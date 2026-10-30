@@ -14,13 +14,14 @@
  */
 
 /**
- * @file FormAgent
+ * @file 卡片代理-FormAgent
  * @kit FormKit
  */
 
 import type { AsyncCallback } from './@ohos.base';
 import formBindingData from './@ohos.app.form.formBindingData';
 import type Want from './@ohos.app.ability.Want';
+import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * FormAgent模块提供了卡片代理相关接口的能力，目前仅包括请求发布卡片。适用于系统应用需要将卡片发布到使用方（如桌面）的场景，能够帮助系统应用便捷地请求发布卡片，简化卡片发布流程。
@@ -37,12 +38,12 @@ declare namespace formAgent {
    *
    * @permission ohos.permission.AGENT_REQUIRE_FORM
    * @param { Want } want - 发布请求，需包含以下字段。
-   *     <br>bundleName: 目标卡片所属应用的bundleName
-   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格，取值原则：1-2x2、2-2x4、3-4x4等，具体规格见卡片配置
-   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
-   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格，取值原则：1-2x2、2-2x4、3-4x4等，具体规格见卡片配置。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName。
    * @param { AsyncCallback<string> } callback - 回调函数，用于异步返回卡片标识。回调参数：error为错误对象（成功时为null），data为卡片标识（string类型）。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -50,9 +51,9 @@ declare namespace formAgent {
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
-   * @throws { BusinessError } 16501002 - The number of forms exceeds the upper limit. [since 26.0.1]
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.0.1]
    * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out. [since 12]
-   * @throws { BusinessError } 16501017 - There is no space to publish form. [since 26.0.1]
+   * @throws { BusinessError } 16501017 - There is no space to publish the form. [since 26.0.1]
    * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.0.1]
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -66,12 +67,12 @@ declare namespace formAgent {
    *
    * @permission ohos.permission.AGENT_REQUIRE_FORM
    * @param { Want } want - 发布请求，需包含以下字段。
-   *     <br>bundleName: 目标卡片所属应用的bundleName
-   *     <br>abilityName: 目标卡片所属应用的Ability
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格
-   *     <br>- ohos.extra.param.key.form_name: 目标卡片名
-   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName。
    * @returns { Promise<string> } Promise对象。返回卡片标识。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -79,9 +80,9 @@ declare namespace formAgent {
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
-   * @throws { BusinessError } 16501002 - The number of forms exceeds the upper limit. [since 26.0.1]
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed. [since 26.0.1]
    * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out. [since 12]
-   * @throws { BusinessError } 16501017 - There is no space to publish form. [since 26.0.1]
+   * @throws { BusinessError } 16501017 - There is no space to publish the form. [since 26.0.1]
    * @throws { BusinessError } 16501018 - This form does not support publishing. [since 26.0.1]
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -111,5 +112,53 @@ declare namespace formAgent {
    * @since 26.0.0 dynamic&static
    */
   function updateFormCrossBundle(formId: string, formBindingData: formBindingData.FormBindingData): Promise<void>;
+
+  /**
+   * 获取可用的卡片使用方服务信息列表。使用Promise异步回调。
+   *
+   * @permission ohos.permission.AGENT_REQUIRE_FORM
+   * @returns { Promise<Array<formInfo.PeerFormHostServiceInfo>> } Promise对象，返回可用的卡片使用方服务信息列表。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function getAvailableFormHostServices(): Promise<Array<formInfo.PeerFormHostServiceInfo>>;
+
+  /**
+   * 请求发布一张卡片到远端设备的卡片使用方服务。使用Promise异步回调。
+   *
+   * @permission ohos.permission.AGENT_REQUIRE_FORM
+   * @param { formInfo.PeerFormHostServiceInfo } peerServiceInfo - 远端卡片使用方服务信息。
+   * @param { Want } want - 发布请求，需包含以下字段。
+   *     <br>bundleName: 目标卡片所属应用的bundleName。
+   *     <br>abilityName: 目标卡片所属应用的Ability。
+   *     <br>parameters:
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
+   *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
+   *     <br>- ohos.extra.param.key.module_name: 目标卡片的模块名称。
+   * @param { formBindingData.FormBindingData } [formBindingData] - 用于更新的卡片数据。默认值为空。
+   * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise对象，返回跨设备发布卡片的结果。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501020 - Remote form service is unavailable.
+   * @throws { BusinessError } 16501021 - The peer form application is not installed or the version is too old.
+   * @throws { BusinessError } 16501002 - The number of forms exceeds the maximum allowed.
+   * @throws { BusinessError } 16501017 - There is no space to publish the form.
+   * @throws { BusinessError } 16501018 - This form does not support publishing.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @throws { BusinessError } 16501008 - Waiting for the form addition to the desktop timed out.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
+    formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;
 }
 export default formAgent;

@@ -41,13 +41,15 @@ import floatingBall from '@ohos.window.floatingBall';
 import PiPWindow from '@ohos.PiPWindow';
 import { sendTouchEvent, sendKeyEvent, sendMouseEvent } from '@ohos.arkui.Test';
 import uiMaterial from '@ohos.arkui.uiMaterial';
+import { PlaceholderOptions, PlaceholderProvider, PlaceholderRegister } from '@ohos.arkui.placeholderRegister';
 export { promptAction, LevelOrder, ComponentContent,
     NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode, BuildOptions, NodeController,
     Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, RoundRect,
     CommandPath, ShapeMask, ShapeClip, NodeBorderRadiuses, CornerRadius, NodeEdges, edgeColors,
     edgeWidths, borderStyles, borderRadiuses, LengthUnit, SizeT, PositionT, RenderNode, Content,
     NodeContent, ComponentContentBase, ReactiveComponentContent, FrameNode, LayoutConstraint, ExpandMode,
-    UIState, typeNode, NodeAdapter, CrossLanguageOptions
+    UIState, typeNode, NodeAdapter, CrossLanguageOptions,
+  PlaceholderOptions, PlaceholderProvider, PlaceholderRegister
 };
 
 export * from '@ohos.arkui.component';

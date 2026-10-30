@@ -38,7 +38,7 @@ import { Callback } from './@ohos.base';
 declare namespace mediaquery {
 
   /**
-   * 用于执行媒体查询操作。
+   * 用于表示媒体查询的结果。
    *
    * @interface MediaQueryResult
    * @syscap SystemCapability.ArkUI.ArkUI.Full

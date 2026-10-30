@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file formInfo
  * @kit FormKit
  */
 
@@ -405,6 +405,28 @@ declare namespace formInfo {
      * @since 26.0.0 dynamic&static
      */
     isFontScaleFollowSystem?: boolean;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
+
+    /**
+     * Obtains whether the form enable tint color.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    readonly enableTint?: boolean;
   }
 
   /**
@@ -1013,7 +1035,24 @@ declare namespace formInfo {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale'
+    FORM_FONT_WEIGHT_SCALE_KEY = 'ohos.extra.param.key.form_font_weight_scale',
+
+    /**
+     * Indicates the key specifying the color mode of the form edit ability,
+     * which is represented as
+     * want: {
+     *   "parameters": {
+     *       FORM_EDIT_COLOR_MODE_KEY: -1
+     *    }
+     * }
+     * Value: -1 for automatic, 0 for dark mode, 1 for light mode.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    FORM_EDIT_COLOR_MODE_KEY = 'ohos.extra.param.key.form_edit_color_mode'
   }
 
   /**
@@ -1618,6 +1657,17 @@ declare namespace formInfo {
      * @since 23 static
      */
     readonly extraData?: Record<string, Object>;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
@@ -2365,7 +2415,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
   interface FormHostServiceInfo {
     /**
@@ -2374,7 +2424,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceName: string;
     /**
@@ -2383,7 +2433,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceDisplayName: string;
     /**
@@ -2392,16 +2442,16 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     displayId: string;
     /**
-     * The custom data.
+     * The custom data. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     customData?: Record<string, string>;
   }
@@ -2412,7 +2462,7 @@ declare namespace formInfo {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   interface PeerFormHostServiceInfo {
     /**
@@ -2421,7 +2471,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceName: string;
     /**
@@ -2430,7 +2480,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceDisplayName: string;
     /**
@@ -2439,7 +2489,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     displayId: string;
     /**
@@ -2448,16 +2498,16 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     customData?: Record<string, string>;
     /**
-     * The device Id of the peer form host service.
+     * The device Id of the peer form host service. By default, no value is passed.
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     deviceId: string;
     /**
@@ -2466,7 +2516,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     networkId: string;
     /**
@@ -2475,7 +2525,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     serviceId: string;
   }
@@ -2486,7 +2536,7 @@ declare namespace formInfo {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   interface PublishFormCrossDeviceResult {
     /**
@@ -2495,7 +2545,7 @@ declare namespace formInfo {
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamiconly
      */
     formId: string;
   }

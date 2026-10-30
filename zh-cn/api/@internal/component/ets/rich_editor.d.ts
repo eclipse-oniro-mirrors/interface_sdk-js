@@ -1493,6 +1493,17 @@ declare interface RichEditorImageSpanResult {
    * @since 10 dynamic
    */
   offsetInSpan: [number, number];
+
+  /**
+   * 图片文本标签。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -1775,6 +1786,17 @@ declare interface RichEditorImageSpanOptions {
    * @since 14 dynamic
    */
   onHover?: OnHoverCallback;
+
+  /**
+   * 图片文本标签。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -1845,7 +1867,7 @@ declare interface RichEditorBuilderSpanOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderSpanInfo {
   /**
@@ -1856,7 +1878,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   id?: string;
 
@@ -1868,7 +1890,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: number;
 }
@@ -1884,7 +1906,7 @@ declare interface BuilderSpanInfo {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface RichEditorBuilderSpan {
   /**
@@ -1894,7 +1916,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   builder: CustomBuilder;
 
@@ -1906,7 +1928,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onAttach?: Callback<BuilderSpanInfo>;
 
@@ -1924,7 +1946,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onDetach?: Callback<BuilderSpanInfo>;
 
@@ -1935,7 +1957,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2867,7 +2889,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): number;
 
@@ -2969,7 +2991,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo>;
 
@@ -3045,13 +3067,6 @@ declare class RichEditorController extends RichEditorBaseController {
  */
 declare type RichEditorSpan = RichEditorImageSpanResult | RichEditorTextSpanResult;
 
-/**
- * # Objects to Import
- * 
- * ```ts
- * controller: RichEditorStyledStringController = new RichEditorStyledStringController();
- * ```
- */
 /**
  * 使用属性字符串构建的RichEditor组件的控制器，继承自[RichEditorBaseController]{@link RichEditorBaseController}。
  * 
@@ -3138,7 +3153,7 @@ declare class RichEditorStyledStringController extends RichEditorBaseController 
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   /**
@@ -3591,8 +3606,8 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
-   * @param { Callback<RichEditorChangeValue, boolean> } callback - The triggered function before text content is about
-   *     to change.
+   * @param { Callback<RichEditorChangeValue, boolean> } callback - [RichEditorChangeValue](#richeditorchangevalue12)为
+   *     图文变化信息；boolean表示当前图文是否允许被更改，true：允许图文被更改；false：不允许图文被更改。
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3611,7 +3626,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
-   * @param { OnDidChangeCallback } callback - The triggered function after content changed.
+   * @param { OnDidChangeCallback } callback - 图文变化后触发的回调，用于获取变化前后的内容范围。
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4158,10 +4173,11 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 interface RichEditorInterface {
   /**
+   * 创建富文本组件时调用。
    *
    * @param { RichEditorOptions } value - 富文本组件初始化选项。
    * @returns { RichEditorAttribute }
@@ -4215,6 +4231,6 @@ declare const RichEditorInstance: RichEditorAttribute;
  * @crossplatform [since 11]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare const RichEditor: RichEditorInterface;

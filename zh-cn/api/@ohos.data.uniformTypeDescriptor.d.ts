@@ -2034,9 +2034,6 @@ declare namespace uniformTypeDescriptor {
      *
      * @param { string } type - 所指定的标准化数据类型（即[UTD预置列表](docroot://database/uniform-data-type-list.md)中各类型对应的UTD-ID或自定义UTD-ID）。
      * @returns { boolean } 返回true表示当前的标准化数据类型归属于所指定的标准化数据类型，包括所指定类型与当前类型相同的情况；返回false则表示无归属关系。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 20]
@@ -2050,9 +2047,6 @@ declare namespace uniformTypeDescriptor {
      *
      * @param { string } type - 所指定的标准化数据类型（即[UTD预置列表](docroot://database/uniform-data-type-list.md)中各类型对应的UTD-ID或自定义UTD-ID）。
      * @returns { boolean } 返回true表示当前的标准化数据类型是所指定标准化数据类型的低层级类型，否则返回false。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 20]
@@ -2066,9 +2060,6 @@ declare namespace uniformTypeDescriptor {
      *
      * @param { string } type - 所指定的标准化数据类型（即[UTD预置列表](docroot://database/uniform-data-type-list.md)中各类型对应的UTD-ID或自定义UTD-ID）。
      * @returns { boolean } 返回true表示当前的标准化数据类型是所指定标准化数据类型的高层级类型，否则返回false。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 20]
@@ -2083,9 +2074,6 @@ declare namespace uniformTypeDescriptor {
      *
      * @param { TypeDescriptor } typeDescriptor - 待比较的标准化数据类型描述类对象。
      * @returns { boolean } 返回true表示所比较的两个TypeDescriptor相同；返回false则表示不同。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 20]
@@ -2100,9 +2088,6 @@ declare namespace uniformTypeDescriptor {
    *
    * @param { string } typeId - [标准化数据类型ID]。
    * @returns { TypeDescriptor } 返回标准化数据类型描述类对象。如果要查询的标准化数据类型不存在，则返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]
@@ -2115,9 +2100,6 @@ declare namespace uniformTypeDescriptor {
    *
    * @param { string } typeId - [标准化数据类型ID]。
    * @returns { TypeDescriptor | null } 返回标准化数据类型描述类对象。如果要查询的标准化数据类型不存在，则返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @since 23 static
@@ -2131,9 +2113,6 @@ declare namespace uniformTypeDescriptor {
    * @param { string } [belongsTo] - 要查询的标准化数据类型所归属类型ID，用于限定查询范围。当需要查询特定归属类型下的数据类型时传入此参数，无默认值，若不传入此参数则只按照文件后缀名称查询[标准化数据类型ID]。
    * @returns { string } 返回与给定文件后缀名以及归属类型ID（如果设置了belongsTo参数）匹配的标准化数据类型ID。如果要查询的标准化数据类型不存在，则返回根据入参按指定规则生成的动态类型（动态类型是系统动态
    *     生成的类型标识，以'flex.'为前缀，用于表示未预定义的数据类型）。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]
@@ -2148,9 +2127,6 @@ declare namespace uniformTypeDescriptor {
    * @param { string } mimeType - MIME类型名称，格式为'type/subtype'，如'image/jpeg'、'text/plain'等。
    * @param { string } [belongsTo] - 要查询的标准化数据类型所归属类型ID。无默认值，若不传入此参数则只按照MIME类型名称查询[标准化数据类型ID]。
    * @returns { string } 返回与MIME类型名称以及归属类型ID（如果设置了belongsTo参数）匹配的标准化数据类型ID，如果要查询的标准化数据类型不存在则返回根据入参按指定规则生成的动态类型。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]
@@ -2165,9 +2141,6 @@ declare namespace uniformTypeDescriptor {
    * @param { string } filenameExtension - 文件后缀名称。
    * @param { string } [belongsTo] - 要查询的标准化数据类型所归属类型ID，无默认值，若不传入此参数则只按照文件后缀名称查询[标准化数据类型ID]。
    * @returns { Array<string> } 返回与给定文件后缀名以及归属类型ID（如果设置了belongsTo参数）匹配的标准化数据类型ID列表，如果要查询的标准化数据类型不存在则返回根据入参按指定规则生成的动态类型列表。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]
@@ -2182,9 +2155,6 @@ declare namespace uniformTypeDescriptor {
    * @param { string } mimeType - MIME类型名称，格式为'type/subtype'，如'image/jpeg'、'text/plain'等。
    * @param { string } [belongsTo] - 要查询的标准化数据类型所归属类型ID。无默认值，若不传入此参数则只按照MIME类型名称查询[标准化数据类型ID]。
    * @returns { Array<string> } 返回与MIME类型名称以及归属类型ID（如果设置了belongsTo参数）匹配的标准化数据类型ID列表，如果要查询的标准化数据类型不存在则返回根据入参按指定规则生成的动态类型列表。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @crossplatform [since 20]

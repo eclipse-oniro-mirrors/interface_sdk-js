@@ -45,6 +45,24 @@ declare namespace screen {
   function getAllScreens(callback: AsyncCallback<Array<Screen>>): void;
 
   /**
+   * 获取所有的屏幕，使用callback异步回调。
+   *
+   * @param { AsyncCallback<Array<Screen>> } callback - Callback used to return the result. If obtaining all screens is
+   *     successful is successful, **err** is **undefined**, and the returned object is screen object set obtained.
+   *     Otherwise, **err** is an error object.
+   * @param { boolean } [isNeedUnused] - Indicates whether unused screen information is required. **true** means they
+   *     should be provided, **false** means they should not.
+   *     <br>Default value: false.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 1400001 - Invalid display or screen.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function getAllScreens(callback: AsyncCallback<Array<Screen>>, isNeedUnused?: boolean): void;
+
+  /**
    * 获取所有的屏幕，使用Promise异步回调。
    *
    * @returns { Promise<Array<Screen>> } Promise对象。返回当前获取的屏幕对象集合。
@@ -56,6 +74,22 @@ declare namespace screen {
    * @since 23 static
    */
   function getAllScreens(): Promise<Array<Screen>>;
+
+  /**
+   * 获取所有的屏幕，使用Promise异步回调。
+   *
+   * @param { boolean } [isNeedUnused] - Indicates whether unused screen information is required.
+   *     This parameter is optional. If not provided, the unused screen information will not be returned
+   *     <br>Default value: false.
+   * @returns { Promise<Array<Screen>> } Promise used to return all the Screen objects obtained.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 1400001 - Invalid display or screen.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  function getAllScreens(isNeedUnused?: boolean): Promise<Array<Screen>>;
 
   /**
    * 开启屏幕状态变化的监听。
@@ -71,6 +105,18 @@ declare namespace screen {
    * @since 9 dynamic
    */
   function on(eventType: 'connect' | 'disconnect' | 'change', callback: Callback<long>): void;
+
+  /**
+   * 开启屏幕断连事件的监听。屏幕断连时，调用回调函数返回断连信息。
+   *
+   * @param { Callback<ScreenDisconnectInfo> } callback - 回调函数。返回屏幕断连信息，包含屏幕id和断连原因。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function onDisconnectWithInfo(callback: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Register the callback for screen connection events.
@@ -119,6 +165,19 @@ declare namespace screen {
    * @since 9 dynamic
    */
   function off(eventType: 'connect' | 'disconnect' | 'change', callback?: Callback<long>): void;
+
+  /**
+   * 关闭屏幕断连事件的监听。
+   *
+   * @param { Callback<ScreenDisconnectInfo> } [callback] - 回调函数。返回屏幕断连信息，包含屏幕id和断连原因。
+   *     如果未传入该参数，则取消该事件类型所有回调的监听。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function offDisconnectWithInfo(callback?: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Unregister the callback for screen connection events.
@@ -514,8 +573,7 @@ declare namespace screen {
    * @param { long } height - 虚拟屏的新高度，单位为px，取值范围为[1, 65536]的正整数，超出有效范围时返回错误码1400004。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 801 - Capability not supported. Function can not work because the current device does
-   *     not support this ability.
+   * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 1400001 - Invalid display or screen.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @throws { BusinessError } 1400004 - Parameter error. Possible cause: 1. Invalid parameter range.
@@ -714,6 +772,38 @@ declare namespace screen {
      * @since 24 dynamic&static
      */
     userId?: int;
+  }
+
+  /**
+   * 屏幕断连信息。
+   *
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  interface ScreenDisconnectInfo {
+    /**
+     * 屏幕id。
+     *
+     * @type { long }
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    id: long;
+
+    /**
+     * 屏幕断连原因。
+     *
+     * @type { string }
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    reason: string;
   }
 
   /**
@@ -1228,7 +1318,6 @@ declare namespace screen {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 1400001 - Invalid display or screen.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @syscap SystemCapability.Window.SessionManager
@@ -1243,11 +1332,10 @@ declare namespace screen {
    *
    * @param { Array<long> } uniqueScreen - 异源屏幕ID集合。其中ID应为大于0的整数，否则返回401错误码。
    * @returns { Promise<Array<long>> } Promise对象。返回异源屏幕的displayId集合，其中id为大于0的整数。
-   * @throws { BusinessError } 202 - Permission verification failed, non-system application uses system API.
+   * @throws { BusinessError } 202 - Permission verification failed, A non-system application uses system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
    * @throws { BusinessError } 1400001 - Invalid display or screen.
    * @throws { BusinessError } 1400003 - This display manager service works abnormally.
    * @syscap SystemCapability.Window.SessionManager

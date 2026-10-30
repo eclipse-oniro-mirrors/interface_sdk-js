@@ -16,6 +16,17 @@
 import { TextModifier, ImageModifier } from './@ohos.arkui.modifier';
 
 /**
+ * PopupV2用于显示特定样式的气泡，适用于提示信息、操作确认或信息通知等需要用户关注或响应的场景。
+ * 
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2)实现，
+ * 相较于[状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1)，状态管理（V2）
+ * 增强了对数据对象的深度观察与管理能力，
+ * 不再局限于组件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制显示特定样式的气泡，实现更高效的用户界面刷新。
+ * 
+ * ###### 子组件
+ * 
+ * 无
+ * 
  * @file
  * @kit ArkUI
  */
@@ -166,7 +177,7 @@ export interface PopupV2InitInfo {
    * **说明：** 
    * 
    * 1. 在使用引用资源类型时，规定其参数类型要与属性方法本身类型一致。
-   * 2. maxWidth是数字类型，支持float和整型，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`。
+   * 2. maxWidth是[Dimension]{@link Dimension}类型，支持数字、百分比或带单位的字符串（如400、'50%'、'400vp'）。使用引用资源类型时，资源类型支持float和integer，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`。
    * 3. 当类型为Resource时，如果未设置单位，默认单位为px。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -205,9 +205,8 @@ declare enum SaveDescription {
  * >
  * > - You are advised to specify at least one of **icon** or **text**.
  * > - If neither **icon** nor **text** is specified, **SaveButton** is created with default styles as follows:
- * > **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
- * > **Capsule**.
- * >
+ * >   **SaveIconStyle** defaults to **FULL_FILLED**, **SaveDescription** to **DOWNLOAD**, and **ButtonType** to
+ * >   **Capsule**.
  * > - The **icon**, **text**, and **buttonType** parameters do not support dynamic modification.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -391,7 +390,7 @@ type SaveButtonCallback = (event: ClickEvent, result: SaveButtonOnClickResult, e
 
 /**
  * Universal attributes are not supported. This component supports the attributes listed below, as well as
- * [universal attributes of security components]{@link ./security_component}. Only the following events are supported.
+ * [universal attributes of security components]{@link ./security_component:SecurityComponentMethod}. Only the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -428,7 +427,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { Resource } icon - Custom icon resource information. Only data sources of the Resource type are supported.
    *     <br>Images in the following formats are supported: PNG, JPG, JPEG, BMP, SVG, WebP, GIF, and HEIF. For details
-   *     about the supported image formats, see [Image]{@link ./image}. If the resource is not an image resource or the
+   *     about the supported image formats, see [Image]{@link ./image:Image}. If the resource is not an image resource or the
    *     format is not supported, the icon is displayed as blank.
    *     <br>Since API version 26.0.0, data sources of the Resource type in Symbol format are supported.
    *     <br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON** permission, the custom icon does not
@@ -461,6 +460,14 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
   /**
    * Sets the icon size of the **SaveButton** component.
    *
+   * > **NOTE**
+   * >
+   * > In API version 10, developers can set the icon size through the security component universal attribute
+   * > [iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}, where the size type supports only
+   * > Dimension.<br/>
+   * > Since API version 20, developers can set the icon size through this API, and the size type additionally
+   * > supports SizeOptions.
+   *
    * @param { Dimension | SizeOptions } size - Icon size. Pixel units such as vp and px are supported.
    *     <br>The default width and height are 16 vp.<br>Percentage strings are not supported. If a percentage string is
    *     passed as a Dimension parameter, the icon
@@ -487,11 +494,11 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
   iconSize(size: Dimension | SizeOptions): SaveButtonAttribute;
 
   /**
-   * Sets the corner radius of the **SaveButton** component.
+   * Sets the corner radius of the icon of the **SaveButton** component.
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
-   * @param { Dimension | BorderRadiuses } radius - Corner radius of the **SaveButton** component. You can set the
-   *     radius for each of the four corners individually.
+   * @param { Dimension | BorderRadiuses } radius - Corner radius of the icon of the **SaveButton** component. You can
+   *     set the radius for each of the four corners individually.
    *     <br>The default value is 0 vp for all four corners. Units such as vp and px are supported, and valid values are
    *     greater than or equal to 0. Negative values are automatically clamped to **0**.
    *     <br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON** permission, the corner radius
@@ -509,7 +516,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { boolean } enabled - Whether to enable the press effect. **true** to enable, **false** otherwise.
-   *     <br>Default value: **false**.<br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON**
+   *     <br>Default value: **true**.<br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON**
    *     permission, the press effect setting does not take effect.
    * @returns { SaveButtonAttribute } Returns the attributes of the save button.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -537,6 +544,7 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    * @since 21 dynamic
    */
   userCancelEvent(enabled: boolean): SaveButtonAttribute;
+
   /**
    * Sets the color of the symbol icon for the save button.
    *

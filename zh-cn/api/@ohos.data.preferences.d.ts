@@ -214,6 +214,22 @@ declare namespace preferences {
      * @since 23 static
      */
     storageType?: StorageType | null | undefined;
+
+    /**
+     * 初始缓存文件大小，单位为KB。为可选参数。表示当前Preferences实例的初始跨进程共享缓存文件大小，
+     * 仅在存储模式设置为**GSKV**时生效。
+     * 取值可以为0或[256, 1112784]范围内的值。不指定此参数时，系统按需自动初始化缓存文件。
+     * 设置为0时，初始缓存文件大小为0，该Preferences实例的缓存文件不会增长，且不支持跨进程访问。
+     * 设置为大于0的有效值时，初始缓存文件大小为配置值，该Preferences实例的缓存文件大小仍会按需增长。
+     * 配置值可在Preferences实例断开连接后重新连接时动态切换。
+     * 单位：KB。取值约束：值可以为0。取值范围：[256,1112784]。默认值：1112784。
+     *
+     * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    sharedMapSize?: long;
   }
 
   /**
@@ -222,7 +238,7 @@ declare namespace preferences {
    * 应用首次调用该接口获取某个Preferences实例后，该实例会被缓存起来，后续再次调用时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @param { AsyncCallback<Preferences> } callback - 回调函数。当获取Preferences实例成功，err为undefined，返回Preferences实例；否则err为错误对象。
@@ -245,7 +261,7 @@ declare namespace preferences {
    * 应用首次调用该接口获取某个Preferences实例后，该实例会被缓存起来，后续再次调用时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。name字段为必填字段，名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。dataGroupId和
    *     storageType为可选字段。
@@ -272,7 +288,7 @@ declare namespace preferences {
    * 应用首次调用该接口获取某个Preferences实例后，该实例会被缓存起来，后续再次调用时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @returns { Promise<Preferences> } Promise对象，返回Preferences实例。
@@ -295,7 +311,7 @@ declare namespace preferences {
    * 应用首次调用该接口获取某个Preferences实例后，该实例会被缓存起来，后续再次调用时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @returns { Promise<Preferences> } Promise对象，返回Preferences实例。
@@ -321,7 +337,7 @@ declare namespace preferences {
    * 应用首次调用该接口获取某个Preferences实例后，该实例会被缓存起来，后续再次调用时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @returns { Preferences } 返回Preferences实例。
@@ -361,7 +377,7 @@ declare namespace preferences {
    * 不支持该接口与其他preference接口并发调用。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @param { AsyncCallback<void> } callback - 回调函数。当移除成功，err为undefined，否则为错误对象。
@@ -387,7 +403,7 @@ declare namespace preferences {
    * 不支持该接口与其他preference接口并发调用。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @param { AsyncCallback<void> } callback - 回调函数。当移除成功，err为undefined，否则为错误对象。
@@ -416,7 +432,7 @@ declare namespace preferences {
    * 不支持该接口与其他preference接口并发调用。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @returns { Promise<void> } 无返回结果的Promise对象。
@@ -442,7 +458,7 @@ declare namespace preferences {
    * 不支持该接口与其他preference接口并发调用。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @returns { Promise<void> } 无返回结果的Promise对象。
@@ -476,7 +492,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @param { AsyncCallback<void> } callback - 回调函数。当移除成功，err为undefined，否则为错误对象。
@@ -506,7 +522,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @param { AsyncCallback<void> } callback - 回调函数。当移除成功，err为undefined，否则为错误对象。
@@ -539,7 +555,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @returns { Promise<void> } 无返回结果的Promise对象。
@@ -569,7 +585,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @returns { Promise<void> } 无返回结果的Promise对象。
@@ -602,7 +618,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -631,7 +647,7 @@ declare namespace preferences {
    * 减少下一次调用getPreferences接口时的耗时。否则，下一次调用getPreferences接口时底层需要进行数据恢复，数据恢复的耗时取决于未写入磁盘的数据缓存页数量。
    *
    * @param { Context } context - 应用上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { Options } options - 与Preferences实例相关的配置选项。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:

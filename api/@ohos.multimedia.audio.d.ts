@@ -107,7 +107,31 @@ declare namespace audio {
      * @since 9 dynamic
      * @since 23 static
      */
-    ERROR_SYSTEM = 6800301
+    ERROR_SYSTEM = 6800301,
+    /**
+     * System service process terminated.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERROR_SERVICE_DIED = 6800302,
+    /**
+     * Required network conditions not met.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERROR_NETWORK_CONDITION_NOT_MET = 6800501,
+    /**
+     * Insufficient storage space.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERROR_STORAGE_NOT_ENOUGH = 6800502
   }
 
   /**
@@ -411,26 +435,15 @@ declare namespace audio {
    * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
    * monitoring using a fast capturer and renderer.
    *
-   * @permission ohos.permission.MICROPHONE
+   * @permission ohos.permission.MICROPHONE [since 20 - 24]
    * @param { AudioLoopbackMode } mode Audio loopback mode.
    * @returns { Promise<AudioLoopback> } Promise used to return the <b>AudioLoopback</b> instance.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Unsupported API.
+   * @throws { BusinessError } 201 - Permission denied. [since 20 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 20 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @since 20 dynamic
-   */
-  /**
-   * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
-   * monitoring using a fast capturer and renderer.
-   *
-   * @param { AudioLoopbackMode } mode Audio loopback mode.
-   * @returns { Promise<AudioLoopback> } Promise used to return the <b>AudioLoopback</b> instance.
-   * @throws { BusinessError } 6800101 - Parameter verification failed.
-   * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
-   * @syscap SystemCapability.Multimedia.Audio.Capturer
-   * @since 26.0.0 dynamic
    */
   function createAudioLoopback(mode: AudioLoopbackMode): Promise<AudioLoopback>;
 
@@ -438,28 +451,16 @@ declare namespace audio {
    * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
    * monitoring using a fast capturer and renderer.
    *
-   * @permission ohos.permission.MICROPHONE
+   * @permission ohos.permission.MICROPHONE [since 23 - 24]
    * @param { AudioLoopbackMode } mode Audio loopback mode.
    * @returns { Promise<AudioLoopback | null> } Promise used to return the <b>AudioLoopback</b> instance, or
    *     null when an error happens.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Unsupported API.
+   * @throws { BusinessError } 201 - Permission denied. [since 23 - 24]
+   * @throws { BusinessError } 801 - Unsupported API. [since 23 - 24]
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @since 23 static
-   */
-  /**
-   * Creates an <b>AudioLoopback</b> instance, which provides low-latency in-ear
-   * monitoring using a fast capturer and renderer.
-   *
-   * @param { AudioLoopbackMode } mode - Audio loopback mode.
-   * @returns { Promise<AudioLoopback | null> } Promise used to return the <b>AudioLoopback</b> instance, or
-   *     null when an error happens.
-   * @throws { BusinessError } 6800101 - Parameter verification failed.
-   * @throws { BusinessError } 6800104 - Loopback mode is unsupported.
-   * @syscap SystemCapability.Multimedia.Audio.Capturer
-   * @since 26.0.0 static
    */
   function createAudioLoopback(mode: AudioLoopbackMode): Promise<AudioLoopback | null>;
 
@@ -1133,30 +1134,20 @@ declare namespace audio {
     REMOTE_DAUDIO = 29,
     /**
      * Hearing aid audio device.
+     * Note: This original device type can be obtained after it is declared via
+     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}. [since 26.0.0]
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @since 20 dynamic
      * @since 23 static
-     */
-    /**
-     * Hearing aid audio device.
-     * Note: This original device type can be obtained after it is declared via
-     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}.
-     * @syscap SystemCapability.Multimedia.Audio.Device
-     * @since 26.0.0 dynamic&static
      */
     HEARING_AID = 30,
     /**
      * Nearlink device.
+     * Note: This original device type can be obtained after it is declared via
+     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}. [since 26.0.0]
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @since 20 dynamic
      * @since 23 static
-     */
-    /**
-     * Nearlink device.
-     * Note: This original device type can be obtained after it is declared via
-     *     {@link AudioRoutingManager#declareDeviceTypesCompatibility}.
-     * @syscap SystemCapability.Multimedia.Audio.Device
-     * @since 26.0.0 dynamic&static
      */
     NEARLINK = 31,
     /**
@@ -1239,27 +1230,16 @@ declare namespace audio {
    * Enumerates the available device types for communication.
    * @enum { int }
    * @syscap SystemCapability.Multimedia.Audio.Communication
-   * @since 9
-   */
-  /**
-   * Enumerates the available device types for communication.
-   * @enum { int }
-   * @syscap SystemCapability.Multimedia.Audio.Communication
-   * @crossplatform
-   * @since 12 dynamic
+   * @crossplatform [since 12]
+   * @since 9 dynamic
    * @since 23 static
    */
   enum CommunicationDeviceType {
     /**
      * Speaker.
      * @syscap SystemCapability.Multimedia.Audio.Communication
-     * @since 9
-     */
-    /**
-     * Speaker.
-     * @syscap SystemCapability.Multimedia.Audio.Communication
-     * @crossplatform
-     * @since 12 dynamic
+     * @crossplatform [since 12]
+     * @since 9 dynamic
      * @since 23 static
      */
     SPEAKER = 2
@@ -2274,6 +2254,16 @@ declare namespace audio {
      * @since 23 static
      */
     rendererId?: int;
+    /**
+     * Keeps the first device selection not cleared.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    blockFirstOverrode?: boolean;
   }
 
   /**
@@ -3543,6 +3533,18 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getRecordingManager(): AudioRecordingManager;
+
+    /**
+     * Obtains the AudioSuiteDownloadManager instance for downloading audio suite algorithms.
+     *
+     * @returns { AudioSuiteDownloadManager } Returns an instance of audio suite download manager.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getSuiteDownloadManager(): AudioSuiteDownloadManager;
 
     /**
      * user disable the safe media volume state.
@@ -5163,7 +5165,15 @@ declare namespace audio {
      * @since 20 dynamic
      * @since 23 static
      */
-    AUDIO_SESSION_SCENE_VOICE_COMMUNICATION = 2
+    AUDIO_SESSION_SCENE_VOICE_COMMUNICATION = 2,
+    /**
+     * Scene for voice message.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_SESSION_SCENE_VOICE_MESSAGE = 3
   }
 
   /**
@@ -5801,8 +5811,8 @@ declare namespace audio {
      * > **NOTE**
      * >
      * > - This API applies to the following scenario: When
-     * > [AudioSessionScene]{@link @ohos.multimedia.audio:audio.AudioSessionScene} is set to **VoIP**, the setting takes
-     * > effect immediately after the AudioSession is activated. For non-VoIP scenarios, the setting does not take
+     * > [AudioSessionScene]{@link @ohos.multimedia.audio:audio.AudioSessionScene} is set to **VoIP** or **voice message**, the setting takes
+     * > effect immediately after the AudioSession is activated. For other scenarios, the setting does not take
      * > effect upon AudioSession activation. Instead, the setting applies when
      * > [StreamUsage]{@link @ohos.multimedia.audio:audio.StreamUsage} for playback is voice message, VoIP voice call,
      * > or VoIP video call. Supported devices include the earpiece, speaker, and system default device.
@@ -7081,6 +7091,50 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     getActiveStreamsVolumeInfo(): ActiveStreamsVolumeInfoArray;
+
+    /**
+     * Listens for the event when the current volume exceeds the volume protection threshold.
+     *
+     * @param { Callback<VolumeLimitExceededEvent> } callback - Callback used to get the volume limit event.
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onVolumeLimitExceeded(callback: Callback<VolumeLimitExceededEvent>): void;
+
+    /**
+     * Unsubscribes from monitoring whether the current volume exceeds the volume protection threshold.
+     *
+     * @param { Callback<VolumeLimitExceededEvent> } [callback] - Callback used to get the volume limit event.
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offVolumeLimitExceeded(callback?: Callback<VolumeLimitExceededEvent>): void;
+
+    /**
+     * Confirms the result of adjusting the volume that exceeds the volume protection threshold.
+     *
+     * @param { AudioVolumeType } volumeType - Audio volume type,
+     *     different volume types have different thresholds,
+     *     volumeType is used to identify the current volume type threshold.
+     * @param { boolean } result - Confirm that the volume adjustment exceeds the volume protection threshold,
+     *     and false indicates the opposite.
+     * @throws { BusinessError } 202 - Not system App.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @throws { BusinessError } 6800301 - System error.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    confirmVolumeLimitExceeded(volumeType: AudioVolumeType, result: boolean): void;
   }
 
   /**
@@ -8746,6 +8800,40 @@ declare namespace audio {
   }
 
   /**
+   * Indicates the available status of audio separation effect.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSeparationEffectAvailableStatus {
+    /**
+     * Indicates the availability status.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * Application UID corresponding to the availability status.
+     * Generally, the value is the application displayed in the playback control application.
+     * The value should be an integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    appUid?: int;
+  }
+
+  /**
    * Implements audio effect management.
    * @typedef AudioEffectManager
    * @syscap SystemCapability.Multimedia.Audio.Core
@@ -8840,6 +8928,18 @@ declare namespace audio {
     setAudioSeparationEffectEnabled(enabled: boolean, uid: int, streamId?: long): Promise<void>;
 
     /**
+     * Gets the audio separation effect enabled status.
+     *
+     * @returns { boolean } Returns whether the audio separation effect is enabled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectEnabled(): boolean;
+
+    /**
      * Subscribes to system audio separation effect enabled state change event.
      * The audio separation effect state in system can be set by system playback controller application,
      * other applications can use this function to listen the change event.
@@ -8867,6 +8967,49 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     offAudioSeparationEffectEnabledChange(callback?: Callback<boolean>): void;
+
+    /**
+     * Obtains the availability status of the audio separation effect.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     *
+     * @returns { AudioSeparationEffectAvailableStatus } Returns the available status of audio separation effect.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAudioSeparationEffectAvailableStatus(): AudioSeparationEffectAvailableStatus;
+
+    /**
+     * Subscribes to the status change event of the audio separation effect.
+     * When the system detects that the current scenario is not the target scenario for audio separation, this callback
+     * function is used to notify the playback control application.
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } callback - Callback function, which is used to return
+     *     the changed availablity status.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAudioSeparationEffectAvailableStatusChange(callback: Callback<AudioSeparationEffectAvailableStatus>): void;
+
+    /**
+     * This API is used to unsubscribe from audio separation effect status change events.
+     * After you cancel the callback, the system does not trigger the callback.
+     *
+     * @param { Callback<AudioSeparationEffectAvailableStatus> } [callback] - Callback to be canceled.
+     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAudioSeparationEffectAvailableStatusChange(callback?: Callback<AudioSeparationEffectAvailableStatus>): void;
 
     /**
      * Sets audio separation effect volume for specific volume type.
@@ -9151,6 +9294,28 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSoundCardInfo(): Promise<SoundCardInfo>;
+
+    /**
+     * This interface is used to obtain the audio card information list, including the onboard audio card and USB audio
+     * card. Use the Promise asynchronous callback to return the query results.
+     * Application scenario: The application needs to obtain information about all audio adapters on the device,
+     * including onboard audio adapters and USB audio adapters, for asset management and monitoring.
+     *
+     * Restriction:
+     * - The application must apply for the ohos.permission.GET_AUDIO_ADAPTER_INFO permission.
+     * - This interface supports only PC devices. When a non-PC device invokes this interface, error code 801 is
+     * returned.
+     *
+     * @permission ohos.permission.GET_AUDIO_ADAPTER_INFO
+     * @returns { Promise<Array<SoundCardInfo>> } Promise used to return the sound card information list.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     * The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - The current device model does not support this function.
+     * @syscap SystemCapability.Multimedia.Audio.DeviceEnhance
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>;
 
     /**
      * Queries whether the system supports the enhanced routing functions provided by this manager,
@@ -9601,59 +9766,103 @@ declare namespace audio {
   }
 
   /**
+   * Enumerates sound card types.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum SoundCardType {
+    /**
+     * Onboard sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ONBOARD = 0,
+  
+    /**
+     * USB sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    USB = 1
+  }
+
+  /**
    * Describes sound card information.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface SoundCardInfo {
     /**
      * Sound card name.
+     * The maximum length is 256.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     name: string;
     /**
      * Sound card vendor.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     vendor: string;
     /**
      * Sound card model.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     model: string;
     /**
      * Sound card bus address.
+     * The maximum length is 256.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     busAddress: string;
     /**
      * Sound card driver.
+     * The maximum length is 128.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     driver: string;
+    /**
+     * Sound card ID.
+     * The maximum length is 128. Default value: Default sound card ID of the onboard sound card.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cardId?: string;
+    /**
+     * Sound card type.
+     * Default value: The default is the onboard sound card type.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cardType?: SoundCardType;
   }
 
   /**
@@ -9974,6 +10183,69 @@ declare namespace audio {
      * @since 23 dynamic&static
      */
     percentage?: int;
+
+    /**
+     * Application UID.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    appUid?: int;
+  }
+
+  /**
+   * Describes the notification event indicating that the volume exceeds the threshold.
+   * after receiving the notification, the app must send the acknowledgment result.
+   * through {@link #confirmVolumeLimitExceeded} before continuing to adjust the volume.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Volume
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface VolumeLimitExceededEvent {
+    /**
+     * Indicates the UID of the process that triggers the volume threshold-crossing.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    uid: int;
+    /**
+     * Current volume type.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    volumeType: AudioVolumeType;
+    /**
+     * Current volume level.
+     *
+     * The value is between the values obtained from {@link #getMinSystemVolume} and {@link #getMaxSystemVolume}.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    currentVolume: int;
+    /**
+     * Volume threshold of current volume type.
+     *
+     * The value is between the values obtained from {@link #getMinSystemVolume} and {@link #getMaxSystemVolume}.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    volumeThreshold: int;
   }
 
   /**
@@ -11941,6 +12213,30 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
+
+    /**
+     * Enters or exits the audio standby state.
+     * The standby state is used when there is no data during audio playback. For example, the streaming media is
+     * waiting for network download.
+     * After the audio channel enters the standby state, the audio channel remains unchanged. The cyclic thread that
+     * only requests data from the application pauses and does not receive proactively written data. The data that has
+     * been written to the system continues to be played.
+     * This interface can be invoked to enter the standby state only when the palyback stream is in
+     * {@link AudioState.STATE_RUNNING} state. The interface cna be invoked to exit only when the interface is in
+     * standby state.
+     * In the standby state, you can directly call {@link pause}, {@link stop}, {@link release} to stop the playback.
+     * but {@link start} cannot be called.
+     * Note that this interface does not change the state obtained through {@link state}.
+     * This API uses a promise to return the result.
+     * 
+     * @param { boolean } on - Enter or exit the standby state. The options are as follows: true: enter; false: exit.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 6800103 - The operation is not allowed in the current state.
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    standby(on: boolean): Promise<void>;
   }
 
   /**
@@ -12262,6 +12558,20 @@ declare namespace audio {
     * @since 26.0.0 dynamic&static
     */
     playbackCaptureUid?: int;
+
+    /**
+     * The token ID of the application that actually uses the audio capturer stream, used to display
+     * the correct application information when the microphone privacy indicator is turned on.
+     * If this field is not specified, the caller application's token ID is used by default.
+     * When this field is set, the caller must have the ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR
+     * permission; otherwise {@link createAudioCapturer} fails.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -12333,6 +12643,20 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     preferredInputDevice?: AudioDeviceDescriptor;
+
+    /**
+     * The token ID of the application that actually uses the audio capturer stream, used to display
+     * the correct application information when the microphone privacy indicator is turned on.
+     * If this field is not specified, the caller application's token ID is used by default.
+     * When this field is set, the caller must have the ohos.permission.AUDIO_USER_MICROPHONE_INDICATOR
+     * permission; otherwise {@link createMicInAudioCapturer} fails.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    actualUsingAppTokenId?: int;
   }
 
   /**
@@ -12386,17 +12710,11 @@ declare namespace audio {
    */
   interface CaptureFilterOptions {
     /**
-     * Filter by stream usages. If you want to capture voice streams, additional permission is needed.
-     * @type { Array<StreamUsage> }
-     * @permission ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO
-     * @syscap SystemCapability.Multimedia.Audio.PlaybackCapture
-     * @since 10
-     */
-    /**
      * Filter by stream usages. But not allow to capture voice streams.
      * @type { Array<StreamUsage> }
+     * @permission ohos.permission.CAPTURE_VOICE_DOWNLINK_AUDIO [since 10 - 10]
      * @syscap SystemCapability.Multimedia.Audio.PlaybackCapture
-     * @since 11 dynamiconly
+     * @since 10 dynamiconly
      * @deprecated since 12
      * @useinstead OH_AVScreenCapture in native interface.
      */
@@ -14289,7 +14607,7 @@ declare namespace audio {
    * A 64-bit integer indicates that the appearance and order of the speakers for recording or playback.
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @crossplatform
+   * @crossplatform [since 12]
    * @since 11 dynamic
    * @since 23 static
    */
@@ -15055,6 +15373,741 @@ declare namespace audio {
      * @since 24 static
      */
     getEqualizerPreset(): AudioLoopbackEqualizerPreset;
+
+    /**
+     * Obtains the global audio loopback available status.
+     * This feature applies only to the playback control application.
+     *
+     * @returns { AudioLoopbackavailablestatus } The available status of global loopback.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getAvailableStatus(): AudioLoopbackAvailableStatus;
+
+    /**
+     * Subscribes to the global audio loopback available status change event.
+     * This feature applies only to the playback control application.
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } callback - Callback function, which is used to return the audio
+     *     loopback available status after the change.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onAvailableStatusChange(callback: Callback<AudioLoopbackAvailableStatus>): void;
+
+    /**
+     * Unsubscribes from the global audio loopback status change event.
+     * After you cancel the callback, the system does not  trigger the callback.
+     * This feature applies only to the playback control application.
+     *
+     * @param { Callback<AudioLoopbackavailablestatus> } [callback] - Callback to the canceled.
+     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offAvailableStatusChange(callback?: Callback<AudioLoopbackAvailableStatus>): void;
+  }
+
+  /**
+   * Defines the availability status of global audio loopback.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioLoopbackAvailableStatus {
+    /**
+     * Indicates the availability status.
+     * The playback control application can determine whether to display the audio separation switch button based on the
+     * status.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    available: boolean;
+
+    /**
+     * Unavailable reason.
+     * The playback control application determines the prompt information based on the information.
+     * <br>This parameter is available only when Status is unavailable.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    unavailableReason?: AudioLoopbackUnavailableReason;
+  }
+
+  /**
+   * Enumerates the reasons why audio loopback is unavailable.
+   * 
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum AudioLoopbackUnavailableReason {
+    /**
+     * This device does not support audio loopback.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_DEVICE_NOT_SUPPORTED = 0,
+
+    /**
+     * The preferred audio device type does not support the audio loopback.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_TYPE_NOT_SUPPORTED = 1,
+
+    /**
+     * The preferred audio device product does not support the audio loopback, mainly used for
+     * unsupported nearlink device scenario.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_PREFERRED_AUDIO_DEVICE_PRODUCT_NOT_SUPPORTED = 2,
+
+    /**
+     * It is occupied by other scenarios, including public audio loopback enabled and phone calls.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_OCCUPIED_BY_OTHER = 3,
+
+    /**
+     * Audio service status is abnormal.
+     * 
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    REASON_AUDIO_PROCESS_ERROR = 4
+  }
+
+  /**
+   * Enumerates the feature type for audio suite.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum AudioSuiteFeatureType {
+    /**
+     * Enhancement for voice dialogue part of the audio.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_DIALOG_ENHANCEMENT = 0,
+    /**
+     * Enhancement for the main voice part of the audio.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_CENTER_VOICE_ENHANCEMENT = 1,
+    /**
+     * Enhancement for the human voice part of the audio.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_VOICE_ENHANCEMENT = 2,
+    /**
+     * Enhancement for the music portion of the audio.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_MUSIC_ENHANCEMENT = 3,
+    /**
+     * Audio source separation.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    AUDIO_SOURCE_SEPARATION = 4
+  }
+
+  /**
+   * Enumerates the status for audio suite feature.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum AudioSuiteFeatureStatus {
+    /**
+     * Invalid status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    INVALID = -1,
+    /**
+     * Initialized status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    INITIALIZED = 0,
+    /**
+     * Checking the version status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    VERSION_CHECKING = 10,
+    /**
+     * Checking the version failed status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    VERSION_CHECK_FAILED = 11,
+    /**
+     * Checking the version succeeded status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    VERSION_CHECK_SUCCEEDED = 12,
+    /**
+     * Downloading status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    DOWNLOADING = 20,
+    /**
+     * Paused during download status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    DOWNLOAD_PAUSED = 21,
+    /**
+     * Download failed status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    DOWNLOAD_FAILED = 22,
+    /**
+     * Download succeeded status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    DOWNLOAD_SUCCEEDED = 23,
+    /**
+     * Installing status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    INSTALLING = 30,
+    /**
+     * Waiting for installation status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    WAITING_FOR_INSTALLATION = 31,
+    /**
+     * Installation failed status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    INSTALLATION_FAILED = 35,
+    /**
+     * Installation succeeded status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    INSTALLATION_SUCCEEDED = 36,
+    /**
+     * Uninstalling status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UNINSTALLING = 40,
+    /**
+     * Waiting for uninstalling status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    WAITING_FOR_UNINSTALLATION = 41,
+    /**
+     * Uninstallation failed status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UNINSTALLATION_FAILED = 42,
+    /**
+     * Uninstallation succeeded status.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UNINSTALLATION_SUCCEEDED = 43
+  }
+
+  /**
+   * Enumerates the network types for audio suite download.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum NetworkType {
+    /**
+     * Wi-Fi network.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    WIFI = 6,
+    /**
+     * Cellular and Wi-Fi network.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    CELLULAR_AND_WIFI = 7
+  }
+
+  /**
+   * Defines the audio suite feature status information.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSuiteFeatureStatusInfo {
+    /**
+     * Type of the feature module.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    featureType: AudioSuiteFeatureType;
+    /**
+     * Status of the feature module.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    status: AudioSuiteFeatureStatus;
+    /**
+     * Installation path.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    installPath: string;
+    /**
+     * Download progress. The value ranges from 0 to 100.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    progress: int;
+    /**
+     * Error code when the feature enters the error status.
+     * <br>If the error code is 6800301, the internal database or I/O of the system is abnormal, which is irrelevant to
+     * application invoking.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    errorCode: AudioErrors;
+  }
+
+  /**
+   * Defines the audio suite feature status information array.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  type AudioSuiteFeatureStatusInfoArray = Array<AudioSuiteFeatureStatusInfo>;
+
+  /**
+   * Defines the audio suite feature version information.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSuiteFeatureVersionInfo {
+    /**
+     * Type of the feature module.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    featureType: AudioSuiteFeatureType;
+    /**
+     * Status of the feature module.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    status: AudioSuiteFeatureStatus;
+    /**
+     * Feature version.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    version: string;
+    /**
+     * Storage size of feature module.
+     * Unit: Bytes.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    size: long;
+    /**
+     * Error code when the feature enters the error state.
+     * <br>If the error code is 6800301, it indicates that the internal database or I/O of the system is abnormal, which
+     * is irrelevant to application invoking.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    errorCode: AudioErrors;
+  }
+
+  /**
+   * Provides audio suite download management capabilities, including starting, pausing,
+   * canceling downloads, querying status, and uninstalling features.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface AudioSuiteDownloadManager {
+    /**
+     * Obtains whether a specified feature has been installed.
+     * This API uses a promise to return the result.
+     *
+     * This interface is used only to query the local installation status of a feature and is not connected to the
+     * network.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<Array<boolean>> } Promise used to return the install status array.
+     *     Each element corresponds to the feature at the same index in featureTypes.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isFeatureInstalled(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<boolean>>;
+
+    /**
+     * Obtains the status of a specified feature.
+     * This API uses a promise to return the result.
+     *
+     * This interface is used only to query the local installation status of a feature and is not connected to the
+     * network.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise used to return the feature status array.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getFeatureStatus(featureTypes: Array<AudioSuiteFeatureType>): Promise<AudioSuiteFeatureStatusInfoArray>;
+
+    /**
+     * Obtains the latest version information of a specified feature.
+     * This API uses a promise to return the result.
+     *
+     * This interface queries information through the network.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise used to return the version info array.
+     *     Each element corresponds to the feature at the same index in featureTypes.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @throws { BusinessError } 6800501 - Required network conditions not met. The current network status
+     *     is unavailable.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getNewVersionInfo(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<AudioSuiteFeatureVersionInfo>>;
+
+    /**
+     * Start downloading features based on the specified network.
+     * This interface must be called after the feature status changes to
+     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED} after the package search succeeds in invoking
+     * {@link getNewVersionInfo} is called. After this interface is called, the feature status changes to
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
+     *
+     * The interface returns after the download starts. During the download, you can obtain the download progress
+     * through the {@link onDownloadStatusChange} subscribed download status change event.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to download.
+     *     <br>The maximum length is 5.
+     * @param { NetworkType } networkType - Network type for downloading.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @throws { BusinessError } 6800501 - Required network conditions not met.
+     *     The current network conditions do not match the type specified by networkType.
+     * @throws { BusinessError } 6800502 - Insufficient storage space.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startDownload(featureTypes: Array<AudioSuiteFeatureType>, networkType: NetworkType): Promise<void>;
+
+    /**
+     * Pauses the download of a specified feature.
+     * This function is called after the feature status is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}. After this
+     * function is called, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}.
+     *
+     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
+     * retains the original state.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to pause.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    pauseDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
+
+    /**
+     * Cancels the download of a specified feature.
+     * It should be called when the feature state is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}. After this function is called, the state changes to
+     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}.
+     *
+     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
+     * retains the original state.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to cancel.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    cancelDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
+
+    /**
+     * Start the background download feature.
+     * If the current network condition is Wi-Fi: The feature will be downloaded directly. If it is not a Wi-Fi network,
+     * the system audio service automatically downloads after switching to the Wi-Fi network.
+     * It can be called in any {@link audio.AudioSuiteFeatureStatus} state.
+     * After the client process exits, the system audio service continuously listens to the network environment until
+     * the task is downloaded successfully.
+     *
+     * The interface returns a message after sending a command. During the download, you can obtain the download
+     * progress through the {@link onDownloadStatusChange} subscribed download status change event.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to download.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    startBackgroundDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
+
+    /**
+     * Uninstall the downloaded features.
+     * This function should be called after the feature status is
+     * {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}. After this function is called, the status changes
+     * to
+     * {@link audio.AudioSuiteFeatureStatus.UNINSTALLING}.
+     *
+     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
+     * retains the original state.
+     *
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to uninstall.
+     *     <br>The maximum length is 5.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
+     * @throws { BusinessError } 6800302 - Audio client call audio service error.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    uninstallFeature(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
+
+    /**
+     * Subscribes to download status change event.
+     * When the download status of any feature module changes, the subscription callback is triggered.
+     *
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } callback - Callback function, which is used to return the
+     *     array of changed download status information.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onDownloadStatusChange(callback: Callback<AudioSuiteFeatureStatusInfoArray>): void;
+
+    /**
+     * Unsubscribe from the download status change event.
+     * After you cancel the callback, the system does not trigger the callback.
+     *
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - Callback to be unsubscribed.
+     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800302 - System service process terminated.
+     * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offDownloadStatusChange(callback?: Callback<AudioSuiteFeatureStatusInfoArray>): void;
   }
 }
 

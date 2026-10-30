@@ -14,7 +14,16 @@
  */
 
 /**
- * @file 3D scene boids simulation type declarations
+ * This module provides types and operation methods for Boids simulation animation in ArkGraphics 3D.
+ * Boids simulation animation is a computer animation method that drives individuals in a group through rules such as separation,
+ * alignment, and cohesion, making them exhibit movement characteristics similar to flocks of birds or schools of fish in nature.
+ *
+ * > **NOTE**
+ * >
+ * > Before using the APIs of this module, you need to load the Boids simulation plugin [BoidsSimPlugin]{@link BoidsSimPlugin}
+ * > through [RenderContext.loadPlugin]{@link ./Scene:RenderContext.loadPlugin}.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -30,9 +39,9 @@ import { Vec3, Quaternion } from './SceneTypes';
  * > A simulation frame refers to the update cycle executed at a fixed time step in the Boids simulation, similar to FixedUpdate in Unity.
  * > The default time step is 16 ms (approximately 62.5 FPS). The simulation is driven by accumulating real time and consuming it in fixed steps.
  * > The default values of some parameters below are calculated based on this time step:
- * > - maxVelocityMag: 0.01 / 0.016 ≈ 0.625 (m/s).
- * > - maxAccelerationMag: maxVelocityMag / 0.016 ≈ 39.06 (m/s²).
- * > - maxTurnRate: π × 0.75 × 0.016 ≈ 0.0377 (rad/simulation frame).
+ * > - **maxVelocityMag:** 0.01 / 0.016 ≈ 0.625 (m/s).
+ * > - **maxAccelerationMag:** maxVelocityMag / 0.016 ≈ 39.06 (m/s²).
+ * > - **maxTurnRate:** π × 0.75 × 0.016 ≈ 0.0377 (rad/simulation frame).
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @systemapi

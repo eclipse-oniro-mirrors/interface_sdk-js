@@ -148,7 +148,7 @@ export declare interface EmbeddedComponentAttribute extends CommonMethod {
    * @returns { this } EmbeddedComponentAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   setEmbeddedComponentOptions(loader: Want, type?: EmbeddedType, options?: EmbeddedOptions): this;
   /**
@@ -159,7 +159,7 @@ export declare interface EmbeddedComponentAttribute extends CommonMethod {
    * @returns { this } EmbeddedComponentAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   setEmbeddedComponentOptions(loader: Want, type?: EmbeddedType): this;
   /**
@@ -250,7 +250,7 @@ export declare function EmbeddedComponent(
  * @returns { EmbeddedComponentAttribute } EmbeddedComponent的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function EmbeddedComponent(

@@ -715,7 +715,7 @@ declare namespace common {
   /**
    * Define basic summary information about the CLI tool.
    *
-   * @typedef { _ToolInfo }
+   * @typedef { _ToolSummary }
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly

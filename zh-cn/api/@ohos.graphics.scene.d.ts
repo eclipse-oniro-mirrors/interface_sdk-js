@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 3D场景模块导出
+ * @file ArkGraphics 3D模块
  * @kit ArkGraphics3D
  */
 
@@ -114,6 +114,24 @@ export {
  * @since 26.0.0 dynamic&static
  */
 export { SceneLoadParams } from './graphics3d/Scene';
+
+/**
+ * 导出场景
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export { RenderTargetParameters } from './graphics3d/Scene';
+
+/**
+ * 导出场景资源
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export { RenderTarget } from './graphics3d/SceneResources';
 
 /**
  * 导出场景类型

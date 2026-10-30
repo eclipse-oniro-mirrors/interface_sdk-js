@@ -15,6 +15,24 @@
  */
 
 /**
+ * A dialog is a modal window that temporarily displays information that requires user attention or actions that need to
+ * be performed, while preserving the current context.
+ * Users must complete the interaction before exiting this modal state.
+ * 
+ * > **NOTE**
+ * >
+ * > - If the **Dialog** component has [universal attributes]{@link common} and [universal events]{@link common}
+ * > configured,
+ * > the compiler toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal
+ * > attributes and universal events on this node rather than the **Dialog** component itself.
+ * > As a result, the configured universal attributes and universal events may fail to take effect or behave as
+ * > intended. For this reason,
+ * > avoid using universal attributes and events with the **Dialog** component.
+ * 
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
  * @file
  * @kit ArkUI
  */
@@ -115,7 +133,9 @@ export declare class ButtonOptions {
   public textAlign?: TextAlign;
 }
 /**
- * Declare CustomDialog TipsDialog
+ * Defines a tip dialog box used to remind users to pay attention to specific matters or perform confirmation
+ * operations.
+ * 
  * @struct { TipsDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -250,7 +270,8 @@ export declare struct TipsDialog {
   @Builder build(): void;
 }
 /**
- * Declare CustomDialog SelectDialog
+ * Displays a dialog box from which the user can select options presented in a list or grid.
+ * 
  * @struct { SelectDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -340,7 +361,10 @@ export declare struct SelectDialog {
   @Builder build(): void;
 }
 /**
- * Declare CustomDialog ConfirmDialog
+ * Defines a confirmation dialog box used to provide error feedback or prompt information when an operation is not
+ * correctly executed (for example, a network error or low battery level) or when an incorrect operation is performed (
+ * for example, fingerprint enrollment).
+ * 
  * @struct { ConfirmDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -448,7 +472,9 @@ export declare struct ConfirmDialog {
   @Builder build(): void;
 }
 /**
- * Declare CustomDialog AlertDialog
+ * Defines an alert dialog box used to warn the user when triggering an irreversible operation that will have 
+ * serious consequences (such as deletion, reset, cancel editing, stop, etc.).
+ * 
  * @struct { AlertDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -538,7 +564,8 @@ export declare struct AlertDialog {
   @Builder build(): void;
 }
 /**
- * Declare CustomDialog LoadingDialog
+ * Displays a loading dialog box to inform the user of the operation progress.
+ * 
  * @struct { LoadingDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -592,7 +619,17 @@ export declare struct LoadingDialog {
   @Builder build(): void;
 }
 /**
- * Declare custom content dialog
+ * Displays a dialog box that contains custom content and operation area.
+ *
+ * > **NOTE**
+ * >
+ * > When the height of the dialog box is insufficient, the area defined by **contentBuilder** will be compressed.
+ * > Global scrolling will be enabled if the compressed area's height falls below 100 vp.
+ * >
+ * > You must define scrolling of the content area in **CustomContentDialog**. In addition, the custom scrolling of the
+ * > content area must be used in conjunction with the **nestedScroll** property, as in the
+ * > **nestedScroll({ scrollForward: NestedScrollMode.PARALLEL, scrollBackward: NestedScrollMode.PARALLEL })** example.
+ * 
  * @struct { CustomContentDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -692,7 +729,10 @@ export declare struct CustomContentDialog {
   @Builder build(): void;
 }
 /**
- * Declare struct PopoverDialog
+ * Defines a follow-hand dialog box that pops up based on the position of the target component. 
+ * The aforementioned **TipsDialog**, **SelectDialog**, **ConfirmDialog**, **AlertDialog**, **LoadingDialog**, 
+ * and **CustomContentDialog** can all serve as the content of the dialog box.
+ * 
  * @struct { PopoverDialog }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

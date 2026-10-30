@@ -104,6 +104,10 @@ declare namespace serial {
      * @param { int } [timeout] - 超时时间，取值范围：[0, 300000]，整数，单位为毫秒。默认值0表示当数据无法写入串口时，不等待直接返回写入长度0。
    	 *     传入负数、非整数或大于300000时返回错误码35700002。
      * @returns { Promise<int> } - Promise对象，返回写入数据长度。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified.
+     *     <br>2. Incorrect parameter types.
+     *     <br>3. undefined is passed as the optional parameter.
      * @throws { BusinessError } 35700001 - Service error.
      * @throws { BusinessError } 35700002 - Invalid parameter.
      * @throws { BusinessError } 35700003 - Virtual serial port disconnected.
@@ -590,7 +594,7 @@ declare namespace serial {
    * @param { string } deviceId - 串口设备ID，用于指定需要授权访问的串口设备。可通过接口[getSerialPortList]{@link serial.getSerialPortList}获取
    *     串口设备列表。板载串口取值为portName；USB虚拟串口取值为VID+PID+SN的组合或设备路径（如/dev/ttyUSB0）。设置后，应用将获得对指定串口设备的访问权限。
    * @returns { Promise<void> } - Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application
+   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
    * @throws { BusinessError } 35700001 - Service error.
    * @throws { BusinessError } 35700002 - Invalid parameter.
    * @throws { BusinessError } 35700008 - Permission denied.

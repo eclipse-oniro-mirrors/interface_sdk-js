@@ -38,6 +38,7 @@ declare enum ImageAnalyzerType {
   SUBJECT = 0,
 
   /**
+   * 文字识别功能。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -47,6 +48,7 @@ declare enum ImageAnalyzerType {
   TEXT,
 
   /**
+   * 对象查找功能。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

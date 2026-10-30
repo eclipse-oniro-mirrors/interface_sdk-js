@@ -31,7 +31,7 @@ import type { AsyncCallback, Callback } from './@ohos.base';
  */
 declare namespace hardwareManager {
   /**
-   * 表示分布式硬件类型。
+   * 指定要操作的分布式硬件类型，决定暂停、恢复或停止操作的硬件范围。例如，设置为CAMERA时仅操作分布式相机，设置为ALL时操作所有分布式硬件。使用该参数前需确保对应的分布式硬件服务已启动。
    *
    * @syscap SystemCapability.DistributedHardware.DistributedHardwareFWK
    * @systemapi
@@ -114,7 +114,7 @@ declare namespace hardwareManager {
    */
   enum DistributedHardwareErrorCode {
     /**
-     * 表示分布式硬件未启动。
+     * 表示指定的分布式硬件服务未启动。
      *
      * @syscap SystemCapability.DistributedHardware.DistributedHardwareFWK
      * @systemapi
@@ -124,7 +124,7 @@ declare namespace hardwareManager {
     ERR_CODE_DISTRIBUTED_HARDWARE_NOT_STARTED = 24200101,
 
     /**
-     * 表示源端设备未连接。
+     * 表示指定的源端设备未建立连接。
      *
      * @syscap SystemCapability.DistributedHardware.DistributedHardwareFWK
      * @systemapi
@@ -156,7 +156,7 @@ declare namespace hardwareManager {
     type: DistributedHardwareType;
 
     /**
-     * 表示源端设备，缺省时表示所有源端设备。
+     * 表示源端设备，为有效设备网络ID字符串时操作指定源端设备的指定类型硬件，未提供或传空字符串时表示所有源端设备。传入无效值时返回错误码401。
      *
      * @permission ohos.permission.ACCESS_DISTRIBUTED_HARDWARE
      * @syscap SystemCapability.DistributedHardware.DistributedHardwareFWK
@@ -168,11 +168,13 @@ declare namespace hardwareManager {
   }
 
   /**
-   * 暂停被控端分布式硬件业务。使用promise异步回调。
+   * 暂停被控端分布式硬件业务。被控端指通过分布式能力连接的远端设备，分布式硬件业务指通过分布式能力调用的相机、麦克风等硬件功能。使用promise异步回调，暂停后可以调用resumeDistributedHardware恢复业务或
+   * stopDistributedHardware停止业务。调用此方法前需确保分布式硬件已启动。使用场景：在多设备协同场景下临时暂停某些设备的硬件功能（如暂停远端相机以节省带宽）；当系统资源紧张时暂停非关键的分布式硬件以释放资源；
+   * 切换设备配置时暂时停止当前硬件同步。
    *
    * @permission ohos.permission.ACCESS_DISTRIBUTED_HARDWARE
-   * @param { HardwareDescriptor } description - 硬件描述信息。
-   * @returns {Promise<void>} 无返回结果的Promise对象。
+   * @param { HardwareDescriptor } description - 硬件描述信息，用于指定要操作的分布式硬件类型和源端设备。
+   * @returns {Promise<void>} Promise对象，异步操作成功时无返回结果，失败时返回错误码和错误信息。
    * @throws {BusinessError} 201 - Permission verification failed.
    * @throws {BusinessError} 202 - Permission denied, non-system app called system api.
    * @throws {BusinessError} 401 - Input parameter error.
@@ -186,11 +188,12 @@ declare namespace hardwareManager {
   function pauseDistributedHardware(description: HardwareDescriptor): Promise<void>;
 
   /**
-   * 恢复被控端分布式硬件业务。使用promise异步回调。
+   * 恢复被控端分布式硬件业务。被控端对应的分布式硬件业务恢复正常运行。使用promise异步回调，必须在pauseDistributedHardware暂停后调用，用于恢复已暂停的业务。调用此方法前需确保分布式硬件已启动。使用场景：
+   * 当多设备协同场景下需要重新启用已暂停的硬件功能时；当系统资源恢复后重新激活非关键分布式硬件时；切换设备配置完成时恢复硬件同步功能。
    *
    * @permission ohos.permission.ACCESS_DISTRIBUTED_HARDWARE
-   * @param { HardwareDescriptor } description - 硬件描述信息。
-   * @returns {Promise<void>} 无返回结果的Promise对象。
+   * @param { HardwareDescriptor } description - 硬件描述信息，用于指定要操作的分布式硬件类型和源端设备。
+   * @returns {Promise<void>} Promise对象，异步操作成功时无返回结果，失败时返回错误码和错误信息。
    * @throws {BusinessError} 201 - Permission verification failed.
    * @throws {BusinessError} 202 - Permission denied, non-system app called system api.
    * @throws {BusinessError} 401 - Input parameter error.
@@ -204,11 +207,13 @@ declare namespace hardwareManager {
   function resumeDistributedHardware(description: HardwareDescriptor): Promise<void>;
 
   /**
-   * 停止被控端分布式硬件业务。使用promise异步回调。
+   * 停止被控端分布式硬件业务。被控端对应的分布式硬件业务停止。使用promise异步回调。停止后无法通过resumeDistributedHardware恢复业务，需要重新启动分布式硬件服务，不能再调用
+   * pauseDistributedHardware或resumeDistributedHardware。调用此方法前需确保分布式硬件已启动。使用场景：当应用退出或不再需要分布式硬件功能时；当用户主动关闭分布式硬件服务时；
+   * 当设备断开连接需要释放分布式硬件资源时。
    *
    * @permission ohos.permission.ACCESS_DISTRIBUTED_HARDWARE
-   * @param { HardwareDescriptor } description - 硬件描述信息。
-   * @returns {Promise<void>} 无返回结果的Promise对象。
+   * @param { HardwareDescriptor } description - 硬件描述信息，用于指定要操作的分布式硬件类型和源端设备。
+   * @returns {Promise<void>} Promise对象，异步操作成功时无返回结果，失败时返回错误码和错误信息。
    * @throws {BusinessError} 201 - Permission verification failed.
    * @throws {BusinessError} 202 - Permission denied, non-system app called system api.
    * @throws {BusinessError} 401 - Input parameter error.

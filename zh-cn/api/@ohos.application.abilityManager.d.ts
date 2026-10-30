@@ -105,7 +105,7 @@ declare namespace abilityManager {
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION
    * @param { Configuration } config - 新的配置项。
-   * @param { AsyncCallback<void> } callback - 回调函数，当通过修改配置来更新配置成功，err为undefined，否则为错误对象。
+   * @param { AsyncCallback<void> } callback - 回调函数。当更新配置成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @since 8

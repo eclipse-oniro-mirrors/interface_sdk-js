@@ -119,8 +119,6 @@ interface ColumnOptionsV2 {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * >
  * > Column未设置高度或宽度时，在主轴（垂直方向）或交叉轴（水平方向）方向上自适应子组件大小。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -170,7 +168,7 @@ interface ColumnInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -216,7 +214,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
    * 息请参见[PointLightStyle]{@link PointLightStyle}对象说明。
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置点光源照亮周围组件的UI效果。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { ColumnAttribute } The attribute of the column.
+   * @returns { ColumnAttribute } Column的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -228,7 +226,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
    *
    * @param { Optional<boolean> } isReversed - 子组件在垂直方向上的排列是否反转。
    *     <br>默认值：true。设置true表示子组件在垂直方向上反转排列，设置false表示子组件在垂直方向上正序排列。
-   * @returns { ColumnAttribute } The attribute of the column.
+   * @returns { ColumnAttribute } Column的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -244,11 +242,9 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * >
  * > Column未设置高度或宽度时，在主轴（垂直方向）或交叉轴（水平方向）方向上自适应子组件大小。
- * 
- * ## 子组件
+ *
+ * ###### 子组件
  * 
  * 可以包含子组件。
  *
@@ -262,7 +258,7 @@ declare class ColumnAttribute extends CommonMethod<ColumnAttribute> {
 declare const Column: ColumnInterface;
 
 /**
- * Defines Column Component instance.
+ * 定义Column组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

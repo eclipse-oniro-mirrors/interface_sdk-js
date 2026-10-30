@@ -45,8 +45,8 @@ import { RecordData } from '@ohos.base';
 export declare class ReuseObject {
 
   /**
-     * Get the raw data of ReuseObject to get values.
-     *
+   * Get the raw data of ReuseObject to get values.
+   *
    * @returns { RecordData } - Returns the raw data of ReuseObject.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -228,25 +228,88 @@ export @interface ComponentV2 {
   poolAccepts: string[] = [];
 }
 
-/**
- * Defining Reusable Annotation that is used to decorate @Component.
+ /**
+ * 定义内存优化策略的类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 23 static
+ * @since 26.0.0 static
  */
-@Retention({policy: "SOURCE"})
-export @interface Reusable {}
+export declare enum ReusableMemOptStrategy {
+    /**
+    * 无内存优化策略。
+    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    DEFAULT = 0,
+    /**
+    * CustomComponent处理内存优化。
+    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    ENABLE_AUTO_CACHE_OPTIMIZATION = 1 << 0,
+}
 
 /**
- * Defining ReusableV2 Annotation that is used to decorate @ComponentV2.
+ * 定义Resuable ClassDecorator的可选参数。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface CustomComponentBaseOptions {
+    /**
+    * CustomComponent Reuse的内存优化策略
+    *
+    * @type { ?ReusableMemOptStrategy }
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    memoryOptimizationStrategy? : ReusableMemOptStrategy;
+}
+
+/**
+ * 声明一个可复用的自定义组件。需与@Component搭配使用，用于装饰自定义组件，以实现组件复用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 @Retention({policy: "SOURCE"})
-export @interface ReusableV2 {}
+export @interface Reusable {
+  /**
+   * 组件复用内存优化配置项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  memoryOptimizationStrategy: ReusableMemOptStrategy = ReusableMemOptStrategy.DEFAULT
+}
+
+/**
+ * 声明一个可复用的自定义组件。该装饰器必须与@ComponentV2搭配使用，用于装饰自定义组件，以实现组件复用。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 23 static
+ */
+@Retention({policy: "SOURCE"})
+export @interface ReusableV2 {
+  /**
+   * 组件复用内存优化配置项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  memoryOptimizationStrategy: ReusableMemOptStrategy = ReusableMemOptStrategy.DEFAULT
+}
 
 /**
  * Defining CustomLayout Annotation that is used to decorate @Component and @ComponentV2.
@@ -572,24 +635,34 @@ export interface LayoutCallbacks {
     };
 }
 
-/** 
- * Defining interface for _invokeImpl options. 
- * 
- * @syscap SystemCapability.ArkUI.ArkUI.Full 
- * @stagemodelonly 
- * @since 24 static 
- */ 
-export interface CustomComponentInvokeOptions { 
-    /** 
-     * CustomComponent Class object. Used to generate default reuse key. 
-     * 
-     * @type { ?Class } 
-     * @syscap SystemCapability.ArkUI.ArkUI.Full 
-     * @stagemodelonly 
-     * @since 24 static 
-     */ 
-    sClass?: Class; 
+/**
+ * 定义_invokeImpl的配置选项
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 24 static
+ */
+export interface CustomComponentInvokeOptions extends CustomComponentBaseOptions {
+    /**
+     * 自定义组件自身的Class类型，用于生成默认的复用键
+     *
+     * @type { ?Class }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 24 static
+     */
+    sClass?: Class;
 }
+
+/**
+ * 定义_invokeImpl选项的接口。
+ *
+ * @typedef CustomComponentV1InvokeOptions
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export interface CustomComponentV1InvokeOptions extends CustomComponentBaseOptions {}
 
 /**
  * CustomComponentLifecycle用于监控自定义组件生命周期的变化，开发者可以通过

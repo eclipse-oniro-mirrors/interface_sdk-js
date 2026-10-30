@@ -15,6 +15,9 @@
 */
 
 /**
+ * The **Chip** component is used for tag display and interaction scenarios. It supports custom styles, icons, activated
+ * states, and other features, and is applicable to scenarios such as search box history and email recipient lists,
+ * enabling you to quickly implement tag creation, deletion, and interaction.
  * @file
  * @kit ArkUI
  */
@@ -764,7 +767,7 @@ export interface ChipOptions {
 }
 
 /**
- * Build function of Chip.
+ * Creates a **Chip** component.
  *
  * @param { ChipOptions } options - chip option.
  * @syscap SystemCapability.ArkUI.ArkUI.Full

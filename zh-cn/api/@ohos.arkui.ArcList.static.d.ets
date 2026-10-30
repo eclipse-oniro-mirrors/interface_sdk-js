@@ -288,7 +288,7 @@ export declare interface ArcListAttribute extends CommonMethod {
    * @returns { ArcListAttribute } 返回ArcListAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setArcListOptions(options?: ArkListOptions): this;
 
@@ -338,7 +338,7 @@ export declare interface ArcListItemAttribute extends CommonMethod {
    * @returns { ArcListItemAttribute } 返回ArcListItemAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setArcListItemOptions(): this;
 

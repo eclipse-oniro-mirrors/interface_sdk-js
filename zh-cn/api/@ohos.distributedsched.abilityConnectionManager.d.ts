@@ -356,7 +356,7 @@ declare namespace abilityConnectionManager {
     data?: ArrayBuffer;
 
     /**
-     * 接收的图片。
+     * 接收的图片。不传入该参数时表示未接收到图片或图片信息不可用。
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @systemapi
@@ -420,7 +420,7 @@ declare namespace abilityConnectionManager {
 
     /**
      * 表示色彩空间转换失败。在跨设备图像协同场景下，当需要将图像数据从源设备色彩空间转换为
-     *     目标设备色彩空间格式失败时产生此事件，常见原因包括色彩格式不支持或转换参数
+     *     目标设备色彩空间格式失败时产生此事件，常见原因包括色彩格式不支持或转换参数错误。
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
@@ -714,7 +714,7 @@ declare namespace abilityConnectionManager {
         callback?: Callback<EventCallbackInfo>): void;
 
   /**
-   * 注册receiveImage事件的回调监听。
+   * 注册receiveImage事件的回调监听，用于接收图片传输事件的异步通知。需与off('receiveImage')方法配合使用，在不需要接收图片时，应调用off('receiveImage')取消监听以释放资源。
    *
    * @param { 'receiveImage' } type - 事件注册类型，'receiveImage'。
    * @param { number } sessionId - 协同会话ID。
@@ -733,9 +733,9 @@ declare namespace abilityConnectionManager {
   /**
    * 取消receiveImage事件的回调监听。
    *
-   * @param { 'receiveImage' } type - 事件注册类型，'receiveImage'。
-   * @param { number } sessionId - 协同会话ID。
-   * @param { Callback<EventCallbackInfo> } callback - 用于处理('receiveImage')事件的回调函数。
+   * @param { 'receiveImage' } type - 表示事件回调类型，支持的事件类型为'receiveImage'。
+   * @param { number } sessionId - 表示创建的协同会话ID，需先创建协同会话后获取。
+   * @param { Callback<EventCallbackInfo> } callback - 用表示注册的回调函数。如果传入该参数，则取消该callback的监听。如果未传入该参数，则取消所有'receiveImage'事件监听。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2.
    *     Incorrect parameter types.
@@ -780,11 +780,11 @@ declare namespace abilityConnectionManager {
         callback?: Callback<EventCallbackInfo>): void;
 
   /**
-   * 注册collaborateEvent事件的回调监听。
+   * 注册collaborateEvent事件的回调监听，使用callback异步回调。该监听需与off('collaborateEvent')成对使用，在不再需要接收事件时及时取消监听以释放资源。
    *
-   * @param { 'collaborateEvent' } type - 事件注册类型，'collaborateEvent'。
-   * @param { number } sessionId - 协同会话ID。
-   * @param { Callback<CollaborateEventInfo> } callback - 错误事件回调函数。
+   * @param { 'collaborateEvent' } type - 表示事件回调类型，支持的事件类型为'collaborateEvent'，当协同状态发生变化时触发该事件。
+   * @param { number } sessionId - 表示创建的协同会话ID，需先创建协同会话后获取。
+   * @param { Callback<CollaborateEventInfo> } callback - 回调函数，返回协同事件的信息。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2.
    *     Incorrect parameter types.
@@ -797,7 +797,7 @@ declare namespace abilityConnectionManager {
         callback: Callback<CollaborateEventInfo>): void;
 
   /**
-   * 取消collaborateEvent事件的回调监听。
+   * 取消collaborateEvent事件的回调监听。需与on('collaborateEvent')方法配合使用，在不需要接收协同事件或组件销毁时，应调用此方法取消监听以释放资源。
    *
    * @param { 'collaborateEvent' } type - 事件注册类型，'collaborateEvent'。
    * @param { number } sessionId - 协同会话ID。
@@ -894,9 +894,20 @@ declare namespace abilityConnectionManager {
    * @syscap SystemCapability.DistributedSched.AppCollaboration
    * @stagemodelonly
    * @since 18 dynamic
-   * @since 23 static
    */
   function getPeerInfoById(sessionId: int): PeerInfo | undefined;
+
+  /**
+   * 获取Ability连接会话中的应用信息。
+   *
+   * @param { int } sessionId - Ability连接会话ID。
+   * @returns { PeerInfo | undefined } 返回接收端的协同应用信息。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2. Incorrect parameter types.
+   * @syscap SystemCapability.DistributedSched.AppCollaboration
+   * @stagemodelonly
+   * @since 23 static
+   */
+  function getPeerInfoById(sessionId: int): PeerInfo | null;
 
   /**
    * 创建协同会话成功并获得会话ID后，设备A上可进行UIAbility的连接。调用此接口前，
@@ -970,7 +981,7 @@ declare namespace abilityConnectionManager {
    * 创建协同会话成功并获得会话ID、调用connect接口建立连接成功后，设备A或设备B可向对端设备发送文本信息。
    * 使用Promise异步回调。
    *
-   * @param { int } sessionId - 协同会话ID。
+   * @param { int } sessionId - 协同会话ID，由createAbilityConnectionSession接口返回。。
    * @param { string } msg - 文本信息内容（内容最大限制为1KB）。超出长度限制时返回错误码401。
    * @returns { Promise<void> } 无返回结果的promise对象。消息发送成功时resolve，发送失败时reject。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified. 2.
@@ -1168,7 +1179,7 @@ declare namespace abilityConnectionManager {
     name: string;
 
     /**
-     * 流传输角色，可以是接收流或发送流。
+     * 表示流传输的方式（可以是接收流或发送流）。bitrate参数仅在role为SOURCE时有效。
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @systemapi
@@ -1263,7 +1274,7 @@ declare namespace abilityConnectionManager {
     rotation?: int;
 
     /**
-     * 视频是否翻转。
+     * 表示视频是否反转。HORIZONTAL表示水平翻转（适合镜像场景），VERTICAL表示垂直翻转。
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @systemapi
@@ -1275,7 +1286,7 @@ declare namespace abilityConnectionManager {
     }
 
   /**
-   * 翻转选项。
+   * 翻转选项的枚举。
    *
    * @syscap SystemCapability.DistributedSched.AppCollaboration
    * @systemapi
@@ -1425,7 +1436,7 @@ declare namespace abilityConnectionManager {
     }
 
   /**
-   * 应用协作键值的枚举。
+   * 应用协作相关值的枚举。
    *
    * @syscap SystemCapability.DistributedSched.AppCollaboration
    * @stagemodelonly

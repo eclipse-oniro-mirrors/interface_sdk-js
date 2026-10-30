@@ -23,7 +23,6 @@ import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
  * abilityToolAccessCtrl的命名空间
  *
  * @syscap SystemCapability.Security.Asset
- * @systemapi
  * @FaAndStageModel
  * @since 26.0.0 dynamiconly
  */
@@ -32,7 +31,6 @@ declare namespace abilityToolAccessCtrl {
    * CLI命令信息。
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -41,7 +39,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI主命令名称。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -51,7 +48,6 @@ declare namespace abilityToolAccessCtrl {
      * CLI子命令名。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -184,6 +180,16 @@ declare namespace abilityToolAccessCtrl {
      * @since 26.0.0 dynamiconly
      */
     domainId?: string;
+
+    /**
+     * 任务标识。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskIdentity?: TaskIdentity;
   }
 
   /**
@@ -271,7 +277,6 @@ declare namespace abilityToolAccessCtrl {
    * 权限信息。
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.0.0 dynamiconly
    */
@@ -281,7 +286,6 @@ declare namespace abilityToolAccessCtrl {
      * 权限名称。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -291,7 +295,6 @@ declare namespace abilityToolAccessCtrl {
      * 权限状态。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.0.0 dynamiconly
      */
@@ -556,6 +559,54 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * 生成票据的可选参数
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TicketParams {
+
+    /**
+     * 票证过期时间（毫秒）。
+     * 单位为：毫秒。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ticketExpireTimeMs?: long;
+  }
+
+  /**
+   * 票据查询结果。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TicketQueryResult {
+
+    /**
+     * 权限结果列表。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    permissionResults: PermissionInfo[];
+
+    /**
+     * 票证信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ticket: string;
+  }
+
+  /**
    * 授权状态。
    *
    * @syscap SystemCapability.Security.Asset
@@ -706,13 +757,228 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
+   * 任务标识。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ControlAppStatus {
+    /**
+     * 允许控制权限。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ALLOW = 0x01,
+
+    /**
+     * 控制权限被拒绝。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DENY = 0x02
+  }
+
+  /**
+   * 任务标识。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TaskIdentity {
+    /**
+     * 任务属性。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskAttributes: string;
+    /**
+     * 任务属性的标识信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    identity: string;
+
+    /**
+     * 挑战值。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    challenge: string;
+  }
+
+  /**
+   * 任务执行类别。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ExecuteType {
+    /**
+     * 即时任务。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    INSTANT = 0x01,
+    /**
+     * 延时任务。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DELAYED = 0x02
+  }
+
+  /**
+   * 用于生成任务标识的任务标识输入信息。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TaskIdentityInfo {
+    /**
+     * 任务ID。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskId: string;
+    /**
+     * 任务过期时间。
+     * 单位为：秒。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskExpireTime: number;
+    /**
+     * 任务执行类别。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    executeType: ExecuteType;
+    /**
+     * 任务是否允许在锁屏下执行。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    allowScreenLockExecution: boolean;
+    /**
+     * 可信持有物的认证凭据。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    authToken?: Uint8Array;
+    /**
+     * 可信持有物认证凭据的有效时长。
+     * 单位为：秒。取值范围：(0,60]。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    allowableDuration?: number;
+  }
+
+  /**
+   * 应用的相关信息。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface AppInfo {
+    /**
+     * 应用的包名。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    bundleName: string;
+    /**
+     * 应用的分身索引。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    index: number;
+  }
+
+  /**
+   * 应用的相关信息。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ControlAppStatusResult {
+    /**
+     * 应用信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * 控制权限状态。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    status: ControlAppStatus;
+  }
+
+  /**
    * 根据指定的操作查询工具权限。
    * 该函数用于检查权限查询中指定的CLI命令或API的权限状态。
    * 对于每个操作，它返回权限状态、授权状态以及是否需要用户对话框。
    * 当needTicket设置为true时，远程授权会生成一个票据。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { PermissionQuery } permissionQuery - 权限查询信息
+   * @param { PermissionQuery } permissionQuery - 权限查询信息。
    * @returns { Promise<PermissionQueryResult> } Promise用于返回${PermissionQueryResult}。
    * @throws { BusinessError } 201 - Permission denial.
    *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
@@ -899,6 +1165,133 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.0.1 dynamiconly
    */
   export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
+
+  /**
+   * 获取CLI工具的执行认证票据。
+   * 该函数用于获取CLI工具及子命令的执行认证票据。
+   * 如果CLI工具所需权限用户尚未授权，会返回需要授权的权限列表及权限状态。
+   * 如果CLI工具所需权限用户均授权，会返回授权的票据。
+   *
+   * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
+   * @param { CliCmdInfo[] } cliCmdInfos - CLI命令列表。
+   * @param { TicketParams } ticketParams - 生成授权凭据选项。
+   * @returns { Promise<TicketQueryResult> } Promise用于返回${TicketQueryResult}
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @throws { BusinessError } 24010006 - The requested operation is not allowed to be executed while the device
+   *     is locked.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketParams: TicketParams): Promise<TicketQueryResult>;
+
+  /**
+   * 为代理命令生成基于任务的身份验证身份。
+   * 该函数根据调用者身份和基本任务属性（例如任务 ID 和任务过期时间）生成认证标识。
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { TaskIdentityInfo } taskIdentityInfo - 要生成认证标识的任务信息。
+   * @returns { Promise<TaskIdentity> } Promise用于返回${TaskIdentity}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function generateTaskIdentity(taskIdentityInfo: TaskIdentityInfo): Promise<TaskIdentity>;
+
+  /**
+   * 批量撤销代理命令的任务认证标识。
+   * 批量撤销任务鉴权标识，删除任务属性的本地缓存。
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { string[] } taskId - 待撤销的任务ID列表。
+   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function revokeTaskIdentity(taskId: string[]): Promise<void>;
+
+  /**
+   * 查询指定应用的控制权限状态。
+   * 此函数检查输入列表中的每个应用程序是否被允许或拒绝
+   * 被外部工具控制。结果列表与输入顺序相对应。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { AppInfo[] } appInfo - 应用信息列表。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
+
+  /**
+   * 向用户请求指定应用的控制权限。该函数会弹出一个用户对话框，获取对每个应用的控制授权决  。返回结果反映用户对每个应用的允许或拒绝决策。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { Context } context - 用于显示用户对话框的上下文对象。
+   * @param { AppInfo[] } appInfo - 应用信息列表。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
+   *     bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
+    Promise<ControlAppStatusResult[]>;
+  /**
+   * 为任务认证令牌生成挑战值。
+   * 此函数基于任务身份信息生成挑战值。
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { TaskIdentityInfo } taskIdentityInfo - 用于生成挑战值的任务身份信息。
+   * @returns { Promise<Uint8Array> } Promise 用于返回 ${Uint8Array}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TaskId is empty, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function generateTaskChallenge(taskIdentityInfo: TaskIdentityInfo): Promise<Uint8Array>;
 }
 
 export default abilityToolAccessCtrl;

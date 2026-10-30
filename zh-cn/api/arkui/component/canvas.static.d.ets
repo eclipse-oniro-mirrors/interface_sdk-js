@@ -2013,7 +2013,7 @@ export declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
    * @param { double } height - 离屏画布的高度，默认单位：vp。
    *     异常值NaN和Infinity按无效值处理。
    * @param { RenderingContextSettings } [settings] - 用来配置OffscreenCanvasRenderingContext2D
-   *     对象的参数，见RenderingContextSettings。
+   *     对象的参数，当需要开启抗锯齿等高级配置时传入此参数，见RenderingContextSettings。
    *     异常值undefined按RenderingContextSettings的默认值处理。默认值：null。
    * @param { LengthMetricsUnit } [unit] - 用来配置OffscreenCanvasRenderingContext2D对象的单位模式，
    *     配置后无法动态更改。异常值undefined、NaN和Infinity按默认值处理。默认值：DEFAULT。
@@ -2248,8 +2248,9 @@ export declare interface CanvasAttribute extends CommonMethod {
    * @param { ImageAIOptions } [imageAIOptions] - Options for AI analyzer.
    * @returns { CanvasAttribute } Returns instance of CanvasAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setCanvasOptions(context?: CanvasRenderingContext2D | DrawingRenderingContext, imageAIOptions?: ImageAIOptions): this;
   /**
@@ -2258,8 +2259,9 @@ export declare interface CanvasAttribute extends CommonMethod {
    * @param { CanvasParams } params - Parameters for creating Canvas.
    * @returns { CanvasAttribute } Returns instance of CanvasAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setCanvasOptions(params: CanvasParams): this;
   /**
@@ -2332,8 +2334,9 @@ export declare function Canvas(
  * @param { CustomBuilderT<CanvasAttribute> } style_ - Canvas attribute instance.
  * @returns { CanvasAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

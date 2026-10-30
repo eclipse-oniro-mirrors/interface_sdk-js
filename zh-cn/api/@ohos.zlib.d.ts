@@ -533,6 +533,16 @@ declare namespace zlib {
      * @since 23 static
      */
     pathSeparatorStrategy?: PathSeparatorStrategy;
+    
+    /**
+     * 指示是否在压缩文件中保留顶层源文件夹。
+     *
+     * @syscap SystemCapability.BundleManager.Zlib
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    keepTopLevelFolder?: boolean;
   }
 
   /**

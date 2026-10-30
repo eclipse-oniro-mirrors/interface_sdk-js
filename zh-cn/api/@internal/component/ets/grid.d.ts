@@ -77,8 +77,8 @@ declare interface StartLineInfo {
  * 根据Grid的总偏移量，计算当前页面起始行的位置，用于快速滑动或反向滑动场景。此回调需与onGetStartIndexByIndex同时设置才能生效。
  *
  * @param { double } totalOffset - 总滚动偏移量，即Grid当中第一个GridItem的顶部与Grid顶部之间的偏移量。<br/>单位：vp
- * @returns { StartLineInfo }
- 用于记录Grid页面内起始行的位置信息。
+ * @returns { StartLineInfo } - 用于记录Grid页面内起始行的位置信息。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
  * @since 23 dynamic
@@ -86,12 +86,12 @@ declare interface StartLineInfo {
 declare type OnGetStartIndexByOffsetCallback = (totalOffset: double) => StartLineInfo;
 
 /**
-* 根据指定的目标索引，计算Grid滚动到该位置时页面内对应的起始行，用于支持[scrollToIndex]{@link Scroller#scrollToIndex}等操作。此回调需与onGetStartIndexByOffset同时设
-* 置才能生效。
-*
+ * 根据指定的目标索引，计算Grid滚动到该位置时页面内对应的起始行，用于支持[scrollToIndex]{@link Scroller#scrollToIndex}等操作。此回调需与onGetStartIndexByOffset同时设
+ * 置才能生效。
+ *
  * @param { int } targetIndex - 要滚动到的目标GridItem的索引。
- * @returns { StartLineInfo }
- 用于记录Grid页面内起始行的位置信息。
+ * @returns { StartLineInfo } - 用于记录Grid页面内起始行的位置信息。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
  * @since 23 dynamic
@@ -474,6 +474,8 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * auto-fit模式和auto-stretch模式只支持track-size为一个有效列宽值，并且auto-stretch模式中的track-size只支持px、vp和有效数字，不支持%。auto-fill模式支持一个或多个有效列
    * 宽，如columnsTemplate('repeat(auto-fill, 20)')、columnsTemplate('repeat(auto-fill, 20 80px)')。
    *
+   * 非repeat形式的模板串中每项仅支持'数字+fr'、'数字+px'、'数字+%'三种格式，不支持vp（如columnsTemplate('100vp 100vp')）。需要按固定vp尺寸自动计算列数时，应使用repeat(auto-fill, track-size)。
+   *
    * 使用效果可以参考[示例8](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#示例8设置自适应列数)。
    *
    * 设置为'0fr'时，该列的列宽为0，不显示GridItem。设置为其他非法值时，GridItem显示为固定1列。
@@ -523,6 +525,8 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    *
    * auto-fit模式和auto-stretch模式只支持track-size为一个有效行高值，并且auto-stretch模式中的track-size只支持px、vp和有效数字，不支持%。auto-fill模式支持一个或多个有效行
    * 高，如rowsTemplate('repeat(auto-fill, 20)')、rowsTemplate('repeat(auto-fill, 20 80px)')。
+   *
+   * 非repeat形式的模板串中每项仅支持'数字+fr'、'数字+px'、'数字+%'三种格式，不支持vp（如rowsTemplate('100vp 100vp')）。需要按固定vp尺寸自动计算行数时，应使用repeat(auto-fill, track-size)。
    *
    * 设置为'0fr'，则这一行的行高为0，这一行GridItem不显示。设置为其他非法值，按固定1行处理。
    *
@@ -976,6 +980,24 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * @since 10 dynamic
    */
   nestedScroll(value: NestedScrollOptions): GridAttribute;
+
+  /**
+   * 设置Grid的两阶段滚动吸附策略。
+   *
+   * START、CENTER、END分别将item对齐到滚动轴方向视口的起始、中间和末尾位置。
+   * 自定义提供方通过calculateApproachOffset计算趋近距离，通过calculateSnapOffset计算最终目标。
+   * 设置为NONE或undefined时清除策略，恢复默认滚动行为。
+   * 不支持的布局不启用吸附。吸附目标受合法滚动范围限制。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐策略或自定义提供方。
+   * @returns { GridAttribute } Grid组件的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): GridAttribute;
 
   /**
    * 设置是否支持滚动手势。

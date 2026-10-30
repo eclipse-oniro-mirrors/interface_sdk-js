@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -83,7 +83,7 @@ declare enum SecurityComponentRoleType {
  *
  * This module is mainly used in the following scenarios:
  * - Set layout, size, text, icon, color, border, and interaction-related attributes for security components
- * such as [PasteButton]{@link ./paste_button} and [SaveButton]{@link ./save_button}.
+ * such as [PasteButton]{@link ./paste_button:PasteButton} and [SaveButton]{@link ./save_button:SaveButton}.
  * - Adjust the display effect and interaction experience of security components while ensuring compliance with
  * the security component specifications. For specific constraints,
  * see [Constraints](docroot://security/AccessToken/security-component-overview.md#constraints).
@@ -614,10 +614,10 @@ declare class SecurityComponentMethod<T> {
    * The security component text is laid out at [maxFontSize]{@link SecurityComponentMethod.maxFontSize}. If the text
    * can be completely displayed and no adaptive adjustment is needed, this API does not take effect. Otherwise,
    * adaptation proceeds according to the specified policy, as follows:
-   * <br>**TextHeightAdaptivePolicy.MAX_LINES_FIRST**: prioritizes the [maxLines]{@link
-   * SecurityComponentMethod.maxLines} attribute for adjusting the text height. If the layout size with **maxLines**
-   * exceeds the layout constraints, the security component attempts to reduce the font size within the range of
-   * [minFontSize]{@link SecurityComponentMethod.minFontSize} and
+   * <br>**TextHeightAdaptivePolicy.MAX_LINES_FIRST**: prioritizes the
+   * [maxLines]{@link SecurityComponentMethod.maxLines} attribute for adjusting the text height. If the layout size
+   * with **maxLines** exceeds the layout constraints, the security component attempts to reduce the font size within
+   * the range of [minFontSize]{@link SecurityComponentMethod.minFontSize} and
    * [maxFontSize]{@link SecurityComponentMethod.maxFontSize} to fit more text. If the text still cannot be fully
    * displayed, the security component adaptively adjusts its height to show all text.
    * <br>**TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST**: prioritizes the
@@ -667,11 +667,11 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the alignment rules for child components within a relative container. This API takes effect only when the
-   * parent container is [RelativeContainer]{@link ./relative_container}.
+   * parent container is [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    *
    * @param { AlignRuleOption } alignRule - Alignment rule configuration object that defines anchor alignment options (
    *     **top**, **bottom**, **left**, **right**, and **center**). Specifies the alignment position and method of the
-   *     security component in [RelativeContainer]{@link ./relative_container}.
+   *     security component in [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @returns { T } Attribute of the security component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -682,7 +682,7 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the alignment rules for child components within a relative container. This API takes effect only when the
-   * parent container is [RelativeContainer]{@link ./relative_container}. In the horizontal direction, this method
+   * parent container is [RelativeContainer]{@link ./relative_container:RelativeContainer}. In the horizontal direction, this method
    * replaces **left** and **right** in the [alignRules]{@link SecurityComponentMethod.alignRules} above with **start**
    * and **end**, respectively, allowing the layout to be mirrored in RTL mode. You are advised to use this method
    * preferentially.
@@ -690,7 +690,7 @@ declare class SecurityComponentMethod<T> {
    * @param { LocalizedAlignRuleOptions } alignRule - Alignment rule configuration object that uses **start** and
    *     **end** in place of **left** and **right** to support RTL layout mirroring. Includes anchor alignment settings
    *     for **top**, **bottom**, **start**, **end**, and **center**, specifying the alignment position and method of
-   *     the security component within [RelativeContainer]{@link ./relative_container}.
+   *     the security component within [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @returns { T } Attribute of the security component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -714,10 +714,10 @@ declare class SecurityComponentMethod<T> {
 
   /**
    * Sets the parameters of the chain in which the component is the head. This API takes effect only when the parent
-   * container is [RelativeContainer]{@link ./relative_container}.
+   * container is [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    *
    * @param { Axis } direction - Direction of the chain layout. Specifies the arrangement direction of the chain headed
-   *     by this component in the [RelativeContainer]{@link ./relative_container}.
+   *     by this component in the [RelativeContainer]{@link ./relative_container:RelativeContainer}.
    * @param { ChainStyle } style - Style of the chain layout. Controls how child components are distributed within the
    *     chain, such as evenly distributed, aligned at both ends, or compactly arranged. For specific values and
    *     effects, see [ChainStyle]{@link ChainStyle}.

@@ -14,7 +14,11 @@
  */
 
 /**
- * @file 3D scene node type declarations
+ * This module provides the types and operation methods of scene resource nodes in ArkGraphics 3D.
+ * SceneNode is the basic building unit of a 3D scene. It allows developers to manage objects in a scene
+ * through a hierarchical structure, implementing efficient scene organization and interaction control.
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -183,7 +187,7 @@ export interface Container<T> {
 
 /**
  * The 3D scene consists of nodes in a tree hierarchy, where each node implements a Node interface.
- * This class inherits from SceneResource.
+ * This class inherits from [SceneResource]{@link SceneResource}.
  *
  * @extends SceneResource
  * @interface Node
@@ -305,7 +309,7 @@ export interface Node extends SceneResource {
 }
 
 /**
- * Geometric node type that holds renderable mesh data and supports optional deformation features. It inherits from Node.
+ * Geometric node type that holds renderable mesh data and supports optional deformation features. It inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Geometry
@@ -364,10 +368,28 @@ export enum LightType {
    * @since 23 static
    */
   SPOT = 2,
+
+  /**
+   * The enumerated value corresponding to the point light source type is added.
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  POINT = 3,
+
+  /**
+   * Rect light.
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  RECT = 4
 }
 
 /**
- * Light node, which inherits from Node.
+ * Light node, which inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Light
@@ -429,7 +451,7 @@ export interface Light extends Node {
 }
 
 /**
- * Spotlight, which inherits from Light.
+ * Spotlight, which inherits from [Light]{@link Light}.
  *
  * A spotlight emits a conical beam of light in a specific direction, with the intensity of the light decaying
  * according to the angles defined by the innerAngle and outerAngle parameters.
@@ -474,7 +496,7 @@ export interface SpotLight extends Light {
 }
 
 /**
- * Directional light, which inherits from Light.
+ * Directional light, which inherits from [Light]{@link Light}.
  *
  * @extends Light
  * @interface DirectionalLight
@@ -486,7 +508,80 @@ export interface DirectionalLight extends Light {
 }
 
 /**
- * Camera node, which inherits from Node.
+ * Point light.
+ *
+ * A point light emits light uniformly in all directions from a single point in space.
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface PointLight extends Light {
+  /**
+   * Maximum distance that the point light affects. Beyond this range, the light intensity is zero.
+   * The unit is the scene unit (such as cm, m, and km) in the world coordinate system.
+   * The value must be greater than 0. If this parameter is not set, a safe range is calculated automatically
+   * based on the light intensity.
+   * The value must be greater than 0. Default value: Refer to the calculated value of intensity.
+   *
+   * @default need to be decided
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  range?: double;
+}
+
+/**
+ * Rectangular area light.
+ *
+ * A rect light emits light from a rectangular area, simulating soft area lighting effects
+ * from one side of the rectangle by default. When twoSided is enabled, light is emitted from both sides.
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RectLight extends Light {
+  /**
+   * Width of the rectangular light emitting surface. The unit is the scene unit (such as cm, m, and km)
+   * in the world coordinate system.
+   * Default value: Default value: 1.
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  width?: double;
+
+  /**
+   * Height of the rectangular light emitting surface. The unit is the scene unit (such as cm, m, and km)
+   * in the world coordinate system.
+   * The value must be greater than 0.
+   *
+   * @default 1.0
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  height?: double;
+
+  /**
+   * Whether the rect light emits light from both sides of the rectangle. true if two-sided, false otherwise.
+   * When set to false, light is emitted only from the front side (determined by the node's rotation).
+   * Default value: Default value: false.
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  twoSided?: boolean;
+}
+
+/**
+ * Camera node, which inherits from [Node]{@link Node}.
  *
  * @extends Node
  * @interface Camera

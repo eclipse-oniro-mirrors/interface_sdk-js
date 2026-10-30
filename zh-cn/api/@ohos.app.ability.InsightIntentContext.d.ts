@@ -50,6 +50,26 @@ declare class InsightIntentContext {
   instanceId: int;
 
   /**
+   * 调用方传入的工具调用ID，用于关联本次意图执行与测试步骤。当调用方未传入工具调用ID或传入空字符串时，该值为undefined。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  readonly toolCallId?: string;
+
+  /**
+   * 表示意图执行信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  readonly insightIntentExecutionInfo?: insightIntent.InsightIntentExecutionInfo;
+
+  /**
    * 启动UIAbility组件，仅支持启动本应用内的UIAbility组件。使用callback异步回调。
    *
    * @param { Want } want - 启动UIAbility组件的want信息。

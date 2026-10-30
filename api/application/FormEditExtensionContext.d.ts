@@ -24,7 +24,7 @@ import type { AbilityResult } from '../ability/abilityResult';
 
 /**
  * **FormEditExtensionContext**, inherited from 
- * [UIExtensionContext]{@link ./application/UIExtensionContext:UIExtensionContext}, is the context of 
+ * [UIExtensionContext]{@link ./UIExtensionContext:UIExtensionContext}, is the context of 
  * [FormEditExtensionAbility]{@link @ohos.app.form.FormEditExtensionAbility:FormEditExtensionAbility}.
  * 
  * > **NOTE**
@@ -70,5 +70,19 @@ declare class FormEditExtensionContext extends UIExtensionContext {
       * @since 23 dynamic&static
       */
      startUIAbility(want: Want): Promise<void>;
+
+	/**
+	 * Sets the background color for the FormEditExtensionAbility.This API uses a promise to return the result.
+	 *
+	 * @param { string } color - Background color to set. The value is a hexadecimal RGB or ARGB color code and is case
+	 *     insensitive, for example, **#00FF00** or **#FF00FF00**.
+	 * @returns { Promise<void> } Promise that returns no value.
+	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
+	 * @throws { BusinessError } 16501026 - Invalid color value.
+	 * @syscap SystemCapability.Ability.Form
+	 * @stagemodelonly
+	 * @since 26.1.0 dynamic&static
+	 */
+	setWindowBackgroundColor(color: string): Promise<void>;
 }
 export default FormEditExtensionContext;

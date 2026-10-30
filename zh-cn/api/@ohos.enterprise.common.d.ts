@@ -268,13 +268,121 @@ declare namespace common {
   }
 
   /**
+   * 磁盘类型
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum DiskType {
+    /**
+     * SD卡类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SD_CARD = 1,
+ 
+    /**
+     * U盘类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USB_FLASH = 2,
+ 
+    /**
+     * CD类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    CD_DVD_BD = 3
+  }
+ 
+  /**
+   * 外置存储设备信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export interface ExternalStorageDeviceInfo {
+    /**
+     * 设备类型。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    type: DiskType;
+ 
+    /**
+     * 设备路径。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    devicePath: string;
+ 
+    /**
+     * 卷ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    volumeId: string;
+ 
+    /**
+     * 挂载状态。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    mountStatus: boolean;
+ 
+    /**
+     * 厂商ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    vendorId: number;
+ 
+    /**
+     * 产品ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    productId: number;
+ 
+    /**
+     * 序列号。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    serial: string;
+  }
+
+  /**
    * 查询企业设备管理策略
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
    */
-  export enum QueryPolicy {  
+  export enum QueryPolicy {
     /**
      * 自己设置的策略。
      *
@@ -293,6 +401,116 @@ declare namespace common {
      */
     ALL = 1
   }
+
+  /**
+   * 管控特性。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  export enum ManagedFeature {
+    /**
+     * 本地Hota域名
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    LOCAL_HOTA_DOMAIN = 0,
+
+    /**
+     * 可信持有物认证
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    USER_EXTEND_CREDENTIAL = 1,
+
+    /**
+     * 设置设备安全等级
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    DEVICE_SECURITY_LEVEL = 2,
+
+    /**
+     * 设置打印机IP策略特性
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    PRINTER_IP_ADDRESS_POLICY = 3,
+
+    /**
+     * 光驱刻录
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    OPTICAL_DISC_DRIVE_BURN = 4,
+
+    /**
+     * 精确定时器
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXACT_TIMER = 5,
+
+    /**
+     * 资源豁免
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    EXEMPTION_RESOURCE = 6,
+
+    /**
+     * x键
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    X_KEY = 7,
+
+    /**
+     * 系统回退
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SYSTEM_ROLLBACK = 8,
+
+    /**
+     * 超级隐私模式
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 9
+  }
+
+  /**
+   * 查询是否支持某个管控特性
+   *
+   * @param { ManagedFeature } feature - 管控特性。
+   * @returns { boolean } true表示支持该特性，fasle表示不支持该特性。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function isFeatureSupported(feature: ManagedFeature): boolean;
 
   /**
    * EnterpriseAdminExtensionContext是

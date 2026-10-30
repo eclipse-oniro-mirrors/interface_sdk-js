@@ -309,7 +309,7 @@ export interface ErrorEvent extends Event {
  */
 export interface MessageEvent<T> extends Event {
   /**
-   * 异常发生时传递的数据。
+   * 线程间传递的数据。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -329,7 +329,7 @@ export interface MessageEvent<T> extends Event {
  */
 export interface MessageEvents extends Event {
   /**
-   * 异常发生时传递的数据。
+   * 线程间传递的数据。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -511,7 +511,7 @@ export interface WorkerEventTarget {
    * 移除Worker线程实例对象中类型为type的事件监听。该接口与off9+接口功能一致。
    *
    * @param { string } type - 需要移除的事件类型。
-   * @param { WorkerEventListener } [callback] - 移除监听事件后执行的回调函数。
+   * @param { WorkerEventListener } [callback] - 要移除的特定事件监听回调函数；省略时移除该类型的全部监听器。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -1102,7 +1102,7 @@ declare namespace worker {
      * 移除宿主线程的Worker实例对象中类型为type的事件监听，该接口与off9+接口功能一致。
      *
      * @param { string } type - 需要移除的事件类型。
-     * @param { WorkerEventListener } [callback] - 移除监听事件后执行的回调函数。
+     * @param { WorkerEventListener } [callback] - 要移除的特定事件监听回调函数；省略时移除该类型的全部监听器。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]

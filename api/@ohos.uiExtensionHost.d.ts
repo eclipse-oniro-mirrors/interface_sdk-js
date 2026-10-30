@@ -246,8 +246,8 @@ declare namespace uiExtensionHost {
      * > **NOTE**
      * >
      * > - A non-secure window refers to any window that may obstruct the
-     * > [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component} or
-     * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}, such as global floating windows
+     * > [EmbeddedComponent]{@link EmbeddedComponent} or
+     * > [UIExtensionComponent]{@link UIExtensionComponent}, such as global floating windows
      * > , host subwindows, and dialog box windows created by the host application (excluding windows of these types
      * > created by system applications).
      * >
@@ -298,6 +298,7 @@ declare namespace uiExtensionHost {
      *     2. Internal task error.
      *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -325,6 +326,7 @@ declare namespace uiExtensionHost {
      *     2. Internal task error.
      *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full

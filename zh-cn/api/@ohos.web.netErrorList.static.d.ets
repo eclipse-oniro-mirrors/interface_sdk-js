@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file 网络协议栈错误列表
  * @kit ArkWeb
  */
 /**
@@ -488,7 +488,7 @@ export declare enum WebNetErrorList {
    */
   ERR_NETWORK_ACCESS_DENIED = -138,
   /**
-   * 因节流而取消了此请求以避免DDOS。
+   * 因节流而取消了此请求以避免DDoS。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @since 23 static

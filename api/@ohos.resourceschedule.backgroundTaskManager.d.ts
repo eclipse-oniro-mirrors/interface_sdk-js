@@ -293,8 +293,8 @@ declare namespace backgroundTaskManager {
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - Application context.
      *     <br>For details about the application context of the FA model,
-     *     see [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
-     *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
+     *     see [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model,
+     *     see [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
      *     UIAbility in the stage model and the ServiceAbility in the FA model.
      * @param { Callback<UserAuthResult> } callback - Callback used to return the user authorization result.
      * @throws { BusinessError } 201 - Permission denied.
@@ -331,8 +331,8 @@ declare namespace backgroundTaskManager {
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - Application context.
      *     <br>For details about the application context of the FA model,
-     *     see [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
-     *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
+     *     see [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model,
+     *     see [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
      *     UIAbility in the stage model and the ServiceAbility in the FA model.
      * @returns { Promise<UserAuthResult> } Promise used to return the user authorization result.
      * @throws { BusinessError } 201 - Permission denied.
@@ -1132,7 +1132,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { BackgroundMode } bgMode - Type of the continuous task.
@@ -1170,7 +1170,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { BackgroundMode } bgMode - Type of the continuous task.
@@ -1207,7 +1207,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { string[] } bgModes - Types of continuous tasks.
@@ -1253,7 +1253,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
@@ -1266,13 +1266,52 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
    * @throws { BusinessError } 9800007 - Continuous task storage failed.
-   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.2.0]
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.0.1]
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]
    * @since 21 dynamic
    * @since 24 static
    */
   function startBackgroundRunning(context: Context, request: ContinuousTaskRequest): Promise<ContinuousTaskNotification>;
+
+  /**
+   * Requests a continuous task. This API allows a UIAbility (ServiceAbility in the FA model) to request multiple
+   * continuous tasks and uses a promise to return the result. When using this API to request a continuous task, its
+   * notification can be combined with that of an existing continuous task. For details, see
+   * [ContinuousTaskRequest]{@link backgroundTaskManager.ContinuousTaskRequest}.
+   *
+   * A maximum of 10 continuous tasks can be created simultaneously. Upon successful creation of a continuous task, a
+   * notification will be sent without a prompt tone.
+   *
+   * If a continuous task requested via this API includes multiple task types (including data transmission tasks), two
+   * notifications will appear in the notification panel: one for the data transmission task and the other for the
+   * remaining tasks. Removing either notification will cancel the continuous task and remove the other notification.
+   * The continuous task notification ID returned by the API is the ID of the data transmission type, which is used to
+   * update the data transmission progress.
+   *
+   * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
+   * @param { Context } context - Application context.
+   *     <br>For details about the application context of the FA model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
+   *     UIAbility in the stage model and the ServiceAbility in the FA model.
+   * @param { ContinuousTaskRequest } request - Request information of a continuous task, including the main type and
+   *     subtype.
+   * @returns { Promise<int> } Promise used to return the continuous task ID.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9800001 - Memory operation failed.
+   * @throws { BusinessError } 9800004 - System service operation failed.
+   * @throws { BusinessError } 9800005 - Continuous task verification failed.
+   * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
+   * @throws { BusinessError } 9800007 - Continuous task storage failed.
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type.
+   * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function startContinuousTask(context: Context, request: ContinuousTaskRequest): Promise<int>;
 
   /**
    * Updates continuous tasks of multiple types. This API uses a promise to return the result. After a continuous task 
@@ -1293,7 +1332,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { string[] } bgModes - Types of continuous tasks after the update.
@@ -1336,7 +1375,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { ContinuousTaskRequest } request - Continuous task request information, including the ID of the continuous
@@ -1349,7 +1388,7 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @throws { BusinessError } 9800006 - Notification verification failed for a continuous task.
    * @throws { BusinessError } 9800007 - Continuous task storage failed.
-   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.2.0]
+   * @throws { BusinessError } 9800008 - The requested continuous task is not supported on this device type. [since 26.0.1]
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]
    * @since 21 dynamic
@@ -1382,7 +1421,7 @@ declare namespace backgroundTaskManager {
    *
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the continuous task is canceled,
@@ -1412,7 +1451,7 @@ declare namespace backgroundTaskManager {
    *
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @returns { Promise<void> } Promise that returns no value.
@@ -1441,7 +1480,7 @@ declare namespace backgroundTaskManager {
    *
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { int } continuousTaskId - Continuous task ID.
@@ -1472,7 +1511,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @returns { Promise<ContinuousTaskInfo[]> } Promise that returns all continuous task information.
@@ -1494,7 +1533,7 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Context } context - Application context.
    *     <br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
    *     [Context]{@link ./application/Context:Context}.<br> Note: Continuous tasks can be requested only by the
    *     UIAbility in the stage model and the ServiceAbility in the FA model.
    * @param { boolean } includeSuspended - Whether to obtain the information about the suspended continuous task. The
@@ -1667,7 +1706,7 @@ declare namespace backgroundTaskManager {
    *     canceling a continuous task.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     <br> 2. Register a exist callback type; 3. Parameter verification failed.
+   *     <br> 2. Register an existing callback type; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1697,7 +1736,7 @@ declare namespace backgroundTaskManager {
     *     parameter is left unspecified, all registered callbacks are cancelled.
     * @throws { BusinessError } 201 - Permission denied.
     * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-    *     <br> 2. Unregister type has not register; 3. Parameter verification failed.
+    *     <br> 2. Unregister type has not been registered; 3. Parameter verification failed.
     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
     * @since 15 dynamic
     */
@@ -2175,7 +2214,7 @@ declare namespace backgroundTaskManager {
      * 
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     MODE_USB_CONNECTION = 16
   }
@@ -2780,9 +2819,18 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    SYSTEM_CANCEL_NOT_USE_USB = 16
+    SYSTEM_CANCEL_NOT_USE_USB = 16,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but the USB device is already occupied.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_CANCEL_USB_ALREADY_OCCUPIED = 17
   }
 
   /**
@@ -2987,9 +3035,18 @@ declare namespace backgroundTaskManager {
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
-    SYSTEM_SUSPEND_USB_NOT_USED = 20
+    SYSTEM_SUSPEND_USB_NOT_USED = 20,
+
+    /**
+     * A continuous task of the **USB_CONNECTION** type is requested, but the USB device is already occupied.
+     *
+     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    SYSTEM_SUSPEND_USB_ALREADY_OCCUPIED = 21
   }
 
   /**

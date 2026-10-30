@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 智能体扩展组件上下文
  * @kit AbilityKit
  */
 
@@ -27,7 +27,7 @@ import ExtensionContext from './ExtensionContext';
  * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}。
  * 
  * AgentExtensionContext为开发者提供访问当前
- * [AgentExtensionAbility]{@link @ohos.app.agent.AgentExtensionAbility}智能体所配置的[AgentCard]{@link ./AgentCard}信息的能力。
+ * [AgentExtensionAbility]{@link @ohos.app.agent.AgentExtensionAbility}智能体所配置的[AgentCard]{@link AgentCard}信息的能力。
  * 
  * > **说明：**
  * >

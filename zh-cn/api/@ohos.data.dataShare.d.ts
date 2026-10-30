@@ -1558,7 +1558,7 @@ declare namespace dataShare {
     /**
      * 通知已注册的观察者指定URI对应的数据资源已发生变更类型及变更内容。使用Promise异步回调。暂不支持静默访问。
      * <br>
-     * <br>静默场景下，调用此接口时，传入的data参数大小不能超过200KB，超出限制将导致操作失败或抛出异常。
+     * <br>非静默场景下，调用此接口时，传入的data参数大小不能超过200KB，超出限制将导致操作失败或抛出异常。
      *
      * @param { ChangeInfo } data - 表示数据变更类型、变化的uri、变更的数据内容。
      * @returns { Promise<void> } 无返回结果的Promise对象。

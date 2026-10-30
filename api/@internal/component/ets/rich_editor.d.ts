@@ -1513,6 +1513,17 @@ declare interface RichEditorImageSpanResult {
    * @since 10 dynamic
    */
   offsetInSpan: [number, number];
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -1804,6 +1815,17 @@ declare interface RichEditorImageSpanOptions {
    * @since 14 dynamic
    */
   onHover?: OnHoverCallback;
+
+  /**
+   * Image text tag.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  imageTag?: string;
 }
 
 /**
@@ -1880,7 +1902,7 @@ declare interface RichEditorBuilderSpanOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderSpanInfo {
   /**
@@ -1892,7 +1914,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   id?: string;
 
@@ -1904,7 +1926,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: number;
 }
@@ -1921,7 +1943,7 @@ declare interface BuilderSpanInfo {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface RichEditorBuilderSpan {
   /**
@@ -1931,7 +1953,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   builder: CustomBuilder;
 
@@ -1943,7 +1965,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onAttach?: Callback<BuilderSpanInfo>;
 
@@ -1962,7 +1984,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onDetach?: Callback<BuilderSpanInfo>;
 
@@ -1974,7 +1996,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2976,7 +2998,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): number;
 
@@ -3089,7 +3111,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo>;
 
@@ -3176,13 +3198,6 @@ declare class RichEditorController extends RichEditorBaseController {
  */
 declare type RichEditorSpan = RichEditorImageSpanResult | RichEditorTextSpanResult;
 
-/**
- * # Objects to Import
- * 
- * ```ts
- * controller: RichEditorStyledStringController = new RichEditorStyledStringController();
- * ```
- */
 /**
  * Represents the controller of the **RichEditor** component built with the styled string. Inherits from 
  * [RichEditorBaseController]{@link RichEditorBaseController}.
@@ -3802,8 +3817,10 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 18.
    *
-   * @param { Callback<RichEditorChangeValue, boolean> } callback - The triggered function before text content is about
-   *     to change.
+   * @param { Callback<RichEditorChangeValue, boolean> } callback -[RichEditorChangeValue](#richeditorchangevalue12)
+   *     indicates the image and text change information. The **boolean** value indicates whether the image and text
+   *     can be modified. **true**: The image and text can be modified. 
+   *     **false**: The image and text cannot be modified.
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3824,7 +3841,8 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 18.
    *
-   * @param { OnDidChangeCallback } callback - The triggered function after content changed.
+   * @param { OnDidChangeCallback } callback - Callback triggered after text and image changes, used to obtain the
+   *     content range before and after the change.
    * @returns { RichEditorAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4441,6 +4459,7 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  */
 interface RichEditorInterface {
   /**
+   * Called when create RichEditor.
    *
    * @param { RichEditorOptions } value - Options for initializing the component.
    * @returns { RichEditorAttribute }

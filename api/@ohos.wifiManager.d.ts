@@ -3974,6 +3974,35 @@ declare namespace wifiManager {
   }
 
   /**
+   * Special Wi-Fi info
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SpecialWifiInfo {
+    /**
+     * The network ID of the connected Wi-Fi
+     * 
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    networkId: int;
+
+    /**
+     * Whether the connected Wi-Fi is CEAIR airplane Wi-Fi
+     * 
+     * @syscap SystemCapability.Communication.WiFi.STA
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    isCeairPlaneWifi?: boolean;
+  }
+
+  /**
    * Describes the WAPI pre-shared key Type.
    *
    * @syscap SystemCapability.Communication.WiFi.Core

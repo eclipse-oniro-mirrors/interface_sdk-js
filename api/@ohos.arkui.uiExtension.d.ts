@@ -25,8 +25,8 @@ import window from './@ohos.window';
  * [EmbeddedUIExtensionAbility](docroot://application-models/embeddeduiextensionability.md) (or
  * [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}) to obtain the host application
  * window information or the information about the corresponding
- * [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component}<!--Del--> (or
- * [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component})<!--DelEnd--> component.
+ * [EmbeddedComponent]{@link EmbeddedComponent}<!--Del--> (or
+ * [UIExtensionComponent]{@link UIExtensionComponent})<!--DelEnd--> component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -221,8 +221,8 @@ declare namespace uiExtension {
      * > **NOTE**
      * >
      * > - A non-secure window refers to any window that may obstruct the
-     * > [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component} or
-     * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}, such as global floating windows
+     * > [EmbeddedComponent]{@link EmbeddedComponent} or
+     * > [UIExtensionComponent]{@link UIExtensionComponent}, such as global floating windows
      * > , host subwindows, and dialog box windows created by the host application (excluding windows of these types
      * > created by system applications).
      * >
@@ -271,6 +271,7 @@ declare namespace uiExtension {
      *     2. Internal task error.
      *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -293,11 +294,12 @@ declare namespace uiExtension {
      * @returns { Promise<window.Window> } Promise used to return the subwindow.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
-     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible causes:
      *     1. The window is not created or destroyed.
      *     2. Internal task error.
      *     3. The subWindow has been created and cannot be created again.
      *     4. It is not allowed to create non-secure window when secure extension exists.
+     *     5. Subwindow level exceeds the maximum limit.
      * @throws { BusinessError } 1300035 - Creating a subwindow is not allowed in the current context. Possible cause:
      *     1. An AgentUIExtensionAbility cannot create a subwindow.
      * @syscap SystemCapability.ArkUI.ArkUI.Full

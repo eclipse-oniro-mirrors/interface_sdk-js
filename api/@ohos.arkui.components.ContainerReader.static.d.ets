@@ -93,6 +93,10 @@ export declare interface BreakpointOptions {
 /**
  * Defines the container reader attribute.
  *
+ * The [universal attributes]{@link CommonMethod} are supported.
+ *
+ * The [Universal events]{@link CommonMethod} are supported.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.0.0 static

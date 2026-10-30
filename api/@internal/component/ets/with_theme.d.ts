@@ -19,7 +19,8 @@
  */
 
 /**
- * Defines a custom theme.
+ * Customizes the color scheme of components within the **WithTheme** scope. The specific color items are configured
+ * through the **CustomColors** interface.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -30,7 +31,7 @@
 declare type CustomTheme = import('../api/@ohos.arkui.theme').CustomTheme;
 
 /**
- * Defines the default theme and color mode for components within the **WithTheme** scope.
+ * Sets the theme colors and dark/light mode for components within the **WithTheme** scope.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -39,12 +40,11 @@ declare type CustomTheme = import('../api/@ohos.arkui.theme').CustomTheme;
  * @since 12 dynamic
  */
 declare interface WithThemeOptions {
-
   /**
-   * Default theme for components in the **WithTheme** scope.
+   * Used to set the custom theme colors of components within the scope of WithTheme.
    *
-   * Default value: **undefined**. The default style follows the
-   * [default token style](docroot://ui/theme_skinning.md#system-default-token-color-values).
+   * Default value: **undefined**, which means the default colors follow the system
+   * [token default styles](docroot://ui/theme_skinning.md#system-default-token-color-values).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -55,7 +55,10 @@ declare interface WithThemeOptions {
   theme?: CustomTheme;
 
   /**
-   * Color mode for components in the **WithTheme** scope.
+   * Used to specify the dark/light mode of the component colors within the scope of WithTheme. Value rules:
+   * **ThemeColorMode.SYSTEM** follows the system dark/light mode settings, **ThemeColorMode.DARK** forces the dark
+   * mode, and **ThemeColorMode.LIGHT** forces the light mode. When setting the dark/light mode, a dark.json resource
+   * file must be added for the setting to take effect.
    *
    * Default value: **ThemeColorMode.SYSTEM**
    *
@@ -82,9 +85,9 @@ declare interface WithThemeOptions {
 declare type WithThemeInterface = (options: WithThemeOptions) => WithThemeAttribute;
 
 /**
- * The [universal attributes]{@link common} are not supported.
+ * The [universal attributes]{@link ./common} are not supported.
  *
- * The [universal events]{@link common} are not supported.
+ * The [universal events]{@link ./common} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

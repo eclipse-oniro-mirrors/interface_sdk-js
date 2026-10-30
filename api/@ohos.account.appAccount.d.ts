@@ -524,7 +524,8 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means data
      *     synchronization is enabled for the application account; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -544,7 +545,8 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means
      *     data synchronization is enabled for the application account; the value **false** means the opposite.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -741,7 +743,8 @@ declare namespace appAccount {
      *     synchronization is enabled, and **false** means the opposite.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
@@ -761,7 +764,8 @@ declare namespace appAccount {
      * @param { boolean } isEnabled - Whether to enable data synchronization. The value **true** means that data
      *     synchronization is enabled, and **false** means the opposite.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.

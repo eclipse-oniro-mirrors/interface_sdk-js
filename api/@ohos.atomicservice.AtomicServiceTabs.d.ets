@@ -20,7 +20,7 @@
  * 
  * ###### Attributes
  * 
- * The [universal attributes]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal attributes]{@link CommonMethod} are not supported.
  *
  * @file Provides an advanced struct of tabs for atomic services
  * @kit ArkUI
@@ -30,6 +30,15 @@
  * **AtomicServiceTabs** is an advanced component designed to streamline the use of the **Tabs** component by limiting
  * customization options. It restricts the display to a maximum of five tabs, with fixed styles, positions, and sizes
  * for the tabs.
+ * 
+ * > **NOTE**
+ * >
+ * > - If the **AtomicServiceTabs** component has [universal attributes]{@link CommonMethod}
+ * > and [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **AtomicServiceTabs** component itself. As a result, the configured universal attributes and
+ * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes
+ * > and events with the **AtomicServiceTabs** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @atomicservice

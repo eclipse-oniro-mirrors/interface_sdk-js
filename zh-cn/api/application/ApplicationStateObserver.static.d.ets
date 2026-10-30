@@ -29,6 +29,7 @@ import _ProcessData from './ProcessData';
  * 方法，监听应用的生命周期变化。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
+ * @FaAndStageModel
  * @since 23 static
  */
 declare interface ApplicationStateObserver {
@@ -37,6 +38,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { AppStateData } appStateData - 应用状态信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onForegroundApplicationChanged(appStateData: AppStateData): void;
@@ -46,6 +48,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { AbilityStateData } abilityStateData - Ability状态信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onAbilityStateChanged(abilityStateData: AbilityStateData): void;
@@ -55,6 +58,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { ProcessData } processData - 进程数据信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onProcessCreated(processData: ProcessData): void;
@@ -64,6 +68,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { ProcessData } processData - 进程数据信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onProcessDied(processData: ProcessData): void;
@@ -73,6 +78,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { ProcessData } processData - 进程数据信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onProcessStateChanged(processData: ProcessData): void;
@@ -82,6 +88,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { AppStateData } appStateData - 应用状态信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onAppStarted(appStateData: AppStateData): void;
@@ -91,6 +98,7 @@ declare interface ApplicationStateObserver {
    *
    * @param { AppStateData } appStateData - 应用状态信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel
    * @since 23 static
    */
   onAppStopped(appStateData: AppStateData): void;
@@ -100,6 +108,7 @@ declare interface ApplicationStateObserver {
  * 进程数据信息。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
+ * @FaAndStageModel
  * @since 23 static
  */
 export type ProcessData = _ProcessData;

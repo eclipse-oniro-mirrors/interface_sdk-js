@@ -58,6 +58,8 @@ export interface AnimatorOptions {
    * negative number, the animation starts playing ahead of its scheduled time. If the amount of time by which the 
    * playback is advanced exceeds the total duration of the animation, the animation immediately skips to its end state.
    * 
+   * Value range: (-∞, +∞).
+   * 
    * Default value: **0**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -119,6 +121,8 @@ export interface AnimatorOptions {
    * animation is played for an unlimited number of times, and a positive integer means the animation is played that 
    * specific number of times.
    * 
+   * Value range: integers greater than or equal to -1.
+   * 
    * Note: Any negative value other than **-1** is treated as invalid. For invalid values, the animation is played once.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -134,6 +138,8 @@ export interface AnimatorOptions {
    * Note: This setting affects the input parameter value of the 
    * [onFrame](docroot://reference/apis-arkui/js-apis-animator.md#properties) callback.
    * 
+   * Value range: (-∞, +∞).
+   * 
    * Default value: **0**
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -148,6 +154,8 @@ export interface AnimatorOptions {
    * 
    * Note: This setting affects the input parameter value of the 
    * [onFrame](docroot://reference/apis-arkui/js-apis-animator.md#properties) callback.
+   * 
+   * Value range: (-∞, +∞).
    * 
    * Default value: **1**
    *
@@ -506,23 +514,33 @@ export interface AnimatorResult {
  */
 export default class Animator {
   /**
-   * Creates an animation.
+   * Creates an **AnimatorResult** object for animations. Compared with
+   * [create]{@link Animator.create(options: AnimatorOptions)}, this API accepts parameters of the 
+   * [SimpleAnimatorOptions]{@link SimpleAnimatorOptions} type.
    *
-   * @param { AnimatorOptions } options - Animator options.
+   * @param { AnimatorOptions | SimpleAnimatorOptions } options - Parameters of the animation.
    * @returns { AnimatorResult } Animator result.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameters types.
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 6 dynamiconly
-   * @deprecated since 9
-   * @useinstead ohos.animator.create
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 18 dynamic
    */
-  static createAnimator(options: AnimatorOptions): AnimatorResult;
+  static create(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
 
   /**
    * Creates an **AnimatorResult** object for animations.
    * 
    * > **NOTE**
    * >
-   * > - Since API version 10, you can use the 
+   * > - Supported since API version 9, deprecated since API version 18. It is recommended to use
+   * > [createAnimator]{@link @ohos.arkui.UIContext.UIContext#createAnimator} instead.
+   * 
+   * > - Since API version 10, you can use the
    * > [createAnimator](docroot://reference/apis-arkui/arkts-apis-uicontext-uicontext.md#createanimator) API in 
    * > [UIContext]{@link @ohos.arkui.UIContext}, which ensures that the object is created in the intended UI instance.
    *
@@ -542,21 +560,14 @@ export default class Animator {
   static create(options: AnimatorOptions): AnimatorResult;
 
   /**
-   * Creates an **AnimatorResult** object for animations. Compared with
-   * [create]{@link Animator.create(options: AnimatorOptions)}, this API accepts parameters of the 
-   * [SimpleAnimatorOptions]{@link SimpleAnimatorOptions} type.
+   * Creates an animation.
    *
-   * @param { AnimatorOptions | SimpleAnimatorOptions } options - Parameters of the animation.
+   * @param { AnimatorOptions } options - Animator options.
    * @returns { AnimatorResult } Animator result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 18 dynamic
+   * @since 6 dynamiconly
+   * @deprecated since 9
+   * @useinstead ohos.animator.create
    */
-  static create(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
+  static createAnimator(options: AnimatorOptions): AnimatorResult;
 }

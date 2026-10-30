@@ -857,7 +857,7 @@ declare enum SwiperDisplayMode {
 *
 * > **说明：**
 *
-* > - Swiper组件通过内置的[PanGesture]{@link gesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
+* > - Swiper组件通过内置的[PanGesture]{@link @global:@PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
 * > 时，会禁用该手势监听，从而阻止滑动操作。
 * >
 * > - Swiper中复用[NodeContainer]{@link node_container}时，禁止递归流程中子节点更新父节点状态变量。
@@ -1418,7 +1418,7 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    *
    * > **说明：**
    *
-   * > 设置外部绑定的导航点组件控制器后，可以和外部导航点结合使用。外部导航点支持自定义设置显示位置和大小。详细介绍可参看[Indicator]{@link indicatorcomponent}。
+   * > 设置外部绑定的导航点组件控制器后，可以和外部导航点结合使用。外部导航点支持自定义设置显示位置和大小。详细介绍可参看[Indicator]{@link @global:IndicatorComponent}。
    *
    * @param { IndicatorComponentController | DotIndicator | DigitIndicator | boolean } indicator - 可选导航点指示器样式。<br/>-
    *     IndicatorComponentController：单独导航点指示器控制器。当使用单独导航点指示器控制器时，可以与外部单独导航点进行绑定，但是绑定的单独导航点和内置导航点不能同时存在。<br/> -
@@ -2262,7 +2262,7 @@ declare type ContentWillScrollCallback = (result: SwiperContentWillScrollResult)
 *
 * > **说明：**
 *
-* > - Swiper组件通过内置的[PanGesture]{@link gesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
+* > - Swiper组件通过内置的[PanGesture]{@link @global:@PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
 * > 时，会禁用该手势监听，从而阻止滑动操作。
 * >
 * > - Swiper中复用[NodeContainer]{@link node_container}时，禁止递归流程中子节点更新父节点状态变量。

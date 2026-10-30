@@ -15,6 +15,12 @@
 */
 
 /**
+ * DatePickerComponent component is used to select date (year, month, day) and time (hour, minute, second).
+ *
+ * > **Description:**
+ * >
+ * > - This component interface can only be used in Stage model.
+ *
  * @file
  * @kit ArkUI
  */
@@ -100,6 +106,13 @@ export declare enum DisplayMode {
 /**
  * DatePickerComponentResult defines the selection result of the date time picker.
  *
+ * **Description**:
+ * When hideYear is true, if the user selects "----", year is not returned;
+ * if a specific year is selected, the year is the selected year. In lunar calendar mode,
+ * the returned year, month, and day are lunar calendar values; in Gregorian calendar mode,
+ * the returned values are Gregorian calendar values.
+ * When hideYear is false, the year, month, and day are fixed to return Gregorian calendar values.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.0.0 static
@@ -108,6 +121,9 @@ export declare class DatePickerComponentResult {
   /**
    * Year of the selected date.
    * The value should be an integer.
+   *
+   * When hideYear is true and the user selects "----", year is not returned; when a specific year is selected,
+   * the value is the selected year.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -253,6 +269,22 @@ export declare class CommonOptions {
   selected?: Date;
 
   /**
+   * Selected date or time.
+   *
+   * **Description:**
+   *
+   * > Takes priority over selected; when both are set, selected does not take effect.
+   * > When hideYear is true, year may be omitted (or undefined), indicating that the year column selects the "----"
+   * > option.
+   *
+   * Default value: current system date or time.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  extendSelected?: Date | DatePickerComponentResult;
+
+  /**
    * Sets whether to enable loop mode.
    *
    * - true: Enable loop mode.
@@ -350,6 +382,32 @@ export declare class DateOptions extends CommonOptions {
    * @since 26.0.0 static
    */
   lunar?: boolean;
+
+  /**
+   * Whether to enable the "hide year" option.
+   *
+   * - true: A "----" option is appended after the end year. The user can select "----" to indicate that
+   * the specific year is not relevant. This is applicable to scenarios that do not require a specific year, such as
+   * birthdays and anniversaries.
+   * - false: The "----" option is not displayed. The year column shows only the specific years within the range of
+   * start and end.
+   * Default value: false.
+   *
+   * **Description**:
+   *
+   * 1. This attribute takes effect only when displayMode is DisplayMode.DATE or DisplayMode.DATE_TIME, and mode is
+   * DateMode.DATE or DateMode.YEAR_AND_MONTH.
+   * 2. When this attribute is true, the user can still scroll to select a specific year. The "----" option and
+   * specific years can be switched freely.
+   * 3. This attribute supports runtime dynamic switching. When the value changes, the year column is updated
+   * accordingly.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  hideYear?: boolean;
 }
 
 /**
@@ -430,11 +488,7 @@ export declare class DatePickerComponentOptions {
 }
 
 /**
- * DatePickerComponent component is used to select date (year, month, day) and time (hour, minute, second).
- *
- * > **Description:**
- * >
- * > - This component interface can only be used in Stage model.
+ * Defines a date and time picker component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

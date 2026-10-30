@@ -23,7 +23,7 @@ import type insightIntent from './@ohos.app.ability.insightIntent';
 import type Want from './@ohos.app.ability.Want';
 
 /**
- * The module provides the context for intent execution. It is used as a property in both the
+ * The module provides the intent execution context. It is used as a property in both the
  * [intent execution base class]{@link @ohos.app.ability.InsightIntentExecutor:InsightIntentExecutor} and
  * [base class decorated with @InsightIntentEntry]{@link @ohos.app.ability.InsightIntentEntryExecutor:InsightIntentEntryExecutor}
  * , offering essential capabilities for intent implementation, for example, starting
@@ -50,6 +50,28 @@ declare class InsightIntentContext {
    * @since 23 dynamic&static
    */
   instanceId: int;
+
+  /**
+   * Tool call ID passed by the caller, used to associate this intent execute
+   * with a test step. It is undefined when the caller does not
+   * pass a tool call ID or passes an empty string.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  readonly toolCallId?: string;
+
+  /**
+   * The insight intent execution info.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  readonly insightIntentExecutionInfo?: insightIntent.InsightIntentExecutionInfo;
 
   /**
    * Starts a UIAbility. This API can only be used to start UIAbility components within the same application. This API

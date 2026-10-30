@@ -20,9 +20,7 @@
 
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type constant from './@ohos.bluetooth.constant';
-/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
-/*** endif */
 
 /**
  * Provides methods to operate or manage Bluetooth.
@@ -98,6 +96,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
+   * @since 26.0.1 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -184,6 +183,7 @@ declare namespace connection {
    * @stagemodelonly
    * @crossplatform
    * @since 21 dynamic
+   * @since 26.0.1 static
    */
   function pairDevice(deviceId: BluetoothAddress): Promise<void>;
 
@@ -257,6 +257,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function pairDeviceOutOfBand(transport: BluetoothTransport, p192Data: OobData | null,
     p256Data: OobData | null): Promise<void>;
@@ -282,6 +283,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function startPairOutOfBand(deviceId: string, transport: BluetoothTransport, p192Data?: OobData,
     p256Data?: OobData): Promise<void>;
@@ -311,6 +313,10 @@ declare namespace connection {
   /**
    * Remove a paired remote device.
    *
+   * On API 26.1.0 and above, for a third-party application,
+   * a system confirmation dialog box is displayed before removing the pairing,
+   * and the pairing is removed only after the user confirms the dialog box.
+   *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
    * @returns { Promise<void> } Returns the promise object.
@@ -321,9 +327,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user does not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - User refuse the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -451,6 +461,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function getRemoteDeviceTransport(deviceId: string): BluetoothTransport;
 
@@ -473,13 +484,8 @@ declare namespace connection {
 
   /**
    * Obtains the list of Bluetooth devices that have been paired with the current device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Array<string> } Returns a list of paired Bluetooth devices's address.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -596,6 +602,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 10 dynamic
+   * @since 26.0.1 static
    * @deprecated since 12
    */
   function setLocalName(name: string): void;
@@ -605,7 +612,7 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { ScanMode } mode - Indicates the Bluetooth scan mode to set.
-   * @param { int } duration - Indicates the duration in seconds, in which the host is discoverable.
+   * @param { int } duration - Indicates the duration in milliseconds, in which the host is discoverable.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -1052,6 +1059,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function generateLocalOobData(transport: BluetoothTransport): Promise<OobData>;
 
@@ -1073,6 +1081,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   function getVirtualAddressByHash(algorithmType: HashAlgorithmType, hashValue: string): string;
 
@@ -1090,6 +1099,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function setCarKeyDfxData(deviceId: string, action: CarKeyActionType): void;
 
@@ -1106,18 +1116,40 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function getCarKeyDfxData(): string;
 
   /**
-   * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
+   * Obtains the real BLE address of a paired remote device based on its real BR address.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * This API is used to identify the BR entry and the BLE entry of the same dual-mode device in the paired
+   * device list. The input brMac is the real BR address of a paired remote device, and the return value is the
+   * real BLE address of the same remote device.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { string } brMac - Indicates the real BR address of the paired remote device. For example,
+   *     "11:22:33:AA:BB:FF".
+   * @returns { string } Returns the real BLE address of the remote device. For example, "11:22:33:AA:BB:FF".
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900016 - Device unpaired.
+   * @throws { BusinessError } 2900017 - No BLE address is associated with the input BR address.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getBleMacByBrMac(brMac: string): string;
+
+
+  /**
+   * Subscribe the event reported when a remote Bluetooth device is discovered.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bluetoothDeviceFind' } type - Type of the discovering event to listen for.
    * @param { Callback<Array<string>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1135,13 +1167,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<string>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1186,14 +1213,9 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.GET_BLUETOOTH_PEERS_MAC [since 12 - 17]
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH [since 18]
    * @param { 'discoveryResult' } type - Type of the discovering event to listen for.
    * @param { Callback<Array<DiscoveryResult>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1211,13 +1233,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is discovered.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<Array<DiscoveryResult>> } callback - Callback used to listen for the discovering event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1262,13 +1279,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is bonded.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'bondStateChange' } type - Type of the bond state event to listen for.
    * @param { Callback<BondStateParam> } callback - Callback used to listen for the bond state event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1285,13 +1297,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event reported when a remote Bluetooth device is bonded.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BondStateParam> } callback - Callback used to listen for the bond state event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1338,13 +1345,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event of a pairing request from a remote Bluetooth device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'pinRequired' } type - Type of the pairing request event to listen for.
    * @param { Callback<PinRequiredParam> } callback - Callback used to listen for the pairing request event.
    * @throws { BusinessError } 201 - Permission denied.
@@ -1360,13 +1362,8 @@ declare namespace connection {
 
   /**
    * Subscribe the event of a pairing request from a remote Bluetooth device.
-   * On API 26.0.0 and above, if the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC,
-   * the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 23 - 24]
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<PinRequiredParam> } callback - Callback used to listen for the pairing request event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1473,6 +1470,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function onScanModeChange(callback: Callback<ScanMode>): void;
 
@@ -1487,16 +1485,14 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   function offScanModeChange(callback?: Callback<ScanMode>): void;
 
   /**
    * Subscribe the event of acl state changed from a remote device.
-   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } callback - Callback used to listen.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1506,16 +1502,14 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function onAclStateChange(callback: Callback<AclStateResult>): void;
 
   /**
    * Unsubscribe the event of acl state changed from a remote device.
-   * If the application has ohos.permission.GET_BLUETOOTH_PEERS_MAC, the type of the peer device address is real.
-   * Otherwise, the type of the peer device address is virtual.
    *
-   * @permission ohos.permission.ACCESS_BLUETOOTH or (ohos.permission.ACCESS_BLUETOOTH and
-   *     ohos.permission.GET_BLUETOOTH_PEERS_MAC)
+   * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AclStateResult> } [callback] - Callback used to listen.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -1525,11 +1519,12 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   function offAclStateChange(callback?: Callback<AclStateResult>): void;
 
   /**
-   * Describes the class of a bluetooth device.
+   * Bond state change parameters.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1549,7 +1544,7 @@ declare namespace connection {
      */
     deviceId: string;
     /**
-     * Profile connection state of the device.
+     * Bond state of the device.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -1574,6 +1569,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     causeMessage?: string;
   }
@@ -1692,6 +1688,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     TRANSPORT_DUAL = 2,
     /**
@@ -1700,6 +1697,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     TRANSPORT_UNKNOWN = 3
   }
@@ -1923,7 +1921,7 @@ declare namespace connection {
    */
   interface DiscoveryResult {
     /**
-     * Identify of the discovery device
+     * Identify of the discovered device
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi [since 12 - 17]
@@ -1966,6 +1964,14 @@ declare namespace connection {
      * @since 23 static
      */
     deviceClass: DeviceClass;
+    /**
+     * The transport of the discovered device.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    transport?: BluetoothTransport;
   }
 
   /**
@@ -2648,6 +2654,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   interface OobData {
     /**
@@ -2657,6 +2664,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     deviceId: BluetoothAddress;
     /**
@@ -2666,6 +2674,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     confirmationHash: Uint8Array;
     /**
@@ -2675,6 +2684,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     randomizerHash?: Uint8Array;
     /**
@@ -2684,6 +2694,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     deviceName?: string;
     /**
@@ -2693,6 +2704,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     deviceRole?: DeviceRole;
   }
@@ -2703,6 +2715,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 23 dynamic
+   * @since 26.0.1 static
    */
   enum DeviceRole {
     /**
@@ -2712,6 +2725,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     DEVICE_ROLE_PERIPHERAL_ONLY = 0,
     /**
@@ -2721,6 +2735,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     DEVICE_ROLE_CENTRAL_ONLY = 1,
     /**
@@ -2730,6 +2745,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     DEVICE_ROLE_BOTH_PREFER_PERIPHERAL = 2,
     /**
@@ -2739,6 +2755,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
+     * @since 26.0.1 static
      */
     DEVICE_ROLE_BOTH_PREFER_CENTRAL = 3
   }
@@ -2750,6 +2767,7 @@ declare namespace connection {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   enum CarKeyActionType {
     /**
@@ -2759,6 +2777,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CAR_KEY_ACTION_ADD = 0,
     /**
@@ -2768,6 +2787,7 @@ declare namespace connection {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     CAR_KEY_ACTION_DELETE = 1
   }
@@ -2778,6 +2798,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 24 dynamic
+   * @since 26.0.1 static
    */
   enum HashAlgorithmType {
     /**
@@ -2786,6 +2807,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 24 dynamic
+     * @since 26.0.1 static
      */
     HASH_ALGORITHM_SHA256 = 0
   }
@@ -2796,6 +2818,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   interface AclStateResult {
     /**
@@ -2804,6 +2827,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     deviceId: string;
     /**
@@ -2812,6 +2836,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     state: AclState;
   }
@@ -2822,6 +2847,7 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
+   * @since 26.0.1 static
    */
   export enum AclState {
     /**
@@ -2830,6 +2856,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     STATE_CONNECTED = 0,
     /**
@@ -2838,6 +2865,7 @@ declare namespace connection {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
+     * @since 26.0.1 static
      */
     STATE_DISCONNECTED = 1
   }

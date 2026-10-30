@@ -1,4 +1,4 @@
-'use static';
+'use static'
 /*
  * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
@@ -17,7 +17,6 @@
 /**
  * @file
  * @kit ArkUI
- * @arkts 1.2
  */
 
 import { ComponentBuilder, CustomBuilder } from '@ohos.arkui.component';

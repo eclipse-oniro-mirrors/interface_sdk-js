@@ -14,7 +14,7 @@
  */
 
 /**
- * @file The subscriber of common event
+ * @file CommonEventSubscriber
  * @kit BasicServicesKit
  */
 
@@ -23,11 +23,11 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
 
 /**
  * # 使用说明
- * 
- * 在使用CommonEventSubscriber的功能前，需要通过commonEventManager.createSubscriberSync获取subscriber对象。
- * 
+ *
+ * 在使用CommonEventSubscriber的功能前，需要通过**commonEventManager.createSubscriberSync**获取subscriber对象。
+ *
  * <!--code_no_check-->
- * 
+ *
  * ```ts
  * import { commonEventManager } from '@kit.BasicServicesKit';
  * import { BusinessError } from '@kit.BasicServicesKit';
@@ -35,18 +35,17 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
  * let subscriber: commonEventManager.CommonEventSubscriber | null = null;
  * // 订阅者信息
  * let subscribeInfo: commonEventManager.CommonEventSubscribeInfo = {
- *   events: ['event']
+ * 	events: ['event']
  * };
  * // 创建订阅者
  * subscriber = commonEventManager.createSubscriberSync(subscribeInfo);
  * ```
  */
 /**
- * 表示公共事件的订阅者。CommonEventSubscriber提供了对有序公共事件的
- * 处理能力，包括获取和设置事件传递的Code和Data数据、查询当前公共事件
- * 是否为有序或粘性公共事件、中止或清理有序公共事件的中止状态、结束对
- * 当前有序公共事件的处理，以及获取订阅者的订阅信息等，适用于订阅者需要
- * 对接收到的公共事件进行数据处理和流程控制的场景。
+ * 表示公共事件的订阅者。CommonEventSubscriber提供了对
+ * [有序公共事件](docroot://basic-services/common-event/common-event-glossary.md#ordered-common-event有序公共事件)的处理能力，包括获取和设置事件传递的Code和Data数据、查询当前公共事件是否为有序或
+ * [粘性公共事件](docroot://basic-services/common-event/common-event-glossary.md#sticky-common-event粘性公共事件)、中止或清理有序公共事件的中止状态、结束对当前有序公共事件的处理，
+ * 以及获取订阅者的订阅信息等，适用于订阅者需要对接收到的公共事件进行数据处理和流程控制的场景。
  *
  * @syscap SystemCapability.Notification.CommonEvent
  * @atomicservice [since 11]
@@ -81,7 +80,7 @@ export interface CommonEventSubscriber {
   /**
    * 同步获取有序公共事件传递的数据。
    *
-   * @returns { int } 表示有序公共事件传递的数据。
+   * @returns { int } 有序公共事件传递的数据。
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
    * @since 10 dynamic
@@ -253,7 +252,8 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为有序公共事件。使用callback异步回调。
    *
-   * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示有序公共事件，data为false表示不是有序公共事件；否则err为错误对象。
+   * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示有序公共事件，data为false表示不是有序公共事件；否则err
+   *     为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -265,7 +265,8 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为有序公共事件。使用Promise异步回调。
    *
-   * @returns { Promise<boolean> } Promise对象。返回true表示有序公共事件；返回false表示无序公共事件。
+   * @returns { Promise<boolean> } Promise对象。返回true表示有序公共事件；返回false表示
+   *     [无序公共事件](docroot://basic-services/common-event/common-event-glossary.md#unordered-common-event无序公共事件)。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
    * @since 23 static
@@ -285,7 +286,8 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为一个粘性公共事件。使用callback异步回调。
    *
-   * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示是粘性公共事件，data为false表示不是粘性公共事件；否则err为错误对象。
+   * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示是粘性公共事件，data为false表示不是粘性公共事件；否则
+   *     err为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -316,7 +318,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 添加有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。使用callback异步回调。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当添加有序公共事件中止状态成功时，err为undefined，否则为错误对象。
@@ -330,7 +332,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 添加有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。使用Promise异步回调。
    *
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
@@ -342,7 +344,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 同步添加有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。
    *
    * @syscap SystemCapability.Notification.CommonEvent
@@ -353,7 +355,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 清理有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。使用callback异步回调。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当清理有序公共事件中止状态成功时，err为undefined，否则为错误对象。
@@ -367,7 +369,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 清理有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。使用Promise异步回调。
    *
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
@@ -379,7 +381,7 @@ export interface CommonEventSubscriber {
 
   /**
    * 同步清理有序公共事件的中止状态。当该接口与
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。
    *
    * @syscap SystemCapability.Notification.CommonEvent
@@ -391,7 +393,8 @@ export interface CommonEventSubscriber {
   /**
    * 获取当前有序公共事件是否处于中止状态。使用callback异步回调。
    *
-   * @param { AsyncCallback<boolean> } callback - 当查询成功时，err为undefined，data为true表示当前有序公共事件处于中止状态，data为false表示当前有序公共事件没有处于中止状态；否则err为错误对象。
+   * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示当前有序公共事件处于中止状态，data为false表示当前有序公共
+   *     事件未处于中止状态；否则err为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -423,7 +426,7 @@ export interface CommonEventSubscriber {
   /**
    * 获取订阅者的订阅信息。使用callback异步回调。
    *
-   * @param { AsyncCallback<CommonEventSubscribeInfo> } callback - 回调函数。当获取成功时，err为undefined，data为订阅者的订阅信息；否则err为错误对象。
+   * @param { AsyncCallback<CommonEventSubscribeInfo> } callback - 回调函数。当获取成功时，err为undefined，data为订阅者的订阅信息；否则err为错误对象
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -436,7 +439,7 @@ export interface CommonEventSubscriber {
   /**
    * 获取订阅者的订阅信息。使用callback异步回调。
    *
-   * @param { AsyncCallback<CommonEventSubscribeInfo|null> } callback - 回调函数。返回订阅者的订阅信息。
+   * @param { AsyncCallback<CommonEventSubscribeInfo|null> } callback - 回调函数。当获取成功时，err为undefined，data为订阅者的订阅信息；否则err为错误对象
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent

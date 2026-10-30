@@ -84,7 +84,7 @@ export declare interface PathOptions {
 export declare interface PathAttribute extends CommonShapeMethod {
     /**
      * 设置符合
-     * [SVG路径描述规范]{@link Path}
+     * [SVG路径描述规范]{@link ./path#svg路径描述规范}
      * 的命令字符串，单位为px。
      * 像素单位转换方法请参考
      * [像素单位转换]{@link Length}。
@@ -104,8 +104,9 @@ export declare interface PathAttribute extends CommonShapeMethod {
  	 * @param { PathOptions } [options] - Path constructor options
  	 * @returns { PathAttribute } Returns the instance of the PathAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setPathOptions(options?: PathOptions): this;
     /**
@@ -142,8 +143,9 @@ export declare function Path(
  * @param { CustomBuilderT<PathAttribute> } style - the callback to set up component's attributes.
  * @returns { PathAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

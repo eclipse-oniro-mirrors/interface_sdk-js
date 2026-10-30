@@ -1778,7 +1778,7 @@ declare namespace huks {
    * <!--RP6End-->
    *
    * @permission ohos.permission.ATTEST_KEY[since 11]
-   * @permission ohos.permission.ATTEST_KEY or ohos.permission.ENTERPRISE_ATTEST_KEY[since26.2.0]
+   * @permission ohos.permission.ATTEST_KEY or ohos.permission.ENTERPRISE_ATTEST_KEY[since26.1.0]
    * @param { string } keyAlias - Alias of the key. The certificate to be obtained stores the key.
    * @param { HuksOptions } options - Parameters and data required for obtaining the certificate.
    * @param { AsyncCallback<HuksReturnResult> } callback - Callback used to return the result. If the operation is
@@ -1812,7 +1812,7 @@ declare namespace huks {
    *
    * @permission ohos.permission.ATTEST_KEY and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS [since 11]
    * @permission (ohos.permission.ATTEST_KEY and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS) or
-   *     (ohos.permission.ENTERPRISE_ATTEST_KEY and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS) [since 26.2.0]
+   *     (ohos.permission.ENTERPRISE_ATTEST_KEY and ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS) [since 26.1.0]
    * @param { number } userId - User ID.
    * @param { string } keyAlias - Alias of the key. The certificate to be obtained stores the key.
    * @param { HuksOptions } huksOptions - Options for attesting the key.
@@ -1861,7 +1861,7 @@ declare namespace huks {
    * <!--RP6End-->
    *
    * @permission ohos.permission.ATTEST_KEY [since 11]
-   * @permission ohos.permission.ATTEST_KEY or ohos.permission.ENTERPRISE_ATTEST_KEY [since 26.2.0]
+   * @permission ohos.permission.ATTEST_KEY or ohos.permission.ENTERPRISE_ATTEST_KEY [since 26.1.0]
    * @param { string } keyAlias - Alias of the key. The certificate to be obtained stores the key.
    * @param { HuksOptions } options - Parameters and data required for obtaining the certificate.
    * @returns { Promise<HuksReturnResult> } Promise that returns the operation result. When the call is successful, the
@@ -5733,6 +5733,14 @@ declare namespace huks {
      * @since 26.0.0
      */
     HUKS_TAG_CONTEXT = HuksTagType.HUKS_TAG_TYPE_BYTES | 528,
+    /**
+     * Asynchronous timeout duration in seconds, customizable by business logic.
+     *
+     * @syscap SystemCapability.Security.Huks.CryptoExtension
+     * @FaAndStageModel
+     * @since 26.0.1
+     */
+    HUKS_TAG_TIMEOUT = HuksTagType.HUKS_TAG_TYPE_UINT | 529,
     /**
      * Whether to use the alias passed in during key generation.
      *

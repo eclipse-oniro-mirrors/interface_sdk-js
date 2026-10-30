@@ -61,7 +61,7 @@ export declare interface LazyDynamicLayoutAttribute extends CommonMethod {
    * @returns { this } 返回LazyDynamicLayoutAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setLazyDynamicLayoutOptions(algorithm: LazyLayoutAlgorithm): this;
 }

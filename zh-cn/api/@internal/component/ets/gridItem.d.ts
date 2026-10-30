@@ -90,8 +90,6 @@ declare interface GridItemOptions {
 *
 * > **说明：**
 * >
-* > *
-* >
 * > * 仅支持作为[Grid]{@link ./grid}组件的子组件使用。
 * >
 * > * 当GridItem配合[LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)使用时，GridItem子组件在
@@ -132,7 +130,8 @@ interface GridItemInterface {
 /**
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel @crossplatform [since 10]
+ * @FaAndStageModel
+ * @crossplatform [since 10]
  * @atomicservice [since 11]
  * @since 7 dynamic
  * @noninterop
@@ -271,8 +270,6 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
  * 网格容器中单项内容容器。
  *
  * > **说明：**
- * >
- * > *
  * >
  * > * 仅支持作为[Grid]{@link ./grid}组件的子组件使用。
  * >

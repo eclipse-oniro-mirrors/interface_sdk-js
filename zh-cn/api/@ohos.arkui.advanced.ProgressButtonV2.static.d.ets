@@ -15,6 +15,9 @@
  */
 
 /**
+ * 文本下载按钮，可显示具体的下载进度。
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于[状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制文本下载按钮的数据和状态，实现更高效的用户界面刷新。
  * @file
  * @kit ArkUI
  */
@@ -24,9 +27,7 @@ import { ResourceStr } from '@ohos.arkui.component';
 import { Builder } from '@ohos.arkui.component';
 import { LengthMetrics, ColorMetrics } from './arkui/Graphics';
 /**
- * 文本下载按钮，可显示具体的下载进度。
- *
- * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于[状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制文本下载按钮的数据和状态，实现更高效的用户界面刷新。
+ * 创建ProgressButtonV2组件。
  *
  * 设备行为差异：该接口在Wearable设备上使用时，应用程序运行异常，异常信息中提示接口未定义，在其他设备中可正常调用。
  *
@@ -141,7 +142,7 @@ export declare struct ProgressButtonV2 {
 @ObservedV2
 export declare class ProgressButtonV2Color {
   /**
-   * 进度条颜色。<br/>默认值：#330A59F7<br/>装饰器类型：@Trace
+   * 进度条颜色。<br/>默认值：#330A59F7
    *
    * @type { ?ColorMetrics }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -151,7 +152,7 @@ export declare class ProgressButtonV2Color {
   @Trace
   public progressColor?: ColorMetrics;
   /**
-   * 按钮描边颜色。<br/>默认值：#330A59F7<br/>装饰器类型：@Trace
+   * 按钮描边颜色。<br/>默认值：#330A59F7
    *
    * @type { ?ColorMetrics }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -161,7 +162,7 @@ export declare class ProgressButtonV2Color {
   @Trace
   public borderColor?: ColorMetrics;
   /**
-   * 按钮文本颜色。<br/>默认值：系统默认值，#CE000000<br/>装饰器类型：@Trace
+   * 按钮文本颜色。<br/>默认值：系统默认值，#CE000000
    *
    * @type { ?ColorMetrics }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -171,7 +172,7 @@ export declare class ProgressButtonV2Color {
   @Trace
   public textColor?: ColorMetrics;
   /**
-   * 按钮背景颜色。<br/>默认值：\$r('sys.color.ohos_id_color_foreground_contrary')<br/>装饰器类型：@Trace
+   * 按钮背景颜色。<br/>默认值：\$r('sys.color.ohos_id_color_foreground_contrary')
    *
    * @type { ?ColorMetrics }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

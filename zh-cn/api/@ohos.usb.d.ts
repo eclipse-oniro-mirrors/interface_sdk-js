@@ -180,7 +180,7 @@ declare namespace usb {
    *
    * @param { USBDevicePipe } pipe - 用于确定总线号和设备地址。
    * @param { USBInterface } iface - 用于确定需要获取接口的索引。
-   * @param { boolean } [force] - 可选参数，是否强制获取。默认值为false?，表示不强制获取。
+   * @param { boolean } [force] - 可选参数，是否强制获取。默认值为false，表示不强制获取，如果无内核驱动占用该接口，则获取成功，否则获取失败；设置为true时，将强制释放内核驱动对该接口的控制权并交由用户空间程序控制。
    * @returns { number } 注册通信接口成功返回0；注册通信接口失败返回其他错误码。
    * @syscap SystemCapability.USB.USBManager
    * @since 8 dynamiconly
@@ -543,7 +543,7 @@ declare namespace usb {
     name: string;
 
     /**
-     * 检查当前配置是否支持远程唤醒。
+     * 检查当前配置是否支持远程唤醒。true表示支持，false表示不支持。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 8 dynamiconly
@@ -553,7 +553,7 @@ declare namespace usb {
     isRemoteWakeup: boolean;
 
     /**
-     * 检查当前配置是否支持独立电源。
+     * 检查当前配置是否支持独立电源。true表示支持，false表示不支持。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 8 dynamiconly
@@ -623,7 +623,7 @@ declare namespace usb {
     name: string;
 
     /**
-     * 产商信息。
+     * 厂商信息。
      *
      * @syscap SystemCapability.USB.USBManager
      * @since 8 dynamiconly

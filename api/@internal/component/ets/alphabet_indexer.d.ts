@@ -27,7 +27,6 @@
  * @since 7 dynamic
  */
 declare enum IndexerAlign {
-
   /**
    * The pop-up window is displayed on the right of the indexer.
    *
@@ -77,7 +76,7 @@ declare enum IndexerAlign {
  * Defines the options of the **AlphabetIndexer** component.
  *
  * > **NOTE**
- *
+ * >
  * > To standardize anonymous object definitions, the element definitions here have been revised in API version 18.
  * > While historical version information is preserved for anonymous objects, there may be cases where the outer element
  * > 's @since version number is higher than inner elements'. This does not affect interface usability.
@@ -89,7 +88,6 @@ declare enum IndexerAlign {
  * @since 18 dynamic
  */
 interface AlphabetIndexerOptions {
-
   /**
    * Array of index items.
    *
@@ -99,7 +97,6 @@ interface AlphabetIndexerOptions {
    * @since 7 dynamic
    */
   arrayValue: Array<string>;
-
   /**
    * Index of the initial selected item. If the value is out of range, the default value **0** is used. When this
    * parameter and the [selected]{@link AlphabetIndexerAttribute#selected} property are set at the same time, the
@@ -118,9 +115,19 @@ interface AlphabetIndexerOptions {
 }
 
 /**
- * The **AlphabetIndexer** component can create a logically indexed array of items in a container for instant location.
+ * The **AlphabetIndexer** component can be used with container components to quickly locate the display area of the
+ * container based on logical structure. It is suitable for scenarios requiring quick content location, such as
+ * contacts, city lists, and category lists.
  *
  * > **NOTE**
+ * >
+ * > - Primary indexes: letter indexes on the index bar, such as '#', 'A', 'B', 'C', etc.
+ * >
+ * > - Secondary indexes: specific content list items displayed in the pop-up window, returned through the
+ * > **onRequestPopupData** callback.
+ * >
+ * > - Since API version 12, haptic feedback is enabled by default. Before using it, configure the vibration permission
+ * > as described in [enableHapticFeedback]{@link AlphabetIndexerAttribute#enableHapticFeedback}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -147,7 +154,7 @@ interface AlphabetIndexerInterface {
 /**
  * Represents the callback invoked when an index item is selected.
  *
- * @param { number } index - selected index
+ * @param { number } index - Index of the currently selected index item.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -159,7 +166,7 @@ declare type OnAlphabetIndexerSelectCallback  = (index: number) => void;
 /**
  * Represents the callback invoked when a secondary index item in the pop-up window is selected.
  *
- * @param { number } index - selected index
+ * @param { number } index - Index of the currently selected secondary index item in the pop-up window.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -167,13 +174,13 @@ declare type OnAlphabetIndexerSelectCallback  = (index: number) => void;
  * @since 18 dynamic
  */
 declare type OnAlphabetIndexerPopupSelectCallback = (index: number) => void;
-
 /**
  * Represents the callback invoked when an index item is selected and
  * [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} is set to **true**.
  *
- * @param { number } index - selected index
- * @returns { Array<string> } string array corresponding to the index
+ * @param { number } index - Index of the currently selected index item.
+ * @returns { Array<string> } Array of secondary index items to be displayed in the pop-up window. Up to 5 items can be
+ *     displayed vertically, with scrollable support for more items.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -191,9 +198,9 @@ declare type OnAlphabetIndexerRequestPopupDataCallback  = (index: number) => Arr
  * The [maxFontScale]{@link TextAttribute#maxFontScale} and [minFontScale]{@link TextAttribute#minFontScale} attributes
  * are both set to a constant value of 1, which means that they do not change with the system font size.
  *
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link common}, the following events are supported.
+ * In addition to the [universal events]{@link ./common}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -201,12 +208,9 @@ declare type OnAlphabetIndexerRequestPopupDataCallback  = (index: number) => Arr
  * @since 7 dynamic
  */
 declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttribute> {
-
   /**
-   * Triggered when an index item is selected, with the callback parameter being the index of the currently selected
-   * item.
-   *
-   * > **NOTE**
+   * Registers the callback for the index item selection event. The callback parameter is the current selected item
+   * index.
    *
    * @param { function } callback - Index of the selected item.
    * @returns { AlphabetIndexerAttribute }
@@ -220,8 +224,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text color for unselected items.
    *
-   * @param { ResourceColor } value - Text color of unselected items.<br>Default value: **0x99182431**, which is a
-   *     slightly transparent brown.
+   * @param { ResourceColor } value - Text color of unselected items.
+   *     <br>Default value: **0x99182431**, displayed as a slightly transparent dark blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -233,7 +237,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text color for the selected item.
    *
-   * @param { ResourceColor } value - Text color of the selected item.<br>Default value: **0xFF007DFF**, which is blue.
+   * @param { ResourceColor } value - Selected item text color.<br/>Default value: **0xFF007DFF**, displayed as opaque
+   *     blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -245,8 +250,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text color for the primary index item in the pop-up window.
    *
-   * @param { ResourceColor } value - Text color of the primary index item in the pop-up window.<br>Default value:
-   *     **0xFF007DFF**, which is blue.
+   * @param { ResourceColor } value - Text color of the pop-up window primary index item.<br/>Default value:
+   *     **0xFF007DFF**, displayed as opaque blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -258,8 +263,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the background color of the selected item.
    *
-   * @param { ResourceColor } value - Background color of the selected item.<br>Default value: **0x1A007DFF**, which is
-   *     semi-transparent blue-green.
+   * @param { ResourceColor } value - Background color of the selected item.
+   *     <br>Default value: **0x1A007DFF**, displayed as a semi-transparent blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -269,26 +274,29 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   selectedBackgroundColor(value: ResourceColor): AlphabetIndexerAttribute;
 
   /**
-   * Sets the background color for the pop-up window.
+   * Sets the background color of the pop-up window.
    *
-   * If this API is not called or the **value** parameter is set to **undefined**:
+   * When this API is not actively called or the parameter **value** is set to **undefined**:
    *
-   * In API version 11 and earlier versions, the default background color of the pop-up is **0xFFFFFFFF**, which is
+   * In API version 11 and earlier, the default background color of the pop-up window is **0xFFFFFFFF**, displayed as
    * white.
    *
-   * In API versions 12 to 24, the default background color is **#66808080**, which is translucent gray.
+   * From API version 12 to API version 24, the default is **#66808080**, displayed as semi-transparent gray.
    *
-   * Since API version 26.0.0, if neither **popupBackground** nor
-   * [popupBackgroundBlurStyle]{@link AlphabetIndexerAttribute#popupBackgroundBlurStyle} is called or the **value**
-   * parameter is set to **undefined**, the **THICK** style of
-   * **[ImmersiveStyle](docroot://reference/apis-arkui/arkts-apis-uimaterial.md#immersivestyle)** is displayed by
-   * default on devices with high- and mid-level computing power, and the white background is displayed by default on
-   * devices with low-level computing power. If **popupBackgroundBlurStyle** is called and the **value** parameter is
-   * set to a valid value, the background color of the pop-up is **#66808080** by default, which is translucent gray.
+   * Starting from API version 26.0.0, if neither [popupBackground]{@link AlphabetIndexerAttribute#popupBackground} nor
+   * [popupBackgroundBlurStyle]{@link AlphabetIndexerAttribute#popupBackgroundBlurStyle} is actively called, or both are
+   * called with **value** set to **undefined**, the default display on high-computing-power and medium-computing-power
+   * devices is the **THICK** style of the immersive system material
+   * [ImmersiveStyle]{@link @ohos.arkui.uiMaterial:uiMaterial.ImmersiveStyle}, and the default display on low-computing-
+   * power devices is a white background.
    *
-   * @param { ResourceColor } value - Background color of the pop-up window.<br>The background blur effect of the pop-up
-   *     text can affect the background color. You can disable the effect by setting
-   *     [popupBackgroundBlurStyle]{@link AlphabetIndexerAttribute#popupBackgroundBlurStyle} to **NONE**.<br>
+   * If **popupBackgroundBlurStyle** is actively called with a valid **value**, the default background color of the pop-
+   * up window is **#66808080**, displayed as semi-transparent gray.
+   *
+   * @param { ResourceColor } value - Background color of the pop-up window.
+   *     <br>The background blur effect of the pop-up text can affect the background color. You can disable the effect
+   *     by setting [popupBackgroundBlurStyle]{@link AlphabetIndexerAttribute#popupBackgroundBlurStyle} to **NONE**.
+   *     <br>
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -300,8 +308,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text color for the selected secondary index item in the pop-up window.
    *
-   * @param { ResourceColor } value - Text color of the selected secondary index items in the pop-up window.<br>Default
-   *     value: **#FF182431**, which is dark blue.
+   * @param { ResourceColor } value - Text color of the selected secondary index items in the pop-up window.
+   *     <br>Default value: **#FF182431**, which is dark blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -314,8 +322,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text color for the unselected secondary index items in the pop-up window.
    *
-   * @param { ResourceColor } value - Text color of the unselected secondary index items in the pop-up window.<br>
-   *     Default value: **#FF182431**, which is dark blue.
+   * @param { ResourceColor } value - Text color of the unselected secondary index items in the pop-up window.
+   *     <br>Default value: **#FF182431**, which is dark blue.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -328,9 +336,9 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the background color for the secondary index item in the pop-up window.
    *
-   * @param { ResourceColor } value - Background color of the secondary index item in the pop-up window.<br>Default
-   *     value:<br>API version 11 and earlier: **#FFFFFFFF**, which is white.<br>API version 12 and later:
-   *     **#00000000**, which is transparent.
+   * @param { ResourceColor } value - Background color of the pop-up window secondary index item.<br/>Default value:<br
+   *     />API version 11 and earlier: #FFFFFFFF, displayed as white.<br />API version 12 and later: #00000000,
+   *     displayed as transparent.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -343,8 +351,10 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets whether to display the pop-up window.
    *
-   * @param { boolean } value - Whether to display the pop-up window.<br>Default value: **false**.<br>**true**: Display
-   *     the pop-up window.<br>**false**: Do not display the pop-up window.
+   * @param { boolean } value - Whether to display the pop-up window.
+   *     <br>Default value: **false**.
+   *     <br>**true**: Display the pop-up window.
+   *     <br>**false**: Do not display the pop-up window.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -356,10 +366,22 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text style for the selected item.
    *
-   * @param { Font } value - Text style of the selected item.<br>Default value:<br>API version 11 and earlier:<br>{<br>
-   *     size:'12.0fp',<br> style:FontStyle.Normal,<br> weight:FontWeight.Regular,<br> family:'HarmonyOS Sans'<br>}<br>
-   *     API version 12 and later:<br>{<br>size:'10.0vp',<br> style:FontStyle.Normal,<br> weight:FontWeight.Medium,<br>
-   *     family:'HarmonyOS Sans'<br>}
+   * @param { Font } value - Text style of the selected item.
+   *     <br>Default value:
+   *     <br>API version 11 and earlier:
+   *     <br>{
+   *     <br>size:'12.0fp',
+   *     <br> style:FontStyle.Normal,
+   *     <br> weight:FontWeight.Regular,
+   *     <br> family:'HarmonyOS Sans'
+   *     <br>}
+   *     <br>API version 12 and later:
+   *     <br>{
+   *     <br>size:'10.0vp',
+   *     <br> style:FontStyle.Normal,
+   *     <br> weight:FontWeight.Medium,
+   *     <br> family:'HarmonyOS Sans'
+   *     <br>}
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -371,8 +393,14 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text style for the primary index item in the pop-up window.
    *
-   * @param { Font } value - Text style of the primary index item in the pop-up window.<br>Default value:<br>{<br>size:'
-   *     24.0vp',<br> style:FontStyle.Normal,<br> weight:FontWeight.Medium,<br> family:'HarmonyOS Sans'<br>}
+   * @param { Font } value - Text style of the primary index item in the pop-up window.
+   *     <br>Default value:
+   *     <br>{
+   *     <br>size:'24.0vp',
+   *     <br> style:FontStyle.Normal,
+   *     <br> weight:FontWeight.Medium,
+   *     <br> family:'HarmonyOS Sans'
+   *     <br>}
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -384,8 +412,12 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text style for the secondary index item in the pop-up window.
    *
-   * @param { Font } value - Text style of the secondary index item in the pop-up window.<br>Default value:<br>{<br>size
-   *     :24,<br>weight:FontWeight.Medium<br>}
+   * @param { Font } value - Text style of the secondary index item in the pop-up window.
+   *     <br>Default value:
+   *     <br>{
+   *     <br>size:24,
+   *     <br>weight:FontWeight.Medium
+   *     <br>}
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -399,11 +431,13 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
    * Sets the size of the index item area.
    *
    * @param { string | number } value - Size of the index item area, which is a square, meaning the side length of the
-   *     square. This attribute cannot be set in percentage.<br>The actual value is restricted by the component size.
-   *     The maximum width of an index item is the component width minus the left and right
-   *     [padding]{@link CommonMethod#padding}, and the maximum height of an index item is (component height minus the
-   *     top and bottom [padding]{@link CommonMethod#padding})/number of index items. If the input value is less than or
-   *     equal to 0, the default value is used.<br>Default value: **16.0**<br>Unit: vp
+   *     square. This attribute cannot be set in percentage.
+   *     <br>The actual value is restricted by the component size. The maximum width of an index item is the component
+   *     width minus the left and right [padding]{@link CommonMethod#padding}, and the maximum height of an index item
+   *     is (component height minus the top and bottom [padding]{@link CommonMethod#padding})/number of index items. If
+   *     the input value is less than or equal to 0, the default value is used.
+   *     <br>Default value: **16.0**
+   *     <br>Unit: vp
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -415,10 +449,22 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the text style for unselected items.
    *
-   * @param { Font } value - Text style of unselected items.<br>Default value:<br>API version 11 and earlier:<br>{<br>
-   *     size:'12.0fp',<br> style:FontStyle.Normal,<br> weight:FontWeight.Regular,<br> family:'HarmonyOS Sans'<br>}<br>
-   *     API version 12 and later:<br>{<br>size:'10.0vp',<br> style:FontStyle.Normal,<br> weight:FontWeight.Medium,<br>
-   *     family:'HarmonyOS Sans'<br>}
+   * @param { Font } value - Text style of unselected items.
+   *     <br>Default value:
+   *     <br>API version 11 and earlier:
+   *     <br>{
+   *     <br>size:'12.0fp',
+   *     <br> style:FontStyle.Normal,
+   *     <br> weight:FontWeight.Regular,
+   *     <br> family:'HarmonyOS Sans'
+   *     <br>}
+   *     <br>API version 12 and later:
+   *     <br>{
+   *     <br>size:'10.0vp',
+   *     <br> style:FontStyle.Normal,
+   *     <br> weight:FontWeight.Medium,
+   *     <br> family:'HarmonyOS Sans'
+   *     <br>}
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -431,7 +477,8 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
    * Sets the alignment style of the indexer pop-up window.
    *
    * @param { IndexerAlign } value - Alignment style of the indexer pop-up window. The pop-up window can be displayed on
-   *     the right or left of the indexer.<br>Default value: **IndexerAlign.END**
+   *     the right or left of the indexer.
+   *     <br>Default value: **IndexerAlign.END**
    * @param { Length } [offset] - Spacing between the pop-up window and the alphabetic index bar. A value greater than
    *     or equal to **0** is valid. If this parameter is set to a value less than **0** or is not set, the spacing is
    *     the same as **popupPosition**. When this parameter and
@@ -449,8 +496,9 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
    * Triggered when an index item is selected, with the callback parameter being the index of the currently selected
    * item.
    *
-   * @param { function } callback - Event triggered when an index item is selected. [since 8 - 17]
-   * @param { OnAlphabetIndexerSelectCallback } callback - Event triggered when an index item is selected. [since 18]
+   * @param { function } callback - Callback used to process the index item selection event. [since 8 - 17]
+   * @param { OnAlphabetIndexerSelectCallback } callback - Callback used to process the index item selection
+   *     event. [since 18]
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -464,10 +512,12 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
    * selected secondary index item. The return value is the secondary index item content to be displayed in the pop-up
    * window.
    *
-   * @param { function } callback - Callback for setting the secondary index item content event in the pop-up
-   *     window. [since 8 - 17]
-   * @param { OnAlphabetIndexerRequestPopupDataCallback } callback - Callback for setting the secondary index item
-   *     content event in the pop-up window. [since 18]
+   * @param { function } callback - Callback used to provide the content of the secondary index item in the pop-up
+   *     window. You need to set [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} to **true**
+   *     first. [since 8 - 17]
+   * @param { OnAlphabetIndexerRequestPopupDataCallback } callback - Callback used to provide the content of the
+   *     secondary index item in the pop-up window. You need to set
+   *     [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} to **true** first. [since 18]
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -478,12 +528,14 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
 
   /**
    * Triggered when a secondary index item in the pop-up window is selected. The callback parameter is the index of the
-   * selected secondary index item.
+   * selected secondary index item. This event is triggered only when
+   * [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} is set to **true**.
    *
-   * @param { function } callback - Event triggered when a secondary index item in the pop-up window is
-   *     selected. [since 8 - 17]
-   * @param { OnAlphabetIndexerPopupSelectCallback } callback - Event triggered when a secondary index item in the pop-
-   *     up window is selected. [since 18]
+   * @param { function } callback - Callback used to process the secondary index selection event of the pop-up window.
+   *     You need to set [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} to **true** first. [since 8 - 17]
+   * @param { OnAlphabetIndexerPopupSelectCallback } callback - Callback used to process the secondary index selection
+   *     event of the pop-up window. You need to set [usingPopup]{@link AlphabetIndexerAttribute#usingPopup} to **true**
+   *     first. [since 18]
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -493,13 +545,17 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   onPopupSelect(callback: OnAlphabetIndexerPopupSelectCallback): AlphabetIndexerAttribute;
 
   /**
-   * Sets the index of the selected item.
+   * Sets the index of the selected item. When this attribute and the **selected** attribute in
+   * [AlphabetIndexerOptions]{@link AlphabetIndexerOptions} are set at the same time, this attribute has a higher
+   * priority.
    *
    * Since API version 10, this parameter supports two-way binding through
    * [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *
-   * @param { number } index - Index of the selected item.<br>Value range:
-   *     [0, [arrayValue]{@link AlphabetIndexerOptions}.length – 1]<br>Default value: **0**
+   * @param { number } index - Index of the selected item.
+   *     <br>Value range: [0, [arrayValue]{@link AlphabetIndexerOptions}.length – 1]
+   *     <br>If the index value is out of the range, the default value **0** is used.
+   *     <br>Default value: **0**
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -509,10 +565,12 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   selected(index: number): AlphabetIndexerAttribute;
 
   /**
-   * Sets the position of the pop-up window relative to the center of the indexer's top border.
+   * Sets the position of the pop-up window relative to the midpoint of the top edge of the index bar.
    *
-   * @param { Position } value - Position of the pop-up window relative to the center of the indexer's top border.<br>
-   *     Default value: **{x: 60.0, y: 48.0}**
+   * @param { Position } value - Position of the pop-up window relative to the midpoint of the top edge of the index
+   *     bar. When set simultaneously with [alignStyle]{@link AlphabetIndexerAttribute#alignStyle}, the horizontal
+   *     direction is controlled by the **offset** parameter of [alignStyle]{@link AlphabetIndexerAttribute#alignStyle},
+   *     and **value.y** takes effect in the vertical direction.<br/>Default value: **{x: 60.0, y: 48.0}**<br/>Unit: vp
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -524,21 +582,24 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets whether to enable the adaptive collapse behavior for the indexer.
    *
-   * When the first index item is **"#"**: Remaining items ≤ 9: Full display mode; 9 < Remaining items ≤ 13: Adapts
-   * between full display and short collapse modes based on the indexer height; remaining items > 13: Adapts between
-   * short and long collapse modes based on the indexer height.
+   * When the first index item is **"#"**: Remaining items ≤ 9: Full display mode (all index items are fully displayed);
+   * 9 < Remaining items ≤ 13: Adapts between full display and short collapse modes based on the indexer height;
+   * remaining items > 13: Adapts between short and long collapse modes based on the indexer height.
    *
-   * When the first index item is not **"#"**: All items ≤ 9: Full display mode; 9 < All items ≤ 13: Adapts between full
-   * display and short collapse modes based on the indexer height; all items > 13: Adapts between short and long
-   * collapse modes based on the indexer height.
+   * When the first index item is not **"#"**: All items ≤ 9: Full display mode (all index items are fully displayed); 9
+   * < All items ≤ 13: Adapts between full display and short collapse modes based on the indexer height; all items > 13:
+   * Adapts between short and long collapse modes based on the indexer height.
    *
    * > **NOTE**
-   *
+   * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 12.
    *
-   * @param { boolean } value - Whether to auto-collapse or expand the indexer bar.<br>Default value:<br>Before API
-   *     version 12: **false**<br>Since API version 12: **true**<br>**true**: Enable the adaptive collapse behavior.<br>
-   *     **false**: Disable the adaptive collapse behavior.
+   * @param { boolean } value - Whether to auto-collapse or expand the indexer bar.
+   *     <br>Default value:
+   *     <br>Before API version 12: **false**
+   *     <br>Since API version 12: **true**
+   *     <br>**true**: Enable the adaptive collapse behavior.
+   *     <br>**false**: Disable the adaptive collapse behavior.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -552,10 +613,10 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
    * Sets the radius of the index border corners in the pop-up window.
    *
    * @param { number } value - Radius of the index background border corners in the pop-up window.
-   *     <br>Unit: vp.
-   *     **24vp**.<br>This parameter cannot be set in percentage. If the value specified is less than **0**, **0** is
-   *     used.<br>The radius of the index background border corners in the pop-up window is automatically adaptive (
-   *     radius of the index corners + 4 vp).
+   *     <br>Default value: **24vp**.
+   *     <br>This parameter cannot be set in percentage. If the value specified is less than **0**, **0** is used.
+   *     <br>The radius of the index background border corners in the pop-up window is automatically adaptive (radius of
+   *     the index corners + 4 vp).
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -568,11 +629,11 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the radius of the index background border corners in the alphabetic index bar.
    *
-   * @param { number } value - <br>Unit: vp.
-   *     - Radius of the index background border corners in the alphabetic index bar.<br>Default
-   *     value: **8vp**<br>This parameter cannot be set in percentage. If the value specified is less than **0**, **0**
-   *     is used.<br>The radius of the index background border corners in the alphabetic index bar is automatically
-   *     adaptive (radius of the index corners + 4 vp).
+   * @param { number } value - Radius of the index background border corners in the alphabetic index bar.
+   *     <br>Default value: **8vp**
+   *     <br>This parameter cannot be set in percentage. If the value specified is less than **0**, **0** is used.
+   *     <br>The radius of the index background border corners in the alphabetic index bar is automatically adaptive (
+   *     radius of the index corners + 4 vp).
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -583,17 +644,18 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   itemBorderRadius(value: number): AlphabetIndexerAttribute;
 
   /**
-   * Sets the background blur style of the pop-up window. In versions earlier than API version 26.0.0, if this API is
-   * not called, the **COMPONENT_REGULAR** value in **BlurStyle** is used by default. Since API version 26.0.0, if
-   * neither [popupBackground]{@link AlphabetIndexerAttribute#popupBackground} nor **popupBackgroundBlurStyle** is
-   * called or the value is **undefined**, the **THICK** style of
-   * [ImmersiveStyle](docroot://reference/apis-arkui/arkts-apis-uimaterial.md#immersivestyle) is used by default on
-   * devices with high- and mid-level computing power, and the white background is used by default on devices with low-
-   * level computing power.
+   * Sets the background blur material of the pop-up window. Before API version 26.0.0, when this API is not called, the
+   * default is the component's regular material blur, corresponding to **COMPONENT_REGULAR** in **BlurStyle**. Starting
+   * from API version 26.0.0, if neither [popupBackground]{@link AlphabetIndexerAttribute#popupBackground} nor
+   * [popupBackgroundBlurStyle]{@link AlphabetIndexerAttribute#popupBackgroundBlurStyle} is actively called, or both are
+   * called with **value** set to **undefined**, the default display on high-computing-power and medium-computing-power
+   * devices is the **THICK** style of the immersive system material
+   * [ImmersiveStyle]{@link @ohos.arkui.uiMaterial:uiMaterial.ImmersiveStyle}, and the default display on low-computing-
+   * power devices is a white background.
    *
-   * @param { BlurStyle } value - Background blur style of the pop-up window.<br>The background blur effect can affect
-   *     [popupBackground]{@link AlphabetIndexerAttribute#popupBackground}. You can disable the effect by setting it to
-   *     **NONE**.
+   * @param { BlurStyle } value - Background blur style of the pop-up window.
+   *     <br>The background blur effect can affect [popupBackground]{@link AlphabetIndexerAttribute#popupBackground}.
+   *     You can disable the effect by setting it to **NONE**.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -606,9 +668,10 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   /**
    * Sets the background color for the primary index item in the pop-up window.
    *
-   * @param { ResourceColor } value - Background color for the primary index item in the pop-up window.<br>Default value
-   *     :<br>If the pop-up window has only one index: **#00FFFFFF**.<br>If the pop-up window has multiple indexes:
-   *     **#0c182431**.
+   * @param { ResourceColor } value - Background color for the primary index item in the pop-up window.
+   *     <br>Default value:
+   *     <br>If the pop-up window has only one index: **#00FFFFFF**.
+   *     <br>If the pop-up window has multiple indexes: **#0c182431**.
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -619,13 +682,17 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
   popupTitleBackground(value: ResourceColor): AlphabetIndexerAttribute;
 
   /**
-   * Sets whether to enable haptic feedback.
+   * Sets whether to enable haptic feedback. When enabled, haptic feedback is triggered when a finger touches or slides
+   * to select an index item.
    *
-   * @param { boolean } value - Whether to enable haptic feedback.<br>**true**: To enable haptic feedback.<br>**false**:
-   *     Not to enable haptic feedback.<br>Default value: **true**<br>To enable haptic feedback, you must declare the
-   *     **ohos.permission.VIBRATE** permission under **requestPermissions** in the
-   *     [module.json5](docroot://quick-start/module-configuration-file.md) file of the project.<br>"requestPermissions"
-   *     : [{"name": "ohos.permission.VIBRATE"}]
+   * @param { boolean } value - Whether to enable haptic feedback.
+   *     <br>**true**: To enable haptic feedback.
+   *     <br>**false**: Not to enable haptic feedback.
+   *     <br>Default value: **true**
+   *     <br>To enable haptic feedback, you must declare the **ohos.permission.VIBRATE** permission under
+   *     **requestPermissions** in the [module.json5](docroot://quick-start/module-configuration-file.md) file of the
+   *     project.
+   *     <br>"requestPermissions": [{"name": "ohos.permission.VIBRATE"}]
    * @returns { AlphabetIndexerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -637,9 +704,19 @@ declare class AlphabetIndexerAttribute extends CommonMethod<AlphabetIndexerAttri
 }
 
 /**
- * The **AlphabetIndexer** component can create a logically indexed array of items in a container for instant location.
+ * The **AlphabetIndexer** component can be used with container components to quickly locate the display area of the
+ * container based on logical structure. It is suitable for scenarios requiring quick content location, such as
+ * contacts, city lists, and category lists.
  *
  * > **NOTE**
+ * >
+ * > - Primary indexes: letter indexes on the index bar, such as '#', 'A', 'B', 'C', etc.
+ * >
+ * > - Secondary indexes: specific content list items displayed in the pop-up window, returned through the
+ * > **onRequestPopupData** callback.
+ * >
+ * > - Since API version 12, haptic feedback is enabled by default. Before using it, configure the vibration permission
+ * > as described in [enableHapticFeedback]{@link AlphabetIndexerAttribute#enableHapticFeedback}.
  *
  * ###### Child Components
  *

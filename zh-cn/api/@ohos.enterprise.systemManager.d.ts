@@ -729,6 +729,73 @@ declare namespace systemManager {
   }
 
   /**
+   * 创建精准定时器的的初始化选项
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  class ExactTimerConfig {
+    /**
+     * 定时器名称。
+     * 最大长度为64且不能为空。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    name: string;
+
+    /**
+     * 定时器是否为重复定时器。**true**表示该定时器为重复定时器。**false**表示定时器为单次定时器。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    repeat: boolean;
+
+    /**
+     * 连续两次定时器触发器之间的时间间隔，单位为毫秒。
+     * 对于重复定时器，**interval*的最小值为1000 ms，最大值为86400000 ms。
+     * 对于单次定时器，该值为**0**。
+     * 单位为：毫秒。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    interval: number;
+
+    /**
+     * 定时器超时时执行的回调。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    callback(): void;
+  }
+
+  /**
+   * 音量类型.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export enum AudioVolumeType {
+    /**
+     * 媒体音量.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    STREAM_MUSIC = 1
+  }
+
+  /**
    * 设置NTP(Network Time Protocol)时间服务器。设置成功后，系统将使用指定的NTP服务器进行时间同步，校准系统时间。适用于企业设备需要统一时间同步的场景，确保企业设备时间与标准时间保持一致，避免因时间不准确导致
    * 的业务问题，如日志时间戳不一致、证书验证失败等。
    *
@@ -1312,6 +1379,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
@@ -1331,6 +1399,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
@@ -1348,6 +1417,7 @@ declare namespace systemManager {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
@@ -1367,6 +1437,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
@@ -1387,6 +1458,7 @@ declare namespace systemManager {
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
@@ -1404,11 +1476,187 @@ declare namespace systemManager {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.0.1
    */
   function getAllowedPrinterIPAddressesForAccount(queryPolicy?: common.QueryPolicy): Array<string>;
+
+  /**
+   * 创建精确定时器。该接口使用promise返回定时器ID。
+   *
+   * > **说明**
+   * >
+   * > 该接口需要和[systemManager.destroyTimer]{@link systemManager.destroyTimer}配合使用。否则，
+   * > 内存泄漏。禁用或删除管理应用程序时，EDM服务会自动销毁管理员创建的所有计时器。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { ExactTimerConfig } config - Timer initialization configuration, including whether the timer is a repeating
+   *     timer, interval, callback, and name.
+   * @returns { Promise<number> } Promise用于返回定时器ID。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201053 - The number of timers has reached the upper limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function createExactTimer(config: ExactTimerConfig): Promise<number>;
+
+  /**
+   * 启动精确的计时器。该接口使用promise返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { number } timer - 定时器ID，通过调用[systemManager.createTimer]{@link systemManager.createTimer}获取。
+   * @param { number } triggerTime - 定时器ID，通过调用[systemManager.createTimer]{@link systemManager.createTimer}获取。
+   * @returns { Promise<void> } 不返回任何值的Promise。如果操作失败，将抛出一个错误对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201054 - The specified timer does not exist or does not belong to the current
+   *     administrator.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function startExactTimer(timer: number, triggerTime: number): Promise<void>;
+
+  /**
+   * 停止精确计时器。该接口使用promise返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { number } timer - 定时器ID，调用获取。
+   *     [systemManager.createTimer]{@link systemManager.createTimer}。
+   * @returns { Promise<void> } 不返回任何值的Promise。如果操作失败，将抛出一个错误对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201054 - The specified timer does not exist or does not belong to the current
+   *     administrator.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function stopExactTimer(timer: number): Promise<void>;
+
+  /**
+   * 销毁一个精确的计时器。该接口使用promise返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { number } timer - 定时器ID，调用获取。
+   *     [systemManager.createTimer]{@link systemManager.createTimer}。
+   * @returns { Promise<void> } 不返回任何值的Promise。如果操作失败，将抛出一个错误对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201054 - The specified timer does not exist or does not belong to the current
+   *     administrator.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function destroyExactTimer(timer: number): Promise<void>;
+
+  /**
+   * 设置设备的本地HOTA域。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } domain - 要设置的本地HOTA域。取值必须符合
+   *     域名规则。校验规则如下：
+   *     1.长度不能超过64个字符。
+   *     2.不支持IP地址和localhost。
+   *     3.域需要完整的请求根地址，必须以https://开头。
+   *     4.域必须匹配以下正则表达式：
+   *     ^(?:[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])？\\.)+[a-zA-Z]{2,}$
+   *     5.传递空字符串意味着将域恢复为其默认值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200018 - This device is not an enterprise device.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setLocalHotaDomain(domain: string): void;
+
+  /**
+   * 获取设备的本地HOTA域。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @returns { string } 返回本地HOTA域。
+   *     当前设备，返回空字符串作为默认值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200018 - This device is not an enterprise device.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getLocalHotaDomain(): string;
+
+  /**
+   * 设置指定音量类型的音量值。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - 音量类型。
+   * @param { number } degree - 音量值，取值范围为0～100。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setVolumeDegree(volumeType: AudioVolumeType, degree: number): void;
+
+  /**
+   * 获取指定音量类型的音量值。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - 音量类型。
+   * @returns { number } degree - 返回指定音量类型的音量值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getVolumeDegree(volumeType: AudioVolumeType): number;
 }
 
 export default systemManager;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web Net Error List
  * @kit ArkWeb
  */
 /**
@@ -517,7 +517,7 @@ export declare enum WebNetErrorList {
      */
     ERR_NETWORK_ACCESS_DENIED = -138,
     /**
-     * The request throttler module cancelled this request to avoid DDOS.
+     * The request throttler module cancelled this request to avoid DDoS.
      *
      * @syscap SystemCapability.Web.Webview.Core
      * @since 23 static

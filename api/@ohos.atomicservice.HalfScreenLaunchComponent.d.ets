@@ -20,7 +20,7 @@
  *
  * ###### Attributes
  *
- * The [universal attributes]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal attributes]{@link CommonMethod} are not supported.
  *
  * @file Defines the halfScreen launch component
  * @kit ArkUI
@@ -37,9 +37,16 @@ import { Callback, ErrorCallback } from '@ohos.base';
  *
  * > **NOTE**
  * >
- * > To implement an embeddable atomic service, make sure it inherits from
+ * > - To implement an embeddable atomic service, make sure it inherits from
  * > [EmbeddableUIAbility]{@link @ohos.app.ability.EmbeddableUIAbility:EmbeddableUIAbility}. If the atomic service does
  * > not inherit from **EmbeddableUIAbility**, the system cannot guarantee its proper operation.
+ * >
+ * > - If the **HalfScreenLaunchComponent** component has [universal attributes]{@link CommonMethod}
+ * > and [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
+ * > rather than the **HalfScreenLaunchComponent** component itself. As a result, the configured universal attributes
+ * > and universal events may fail to take effect or behave as intended. For this reason, avoid using universal
+ * > attributes and events with the **HalfScreenLaunchComponent** component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @atomicservice

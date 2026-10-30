@@ -226,7 +226,7 @@ declare class AbilityStage {
    * > - 当[AbilityStage.onPrepareTerminationAsync]{@link AbilityStage.onPrepareTerminationAsync}实现时，本回调函数将不执行。
    *
    * @permission ohos.permission.PREPARE_APP_TERMINATE
-   * @returns { AbilityConstant.PrepareTermination } The user's choice.
+   * @returns { AbilityConstant.PrepareTermination } 用户的选择。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -245,7 +245,7 @@ declare class AbilityStage {
    * > - 若异步回调内发生crash，按超时处理，执行等待超过10秒未响应，应用将被强制关闭。
    *
    * @permission ohos.permission.PREPARE_APP_TERMINATE
-   * @returns { Promise<AbilityConstant.PrepareTermination> } Promise used to return the user's choice.
+   * @returns { Promise<AbilityConstant.PrepareTermination> } Promise对象，用于返回用户的选择。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -264,13 +264,24 @@ declare class AbilityStage {
   onLaunchFromHyperSnap(): void;
 
   /**
-   * 无
+   * 当AbilityStage即将创建第一个Ability时调用。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 24 dynamic&static
    */
   onAboutToCreateAbility(): void;
+
+  /**
+   * 当AbilityStage即将创建第一个Ability时调用。使用Promise异步回调。此方法返回的Promise成功resolve后，后续的生命周期回调才会继续执行，否则将被挂起。
+   * 若同时实现[onAboutToCreateAbility]{@link AbilityStage.onAboutToCreateAbility}和此方法，仅此方法生效。
+   *
+   * @returns { Promise<void> } 无返回值的Promise。
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  onAboutToCreateAbilityAsync(): Promise<void>;
 }
 
 export default AbilityStage;

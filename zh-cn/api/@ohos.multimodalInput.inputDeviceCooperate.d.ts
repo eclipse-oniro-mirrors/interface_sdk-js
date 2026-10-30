@@ -22,6 +22,7 @@ import { AsyncCallback } from './@ohos.base';
 
 /**
  * 键鼠穿越功能模块，提供两台或多台设备组网协同后键鼠共享能力，实现键鼠输入设备的跨设备协同操作。
+ * 本模块接口从API version 10开始不再维护。
  *
  * @syscap SystemCapability.MultimodalInput.Input.Cooperator
  * @since 9 dynamiconly
@@ -34,7 +35,7 @@ declare namespace inputDeviceCooperate {
    * 键鼠穿越事件。
    *
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
-   * @systemapi hide for inner use.
+   * @systemapi hide for inner use
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate.CooperateState
@@ -102,7 +103,8 @@ declare namespace inputDeviceCooperate {
    *
    * @param { boolean } enable - 键鼠穿越使能状态。
    * @param { AsyncCallback<void> } callback - 回调函数。当开启键鼠穿越成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -110,6 +112,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean, callback: AsyncCallback<void>): void;
 
@@ -118,7 +121,8 @@ declare namespace inputDeviceCooperate {
    *
    * @param { boolean } enable - 键鼠穿越使能状态。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -126,6 +130,7 @@ declare namespace inputDeviceCooperate {
    * @since 9 dynamiconly
    * @deprecated since 23
    * @useinstead ohos.cooperate/cooperate#prepareCooperate
+   * @useinstead ohos.cooperate/cooperate#unprepareCooperate
    */
   function enable(enable: boolean): Promise<void>;
 
@@ -135,7 +140,8 @@ declare namespace inputDeviceCooperate {
    * @param { string } sinkDeviceDescriptor - 键鼠穿越目标设备描述符。
    * @param { number } srcInputDeviceId - 键鼠穿越待穿越外设标识符。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动键鼠穿越成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 4400001 - Incorrect descriptor for the target device.
@@ -154,7 +160,8 @@ declare namespace inputDeviceCooperate {
    * @param { string } sinkDeviceDescriptor - 键鼠穿越目标设备描述符。
    * @param { number } srcInputDeviceId - 键鼠穿越待穿越外设标识符。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 4400001 - Incorrect descriptor for the target device.
@@ -171,7 +178,8 @@ declare namespace inputDeviceCooperate {
    * 停止键鼠穿越，使用callback异步回调。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当停止键鼠穿越成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -186,7 +194,8 @@ declare namespace inputDeviceCooperate {
    * 停止键鼠穿越，使用Promise异步回调。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
    * @systemapi hide for inner use
    * @since 9 dynamiconly
@@ -201,7 +210,8 @@ declare namespace inputDeviceCooperate {
    * @param {string} deviceDescriptor - 键鼠穿越目标设备描述符。
    * @param {AsyncCallback<{ state: boolean }>} callback - 回调函数。当获取键鼠穿越开关状态成功，err为undefined，data为键鼠穿越开关状态（true表示打开，false
    * 表示关闭）；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -217,7 +227,8 @@ declare namespace inputDeviceCooperate {
    *
    * @param { string } deviceDescriptor - 键鼠穿越目标设备描述符。
    * @returns { Promise<{ state: boolean }> } Promise对象，返回键鼠穿越开关状态。true表示键鼠穿越开关打开，false表示键鼠穿越开关关闭。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -234,7 +245,8 @@ declare namespace inputDeviceCooperate {
    * @param { 'cooperation' } type - 注册类型，取值'cooperation'。
    * @param { AsyncCallback<{ deviceDescriptor: string, eventMsg: EventMsg }> } callback - 回调函数。当接收键鼠穿越事件成功，err为
    * undefined，data为键鼠穿越事件信息；否则为错误对象。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator
@@ -250,7 +262,8 @@ declare namespace inputDeviceCooperate {
    *
    * @param { 'cooperation' } type - 注册类型，取值'cooperation'。
    * @param { AsyncCallback<void> } [callback] - 回调函数。当取消注册成功，err为undefined，否则为错误对象。若无此参数，则取消当前应用注册的所有回调函数。
-   * @throws { BusinessError } 202 - SystemAPI permit error. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    * 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Cooperator

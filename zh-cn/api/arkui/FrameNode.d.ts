@@ -24,6 +24,7 @@ import { Size, Position, Edges, LengthMetrics, SizeT } from './Graphics';
 import { DrawContext } from './Graphics';
 import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
 import { BusinessError } from '../@ohos.base';
+import { InputEventType } from './BuilderNode';
 
 /**
  * 描述组件的布局约束。
@@ -474,6 +475,34 @@ export class FrameNode {
   isModifiable(): boolean;
 
   /**
+   * 向当前FrameNode派发输入事件，并可指定竞争策略。支持TouchEvent、MouseEvent和AxisEvent。
+   * KeyEvent请使用[dispatchKeyEvent]{@link FrameNode#dispatchKeyEvent}派发。
+   *
+   * @param { InputEventType } event - 需要派发的输入事件。
+   * @param { CompetitionStrategy } [competitionStrategy] - 派发事件时使用的竞争策略。
+   * @returns { boolean } 是否成功派发事件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
+
+  /**
+   * 向当前FrameNode派发按键事件。
+   *
+   * @param { KeyEvent } event - 需要派发的按键事件。
+   * @returns { boolean } 按键事件是否被消费。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  dispatchKeyEvent(event: KeyEvent): boolean;
+
+  /**
    * 在FrameNode最后一个子节点后添加新的子节点。当前FrameNode如果不可修改，抛出异常信息。[typeNode]{@link typeNode}在appendChild时会校验子组件类型或个数，不满足时抛出异常信息，限制
    * 情况请查看[typeNode]{@link typeNode}描述。
    *
@@ -651,8 +680,8 @@ export class FrameNode {
   /**
    * 根据指定的计数模式获取当前FrameNode的子节点数量。
    *
-   * @param { ChildrenCountMode } [countMode] - The children count mode. Default value is ChildrenCountMode.ALL_EXPAND.
-   * @returns { int } - Returns the number of children of the current FrameNode based on the count mode.
+   * @param { ChildrenCountMode } [countMode] - 子节点计数模式。默认值为ChildrenCountMode.ALL_EXPAND。
+   * @returns { int } - 根据计数模式返回的当前FrameNode的子节点数量。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

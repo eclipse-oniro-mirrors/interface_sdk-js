@@ -331,7 +331,7 @@ declare namespace inputDevice {
     sources: Array<SourceType>;
 
     /**
-     * Axis information of the input device.
+     * Axis range of the input device.
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputDevice
      * @since 8 dynamic
@@ -394,10 +394,8 @@ declare namespace inputDevice {
     uniq: string;
 
     /**
-     * Whether the input device is a virtual device.
-     *
-     * The value **true** indicates that the device is a virtual device, and the value **false** indicates that the
-     * device is a non-virtual device.
+     * Whether the input device is a virtual device.<br>The value **true** indicates a virtual device, and **false**
+     * indicates a non-virtual device. If this field does not exist, the default value is **false**.
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputDevice
      * @since 23 dynamic&static
@@ -405,10 +403,8 @@ declare namespace inputDevice {
     isVirtual?: boolean;
 
     /**
-     * Whether the input device is a local device.
-     *
-     * The value **true** indicates that the device is a local device, and the value **false** indicates that the device
-     * is a non-local device.
+     * Whether the input device is a local device.<br>The value **true** indicates a local device, and **false**
+     * indicates a non-local device. If this field does not exist, the default value is **false**.
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputDevice
      * @since 23 dynamic&static
@@ -416,23 +412,18 @@ declare namespace inputDevice {
     isLocal?: boolean;
 
     /**
-     * Indicates the bound target displayId.
+     * ID of the bound target display. This field exists when there is a binding relationship in the system, and does
+     * not exist when there is no binding.
      *
      * @syscap SystemCapability.MultimodalInput.Input.InputDevice
      * @stagemodelonly
-     * @readonly
      * @since 26.0.1 dynamic&static
      */
-    displayId?: int;
+    readonly displayId?: int;
   }
 
   /**
    * Obtains the IDs of all input devices. This API uses an asynchronous callback to return the result.
-   *
-   * > **NOTE**
-   * >
-   * > This API is supported since API version 8 and deprecated since API version 9. Use
-   * > [inputDevice.getDeviceList]{@link inputDevice.getDeviceList} instead.
    *
    * @param { AsyncCallback<Array<number>> } callback - Callback function. If the operation is successful, **err** is
    *     **undefined**, and **data** is the ID list of all input devices. Otherwise, **err** is an error object.
@@ -445,11 +436,6 @@ declare namespace inputDevice {
 
   /**
    * Obtains the IDs of all input devices. This API uses a promise to return the result.
-   *
-   * > **NOTE**
-   * >
-   * > This API is supported since API version 8 and deprecated since API version 9. Use
-   * > [inputDevice.getDeviceList]{@link inputDevice.getDeviceList} instead.
    *
    * @returns { Promise<Array<number>> } Promise used to return the IDs of all input devices. **id** is the unique ID of
    *     an input device.
@@ -464,15 +450,11 @@ declare namespace inputDevice {
    * Obtains the information about the input device with the specified ID. This API uses an asynchronous callback to
    * return the result.
    *
-   * > **NOTE**
-   * >
-   * > This API is supported since API version 8 and deprecated since API version 9. Use
-   * > [inputDevice.getDeviceInfo]{@link inputDevice.getDeviceInfo} instead.
-   *
    * @param { number } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
-   * @param { AsyncCallback<InputDeviceData> } callback - Callback function. If the retrieval is successful, **err** is
-   *     **undefined**, and **data** is the input device information. Otherwise, **err** is an error object.
+   * @param { AsyncCallback<InputDeviceData> } callback - Callback used to return the result. If the retrieval is
+   *     successful, **err** is **undefined**, and **data** is the input device information. Otherwise, **err** is
+   *     an error object.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -482,11 +464,6 @@ declare namespace inputDevice {
 
   /**
    * Obtains the information about the input device with the specified ID. This API uses a promise to return the result.
-   *
-   * > **NOTE**
-   * >
-   * > This API is supported since API version 8 and deprecated since API version 9. Use
-   * > [inputDevice.getDeviceInfo]{@link inputDevice.getDeviceInfo} instead.
    *
    * @param { number } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -506,7 +483,7 @@ declare namespace inputDevice {
    *     **undefined**, and **data** is the ID list of all input devices (the ID is the unique identifier of an input
    *     device). Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -533,7 +510,7 @@ declare namespace inputDevice {
    *     **undefined**, and **data** is the input device information (including the device ID, name, supported input
    *     capabilities). Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -548,7 +525,7 @@ declare namespace inputDevice {
    * @returns { Promise<InputDeviceData> } Promise used to return information about the input device, including device
    *     ID, name, supported source, physical address, version information, and product information.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -563,7 +540,7 @@ declare namespace inputDevice {
    * @returns { InputDeviceData } Information about the input device, including the device ID, name, supported source,
    *     physical address, version information, and product information.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 10 dynamic
    * @since 23 static
@@ -572,17 +549,19 @@ declare namespace inputDevice {
 
   /**
    * Queries whether a specified input device supports specified keys. This API uses an asynchronous callback to return
-   * the result.
+   * the result. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
    * @param { Array<KeyCode> } keys - Keys to be queried. A maximum of five keys can be specified.
-   * @param { AsyncCallback<Array<boolean>> } callback - Callback function. If the query is successful, **err** is
-   *     **undefined**, and **data** is the key support query result (elements in the array correspond one-to-one to
-   *     those in **keys**; **true** indicates supported, and **false** indicates not supported). Otherwise, **err** is
-   *     an error object.
+   * @param { AsyncCallback<Array<boolean>> } callback - Callback used to return the result. If the query is
+   *     successful, **err** is **undefined**, and **data** is the key support query result (elements in the array
+   *     correspond one-to-one to those in **keys**; **true** indicates supported, and **false** indicates not
+   *     supported). Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -591,6 +570,9 @@ declare namespace inputDevice {
 
   /**
    * Checks whether the input device supports the specified keys. This API uses a promise to return the result.
+   * Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -598,7 +580,7 @@ declare namespace inputDevice {
    * @returns { Promise<Array<boolean>> } Promise object, returning the query result. true indicates supported, false
    *     indicates not supported.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -606,7 +588,9 @@ declare namespace inputDevice {
   function supportKeys(deviceId: int, keys: Array<KeyCode>): Promise<Array<boolean>>;
 
   /**
-   * Checks whether the input device supports the specified keys.
+   * Checks whether the input device supports the specified keys. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -614,7 +598,7 @@ declare namespace inputDevice {
    * @returns { Array<boolean> } Result indicating whether the input device supports the keycode value. The value
    *     **true** indicates yes, and the value **false** indicates no.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 10 dynamic
    * @since 23 static
@@ -624,14 +608,16 @@ declare namespace inputDevice {
   /**
    * Obtains the keyboard type of the input device, such as full keyboard and numeric keypad. The keyboard type of the
    * input device is subject to the result returned by this API. This API uses an asynchronous callback to return the
-   * result.
+   * result. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
    * @param { AsyncCallback<KeyboardType> } callback - Callback function. If the query is successful, **err** is
    *     **undefined**, and **data** is the keyboard type of the input device. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -640,12 +626,15 @@ declare namespace inputDevice {
 
   /**
    * Obtains the keyboard type of an input device. This API uses a promise to return the result.
+   * Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
    * @returns { Promise<KeyboardType> } Promise used to return the keyboard type of the input device.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 9 dynamic
    * @since 23 static
@@ -653,13 +642,15 @@ declare namespace inputDevice {
   function getKeyboardType(deviceId: int): Promise<KeyboardType>;
 
   /**
-   * Obtains the keyboard type of the input device.
+   * Obtains the keyboard type of the input device. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
    * @returns { KeyboardType } Keyboard type.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 10 dynamic
    * @since 23 static
@@ -669,13 +660,12 @@ declare namespace inputDevice {
   /**
    * Sets the keyboard repeat delay. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } delay - Keyboard repeat delay, in ms. The value range is [300, 1000] and the default value is
-   *     **500**.
+   * @param { int } delay - Key repeat delay. Default value: 500 ms. Adjustment range: [300 ms, 1000 ms].
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -686,12 +676,11 @@ declare namespace inputDevice {
   /**
    * Sets the keyboard repeat delay. This API uses a promise to return the result.
    *
-   * @param { int } delay - Keyboard repeat delay, in ms. The value range is [300, 1000] and the default value is
-   *     **500**.
+   * @param { int } delay - Keyboard key repeat delay. Default value: 500 ms. Adjustment range: [300 ms, 1000 ms].
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -703,10 +692,10 @@ declare namespace inputDevice {
    * Obtains the keyboard repeat delay. This API uses an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **data** is the keyboard repeat rate. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   *     err is undefined and data is the key repeat delay (in ms); otherwise, err is an error object.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -717,10 +706,10 @@ declare namespace inputDevice {
   /**
    * Obtains the keyboard repeat delay. This API uses a promise to return the result.
    *
-   * @returns { Promise<int> } Promise used to return the keyboard repeat delay.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { Promise<int> } Promise used to return the key repeat delay, in ms.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -731,12 +720,12 @@ declare namespace inputDevice {
   /**
    * Sets the keyboard repeat rate. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } rate - Keyboard repeat rate, in ms/time. The value range is [36, 100] and the default value is 50.
+   * @param { int } rate - Keyboard key repeat rate. Default value: 50 ms/event. Unit: ms/event. Value range: [36, 100].
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -747,11 +736,12 @@ declare namespace inputDevice {
   /**
    * Sets the keyboard repeat rate. This API uses a promise to return the result.
    *
-   * @param { int } rate - Keyboard repeat rate, in ms/time. The value range is [36, 100] and the default value is 50.
+   * @param { int } rate - Keyboard key repeat rate. Default value: 50 ms/event. Adjustment range: [36 ms/event,
+   *     100 ms/event].
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -762,11 +752,11 @@ declare namespace inputDevice {
   /**
    * Obtains the keyboard repeat rate. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **data** is the keyboard repeat rate. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @param { AsyncCallback<int> } callback - Callback function. If the operation is successful, err is undefined
+   *     and data is the keyboard repeat rate, in ms per event; otherwise, err is an error object.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -777,10 +767,10 @@ declare namespace inputDevice {
   /**
    * Obtains the keyboard repeat rate. This API uses a promise to return the result.
    *
-   * @returns { Promise<int> } Promise used to return the keyboard repeat rate.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { Promise<int> } Promise used to return the keyboard repeat rate, in ms per event.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -801,8 +791,8 @@ declare namespace inputDevice {
   function getIntervalSinceLastInput(): Promise<long>;
 
   /**
-   * Sets the input switch status of an input device. Take the touchscreen as an example. If the input switch is off,
-   * the touchscreen does not respond when being touched. If the input switch is on, the touchscreen wakes up when being
+   * Sets the switch status of an input device. Take the touchscreen as an example. If the input switch is off, the
+   * touchscreen does not respond when being touched. If the input switch is on, the touchscreen wakes up when being
    * touched. This API uses a promise to return the result.
    *
    * @permission ohos.permission.INPUT_DEVICE_CONTROLLER
@@ -811,14 +801,11 @@ declare namespace inputDevice {
    * @param { boolean } enabled - Switch status of the input device. The value **true** indicates that the input device
    *     is enabled, and the value **false** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API
-   * @throws { BusinessError } 202 - Permission verification failed.
-   *     A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Input parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 3900001 - The specified device does not exist.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @systemapi
@@ -835,7 +822,7 @@ declare namespace inputDevice {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the function key
    *     is enabled, and the value **false** indicates the opposite.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 3900002 - There is currently no keyboard device connected.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
    * @since 15 dynamic
@@ -871,9 +858,10 @@ declare namespace inputDevice {
    * @param { boolean } enabled - Status of the function key. The value **true** indicates that the function key is
    *     enabled, and the value **false** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 3900002 - There is currently no keyboard device connected.
    * @throws { BusinessError } 3900003 - It is prohibited for non-input applications.
    * @syscap SystemCapability.MultimodalInput.Input.InputDevice
@@ -883,21 +871,18 @@ declare namespace inputDevice {
   function setFunctionKeyEnabled(functionKey: FunctionKey, enabled: boolean): Promise<void>;
 
   /**
-   * Bind input devices to a display group.
-   * Only external USB and Bluetooth mice, touchpads, keyboards, and game controllers are supported.
-   * After binding, the device will be fixed to operate on the display group where the specified display is located.
-   * This API uses a promise to return the result.
+   * Binds an input device to a display group. Only external USB and Bluetooth mice, touchpads, keyboards, and
+   * gamepads are supported. After binding, the input device operates only on the display group where the specified
+   * display resides. This API uses a promise to return the result.
    *
    * @permission ohos.permission.INPUT_DEVICE_CONTROLLER
-   * @param { int } inputDeviceId - ID of the specified input device.
-   *     If the input service restarts or the input device is reconnects, its ID may change.
-   *     The value must be an integer greater than or equal to 0.
-   * @param { int } displayId - ID of the target display.
-   *     The value must be an integer greater than or equal to 0.
+   * @param { int } inputDeviceId - ID of the input device. If the input service restarts or the input device
+   *     reconnects, this ID may change. The value must be an integer greater than or equal to 0.
+   * @param { int } displayId - ID of the target display. The value must be an integer greater than or equal to 0.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   *     The application does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @throws { BusinessError } 3900001 - The specified input device does not exist.
    * @throws { BusinessError } 3900004 - The specified display does not exist.

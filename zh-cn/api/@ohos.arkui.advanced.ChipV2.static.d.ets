@@ -16,6 +16,12 @@
  */
 
 /**
+ * ChipV2是提供丰富样式和交互能力的操作块组件，支持前缀图标、后缀图标、激活状态、关闭按钮等特性，支持Symbol和Image两种图标类型，并提供完善的无障碍访问能力。该组件适用于搜索历史记录、邮件发送列表、标签选择、过滤器、联系人
+ * 展示等场景。
+ *
+ * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
+ * 件层级。借助状态管理（V2），开发者可以更灵活地控制组件的数据和状态，实现更高效的用户界面刷新。
  * @file
  * @kit ArkUI
  */
@@ -1562,7 +1568,7 @@ export declare class ChipV2Options {
 }
 
 /**
- * V2状态管理操作块组件。
+ * 创建ChipV2组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

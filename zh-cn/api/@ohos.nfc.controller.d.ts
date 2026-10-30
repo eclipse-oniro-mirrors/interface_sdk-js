@@ -109,7 +109,7 @@ declare namespace nfcController {
    * @atomicservice [since 12]
    * @since 7 dynamic
    */
-  function on(type: "nfcStateChange", callback: Callback<NfcState>): void;
+  function on(type: 'nfcStateChange', callback: Callback<NfcState>): void;
 
   /**
    * register nfc state changed event.
@@ -129,7 +129,7 @@ declare namespace nfcController {
    * @atomicservice [since 12]
    * @since 7 dynamic
    */
-  function off(type: "nfcStateChange", callback?: Callback<NfcState>): void;
+  function off(type: 'nfcStateChange', callback?: Callback<NfcState>): void;
 
   /**
    * unregister nfc state changed event.

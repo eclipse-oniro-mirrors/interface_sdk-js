@@ -14,7 +14,10 @@
  */
 
 /**
- * @file 3D场景节点类型声明
+ * 本模块提供ArkGraphics 3D中场景资源节点的类型及操作方法。
+ * SceneNode是3D场景的基础构建单元，它允许开发者通过层级结构管理场景中的对象，实现高效的场景组织与交互控制。
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
@@ -182,7 +185,7 @@ export interface Container<T> {
 }
 
 /**
- * 3D场景由树状层次结构的节点组成，其中每个节点都实现了Node接口。继承自SceneResource。
+ * 3D场景由树状层次结构的节点组成，其中每个节点都实现了Node接口。继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Node
@@ -301,7 +304,7 @@ export interface Node extends SceneResource {
 }
 
 /**
- * 几何节点类型，用于承载可渲染的网格数据，并支持可选的形变功能，继承自Node。
+ * 几何节点类型，用于承载可渲染的网格数据，并支持可选的形变功能，继承自[Node]{@link Node}。
  *
  * @extends Node
  * @interface Geometry
@@ -359,10 +362,28 @@ export enum LightType {
    * @since 23 static
    */
   SPOT = 2,
+
+  /**
+   * 点光源类型
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  POINT = 3,
+
+  /**
+   * 矩形面光源类型。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  RECT = 4
 }
 
 /**
- * 光源，继承自Node。
+ * 光源，继承自[Node]{@link Node}。
  *
  * @extends Node
  * @interface Light
@@ -424,7 +445,7 @@ export interface Light extends Node {
 }
 
 /**
- * 聚光灯类型，继承自Light。
+ * 聚光灯类型，继承自[Light]{@link Light}。
  *
  * 聚光灯会朝某个方向发出锥形光，强度随着圆锥角度的衰减由innerAngle和outerAngle两个参数定义。另外与点光源类似，强度也会随着距离光源位置的增加而衰减。
  *
@@ -465,7 +486,7 @@ export interface SpotLight extends Light {
 }
 
 /**
- * 平行光类型，继承自Light。
+ * 平行光类型，继承自[Light]{@link Light}。
  *
  * @extends Light
  * @interface DirectionalLight
@@ -477,7 +498,70 @@ export interface DirectionalLight extends Light {
 }
 
 /**
- * 相机类型，Camera继承自Node。
+ * 点光源类型，继承自[Light]{@link Light}。点光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。
+ * 
+ * 点光源从空间中的单个点向所有方向均匀发射光，强度随着距离光源位置的增加而衰减。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface PointLight extends Light {
+  /**
+   * 点光源影响的最大距离，超过该范围光强为0。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0。若未设置此参数或取值小于等于0。系统根据设置的intensity值计算一个经验值作为range。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  range?: double;
+}
+
+/**
+ * 矩形面光源类型，继承自[Light]{@link Light}。矩形面光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。
+ *
+ * 矩形面光源从矩形面发射光，模拟柔和的区域照明效果，强度随着距离的增加而衰减。矩形面光源功耗较高、性能开销较大，建议优先使用[DirectionalLight]{@link DirectionalLight}等其他光源类型近似想要的渲染效果。
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RectLight extends Light {
+  /**
+   * 矩形面光源的宽度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
+   *
+   * @default 1
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  width?: double;
+
+  /**
+   * 矩形面光源的高度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
+   *
+   * @default 1
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  height?: double;
+
+  /**
+   * 矩形面光源是否从矩形面的两侧发光。true表示矩形面光源两侧发光，false表示矩形面光源单侧发光。默认值为false。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  twoSided?: boolean;
+}
+
+/**
+ * 相机类型，Camera继承自[Node]{@link Node}。
+ *
+ * 场景中可包含多个相机，其中负责将场景渲染到屏幕（Component3D控件）上的相机称为主相机（main camera）。引擎遍历场景中的相机，将第一个enabled属性为true的相机作为主相机。主相机的渲染结果直接呈现给用户，其余相机可用于离屏渲染等用途。
  *
  * @extends Node
  * @interface Camera

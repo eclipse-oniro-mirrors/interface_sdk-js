@@ -189,7 +189,7 @@ declare namespace taskpool {
      * >
      * > - 调用该接口时，请确保处理数据的回调函数已在宿主线程注册。
      *
-     * @param { Object[] } args - 作为已注册回调函数入参的数据，支持的参数类型请参考
+     * @param { Object[] } args - 作为已注册回调函数入参的数据，可传输对象默认转移；支持的参数类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200022 - The function is not called in the TaskPool thread.
@@ -234,7 +234,7 @@ declare namespace taskpool {
      *
      * @param { Object[] | ArrayBuffer[] } cloneList - - 传入数组的类型必须为
      *     [Sendable支持的数据类型](docroot://arkts-utils/arkts-sendable.md#sendable支持的数据类型)或ArrayBuffer。<br>- 所有传入
-     *     **cloneList**的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
+     *     **cloneList**的对象所持有的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
      *     在线程间传输的行为都会变成拷贝传递，即修改传输后的对象不会对原有对象产生任何影响。
      * @throws { BusinessError } 10200029 - An ArrayBuffer cannot be set as both a transfer list and a clone list.
      * @syscap SystemCapability.Utils.Lang
@@ -293,7 +293,7 @@ declare namespace taskpool {
     /**
      * 注册回调函数，任务入队时将调用该函数。需在调用execute前注册，否则会抛异常。
      *
-     * @param { CallbackFunction } [callback] - 需注册的回调函数。
+     * @param { CallbackFunction } callback - 需注册的回调函数。
      * @throws { BusinessError } 10200034 - The executed task does not support the registration of listeners.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -305,7 +305,7 @@ declare namespace taskpool {
     /**
      * 注册回调函数，任务开始执行前将调用该函数。需在调用execute前注册，否则会抛异常。
      *
-     * @param { CallbackFunction } [callback] - 需注册的回调函数。
+     * @param { CallbackFunction } callback - 需注册的回调函数。
      * @throws { BusinessError } 10200034 - The executed task does not support the registration of listeners.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -317,7 +317,7 @@ declare namespace taskpool {
     /**
      * 注册回调函数，任务执行失败时调用该回调函数（周期任务不支持）。需在调用execute前注册，否则会抛异常。
      *
-     * @param { CallbackFunctionWithError } [callback] - 需注册的回调函数。
+     * @param { CallbackFunctionWithError } callback - 需注册的回调函数。
      * @throws { BusinessError } 10200034 - The executed task does not support the registration of listeners.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -329,7 +329,7 @@ declare namespace taskpool {
     /**
      * 注册一个回调函数，并在任务执行成功时调用它（周期任务不支持）。需在调用execute前注册，否则会抛异常。
      *
-     * @param { CallbackFunction } [callback] - 需注册的回调函数。
+     * @param { CallbackFunction } callback - 需注册的回调函数。
      * @throws { BusinessError } 10200034 - The executed task does not support the registration of listeners.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -518,7 +518,7 @@ declare namespace taskpool {
     /**
      * SequenceRunner的构造函数，用于创建一个**SequenceRunner**实例。
      *
-     * @param { Priority } priority - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
+     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -537,7 +537,7 @@ declare namespace taskpool {
      * > - 无法修改串行队列的优先级。
      *
      * @param { string } name - 串行队列的名字。
-     * @param { Priority } priority - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
+     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -810,8 +810,7 @@ declare namespace taskpool {
    *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
    * @param { Object[] } args - 任务执行函数的入参，支持的参数类型请参考
    *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
-   * @returns { Promise<unknown> } [since 9 - 11]
-   * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。 [since 11]
+   * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。
    * @throws { BusinessError } 10200003 - Worker initialization failed. [since 9 - 11]
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
@@ -851,8 +850,7 @@ declare namespace taskpool {
    * @param { Task } task - 需要在任务池中执行的任务。
    * @param { Priority } [priority] - 等待执行的任务的优先级，默认值为
    *     **taskpool.Priority.MEDIUM**。
-   * @returns { Promise<unknown> } [since 9 - 17]
-   * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。 [since 11]
+   * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。
    * @throws { BusinessError } 10200003 - Worker initialization failed. [since 9 - 17]
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
@@ -968,7 +966,7 @@ declare namespace taskpool {
   function executePeriodically(period: number, task: Task, priority?: Priority): void;
 
   /**
-   * 周期执行泛型任务，使用Promise异步回调。
+   * 周期执行泛型任务。
    * executePeriodically任务的类型校验与GenericsTask的构造类型相关联，参数类型和返回值类型需与new GenericsTask时指定的类型保持一致。
    *
    * @param { number } period - 周期时长。单位：ms。period值必须要大于等于0。
@@ -1091,7 +1089,7 @@ declare namespace taskpool {
      *
      * @param { number } runningCapacity - 指定任务执行的最大并发度，该值必须为正整数。如果传入负数，会报错；如果传入非整数，
      *     会向下取整。
-     * @param { ?number } waitingCapacity - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
+     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
      *     会向下取整。默认值为**0**，表示等待任务列表的容量没有限制。如果传入大于0的值，则表示排队策略为丢弃策略，当加入的任务数量
      *     超过该值时，等待列表中处于队头的任务会被丢弃。
      * @syscap SystemCapability.Utils.Lang
@@ -1114,7 +1112,7 @@ declare namespace taskpool {
      * @param { string } name - 异步队列的名字。
      * @param { number } runningCapacity - 指定任务执行的最大并发度，该值必须为正整数。如果传入负数，会报错；如果传入非整数，
      *     会向下取整。
-     * @param { ?number } waitingCapacity - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
+     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
      *     会向下取整。默认值为**0**，表示等待任务列表的容量没有限制。如果传入大于0的值，则表示排队策略为丢弃策略，当加入的任务数量
      *     超过该值时，等待列表中处于队头的任务会被丢弃。
      * @syscap SystemCapability.Utils.Lang
@@ -1144,7 +1142,7 @@ declare namespace taskpool {
      * > - 不支持执行已执行过的任务。
      *
      * @param { Task } task - 需要添加到异步队列中的任务。
-     * @param { ?Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
+     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
      * @returns { Promise<Object> } Promise对象，返回任务执行的结果。
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200025 - dependent task not allowed.

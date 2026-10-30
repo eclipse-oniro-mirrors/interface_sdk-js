@@ -199,7 +199,7 @@ declare namespace inspector {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice [since 12]
-   * @since 10 dynamic
+   * @since 10 dynamiconly
    * @deprecated since 18
    * @useinstead ohos.arkui.UIContext.UIInspector#createComponentObserver
    */

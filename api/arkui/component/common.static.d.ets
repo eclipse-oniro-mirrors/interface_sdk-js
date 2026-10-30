@@ -42,12 +42,13 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, TipsAnchorType, InputEventInterceptAction, GestureShortcut, EdgeLightPosition } from "./enums";
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -4190,6 +4191,161 @@ export declare enum SafeAreaEdge {
     END = 3
 }
 /**
+ * Enumerates alignment positions for safe area inset content along its attachment edge.
+ * The alignment axis is horizontal for the top and bottom edges and vertical for the start and end edges.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SafeAreaInsetAlignment {
+    /**
+     * Aligns content to the beginning of the attachment edge.
+     * For the top and bottom edges, this is the left in a left-to-right layout and the right in a right-to-left layout.
+     * For the start and end edges, this is the top.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    START = 0,
+
+    /**
+     * Centers content along the attachment edge.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    CENTER = 1,
+
+    /**
+     * Aligns content to the end of the attachment edge.
+     * For the top and bottom edges, this is the right in a left-to-right layout and the left in a right-to-left layout.
+     * For the start and end edges, this is the bottom.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    END = 2
+}
+
+/**
+ * Defines custom content and layout settings for one safe area inset edge.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface SafeAreaInsetEdgeConfig {
+    /**
+     * Required builder for the content attached to this edge.
+     * An empty build result clears this edge without affecting other valid edges.
+     * The space reserved on this edge equals the measured content size perpendicular to the edge plus `spacing`.
+     *
+     * Each edge builder must produce one root component, either a built-in or custom component.
+     * Wrap multiple components in a single container. Results of builders with multiple roots are not guaranteed.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    content: CustomBuilder;
+
+    /**
+     * Gap between the inset content and the component content, measured inward from the attachment edge.
+     * Supported units are vp, px, fp, and lpx. The value must be finite and non-negative.
+     * Percentage values and resource values are not supported.
+     * Default value: `0vp`. An omitted or invalid value falls back to `0vp` without clearing valid content.
+     * The gap is added after measuring the content and is not deducted from its measurement space.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    spacing?: LengthMetrics;
+
+    /**
+     * Alignment of the content along the attachment edge.
+     * Default value: `SafeAreaInsetAlignment.CENTER`.
+     * If omitted, `SafeAreaInsetAlignment.CENTER` is used without clearing valid content.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    alignment?: SafeAreaInsetAlignment;
+}
+
+/**
+ * Defines the complete inset configuration for all four edges of a component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface SafeAreaInsetOptions {
+    /**
+     * Configuration of the content attached to the physical top edge.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    top?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the logical end edge: right in a left-to-right layout and left
+     * in a right-to-left layout.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    end?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the physical bottom edge.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    bottom?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * Configuration of the content attached to the logical start edge: left in a left-to-right layout and right
+     * in a right-to-left layout.
+     * Default value: `undefined`, which means no content is attached to this edge.
+     * Omitting this edge or passing `undefined` clears its previous content without affecting other valid edges.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    start?: SafeAreaInsetEdgeConfig;
+}
+/**
  * Describe the types for expanding the safe area in layout.
  *
  * @enum { number }
@@ -7429,6 +7585,57 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     blurSnapshot?: BlurSnapshotOptions;
+    /**
+     * Title bar hover mode.
+     * - STANDARD: The title bar and content are arranged vertically without overlapping.
+     * - STACK: The title bar overlays on top of the content. Developers need to add padding to avoid occlusion.
+     * - SAFE_AREA_PADDING: The title bar is placed in the safe area padding region. The content expands
+     *   into the safe area, and the scroll content is clipped to the safe area.
+     * The default value is **SheetTitleBarHoverMode.STANDARD**.
+     * After {@link ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA} is successfully set via
+     * {@link UIContext.applyDefaultImmersiveStrategy}, the default value is
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * Enum of title bar hover modes.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * Standard mode: The title bar and content are arranged vertically without overlapping.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STANDARD = 0,
+    /**
+     * Stack mode: The title bar overlays on top of the content.
+     * Developers need to add padding at the top of the content to avoid occlusion.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STACK = 1,
+    /**
+     * Safe area padding mode: The title bar is placed in the safe area padding region.
+     * The content expands into the safe area, and the scroll content is clipped to the safe area.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
@@ -11008,6 +11215,26 @@ export declare interface CommonMethod {
      */
     default safeAreaPadding(paddingValue: Padding | LengthMetrics | LocalizedPadding | undefined): this;
     /**
+     * Places custom content at one or more component edges and reserves component-level safe area for it.
+     * Use this attribute for edge toolbars, action areas, or placeholders. Each call replaces the complete four-edge
+     * configuration; omitted edges do not retain their previous content.
+     * Content is attached to the inner boundary of the component's ordinary `padding`. On each physical edge of the
+     * same component, the effective safe area is the greater of the declared `safeAreaPadding` and the inset extent,
+     * not their sum. Ancestor and system safe areas retain their existing accumulation rules.
+     * The effective safe area is included when calculating the component's adaptive size perpendicular to the edge.
+     *
+     * @param { SafeAreaInsetOptions } [options] - Complete four-edge configuration. Default value: `undefined`, which
+     *     resets all edges. An empty configuration also resets all edges. An omitted edge or an empty build result
+     *     clears only that edge. Unsupported `spacing` values fall back to `0vp` without clearing valid content.
+     * @returns { this } Current component.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default safeAreaInset(options?: SafeAreaInsetOptions): this;
+    /**
      * Sets the margin of the component.
      * Default value: **0**.
      *
@@ -12670,6 +12897,33 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default shadow(value: ShadowOptions | ShadowStyle | undefined): this;
+    /**
+     * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+     *
+     * This API works with the [shadow]{@link CommonMethod#shadow} attribute. The shadow shape is recalculated
+     * when the component size changes.
+     *
+     * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+     *     When the value type is {@link CircleShape}, {@link EllipseShape},
+     *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+     *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): this;
+    /**
+     * Sets the clip mode for the [shadow]{@link CommonMethod#shadow} when it is not filled. This API takes effect
+     * only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+     *
+     * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowClipMode(mode: ShadowClipMode | undefined): this;
     /**
      * Sets the edge light effect for the component.
      *
@@ -14847,10 +15101,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onDidStopFling(handler: VoidCallback | undefined): this;
     /**
-     * Enable left mouse button press-and-drag scrolling.
+     * Set whether to support scrolling by dragging with the left mouse button pressed.
      *
-     * @param { boolean | undefined } enabled - Enable left mouse button press-and-drag scrolling.
-     *    <br>Default value: false.
+     * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
+     *    pressed.
+     *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
+     *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
+     *    horizontally,false otherwise.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14956,6 +15213,19 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @since 26.0.0 static
      */
     default scrollBarHeight(height: LengthMetrics | undefined): this;
+
+    /**
+     * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
+     * in response to arrow key presses when focused but not in active focus state.
+     *
+     * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
+     *     <br>Default value: true.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
  * The actual offset by which the scrollable scrolls.

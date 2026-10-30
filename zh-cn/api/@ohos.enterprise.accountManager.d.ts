@@ -362,7 +362,7 @@ declare namespace accountManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
-   *     1. The operation is restricted by the OS-account constraint;
+   *     1. The operation is restricted by the OS-account constraint.
    *     2. The required privilege for the operation has not been granted.
    * @throws { BusinessError } 801 - Capability not supported.
    *     Failed to call the API due to limited device capabilities.

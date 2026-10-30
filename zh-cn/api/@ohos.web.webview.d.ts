@@ -26,7 +26,11 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
- * This module provides the capability to manage web modules.
+ * 本模块提供管理Web模块的能力。
+ *
+ * ## 需要权限
+ *
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
  * @namespace webview
  * @syscap SystemCapability.Web.Webview.Core
@@ -1120,6 +1124,34 @@ declare namespace webview {
 
   /**
    * 通过WebStorage可管理Web SQL数据库接口和HTML5 Web存储接口，每个应用中的所有Web组件共享一个WebStorage。
+   *
+   * ## 概述
+   *
+   * WebStorage提供对Web存储数据的管理能力，包括Web SQL数据库和HTML5 Web存储API，主要解决以下问题：
+   * - 跨Web组件的数据存储管理。
+   * - 存储空间配额和使用量的查询。
+   * - 存储数据的清理。
+   *
+   * ### 基本概念
+   *
+   * - **源（Origin）**：Web存储的数据隔离单位，相同源下的页面可以共享存储数据。
+   * - **配额（Quota）**：每个源允许使用的最大存储空间，以字节为单位。
+   * - **使用量（Usage）**：每个源当前已使用的存储空间，以字节为单位。
+   *
+   * ### 关键设计
+   *
+   * WebStorage采用统一管理的设计模式：
+   * 1. 每个应用中的所有Web组件共享一个WebStorage实例。
+   * 2. 通过源（origin）作为索引来区分和管理不同源的存储数据。
+   * 3. 支持同步和异步两种方式访问存储数据。
+   * 4. 支持隐私模式和非隐私模式下的数据分离管理。
+   *
+   * > **说明：**
+   * >
+   * > - 目前调用WebStorage下的方法，都需要先加载Web组件。
+   * >
+   * > - 本Class下的接口在ArkWeb内核升级到M132版本后因内核废弃Web SQL，对Web SQL数据库的管理失效。ArkWeb内核版本参考
+   * > ArkWeb简介[约束与限制](docroot://web/web-component-overview.md#约束与限制)。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
@@ -2805,6 +2837,14 @@ declare namespace webview {
    * ）等。当获取的数据类型与实际存储类型不匹配时（例如对数值类型调用getString），会抛出错误码17100014。从API version 22开始，JsMessageExt还提供了getErrorDescription方法，用
    * 于获取JavaScript执行过程中的异常信息，如果返回值为object类型则统一格式化为描述字符串。
    *
+   * > **说明：**
+   * >
+   * > - 本模块首批接口从API version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+   * >
+   * > - 本Class首批接口从API version 10开始支持。
+   * >
+   * > - 示例效果请以真机运行为准。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -3008,7 +3048,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    IMAGE = 0,
+    IMAGE,
 
     /**
      * CSS类型的资源。
@@ -3016,7 +3056,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    CSS = 1,
+    CSS,
 
     /**
      * 通过<script src="" />标签加载的JavaScript资源。
@@ -3024,7 +3064,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    CLASSIC_JS = 2,
+    CLASSIC_JS,
 
     /**
      * 通过<script src="" type="module" />标签加载的JavaScript资源。
@@ -3032,7 +3072,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    MODULE_JS = 3
+    MODULE_JS
   }
 
   /**
@@ -3435,6 +3475,10 @@ declare namespace webview {
      * JIT编译是一种将程序代码在运行时动态编译为机器码的技术，V8引擎为了提升代码执行性能，会将热点代码编译为机器码。绝大多数浏览器漏洞（如Type Confusion）都是通过操纵JIT优化过程实现的。禁用后不影响网页功能，对于
      * 复杂JS代码性能下降17%左右。建议有条件禁用该特性，对于纯展示类、非计算密集型页面（例如新闻、文档）建议禁用。
      *
+     * 只读：否
+     * 
+     * 可选：是
+     * 
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3446,6 +3490,10 @@ declare namespace webview {
      * WebAssembly（简称WASM）是一种可移植的二进制指令格式，允许C/C++/Rust等语言编写的代码在浏览器中以接近原生性能运行。编译后的机器码在WASM虚拟机中执行，而WASM容易存在内存安全漏洞。建议根据页面类型决
      * 定是否禁用。对于纯展示类、非计算密集型页面（例如新闻、文档）建议禁用；对于依赖视频编解码、复杂加密的网页不建议禁用，禁用后可能影响依赖视频编解码、复杂加密的网页功能。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3457,6 +3505,10 @@ declare namespace webview {
      * WebGL允许JavaScript直接调用GPU驱动进行渲染，攻击者可能利用底层驱动漏洞实现沙箱逃逸或远程代码执行，同时WebGL也可能被应用于用户指纹识别攻击。禁用后无法进行3D渲染，部分2D画布退回到CPU渲染，可能帧率下
      * 降。金融支付类、即时通讯、政务系统等敏感业务建议禁用。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3468,6 +3520,10 @@ declare namespace webview {
      * 内置PDF解析引擎在解析复杂二进制格式和嵌入式脚本时容易存在漏洞，攻击者可构造特殊PDF文件利用字体解析或内存破坏漏洞控制应用主进程。禁用后无法在ArkWeb中加载PDF。非文档办公类App建议禁用，引导用户使用外部应用打开
      * PDF。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3479,6 +3535,10 @@ declare namespace webview {
      * MathML是内核中一个相对陈旧的渲染模块，往往缺乏足够的自动化审计和模糊测试，容易成为侧信道攻击或属性注入跨站脚本攻击（Cross-Site Scripting，XSS）的跳板。建议禁用，禁用后`<math>`标签内容将无法
      * 正确解析展示，可能影响极少数未进行JS适配的科学网站公式排版。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3490,6 +3550,10 @@ declare namespace webview {
      * Service Worker具有持久化控制权，可在Web页面后台常驻并拦截网络请求。若网页存在XSS漏洞，攻击者可利用其安装恶意Service Worker实施中间人攻击。禁用后失去离线访问功能、Web消息推送无法使用、失去预
      * 加载能力。银行、证券等对会话新鲜度要求极高的行业建议禁用。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3500,6 +3564,10 @@ declare namespace webview {
      * 
      * WebRTC开启时可能导致恶意流量绕过代理通道，暴露用户的真实物理IP地址，造成隐私泄露。禁用后强制所有流量走TCP代理会增加延迟，视频通话、实时对讲等功能可能无法建立连接。匿名社交、出海业务、强制代理等场景建议禁用。
      *
+     * 只读：否
+     * 
+     * 可选：是
+
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -3980,7 +4048,13 @@ declare namespace webview {
     /**
      * 调整当前网页的缩放比例，[zoomAccess]{@link WebAttribute#zoomAccess}需为true。
      *
-     * @param { number } factor - 基于当前网页所需调整的相对缩放比例，入参要求大于0，当入参为1时为默认加载网页的缩放比例，入参小于1为缩小，入参大于1为放大。
+     * > **说明：**
+     * >
+     * > 入参超出取值范围时，本次调用不生效，网页缩放比例保持不变。
+     * >
+     * > 当网页缩放比例已达到最大值或最小值时，继续同向缩放的调用同样不生效。
+     *
+     * @param { number } factor - 缩放倍数，与当前网页缩放比例相乘得到新的缩放比例。入参为1时缩放比例保持不变，入参小于1为缩小，入参大于1为放大。
      *     <br>取值范围：(0，100]。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
@@ -4618,6 +4692,10 @@ declare namespace webview {
 
     /**
      * 在指定时间内将页面滚动指定的偏移量。
+     *
+     * > **说明：**
+     * >
+     * > 嵌套滚动场景中，调用scrollBy不会触发父组件的嵌套滚动。
      *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。
      *     <br>单位：vp。
@@ -5917,6 +5995,46 @@ declare namespace webview {
     getSubframeErrorPageEnabled(): boolean;
 
     /**
+     * 设置是否启用错误页面的自动重载。
+     *
+     * 启用后，Web组件会在出现网络错误时自动重试加载，
+     * 使用重试退避序列：1s → 5s → 30s → 1min → 5min → 10min → 30min。
+     * 最多重试7次后停止。
+     *
+     * > **说明**
+     * >
+     * > - 只有网络错误才会触发自动重新加载。不包括以下内容：
+     * > 证书错误、SSL（安全套接字层）协议错误、身份验证错误、
+     * > POST请求、非HTTP(S)协议和客户端拦截的错误。
+     * > - 自动重新加载不会影响{@link onOverrideErrorPage}回调。
+     * > - 当触发自动重新加载时，{@link onErrorReceive}回调将被
+     * > 每次重试都会重新调用。
+     *
+     * @param { boolean } enable - 是否启用自动重载。值**true**启用它，
+     *     和**false**禁用它。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    enableAutoReload(enable: boolean): void;
+
+    /**
+     * 获取是否启用错误页面的自动重载。
+     *
+     * @returns { boolean } 是否使能自动重新加载。如果启用，则返回**true**，否则返回**false**。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isAutoReloadEnabled(): boolean;
+
+    /**
      * 根据指定的内存压力等级，主动清理Web组件占用的缓存。
      *
      * @param { PressureLevel } level - 需要清理内存的内存等级。
@@ -5964,6 +6082,13 @@ declare namespace webview {
 
     /**
      * 将页面滚动指定的偏移量，返回值表示此次滚动是否执行成功。
+     *
+     * > **说明：**
+     * >
+     * > - 返回值场景：Web页面处于触摸中状态时，返回false，否则返回true。
+     * > - 同层渲染场景中，Web的同层渲染区域处于触摸中状态时，返回值为true。
+     * > - 嵌套滚动场景中，调用scrollByWithResult不会触发父组件的嵌套滚动。
+     * > - 此接口不保证滑动帧率性能。
      *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。 
      *     <br>单位：vp。
@@ -6312,6 +6437,51 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     executeAIPageCommand(command: string): Promise<string>;
+
+    /**
+     * 设置当前网页的页面缩放倍率。页面缩放会同时缩放文字和图片，并触发页面重新布局以适应Web组件宽度。
+     *
+     * > **说明：**
+     * >
+     * > - 页面缩放倍率按网页的主机名（Host）管理。在同一浏览数据上下文中，设置成功后，已打开的同Host Web组件会同步缩放，后续打开的同Host网页也会使用已保存的倍率；不同Host互不影响。当前Web组件导航至其他Host时，使用目标Host的页面缩放倍率，而非继续沿用原Host的倍率。
+     * >
+     * > - 如需让不同Host的网页使用相同倍率，可在网页开始加载时通过[onPageBegin]{@link WebAttribute#onPageBegin}针对当前Web组件再次调用本接口；原Host的倍率不会自动应用到目标Host。
+     * >
+     * > - [zoomControlAccess]{@link WebAttribute#zoomControlAccess}是Web组件的用户缩放开关：设置为**true**时，用户可通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整页面缩放倍率；设置为**false**时，上述用户操作无效。该开关不限制本接口的程序化设置。
+     * >
+     * > - 需要按指定倍率调整页面布局时，建议使用本接口；{@link zoom}、{@link zoomIn}、{@link zoomOut}适用于视觉缩放，[textZoomRatio]{@link WebAttribute#textZoomRatio}适用于文字缩放，三者相互独立。
+     * >
+     * > - 本接口需在Controller关联Web组件后调用，无需等待网页加载完成。若浏览器实例尚未创建，设置的倍率会在缩放控制器可用后应用。
+     *
+     * @param { number } zoomFactor - 要设置的页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+     *     <br>取值范围：[0.25, 5]。
+     *     <br>超出该范围的值会被裁剪到边界值。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setZoomFactor(zoomFactor: number): void;
+
+    /**
+     * 获取当前网页的页面缩放倍率。
+     *
+     * > **说明：**
+     * >
+     * > - 本接口返回当前Web组件实际生效的页面缩放倍率。该倍率可能由本Controller通过{@link setZoomFactor}设置，也可能在[zoomControlAccess]{@link WebAttribute#zoomControlAccess}开启时由用户通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整，还可能受其他同Host Web组件的缩放操作影响，因此不一定等于本Controller上次设置的值。
+     * >
+     * > - 浏览器实例尚未创建时，**getZoomFactor**返回默认值**1.0**，不会返回尚待应用的设置值。
+     *
+     * @returns { number } 当前页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+     *     <br>取值范围：[0.25, 5.0]，默认值为**1**。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getZoomFactor(): number;
   }
 
   /**
@@ -8087,7 +8257,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    ENTER_BACKGROUND = 1,
+    ENTER_BACKGROUND,
 
     /**
      * 系统自动清理。
@@ -8095,7 +8265,7 @@ declare namespace webview {
      * @syscap SystemCapability.Web.Webview.Core
      * @since 12 dynamic
      */
-    AUTO_CLEANUP = 2
+    AUTO_CLEANUP
   }
 
   /**
@@ -8570,6 +8740,16 @@ declare namespace webview {
    * AdsBlockManager的核心机制基于域名后缀匹配的AllowedList/DisallowedList双层策略：DisallowedList用于禁用特定网站的广告过滤，而AllowedList具有更高优先级，可在
    * DisallowedList的范围内重新开启部分子域名的广告过滤。广告过滤规则内部解析成功后会被持久化存储，应用重启后无需重复设置；而域名黑白名单不会持久化，应用重启后需重新配置。
    *
+   * > **说明：**
+   * >
+   * > - 本模块首批接口从API version 9开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+   * >
+   * > - 本Class首批接口从API version 12开始支持。
+   * >
+   * > - 示例效果请以真机运行为准。
+   * >
+   * > - 静态方法必须在用户界面（UI）线程上使用。
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice
    * @since 12 dynamic

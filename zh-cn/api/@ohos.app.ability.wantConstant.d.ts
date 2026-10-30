@@ -516,6 +516,24 @@ declare namespace wantConstant {
      */
     EMBEDDED_HALF = 2
   }
+
+  /**
+   * 枚举Want对象的action常量。action指定要执行的操作。
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @stagemodelonly
+   * @since 26.0.0 dynamic&static
+   */
+  export enum Action {
+    /**
+     * 指示启动向指定接收方发送消息界面的操作。
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    ACTION_SEND_TO_DATA = 'ohos.want.action.sendToData'
+  }
 }
 
 export default wantConstant;

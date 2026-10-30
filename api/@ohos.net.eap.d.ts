@@ -26,6 +26,7 @@ import { Callback } from './@ohos.base';
  *
  * @syscap SystemCapability.Communication.NetManager.Eap
  * @since 20 dynamic
+ * @since 26.0.1 static
  */
 declare namespace eap {
   /**
@@ -54,6 +55,7 @@ declare namespace eap {
    * @throws { BusinessError } 33200099 - internal error
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function regCustomEapHandler(netType: int, eapCode: int, eapType: int, callback: Callback<EapData>): void;
 
@@ -80,6 +82,7 @@ declare namespace eap {
    * @throws { BusinessError } 33200099 - internal error
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function unregCustomEapHandler(netType:int, eapCode: int, eapType: int, callback: Callback<EapData>): void;
 
@@ -104,6 +107,7 @@ declare namespace eap {
    * @throws { BusinessError } 33200099 - internal error
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function replyCustomEapData(result: CustomResult, data: EapData): void;
 
@@ -122,6 +126,7 @@ declare namespace eap {
    * @throws { BusinessError } 33200099 - internal error
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function startEthEap(netId: int, profile: EthEapProfile): void;
 
@@ -139,6 +144,7 @@ declare namespace eap {
    * @throws { BusinessError } 33200099 - internal error
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   function logOffEthEap(netId: int): void;
 
@@ -149,6 +155,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   interface EapData {
     /**
@@ -156,6 +163,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     msgId: int;
     /**
@@ -163,6 +171,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     eapBuffer: Uint8Array;
     /**
@@ -170,6 +179,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     bufferLen: int;
   }
@@ -181,6 +191,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   enum CustomResult {
     /**
@@ -188,6 +199,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     RESULT_FAIL = 0,
 
@@ -196,6 +208,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     RESULT_NEXT = 1,
 
@@ -204,6 +217,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     RESULT_FINISH = 2
   }
@@ -213,6 +227,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   enum EapMethod {
     /**
@@ -220,6 +235,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_NONE = 0,
 
@@ -228,6 +244,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_PEAP = 1,
 
@@ -236,6 +253,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_TLS = 2,
   
@@ -244,6 +262,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_TTLS = 3,
 
@@ -252,6 +271,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_PWD = 4,
 
@@ -260,6 +280,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_SIM = 5,
 
@@ -268,6 +289,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_AKA = 6,
 
@@ -276,6 +298,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_AKA_PRIME = 7,
 
@@ -284,6 +307,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     EAP_UNAUTH_TLS = 8
   }
@@ -293,6 +317,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   enum Phase2Method {
     /**
@@ -300,6 +325,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_NONE = 0,
 
@@ -308,6 +334,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_PAP = 1,
 
@@ -316,6 +343,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_MSCHAP = 2,
 
@@ -324,6 +352,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_MSCHAPV2 = 3,
 
@@ -332,6 +361,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_GTC = 4,
 
@@ -340,6 +370,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_SIM = 5,
 
@@ -348,6 +379,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_AKA = 6,
 
@@ -356,6 +388,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     PHASE2_AKA_PRIME = 7
   }
@@ -365,6 +398,7 @@ declare namespace eap {
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
+   * @since 26.0.1 static
    */
   interface EthEapProfile {
     /**
@@ -372,6 +406,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     eapMethod: EapMethod;
 
@@ -380,6 +415,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     phase2Method: Phase2Method;
 
@@ -388,6 +424,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     identity: string;
 
@@ -396,6 +433,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     anonymousIdentity: string;
 
@@ -404,6 +442,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     password: string;
 
@@ -412,6 +451,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     caCertAliases: string;
 
@@ -420,6 +460,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     caPath: string;
 
@@ -428,6 +469,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     clientCertAliases: string;
 
@@ -436,6 +478,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     certEntry: Uint8Array;
 
@@ -444,6 +487,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     certPassword: string;
 
@@ -452,6 +496,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     altSubjectMatch: string;
 
@@ -460,6 +505,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     domainSuffixMatch: string;
 
@@ -468,6 +514,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     realm: string;
 
@@ -476,6 +523,7 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     plmn: string;
 
@@ -484,10 +532,279 @@ declare namespace eap {
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @since 20 dynamic
+     * @since 26.0.1 static
      */
     eapSubId: int;
   }
+  /**
+   * Represents the 802.1X Ethernet EAP configuration, including the EAP profile and feature toggles.
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface EthEapConfig {  
+    /**
+     * EAP profile information.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    profile: EthEapProfile;
 
+    /**
+     * Whether the 802.1X feature is enabled.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    enabled: boolean;
+
+    /**
+     * Whether to automatically initiate authentication when the network cable is connected or on boot.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    autoAuth: boolean;
+
+    /**
+     * Whether the configuration is locked. When locked, modifications are denied except for unlocking.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    locked: boolean;
+  }
+
+  /**
+   * Enumerates the 802.1X EAP authentication states.
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum EthEapState {  
+    /**
+     * Idle: no authentication has been initiated.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_IDLE = 0,
+
+    /**
+     * Authenticating: 802.1X authentication is in progress.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_AUTHENTICATING = 1,
+
+    /**
+     * Authenticated: authentication succeeded.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_AUTHENTICATED = 2,
+
+    /**
+     * Failed: maximum retry count reached.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_FAILED = 3,
+
+    /**
+     * Retrying: waiting before the next retry attempt.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    STATE_RETRYING = 4
+  }
+
+  /**
+   * Represents the 802.1X EAP authentication state information, delivered via the stateChange callback.
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface EthEapStateInfo {  
+    /**
+     * Current authentication state.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    state: EthEapState;
+
+    /**
+     * Current retry count (resets to 0 on success).
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    retryCount: int;
+
+    /**
+     * Supplementary message, such as the failure reason. Empty on success.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    message?: string;
+  }
+
+  /**
+   * Sets the 802.1X EAP configuration for Ethernet. The configuration is persisted and encrypted.
+   *
+   * Any field change triggers one auto-auth cycle unless the feature is disabled or
+   * the authentication is occupied by an enterprise app (then the config is only
+   * persisted; the enterprise app keeps control). The auth result is delivered via
+   * the stateChange callback, not by this API's return.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { EthEapConfig } config - 802.1X EAP configuration to set. Sensitive fields (password, certPassword,
+   *     certEntry) passed as empty string/empty array mean "keep the original value".
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function setEthEapConfig(config: EthEapConfig): void;
+
+  /**
+   * Gets the 802.1X EAP configuration for Ethernet. Sensitive fields (password, certPassword, certEntry) are
+   * always returned empty.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { Promise<EthEapConfig> } Promise used to return EthEapConfig.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getEthEapConfig(): Promise<EthEapConfig>;
+
+  /**
+   * Deletes the persisted 802.1X EAP configuration and stops any ongoing auto-authentication.
+   * Idempotent: resolves successfully even if no configuration has been stored.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function deleteEthEapConfig(): Promise<void>;
+
+  /**
+   * Queries the current 802.1X EAP authentication state information.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @returns { EthEapStateInfo } Current authentication state, retry count and supplementary message.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getEthEapStateInfo(): EthEapStateInfo;
+
+  /**
+   * Subscribes to 802.1X EAP authentication state changes.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { Callback<EthEapStateInfo> } callback - Callback used to return EthEapStateInfo.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onStateChange(callback: Callback<EthEapStateInfo>): void;
+
+  /**
+   * Unsubscribes from 802.1X EAP authentication state changes.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { Callback<EthEapStateInfo> } [callback] - Callback used to return EthEapStateInfo.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offStateChange(callback?: Callback<EthEapStateInfo>): void;
+
+  /**
+   * Enumerates the manual connect actions for the 802.1X EAP authentication of Ethernet.
+   *
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  enum EthEapConnectAction {  
+    /**
+     * Re-triggers authentication with the saved configuration.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ACTION_CONNECT = 0,
+    /**
+     * Stops auto authentication and logs off the underlying 802.1X authentication.
+     *
+     * @syscap SystemCapability.Communication.NetManager.Eap
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ACTION_DISCONNECT = 1
+  }
+
+  /**
+   * Manually triggers or disconnects the 802.1X EAP authentication of Ethernet.
+   *
+   * When **action** is **ACTION_CONNECT**, authentication is re-triggered with the saved
+   * configuration (manual counterpart of the auto-auth trigger; fails if no configuration
+   * has been stored). If the authentication is occupied by an enterprise app, this API
+   * does not interrupt it; the result is delivered via the stateChange callback.
+   * When **action** is **ACTION_DISCONNECT**, auto authentication is stopped and the underlying
+   * 802.1X authentication is logged off.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
+   * @param { EthEapConnectAction } action - Manual connect action: re-trigger authentication
+   *     (**ACTION_CONNECT**) or disconnect (**ACTION_DISCONNECT**).
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @syscap SystemCapability.Communication.NetManager.Eap
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function connect(action: EthEapConnectAction): Promise<void>;
 }
 
 export default eap;

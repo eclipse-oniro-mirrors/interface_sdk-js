@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -204,10 +204,8 @@ declare enum SaveDescription {
  * > **说明**
  * >
  * > - 建议icon或text至少传入一个。
- * >
  * > - 如果icon、text都不传入，SaveButton将使用默认样式创建，默认样式：SaveIconStyle默认样式为FULL_FILLED；
- * > SaveDescription默认样式为DOWNLOAD；ButtonType默认样式为Capsule。
- * >
+ * >   SaveDescription默认样式为DOWNLOAD；ButtonType默认样式为Capsule。
  * > - icon、text和buttonType不支持动态修改。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -353,7 +351,7 @@ interface SaveButtonInterface {
 type SaveButtonCallback = (event: ClickEvent, result: SaveButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * 不支持通用属性，除了继承[安全控件通用属性]{@link ./security_component}，还支持以下属性。
+ * 不支持通用属性，除了继承[安全控件通用属性]{@link ./security_component:SecurityComponentMethod}，还支持以下属性。
  * 不支持通用事件，仅支持以下事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -384,9 +382,10 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { Resource } icon - 自定义图标资源信息，仅支持Resource类型的数据源。
-   *     <br>可支持的图片格式：png、jpg、jpeg、bmp、svg、webp、gif和heif等，支持的图片格式范围见[Image]{@link
-   *     ./image}。当资源为非图片资源或不支持的格式时，图标显示为空白。<br/>从API版本26.0.0开始，支持Symbol格式的Resource类型的数据源。<br/>若应用不具备ohos.permission.CUS
-   *     TOMIZE_SAVE_BUTTON权限，则自定义图标设置不生效，保存控件保持默认样式。
+   *     <br>可支持的图片格式：png、jpg、jpeg、bmp、svg、webp、gif和heif等，支持的图片格式范围见
+   *     [Image]{@link ./image:Image}。当资源为非图片资源或不支持的格式时，图标显示为空白。<br/>从API版本26.0.0开始，
+   *     支持Symbol格式的Resource类型的数据源。<br/>若应用不具备ohos.permission.CUSTOMIZE_SAVE_BUTTON权限，
+   *     则自定义图标设置不生效，保存控件保持默认样式。
    * @returns { SaveButtonAttribute } 返回保存控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -411,6 +410,11 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
 
   /**
    * 设置保存控件的图标尺寸。
+   *
+   * > **说明**
+   * >
+   * > 在API版本10时，开发者可通过安全控件通用属性[iconSize]{@link SecurityComponentMethod#iconSize(value: Dimension)}设置图标尺寸，此时size类型仅支持Dimension。<br/>
+   * > 从API版本20开始，开发者可以通过本接口设置图标尺寸，size类型增加支持SizeOptions。
    *
    * @param { Dimension | SizeOptions } size - 图标尺寸，支持像素单位（vp、px等）。
    *     <br>不支持设置百分比字符串。若设置Dimension类型入参的百分比字符串，则图标尺寸显示为默认值；
@@ -514,9 +518,9 @@ declare class SaveButtonAttribute extends SecurityComponentMethod<SaveButtonAttr
    *
    * @permission ohos.permission.CUSTOMIZE_SAVE_BUTTON
    * @param { number | FontWeight | string | Resource } fontWeight - 设置保存控件Symbol图标粗细。
-   *     <br>支持number类型：取值范围为[100, 900]，取值间隔为100，数值越大字体越粗。<br/>支持string类型：可传入number类型的数字字符串（如"400"），或[FontWeight]{@link
-   *     FontWeight}的枚举值的小写字符串（如"normal"）。<br/>默认值：FontWeight.Normal（对应数值400）。<br/>若应用不具备ohos.permission.CUSTOMIZE_SAVE_
-   *     BUTTON权限，则该设置不生效。
+   *     <br>支持number类型：取值范围为[100, 900]，取值间隔为100，数值越大字体越粗。<br/>支持string类型：
+   *     可传入number类型的数字字符串（如"400"），或[FontWeight]{@link FontWeight}的枚举值的小写字符串（如"normal"）。
+   *     <br/>默认值：FontWeight.Normal（对应数值400）。<br/>若应用不具备ohos.permission.CUSTOMIZE_SAVE_BUTTON权限，则该设置不生效。
    * @returns { SaveButtonAttribute } 返回保存控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

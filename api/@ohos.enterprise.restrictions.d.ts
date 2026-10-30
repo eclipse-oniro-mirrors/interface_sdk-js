@@ -611,7 +611,25 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SYSTEM_ROLLBACK = 51
+    SYSTEM_ROLLBACK = 51,
+ 
+    /**
+     * Built-in optical drive burning capability.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SATA_ODD_BURN = 52,
+
+    /**
+     * Super privacy mode. Once disabled, the super privacy mode cannot be enabled.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    SUPER_PRIVACY = 53
   }
 
   /**
@@ -755,7 +773,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.0
      */
-    OPEN_FILE_BOOST = 10
+    OPEN_FILE_BOOST = 10,
+
+    /**
+     * Free window mode is an interaction method that supports users in performing multitasking on mobile devices.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FREE_WINDOW = 14
   }
 
   /**

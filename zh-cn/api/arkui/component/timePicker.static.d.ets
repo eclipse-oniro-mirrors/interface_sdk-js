@@ -90,7 +90,7 @@ export declare interface TimePickerResult {
 export declare enum TimePickerFormat {
 
   /**
-     * Hour and minute.
+     * 按照小时和分钟进行显示。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -98,7 +98,7 @@ export declare enum TimePickerFormat {
   HOUR_MINUTE = 0,
 
   /**
-     * Hour and minute and second
+     * 按照小时、分钟和秒进行显示。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

@@ -14,7 +14,7 @@
 */
  
 /**
- * @file
+ * @file Media
  * @kit MediaKit
  */
 
@@ -360,10 +360,12 @@ declare namespace media {
   }
 
   /**
-   * Create an ad playback controller associated with the player instance.
+   * Creates an ad playback controller associated with a player instance. This API uses a promise to return the result.
    *
-   * @param { AVPlayer } player - Created player instance.
-   * @returns { Promise<AVAdsController | undefined> } If success, an Controller is returned. Otherwise returns null.
+   * @param { AVPlayer } player - Player instance created.
+   * @returns { Promise<AVAdsController | undefined> } Promise used to return the result.
+   *     An **AVAdsController** instance is returned if the operation is successful;
+   *     **undefined** is returned otherwise.
    * @throws { BusinessError } 5400108 - The player object corresponding to player does not exist or is invalid.
    * @syscap SystemCapability.Multimedia.Media.AVPlayer
    * @stagemodelonly
@@ -372,10 +374,10 @@ declare namespace media {
   function createAVAdsController(player: AVPlayer): Promise<AVAdsController | undefined>;
 
   /**
-   * Describes the callback function for the ad media resource loading error event.
+   * Registers a callback for the ad media resource loading failure event.
    *
-   * @param { string } adsId - ID of the advertisement resource that fails to be loaded.
-   * @param { BusinessError } reason - Indicates the reason of the loading failure.
+   * @param { string } adsId - ID of the ad resource that fails to be loaded.
+   * @param { BusinessError } reason - Cause of the loading failure.
    * @syscap SystemCapability.Multimedia.Media.AVPlayer
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -383,11 +385,11 @@ declare namespace media {
   type OnAdsEventLoadingErrorHandle = (adsId: string, reason: BusinessError) => void;
 
   /**
-   * Describes the callback function of the ad content playback start event.
+   * Registers a callback invoked when the ad starts to play.
    *
    * @param { string } adsId - ID of the ad resource that is being played.
-   * @param { int } duration - Playing duration of the advertisement, in milliseconds.
-   *     <br>The value should be an integer.
+   * @param { int } duration - Playback duration of an ad, in milliseconds.
+   *     <br>The value must be an integer.
    * @syscap SystemCapability.Multimedia.Media.AVPlayer
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -395,7 +397,10 @@ declare namespace media {
   type OnAdsEventAdsStartedHandle = (adsId: string, duration: int) => void;
 
   /**
-   * Definition of the Ad Content Control Interface
+   * Provides APIs for controlling ad content, including managing ad resources in the ad playback controller and
+   * listening for ad events. You can add and remove ad sources, skip the current ad, and disable remaining ads.
+   * This module can be used to insert and manage ad content during video playback.
+   * Use [createAVAdsController()]{@link @ohos.multimedia.media:media.createAVAdsController(player: AVPlayer)} to create an instance.
    *
    * @syscap SystemCapability.Multimedia.Media.AVPlayer
    * @stagemodelonly
@@ -403,13 +408,18 @@ declare namespace media {
    */
   interface AVAdsController {  
     /**
-     * Add an advertisement film source to the advertisement controller,
-     * The insertion time (relative to the playback progress of the main media asset) can be specified.
+     * Adds an ad media source to the ad controller and specifies the position where the ad is inserted during the
+     * playback of the main media resource. For example, you can insert an ad before the main content is played in
+     * the video player or during the playback. If multiple ads are inserted at the same position, they are played
+     * in the sequence in which they are added. This API uses a promise to return the result.
      *
-     * @param { MediaSource } src - Video source to be inserted into the main content for playback.
-     * @param { int } start - Progress value of inserting data to the main media asset.
-     *     <br>Unit: milliseconds. The value should be an integer.
-     * @returns { Promise<string> } Returns the ID of the added media source in the ad controller.
+     * @param { MediaSource } src - Media source of the ad to be inserted into the main content.
+     * @param { int } start - Position where the ad is inserted during the playback of the main media resources,
+     *     which is calculated from the start of the main media resource playback.
+     *     <br>The unit is milliseconds.<br>The value must be a non-negative integer and cannot exceed the total
+     *     duration of the main media resource. Otherwise, error code 5400108 will be triggered.
+     * @returns { Promise<string> } Promise used to return the ID of the media source added to the ad controller.
+     *     The **removeAdsMediaSource** API can remove the corresponding ad source based on this ID.
      * @throws { BusinessError } 5400108 - Insert a media asset whose start value exceeds the value of the main content.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
@@ -418,9 +428,11 @@ declare namespace media {
     addAdsMediaSource(src: MediaSource, start: int): Promise<string>;
 
     /**
-     * Remove the ad source specified in the AdsController.
+     * Removes the specified ad media source from the ad controller. If the ad is being played, it will be removed
+     * after the playback is complete. For example, you can call this method to remove an ad when its content expires
+     * or the user has purchased the ad-free option.
      *
-     * @param { string } id - UUID value of the MediaSource.
+     * @param { string } id - ID of the ad media source, which is returned by the **addAdsMediaSource** API.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the AdsController.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
@@ -429,7 +441,10 @@ declare namespace media {
     removeAdsMediaSource(id: string): void;
 
     /**
-     * Skip the ad content that is being played.
+     * Skips the ad that is being played. After the ad is skipped, the playback of the main content resumes
+     * immediately, and the **onAdsListenerAdsSkipped** callback is triggered. For example, when a user taps
+     * the ad skip button on the player, this API can be called to skip the current ad and continue playing the
+     * main content.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
@@ -438,7 +453,9 @@ declare namespace media {
     skipCurrentAdsMediaSource(): void;
 
     /**
-     * Disable playback of the remaining broadcast content in the current session
+     * Disables the playback of remaining ad content in the current session. Subsequent ads that have not been played
+     * will not be played. For example, when a user has purchased the ad-free option or ads should not be displayed
+     * according to the content review mechanism, this API can be called to disable all subsequent ads.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
@@ -447,7 +464,8 @@ declare namespace media {
     disableAllAdsMediaSource(): void;
 
     /**
-     * Release the AVAdsController object.
+     * Releases the **AVAdsController** object. After the release, the registered callback will not be triggered.
+     * You need to call this method to release the ad controller before releasing the AVPlayer.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
@@ -456,12 +474,11 @@ declare namespace media {
     release(): void;
 
     /**
-     * Registers the event processing function when the ad content fails to be loaded.
+     * Registers a callback for handling ad content loading failures.
      *
-     * @param { OnAdsEventLoadingErrorHandle } callback - This function is used to process ad content loading failures.
-     *     This function needs to be implemented by the application.
-     *     <br>The first parameter is used to transfer the advertisement ID, and the second parameter is used to
-     *     transfer the failure cause.
+     * @param { OnAdsEventLoadingErrorHandle } callback - Callback for handling ad content loading failures,
+     *     which is implemented by the user.<br>The first parameter is used to pass the ad ID,
+     *     and the second parameter is used to pass the failure cause.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -469,12 +486,12 @@ declare namespace media {
     onAdsEventListenerLoadingError(callback: OnAdsEventLoadingErrorHandle): void;
 
     /**
-     * Registers the processing function for the event triggered when a new ad content is played.
+     * Registers a callback triggered when a new ad is played.
      *
-     * @param { OnAdsEventAdsStartedHandle } callback - Processing function when the ad content starts to be played.
-     *     The logic for switching the playback page is commonly used.
-     *     <br>The first parameter indicates the ID of the advertisement that is being played, and the second parameter
-     *     indicates the duration of the advertisement.
+     * @param { OnAdsEventAdsStartedHandle } callback - Callback triggered when the ad starts playing.
+     *     It is usually used when the main content playback screen is switched to the ad playback screen.
+     *     <br>The first parameter indicates the ID of the ad being played, and the second parameter indicates
+     *     the ad duration, in milliseconds
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -482,10 +499,10 @@ declare namespace media {
     onAdsListenerAdsStarted(callback: OnAdsEventAdsStartedHandle): void;
 
     /**
-     * Registers the processing function of the event triggered when advertisement is skipped.
+     * Registers a callback triggered when an ad is skipped.
      *
-     * @param { Callback<string> } callback - Processing function for the advertisement to be jumped out of date. The
-     *     parameter is passed as the ID of the skipped advertisement.
+     * @param { Callback<string> } callback - Callback for ad skipping. It is usually used to resume the playback of
+     *     the main content. The parameter is the ID of the ad that is skipped.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -493,10 +510,11 @@ declare namespace media {
     onAdsListenerAdsSkipped(callback: Callback<string>): void;
 
     /**
-     * Registers the processing function of the event triggered by the completion of ad content playing.
+     * Registers a callback triggered when the ad content playback is complete.
      *
-     * @param { Callback<string> } callback - Processing function of the ad event, which contains the ID of the ad that
-     *     is played.
+     * @param { Callback<string> } callback - Callback invoked when the ad playback is complete.
+     *     It is usually used to resume the playback of the main content. The parameter is the ID of
+     *     the ad that has been played.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -504,11 +522,11 @@ declare namespace media {
     onAdsListenerAdsCompleted(callback: Callback<string>): void;
 
     /**
-     * Unregisters the event processing function when the ad content fails to be loaded.
+     * Unregisters the callback for handling ad content loading failures.
      *
-     * @param { OnAdsEventLoadingErrorHandle } [callback] - Ad content loading failure processing function.
-     *     <br>Default value: If this parameter is not specified, all processing functions of the event are
-     *     deregistered.
+     * @param { OnAdsEventLoadingErrorHandle } [callback] - Callback for handling ad content loading failures.
+     *     <br>If this parameter is specified, only the specified callback is unregistered.
+     *     If this parameter is not specified, all callbacks for the event are unregistered by default.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -516,12 +534,12 @@ declare namespace media {
     offAdsEventListenerLoadingError(callback?: OnAdsEventLoadingErrorHandle): void;
 
     /**
-     * Unregisters the processing function for the event triggered when a new ad content is played.
+     * Unregisters the callback triggered when a new ad is played.
      *
-     * @param { OnAdsEventAdsStartedHandle } [callback] - Processing function when the ad content starts to be played.
-     *     It is usually used to switch the logic of the playback page.
-     *     <br>Default value: If this parameter is not specified, all processing functions of the event are
-     *     deregistered.
+     * @param { OnAdsEventAdsStartedHandle } [callback] - Callback triggered when the ad starts playing.
+     *     It is usually used when the main content playback screen is switched to the ad playback screen.
+     *     <br>If this parameter is specified, only the specified callback is unregistered.
+     *     If this parameter is not specified, all callbacks for the event are unregistered by default.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -529,11 +547,11 @@ declare namespace media {
     offAdsListenerAdsStarted(callback?: OnAdsEventAdsStartedHandle): void;
 
     /**
-     * Unregisters the processing function of the event triggered when advertisement is skipped.
+     * Unregisters the callback triggered when an ad is skipped.
      *
-     * @param { Callback<string> } [callback] - Advertisement Skipped Processing Function.
-     *     <br>Default value: If this parameter is not specified, all processing functions of the event are
-     *     deregistered.
+     * @param { Callback<string> } [callback] - Callback for ad skipping.<br>If this parameter is specified,
+     *     only the specified callback is unregistered. If this parameter is not specified,
+     *     all callbacks for the event are unregistered by default.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -541,11 +559,11 @@ declare namespace media {
     offAdsListenerAdsSkipped(callback?: Callback<string>): void;
 
     /**
-     * Unregisters the processing function of the event triggered by the completion of ad content playing.
+     * Unregisters the callback triggered when the ad content playback is complete.
      *
-     * @param { Callback<string> } [callback] - Processing function of the advertisement playing completion event.
-     *     <br>Default value: If this parameter is not specified, all processing functions of the event are
-     *     deregistered.
+     * @param { Callback<string> } [callback] - Callback invoked when the ad playback is complete.
+     *     <br>If this parameter is specified, only the specified callback is unregistered.
+     *     If this parameter is not specified, all callbacks for the event are unregistered by default.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -1197,7 +1215,7 @@ declare namespace media {
      * Obtains the cover of the audio album. This API uses an asynchronous callback to return the result.
      *
      * @param { AsyncCallback<image.PixelMap> } callback - Callback used to return the album cover.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1210,7 +1228,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<image.PixelMap | undefined> } callback - Callback used to return the album cover.
      *     to return when fetchAlbumCover completed.
-     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by callback.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by callback.
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform
@@ -1538,7 +1556,7 @@ declare namespace media {
     composer?: string;
 
     /**
-     * Duration of the media asset. This parameter is not supported in AVRecorder settings.
+     * Duration of the media asset, in ms. This parameter is not supported in AVRecorder settings.
      *
      * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
      * @crossplatform [since 12]
@@ -1883,8 +1901,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Relationship between the thumbnail timestamp in and the video frame.
      * @param { OutputSize } outputSize - Output size of the thumbnail. By default, the original image size is used.
      * @returns { Promise<image.PixelMap> } Promise used to return the video thumbnail.
-     * @throws { BusinessError  } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError  } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 20 dynamic
      */
@@ -1899,8 +1917,8 @@ declare namespace media {
      * @param { AVImageQueryOptions } queryMode - Specify how to position the video frame
      * @param { OutputSize } [outputSize] - This field is used to define the output size of frame.
      * @returns { Promise<image.PixelMap | undefined> }  Returns the output image object
-     * @throws { BusinessError } 5400102 Operation not allowed. Returned by promise.
-     * @throws { BusinessError } 5400106 Unsupported format. Returned by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned by promise.
+     * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
      * @syscap SystemCapability.Multimedia.Media.AVImageGenerator
      * @since 23 static
      */
@@ -2654,7 +2672,7 @@ declare namespace media {
     preferredSubtitleLanguages?: Array<string>;
   }
     /**
-   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media}. Your application can proactively obtain 
+   * Describes the state of the [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer}. Your application can proactively obtain 
    * the AVPlayer state through the **state** property or obtain the reported AVPlayer state by subscribing to the 
    * [stateChange]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle)}
    * event. For details about the rules for state transition, see 
@@ -3009,6 +3027,37 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     details: Record<string, Object>;
+  }
+
+  /**
+   * Enumeration definition of executable playback control instructions,
+   * This interface is used by the application to query whether the corresponding playback control operation can be
+   * performed on the media asset after Prepare() is complete.
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVPlayer
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum PlaybackCommand {  
+    /**
+     * Definition of Enumerated Values of the Seek Operation
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_SEEK = 0,
+    /**
+     * Operation value for adjusting the playback rate
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    PLAYBACK_COMMAND_RATE = 1
   }
 
   /**
@@ -3405,10 +3454,10 @@ declare namespace media {
      * @param { int } fd - Resource handle, which is obtained by calling
      *     [resourceManager.getRawFd]{@link @ohos.resourceManager:resourceManager.ResourceManager.getRawFd(path: string, callback: _AsyncCallback<RawFileDescriptor>)}.
      * @param { long } offset - Resource offset, which needs to be entered based on the preset asset information. An
-     *     invalid value causes a failure to parse subtitle assets. The default value is **0**.unit:Byte.
+     *     invalid value causes a failure to parse subtitle assets. The default value is **0**. Unit:Byte.
      * @param { long } length - Resource length, which needs to be entered based on the preset asset information. The
      *     default value is the remaining bytes from the offset in the file. An invalid value causes a failure to parse
-     *     subtitle assets. The default value is **0**.
+     *     subtitle assets. The default value is **0**. Unit:Byte.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -3439,6 +3488,7 @@ declare namespace media {
      * paused state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackInfo> } Promise used to return **PlaybackInfo**.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise. 
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3505,6 +3555,7 @@ declare namespace media {
      * playing, paused, completed, or stopped state. This API uses a promise to return the result.
      *
      * @returns { Promise<PlaybackMetrics> } Promise used to return the playback metrics of the current AVPlayer.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3749,7 +3800,7 @@ declare namespace media {
      * Clears all the items in the player's playlist. Currently playing media will be terminated immediately.
      *
      * @returns { Promise<void> } Promise is used to return the result.
-     * @throws { BusinessError } 5400102 - operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
@@ -3783,6 +3834,24 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getMediaSources(): Array<MediaSource | undefined>;
+
+    /**
+     * Queries whether a specified playback control command can be executed under the current playback source.
+     * The function can be called only after Prepare() is successfully executed.
+     *
+     * @param { PlaybackCommand } command - Enumerated value of the playback control instruction to be queried.
+     *     <br>Value constraint: See Enumeration PlaybackCommand.
+     * @returns { Promise<boolean> } Promise used to return the result.
+     *     The value **true** indicates that the command can be executed.
+     *     The value **false** indicates that the command cannot be executed.
+     * @throws { BusinessError } 5400102 - Operation not allowed.
+     *     If this function is invoked before Prepare(), it is returned.
+     * @syscap SystemCapability.Multimedia.Media.AVPlayer
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    checkSupportPlaybackCommand(command: PlaybackCommand): Promise<boolean>;
 
     /**
      * URL of the media asset. It can be set only when the AVPlayer is in the idle state. 
@@ -4020,7 +4089,7 @@ declare namespace media {
      * **Use scenario**: It is used to render the window for video playback (not involved in audio-only playback 
      * scenarios).
      * 
-     * [Create a surface ID through XComponent]{@link ./@internal/component/ets/xcomponent:XComponentController.getXComponentSurfaceId}.
+     * [Create a surface ID through XComponent]{@link @global:XComponentController.getXComponentSurfaceId}.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
@@ -4351,7 +4420,7 @@ declare namespace media {
      *     requested by the user.<br>For video playback, [SeekMode]{@link @ohos.multimedia.media:media.SeekMode} may
      *     cause the actual position to be different from that requested by the user. The exact position can be obtained
      *     from the **currentTime** property. The time in this callback only means that the requested seek operation is
-     *     complete.
+     *     complete. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4475,7 +4544,7 @@ declare namespace media {
      * > - In the **pause** state, the player reports the timeUpdate event when the buffering ends.
      *
      * @param { 'timeUpdate' } type - Event type, which is **'timeUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the current time.
+     * @param { Callback<int> } callback - Callback used to return the current time. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 11]
@@ -4505,7 +4574,7 @@ declare namespace media {
      * > The **durationUpdate** event is not supported in live streaming scenarios.
      *
      * @param { 'durationUpdate' } type - Event type, which is **'durationUpdate'** in this case.
-     * @param { Callback<int> } callback - Callback used to return the resource duration.
+     * @param { Callback<int> } callback - Callback used to return the resource duration. Unit:millisecond.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -4679,7 +4748,7 @@ declare namespace media {
     off(type: 'availableBitrates', callback?: Callback<Array<int>>): void;
 
     /**
-     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media} errors. This event is used only for error prompt and
+     * Subscribes to [AVPlayer]{@link @ohos.multimedia.media:media.avplayer} errors. This event is used only for error prompt and
      * does not require the user to stop playback control. If the 
      * [AVPlayerState]{@link @ohos.multimedia.media:media.AVPlayerState} is also switched to error, call 
      * [reset()]{@link media.AVPlayer.reset(callback: AsyncCallback<void>)} or 
@@ -6307,6 +6376,44 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     getID(): string;
+
+    /**
+     * Set the audio and video feature filtering items of the MediaSource,
+     * After the user defines the audio and video filtering items of the MediaSource,
+     * When playing or downloading MediaSource data offline,
+     * Preferentially perform a corresponding operation in the filtering feature.
+     * 
+     * @param { TrackSelectionFilter } filter - Specifies the audio and video features of the pre-downloaded streaming
+     *     media.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setTrackSelectionFilter(filter: TrackSelectionFilter): void;
+
+    /**
+     * Sets the matching character string of the MediaSource during retrieval.
+     * After a resource corresponding to the MediaSource is cached to the local host, the resource is played again,
+     * The CDN path may change. As a result, the matching fails.
+     * You can set the matching character string to solve this problem.
+     * 
+     * @param { string } key - Key value set for the MediaSource to match in the loacl cache.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    setRetrieveKey(key: string): void;
+
+    /**
+     * Obtains the configured audio and video feature filtering values.
+     * 
+     * @returns { TrackSelectionFilter | undefined } If the TrackSelectionFilter object exists,
+     *     the TrackSelectionFilter object is returned. Otherwise, the TrackSelectionFilter object is returned.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getTrackSelectionFilter(): TrackSelectionFilter | undefined;
   }
 
   /**
@@ -6979,7 +7086,7 @@ declare namespace media {
    * 
    * > **NOTE**
    * >
-   * > > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
+   * > To use the camera to record videos, the camera module is required. For details about how to use the APIs 
    * > provided by the camera module, see [Camera Management]{@link @ohos.multimedia.camera:camera}.
    *
    * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6999,7 +7106,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by callback.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -7018,7 +7125,7 @@ declare namespace media {
      * @throws { BusinessError } 201 - Permission denied. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -7038,7 +7145,7 @@ declare namespace media {
      * @param { AsyncCallback<AVRecorderConfig> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined** and **data** is the real-time configuration obtained; otherwise, **err**
      *     is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7055,7 +7162,7 @@ declare namespace media {
      *     If the operation is successful, **err** is **undefined** and **data** is the real-time configuration obtained
      *     ;
      *     otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7070,7 +7177,7 @@ declare namespace media {
      * called.
      *
      * @returns { Promise<AVRecorderConfig> } Promise used to return the real-time configuration.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7083,7 +7190,7 @@ declare namespace media {
      * This API can be called only after prepare() is called.
      *
      * @returns { Promise<AVRecorderConfig | undefined> } Promise used to return the real-time configuration.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7105,7 +7212,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined** and **data** is the surface ID obtained; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7125,7 +7232,7 @@ declare namespace media {
      * @param { AsyncCallback<string | undefined> } callback - Callback used to return the result.
      *     If the operation is successful, **err** is **undefined** and **data** is the surface ID obtained;
      *     otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7145,7 +7252,7 @@ declare namespace media {
      * is called.
      *
      * @returns { Promise<string> } Promise used to return the surface buffer obtained from the surface.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7163,7 +7270,7 @@ declare namespace media {
      * This API can be called only after the prepare() API is called.
      *
      * @returns { Promise<string | undefined> } Promise used to return the result.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7179,7 +7286,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7196,7 +7303,7 @@ declare namespace media {
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7321,7 +7428,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7340,7 +7447,7 @@ declare namespace media {
      * called.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7360,7 +7467,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7377,7 +7484,7 @@ declare namespace media {
      * [resume()]{@link media.AVRecorder.resume()} to resume recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7396,7 +7503,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7412,7 +7519,7 @@ declare namespace media {
      * This API can be called only after the [pause()]{@link media.AVRecorder.pause()} API is called.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7438,7 +7545,7 @@ declare namespace media {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by callback.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7460,7 +7567,7 @@ declare namespace media {
      * [getInputSurface()]{@link media.AVRecorder.getInputSurface()} again for re-recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operate not permit. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -8874,7 +8981,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the setting is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
@@ -8892,7 +8999,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
@@ -9757,6 +9864,16 @@ declare namespace media {
      * @since 23 dynamic&static
      */
     MD_KEY_TRACK_REFERENCE_TYPE = 'track_ref_type',
+
+    /**
+     * Key for obtaining whether the track can be played normally
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    MD_KEY_TRACK_PLAYABLE = 'is_playable'
   }
 
   /**
@@ -10406,11 +10523,22 @@ declare namespace media {
      * Whether to enable video encoding policy to quality stable encoding.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
-     * @systemapi
+     * @systemapi [since 18 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 18 dynamic
      * @since 23 static
      */
-    enableStableQualityMode?: boolean
+    enableStableQualityMode?: boolean;
+
+   /**
+    * Set the quality parameter in StableQualityMode. The value range is [0, 51].
+    * A smaller value indicates a higher output bit rate and better quality.
+    *
+    * @syscap SystemCapability.Multimedia.Media.AVRecorder
+    * @stagemodelonly
+    * @since 26.0.1 dynamic&static
+    */
+    sqrFactor?: int;
  
     /**
      * Indicates whether enable B Frame. Default is disabled.
@@ -11015,6 +11143,33 @@ declare namespace media {
   }
 
   /**
+   * Scene enumeration definition for automatically pausing screen capture
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum AVScreenCaptureAutoPauseCaptureScene {  
+    /**
+     * No scene is set; screen capture will not be automatically paused in any scenario.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_NONE = 0,
+
+    /**
+     * Scene for screen fold state changes.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SCENE_SCREEN_FOLD_STATE_CHANGE = 1 << 0
+  }
+
+  /**
    * Provides the media AVScreenCaptureStrategy definition.
    *
    * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11069,6 +11224,91 @@ declare namespace media {
      * @since 26.0.0 dynamic&static
      */
     enablePause?: boolean;
+
+    /**
+     * Specifies whether to enable echo detection and echo cancellation when microphone capture is enabled.
+     * Default value: The default value is false, indicating that echo cancellation is disabled.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    enableAEC?: boolean;
+
+    /**
+     * Sets whether to output videos in HDR vivid format.
+     * Default value: The default value is false, indicating that videos in SDR format are output.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    enableHDR?: boolean;
+
+    /**
+     * Sets the set of scenes that automatically pause screen content capture.
+     * When the capture session is running, if any of the scenarios in the scenario set occurs, the system automatically
+     * pauses the collection of screen content. You can use the OH_AVScreenCapture_ResumeScreenCapture() function to
+     * restore the data.
+     * image content acquisition is not automatically paused by default.
+     * Default value: If this parameter is not set.
+     * <br>You can use the OH_AVScreenCapture_ResumeScreenCapture() function to restore data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
+  }
+
+  /**
+   * This API is used to configure a rectangular area. The position of the rectangular region starts from the upper left
+   * corner, and the size is defined as the length and width of the rectangle.
+   * 
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface RectangleRegion {
+    /**
+     * Offset of the rectangle region to the top edge.
+     * Unit: Pixel. The value must be an integer greater than or equal to 0.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * Offset of the rectangle region to the left edge.
+     * Unit: Pixel. The value must be an integer greater than or equal to 0.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * Width of the rectangle region.
+     * Unit: Pixel. The value must be a positive integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    width: int;
+    
+    /**
+     * Height of the rectangle region.
+     * Unit: Pixel. The value must be a positive integer.
+     * 
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    height: int;
   }
 
   /**
@@ -11301,7 +11541,7 @@ declare namespace media {
      * Pause screen capture. This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operation not be permitted. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11314,7 +11554,7 @@ declare namespace media {
      * Resume screen capture. This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400102 - Operation not be permitted. Return by promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11456,6 +11696,25 @@ declare namespace media {
     setContentAutoRotation(enable: boolean): Promise<void>;
 
     /**
+     * Used to specify the actual recording area in screen recording mode.
+     * 
+     * You can configure the area before starting screen recording or update the area during screen recording.
+     *
+     * @param { int } displayId - Specifies the screen ID of the recording area.
+     * <br>The value should be an integer. Value constraint: The value must be an existing screen ID in the current
+     * system.
+     * @param { RectangleRegion } area - Rectangular area definition for recording.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
+     * @throws { BusinessError } 5400108 - The parameter check failed, parameter value out of range.
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setCaptureArea(displayId: int, area: RectangleRegion): Promise<void>;
+
+    /**
      * Subscribes to screen capture state changes. An application can subscribe to only one screen capture state change 
      * event. When the application initiates multiple subscriptions to this event, the last subscription is applied.
      *
@@ -11554,6 +11813,36 @@ declare namespace media {
      * @since 23 static
      */
     offError(callback?: ErrorCallback): void;
+  }
+
+  /**
+   * Defines the HDR format of the target file.
+   *
+   * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum DestHDRMode {  
+    /**
+     * The target file format is SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    SDR = 0,
+    /**
+     * The target file format is HDR vivid only when the source file format is HDR vivid. In other cases, the target
+     * file format is SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    AUTO_HDR_VIVID = 1
   }
 
   /**
@@ -11660,6 +11949,61 @@ declare namespace media {
      * @since 23 static
      */
     enableBFrame?: boolean;
+
+    /**
+     * Whether to enable video encoding policy to quality stable encoding.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    enableStableQualityMode?: boolean;
+
+    /**
+     * Set the quality parameter in StableQualityMode. The value range is [0, 51].
+     * A smaller value indicates a higher output bit rate and better quality.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    sqrFactor?: int;
+
+    /**
+     * Specifies the HDR format of the target file.
+     * Default value: SDR.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    destHDRMode?:DestHDRMode;
+
+    /**
+     * Time point from which the source file is transcoded. The unit is millisecond.
+     * Default value: The default value is the beginning of the source file.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    startTime?: int;
+
+    /**
+     * Specifies the time when the transcoding ends in the source file. The unit is millisecond.
+     * Default value: Default to end of source file.
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVTranscoder
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    endTime?: int;
   }
 
   /**
@@ -11725,7 +12069,7 @@ declare namespace media {
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @throws { BusinessError } 5400106 - Unsupported format. Returned by promise.
-     * @throws { BusinessError } 401 - The parameter check failed. Return by promise. [since 22]
+     * @throws { BusinessError } 401 - The parameter check failed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVTranscoder
      * @atomicservice [since 22]
      * @since 12 dynamic
@@ -12186,9 +12530,9 @@ declare namespace media {
   function createMediaSourceWithDirectory(path: string): Promise< MediaSource | undefined>;
 
   /**
-   * Creating a Streaming Resource Download Task Manager
+   * Creates an offline download task manager instance. This API uses a promise to return the result.
    *
-   * @returns { Promise<AVDownloaderManager> } Promise used to return AVDownloaderManager.
+   * @returns { Promise<AVDownloaderManager> } Promise used to return an offline download task manager instance.
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -12197,6 +12541,14 @@ declare namespace media {
 
   /**
    * Enumerates the states of the download task.
+   * 
+   * @unionmember { 'init' } The download task is being initialized.
+   * @unionmember { 'queued' } The download task is waiting in the queue.
+   * @unionmember { 'running' } The download task is running.
+   * @unionmember { 'completed' } The download task is complete.
+   * @unionmember { 'paused' } The download task is paused.
+   * @unionmember { 'removing' } The download task is being removed.
+   * @unionmember { 'error' } An error occurred in the download task.
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -12204,10 +12556,10 @@ declare namespace media {
   type AVDownloadTaskState = 'init' | 'queued' | 'running' | 'completed' | 'paused' | 'removing' | 'error';
 
   /**
-   * Describes the callback invoked for the AVDownloader state change event.
+   * Registers a callback for the status change event of an offline download task.
    *
-   * @param { string } taskId - ID of the task whose status changes.
-   * @param { AVDownloadTaskState } status - New status of the task switchover.
+   * @param { string } taskId - ID of the offline download task whose status changes.
+   * @param { AVDownloadTaskState } status - New task state.
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -12215,10 +12567,13 @@ declare namespace media {
   type OnAVDownloadTaskStateHandle = (taskId: string, state: AVDownloadTaskState) => void;
 
   /**
-   * Describes the callback invoked for the AVDownloader progress change event.
+   * Registers a callback for the progress change event of an offline download task. This event is triggered when
+   * the download progress changes by more than 1% compared to the last time and the interval since the last triggering
+   * exceeds 500 ms.
    *
-   * @param { string } taskId - ID of the task whose status changes.
-   * @param { double } status - Progress value ranges from 0.0 to 1.0.
+   * @param { string } taskId - ID of an offline download task.
+   * @param { double } status - Download progress.
+   *     <br>Value range: [0.0, 1.0]<br>If the value is **-1**, the resource size is unknown.
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -12226,7 +12581,13 @@ declare namespace media {
   type OnAVDownloadProgressChangeHandle = (taskId: string, progress: double) => void;
 
   /**
-   * Definition of the Offline Download Management Interface
+   * This module provides APIs for managing offline download tasks of media resources, including creating, pausing,
+   * resuming, and removing download tasks, as well as listening for download status and progress change events.
+   * This module is applicable to scenarios where streaming media resources need to be cached offline in an app and
+   * played without network access. It helps users save traffic and improves media playback experience in poor network
+   * connection or offline scenarios.
+   * You can call [createAVDownloaderManager()]{@link @ohos.multimedia.media:media.createAVDownloaderManager()}
+   * to create an instance.
    *
    * @syscap SystemCapability.Multimedia.Media.Core
    * @stagemodelonly
@@ -12234,10 +12595,13 @@ declare namespace media {
    */
   interface AVDownloaderManager {
     /**
-     * Set the network environment for the download. By default, the download is performed only in the Wi-Fi environment.
+     * Sets whether download is allowed on a cellular network. By default, download is allowed only over Wi-Fi.
+     * If download is not allowed on a cellular network but the current network is a cellular network, the download
+     * task will be paused and resumed when Wi-Fi is available.
      *
-     * @param { boolean } value - If is set to true, the download can be performed in any network environment,
-     *     Otherwise, the download is performed only in the free Wi-Fi network environment.
+     * @param { boolean } value - Whether download is allowed on a cellular network.
+     *     <br>- **true**: allowed.
+     *     <br>- **false**: not allowed (default).
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12245,12 +12609,15 @@ declare namespace media {
     allowsCellularAccess(value: boolean): void;
 
     /**
-     * Sets the network timeout interval for HTTP requests. If the timeout interval is exceeded, the download fails.
+     * Sets the network timeout interval for an HTTP request. If the timeout interval is reached,
+     * the download task will fail.
      *
-     * @param { int } timeout - Timeout duration, in ms. If is not set, the default timeout duration is used.
-     *     The value should be an integer.
-     *     <br>**Description**</br>
-     *     <ul><li>If the value is less than 0, there is no timeout duration.</li></ul>.
+     * @param { int } timeout - Timeout interval, in milliseconds.<br>The value must be an integer.
+     *     <br>- If the value is greater than 0, it indicates the timeout interval. The value range is (0, +∞).
+     *     <br>- If the value is less than or equal to 0, there is no timeout limit.
+     *     You are advised to set a proper timeout interval based on the service scenario to prevent tasks from being
+     *     suspended for a long time.
+     *     <br>- If this parameter is not specified, the default timeout interval of 60,000 milliseconds is used.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12258,10 +12625,11 @@ declare namespace media {
     setRequestTimeout(timeout: int): void;
 
     /**
-     * Create a download task based on the media description.
+     * Creates an offline download task based on the media source. By default, download tasks are performed only
+     * over Wi-Fi. To perform download tasks on the cellular network, set **allowsCellularAccess** to **true**.
      *
-     * @param { MediaSource } source - Media description, including at least the resource URL.
-     *     <br>Value constraint:The value cannot be null.
+     * @param { MediaSource } source - Media resource, which must contain at least the resource URL.
+     *     <br>The value cannot be null.
      * @returns { string } ID of the offline download task that is successfully added.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -12270,10 +12638,11 @@ declare namespace media {
     addAVDownloadTask(source: MediaSource): string;
 
     /**
-     * Remove a download task from the offline download manager
+     * Removes an offline download task from the offline download manager. After the task is removed,
+     * the download will stop and the task will be deleted from the manager.
      *
-     * @param { string } [taskId] - Specifies the ID of an offline download task.
-     *     <br>Default value:    If this parameter is not specified, all offline download tasks are cleared..
+     * @param { string } [taskId] - ID of the offline download task to remove.
+     *     <br>By default, if this parameter is not specified, all offline download tasks are removed.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the offline download task manager.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -12282,10 +12651,13 @@ declare namespace media {
     removeDownloadTask(taskId?: string): void;
 
     /**
-     * Suspending the download of a specified task
+     * Pauses a specified offline download task. The downloaded data will be retained. After the task is resumed,
+     * the download can continue from the breakpoint. The task must be in the downloading state. Otherwise, error
+     * code 5400102 will be returned. If no task ID is specified, all offline download tasks are paused.
+     * A paused task can be resumed using **resumeDownloadTask**.
      *
-     * @param { string } [taskId] - ID of the task whose download needs to be suspended.
-     *     Value constraint:If the task ID is not transferred, all download tasks are suspended..
+     * @param { string } [taskId] - ID of the offline download task to pause.
+     *     <br>By default, if this parameter is not specified, all download tasks are paused.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the offline download task manager.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @syscap SystemCapability.Multimedia.Media.Core
@@ -12295,10 +12667,12 @@ declare namespace media {
     pauseDownloadTask(taskId?: string): void;
 
     /**
-     * Resuming Offline Download of a Specified Task
+     * Resumes a specified offline download task from the breakpoint where the task was paused last time.
+     * The task must be in the paused state. Otherwise, error code 5400102 will be returned.
+     * If no task ID is specified, all paused offline download tasks are resumed.
      *
-     * @param { string } [taskId] - Specifies the ID of an offline download task.
-     *     Value constraint:If this parameter is not specified, all suspended offline download tasks are resumed..
+     * @param { string } [taskId] - ID of the offline download task to resume. The task must be in the paused state.
+     *     <br>By default, if this parameter is not specified, all paused offline download tasks are resumed.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the offline download task manager.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @syscap SystemCapability.Multimedia.Media.Core
@@ -12308,9 +12682,10 @@ declare namespace media {
     resumeDownloadTask(taskId?: string): void;
 
     /**
-     * Obtains all offline download tasks in the Task Manager. Ended download tasks are automatically cleared.
+     * Obtains all offline download tasks in the offline download manager.
      *
-     * @returns { Array<string> } If a task exists in the task manager, the task ID array is returned. Otherwise null.
+     * @returns { Array<string> } If tasks exist in the task manager, an array of the task IDs is returned.
+     *     Otherwise, an empty array is returned.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12318,10 +12693,11 @@ declare namespace media {
     getDownloadTasks(): Array<string>;
 
     /**
-     * Obtains the offline download cache directory of a specified task.
+     * Obtains the cache directory of a specified offline download task.
      *
-     * @param { string } taskId - ID of a task whose download cache directory is queried.
-     * @returns { string } Return the accessible path of the offline download task on the disk.
+     * @param { string } taskId - ID of the offline download task whose cache directory is to be queried.
+     *     The value must be the ID of an existing task in the current manager.
+     * @returns { string } Path of the cache directory of the offline download task on the disk.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the manager, an error is returned.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -12330,10 +12706,12 @@ declare namespace media {
     getTaskCacheDirectory(taskId: string): string;
 
     /**
-     * Obtains the status of a specified offline download task. For details, see #AVDownloadTaskState.
+     * Obtains the status of a specified offline download task. For details about the status types,
+     * see #AVDownloadTaskState.
      *
-     * @param { string } taskId - ID of a task whose status is queried.
-     * @returns { AVDownloadTaskState } Returns the task status of a specified task.
+     * @param { string } taskId - ID of the offline download task whose status is to be queried.
+     *     The value must be the ID of an existing task in the current manager.
+     * @returns { AVDownloadTaskState } Download status of the specified task.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the manager, an error is returned.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -12342,11 +12720,13 @@ declare namespace media {
     getTaskStatus(taskId: string): AVDownloadTaskState;
 
     /**
-     * Obtains the progress of a specified offline download task.
+     * Obtains the download progress of a specified offline download task.
      *
-     * @param { string } taskId - ID of the task for querying the progress.
-     * @returns { double } Returns the approximate ratio of the download progress of a specified task.
-     *     Value range: [0.0-1.0] If the returned value range is -1, the resource size is unknown.
+     * @param { string } taskId - ID of the offline download task whose progress is to be queried.
+     *     The value must be the ID of an existing task in the current manager.
+     * @returns { double } Download progress percentage.
+     *     <br>- Value range: [0.0, 1.0]
+     *     <br>- If the return value is **-1**, the resource size is unknown.
      * @throws { BusinessError } 5400108 - If the specified ID is not in the manager, an error is returned.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -12355,11 +12735,11 @@ declare namespace media {
     getTaskProgress(taskId: string): double;
 
     /**
-     * Registering a Function for Listening on Status Changes of Offline Download Tasks
+     * Registers a listener for the status change event of an offline download task.
      *
-     * @param { OnAVDownloadTaskStateHandle } callback - Prototype of the function invoked by the event.
-     *     The first parameter indicates the ID of the task whose status changes.
-     *     The second parameter indicates the new status of the task switchover.
+     * @param { OnAVDownloadTaskStateHandle } callback - Callback for status changes, which is implemented by the app.
+     *     <br>The first parameter indicates the ID of the task whose status changes, and the second parameter
+     *     indicates the new status of the task
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12367,15 +12747,16 @@ declare namespace media {
     onStatusChange(callback: OnAVDownloadTaskStateHandle): void;
 
     /**
-     * Registers a function to listen to the progress change value of an offline download task.
-     * The progress change of the offline download task exceeds 1% compared with that of the last time.
-     * The event is triggered after the interval exceeds 500 ms.
+     * Registers a listener for the progress change event of an offline download task.
+     * This event is triggered when the download progress changes by more than 1% compared to the last time and the
+     * interval since the last triggering exceeds 500 ms.
      *
-     * @param { OnAVDownloadProgressChangeHandle } callback - Prototype of the function called by the event.
-     *     The first parameter indicates the offline download task ID.
-     *     The second parameter indicates the progress of an offline download task.
-     *     The progress value ranges from 0.0 to 1.0,
-     *     If the value is -1, the size of the resource is unknown.
+     * @param { OnAVDownloadProgressChangeHandle } callback - Callback for progress changes, which is implemented
+     * by the app.
+     * <br>The first parameter indicates the download task ID, and the second parameter indicates the download
+     * progress.
+     * <br>The value can be **-1** or a number within the range of [0.0, 1.0]. The value **-1** indicates that the
+     * resource size is unknown.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12383,12 +12764,11 @@ declare namespace media {
     onProgressChange(callback: OnAVDownloadProgressChangeHandle): void;
 
     /**
-     * Deregisters a specified function's listening on task status change events.
+     * Unregisters the listener for the status change event of an offline download task.
      *
-     * @param { OnAVDownloadTaskStateHandle } [callback] - Prototype of the function invoked by the event.
-     *     The first parameter indicates the ID of the offline download task.
-     *     The second parameter indicates the latest status of the offline download task.
-     *     <br>Default value: If no parameter is set, all listening functions for the event are canceled.
+     * @param { OnAVDownloadTaskStateHandle } [callback] - Callback for status changes, which must be registered
+     *     using **onStatusChange**.<br>By default, if this parameter is not specified, all callbacks for the event
+     *     are unregistered.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12396,14 +12776,11 @@ declare namespace media {
     offStatusChange(callback?: OnAVDownloadTaskStateHandle): void;
 
     /**
-     * Deregisters a specified function's listening on task progress change events.
+     * Unregisters the listener for the progress change event of an offline download task.
      *
-     * @param { OnAVDownloadProgressChangeHandle } [callback] - Prototype of the function called by the event.
-     *     The first parameter indicates the offline download task ID.
-     *     The second parameter indicates the progress of an offline download task.
-     *     The progress value ranges from 0.0 to 1.0,
-     *     If the value is -1, the size of the resource is unknown.
-     *     <br>Default value: If no parameter is set, all listening functions for the event are canceled.
+     * @param { OnAVDownloadProgressChangeHandle } [callback] - Callback for progress changes, which must be registered
+     *     using **onProgressChange**.
+     *     <br>By default, if this parameter is not specified, all callbacks for the event are unregistered.
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -12411,7 +12788,9 @@ declare namespace media {
     offProgressChange(callback?: OnAVDownloadProgressChangeHandle): void;
 
     /**
-     * Release resources used for AVDownloaderManager.
+     * Releases the resources used by the **AVDownloaderManager** instance. After this method is called,
+     * all download tasks will be stopped and removed, and the instance cannot be used to manage download
+     * tasks anymore.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly

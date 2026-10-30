@@ -24,7 +24,8 @@
  * <br>**基础模式介绍：**
  * <br>基础模式下，输入法扩展（InputMethodExtensionAbility）进程无法拉起其他UIAbility或ExtensionAbility。
  * <br>
- * <br>基础模式下，输入法扩展会受到系统管控，不能使用涉及访问或泄露用户个人数据的各种接口，同时无法将数据传递出进程。管控功能包括但不限于：网络、短信、电话、麦克风、定位、相机、蓝牙、壁纸、支付、日历、游戏、扬声器、Wi-Fi、剪切板、多媒体
+ * <br>基础模式下，输入法扩展会受到系统管控，不能使用涉及访问或泄露用户个人数据的各种接口，同时无法将数据传递出进程。
+ * 管控功能包括但不限于：网络、短信、电话、麦克风、定位、相机、蓝牙、壁纸、支付、日历、游戏、扬声器、Wi-Fi、剪贴板、多媒体
  * 、联系人、公共事件、系统账号、健康数据、地图服务、推送服务、融合搜索、共享内存、分布式特性、广告设备标识、振动等。
  * <br>
  * <br>基础模式下，输入法扩展可以使用基础输入功能必要的系统能力，例如，IME Kit、ArkUI、窗口、图形、屏幕管理等。
@@ -42,27 +43,33 @@
  * <br>InputMethodExtensionAbility不支持以下模块的引用。<br>
  * | Kit | 模块 |
  * | -------- | -------- |
- * | Ability Kit |  [@ohos.ability.featureAbility (FeatureAbility模块)]{@link @ohos.ability.featureAbility:featureAbility}</br>
- * [@ohos.ability.particleAbility (ParticleAbility模块)]{@link @ohos.ability.particleAbility:particleAbility} |
- * | Background Tasks Kit |  
- * [@ohos.resourceschedule.backgroundTaskManager (后台任务管理)]{@link @ohos.resourceschedule.backgroundTaskManager:backgroundTaskManager}
- * </br>[@ohos.reminderAgentManager (后台代理提醒)]{@link @ohos.reminderAgentManager:reminderAgentManager}
- * </br> [@ohos.reminderAgent (后台代理提醒)]{@link @ohos.reminderAgent:reminderAgent} |
- * | Basic Services Kit | [@ohos.account.osAccount (系统账号管理)]{@link @ohos.account.osAccount:osAccount}
- * </br>[@ohos.account.distributedAccount (分布式账号管理)]{@link @ohos.account.distributedAccount:distributedAccount}
- * </br>[@ohos.wallpaper (壁纸)]{@link @ohos.wallpaper:wallpaper} |
- * | Connectivity Kit |  [@ohos.bluetooth (蓝牙)]{@link @ohos.bluetooth:bluetooth}
- * </br>[@ohos.bluetoothManager (蓝牙)]{@link @ohos.bluetoothManager:bluetoothManager}</br>[nfctech (标准NFC-Tag Nfc 技术)]{@link ./tag/nfctech}
- * </br>[@ohos.nfc.controller (标准NFC)]{@link @ohos.nfc.controller:nfcController}
- * </br>[@ohos.nfc.cardEmulation (标准NFC-cardEmulation)]{@link @ohos.nfc.cardEmulation:cardEmulation}
- * </br>[@ohos.connectedTag (有源标签)]{@link @ohos.connectedTag:connectedTag}</br>[@ohos.wifiext (WLAN扩展接口)]{@link @ohos.wifiext:wifiext}
- * </br>[@ohos.wifiManager (WLAN)]{@link @ohos.wifiManager:wifiManager}</br>[@ohos.wifiManagerExt (WLAN扩展接口)]{@link @ohos.wifiManagerExt:wifiManagerExt}
- * </br>[tagSession (标准NFC-Tag TagSession)]{@link ./tag/tagSession:TagSession}</br> |
- * | Location Kit | [@ohos.geolocation (位置服务)]{@link @ohos.geolocation:geolocation}
- * </br>[@ohos.geoLocationManager (位置服务)]{@link @ohos.geoLocationManager:geoLocationManager} |
- * | Telephony Kit | [@ohos.telephony.call (拨打电话)]{@link @ohos.telephony.call:call}</br>[@ohos.telephony.data (蜂窝数据)]{@link @ohos.telephony.data:data}
- * </br>[@ohos.telephony.observer (电话服务状态监听)]{@link @ohos.telephony.observer:observer}</br>[@ohos.telephony.radio (网络搜索)]{@link @ohos.telephony.radio:radio}
- * </br>[@ohos.telephony.sms (短信服务)]{@link @ohos.telephony.sms:sms}</br>[@ohos.telephony.sim (SIM卡管理)]{@link @ohos.telephony.sim:sim} |
+ * | Ability Kit |  [@ohos.ability.featureAbility (FeatureAbility模块)](../apis-ability-kit/js-apis-ability-featureAbility.md)
+ * </br>[@ohos.ability.particleAbility (ParticleAbility模块)](../apis-ability-kit/js-apis-ability-particleAbility.md) |
+ * | Background Tasks Kit |  [@ohos.resourceschedule.backgroundTaskManager (后台任务管理)]
+ * (../apis-backgroundtasks-kit/js-apis-resourceschedule-backgroundTaskManager.md)
+ * </br>[@ohos.reminderAgentManager (后台代理提醒)](../apis-backgroundtasks-kit/js-apis-reminderAgentManager.md)
+ * </br> [@ohos.reminderAgent (后台代理提醒)](../apis-backgroundtasks-kit/js-apis-reminderAgent.md) |
+ * | Basic Services Kit | [@ohos.account.osAccount (系统账号管理)](../apis-basic-services-kit/js-apis-osAccount.md)
+ * </br>[@ohos.account.distributedAccount (分布式账号管理)](../apis-basic-services-kit/js-apis-distributed-account.md)
+ * </br>[@ohos.wallpaper (壁纸)](../apis-basic-services-kit/js-apis-wallpaper.md) |
+ * | Connectivity Kit |  [@ohos.bluetooth (蓝牙)](../apis-connectivity-kit/js-apis-bluetooth.md)
+ * </br>[@ohos.bluetoothManager (蓝牙)](../apis-connectivity-kit/js-apis-bluetoothManager.md)
+ * </br>[nfctech (标准NFC-Tag Nfc 技术)](../apis-connectivity-kit/js-apis-nfctech.md)
+ * </br>[@ohos.nfc.controller (标准NFC)](../apis-connectivity-kit/js-apis-nfcController.md)
+ * </br>[@ohos.nfc.cardEmulation (标准NFC-cardEmulation)](../apis-connectivity-kit/js-apis-cardEmulation.md)
+ * </br>[@ohos.connectedTag (有源标签)](../apis-connectivity-kit/js-apis-connectedTag.md)
+ * </br>[@ohos.wifiext (WLAN扩展接口)](../apis-connectivity-kit/js-apis-wifiext.md)
+ * </br>[@ohos.wifiManager (WLAN)](../apis-connectivity-kit/js-apis-wifiManager.md)
+ * </br>[@ohos.wifiManagerExt (WLAN扩展接口)](../apis-connectivity-kit/js-apis-wifiManagerExt.md)
+ * </br>[tagSession (标准NFC-Tag TagSession)](../apis-connectivity-kit/js-apis-tagSession.md)</br> |
+ * | Location Kit | [@ohos.geolocation (位置服务)](../apis-location-kit/js-apis-geolocation.md)
+ * </br>[@ohos.geoLocationManager (位置服务)](../apis-location-kit/js-apis-geoLocationManager.md) |
+ * | Telephony Kit | [@ohos.telephony.call (拨打电话)](../apis-telephony-kit/js-apis-call.md)
+ * </br>[@ohos.telephony.data (蜂窝数据)](../apis-telephony-kit/js-apis-telephony-data.md)
+ * </br>[@ohos.telephony.observer (电话服务状态监听)](../apis-telephony-kit/js-apis-observer.md)
+ * </br>[@ohos.telephony.radio (网络搜索)](../apis-telephony-kit/js-apis-radio.md)
+ * </br>[@ohos.telephony.sms (短信服务)](../apis-telephony-kit/js-apis-sms.md)
+ * </br>[@ohos.telephony.sim (SIM卡管理)](../apis-telephony-kit/js-apis-sim.md) |
  *
  * @file InputMethodExtensionAbility
  * @kit IMEKit

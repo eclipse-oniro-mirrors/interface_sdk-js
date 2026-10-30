@@ -25,6 +25,20 @@
  * [CanvasPattern]{@link CanvasPattern}和
  * [Path2D]{@link Path2D}的矩阵对象，
  * 可以对矩阵进行缩放、旋转和平移等变换。
+ * 
+ * Matrix2D的使用场景包括：
+ *
+ * 1. [CanvasRenderingContext2D]{@link CanvasRenderingContext2D}和[OffscreenCanvasRenderingContext2D]{@link OffscreenCanvasRenderingContext2D}
+ * 中调用[getTransform]{@link CanvasRenderer#getTransform}接口获取画布的图形变换矩阵Matrix2D对象，
+ * 调用[setTransform]{@link CanvasPattern#setTransform}接口对后续绘制内容进行Matrix2D对象对应的图形变换。
+ *
+ * 2. [CanvasPattern]{@link CanvasPattern}中调用[setTransform]{@link CanvasPattern#setTransform}接口对[CanvasPattern]{@link CanvasPattern}对象进行Matrix2D对象对应的图形变换。
+ *
+ * 3. [Path2D]{@link Path2D}中调用[addPath]{@link Path2D#addPath}接口对[Path2D]{@link Path2D}对象进行Matrix2D对象对应的图形变换。
+ * 
+ * > **说明：**
+ * >
+ * > 可使用[px2vp](../arkts-apis-uicontext-uicontext.md#px2vp12)接口进行单位转换。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -159,7 +173,7 @@ declare class Matrix2D {
    *     按无效值处理，NaN和Infinity会导致Matrix2D异常。<br>默认单位：vp
    * @param { number } ry - 旋转点的垂直方向坐标，取值范围无限制。<br>异常值undefined和null
    *     按无效值处理，NaN和Infinity会导致Matrix2D异常。<br>默认单位：vp
-   * @returns { Matrix2D }
+   * @returns { Matrix2D } - 旋转后结果矩阵对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @form [since 9]
@@ -182,7 +196,7 @@ declare class Matrix2D {
    * @param { number } ry - 旋转点的垂直方向坐标，取值范围无限制。<br>默认单位：vp
    *     <br>异常值undefined和null按无效值处理，NaN和Infinity会导致Matrix2D异常。
    *     <br>默认值：0
-   * @returns { Matrix2D }
+   * @returns { Matrix2D } - 旋转后结果矩阵对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -216,7 +230,7 @@ declare class Matrix2D {
    *     按无效值处理，NaN和Infinity会导致Matrix2D异常。<br>默认值：1.0
    * @param { number } sy - 垂直缩放比例系数，取值范围无限制。<br>异常值undefined和null
    *     按无效值处理，NaN和Infinity会导致Matrix2D异常。<br>默认值：1.0
-   * @returns { Matrix2D }
+   * @returns { Matrix2D } - 缩放后结果矩阵对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]

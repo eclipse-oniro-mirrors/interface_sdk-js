@@ -41,6 +41,11 @@ import * as _UIServiceExtensionContext from './application/UIServiceExtensionCon
 import * as _UIServiceProxy from './application/UIServiceProxy';
 import * as _UIServiceHostProxy from './application/UIServiceHostProxy';
 import * as _UIServiceExtensionConnectCallback from './application/UIServiceExtensionConnectCallback';
+import { FunctionInfo as _FunctionInfo } from './application/FunctionInfo';
+import { ToolInfo as _ToolInfo } from './application/ToolInfo';
+import { ToolSummary as _ToolSummary } from './application/ToolInfo';
+import { CliToolEvent as _CliToolEvent } from './application/CliToolEvent';
+import { ToolEventCallback as _ToolEventCallback } from './application/ToolEventCallback';
 /*** endif */
 /*** if arkts static */
 import _UIAbilityContext from './application/UIAbilityContext';
@@ -80,7 +85,7 @@ import _AgentExtensionContext from './application/AgentExtensionContext';
  * 本模块提供Ability Kit中常用公共能力的纯类型定义，包含各类上下文对象、回调接口和数据结构。本模块仅导出类型声明，不包含具体实现逻辑或可执行代码。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
- * @stagemodelonly
+ * @FaAndStageModel [since 11]
  * @crossplatform [since 10]
  * @atomicservice [since 11]
  * @since 9 dynamic
@@ -338,6 +343,7 @@ declare namespace common {
    * 存储基础数据类型的容器。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @FaAndStageModel [since 11]
    * @atomicservice [since 11]
    * @since 9 dynamic
    * @since 23 static
@@ -675,6 +681,60 @@ declare namespace common {
    * @since 24 dynamic&static
    */
   export type AgentExtensionContext = _AgentExtensionContext;
+
+  /**
+   * 用于描述系统命令行工具（CLI）的基本信息。
+   *
+   * @typedef { _ToolInfo }
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  export type ToolInfo = _ToolInfo;
+
+  /**
+   * 用于描述系统命令行工具（CLI）的摘要信息。
+   *
+   * @typedef { _ToolSummary }
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  export type ToolSummary = _ToolSummary;
+
+  /**
+   * 用于描述CLI工具进程运行期间产生的会话事件信息。
+   *
+   * @typedef { _CliToolEvent }
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  export type CliToolEvent = _CliToolEvent;
+
+  /**
+   * 用于接收CLI工具进程运行期间产生的会话事件。
+   *
+   * @typedef { _ToolEventCallback }
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  export type ToolEventCallback = _ToolEventCallback;
+
+  /**
+   * 用于描述Function的基本信息。
+   *
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamiconly
+   */
+  export type FunctionInfo = _FunctionInfo;
 }
 
 export default common;

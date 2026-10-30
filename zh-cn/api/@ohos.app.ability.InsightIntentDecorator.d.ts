@@ -155,7 +155,7 @@ declare interface IntentDecoratorInfo {
 
 /**
  * LinkIntentDecoratorInfo继承自[IntentDecoratorInfo]{@link IntentDecoratorInfo}，用于描述
- * [@InsightIntentLink](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentlink)
+ * [@InsightIntentLink]{@link InsightIntentLink}
  * 装饰器支持的参数，例如应用间跳转需要的uri信息。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -186,7 +186,7 @@ declare interface LinkIntentDecoratorInfo extends IntentDecoratorInfo {
 }
 
 /**
- * [@InsightIntentLink](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentlink)
+ * [@InsightIntentLink]{@link InsightIntentLink}
  * 装饰器的意图参数类别，用于定义意图参数的传递形式。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -218,7 +218,7 @@ declare enum LinkParamCategory {
 
 /**
  * LinkIntentParamMapping是
- * [@InsightIntentLink](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentlink)
+ * [@InsightIntentLink]{@link InsightIntentLink}
  * 装饰器的意图参数和uri信息的映射。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -276,7 +276,7 @@ export declare const InsightIntentLink: ((intentInfo: LinkIntentDecoratorInfo) =
 
 /**
  * PageIntentDecoratorInfo继承自[IntentDecoratorInfo]{@link IntentDecoratorInfo}，用于描述
- * [@InsightIntentPage](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentpage)
+ * [@InsightIntentPage]{@link InsightIntentPage}
  * 装饰器支持的参数，例如目标页面的
  * [NavDestination]{@link ./@internal/component/ets/navigation:NavigationAttribute.navDestination}名称。
  *
@@ -326,6 +326,19 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   navDestinationName?: string;
+
+  /**
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**
@@ -344,7 +357,7 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
 export declare const InsightIntentPage: ((intentInfo: PageIntentDecoratorInfo) => ClassDecorator);
 
 /**
- * [@InsightIntentFunctionMethod](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentfunctionmethod)
+ * [@InsightIntentFunctionMethod]{@link InsightIntentFunctionMethod}
  * 装饰器的参数类型，当前全部属性均继承自[IntentDecoratorInfo]{@link IntentDecoratorInfo}。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -353,6 +366,18 @@ export declare const InsightIntentPage: ((intentInfo: PageIntentDecoratorInfo) =
  * @since 20 dynamiconly
  */
 declare interface FunctionIntentDecoratorInfo extends IntentDecoratorInfo {
+  /**
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**
@@ -385,7 +410,7 @@ export declare const InsightIntentFunction: (() => ClassDecorator);
 
 /**
  * EntryIntentDecoratorInfo继承自[IntentDecoratorInfo]{@link IntentDecoratorInfo}，用于描述
- * [@InsightIntentEntry](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintententry)
+ * [@InsightIntentEntry]{@link InsightIntentEntry}
  * 装饰器支持的参数。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -426,6 +451,19 @@ declare interface EntryIntentDecoratorInfo extends IntentDecoratorInfo {
    * @since 20 dynamic
    */
   executeMode?: insightIntent.ExecuteMode[];
+
+  /**
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  permissions?: string[];
 }
 
 /**
@@ -449,7 +487,7 @@ export declare const InsightIntentEntry: ((intentInfo: EntryIntentDecoratorInfo)
 
 /**
  * FormIntentDecoratorInfo继承自[IntentDecoratorInfo]{@link IntentDecoratorInfo}，用于描述
- * [@InsightIntentForm](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintentform)
+ * [@InsightIntentForm]{@link InsightIntentForm}
  * 装饰器支持的参数。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -487,7 +525,7 @@ export declare const InsightIntentForm: ((intentInfo: FormIntentDecoratorInfo) =
 
 /**
  * 用于描述
- * [@InsightIntentEntity](docroot://reference/apis-ability-kit/js-apis-app-ability-InsightIntentDecorator.md#insightintententity)
+ * [@InsightIntentEntity]{@link InsightIntentEntity}
  * 装饰器支持的参数。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core

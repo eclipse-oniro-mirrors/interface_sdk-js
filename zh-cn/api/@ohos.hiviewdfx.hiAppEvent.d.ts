@@ -395,8 +395,6 @@ declare namespace hiAppEvent {
    * 应用事件打点配置方法，支持配置打点开关和目录存储配额大小。
    *
    * @param { ConfigOption } config - 应用事件打点配置项对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11103001 - Invalid max storage quota value. Possibly caused by incorrectly formatted.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
@@ -542,8 +540,10 @@ declare namespace hiAppEvent {
    * @param { AppEventInfo } info - 应用事件对象。其中的事件名称建议避免与
    *     [Event]{@link hiAppEvent.event}中定义的系统事件名称常量冲突混淆。 [since 11]
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -571,8 +571,10 @@ declare namespace hiAppEvent {
    *
    * @param { AppEventInfo } info - 应用事件对象。其内部定义的事件名称建议避免与[Event]{@link hiAppEvent.event}中定义的系统事件名称常量产生冲突。
    * @param { AsyncCallback<void> } callback - 打点回调函数。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -624,8 +626,6 @@ declare namespace hiAppEvent {
    *     [资源泄漏事件](docroot://dfx/hiappevent-watcher-resourceleak-events.md)（hiAppEvent.event.RESOURCE_OVERLIMIT）。<br>
    *     **注意**：从API version 20开始，支持[资源泄漏事件](docroot://dfx/hiappevent-watcher-resourceleak-events.md)。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11100001 - Function disabled. Possibly caused by the param disable in ConfigOption is
    *     true.
    * @throws { BusinessError } 11101001 - Invalid event domain. Possible causes: 1. Contain invalid characters;
@@ -663,8 +663,10 @@ declare namespace hiAppEvent {
    *     <br>- 参数名为string类型，要求非空，且参数名长度需在1024个字符以内。
    *     <br>- 参数值为ParamType类型，参数值长度需在1024个字符以内。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 15 dynamic
@@ -774,8 +776,6 @@ declare namespace hiAppEvent {
      * 设置每次取出的事件包的数据大小阈值。
      *
      * @param { int } size - 数据大小阈值，单位为byte。取值范围[0, 2^31-1]，超出范围会抛异常。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -790,8 +790,6 @@ declare namespace hiAppEvent {
      * 设置每次取出的事件包的数据条数，优先级高于setSize，和setSize同时调用时仅setRow生效。
      *
      * @param { int } size - 事件条数，单位为条。取值范围(0, 2^31-1]，超出范围会抛异常。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types.
      * @throws { BusinessError } 11104001 - Invalid size value. Possibly caused by the size value is less than or equal
      *     to zero.
      * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1047,8 +1045,6 @@ declare namespace hiAppEvent {
    *
    * @param { Watcher } watcher - 事件观察者。
    * @returns { AppEventPackageHolder } 订阅数据持有者。订阅失败时返回null。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @throws { BusinessError } 11102002 - Invalid filtering event domain. Possible causes: 1. Contain invalid
@@ -1069,8 +1065,6 @@ declare namespace hiAppEvent {
    * 移除事件观察者。
    *
    * @param { Watcher } watcher - 事件观察者。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 11102001 - Invalid watcher name. Possible causes: 1. Contain invalid characters;
    *     <br>2. Length is invalid.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
@@ -1097,8 +1091,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户ID的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @param { string } value - 用户ID的值。长度不超过256个字符，当值为null或空字符串时，则清除用户ID。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1112,8 +1108,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户ID的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @returns { string } 用户ID的值。没有查到返回空字符串。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1127,8 +1125,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户属性的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @param { string } value - 用户属性的值。长度不超过1024个字符，当值为null或空字符串时，则清除用户属性。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1142,8 +1142,10 @@ declare namespace hiAppEvent {
    *
    * @param { string } name - 用户属性的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
    * @returns { string } 用户属性的值。没有查到返回空字符串。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @crossplatform [since 19]
    * @atomicservice [since 11]
@@ -1381,8 +1383,6 @@ declare namespace hiAppEvent {
    *
    * @param { Processor } processor - 上报事件的数据处理者。
    * @returns { long } 所添加上报事件数据处理者的ID，标识唯一数据处理者，可用于移除数据处理者。 添加失败返回-1，添加成功返回大于0的值。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -1412,8 +1412,6 @@ declare namespace hiAppEvent {
    *
    * @param { long } id - 上报事件数据处理者ID。值大于0。由调用[addProcessor]{@link hiAppEvent.addProcessor}或
    *     [addProcessorFromConfig]{@link hiAppEvent.addProcessorFromConfig}接口返回值所得。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 11 dynamic
@@ -1705,6 +1703,20 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     collectMinidump?: boolean;
+
+    /**
+     * 该选项用于配置应用收到崩溃事件回调的时机，是否固定在应用重新启动之后收到事件回调。
+     * true：使能固定在应用重启之后收到事件回调。
+     * false：不使能固定在应用重启之后收到事件回调。
+     * 默认值：false。
+     * 说明：该选项只对onTrigger和onReceive回调生效，应用在同一生命周期内，以最后一次成功调用的使能状态为准。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    publishOnNextLaunch?: boolean;
   }
 
   /**
@@ -1909,14 +1921,247 @@ declare namespace hiAppEvent {
    * @param { EventPolicy } policy - 系统事件配置策略。
    * @returns { Promise<void> } Promise对象，无返回结果。
    *     <br>各个事件的事件配置策略，详细规格见[EventPolicy]{@link hiAppEvent.EventPolicy}类型说明。若配置策略设置有误，会导致接口返回失败。
-   *     <br>- 参数类型设置有误，则返回401通用错误信息；
    *     <br>- 参数规格设置有误，则在hilog日志输出相关错误信息。
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiAppEvent
    * @atomicservice
    * @since 22 dynamic
    * @since 23 static
    */
   function configEventPolicy(policy: EventPolicy): Promise<void>;
+
+  /**
+   * 定义外部日志管理者，用于外部日志管理
+   *
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  class ExternalLogManager {
+  /**
+   * 当外部日志目录容量达到时调用此函数
+   *
+   * @param { ExternalLogContainer } container - 包含所有外部日志文件的容器
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  onCapacityReached(container: ExternalLogContainer): void;
+}
+ 
+/**
+ * 一个外部日志容器，包含所有外部日志文件。
+ *
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+class ExternalLogContainer {
+  /**
+   * 获取所有ExternalLogWrappers的集合
+   *
+   * @returns { Set<ExternalLogWrapper> } 所有ExternalLogWrappers的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getAllLogs(): Set<ExternalLogWrapper>;
+ 
+  /**
+   * 获取所有外部日志文件路径的集合
+   *
+   * @returns { Set<string> } 所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getAllLogFiles(): Set<string>;
+ 
+  /**
+   * 获取给定系统事件的所有外部日志文件路径的集合
+   *
+   * @param { string } event - 给定系统事件的字符串
+   * @returns { Set<string> } 给定系统事件的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesOfSysEvent(event: string): Set<string>;
+ 
+  /**
+   * 获取给定时间之后的所有外部日志文件路径的集合
+   *
+   * @param { long } timePoint - 给定的文件生成时间点（单位：毫秒）
+   * @returns { Set<string> } 指定时间之后的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesGeneratedAfter(timePoint: long): Set<string>;
+ 
+  /**
+   * 获取给定时间之前的所有外部日志文件路径的集合
+   *
+   * @param { long } timePoint - 给定的文件生成时间点（单位：毫秒）
+   * @returns { Set<string> } 给定时间之前的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesGeneratedBefore(timePoint: long): Set<string>;
+ 
+  /**
+   * 获取大小大于给定数量的所有外部日志文件路径的集合
+   *
+   * @param { long } sizeKb - 给定的文件大小
+   * @returns { Set<string> } 大小大于给定数量的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesLargerThan(sizeKb: long): Set<string>;
+ 
+  /**
+   * 获取大小小于给定数量的所有外部日志文件路径的集合
+   *
+   * @param { long } sizeKb - 给定的文件大小
+   * @returns { Set<string> } 大小小于给定数量的所有外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogFilesSmallerThan(sizeKb: long): Set<string>;
+ 
+  /**
+   * 获取所有外部日志文件的个数
+   *
+   * @returns { int } 所有外部日志文件的个数
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getLogNumber(): int;
+ 
+  /**
+   * 获取给定数字的最早生成的外部日志文件路径
+   *
+   * @param { int } num - 给定查询文件的个数
+   * @returns { Set<string> } 符合条件的外部日志文件路径的集合
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getFirstGeneratedLogFiles(num: int): Set<string>;
+}
+ 
+/**
+ * 外部日志的包装器，提供各种信息。
+ *
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+class ExternalLogWrapper {
+  /**
+   * 获取文件路径
+   *
+   * @returns { string } 文件路径
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getFilePath(): string;
+ 
+  /**
+   * 获取文件的生成时间点（毫秒）
+   *
+   * @returns { long } 生成时间
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getGenerationTime(): long;
+ 
+  /**
+   * 以kb为单位获取文件大小
+   *
+   * @returns { long } 文件大小，单位为kb
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getSizeInKb(): long;
+ 
+  /**
+   * 获取文件的系统事件
+   *
+   * @returns { string } 系统事件的字符串形式
+   * @syscap SystemCapability.HiviewDFX.HiAppEvent
+   * @FaAndStageModel
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  getSysEvent(): string;
+}
+ 
+/**
+ * 注册外部日志管理者
+ *
+ * @param { ExternalLogManager } logMngr - 外部日志管理者。
+ * @throws { BusinessError } 11106001 - State error. Possible causes: 1. Log manager already registered;
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+function registerExternalLogManager(logMngr: ExternalLogManager): void;
+ 
+/**
+ * 查询外部日志管理者是否已注册
+ *
+ * @returns { boolean } 如果已经注册，则返回true，否则返回false。
+ * @syscap SystemCapability.HiviewDFX.HiAppEvent
+ * @FaAndStageModel
+ * @atomicservice
+ * @since 26.0.1 dynamic&static
+ */
+function isExternalLogManagerRegistered(): boolean;
 }
 
 export default hiAppEvent;

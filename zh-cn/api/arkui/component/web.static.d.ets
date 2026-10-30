@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * @file
+ * @file Web控制器
  * @kit ArkWeb
  */
 import webview from '../../@ohos.web.webview';
@@ -22,7 +22,7 @@ import image from '../../@ohos.multimedia.image';
 import { CommonMethod, Callback, TouchEvent, MouseEvent, NestedScrollOptions, KeyEvent, HapticFeedbackMode } from './common';
 import { CustomBuilder } from './builder';
 import { Resource } from '../../global/resource';
-import { Position, ResourceStr, VoidCallback } from './units';
+import { Position, ResourceColor, ResourceStr, VoidCallback } from './units';
 import { MenuType, EditMenuOptions, TextDataDetectorConfig } from './textCommon';
 import { CopyOptions, NestedScrollMode } from './enums';
 import { PreviewMenuOptions } from './richEditor';
@@ -1084,6 +1084,54 @@ export declare enum RenderExitReason {
  * @since 23 static
  */
 export type OnContextMenuHideCallback = () => void;
+
+/**
+ * The callback of context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>see the default options parameter.
+ *     <br>Default value: For details.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+/**
+ * Enum type of context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum WebContextMenuItemId {
+    /**
+     * Copy link to highlight menu item.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    MENU_COPY_LINK = 11
+}
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface WebContextMenuOptions {
+    /**
+     * Whether the context menu item is enabled.
+     * Default value: Default value: false.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    enable?: boolean;
+}
 /**
  * Enum type supplied to {@link error} when onSslErrorEventReceive being called.
  *
@@ -2176,6 +2224,34 @@ export declare class WebContextMenuParam {
      * @since 23 static
      */
     getContextMenuMediaType(): ContextMenuDataMediaType;
+
+    /**
+     * Checks whether the currently selected text can be used to generate a Text Fragment link.
+     *
+     * @returns { boolean } Return whether can generate a Text Fragment link.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    shouldOfferLinkToText(): boolean;
+    /**
+     * Returns a Text Fragment link URL that points to the currently highlighted text.
+     *
+     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    getTextFragmentGeneratedLink(): string;
+    /**
+     * Checks whether the current web page has a Text Fragment highlight.
+     *
+     * @returns { boolean } Return whether has a Text Fragment highlight.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    isOverTextFragment(): boolean;
 }
 /**
  * Defines the context menu result, related to {@link WebContextMenuResult} method.
@@ -2279,6 +2355,23 @@ export declare class WebContextMenuResult {
      * @since 24 static
      */
     saveImage(): void;
+
+    /**
+     * Copies a Text Fragment link pointing to the currently highlighted text to the system clipboard.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    copyLinkToTextMenu(): void;
+    /**
+     * Removes all Text Fragment highlights from the current web page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    removeFragments(): void;
 }
 /**
  * Encompassed message information as parameters to {@link onConsole} method.
@@ -2540,6 +2633,24 @@ export declare class WebResourceResponse {
      * @since 23 static
      */
     getResponseIsReady(): boolean;
+    /**
+     * Sets the response data.
+     *
+     * > **NOTE**
+     * >
+     * > - This API supports obtaining HSP resources based on Resource objects,
+     * > which {@link setResponseData} does not support.
+     *
+     * @param { string | int | Resource | ArrayBuffer } data - The response data.
+     *     string type indicates strings in HTML format.
+     *     int type indicates file handle.
+     *     Resource type indicates $rawfile resource or HSP resource.
+     *     ArrayBuffer type indicates binary data.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    setResponseBody(data: string | int | Resource | ArrayBuffer): void;
 }
 /**
  * Defines the Web's request/response header.
@@ -2596,6 +2707,14 @@ export declare class WebResourceError {
      * @since 23 static
      */
     getErrorCode(): int;
+    /**
+      * Gets the custom error code of the Web resource.
+      *
+      * @returns { int } Return the custom error code of the Web resource.
+      * @syscap SystemCapability.Web.Webview.Core
+      * @since 26.0.1 static
+      */
+    getCustomErrorCode(): int;
 }
 /**
  * Defines the js geolocation request.
@@ -4682,6 +4801,258 @@ export declare interface BlankScreenDetectionEventInfo {
  */
 export type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 /**
+ * 枚举白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare enum BlankScreenReason {
+    /**
+     * DNS解析失败。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    DNS_RESOLVE_FAILED = 101,
+    /**
+     * 主文档加载超时。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REQUEST_TIMED_OUT = 102,
+    /**
+     * 连接被拒绝。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_REFUSED = 103,
+    /**
+     * 连接被重置。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CONNECTION_RESET = 104,
+    /**
+     * 发生SSL错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    SSL_ERROR = 105,
+    /**
+     * 发生证书错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CERT_ERROR = 106,
+    /**
+     * 网络已断开。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    INTERNET_DISCONNECTED = 107,
+    /**
+     * 发生重定向循环。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    REDIRECT_LOOP = 108,
+    /**
+     * 发生代理错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    PROXY_ERROR = 109,
+    /**
+     * 发生其他网络错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    OTHER_NETWORK_ERROR = 199,
+    /**
+     * 主文档为空。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MAIN_DOC_EMPTY = 201,
+    /**
+     * 发生HTTP 4xx错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_4XX_ERROR = 202,
+    /**
+     * 发生HTTP 5xx错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    HTTP_5XX_ERROR = 203,
+    /**
+     * JavaScript全局bundle加载失败。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+    /**
+     * CSS加载失败。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSS_LOAD_FAILED = 211,
+    /**
+     * 多个资源加载失败。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MULTI_RESOURCE_LOAD_FAILED = 212,
+    /**
+     * 请求被CORS拦截。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CORS_BLOCKED = 213,
+    /**
+     * 请求被CSP拦截。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    CSP_BLOCKED = 214,
+    /**
+     * 混合内容被拦截。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    MIXED_CONTENT_BLOCKED = 215,
+    /**
+     * 发生JavaScript运行时错误。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    JS_RUNTIME_ERROR = 301,
+    /**
+     * 未发生首次内容绘制。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    NO_FIRST_CONTENTFUL_PAINT = 312,
+    /**
+     * 渲染进程崩溃。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_CRASHED = 401,
+    /**
+     * 渲染进程被终止。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    RENDERER_KILLED = 402,
+    /**
+     * GPU进程崩溃。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_CRASHED = 403,
+    /**
+     * GPU进程看门狗超时。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+    /**
+     * Web组件尺寸为0。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    WEB_VIEW_ZERO_SIZE = 501
+}
+export declare interface MonitoredBlankScreenEventInfo {
+    /**
+     * 监测到白屏时，正在加载页面的URL。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    url: string;
+    /**
+     * 白屏归因原因。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    reason: BlankScreenReason;
+    /**
+     * 白屏归因原因的附加信息。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    extraMsg: string;
+}
+/**
+ * 监测到白屏并完成根因归因时触发的回调。
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的事件信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+/**
  * Callback with the selected text after the text selection content changes.
  *
  * @param { string } selectionText - the selected text after the text selection content changes.
@@ -5382,6 +5753,18 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default onContextMenuHide(callback: OnContextMenuHideCallback | undefined): this;
+
+    /**
+     * Triggered when the context menu item status is updated by the kernel asynchronously.
+     *
+     * @param { OnContextMenuUpdateCallback | undefined } callback - The triggered function when the context menu item
+     *     status is updated by the kernel asynchronously.
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default onContextMenuUpdate(callback: OnContextMenuUpdateCallback | undefined): this;
     /**
      * 设置有声视频的自动播放是否需要用户手动点击，静音视频播放不受该接口管控。当该属性未显式设置时，默认有声视频的自动播放需要用户手动点击。
      *
@@ -6396,6 +6779,16 @@ export declare interface WebAttribute extends CommonMethod {
      */
     default onDetectedBlankScreen(callback: OnDetectBlankScreenCallback | undefined): this;
     /**
+     * 注册白屏监控归因回调。Web组件监测到白屏并完成根因归因时，触发该回调。
+     *
+     * @param { OnMonitorBlankScreenCallback | undefined } callback - 白屏监控归因回调。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback | undefined): this;
+    /**
      * The options for blank screen detection.
      *
      * @param { BlankScreenDetectionConfig | undefined } detectConfig - the strategy config for detection.
@@ -6404,6 +6797,16 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 23 static
      */
     default blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig | undefined): this;
+    /**
+     * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发onMonitoredBlankScreen回调。
+     *
+     * @param { boolean | undefined } enable - 是否开启白屏监控。true表示开启，false表示关闭。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.0.1 static
+     */
+    default enableBlankScreenMonitor(enable: boolean | undefined): this;
     /**
      * Set whether to enable the back-to-top feature for web component when the status bar is touched.
      *
@@ -6608,6 +7011,51 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default onInputmethodAttached(callback: OnInputmethodAttachedCallback | undefined): this;
+
+    /**
+     * 设置Web组件网页文本输入光标及选择手柄的颜色。
+     *
+     * 当该属性没有显式调用或已重置时，光标使用页面CSS `caret-color` 的结果；CSS为 `auto` 或未设置时，
+     * 使用内置默认光标颜色（当前为 `#0A59F7`）。选择手柄使用当前主题默认色。
+     *
+     * 优先级为：该API设置的非零值 > 网页设置的 `caret-color` CSS属性 > 内置默认颜色。
+     * 该API设置的非零值也会覆盖CSS显式颜色或 `transparent`。精确颜色值 `#00000000` 保留为重置哨兵值。
+     * 重置后使用CSS `caret-color` 的结果；CSS为 `auto` 或未设置时，使用内置默认颜色。
+     *
+     * @param { ResourceColor | undefined } value - 网页文本输入光标及选择手柄的颜色。
+     *     传入undefined时重置该属性。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default caretColor(value: ResourceColor | undefined): this;
+
+    /**
+     * 当网页的浏览器级缩放倍率变化时触发。
+     *
+     * @param { OnZoomChangeCallback | undefined } callback - 浏览器级缩放倍率变化时触发的回调。该回调仅由浏览器级
+     *     缩放变化（例如{@link setZoomFactor}）触发；页面显示比例变化（捏合缩放）由{@link onScaleChange}通知。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default onZoomChange(callback: OnZoomChangeCallback | undefined): this;
+
+    /**
+     * 设置Web组件惯性滚动的最大速度。
+     *
+     * 通过该TypeScript API配置的值优先于通过前端viewport max-fling-speed-x/y接口设置的值。
+     *
+     * @param { double | undefined } speedLimit - 惯性滚动的速度上限，单位为vp/s。取值范围为(0, +∞)。
+   *       传入范围外的值或{@code undefined}时，使用默认值：PC设备默认9000 vp/s，非PC设备默认17000 vp/s。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default flingSpeedLimit(speedLimit: double | undefined): this;
 }
 
 /**
@@ -6779,7 +7227,7 @@ export declare interface EmbedOptions {
      * @default false
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     supportTransformRotateAndSkew?: boolean;
 }
@@ -7259,3 +7707,40 @@ export declare enum AISessionResultType {
  * @since 26.0.0 static
  */
 export type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * 浏览器级缩放倍率变化时触发的回调类型。
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * 描述网页浏览器级缩放倍率变化的信息。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface OnZoomChangeEvent {
+  /**
+   * 变化前的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  oldZoomFactor: double;
+
+  /**
+   * 变化后的浏览器级缩放倍率。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  newZoomFactor: double;
+}

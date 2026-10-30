@@ -398,10 +398,10 @@ declare namespace avMusicTemplate {
   type QueryMemberPurchaseEvent = (memberPurchaseType: MemberPurchaseType) => Promise<MemberPurchaseInfo[]>;
 
   /**
-   * 自定义内容查询事件。使用Promise异步回调。
+   * 自定义内容查询事件。用于查询用户基本信息、界面选项卡配置、合集信息和设置项等自定义内容。使用Promise异步回调。
    *
    * @typedef { function } QueryCustomContentEvent
-   * @param { CustomType[] } queryType - 自定义类型：包含用户基本信息、界面选项卡配置、代码编译选项和系统设置项。
+   * @param { CustomType[] } queryType - 自定义类型：包含用户基本信息、界面选项卡配置、合集信息和设置项。
    * @returns { Promise<CustomElement> } Promise对象，返回我的页面的自定义元素。
    * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
    * @stagemodelonly
@@ -497,10 +497,22 @@ declare namespace avMusicTemplate {
    */
   type FavoriteMediaEntityEvent = (actionType: MediaFavoriteType, mediaEntity: MediaEntity) => Promise<OperResult>;
 
+   /**
+   * 带有事件和参数的通用处理函数。
+   *
+   * @param { string } command - 请求事件。
+   * @param { string } args - 请求事件。
+   * @returns { Promise<OperResult> } Promise用于返回OperResult。
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+   type CustomCommandEvent = (command: string, args: string) => Promise<OperResult>;
+
   /**
    * 调用[avMusicTemplate.createAVMusicTemplate]{@link avMusicTemplate.createAVMusicTemplate}获取实例后，可获取其ID，启动音频模板界面，并配置数据获取
    * 方法。随后，同步数据给模板控制方，以完成后续操作。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本模块仅适用于API version 23及以上版本的Car设备。
@@ -1215,6 +1227,34 @@ declare namespace avMusicTemplate {
     offFavoriteMediaEntity(callback?: FavoriteMediaEntityEvent): void;
 
     /**
+     * 注册自定义命令回调。
+     *
+     * @param { CustomCommandEvent } callback - 用于处理（'sendCustomCommand'）事件的回调。
+     * @throws { BusinessError } 801 - Capability not supported.function onCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    onCustomCommand(callback: CustomCommandEvent): void;
+
+    /**
+     * 取消注册自定义命令回调。
+     *
+     * @param { CustomCommandEvent } [callback] - 用于处理（'sendCustomCommand'）事件的回调。
+     * @throws { BusinessError } 801 - Capability not supported.function offCustomCommand
+     *     can not work correctly due to limited device capabilities.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000012 - AVMusicTemplate error.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    offCustomCommand(callback?: CustomCommandEvent): void;
+
+    /**
      * 向音频模板控制方同步用户信息。使用Promise异步回调。
      *
      * @param { UserInfo } userInfo - 用户信息。
@@ -1222,7 +1262,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setUserInfo
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1238,7 +1278,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setDialogCommand
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1253,7 +1293,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setCurrentSingle
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1268,7 +1308,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setMediaEntities
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1284,7 +1324,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setTabContent
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1299,7 +1339,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setPlaylist
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1314,7 +1354,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setDownloadMediaEntityStatus
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1331,7 +1371,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setCustomElements
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1347,7 +1387,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function setSettings
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1363,7 +1403,7 @@ declare namespace avMusicTemplate {
      * @throws { BusinessError } 801 - Capability not supported.function reportExecuteAction
      *     can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1377,7 +1417,7 @@ declare namespace avMusicTemplate {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 801 - capability not supported.
      * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
-     * @throws { BusinessError } 35000011 - Thr data write error, data is invalid.
+     * @throws { BusinessError } 35000011 - The data write error, data is invalid.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
      * @since 23 dynamic&static
@@ -1399,7 +1439,7 @@ declare namespace avMusicTemplate {
 
   /**
    * 音频模板控制器，可以获得音频模板控制器唯一的标识，用于与接入音频模板的媒体应用数据交互。
-   * 
+   *
    * > **说明：**
    * >
    * > - 本模块仅适用于API version 23及以上版本的Car设备。
@@ -1793,6 +1833,21 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     favoriteMediaEntity(actionType: MediaFavoriteType, mediaEntity: MediaEntity): Promise<OperResult>;
+
+    /**
+     * 将自定义命令发送到AVMusicTemplate
+     *
+     * @param { string } command - 发送的命令名称。
+     * @param { string } args - 发送的命令名称。
+     * @returns { Promise<OperResult> } Promise用于返回OperResult。
+     * @throws { BusinessError } 35000003 - Template listener not registered.
+     * @throws { BusinessError } 35000005 - AVMusicTemplate does not exist.
+     * @throws { BusinessError } 35000006 - AVMusicTemplateController does not exist.
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    sendCustomCommand(command: string, args: string): Promise<OperResult>;
 
     /**
      * 注册用户信息改变的回调。使用callback异步回调。
@@ -3245,7 +3300,7 @@ declare namespace avMusicTemplate {
 
     /**
      * 用于唯一标识用户登录的二维码会话。
-     * 
+     *
      * 当二维码过期时，MediaUI将使用此ID从媒体应用查询并更新新的二维码。
      *
      * @type { string }
@@ -3327,7 +3382,7 @@ declare namespace avMusicTemplate {
 
     /**
      * 二维码有效期（单位：秒）。
-     * 
+     *
      * 当二维码到期时，二维码ID将用于再次查询并获得新的二维码。
      *
      * @type { int }
@@ -3389,7 +3444,7 @@ declare namespace avMusicTemplate {
 
     /**
      * 设置项的值。
-     * 
+     *
      * - 当settingType为SettingType.SWITCH时，该值为boolean类型。
      * - 当settingType为SettingType.LIST时，该值为SettingContent数组。
      * - 当settingType为SettingType.JUMP时，该值为string类型。
@@ -3403,7 +3458,7 @@ declare namespace avMusicTemplate {
 
     /**
      * 与当前设置关联的媒体ID。
-     * 
+     *
      * 如果设置与当前媒体信息相关联，需要设置mediaId；否则，不需要设置mediaId。
      *
      * @type { string }
@@ -3565,7 +3620,7 @@ declare namespace avMusicTemplate {
 
     /**
      * 对话框二维码的数组。
-     * 
+     *
      * 当设置了二维码信息时，此对话框将被识别为二维码对话框，并将优先显示二维码信息。最多可以设置两个。
      *
      * @type { ?QrCodeInfo[] }
@@ -3715,6 +3770,15 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     playMode?: string;
+
+    /**
+     * 资源的扩展数据。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extras?: string
   }
 
   /**
@@ -3766,7 +3830,184 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     extras?: string;
+  }
 
+  /**
+   * 搜播的音频项目的定义。
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeItem {
+    /**
+     * 音频的唯一标识。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityId: string;
+
+    /**
+     * 音频的名称。
+     * 此值为空时，应用仅根据{@link entityId}查找音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    entityName?: string;
+  }
+
+  /**
+   * 搜播K歌信息的定义
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  interface SearchPlayKaraokeInfo {
+
+    /**
+     * 搜播列表。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    items?: SearchPlayKaraokeItem[];
+
+    /**
+     * 歌曲名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    songName?: string;
+
+    /**
+     * 歌手名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    artist?: string;
+
+    /**
+     * 专辑名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    albumName?: string;
+
+    /**
+     * 榜单名称。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    billBoard?: string;
+
+    /**
+     * 场景。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    scene?: string;
+
+    /**
+     * 风格。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    genre?: string;
+
+    /**
+     * 乐器。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    instrument?: string;
+
+    /**
+     * 语言。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    language?: string;
+
+    /**
+     * 年代。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    decade?: string;
+
+    /**
+     * 情感。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    mood?: string;
+
+    /**
+     * 性别。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    gender?: string;
+
+    /**
+     * 搜索关键字。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    queryKeyWords?: string;
+
+    /**
+     * 音频额外信息。
+     * 此值为空时，应用不参考此字段搜索音频。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    extra?: string;
   }
 
   /**
@@ -3797,6 +4038,15 @@ declare namespace avMusicTemplate {
      * @since 23 dynamic&static
      */
     videoInfo?: SearchPlayVideoInfo;
+
+    /**
+     * 搜播K歌信息的定义
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    karaokeInfo?: SearchPlayKaraokeInfo;
   }
 
 
@@ -4132,7 +4382,7 @@ declare namespace avMusicTemplate {
   enum PlaybackState {
     /**
      * 准备中状态。
-     * 
+     *
      * 表示媒体文件尚未准备好播放，媒体正在加载或缓冲中。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
@@ -4236,7 +4486,7 @@ declare namespace avMusicTemplate {
   enum AVMusicTemplateType {
     /**
      * 音频模板类型的默认值。
-     * 
+     *
      * 用于标识当前音频模板应用的业务类型，开发者创建模板时可根据自身业务修改此值。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
@@ -4271,7 +4521,43 @@ declare namespace avMusicTemplate {
      * @stagemodelonly
      * @since 23 dynamic&static
      */
-    PLAY_VIDEO = 'playVideo'
+    PLAY_VIDEO = 'playVideo',
+
+    /**
+     * 播放音乐列表。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_MUSIC_LIST = 'playMusicList',
+
+    /**
+     * 播放视频列表。
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_VIDEO_LIST = 'playVideoList',
+
+    /**
+     * K歌点播
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE = 'playKaraoke',
+
+    /**
+     * K歌歌单点播
+     *
+     * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PLAY_KARAOKE_LIST = 'playKaraokeList'
   }
 
   /**

@@ -40,6 +40,8 @@ import _AppForegroundStateObserver from './application/AppForegroundStateObserve
 import { AbilityFirstFrameStateObserver as _AbilityFirstFrameStateObserver } from './application/AbilityFirstFrameStateObserver';
 import { AbilityFirstFrameStateData as _AbilityFirstFrameStateData } from './application/AbilityFirstFrameStateData';
 /*** endif */
+import _FocusedApplicationObserver from './application/FocusedApplicationObserver';
+import _FocusedApplicationInfo from './application/FocusedApplicationInfo';
 
 /**
  * appManager模块提供App管理的能力，包括查询当前是否处于稳定性测试场景、查询是否为ram受限设备、获取应用程序的内存大小、获取有关运行进程的信息等。
@@ -989,6 +991,40 @@ declare namespace appManager {
   function offAbilityFirstFrameStateChange(observer?: AbilityFirstFrameStateObserver): void;
 
   /**
+   * 注册观察者以监听获焦应用变化。
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { FocusedApplicationObserver } observer - 用于监听获焦应用变化的观察者。
+   * @returns { int } 已注册观察者的ID，可以通过
+   *     [offFocusedApplicationChanged]{@link appManager.offFocusedApplicationChanged}传入该ID来注销观察者。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onFocusedApplicationChanged(observer: FocusedApplicationObserver): int;
+
+  /**
+   * 注销用于监听获焦应用变化的观察者。
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { int } observerId - 已注册观察者的ID，即
+   *     [onFocusedApplicationChanged]{@link appManager.onFocusedApplicationChanged}返回的监听器ID。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - The observer does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offFocusedApplicationChanged(observerId: int): void;
+
+  /**
    * 获取当前所有前台应用的信息。该应用信息由[AppStateData]{@link ./application/AppStateData:AppStateData}定义。使用callback异步回调。
    *
    * @permission ohos.permission.GET_RUNNING_INFO
@@ -1021,7 +1057,7 @@ declare namespace appManager {
   function getForegroundApplications(): Promise<Array<AppStateData>>;
 
   /**
-   * 终止account进程。使用Promise异步回调。
+   * 终止指定系统账号下的应用进程。使用Promise异步回调。
    * 
    * > **说明：**
    * >
@@ -1048,7 +1084,7 @@ declare namespace appManager {
   function killProcessWithAccount(bundleName: string, accountId: int): Promise<void>;
 
   /**
-   * 终止account进程。使用Promise异步回调。
+   * 终止指定系统账号下的应用进程。使用Promise异步回调。
    * 
    * > **说明：**
    * >
@@ -1688,7 +1724,6 @@ declare namespace appManager {
   /**
    * 获取指定用户下指定类型的保活应用信息。该应用信息由[KeepAliveBundleInfo]{@link appManager.KeepAliveBundleInfo}定义。使用Promise异步回调。
    * 该接口在PC/2in1中可正常调用，在其他设备类型中返回801错误码。
-   * **需要权限**：ohos.permission.MANAGE_APP_KEEP_ALIVE
    *
    * @permission ohos.permission.MANAGE_APP_KEEP_ALIVE
    * @param { KeepAliveAppType } type - 表示要查询的保活应用类型。
@@ -1755,7 +1790,6 @@ declare namespace appManager {
   /**
    * 批量终止进程。使用Promise异步回调。
    * 该接口在PC/2in1中可正常调用，在其他设备类型中返回801错误码。
-   * **需要权限**：ohos.permission.KILL_APP_PROCESSES
    *
    * @permission ohos.permission.KILL_APP_PROCESSES
    * @param { Array<int> } pids - 要终止的进程ID。
@@ -1772,6 +1806,37 @@ declare namespace appManager {
    * @since 23 static
    */
   function killProcessesInBatch(pids: Array<int>): Promise<void>;
+
+  /**
+   *
+   * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
+   * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
+   *     information. You can perform error handling or custom processing in this callback.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @since 9
+   * @deprecated since 10
+   * @useinstead appManager#getRunningProcessInformation
+   */
+  function getProcessRunningInfos(): Promise<Array<ProcessInformation>>;
+ 
+  /**
+   *
+   * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
+   * @param { AsyncCallback<Array<ProcessInformation>> } callback - Callback used to return the result. If the API call
+   *     is successful, **err** is **undefined** and **data** is the information about the running processes. Otherwise,
+   *     **err** is an error object. You can perform error handling or other custom processing.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Failed to connect to the system service;
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @since 9
+   * @deprecated since 10
+   * @useinstead appManager#getRunningProcessInformation
+   */
+  function getProcessRunningInfos(callback: AsyncCallback<Array<ProcessInformation>>): void;
 
   /**
    * Ability状态信息。
@@ -1900,6 +1965,24 @@ declare namespace appManager {
    * @since 23 static
    */
   export type AbilityFirstFrameStateData = _AbilityFirstFrameStateData;
+
+  /**
+   * 定义用于监听获焦应用变化的观察者。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationObserver = _FocusedApplicationObserver;
+
+  /**
+   * 定义获焦应用变化时上报的获焦应用信息。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationInfo = _FocusedApplicationInfo;
 
   /**
    * 应用多开在运行态的结构信息。

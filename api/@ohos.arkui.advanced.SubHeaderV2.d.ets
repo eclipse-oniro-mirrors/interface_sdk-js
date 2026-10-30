@@ -20,9 +20,10 @@
 import { TextModifier as TextModifier } from '@ohos.arkui.modifier';
 
 /**
- * SubHeaderV2IconType
+ * Defines the union type for the icon content.
  *
- * @typedef { ResourceStr | SymbolGlyphModifier } SubHeaderV2IconType
+ * @unionmember { ResourceStr } Resource type for defining common icons.
+ * @unionmember { SymbolGlyphModifier } Symbol type for defining symbol icons.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -480,8 +481,11 @@ export declare enum SubHeaderV2OperationType {
 export type SubHeaderV2OperationItemAction = () => void;
 
 /**
- * SubHeaderV2OperationItemType
+ * Defines the union type for the content of elements in the operation area.
  *
+ * @unionmember { ResourceStr } String type for defining text display or common icons; resource type for defining common
+ *     icons.
+ * @unionmember { SymbolGlyphModifier } Symbol type for defining symbol icons.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -560,12 +564,6 @@ export interface SubHeaderV2OperationItemOptions {
    *
    * Default value: **"yes"**
    *
-   * @default "auto".The options are as follows:<br/>
-   *     "auto":The value is converted to "yes" or "no" based on the component.
-   *     "yes": the current component is selectable for the accessibility service.
-   *     "no": The current component is not selectable for the accessibility service.
-   *     "no-hide-descendants":The current component and all its child components are not selectable<br/>
-   *     for the accessibility service.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -625,7 +623,9 @@ export declare class SubHeaderV2OperationItem {
   @Trace
   content: SubHeaderV2OperationItemType;
   /**
-   * callback function when operate the text or icon.
+   * Callback function when operate the text or icon.
+   *
+   * Default value: **() => void**.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -739,7 +739,7 @@ export type SubHeaderV2TitleBuilder = () => void;
  * >
  * > - If the **SubHeaderV2** component has [universal attributes]{@link ./@internal/component/ets/common} and
  * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
- * > generates an additional **__Common__** node and mounts the universal attributes and universal events on this node
+ * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **SubHeaderV2** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
  * > with the **SubHeaderV2** component.

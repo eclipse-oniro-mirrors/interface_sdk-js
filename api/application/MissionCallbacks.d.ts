@@ -14,7 +14,7 @@
  */
 
 /**
- * The module defines the callbacks invoked after synchronization starts. These callbacks can be used as input 
+ * The module defines the callbacks invoked after synchronization starts. These callbacks are used as input 
  * parameters in 
  * [registerMissionListener]{@link @ohos.distributedMissionManager:distributedMissionManager.registerMissionListener(parameter: MissionDeviceInfo, options: MissionCallback)}
  * 
@@ -87,7 +87,9 @@ export interface MissionCallback {
   notifyMissionsChanged: NotifyMissionsChangedCallback;
 
   /**
-   * Called by system when snapshot changed.
+   * Called by the system when a snapshot changes. The snapshot refers to a snapshot of the current UI state of the
+   * task. This is used in multi-device collaboration scenarios to listen for remote device task UI state changes,
+   * such as task switching, task recovery, and multi-screen collaboration UI synchronization.
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission

@@ -408,7 +408,7 @@ export declare interface XComponentAttribute extends CommonMethod {
    * @returns { this } XComponentAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   setXComponentOptions(params: XComponentParameters | XComponentOptions | NativeXComponentParameters): this;
   /**
@@ -582,7 +582,7 @@ export declare function XComponent(
  * @returns { XComponentAttribute } XComponent的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function XComponent(

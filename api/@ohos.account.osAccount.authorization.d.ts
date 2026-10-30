@@ -70,7 +70,8 @@ declare namespace authorization {
      * @param { Privilege } privilege - Target privilege. For available values, see [Privilege]{@link authorization.Privilege}.
      * @param { UIAbilityContext } context - The [UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext} that hosts the authorization dialog.
      * @returns { Promise<AuthorizationResult> } Promise used to return the authorization result.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
      * @throws { BusinessError } 12300302 - User interaction is required but not allowed.
      *     Possible causes: 1. The specified UI context is invalid; 2. The application is not in the foreground.
@@ -116,7 +117,27 @@ declare namespace authorization {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    PRIVILEGE_OPERATE_RAW_NET_PACKETS = 'ohos.privilege.operate_raw_net_packets'
+    PRIVILEGE_OPERATE_RAW_NET_PACKETS = 'ohos.privilege.operate_raw_net_packets',
+
+    /**
+     * Privilege for monitoring the raw USB packets.
+     *
+     * After authorization, allows the application to capture raw USB traffic at the kernel level
+     * via the usbmon interface. This includes:
+     * - Raw Packet Capture: Directly reading the complete binary byte stream on the USB bus,
+     * including PID (Packet Identifier), token packets, data packets, and handshake packets at the transaction layer.
+     * - URB Lifecycle Tracking: Exposing the submission and completion events of USB Request Blocks (URBs)
+     * in the kernel, with detailed metadata such as timestamps, endpoint addresses,
+     * transfer types (Control, Interrupt, Isochronous, or Bulk), status codes, and actual payload data buffers.
+     *
+     * These capabilities are intended for USB packet sniffing, low-level protocol analysis,
+     * and bus performance benchmarking.
+     *
+     * @syscap SystemCapability.Account.OsAccount
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    PRIVILEGE_MONITOR_RAW_USB_PACKETS = 'ohos.privilege.monitor_raw_usb_packets'
   }
 
   /**

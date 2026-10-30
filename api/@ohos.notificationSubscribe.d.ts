@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file NotificationSubscribe
  * @kit NotificationKit
  */
 
@@ -41,8 +41,10 @@ import type { BadgeNumberCallbackData as _BadgeNumberCallbackData } from './noti
 /*** endif */
 
 /**
- * The **notificationSubscribe** module provides APIs for notification subscription, notification unsubscription, 
- * subscription removal, and more. In general cases, only system applications can call these APIs.
+ * This module provides 
+ * [notification subscription](docroot://notification/notification-glossary.md#notification-subscription), 
+ * unsubscription, notification removal, and other capabilities. Generally, only system applications have the 
+ * permissions for these operations.
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -115,7 +117,8 @@ declare namespace notificationSubscribe {
    * the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -130,15 +133,15 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber)
    */
   function subscribe(subscriber: NotificationSubscriber, callback: AsyncCallback<void>): void;
 
   /**
-   * Subscribes to notifications of the application and specifies subscription information. This API uses a promise to 
-   * return the result.
+   * Subscribes to notifications of this application. This API uses a promise to return the result.
    *
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Not system application to call the interface.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -159,7 +162,8 @@ declare namespace notificationSubscribe {
    * return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { NotificationSubscribeInfo } info - Notification subscription information.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
@@ -175,7 +179,7 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber, info: NotificationSubscribeInfo)
    */
   function subscribe(
     subscriber: NotificationSubscriber,
@@ -188,9 +192,11 @@ declare namespace notificationSubscribe {
    * result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
-   * @param { NotificationSubscribeInfo } [info] - Notification subscription information. By default, this parameter is
-   *     left empty, which means to subscribe to notifications of all applications under this user.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
+   * @param { NotificationSubscribeInfo } [info] - Notification subscription information. The default value is empty.
+   *     When this parameter is empty, it indicates subscribing to notifications of all applications under the current
+   *     user.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -205,16 +211,18 @@ declare namespace notificationSubscribe {
    * @since 9 dynamic
    * @since 23 static
    * @deprecated since 26.0.0
-   * @useinstead subscribeNotification
+   * @useinstead subscribeNotification(subscriber: NotificationSubscriber, info: NotificationSubscribeInfo)
    */
   function subscribe(subscriber: NotificationSubscriber, info?: NotificationSubscribeInfo): Promise<void>;
 
   /**
-   * Subscribes to notifications. After the subscription, the new message is received through the callback
-   * in the subscriber. This API uses a promise to return the result.
+   * Subscribes to notifications. After the subscription, the new message is received through the callback in the 
+   * subscriber. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_SYSTEM_SUBSCRIBER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription)
+   *     subscriber.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -230,12 +238,14 @@ declare namespace notificationSubscribe {
   function subscribeNotification(subscriber: NotificationSubscriber): Promise<void>;
 
   /**
-   * Subscribes to notifications. After the subscription, the new message is received through the callback
-   * in the subscriber. This API uses a promise to return the result.
+   * Subscribes to notifications. After the subscription, the new message is received through the callback in the 
+   * subscriber. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_SYSTEM_SUBSCRIBER
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
-   * @param { NotificationSubscribeInfo } info - Notification subscription information.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscriber](docroot://notification/notification-glossary.md#notification-subscription).
+   * @param { NotificationSubscribeInfo } info - Notification subscription information. The default value is empty. When
+   *     this parameter is empty, it indicates subscribing to notifications of all applications under the current user.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -254,7 +264,8 @@ declare namespace notificationSubscribe {
    * Unsubscribes from a notification. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 19]
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied. [since 9 - 19]
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -274,7 +285,8 @@ declare namespace notificationSubscribe {
    * Unsubscribes from a notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER [since 9 - 19]
-   * @param { NotificationSubscriber } subscriber - Notification subscriber.
+   * @param { NotificationSubscriber } subscriber -
+   *     [Notification subscription](docroot://notification/notification-glossary.md#notification-subscription) object.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied. [since 9 - 19]
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -424,7 +436,10 @@ declare namespace notificationSubscribe {
    * Removes specified notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { Array<String> } hashCodes - Array of unique notification IDs.
+   * @param { Array<String> } hashCodes - Array of unique notification IDs. It is the value of **hashCode** in the
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object of
+   *     [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData} used in the
+   *     [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume} callback.
    * @param { RemoveReason } reason - Reason for removing the notification.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
@@ -527,8 +542,8 @@ declare namespace notificationSubscribe {
    * Removes all notifications for a specified application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { BundleOption } [bundle] - Bundle information of the application. By default, this parameter is left empty,
-   *     indicating that all notifications will be removed.
+   * @param { BundleOption } [bundle] - Bundle information of the specified application. Default is empty. When this
+   *     parameter is empty, it indicates deleting notifications of all applications.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -546,13 +561,18 @@ declare namespace notificationSubscribe {
   function removeAll(bundle?: BundleOption): Promise<void>;
 
   /**
-   * Triggers a notification for cross-device operations, such as tap-to-redirect and quick reply. This API uses a 
-   * promise to return the result.
+   * Triggers the 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) operation 
+   * of the specified notification (for example, cross-device notification click-to-redirect and cross-device quick 
+   * reply). This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
-   * @param { string } hashcode - Unique notification ID.
-   * @param { OperationInfo } [operationInfo] - Cross-device operation information. This parameter is left empty by
-   *     default.
+   * @param { string } hashcode - Unique notification ID. It is the value of **hashCode** in the
+   *     [NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest} object of
+   *     [SubscribeCallbackData]{@link ./notification/notificationSubscriber:SubscribeCallbackData} used in the
+   *     [onConsume]{@link ./notification/notificationSubscriber:NotificationSubscriber.onConsume} callback.
+   * @param { OperationInfo } [operationInfo] - Cross-device collaboration operation information. When this parameter is
+   *     not passed, the system default collaboration operation configuration is used.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -568,7 +588,9 @@ declare namespace notificationSubscribe {
   function distributeOperation(hashcode: string, operationInfo?: OperationInfo): Promise<void>;
 
   /**
-   * Defines cross-device collaborative operation information.
+   * Describes the 
+   * [cross-device collaboration](docroot://notification/notification-glossary.md#cross-device-collaboration) operation 
+   * information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -599,12 +621,13 @@ declare namespace notificationSubscribe {
     userInput?: string;
 
     /**
-     * Operation type.
-     * 
-     * - **0**: The user taps the non-live view.
-     * - **1**: The user taps the non-live view button.
-     * - **32**: The user taps the live view.
-     * - **33**: The user taps the live view auxiliary area.
+     * Type of the user click operation.
+     *
+     * - **0**: The user clicks the non-
+     * [live view notification](docroot://notification/notification-glossary.md#live-view-notification) body.
+     * - **1**: The user clicks a non-live-view notification button.
+     * - **32**: The user clicks the live view notification body.
+     * - **33**: The user clicks the auxiliary area of the live view notification.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -635,8 +658,8 @@ declare namespace notificationSubscribe {
   export type BundleOption = _BundleOption;
 
   /**
-   * The **NotificationSubscribeInfo** module provides APIs for defining the information about the publisher for
-   * notification subscription.
+   * The **NotificationSubscribeInfo** module provides APIs for defining the information about the notification
+   * subscriber.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -656,8 +679,7 @@ declare namespace notificationSubscribe {
   export type NotificationSubscriber = _NotificationSubscriber;
 
   /**
-   * Provides methods that will be called back when the subscriber receives a new notification or
-   * a notification is canceled.
+   * Returns notification information carrying system property values.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -667,7 +689,7 @@ declare namespace notificationSubscribe {
   export type SubscribeCallbackData = _SubscribeCallbackData;
 
   /**
-   * Describes the properties of the application that the permission to send notifications has changed.
+   * Returns the changes of the application badge enabled state.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -677,7 +699,8 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * Describes the switch state for silent reminder notification.
+   * Returns the changes of the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
+   * switch state of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -687,7 +710,8 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * Defines a callback function to listen for the enabling state changes of the application's silent reminder.
+   * Triggered for registering the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
+   * enabled state change of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -697,7 +721,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderChangedCallback = _EnabledSilentReminderChangedCallback;
 
   /**
-   * Describes the main switch state for priority notification.
+   * Returns the changes of the enabled state of the notification priority.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -706,7 +730,7 @@ declare namespace notificationSubscribe {
   export type EnabledPriorityNotificationCallbackData = _EnabledPriorityNotificationCallbackData;
 
   /**
-   * Describes the bundle switch state for priority notification.
+   * Returns the changes of the enabled state of the application notification priority.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -715,7 +739,7 @@ declare namespace notificationSubscribe {
   export type EnabledPriorityNotificationByBundleCallbackData = _EnabledPriorityNotificationByBundleCallbackData;
 
   /**
-   * Describes the badge number of the application has changed.
+   * Returns the changes of the application badge number.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -734,7 +758,7 @@ declare namespace notificationSubscribe {
    */
   export type VoiceContentOptions = _VoiceContentOptions;
   /**
-   * Describes the properties of the voice content of the received notification.
+   * Returns the notification voice broadcast content.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -744,7 +768,7 @@ declare namespace notificationSubscribe {
   export type VoiceContent = _VoiceContent;
 
   /**
-   * Describes the notification classification information.
+   * Returns the notification classification information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -752,11 +776,11 @@ declare namespace notificationSubscribe {
    * @since 26.0.0 dynamic&static
    */
   export type NotificationClassification = _NotificationClassification;
-  
+
   /**
-   * Register the callback function type for notification switch state changes set by the interface of
-   * [notificationManager.setNotificationSwitch]{@link
-   * ./@ohos.notificationManager:notificationManager.setNotificationSwitch}.
+   * Registers the callback for notification switch state changes set by the
+   * [notificationManager.setNotificationSwitch]{@link @ohos.notificationManager:notificationManager.setNotificationSwitch}
+   * API.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -766,7 +790,7 @@ declare namespace notificationSubscribe {
   export type NotificationSwitchChangedCallback = _NotificationSwitchChangedCallback;
 
   /**
-   * Describes the notification switch state changes callback data.
+   * Returns the changes of the notification switch state.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

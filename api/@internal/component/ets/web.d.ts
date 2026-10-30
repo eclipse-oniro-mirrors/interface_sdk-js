@@ -14,12 +14,15 @@
  */
 
 /**
- * @file
+ * @file Web Controller
  * @kit ArkWeb
  */
 
 /**
  * Defines methods for the web controller.
+ * Controls various behaviors of the Web component through WebviewController. A WebviewController object can control
+ * only one Web component, and methods on WebviewController (except static methods) can be called only after the Web
+ * component and WebviewController are bound.
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -1652,6 +1655,55 @@ declare enum RenderExitReason {
 type OnContextMenuHideCallback = () => void;
 
 /**
+ * Defines the callback type for context menu item status updates.
+ *
+ * @param { WebContextMenuItemId } menuItemId - The ID of the context menu item.
+ * @param { WebContextMenuOptions } [options] - The options of the context menu item.
+ *     <br>Default value: See the default value of options.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
+
+/**
+ * Enumerates the context menu item IDs.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum WebContextMenuItemId {
+  /**
+   * Copy link to highlight menu item.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  MENU_COPY_LINK = 11
+}
+
+/**
+ * Defines the options for a context menu item.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare interface WebContextMenuOptions {
+  /**
+   * Whether the context menu item is enabled.
+   * Default value: Default value: false.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enable?: boolean;
+}
+
+/**
  * Enumerates the error codes returned by **onSslErrorEventReceive** API.
  *
  * @syscap SystemCapability.Web.Webview.Core
@@ -1828,6 +1880,15 @@ declare enum RenderProcessNotRespondingReason {
  *
  * For sample code, see [onShowFileSelector]{@link WebAttribute#onShowFileSelector}.
  *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8.
+ * >  Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The initial APIs of this class are supported since API version 9.
+ * >
+ * > - The sample effect is subject to the actual device.
+ *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 11]
  * @atomicservice [since 11]
@@ -1869,6 +1930,14 @@ declare class FileSelectorParam {
 
   /**
    * Obtains the file filtering type.
+   *
+   * > **NOTE**
+   * >
+   * > Correspondence with getMimeTypes and getAcceptableFileTypes: getAcceptType and getMimeTypes correspond to the
+   * > accept attribute of the HTML input tag, and getAcceptableFileTypes corresponds to the types attribute of the
+   * > options parameter of the HTML showOpenFilePicker, showDirectoryPicker, and showSaveFilePicker interfaces.
+   * > According to HTML specifications, the accept attribute and the types attribute are mutually exclusive and should
+   * > not be used at the same time.
    *
    * @returns { Array<string> } Array of file filter types, containing type information used to limit the selectable
    *     file range in the file selector. The elements are extensions (such as '.png'), corresponding to the HTML accept
@@ -2221,6 +2290,23 @@ declare class ClientAuthenticationHandler {
   /**
    * Instructs the **Web** component to use the specified credentials (obtained from the certificate management module).
    *
+   * > **NOTE**
+   * >
+   * > - The authUri parameter must be obtained through the system certificate manager and requires the
+   * > ohos.permission.ACCESS_CERT_MANAGER permission to be configured.
+   * 
+   * | Signing Algorithm     | Key Length   | 
+   * | ------- | ------ |
+   * | SSL_SIGN_RSA_PKCS1_SHA256 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA384 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PKCS1_SHA512 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA256 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA384 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_RSA_PSS_SHA512 | 1024 (supported since API version 18), 2048, 3072, and 4096 | 
+   * | SSL_SIGN_ECDSA_SECP256R1_SHA256 | 256 | 
+   * | SSL_SIGN_ECDSA_SECP384R1_SHA384 | 384 | 
+   * | SSL_SIGN_ECDSA_SECP521R1_SHA512 | 521 | 
+   *
    * @param { string } authUri - Key value of the credentials.
    * @syscap SystemCapability.Web.Webview.Core
    * @atomicservice [since 11]
@@ -2434,8 +2520,8 @@ declare class ScreenCaptureHandler {
   constructor();
 
   /**
-   * Obtains the origin of the web page. This method is used to verify the trustworthiness of the request origin, or to
-   * implement a whitelist mechanism to control which web pages can perform screen capture.
+   * Obtains the origin of the web page. Used to validate the origin of the web page initiating the request, allowing
+   * developers to control which web pages are permitted to initiate screen capture requests via an origin allowlist.
    *
    * @returns { string } Origin of the web page that initiates the current screen capture request.
    * @syscap SystemCapability.Web.Webview.Core
@@ -3176,6 +3262,58 @@ declare class WebContextMenuParam {
    * @since 22 dynamic
    */
   getContextMenuMediaType(): ContextMenuDataMediaType;
+
+  /**
+   * Checks whether the currently selected text can be used to generate a Text Fragment link.
+   * A Text Fragment link is a URL that contains a **#:~:text=** fragment, which directs
+   * the browser to scroll to and highlight a specific text passage when the link is opened.
+   *
+   * Use this API in the **onContextMenuShow** event callback to determine whether to display
+   * a "Copy Link to Highlight" menu item. The result is consistent with the Chromium
+   * **ShouldOfferLinkToText** behavior.
+   *
+   * @returns { boolean } **true** if the currently selected text can be used to generate
+   *     a Text Fragment link; **false** otherwise.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  shouldOfferLinkToText(): boolean;
+
+  /**
+   * Obtains a Text Fragment link URL that points to the currently highlighted text on
+   * the web page. The returned URL contains a **#:~:text=** fragment that complies with
+   * the W3C Text Fragments specification.
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call shouldOfferLinkToText() to check whether the current selection
+   * supports link generation. If the selection does not support link generation, an empty
+   * string is returned.
+   *
+   * @returns { string } Text Fragment link URL that contains the **#:~:text=** fragment
+   *     and complies with the W3C Text Fragments specification. If the current selection
+   *     does not support link generation, an empty string is returned.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  getTextFragmentGeneratedLink(): string;
+
+  /**
+   * Checks whether the current web page has a Text Fragment highlight.
+   * Use this API to determine whether the "Remove Highlight" and "Re-share Link"
+   * menu items should be displayed.
+   *
+   * Use this API in the **onContextMenuShow** event callback.
+   * The result is consistent with the Chromium **GetExistingSelectors** behavior.
+   *
+   * @returns { boolean } **true** if the current page has a Text Fragment highlight;
+   *     **false** otherwise.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  isOverTextFragment(): boolean;
 }
 
 /**
@@ -3295,6 +3433,13 @@ declare class WebContextMenuResult {
   /**
    * Performs the redo operation, which re-executes the revoked operation.
    *
+   * **Coordination**
+   *
+   * - Used together with the undo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
+   *
    * > **NOTE**
    * >
    * > After the operation is complete, [closeContextMenu]{@link WebContextMenuResult#closeContextMenu} should be called
@@ -3307,6 +3452,13 @@ declare class WebContextMenuResult {
 
   /**
    * Performs the undo operation, which undoes the last editing operation.
+   *
+   * **Coordination**
+   *
+   * - Used together with the redo() method. After undo() is called, redo() can be used to re-execute the revoked
+   *   operation.
+   *
+   * - If the user has not performed an undo operation, the redo() method cannot be used.
    *
    * > **NOTE**
    * >
@@ -3363,6 +3515,47 @@ declare class WebContextMenuResult {
    * @since 24 dynamic
    */
   saveImage(): void;
+
+  /**
+   * Copies a Text Fragment link that points to the currently highlighted text to the
+   * system clipboard. The copied URL contains a **#:~:text=** fragment that complies
+   * with the W3C Text Fragments specification. The clipboard content is the same as
+   * the URL returned by getTextFragmentGeneratedLink().
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call shouldOfferLinkToText() to check whether the current selection
+   * supports link generation. If the selection does not support link generation, this
+   * method does not write to the clipboard.
+   *
+   * > **NOTE**
+   * >
+   * > After the operation is complete, closeContextMenu() should be called to close
+   * > the menu. Failure to do so may result in menu resources not being properly released.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  copyLinkToTextMenu(): void;
+
+  /**
+   * Removes all Text Fragment highlights from the current web page,
+   * restoring the original text style.
+   *
+   * Use this API in the **onContextMenuShow** event callback. Before calling this API,
+   * you are advised to call isOverTextFragment() to check whether a highlight exists.
+   * If no highlight exists, this method does nothing.
+   *
+   * > **NOTE**
+   * >
+   * > After the operation is complete, closeContextMenu() should be called to close
+   * > the menu. Failure to do so may result in menu resources not being properly released.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  removeFragments(): void;
 }
 
 /**
@@ -4602,6 +4795,13 @@ declare interface IntelligentTrackingPreventionDetails {
 interface WebInterface {
   /**
    * Sets Value.
+   *
+   * > **NOTE**
+   * >
+   * > - Transition animation is not supported.
+   * >
+   * > - To ensure the independence and performance isolation of Web components, multiple Web components on the same
+   *     page must be bound to different WebviewController instances.
    *
    * @param { WebOptions } value - Define web options.
    * @returns { WebAttribute }
@@ -6681,6 +6881,272 @@ declare interface BlankScreenDetectionEventInfo {
 type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 
 /**
+ * Enumerates the reasons for blank screen attribution, identifying the root cause of the blank screen issue across
+ * the network layer, resource layer, rendering and JavaScript layer, kernel and process layer, and container layer.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare enum BlankScreenReason {
+  /**
+   * DNS resolution failed.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  DNS_RESOLVE_FAILED = 101,
+  /**
+   * Main document loading timed out.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REQUEST_TIMED_OUT = 102,
+  /**
+   * The connection was refused.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_REFUSED = 103,
+  /**
+   * The connection was reset.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_RESET = 104,
+  /**
+   * An SSL error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  SSL_ERROR = 105,
+  /**
+   * A certificate error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CERT_ERROR = 106,
+  /**
+   * The network is disconnected.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  INTERNET_DISCONNECTED = 107,
+  /**
+   * A redirect loop occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REDIRECT_LOOP = 108,
+  /**
+   * A proxy error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  PROXY_ERROR = 109,
+  /**
+   * Another network error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  OTHER_NETWORK_ERROR = 199,
+  /**
+   * The main document is empty.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MAIN_DOC_EMPTY = 201,
+  /**
+   * An HTTP 4xx error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_4XX_ERROR = 202,
+  /**
+   * An HTTP 5xx error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_5XX_ERROR = 203,
+  /**
+   * Failed to load the JavaScript global bundle.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+  /**
+   * Failed to load CSS.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSS_LOAD_FAILED = 211,
+  /**
+   * Failed to load multiple resources.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MULTI_RESOURCE_LOAD_FAILED = 212,
+  /**
+   * The request was blocked by CORS.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CORS_BLOCKED = 213,
+  /**
+   * The request was blocked by CSP.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSP_BLOCKED = 214,
+  /**
+   * Mixed content was blocked.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MIXED_CONTENT_BLOCKED = 215,
+  /**
+   * A JavaScript runtime error occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_RUNTIME_ERROR = 301,
+  /**
+   * No first contentful paint occurred.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  NO_FIRST_CONTENTFUL_PAINT = 312,
+  /**
+   * The renderer process crashed.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_CRASHED = 401,
+  /**
+   * The renderer process was killed.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_KILLED = 402,
+  /**
+   * The GPU process crashed.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_CRASHED = 403,
+  /**
+   * The GPU process watchdog timed out.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+  /**
+   * The web view has zero size.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  WEB_VIEW_ZERO_SIZE = 501
+}
+
+/**
+ * Provides the event information for blank screen monitoring attribution, including the page URL, the attribution
+ * reason, and additional details.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare interface MonitoredBlankScreenEventInfo {
+  /**
+   * URL of the page that is loading when the white screen is monitored.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  url: string;
+
+  /**
+   * Blank screen reason.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  reason: BlankScreenReason;
+
+  /**
+   * Extra message for blank screen reason.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  extraMsg: string;
+}
+
+/**
+ * Defines a callback triggered when the Web component monitors a blank screen and completes root cause attribution.
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - Event information for blank screen monitoring attribution.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+
+/**
  * Callback for onTextSelectionChange. Triggered when the text selection content changes.
  *
  * @param { string } selectionText - Selected text.
@@ -6890,8 +7356,49 @@ declare enum WebKeyboardAppearanceMode {
 }
 
 /**
- * Defines the Web attribute functions.
- * 
+ * The supported universal attributes include [aspectRatio]{@link CommonMethod#aspectRatio},
+ * [backdropBlur]{@link CommonMethod#backdropBlur}, [backgroundColor]{@link CommonMethod#backgroundColor},
+ * [bindContentCover]{@link CommonMethod#bindContentCover}, [bindContextMenu]{@link CommonMethod#bindContextMenu},
+ * [bindMenu]{@link CommonMethod#bindMenu}, [bindSheet]{@link CommonMethod#bindSheet},
+ * [borderColor]{@link CommonMethod#borderColor}, [borderRadius]{@link CommonMethod#borderRadius},
+ * [borderStyle]{@link CommonMethod#borderStyle}, [borderWidth]{@link CommonMethod#borderWidth},
+ * [clip]{@link CommonMethod#clip}, [constraintSize]{@link CommonMethod#constraintSize},
+ * [defaultFocus]{@link CommonMethod#defaultFocus}, [focusable]{@link CommonMethod#focusable},
+ * [tabIndex]{@link CommonMethod#tabIndex}, [groupDefaultFocus]{@link CommonMethod#groupDefaultFocus},
+ * [displayPriority]{@link CommonMethod#displayPriority}, [enabled]{@link CommonMethod#enabled},
+ * [flexBasis]{@link CommonMethod#flexBasis}, [flexShrink]{@link CommonMethod#flexShrink},
+ * [layoutWeight]{@link CommonMethod#layoutWeight}, [id]{@link CommonMethod#id},
+ * [gridOffset]{@link CommonMethod#gridOffset}, [gridSpan]{@link CommonMethod#gridSpan},
+ * [useSizeType]{@link CommonMethod#useSizeType}, [height]{@link CommonMethod#height},
+ * [touchable]{@link CommonMethod#touchable}, [margin]{@link CommonMethod#margin},
+ * [markAnchor]{@link CommonMethod#markAnchor}, [offset]{@link CommonMethod#offset},
+ * [width]{@link CommonMethod#width}, [zIndex]{@link CommonMethod#zIndex},
+ * [visibility]{@link CommonMethod#visibility}, [scale]{@link CommonMethod#scale},
+ * [translate]{@link CommonMethod#translate}, [responseRegion]{@link CommonMethod#responseRegion},
+ * [size]{@link CommonMethod#size}, [opacity]{@link CommonMethod#opacity},
+ * [shadow]{@link CommonMethod#shadow}, [sharedTransition]{@link CommonMethod#sharedTransition},
+ * [transition]{@link CommonMethod#transition}, [position]{@link CommonMethod#position}, and
+ * [direction]{@link CommonMethod#direction}.
+ *
+ * The following universal events are supported: [onAppear]{@link CommonMethod#onAppear},
+ * [onDisAppear]{@link CommonMethod#onDisAppear}, [onBlur]{@link CommonMethod#onBlur},
+ * [onFocus]{@link CommonMethod#onFocus}, [onDragEnd]{@link CommonMethod#onDragEnd},
+ * [onDragEnter]{@link CommonMethod#onDragEnter}, [onDragStart]{@link CommonMethod#onDragStart},
+ * [onDragMove]{@link CommonMethod#onDragMove}, [onDragLeave]{@link CommonMethod#onDragLeave},
+ * [onDrop]{@link CommonMethod#onDrop}, [onHover]{@link CommonMethod#onHover}, [onMouse]{@link CommonMethod#onMouse},
+ * [onKeyEvent]{@link CommonMethod#onKeyEvent}, [onTouch]{@link CommonMethod#onTouch},
+ * [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange}.
+ *
+ * ## Overview
+ *
+ * Web component attributes are used to configure the web page loading behavior, security policies, runtime environment,
+ * and interaction capabilities of the **Web** component through chain calls in the ArkUI declarative syntax. They serve
+ * as the primary entry point for customizing **Web** component behavior. For general style and layout attributes (such
+ * as size, margin, background, and visibility), see [Size Settings]{@link CommonMethod}. This chapter describes only
+ * attributes specific to the **Web** component. For runtime dynamic control capabilities (such as loading URLs,
+ * navigating forward/backward, registering/unregistering JS objects, running JavaScript, and injecting CSS), use them
+ * together with [WebviewController]{@link @ohos.web.webview:webview.WebviewController}.
+ *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
  * @atomicservice [since 11]
@@ -7910,6 +8417,24 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onContextMenuHide(callback: OnContextMenuHideCallback): WebAttribute;
 
   /**
+   * Registers a callback to be invoked when the context menu item status is updated
+   * by the kernel asynchronously. The callback is triggered after the kernel completes
+   * asynchronous processing, notifying the application to update the display status of
+   * menu items.
+   *
+   * The shouldOfferLinkToText() method returns a synchronous initial value, while this
+   * callback provides the asynchronous final value. The two are complementary.
+   *
+   * @param { OnContextMenuUpdateCallback } callback - Callback function that receives
+   *     the menu item ID and options.
+   * @returns { WebAttribute } Returns the WebAttribute object to support chained calls.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
+
+  /**
    * Sets whether autoplay of audible videos requires a user tap. Muted video playback is not affected by this API. If
    * this attribute is not explicitly set, a user tap is required by default.
    *
@@ -8417,6 +8942,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    */
   verticalScrollBarAccess(verticalScrollBar: boolean): WebAttribute;
 
+
   /**
    * Triggered when an apple-touch-icon URL is received.
    *
@@ -8810,8 +9336,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > - You can set the up, down, left, and right directions, or set the forward and backward nested scrolling modes to
    * > implement scrolling linkage with the parent component.
    * >
-   * > - Containers that support nested scrolling: [Grid]{@link ./grid}, [List]{@link ./list}, [Scroll]{@link ./scroll},
-   * > [Swiper]{@link ./swiper}, [Tabs]{@link ./tabs}, [WaterFlow]{@link ./water_flow}, [Refresh]{@link ./refresh} and
+   * > - Containers that support nested scrolling: [Grid]{@link Grid}, [List]{@link List}, [Scroll]{@link Scroll},
+   * > [Swiper]{@link Swiper}, [Tabs]{@link Tabs}, [WaterFlow]{@link WaterFlow}, [Refresh]{@link Refresh} and
    * > [bindSheet]{@link CommonMethod#bindSheet}.
    * >
    * > - Input sources that support nested scrolling: gestures, mouse device, and touchpad.
@@ -9095,7 +9621,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - Extended options of the custom context menu on
    *     selection.
    *     <br>The number of menu options, menu content size, and start icon size must be the same as those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -9197,7 +9723,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    *
    * @param { EditMenuOptions } editMenu - Custom text menu options for the Web component.
    *     <br>The number of menu items, the content size, and the icon size are consistent with those of the ArkUI
-   *     [Menu]{@link ./menu} component.
+   *     [Menu]{@link Menu} component.
    *     <br>Among the system-provided ID enum values ([TextMenuItemId]{@link TextMenuItemId}) in the menu, only CUT,
    *     COPY, PASTE, SELECT_ALL, TRANSLATE, SEARCH, and AI_WRITER are supported in the Web component.
    *     <br>In the onMenuItemClick function, the textRange parameter is meaningless in the Web component, and the value
@@ -9562,6 +10088,23 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onDetectedBlankScreen(callback: OnDetectBlankScreenCallback): WebAttribute;
 
   /**
+   * Registers a callback for blank screen monitoring attribution. The callback is triggered when the Web component
+   * monitors a blank screen and completes root cause attribution.
+   *
+   * > **NOTE**
+   * >
+   * > - This method must be used with [enableBlankScreenMonitor]{@link WebAttribute#enableBlankScreenMonitor}.
+   * > Otherwise, the blank screen monitor is disabled by default, and this callback is not triggered.
+   *
+   * @param { OnMonitorBlankScreenCallback } callback - Callback for blank screen monitoring attribution.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback): WebAttribute;
+
+  /**
    * Sets the blank screen detection configuration, such as whether to enable the detection, detection time, and
    * detection policy. When this attribute is not explicitly called, blank screen detection is disabled by default.
    *
@@ -9583,6 +10126,19 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 22 dynamic
    */
   blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig): WebAttribute;
+
+  /**
+   * Enables or disables the blank screen monitor. When the monitor is enabled, the onMonitoredBlankScreen callback
+   * will be triggered after blank screen is monitored.
+   *
+   * @param { boolean } enable - Whether to enable the blank screen monitor. The value **true** means to enable the
+   *     monitor, and **false** means to disable it.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  enableBlankScreenMonitor(enable: boolean): WebAttribute;
 
   /**
    * Sets whether to enable the back-to-top feature for the **Web** component when the status bar is touched. When this
@@ -9929,6 +10485,60 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.0.0 dynamic
    */
   enableMediaNetworkProxy(enabled: boolean): WebAttribute;
+
+  /**
+   * Sets the color of the text input caret and selection handles of the **Web** component.
+   *
+   * When this attribute is not explicitly called or is reset, the caret uses the page's CSS `caret-color` result.
+   * If the CSS value is **auto** or not set, the caret uses the built-in default color (currently **#0A59F7**).
+   * Selection handles use the current theme colors.
+   *
+   * > **NOTE**
+   * >
+   * > - The priority is: a non-zero value set by this API > the `caret-color` CSS property set by the web page >
+   * the built-in default color. A non-zero value set by this API also overrides an explicit CSS color or transparent.
+   * >
+   * > - The exact color value **#00000000** is reserved as the reset sentinel. After reset, the CSS `caret-color`
+   * value is used. If the CSS value is **auto** or not set, the built-in default color is used.
+   *
+   * @param { ResourceColor } value - Color of the text input caret and selection handles.
+   *     <br>When **undefined** or **null** is passed in, this attribute is reset.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  caretColor(value: ResourceColor): WebAttribute;
+
+  /**
+   * The callback is triggered when the browser zoom factor of the page changes.
+   *
+   * @param { OnZoomChangeCallback } callback - The triggered callback when the browser zoom factor
+   *     of the page changes. The callback is triggered only by browser zoom changes (for example,
+   *     {@link setZoomFactor}); page display scale changes (pinch zoom) are notified by
+   *     {@link onScaleChange} instead.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
+
+  /**
+   * Sets the maximum fling speed for the Web component.
+   *
+   * The value configured through this TypeScript API takes precedence over the front-end viewport max-fling-speed-x/y.
+   *
+   * @param { number } speedLimit - Maximum fling speed, in vp/s.
+   *     If a value outside this range is passed, the default value is used:
+   *     9000 vp/s on PCs and 17000 vp/s on non-PC devices.
+   *     <br>Value range: (0, +∞).
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  flingSpeedLimit(speedLimit: number): WebAttribute;
 }
 
 /**
@@ -9942,6 +10552,15 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
  * <p>When the white screen duration is long due to complex web page parsing,
  * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
  * </p>
+ *
+ * ## Required Permissions
+ *
+ * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
+ * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
+ *
+ * ## Child Components
+ *
+ * Not supported
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -10214,7 +10833,7 @@ declare interface EmbedOptions {
    * @default false
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   supportTransformRotateAndSkew?: boolean;
 }
@@ -10676,3 +11295,40 @@ declare enum AISessionResultType {
  * @since 26.0.0 dynamic
  */
 type OnAISessionCallback = (state: AISessionResultType, content: string) => void;
+
+/**
+ * Called when the browser zoom factor of the page changes.
+ *
+ * @param { OnZoomChangeEvent } zoomChangeInfo - Details about the browser zoom factor change.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
+
+/**
+ * Describes the browser zoom factor change information of the web page.
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare interface OnZoomChangeEvent {
+  /**
+   * Browser zoom factor of the page before the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  oldZoomFactor: number;
+
+  /**
+   * Browser zoom factor of the page after the change.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  newZoomFactor: number;
+}

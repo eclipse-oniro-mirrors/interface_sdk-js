@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file FormAgent
  * @kit FormKit
  */
 
@@ -129,7 +129,7 @@ declare namespace formAgent {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function getAvailableFormHostServices(): Promise<Array<formInfo.PeerFormHostServiceInfo>>;
 
@@ -145,7 +145,7 @@ declare namespace formAgent {
    *     <br>- **ohos.extra.param.key.form_dimension**: dimension of the target form.
    *     <br>- **ohos.extra.param.key.form_name**: name of the target form.
    *     <br>- **ohos.extra.param.key.module_name**: module name of the target form.
-   * @param { formBindingData.FormBindingData } [formBindingData] - Data to be used for the update.
+   * @param { formBindingData.FormBindingData } [formBindingData] - Data to be used for the update. By default, no value is passed.
    * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise used to return the result of
    *     publishing the form across device.
    * @throws { BusinessError } 201 - Permissions denied.
@@ -161,7 +161,7 @@ declare namespace formAgent {
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamiconly
    */
   function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
     formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;

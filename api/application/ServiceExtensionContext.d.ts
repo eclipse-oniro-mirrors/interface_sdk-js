@@ -66,7 +66,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
@@ -110,7 +111,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
@@ -152,7 +154,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
@@ -196,8 +199,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { string } link - URL to open, which must be in the standard format.
    * @param { OpenLinkOptions } [options] - Options of the URL.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -238,8 +242,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -290,8 +295,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { StartOptions } options - Parameters used for starting the ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -339,8 +345,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { StartOptions } options - Parameters used for starting the ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -388,8 +395,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { int } accountId - ID of the target system account.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -439,8 +447,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { StartOptions } options - Parameters used for starting the ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -490,8 +499,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { int } accountId - ID of the target system account.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -532,8 +542,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ServiceExtensionAbility is
    *     started, **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -561,8 +572,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - Want information about the target ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -600,8 +612,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { int } accountId - ID of the target system account.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ServiceExtensionAbility is
    *     started, **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -638,8 +651,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { int } accountId - ID of the target system account.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -668,7 +682,7 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ServiceExtensionAbility is
    *     stopped, **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -678,7 +692,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -693,7 +708,7 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - Want information about the target ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -703,7 +718,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -726,8 +742,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { int } accountId - ID of the target system account.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ServiceExtensionAbility is
    *     stopped, **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -758,8 +775,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability.
    * @param { int } accountId - ID of the target system account.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -831,7 +849,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { ConnectOptions } options - Callback used to return the information indicating that the connection is
    *     successful, interrupted, or failed.
    * @returns { long } A number, based on which the connection will be interrupted.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -872,8 +891,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { int } accountId - ID of the target system account.
    * @param { ConnectOptions } options - Remote object instance.
    * @returns { long } Result code of the connection.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -956,7 +976,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *     **bundleName**, **deviceId**, and **parameters** (optional). If **parameters** is left blank or null, the
    *     ability is started in the background.
    * @returns { Promise<Caller> } Promise used to return the caller object to communicate with.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1001,8 +1022,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *     background.
    * @param { int } accountId - ID of the target system account. The value **-1** indicates the current user.
    * @returns { Promise<Caller> } Promise used to return the caller object to communicate with.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -1051,8 +1073,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 14]
@@ -1100,8 +1123,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 14]
@@ -1145,8 +1169,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
    * @throws { BusinessError } 16200001 - The caller has been released.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 10]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api. [since 14]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 14]
    * @throws { BusinessError } 16000071 - App clone is not supported. [since 14]
    * @throws { BusinessError } 16000072 - App clone or multi-instance is not supported. [since 14]
    * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 14]
@@ -1184,8 +1209,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the UIExtensionAbility is started,
    *     **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 11 - 11]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -1221,8 +1247,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 11 - 11]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -1260,8 +1287,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { Want } pickerWant - Want information used to start the UIExtensionAbility.
    * @param { int } accountId - The account to request.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed;
    *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
    *     4.The logical screen corresponding to the specified accountId is not in the foreground.
@@ -1285,8 +1313,9 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { string } abilityName - Ability name of the atomic service.
    * @param { string } startTime - Start time to open the atomic service, in milliseconds.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16300007 - The target free-installation task does not exist.
@@ -1312,11 +1341,13 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - Indicates the want info to start.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -1348,7 +1379,8 @@ declare class ServiceExtensionContext extends ExtensionContext {
    * @param { AtomicServiceOptions } [options] - Parameter carried in the request for starting the atomic service in
    *     jump-out mode.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
@@ -1386,9 +1418,11 @@ declare class ServiceExtensionContext extends ExtensionContext {
    *     launch, cross-user launch, distributed launch, instant installation, or on-demand loading. By default, the main
    *     application is launched unless specified otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.

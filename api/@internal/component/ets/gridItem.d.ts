@@ -19,7 +19,7 @@
  */
 
 /**
- * Enumerates styles of grid items.
+ * Enumerates the **GridItem** styles, used to define the interaction state styles of **GridItem**.
  *
  * > **NOTE**
  * >
@@ -35,7 +35,7 @@
 declare enum GridItemStyle {
 
   /**
-   * No style.
+   * No style. **Hover** and **Press** state styles are not displayed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -46,7 +46,8 @@ declare enum GridItemStyle {
   NONE = 0,
 
   /**
-   * Hover or press style.
+   * Displays **Hover** and **Press** state styles. The **Hover** state is the style when the mouse hovers, and the
+   * **Press** state is the style when pressed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -58,7 +59,7 @@ declare enum GridItemStyle {
 }
 
 /**
- * Defines the style of a grid item.
+ * Defines the **GridItem** style object, used to configure the style options of **GridItem**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -69,14 +70,14 @@ declare enum GridItemStyle {
 declare interface GridItemOptions {
 
   /**
-   * Style of the grid item.
+   * Style of **GridItem**.
    *
-   * Default value: **GridItemStyle.NONE**.
+   * Default value: **GridItemStyle.NONE**
    *
-   * If this parameter is set to **GridItemStyle.NONE**, no style is applied.
+   * When set to **GridItemStyle.NONE**, no style is applied.
    *
-   * If this parameter is set to **GridItemStyle.PLAIN**, the grid item is in hover or press style depending on the
-   * state.
+   * When set to **GridItemStyle.PLAIN**, the **Hover** and **Press** state styles are displayed. The **Hover** state is
+   * the style when the mouse hovers over the item, and the **Press** state is the style when the item is pressed.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -92,9 +93,7 @@ declare interface GridItemOptions {
  *
  * > **NOTE**
  * >
- * > *
- * >
- * > * This component can be used only as a child of [Grid]{@link grid}.
+ * > * This component can be used only as a child of [Grid]{@link ./grid}.
  * >
  * > * When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are
@@ -121,12 +120,12 @@ declare interface GridItemOptions {
  * @noninterop
  */
 interface GridItemInterface {
-
   /**
    * Creates a **GridItem** component.
    *
-   * @param { GridItemOptions } value - Parameters of the grid item, containing the **style** parameter of the
-   *     [GridItemStyle]{@link GridItemStyle} enum type. [since 11]
+   * @param { GridItemOptions } value - Optional parameters for **GridItem**. This object contains the **style**
+   *     parameter of the [GridItemStyle]{@link GridItemStyle} enum type. When not passed, the default style is used,
+   *     that is, **GridItemStyle.NONE**.<br/> [since 11]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -138,6 +137,35 @@ interface GridItemInterface {
 }
 
 /**
+ * Rules for setting **rowStart**, **rowEnd**, **columnStart**, and **columnEnd**:
+ * The valid value range of **rowStart** and **rowEnd** is 0 to the total number of rows minus 1.
+ * The valid value range of **columnStart** and **columnEnd** is 0 to the total number of columns minus 1.
+ * If **rowStart**, **rowEnd**, **columnStart**, or **columnEnd** is set, **GridItem** components occupy
+ * the specified number of rows (**rowEnd** - **rowStart** + 1) or columns (**columnEnd** - **columnStart** + 1).
+ * **GridItem** components with properly configured **rowStart** or **rowEnd** or **columnStart** or **columnEnd**
+ * attributes can only be laid out according to the specified grid coordinates when the parent **Grid**
+ * has both **columnsTemplate** and **rowsTemplate** defined.
+ * In the **Grid** component with both **columnsTemplate** and **rowsTemplate** set,
+ * **GridItem** components that have **rowStart** or **rowEnd** or **columnStart** or **columnEnd** set
+ * are laid out in a row-by-row then column-by-column manner.
+ * In the **Grid** component with only **columnsTemplate** set,
+ * **GridItem** components that have **columnStart** or **columnEnd** set are laid out in the specified columns.
+ * If there are already grid items in those columns, the grid items will be laid out in another row.
+ * In the **Grid** component with only **rowsTemplate** set,
+ * **GridItem** components that have **rowStart** or **rowEnd** set are laid out on the specified rows.
+ * If there are already grid items in those rows, the grid items will be laid out in another column.
+ * In the **Grid** component with neither **columnsTemplate** nor **rowsTemplate** set,
+ * the row and column number attributes have no effect for **GridItem** components.
+ * The following table describes the rules for handling abnormal values for **GridItem** row and column numbers.
+ *
+ * | Attribute Setting | Exception Type| Layout Principles After Correction |
+ * | ----- |----| ------------------------ |
+ * | Only **columnsTemplate** is set |  Any row or column exception| Laid out in a row-by-row then column-by-column manner|
+ * | Only **rowsTemplate** is set|  Any row or column exception| Laid out in a row-by-row then column-by-column manner|
+ * | Both **rowsTemplate** and **columnsTemplate** are set|  rowStart < rowEnd | Row span = min(rowEnd - rowStart + 1, total number of rows)|
+ * | Both **rowsTemplate** and **columnsTemplate** are set|  rowStart > rowEnd | Laid out in a row-by-row then column-by-column manner|
+ * | Both **rowsTemplate** and **columnsTemplate** are set|  columnStart < columnEnd | Column span = min(columnEnd - columnStart + 1, total number of columns)|
+ * | Both **rowsTemplate** and **columnsTemplate** are set|  columnStart > columnEnd | Laid out in a row-by-row then column-by-column manner|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -151,9 +179,10 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * Sets the start row number of the component.
    *
-   * @param { number } value - Start row number of the component.<br>In scenarios where you need to specify the start
-   *     row and column numbers and the number of rows and columns of a **GridItem**, you are advised to use the
-   *     [GridLayoutOptions]{@link GridLayoutOptions} parameter of the **Grid** component. For details, see
+   * @param { number } value - Start row number of the component.
+   *     <br>In scenarios where you need to specify the start row and column numbers and the number of rows and columns
+   *     of a **GridItem**, you are advised to use the [GridLayoutOptions]{@link GridLayoutOptions} parameter of the
+   *     **Grid** component. For details, see
    *     [Example 1: Creating a Fixed Row and Column Grid Layout](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-1-creating-a-fixed-row-and-column-grid-layout)
    *     and
    *     [Example 3: Implementing a Scrollable Grid with Grid Items Spanning Rows and Columns](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-3-implementing-a-scrollable-grid-with-grid-items-spanning-rows-and-columns).
@@ -170,13 +199,13 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * Sets the end row number of the component.
    *
-   * @param { number } value - End row number of the component.<br>In scenarios where you need to specify the start row
-   *     and column numbers and the number of rows and columns of a **GridItem**, you are advised to use the
-   *     [GridLayoutOptions]{@link GridLayoutOptions} parameter of the **Grid** component. For details, see
+   * @param { number } value - End row number of the current element.<br/>In scenarios where you need to specify the
+   *     start row and column and the occupied rows and columns of a **GridItem**, you are advised to use the
+   *     [GridLayoutOptions]{@link GridLayoutOptions} parameter of **Grid**. For details, see
    *     [Example 1: Creating a Fixed Row and Column Grid Layout](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-1-creating-a-fixed-row-and-column-grid-layout)
    *     and
    *     [Example 3: Implementing a Scrollable Grid with Grid Items Spanning Rows and Columns](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-3-implementing-a-scrollable-grid-with-grid-items-spanning-rows-and-columns).
-   *     <br>Value range: [0, Total number of rows – 1].
+   *     <br/>Value range: [0, Total Rows - 1]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -189,9 +218,10 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * Sets the start column number of the component.
    *
-   * @param { number } value - Start column number of the component.<br>In scenarios where you need to specify the start
-   *     row and column numbers and the number of rows and columns of a **GridItem**, you are advised to use the
-   *     [GridLayoutOptions]{@link GridLayoutOptions} parameter of the **Grid** component. For details, see
+   * @param { number } value - Start column number of the component.
+   *     <br>In scenarios where you need to specify the start row and column numbers and the number of rows and columns
+   *     of a **GridItem**, you are advised to use the [GridLayoutOptions]{@link GridLayoutOptions} parameter of the
+   *     **Grid** component. For details, see
    *     [Example 1: Creating a Fixed Row and Column Grid Layout](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-1-creating-a-fixed-row-and-column-grid-layout)
    *     and
    *     [Example 3: Implementing a Scrollable Grid with Grid Items Spanning Rows and Columns](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-3-implementing-a-scrollable-grid-with-grid-items-spanning-rows-and-columns).
@@ -208,9 +238,10 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * Sets the end column number of the component.
    *
-   * @param { number } value - End column number of the component.<br>In scenarios where you need to specify the start
-   *     row and column numbers and the number of rows and columns of a **GridItem**, you are advised to use the
-   *     [GridLayoutOptions]{@link GridLayoutOptions} parameter of the **Grid** component. For details, see
+   * @param { number } value - End column number of the component.
+   *     <br>In scenarios where you need to specify the start row and column numbers and the number of rows and columns
+   *     of a **GridItem**, you are advised to use the [GridLayoutOptions]{@link GridLayoutOptions} parameter of the
+   *     **Grid** component. For details, see
    *     [Example 1: Creating a Fixed Row and Column Grid Layout](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-1-creating-a-fixed-row-and-column-grid-layout)
    *     and
    *     [Example 3: Implementing a Scrollable Grid with Grid Items Spanning Rows and Columns](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-3-implementing-a-scrollable-grid-with-grid-items-spanning-rows-and-columns).
@@ -233,8 +264,8 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    * > is automatically determined based on the component attributes and child component changes. No manual
    * > configuration is required.
    *
-   * @param { boolean } value - Sets whether to re-create the component when it is being built.<br>Default value:
-   *     **false**.
+   * @param { boolean } value - Whether to recreate this node when the component build is triggered. The value **true**
+   *     means to recreate the node, and **false** means not to forcibly recreate the node.<br/>Default value: **false**
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -247,12 +278,12 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    * Sets whether the grid item is selectable in the mouse selection box area. This attribute takes effect only when
    * mouse box selection is enabled for the parent **Grid** container.
    *
-   * This attribute must be used before the [polymorphic style]{@link common} is set. Otherwise, the style settings will
-   * not take effect.
+   * This attribute must be used before the [polymorphic style]{@link ./common} is set. Otherwise, the style settings
+   * will not take effect.
    *
-   * @param { boolean } value - Whether the grid item is selectable in the mouse selection box area. The **value** means
-   *     that the grid item is selectable in the mouse selection box area, and **false** means the opposite.<br>Default
-   *     value: **true**.
+   * @param { boolean } value - Whether the grid item is selectable in the mouse selection box area. The value **true**
+   *     means that the grid item is selectable in the mouse selection box area, and **false** means the opposite.
+   *     <br>Default value: **true**.
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -266,11 +297,11 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    * Sets whether the grid item is selected. This attribute supports two-way binding through
    * [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *
-   * This attribute must be used before the [polymorphic style]{@link common} is set. Otherwise, the style settings will
-   * not take effect.
+   * This attribute must be used before the [polymorphic style]{@link ./common} is set. Otherwise, the style settings
+   * will not take effect.
    *
-   * @param { boolean } value - Whether the grid item is selected. The **value** means that the grid item is selected,
-   *     and **false** means that the grid item is in the default state.<br>Default value: **false**.
+   * @param { boolean } value - Whether the current **GridItem** is selected. The value **true** indicates the selected
+   *     state, and **false** indicates the unselected state.<br/>Default value: **false**
    * @returns { GridItemAttribute } the attribute of the gridItem.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -283,8 +314,10 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * Triggered when the selected state of the grid item changes.
    *
-   * @param { function } event - Callback invoked when the selected state changes. The input parameter **isSelected**
-   *     returns **true** if the grid item is selected in the mouse selection box area; returns **false** otherwise.
+   * @param { function } event - Callback invoked when the selected state changes.
+   *     The input parameter **isSelected**: Whether the item is selected.
+   *     The value **true** indicates that the item enters the mouse selection range and is selected,
+   *     and **false** indicates that the item moves out of the mouse selection range and is not selected.
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -300,9 +333,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
  *
  * > **NOTE**
  * >
- * > *
- * >
- * > * This component can be used only as a child of [Grid]{@link grid}.
+ * > * This component can be used only as a child of [Grid]{@link ./grid}.
  * >
  * > * When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are

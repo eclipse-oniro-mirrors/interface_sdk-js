@@ -84,6 +84,16 @@ export interface AutoStartupInfo {
   appCloneIndex?: int;
 
   /**
+   * The app is started when the device is powered on and before the user unlocks the device.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  isDirectBoot?: boolean;
+
+  /**
    * User ID associated with the application, used to differentiate applications belonging to different user accounts on
    * the same device.
    *

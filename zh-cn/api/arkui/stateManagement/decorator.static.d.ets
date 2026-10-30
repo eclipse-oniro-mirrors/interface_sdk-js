@@ -1546,8 +1546,8 @@ export type MonitorCallback = (iMonitor: IMonitor) => void;
 /**
  * 监听状态变量的回调类型。
  *
- * @returns { Any }
- 被监听状态变量。
+ * @returns { Any } 被监听状态变量。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
@@ -1745,6 +1745,32 @@ export declare interface EnvOptions<T> {
    * @since 24 static
    */
   initValue?: T;
+  /**
+   * watch函数。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  watchFunc?: WatchFuncType;
+}
+
+/**
+ * Env创建可选参数
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface CustomEnvOptions<T> {
+  /**
+   * watch函数。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  watchFunc?: WatchFuncType;
 }
 
 /**

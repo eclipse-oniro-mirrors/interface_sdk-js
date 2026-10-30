@@ -350,8 +350,9 @@ export declare interface GridRowAttribute extends CommonMethod {
  	 * @param { GridRowOptions } [options] - GridRow constructor options
  	 * @returns { GridRowAttribute } Returns the instance of the GridRowAttribute.
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setGridRowOptions(options?: GridRowOptions): this;
     /**
@@ -393,8 +394,9 @@ export declare function GridRow(
  * @param { CustomBuilder } [content_] - container
  * @returns { GridRowAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

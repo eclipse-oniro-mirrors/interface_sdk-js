@@ -19,11 +19,11 @@
  * 
  * ###### Attributes
  * 
- * The [universal attributes]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal attributes]{@link CommonMethod} are not supported.
  * 
  * ###### Events
  * 
- * The [universal events]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal events]{@link CommonMethod} are not supported.
  *
  * @file This section describes the interfaces used by InterstitialDialogAction
  * @kit ArkUI

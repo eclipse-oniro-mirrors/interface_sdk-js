@@ -1182,7 +1182,16 @@ export declare interface RichEditorImageSpanResult {
         int,
         int
     ];
+    /**
+     * 图片文本标签。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * 图片Span信息。
  *
@@ -1396,7 +1405,16 @@ export declare interface RichEditorImageSpanOptions {
      * @since 23 static
      */
     onHover?: OnHoverCallback;
+    /**
+     * 图片文本标签。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    imageTag?: string;
 }
+
 /**
  * 设置builder插入的偏移位置和样式。
  *
@@ -1454,7 +1472,7 @@ export declare interface RichEditorBuilderSpanOptions {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface BuilderSpanInfo {
     /**
@@ -1463,7 +1481,7 @@ export declare interface BuilderSpanInfo {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     id?: string;
     /**
@@ -1472,7 +1490,7 @@ export declare interface BuilderSpanInfo {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     offset?: int;
 }
@@ -1485,7 +1503,7 @@ export declare interface BuilderSpanInfo {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface RichEditorBuilderSpan {
     /**
@@ -1493,7 +1511,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     builder: CustomBuilder;
     /**
@@ -1502,7 +1520,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     onAttach?: Callback<BuilderSpanInfo>;
     /**
@@ -1517,7 +1535,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     onDetach?: Callback<BuilderSpanInfo>;
     /**
@@ -1526,7 +1544,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2291,7 +2309,7 @@ export declare class RichEditorController extends RichEditorBaseController {
      * @returns { int | undefined } 添加完成的builderSpan在所有Span中的索引位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): int | undefined;
     /**
@@ -2375,7 +2393,7 @@ export declare class RichEditorController extends RichEditorBaseController {
      * @returns { Array<BuilderSpanInfo> | undefined } BuilderSpan身份与位置信息数组。<br>当controller未绑定组件或绑定controller的组件被释放时，返回**undefined**。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo> | undefined;
     /**
@@ -3183,8 +3201,9 @@ export declare interface RichEditorAttribute extends CommonMethod {
      * @param { RichEditorOptions | RichEditorStyledStringOptions } options - RichEditor 构造函数选项。
      * @returns { RichEditorAttribute } - 返回RichEditorAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setRichEditorOptions(options: RichEditorOptions | RichEditorStyledStringOptions): this;
 
@@ -3370,8 +3389,9 @@ export declare function RichEditor(
  * @param { CustomBuilderT<RichEditorAttribute> } style - RichEditor attribute instance
  * @returns { RichEditorAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

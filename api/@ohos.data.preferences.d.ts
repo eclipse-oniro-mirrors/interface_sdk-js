@@ -228,13 +228,34 @@ declare namespace preferences {
      * @since 23 static
      */
     storageType?: StorageType | null | undefined;
+
+    /**
+     * Initial cache file size, in KB. This parameter is optional. It indicates the initial inter-process shared cache
+     * file size of the current **Preferences** instance, and takes effect only when the storage mode is set to
+     * **GSKV**.
+     * The value can be 0 or within the range of [256, 1112784]. If this parameter is not specified, the system
+     * automatically
+     * initializes the cache file as needed. If this parameter is set to 0, the initial cache file size is 0, the cache
+     * file of this **Preferences** instance will not grow, and this **Preferences** instance does not support
+     * cross-process access. If this parameter is set to a valid value greater than 0, the initial cache file size is
+     * the configured value, and the cache file size of this **Preferences** instance will still grow as needed.
+     * The configuration value can be dynamically switched when the **Preferences** instance is disconnected and
+     * reconnected.
+     * Unit: kb.  Value constraint: The value can be 0. Value range: [256,1112784]. Default value: 1112784.
+     *
+     * @syscap SystemCapability.DistributedDataManager.Preferences.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    sharedMapSize?: long;
   }
 
   /**
    * Obtains a **Preferences** instance. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<Preferences> } callback - Callback used to return the result. If the operation is successful
@@ -257,7 +278,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<Preferences> } callback - Callback used to return the result. If the operation is successful
@@ -267,7 +288,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -283,7 +306,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<Preferences> } Promise used to return the **Preferences** instance obtained.
@@ -304,7 +327,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<Preferences> } Promise used to return the **Preferences** instance obtained.
@@ -312,7 +335,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -328,7 +353,7 @@ declare namespace preferences {
    * Obtains a **Preferences** instance. This API returns the result synchronously.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Preferences } **Preferences** instance obtained.
@@ -336,7 +361,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -354,7 +381,10 @@ declare namespace preferences {
    *
    * @param { StorageType } type - Storage type to check.
    * @returns { boolean } Returns **true** if the storage type is supported; returns **false** otherwise.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: Incorrect parameter types
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.Preferences.Core
    * @atomicservice
    * @since 18 dynamic
@@ -369,7 +399,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -396,7 +426,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -405,7 +435,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500010 - Failed to delete the user preferences persistence file.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
@@ -426,7 +458,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -452,7 +484,7 @@ declare namespace preferences {
    * This API cannot be called concurrently with other **preferences** APIs.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -460,7 +492,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15500010 - Failed to delete the user preferences persistence file.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
@@ -492,7 +526,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -529,7 +563,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
@@ -538,7 +572,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -569,7 +605,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -605,7 +641,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @returns { Promise<void> } Promise that returns no value.
@@ -613,7 +649,9 @@ declare namespace preferences {
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -644,7 +682,7 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the **Preferences** instance.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -679,14 +717,16 @@ declare namespace preferences {
    * number of data cache pages that are not written to the disk.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.<br>For details about the application context of the stage model, see 
+   *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see 
    *     [Context]{@link ./application/Context:Context}.
    * @param { Options } options - Configuration options of the **Preferences** instance.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @throws { BusinessError } 15501001 - The operations is supported in stage mode only.
    * @throws { BusinessError } 15501002 - Invalid dataGroupId.
    * @throws { BusinessError } 15500000 - Inner error. [since 11]
@@ -781,7 +821,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<Object> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined** and **value** provides all KV pairs obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1016,7 +1055,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1060,7 +1098,6 @@ declare namespace preferences {
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, 
      *     **err** is **undefined**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Mandatory parameters are left unspecified.
      * @throws { BusinessError } 15500000 - Inner error. [since 11]
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 10]
@@ -1172,9 +1209,10 @@ declare namespace preferences {
      *     of KV pairs. The keys identify the data changed, and the values are the new values. The values support the 
      *     following data types: number, string, boolean, Array<number>, Array<string>, Array< boolean>, Uint8Array, and
      *     object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     2. Incorrect parameter types;
-     *     3. Parameter verification failed.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 15500000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.Preferences.Core
      * @crossplatform [since 20]

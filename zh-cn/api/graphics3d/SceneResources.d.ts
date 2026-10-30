@@ -14,13 +14,17 @@
  */
 
 /**
- * @file 3D场景资源类型声明
+ * 本模块提供ArkGraphics 3D中常用的基本资源类型。
+ *
+ * @file
  * @kit ArkGraphics3D
  */
 
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
+
+import image from '../@ohos.multimedia.image';
 import { Vec2, Vec3, Vec4, Aabb, Quaternion } from './SceneTypes';
 import { Callback } from '../@ohos.base';
 
@@ -177,7 +181,7 @@ export interface SceneResource {
 }
 
 /**
- * 着色器，继承自SceneResource。
+ * 着色器，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Shader
@@ -251,7 +255,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * 仅对阴影进行绘制，当材质开启Blend属性，与背景融合模拟透明材质效果。
+   * 仅对阴影进行绘制，当材质开启[Blend]{@link Blend}属性，与背景融合模拟透明材质效果。
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
@@ -384,7 +388,7 @@ export interface RenderSort {
 }
 
 /**
- * 材质类型，继承自SceneResource。
+ * 材质类型，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Material
@@ -497,7 +501,7 @@ export interface MaterialProperty {
   factor: Vec4;
 
   /**
-   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V、W方向的寻址模式为重复（REPEAT）。
+   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V方向的寻址模式为重复（REPEAT）。
    * 
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -509,7 +513,7 @@ export interface MaterialProperty {
 
 /**
  * 用于实现真实感外观的材质资源。
- * 采用基于物理渲染（PBR）的金属-粗糙度模型，通过调节金属度和粗糙度参数，可模拟金属、塑料等不同材质的表面光照与反射效果，继承自Material。
+ * 采用基于物理渲染（PBR）的金属-粗糙度模型，通过调节金属度和粗糙度参数，可模拟金属、塑料等不同材质的表面光照与反射效果，继承自[Material]{@link Material}。
  *
  * @extends Material
  * @interface MetallicRoughnessMaterial
@@ -623,7 +627,7 @@ export interface MetallicRoughnessMaterial extends Material {
 }
 
 /**
- * 不受光照影响的材质，其着色值只与设置的基础颜色有关，与光照条件无关，继承自Material。
+ * 不受光照影响的材质，其着色值只与设置的基础颜色有关，与光照条件无关，继承自[Material]{@link Material}。
  *
  * @extends Material
  * @interface UnlitMaterial
@@ -642,7 +646,7 @@ export interface UnlitMaterial extends Material {
 }
 
 /**
- * 此材质继承自Material，仅绘制材质表面阴影。材质启用Blend属性时，可与背景融合模拟透明效果。
+ * 此材质继承自[Material]{@link Material}，仅绘制材质表面阴影。材质启用[Blend]{@link Blend}属性时，可与背景融合模拟透明效果。
  *
  * @extends Material
  * @interface UnlitShadowAlphaMaterial
@@ -665,7 +669,7 @@ export interface UnlitShadowAlphaMaterial extends Material {
 }
 
 /**
- * 着色器材质，继承自Material。
+ * 着色器材质，继承自[Material]{@link Material}。
  *
  * @extends Material
  * @interface ShaderMaterial
@@ -686,7 +690,7 @@ export interface ShaderMaterial extends Material {
 }
 
 /**
- * 遮挡材质，能够遮挡场景中的其他物体但不会遮挡环境，继承自Material。
+ * 遮挡材质，能够遮挡场景中的其他物体但不会遮挡环境，继承自[Material]{@link Material}。
  *
  * @extends Material
  * @interface OcclusionMaterial
@@ -883,7 +887,7 @@ export interface Morpher {
 }
 
 /**
- * 网格类型，继承自SceneResource。
+ * 网格类型，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Mesh
@@ -926,7 +930,7 @@ export interface Mesh extends SceneResource {
 }
 
 /**
- * 网格资源，继承自SceneResource。
+ * 网格资源，继承自[SceneResource]{@link SceneResource}。
  *
  *
  * @extends SceneResource
@@ -939,7 +943,7 @@ export interface MeshResource extends SceneResource {
 }
 
 /**
- * 动画类型，继承自SceneResource。
+ * 动画类型，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Animation
@@ -1123,7 +1127,7 @@ export enum EnvironmentBackgroundType {
 }
 
 /**
- * 环境类型，继承自SceneResource。
+ * 环境类型，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Environment
@@ -1214,7 +1218,7 @@ export interface Environment extends SceneResource {
 }
 
 /**
- * 图片类型，继承自SceneResource。
+ * 图片类型，继承自[SceneResource]{@link SceneResource}。
  *
  * @extends SceneResource
  * @interface Image
@@ -1247,7 +1251,7 @@ export interface Image extends SceneResource {
 }
 
 /**
- * 流图片类型，继承自Image。
+ * 流图片类型，继承自[Image]{@link Image}。
  *
  * @syscap SystemCapability.ArkUi.Graphics3D
  * @stagemodelonly
@@ -1265,7 +1269,29 @@ export interface ImageStream extends Image {
 }
 
 /**
- * 特效类型，继承自SceneResource。由createEffect接口获得。
+ * 渲染目标类型，继承自[Image]{@link Image}，用于离屏渲染。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTarget extends Image {
+  /**
+   * 从渲染目标对象获取渲染结果的PixelMap，返回的PixelMap不可编辑，使用Promise异步回调。渲染目标对象已销毁时调用该接口抛出错误码25601006。
+   *
+   * @returns { Promise<image.PixelMap> } Promise对象，返回渲染结果对应的PixelMap。
+   * @throws { BusinessError } 25601006 - Expired or invalid resource.
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  getPixelMap(): Promise<image.PixelMap>;
+}
+
+/**
+ * 特效类型，继承自[SceneResource]{@link SceneResource}。由[createEffect]{@link ./Scene:SceneResourceFactory.createEffect}接口获得。
  *
  * @extends SceneResource
  * @interface Effect
@@ -1299,8 +1325,8 @@ export interface Effect extends SceneResource {
    * 获取特定特效属性的值。
    *
    * @param { string } propertyName - 特定特效属性的名称。目前支持的字符串为：
-   *     -'exposure'：该属性表示图像的曝光度。
-   *     -'vibrance'：该属性表示图像的自然饱和度。
+   *     <br>-'exposure'：该属性表示图像的曝光度。
+   *     <br>-'vibrance'：该属性表示图像的自然饱和度。
    * @returns { Object | null | undefined } 特效属性值。
    *     若当前Effect类型下不存在与传入的propertyName匹配的属性，则获取属性值失败，返回null；
    *     若propertyName对应的可选属性未设置，则返回undefined。
@@ -1314,11 +1340,11 @@ export interface Effect extends SceneResource {
    * 设置特定特效属性的值。
    *
    * @param { string } propertyName - 特定特效属性的名称。目前支持的字符串为：
-   *     -'exposure'：该属性表示图像的曝光度。
-   *     -'vibrance'：该属性表示图像的自然饱和度。
+   *     <br>-'exposure'：该属性表示图像的曝光度。
+   *     <br>-'vibrance'：该属性表示图像的自然饱和度。
    * @param { Object | undefined } value - 要设置的特效属性值。
-   *     'exposure'：value实际类型为number，推荐取值范围[-5, 5]。取值越大，图像越亮。
-   *     'vibrance'：value实际类型为number，推荐取值范围 [-1, 1]。取值越大，图像颜色越鲜艳。
+   *     <br>-'exposure'：value实际类型为number，推荐取值范围[-5, 5]。取值越大，图像越亮。
+   *     <br>-'vibrance'：value实际类型为number，推荐取值范围 [-1, 1]。取值越大，图像颜色越鲜艳。
    * @returns { boolean } 返回设置特效属性值操作是否成功。true表示设置成功，false表示设置失败。
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly

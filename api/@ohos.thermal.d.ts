@@ -126,7 +126,8 @@ declare namespace thermal {
    *
    * @param { Callback<ThermalLevel> } callback - Callback used to return thermal level. This parameter is of the
    *     function type.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   * 2. Incorrect parameter types.
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 9 dynamic
    * @since 23 static
@@ -149,7 +150,7 @@ declare namespace thermal {
    * Unregisters from the thermal level changes. This API uses an asynchronous callback to return the result.
    *
    * @param { Callback<void> } callback - (Optional) Callback that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types;
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 9 dynamic
    * @since 23 static

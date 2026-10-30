@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file URI权限管理
  * @kit AbilityKit
  */
 
@@ -48,8 +48,9 @@ declare namespace uriPermissionManager {
    * @param { wantConstant.Flags } flag - URI的读权限或写权限。
    * @param { string } targetBundleName - 被授权URI的应用包名。
    * @param { AsyncCallback<number> } callback - 回调函数。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -57,7 +58,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 10 dynamic
@@ -86,9 +89,11 @@ declare namespace uriPermissionManager {
    * @param { wantConstant.Flags } flag - URI的读权限或写权限。
    * @param { string } targetBundleName - 被授权URI的应用包名。
    * @param { AsyncCallback<void> } callback - 回调函数。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
@@ -122,8 +127,9 @@ declare namespace uriPermissionManager {
    * @param { wantConstant.Flags } flag - URI的读权限或写权限。
    * @param { string } targetBundleName - 被授权URI的应用包名。
    * @returns { Promise<number> } Promise对象。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -131,7 +137,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 10 dynamic
@@ -148,9 +156,11 @@ declare namespace uriPermissionManager {
    *     wantConstant.Flags.FLAG_AUTH_PERSISTABLE_URI_PERMISSION.
    * @param { string } targetBundleName - Indicates the bundle name of authorization target.
    * @returns { Promise<void> } - the promise returned by the function.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000059 - Invalid URI type.
@@ -181,8 +191,9 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - 被授权应用的应用包名。
    * @param { int } appCloneIndex - 被授权应用的分身索引，有效范围为[0, 1000], 取值为0时表示主应用。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
@@ -191,7 +202,9 @@ declare namespace uriPermissionManager {
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
    * @throws { BusinessError } 16000081 - Failed to obtain the target application information.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use.
    * @since 14 dynamic
@@ -214,14 +227,17 @@ declare namespace uriPermissionManager {
    * @param { string } uri - 指向文件的URI，scheme固定为"file"，参考[FileUri]{@link @ohos.file.fileuri:fileUri.FileUri#constructor}。
    * @param { string } targetBundleName - 被撤销授权uri的应用包名。
    * @param { AsyncCallback<number> } callback - 回调函数。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10 - 11]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 10 dynamic
@@ -238,8 +254,9 @@ declare namespace uriPermissionManager {
    * @param { string } uri - 指向文件的URI，scheme固定为"file"，参考[FileUri]{@link @ohos.file.fileuri:fileUri.FileUri#constructor}。
    * @param { string } targetBundleName - 被撤销授权uri的应用包名。
    * @param { AsyncCallback<void> } callback - 回调函数。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -263,14 +280,17 @@ declare namespace uriPermissionManager {
    * @param { string } uri - 指向文件的URI，scheme固定为"file"，参考[FileUri]{@link @ohos.file.fileuri:fileUri.FileUri#constructor}。
    * @param { string } targetBundleName - 被授权URI的应用包名。
    * @returns { Promise<number> } Promise对象。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API. [since 10 - 11]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 10 dynamic
@@ -287,8 +307,9 @@ declare namespace uriPermissionManager {
    * @param { string } uri - 指向文件的URI，scheme固定为"file"，参考[FileUri]{@link @ohos.file.fileuri:fileUri.FileUri#constructor}。
    * @param { string } targetBundleName - 被授权URI的应用包名。
    * @returns { Promise<void> } - Promise对象。返回0表示有权限，返回-1表示无权限。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Connect to system server failed.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -314,14 +335,16 @@ declare namespace uriPermissionManager {
    * @param { string } targetBundleName - 被授权应用的应用包名。
    * @param { int } appCloneIndex - 被授权应用的分身索引，有效范围为[0, 1000], 取值为0时表示主应用。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000059 - Invalid URI type.
    * @throws { BusinessError } 16000081 - Failed to obtain the target application information.
-   * @throws { BusinessError } 801 - Capability not supported. [since 19]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 19]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi hide this for inner system use
    * @since 14 dynamic
@@ -345,8 +368,9 @@ declare namespace uriPermissionManager {
    *     [bundleManager.getApplicationInfo]{@link @ohos.bundle.bundleManager:bundleManager.getApplicationInfo(bundleName: string, appFlags: int, userId: int, callback: AsyncCallback<ApplicationInfo>)}
    *     获取。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.
@@ -379,9 +403,11 @@ declare namespace uriPermissionManager {
    *     [bundleManager.getApplicationInfo]{@link @ohos.bundle.bundleManager:bundleManager.getApplicationInfo(bundleName: string, appFlags: int, userId: int, callback: AsyncCallback<ApplicationInfo>)}
    *     获取。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000058 - Invalid URI flag.
    * @throws { BusinessError } 16000060 - A sandbox application cannot grant URI permission.

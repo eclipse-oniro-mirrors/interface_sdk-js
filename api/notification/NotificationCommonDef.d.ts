@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http?://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,9 +14,7 @@
  */
 
 /**
- * The **NotificationCommonDef** module defines the common data structures used in notification-related APIs.
- *
- * @file Some common definitions
+ * @file NotificationCommonDef
  * @kit NotificationKit
  */
 
@@ -29,7 +27,8 @@
  */
 export interface BundleOption {
   /**
-   * Bundle name of the application.
+   * Bundle name of the application. The string length cannot exceed 202 bytes, and the excess part will be
+   * truncated.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -73,7 +72,7 @@ export interface GrantedBundleInfo {
    * @since 22 dynamic
    * @since 23 static
    */
-  readonly appIndex: int;
+  appIndex: int;
 
   /**
    * Application name, which is obtained from the **label** of ApplicationInfo.

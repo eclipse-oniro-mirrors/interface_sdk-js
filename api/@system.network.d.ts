@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Network State
  * @kit NetworkKit
  */
 

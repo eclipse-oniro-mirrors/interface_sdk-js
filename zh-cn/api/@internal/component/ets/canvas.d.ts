@@ -19,7 +19,7 @@
  */
 
 /**
- * ## 子组件
+ * ###### 子组件
  *
  * 不支持。
  */
@@ -151,7 +151,7 @@ declare type CanvasTextBaseline = "alphabetic" | "bottom" | "hanging" | "ideogra
 declare type ImageSmoothingQuality = "high" | "low" | "medium";
 
 /**
- * Import the frame node type object for Canvas.
+ * 为Canvas导入FrameNode类型对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -585,7 +585,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
    * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -599,7 +599,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link path}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
    * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
@@ -1817,7 +1817,7 @@ declare class CanvasRenderer extends CanvasPath {
   /**
    * 获取虚线样式。
    *
-   * @returns { number[] }
+   * @returns { number[] } 虚线样式数组，包含交替绘制线和间距的距离。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -2370,7 +2370,7 @@ declare class CanvasRenderer extends CanvasPath {
  */
 declare class CanvasRenderingContext2D extends CanvasRenderer {
   /**
-   * 组件高度。
+   * **CanvasRenderingContext2D**的组件高度。
    *
    * 默认单位为vp。
    *
@@ -2384,7 +2384,7 @@ declare class CanvasRenderingContext2D extends CanvasRenderer {
   readonly height: number;
 
   /**
-   * 组件宽度。
+   * **CanvasRenderingContext2D**的组件宽度。
    *
    * 默认单位为vp。
    *
@@ -2664,16 +2664,6 @@ declare class CanvasRenderingContext2D extends CanvasRenderer {
  * @atomicservice [since 11]
  * @since 8 dynamic
  */
-declare interface OffscreenCanvasRenderingContext2DInterface {
-  /**
-   * @since 8
-   */
-  (width: number, height: number, settings?: RenderingContextSettings): OffscreenCanvasRenderingContext2D;
-  /**
-   * @since 12
-   */
-  (width: number, height: number, settings?: RenderingContextSettings, unit?: LengthMetricsUnit): OffscreenCanvasRenderingContext2D;
-}
 declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
   /**
    * 生成一个包含图片展示的URL，该接口存在内存拷贝行为，高耗时，应避免频繁使用。
@@ -2717,7 +2707,7 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
    * @param { number } height - 离屏画布的高度，默认单位：vp。
    *    <br>异常值NaN和Infinity按无效值处理。
    * @param { RenderingContextSettings } settings - 用来配置OffscreenCanvasRenderingContext2D对象的参数，
-   *    见RenderingContextSettings接口描述。
+   *    当需要开启抗锯齿等高级配置时传入此参数，见RenderingContextSettings接口描述。
    *    <br>异常值undefined按RenderingContextSettings的默认值处理。
    *    <br>默认值：null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2737,7 +2727,7 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
    * @param { number } height - 离屏画布的高度，默认单位：vp。
    *    <br>异常值NaN和Infinity按无效值处理。
    * @param { RenderingContextSettings } settings - 用来配置OffscreenCanvasRenderingContext2D对象的参数，
-   *    见RenderingContextSettings接口描述。
+   *    当需要开启抗锯齿等高级配置时传入此参数，见RenderingContextSettings接口描述。
    *    <br>异常值undefined按RenderingContextSettings的默认值处理。
    *    <br>默认值：null。
    * @param { LengthMetricsUnit } [unit] - 用来配置OffscreenCanvasRenderingContext2D对象的单位模式，
@@ -2769,10 +2759,6 @@ declare class OffscreenCanvasRenderingContext2D extends CanvasRenderer {
  * > OffscreenCanvas无法在ServiceExtensionAbility中使用，ServiceExtensionAbility中建议使用
  * > [Drawing模块]{@link @ohos.graphics.drawing}
  * > 进行离屏绘制。
- *
- * ## 子组件
- *
- * 不支持。
  *
  * @extends CanvasRenderer [since 8 - 10]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2948,6 +2934,8 @@ declare class DrawingRenderingContext {
 
   /**
    * 获取绘制内容的画布对象。
+   * 仅当**DrawingRenderingContext**对象与**Canvas**组件绑定后，才可使用该接口。
+   * 获取的**Canvas**对象可用于绑定**Brush**、**Pen**等绘图工具，以绘制形状、文本和图片。
    *
    * @returns { DrawingCanvas } 绘制内容的画布对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3107,7 +3095,7 @@ interface CanvasInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 设置组件支持AI分析，当前支持主体识别、文字识别和对象查找等功能，支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。
  * 
@@ -3119,7 +3107,7 @@ interface CanvasInterface {
  * [ImageAnalyzerController.getImageAnalyzerSupportTypes]{@link ImageAnalyzerController#getImageAnalyzerSupportTypes}接口查
  * 询设备支持的分析类型。
  * 
- * 除支持[通用事件]{@link CommonMethod}外，还支持如下事件：
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -3203,7 +3191,7 @@ declare class CanvasAttribute extends CommonMethod<CanvasAttribute> {
 /**
  * 提供画布组件，用于自定义绘制图形。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 不支持。
  *
@@ -3219,10 +3207,6 @@ declare const Canvas: CanvasInterface;
 
 /**
  * 提供画布组件，用于自定义绘制图形。
- * 
- * ## 子组件
- * 
- * 不支持。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

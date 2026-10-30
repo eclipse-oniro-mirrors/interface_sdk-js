@@ -91,7 +91,8 @@ declare class AppServiceExtensionContext extends ExtensionContext {
    * @param { Want } want - Want information about the target ability, such as the ability name and bundle name.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.

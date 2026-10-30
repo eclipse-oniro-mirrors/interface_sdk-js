@@ -112,7 +112,34 @@ declare namespace certificateManagerDialog {
      * @since 22 dynamic
      * @since 23 static
      */
-    ERROR_NO_AVAILABLE_CERTIFICATE = 29700007
+    ERROR_NO_AVAILABLE_CERTIFICATE = 29700007,
+
+    /**
+     * 密码不正确。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ERROR_PASSWORD_IS_INCORRECT = 29700008,
+
+    /**
+     * 证书管理对话框操作超时。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERROR_OPERATION_TIMEOUT = 29700009,
+
+    /**
+     * API不支持并发调用。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    ERROR_NOT_CONCURRENT_SUPPORT = 29700010
   }
 
   /**
@@ -174,8 +201,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManagerDialog
@@ -285,21 +314,27 @@ declare namespace certificateManagerDialog {
   }
 
   /**
-   * 打开证书管理安装证书向导，显示相应的页面。证书安装成功后，返回证书的唯一标识符，应用可通过该标识符对证书进行使用。使用Promise异步回调。
+   * 打开证书管理安装证书对话框。证书安装成功后，返回证书的唯一标识符。应用可以使用该标识符来使用证书。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER
-   * @param { common.Context } context - 表示应用的上下文信息。
-   * @param { CertificateType } certType - 表示安装证书类型，目前仅支持CA_CERT、CREDENTIAL_USER、CREDENTIAL_SYSTEM。
-   * @param { CertificateScope } certScope - 表示安装证书的使用范围，目前仅支持CURRENT_USER、NOT_SPECIFIED。
-   * @param { Uint8Array } cert - 表示证书数据，大小不超过8KB。<br>当certType为CA_CERT，应为PEM或DER编码格式的证书数据。<br>当certType为CREDENTIAL_USER或CREDENTIAL_SYSTEM，应为P12编码格式的
-   *     证书凭据数据。
-   * @returns { Promise<string> } Promise对象。表示返回证书uri的结果，最大长度为256字节。
+   * @param { common.Context } context - 应用的Context。
+   * @param { CertificateType } certType - 要安装的证书类型。当前支持**CA_CERT**、**CREDENTIAL_USER**和
+   *     **CREDENTIAL_SYSTEM**。
+   * @param { CertificateScope } certScope - 要安装的证书的使用范围。当前支持**CURRENT_USER**和
+   *     **NOT_SPECIFIED**。
+   * @param { Uint8Array } cert - 证书数据。大小不能超过8 KB。<br>当certType设置为
+   *     CA_CERT时，证书数据必须为PEM或DER格式。<br>当certType设置为CREDENTIAL_USER或
+   *     CREDENTIAL_SYSTEM时，值必须为P12编码格式。
+   * @returns { Promise<string> } Promise用于返回证书URI。值最多包含256字节。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - The certificate management application Hap is not preinstalled in the system,
-   *     and the capability is not supported. [since 26.0.0]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system. [since 26.0.0]
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the installation operation.
@@ -325,11 +360,12 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<string> } Promise对象。表示返回授权证书uri的结果，最大长度为256字节。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
    *     permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. A mandatory parameter is left
-   *     unspecified.
-   *     2. Incorrect parameter type. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - The certificate management application Hap is not preinstalled in the system,
-   *     and the capability is not supported. [since 26.0.0]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. A mandatory parameter is left unspecified;
+   *     <br>2. Incorrect parameter type;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system. [since 26.0.0]
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the authorization.
@@ -350,8 +386,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700003 - Show the certificate detail dialog failed, such as the certificate is in an
@@ -375,8 +413,10 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the uninstallation operation.
@@ -425,7 +465,8 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<CertReference> } Promise对象，返回授权证书引用的结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
    *     permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error; 4. Call other service failed. Please try again.
    * @throws { BusinessError } 29700002 - The user cancels the authorization.
@@ -549,14 +590,17 @@ declare namespace certificateManagerDialog {
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
    *     permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
-   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
    * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
    *     <br>2. Memory operation error; 3. File operation error. Please try again.
-   * @throws { BusinessError } 29700002 - The user cancels the authentication operation.
-   * @throws { BusinessError } 29700003 - The authentication operation failed, such as the USB key certificate
-   *     does not exist, the USB key status is abnormal.
+   * @throws { BusinessError } 29700002 - The user cancels the authentication operation or operation timed out.
+   * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
+   *     The USB key certificate does not exist.
+   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   *     The Ukey authentication dialog box cannot be opened concurrently. Please try again later.
+   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
    * @syscap SystemCapability.Security.CertificateManagerDialog
    * @stagemodelonly
    * @since 22 dynamic
@@ -583,6 +627,26 @@ declare namespace certificateManagerDialog {
      * @since 23 static
      */
     keyUri: string;
+
+    /**
+     * 传入Ukey鉴权对话框的自定义数据。一般情况下，此字段只需要在调用openAuthDialogForUkeyProvider接口时提供。
+     * 最大长度2048字节。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    customData?: Uint8Array;
+
+    /**
+     * Ukey认证对话框操作超时时间。
+     * 单位为：秒。取值应为[180,600]内的整数。默认值：300。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    timeoutDuration?: int;
   }
 
   /**
@@ -599,6 +663,165 @@ declare namespace certificateManagerDialog {
    * @since 26.0.0 dynamic&static
    */
   function supportsCACertDialog(): boolean;
+
+  /**
+   * 打开USB Key凭证的Ukey认证对话框。该接口仅Ukey驱动应用调用。实现支付、证书更新等场景下的自定义对话框功能。
+   * Ukey认证对话框需要Ukey驱动应用实现。
+   * 该接口使用promise返回结果。
+   *
+   * @permission ohos.permission.CRYPTO_EXTENSION_REGISTER
+   * @param { UkeyAuthDialogInfo } dialogInfo - 需要打开的Ukey认证对话框信息。
+   * @param { UkeyAuthRequest } ukeyAuthRequest - USB Key凭证认证请求信息。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
+   *     permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
+   * @throws { BusinessError } 29700001 - The certificate manager service processing failed. Possible causes:
+   *     1. IPC communication failed; 2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 29700002 - The user cancels the authentication operation.
+   * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
+   *     The USB key certificate does not exist.
+   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy. Only the
+   *     PC/2in1 device can open the dialog box of the UkeyAuthExtensionAbility type.
+   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @throws { BusinessError } 29700009 - The operation in the Ukey authentication dialog box timed out.
+   * @throws { BusinessError } 29700010 - The Ukey authentication dialog box cannot be opened concurrently.
+   *     Please try again later.
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function openAuthDialogForUkeyProvider(dialogInfo: UkeyAuthDialogInfo, ukeyAuthRequest: UkeyAuthRequest): Promise<void>;
+
+  /**
+   * Ukey认证对话框的ability类型。
+   *
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export enum AbilityType {
+    /**
+     * UkeyAuthExtensionAbility类型的ability。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    UKEY_AUTH_EXTENSION_ABILITY = 1
+  }
+
+  /**
+   * 需要打开的Ukey认证对话框信息。
+   *
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  export interface UkeyAuthDialogInfo {
+
+    /**
+     * Ukey认证对话框的ability类型。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    abilityType: AbilityType;
+
+    /**
+     * Ukey认证对话框的ability名称。最大长度为256字节，且不能为空。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    abilityName: string;
+  }
+
+  /**
+   * 安装证书对话框请求参数。
+   *
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface InstallCertificateRequest {
+ 
+    /**
+     * 安装的证书类型。目前支持**CA_CERT**、**CREDENTIAL_USER**和
+     * **CREDENTIAL_SYSTEM**。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    certType: CertificateType;
+ 
+    /**
+     * 待安装证书的使用范围。**当前用户**和
+     * **NOT_Specific**目前支持。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    certScope: CertificateScope;
+ 
+    /**
+     * 证书数据。大小不能超过8KB。<br>certType为CA_CERT时，证书数据必须为PEM或DER格式。<br>certType为CREDENTIAL_USER或CREDENTIAL_SYSTEM时，必须为P12编码格式。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cert: Uint8Array;
+ 
+    /**
+     * 密钥库文件的密码。该参数仅当certType取值为CREDENTIAL_USER或CREDENTIAL_SYSTEM时有效，如果指定了keystorePwd参数，则对话框中无需用户输入密码。
+     * 最大长度为128。
+     *
+     * @syscap SystemCapability.Security.CertificateManagerDialog
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    keystorePwd?: string;
+  }
+ 
+  /**
+   * 打开证书管理安装证书对话框。证书安装成功后，
+   * 返回证书的唯一标识符。应用程序可以使用该标识符来使用证书。
+   * 使用Promise异步回调。
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER
+   * @param { common.Context } context - 应用程序的上下文。
+   * @param { InstallCertificateRequest } request - 安装证书对话框的请求参数。
+   * @returns { Promise<string> } Promise用于返回证书URI。最大长度256字节。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported because the certificate management application hap
+   *     is not preinstalled in the system.
+   * @throws { BusinessError } 29700001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 29700002 - The user cancels the installation operation.
+   * @throws { BusinessError } 29700003 - The user install certificate failed in the certificate manager dialog, such as
+   *     the certificate is in an invalid format.
+   * @throws { BusinessError } 29700004 - For security purposes, the current device does not support this API.
+   *     You can use the [supportsCACertDialog]{@link certificateManagerDialog.supportsCACertDialog} to determine
+   *     whether the device supports opening the dialog box for installing a CA certificate with certType set to CA.
+   * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy, such as the
+   *     device does not allow users to manage the CA certificate of the global user.
+   * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @throws { BusinessError } 29700008 - The keystore file password is incorrect.
+   * @syscap SystemCapability.Security.CertificateManagerDialog
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function openInstallCertificateDialog(context: common.Context, request: InstallCertificateRequest): Promise<string>;
 }
 
 export default certificateManagerDialog;

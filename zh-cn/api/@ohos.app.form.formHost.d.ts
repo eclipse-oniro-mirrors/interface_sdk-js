@@ -14,7 +14,7 @@
  */
 
 /**
- * @file formHost
+ * @file 卡片使用方-FormHost
  * @kit FormKit
  */
 
@@ -60,7 +60,7 @@ declare namespace formHost {
   function addForm(want: Want): Promise<formInfo.RunningFormInfo>;
 
   /**
-   * 删除指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理器服务不再保留有关该卡片的信息。使用callback异步回调。
+   * 删除指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理服务不再保留有关该卡片的信息。使用callback异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
@@ -82,7 +82,7 @@ declare namespace formHost {
   function deleteForm(formId: string, callback: AsyncCallback<void>): void;
 
   /**
-   * 删除指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理器服务不再保留有关该卡片的信息。使用Promise异步回调。
+   * 删除指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理服务不再保留有关该卡片的信息。使用Promise异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
@@ -104,7 +104,7 @@ declare namespace formHost {
   function deleteForm(formId: string): Promise<void>;
 
   /**
-   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，但卡片管理器服务仍然保留有关该卡片的缓存信息和存储信息。使用callback异步回调。
+   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，但卡片管理服务仍然保留有关该卡片的缓存信息和存储信息。使用callback异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
@@ -126,7 +126,7 @@ declare namespace formHost {
   function releaseForm(formId: string, callback: AsyncCallback<void>): void;
 
   /**
-   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理器服务保留有关该卡片的存储信息，可以选择是否保留缓存信息。使用callback异步回调。
+   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理服务保留有关该卡片的存储信息，可以选择是否保留缓存信息。使用callback异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
@@ -151,7 +151,7 @@ declare namespace formHost {
   function releaseForm(formId: string, isReleaseCache: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理器服务保留有关该卡片的存储信息，可以选择是否保留缓存信息。使用Promise异步回调。
+   * 释放指定的卡片。调用此方法后，应用程序将无法使用该卡片，卡片管理服务保留有关该卡片的存储信息，可以选择是否保留缓存信息。使用Promise异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
@@ -1663,5 +1663,40 @@ declare namespace formHost {
    * @since 26.0.0 dynamic&static
    */
   function offDeleteFormsCallback(callback?: formInfo.DeleteFormsCallback): void;
+
+  /**
+   * 注册卡片使用方服务信息。注册成功后，可用于跨设备卡片发布。使用Promise异步回调。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { formInfo.FormHostServiceInfo } service - 注册到卡片管理服务的卡片使用方服务信息。
+   * @returns { Promise<string> } Promise对象，返回注册成功的卡片使用方服务的服务Id。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function registerFormHostService(service: formInfo.FormHostServiceInfo): Promise<string>;
+
+    /**
+   * 注销卡片使用方服务信息。注销后，对应的卡片使用方服务不可用于跨设备卡片发布。使用Promise异步回调。
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } serviceId - 待注销的卡片使用方服务的服务Id。
+   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16501019 - A form service not owned by you cannot be unregistered.
+   * @throws { BusinessError } 16501000 - An internal functional error occurred.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function unregisterFormHostService(serviceId: string): Promise<void>;
 }
 export default formHost;

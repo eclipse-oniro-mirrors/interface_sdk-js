@@ -307,6 +307,18 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  permissions: string[] = [];
+
+  /**
    * The parameters of intent.
    * The value is the name of a variable of type Record<string, RecordData>.
    *
@@ -460,6 +472,18 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * The parameters of intent.
@@ -689,6 +713,18 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   keywords: string[] = [];
+
+  /**
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  permissions: string[] = [];
 
   /**
    * The parameters of intent.

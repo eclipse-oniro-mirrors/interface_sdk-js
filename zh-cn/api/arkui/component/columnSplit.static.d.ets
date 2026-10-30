@@ -102,8 +102,9 @@ export declare interface ColumnSplitAttribute extends CommonMethod {
  	 *
      * @returns { ColumnSplitAttribute }
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
+ 	 * @unpublished
  	 * @stagemodelonly
- 	 * @since 26.0.0 staticonly
+ 	 * @since 26.0.1 staticonly
  	 */
  	default setColumnSplitOptions(): this;
     /**
@@ -167,8 +168,9 @@ export declare function ColumnSplit(
  * @param { CustomBuilder } [content_] - container
  * @returns { ColumnSplitAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

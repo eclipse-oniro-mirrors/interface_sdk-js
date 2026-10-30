@@ -109,6 +109,20 @@ declare namespace screen {
   function on(eventType: 'connect' | 'disconnect' | 'change', callback: Callback<long>): void;
 
   /**
+   * Subscribes to screen disconnect events, When a screen is disconnected,
+   * the callback is invoked to return the disconnection information.
+   *
+   * @param { Callback<ScreenDisconnectInfo> } callback - Callback used to return the screen disconnect information,
+   *     including the screen ID and disconnection reason.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function onDisconnectWithInfo(callback: Callback<ScreenDisconnectInfo>): void;
+
+  /**
    * Register the callback for screen connection events.
    *
    * @param { Callback<long> } callback Callback used to return the screen ID. This parameter is callable.
@@ -156,6 +170,20 @@ declare namespace screen {
    * @since 9 dynamic
    */
   function off(eventType: 'connect' | 'disconnect' | 'change', callback?: Callback<long>): void;
+
+  /**
+   * Unsubscribes from screen disconnect events.
+   *
+   * @param { Callback<ScreenDisconnectInfo> } [callback] - Callback used to return the screen disconnect information,
+   *     including the screen ID and disconnection reason. If not provided, all callbacks for the given event type
+   *     will be removed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function offDisconnectWithInfo(callback?: Callback<ScreenDisconnectInfo>): void;
 
   /**
    * Unregister the callback for screen connection events.
@@ -782,6 +810,38 @@ declare namespace screen {
      * @since 24 dynamic&static
      */
     userId?: int;
+  }
+
+  /**
+   * Defines the screen disconnect information.
+   *
+   * @syscap SystemCapability.WindowManager.WindowManager.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  interface ScreenDisconnectInfo {
+    /**
+     * Screen ID.
+     *
+     * @type { long }
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    id: long;
+
+    /**
+     * Screen disconnect reason.
+     *
+     * @type { string }
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    reason: string;
   }
 
   /**

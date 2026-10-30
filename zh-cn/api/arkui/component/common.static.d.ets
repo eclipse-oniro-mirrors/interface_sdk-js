@@ -42,12 +42,13 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, TipsAnchorType, InputEventInterceptAction, GestureShortcut, EdgeLightPosition } from "./enums";
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -1733,7 +1734,7 @@ export type Matrix4Transit = matrix4.Matrix4Transit;
  */
 export declare interface MotionPathOptions {
     /**
-     * 位移动画的运动路径，使用[SVG路径描述规范]{@link Path}。path中支持使
+     * 位移动画的运动路径，使用[SVG路径描述规范]{@link ./path#svg路径描述规范}。path中支持使
      * 用start和end进行起点和终点的替代，如：'Mstart.x start.y L50 50 Lend.x end.y Z'，更多说明请参考
      * [绘制路径](docroot://ui/ui-js-components-svg-path.md)。
      * 
@@ -2260,7 +2261,7 @@ export declare interface ScaleOptions {
     centerY?: double | string;
 }
 /**
- * Defines the align rule options of relative container.
+ * 定义相对容器的垂直对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2268,7 +2269,7 @@ export declare interface ScaleOptions {
  */
 export declare interface VerticalAlignParam {
     /**
-     * Specifies the anchor component
+     * 设置作为锚点的组件的id值。
      *
      * Anonymous Object Rectification
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2277,7 +2278,7 @@ export declare interface VerticalAlignParam {
      */
     anchor: string;
     /**
-     * Sets the vertical alignment relative to the anchor component.
+     * 设置相对于锚点组件的纵向对齐方式。
      *
      * Anonymous Object Rectification
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2287,7 +2288,7 @@ export declare interface VerticalAlignParam {
     align: VerticalAlign;
 }
 /**
- * Defines the horizontal align rule options of relative container.
+ * 定义相对容器的水平对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2296,7 +2297,7 @@ export declare interface VerticalAlignParam {
 export declare interface HorizontalAlignParam {
 
     /**
-     * Specifies the anchor component
+     * 设置作为锚点的组件的id值。
      *
      * Anonymous Object Rectification
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2305,7 +2306,7 @@ export declare interface HorizontalAlignParam {
      */
     anchor: string;
     /**
-     * Sets the horizontal alignment relative to the anchor component.
+     * 设置相对于锚点组件的水平对齐方式。
      *
      * Anonymous Object Rectification
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2315,7 +2316,7 @@ export declare interface HorizontalAlignParam {
     align: HorizontalAlign;
 }
 /**
- * Defines the align rule options of relative container.
+ * 相对布局组件中子组件的对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2323,7 +2324,7 @@ export declare interface HorizontalAlignParam {
  */
 export declare interface AlignRuleOption {
     /**
-     * The param of left align.
+     * 设置左对齐参数。<br/>API version 23之前，入参类型为{ anchor: string, align: HorizontalAlign }
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2331,7 +2332,7 @@ export declare interface AlignRuleOption {
      */
     left?: HorizontalAlignParam;
     /**
-     * The param of right align.
+     * 设置右对齐参数。<br/>API version 23之前，入参类型为{ anchor: string, align: HorizontalAlign}
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2339,7 +2340,7 @@ export declare interface AlignRuleOption {
      */
     right?: HorizontalAlignParam;
     /**
-     * The param of middle align.
+     * 设置横向居中对齐方式的参数。<br/>API version 23之前，入参类型为{ anchor: string, align: HorizontalAlign }
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2347,7 +2348,7 @@ export declare interface AlignRuleOption {
      */
     middle?: HorizontalAlignParam;
     /**
-     * The param of top align.
+     * 设置顶部对齐的参数。<br/>API version 23之前，入参类型为{ anchor: string, align: VerticalAlign}
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2355,7 +2356,7 @@ export declare interface AlignRuleOption {
      */
     top?: VerticalAlignParam;
     /**
-     * The param of bottom align.
+     * 设置底部对齐的参数。<br/>API version 23之前，入参类型为{ anchor: string, align: VerticalAlign}
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2363,7 +2364,7 @@ export declare interface AlignRuleOption {
      */
     bottom?: VerticalAlignParam;
     /**
-     * The param of center align.
+     * 设置纵向居中对齐方式的参数。<br/>API version 23，之前入参类型为{ anchor: string, align: VerticalAlign }
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2371,7 +2372,7 @@ export declare interface AlignRuleOption {
      */
     center?: VerticalAlignParam;
     /**
-     * Defines the bias ratio in horizontal and vertical direction.
+     * 设置组件在锚点约束下的偏移参数，其值为到左/上侧锚点的距离与锚点间总距离的比值。
      *
      * @default {horizontal:0.5,vertical:0.5}
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2381,7 +2382,7 @@ export declare interface AlignRuleOption {
     bias?: Bias;
 }
 /**
- * Defines the localized horizontal align param of relative container.
+ * 定义相对容器的水平对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2389,7 +2390,7 @@ export declare interface AlignRuleOption {
  */
 export declare interface LocalizedHorizontalAlignParam {
     /**
-     * ID of the component that serves as the anchor.
+     * 设置作为锚点的组件的id值。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2397,7 +2398,7 @@ export declare interface LocalizedHorizontalAlignParam {
      */
     anchor: string;
     /**
-     * Horizontal alignment mode relative to the anchor component.
+     * 设置相对于锚点组件的水平对齐方式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2406,7 +2407,7 @@ export declare interface LocalizedHorizontalAlignParam {
     align: HorizontalAlign;
 }
 /**
- * Defines the localized vertical align param of relative container.
+ * 定义相对容器的纵向对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2414,7 +2415,7 @@ export declare interface LocalizedHorizontalAlignParam {
  */
 export declare interface LocalizedVerticalAlignParam {
     /**
-     * ID of the component that serves as the anchor.
+     * 设置作为锚点的组件的id值。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2422,7 +2423,7 @@ export declare interface LocalizedVerticalAlignParam {
      */
     anchor: string;
     /**
-     * Vertical alignment mode relative to the anchor component.
+     * 设置相对于锚点组件的纵向对齐方式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2431,7 +2432,7 @@ export declare interface LocalizedVerticalAlignParam {
     align: VerticalAlign;
 }
 /**
- * Defines the Localized align rule options of relative container.
+ * 相对布局组件中子组件的对齐规则。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2439,7 +2440,7 @@ export declare interface LocalizedVerticalAlignParam {
  */
 export declare interface LocalizedAlignRuleOptions {
     /**
-     * Left alignment with left-to-right scripts and right alignment with right-to-left scripts in the horizontal direction.
+     * 设置横向对齐方式的参数，LTR模式时为左对齐，RTL模式时为右对齐。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2447,7 +2448,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     start?: LocalizedHorizontalAlignParam;
     /**
-     * Right alignment with left-to-right scripts and left alignment with right-to-left scripts in the horizontal direction.
+     * 设置横向对齐方式的参数，LTR模式时为右对齐，RTL模式时为左对齐。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2455,7 +2456,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     end?: LocalizedHorizontalAlignParam;
     /**
-     * Center alignment in the horizontal direction.
+     * 设置横向居中对齐方式的参数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2463,7 +2464,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     middle?: LocalizedHorizontalAlignParam;
     /**
-     * Top alignment in the vertical direction.
+     * 设置纵向顶部对齐的参数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2471,7 +2472,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     top?: LocalizedVerticalAlignParam;
     /**
-     * Bottom alignment in the vertical direction.
+     * 设置纵向底部对齐的参数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2479,7 +2480,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     bottom?: LocalizedVerticalAlignParam;
     /**
-     * Center alignment in the vertical direction.
+     * 设置纵向居中对齐方式的参数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2487,8 +2488,7 @@ export declare interface LocalizedAlignRuleOptions {
      */
     center?: LocalizedVerticalAlignParam;
     /**
-     * Offset of the component under the anchor constraints.
-     * <br>The value is the ratio of the distance to the left/upper anchor to the total distance between anchors.
+     * 设置组件在锚点约束下的偏移参数，其值为到左/上侧锚点的距离与锚点间总距离的比值。
      *
      * @default {horizontal:0.5,vertical:0.5}
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2498,7 +2498,7 @@ export declare interface LocalizedAlignRuleOptions {
     bias?: Bias;
 }
 /**
- * Enumerates the chain styles in relative container.
+ * 定义链的风格，支持attributeModifier动态设置属性方法。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2507,7 +2507,7 @@ export declare interface LocalizedAlignRuleOptions {
  */
 export declare enum ChainStyle {
     /**
-     * Child components are evenly distributed among constraint anchors.
+     * 组件在约束锚点间均匀分布。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2515,7 +2515,7 @@ export declare enum ChainStyle {
      */
     SPREAD = 0,
     /**
-     * All child components except the first and last ones are evenly distributed among constraint anchors.
+     * 除首尾2个子组件的其他组件在约束锚点间均匀分布。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2523,7 +2523,7 @@ export declare enum ChainStyle {
      */
     SPREAD_INSIDE = 1,
     /**
-     * There is no gap between child components in the chain.
+     * 链内子组件无间隙。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4293,7 +4293,7 @@ export declare interface MultiShadowOptions {
     offsetY?: double | Resource;
 }
 /**
- * The types of expanded safe areas.
+ * 扩展安全区域的枚举类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4302,7 +4302,7 @@ export declare interface MultiShadowOptions {
  */
 export declare enum SafeAreaType {
     /**
-     * Default non-safe area of the system, including the status bar and navigation bar.
+     * 系统默认非安全区域，包括状态栏、导航栏。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4310,7 +4310,7 @@ export declare enum SafeAreaType {
      */
     SYSTEM = 0,
     /**
-     * Non-safe area of the device like Notch or punch hole.
+     * 设备的非安全区域，例如刘海屏或挖孔屏区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4318,7 +4318,7 @@ export declare enum SafeAreaType {
      */
     CUTOUT = 1,
     /**
-     * Soft keyboard area.
+     * 软键盘区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4369,7 +4369,157 @@ export declare enum SafeAreaEdge {
     END = 3
 }
 /**
- * Describe the types for expanding the safe area in layout.
+ * 沿边方向的内容对齐方式。
+ * 上、下边沿水平方向对齐；起始边、结束边沿垂直方向对齐。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SafeAreaInsetAlignment {
+    /**
+     * 对齐到沿边方向的起点。
+     * 上、下边在从左到右布局时靠左，在从右到左布局时靠右；起始边、结束边靠上。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    START = 0,
+
+    /**
+     * 在沿边方向居中对齐。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    CENTER = 1,
+
+    /**
+     * 对齐到沿边方向的终点。
+     * 上、下边在从左到右布局时靠右，在从右到左布局时靠左；起始边、结束边靠下。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    END = 2
+}
+
+/**
+ * 单个边缘内容及其布局配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface SafeAreaInsetEdgeConfig {
+    /**
+     * 用于创建该边内容的必填构建函数。
+     * 构建结果为空时清除该边，不影响其他有效边。
+     * 该边预留的空间等于内容在垂直于附着边方向上的实测尺寸加上 `spacing`。
+     *
+     * 每边 builder 应生成一个根组件，可以是普通组件或自定义组件。
+     * 多个组件应由容器组成单根；多根构建结果不作保证。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    content: CustomBuilder;
+
+    /**
+     * 边缘内容与主体内容之间、指向容器内部的间隔。
+     * 支持的单位为 vp、px、fp、lpx，取值须为非负有限值；不支持百分比或资源值。
+     * 默认值：`0vp`。省略或传入非法值时回退为 `0vp`，不清除有效内容。
+     * 间隔在内容测量之后计入占用，不预先扣减内容的测量空间。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    spacing?: LengthMetrics;
+
+    /**
+     * 内容沿附着边的对齐方式。
+     * 默认值：`SafeAreaInsetAlignment.CENTER`。
+     * 省略时使用 `SafeAreaInsetAlignment.CENTER`，不清除有效内容。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    alignment?: SafeAreaInsetAlignment;
+}
+
+/**
+ * 组件四边的完整边缘内容配置。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface SafeAreaInsetOptions {
+    /**
+     * 附着在物理上边的内容配置。
+     * 默认值：`undefined`，不设置该边内容。
+     * 省略该边或传入 `undefined` 时清除该边原有内容，不影响其他有效边。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    top?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * 附着在逻辑结束边的内容配置：从左到右布局时为右边，从右到左布局时为左边。
+     * 默认值：`undefined`，不设置该边内容。
+     * 省略该边或传入 `undefined` 时清除该边原有内容，不影响其他有效边。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    end?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * 附着在物理下边的内容配置。
+     * 默认值：`undefined`，不设置该边内容。
+     * 省略该边或传入 `undefined` 时清除该边原有内容，不影响其他有效边。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    bottom?: SafeAreaInsetEdgeConfig;
+
+    /**
+     * 附着在逻辑起始边的内容配置：从左到右布局时为左边，从右到左布局时为右边。
+     * 默认值：`undefined`，不设置该边内容。
+     * 省略该边或传入 `undefined` 时清除该边原有内容，不影响其他有效边。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    start?: SafeAreaInsetEdgeConfig;
+}
+/**
+ * 扩展布局安全区域的枚举类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4378,7 +4528,7 @@ export declare enum SafeAreaEdge {
  */
 export declare enum LayoutSafeAreaType {
     /**
-     * Default non-safe area of the system, including the status bar and navigation bar.
+     * 设置后，组件的布局范围可扩展至组件级安全区([safeAreaPadding]{@link CommonMethod#safeAreaPadding})和页面级安全区（状态栏、导航栏、挖孔区）。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -7807,6 +7957,56 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 标题栏悬浮模式。
+     * - STANDARD：标题栏与内容上下排布，无重叠。
+     * - STACK：标题栏悬浮于内容之上。开发者需要在内容顶部添加padding以避免遮挡。
+     * - SAFE_AREA_PADDING：标题栏放置在安全区域padding区域。内容扩展到安全区域，
+     * 滚动内容裁剪到安全区域。
+     * 默认值为**SheetTitleBarHoverMode.STANDARD**。通过UIContext.applyDefaultImmersiveStrategy
+     * 成功设置ImmersiveStrategy.BIND_SHEET_EXPAND_SAFE_AREA后，默认值为
+     * **SheetTitleBarHoverMode.SAFE_AREA_PADDING**。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarHoverMode?: SheetTitleBarHoverMode;
+}
+/**
+ * 标题栏悬浮模式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SheetTitleBarHoverMode {
+    /**
+     * 标准模式：标题栏与内容上下排布，无重叠。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STANDARD = 0,
+    /**
+     * 堆叠模式：标题栏悬浮于内容之上。
+     * 开发者需要在内容顶部添加padding以避免遮挡。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    STACK = 1,
+    /**
+     * 安全区域填充模式：标题栏放置在安全区域padding区域。
+     * 内容扩展到安全区域，滚动内容裁剪到安全区域。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    SAFE_AREA_PADDING = 2
 }
 /**
  * The custom styles function block.
@@ -9346,7 +9546,7 @@ export declare enum PreviewScaleMode {
     MAINTAIN = 2
 }
 /**
- * Defines the content transition effect.
+ * 定义内容切换时的过渡效果。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -9354,7 +9554,7 @@ export declare enum PreviewScaleMode {
  */
 export declare class ContentTransitionEffect {
   /**
-   * When the content changes,there is no animation effect.
+   * 内容切换时无过渡动画效果。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9364,7 +9564,7 @@ export declare class ContentTransitionEffect {
   static get IDENTITY(): ContentTransitionEffect;
 
   /**
-   * When the content changes,there is a smooth fade-in and fade-out effect.
+   * 内容切换时采用淡入淡出过渡动画。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11356,6 +11556,24 @@ export declare interface CommonMethod {
      */
     default safeAreaPadding(paddingValue: Padding | LengthMetrics | LocalizedPadding | undefined): this;
     /**
+     * 在组件的一个或多个边缘放置自定义内容，并按其实际占用为主体内容留出组件级安全区域。
+     * 适用于边缘工具栏、操作区或占位内容。再次调用时整体替换四边配置，未提供的边不保留旧内容。
+     * 内容从宿主普通 `padding` 的内边界附着；同宿主同物理边的有效安全区取已有 `safeAreaPadding`
+     * 与边缘内容占用的较大值，不将两者相加。跨祖先和系统安全区沿用既有累计规则。
+     * 计算组件在垂直于附着边方向上的自适应尺寸时，会计入有效安全区。
+     *
+     * @param { SafeAreaInsetOptions } [options] - 四边完整配置。默认值：`undefined`，重置四边。
+     *     空配置也重置四边；省略的边或构建结果为空的边只清除该边。
+     *     不支持的 `spacing` 值回退为 `0vp`，不清除有效内容。
+     * @returns { this } 当前组件。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default safeAreaInset(options?: SafeAreaInsetOptions): this;
+    /**
      * Sets the margin of the component.
      * Default value: **0**.
      *
@@ -11579,9 +11797,9 @@ export declare interface CommonMethod {
      */
     default opacity(value: double | Resource | undefined): this;
     /**
-     * Sets the border.
+     * 设置边框样式。
      *
-     * @param { BorderOptions | undefined } value
+     * @param { BorderOptions | undefined } value - 统一边框样式设置接口。<br/>**说明：** <br/>边框宽度默认值为0，即不显示边框。边框圆角半径默认值为0，即不显示圆角。边框颜色默认值为Color.Black。<br/>从API version 9开始，父节点的border显示在子节点内容之上。<br/>color、radius缺省时，为了保证borderColor、borderRadius生效，需要将borderColor、borderRadius设置在border后。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11589,10 +11807,9 @@ export declare interface CommonMethod {
      */
     default border(value: BorderOptions | undefined): this;
     /**
-     * Sets the border style.
-     * Default value: **BorderStyle.Solid**.
+     * 设置元素的边框线条样式。
      *
-     * @param { BorderStyle | EdgeStyles | undefined } value
+     * @param { BorderStyle | EdgeStyles | undefined } value - 设置元素的边框样式。<br/>默认值：BorderStyle.Solid
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11600,10 +11817,9 @@ export declare interface CommonMethod {
      */
     default borderStyle(value: BorderStyle | EdgeStyles | undefined): this;
     /**
-     * Sets the border width.
-     * Percentage values are not supported.
+     * 设置元素的边框宽度。
      *
-     * @param { Length | EdgeWidths | LocalizedEdgeWidths | undefined } value
+     * @param { Length | EdgeWidths | LocalizedEdgeWidths | undefined } value - 设置元素的边框宽度，不支持百分比。默认单位：vp。<br/>默认值：0。<br/>**说明：** 使用LocalizedEdgeWidths类型时，在不同语言方向下边框宽度设置会有差异。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11611,9 +11827,9 @@ export declare interface CommonMethod {
      */
     default borderWidth(value: Length | EdgeWidths | LocalizedEdgeWidths | undefined): this;
     /**
-     * Sets the border color.
-     * Default value: **Color.Black**.
-     * @param { ResourceColor | EdgeColors | LocalizedEdgeColors | undefined } value
+     * 设置元素的边框颜色。
+     *
+     * @param { ResourceColor | EdgeColors | LocalizedEdgeColors | undefined } value - 设置元素的边框颜色，设置后边框显示为相应颜色。<br/>默认值：Color.Black<br/>**说明：** <br/>使用LocalizedEdgeColors类型时，在不同语言方向下边框颜色设置会有差异。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11621,16 +11837,11 @@ export declare interface CommonMethod {
      */
     default borderColor(value: ResourceColor | EdgeColors | LocalizedEdgeColors | undefined): this;
     /**
-     * Sets the radius of the border rounded corners.
-     *     The radius is restricted by the component size. The maximum value is half of the component width or height.
-     * NOTE
-     *    1. **RenderStrategy.FAST**: The current component and its child components will be drawn directly
-     *        onto the canvas with rounded corners applied.
-     *    2. **RenderStrategy.OFFSCREEN**: The current component and its child components will first be rendered onto
-     *        an off-screen canvas, then undergo a rounded corner clipping, and finally be drawn onto the main canvas.
-     * @param { Length | BorderRadiuses | LocalizedBorderRadiuses | undefined } value
-     * @param { RenderStrategy | undefined } [type] - Application types for drawing rounded corners.
-     *     Default value: **RenderStrategy.FAST**.
+     * 设置元素的边框圆角半径。
+     * 圆角半径受组件尺寸限制，最大值为组件宽度或高度的一半。
+     *
+     * @param { Length | BorderRadiuses | LocalizedBorderRadiuses | undefined } value - 设置元素的边框圆角半径，支持百分比，百分比依据组件宽度，默认单位：vp。<br/>默认值：0。设置圆角后，可搭配clip属性进行裁剪，避免子组件超出组件自身。
+     * @param { RenderStrategy | undefined } [type] - 绘制圆角的应用类型。<br/>默认值：RenderStrategy.FAST。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11638,9 +11849,9 @@ export declare interface CommonMethod {
      */
     default borderRadius(value: Length | BorderRadiuses | LocalizedBorderRadiuses | undefined, type?: RenderStrategy | undefined): this;
     /**
-     * Sets the border image of the component.
+     * 设置组件的边框图片。
      *
-     * @param { BorderImageOption | undefined } value - Border image or border gradient.
+     * @param { BorderImageOption | undefined } value - 边框图片或边框渐变。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12531,10 +12742,9 @@ export declare interface CommonMethod {
      */
     default visibility(value: Visibility | undefined): this;
     /**
-     * Sets the percentage of the parent container's remaining space that is allocated to the component.
-     * Default value: **0**.
+     * 设置组件在父容器剩余空间中所占的比例。设置该属性会触发二次布局，在对性能有严格要求的场景下建议使用layoutWeight替代。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置父容器在主轴方向上的剩余空间分配给此属性所在组件的比例。值为0表示不参与剩余空间分配，保持原有尺寸；值大于0时，按照比例分配父容器的剩余空间，值越大分配的空间越多。<br/>取值范围：[0, +∞)<br/>默认值：0
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12542,10 +12752,9 @@ export declare interface CommonMethod {
      */
     default flexGrow(value: double | undefined): this;
     /**
-     * Sets the percentage of the parent container's shrink size that is allocated to the component.
-     * Default value: 0 when the parent container is Column or Row, 1 when the parent container is Flex..
+     * 设置父容器空间不足时，压缩尺寸分配给此属性所在组件的比例。设置该属性会触发二次布局，在对性能有严格要求的场景下建议使用layoutWeight替代。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置父容器空间不足时，压缩尺寸分配给此属性所在组件的比例。<br/>默认值：0（父容器为Column或Row时），1（父容器为Flex时）
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12553,10 +12762,9 @@ export declare interface CommonMethod {
      */
     default flexShrink(value: double | undefined): this;
     /**
-     * Sets the base size of the component in the main axis of the parent container.
-     * Default value: **'auto'**.
+     * 设置组件在父容器主轴方向上的基准尺寸。
      *
-     * @param { double | string | undefined } value
+     * @param { double | string | undefined } value - 设置组件在父容器主轴方向上的基准尺寸。<br/>默认值：'auto'（表示组件在主轴方向上的基准尺寸为组件原本的大小）。<br/>string类型：不允许设置百分比字符串。可选值：可以转化为数字的字符串（如'10'）、带长度单位的字符串（如'10px'）或'auto'。传入不符合要求的字符串时，按默认值'auto'处理。<br/>number：取值范围(0, +∞)，单位为vp。<br/>设置异常值时，该属性按默认值'auto'处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12564,10 +12772,10 @@ export declare interface CommonMethod {
      */
     default flexBasis(value: double | string | undefined): this;
     /**
-     * Sets the alignment mode of the child components along the cross axis of the parent container.
-     * Default value: **ItemAlign.Auto**.
+     * 子组件在父容器交叉轴的对齐格式，设置后会覆盖父容器的alignItems设置。
+     * 当父容器为Flex时，alignSelf仅在父容器设置FlexWrap.NoWrap时生效；设置FlexWrap.Wrap或FlexWrap.WrapReverse时不生效。
      *
-     * @param { ItemAlign | undefined } value
+     * @param { ItemAlign | undefined } value - 子组件在父容器交叉轴的对齐格式，会覆盖Flex、Column、Row、DynamicLayout、GridRow布局容器中的alignItems设置。<br/>默认值：ItemAlign.Auto（表示继承父容器的对齐设置）
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12585,10 +12793,10 @@ export declare interface CommonMethod {
      */
     default layoutGravity(alignment: LocalizedAlignment | undefined): this;
     /**
-     * Sets the display priority for the component in the layout container.
-     * <br>This parameter is only effective in Row, Column, and Flex (single-line) container components.
+     * 设置当前组件在布局容器中显示的优先级。
+     * <br>仅在Row、Column、Flex(单行)容器组件中生效。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在Row/Column/Flex(单行)容器组件中生效。<br/>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。<br/>小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。<br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12713,14 +12921,13 @@ export declare interface CommonMethod {
      */
     default chainMode(direction: Axis | undefined, style: ChainStyle | undefined): this;
     /**
-     * Sets the aspect ratio of the component, which can be obtained using the following formula: width/height.
-     * <br>If only width and aspectRatio are set, the height is calculated using the following formula: width/aspectRatio.
-     * <br>If only height and aspectRatio are set, the width is calculated using the following formula: height x aspectRatio.
-     * <br>If width, height, and aspectRatio are all set, the explicitly set height is ignored, and the effective height is
-     * calculated using the following formula: width/aspectRatio.
-     * <br>This parameter takes effect only when a valid value greater than 0 is specified.
+     * 指定当前组件的宽高比，aspectRatio=width/height。
+     * <br>仅设置width、aspectRatio时，height=width/aspectRatio。
+     * <br>仅设置height、aspectRatio时，width=height*aspectRatio。
+     * <br>同时设置width、height和aspectRatio时，height会被重新计算为width/aspectRatio，显式设置的height值不生效。
+     * <br>设置aspectRatio属性后，组件宽高会受父组件内容区大小限制，constraintSize的maxWidth/maxHeight优先级高于aspectRatio。当constraintSize设置的maxWidth/maxHeight约束与aspectRatio计算结果冲突时，组件将优先遵循constraintSize的maxWidth/maxHeight约束，此时aspectRatio可能无法生效。
      *
-     * @param { double | undefined } value
+     * @param { double | undefined } value - 指定当前组件的宽高比，取值范围(0, +∞)。<br/>API version 9及以前，默认值：1.0。<br/>API version 10及以后，默认值：无。<br/>**说明：**<br/>该属性设置为非法值（小于等于0）时不生效。API version 10及以后，未设置值时该属性不生效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13024,6 +13231,31 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default shadow(value: ShadowOptions | ShadowStyle | undefined): this;
+    /**
+     * 设置组件的阴影形状。阴影按指定形状渲染。
+     *
+     * 此接口与[shadow]{@link CommonMethod#shadow}属性配合使用。组件大小变化时阴影形状会重新计算。
+     *
+     * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - 阴影形状。
+     *     当值类型为 {@link CircleShape}、{@link EllipseShape}、
+     *     {@link PathShape} 或 {@link RectShape} 时，阴影渲染为对应形状。
+     *     当值为 **undefined** 时，清除阴影形状。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): this;
+    /**
+     * 设置[阴影]{@link CommonMethod#shadow}不填充时的裁切方式。仅在[ShadowOptions#fill]{@link ShadowOptions#fill}设为 **false** 时生效。
+     *
+     * @param { ShadowClipMode | undefined } mode - 阴影裁切方式。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowClipMode(mode: ShadowClipMode | undefined): this;
     /**
      * Sets the edge light effect for the component.
      *
@@ -14247,7 +14479,7 @@ export declare interface CommonShapeMethod extends CommonMethod {
     default allowForceDark(value: boolean): this;
 }
 /**
- * Defines the direction of pixel rounding at the component level.
+ * 指定组件级像素取整的方向。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14255,7 +14487,8 @@ export declare interface CommonShapeMethod extends CommonMethod {
  */
 export declare interface PixelRoundPolicy {
     /**
-     * Rounding for alignment with the start edge.
+     * 组件前部边界取整对齐方式。
+     * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
      *
      * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14264,7 +14497,8 @@ export declare interface PixelRoundPolicy {
      */
     start?: PixelRoundCalcPolicy;
     /**
-     * Rounding for alignment with the top edge.
+     * 组件上部边界取整对齐方式。
+     * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
      *
      * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14273,7 +14507,8 @@ export declare interface PixelRoundPolicy {
      */
     top?: PixelRoundCalcPolicy;
     /**
-     * Rounding for alignment with the end edge.
+     * 组件尾部边界取整对齐方式。
+     * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
      *
      * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14282,7 +14517,8 @@ export declare interface PixelRoundPolicy {
      */
     end?: PixelRoundCalcPolicy;
     /**
-     * Rounding for alignment with the bottom edge.
+     * 组件底部边界取整对齐方式。
+     * <br>不设置pixelRound或者设置异常值时按四舍五入规则取整。
      *
      * @default PixelRoundCalcPolicy.NO_FORCE_ROUND
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14367,7 +14603,7 @@ export declare interface MotionBlurOptions {
     anchor: MotionBlurAnchor | undefined;
 }
 /**
- * Sub component layout info.
+ * 父组件（自定义组件）布局信息。
  *
  * @extends SizeResult
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14376,7 +14612,8 @@ export declare interface MotionBlurOptions {
  */
 export declare interface GeometryInfo extends SizeResult {
     /**
-     * Sub component borderWidth info.
+     * 父组件（自定义组件）边框宽度。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14384,7 +14621,8 @@ export declare interface GeometryInfo extends SizeResult {
      */
     borderWidth: EdgeWidth;
     /**
-     * Sub component margin info.
+     * 父组件（自定义组件）margin信息。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14392,7 +14630,8 @@ export declare interface GeometryInfo extends SizeResult {
      */
     margin: Margin;
     /**
-     * Sub component padding info.
+     * 父组件（自定义组件）padding信息。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14401,7 +14640,7 @@ export declare interface GeometryInfo extends SizeResult {
     padding: Padding;
 }
 /**
- * Provides the child component layout information.
+ * 子组件布局信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14409,7 +14648,8 @@ export declare interface GeometryInfo extends SizeResult {
  */
 export declare interface Layoutable {
     /**
-     * Measurement result of the child component.
+     * 子组件测量后的尺寸信息。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14417,7 +14657,8 @@ export declare interface Layoutable {
      */
     measureResult: MeasureResult;
     /**
-     * Unique ID of the child component.
+     * 系统为子组件分配的唯一标识UniqueID。
+     * 取值应为≥0的整数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14465,7 +14706,7 @@ export declare interface Layoutable {
     getBorderWidth(): DirectionalEdgesT<double> | undefined;
 }
 /**
- * Sub component info passed from framework when measure happens.
+ * 子组件位置信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14473,7 +14714,8 @@ export declare interface Layoutable {
  */
 export declare interface Measurable {
     /**
-     * Unique ID that the system assigns to the child component.
+     * 系统为子组件分配的唯一标识UniqueID。
+     * 取值限定为整数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14523,7 +14765,14 @@ export declare interface Measurable {
     getBorderWidth(): DirectionalEdgesT<double> | undefined;
 }
 /**
- * Provides the component size information.
+ * 组件尺寸信息。
+ * > **说明：**
+ * >
+ * >- 自定义布局暂不支持LazyForEach写法。
+ * >- 使用builder形式的自定义布局创建，自定义组件的build()方法内只允许存在this.builder()，即示例的推荐用法。
+ * >- 父容器（自定义组件）上设置的尺寸信息，除aspectRatio之外，优先级小于onMeasureSize设置的尺寸信息。
+ * >- 子组件设置的位置信息，offset、position、markAnchor优先级大于onPlaceChildren设置的位置信息，其他位置设置属性不生效。
+ * >- 使用自定义布局方法时，需要同时调用onMeasureSize和onPlaceChildren方法，否则可能出现布局异常。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14531,7 +14780,8 @@ export declare interface Measurable {
  */
 export declare interface SizeResult {
     /**
-     * Width obtained from the measurement result. Unit: vp.
+     * 测量后的宽。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14539,7 +14789,8 @@ export declare interface SizeResult {
      */
     width: double;
     /**
-     * Height obtained from the measurement result. Unit: vp.
+     * 测量后的高。
+     * 单位为： vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15153,10 +15404,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onDidStopFling(handler: VoidCallback | undefined): this;
     /**
-     * Enable left mouse button press-and-drag scrolling.
-     *
-     * @param { boolean | undefined } enabled - Enable left mouse button press-and-drag scrolling.
-     *    <br>Default value: false.
+     * 设置是否支持左键按下拖动滚动。
+     * 
+     * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
+     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15262,6 +15513,18 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * @since 26.0.0 static
      */
     default scrollBarHeight(height: LengthMetrics | undefined): this;
+
+    /**
+     * 设置是否支持键盘方向键滚动。开启后，组件在获焦且未激活焦点态时会响应键盘方向键滚动。
+     *
+     * @param { boolean | undefined } enabled - 是否支持键盘方向键滚动。
+     *     <br>默认值：true。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
  * The actual offset by which the scrollable scrolls.

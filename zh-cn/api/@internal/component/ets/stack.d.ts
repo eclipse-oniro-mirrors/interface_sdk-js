@@ -93,7 +93,7 @@ interface StackInterface {
 }
 
 /**
- * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}。
  * 
  * 支持[通用事件]{@link CommonMethod}。
  *
@@ -127,7 +127,7 @@ declare class StackAttribute extends CommonMethod<StackAttribute> {
    *
    * @param { PointLightStyle } value - 点光源样式，用于设置点光源照亮周围组件的UI效果，影响组件的光照渲染。PointLightStyle对象包含光源位置、颜色、强度等参数，具体配置方式详见链接说
    *     明。仅Image、Column、Flex、Row、Stack组件支持设置点光源。
-   * @returns { StackAttribute } The attribute of the stack.
+   * @returns { StackAttribute } Stack的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -143,7 +143,7 @@ declare class StackAttribute extends CommonMethod<StackAttribute> {
    *     <br>默认值：true
    *     <br>**说明：** 
    *     <br>设置为false时，在首次显示场景，若当前帧布局耗时超过50ms，会将Stack区域内尚未布局的子组件延后到下一帧进行布局。
-   * @returns { StackAttribute } The attribute of the Stack.
+   * @returns { StackAttribute } Stack的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -163,7 +163,7 @@ declare class StackAttribute extends CommonMethod<StackAttribute> {
  * >
  * > - 通用属性[align]{@link CommonMethod#align(value: Alignment)}在该组件上支持镜像能力。
  * 
- * ## 子组件
+ * ###### 子组件
  * 
  * 可以包含子组件。
  *
@@ -177,7 +177,7 @@ declare class StackAttribute extends CommonMethod<StackAttribute> {
 declare const Stack: StackInterface;
 
 /**
- * Defines Stack Component instance.
+ * 定义Stack组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

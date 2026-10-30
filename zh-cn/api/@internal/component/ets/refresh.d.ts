@@ -153,12 +153,13 @@ interface RefreshOptions {
   friction?: number | string;
 
   /**
-   * 设置刷新区域底部显示的自定义文本。
+   * 设置刷新区域底部显示的自定义文本。不设置时，不显示该文本。
    * <br/>**说明：**<br/>输入文本的限制参考Text组件，使用builder或refreshingContent参数自定义刷新区域显示内容时，promptText不显示。
    * <br/>promptText设置有效时，
    * [refreshOffset]{@link CommonMethod#refreshOffset}属性默认值为96vp。
    * <br/>自定义文本最大的字体缩放倍数
    * [maxFontScale]{@link maxFontScale}为2。
+   * <br/>自定义文本最大行数为1，超出部分以省略号（...）截断。若需多行提示，请通过builder或refreshingContent参数自定义刷新区域显示内容实现。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -170,7 +171,8 @@ interface RefreshOptions {
 
   /**
    * 自定义刷新区域显示内容。
-   * <br/>**说明：**<br/>API version 10及之前版本，自定义组件的高度限制在64vp之内。API version 11及以后版本没有此限制。
+   * <br/>**说明：**<br/>与refreshingContent参数同时设置时，该参数不生效。使用本参数自定义刷新区域显示内容时，promptText不显示。
+   * <br/>API version 10及之前版本，自定义组件的高度限制在64vp之内。API version 11及以后版本没有此限制。
    * <br/>自定义组件设置了固定高度时，自定义组件会以固定高度显示在刷新区域下方；自定义组件未设置高度时，自定义组件高度会自适应刷新区域高度，会发生自定义组件高度跟随刷新区域变化至0的现象。
    * 建议对自定义组件设置最小高度约束来避免自定义组件高度小于预期的情况发生，具体可参照
    * [示例3]{@link Refresh}。
@@ -186,7 +188,7 @@ interface RefreshOptions {
 
   /**
    * 自定义刷新区域显示内容。
-   * <br/>**说明：**<br/>与builder参数同时设置时builder参数不生效。
+   * <br/>**说明：**<br/>与builder参数同时设置时builder参数不生效。使用本参数自定义刷新区域显示内容时，promptText不显示。
    * <br/>自定义组件设置了固定高度时，自定义组件会以固定高度显示在刷新区域下方；自定义组件未设置高度时，自定义组件高度会自适应刷新区域高度，会发生自定义组件高度跟随刷新区域变化至0的现象。
    * 建议对自定义组件设置最小高度约束来避免自定义组件高度小于预期的情况发生，具体可参照
    * [示例4]{@link Refresh}。

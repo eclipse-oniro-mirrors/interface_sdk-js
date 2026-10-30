@@ -210,8 +210,8 @@ export declare class Binding<T> {
   /**
    * 提供get访问器以获取当前绑定值。
    *
-   * @returns { T }
-   返回值类型为泛型参数T，与Binding<T>定义的类型一致。
+   * @returns { T } 返回值类型为泛型参数T，与Binding<T>定义的类型一致。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */

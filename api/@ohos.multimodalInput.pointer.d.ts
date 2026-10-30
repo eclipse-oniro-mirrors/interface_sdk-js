@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Mouse Pointer
+ * @file Mouse Pointer and pointer-type external devices
  * @kit InputKit
  */
 
@@ -23,8 +23,8 @@ import type { AsyncCallback } from './@ohos.base';
 import type image from './@ohos.multimedia.image';
 
 /**
- * The **pointer** module provides APIs related to pointer attribute management, such as querying and setting pointer
- * attributes.
+ * This module provides management of the mouse cursor and cursor type external devices, and is used to query and
+ * set the related attributes of the mouse cursor and cursor type external devices.
  *
  * @syscap SystemCapability.MultimodalInput.Input.Pointer
  * @atomicservice [since 12]
@@ -215,7 +215,7 @@ declare namespace pointer {
     HAND_OPEN = 18,
 
     /**
-     * Hand-shaped pointer
+     * Hand pointer
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 9 dynamic
@@ -395,7 +395,7 @@ declare namespace pointer {
     MIDDLE_BTN_NORTH_SOUTH_WEST_EAST = 38,
 
     /**
-     * Horizontal text selection
+     * Selecting text horizontally
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 10 dynamic
@@ -422,7 +422,7 @@ declare namespace pointer {
     CURSOR_CIRCLE = 41,
 
     /**
-     * Animation loading
+     * Animated cursor for loading
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @atomicservice [since 12]
@@ -432,7 +432,7 @@ declare namespace pointer {
     LOADING = 42,
 
     /**
-     * Animation running in the background
+     * Animated cursor for background loading
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @atomicservice [since 12]
@@ -451,7 +451,7 @@ declare namespace pointer {
     MIDDLE_BTN_EAST_WEST = 44,
 
     /**
-     * Running in the background (extension 1)
+     * Animated cursor for background running (extension 1)
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -460,7 +460,7 @@ declare namespace pointer {
     RUNNING_LEFT = 45,
 
     /**
-     * Running in the background (extension 2)
+     * Animated cursor for background running (extension 2)
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -487,11 +487,10 @@ declare namespace pointer {
     SCREENRECORDER_CURSOR = 48,
 
     /**
-     * Floating This pointer can be used only when the stylus enters the air mouse mode and cannot be directly set.
-     *
-     * In air mouse mode, you can rotate the stylus in the air to control the movement of the virtual pointer on the
-     * screen and press the button on the stylus to turn pages up or down. This mode is used for PPT presentation and
-     * air gesture control.
+     * Hover cursor. This cursor is used when the stylus enters air mouse mode and cannot be set directly.
+     * <br>In air mouse mode, the stylus can be rotated in the air to control the movement of the virtual cursor on
+     * the screen, and the buttons on the stylus body can be used to page up and down, which is suitable for
+     * scenarios such as PPT presentations and air operations.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -500,11 +499,10 @@ declare namespace pointer {
     LASER_CURSOR = 49,
 
     /**
-     * Click This pointer can be used only when the stylus enters the air mouse mode and cannot be directly set.
-     *
-     * In air mouse mode, you can rotate the stylus in the air to control the movement of the virtual pointer on the
-     * screen and press the button on the stylus to turn pages up or down. This mode is used for PPT presentation and
-     * air gesture control.
+     * Click cursor. This cursor is used when the stylus enters air mouse mode and cannot be set directly.
+     * <br>In air mouse mode, the stylus can be rotated in the air to control the movement of the virtual cursor on
+     * the screen, and the buttons on the stylus body can be used to page up and down, which is suitable for
+     * scenarios such as PPT presentations and air operations.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -513,11 +511,10 @@ declare namespace pointer {
     LASER_CURSOR_DOT = 50,
 
     /**
-     * Laser pointer This pointer can be used only when the stylus enters the air mouse mode and cannot be directly set.
-     *
-     * In air mouse mode, you can rotate the stylus in the air to control the movement of the virtual pointer on the
-     * screen and press the button on the stylus to turn pages up or down. This mode is used for PPT presentation and
-     * air gesture control.
+     * Laser pointer cursor. This cursor is used when the stylus enters air mouse mode and cannot be set directly.
+     * <br>In air mouse mode, the stylus can be rotated in the air to control the movement of the virtual cursor on
+     * the screen, and the buttons on the stylus body can be used to page up and down, which is suitable for
+     * scenarios such as PPT presentations and air operations.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -526,8 +523,13 @@ declare namespace pointer {
     LASER_CURSOR_DOT_RED = 51,
 
     /**
-     * Custom pointer. You can use [setCustomCursor]{@link pointer.setCustomCursor} to set a custom pointer. The custom
-     * pointer cannot be directly set using [setPointerStyle]{@link pointer.setPointerStyle}.
+     * Custom pointer. You can use
+     * [setCustomCursor]{@link pointer.setCustomCursor(windowId: int, cursor: CustomCursor, config: CursorConfig)} to
+     * set a custom pointer. The custom pointer cannot be directly set using
+     * [setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle)}.
+     * Custom pointer style, set via the API. This value is used by **getPointerStyle** to return data in specific
+     * scenarios (obtaining the style on a window where a custom pointer style has been set). It cannot be used as an
+     * input parameter of the **setCustomCursor** or **setPointerStyle** API.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 22 dynamic
@@ -650,7 +652,7 @@ declare namespace pointer {
 
     /**
      * Vertical coordinate of the custom pointer focus, in px. This coordinate is limited by the custom pointer size.
-     * The minimum value is 0, and the maximum value is the maximum width of the resource image. The default value is
+     * The minimum value is 0, and the maximum value is the maximum height of the resource image. The default value is
      * **0** when this parameter is omitted.
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -670,9 +672,9 @@ declare namespace pointer {
   interface CursorConfig {
 
     /**
-     * Whether to adjust the cursor size based on system settings. The value **true** means to adjust the cursor size
-     * based on system settings, and the value **false** means to use the custom cursor size. The adjustment range is
-     * [size of the cursor image, 256 x 256].
+     * Whether to adjust the cursor size based on system settings. The value **false** indicates using the custom
+     * cursor style size, and **true** indicates adjusting the cursor size based on system settings. The adjustable
+     * range is [cursor resource image size, 256×256].
      *
      * @syscap SystemCapability.MultimodalInput.Input.Pointer
      * @since 15 dynamic
@@ -684,12 +686,13 @@ declare namespace pointer {
   /**
    * Sets the mouse pointer speed. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } speed - Mouse pointer speed. The value ranges from **1** to **20**. The default value is **10**.
+   * @param { int } speed - Mouse pointer speed. The value range is [1, 20], and the default value is **10**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 9 dynamic
@@ -700,11 +703,12 @@ declare namespace pointer {
   /**
    * Sets the mouse pointer speed. This API uses a promise to return the result.
    *
-   * @param { int } speed - Mouse pointer speed. The value ranges from **1** to **20**. The default value is **10**.
+   * @param { int } speed - Mouse pointer speed. The value range is [1, 20], and the default value is **10**.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 9 dynamic
@@ -715,10 +719,10 @@ declare namespace pointer {
   /**
    * Sets the mouse pointer speed. This API returns the result synchronously.
    *
-   * @param { int } speed - Mouse pointer speed. The value ranges from **1** to **20**. The default value is **10**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @param { int } speed - Mouse pointer speed. The value range is [1, 20], and the default value is 10.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 10 dynamic
@@ -729,11 +733,13 @@ declare namespace pointer {
   /**
    * Obtains the mouse pointer speed. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **number** is the mouse pointer speed. Otherwise, **err** is an error object.
+   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the mouse movement speed is
+   *     obtained successfully, **err** is **undefined** and **number** is the mouse movement speed, with a value range
+   *     of [1, 20]; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 9 dynamic
@@ -745,7 +751,8 @@ declare namespace pointer {
    * Obtains the mouse pointer speed. This API uses a promise to return the result.
    *
    * @returns { Promise<int> } Promise used to return the mouse pointer speed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [since 12]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 12]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 9 dynamic
@@ -756,10 +763,10 @@ declare namespace pointer {
   /**
    * Obtains the mouse pointer speed. This API returns the result synchronously.
    *
-   * @returns { int } Mouse pointer speed. The value ranges from 1 to 20.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { int } Returns the mouse movement speed, with a value range of [1, 20].
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use
    * @since 10 dynamic
@@ -778,14 +785,14 @@ declare namespace pointer {
    *     <br>If the window ID is valid and the corresponding window exists, the mouse pointer style of the window can be
    *     set properly.
    *     <br>If the window ID is valid but the window does not exist, the mouse pointer style can also be set properly.
-   *     <br>The result can be obtained through [getPointerStyle]{@link pointer.getPointerStyle}.
+   *     <br>The result can be obtained through
+   *     [getPointerStyle]{@link pointer.getPointerStyle(windowId: int, callback: AsyncCallback<PointerStyle>)}.
    * @param { PointerStyle } pointerStyle - Pointer style. Do not pass **DEVELOPER_DEFINED_ICON**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [staticonly]
-   *     <br> When the windowId value is -1, the system permission is required to set the global style. [staticonly]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -802,13 +809,13 @@ declare namespace pointer {
    *     <br>If the window ID is valid and the corresponding window exists, the mouse pointer style of the window can be
    *     set properly.
    *     <br>If the window ID is valid but the window does not exist, the mouse pointer style can also be set properly.
-   *     <br>The result can be obtained through [getPointerStyle]{@link pointer.getPointerStyle}.
-   * @param { PointerStyle } pointerStyle - Pointer style.
+   *     <br>The result can be obtained through [getPointerStyle]{@link pointer.getPointerStyle(windowId: int)}.
+   * @param { PointerStyle } pointerStyle - Mouse cursor style. DEVELOPER_DEFINED_ICON cannot be passed as a
+   *     parameter.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [staticonly]
-   *     <br> When the windowId value is -1, the system permission is required to set the global style. [staticonly]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -825,12 +832,12 @@ declare namespace pointer {
    *     <br>If the window ID is valid and the corresponding window exists, the mouse pointer style of the window can be
    *     set properly.
    *     <br>If the window ID is valid but the window does not exist, the mouse pointer style can also be set properly.
-   *     <br>The result can be obtained through [getPointerStyleSync]{@link pointer.getPointerStyleSync}.
-   * @param { PointerStyle } pointerStyle - Pointer style.
+   *     <br>The result can be obtained through [getPointerStyleSync]{@link pointer.getPointerStyleSync(windowId: int)}.
+   * @param { PointerStyle } pointerStyle - Mouse pointer style. DEVELOPER_DEFINED_ICON cannot be passed in as a
+   *     parameter.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api. [staticonly]
-   *     <br> When the windowId value is -1, the system permission is required to set the global style. [staticonly]
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 10 dynamic
    * @since 23 static
@@ -848,13 +855,14 @@ declare namespace pointer {
    *     <br>If the window ID is valid but the window does not exist, the global mouse pointer style is returned by
    *     default.
    *     <br>If the mouse pointer style is set for a non-existent window through
-   *     [setPointerStyle]{@link pointer.setPointerStyle}, this API can obtain the mouse pointer style properly.
+   *     [setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle, callback:
+   *     AsyncCallback<void>)}, this API can obtain the mouse pointer style properly.
    * @param { AsyncCallback<PointerStyle> } callback - Callback used to return the result. If the operation is
    *     successful, **err** is **undefined**, and **data** is the mouse pointer style type. Otherwise, **err** is an
    *     error object. In specific scenarios (obtaining the style on a window with a custom pointer style),
    *     **DEVELOPER_DEFINED_ICON** is returned.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -872,10 +880,11 @@ declare namespace pointer {
    *     <br>If the window ID is valid but the window does not exist, the global mouse pointer style is returned by
    *     default.
    *     <br>If the mouse pointer style is set for a non-existent window through
-   *     [setPointerStyle]{@link pointer.setPointerStyle}, this API can obtain the mouse pointer style properly.
+   *     [setPointerStyle]{@link pointer.setPointerStyle(windowId: int, pointerStyle: PointerStyle)}, this API can
+   *     obtain the mouse pointer style properly.
    * @returns { Promise<PointerStyle> } Promise object, which is used to return the mouse pointer style.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -893,10 +902,11 @@ declare namespace pointer {
    *     <br>If the window ID is valid but the window does not exist, the global mouse pointer style is returned by
    *     default.
    *     <br>If the mouse pointer style is set for a non-existent window through
-   *     [setPointerStyleSync]{@link pointer.setPointerStyleSync}, this API can obtain the mouse pointer style properly.
+   *     [setPointerStyleSync]{@link pointer.setPointerStyleSync(windowId: int, pointerStyle: PointerStyle)}, this
+   *     API can obtain the mouse pointer style properly.
    * @returns { PointerStyle } Mouse pointer style.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 10 dynamic
    * @since 23 static
@@ -904,8 +914,9 @@ declare namespace pointer {
   function getPointerStyleSync(windowId: int): PointerStyle;
 
   /**
-   * Sets whether the mouse pointer is visible in the current window. This API uses an asynchronous callback to return
-   * the result.
+   * Sets the cursor display/hidden state. This state applies to all windows of the current process. The actual
+   * display/hidden effect of the cursor on the screen is also affected by the render service process. This API uses
+   * an asynchronous callback to return the result.
    *
    * @param { boolean } visible - Whether the mouse pointer is visible in the current window. The value **true**
    *     indicates that the mouse pointer is visible, and the value **false** indicates the opposite.
@@ -913,7 +924,9 @@ declare namespace pointer {
    *     **err** is **undefined**. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported; [since 18]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 18]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -921,14 +934,18 @@ declare namespace pointer {
   function setPointerVisible(visible: boolean, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets whether the mouse pointer is visible in the current window. This API uses a promise to return the result.
+   * Sets the cursor display/hidden state. This state applies to all windows of the current process. The actual
+   * display/hidden effect of the cursor on the screen is also affected by the render service process. This API uses
+   * a promise to return the result.
    *
    * @param { boolean } visible - Whether the mouse pointer is visible in the current window. The value **true**
    *     indicates that the mouse pointer is visible, and the value **false** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported; [since 18]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     [since 18]
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -936,12 +953,14 @@ declare namespace pointer {
   function setPointerVisible(visible: boolean): Promise<void>;
 
   /**
-   * Sets whether the mouse pointer is visible in the current window. This API returns the result synchronously.
+   * Sets the cursor display/hidden state. This state applies to all windows of the current process. The actual
+   * display/hidden effect of the cursor on the screen is also affected by the render service process. This API is
+   * called synchronously.
    *
    * @param { boolean } visible - Whether the mouse pointer is visible in the current window. The value **true**
    *     indicates that the mouse pointer is visible, and the value **false** indicates the opposite.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 10 dynamic
    * @since 23 static
@@ -949,13 +968,16 @@ declare namespace pointer {
   function setPointerVisibleSync(visible: boolean): void;
 
   /**
-   * Obtains the visible status of the mouse pointer. This API uses an asynchronous callback to return the result.
+   * Obtains the display/hidden state of the current window. This state reflects the cursor display/hidden state of
+   * the multimodal process for the process where the window resides, not the actual cursor display/hidden status.
+   * Whether the cursor is correctly displayed/hidden is also affected by the render service process. This API uses
+   * an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **data** is the visible status of the mouse pointer (**true** if visible and
    *     **false** if invisible). Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 9 dynamic
    * @since 23 static
@@ -963,7 +985,10 @@ declare namespace pointer {
   function isPointerVisible(callback: AsyncCallback<boolean>): void;
 
   /**
-   * Obtains the visible status of the mouse pointer. This API uses a promise to return the result.
+   * Obtains the display/hidden state of the current window. This state reflects the cursor display/hidden state of
+   * the multimodal process for the process where the window resides, not the actual cursor display/hidden status.
+   * Whether the cursor is correctly displayed/hidden is also affected by the render service process. This API uses
+   * a promise to return the result.
    *
    * @returns { Promise<boolean> } Promise used to return the result. **true** is returned if the mouse pointer is
    *     visible; **false** is returned if the mouse pointer is hidden.
@@ -974,7 +999,10 @@ declare namespace pointer {
   function isPointerVisible(): Promise<boolean>;
 
   /**
-   * Checks whether the mouse pointer is visible in the current window. This API returns the result synchronously.
+   * Obtains the display/hidden state of the current window. This state reflects the cursor display/hidden state of
+   * the multimodal process for the process where the window resides, not the actual cursor display/hidden status.
+   * Whether the cursor is correctly displayed/hidden is also affected by the render service process. This API is
+   * called synchronously.
    *
    * @returns { boolean } Visible status of the mouse pointer. The value **true** indicates that the mouse pointer is
    *     visible, and the value **false** indicates the opposite.
@@ -994,9 +1022,9 @@ declare namespace pointer {
    * @param { int } color - Pointer color. The default value is **black** (0x000000).
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1013,9 +1041,9 @@ declare namespace pointer {
    *
    * @param { int } color - Pointer color. The default value is **black** (0x000000).
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1031,9 +1059,9 @@ declare namespace pointer {
    * > When performing this operation, you need to connect an external device, such as a mouse or Bluetooth device.
    *
    * @param { int } color - Pointer color. The default value is **black** (0x000000).
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1047,9 +1075,9 @@ declare namespace pointer {
    * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **number** is the obtained mouse pointer color. Otherwise, **err** is an error
    *     object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1061,7 +1089,7 @@ declare namespace pointer {
    * Obtains the current mouse pointer color. This API uses a promise to return the result.
    *
    * @returns { Promise<int> } Promise used to return the mouse pointer color.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1073,7 +1101,7 @@ declare namespace pointer {
    * Obtains the pointer color. This API returns the result synchronously.
    *
    * @returns { int } Pointer color.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1084,12 +1112,12 @@ declare namespace pointer {
   /**
    * Sets the mouse pointer size. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } size - Pointer size. The value ranges from **1** to **7**. The default value is **1**.
+   * @param { int } size - Mouse cursor size. The value range is [1, 7], and the default value is **1**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1100,11 +1128,11 @@ declare namespace pointer {
   /**
    * Sets the mouse pointer size. This API uses a promise to return the result.
    *
-   * @param { int } size - Pointer size. The value ranges from **1** to **7**. The default value is **1**.
+   * @param { int } size - Mouse cursor size. The value ranges from 1 to 7, and the default value is **1**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1115,10 +1143,10 @@ declare namespace pointer {
   /**
    * Sets the pointer size. This API returns the result synchronously.
    *
-   * @param { int } size - Pointer size. The value ranges from **1** to **7**. The default value is **1**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @param { int } size - Mouse cursor size. The value ranges from 1 to 7, and the default value is **1**.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1129,12 +1157,12 @@ declare namespace pointer {
   /**
    * Obtains the current mouse pointer size. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **number** is the obtained mouse pointer size (value range: [1-7]). Otherwise,
-   *     **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the mouse cursor size is obtained
+   *     successfully, err is undefined and number is the obtained mouse cursor size, which ranges from 1 to 7;
+   *     otherwise, err is an error object.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1145,8 +1173,8 @@ declare namespace pointer {
   /**
    * Obtains the current mouse pointer size. This API uses a promise to return the result.
    *
-   * @returns { Promise<int> } Promise used to return the mouse pointer size. The value ranges from 1 to 7.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { Promise<int> } Promise used to return the mouse cursor size, which ranges from [1, 7].
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1157,8 +1185,8 @@ declare namespace pointer {
   /**
    * Obtains the pointer size. This API returns the result synchronously.
    *
-   * @returns { int } Mouse pointer size. The value ranges from **1** to **7**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { int } Mouse pointer size. The value range is [1, 7].
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1172,9 +1200,9 @@ declare namespace pointer {
    * @param { PrimaryButton } primary - Type of the primary mouse button.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1187,9 +1215,9 @@ declare namespace pointer {
    *
    * @param { PrimaryButton } primary - Type of the primary mouse button.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1203,9 +1231,9 @@ declare namespace pointer {
    * @param { AsyncCallback<PrimaryButton> } callback - Callback used to return the result. If the operation is
    *     successful, **err** is **undefined**, and **PrimaryButton** is the obtained key value. Otherwise, **err** is an
    *     error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1217,9 +1245,9 @@ declare namespace pointer {
    * Obtains the current primary mouse button. This API uses a promise to return the result.
    *
    * @returns { Promise<PrimaryButton> } Promise used to return the primary mouse button.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1234,9 +1262,9 @@ declare namespace pointer {
    *     enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1250,9 +1278,9 @@ declare namespace pointer {
    * @param { boolean } state - Status of the mouse hover scroll switch. The value **true** indicates that the switch is
    *     enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1266,9 +1294,9 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **true** (default) will be returned if the switch is enabled while false will be
    *     returned if the switch is disabled. If the operation fails, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1282,9 +1310,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the mouse hover
    *     scrolling switch is enabled, and the value **false** indicates that the switch is disabled. The default value
    *     is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1295,12 +1323,12 @@ declare namespace pointer {
   /**
    * Sets the number of mouse scroll lines. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } rows - Number of mouse scroll lines. The value ranges from 1 to 100. The default value is **3**.
+   * @param { int } rows - Mouse scroll lines. The value range is [1, 100], and the default value is 3.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1311,11 +1339,11 @@ declare namespace pointer {
   /**
    * Sets the number of mouse scroll lines. This API uses a promise to return the result.
    *
-   * @param { int } rows - Number of mouse scroll lines. The value ranges from 1 to 100. The default value is **3**.
+   * @param { int } rows - Mouse scroll lines. The value range is [1, 100], and the default value is 3.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1329,9 +1357,9 @@ declare namespace pointer {
    * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **number** is the number of mouse scroll lines. Otherwise, **err** is an error
    *     object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1343,9 +1371,9 @@ declare namespace pointer {
    * Obtains the number of mouse scroll lines. This API uses a promise to return the result.
    *
    * @returns { Promise<int> } Promise used to return the number of mouse scroll lines.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1360,9 +1388,9 @@ declare namespace pointer {
    *     value **false** indicates the opposite. The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1376,9 +1404,9 @@ declare namespace pointer {
    * @param { boolean } state - Scroll switch status. The value **true** indicates that the switch is enabled, and the
    *     value **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1392,9 +1420,9 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **state** indicates whether the scroll switch state (**true** indicates yes and
    *     **false** indicates no; default value: **true**). Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1408,9 +1436,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad
    *     scroll switch is enabled, and the value **false** indicates that the touchpad scroll is disabled. The default
    *     value is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1427,9 +1455,9 @@ declare namespace pointer {
    *     <br>The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1445,9 +1473,9 @@ declare namespace pointer {
    *     value **false** indicates the opposite.
    *     <br>The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1461,9 +1489,10 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **state** indicates whether the touchpad scroll direction matches the direction
    *     of finger movement (**true** indicates yes). Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error. [since 10 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 10 - 26.0.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use. [since 10 - 26.0.0]
    * @publicapi [since 26.0.1]
@@ -1478,9 +1507,10 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad
    *     scroll direction matches the direction of finger movement, and the value **false** indicates the opposite. The
    *     default value is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error. [since 10 - 26.0.0]
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   *     [since 10 - 26.0.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use. [since 10 - 26.0.0]
    * @publicapi [since 26.0.1]
@@ -1496,9 +1526,9 @@ declare namespace pointer {
    *     enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1512,9 +1542,9 @@ declare namespace pointer {
    * @param { boolean } state - State of the touchpad tap switch. The value **true** indicates that the switch is
    *     enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1528,9 +1558,9 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **state** indicates whether the touchpad tap switch is enabled (**true**
    *     indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1544,9 +1574,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad tap
    *     switch is enabled, and the value **false** indicates that the touchpad tap switch is disabled. The default
    *     value is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1557,12 +1587,12 @@ declare namespace pointer {
   /**
    * Sets the touchpad pointer speed. This API uses an asynchronous callback to return the result.
    *
-   * @param { int } speed - Touchpad pointer speed The value range is [1,11]. The default value is **6**.
+   * @param { int } speed - Cursor movement speed. The value range is [1, 11], and the default value is 6.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1573,11 +1603,11 @@ declare namespace pointer {
   /**
    * Sets the touchpad pointer speed. This API uses a promise to return the result.
    *
-   * @param { int } speed - Touchpad pointer speed The value range is [1,11]. The default value is **6**.
+   * @param { int } speed - Cursor movement speed. The value range is [1, 11], and the default value is 6.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1591,9 +1621,9 @@ declare namespace pointer {
    * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **number** is the obtained touchpad pointer speed. Otherwise, **err** is an error
    *     object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1604,10 +1634,11 @@ declare namespace pointer {
   /**
    * Obtains the touchpad pointer speed. This API uses a promise to return the result.
    *
-   * @returns { Promise<int> } Promise used to return the touchpad pointer speed. The value range is [1,11].
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @returns { Promise<int> } Promise used to return the touchpad cursor movement speed. The value range of speed
+   *     is [1, 11].
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1622,9 +1653,9 @@ declare namespace pointer {
    *     and the value **false** indicates the opposite. The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1638,9 +1669,9 @@ declare namespace pointer {
    * @param { boolean } state - Touchpad pinch switch state. The value **true** indicates that the switch is enabled,
    *     and the value **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1654,9 +1685,9 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **state** indicates whether the touchpad pinch switch is enabled (**true**
    *     indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1670,9 +1701,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad
    *     pinch switch is enabled, and the value **false** indicates that the touchpad pinch switch is disabled. The
    *     default value is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1687,9 +1718,9 @@ declare namespace pointer {
    *     is enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1703,9 +1734,9 @@ declare namespace pointer {
    * @param { boolean } state - Touchpad multi-finger swipe switch state. The value **true** indicates that the switch
    *     is enabled, and the value **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1717,12 +1748,12 @@ declare namespace pointer {
    * Obtains the touchpad multi-finger swipe switch state. This API uses an asynchronous callback to return the result.
    *
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
-   *     **err** is **undefined**, and **state** indicates whether the touchpad multi-finger swipe switch is enabled (
-   *     **true** indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error
+   *     **err** is **undefined**, and **state** indicates whether the touchpad multi-finger swipe switch is enabled
+   *     (**true** indicates yes and **false** indicates no; default value: **true**). Otherwise, **err** is an error
    *     object
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1736,9 +1767,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad
    *     multi-finger swipe switch is enabled, and **false** indicates that the touchpad multi-finger swipe switch is
    *     disabled. The default value is **true**.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1760,9 +1791,9 @@ declare namespace pointer {
    *     <br>The default value is **TOUCHPAD_TWO_FINGER_TAP_OR_RIGHT_BUTTON**.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1783,9 +1814,9 @@ declare namespace pointer {
    *     or tapping the left-button area of the touchpad.
    *     <br>The default value is **TOUCHPAD_TWO_FINGER_TAP_OR_RIGHT_BUTTON**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1799,9 +1830,9 @@ declare namespace pointer {
    * @param { AsyncCallback<RightClickType> } callback - Callback used to return the result. If the operation is
    *     successful, **err** is **undefined**, and the object is the touchpad right-click menu type. Otherwise, **err**
    *     is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1813,9 +1844,9 @@ declare namespace pointer {
    * Obtains the touchpad right-click menu type. This API uses a promise to return the result.
    *
    * @returns { Promise<RightClickType> } Promise used to return the touchpad right-click menu type.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 10 dynamic
@@ -1830,7 +1861,11 @@ declare namespace pointer {
    * [setCustomCursor]{@link @ohos.arkui.UIContext:CursorController.setCustomCursor}. This API uses a promise to return
    * the result.
    *
-   * @param { int } windowId - Window ID.
+   * Changes to the app window layout, hot zone switching, page navigation, the cursor moving out of and back into the
+   * window, and the cursor moving across different areas of the window may cause the cursor to switch back to the
+   * system style. In these scenarios, you need to set the cursor style again.
+   *
+   * @param { int } windowId - Window ID. The value is an integer greater than 0.
    * @param { image.PixelMap } pixelMap - Custom cursor resource.
    * @param { int } [focusX] - Custom cursor focus X, in px. The value must be greater than or equal to 0. The default
    *     value is **0**.
@@ -1838,7 +1873,7 @@ declare namespace pointer {
    *     value is **0**.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 11 dynamic
    * @since 23 static
@@ -1851,6 +1886,10 @@ declare namespace pointer {
    * window through the **UIExtensionAbility** process, see
    * [setCustomCursor]{@link @ohos.arkui.UIContext:CursorController.setCustomCursor}.
    *
+   * Changes to the app window layout, hot zone switching, page navigation, the cursor moving out of and back into the
+   * window, and the cursor moving across different areas of the window may cause the cursor to switch back to the
+   * system style. In these scenarios, you need to set the cursor style again.
+   *
    * @param { int } windowId - Window ID. The value must be an integer greater than 0.
    * @param { image.PixelMap } pixelMap - Custom cursor resource.
    * @param { int } [focusX] - Custom pointer focus X, in px. The value must be greater than or equal to 0. The default
@@ -1858,7 +1897,7 @@ declare namespace pointer {
    * @param { int } [focusY] - Custom pointer focus Y, in px. The value must be greater than or equal to 0. The default
    *     value is **0**.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @since 11 dynamic
    * @since 23 static
@@ -1876,15 +1915,15 @@ declare namespace pointer {
    * zone switching, page redirection, moving of the cursor out of the window and then back to the window, or moving of
    * the cursor in different areas of the window. In this case, you need to reset the cursor style.
    *
-   * @param { int } windowId - Window ID.
+   * @param { int } windowId - Window ID. The value is an integer greater than 0.
    * @param { CustomCursor } cursor - Custom cursor resource.
-   * @param { CursorConfig } config - Custom cursor configuration, which specifies whether to adjust the cursor size
-   *     based on system settings. If **followSystem** in **CursorConfig** is set to **true**, the supported adjustment
-   *     range is [size of the cursor image, 256 x 256].
+   * @param { CursorConfig } config - Custom cursor configuration, used to configure whether to adjust the cursor size
+   *     based on system settings. If followSystem in CursorConfig is set to true, the adjustable range of the cursor
+   *     size is [cursor resource image size, 256×256].
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Abnormal windowId parameter passed in;
-   *     <br>2. Abnormal pixelMap parameter passed in; 3. Abnormal focusX parameter passed in;
-   *     <br>4. Abnormal focusY parameter passed in.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Abnormal windowId parameter passed in.
+   *     2. Abnormal pixelMap parameter passed in; 3. Abnormal focusX parameter passed in.4. Abnormal focusY
+   *     parameter passed in.
    * @throws { BusinessError } 26500001 - Invalid windowId. Possible causes: The window id does not belong to the
    *     current process.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -1900,9 +1939,9 @@ declare namespace pointer {
    *     is enabled, and the value **false** indicates the opposite.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 14 dynamic
@@ -1916,9 +1955,9 @@ declare namespace pointer {
    * @param { boolean } isOpen - State of the double-tap and drag switch. The value **true** indicates that the switch
    *     is enabled, and the value **false** indicates the opposite.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 14 dynamic
@@ -1932,9 +1971,9 @@ declare namespace pointer {
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**, and **true** is returned if the switch is enabled while **false** is returned if the
    *     switch is disabled. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 14 dynamic
@@ -1948,7 +1987,7 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the touchpad
    *     double-tap and drag switch is enabled, and the value **false** indicates that the touchpad double-tap and drag
    *     switch is disabled.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
    * @since 14 dynamic
@@ -1965,8 +2004,9 @@ declare namespace pointer {
    *     **false** indicates that the scroll direction is opposite to the finger movement.
    *     <br>The default value is **true**.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - permission denied.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.
@@ -1981,8 +2021,9 @@ declare namespace pointer {
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the mouse wheel
    *     scroll direction is the same as the finger direction, and the value **false** indicates that the mouse wheel
    *     scroll direction is opposite to the finger direction. The default value is **true**.
-   * @throws { BusinessError } 201 - permission denied.
-   * @throws { BusinessError } 202 - SystemAPI permission error.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 3800001 - Input service exception.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi hide for inner use.

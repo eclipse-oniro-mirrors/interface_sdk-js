@@ -94,6 +94,7 @@ export declare class CustomLayoutAlgorithm implements LayoutAlgorithm {
      * @param { FrameNode } self - 动态布局组件在组件树上的实体节点。
      * @param { NodePosition } position - 动态布局组件进行布局时使用的位置信息。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     onLayout(self: FrameNode, position: NodePosition): void;
@@ -104,6 +105,7 @@ export declare class CustomLayoutAlgorithm implements LayoutAlgorithm {
  *
  * @interface ColumnLayoutAlgorithmOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 interface ColumnLayoutAlgorithmOptions {
@@ -114,6 +116,7 @@ interface ColumnLayoutAlgorithmOptions {
      * @type { ?LengthMetrics }
      * @default LengthMetrics.vp(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     space?: LengthMetrics;
@@ -124,6 +127,7 @@ interface ColumnLayoutAlgorithmOptions {
      * @type { ?HorizontalAlign }
      * @default HorizontalAlign.Center
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     alignItems?: HorizontalAlign;
@@ -134,6 +138,7 @@ interface ColumnLayoutAlgorithmOptions {
      * @type { ?FlexAlign }
      * @default FlexAlign.Start
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     justifyContent?: FlexAlign;
@@ -146,6 +151,7 @@ interface ColumnLayoutAlgorithmOptions {
      * @type { ?boolean }
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     isReverse?: boolean;
@@ -161,6 +167,7 @@ interface ColumnLayoutAlgorithmOptions {
  *
  * @implements LayoutAlgorithm
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 @ObservedV2
@@ -219,6 +226,7 @@ export declare class ColumnLayoutAlgorithm implements LayoutAlgorithm {
  *
  * @interface RowLayoutAlgorithmOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 interface RowLayoutAlgorithmOptions {
@@ -229,6 +237,7 @@ interface RowLayoutAlgorithmOptions {
      * @type { ?LengthMetrics }
      * @default LengthMetrics.vp(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     space?: LengthMetrics;
@@ -239,6 +248,7 @@ interface RowLayoutAlgorithmOptions {
      * @type { ?VerticalAlign }
      * @default VerticalAlign.Center
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     alignItems?: VerticalAlign;
@@ -249,6 +259,7 @@ interface RowLayoutAlgorithmOptions {
      * @type { ?FlexAlign }
      * @default FlexAlign.Start
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     justifyContent?: FlexAlign;
@@ -265,6 +276,7 @@ interface RowLayoutAlgorithmOptions {
      * @type { ?boolean }
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     isReverse?: boolean;
@@ -280,6 +292,7 @@ interface RowLayoutAlgorithmOptions {
  *
  * @implements LayoutAlgorithm
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 @ObservedV2
@@ -342,6 +355,7 @@ export declare class RowLayoutAlgorithm implements LayoutAlgorithm {
  *
  * @interface StackLayoutAlgorithmOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 interface StackLayoutAlgorithmOptions {
@@ -352,6 +366,7 @@ interface StackLayoutAlgorithmOptions {
      * @type { ?LocalizedAlignment }
      * @default LocalizedAlignment.Center
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     alignContent?: LocalizedAlignment;
@@ -367,6 +382,7 @@ interface StackLayoutAlgorithmOptions {
  *
  * @implements LayoutAlgorithm
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 @ObservedV2
@@ -395,6 +411,7 @@ export declare class StackLayoutAlgorithm implements LayoutAlgorithm {
  *
  * @interface GridLayoutAlgorithmOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 interface GridLayoutAlgorithmOptions {
@@ -405,6 +422,7 @@ interface GridLayoutAlgorithmOptions {
      * @type { ?(string | ItemFillPolicy) }
      * @default '1fr'
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     columnsTemplate?: string | ItemFillPolicy;
@@ -415,6 +433,7 @@ interface GridLayoutAlgorithmOptions {
      * @type { ?LengthMetrics }
      * @default LengthMetrics.vp(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     columnsGap?: LengthMetrics;
@@ -425,6 +444,7 @@ interface GridLayoutAlgorithmOptions {
      * @type { ?LengthMetrics }
      * @default LengthMetrics.vp(0)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
      * @since 24 static
      */
     rowsGap?: LengthMetrics;
@@ -440,6 +460,7 @@ interface GridLayoutAlgorithmOptions {
  *
  * @implements LayoutAlgorithm
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
  * @since 24 static
  */
 export declare class GridLayoutAlgorithm implements LayoutAlgorithm {

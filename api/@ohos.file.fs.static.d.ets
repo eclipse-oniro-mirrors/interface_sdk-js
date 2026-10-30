@@ -5105,6 +5105,17 @@ interface Stat {
   readonly location: LocationType;
 
   /**
+   * Number of blocks allocated to the file, in 512-byte units.
+   *
+   * @throws { BusinessError } 13900005 - I/O error
+   * @throws { BusinessError } 13900042 - Unknown error
+   * @syscap SystemCapability.FileManagement.File.FileIO
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  readonly blocks?: long;
+
+  /**
    * Checks whether this file is a block special file. A block special file supports access by block only, and it is
    * cached when accessed.
    *
@@ -5552,6 +5563,7 @@ interface Watcher {
    * Starts listening.
    *
    * @throws { BusinessError } 13900002 - No such file or directory
+   * @throws { BusinessError } 13900005 - I/O error
    * @throws { BusinessError } 13900008 - Bad file descriptor
    * @throws { BusinessError } 13900011 - Out of memory
    * @throws { BusinessError } 13900012 - Permission denied
@@ -5573,6 +5585,7 @@ interface Watcher {
    * Stops listening and removes the Watcher object.
    *
    * @throws { BusinessError } 13900002 - No such file or directory
+   * @throws { BusinessError } 13900005 - I/O error
    * @throws { BusinessError } 13900008 - Bad file descriptor
    * @throws { BusinessError } 13900011 - Out of memory
    * @throws { BusinessError } 13900012 - Permission denied

@@ -18,6 +18,10 @@
  * @kit ArkTS
  */
 
+/*** if arkts dynamic */
+import collections from '@arkts.collections';
+/*** endif */
+
 /**
  * 该模块主要提供常用的工具函数，实现字符串编解码（[TextEncoder]{@link util.TextEncoder}，[TextDecoder]{@link util.TextDecoder}）、
  * 有理数运算（[RationalNumber<sup>8+</sup>]{@link util.RationalNumber}）、缓冲区管理（[LRUCache<sup>9+</sup>]{@link util.LRUCache}）、
@@ -182,7 +186,7 @@ declare namespace util {
    * 如果尚未获取过哈希值，则生成一个随机哈希值，保存到对象的 **hash** 字段中并返回。如果已经获取过哈希值，则返回保存在
    * **hash** 字段中的哈希值（同一对象返回相同的值）。
    *
-   * @param { object } [object] - 要获取哈希值的对象。
+   * @param { object } object - 要获取哈希值的对象。
    * @returns { number } 哈希值。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform
@@ -528,7 +532,7 @@ declare namespace util {
   }
 
   /**
-   * 提供比较有理数、获取分子和分母的 API。例如，可以使用 **toString()** API 将有理数转换为字符串。
+   * 提供比较有理数、获取分子和分母的 API。创建有理数时会自动约分。例如，可以使用 **toString()** API 将有理数转换为字符串。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -537,7 +541,7 @@ declare namespace util {
    */
   class RationalNumber {
     /**
-     * 用于创建 **RationalNumber** 对象的构造函数。
+     * 用于创建 **RationalNumber** 对象的构造函数。无参构造时分子为0、分母为1。
      *
      * @param { number } numerator - 分子，为整数。
      * @param { number } denominator - 分母，为整数。
@@ -597,7 +601,7 @@ declare namespace util {
      * 将当前的 RationalNumber 对象与给定对象进行比较。
      *
      * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 根据比较结果返回 0、1 或 -1。
+     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -609,7 +613,7 @@ declare namespace util {
      * 将当前的 RationalNumber 对象与给定对象进行比较。
      *
      * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 根据比较结果返回 0、1 或 -1。
+     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -756,7 +760,7 @@ declare namespace util {
     /**
      * 用于创建 **LruBuffer** 实例的构造函数。缓存的默认容量为 64。
      *
-     * @param { number } capacity - 要创建的缓存的容量。默认值为 **64**。
+     * @param { number } [capacity] - 要创建的缓存的容量。默认值为 **64**。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -767,7 +771,7 @@ declare namespace util {
     /**
      * 改变缓存容量。如果新容量小于等于 **0**，则抛出异常。
      *
-     * @param { number } newCapacity - 缓存的新容量。
+     * @param { number } newCapacity - 缓存的新容量，取值范围为 [0, 2147483647]。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1146,7 +1150,7 @@ declare namespace util {
 
     /**
      * 获取 key 对应的值。如果该 key 不在缓存中，则调用
-     * [createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault} 创建该 key。如果 **createDefault** 中指定的值
+     * [createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault} 创建该 key 对应的值。如果 **createDefault** 中指定的值
      * 不为 **undefined**，则调用 [afterRemoval<sup>9+</sup>]{@link util.LRUCache.afterRemoval} 返回 **createDefault**
      * 中指定的值。
      *
@@ -1198,7 +1202,7 @@ declare namespace util {
      * 从此缓存中移除 key 及其关联的值，并返回与该 key 关联的值。如果 key 不存在，则返回 **undefined**。
      *
      * @param { K } key - 要移除的 key。
-     * @returns { V | undefined } 如果 key 存在于缓存中，则返回包含被移除键值对的 **Optional** 对象；如果 key 不存在
+     * @returns { V | undefined } 如果 key 存在于缓存中，则返回与该 key 关联的值；如果 key 不存在
      *     则返回 **undefined**；如果 **key** 传入 **null**，则抛出错误。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1339,7 +1343,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.toString
+     * @useinstead ohos.util.ScopeHelper.toString
      */
     toString(): string;
 
@@ -1435,7 +1439,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(value: ScopeType): boolean;
 
@@ -1447,7 +1451,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
-     * @useinstead util.LRUCache.contains
+     * @useinstead ohos.util.ScopeHelper.contains
      */
     contains(range: Scope): boolean;
 
@@ -1581,7 +1585,7 @@ declare namespace util {
     expand(value: ScopeType): ScopeHelper;
 
     /**
-     * 判断一个范围是否在此 **Scope** 范围内。
+     * 判断一个值是否在此 **Scope** 范围内。
      *
      * @param { ScopeType } value - 指定的值。
      * @returns { boolean } 检查结果。如果值在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
@@ -1767,9 +1771,9 @@ declare namespace util {
 
   /**
    * 提供 Base64 和 Base64URL 的编解码。Base64 编码表包含 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）
-   * 以及特殊字符加号（+）和斜杠（/）。编码时，原始数据按三个字节一组进行划分，每组包含一个 6 位的数字。然后使用 Base64
+   * 以及特殊字符加号（+）和斜杠（/）。编码时，原始数据按三个字节一组进行划分，每组转换为多个 6 位数字。然后使用 Base64
    * 编码表中对应的字符来表示这些数字。如果最后一组只包含一个或两个字节，则使用等号（=）进行填充。Base64URL 编码表包含
-   * 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）以及特殊字符加号（+）和斜杠（/）。Base64URL 编码结果
+   * 64 个字符，分别为大写字母（A-Z）、小写字母（a-z）、数字（0-9）以及特殊字符连字符（-）和下划线（_）。Base64URL 编码结果
    * 不包含等号（=）。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -1806,24 +1810,25 @@ declare namespace util {
      * 对输入的 Uint8Array 字节数组进行 Base64 编码，并返回字符串。该方法支持多种编码格式，包括标准 Base64 编码、符合
      * MIME 规范的 Base64 编码（带换行）以及 URL 安全的 Base64 编码。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
+     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
      *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
      *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
      *     且以 '\r\n' 结尾。[since 10 - 11]
-     * @param { Type } options - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不包含
-     *     回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换行，
-     *     每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL 编码。
-     *     返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符且以
-     *     '\r\n' 结尾。[since 12]
+     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
+     *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
+     *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
+     *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
+     *     且以 '\r\n' 结尾。[since 12]
      * @returns { string } 获取到的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 9 dynamic
      */
-    encodeToStringSync(src: Uint8Array, options?: Type): string;
+    encodeToStringSync(src: Uint8Array | collections.Uint8Array, options?: Type): string;
 
     /**
      * 将字符串解码为 Uint8Array 对象。该接口同步返回结果。
@@ -1858,7 +1863,8 @@ declare namespace util {
     /**
      * 将输入内容编码为字符串。该接口使用 promise 返回结果。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
+     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。<br>-
      *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：
@@ -1869,7 +1875,7 @@ declare namespace util {
      * @atomicservice [since 12]
      * @since 9 dynamic
      */
-    encodeToString(src: Uint8Array, options?: Type): Promise<string>;
+    encodeToString(src: Uint8Array | collections.Uint8Array, options?: Type): Promise<string>;
 
     /**
      * 将输入内容解码为 Uint8Array 对象。该接口使用 promise 返回结果。
@@ -1919,7 +1925,8 @@ declare namespace util {
      */
     isAnyArrayBuffer(value: Object): boolean;
     /**
-     * 判断入参是否为 ArrayBufferView 类型。
+     * 判断入参是否为 ArrayBufferView 类型。ArrayBufferView 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint32Array、Float32Array、Float64Array 和 DataView。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 ArrayBufferView 类型，则返回 **true**；否则返回 **false**。
@@ -2296,7 +2303,8 @@ declare namespace util {
      */
     isSymbolObject(value: Object): boolean;
     /**
-     * 判断入参是否为 TypedArray 类型。
+     * 判断入参是否为 TypedArray 类型。TypedArray 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
+     * Uint8ClampedArray、Uint16Array、Uint32Array、Float32Array、Float64Array、BigInt64Array 和 BigUint64Array。
      *
      * @param { Object } value - 要检查的对象。
      * @returns { boolean } 检查结果。如果入参为 TypedArray 类型，则返回 **true**；否则返回 **false**。
@@ -2462,7 +2470,8 @@ declare namespace util {
      */
     write(chunk: string | Uint8Array): string;
     /**
-     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。
+     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。如果传入 **chunk**，则将其作为最后一部分数据进行解码；
+     * 如果未传入 **chunk**，则仅返回内部缓存中不完整字节序列的解码结果，不再处理新数据。
      *
      * @param { string | Uint8Array } [chunk] - 要解码的字符串。默认值为 **undefined**。
      * @returns { string } 解码后的字符串。
@@ -2498,7 +2507,7 @@ declare namespace util {
    */
   interface AutoFinalizer<T> {
     /**
-     * 开发者自定义的用于释放资源的回调。
+     * 开发者自定义的用于释放资源的回调。当注册对象被回收时自动触发，并将heldValue传递给onFinalization。
      *
      * @param { T } heldValue - 传递给 finalizer 的值。
      * @syscap SystemCapability.Utils.Lang
@@ -2518,7 +2527,7 @@ declare namespace util {
    */
   class AutoFinalizerCleaner<T> {
     /**
-     * 注册释放由开发者管理的资源的对象。
+     * 注册释放由开发者管理的资源的对象；当obj被回收时自动触发其onFinalization并传入heldValue。
      *
      * @param { AutoFinalizer<T> } obj - 注册到 cleaner 的对象。
      * @param { T } heldValue - 传递给 finalizer 的值。
@@ -2550,7 +2559,7 @@ declare namespace util {
     abort?: boolean;
     /**
      * 多线程安全检测的采样频率。
-     * 该值必须为整数，最小为 **100**，最大为 **2147483647**（默认 **100**）。
+     * 该值表示两次检测之间的函数调用次数，数值越大表示采样频率越低；数值越小检测越及时但性能开销越大，数值越大则可能漏检。该值必须为整数，最小为 **100**，最大为 **2147483647**（默认 **100**）。
      * 该值应为整数。
      *
      * @syscap SystemCapability.Utils.Lang
@@ -2561,7 +2570,7 @@ declare namespace util {
     frequency?: number;
 
     /**
-     * 多线程安全检测的时间间隔（分钟）。
+     * 多线程安全检测的时间间隔（分钟）。该配置仅在abort为 **false** 时生效；建议不要设置为低于5分钟的值，否则可能产生严重性能影响。
      * 只有距离上次检测的时间超过此间隔时才会再次上报错误。
      * 该值必须为 [0,1440] 范围内的整数（默认 5min）。
      *
@@ -2597,11 +2606,8 @@ declare namespace util {
     static setMultithreadingDetectionEnabled(enabled: boolean, options?: MultithreadingDetectionOptions):void;
 
     /**
-     * 注册一个回调函数，在 GC（垃圾回收）后堆内存超过临界预警阈值时触发。
+     * 注册一个回调函数，在虚拟机主线程完成GC（垃圾回收）后，按存活对象大小判断堆内存是否超过临界预警阈值时触发。堆碎片和浮动垃圾可能影响判断，无法保证在OOM（内存溢出）前一定触发。
      * 必须在主线程上调用，且仅能注册一个回调。
-     *
-     * NOTE:
-     * 无法保证在 OOM（内存溢出）前一定会触发该回调。
      *
      * @param { Callback<string> } callback - 在 GC 后内存达到阈值时触发的回调。字符串参数表示内存压力事件的类型：
      *     "LocalHeapMemPressure"、"SharedHeapMemPressure" 或 "ProcessHeapMemPressure"。
@@ -2615,7 +2621,7 @@ declare namespace util {
     static onVMHeapMemoryPressure(callback: Callback<string>, heapMemoryThreshold: HeapMemoryThreshold): boolean;
 
     /**
-     * 取消注册在 GC 后堆内存超过临界预警阈值时触发的回调。
+     * 取消注册在 GC 后堆内存超过临界预警阈值时触发的回调。必须在主线程上调用。
      *
      * @static
      * @syscap SystemCapability.Utils.Lang
@@ -2649,7 +2655,7 @@ declare namespace util {
     static enableLocalHandleDetection(): void;
 
     /**
-     * 开启或关闭 napi_ref 与全局 handle 之间关联关系的追踪。开启后，堆快照将包含 native 引用地址信息。关闭后（enable 为
+     * 开启或关闭进程级的 napi_ref 与全局 handle 之间关联关系追踪，所有线程共享该状态。开启后，堆快照将包含 native 引用地址信息。追踪会增加内存和性能开销，建议无需调试时关闭。关闭后（enable 为
      * false），将停止追踪，堆快照中不再显示 native 引用与全局 handle 之间的关联关系。
      *
      * @param { boolean } enable - 布尔标志位，指示是开启还是关闭追踪。**true** 表示开启追踪，**false** 表示关闭追踪。
@@ -2659,6 +2665,29 @@ declare namespace util {
      * @since 26.0.0 dynamiconly
      */
     static setTrackGlobalRef(enable: boolean): void;
+
+    /**
+     * 获取当前调用线程所属 ArkTS 虚拟机正在使用的全局 handle 数量。可用于维测场景，例如根据全局 handle 数量决定是否
+     * 生成内存快照。
+     *
+     * > **说明：**
+     * >
+     * > 该计数是在调用线程所属的虚拟机上查询的。在 worker 中调用此接口返回的是该 worker 自身虚拟机的计数，而非主
+     * > 虚拟机的计数。
+     * >
+     * > 仅统计强引用（global handle）的数量，不包含弱引用（WeakRef）和 Sendable 引用（SendableRef）。弱引用存储在
+     * > 独立的弱引用链表中，Sendable 引用存储在独立的 Sendable 全局存储中，均不在本接口的遍历范围内。
+     * >
+     * > 返回值受强引用创建/删除操作的影响。例如，napi_create_strong_reference、napi_delete_strong_reference 会相应
+     * > 增减计数，而 napi_create_strong_sendable_reference、napi_delete_strong_sendable_reference 不会影响计数结果。
+     *
+     * @returns { number } 返回当前虚拟机正在使用的全局 handle 数量，该值大于等于 0。
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static getGlobalHandleCount(): number;
   }
 
   /**

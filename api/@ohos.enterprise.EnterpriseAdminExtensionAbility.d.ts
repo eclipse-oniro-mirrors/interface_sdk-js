@@ -450,4 +450,30 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.0.0
    */
   onAdminPolicyChanged(event: common.PolicyChangedEvent): void;
+
+  /**
+   * Callback for unmounting external storage devices.
+   * When an external storage device needs to be mounted, the callback is triggered.
+   *
+   * @param { common.ExternalStorageDeviceInfo } deviceInfo - Device information of
+   *     the external storage device that needs to be unmounted.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
+
+  /**
+   * Callback for the password authentication failure event. This callback is triggered when password authentication fails.
+   * You should register the **MANAGED_EVENT_PASSWORD_FAILED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
+   * @param { number } userId - ID of the user whose password authentication failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
 }

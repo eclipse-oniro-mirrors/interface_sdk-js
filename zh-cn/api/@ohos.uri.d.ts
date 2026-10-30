@@ -49,6 +49,9 @@ declare namespace uri {
   export class URI {
     /**
      * 构造函数用于创建URI对象，将输入的URI字符串按照RFC3986规范解析并分解为scheme、userInfo、host、port、path、query和fragment等组件。
+     * URI的标准形式为[scheme:]scheme-specific-part[#fragment]，细化形式为[scheme:][//authority][path][?query][#fragment]。
+     * 包含scheme的URI为绝对URI，否则为相对URI；scheme-specific-part以“/”开头时为分层URI，否则为不透明URI；
+     * authority由[userInfo@]host[:port]组成，authority存在时必须包含host。
      *
      * @param { string } uri - 需要解析的URI字符串，需符合RFC3986规范标准。
      * @throws { BusinessError } 10200002 - Invalid uri string.
@@ -157,8 +160,8 @@ declare namespace uri {
     /**
      * 在当前URI对象上添加查询参数后返回新的URI对象，保持原有URI对象不变。
      *
-     * @param { string } [key] - 需要添加查询参数的名称。
-     * @param { string } [value] - 需要添加查询参数的值。
+     * @param { string } key - 需要添加查询参数的名称。
+     * @param { string } value - 需要添加查询参数的值。
      * @returns { URI } 返回添加查询部分后的URI对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -241,7 +244,7 @@ declare namespace uri {
     /**
      * 对指定字段进行编码，并将其追加到当前URI对象的path中，创建并返回新的URI对象，保持原有URI对象不变。
      *
-     * @param { string } [pathSegment] - 需要追加到路径部分的字段。
+     * @param { string } pathSegment - 需要追加到路径部分的字段。
      * @returns { URI } 返回已追加字段的URI对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform

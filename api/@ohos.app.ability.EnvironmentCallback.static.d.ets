@@ -31,7 +31,7 @@ import { Configuration } from './@ohos.app.ability.Configuration';
  */
 declare interface EnvironmentCallback {
   /**
-   * Called when the system configuration changes, after
+   * Called when the system environment changes, after
    * [a listener has been registered for such events]{@link ./application/ApplicationContext:ApplicationContext#on(type:
    *  'environment', callback: EnvironmentCallback)}
    * .
@@ -44,7 +44,7 @@ declare interface EnvironmentCallback {
   onConfigurationUpdated(config: Configuration): void;
 
   /**
-   * Called when the system memory level changes, after
+   * Called when the system memory changes, after
    * [a listener has been registered for such events]{@link ./application/ApplicationContext:ApplicationContext#on(type:
    *  'environment', callback: EnvironmentCallback)}
    * .
