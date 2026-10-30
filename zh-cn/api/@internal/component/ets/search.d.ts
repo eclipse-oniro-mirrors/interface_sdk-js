@@ -323,7 +323,7 @@ declare interface SearchOptions {
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link ./rich_editor}组件。
+ * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link @global:RichEditor}组件。
  * >
  * > - 如需设置触摸文本组件外部时是否清除文本选中和手柄，可使用
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy}接口。
@@ -526,7 +526,7 @@ interface CancelButtonSymbolOptions {
 declare type SearchSubmitCallback = (searchContent: string, event?: SubmitEvent) => void;
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1739,7 +1739,7 @@ declare class SearchAttribute extends CommonMethod<SearchAttribute> {
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link ./rich_editor}组件。
+ * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link @global:RichEditor}组件。
  * >
  * > - 如需设置触摸文本组件外部时是否清除文本选中和手柄，可使用
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy}接口。

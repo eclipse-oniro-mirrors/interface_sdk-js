@@ -51,7 +51,7 @@ declare interface CheckboxOptions {
    *
    * **Note:**
    *
-   * This value is useless when the [CheckboxGroup]{@link ./checkboxgroup} component is not used together.
+   * This value is useless when the [CheckboxGroup]{@link @global:CheckboxGroup} component is not used together.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -178,7 +178,7 @@ interface CheckboxInterface {
 declare type OnCheckboxChangeCallback = (value: boolean) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

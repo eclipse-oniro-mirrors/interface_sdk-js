@@ -19,12 +19,12 @@
  */
 
 /**
- * A child component of the [WaterFlow]{@link ./water_flow} container, used to display specific items in the waterfall
+ * A child component of the [WaterFlow]{@link @global:WaterFlow} container, used to display specific items in the waterfall
  * layout.
  *
  * > **NOTE**
  * >
- * > * This component can be used only as a child of the [WaterFlow]{@link ./water_flow} container.
+ * > * This component can be used only as a child of the [WaterFlow]{@link @global:WaterFlow} container.
  * >
  * > * In scrolling scenarios, **FlowItem** and its child components are frequently created and destroyed. To reduce the
  * > overhead of repeated node creation and destruction within the ArkUI framework, you are advised to encapsulate the
@@ -42,7 +42,7 @@
 interface FlowItemInterface {
   /**
    * Creates a waterfall flow child component. This component can be used only as a child of the
-   * [WaterFlow]{@link ./water_flow} container.
+   * [WaterFlow]{@link @global:WaterFlow} container.
    *
    * @returns { FlowItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -67,12 +67,12 @@ interface FlowItemInterface {
 declare class FlowItemAttribute extends CommonMethod<FlowItemAttribute> {}
 
 /**
- * A child component of the [WaterFlow]{@link ./water_flow} container, used to display specific items in the waterfall
+ * A child component of the [WaterFlow]{@link @global:WaterFlow} container, used to display specific items in the waterfall
  * layout.
  *
  * > **NOTE**
  * >
- * > * This component can be used only as a child of the [WaterFlow]{@link ./water_flow} container.
+ * > * This component can be used only as a child of the [WaterFlow]{@link @global:WaterFlow} container.
  * >
  * > * In scrolling scenarios, **FlowItem** and its child components are frequently created and destroyed. To reduce the
  * > overhead of repeated node creation and destruction within the ArkUI framework, you are advised to encapsulate the

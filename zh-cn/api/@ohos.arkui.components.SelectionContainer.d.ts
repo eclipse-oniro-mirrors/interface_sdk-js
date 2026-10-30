@@ -225,15 +225,15 @@ export declare class SelectionContainerController {
  *
  * > **说明：**
  * >
- * > - 本组件中选中文本相关回调返回的文本内容，按照[Text]{@link ./@internal/component/ets/text}组件的从上到下显示顺序进行拼接。
+ * > - 本组件中选中文本相关回调返回的文本内容，按照[Text]{@link @global:Text}组件的从上到下显示顺序进行拼接。
  * >
- * > - 本组件默认布局走[Stack]{@link ./@internal/component/ets/stack}，如有其他容器布局需求请在SelectionContainer内放置一个容器组件。
+ * > - 本组件默认布局走[Stack]{@link @global:Stack}，如有其他容器布局需求请在SelectionContainer内放置一个容器组件。
  * >
  * > - SelectionContainer内选中文本时不显示放大镜，也不支持[getMagnifier]{@link @ohos.arkui.UIContext:UIContext.getMagnifier}主动设置放大镜。
  * >
  * > - SelectionContainer内选中文本时不支持拖拽。
  * >
- * > - SelectionContainer内[Repeat]{@link ./@internal/component/ets/repeat}组件下的文本不支持跨节点选中。
+ * > - SelectionContainer内[Repeat]{@link @global:Repeat}组件下的文本不支持跨节点选中。
  * >
  * > - 仅Text组件中的文本内容参与跨节点选中与文本拼接。
  *
@@ -259,13 +259,13 @@ export interface SelectionContainerInterface {
 }
 
 /**
- * 支持[通用属性]{@link ./@internal/component/ets/common}。
+ * 支持[通用属性]{@link CommonMethod}。
  *
  * > **说明：**
  * >
- * > - 不支持[隐私遮罩]{@link ./@internal/component/ets/common}。
+ * > - 不支持[隐私遮罩]{@link CommonMethod}。
  * >
- * > - 不支持[图形变换]{@link ./@internal/component/ets/common}，在SelectionContainer容器中子组件Text不支持图形变换。
+ * > - 不支持[图形变换]{@link CommonMethod}，在SelectionContainer容器中子组件Text不支持图形变换。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -378,7 +378,7 @@ export declare class SelectionContainerAttribute extends CommonMethod<SelectionC
    * > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
    * > 的长按响应时长为800ms，当两者同时绑定且触发方式均为长按时，优先响应bindSelectionMenu。
    * >
-   * > - 自定义菜单过长时，建议内部嵌套使用[Scroll]{@link ./@internal/component/ets/scroll}组件，避免键盘被遮挡。
+   * > - 自定义菜单过长时，建议内部嵌套使用[Scroll]{@link @global:Scroll}组件，避免键盘被遮挡。
    * >
    * > - 选区跨越不可复制Text时，菜单仅基于实际选中的可复制文本进行显示和处理。
    * >
@@ -489,15 +489,15 @@ export declare class SelectionContainerAttribute extends CommonMethod<SelectionC
  *
  * > **说明：**
  * >
- * > - 本组件中选中文本相关回调返回的文本内容，按照[Text]{@link ./@internal/component/ets/text}组件的从上到下显示顺序进行拼接。
+ * > - 本组件中选中文本相关回调返回的文本内容，按照[Text]{@link @global:Text}组件的从上到下显示顺序进行拼接。
  * >
- * > - 本组件默认布局走[Stack]{@link ./@internal/component/ets/stack}，如有其他容器布局需求请在SelectionContainer内放置一个容器组件。
+ * > - 本组件默认布局走[Stack]{@link @global:Stack}，如有其他容器布局需求请在SelectionContainer内放置一个容器组件。
  * >
  * > - SelectionContainer内选中文本时不显示放大镜，也不支持[getMagnifier]{@link @ohos.arkui.UIContext:UIContext.getMagnifier}主动设置放大镜。
  * >
  * > - SelectionContainer内选中文本时不支持拖拽。
  * >
- * > - SelectionContainer内[Repeat]{@link ./@internal/component/ets/repeat}组件下的文本不支持跨节点选中。
+ * > - SelectionContainer内[Repeat]{@link @global:Repeat}组件下的文本不支持跨节点选中。
  * >
  * > - 仅Text组件中的文本内容参与跨节点选中与文本拼接。
  *

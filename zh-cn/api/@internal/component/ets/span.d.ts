@@ -63,7 +63,7 @@ declare interface TextBackgroundStyle {
  */
 declare class BaseSpan<T> extends CommonMethod<T> {
   /**
-   * 设置文本背景样式。作为[ContainerSpan]{@link ./container_span}的子组件时可继承该属性值，优先使用自身的设置。未通过该接口设置时，默认背景颜色为Color.Transparent（透明），圆角弧
+   * 设置文本背景样式。作为[ContainerSpan]{@link @global:ContainerSpan}的子组件时可继承该属性值，优先使用自身的设置。未通过该接口设置时，默认背景颜色为Color.Transparent（透明），圆角弧
    * 度为0。
    *
    * @param { TextBackgroundStyle } style - 文本背景样式。
@@ -94,7 +94,7 @@ declare class BaseSpan<T> extends CommonMethod<T> {
 }
 
 /**
- * 作为[Text]{@link ./text}、[ContainerSpan]{@link ./container_span}组件的子组件，用于显示行内文本，支持对文本的字体、颜色、大小等样式进行细粒度设置。适用于在同一行文本中混合显示
+ * 作为[Text]{@link @global:Text}、[ContainerSpan]{@link @global:ContainerSpan}组件的子组件，用于显示行内文本，支持对文本的字体、颜色、大小等样式进行细粒度设置。适用于在同一行文本中混合显示
  * 不同样式的场景，如不同字体颜色的文本、添加装饰线或阴影效果等。
  *
  * > **说明：**
@@ -104,17 +104,17 @@ declare class BaseSpan<T> extends CommonMethod<T> {
  * > - 该组件从API version 10开始支持继承父组件Text的属性，即如果子组件未设置属性且父组件设置属性，则继承父组件设置的属性。支持继承的属性仅包括：fontColor、fontSize、fontStyle、
  * > fontWeight、decoration、letterSpacing、textCase、fontFamily、textShadow。
  * >
- * > - 支持[通用属性]{@link ./common}中的[无障碍属性]{@link ./common}（
- * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}）、[组件标识]{@link ./common}（
- * > [id]{@link CommonMethod#id}、[key]{@link CommonMethod#key}）和[禁用反色能力]{@link ./common}（
- * > [allowForceDark]{@link CommonMethod#allowForceDark}），不支持其他通用属性。若需设置其他通用属性，应使用[Text]{@link ./text}进行设置，或改用
- * > [属性字符串]{@link ./styled_string}中的[CustomSpan]{@link CustomSpan}自行绘制。
+ * > - 支持[通用属性]{@link CommonMethod}中的[无障碍属性]{@link CommonMethod}（
+ * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}）、[组件标识]{@link CommonMethod}（
+ * > [id]{@link CommonMethod#id}、[key]{@link CommonMethod#key}）和[禁用反色能力]{@link CommonMethod}（
+ * > [allowForceDark]{@link CommonMethod#allowForceDark}），不支持其他通用属性。若需设置其他通用属性，应使用[Text]{@link @global:Text}进行设置，或改用
+ * > [属性字符串]{@link @global:StyledString}中的[CustomSpan]{@link CustomSpan}自行绘制。
  * >
  * > - [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}仅在Span设置了
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}事件时生效，配置的文本只会体现在无障碍服务识别到的内嵌链接弹窗中。直接播报时，仍播报
  * > Span的内容，不会替换为accessibilityText配置的文本。
  * >
- * > - [通用事件]{@link ./common}只支持点击事件[onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}和悬浮事件
+ * > - [通用事件]{@link CommonMethod}只支持点击事件[onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}和悬浮事件
  * > [onHover]{@link CommonMethod#onHover}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -384,7 +384,7 @@ declare class SpanAttribute extends BaseSpan<SpanAttribute> {
 }
 
 /**
- * 作为[Text]{@link ./text}、[ContainerSpan]{@link ./container_span}组件的子组件，用于显示行内文本，支持对文本的字体、颜色、大小等样式进行细粒度设置。适用于在同一行文本中混合显示
+ * 作为[Text]{@link @global:Text}、[ContainerSpan]{@link @global:ContainerSpan}组件的子组件，用于显示行内文本，支持对文本的字体、颜色、大小等样式进行细粒度设置。适用于在同一行文本中混合显示
  * 不同样式的场景，如不同字体颜色的文本、添加装饰线或阴影效果等。
  *
  * > **说明：**
@@ -394,17 +394,17 @@ declare class SpanAttribute extends BaseSpan<SpanAttribute> {
  * > - 该组件从API version 10开始支持继承父组件Text的属性，即如果子组件未设置属性且父组件设置属性，则继承父组件设置的属性。支持继承的属性仅包括：fontColor、fontSize、fontStyle、
  * > fontWeight、decoration、letterSpacing、textCase、fontFamily、textShadow。
  * >
- * > - 支持[通用属性]{@link ./common}中的[无障碍属性]{@link ./common}（
- * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}）、[组件标识]{@link ./common}（
- * > [id]{@link CommonMethod#id}、[key]{@link CommonMethod#key}）和[禁用反色能力]{@link ./common}（
- * > [allowForceDark]{@link CommonMethod#allowForceDark}），不支持其他通用属性。若需设置其他通用属性，应使用[Text]{@link ./text}进行设置，或改用
- * > [属性字符串]{@link ./styled_string}中的[CustomSpan]{@link CustomSpan}自行绘制。
+ * > - 支持[通用属性]{@link CommonMethod}中的[无障碍属性]{@link CommonMethod}（
+ * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}）、[组件标识]{@link CommonMethod}（
+ * > [id]{@link CommonMethod#id}、[key]{@link CommonMethod#key}）和[禁用反色能力]{@link CommonMethod}（
+ * > [allowForceDark]{@link CommonMethod#allowForceDark}），不支持其他通用属性。若需设置其他通用属性，应使用[Text]{@link @global:Text}进行设置，或改用
+ * > [属性字符串]{@link @global:StyledString}中的[CustomSpan]{@link CustomSpan}自行绘制。
  * >
  * > - [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}仅在Span设置了
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}事件时生效，配置的文本只会体现在无障碍服务识别到的内嵌链接弹窗中。直接播报时，仍播报
  * > Span的内容，不会替换为accessibilityText配置的文本。
  * >
- * > - [通用事件]{@link ./common}只支持点击事件[onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}和悬浮事件
+ * > - [通用事件]{@link CommonMethod}只支持点击事件[onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)}和悬浮事件
  * > [onHover]{@link CommonMethod#onHover}。
  *
  * ###### 子组件

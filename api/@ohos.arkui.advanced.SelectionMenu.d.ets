@@ -209,7 +209,7 @@ export interface SelectionMenuOptions {
    * After tapping the built-in paste option in the custom text selection menu, pasting in a blank area or replacing
    * selected text with paste both retain the style of the copied text.
    *
-   * When the copyOptions attribute of the rich text component [RichEditor]{@link ./@internal/component/ets/rich_editor}
+   * When the copyOptions attribute of the rich text component [RichEditor]{@link @global:RichEditor}
    * is set to `CopyOptions.None`, the built-in copy and cut functions are not restricted.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -309,7 +309,7 @@ export interface SelectionMenuOptions {
 
 /**
  * When the input parameter is empty, both the content area and the component size of the **SelectionMenu** component
- * are zero. For example, if the [RichEditor]{@link ./@internal/component/ets/rich_editor} component uses the
+ * are zero. For example, if the [RichEditor]{@link @global:RichEditor} component uses the
  * [bindSelectionMenu]{@link RichEditorAttribute#bindSelectionMenu} API to bind a right-click menu of **SelectionMenu**,
  * no menu will pop up when right-clicking the rich text component area.
  *

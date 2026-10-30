@@ -210,7 +210,7 @@ declare interface DataPanelOptions {
  *
  * > **NOTE**
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -283,7 +283,7 @@ declare interface DataPanelConfiguration extends CommonConfiguration<DataPanelCo
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @extends CommonMethod [since 7 - 10]
  * @extends CommonMethod<DataPanelAttribute> [since 11]
@@ -422,7 +422,7 @@ declare class DataPanelAttribute extends CommonMethod<DataPanelAttribute> {
  *
  * > **NOTE**
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * ###### Child Components
  *

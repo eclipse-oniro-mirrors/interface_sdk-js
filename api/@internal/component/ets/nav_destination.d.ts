@@ -364,14 +364,14 @@ declare enum VisibilityChangeReason {
 
 /**
  * **NavDestination** is the root container of a destination page and represents the content area of the
- * [Navigation]{@link ./navigation} component.
+ * [Navigation]{@link @global:Navigation} component.
  *
  * > **NOTE**
  * >
  * > - Since API version 11, this component supports the safe area attribute by default, with the default attribute
  * > value being **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])**. You can override
  * > this attribute to change the default behavior. In earlier versions, you need to use the
- * > [expandSafeArea]{@link ./common} attribute to implement the safe area feature.
+ * > [expandSafeArea]{@link CommonMethod} attribute to implement the safe area feature.
  * >
  * > - The **NavDestination** component must be used in conjunction with the **Navigation** component to act as the root
  * > node for the navigation destination page. When used alone, it can only function as a standard container component
@@ -396,7 +396,7 @@ declare enum VisibilityChangeReason {
  */
 declare interface NavDestinationInterface {
   /**
-   * Creates the root container for a subpage in [Navigation]{@link ./navigation}.
+   * Creates the root container for a subpage in [Navigation]{@link @global:Navigation}.
    *
    * @returns { NavDestinationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -630,9 +630,9 @@ declare interface NavDestinationTransition {
 }
 
 /**
- * The [universal attributes]{@link ./common} are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1149,8 +1149,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   systemTransition(type: NavigationSystemTransitionType): NavDestinationAttribute;
 
   /**
-   * Binds the **NavDestination** component with a scrollable container, which can be a [List]{@link ./list},
-   * [Scroll]{@link ./scroll}, [Grid]{@link ./grid}, or [WaterFlow]{@link ./water_flow} component. This way, scrolling
+   * Binds the **NavDestination** component with a scrollable container, which can be a [List]{@link @global:List},
+   * [Scroll]{@link @global:Scroll}, [Grid]{@link @global:Grid}, or [WaterFlow]{@link @global:WaterFlow} component. This way, scrolling
    * in the scrollable container triggers the display and hide animations of the title bar and toolbar of all
    * **NavDestination** components that are bound to it – scrolling up triggers the hide animation, and scrolling down
    * triggers the show animation. A single **NavDestination** component can be bound to multiple scrollable containers,
@@ -1181,8 +1181,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   bindToScrollable(scrollers: Array<Scroller>): NavDestinationAttribute;
 
   /**
-   * Binds the **NavDestination** component with a nested scrollable container, which can be a [List]{@link ./list},
-   * [Scroll]{@link ./scroll}, [Grid]{@link ./grid}, or [WaterFlow]{@link ./water_flow} component. This way, scrolling
+   * Binds the **NavDestination** component with a nested scrollable container, which can be a [List]{@link @global:List},
+   * [Scroll]{@link @global:Scroll}, [Grid]{@link @global:Grid}, or [WaterFlow]{@link @global:WaterFlow} component. This way, scrolling
    * in the scrollable container triggers the display and hide animations of the title bar and toolbar of all
    * **NavDestination** components that are bound to it – scrolling up triggers the hide animation, and scrolling down
    * triggers the show animation. A single **NavDestination** component can be bound to multiple nested scrollable
@@ -1449,14 +1449,14 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
 
 /**
  * **NavDestination** is the root container of a destination page and represents the content area of the
- * [Navigation]{@link ./navigation} component.
+ * [Navigation]{@link @global:Navigation} component.
  *
  * > **NOTE**
  * >
  * > - Since API version 11, this component supports the safe area attribute by default, with the default attribute
  * > value being **expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])**. You can override
  * > this attribute to change the default behavior. In earlier versions, you need to use the
- * > [expandSafeArea]{@link ./common} attribute to implement the safe area feature.
+ * > [expandSafeArea]{@link CommonMethod} attribute to implement the safe area feature.
  * >
  * > - The **NavDestination** component must be used in conjunction with the **Navigation** component to act as the root
  * > node for the navigation destination page. When used alone, it can only function as a standard container component

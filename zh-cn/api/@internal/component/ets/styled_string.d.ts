@@ -1908,7 +1908,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除指定范围内容的指定类型样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * 当属性字符串中包含图片时，同样生效。
    *
@@ -1930,7 +1930,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除指定范围内容的所有样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * 当属性字符串中包含图片时，同样生效。
    *
@@ -1951,7 +1951,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除属性字符串对象的所有样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

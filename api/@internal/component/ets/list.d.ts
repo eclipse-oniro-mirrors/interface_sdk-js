@@ -461,7 +461,7 @@ declare interface ChainAnimationOptions {
 
 /**
  * Represents the return value of the
- * [getEvent('List')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'List')} method in
+ * [getEvent('List')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'List')} method in
  * **frameNode**, which can be used to set scroll events for a **List** node.
  *
  * **UIListEvent** inherits from [UIScrollableCommonEvent]{@link UIScrollableCommonEvent}.
@@ -535,7 +535,7 @@ declare interface UIListEvent extends UIScrollableCommonEvent {
 }
 
 /**
- * Implements the callbacks and events for the [ListItem]{@link ./list_item} in the [expanded]{@link SwipeActionState}
+ * Implements the callbacks and events for the [ListItem]{@link @global:ListItem} in the [expanded]{@link SwipeActionState}
  * state.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -698,7 +698,7 @@ declare type OnListScrollIndexCallback = (start: number, end: number, center: nu
  */
 declare class ListScroller extends Scroller {
   /**
-   * Obtains the size of a [list item]{@link ./list_item} in a [list item group]{@link ./list_item_group} and its
+   * Obtains the size of a [list item]{@link @global:ListItem} in a [list item group]{@link @global:ListItemGroup} and its
    * position relative to the list.
    *
    * > **NOTE**
@@ -761,11 +761,11 @@ declare class ListScroller extends Scroller {
   scrollToItemInGroup(index: number, indexInGroup:number, smooth?: boolean, align?: ScrollAlign): void;
 
   /**
-   * Collapses the [list items]{@link ./list_item} in the [EXPANDED]{@link SwipeActionState} state and sets callback
+   * Collapses the [list items]{@link @global:ListItem} in the [EXPANDED]{@link SwipeActionState} state and sets callback
    * events.
    *
    * @param { CloseSwipeActionOptions } options - Set of callback events for collapsing the
-   *     [ListItem]{@link ./list_item} in the [EXPANDED]{@link SwipeActionState} state. If this parameter is not passed,
+   *     [ListItem]{@link @global:ListItem} in the [EXPANDED]{@link SwipeActionState} state. If this parameter is not passed,
    *     no callback events are set.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -978,7 +978,7 @@ declare enum ScrollSnapAnimationSpeed {
  *
  * If a scrollable component is nested in a **List** component, their scrolling directions are the same, and the main
  * axis size is not set for the **List** component, the **List** component loads all child components, causing lazy
- * loading to fail. In this scenario, you are advised to nest the [ListItemGroup]{@link ./list_item_group} component in
+ * loading to fail. In this scenario, you are advised to nest the [ListItemGroup]{@link @global:ListItemGroup} component in
  * **List** to optimize performance.
  *
  * Preloading in **List** refers to loading not only the visible child components within the display area but also some
@@ -1006,7 +1006,7 @@ declare enum ScrollSnapAnimationSpeed {
  * > **NOTE**
  * >
  * > The component has been bound with gestures to implement functions such as follow-up scrolling. If you need to add
- * > custom gestures, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > custom gestures, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1144,11 +1144,11 @@ declare interface ListDividerOptions {
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
 /**
- * In addition to [universal attributes]{@link ./common} and
+ * In addition to [universal attributes]{@link CommonMethod} and
  * [scrollable component common attributes](docroot://reference/apis-arkui-ts/ts-container-scrollable-common.md#attributes),
  * the following attributes are also supported.
  *
- * In addition to [universal events]{@link ./common} and
+ * In addition to [universal events]{@link CommonMethod} and
  * [scrollable component common events](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#events),
  * the following events are also supported.
  *
@@ -1389,7 +1389,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * In multi-column mode, the value of **startMargin** is calculated from the start edge of the cross axis of each
    * column. In single-column mode, it is calculated from the start edge of the cross axis of the list.
    *
-   * When a list item has [polymorphic styles]{@link ./common} applied, the dividers above and below the pressed child
+   * When a list item has [polymorphic styles]{@link CommonMethod} applied, the dividers above and below the pressed child
    * component are not rendered.
    *
    * @param { object | null } value - Style of the divider for the list items.
@@ -1420,7 +1420,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * > removed, and no substitute is provided. To switch the edit state and delete list items, you can control the
    * > display and hiding of the delete button through a custom state variable and update the data source in the click
    * > event of the delete button. For details, see
-   * > [Example 3: Customizing Edit and Delete Mode]{@link ./list}.
+   * > [Example 3: Customizing Edit and Delete Mode]{@link @global:List}.
    *
    * @param { boolean } value - Whether the current **List** component is in editable mode. The value **true** indicates
    *     that the current **List** component is in editable mode, and **false** indicates that it is not.<br/>Default
@@ -1620,7 +1620,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   chainAnimationOptions(value: ChainAnimationOptions): ListAttribute;
 
   /**
-   * Used together with the [ListItemGroup]{@link ./list_item_group} component to set whether the header of a
+   * Used together with the [ListItemGroup]{@link @global:ListItemGroup} component to set whether the header of a
    * **ListItemGroup** is sticky at the top or the footer is sticky at the bottom. Since API version 20, the **sticky**
    * attribute supports the **StickyStyle.BOTH** enum value, which can be directly set to **StickyStyle.BOTH** to
    * support both sticky header and sticky footer, with the same effect as **StickyStyle.Header | StickyStyle.Footer**.
@@ -1847,7 +1847,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
 
   /**
    * Sets whether to enable the edit mode for the **List** component. After the edit mode is enabled, you can swipe to
-   * select multiple [ListItem]{@link ./list_item} components in the **List** component. If this API is not called, the
+   * select multiple [ListItem]{@link @global:ListItem} components in the **List** component. If this API is not called, the
    * edit mode is not enabled.
    *
    * @param { boolean | undefined } enabled - Whether to enable edit mode. This parameter supports
@@ -2072,7 +2072,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDelete(event: (index: number) => boolean): ListAttribute;
 
   /**
-   * Triggered when a child component [ListItem]{@link ./list_item} of **List** moves.
+   * Triggered when a child component [ListItem]{@link @global:ListItem} of **List** moves.
    *
    * @param { function } event
    * @returns { ListAttribute } Whether the list has moved. The value **true** indicates that the list child component
@@ -2086,7 +2086,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemMove(event: (from: number, to: number) => boolean): ListAttribute;
 
   /**
-   * Triggered when dragging of a child component [ListItem]{@link ./list_item} of **List** starts.
+   * Triggered when dragging of a child component [ListItem]{@link @global:ListItem} of **List** starts.
    *
    * Automatic scrolling of **List** is not supported when dragging to the edge of **List**. You can use the
    * [onMove](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-drag-sorting.md#onmove) API of
@@ -2099,13 +2099,13 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * >
    * > This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 14.
    *
-   * @param { function } event - Callback invoked when the [ListItem]{@link ./list_item} child component of the **List**
+   * @param { function } event - Callback invoked when the [ListItem]{@link @global:ListItem} child component of the **List**
    *     starts to be dragged.
    *     <br> In API version 22 and earlier versions, the type of this parameter is
    *     **(event: ItemDragInfo, itemIndex: number) => (() => any) | void**, where the meanings of the **event** and
    *     **itemIndex** parameters are described in
    *     [OnItemDragStartCallback]{@link OnItemDragStartCallback}. [since 8 - 22]
-   * @param { OnItemDragStartCallback } event - Callback invoked when the [ListItem]{@link ./list_item} child component
+   * @param { OnItemDragStartCallback } event - Callback invoked when the [ListItem]{@link @global:ListItem} child component
    *     of the **List** starts to be dragged.
    *     <br> In API version 22 and earlier versions, the type of this parameter is
    *     **(event: ItemDragInfo, itemIndex: number) => (() => any) | void**, where the meanings of the **event** and
@@ -2120,7 +2120,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragStart(event: OnItemDragStartCallback): ListAttribute;
 
   /**
-   * Triggered when a dragged child component [ListItem]{@link ./list_item} of **List** enters the list range.
+   * Triggered when a dragged child component [ListItem]{@link @global:ListItem} of **List** enters the list range.
    *
    * @param { function } event - Information about the drag point.
    * @returns { ListAttribute }
@@ -2133,7 +2133,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragEnter(event: (event: ItemDragInfo) => void): ListAttribute;
 
   /**
-   * Triggered when a dragged child component [ListItem]{@link ./list_item} of **List** moves within the list range.
+   * Triggered when a dragged child component [ListItem]{@link @global:ListItem} of **List** moves within the list range.
    *
    * @param { function } event - Information about the drag point.
    * @returns { ListAttribute }
@@ -2146,7 +2146,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragMove(event: (event: ItemDragInfo, itemIndex: number, insertIndex: number) => void): ListAttribute;
 
   /**
-   * Triggered when a dragged child component [ListItem]{@link ./list_item} of **List** leaves the list range.
+   * Triggered when a dragged child component [ListItem]{@link @global:ListItem} of **List** leaves the list range.
    *
    * @param { function } event - Information about the drag point.
    * @returns { ListAttribute }
@@ -2225,7 +2225,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * 2. The placeholder template must be a global, parameterless
    * **@Builder({ isPlaceholder: true })** function that performs read-only static rendering.
    * 3. After the real item has been created, it is re-laid out under the normal layout constraints of
-   * [ListItem]{@link list_item} and replaces the placeholder, keeping the scroll anchor.
+   * [ListItem]{@link @global:ListItem} and replaces the placeholder, keeping the scroll anchor.
    *
    * @param { PlaceholderProvider } [provider] - Placeholder provider of the item at the given index.
    * @returns { ListAttribute } The attribute of the list.
@@ -2266,7 +2266,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
  *
  * If a scrollable component is nested in a **List** component, their scrolling directions are the same, and the main
  * axis size is not set for the **List** component, the **List** component loads all child components, causing lazy
- * loading to fail. In this scenario, you are advised to nest the [ListItemGroup]{@link ./list_item_group} component in
+ * loading to fail. In this scenario, you are advised to nest the [ListItemGroup]{@link @global:ListItemGroup} component in
  * **List** to optimize performance.
  *
  * Preloading in **List** refers to loading not only the visible child components within the display area but also some
@@ -2294,11 +2294,11 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
  * > **NOTE**
  * >
  * > The component has been bound with gestures to implement functions such as follow-up scrolling. If you need to add
- * > custom gestures, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > custom gestures, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  *
  * ###### Child Components
  *
- * Only [ListItem]{@link ./list_item}, [ListItemGroup]{@link ./list_item_group}, and custom components are supported as
+ * Only [ListItem]{@link @global:ListItem}, [ListItemGroup]{@link @global:ListItemGroup}, and custom components are supported as
  * child components. When a custom component is used under **List**, use **ListItem** or **ListItemGroup** as the top-
  * level component of the custom component. Do not directly set attributes and event methods for the custom component,
  * because **List** manages the layout and event handling of child components through **ListItem** or **ListItemGroup**.

@@ -4464,8 +4464,8 @@ declare interface LinearGradientOptions {
  * >
  * > metricsColors参数的约束：
  * >
- * > [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}表示填充的颜色，可以使用
- * > [colorWithSpace]{@link ../../../arkui/Graphics:ColorMetrics#colorWithSpace}方法构造指定色域属性的颜色。number表示指定颜色所处的位置，取值范围为
+ * > [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics}表示填充的颜色，可以使用
+ * > [colorWithSpace]{@link @ohos.arkui.node:ColorMetrics.colorWithSpace}方法构造指定色域属性的颜色。number表示指定颜色所处的位置，取值范围为
  * > [0, 1.0]，设置的值小于0时，按0处理，设置的值大于1.0时，按1.0处理。0表示当前组件渐变区域的开始处，1.0表示渐变区域的结束处。为了实现多个颜色渐变效果，多个数组中的number类型参数应递增设置。如果后一个数组中的
  * > number类型参数小于前一个数组的number类型参数，将按照等于前一个数组number值处理。
  *
@@ -5720,7 +5720,7 @@ declare type TransitionEffects = {
 declare class DrawModifier {
   /**
    * 自定义绘制内容背景的接口，若重载该方法则可进行内容背景的自定义绘制。背景位于组件内容层之下，适用于需要在组件底层添加装饰性背景元素的场景。
-   * 该接口的[DrawContext]{@link ../api/arkui/Graphics#DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。
    * 使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
    *
    * @param { DrawContext } drawContext - 图形绘制上下文，提供canvas（画布对象）和size（绘制区域尺寸）等属性，用于在自定义绘制方法中执行具体的绘制操作。
@@ -5734,7 +5734,7 @@ declare class DrawModifier {
 
   /**
    * 自定义绘制内容的接口，若重载该方法则可进行内容的自定义绘制，会替换组件原本的内容绘制函数。适用于需要完全自定义组件内容绘制、不使用组件原本内容绘制逻辑的场景。
-   * 该接口的[DrawContext]{@link ../api/arkui/Graphics#DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。
    * 使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
    *
    * @param { DrawContext } drawContext - 图形绘制上下文，提供canvas（画布对象）和size（绘制区域尺寸）等属性，用于在自定义绘制方法中执行具体的绘制操作。
@@ -5748,7 +5748,7 @@ declare class DrawModifier {
 
   /**
    * 自定义绘制内容前景的接口，若重载该方法则可进行内容前景的自定义绘制。内容前景位于内容和前景之间，适用于需要在组件内容之上、组件前景之下添加绘制内容的场景。
-   * 该接口的[DrawContext]{@link ../api/arkui/Graphics#DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
    *
    * @param { DrawContext } drawContext - 图形绘制上下文，提供canvas（画布对象）和size（绘制区域尺寸）等属性，用于在自定义绘制方法中执行具体的绘制操作。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5762,7 +5762,7 @@ declare class DrawModifier {
   /**
    * 自定义绘制前景的接口，若重载该方法则可进行前景的自定义绘制。与[drawFront]{@link DrawModifier#drawFront}（内容前景）相比，
    * drawForeground位于更高层级，绘制在内容前景之上、遮罩层之下。drawFront适用于绘制组件内容自身的前景效果，drawForeground适用于需要在内容前景之上添加额外前景效果的场景。
-   * 该接口的[DrawContext]{@link ../api/arkui/Graphics#DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
    *
    * @param { DrawContext } drawContext - 图形绘制上下文，提供canvas（画布对象）和size（绘制区域尺寸）等属性，用于在自定义绘制方法中执行具体的绘制操作。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5775,7 +5775,7 @@ declare class DrawModifier {
 
   /**
    * 自定义绘制遮罩层的接口，若重载该方法则可进行遮罩层的自定义绘制。遮罩层是最上层的绘制层级，适用于需要在组件最上层添加遮罩效果（如高亮、蒙版等）的场景。
-   * 该接口的[DrawContext]{@link ../api/arkui/Graphics#DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见[调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-extension-drawModifier.md#调整自定义绘制canvas的变换矩阵)。
    *
    * 自定义绘制包含五个层级：内容背景层、内容层、内容前景层、前景层和悬浮层。
    * - 前景层和悬浮层在子节点之后绘制。
@@ -6383,7 +6383,7 @@ declare interface DragItemInfo {
    * 
    * **说明：** 
    * 
-   * 不支持全局builder。如果builder中使用了[Image]{@link image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。
+   * 不支持全局builder。如果builder中使用了[Image]{@link @global:Image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link ImageAttribute#syncLoad}为true。
    * 该builder只用于生成当次拖拽中显示的图片，builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
    * 
    * builder传参时，建议传参格式为builder: ()=>{this.customBuilder()}，用以保证this指向的正确性。具体请参考
@@ -6424,7 +6424,7 @@ declare interface DragItemInfo {
  * > - 执行[aboutToDisappear]{@link aboutToDisappear}时，
  * > 组件即将销毁，不能在aboutToDisappear里面做动画。
  * >
- * > - 在组件出现和消失时，可以通过[组件内转场]{@link ./common}添加动画效果。
+ * > - 在组件出现和消失时，可以通过[组件内转场]{@link CommonMethod}添加动画效果。
  * >
  * > - 组件内转场不支持的属性，可以参考[示例2]{@link CommonMethod}，使用
  * > animateTo实现动画执行结束后组件消失的效果。
@@ -9442,7 +9442,7 @@ declare interface BorderImageOption {
    *
    * **说明：**
    *
-   * 边框图源仅适用于容器组件，如[Row]{@link ./row}、[Column]{@link ./column}、[Flex]{@link ./flex}，在非容器组件上使用会失效。
+   * 边框图源仅适用于容器组件，如[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}，在非容器组件上使用会失效。
    *
    * @type { ?(string | Resource | LinearGradient) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9457,7 +9457,7 @@ declare interface BorderImageOption {
    *
    * **说明：**
    *
-   * 边框图源仅适用于容器组件，如[Row]{@link ./row}、[Column]{@link ./column}、[Flex]{@link ./flex}，在非容器组件上使用会失效。
+   * 边框图源仅适用于容器组件，如[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}，在非容器组件上使用会失效。
    *
    * @type { ?(string | Resource | LinearGradient) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9473,7 +9473,7 @@ declare interface BorderImageOption {
    *
    * **说明：**
    *
-   * 边框图源仅适用于容器组件，如[Row]{@link ./row}、[Column]{@link ./column}、[Flex]{@link ./flex}，在非容器组件上使用会失效。
+   * 边框图源仅适用于容器组件，如[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}，在非容器组件上使用会失效。
    *
    * @type { ?(string | Resource | LinearGradient) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10479,7 +10479,7 @@ declare interface MouseEvent extends BaseEvent {
    * 
    * 取值范围：[0, +∞)
    * 
-   * **说明：** 在使用[postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
+   * **说明：** 在使用[postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
    * 发一次字段会增加100000。
    * 
    * 多次使用相同的eventHandleId进行事件分发将导致事件响应异常。仅在构造事件的时候需要对此字段赋值，其余情况开发者无需处理。
@@ -11129,7 +11129,7 @@ declare interface TouchEvent extends BaseEvent {
   /**
    * 阻止默认事件。
    * 
-   * **说明：** 该接口仅支持部分组件使用，当前支持组件：[Hyperlink]{@link hyperlink}，不支持的组件在使用时会抛出异常。暂不支持异步调用和提供Modifier接口。
+   * **说明：** 该接口仅支持部分组件使用，当前支持组件：[Hyperlink]{@link @global:Hyperlink}，不支持的组件在使用时会抛出异常。暂不支持异步调用和提供Modifier接口。
    *
    * @throws { BusinessError } 100017 - Component does not support prevent function.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11145,7 +11145,7 @@ declare interface TouchEvent extends BaseEvent {
    * 
    * 取值范围：[0, +∞)
    * 
-   * **说明：** 在使用[postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
+   * **说明：** 在使用[postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
    * 发一次字段会增加100000。
    * 
    * 多次使用相同的eventHandleId进行事件分发将导致事件响应异常。仅在构造事件的时候需要对此字段赋值，其余情况开发者无需处理。
@@ -11296,7 +11296,7 @@ declare interface AxisEvent extends BaseEvent {
    * 
    * 取值范围：[0, +∞)
    * 
-   * **说明：** 在使用[postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
+   * **说明：** 在使用[postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy}接口分发事件时会使用该字段，事件每分
    * 发一次字段会增加100000。
    * 
    * 多次使用相同的eventHandleId进行事件分发将导致事件响应异常。仅在构造事件的时候需要对此字段赋值，其余情况开发者无需处理。
@@ -12392,7 +12392,7 @@ declare interface DragEvent {
    * 若拖拽源本身也需要隐藏，需要同时传入拖拽源组件的uniqueId。
    * 
    * 组件的uniqueId可通过[UIContext.getFrameNodeById()]{@link @ohos.arkui.UIContext:UIContext#getFrameNodeById}
-   * 配合[FrameNode.getUniqueId()]{@link FrameNode:FrameNode#getUniqueId}获取。
+   * 配合[FrameNode.getUniqueId()]{@link @ohos.arkui.node:FrameNode.getUniqueId}获取。
    * 
    * 开发者应在[onDragEnd]{@link CommonMethod#onDragEnd}或
    * [onDrop]{@link CommonMethod#onDrop(event: (event: DragEvent, extraParams?: string) => void)}中恢复组件显示状态。
@@ -14537,7 +14537,7 @@ declare enum DismissReason {
    * 
    * **说明：** 
    * 
-   * 该接口仅支持在[半模态转场]{@link common}中使用。
+   * 该接口仅支持在[半模态转场]{@link CommonMethod}中使用。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -18053,7 +18053,7 @@ declare interface ContextMenuOptions {
    * 、[bindContextMenuByResponseType]{@link CommonMethod#bindContextMenuByResponseType}、
    * [bindContextMenuByIsShow]{@link CommonMethod#bindContextMenuByIsShow}、
    * [bindContextMenuWithResponse]{@link CommonMethod#bindContextMenuWithResponse(content: CustomBuilderT<ResponseType> | undefined, options?: ContextMenuOptions)}
-   * 中使用[MenuElement]{@link MenuElement}或在[MenuItem]{@link menu_item}中使用MenuItemOptions。
+   * 中使用[MenuElement]{@link MenuElement}或在[MenuItem]{@link @global:MenuItem}中使用MenuItemOptions。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -18932,7 +18932,7 @@ declare interface MenuElement {
  * | MarqueeAttribute | Marquee的[属性]{@link MarqueeAttribute}。 |
  * | MenuAttribute | Menu的[属性]{@link MenuAttribute}。 |
  * | MenuItemAttribute | MenuItem的[属性]{@link MenuItemAttribute}。 |
- * | MenuItemGroupAttribute | [MenuItemGroup]{@link ./menu_item_group}的属性。 |
+ * | MenuItemGroupAttribute | [MenuItemGroup]{@link @global:MenuItemGroup}的属性。 |
  * | NavDestinationAttribute | NavDestination的[属性]{@link NavDestinationAttribute}。 |
  * | NavigationAttribute | Navigation的[属性]{@link NavigationAttribute}。 |
  * | NavigatorAttribute | Navigator的[属性]{@link NavigatorAttribute}。 |
@@ -18987,7 +18987,7 @@ declare interface MenuElement {
  * | <!--DelRow-->PluginComponentAttribute | PluginComponent的[属性]{@link PluginComponentAttribute}。 |
  * | <!--DelRow-->RemoteWindowAttribute | RemoteWindow的[属性]{@link RemoteWindowAttribute}。 |
  * | UIExtensionComponentAttribute | UIExtensionComponent的[属性]{@link UIExtensionComponentAttribute}。 |
- * | ContainerReaderAttribute | ContainerReader的[属性]{@link ContainerReaderAttribute}。<br>**起始版本：** 26.0.0|
+ * | ContainerReaderAttribute | ContainerReader的[属性]{@link @ohos.arkui.components.ContainerReader:ContainerReaderAttribute}。<br>**起始版本：** 26.0.0|
  * 
  * > **说明**
  * > StepperAttribute从API version 11开始支持，从API version 22开始废弃。建议使用SwiperAttribute替代。
@@ -19019,9 +19019,9 @@ declare interface AttributeModifier<T> {
   /**
    * 组件普通状态时的样式。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。具体取值请参考
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。具体取值请参考
    *     [Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19035,9 +19035,9 @@ declare interface AttributeModifier<T> {
    * 组件按压状态的样式。参考
    * [示例2（组件绑定Modifier实现按压态效果）]{@link AttributeModifier#applyPressedAttribute}、[示例8（自定义组件绑定Modifier实现按压态效果）]{@link AttributeModifier#applyPressedAttribute}。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
    *     具体取值请参考[Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19051,9 +19051,9 @@ declare interface AttributeModifier<T> {
    * 组件获焦状态的样式。
    * 参考[示例5（组件绑定Modifier获焦样式）]{@link AttributeModifier#applyFocusedAttribute}。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
    *     具体取值请参考[Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19066,9 +19066,9 @@ declare interface AttributeModifier<T> {
   /**
    * 组件禁用状态的样式。参考[示例6（组件绑定Modifier禁用状态的样式）]{@link AttributeModifier#applyDisabledAttribute}。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
    *     具体取值请参考[Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19083,9 +19083,9 @@ declare interface AttributeModifier<T> {
    *
    * 开发者可根据需要自定义实现上述回调方法，通过传入的参数识别组件类型，对instance设置属性，支持使用if/else语法进行动态设置。参考[示例7（组件绑定Modifier选中状态样式）]{@link AttributeModifier#applySelectedAttribute}。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
    *     具体取值请参考[Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19098,9 +19098,9 @@ declare interface AttributeModifier<T> {
   /**
    * 组件悬浮状态的样式。参考[示例9（组件绑定Modifier实现鼠标悬浮态效果）]{@link AttributeModifier#applyHoveredAttribute}。
    *
-   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link ./button}组件的
+   * @param { T } instance - 组件的属性类，用来标识进行属性设置的组件的类型，比如[Button]{@link @global:Button}组件的
    *     [属性]{@link ButtonAttribute}（ButtonAttribute），
-   *     [Text]{@link ./text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
+   *     [Text]{@link @global:Text}组件的[属性]{@link TextAttribute}（TextAttribute）等。
    *     具体取值请参考[Attribute类型支持范围]{@link AttributeModifier}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19552,8 +19552,8 @@ declare interface DragPreviewOptions {
 declare interface DragInteractionOptions {
 
   /**
-   * 表示拖拽过程中背板图是否支持多选聚拢效果。true表示支持多选聚拢效果，false表示不支持多选聚拢效果。该参数只在[Grid]{@link ./grid}和[List]{@link ./list}组件中的
-   * [GridItem]{@link ./gridItem}组件和[ListItem]{@link ./list_item}组件生效。
+   * 表示拖拽过程中背板图是否支持多选聚拢效果。true表示支持多选聚拢效果，false表示不支持多选聚拢效果。该参数只在[Grid]{@link @global:Grid}和[List]{@link @global:List}组件中的
+   * [GridItem]{@link @global:GridItem}组件和[ListItem]{@link @global:ListItem}组件生效。
    *
    * 当一个item组件设置为多选拖拽时，该组件的子组件不可拖拽。聚拢组件预览图设置的优先级为
    * [dragPreview]{@link CommonMethod#dragPreview(value: CustomBuilder | DragItemInfo | string)}中的string，dragPreview中的
@@ -20001,7 +20001,7 @@ declare class CommonMethod<T> {
    * >
    * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
-   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，width设置auto表示自适应子组件。
+   * > - 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，width设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20041,7 +20041,7 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，height设置auto表示自适应子组件。
+   * > - 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，height设置auto表示自适应子组件。
    * >
    * > - 从API version 10开始，该接口支持calc计算特性。
    *
@@ -20085,7 +20085,7 @@ declare class CommonMethod<T> {
    * @param { DrawModifier | undefined } modifier - 自定义绘制修改器，其中定义了自定义绘制的逻辑。
    *     <br>默认值：undefined，未设置自定义绘制修改器时，组件使用原有默认绘制行为，不进行自定义绘制。
    *     <br>**说明：**
-   *     <br>每个自定义绘制修改器只对当前绑定组件的[FrameNode]{@link ../api/arkui/FrameNode#FrameNode}生效，对其子节点不生效。
+   *     <br>每个自定义绘制修改器只对当前绑定组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}生效，对其子节点不生效。
    *     每个DrawModifier实例只能设置到一个组件上，禁止重复设置。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -20189,7 +20189,7 @@ declare class CommonMethod<T> {
   ignoreLayoutSafeArea(types?: Array<LayoutSafeAreaType>, edges?: Array<LayoutSafeAreaEdge>): T;
 
   /**
-   * 设置一个或多个触摸热区。从API版本26.0.0开始，未主动设置时[Button]{@link button}、[Button模式的Toggle]{@link toggle}、[Select]{@link select}、
+   * 设置一个或多个触摸热区。从API版本26.0.0开始，未主动设置时[Button]{@link @global:Button}、[Button模式的Toggle]{@link @global:Button模式的Toggle}、[Select]{@link @global:Select}、
    * [Chip]{@link @ohos.arkui.advanced.Chip}和[ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}组件的触摸热区默认最小高度从28vp变更为32vp。
    * 该变更仅影响触摸命中范围，不影响组件实际显示高度。
    *
@@ -20327,7 +20327,7 @@ declare class CommonMethod<T> {
   onChildTouchTest(event: (value: Array<TouchTestInfo>) => TouchResult): T;
 
   /**
-   * 设置组件的布局权重，使组件在父容器（[Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex}）的主轴方向按照权重分配尺寸。适用于父容器尺寸确定、需要多个子组件
+   * 设置组件的布局权重，使组件在父容器（[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}）的主轴方向按照权重分配尺寸。适用于父容器尺寸确定、需要多个子组件
    * 按比例分配剩余空间的场景。
    *
    * @param { number | string } value - 父容器尺寸确定时，不设置layoutWeight属性或者layoutWeight属性生效值为0的子组件优先占位，这些子组件占位后在主轴留下的空间称为主轴剩余空
@@ -20337,7 +20337,7 @@ declare class CommonMethod<T> {
    * <br>取值范围：[0, +∞)
    * <br>超出范围时：传入小于0的值时，按0处理。
    * <br>**说明：**
-   * <br>仅在[Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex}布局中生效。
+   * <br>仅在[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}布局中生效。
    * <br>可选值为大于等于0的数字，或者可以转换为数字的字符串（支持整数、小数格式）。
    * <br>如果容器中有子组件设置了layoutWeight属性，且设置的属性值大于0，则所有子组件不会再基于[flexShrink]{@link CommonMethod#flexShrink}和
    * [flexGrow]{@link CommonMethod#flexGrow}布局。
@@ -20352,7 +20352,7 @@ declare class CommonMethod<T> {
   layoutWeight(value: number | string): T;
 
   /**
-   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link ./relative_container}时生效。
+   * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效。
    *
    * > **说明：**
    * >
@@ -20445,7 +20445,7 @@ declare class CommonMethod<T> {
    * <br>参数为Length类型时，四个方向外边距同时生效。
    * <br>默认值：0
    * <br>单位：vp
-   * <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link ./row}、[Column]{@link ./column}、[Flex]{@link ./flex}交叉轴上布
+   * <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}交叉轴上布
    * 局时，子组件在交叉轴方向占用的空间包含子组件本身尺寸和margin值。
    * <br>例如Column容器宽100，其中子组件宽50，margin left为10，right为20，子组件宽度与左右margin之和为50+10+20=80，小于容器宽度100，子组件在交叉轴方向居中对齐，此时水平方向
    * 左侧和右侧各有(100-80)/2=10的空白区域。 [since 7 - 11]
@@ -20453,7 +20453,7 @@ declare class CommonMethod<T> {
    * <br>参数为Length类型时，四个方向外边距同时生效。
    * <br>默认值：0
    * <br>单位：vp
-   * <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link ./row}、[Column]{@link ./column}、[Flex]{@link ./flex}交叉轴上布
+   * <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}交叉轴上布
    * 局时，子组件在交叉轴方向占用的空间包含子组件本身尺寸和margin值。
    * <br>例如Column容器宽100，其中子组件宽50，margin left为10，right为20，子组件宽度与左右margin之和为50+10+20=80，小于容器宽度100，子组件在交叉轴方向居中对齐，此时水平方向
    * 左侧和右侧各有(100-80)/2=10的空白区域。 [since 12]
@@ -20536,7 +20536,7 @@ declare class CommonMethod<T> {
 
   /**
    * 设置组件背景色。与[backgroundColor]{@link CommonMethod#backgroundColor(color: Optional<ResourceColor>)}相比，color参数新增了对
-   * [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型的支持。
+   * [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics}类型的支持。
    * 
    * > **说明：**
    * >
@@ -21336,7 +21336,7 @@ declare class CommonMethod<T> {
    *
    * @param { ResourceColor | ColoringStrategy } value - 设置组件的前景色或者根据智能取色策略设置前景色。使用
    *     [ColoringStrategy]{@link ColoringStrategy}.INVERT时前景色为背景色的反色，需配合设置
-   *     [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}。不支持[属性动画]{@link ./common}。
+   *     [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}。不支持[属性动画]{@link CommonMethod}。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -21353,7 +21353,7 @@ declare class CommonMethod<T> {
    *
    * @param { Optional<ResourceColor | ColoringStrategy> } color - 设置组件的前景色或者根据智能取色策略设置前景色。使用
    *     [ColoringStrategy]{@link ColoringStrategy}.INVERT时前景色为背景色的反色，需配合设置
-   *     [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}。不支持[属性动画]{@link ./common}。
+   *     [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}。不支持[属性动画]{@link CommonMethod}。
    *     <br>当color的值为undefined时，若组件之前已设置前景色则维持之前的前景色取值，若组件之前未设置前景色则使用组件默认前景色取值。不同组件的默认前景色取值可能存在差异，建议开发者使用确定颜色或
    *     [ColoringStrategy]{@link ColoringStrategy}。
    * @returns { T } 返回当前组件，用于链式调用。
@@ -21596,7 +21596,7 @@ declare class CommonMethod<T> {
   /**
    * 鼠标滚轮滚动或触控板双指轻触滑动、双指捏合时触发该回调。
    *
-   * @param { Callback<AxisEvent> } event - 获得[AxisEvent]{@link AxisEvent}对象。
+   * @param { Callback<AxisEvent> } event - 获得[AxisEvent]{@link @global:AxisEvent}对象。
    * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -21609,8 +21609,8 @@ declare class CommonMethod<T> {
    * 设置当前组件是否可以获焦。
    *
    * @param { boolean } value - 设置当前组件是否可以获焦，true表示组件可以获焦，false表示组件不可获焦。<br/>**说明：**<br/>存在默认交互逻辑的组件例如
-   *     [Button]{@link button}、[TextInput]{@link text_input}等，默认即为可获焦，[Text]{@link text}、[Image]{@link image}等组件则默认状态为不
-   *     可获焦。不可获焦状态下，无法触发[焦点事件]{@link common}。
+   *     [Button]{@link @global:Button}、[TextInput]{@link @global:TextInput}等，默认即为可获焦，[Text]{@link @global:Text}、[Image]{@link @global:Image}等组件则默认状态为不
+   *     可获焦。不可获焦状态下，无法触发[焦点事件]{@link CommonMethod}。
    * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -22431,7 +22431,7 @@ declare class CommonMethod<T> {
   useShadowBatching(use: Optional<boolean>): T;
 
   /**
-   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link ./effect_component}或<!--DelEnd-->窗口定义的效果模板。effectType为DEFAULT时，必须在
+   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}或<!--DelEnd-->窗口定义的效果模板。effectType为DEFAULT时，必须在
    * EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；effectType为WINDOW_EFFECT时，需配合窗口效果模板使用。不在对应容器内使用时，useEffect将不产生任何效
    * 果。效果模板是一组预定义的视觉特效参数（包括模糊半径、饱和度、亮度、颜色），应用于组件以实现统一的视觉特效风格。
    *
@@ -22450,7 +22450,7 @@ declare class CommonMethod<T> {
   useEffect(useEffect: boolean, effectType: EffectType): T;
 
   /**
-   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link ./effect_component}或<!--DelEnd-->窗口定义的效果模板。与
+   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}或<!--DelEnd-->窗口定义的效果模板。与
    * [useEffect<sup>14+</sup>]{@link CommonMethod#useEffect(useEffect: boolean, effectType: EffectType)}相比，useEffect参数新增
    * 了对undefined类型的支持。effectType为DEFAULT时，必须在EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；effectType为WINDOW_EFFECT
    * 时，需配合窗口效果模板使用。不在对应容器内使用时，useEffect将不产生任何效果。
@@ -22471,12 +22471,12 @@ declare class CommonMethod<T> {
   useEffect(useEffect: Optional<boolean>, effectType?: EffectType): T;
 
   /**
-   * 用于控制组件是否继承<!--Del-->父级[EffectComponent]{@link ./effect_component}的<!--DelEnd-->特效属性参数，对背景模糊等特效进行绘制合并。
+   * 用于控制组件是否继承<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}的<!--DelEnd-->特效属性参数，对背景模糊等特效进行绘制合并。
    *
-   * @param { boolean } value - 控制组件是否继承<!--Del-->父级[EffectComponent]{@link ./effect_component}的<!--DelEnd-->特效属性参数，从而合并
+   * @param { boolean } value - 控制组件是否继承<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}的<!--DelEnd-->特效属性参数，从而合并
    *     绘制特效。
-   *     <br>useEffect为true时子组件继承<!--Del-->父级[EffectComponent]{@link ./effect_component}的<!--DelEnd-->特效属性参数，为false时子组件不
-   *     继承<!--Del-->父级[EffectComponent]{@link ./effect_component}的<!--DelEnd-->特效属性参数。
+   *     <br>useEffect为true时子组件继承<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}的<!--DelEnd-->特效属性参数，为false时子组件不
+   *     继承<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}的<!--DelEnd-->特效属性参数。
    *     <br>默认值：false
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -22487,7 +22487,7 @@ declare class CommonMethod<T> {
   useEffect(value: boolean): T;
 
   /**
-   * 表示是否使用祖先组件[UnionEffectContainer]{@link ./union_effect_container}的融合效果，即是否作为UnionEffectContainer做形状融合的一部分，参与融合形态计算。
+   * 表示是否使用祖先组件[UnionEffectContainer]{@link @global:UnionEffectContainer}的融合效果，即是否作为UnionEffectContainer做形状融合的一部分，参与融合形态计算。
    * 
    * 未设置时，默认不使用祖先组件UnionEffectContainer的融合效果。
    *
@@ -22505,7 +22505,7 @@ declare class CommonMethod<T> {
   useUnionEffect(value: boolean | undefined): T;
 
   /**
-   * 表示是否使用祖先组件[UnionEffectContainer]{@link ./union_effect_container}的融合效果，是否作为UnionEffectContainer做形状融合的一部分，参与融合形态计算。当不存在
+   * 表示是否使用祖先组件[UnionEffectContainer]{@link @global:UnionEffectContainer}的融合效果，是否作为UnionEffectContainer做形状融合的一部分，参与融合形态计算。当不存在
    * 祖先组件UnionEffectContainer时，设置该属性不产生效果。
    * 
    * 未设置时，默认不使用祖先组件UnionEffectContainer的融合效果。
@@ -23107,9 +23107,9 @@ declare class CommonMethod<T> {
    * > 使用[getInspectorByKey](ts-universal-attributes-component-id.md#getinspectorbykey9)获取**flexShrink**属性时，如果该节点未设置**flexShrink**属性，默认返回**1**（与Flex容器的默认值一致，但与Column和Row容器的默认值**0**不同）。
    *
    * @param { number } value - 设置父容器压缩尺寸分配给此属性所在组件的比例。
-   *     <br>取值限定为整数，父容器为 [Column]{@link ./column} 、[Row]{@link ./row}时， 取值范围[0,+∞).
+   *     <br>取值限定为整数，父容器为 [Column]{@link @global:Column} 、[Row]{@link @global:Row}时， 取值范围[0,+∞).
    *     <br/>
-   *     父容器为[Flex]{@link ./flex}时，默认值：1
+   *     父容器为[Flex]{@link @global:Flex}时，默认值：1
    *     <br/>[constraintSize]{@link constraintSize}限制组件的尺寸范围.
    *     Column和Row即使设置了constraintSize，在未设置主轴尺寸width/height/size时仍遵守默认布局行为，在主轴上自适应子组件尺寸，此时flexShrink不生效.<br/>设置异常值时，该属性为
    *     默认值。
@@ -23141,7 +23141,7 @@ declare class CommonMethod<T> {
   /**
    * 子组件在父容器交叉轴的对齐格式。
    *
-   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row}, or
+   * @param { ItemAlign } value - 子组件在父容器交叉轴的对齐格式，会覆盖([Flex]{@link @global:Flex}, [Column]{@link @global:Column}, [Row]{@link @global:Row}, or
    *     [GridRow]{@link GridRow})布局容器中的alignItems设置。<br/>[GridCol]{@link
    *     GridCol}可以绑定alignSelf属性来改变它自身在交叉轴方向上的布局。<br/>默认值：ItemAlign.Auto
    * @returns { T } 返回当前组件。
@@ -23173,7 +23173,7 @@ declare class CommonMethod<T> {
    * 设置当前组件在Row/Column/Flex(单行)容器中显示的优先级，优先级由数值的整数部分决定，整数部分越大优先级越高。
    * 适用于响应式布局中根据父容器空间动态显示/隐藏子组件的场景。例如，在不同屏幕尺寸下优先显示重要内容，隐藏次要内容。
    *
-   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link ./row}/[Column]{@link
+   * @param { number } value - 设置当前组件在布局容器中显示的优先级，取值范围[0, +∞)。<br/>默认值：1<br/>**说明：**<br/>仅在[Row]{@link @global:Row}/[Column]{@link
    *     Column}/[Flex(单行)]{@link Flex}容器组件中生效。<br>当容器空间有限，需要控制组件显示顺序或隐藏低优先级组件时使用（如在Flex容器中根据空间大小动态显示内容）。建议根据组件重要性设置优先级，关键组件设置较大的值（如2-10），次要组件设置较小的值（如1）。
    *     <br/> 小数点后的数字不影响优先级。不大于1的所有值优先级相同。大于1时，displayPriority的整数部分越大，优先级越高；同一整数区间内的值优先级相同。例如：0.5和1.0优先级相同（均不大于1）；1.5和1.9优先级相同（整数部分均为1）；2.0和2.9优先级相同（整数部分均为2），且高于1.x的优先级。
    *     <br/>若父容器空间不足，隐藏低优先级子组件。若某一优先级级别的子组件被隐藏，则所有更低优先级的子组件也都会被隐藏。
@@ -23323,14 +23323,14 @@ declare class CommonMethod<T> {
    * > **说明：**
    * >
    * > - position对位置的影响作用在组件的尺寸测量完成之后。
-   * > - 当父组件为[Row]{@link ./row}、[Column]{@link ./column}或[Flex]{@link
+   * > - 当父组件为[Row]{@link @global:Row}、[Column]{@link @global:Column}或[Flex]{@link
    * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
    * > -
    * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
    * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
    * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
    * > - 本属性不支持在宽高为零的布局组件上设置。
-   * > - 当父组件为[RelativeContainer]{@link ./relative_container}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+   * > - 当父组件为[RelativeContainer]{@link @global:RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
    * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
    *
    * @param { Position } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
@@ -23435,7 +23435,7 @@ declare class CommonMethod<T> {
   }): T;
 
   /**
-   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link ./relative_container}时生效，支持[attributeModifier]{@link
+   * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效，支持[attributeModifier]{@link
    * attributeModifier}动态设置属性方法。
    *
    * @param { AlignRuleOption } value - 指定设置在相对布局组件中子组件的对齐规则。
@@ -23509,7 +23509,7 @@ declare class CommonMethod<T> {
    *     <br>**说明：**
    *     <br>可通过null取消点击回弹效果。
    *     <br>不建议在组件大小动态变化的场景中使用该功能，可能导致回弹效果异常。
-   *     <br>当组件无法触发通用事件（如[点击事件]{@link ./common}等事件）时，不支持该属性。
+   *     <br>当组件无法触发通用事件（如[点击事件]{@link CommonMethod}等事件）时，不支持该属性。
    *     <br>回弹触发缩放后可能造成触摸点不在组件上，组件上无法响应手势事件。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -23528,7 +23528,7 @@ declare class CommonMethod<T> {
    *     <br>**说明：**
    *     <br>可通过undefined或者null取消点击回弹效果。
    *     <br>不建议在组件大小动态变化的场景中使用该功能。
-   *     <br>当组件无法触发通用事件（如[点击事件]{@link ./common}等事件）时，不支持该属性。具体包括：组件被设置为disabled状态、组件不可见、组件被其他组件遮挡等场景下，无法触发通用事件，此时
+   *     <br>当组件无法触发通用事件（如[点击事件]{@link CommonMethod}等事件）时，不支持该属性。具体包括：组件被设置为disabled状态、组件不可见、组件被其他组件遮挡等场景下，无法触发通用事件，此时
    *     clickEffect属性不生效。
    *     <br>回弹触发缩放后可能造成触摸点不在组件上，组件上无法响应手势事件。
    * @returns { T } 返回当前组件，用于链式调用。
@@ -23561,8 +23561,8 @@ declare class CommonMethod<T> {
    * - 如果开发者返回了自定义预览图，则不再使用系统默认的拖拽预览图；
    * - 如果开发者设置了拖拽数据，则不再使用系统默认填充的拖拽数据。
    * 
-   * 文本类组件[Text]{@link text}、[Search]{@link search}、[TextInput]{@link text_input}、[TextArea]{@link text_area}、
-   * [RichEditor]{@link rich_editor}对选中的文本内容进行拖拽时，不支持自定义预览图。当onDragStart与菜单预览一起使用或使用了默认支持拖拽能力的组件时，预览及菜单项上的自定义内容不支持拖拽。
+   * 文本类组件[Text]{@link @global:Text}、[Search]{@link @global:Search}、[TextInput]{@link @global:TextInput}、[TextArea]{@link @global:TextArea}、
+   * [RichEditor]{@link @global:RichEditor}对选中的文本内容进行拖拽时，不支持自定义预览图。当onDragStart与菜单预览一起使用或使用了默认支持拖拽能力的组件时，预览及菜单项上的自定义内容不支持拖拽。
    * 
    * > **说明：**
    * >
@@ -24399,7 +24399,7 @@ declare class CommonMethod<T> {
 
   /**
    * 组件内隐式共享元素转场。必须配合[animateTo]{@link @ohos.arkui.UIContext:UIContext.animateTo}使用才有动画效果，动效时长、曲线跟随
-   * [animateTo]{@link @ohos.arkui.UIContext:UIContext.animateTo}中的配置，不支持[animation]{@link ./common}动画。geometryTransition会
+   * [animateTo]{@link @ohos.arkui.UIContext:UIContext.animateTo}中的配置，不支持[animation]{@link CommonMethod}动画。geometryTransition会
    * 同步圆角，但仅限于geometryTransition绑定处，不会操作容器内部子组件的borderRadius。
    *
    * @param { string } id - 用于设置绑定关系，id置空字符串清除绑定关系避免参与共享行为，id可更换重新建立绑定关系。同一个id只能有两个组件绑定，
@@ -24758,7 +24758,7 @@ declare class CommonMethod<T> {
    * >
    * > - 仅提供自身节点相对于所有祖先节点（直到window边界）的相对裁切面积与自身面积的比值及其变化趋势。
    * >
-   * > - 不支持兄弟组件对自身节点的遮挡计算，不支持所有祖先的兄弟节点对自身节点的遮挡计算，不支持窗口遮挡计算，不支持组件旋转计算，如[Stack]{@link stack}、[Z序控制]{@link CommonMethod#zIndex}、
+   * > - 不支持兄弟组件对自身节点的遮挡计算，不支持所有祖先的兄弟节点对自身节点的遮挡计算，不支持窗口遮挡计算，不支持组件旋转计算，如[Stack]{@link @global:Stack}、[Z序控制]{@link CommonMethod#zIndex}、
    * > [rotate]{@link CommonMethod#rotate(value: RotateOptions)}等。
    * >
    * > - 不支持非挂树节点的可见面积变化计算。例如，预加载的节点、通过[overlay]{@link CommonMethod#overlay}能力挂载的自定义节点。
@@ -24973,8 +24973,8 @@ declare class CommonMethod<T> {
   /**
    * 设置组件的自定义组合键。
    *
-   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或[FunctionKey]{@link FunctionKey}。<br />空字符串意为取消快捷键绑定。<br/>
-   * @param { Array<ModifierKey> } keys - 热键组合。<br />仅当value为[FunctionKey]{@link FunctionKey}的情况下keys的值可以为空。<br/>
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或[FunctionKey]{@link @global:FunctionKey}。<br />空字符串意为取消快捷键绑定。<br/>
+   * @param { Array<ModifierKey> } keys - 热键组合。<br />仅当value为[FunctionKey]{@link @global:FunctionKey}的情况下keys的值可以为空。<br/>
    * @param { function } [action] - 组合快捷键触发成功后的自定义事件回调。
    * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -25302,11 +25302,11 @@ declare class CommonMethod<T> {
    * @param { Array<ObscuredReasons> } reasons - 设置组件内容的遮罩类型，在屏幕录制或屏幕共享等场景下对组件内容进行隐私遮挡。取值原则：请参考
    *     [ObscuredReasons]{@link ObscuredReasons}枚举定义，如PLACEHOLDER表示使用占位图遮罩。
    *     <br>默认值：[]，未设置遮罩原因时，不对组件内容进行隐私遮罩处理。
-   *     <br>隐私遮罩效果仅在[Image]{@link ./image}组件、[Text]{@link ./text}组件<!--Del-->和[FormComponent]{@link ./form_component}组件
+   *     <br>隐私遮罩效果仅在[Image]{@link @global:Image}组件、[Text]{@link @global:Text}组件<!--Del-->和[FormComponent]{@link @global:FormComponent}组件
    *     <sup>12+</sup><!--DelEnd-->上生效。
    *     <br>**说明：**
    *     <br>如需在图片加载过程中显示隐私遮罩，需要设置Image组件的宽度和高度；若未设置宽度和高度，图片加载过程中将不会显示隐私遮罩效果。
-   *     <br>Text组件设置子组件或设置[属性字符串]{@link ./styled_string}时，不支持隐私遮罩。
+   *     <br>Text组件设置子组件或设置[属性字符串]{@link @global:StyledString}时，不支持隐私遮罩。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -25571,7 +25571,7 @@ declare class CommonMethod<T> {
    * >
    * > 2. onSizeChange是布局过程中触发的同步回调，直接在其中更改状态变量存在被纳入动画闭包的风险。具体而言，动画会对比动画前的布局与动画闭包后的布局，若onSizeChange的回调在动画前的布局中同步触发，那么
    * > onSizeChange回调中所做的变更将与动画闭包中的变更一同纳入动画过程。为了避免此类问题，可在onSizeChange中使用延迟时间为0的
-   * > [setTimeout]{@link api/@internal/ets/global:setTimeout}或
+   * > [setTimeout]{@link @global:setTimeout}或
    * > [postFrameCallback]{@link @ohos.arkui.UIContext:UIContext#postFrameCallback}，将UI处理逻辑
    * > 延后至异步执行。
    *
@@ -27504,7 +27504,7 @@ declare class BaseCustomComponent extends CommonAttribute {
   getUniqueId(): number;
 
   /**
-   * 查询自定义组件所属的[NavDestination]{@link nav_destination}信息，仅当自定义组件在NavDestination的内部时才生效。
+   * 查询自定义组件所属的[NavDestination]{@link @global:NavDestination}信息，仅当自定义组件在NavDestination的内部时才生效。
    *
    * @returns { NavDestinationInfo | undefined } **NavDestinationInfo** instance obtained.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27530,7 +27530,7 @@ declare class BaseCustomComponent extends CommonAttribute {
   queryNavDestinationInfo(isInner: Optional<boolean>): NavDestinationInfo | undefined;
 
   /**
-   * 查询自定义组件所属的[Navigation]{@link navigation}信息。
+   * 查询自定义组件所属的[Navigation]{@link @global:Navigation}信息。
    *
    * @returns { NavigationInfo | undefined } **NavigationInfo** instance obtained.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27772,7 +27772,7 @@ declare abstract class TextContentControllerBase {
    * >
    * > - 返回值中的位置信息是光标相对于可编辑组件的位置。
    * >
-   * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link ./text_input}组件绑定时），该接口返回undefined。
+   * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link @global:TextInput}组件绑定时），该接口返回undefined。
    *
    * @returns { CaretOffset } 光标相对输入框的位置。
    *     *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
@@ -28301,7 +28301,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * > **说明：**
    * >
-   * > 从API version 11开始支持，从API version 12开始废弃。[List]{@link ./list}、[Grid]{@link ./grid}和[WaterFlow]{@link ./water_flow}
+   * > 从API version 11开始支持，从API version 12开始废弃。[List]{@link @global:List}、[Grid]{@link @global:Grid}和[WaterFlow]{@link @global:WaterFlow}
    * > 组件的onScroll事件在布局之后触发，
    *
    * @param { function } event - 滚动组件滑动时的回调。<br/>scrollOffset：相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。单位vp。<br/>
@@ -28324,7 +28324,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * onWillScroll在滚动发生前触发，可通过返回值指定将要滚动的偏移量，适用于需要拦截或自定义滚动行为的场景；onDidScroll在滚动发生时触发，返回当前帧的实际滚动偏移量和滑动状态，适用于仅需监听滚动过程的场景。两者可同
    * 时使用。
    *
-   * 回调当前帧将要滚动的偏移量、当前滚动状态及滚动操作来源，其中回调的偏移量为计算得到的将要滚动的偏移量值，并非最终实际滚动偏移。可以通过该回调返回值指定滚动组件将要滚动的偏移。[Scroll]{@link ./scroll}组件的
+   * 回调当前帧将要滚动的偏移量、当前滚动状态及滚动操作来源，其中回调的偏移量为计算得到的将要滚动的偏移量值，并非最终实际滚动偏移。可以通过该回调返回值指定滚动组件将要滚动的偏移。[Scroll]{@link @global:Scroll}组件的
    * [onWillScroll]{@link ScrollAttribute#onWillScroll}接口的参数类型是
    * [ScrollOnWillScrollCallback]{@link ScrollOnWillScrollCallback}。
    *
@@ -28758,7 +28758,7 @@ declare type OnDidStopDraggingCallback = (willFling: boolean) => void;
 
 /**
  * 懒加载布局容器[LazyColumnLayout]{@link LazyColumnLayout}、
- * [LazyVGridLayout]{@link ./lazy_grid_layout}、
+ * [LazyVGridLayout]{@link @global:LazyVGridLayout}、
  * [LazyVWaterFlowLayout]{@link LazyVWaterFlowLayout}所显示的子组件索引发生变化时的回调
  * 类型。
  *
@@ -28866,7 +28866,7 @@ declare interface ItemDragEventHandler {
 declare class DynamicNode<T> {
 
   /**
-   * 拖拽排序数据移动回调。当父容器组件为[List]{@link ./list}或[Grid]{@link ./grid}，并且ForEach/LazyForEach/Repeat每次迭代都生成一个ListItem或GridItem组
+   * 拖拽排序数据移动回调。当父容器组件为[List]{@link @global:List}或[Grid]{@link @global:Grid}，并且ForEach/LazyForEach/Repeat每次迭代都生成一个ListItem或GridItem组
    * 件时才生效。调用后开启拖拽排序功能；拖拽排序离手后，如果数据位置发生变化，将触发handler回调，上报数据移动起始索引号和目标索引号。需要在回调中修改数据源，并确保数据仅顺序发生变化，才能正常执行落位动画。
    *
    * @param { Optional<OnMoveHandler> } handler
@@ -28881,7 +28881,7 @@ declare class DynamicNode<T> {
   onMove(handler: Optional<OnMoveHandler>): T;
 
   /**
-   * 拖拽排序数据移动回调。当父容器组件为[List]{@link ./list}或[Grid]{@link ./grid}，并且ForEach/LazyForEach/Repeat每次迭代都生成一个ListItem或GridItem组
+   * 拖拽排序数据移动回调。当父容器组件为[List]{@link @global:List}或[Grid]{@link @global:Grid}，并且ForEach/LazyForEach/Repeat每次迭代都生成一个ListItem或GridItem组
    * 件时才生效。调用后开启拖拽排序功能；拖拽排序离手后，如果数据位置发生变化，将触发handler回调，上报数据移动起始索引号和目标索引号。需要在回调中修改数据源，并确保数据仅顺序发生变化，才能正常执行落位动画。与
    * [onMove]{@link CommonMethod#onMove}相比，新增eventHandler参
    * 数，可监听长按、开始拖拽、经过其他组件、拖拽结束等拖拽阶段事件。
@@ -28912,8 +28912,8 @@ declare class DynamicNode<T> {
 declare interface EdgeEffectOptions {
 
   /**
-   * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。[List]{@link ./list}、[Grid]{@link ./grid}和
-   * [WaterFlow]{@link ./water_flow}组件默认值是false，[Scroll]{@link ./scroll}组件默认值是true。
+   * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。[List]{@link @global:List}、[Grid]{@link @global:Grid}和
+   * [WaterFlow]{@link @global:WaterFlow}组件默认值是false，[Scroll]{@link @global:Scroll}组件默认值是true。
    *
    * @type { boolean }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28922,8 +28922,8 @@ declare interface EdgeEffectOptions {
    * @since 11
    */
   /**
-   * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。[List]{@link ./list}、[Grid]{@link ./grid}和
-   * [WaterFlow]{@link ./water_flow}组件默认值是false，[Scroll]{@link ./scroll}组件默认值是true。
+   * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。[List]{@link @global:List}、[Grid]{@link @global:Grid}和
+   * [WaterFlow]{@link @global:WaterFlow}组件默认值是false，[Scroll]{@link @global:Scroll}组件默认值是true。
    *
    * @type { boolean }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -29781,7 +29781,7 @@ declare interface UICommonEvent {
   setOnDisappear(callback: Callback<void> | undefined): void;
 
   /**
-   * 设置[按键事件]{@link common}的回调。
+   * 设置[按键事件]{@link CommonMethod}的回调。
    *
    * @param { Callback<KeyEvent> | undefined } callback - 按键事件的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -30299,7 +30299,7 @@ declare interface InputEventInterceptResult {
  * >
  * > - 对象为空对象，不包含任何可访问的成员。
  * >
- * > - 开发者无法主动构造此对象，只能通过[addLocalInputEventMonitor]{@link UIContext:UIContext#addLocalInputEventMonitor}接口注册获取。
+ * > - 开发者无法主动构造此对象，只能通过[addLocalInputEventMonitor]{@link @ohos.arkui.UIContext:UIContext.addLocalInputEventMonitor}接口注册获取。
  * >
  * > - 用于后续解除注册时验证身份。
  *
