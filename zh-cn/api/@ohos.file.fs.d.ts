@@ -4884,6 +4884,17 @@ declare interface Stat {
   readonly location: LocationType;
 
   /**
+   * 分配给文件的块数，以512字节为单位。
+   *
+   * @throws { BusinessError } 13900005 - I/O error
+   * @throws { BusinessError } 13900042 - Unknown error
+   * @syscap SystemCapability.FileManagement.File.FileIO
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  readonly blocks?: number;
+
+  /**
    * 用于判断文件是否是块特殊文件。一个块特殊文件只能以块为粒度进行访问，且访问的时候带缓存。
    *
    * @returns { boolean } 表示文件是否是块特殊设备。true：是块特殊设备；false：不是块特殊设备。
