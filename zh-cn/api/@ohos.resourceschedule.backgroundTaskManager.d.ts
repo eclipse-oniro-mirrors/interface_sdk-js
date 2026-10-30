@@ -542,7 +542,7 @@ declare namespace backgroundTaskManager {
      */
     contentType: notificationManager.ContentType;
     /**
-     * 长时任务通知 Id。
+     * 长时任务通知 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @atomicservice
@@ -551,7 +551,7 @@ declare namespace backgroundTaskManager {
      */
     notificationId: int;
     /**
-     * 长时任务 Id。
+     * 长时任务 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @atomicservice [since 26.0.0]
@@ -672,7 +672,7 @@ declare namespace backgroundTaskManager {
      */
     backgroundSubModes: string[];
     /**
-     * 通知 Id。
+     * 通知 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @since 20 dynamic
@@ -1345,7 +1345,7 @@ declare namespace backgroundTaskManager {
   /**
    * 取消当前UIAbility（FA模型则为ServiceAbility）下所有长时任务，使用callback异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, continuousTaskId: int)}
-   * 接口取消指定Id的长时任务。适用于应用功能已完成、应用即将退出等场景。
+   * 接口取消指定ID的长时任务。适用于应用功能已完成、应用即将退出等场景。
    *
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
@@ -1372,7 +1372,7 @@ declare namespace backgroundTaskManager {
   /**
    * 取消当前UIAbility（FA模型则为ServiceAbility）下所有长时任务，使用Promise异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, continuousTaskId: int)}
-   * 接口取消指定Id的长时任务。适用于应用功能已完成、应用即将退出等场景。
+   * 接口取消指定ID的长时任务。适用于应用功能已完成、应用即将退出等场景。
    *
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
@@ -1397,7 +1397,7 @@ declare namespace backgroundTaskManager {
   function stopBackgroundRunning(context: Context): Promise<void>;
 
   /**
-   * 取消指定Id的长时任务，使用Promise异步回调。也可以通过
+   * 取消指定ID的长时任务，使用Promise异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, callback:AsyncCallback<void>)}
    * 取消当前UIAbility下所有长时任务。。适用于应用功能已完成、应用即将退出等场景。
    *
@@ -1612,7 +1612,7 @@ declare namespace backgroundTaskManager {
    * @param { Callback<ContinuousTaskCancelInfo> } callback  - 回调函数，返回长时任务取消原因等信息。当长时任务被取消时触发此回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Register a exist callback type; 3. Parameter verification failed.
+   *     2. Register an existing callback type; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1639,7 +1639,7 @@ declare namespace backgroundTaskManager {
    * @param { Callback<ContinuousTaskCancelInfo> } [callback]  - 需要取消监听的回调函数，未传入则取消所有注册回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Unregister type has not register; 3. Parameter verification failed.
+   *     2. Unregister type has not been registered; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */

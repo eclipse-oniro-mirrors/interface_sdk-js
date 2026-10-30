@@ -1706,7 +1706,7 @@ declare namespace backgroundTaskManager {
    *     canceling a continuous task.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     <br> 2. Register a exist callback type; 3. Parameter verification failed.
+   *     <br> 2. Register an existing callback type; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1736,7 +1736,7 @@ declare namespace backgroundTaskManager {
     *     parameter is left unspecified, all registered callbacks are cancelled.
     * @throws { BusinessError } 201 - Permission denied.
     * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-    *     <br> 2. Unregister type has not register; 3. Parameter verification failed.
+    *     <br> 2. Unregister type has not been registered; 3. Parameter verification failed.
     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
     * @since 15 dynamic
     */
