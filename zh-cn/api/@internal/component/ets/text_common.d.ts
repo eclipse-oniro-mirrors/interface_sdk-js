@@ -1482,6 +1482,16 @@ declare class TextMenuItemId {
    * @since 23 dynamic
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * 快捷翻译，为一级菜单项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 
 /**

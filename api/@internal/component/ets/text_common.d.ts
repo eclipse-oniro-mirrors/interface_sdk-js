@@ -1570,6 +1570,16 @@ declare class TextMenuItemId {
    * @since 23 dynamic
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * ID for the quick translate input menu item. It is a level-1 menu item.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 
 /**
