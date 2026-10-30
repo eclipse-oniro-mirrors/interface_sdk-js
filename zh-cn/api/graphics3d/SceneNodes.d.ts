@@ -525,7 +525,7 @@ export interface PointLight extends Light {
  */
 export interface RectLight extends Light {
   /**
-   * 矩形面光源的宽度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认为1。
+   * 矩形面光源的宽度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
    *
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -535,7 +535,7 @@ export interface RectLight extends Light {
   width?: double;
 
   /**
-   * 矩形面光源的高度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认为1。
+   * 矩形面光源的高度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
    *
    * @default 1.0
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -545,7 +545,7 @@ export interface RectLight extends Light {
   height?: double;
 
   /**
-   * 矩形面光源是否从矩形面的两侧发光。true表示矩形面光源两侧发光，false表示矩形面光源单侧发光。默认为false。
+   * 矩形面光源是否从矩形面的两侧发光。true表示矩形面光源两侧发光，false表示矩形面光源单侧发光。默认值为false。
    *
    * @default false
    * @syscap SystemCapability.ArkUi.Graphics3D
