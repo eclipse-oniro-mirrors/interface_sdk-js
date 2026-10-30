@@ -19,8 +19,16 @@
  */
 
 /**
- * The proxy object of the connected party for the AgentExtensionAbility,
- * used to send messages to the connected party, etc.
+ * AgentHostProxy is used to send data or security authentication requests from the AgentExtensionAbility server
+ *  to the client.
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this module are supported since API version 24. Newly added APIs will be marked with
+ * >   a superscript to indicate their earliest API version.
+ * > - The APIs of this module can be used only in the stage model.
+ * > - The APIs of this module must be used in the main thread. They are not supported in subthreads such as Worker
+ * >   and TaskPool.
  *
  * @interface AgentHostProxy
  * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -30,9 +38,9 @@
  */
 export interface AgentHostProxy {
   /**
-   * Send data to an agent service host.
+   * Sends data from the AgentExtensionAbility server to the client.
    *
-   * @param { string } data - Indicates the data to send.
+   * @param { string } data - Data to be sent to the client of AgentExtensionAbility.
    * @throws { BusinessError } 35600002 - Failed to send the IPC message.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly
@@ -42,9 +50,9 @@ export interface AgentHostProxy {
   sendData(data: string): void;
 
   /**
-   * Send authentication to an agent service host.
+   * Sends a security authentication request from the AgentExtensionAbility server to the client.
    *
-   * @param { string } handshakeData - Indicates the handshake data to send.
+   * @param { string } handshakeData - Security authentication data to be sent to the client.
    * @throws { BusinessError } 35600002 - Failed to send the IPC message.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @stagemodelonly

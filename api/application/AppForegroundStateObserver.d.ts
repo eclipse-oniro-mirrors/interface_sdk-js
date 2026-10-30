@@ -21,8 +21,8 @@
 import type AppStateData from './AppStateData';
 
 /**
- * The module defines the listener used to listen for application startup and exit state changes. It can be used as an 
- * input parameter of 
+ * The module defines the listener used to listen for application startup, foreground and background, and exit states.
+ * It can be used as an input parameter of
  * [appManager.on('appForegroundState')]{@link ./../@ohos.app.ability.appManager:appManager.on(type: 'appForegroundState', observer: AppForegroundStateObserver)}
  * to listen for the state changes of all applications.
  *
@@ -32,7 +32,7 @@ import type AppStateData from './AppStateData';
  */
 export default class AppForegroundStateObserver {
   /**
-   * Called when the application launch or exit state changes.
+   * Called when the application startup, foreground and background, or exit state changes.
    *
    * @param { AppStateData } appStateData - Application state data.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
