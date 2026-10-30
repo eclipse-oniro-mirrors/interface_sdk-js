@@ -33,9 +33,12 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<TextEmbedding> } Promise对象，返回文本嵌入模型，用于文本向量化。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   * <br>2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic
@@ -48,9 +51,12 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<ImageEmbedding> } Promise对象，返回图像嵌入模型，用于图像向量化。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   * <br>2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic
@@ -209,7 +215,8 @@ declare namespace intelligence {
      *- 未调用releaseModel()会导致资源泄漏，影响系统性能。
      *- 建议将releaseModel()放在finally块中确保资源被正确释放。
      * @returns { Promise<void> } 无返回结果的Promise。
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -221,7 +228,8 @@ declare namespace intelligence {
      * 释放文本嵌入模型。使用Promise异步回调。
      *
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -236,9 +244,8 @@ declare namespace intelligence {
      *
      * @param { string } text - 嵌入模型的输入文本。长度上限为512个字符。
      * @returns { Promise<Array<double>> } Promise对象，返回向量化结果的数组。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -253,9 +260,8 @@ declare namespace intelligence {
      *
      * @param { Array<string> } batchTexts - 嵌入模型的文本输入批次。单个文本长度上限为512个字符。
      * @returns { Promise<Array<Array<double>>> } Promise对象，返回批次向量化结果的二维数组。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -284,7 +290,8 @@ declare namespace intelligence {
      *- 未调用releaseModel()会导致资源泄漏，影响系统性能。
      *- 建议将releaseModel()放在finally块中确保资源被正确释放。
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -296,7 +303,8 @@ declare namespace intelligence {
      * 释放图像嵌入模型。使用Promise异步回调。
      *
      * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -307,13 +315,12 @@ declare namespace intelligence {
     /**
      * 获取给定图像的嵌入向量。使用Promise异步回调。
      *
-     * 该接口需先调用[loadModel]{@link intelligence.TextEmbedding.loadModel}加载嵌入模型，加载成功后调用getEmbedding。
+     * 该接口需先调用[loadModel]{@link intelligence.ImageEmbedding.loadModel}加载嵌入模型，加载成功后调用getEmbedding。
      *
      * @param { Image } image - 嵌入模型的输入图像类型的URI地址。
      * @returns { Promise<Array<double>> } Promise对象，返回向量化结果的数组对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     * <br>2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @since 15 dynamic
@@ -323,7 +330,7 @@ declare namespace intelligence {
   }
 
   /**
-   * 表示图片的URI地址，为string类型。
+   * 表示图片的URI地址，为string类型。长度上限为512个字符。超出长度时抛出异常。
    *
    * @typedef { string } Image
    * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
@@ -338,9 +345,12 @@ declare namespace intelligence {
    * @param { string } text - 待分块的文本。单个文本长度上限为100000个字符。超出长度时抛出异常。
    * @param { SplitConfig } config - 文本分块的配置信息。
    * @returns { Promise<Array<string>> } Promise对象，返回分块结果的数组。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   * <br>2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic

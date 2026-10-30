@@ -306,9 +306,6 @@ declare namespace unifiedDataChannel {
      * 用于创建带有一条数据记录的统一数据对象。调用成功后，返回包含指定数据记录的UnifiedData对象。
      *
      * @param { UnifiedRecord } record - 要添加到统一数据对象中的数据记录，该记录为UnifiedRecord或其子类对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -332,9 +329,6 @@ declare namespace unifiedDataChannel {
      * 在当前统一数据对象中添加一条数据记录。调用成功后，指定的数据记录被添加到当前统一数据对象中。
      *
      * @param { UnifiedRecord } record - 要添加到统一数据对象中的数据记录，该记录为UnifiedRecord或其子类对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -366,9 +360,6 @@ declare namespace unifiedDataChannel {
      * @param { string } type - 要查询的数据类型，见
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}。
      * @returns { boolean } 有指定的数据类型返回true，否则返回false。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -561,9 +552,6 @@ declare namespace unifiedDataChannel {
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}，如
      *     'general.plain-text'、'general.hyperlink'等。
      * @param { ValueType } value - 要创建的数据记录的值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3.Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -607,9 +595,6 @@ declare namespace unifiedDataChannel {
      * @param { string } type - 要创建的数据类型，见
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}。
      * @param { ValueType } value - 要创建的数据的值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @atomicservice
@@ -624,9 +609,6 @@ declare namespace unifiedDataChannel {
      * @param { string } type - 要获取数据的类型，见
      *     [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}。
      * @returns { ValueType } 当前数据记录对应的值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-     *     <br>2.Incorrect parameter types;
-     *     <br>3. Parameter verification failed.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @atomicservice
@@ -2166,8 +2148,9 @@ declare namespace unifiedDataChannel {
    * @param { Options } options - 配置项参数，参数中intention字段必填，且不支持DRAG，不填时会返回401错误码；其他字段是否填写均不影响接口的使用。
    * @param { UnifiedData } data - 要写入或更新的统一数据对象，用于存储数据记录及其属性信息。
    * @param { AsyncCallback<string> } callback - 回调函数，返回写入UDMF的数据的唯一标识符key的值。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2183,8 +2166,9 @@ declare namespace unifiedDataChannel {
    * @param { Options } options - 配置项参数，参数中intention字段必填，且不支持DRAG，不填时会返回401错误码；其他字段是否填写均不影响接口的使用。
    * @param { UnifiedData } data - 要写入或更新的统一数据对象，用于存储数据记录及其属性信息。
    * @returns { Promise<string> } Promise对象，返回写入UDMF的数据的唯一标识符key的值。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2200,8 +2184,9 @@ declare namespace unifiedDataChannel {
    * @param { Options } options - 配置项参数，参数中key字段必填，不填时会返回401错误码；intention参数仅支持DATA_HUB；其他字段是否填写均不影响接口的使用。
    * @param { UnifiedData } data - 目标数据。
    * @param { AsyncCallback<void> } callback - 回调函数。当更新数据成功，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2217,8 +2202,9 @@ declare namespace unifiedDataChannel {
    * @param { Options } options - 配置项参数，参数中key字段必填，不填时会返回401错误码；intention参数仅支持DATA_HUB；其他字段是否填写均不影响接口的使用。
    * @param { UnifiedData } data - 目标数据。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2236,8 +2222,9 @@ declare namespace unifiedDataChannel {
    *     <br>如果options中填入的是key，则返回key对应的数据；
    *     <br>如果options中填入的是intention，则返回intention下所有数据。
    *     <br>如intention和key均填写了，取两者查询数据的交集，与options只填入key的获取结果一致；如没有交集报错。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2255,8 +2242,9 @@ declare namespace unifiedDataChannel {
    *     <br>如果options中填入的是key，则返回key对应的数据。
    *     <br>如果options中填入的是intention，则返回intention下所有数据。
    *     <br>如intention和key均填写了，取两者查询数据的交集，与options只填入key的获取结果一致；如没有交集报错。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2274,8 +2262,9 @@ declare namespace unifiedDataChannel {
    *     <br>如果options中填入的是key，则删除key对应的数据并返回该数据。
    *     <br>如果options中填入的是intention，则删除intention下所有数据并返回删除的数据。
    *     <br>如intention和key均填写了，取两者数据的交集进行删除，并返回删除的数据，与options只填入key的结果一致；如没有交集报错。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2293,8 +2282,9 @@ declare namespace unifiedDataChannel {
    *     <br>如果options中填入的是key，则删除key对应的数据并返回该数据。
    *     <br>如果options中填入的是intention，则删除intention下所有数据并返回删除的数据。
    *     <br>如intention和key均填写了，取两者数据的交集进行删除，并返回删除的数据，与options只填入key的结果一致；如没有交集报错。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types;
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2313,9 +2303,10 @@ declare namespace unifiedDataChannel {
     * @param { ShareOptions } shareOptions - 指示[UnifiedData]{@link unifiedDataChannel.UnifiedData}支持的设备内使用范围。
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
-    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-    *     2. Incorrect parameter types;
-    *     3. Parameter verification failed.
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+    *     <br>1. Mandatory parameters are left unspecified;
+    *     <br>2. Incorrect parameter types;
+    *     <br>3. Parameter verification failed. 
     * @throws { BusinessError } 20400001 - Settings already exist. To reconfigure, remove the existing sharing options.
     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
     *      required to call the API. [since 14]
@@ -2336,9 +2327,10 @@ declare namespace unifiedDataChannel {
     * @param { Intention } intention - 表示数据操作相关的数据通路类型，目前仅支持DRAG类型数据通道。
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
-    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-    *     2. Incorrect parameter types;
-    *     3. Parameter verification failed.
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+    *     <br>1. Mandatory parameters are left unspecified;
+    *     <br>2. Incorrect parameter types;
+    *     <br>3. Parameter verification failed.
     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
     *     required to call the API. [since 14]
     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -2361,9 +2353,6 @@ declare namespace unifiedDataChannel {
     * 否则不会产生任何行为。
     *
     * @param { UnifiedData } data - 需要转换为多样式数据结构的统一数据对象。
-    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-    *     <br>2.Incorrect parameter types;
-    *     <br>3. Parameter verification failed.
     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
     * @stagemodelonly
     * @atomicservice
