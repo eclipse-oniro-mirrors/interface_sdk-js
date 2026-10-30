@@ -18,10 +18,6 @@
  * @kit NetworkKit
  */
 
-import type { AsyncCallback, Callback } from './@ohos.base';
-import type connection from './@ohos.net.connection';
-import type _AbilityContext from './application/UIAbilityContext';
-
 /**
  * This module is the built-in VPN function provided by the OS. It allows users to set up VPN connections through the
  * network settings of the OS. Generally, this module provides only limited functions and is subject to strict
@@ -33,7 +29,7 @@ import type _AbilityContext from './application/UIAbilityContext';
  */
 declare namespace vpn {
   /**
-   * Defines the network link address information.
+   * Represents the network link information.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
@@ -42,21 +38,13 @@ declare namespace vpn {
   export type LinkAddress = connection.LinkAddress;
 
   /**
-   * Defines the network route information.
+   * Represents the network route information.
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 26.0.1 static
    */
   export type RouteInfo = connection.RouteInfo;
-
-  /**
-   * The context of an ability. It allows access to ability-specific resources.
-   * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @since 10 dynamic
-   * @since 26.0.1 static
-   */
-  export type AbilityContext = _AbilityContext;
 
   /**
    * Creates a VPN connection.
@@ -308,8 +296,8 @@ declare namespace vpn {
   function getConnectedVpnAppInfo(): Promise<Array<string>>;
 
   /**
-   * Defines a VPN connection object. Before calling **VpnConnection** APIs, you need to create a VPN connection object
-   * by calling [vpn.createVpnConnection]{@link vpn.createVpnConnection}.
+   * VPN connection object. Before calling the methods of **VpnConnection**, you must create a VPN connection object
+   * through [vpn.createVpnConnection]{@link vpn.createVpnConnection}.
    *
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @systemapi Hide this for inner system use.
@@ -318,13 +306,14 @@ declare namespace vpn {
    */
   export interface VpnConnection {
     /**
-     * Creates a VPN based on the specified configuration. This API uses an asynchronous callback to return the result.
+     * Creates a VPN network based on the specified configuration. This API uses an asynchronous callback to return the
+     * result.
      *
      * @permission ohos.permission.MANAGE_VPN
      * @param { VpnConfig } config - VPN configuration.
-     * @param { AsyncCallback<int> } callback - Callback used to return the result. If a VPN is created successfully,
-     *     **error** is **undefined** and **data** is the file descriptor of the vNIC. Otherwise, **error** is an error
-     *     object.
+     * @param { AsyncCallback<int> } callback - Callback function. When the VPN network is started successfully, returns
+     *     the file descriptor (fd) of the virtual network interface, and **error** is **undefined**; otherwise, returns
+     *     an error object.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
      * @throws { BusinessError } 401 - Parameter error.
@@ -343,9 +332,15 @@ declare namespace vpn {
     /**
      * Creates a VPN based on the specified configuration. This API uses a promise to return the result.
      *
+     * > **NOTE**
+     * >
+     * > Only one VPN connection is allowed for the same user at the same time. If a VPN connection already exists, error
+     * > code 2203002 is returned. The VPN network persists and must be destroyed by calling **destroy**.
+     *
      * @permission ohos.permission.MANAGE_VPN
      * @param { VpnConfig } config - VPN configuration.
-     * @returns { Promise<int> } Promise used to return the result, which is the file descriptor of the vNIC.
+     * @returns { Promise<int> } Promise used to return the file descriptor (fd) of the specified virtual network
+     *     interface.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
      * @throws { BusinessError } 401 - Parameter error.
@@ -362,15 +357,14 @@ declare namespace vpn {
     setUp(config: VpnConfig): Promise<int>;
 
     /**
-     * Protects sockets against a VPN connection. The data sent through sockets is directly transmitted over the
-     * physical network and therefore the traffic does not traverse through the VPN. This API uses an asynchronous
-     * callback to return the result.
+     * Protects the specified sockets so that their data traffic bypasses the VPN network and is sent and received
+     * directly over the physical network. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.MANAGE_VPN
-     * @param { int } socketFd - Socket file descriptor. It can be obtained through
-     *     [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd(callback: AsyncCallback<int>)}.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **error** is **undefined**. If the operation fails, an error message is returned.
+     * @param { int } socketFd - Socket file descriptor (socketfd) to be protected. The file descriptor is obtained
+     *     through [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd(callback: AsyncCallback<int>)}.
+     * @param { AsyncCallback<void> } callback - Callback function. If the operation is successful, **error** is
+     *     **undefined**. Returns an error code and error message on failure.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
      * @throws { BusinessError } 401 - Parameter error.
@@ -386,9 +380,8 @@ declare namespace vpn {
     protect(socketFd: int, callback: AsyncCallback<void>): void;
 
     /**
-     * Protects sockets against a VPN connection. The data sent through sockets is directly transmitted over the
-     * physical network and therefore the traffic does not traverse through the VPN. This API uses a promise to return
-     * the result.
+     * Protects the specified socket so that its data traffic bypasses the VPN and is sent and received directly over
+     * the physical network. This API uses a promise to return the result.
      *
      * @permission ohos.permission.MANAGE_VPN
      * @param { int } socketFd - Socket file descriptor. It can be obtained through
@@ -410,7 +403,7 @@ declare namespace vpn {
     protect(socketFd: int): Promise<void>;
 
     /**
-     * Destroys a VPN. This API uses an asynchronous callback to return the result.
+     * Destroys the started VPN. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.MANAGE_VPN
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -456,7 +449,7 @@ declare namespace vpn {
    */
   export interface VpnConfig {
     /**
-     * Unique VPN ID.
+     * Unique identifier of the VPN. The value is empty by default if this parameter is not set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -475,7 +468,8 @@ declare namespace vpn {
     addresses: Array<LinkAddress>;
 
     /**
-     * Route information of the vNIC.
+     * Route information of the VPN virtual network interface. The value is empty by default if this parameter is not
+     * set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -485,7 +479,7 @@ declare namespace vpn {
     routes?: Array<RouteInfo>;
 
     /**
-     * IP address of the DNS server.
+     * DNS server address information. The value is empty by default if this parameter is not set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -495,7 +489,7 @@ declare namespace vpn {
     dnsAddresses?: Array<string>;
 
     /**
-     * List of DNS search domains.
+     * List of DNS search domains. The value is empty by default if this parameter is not set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -505,7 +499,8 @@ declare namespace vpn {
     searchDomains?: Array<string>;
 
     /**
-     * Maximum transmission unit (MTU), in bytes.
+     * Maximum transmission unit (MTU) value, in bytes. The system default MTU value is used if this parameter is not
+     * set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -559,7 +554,8 @@ declare namespace vpn {
     isBlocking?: boolean;
 
     /**
-     * Used to specify that the bundle name of the string type can access the VPN network.
+     * Bundle names, represented by strings, that can access the VPN network. The value is empty by default if this
+     * parameter is not set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -569,7 +565,8 @@ declare namespace vpn {
     trustedApplications?: Array<string>;
 
     /**
-     * Used to specify that the bundle name of the string type cannot access the VPN network.
+     * Bundle names, represented by strings, that cannot access the VPN network. The value is empty by default if this
+     * parameter is not set.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @systemapi Hide this for inner system use.
@@ -1250,5 +1247,3 @@ declare namespace vpn {
     OPENVPN = 9
   }
 }
-
-export default vpn;

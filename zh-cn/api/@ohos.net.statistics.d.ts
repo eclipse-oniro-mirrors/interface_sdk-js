@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (C) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ declare namespace statistics {
    * 获取指定网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用callback异步回调。
    *
    * @param { string } nic - 指定查询的网卡名。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -70,7 +70,7 @@ declare namespace statistics {
    * 获取指定网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用Promise异步回调。
    *
    * @param { string } nic - 指定查询的网卡名。
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回指定网卡从最近一次开机至接口调用时刻的下行流量总和（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -87,7 +87,7 @@ declare namespace statistics {
    * 获取指定网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用callback异步回调。
    *
    * @param { string } nic - 指定查询的网卡名。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -104,7 +104,7 @@ declare namespace statistics {
    * 获取指定网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用Promise异步回调。
    *
    * @param { string } nic - 指定查询的网卡名。
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回指定网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -194,9 +194,9 @@ declare namespace statistics {
   function getCellularTxBytes(): Promise<long>;
 
   /**
-   * 获取所有网卡从最近一次开机开始至接口调用时刻的下行流量总和(单位:字节)。使用callback异步回调。
+   * 获取所有网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用callback异步回调。
    *
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -211,7 +211,7 @@ declare namespace statistics {
   /**
    * 获取所有网卡从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用Promise异步回调。
    *
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回所有网卡从最近一次开机开始到现在的下行流量总和（单位：字节）。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -226,7 +226,7 @@ declare namespace statistics {
   /**
    * 获取所有网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用callback异步回调。
    *
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -241,7 +241,7 @@ declare namespace statistics {
   /**
    * 获取所有网卡从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用Promise异步回调。
    *
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回所有网卡实时上行流量（单位：字节）。
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
@@ -255,14 +255,15 @@ declare namespace statistics {
 
   /**
    * 获取指定应用从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 若重启后该应用未产生流量消耗，则会抛出2103005错误码。
+   * >
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - 指定查询的应用 uid。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，error为undefined，否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取到流量数据时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -277,14 +278,15 @@ declare namespace statistics {
 
   /**
    * 获取指定应用从最近一次开机开始至接口调用时刻的下行流量总和（单位：字节）。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 若重启后该应用未产生流量消耗，则会抛出2103005错误码。
+   * >
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - 指定查询的应用 uid。
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回指定应用从最近一次开机开始到现在的下行流量总和（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -299,14 +301,15 @@ declare namespace statistics {
 
   /**
    * 获取指定应用从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 若重启后该应用未产生流量消耗，则会抛出2103005错误码。
+   * >
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - 指定查询的应用 uid。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取应用实时上行流量时，error为undefined，stats为获取到的应用上行流量(单位:字节)；否则为错误对象。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取应用实时上行流量时，err为undefined，stats为获取到的应用上行流量（单位：字节）；否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -321,14 +324,15 @@ declare namespace statistics {
 
   /**
    * 获取指定应用从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 若重启后该应用未产生流量消耗，则会抛出2103005错误码。
+   * >
    *
    * @permission ohos.permission.GET_NETWORK_STATS [since 26.0.0]
    * @param { int } uid - 指定查询的应用 uid。
-   * @returns { Promise<long> } The promise returned by the function.
+   * @returns { Promise<long> } Promise对象，返回指定应用从最近一次开机开始至接口调用时刻的上行流量总和（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
@@ -379,10 +383,10 @@ declare namespace statistics {
    * 取消订阅流量改变事件通知。使用callback异步回调。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
-   * @param { 'netStatsChange' } type - 注销订阅事件，固定为'netStatsChange'。
-   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic
-   *     changes. [since 10 - 10]
-   * @param { Callback<NetStatsChangeInfo> } callback - 当流量有改变时触发回调函数。 [since 11]
+   * @param { 'netStatsChange' } type - 取消订阅事件，固定为'netStatsChange'。
+   * @param { Callback<{ iface: string, uid?: int }> } callback - Callback invoked when the traffic changes. [since 10 -
+   *     10]
+   * @param { Callback<NetStatsChangeInfo> } callback - 取消订阅的回调，先通过on('netStatsChange')注册。 [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -410,11 +414,11 @@ declare namespace statistics {
   function offNetStatsChange(callback?: Callback<NetStatsChangeInfo>): void;
 
   /**
-   * 获取指定网卡历史流量信息，使用 callback 异步回调。
+   * 获取指定网卡历史流量信息，使用callback异步回调。系统根据ifaceInfo中指定的网卡名和时间范围，从流量统计数据库中读取该网卡在对应时间段内的收发字节数与包数，通过回调返回；若网卡名无效或该时间段内无统计数据，则返回全零的统计信息。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { IfaceInfo } ifaceInfo - 指定查询的网卡信息，参见[IfaceInfo]{@link statistics.IfaceInfo}。
-   * @param { AsyncCallback<NetStatsInfo> } callback - 回调函数。成功时 statsInfo 返回包含网卡历史流量信息，error 为 undefined，否则为错误对象。
+   * @param { AsyncCallback<NetStatsInfo> } callback - 回调函数。当成功获取指定网卡历史流量信息时，err为undefined，data为获取到的网卡历史流量信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -430,15 +434,11 @@ declare namespace statistics {
   function getTrafficStatsByIface(ifaceInfo: IfaceInfo, callback: AsyncCallback<NetStatsInfo>): void;
 
   /**
-   * 获取指定网卡历史流量信息，使用 Promise 异步回调。
-   * 
-   * | 参数名    | 类型                      | 必填 | 说明                                                |
-   * | --------- | ------------------------- | ---- | --------------------------------------------------- |
-   * | ifaceInfo | [IfaceInfo]{@link statistics.IfaceInfo} | 是   | 指定查询的网卡信息，参见[IfaceInfo]{@link statistics.IfaceInfo}。 |
+   * 获取指定网卡历史流量信息，使用Promise异步回调。系统根据ifaceInfo中指定的网卡名和时间范围，从流量统计数据库中读取该网卡在对应时间段内的收发字节数与包数并以Promise形式返回；若网卡名无效或该时间段内无统计数据，则返回全零的统计信息。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
-   * @param { IfaceInfo } ifaceInfo - Detailed query content. See {@link IfaceInfo}.
-   * @returns { Promise<NetStatsInfo> } The promise returned by the function.
+   * @param { IfaceInfo } ifaceInfo - 指定查询的网卡信息，参见[IfaceInfo]{@link statistics.IfaceInfo}。
+   * @returns { Promise<NetStatsInfo> } Promise对象，返回网卡历史流量信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -454,11 +454,11 @@ declare namespace statistics {
   function getTrafficStatsByIface(ifaceInfo: IfaceInfo): Promise<NetStatsInfo>;
 
   /**
-   * 获取指定应用历史流量信息，使用 callback 异步回调。
+   * 获取指定应用历史流量信息，使用callback异步回调。系统根据uidInfo中指定的应用uid及网卡、时间范围，从流量统计数据库中读取该应用在对应时间段内的收发字节数与包数，通过回调返回；若该应用在指定时间段内无流量记录，则返回全零的统计信息。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { UidInfo } uidInfo - 指定查询的应用信息，参见[UidInfo]{@link statistics.UidInfo}。
-   * @param { AsyncCallback<NetStatsInfo> } callback - 回调函数。成功时 statsInfo 返回包含应用历史流量信息，error 为 undefined，否则为错误对象。
+   * @param { AsyncCallback<NetStatsInfo> } callback - 回调函数。当成功获取指定应用历史流量信息时，err为undefined，data为获取到的应用历史流量信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -474,11 +474,11 @@ declare namespace statistics {
   function getTrafficStatsByUid(uidInfo: UidInfo, callback: AsyncCallback<NetStatsInfo>): void;
 
   /**
-   * 获取指定应用历史流量信息，使用 Promise 异步回调。
+   * 获取指定应用历史流量信息，使用Promise异步回调。系统根据uidInfo中指定的应用uid及网卡、时间范围，从流量统计数据库中读取该应用在对应时间段内的收发字节数与包数并以Promise形式返回；若该应用在指定时间段内无流量记录，则返回全零的统计信息。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { UidInfo } uidInfo - 指定查询的应用信息，参见[UidInfo]{@link statistics.UidInfo}。
-   * @returns { Promise<NetStatsInfo> } 以 Promise 形式返回获取结果,返回应用历史流量信息。
+   * @returns { Promise<NetStatsInfo> } Promise对象，返回应用历史流量信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -495,13 +495,13 @@ declare namespace statistics {
 
   /**
    * 获取指定Socket的下行流量（单位：字节）。使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 推荐在Socket连接时使用，否则Socket已经关闭后无法查询到对应流量数据。
    *
-   * @param { int } sockfd - 指定查询的Socket的FD(file description)。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取Socket的下行流量时，error为undefined，否则为错误对象。
+   * @param { int } sockfd - 指定查询的Socket的FD(file descriptor)。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取Socket的下行流量时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
@@ -514,13 +514,13 @@ declare namespace statistics {
 
   /**
    * 获取指定Socket的下行流量（单位：字节）。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 推荐在Socket连接时使用，否则Socket已经关闭后无法查询到对应流量数据。
    *
-   * @param { int } sockfd - 指定查询的Socket的FD(file description)。
-   * @returns { Promise<long> } Promise对象。返回该Socket的下行流量（单位：字节）。
+   * @param { int } sockfd - 指定查询的Socket的FD(file descriptor)。
+   * @returns { Promise<long> } Promise对象，返回该Socket的下行流量（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
@@ -533,15 +533,15 @@ declare namespace statistics {
 
   /**
    * 获取指定Socket的上行流量（单位：字节）。使用callback异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 推荐在Socket连接时使用，否则Socket已经关闭后无法查询到对应流量数据。
    *
-   * @param { int } sockfd - 指定查询的Socket的FD(file description)。
-   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取Socket的上行流量时，error为undefined，否则为错误对象。
+   * @param { int } sockfd - 指定查询的Socket的FD(file descriptor)。
+   * @param { AsyncCallback<long> } callback - 回调函数。当成功获取Socket的上行流量时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -552,15 +552,15 @@ declare namespace statistics {
 
   /**
    * 获取指定Socket的上行流量（单位：字节）。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 推荐在Socket连接时使用，否则Socket已经关闭后无法查询到对应流量数据。
    *
-   * @param { int } sockfd - 指定查询的Socket的FD(file description)。
-   * @returns { Promise<long> } Promise对象。返回该Socket的上行流量（单位：字节）。
+   * @param { int } sockfd - 指定查询的Socket的FD(file descriptor)。
+   * @returns { Promise<long> } Promise对象，返回该Socket的上行流量（单位：字节）。
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value
+   * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
    * @throws { BusinessError } 2100003 - System internal error.
    * @syscap SystemCapability.Communication.NetManager.Core
@@ -570,7 +570,7 @@ declare namespace statistics {
   function getSockfdTxBytes(sockfd: int): Promise<long>;
 
   /**
-   * 设置流量校准数据。在做流量校准时，可通过本接口设置相关流量数据。使用Promise异步回调。
+   * 设置流量校准数据。在做流量校准时，可通过本接口设置相关流量数据，接口会将simId对应的剩余流量（remainTraffic）与套餐总流量（totalTraffic）写入系统流量统计数据库并用于后续流量统计与校准计算，校准结果对后续查询接口返回的数据生效。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { int } simId - SIM卡ID。
@@ -797,7 +797,7 @@ declare namespace statistics {
   }
 
   /**
-   * 监听和管理网络接口的状态和使用情况。
+   * 流量变化事件上报的网卡名称及应用UID等信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
@@ -826,37 +826,12 @@ declare namespace statistics {
   }
 
   /**
-   * An {@link NetStatsInfo} array with start time and end time.
+   * Defines the historical traffic statistics of the specified application.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
    */
-  export type NetStatsInfoSequence = {
-    /**
-     * 查询的开始时间(时间戳;单位：秒)。
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    startTime: int;
-    /**
-     * 查询的结束时间(时间戳;单位：秒)。
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    endTime: int;
-    /**
-     * 获取的历史流量信息。
-     * @type { NetStatsInfo }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     */
-    info: NetStatsInfo;
-  }[];
+  export type NetStatsInfoSequence = {  }[]
 
   /**
    * {@link NetStatsInfoSequenceItem}的数组。
@@ -902,17 +877,19 @@ declare namespace statistics {
   }
 
   /**
-   * {@link NetStatsInfo} for every UID. Key is UID.
-   * {@link NetStatsInfo} for every UID. Key is UID. @syscap SystemCapability.Communication.NetManager.Core
-   * {@link NetStatsInfo} for every UID. Key is UID. @systemapi Hide this for inner system use.
-   * {@link NetStatsInfo} for every UID. Key is UID. @since 12 dynamic
-   * {@link NetStatsInfo} for every UID. Key is UID./
+   * 获取的所有应用历史流量信息。
+   *
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 12 dynamic
+   */
   export type UidNetStatsInfo = {
     [uid: int]: NetStatsInfo;
   };
 
   /**
-   * {@link NetStatsInfo} for every UID. Key is UID.
+   * 获取的所有应用历史流量信息。
+   *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 23 static
@@ -976,11 +953,11 @@ declare namespace statistics {
   }
 
   /**
-   * 获取指定时间段内所有应用在指定网络中的流量使用详情，使用 Promise 异步回调。
+   * 获取指定时间段内所有应用在指定网络中的流量使用详情，使用Promise异步回调。系统根据networkInfo中的网络类型、时间范围及simId，从流量统计数据库中聚合该网络下各应用（按uid维度）的历史流量数据并以Promise形式返回UidNetStatsInfo；其中simId仅在网络类型为蜂窝网络（BEARER_CELLULAR）时生效。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { NetworkInfo } networkInfo - 指定查询的网络信息，参见[NetworkInfo]{@link statistics.NetworkInfo}。
-   * @returns { Promise<UidNetStatsInfo> } 以 Promise 形式返回获取结果。返回所有应用历史流量信息。
+   * @returns { Promise<UidNetStatsInfo> } Promise对象，返回所有应用历史流量信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -995,12 +972,12 @@ declare namespace statistics {
    */
   function getTrafficStatsByNetwork(networkInfo: NetworkInfo): Promise<UidNetStatsInfo>;
   /**
-   * 获取指定时间段内，应用在指定网络中的流量使用详情，使用 Promise 异步回调。
+   * 获取指定时间段内，应用在指定网络中的流量使用详情，使用Promise异步回调。系统根据uid及networkInfo中的网络类型、时间范围、simId，从流量统计数据库中读取该应用在指定网络下的历史流量数据，按时间段返回NetStatsInfoSequence序列并以Promise形式返回；其中simId仅在网络类型为蜂窝网络（BEARER_CELLULAR）时生效。
    *
    * @permission ohos.permission.GET_NETWORK_STATS
    * @param { int } uid - 指定查询的应用 UID。
    * @param { NetworkInfo } networkInfo - 指定查询的网络信息，参见[NetworkInfo]{@link statistics.NetworkInfo}。
-   * @returns { Promise<NetStatsInfoSequence> } 以 Promise 形式返回获取结果。返回应用历史流量统计信息。
+   * @returns { Promise<NetStatsInfoSequence> } Promise对象，返回应用历史流量统计信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -1052,7 +1029,7 @@ declare namespace statistics {
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @since 23 dynamic
+   * @since 23 dynamic&static
    */
   function getMonthTrafficStats(simId: int): Promise<long>;
 
@@ -1137,6 +1114,43 @@ declare namespace statistics {
      */
     DAILY_LIMIT_PERCENTAGE = 7
   }
+
+  /**
+   * 获取的应用历史流量信息。
+   * @syscap SystemCapability.Communication.NetManager.Core
+   * @systemapi Hide this for inner system use.
+   * @since 12 dynamic
+   */
+  export type NetStatsInfoSequence = {
+    /**
+     * 查询的开始时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    startTime: int;
+    /**
+     * 查询的结束时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    endTime: int;
+    /**
+     * 获取的历史流量信息。
+     * @type { NetStatsInfo }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     * @arkts 1.1
+     */
+    info: NetStatsInfo;
+  }[];
+
 
 }
 
