@@ -5996,7 +5996,7 @@ declare namespace media {
    */
   interface PlaybackStrategy {
     /**
-     * 选择宽度接近的流。
+     * 选择宽度接近的流，单位为像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6005,7 +6005,7 @@ declare namespace media {
      */
     preferredWidth?: int;
     /**
-     * 选择高度接近的流。
+     * 选择高度接近的流，单位为像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6014,7 +6014,7 @@ declare namespace media {
      */
     preferredHeight?: int;
     /**
-     * 选择缓冲时长。
+     * 选择缓冲时长，单位为秒（s）。
      * 
      * <p>The preferred buffer duration in the playback policy, is used to set the buffer size. For details,
      * see [Online Video Frame Freezing Optimization Practice]{@link
@@ -6077,7 +6077,7 @@ declare namespace media {
     showFirstFrameOnPrepare?: boolean;
 
     /**
-     * 自定义开始或重新播放的缓冲阈值，单位为秒。
+     * 自定义开始或重新播放的缓冲阈值，单位为秒（s）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6098,7 +6098,7 @@ declare namespace media {
     enableSuperResolution?: boolean;
 
     /**
-     * 在更改速度时，为直播或 AVPlayer 设置最大缓冲阈值。
+     * 在更改速度时，为直播或 AVPlayer 设置最大缓冲阈值，单位为秒（s）。
      * 建议比起始水位高出2秒。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
