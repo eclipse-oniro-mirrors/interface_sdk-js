@@ -471,17 +471,6 @@ declare namespace formInfo {
     isFontScaleFollowSystem?: boolean;
 
     /**
-     * 获取卡片是否启用赋色。
-     * 默认值：默认是值是false。
-     *
-     * @syscap SystemCapability.Ability.Form
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamiconly
-     */
-    readonly enableTint?: boolean;
-
-    /**
      * 表示卡片是否使能深浅色模式切换触发刷新，默认值为false。
      *
      * - true：使能。
@@ -494,6 +483,17 @@ declare namespace formInfo {
      * @since 26.1.0 dynamic&static
      */
     readonly isColorModeRefreshEnabled?: boolean;
+
+    /**
+     * 获取卡片是否启用赋色。
+     * 默认值：默认是值是false。
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    readonly enableTint?: boolean;
   }
 
   /**
