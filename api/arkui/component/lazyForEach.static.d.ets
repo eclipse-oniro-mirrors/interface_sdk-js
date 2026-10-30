@@ -224,6 +224,17 @@ export interface LazyForEachOptions {
    * @since 26.0.0 static
    */
   memoryOptimizationStrategy?: LazyForEachMemOptStrategy;
+
+  /**
+   * Controller bound to the LazyForEach component. When the controller is bound, you can call
+   * [clearCache]{@link LazyForEachController#clearCache} to clear the child components prebuilt by the LazyForEach
+   * component as needed.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  controller?: LazyForEachController;
 }
 
 /**
@@ -729,6 +740,37 @@ export interface LazyForEachAttribute extends DynamicNode {
    * @since 26.0.1 staticonly
    */
   applyAttributesFinish(): void;
+}
+
+/**
+ * Defines a controller of the LazyForEach component. You can bind the controller to the LazyForEach component
+ * through the **controller** field in [LazyForEachOptions]{@link LazyForEachOptions} and call
+ * [clearCache]{@link LazyForEachController#clearCache} to clear the child components prebuilt by the LazyForEach
+ * component as needed.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare class LazyForEachController {
+
+  /**
+   * A constructor used to create a LazyForEachController object.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  constructor();
+
+  /**
+   * Clears the child components prebuilt by the LazyForEach component bound to this controller.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(): void;
 }
 
 /**

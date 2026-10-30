@@ -1331,6 +1331,18 @@ export declare interface CustomComponentContext {
    * @since 26.0.0 dynamic
    */
   getReusePool(): IReusePool | undefined;
+
+  /**
+   * 返回该自定义组件拥有的默认复用池。
+   *
+   * @returns { IDefaultReusePool | undefined } 当前组件存在默认复用池时，返回默认复用池，否则返回`undefined`。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
 }
 
 /**
@@ -1385,6 +1397,31 @@ export declare interface IReusePool {
    * @since 26.0.0 dynamic
    */
   preRender(builder: WrappedBuilder<[]>, times: number): Promise<void>;
+}
+
+/**
+ * `IDefaultReusePool`接口提供自定义组件上的默认复用池的相关功能，包括清理复用池中的节点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface IDefaultReusePool {
+  /**
+   * 清理复用池中的节点。
+   *
+   * 指定reuseId时，仅清理该reuseId对应的可复用自定义组件的节点；未指定时，清理复用池中的全部节点。
+   *
+   * @param { string } [reuseId] - 需要清理的复用池中可复用自定义组件的复用标识ID。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**
