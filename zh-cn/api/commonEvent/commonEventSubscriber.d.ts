@@ -40,6 +40,15 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
  * // 创建订阅者
  * subscriber = commonEventManager.createSubscriberSync(subscribeInfo);
  * ```
+ *
+ * # 约束与失效行为说明：
+ *
+ * - 本类的数据处理与流程控制方法（getCode、getData、getAbortCommonEvent、setCode、setData、setCodeAndData、abortCommonEvent、clearAbortCommonEvent、finishCommonEvent及其对应的Sync方法）仅在当前订阅收到[有序公共事件](../../basic-services/common-event/common-event-glossary.md#ordered-common-event有序公共事件)的接收回调（onReceiveEvent）执行期间调用才有效。
+ * - 在无序公共事件的接收回调内、退订（unsubscribe）之后或其他上下文调用时，接口不会抛出错误，但调用不生效：
+ *   - 获取类方法（getCode、getData、getAbortCommonEvent及其对应的Sync方法）返回默认值（依次为0、空字符串、false），与真实数据不可区分；
+ *   - 设置与流程控制类方法（setCode、setData、setCodeAndData、abortCommonEvent、clearAbortCommonEvent、finishCommonEvent及其对应的Sync方法）静默返回成功，但设置不生效。
+ * - 上述失效调用仅记录系统日志，应用侧无法通过返回值或错误码感知。
+ * - 有序公共事件对每个订阅者的处理时长存在10秒超时限制，超时后系统将自动结束当前订阅者的处理并向下一优先级订阅者投递该事件，此后调用的setCode、setData、setCodeAndData、finishCommonEvent等接口不再生效。
  */
 /**
  * 表示公共事件的订阅者。CommonEventSubscriber提供了对
@@ -56,6 +65,10 @@ export interface CommonEventSubscriber {
   /**
    * 获取有序公共事件传递的数据。使用callback异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，而是通过callback或Promise返回默认值0。
+   *
    * @param { AsyncCallback<int> } callback - 回调函数。当获取有序公共事件传递的数据成功时，err为undefined，data为获取到的数据；否则err为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -69,6 +82,10 @@ export interface CommonEventSubscriber {
   /**
    * 获取有序公共事件传递的数据。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值0。
+   *
    * @returns { Promise<int> } Promise对象。返回有序公共事件传递的数据。
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -80,6 +97,10 @@ export interface CommonEventSubscriber {
   /**
    * 同步获取有序公共事件传递的数据。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值0。
+   *
    * @returns { int } 有序公共事件传递的数据。
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -90,6 +111,11 @@ export interface CommonEventSubscriber {
 
   /**
    * 设置有序公共事件传递的数据。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
    *
    * @param { int } code - 有序公共事件传递的数据。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置有序公共事件传递的数据成功时，err为undefined，否则为错误对象。
@@ -105,6 +131,11 @@ export interface CommonEventSubscriber {
   /**
    * 设置有序公共事件传递的数据。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { int } code - 有序公共事件传递的数据。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -119,6 +150,11 @@ export interface CommonEventSubscriber {
   /**
    * 同步设置有序公共事件传递的数据。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { int } code - 有序公共事件传递的数据。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -131,6 +167,10 @@ export interface CommonEventSubscriber {
 
   /**
    * 获取有序公共事件传递的数据。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，而是通过callback或Promise返回默认值空字符串""。
    *
    * @param { AsyncCallback<string> } callback - 回调函数。当获取有序公共事件传递的数据成功时，err为undefined，data为获取到的数据；否则err为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -145,6 +185,10 @@ export interface CommonEventSubscriber {
   /**
    * 获取有序公共事件传递的数据。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值空字符串""。
+   *
    * @returns { Promise<string> } Promise对象。返回有序公共事件传递的数据。
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -156,6 +200,10 @@ export interface CommonEventSubscriber {
   /**
    * 同步获取有序公共事件传递的数据。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值空字符串""。
+   *
    * @returns { string } 有序公共事件传递的数据。
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -166,6 +214,11 @@ export interface CommonEventSubscriber {
 
   /**
    * 设置有序公共事件传递的数据。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
    *
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置有序公共事件传递的数据成功时，err为undefined，否则为错误对象。
@@ -181,6 +234,11 @@ export interface CommonEventSubscriber {
   /**
    * 设置有序公共事件传递的数据。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -195,6 +253,11 @@ export interface CommonEventSubscriber {
   /**
    * 同步设置有序公共事件传递的数据。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -207,6 +270,11 @@ export interface CommonEventSubscriber {
 
   /**
    * 设置有序公共事件传递的数据。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
    *
    * @param { int } code - 有序公共事件传递的数据。
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
@@ -223,6 +291,11 @@ export interface CommonEventSubscriber {
   /**
    * 设置有序公共事件传递的数据。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { int } code - 有序公共事件传递的数据。
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
@@ -238,6 +311,11 @@ export interface CommonEventSubscriber {
   /**
    * 同步设置有序公共事件传递的数据。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。若调用时已超时，系统已自动向下一优先级订阅者投递该事件，设置的数据不会被采纳。
+   *
    * @param { int } code - 有序公共事件传递的数据。
    * @param { string } data - 有序公共事件传递的数据，长度不超过65536字符，若超过限制，接口设置失效。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -252,6 +330,10 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为有序公共事件。使用callback异步回调。
    *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；退订后调用时不抛出错误，而是通过callback或Promise返回false。
+   *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示有序公共事件，data为false表示不是有序公共事件；否则err
    *     为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -265,6 +347,10 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为有序公共事件。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；退订后调用时不抛出错误，返回false。
+   *
    * @returns { Promise<boolean> } Promise对象。返回true表示有序公共事件；返回false表示
    *     [无序公共事件](docroot://basic-services/common-event/common-event-glossary.md#unordered-common-event无序公共事件)。
    * @syscap SystemCapability.Notification.CommonEvent
@@ -276,6 +362,10 @@ export interface CommonEventSubscriber {
   /**
    * 同步查询当前公共事件是否为有序公共事件。
    *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；退订后调用时不抛出错误，返回false。
+   *
    * @returns { boolean } 返回true表示有序公共事件；返回false表示无序公共事件。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
@@ -285,6 +375,10 @@ export interface CommonEventSubscriber {
 
   /**
    * 查询当前公共事件是否为一个粘性公共事件。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；在接收回调外或退订后调用时不抛出错误，但通过callback或Promise返回的结果不可靠。
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示是粘性公共事件，data为false表示不是粘性公共事件；否则
    *     err为错误对象。
@@ -299,6 +393,10 @@ export interface CommonEventSubscriber {
   /**
    * 查询当前公共事件是否为一个粘性公共事件。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；在接收回调外或退订后调用时不抛出错误，但返回值不可靠。
+   *
    * @returns { Promise<boolean> } Promise对象。返回true表示是粘性公共事件；返回false表示不是粘性公共事件。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
@@ -308,6 +406,10 @@ export interface CommonEventSubscriber {
 
   /**
    * 同步检查当前公共事件是否为一个粘性公共事件。
+   *
+   * > **说明：**
+   * >
+   * > 仅当在公共事件接收回调（onReceiveEvent）中调用时，本接口才能如实反映当前公共事件；在接收回调外或退订后调用时不抛出错误，但返回值不可靠。
    *
    * @returns { boolean } 返回true表示是粘性公共事件；返回false表示不是粘性公共事件。
    * @syscap SystemCapability.Notification.CommonEvent
@@ -320,6 +422,10 @@ export interface CommonEventSubscriber {
    * 添加有序公共事件的中止状态。当该接口与
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当添加有序公共事件中止状态成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -335,6 +441,10 @@ export interface CommonEventSubscriber {
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   *
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
@@ -347,6 +457,10 @@ export interface CommonEventSubscriber {
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以中止当前的有序公共事
    * 件，使该公共事件不再向下一个订阅者传递。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
    * @since 23 static
@@ -357,6 +471,10 @@ export interface CommonEventSubscriber {
    * 清理有序公共事件的中止状态。当该接口与
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当清理有序公共事件中止状态成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -372,6 +490,10 @@ export interface CommonEventSubscriber {
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   *
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
@@ -384,6 +506,10 @@ export interface CommonEventSubscriber {
    * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}配合使用时，可以使该公共事件继续向下
    * 一个订阅者传递。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但设置不生效。
+   *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
    * @since 23 static
@@ -392,6 +518,10 @@ export interface CommonEventSubscriber {
 
   /**
    * 获取当前有序公共事件是否处于中止状态。使用callback异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，而是通过callback或Promise返回默认值false。
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。当查询成功时，err为undefined，data为true表示当前有序公共事件处于中止状态，data为false表示当前有序公共
    *     事件未处于中止状态；否则err为错误对象。
@@ -406,6 +536,10 @@ export interface CommonEventSubscriber {
   /**
    * 获取当前有序公共事件是否处于中止状态。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值false。
+   *
    * @returns { Promise<boolean> } Promise对象。返回true表示当前有序公共事件处于中止状态；返回false表示当前有序公共事件未处于中止状态。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
@@ -415,6 +549,10 @@ export interface CommonEventSubscriber {
 
   /**
    * 同步获取当前有序公共事件是否处于中止状态。
+   *
+   * > **说明：**
+   * >
+   * > 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，返回默认值false。
    *
    * @returns { boolean } 返回true表示当前有序公共事件处于中止状态；返回false表示当前有序公共事件未处于中止状态。
    * @syscap SystemCapability.Notification.CommonEvent
@@ -491,6 +629,11 @@ export interface CommonEventSubscriber {
   /**
    * 用于订阅者结束对当前有序公共事件的处理。使用callback异步回调。
    *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但调用不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。超时后系统将自动结束当前订阅者的处理并向下一优先级订阅者投递该事件，且不会通知当前订阅者；此后调用本接口不会报错，但不会生效。
+   *
    * @param { AsyncCallback<void> } callback - 回调函数。当订阅者结束当前有序公共事件成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -502,6 +645,11 @@ export interface CommonEventSubscriber {
 
   /**
    * 用于订阅者结束对当前有序公共事件的处理。使用Promise异步回调。
+   *
+   * > **说明：**
+   * >
+   * > - 本接口仅在有序公共事件的接收回调内调用有效。在无序公共事件回调内或退订后调用时不抛出错误，但调用不生效。
+   * > - 有序公共事件对每个订阅者的处理时长上限为10秒。超时后系统将自动结束当前订阅者的处理并向下一优先级订阅者投递该事件，且不会通知当前订阅者；此后调用本接口仍会返回成功，但实际不会生效。
    *
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @syscap SystemCapability.Notification.CommonEvent
