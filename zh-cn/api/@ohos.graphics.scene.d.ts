@@ -128,3 +128,10 @@ export { ShadowAlgorithmType } from './graphics3d/SceneTypes';
  * @since 26.0.0 dynamic&static
  */
 export { SoftShadowConfig, PCFConfig } from './graphics3d/Scene';
+
+/**
+ * 导出场景节点
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @since 26.1.0 dynamic&static
+ */
+export { PointLight, RectLight } from './graphics3d/SceneNodes';
