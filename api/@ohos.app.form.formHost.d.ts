@@ -1799,9 +1799,8 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } callback - Callback function used by the widget host to process the
    *     request and return the position and dimension of the widget relative to the upper-left corner of the screen.
    *     The unit is vp.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -1821,9 +1820,8 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } [callback] - Callback function used by the widget host to process the
    *     request and return the position and dimension of the widget relative to the upper-left corner of the screen.
    *     The unit is vp.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
