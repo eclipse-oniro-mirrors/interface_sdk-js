@@ -1012,7 +1012,7 @@ declare enum SwiperDisplayMode {
  * > **NOTE**
  * >
  * > - The **Swiper** component implements the scrolling carousel effect through the built-in
- * > [PanGesture]{@link ./gesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
+ * > [PanGesture]{@link @global:@PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
  * > to **true**, the gesture listening is disabled, thereby preventing the scrolling operation.
  * >
  * > - When [NodeContainer]{@link ./node_container} is reused in the **Swiper** component, recursive updates of parent
@@ -1616,7 +1616,7 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    * >
    * > An externally bound navigation indicator component can be used together if it is set. The display position and
    * > size can be customized for the external navigation indicator. For details, see
-   * > [Indicator]{@link ./indicatorcomponent}.
+   * > [Indicator]{@link @global:IndicatorComponent}.
    *
    * @param { IndicatorComponentController | DotIndicator | DigitIndicator | boolean } indicator - Style of the
    *     navigation indicator.
@@ -2697,7 +2697,7 @@ declare type ContentWillScrollCallback = (result: SwiperContentWillScrollResult)
  * > **NOTE**
  * >
  * > - The **Swiper** component implements the scrolling carousel effect through the built-in
- * > [PanGesture]{@link ./gesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
+ * > [PanGesture]{@link @global:@PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
  * > to **true**, the gesture listening is disabled, thereby preventing the scrolling operation.
  * >
  * > - When [NodeContainer]{@link ./node_container} is reused in the **Swiper** component, recursive updates of parent
