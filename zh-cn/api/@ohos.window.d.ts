@@ -1711,7 +1711,7 @@ declare namespace window {
     globalDisplayRect?: Rect;
 
     /**
-     * Indicates the ID of the display where the window is located.
+     * 窗口所在屏幕的ID。默认返回主屏幕ID，该参数为整数。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -1895,8 +1895,7 @@ declare namespace window {
     type: WindowType;
 
     /**
-     * 含义：窗口类型
-     * 使用场景：判断当前窗口主窗口还是子窗口等
+     * 窗口类型，默认值是[TYPE_MAIN]{@link window.WindowType.TYPE_MAIN}。
      *
      * @type { ?WindowType }
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -1966,7 +1965,7 @@ declare namespace window {
     /**
      * 下层窗口的暗度值。该参数为浮点数，取值范围为[0.0, 1.0]，其取1.0表示最暗。
      * 
-     * **说明：** 从API version 7开始支持，从API version 9开始废弃，当前无可替代接口。
+     * **说明：** 从API版本7开始支持，从API版本9开始废弃，当前无可替代接口。
      *
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
@@ -10481,7 +10480,7 @@ declare namespace window {
      * [setWindowPrivacyMode]{@link window.Window.setWindowPrivacyMode(isPrivacyMode: boolean, callback: AsyncCallback<void>)}
      * 接口设置），截图结果为白屏。
      *
-     * @returns { Promise<image.PixelMap> } Promise used to return the window screenshot.
+     * @returns { Promise<image.PixelMap> } Promise对象。返回当前窗口截图。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: 1. The window is not created or destroyed;
      *     2. Get pixelMap failed;
@@ -10520,7 +10519,7 @@ declare namespace window {
      * [setWindowPrivacyMode]{@link window.Window.setWindowPrivacyMode(isPrivacyMode: boolean, callback: AsyncCallback<void>)}
      * 接口设置），仍可调用本接口返回当前窗口截图。
      *
-     * @returns { Promise<image.PixelMap> } Promise used to return the window screenshot.
+     * @returns { Promise<image.PixelMap> } Promise对象。返回当前窗口截图。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function snapshotIgnorePrivacy can not work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -11312,6 +11311,36 @@ declare namespace window {
      * @since 26.0.0 dynamic&static
      */
     maximizeWithOptions(maximizeOptions?: MaximizeOptions): Promise<void>;
+
+    /**
+     * 设置主窗或子窗支持的窗口模式，使用Promise异步回调。
+     *
+     * @param { Array<bundleManager.SupportWindowMode> } supportedWindowModes - 设置主窗的窗口支持模式。
+     *    <br>- FULL_SCREEN：支持全屏模式。<br>- FLOATING：支持自由悬浮窗口模式。<br>- SPLIT：支持分屏模式。
+     *    需要配合FULL_SCREEN或FLOATING一起使用，不支持仅配置SPLIT。
+     *    <br> 注：数组中SupportWindowMode字段取值不应该与该UIAbility对应的
+     *    [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中
+     *    [abilities标签](docroot://quick-start/module-configuration-file.md#abilities)的supportWindowMode字段取值或者
+     *    [StartOptions]{@link @ohos.app.ability.StartOptions:StartOptions}的
+     *    supportWindowModes属性取值冲突。当取值冲突时，最终以该参数设置的窗口支持模式为准。
+     * @returns { Promise<void> } 无返回结果的Promise对象。
+     * @throws { BusinessError } 801 - Capability not supported.
+     *     Failed to call the API due to limited device capabilities.
+     * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
+     *     1. The window is not created or destroyed.
+     *     2. Internal task error.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     * @throws { BusinessError } 1300004 - Unauthorized operation. Possible cause:
+     *     1. Only main windows and subwindows are supported.
+     *     2. Not supported when subwindows are set to follow the main window.
+     * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
+     *     1. When called on a main window, the parameter should not only contain SPLIT.
+     *     2. When called on a sub window, the parameter should not contain SPLIT.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.0.0 dynamic&static
+     */
+    setSupportedWindowModes(supportedWindowModes: Array<bundleManager.SupportWindowMode>): Promise<void>;
 
     /**
      * 禁止/使能通过拖拽方式缩放主窗口或启用装饰的子窗口的功能。使用callback异步回调。
@@ -14483,6 +14512,7 @@ declare namespace window {
 
     /**
      * 窗口透明度。有效值范围为[0.0, 1.0]，0.0表示完全透明，1.0表示完全不透明。默认值是-1.0，表示未查询到窗口透明度或者查询失败。
+     * <br>说明：本透明度非窗口背景色透明度（可通过[setWindowBackgroundColor()]{@link window.Window.setWindowBackgroundColor}接口设置）。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
