@@ -31,13 +31,11 @@ declare namespace pinAuth {
    * 设置PIN有效期。设置策略后，当口令过期时，会弹出安全提示要求用户重置口令。
    *
    * @permission ohos.permission.USE_USER_ACCESS_MANAGER
-   * @param { int } userId - 用户ID。如果取值为0，则表示该策略对所有用户生效，否则表示该策略对所有用户生效。
-   *     对指定用户生效。
+   * @param { int } userId - 用户ID。如果取值为0，则表示该策略对所有用户生效，否则表示该策略对对指定用户生效。
    *     <br>取值限定为整数。
-   * @param { long } validityPeriod - PIN码有效时间，单位：毫秒。
-   *     <br>Unit: milliseconds.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @param { long } validityPeriod - PIN码有效时间，单位：毫秒。合法有效值为大于等于0并且小于2的50次方的整数。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -53,9 +51,9 @@ declare namespace pinAuth {
    * @permission ohos.permission.USE_USER_ACCESS_MANAGER
    * @param { int } userId - 用户ID。
    *     <br>取值限定为整数。
-   * @returns { long | undefined } PIN码有效时间，单位为毫秒。如果没有为指定用户设置有效期，则返回undefined。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @returns { long | undefined } PIN码有效时间，单位为毫秒。如果没有为指定用户设置有效期或者设置有效期为0，则返回undefined。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -73,8 +71,8 @@ declare namespace pinAuth {
    * @param { int } userId - 用户ID。如果取值为0，则对所有用户生效，否则对指定用户生效。
    *     <br>取值限定为整数。
    * @param { boolean } isDisabled - 是否禁用PIN删除功能。True表示禁用。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -90,9 +88,9 @@ declare namespace pinAuth {
    * @permission ohos.permission.USE_USER_ACCESS_MANAGER
    * @param { int } userId - 用户ID。
    *     <br>取值限定为整数。
-   * @returns { boolean | undefined } 如果禁用PIN删除功能，则返回True；否则返回false。如果尚未为指定用户设置启用状态，则返回undefined。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @returns { boolean | undefined } 如果禁用PIN删除功能，则返回true；否则返回false。如果尚未为指定用户设置启用状态，则返回undefined。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -103,46 +101,7 @@ declare namespace pinAuth {
   function getPinDeletionDisabledState(userId: int): boolean | undefined;
 
   /**
-   * 设置更改PIN时要检查的最近历史PIN数。
-   * 设置策略后，用户不能重用任何指定数量的
-   * 更改PIN时的最新历史PIN。
-   *
-   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
-   * @param { int } userId - 用户ID。如果取值为0，则对所有用户生效，否则对指定用户生效。
-   *     <br>取值限定为整数。
-   * @param { int } historyRange - 要检查的最近历史PIN的数量。取值范围为0~5。
-   *     <br>取值限定为整数。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
-   * @throws { BusinessError } 12500002 - General operation error.
-   * @throws { BusinessError } 12500008 - The parameter is out of range.
-   * @syscap SystemCapability.UserIAM.UserAuth.Core
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function setPinHistoryCheckRange(userId: int, historyRange: int): void;
-
-  /**
-   * 获取更改PIN时要检查的最近历史PIN数。
-   *
-   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
-   * @param { int } userId - 用户ID。
-   *     <br>取值限定为整数。
-   * @returns { int | undefined } 要检查的最近历史PIN数。如果尚未为指定的用户设置历史检查范围，则返回undefined。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
-   * @throws { BusinessError } 12500002 - General operation error.
-   * @throws { BusinessError } 12500008 - The parameter is out of range.
-   * @syscap SystemCapability.UserIAM.UserAuth.Core
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function getPinHistoryCheckRange(userId: int): int | undefined;
-
-  /**
-   * 引脚复杂度检查策略及说明。
+   * PIN码复杂度检查策略及说明。
    *
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -151,7 +110,7 @@ declare namespace pinAuth {
    */
   interface PinComplexityPolicy {
     /**
-     * PIN复杂度检查正则表达式。
+     * PIN码复杂度检查正则表达式。
      *
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @systemapi Hide this for inner system use.
@@ -178,8 +137,8 @@ declare namespace pinAuth {
    * @param { int } userId - 用户ID。如果取值为0，则对所有用户生效，否则对指定用户生效。
    *     <br>取值限定为整数。
    * @param { PinComplexityPolicy } policy - PIN码复杂度检查策略及说明。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -195,9 +154,10 @@ declare namespace pinAuth {
    * @permission ohos.permission.USE_USER_ACCESS_MANAGER
    * @param { int } userId - 用户ID。
    *     <br>取值限定为整数。
-   * @returns { PinComplexityPolicy | undefined } PIN码复杂度检查策略及说明。如果尚未为指定的用户设置复杂度策略，则返回undefined。
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @returns { PinComplexityPolicy | undefined } PIN码复杂度检查策略及说明。如果尚未为指定的用户设置复杂度策略或者为指定
+   *     用户同时设置的正则表达式和空的正则表达式描述均为空，则返回undefined。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core

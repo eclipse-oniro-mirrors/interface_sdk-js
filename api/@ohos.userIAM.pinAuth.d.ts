@@ -38,9 +38,10 @@ declare namespace pinAuth {
    *     takes effect for the specified user.
    *     <br>The value should be an integer.
    * @param { long } validityPeriod - PIN validity period, in milliseconds.
+   *     Valid values must be greater than or equal to 0 and less than 2^50.
    *     <br>Unit: milliseconds.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -56,10 +57,10 @@ declare namespace pinAuth {
    * @permission ohos.permission.USE_USER_ACCESS_MANAGER
    * @param { int } userId - User ID.
    *     <br>The value should be an integer.
-   * @returns { long | undefined } Validity period of a PIN, in milliseconds. If no validity period is set for the
-   *     specified subscriber, undefined is returned.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @returns { long | undefined } Validity period of a PIN, in milliseconds. If no validity period or zero is set for the
+   *     specified userId, or if the validity period is set to 0, undefined is returned.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -78,8 +79,8 @@ declare namespace pinAuth {
    *     takes effect for the specified user.
    *     <br>The value should be an integer.
    * @param { boolean } isDisabled - Whether the PIN deletion feature is disabled. True means disabled.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -97,8 +98,8 @@ declare namespace pinAuth {
    *     <br>The value should be an integer.
    * @returns { boolean | undefined } True if the PIN deletion feature is disabled, false otherwise.Returns undefined if
    *     the enabled state has not been set for the specified user.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -107,47 +108,6 @@ declare namespace pinAuth {
    * @since 26.1.0 dynamic&static
    */
   function getPinDeletionDisabledState(userId: int): boolean | undefined;
-
-  /**
-   * Sets the number of recent historical PINs to check when the PIN is changed.
-   * After the policy is set, the user cannot reuse any of the specified number of
-   * most recent historical PINs when changing the PIN.
-   *
-   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
-   * @param { int } userId - User ID. If the value is 0, the policy takes effect for all users; otherwise, the policy
-   *     takes effect for the specified user.
-   *     <br>The value should be an integer.
-   * @param { int } historyRange - The number of recent historical PINs to check. The value ranges from 0 to 5.
-   *     <br>The value should be an integer.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
-   * @throws { BusinessError } 12500002 - General operation error.
-   * @throws { BusinessError } 12500008 - The parameter is out of range.
-   * @syscap SystemCapability.UserIAM.UserAuth.Core
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function setPinHistoryCheckRange(userId: int, historyRange: int): void;
-
-  /**
-   * Gets the number of recent historical PINs to check when the PIN is changed.
-   *
-   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
-   * @param { int } userId - User ID.
-   *     <br>The value should be an integer.
-   * @returns { int | undefined } The number of recent historical PINs to check. Returns undefined if the history check
-   *     range has not been set for the specified user.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
-   * @throws { BusinessError } 12500002 - General operation error.
-   * @throws { BusinessError } 12500008 - The parameter is out of range.
-   * @syscap SystemCapability.UserIAM.UserAuth.Core
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function getPinHistoryCheckRange(userId: int): int | undefined;
 
   /**
    * PIN complexity check policy and description.
@@ -188,8 +148,8 @@ declare namespace pinAuth {
    *     takes effect for the specified user.
    *     <br>The value should be an integer.
    * @param { PinComplexityPolicy } policy - PIN complexity check policy and description.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -206,9 +166,10 @@ declare namespace pinAuth {
    * @param { int } userId - User ID.
    *     <br>The value should be an integer.
    * @returns { PinComplexityPolicy | undefined } PIN complexity check policy and description. Returns undefined if no
-   *     complexity policy has been set for the specified user.
-   * @throws { BusinessError } 201 - Permission denied.The caller does not have the required permission.
-   * @throws { BusinessError } 202 - Permission denied.The caller is not a system application.
+   *     complexity policy has been set for the specified user or if both an empty regular expression and an empty regular
+   *     expression description are set for the specified user.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
