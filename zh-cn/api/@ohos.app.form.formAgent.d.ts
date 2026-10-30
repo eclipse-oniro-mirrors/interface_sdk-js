@@ -166,7 +166,7 @@ declare namespace formAgent {
    *
    * @param { string } formId - 卡片id。
    * @returns { Promise<formInfo.Rect> } Promise对象，返回卡片相对于屏幕左上角的位置和尺寸，单位为 vp。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.

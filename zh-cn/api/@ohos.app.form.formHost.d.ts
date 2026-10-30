@@ -1707,8 +1707,9 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } callback - widget host处理的回调函数。
    *     请求并返回小部件相对于屏幕左上角的位置和尺寸。
    *     单位为vp。
-   * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -1727,8 +1728,9 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } [callback] - 含义:事件类型-获取可见卡片区域
    *     使用场景：卡片使用方向FMS反注册获取可见卡片的区域的回调
    *     使用后效果：FMS会清理记录的回调。
-   * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form

@@ -172,7 +172,7 @@ declare namespace formAgent {
    * @param { string } formId - Widget ID.
    * @returns { Promise<formInfo.Rect> } Promise used to return the position and dimension of the widget relative to the
    *     upper-left corner of the screen, in vp.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
