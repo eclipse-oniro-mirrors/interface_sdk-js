@@ -8757,7 +8757,7 @@ declare namespace media {
      * Releases resources used for video recording.
      *
      * @returns { Promise<void> } A Promise instance used to return when release completed.
-     * @throws { BusinessError } 5400105 - Service died. Return by callback.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @throws { BusinessError } 202 - Not System App. [since 12]
      * @syscap SystemCapability.Multimedia.Media.VideoRecorder
      * @systemapi
