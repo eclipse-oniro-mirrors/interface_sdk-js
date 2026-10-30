@@ -1104,38 +1104,31 @@ declare namespace window {
     layoutMeasureDuration: long;
 
     /**
-     * 当前帧的开始时间戳（单位：纳秒）。
+     * 渲染该帧并将其发送至显示子系统所需的总耗时（单位：纳秒）。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @since 22 dynamic
-     * @since 23 static
-     */
-    vsyncTimestamp: long;
-
-    /**
-     * 一帧从开始渲染到最终提交显示子系统的总耗时（单位：纳秒）。
-     *
-     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    totalDuration: long;
+    totalDuration?: long;
 
     /**
-     * 一帧中的执行动画回调耗时（单位：纳秒）。
+     * 当前帧预期的垂直同步（VSync）起始时间戳（单位：纳秒）。
      *
      * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    animationDuration: long;
+    intendedVsyncTimestamp?: long;
 
     /**
-     * 当前帧预期的垂直同步（VSync）起始时间戳。
+     * 一帧中执行所有动画回调的总耗时（单位：纳秒）。
      *
      * @syscap SystemCapability.Window.SessionManager
-     * @since 22 dynamic
-     * @since 23 static
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
      */
-    intendedVsyncTimestamp: long;
+    animationDuration?: long;
   }
 
   /**
