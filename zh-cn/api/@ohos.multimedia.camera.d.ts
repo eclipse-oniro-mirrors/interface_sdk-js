@@ -1803,14 +1803,10 @@ declare namespace camera {
 
     /**
      * 折叠态相机。
-     * 
-     * 从API版本11开始支持，从API版本12开始废弃。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
-     * @atomicservice [since 12]
      * @since 11 dynamiconly
      * @deprecated since 12
-     * @useinstead null
      * @useinstead null
      */
     CAMERA_POSITION_FOLD_INNER = 3
@@ -3130,9 +3126,7 @@ declare namespace camera {
     /**
      * 手动曝光。支持设置曝光时长。
      * 
-     * 设置该模式后，用户可通过
-     * [ManualExposure.setExposureDuration](docroot://reference/apis-camera-kit/arkts-apis-camera-ManualExposure.md#setexposureduration24)
-     * 设置曝光时长。
+     * 设置该模式后，用户可通过{@link camera.ManualExposure.setExposureDuration}设置曝光时长。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @systemapi [since 12 - 23]
@@ -17345,7 +17339,7 @@ declare namespace camera {
    */
   enum OISAxes {  
     /**
-     * 俯仰轴。相控制相机机身上下旋转，即机身围绕与镜头水平方向的轴旋转。
+     * 俯仰轴。控制相机机身上下旋转，即机身围绕与镜头水平方向的轴旋转。
      *
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
