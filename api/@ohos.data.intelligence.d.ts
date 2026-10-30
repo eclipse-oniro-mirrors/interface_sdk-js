@@ -46,10 +46,10 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - Configuration of the embedded model to obtain.
    * @returns { Promise<TextEmbedding> } Promise used to return the text embedding model for text vectorization.
-   * @throws { BusinessError } 401 - [sync] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
@@ -67,11 +67,12 @@ declare namespace intelligence {
    *
    * @param { ModelConfig } config - Configuration of the embedded model to obtain.
    * @returns { Promise<ImageEmbedding> } Promise used to return the image embedding model for image vectorization.
-   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
-   * c    apability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic
@@ -182,8 +183,8 @@ declare namespace intelligence {
 
     /**
      * Type and version information of the cloud-side model. Configure this parameter when a text embedding model is
-     * used. The supported model information is obtained through the {@link getSupportedCloudModel} API. The default
-     * value is empty.
+     * used. The supported model information is obtained through the {@link intelligence.getSupportedCloudModel } API.
+     * The default value is empty.
      *
      * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
      * @stagemodelonly
@@ -379,7 +380,7 @@ declare namespace intelligence {
      * device types.
      *
      * @param { Image } image - URI of the input image for the embedding model.
-     * @returns { Promise<Array<double>> } TPromise used to return the vectorization result.
+     * @returns { Promise<Array<double>> } Promise used to return the vectorization result.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
      *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 31300000 - Inner error.
@@ -408,13 +409,13 @@ declare namespace intelligence {
    * device types, error code 801 is returned.
    *
    * @param { string } text - Text to be chunked. The maximum length of a single text is 100000 characters. An exception
-   * is thrown when the length exceeds the limit.
+   *     is thrown when the length exceeds the limit.
    * @param { SplitConfig } config - Configuration for splitting the text.
    * @returns { Promise<Array<string>> } Promise object that returns an array of chunking results.
-   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types.
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.

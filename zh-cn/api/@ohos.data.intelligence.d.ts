@@ -34,7 +34,7 @@ declare namespace intelligence {
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<TextEmbedding> } Promise对象，返回文本嵌入模型，用于文本向量化。
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
-   * capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic
@@ -48,7 +48,7 @@ declare namespace intelligence {
    * @param { ModelConfig } config - 嵌入模型的配置信息。
    * @returns { Promise<ImageEmbedding> } Promise对象，返回图像嵌入模型，用于图像向量化。
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
-   * capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic
@@ -338,7 +338,7 @@ declare namespace intelligence {
    * @param { SplitConfig } config - 文本分块的配置信息。
    * @returns { Promise<Array<string>> } Promise对象，返回分块结果的数组。
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
-   * capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 31300000 - Inner error.
    * @syscap SystemCapability.DistributedDataManager.DataIntelligence.Core
    * @since 15 dynamic

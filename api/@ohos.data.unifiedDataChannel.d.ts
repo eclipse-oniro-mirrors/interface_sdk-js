@@ -94,10 +94,10 @@ declare namespace unifiedDataChannel {
    * supported.
    *
    * @param { string } type - Identifier of the deferred data type, used to distinguish different types of data. For the
-   * values, see [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}. For
-   * example, 'general.plain-text' indicates the plain text type.
+   *     values, see [UniformDataType]{@link @ohos.data.uniformTypeDescriptor:uniformTypeDescriptor.UniformDataType}.
+   *     For example, 'general.plain-text' indicates the plain text type.
    * @returns { UnifiedData } UnifiedData object that contains the data of the corresponding type and is returned when
-   * the deferred callback is triggered. It can be used for cross-application data sharing and transfer.
+   *     the deferred callback is triggered. It can be used for cross-application data sharing and transfer.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -311,7 +311,7 @@ declare namespace unifiedDataChannel {
     /**
      * URI authorization policies for the drag-and-drop scenario. The default value is READ+WRITE+PERSIST. This field
      * takes effect only for a single data operation and has a lower priority. For details about the policies,
-     * see {@link UriPermission}.
+     * see {@link unifiedDataChannel.UriPermission}.
      *
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
@@ -337,7 +337,7 @@ declare namespace unifiedDataChannel {
      * containing the specified data record is returned.
      *
      * @param { UnifiedRecord } record - Data record to add to the unified data object. The record is a UnifiedRecord
-     * object or an object of its subclass.
+     *     object or an object of its subclass.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -362,7 +362,7 @@ declare namespace unifiedDataChannel {
      * is added to the current unified data object.
      *
      * @param { UnifiedRecord } record - Data record to add to the unified data object. The record is a UnifiedRecord
-     * object or an object of its subclass.
+     *     object or an object of its subclass.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -374,11 +374,11 @@ declare namespace unifiedDataChannel {
     /**
      * Obtains all data records in the current unified data object. The data obtained through this API is of the
      * UnifiedRecord type. You need to obtain the data type through
-     * [getType]{@link unifiedDataChannel.UnifiedRecord.getType} and then convert it to a subclass before use.
+     * [getType]{@link unifiedDataChannel.UnifiedRecord#getType} and then convert it to a subclass before use.
      *
      * @returns { Array<UnifiedRecord> } Array of all data records contained in the current unified data object. Each
-     * record can be converted to a specific subclass after its type is obtained through getType, for reading and
-     * processing various types of data in the unified data.
+     *     record can be converted to a specific subclass after its type is obtained through getType, for reading and 
+     *     processing various types of data in the unified data.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @crossplatform [since 14]
@@ -820,7 +820,7 @@ declare namespace unifiedDataChannel {
     /**
      * Plain text abstract. This is an optional field, and the default value is an empty string.
      *
-     * @param { string | undefined } the abstract of text
+     * @param { string | undefined } the abstract of text.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
      * @stagemodelonly
      * @since 23 static
@@ -968,7 +968,7 @@ declare namespace unifiedDataChannel {
     /**
      * URI authorization policy used in drag-and-drop scenarios. The default value is READ (read-only authorization),
      * which takes effect only in scenarios such as the img tag. It applies only to a single record and has the highest
-     * priority. For details about the policies, see {@link UriPermission}.
+     * priority. For details about the policies, see {@link unifiedDataChannel.UriPermission}.
      *
      * @param { Array<UriPermission> | undefined } value - URI authorization policies.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -1086,7 +1086,7 @@ declare namespace unifiedDataChannel {
     /**
      * URI authorization policy used in drag-and-drop scenarios. The default value is READ+WRITE+PERSIST
      * (read + write + persistent authorization). It applies only to a single record and has the highest priority. For
-     * details about the policies, see {@link UriPermission}.
+     * details about the policies, see {@link unifiedDataChannel.UriPermission}.
      *
      * @param { Array<UriPermission> | undefined } value - URI authorization policies.
      * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -2078,6 +2078,9 @@ declare namespace unifiedDataChannel {
   /**
    * Represents the parameters used to obtain data from UDMF, including the destination path, file conflict options, and
    * progress bar type.
+   * 
+   * For details about how to use it, see 
+   * [Obtaining Data Asynchronously Through Drag-and-Drop].
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
@@ -2222,8 +2225,8 @@ declare namespace unifiedDataChannel {
    *
    * @param { DataLoadInfo } [acceptableInfo] - Data types and quantity that the data receiver can accept. The default
    *     value is empty.
-   * @returns { Promise<UnifiedData | null> } Promise object. When resolved, it returns the UnifiedData object generated
-   *     based on the receiver information, or null. When rejected, it returns the error information.
+   * @returns { Promise<UnifiedData | null> } Promise used to return the UnifiedData object generated based on the
+   *     receiver information, or null. Rejects with error information on failure.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice
@@ -2297,10 +2300,10 @@ declare namespace unifiedDataChannel {
    *     attribute information.
    * @param { AsyncCallback<string> } callback - Callback invoked to return the unique identifier key of the data
    *     written to the UDMF.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2314,14 +2317,14 @@ declare namespace unifiedDataChannel {
    * promise to return the result asynchronously.
    *
    * @param { Options } options - Configuration options. The **intention** field is mandatory and does not support DRAG.
-   * If it is not specified, error code 401 is returned. Whether other fields are specified does not affect the use of
-   * this API
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   *     If it is not specified, error code 401 is returned. Whether other fields are specified does not affect the use
+   *     of this API
    * @param { UnifiedData } data - Target data.
    * @returns { Promise<string> } Promise used to return the unique identifier key of the data written to UDMF.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2338,12 +2341,12 @@ declare namespace unifiedDataChannel {
    *     error code 401 is returned. The **intention** parameter supports only DATA_HUB. Whether other fields are
    *     specified does not affect the use of this API.
    * @param { UnifiedData } data - Target data.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the data is updated successfully,
-   *     **err** is **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @param { AsyncCallback<void> } callback Callback used to return the result. If the data update is successful, 
+   *     **err** is **undefined**. Otherwise, **err** is an error object.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2353,13 +2356,18 @@ declare namespace unifiedDataChannel {
   function updateData(options: Options, data: UnifiedData, callback: AsyncCallback<void>): void;
 
   /**
-   * Updates the data in the public data channel that has been written to UDMF. This API uses a promise to return the result.
+   * Updates the data in the public data channel that has been written to UDMF. 
+   * This API uses a promise to return the result.
    *
    * @param { Options } options - Configuration options. The **key** field is mandatory. If it is not specified, error
    *     code 401 is returned. The **intention** parameter supports only DATA_HUB. Other fields do not affect the use of
    *     this API.
    * @param { UnifiedData } data - Target data.
    * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2378,10 +2386,10 @@ declare namespace unifiedDataChannel {
    *     options, all data under the intention is returned.<br>If both intention and key are specified, the intersection
    *     of the data queried by the two is returned, which is consistent with the result obtained when only key is
    *     specified in options. If there is no intersection, an error is reported.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2396,15 +2404,14 @@ declare namespace unifiedDataChannel {
    * @param { Options } options - Configuration parameters. Both key and intention are optional, and the intention
    *     parameter does not support DRAG. Corresponding verification is performed based on the passed parameters to
    *     return different values.
-   * @returns { Promise<Array<UnifiedData>> } Promise object used to return all the queried data.<br>If key is specified
-   *     in options, the data corresponding to the key is returned.<br>If intention is specified in options, all data
-   *     under the intention is returned.<br>If both intention and key are specified, the intersection of the two query
-   *     results is returned, which is consistent with the result obtained when only key is specified in options. An
-   *     error is reported if there is no intersection.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @returns { Promise<Array<UnifiedData>> } Promise used to return the queried data. When a key is specified in
+   *     options, the data corresponding to the key is returned. When an intention is specified, all data under that
+   *     intention is returned. When both are specified, the intersection of the two query results is returned;
+   *     the promise rejects if no intersection exists.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2425,10 +2432,10 @@ declare namespace unifiedDataChannel {
    *     specified in options, all data under the intention is deleted and returned.<br>If both intention and key are
    *     specified, the intersection of the two is deleted and returned, which is consistent with the result when only
    *     key is specified in options; an error is reported if there is no intersection.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2448,10 +2455,10 @@ declare namespace unifiedDataChannel {
    *     data under intention is deleted and returned.<br>If both intention and key are specified, the intersection of
    *     the two data sets is deleted and returned, which is the same as the result when only key is specified in
    *     options. An error is reported if there is no intersection.
-   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-   *     1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types;
-   *     3. Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes: 
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
    * @stagemodelonly
    * @atomicservice [since 11]
@@ -2473,10 +2480,10 @@ declare namespace unifiedDataChannel {
     *     [UnifiedData]{@link unifiedDataChannel.UnifiedDataProperties} within the device.
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
-    * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-    *     1. Mandatory parameters are left unspecified;
-    *     2. Incorrect parameter types;
-    *     3. Parameter verification failed.
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+    *     <br>1. Mandatory parameters are left unspecified;
+    *     <br>2. Incorrect parameter types;
+    *     <br>3. Parameter verification failed. 
     * @throws { BusinessError } 20400001 - Settings already exist. To reconfigure, remove the existing sharing options.
     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
     *      required to call the API. [since 14]
@@ -2496,12 +2503,12 @@ declare namespace unifiedDataChannel {
     * @permission ohos.permission.MANAGE_UDMF_APP_SHARE_OPTION [since 14]
     * @param { Intention } intention - Data channel type related to the data operation. Currently, only the DRAG data
     *     channel is supported.
-    * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
-    *     1. Mandatory parameters are left unspecified;
-    *     2. Incorrect parameter types;
-    *     3. Parameter verification failed.
     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
     *     API. [since 12 - 13]
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes: 
+    *     <br>1. Mandatory parameters are left unspecified;
+    *     <br>2. Incorrect parameter types;
+    *     <br>3. Parameter verification failed.
     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
     *     required to call the API. [since 14]
     * @syscap SystemCapability.DistributedDataManager.UDMF.Core

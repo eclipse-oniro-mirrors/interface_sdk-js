@@ -2477,7 +2477,7 @@ declare namespace uniformTypeDescriptor {
    * uniform data type IDs matching the conditions, the first one is returned.
    *
    * @param { string } filenameExtension - File name extension, which must contain a dot, for example, '.ts' and '.jpg'.
-   * @param { string } [belongsTo] - D of the belonging type of the uniform data type to query, used to limit the query
+   * @param { string } [belongsTo] - ID of the belonging type of the uniform data type to query, used to limit the query
    *     scope. Pass this parameter when you need to query data types under a specific belonging type. There is no
    *     default value. If this parameter is not passed, the [uniform data type ID] is queried only by the file name
    *     extension.
@@ -2503,7 +2503,7 @@ declare namespace uniformTypeDescriptor {
    * @param { string } [belongsTo] - ID of the uniform data type, to which the data type to be obtained belongs. This
    *     parameter has no default value. If it is not specified, the [uniform data type ID] is queried based on the MIME
    *     name.
-   * @returns { string } IID of the uniform data type that matches the specified MIME type and **belongsTo** (if
+   * @returns { string } ID of the uniform data type that matches the specified MIME type and **belongsTo** (if
    *     specified). If no match is found, the data type dynamically generated based on the rules specified by the input
    *     parameters is returned.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -2540,7 +2540,7 @@ declare namespace uniformTypeDescriptor {
    * @param { string } [belongsTo] - ID of the uniform data type, to which the data type to be obtained belongs. This
    *     parameter has no default value. If it is not specified, the  [uniform data type ID] is queried based on the
    *     MIME name.
-   * @returns { Array<string> }Uniform data type IDs that match the specified MIME type and **belongsTo**
+   * @returns { Array<string> }Uniform data type IDs that match the specified MIME type and **belongsTo** 
    *     (if specified). If no match is found, the data types dynamically generated based on the rules specified
    *     by the input parameters are returned.
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -2561,23 +2561,24 @@ declare namespace uniformTypeDescriptor {
    *     **TypeDescriptor** is used to describe the attributes of a custom data type, including the type ID, belonging
    *     types, file name extensions, MIME types, and so on. The list cannot be empty, and the number of elements cannot
    *     xceed 50. The total number of uniform data type descriptors registered by a single application cannot exceed
-   *     200.<br>
-   *     **TypeDescriptor format requirements**<br>
-   *     1. typeId cannot be an empty string. Its length cannot exceed 127, and it can contain only letters, digits,
-   *     hyphens (-), and periods (.).<br>
-   *     2. The number of elements in **belongingToTypes** cannot exceed 50. Each element cannot be an empty string, and
-   *     its length cannot exceed  127.<br>
-   *     3. The length of each of description, **referenceURL**, and **iconFile** cannot exceed 255.<br>
-   *     4. The number of elements in **filenameExtensions** cannot exceed 50. Each element cannot be an empty string,
-   *     its length cannot exceed 127, and its first character must be a period (.).<br>
-   *     5. The number of elements in **mimeTypes** cannot exceed 50. Each element cannot be an empty string, and its
-   *     length cannot exceed 127.<br>
-   *     **TypeDescriptor content requirements**<br>
-   *     1. **typeId** must be unique and cannot duplicate the **typeId** of a registered type.<br>
-   *     2. typeId must start with the bundle name of the current application.<br>3. The uniform data type IDs in
-   *     **belongingToTypes** must be [preset data types](../../database/uniform-data-type-list.md) or the **typeIds**
-   *     of other uniform data types registered in this registration.<br>4. No circular dependency can exist between
-   *     uniform data types.
+   *     200.
+   *     <br>**TypeDescriptor format requirements**
+   *         <br>1. typeId cannot be an empty string. Its length cannot exceed 127, and it can contain only letters, digits,
+   *             hyphens (-), and periods (.).
+   *         <br>2. The number of elements in **belongingToTypes** cannot exceed 50. Each element cannot be
+   *             an empty string, and its length cannot exceed 127.
+   *         <br>3. The length of each of description, **referenceURL**, and **iconFile** cannot exceed 255.
+   *         <br>4. The number of elements in **filenameExtensions** cannot exceed 50. Each element cannot be 
+   *             an empty string, its length cannot exceed 127, and its first character must be a period (.).
+   *         <br>5. The number of elements in **mimeTypes** cannot exceed 50. Each element cannot be an empty string,
+   *             and its length cannot exceed 127.
+   *     <br>**TypeDescriptor content requirements**
+   *         <br>1. **typeId** must be unique and cannot duplicate the **typeId** of a registered type.
+   *         <br>2. typeId must start with the bundle name of the current application.
+   *         <br>3. The uniform data type IDs in **belongingToTypes** must be 
+   *             [preset data types](../../database/uniform-data-type-list.md) or the **typeIds** of 
+   *             other uniform data types registered in this registration.
+   *         <br>4. No circular dependency can exist between uniform data types.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -2601,11 +2602,11 @@ declare namespace uniformTypeDescriptor {
    * @permission ohos.permission.MANAGE_DYNAMIC_UTD_TYPE
    * @param { Array<string> } typeIds - List of **typeId**s to unregister. The list cannot be empty, and the number of
    *     elements cannot exceed 50. The length of each item cannot exceed 127.<br>
-   *     **typeId constraints:**<br>
-   *     1. The uniform data type corresponding to the **typeId** must have been registered in the system;<br>
-   *     2. The **typeId** must start with the bundle name of the current application;<br>
-   *     3. The uniform data type corresponding to the **typeId** must have been registered through the
-   *     [registerTypeDescriptors](#uniformtypedescriptorregistertypedescriptors22) API.
+   *     **typeId constraints:**
+   *     <br>1. The uniform data type corresponding to the **typeId** must have been registered in the system;
+   *     <br>2. The **typeId** must start with the bundle name of the current application;
+   *     <br>3. The uniform data type corresponding to the **typeId** must have been registered through the
+   *         [registerTypeDescriptors](#uniformtypedescriptorregistertypedescriptors22) API.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
