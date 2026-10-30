@@ -146,6 +146,7 @@ export interface DeviceResponse {
    * - circle：圆形屏。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 4 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -212,6 +213,7 @@ export interface GetDeviceOptions {
    * 接口调用成功的回调函数，在接口调用成功时执行。data 为成功返回的设备信息。不传入时无法获取设备信息，建议设置此回调。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -224,6 +226,7 @@ export interface GetDeviceOptions {
    * code:200，表示返回结果中存在无法获得的信息。建议设置此回调以处理错误情况。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]
@@ -234,6 +237,7 @@ export interface GetDeviceOptions {
    * 接口调用结束的回调函数，在接口调用完成后（无论成功或失败）执行，适用于需执行清理或收尾工作的场景。不传入时不执行结束回调。
    *
    * @syscap SystemCapability.Startup.SystemInfo.Lite
+   * @FaAndStageModel
    * @since 3 dynamiconly
    * @deprecated since 6
    * @reserved ["liteWearable"]

@@ -46,7 +46,8 @@ declare namespace cloudData {
    */
   enum ClearAction {
     /**
-     * Clear the cloud identifier of the data downloaded from the cloud and retain the data locally.
+     * Clear the cloud identifier of the data downloaded from the cloud (the flag indicating that the data comes from
+     * the cloud) and retain the data locally.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -104,7 +105,8 @@ declare namespace cloudData {
    */
   interface ExtraData {
     /**
-     * Event ID. The value **cloud_data_change** indicates cloud data changes.
+     * Event ID. Currently, only the value **cloud_data_change** is supported, indicating cloud data change. Other
+     * values are invalid.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -114,9 +116,9 @@ declare namespace cloudData {
     eventId: string;
 
     /**
-     * Data to be transmitted transparently. **extraData** is a JSON string that must contain the **data** field. The 
-     * **data** field contains information required for a change notification, including the account ID, application 
-     * name, database name, database type, and database table name. All the fields cannot be empty.
+     * Data to be transmitted transparently. **extraData** is a JSON string that must contain the **data** field. The
+     * **data** field contains information required for a change notification, including the account ID, application
+     * bundle name, database name, database type, and database table name. None of the fields can be empty.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -147,7 +149,7 @@ declare namespace cloudData {
     table: string;
 
     /**
-     * Number of data records that are added locally and have not been synced to the cloud. For example, the value **2**
+     * Number of data records that are added locally but not synced to the cloud. For example, the value **2**
      * indicates that the table has two data records that are added locally but not synced to the cloud.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
@@ -170,7 +172,7 @@ declare namespace cloudData {
 
     /**
      * Number of consistent data records between the device and the cloud. For example, the value **2** indicates that 
-     * table has two data records that are consistent between the device and the cloud.
+     * the table has two data records that are consistent between the device and the cloud.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -200,7 +202,7 @@ declare namespace cloudData {
     RUNNING = 0,
 
     /**
-     * The device-cloud sync task is completed.
+     * The device-cloud sync task is complete.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -311,7 +313,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Defines the clearance information of a device-cloud synergy database.
+   * Defines the database-level clearing rules for device-cloud synergy.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
    * @systemapi
@@ -319,7 +321,7 @@ declare namespace cloudData {
    */
   interface DBActionInfo {
     /**
-     * Default data clearance mode of the database.
+     * Default data clearing rule of the database.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -328,8 +330,8 @@ declare namespace cloudData {
     action: ClearAction;
 
     /**
-     * Information about the table whose data is to be cleared and the clearance rules. The key is the table name, and
-     * the value is the clearance mode of the table. If this parameter is not set, the data clearance mode of database
+     * Information about the table whose data is to be cleared and the clearing rules. The key is the table name, and
+     * the value is the clearing rule of the table. If this parameter is not set, the data clearing rule of database
      * is used by default.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
@@ -340,7 +342,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Defines the clearance configuration of a device-cloud synergy database.
+   * Defines the database-level clearing rules for device-cloud synergy.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
    * @systemapi
@@ -349,8 +351,8 @@ declare namespace cloudData {
    */
   interface ClearConfig {
     /**
-      * Information about the database whose data is to be cleared and the clearance rules. The key is the database name
-      * , and the value is the clearance configuration of the database.
+      * Information about the database whose data is to be cleared and the clearing rules. The key is the database name
+      * , and the value is the clearing rule of the database.
       *
       * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
       * @systemapi
@@ -361,7 +363,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Bundle information configuration.
+   * Defines the device-cloud synergy application information.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
    * @systemapi
@@ -370,7 +372,7 @@ declare namespace cloudData {
    */
   interface BundleInfo {
     /**
-     * Indicates the name of the application.
+     * Bundle name of the application.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -380,7 +382,8 @@ declare namespace cloudData {
     bundleName: string;
 
     /**
-     * Indicates the store ID.
+     * Name of the RDB store. The default value is an empty string. If the default value is used, this API queries
+     * all databases of this application.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Config
      * @systemapi
@@ -404,11 +407,13 @@ declare namespace cloudData {
      * Enables device-cloud synergy. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
-     * @param { object } switches - Device-cloud synergy settings for applications. The value **true** means to enable
-     *     device-cloud synergy; the value **false** means the opposite. [since 10 - 10]
-     * @param { Record<string, boolean> } switches - Device-cloud synergy settings for applications. The value **true**
-     *     means to enable device-cloud synergy; the value **false** means the opposite. [since 11]
+     * @param { string } accountId - ID of the logged-in cloud account.
+     * @param { object } switches - Device-cloud synergy switch information of each application. The key is the bundle
+     *     name of the application, and the value is the switch status of the application. The value **true** means to
+     *     enable the device-cloud switch of the application, and **false** means to disable it. [since 10 - 10]
+     * @param { Record<string, boolean> } switches - Device-cloud synergy switch information of each application. The
+     *     key is the bundle name of the application, and the value is the switch status of the application. The value
+     *     **true** means to enable the device-cloud switch of the application, and **false** means to disable it. [since 11]
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -432,7 +437,7 @@ declare namespace cloudData {
       * Enables device-cloud synergy. This API uses a promise to return the result.
       *
       * @permission ohos.permission.CLOUDDATA_CONFIG
-      * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
       * @param { object } switches - Device-cloud synergy settings for applications. The value **true** means to enable
       *     device-cloud synergy; the value **false** means the opposite. [since 10 - 10]
       * @param { Record<string, boolean> } switches - Device-cloud synergy settings for applications. The value **true**
@@ -456,7 +461,7 @@ declare namespace cloudData {
      * Disables device-cloud synergy. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -476,7 +481,7 @@ declare namespace cloudData {
      * Disables device-cloud synergy. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -497,7 +502,7 @@ declare namespace cloudData {
      * result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @param { boolean } status - New device-cloud synergy setting. The value **true** means to enable device-cloud
      *     synergy; the value **false** means the opposite.
@@ -525,7 +530,7 @@ declare namespace cloudData {
      * Changes the device-cloud synergy setting for an application. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @param { boolean } status - New device-cloud synergy setting. The value **true** means to enable device-cloud
      *     synergy; the value **false** means the opposite.
@@ -548,7 +553,7 @@ declare namespace cloudData {
      * Changes the device-cloud synergy setting for an application. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @param { boolean } status - New device-cloud synergy setting. The value **true** means to enable device-cloud
      *     synergy; the value **false** means the opposite.
@@ -628,7 +633,7 @@ declare namespace cloudData {
      * @permission ohos.permission.CLOUDDATA_CONFIG
      * @param { ExtraData } extInfo - Transparently transmitted data, including information about the application that
      *     has data changes.
-     * @param { int } userId - User ID in the system.
+     * @param { int } userId - User account ID, which refers to the existing user account ID in the system.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
@@ -649,7 +654,7 @@ declare namespace cloudData {
      * Notifies the data changes in the cloud. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
@@ -670,9 +675,10 @@ declare namespace cloudData {
      * Notifies the data changes in the cloud. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the data changes in the cloud
+     *     are successfully notified, the value of **err** is **undefined**; otherwise, **err** is an error object.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2
@@ -692,11 +698,12 @@ declare namespace cloudData {
      * synced but inconsistent between the device and the cloud. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @param { string } [storeId] - Name of the RDB store. If this parameter is not specified, all local databases of
      *     this application are queried by default.
-     * @returns { Promise<Record<string, Array<StatisticInfo>>> } Promise used to return the table name and statistics.
+     * @returns { Promise<Record<string, Array<StatisticInfo>>> } Promise used to return the result set where the table
+     *     name is the key and the statistics array is the value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2
@@ -719,12 +726,12 @@ declare namespace cloudData {
      * Queries information about the last device-cloud sync. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
+     * @param { string } accountId - ID of the logged-in cloud account.
      * @param { string } bundleName - Bundle name of the application.
      * @param { string } [storeId] - Name of the RDB store. The default value is an empty string. If the default value
      *     is used, this API queries the last device-cloud sync information of all databases of this application.
-     * @returns { Promise<Record<string, SyncInfo>> } Promise used to return the database name and the result set of the
-     *     last device-cloud sync.
+     * @returns { Promise<Record<string, SyncInfo>> } Result set with database names as keys and the last device-cloud
+     *     sync information as values.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2
@@ -744,13 +751,15 @@ declare namespace cloudData {
     ): Promise<Record<string, SyncInfo>>;
 
     /**
-     * Queries the last synchronization information in batch
+     * Queries information about the last device-cloud sync in batches.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - Indicates the account ID.
-     *     The account ID is required by hashing cloud account.
-     * @param { Array<BundleInfo> } bundleInfos - BundleInfo configuration array.
-     * @returns { Promise<Record<string, Record<string, SyncInfo>>> } Promise used to return the result.
+     * @param { string } accountId - ID of the logged-in cloud account.
+     * @param { Array<BundleInfo> } bundleInfos - Array of application information to be queried in batches. Value range:
+     *     The array length is [1, 30]. If the array length is out of range, error code 14800001 is returned.
+     * @returns { Promise<Record<string, Record<string, SyncInfo>>> } Promise used to return the application bundle
+     *     name and the result set of the last device-cloud sync for the database. The key of the outer record is the
+     *     application bundle name, and the key of the inner record is the database name.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -768,11 +777,14 @@ declare namespace cloudData {
     ): Promise<Record<string, Record<string, SyncInfo>>>;
 
     /**
-     * Subscribes to changes in the sync information of a specified application.
+     * Subscribes to application sync information changes. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { Array<BundleInfo> } bundleInfos - BundleInfo configuration array.
-     * @param { Callback<Record<string, Record<string, SyncInfo>>> } progress - progress.
+     * @param { Array<BundleInfo> } bundleInfos - Array of application information to be subscribed to. Value range:
+     *     The array length is [1, 30]. If the array length is out of range, error code 14800001 is returned.
+     * @param { Callback<Record<string, Record<string, SyncInfo>>> } progress - Callback used to return the
+     *     application bundle name and the sync result set of the database. The key of the outer record is the
+     *     application bundle name, and the key of the inner record is the database name.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -790,11 +802,16 @@ declare namespace cloudData {
     ): void;
 
     /**
-     * Remove specified observer of specified type from the database.
+     * Unsubscribes from application sync information changes. This API uses an asynchronous callback to return the
+     * result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { Array<BundleInfo> } bundleInfos - BundleInfo configuration array.
-     * @param { Callback<Record<string, Record<string, SyncInfo>>> } [progress] - Optional progress callback.
+     * @param { Array<BundleInfo> } bundleInfos - Array of application information to be unsubscribed from. Value range:
+     *     The array length is [1, 30]. If the array length is out of range, error code 14800001 is returned. The storeId
+     *     of the application information during unsubscription must be the same as that during subscription.
+     * @param { Callback<Record<string, Record<string, SyncInfo>>> } [progress] - Callback used to return the result.
+     *     If this parameter is passed, the specified callback is unsubscribed. If this parameter is not passed, all
+     *     callbacks of the application are unsubscribed.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -815,11 +832,13 @@ declare namespace cloudData {
      * Clears the cloud data locally. This API uses an asynchronous callback to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
-     * @param { Record<string, ClearAction> } appActions - Information about the application whose data is to be cleared and the operation to
-     *     perform. [since 10 - 10]
-     * @param { Record<string, ClearAction> } appActions - Information about the application whose data is to be cleared
-     *     and the operation to perform. [since 11]
+     * @param { string } accountId - ID of the logged-in cloud account.
+     * @param { Record<string, ClearAction> } appActions - Application information of the data to be cleared and the
+     *     clearing rule of each application. The key is the application bundle name, and the value is the clearing
+     *     rule. [since 10 - 10]
+     * @param { Record<string, ClearAction> } appActions - Application information of the data to be cleared and the
+     *     clearing rule of each application. The key is the application bundle name, and the value is the clearing
+     *     rule. [since 11]
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -843,9 +862,9 @@ declare namespace cloudData {
       * Clears the cloud data locally. This API uses a promise to return the result.
       *
       * @permission ohos.permission.CLOUDDATA_CONFIG
-      * @param { string } accountId - ID of the cloud account.
-      * @param { object } appActions - Information about the application whose data is to be cleared and the operation
-      *     to perform. [since 10 - 10]
+      * @param { string } accountId - ID of the logged-in cloud account.
+      * @param { object } appActions - Application information of the data to be cleared and the clearing rule of
+      *     each application. The key is the application bundle name, and the value is the clearing rule. [since 10 - 10]
       * @param { Record<string, ClearAction> } appActions - Information about the application whose data is to be
       *     cleared and the operation to perform. [since 11]
       * @returns { Promise<void> } Promise that returns no value.
@@ -867,13 +886,14 @@ declare namespace cloudData {
      * Clears the cloud data locally. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } accountId - ID of the cloud account.
-     * @param { Record<string, ClearAction> } appActions - Information about the application whose data is to be cleared
-     *     and the operation to perform.
-     * @param { Record<string, ClearConfig> } [config] - Clearance information of a device-cloud synergy database. The
-     *     key is the application name, and the value is the database clearance rules of the application. Clearance
-     *     priority: table > database > application. If this parameter is not set, the application-level data clearance
-     *     mode is used by default.
+     * @param { string } accountId - ID of the logged-in cloud account.
+     * @param { Record<string, ClearAction> } appActions - Application information of the data to be cleared and the
+     *     clearing rule of each application. The key is the application bundle name, and the value is the clearing
+     *     rule.
+     * @param { Record<string, ClearConfig> } [config] - Database-level clearing rule for device-cloud synergy. The
+     *     key is the application package name, and the value is the database clearing rule of the application. Clearing
+     *     rule priority: table level > database level > application level. If this parameter is not configured, the
+     *     application-level data clearing rule is used by default.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -917,7 +937,7 @@ declare namespace cloudData {
      * result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { string } bundleName - Name of the application to sync.
+     * @param { string } bundleName - Bundle name of the application to sync.
      * @param { string } storeId - Name of the database to sync.
      * @param { relationalStore.SyncMode } mode - Device-cloud sync mode.
      * @param { Callback<relationalStore.ProgressDetails> } progress - Callback used to return the sync progress.
@@ -941,14 +961,15 @@ declare namespace cloudData {
     ): Promise<void>;
 
     /**
-     * Sync data to cloud. This API uses a promise to return the result.
+     * Synchronizes data of a specified application between the device and cloud based on the cloud sync configuration.
+     * When **downloadOnly** in **CloudSyncConfig** is set to **true**, only the data on the cloud is synchronized to
+     * the device. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { BundleInfo } bundleInfo - BundleInfo configuration.
-     *     <br>the instance object of {@link BundleInfo}
-     * @param { relationalStore.CloudSyncConfig } config - Indicates cloud sync configuration.
-     *     <br>the instance object of {@link relationalStore.CloudSyncConfig}
-     * @param { Callback<relationalStore.ProgressDetails> } progress - Callback used to return the sync progress.
+     * @param { BundleInfo } bundleInfo - Application bundle information configuration, which is a **BundleInfo** instance.
+     * @param { relationalStore.CloudSyncConfig } config - Cloud sync configuration.
+     * @param { Callback<relationalStore.ProgressDetails> } progress - Callback used to return the **ProgressDetails**
+     *     instance.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -967,11 +988,12 @@ declare namespace cloudData {
     ): Promise<void>;
 
     /**
-     * Stops syncing data to the cloud.
+     * Stops data syncing with the cloud. This API uses a promise to return the result.
      *
      * @permission ohos.permission.CLOUDDATA_CONFIG
-     * @param { Array<BundleInfo> } bundleInfos - BundleInfo configuration array.
-     * @returns { Promise<void> } : The promise returned by the function.
+     * @param { Array<BundleInfo> } bundleInfos - Array of application bundle information configurations. Value range:
+     *     The array length is [1, 30]. If the array length is out of range, error code 14800001 is returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
@@ -987,7 +1009,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Enumerates the types of the cloud-device sync strategy.
+   * Enumerates the cloud sync strategy types.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
    * @since 12 dynamic
@@ -996,7 +1018,7 @@ declare namespace cloudData {
   enum StrategyType {
 
     /**
-     * Sync over the network.
+     * Synchronization over the network.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @since 12 dynamic
@@ -1006,7 +1028,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Enumerates the network sync options.
+   * Enumerates the network policy parameters.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
    * @since 12 dynamic
@@ -1015,7 +1037,7 @@ declare namespace cloudData {
   enum NetWorkStrategy {
 
     /**
-     * Sync over Wi-Fi.
+     * Wi-Fi network policy.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @since 12 dynamic
@@ -1024,7 +1046,7 @@ declare namespace cloudData {
     WIFI = 1,
 
     /**
-     * Sync over the cellular network.
+     * Cellular network policy.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @since 12 dynamic
@@ -1034,11 +1056,12 @@ declare namespace cloudData {
   }
 
   /**
-   * Sets the cloud sync strategy of an application. This API uses a promise to return the result.
+   * Sets the cloud sync strategy of the application itself. This API uses a promise to return the result.
    *
-   * @param { StrategyType } strategy - Type of the strategy to set.
-   * @param { Array<commonType.ValueType> } param - Strategy parameters to set. 
-   *     Currently, only network strategies can be set. By default, Wi-Fi and cellular network are supported.
+   * @param { StrategyType } strategy - Type of the strategy to configure.
+   * @param { Array<commonType.ValueType> } param - Strategy parameter, of the Array<commonType.ValueType> type. The
+   *     actual value passed in is a NetWorkStrategy enum value, which can be WIFI or CELLULAR. By default, both the
+   *     Wi-Fi and cellular network strategies are supported.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types;
@@ -1052,9 +1075,9 @@ declare namespace cloudData {
   function setCloudStrategy(strategy: StrategyType, param?: Array<commonType.ValueType>): Promise<void>;
 
   /**
-   * Provides APIs for device-cloud data sharing, including sharing or unsharing data, exiting a share, changing the 
-   * privilege on the shared data, querying participants, confirming an invitation, changing the invitation confirmation
-   * state, and querying the shared resource.
+   * Provides APIs for device-cloud data sharing, including sharing or unsharing data, exiting a share, changing the
+   * privilege on the shared data, querying participants, confirming an invitation, changing a confirmed invitation,
+   * and querying the shared resource.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
    * @systemapi
@@ -1328,7 +1351,7 @@ declare namespace cloudData {
       code: int;
 
       /**
-       * Detailed description of the error code. The default value is undefined.
+       * Detailed description of the error code. The default value is **undefined**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1338,7 +1361,7 @@ declare namespace cloudData {
       description?: string;
 
       /**
-       * Value returned. The specific type is specified by the T parameter. The default value is undefined.
+       * Value returned. The specific type is specified by the **T** parameter. The default value is **undefined**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1358,8 +1381,8 @@ declare namespace cloudData {
      */
     interface Privilege {
       /**
-       * Whether the participant can modify the shared data. The value true means the participant can modify the
-       * data; the value false means the opposite. The default value is false.
+       * Whether the participant can modify the shared data. The value **true** means the participant can modify the
+       * data; the value **false** means the opposite. The default value is **false**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1369,8 +1392,8 @@ declare namespace cloudData {
       writable?: boolean;
 
       /**
-       * Whether the participant can read the shared data. The value true means the participant can read the data;
-       * the value false means the opposite. The default value is false.
+       * Whether the participant can read the shared data. The value **true** means the participant can read the data;
+       * the value **false** means the opposite. The default value is **false**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1380,8 +1403,8 @@ declare namespace cloudData {
       readable?: boolean;
 
       /**
-       * Whether the participant can create data to share. The value true means the participant can create data; the
-       * value false means the opposite. The default value is false.
+       * Whether the participant can create data to share. The value **true** means the participant can create data; the
+       * value **false** means the opposite. The default value is **false**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1391,8 +1414,8 @@ declare namespace cloudData {
       creatable?: boolean;
 
       /**
-       * Whether the participant can delete the shared data. The value true means the participant can delete the
-       * data; the value false means the opposite. The default value is false.
+       * Whether the participant can delete the shared data. The value **true** means the participant can delete the
+       * data; the value **false** means the opposite. The default value is **false**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1402,8 +1425,8 @@ declare namespace cloudData {
       deletable?: boolean;
 
       /**
-       * Whether the participant can share the data to others. The value true means the participant can share the
-       * data; the value false means the opposite. The default value is false.
+       * Whether the participant can share the data to others. The value **true** means the participant can share the
+       * data; the value **false** means the opposite. The default value is **false**.
        *
        * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
        * @systemapi
@@ -1480,10 +1503,9 @@ declare namespace cloudData {
      * which also includes the column names if they are specified.
      *
      * @param { string } storeId - Name of the RDB store.
-     * @param { relationalStore.RdbPredicates } predicates - Predicates for matching the data to share.
+     * @param { relationalStore.RdbPredicates } predicates - Predicate conditions for querying the data of the sharing resource identifier.
      * @param { Array<Participant> } participants - Participants of the share.
-     * @param { Array<string> } [columns] - Columns in which the data is located.
-     *     The default value is undefined, which means column names are not returned.
+     * @param { Array<string> } [columns] - Names of the columns to query. The default value is undefined, which means no column fields are returned.
      * @returns { Promise<relationalStore.ResultSet> } Promise used to return the result set of the data to share.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1507,7 +1529,7 @@ declare namespace cloudData {
      * This API uses an asynchronous callback to return the result.
      *
      * @param { string } storeId - Name of the RDB store.
-     * @param { relationalStore.RdbPredicates } predicates - Predicates for matching the data to share.
+     * @param { relationalStore.RdbPredicates } predicates - Predicate conditions for querying the data of the sharing resource identifier.
      * @param { Array<Participant> } participants - Participants of the share.
      * @param { AsyncCallback<relationalStore.ResultSet> } callback - Callback used to return the result.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1533,9 +1555,9 @@ declare namespace cloudData {
      * which includes the shared resource ID and column names.
      *
      * @param { string } storeId - Name of the RDB store.
-     * @param { relationalStore.RdbPredicates } predicates - Predicates for matching the data to share.
+     * @param { relationalStore.RdbPredicates } predicates - Predicate conditions for querying the data of the sharing resource identifier.
      * @param { Array<Participant> } participants - Participants of the share.
-     * @param { Array<string> } columns - Columns in which the data is located.
+     * @param { Array<string> } columns - Names of the columns to query.
      * @param { AsyncCallback<relationalStore.ResultSet> } callback -
      *     Callback used to return the result set of the data to share.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1809,7 +1831,7 @@ declare namespace cloudData {
      * This API uses an asynchronous callback to return the result.
      *
      * @param { string } invitationCode - Invitation code of the share.
-     * @param { State } state - Confirmation state.
+     * @param { State } state - New confirmation state of the invitation.
      * @param { AsyncCallback<Result<string>> } callback - Callback used to return the result.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1828,7 +1850,7 @@ declare namespace cloudData {
      * This API uses a promise to return the result.
      *
      * @param { string } invitationCode - Invitation code of the share.
-     * @param { State } state - Confirmation state.
+     * @param { State } state - New confirmation state of the invitation.
      * @returns { Promise<Result<string>> } Promise used to return the result.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1882,7 +1904,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Indicates automatic synchronization triggering method for Device-Cloud data.
+   * Enumerates the trigger modes of automatic synchronization.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
    * @stagemodelonly
@@ -1890,7 +1912,7 @@ declare namespace cloudData {
    */
   enum AutoSyncTriggerMode {
     /**
-     * Indicates account login trigger method.
+     * Account login trigger mode.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1899,7 +1921,7 @@ declare namespace cloudData {
     ACCOUNT_LOGIN = 0,
 
     /**
-     * Indicates the synchronization switch trigger mode.
+     * Sync switch trigger mode.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1908,7 +1930,7 @@ declare namespace cloudData {
     CLOUD_SWITCH_ON = 1,
 
     /**
-     * Indicates the trigger mode for network reconnection after recovery.
+     * Trigger mode after network recovery.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1917,7 +1939,7 @@ declare namespace cloudData {
     NETWORK_RECOVER = 2,
 
     /**
-     * Indicates the cloud-side data change trigger mode.
+     * Cloud data change trigger mode.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1926,7 +1948,7 @@ declare namespace cloudData {
     CLOUD_DATA_CHANGE = 3,
 
     /**
-     * Indicates the user change trigger method.
+     * User change trigger mode.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1936,7 +1958,7 @@ declare namespace cloudData {
   }
 
   /**
-   * Describes information about the automatic synchronization trigger mode.
+   * Automatic synchronization trigger information.
    *
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
    * @stagemodelonly
@@ -1944,7 +1966,7 @@ declare namespace cloudData {
    */
   interface AutoSyncTriggerInfo {
     /**
-     * Describes the automatic synchronization triggering mode.
+     * Automatic synchronization trigger mode.
      *
      * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
      * @stagemodelonly
@@ -1954,9 +1976,10 @@ declare namespace cloudData {
   }
 
   /**
-   * Describes the triggering method for automatic device-cloud synchronization subscription.
+   * Registers the auto sync trigger event notification when device-cloud sync is enabled and automatic sync is
+   * disabled for the application. When the auto trigger condition is met, the callback function is invoked.
    *
-   * @param { Callback<AutoSyncTriggerInfo> } observer - Callback for automatic synchronization trigger interception.
+   * @param { Callback<AutoSyncTriggerInfo> } observer - Callback invoked to return the auto sync trigger information.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
    *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client
@@ -1966,9 +1989,11 @@ declare namespace cloudData {
   function onAutoSyncTrigger(observer: Callback<AutoSyncTriggerInfo>): void;
 
   /**
-   * Describes unsubscribing from the device-cloud automatic synchronization trigger mode.
+   * Unsubscribes from the auto sync trigger event notification.
    *
-   * @param { Callback<AutoSyncTriggerInfo> } [observer] - Callback for automatic synchronization trigger interception.
+   * @param { Callback<AutoSyncTriggerInfo> } [observer] - Callback for the auto sync trigger event. If observer is
+   *     passed in, the subscription of the specified callback is canceled; if observer is not passed in, all
+   *     registered subscriptions are canceled.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
    *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @syscap SystemCapability.DistributedDataManager.CloudSync.Client

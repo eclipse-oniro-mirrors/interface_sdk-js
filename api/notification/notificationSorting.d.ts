@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Provides sorting information about an active notification
+ * @file NotificationSorting
  * @kit NotificationKit
  */
 
@@ -22,7 +22,7 @@ import { NotificationSlot } from './notificationSlot';
 
 /**
  * The **NotificationSorting** module provides APIs for defining the sorting information of active notifications.
- * 
+ *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
  * @since 7 dynamic
@@ -50,7 +50,8 @@ export interface NotificationSorting {
   readonly hashCode: string;
 
   /**
-   * Notification level. If this parameter is not set, the default value is used based on the notification slot type.
+   * Notification level. If not set, the default value is determined by the 
+   * [notification slot](docroot://notification/notification-glossary.md#notification-slot) type.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

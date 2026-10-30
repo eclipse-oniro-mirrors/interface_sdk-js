@@ -14,22 +14,21 @@
  */
 
 /**
- * @file The CommonEventSubscribeInfo module provides APIs for providing subscriber information.
+ * @file CommonEventSubscribeInfo
  * @kit BasicServicesKit
  */
 
 /**
- * This module provides APIs for providing subscriber information. It allows you to
- * configure parameters such as the subscribed common event type, publisher permission,
- * publisher device ID, user ID, and subscription priority. This module is applicable to
- * scenarios where an app needs to subscribe to system common events or custom common
- * events and requires refined control over event sources.
- * 
+ * This module provides APIs for providing subscriber information. It allows you to configure parameters such as the 
+ * subscribed common event type, publisher permission, publisher device ID, user ID, and subscription priority. This 
+ * module is applicable to scenarios where an app needs to subscribe to 
+ * [system common events](docroot://basic-services/common-event/common-event-glossary.md#system-common-event) or custom 
+ * common events and requires refined control over event sources.
+ *
  * > **NOTE**
  * >
- * > After users subscribing to custom common events, any application can send potential
- * > malicious common events to subscribers. The **publisherPermission** and
- * > **publisherBundleName** parameters of this module can be used to restrict the publisher
+ * > After users subscribe to custom common events, any app can send potential malicious common events to subscribers. 
+ * > Use the **publisherPermission** and **publisherBundleName** parameters of this module to restrict the publishing 
  * > scope of common events.
  *
  * @syscap SystemCapability.Notification.CommonEvent
@@ -51,10 +50,10 @@ export interface CommonEventSubscribeInfo {
   events: Array<string>;
 
   /**
-   * Permission of the publisher. The value is an array of permission names defined by the
-   * system. This parameter specifies that the subscriber can only receive the common events
-   * from publishers with this permission. If this parameter is left empty, the subscriber can
-   * receive common events from all publishers.
+   * Permission of the publisher. The value is a permission name defined by the system. This parameter is used to 
+   * specify that the subscriber receives only common events published by the publisher with this permission. If this 
+   * parameter is not set, the subscriber can receive common events published by all publishers. The value can contain a
+   * maximum of 254 bytes. Excess content will be truncated.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -64,9 +63,10 @@ export interface CommonEventSubscribeInfo {
   publisherPermission?: string;
 
   /**
-   * Device ID, which is used to restrict the subscriber to receive only public events
-   * published by the specified device. Use [@ohos.deviceInfo]{@link ./../@ohos.deviceInfo:deviceInfo}
-   * to obtain the UDID as the device ID of the publisher. Not supported currently.
+   * Device ID, which is used to specify that the subscriber receives only common events published by the specified 
+   * device. Use [@ohos.deviceInfo]{@link @ohos.deviceInfo:deviceInfo} to obtain the UDID as the device ID of the 
+   * publisher. This feature is not supported currently. The value can contain a maximum of 254 bytes. Excess content 
+   * will be truncated.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -76,11 +76,10 @@ export interface CommonEventSubscribeInfo {
   publisherDeviceId?: string;
 
   /**
-   * User ID, which is used to restrict the subscriber to receive only public events related
-   * to the specified user ID. If this parameter is not specified, the default value, which
-   * is the ID of the current user, will be used. The value must be an existing user ID in
-   * the system. Use
-   * [getOsAccountLocalId]{@link ../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId}
+   * User ID, which is used to specify that the subscriber receives only common events related to the specified user ID.
+   * If this parameter is not specified, the default value, which is the ID of the current user, will be used. The value
+   * must be an existing user ID in the system. Use 
+   * [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager#getOsAccountLocalId(callback: AsyncCallback<int>)}
    * to obtain the system user ID and use it as the user ID of the publisher.
    *
    * @syscap SystemCapability.Notification.CommonEvent
@@ -91,10 +90,10 @@ export interface CommonEventSubscribeInfo {
   userId?: int;
 
   /**
-   * Subscriber priority. A larger value indicates a higher priority, and the subscriber
-   * with a higher priority receives ordered public events first. The value ranges from
-   * –100 to 1000. If the value exceeds the upper or lower limit, the upper or lower limit
-   * is used. The default value is **0**.
+   * Subscriber priority. Subscribers with higher priorities receive 
+   * [ordered common events](docroot://basic-services/common-event/common-event-glossary.md#ordered-common-event) first.
+   * The value ranges from –100 to 1000. If the value exceeds the upper or lower limit, the upper or lower limit is 
+   * used. The default value is **0**.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -104,10 +103,10 @@ export interface CommonEventSubscribeInfo {
   priority?: int;
 
   /**
-   * Bundle name of the publisher to be subscribed to. This parameter is used to restrict
-   * the subscriber to receive only public events published by the publisher with the
-   * specified bundle name. If this parameter is not set, the subscriber can receive all
-   * public events published by the app.
+   * Bundle name of the publisher to be subscribed to. This parameter is used to specify that the subscriber receives 
+   * only public events published by the publisher with the specified bundle name. If this parameter is not set, the 
+   * subscriber can receive all public events published by the app. The value can contain a maximum of 254 bytes. Excess
+   * content will be truncated.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice

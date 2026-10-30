@@ -338,6 +338,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @param { RepeatArray<T> } arr - 数据源数组
    * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -350,6 +351,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。
    * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.1.0 staticonly
    */
@@ -359,6 +361,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * 通知Repeat已完成属性设置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -415,11 +418,12 @@ export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
 export declare function Repeat<T>(arr: RepeatArray<T>, options?: RepeatOptions): RepeatAttribute<T>;
 
 /**
-  * 定义Repeat组件。需要在组件属性设置开始时调用setRepeatOptions，并在组件属性设置结束时调用applyAttributeFinish。
+  * 定义Repeat组件。需要在组件属性设置开始时调用setRepeatOptions，并在组件属性设置结束时调用applyAttributesFinish。
   *
  * @param { CustomBuilderT<RepeatAttribute<T>> } style - 用于设置Repeat属性的回调。
  * @returns { RepeatAttribute<T> } Repeat属性实例。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
  * @since 26.0.1 staticonly
  */

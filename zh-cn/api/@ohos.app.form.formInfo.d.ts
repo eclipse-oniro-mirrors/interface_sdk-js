@@ -469,6 +469,17 @@ declare namespace formInfo {
      * @since 26.0.0 dynamic&static
      */
     isFontScaleFollowSystem?: boolean;
+
+    /**
+     * 获取卡片是否启用赋色。
+     * 默认值：默认是值是false。
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    readonly enableTint?: boolean;
   }
 
   /**

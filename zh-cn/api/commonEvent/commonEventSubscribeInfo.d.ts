@@ -14,18 +14,18 @@
  */
 
 /**
- * @file The CommonEventSubscribeInfo module provides APIs for providing subscriber information.
+ * @file CommonEventSubscribeInfo
  * @kit BasicServicesKit
  */
 
 /**
- * 用于表示公共事件订阅者的信息，支持配置订阅的公共事件类型、发布者权限、
- * 发布者设备ID、用户ID、订阅优先级等参数，适用于应用需要订阅系统公共事件
- * 或自定义公共事件并精细化控制事件来源的场景。
+ * 用于表示公共事件订阅者的信息，支持配置订阅的公共事件类型、发布方权限、发布方设备ID、用户ID、订阅优先级等参数，适用于应用需要订阅
+ * [系统公共事件](docroot://basic-services/common-event/common-event-glossary.md#system-common-event系统公共事件)或自定义公共事件并精细化控制事件来源的
+ * 场景。
  *
  * > **说明：**
  * >
- * > 订阅自定义公共事件后，任意应用都可以向订阅者发送潜在的恶意公共事件。通过本模块的publisherPermission和publisherBundleName参数，可以限制公共事件发布者的范围。
+ * > 订阅自定义公共事件后，任意应用都可以向订阅者发送潜在的恶意公共事件。通过本模块的publisherPermission和publisherBundleName参数，可以限制公共事件发布方的范围。
  *
  * @syscap SystemCapability.Notification.CommonEvent
  * @crossplatform [since 11]
@@ -46,8 +46,7 @@ export interface CommonEventSubscribeInfo {
   events: Array<string>;
 
   /**
-   * 表示发布者的权限，取值为系统已定义的权限名。用于限制订阅方只接收具有该
-   * 权限的发布方发布的公共事件。不设置时，可接收所有发布方发布的公共事件。
+   * 表示发布方的权限，取值为系统已定义的权限名。用于限制订阅方只接收具有该权限的发布方发布的公共事件。不设置时，可接收所有发布方发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -57,9 +56,8 @@ export interface CommonEventSubscribeInfo {
   publisherPermission?: string;
 
   /**
-   * 表示设备ID，用于限制订阅者只接收来自指定设备发布的公共事件。
-   * 通过[@ohos.deviceInfo]{@link ./../@ohos.deviceInfo:deviceInfo}获取udid，作为
-   * 发布者的设备ID。预留能力，暂不支持。
+   * 表示设备ID，用于限制订阅者只接收来自指定设备发布的公共事件。通过[@ohos.deviceInfo]{@link @ohos.deviceInfo:deviceInfo}获取udid，作为发布方的设备ID。预留能力，暂不支持。字
+   * 符串长度不超过254字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -69,10 +67,9 @@ export interface CommonEventSubscribeInfo {
   publisherDeviceId?: string;
 
   /**
-   * 表示用户ID，用于限制订阅者只接收指定用户ID相关的公共事件。此参数是可选的，
-   * 默认值为当前用户的ID。如果指定了此参数，则该值必须是系统中现有的用户ID。通过
-   * [getOsAccountLocalId]{@link ./../@ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
-   * 获取系统用户ID，作为发布者的用户ID。
+   * 表示用户ID，用于限制订阅者只接收指定用户ID相关的公共事件。此参数是可选的，默认值为当前用户的ID。如果指定了此参数，则该值必须是系统中现有的用户ID。通过
+   * [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager#getOsAccountLocalId(callback: AsyncCallback<int>)}
+   * 获取系统用户ID，作为发布方的用户ID。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -82,8 +79,9 @@ export interface CommonEventSubscribeInfo {
   userId?: int;
 
   /**
-   * 表示订阅者的优先级，数值越大，订阅者优先级越高，越优先接收到有序公共事件。
-   * 取值范围是-100到1000，超过上下限的优先级将被设置为对应的上下限值，默认优先级为0。
+   * 表示订阅者的优先级，数值越大，订阅者优先级越高，越优先接收到
+   * [有序公共事件](docroot://basic-services/common-event/common-event-glossary.md#ordered-common-event有序公共事件)。取值范围是-100到1000，
+   * 超过上下限的优先级将被设置为对应的上下限值，默认优先级为0。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
@@ -93,8 +91,7 @@ export interface CommonEventSubscribeInfo {
   priority?: int;
 
   /**
-   * 表示要订阅的发布者的bundleName，用于限制订阅方只接收该bundleName的发布者
-   * 发布的公共事件。不设置时，可接收所有应用发布的公共事件。
+   * 表示要订阅的发布方的bundleName，用于限制订阅方只接收该bundleName的发布方发布的公共事件。不设置时，可接收所有应用发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice

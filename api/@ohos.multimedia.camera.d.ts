@@ -18024,7 +18024,7 @@ declare namespace camera {
     /**
      * Gets the current custom bias value for the specified OIS axis.
      *
-     * @param { OISAxes } oisAxis - The OIS axis
+     * @param { OISAxes } oisAxis - The OIS axis.
      * @returns { double } The current bias value.
      * @throws { BusinessError } 7400102 - Operation not allowed, the inputDevice or the session is abnormal.
      * @throws { BusinessError } 7400103 - Session not config.

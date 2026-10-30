@@ -403,7 +403,7 @@ export interface AbilityDelegator {
   /**
    * Obtains the application context.
    *
-   * @returns { Context } [Context]{@link ./app/context}.
+   * @returns { Context } [Context]{@link ../app/context}.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @crossplatform [since 10]
    * @atomicservice [since 11]

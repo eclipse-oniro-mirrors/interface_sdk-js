@@ -39,7 +39,7 @@ declare namespace photoAccessHelper {
    *
    * @param { Context } context - 传入Ability实例的上下文。
    * @returns { PhotoAccessHelper } 相册管理模块的实例。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -56,7 +56,7 @@ declare namespace photoAccessHelper {
    *
    * @param { Context } context - Context of the ability instance.
    * @returns { PhotoAccessHelper | null } Instance of PhotoAccessHelper. if the operation fails, returns null.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -1289,7 +1289,7 @@ declare namespace photoAccessHelper {
      *     [cancelRequest]{@link photoAccessHelper.MediaAssetManager#cancelRequest}取消请求。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1318,7 +1318,7 @@ declare namespace photoAccessHelper {
      *     [cancelRequest]{@link photoAccessHelper.MediaAssetManager.cancelRequest}取消请求。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1346,7 +1346,7 @@ declare namespace photoAccessHelper {
      *     [cancelRequest]{@link photoAccessHelper.MediaAssetManager#cancelRequest}取消请求。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1375,7 +1375,7 @@ declare namespace photoAccessHelper {
      *     [cancelRequest]{@link photoAccessHelper.MediaAssetManager.cancelRequest}取消请求。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1409,7 +1409,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1440,7 +1440,7 @@ declare namespace photoAccessHelper {
      *     [cancelRequest]{@link photoAccessHelper.MediaAssetManager.cancelRequest}取消请求。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1477,7 +1477,7 @@ declare namespace photoAccessHelper {
      *     <br>示例：'file://com.example.temptest/data/storage/el2/base/haps/VideoFile.mp4'
      * @returns { Promise<MovingPhoto> } Promise对象，返回
      *     [MovingPhoto]{@link @ohos.file.photoAccessHelper:photoAccessHelper}实例。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1557,6 +1557,21 @@ declare namespace photoAccessHelper {
       asset: PhotoAsset, 
       dataHandler: MediaAssetDataHandler<image.ImageSource>
     ) : Promise<string>;
+
+    /**
+     * 加载合一动态照片为MovingPhoto对象
+     *
+     * @param { string } singleFileMovingPhotoUri - 合一动态照片uri。
+     * @returns { MovingPhoto } MovingPhoto对象
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The singleFileMovingPhotoUri is empty or can not open.
+     *     <br>2. The singleFileMovingPhotoUri is belonging to MediaLibrary.
+     * @throws { BusinessError } 23800109 - Incorrect file format.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static loadSingleFileMovingPhoto(singleFileMovingPhotoUri: string): MovingPhoto;
   }
 
   /**
@@ -1831,7 +1846,7 @@ declare namespace photoAccessHelper {
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
      *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1852,7 +1867,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<void> } callback - 回调函数。当修改文件元数据成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1882,7 +1897,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1918,7 +1933,7 @@ declare namespace photoAccessHelper {
      * @param { string } mode - 打开文件方式，分别为：'r'（只读）, 'w'（只写）, 'rw'（读写）。
      * @param { AsyncCallback<number> } callback - callback返回文件描述符。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1948,7 +1963,7 @@ declare namespace photoAccessHelper {
      * @param { string } mode - 打开文件方式，分别为：'r'（只读）, 'w'（只写）, 'rw'（读写）。
      * @returns { Promise<number> } Promise对象，返回文件描述符。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1975,7 +1990,7 @@ declare namespace photoAccessHelper {
      *     否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2002,7 +2017,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<number> } Promise对象，返回文件描述符。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2025,7 +2040,7 @@ declare namespace photoAccessHelper {
      *
      * @param { number } fd - 文件描述符。
      * @param { AsyncCallback<void> } callback - 回调函数。当关闭当前文件成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2047,7 +2062,7 @@ declare namespace photoAccessHelper {
      *
      * @param { number } fd - 文件描述符。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2070,7 +2085,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当获取文件的缩略图成功，err为undefined，
      *     data为缩略图的PixelMap；否则为错误对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2097,7 +2112,7 @@ declare namespace photoAccessHelper {
      * @param { image.Size } size - 缩略图尺寸。
      * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当获取文件的缩略图成功，err为undefined，
      *     data为缩略图的PixelMap；否则为错误对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2126,7 +2141,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @param { image.Size } [size] - 缩略图尺寸。
      * @returns { Promise<image.PixelMap> } Promise对象，返回缩略图的PixelMap。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2158,7 +2173,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2182,7 +2197,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2204,7 +2219,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2228,7 +2243,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2252,7 +2267,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2274,7 +2289,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2296,7 +2311,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2324,7 +2339,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @param { AsyncCallback<string> } callback - 返回Exif字段组成的json格式的字符串。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2346,7 +2361,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2372,7 +2387,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @returns { Promise<string> } 返回Exif标签组成的json格式的字符串。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2402,7 +2417,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2430,7 +2445,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2450,7 +2465,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2470,7 +2485,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2491,7 +2506,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2515,7 +2530,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2539,7 +2554,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2565,7 +2580,7 @@ declare namespace photoAccessHelper {
      *     [PhotoAsset]{@link @ohos.file.photoAccessHelper:photoAccessHelper}。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2585,7 +2600,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2607,7 +2622,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2625,7 +2640,7 @@ declare namespace photoAccessHelper {
      * 提交编辑数据以及编辑后的图片或视频。使用callback异步回调。
      * 
      * 通过uri将编辑后的文件传递给媒体库，uri是编辑后的文件在应用沙箱下的FileUri，可参考
-     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}。
+     * [文件URI]{@link ./@ohos.file.fileuri:fileUri.FileUri}。
      * 
      * > **注意：**
      * >
@@ -2638,7 +2653,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2656,7 +2671,7 @@ declare namespace photoAccessHelper {
      * 提交编辑数据以及编辑后的图片或视频。使用Promise异步回调。
      * 
      * 通过uri将编辑后的文件传递给媒体库，uri是编辑后的文件在应用沙箱下的FileUri，可参考
-     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}。
+     * [文件URI]{@link ./@ohos.file.fileuri:fileUri.FileUri}。
      * 
      * > **注意：**
      * >
@@ -2669,7 +2684,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2695,7 +2710,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2718,7 +2733,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2741,7 +2756,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2761,7 +2776,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2785,7 +2800,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2806,7 +2821,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2828,7 +2843,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -2849,7 +2864,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -3718,6 +3733,14 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     LOCAL_ENHANCEMENT_STATUS = 'local_enhancement_status',
+    /**
+     * 文件大小总和。在fetchColumns中填入SUM_SIZE属性时，仅获取到第一个资产，并且属性中带有所有资产的总大小。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @since 19 dynamic
+     */
+    SUM_SIZE = 'sum(size)',
   }
 
   /**
@@ -3766,6 +3789,17 @@ declare namespace photoAccessHelper {
      */
     REJECTED = 3
   }
+
+  /**
+   * 保存图片或视频到媒体库时的配置项，包括保存的文件名、文件类型和其他相关参数。
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 23 dynamic
+   * @since 26.0.0 static
+   */
+  interface CreationSetting {  }
 
   /**
    * 枚举，视频文件的log模式。
@@ -5071,7 +5105,7 @@ declare namespace photoAccessHelper {
    	 * [FetchResult]{@link @ohos.file.photoAccessHelper:photoAccessHelper}；否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 12]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5108,7 +5142,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<FetchResult<PhotoAsset>> } Promise对象，返回图片和视频数据结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 20]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5143,7 +5177,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5307,7 +5341,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<void> } callback - 回调函数。当相册属性修改成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5335,7 +5369,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5363,7 +5397,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<void> } callback - 回调函数。当添加图片或视频成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5401,7 +5435,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5440,7 +5474,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<void> } callback - 回调函数。当移除图片或视频成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5477,7 +5511,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5513,7 +5547,7 @@ declare namespace photoAccessHelper {
      * @param { Array<PhotoAsset> } assets - 回收站中待恢复图片或者视频数组。
      * @param { AsyncCallback<void> } callback - callback返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5534,7 +5568,7 @@ declare namespace photoAccessHelper {
      * @param { Array<PhotoAsset> } assets - 回收站中待恢复图片或者视频数组。
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5559,7 +5593,7 @@ declare namespace photoAccessHelper {
      * @param { Array<PhotoAsset> } assets - 回收站中待彻底删除图片或者视频数组。
      * @param { AsyncCallback<void> } callback - callback返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5584,7 +5618,7 @@ declare namespace photoAccessHelper {
      * @param { Array<PhotoAsset> } assets - 回收站中待彻底删除图片或者视频数组。
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5605,7 +5639,7 @@ declare namespace photoAccessHelper {
      * @param { string } uri - 待设置为相册封面文件的uri。
      * @param { AsyncCallback<void> } callback - callback返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5627,7 +5661,7 @@ declare namespace photoAccessHelper {
      * @param { string } uri - 待设置为相册封面文件的uri。
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5749,7 +5783,7 @@ declare namespace photoAccessHelper {
    	 * [FetchResult]{@link @ohos.file.photoAccessHelper:photoAccessHelper}；否则为错误对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 12]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5853,7 +5887,7 @@ declare namespace photoAccessHelper {
      * @param { string } displayName - 创建的图片或者视频文件名。
      * @param { AsyncCallback<PhotoAsset> } callback - callback返回创建的图片和视频结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5884,7 +5918,7 @@ declare namespace photoAccessHelper {
      * @param { string } displayName - 创建的图片或者视频文件名。
      * @returns { Promise<PhotoAsset> } Promise对象，返回创建的图片和视频结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5916,7 +5950,7 @@ declare namespace photoAccessHelper {
      * @param { PhotoCreateOptions } options - 图片或视频的创建选项。
      * @returns { Promise<PhotoAsset> } Promise对象，返回创建的图片和视频结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5948,7 +5982,7 @@ declare namespace photoAccessHelper {
      * @param { PhotoCreateOptions } options - 图片或视频的创建选项。
      * @param { AsyncCallback<PhotoAsset> } callback - callback返回创建的图片和视频结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -5978,7 +6012,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<string> } callback - callback返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6024,7 +6058,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<string> } callback - callback返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6072,7 +6106,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<string> } Promise对象，返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6152,7 +6186,7 @@ declare namespace photoAccessHelper {
      * @param { string } name - 待创建相册的相册名。
      * @param { AsyncCallback<Album> } callback - callback返回创建的相册实例。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6183,7 +6217,7 @@ declare namespace photoAccessHelper {
      * @param { string } name - 待创建相册的相册名。
      * @returns { Promise<Album> } Promise对象，返回创建的相册实例。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6205,7 +6239,7 @@ declare namespace photoAccessHelper {
      * @param { Array<Album> } albums - 待删除相册的数组。
      * @param { AsyncCallback<void> } callback - callback返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6226,7 +6260,7 @@ declare namespace photoAccessHelper {
      * @param { Array<Album> } albums - 待删除相册的数组。
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6252,7 +6286,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<FetchResult<Album>> } callback - callback返回获取相册的结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 12]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6296,7 +6330,7 @@ declare namespace photoAccessHelper {
      * @param { AsyncCallback<FetchResult<Album>> } callback - callback返回获取相册的结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 12]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6333,7 +6367,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<FetchResult<Album>> } Promise对象，返回获取相册的结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 12]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6371,7 +6405,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6391,7 +6425,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6436,7 +6470,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6454,7 +6488,7 @@ declare namespace photoAccessHelper {
      * @param { Array<string> } uriList - 待删除的媒体文件uri数组。
      * @param { AsyncCallback<void> } callback - callback返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6476,7 +6510,7 @@ declare namespace photoAccessHelper {
      * @param { Array<string> } uriList - 待删除的媒体文件uri数组。
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6500,7 +6534,7 @@ declare namespace photoAccessHelper {
      * @param { Callback<ChangeData> } callback - 返回要监听的[ChangeData]{@link photoAccessHelper.ChangeData}。注：uri可以注册多个不同的
      *     callback监听，[unRegisterChange]{@link photoAccessHelper.PhotoAccessHelper.unRegisterChange}可以关闭该uri所有监听，也可以关闭指定
      *     callback的监听。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6532,7 +6566,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Incorrect parameter types;
      *     <br>2. Parameter verification failed.
      * @throws { BusinessError } 14000011 - Internal system error.
@@ -6549,7 +6583,7 @@ declare namespace photoAccessHelper {
      * @param { Callback<ChangeData> } [callback] - 取消
      *     [registerChange]{@link photoAccessHelper.PhotoAccessHelper.registerChange}注册时的callback的监听，不填时，取消该uri的所有监听。注：
      *     off指定注册的callback后不会进入此回调。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6575,7 +6609,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.WRITE_IMAGEVIDEO
      * @param { Array<string> } uriList - 待删除的媒体文件uri数组，最大删除数量300。
      * @param { AsyncCallback<void> } callback - callback返回void。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6607,7 +6641,7 @@ declare namespace photoAccessHelper {
      * @permission ohos.permission.WRITE_IMAGEVIDEO
      * @param { Array<string> } uriList - 待删除的媒体文件uri数组，最大删除数量300。
      * @returns { Promise<void> } Promise对象，返回void。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6653,7 +6687,7 @@ declare namespace photoAccessHelper {
      *     <br>- 返回-3006表示不允许出现非法字符。
      *     <br>- 返回-2004表示图片类型和后缀不符。
      *     <br>- 返回-203表示文件操作异常。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6772,7 +6806,7 @@ declare namespace photoAccessHelper {
      *     <br>返回-3006表示不允许出现非法字符；返回-2004表示图片类型和后缀不符；返回-203表示文件操作异常。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6826,7 +6860,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6852,7 +6886,7 @@ declare namespace photoAccessHelper {
      *     <br>**注意：**
      *     <br>仅支持处理图片、视频URI，且最大数量限制为100个。
      * @returns { Promise<Array<string>> } Promise对象，返回已授权的URI列表。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6902,7 +6936,7 @@ declare namespace photoAccessHelper {
      * @param { FetchOptions } options - 检索选项，predicates中必须设置一种检索排序方式，不设置或多设置均会导致接口调用异常。
      * @param { AsyncCallback<int> } callback - callback返回相册中资源的索引。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6924,7 +6958,7 @@ declare namespace photoAccessHelper {
      * @param { FetchOptions } options - 检索选项，predicates中必须设置一种检索排序方式，不设置或多设置均会导致接口调用异常。
      * @returns { Promise<int> } 返回相册中资源的索引。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6943,7 +6977,7 @@ declare namespace photoAccessHelper {
      * 当后续不需要使用PhotoAccessHelper实例中的方法时调用。
      *
      * @param { AsyncCallback<void> } callback - 回调表示成功还是失败。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6966,7 +7000,7 @@ declare namespace photoAccessHelper {
      * 当后续不需要使用PhotoAccessHelper实例中的方法时调用。
      *
      * @returns { Promise<void> } Promise对象，返回void。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -6992,7 +7026,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7012,7 +7046,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7032,7 +7066,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7100,7 +7134,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7120,7 +7154,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7140,7 +7174,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7160,7 +7194,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7179,7 +7213,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7297,7 +7331,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7341,7 +7375,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7361,7 +7395,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7377,7 +7411,7 @@ declare namespace photoAccessHelper {
      *
      * @param { PhotoType } photoType - 媒体文件类型。
      * @returns { Promise<Array<string>> } Promise对象，返回支持的图片或者视频后缀列表。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7402,7 +7436,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7421,7 +7455,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -7446,7 +7480,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -8778,7 +8812,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     moveAssetsToDir(assets: string[], target: string, option?: BatchOperationOptions): Promise<string[]>;
 
@@ -8803,7 +8837,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     moveAssetsByPath(assets: string[], target: Album, option?: BatchOperationOptions): Promise<string[]>;
 
@@ -8863,7 +8897,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     cloneToDir(assets: string[], target: string, option?: BatchOperationOptions): Promise<string[]>;
 
@@ -8893,7 +8927,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     cloneAssetsByPath(assets: string[], target: Album, option?: BatchOperationOptions): Promise<string[]>;
 
@@ -8918,7 +8952,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     convertToAsset(path: string): Promise<PhotoAsset>;
 
@@ -9361,6 +9395,20 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     getShareAlbums(options?: FetchOptions): Promise<FetchResult<Album>>;
+
+    /**
+     * 校验是否是媒体库的uri，是返回true，不是返回false
+     *
+     * @param { string[] } uris - 待检查的uris。
+     * @returns { Map<string, boolean> } 返回Map结构，key为传入的uri, value为判断的结果
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The input uris list is empty.
+     *     <br>2. The length of the input uris list exceeds 500.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    verifyPhotoAssetUris(uris: string[]): Map<string, boolean>;
   }
 
   /**
@@ -9445,7 +9493,7 @@ declare namespace photoAccessHelper {
   export class RecentPhotoOptions {
     /**
      * 配置最近图片显示的时间范围，单位为秒（s）。配置后，系统将显示距离当前时间点指定时长内的图片。最长可配置时长为1天（86400s）。
-     * 
+     *
      * 当值小于等于0、大于86400或者未配置时，默认按最长时间段（1天）显示最近图片。当配置时间段内无符合的图片或视频时，组件不显示。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -10825,7 +10873,7 @@ declare namespace photoAccessHelper {
      * 当应用配置的过滤条件string不满足上述规格时，过滤结果为空。
      * 
      * 配置该参数时，仅取数组前三个参数进行处理，MIMEType、mimeTypeFilter参数自动失效。
-     * 
+     *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
      * @since 20 dynamic
@@ -10952,7 +11000,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     textColor?: string;
   }
@@ -11590,7 +11638,7 @@ declare namespace photoAccessHelper {
      *
      * @param { PhotoSelectOptions } [option] - photoPicker选择选项，若无此参数，则默认选择媒体文件类型为图片和视频类型，默认选择媒体文件数量的最大值为50。
      * @returns { Promise<PhotoSelectResult> } Promise对象。返回photoPicker选择后的结果集
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -11618,7 +11666,7 @@ declare namespace photoAccessHelper {
      *
      * @param { PhotoSelectOptions } option - photoPicker选择选项。
      * @param { AsyncCallback<PhotoSelectResult> } callback - callback 返回photoPicker选择后的结果集。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -11644,7 +11692,7 @@ declare namespace photoAccessHelper {
      * > 去使用。具体操作请参考[媒体文件URI的使用方式](docroot://file-management/user-file-uri-intro.md#媒体文件uri的使用方式)。
      *
      * @param { AsyncCallback<PhotoSelectResult> } callback - callback 返回photoPicker选择后的结果集。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -11706,7 +11754,7 @@ declare namespace photoAccessHelper {
      * @param { string } compatibleFormat - 编辑数据的格式。
      * @param { string } formatVersion - 编辑数据格式的版本。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -11792,9 +11840,8 @@ declare namespace photoAccessHelper {
      * 表示私有动态照片资源。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
-     * @systemapi
-     * @since 13 dynamic
-     * @since 23 static
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
      */
     PRIVATE_MOVING_PHOTO_RESOURCE = 4,
 
@@ -12360,7 +12407,7 @@ declare namespace photoAccessHelper {
      * 构造函数，用于初始化资产变更请求。
      *
      * @param { PhotoAsset } asset - 需要变更的资产。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12382,13 +12429,13 @@ declare namespace photoAccessHelper {
      * 创建图片资产变更请求。
      * 
      * 指定待创建资产的数据来源，可参考
-     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
+     * [文件URI]{@link ./@ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - 传入Ability实例的上下文。
      * @param { string } fileUri - fileUri - 图片资产的数据来源，在应用沙箱下的uri。示例fileUri：'file://com.example.temptest/data/storage/
      *     el2/base/haps/entry/files/test.jpg'。
      * @returns { MediaAssetChangeRequest } 返回创建资产的变更请求。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12414,7 +12461,7 @@ declare namespace photoAccessHelper {
      *     which is specified by a URI in the application sandbox directory.
      * @returns { MediaAssetChangeRequest | null } - Returns a MediaAssetChangeRequest instance,
      *     if the operation fails, returns null
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12434,13 +12481,13 @@ declare namespace photoAccessHelper {
      * 创建视频资产变更请求。
      * 
      * 指定待创建资产的数据来源，可参考
-     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
+     * [文件URI]{@link ./@ohos.file.fileuri:fileUri.FileUri}.
      *
      * @param { Context } context - 传入Ability实例的上下文。
      * @param { string } fileUri - 视频资产的数据来源，在应用沙箱下的uri。示例fileUri：'file://com.example.temptest/data/storage/
      *     el2/base/haps/entry/files/test.mp4'。
      * @returns { MediaAssetChangeRequest } 返回创建资产的变更请求。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12465,7 +12512,7 @@ declare namespace photoAccessHelper {
      *     which is specified by a URI in the application sandbox directory.
      * @returns { MediaAssetChangeRequest | null } - Returns a MediaAssetChangeRequest instance.
      *     if the operation fails, returns null.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12498,7 +12545,7 @@ declare namespace photoAccessHelper {
      * @param { PhotoCreateOptions } [options] - 图片或视频的创建选项。
      * @returns { MediaAssetChangeRequest } 返回创建资产的变更请求。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12519,7 +12566,7 @@ declare namespace photoAccessHelper {
      * @returns { MediaAssetChangeRequest | null } - Returns a MediaAssetChangeRequest instance.
      *     if the operation fails, returns null
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12544,7 +12591,7 @@ declare namespace photoAccessHelper {
      * @param { CreateOptions } [options] - 创建选项，例如：{title: 'testPhoto'}。
      *     <br>文件名中不允许出现非法英文字符，包括：. .. \ / : * ? " ' ` < > | { } [ ]
      * @returns { MediaAssetChangeRequest }      **MediaAssetChangeRequest** created.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12572,7 +12619,7 @@ declare namespace photoAccessHelper {
      *     for example, {title: 'testPhoto'}.
      * @returns { MediaAssetChangeRequest | null } - Returns a MediaAssetChangeRequest instance,
      *     if the operation fails, returns null
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12597,7 +12644,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12626,7 +12673,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，返回void。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12679,7 +12726,7 @@ declare namespace photoAccessHelper {
      * > > 的提交生效之前，该接口会返回null。
      *
      * @returns { PhotoAsset } 返回当前资产变更请求中的资产。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12727,7 +12774,7 @@ declare namespace photoAccessHelper {
      *
      * @param { boolean } hiddenState - 是否设置为隐藏文件，true：将文件资产放入隐藏相册；false：从隐藏相册中恢复。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12744,7 +12791,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } userComment - 待修改的资产备注信息，备注信息最长为420字符。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12762,7 +12809,7 @@ declare namespace photoAccessHelper {
      * @param { double } longitude - 经度。
      * @param { double } latitude - 纬度。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12778,7 +12825,7 @@ declare namespace photoAccessHelper {
      * 修改媒体资产的标题。
      *
      * @param { string } title - 待修改的资产标题。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12798,7 +12845,7 @@ declare namespace photoAccessHelper {
      *
      * @param { MediaAssetEditData } editData - 待保存的资产编辑数据。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12822,7 +12869,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @FaAndStageModel
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     setCameraEditData(editData: MediaAssetEditData): void;
 
@@ -12854,7 +12901,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<int> } Promise对象，返回临时文件写句柄。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12874,7 +12921,7 @@ declare namespace photoAccessHelper {
 
     /**
      * 通过文件URI从应用沙箱添加资源，待添加资源的数据来源可参考
-     * [文件URI]{@link @ohos.file.fileuri:fileUri.FileUri}.
+     * [文件URI]{@link ./@ohos.file.fileuri:fileUri.FileUri}.
      * 
      * > **注意：**
      * >
@@ -12883,7 +12930,7 @@ declare namespace photoAccessHelper {
      * @param { ResourceType } type - 待添加资源的类型。
      * @param { string } fileUri - 待添加资源的数据来源，在应用沙箱下的uri。示例fileUri：'file://com.example.temptest/data/storage/el2/base/
      *     haps/entry/files/test.jpg'。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12910,7 +12957,7 @@ declare namespace photoAccessHelper {
      *
      * @param { ResourceType } type - 待添加资源的类型。
      * @param { ArrayBuffer } data - 待添加资源的数据。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12937,7 +12984,7 @@ declare namespace photoAccessHelper {
      * @param { ResourceType } type - 待添加资源的类型。
      * @param { PhotoProxy } proxy - 待添加资源的PhotoProxy 数据。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -12955,7 +13002,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } cameraShotKey - 锁屏相机拍照或录像的标记字段（仅开放给系统相机，其key值由系统相机定义）。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13025,7 +13072,7 @@ declare namespace photoAccessHelper {
      *
      * @param { MovingPhotoEffectMode } mode - 动态照片效果模式。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13042,7 +13089,7 @@ declare namespace photoAccessHelper {
      * 设置图片的显示旋转角度。本接口通过修改exif元数据实现对图片旋转角度的调整。
      *
      * @param { int } orientation - 待修改的图片旋转角度，且只能为0、90、180、270。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13106,7 +13153,7 @@ declare namespace photoAccessHelper {
      * @param { VideoEnhancementType } videoEnhancementType - The type of video enhancement
      * @param { string } photoId - The photo id of video
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13126,7 +13173,7 @@ declare namespace photoAccessHelper {
      *     <br>**注意：**
      *     <br>不支持传入WatermarkType.DEFAULT。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13177,7 +13224,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13369,7 +13416,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     setHiddenAttribute(hiddenState: boolean): void;
 
@@ -13395,9 +13442,23 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     setTitleByFile(name: string): void;
+
+    /**
+     * Set recentShow state of the asset.
+     *
+     * @param { boolean } isRencentShow - the new recentShow state of the asset
+     * @throws { BusinessError } 202 - Called by non-system application
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     * <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessError } 14000011 - System inner fail
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @since 18 dynamic
+     */
+    setIsRecentShow(isRencentShow: boolean): void;
   }
 
   /**
@@ -13453,7 +13514,7 @@ declare namespace photoAccessHelper {
      *
      * @param { boolean } hiddenState - 是否设置为隐藏文件，true：将文件资产放入隐藏相册；false：从隐藏相册中恢复。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13470,7 +13531,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } userComment - 待修改的资产备注信息，备注信息最长为420字符。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13488,7 +13549,7 @@ declare namespace photoAccessHelper {
      * @param { boolean } isRencentShow - 表示当前资产是否在“最近”列表中显示。true表示显示，false表示不显示。
      *     **false** otherwise.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13529,7 +13590,7 @@ declare namespace photoAccessHelper {
      * 构造函数用于初始化新创建的对象。用于对相册进行操作。
      *
      * @param { Album } album - 需要变更的相册。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13563,7 +13624,7 @@ declare namespace photoAccessHelper {
      * @param { string } name - 待创建相册的名称。
      * @returns { MediaAlbumChangeRequest } 返回创建相册的变更请求。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13582,7 +13643,7 @@ declare namespace photoAccessHelper {
      * @returns { MediaAlbumChangeRequest | null } - Returns a MediaAlbumChangeRequest instance.
      *     if the operation fails, returns null.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13607,7 +13668,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13680,7 +13741,7 @@ declare namespace photoAccessHelper {
      * > > 的提交生效之前，该接口会返回null。
      *
      * @returns { Album } 返回当前相册变更请求中的相册。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13715,7 +13776,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } coverUri - 待设置为相册封面文件的uri。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13741,7 +13802,7 @@ declare namespace photoAccessHelper {
      * - 相册名不允许重名。
      *
      * @param { string } name - 待设置的相册名称。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13764,7 +13825,7 @@ declare namespace photoAccessHelper {
      * 向相册中添加资产。
      *
      * @param { Array<PhotoAsset> } assets - 待添加到相册中的资产数组。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13789,7 +13850,7 @@ declare namespace photoAccessHelper {
      * 从相册中移除资产。
      *
      * @param { Array<PhotoAsset> } assets - 待从相册中移除的资产数组。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13814,7 +13875,7 @@ declare namespace photoAccessHelper {
      * @param { Array<PhotoAsset> } assets - 待从相册中移出的资产数组。
      * @param { Album } targetAlbum - 待移入资产的目标相册。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13853,7 +13914,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Array<PhotoAsset> } assets - 待从回收站中恢复的资产数组。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13894,7 +13955,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Array<PhotoAsset> } assets - 待从回收站中彻底删除的资产数组。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13934,7 +13995,7 @@ declare namespace photoAccessHelper {
      * 将人像相册的人物关系设置为“我”。
      *
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13955,7 +14016,7 @@ declare namespace photoAccessHelper {
      *     <br>2：设置人像相册为更多界面；
      *     <br>3：设置人像相册为收藏界面。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13972,7 +14033,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Array<PhotoAsset> } assets - 需要移除的文件列表。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -13990,7 +14051,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Album } target - 需要合并的目标相册，合并相册必须重命名。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -14008,7 +14069,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Album } album - 目标相册。如果要将当前相册排序到末位，则目标相册传入null。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -14024,7 +14085,7 @@ declare namespace photoAccessHelper {
      * 删除合影相册。
      *
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -14070,7 +14131,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     setHiddenAttribute(hiddenState: boolean, isInherited: boolean): void;
 
@@ -14097,7 +14158,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     setAlbumNameByFile(name: string): void;
 
@@ -14128,6 +14189,33 @@ declare namespace photoAccessHelper {
      * @since 26.0.0 dynamic&static
      */
     operateAttribute(operation: AlbumOperation): void;
+
+    /**
+     * 将指定相册融合到当前相册中。融合后，当前相册继承输入相册的信息和资产，输入相册被删除。
+     *
+     * 当前相册必须处于隐藏状态。输入相册必须是来源相册或用户相册，且其类型须与当前相册匹配。
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Album } album - 待融合的相册。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The input album is not a source album or a user album;
+     *     <br>2. The type of the input album does not match that of the current album;
+     *     <br>3. The current album is not hidden;
+     *     <br>4. The input album is not allowed to be absorbed.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    absorbAlbum(album: Album): void;
   }
 
   /**
@@ -14492,7 +14580,7 @@ declare namespace photoAccessHelper {
     public setShareAlbumName(owner: string, name: string): void;
 
     /**
-     * 设置共享相册的封面
+     * 设置共享相册的封面。
      *
      * @permission ohos.permission.MANAGE_SHARE_PHOTO and ohos.permission.WRITE_IMAGEVIDEO
      * @param { string } owner - 共享相册的所有者ID。
@@ -14985,7 +15073,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15009,7 +15097,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15032,7 +15120,7 @@ declare namespace photoAccessHelper {
      * @returns { Promise<ArrayBuffer> } Promise对象，返回包含所请求文件内容的ArrayBuffer。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15051,7 +15139,7 @@ declare namespace photoAccessHelper {
      * 获取动态照片的uri。
      *
      * @returns { string } 动态照片的uri。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15321,7 +15409,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Album } album - 智慧相册。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15341,7 +15429,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15562,7 +15650,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Album } album - 智慧相册。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15581,7 +15669,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15632,7 +15720,7 @@ declare namespace photoAccessHelper {
      *
      * @param { Album } album - 智慧相册。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15653,7 +15741,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15674,7 +15762,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15699,7 +15787,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15729,7 +15817,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15755,7 +15843,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15925,7 +16013,7 @@ declare namespace photoAccessHelper {
      * @param { Context } context - 传入Ability实例的Context。
      * @returns { CloudEnhancement } 返回云增强管理类实例。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15941,7 +16029,7 @@ declare namespace photoAccessHelper {
      * @param { Context } context - Context of the ability instance.
      * @returns { CloudEnhancement | null } Returns cloud enhancement instance, if the operation fails, returns null
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15966,7 +16054,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -15987,7 +16075,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16010,7 +16098,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16035,7 +16123,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16072,7 +16160,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16109,7 +16197,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16452,7 +16540,7 @@ declare namespace photoAccessHelper {
      * @param { Context } context - 传入Ability实例的Context。
      * @returns { CloudMediaAssetManager } 返回云端媒体资产管理类实例。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16474,7 +16562,7 @@ declare namespace photoAccessHelper {
      * @returns { CloudMediaAssetManager | null } Returns cloud media asset manager instance,
      *     if the operation fails, returns null
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16497,7 +16585,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -16562,7 +16650,7 @@ declare namespace photoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -18049,7 +18137,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     static getSearchResult(query: SearchQuery): Promise<SearchResult>;
   }
@@ -18366,7 +18454,16 @@ declare namespace photoAccessHelper {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    CONTACT_INFO_ATTR = 'contact_info'
+    CONTACT_INFO_ATTR = 'contact_info',
+    /**
+     * 相册隐藏操作属性。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HIDDEN_ATTR = 'hidden'
   }
 
   /**
@@ -18949,7 +19046,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface SearchQuery {
     /**
@@ -18959,7 +19056,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     queryString: string;
     /**
@@ -18969,7 +19066,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     offset: int;
     /**
@@ -18979,7 +19076,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     size: int;
   }
@@ -18990,7 +19087,7 @@ declare namespace photoAccessHelper {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface SearchResult {
     /**
@@ -19000,7 +19097,7 @@ declare namespace photoAccessHelper {
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     results: string[];
   }
@@ -19024,6 +19121,81 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     progress: int;
+  }
+
+  /**
+   * 合一动态照片管理类
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  class SingleFileMovingPhotoUtil {
+    /**
+     * 判断一个文件是否是合一动态照片
+     *
+     * @param { string } uri - Input uri.
+     * @returns { boolean } 是合一动态返回true,否则返回false。
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The uri is invalid.
+     *     <br>2. The uri can not be opened.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static isSingleFileMovingPhoto(uri: string): boolean;
+
+    /**
+     * 拆分合一动态照片为一张图片和一张视频
+     *
+     * @param { string } singleFileMovingPhotoUri - 合一动态照片。
+     * @param { string } outImageParentFolder - 图片保存父目录。
+     * @param { string } outVideoParentFolder - 视频保存父目录。
+     * @returns { string[] } 返回图片和视频的路径
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. SingleFileMovingPhotoUri、outImageParentFolder、outVideoParentFolder are empty or can not open.
+     *     <br>2. When saving generated files, a naming conflict occurs after more than 10 attempts.
+     * @throws { BusinessError } 23800109 - Incorrect file format.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static unpackingSingleFileMovingPhoto(
+        singleFileMovingPhotoUri: string, 
+        outImageParentFolder: string, 
+        outVideoParentFolder: string): string[];
+
+    /**
+     * 将一张图片和一段视频合并为合一动态照片
+     *
+     * @param { string } imageUri - 输入图片的uri。
+     * @param { string } videoUri - 输入视频的uri。
+     * @param { string } outParentFolder - 输出合一动态照片的父目录。
+     * @returns { string } 返回合一动态照片的路径
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. ImageUri、videoUri and outParentFolder are empty or can not open.
+     *     <br>2. The image and video formats do not satisfy jpeg/jpg/heic/heif+mp4.
+     *     <br>3. When saving generated files, a naming conflict occurs after more than 10 attempts.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static packingSingleFileMovingPhoto(imageUri: string, videoUri: string, outParentFolder: string): string;
+
+    /**
+     * 获取视频在合一动态照片中的偏移量
+     *
+     * @param { string } singleFileMovingPhotoUri - 合一动态照片uri。
+     * @returns { int } 视频在合一动态照片中的偏移量
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The singleFileMovingPhotoUri is empty or can not open.
+     *     <br>2. The singleFileMovingPhotoUri is belonging to MediaLibrary.
+     * @throws { BusinessError } 23800109 - Incorrect file format.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static getVideoOffset(singleFileMovingPhotoUri: string): int;
   }
 }
 

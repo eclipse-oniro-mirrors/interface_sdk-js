@@ -1630,10 +1630,16 @@ declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCond
 declare const Styles: MethodDecorator & StylesVersionDecorator;
 
 /**
- * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style 
- * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter 
- * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
+ * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style
+ * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter
+ * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing
  * style code duplication.
+ *
+ * value: Target built-in UI component type (such as **Text** and **Column**) for which the style is to be extended.
+ * Pass in the component type rather than a component instance. Custom components are not supported. The style
+ * attributes defined in the @Extend decorator will be bound to this component type, so that they can be called on the
+ * component in a chained manner.
+ * MethodDecorator: Method decorator. Developers do not need to pay attention to this return value.
  *
  * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
  * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
@@ -25341,6 +25347,39 @@ declare class CommonMethod<T> {
    * @since 18 dynamic
    */
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
+
+  /**
+   * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+   *
+   * This API works with the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} attribute.
+   * The shadow shape is recalculated when the component size changes.
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+   *     When the value type is {@link CircleShape}, {@link EllipseShape},
+   *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+   *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * Sets the clip mode for the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} when it is
+   * not filled. This API takes effect only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+   *
+   * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
 
   /**
    * Sets the edge light effect for the component.

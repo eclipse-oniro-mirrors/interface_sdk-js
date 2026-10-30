@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Describes an action button displayed in a notification
+ * @file NotificationActionButton
  * @kit NotificationKit
  */
 
@@ -28,10 +28,10 @@ import { RecordData } from '../@ohos.base';
 /*** endif */
 
 /**
- * The **NotificationActionButton** module defines the action buttons displayed in a notification. It is used to add
- * interactive action buttons in NotificationRequest, allowing users to trigger a **WantAgent** action by tapping the
- * button. This module is used when you need to provide interactive action buttons (such as **Reply** and
- * **Mark as read**) in a notification.
+ * The **NotificationActionButton** module defines the action buttons displayed in a notification. It is used to add 
+ * interactive action buttons in [NotificationRequest]{@link ./notificationRequest:NotificationRequest}, allowing users 
+ * to trigger a **WantAgent** action by tapping the button. This module is used when you need to provide interactive 
+ * action buttons (such as **Reply** and **Mark as read**) in a notification.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 7 dynamic
@@ -39,8 +39,8 @@ import { RecordData } from '../@ohos.base';
  */
 export interface NotificationActionButton {
   /**
-   * Title of the button, displayed on the action button of the notification. The string length cannot exceed 202
-   * bytes; the excess part will be truncated. It cannot be an empty string.
+   * Title of the button, displayed on the action button of the notification. The string length cannot exceed 202 bytes;
+   * the excess part will be truncated. It cannot be an empty string.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -49,9 +49,9 @@ export interface NotificationActionButton {
   title: string;
 
   /**
-   * **WantAgent** triggered when the button is tapped, which encapsulates the application's behavioral intent. After
-   * the user taps the button, the system will execute the action in the method specified by the **WantAgent** (such
-   * as navigating to a specified **UIAbility** or sending a common event).
+   * **WantAgent** triggered when the button is tapped, which encapsulates the application's behavioral intent. After 
+   * the user taps the button, the system will execute the action in the method specified by the **WantAgent** (such as 
+   * navigating to a specified **UIAbility** or sending a common event).
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -60,9 +60,9 @@ export interface NotificationActionButton {
   wantAgent: WantAgent;
 
   /**
-   * Extension information of the button. The default value is empty. It is used to store custom extension data of the button.
-   * An application can add any key-value pair information as needed, such as the specific identifier and additional
-   * data of the button.
+   * Extension information of the button. The default value is empty. It is used to store custom extension data of the 
+   * button. An application can add any key-value pair information as needed, such as the specific identifier and 
+   * additional data of the button.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -70,7 +70,8 @@ export interface NotificationActionButton {
   extras?: { [key: string]: any };
 
   /**
-   * Extension information of the button. The default value is empty. It is used to store custom extension data of the button.
+   * Extension information of the button. The default value is empty. It is used to store custom extension data of the 
+   * button.
    * An application can add any key-value pair information as needed, such as the specific identifier and additional
    * data of the button.
    *
