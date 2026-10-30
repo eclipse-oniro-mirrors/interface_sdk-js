@@ -47,6 +47,16 @@ declare namespace inputMethodEngine {
   const ENTER_KEY_TYPE_UNSPECIFIED: int;
 
   /**
+   * The Enter key has no specific behavior. The value is fixed at 1.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  const ENTER_KEY_TYPE_NONE: int;
+
+  /**
    * Key that executes a command or navigates to a specific location.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -126,6 +136,16 @@ declare namespace inputMethodEngine {
    * @since 23 static
    */
   const PATTERN_TEXT: int;
+
+  /**
+   * The multi-line edit Box. The value is fixed at 1.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  const PATTERN_MULTILINE: int;
 
   /**
    * Number edit box.
@@ -4771,6 +4791,506 @@ declare namespace inputMethodEngine {
      * @since 26.1.0 dynamic&static
      */
     CUSTOM = 3
+  }
+
+  /**
+   * Defines the options for registering a proxy input method.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface RegisterOptions {
+    /**
+     * Range of edit box patterns to proxy. Each element **must be** one of the PATTERN_* constants, such as
+     * [PATTERN_TEXT]{@link inputMethodEngine.PATTERN_TEXT} or
+     * [PATTERN_NUMBER]{@link inputMethodEngine.PATTERN_NUMBER}. If this parameter is not specified, all edit box
+     * patterns are proxied. This parameter cannot be an empty array.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    inputPatternTypes?: Array<int>;
+  }
+
+  /**
+   * Registers a proxy input method. The proxy input method is activated when an edit box
+   * in the same process gains focus, triggers input method binding, and matches the options specified in
+   * **RegisterOptions**.
+   *
+   * @param { RegisterOptions } [options] - Options for registering the proxy input method.
+   *     If not specified, all edit box patterns are proxied.
+   *     If called again with different options, the new options take effect (last wins).
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 12800027 - The caller is not a focused application.
+   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerInAppProxyIme(options?: RegisterOptions): Promise<void>;
+
+  /**
+   * Unregisters the proxy input method registered by
+   * [registerInAppProxyIme]{@link inputMethodEngine.registerInAppProxyIme}. This API is idempotent:
+   * it returns success even if no proxy is registered.
+   *
+   * @returns { Promise<void> } Promise that returns no value.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterInAppProxyIme(): Promise<void>;
+
+  /**
+   * Obtains a [ProxyInputMethodAbility]{@link inputMethodEngine.ProxyInputMethodAbility} instance.
+   * The caller must not be an input method extension;
+   * <br>
+   * <br>The caller as the proxy input method can use the obtained instance to subscribe to a input start event, and
+   * more.
+   *
+   * @returns { ProxyInputMethodAbility | null } **ProxyInputMethodAbility** instance.
+   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getProxyInputMethodAbility(): ProxyInputMethodAbility | null;
+
+  /**
+   * Obtains a [ProxyKeyboardDelegate]{@link inputMethodEngine.ProxyKeyboardDelegate} instance.
+   * The caller must not be an input method extension;
+   * <br>
+   * <br>The caller as the proxy input method can use the instance to subscribe to a physical keyboard event, text
+   * selection change event, and more.
+   *
+   * @returns { ProxyKeyboardDelegate | null } **ProxyKeyboardDelegate** instance.
+   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getProxyKeyboardDelegate(): ProxyKeyboardDelegate | null;
+
+  /**
+   * The callback of 'inputStart' event for the proxy input method provider.
+   *
+   * @param { ProxyTextInputClient } inputClient - proxy text input client.
+   * @param { ProxyKeyboardController } keyboardController - proxy keyboard controller.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type ProxyInputStartCallback = (inputClient: ProxyTextInputClient, keyboardController: ProxyKeyboardController) => void;
+
+  /**
+   * In the following API examples, you must first use
+   * [onInputStart]{@link inputMethodEngine.ProxyInputMethodAbility.onInputStart}
+   * to obtain a **ProxyTextInputClient** instance, and then call the APIs using the obtained instance.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ProxyTextInputClient {
+    /**
+     * Sends the function key. This API uses a promise to return the result.
+     *
+     * @param { int } action - Action of the function key. The value **must be** one of the ENTER_KEY_TYPE_* constants,
+     * such as [ENTER_KEY_TYPE_UNSPECIFIED]{@link inputMethodEngine.ENTER_KEY_TYPE_UNSPECIFIED} or
+     * [ENTER_KEY_TYPE_DONE]{@link inputMethodEngine.ENTER_KEY_TYPE_DONE}.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    sendKeyFunction(action: int): Promise<void>;
+
+    /**
+     * Deletes the fixed-length text before the cursor. This API uses a promise to return the result.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *    <br> The vale should be an integer
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    deleteForward(length: int): Promise<void>;
+
+    /**
+     * Deletes the fixed-length text after the cursor. This API uses a promise to return the result.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *    <br> The vale should be an integer
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    deleteBackward(length: int): Promise<void>;
+
+    /**
+     * Inserts text. This API uses a promise to return the result.
+     *
+     * @param { string } text - Text to insert.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    insertText(text: string): Promise<void>;
+
+    /**
+     * Obtains the specific-length text before the cursor. This API uses a promise to return the result.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *    <br> The vale should be an integer
+     * @returns { Promise<string> } Promise used to return the specific-length text before the cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getForward(length: int): Promise<string>;
+
+    /**
+     * Obtains the specific-length text after the cursor. This API uses a promise to return the result.
+     *
+     * @param { int } length - Text length, which cannot be less than 0.
+     *    <br> The vale should be an integer
+     * @returns { Promise<string> } Promise used to return the specific-length text after the cursor.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getBackward(length: int): Promise<string>;
+
+    /**
+     * Obtains the attribute of the edit box. This API uses a promise to return the result.
+     *
+     * @returns { Promise<EditorAttribute> } Promise used to return the attribute of the edit box.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getEditorAttribute(): Promise<EditorAttribute>;
+
+    /**
+     * Moves the cursor. This API uses a promise to return the result.
+     *
+     * @param { int } direction - Direction in which the cursor moves.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    moveCursor(direction: Direction): Promise<void>;
+
+    /**
+     * Selects text based on the specified range. This API uses a promise to return the result.
+     *
+     * @param { Range } range - Range of the selected text.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    selectByRange(range: Range): Promise<void>;
+
+    /**
+     * Selects text based on the cursor movement direction. This API uses a promise to return the result.
+     *
+     * @param { Movement } movement - Direction in which the cursor moves when the text is selected.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    selectByMovement(movement: Movement): Promise<void>;
+
+    /**
+     * Obtains the index of the text where the cursor is located. This API uses a promise to return the result.
+     *
+     * @returns { Promise<int> } Promise used to return the result.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getTextIndexAtCursor(): Promise<int>;
+
+    /**
+     * Sends an extended edit action. This API uses a promise to return the result.
+     * 
+     * @param { ExtendAction } action - Extended edit action to send.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    sendExtendAction(action: ExtendAction): Promise<void>;
+  }
+
+  /**
+   * You must first use
+   * [onInputStart]{@link inputMethodEngine.ProxyInputMethodAbility.onInputStart}
+   * to obtain a **ProxyKeyboardController** instance, and then use this instance to call the following APIs.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ProxyKeyboardController {
+    /**
+     * Notifies the framework that the custom keyboard has been hidden. When the user taps the hide button on the
+     * custom keyboard, the application calls this API to notify the edit box that the custom keyboard is hidden.
+     *
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    hideSelf(): Promise<void>;
+  }
+
+  /**
+   * In the following API examples, you must first use
+   * [getProxyInputMethodAbility]{@link inputMethodEngine.getProxyInputMethodAbility} to obtain a
+   * **ProxyInputMethodAbility** instance, and then call the APIs using the obtained instance.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ProxyInputMethodAbility {
+    /**
+     * Subscribe 'inputStart' event.
+     *
+     * @param { ProxyInputStartCallback } callback - the callback called when an edit box requests the proxy input
+     *     method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onInputStart(callback: ProxyInputStartCallback): void;
+
+    /**
+     * Unsubscribe 'inputStart' event.
+     *
+     * @param { ProxyInputStartCallback } [callback] - optional, the callback called when an edit box requests the
+     *     proxy input method.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offInputStart(callback?: ProxyInputStartCallback): void;
+
+    /**
+     * Subscribe 'keyboardShow' event.
+     *
+     * @param { Callback<void> } callback - the callback called when the proxy keyboard should be shown.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onKeyboardShow(callback: Callback<void>): void;
+
+    /**
+     * Unsubscribe 'keyboardShow' event.
+     *
+     * @param { Callback<void> } [callback] - optional, the callback called when the proxy keyboard should be shown.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offKeyboardShow(callback?: Callback<void>): void;
+
+    /**
+     * Subscribe 'keyboardHide' event.
+     *
+     * @param { Callback<void> } callback - the callback called when the proxy keyboard should be hidden.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onKeyboardHide(callback: Callback<void>): void;
+
+    /**
+     * Unsubscribe 'keyboardHide' event.
+     *
+     * @param { Callback<void> } [callback] - optional, the callback called when the proxy keyboard should be hidden.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offKeyboardHide(callback?: Callback<void>): void;
+
+    /**
+     * Subscribe 'unregister' event. This event is triggered when the framework passively
+     * unregisters the proxy input method (e.g., when the registration limit is exceeded).
+     * After receiving this callback, if the app is currently focused and needs to continue
+     * using the proxy input method, it should call registerInAppProxyIme again immediately;
+     * if not focused, it should re-register when it regains focus.
+     *
+     * @param { Callback<void> } callback - the callback called when the proxy input method is
+    * passively unregistered.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onUnregister(callback: Callback<void>): void;
+
+    /**
+     * Unsubscribe 'unregister' event.
+     *
+     * @param { Callback<void> } [callback] - optional, the callback called when the proxy input method is passively unregistered.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offUnregister(callback?: Callback<void>): void;
+  }
+
+  /**
+   * In the following API examples, you must first use
+   * [getProxyKeyboardDelegate]{@link inputMethodEngine.getProxyKeyboardDelegate} to obtain a
+   * **ProxyKeyboardDelegate** instance, and then call the APIs using the obtained instance.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ProxyKeyboardDelegate {
+    /**
+     * Subscribe key event.
+     *
+     * @param { InputKeyEventCallback } callback - the callback called when a key event occurs.
+     *     If the key is processed by event subscriber, callback should be return true, else return false.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onKeyEvent(callback: InputKeyEventCallback): void;
+    /**
+     * Unsubscribe key event.
+     *
+     * @param { InputKeyEventCallback } [callback] - optional, the callback called when a key event occurs.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offKeyEvent(callback?: InputKeyEventCallback): void;
+
+    /**
+     * Subscribe cursor context change.
+     *
+     * @param { CursorContextChangeCallback } callback - the callback called when cursor information changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onCursorContextChange(callback: CursorContextChangeCallback): void;
+    /**
+     * Unsubscribe cursor context change.
+     *
+     * @param { CursorContextChangeCallback } [callback] - optional, the callback called when cursor information
+     *     changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offCursorContextChange(callback?: CursorContextChangeCallback): void;
+
+    /**
+     * Subscribe selection change.
+     *
+     * @param { SelectionChangeCallback } callback - the callback called when the text selection changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onSelectionChange(callback: SelectionChangeCallback): void;
+    /**
+     * Unsubscribe selection change.
+     *
+     * @param { SelectionChangeCallback } [callback] - optional, the callback called when the text selection changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offSelectionChange(callback?: SelectionChangeCallback): void;
+
+    /**
+     * Subscribe text change.
+     *
+     * @param { Callback<string> } callback - the callback called when the text changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onTextChange(callback: Callback<string>): void;
+    /**
+     * Unsubscribe text change.
+     *
+     * @param { Callback<string> } [callback] - optional, the callback called when the text changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offTextChange(callback?: Callback<string>): void;
+
+    /**
+     * Subscribe input text attribute change.
+     *
+     * @param { Callback<EditorAttribute> } callback - the callback called when editor's attribute changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onEditorAttributeChanged(callback: Callback<EditorAttribute>): void;
+    /**
+     * Unsubscribe input text attribute change.
+     *
+     * @param { Callback<EditorAttribute> } [callback] - optional, the callback called when editor's attribute changes.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offEditorAttributeChanged(callback?: Callback<EditorAttribute>): void;
   }
 }
 
