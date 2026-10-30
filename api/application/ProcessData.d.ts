@@ -23,7 +23,7 @@
  * [appManager.on('applicationState')]{@link @ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)}
  * , the
  * [onProcessCreated](docroot://reference/apis-ability-kit/js-apis-inner-application-applicationStateObserver.md#applicationstateobserveronprocesscreated)
- *  callback in [ApplicationStateObserver]{@link ./application/ApplicationStateObserver} is invoked when the lifecycle of
+ *  callback in [ApplicationStateObserver]{@link ApplicationStateObserver} is invoked when the lifecycle of
  * an application or ability changes.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
