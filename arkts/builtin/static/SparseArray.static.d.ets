@@ -630,4 +630,18 @@ export class SparseArray<T> {
      * @since 26.0.0 staticonly
      */
     toSorted(compareFn?: (a: T, b: T) => int): SparseArray<T>;
+
+    /**
+     * Returns a string representing the elements of the array. The elements are converted to Strings using their
+     * toLocaleString methods.
+     *
+     * @param { Intl.LocalesArgument } [locales] - A string with a BCP 47 language tag, or an
+     *     array of such strings.
+     * @param { object } [options] - An object with configuration properties.
+     * @returns { string } A string representing the elements of the array.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @since 26.1.0 staticonly
+     */
+    public toLocaleString(locales?: Intl.LocalesArgument, options?: object): string;
 }
