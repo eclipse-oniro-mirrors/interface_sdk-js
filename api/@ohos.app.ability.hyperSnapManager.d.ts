@@ -19,7 +19,20 @@
  */
 
 /**
- * This module provides the capability to manage HyperSnap.
+ * The initialization process during app startup can be performed in advance as quick launch initialization,
+ *  so that apps started via Quick Launch do not repeat the initialization process, thereby accelerating startup.
+ *  The hyperSnapManager module provides Quick Launch management capabilities, including enabling or disabling the
+ *  Quick Launch feature of an app and requesting re-initialization of Quick Launch.
+ *
+ * > **NOTE**
+ * >
+ * > The initial APIs of this module are supported since API version 24. Newly added APIs will be marked with a
+ * > superscript to indicate their earliest API version.
+ *
+ * ###### Implementation Principle
+ *
+ * Quick Launch initializes an app only once, which saves the time required for app initialization and AbilityStage
+ *  creation during Quick Launch startup.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly

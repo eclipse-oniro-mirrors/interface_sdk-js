@@ -19,7 +19,17 @@
  */
 
 /**
- * The proxy object of the AgentExtensionAbility, used to send messages to the AgentExtensionAbility, etc.
+ * AgentProxy is used to send data or security authentication requests from the client to
+ *  the AgentExtensionAbility server.
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this module are supported since API version 24. Newly added APIs will be marked
+ * >   with a superscript to indicate their earliest API version.
+ * > - The APIs of this module are all system APIs.
+ * > - The APIs of this module can be used only in the stage model.
+ * > - The APIs of this module must be used in the main thread. They cannot be used in child threads such as
+ * >   Worker and TaskPool.
  *
  * @interface AgentProxy
  * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -29,9 +39,9 @@
  */
 export interface AgentProxy {
   /**
-   * Send data to the AgentExtensionAbility.
+   * The client calls this API to send data to the AgentExtensionAbility server.
    *
-   * @param { string } data - Indicates the data to send.
+   * @param { string } data - Data to be sent to the AgentExtensionAbility server.
    * @throws { BusinessError } 35600002 - Failed to send the IPC message.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
@@ -41,9 +51,9 @@ export interface AgentProxy {
   sendData(data: string): void;
 
   /**
-   * Send authentication to the AgentExtensionAbility.
+   * The client calls this API to send a security authentication request to the AgentExtensionAbility server.
    *
-   * @param { string } handshakeData - Indicates the handshake data to send.
+   * @param { string } handshakeData - Security authentication data to be sent to the AgentExtensionAbility server.
    * @throws { BusinessError } 35600002 - Failed to send the IPC message.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi

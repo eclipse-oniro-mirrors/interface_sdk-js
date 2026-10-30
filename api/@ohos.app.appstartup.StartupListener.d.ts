@@ -43,7 +43,11 @@ declare class StartupListener {
   /**
    * Called when all startup tasks complete.
    *
-   * @param { BusinessError<void> } error - Indicates the error during execution.
+   * @param { BusinessError<void> } error - Error information of the startup task execution. On success,
+   *     error is null. On failure, it contains an error code and an error description. You can obtain the
+   *     error code through error.code and the error description through error.message. Possible error codes
+   *     include 28800001, 28800002, 28800003, and 28800004. For details about the error causes and handling
+   *     measures, see Ability Subsystem Error Codes.
    * @syscap SystemCapability.Ability.AppStartup
    * @stagemodelonly
    * @since 12 dynamic

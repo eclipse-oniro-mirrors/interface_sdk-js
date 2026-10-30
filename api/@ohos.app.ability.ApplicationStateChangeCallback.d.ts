@@ -28,6 +28,19 @@
  * duration of the process in the foreground and background, or clearing memory caches when the process moves to the 
  * background.
  *
+ * > **NOTE**
+ * >
+ * > The initial APIs of this module are supported since API version 10. Newly added APIs will be marked with a
+ * > superscript to indicate their earliest API version.
+ * >
+ * > The APIs of this module can be used only in the stage model.
+ *
+ * ###### Constraints
+ *
+ * This module allows you to listen for foreground/background state changes of the current process. If you need to
+ * listen for foreground/background state changes of the entire application, use
+ * ApplicationStateObserver.onForegroundApplicationChanged.
+ *
  * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
  * @stagemodelonly
  * @crossplatform [since 18]
@@ -40,6 +53,9 @@ export default class ApplicationStateChangeCallback {
    * it does not mean that the process is already fully in the foreground state, but rather that it is about to enter 
    * the foreground state. At this point, operations that depend on the foreground state (such as launching another 
    * UIAbility) cannot be performed.
+   *
+   * **Example**
+   * For details, see [onApplicationBackground]{@link ApplicationStateChangeCallback#onApplicationBackground}.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @stagemodelonly
