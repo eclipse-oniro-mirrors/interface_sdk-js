@@ -284,7 +284,7 @@ declare namespace camera {
   }
 
   /**
-   * 视频配置信息项，继承[Profile]{@link camera.Profile}。
+   * 视频配置信息项。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -2948,8 +2948,6 @@ declare namespace camera {
   }
 
   /**
-   * Flash继承自[FlashQuery]{@link camera.FlashQuery}。
-   * 
    * 闪光灯类，对设备闪光灯操作。
    * 
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -3283,7 +3281,6 @@ declare namespace camera {
   }
 
   /**
-   * AutoExposure继承自[AutoExposureQuery]{@link camera.AutoExposureQuery}。
    * 
    * 自动曝光类，对设备自动曝光（AE）操作。
    *
@@ -3732,7 +3729,6 @@ declare namespace camera {
   }
 
   /**
-   * Focus继承自[FocusQuery]{@link camera.FocusQuery}。
    * 
    * 对焦类，对设备对焦操作。
    * 
@@ -4143,7 +4139,6 @@ declare namespace camera {
   }
 
   /**
-   * WhiteBalance继承自[WhiteBalanceQuery]{@link camera.WhiteBalanceQuery}。
    * 
    * 提供了处理设备白平衡的相关功能，包括获取和设置白平衡模式以及白平衡值。
    * 
@@ -4491,7 +4486,6 @@ declare namespace camera {
   }
 
   /**
-   * Zoom继承自[ZoomQuery]{@link camera.ZoomQuery}。
    * 
    * 变焦类，对设备变焦操作。
    * 
@@ -4682,7 +4676,6 @@ declare namespace camera {
   }
 
   /**
-   * Stabilization继承自[StabilizationQuery]{@link camera.StabilizationQuery}。
    * 
    * 提供设备在录像模式下设置视频防抖的操作。
    * 
@@ -4941,7 +4934,6 @@ declare namespace camera {
   }
 
   /**
-   * Beauty继承[BeautyQuery]{@link camera.BeautyQuery}
    * 提供获取和设置美颜效果的接口。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5218,7 +5210,6 @@ declare namespace camera {
   }
 
   /**
-   * ColorEffect 继承 [ColorEffectQuery]{@link camera.ColorEffectQuery}
    * 提供获取和设置镜头色彩效果的接口。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5278,8 +5269,6 @@ declare namespace camera {
   }
 
   /**
-   * ColorManagement继承自[ColorManagementQuery]{@link camera.ColorManagementQuery}。
-   * 
    * 色彩管理类，用于设置色彩空间参数。
    * 
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5394,8 +5383,6 @@ declare namespace camera {
   }
 
   /**
-   * ControlCenter继承自[ControlCenterQuery]{@link camera.ControlCenterQuery}。
-   * 
    * 控制中心类，用于使能相机控制器。
    * 
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -5443,7 +5430,7 @@ declare namespace camera {
   }
 
   /**
-   * 自动切换镜头类，继承自[AutoDeviceSwitchQuery]{@link camera.AutoDeviceSwitchQuery}，用于使能或去使能自动切换镜头。自动切换镜头能力仅支持折叠屏设备使用，详细开发指导请参考
+   * 自动切换镜头类，用于使能或去使能自动切换镜头。自动切换镜头能力仅支持折叠屏设备使用，详细开发指导请参考
    * [自动切换摄像头实践](docroot://media/camera/camera-auto-switch.md)。
    * 
    * 使用建议：自动切换镜头功能由系统自动完成输入设备切换、会话配置和参数接续。如系统发现镜头切换时，两颗镜头的变焦范围不一致，则会通过
@@ -5537,7 +5524,6 @@ declare namespace camera {
   }
 
   /**
-   * Macro继承自[MacroQuery]{@link camera.MacroQuery}。
    * 
    * 提供使能微距能力的接口。
    * 
@@ -6903,7 +6889,6 @@ declare namespace camera {
   }
 
   /**
-   * TripodDetectionResult extends [SceneFeatureDetectionResult]{@link camera.SceneFeatureDetectionResult}
    * 描述三脚架检测结果。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -6949,7 +6934,7 @@ declare namespace camera {
   }
 
   /**
-   * 提供场景检测能力，继承自[SceneDetectionQuery]{@link camera.SceneDetectionQuery}。
+   * 提供场景检测能力。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -8681,7 +8666,6 @@ declare namespace camera {
   }
 
   /**
-   * Portrait 继承自[PortraitQuery]{@link camera.PortraitQuery}。
    * 提供人像拍照设置相关接口。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -8859,7 +8843,7 @@ declare namespace camera {
     getVirtualAperture(): double;
 
     /**
-     * 设置虚拟光圈。可以先通过getSupportedVirtualApertures获取当前设备所支持的虚拟光圈列表。
+     * 设置虚拟光圈。可以先通过{@link getSupportedVirtualApertures}获取当前设备所支持的虚拟光圈列表。
      *
      * @param { double } aperture - 虚拟光圈值，通过getSupportedVirtualApertures接口获取。
      * @throws { BusinessError } 202 - Not System Application.
@@ -8941,7 +8925,7 @@ declare namespace camera {
   }
 
   /**
-   * 实现色彩控制功能。它继承自[ColorControlsQuery]{@link camera.ColorControlsQuery}。
+   * 实现色彩控制功能。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -9449,7 +9433,6 @@ declare namespace camera {
   }
 
   /**
-   * ManualExposure继承自[ManualExposureQuery]{@link camera.ManualExposureQuery}。
    * 提供了获取和设置曝光时长的方法。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
@@ -9815,8 +9798,6 @@ declare namespace camera {
   }
 
   /**
-   * 专业拍照会话类，继承自 Session、AutoExposure、ManualExposure、Focus、ManualFocus、
-   * WhiteBalance、ManualIso、Flash、Zoom、ColorEffect、Aperture 接口。
    * 用于设置专业拍照模式的参数，并保存运行相机所需的全部
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
@@ -10176,8 +10157,7 @@ declare namespace camera {
   }
 
   /**
-   * 专业录像会话类，继承自 Session、AutoExposure、ManualExposure、Focus、ManualFocus、
-   * WhiteBalance、ManualIso、Flash、Zoom、ColorEffect、Aperture 接口。
+   * 专业录像会话类。
    * 用于设置专业录像模式的参数，并保存运行相机所需的全部
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
@@ -10597,7 +10577,6 @@ declare namespace camera {
   }
 
   /**
-   * SlowMotionVideoSession extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect
    * 实现慢动作录像会话，设置慢动作录像模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自[Session]{@link camera.Session}。
@@ -10836,7 +10815,6 @@ declare namespace camera {
   }
 
   /**
-   * HighResolutionPhotoSession继承自[Session]{@link camera.Session}、[AutoExposure]{@link camera.AutoExposure}、[Focus]{@link camera.Focus}。
    * 实现高分辨率拍照会话，用于设置高分辨率拍照模式的参数，并保存运行相机所需的
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自[Session]{@link camera.Session}。
@@ -11384,7 +11362,6 @@ declare namespace camera {
   }
 
   /**
-   * LightPaintingPhotoSession extends Session, Flash, Focus, Zoom, ColorEffect
    * 实现光绘拍照会话，用于设置光绘拍照模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自[Session]{@link camera.Session}。
@@ -11803,7 +11780,7 @@ declare namespace camera {
   }
 
   /**
-   * 全景拍照会话类，继承自 Session、Focus、AutoExposure、WhiteBalance、ColorEffect 接口。
+   * 全景拍照会话类。
    * 用于设置全景拍照模式的参数，并保存运行相机所需的全部
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
@@ -12166,7 +12143,7 @@ declare namespace camera {
   }
 
   /**
-   * 预览输出类。继承[CameraOutput]{@link camera.CameraOutput}。
+   * 预览输出类。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -13206,7 +13183,7 @@ declare namespace camera {
   }
 
   /**
-   * 拍照会话中使用的输出信息，继承[CameraOutput]{@link camera.CameraOutput}。
+   * 拍照会话中使用的输出信息。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -14532,7 +14509,7 @@ declare namespace camera {
   }
 
   /**
-   * 录像会话中使用的输出信息，继承[CameraOutput]{@link camera.CameraOutput}。
+   * 录像会话中使用的输出信息。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -15392,7 +15369,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的基础人脸元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
+   * 相机检测到的基础人脸元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
    * 通过metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15461,7 +15438,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的人脸元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
+   * 相机检测到的人脸元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
    * metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15560,7 +15537,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的人体元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
+   * 相机检测到的人体元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
    * metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15576,7 +15553,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的猫脸元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
+   * 相机检测到的猫脸元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
    * metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15615,7 +15592,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的猫的身体元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
+   * 相机检测到的猫的身体元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
    * 通过metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15631,7 +15608,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的狗脸元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
+   * 相机检测到的狗脸元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通过
    * metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15670,7 +15647,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的狗的身体元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
+   * 相机检测到的狗的身体元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，
    * 通过metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15686,7 +15663,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的显著性物体元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来
+   * 相机检测到的显著性物体元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来
    * 源，通过metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15702,7 +15679,7 @@ declare namespace camera {
   }
 
   /**
-   * 相机检测到的二维码元数据信息，继承自[MetadataObject]{@link camera.MetadataObject}。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通
+   * 相机检测到的二维码元数据信息。[CameraInput]{@link camera.CameraInput}相机信息中的数据来源，通
    * 过metadataOutput.
    * [on('metadataObjectsAvailable')]{@link camera.MetadataOutput.on(type: 'metadataObjectsAvailable', callback: AsyncCallback<Array<MetadataObject>>)}
    * 接口获取。
@@ -15754,7 +15731,7 @@ declare namespace camera {
   }
 
   /**
-   * metadata流。继承[CameraOutput]{@link camera.CameraOutput}。
+   * metadata流。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @atomicservice [since 19]
@@ -16091,8 +16068,6 @@ declare namespace camera {
   }
 
   /**
-   * TimeLapsePhotoSession 继承 Session, Focus, ManualFocus, AutoExposure, ManualExposure, ManualIso, WhiteBalance,
-   * Zoom, ColorEffect
    * 实现延时拍照会话，用于设置延时拍照模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
@@ -16796,7 +16771,7 @@ declare namespace camera {
   }
 
   /**
-   * 实现深度数据输出。继承自 [CameraOutput]{@link camera.CameraOutput}。
+   * 实现深度数据输出。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -16974,7 +16949,7 @@ declare namespace camera {
   }
 
   /**
-   * 深度融合类。继承自 [DepthFusionQuery]{@link camera.DepthFusionQuery}。
+   * 深度融合类。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -17065,7 +17040,6 @@ declare namespace camera {
   }
 
   /**
-   * ColorReservation 继承 [ColorReservationQuery]{@link camera.ColorReservationQuery}
    * 提供获取和设置色彩保留类型的接口。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
