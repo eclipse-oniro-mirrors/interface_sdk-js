@@ -236,15 +236,14 @@ declare namespace hyperSnapManager {
      * > 这对于应用程序区分正常冷启动和Hyper Snap模板非常有用
      * > 进程初始化，允许他们相应地调整初始化逻辑。
      *
-     * @returns { Promise<boolean> } Promise用于返回结果。
-     *     **true**表示当前进程正在进行Hyper Snap初始化。
-     *     **false**表示当前进程未进行Hyper Snap初始化
+     * @returns { boolean } 返回true表示当前进程正在进行Hyper Snap初始化，
+     *     返回false表示当前进程未进行Hyper Snap初始化
      *     （快照已完成、失败或进程不是模板进程）。
      * @throws { BusinessError } 16000050 - Connect to system service failed.
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    function isHyperSnapInitializing(): Promise<boolean>;
+    function isHyperSnapInitializing(): boolean;
 }
 export default hyperSnapManager;
