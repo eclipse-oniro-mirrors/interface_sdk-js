@@ -18532,6 +18532,39 @@ declare interface DepthColorRGB {
 }
 
 /**
+ * 空间位置模式。表示角点位置使用的坐标系。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+declare enum SpatialPositionMode {
+  /**
+   * 世界XYZ坐标系模式。X、Y、Z分量均使用世界坐标。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  WORLD_XYZ = 0,
+
+  /**
+   * NDC XY与世界Z坐标系模式。X、Y分量使用NDC（标准化设备坐标系），Z分量使用世界坐标。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  NDC_XY_WORLD_Z = 1
+}
+
+/**
  * 三维空间中的空间角位置。
  * 用于为组件设置空间效果参数。
  *
@@ -18599,6 +18632,18 @@ declare interface SpatialPosition {
    * @since 26.0.0 dynamic
    */
   rightBottom: DepthVector3;
+
+  /**
+   * 角点位置的坐标系模式。
+   *
+   * @default SpatialPositionMode.WORLD_XYZ
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  positionMode?: SpatialPositionMode;
 }
 
 /**
