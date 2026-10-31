@@ -4608,10 +4608,15 @@ export declare class UIContext {
   getTextMenuController(): TextMenuController;
 
   /**
-   * Create a UI instance singleton without window and get its UIContext object.
+   * 创建一个不依赖窗口的UI实例，并返回其UI上下文。该接口所创建的UI实例是单例。
    *
-   * @param { common.UIAbilityContext | common.ExtensionContext } context - UIAbilityContext or ExtensionContext.
-   * @returns { UIContext | undefined } object UIContext, or undefined when failed.
+   * > **说明：**
+   * >
+   * > 返回的UI上下文只可用于创建[自定义节点](docroot://ui/arkts-user-defined-node.md)，不能执行其他UI操作。
+   *
+   * @param { common.UIAbilityContext | common.ExtensionContext } context - [UIAbility]{@link @ohos.app.ability.UIAbility}或
+   *     [ExtensionAbility]{@link @ohos.app.ability.ExtensionAbility:ExtensionAbility}所对应的上下文环境。
+   * @returns { UIContext | undefined } Context of the created UI instance, or **undefined** if creation fails.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. The number of parameters is incorrect.
    * <br> 2. Invalid parameter type of context.
