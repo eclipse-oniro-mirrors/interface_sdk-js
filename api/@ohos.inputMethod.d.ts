@@ -2342,6 +2342,23 @@ declare namespace inputMethod {
     recvMessage(msgHandler?: MessageHandler): void;
 
     /**
+     * Requests system input capability. This API uses a promise to return the result.
+     * <br>
+     * <br>For {@link InputCapabilityType#TRANSLATION}, the current input method must be the system default
+     * input method; otherwise, the request is rejected.
+     *
+     * @param { InputCapabilityType } type - The input capability type.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
+     * @throws { BusinessError } 12800010 - current ime is not the default ime.
+     * @throws { BusinessError } 12800027 - the input type is not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    requestSystemInputCapability(type: InputCapabilityType): Promise<void>;
+
+    /**
      * Enables listening for the select-by-range event. This API uses an asynchronous callback to return the result.
      *
      * @param { 'selectByRange' } type - Type of the listener to set. The value is fixed at 'selectByRange'.
@@ -4266,6 +4283,29 @@ declare namespace inputMethod {
      * @since 23 static
      */
     SERVICE_ABNORMAL
+  }
+  /**
+   * Enumerates the input capability types.
+   * <br>
+   * <br>Used by {@link inputMethod.InputMethodController.requestSystemInputCapability} to specify the system input
+   * capability to request.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InputCapabilityType {
+    /**
+     * Translation input capability.
+     * <br>
+     * <br>Usage scenarios: Used to request the input method to switch to translation mode. The current input method
+     * must be the system default input method; otherwise, the request is rejected with error 12800010.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TRANSLATION = 0
   }
   /**
    * Defines additional options for binding an input method.
