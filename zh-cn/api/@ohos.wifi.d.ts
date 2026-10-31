@@ -114,7 +114,7 @@ declare namespace wifi {
    * > 从API version 6开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO and (ohos.permission.GET_WIFI_PEERS_MAC or ohos.permission.LOCATION)
-   * @param { AsyncCallback<Array<WifiScanInfo>> } callback - 回调函数。当成功时，err为0，data为扫描到的热点；否则err为非0值，data为空。
+   * @param { AsyncCallback<Array<WifiScanInfo>> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 6 dynamiconly
    * @deprecated since 9
@@ -141,8 +141,7 @@ declare namespace wifi {
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.SET_WIFI_CONFIG
    * @param { WifiDeviceConfig } config - Wi-Fi配置信息。
-   * @param { AsyncCallback<number> } callback - 回调函数。当操作成功时，error为0，data为添加的网络配置ID，如果data值为-1，表示添加失败。当error为非0，表示处理出现错
-   *     误。
+   * @param { AsyncCallback<number> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.STA
    * @systemapi Hide this for inner system use.
    * @since 6 dynamiconly
@@ -177,8 +176,7 @@ declare namespace wifi {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { WifiDeviceConfig } config - Wi-Fi配置信息。
-   * @param { AsyncCallback<boolean> } callback - 回调函数。当操作成功时，异步错误对象error为0，data表示操作结果，true: 成功， false: 失败。如果异步错误对象error
-   *     为非0，表示处理出现错误。
+   * @param { AsyncCallback<boolean> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -212,8 +210,7 @@ declare namespace wifi {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { WifiDeviceConfig } config - Wi-Fi配置信息。
-   * @param { AsyncCallback<boolean> } callback - 回调函数。当操作成功时，异步错误对象error为0，data表示操作结果，true: 成功， false: 失败。如果error为非0，表示
-   *     处理出现错误。
+   * @param { AsyncCallback<boolean> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -305,7 +302,7 @@ declare namespace wifi {
    * > 从API version 6开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiLinkedInfo> } callback - 回调函数。当获取成功时，err为0，data表示Wi-Fi连接信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiLinkedInfo> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 6 dynamiconly
    * @deprecated since 9
@@ -616,7 +613,7 @@ declare namespace wifi {
    * > 从API version 8开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - 回调函数。当操作成功时，err为0，data表示P2P连接信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -648,7 +645,7 @@ declare namespace wifi {
    * > 从API version 8开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION
-   * @param { AsyncCallback<WifiP2pGroupInfo> } callback - 回调函数。当操作成功时，err为0，data表示当前组信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiP2pGroupInfo> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -680,7 +677,7 @@ declare namespace wifi {
    * > 从API version 8开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION
-   * @param { AsyncCallback<WifiP2pDevice[]> } callback - 回调函数。当操作成功时，err为0，data表示对端设备列表信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiP2pDevice[]> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @since 8 dynamiconly
    * @deprecated since 9

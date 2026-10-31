@@ -269,7 +269,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.SET_WIFI_CONFIG
    * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType无指定值，则bssidType默认为随机设备地址类型。
-   * @param { AsyncCallback<int> } callback - 回调函数。当操作成功时，error为0，data为添加的网络配置ID，如果data值为-1，表示添加失败。当操作错误，error为非0值。
+   * @param { AsyncCallback<int> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3.Parameter verification failed.
@@ -314,8 +314,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType未指定值，则bssidType默认为随机设备地址类型。
-   * @param { AsyncCallback<int> } callback - 回调函数。error为0时：操作成功，data为添加的网络配置ID，如果data值为-1，表示添加失败。<br /> error为非0值时：操作出现
-   *     错误。
+   * @param { AsyncCallback<int> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3.Parameter verification failed.
@@ -358,7 +357,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.SET_WIFI_INFO
    * @param { int } networkId - 网络配置ID。
-   * @param { AsyncCallback<void> } callback - 回调函数。当操作成功时，error为0。如果error为非0，表示处理出现错误。
+   * @param { AsyncCallback<void> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3.Parameter verification failed.
@@ -589,7 +588,7 @@ declare namespace wifiManager {
    * > - 如果应用申请了ohos.permission.GET_WIFI_PEERS_MAC权限，则返回结果中的bssid为真实BSSID地址，否则为随机设备地址。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiLinkedInfo> } callback - 回调函数。当获取成功时，error为0，data表示Wi-Fi连接信息。如果error为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiLinkedInfo> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -1230,7 +1229,7 @@ declare namespace wifiManager {
    * 获取P2P连接信息。使用callback异步回调。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - 回调函数。当操作成功时，err为0，data表示P2P连接信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiP2pLinkedInfo> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -1264,8 +1263,7 @@ declare namespace wifiManager {
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION and
    *     ohos.permission.APPROXIMATELY_LOCATION [since 9 - 9]
    * @permission ohos.permission.GET_WIFI_INFO [since 10]
-   * @param { AsyncCallback<WifiP2pGroupInfo> } callback - 回调函数。当操作成功时，err为0，data表示当前组信息。如果err为非0，表示处理出现错误。如果应用申请了
-   *     ohos.permission.GET_WIFI_PEERS_MAC权限，则返回结果中的deviceAddress为真实设备地址，否则为随机设备地址。
+   * @param { AsyncCallback<WifiP2pGroupInfo> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -1298,8 +1296,7 @@ declare namespace wifiManager {
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION and
    *     ohos.permission.APPROXIMATELY_LOCATION [since 9 - 9]
    * @permission ohos.permission.GET_WIFI_INFO [since 10]
-   * @param { AsyncCallback<WifiP2pDevice[]> } callback - 回调函数。当操作成功时，err为0，data表示对端设备列表信息。如果err为非0，表示处理出现错误。如果应用申请了
-   *     ohos.permission.GET_WIFI_PEERS_MAC权限，则返回结果中的deviceAddress为真实设备地址，否则为随机设备地址。
+   * @param { AsyncCallback<WifiP2pDevice[]> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -1330,7 +1327,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.GET_WIFI_CONFIG [since 9 - 10]
    * @permission ohos.permission.GET_WIFI_INFO [since 11]
-   * @param { AsyncCallback<WifiP2pDevice> } callback - 回调函数。当操作成功时，err为0，data表示本端设备信息。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<WifiP2pDevice> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -1480,8 +1477,7 @@ declare namespace wifiManager {
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.LOCATION and
    *     ohos.permission.APPROXIMATELY_LOCATION [since 9 - 9]
    * @permission ohos.permission.GET_WIFI_INFO [since 10]
-   * @param { AsyncCallback<Array<WifiP2pGroupInfo>> } callback - 回调函数。当操作成功时，err为0，data表示所有群组信息。如果err为非0，表示处理出现错误。如果应用申
-   *     请了ohos.permission.GET_WIFI_PEERS_MAC权限，则返回结果中的deviceAddress为真实设备地址，否则为随机设备地址。
+   * @param { AsyncCallback<Array<WifiP2pGroupInfo>> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -5589,6 +5585,148 @@ declare namespace wifiManager {
    * @since 26.1.0 dynamic&static
    */
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
+
+  /**
+   * Adds a DNS-SD service discovery request that matches DNS-SD services.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { string } [serviceType] - Service type, which is used for peer service discovery.
+   *     The recommended format is "_<ServiceName>._<Protocol>", for example, "_http._tcp".
+   *     Corresponds to the serviceType input parameter in {@link addDnsSdLocalP2pService}.
+   *     If this parameter is not specified, it defaults to an empty string, which matches all service types.
+   * @param { string } [instanceName] - Instance name, used to discover the peer service.
+   *     Corresponds to the instanceName input parameter in {@link addDnsSdLocalP2pService}.
+   *     If this parameter is not specified, it defaults to an empty string.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function addDnsSdServiceRequest(serviceType?: string, instanceName?: string): void;
+
+  /**
+   * Adds a UPnP service discovery request that matches the specified search target.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { string } [searchTarget] - UPnP search target. If this parameter is not specified,
+   *     it defaults to an empty string.<br>
+   *     Examples of input parameter types: <br>
+   *     <ul>
+   *     <li>Search all UPnP devices and services: "ssdp:all"
+   *     <li>Search specific root devices: "upnp:rootdevice"
+   *     <li>Search specific device types (urn:schemas-upnp-org:device:...): <br>
+   *         for example "urn:schemas-upnp-org:device:MediaServer:2"
+   *     <li>Search specific service types (urn:schemas-upnp-org:service:...): <br>
+   *         for example "urn:schemas-upnp-org:service:ContentDirectory:2"
+   *     <li>Search specific UUID: for example: "uuid:6859dede-8574-59ab-9332-123456789012"
+   *     </ul>
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function addUpnpServiceRequest(searchTarget?: string): void;
+
+  /**
+   * Queries the pending P2P service discovery requests. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @returns { Promise<Array<WifiP2pServiceRequest>> } Promise used to return the pending service discovery
+   *     request list.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function getP2pServiceRequest(): Promise<Array<WifiP2pServiceRequest>>;
+
+  /**
+   * Removes a specified service discovery request.
+   * You can obtain the list of registered service discovery requests by calling {@link getP2pServiceRequest}.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @param { WifiP2pServiceRequest } request - Service discovery request to remove.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function removeP2pServiceRequest(request: WifiP2pServiceRequest): void;
+
+  /**
+   * Removes all pending service discovery requests.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function removeAllP2pServiceRequests(): void;
+
+  /**
+   * Starts P2P service discovery. The pending requests' TLV queries are used, falling back to all service types
+   * if the pending list is empty.
+   * Use {@link addDnsSdServiceRequest} or {@link addUpnpServiceRequest} to add a service request before
+   * starting discovery.
+   *
+   * @permission ohos.permission.GET_WIFI_PEERS_MAC
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function discoverServices(): void;
+
+  /**
+   * Subscribes to generic service response events from peer devices.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO
+   * @param { Callback<P2pServiceDiscoveryInfo> } callback - Callback invoked when a service discovery
+   *     response is received from a peer device.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function onP2pServiceDiscovery(callback: Callback<P2pServiceDiscoveryInfo>): void;
+
+  /**
+   * Unsubscribes from generic service response events.
+   *
+   * @permission ohos.permission.GET_WIFI_INFO
+   * @param { Callback<P2pServiceDiscoveryInfo> } [callback] - Callback to unregister. If not specified,
+   *     all callbacks for this event type are unregistered.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2801000 - Operation failed.
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function offP2pServiceDiscovery(callback?: Callback<P2pServiceDiscoveryInfo>): void;
 }
+
+
 
 export default wifiManager;
