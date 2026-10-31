@@ -13671,7 +13671,7 @@ declare namespace audio {
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
 
     /**
-     * *Sets noise reduction mode for current audio capturer.
+     * Sets noise reduction mode for current audio capturer.
      * The supported mode should be obtained by {@link #getSupportedNoiseReductionModes}.
      * The actual effect may vary from different audio devices, and will be invalid when there are multiple
      * recording streams running simultaneously.
@@ -13744,6 +13744,7 @@ declare namespace audio {
      * The change may be triggered by the user through the system record controller panel, by the application calling
      * {@link #setNoiseReductionMode}, or by the system adjusting the mode due to device changes or
      * stream concurrency. For details, see {@link NoiseReductionModeChangeReason}.
+     * 
      * Application scenario: Applies to scenarios where applications need to detect noise reduction mode changes in real
      * time, such as
      * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE} live broadcast,
@@ -13764,6 +13765,7 @@ declare namespace audio {
 
     /**
      * Unsubscribe from the NR mode change event.
+     * 
      * Application scenario: This interface is invoked when the application no longer needs to detect the NR mode
      * change.
      * Constraint: If the callback parameter is transferred, only the registered callback that matches the callback
@@ -13772,7 +13774,7 @@ declare namespace audio {
      *
      * @param { Callback<NoiseReductionModeChangeInfo> } [callback] - Callback function, which is used to cancel
      *     subscription. If this parameter is not specified, all registered callbacks are canceled.
-     * <br>Default value: Default behavior: Cancel all registered noise reduction mode change callbacks by default.
+     *     <br>Default value: Default behavior: Cancel all registered noise reduction mode change callbacks by default.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
