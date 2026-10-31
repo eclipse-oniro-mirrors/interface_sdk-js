@@ -8819,8 +8819,6 @@ declare namespace camera {
   /**
    * 物理光圈对象。
    *
-   * Aperture继承自ApertureQuery。
-   *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi [since 11 - 23]
    * @publicapi [since 24]
@@ -8843,7 +8841,7 @@ declare namespace camera {
     getVirtualAperture(): double;
 
     /**
-     * 设置虚拟光圈。可以先通过{@link getSupportedVirtualApertures}获取当前设备所支持的虚拟光圈列表。
+     * 设置虚拟光圈。可以先通过{@link camera.ApertureQuery.getSupportedVirtualApertures}获取当前设备所支持的虚拟光圈列表。
      *
      * @param { double } aperture - 虚拟光圈值，通过getSupportedVirtualApertures接口获取。
      * @throws { BusinessError } 202 - Not System Application.
@@ -9798,6 +9796,7 @@ declare namespace camera {
   }
 
   /**
+   * 专业拍照会话类。
    * 用于设置专业拍照模式的参数，并保存运行相机所需的全部
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
