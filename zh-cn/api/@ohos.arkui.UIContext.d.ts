@@ -6045,9 +6045,9 @@ export class UIContext {
    * >
    * > 返回的UI上下文只可用于创建[自定义节点](docroot://ui/arkts-user-defined-node.md)，不能执行其他UI操作。
    *
-   * @param { common.UIAbilityContext | common.ExtensionContext } context -    *     [UIAbility]{@link @ohos.app.ability.UIAbility}或
+   * @param { common.UIAbilityContext | common.ExtensionContext } context - [UIAbility]{@link @ohos.app.ability.UIAbility}或
    *     [ExtensionAbility]{@link @ohos.app.ability.ExtensionAbility:ExtensionAbility}所对应的上下文环境。
-   * @returns { UIContext | undefined } Context of the created UI instance, or **undefined** if creation fails.
+   * @returns { UIContext | undefined } 创建的UI实例的上下文，创建失败时返回undefined。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. The number of parameters is incorrect.
    *     <br> 2. Invalid parameter type of context.
