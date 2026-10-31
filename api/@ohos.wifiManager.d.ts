@@ -582,7 +582,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2501000 - Operation failed, possibly causes:
-   *     <br>The network identified by the network does not exist.
+   *     <br>The network identified by networkId does not exist.
    *     <br>The candidate network was not added by the caller.
    *     <br>The caller is not running in the foreground.
    * @throws { BusinessError } 2501001 - Wi-Fi STA disabled.
