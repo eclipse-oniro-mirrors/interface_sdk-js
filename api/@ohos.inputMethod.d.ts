@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -134,6 +134,7 @@ import { PanelInfo } from './@ohos.inputMethod.Panel';
  * @since 23 static
  */
 declare namespace inputMethod {
+
   /**
    * Keyboard max number. Max value is 128.
    *
@@ -142,6 +143,41 @@ declare namespace inputMethod {
    * @since 23 static
    */
   const MAX_TYPE_NUM: int;
+
+  /**
+   * Injects text into the currently focused edit box of the foreground application. This API uses a promise to return
+   * the result.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { string } text - Text to inject. Maximun 512 bytes.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - permissions check fails.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+   *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
+   *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function injectText(text: string): Promise<void>;
+ 
+  /**
+   * Injects text into the currently focused edit box of the foreground application.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { string } text - Text to inject. Maximun 512 bytes.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - permissions check fails.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+   *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
+   *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function injectTextSync(text: string): void;
 
   /**
    * Obtains an [InputMethodSetting]{@link inputMethod.InputMethodSetting} instance.
