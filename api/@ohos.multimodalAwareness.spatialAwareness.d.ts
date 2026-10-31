@@ -343,7 +343,7 @@ declare namespace spatialAwareness {
    * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to
    *     <br> limited device capabilities.
    * @throws { BusinessError } 35100001 - Service exception.
-   * @throws { BusinessError } 35100003 - UnSubscription failed.
+   * @throws { BusinessError } 35100003 - Unsubscription failed.
    * @throws { BusinessError } 35100004 - Parameter invalid.
    * @syscap SystemCapability.MultimodalAwareness.DistanceMeasurement
    * @systemapi
