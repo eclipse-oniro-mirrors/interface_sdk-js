@@ -2283,13 +2283,14 @@ declare namespace cryptoFramework {
      * > 当前此接口与{@link squeezeSync}在每个**Md**实例上总共仅支持调用一次。
      *
      * @param { int } len - 输出摘要的字节长度。
+     *     <br>取值限定为整数。
      *     <br>SHAKE128算法支持的长度范围为32到65536。
      *     <br>SHAKE256算法支持的长度范围为64到65536。
      * @returns { Promise<DataBlob> } Promise对象，返回生成的消息摘要。
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
-     *     <br>1. Invalid len value;
+     *     <br>1. Invalid len value.
      * @throws { BusinessError } 17620004 - Invalid function call. The fixed-length digest algorithm, such as SHA256,
      *     does not support this API.
      * @syscap SystemCapability.Security.CryptoFramework.MessageDigest
@@ -2311,13 +2312,14 @@ declare namespace cryptoFramework {
      * 因此建议在子线程中调用同步API，以避免阻塞主线程。
      *
      * @param { int } len - 输出摘要的字节长度。
+     *     <br>取值限定为整数。
      *     <br>SHAKE128算法支持的长度范围为32到65536。
      *     <br>SHAKE256算法支持的长度范围为64到65536。
      * @returns { DataBlob } 生成的消息摘要。
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
-     *     <br>1. Invalid len value;
+     *     <br>1. Invalid len value.
      * @throws { BusinessError } 17620004 - Invalid function call. The fixed-length digest algorithm, such as SHA256,
      *     does not support this API.
      * @syscap SystemCapability.Security.CryptoFramework.MessageDigest
