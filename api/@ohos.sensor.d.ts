@@ -125,6 +125,7 @@ declare namespace sensor {
      * Barometric pressure sensor, which is used to measure atmospheric pressure.
      *
      * @syscap SystemCapability.Sensors.Sensor
+     * @atomicservice [since 26.1.0]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -1531,6 +1532,7 @@ declare namespace sensor {
    * @throws { BusinessError } 14500101 - Service exception. Possible causes: 1. Sensor hdf service exception;
    *     <br> 2. Sensor service ipc exception;3. Sensor data channel exception.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 9 dynamic
    */
   function on(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>, options?: Options): void;
@@ -2614,6 +2616,7 @@ declare namespace sensor {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br> 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 9 dynamic
    */
   function off(type: SensorId.BAROMETER, callback?: Callback<BarometerResponse>): void;
@@ -2632,6 +2635,7 @@ declare namespace sensor {
    * @throws { BusinessError } 14500101 - Service exception. Possible causes: 1. Sensor hdf service exception;
    *     <br> 2. Sensor service ipc exception;3. Sensor data channel exception.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 19 dynamic
    */
   function off(type: SensorId.BAROMETER, sensorInfoParam?: SensorInfoParam, callback?: Callback<BarometerResponse>): void;
@@ -6778,6 +6782,7 @@ declare namespace sensor {
    * Describes the barometer sensor data. It extends from [Response]{@link sensor.Response}.
    *
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -6786,6 +6791,7 @@ declare namespace sensor {
      * Atmospheric pressure, in hPa.
      *
      * @syscap SystemCapability.Sensors.Sensor
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */
