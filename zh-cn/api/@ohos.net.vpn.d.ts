@@ -14,9 +14,13 @@
  */
 
 /**
- * @file VPN Management
+ * @file VPN管理
  * @kit NetworkKit
  */
+
+import type { AsyncCallback, Callback } from './@ohos.base';
+import type connection from './@ohos.net.connection';
+import type _AbilityContext from './application/UIAbilityContext';
 
 /**
  * VPN管理模块，支持VPN的启动和停止功能。
@@ -49,6 +53,14 @@ declare namespace vpn {
    * @since 26.0.1 static
    */
   export type RouteInfo = connection.RouteInfo;
+
+  /**
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @since 10 dynamic
+   * @since 26.0.1 static
+   */
+  export type AbilityContext = _AbilityContext;
 
   /**
    * 创建一个 VPN 连接对象。
@@ -1221,3 +1233,5 @@ declare namespace vpn {
     OPENVPN = 9
   }
 }
+
+export default vpn;

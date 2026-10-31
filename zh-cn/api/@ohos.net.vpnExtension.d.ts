@@ -345,6 +345,36 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     protectProcessNet(): Promise<void>;
+
+    /**
+     * 为VPN网络添加路由
+     *
+     * @param { RouteInfo[] } routes - VPN接口的路由数组。
+     * @param { string } [vpnId] - vpn唯一标识
+     * @returns { Promise<void> } 函数返回的promise。
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    addRoute(routes: RouteInfo[], vpnId?: string): Promise<void>;
+
+    /**
+     * 删除VPN网络的路由
+     *
+     * @param { RouteInfo[] } routes - VPN接口的路由数组。
+     * @param { string } [vpnId] - vpn唯一标识。
+     * @returns { Promise<void> } 函数返回的promise。
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    delRoute(routes: RouteInfo[], vpnId?: string): Promise<void>;
   }
 
   /**

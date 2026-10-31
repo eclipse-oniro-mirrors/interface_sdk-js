@@ -231,8 +231,6 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     supportOriginPort?: boolean;
-
-
   }
 
   /**

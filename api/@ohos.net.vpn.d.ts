@@ -18,6 +18,10 @@
  * @kit NetworkKit
  */
 
+import type { AsyncCallback, Callback } from './@ohos.base';
+import type connection from './@ohos.net.connection';
+import type _AbilityContext from './application/UIAbilityContext';
+
 /**
  * This module is the built-in VPN function provided by the OS. It allows users to set up VPN connections through the
  * network settings of the OS. Generally, this module provides only limited functions and is subject to strict
@@ -45,6 +49,14 @@ declare namespace vpn {
    * @since 26.0.1 static
    */
   export type RouteInfo = connection.RouteInfo;
+
+  /**
+   * The context of an ability. It allows access to ability-specific resources.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @since 10 dynamic
+   * @since 26.0.1 static
+   */
+  export type AbilityContext = _AbilityContext;
 
   /**
    * Creates a VPN connection.
@@ -1247,3 +1259,5 @@ declare namespace vpn {
     OPENVPN = 9
   }
 }
+
+export default vpn;

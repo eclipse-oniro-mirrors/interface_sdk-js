@@ -198,7 +198,6 @@ declare namespace connection {
   /**
    * Obtains the list of all connected networks. This API uses an asynchronous callback to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<Array<NetHandle>> } callback - Callback used to return the result. If the list of all
    *     connected networks is obtained successfully, **error** is **undefined** and **data** is the list of activated
@@ -220,7 +219,6 @@ declare namespace connection {
   /**
    * Obtains the list of all connected networks. This API uses a promise to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<Array<NetHandle>> } Promise used to return the list of activated networks.
    * @throws { BusinessError } 201 - Permission denied.
@@ -234,7 +232,6 @@ declare namespace connection {
 
   /**
    * Obtains the list of all connected networks. This API returns the result synchronously.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Array<NetHandle> } List of all connected networks.
@@ -251,7 +248,6 @@ declare namespace connection {
    * Obtains the connection information of the data network specified by **NetHandle**, including the NIC name, domain
    * name, link information, route information, network address, and maximum transmission unit. This API uses an
    * asynchronous callback to return the result.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -274,7 +270,6 @@ declare namespace connection {
    * name, link information, route information, network address, and maximum transmission unit. This API uses a promise
    * to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Handle of the data network.
    * @returns { Promise<ConnectionProperties> } Promise used to return the network connection information.
@@ -294,7 +289,6 @@ declare namespace connection {
    * name, link information, route information, network address, and maximum transmission unit. This API returns the
    * result synchronously.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
    * @returns { ConnectionProperties } Network connection information.
@@ -313,7 +307,6 @@ declare namespace connection {
    * Obtains the network capability set of the data network specified by **NetHandle**, including the uplink and
    * downlink bandwidth, specific network capabilities, and network type. This API uses an asynchronous callback to
    * return the result.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -336,7 +329,6 @@ declare namespace connection {
    * Obtains the network capability set of the data network specified by **NetHandle**, including the uplink and
    * downlink bandwidth, specific network capabilities, and network type. This API uses a promise to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
    * @returns { Promise<NetCapabilities> } Promise used to return the network capability set.
@@ -355,7 +347,6 @@ declare namespace connection {
   /**
    * Obtains the network capability information of the data network specified by **NetHandle**, including the uplink and
    * downlink bandwidth, specific network capabilities, and network type. This API returns the result synchronously.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -419,7 +410,6 @@ declare namespace connection {
    * Obtains the extended attributes of the network specified by **netHandle** to determine its security level. This API
    * uses a promise to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
    * @returns { Promise<string> } Promise used to return the network extension attributes.
@@ -436,7 +426,6 @@ declare namespace connection {
   /**
    * Obtains the extended attributes of the network specified by **netHandle** to determine its security level. This API
    * returns the result synchronously.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { NetHandle } netHandle - Network handle.
@@ -456,7 +445,6 @@ declare namespace connection {
    * is not metered, whereas that over cellular networks is. This API uses an asynchronous callback to return the
    * result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** indicates that
    *     the data traffic over the current network is metered, and the value **false** indicates the opposite.
@@ -474,7 +462,6 @@ declare namespace connection {
    * Checks whether the data traffic over the current default network is metered. For example, data traffic over Wi-Fi
    * is not metered, whereas that over cellular networks is. This API uses a promise to return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the data traffic
    *     over the current network is metered, and the value **false** indicates the opposite.
@@ -490,7 +477,6 @@ declare namespace connection {
   /**
    * Checks whether the data traffic over the current network is metered. For example, data traffic over Wi-Fi is not
    * metered, whereas that over cellular networks is. This API returns the result synchronously.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { boolean } Boolean value indicating whether data traffic over the current network is metered. The value
@@ -508,7 +494,6 @@ declare namespace connection {
    * Checks whether there is an available network. This API uses an asynchronous callback to return the result. If there
    * is an available network, [getDefaultNet]{@link connection.getDefaultNet} can be used to obtain the default network
    * handle.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<boolean> } callback - Callback used to return whether there is an available network. The
@@ -529,7 +514,6 @@ declare namespace connection {
    * available network, [getDefaultNet]{@link connection.getDefaultNet} can be used to obtain the default network
    * handle.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { Promise<boolean> } Promise used to return whether there is an available network. The value **true**
    *     indicates that a network is available, and the value **false** indicates the opposite.
@@ -545,7 +529,6 @@ declare namespace connection {
 
   /**
    * Checks whether there is an available network. This API returns the result synchronously.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @returns { boolean } Whether there is an available network. The value **true** indicates that a network is
@@ -655,7 +638,6 @@ declare namespace connection {
    * Reports that the network is available to the network management module. This API uses a promise to return the
    * result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle. For details, see [NetHandle]{@link connection.NetHandle}.
    * @returns { Promise<void> } Promise that returns no value.
@@ -674,7 +656,6 @@ declare namespace connection {
    * Reports the network unavailability to the network management module. This API uses an asynchronous callback to
    * return the result.
    *
-   *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle. For details, see [NetHandle]{@link connection.NetHandle}.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the network status is reported
@@ -692,7 +673,6 @@ declare namespace connection {
 
   /**
    * Reports the network unavailability to the network management module. This API uses a promise to return the result.
-   *
    *
    * @permission ohos.permission.GET_NETWORK_INFO and ohos.permission.INTERNET
    * @param { NetHandle } netHandle - Network handle.

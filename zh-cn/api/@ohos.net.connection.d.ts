@@ -1152,18 +1152,16 @@ declare namespace connection {
   function clearCustomDnsRules(callback: AsyncCallback<void>): void;
 
   /**
+   * 删除当前应用程序的所有的自定义DNS规则。使用Promise异步回调。
    *
-   *
-   *
-   *
-   *
-   *
-   *
-   *
-   *
+   * > **说明：**
+   * >
+   * > 删除前需确认当前无线程正在使用当前存在的自定义规则，以避免冲突。
+   * >
+   * > 可调用[addCustomDnsRule]{@link connection.addCustomDnsRule}添加自定义规则。
    *
    * @permission ohos.permission.INTERNET
-   * @returns { Promise<void> } Promise that returns no value.
+   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
    * @throws { BusinessError } 2100002 - Failed to connect to the service.
@@ -1800,9 +1798,9 @@ declare namespace connection {
     on(type: 'netAvailable', callback: Callback<NetHandle>): void;
 
     /**
-     * Registers a listener for netAvailable events.
+     * 注册netAvailable事件监听。
      *
-     * @param { Callback<NetHandle> } callback - the callback used to return the result.
+     * @param { Callback<NetHandle> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice
@@ -1823,8 +1821,8 @@ declare namespace connection {
     on(type: 'netBlockStatusChange', callback: Callback<NetBlockStatusInfo>): void;
 
     /**
-     * Registers a listener for netBlockStatusChange events.
-     * @param { Callback<NetBlockStatusInfo> } callback - the callback used to return the result.
+     * 注册netBlockStatusChange事件监听。
+     * @param { Callback<NetBlockStatusInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 23 static
      */
@@ -1843,9 +1841,9 @@ declare namespace connection {
     on(type: 'netCapabilitiesChange', callback: Callback<NetCapabilityInfo>): void;
 
     /**
-     * Registers a listener for **netCapabilitiesChange** events.
+     * 注册netCapabilitiesChange事件监听。
      *
-     * @param { Callback<NetCapabilityInfo> } callback - the callback used to return the result.
+     * @param { Callback<NetCapabilityInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice
@@ -1867,9 +1865,9 @@ declare namespace connection {
     on(type: 'netConnectionPropertiesChange', callback: Callback<NetConnectionPropertyInfo>): void;
 
     /**
-     * Registers a listener for netConnectionPropertiesChange events.
+     * 注册netConnectionPropertiesChange事件监听。
      *
-     * @param { Callback<NetConnectionPropertyInfo> } callback - the callback used to return the result.
+     * @param { Callback<NetConnectionPropertyInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @since 26.0.1 static
      */
@@ -1888,8 +1886,8 @@ declare namespace connection {
     on(type: 'netLost', callback: Callback<NetHandle>): void;
 
     /**
-     * Registers a listener for **netLost** events.
-     * @param { Callback<NetHandle> } callback - the callback used to return the result.
+     * 注册netLost事件监听。
+     * @param { Callback<NetHandle> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice
@@ -1910,8 +1908,8 @@ declare namespace connection {
     on(type: 'netUnavailable', callback: Callback<void>): void;
 
     /**
-     * Registers a listener for netUnavailable events.
-     * @param { Callback<void> } callback - the callback used to return the result.
+     * 注册netUnavailable事件监听。
+     * @param { Callback<void> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.Core
      * @crossplatform
      * @atomicservice

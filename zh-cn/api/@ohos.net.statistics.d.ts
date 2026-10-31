@@ -826,12 +826,37 @@ declare namespace statistics {
   }
 
   /**
-   * Defines the historical traffic statistics of the specified application.
+   * 获取的应用历史流量信息。
    * @syscap SystemCapability.Communication.NetManager.Core
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
    */
-  export type NetStatsInfoSequence = {  }[]
+  export type NetStatsInfoSequence = {
+    /**
+     * 查询的开始时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    startTime: int;
+    /**
+     * 查询的结束时间(时间戳;单位：秒)。
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    endTime: int;
+    /**
+     * 获取的历史流量信息。
+     * @type { NetStatsInfo }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    info: NetStatsInfo;
+  }[];
 
   /**
    * {@link NetStatsInfoSequenceItem}的数组。
@@ -1114,44 +1139,6 @@ declare namespace statistics {
      */
     DAILY_LIMIT_PERCENTAGE = 7
   }
-
-  /**
-   * 获取的应用历史流量信息。
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @systemapi Hide this for inner system use.
-   * @since 12 dynamic
-   */
-  export type NetStatsInfoSequence = {
-    /**
-     * 查询的开始时间(时间戳;单位：秒)。
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    startTime: int;
-    /**
-     * 查询的结束时间(时间戳;单位：秒)。
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    endTime: int;
-    /**
-     * 获取的历史流量信息。
-     * @type { NetStatsInfo }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    info: NetStatsInfo;
-  }[];
-
-
 }
 
 export default statistics;

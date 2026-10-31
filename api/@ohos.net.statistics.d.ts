@@ -132,7 +132,7 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > It is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the traffic data is successfully
@@ -141,7 +141,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -154,7 +154,7 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > It is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
    * @returns { Promise<long> } Promise used to return the total downlink traffic of the specified network card from the
@@ -163,7 +163,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -177,7 +177,7 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > It is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
    * @param { AsyncCallback<long> } callback - Callback used to return the result. If the traffic data is successfully
@@ -186,7 +186,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -199,7 +199,7 @@ declare namespace statistics {
    *
    * > **NOTE**
    * >
-   * > On API 26.0.1 and below, it is recommended to call this API when the cellular network is in the connected state.
+   * > It is recommended to call this API when the cellular network is in the connected state.
    * > Otherwise, error code 2103012 will be thrown.
    *
    * @returns { Promise<long> } Promise used to return the total uplink traffic consumed on the cellular network from
@@ -208,7 +208,7 @@ declare namespace statistics {
    * @throws { BusinessError } 2100003 - System internal error.
    * @throws { BusinessError } 2103005 - Failed to read the system map.
    * @throws { BusinessError } 2103011 - Failed to create a system map.
-   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.[since 10 - 26.0.1]
+   * @throws { BusinessError } 2103012 - Failed to obtain the NIC name.
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 10 dynamic
    * @since 23 static
@@ -903,7 +903,32 @@ declare namespace statistics {
    * @systemapi Hide this for inner system use.
    * @since 12 dynamic
    */
-  export type NetStatsInfoSequence = {  }[]
+  export type NetStatsInfoSequence = {
+    /**
+     * Start time for querying traffic.
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    startTime: int;
+    /**
+     * End time for querying traffic.
+     * @type { int }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    endTime: int;
+    /**
+     * Detailed information of statistics.
+     * @type { NetStatsInfo }
+     * @syscap SystemCapability.Communication.NetManager.Core
+     * @systemapi Hide this for inner system use.
+     * @since 12
+     */
+    info: NetStatsInfo;
+  }[];
 
   /**
    * Array of {@link NetStatsInfoSequenceItem}.
@@ -1199,44 +1224,6 @@ declare namespace statistics {
      */
     DAILY_LIMIT_PERCENTAGE = 7
   }
-
-  /**
-   * An {@link NetStatsInfo} array with start time and end time.
-   * @syscap SystemCapability.Communication.NetManager.Core
-   * @systemapi Hide this for inner system use.
-   * @since 12 dynamic
-   */
-  export type NetStatsInfoSequence = {
-    /**
-     * Start time for querying traffic.
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    startTime: int;
-    /**
-     * End time for querying traffic.
-     * @type { int }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    endTime: int;
-    /**
-     * Detailed information of statistics.
-     * @type { NetStatsInfo }
-     * @syscap SystemCapability.Communication.NetManager.Core
-     * @systemapi Hide this for inner system use.
-     * @since 12
-     * @arkts 1.1
-     */
-    info: NetStatsInfo;
-  }[];
-
-
 }
 
 export default statistics;

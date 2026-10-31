@@ -905,10 +905,10 @@ declare namespace policy {
   function on(type: 'netMeteredIfacesChange', callback: Callback<Array<string>>): void;
 
   /**
-   * Register metered ifaces change listener.
+   * 注册计量网络接口变化的监听。
    *
    * @permission ohos.permission.MANAGE_NET_STRATEGY
-   * @param { Callback<Array<string>> } callback - the callback of on.
+   * @param { Callback<Array<string>> } callback - on对应的回调函数。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2100001 - Invalid parameter value.

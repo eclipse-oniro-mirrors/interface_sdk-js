@@ -125,13 +125,12 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     extraData?: string | Object | ArrayBuffer;
 
     /**
-     * Additional data of the request.
-     * extraData can be a string or an Object (API 6) or an ArrayBuffer(API 8).
+     * 请求的附加数据。
+     * extraData可以是字符串、Object（API 6）或ArrayBuffer（API 8）。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -183,12 +182,11 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     header?: Object;
 
     /**
-     * HTTP request header. default is 'content-type': 'application/json'
+     * HTTP请求头字段。默认为{'content-Type': 'application/json'}。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @FaAndStageModel
@@ -549,17 +547,6 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
-
-    /**
-     * Use specific network to send this HTTP request and receive the correponding response.
-     * Activate the target network and create the netHandle in advace.
-     * @type { ?connection.NetHandle }
-     * @syscap SystemCapability.Communication.NetStack
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 22 static
-     */
-    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -661,10 +648,9 @@ declare namespace http {
    * 自定义远程验证。
    * 该API使用Promise异步返回结果。
    *
-   * @param { ValidationContext } context - Certificate verification context, which contains information such as the
-   *     certificate chain, host name, and IP address.
-   * @returns { boolean | Promise<boolean> } Returns a boolean value indicating whether the validation is successful.
-   *     Promise used to return the result. The value true indicates valid, and false indicates invalid.
+   * @param { ValidationContext } context - 证书验证上下文，包含证书链、主机名和IP地址等信息。
+   * @returns { boolean | Promise<boolean> } 返回布尔值表示验证是否通过。true表示验证通过，false表示验证不通过。
+     *     支持返回Promise对象，用于异步验证场景。
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -733,11 +719,9 @@ declare namespace http {
    * 
    * > 当指定的网络没有激活时，系统按照指定默认网络处理。
    *
-   * @unionmember { 'auto' } Specifies the default network connection in an HTTP request.
-   * @unionmember { 'primaryCellular' } Specifies the default cellular network connection in an HTTP request when the
-   *     cellular network is activated.
-   * @unionmember { 'secondaryCellular' } Specifies the cellular network connection of the secondary SIM card in an HTTP
-   *     request when dual cellular networks are activated.
+   * @unionmember { 'auto' } 表示HTTP请求指定默认的网络连接。
+   * @unionmember { 'primaryCellular' } 表示在蜂窝网络激活的场景下，HTTP请求指定默认的蜂窝网络连接。
+   * @unionmember { 'secondaryCellular' } 表示在双蜂窝网络激活的场景下，HTTP请求指定副卡的蜂窝网络连接。
    * @syscap SystemCapability.Communication.NetStack
    * @since 23 dynamic
    * @since 26.0.1 static
@@ -1276,12 +1260,11 @@ declare namespace http {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
-     * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
 
     /**
-     * This parameter sets a mime part's body content from memory data.
+     * 此参数从内存数据中设置mime部分的正文内容。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -2803,13 +2786,12 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     result: string | Object | ArrayBuffer;
 
     /**
-     * result can be a string (API 6) or an ArrayBuffer(API 8). Object is deprecated from API 8.
-     * If {@link HttpRequestOptions#expectDataType} is set, the system preferentially returns this parameter.
+     * result可以是字符串（API 6）或ArrayBuffer（API 8）。从API 8开始，Object类型不再支持。
+     * 如果设置了{@link HttpRequestOptions#expectDataType}，系统将优先返回此参数。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @since 26.0.1 static
@@ -2850,12 +2832,11 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     header: Object;
 
     /**
-     * All headers in the response from the server.
+     * 服务器响应中的所有请求头。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @FaAndStageModel

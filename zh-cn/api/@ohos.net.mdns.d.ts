@@ -212,9 +212,9 @@ declare namespace mdns {
     on(type: 'discoveryStart', callback: Callback<DiscoveryEventInfo>): void;
 
     /**
-     * Enables listening for discoveryStart events of mDNS services.
+     * 开启监听mDNS服务的discoveryStart事件。
      *
-     * @param { Callback<DiscoveryEventInfo> } callback - the callback used to return the result.
+     * @param { Callback<DiscoveryEventInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -237,9 +237,9 @@ declare namespace mdns {
     off(type: 'discoveryStart', callback?: Callback<DiscoveryEventInfo>): void;
 
     /**
-     * Cancels listening for discoveryStart events of mDNS services.
+     * 取消监听mDNS服务的discoveryStart事件。
      *
-     * @param { Callback<DiscoveryEventInfo> } [callback] - the callback used to return the result.
+     * @param { Callback<DiscoveryEventInfo> } [callback] - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -261,9 +261,9 @@ declare namespace mdns {
     on(type: 'discoveryStop', callback: Callback<DiscoveryEventInfo>): void;
 
     /**
-     * Enables listening for discoveryStop events of mDNS services.
+     * 开启监听mDNS服务的discoveryStop事件。
      *
-     * @param { Callback<DiscoveryEventInfo> } callback - the callback used to return the result.
+     * @param { Callback<DiscoveryEventInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -286,9 +286,9 @@ declare namespace mdns {
     off(type: 'discoveryStop', callback?: Callback<DiscoveryEventInfo>): void;
 
     /**
-     * Cancels listening for discoveryStop events of mDNS services.
+     * 取消监听mDNS服务的discoveryStop事件。
      *
-     * @param { Callback<DiscoveryEventInfo> } [callback] - the callback used to return the result.
+     * @param { Callback<DiscoveryEventInfo> } [callback] - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -308,9 +308,9 @@ declare namespace mdns {
     on(type: 'serviceFound', callback: Callback<LocalServiceInfo>): void;
 
     /**
-     * Enables listening for serviceFound events of mDNS services.
+     * 开启监听mDNS服务的serviceFound事件。
      *
-     * @param { Callback<LocalServiceInfo> } callback - the callback used to return the result.
+     * @param { Callback<LocalServiceInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -333,9 +333,9 @@ declare namespace mdns {
     off(type: 'serviceFound', callback?: Callback<LocalServiceInfo>): void;
 
     /**
-     * Cancels listening for serviceFound events of mDNS services.
+     * 取消监听mDNS服务的serviceFound事件。
      *
-     * @param { Callback<LocalServiceInfo> } [callback] - the callback used to return the result.
+     * @param { Callback<LocalServiceInfo> } [callback] - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -355,9 +355,9 @@ declare namespace mdns {
     on(type: 'serviceLost', callback: Callback<LocalServiceInfo>): void;
 
     /**
-     * Enables listening for serviceLost events of mDNS services.
+     * 开启监听mDNS服务的serviceLost事件。
      *
-     * @param { Callback<LocalServiceInfo> } callback - the callback used to return the result.
+     * @param { Callback<LocalServiceInfo> } callback - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static
@@ -377,9 +377,9 @@ declare namespace mdns {
     off(type: 'serviceLost', callback?: Callback<LocalServiceInfo>): void;
 
     /**
-     * Cancels listening for serviceLost events of mDNS services.
+     * 取消监听mDNS服务的serviceLost事件。
      *
-     * @param { Callback<LocalServiceInfo> } [callback] - the callback used to return the result.
+     * @param { Callback<LocalServiceInfo> } [callback] - 用于返回结果的回调函数。
      * @syscap SystemCapability.Communication.NetManager.MDNS
      * @atomicservice
      * @since 26.0.1 static

@@ -18,7 +18,7 @@
  * @kit NetworkKit
  */
 
-import { Callback } from "./@ohos.base";
+import { Callback } from './@ohos.base';
 /**
  * The **eap** module provides the extensible authentication mechanism to enable third-party clients to access custom 80
  * 2.1X (a port-based network access control protocol) authentication, such as Extensible Authentication Protocol (EAP)
@@ -152,8 +152,6 @@ declare namespace eap {
   /**
    * Defines the EAP data.
    *
-   *
-   *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -187,8 +185,6 @@ declare namespace eap {
 
   /**
    * Enumerates the EAP authentication results.
-   *
-   *
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic

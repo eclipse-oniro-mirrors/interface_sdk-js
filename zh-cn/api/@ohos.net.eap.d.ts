@@ -18,7 +18,7 @@
  * @kit NetworkKit
  */
 
-import { Callback } from "./@ohos.base";
+import { Callback } from './@ohos.base';
 /**
  * 该模块提供了第三方客户端接入802.1X认证（一种基于端口的网络接入控制协议）流程的机制，支撑客户端的定制认证等功能。
  *

@@ -274,7 +274,6 @@ declare namespace ethernet {
    * Obtains the names of all Ethernet NICs and the MAC address information of the corresponding NICs. This API uses a
    * promise to return the result.
    *
-   *
    * @permission ohos.permission.GET_ETHERNET_LOCAL_MAC
    * @returns { Promise<Array<MacAddressInfo>> } Promise used to return the names of all Ethernet NICs and the
    *     corresponding MAC address information.

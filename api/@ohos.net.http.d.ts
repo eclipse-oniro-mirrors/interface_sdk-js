@@ -136,7 +136,6 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     extraData?: string | Object | ArrayBuffer;
 
@@ -229,7 +228,6 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     header?: Object;
 
@@ -276,7 +274,6 @@ declare namespace http {
      * suitable protocol version. If HTTP3 is specified, due to the security restrictions of the HTTP3 protocol, TLS
      * version 1.3 must be specified through [TlsConfig]{@link http.TlsConfig} and the target domain must support the
      * HTTP3 protocol to enable HTTP3; otherwise, a downgrade is negotiated.
-     *
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -644,17 +641,6 @@ declare namespace http {
      * @since 26.0.1 static
      */
     body?: string | Object | ArrayBuffer;
-
-    /**
-     * Use specific network to send this HTTP request and receive the correponding response.
-     * Activate the target network and create the netHandle in advace.
-     * @type { ?connection.NetHandle }
-     * @syscap SystemCapability.Communication.NetStack
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 22 static
-     */
-    netHandler?: connection.NetHandle;
   }
 
   /**
@@ -995,7 +981,6 @@ declare namespace http {
 
   /**
    * Specifies whether to continue to process the interceptor chain.
-   *
    *
    * @syscap SystemCapability.Communication.NetStack
    * @atomicservice
@@ -1408,7 +1393,6 @@ declare namespace http {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
-     * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
 
@@ -3008,7 +2992,6 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     result: string | Object | ArrayBuffer;
 
@@ -3064,7 +3047,6 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
-     * @since 23 static
      */
     header: Object;
 
