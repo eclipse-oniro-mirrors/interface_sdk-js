@@ -7673,7 +7673,6 @@ declare namespace camera {
   /**
    * 为系统应用实现视频会话，用于设置普通视频模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}实例。
-   * 此接口继承自[Session]{@link camera.Session}。
    *
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro [since 11 - 14]
    * @extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation [since 15 - 17]
@@ -8987,8 +8986,7 @@ declare namespace camera {
   }
 
   /**
-   * 人像拍照会话类，继承自 Session、Flash、AutoExposure、Focus、Zoom、Beauty、ColorEffect、
-   * ColorManagement、Portrait、Aperture 接口。
+   * 人像拍照会话类。
    * 用于设置人像拍照模式的参数，并保存运行相机所需的
    * [CameraInput]{@link camera.CameraInput} 和 [CameraOutput]{@link camera.CameraOutput}
    * 实例。继承自 [Session]{@link camera.Session}。
@@ -9496,11 +9494,9 @@ declare namespace camera {
   }
 
   /**
-   * 夜间拍照会话类，继承自 Session、Flash、AutoExposure、Focus、Zoom、ColorEffect、
-   * ColorManagement、ManualExposure 接口。用于设置夜间拍照模式的参数，并保存
+   * 夜间拍照会话类。用于设置夜间拍照模式的参数，并保存
    * 运行相机所需的 [CameraInput]{@link camera.CameraInput}、[CameraOutput]{@link camera.CameraOutput} 和
-   * [PhotoOutput]{@link camera.PhotoOutput} 实例。继承自
-   * [Session]{@link camera.Session}。
+   * [PhotoOutput]{@link camera.PhotoOutput} 实例。
    * 夜间拍照场景下，必须监听
    * [onCaptureEnd]{@link camera.PhotoOutput.on(type: 'captureEnd', callback: AsyncCallback<CaptureEndInfo>)}
    * 事件，以标记拍照会话结束。
@@ -10578,7 +10574,7 @@ declare namespace camera {
   /**
    * 实现慢动作录像会话，设置慢动作录像模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput} and [CameraOutput]{@link camera.CameraOutput}
-   * 实例。继承自[Session]{@link camera.Session}。
+   * 实例。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
@@ -10816,7 +10812,7 @@ declare namespace camera {
   /**
    * 实现高分辨率拍照会话，用于设置高分辨率拍照模式的参数，并保存运行相机所需的
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
-   * 实例。继承自[Session]{@link camera.Session}。
+   * 实例。
    *
    * > **说明：**
    * >
@@ -10926,7 +10922,7 @@ declare namespace camera {
   /**
    * 实现微距拍照会话，用于设置微距拍照模式的参数，并保存运行相机所需的
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
-   * 实例。继承自[Session]{@link camera.Session}。
+   * 实例。
    *
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 13]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus, DepthFusion [since 14 - 17]
@@ -11083,7 +11079,7 @@ declare namespace camera {
   /**
    * 实现微距录像会话，用于设置微距录像模式的参数，并保存运行相机所需的
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
-   * 实例。继承自[Session]{@link camera.Session}。
+   * 实例。
    *
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus [since 12 - 17]
    * @extends Session, Flash, AutoExposure, Focus, Zoom, ColorEffect, ManualFocus, ColorManagement [since 18]
@@ -11236,9 +11232,6 @@ declare namespace camera {
   }
 
   /**
-   * SecureSession继承自[Session]{@link camera.Session}、[Flash]{@link camera.Flash}、
-   * [AutoExposure]{@link camera.AutoExposure}、[WhiteBalance]{@link camera.WhiteBalance}、[Focus]{@link camera.Focus}、
-   * [Zoom]{@link camera.Zoom}。
    * 
    * 安全模式会话类，提供了对闪光灯、曝光、白平衡、对焦、变焦的操作。
    * 
@@ -11363,7 +11356,7 @@ declare namespace camera {
   /**
    * 实现光绘拍照会话，用于设置光绘拍照模式的参数，并保存运行相机所需的所有
    * [CameraInput]{@link camera.CameraInput}和[CameraOutput]{@link camera.CameraOutput}
-   * 实例。继承自[Session]{@link camera.Session}。
+   * 实例。
    *
    * @syscap SystemCapability.Multimedia.Camera.Core
    * @systemapi
