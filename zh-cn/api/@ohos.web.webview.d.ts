@@ -1327,6 +1327,10 @@ declare namespace webview {
   /**
    * Web组件数据库管理对象。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用WebDataBase下的方法，都需要先加载Web组件。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -1620,7 +1624,9 @@ declare namespace webview {
    * 
    * > **说明：**
    * >
-   * > - 静态方法必须在用户界面（UI）线程上使用。
+   * > - 默认情况下，静态方法必须在用户界面（UI）线程上使用。从API版本26.0.1开始，
+   * > 调用[setLazyInitializeWebEngine]{@link webview.WebCookieManager.setLazyInitializeWebEngine(lazy: boolean)}
+   * > 设置为true后，静态方法支持在非用户界面（UI）线程使用。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -2182,6 +2188,8 @@ declare namespace webview {
      * >
      * > - 该接口仅适用于调用后会初始化CookieManager的接口，比如本类WebCookieManager的其他接口。调用本接口设置为true后，再调用适用的接口，会在初始化CookieManager时跳过初始化
      * > ArkWeb内核，后续需自行初始化ArkWeb内核。
+     * >
+     * > - 从API版本26.0.1开始，调用本接口设置为true后，WebCookieManager的接口支持在异步线程使用。
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -4381,6 +4389,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @returns { Promise<string> } Promise实例，返回脚本执行的结果，执行失败返回null。
@@ -4410,6 +4420,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @param { AsyncCallback<string> } callback - 回调执行JavaScript脚本结果。JavaScript脚本若执行失败或无返回值时，返回null。
@@ -4432,6 +4444,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4453,6 +4467,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4636,10 +4652,6 @@ declare namespace webview {
 
     /**
      * 清除与当前WebView上下文相关的资源缓存。
-     * 
-     * > **说明：**
-     * >
-     * > 可以通过在data/storage/el2/base/cache/web/Cache目录下查看Webview的缓存。
      *
      * @param { boolean } clearRom - 设置为true时同时清除ROM和RAM中的缓存，设置为false时只清除RAM中的缓存。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
