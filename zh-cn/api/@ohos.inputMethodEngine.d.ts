@@ -2512,6 +2512,41 @@ declare namespace inputMethodEngine {
     setPreviewTextSync(text: string, range: Range): void;
 
     /**
+     * 设置带下划线样式的预上屏文本。使用promise异步回调。
+     *
+     * @param { string } text - 预上屏文本。
+     * @param { Range } range - 预上屏文本范围。
+     * @param { PreviewTextStyle } style - 预上屏文本下划线样式和颜色。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyle(text: string, range: Range, style: PreviewTextStyle): Promise<void>;
+
+    /**
+     * 设置带下划线样式的预上屏文本。
+     *
+     * @param { string } text - 预上屏文本。
+     * @param { Range } range - 预上屏文本范围。
+     * @param { PreviewTextStyle } style - 预上屏文本下划线样式和颜色。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyleSync(text: string, range: Range, style: PreviewTextStyle): void;
+
+    /**
      * 结束预上屏。使用promise异步回调。
      * <br>
      * <br> > **说明：**
@@ -4987,6 +5022,73 @@ declare namespace inputMethodEngine {
      */
     CUSTOM = 3
   }
-}
+  /**
+   * 枚举预上屏文本的下划线样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * 无下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * 直线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * 波浪线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * 虚线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
 
+  /**
+   * 描述预上屏文本的下划线样式和颜色。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface PreviewTextStyle {
+    /**
+     * 下划线样式。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * 下划线颜色，格式为0xAARRGGBB。可选参数，不传时下划线颜色遵循应用主题颜色。透明度通道无效，将被编辑器忽略。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
+  }
+}
 export default inputMethodEngine;
+export type PreviewTextStyle = inputMethodEngine.PreviewTextStyle;

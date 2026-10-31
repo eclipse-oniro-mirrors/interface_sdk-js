@@ -18,6 +18,7 @@
  * @kit IMEKit
  */
 import type { Callback, AsyncCallback } from './@ohos.base';
+import type { PreviewTextStyle as _PreviewTextStyle } from './@ohos.inputMethodEngine';
 import InputMethodSubtype from './@ohos.InputMethodSubtype';
 import { UIContext } from './@ohos.arkui.UIContext';
 /*** if arkts dynamic */
@@ -2652,6 +2653,31 @@ declare namespace inputMethod {
     offSetPreviewText(callback?:SetPreviewTextCallback): void;
 
    /**
+     * 订阅带样式的预上屏文本事件。使用callback异步回调。
+     * <br>
+     * <br> > **说明：**
+     * <br> >
+     * <br> > 使用带样式的预上屏文本功能，需在调用
+     * <br> > [attach]{@link inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, callback: AsyncCallback<void>)}
+     * <br> > 前订阅此事件。
+     *
+     * @param { SetPreviewTextWithStyleCallback } callback - 回调函数。用于接收带样式的预上屏文本内容。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @since 26.1.0 dynamic&static
+     */
+    onSetPreviewTextWithStyle(callback: SetPreviewTextWithStyleCallback): void;
+   /**
+     * 取消订阅带样式的预上屏文本事件。
+     *
+     * @param { SetPreviewTextWithStyleCallback } [callback] - 取消订阅的回调函数，需要与on接口传入的保持一致。
+     *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+   offSetPreviewTextWithStyle(callback?:SetPreviewTextWithStyleCallback): void;
+
+   /**
      * 订阅结束文本预览事件。使用callback异步回调。
      * <br>
      * <br> > **说明：**
@@ -3755,7 +3781,68 @@ declare namespace inputMethod {
    */
   export type SetPreviewTextCallback = (text: string, range: Range) => void;
 
- /**
+  /**
+   * 当输入法框架需要显示带样式的预览文本时触发的回调。
+   *
+   * @param { string } text - 预览文本内容。
+   * @param { Range } range - 文本的选中范围。
+   * @param { PreviewTextStyle } style - 预上屏文本下划线样式和颜色。
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @since 26.1.0 dynamic&static
+   */
+  export type SetPreviewTextWithStyleCallback = (text: string, range: Range, style: PreviewTextStyle) => void;
+
+  /**
+   * 枚举预上屏文本的下划线样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * 无下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * 直线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * 波浪线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * 虚线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
+  /**
+   * 描述预上屏文本的下划线样式和颜色。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type PreviewTextStyle = _PreviewTextStyle;
+
+  /**
    * 枚举，定义了文本首字母大写的不同模式。
    * <br>
    * | 名称 | 值 | 说明 |
