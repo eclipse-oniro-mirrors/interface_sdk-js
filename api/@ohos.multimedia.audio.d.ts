@@ -13686,9 +13686,8 @@ declare namespace audio {
      * > - Currently, only the recording streams created by
      * > [SourceType.SOURCE_TYPE_VOICE_MESSAGE]{@link @ohos.multimedia.audio:audio.SourceType} can be used to set
      * > the noise reduction mode. Other stream types may be supported in the future.
-     * >
      * > - The noise reduction effect is affected by the device platform, audio device, and recording concurrency.
-     * > This interface can be invoked only when recording is not started after the recording stream is created
+     * > - This interface can be invoked only when recording is not started after the recording stream is created
      * > or when recording is stopped. The call throws an exception when the recording stream is running or has
      * > been released.
      *
