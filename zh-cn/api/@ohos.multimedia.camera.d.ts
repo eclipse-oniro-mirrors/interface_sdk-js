@@ -15791,7 +15791,8 @@ declare namespace camera {
     /**
      * 新增需要上报的检测对象类型。
      *
-     * @param { Array<MetadataObjectType> } types - metadata流类型信息，通过getSupportedOutputCapability接口获取。
+     * @param { Array<MetadataObjectType> } types - metadata流类型信息，
+     *     通过{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}接口获取。
      * @throws { BusinessError } 202 - Not System Application. [since 13 - 22]
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400103 - Session not config.
@@ -15808,7 +15809,8 @@ declare namespace camera {
     /**
      * 删除需要上报的检测对象类型。
      *
-     * @param { Array<MetadataObjectType> } types - metadata流类型信息，通过getSupportedOutputCapability接口获取。
+     * @param { Array<MetadataObjectType> } types - metadata流类型信息，
+     *     通过{@link camera.CameraManager.getSupportedOutputCapability(camera: CameraDevice, mode: SceneMode)}接口获取。
      * @throws { BusinessError } 202 - Not System Application. [since 13 - 22]
      * @throws { BusinessError } 7400101 - Parameter missing or parameter type incorrect.
      * @throws { BusinessError } 7400103 - Session not config.
