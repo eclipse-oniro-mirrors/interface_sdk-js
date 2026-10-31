@@ -2351,7 +2351,7 @@ declare namespace inputMethod {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
      * @throws { BusinessError } 12800010 - current ime is not the default ime.
-     * @throws { BusinessError } 12800027 - the input type is not supported.
+     * @throws { BusinessError } 12800029 - the input type is not supported.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static

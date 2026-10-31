@@ -1393,7 +1393,7 @@ declare namespace inputMethod {
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - 参数错误。可能原因：1.参数类型错误。
      * @throws { BusinessError } 12800010 - 当前输入法非系统默认输入法。
-     * @throws { BusinessError } 12800027 - 输入类型不支持。
+     * @throws { BusinessError } 12800029 - 输入类型不支持。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
