@@ -13629,6 +13629,15 @@ declare namespace audio {
     getNoiseReductionMode(): NoiseReductionMode;
 
     /**
+     * 获取当前设备支持的录音降噪模式。
+     *
+     * > **说明：**
+     * >
+     * > - 当前仅使用[SourceType.SOURCE_TYPE_VOICE_MESSAGE]{@link @ohos.multimedia.audio:audio.SourceType}创建的录音流会根据设备平台查询支持的降
+     * > 噪模式，其他录音流默认仅返回[NoiseReductionMode.FIDELITY]{@link @ohos.multimedia.audio:audio.NoiseReductionMode}。
+     * >
+     * > - 返回结果仅考虑音频格式和设备平台，不考虑当前输入设备和录音并发情况。
+     * 
      * 获取当前设备支持应用设置的录音降噪模式。返回的是应用调用setNoiseReductionMode可以设置切换的降噪模式。
      * 部分场景的降噪模式只能由系统设置，该接口不会返回这些模式。应用可以通过getNoiseReductionMode
      * 和onNoiseReductionModeChanged感知系统当前选择的降噪模式。
