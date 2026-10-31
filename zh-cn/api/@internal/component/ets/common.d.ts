@@ -16109,7 +16109,6 @@ declare interface PopupOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -24495,36 +24494,18 @@ declare class CommonMethod<T> {
 
   /**
    * Popup控制。
-   *
-   * @param { boolean } show
-   * @param { PopupOptions } popup
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Popup控制。
-   *
-   * @param { boolean } show
-   * @param { PopupOptions | CustomPopupOptions } popup
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 8
-   */
-  /**
-   * Popup控制。
    * <p><strong>NOTE</strong>:
    * <br>The popup can be displayed only after the entire page is fully constructed. Therefore, to avoid incorrect
    * display positions and shapes, do not set this parameter to true while the page is still being constructed.
    * </p>
    *
-   * @param { boolean } show - 
-   * @param { PopupOptions | CustomPopupOptions } popup
+   * @param { PopupOptions } popup [since 7 - 7]
+   * @param { PopupOptions | CustomPopupOptions } popup [since 8]
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   bindPopup(show: boolean, popup: PopupOptions | CustomPopupOptions): T;
 
