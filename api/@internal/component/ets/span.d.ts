@@ -49,6 +49,30 @@ declare interface TextBackgroundStyle {
    * @since 11 dynamic
    */
   radius?: Dimension | BorderRadiuses;
+
+  /**
+   * Text background border width.
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderWidth?: Dimension;
+
+  /**
+   * Text background border color.
+   * Default value: **Color.Transparent**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderColor?: ResourceColor;
 }
 
 /**
