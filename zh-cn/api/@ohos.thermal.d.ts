@@ -118,8 +118,14 @@ declare namespace thermal {
 
   /**
    * 订阅热档位变化时的回调提醒。当设备温度跨越档位阈值导致热档位发生变化时，系统自动触发回调通知，
-   * 通过callback返回变化后的热档位等级。使用callback异步回调。此方法与thermal.unregisterThermalLevelCallback配对使用，
-   * 用于取消先前注册的热档位回调。
+   * 通过callback返回变化后的热档位等级。使用callback异步回调。
+   * 此方法与[thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback}配对使用， 用于取消先前注册的热档位回调。
+   *
+   * - 每个进程仅支持订阅一个回调，重复订阅将覆盖。
+   * - 回调函数应尽快返回，不可执行耗时操作（如同步文件 I/O），否则可能阻塞系统热档位通知投递。
+   * - 当热管理服务异常重启后，已注册的回调将自动失效且不会收到通知。开发者需重新调用 registerThermalLevelCallback 恢复订阅。
+   * - 当热管理服务不可用时，订阅可能静默失败且不抛出异常。开发者无法从返回值判断订阅是否成功。建议在订阅后通过[thermal.getLevel]{@link thermal.getLevel}验证服务是否可用
+   * （若[thermal.getLevel]{@link thermal.getLevel}返回COOL且设备明显发热，则服务可能不可用）。
    *
    * @param { Callback<ThermalLevel> } callback - 回调函数，返回变化后的热档位。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -131,9 +137,10 @@ declare namespace thermal {
   function registerThermalLevelCallback(callback: Callback<ThermalLevel>): void;
 
   /**
-   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。
+   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。取消订阅未注册的回调不会报错，视为无操作。
    *
-   * @param { AsyncCallback<void> } [callback] - 回调函数，用来执行取消热档位变化回调后的资源回收等操作，无返回值。
+   * @param { AsyncCallback<void> } [callback] - 回调函数。反注册完成后的通知回调，无返回值。该参数仅用于接收取消订阅完成的通知，取消订阅成功后会调用该回调函数。
+   * 不传入此参数时，取消订阅仍生效，但不会触发回调通知。
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 8 dynamiconly
    * @deprecated since 9

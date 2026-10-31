@@ -108,7 +108,8 @@ declare namespace power {
    * - A device with a screen is active when the screen is on and inactive when the screen is off.
    * - A device without a screen is active when it exits the sleep mode and inactive when it enters the sleep mode.
    *
-   * @returns { boolean } Return value **true** if the device is active; returns **false** otherwise.
+   * @returns { boolean } The activity status returns true; and false is returned when the status is inactive or 
+   * when obtaining the device's activity status fails.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -160,7 +161,10 @@ declare namespace power {
   /**
    * Obtains the power mode of this device.
    *
-   * @returns { DevicePowerMode } Power mode.
+   * @returns { DevicePowerMode } Power mode of the current device. The value can be Standard mode, Power saving mode,
+   * Performance mode, or Ultra Power Saver. If the power mode of the current device fails to be obtained,
+   * 0 is returned, which is not within the value range of the [DevicePwerMode]{@link devicepowermode9} enumeration.
+   * you should check whether the returned valued is a vaild enumeration value (600 or higher).
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static

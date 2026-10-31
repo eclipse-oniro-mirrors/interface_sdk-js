@@ -105,7 +105,7 @@ declare namespace power {
    * - 有屏的设备亮屏时为活动状态，灭屏时为非活动状态。
    * - 无屏的设备非休眠时为活动状态，休眠时为非活动状态。
    *
-   * @returns { boolean } 活动状态返回true，非活动状态返回false。
+   * @returns { boolean } 活动状态返回true，非活动状态或获取设备活动状态失败时返回false。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
