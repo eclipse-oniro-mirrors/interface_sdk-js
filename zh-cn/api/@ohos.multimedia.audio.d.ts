@@ -9372,7 +9372,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum NoiseReductionModeChangeReason {
     /**
@@ -9380,7 +9380,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
 
@@ -9389,7 +9389,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_SETTING = 1,
 
@@ -9398,7 +9398,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DEVICE_CHANGE = 2,
 
@@ -9407,7 +9407,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     STREAM_CONCURRENCY = 3,
   }
@@ -9418,7 +9418,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface NoiseReductionModeChangeInfo {
     /**
@@ -9426,7 +9426,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     reason: NoiseReductionModeChangeReason;
 
@@ -9435,7 +9435,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     noiseReductionMode: NoiseReductionMode;
   }
@@ -13645,6 +13645,7 @@ declare namespace audio {
     /**
      * 订阅降噪模式变更事件，当音频采集器的降噪模式发生变更时触发。
      * 变更可能由用户通过系统录音控制面板切换、应用调用{@link #setNoiseReductionMode}接口设置，或系统因设备变更、录音流并发冲突而调整降噪模式触发。详见{@link NoiseReductionModeChangeReason}。
+     *
      * 使用场景：适用于应用需要实时感知降噪模式变更的场景，如
      * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE}直播、[SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC}录音、 [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER}录像、[SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION}VoIP、 [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}语音消息等。应用感知到降噪模式变更后，可根据情况自行决策是否需要关闭应用自身叠加的降噪算法，从而达到端到端的整体降噪体验最佳。
      * 使用约束：多次订阅时，如果订阅的callback函数对象不同，会记录所有callback函数，按照订阅顺序依次回调。请勿在回调中调用AudioCapturer相关接口。
@@ -13652,12 +13653,13 @@ declare namespace audio {
      * @param { Callback<NoiseReductionModeChangeInfo> } callback - 返回降噪模式变更信息的回调。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
 
     /**
      * 取消订阅降噪模式变更事件。
+     * 
      * 使用场景：当应用不再需要感知降噪模式变更时调用。
      * 使用约束：如果传入callback参数，则仅取消与该callback实例匹配的已注册回调；如果不传callback参数，则取消所有已注册的降噪模式变更回调。
      *
@@ -13665,7 +13667,7 @@ declare namespace audio {
      * <br>默认值：缺省行为：默认取消所有已注册的降噪模式变更回调。
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
