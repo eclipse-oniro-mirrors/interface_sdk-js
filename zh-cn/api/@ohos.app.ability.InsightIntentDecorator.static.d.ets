@@ -321,7 +321,10 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -496,7 +499,10 @@ export @interface InsightIntentFunctionMethod {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -751,7 +757,10 @@ export @interface InsightIntentEntry {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

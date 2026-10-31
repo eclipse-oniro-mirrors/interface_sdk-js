@@ -1044,13 +1044,14 @@ declare namespace userAuth {
 
     /**
      * 开始认证。
-     * 
+     *
      * > **说明：**
      * >
      * > 使用获取到的[AuthInstance]{@link userAuth.AuthInstance}对象调用该接口进行认证。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 12500001 - Authentication failed.
      * @throws { BusinessError } 12500002 - General operation error.
@@ -1070,14 +1071,15 @@ declare namespace userAuth {
 
     /**
      * 取消认证。
-     * 
+     *
      * > **说明：**
      * >
      * > 使用获取到的[AuthInstance]{@link userAuth.AuthInstance}对象调用该接口进行取消认证，此[AuthInstance]{@link userAuth.AuthInstance}需要是正
      * > 在进行认证的对象。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -1099,9 +1101,8 @@ declare namespace userAuth {
    *     <br>从API版本26.0.0开始支持COMPANION_DEVICE查询。
    * @param { AuthTrustLevel } authTrustLevel - 认证信任等级。用于指定查询的认证可信等级，有效值为ATL1(10000)、ATL2(20000)、ATL3(30000)、ATL4(40000
    *     )。等级越高，对认证方案的活体检测能力要求越高。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500006 - The authentication trust level is not supported.
@@ -1157,9 +1158,8 @@ declare namespace userAuth {
    *     时返回的是密码的整体状态，而非单个密码的数量。
    * @returns { EnrolledState } 当查询成功时，返回值为用户注册凭据的状态。包含credentialDigest（凭据摘要）和credentialCount（凭据数量）。应用可保存
    *     credentialDigest值，后续查询时对比以检测凭据变更。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500010 - The type of credential has not been enrolled.
@@ -1220,7 +1220,8 @@ declare namespace userAuth {
    * @permission ohos.permission.ACCESS_BIOMETRIC
    * @param { UserAuthType } authType - 认证类型，用于指定查询的凭据类型。支持FACE（人脸）、FINGERPRINT（指纹）、PIN（密码）等。根据业务场景安全需求选择合适的认证类型。
    * @returns { Promise<AuthLockState> } Promise对象，当查询成功时，返回值为指定认证类型的身份认证冻结状态。失败时报错。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
@@ -1803,7 +1804,7 @@ declare namespace userAuth {
      * 订阅用户身份认证的最终结果。通过该接口获取到的是用户在认证控件完成身份认证交互后的最终身份认证结果。认证控件消失前，用户中间的认证不通过尝试并不会通过该接口返回，只有最终的认证结果（成功或最终失败）会通过此接口返回。如果需要感
      * 知整个认证过程中用户的每一次认证不通过尝试和中间状态，请通过
      * [on('authTip')]{@link userAuth.UserAuthInstance.on(type: 'authTip', callback: AuthTipCallback)}接口订阅。
-     * 
+     *
      * > **说明：**
      * >
      * > 在PC/2in1设备上，应用如果使用模应用弹窗方式发起认证（即配置用户界面参数[widgetParam]{@link userAuth.WidgetParam}时传入了有效的uiContext），收到认证结果后，若需弹出其
@@ -1814,7 +1815,7 @@ declare namespace userAuth {
      * @param { 'result' } type - 订阅事件类型，表明该事件用来返回认证结果，当[start()]{@link userAuth.UserAuthInstance.start}调用完成，发起身份认证并完成认证
      *     交互后，触发该事件。
      * @param { IAuthCallback } callback - 认证接口的回调函数，用于返回认证结果。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -1830,7 +1831,7 @@ declare namespace userAuth {
      * 如果需要感知整个认证过程中用户的每一次认证失败尝试，请通过[on('authTip')]{@link userAuth.UserAuthInstance.on_authTip}接口订阅。
      *
      * @param { IAuthCallback } callback - Callback used to return the user authentication result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -1850,7 +1851,7 @@ declare namespace userAuth {
      * @param { 'result' } type - 订阅事件类型，表明该事件用来返回认证结果。
      * @param { IAuthCallback } [callback] - 认证接口的回调函数，用于返回认证结果。当不传该参数时默认值为调用
      *     [on('result')]{@link userAuth.UserAuthInstance.on(type: 'result', callback: IAuthCallback)}接口时传递的参数值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -1863,13 +1864,13 @@ declare namespace userAuth {
 
     /**
      * 取消订阅用户身份认证的结果。
-     * 
+     *
      * > **说明：**
      * >
      * > 需要使用已经成功订阅事件的[UserAuthInstance]{@link userAuth.UserAuthInstance}对象调用该接口进行取消订阅。
      *
      * @param { IAuthCallback } [callback] - Callback to unregister.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -1881,18 +1882,15 @@ declare namespace userAuth {
 
     /**
      * 开始认证。该接口常用于以下业务场景：用户点击支付按钮时发起身份认证；用户登录应用时进行身份验证；用户访问敏感数据或执行敏感操作时进行身份确认。
-     * 
+     *
      * > **说明：**
      * >
      * > 每个UserAuthInstance只能进行一次认证，需要再次认证时，必须重新获取UserAuthInstance。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC [since 10 - 19]
      * @permission ohos.permission.ACCESS_BIOMETRIC or ohos.permission.USER_AUTH_FROM_BACKGROUND [since 20]
-     * @throws { BusinessError } 201 - Permission denied. Possible causes:
-     *     <br>1. No permission to access biometric.
-     *     <br>2. No permission to start authentication from background.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Incorrect parameter types.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 12500001 - Authentication failed. [since 10 - 19]
      * @throws { BusinessError } 12500002 - General operation error.
      * @throws { BusinessError } 12500003 - Authentication canceled.
@@ -1913,15 +1911,14 @@ declare namespace userAuth {
 
     /**
      * 取消认证。该接口常用于以下场景：应用因业务逻辑变化需要中止认证；超时或异常情况下中止认证操作。
-     * 
+     *
      * > **说明：**
      * >
      * > 此时UserAuthInstance必须是正在进行认证的对象。
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Incorrect parameter types.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -1997,7 +1994,7 @@ declare namespace userAuth {
   /**
    * 获取[UserAuthInstance]{@link userAuth.UserAuthInstance}对象，执行用户身份认证，并支持使用统一用户身份认证控件。该接口用于创建一个用户认证实例，配置认证参数和界面参数后，可通过返回
    * 的实例对象启动认证、订阅认证结果等。
-   * 
+   *
    * > **说明：**
    * >
    * > 每个UserAuthInstance只能进行一次认证，需要再次认证时，必须重新获取UserAuthInstance。认证完成后（无论成功或失败），该实例将无法再次使用。
@@ -2008,7 +2005,7 @@ declare namespace userAuth {
    * @returns { UserAuthInstance } 支持用户界面的认证器对象。获取实例后，需调用
    *     [on('result')]{@link userAuth.UserAuthInstance.on(type: 'result', callback: IAuthCallback)}订阅认证结果，再调用
    *     [start]{@link userAuth.UserAuthInstance.start}启动认证。认证完成后，可通过回调获取认证结果。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
@@ -2049,9 +2046,10 @@ declare namespace userAuth {
    * @param { NoticeType } noticeType - 通知类型。用于标识通知的来源，当前支持WIDGET_NOTICE（1），表示来自身份认证组件的通知。
    * @param { string } eventData - 事件数据。JSON格式的字符串，包含通知的具体内容，如认证类型就绪事件等。数据长度范围为(0, 65536)字节。JSON对象应包含widgetContextId（
    *     number类型，控件上下文ID）、event（string类型，事件类型）、version（string类型，版本号）、payload（object类型，事件载荷对象）等字段。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
@@ -2248,7 +2246,7 @@ declare namespace userAuth {
      *
      * @param { 'command' } type - 订阅事件类型。值为'command'，表明该事件用于用户认证框架向身份认证控件发送命令。
      * @param { IAuthWidgetCallback } callback - 回调函数。用于接收来自用户认证框架的命令，身份认证控件需在回调中解析命令并执行相应操作。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2263,7 +2261,7 @@ declare namespace userAuth {
      * 身份认证控件订阅来自用户认证框架的命令。使用callback异步回调。
      *
      * @param { IAuthWidgetCallback } callback - 组件管理接口的回调函数，用于用户认证框架向身份认证控件发送命令。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2280,7 +2278,7 @@ declare namespace userAuth {
      * @param { 'command' } type - 订阅事件类型。值为'command'，表明取消订阅用户认证框架向身份认证控件发送命令的事件。
      * @param { IAuthWidgetCallback } callback - 回调函数。指定取消注册的回调函数，需与on方法注册时传入的回调一致；若不传入此参数，则取消所有已注册的回调。使用前需确保已通过
      *     [on]{@link userAuth.UserAuthWidgetMgr.on(type: 'command', callback: IAuthWidgetCallback)}方法注册过相应回调。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2295,7 +2293,7 @@ declare namespace userAuth {
      * 身份认证控件取消订阅来自用户认证框架的命令。
      *
      * @param { IAuthWidgetCallback } [callback] - Callback to unregister.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2309,7 +2307,7 @@ declare namespace userAuth {
 
   /**
    * 获取身份认证组件管理器对象。用于获取UserAuthWidgetMgr实例，通过该实例可将自定义身份认证控件注册到系统进行统一管理。
-   * 
+   *
    * > **说明：**
    * >
    * > 每个UserAuthWidgetMgr实例可管理一个身份认证控件，若需要管理多个控件则需获取多个实例。
@@ -2317,11 +2315,9 @@ declare namespace userAuth {
    * @permission ohos.permission.SUPPORT_USER_AUTH
    * @param { int } version - 身份认证组件的版本号。取值原则：目前仅支持版本1。组件版本决定了组件与框架之间的通信协议和功能支持范围。
    * @returns { UserAuthWidgetMgr } 身份认证组件管理器对象。可用于订阅和取消订阅来自用户认证框架的命令。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
-   *     <br>2. Incorrect parameter types.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2431,8 +2427,9 @@ declare namespace userAuth {
    *
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
    * @param { IRemoteAuthCallback } callback - 远程认证回调接口。包含获取认证页面参数和返回认证结果的回调函数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2445,8 +2442,9 @@ declare namespace userAuth {
    * 注销远程认证回调。该接口用于注销已注册的远程认证回调，注销后系统不再接收远程认证的页面参数请求和认证结果通知。
    *
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2462,8 +2460,9 @@ declare namespace userAuth {
    * @param { AuthParam } authParam - 用户认证相关参数。包含挑战值（challenge）、认证类型列表（authType）、认证信任等级（authTrustLevel）以及认证结果复用配置（
    *     reuseUnlockResult）。系统会根据这些参数判断是否存在满足条件的可复用认证结果。
    * @returns { Uint8Array } 可复用的认证令牌（AuthToken）。若存在满足条件的可复用认证结果，返回AuthToken数据，最大长度为1024字节；若不存在，则抛出相应错误码。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @throws { BusinessError } 12500017 - Failed to reuse authentication result.
@@ -2634,7 +2633,8 @@ declare namespace userAuth {
    *
    * @permission ohos.permission.ACCESS_USER_PASSIVE_RECOGNITION
    * @returns { UserRecognitionMgr | null } 用户识别管理实例。如果设备不支持此能力则返回null。
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
    * @atomicservice

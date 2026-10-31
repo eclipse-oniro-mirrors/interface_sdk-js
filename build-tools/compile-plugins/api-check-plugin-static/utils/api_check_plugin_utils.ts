@@ -81,7 +81,7 @@ import {
 import { getGlobalMonitor } from './performance_monitor';
 import { PERF } from './perf_constants';
 
-function isVersionRangeIntersect(start1: string, end1: string, start2: number, end2: number): boolean {
+function isVersionRangeDisjoint(start1: string, end1: string, start2: number, end2: number): boolean {
   // Convert version strings to numeric representations
   const range1StartNum = parseVersion(start1);
   const range1EndNum = parseVersion(end1);
@@ -94,10 +94,10 @@ function isVersionRangeIntersect(start1: string, end1: string, start2: number, e
   const normalizedRange2Start = Math.min(range2StartNum, range2EndNum);
   const normalizedRange2End = Math.max(range2StartNum, range2EndNum);
 
-  // Check for range intersection
-  const rangesIntersect = (normalizedRange1End < normalizedRange2Start || normalizedRange2End < normalizedRange1Start);
+  // Check for range disjoint
+  const rangesDisjoint = (normalizedRange1End < normalizedRange2Start || normalizedRange2End < normalizedRange1Start);
 
-  return rangesIntersect;
+  return rangesDisjoint;
 }
 
 function parseVersion(versionStr: string): number {
@@ -1537,10 +1537,10 @@ function checkVersionRangeIntersection(versionRange: { start: string; end: strin
   // 取项目编译SDK版本作为比较基准（min和max相同，即检查单一版本是否落在范围内）
   const minSDKVersion = globalObject.projectConfig.compileSdkVersion;
   const maxSDKVersion = globalObject.projectConfig.compileSdkVersion;
-  // isVersionRangeIntersect 返回"是否相交"，此处取反：
+  // isVersionRangeDisjoint 返回"是否不相交"，此处取反：
   //   相交（当前SDK版本在范围内）→ 返回true，表示permission标签生效
   //   不相交（当前SDK版本不在范围内）→ 返回false，表示permission标签不生效
-  isflag = isVersionRangeIntersect(startVersion, endVersion, minSDKVersion, maxSDKVersion);
+  isflag = isVersionRangeDisjoint(startVersion, endVersion, minSDKVersion, maxSDKVersion);
   return !isflag;
 }
 

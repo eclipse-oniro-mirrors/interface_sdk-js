@@ -405,6 +405,28 @@ declare namespace formInfo {
      * @since 26.0.0 dynamic&static
      */
     isFontScaleFollowSystem?: boolean;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
+
+    /**
+     * Obtains whether the form enable tint color.
+     * Default value: false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    readonly enableTint?: boolean;
   }
 
   /**
@@ -1635,6 +1657,17 @@ declare namespace formInfo {
      * @since 23 static
      */
     readonly extraData?: Record<string, Object>;
+
+    /**
+     * Indicates whether the form enable refresh upon switching between light and dark modes.
+     * Default value: The default value is false.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**

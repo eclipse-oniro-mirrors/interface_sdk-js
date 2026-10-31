@@ -14,6 +14,9 @@
  */
 
 /**
+ * As the basic module of ArkGraphics 3D, this module provides data types such as scene load parameters.
+ * It also provides basic methods such as scene loading methods.
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -685,10 +688,11 @@ export declare class Scene {
   static getDefaultRenderContext(): RenderContext | null;
 
   /**
-   * Loads a resource by path.
-   * This API uses a promise to return the result.
+   * Loads resources through the passed resource path. This API uses a promise to return the result.
+   * After the call, you should call [destroy]{@link destroy} to release resources when the Scene is no longer used;
+   * otherwise, resource leakage may occur.
    *
-   * @param { ResourceStr } [uri] - Path of the model file resource to load. The default value is undefined.
+   * @param { ResourceStr } uri - Path of the model file resource to load. The default value is undefined.
    * @returns { Promise<Scene> } Promise used to return the Scene object created.
    * @static
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -884,7 +888,7 @@ export declare class Scene {
    *     -- The number of elements in the camera array and the RenderTargetParameters array is not the same
    * @throws { BusinessError } 25601002 -- Possible Cause:
    *     -- Use this api after scene is destroyed
-   * @throws { BusinessError } 25601004 -- Possible Cause:
+   * @throws { BusinessError } 25601005 -- Possible Cause:
    *     -- No enough memory to allocate offscreen render targets
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi

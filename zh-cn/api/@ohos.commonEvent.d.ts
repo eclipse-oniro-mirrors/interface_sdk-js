@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file 公共事件模块
  * @kit API10LessDeprecatedModules
  */
 
@@ -36,8 +36,8 @@ declare namespace commonEvent {
   /**
    * 以回调形式发布公共事件。
    *
-   * @param { string } event - 表示要发布的公共事件。
-   * @param { AsyncCallback<void> } callback - 表示发布公共事件的回调方法。
+   * @param { string } event - 表示要发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
+   * @param { AsyncCallback<void> } callback - 回调函数。当公共事件发布成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
@@ -48,9 +48,9 @@ declare namespace commonEvent {
   /**
    * 以回调形式发布公共事件。
    *
-   * @param { string } event - 表示要发布的公共事件。
+   * @param { string } event - 表示要发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
    * @param { CommonEventPublishData } options - 表示发布公共事件的属性。
-   * @param { AsyncCallback<void> } callback - 表示发布公共事件的回调方法。
+   * @param { AsyncCallback<void> } callback - 回调函数。当公共事件发布成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
@@ -61,9 +61,9 @@ declare namespace commonEvent {
   /**
    * 以回调的形式向指定用户发布公共事件。
    *
-   * @param { string } event - 表示要发布的公共事件。
+   * @param { string } event - 表示要发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
    * @param { number } userId - 表示指定向该用户ID发布此公共事件。
-   * @param { AsyncCallback<void> } callback - 公共事件发布结果的回调方法。
+   * @param { AsyncCallback<void> } callback - 回调函数。当公共事件发布成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @systemapi
    * @since 8
@@ -75,15 +75,16 @@ declare namespace commonEvent {
   /**
    * 以回调形式向指定用户发布公共事件并指定发布信息。
    *
-   * @param { string } event - 表示要发布的公共事件。
+   * @param { string } event - 表示要发布的公共事件。字符串长度不超过254字节，超出部分会被截断。
    * @param { number } userId - 表示指定向该用户ID发布此公共事件。
    * @param { CommonEventPublishData } options - 表示发布公共事件的属性。
-   * @param { AsyncCallback<void> } callback - 公共事件发布结果的回调方法。
+   * @param { AsyncCallback<void> } callback - 回调函数。当公共事件发布成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.publishAsUser( event: string, userId: int, options: CommonEventPublishData, callback: AsyncCallback<void> )
+   * @useinstead @ohos.commonEventManager:commonEventManager.publishAsUser(event: string, userId: int, options: CommonEventPublishData,
+   *     callback: AsyncCallback<void>)
    */
   function publishAsUser(
     event: string,
@@ -96,11 +97,13 @@ declare namespace commonEvent {
    * 以回调形式创建订阅者。
    *
    * @param { CommonEventSubscribeInfo } subscribeInfo - 表示订阅信息。
-   * @param { AsyncCallback<CommonEventSubscriber> } callback - 表示创建订阅者的回调方法。
+   * @param { AsyncCallback<CommonEventSubscriber> } callback - 回调函数。当创建公共事件订阅者成功，err为undefined，data为获取到的公共事件订阅者，否则为错误对
+   *     象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.createSubscriber( subscribeInfo: CommonEventSubscribeInfo, callback: AsyncCallback<CommonEventSubscriber> )
+   * @useinstead @ohos.commonEventManager:commonEventManager.createSubscriber(subscribeInfo: CommonEventSubscribeInfo,
+   *     callback: AsyncCallback<CommonEventSubscriber>)
    */
   function createSubscriber(
     subscribeInfo: CommonEventSubscribeInfo,
@@ -111,7 +114,7 @@ declare namespace commonEvent {
    * 以Promise形式创建订阅者。
    *
    * @param { CommonEventSubscribeInfo } subscribeInfo - 表示订阅信息。
-   * @returns { Promise<CommonEventSubscriber> } 返回订阅者对象。
+   * @returns { Promise<CommonEventSubscriber> } Promise对象，返回订阅者对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
@@ -123,11 +126,11 @@ declare namespace commonEvent {
    * 以回调形式订阅公共事件。
    *
    * @param { CommonEventSubscriber } subscriber - 表示订阅者对象。
-   * @param { AsyncCallback<CommonEventData> } callback - 表示接收公共事件数据的回调方法。
+   * @param { AsyncCallback<CommonEventData> } callback - 回调函数。当订阅公共事件成功，err为undefined，data为获取到的公共事件数据，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.subscribe
+   * @useinstead @ohos.commonEventManager:commonEventManager.subscribe(subscriber: CommonEventSubscriber, callback: AsyncCallback<CommonEventData>)
    */
   function subscribe(subscriber: CommonEventSubscriber, callback: AsyncCallback<CommonEventData>): void;
 
@@ -135,16 +138,19 @@ declare namespace commonEvent {
    * 以回调形式取消订阅公共事件。
    *
    * @param { CommonEventSubscriber } subscriber - 表示订阅者对象。
-   * @param { AsyncCallback<void> } [callback] - 表示取消订阅的回调方法。
+   * @param { AsyncCallback<void> } [callback] - 回调函数。当取消公共事件订阅成功，err为undefined，否则为错误对象。
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.unsubscribe
+   * @useinstead @ohos.commonEventManager:commonEventManager.unsubscribe(subscriber: CommonEventSubscriber, callback?: AsyncCallback<void>)
    */
   function unsubscribe(subscriber: CommonEventSubscriber, callback?: AsyncCallback<void>): void;
 
   /**
-   * 系统公共事件是指由系统服务或系统应用发布的事件，订阅这些系统公共事件需要特定的权限。
+   * [系统公共事件](docroot://basic-services/common-event/common-event-glossary.md#system-common-event系统公共事件)是指由系统服务或系统应用发布的事
+   * 件，订阅这些系统公共事件需要相应的权限。发布或订阅这些事件需要使用如下链接中的枚举定义。
+   *
+   * 全部系统公共事件枚举定义请参见[系统公共事件定义]{@link commonEvent}。
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7

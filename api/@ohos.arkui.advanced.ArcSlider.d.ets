@@ -179,7 +179,7 @@ declare class ArcSliderValueOptions {
    * When progress is not within the range of [min, max], the nearest boundary value is taken: if **progress** is less
    * than **min**, **min** is taken; if **progress** is greater than **max**, **max** is taken.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default 100
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -253,7 +253,7 @@ declare class ArcSliderLayoutOptions {
    *
    * Default value: **true**, meaning sliding from bottom to top.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -460,7 +460,7 @@ declare class ArcSliderStyleOptions {
    *
    * Value range: [0, +∞). Abnormal values are handled as default.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default 20
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -688,7 +688,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -703,7 +703,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -718,7 +718,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform

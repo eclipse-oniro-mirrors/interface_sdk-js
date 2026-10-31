@@ -922,7 +922,6 @@ declare namespace abilityToolAccessCtrl {
    * 应用的相关信息。
    *
    * @syscap SystemCapability.Security.Asset
-   * @systemapi
    * @FaAndStageModel
    * @since 26.1.0 dynamiconly
    */
@@ -931,7 +930,6 @@ declare namespace abilityToolAccessCtrl {
      * 应用的包名。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
      */
@@ -940,7 +938,6 @@ declare namespace abilityToolAccessCtrl {
      * 应用的分身索引。
      *
      * @syscap SystemCapability.Security.Asset
-     * @systemapi
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
      */

@@ -209,7 +209,9 @@ declare class FormExtensionAbility {
    * Called when system configuration items change. The **onConfigurationUpdate** callback is triggered only when the 
    * FormExtensionAbility is alive. <!--Del-->Since API version 20, for system applications, the 
    * **onConfigurationUpdate** callback within the FormExtensionAbility will be triggered when the system language 
-   * changes.<!--DelEnd-->
+   * changes.<!--DelEnd--> Since API version 26.1.0, for form applications that enable resfresh upon switching between
+   * light and dark modes, the **onConfigurationUpdate** callback within the FormExtensionAbility will be triggered when
+   * the color mode changes.
    *
    * @param { Configuration } newConfig - New configuration.
    * @syscap SystemCapability.Ability.Form

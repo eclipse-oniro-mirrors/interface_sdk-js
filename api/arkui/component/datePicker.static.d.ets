@@ -19,6 +19,7 @@
  * @kit ArkUI
  */
 
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
 import { CommonMethod, PickerTextStyle, PickerDialogButtonStyle, Rectangle, Callback, BlurStyle, ShadowOptions, ShadowStyle, HoverModeAreaType, BackgroundBlurStyleOptions, BackgroundEffectOptions, DateTimeOptions, Bindable, DistortionMode, EdgeLightMode, SystemUiMaterial } from './common';
 import { ResourceColor, Offset, VoidCallback } from "./units";
 import { DialogAlignment } from "./alertDialog";
@@ -744,6 +745,22 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it (the last interacted component); falls back to the current layout
+     * when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+     * the device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    adaptToHandedness?: HandednessFollowMode;
 }
 
 /**

@@ -374,7 +374,7 @@ interface ArcSliderStyleOptionsConstructorOptions {
    * 
    * 默认值：20
    * 
-   * 设置小于0的值时，按照默认值处理。
+   * 取值范围：[0, +∞)，异常值按默认值处理。
    * 
    * @Trace
    *
@@ -470,7 +470,7 @@ declare class ArcSliderStyleOptions {
    * 
    * 默认值：20
    * 
-   * 设置小于0的值时，按照默认值处理。
+   * 取值范围：[0, +∞)，异常值按默认值处理。
    * 
    * @Trace
    *
@@ -539,9 +539,9 @@ declare type ArcSliderEnlargeHandler = (isEnlarged: boolean) => void;
  */
 interface ArcSliderOptionsConstructorOptions {
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的数值信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderValueOptions]{@link ArcSliderValueOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -553,9 +553,9 @@ interface ArcSliderOptionsConstructorOptions {
   valueOptions?: ArcSliderValueOptions;
 
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的布局信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderLayoutOptions]{@link ArcSliderLayoutOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -648,9 +648,9 @@ interface ArcSliderOptionsConstructorOptions {
 @ObservedV2
 declare class ArcSliderOptions {
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的数值信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderValueOptions]{@link ArcSliderValueOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *
@@ -663,9 +663,9 @@ declare class ArcSliderOptions {
   valueOptions?: ArcSliderValueOptions;
 
   /**
-   * 配置弧形Slider的样式信息。
+   * 配置弧形Slider的布局信息。
    * 
-   * 默认值：[ArcSliderStyleOptions]{@link ArcSliderStyleOptions}的各项子属性均取其默认值。
+   * 默认值：[ArcSliderLayoutOptions]{@link ArcSliderLayoutOptions}的各项子属性均取其默认值。
    * 
    * @Trace
    *

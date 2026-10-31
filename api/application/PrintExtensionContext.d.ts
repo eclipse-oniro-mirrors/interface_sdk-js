@@ -14,14 +14,19 @@
  */
 
 /**
- * @file
+ * @file PrintExtensionContext
  * @kit BasicServicesKit
  */
 
 import ExtensionContext from './ExtensionContext';
 /**
- * The context of print extension. It allows access to
- * serviceExtension-specific resources.
+ * **PrintExtensionContext** represents the context of **PrintExtensionAbility** and is inherited from
+ * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}.
+ *
+ * It can be directly used as the context of **PrintExtensionAbility** to obtain and manage printing resources for
+ * printing extension development, so as to complete printing tasks. For details about the design logic and accessible
+ * resources of **PrintExtensionContext**, see **PrintExtensionAbility** and
+ * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}.
  *
  * @syscap SystemCapability.Print.PrintFramework
  * @stagemodelonly

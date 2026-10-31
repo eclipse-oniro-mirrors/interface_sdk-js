@@ -24,6 +24,7 @@ import { Size, Position, Edges, LengthMetrics, SizeT } from './Graphics';
 import { DrawContext } from './Graphics';
 import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
 import { BusinessError } from '../@ohos.base';
+import { InputEventType } from './BuilderNode';
 
 /**
  * 描述组件的布局约束。

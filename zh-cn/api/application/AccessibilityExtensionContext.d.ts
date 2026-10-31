@@ -1098,7 +1098,7 @@ export declare interface AccessibilityElement {
    */
   hotArea?: Rect;
   /**
-   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType}类型所对应。
+   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link @global:AccessibilityRoleType}类型所对应。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
@@ -2205,7 +2205,7 @@ export interface ElementAttributeValues {
    */
   hotArea: Rect;
   /**
-   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType}类型对应。默认值为空。
+   * 自定义组件类型。与元素的[AccessibilityRoleType]{@link @global:AccessibilityRoleType}类型对应。默认值为空。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @since 18 dynamiconly

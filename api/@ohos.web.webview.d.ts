@@ -28,6 +28,8 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
  * This module provides the capability to manage web modules.
  *
+ * ## Required Permissions
+ *
  * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
  * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
@@ -5028,6 +5030,10 @@ declare namespace webview {
     /**
      * Scrolls the page by the specified amount within a specified period.
      *
+     * > **NOTE**
+     * >
+     * > Calling **scrollBy** does not trigger the nested scrolling of the parent component.
+     *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp
      * @param { number } deltaY - Amount to scroll by along the y-axis. The positive direction is downward.
@@ -6486,6 +6492,46 @@ declare namespace webview {
     getSubframeErrorPageEnabled(): boolean;
 
     /**
+     * Enables or disables automatic reload for error pages.
+     *
+     * When enabled, the Web component automatically retries loading on network errors
+     * using a retry backoff sequence: 1s → 5s → 30s → 1min → 5min → 10min → 30min.
+     * Retries stop after 7 attempts with increasing delays.
+     *
+     * > **NOTE**
+     * >
+     * > - Only network errors trigger auto-reload. The following are excluded:
+     * > certificate errors, SSL (Secure Sockets Layer) protocol errors, authentication errors,
+     * > POST requests, non-HTTP(S) protocols, and errors blocked by the client.
+     * > - Auto-reload does not affect the {@link onOverrideErrorPage} callback.
+     * > - When auto-reload is triggered, the {@link onErrorReceive} callback will be
+     * > invoked again for each retry attempt.
+     *
+     * @param { boolean } enable - Whether to enable automatic reload. The value **true** enables it,
+     *     and **false** disables it.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    enableAutoReload(enable: boolean): void;
+
+    /**
+     * Returns whether automatic reload for error pages is enabled.
+     *
+     * @returns { boolean } Whether automatic reload is enabled. Returns **true** if enabled, **false** otherwise.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isAutoReloadEnabled(): boolean;
+
+    /**
      * Clears the cache occupied by **Web** component based on the specified memory pressure level.
      *
      * @param { PressureLevel } level - Pressure level of the memory to be cleared.
@@ -6537,6 +6583,13 @@ declare namespace webview {
 
     /**
      * Scrolls the page by the specified amount and returns value to indicate whether the scrolling is successful.
+     *
+     * > **NOTE**
+     * >
+     * > - If the web page is being touched, **false** is returned. Otherwise, **true** is returned.
+     * > - If the rendering area at the same layer of the web page is being touched, **true** is returned.
+     * > - Calling **scrollByWithResult** does not trigger the nested scrolling of the parent component.
+     * > - This API does not support the high frame rate of scrolling performance.
      *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp

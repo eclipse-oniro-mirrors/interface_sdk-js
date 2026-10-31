@@ -5720,7 +5720,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5866,7 +5866,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -5937,6 +5937,75 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writePixelsFromAreaSync(area: PositionArea): void;
 
     /**
+     * 将缓冲区内指定像素格式的像素数据写入PixelMap的指定区域。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。使用Promise异步回调。
+     *
+     * 所需的最小缓冲区大小计算公式为：
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * sourcePixelFormat的每像素字节数。
+     * 其中PositionArea.stride的值必须大于或等于PositionArea.region.size.width乘以sourcePixelFormat的每像素字节数。
+     * 
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需将YUV格式的像素数据写入同一YUV格式的PixelMap，请使用{@link writePixelsFromArea}。
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至
+     *     [PositionArea]{@link image.PositionArea}.region指定的区域。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * 将缓冲区内指定像素格式的像素数据写入PixelMap的指定区域。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。同步返回结果。
+     *
+     * 所需的最小缓冲区大小计算公式为：
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * sourcePixelFormat的每像素字节数。
+     * 其中PositionArea.stride的值必须大于或等于PositionArea.region.size.width乘以sourcePixelFormat的每像素字节数。
+     * 
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需将YUV格式的像素数据写入同一YUV格式的PixelMap，请使用{@link writePixelsFromAreaSync}。
+     *
+     * @param { PositionArea } area - 写入的区域数据。<br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至
+     *     [PositionArea]{@link image.PositionArea}.region指定的区域。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat): void;
+
+    /**
      * 将缓冲区内的像素数据写入PixelMap的指定区域。如果PixelMap的像素格式为YUV类型，则缓冲区内的数据会按照PixelMap的像素格式解析，否则按照BGRA_8888格式解析。使用Promise异步回调。
      *
      * > **说明：**
@@ -6003,7 +6072,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6057,6 +6126,67 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeAllPixelsFromBufferSync(src: ArrayBuffer): void;
 
     /**
+     * 将缓冲区内指定像素格式的像素数据写入整个PixelMap。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。使用Promise异步回调。
+     *
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需写入与当前PixelMap像素格式相同的源数据（包括YUV格式），请使用{@link writeAllPixelsFromBuffer}。
+     * > - 如需写入具有自定义行跨距或偏移量的源数据，请使用{@link writePixelsFromArea}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
+     *     缓冲区内的像素数据必须是整个PixelMap的像素数据，且不包含内存对齐填充字节。
+     *     所需的最小缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBuffer(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * 将缓冲区内指定像素格式的像素数据写入整个PixelMap。
+     * 支持的源像素格式为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。同步返回结果。
+     *
+     * > **说明：**
+     * >
+     * > - 本接口支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
+     * > - 如需写入与当前PixelMap像素格式相同的源数据（包括YUV格式），请使用{@link writeAllPixelsFromBufferSync}。
+     * > - 如需写入具有自定义行跨距或偏移量的源数据，请使用{@link writePixelsFromAreaSync}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
+     *     缓冲区内的像素数据必须是整个PixelMap的像素数据，且不包含内存对齐填充字节。
+     *     所需的最小缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBufferSync(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): void;
+
+    /**
      * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
      * > **说明：**
@@ -6106,7 +6236,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6156,7 +6286,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 获取图像像素信息。同步返回结果。
      *
      * @returns { ImageInfo } 图像像素信息。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
      * @form
@@ -6303,7 +6433,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6413,7 +6543,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @returns { PixelMap } 成功同步返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6529,7 +6659,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6552,7 +6682,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6575,7 +6705,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { AntiAliasingLevel } level - 采用的缩放算法。该参数对于ASTC格式的PixelMap不生效。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6597,7 +6727,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<PixelMap> } Promise对象，返回缩放后的PixelMap。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6617,7 +6747,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { PixelMap } 成功同步返回缩放后的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6739,7 +6869,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     <br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6858,7 +6988,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6959,7 +7089,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7057,7 +7187,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7261,7 +7391,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 设置PixelMap在跨线程传输后断开原线程的引用。适用于需要立即释放PixelMap的场景。
      *
      * @param { boolean } detached - true表示断开原线程引用，false表示不断开原线程引用。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
      * @since 23 static
@@ -7279,7 +7409,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { HdrMetadataValue } 返回元数据的值。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -7300,7 +7430,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.The length of the input parameter is too
      *     long.
      *     2.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980286 - Memory format not supported.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 13 dynamic
@@ -7316,7 +7446,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 该接口不会拷贝原图像的EXIF信息。
      *
      * @returns { PixelMap } 成功同步返回拷贝的PixelMap对象，失败抛出异常。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7338,7 +7468,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 该接口不会拷贝原图像的EXIF信息。
      *
      * @returns { Promise<PixelMap> } Promise对象，返回拷贝的PixelMap。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7364,7 +7494,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core

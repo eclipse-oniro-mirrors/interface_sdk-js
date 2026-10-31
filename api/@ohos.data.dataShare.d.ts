@@ -38,7 +38,8 @@ import { ValuesBucket, ValueType } from './@ohos.data.ValuesBucket';
  */
 declare namespace dataShare {
   /**
-   * Represents the optional parameters of [DataShareHelper]{@link dataShare.DataShareHelperOptions}.
+   * Specifies the optional parameters of [DataShareHelper]{@link dataShare.DataShareHelper}, including whether it is in
+   * proxy mode and the startup waiting time for non-silent access.
    *
    * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
    * @systemapi
@@ -48,14 +49,10 @@ declare namespace dataShare {
    */
   interface DataShareHelperOptions {
     /**
-     * Whether the [DataShareHelper]{@link dataShare.DataShareHelperOptions} is in proxy mode. The default value is
-     * **false**.
-     *
-     * If the value is **true**, the [DataShareHelper]{@link dataShare.DataShareHelperOptions} to be created is in proxy
-     * mode, and all operations will not open the data provider application unless the database does not exist. If the
-     * database does not exist,
-     * [createDataShareHelper]{@link dataShare.createDataShareHelper(context: Context, uri: string, options: DataShareHelperOptions, callback: AsyncCallback<DataShareHelper>)}
-     * will start the data provider to create a database.
+     * Default value: **false**. If set to **true**, the [DataShareHelper]{@link dataShare.DataShareHelper} to be
+     * created is in proxy mode, and all operations do not open the data provider application unless the database
+     * does not exist. When the database does not exist,
+     * [createDataShareHelper]{@link dataShare.createDataShareHelper} starts the data provider to create the database.
      *
      * @default false
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
@@ -66,7 +63,7 @@ declare namespace dataShare {
      */
     isProxy?: boolean;
     /**
-     * Waiting time for starting the data provider process, in seconds. The default value is **2**.
+     * Waiting time for starting the data provider process, in seconds. The default value is **2**. The value must be greater than 0.
      *
      * @default 2
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
@@ -102,10 +99,17 @@ declare namespace dataShare {
    * Creates a **DataShareHelper** instance. **DataShareHelperOptions** specifies whether **DataShareHelper** is in
    * proxy mode. This API uses an asynchronous callback to return the result.
    *
-   * @param { Context } context - Indicates the application context.
-   * @param { string } uri - Indicates the path of the file to open.
-   * @param { DataShareHelperOptions } options - Indicates the optional config.
-   * @param { AsyncCallback<DataShareHelper> } callback - {DataShareHelper}: The dataShareHelper for consumer.
+   * @param { Context } context - Context of the application.
+   * @param { string } uri - URI of the server application to connect.
+   * @param { DataShareHelperOptions } options - Specifies whether [DataShareHelper]{@link dataShare.DataShareHelper}
+   *     is in proxy mode, and specifies the waiting time for startup during non-silent access.
+   *     If not set, [DataShareHelper]{@link dataShare.DataShareHelper} is not in proxy mode, and the waiting
+   *     time for startup during non-silent access is 2 seconds.
+   *     If the URI starts with **datashareproxy**, the **isProxy** parameter of **options** must be set;
+   *     otherwise, **DataShareHelper** creation fails and an error is returned.
+   * @param { AsyncCallback<DataShareHelper> } callback - Callback used to return the result. If the operation
+   *     is successful, **err** is **undefined** and **data** is the **DataShareHelper** instance created.
+   *     Otherwise, **err** is an error object.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
    *     API. [since 19]
    * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -130,13 +134,12 @@ declare namespace dataShare {
    *
    * @param { Context } context - Context of the application.
    * @param { string } uri - URI of the server application to connect.
-   * @param { DataShareHelperOptions } options - Optional configuration of the **DataShareHelper** instance. It
-   *     specifies whether [DataShareHelper]{@link dataShare.DataShareHelperOptions} is in proxy mode and the waiting
-   *     time for starting the data provider process in non-silent access mode.If this parameter is not set,
-   *     [DataShareHelper]{@link dataShare.DataShareHelperOptions} is not in proxy mode and the waiting time for
-   *     starting the data provider process in non-silent access mode is 2 seconds.If the URI starts with
-   *     **datashareproxy**, the **isProxy** parameter in **options** must be set. Otherwise, **DataShareHelper** will
-   *     fail to be created and an error will be returned. [since 10]
+   * @param { DataShareHelperOptions } options - Optional configuration. It specifies whether the
+   *     [DataShareHelper]{@link dataShare.DataShareHelper} is in proxy mode and the wait time for startup during
+   *     non-silent access. If this parameter is not set, the [DataShareHelper]{@link dataShare.DataShareHelper} is
+   *     not in proxy mode, and the wait time for startup during non-silent access is 2 seconds. If the URI starts
+   *     with **datashareproxy**, the **isProxy** parameter of **options** must be set; otherwise, the
+   *     **DataShareHelper** fails to be created and an error is returned.
    * @returns { Promise<DataShareHelper> } Promise used to return the **DataShareHelper** instance created.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
    *     API. [since 19]
@@ -159,7 +162,6 @@ declare namespace dataShare {
    * Enables silent access. This API uses a promise to return the result.
    *
    * Observe the following when using this API:
-   *
    * - The data provider calls this API to enable silent access.
    * - Whether silent access is enabled is determined based on the return value of this API and the
    * **isSilentProxyEnable** field in the
@@ -169,13 +171,13 @@ declare namespace dataShare {
    * **data_share_config.json** file is used to determine whether to enable silent access.
    *
    * @param { Context } context - Context of the application.
-   * @param { string } uri - URI of the data, for which silent access is to be enabled.Global setting: If **uri** is
-   *     **undefined** or **null** or is not specified, all the previous settings will be cleared and silent access will
-   *     be enabled globally for the data provider.URI-specific setting: If a URI is specified, silent access to the
-   *     specified URI will be enabled.When datashareHelper APIs are called, the URI-specific setting is
-   *     preferentially applied. If no match is found, the global setting is applied.URI format:
-   *     **datashare:///{bundleName}/{moduleName}/{storeName}/{tableName}**
-   * @returns { Promise<void> } returns no value.
+   * @param { string } uri - Data path of the data provider for which silent access is to be enabled.<br>1) Global
+   *     switch state: If **uri** is not passed, is **undefined**, or is **null**, all previously set **uri** switch
+   *     states are cleared, and silent access to the data provider is enabled.<br>2) Precise switch state: If **uri**
+   *     is a fixed value, silent access is enabled only for that **uri**.<br>When calling **datashareHelper** APIs,
+   *     the switch state that precisely matches the **uri** is matched first. If no match is found, the global
+   *     switch state is matched.<br>uri format: **datashare:///{bundleName}/{moduleName}/{storeName}/{tableName}**
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
    *     API. [since 19]
    * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -193,7 +195,6 @@ declare namespace dataShare {
    * Disables silent access. This API uses a promise to return the result.
    *
    * Observe the following when using this API:
-   *
    * - The data provider calls this API to disable silent access.
    * - Whether silent access is disabled is determined based on the return value of this API and the
    * **isSilentProxyEnable** field in the
@@ -203,13 +204,14 @@ declare namespace dataShare {
    * **data_share_config.json** file is used to determine whether to disable silent access.
    *
    * @param { Context } context - Context of the application.
-   * @param { string } uri - URI of the data, for which silent access is to be disabled.Global setting: If **uri**
-   *     is **undefined** or **null** or is not specified, all the previous settings will be cleared and silent access
-   *     will be disabled globally for the data provider.URI-specific setting: If a URI is specified, silent access
-   *     to the specified URI will be disabled.When datashareHelper APIs are called, the URI-specific setting is
-   *     preferentially applied. If no match is found, the global setting is applied.URI format:
+   * @param { string } uri - Data path of the data provider to be closed.<br>1. Global switch state: If the input
+   *     parameter does not carry a **uri**, or the **uri** is **undefined** or **null**, the previously set uri switch
+   *     state is cleared, and silent access to the data provider is disabled.<br>2. Precise switch state: If the **uri**
+   *     input parameter is a fixed value, only the silent access corresponding to this **uri** is disabled.<br>When
+   *     calling **datashareHelper**-related APIs, the switch state that precisely matches the **uri** is matched
+   *     first. If no match is found, the global switch state is matched.<br>uri format:
    *     **datashare:///{bundleName}/{moduleName}/{storeName}/{tableName}**
-   * @returns { Promise<void> } returns no value.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
    *     API. [since 19]
    * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -235,7 +237,7 @@ declare namespace dataShare {
    */
   interface TemplateId {
     /**
-     * ID of the subscriber who handles the callback. The value must the same as the **subscriberId** in
+     * ID of the subscriber who handles the callback. The value must be the same as the **subscriberId** in
      * [**addTemplate**]{@link dataShare.DataShareHelper.addTemplate}. The ID of each subscriber must be unique.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
@@ -246,8 +248,7 @@ declare namespace dataShare {
      */
     subscriberId: string;
     /**
-     * Bundle name of the template owner. The value must be the same as the **bundleName** in
-     * [**addTemplate**]{@link dataShare.DataShareHelper.addTemplate}.
+     * Bundle name of the template owner who creates the template.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @systemapi
@@ -301,7 +302,8 @@ declare namespace dataShare {
   }
 
   /**
-   * Represents the RDB data change result. The data returned by the callback is not larger than 10 MB in size.
+   * Represents the result of subscribing to or unsubscribing from RDB data changes. The callback supports data
+   * transfer of no more than 10 MB.
    *
    * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
    * @systemapi
@@ -400,13 +402,11 @@ declare namespace dataShare {
     predicates: Record<string, string>;
 
     /**
-     * Template scheduler SQL, which is embedded with a custom function. Currently, the **remindTimer** function is
-     * embedded. The **remindTimer** triggers a subscription-based update in specified scenarios.
-     *
-     * The scheduler SQL statement is triggered when:
-     *
-     * 1. The subscribed data is modified.
-     * 2. The first subscription is added to the corresponding database.
+     * Scheduler SQL of the template. Custom functions are embedded for processing, and the preset custom function
+     * **remindTimer** is currently used. **remindTimer** triggers a subscription refresh once in the specified
+     * scenario. Trigger scenarios: 1. When data is modified and a subscription exists, the corresponding scheduler SQL
+     * statement is triggered. 2. When the first subscription of the corresponding database is added, the corresponding
+     * scheduler SQL statement is triggered.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @systemapi
@@ -611,8 +611,7 @@ declare namespace dataShare {
   /**
    * Provides a **DataShareHelper** instance to access or manage data on the server. Before calling an API provided by
    * **DataShareHelper**, you must create a **DataShareHelper** instance using
-   * [createDataShareHelper]{@link dataShare.createDataShareHelper(context: Context, uri: string, callback: AsyncCallback<DataShareHelper>)}
-   * .
+   * [createDataShareHelper]{@link dataShare.createDataShareHelper}.
    *
    * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
    * @systemapi
@@ -622,14 +621,17 @@ declare namespace dataShare {
    */
   interface DataShareHelper {
     /**
-     * Subscribes to the data change of the specified URI. After an observer is registered, the subscriber will receive
-     * a notification when the **notifyChange** API is called. This API uses an asynchronous callback to return the
-     * result. This function does not support cross-user notification subscription. An application can subscribe to a
-     * single URI for a maximum of 51 times.
+     * Subscribes to the data change event of the data corresponding to the specified URI. Cross-user subscription to
+     * notifications is not supported.
      *
-     * Notification triggering: In non-silent scenarios, a notification is published if the
-     * [notifyChange]{@link dataShare.DataShareHelper.notifyChange(uri: string)} method is called. In silent scenarios,
-     * a notification is automatically published if data is modified via silent access.
+     * **Notification triggering:** In non-silent scenarios, a notification is published to the subscribers of the
+     * specified URI when the [notifyChange]{@link dataShare.DataShareHelper.notifyChange} method is called. In silent
+     * scenarios, a notification is automatically published when the data is modified through silent access to the
+     * specified URI.
+     *
+     * **Specification limits**
+     * - Before OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 50 subscriptions globally.
+     * - Since OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 2500 subscriptions globally.
      *
      * @param { 'dataChange' } type - Event/callback type. The value is **dataChange**, which indicates the data change.
      * @param { string } uri - URI of the data to be observed.
@@ -648,10 +650,17 @@ declare namespace dataShare {
     on(type: 'dataChange', uri: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Subscribes to the data change of the specified URI. After an observer is registered, the subscriber will receive
-     * a notification when the **notifyChange** API is called. This API uses an asynchronous callback to return the
-     * result. This function does not support cross-user notification subscription. An application can subscribe to a
-     * single URI for a maximum of 51 times.
+     * Subscribes to the data change event of the data corresponding to the specified URI. Cross-user subscription to
+     * notifications is not supported.
+     *
+     * **Notification triggering:** In non-silent scenarios, a notification is published to the subscribers of the
+     * specified URI when the [notifyChange]{@link dataShare.DataShareHelper.notifyChange} method is called. In silent
+     * scenarios, a notification is automatically published when the data is modified through silent access to the
+     * specified URI.
+     *
+     * **Specification limits**
+     * - Before OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 50 subscriptions globally.
+     * - Since OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 2500 subscriptions globally.
      *
      * @param { string } uri - URI of the data to be observed.
      * @param { Callback<void> } callback - Callback used to return the result. If the data is changed, **err** is
@@ -703,16 +712,23 @@ declare namespace dataShare {
     offDataChange(uri: string, callback?: Callback<void>): void;
 
     /**
-     * Subscribes to the data change of the specified URI. After a change notification is registered, the subscriber
-     * will receive a notification when the **notifyChange** API is called. The change notification contains the data
-     * change type, URI of the data changed, and the changed data. This API uses an asynchronous callback to return the
-     * result. This function does not support cross-user notification subscription. An application can subscribe to a
-     * single URI for a maximum of 51 times.
+     * Subscribes to the data change event of the data corresponding to the specified URI. Cross-user subscription to
+     * notifications is not supported.
      *
-     * Notification triggering: In non-silent scenarios, a notification is published if the
+     * **API called in pairs**
+     * - This API is used in pairs with [off('dataChange')]{@link dataShare.DataShareHelper.off}, which is used to unsubscribe from data change events.
+     * - To cancel the subscription, ensure that the values of **type**, **uri**, and **callback** are the same as those set during the subscription.
+     * - If the subscription is not canceled in time, memory leaks and resource occupation may occur.
+     *
+     * **Notification triggering:** In non-silent scenarios, a notification carrying [ChangeInfo]{@link
+     * dataShare.ChangeInfo} is published to the subscribers of the specified URI when the
      * [notifyChange]{@link dataShare.DataShareHelper.notifyChange(data: ChangeInfo)} method is called. In silent
-     * scenarios, a notification is automatically published if data is modified via silent access, but **changeInfo** in
-     * the callback is invalid.
+     * scenarios, a notification is automatically published when the data is modified through silent access to the
+     * specified URI, but the **ChangeInfo** in the callback notification is invalid in this case.
+     *
+     * **Specification limits**
+     * - Before OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 50 subscriptions globally.
+     * - Starting from OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 2500 subscriptions globally.
      *
      * @param { 'dataChange' } event - Event/callback type. The value is **dataChange**, which indicates the data
      *     change.
@@ -731,11 +747,23 @@ declare namespace dataShare {
     on(event: 'dataChange', type:SubscriptionType, uri: string, callback: AsyncCallback<ChangeInfo>): void;
 
     /**
-     * Subscribes to the data change of the specified URI. After a change notification is registered, the subscriber
-     * will receive a notification when the **notifyChange** API is called. The change notification contains the data
-     * change type, URI of the data changed, and the changed data. This API uses an asynchronous callback to return the
-     * result. This function does not support cross-user notification subscription. An application can subscribe to a
-     * single URI for a maximum of 51 times.
+     * Subscribes to the data change event of the data corresponding to the specified URI. Cross-user subscription to
+     * notifications is not supported.
+     *
+     * **API called in pairs**
+     * - This API is used in pairs with [offDataChange]{@link dataShare.DataShareHelper.offDataChange}, which is used to unsubscribe from data change events.
+     * - To cancel the subscription, ensure that the values of **type**, **uri**, and **callback** are the same as those set during the subscription.
+     * - If the subscription is not canceled in time, memory leaks and resource occupation may occur.
+     *
+     * **Notification triggering:** In non-silent scenarios, a notification carrying [ChangeInfo]{@link
+     * dataShare.ChangeInfo} is published to the subscribers of the specified URI when the
+     * [notifyChange]{@link dataShare.DataShareHelper.notifyChange(data: ChangeInfo)} method is called. In silent
+     * scenarios, a notification is automatically published when the data is modified through silent access to the
+     * specified URI, but the **ChangeInfo** in the callback notification is invalid in this case.
+     *
+     * **Specification limits**
+     * - Before OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 50 subscriptions globally.
+     * - Starting from OpenHarmony 6.0, the maximum number of repeated subscriptions to a single URI within the same application is 50, and a single URI supports a maximum of 2500 subscriptions globally.
      *
      * @param { SubscriptionType } type - Subscription type.
      * @param { string } uri - URI of the data to be observed.
@@ -846,6 +874,11 @@ declare namespace dataShare {
      * Subscribes to the changes of the data corresponding to the specified URI and template. Only silent access is
      * supported. This function does not support cross-user notification subscription.
      *
+     * **API called in pairs**
+     * - This API is used in pairs with [off('rdbDataChange')]{@link dataShare.DataShareHelper.off}, which is used to unsubscribe from data change events.
+     * - To cancel the subscription, ensure that the values of **type**, **uris**, **templateId**, and **callback** are the same as those set during the subscription.
+     * - If the subscription is not canceled in time, memory leaks and resource occupation may occur.
+     *
      * @param { 'rdbDataChange' } type - Event type. The value is **rdbDataChange**, which indicates the change of the
      *     RDB data. If **type** is any other value, there is no response to this API.
      * @param { Array<string> } uris - URIs of the target data.
@@ -897,6 +930,11 @@ declare namespace dataShare {
     /**
      * Unsubscribes from the changes of the data corresponding to the specified URI and template. Only silent access is
      * supported.
+     *
+     * **API called in pairs**
+     * - This API is used in pairs with [on('rdbDataChange')]{@link dataShare.DataShareHelper.on} and must be used after subscription.
+     * - To cancel the subscription, ensure that the values of **type**, **uris**, and **templateId** are the same as those set during the subscription.
+     * - If the **callback** parameter is empty, all registered callbacks of the URI will be unregistered.
      *
      * @param { 'rdbDataChange' } type - Event type. The value is **rdbDataChange**, which indicates the change of the
      *     RDB data.
@@ -1097,7 +1135,7 @@ declare namespace dataShare {
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameters types.
-     * @throws { BusinessError } 15700012 - The data area is not exist.
+     * @throws { BusinessError } 15700012 - The data area does not exist.
      * @throws { BusinessError } 15700013 - The DataShareHelper instance is already closed. [since 12]
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @systemapi
@@ -1122,9 +1160,9 @@ declare namespace dataShare {
      * @param { Array<PublishedItem> } data - Data to publish.
      * @param { string } bundleName - Application of the data to publish. This parameter is valid only for the private
      *     data published. Only the application can read the data.
-     * @param { int } version - Version of the data to publish. A larger value indicates a later version. If the version
-     *     of the data published is earlier than that of the data in the database, the data in the database will not be
-     *     updated. If the data version is not checked, leave this parameter unspecified.
+     * @param { int } version - Version of the data to publish. A larger value indicates a newer data version. If the
+     *     published version number is smaller than the record in the database, the update fails. If the version of the
+     *     data to publish does not need to be checked, leave this parameter unspecified.
      * @returns { Promise<Array<OperationResult>> } Returns the operation result.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
@@ -1197,10 +1235,11 @@ declare namespace dataShare {
      *
      * @param { string } uri - URI of the data to insert.
      * @param { ValuesBucket } value - Value of the data to insert.
-     * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined** and **data** is the index of the inserted data record. Otherwise, **err** is an
-     *     error object.The data index is not returned if the APIs of the database in use, for example, the key-
-     *     value database (KVDB), do not support the return of indexes.
+     * @param { AsyncCallback<int> } callback - Callback used to return the result. If a single data record is
+     *     inserted into the database successfully, **err** is **undefined** and **data** is the index of the inserted
+     *     data record; otherwise, **err** is an error object. Because the corresponding APIs of some databases (such
+     *     as KVDB) do not support returning an index, this **callback** cannot return an index value if the server
+     *     uses a database that does not support indexes.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1225,9 +1264,9 @@ declare namespace dataShare {
      *
      * @param { string } uri - URI of the data to insert.
      * @param { ValuesBucket } value - Value of the data to insert.
-     * @returns { Promise<int> } Promise used to return the index of the inserted data record.
-     *     The data index is not returned if the APIs of the database in use (for example, KVDB) do not support this
-     *     return.
+     * @returns { Promise<int> } Promise object. Returns the index of the inserted data record. Because the
+     *     corresponding APIs of some databases (such as KVDB) do not support returning an index, if the server uses
+     *     a database that does not support indexes, this Promise cannot return an index value either.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1251,13 +1290,16 @@ declare namespace dataShare {
      * 200 KB. Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to delete.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for deleting data.The predicate
-     *     methods supported by **delete()** vary depending on the database in use. For example, the KVDB supports only
-     *     **inKeys**. If this parameter is left empty, the entire table will be deleted by default.
-     * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined** and **data** is the number of deleted data records. Otherwise, **err** is an error
-     *     object.The number of deleted data records is not returned if the APIs of the database in use (for example
-     *     , KVDB) do not support this return.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filtering conditions. The predicate methods
+     *     supported by the **delete** API depend on the database selected by the server. For example, the deletion of
+     *     KVDB currently supports only the **inKeys** predicate. In the silent access scenario, if the methods in the
+     *     predicate are empty, the entire table is deleted by default. In the non-silent access scenario, the
+     *     specifications are defined by the data provider.
+     * @param { AsyncCallback<int> } callback - Callback invoked to return the result. If one or more data records
+     *     are deleted from the database successfully, **err** is **undefined** and **data** is the number of deleted
+     *     data records obtained. Otherwise, err is an error object. Because the corresponding APIs of some databases
+     *     (such as KVDB) do not provide the relevant support, if the server uses such a database, this **callback**
+     *     cannot return the number of deleted data records.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1281,12 +1323,14 @@ declare namespace dataShare {
      * 200 KB. Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to delete.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for deleting data.The predicate
-     *     methods supported by **delete()** vary depending on the database in use. For example, the KVDB supports only
-     *     **inKeys**. If this parameter is left empty, the entire table will be deleted by default.
-     * @returns { Promise<int> } Promise used to return the number of deleted data records.
-     *     The number of deleted data records is not returned if the APIs of the database in use
-     *     (for example, KVDB) do not support this return.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filter criteria. The predicate methods
+     *     supported by the **delete** API depend on the database selected by the server. For example, the deletion of
+     *     KVDB currently supports only the **inKeys** predicate. In the silent access scenario, if the methods in the
+     *     predicate are empty, the entire table is deleted by default. In the non-silent access scenario, the
+     *     specifications are defined by the data provider.
+     * @returns { Promise<int> } Promise object. Number of deleted data records. Because the corresponding APIs of
+     *     some databases (such as KVDB) do not provide such support, if the server uses such a database, this Promise
+     *     cannot return the number of deleted data records either.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1318,9 +1362,11 @@ declare namespace dataShare {
      * .
      *
      * @param { string } uri - URI of the data to query.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for querying data.The predicate
-     *     methods supported by **query()** vary depending on the database used. For example, the KVDB supports only
-     *     **inKeys** and **prefixKey**. If this parameter is left empty, the entire table will be queried by default.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filter criteria. The predicate methods
+     *     supported by the **query** API depend on the database selected by the server. For example, KVDB currently
+     *     supports only **inKeys** and **prefixKey**. In a silent access scenario, when the methods in the predicate
+     *     are empty, the entire table is queried by default. In a non-silent access scenario, the specifications are
+     *     defined by the data provider.
      * @param { Array<string> } columns - Column to query. If this parameter is left empty, all columns will be queried.
      * @param { AsyncCallback<DataShareResultSet> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined** and **data** is the result set obtained. Otherwise, **err** is an error
@@ -1356,15 +1402,17 @@ declare namespace dataShare {
      * When this API is used to query database data, if the query content exceeds the resource limit, the operation
      * fails and an error is returned. You can retry the operation based on the scenario. For details about the resource
      * limit, see
-     * [Silent Access via DatamgrService (ArkTS) (for System Applications Only)](docroot://database/share-data-by-silent-access-sys.md#constraints)
+     * [Silent Access via DatamgrService](docroot://database/share-data-by-silent-access-sys.md#constraints)
      * and
-     * [Sharing Data Using DataShareExtensionAbility (ArkTS) (for System Applications Only)](docroot://database/share-data-by-datashareextensionability-sys.md#constraints)
+     * [Sharing Data Using DataShareExtensionAbility](docroot://database/share-data-by-datashareextensionability-sys.md#constraints)
      * .
      *
      * @param { string } uri - URI of the data to query.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for querying data.The predicate
-     *     methods supported by **query()** vary depending on the database used. For example, the KVDB supports only
-     *     **inKeys** and **prefixKey**. If this parameter is left empty, the entire table will be queried by default.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filter criteria. The predicate methods
+     *     supported by the **query** API depend on the database selected by the server. For example, KVDB currently
+     *     supports only **inKeys** and **prefixKey**. In a silent scenario, when the methods in the predicate are
+     *     empty, the entire table is queried by default. In a non-silent scenario, the specification is defined by
+     *     the data provider.
      * @param { Array<string> } columns - Column to query. If this parameter is left empty, all columns will be queried.
      * @returns { Promise<DataShareResultSet> } Promise used to return the result set obtained.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
@@ -1394,15 +1442,17 @@ declare namespace dataShare {
      * is called cannot exceed 200 KB. Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to update.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for updating data.The predicate
-     *     methods supported by **update()** vary depending on the database in use. For example, only the relational
-     *     database (RDB) supports predicates. If this parameter is left empty, the entire table will be updated by
-     *     default.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filtering conditions. The predicate filtering
+     *     conditions supported by the **update** API depend on the database selected by the server. For example, KVDB
+     *     does not support predicate filtering conditions, and only RDB does. In a silent scenario, when the methods
+     *     in the predicate are empty, the entire table is updated by default. In a non-silent scenario, the
+     *     specifications are defined by the data provider.
      * @param { ValuesBucket } value - Value of the data to update.
-     * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined** and **data** is the number of updated data records. Otherwise, **err** is an error
-     *     object.The number of updated data records is not returned if the APIs of the database in use (for example
-     *     , KVDB) do not support this return.
+     * @param { AsyncCallback<int> } callback - Callback invoked to return the result. If the data records in the
+     *     database are updated successfully, **err** is **undefined** and **data** is the number of updated data
+     *     records. Otherwise, err is an error object. Because the corresponding APIs of some databases (such as KVDB)
+     *     do not provide such support, if the server uses such a database, this **callback** cannot return the number
+     *     of updated data records.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1431,14 +1481,15 @@ declare namespace dataShare {
      * is called cannot exceed 200 KB. Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to update.
-     * @param { dataSharePredicates.DataSharePredicates } predicates - Conditions for updating data.The predicate
-     *     methods supported by **update()** vary depending on the database in use. For example, only the relational
-     *     database (RDB) supports predicates. If this parameter is left empty, the entire table will be updated by
-     *     default.
+     * @param { dataSharePredicates.DataSharePredicates } predicates - Filter criteria. The predicate filter
+     *     criteria supported by the **update** API depend on the database used by the server. For example, KVDB does
+     *     not support predicate filter criteria, and only RDB does. In the silent access scenario, when the methods
+     *     in the predicate are empty, the entire table is updated by default. In the non-silent access scenario, the
+     *     specifications are defined by the data provider.
      * @param { ValuesBucket } value - Value of the data to update.
-     * @returns { Promise<int> } Promise used to return the number of data records updated.
-     *     The number of updated data records is not returned if the APIs of the database in use
-     *     (for example, KVDB) do not support this return.
+     * @returns { Promise<int> } Promise used to return the number of updated data records. Because the corresponding
+     *     APIs of some databases (such as KVDB) do not provide such support, if the server uses such a database, this
+     *     Promise cannot return the number of updated data records.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1453,19 +1504,20 @@ declare namespace dataShare {
     update(uri: string, predicates: dataSharePredicates.DataSharePredicates, value: ValuesBucket): Promise<int>;
 
     /**
-     * Batch updates data in the database. The total number of objects for operations (that is, KV pairs of the objects)
-     * cannot exceed 4000. If the number exceeds 4000, the update will fail. The transaction of this API depends on the
-     * data provider. This API uses a promise to return the result. Silent access is not supported currently.
+     * Updates data records in the database in batches. The total number of all operations (that is, the key-value
+     * pairs of the **operations** object) must not exceed 4000; otherwise, the update fails. The transactionality of
+     * this API depends on the **provider** (data provider). This API uses a promise to return the result. Silent access
+     * is not supported.
      *
-     * In non-silent scenarios, the size of the **operations** parameter passed in this API called cannot exceed 900 KB.
-     * Otherwise, the operation fails or an exception is thrown.
+     * In non-silent scenarios, the size of the **operations** parameter passed when calling this API cannot exceed 900
+     * KB. Otherwise, the operation fails or an exception is thrown.
      *
      * @param { Record<string, Array<UpdateOperation>> } operations - Collection of the path of the data to update,
      *     update conditions, and new data.
-     * @returns {Promise<Record<string, Array<int>>>} Promise used to return an array of updated data records. The value
-     *     **-1** means the update operation fails.
-     *     The number of updated data records is not returned if the APIs of the database in use
-     *     (for example, KVDB) do not support this return.
+     * @returns {Promise<Record<string, Array<int>>>} Promise object used to return the collection of the numbers of
+     *     updated data records. The number of data records for an **UpdateOperation** that fails to update is **-1**.
+     *     Because the corresponding APIs of some databases (such as KVDB) do not provide such support, this Promise
+     *     cannot return the number of updated data records if the server uses such a database.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameters types.
@@ -1489,10 +1541,11 @@ declare namespace dataShare {
      *
      * @param { string } uri - URI of the data to insert.
      * @param { Array<ValuesBucket> } values - Data to insert.
-     * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined** and **data** is the number of data records inserted. Otherwise, **err** is an error
-     *     object.The number of inserted data records is not returned if the APIs of the database in use (for
-     *     example, KVDB) do not support this return.
+     * @param { AsyncCallback<int> } callback - Callback invoked when the batch data is inserted into the database
+     *     successfully. In this case, **err** is **undefined** and **data** is the number of inserted data records;
+     *     otherwise, err is an error object. Because the corresponding APIs of some databases (such as KVDB) do not
+     *     provide such support, if the server uses such a database, this **callback** cannot return the number of
+     *     inserted data records.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1515,9 +1568,9 @@ declare namespace dataShare {
      *
      * @param { string } uri - URI of the data to insert.
      * @param { Array<ValuesBucket> } values - Data to insert.
-     * @returns { Promise<int> } Promise used to return the number of data records inserted.
-     *     The number of inserted data records is not returned if the APIs of the database in use
-     *     (for example, KVDB) do not support this return.
+     * @returns { Promise<int> } Promise used to return the number of inserted data records. Because the
+     *     corresponding APIs of some databases (such as KVDB) do not provide such support, if the server uses such a
+     *     database, this promise cannot return the number of inserted data records.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 12]
      * @throws { BusinessError } 401 - Parameter error.Possible causes: 1. Mandatory parameters are left unspecified;
@@ -1620,7 +1673,7 @@ declare namespace dataShare {
      * Notifies the registered observer of data changes. This API uses an asynchronous callback to return the result.
      * Silent access is not supported currently.
      *
-     * In non-silent scenarios, the size of the **uri** parameter passed in this API called cannot exceed 200 KB.
+     * In non-silent scenarios, the size of the **uri** parameter passed when calling this API cannot exceed 200 KB.
      * Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to be observed.
@@ -1642,7 +1695,7 @@ declare namespace dataShare {
      * Notifies the registered observer of data changes. This API uses a promise to return the result. Silent access is
      * not supported currently.
      *
-     * In non-silent scenarios, the size of the **uri** parameter passed in this API called cannot exceed 200 KB.
+     * In non-silent scenarios, the size of the **uri** parameter passed in this API call cannot exceed 200 KB.
      * Otherwise, the operation fails or an exception is thrown.
      *
      * @param { string } uri - URI of the data to be observed.
@@ -1663,7 +1716,7 @@ declare namespace dataShare {
      * Notifies the observer of the data change of the specified URI. This API uses a promise to return the result.
      * Silent access is not supported currently.
      *
-     * In non-silent scenarios, the size of the **data** parameter passed in this API called cannot exceed 200 KB.
+     * In non-silent scenarios, the size of the **data** parameter passed when calling this API cannot exceed 200 KB.
      * Otherwise, the operation fails or an exception is thrown.
      *
      * @param { ChangeInfo } data - Information about the data change type, URI of the data changed, and changed data.
@@ -1684,7 +1737,7 @@ declare namespace dataShare {
      * Closes the **DataShareHelper** instance. After this API is called, the instance becomes invalid. This API uses a
      * promise to return the result.
      *
-     * @returns { Promise<void> } returns no value.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
      *     API. [since 19]
      * @throws { BusinessError } 15700000 - Inner error.
@@ -1732,13 +1785,12 @@ declare namespace dataShare {
     uri: string;
 
     /**
-     * Value of a shared configuration. If not specified, the value is an empty string. The value is a string with a
-     * maximum of 4,096 bytes. If this parameter is not set when the shared configuration is published for the first
-     * time, the value will be an empty string by default. If this parameter is not set when a shared configuration is
-     * updated, the value of the shared configuration will not be updated.
-     * In versions earlier than API version 26.0.0, the maximum length of a string is 4096 bytes. In API version 26.0.0
-     * and later versions, the maximum length of a string is 4096 bytes by default, and can be extended to 102,400
-     * bytes by setting the maxValueLength parameter in [DataProxyConfig]{@link dataShare.DataProxyConfig}.
+     * Value of the shared configuration. If not specified, an empty string is used. **Note:** 1. Before API version 26.0.0,
+     * the string length does not exceed 4096 bytes. Since API version 26.0.0, the default maximum string length allowed
+     * is 4096 bytes, and you can configure maxValueLength in [DataProxyConfig]{@link dataShare.DataProxyConfig} to
+     * extend the maximum length to 102400 bytes. 2. When the shared configuration is published for the first time, if
+     * this parameter is not specified, an empty string is used by default. When the shared configuration is updated,
+     * if this parameter is not specified, the value of the shared configuration will not be updated.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1748,15 +1800,16 @@ declare namespace dataShare {
     value?: ValueType;
 
     /**
-     * List of applications that can subscribe to and read shared configurations. If this parameter is left empty, the
-     * value is an empty string array. The array can contain a maximum of 256 elements. Excess elements are invalid.
-     * Each element in the array is the
-     * [appIdentifier](docroot://quick-start/common-problem-of-application.md#what-is-appidentifier) of an application.
-     * The maximum length of an **appIdentifier** is 128 bytes. If the length exceeds 128 bytes, the **appIdentifier**
-     * does not take effect. If this parameter is not set when the shared configuration is published for the first time,
-     * the allowlist is empty by default. If this parameter is not set when the shared configuration is updated, the
-     * allowlist will not be updated. An empty allowlist indicates that only the publisher can access the shared
-     * configuration.
+     * List of apps that are allowed to subscribe to and read the shared configuration. If not specified, an empty
+     * string array is used. The maximum length of the array is 256, and elements beyond 256 do not take effect. When
+     * the shared configuration is published for the first time, if this parameter is not specified, an empty allowlist
+     * is used by default. When the shared configuration is updated, if this parameter is not specified, the allowlist
+     * of the shared configuration will not be updated. An empty allowlist indicates that only the publisher can access
+     * the shared configuration. Before API version 26.0.0, each element in the array is the
+     * [appIdentifier](docroot://quick-start/common-problem-of-application.md#what-is-appidentifier) of an app. The
+     * maximum length of a single appIdentifier is 128 bytes, and an appIdentifier longer than 128 bytes does not take
+     * effect. Since API version 26.0.0, the array supports the special string "all" (case-sensitive), which indicates
+     * that all apps are allowed to access.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1766,10 +1819,9 @@ declare namespace dataShare {
     allowList?: string[];
 
     /**
-     * Indicates whether the shared configuration is multi-value type. The default value is false, indicating that the
-     * shared configuration is not multi-value type. If the value is true, it indicates that the data being published is
-     * multi-value type, and the [value]{@link ProxyData#value} parameter will be ignored.
-     * Default value: false.
+     * Whether this is a multi-value shared configuration that uses values. **true** indicates that the data published
+     * this time is of the multi-value type, in which case the value parameter is ignored.
+     * **false** indicates a non-multi-value type. The default value is **false**.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1778,11 +1830,13 @@ declare namespace dataShare {
     isMultiValues?: boolean;
 
     /**
-     * Values of the multi-value type. The first parameter in the **Record** is the key specified by the user, which
-     * must be unique. The second parameter is the value corresponding to the key. A maximum of 10 values can be added
-     * to a single URI for an application. Each value can contain a maximum of 4096 bytes. At the same time, the total
-     * length of all values is limited by the [maxValueLength]{@link DataProxyConfig#maxValueLength} parameter value.
-     * This parameter is valid only when [isMultiValues]{@link ProxyData#isMultiValues} is set to true.
+     * Value of the multi-value type. The first parameter in Record is the key, which is specified by the user and must
+     * be unique. The second parameter is the value corresponding to the key. A single app can add up to 10 values under
+     * a single URI, and the maximum length of each value is 4096 bytes. In addition, the total length of all values
+     * is limited by the maxValueLength field in
+     * [DataProxyConfig]{@link dataShare.DataProxyConfig}. This parameter takes effect only when
+     * isMultiValues is set to **true**, and it cannot be empty. When
+     * isMultiValues is **false**, the default value is undefined.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1791,17 +1845,15 @@ declare namespace dataShare {
     values?: Record<int, ValueType>;
 
     /**
-     * List of applications that can add values to the shared configuration of multi-value type. The array can contain a
-     * maximum of 256 elements. Excess elements are invalid.
-     * Each element in the array is the
-     * [appIdentifier](docroot://quick-start/common-problem-of-application.md#what-is-appidentifier) of an application.
-     * The maximum length of an **appIdentifier** is 128 bytes. If the length exceeds 128 bytes, the **appIdentifier**
-     * does not take effect. If this parameter is not set when the shared configuration is published for the first time,
-     * the list is empty by default. If this parameter is not set when the shared configuration is updated, the
-     * list will not be updated. An empty list indicates that only the publisher can add values to the shared
-     * configuration.
-     * The array supports the special string "all" (case-sensitive), which indicates that all applications are allowed
-     * to add values to the shared configuration.
+     * List of apps that can assign values to the multi-value shared configuration. The array can contain up to 256
+     * elements, and elements beyond 256 do not take effect. Each element in the array is the
+     * [appIdentifier](docroot://quick-start/common-problem-of-application.md#what-is-appidentifier) of an app. The
+     * maximum length of an appIdentifier is 128 bytes, and the part longer than 128 bytes does not take effect. If
+     * this parameter is not set when the shared configuration is published for the first time, the assignment list is
+     * empty by default. An empty assignment list indicates that only the publisher can assign values to the
+     * multi-value shared configuration. The array supports the special string "all" (case-sensitive), which indicates
+     * that all apps are allowed to assign values to the multi-value shared configuration. This parameter takes effect
+     * only when isMultiValues is set to **true**.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1831,7 +1883,9 @@ declare namespace dataShare {
     type: ChangeType;
 
     /**
-     * URI to change.
+     * Data change URI. The fixed format is `"datashareproxy://{bundleName}/{path}"`, where **bundleName** is the
+     * **bundleName** of the publisher application, **path** can be set as required, but duplication is not allowed
+     * within the same application, and the string length does not exceed 256 bytes.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1851,7 +1905,8 @@ declare namespace dataShare {
     value: ValueType;
 
     /**
-     * Changed data of the multi-value type. If the changed data is not multi-value type, the **values** is undefined.
+     * Change data of the multi-value type. If the changed data type is not a multi-value type, the value of values is
+     * undefined.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -1900,7 +1955,11 @@ declare namespace dataShare {
     NO_PERMISSION = 2,
 
     /**
-     * The number of configurations published by the current application exceeds the upper limit of 32.
+     * Before API version 26.0.0, this status code indicates that the number of configurations published by the current
+     * application exceeds the upper limit of 32. Since API version 26.0.0, it indicates that the number of
+     * configurations published by the current application exceeds the upper limit of 64, or the value of the
+     * obtained share configuration item exceeds the maximum length limit configured by the **maxValueLength** field
+     * in [DataProxyConfig]{@link dataShare.DataProxyConfig}.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -2017,7 +2076,7 @@ declare namespace dataShare {
   }
 
   /**
-   * The maximum length of {@link ProxyData#value}, {@link DataProxyChangeInfo#value}, {@link DataProxyGetResult#value}.
+   * Enumerates the maximum length of the [share configuration]{@link dataShare.ProxyData} value.
    *
    * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
    * @stagemodelonly
@@ -2025,7 +2084,7 @@ declare namespace dataShare {
    */
   enum DataProxyMaxValueLength {
     /**
-     * The maximum length of value is 4096 bytes.
+     * The maximum length of the share configuration value is 4096 bytes.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -2034,7 +2093,7 @@ declare namespace dataShare {
     MAX_LENGTH_4K = 4096,
 
     /**
-     * The maximum length of value is 102400 bytes.
+     * The maximum length of the share configuration value is 102400 bytes.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -2063,11 +2122,8 @@ declare namespace dataShare {
     type: DataProxyType;
 
     /**
-     * Sets the maximum length of the data proxy value. The default value is MAX_LENGTH_4K, indicating that the maximum
-     * value length is 4096 bytes.
-     * If the length of the value that is actually transferred or obtained exceeds the maximum value length specified by
-     * this parameter, the publish or get operation will fail.
-     * Default value: MAX_LENGTH_4K.
+     * Sets the maximum allowed length of the value of the shared configuration. If not filled, the default value is
+     * MAX_LENGTH_4K, that is, the maximum allowed length of the value of the shared configuration is 4096 bytes.
      *
      * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
      * @stagemodelonly
@@ -2089,25 +2145,34 @@ declare namespace dataShare {
   interface DataProxyHandle {
     /**
      * Subscribes to the change event of the shared configuration corresponding to a specified URI. If the change event
-     * is subscribed, the subscriber will receive a callback notification that carries the data change type, changed URI
-     * , and changed content when the publisher modifies the configuration. This API uses an asynchronous callback to
+     * is subscribed, the subscriber will receive a callback notification that carries the data change type, changed
+     * URI, and changed content when the publisher modifies the configuration. This API uses an asynchronous callback to
      * return the result. This function does not support cross-user notification subscription or subscription to
      * unpublished configurations. If the permission is revoked after the subscription is successful, the subscriber
      * will not be notified consequently.
      *
-     * When the publisher calls the [publish]{@link dataShare.DataProxyHandle.publish} or
-     * [delete]{@link dataShare.DataProxyHandle.delete(uris: string[], config: DataProxyConfig)} API to publish or
-     * delete a configuration, a notification is automatically triggered.
+     * **API called in pairs**
+     * - After subscription, you must call [off('dataChange')]{@link dataShare.DataProxyHandle.off} to unsubscribe when
+     *   it is no longer needed.
+     * - To unsubscribe an event, ensure that the **event**, **uris**, **config**, and **callback** parameters are
+     *   consistent with those used during subscription.
+     * - Failure to unsubscribe may lead to memory leaks and resource occupation.
      *
-     * @param { 'dataChange' } event - Event or callback type. The value is **dataChange**, which indicates the data
-     *     change. This event is triggered when the publisher modifies the configuration.
-     * @param { string[] } uris - Array of URIs to be subscribed, with a maximum of 32 URIs. The URI value is fixed at
-     *     the format of **"datashareproxy://{*bundleName*}/{*path*}"**, in which **bundleName** indicates the bundle
-     *     name of the publisher application, and **path** can be set to any value but must be unique in the same
-     *     application. The value contains a maximum of 256 bytes.
-     * @param { DataProxyConfig } config - Data proxy configuration.
-     * @param { AsyncCallback<DataProxyChangeInfo[]> } callback - Callback triggered when the publisher modifies the
-     *     configuration.
+     * @param { 'dataChange' } event - Event or callback type. The **dataChange** event is triggered when the publisher
+     *     modifies the configuration.
+     * @param { string[] } uris - Array of URIs corresponding to the share configurations to subscribe to. **NOTE** 1.
+     *     Before API version 26.0.0, the maximum length of the array is 32; from API version 26.0.0, the maximum
+     *     length of the array is 64. 2. The URI is in the fixed format of `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundleName
+     *     of the publisher app of the configuration, path can be any value but must be unique within the same
+     *     app, and the string length cannot exceed 256 bytes.
+     * @param { DataProxyConfig } config - Configuration of the data proxy operation. Since API version 26.0.0, when
+     *     the length of the changed share configuration content exceeds the maximum length limit configured by the
+     *     **maxValueLength** field in [DataProxyConfig]{@link dataShare.DataProxyConfig}, the shared configuration
+     *     content will be truncated.
+     * @param { AsyncCallback<DataProxyChangeInfo[]> } callback - Callback used to return the result. If the
+     *     subscription is successful, **err** is **undefined**, and **data** is the obtained
+     *     **DataProxyChangeInfo** array, containing the change type, URI, and the changed share configuration
+     *     content; otherwise, it is an error object.
      * @returns { DataProxyResult[] } Batch operation result array.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
@@ -2124,12 +2189,34 @@ declare namespace dataShare {
     ): DataProxyResult[];
 
     /**
-     * Registers observers to observe proxy data change specified by the given URIs.
+     * Subscribes to the change event of the shared configuration corresponding to a specified URI. If the change event
+     * is subscribed, the subscriber will receive a callback notification that carries the data change type, changed
+     * URI, and changed content when the publisher modifies the configuration. This API uses an asynchronous callback to
+     * return the result. This function does not support cross-user notification subscription or subscription to
+     * unpublished configurations. If the permission is revoked after the subscription is successful, the subscriber
+     * will not be notified consequently.
      *
-     * @param { string[] } uris - Indicates the uris of the data to operate.
-     * @param { DataProxyConfig } config - Indicates the configuration of the data proxy operation.
-     * @param { Callback<DataProxyChangeInfo[]> } callback - The callback function when data changes.
-     * @returns { DataProxyResult[] } : The operation result.
+     * **API called in pairs**
+     * - After subscription, you must call [offDataChange]{@link dataShare.DataProxyHandle.offDataChange} to unsubscribe
+     *   when it is no longer needed.
+     * - To unsubscribe an event, ensure that the **uris**, **config**, and **callback** parameters are consistent with
+     *   those used during subscription.
+     * - Failure to unsubscribe may lead to memory leaks and resource occupation.
+     *
+     * @param { string[] } uris - Array of URIs corresponding to the share configurations to subscribe to. **NOTE** 1.
+     *     Before API version 26.0.0, the maximum length of the array is 32; from API version 26.0.0, the maximum
+     *     length of the array is 64. 2. The URI is in the fixed format of `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundleName
+     *     of the publisher app of the configuration, path can be any value but must be unique within the same
+     *     app, and the string length cannot exceed 256 bytes.
+     * @param { DataProxyConfig } config - Configuration of the data proxy operation. Since API version 26.0.0, when
+     *     the length of the changed share configuration content exceeds the maximum length limit configured by the
+     *     **maxValueLength** field in [DataProxyConfig]{@link dataShare.DataProxyConfig}, the shared configuration
+     *     content will be truncated.
+     * @param { Callback<DataProxyChangeInfo[]> } callback - Callback used to return the result. If the
+     *     subscription is successful, **err** is **undefined**, and **data** is the obtained
+     *     **DataProxyChangeInfo** array, containing the change type, URI, and the changed share configuration
+     *     content; otherwise, it is an error object.
+     * @returns { DataProxyResult[] } Batch operation result array.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
      * @throws { BusinessError } 15700014 - The parameter format is incorrect or the value range is invalid.
@@ -2146,15 +2233,24 @@ declare namespace dataShare {
     /**
      * Unsubscribes from the change event of the proxy data corresponding to a specified URI.
      *
+     * **API called in pairs**
+     * - This API must be used after [on('dataChange')]{@link dataShare.DataProxyHandle.on} is called for subscription.
+     * - To unregister a subscription, ensure that the **event**, **uris**, and **config** parameters are consistent
+     *   with those used during subscription.
+     * - If the **callback** parameter is not specified, all registered callbacks for the URI will be unsubscribed.
+     *
      * @param { 'dataChange' } event - Event or callback type. The value is **dataChange**, which indicates the data
      *     change.
-     * @param { string[] } uris - Array of URIs to be unsubscribed, with a maximum of 32 URIs. The URI value is fixed at
-     *     the format of **"datashareproxy://{*bundleName*}/{*path*}"**, in which **bundleName** indicates the bundle
-     *     name of the publisher application, and **path** can be set to any value but must be unique in the same
-     *     application. The value contains a maximum of 256 bytes.
+     * @param { string[] } uris - URI array of the shared configurations to unsubscribe from. **NOTE** 1. Before API
+     *     version 26.0.0, the maximum length of the array is 32. Since API version 26.0.0, the maximum length of the
+     *     array is 64. 2. The URI is in the fixed format `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundle
+     *     name of the publisher application of the configuration, and path can be any value but must be unique within the same
+     *     app. The string length cannot exceed 256 bytes.
      * @param { DataProxyConfig } config - Data proxy configuration.
-     * @param { AsyncCallback<DataProxyChangeInfo[]> } [callback] - Callback function. If the value is empty, undefined,
-     *     or null, all notifications of the URIs are unsubscribed.
+     * @param { AsyncCallback<DataProxyChangeInfo[]> } [callback] - Callback function. When the unsubscription succeeds,
+     *     err is undefined and data is the obtained DataProxyChangeInfo array, which contains the change type, URI,
+     *     and changed share configuration content; otherwise, it is an error object. If this parameter is not
+     *     specified, all registered callback functions are unsubscribed.
      * @returns { DataProxyResult[] } Batch operation result array.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
@@ -2171,12 +2267,26 @@ declare namespace dataShare {
     ): DataProxyResult[];
 
     /**
-     * Deregisters observers to observe proxy data change specified by the given URIs.
+     * Unsubscribes from the change event of the proxy data corresponding to a specified URI.
      *
-     * @param { string[] } uris - Indicates the uris of the data to operate.
-     * @param { DataProxyConfig } config - Indicates the configuration of the data proxy operation.
-     * @param { Callback<DataProxyChangeInfo[]> } [callback] - The callback function when data changes.
-     * @returns { DataProxyResult[] } : The operation result.
+     * **API called in pairs**
+     * - This API must be used after [onDataChange]{@link dataShare.DataProxyHandle.onDataChange} is called for
+     *   subscription.
+     * - To unregister a subscription, ensure that the **uris** and **config** parameters are consistent with those used
+     *   during subscription.
+     * - If the **callback** parameter is not specified, all registered callbacks for the URI will be unsubscribed.
+     *
+     * @param { string[] } uris - URI array of the shared configurations to unsubscribe from. **NOTE** 1. Before API
+     *     version 26.0.0, the maximum length of the array is 32. Since API version 26.0.0, the maximum length of the
+     *     array is 64. 2. The URI is in the fixed format `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundle
+     *     name of the publisher application of the configuration, and path can be any value but must be unique within the same
+     *     app. The string length cannot exceed 256 bytes.
+     * @param { DataProxyConfig } config - Data proxy configuration.
+     * @param { Callback<DataProxyChangeInfo[]> } [callback] - Callback function. When the unsubscription succeeds,
+     *     err is undefined and data is the obtained DataProxyChangeInfo array, which contains the change type, URI,
+     *     and changed share configuration content; otherwise, it is an error object. If this parameter is not
+     *     specified, all registered callback functions are unsubscribed.
+     * @returns { DataProxyResult[] } Batch operation result array.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
      * @throws { BusinessError } 15700014 - The parameter format is incorrect or the value range is invalid.
@@ -2191,16 +2301,33 @@ declare namespace dataShare {
     ): DataProxyResult[];
 
     /**
-     * Publishes shared configuration items. This API uses a promise to return the result. After shared configuration
-     * items are published, the publisher and the applications in the allowlist can access these items. If the URI to be
-     * published already exists, the corresponding shared configuration item is updated. If any URI in the configuration
-     * item to be published exceeds the maximum length or fails the format verification, the current publish operation
-     * fails. Only the publisher can update shared configuration items. Each application supports a maximum of 32 shared
-     * configurations.
+     * Publishes share configuration items. This API uses a promise to return the result.
      *
-     * @param { ProxyData[] } data - Array of shared configuration items to be created or updated, with a maximum of 32
-     *     items.
-     * @param { DataProxyConfig } config - Data proxy configuration.
+     * After publishing, the publisher and the applications specified in the allowlist can access the share
+     * configuration items.
+     *
+     * If the URI to be published already exists, the corresponding share configuration item is updated. If the length
+     * of any URI in the published configuration items exceeds the upper limit or format verification fails, the
+     * current publish operation fails.
+     *
+     * Only the publisher is allowed to update share configuration items.
+     *
+     * Before API version 26.0.0, an application supports a maximum of 32 share configurations; since API version
+     * 26.0.0, an application supports a maximum of 64 share configurations.
+     *
+     * Since API version 26.0.0, publishing multi-value type configurations is supported, and a URI can correspond to
+     * only one value type. After a configuration is published, the publish API cannot be used to update a published
+     * multi-value type URI. For the APIs for operating multi-value types, see
+     * [putValue]{@link dataShare.DataProxyHandle.putValue},
+     * [removeValue]{@link dataShare.DataProxyHandle.removeValue}, and
+     * [getValues]{@link dataShare.DataProxyHandle.getValues}.
+     *
+     * @param { ProxyData[] } data - Array of share configuration items to be created or updated. Before API version
+     *     26.0.0, the maximum array length is 32; Since API version 26.0.0, the maximum array length is 64.
+     * @param { DataProxyConfig } config - Configuration for the data proxy operation. Since API version 26.0.0, if the
+     *     length of any value in the published configuration items exceeds the maximum length limit configured in the
+     *     **maxValueLength** field of [DataProxyConfig]{@link dataShare.DataProxyConfig}, the current publish operation
+     *     fails.
      * @returns { Promise<DataProxyResult[]> } Promise used to return the result array of the batch operations.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
@@ -2216,10 +2343,11 @@ declare namespace dataShare {
      * Deletes the specified shared configuration items based on URIs. This API uses a promise to return the result.
      * Only the publisher is allowed to delete shared configuration items.
      *
-     * @param { string[] } uris - URI array of the shared configuration items to be deleted, with a maximum of 32 URIs.
-     *     The URI value is fixed at the format of **"datashareproxy://{*bundleName*}/{*path*}"**, in which
-     *     **bundleName** indicates the bundle name of the publisher application, and **path** can be set to any value
-     *     but must be unique in the same application. The value contains a maximum of 256 bytes.
+     * @param { string[] } uris - Array of URIs corresponding to the share configurations to be deleted. **NOTE** 1.
+     *     Before API version 26.0.0, the maximum length of the array is 32; starting from API version 26.0.0, the
+     *     maximum length of the array is 64. 2. The URI is in the fixed format of `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundle
+     *     name of the publisher app of the configuration, and path can be set to any value but must be unique within the
+     *     same app. The string length cannot exceed 256 bytes.
      * @param { DataProxyConfig } config - Data proxy configuration.
      * @returns { Promise<DataProxyResult[]> } Promise used to return the result array of the batch operations.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
@@ -2233,11 +2361,11 @@ declare namespace dataShare {
     delete(uris: string[], config: DataProxyConfig): Promise<DataProxyResult[]>;
 
     /**
-     * Deletes all the data published by the publisher.
-     * Only the data publisher can delete the data.
+     * Deletes all share configuration items published by the current publisher. This API uses a promise to return
+     * the result. Only the configuration publisher can delete share configuration items.
      *
      * @param { DataProxyConfig } config - Configuration of the data proxy operation.
-     * @returns { Promise<DataProxyResult[]> } Promise used to return the operation result.
+     * @returns { Promise<DataProxyResult[]> } Promise used to return the result array of the batch operation.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is
      *     being restarted abnormally.
      * @throws { BusinessError } 15700014 - The parameter format is incorrect or the value range is invalid.
@@ -2248,14 +2376,19 @@ declare namespace dataShare {
     deleteMyPublishedData(config: DataProxyConfig): Promise<DataProxyResult[]>;
 
     /**
-     * Obtains a specified shared configuration item based on the URI. This API uses a promise to return the result.
-     * Only the publisher and applications in the allowed list can access the shared configuration item.
+     * Obtains a specified share configuration item based on the URI. This API uses a promise to return the result.
+     * Only the publisher and applications in the allowed list can access the share configuration item.
      *
-     * @param { string[] } uris - URI array of the shared configuration items to be obtained, with a maximum of 32 URIs.
-     *     The URI value is fixed at the format of **"datashareproxy://{*bundleName*}/{*path*}"**, in which
-     *     **bundleName** indicates the bundle name of the publisher application, and **path** can be set to any value
-     *     but must be unique in the same application. The value contains a maximum of 256 bytes.
-     * @param { DataProxyConfig } config - Data proxy configuration.
+     * @param { string[] } uris - Array of URIs of the share configurations to obtain. **NOTE** 1. Before API version
+     *     26.0.0, the maximum length of the array is 32; since API version 26.0.0, the maximum length of the array is
+     *     64. 2. The URI is in the fixed format `"datashareproxy://{bundleName}/{path}"`, where bundleName is the bundle
+     *     name of the publisher app of the configuration, and path can be any value but must be unique within the same
+     *     app. The string length cannot exceed 256 bytes.
+     * @param { DataProxyConfig } config - Configuration of the data proxy operation. Since API version 26.0.0,
+     *     length of the obtained share configuration item value cannot exceed the maximum length limit configured in
+     *     the **maxValueLength** field of [DataProxyConfig]{@link dataShare.DataProxyConfig}. When the limit is
+     *     exceeded, the return value status code [DataProxyErrorCode]{@link dataShare.DataProxyErrorCode} of the
+     *     corresponding operation result is **OVER_LIMIT**.
      * @returns { Promise<DataProxyGetResult[]> } Promise used to return the result array of the batch operations.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is being
      *     restarted abnormally.
@@ -2268,19 +2401,26 @@ declare namespace dataShare {
     get(uris: string[], config: DataProxyConfig): Promise<DataProxyGetResult[]>;
 
     /**
-     * Puts a value into the published data. This operation can be performed only on multi-value type data. If the
-     * input **key** does not exist, a new value is added. If the input **key** already exists, the value corresponding
-     * to the key is updated. By default, a maximum of 10 values can be added to a single data record (that is, a URI)
-     * for a single application, and the maximum length of each value is 4096 bytes. In addition, the total length of
-     * all values in a single data record is limited by the value of the **maxValueLength** parameter that is specified
-     * during data publishing. Note that the **maxValueLength** parameter does not take effect in this API. This API
+     * Writes a value to the published data. This operation is only supported for multi-value type data. This API
      * uses a promise to return the result.
      *
-     * @param { string } uri - Indicates the URI of the data to operate.
-     * @param { int } key - The key corresponding to the added value. It is unique for the same application.
+     * If the passed key does not exist, a new value is added; if the passed key already exists, the value
+     * corresponding to that key is updated.
+     *
+     * By default, a single data item (that is, a URI) can have a maximum of 10 values added in a single app, and the
+     * maximum length of each value is 4096 bytes. In addition, the total length of all values of a single data item
+     * (that is, a URI) in a single app is limited by the maxValueLength parameter value specified when the data is
+     * published using [publish]{@link dataShare.DataProxyHandle.publish}.
+     *
+     * @param { string } uri - URI corresponding to the data to be operated. The fixed format is
+     *     **"datashareproxy://{bundleName}/{path}"**, where **bundleName** is the **bundleName** of the
+     *     publisher application, **path** can be set as required but not allowed to be duplicated
+     *     within the same application, and the string length cannot exceed 256 bytes.
+     * @param { int } key - Key corresponding to the added value, which is unique within the same application.
      *     <br>The value range is all integers.
-     * @param { ValueType } value - The value to be put.
-     * @param { DataProxyConfig } config - Configuration of the data proxy operation.
+     * @param { ValueType } value - Value to be added.
+     * @param { DataProxyConfig } config - Configuration of the data proxy operation. The **maxValueLength**
+     *     parameter in the configuration does not take effect.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is
      *     being restarted abnormally.
@@ -2294,11 +2434,14 @@ declare namespace dataShare {
     putValue(uri: string, key: int, value: ValueType, config: DataProxyConfig): Promise<void>;
 
     /**
-     * Removes the value corresponding to the key. This operation can be performed only on multi-value type data. Only
-     * values added by this application can be removed. This API uses a promise to return the result.
+     * Removes the value corresponding to the key. This operation can only be performed on multi-value type data.
+     * Only values added by the current application can be removed. This API uses a promise to return the result.
      *
-     * @param { string } uri - Indicates the URI of the data to operate.
-     * @param { int } key - The key corresponding to the added value.
+     * @param { string } uri - URI corresponding to the data to be operated. The fixed format is
+     *     **"datashareproxy://{bundleName}/{path}"**, where **bundleName** is the **bundleName** of the
+     *     publisher application, **path** can be set as required but not allowed to be duplicated
+     *     within the same application, and the string length cannot exceed 256 bytes.
+     * @param { int } key - Key corresponding to the value to be removed.
      *     <br>The value range is all integers.
      * @param { DataProxyConfig } config - Configuration of the data proxy operation.
      * @returns { Promise<void> } Promise that returns no value.
@@ -2314,13 +2457,16 @@ declare namespace dataShare {
     removeValue(uri: string, key: int, config: DataProxyConfig): Promise<void>;
 
     /**
-     * Obtains all multi-value data under a specified URI. Only the publisher and the applications in the
-     * [allowList]{@link dataShare.ProxyData#allowList} can obtain the data. This API uses a promise to return the
+     * Obtains all multi-value type data under the specified URI. Only the publisher and applications in the
+     * [allowList]{@link dataShare.ProxyData#allowList} can obtain this data. This API uses a promise to return the
      * result.
      *
-     * @param { string } uri - Indicates the URI of the data to operate.
+     * @param { string } uri - URI corresponding to the data to be operated. The fixed format is
+     *     **"datashareproxy://{bundleName}/{path}"**, where **bundleName** is the **bundleName** of the
+     *     publisher application, **path** can be set as required but not allowed to be duplicated
+     *     within the same application, and the string length cannot exceed 256 bytes.
      * @param { DataProxyConfig } config - Configuration of the data proxy operation.
-     * @returns { Promise<ValueType[]> } Promise used to return an array of all values under the URI.
+     * @returns { Promise<ValueType[]> } Promise used to return the array of all values under the URI.
      * @throws { BusinessError } 15700000 - Inner error. Possible causes: The service is not ready or is
      *     being restarted abnormally.
      * @throws { BusinessError } 15700011 - The URI does not exist.

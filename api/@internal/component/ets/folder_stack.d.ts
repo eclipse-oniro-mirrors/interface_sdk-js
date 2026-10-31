@@ -14,6 +14,28 @@
  */
 
 /**
+ * **FolderStack** extends the [Stack]{@link ./stack} container, adding the <!--RP1-->foldable screen hover<!--RP1End-->
+ * capability. By setting child component IDs in the **upperItems** array of the
+ * [FolderStackOptions]{@link FolderStackOptions} configuration, the corresponding child components automatically avoid
+ * the fold crease area and move to the upper screen. **FolderStack** is designed for the hover status scenario of dual-
+ * fold devices, such as video playback and video conferencing apps, where the video image automatically moves to the
+ * upper screen while the control panel remains on the lower screen. This component addresses the adaptation challenges
+ * of dual-fold devices, delivering benefits such as improved user experience and simplified layout adaptation for
+ * developers.
+ *
+ * > **NOTE**
+ * >
+ * > - The hover capability of this component is designed for <!--RP2-->dual-fold<!--RP2End--> devices and takes effect
+ * > only on dual-fold devices. You can use [FoldStatus]{@link FoldStatus} to determine the fold status of the device.
+ * >
+ * > - When the parent component of this component is an
+ * > [if/else: conditional rendering](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) node, the
+ * > foldable screen hover capability becomes invalid.
+ *
+ * ###### Child Components
+ *
+ * Multiple child components are supported.
+ *
  * @file
  * @kit ArkUI
  */
@@ -63,24 +85,6 @@ interface FolderStackOptions {
 }
 
 /**
- * **FolderStack** extends the [Stack]{@link ./stack} container, adding the <!--RP1-->foldable screen hover<!--RP1End-->
- * capability. By setting child component IDs in the **upperItems** array of the
- * [FolderStackOptions]{@link FolderStackOptions} configuration, the corresponding child components automatically avoid
- * the fold crease area and move to the upper screen. **FolderStack** is designed for the hover status scenario of dual-
- * fold devices, such as video playback and video conferencing apps, where the video image automatically moves to the
- * upper screen while the control panel remains on the lower screen. This component addresses the adaptation challenges
- * of dual-fold devices, delivering benefits such as improved user experience and simplified layout adaptation for
- * developers.
- *
- * > **NOTE**
- * >
- * > - The hover capability of this component is designed for <!--RP2-->dual-fold<!--RP2End--> devices and takes effect
- * > only on dual-fold devices. You can use [FoldStatus]{@link FoldStatus} to determine the fold status of the device.
- * >
- * > - When the parent component of this component is an
- * > [if/else: conditional rendering](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) node, the
- * > foldable screen hover capability becomes invalid.
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -347,27 +351,10 @@ declare interface HoverEventParam {
   windowStatusType: WindowStatusType;
 }
 /**
- * **FolderStack** extends the [Stack]{@link ./stack} container, adding the <!--RP1-->foldable screen hover<!--RP1End-->
- * capability. By setting child component IDs in the **upperItems** array of the
- * [FolderStackOptions]{@link FolderStackOptions} configuration, the corresponding child components automatically avoid
- * the fold crease area and move to the upper screen. **FolderStack** is designed for the hover status scenario of dual-
- * fold devices, such as video playback and video conferencing apps, where the video image automatically moves to the
- * upper screen while the control panel remains on the lower screen. This component addresses the adaptation challenges
- * of dual-fold devices, delivering benefits such as improved user experience and simplified layout adaptation for
- * developers.
- *
- * > **NOTE**
- * >
- * > - The hover capability of this component is designed for <!--RP2-->dual-fold<!--RP2End--> devices and takes effect
- * > only on dual-fold devices. You can use [FoldStatus]{@link FoldStatus} to determine the fold status of the device.
- * >
- * > - When the parent component of this component is an
- * > [if/else: conditional rendering](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) node, the
- * > foldable screen hover capability becomes invalid.
- *
- * ###### Child Components
- *
- * Multiple child components are supported.
+ * A foldable screen hover layout container that extends [Stack]{@link ./stack}.
+ * It implements the foldable screen hover capability through the **upperItems** configuration.
+ * When the device is in hover status, the specified child components automatically
+ * move to the upper screen, while other components are stacked on the lower screen.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

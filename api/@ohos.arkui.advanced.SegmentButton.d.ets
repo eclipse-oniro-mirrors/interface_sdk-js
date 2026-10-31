@@ -23,6 +23,18 @@
  * mirroring, custom rounded corners, and property animation, making it suitable for scenarios where you need to quickly
  * build a segmented selection interface that complies with design specifications.
  *
+ * ###### Child Components
+ *
+ * None
+ *
+ * ###### Attributes
+ *
+ * The [universal attributes]{@link CommonMethod} are not supported.
+ *
+ * ###### Events
+ *
+ * The [universal events]{@link CommonMethod} are not supported.
+ *
  * @file
  * @kit ArkUI
  */
@@ -1896,18 +1908,6 @@ declare class SegmentButtonOptions {
  * >
  * > - Attributes decorated by **@Prop** are optional parameters. They must be passed during construction only when
  * > used together with the **@Require** decorator.
- *
- * ###### Child Components
- *
- * None
- *
- * ###### Attributes
- *
- * The [universal attributes]{@link CommonMethod} are not supported.
- *
- * ###### Events
- *
- * The [universal events]{@link CommonMethod} are not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

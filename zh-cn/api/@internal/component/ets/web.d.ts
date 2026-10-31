@@ -1794,6 +1794,12 @@ declare class FileSelectorParam {
   /**
    * 获取文件过滤类型。
    *
+   * > **说明：**
+   * >
+   * > 与getMimeTypes和getAcceptableFileTypes的对应关系：getAcceptType和getMimeTypes对应HTML input标签的accept属性，
+   * > getAcceptableFileTypes对应HTML showOpenFilePicker、showDirectoryPicker、showSaveFilePicker接口参数options的types属性。
+   * > 根据HTML规范，accept属性与types属性为互斥关系，不应同时使用。
+   *
    * @returns { Array<string> } 返回文件过滤类型数组，包含用于限制文件选择器可选文件范围的类型信息。元素为扩展名（如'.png'），对应HTML accept属性。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -3149,6 +3155,10 @@ declare class WebContextMenuResult {
   /**
    * 执行重做操作，重新执行被撤销的操作。
    * 
+   * **配合关系：**
+   * - 与undo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。
@@ -3161,6 +3171,10 @@ declare class WebContextMenuResult {
   /**
    * 执行撤销操作，撤销上一次的编辑操作。
    * 
+   * **配合关系：**
+   * - 与redo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。
@@ -4347,10 +4361,12 @@ declare interface IntelligentTrackingPreventionDetails {
 interface WebInterface {
   /**
    * Sets Value.
-   * 
+   *
    * > **说明：**
    * >
-   * > - 在HTML5侧，调用console.log或console.info对应ConsoleMessage的信息级别都为MessageLevel.Info。
+   * > - 不支持转场动画。
+   * >
+   * > - 为了保证各Web组件间的独立性和性能隔离，同一页面内的多个Web组件应分别绑定不同的WebviewController实例。
    *
    * @param { WebOptions } value - Web组件的初始化配置选项，用于设置加载的网页资源（src）、绑定的控制器（controller）以及渲染模式等行为参数。具体属性结构请参考WebOptions接口定义。
    * @returns { WebAttribute }
@@ -6786,7 +6802,43 @@ declare enum WebKeyboardAppearanceMode {
 }
 
 /**
- * 定义了Web属性函数。
+ * 通用属性仅支持[aspectRatio]{@link CommonMethod#aspectRatio}、[backdropBlur]{@link CommonMethod#backdropBlur}、
+ * [backgroundColor]{@link CommonMethod#backgroundColor}、[bindContentCover]{@link CommonMethod#bindContentCover}、
+ * [bindContextMenu]{@link CommonMethod#bindContextMenu}、[bindMenu]{@link CommonMethod#bindMenu}、
+ * [bindSheet]{@link CommonMethod#bindSheet}、[borderColor]{@link CommonMethod#borderColor}、
+ * [borderRadius]{@link CommonMethod#borderRadius}、[borderStyle]{@link CommonMethod#borderStyle}、
+ * [borderWidth]{@link CommonMethod#borderWidth}、[clip]{@link CommonMethod#clip}、
+ * [constraintSize]{@link CommonMethod#constraintSize}、[defaultFocus]{@link CommonMethod#defaultFocus}、
+ * [focusable]{@link CommonMethod#focusable}、[tabIndex]{@link CommonMethod#tabIndex}、
+ * [groupDefaultFocus]{@link CommonMethod#groupDefaultFocus}、[displayPriority]{@link CommonMethod#displayPriority}、
+ * [enabled]{@link CommonMethod#enabled}、[flexBasis]{@link CommonMethod#flexBasis}、
+ * [flexShrink]{@link CommonMethod#flexShrink}、[layoutWeight]{@link CommonMethod#layoutWeight}、
+ * [id]{@link CommonMethod#id}、[gridOffset]{@link CommonMethod#gridOffset}、
+ * [gridSpan]{@link CommonMethod#gridSpan}、[useSizeType]{@link CommonMethod#useSizeType}、
+ * [height]{@link CommonMethod#height}、[touchable]{@link CommonMethod#touchable}、
+ * [margin]{@link CommonMethod#margin}、[markAnchor]{@link CommonMethod#markAnchor}、
+ * [offset]{@link CommonMethod#offset}、[width]{@link CommonMethod#width}、
+ * [zIndex]{@link CommonMethod#zIndex}、[visibility]{@link CommonMethod#visibility}、
+ * [scale]{@link CommonMethod#scale}、[translate]{@link CommonMethod#translate}、
+ * [responseRegion]{@link CommonMethod#responseRegion}、[size]{@link CommonMethod#size}、
+ * [opacity]{@link CommonMethod#opacity}、[shadow]{@link CommonMethod#shadow}、
+ * [sharedTransition]{@link CommonMethod#sharedTransition}、[transition]{@link CommonMethod#transition}、
+ * [position]{@link CommonMethod#position}、[direction]{@link CommonMethod#direction}。
+ *
+ * 通用事件仅支持[onAppear]{@link CommonMethod#onAppear}、[onDisAppear]{@link CommonMethod#onDisAppear}、
+ * [onBlur]{@link CommonMethod#onBlur}、[onFocus]{@link CommonMethod#onFocus}、[onDragEnd]{@link CommonMethod#onDragEnd}、
+ * [onDragEnter]{@link CommonMethod#onDragEnter}、[onDragStart]{@link CommonMethod#onDragStart}、
+ * [onDragMove]{@link CommonMethod#onDragMove}、[onDragLeave]{@link CommonMethod#onDragLeave}、
+ * [onDrop]{@link CommonMethod#onDrop}、[onHover]{@link CommonMethod#onHover}、[onMouse]{@link CommonMethod#onMouse}、
+ * [onKeyEvent]{@link CommonMethod#onKeyEvent}、[onTouch]{@link CommonMethod#onTouch}、
+ * [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange}。
+ *
+ * ## 概述
+ *
+ * Web组件属性用于在ArkUI声明式语法下以链式调用的方式配置Web组件的网页加载行为、安全策略、运行环境与交互能力，是定制Web组件行为的主要入口。
+ * 其中通用的样式与布局类属性（如尺寸、边距、背景、可见性等）请参考[尺寸设置]{@link CommonMethod}，本章仅描述Web组件特有的属性；
+ * 运行期动态控制类能力（如加载URL、前进后退、注册/反注册JS对象、运行JavaScript、注入CSS等）请配合
+ * [WebviewController]{@link @ohos.web.webview:webview.WebviewController}使用。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -9488,11 +9540,10 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * 设置Web组件惯性滚动的最大速度。
    *
-   * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+   * 通过该TypeScript API配置的值优先于通过前端viewport max-fling-speed-x/y接口设置的值。
    *
-   * @param { number } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
-   *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
-   *     非PC设备为17000 vp/s。
+   * @param { number } speedLimit - 惯性滚动的速度上限，单位为vp/s。取值范围为(0, +∞)。
+   *     传入范围外的值时使用默认值：PC设备默认9000 vp/s，非PC设备默认17000 vp/s。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
@@ -9504,8 +9555,6 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
 /**
  * 定义 Web 组件。
  *
- * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
- *
  * <p><strong>接口说明</strong>:
  *
  * <strong>性能说明</strong>:
@@ -9514,6 +9563,14 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
  * <p>当由于复杂的网页解析导致白屏时间较长时，
  * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
  * </p>
+ *
+ * ## 需要权限
+ *
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
+ *
+ * ## 子组件
+ *
+ * 无
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]

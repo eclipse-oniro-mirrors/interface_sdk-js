@@ -25,8 +25,8 @@ import window from './@ohos.window';
  * [EmbeddedUIExtensionAbility](docroot://application-models/embeddeduiextensionability.md) (or
  * [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}) to obtain the host application
  * window information or the information about the corresponding
- * [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component}<!--Del--> (or
- * [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component})<!--DelEnd--> component.
+ * [EmbeddedComponent]{@link EmbeddedComponent}<!--Del--> (or
+ * [UIExtensionComponent]{@link UIExtensionComponent})<!--DelEnd--> component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -221,8 +221,8 @@ declare namespace uiExtension {
      * > **NOTE**
      * >
      * > - A non-secure window refers to any window that may obstruct the
-     * > [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component} or
-     * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}, such as global floating windows
+     * > [EmbeddedComponent]{@link EmbeddedComponent} or
+     * > [UIExtensionComponent]{@link UIExtensionComponent}, such as global floating windows
      * > , host subwindows, and dialog box windows created by the host application (excluding windows of these types
      * > created by system applications).
      * >

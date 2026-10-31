@@ -46,6 +46,7 @@ import {
   ERROR_CODE_INFO,
   STAGE_COMPILE_MODE,
   FA_TAG_CHECK_ERROR,
+  FA_TAG_CHECK_NAME,
   FA_TAG_HUMP_CHECK_NAME
 } from '../utils/api_check_plugin_define';
 import { globalObject } from '../index';
@@ -201,7 +202,7 @@ function getCrossplatformCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[
 function getFAModuleCheckConfig(checkConfigArray: JsDocNodeCheckConfigItem[]): void {
   const diagnosticMessage: string = `${ERROR_CODE_INFO.get(FA_TAG_CHECK_ERROR)?.code}#${FA_TAG_CHECK_ERROR}`;
   const faModelOnlyConfig: JsDocNodeCheckConfigItemInterface = {
-    tagName: [FA_TAG_CHECK_ERROR, FA_TAG_HUMP_CHECK_NAME],
+    tagName: [FA_TAG_CHECK_NAME, FA_TAG_HUMP_CHECK_NAME],
     message: diagnosticMessage,
     type: DiagnosticCategory.ERROR,
     tagNameShouldExisted: false,

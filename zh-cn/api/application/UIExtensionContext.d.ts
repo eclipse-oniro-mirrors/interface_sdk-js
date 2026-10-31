@@ -58,7 +58,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 启动UIAbility时必要的Want，包含待启动UIAbility的名称等信息。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动UIAbility成功时，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -106,7 +107,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - 启动UIAbility时必要的Want，包含待启动UIAbility的名称等信息。
    * @param { StartOptions } options - 启动UIAbility所携带的额外参数。
    * @param { AsyncCallback<void> } callback - 回调函数。当启动UIAbility成功时，err为undefined，否则为错误对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -153,7 +155,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { StartOptions } [options] - 启动UIAbility所携带的额外参数，用于自定义启动行为（如指定显示屏幕ID、窗口模式等）。
    *     当需要自定义启动配置时传入此参数，不传入时使用系统默认启动配置。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -211,7 +214,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { OpenLinkOptions } [options] - 打开URL的选项参数。
    * @param { AsyncCallback<AbilityResult> } [callback] - 回调函数，包含返回给拉起方的信息。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -254,7 +258,8 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 启动UIAbility时必要的Want，包含待启动UIAbility的名称等信息。
    * @param { AsyncCallback<AbilityResult> } callback - 回调函数，包含返回给拉起方的信息。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -310,7 +315,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - 启动UIAbility时必要的Want，包含待启动UIAbility的名称等信息。
    * @param { StartOptions } options - 启动UIAbility所携带的额外参数。
    * @param { AsyncCallback<AbilityResult> } callback - 回调函数，包含返回给拉起方的信息。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -364,7 +370,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - 启动UIAbility时必要的Want，包含待启动UIAbility的名称等信息。
    * @param { StartOptions } [options] - 启动UIAbility所携带的额外参数。
    * @returns { Promise<AbilityResult> } Promise对象，返回被拉起的UIAbility退出时的返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -422,8 +429,9 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Want } want - 启动Ability的want信息。
    * @param { StartOptions } [options] - 启动Ability所携带的参数。
    * @returns { Promise<AbilityResult> } Promise对象，返回Ability结果对象。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -465,10 +473,9 @@ declare class UIExtensionContext extends ExtensionContext {
    * @returns { long } 返回连接标识ID，客户端可以通过
    *     [disconnectServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-inner-application-uiExtensionContext.md#disconnectserviceextensionability)
    *     传入该连接标识ID来断开连接。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. Possible cause:
-   *     target service extension ability is in cross-device and needed designated permission to be started, but
-   *     call ability do not have this permission.
-   * @throws { BusinessError } 202 - Not system application
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -503,7 +510,8 @@ declare class UIExtensionContext extends ExtensionContext {
    * @returns { long } 返回连接id，客户端可以通过
    *     [disconnectServiceExtensionAbility]{@link UIExtensionContext.disconnectServiceExtensionAbility(connection: long)}传入该
    *     连接id来断开连接。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -674,10 +682,12 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 启动UIServiceExtensionAbility的Want。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -708,10 +718,12 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { UIServiceExtensionConnectCallback } callback - 连接UIServiceExtensionAbility回调。
    * @returns { Promise<UIServiceProxy> } Promise对象，连接UIServiceExtensionAbility成功时，返回
    *     [UIServiceProxy]{@link ./application/UIServiceProxy:UIServiceProxy}对象，借助该对象可以往UIServiceExtensionAbility发送数据。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000002 - Incorrect ability type.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
@@ -749,8 +761,9 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 启动ServiceExtensionAbility的Want信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -789,8 +802,9 @@ declare class UIExtensionContext extends ExtensionContext {
    *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId(callback: AsyncCallback<int>)}
    *     接口获取。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -825,7 +839,7 @@ declare class UIExtensionContext extends ExtensionContext {
    *
    * @param { boolean } isForbidden - 设置是否禁止[UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}
    *     拉起的页面被使用方的页面覆盖。true表示禁止，false表示允许。
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -870,9 +884,11 @@ declare class UIExtensionContext extends ExtensionContext {
    * @param { Array<Want> } wantList - 需要被同时拉起的多个UIAbility的启动参数列表，最多支持传入4个Want。启动参数Want不支持隐式启动、跨用户启动、分布式、免安装和按需加载，不指明分身的情况下默认
    *     启动主应用。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.
@@ -922,9 +938,11 @@ declare class UIExtensionContext extends ExtensionContext {
    *     [getWindowProperties()](docroot://reference/apis-arkui/arkts-apis-window-Window.md#getwindowproperties9)获取。
    * @param { Want } secondaryWant - 启动第二个UIAbility所需的Want信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - Target UIAbility does not exist.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component.
    * @throws { BusinessError } 16000005 - The specified process does not have the permission.

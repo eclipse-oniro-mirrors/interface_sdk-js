@@ -512,6 +512,9 @@ export declare type TypeDecorator = <T>(type: TypeConstructor<T>) => PropertyDec
  * Marks the original type of a property, ensuring that the complex type information of the property is correctly
  * retained and restored during serialization.
  *
+ * type: Original type of the class property to be marked. The value is the constructor of the corresponding class and
+ * must be the same as the type of the decorated property.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

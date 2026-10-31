@@ -98,7 +98,12 @@ declare enum ListItemGroupHeaderFooterStyle {
 declare interface ListItemGroupOptions {
 
   /**
-   * Header of the list item group.
+   * Header component of the **ListItemGroup**.
+   * <p><strong>NOTE</strong>
+   * <br>It can contain a single child component or no child component. If it is not set, there is no header
+   * component. This parameter has a lower priority than **headerComponent**. That is, if both header and
+   * **headerComponent** are set, the value of **headerComponent** takes effect.
+   * </p>
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -182,7 +187,21 @@ declare interface ListItemGroupOptions {
   spaceWidth?: Dimension;
 
   /**
-   * Style of the list item.
+   * Card style of the **ListItemGroup** component.
+   * <br>Default value: **ListItemGroupStyle.NONE**
+   * <br>When set to **ListItemGroupStyle.NONE**, no style is applied.
+   * <br>When set to **ListItemGroupStyle.CARD**, it is recommended to use it together with **ListItemStyle.CARD**
+   * of [ListItem](ts-container-listitem.md) to display the default card style.
+   * <br>In card style, the default specifications of **ListItemGroup** are as follows: left and right margins of
+   * 12 vp, and top, bottom, left, and right padding of 4 vp.
+   * <br>In card style, default **focused**, **hover**, **pressed**, **selected**, and **disabled** styles are
+   * provided for the list items in the card.
+   * <p><strong>NOTE</strong>
+   * <br>When set to **ListItemGroupStyle.CARD**, the **listDirection** attribute of List must be
+   * **Axis.Vertical**. If it is set to **Axis.Horizontal**, the display will be disordered. The
+   * [alignListItem](ts-container-list.md#alignlistitem9) attribute of **List** defaults to
+   * **ListItemAlign.Center**, which centers the items.
+   * </p>
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
