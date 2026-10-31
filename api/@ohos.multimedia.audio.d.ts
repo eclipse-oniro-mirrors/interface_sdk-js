@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2025 Huawei Device Co., Ltd. 
+ * Copyright (c) 2021-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -9074,7 +9074,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum NoiseReductionModeChangeReason {
     /**
@@ -9082,7 +9082,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
 
@@ -9092,7 +9092,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_SETTING = 1,
 
@@ -9101,7 +9101,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DEVICE_CHANGE = 2,
 
@@ -9110,7 +9110,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     STREAM_CONCURRENCY = 3,
   }
@@ -9123,7 +9123,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface NoiseReductionModeChangeInfo {
     /**
@@ -9131,7 +9131,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     reason: NoiseReductionModeChangeReason;
 
@@ -9140,7 +9140,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     noiseReductionMode: NoiseReductionMode;
   }
@@ -13671,6 +13671,12 @@ declare namespace audio {
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
 
     /**
+     * *Sets noise reduction mode for current audio capturer.
+     * The supported mode should be obtained by {@link #getSupportedNoiseReductionModes}.
+     * The actual effect may vary from different audio devices, and will be invalid when there are multiple
+     * recording streams running simultaneously.
+     * The mode can only be changed in created and stopped state.
+     * 
      * Sets the noise reduction mode of the current recording stream. You are advised to call
      * [getSupportedNoiseReductionModes]{@link audio.AudioCapturer.getSupportedNoiseReductionModes} to obtain the
      * NR mode supported by the current recording stream, and then call this API to set the NR mode.
@@ -13711,6 +13717,12 @@ declare namespace audio {
     getNoiseReductionMode(): NoiseReductionMode;
 
     /**
+     * Gets all the supported noise reduction modes for current device platform.
+     * Currently the noise reduction effect is only supported when using
+     * {@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}, other supported usage may be extened later.
+     * The supported modes will only consider the audio format and device platform,
+     * audio input device and stream concurrency will not be considered.
+     *
      * Obtains the recording noise reduction mode supported by the current device.
      * The application can call {@link #setNoiseReductionMode} to set the noise reduction mode to be switched.
      * The NR modes in some scenarios can be set only by the system. These modes are not returned by this API.
@@ -13746,7 +13758,7 @@ declare namespace audio {
      *     change information.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
 
@@ -13763,7 +13775,7 @@ declare namespace audio {
      * <br>Default value: Default behavior: Cancel all registered noise reduction mode change callbacks by default.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
