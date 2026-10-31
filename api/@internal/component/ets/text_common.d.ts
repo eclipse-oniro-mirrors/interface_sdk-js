@@ -14,7 +14,11 @@
  */
 
 /**
- * @file
+ * @file The common APIs of text components provide basic text processing capabilities, including caret style settings, 
+ * layout management, text selection control, and menu item customization. This module is suitable for scenarios that 
+ * require fine-grained control over text components, such as text editors, rich text apps, and input forms. With these 
+ * APIs, developers can customize the caret style, obtain text layout information, handle text selection, 
+ * customize the editing menu, and so on, thereby improving the text interaction experience of the app.
  * @kit ArkUI
  */
 
