@@ -657,7 +657,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音频流类型。
+   * 表示音频音量类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Volume
    * @crossplatform [since 12]
@@ -766,7 +766,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，可获取的设备种类。
+   * 表示音频设备类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Device
    * @crossplatform [since 12]
@@ -1095,7 +1095,7 @@ declare namespace audio {
     /**
      * 助听器设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -1108,7 +1108,7 @@ declare namespace audio {
     /**
      * 星闪设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -10239,7 +10239,6 @@ declare namespace audio {
     updateUi: boolean;
     /**
      * 变化前的音量值。
-     * 取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Audio.Volume
      * @since 23 dynamic&static
