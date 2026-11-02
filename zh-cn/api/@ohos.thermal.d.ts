@@ -138,7 +138,7 @@ declare namespace thermal {
   /**
    * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。
    *
-   * @param { AsyncCallback<void> } [callback] - 回调函数。用来执行取消热档位变化回调后的资源回收等操作，无返回值。
+   * @param { AsyncCallback<void> } [callback] - 回调函数，用来执行取消热档位变化回调后的资源回收等操作，无返回值。
 
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 8 dynamiconly
