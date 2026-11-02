@@ -650,11 +650,11 @@ declare namespace restrictions {
     NOTIFICATION_CENTER = 60,
 
     /**
-     * Once disabled, the parent control bundle cannot be enabled.
+     * 健康使用设备
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
-     * @since 26.0.1
+     * @since 26.1.0
      */
      PARENT_CONTROL = 61
   }
