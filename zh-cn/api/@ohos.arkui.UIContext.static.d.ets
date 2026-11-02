@@ -1380,7 +1380,7 @@ export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, nod
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 static
+ * @since 26.1.0 static
  */
 export const enum NodeSensitiveInputEventType {
   /**
@@ -1388,7 +1388,7 @@ export const enum NodeSensitiveInputEventType {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   TOUCH = 0,
 
@@ -1397,7 +1397,7 @@ export const enum NodeSensitiveInputEventType {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   MOUSE = 1,
 
@@ -1406,7 +1406,7 @@ export const enum NodeSensitiveInputEventType {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   KEY = 2
 }
@@ -1416,7 +1416,7 @@ export const enum NodeSensitiveInputEventType {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 static
+ * @since 26.1.0 static
  */
 export interface NodeSensitiveInputInfo {
   /**
@@ -1424,7 +1424,7 @@ export interface NodeSensitiveInputInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   isAgent: boolean;
 
@@ -1433,7 +1433,7 @@ export interface NodeSensitiveInputInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   type: NodeSensitiveInputEventType;
 
@@ -1442,7 +1442,7 @@ export interface NodeSensitiveInputInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   touchEvent?: TouchEvent;
 
@@ -1451,7 +1451,7 @@ export interface NodeSensitiveInputInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   mouseEvent?: MouseEvent;
 
@@ -1460,7 +1460,7 @@ export interface NodeSensitiveInputInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   keyEvent?: KeyEvent;
 }
@@ -1472,7 +1472,7 @@ export interface NodeSensitiveInputInfo {
  * @param { FrameNode } [node] - 接收输入事件的节点。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 static
+ * @since 26.1.0 static
  */
 export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
 
@@ -2124,7 +2124,7 @@ export declare class UIObserver {
    * @param { NodeSensitiveInputCallback } callback - 目标节点收到输入尝试时执行的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
 
@@ -2135,7 +2135,7 @@ export declare class UIObserver {
    * @param { NodeSensitiveInputCallback } [callback] - 需要注销的回调函数。未传入时，注销指定节点的全部敏感输入事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 

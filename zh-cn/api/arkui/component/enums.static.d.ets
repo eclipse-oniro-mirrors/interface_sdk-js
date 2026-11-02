@@ -5141,7 +5141,7 @@ export declare enum RawInputEventType {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 static
+ * @since 26.1.0 static
  */
 export declare enum AgentControlMode {
   /**
@@ -5149,7 +5149,7 @@ export declare enum AgentControlMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   ALLOW = 0,
 
@@ -5158,7 +5158,7 @@ export declare enum AgentControlMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
   DENY = 1
 }

@@ -6479,7 +6479,7 @@ declare enum EdgeLightPosition {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum AgentControlMode {
   /**
@@ -6487,7 +6487,7 @@ declare enum AgentControlMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 dynamic
+   * @since 26.1.0 dynamic
    */
   ALLOW = 0,
 
@@ -6496,7 +6496,7 @@ declare enum AgentControlMode {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 dynamic
+   * @since 26.1.0 dynamic
    */
   DENY = 1
 }
