@@ -11490,7 +11490,6 @@ declare namespace media {
      *
      * @param { 'error' } type - 错误事件回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 录屏错误事件回调方法。
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
