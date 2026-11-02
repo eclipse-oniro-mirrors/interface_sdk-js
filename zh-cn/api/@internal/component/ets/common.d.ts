@@ -20358,6 +20358,8 @@ declare class CommonMethod<T> {
   /**
    * 设置当前组件处理系统可信GUI Agent输入事件的方式。未设置该属性时，使用**AgentControlMode.ALLOW**。
    * 该属性不影响系统未识别为Agent输入的事件。
+   * 仅当接收应用具有ohos.permission.CONTROL_COMPONENT权限时，该管控模式生效。
+   * 无此权限时忽略节点标签，Agent输入沿既有路径分发。
    *
    * @param { AgentControlMode } value - 系统可信Agent输入事件的管控模式。
    * @returns { T } 返回当前组件。
