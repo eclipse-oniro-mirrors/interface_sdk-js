@@ -1424,6 +1424,15 @@ export declare class TextMenuItemId {
      * @since 23 static
      */
     static readonly passwordVault: TextMenuItemId;
+
+    /**
+     * Indicates the TextMenuItemId for quick translate input.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 /**
  * TextMenuItem
