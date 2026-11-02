@@ -5348,8 +5348,6 @@ export declare enum ImmersiveStrategy {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
    * @since 26.1.0 static
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
