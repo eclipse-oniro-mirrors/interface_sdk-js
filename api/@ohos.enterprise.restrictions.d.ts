@@ -638,7 +638,7 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-     PARENT_CONTROL = 54
+     PARENT_CONTROL = 61
   }
 
   /**
