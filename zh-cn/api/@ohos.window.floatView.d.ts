@@ -51,8 +51,6 @@ import { LocalStorage } from '@ohos.arkui.stateManagement';
  *  - 标准悬浮窗由系统管理并统一绘制UI，动效更为高端精致。
  *  - 标准悬浮窗支持与[闪控球]{@link @ohos.window.floatingBall:floatingBall}互相绑定联合使用，实现更复杂场景。
  *
- * **起始版本：** 26.0.0
- *
  * > **说明：**
  * >
  * > - 针对系统能力SystemCapability.Window.SessionManager，请先使用
@@ -85,7 +83,7 @@ declare namespace floatView {
    * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
    *     1. This window context is abnormal.
    *     2. System error, such as a null pointer, insufficient memory or a JS engine exception.
-   * @throws { BusinessError } 1300016 - Parameter error.
+   * @throws { BusinessError } 1300016 - Parameter validation error.
    *     Possible cause: Invalid template type.
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -167,7 +165,7 @@ declare namespace floatView {
    *     System error, such as a null pointer, insufficient memory or a JS engine exception.
    * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
    *     Internal IPC error.
-   * @throws { BusinessError } 1300016 - Parameter error. Possible cause: Invalid template type.
+   * @throws { BusinessError } 1300016 - Parameter validation error. Possible cause: Invalid template type.
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -257,7 +255,7 @@ declare namespace floatView {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible causes: Invalid path.
+     * @throws { BusinessError } 1300016 - Parameter validation error. Possible causes: Invalid path.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -272,7 +270,7 @@ declare namespace floatView {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible causes: Invalid name.
+     * @throws { BusinessError } 1300016 - Parameter validation error. Possible causes: Invalid name.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -290,7 +288,7 @@ declare namespace floatView {
      *     The float view controller object is null.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
      *     Internal IPC error.
-     * @throws { BusinessError } 1300016 - Parameter error.
+     * @throws { BusinessError } 1300016 - Parameter validation error.
      *     Possible cause: The value of the size is less than or equal to 0.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -311,7 +309,7 @@ declare namespace floatView {
      *     The float view controller object is null.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
      *     Internal IPC error.
-     * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
+     * @throws { BusinessError } 1300016 - Parameter validation error. Possible cause:
      *     1. Invalid template type.
      *     2. The value of the size is less than or equal to 0.
      * @syscap SystemCapability.Window.SessionManager

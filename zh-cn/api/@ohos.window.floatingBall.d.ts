@@ -455,10 +455,9 @@ declare namespace floatingBall {
     /**
      * 闪控球标题颜色，为不带透明度的十六进制颜色格式（例如'#008EF5'或'#FF008EF5'）。如果背景颜色没有指定，不允许指定标题颜色。
      *
-     * @default Set different default values according to the 'backgroundColor'.
-     *     - If 'backgroundColor' is provided, when 'backgroundColor' is light color, default value is '#E5FFFFFF',
-     *       otherwise is '#E5000000'.
-     *     - If 'backgroundColor' is not provided, default value is $r('sys.color.font_primary').
+     * @default 根据'backgroundColor'设置不同的默认值。
+     *     - 如果提供了'backgroundColor'，当'backgroundColor'为浅色时，默认值为'#E5FFFFFF'，否则为'#E5000000'。
+     *     - 如果未提供'backgroundColor'，默认值为$r('sys.color.font_primary')。
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -477,10 +476,9 @@ declare namespace floatingBall {
     /**
      * 闪控球内容颜色，为不带透明度的十六进制颜色格式（例如'#008EF5'或'#FF008EF5'）。如果背景颜色没有指定，不允许指定内容颜色。
      *
-     * @default Set different default values according to the 'backgroundColor'.
-     *     - If 'backgroundColor' is provided, when 'backgroundColor' is light color, default value is '#99FFFFFF',
-     *       otherwise is '#99000000'
-     *     - If 'backgroundColor' is not provided, default value is $r('sys.color.font_secondary')
+     * @default 根据'backgroundColor'设置不同的默认值。
+     *     - 如果提供了'backgroundColor'，当'backgroundColor'为浅色时，默认值为'#99FFFFFF'，否则为'#99000000'。
+     *     - 如果未提供'backgroundColor'，默认值为$r('sys.color.font_secondary')。
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static

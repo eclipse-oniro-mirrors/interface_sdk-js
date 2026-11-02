@@ -254,7 +254,6 @@ declare namespace PiPWindow {
      *
      * 该接口在Phone、Tablet设备上可正常调用，在其他设备上不生效。
      *
-     * @default true
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 22 dynamic
@@ -804,7 +803,7 @@ declare namespace PiPWindow {
   }
 
   /**
-   * 画中画控制面板控件动作事件类型，支持以下四种。
+   * 画中画控制面板控件动作事件类型。
    *
    * @unionmember { PiPVideoActionEvent } 视频播放控制面板控件事件类型。
    * @unionmember { PiPCallActionEvent } 视频通话控制面板控件事件类型。
@@ -916,7 +915,7 @@ declare namespace PiPWindow {
     controlType: PiPControlType;
 
     /**
-     * 表示可切换状态的控件当前的状态，如具备打开和关闭两种状态的麦克风控件组、摄像头控件组和静音控件组，打开为PiPControlStatus.PLAY，关闭为PiPControlStatus.PAUSE。如不具备开/关和播放/暂停
+     * 表示可切换状态的控件当前的状态，如具备播放和暂停两种状态的麦克风控件组、摄像头控件组和静音控件组，播放为PiPControlStatus.PLAY，暂停为PiPControlStatus.PAUSE。如不具备开/关和播放/暂停
      * 状态的挂断控件默认返回值为-1。
      *
      * @syscap SystemCapability.Window.SessionManager
