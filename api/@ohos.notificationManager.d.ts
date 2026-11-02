@@ -4427,6 +4427,31 @@ declare namespace notificationManager {
   function isNotificationSlotEnabledByBundles(bundles: Array<BundleOption>, type: SlotType): Promise<Map<BundleOption, boolean>>;
 
   /**
+   * Obtains the list of apps whose notification permission is restricted. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
+   * @param { int } userId - User ID.
+   *     <br>The value should be an integer.
+   * @returns { Promise<Map<string, boolean>> } Promise used to return a collection of key-value pairs indicating
+   *     the status of the application notification switch.
+   *     <br> - **true**: enabled.
+   *     <br> - **false**: disabled.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Not system application to call the interface.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   *     2.Memory operation error.
+   * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600008 - The user does not exist.
+   * @throws { BusinessError } 1600012 - No memory space.
+   * @syscap SystemCapability.Notification.Notification
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getNotificationSwitchLimitedBundles(userId: int): Promise<Map<string, boolean>>;
+
+  /**
    * Obtains an active notification based on **hashCode**. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
