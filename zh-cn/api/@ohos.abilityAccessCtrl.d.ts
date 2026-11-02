@@ -1169,6 +1169,22 @@ declare namespace abilityAccessCtrl {
      */
     queryStatusByTokenID(tokenIDList: Array<int>): Promise<Array<PermissionStatusInfo>>;
     /**
+     * 查询当前设备是否支持该权限，同步返回结果。调用成功后，返回该权限在当前设备上的支持状态。
+     *
+     * @param { Permissions } permissionName - 需要查询状态的权限名称。传入无效值时返回错误码12100001。
+     *     <br>取值约束：权限名长度需大于0且不能超过256个字符。
+     * @returns { boolean } 返回{@code true}表示当前设备支持该权限；
+     *     返回{@code false}表示不支持。
+     * @throws { BusinessError } 12100001 - Invalid parameter. The permissionName is empty
+     *     or exceeds 256 characters.
+     * @throws { BusinessError } 12100007 - Service exception.
+     * @syscap SystemCapability.Security.AccessToken
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    isPermissionSupported(permissionName: Permissions): boolean;
+    /**
      * 设置控制方应用对目标应用的自动化控制开关，
      * 返回每个目标应用的结果。该开关状态包含允许和禁止。
      *

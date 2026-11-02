@@ -1551,7 +1551,7 @@ declare class PanGestureOptions {
    *
    * @param { object } value - 滑动手势配置参数对象。<br/>fingers用于指定触发滑动的最少手指数，最小为1指， 最大取值为10指。<br/>默认值：1 <br/>direction用于指定触发滑动的手
    *     势方向，此枚举值支持逻辑与(&)和逻辑或（|）运算。<br/>默认值：PanDirection.All<br/>distance用于指定触发滑动手势事件的最小滑动距离，单位为vp。<br/>手写笔默认值：8，其余输入源默认
-   *     值：5<br/>**说明：**<br/>[Tabs]{@link ./tabs}组件滑动与该滑动手势事件同时存在时，可将distance值设为1，使滑动更灵敏，避免造成事件错乱。<br/>当设定的值小于0时，按默认值处理。
+   *     值：5<br/>**说明：**<br/>[Tabs]{@link @global:Tabs}组件滑动与该滑动手势事件同时存在时，可将distance值设为1，使滑动更灵敏，避免造成事件错乱。<br/>当设定的值小于0时，按默认值处理。
    *     <br/>建议设置合理的滑动距离，滑动距离设置过大时会导致滑动不跟手（响应时延慢）的问题。<br/>当组件应用了[scale]{@link CommonMethod#scale(value: ScaleOptions)}缩放
    *     变换时，distance的实际识别距离会按照scale比例进行缩放。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1576,7 +1576,7 @@ declare class PanGestureOptions {
    * 设置触发滑动手势事件的最小滑动距离，单位为vp。距离值不宜设置过大，避免因滑动脱手、响应时延过大等问题导致性能劣化，最佳实践请参考：
    * [减小拖动识别距离](https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-application-latency-optimization-cases#section1116134115286)。
    *
-   * @param { number } value - 触发滑动手势事件的最小滑动距离，单位为vp。<br/>手写笔默认值：8，其余输入源默认值：5<br/>**说明：**<br/>[Tabs组件]{@link ./tabs}滑动与该滑动
+   * @param { number } value - 触发滑动手势事件的最小滑动距离，单位为vp。<br/>手写笔默认值：8，其余输入源默认值：5<br/>**说明：**<br/>[Tabs组件]{@link @global:Tabs}滑动与该滑动
    *     手势事件同时存在时，可将distance值设为1，使滑动更灵敏，避免造成事件错乱。<br/>当设定的值小于0时，按默认值处理。<br/>建议设置合理的滑动距离，滑动距离设置过大时会导致滑动不跟手（响应时延慢）的问题。<br/>
    *     当组件应用了[scale]{@link CommonMethod#scale(value: ScaleOptions)}缩放变换时，distance的实际识别距离会按照scale比例进行缩放。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1640,7 +1640,7 @@ interface PanGestureInterface extends GestureInterface<PanGestureInterface> {
    *     <br/>**说明：** <br/>当设置的值小于1或不设置时，会被转化为默认值。
    *     <br> - direction：用于指定触发滑动的手势方向，此枚举值支持逻辑与(&amp;)和逻辑或（\|）运算。<br/>默认值：PanDirection.All
    *     <br> - distance：用于指定触发滑动手势事件的最小滑动距离，单位为vp。<br/>取值范围：[0, +∞)<br/>手写笔默认值：8，其余输入源默认值：5
-   *     <br/>**说明：**<br/>[Tabs]{@link ./tabs}组件滑动与该滑动手势事件同时存在时，可将distance值设为1，使滑动更灵敏，避免造成事件错乱。
+   *     <br/>**说明：**<br/>[Tabs]{@link @global:Tabs}组件滑动与该滑动手势事件同时存在时，可将distance值设为1，使滑动更灵敏，避免造成事件错乱。
    *     <br/>当设定的值小于0时，按默认值处理。<br/>当组件应用了[scale]{@link CommonMethod#scale(value: ScaleOptions)}缩放变换时，distance的
    *     实际识别距离会按照scale比例进行缩放。
    * @returns { PanGestureInterface }
@@ -2441,7 +2441,7 @@ interface PanGestureHandlerOptions extends BaseHandlerOptions {
    * 
    * **说明：**
    * 
-   * [Tabs组件]{@link ./tabs}滑动与该滑动手势事件同时存在时，可将distance值设为1，使拖动更灵敏，避免造成事件错乱。
+   * [Tabs组件]{@link @global:Tabs}滑动与该滑动手势事件同时存在时，可将distance值设为1，使拖动更灵敏，避免造成事件错乱。
    * 
    * 取值范围：[0, +∞)，当设定的值小于0时，按默认值处理。
    * 

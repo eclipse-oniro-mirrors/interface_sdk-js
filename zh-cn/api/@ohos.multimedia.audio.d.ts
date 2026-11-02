@@ -657,7 +657,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音频流类型。
+   * 表示音频音量类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Volume
    * @crossplatform [since 12]
@@ -766,7 +766,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，可获取的设备种类。
+   * 表示音频设备类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Device
    * @crossplatform [since 12]
@@ -1095,7 +1095,7 @@ declare namespace audio {
     /**
      * 助听器设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -1108,7 +1108,7 @@ declare namespace audio {
     /**
      * 星闪设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -2569,11 +2569,11 @@ declare namespace audio {
   }
 
   /**
-   * 表示音频打断是否由系统强制执行的枚举。
-   * 当用户监听到音频打断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
-   * 此类型表示音频打断提示[InterruptHint]{@link audio.InterruptHint}是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
-   * 其中，INTERRUPT_HINT_RESUME对应的forceType一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
-   * 关于音频打断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
+   * 表示音频中断提示对应的操作是否由系统强制执行的枚举。
+   * 当用户监听到音频中断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
+   * 此类型表示音频中断提示[InterruptHint]{@link audio.InterruptHint}对应的操作是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
+   * 其中，INTERRUPT_HINT_RESUME对应的[InterruptForceType]{@link audio.InterruptForceType}一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
+   * 关于音频中断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
    *
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @crossplatform [since 12]
@@ -2583,7 +2583,7 @@ declare namespace audio {
    */
   enum InterruptForceType {
     /**
-     * 强制执行类型，即打断提示[InterruptHint]{@link audio.InterruptHint}对应操作已由系统强制执行。
+     * 强制执行类型，即中断提示[InterruptHint]{@link audio.InterruptHint}对应的操作已由系统强制执行。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
@@ -3726,6 +3726,26 @@ declare namespace audio {
      * @since 23 static
      */
     disableSafeMediaVolume(): Promise<void>;
+
+    /**
+     * Reports user allowed result for playback capture request to audio system from specific system application.
+     * The system will continue to start playback capture or return a failure based on result.
+     * This API uses a promise to return the result.
+     *
+     * @permission ohos.permission.CAPTURE_PLAYBACK
+     * @param { long } streamId - Stream id of the capturer.
+     * @param { boolean } allowed - User allowed result, true means user allows to start playback capture,
+     *  otherwise false.
+     * @returns { Promise<void> } - Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, streamId does not exist.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reportPlaybackCaptureUserAllowed(streamId: long, allowed: boolean): Promise<void>;
   }
 
   /**
@@ -10219,7 +10239,6 @@ declare namespace audio {
     updateUi: boolean;
     /**
      * 变化前的音量值。
-     * 取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Audio.Volume
      * @since 23 dynamic&static

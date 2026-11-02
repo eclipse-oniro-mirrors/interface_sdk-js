@@ -6158,24 +6158,9 @@ interface PreviewParams {
  *
  * @interface ItemDragInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 8
- */
-/**
- * 拖拽点信息对象。
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- */
-/**
- * 拖拽点信息对象。
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 8 dynamic
  */
 declare interface ItemDragInfo {
 
@@ -11475,7 +11460,8 @@ declare type TransitionFinishCallback = (transitionIn: boolean) => void;
 /**
  * 当绑定该方法的组件判断是否需要键盘时，将触发此回调。前提条件：组件需可获焦，否则本接口不生效。
  *
- * @returns { boolean } 是否需要键盘。<br>若此回调的返回值为`true`，则表明该组件需要键盘；返回值为`false`，则表明该组件不需要键盘。
+ * @returns { boolean } 是否需要键盘。
+ *     <br>若此回调的返回值为`true`，则表明该组件需要键盘；返回值为`false`，则表明该组件不需要键盘。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -16109,7 +16095,6 @@ declare interface PopupOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -18795,26 +18780,9 @@ declare interface FadingEdgeOptions {
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * [nestedScroll]{@link CommonMethod#nestedScroll(value: NestedScrollOptions)}属性参数对象。
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * [nestedScroll]{@link CommonMethod#nestedScroll(value: NestedScrollOptions)}属性参数对象。
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 23 dynamic
+ * @crossplatform [since 23]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 declare interface NestedScrollOptions {
 
@@ -18825,18 +18793,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * 滚动组件往末尾端滚动时的嵌套滚动选项。NestedScrollMode.SELF_ONLY表示仅自身滚动，不与父组件联动；NestedScrollMode.SELF_FIRST表示自身先滚动，自身滚动到边缘后父组件滚动；
-   * NestedScrollMode.PARENT_FIRST表示父组件先滚动，父组件滚动到边缘后自身滚动。
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollForward: NestedScrollMode;
 
@@ -18847,18 +18806,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * 滚动组件往起始端滚动时的嵌套滚动选项。NestedScrollMode.SELF_ONLY表示仅自身滚动，不与父组件联动；NestedScrollMode.SELF_FIRST表示自身先滚动，自身滚动到边缘后父组件滚动；
-   * NestedScrollMode.PARENT_FIRST表示父组件先滚动，父组件滚动到边缘后自身滚动。
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollBackward: NestedScrollMode;
 }
@@ -24495,36 +24445,18 @@ declare class CommonMethod<T> {
 
   /**
    * Popup控制。
-   *
-   * @param { boolean } show
-   * @param { PopupOptions } popup
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Popup控制。
-   *
-   * @param { boolean } show
-   * @param { PopupOptions | CustomPopupOptions } popup
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 8
-   */
-  /**
-   * Popup控制。
    * <p><strong>NOTE</strong>:
    * <br>The popup can be displayed only after the entire page is fully constructed. Therefore, to avoid incorrect
    * display positions and shapes, do not set this parameter to true while the page is still being constructed.
    * </p>
    *
-   * @param { boolean } show - 
-   * @param { PopupOptions | CustomPopupOptions } popup
+   * @param { PopupOptions } popup [since 7 - 7]
+   * @param { PopupOptions | CustomPopupOptions } popup [since 8]
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   bindPopup(show: boolean, popup: PopupOptions | CustomPopupOptions): T;
 
@@ -25780,18 +25712,16 @@ declare class CommonMethod<T> {
    *
    * 对于不能获焦的组件，本接口不生效。
    *
-   * 输入框组件使用该接口并将返回值设置为`false`时，点击输入框将不会拉起键盘。
+   * > **说明**
+   * > 输入框组件使用该接口并将返回值设置为`false`时，点击输入框将不会拉起键盘。
+   * > Web组件使用该方法时，如果返回值为`true`，Web组件会判断组件中是否有可编辑节点，如果有可编辑节点才会保留键盘，如果返回值为`false`，无论是否有可编辑节点，键盘都不会保留。
+   * > XComponent组件使用该方法时，如果返回值为`true`且XComponent组件使用 [OH_ArkUI_XComponent_SetNeedSoftKeyboard()](docroot://reference/apis-arkui/capi-native-interface-xcomponent-h.md#oh_arkui_xcomponent_setneedsoftkeyboard)设置了需要键盘，才会保留键盘，如果返回值为`false`，无论组件如何设置，键盘都不会保留。
+   * > 当返回值为`true`时，应用的自绘制输入框需要在获焦时主动调用 [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)}方法，建立输入法框架和输入法应用的通信，否则点击键盘会失去响应。说明：失焦时输入法框架和输入法应用的通信会断开，获焦时需要重新建立通信。
+   * > 该接口只适用于对输入法应用接续的场景，对自定义键盘不生效。自定义键盘接续详见[setCustomKeyboardContinueFeature]{@link @ohos.arkui.UIContext:UIContext#setCustomKeyboardContinueFeature}。
    *
-   * Web组件使用该方法时，如果返回值为`true`，Web组件会判断组件中是否有可编辑节点，如果有可编辑节点才会保留键盘，如果返回值为`false`，无论是否有可编辑节点，键盘都不会保留。
-   *
-   * XComponent组件使用该方法时，如果返回值为`true`且XComponent组件使用 [OH_ArkUI_XComponent_SetNeedSoftKeyboard()](docroot://reference/apis-arkui/capi-native-interface-xcomponent-h.md#oh_arkui_xcomponent_setneedsoftkeyboard)设置了需要键盘，才会保留键盘，如果返回值为`false`，无论组件如何设置，键盘都不会保留。
-   *
-   * 当返回值为`true`时，应用的自绘制输入框需要在获焦时主动调用 [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)}方法，建立输入法框架和输入法应用的通信，否则点击键盘会失去响应。说明：失焦时输入法框架和输入法应用的通信会断开，获焦时需要重新建立通信。
-   *
-   * 该接口只适用于对输入法应用接续的场景，对自定义键盘不生效。自定义键盘接续详见[setCustomKeyboardContinueFeature]{@link @ohos.arkui.UIContext:UIContext.setCustomKeyboardContinueFeature}。
-   *
-   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - 事件触发时执行的回调，系统会根据回调的返回值决定是否需要键盘。设置为undefined时，不会触发回调，输入框类组件行为等同返回true。其他组件行为等同返回false。前提条件：组件需可获焦，否则本接口不生效。当返回值为true时，自绘制输入框需在获焦时主动调用[attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)}方法建立输入法通信，否则点击键盘会失去响应。
-   * @returns { T }
+   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - 事件触发时执行的回调，系统会根据回调的返回值决定是否需要键盘。
+   *     <br>设置为undefined时，不会触发回调，输入框类组件行为等同返回true。其他组件行为等同返回false。前提条件：组件需可获焦，否则本接口不生效。当返回值为true时，自绘制输入框需在获焦时主动调用[attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)}方法建立输入法通信，否则点击键盘会失去响应。
+   * @returns { T } 返回当前组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27842,7 +27772,7 @@ declare abstract class TextContentControllerBase {
    * >
    * > - 返回值中的位置信息是光标相对于可编辑组件的位置。
    * >
-   * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link ./text_input}组件绑定时），该接口返回null。
+   * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link ./text_input}组件绑定时），该接口返回undefined。
    *
    * @returns { CaretOffset } 光标相对输入框的位置。
    *     *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
@@ -27856,6 +27786,11 @@ declare abstract class TextContentControllerBase {
 
   /**
    * 获取已编辑文本内容区域相对于组件的位置和大小，返回值的单位为像素。
+   * > **说明**
+   * > - 初始不输入文本时，返回值中有相对组件的位置信息，大小为0。
+   * > - 返回值中的位置信息是第一个字符相对于可编辑组件的位置。
+   * > - 在Search组件中，返回的位置信息是相对Search组件中搜索图标的偏移值。
+   * > - 有输入时，返回信息中的宽度是组件编辑区域的固定宽度。
    *
    * @returns { RectResult } 获取已编辑文本内容区域相对组件的位置和大小。
    *     <br>当controller未绑定组件或绑定controller的组件被释放时，返回undefined。
@@ -27885,12 +27820,15 @@ declare abstract class TextContentControllerBase {
    *
    * 拖拽文本的状态下不生效。
    *
+   * `addText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑。预上屏状态由输入法管理，应用层调用`addText`/`deleteText`会破坏输入法的状态管理，因此应避免在预上屏状态下调用`addText`。
+   *
    * > **说明**
    * >
-   * > `addText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不推荐在预上屏状态下调用。
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
    *
    * @param { string } text - 插入的文本内容。
-   * @param { TextContentControllerOptions } [textOperationOptions] - 插入文本的配置选项，不设置时默认插入文本至末尾。
+   * @param { TextContentControllerOptions } [textOperationOptions] - 插入文本的配置选项，用于自定义插入位置等参数。
+   *     <br>默认值：无（插入文本至末尾）。
    * @returns { number } 插入文本后光标的位置。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -27903,24 +27841,22 @@ declare abstract class TextContentControllerBase {
   /**
    * 删除已编辑文本的指定区域的内容。
    *
+   * 拖拽文本的状态下不生效。
+   *
+   * `deleteText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑。预上屏状态由输入法管理，应用层调用`addText`/`deleteText`会破坏输入法的状态管理，因此应避免在预上屏状态下调用`deleteText`。
+   *
    * > **说明**
    * >
-   * > - 拖拽文本的状态下不生效。
-   * >
-   * > - `deleteText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不推荐在预上屏状态下调用。
-   * >
-   * > - 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+   * > **与[deleteBackward]{@link TextContentControllerBase#deleteBackward}的差异：**
+   * > - deleteText支持范围删除，可删除任意指定区域的文本；deleteBackward模拟用户删除操作，删除光标前一个字符或已选中文本。
+   * > - deleteText在预上屏状态下应避免调用，deleteBackward在预上屏场景下不支持使用。
+   * > - 建议根据删除需求选择：需要删除指定范围文本时使用deleteText，需要删除光标前字符时使用deleteBackward。
    *
-   * > **与`deleteBackward`的差异**
-   * >
-   * > - `deleteText`支持范围删除，可删除任意指定区域的文本；`deleteBackward`模拟用户删除操作，删除光标前一个字符或已选中文本。
-   * >
-   * > - `deleteText`在预上屏状态下应避免调用，`deleteBackward`在预上屏场景下不支持使用。
-   * >
-   * > - 建议根据删除需求选择：需要删除指定范围文本时使用`deleteText`，需要删除光标前字符时使用`deleteBackward`。
-   *
-   * @param { TextRange } [range] - 删除文本的范围，包括删除文本的起始位置和终止位置。<br>起始位置应小于等于结束位置，否则接口调用无效。起始位置小于0视为0，结束位置大于文本长度视为文本长度。
-   *     <br>未指定删除范围时，默认将删除全部文本。未指定删除文本的起始位置，则默认从下标0开始删除；未指定删除文本的终止位置，则默认以文本末尾作为删除的结束点。
+   * @param { TextRange } [range] - 删除文本的范围，包括删除文本的起始位置和终止位置。
+   *     <br>
+   *     <br>未指定删除范围时，默认将删除全部文本。
+   *     <br>未指定删除文本的起始位置，则默认从下标0开始删除；未指定删除文本的终止位置，则默认以文本末尾作为删除的结束点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27943,7 +27879,10 @@ declare abstract class TextContentControllerBase {
   getSelection(): TextRange;
 
   /**
-   * 获取指定范围的文本内容。
+   * 获取指定范围的文本内容。可用于以下场景：
+   * - 文本编辑器中获取用户选中的文本内容进行处理。
+   * - 内容校验时获取特定范围的文本进行检查。
+   * - 文本处理应用中提取部分文本内容进行分析或转换。
    *
    * @param { TextRange } [range] - 获取文本的范围，包括需要获取文本的起始位置和终止位置。<br>未指定范围时，默认将获取全部文本。未指定获取文本的起始位置，则默认从下标0开始；未指定获取文本的终止位置，则默认以文本末尾作为结束点。
    * @returns { string } 指定范围的文本内容。
@@ -27958,10 +27897,9 @@ declare abstract class TextContentControllerBase {
   /**
    * 通知输入法清除当前的预上屏文本内容。
    *
-   * > **说明：**
-   * >
+   * > **说明**
    * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
-   * 
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 23]
@@ -27989,16 +27927,12 @@ declare abstract class TextContentControllerBase {
   /**
    * 将起始索引与结束索引传递给与其绑定的输入框（TextInput、TextArea、Search）组件，并将此范围内的文字滚动到可视区域。
    *
-   * > **说明：**
-   * >
+   * > **说明**
    * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
    *
-   * > **说明：**
-   * >
-   * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
-   *
-   * @param { TextRange } [range] - 滚动到可视区域的文本范围，包括文本起始位置和终止位置。<br>起始位置应小于等于结束位置，否则接口调用无效。起始位置小于0视为0，结束位置大于全文长度视为全文长度。<br>未指定范围时，默认为全部文本。未指定起始位置，默认起始位置
-   *     为0；未指定结束位置，默认结束位置为全文长度。
+   * @param { TextRange } [range] - 滚动到可视区域的文本范围，包括文本起始位置和终止位置。
+   *     <br>起始位置应小于等于结束位置，否则接口调用无效。起始位置小于0视为0，结束位置大于全文长度视为全文长度。
+   *     <br>未指定范围时，默认为全部文本。未指定起始位置，默认起始位置为0；未指定结束位置，默认结束位置为全文长度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28014,8 +27948,7 @@ declare abstract class TextContentControllerBase {
    *
    * `deleteBackward`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不支持在预上屏场景下使用。
    *
-   * > **说明：**
-   * >
+   * > **说明**
    * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -28080,19 +28013,9 @@ declare enum ContentClipMode {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 12]
  * @atomicservice
- * @since 11
- */
-/**
- * CommonScrollableMethod
- *
- * @extends CommonMethod<T>
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 12 dynamic
+ * @since 11 dynamic
  */
 declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
 
@@ -28983,17 +28906,8 @@ declare class DynamicNode<T> {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @since 11
- */
-/**
- * [edgeEffect]{@link CommonMethod#edgeEffect}属性参数对象。
- *
- * @interface EdgeEffectOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface EdgeEffectOptions {
 

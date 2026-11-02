@@ -1078,7 +1078,7 @@ declare namespace cryptoFramework {
    */
   interface KeyPair {
     /**
-     * KeyPair's private key.
+     * Private key.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Key.AsymKey [since 12]
@@ -1090,7 +1090,7 @@ declare namespace cryptoFramework {
     readonly priKey: PriKey;
 
     /**
-     * KeyPair's public key.
+     * Public key.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Key.AsymKey [since 12]
@@ -1103,8 +1103,8 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Random interface, defining methods for generating random numbers. Before use, you must
-   * create a **Random** instance by using [createRandom]{@link cryptoFramework.createRandom}.
+   * Defines an API for generating random numbers. Before calling this API, you need to
+   * create a **Random** instance by calling [createRandom]{@link cryptoFramework.createRandom}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Rand [since 12]
@@ -1119,9 +1119,10 @@ declare namespace cryptoFramework {
     /**
      * Generates a random number of the specified length. This API uses an asynchronous callback to return the result.
      *
-     * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the random number obtained. Otherwise, **err** is an error object.
+     * @param { int } len - Length of the random number to generate, in bytes. The value ranges from 1 to **INT_MAX**.
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the random number generated. If a random number
+     *     is successfully generated, **err** is **undefined** and **data** is the random number generated. Otherwise,
+     *     **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1142,7 +1143,7 @@ declare namespace cryptoFramework {
     /**
      * Generates a random number of the specified length. This API uses a promise to return the result.
      *
-     * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
+     * @param { int } len - Length of the random number to generate, in bytes. The value ranges from 1 to **INT_MAX**.
      * @returns { Promise<DataBlob> } Promise used to return the random number generated.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -1168,7 +1169,7 @@ declare namespace cryptoFramework {
      * take a long time and block the main thread due to system busyness, high load, and other reasons. Therefore,
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
-     * @param { int } len - Length of the random number to generate, in bytes. The value range is [1, INT_MAX].
+     * @param { int } len - Length of the random number to generate, in bytes. The value ranges from 1 to **INT_MAX**.
      * @returns { DataBlob } Returns the generated random number.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -1204,8 +1205,8 @@ declare namespace cryptoFramework {
     setSeed(seed: DataBlob): void;
 
     /**
-     * Enables the hardware entropy source. Secure random numbers obtained from TEE will be
-     * used as the entropy source of this random instance.
+     * Enables the hardware entropy source. Secure random numbers obtained from the TEE are
+     * used as the entropy source of the **Random** instance.
      *
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 17620001 - Memory operation failed.
@@ -1220,7 +1221,7 @@ declare namespace cryptoFramework {
     enableHardwareEntropy(): void;
 
     /**
-     * Indicates the random generation algorithm name. Currently, only CTR_DRBG is supported.
+     * Algorithm used to generate the random number. Currently, only **CTR_DRBG** is supported.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Rand [since 12]
@@ -1250,7 +1251,7 @@ declare namespace cryptoFramework {
   function createRandom(): Random;
 
   /**
-   * Asymmetric key generator interface, defining methods for generating asymmetric keys. Before use, you must create an
+   * Defines the method for generating an asymmetric key. Before calling this method, you need to create an
    * **AsyKeyGenerator** instance by using [createAsyKeyGenerator]{@link cryptoFramework.createAsyKeyGenerator}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
@@ -1265,8 +1266,9 @@ declare namespace cryptoFramework {
      * Generates a random key pair using this asymmetric key generator. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the asymmetric key is
+     *     successfully obtained, **err** is **undefined** and **data** is the key pair generated. Otherwise, **err** is
+     *     an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
@@ -1323,7 +1325,8 @@ declare namespace cryptoFramework {
     generateKeyPairSync(): KeyPair;
 
     /**
-     * Converts asymmetric key data to a key pair object. This API uses an asynchronous callback to return the result.
+     * Converts the key data into an asymmetric key pair object. This API uses an asynchronous callback to return the
+     * result.
      *
      * @param { DataBlob } pubKey - The public key data blob.
      * @param { DataBlob } priKey - The private key data blob.
@@ -1346,7 +1349,8 @@ declare namespace cryptoFramework {
     convertKey(pubKey: DataBlob, priKey: DataBlob, callback: AsyncCallback<KeyPair>): void;
 
     /**
-     * Converts data into an asymmetric key pair. This API uses an asynchronous callback to return the result.
+     * Parses the key data and generates an asymmetric key object. This API uses an asynchronous callback to return the
+     * result.
      *
      * @param { DataBlob | null } pubKey - Public key material to convert. If no public key needs to be converted, set
      *     this parameter to **null**. In versions earlier than API version 10, only **DataBlob** is supported. Since
@@ -1354,8 +1358,9 @@ declare namespace cryptoFramework {
      * @param { DataBlob | null } priKey - Private key material to convert. If no private key needs to be converted, set
      *     this parameter to **null**. In versions earlier than API version 10, only **DataBlob** is supported. Since
      *     API version 10, **null** is also supported.
-     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the asymmetric key is
+     *     successfully obtained, **err** is **undefined** and **data** is the key pair generated. Otherwise, **err** is
+     *     an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1373,7 +1378,7 @@ declare namespace cryptoFramework {
     convertKey(pubKey: DataBlob | null, priKey: DataBlob | null, callback: AsyncCallback<KeyPair>): void;
 
     /**
-     * Converts asymmetric key data to a key pair object. This API uses a promise to return the result.
+     * Converts the key data into an asymmetric key pair object. This API uses a promise to return the result.
      *
      * @param { DataBlob } pubKey - The public key data blob.
      * @param { DataBlob } priKey - The private key data blob.
@@ -1395,7 +1400,7 @@ declare namespace cryptoFramework {
     convertKey(pubKey: DataBlob, priKey: DataBlob): Promise<KeyPair>;
 
     /**
-     * Converts data into an asymmetric key pair. This API uses a promise to return the result.
+     * Parses the key data and generates an asymmetric key object. This API uses a promise to return the result.
      *
      * @param { DataBlob | null } pubKey - Public key material to convert. If no public key needs to be converted, set
      *     this parameter to **null**. In versions earlier than API version 10, only **DataBlob** is supported. Since
@@ -1422,7 +1427,7 @@ declare namespace cryptoFramework {
     convertKey(pubKey: DataBlob | null, priKey: DataBlob | null): Promise<KeyPair>;
 
     /**
-     * Converts data into an asymmetric key pair. This API returns the result synchronously.
+     * Parses the key data and generates an asymmetric key object. This API is synchronous.
      *
      * <br><br>**NOTE**
      * <br>It is recommended to prioritize the use of asynchronous API, {@link convertKey}. Synchronous API may
@@ -1452,7 +1457,7 @@ declare namespace cryptoFramework {
     convertKeySync(pubKey: DataBlob | null, priKey: DataBlob | null): KeyPair;
 
     /**
-     * Converts data into an asymmetric key pair. This API uses a promise to return the result.
+     * Parses the key data and generates an asymmetric key object. This API uses a promise to return the result.
      *
      * > **NOTE**
      * >
@@ -1489,8 +1494,8 @@ declare namespace cryptoFramework {
     convertPemKey(pubKey: string | null, priKey: string | null): Promise<KeyPair>;
 
     /**
-     * Converts data into an asymmetric key pair. Encrypted private keys are supported. The private key password is
-     * synchronously passed to decrypt the private key. This API uses a promise to return the result.
+     * Parses the key data and generates an asymmetric key object. Encrypted private keys are supported. The private key
+     * password is synchronously passed to decrypt the private key. This API uses a promise to return the result.
      *
      * > **NOTE**
      * >
@@ -1564,8 +1569,8 @@ declare namespace cryptoFramework {
     convertPemKeySync(pubKey: string | null, priKey: string | null): KeyPair;
 
     /**
-     * Converts data into an asymmetric key pair. Encrypted private keys are supported. The private key password is
-     * synchronously passed to decrypt the private key.
+     * Parses the key data and generates an asymmetric key object. Encrypted private keys are supported. The private key
+     * password is synchronously passed to decrypt the private key.
      *
      * > **NOTE**
      * > The precautions for using **convertPemKeySync** are the same as those for
@@ -1612,7 +1617,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Symmetric key generator interface, defining methods for generating symmetric keys. Before use, you must create a
+   * Defines the method for generating a symmetric key. Before calling this method, you need to create a
    * **SymKeyGenerator** instance by using [createSymKeyGenerator]{@link cryptoFramework.createSymKeyGenerator}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
@@ -1636,9 +1641,9 @@ declare namespace cryptoFramework {
      * > symmetric key generation is not supported. You can generate symmetric key data using
      * > [convertKey]{@link cryptoFramework.SymKeyGenerator.convertKey(key: DataBlob, callback: AsyncCallback<SymKey>)}.
      *
-     * @param { AsyncCallback<SymKey> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the symmetric key obtained. Otherwise, **err** is an
-     *     error object.
+     * @param { AsyncCallback<SymKey> } callback - Callback used to return the result. If the symmetric key is
+     *     successfully generated, **err** is **undefined** and **data** is the symmetric key generated. Otherwise,
+     *     **err** is an error object.
      * @throws { BusinessError } 801 - Capability not supported. [since 26.1.0]
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620004 - Invalid function call. [since 26.0.0]
@@ -1706,14 +1711,14 @@ declare namespace cryptoFramework {
      * >
      * > For symmetric keys used in the HMAC algorithm, if a hash algorithm (for example, **HMAC|SHA256**) is specified
      * > when the symmetric key generator is created, the binary key data passed in must match the hash length (for
-     * > example, a 256-bit key for SHA256).
-     *
-     * If no hash algorithm is specified when the symmetric key generator is created (for example, only **HMAC** is
-     * specified), any binary key data with a length of 1 to 4,096 bytes is supported.
+     * > example, a 256-bit key for SHA256).<br>If no hash algorithm is specified when the symmetric key generator is
+     * > created (for example, only **HMAC** is specified), any binary key data with a length of 1 to 4,096 bytes is
+     * > supported.
      *
      * @param { DataBlob } key - Data to convert.
-     * @param { AsyncCallback<SymKey> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the symmetric key obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<SymKey> } callback - Callback used to return the result. If the symmetric key is
+     *     successfully generated, **err** is **undefined** and **data** is the symmetric key generated. Otherwise,
+     *     **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1783,7 +1788,7 @@ declare namespace cryptoFramework {
     convertKeySync(key: DataBlob): SymKey;
 
     /**
-     * Indicates the algorithm name of the SymKeyGenerator object.
+     * Algorithm used by the **symKeyGenerator**.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Key.SymKey [since 12]
@@ -1796,7 +1801,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Creates an **AsyKeyGenerator** instance based on the specified algorithm.
+   * Creates an **AsyKeyGenerator** instance for the specified algorithm.
    *
    * <br>For details about the supported specifications, see
    * [Asymmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
@@ -1805,7 +1810,7 @@ declare namespace cryptoFramework {
    * @param { string } algName - Algorithm used by the asymmetric keys. For details, see the string parameters in
    *     [Asymmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
-   * @returns { AsyKeyGenerator } Returns the **AsyKeyGenerator** instance corresponding to the specified algorithm.
+   * @returns { AsyKeyGenerator } **AsyKeyGenerator** instance created.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1822,7 +1827,7 @@ declare namespace cryptoFramework {
   function createAsyKeyGenerator(algName: string): AsyKeyGenerator;
 
   /**
-   * Creates a symmetric key generator instance with the specified algorithm.
+   * Creates a **SymKeyGenerator** instance for the specified algorithm.
    *
    * <br>For details about the supported specifications, see
    * [Symmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
@@ -1832,7 +1837,7 @@ declare namespace cryptoFramework {
    *     **String Parameter** in
    *     [Symmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
-   * @returns { SymKeyGenerator } Returns the **SymKeyGenerator** instance corresponding to the specified algorithm.
+   * @returns { SymKeyGenerator } Returns the **SymKeyGenerator** instance created.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -1929,8 +1934,9 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Message authentication code (MAC) interface, defining methods for calculating MACs based on symmetric keys. Before
-   * use, you must create a **Mac** instance by using [createMac]{@link cryptoFramework.createMac(algName: string)}.
+   * Defines the MAC API for calculating the message authentication code based on the symmetric key. Before calling this
+   * API, you need to create a **Mac** instance by calling
+   * [createMac]{@link cryptoFramework.createMac(algName: string)}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Mac [since 12]
@@ -1945,9 +1951,21 @@ declare namespace cryptoFramework {
      * result. **init**, **update**, and **doFinal** must be used together. **init** and **doFinal** are mandatory, and
      * **update** is optional.
      *
-     * @param { SymKey } key - Symmetric key.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**. Otherwise, **err** is an error object.
+     * > **NOTE**
+     * >
+     * > You are advised to create a symmetric key generator based on the
+     * > [HMAC key generation specifications](docroot://security/CryptoArchitectureKit/crypto-sym-key-generation-conversion-spec.md#hmac)
+     * > and use [generateSymKey]{@link cryptoFramework.SymKeyGenerator.generateSymKey(callback: AsyncCallback<SymKey>)}
+     * > to randomly generate a symmetric key or use
+     * > [convertKey]{@link cryptoFramework.SymKeyGenerator.convertKey(key: DataBlob, callback: AsyncCallback<SymKey>)}
+     * > to convert the binary data (whose length is the same as the key specifications) into a key.<br>If **HMAC** is
+     * > specified to generate the symmetric key generator, only
+     * > [convertKey]{@link cryptoFramework.SymKeyGenerator.convertKey(key: DataBlob, callback: AsyncCallback<SymKey>)}
+     * > can be called to pass in a binary key of 1 to 4,096 bytes.
+     *
+     * @param { SymKey } key - Symmetric key obtained.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the HMAC initialization is
+     *     successful, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -1968,7 +1986,7 @@ declare namespace cryptoFramework {
      * **update**, and **doFinal** must be used together. **init** and **doFinal** are mandatory, and **update** is
      * optional.
      *
-     * @param { SymKey } key - Symmetric key.
+     * @param { SymKey } key - Symmetric key obtained.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -1996,7 +2014,7 @@ declare namespace cryptoFramework {
      * take a long time and block the main thread due to system busyness, high load, and other reasons. Therefore,
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
-     * @param { SymKey } key - Symmetric key.
+     * @param { SymKey } key - Symmetric key obtained.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2021,7 +2039,7 @@ declare namespace cryptoFramework {
      * > .
      *
      * @param { DataBlob } input - Data to pass in.
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the HMAC update is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -2095,11 +2113,10 @@ declare namespace cryptoFramework {
     updateSync(input: DataBlob): void;
 
     /**
-     * Finishes the MAC computation and obtains the MAC computation result. This API uses an asynchronous callback to
-     * return the result.
+     * Finalizes MAC calculation and obtains the result. This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is
-     *     successful, **err** is **undefined**, and **data** is the MAC computation result obtained. Otherwise,
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the MAC computation result. If the MAC
+     *     calculation is successful, **err** is **undefined**, and **data** is the MAC calculation result. Otherwise,
      *     **err** is an error object.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
@@ -2113,10 +2130,9 @@ declare namespace cryptoFramework {
     doFinal(callback: AsyncCallback<DataBlob>): void;
 
     /**
-     * Finishes the MAC computation and obtains the MAC computation result. This API uses a promise to return the
-     * result.
+     * Finalizes MAC calculation and obtains the result. This API uses a promise to return the result.
      *
-     * @returns { Promise<DataBlob> } Promise used to return the MAC computation result.
+     * @returns { Promise<DataBlob> } Promise used to return the MAC calculation result.
      * @throws { BusinessError } 801 - Capability not supported. [since 26.1.0]
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
@@ -2130,14 +2146,14 @@ declare namespace cryptoFramework {
     doFinal(): Promise<DataBlob>;
 
     /**
-     * Finishes the MAC computation. This API returns the result synchronously.
+     * Finalizes MAC calculation and obtains the result synchronously.
      *
      * <br><br>**NOTE**
      * <br>It is recommended to prioritize the use of asynchronous API, {@link doFinal}. Synchronous API may
      * take a long time and block the main thread due to system busyness, high load, and other reasons. Therefore,
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
-     * @returns { DataBlob } MAC computation result.
+     * @returns { DataBlob } MAC calculation result.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2169,7 +2185,7 @@ declare namespace cryptoFramework {
     getMacLength(): int;
 
     /**
-     * Indicates the algorithm name.
+     * Digest algorithm.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Mac [since 12]
@@ -2196,7 +2212,7 @@ declare namespace cryptoFramework {
    * @param { string } algName - Specifies the digest algorithm. For details about the supported algorithms, see
    *     [MAC Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-compute-mac-overview.md)
    *     .
-   * @returns { Mac } Returns the **Mac** instance corresponding to the specified algorithm.
+   * @returns { Mac } **Mac** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -2223,7 +2239,7 @@ declare namespace cryptoFramework {
    *     supported algorithms, see
    *     [MAC Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-compute-mac-overview.md)
    *     .
-   * @returns { Mac } Returns the **Mac** instance corresponding to the specified algorithm.
+   * @returns { Mac } **Mac** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -2240,8 +2256,8 @@ declare namespace cryptoFramework {
   function createMac(macSpec: MacSpec): Mac;
 
   /**
-   * Message digest interface, defining methods for calculating message digests. Before use, you must create an **Md**
-   * instance by using [createMd]{@link cryptoFramework.createMd}.
+   * Defines the MD API for calculating the message digest. Before calling this API, you need to create an **Md** instance
+   * by using [createMd]{@link cryptoFramework.createMd}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.MessageDigest [since 12]
@@ -2254,7 +2270,7 @@ declare namespace cryptoFramework {
    */
   interface Md {
     /**
-     * Updates the message digest status. This API uses an asynchronous callback to return the result. **update** must
+     * Updates the MD status. This API uses an asynchronous callback to return the result. **update** must
      * be used with **digest** together. **digest** is mandatory, and **update** is optional.
      *
      * > **NOTE**
@@ -2284,7 +2300,7 @@ declare namespace cryptoFramework {
     update(input: DataBlob, callback: AsyncCallback<void>): void;
 
     /**
-     * Updates the message digest status. This API uses a promise to return the result. **update** must be used with
+     * Updates the MD status. This API uses a promise to return the result. **update** must be used with
      * **digest** together. **digest** is mandatory, and **update** is optional.
      *
      * > **NOTE**
@@ -2312,7 +2328,7 @@ declare namespace cryptoFramework {
     update(input: DataBlob): Promise<void>;
 
     /**
-     * Updates the message digest status. This API returns the result synchronously. **updateSync** must be used with
+     * Updates the MD digest status. This API returns the result synchronously. **updateSync** must be used with
      * **digestSync** together. **digestSync** is mandatory, and **updateSync** is optional.
      *
      * > **NOTE**
@@ -2343,10 +2359,10 @@ declare namespace cryptoFramework {
     updateSync(input: DataBlob): void;
 
     /**
-     * Generates a message digest. This API uses an asynchronous callback to return the result.
+     * Generates a message digest (MD). This API uses an asynchronous callback to return the result.
      *
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the message digest obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the MD generated. If the MD calculation is
+     *     successful, **err** is **undefined**, and **data** is the MD obtained. Otherwise, **err** is an error object.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620004 - Invalid function call. XOF(Extendable-Output Function) digest algorithms,
      *     such as SHAKE128 and SHAKE256, do not support this API. [since 26.1.0]
@@ -2363,9 +2379,9 @@ declare namespace cryptoFramework {
     digest(callback: AsyncCallback<DataBlob>): void;
 
     /**
-     * Generates a message digest. This API uses a promise to return the result.
+     * Generates an MD. This API uses a promise to return the result.
      *
-     * @returns { Promise<DataBlob> } Promise used to return the message digest generated.
+     * @returns { Promise<DataBlob> } Promise used to return the MD generated.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @throws { BusinessError } 17620004 - Invalid function call. XOF digest algorithms, such as SHAKE128
@@ -2381,7 +2397,7 @@ declare namespace cryptoFramework {
     digest(): Promise<DataBlob>;
 
     /**
-     * Generates a message digest. This API returns the result synchronously.
+     * Generates an MD. This API returns the result synchronously.
      *
      * <br><br>**NOTE**
      * <br>It is recommended to prioritize the use of asynchronous API, {@link digest}. Synchronous API may
@@ -2463,7 +2479,7 @@ declare namespace cryptoFramework {
     squeezeSync(len: int): DataBlob;
 
     /**
-     * Obtains the message digest length, in bytes.
+     * Obtains the MD length, in bytes.
      *
      * @returns { int } Message digest length obtained.
      * @throws { BusinessError } 17620004 - Invalid function call. XOF digest algorithms, such as SHAKE128
@@ -2481,7 +2497,7 @@ declare namespace cryptoFramework {
     getMdLength(): int;
 
     /**
-     * Indicates the algorithm name.
+     * Digest algorithm.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.MessageDigest [since 12]
@@ -2501,10 +2517,10 @@ declare namespace cryptoFramework {
    * [Supported Algorithms and Specifications](docroot://security/CryptoArchitectureKit/crypto-generate-message-digest-overview.md#supported-algorithms-and-specifications)
    * .
    *
-   * @param { string } algName - Message digest algorithm to use. For details about the supported algorithms, see
+   * @param { string } algName - MD algorithm to use. For details about the supported algorithms, see
    *     [Supported Algorithms and Specifications](docroot://security/CryptoArchitectureKit/crypto-generate-message-digest-overview.md#supported-algorithms-and-specifications)
    *     .
-   * @returns { Md } Returns the **Md** instance corresponding to the specified algorithm.
+   * @returns { Md } **Md** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -2735,8 +2751,8 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Encryption and decryption interface, defining methods for symmetric and asymmetric encryption and decryption.
-   * Before use, you must create a **Cipher** instance by using
+   * Provides an encryption and decryption API, which defines symmetric and asymmetric encryption and decryption methods.
+   * Before calling this API, you must use
    * [createCipher(transformation: string): Cipher]{@link cryptoFramework.createCipher}.
    * Call the [init()]{@link cryptoFramework.Cipher.init(opMode: CryptoMode, key: Key, params: ParamsSpec | null)},
    * [update()]{@link cryptoFramework.Cipher.update(data: DataBlob, callback: AsyncCallback<DataBlob>)}, and
@@ -2767,15 +2783,16 @@ declare namespace cryptoFramework {
    */
   interface Cipher {
     /**
-     * Initializes the crypto operation with the given crypto mode, key and parameters. This API uses an asynchronous
-     * callback to return the result.
+     * Initializes the [cipher]{@link cryptoFramework.Cipher} object for encryption and decryption. This API uses an
+     * asynchronous callback to return the result. **init**, **update**, and **doFinal** must be used together. **init**
+     * and **doFinal** are mandatory, and **update** is optional.
      *
-     * <br>**init**, **update**, and **doFinal** must be used together. **init** and **doFinal** are mandatory, and
-     * **update** is optional.
+     * This API can be used only after a [Cipher]{@link cryptoFramework.Cipher} instance is created by using
+     * [createCipher]{@link cryptoFramework.createCipher}.
      *
      * @param { CryptoMode } opMode - Operation (encryption or decryption) to perform.
      * @param { Key } key - Key for encryption or decryption.
-     * @param { ParamsSpec } params - Indicates the algorithm parameters such as IV.
+     * @param { ParamsSpec } params - Parameters for encryption or decryption, for example, **IV**.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
@@ -2798,11 +2815,12 @@ declare namespace cryptoFramework {
     init(opMode: CryptoMode, key: Key, params: ParamsSpec, callback: AsyncCallback<void>): void;
 
     /**
-     * Initializes the [cipher]{@link cryptoFramework.Cipher} object for encryption and decryption. This API
-     * uses an asynchronous callback to return the result.
+     * Initializes the [cipher]{@link cryptoFramework.Cipher} object for encryption and decryption. This API uses an
+     * asynchronous callback to return the result. **init**, **update**, and **doFinal** must be used together. **init**
+     * and **doFinal** are mandatory, and **update** is optional.
      *
-     * <br>**init**, **update**, and **doFinal** must be used together. **init** and **doFinal** are mandatory, and
-     * **update** is optional.
+     * This API can be used only after a [Cipher]{@link cryptoFramework.Cipher} instance is created by using
+     * [createCipher]{@link cryptoFramework.createCipher}.
      *
      * @param { CryptoMode } opMode - Operation (encryption or decryption) to perform.
      * @param { Key } key - Key for encryption or decryption.
@@ -2832,15 +2850,14 @@ declare namespace cryptoFramework {
     init(opMode: CryptoMode, key: Key, params: ParamsSpec | null, callback: AsyncCallback<void>): void;
 
     /**
-     * Initializes the crypto operation with the given crypto mode, key and parameters. This API uses a promise to
-     * return the result.
+     * Initializes the cipher object for encryption and decryption. This API uses a promise to return the result.
      *
      * <br>**init**, **update**, and **doFinal** must be used together. **init** and **doFinal** are mandatory, and
      * **update** is optional.
      *
      * @param { CryptoMode } opMode - Operation (encryption or decryption) to perform.
      * @param { Key } key - Key for encryption or decryption.
-     * @param { ParamsSpec } params - Indicates the algorithm parameters such as IV.
+     * @param { ParamsSpec } params - Parameters for encryption or decryption, for example, **IV**.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -2965,9 +2982,9 @@ declare namespace cryptoFramework {
      * > **doFinal()** once to decrypt data and verify the tag.
      *
      * @param { DataBlob } data - Data to be encrypted or decrypted. It cannot be null.
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the data is updated
-     *     successfully, **err** is **undefined**, and **data** is the encryption or decryption result obtained.
-     *     Otherwise, **err** is an error object.
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the encrypted or decrypted
+     *     data is updated successfully, **err** is **undefined**, and **data** is the encryption or decryption result
+     *     **DataBlob**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -3149,7 +3166,8 @@ declare namespace cryptoFramework {
     update(data: DataBlob): Promise<DataBlob | null>;
 
     /**
-     * Updates the data to encrypt or decrypt by segment.
+     * Updates the data to encrypt or decrypt by segment. This API uses an asynchronous callback to return the encrypted or
+     * decrypted data.
      *
      * <br>This API can be called only after the [Cipher]{@link cryptoFramework.Cipher} instance is initialized by
      * using [initSync()]{@link cryptoFramework.Cipher.initSync}.
@@ -3206,11 +3224,10 @@ declare namespace cryptoFramework {
     updateSync(data: DataBlob): DataBlob | null;
 
     /**
-     * Finishes the crypto operation, encrypts or decrypts the input data, and then feeds back the output data.
-     * Data cannot be updated after the crypto operation is finished. This API uses an asynchronous callback to return
-     * the result.
+     * Encrypts or decrypts the input data and returns the output data. After the encryption or decryption operation is
+     * complete, the data cannot be updated. This API uses an asynchronous callback to return the result.
      *
-     * @param { DataBlob } data - Indicates the data to be finally encrypted or decrypted.
+     * @param { DataBlob } data - Data to encrypt or decrypt.
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**, and **data** is the encrypted or decrypted data obtained. Otherwise, **err** is an
      *     error object.
@@ -3350,11 +3367,12 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob | null, callback: AsyncCallback<DataBlob | null>): void;
 
     /**
-     * Finishes the crypto operation, encrypts or decrypts the input data, and then feeds back the output data.
-     * Data cannot be updated after the crypto operation is finished. This API uses a promise to return the result.
+     * Encrypts or decrypts the input data and returns the output data. After the encryption or decryption operation is
+     * complete, the data cannot be updated. This API uses a promise to return the result.
      *
-     * @param { DataBlob } data - Indicates the data to be finally encrypted or decrypted.
-     * @returns { Promise<DataBlob> } Promise used to return the encrypted or decrypted data.
+     * @param { DataBlob } data - Data to encrypt or decrypt.
+     * @returns { Promise<DataBlob> } Promise used to return the **DataBlob**, which is the encryption or decryption
+     *     result of the remaining data.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -3488,10 +3506,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob | null): Promise<DataBlob | null>;
 
     /**
-     * Finishes the crypto operation, encrypts or decrypts the input data, and then feeds back the output data.
-     * Data cannot be updated after the crypto operation is finished.
-     *
-     * <br>(1) Processes the remaining data and the data passed in this time, and completes the encryption or decryption
+     * (1) Processes the remaining data and the data passed in this time, and completes the encryption or decryption
      * operation for symmetric encryption and decryption. This API returns the encrypted or decrypted data
      * synchronously.
      *
@@ -3618,7 +3633,7 @@ declare namespace cryptoFramework {
     getCipherSpec(itemType: CipherSpecItem): string | Uint8Array;
 
     /**
-     * Indicates the algorithm name of the cipher object.
+     * Algorithm.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Cipher [since 12]
@@ -3631,9 +3646,9 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Creates a **Cipher** instance.
+   * Create a **Cipher** instance.
    *
-   * <br>For details about the supported specifications, see[Encryption and Decryption Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-encryption-decryption.md).
+   * <br>For details about the supported specifications, see [Encryption and Decryption Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-encryption-decryption.md).
    *
    * > **NOTE**
    * >
@@ -3673,8 +3688,8 @@ declare namespace cryptoFramework {
   function createCipher(transformation: string): Cipher;
 
   /**
-   * Signing interface, defining methods for signing data using a private key. Before use, you must create a **Sign**
-   * instance by using [createSign(algName: string): Sign]{@link cryptoFramework.createSign}. Invoke **init()**,
+   * Provides a signing API for signing data based on a private key. Before calling this API, you need to construct this
+   * instance using [createSign(algName: string): Sign]{@link cryptoFramework.createSign}. Invoke **init()**,
    * **update()**, and **sign()** in this class in sequence to complete the signing operation.
    * For details about the sample code, see
    * [Signing and Signature Verification with an RSA Key Pair (PKCS1 Mode)](docroot://security/CryptoArchitectureKit/crypto-rsa-sign-sig-verify.md)
@@ -3707,11 +3722,11 @@ declare namespace cryptoFramework {
    */
   interface Sign {
     /**
-     * Initializes the **Sign** object using a private key. This API uses an asynchronous callback to return the result.
+     * Initializes the **Sign** instance using a private key. This API uses an asynchronous callback to return the result.
      * **init**, **update**, and **sign** must be used together. **init** and **sign** are mandatory, and **update** is
      * optional.
      *
-     * <br>The **Sign** instance does not support repeated use of **init**.
+     * <br>The **Sign** instance does not support repeated initialization.
      *
      * @param { PriKey } priKey - Private key used for the initialization.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
@@ -3735,12 +3750,12 @@ declare namespace cryptoFramework {
     init(priKey: PriKey, callback: AsyncCallback<void>): void;
 
     /**
-     * Initializes the **Sign** object using a private key. This API uses a promise to return the result.
+     * Initializes the **Sign** instance using a private key. This API uses a promise to return the result.
      *
      * **init**, **update**, and **sign** must be used together. **init** and **sign** are mandatory, and **update** is
      * optional.
      *
-     * <br>The **Sign** instance does not support repeated use of **init**.
+     * <br>The **Sign** instance does not support repeated initialization.
      *
      * @param { PriKey } priKey - Private key used for the initialization.
      * @returns { Promise<void> } Promise that returns no value.
@@ -3797,7 +3812,7 @@ declare namespace cryptoFramework {
      * Updates data to be signed. This API uses an asynchronous callback to return the result.
      *
      * <br>This API can be called only after the [Sign]{@link cryptoFramework.Sign} instance is initialized by using
-     * [init]{@link cryptoFramework.Sign.init} or [initSync]{@link cryptoFramework.Sign.initSync}.
+     * [init()]{@link cryptoFramework.Sign.init} or [initSync()]{@link cryptoFramework.Sign.initSync}..
      *
      * > **NOTE**
      * >
@@ -3930,8 +3945,9 @@ declare namespace cryptoFramework {
     updateSync(data: DataBlob): void;
 
     /**
-     * Signs the data, including data added via the update interface. This API uses an asynchronous callback to return
-     * the result.
+     * Signs the data, including data added via the update interface. This API uses an asynchronous callback to return the result.
+     *
+     * <br>The **Sign** class does not support repeated use of **sign**.
      *
      * @param { DataBlob } data - The data to be signed.
      * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is
@@ -3979,6 +3995,7 @@ declare namespace cryptoFramework {
 
     /**
      * Signs the data, including data added via the update interface. This API uses a promise to return the result.
+     * The **Sign** class does not support repeated use of **sign**.
      *
      * @param { DataBlob } data - The data to be signed.
      * @returns { Promise<DataBlob> } Promise used to return the signature.
@@ -4071,12 +4088,12 @@ declare namespace cryptoFramework {
     setSignSpec(itemType: SignSpecItem, itemValue: int): void;
 
     /**
-     * Sets the specified parameter for the Sign instance.
+     * Sets signing specifications. You can use this API to set signing parameters that cannot be set by
+     * [createSign]{@link cryptoFramework.createSign}. Currently, only RSA and SM2 are supported. Since API version 11,
+     * SM2 signing parameters can be set.
      *
-     * <br>Currently, only PSS_SALT_LEN in RSA and USER_ID in SM2 are supported.
-     *
-     * @param { SignSpecItem } itemType - Indicates the specified parameter type.
-     * @param { int | Uint8Array } itemValue - The value of the specified parameter.
+     * @param { SignSpecItem } itemType - Signing parameter to set.
+     * @param { int | Uint8Array } itemValue - Value of the signing parameter to set.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4097,13 +4114,16 @@ declare namespace cryptoFramework {
     setSignSpec(itemType: SignSpecItem, itemValue: int | Uint8Array): void;
 
     /**
-     * Sets the specified parameter for the Sign instance.
+     * Sets signing specifications. String parameters of the signing algorithm are specified using **createSign**. The ML-DSA
+     * parameters are set using this API, including whether to use deterministic signatures, whether to use external mu
+     * pre-hashing, and the context string.
      *
      * <br>Currently, only PSS_SALT_LEN in RSA, USER_ID in SM2, and ML_DSA_DETERMINISTIC, ML_DSA_MU, and ML_DSA_CONTEXT in
      * ML-DSA are supported.
-     *
+     * 
      * @param { SignSpecItem } itemType - Indicates the specified parameter type.
-     * @param { int | Uint8Array | boolean } itemValue - The value of the specified parameter.
+     * @param { int | Uint8Array | boolean } itemValue - Value of the signing parameter to set. For details about the
+     *     parameters, see SignSpecItem.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
@@ -4172,15 +4192,16 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Signature verification interface, defining methods for verifying signatures using a public key. Before use, you
-   * must create a **Verify** instance by using
+   * Provides a signature verification API for verifying signature data based on the public key. Before calling this API,
+   * you need to construct this instance using
    * [createVerify(algName: string): Verify]{@link cryptoFramework.createVerify}. Invoke **init()**, **update()**, and
    * **verify()** in this class in sequence to complete the signature verification. For
    * details about the sample code, see
    * [Signing and Signature Verification with an RSA Key Pair (PKCS1 Mode)](docroot://security/CryptoArchitectureKit/crypto-rsa-sign-sig-verify.md)
    * .
    *
-   * <br>The **Verify** class does not support repeated initialization. When a new key is used for signature verification,
+   * <br>The **Verify** instance does not support repeated initialization. When a new key is used for signature
+   * verification,
    * you must create a new **Verify** instance and call **init()** for initialization.
    *
    * <br>The signature verification mode is determined in **createVerify()**, and the key is set by **init()**.
@@ -4425,9 +4446,10 @@ declare namespace cryptoFramework {
     updateSync(data: DataBlob): void;
 
     /**
-     * Verifies the message, including the update data. This API uses an asynchronous callback to return the result.
+     * Verifies the signature. This API returns the verification result. This API uses an asynchronous callback to return
+     * the result.
      *
-     * @param { DataBlob } data - Data to be verified.
+     * @param { DataBlob } data - Pointer to the data with the signature to be verified.
      * @param { DataBlob } signatureData - The signature data.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** indicates
      *     that the signature verification is successful, and **false** indicates the opposite.
@@ -4473,12 +4495,12 @@ declare namespace cryptoFramework {
     verify(data: DataBlob | null, signatureData: DataBlob, callback: AsyncCallback<boolean>): void;
 
     /**
-     * Verifies the message, including the update data. This API uses a promise to return the result.
+     * Verifies the signature. This API returns the verification result. This API uses a promise to return the result.
      *
-     * @param { DataBlob } data - Data to be verified.
+     * @param { DataBlob } data - Pointer to the data with the signature to be verified.
      * @param { DataBlob } signatureData - The signature data.
-     * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the signature
-     *     verification is successful, and **false** indicates the opposite.
+     * @returns { Promise<boolean> } Promise used to return the verification result. **true** if the signature
+     *     verification is successful; **false** otherwise.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4501,8 +4523,8 @@ declare namespace cryptoFramework {
      * @param { DataBlob | null } data - Data to pass in. In versions earlier than API version 10, only **DataBlob** is
      *     supported. Since API version 10, **null** is also supported.
      * @param { DataBlob } signatureData - Signature data.
-     * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the signature
-     *     verification is successful, and **false** indicates the opposite.
+     * @returns { Promise<boolean> } Promise used to return the signature verification result. The value **true** indicates
+     *     that the signature verification is successful, and **false** indicates the opposite.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4629,14 +4651,14 @@ declare namespace cryptoFramework {
     setVerifySpec(itemType: SignSpecItem, itemValue: int): void;
 
     /**
-     * Sets the specified parameter for the Verify instance.
-     *
-     * <br>Currently, only PSS_SALT_LEN in RSA and USER_ID in SM2 are supported.
+     * Sets signature verification specifications. You can use this API to set signature verification parameters that
+     * cannot be set by [createVerify]{@link cryptoFramework.createVerify}. Currently, only RSA and SM2 are supported.
+     * Since API version 11, SM2 signature verification parameters can be set.
      *
      * <br>The parameters for signature verification must be the same as those for signing.
      *
-     * @param { SignSpecItem } itemType - Indicates the specified parameter type.
-     * @param { int | Uint8Array } itemValue - The value of the specified parameter.
+     * @param { SignSpecItem } itemType - Signature verification parameter to set.
+     * @param { int | Uint8Array } itemValue - Value of the signature verification parameter to set.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4657,15 +4679,18 @@ declare namespace cryptoFramework {
     setVerifySpec(itemType: SignSpecItem, itemValue: int | Uint8Array): void;
 
     /**
-     * Sets the specified parameter for the Verify instance.
+     * Sets signature verification specifications. String parameters of the signature verification algorithm are specified
+     * using **createVerify**. The ML-DSA parameters are set using this API, including whether to use external mu
+     * pre-hashing and the context string.
      *
      * <br>Currently, only PSS_SALT_LEN in RSA, USER_ID in SM2, and ML_DSA_DETERMINISTIC, ML_DSA_MU and ML_DSA_CONTEXT in
      * ML-DSA are supported.
-     *
+     * 
      * <br>The parameters for signature verification must be the same as those for signing.
      *
      * @param { SignSpecItem } itemType - Indicates the specified parameter type.
-     * @param { int | Uint8Array | boolean } itemValue - The value of the specified parameter.
+     * @param { int | Uint8Array | boolean } itemValue - Value of the signature verification parameter to set. For
+     *     details about the parameters, see SignSpecItem.
      * @throws { BusinessError } 801 - This operation is not supported.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
@@ -4722,7 +4747,7 @@ declare namespace cryptoFramework {
     getVerifySpec(itemType: SignSpecItem): string | int;
 
     /**
-     * Indicates the algorithm name of the Verify instance.
+     * Algorithm to be used for signature verification.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Signature [since 12]
@@ -4735,7 +4760,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Creates a **Sign** instance.
+   * Creates a signing instance.
    *
    * <br>For details about the supported specifications, see
    *     [Signing and Signature Verification Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md).
@@ -4746,7 +4771,7 @@ declare namespace cryptoFramework {
    *     For signing, you can set **OnlySign** to enable the data digest to be used for signing only.
    *     <br>For details about the supported specifications, see
    *     [Signing and Signature Verification Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md)
-   * @returns { Sign } Returns the **Sign** instance corresponding to the specified algorithm.
+   * @returns { Sign } **Sign** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4776,7 +4801,7 @@ declare namespace cryptoFramework {
    *     <br>For details about the supported specifications, see
    *     [Signing and Signature Verification Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md)
    *     .
-   * @returns { Verify } Returns the **Verify** instance corresponding to the specified algorithm.
+   * @returns { Verify } **Verify** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -4792,8 +4817,8 @@ declare namespace cryptoFramework {
    */
   function createVerify(algName: string): Verify;
   /**
-   * Key agreement interface, defining methods for generating shared secrets based on asymmetric key pairs. Before
-   * use, you must create a **KeyAgreement** instance by using
+   * Defines the key agreement API for generating a shared key based on an asymmetric key pair. Before calling this API,
+   * you need to construct this instance using
    * [createKeyAgreement(algName: string): KeyAgreement]{@link cryptoFramework.createKeyAgreement}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
@@ -4810,8 +4835,8 @@ declare namespace cryptoFramework {
      *
      * @param { PriKey } priKey - Private key used for key agreement.
      * @param { PubKey } pubKey - Public key used for key agreement.
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the shared secret obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the key agreement result. If key agreement is
+     *     successful, **err** is **undefined** and **data** is the shared key. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4834,7 +4859,7 @@ declare namespace cryptoFramework {
      *
      * @param { PriKey } priKey - Private key used for key agreement.
      * @param { PubKey } pubKey - Public key used for key agreement.
-     * @returns { Promise<DataBlob> } Promise used to return the shared secret of key agreement.
+     * @returns { Promise<DataBlob> } Promise used to return the shared key of key agreement.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -4880,7 +4905,7 @@ declare namespace cryptoFramework {
     generateSecretSync(priKey: PriKey, pubKey: PubKey): DataBlob;
 
     /**
-     * Indicates the algorithm name.
+     * Name of the algorithm used for key agreement.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.KeyAgreement [since 12]
@@ -4901,7 +4926,7 @@ declare namespace cryptoFramework {
    *     API version 11.<br>For details about the supported specifications, see
    *     [Key Agreement Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-key-agreement-overview.md)
    *     .
-   * @returns { KeyAgreement } Returns the **KeyAgreement** instance corresponding to the specified algorithm.
+   * @returns { KeyAgreement } **KeyAgreement** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -5968,7 +5993,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Provides utilities for ECC key parameter generation and point conversion based on the specified elliptic curve.
+   * Provides tools for generating ECC key parameters and converting points based on a specified elliptic curve.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 11 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Key.AsymKey [since 12]
@@ -6591,9 +6616,9 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Asymmetric key generator interface with specified key specifications, defining methods for generating asymmetric
-   * keys based on specified key specifications. Before use, you must create an **AsyKeyGeneratorBySpec** instance by
-   * using [createAsyKeyGeneratorBySpec]{@link cryptoFramework.createAsyKeyGeneratorBySpec}.
+   * Defines the method for generating an asymmetric key based on the specified key specifications. Before calling this
+   * method, you need to create an **AsyKeyGeneratorBySpec** instance by using
+   * [createAsyKeyGeneratorBySpec]{@link cryptoFramework.createAsyKeyGeneratorBySpec}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Key.AsymKey [since 12]
@@ -6612,8 +6637,9 @@ declare namespace cryptoFramework {
      * [KEY_PAIR_SPEC]{@link cryptoFramework.AsyKeySpecType} type is used to create the key generator, you can obtain a
      * key pair that is consistent with the specified key parameters.
      *
-     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the key pair obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<KeyPair> } callback - Callback used to return the result. If the asymmetric key is
+     *     successfully obtained, **err** is **undefined** and **data** is the key pair generated. Otherwise, **err** is
+     *     an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
@@ -6686,9 +6712,10 @@ declare namespace cryptoFramework {
      * generates the specified private key. If [KEY_PAIR_SPEC]{@link cryptoFramework.AsyKeySpecType} is used to create a
      * key generator, you can obtain the specified private key from the key pair generated.
      *
-     * @param { AsyncCallback<PriKey> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the private key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Mandatory parameters are left unspecified.
+     * @param { AsyncCallback<PriKey> } callback - Callback used to return the result. If the asymmetric key is
+     *     successfully obtained, **err** is **undefined** and **data** is the private key generated. Otherwise,
+     *     **err** is an error object.
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: <br>Mandatory parameters are left unspecified;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
@@ -6761,9 +6788,10 @@ declare namespace cryptoFramework {
      * [KEY_PAIR_SPEC]{@link cryptoFramework.AsyKeySpecType} type is used to create the key generator, you can obtain
      * the specified public key from the key pair generated.
      *
-     * @param { AsyncCallback<PubKey> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the public key obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes: Incorrect parameter types;
+     * @param { AsyncCallback<PubKey> } callback - Callback used to return the result. If the asymmetric key is
+     *     successfully obtained, **err** is **undefined** and **data** is the public key generated. Otherwise,
+     *     **err** is an error object.
+     * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:<br> Incorrect parameter types;
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17630001 - Crypto operation error.
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
@@ -6827,7 +6855,7 @@ declare namespace cryptoFramework {
     generatePubKeySync(): PubKey;
 
     /**
-     * Indicates the algorithm name of the generator.
+     * Algorithm used by the asymmetric key generator.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Key.AsymKey [since 12]
@@ -6846,7 +6874,7 @@ declare namespace cryptoFramework {
    *     on the specified parameters.<br>For details about the supported specifications, see
    *     [Asymmetric Key Generation and Conversion Specifications](docroot://security/CryptoArchitectureKit/crypto-key-generation-conversion.md)
    *     .
-   * @returns { AsyKeyGeneratorBySpec } Returns the **AsyKeyGeneratorBySpec** instance created.
+   * @returns { AsyKeyGeneratorBySpec } **AsyKeyGeneratorBySpec** instance.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -7166,8 +7194,8 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Key derivation function (KDF) interface, defining methods for deriving keys based on key derivation parameters.
-   * Before use, you must create a **Kdf** instance by using [createKdf]{@link cryptoFramework.createKdf}.
+   * Defines the key derivation function (KDF) API for deriving a key based on key derivation parameters. Before calling
+   * this API, you need to construct this instance using [createKdf]{@link cryptoFramework.createKdf}.
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 11 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Kdf [since 12]
@@ -7182,8 +7210,8 @@ declare namespace cryptoFramework {
      * return the result.
      *
      * @param { KdfSpec } params - Parameters of the key derivation function.
-     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**, and **data** is the derived key obtained. Otherwise, **err** is an error object.
+     * @param { AsyncCallback<DataBlob> } callback - Callback used to return the key generated. If key derivation is
+     *     successful, **err** is **undefined** and **data** is the key generated. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -7207,7 +7235,7 @@ declare namespace cryptoFramework {
      * Generates a key based on the specified key derivation parameters. This API uses a promise to return the result.
      *
      * @param { KdfSpec } params - Parameters of the key derivation function.
-     * @returns { Promise<DataBlob> } Promise used to return the derived key.
+     * @returns { Promise<DataBlob> } Promise used to return the key generated.
      * @throws { BusinessError } 401 - [Sync/Async] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -7236,7 +7264,7 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { KdfSpec } params - Parameters of the key derivation function.
-     * @returns { DataBlob } The derived key.
+     * @returns { DataBlob } Key derived.
      * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -7257,7 +7285,7 @@ declare namespace cryptoFramework {
     generateSecretSync(params: KdfSpec): DataBlob;
 
     /**
-     * Indicates the algorithm name of the key derivation function.
+     * Algorithm of the key derivation function.
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 11 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Kdf [since 12]
@@ -7270,16 +7298,16 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Creates a key derivation function instance.
+   * Creates a KDF instance.
    *
    * <br>For details about the supported specifications, see
    *     [Key Derivation Function Specifications](docroot://security/CryptoArchitectureKit/crypto-key-derivation-overview.md).
    *
-   * @param { string } algName - Key derivation algorithm (including the hash function for the HMAC). Currently, PBKDF2,
-   *     HKDF, SCRYPT, and X963KDF are supported. For example, **PBKDF2|SHA256**, **HKDF|SHA256**,
-   *     **SCRYPT**, and **X963KDF|SHA256**.<br>For details about the supported specifications, see
-   *     [Key Derivation Function Specifications](docroot://security/CryptoArchitectureKit/crypto-key-derivation-overview.md).
-   * @returns { Kdf } Returns the **Kdf** instance corresponding to the specified algorithm.
+   * @param { string } algName - Key derivation algorithm (including the hash function for the HMAC). Currently, only
+   *     PBKDF2, HKDF, SCRYPT and X963KDF are supported. For example, **PBKDF2|SHA256**, **HKDF|SHA256**,
+   *     **SCRYPT**, or **X963KDF|SHA256**.<br>For details about the supported specifications, see
+   *     [Key Derivation Overview and Algorithm Specifications](docroot://security/CryptoArchitectureKit/crypto-key-derivation-overview.md).
+   * @returns { Kdf } **Kdf** instance of the corresponding algorithm.
    * @throws { BusinessError } 401 - [Sync] Invalid parameters. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -7465,10 +7493,10 @@ declare namespace cryptoFramework {
    */
   class SignatureUtils {
     /**
-     * Generates r and s from the ECC/SM2 signature data in ASN.1 DER encoding.
+     * Generates r and s from the ECC/SM2 signature data encoded in ASN.1 DER format.
      *
-     * @param { Uint8Array } data - Signature data in ASN.1 DER encoding.
-     * @returns { EccSignatureSpec } Object that contains r and s.
+     * @param { Uint8Array } data - Signature data encoded in ASN.1 DER format.
+     * @returns { EccSignatureSpec } Data object that contains r and s.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
@@ -7483,10 +7511,10 @@ declare namespace cryptoFramework {
     static genEccSignatureSpec(data: Uint8Array): EccSignatureSpec;
 
     /**
-     * Converts an ECC/SM2 signature (r, s) to the ASN.1 DER encoding.
+     * Converts an ECC/SM2 signature (r, s) to the ASN.1 DER format.
      *
-     * @param { EccSignatureSpec } spec - ECC/SM2 signature data to convert.
-     * @returns { Uint8Array } Signature data in ASN.1 DER encoding.
+     * @param { EccSignatureSpec } spec - ECC/SM2 signature data that contains (r, s).
+     * @returns { Uint8Array } Signature data encoded in ASN.1 DER format.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
@@ -7502,7 +7530,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Enumerates the KEM algorithm name IDs.
+   * Enumerates the key-encapsulation mechanism (KEM) algorithms.
    *
    * @syscap SystemCapability.Security.CryptoFramework.Cipher
    * @stagemodelonly
@@ -7511,7 +7539,7 @@ declare namespace cryptoFramework {
    */
   enum KemAlgNameId {
     /**
-     * Indicates the ML_KEM_512 algorithm name ID.
+     * Name ID of ML-KEM-512.
      *
      * @syscap SystemCapability.Security.CryptoFramework.Cipher
      * @stagemodelonly
@@ -7521,7 +7549,7 @@ declare namespace cryptoFramework {
     ML_KEM_512 = 0,
 
     /**
-     * Indicates the ML_KEM_768 algorithm name ID.
+     * Name ID of ML-KEM-768.
      *
      * @syscap SystemCapability.Security.CryptoFramework.Cipher
      * @stagemodelonly
@@ -7531,7 +7559,7 @@ declare namespace cryptoFramework {
     ML_KEM_768 = 1,
 
     /**
-     * Indicates the ML_KEM_1024 algorithm name ID.
+     * Name ID of ML-KEM-1024.
      *
      * @syscap SystemCapability.Security.CryptoFramework.Cipher
      * @stagemodelonly
@@ -7542,7 +7570,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Represents the encapsulation result of the KEM.
+   * Indicates the key encapsulation result.
    *
    * @syscap SystemCapability.Security.CryptoFramework.Cipher
    * @stagemodelonly
@@ -7551,7 +7579,7 @@ declare namespace cryptoFramework {
    */
   interface KemEncapResult {
     /**
-     * Indicates the shared secret key of the KEM.
+     * Shared key generated during key encapsulation.
      *
      * @syscap SystemCapability.Security.CryptoFramework.Cipher
      * @stagemodelonly
@@ -7561,7 +7589,7 @@ declare namespace cryptoFramework {
     sharedSecret: Uint8Array;
 
     /**
-     * Indicates the wrapped key of the KEM, which is the ciphertext of the KEM.
+     * Wrapped key generated during key encapsulation.
      *
      * @syscap SystemCapability.Security.CryptoFramework.Cipher
      * @stagemodelonly
@@ -7572,9 +7600,8 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Key encapsulation mechanism (KEM) interface, defining methods for key encapsulation and decapsulation based on KEM.
-   * Before use, you must create a **Kem** instance by using
-   * [createKem(algNameId: KemAlgNameId): Kem]{@link cryptoFramework.createKem}.
+   * Defines an API for key encapsulation and decapsulation based on the key encapsulation mechanism (KEM). Before calling
+   * this API, you must use the [createKem]{@link cryptoFramework.createKem} method to create a Kem instance.
    *
    * @syscap SystemCapability.Security.CryptoFramework.Cipher
    * @stagemodelonly
@@ -7583,12 +7610,11 @@ declare namespace cryptoFramework {
    */
   interface Kem {
     /**
-     * Key encapsulation operation. Using the recipient's public key, executed by the sender, to generate and
-     * encapsulate a shared key. This API uses a promise to return the result.
+     * Encapsulates a key based on the given public key. This API uses a promise to return the result.
      *
-     * @param { PubKey } pubKey - The public key of the receiver.
+     * @param { PubKey } pubKey - Public key used for key encapsulation.
      * @param { Uint8Array | null } ikme - Random number seed, used to replace the random number within the algorithm.
-     *     For the ML-KEM algorithm, the random number seed is 32 bytes. It is recommended to pass null.
+     *      For the ML-KEM algorithm, the random number seed is 32 bytes. It is recommended to pass null.
      * @returns { Promise<KemEncapResult> } Promise used to return the KemEncapResult.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
@@ -7602,15 +7628,14 @@ declare namespace cryptoFramework {
     encapsulate(pubKey: PubKey, ikme: Uint8Array | null): Promise<KemEncapResult>;
 
     /**
-     * Key encapsulation operation. Using the recipient's public key, executed by the sender, to generate and
-     * encapsulate a shared key.
+     * Encapsulates a key based on the given public key. This API returns the result synchronously.
      *
      * <br><br>**NOTE**
-     * <br>It is recommended to prioritize the use of asynchronous API, {@link encapsulate}. Synchronous API may
-     * take a long time and block the main thread due to system busyness, high load, and other reasons. Therefore,
-     * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
+     * <br>You are advised to preferentially use the asynchronous API
+     * <br>[encapsulate]{@link cryptoFramework.Kem.encapsulate} in a child thread. A synchronous API may block the main
+     * thread due to long execution time caused by the busy system or a high load.
      *
-     * @param { PubKey } pubKey - The public key of the receiver.
+     * @param { PubKey } pubKey - Public key used for key encapsulation.
      * @param { Uint8Array | null } ikme - Random number seed, used to replace the random number within the algorithm.
      *     For the ML-KEM algorithm, the random number seed is 32 bytes. It is recommended to pass null.
      * @returns { KemEncapResult } The encapsulation result of the KEM.
@@ -7626,12 +7651,11 @@ declare namespace cryptoFramework {
     encapsulateSync(pubKey: PubKey, ikme: Uint8Array | null): KemEncapResult;
 
     /**
-     * Key decapsulation operation. Using the receiver's private key, executed by the receiver, to decapsulate the
-     * shared key from the ciphertext. This API uses a promise to return the result.
+     * Decapsulates a key based on the given private key and wrapped key. This API uses a promise to return the result.
      *
-     * @param { PriKey } priKey - The private key of the receiver.
-     * @param { Uint8Array } wrappedKey - The wrapped key of the KEM.
-     * @returns { Promise<Uint8Array> } Promise used to return the shared secret.
+     * @param { PriKey } priKey - Private key used for key decapsulation.
+     * @param { Uint8Array } wrappedKey - Wrapped key generated during key encapsulation.
+     * @returns { Promise<Uint8Array> } Promise used to return the shared key obtained through key decapsulation.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed.
@@ -7644,17 +7668,16 @@ declare namespace cryptoFramework {
     decapsulate(priKey: PriKey, wrappedKey: Uint8Array): Promise<Uint8Array>;
 
     /**
-     * Key decapsulation operation. Using the receiver's private key, executed by the receiver, to decapsulate the
-     * shared key from the ciphertext.
+     * Decapsulates a key based on the given private key and wrapped key. This API returns the result synchronously.
      *
      * <br><br>**NOTE**
-     * <br>It is recommended to prioritize the use of asynchronous API, {@link decapsulate}. Synchronous API may
-     * take a long time and block the main thread due to system busyness, high load, and other reasons. Therefore,
-     * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
+     * <br>You are advised to preferentially use the asynchronous API
+     * <br>[decapsulate]{@link cryptoFramework.Kem.decapsulate} in a child thread. A synchronous API may block the main
+     * thread due to long execution time caused by the busy system or a high load.
      *
-     * @param { PriKey } priKey - The private key of the receiver.
-     * @param { Uint8Array } wrappedKey - The wrapped key of the KEM.
-     * @returns { Uint8Array } The decapsulation result of the KEM.
+     * @param { PriKey } priKey - Private key used for key decapsulation.
+     * @param { Uint8Array } wrappedKey - Wrapped key generated during key encapsulation.
+     * @returns { Uint8Array } Shared key obtained through key decapsulation.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed.
@@ -7668,10 +7691,10 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * Creates a Kem instance for key encapsulation and decapsulation operations.
+   * Creates a KEM instance for key encapsulation and decapsulation.
    *
-   * @param { KemAlgNameId } algNameId - The algorithm name ID of the KEM.
-   * @returns { Kem } Returns the **Kem** instance corresponding to the specified algorithm.
+   * @param { KemAlgNameId } algNameId - Name ID of the key encapsulation algorithm.
+   * @returns { Kem } **Kem** instance of the corresponding algorithm.
    * @throws { BusinessError } 801 - Capability not supported. [since 26.1.0]
    * @throws { BusinessError } 17620001 - Memory operation failed.
    * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.

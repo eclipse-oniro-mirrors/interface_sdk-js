@@ -5459,6 +5459,17 @@ declare interface Stat {
   readonly location: LocationType;
 
   /**
+   * Number of blocks allocated to the file, in 512-byte units.
+   *
+   * @throws { BusinessError } 13900005 - I/O error
+   * @throws { BusinessError } 13900042 - Unknown error
+   * @syscap SystemCapability.FileManagement.File.FileIO
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  readonly blocks?: number;
+
+  /**
    * Checks whether this file is a block special file. A block special file supports access by block only, and it is
    * cached when accessed.
    *

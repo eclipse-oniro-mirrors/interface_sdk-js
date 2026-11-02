@@ -103,7 +103,7 @@ export declare enum CancelButtonStyle {
    * @stagemodelonly
    * @since 23 static
    */
-  CONSTANT = 0,
+  CONSTANT,
   /**
    * 清除按钮常隐样式。
    *
@@ -111,7 +111,7 @@ export declare enum CancelButtonStyle {
    * @stagemodelonly
    * @since 23 static
    */
-  INVISIBLE = 1,
+  INVISIBLE,
   /**
    * 清除按钮输入样式。
    *
@@ -119,7 +119,7 @@ export declare enum CancelButtonStyle {
    * @stagemodelonly
    * @since 23 static
    */
-  INPUT = 2
+  INPUT
 }
 /**
  * 搜索输入框类型。

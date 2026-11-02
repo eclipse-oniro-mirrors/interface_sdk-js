@@ -15,7 +15,7 @@
  
 /**
  * @file Media
- * @kit media
+ * @kit MediaKit
  */
 
 import { ErrorCallback, AsyncCallback, Callback, BusinessError } from './@ohos.base';
@@ -4089,7 +4089,7 @@ declare namespace media {
      * **Use scenario**: It is used to render the window for video playback (not involved in audio-only playback 
      * scenarios).
      * 
-     * [Create a surface ID through XComponent]{@link ./@internal/component/ets/xcomponent:XComponentController.getXComponentSurfaceId}.
+     * [Create a surface ID through XComponent]{@link @global:XComponentController.getXComponentSurfaceId}.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
@@ -6446,7 +6446,7 @@ declare namespace media {
    */
   interface PlaybackStrategy {
     /**
-     * Choose a stream with width close to it.
+     * Choose a stream with width close to it. Unit: px.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6455,7 +6455,7 @@ declare namespace media {
      */
     preferredWidth?: int;
     /**
-     * Choose a stream with height close to it.
+     * Choose a stream with height close to it. Unit: px.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6464,7 +6464,7 @@ declare namespace media {
      */
     preferredHeight?: int;
     /**
-     * Chooses a preferred buffer duration.
+     * Chooses a preferred buffer duration. The unit is second.
      * 
      * <p>The preferred buffer duration in the playback policy, is used to set the buffer size. For details,
      * see [Online Video Frame Freezing Optimization Practice]{@link
@@ -6548,7 +6548,8 @@ declare namespace media {
     enableSuperResolution?: boolean;
 
     /**
-     * set max buffering threshold for liveStreaming or avplayer while change the speed.
+     * set max buffering threshold for liveStreaming or avplayer while change the speed. The unit is second.
+     *
      * It is recommended that the value be 2 seconds greater than the starting waterline.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
@@ -8757,7 +8758,7 @@ declare namespace media {
      * Releases resources used for video recording.
      *
      * @returns { Promise<void> } A Promise instance used to return when release completed.
-     * @throws { BusinessError } 5400105 - Service died. Return by callback.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @throws { BusinessError } 202 - Not System App. [since 12]
      * @syscap SystemCapability.Multimedia.Media.VideoRecorder
      * @systemapi
@@ -8981,7 +8982,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the setting is successful,
      *     **err** is **undefined**. Otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
@@ -8999,7 +9000,7 @@ declare namespace media {
      * > be set for video streams without audio. Otherwise, the calling of **prepare** fails.
      *
      * @param {string} surfaceId - Surface ID, which is obtained from the **XComponent**. For details about how to
-     *     obtain it, see [XComponent]{@link ./@internal/component/ets/xcomponent}.
+     *     obtain it, see [XComponent]{@link @global:XComponent}.
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
@@ -11734,7 +11735,6 @@ declare namespace media {
      *
      * @param { 'error' } type - Event type, which is **'error'** in this case.
      * @param { ErrorCallback } callback - Callback invoked when the event is triggered.
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
@@ -11784,7 +11784,6 @@ declare namespace media {
      * When the application initiates multiple subscriptions to this event, the last subscription is applied.
      *
      * @param { ErrorCallback } callback - Callback invoked when the event is triggered.
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture

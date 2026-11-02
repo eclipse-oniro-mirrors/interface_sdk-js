@@ -3910,20 +3910,21 @@ declare namespace avSession {
   }
 
   /**
+   * 投播控制器可传递的命令。
    *
-   * @unionmember { 'play' } Play the current media. [since 10]
-   * @unionmember { 'pause' } Pause the current media. [since 10]
-   * @unionmember { 'stop' } Stop the current media. [since 10]
-   * @unionmember { 'playNext' } Play the next media in the queue. [since 10]
-   * @unionmember { 'playPrevious' } Play the previous media in the queue. [since 10]
-   * @unionmember { 'fastForward' } Fast forward the current media. [since 10]
-   * @unionmember { 'rewind' } Rewind the current media. [since 10]
-   * @unionmember { 'seek' } Seek to a specific position in the media. [since 10]
-   * @unionmember { 'setVolume' } Adjust volume for the media. [since 10]
-   * @unionmember { 'setSpeed' } Set the playback speed.. [since 10]
-   * @unionmember { 'setLoopMode' } Set the loop mode for the media. [since 10]
-   * @unionmember { 'toggleFavorite' } Toggle the favorite status of the current media. [since 10]
-   * @unionmember { 'toggleMute' } Toggle the mute status of the media. [since 10]
+   * @unionmember { 'play' } 播放。 [since 10]
+   * @unionmember { 'pause' } 暂停。 [since 10]
+   * @unionmember { 'stop' } 停止。 [since 10]
+   * @unionmember { 'playNext' } 下一首。 [since 10]
+   * @unionmember { 'playPrevious' } 上一首。 [since 10]
+   * @unionmember { 'fastForward' } 快进。 [since 10]
+   * @unionmember { 'rewind' } 快退。 [since 10]
+   * @unionmember { 'seek' } 跳转到指定时间点。 [since 10]
+   * @unionmember { 'setVolume' } 设置音量。 [since 10]
+   * @unionmember { 'setSpeed' } 设置播放倍速。 [since 10]
+   * @unionmember { 'setLoopMode' } 设置循环模式。 [since 10]
+   * @unionmember { 'toggleFavorite' } 切换收藏状态。 [since 10]
+   * @unionmember { 'toggleMute' } 切换静音状态。 [since 10]
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice [since 12]
    * @since 10 dynamic
@@ -5704,7 +5705,7 @@ declare namespace avSession {
   enum DecoderType {
 
     /**
-     * Defination of avc codec type.
+     * VIDEO AVC格式。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -5714,7 +5715,7 @@ declare namespace avSession {
     OH_AVCODEC_MIMETYPE_VIDEO_AVC = 'video/avc',
 
     /**
-     * Defination of hevc codec type.
+     * VIDEO HEVC格式。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -5724,7 +5725,7 @@ declare namespace avSession {
     OH_AVCODEC_MIMETYPE_VIDEO_HEVC = 'video/hevc',
 
     /**
-     * Defination of audio vivid codec type.
+     * AUDIO AV3A格式。
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVCast
      * @atomicservice
@@ -9455,25 +9456,25 @@ declare namespace avSession {
   }
 
   /**
-   * The type of control command
+   * 会话可传递的命令。
    *
-   * @unionmember { 'play' } Play the current media. [since 10]
-   * @unionmember { 'pause' } Pause the current media. [since 10]
-   * @unionmember { 'stop' } Stop the current media. [since 10]
-   * @unionmember { 'playNext' } Play the next media in the queue. [since 10]
-   * @unionmember { 'playPrevious' } Play the previous media in the queue. [since 10]
-   * @unionmember { 'fastForward' } Fast forward the current media. [since 10]
-   * @unionmember { 'rewind' } Rewind the current media. [since 10]
-   * @unionmember { 'seek' } Seek to a specific position in the media. [since 10]
-   * @unionmember { 'setSpeed' } Set the playback speed. [since 10]
-   * @unionmember { 'setLoopMode' } Set the loop mode for the media. [since 10]
-   * @unionmember { 'toggleFavorite' } Toggle the favorite status of the current media. [since 10]
-   * @unionmember { 'playFromAssetId' } Play media specified by an asset ID. [since 11]
-   * @unionmember { 'playWithAssetId' } Play media with an asset ID (dynamic support). [since 20]
-   * @unionmember { 'answer' } Answer an incoming call. [since 11]
-   * @unionmember { 'hangUp' } Hang up the current call. [since 11]
-   * @unionmember { 'toggleCallMute' } Toggle the mute status of the call. [since 11]
-   * @unionmember { 'setTargetLoopMode' } Set the target loop mode. [since 18]
+   * @unionmember { 'play' } 播放。 [since 10]
+   * @unionmember { 'pause' } 暂停。 [since 10]
+   * @unionmember { 'stop' } 停止。 [since 10]
+   * @unionmember { 'playNext' } 下一首。 [since 10]
+   * @unionmember { 'playPrevious' } 上一首。 [since 10]
+   * @unionmember { 'fastForward' } 快进。 [since 10]
+   * @unionmember { 'rewind' } 快退。 [since 10]
+   * @unionmember { 'seek' } 跳转到指定时间点。 [since 10]
+   * @unionmember { 'setSpeed' } 设置播放倍速。 [since 10]
+   * @unionmember { 'setLoopMode' } 设置循环模式。 [since 10]
+   * @unionmember { 'toggleFavorite' } 切换收藏状态。 [since 10]
+   * @unionmember { 'playFromAssetId' } 播放指定的assetId。 [since 11]
+   * @unionmember { 'playWithAssetId' } 播放指定的assetId。 [since 20]
+   * @unionmember { 'answer' } 接听。 [since 11]
+   * @unionmember { 'hangUp' } 挂断。 [since 11]
+   * @unionmember { 'toggleCallMute' } 切换通话静音状态。 [since 11]
+   * @unionmember { 'setTargetLoopMode' } 设置目标循环模式。 [since 18]
    * @syscap SystemCapability.Multimedia.AVSession.Core
    * @atomicservice [since 12]
    * @since 10 dynamic

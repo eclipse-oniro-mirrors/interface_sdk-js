@@ -888,7 +888,7 @@ export declare class Scene {
    *     -- The number of elements in the camera array and the RenderTargetParameters array is not the same
    * @throws { BusinessError } 25601002 -- Possible Cause:
    *     -- Use this api after scene is destroyed
-   * @throws { BusinessError } 25601004 -- Possible Cause:
+   * @throws { BusinessError } 25601005 -- Possible Cause:
    *     -- No enough memory to allocate offscreen render targets
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi

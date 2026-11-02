@@ -61,7 +61,7 @@ import type pointer from './@ohos.multimodalInput.pointer';
  * >
  * > - 以下API需先使用UIContext中的[getFont()]{@link UIContext.getFont}方法获取到Font对象，再通过该对象调用对应方法。
  * >
- * > - 推荐使用字体引擎的[loadFontSync]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
+ * > - 推荐使用字体引擎的[loadFontSync()]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -74,12 +74,11 @@ export class Font {
   /**
    * 在字体管理中注册自定义字体。
    *
-   * 推荐使用字体引擎的[loadFontSync](../apis-arkgraphics2d/js-apis-graphics-text.md#loadfontsync)接口注册自定义字体。
+   * 推荐使用字体引擎的[loadFontSync()]{@link ./@ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
    *
-   * 该接口为异步接口，字体注册为异步过程，不支持并发调用。由于注册是异步完成的，建议在页面初始化阶段（如aboutToAppear）提前调用，以确保字体在使用前已注册完成。
+   * 该接口的字体注册过程为异步，不支持并发调用。由于注册是异步完成的，建议在页面初始化阶段（如aboutToAppear）提前调用，以确保字体在使用前已注册完成。
    *
-   * @param { font.FontOptions } options - 注册的自定义字体信息。
-   *     <br>**说明：**<br>设置注册字体文件的路径，读取系统沙箱路径内的资源时，建议使用file://路径前缀的字符串，需要确保沙箱目录路径下的文件存在并且有可读权限。
+   * @param { font.FontOptions } options - 注册的自定义字体信息。<br>**说明：**<br>设置注册字体文件的路径，读取系统沙箱路径内的资源时，建议使用file://路径前缀的字符串，需要确保沙箱目录路径下的文件存在并且有可读权限。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -94,7 +93,7 @@ export class Font {
    * 该接口仅在PC/2in1设备上生效，在其他设备上返回空数组。
    *
    * > **说明**
-   * > 推荐使用[getSystemFontFullNamesByType]{@link @ohos.graphics.text:text.getSystemFontFullNamesByType}接口获取系统最新支持的字体列表数据。
+   * > 推荐使用[getSystemFontFullNamesByType()]{@link @ohos.graphics.text:text.getSystemFontFullNamesByType}接口获取系统最新支持的字体列表数据。
    *
    * @returns { Array<string> } 系统支持的字体名称列表，返回的名称可用于getFontByName方法查询对应字体的详细信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -108,7 +107,7 @@ export class Font {
   /**
    * 根据传入的系统字体名称获取系统字体的相关信息。
    *
-   * @param { string } fontName - 系统的字体名，可通过[getSystemFontList()](#getsystemfontlist)方法获取支持的字体名称列表。
+   * @param { string } fontName - 系统的字体名，可通过[getSystemFontList()]{@link Font#getSystemFontList}方法获取支持的字体名称列表。
    * @returns { font.FontInfo } 字体的详细信息。<br>如果查询不到字体，返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3061,7 +3060,7 @@ export class Magnifier {
    * >
    * > - 使用前需先通过UIContext中的getMagnifier()方法获取Magnifier实例。
    * >
-   * > - 调用此方法前，需先调用[bind](#bind)方法绑定目标组件。
+   * > - 调用此方法前，需先调用[bind]{@link Magnifier#bind}方法绑定目标组件。
    * >
    * > - 当与放大镜绑定的组件自身内容发生变化时，放大镜显示内容不会自动更新，需要主动调用show接口对放大镜显示内容进行更新。
    *
@@ -3335,9 +3334,9 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
 /**
  * 提供Marquee组件动态帧率的配置能力，支持在Marquee组件运行动画时动态调节帧率，优化性能和功耗，适用于需要在跑马灯场景中平衡动画流畅度和系统资源消耗的场景。
  *
- * > **说明：**
- * >
- * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext}，对应[Marquee]{@link ./@internal/component/ets/marquee}的动态帧率场景。
+ * > **说明**
+ * > 
+ * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link DynamicSyncScene}，对应[Marquee]{@link ./marquee}的动态帧率场景。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3550,12 +3549,16 @@ export class MeasureUtils {
    *
    * > **说明**
    * >
-   * > - 调用此接口时，应避免同时使用[ApplicationContext.setFontSizeScale]{@link ./application/ApplicationContext:ApplicationContext.setFontSizeScale}设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+   * > - 调用此接口时，应避免同时使用[ApplicationContext.setFontSizeScale]{@link ./application/ApplicationContext:ApplicationContext#setFontSizeScale}设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
    * >
    * > - measureText接口的计算结果始终是单行文本的宽度，入参options中配置的布局约束（如constraintWidth、maxLines）对measureText的结果没有影响。如果需要计算布局约束下的宽度，请使用[measureTextSize]{@link MeasureUtils.measureTextSize}方法。
    *
    * @param { MeasureOptions } options - 文本测量配置选项。包含文本内容（textContent）、字体大小（fontSize）等属性。constraintWidth、maxLines等布局约束属性对measureText的计算结果无影响，如需计算布局约束下的宽度，请使用measureTextSize方法。
-   * @returns { number } 文本宽度。<br>**说明：**<br>浮点数会向上取整。<br>单位：px
+   * @returns { number } 文本宽度。
+   *     <br>**说明：**
+   *     <br>浮点数会向上取整。
+   *     <br>单位：px
+   *     <br>当参数异常或内部计算失败时，会返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6045,9 +6048,9 @@ export class UIContext {
    * >
    * > 返回的UI上下文只可用于创建[自定义节点](docroot://ui/arkts-user-defined-node.md)，不能执行其他UI操作。
    *
-   * @param { common.UIAbilityContext | common.ExtensionContext } context -    *     [UIAbility]{@link @ohos.app.ability.UIAbility}或
+   * @param { common.UIAbilityContext | common.ExtensionContext } context - [UIAbility]{@link @ohos.app.ability.UIAbility}或
    *     [ExtensionAbility]{@link @ohos.app.ability.ExtensionAbility:ExtensionAbility}所对应的上下文环境。
-   * @returns { UIContext | undefined } Context of the created UI instance, or **undefined** if creation fails.
+   * @returns { UIContext | undefined } 创建的UI实例的上下文，创建失败时返回undefined。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. The number of parameters is incorrect.
    *     <br> 2. Invalid parameter type of context.

@@ -28,6 +28,8 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
  * This module provides the capability to manage web modules.
  *
+ * ## Required Permissions
+ *
  * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
  * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
@@ -5028,6 +5030,10 @@ declare namespace webview {
     /**
      * Scrolls the page by the specified amount within a specified period.
      *
+     * > **NOTE**
+     * >
+     * > Calling **scrollBy** does not trigger the nested scrolling of the parent component.
+     *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp
      * @param { number } deltaY - Amount to scroll by along the y-axis. The positive direction is downward.
@@ -6577,6 +6583,13 @@ declare namespace webview {
 
     /**
      * Scrolls the page by the specified amount and returns value to indicate whether the scrolling is successful.
+     *
+     * > **NOTE**
+     * >
+     * > - If the web page is being touched, **false** is returned. Otherwise, **true** is returned.
+     * > - If the rendering area at the same layer of the web page is being touched, **true** is returned.
+     * > - Calling **scrollByWithResult** does not trigger the nested scrolling of the parent component.
+     * > - This API does not support the high frame rate of scrolling performance.
      *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp

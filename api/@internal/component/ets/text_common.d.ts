@@ -14,7 +14,11 @@
  */
 
 /**
- * @file
+ * @file The common APIs of text components provide basic text processing capabilities, including caret style settings, 
+ * layout management, text selection control, and menu item customization. This module is suitable for scenarios that 
+ * require fine-grained control over text components, such as text editors, rich text apps, and input forms. With these 
+ * APIs, developers can customize the caret style, obtain text layout information, handle text selection, 
+ * customize the editing menu, and so on, thereby improving the text interaction experience of the app.
  * @kit ArkUI
  */
 
@@ -1570,6 +1574,16 @@ declare class TextMenuItemId {
    * @since 23 dynamic
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * ID for the quick translate input menu item. It is a level-1 menu item.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 
 /**

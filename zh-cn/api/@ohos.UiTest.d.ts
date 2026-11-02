@@ -2581,9 +2581,9 @@ declare class Component {
   isClickable(): Promise<boolean>;
 
   /**
-   * 获取控件对象可点击属性。使用Promise异步回调。
+   * 获取控件对象可长按点击属性。使用Promise异步回调。
    *
-   * @returns { Promise<boolean> } - Promise对象，返回控件对象是否可点击。true：可点击。false：不可点击。
+   * @returns { Promise<boolean> } - Promise对象，返回控件对象是否可长按点击。true：可长按点击。false：不可长按点击。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
    * @syscap SystemCapability.Test.UiTest
@@ -2907,7 +2907,7 @@ declare class Component {
    *
    * @param { On } on - 目标控件的属性要求。
    * @param { boolean } [vertical] - 默认为true，表示查找方向是纵向。false表示查找方向为横向。
-   * @param { number } [offset] - 滑动起点/终点到组件边框的偏移，默认80，单位：px，取值范围：大于等于0的整数。
+   * @param { number } [offset] - 滑动起点/终点到组件边框的偏移，默认80，单位：px，取值范围：大于等于0的整数。为负数时抛出401错误码。
    * @returns { Promise<Component> } - Promise对象，返回目标控件对象。
    * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2.
    *     Incorrect parameter types; 3. Parameter verification failed.
@@ -3109,7 +3109,7 @@ declare class Driver {
    */
   findComponents(on: On): Promise<Array<Component> | null>;
   /**
-   * 断言API，用于断言当前界面是否存在满足给出的目标属性的控件。使用Promise异步回调。
+   * 断言API，用于断言当前界面是否存在满足给出的目标属性的控件。断言失败时会抛出JS异常导致测试用例失败。使用Promise异步回调。
    *
    * @param { On } on - 目标控件的属性要求。
    * @returns { Promise<void> } - Promise对象，无返回结果。
@@ -3862,7 +3862,7 @@ declare class Driver {
   mouseScroll(p: Point, down: boolean, d: int, key1?: int, key2?: int, speed?: int): Promise<void>;
 
   /**
-   * 捕获当前屏幕的指定区域，并保存为PNG格式的图片至给出的保存路径中。使用Promise异步回调。适用于支持截屏的场景。
+   * 捕获当前屏幕的指定区域，并保存为PNG格式的图片至给出的保存路径中。使用Promise异步回调。适用于支持截屏的场景。与[screenCap]{@link Driver#screenCap}的区别在于本接口支持通过rect参数指定截图区域，而非截取全屏。
    *
    * @param { string } savePath - 文件保存路径。路径需为当前应用的[沙箱路径](docroot://file-management/app-sandbox-directory.md)。
    * @param { Rect } [rect] - 截图区域，默认为全屏。
@@ -3882,7 +3882,7 @@ declare class Driver {
   /**
    * 创建一个UI事件监听器。
    *
-   * @returns { UIEventObserver } - 返回找到的目标窗口对象。
+   * @returns { UIEventObserver } - 返回创建的UI事件监听器对象。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @syscap SystemCapability.Test.UiTest
    * @atomicservice [since 11]
@@ -4495,7 +4495,7 @@ declare class UiWindow {
   resize(wide: int, height: int, direction: ResizeDirection): Promise<void>;
 
   /**
-   * 将窗口模式切换成分屏模式。使用Promise异步回调。适用于支持切换分屏模式的窗口。
+   * 将窗口模式切换成分屏模式。可通过[resume()]{@link UiWindow#resume}恢复到之前的窗口模式。使用Promise异步回调。适用于支持切换分屏模式的窗口。
    *
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
@@ -4510,7 +4510,7 @@ declare class UiWindow {
   split(): Promise<void>;
 
   /**
-   * 将窗口最大化。使用Promise异步回调。适用于支持窗口最大化操作的窗口。
+   * 将窗口最大化。可通过[resume()]{@link UiWindow#resume}恢复到之前的窗口模式。使用Promise异步回调。适用于支持窗口最大化操作的窗口。
    *
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
@@ -4525,7 +4525,7 @@ declare class UiWindow {
   maximize(): Promise<void>;
 
   /**
-   * 将窗口最小化。使用Promise异步回调。适用于支持窗口最小化操作的窗口。
+   * 将窗口最小化。可通过[resume()]{@link UiWindow#resume}恢复到之前的窗口模式。使用Promise异步回调。适用于支持窗口最小化操作的窗口。
    *
    * @returns { Promise<void> } - Promise对象，无返回结果。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.

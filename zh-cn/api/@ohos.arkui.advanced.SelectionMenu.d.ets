@@ -14,7 +14,13 @@
  */
 
 /**
- * @file
+ * @file 文本选择菜单，适用于[RichEditor]{@link RichEditor}组件通过[bindSelectionMenu]{@link RichEditorAttribute#bindSelectionMenu}或 
+ * [Text]{@link Text}组件通过[bindSelectionMenu]{@link TextAttribute#bindSelectionMenu}绑定自定义文本选择菜单，支持编辑菜单和扩展下拉菜 
+ * 单两种类型，可通过配置实现复制、粘贴、剪切、全选等内置功能，也可通过自定义菜单项和事件回调实现扩展功能。建议绑定鼠标右键或鼠标选中方
+ * 式弹出，不支持作为普通组件单独使用。适用于富文本编辑场景，可为用户提供便捷的文本操作入口，提升文本编辑效率。
+ * 
+ * ###### 子组件
+ * 无。
  * @kit ArkUI
  */
 
