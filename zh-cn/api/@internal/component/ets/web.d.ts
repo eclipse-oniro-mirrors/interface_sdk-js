@@ -6209,8 +6209,271 @@ declare interface BlankScreenDetectionEventInfo {
 type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 
 /**
- * 文本选择内容发生变化后，通过回调返回选中的文本。
+ * 白屏的具体原因。从网络层、资源层、渲染与 JS 层、内核与进程层、容器层五个维度进行归因。
  *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare enum BlankScreenReason {
+  /**
+   * DNS解析失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  DNS_RESOLVE_FAILED = 101,
+  /**
+   * 主文档加载超时。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REQUEST_TIMED_OUT = 102,
+  /**
+   * 连接被拒绝。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_REFUSED = 103,
+  /**
+   * 连接被重置。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_RESET = 104,
+  /**
+   * 发生SSL错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  SSL_ERROR = 105,
+  /**
+   * 发生证书错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CERT_ERROR = 106,
+  /**
+   * 网络已断开。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  INTERNET_DISCONNECTED = 107,
+  /**
+   * 发生重定向循环。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REDIRECT_LOOP = 108,
+  /**
+   * 发生代理错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  PROXY_ERROR = 109,
+  /**
+   * 其他网络错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  OTHER_NETWORK_ERROR = 199,
+  /**
+   * 主文档为空。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MAIN_DOC_EMPTY = 201,
+  /**
+   * 发生HTTP 4xx错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_4XX_ERROR = 202,
+  /**
+   * 发生HTTP 5xx错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_5XX_ERROR = 203,
+  /**
+   * JavaScript全局bundle加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+  /**
+   * CSS加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSS_LOAD_FAILED = 211,
+  /**
+   * 多个资源加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MULTI_RESOURCE_LOAD_FAILED = 212,
+  /**
+   * 请求被CORS拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CORS_BLOCKED = 213,
+  /**
+   * 请求被CSP拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSP_BLOCKED = 214,
+  /**
+   * 混合内容被拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MIXED_CONTENT_BLOCKED = 215,
+  /**
+   * 发生JavaScript运行时错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_RUNTIME_ERROR = 301,
+  /**
+   * 未发生首次内容绘制。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  NO_FIRST_CONTENTFUL_PAINT = 312,
+  /**
+   * 渲染进程崩溃。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_CRASHED = 401,
+  /**
+   * 渲染进程被终止。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_KILLED = 402,
+  /**
+   * GPU进程崩溃。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_CRASHED = 403,
+  /**
+   * GPU进程看门狗超时。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+  /**
+   * Web组件尺寸为0。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  WEB_VIEW_ZERO_SIZE = 501
+}
+
+/**
+ * 白屏检测归因信息，包括页面URL、白屏根因、归因详情。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare interface MonitoredBlankScreenEventInfo {
+  /**
+   * 页面URL。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  url: string;
+
+  /**
+   * 白屏的具体原因。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  reason: BlankScreenReason;
+
+  /**
+   * 归因详情，JSON格式的字符串。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  extraMsg: string;
+}
+
+/**
+ * Web组件检测到白屏时会触发回调。
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - 检测到白屏时的详细信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+
+/**
+ * 文本选择内容发生变化后，通过回调返回选中的文本。
  * @param { string } selectionText - 所选文本。
  * @syscap SystemCapability.Web.Webview.Core
  * @since 23 dynamic
@@ -8663,6 +8926,21 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onDetectedBlankScreen(callback: OnDetectBlankScreenCallback): WebAttribute;
 
   /**
+   * Web组件检测到白屏时会触发回调。
+   *
+   * > **说明：**
+   * >
+   * > - 需配合enableBlankScreenMonitor使用。未开启白屏检测时，不会触发本回调。
+   *
+   * @param { OnMonitorBlankScreenCallback } callback - 检测到白屏时触发。事件对象包含页面URL、白屏根因、归因详情等诊断信息。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback): WebAttribute;
+
+  /**
    * 设置白屏检测的策略配置，如使能开关、检测时间和检测策略等。当属性没有显式调用时，默认关闭白屏检测。
    *
    * > **说明：**
@@ -8682,6 +8960,17 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 22 dynamic
    */
   blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig): WebAttribute;
+
+  /**
+   * 设置是否开启白屏检测。开启白屏检测后，Web组件检测到白屏时会触发回调onMonitoredBlankScreen。当属性没有显式调用时，默认关闭白屏检测。
+   *
+   * @param { boolean } enable - 是否开启白屏检测。true表示开启，false表示关闭。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  enableBlankScreenMonitor(enable: boolean): WebAttribute;
 
   /**
    * Set whether to enable the back-to-top feature for web component when the status bar is touched.
