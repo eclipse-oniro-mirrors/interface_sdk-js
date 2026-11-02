@@ -11017,7 +11017,7 @@ declare namespace media {
 
     /**
      * 录屏指定是否以HDR格式输出图像。<br>
-     * true表示图像为HDR格式，false表示图像为SDR格式。<br>默认是false。<br>
+     * true表示图像为HDR格式，false表示图像为SDR格式。<br>默认为false。
      *
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
      * @stagemodelonly
