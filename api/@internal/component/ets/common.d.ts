@@ -20918,7 +20918,7 @@ declare class CommonMethod<T> {
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 dynamic
+   * @since 26.1.0 dynamic
    */
   agentControlMode(value: AgentControlMode): T;
 

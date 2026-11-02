@@ -11171,7 +11171,7 @@ export declare interface CommonMethod {
      * @returns { this } Current component.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 26.1.0 static
      */
     default agentControlMode(value: AgentControlMode | undefined): this;
 
