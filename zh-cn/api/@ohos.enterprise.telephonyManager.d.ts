@@ -107,7 +107,7 @@ declare namespace telephonyManager {
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。数组总长度不能超过1000。例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个。
+   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前数组总长度不能超过1000，例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个；API 26.1.0及以后数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -194,15 +194,14 @@ declare namespace telephonyManager {
    *
    * 以下情况下，通过本接口添加通话呼入的允许或禁用名单，会报策略冲突：
    *
-   * 1. 已经通过[setDisallowedPolicy]{@link @ohos.enterprise.restrictions:restrictions.setDisallowedPolicy}接口禁用了设备通话能力，再通过本接口添加通话呼入的禁用或允许名单，返回203错误码。
-   * 通过[setDisallowedPolicy]{@link @ohos.enterprise.restrictions:restrictions.setDisallowedPolicy}接口解除禁用设备通话能力后，可解除冲突。
+   * 1. 已经通过[setDisallowedPolicy]{@link @ohos.enterprise.restrictions:restrictions.setDisallowedPolicy}接口禁用了设备通话能力，再通过本接口添加通话呼入的禁用或允许名单，返回203错误码。通过[setDisallowedPolicy]{@link @ohos.enterprise.restrictions:restrictions.setDisallowedPolicy}接口解除禁用设备通话能力后，可解除冲突。
    * 2. 已经通过本接口设置了通话呼入的禁用名单，再通过本接口添加通话呼入允许名单，返回9200010错误码。通过[removeIncomingCallPolicyNumbers]{@link telephonyManager.removeIncomingCallPolicyNumbers}接口将之前设置的通话呼入禁用名单移除后，可解除冲突。
    * 3. 已经通过本接口设置了通话呼入的允许名单，再通过本接口添加通话呼入禁用名单，返回9200010错误码。通过[removeIncomingCallPolicyNumbers]{@link telephonyManager.removeIncomingCallPolicyNumbers}接口将之前设置的通话呼入允许名单移除后，可解除冲突。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。数组总长度不能超过1000。例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个。
+   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前，数组总长度不能超过1000，例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个；API 26.1.0及以后，数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -382,6 +381,135 @@ declare namespace telephonyManager {
    * @since 26.0.0
    */
   function getDefaultData(admin: Want): number;
+
+  /**
+   * 根据指定的时间范围和电话号码查询通话记录。
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
+   * @param { Want } admin - 企业设备管理扩展组件。
+   * @param { TelephonyQueryConfig } queryConfig - 查询选项，包括时间范围和电话号码。
+   * @returns { Promise<Array<CallLogInfo>> } 符合查询条件的通话记录列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service execution timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCallLogs(admin: Want, queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
+
+  /**
+   * 查询通话记录的选项。
+   * 提供电话相关查询的通用查询参数。
+   *
+   * @property { number } startTime - Query start time (timestamp, in seconds). Matched by call log creation time.
+   * @property { number } endTime - Query end time (timestamp, in seconds). Matched by call log creation time.
+   * @property { string } [telephoneNumber] - Telephone number to filter by (optional).
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface TelephonyQueryConfig {
+    /**
+     * 查询开始时间（时间戳，单位秒）。按通话记录创建时间匹配。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    startTime: number;
+
+    /**
+     * 查询结束时间（时间戳，单位秒）。按通话记录创建时间匹配。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    endTime: number;
+
+    /**
+     * 电话号码，用于过滤查询结果。不传则查询所有号码的通话记录。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber?: string;
+  }
+
+  /**
+   * 通话记录信息。
+   * 提供通话记录的详细信息，包括通话时长、通话方向（呼入/呼出）、时间戳以及使用的SIM卡槽位。
+   *
+   * @property { number } createTime - Call log creation time (timestamp, in seconds).
+   * @property { number } startTime - Call start time (timestamp, in seconds). 0 if the call was not connected.
+   * @property { number } endTime - Call end time (timestamp, in seconds). For unanswered calls, this is the hangup time.
+   * @property { boolean } isIncoming - Call direction: **TRUE** indicates incoming, **false** indicates outgoing.
+   * @property { number } slotId - SIM card slot ID.
+   * @property { string } telephoneNumber - Telephone number.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface CallLogInfo {
+    /**
+     * 通话记录创建时间（时间戳，单位秒）。来电时为开始振铃时刻，去电时为拨出时刻。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    createTime: number;
+
+    /**
+     * 通话接通时间（时间戳，单位秒）。通话未接通时为0。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    startTime: number;
+
+    /**
+     * 通话结束时间（时间戳，单位秒）。通话未接通时为挂断时间。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    endTime: number;
+
+    /**
+     * 通话方向：**true**表示呼入，**false**表示呼出。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isIncoming: boolean;
+
+    /**
+     * SIM卡槽ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    slotId: number;
+
+    /**
+     * 对方电话号码。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+  }
 }
 
 export default telephonyManager;
