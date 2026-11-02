@@ -2817,6 +2817,28 @@ declare namespace util {
      * @since 26.2.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
+
+    /**
+     *
+     * Interface of suggesting current ArkTS VM to perform proactive GC.
+     * The VM determines whether to trigger GC based on the memory status and urgency level.
+     * The default value of param is Urgency.LOW.
+     * High-frequency calling is not recommended because GC may cause high performance overhead.
+     *
+     * @param { UrgencyLevel } [level] - Urgency level.<br>The following values are available:
+     *     <br>- **Urgency.LOW** (default): low urgency level, GC threshold is relatively high,
+     *     suitable for scenarios where the developer expects to proactively trigger GC to reclaim some dead objects,
+     *     but the ArkTS memory pressure of the application is under control.
+     *     <br>- **Urgency.MEDIUM**: medium urgency level, GC threshold is between LOW and HIGH.
+     *     <br>- **Urgency.HIGH**: high urgency level, GC threshold is low,
+     *     suitable for scenarios the ArkTS memory pressure of the application is extremely high,
+     *     developers expect the system to trigger GC as soon as possible to reclaim memory.
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static hintGC(level?: UrgencyLevel): void;
   }
 
   /**
@@ -2915,6 +2937,50 @@ declare namespace util {
      */
     processHeapThreshold?: number;
   }
+
+  /**
+   * Enumerates the urgency level of hint GC.
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamiconly
+   */
+  enum UrgencyLevel {
+    /**
+     * LOW level, GC threshold is relatively high, but GC is still more likely to be triggered than normal
+     * memory thresholds.
+     * It is suitable for scenarios where the developer expects to proactively trigger GC to reclaim some dead objects,
+     * but the ArkTS memory pressure of the application is under control.
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    LOW = 0,
+    /**
+     * MEDIUM level, The GC triggering threshold is between LOW and HIGH.
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    MEDIUM = 1,
+    /**
+     * HIGH level, the gc triggering threshold is low.
+     * It is suitable for scenarios the ArkTS memory pressure of the application is extremely high, developers expect
+     * the system to trigger GC as soon as possible to reclaim memory.
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    HIGH = 2,
+  }
+
 }
 
 import type { Callback } from './@ohos.base';

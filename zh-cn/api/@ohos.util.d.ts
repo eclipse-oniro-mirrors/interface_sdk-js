@@ -2580,6 +2580,46 @@ declare namespace util {
   }
 
   /**
+   * 枚举，提示触发GC的紧急程度。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamiconly
+   */
+  enum UrgencyLevel {
+    /**
+     * 紧急程度低，GC触发阈值较高但仍低于正常的GC触发阈值。
+     * 适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    LOW = 0,
+    /**
+     * 紧急程度中等，GC触发阈值介于LOW和HIGH之间。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    MEDIUM = 1,
+    /**
+     * 紧急程度高，GC触发阈值低。
+     * 适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    HIGH = 2,
+  }
+
+  /**
    * 为开发者提供虚拟机维测能力的类。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -2685,6 +2725,25 @@ declare namespace util {
      * @since 26.2.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
+
+    /**
+     * 提示当前ArkTS虚拟机主动触发GC的接口。
+     * 虚拟机根据当前内存状态和紧急程度决定是否触发GC。
+     * 默认参数值是Urgency.LOW。
+     * 不推荐高频调用，因为GC可能带来较高的性能开销
+     *
+     * @param { UrgencyLevel } [level] - 紧急程度.<br>可选的参数值如下:
+     *     <br>- **Urgency.LOW** (默认值): 紧急程度低, GC触发阈值相对较高,
+     *     适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *     <br>- **Urgency.MEDIUM**: 紧急程度中等, GC触发阈值介于LOW和HIGH之间。
+     *     <br>- **Urgency.HIGH**: 紧急程度高, GC触发阈值低,
+     *     适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static hintGC(level?: UrgencyLevel): void;
   }
 
   /**
