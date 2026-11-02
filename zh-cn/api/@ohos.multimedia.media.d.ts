@@ -11014,6 +11014,16 @@ declare namespace media {
      * @since 26.1.0 dynamic&static
      */
     contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
+
+    /**
+     * 录屏指定是否以HDR格式输出图像。<br>
+     * true表示图像为HDR格式，false表示图像为SDR格式。<br>默认是false。<br>
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    enableHDR?: boolean;
   }
 
 
