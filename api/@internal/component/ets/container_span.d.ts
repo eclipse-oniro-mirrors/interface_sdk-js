@@ -24,11 +24,6 @@
  * in a unified manner. It applies to scenarios where a unified background style needs to be set for a combination of
  * text segments and images.
  *
- * > **NOTE**
- * >
- * > - This component is supported since API version 11. Newly added APIs will be marked with a superscript to indicate
- * > their.
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -103,11 +98,6 @@ declare class ContainerSpanAttribute {
  * background colors and rounded corners of multiple [Span]{@link ./span} and [ImageSpan]{@link ./image_span} components
  * in a unified manner. It applies to scenarios where a unified background style needs to be set for a combination of
  * text segments and images.
- *
- * > **NOTE**
- * >
- * > - This component is supported since API version 11. Newly added APIs will be marked with a superscript to indicate
- * > their
  *
  * ###### Child Components
  *

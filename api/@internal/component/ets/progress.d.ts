@@ -788,8 +788,6 @@ declare interface ProgressStyleMap {
  * data loading, and task processing. With rich style and animation configurations, progress visualization can be
  * quickly implemented to improve user experience.
  *
- * > **NOTE**
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
  * @form [since 9]
@@ -1002,11 +1000,9 @@ declare interface ProgressConfiguration extends CommonConfiguration<ProgressConf
  * data loading, and task processing. With rich style and animation configurations, progress visualization can be
  * quickly implemented to improve user experience.
  *
- * > **NOTE**
- *
  * ###### Child Components
  *
- * Not supported
+ * Not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

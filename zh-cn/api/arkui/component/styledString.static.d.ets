@@ -133,6 +133,10 @@ export declare class StyledString {
    各样式对象的数组。<br/>**说明：** <br/>当指定范围属性字符串未设置任何样式，则返回空数组。<br/>当start和length越
    *     界或者必填传入undefined时，会抛出异常；<br/>当styledKey传入异常值或undefined时，会抛出异常。<br/>当styledKey为CustomSpan时，返回的是创建CustomSpan时传入
    *     的样式对象，即修改该样式对象也会影响实际的显示效果。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameters types.
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -146,6 +150,7 @@ export declare class StyledString {
    两个属性字符串是否相等。<br/>true表示相等，false表示不相等。<br/>**说明：** <br/>当属性字符串的文本及样式均一致，视为相等。<br/>不比较
    *     [GestureStyle]{@link GestureStyle}，当属性字符串配置了不同事件，文本和其他样式相同时，亦视为相等。<br/>当比较[CustomSpan]{@link CustomSpan}或
    *     [LeadingMarginSpan]{@link LeadingMarginSpan}时，比较的是地址，地址相等，视为相等。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -158,6 +163,10 @@ export declare class StyledString {
    * @returns { StyledString | undefined }
    子属性字符串。<br/>**说明：** <br/>当start为合法入参时，length的默认值是被查询属性字符串对象的长度与start的值的差。<
    *     br/>当start和length越界或者必填传入undefined时，会抛出异常。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameters types.
+   *     <br> 3. Parameter verification failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -205,6 +214,10 @@ export declare class StyledString {
    * @param { string } html - html格式的字符串。
    * @returns { Promise<StyledString | undefined> }
    *     [Promise](docroot://arkts-utils/async-concurrency-overview.md#promise)对象，属性字符串。
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameters types.
+   *     <br> 3. Parameter verification failed.
    * @throws { BusinessError } 170001 - Convert Error.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

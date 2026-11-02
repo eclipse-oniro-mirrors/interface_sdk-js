@@ -14,7 +14,17 @@
  */
 
 /**
- * @file
+ * @file The text selection menu is used for the [RichEditor]{@link RichEditor} component 
+ * through [bindSelectionMenu]{@link RichEditorAttribute#bindSelectionMenu} or the 
+ * [Text]{@link Text} component through [bindSelectionMenu]{@link TextAttribute#bindSelectionMenu} to bind a custom 
+ * text selection menu. It supports two types: edit menu and extended dropdown menu. Built-in functions such as copy, 
+ * paste, cut, and select all can be implemented through configuration, and extended functions can be implemented 
+ * through custom menu items and event callbacks. It is recommended to trigger the menu by right-clicking or selecting 
+ * text with the mouse. It cannot be used as a standalone component. It is suitable for rich text editing scenarios, 
+ * providing users with convenient text operation access and improving text editing efficiency.
+ * 
+ * ###### Child Components
+ * Not supported
  * @kit ArkUI
  */
 

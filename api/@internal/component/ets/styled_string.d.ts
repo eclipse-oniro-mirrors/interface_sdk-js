@@ -14,13 +14,34 @@
  */
 
 /**
- * @file
+ * @file A styled string is an object that associates text styles with text content. Styles specify text ranges through 
+ * **start** and **length**, and multiple styles can be applied to the same range in a stacked manner. It can be 
+ * bound to a **Text** component through [setStyledString]{@link ./text:setStyledString} in 
+ * [TextController]{@link ./text:TextController}, or bound to a [RichEditor]{@link ./rich_editor} component through 
+ * [setStyledString]{@link ./rich_editor:setStyledString} in [RichEditorStyledStringController]
+ * {@link ./rich_editor:RichEditorStyledStringController}. It is suitable for scenarios that require flexible text style
+ * settings, such as rich text editing, chat message display, and document annotation. It supports dynamic modification 
+ * of style content, style stacking, and conflict handling.
+ * 
+ * >  **NOTE**
+ * > - Since API version 20, the text layout information of a styled string can be obtained through
+ * [getParagraphs]{@link MeasureUtils#getParagraphs}.
+ * >
+ * > - Styled strings are not supported in worker threads.
+ * >
+ * > - When a styled string is bound through a controller, the binding takes effect only after the layout is complete.
+ * When [measure]{@link ./FrameNode:measure} and **setStyledString** are used at the same time, developers need to
+ * determine that the layout is complete through [@ohos.arkui.inspector (Layout Callback)]{@link @ohos.arkui.inspector}
+ * before binding the styled string.
  * @kit ArkUI
  */
-
 /**
  * Defines a custom marshalling object for styled strings, which you need to define marshalling and unmarshalling
  * methods.
+ *
+ * | Type | Description  |
+ * | ------ | ---------- |
+ * | [UserDataSpan]{@link UserDataSpan} | Custom data span of UserDataSpan. |
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -32,7 +53,9 @@ declare type StyledStringMarshallingValue = UserDataSpan;
 /**
  * Defines a callback for marshalling [StyledStringMarshallingValue]{@link StyledStringMarshallingValue}.
  *
- * @param { StyledStringMarshallingValue } marshallableVal - Object to be marshaled.
+ * @param { StyledStringMarshallingValue } marshallableVal - UserDataSpan object in the styled string that requires
+ *     custom serialization. In the callback function, the developer selects the corresponding serialization API based
+ *     on the type of this parameter to convert it into an ArrayBuffer.
  * @returns { ArrayBuffer } Marshaled data of [StyledStringMarshallingValue]{@link StyledStringMarshallingValue}.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -46,8 +69,8 @@ declare type StyledStringMarshallCallback = (marshallableVal: StyledStringMarsha
  * [StyledStringMarshallingValue]{@link StyledStringMarshallingValue}.
  *
  * @param { ArrayBuffer } buf - Marshaled data of [StyledStringMarshallingValue]{@link StyledStringMarshallingValue}.
- * @returns { StyledStringMarshallingValue } [StyledStringMarshallingValue]{@link StyledStringMarshallingValue} obtained
- *     after unmarshalling.
+ * @returns { StyledStringMarshallingValue } Custom data fragment object obtained through deserialization, used to
+ *     restore user-defined style data.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly
@@ -57,6 +80,18 @@ declare type StyledStringUnmarshallCallback = (buf: ArrayBuffer) => StyledString
 
 /**
  * StyledString
+ *
+ * ###### Rules of Use
+ * * If a styled string conflicts with the current style settings in a component, the style set in the styled string
+ * takes effect.
+ * * If a styled string conflicts with the child components in [Text]{@link ./text}, the style set in the styled string
+ * is applied to the **Text** component, and style settings of the child components, including [Span]{@link ./span}, are
+ * ignored.
+ * * The [@State](docroot://ui/state-management/arkts-state.md) decorator is not supported.
+ * * Define **StyledString** as a member variable to prevent it from being destroyed when the application moves to the
+ * background.
+ * * Creation before [loadContent()]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage,
+ * callback: AsyncCallback<void>)} is not supported
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -199,24 +234,19 @@ declare class StyledString {
 
   /**
    * Converts an HTML-formatted string into a styled string. HTML tags are mapped to the corresponding styled string
-   * styles (for example, bold tags are mapped to **TextStyle**, and decoration tags are mapped to **DecorationStyle**).
-   * The HTML tags currently supported for conversion are: \<p>, \<span>, \<img>, \
-   *
-   * , \<strong>, \<b>, \<a>, \<i>, \<em>, \<s>, \<u>, \<del>, \<sup>, \<sub>, \<cite>, \<dfn>, \<small>, \<h1>, \<h2>,
-   * \<h3>, \<h4>, \<h5>, \<h6>, \, \, \<li>. The style attribute in tags can be converted into the corresponding styled
-   * string styles.
+   * styles (for example, bold tags are mapped to **TextStyle**, and decoration tags are mapped to
+   * **DecorationStyle**).For the scope of supported HTML tags, see the table below. Different tags support different
+   * starting API versions.
    *
    * For details about how to use this API, see
-   * [Example 12: Implementing Conversion Using fromHtml and toHtml](docroot://reference/apis-arkui/arkui-ts/ts-universal-styled-string.md#example-12-implementing-conversion-using-fromhtml-and-tohtml)
-   * and
-   * [Example 18: Conversion Using fromHtml](docroot://reference/apis-arkui/arkui-ts/ts-universal-styled-string.md#example-18-conversion-using-fromhtml).
-   *
+   * [Example 12: Implementing Conversion Using fromHtml and toHtml]{@link StyledString}
+   * and [Example 18: Conversion Using fromHtml]{@link StyledString}.
    *
    * | Tag Name| Description                  |
    * | ------------- | ---------------------------- |
    * | \<p\>       | Paragraph, separates text paragraphs.       |
-   * | \<span\>    | Inline text supporting style configuration. In API version 17 and earlier, the **background-color** attribute set 
-   * using **\<span\>** does not take effect.    |
+   * | \<span\>    | Inline text supporting style configuration. In API version 17 and earlier, the **background-color**
+   * attribute set using **\<span\>** does not take effect.    |
    * | \<img\>     | Image.                   |
    * | \<strong\>  | Bolds text.                   |
    * | &lt;br&gt;<sup>20+</sup>      | Line break.                       |
@@ -229,18 +259,19 @@ declare class StyledString {
    * | \<del\><sup>20+</sup>     | Strikethrough.            |
    * | \<sup\><sup>20+</sup>     | Superscript text.                   |
    * | \<sub\><sup>20+</sup>     | Subscript text.                   |
-   * | \<cite\>    | Italic text.        |
-   * | \<dfn\>     | Italic text.        |
-   * | \<small\>   | Font‑size reduction tag. The font size is scaled to 0.8 times the parent container font size, and nesting is supported.        |
-   * | \<h1\>      | Level-1 heading.        |
-   * | \<h2\>      | Level-2 heading.        |
-   * | \<h3\>      | Level-3 heading.        |
-   * | \<h4\>      | Level-4 heading.        |
-   * | \<h5\>      | Level-5 heading.        |
-   * | \<h6\>      | Level-6 heading.        |
-   * | \<ol\>      | Ordered list.        |
-   * | \<ul\>      | Unordered list.        |
-   * | \<li\>      | List item.          |
+   * | \<cite\>    | Italic text.<br>**Since:** 26.0.0        |
+   * | \<dfn\>     | Italic text.<br>**Since:** 26.0.0        |
+   * | \<small\>   | Font‑size reduction tag. The font size is scaled to 0.8 times the parent container font size, and
+   * nesting is supported.<br>**Since:** 26.0.0        |
+   * | \<h1\>      | Level-1 heading.<br>**Since:** 26.0.0        |
+   * | \<h2\>      | Level-2 heading.<br>**Since:** 26.0.0        |
+   * | \<h3\>      | Level-3 heading.<br>**Since:** 26.0.0        |
+   * | \<h4\>      | Level-4 heading.<br>**Since:** 26.0.0        |
+   * | \<h5\>      | Level-5 heading.<br>**Since:** 26.0.0        |
+   * | \<h6\>      | Level-6 heading.<br>**Since:** 26.0.0        |
+   * | \<ol\>      | Ordered list.<br>**Since:** 26.0.0        |
+   * | \<ul\>      | Unordered list.<br>**Since:** 26.0.0        |
+   * | \<li\>      | List item.<br>**Since:** 26.0.0          |
    *
    * @param { string } html - HTML-formatted string.
    * @returns { Promise<StyledString> } Styled string. **resolve** returns the converted styled string; **reject**
@@ -530,12 +561,29 @@ declare class TextStyle {
   /**
    * Text font weight of the styled string.
    *
-   * Default value: **400**
+   * Default value: **400**.
    *
    * **NOTE**
-   *
    * The return value is of the string type. For details about the relationship between the return value and the set
    * value, see the table below.
+   *
+   * <br>| Parameter       | Return Value|
+   * | ----------- | ----------- |
+   * | 100 |  '0' |
+   * | 200  |  '1'  |
+   * | 300 |  '2'  |
+   * | 400  |  '3'  |
+   * | 500    |  '4'  |
+   * | 600  |  '5'  |
+   * | 700  |  '6'  |
+   * | 800    |  '7'  |
+   * | 900  |  '8'  |
+   * | FontWeight.Bold or 'bold' |  '9'  |
+   * | FontWeight.Normal or 'normal' |  '10' |
+   * | FontWeight.Bolder or 'bolder' |  '11'  |
+   * | FontWeight.Lighter or 'lighter' |  '12'  |
+   * | FontWeight.Medium or 'medium' |  '13'  |
+   * | FontWeight.Regular or 'regular' |  '14'  |.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
