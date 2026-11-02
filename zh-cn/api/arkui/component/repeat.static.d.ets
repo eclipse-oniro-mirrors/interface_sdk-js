@@ -338,6 +338,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @param { RepeatArray<T> } arr - 数据源数组
    * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -350,6 +351,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。
    * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.1.0 staticonly
    */
@@ -359,10 +361,40 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * 通知Repeat已完成属性设置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
   applyAttributesFinish(): void;
+}
+
+/**
+ * Repeat组件的控制器。通过[RepeatOptions]{@link RepeatOptions}中的controller字段将控制器绑定到Repeat组件上，
+ * 需要清理缓存时调用[clearCache]{@link RepeatController#clearCache}清理Repeat组件复用池中的节点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare class RepeatController {
+
+  /**
+   * 构造函数，用于创建一个RepeatController对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  constructor();
+
+  /**
+   * 清理该控制器绑定的Repeat组件复用池中的节点。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(): void;
 }
 
 /**
@@ -385,6 +417,15 @@ export interface RepeatOptions {
    * @since 26.1.0 static
    */
   allowReuseInAnimation?: boolean;
+  /**
+   * 绑定到Repeat组件上的控制器。绑定后，需要清理缓存时可调用
+   * [clearCache]{@link RepeatController#clearCache}清理Repeat组件复用池中的节点。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  controller?: RepeatController;
 }
 
 /**
@@ -415,11 +456,12 @@ export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
 export declare function Repeat<T>(arr: RepeatArray<T>, options?: RepeatOptions): RepeatAttribute<T>;
 
 /**
-  * 定义Repeat组件。需要在组件属性设置开始时调用setRepeatOptions，并在组件属性设置结束时调用applyAttributeFinish。
+  * 定义Repeat组件。需要在组件属性设置开始时调用setRepeatOptions，并在组件属性设置结束时调用applyAttributesFinish。
   *
  * @param { CustomBuilderT<RepeatAttribute<T>> } style - 用于设置Repeat属性的回调。
  * @returns { RepeatAttribute<T> } Repeat属性实例。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
  * @since 26.0.1 staticonly
  */

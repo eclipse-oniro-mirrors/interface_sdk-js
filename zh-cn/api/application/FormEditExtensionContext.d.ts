@@ -76,6 +76,7 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	 * @param { string } color - 要设置的背景颜色。该值是一个十六进制 RGB 或 ARGB 颜色代码，不区分大小写，例如 **#00FF00** 或 **#FF00FF00**。
 	 * @returns { Promise<void> } Promise对象，无返回结果。
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
+	 * @throws { BusinessError } 16501026 - Invalid color value.
 	 * @syscap SystemCapability.Ability.Form
 	 * @stagemodelonly
 	 * @since 26.1.0 dynamic&static

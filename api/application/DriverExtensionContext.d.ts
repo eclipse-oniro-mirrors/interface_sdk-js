@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,7 +14,21 @@
  */
 
 /**
- * @file Defines the context of driver extension
+ * ###### How to Use
+ *
+ * Before using **DriverExtensionContext**, you need to obtain it through a **DriverExtensionAbility** child class
+ * instance.
+ *
+ * ```ts
+ *   let context: DriverExtensionContext | undefined;
+ *   class EntryAbility extends DriverExtensionAbility {
+ *     onInit() {
+ *       context = this.context; // Obtain DriverExtensionContext.
+ *     }
+ *   }
+ * ```
+ *
+ * @file Driver Extension Context
  * @kit DriverDevelopmentKit
  */
 
@@ -23,11 +37,9 @@ import ExtensionContext from './ExtensionContext';
 /**
  * The **DriverExtensionContext** module provides the context of **DriverExtensionAbility**. It inherits from
  * **ExtensionContext**.
+ *
  * The **DriverExtensionContext** module provides the operations that need to be actively initiated in the
  * **DriverExtensionAbility** implementation.
- *
- * > **NOTE**
- * > - The APIs of this module can be used only in the stage model.
  *
  * @syscap SystemCapability.Driver.ExternalDevice
  * @StageModelOnly
@@ -45,6 +57,7 @@ declare class DriverExtensionContext extends ExtensionContext {
    */
   updateDriverState(): void;
 }
+
 /**
  * Define a DriverExtensionContext.
  *

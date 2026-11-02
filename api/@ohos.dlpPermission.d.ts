@@ -162,7 +162,17 @@ declare namespace dlpPermission {
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 10
          */
-        FULL_CONTROL = 3
+        FULL_CONTROL = 3,
+        /**
+         * The user has atomic control on the file, enabling fine-grained permission management
+         * via DlpAtomicPermissionType bit masks.
+         * This provides more granular control compared to FULL_CONTROL which grants all permissions.
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_CONTROL = 4
     }
     /**
      * Represents the permission information about a DLP file.
@@ -931,11 +941,11 @@ declare namespace dlpPermission {
      *     out of range, error code 401 is thrown.
      * @param { number } userId - Current user ID, which is the system account ID obtained by the account subsystem. The
      *     default super user ID is **100**.<br>The value range is [0, 2<sup>31</sup>-1]. If the value is out of range,
-     *     the excess part will be truncated. If the value of **userId** is less than 0, an error log is generated, and
-     *     the function stops running.
-     * @param { number } appIndex - DLP sandbox index, which is the value returned after **installDLPSandbox** is
-     *     successfully called. It is used to identify the installed DLP sandbox. The value range is [1000, 1100].
-     *     If the value of **appIndex** is less than 0, an error log is generated, and the function stops running.
+     *     the excess part will be truncated. If the value of the passed parameter is less than 0, an error log is
+     *     generated.
+     * @param { number } appIndex - DLP sandbox index, which is the value returned after installDLPSandbox is successfully
+     *     called. It is used to identify the installed DLP sandbox. The value range is [1000, 1100]. If the value is out
+     *     of range, an error log is generated.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -965,11 +975,10 @@ declare namespace dlpPermission {
      *     out of range, error code 401 is thrown.
      * @param { number } userId - Current user ID, which is the system account ID obtained by the account subsystem. The
      *     default super user ID is **100**. The value range is [0, 2<sup>31</sup>-1]. If the value is out of range, the
-     *     excess part will be truncated. If the value of **userId** is less than 0, an error log is generated, and
-     *     the function stops running.
+     *     excess part will be truncated. If the value of the passed parameter is less than 0, an error log is generated.
      * @param { number } appIndex - DLP sandbox index, which is the value returned after **installDLPSandbox** is
      *     successfully called. It is used to identify the installed DLP sandbox. The value range is [1000, 1100].
-     *     If the value of **appIndex** is less than 0, an error log is generated, and the function stops running.
+     *     If the value is out of range, an error log is generated.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the DLP sandbox uninstallation
      *     is successful, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 201 - Permission denied.
@@ -1147,6 +1156,18 @@ declare namespace dlpPermission {
          * @since 10
          */
         permExpiryTime: number;
+        /**
+         * Indicates the atomic permission control bit mask for DLP files. The value is a bit mask formed
+         * by bitwise OR operator (|) of the DlpAtomicPermissionType flags, which control read, edit, copy,
+         * screenshot, print, and application-level permissions respectively.
+         * For example, `DlpAtomicPermissionType.ATOMIC_READ | DlpAtomicPermissionType.ATOMIC_COPY`
+         * grants both read and copy permissions. Default value is 0, indicating no atomic permissions are granted.
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        atomicDlpFileAccess?: number;
     }
     /**
      * Represents the authorization information.
@@ -2439,5 +2460,91 @@ declare namespace dlpPermission {
      * @since 26.0.1
      */
     function processPluginCommand(code: PluginCmd, message: string): Promise<string>;
+
+    /**
+   * Enumerates atomic permissions for DLP files, including user operation and application permission control.
+   * This enumeration supports bitwise OR operations to combine multiple permissions.
+   *
+   * @syscap SystemCapability.Security.DataLossPrevention
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export enum DlpAtomicPermissionType {  
+    /**
+     * Atomic permission to read files.
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_READ = 0x01,
+
+    /**
+     * Atomic permission to edit files.
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_EDIT = 0x02,
+
+    /**
+     * Atomic permission to copy file content.
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_COPY = 0x04,
+    
+    /**
+     * Atomic permission to take file screenshots.
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_SCREENSHOT = 0x08,
+    
+    /**
+     * Atomic permission to print files.
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_PRINT = 0x10,
+
+    /**
+     * Atomic permission to allow sandbox applications to access system services that are otherwise restricted.
+     * When accessing a DLP file, the system creates an isolated sandbox clone of the application that inherits
+     * data, configuration, and permissions from the original application.
+     * This flag enables the sandbox to access system services within the inherited permissions.
+     * For example, if the original application does not have the use Bluetooth permission, the sandbox application
+     * cannot call Bluetooth-related APIs even with this flag enabled.
+     * Specifically, the following permissions are covered:
+     * - access Internet, set Wi-Fi configuration, set Wi-Fi information, and manage Wi-Fi hotspot permissions.
+     * - use Bluetooth, manage Bluetooth, access Bluetooth, and discover Bluetooth permissions.
+     * - access NearLink and manage NearLink permissions.
+     * - use cloud common service, use cloud backup service, use cloud drive service, cloud file sync, and
+     * cloud file sync manager permissions.
+     * - send messages, receive SMS, receive MMS, and receive WAP message permissions.
+     * - write audio, write document, write image/video, and write media permissions.
+     * - read/write download directory, read/write desktop directory, and read/write documents directory permissions.
+     * - write whole calendar permission.
+     * - proxy authorization URI permission.
+     * - file access manager permission.
+     * - distributed data sync permission.
+     * - NFC tag permission.
+     *
+     * This permission can be combined with other atomic permissions using bitwise OR operation.
+     * see [DLP Service Development](docroot://security/DataProtectionKit/dlp-guidelines.md)
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ATOMIC_APP_PERMISSION = 0x20
+  }
 }
 export default dlpPermission;

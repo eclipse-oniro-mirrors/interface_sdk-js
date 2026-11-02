@@ -325,65 +325,6 @@ declare namespace systemTimer {
      */
     name?: string;
   }
-
-  /**
-   * Sets the enabled state of the power-on timers that match the conditions specified in **options**. This API uses
-   * a promise to return the result.
-   *
-   * The matching conditions and enabled state are specified through {@link PowerOnTimerEnabledOptions}. When the
-   * enabled state is set to **false**, the matching power-on timers will no longer be triggered at device power-on,
-   * but the timers themselves are not deleted. When the enabled state is set to **true**, the matching power-on
-   * timers will be triggered at device power-on again. Only timers that meet the power-on timer conditions are
-   * restored.
-   *
-   * > **NOTE**
-   * > The enabled state set by this API is valid only during the current device run. After the device is restarted,
-   * > the enabled state needs to be set again.
-   *
-   * @param { PowerOnTimerEnabledOptions } [options] - Options for enabling or disabling the power-on timer, including
-   *     the matching conditions and the enabled state. See {@link PowerOnTimerEnabledOptions}.
-   *     If this parameter is not specified, all power-on timers are enabled.
-   * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @syscap SystemCapability.MiscServices.Time
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  function setPowerOnTimerEnabled(options?: PowerOnTimerEnabledOptions): Promise<void>;
-
-  /**
-   * Defines the options for {@link systemTimer.setPowerOnTimerEnabled}.
-   *
-   * @syscap SystemCapability.MiscServices.Time
-   * @systemapi Hide this for inner system use.
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  interface PowerOnTimerEnabledOptions {  
-    /**
-     * Timer name. The value cannot be an empty string, and the maximum length is 64 bytes.
-     * If this parameter is not specified, the operation applies to all power-on timers.
-     *
-     * @syscap SystemCapability.MiscServices.Time
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    timerName?: string;
-
-    /**
-     * Whether to enable the power-on timer. The value **true** means to add the timer back to the power-on timer
-     * list, and **false** means to remove the timer from the power-on timer list.
-     * If this parameter is not specified, the default value is **true**.
-     *
-     * @syscap SystemCapability.MiscServices.Time
-     * @systemapi Hide this for inner system use.
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    enable?: boolean;
-  }
 }
 
 export default systemTimer;

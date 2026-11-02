@@ -14,7 +14,21 @@
  */
 
 /**
- * @file
+ * @file The **Counter** component is used for precise numerical value adjustment. It supports four styles: list, 
+ * compact, inline numeric, and inline date, and is suitable for scenarios such as shopping quantity adjustment, 
+ * parameter setting, and date selection. It provides flexible style configuration and event callback capabilities.
+ *
+ * ###### Child Components
+ * Not supported
+ *
+ * > **NOTE**
+ * >
+ * > - If the **Counter** component has [universal attributes]{@link CommonMethod} and 
+ * > [universal events]{@link CommonMethod} set, the compilation toolchain generates an additional
+ * > node named \_\_Common\_\_ and attaches the universal attributes or events to \_\_Common\_\_ instead of directly
+ * > applying them to the **Counter** component. This may cause the universal attributes or events to not take effect or
+ * > behave unexpectedly. Therefore, setting universal attributes and events for the **Counter** component is not
+ * > recommended.
  * @kit ArkUI
  */
 
@@ -659,18 +673,7 @@ declare class CounterOptions {
 }
 
 /**
- * The **Counter** component is used for precise numerical value adjustment. It supports four styles: list, compact,
- * inline numeric, and inline date, and is suitable for scenarios such as shopping quantity adjustment, parameter
- * setting, and date selection. It provides flexible style configuration and event callback capabilities.
- *
- * > **NOTE**
- * >
- * > - If the **Counter** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} set, the compilation toolchain generates an additional
- * > node named \_\_Common\_\_ and attaches the universal attributes or events to \_\_Common\_\_ instead of directly
- * > applying them to the **Counter** component. This may cause the universal attributes or events to not take effect or
- * > behave unexpectedly. Therefore, setting universal attributes and events for the **Counter** component is not
- * > recommended.
+ * Creates a **Counter** component instance.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

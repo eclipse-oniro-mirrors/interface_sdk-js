@@ -36,7 +36,8 @@ declare class ChildProcess {
    * Entrypoint method of the child process. This callback is triggered when the child process is started through
    * [childProcessManager]{@link @ohos.app.ability.childProcessManager:childProcessManager}.
    *
-   * @param { ChildProcessArgs } [args] - Parameters transferred to the child process.
+   * @param { ChildProcessArgs } [args] - Parameters passed to the child process. This parameter is optional.
+   *     If it is not passed or null is passed, the default configuration is used for startup.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 11 dynamic

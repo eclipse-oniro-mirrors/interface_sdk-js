@@ -42,12 +42,13 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, TipsAnchorType, InputEventInterceptAction, GestureShortcut, EdgeLightPosition } from "./enums";
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -11646,9 +11647,10 @@ export declare interface CommonMethod {
      */
     default onHoverMove(event: Callback<HoverEvent> | undefined): this;
     /**
-     * Trigger a accessibility hover event.
+     * Triggered in accessibility mode when a single finger touches the bound component.
      *
-     * @param { AccessibilityCallback | undefined } callback - A callback instance used when the component is touched after accessibility mode is enabled.
+     * @param { AccessibilityCallback | undefined } callback - Callback invoked in accessibility mode when a single finger
+     * touches the bound component.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11657,10 +11659,11 @@ export declare interface CommonMethod {
     default onAccessibilityHover(callback: AccessibilityCallback | undefined): this;
 
     /**
-     * prompt for current component and descendants unable to handle accessibility hover event
+     * Triggered if a finger touch occurs within the component area while an accessibility service is running, but the
+     * accessibility system finds no focusable elements within the component hierarchy.
      *
-     * @param { AccessibilityTransparentCallback | undefined } callback - A callback instance used when current component and 
-     * descendants not handled accessibility hover event
+     * @param { AccessibilityTransparentCallback | undefined } callback - Callback invoked when a touch interaction occurs
+     * within the area of the component that does not respond to the accessibility hover event.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12897,6 +12900,33 @@ export declare interface CommonMethod {
      */
     default shadow(value: ShadowOptions | ShadowStyle | undefined): this;
     /**
+     * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+     *
+     * This API works with the [shadow]{@link CommonMethod#shadow} attribute. The shadow shape is recalculated
+     * when the component size changes.
+     *
+     * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+     *     When the value type is {@link CircleShape}, {@link EllipseShape},
+     *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+     *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): this;
+    /**
+     * Sets the clip mode for the [shadow]{@link CommonMethod#shadow} when it is not filled. This API takes effect
+     * only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+     *
+     * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default shadowClipMode(mode: ShadowClipMode | undefined): this;
+    /**
      * Sets the edge light effect for the component.
      *
      * <p><strong>NOTE</strong>:
@@ -13465,8 +13495,10 @@ export declare interface CommonMethod {
      */
     default accessibilityRole(role: AccessibilityRoleType | undefined): this;
     /**
-     * Register accessibility focus callback,when the component is focused or out of focus,the callback will be executed
-     * @param { AccessibilityFocusCallback | undefined } callback - accessibility focus callback function
+     * Triggered when the accessibility component gains or loses focus.
+     *
+     * @param { AccessibilityFocusCallback | undefined } callback - Callback that notifies the registered component of
+     * focus and blur events.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13474,9 +13506,13 @@ export declare interface CommonMethod {
      */
     default onAccessibilityFocus(callback: AccessibilityFocusCallback | undefined): this;
     /**
-     * Register accessibility action intercept callback,
-     * when accessibility action is to be executed,the callback will be executed
-     * @param { AccessibilityActionInterceptCallback | undefined } callback - accessibility action intercept callback function
+     * Registers a callback to intercept accessibility control actions in accessibility mode. The callback is invoked
+     * before an accessibility action is triggered, allowing the component to determine whether to intercept the action.
+     * This callback is not supported by components that lack click capability.
+     *
+     * @param { AccessibilityActionInterceptCallback | undefined } callback - Callback to be invoked before an accessibility
+     * action is triggered. The application that registers this callback can decide whether to intercept the action.
+     * Set to undefined to unregister the callback.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15793,8 +15829,8 @@ export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
  * The value of isHover indicates whether the touch is hovering over the component.
  * The value of event contains information about AccessibilityHoverEvent.
  *
- * @param { boolean } isHover
- * @param { AccessibilityHoverEvent } event
+ * @param { boolean } isHover - Hover state. true: the finger enters the component. false: the finger exits the component.
+ * @param { AccessibilityHoverEvent } event - AccessibilityHoverEvent object.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -15802,9 +15838,10 @@ export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 export type AccessibilityCallback = (isHover: boolean, event: AccessibilityHoverEvent) => void;
 
 /**
- * Defines the callback type used in accessibility hover transparent event.
+ * Defines the callback type for touch events that do not trigger accessibility responses in accessibility mode.
  *
- * @param { TouchEvent } event - The value of event contains information about original accessibility hover event.
+ * @param { TouchEvent } event - Original touch event. The TouchEvent object's TouchType corresponds to four accessibility
+ * hover event types: HOVER_ENTER, HOVER_MOVE, HOVER_EXIT, and HOVER_CANCEL.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

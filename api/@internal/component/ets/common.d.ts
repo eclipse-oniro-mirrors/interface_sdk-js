@@ -1630,10 +1630,16 @@ declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCond
 declare const Styles: MethodDecorator & StylesVersionDecorator;
 
 /**
- * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style 
- * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter 
- * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
+ * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style
+ * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter
+ * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing
  * style code duplication.
+ *
+ * value: Target built-in UI component type (such as **Text** and **Column**) for which the style is to be extended.
+ * Pass in the component type rather than a component instance. Custom components are not supported. The style
+ * attributes defined in the @Extend decorator will be bound to this component type, so that they can be called on the
+ * component in a chained manner.
+ * MethodDecorator: Method decorator. Developers do not need to pay attention to this return value.
  *
  * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
  * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
@@ -6672,24 +6678,9 @@ interface PreviewParams {
  *
  * @interface ItemDragInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 8
- */
-/**
- * ItemDragInfo object description
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- */
-/**
- * ItemDragInfo object description
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 8 dynamic
  */
 declare interface ItemDragInfo {
   /**
@@ -11640,10 +11631,12 @@ declare type ShouldRecognizerParallelWithCallback = (current: GestureRecognizer,
 declare type TransitionFinishCallback = (transitionIn: boolean) => void;
 
 /**
- * Defines the callback type used in onNeedSoftkeyboard.
- * Called when component is focused, the return value indicates whether keyboard is needed.
+ * This callback is triggered when the component bound to this method determines whether a keyboard is required.
+ * Prerequisite: The component must be focusable; otherwise, this API does not take effect.
  *
- * @returns { boolean } True means keyboard is needed, false means keyboard is not needed.
+ * @returns { boolean } Whether the component needs a keyboard.
+ *     <br>If the return value of this callback is `true`, the component needs a keyboard; if the return value is
+ *     `false`, the component does not need a keyboard.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -19201,28 +19194,9 @@ declare interface FadingEdgeOptions {
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Implements an object used to configure the
- * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * Implements an object used to configure the
- * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 23 dynamic
+ * @crossplatform [since 23]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 declare interface NestedScrollOptions {
   /**
@@ -19231,17 +19205,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Set NestedScrollMode when the scrollable component scrolls forward
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollForward: NestedScrollMode;
 
@@ -19251,17 +19217,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Set NestedScrollMode when the scrollable component scrolls backward
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollBackward: NestedScrollMode;
 }
@@ -27405,15 +27363,41 @@ declare class CommonMethod<T> {
   /**
    * Called when component is focused, the return value indicates whether keyboard is needed.
    *
-   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - Callback executed when an event is
-   *     triggered. The system determines whether a keyboard is required based on the return value of the callback. If this
-   *     parameter is set to undefined, no callback is triggered, and the input box component returns true. For other
-   *     components, false is returned. Prerequisite: The component must be able to obtain focus. Otherwise, this interface
-   *     does not take effect. When the return value is true, the self-drawn text box needs to actively invoke the
-   *     [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig:
-   *     TextConfig, requestKeyboardReason: RequestKeyboardReason)} method to establish input method communication when the
-   *     focus is obtained. Otherwise, the keyboard does not respond.
-   * @returns { T }
+   * This API does not take effect for components that cannot gain focus.
+   *
+   * For the text box, if the return value of this API is set to **false**, the keyboard will not be displayed when the
+   * text box is tapped.
+   *
+   * When the **Web** component uses this method, if the return value is `true`, the **Web** component checks whether
+   * there are editable nodes in the component and retains the keyboard only if editable nodes exist; if the return
+   * value is `false`, the keyboard is not retained regardless of whether editable nodes exist.
+   *
+   * When the **XComponent** component uses this method, the keyboard is retained only if the return value is `true` and
+   * the **XComponent** component sets [OH_ArkUI_XComponent_SetNeedSoftKeyboard()](docroot://reference/apis-arkui/
+   * capi-native-interface-xcomponent-h.md#oh_arkui_xcomponent_setneedsoftkeyboard)
+   * to request a keyboard; if the return value is `false`, the keyboard is not retained regardless of how the component
+   * is configured.
+   *
+   * When the return value is `true`, the self-drawn input box of the application needs to proactively call [attach]
+   * {@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig,
+   * requestKeyboardReason: RequestKeyboardReason)} upon focus acquisition to establish the communication between the
+   * input method framework and the input method application; otherwise, tapping the keyboard will not respond.
+   * Note: The communication between the input method framework and the input method application is disconnected upon
+   * focus loss and needs to be re-established upon focus acquisition.
+   *
+   * This API is applicable only to the scenario of input method application continuation and does not take effect for
+   * custom keyboards. For custom keyboard continuation, see
+   * [setCustomKeyboardContinueFeature]{@link @ohos.arkui.UIContext:UIContext#setCustomKeyboardContinueFeature}.
+   *
+   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - Callback invoked when the event is
+   *     triggered. The system determines whether the keyboard is needed based on the return value of the callback.
+   *     <br>When set to undefined, the callback is not triggered, and input box components behave as if returning true.
+   *     Other components behave as if returning false. Prerequisite: The component must be focusable; otherwise, this
+   *     API does not take effect. When the return value is true, the self-drawn input box must proactively call the
+   *     [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean,
+   *     textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)} method upon focus acquisition to
+   *     establish communication with the input method; otherwise, tapping the keyboard will not respond.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -29559,7 +29543,7 @@ declare interface RectResult {
  */
 declare interface CaretOffset {
   /**
-   * Index of the caret position.
+   * Index of the position where the caret is located. The value starts from 0 and ranges from 0 to the text length.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -29664,6 +29648,13 @@ declare abstract class TextContentControllerBase {
    * Obtains the position of the edited text area relative to the component and its size. The unit of the return value
    * is pixel.
    *
+   * > **NOTE**
+   * > - If no text is entered, the return value contains the position information, but the size is 0.
+   * > - The position information is the offset of the first character relative to the editable area.
+   * > - For the **Search** component, the returned position information is the offset of the first character relative
+   * to the search icon in the component.
+   * > - If there is input, the width in the return value is the fixed width of the editable area.
+   *
    * @returns { RectResult } Position of the edited text area relative to the component and its size.
    *     <br>If no component is bound to the controller or the component bound to the controller is released,
    *     **undefined** is returned.
@@ -29701,9 +29692,8 @@ declare abstract class TextContentControllerBase {
    * preview text state.
    *
    * > **NOTE**
-   * >
    * > When the controller is not bound to a component or the component bound to the controller is released, this API
-   * > does not take effect.
+   * does not take effect.
    *
    * @param { string } text - Text to insert.
    * @param { TextContentControllerOptions } [textOperationOptions] - Configuration options for inserting text, used to
@@ -29775,7 +29765,10 @@ declare abstract class TextContentControllerBase {
   getSelection(): TextRange;
 
   /**
-   * Obtains the text content within a specified range.
+   * Obtains the text content within a specified range.This API can be used in the following scenarios:
+   * - Obtain the text content selected by the user in a text editor for processing.
+   * - Obtain the text content within a specific range for checking during content validation.
+   * - Extract part of the text content for analysis or conversion in a text processing application.
    *
    * @param { TextRange } [range] - Range of the text content to obtain, defined by start and end positions.<br>If the
    *     range is not specified, the entire text is obtained by default. If the start position is not specified, it defaults
@@ -29855,6 +29848,9 @@ declare abstract class TextContentControllerBase {
    *
    * This API is not effective in the state of dragged text.
    *
+   * `deleteBackward` only affects the internal UI behavior of the application and does not affect the internal logic of
+   * the input method application. It is not supported in the preview text scenario.
+   *
    * > **NOTE**
    * >
    * > When the controller is not bound to a component or the component bound to the controller is released, this API is
@@ -29923,19 +29919,9 @@ declare enum ContentClipMode {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 12]
  * @atomicservice
- * @since 11
- */
-/**
- * CommonScrollableMethod
- *
- * @extends CommonMethod<T>
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 12 dynamic
+ * @since 11 dynamic
  */
 declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
@@ -30950,15 +30936,6 @@ declare class DynamicNode<T> {
   onMove(handler: Optional<OnMoveHandler>, eventHandler: ItemDragEventHandler): T;
   
 /**
- * Define EdgeEffect Options.
- *
- * @interface EdgeEffectOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @since 11
- */
-/**
  * Implements an object used to configure the
  * [edgeEffect]{@link ScrollableCommonMethod#edgeEffect(edgeEffect: EdgeEffect, options?: EdgeEffectOptions)} attribute.
  *
@@ -30966,8 +30943,8 @@ declare class DynamicNode<T> {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface EdgeEffectOptions {
   /**

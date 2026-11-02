@@ -27,6 +27,7 @@ import { BorderStyle, Alignment, DialogDisplayMode } from '@ohos.arkui.component
 import { Resource } from 'global.resource';
 import { LengthMetrics } from 'arkui.Graphics';
 import uiMaterial from '@ohos.arkui.uiMaterial';
+import { HandednessFollowMode } from '@ohos.arkui.dialog';
 /**
  * Define the display mode of all kind of dialog
  *
@@ -720,6 +721,22 @@ declare namespace promptAction {
          * @since 26.0.0 static
          */
         edgeLightMode?: EdgeLightMode;
+
+        /**
+         * Whether and how the dialog adapts to the handedness.
+         * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+         * triggers it (the last interacted component); falls back to the current layout
+         * when no trigger component exists.
+         * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+         * the device, distinguished from the operating hand) reported by the awareness
+         * platform; falls back to the current layout when unavailable.
+         *
+         * @default HandednessFollowMode.NONE
+         * @syscap SystemCapability.ArkUI.ArkUI.Full
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        adaptToHandedness?: HandednessFollowMode;
     }
     /**
      * Enum for state.
@@ -1125,6 +1142,22 @@ declare namespace promptAction {
          * @since 26.0.0 static
          */
         edgeLightMode?: EdgeLightMode;
+
+        /**
+         * Whether and how the dialog adapts to the handedness.
+         * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+         * triggers it (the last interacted component); falls back to the current layout
+         * when no trigger component exists.
+         * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+         * the device, distinguished from the operating hand) reported by the awareness
+         * platform; falls back to the current layout when unavailable.
+         *
+         * @default HandednessFollowMode.NONE
+         * @syscap SystemCapability.ArkUI.ArkUI.Full
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        adaptToHandedness?: HandednessFollowMode;
     }
     
     /**
@@ -1545,6 +1578,22 @@ declare namespace promptAction {
          * @since 26.0.0 static
          */
         edgeLightMode?: EdgeLightMode;
+
+        /**
+         * Whether and how the dialog adapts to the handedness.
+         * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+         * triggers it (the last interacted component); falls back to the current layout
+         * when no trigger component exists.
+         * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+         * the device, distinguished from the operating hand) reported by the awareness
+         * platform; falls back to the current layout when unavailable.
+         *
+         * @default HandednessFollowMode.NONE
+         * @syscap SystemCapability.ArkUI.ArkUI.Full
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        adaptToHandedness?: HandednessFollowMode;
     }
     /**
      * Displays the notification text.

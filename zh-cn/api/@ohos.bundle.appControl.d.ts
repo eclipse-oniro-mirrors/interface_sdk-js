@@ -401,7 +401,7 @@ declare namespace appControl {
   /**
    * 获取指定应用的处置状态。使用callback异步回调，成功返回应用的处置状态，失败返回对应错误信息。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -422,7 +422,7 @@ declare namespace appControl {
   /**
    * 获取指定应用已设置的处置状态。使用Promise异步回调，成功返回应用的处置状态，失败返回对应错误信息。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -443,7 +443,7 @@ declare namespace appControl {
   /**
    * 以同步方法获取指定应用已设置的处置状态。成功返回应用的处置状态，失败抛出对应异常。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -538,7 +538,7 @@ declare namespace appControl {
   /**
    * 获取指定应用或分身应用已设置的拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要获取拦截规则的应用的appId或appIdentifier。使用appId设置的拦截规则只能通过appId获取，使用appIdentifier设置的同理。<br/>
    *     **说明：**<br/> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -617,7 +617,7 @@ declare namespace appControl {
   /**
    * 获取指定应用或分身应用已设置的优先级最高的卸载处置规则。
    *
-   * @permission ohos.permission.GET_DISPOSED_APP_STATUS or ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @permission ohos.permission.GET_DISPOSED_APP_STATUS 或 ohos.permission.MANAGE_DISPOSED_APP_STATUS
    * @param { string } appIdentifier - 要获取卸载处置规则的应用的appIdentifier。
    *     <br> 如果应用没有appIdentifier可使用appId代替。appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -683,7 +683,7 @@ declare namespace appControl {
   /**
    * 获取当前用户下已设置的所有拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @returns { Array<DisposedRuleConfiguration> } 应用已设置的拦截规则。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
@@ -697,7 +697,7 @@ declare namespace appControl {
   /**
    * 获取指定应用程序包设置的所有拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } bundleName - 表示设置拦截规则的应用程序包的包名。
    * @returns { Array<DisposedRuleConfiguration> } 指定应用程序包已设置的拦截规则。
    * @throws { BusinessError } 201 - Permission denied.

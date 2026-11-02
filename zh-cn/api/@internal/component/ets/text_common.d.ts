@@ -14,7 +14,9 @@
  */
 
 /**
- * @file
+ * @file 文本类组件公共接口提供了文本处理的基础能力，包括光标样式设置、布局管理、文本选择控制、菜单项定制等功能。
+ *  该模块适用于需要对文本组件进行精细控制的场景，例如文本编辑器、富文本应用、输入表单等。通过这些接口，开发者可以
+ *  自定义光标样式、获取文本布局信息、处理文本选择、定制编辑菜单等，提升应用的文本交互体验。
  * @kit ArkUI
  */
 
@@ -1482,6 +1484,16 @@ declare class TextMenuItemId {
    * @since 23 dynamic
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * 快捷翻译，为一级菜单项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 
 /**
@@ -2564,7 +2576,7 @@ declare enum TextChangeReason {
   ACCESSIBILITY = 10,
 
   /**
-   * 跨端拍照。
+   * 跨端拍照协同输入。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

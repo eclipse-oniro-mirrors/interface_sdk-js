@@ -15,7 +15,7 @@
 
 /**
  * @file 媒体服务
- * @kit media
+ * @kit MediaKit
  */
 
 import { ErrorCallback, AsyncCallback, Callback, BusinessError } from './@ohos.base';
@@ -3222,6 +3222,7 @@ declare namespace media {
      * 获取播放过程信息，可以在prepared/playing/paused状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackInfo> } Promise对象，返回播放器信息PlaybackInfo。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 12 dynamic
      * @since 23 static
@@ -3285,6 +3286,7 @@ declare namespace media {
      * 获取当前播放器的统计指标信息，可以在准备（prepared）/播放（playing）/暂停（paused）/完成（completed）/停止（stopped）状态调用。使用Promise异步回调。
      *
      * @returns { Promise<PlaybackMetrics> } Promise对象，返回当前播放器的指标信息PlaybackMetrics。
+     * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 dynamic&static
      */
@@ -3510,7 +3512,7 @@ declare namespace media {
      * 清空播放列表中的所有项目，当前正在播放的媒体将会立即终止。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400102 - Operation not allowed . Returned via promise.
+     * @throws { BusinessError } 5400102 - Operation not allowed. Returned via promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @stagemodelonly
      * @atomicservice
@@ -3785,9 +3787,7 @@ declare namespace media {
      * 
      * **使用示例**：
      * 
-     * 通过
-     * [getXComponentSurfaceId]{@link ./@internal/component/ets/xcomponent:XComponentController.getXComponentSurfaceId}接
-     * 口创建surfaceId。
+     * 通过[getXComponentSurfaceId]{@link @global:XComponentController.getXComponentSurfaceId}接口创建surfaceId。
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @crossplatform [since 12]
@@ -5996,7 +5996,7 @@ declare namespace media {
    */
   interface PlaybackStrategy {
     /**
-     * 选择宽度接近的流。
+     * 选择宽度接近的流，单位为像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6005,7 +6005,7 @@ declare namespace media {
      */
     preferredWidth?: int;
     /**
-     * 选择高度接近的流。
+     * 选择高度接近的流，单位为像素（px）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6014,7 +6014,7 @@ declare namespace media {
      */
     preferredHeight?: int;
     /**
-     * 选择缓冲时长。
+     * 选择缓冲时长，单位为秒（s）。
      * 
      * <p>The preferred buffer duration in the playback policy, is used to set the buffer size. For details,
      * see [Online Video Frame Freezing Optimization Practice]{@link
@@ -6077,7 +6077,7 @@ declare namespace media {
     showFirstFrameOnPrepare?: boolean;
 
     /**
-     * 自定义开始或重新播放的缓冲阈值，单位为秒。
+     * 自定义开始或重新播放的缓冲阈值，单位为秒（s）。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @atomicservice
@@ -6098,7 +6098,7 @@ declare namespace media {
     enableSuperResolution?: boolean;
 
     /**
-     * 在更改速度时，为直播或 AVPlayer 设置最大缓冲阈值。
+     * 在更改速度时，为直播或 AVPlayer 设置最大缓冲阈值，单位为秒（s）。
      * 建议比起始水位高出2秒。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
@@ -8619,7 +8619,7 @@ declare namespace media {
      * > [AVPlayer.surfaceId](docroot://reference/apis-media-kit/arkts-apis-media-AVPlayer.md#属性)替代。
      *
      * @param {string} surfaceId - 指定SurfaceId，应从XComponent组件获取，获取方式请参考
-     *     [XComponent]{@link ./@internal/component/ets/xcomponent}。
+     *     [XComponent]{@link @global:XComponent}。
      * @param { AsyncCallback<void> } callback - 回调函数。当设置SurfaceId成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
@@ -8638,7 +8638,7 @@ declare namespace media {
      * > [AVPlayer.surfaceId](docroot://reference/apis-media-kit/arkts-apis-media-AVPlayer.md#属性)替代。
      *
      * @param {string} surfaceId - 指定SurfaceId，应从XComponent组件获取，获取方式请参考
-     *     [XComponent]{@link ./@internal/component/ets/xcomponent}。
+     *     [XComponent]{@link @global:XComponent}。
      * @returns { Promise<void> } 设置SurfaceId的Promise返回值。
      * @syscap SystemCapability.Multimedia.Media.VideoPlayer
      * @since 8 dynamiconly
@@ -11328,7 +11328,7 @@ declare namespace media {
     resumeRecording(): Promise<void>;
 
     /**
-     * 录屏时，应用可对本应用的隐私窗口做安全豁免。使用Promise异步回调。
+     * 录屏时，应用仅能对本应用的隐私窗口做安全豁免。使用Promise异步回调。
      * 
      * 如录屏时，用户在本应用进行输入密码等操作，应用不会进行黑屏处理。
      *
@@ -11490,7 +11490,6 @@ declare namespace media {
      *
      * @param { 'error' } type - 错误事件回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 录屏错误事件回调方法。
-     * @throws { BusinessError } 201 - permission denied.
      * @throws { BusinessError } 5400103 - IO error. Return by ErrorCallback.
      * @throws { BusinessError } 5400105 - Service died. Return by ErrorCallback.
      * @syscap SystemCapability.Multimedia.Media.AVScreenCapture

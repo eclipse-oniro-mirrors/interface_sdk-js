@@ -242,7 +242,16 @@ declare namespace adminManager {
      * @stagemodelonly
      * @since 26.0.0
      */
-    MANAGED_EVENT_POLICIES_CHANGED = 11
+    MANAGED_EVENT_POLICIES_CHANGED = 11,
+
+    /**
+     * Password authentication failure event.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MANAGED_EVENT_PASSWORD_FAILED = 13
   }
 
   /**

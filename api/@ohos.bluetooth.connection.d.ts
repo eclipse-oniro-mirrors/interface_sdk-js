@@ -612,7 +612,7 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { ScanMode } mode - Indicates the Bluetooth scan mode to set.
-   * @param { int } duration - Indicates the duration in seconds, in which the host is discoverable.
+   * @param { int } duration - Indicates the duration in milliseconds, in which the host is discoverable.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -1524,7 +1524,7 @@ declare namespace connection {
   function offAclStateChange(callback?: Callback<AclStateResult>): void;
 
   /**
-   * Describes the class of a bluetooth device.
+   * Bond state change parameters.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1544,7 +1544,7 @@ declare namespace connection {
      */
     deviceId: string;
     /**
-     * Profile connection state of the device.
+     * Bond state of the device.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -1921,7 +1921,7 @@ declare namespace connection {
    */
   interface DiscoveryResult {
     /**
-     * Identify of the discovery device
+     * Identify of the discovered device
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi [since 12 - 17]
@@ -1965,7 +1965,7 @@ declare namespace connection {
      */
     deviceClass: DeviceClass;
     /**
-     * The transport of the discovery device.
+     * The transport of the discovered device.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly

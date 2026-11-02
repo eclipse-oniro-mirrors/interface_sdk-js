@@ -14,15 +14,14 @@
  */
 
 /**
- * @file
+ * @file 通知订阅扩展上下文
  * @kit NotificationKit
  */
 
 import type ExtensionContext from './application/ExtensionContext';
 /**
- * NotificationSubscriberExtensionContext模块提供通知订阅者扩展能力。
- * 
- * NotificationSubscriberExtensionContext继承自ExtensionContext类，是NotificationSubscriberExtensionAbility的上下文。
+ * NotificationSubscriberExtensionContext模块提供
+ * [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)者扩展能力。
  *
  * @syscap SystemCapability.Notification.Notification
  * @stagemodelonly

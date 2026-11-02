@@ -19,7 +19,9 @@
  */
 
 /**
- * The commonType module defines common data types in data management.
+ * The commonType module defines common data types in data management. It provides basic data types such
+ * as asset status enum, asset information, and key-value pair storage to support unified data
+ * representation and transfer in distributed data management scenarios.
  *
  * @syscap SystemCapability.DistributedDataManager.CommonType
  * @crossplatform
@@ -28,7 +30,7 @@
  */
 declare namespace commonType {
   /**
-   * Enumerates the asset statuses.
+   * Enumerates the asset statuses. Use the enum name rather than the enum value.
    *
    * @syscap SystemCapability.DistributedDataManager.CommonType
    * @crossplatform
@@ -98,7 +100,9 @@ declare namespace commonType {
   }
 
   /**
-   * Represents asset (such as a file, image, or video) information.
+   * Represents asset (such as a file, image, or video) information. For details, see the sample code in
+   * [Using Distributed Data Objects in Cross-Device Migration]
+   * (../../database/data-sync-of-distributed-data-object.md#using-distributed-data-objects-in-cross-device-migration).
    *
    * @syscap SystemCapability.DistributedDataManager.CommonType
    * @crossplatform
@@ -157,7 +161,7 @@ declare namespace commonType {
     modifyTime: string;
 
     /**
-     * Size of the asset. If this field changes, the asset is considered to have changed.
+     * Size of the space occupied by the asset, in bytes. The value is a non-negative integer.
      *
      * @syscap SystemCapability.DistributedDataManager.CommonType
      * @crossplatform
@@ -167,7 +171,7 @@ declare namespace commonType {
     size: string;
 
     /**
-     * Asset status. The default value is ASSET_NORMAL.
+     * Asset status. The default value is **ASSET_NORMAL**.
      *
      * @syscap SystemCapability.DistributedDataManager.CommonType
      * @crossplatform
@@ -188,16 +192,16 @@ declare namespace commonType {
   type Assets = Array<Asset>;
 
   /**
-   * Enumerates the value types, which vary with the parameter function.
+   * Enumerates the data field types, which are determined by API parameter functions.
    *
    * @unionmember { null } The value is null.
    * @unionmember { long } The value is a 64-bit integer (int64_t).
    * @unionmember { double } The value is a floating-point number (float).
    * @unionmember { string } The value is a string.
    * @unionmember { boolean } The value is true or false.
-   * @unionmember { Uint8Array } The value is an array of 8-bit unsigned integers.
-   * @unionmember { Asset } The value is an instance of the Asset type.
-   * @unionmember { Assets } The value is an instance of the Assets type.
+   * @unionmember { Uint8Array } The value is a Uint8 array.
+   * @unionmember { Asset } The value is an Asset.
+   * @unionmember { Assets } The value is an array of Assets.
    * @syscap SystemCapability.DistributedDataManager.CommonType
    * @crossplatform
    * @since 11 dynamic
@@ -206,7 +210,9 @@ declare namespace commonType {
   type ValueType = null | long | double | string | boolean | Uint8Array | Asset | Assets;
 
   /**
-   * Defines the types of the key and value in a KV pair.
+   * Defines the types of the key and value in a KV pair. This type is not concurrency-safe. If multiple
+   * threads in an application operate instances derived from this class at the same time, use a lock for
+   * protection.
    *
    * @syscap SystemCapability.DistributedDataManager.CommonType
    * @crossplatform

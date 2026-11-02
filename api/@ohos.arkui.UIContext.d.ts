@@ -160,15 +160,17 @@ export interface ModalUIExtensionCallback {
 }
 
 /**
- * Provides APIs for registering custom fonts.
+ * The Font class manages custom font and system font information, supporting functions such as registering custom
+ * fonts, obtaining the system font list, and querying detailed font information. It is applicable to scenarios where
+ * custom fonts need to be used in an app or system font resources need to be queried.
  *
  * > **NOTE**
  * >
  * > - In the following API examples, you must first use [getFont()]{@link UIContext.getFont} in **UIContext** to obtain
  * > a **Font** instance, and then call the APIs using the obtained instance.
  * >
- * > - You are advised to use the [loadFontSync]{@link @ohos.graphics.text:text.FontCollection#loadFontSync} API of the
- * > font engine to register custom fonts.
+ * > - You are advised to use the [loadFontSync()]{@link @ohos.graphics.text:text.FontCollection#loadFontSync} API of
+ * > the font engine to register custom fonts.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -180,12 +182,17 @@ export class Font {
   /**
    * Registers a custom font with the font manager.
    *
-   * This API is asynchronous and does not support concurrent calls.
+   * You are advised to use the [loadFontSync()]{@link ./@ohos.graphics.text:text.FontCollection#loadFontSync} API of
+   * the font engine to register the custom font.
    *
-   * @param { font.FontOptions } options - Information about the custom font to register.<br>**NOTE**<br>When setting
-   *     the path to the font file, you are advised to use a string with the **file://** path prefix for resources
-   *     within the system sandbox path. Ensure that the file exists in the sandbox directory path and has read
-   *     permissions.
+   * This API is asynchronous. Font registration is an asynchronous process and does not support concurrent calls. Since
+   * registration is completed asynchronously, it is recommended to call this API in advance during the page
+   * initialization phase (such as aboutToAppear) to ensure that the font is registered before use
+   *
+   * @param { font.FontOptions } options - Custom font information to register.<br>**Note**<br>The path for the font
+   *     file to register needs to be set. When reading resources within the system sandbox directory, it is recommended
+   *     to use a string with the **file://** path prefix. Ensure that the file exists under the sandbox directory path
+   *     and has read permissions.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -199,11 +206,13 @@ export class Font {
    *
    * This API only takes effect on PCs/2-in-1 devices and returns an empty array on other devices.
    *
-   * You are advised to use the
-   * [getSystemFontFullNamesByType]{@link @ohos.graphics.text:text.getSystemFontFullNamesByType} API to obtain the
-   * latest system-supported font list data.
+   * > **NOTE**
+   * > You are advised to use the
+   * > [getSystemFontFullNamesByType()]{@link @ohos.graphics.text:text.getSystemFontFullNamesByType} API to obtain the
+   * > latest system-supported font list data.
    *
-   * @returns { Array<string> } List of supported fonts.
+   * @returns { Array<string> } List of system-supported font names. The returned names can be used with the
+   *     **getFontByName** method to query detailed information about the corresponding fonts.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 11]
@@ -215,7 +224,8 @@ export class Font {
   /**
    * Obtains information about a system font based on the font name.
    *
-   * @param { string } fontName - System font name.
+   * @param { string } fontName - System font name, which can be obtained through the
+   *     [getSystemFontList()]{@link Font#getSystemFontList} method.
    * @returns { font.FontInfo } Detailed information of the font.
    *     <br>If no font is found, **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3284,8 +3294,9 @@ export class OverlayManager {
 }
 
 /**
- * Provides the capability of displaying and hiding of the magnifier. The magnifier enlarges the component content for
- * you to view the component details.
+ * Provides the ability to control the display and hiding of the magnifier. The magnifier enlarges component content to
+ * facilitate viewing of details. This is suitable for scenarios where non‑text components (such as images) require
+ * detail inspection.
  *
  * > **NOTE**
  * >
@@ -3326,9 +3337,10 @@ export class Magnifier {
    * component. After the setting is successful, the magnifier displays the content centered at the coordinate point.
    *
    * > **NOTE**
-   * >
-   * > When the content of the component bound to the magnifier changes, the magnifier does not automatically update the
-   * > displayed content. You need to call the **show** API to update the displayed content of the magnifier.
+   * > - Before using this API, obtain a Magnifier instance through the getMagnifier() method in UIContext.
+   * > - Before calling this method, call [bind]{@link Magnifier#bind} to bind the target component.
+   * > - When the content of the component bound to the magnifier changes, the magnifier display content is not
+   * >   automatically updated. You need to actively call the **show** API to update the content.
    *
    * @param { number } x - Horizontal coordinate of the component content displayed by the magnifier, relative to the
    *     component itself, in vp. If the coordinate value is greater than the component width or less than 0, the
@@ -3627,7 +3639,13 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
- * Represents a dynamic synchronization scene of Marquee.
+ * Provides the dynamic frame rate configuration capability for the Marquee component, supporting dynamic frame rate
+ * adjustment during Marquee animation to optimize performance and power consumption. It is applicable to scenarios
+ * where animation smoothness and system resource consumption need to be balanced in marquee contexts.
+ *
+ * > **NOTE**
+ * > - **MarqueeDynamicSyncScene** inherits from [DynamicSyncScene]{@link DynamicSyncScene} and represents the
+ * >   dynamic sync scene of the [Marquee]{@link ./marquee} component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3635,9 +3653,10 @@ export class SwiperDynamicSyncScene extends DynamicSyncScene {
  * @since 14 dynamic
  */
 export class MarqueeDynamicSyncScene extends DynamicSyncScene {
-
   /**
-   * Type of the MarqueeDynamicSyncSceneType.
+   * Dynamic sync scene type of the Marquee component. It is used to specify the dynamic sync scene type mode of the
+   * Marquee component. Different scene types correspond to different frame rate adjustment strategies. For details, see
+   * MarqueeDynamicSyncSceneType.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3888,16 +3907,24 @@ export class MeasureUtils {
    * **\n**), this API returns the width of the longest line.
    *
    * > **NOTE**
-   * >
-   * > **measureText** always measures single-line text width. Layout constraints in **options** (**constraintWidth**,
-   * > **maxLines**, and more) do not affect results. For layout-constrained width measurement, use
-   * > [measureTextSize]{@link MeasureUtils.measureTextSize}.
+   * > - When calling this API, avoid simultaneously using
+   * >   [ApplicationContext.setFontSizeScale]{@link ./application/ApplicationContext:ApplicationContext#setFontSizeScale}
+   * >   to set the app font size scale. To ensure correct timing, you are advised to listen for font scale changes on
+   *     your own to guarantee the accuracy of measurement results.
+   * > - The calculation result of the measureText API is always the width of a single-line text. Layout constraints
+   * >   configured in the input parameter **options** (such as **constraintWidth** and **maxLines**) do not affect the
+   * >   result of **measureText**. If you need to calculate the width under layout constraints, use the
+   * >   [measureTextSize]{@link MeasureUtils.measureTextSize} method.
    *
-   * @param { MeasureOptions } options - Options of the target text.
+   * @param { MeasureOptions } options - Text measurement configuration options, containing properties such as text
+   *     content (**textContent**) and font size (**fontSize**). Layout constraint properties such as
+   *     **constraintWidth** and **maxLines** do not affect the calculation result of **measureText**. To calculate the
+   *     width under layout constraints, use the **measureTextSize** method.
    * @returns { number } Text width.
-   *     <br>**NOTE**
-   *     <br>Floating-point results are rounded up.
-   *     <br>Unit: px.
+   *     <br>**Note: **
+   *     <br>Floating-point numbers are rounded up.
+   *     <br>Unit: px
+   *     <br>When a parameter is abnormal or the internal calculation fails, undefined is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3907,7 +3934,7 @@ export class MeasureUtils {
   measureText(options: MeasureOptions): number;
 
   /**
-   * Measures the width and height of the given single-line text.
+   * Calculates the width and height of the specified text.
    *
    * > **NOTE**
    * >
@@ -3916,8 +3943,10 @@ export class MeasureUtils {
    * > ensure the correctness of the time sequence, you are advised to monitor the font scaling changes by yourself to
    * > ensure the accuracy of the calculation result.
    *
-   * @param { MeasureOptions } options - Options of the target text.
-   * @returns { SizeOptions } Width and height of the text.
+   * @param { MeasureOptions } options - Text measurement configuration options, including attributes such as text content
+   *     (**textContent**), font size (**fontSize**), constraint width (**constraintWidth**), and maximum lines
+   *     (**maxLines**). This parameter is used to configure the measurement parameters of the text to be calculated.
+   * @returns { SizeOptions } Layout width and height occupied by the text.
    *     <br>**NOTE**
    *     <br>If **constraintWidth** is not specified, the floating-point value of the text width will be rounded up.
    *     <br>The return values for text width and height are both in px.
@@ -3934,8 +3963,9 @@ export class MeasureUtils {
    * objects based on text layout options.
    *
    * @param { StyledString } styledString - Styled string to be converted.
-   * @param { TextLayoutOptions } [options] - Text layout options.
-   * @returns { Array<Paragraph> } Array of [Paragraph]{@link @ohos.graphics.text:text.Paragraph} objects.
+   * @param { TextLayoutOptions } [options] - Text layout options. If omitted, the default layout configuration is used.
+   * @returns { Array<Paragraph> } Array of [Paragraph]{@link @ohos.graphics.text:text.Paragraph} objects obtained after
+   *     conversion based on the text layout options, used for subsequent text layout calculation.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

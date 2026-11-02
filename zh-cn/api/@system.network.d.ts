@@ -14,7 +14,7 @@
  */
 
 /**
-  * @file
+  * @file 网络状态
   * @kit NetworkKit
  */
 

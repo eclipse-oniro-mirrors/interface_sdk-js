@@ -351,7 +351,7 @@ export declare interface TextClockAttribute extends CommonMethod {
      * @returns { TextClockAttribute } 返回TextClock属性的实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setTextClockOptions(options?: TextClockOptions): this;
 }
