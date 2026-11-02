@@ -125,8 +125,7 @@ declare namespace runningLock {
     /**
      * Releases this running lock. This method is used together with the hold() method. After the lock is held by
      * calling the hold() method, this method is called to release the lock. If the unhold() method is called for
-     * a lock that is not held, no error is reported and the operation is regarded as no operation. You are advised
-     * to call the isHolding() method to check the lock holding status before calling the unhold() method.
+     * a lock that is not held, no error is reported and the operation is regarded as no operation.
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @throws { BusinessError } 201 - If the permission is denied.

@@ -106,7 +106,6 @@ declare namespace runningLock {
 
     /**
      * 释放RunningLock锁。此方法与hold()配对使用，在调用hold()锁定后调用此方法释放锁。对未持有的锁调用unhold()不会报错，视为无操作。
-     * 建议在调用unhold()前通过isHolding()确认锁的持有状态。
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @throws { BusinessError } 201 - If the permission is denied.

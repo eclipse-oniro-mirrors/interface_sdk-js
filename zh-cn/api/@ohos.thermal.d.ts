@@ -117,8 +117,7 @@ declare namespace thermal {
   function subscribeThermalLevel(callback: AsyncCallback<ThermalLevel>): void;
 
   /**
-   * 订阅热档位变化时的回调提醒。当设备温度跨越档位阈值导致热档位发生变化时，系统自动触发回调通知，
-   * 通过callback返回变化后的热档位等级。使用callback异步回调。
+   * 订阅热档位变化时的回调提醒。使用callback异步回调。当设备温度跨越档位阈值导致热档位发生变化时，系统自动触发回调通知，通过callback返回变化后的热档位等级。
    * 此方法与[thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback}配对使用， 用于取消先前注册的热档位回调。
    *
    * - 每个进程仅支持订阅一个回调，重复订阅将覆盖。
@@ -137,10 +136,10 @@ declare namespace thermal {
   function registerThermalLevelCallback(callback: Callback<ThermalLevel>): void;
 
   /**
-   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。取消订阅未注册的回调不会报错，视为无操作。
+   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。
    *
-   * @param { AsyncCallback<void> } [callback] - 回调函数。反注册完成后的通知回调，无返回值。该参数仅用于接收取消订阅完成的通知，取消订阅成功后会调用该回调函数。
-   * 不传入此参数时，取消订阅仍生效，但不会触发回调通知。
+   * @param { AsyncCallback<void> } [callback] - 回调函数。用来执行取消热档位变化回调后的资源回收等操作，无返回值。
+
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -149,9 +148,10 @@ declare namespace thermal {
   function unsubscribeThermalLevel(callback?: AsyncCallback<void>): void;
 
   /**
-   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.registerThermalLevelCallback配对使用，用于取消先前注册的热档位回调。
+   * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.registerThermalLevelCallback配对使用，用于取消先前注册的热档位回调。取消订阅未注册的回调不会报错，视为无操作。
    *
-   * @param { Callback<void> } [callback] - 回调函数，用来执行取消热档位变化回调后的资源回收等操作，无返回值。
+   * @param { Callback<void> } [callback] - 回调函数。反注册完成后的通知回调，无返回值。该参数仅用于接收取消订阅完成的通知，取消订阅成功后会调用该回调函数。
+  * 不传入此参数时，取消订阅仍生效，但不会触发回调通知。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 9 dynamic

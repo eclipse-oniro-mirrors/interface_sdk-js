@@ -121,9 +121,9 @@ declare namespace thermal {
   function subscribeThermalLevel(callback: AsyncCallback<ThermalLevel>): void;
 
   /**
-   * Subscribes to the callback notification when the thermal level changes. When Then device temperature crosses the
-   * threshold of a thermal level, the system automatically triggers a callback notification and returns the new thermal
-   * level through the callback. This method uses an asynchronous callback and is used in pairs
+   * Subscribes to the callback notification when the thermal level changes. Uses an asynchronous callback.
+   * When Then device temperature crosses the threshold of a thermal level, the system automatically triggers a callback
+   * notification and returns the new thermal level through the callback. This method used in pairs
    * with [thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback} to cancel the
    * previously registered thermal level callback.
    *
