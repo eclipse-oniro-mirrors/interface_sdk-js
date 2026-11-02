@@ -167,5 +167,59 @@ declare namespace deviceStatus {
    * @since 23 static
    */
   function offSteadyStandingDetect(callback?: Callback<SteadyStandingStatus>): void;
+
+  /**
+   * 定义手机跌落检测状态。
+   *
+   * 表示设备的跌落检测状态，包括正常状态和跌落状态。
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DropDetectionStatus {
+    /**
+     * 正常状态，表示设备处于正常握持或放置状态。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_NORMAL = 0,
+    /**
+     * 跌落状态，表示设备检测到跌落事件。
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_DROPPED = 1
+  }
+
+  /**
+   * 订阅跌落检测事件。
+   *
+   * @param { Callback<DropDetectionStatus> } callback - 用于接收设备跌落事件的回调。同一回调重复订阅时抛出错误32500002。
+  * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+  * @throws { BusinessError } 32500001 - Service exception.
+  * @throws { BusinessError } 32500002 - Subscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onDropDetect(callback: Callback<DropDetectionStatus>): void;
+
+  /**
+   * 取消订阅跌落检测事件。
+   *
+   * @param { Callback<DropDetectionStatus> } [callback] - 用于接收设备跌落事件的回调。
+  * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+  * @throws { BusinessError } 32500001 - Service exception.
+  * @throws { BusinessError } 32500003 - Unsubscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offDropDetect(callback?: Callback<DropDetectionStatus>): void;
 }
 export default deviceStatus;
