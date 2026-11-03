@@ -5475,7 +5475,7 @@ declare namespace window {
     /**
      * Whether the window starts in a minimized state.
      * If true, the window will not be brought to the foreground.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices.
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -5487,7 +5487,7 @@ declare namespace window {
     /**
      * Whether to hide the dock icon and the hover thumbnail preview.
      * If true, the current window will not display its icon and hover thumbnail preview on the dock.
-     * This parameter only takes effect within the same application. It applies only to PC/2in1 devices and requires the window to be bound to a tray icon.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
      * @default undefined
      * @syscap SystemCapability.Window.SessionManager
@@ -5499,7 +5499,7 @@ declare namespace window {
     /**
      * Whether to hide the window from the multitasking center.
      * If true, the current window will not be displayed in the multitasking center.
-     * This parameter only takes effect within the same application. It applies only to PC/2in1 devices and requires the window to be bound to a tray icon.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
      * @default undefined
      * @syscap SystemCapability.Window.SessionManager
