@@ -54,6 +54,7 @@ import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
 import { OnScrollFrameBeginCallback } from "./scroll";
 import dragController from '../../@ohos.arkui.dragController';
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
 /**
  * Define the ratio of characters entered by the the percentage of InputCounterOptions.
  *
@@ -7601,6 +7602,18 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     titleBarHoverMode?: SheetTitleBarHoverMode;
+
+    /**
+     * Set the touch follow mode of the semi-modal page.
+     * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+     * -FOLLOW_GRIP_HAND: The layout follows the grip.
+     * -NONE: Retain the current layout.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    adaptToHandedness?: HandednessFollowMode;
 }
 /**
  * Enum of title bar hover modes.
