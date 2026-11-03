@@ -1399,6 +1399,10 @@ declare namespace webview {
    * 加权限：ohos.permission.LOCATION、ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION_IN_BACKGROUND，具体权限说明请参
    * 考[申请位置权限开发指导](docroot://device/location/location-permission-guidelines.md)。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用GeolocationPermissions下的方法，都需要先加载Web组件。
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -1413,9 +1417,9 @@ declare namespace webview {
      * @param { boolean } incognito - true表示隐私模式下允许指定源使用地理位置，false表示正常非隐私模式下允许指定源使用地理位置。
      *     <br>默认值：false。
      *     <br>传入null或undefined时为false。 [since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
