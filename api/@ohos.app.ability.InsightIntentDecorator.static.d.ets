@@ -197,6 +197,17 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   * The value is 'systemOnly' or 'thirdParty', and defaults to 'systemOnly' when omitted.
+   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 27 static
+   */
+  exported: string = 'systemOnly';
+
+  /**
    * The uri of a link.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -337,6 +348,17 @@ export @interface InsightIntentPage {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   * The value is 'systemOnly' or 'thirdParty', and defaults to 'systemOnly' when omitted.
+   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 27 static
+   */
+  exported: string = 'systemOnly';
 
   /**
    * The uiAbility name bound to the intent.
@@ -504,6 +526,17 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   * The value is 'systemOnly' or 'thirdParty', and defaults to 'systemOnly' when omitted.
+   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 27 static
+   */
+  exported: string = 'systemOnly';
 }
 /**
  * Define InsightIntentForm Annotation.
@@ -614,6 +647,17 @@ export @interface InsightIntentForm {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   * The value is 'systemOnly' or 'thirdParty', and defaults to 'systemOnly' when omitted.
+   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 27 static
+   */
+  exported: string = 'systemOnly';
 
   /**
    * The form name bound to the intent.
@@ -745,6 +789,17 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   * The value is 'systemOnly' or 'thirdParty', and defaults to 'systemOnly' when omitted.
+   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 27 static
+   */
+  exported: string = 'systemOnly';
 
   /**
    * The ability name bound to the intent.

@@ -201,6 +201,24 @@ declare interface IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   result?: Record<string, Object>;
+
+  /**
+   * Whether the intent can be discovered and invoked by third-party agents.
+   *
+   * If this parameter is set to 'systemOnly', the intent is visible only to system applications.
+   * If this parameter is set to 'thirdParty', the intent is also visible to third-party agents.
+   * If this parameter is left unspecified, 'systemOnly' is used.
+   *
+   * > **NOTE**
+   * >
+   * > This parameter is ignored by the {@link InsightIntentForm} decorator and by intents bound to UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 27
+   */
+  exported?: 'systemOnly' | 'thirdParty';
 }
 
 /**

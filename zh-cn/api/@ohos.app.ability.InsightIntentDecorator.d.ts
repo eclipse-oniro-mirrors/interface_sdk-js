@@ -151,6 +151,24 @@ declare interface IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   result?: Record<string, Object>;
+
+  /**
+   * 表示该意图是否允许被三方Agent发现和调用。
+   *
+   * - 当取值为'systemOnly'时，表示该意图仅对系统应用可见。
+   * - 当取值为'thirdParty'时，表示该意图也对三方Agent可见。
+   * - 当不配置该字段时，按'systemOnly'处理。
+   *
+   * > **说明**
+   * >
+   * > 该字段在[InsightIntentForm]{@link InsightIntentForm}装饰器以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 27
+   */
+  exported?: 'systemOnly' | 'thirdParty';
 }
 
 /**
