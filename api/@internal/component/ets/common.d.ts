@@ -14681,6 +14681,19 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.1 dynamiconly
    */
   closeButtonMaterial?: SystemUiMaterial;
+
+  /**
+   * Set the touch follow mode of the semi-modal page.
+   * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+   * -FOLLOW_GRIP_HAND: The layout follows the grip.
+   * -NONE: Retain the current layout.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -14752,11 +14765,6 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * Base color of the gradient mask.
    * This color serves as the maximum color at the top of the mask.
    * The system applies a built-in transparency curve to gradually fade it from top to bottom.
-   * When not set:
-   * on mid-to-high-performance devices: #CCF1F3F5 is used in light mode,
-   * and #66202224 is used in dark mode.
-   * On low-performance devices: #F2F1F3F5 is used in light mode,
-   * and #E5202224 is used in dark mode.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -28966,6 +28974,16 @@ declare type Theme = import('../api/@ohos.arkui.theme').Theme;
  * @since 18 dynamic
  */
 declare type PromptActionDialogController = import('../api/@ohos.promptAction').promptAction.DialogController;
+
+/**
+ * Import the HandednessFollowMode type from a dialog.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type HandednessFollowMode = import('../api/@ohos.arkui.dialog').HandednessFollowMode;
 
 /**
  * Custom Component
