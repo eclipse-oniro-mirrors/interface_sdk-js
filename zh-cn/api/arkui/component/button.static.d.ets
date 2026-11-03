@@ -612,6 +612,29 @@ export declare interface ButtonAttribute extends CommonMethod {
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<ButtonAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+    /**
+     * Set button options.
+     *
+     * @param { ResourceStr } label - the label of button
+     * @param { ButtonOptions } [options] - button constructor options
+     * @returns { ButtonAttribute } Returns the instance of the ButtonAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setButtonOptions(label: ResourceStr, options?: ButtonOptions): this;
+    /**
+     * Set button options.
+     *
+     * @param { ButtonOptions } [options] - button constructor options
+     * @returns { ButtonAttribute } Returns the instance of the ButtonAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setButtonOptions(options?: ButtonOptions): this;
 }
 
 /**
