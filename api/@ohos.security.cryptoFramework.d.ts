@@ -2432,13 +2432,14 @@ declare namespace cryptoFramework {
      * > Currently, this API and {@link squeezeSync} can be called only once in total per **Md** instance.
      *
      * @param { int } len - Length of the output digest in bytes.
+     *     <br>The value should be an integer.
      *     <br>For the SHAKE128 algorithm, the supported length ranges from 32 to 65536.
      *     <br>For the SHAKE256 algorithm, the supported length ranges from 64 to 65536.
      * @returns { Promise<DataBlob> } Promise used to return the message digest generated.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
-     *     <br>1. Invalid len value;
+     *     <br>1. Invalid len value.
      * @throws { BusinessError } 17620004 - Invalid function call. The fixed-length digest algorithm, such as SHA256,
      *     does not support this API.
      * @syscap SystemCapability.Security.CryptoFramework.MessageDigest
@@ -2462,13 +2463,14 @@ declare namespace cryptoFramework {
      * it is advised to invoke synchronous API within a child thread to avoid blocking the main thread.
      *
      * @param { int } len - Length of the output digest in bytes.
+     *     <br>The value should be an integer.
      *     <br>For the SHAKE128 algorithm, the supported length ranges from 32 to 65536.
      *     <br>For the SHAKE256 algorithm, the supported length ranges from 64 to 65536.
      * @returns { DataBlob } Message digest generated.
      * @throws { BusinessError } 17620001 - Memory operation failed.
      * @throws { BusinessError } 17620002 - Failed to obtain the native object or convert parameters.
      * @throws { BusinessError } 17620003 - Parameter check failed. Possible causes:
-     *     <br>1. Invalid len value;
+     *     <br>1. Invalid len value.
      * @throws { BusinessError } 17620004 - Invalid function call. The fixed-length digest algorithm, such as SHA256,
      *     does not support this API.
      * @syscap SystemCapability.Security.CryptoFramework.MessageDigest
