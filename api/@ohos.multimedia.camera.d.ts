@@ -14862,8 +14862,6 @@ declare namespace camera {
      * @param { C2PASignatureConfig } [config] - C2PA signature configuration, which includes the author name and
      *     author ID. This parameter is optional. If not provided, the C2PA signature will be generated
      *     without author information.
-     * @throws { BusinessError } 7400113 - An exception occurred in the session currently in use.
-     * @throws { BusinessError } 7400116 - The session does not have camerainput information.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
