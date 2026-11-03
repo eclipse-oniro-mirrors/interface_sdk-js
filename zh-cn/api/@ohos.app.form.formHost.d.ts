@@ -37,13 +37,11 @@ import formInfo from './@ohos.app.form.formInfo';
  */
 declare namespace formHost {
   /**
-   * Add a form.
-   * 
-   * You can use this method to create a theme form.
+   * 添加主题卡片。使用Promise异步回调。
    *
    * @permission ohos.permission.REQUIRE_FORM
-   * @param { Want } want - Indicates want of the form.
-   * @returns { Promise<formInfo.RunningFormInfo> } Return the form info.
+   * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
+   * @returns { Promise<formInfo.RunningFormInfo> } Promise对象。返回符合条件的卡片信息，包括卡片名称、尺寸等。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -86,7 +84,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -158,7 +156,7 @@ declare namespace formHost {
    * @param { boolean } [isReleaseCache] - 表示是否释放缓存，默认为false。
    *     <br>true: 表示释放缓存。
    *     <br>false: 表示不释放缓存。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -202,7 +200,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -225,7 +223,7 @@ declare namespace formHost {
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
    * @param { Record<string, Object> } [wantParams] - 更新参数。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -269,7 +267,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -311,7 +309,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识列表。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -351,7 +349,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识列表。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -392,7 +390,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识列表。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -435,7 +433,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识列表。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -469,7 +467,7 @@ declare namespace formHost {
   /**
    * 检查系统是否准备好。使用Promise异步回调。
    *
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -650,7 +648,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用callback异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @param { AsyncCallback<formInfo.FormStateInfo> } callback - 回调函数。当获取卡片状态成功，error为undefined，data为获取到的卡片状态；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
@@ -671,7 +669,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用Promise异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @returns { Promise<formInfo.FormStateInfo> } Promise对象。返回卡片状态。
    * @throws { BusinessError } 201 - Permissions denied.
@@ -788,7 +786,7 @@ declare namespace formHost {
    * @param { boolean } isVisible - 表示卡片是否可见。
    *     <br>true: 表示卡片可见。
    *     <br>false: 表示卡片不可见。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -839,7 +837,7 @@ declare namespace formHost {
    * @param { boolean } isEnableUpdate - 表示卡片是否启用更新状态。
    *     <br>true: 表示卡片启用更新状态。
    *     <br>false: 表示卡片没有启用更新状态。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -858,7 +856,7 @@ declare namespace formHost {
   /**
    * 指定formId和远程设备Id进行卡片分享。使用callback异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.DISTRIBUTED_DATASYNC
+   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.DISTRIBUTED_DATASYNC
    * @param { string } formId - 卡片标识。
    * @param { string } deviceId - 远程设备标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当指定formId和远程设备Id进行卡片分享成功，error为undefined，否则为错误对象。
@@ -880,10 +878,10 @@ declare namespace formHost {
   /**
    * 指定formId和远程设备Id进行卡片分享。使用Promise异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.DISTRIBUTED_DATASYNC
+   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.DISTRIBUTED_DATASYNC
    * @param { string } formId - 卡片标识。
    * @param { string } deviceId - 远程设备标识。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -934,7 +932,7 @@ declare namespace formHost {
    * @param { boolean } isProtected - 表示卡片是否进行隐私保护状态。
    *     <br>true: 表示卡片要进行隐私保护状态。
    *     <br>false: 表示卡片不需要进行隐私保护状态。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -979,8 +977,7 @@ declare namespace formHost {
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
    * @returns { Promise<{ [key: string]: Object }> } 以Promise方式返回接口运行结果及卡片提供方数据。 [since 10 - 10]
-   * @returns { Promise<Record<string, Object>> } Promise used to return the API call result and the shared
-   *     data. [since 11]
+   * @returns { Promise<Record<string, Object>> } 以Promise方式返回接口运行结果及卡片提供方数据。 [since 11]
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1044,7 +1041,7 @@ declare namespace formHost {
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识数组。
    * @param { Callback<Want> } proxy - 回调函数。返回跳转所需要的Want信息。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1086,7 +1083,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识数组。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1129,7 +1126,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识数组。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - caller is not system app.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1171,7 +1168,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识数组。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1192,7 +1189,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.REQUIRE_FORM
    * @param { Array<string> } formIds - 卡片标识数组。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - caller is not system app.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1260,7 +1257,7 @@ declare namespace formHost {
    * @permission ohos.permission.REQUIRE_FORM
    * @param { string } formId - 卡片标识。
    * @param { boolean } isLocked - 标识卡片是否为管控状态，true表示管控状态，false表示非管控状态。
-   * @returns { Promise<void> } The promise returned by the function.
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - caller is not system app.
    * @throws { BusinessError } 16500050 - IPC connection error.
@@ -1452,10 +1449,10 @@ declare namespace formHost {
   function offGetFormRect(callback?: formInfo.GetFormRectInfoCallback): void;
 
   /**
-   * Listens to the event of get live form status.
+   * 订阅所有实时卡片的运行状态查询事件。使用callback异步回调。
    *
-   * @param { 'getLiveFormStatus' } type - Indicates event type.
-   * @param { formInfo.GetLiveFormStatusCallback } callback  - The callback of get live form status.
+   * @param { 'getLiveFormStatus' } type - 事件回调类型，支持的事件为'getLiveFormStatus'，表示在线卡片状态查询。
+   * @param { formInfo.GetLiveFormStatusCallback } callback  - 回调函数，卡片使用方对查询请求进行处理，返回所有实时卡片的运行状态。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1475,10 +1472,10 @@ declare namespace formHost {
   function onGetLiveFormStatus(callback: formInfo.GetLiveFormStatusCallback): void;
 
   /**
-   * Cancels Listening to the event of get live form status.
+   * 取消订阅所有实时卡片的运行状态查询事件。使用callback异步回调。
    *
-   * @param { 'getLiveFormStatus' } type - Indicates event type.
-   * @param { formInfo.GetLiveFormStatusCallback } [callback]  - The callback of get live form status.
+   * @param { 'getLiveFormStatus' } type - 事件回调类型，支持的事件为'getLiveFormStatus'，表示卡片位置尺寸查询。
+   * @param { formInfo.GetLiveFormStatusCallback } [callback]  - 回调函数，对应已订阅卡片位置尺寸查询请求。缺省时，表示注销所有实时卡片的运行状态查询事件回调。
    * @throws { BusinessError } 202 - The application is not a system application.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1686,7 +1683,7 @@ declare namespace formHost {
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { string } serviceId - 待注销的卡片使用方服务的服务Id。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 16500050 - IPC connection error.
