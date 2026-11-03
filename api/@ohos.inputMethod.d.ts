@@ -2348,12 +2348,11 @@ declare namespace inputMethod {
      * input method; otherwise, the request is rejected.
      *
      * @param { InputCapabilityType } type - The input capability type.
-     * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
+     * @returns { Promise } Promise that returns no result.
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      * a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
-     * @throws { BusinessError } 12800010 - current ime is not the default ime.
+     * @throws { BusinessError } 12800010 - current ime application is not the system-configured default input method.
      * @throws { BusinessError } 12800029 - the input type is not supported.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly

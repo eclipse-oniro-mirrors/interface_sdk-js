@@ -1390,11 +1390,10 @@ declare namespace inputMethod {
      * <br>当type为TRANSLATION时，当前输入法须为系统预置默认输入法，否则请求被拒绝。
      *
      * @param { InputCapabilityType } type - 系统输入能力类型。
-     * @returns { Promise<void> } 无返回结果的Promise对象。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1.参数类型错误。
+     * @returns { Promise } Promise对象，无返回结果。
      * @throws { BusinessError } 12800008 - 输入法管理服务错误。可能原因：系统错误，如空指针、IPC异常。
      * @throws { BusinessError } 12800009 - 输入法客户端断开连接。
-     * @throws { BusinessError } 12800010 - 当前输入法非系统默认输入法。
+     * @throws { BusinessError } 12800010 - 当前输入法应用不是系统配置的默认输入法。
      * @throws { BusinessError } 12800029 - 输入类型不支持。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
