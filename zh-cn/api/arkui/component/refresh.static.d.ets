@@ -123,7 +123,7 @@ export interface RefreshOptions {
 }
 
 /**
- * 支持[通用属性]{@link common}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

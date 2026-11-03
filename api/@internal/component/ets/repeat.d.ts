@@ -340,7 +340,7 @@ declare type TemplateTypedFunc<T> = (item: T, index: number) => string;
 declare type RepeatItemBuilder<T> = (repeatItem: RepeatItem<T>) => void;
 
 /**
- * In addition to the [drag-and-drop sorting]{@link common} attribute, the following attributes are supported.
+ * In addition to the [drag-and-drop sorting]{@link CommonMethod} attribute, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

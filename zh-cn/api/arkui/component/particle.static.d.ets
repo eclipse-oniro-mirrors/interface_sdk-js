@@ -1008,7 +1008,7 @@ export declare enum ParticleUpdater {
 }
 
 /**
- * 除支持[通用属性]{@link common}外还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

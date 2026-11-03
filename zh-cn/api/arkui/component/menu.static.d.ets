@@ -47,7 +47,7 @@
  * > >
  * > >   - Menu支持设置的最小宽度为64vp。
  * >
- * > - Menu不支持的通用属性：[外描边设置]{@link common}下的属性、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}。
+ * > - Menu不支持的通用属性：[外描边设置]{@link CommonMethod}下的属性、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}。
  *
  * @file
  * @kit ArkUI
@@ -92,7 +92,7 @@ export declare enum SubMenuExpandingMode {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -190,7 +190,7 @@ export declare interface MenuAttribute extends CommonMethod {
      *
      * @param { AttributeModifier<MenuAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - Menu组件的属性修改
      *     器。取值为undefined时，则不使用属性修改器。<br/>MenuAttribute：当前组件的[属性]{@link MenuAttribute}<br/>CommonMethod：
-     *     [通用属性]{@link common}
+     *     [通用属性]{@link CommonMethod}
      * @returns { MenuAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

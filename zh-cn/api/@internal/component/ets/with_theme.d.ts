@@ -81,9 +81,9 @@ declare interface WithThemeOptions {
 declare type WithThemeInterface = (options: WithThemeOptions) => WithThemeAttribute;
 
 /**
- * 不支持[通用属性]{@link common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  * 
- * 不支持[通用事件]{@link common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

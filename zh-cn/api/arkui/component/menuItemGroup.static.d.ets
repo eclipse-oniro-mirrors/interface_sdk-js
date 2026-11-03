@@ -64,7 +64,7 @@ export declare interface MenuItemGroupOptions {
 }
 
 /**
- * 不支持[通用属性]{@link common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -75,7 +75,7 @@ export declare interface MenuItemGroupAttribute extends CommonMethod {
      * 设置MenuItemGroup组件的属性修改器。
      *
      * @param { AttributeModifier<MenuItemGroupAttribute> | AttributeModifier<CommonMethod> | undefined } modifier -
-     *     MenuItemGroup组件的属性修改器。<br/>CommonMethod：[通用属性]{@link common}
+     *     MenuItemGroup组件的属性修改器。<br/>CommonMethod：[通用属性]{@link CommonMethod}
      * @returns { MenuItemGroupAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

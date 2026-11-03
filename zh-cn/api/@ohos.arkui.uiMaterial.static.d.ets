@@ -107,7 +107,7 @@ declare namespace uiMaterial {
     /**
      * 使能模式。[弹出框Dialog](docroot://ui/arkts-base-dialog-overview.md)、[即时反馈（Toast）](docroot://ui/arkts-create-toast.md)、
      * [AlphabetIndexer]{@link alphabet_indexer}、[ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}、
-     * [Chip]{@link @ohos.arkui.advanced.Chip}、[Select]{@link select}、[菜单控制]{@link common}、[Toggle]{@link toggle}、
+     * [Chip]{@link @ohos.arkui.advanced.Chip}、[Select]{@link select}、[菜单控制]{@link CommonMethod}、[Toggle]{@link toggle}、
      * [SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}、
      * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}、[Slider]{@link slider}、
      * [bindSheet]{@link CommonMethod#bindSheet}、[SelectionMenu]{@link @ohos.arkui.advanced.SelectionMenu}组件默认开启沉浸式系统材质；
