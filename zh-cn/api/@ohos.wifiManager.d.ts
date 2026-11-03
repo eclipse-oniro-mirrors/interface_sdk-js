@@ -5587,16 +5587,15 @@ declare namespace wifiManager {
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
 
   /**
-   * Adds a DNS-SD service discovery request that matches DNS-SD services.
+   * 添加DNS-SD服务发现请求，用于匹配DNS-SD服务。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } [serviceType] - Service type, which is used for peer service discovery.
-   *     The recommended format is "_<ServiceName>._<Protocol>", for example, "_http._tcp".
-   *     Corresponds to the serviceType input parameter in {@link addDnsSdLocalP2pService}.
-   *     If this parameter is not specified, it defaults to an empty string, which matches all service types.
-   * @param { string } [instanceName] - Instance name, used to discover the peer service.
-   *     Corresponds to the instanceName input parameter in {@link addDnsSdLocalP2pService}.
-   *     If this parameter is not specified, it defaults to an empty string.
+   * @param { string } [serviceType] - 服务类型，用于对端服务发现。推荐格式为"_<服务名>._<协议>"，例如："_http._tcp"。
+   *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参serviceType对应。
+   *     未指定该参数时，默认为空字符串，匹配所有服务类型。
+   * @param { string } [instanceName] - 实例名称，用于发现对端服务。
+   *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参instanceName对应。
+   *     未指定该参数时，默认为空字符串。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5608,20 +5607,19 @@ declare namespace wifiManager {
   function addDnsSdServiceRequest(serviceType?: string, instanceName?: string): void;
 
   /**
-   * Adds a UPnP service discovery request that matches the specified search target.
+   * 添加UPnP服务发现请求，用于匹配指定的搜索目标。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } [searchTarget] - UPnP search target. If this parameter is not specified,
-   *     it defaults to an empty string.<br>
-   *     Examples of input parameter types: <br>
+   * @param { string } [searchTarget] - UPnP搜索目标。未指定该参数时，默认为空字符串。<br>
+   *     入参类型示例如下：<br>
    *     <ul>
-   *     <li>Search all UPnP devices and services: "ssdp:all"
-   *     <li>Search specific root devices: "upnp:rootdevice"
-   *     <li>Search specific device types (urn:schemas-upnp-org:device:...): <br>
-   *         for example "urn:schemas-upnp-org:device:MediaServer:2"
-   *     <li>Search specific service types (urn:schemas-upnp-org:service:...): <br>
-   *         for example "urn:schemas-upnp-org:service:ContentDirectory:2"
-   *     <li>Search specific UUID: for example: "uuid:6859dede-8574-59ab-9332-123456789012"
+   *     <li>搜索所有UPnP设备和服务："ssdp:all"
+   *     <li>搜索特定根设备："upnp:rootdevice"
+   *     <li>搜索特定设备类型（urn:schemas-upnp-org:device:...）：<br>
+   *         例如"urn:schemas-upnp-org:device:MediaServer:2"
+   *     <li>搜索特定服务类型（urn:schemas-upnp-org:service:...）：<br>
+   *         例如"urn:schemas-upnp-org:service:ContentDirectory:2"
+   *     <li>搜索特定UUID：例如："uuid:6859dede-8574-59ab-9332-123456789012"
    *     </ul>
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -5634,11 +5632,10 @@ declare namespace wifiManager {
   function addUpnpServiceRequest(searchTarget?: string): void;
 
   /**
-   * Queries the pending P2P service discovery requests. This API uses a promise to return the result.
+   * 查询待处理的P2P服务发现请求，使用Promise异步回调。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @returns { Promise<Array<WifiP2pServiceRequest>> } Promise used to return the pending service discovery
-   *     request list.
+   * @returns { Promise<Array<WifiP2pServiceRequest>> } Promise对象。用于返回待处理的服务发现请求列表。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5650,11 +5647,10 @@ declare namespace wifiManager {
   function getP2pServiceRequest(): Promise<Array<WifiP2pServiceRequest>>;
 
   /**
-   * Removes a specified service discovery request.
-   * You can obtain the list of registered service discovery requests by calling {@link getP2pServiceRequest}.
+   * 移除指定的服务发现请求。可以通过[getP2pServiceRequest]{@link wifiManager.getP2pServiceRequest}获取已注册的服务发现请求列表。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { WifiP2pServiceRequest } request - Service discovery request to remove.
+   * @param { WifiP2pServiceRequest } request - 待移除的服务发现请求。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5666,7 +5662,7 @@ declare namespace wifiManager {
   function removeP2pServiceRequest(request: WifiP2pServiceRequest): void;
 
   /**
-   * Removes all pending service discovery requests.
+   * 移除所有待处理的服务发现请求。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
    * @throws { BusinessError } 201 - Permission denied.
@@ -5680,10 +5676,9 @@ declare namespace wifiManager {
   function removeAllP2pServiceRequests(): void;
 
   /**
-   * Starts P2P service discovery. The pending requests' TLV queries are used, falling back to all service types
-   * if the pending list is empty.
-   * Use {@link addDnsSdServiceRequest} or {@link addUpnpServiceRequest} to add a service request before
-   * starting discovery.
+   * 启动P2P服务发现。使用待处理请求的TLV查询进行发现，如果待处理列表为空，则回退为发现所有服务类型。
+   * 启动发现前，请先通过[addDnsSdServiceRequest]{@link wifiManager.addDnsSdServiceRequest}或
+   * [addUpnpServiceRequest]{@link wifiManager.addUpnpServiceRequest}添加服务请求。
    *
    * @permission ohos.permission.GET_WIFI_PEERS_MAC
    * @throws { BusinessError } 201 - Permission denied.
@@ -5697,11 +5692,10 @@ declare namespace wifiManager {
   function discoverServices(): void;
 
   /**
-   * Subscribes to generic service response events from peer devices.
+   * 订阅来自对端设备的通用服务响应事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<P2pServiceDiscoveryInfo> } callback - Callback invoked when a service discovery
-   *     response is received from a peer device.
+   * @param { Callback<P2pServiceDiscoveryInfo> } callback - 收到对端设备的服务发现响应时触发的回调函数。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5712,11 +5706,11 @@ declare namespace wifiManager {
   function onP2pServiceDiscovery(callback: Callback<P2pServiceDiscoveryInfo>): void;
 
   /**
-   * Unsubscribes from generic service response events.
+   * 取消订阅通用服务响应事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<P2pServiceDiscoveryInfo> } [callback] - Callback to unregister. If not specified,
-   *     all callbacks for this event type are unregistered.
+   * @param { Callback<P2pServiceDiscoveryInfo> } [callback] - 待取消注册的回调函数。未指定该参数时，
+   *     取消注册该事件类型的所有回调。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5726,7 +5720,5 @@ declare namespace wifiManager {
    */
   function offP2pServiceDiscovery(callback?: Callback<P2pServiceDiscoveryInfo>): void;
 }
-
-
 
 export default wifiManager;
