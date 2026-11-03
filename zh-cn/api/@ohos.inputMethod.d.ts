@@ -18,7 +18,7 @@
  * @kit IMEKit
  */
 import type { Callback, AsyncCallback } from './@ohos.base';
-import type { PreviewTextStyle as _PreviewTextStyle } from './@ohos.inputMethodEngine';
+import inputMethodEngine from './@ohos.inputMethodEngine';
 import InputMethodSubtype from './@ohos.InputMethodSubtype';
 import { UIContext } from './@ohos.arkui.UIContext';
 /*** if arkts dynamic */
@@ -2663,6 +2663,7 @@ declare namespace inputMethod {
      *
      * @param { SetPreviewTextWithStyleCallback } callback - 回调函数。用于接收带样式的预上屏文本内容。
      * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     onSetPreviewTextWithStyle(callback: SetPreviewTextWithStyleCallback): void;
@@ -3786,8 +3787,9 @@ declare namespace inputMethod {
    *
    * @param { string } text - 预览文本内容。
    * @param { Range } range - 文本的选中范围。
-   * @param { PreviewTextStyle } style - 预上屏文本下划线样式和颜色。
+   * @param { PreviewTextStyle } style - 预上屏文本的样式。
    * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
   export type SetPreviewTextWithStyleCallback = (text: string, range: Range, style: PreviewTextStyle) => void;
@@ -3809,7 +3811,7 @@ declare namespace inputMethod {
      */
     NONE = 0,
     /**
-     * 直线下划线。
+     * 实线下划线。
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -3833,14 +3835,33 @@ declare namespace inputMethod {
      */
     DASHED = 3
   }
+
   /**
-   * 描述预上屏文本的下划线样式和颜色。
+   * 预上屏文本的样式。
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  export type PreviewTextStyle = _PreviewTextStyle;
+  export interface PreviewTextStyle {
+    /**
+     * 下划线样式。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * 下划线颜色，格式为0xRRGGBB。可选参数，不传时下划线颜色应遵循应用主题颜色。若携带透明度，透明度无效，将被编辑器忽略。
+     * 取值限定为整数。默认值：缺省行为：不传递颜色给编辑框，由编辑框处理，默认跟随光标色。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
+  }
 
   /**
    * 枚举，定义了文本首字母大写的不同模式。

@@ -26,7 +26,7 @@
  * @kit IMEKit
  */
 import type { Callback, AsyncCallback } from './@ohos.base';
-import type { PreviewTextStyle as _PreviewTextStyle } from './@ohos.inputMethodEngine';
+import inputMethodEngine from './@ohos.inputMethodEngine';
 import InputMethodSubtype from './@ohos.InputMethodSubtype';
 import { UIContext } from "./@ohos.arkui.UIContext";
 /*** if arkts dynamic */
@@ -3002,6 +3002,7 @@ declare namespace inputMethod {
      *
      * @param { SetPreviewTextWithStyleCallback } callback - the callback called when the input method sets preview text with style.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     onSetPreviewTextWithStyle(callback: SetPreviewTextWithStyleCallback): void;
@@ -4183,8 +4184,9 @@ declare namespace inputMethod {
    *
    * @param { string } text - Preview text content.
    * @param { Range } range - Selected range of the text.
-   * @param { PreviewTextStyle } style - Underline style and color for the preview text.
+   * @param { PreviewTextStyle } style - Style of the preview text.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
   export type SetPreviewTextWithStyleCallback = (text: string, range: Range, style: PreviewTextStyle) => void;
@@ -4232,13 +4234,34 @@ declare namespace inputMethod {
   }
 
   /**
-   * Describes the underline style and color for preview text.
+   * Style of the preview text.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  export type PreviewTextStyle = _PreviewTextStyle;
+  export interface PreviewTextStyle {
+    /**
+     * Underline style.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * Underline color in 0xRRGGBB format. Optional; when not specified, the underline color
+     * should follow the application's theme color. If transparency is provided, it is invalid
+     * and will be ignored by the editor.
+     * The value must be an integer. Default: when not provided, no color is passed to the edit box;
+     * the edit box handles it and defaults to following the cursor color.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
+  }
 
   /**
    * Enumerates the modes of capitalizing the first letter of a text.

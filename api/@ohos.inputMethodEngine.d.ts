@@ -2221,36 +2221,34 @@ declare namespace inputMethodEngine {
     setPreviewTextSync(text: string, range: Range): void;
 
     /**
-     * Sets the preview text with underline style.
+     * Sets the preview text with style.
      *
      * @param { string } text - Preview text to set.
      * @param { Range } range - Range of the preview text.
-     * @param { PreviewTextStyle } style - Underline style and color for the preview text.
+     * @param { PreviewTextStyle } style - Style of the preview text.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
      * 3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800011 - text preview not supported.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     setPreviewTextWithStyle(text: string, range: Range, style: PreviewTextStyle): Promise<void>;
 
     /**
-     * Sets the preview text with underline style.
+     * Sets the preview text with style.
      *
      * @param { string } text - Preview text to set.
      * @param { Range } range - Range of the preview text.
-     * @param { PreviewTextStyle } style - Underline style and color for the preview text.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @param { PreviewTextStyle } style - Style of the preview text.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
      * 3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800011 - text preview not supported.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     setPreviewTextWithStyleSync(text: string, range: Range, style: PreviewTextStyle): void;
@@ -5371,7 +5369,7 @@ declare namespace inputMethodEngine {
   }
 
   /**
-   * Describes the underline style and color for preview text.
+   * Style of the preview text.
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
@@ -5387,9 +5385,11 @@ declare namespace inputMethodEngine {
      */
     underlineStyle: UnderlineStyle;
     /**
-     * Underline color in 0xAARRGGBB format. Optional; when not specified, the underline color
-     * follows the application's theme color. The alpha channel is invalid and will be ignored
-     * by the editor.
+     * Underline color in 0xRRGGBB format. Optional; when not specified, the underline color
+     * should follow the application's theme color. If transparency is provided, it is invalid
+     * and will be ignored by the editor.
+     * The value must be an integer. Default: when not provided, no color is passed to the edit box;
+     * the edit box handles it and defaults to following the cursor color.
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5400,4 +5400,3 @@ declare namespace inputMethodEngine {
 }
 
 export default inputMethodEngine;
-export type PreviewTextStyle = inputMethodEngine.PreviewTextStyle;
