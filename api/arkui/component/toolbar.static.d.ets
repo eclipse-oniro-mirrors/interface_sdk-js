@@ -85,7 +85,7 @@ export declare interface ToolBarItemAttribute {
     /**
      * Sets toolbar item options.
      *
-     * @param { ToolBarItemOptions } [options] - column options
+     * @param { ToolBarItemOptions } [options] - toolbar item options
      * @returns { this } ToolBarItemAttribute instance
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
@@ -107,7 +107,7 @@ export declare interface ToolBarItemAttribute {
 /**
  * Defines ToolBarItem Component.
  *
- * @param { ToolBarItemOptions } [options] - column options
+ * @param { ToolBarItemOptions } [options] - toolbar item options
  * @param { CustomBuilder } [content_] - container
  * @returns { ToolBarItemAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -123,7 +123,7 @@ export declare function ToolBarItem(
 /**
  * Defines ToolBarItem Component.It requires call setToolBarItemOptions at start of
  * the component attribute set-up,
- * and it requires call applyAttributeFinish at the end of the component attribute set-up.
+ * and it requires call applyAttributesFinish at the end of the component attribute set-up.
  *
  * @param { CustomBuilderT<ToolBarItemAttribute> } style - the callback to set up toolbaritem's attributes.
  * @param { CustomBuilder } [content_] - container.
