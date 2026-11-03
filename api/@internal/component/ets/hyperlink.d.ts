@@ -54,7 +54,7 @@ interface HyperlinkInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 20]
@@ -94,7 +94,7 @@ declare class HyperlinkAttribute extends CommonMethod<HyperlinkAttribute> {
  *
  * ###### Child Components
  *
- * This component can contain the [Image]{@link ./image} child component.
+ * This component can contain the [Image]{@link @global:Image} child component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 20]

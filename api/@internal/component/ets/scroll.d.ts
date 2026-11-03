@@ -152,7 +152,7 @@ declare enum ScrollAlign {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum FastScrollMode {
   /**
@@ -162,7 +162,7 @@ declare enum FastScrollMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   NONE = 0,
 
@@ -177,7 +177,7 @@ declare enum FastScrollMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SKIP_MEASURE = 1,
 
@@ -191,7 +191,7 @@ declare enum FastScrollMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SKIP_CREATE_AND_MEASURE = 2
 }
@@ -292,7 +292,7 @@ declare interface ScrollToIndexOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   fastScroll?: FastScrollMode;
 }
@@ -825,7 +825,7 @@ declare class Scroller {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getScrollState(): ScrollState;
 }

@@ -972,7 +972,7 @@ export declare struct ChipGroupV2 {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   @Event
   onItemsChange?: Callback<ChipGroupV2Items>;

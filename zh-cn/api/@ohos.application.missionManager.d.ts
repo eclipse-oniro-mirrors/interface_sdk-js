@@ -40,7 +40,7 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { MissionListener } listener - 系统任务监听器。
-   * @returns { number } 监听器的index值，由系统创建，在注册系统任务状态监听器时分配，和监听器一一对应 。
+   * @returns { number } 监听器的index值，由系统创建，在注册系统任务状态监听器时分配，和监听器一一对应。
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi
    * @since 8

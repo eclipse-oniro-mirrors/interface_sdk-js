@@ -542,7 +542,7 @@ type GestureType = 'left' | 'leftThenRight' | 'leftThenUp' | 'leftThenDown' |
  *
  * @unionmember { 'pageContentUpdate' } Page content updated.
  * @unionmember { 'pageStateUpdate' } Page state updated.
- * @unionmember { 'pageStatePreUpdate' } Indicates that the page status is about to be updated. [since 26.2.0]
+ * @unionmember { 'pageStatePreUpdate' } Indicates that the page status is about to be updated. [since 26.1.0]
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @since 9 dynamiconly
  */

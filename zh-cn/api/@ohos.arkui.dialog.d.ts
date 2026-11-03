@@ -19,8 +19,48 @@
  */
 
 /**
+ * 表示对话框跟随惯用手的方式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export enum HandednessFollowMode {
+  /**
+   * 不适配。对话框保持当前布局。默认值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+
+  /**
+   * 对话框跟随触发它的组件（最近交互的组件）的位置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_ANCHOR = 1,
+
+  /**
+   * 对话框跟随握持手（握持设备的手，区别于与屏幕交互的操作手）。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_GRIP_HAND = 2,
+}
+
+/**
 * 提供统一的Dialog API。
-*
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -648,6 +688,19 @@ declare namespace dialog {
      * @since 26.0.1 dynamic
      */
     edgeLightMode?: EdgeLightMode;
+
+    /**
+     * 是否以及如何使对话框适配惯用手。
+     * FOLLOW_ANCHOR：对话框向触发它的组件的位置偏移；当不存在触发组件时，回退到当前布局。
+     * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    adaptToHandedness?: HandednessFollowMode;
   }
 
   /**

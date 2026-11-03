@@ -435,7 +435,7 @@ export declare class FrameNode {
    *     successfully; returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
 
@@ -447,7 +447,7 @@ export declare class FrameNode {
    *     returns **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   dispatchKeyEvent(event: KeyEvent): boolean;
 

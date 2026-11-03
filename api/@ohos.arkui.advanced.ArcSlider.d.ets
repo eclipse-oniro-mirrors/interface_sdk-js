@@ -14,6 +14,26 @@
   */
 
 /**
+ * The **ArcSlider** component is designed for circular screens on wearables to quickly adjust settings, 
+ * such as the volume and brightness.
+ * 
+ * > **NOTE**
+ * >
+ * > - This component is supported on Phone, PC/2in1, Tablet, TV, and Wearable devices. In API version 22 and earlier, 
+ * > using it on Phone, PC/2in1, Tablet, or TV generates a compilation warning, but the component can run normally.
+ * 
+ * ###### Child Components
+ * 
+ * Not supported
+ * 
+ * ###### Attributes
+ * 
+ * The [universal attributes]{@link common} are not supported.
+ * 
+ * ###### Events
+ * 
+ * The [universal events]{@link common} are not supported.
+ * 
  * @file
  * @kit ArkUI
  */
@@ -159,7 +179,7 @@ declare class ArcSliderValueOptions {
    * When progress is not within the range of [min, max], the nearest boundary value is taken: if **progress** is less
    * than **min**, **min** is taken; if **progress** is greater than **max**, **max** is taken.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default 100
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -233,7 +253,7 @@ declare class ArcSliderLayoutOptions {
    *
    * Default value: **true**, meaning sliding from bottom to top.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -440,7 +460,7 @@ declare class ArcSliderStyleOptions {
    *
    * Value range: [0, +∞). Abnormal values are handled as default.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @default 20
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -668,7 +688,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -683,7 +703,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -698,7 +718,7 @@ declare class ArcSliderOptions {
    *
    * Default value: no callback when not passed in.
    *
-   * **Decorator:*
+   * **Decorator**: @Trace
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -722,16 +742,7 @@ declare class ArcSliderOptions {
 }
 
 /**
- * The **ArcSlider** component is designed for circular screens on wearables to quickly adjust settings, such as the
- * volume and brightness.
- *
- * > **NOTE**
- * >
- * > - This component is supported since API version 18. New features in later versions are marked with superscripts to
- * > indicate the initial version.
- * >
- * > - This component is supported on Phone, PC/2in1, Tablet, TV, and Wearable devices. In API version 22 and earlier,
- * > using it on Phone, PC/2in1, Tablet, or TV generates a compilation warning, but the component can run normally.
+ * Creates an **ArcSlider** instance. The input parameter is the arc slider configuration options.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Description of the notification channel
+ * @file NotificationSlot
  * @kit NotificationKit
  */
 
@@ -26,7 +26,8 @@ import type notificationManager from '../@ohos.notificationManager';
 /*** endif */
 
 /**
- * 描述通知渠道，不同通知渠道对应的通知提醒方式不同。
+ * 描述[通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)，不同通知渠道对应的
+ * [通知提醒方式](docroot://notification/notification-glossary.md#notification-reminder-mode通知提醒方式)不同。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 7 dynamic
@@ -44,7 +45,7 @@ export interface NotificationSlot {
   type?: notification.SlotType;
 
   /**
-   * 渠道类型。不同渠道类型的通知提醒方式不同。
+   * 渠道类型。不同渠道类型的[通知提醒方式](docroot://notification/notification-glossary.md#notification-reminder-mode通知提醒方式)不同。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -82,7 +83,7 @@ export interface NotificationSlot {
 
   /**
    * 是否显示角标。默认值为true。
-   * 
+   *
    * - true：显示角标。
    * - false：不显示角标。
    *
@@ -93,8 +94,8 @@ export interface NotificationSlot {
   badgeFlag?: boolean;
 
   /**
-   * 是否在系统中绕过免打扰模式。默认值为false。
-   * 
+   * 是否在系统中绕过[免打扰模式](docroot://notification/notification-glossary.md#do-not-disturb-mode免打扰模式)。默认值为false。
+   *
    * - true：绕过免打扰模式，免打扰模式下仍会提醒。
    * - false：不绕过免打扰模式，免打扰模式下不提醒。
    *
@@ -115,7 +116,7 @@ export interface NotificationSlot {
 
   /**
    * 是否可振动。默认值为false。
-   * 
+   *
    * - true：可振动。
    * - false：不可振动。
    *
@@ -126,7 +127,8 @@ export interface NotificationSlot {
   vibrationEnabled?: boolean;
 
   /**
-   * 该渠道的通知的自定义铃声文件名。该文件放在resources/rawfile目录下，支持m4a、aac、mp3、ogg、wav、flac、amr等格式。大小不超过243字节，超出部分会被截断。
+   * 该渠道的通知的[自定义铃声](docroot://notification/notification-glossary.md#customized-ringtone自定义铃声)文件名。该文件放在resources/rawfile目
+   * 录下，支持m4a、aac、mp3、ogg、wav、flac、amr等格式。大小不超过243字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -136,7 +138,7 @@ export interface NotificationSlot {
 
   /**
    * 是否闪灯。默认值为false。
-   * 
+   *
    * - true：闪灯。
    * - false：不闪灯。
    *
@@ -165,8 +167,8 @@ export interface NotificationSlot {
   vibrationValues?: Array<long>;
 
   /**
-   * 是否允许发布此通知渠道类型的通知。
-   * 
+   * 是否允许发布此[通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)类型的通知。
+   *
    * - true：允许发布通知。
    * - false：禁止发布通知。
    *
@@ -178,7 +180,7 @@ export interface NotificationSlot {
 
   /**
    * 通知提醒模式。
-   * 
+   *
    * - bit0：铃声提示。0表示关闭，1表示开启。 
    * - bit1：锁屏。0表示关闭，1表示开启。 
    * - bit2：横幅。0表示关闭，1表示开启。 
@@ -195,7 +197,7 @@ export interface NotificationSlot {
 
   /**
    * 授权状态。
-   * 
+   *
    * - 0：表示已授权。 
    * - 1：表示待授权。
    *

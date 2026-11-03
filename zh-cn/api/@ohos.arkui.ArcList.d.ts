@@ -62,8 +62,8 @@ declare interface ArkListOptions {
    *
    * **说明：**
    *
-   * 不允许和其他滚动类组件，如：[List]{@link ./@internal/component/ets/list}、[Grid]{@link ./@internal/component/ets/grid}、
-   * [Scroll]{@link ./@internal/component/ets/scroll}和[WaterFlow]{@link ./@internal/component/ets/water_flow}绑定同一个滚动控制对
+   * 不允许和其他滚动类组件，如：[List]{@link @global:List}、[Grid]{@link @global:Grid}、
+   * [Scroll]{@link @global:Scroll}和[WaterFlow]{@link @global:WaterFlow}绑定同一个滚动控制对
    * 象。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -146,7 +146,7 @@ export interface ArcListItemInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./@internal/component/ets/common}外，还支持以下属性（不支持
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性（不支持
  * [滚动组件通用属性]{@link ScrollableCommonMethod}）：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -426,7 +426,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
 }
 
 /**
- * 除支持[通用属性]{@link ./@internal/component/ets/common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform

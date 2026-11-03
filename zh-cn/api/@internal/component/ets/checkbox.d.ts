@@ -50,7 +50,7 @@ declare interface CheckboxOptions {
    * 
    * **说明：** 
    * 
-   * 未配合使用[CheckboxGroup]{@link checkboxgroup}组件时，此值无用。
+   * 未配合使用[CheckboxGroup]{@link @global:CheckboxGroup}组件时，此值无用。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -162,9 +162,9 @@ interface CheckboxInterface {
 declare type OnCheckboxChangeCallback = (value: boolean) => void;
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 支持[通用事件]{@link common}外，还支持以下事件：
+ * 支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

@@ -50,6 +50,24 @@ export declare interface TextBackgroundStyle {
      * @since 23 static
      */
     radius?: Dimension | BorderRadiuses;
+    /**
+     * Text background border width.
+     * Default value: **0**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    borderWidth?: Dimension;
+    /**
+     * Text background border color.
+     * Default value: **Color.Transparent**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    borderColor?: ResourceColor;
 }
 
 /**

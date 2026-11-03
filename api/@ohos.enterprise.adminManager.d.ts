@@ -109,7 +109,8 @@ declare namespace adminManager {
      * automatically start upon device startup and can be restarted after the component process dies.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_NORMAL = 0x00,
@@ -120,7 +121,8 @@ declare namespace adminManager {
      * automatically start upon device startup and can be restarted after the component process dies.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @systemapi
+     * @systemapi [since 9 - 26.0.0]
+     * @publicapi [since 26.0.1]
      * @since 9
      */
     ADMIN_TYPE_SUPER = 0x01,
@@ -240,7 +242,16 @@ declare namespace adminManager {
      * @stagemodelonly
      * @since 26.0.0
      */
-    MANAGED_EVENT_POLICIES_CHANGED = 11
+    MANAGED_EVENT_POLICIES_CHANGED = 11,
+
+    /**
+     * Password authentication failure event.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MANAGED_EVENT_PASSWORD_FAILED = 13
   }
 
   /**
@@ -921,7 +932,7 @@ declare namespace adminManager {
    * @param { string } bundleName - Bundle name of the delegated application. The distribution type of the delegated
    *     application must be **enterprise_normal** or **enterprise_mdm**. You can call the
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo} of the application, where
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of the application, where
    *     **BundleInfo.appInfo.appDistributionType** indicates the distribution type.
    * @param { Array<string> } policies -
    *     [Delegable policy list](docroot://mdm/mdm-kit-appendix.md#delegable-policy-list).
@@ -973,7 +984,7 @@ declare namespace adminManager {
    * @param { string } bundleName - Bundle name of the delegated application. The distribution type of the delegated
    *     application must be **enterprise_normal** or **enterprise_mdm**. You can call the
    *     [getBundleInfoForSelf]{@link @ohos.bundle.bundleManager:bundleManager.getBundleInfoForSelf} API to query the
-   *     [BundleInfo]{@link ./bundleManager/BundleInfo} of the application, where
+   *     [BundleInfo]{@link ./bundleManager/BundleInfo:BundleInfo} of the application, where
    *     **BundleInfo.appInfo.appDistributionType** indicates the distribution type.
    * @returns { Array<string> } Delegation policy list.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.

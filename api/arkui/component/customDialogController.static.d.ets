@@ -17,6 +17,7 @@
  * @file
  * @kit ArkUI
  */
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
 import { Rectangle, AnimateParam, Callback, ShadowOptions, ShadowStyle, KeyboardAvoidMode, BlurStyle, HoverModeAreaType, DismissReason, BackgroundBlurStyleOptions, BackgroundEffectOptions, DistortionMode, EdgeLightMode } from './common';
 import { ExtendableComponent } from './extendableComponent';
 import { DialogAlignment } from './alertDialog';
@@ -441,6 +442,22 @@ export declare interface CustomDialogControllerOptions {
      * @since 26.0.1 staticonly
      */
     baseComponent?: ExtendableComponent;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it (the last interacted component); falls back to the current layout
+     * when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+     * the device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    adaptToHandedness?: HandednessFollowMode;
 }
 /**
  * Defines the external options of CustomDialogController.

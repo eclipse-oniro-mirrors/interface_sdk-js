@@ -188,7 +188,7 @@ declare class PatternLockController {
  * > [custom components](docroot://ui/state-management/arkts-create-custom-components.md). For example, the custom
  * > component<!--RP1-->
  * > [CustomPatternLock](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/UI/CustomPatternLock)
- * > <!--RP1End--> implements the pattern password lock feature through the [Canvas]{@link ./canvas} component, based on
+ * > <!--RP1End--> implements the pattern password lock feature through the [Canvas]{@link @global:Canvas} component, based on
  * > which you can extend the features as needed.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -216,7 +216,7 @@ interface PatternLockInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -446,7 +446,7 @@ declare class PatternLockAttribute extends CommonMethod<PatternLockAttribute> {
  * > [custom components](docroot://ui/state-management/arkts-create-custom-components.md). For example, the custom
  * > component<!--RP1-->
  * > [CustomPatternLock](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/UI/CustomPatternLock)
- * > <!--RP1End--> implements the pattern password lock feature through the [Canvas]{@link ./canvas} component, based on
+ * > <!--RP1End--> implements the pattern password lock feature through the [Canvas]{@link @global:Canvas} component, based on
  * > which you can extend the features as needed.
  *
  * ###### Child Components

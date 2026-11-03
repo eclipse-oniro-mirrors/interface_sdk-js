@@ -73,7 +73,7 @@ declare interface UIPickerComponentOptions {
  * >
  * > - UIPickerComponent容器当前不支持智能手表设备。开发者可通过deviceInfo.deviceType获取设备类型，判断是否为智能手表设备。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -285,7 +285,7 @@ declare interface PickerIndicatorStyle {
    * > **说明：**
    * >
    * > 1. 当type为PickerIndicatorType.BACKGROUND时生效。
-   * > 2. [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}：统一设置四个圆角半径的大小和单位。
+   * > 2. [LengthMetrics]{@link @ohos.arkui.node:LengthMetrics}：统一设置四个圆角半径的大小和单位。
    * > 3. [BorderRadiuses]{@link BorderRadiuses}：单独设置四个圆角半径的大小（单位为vp）。
    * > 4. [LocalizedBorderRadiuses]{@link LocalizedBorderRadiuses}：单独设置四个圆角半径的大小和单位。
    *
@@ -300,9 +300,9 @@ declare interface PickerIndicatorStyle {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -432,7 +432,7 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
    * [height]{@link CommonMethod#height(value: Length)}属性进行调整以保证完整显示。
    *
    * @param { Optional<LengthMetrics> } height - 选项高度。
-   *     <br>单位：与[LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}一致。
+   *     <br>单位：与[LengthMetrics]{@link @ohos.arkui.node:LengthMetrics}一致。
    *     <br>取值范围：[40vp, 64vp]
    *     <br>设置小于40vp或大于64vp时，使用默认值40vp。
    *     <br>当height的值为undefined时，使用默认值40vp。
@@ -490,12 +490,12 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
  * >
  * > - UIPickerComponent容器当前不支持智能手表设备。开发者可通过deviceInfo.deviceType获取设备类型，判断是否为智能手表设备。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * 
  * > ###### 子组件
  * >
  * > - 支持多个子组件。
- * > - 支持子组件类型：[Text]{@link ./text}、[Image]{@link ./image}、[Row]{@link ./row}和[SymbolGlyph]{@link ./symbolglyph}。
+ * > - 支持子组件类型：[Text]{@link @global:Text}、[Image]{@link @global:Image}、[Row]{@link @global:Row}和[SymbolGlyph]{@link @global:SymbolGlyph}。
  * > - 支持渲染控制类型：[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)和
  * > [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)。
  * 

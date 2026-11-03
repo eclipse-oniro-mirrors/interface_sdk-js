@@ -359,7 +359,7 @@ declare interface WaterFlowOptions {
 
 /**
  * frameNode中
- * [getEvent('WaterFlow')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}方法的返
+ * [getEvent('WaterFlow')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}方法的返
  * 回值，可用于给WaterFlow节点设置滚动事件。
  *
  * UIWaterFlowEvent继承于[UIScrollableCommonEvent]{@link UIScrollableCommonEvent}。
@@ -443,7 +443,7 @@ declare type OnWaterFlowScrollIndexCallback = (first: number, last: number) => v
  * >
  * > WaterFlow组件支持展示瀑布流布局，不支持编辑模式和子元素拖动功能。
  * >
- * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -642,7 +642,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
 
@@ -835,11 +835,11 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
  * >
  * > WaterFlow组件支持展示瀑布流布局，不支持编辑模式和子元素拖动功能。
  * >
- * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  *
  * ###### 子组件
  *
- * 仅支持[FlowItem]{@link ./flow_item}子组件和自定义组件。自定义组件在WaterFlow下使用时，建议使用FlowItem作为自定义组件的顶层组件，不建议给自定义组件设置属性和事件方法。
+ * 仅支持[FlowItem]{@link @global:FlowItem}子组件和自定义组件。自定义组件在WaterFlow下使用时，建议使用FlowItem作为自定义组件的顶层组件，不建议给自定义组件设置属性和事件方法。
  *
  * 支持通过渲染控制类型（[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)、

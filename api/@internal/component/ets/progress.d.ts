@@ -593,7 +593,7 @@ declare interface CapsuleStyleOptions extends ScanEffectOptions, CommonProgressS
    *
    * Text size (percentage setting not supported): 12fp
    *
-   * Other text parameters follow the theme values of the [Text]{@link ./text} component.
+   * Other text parameters follow the theme values of the [Text]{@link @global:Text} component.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -788,8 +788,6 @@ declare interface ProgressStyleMap {
  * data loading, and task processing. With rich style and animation configurations, progress visualization can be
  * quickly implemented to improve user experience.
  *
- * > **NOTE**
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
  * @form [since 9]
@@ -815,7 +813,7 @@ interface ProgressInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * > **NOTE**
  * >
@@ -859,7 +857,7 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    *
    * Since API version 10, [LinearGradient]{@link LinearGradient} can be used to set a gradient color for the ring
    * style. Setting opacity is not recommended for the ring type. If opacity is required, use
-   * [DataPanel]{@link ./data_panel}.
+   * [DataPanel]{@link @global:DataPanel}.
    *
    * Since API version 23, LinearGradient can be used to set the gradient color of the Linear style and Capsule style.
    * In API version 22 and earlier, when this method is used, the default theme color is displayed.
@@ -921,8 +919,8 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    *     <br> Default value: false
    *     <br>**Note:**
    *     <br>Setting null indicates that the component is not sensitive. <!--Del-->
-   *     <br>To use Progress in a card and set the [privacy mask]{@link ./common} attribute with the
-   *     [FormComponent]{@link ./form_component} component, the privacy mask effect is available only when the card is
+   *     <br>To use Progress in a card and set the [privacy mask]{@link CommonMethod} attribute with the
+   *     [FormComponent]{@link @global:FormComponent} component, the privacy mask effect is available only when the card is
    *     displayed.<!--DelEnd-->
    * @returns { ProgressAttribute<Type> }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1002,11 +1000,9 @@ declare interface ProgressConfiguration extends CommonConfiguration<ProgressConf
  * data loading, and task processing. With rich style and animation configurations, progress visualization can be
  * quickly implemented to improve user experience.
  *
- * > **NOTE**
- *
  * ###### Child Components
  *
- * Not supported
+ * Not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

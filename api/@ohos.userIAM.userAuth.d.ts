@@ -1119,7 +1119,8 @@ declare namespace userAuth {
      * > Use the obtained [AuthInstance]{@link userAuth.AuthInstance} object to call this API for authentication.
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 12500001 - Authentication failed.
      * @throws { BusinessError } 12500002 - General operation error.
@@ -1147,7 +1148,8 @@ declare namespace userAuth {
      * > authentication.
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
@@ -1176,9 +1178,8 @@ declare namespace userAuth {
    *     trust level to be queried. The valid values are **ATL1(10000)**, **ATL2(20000)**, **ATL3(30000)**, and
    *     **ATL4(40000)**. A higher level indicates a higher requirement on the liveness detection capability of the
    *     authentication solution.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500006 - The authentication trust level is not supported.
@@ -1249,9 +1250,8 @@ declare namespace userAuth {
    *     **credentialDigest** (credential digest) and **credentialCount** (credential count). The application can save
    *     the **credentialDigest** value and compare it with the value obtained in subsequent queries to detect
    *     credential changes.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500010 - The type of credential has not been enrolled.
@@ -1325,7 +1325,8 @@ declare namespace userAuth {
    *     the security requirements of the service scenario.
    * @returns { Promise<AuthLockState> } Promise used to return the result. An error is reported when the operation
    *     fails.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500005 - The authentication type is not supported.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
@@ -2070,7 +2071,7 @@ declare namespace userAuth {
      *     [start()]{@link userAuth.UserAuthInstance.start} is called, identity authentication is initiated, and the
      *     authentication interaction is completed.
      * @param { IAuthCallback } callback - Callback used to return the user authentication result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2089,7 +2090,7 @@ declare namespace userAuth {
      * subscription.
      *
      * @param { IAuthCallback } callback - Callback used to return the user authentication result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2114,7 +2115,7 @@ declare namespace userAuth {
      *     is not passed, the value passed when the
      *     [on('result')]{@link userAuth.UserAuthInstance.on(type: 'result', callback: IAuthCallback)} API is called is
      *     used by default.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2138,7 +2139,7 @@ declare namespace userAuth {
      * </p>
      *
      * @param { IAuthCallback } [callback] - Callback to unregister.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2160,11 +2161,8 @@ declare namespace userAuth {
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC [since 10 - 19]
      * @permission ohos.permission.ACCESS_BIOMETRIC or ohos.permission.USER_AUTH_FROM_BACKGROUND [since 20]
-     * @throws { BusinessError } 201 - Permission denied. Possible causes:
-     *     <br>1. No permission to access biometric.
-     *     <br>2. No permission to start authentication from background.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Incorrect parameter types.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 12500001 - Authentication failed. [since 10 - 19]
      * @throws { BusinessError } 12500002 - General operation error.
      * @throws { BusinessError } 12500003 - Authentication canceled.
@@ -2193,9 +2191,8 @@ declare namespace userAuth {
      * > **UserAuthInstance** must be the instance being authenticated.
      *
      * @permission ohos.permission.ACCESS_BIOMETRIC
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     <br>1. Incorrect parameter types.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 12500002 - General operation error.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @atomicservice [since 12]
@@ -2304,7 +2301,7 @@ declare namespace userAuth {
    *     [on('result')]{@link userAuth.UserAuthInstance.on(type: 'result', callback: IAuthCallback)} to subscribe to the
    *     authentication result, and then call [start]{@link userAuth.UserAuthInstance.start} to start authentication.
    *     After the authentication is complete, you can obtain the authentication result through a callback.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
@@ -2353,9 +2350,10 @@ declare namespace userAuth {
    *     contain the following fields: **widgetContextId** (context ID of the component, number type), **event** (event
    *     type, string type), **version** (version number, string type), and **payload** (event payload object, object
    *     type).
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
@@ -2589,7 +2587,7 @@ declare namespace userAuth {
      * @param { IAuthWidgetCallback } callback - Callback function. It is used to receive commands from the user
      *     authentication framework. The authentication widget needs to parse the commands and perform corresponding
      *     operations in the callback.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2605,7 +2603,7 @@ declare namespace userAuth {
      *
      * @param { IAuthWidgetCallback } callback - Callback used to return the command from the user authentication
      *     framework to the user authentication widget.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2626,7 +2624,7 @@ declare namespace userAuth {
      *     as that passed to the **on** method. If this parameter is not passed, all registered callbacks are
      *     unregistered. Before using this method, ensure that the corresponding callback has been registered using the
      *     [on]{@link userAuth.UserAuthWidgetMgr.on(type: 'command', callback: IAuthWidgetCallback)} method.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2641,7 +2639,7 @@ declare namespace userAuth {
      * Unsubscribes from commands sent from the user authentication framework.
      *
      * @param { IAuthWidgetCallback } [callback] - Callback to unregister.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types.
      *     <br>3. Parameter verification failed.
@@ -2668,11 +2666,9 @@ declare namespace userAuth {
    *     framework.
    * @returns { UserAuthWidgetMgr } Authentication widget manager object. It can be used to subscribe to and unsubscribe
    *     from commands from the user authentication framework.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified.
-   *     <br>2. Incorrect parameter types.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2807,8 +2803,9 @@ declare namespace userAuth {
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
    * @param { IRemoteAuthCallback } callback - Remote authentication callback API. It contains the callback function for
    *     obtaining authentication page parameters and returning the authentication result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2823,8 +2820,9 @@ declare namespace userAuth {
    * authentication result notifications for remote authentication.
    *
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @systemapi Hide this for inner system use.
@@ -2847,8 +2845,9 @@ declare namespace userAuth {
    * @returns { Uint8Array } Reusable authentication token (**AuthToken**). If there are reusable authentication results
    *     that meet the requirements, the **AuthToken** data is returned. The maximum length is 1024 bytes. If there are
    *     no such results, an error code is returned.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied. Called by non-system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 12500002 - General operation error.
    * @throws { BusinessError } 12500008 - The parameter is out of range.
    * @throws { BusinessError } 12500017 - Failed to reuse authentication result.
@@ -3024,7 +3023,8 @@ declare namespace userAuth {
    * @permission ohos.permission.ACCESS_USER_PASSIVE_RECOGNITION
    * @returns { UserRecognitionMgr | null } User recognition manager instance. If the device does not support this
    *     capability, null is returned.
-   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @stagemodelonly
    * @atomicservice

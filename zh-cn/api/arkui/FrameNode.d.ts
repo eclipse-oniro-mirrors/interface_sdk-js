@@ -24,6 +24,7 @@ import { Size, Position, Edges, LengthMetrics, SizeT } from './Graphics';
 import { DrawContext } from './Graphics';
 import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
 import { BusinessError } from '../@ohos.base';
+import { InputEventType } from './BuilderNode';
 
 /**
  * 描述组件的布局约束。
@@ -195,7 +196,7 @@ declare interface InteractionEventBindingInfo {
  */
 export enum ExpandMode {
   /**
-   * 表示不展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}子节点，获取在主节点树上的子节点时，不展
+   * 表示不展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link @global:LazyForEach}子节点，获取在主节点树上的子节点时，不展
    * 开当前FrameNode的子节点。子节点序列号按在主节点树上的子节点计算。
    * 
    * 使用场景：仅需获取主节点树上已展开子节点且不触发展开操作的场景。
@@ -209,7 +210,7 @@ export enum ExpandMode {
   NOT_EXPAND = 0,
 
   /**
-   * 表示展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}子节点，获取所有子节点时，展开当前
+   * 表示展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link @global:LazyForEach}子节点，获取所有子节点时，展开当前
    * FrameNode的子节点。子节点序列号按所有子节点计算。
    * 
    * 使用场景：需要获取包含懒加载在内的所有子节点的场景。
@@ -223,7 +224,7 @@ export enum ExpandMode {
   EXPAND = 1,
 
   /**
-   * 表示按需展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}子节点，获取在主节点树上的子节点时，不
+   * 表示按需展开当前FrameNode的子节点。如果FrameNode包含[LazyForEach]{@link @global:LazyForEach}子节点，获取在主节点树上的子节点时，不
    * 展开当前FrameNode的子节点；获取不在主节点树上的子节点时，展开当前FrameNode的子节点。子节点序列号按所有子节点计算。
    * 
    * 使用场景：需要兼顾主节点树与非主节点树子节点按需获取的场景。
@@ -237,7 +238,7 @@ export enum ExpandMode {
   LAZY_EXPAND = 2,
 
   /**
-   * 表示不展开当前FrameNode的子节点，如果FrameNode包含[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}子节点，对于已经展开的子节点，可以直接返
+   * 表示不展开当前FrameNode的子节点，如果FrameNode包含[LazyForEach]{@link @global:LazyForEach}子节点，对于已经展开的子节点，可以直接返
    * 回，获取未展开的子节点时，仅创建对应位置的节点，而不展开所有子节点。子节点序列号按所有子节点计算。
    * 
    * 使用场景：需要按位置精确获取子节点但不批量展开懒加载子节点的场景。
@@ -262,7 +263,7 @@ export enum ExpandMode {
  */
 export enum ChildrenCountMode {
   /**
-   * 计数展开模式。当遇到懒加载节点（如[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}）时，展开节点并返回所有子节点数量。
+   * 计数展开模式。当遇到懒加载节点（如[LazyForEach]{@link @global:LazyForEach}）时，展开节点并返回所有子节点数量。
    * 
    * 是否展开懒加载节点：是 
    * 
@@ -404,9 +405,9 @@ export enum UIState {
 declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) => void;
 
 /**
- * FrameNode表示组件树的实体节点，支持节点树操作、自定义绘制与布局、位置查询、动画等能力。[NodeController]{@link ./NodeController:NodeController}可通过
- * [BuilderNode]{@link ./BuilderNode}持有的FrameNode将其挂载到[NodeContainer]{@link ../@internal/component/ets/node_container}上，
- * 也可通过FrameNode获取[RenderNode]{@link ./RenderNode:RenderNode}，挂载到其他FrameNode上。适用于需要通过代码动态创建和管理组件节点树的场景，可实现声明式组件无法直接满足的灵活
+ * FrameNode表示组件树的实体节点，支持节点树操作、自定义绘制与布局、位置查询、动画等能力。[NodeController]{@link @ohos.arkui.node:NodeController}可通过
+ * [BuilderNode]{@link @ohos.arkui.node:BuilderNode}持有的FrameNode将其挂载到[NodeContainer]{@link @global:NodeContainer}上，
+ * 也可通过FrameNode获取[RenderNode]{@link @ohos.arkui.node:RenderNode}，挂载到其他FrameNode上。适用于需要通过代码动态创建和管理组件节点树的场景，可实现声明式组件无法直接满足的灵活
  * UI组合与自定义渲染需求。<!--RP2--><!--RP2End-->
  * 
  * > **说明：**
@@ -417,7 +418,7 @@ declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) 
  * >
  * > - FrameNode对象不支持使用JSON序列化。
  * >
- * > - 在[UI上下文不明确](docroot://ui/arkts-global-interface.md#ui上下文不明确)的场景中调用[FrameNode]{@link FrameNode}对象的接口时，建议使用
+ * > - 在[UI上下文不明确](docroot://ui/arkts-global-interface.md#ui上下文不明确)的场景中调用[FrameNode]{@link @ohos.arkui.node:FrameNode}对象的接口时，建议使用
  * > [UIContext]{@link @ohos.arkui.UIContext}的[runScopedTask]{@link @ohos.arkui.UIContext:UIContext.runScopedTask}接口明确UI
  * > 上下文，参考[执行绑定UI实例的闭包](docroot://ui/arkts-global-interface.md#执行绑定ui实例的闭包)示例。
  * >
@@ -443,7 +444,7 @@ export class FrameNode {
   constructor(uiContext: UIContext);
 
   /**
-   * 获取FrameNode中持有的[RenderNode]{@link ./RenderNode:RenderNode}。
+   * 获取FrameNode中持有的[RenderNode]{@link @ohos.arkui.node:RenderNode}。
    *
    * @returns { RenderNode | null } 一个RenderNode对象。若该FrameNode不包含RenderNode，则返回空对象null。如果当前FrameNode为声明式组件创建的节点，则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -484,7 +485,7 @@ export class FrameNode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   dispatchInputEvent(event: InputEventType, competitionStrategy?: CompetitionStrategy): boolean;
 
@@ -497,7 +498,7 @@ export class FrameNode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   dispatchKeyEvent(event: KeyEvent): boolean;
 
@@ -506,7 +507,7 @@ export class FrameNode {
    * 情况请查看[typeNode]{@link typeNode}描述。
    *
    * @param { FrameNode } node - 需要添加的FrameNode。<br/> node节点不可以为不可修改的FrameNode（例如通过getFrameNodeById等接口获取的声明式组件节点）。仅
-   *     [BuilderNode]{@link ./BuilderNode}通过getFrameNode接口获取的FrameNode可作为声明式子节点添加。若子节点不符合规格，则抛出异常信息。<br/> node节点不可以拥有父节
+   *     [BuilderNode]{@link @ohos.arkui.node:BuilderNode}通过getFrameNode接口获取的FrameNode可作为声明式子节点添加。若子节点不符合规格，则抛出异常信息。<br/> node节点不可以拥有父节
    *     点，否则抛出异常信息。
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
    * @throws { BusinessError } 100025 - The parameter is invalid. Details about the invalid parameter and the reason
@@ -525,7 +526,7 @@ export class FrameNode {
    * 息，限制情况请查看[typeNode]{@link typeNode}描述。
    *
    * @param { FrameNode } child - 需要添加的子节点。<br/>child节点不可以为不可修改的FrameNode（例如通过getFrameNodeById等接口获取的声明式组件节点）。仅
-   *     [BuilderNode]{@link ./BuilderNode}通过getFrameNode接口获取的FrameNode可作为声明式子节点添加。若子节点不符合规格，则抛出异常信息。<br/> child节点不可以拥有父
+   *     [BuilderNode]{@link @ohos.arkui.node:BuilderNode}通过getFrameNode接口获取的FrameNode可作为声明式子节点添加。若子节点不符合规格，则抛出异常信息。<br/> child节点不可以拥有父
    *     节点，否则抛出异常信息。
    * @param { FrameNode | null } sibling - 新节点将插入到该节点之后。若该参数设置为空，则新节点将插入到首个子节点之前。
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
@@ -698,9 +699,9 @@ export class FrameNode {
    * > 当前仅支持以下类型的[TypedFrameNode]{@link TypedFrameNode}进行移动操作：[Stack]{@link typeNode.Stack}、
    * > [XComponent]{@link typeNode.XComponent}。对于其他类型的节点，移动操作不会生效。
    * >
-   * > 当前仅支持根节点为以下类型组件的[BuilderNode]{@link ./BuilderNode:BuilderNode}进行移动操作：
-   * > [Stack]{@link ../@internal/component/ets/stack}、[XComponent]{@link ../@internal/component/ets/xcomponent}、
-   * > [EmbeddedComponent]{@link ../@internal/component/ets/embedded_component}。对于其他类型的组件，移动操作不会生效。
+   * > 当前仅支持根节点为以下类型组件的[BuilderNode]{@link @ohos.arkui.node:BuilderNode}进行移动操作：
+   * > [Stack]{@link @global:Stack}、[XComponent]{@link @global:XComponent}、
+   * > [EmbeddedComponent]{@link @global:EmbeddedComponent}。对于其他类型的组件，移动操作不会生效。
    *
    * @param { FrameNode } targetParent - 目标父节点。<br/>targetParent节点不可以为声明式创建的节点，即不可修改的FrameNode。若目标父节点不符合规格，则抛出异常信息。
    * @param { number } [index] - 子节点序列号。当前FrameNode将被添加到目标FrameNode对应序列号的子节点之前，若目标FrameNode有n个节点，index取值范围为[0, n-1]。<br/
@@ -831,9 +832,9 @@ export class FrameNode {
   getUserConfigSize(): SizeT<LengthMetrics>;
 
   /**
-   * 获取用户设置的节点ID（通用属性设置的[组件标识]{@link ../@internal/component/ets/common}）。
+   * 获取用户设置的节点ID（通用属性设置的[组件标识]{@link CommonMethod}）。
    *
-   * @returns { string } 用户设置的节点ID（通用属性设置的[组件标识]{@link ../@internal/component/ets/common}）。
+   * @returns { string } 用户设置的节点ID（通用属性设置的[组件标识]{@link CommonMethod}）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -855,7 +856,7 @@ export class FrameNode {
   getUniqueId(): number;
 
   /**
-   * 获取节点的类型。系统组件类型为组件名称，例如，按钮组件[Button]{@link ../@internal/component/ets/button}的类型为Button。而对于自定义组件，若其有渲染内容，则其类型为
+   * 获取节点的类型。系统组件类型为组件名称，例如，按钮组件[Button]{@link @global:Button}的类型为Button。而对于自定义组件，若其有渲染内容，则其类型为
    * __Common__。
    *
    * @returns { string } 节点的类型。
@@ -977,7 +978,7 @@ export class FrameNode {
 
   /**
    * 获取FrameNode中持有的UIGestureEvent对象，用于设置组件绑定的手势事件。通过gestureEvent接口设置的手势不会覆盖通过
-   * [绑定手势事件]{@link ../@internal/component/ets/common}绑定的手势，两者同时设置了手势时，优先回调绑定手势事件设置的手势事件。
+   * [绑定手势事件]{@link CommonMethod}绑定的手势，两者同时设置了手势时，优先回调绑定手势事件设置的手势事件。
    * 
    * LazyForEach场景下，由于存在节点的销毁重建，对于重建的节点需要重新设置手势事件回调才能保证监听事件正常响应。
    *
@@ -991,14 +992,14 @@ export class FrameNode {
   get gestureEvent(): UIGestureEvent;
 
   /**
-   * 获取FrameNode中持有的CommonAttribute接口，用于设置[通用属性]{@link ../@internal/component/ets/common}和
-   * [通用事件]{@link ../@internal/component/ets/common}。
+   * 获取FrameNode中持有的CommonAttribute接口，用于设置[通用属性]{@link CommonMethod}和
+   * [通用事件]{@link CommonMethod}。
    * 
    * 仅可以修改自定义节点的属性。
    * 
    * > **说明：**
    * >
-   * > FrameNode的效果参考对齐方式为顶部起始端的[Stack]{@link ../@internal/component/ets/stack}容器组件。
+   * > FrameNode的效果参考对齐方式为顶部起始端的[Stack]{@link @global:Stack}容器组件。
    * >
    * > FrameNode的属性支持情况参考
    * > [属性或事件对attributemodifier的支持情况](docroot://ui/arkts-user-defined-extension-attributeModifier.md#属性或事件对attributemodifier的支持情况)。
@@ -1016,7 +1017,7 @@ export class FrameNode {
   /**
    * FrameNode的自绘制方法，该方法会重写默认绘制方法，在FrameNode进行内容绘制时被调用。
    * 
-   * 该接口的[DrawContext]{@link ./Graphics:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见
    * [调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-arktsNode-frameNode.md#调整自定义绘制canvas的变换矩阵)。
    *
    * @param { DrawContext } context - 图形绘制上下文。自绘制区域无法超出组件自身大小。
@@ -1535,7 +1536,7 @@ export class FrameNode {
   /**
    * 以当前节点为根节点，逐层查找所有子节点，返回第一个匹配指定id的节点。查找顺序为：先查找直接子节点，再查找二级子节点，依此类推，找到后立即返回。
    *
-   * @param { string } id - 查询的子节点id，为通用属性设置的[组件标识]{@link ../@internal/component/ets/common}。
+   * @param { string } id - 查询的子节点id，为通用属性设置的[组件标识]{@link CommonMethod}。
    * @returns { FrameNode | null } 以当前节点为根节点，逐层查找所有子节点，返回第一个匹配指定id的节点。若当前节点所有的子节点中都不存在匹配该id的节点，则返回空对象null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1560,7 +1561,7 @@ export class FrameNode {
 }
 
 /**
- * TypedFrameNode继承自[FrameNode]{@link FrameNode}，用于声明具体类型的FrameNode，支持Text、Image、Button、Column等多种组件类型，适用于通过代码动态创建具体类型组件节
+ * TypedFrameNode继承自[FrameNode]{@link @ohos.arkui.node:FrameNode}，用于声明具体类型的FrameNode，支持Text、Image、Button、Column等多种组件类型，适用于通过代码动态创建具体类型组件节
  * 点的场景。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1595,8 +1596,8 @@ export interface TypedFrameNode<C, T> extends FrameNode {
 /**
  * typeNode提供创建具体类型的FrameNode能力，可通过FrameNode的基础接口进行自定义的挂载，使用占位容器进行显示。适用于需要通过代码动态创建具体类型组件节点并进行自定义挂载的场景。
  * 
- * 使用typeNode创建[Text]{@link ../@internal/component/ets/text}、[Image]{@link ../@internal/component/ets/image}、
- * [Select]{@link ../@internal/component/ets/select}、[Toggle]{@link ../@internal/component/ets/toggle}节点时，当传入的
+ * 使用typeNode创建[Text]{@link @global:Text}、[Image]{@link @global:Image}、
+ * [Select]{@link @global:Select}、[Toggle]{@link @global:Toggle}节点时，当传入的
  * [UIContext]{@link @ohos.arkui.UIContext}对应的UI实例销毁后，调用该接口会返回一个无效的FrameNode节点，无法正常挂载和显示。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2129,7 +2130,7 @@ export namespace typeNode {
   function createNode(context: UIContext, nodeType: 'LoadingProgress'): LoadingProgress;
 
   /**
-   * 获取[LoadingProgress]{@link ../@internal/component/ets/loading_progress}节点的属性。若该节点非ArkTS语言创建，则需要设置是否支持跨语言访问，如果不支持跨语言访
+   * 获取[LoadingProgress]{@link @global:LoadingProgress}节点的属性。若该节点非ArkTS语言创建，则需要设置是否支持跨语言访问，如果不支持跨语言访
    * 问，则返回undefined。该接口不支持声明式方式创建的节点。
    *
    * @param { FrameNode } node - 获取属性时所需的目标节点。
@@ -2441,7 +2442,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Button'): ButtonAttribute | undefined;
 
   /**
-   * ListItemGroup类型的FrameNode节点类型。只允许添加[ListItem]{@link ../@internal/component/ets/list_item}类型子组件。
+   * ListItemGroup类型的FrameNode节点类型。只允许添加[ListItem]{@link @global:ListItem}类型子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2480,7 +2481,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'ListItemGroup'): ListItemGroupAttribute | undefined;
 
   /**
-   * WaterFlow类型的FrameNode节点类型。只允许添加[FlowItem]{@link ../@internal/component/ets/flow_item}类型子组件。
+   * WaterFlow类型的FrameNode节点类型。只允许添加[FlowItem]{@link @global:FlowItem}类型子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2853,7 +2854,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Slider'): SliderAttribute | undefined;
 
   /**
-   * [Toggle]{@link ../@internal/component/ets/toggle}类型的FrameNode节点类型。
+   * [Toggle]{@link @global:Toggle}类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3214,7 +3215,7 @@ export namespace typeNode {
 }
 
 /**
- * NodeAdapter提供FrameNode的数据懒加载能力，通过[LazyForEach]{@link ../@internal/component/ets/lazy_for_each}实现接口功能。适用于长列表等需要按需加载节点数
+ * NodeAdapter提供FrameNode的数据懒加载能力，通过[LazyForEach]{@link @global:LazyForEach}实现接口功能。适用于长列表等需要按需加载节点数
  * 据的场景，可提升渲染性能并降低内存占用。
  * 
  * > **说明：**

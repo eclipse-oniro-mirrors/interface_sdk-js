@@ -27,7 +27,7 @@ import { CustomBuilder, WrappedBuilder } from '@ohos.arkui.component';
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface PlaceholderOptions {
   /**
@@ -38,7 +38,7 @@ export declare interface PlaceholderOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   id?: string;
 
@@ -49,7 +49,7 @@ export declare interface PlaceholderOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   size?: SizeOptions;
 }
@@ -66,7 +66,7 @@ export declare interface PlaceholderOptions {
  *     if the item does not need a placeholder.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare type PlaceholderProvider = (index: int) => PlaceholderOptions | undefined;
 
@@ -78,7 +78,7 @@ export declare type PlaceholderProvider = (index: int) => PlaceholderOptions | u
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare class PlaceholderRegister {
   /**
@@ -105,7 +105,7 @@ export declare class PlaceholderRegister {
    *     **@Builder({ isPlaceholder: true })**. The ID is not registered.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   register(id: string, builder: WrappedBuilder<CustomBuilder>): void;
 
@@ -120,7 +120,7 @@ export declare class PlaceholderRegister {
    * @param { string } id - ID of the placeholder template to unregister.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   unregister(id: string): void;
 
@@ -135,7 +135,7 @@ export declare class PlaceholderRegister {
    * @returns { boolean } **true** if the ID has been registered in this UI instance; **false** otherwise.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   isRegistered(id: string): boolean;
 }

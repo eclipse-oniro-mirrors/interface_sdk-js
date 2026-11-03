@@ -27,51 +27,51 @@ import { Size } from './Graphics';
  * 
  * > **说明：**
  * >
- * > - RENDER_TYPE_TEXTURE类型目前仅在[BuilderNode]{@link BuilderNode}持有组件树的根节点为自定义组件时以及
- * > [XComponentNode]{@link ./XComponentNode:XComponentNode}中设置生效。
+ * > - RENDER_TYPE_TEXTURE类型目前仅在[BuilderNode]{@link @ohos.arkui.node:BuilderNode}持有组件树的根节点为自定义组件时以及
+ * > [XComponentNode]{@link @ohos.arkui.node:XComponentNode}中设置生效。
  * >
- * > - 在[BuilderNode]{@link BuilderNode}的情况下，目前在作为根节点的自定义组件中支持纹理导出的有以下组件：[Badge]{@link ../@internal/component/ets/badge}
- * > 、[Blank]{@link ../@internal/component/ets/blank}、[Button]{@link ../@internal/component/ets/button}、
- * > [CanvasGradient]{@link ../@internal/component/ets/canvas}、[CanvasPattern]{@link ../@internal/component/ets/canvas}、
- * > [CanvasRenderingContext2D]{@link ../@internal/component/ets/canvas}、
- * > [Canvas]{@link ../@internal/component/ets/canvas}、[CheckboxGroup]{@link ../@internal/component/ets/checkboxgroup}、
- * > [Checkbox]{@link ../@internal/component/ets/checkbox}、[Circle]{@link ../@internal/component/ets/circle}、
- * > [ColumnSplit]{@link ../@internal/component/ets/column_split}、[Column]{@link ../@internal/component/ets/column}、
- * > [ContainerSpan]{@link ../@internal/component/ets/container_span}、
- * > [Counter]{@link ../@internal/component/ets/counter}、[DataPanel]{@link ../@internal/component/ets/data_panel}、
- * > [Divider]{@link ../@internal/component/ets/divider}、[Ellipse]{@link ../@internal/component/ets/ellipse}、
- * > [Flex]{@link ../@internal/component/ets/flex}、[Gauge]{@link ../@internal/component/ets/gauge}、
- * > [Hyperlink]{@link ../@internal/component/ets/hyperlink}、[ImageBitmap]{@link ../@internal/component/ets/canvas}、
- * > [ImageData]{@link ../@internal/component/ets/canvas}、[Image]{@link ../@internal/component/ets/image}、
- * > [Line]{@link ../@internal/component/ets/line}、[LoadingProgress]{@link ../@internal/component/ets/loading_progress}、
- * > [Marquee]{@link ../@internal/component/ets/marquee}、[Matrix2D]{@link ../@internal/component/ets/canvas}、
- * > [OffscreenCanvasRenderingContext2D]{@link ../@internal/component/ets/canvas}、
- * > [OffscreenCanvas]{@link ../@internal/component/ets/canvas}、[Path2D]{@link ../@internal/component/ets/canvas}、
- * > [Path]{@link ../@internal/component/ets/path}、[PatternLock]{@link ../@internal/component/ets/pattern_lock}、
- * > [Polygon]{@link ../@internal/component/ets/polygon}、[Polyline]{@link ../@internal/component/ets/polyline}、
- * > [Progress]{@link ../@internal/component/ets/progress}、[QRCode]{@link ../@internal/component/ets/qrcode}、
- * > [Radio]{@link ../@internal/component/ets/radio}、[Rating]{@link ../@internal/component/ets/rating}、
- * > [Rect]{@link ../@internal/component/ets/rect}、
- * > [RelativeContainer]{@link ../@internal/component/ets/relative_container}、
- * > [RowSplit]{@link ../@internal/component/ets/row_split}、[Row]{@link ../@internal/component/ets/row}、
- * > [Shape]{@link ../@internal/component/ets/shape}、[Slider]{@link ../@internal/component/ets/slider}、
- * > [Span]{@link ../@internal/component/ets/span}、[Stack]{@link ../@internal/component/ets/stack}、
- * > [TextArea]{@link ../@internal/component/ets/text_area}、[TextClock]{@link ../@internal/component/ets/text_clock}、
- * > [TextInput]{@link ../@internal/component/ets/text_input}、[TextTimer]{@link ../@internal/component/ets/text_timer}、
- * > [Text]{@link ../@internal/component/ets/text}、[Toggle]{@link ../@internal/component/ets/toggle}、
- * > [Video]{@link ../@internal/component/ets/video}（不含全屏播放能力）、[Web]{@link ../@internal/component/ets/web}、
- * > [XComponent]{@link ../@internal/component/ets/xcomponent}。
+ * > - 在[BuilderNode]{@link @ohos.arkui.node:BuilderNode}的情况下，目前在作为根节点的自定义组件中支持纹理导出的有以下组件：[Badge]{@link @global:Badge}
+ * > 、[Blank]{@link @global:Blank}、[Button]{@link @global:Button}、
+ * > [CanvasGradient]{@link @global:CanvasGradient}、[CanvasPattern]{@link @global:CanvasPattern}、
+ * > [CanvasRenderingContext2D]{@link @global:CanvasRenderingContext2D}、
+ * > [Canvas]{@link @global:Canvas}、[CheckboxGroup]{@link @global:CheckboxGroup}、
+ * > [Checkbox]{@link @global:Checkbox}、[Circle]{@link @global:Circle}、
+ * > [ColumnSplit]{@link @global:ColumnSplit}、[Column]{@link @global:Column}、
+ * > [ContainerSpan]{@link @global:ContainerSpan}、
+ * > [Counter]{@link @global:Counter}、[DataPanel]{@link @global:DataPanel}、
+ * > [Divider]{@link @global:Divider}、[Ellipse]{@link @global:Ellipse}、
+ * > [Flex]{@link @global:Flex}、[Gauge]{@link @global:Gauge}、
+ * > [Hyperlink]{@link @global:Hyperlink}、[ImageBitmap]{@link @global:ImageBitmap}、
+ * > [ImageData]{@link @global:ImageData}、[Image]{@link @global:Image}、
+ * > [Line]{@link @global:Line}、[LoadingProgress]{@link @global:LoadingProgress}、
+ * > [Marquee]{@link @global:Marquee}、[Matrix2D]{@link @global:Matrix2D}、
+ * > [OffscreenCanvasRenderingContext2D]{@link @global:OffscreenCanvasRenderingContext2D}、
+ * > [OffscreenCanvas]{@link @global:OffscreenCanvas}、[Path2D]{@link @global:Path2D}、
+ * > [Path]{@link @global:Path}、[PatternLock]{@link @global:PatternLock}、
+ * > [Polygon]{@link @global:Polygon}、[Polyline]{@link @global:Polyline}、
+ * > [Progress]{@link @global:Progress}、[QRCode]{@link @global:QRCode}、
+ * > [Radio]{@link @global:Radio}、[Rating]{@link @global:Rating}、
+ * > [Rect]{@link @global:Rect}、
+ * > [RelativeContainer]{@link @global:RelativeContainer}、
+ * > [RowSplit]{@link @global:RowSplit}、[Row]{@link @global:Row}、
+ * > [Shape]{@link @global:Shape}、[Slider]{@link @global:Slider}、
+ * > [Span]{@link @global:Span}、[Stack]{@link @global:Stack}、
+ * > [TextArea]{@link @global:TextArea}、[TextClock]{@link @global:TextClock}、
+ * > [TextInput]{@link @global:TextInput}、[TextTimer]{@link @global:TextTimer}、
+ * > [Text]{@link @global:Text}、[Toggle]{@link @global:Toggle}、
+ * > [Video]{@link @global:Video}（不含全屏播放能力）、[Web]{@link @global:Web}、
+ * > [XComponent]{@link @global:XComponent}。
  * >
- * > - 从API version 12开始，新增以下组件支持纹理导出：[DatePicker]{@link ../@internal/component/ets/date_picker}、
- * > [ForEach]{@link ../@internal/component/ets/for_each}、[Grid]{@link ../@internal/component/ets/grid}、
+ * > - 从API version 12开始，新增以下组件支持纹理导出：[DatePicker]{@link @global:DatePicker}、
+ * > [ForEach]{@link @global:ForEach}、[Grid]{@link @global:Grid}、
  * > [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
- * > [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}、[List]{@link ../@internal/component/ets/list}、
- * > [Scroll]{@link ../@internal/component/ets/scroll}、[Swiper]{@link ../@internal/component/ets/swiper}、
- * > [TimePicker]{@link ../@internal/component/ets/time_picker}、
+ * > [LazyForEach]{@link @global:LazyForEach}、[List]{@link @global:List}、
+ * > [Scroll]{@link @global:Scroll}、[Swiper]{@link @global:Swiper}、
+ * > [TimePicker]{@link @global:TimePicker}、
  * > [@Component](docroot://ui/state-management/arkts-create-custom-components.md#component)修饰的自定义组件、
- * > [NodeContainer]{@link ../@internal/component/ets/node_container}以及
- * > [NodeContainer]{@link ../@internal/component/ets/node_container}下挂载的[FrameNode]{@link ./FrameNode}和
- * > [RenderNode]{@link ./RenderNode:RenderNode}。
+ * > [NodeContainer]{@link @global:NodeContainer}以及
+ * > [NodeContainer]{@link @global:NodeContainer}下挂载的[FrameNode]{@link @ohos.arkui.node:FrameNode}和
+ * > [RenderNode]{@link @ohos.arkui.node:RenderNode}。
  * >
  * > - 使用方式可参考[同层渲染绘制](docroot://web/web-same-layer.md)。
  *
@@ -243,8 +243,8 @@ declare type InputEventType = TouchEvent | MouseEvent | AxisEvent;
  * > [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)/
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)/
  * > [ContentSlot](docroot://ui/rendering-control/arkts-rendering-control-contentslot.md)…）、
- * > [Span]{@link ../@internal/component/ets/span}、[ContainerSpan]{@link ../@internal/component/ets/container_span}、
- * > [SymbolSpan]{@link ../@internal/component/ets/symbol_span}或自定义组件，将额外生成一个[FrameNode]{@link ./FrameNode}，在节点树中显示为“
+ * > [Span]{@link @global:Span}、[ContainerSpan]{@link @global:ContainerSpan}、
+ * > [SymbolSpan]{@link @global:SymbolSpan}或自定义组件，将额外生成一个[FrameNode]{@link @ohos.arkui.node:FrameNode}，在节点树中显示为“
  * > BuilderProxyNode”，这会导致树结构变化，影响事件传递等测试流程。详情参见
  * > [BuilderNode内的BuilderProxyNode导致树结构发生变化](docroot://ui/arkts-user-defined-arktsNode-builderNode.md#buildernode内的builderproxynode导致树结构发生变化)。
  * >
@@ -310,8 +310,8 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - build的参数是值传递，需要使用[update]{@link BuilderNode#update}接口进行更新。
    * >
-   * > - 需要操作BuilderNode中的对象时，需要保证其引用不被回收。当BuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link ./FrameNode}、
-   * > [RenderNode]{@link ./RenderNode:RenderNode}对象也会与后端节点解引用。即从BuilderNode中获取的FrameNode对象不对应任何一个节点。
+   * > - 需要操作BuilderNode中的对象时，需要保证其引用不被回收。当BuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link @ohos.arkui.node:FrameNode}、
+   * > [RenderNode]{@link @ohos.arkui.node:RenderNode}对象也会与后端节点解引用。即从BuilderNode中获取的FrameNode对象不对应任何一个节点。
    * >
    * > - BuilderNode对象会持有实体节点的引用。如果不需要使用BuilderNode前端对象管理后端节点，可以调用[dispose]{@link BuilderNode#dispose}接口，实现前后端对象的解绑。
    *
@@ -344,8 +344,8 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - build的参数是值传递，需要使用[update]{@link BuilderNode#update}接口进行更新。
    * >
-   * > - 需要操作BuilderNode中的对象时，需要保证其引用不被回收。当BuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link ./FrameNode}、
-   * > [RenderNode]{@link ./RenderNode:RenderNode}对象也会与后端节点解引用。即从BuilderNode中获取的FrameNode对象不对应任何一个节点。
+   * > - 需要操作BuilderNode中的对象时，需要保证其引用不被回收。当BuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link @ohos.arkui.node:FrameNode}、
+   * > [RenderNode]{@link @ohos.arkui.node:RenderNode}对象也会与后端节点解引用。即从BuilderNode中获取的FrameNode对象不对应任何一个节点。
    * >
    * > - BuilderNode对象会持有实体节点的引用。如果不需要使用BuilderNode前端对象管理后端节点，可以调用[dispose]{@link BuilderNode#dispose}接口，实现前后端对象的解绑。
    *
@@ -376,7 +376,7 @@ export class BuilderNode<Args extends Object[]> {
   update(arg: Object): void;
 
   /**
-   * 获取BuilderNode中的[FrameNode]{@link ./FrameNode}。在BuilderNode执行build操作之后，才会生成FrameNode。
+   * 获取BuilderNode中的[FrameNode]{@link @ohos.arkui.node:FrameNode}。在BuilderNode执行build操作之后，才会生成FrameNode。
    *
    * @returns { FrameNode | null } BuilderNode持有的FrameNode对象，用于将该BuilderNode作为子节点挂载到其他FrameNode上。若该BuilderNode不包含
    *     FrameNode，则返回空对象null。
@@ -393,7 +393,7 @@ export class BuilderNode<Args extends Object[]> {
    * 
    * postTouchEvent是从组件树的中间节点往下分发，需要变换到父组件坐标系才能分发成功，参考下图。
    * 
-   * offsetA为builderNode相对于父组件的偏移量，可以通过FrameNode中的[getPositionToParent]{@link ./FrameNode:FrameNode#getPositionToParent}
+   * offsetA为builderNode相对于父组件的偏移量，可以通过FrameNode中的[getPositionToParent]{@link @ohos.arkui.node:FrameNode.getPositionToParent}
    * 获取。offsetB为触点相对于builderNode的偏移量，可以通过
    * [TouchEvent]{@link TouchEvent}获取。offsetC为offsetA
    * 与offsetB的和，是传给postTouchEvent的最终结果。
@@ -509,8 +509,8 @@ export class BuilderNode<Args extends Object[]> {
    * > - 鼠标左键点击事件将转换为触摸事件，转发时应注意不在外层同时绑定触摸事件与鼠标事件，否则可能导致坐标偏移。这是由于在事件转换过程中，SourceType不会发生变化，规格可查看
    * > [onTouch]{@link CommonMethod#onTouch}。
    * >
-   * > - 注入事件为轴事件[（AxisEvent）]{@link AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}。
+   * > - 注入事件为轴事件[（AxisEvent）]{@link @global:AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发
+   * > [RotationGesture]{@link @global:RotationGesture}。
    * >
    * > - 转发的事件会在被分发到的目标组件所在的子树里做触摸测试（TouchTest），并触发对应手势，原始事件也会触发当前组件所在组件树中的手势。不保证两类手势的竞争结果。
    * >
@@ -548,8 +548,8 @@ export class BuilderNode<Args extends Object[]> {
    * > [SourceType]{@link SourceType}不会发生变化，规格可查看
    * > [onTouch]{@link CommonMethod#onTouch}。
    * >
-   * > - 注入事件为轴事件[AxisEvent]{@link AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发旋转手势
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}。
+   * > - 注入事件为轴事件[AxisEvent]{@link @global:AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发旋转手势
+   * > [RotationGesture]{@link @global:RotationGesture}。
    * >
    * > - 转发的事件会在被分发到的目标组件及其子组件里做事件处理，并触发对应手势。可以通过入参控制当前组件和目标组件手势是否为竞争关系。
    * >
@@ -610,11 +610,11 @@ export class BuilderNode<Args extends Object[]> {
 
 /**
  * ReactiveBuilderNode支持通过无状态的UI方法[@Builder](docroot://ui/state-management/arkts-builder.md)生成组件树，并持有该组件树的根节点，不支持定义为状态变
- * 量。ReactiveBuilderNode中持有的[FrameNode]{@link ./FrameNode}仅用于将此ReactiveBuilderNode作为子节点挂载到其他FrameNode上。对
+ * 量。ReactiveBuilderNode中持有的[FrameNode]{@link @ohos.arkui.node:FrameNode}仅用于将此ReactiveBuilderNode作为子节点挂载到其他FrameNode上。对
  * ReactiveBuilderNode持有的FrameNode进行属性设置与子节点操作可能会导致未定义行为，因此不建议通过ReactiveBuilderNode的
- * [getFrameNode]{@link BuilderNode#getFrameNode}方法和[FrameNode]{@link ./FrameNode}节点的
- * [getRenderNode]{@link ./FrameNode:FrameNode#getRenderNode}方法获取RenderNode，并通过
- * [RenderNode]{@link ./RenderNode:RenderNode}的接口对其进行属性设置与子节点操作。
+ * [getFrameNode]{@link BuilderNode#getFrameNode}方法和[FrameNode]{@link @ohos.arkui.node:FrameNode}节点的
+ * [getRenderNode]{@link @ohos.arkui.node:FrameNode.getRenderNode}方法获取RenderNode，并通过
+ * [RenderNode]{@link @ohos.arkui.node:RenderNode}的接口对其进行属性设置与子节点操作。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -624,7 +624,7 @@ export class BuilderNode<Args extends Object[]> {
  */
 export class ReactiveBuilderNode<Args extends Object[]> {
   /**
-   * 用于构造ReactiveBuilderNode类。当将ReactiveBuilderNode生成的内容嵌入到其它[RenderNode]{@link ./RenderNode:RenderNode}中显示时，需要显式指定
+   * 用于构造ReactiveBuilderNode类。当将ReactiveBuilderNode生成的内容嵌入到其它[RenderNode]{@link @ohos.arkui.node:RenderNode}中显示时，需要显式指定
    * [RenderOptions]{@link RenderOptions}中的[selfIdealSize]{@link RenderOptions}，否则ReactiveBuilderNode内的节点默认父组件布局约束为
    * [0, 0]。调用此接口，若不设置selfIdealSize则认为ReactiveBuilderNode中子树的根节点大小为[0, 0]。
    *
@@ -651,8 +651,8 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * >
    * > - @Builder嵌套使用的时候需要保证内外的@Builder方法的入参对象一致。
    * >
-   * > - 需要操作ReactiveBuilderNode中的对象时，需要保证其引用不被回收。当ReactiveBuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link ./FrameNode}、
-   * > [RenderNode]{@link ./RenderNode:RenderNode}对象也会与后端节点解引用。即从ReactiveBuilderNode中获取的FrameNode对象不对应任何一个节点。
+   * > - 需要操作ReactiveBuilderNode中的对象时，需要保证其引用不被回收。当ReactiveBuilderNode对象被虚拟机回收之后，它的[FrameNode]{@link @ohos.arkui.node:FrameNode}、
+   * > [RenderNode]{@link @ohos.arkui.node:RenderNode}对象也会与后端节点解引用。即从ReactiveBuilderNode中获取的FrameNode对象不对应任何一个节点。
    * >
    * > - ReactiveBuilderNode对象会持有实体节点的引用。如果不需要使用ReactiveBuilderNode前端对象管理后端节点，可以调用
    * > [dispose]{@link ReactiveBuilderNode#dispose}接口，实现前后端对象的解绑。
@@ -669,7 +669,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    */
   build(builder: WrappedBuilder<Args>, config: BuildOptions, ...args: Args): void;
   /**
-   * 获取ReactiveBuilderNode中的[FrameNode]{@link ./FrameNode}。在ReactiveBuilderNode执行build操作之后，才会生成FrameNode。
+   * 获取ReactiveBuilderNode中的[FrameNode]{@link @ohos.arkui.node:FrameNode}。在ReactiveBuilderNode执行build操作之后，才会生成FrameNode。
    *
    * @returns { FrameNode | null } ReactiveBuilderNode持有的FrameNode对象，用于将该ReactiveBuilderNode作为子节点挂载到其他FrameNode上。若该
    *     ReactiveBuilderNode不包含FrameNode，则返回空对象null。
@@ -687,7 +687,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * 
    * postTouchEvent是从组件树的中间节点往下分发，需要变换到父组件坐标系才能分发成功，参考下图。
    * 
-   * offsetA为builderNode相对于父组件的偏移量，可以通过FrameNode中的[getPositionToParent]{@link ./FrameNode:FrameNode#getPositionToParent}
+   * offsetA为builderNode相对于父组件的偏移量，可以通过FrameNode中的[getPositionToParent]{@link @ohos.arkui.node:FrameNode.getPositionToParent}
    * 获取。offsetB为触点相对于builderNode的偏移量，可以通过
    * [TouchEvent]{@link TouchEvent}获取。offsetC为offsetA
    * 与offsetB的和，是传给postTouchEvent的最终结果。
@@ -812,8 +812,8 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > [SourceType]{@link SourceType}不会发生变化，规格可查看
    * > [onTouch]{@link CommonMethod#onTouch}。
    * >
-   * > 注入事件为轴事件[（AxisEvent）]{@link AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}。
+   * > 注入事件为轴事件[（AxisEvent）]{@link @global:AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发
+   * > [RotationGesture]{@link @global:RotationGesture}。
    * >
    * > 转发的事件会在被分发到的目标组件所在的子树里做触摸测试（TouchTest），并触发对应手势，原始事件也会触发当前组件所在组件树中的手势。不保证两类手势的竞争结果。
    * >
@@ -851,8 +851,8 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > [SourceType]{@link SourceType}不会发生变化，规格可查看
    * > [onTouch]{@link CommonMethod#onTouch}。
    * >
-   * > - 注入事件为轴事件[AxisEvent]{@link AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发旋转手势
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}。
+   * > - 注入事件为轴事件[AxisEvent]{@link @global:AxisEvent}时，由于轴事件中缺少旋转轴信息，因此注入的事件无法触发旋转手势
+   * > [RotationGesture]{@link @global:RotationGesture}。
    * >
    * > - 转发的事件会在被分发到的目标组件及其子组件里做事件处理，并触发对应手势。可以通过入参控制当前组件和目标组件手势是否为竞争关系。
    * >

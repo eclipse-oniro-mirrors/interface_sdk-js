@@ -14,10 +14,7 @@
  */
 
 /**
- * The **NotificationFlags** module describes the notification flags. An application can use **NotificationFlags**
- * to reduce the notification reminder types as needed.
- * 
- * @file Some states and flags for notifications
+ * @file NotificationFlags
  * @kit NotificationKit
  */
 
@@ -66,7 +63,8 @@ export enum NotificationFlagStatus {
 }
 
 /**
- * Defines the notification flags.
+ * Describes the [notification flags](docroot://notification/notification-glossary.md#notification-flags). An 
+ * application can use `NotificationFlags` to reduce the notification reminder methods as needed.
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 8 dynamic
@@ -74,8 +72,8 @@ export enum NotificationFlagStatus {
  */
 export interface NotificationFlags {
   /**
-   * Settings of sound for the notification. The default value is **TYPE_NONE**. This parameter becomes writable
-   * starting from API version 23. Only TYPE_CLOSE takes effect.
+   * Settings of sound for the notification. The default value is **TYPE_NONE**. This parameter becomes writable 
+   * starting from API version 23. Only [TYPE_CLOSE]{@link NotificationFlagStatus} takes effect.
    *
    * @readonly [since 8 - 22]
    * @syscap SystemCapability.Notification.Notification
@@ -85,8 +83,8 @@ export interface NotificationFlags {
   soundEnabled?: NotificationFlagStatus;
 
   /**
-   * Settings of vibration for the notification. The default value is **TYPE_NONE**. This parameter becomes writable
-   * starting from API version 23. Only TYPE_CLOSE takes effect.
+   * Settings of vibration for the notification. The default value is **TYPE_NONE**. This parameter becomes writable 
+   * starting from API version 23. Only [TYPE_CLOSE]{@link NotificationFlagStatus} takes effect.
    *
    * @readonly [since 8 - 22]
    * @syscap SystemCapability.Notification.Notification
@@ -96,7 +94,8 @@ export interface NotificationFlags {
   vibrationEnabled?: NotificationFlagStatus;
 
   /**
-   * Settings of banner for the notification. The default value is **TYPE_NONE**. Only TYPE_CLOSE takes effect.
+   * Settings of banner for the notification. The default value is **TYPE_NONE**. Only 
+   * [TYPE_CLOSE]{@link NotificationFlagStatus} takes effect.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 23 dynamic&static
@@ -104,7 +103,8 @@ export interface NotificationFlags {
   bannerEnabled?: NotificationFlagStatus;
 
   /**
-   * Settings of screen lock for the notification. The default value is **TYPE_NONE**. Only TYPE_CLOSE takes effect.
+   * Settings of screen lock for the notification. The default value is **TYPE_NONE**. Only 
+   * [TYPE_CLOSE]{@link NotificationFlagStatus} takes effect.
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 23 dynamic&static
@@ -113,14 +113,14 @@ export interface NotificationFlags {
 
   /**
    * Settings of the input information reminder features.
-   * 
-   * - Bit 0: sound alert. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 1: locking the screen. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 2: banner. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 3: turning on the screen. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 4: vibration. The value **0** means to enable the feature, and **1** means the opposite.
-   * - Bit 5: notification icon in the status bar. The value **0** means to enable the feature, and **1** means the 
-   * opposite.
+   *
+   * - Bit 0: sound alert. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 1: locking the screen. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 2: banner. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 3: turning on the screen. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 4: vibration. The value **0** means the feature is disabled, and **1** means enabled.
+   * - Bit 5: notification icon in the status bar. The value **0** means the feature is disabled, and **1** means 
+   * enabled.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

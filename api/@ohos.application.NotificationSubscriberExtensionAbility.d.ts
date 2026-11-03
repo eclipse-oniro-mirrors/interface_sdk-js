@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file ExtensionAbility for Notification Subscription
  * @kit NotificationKit
  */
 
@@ -22,17 +22,19 @@ import type NotificationSubscriberExtensionContext from './@ohos.application.Not
 import { NotificationInfo } from './notification/NotificationInfo'
 
 /**
- * NotificationSubscriberExtensionAbility is the base class for notification subscriber extension abilities, providing
- * notification subscription-related functionality. Third-party wearable apps (such as companion applications for
- * watches)implement callback logic by inheriting this class, receiving notification information when notifications
- * are published on the local device and forwarding them to the wearable device via Bluetooth, and receiving callbacks
- * for notification cancellation when local notifications are cancelled and forwarding them to the wearable device to
- * delete the corresponding notifications.
+ * NotificationSubscriberExtensionAbility is the base class of the 
+ * [notification subscription](docroot://notification/notification-glossary.md#notification-subscription) extension 
+ * ability, providing notification subscription related capabilities. Third-party wearable applications (such as 
+ * companion applications for watches) implement callback logic by inheriting from this class, receive notification 
+ * information when a notification is published on the local device and forward it to the wearable device over 
+ * Bluetooth. When a local notification is canceled, they receive the cancellation callback and forward it to the 
+ * wearable device to delete the corresponding notification.
  *
  * Use this module when your wearable application needs to obtain local notifications and sync them to a paired wearable
- * device. This module is used together with the notificationExtensionSubscription module. This module is responsible
- * for receiving and processing notification data in callbacks, while the notificationExtensionSubscription module is
- * responsible for management operations such as authorization, subscription, and unsubscription.
+ * device. This module is used together with the **notificationExtensionSubscription** module. This module is 
+ * responsible for receiving and processing notification data in callbacks, while the 
+ * **notificationExtensionSubscription** module is responsible for management operations such as authorization, 
+ * subscription, and unsubscription.
  *
  * @syscap SystemCapability.Notification.Notification
  * @stagemodelonly
@@ -49,9 +51,11 @@ declare class NotificationSubscriberExtensionAbility {
    * @since 23 static
    */
   context: NotificationSubscriberExtensionContext;
- 
+
   /**
-   * Called when the notification subscription extension is destroyed.
+   * Triggered when the 
+   * [notification subscription](docroot://notification/notification-glossary.md#notification-subscription) extension is
+   * destroyed.
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -64,7 +68,7 @@ declare class NotificationSubscriberExtensionAbility {
    * Called when a notification is received.
    *
    * @param { NotificationInfo } notificationInfo - Callback information about the notification received in the
-   *     notification subscription extension capability.
+   *     notification subscription extension ability.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
    * @since 22 dynamic
@@ -76,7 +80,7 @@ declare class NotificationSubscriberExtensionAbility {
    * Called when notifications are canceled.
    *
    * @param { Array<string> } hashCodes - List of hash codes of the notifications to cancel, obtained through
-   *     {@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility.onReceiveMessage}.
+   *     [onReceiveMessage]{@link NotificationSubscriberExtensionAbility#onReceiveMessage}.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
    * @since 22 dynamic

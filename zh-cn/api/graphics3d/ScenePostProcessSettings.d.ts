@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中的色调映射等图像后处理方法。
+ *
  * @file
  * @kit ArkGraphics3D
  */

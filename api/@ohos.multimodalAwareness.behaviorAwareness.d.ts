@@ -27,7 +27,7 @@ import { Callback } from './@ohos.base';
  * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
  * @systemapi
  * @stagemodelonly
- * @since 26.2.0 dynamic&static
+ * @since 26.1.0 dynamic&static
  */
 declare namespace behaviorAwareness {
 
@@ -38,7 +38,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum PerceptionDomain {  
     /**
@@ -48,7 +48,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HABIT_AWARENESS = 'habitAwareness'
   }
@@ -59,7 +59,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum PatternType {
     /**
@@ -68,7 +68,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     TIME_PATTERN = 'timePattern',
     /**
@@ -77,7 +77,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     LOCATION_PATTERN = 'locationPattern',
     /**
@@ -86,7 +86,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EVENT_PATTERN = 'eventPattern',
   }
@@ -97,7 +97,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum EventType {
     /**
@@ -106,7 +106,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DAILY_TIME = 'dailyTime',
     /**
@@ -115,7 +115,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WEEKLY_TIME = 'weeklyTime',
     /**
@@ -124,7 +124,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     MONTHLY_TIME = 'monthlyTime',
     /**
@@ -133,7 +133,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WORKDAY_TIME = 'workdayTime',
     /**
@@ -142,7 +142,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     LOCATION = 'location',
     /**
@@ -151,7 +151,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_LAUNCH = 'appLaunch',
     /**
@@ -160,7 +160,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_EXIT = 'appExit',
     /**
@@ -169,7 +169,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_USAGE_SINGLE = 'appUsageSingle',
     /**
@@ -178,7 +178,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_USAGE_DAILY = 'appUsageDaily',
     /**
@@ -187,7 +187,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ALARM_DISMISS = 'alarmDismiss',
     /**
@@ -196,7 +196,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CHARGE_START = 'chargeStart',
     /**
@@ -205,7 +205,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CHARGE_END = 'chargeEnd',
     /**
@@ -214,7 +214,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CHARGE_FULL = 'chargeFull',
     /**
@@ -223,7 +223,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BATTERY_ABOVE = 'batteryAbove',
     /**
@@ -232,7 +232,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BATTERY_BELOW = 'batteryBelow',
     /**
@@ -241,7 +241,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BLUETOOTH_CONNECT = 'bluetoothConnect',
     /**
@@ -250,7 +250,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BLUETOOTH_DISCONNECT = 'bluetoothDisconnect',
     /**
@@ -259,7 +259,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     PHONE_RING = 'phoneRing',
   }
@@ -270,7 +270,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum ActionType {
     /**
@@ -279,7 +279,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_CLOSE = 'appClose',
     /**
@@ -288,7 +288,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     APP_OPEN = 'appOpen',
     /**
@@ -297,7 +297,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EYE_PROTECT_MODE = 'eyeProtectMode',
     /**
@@ -306,7 +306,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DARK_MODE = 'darkMode',
     /**
@@ -315,7 +315,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     PERSONAL_HOTSPOT = 'personalHotspot',
     /**
@@ -324,7 +324,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     MOBILE_DATA = 'mobileData',
     /**
@@ -333,7 +333,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WIFI = 'wifi',
     /**
@@ -342,7 +342,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     AIRPLANE_MODE = 'airplaneMode',
     /**
@@ -351,7 +351,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     BLUETOOTH = 'bluetooth',
     /**
@@ -360,7 +360,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     NFC = 'nfc',
     /**
@@ -369,7 +369,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ROTATION_LOCK = 'rotationLock',
     /**
@@ -378,7 +378,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     POWER_SAVING = 'powerSaving',
     /**
@@ -387,7 +387,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SOUND_MODE = 'soundMode',
     /**
@@ -396,7 +396,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SCREEN_BRIGHTNESS = 'screenBrightness',
     /**
@@ -405,7 +405,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     VOLUME = 'volume',
     /**
@@ -414,7 +414,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SHUTDOWN = 'shutdown',
     /**
@@ -423,7 +423,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     REBOOT = 'reboot',
   }
@@ -434,7 +434,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum SoundMode {
     /**
@@ -443,7 +443,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     VIBRATE = 'vibrate',
     /**
@@ -452,7 +452,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SILENT = 'silent',
     /**
@@ -461,7 +461,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     RING = 'ring',
   }
@@ -472,7 +472,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum BluetoothDeviceType {
     /**
@@ -481,7 +481,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DEFAULT = 0,
     /**
@@ -490,7 +490,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CAR = 1,
     /**
@@ -499,7 +499,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HEADSET = 2,
     /**
@@ -508,7 +508,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HEARING = 3,
     /**
@@ -517,7 +517,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     GLASSES = 4,
     /**
@@ -526,7 +526,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WATCH = 5,
     /**
@@ -535,7 +535,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     SPEAKER = 6,
     /**
@@ -544,7 +544,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     OTHERS = 7,
   }
@@ -555,7 +555,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum FeedbackType {
     /**
@@ -564,7 +564,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ACCEPT = 0,
     /**
@@ -573,7 +573,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     IGNORE = 1,
     /**
@@ -582,7 +582,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     REJECT = 2,
     /**
@@ -591,7 +591,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EDIT = 3,
     /**
@@ -600,7 +600,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     NOT_PUSHED = 4
   }
@@ -611,7 +611,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum RecurrenceType {
     /**
@@ -620,7 +620,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DAILY = 'daily',
     /**
@@ -629,7 +629,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WEEKLY = 'weekly',
     /**
@@ -638,7 +638,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     MONTHLY = 'monthly',
     /**
@@ -647,7 +647,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     WORKDAY = 'workday',
   }
@@ -658,7 +658,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum LocationType {
     /**
@@ -667,7 +667,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     HOME = 'home',
     /**
@@ -676,7 +676,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     COMPANY = 'company',
     /**
@@ -685,7 +685,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     CUSTOM = 'custom',
   }
@@ -696,7 +696,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum LocationStatusType {
     /**
@@ -705,7 +705,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ENTER = 'enter',
     /**
@@ -714,7 +714,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EXIT = 'exit',
   }
@@ -725,7 +725,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum Operation {
     /**
@@ -734,7 +734,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     ON = 'on',
     /**
@@ -743,7 +743,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     OFF = 'off',
     /**
@@ -752,7 +752,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     TOGGLE = 'toggle',
   }
@@ -763,7 +763,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export enum AdjustmentDirection {
     /**
@@ -772,7 +772,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     UP = 'up',
     /**
@@ -781,7 +781,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     DOWN = 'down',
   }
@@ -792,7 +792,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface TimeAttributes {
     /**
@@ -801,7 +801,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     kind: 'time';
     /**
@@ -810,7 +810,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     timePoint: string;
     /**
@@ -819,7 +819,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     recurrence: RecurrenceType;
     /**
@@ -829,7 +829,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     dayOfWeek?: int;
     /**
@@ -839,7 +839,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     dayOfMonth?: int;
   }
@@ -850,7 +850,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface Coordinates {
     /**
@@ -860,7 +860,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     latitude: double;
     /**
@@ -870,7 +870,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     longitude: double;
   }
@@ -881,7 +881,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface LocationAttributes {
     /**
@@ -890,7 +890,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     kind: 'location';
     /**
@@ -899,7 +899,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     locationType?: LocationType;
     /**
@@ -908,7 +908,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     locationName?: string;
     /**
@@ -917,7 +917,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     coordinates: Coordinates;
   }
@@ -928,7 +928,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface SystemEventAttributes {
     /**
@@ -937,7 +937,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     kind: 'systemEvent';
     /**
@@ -946,7 +946,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     packageName?: string;
     /**
@@ -955,7 +955,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     appName?: string;
     /**
@@ -964,7 +964,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     appId?: string;
     /**
@@ -974,7 +974,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     durationThreshold?: int;
     /**
@@ -984,7 +984,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     dailyDurationThreshold?: int;
     /**
@@ -994,7 +994,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     batteryThreshold?: int;
     /**
@@ -1004,7 +1004,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     level?: int;
     /**
@@ -1014,7 +1014,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     bluetoothDeviceType?: BluetoothDeviceType;
     /**
@@ -1023,7 +1023,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     bluetoothDeviceName?: string;
   }
@@ -1034,7 +1034,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface SystemActionAttributes {
     /**
@@ -1043,7 +1043,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     kind: 'systemAction';
     /**
@@ -1052,7 +1052,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     operation: Operation;
     /**
@@ -1061,7 +1061,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     packageName?: string;
     /**
@@ -1070,7 +1070,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     appName?: string;
     /**
@@ -1079,7 +1079,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     adjustment?: AdjustmentDirection;
     /**
@@ -1089,7 +1089,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     value?: int;
     /**
@@ -1098,7 +1098,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     soundMode?: SoundMode;
   }
@@ -1109,7 +1109,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface EventData {  
     /**
@@ -1118,7 +1118,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     eventId: string;
     /**
@@ -1127,7 +1127,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     eventType: EventType;
     /**
@@ -1136,7 +1136,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     name: string;
     /**
@@ -1146,7 +1146,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     timestamp: long;
     /**
@@ -1156,7 +1156,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     params?: Record<string, string | int | boolean>;
     /**
@@ -1165,7 +1165,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     attributes?: TimeAttributes | LocationAttributes | SystemEventAttributes;
   }
@@ -1176,7 +1176,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface ActionData {  
     /**
@@ -1185,7 +1185,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actionId: string;
     /**
@@ -1194,7 +1194,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actionType: ActionType;
     /**
@@ -1203,7 +1203,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     name: string;
     /**
@@ -1213,7 +1213,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     params?: Record<string, string | int | boolean>;
     /**
@@ -1222,7 +1222,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     attributes?: SystemActionAttributes;
   }
@@ -1233,7 +1233,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface BehaviorAwarenessPayload {  
     /**
@@ -1242,7 +1242,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     patternType: PatternType;
     /**
@@ -1251,7 +1251,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     triggerEvent: EventData[];
     /**
@@ -1260,7 +1260,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     action: ActionData[];
   }
@@ -1271,7 +1271,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface PerceptionEvent<T = BehaviorAwarenessPayload> {  
     /**
@@ -1280,7 +1280,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     perceptionEventId: string;
     /**
@@ -1289,7 +1289,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     domain: PerceptionDomain;
     /**
@@ -1300,7 +1300,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     confidence: int;
     /**
@@ -1310,7 +1310,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     generateTime: long;
     /**
@@ -1319,7 +1319,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     payload: T;
   }
@@ -1330,7 +1330,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface SubscribeInfo {  
     /**
@@ -1339,7 +1339,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     domain: PerceptionDomain;
     /**
@@ -1349,7 +1349,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     patternTypes?: PatternType[];
   }
@@ -1360,7 +1360,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export interface FeedbackData {  
     /**
@@ -1369,7 +1369,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     perceptionEventId: string;
     /**
@@ -1378,7 +1378,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     feedbackType: FeedbackType;
     /**
@@ -1388,7 +1388,7 @@ declare namespace behaviorAwareness {
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     feedbackTime: long;
   }
@@ -1414,7 +1414,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export function onPerception(
     info: SubscribeInfo,
@@ -1442,7 +1442,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export function offPerception(
     callback?: Callback<PerceptionEvent<BehaviorAwarenessPayload>>
@@ -1462,7 +1462,7 @@ declare namespace behaviorAwareness {
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   export function submitFeedback(feedback: FeedbackData): Promise<void>;
 

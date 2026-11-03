@@ -645,6 +645,17 @@ export declare interface SelectAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default menuEdgeLightMode(mode: EdgeLightMode | undefined): this;
+    /**
+     * 设置Select选项。
+     *
+     * @param { Array<SelectOption> } optionArray - Select构造器选项
+     * @returns { SelectAttribute } 返回SelectAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setSelectOptions(optionArray: Array<SelectOption>): this;
 }
 /**
  * 菜单项配置接口，用于ContentModifier中。

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Some notification types and content
+ * @file NotificationContent
  * @kit NotificationKit
  */
 
@@ -33,9 +33,9 @@ import { RecordData } from '../@ohos.base';
 /**
  * 描述图标的类型。
  *
- * @syscap SystemCapability.Notification.Notification
  * @unionmember { Resource } 表示值类型为图片资源。
  * @unionmember { image.PixelMap } 表示值类型为图片。
+ * @syscap SystemCapability.Notification.Notification
  * @systemapi
  * @since 18 dynamic
  * @since 23 static
@@ -43,38 +43,43 @@ import { RecordData } from '../@ohos.base';
 type IconType = Resource | image.PixelMap;
 
 /**
- * 描述普通文本通知，用于展示标题和正文内容，是其他通知类型的基础内容结构。
- * 其他通知类型（如长文本、多行文本、图片、实况窗）均继承本接口，在此基础上扩展各自特有字段。
+ * 描述普通文本通知，用于展示标题和正文内容，是其他通知类型的基础内容结构。其他通知类型（如长文本、多行文本、图片、实况窗）均继承本接口，在此基础上扩展各自特有字段。
  *
- * @crossplatform [since 12]
  * @syscap SystemCapability.Notification.Notification
+ * @crossplatform [since 12]
  * @since 7 dynamic
  * @since 23 static
  */
 export interface NotificationBasicContent {
   /**
-   * 通知标题，显示在通知顶部。不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   * 通知标题，显示在通知顶部。
    *
-   * @crossplatform [since 12]
+   * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   title: string;
 
   /**
-   * 通知正文内容，显示在标题下方。不可为空字符串，大小不超过3072字节，超出部分会被截断。
+   * 通知正文内容，显示在标题下方。
    *
-   * @crossplatform [since 12]
+   * 不可为空字符串，大小不超过3072字节，超出部分会被截断。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   text: string;
 
   /**
-   * 通知附加内容，是对通知内容的补充，不在通知中心中显示。默认为空。
-   * 大小不超过3072字节，超出部分会被截断。
+   * 通知附加内容，是对[通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)的补充，不在
+   * [通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)中显示。
+   *
+   * 默认为空。大小不超过3072字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -94,7 +99,8 @@ export interface NotificationBasicContent {
   lockscreenPicture?: image.PixelMap;
 
   /**
-   * 通知结构化字段。当前仅支持服务提醒类短信在通知中心结构化展示。默认为空。（key/value大小不超过512字节，超出部分会被截断，最多支持3对结构化数据，超出部分会被忽略。）
+   * 通知结构化字段。当前仅支持服务提醒类短信在[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)结构化展示。默认为空。（key
+   * /value大小不超过512字节，超出部分会被截断，最多支持3对结构化数据，超出部分会被忽略。）
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -106,50 +112,55 @@ export interface NotificationBasicContent {
 
 /**
  * 描述长文本通知。继承自[NotificationBasicContent]{@link NotificationBasicContent}。
- * 
+ *
  * > **说明：**
  * >
- * > - 当该类型通知与其他通知形成组通知时，该通知类型的展示效果默认为折叠态，
- * > 显示的标题与正文为该类型继承的NotificationBasicContent中的`title`与`text`。
- * > 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果
- * > 默认为展开态，显示的标题为展开时的标题`expandedTitle`，显示的正文内容为长文本`longText`。
- * >
+ * > - 当该类型通知与其他通知形成[组通知](docroot://notification/notification-glossary.md#group-notification组通知)时，该通知类型的展示效果默认为折叠态，显示的标题
+ * > 与正文为该类型继承的[普通文本]{@link NotificationBasicContent}中的`title`与`text`。
+ *
+ * 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果默认为展开态，显示的标题为展开时的标题`expandedTitle`，显示的正文内容为长文本`longText`。
+ *
  * > - 用户点击成组展示的通知，查看各个通知详情时，该通知的展示效果变化为展开态。
  * >
- * > - 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > - 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
- * @crossplatform [since 12]
  * @syscap SystemCapability.Notification.Notification
+ * @crossplatform [since 12]
  * @since 7 dynamic
  * @since 23 static
  */
 export interface NotificationLongTextContent extends NotificationBasicContent {
   /**
-   * 通知展开后显示的完整长文本内容。不可为空字符串，大小不超过3072字节，超出部分会被截断。
+   * 通知展开后显示的完整长文本内容。
    *
-   * @crossplatform [since 12]
+   * 不可为空字符串，大小不超过3072字节，超出部分会被截断。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   longText: string;
 
   /**
-   * 通知概要内容，是对通知内容的总结，不在通知中心中显示。
+   * 通知概要内容，是对[通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)的总结，不在通知中心中显示。
+   *
    * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   briefText: string;
 
   /**
-   * 通知展开时的标题。不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   * 通知展开时的标题。
    *
-   * @crossplatform [since 12]
+   * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -157,7 +168,7 @@ export interface NotificationLongTextContent extends NotificationBasicContent {
 }
 
 /**
- * 描述普通实况通知的状态。
+ * 描述[普通实况通知](docroot://notification/notification-glossary.md#normal-live-view普通实况通知)的状态。
  *
  * @syscap SystemCapability.Security.AccessToken
  * @systemapi
@@ -203,7 +214,6 @@ export enum LiveViewStatus {
   LIVE_VIEW_FULL_UPDATE = 3,
   /**
    * 条件触发创建
-   * 
    *
    * @syscap SystemCapability.Security.AccessToken
    * @systemapi
@@ -223,7 +233,7 @@ export enum LiveViewStatus {
 }
 
 /**
- * 描述实况通知的类型。
+ * 描述[实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)的类型。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -261,7 +271,8 @@ export enum LiveViewTypes {
 }
 
 /**
- * 描述普通实况通知。继承自[NotificationBasicContent]{@link NotificationBasicContent}。
+ * 描述[普通实况通知](docroot://notification/notification-glossary.md#normal-live-view普通实况通知)。继承自
+ * [NotificationBasicContent]{@link NotificationBasicContent}。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -290,7 +301,7 @@ export interface NotificationLiveViewContent extends NotificationBasicContent {
   version?: int;
 
   /**
-   * 实况通知附加内容。默认为空。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)附加内容。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -299,7 +310,7 @@ export interface NotificationLiveViewContent extends NotificationBasicContent {
   extraInfo?: Record<string, Object>;
 
   /**
-   * 实况通知附加内容。默认为空。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)附加内容。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -319,7 +330,7 @@ export interface NotificationLiveViewContent extends NotificationBasicContent {
 
   /**
    * 实况窗是否只在本地更新。默认为false。
-   * 
+   *
    * - true：是。
    * - false：否。
    *
@@ -343,40 +354,43 @@ export interface NotificationLiveViewContent extends NotificationBasicContent {
 
 /**
  * 描述多行文本通知。继承自[NotificationBasicContent]{@link NotificationBasicContent}。
- * 
+ *
  * > **说明：**
  * >
- * > - 当该类型通知与其他通知形成组通知时，该通知类型的展示效果默认为折叠态，
- * > 显示的标题与正文为该类型继承的NotificationBasicContent中的`title`与`text`。
- * > 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果
- * > 默认为展开态，显示的标题为展开时的标题`longTitle`，多行文本内容`lines`作为正文多行显示。
- * >
+ * > - 当该类型通知与其他通知形成[组通知](docroot://notification/notification-glossary.md#group-notification组通知)时，该通知类型的展示效果默认为折叠态，显示的标题
+ * > 与正文为该类型继承的[普通文本]{@link NotificationBasicContent}中的`title`与`text`。
+ *
+ * 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果默认为展开态，显示的标题为展开时的标题`longTitle`，多行文本内容`lines`作为正文多行显示。
+ *
  * > - 用户点击成组展示的通知，查看各个通知详情时，该通知的展示效果变化为展开态。
  * >
- * > - 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > - 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
- * @crossplatform [since 12]
  * @syscap SystemCapability.Notification.Notification
+ * @crossplatform [since 12]
  * @since 7 dynamic
  * @since 23 static
  */
 export interface NotificationMultiLineContent extends NotificationBasicContent {
   /**
-   * 通知概要内容，是对通知内容的总结，不在通知中心中显示。
+   * 通知概要内容，是对[通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)的总结，不在通知中心中显示。
+   *
    * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   briefText: string;
 
   /**
-   * 通知展开时的标题。不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   * 通知展开时的标题。
    *
-   * @crossplatform [since 12]
+   * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -384,18 +398,21 @@ export interface NotificationMultiLineContent extends NotificationBasicContent {
 
   /**
    * 通知展开后显示的多行文本列表，每行作为独立条目展示，最多支持三行。
+   *
    * 每行大小不超过1024字节，超出部分会被截断。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   lines: Array<string>;
 
   /**
-   * 点击多行文本中某一行文本消息触发的wantAgent。不同行的文本分别对应于不同的wantAgent。该字段配置的行数不能大于
-   * [lines]{@link ./notification/notificationContent:NotificationMultiLineContent}字段配置的行数。默认为空。
+   * 点击多行文本中某一行文本消息触发的wantAgent。不同行的文本分别对应于不同的wantAgent。该字段配置的行数不能大于[lines]{@link NotificationMultiLineContent}字段配置的行数。默
+   * 认为空。
+   *
+   * ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    *
    * @permission ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @syscap SystemCapability.Notification.Notification
@@ -408,18 +425,17 @@ export interface NotificationMultiLineContent extends NotificationBasicContent {
 
 /**
  * 描述附有图片的通知。继承自[NotificationBasicContent]{@link NotificationBasicContent}。
- * 
+ *
  * > **说明：**
  * >
- * > - 当该类型通知与其他通知形成组通知时，该通知类型的展示效果默认为折叠态，
- * > 显示的标题与正文为该类型继承的NotificationBasicContent中的`title`与`text`。
- * > 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果
- * > 默认为展开态，显示的标题为展开时的标题`expandedTitle`，
- * > 显示的正文为该类型继承的NotificationBasicContent中的`text`+该类型的图片内容`picture`。
- * >
+ * > - 当该类型通知与其他通知形成[组通知](docroot://notification/notification-glossary.md#group-notification组通知)时，该通知类型的展示效果默认为折叠态，显示的标题
+ * > 与正文为该类型继承的[普通文本]{@link NotificationBasicContent}中的`title`与`text`。
+ *
+ * 当该类型通知单独展示，没有与其他通知形成组通知时，该通知类型的展示效果默认为展开态，显示的标题为展开时的标题`expandedTitle`，显示的正文为该类型继承的`普通文本`中的`text`和该类型的图片内容`picture`。
+ *
  * > - 用户点击成组展示的通知，查看各个通知详情时，该通知的展示效果变化为展开态。
  * >
- * > - 实际显示效果依赖于设备能力和通知中心UI样式<!--RP1--><!--RP1End-->。
+ * > - 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式<!--RP1--><!--RP1End-->。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 7 dynamic
@@ -427,7 +443,8 @@ export interface NotificationMultiLineContent extends NotificationBasicContent {
  */
 export interface NotificationPictureContent extends NotificationBasicContent {
   /**
-   * 通知概要内容，是对通知内容的总结，不在通知中心中显示。
+   * 通知概要内容，是对[通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)的总结，不在通知中心中显示。
+   *
    * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -437,7 +454,9 @@ export interface NotificationPictureContent extends NotificationBasicContent {
   briefText: string;
 
   /**
-   * 通知展开时的标题。不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   * 通知展开时的标题。
+   *
+   * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -446,8 +465,10 @@ export interface NotificationPictureContent extends NotificationBasicContent {
   expandedTitle: string;
 
   /**
-   * 通知展开后显示的右侧图标。图标像素的总字节数不能超过2MB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取）。
+   * 通知展开后显示的右侧图标。
+   *
+   * 图标像素的总字节数不能超过2MB（图标像素的总字节数通过[getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获
+   * 取）。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -457,14 +478,13 @@ export interface NotificationPictureContent extends NotificationBasicContent {
 }
 
 /**
- * 描述系统实况窗通知内容，用于在实况窗中展示实时状态信息。
- * 不支持三方应用直接创建该类型通知，可以由系统代理创建系统实况窗类型通知后，
- * 三方应用发布同ID的通知来更新指定内容。
- * 继承自[NotificationBasicContent]{@link NotificationBasicContent}。
- * 
+ * 描述[系统实况窗](docroot://notification/notification-glossary.md#system-live-view系统实况窗)
+ * [通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)，用于在实况窗中展示实时状态信息。不支持三方应用直接创建该类型通知，可以由
+ * 系统代理创建系统实况窗类型通知后，三方应用发布同ID的通知来更新指定内容。继承自[NotificationBasicContent]{@link NotificationBasicContent}。
+ *
  * > **说明：**
  * >
- * > 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 11 dynamic
@@ -481,7 +501,7 @@ export interface NotificationSystemLiveViewContent extends NotificationBasicCont
   typeCode: int;
 
   /**
-   * 实况通知的胶囊。默认为空。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)的胶囊。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -538,11 +558,11 @@ export interface NotificationSystemLiveViewContent extends NotificationBasicCont
 }
 
 /**
- * 描述通知胶囊，用于在实况窗中展示胶囊形态。
- * 
+ * 描述[通知胶囊](docroot://notification/notification-glossary.md#notification-capsule通知胶囊)，用于在实况窗中展示胶囊形态。
+ *
  * > **说明：**
  * >
- * > 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 11 dynamic
@@ -550,7 +570,9 @@ export interface NotificationSystemLiveViewContent extends NotificationBasicCont
  */
 export interface NotificationCapsule {
   /**
-   * 胶囊标题。大小不超过202字节，超出部分会被截断。默认为空。
+   * 胶囊标题。
+   *
+   * 大小不超过202字节，超出部分会被截断。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -559,9 +581,10 @@ export interface NotificationCapsule {
   title?: string;
 
   /**
-   * 胶囊图标。图标像素的总字节数不超过192KB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），
-   * 建议图标像素长宽为128*128。
+   * 胶囊图标。
+   *
+   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过[getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}
+   * 获取），建议图标像素长宽为128*128。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -571,9 +594,13 @@ export interface NotificationCapsule {
 
   /**
    * 胶囊背景颜色。支持rgb、rgba或者argb的格式颜色。
+   *
    * rgb格式颜色示例：'#ffffff'、'rgb(255, 100, 255)'。
+   *
    * rgba格式颜色示例：'rgba(255, 100, 255, 0.5)'。
+   *
    * argb格式颜色示例：'#ff000000'。
+   *
    * 大小不超过202字节，超出部分会被截断。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -583,7 +610,7 @@ export interface NotificationCapsule {
   backgroundColor?: string;
 
   /**
-   * 胶囊的拓展文本。默认为空。
+   * 胶囊的扩展文本。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -593,7 +620,9 @@ export interface NotificationCapsule {
   content?: string;
 
   /**
-   * 即时任务类实况胶囊展示时长。默认值为0。单位：秒。
+   * 即时任务类实况胶囊展示时长。默认值为0。
+   *
+   * 单位：秒。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -614,7 +643,7 @@ export interface NotificationCapsule {
 }
 
 /**
- * 描述系统通知按钮。
+ * 描述系统[通知按钮](docroot://notification/notification-glossary.md#notification-button通知按钮)。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -624,8 +653,7 @@ export interface NotificationCapsule {
 export interface NotificationIconButton {
 
   /**
-   * 按钮标识，用于区分同一通知的多个不同按钮。字符串长度不超过202字节，
-   * 超出部分会被截断。不可为空字符串。
+   * 按钮标识，用于区分同一通知的多个不同按钮。字符串长度不超过202字节，超出部分会被截断。不可为空字符串。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -655,8 +683,8 @@ export interface NotificationIconButton {
   text?: string;
 
   /**
-   * 点击按钮时，是否隐藏通知中心。默认为false。
-   * 
+   * 点击按钮时，是否隐藏[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)。默认为false。
+   *
    * - true：是。
    * - false：否。
    *
@@ -669,11 +697,11 @@ export interface NotificationIconButton {
 }
 
 /**
- * 描述通知按钮，用于在实况窗中展示可交互的按钮。
- * 
+ * 描述[通知按钮](docroot://notification/notification-glossary.md#notification-button通知按钮)，用于在实况窗中展示可交互的按钮。
+ *
  * > **说明：**
  * >
- * > 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 11 dynamic
@@ -682,6 +710,7 @@ export interface NotificationIconButton {
 export interface NotificationButton {
   /**
    * 按钮名称列表，每个名称对应一个通知按钮的文本显示。最多支持3个按钮。
+   *
    * 每个名称的大小不超过202字节，超出部分会被截断。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -691,10 +720,9 @@ export interface NotificationButton {
   names?: Array<string>;
 
   /**
-   * 按钮图标列表，与names一一对应，每个图标显示在对应按钮上。最多支持3个。
-   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），
-   * 建议图标像素长宽为128*128。默认为空。该属性与iconsResource互斥，只使用其中一个即可。
+   * 按钮图标列表，与names一一对应，每个图标显示在对应按钮上。最多支持3个。图标像素的总字节数不超过192KB（图标像素的总字节数通过
+   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），建议图标像素长宽为128*128。默认为空。该属性
+   * 与iconsResource互斥，只使用其中一个即可。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -703,8 +731,7 @@ export interface NotificationButton {
   icons?: Array<image.PixelMap>;
 
   /**
-   * 按钮图标资源列表，与names一一对应，使用Resource资源引用图标。最多支持3个。
-   * 默认为空。与icons互斥，只使用其中一个即可。
+   * 按钮图标资源列表，与names一一对应，使用Resource资源引用图标。最多支持3个。默认为空。与icons互斥，只使用其中一个即可。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 12 dynamic
@@ -715,10 +742,10 @@ export interface NotificationButton {
 
 /**
  * 描述通知计时信息。
- * 
+ *
  * > **说明：**
  * >
- * > 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 11 dynamic
@@ -726,7 +753,9 @@ export interface NotificationButton {
  */
 export interface NotificationTime {
   /**
-   * 计时起始时间，用于设置实况窗中的计时起点。默认值为0。单位：毫秒。
+   * 计时起始时间，用于设置实况窗中的计时起点。默认值为0。
+   *
+   * 单位：毫秒。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -736,7 +765,7 @@ export interface NotificationTime {
 
   /**
    * 是否为倒计时模式。默认为false。
-   * 
+   *
    * - true：时间从initialTime开始递减显示。
    * - false：时间从initialTime开始递增显示。
    *
@@ -748,7 +777,7 @@ export interface NotificationTime {
 
   /**
    * 计时是否暂停。默认为false。
-   * 
+   *
    * - true：计时暂停在当前值。
    * - false：计时正常运行。
    *
@@ -760,7 +789,7 @@ export interface NotificationTime {
 
   /**
    * 时间信息是否展示在通知标题中。默认为false。
-   * 
+   *
    * - true：计时信息将嵌入标题区域展示。
    * - false：计时信息在独立区域展示。
    *
@@ -772,11 +801,11 @@ export interface NotificationTime {
 }
 
 /**
- * 描述通知进度，用于在实况窗中展示进度条信息。
- * 
+ * 描述[通知进度](docroot://notification/notification-glossary.md#notification-progress通知进度)，用于在实况窗中展示进度条信息。
+ *
  * > **说明：**
  * >
- * > 实际显示效果依赖于设备能力和通知中心UI样式。
+ * > 实际显示效果依赖于设备能力和[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)UI样式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 11 dynamic
@@ -803,7 +832,7 @@ export interface NotificationProgress {
 
   /**
    * 是否按百分比展示进度。默认为false。
-   * 
+   *
    * - true：进度以百分比形式展示。
    * - false：进度以绝对值形式展示。
    *
@@ -815,10 +844,11 @@ export interface NotificationProgress {
 }
 
 /**
- * 通知内容。
+ * NotificationContent中定义通知的内容结构，提供多种通知类型的内容描述接口。当应用需要发布通知时，可根据通知的展示需求（如普通文本、长文本、多行文本、图片、实况窗），选择对应的内容类型接口构造
+ * [通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)。
  *
- * @crossplatform [since 12]
  * @syscap SystemCapability.Notification.Notification
+ * @crossplatform [since 12]
  * @since 7 dynamic
  * @since 23 static
  */
@@ -834,53 +864,49 @@ export interface NotificationContent {
   contentType?: notification.ContentType;
 
   /**
-   * 通知内容类型，用于指定通知的内容布局类型，决定了通知在通知中心中的展示样式。
-   * 需与对应类型的通知内容对象配合使用，例如设置为NOTIFICATION_CONTENT_BASIC_TEXT时
-   * 需同时填充normal字段。
+   * [通知内容类型](docroot://notification/notification-glossary.md#content-type通知内容类型)，用于指定通知的内容布局类型，决定了通知在
+   * [通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)中的展示样式。需与对应类型的通知内容对象配合使用，例如设置为
+   * NOTIFICATION_CONTENT_BASIC_TEXT时需同时填充normal字段。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 11 dynamic
    * @since 23 static
    */
   notificationContentType?: notificationManager.ContentType;
 
   /**
-   * 基本类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_BASIC_TEXT时使用，
-   * 通知以普通文本样式展示标题和正文。
+   * 基本类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_BASIC_TEXT时使用，通知以普通文本样式展示标题和正文。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   normal?: NotificationBasicContent;
 
   /**
-   * 长文本类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_LONG_TEXT时使用，
-   * 通知展开后可展示完整长文本内容。
+   * 长文本类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_LONG_TEXT时使用，通知展开后可展示完整长文本内容。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   longText?: NotificationLongTextContent;
 
   /**
-   * 多行类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_MULTILINE时使用，
-   * 通知展开后以多行列表样式展示。
+   * 多行类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_MULTILINE时使用，通知展开后以多行列表样式展示。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   multiLine?: NotificationMultiLineContent;
 
   /**
-   * 图片类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_PICTURE时使用。
-   * 通知展开后可展示图片。
+   * 图片类型通知内容。当notificationContentType为NOTIFICATION_CONTENT_PICTURE时使用。通知展开后可展示图片。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -889,7 +915,8 @@ export interface NotificationContent {
   picture?: NotificationPictureContent;
 
   /**
-   * 系统实况窗类型通知内容。不支持三方应用直接创建该类型通知，可以由系统代理创建系统实况窗类型通知后，三方应用发布同ID的通知来更新指定内容。
+   * [系统实况窗](docroot://notification/notification-glossary.md#system-live-view系统实况窗)类型通知内容。不支持三方应用直接创建该类型通知，可以由系统代理创建系统实况
+   * 窗类型通知后，三方应用发布同ID的通知来更新指定内容。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -898,7 +925,7 @@ export interface NotificationContent {
   systemLiveView?: NotificationSystemLiveViewContent;
 
   /**
-   * 普通实况窗类型通知内容。
+   * 普通实况窗类型[通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

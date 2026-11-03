@@ -19,29 +19,29 @@
  */
 
 /**
- * **NodeContainer** is a basic component for mounting custom nodes (such as [FrameNode]{@link ../../../arkui/FrameNode}
- * or the root FrameNode obtained from [BuilderNode]{@link ../../../arkui/BuilderNode}) and dynamically controlling the
- * mounting and unmounting of nodes through [NodeController]{@link ../../../arkui/NodeController:NodeController}. It is
+ * **NodeContainer** is a basic component for mounting custom nodes (such as [FrameNode]{@link @ohos.arkui.node:FrameNode}
+ * or the root FrameNode obtained from [BuilderNode]{@link @ohos.arkui.node:BuilderNode}) and dynamically controlling the
+ * mounting and unmounting of nodes through [NodeController]{@link @ohos.arkui.node:NodeController}. It is
  * suitable for scenarios where custom nodes need to be dynamically inserted into and removed from the component tree to
  * implement on-demand UI loading and node reuse, which improves page rendering efficiency and reduces node creation
  * overhead. The component does not support appending child nodes. It accepts a
- * [NodeController]{@link ../../../arkui/NodeController:NodeController} instance and must be used together with
+ * [NodeController]{@link @ohos.arkui.node:NodeController} instance and must be used together with
  * **NodeController**.
  *
  * > **NOTE**
  * >
- * > - This component supports mounting only custom nodes, that is, [FrameNodes]{@link ../../../arkui/FrameNode} or the
- * > root FrameNode obtained from a [BuilderNode]{@link ../../../arkui/BuilderNode}.
+ * > - This component supports mounting only custom nodes, that is, [FrameNodes]{@link @ohos.arkui.node:FrameNode} or the
+ * > root FrameNode obtained from a [BuilderNode]{@link @ohos.arkui.node:BuilderNode}.
  * >
  * > - Mounting the proxy node of a system component obtained through a query is not supported. For details, see
- * > [isModifiable]{@link ../../../arkui/FrameNode:FrameNode#isModifiable}.
+ * > [isModifiable]{@link @ohos.arkui.node:FrameNode.isModifiable}.
  * >
- * > - This component does not work with the [attribute modifier]{@link ./common}.
+ * > - This component does not work with the [attribute modifier]{@link CommonMethod}.
  * >
  * > - When the node tree under this component is built, the UI instance [UIContext]{@link @ohos.arkui.UIContext} is
  * > used. When the instance is switched, the input parameter of the
- * > [makeNode]{@link ../../../arkui/NodeController:NodeController#makeNode} callback of the bound
- * > [NodeController]{@link ../../../arkui/NodeController:NodeController} may be **undefined** due to instance mismatch.
+ * > [makeNode]{@link @ohos.arkui.node:NodeController.makeNode} callback of the bound
+ * > [NodeController]{@link @ohos.arkui.node:NodeController} may be **undefined** due to instance mismatch.
  * > Therefore, this component does not support cross-instance node reuse.
  * >
  * > - When this component is not destroyed, it does not proactively trigger the unmounting of the mounted node.
@@ -71,10 +71,10 @@ interface NodeContainerInterface {
 }
 
 /**
- * The [universal attributes]{@link ./common} are supported, but the [attribute modifier]{@link ./common:AttributeModifier} is not
+ * The [universal attributes]{@link CommonMethod} are supported, but the [attribute modifier]{@link @global:AttributeModifier} is not
  * supported.
  *
- * The [universal events]{@link ./common} are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -86,29 +86,29 @@ interface NodeContainerInterface {
 declare class NodeContainerAttribute extends CommonMethod<NodeContainerAttribute> {}
 
 /**
- * **NodeContainer** is a basic component for mounting custom nodes (such as [FrameNode]{@link ../../../arkui/FrameNode}
- * or the root FrameNode obtained from [BuilderNode]{@link ../../../arkui/BuilderNode}) and dynamically controlling the
- * mounting and unmounting of nodes through [NodeController]{@link ../../../arkui/NodeController:NodeController}. It is
+ * **NodeContainer** is a basic component for mounting custom nodes (such as [FrameNode]{@link @ohos.arkui.node:FrameNode}
+ * or the root FrameNode obtained from [BuilderNode]{@link @ohos.arkui.node:BuilderNode}) and dynamically controlling the
+ * mounting and unmounting of nodes through [NodeController]{@link @ohos.arkui.node:NodeController}. It is
  * suitable for scenarios where custom nodes need to be dynamically inserted into and removed from the component tree to
  * implement on-demand UI loading and node reuse, which improves page rendering efficiency and reduces node creation
  * overhead. The component does not support appending child nodes. It accepts a
- * [NodeController]{@link ../../../arkui/NodeController:NodeController} instance and must be used together with
+ * [NodeController]{@link @ohos.arkui.node:NodeController} instance and must be used together with
  * **NodeController**.
  *
  * > **NOTE**
  * >
- * > - This component supports mounting only custom nodes, that is, [FrameNodes]{@link ../../../arkui/FrameNode} or the
- * > root FrameNode obtained from a [BuilderNode]{@link ../../../arkui/BuilderNode}.
+ * > - This component supports mounting only custom nodes, that is, [FrameNodes]{@link @ohos.arkui.node:FrameNode} or the
+ * > root FrameNode obtained from a [BuilderNode]{@link @ohos.arkui.node:BuilderNode}.
  * >
  * > - Mounting the proxy node of a system component obtained through a query is not supported. For details, see
- * > [isModifiable]{@link ../../../arkui/FrameNode:FrameNode#isModifiable}.
+ * > [isModifiable]{@link @ohos.arkui.node:FrameNode.isModifiable}.
  * >
- * > - This component does not work with the [attribute modifier]{@link ./common:AttributeModifier}.
+ * > - This component does not work with the [attribute modifier]{@link @global:AttributeModifier}.
  * >
  * > - When the node tree under this component is built, the UI instance [UIContext]{@link @ohos.arkui.UIContext} is
  * > used. When the instance is switched, the input parameter of the
- * > [makeNode]{@link ../../../arkui/NodeController:NodeController#makeNode} callback of the bound
- * > [NodeController]{@link ../../../arkui/NodeController:NodeController} may be **undefined** due to instance mismatch.
+ * > [makeNode]{@link @ohos.arkui.node:NodeController.makeNode} callback of the bound
+ * > [NodeController]{@link @ohos.arkui.node:NodeController} may be **undefined** due to instance mismatch.
  * > Therefore, this component does not support cross-instance node reuse.
  * >
  * > - When this component is not destroyed, it does not proactively trigger the unmounting of the mounted node.

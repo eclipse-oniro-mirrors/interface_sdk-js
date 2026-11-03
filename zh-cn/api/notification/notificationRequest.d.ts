@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Information carried when a notification is sent
+ * @file NotificationRequest
  * @kit NotificationKit
  */
 
@@ -45,7 +45,7 @@ import { RecordData } from '../@ohos.base';
  */
 export interface NotificationParameters {
   /**
-   * 应用在创建wantAgent时，传入的want的action字段，具体含义请参考[action]{@link @ohos.app.ability.Want:Want}。
+   * 应用在创建wantAgent时，传入的Want的action字段，具体含义请参考[action]{@link @ohos.app.ability.Want:Want}。
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -54,7 +54,7 @@ export interface NotificationParameters {
   wantAction?:string;
 
   /**
-   * 应用在创建wantAgent时，传入的want的uri字段，具体含义请参考[uri]{@link @ohos.app.ability.Want:Want}。
+   * 应用在创建wantAgent时，传入的Want的uri字段，具体含义请参考[uri]{@link @ohos.app.ability.Want:Want}。
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -63,7 +63,7 @@ export interface NotificationParameters {
   wantUri?:string;
 
   /**
-   * 应用在创建wantAgent时，传入的want的parameters字段，具体含义请参考[parameters]{@link @ohos.app.ability.Want:Want}。
+   * 应用在创建wantAgent时，传入的Want的parameters字段，具体含义请参考[parameters]{@link @ohos.app.ability.Want:Want}。
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -72,7 +72,7 @@ export interface NotificationParameters {
   wantParameters?:Record<string, Object>;
 
   /**
-   * 应用在创建wantAgent时，传入的want的parameters字段，具体含义请参考[parameters]{@link @ohos.app.ability.Want:Want}。
+   * 应用在创建wantAgent时，传入的Want的parameters字段，具体含义请参考[parameters]{@link @ohos.app.ability.Want:Want}。
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -82,7 +82,7 @@ export interface NotificationParameters {
 }
 
 /**
- * 表示地理围栏的监控事件类型的枚举。
+ * 表示[地理围栏](docroot://notification/notification-glossary.md#geofence地理围栏)的监控事件类型的枚举。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -109,7 +109,7 @@ export enum MonitorEvent {
 }
 
 /**
- * 表示地理围栏坐标系类型的枚举。
+ * 表示[地理围栏](docroot://notification/notification-glossary.md#geofence地理围栏)坐标系类型的枚举。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -144,7 +144,7 @@ export enum CoordinateSystemType {
  */
 export enum TriggerType {
   /**
-   * 地理围栏触发类型。
+   * [地理围栏](docroot://notification/notification-glossary.md#geofence地理围栏)触发类型。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -154,7 +154,7 @@ export enum TriggerType {
 }
 
 /**
- * 地理围栏的配置信息。
+ * [地理围栏](docroot://notification/notification-glossary.md#geofence地理围栏)的配置信息。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -241,7 +241,7 @@ export interface Trigger {
    * @since 23 dynamic&static
    */
   condition:Geofence;
-  
+
   /**
    * 条件触发实况的展示时间，单位：秒，取值范围：[15, 1800]，默认值为900。
    *
@@ -253,10 +253,11 @@ export interface Trigger {
 }
 
 /**
- * 定义了通知请求的数据结构，用于描述一条通知的全部信息，包括通知内容、标识、展示样式、交互行为等。
- * 
- * @crossplatform [since 12]
+ * 定义了[通知请求](docroot://notification/notification-glossary.md#notification-request通知请求)的数据结构，用于描述一条通知的全部信息，包括
+ * [通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)、标识、展示样式、交互行为等。
+ *
  * @syscap SystemCapability.Notification.Notification
+ * @crossplatform [since 12]
  * @since 7 dynamic
  * @since 23 static
  */
@@ -264,8 +265,8 @@ export interface NotificationRequest {
   /**
    * 通知展示内容。包括通知标题、正文等。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -283,16 +284,16 @@ export interface NotificationRequest {
   /**
    * 通知ID，默认值为0。若已存在相同ID的通知，则更新该通知；若不存在相同ID的通知，则创建新的通知。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   id?: int;
 
   /**
-   * 通知优先级类型，默认值为OTHER。设置该参数可使通知置顶，并且在通知中心以突出方式显示。<!--RP2--><!--RP2End-->实际显示效果依赖于设备能力和通知中心UI样式。
-   * 
+   * 通知优先级类型，默认值为OTHER。设置该参数可使通知置顶，并且在[通知中心](docroot://notification/notification-glossary.md#notification-center通知中心)以突出
+   * 方式显示。<!--RP2--><!--RP2End-->实际显示效果依赖于设备能力和通知中心UI样式。
    *
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
@@ -301,9 +302,10 @@ export interface NotificationRequest {
   priorityNotificationType?: notificationManager.PriorityNotificationType;
 
   /**
-   * 应用发送通知携带的唯一标识字段，用于通知去重。如果同一应用通过本地和云端等不同途径发布携带相同appMessageId的通知，
-   * 设备只展示一条消息，之后收到的重复通知会被静默去重，不展示、不提醒。去重标识仅在通知发布的24小时内有效，
-   * 超过24小时或者设备重启失效。大小不超过202字节，超出部分会被截断。默认为空。
+   * 应用发送通知携带的唯一标识字段，用于通知去重。如果同一应用通过本地和云端等不同途径发布携带相同appMessageId的通知，设备只展示一条消息，之后收到的重复通知会被静默去重，不展示、不提醒。去重标识仅在通知发布的24小时内有
+   * 效，超过24小时或者设备重启失效。
+   *
+   * 大小不超过202字节，超出部分会被截断。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 12 dynamic
@@ -322,7 +324,8 @@ export interface NotificationRequest {
   slotType?: notification.SlotType;
 
   /**
-   * 通知渠道类型，默认值为OTHER_TYPES。不同渠道类型的通知提醒方式不同。
+   * [通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)类型，默认值为OTHER_TYPES。不同渠道类型的
+   * [通知提醒方式](docroot://notification/notification-glossary.md#notification-reminder-mode通知提醒方式)不同。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 11 dynamic
@@ -333,8 +336,8 @@ export interface NotificationRequest {
   /**
    * 预留能力，暂未支持。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -351,7 +354,7 @@ export interface NotificationRequest {
 
   /**
    * 是否仅更新通知，默认值为false。
-   * 
+   *
    * - true：若已存在相同ID的通知，则更新该通知；若不存在相同ID的通知，则更新失败，并且不创建新的通知。
    * - false：若已存在相同ID的通知，则更新该通知；若不存在相同ID的通知，则创建新的通知。
    *
@@ -363,13 +366,13 @@ export interface NotificationRequest {
 
   /**
    * 通知发送时间。系统自动生成，无需开发者配置。
-   * 
+   *
    * 数据格式：时间戳。
-   * 
+   *
    * 单位：毫秒。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -377,29 +380,28 @@ export interface NotificationRequest {
 
   /**
    * 点击通知携带的wantAgent或actionButtons时，该通知是否自动清除。当通知携带wantAgent或actionButtons时该字段生效。默认值为true。
-   * 
+   *
    * - true：点击通知或按钮后，自动删除当前通知。
    * - false：点击通知或按钮后，保留当前通知。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   tapDismissed?: boolean;
 
   /**
-   * 通知定时清除时间。设置该参数可使通知在指定时间后自动清除。默认值为0。
-   * 传入小于0的值或过去的时间值，该参数不生效。
-   * 
+   * 通知定时清除时间。设置该参数可使通知在指定时间后自动清除。默认值为0。传入小于0的值或过去的时间值，该参数不生效。
+   *
    * 数据格式：时间戳。
-   * 
+   *
    * 单位：毫秒。
-   * 
+   *
    * 例如，希望某通知存留3秒（3000ms）后对其进行清除，则对应的清除时间为：new Date().getTime() + 3000。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -416,12 +418,11 @@ export interface NotificationRequest {
 
   /**
    * 扩展参数。为应用提供定制服务。默认为空。
-   * 
+   *
    * 以下Key由系统赋值，开发者手动修改也不会生效，系统在数据传递时会自动修改为实际值。
-   * 
+   *
    * - 'ohos.notificationManager.wantUri'：用户点击通知时传递给应用的[Want]{@link @ohos.app.ability.Want:Want} 中的uri字段，使用
-   * [getActiveNotifications]{@link @ohos.notification:notification.getActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>)}
-   * 接口获取该信息。
+   * [getActiveNotifications]{@link @ohos.notificationManager:notificationManager.getActiveNotifications}接口获取该信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -430,12 +431,11 @@ export interface NotificationRequest {
 
   /**
    * 扩展参数。为应用提供定制服务。默认为空。
-   * 
+   *
    * 以下Key由系统赋值，开发者手动修改也不会生效，系统在数据传递时会自动修改为实际值。
-   * 
+   *
    * - 'ohos.notificationManager.wantUri'：用户点击通知时传递给应用的[Want]{@link @ohos.app.ability.Want:Want} 中的uri字段，使用
-   * [getActiveNotifications]{@link @ohos.notification:notification.getActiveNotifications(callback: AsyncCallback<Array<NotificationRequest>>)}
-   * 接口获取该信息。
+   * [getActiveNotifications]{@link @ohos.notificationManager:notificationManager.getActiveNotifications}接口获取该信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 23 static
@@ -479,13 +479,13 @@ export interface NotificationRequest {
   colorEnabled?: boolean;
 
   /**
-   * 发布或更新该通知时，是否只进行一次通知提醒，默认值为false。
-   * 
+   * 发布或更新该通知时，是否只进行一次通知提醒，默认为false。
+   *
    * - true：仅首次发布通知时进行提醒，后续更新该通知时，提醒方式变更为[LEVEL_LOW]{@link @ohos.notificationManager:notificationManager.SlotLevel}。
    * - false：每次均按照配置的通知提醒方式进行提醒。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
@@ -520,10 +520,11 @@ export interface NotificationRequest {
 
   /**
    * 通知标签。
-   * 
+   *
    * label字段的功能类似于id，可以单独使用，也可与id结合共同作为通知的标识。优先推荐使用id。
-   * 
+   *
    * 如果发布通知时label不为空，那么在更新或删除该通知时，也需要指定相应的label。
+   *
    * 大小不超过202字节，超出部分会被截断。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -544,15 +545,16 @@ export interface NotificationRequest {
   /**
    * 是否显示分发时间。预留能力，暂未支持。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 7 dynamic
    * @since 23 static
    */
   showDeliveryTime?: boolean;
 
   /**
-   * 通知按钮，默认为空。一条通知中最多包含两个按钮。从API version 16开始，`wearable`设备一条通知最多包含三个按钮。
+   * [通知按钮](docroot://notification/notification-glossary.md#notification-button通知按钮)，默认为空。一条通知中最多包含两个按钮。从API version 16开
+   * 始，`wearable`设备一条通知最多包含三个按钮。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -561,9 +563,10 @@ export interface NotificationRequest {
   actionButtons?: Array<NotificationActionButton>;
 
   /**
-   * 通知左侧图标，默认为空。系统自动生成，无需开发者配置。图标像素的总字节数不超过192KB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），超出后设置不生效。
-   * 建议图标像素长宽为128*128。实际显示效果依赖于设备能力和通知中心UI样式<!--RP4--><!--RP4End-->。
+   * 通知左侧图标，默认为空。系统自动生成，无需开发者配置。
+   *
+   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过[getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}
+   * 获取），超出后设置不生效。建议图标像素长宽为128*128。实际显示效果依赖于设备能力和通知中心UI样式<!--RP4--><!--RP4End-->。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -572,11 +575,11 @@ export interface NotificationRequest {
   smallIcon?: image.PixelMap;
 
   /**
-   * 通知右侧图标，默认为空。当`content`使用
-   * [NotificationPictureContent]{@link ./notification/notificationContent:NotificationPictureContent}时，该参数设置不生效。
-   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），超出后设置不生效。
-   * 实际显示效果依赖于设备能力和通知中心UI样式<!--RP1--><!--RP1End-->。
+   * 通知右侧图标，默认为空。当`content`使用[NotificationPictureContent]{@link ./notificationContent:NotificationPictureContent}时，该参数设置
+   * 不生效。
+   *
+   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过[getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}
+   * 获取），超出后设置不生效。建议图标像素长宽为128*128。实际显示效果依赖于设备能力和通知中心UI样式<!--RP1--><!--RP1End-->。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -585,10 +588,10 @@ export interface NotificationRequest {
   largeIcon?: image.PixelMap;
 
   /**
-   * 通知重叠图标，替换通知左侧图标，默认为空。此接口只在[notificationSlotType]{@link NotificationRequest}
-   * 类型设置为SOCIAL_COMMUNICATION时生效。图标像素的总字节数不超过192KB（图标像素的总字节数通过
-   * [getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}获取），超出后设置不生效。
-   * 建议图标像素长宽为128*128。实际显示效果依赖于设备能力和通知中心UI样式<!--RP3--><!--RP3End-->。
+   * 通知重叠图标，替换通知左侧图标，默认为空。此接口只在[notificationSlotType]{@link NotificationRequest}类型设置为SOCIAL_COMMUNICATION时生效。
+   *
+   * 图标像素的总字节数不超过192KB（图标像素的总字节数通过[getPixelBytesNumber]{@link @ohos.multimedia.image:image.PixelMap.getPixelBytesNumber}
+   * 获取），超出后设置不生效。建议图标像素长宽为128*128。实际显示效果依赖于设备能力和通知中心UI样式<!--RP3--><!--RP3End-->。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi [since 11 - 22]
@@ -599,18 +602,19 @@ export interface NotificationRequest {
   overlayIcon?: image.PixelMap;
 
   /**
-   * 通知所属组。当不同通知的groupName相同时，这些通知将成组展示。大小不超过202字节，
-   * 超出部分会被截断。默认为空。
+   * 通知所属组。当不同通知的groupName相同时，这些通知将成组展示。
    *
-   * @crossplatform [since 12]
+   * 大小不超过202字节，超出部分会被截断。默认为空。
+   *
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 8 dynamic
    * @since 23 static
    */
   groupName?: string;
 
   /**
-   * 创建通知的应用名称。
+   * 创建通知的应用包名。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 7 dynamic
@@ -657,14 +661,14 @@ export interface NotificationRequest {
   readonly creatorInstanceKey?: number;
 
   /**
-   * 应用通知自定义铃声资源路径，默认为空。支持两种音频资源来源：
-   * 
+   * 应用通知[自定义铃声](docroot://notification/notification-glossary.md#customized-ringtone自定义铃声)资源路径，默认为空。支持两种音频资源来源：
+   *
    * - 资源文件：应用预置的音频文件，资源文件必须放在resources/rawfile目录下，使用时直接传入文件名。
-   * - 沙箱文件：网络下载或者用户生成的音频文件，必须放在沙箱文件目录EL1区域的files目录或
+   * - 沙箱文件：网络下载或者用户生成的音频文件，必须放在[沙箱文件目录](docroot://file-management/app-sandbox-directory.md#应用文件目录与应用文件路径)EL1区域的files目录或
    * 者其子目录下，传入格式为uri::{fileUri}，其中fileUri是通过[getUriFromPath]{@link @ohos.file.fileuri:fileUri.getUriFromPath}获取的路径。例如，应用
    * 将下载的音频资源demo.mp3传入沙箱文件目录/data/storage/el1/base/files/，通过getUriFromPath获取的路径为file://{bundleName}/data/storage/el1/
    * base/files/demo.mp3，使用该路径发布通知即可播放应用下载的音频资源。
-   * 
+   *
    * 支持m4a、aac、mp3、ogg、wav、flac、amr等格式。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -675,6 +679,7 @@ export interface NotificationRequest {
 
   /**
    * 通知分类。
+   *
    * 预留能力，暂未支持。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -695,7 +700,7 @@ export interface NotificationRequest {
 
   /**
    * 通知是否能被移除（点击通知下方删除按钮无法删除，左滑不出现删除按钮）。默认为true。
-   * 
+   *
    * - true：是。
    * - false：否。
    *
@@ -706,11 +711,12 @@ export interface NotificationRequest {
    * @since 8 dynamic
    * @since 23 static
    */
-  
+
   isRemoveAllowed?: boolean;
 
   /**
    * 通知源。
+   *
    * 预留能力，暂未支持。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -730,7 +736,7 @@ export interface NotificationRequest {
   template?: NotificationTemplate;
 
   /**
-   * 分布式通知的选项。预留能力，暂未支持。
+   * [分布式通知](docroot://notification/notification-glossary.md#distributed-notification分布式通知)的选项。预留能力，暂未支持。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 8 dynamic
@@ -740,6 +746,7 @@ export interface NotificationRequest {
 
   /**
    * 通知源的deviceId。
+   *
    * 预留能力，暂未支持。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -750,12 +757,12 @@ export interface NotificationRequest {
   readonly deviceId?: string;
 
   /**
-   * 通知标志位设置，默认为空。从API version 23开始成为可写参数，设置该参数可削减通知的提醒方式，当通知渠道类型为
-   * [LIVE_VIEW]{@link @ohos.notificationManager:notificationManager.SlotType}时，该参数设置不生效。
+   * [通知标志位](docroot://notification/notification-glossary.md#notification-flags通知标志位)设置，默认为空。从API version 23开始成为可写参数，设置该
+   * 参数可削减通知的提醒方式，当通知渠道类型为[LIVE_VIEW]{@link @ohos.notificationManager:notificationManager.SlotType}时，该参数设置不生效。
    *
    * @readonly [since 8 - 22]
    * @syscap SystemCapability.Notification.Notification
-   * @FaAndStageModel [dynamiconly]
+   * @FaAndStageModel [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -763,8 +770,8 @@ export interface NotificationRequest {
 
   /**
    * 封装了应用的行为意图，移除通知时触发该行为，默认为空。
-   * 
-   * 当前不支持跳转UIAbility，只支持发布公共事件（即[WantAgentInfo]{@link ./wantAgent/wantAgentInfo:WantAgentInfo}的actionType字段取值为4）。
+   *
+   * 当前不支持跳转UIAbility，只支持发布公共事件（即[WantAgentInfo]{@link ../wantAgent/wantAgentInfo:WantAgentInfo}的actionType字段取值为4）。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 9 dynamic
@@ -774,15 +781,15 @@ export interface NotificationRequest {
 
   /**
    * 应用图标上显示的通知数，该数量累计展示，默认值为0。
-   * 
+   *
    * 当`badgeNumber`取值小于或等于0时，将忽略本次角标设定。
-   * 
-   * 当角标累加设定个数取值大于99时，通知角标将显示99+。
-   * 
+   *
+   * 当角标累加设定个数取值大于99时，[通知角标](docroot://notification/notification-glossary.md#notification-badge通知角标)将显示99+。
+   *
    * 例如，应用发布3条通知，`badgeNumber`依次设置为2、0、3，应用将依次展示为2、2、5。
    *
-   * @crossplatform [since 12]
    * @syscap SystemCapability.Notification.Notification
+   * @crossplatform [since 12]
    * @since 9 dynamic
    * @since 23 static
    */
@@ -809,7 +816,7 @@ export interface NotificationRequest {
   readonly agentBundle?: BundleOption;
 
   /**
-   * 消息智能聚合信息字段。默认为空。 
+   * 消息[智能聚合](docroot://notification/notification-glossary.md#notification-smart-aggregation智能聚合)信息字段。默认为空。 
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -819,8 +826,8 @@ export interface NotificationRequest {
   unifiedGroupInfo?: UnifiedGroupInfo;
 
   /**
-   * 通知提醒方式管控。默认值为0。
-   * 
+   * [通知提醒方式](docroot://notification/notification-glossary.md#notification-reminder-mode通知提醒方式)管控。默认值为0。
+   *
    * 可以通过此接口减少当前通知的提醒方式。与
    * [NotificationControlFlagStatus]{@link @ohos.notificationManager:notificationManager.NotificationControlFlagStatus}的
    * 枚举进行按位或运算得到该参数。
@@ -833,7 +840,7 @@ export interface NotificationRequest {
   notificationControlFlags?: long;
 
   /**
-   * 应用实例键值。默认为空。
+   * 应用实例键值。默认为空。当需要区分同一应用的不同实例时，设置此字段。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -844,17 +851,16 @@ export interface NotificationRequest {
 
   /**
    * 通知是否强制进行全场景跨设备协同显示，默认为false。
-   * 
+   *
    * **说明**:
-   * 
-   * 仅当应用在跨设备协同管控名单中且notDistributed为false时，该字段才会生效。通过读取notification_config.json文件
-   * （文件配置路径见：[notification_config_parse.h]
+   *
+   * 仅当应用在跨设备协同管控名单中且notDistributed为false时，该字段才会生效。通过读取notification_config.json文件（文件配置路径见：
+   * [notification_config_parse.h]
    * (https://gitcode.com/openharmony/notification_distributed_notification_service/blob/master/services/ans/include/notification_config_parse.h)
-   * 中的NOTIFICATION_CONFIG_FILE属性）中的collaborationFilter字段，查看是否包含应用的UID或包名。如果包含，
-   * 说明是在应用跨设备协同管控名单中。
-   * 
+   * 中的NOTIFICATION_CONFIG_FILE属性）中的collaborationFilter字段，查看是否包含应用的UID或包名。如果包含，说明是在应用跨设备协同管控名单中。
+   *
    * - 设置为true时：通知将在所有协同设备上显示。
-   * 
+   *
    * - 设置为false时：通知将按照协同管控名单显示。
    *
    * @default false
@@ -866,14 +872,14 @@ export interface NotificationRequest {
   forceDistributed?: boolean;
 
   /**
-   * 通知是否不进行全场景跨设备协同显示，默认为false。
-   * 
+   * 通知是否不进行全场景[跨设备协同](docroot://notification/notification-glossary.md#cross-device-collaboration跨设备协同)显示，默认为false。
+   *
    * **说明**:
-   * 
+   *
    * 该字段与forceDistributed字段互斥，当两者同时为true时，仅notDistributed字段生效。
-   * 
+   *
    * - 设置为true时：通知仅在本设备上显示。
-   * 
+   *
    * - 设置为false时：通知将在所有协同设备上显示。
    *
    * @default false
@@ -885,7 +891,7 @@ export interface NotificationRequest {
   notDistributed?: boolean;
 
   /**
-   * 组通知定制信息。默认为空。
+   * [组通知](docroot://notification/notification-glossary.md#group-notification组通知)定制信息。默认为空。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -896,7 +902,7 @@ export interface NotificationRequest {
 }
 
 /**
- * 描述跨设备协同选项。预留能力，暂未支持。
+ * 描述[跨设备协同](docroot://notification/notification-glossary.md#cross-device-collaboration跨设备协同)选项。预留能力，暂未支持。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 8 dynamic
@@ -905,7 +911,7 @@ export interface NotificationRequest {
 export interface DistributedOptions {
   /**
    * 是否支持跨设备协同通知。默认为true。
-   * 
+   *
    * - true：支持跨设备协同通知。
    * - false：不支持跨设备协同通知。
    *
@@ -946,7 +952,7 @@ export interface DistributedOptions {
 }
 
 /**
- * 描述查询普通实况窗时的筛选条件。
+ * 描述查询实况通知时的筛选条件。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -955,7 +961,7 @@ export interface DistributedOptions {
  */
 export interface NotificationFilter {
   /**
-   * 实况通知的包信息。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)的包信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -1015,7 +1021,7 @@ export interface NotificationCheckRequest {
   slotType: notificationManager.SlotType;
 
   /**
-   * 实况通知的附加信息。
+   * [实况通知](docroot://notification/notification-glossary.md#live-view-notification实况通知)的附加信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -1026,7 +1032,7 @@ export interface NotificationCheckRequest {
 }
 
 /**
- * 描述通知智能聚合信息字段。
+ * 描述通知[智能聚合](docroot://notification/notification-glossary.md#notification-smart-aggregation智能聚合)信息字段。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -1094,7 +1100,7 @@ export interface UnifiedGroupInfo {
 }
 
 /**
- * 组通知信息。
+ * [组通知](docroot://notification/notification-glossary.md#group-notification组通知)信息。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -1103,9 +1109,9 @@ export interface UnifiedGroupInfo {
  */
 export interface GroupInfo {
   /**
-   * 是否使用该通知[NotificationRequest]{@link ./notification/notificationRequest:NotificationRequest}中的smallIcon字段作为通知成组后
-   * 展示的组图标。当该通知是通知组中最新的一条通知，且开发者传入smallIcon时，是否使用smallIcon作为组图标。默认值为false。
-   * 
+   * 是否使用该通知[NotificationRequest]{@link NotificationRequest}中的smallIcon字段作为通知成组后展示的组图标。当该通知是通知组中最新的一条通知，且开发者传入smallIcon
+   * 时，是否使用smallIcon作为组图标。默认值为false。
+   *
    * - true：使用smallIcon作为组通知的图标。
    * - false：不使用smallIcon作为组通知的图标。
    *
@@ -1115,7 +1121,7 @@ export interface GroupInfo {
    * @since 26.0.0 dynamic&static
    */
   isGroupIcon?: boolean;
- 	 
+
   /**
    * 通知成组后展示的组标题。当该通知是通知组中最新的一条通知时，该字段生效。默认为空。
    *

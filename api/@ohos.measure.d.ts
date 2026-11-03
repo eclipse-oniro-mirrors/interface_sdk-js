@@ -314,9 +314,16 @@ export default class MeasureText {
    *
    * > **NOTE**
    * >
+   * > - This API is supported since API version 9 and deprecated since API version 18. You are advised to use
+   * > [measureText]{@link @ohos.arkui.UIContext:MeasureUtils.measureText} instead. Before calling this API, you need to
+   * > obtain the [MeasureUtils]{@link @ohos.arkui.UIContext} object using
+   * > the [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils} method in
+   * > [UIContext]{@link @ohos.arkui.UIContext}. Directly using **measureText** can lead to the issue of
+   * > [ambiguous UI context](docroot://ui/arkts-global-interface.md#ambiguous-ui-context).
+   * >
    * > - Since API version 12, you can use the [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}
-   * > API in [UIContext]{@link @ohos.arkui.UIContext} to obtain the [MeasureUtils]{@link @ohos.arkui.UIContext} object
-   * > associated with the current UI context.
+   * > API in [UIContext]{@link @ohos.arkui.UIContext} to obtain the
+   * > [MeasureUtils]{@link @ohos.arkui.UIContext} object associated with the current UI context.
    * >
    * > - **measureText** always measures single-line text width. Layout constraints in **options** (**constraintWidth**,
    * > **maxLines**, and more) do not affect results. For layout-constrained width measurement, use
@@ -338,6 +345,12 @@ export default class MeasureText {
    * Measures the width and height of the given text.
    *
    * > **NOTE**
+   * > - This API is supported since API version 10 and deprecated since API version 18. You are advised to use
+   * > [measureTextSize]{@link @ohos.arkui.UIContext:MeasureUtils.measureTextSize} instead. Before calling this API, you
+   * > need to obtain the [MeasureUtils]{@link @ohos.arkui.UIContext} object using the
+   * > [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils} method in
+   * > [UIContext]{@link @ohos.arkui.UIContext}. Directly using **measureTextSize** can lead to the issue of
+   * > [ambiguous UI context](docroot://ui/arkts-global-interface.md#ambiguous-ui-context).
    * >
    * > - Since API version 12, you can use the [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}
    * > API in [UIContext]{@link @ohos.arkui.UIContext} to obtain the [MeasureUtils]{@link @ohos.arkui.UIContext} object

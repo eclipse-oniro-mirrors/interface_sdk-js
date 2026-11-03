@@ -302,7 +302,8 @@ export type SaveButtonCallback
 
 /**
  * Universal attributes are not supported. This component supports the attributes listed below, as well as
- * [universal attributes of security components]{@link ./securityComponent}. Only the following events are supported.
+ * [universal attributes of security components]{@link ./securityComponent:SecurityComponentMethod}. Only the
+ * following events are supported.
  *
  * @extends SecurityComponentMethod
  * @interface SaveButtonAttribute
@@ -335,8 +336,8 @@ export declare interface SaveButtonAttribute extends SecurityComponentMethod {
    * @param { Resource | undefined } icon - Custom icon resource information. Only data sources of the Resource type are
    *     supported.
    *     <br>Images in the following formats are supported: PNG, JPG, JPEG, BMP, SVG, WebP, GIF, and HEIF. For details
-   *     about the supported image formats, see [Image]{@link ./image}. If the resource is not an image resource or the
-   *     format is not supported, the icon is displayed as blank.
+   *     about the supported image formats, see [Image]{@link ./image:Image}. If the resource is not an image resource
+   *     or the format is not supported, the icon is displayed as blank.
    *     <br>Since API version 26.0.0, data sources of the Resource type in Symbol format are supported.
    *     <br>If the app does not have the **ohos.permission.CUSTOMIZE_SAVE_BUTTON** permission, the custom icon does not
    *     take effect and the save button uses the default style.

@@ -70,7 +70,7 @@ interface StepperInterface {
  */
 declare class StepperAttribute extends CommonMethod<StepperAttribute> {
   /**
-   * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} of the last [StepperItem]{@link ./stepper_item} in
+   * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} of the last [StepperItem]{@link @global:StepperItem} in
    * the stepper is clicked and the [ItemState]{@link ItemState} attribute is **Normal**.
    *
    * @param { function } callback - Invoked when the **nextLabel** of the last **StepperItem** in the **Stepper** is
@@ -87,7 +87,7 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
 
   /**
    * Triggered when [nextLabel]{@link StepperItemAttribute#nextLabel} is clicked and the
-   * [StepperItem]{@link ./stepper_item} status is **ItemState.Skip**.
+   * [StepperItem]{@link @global:StepperItem} status is **ItemState.Skip**.
    *
    * @param { function } callback - Invoked when the current **StepperItem** is **ItemState.Skip** and the **nextLabel**
    *     is clicked.
@@ -164,7 +164,7 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
  *
  * ###### Child Components
  *
- * Only the child component [StepperItem]{@link ./stepper_item} is supported.
+ * Only the child component [StepperItem]{@link @global:StepperItem} is supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

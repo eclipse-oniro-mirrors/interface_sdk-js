@@ -207,7 +207,7 @@ declare interface ListItemGroupOptions {
    *
    * 设置为ListItemGroupStyle.NONE时无样式。
    *
-   * 设置为ListItemGroupStyle.CARD时，建议配合[ListItem]{@link ./list_item}的ListItemStyle.CARD同时使用，显示默认卡片样式。
+   * 设置为ListItemGroupStyle.CARD时，建议配合[ListItem]{@link @global:ListItem}的ListItemStyle.CARD同时使用，显示默认卡片样式。
    *
    * 卡片样式下，ListItemGroup默认规格：左右外边距12vp，上下左右内边距4vp。
    *
@@ -264,7 +264,7 @@ declare interface ListItemGroupOptions {
 }
 
 /**
- * 该组件用来展示列表项分组，支持自定义分组头部和尾部区域、卡片样式、分割线、懒加载与预加载等能力，适用于需要对列表项进行逻辑分组展示的场景。宽度默认充满[List]{@link ./list}组件，必须配合List组件来使用。
+ * 该组件用来展示列表项分组，支持自定义分组头部和尾部区域、卡片样式、分割线、懒加载与预加载等能力，适用于需要对列表项进行逻辑分组展示的场景。宽度默认充满[List]{@link @global:List}组件，必须配合List组件来使用。
  *
  * ListItemGroup的懒加载是指组件按需加载可见区域内的子组件。相比全量加载，使用懒加载可以提升应用启动速度，减少内存消耗。ListItemGroup和
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)、
@@ -290,7 +290,7 @@ declare interface ListItemGroupOptions {
  *
  * > **说明：**
  * >
- * > - 该组件的父组件只能是[List]{@link ./list}。
+ * > - 该组件的父组件只能是[List]{@link @global:List}。
  * >
  * > - ListItemGroup组件不支持设置[通用属性aspectRatio]{@link CommonMethod#aspectRatio}。
  * >
@@ -327,7 +327,7 @@ interface ListItemGroupInterface {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -343,7 +343,7 @@ declare class ListItemGroupAttribute extends CommonMethod<ListItemGroupAttribute
    *
    * strokeWidth，startMargin和endMargin不支持设置百分比。
    *
-   * ListItem设置[多态样式]{@link common}时，被按压的子组件上下的分割线不绘制。
+   * ListItem设置[多态样式]{@link CommonMethod}时，被按压的子组件上下的分割线不绘制。
    *
    * @param { {
    *     strokeWidth: Length;
@@ -395,7 +395,7 @@ declare class ListItemGroupAttribute extends CommonMethod<ListItemGroupAttribute
 declare const ListItemGroupInstance: ListItemGroupAttribute;
 
 /**
- * 该组件用来展示列表项分组，支持自定义分组头部和尾部区域、卡片样式、分割线、懒加载与预加载等能力，适用于需要对列表项进行逻辑分组展示的场景。宽度默认充满[List]{@link ./list}组件，必须配合List组件来使用。
+ * 该组件用来展示列表项分组，支持自定义分组头部和尾部区域、卡片样式、分割线、懒加载与预加载等能力，适用于需要对列表项进行逻辑分组展示的场景。宽度默认充满[List]{@link @global:List}组件，必须配合List组件来使用。
  *
  * ListItemGroup的懒加载是指组件按需加载可见区域内的子组件。相比全量加载，使用懒加载可以提升应用启动速度，减少内存消耗。ListItemGroup和
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)、
@@ -421,7 +421,7 @@ declare const ListItemGroupInstance: ListItemGroupAttribute;
  *
  * > **说明：**
  * >
- * > - 该组件的父组件只能是[List]{@link ./list}。
+ * > - 该组件的父组件只能是[List]{@link @global:List}。
  * >
  * > - ListItemGroup组件不支持设置[通用属性aspectRatio]{@link CommonMethod#aspectRatio}。
  * >
@@ -435,7 +435,7 @@ declare const ListItemGroupInstance: ListItemGroupAttribute;
  *
  * ###### 子组件
  *
- * 包含[ListItem]{@link ./list_item}子组件。支持通过渲染控制类型（
+ * 包含[ListItem]{@link @global:ListItem}子组件。支持通过渲染控制类型（
  * [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)、
  * [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)和

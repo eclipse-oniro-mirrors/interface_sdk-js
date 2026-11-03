@@ -128,7 +128,7 @@ declare interface ViewportRect {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @global:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -436,13 +436,13 @@ declare class ShapeAttribute extends CommonMethod<ShapeAttribute> {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @global:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  *
  * ###### 子组件
  * 
- * 包含[Rect]{@link rect}、[Path]{@link path}、[Circle]{@link circle}、[Ellipse]{@link ellipse}、[Polyline]{@link polyline}、
-   * [Polygon]{@link polygon}、[Image]{@link image}、[Text]{@link text}、[Column]{@link column}、[Row]{@link row}和Shape子组件。
+ * 包含[Rect]{@link @global:Rect}、[Path]{@link @global:Path}、[Circle]{@link @global:Circle}、[Ellipse]{@link @global:Ellipse}、[Polyline]{@link @global:Polyline}、
+   * [Polygon]{@link @global:Polygon}、[Image]{@link @global:Image}、[Text]{@link @global:Text}、[Column]{@link @global:Column}、[Row]{@link @global:Row}和Shape子组件。
   *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

@@ -171,6 +171,11 @@ function replaceNodeInParent(oldChild: arkts.AstNode, newChild: arkts.AstNode): 
   const p = parent as any;
   const kind = arkts.arktsGlobal.generatedEs2panda._AstNodeTypeConst(arkts.arktsGlobal.context, parent.peer);
 
+  if (kind === arkts.Es2pandaAstNodeType.AST_NODE_TYPE_AWAIT_EXPRESSION) {
+    const newAwait = arkts.factory.updateAwaitExpression(parent, newChild);
+    return replaceNodeInParent(parent, newAwait);
+  }
+
   const singleSetter = SINGLE_SETTER_BY_KIND[kind];
   if (singleSetter) {
     return applySetter(p, singleSetter, newChild);

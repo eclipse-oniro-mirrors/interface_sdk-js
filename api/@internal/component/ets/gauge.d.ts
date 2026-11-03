@@ -104,7 +104,7 @@ interface GaugeOptions {
  *
  * > **NOTE**
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  * >
  * > - [startAngle]{@link GaugeAttribute#startAngle} and [endAngle]{@link GaugeAttribute#endAngle} only determine the
  * > arc path range and do not affect the component size. The smaller the angle difference, the smaller the proportion
@@ -250,7 +250,7 @@ declare interface GaugeConfiguration extends CommonConfiguration<GaugeConfigurat
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -472,8 +472,8 @@ declare class GaugeAttribute extends CommonMethod<GaugeAttribute> {
    *     the background color. The value **true** enables privacy sensitivity, and **false** disables it.
    *     <br>**Note:**
    *     <br>If this parameter is set to null, the content is not sensitive.<!--Del-->
-   *     <br>To use Gauge in a card, set the [privacy mask]{@link ./common} attribute through the
-   *     [FormComponent]{@link ./form_component} component. The privacy mask takes effect only when the card is
+   *     <br>To use Gauge in a card, set the [privacy mask]{@link CommonMethod} attribute through the
+   *     [FormComponent]{@link @global:FormComponent} component. The privacy mask takes effect only when the card is
    *     displayed.<!--DelEnd-->
    * @returns { GaugeAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -510,7 +510,7 @@ declare class GaugeAttribute extends CommonMethod<GaugeAttribute> {
  *
  * > **NOTE**
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  * >
  * > - [startAngle]{@link GaugeAttribute#startAngle} and [endAngle]{@link GaugeAttribute#endAngle} only determine the
  * > arc path range and do not affect the component size. The smaller the angle difference, the smaller the proportion

@@ -146,7 +146,7 @@ declare interface GridContainerOptions {
  *
  * > **说明：**
  * >
- * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link ./grid_col}、[GridRow]{@link ./grid_row}。
+ * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link @global:GridCol}、[GridRow]{@link @global:GridRow}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
@@ -190,7 +190,7 @@ declare class GridContainerAttribute extends ColumnAttribute {}
  *
  * > **说明：**
  * >
- * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link ./grid_col}、[GridRow]{@link ./grid_row}。
+ * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link @global:GridCol}、[GridRow]{@link @global:GridRow}。
  *
  * ###### 子组件
  * 

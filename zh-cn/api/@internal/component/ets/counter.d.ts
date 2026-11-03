@@ -23,7 +23,7 @@
  *
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -48,7 +48,7 @@ interface CounterInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性。
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -132,7 +132,7 @@ declare const CounterInstance: CounterAttribute;
  *
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * ## 子组件
  *

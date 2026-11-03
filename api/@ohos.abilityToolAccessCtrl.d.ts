@@ -183,6 +183,16 @@ declare namespace abilityToolAccessCtrl {
      * @since 26.0.0 dynamiconly
      */
     domainId?: string;
+
+    /**
+     * Task identity.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskIdentity?: TaskIdentity;
   }
 
   /**
@@ -552,13 +562,13 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * Optional parameters for the ticket.
+   * Parameters for the ticket.
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
-  interface TicketOpions {
+  interface TicketParams {
 
     /**
      * Ticket expiration time in milliseconds.
@@ -566,7 +576,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     ticketExpireTimeMs?: long;
   }
@@ -576,7 +586,7 @@ declare namespace abilityToolAccessCtrl {
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   interface TicketQueryResult {
 
@@ -585,7 +595,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     permissionResults: PermissionInfo[];
 
@@ -594,7 +604,7 @@ declare namespace abilityToolAccessCtrl {
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     ticket: string;
   }
@@ -747,6 +757,221 @@ declare namespace abilityToolAccessCtrl {
      * @since 26.0.1 dynamiconly
      */
     DISABLE = 0x02
+  }
+
+  /**
+   * Control permission status.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ControlAppStatus {
+    /**
+     * Control permission is allowed.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ALLOW = 0x01,
+
+    /**
+     * Control permission is denied.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DENY = 0x02
+  }
+
+  /**
+   * Task identity.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TaskIdentity {
+    /**
+     * Task attributes.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskAttributes: string;
+    /**
+     * Identity info of task attributes.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    identity: string;
+
+    /**
+     * Challenge value.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    challenge: string;
+  }
+
+  /**
+   * Task execute type.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ExecuteType {
+    /**
+     * Instant task.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    INSTANT = 0x01,
+    /**
+     * Delayed task.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DELAYED = 0x02
+  }
+
+  /**
+   * Task identity input info used to generate TaskIdentity.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface TaskIdentityInfo {
+    /**
+     * Task ID.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskId: string;
+    /**
+     * Task expire time.
+     * Unit: seconds.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    taskExpireTime: number;
+    /**
+     * Task execute type.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    executeType: ExecuteType;
+    /**
+     * Whether task is allowed to execute under screen locks.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    allowScreenLockExecution: boolean;
+    /**
+     * Auth token of trusted device.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    authToken?: Uint8Array;
+    /**
+     * Valid duration of auth token.
+     * Unit: seconds. Value range: (0,60].
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    allowableDuration?: number;
+  }
+
+  /**
+   * Information about an application.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface AppInfo {
+    /**
+     * Bundle name of the application.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    bundleName: string;
+    /**
+     * Index of the application.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    index: number;
+  }
+
+  /**
+   * Control permission status result for an application.
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ControlAppStatusResult {
+    /**
+     * Application information.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * Control permission status.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    status: ControlAppStatus;
   }
 
   /**
@@ -954,10 +1179,10 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
    * @param { CliCmdInfo[] } cliCmdInfos - CLI command list.
-   * @param { TicketOpions } ticketOpions - generate ticket options.
+   * @param { TicketParams } ticketParams - Used to generate ticket parameters.
    * @returns { Promise<TicketQueryResult> } Promise used to return ${TicketQueryResult}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.EXEC_PUBLIC_CLI_TOOL".
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -966,9 +1191,115 @@ declare namespace abilityToolAccessCtrl {
    *     is locked.
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
-  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketOpions: TicketOpions): Promise<TicketQueryResult>;
+  export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketParams: TicketParams): Promise<TicketQueryResult>;
+
+  /**
+   * Generate the task-based authentication identity for agent commands.
+   * This function generates a authentication identity based on caller identity and basic task attributes,
+   * such as task ID and task expire time.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { TaskIdentityInfo } taskIdentityInfo - Task identity info to generate authentication identity.
+   * @returns { Promise<TaskIdentity> } Promise used to return ${TaskIdentity}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function generateTaskIdentity(taskIdentityInfo: TaskIdentityInfo): Promise<TaskIdentity>;
+
+  /**
+   * Batch revoke task authentication identities for agent commands.
+   * This function batch revokes the task authentication identities and deletes the local cache of task attributes.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { string[] } taskId - Task ID list to revoke authentication identity.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function revokeTaskIdentity(taskId: string[]): Promise<void>;
+
+  /**
+   * Queries the control permission status for the specified applications.
+   * This function checks whether each application in the input list is allowed or denied
+   * to be controlled by external tools. The result list corresponds to the input order.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { AppInfo[] } appInfo - Application information list.
+   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
+
+  /**
+   * Requests the control permission for the specified applications from the user.
+   * This function displays a user dialog to obtain authorization decisions for controlling
+   * each application. The result reflects the user's allow or deny decision for each app.
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { Context } context - Context object for displaying the user dialog.
+   * @param { AppInfo[] } appInfo - Application information list.
+   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
+   *     bundleName is invalid, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
+    Promise<ControlAppStatusResult[]>;
+  /**
+   * Generate the challenge for task auth token generation.
+   * This function generates a challenge based on task identity info.
+   *
+   * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
+   * @param { TaskIdentityInfo } taskIdentityInfo - Task identity info to generate challenge.
+   * @returns { Promise<Uint8Array> } Promise used to return ${Uint8Array}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TaskId is empty, etc.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @systemapi
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function generateTaskChallenge(taskIdentityInfo: TaskIdentityInfo): Promise<Uint8Array>;
 }
 
 export default abilityToolAccessCtrl;

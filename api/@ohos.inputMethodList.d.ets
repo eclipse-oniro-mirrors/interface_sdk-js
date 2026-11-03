@@ -70,11 +70,11 @@
  * <br>
  * <br>###### Attributes
  * <br>
- * <br>The [universal attributes]{@link ./@internal/component/ets/common} are not supported.
+ * <br>The [universal attributes]{@link CommonMethod} are not supported.
  * <br>
  * <br>######  Events
  * <br>
- * <br>The [universal events]{@link ./@internal/component/ets/common} are not supported.
+ * <br>The [universal events]{@link CommonMethod} are not supported.
  *
  * @file Input Method List
  * @kit IMEKit

@@ -405,13 +405,13 @@ declare enum ImageRotateOrientation {
  * >
  * > - 从API version 23开始，图片类型新增支持tiff格式。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * >
  * > - 使用快捷组合键对Image组件复制时，Image组件必须处于获焦状态，如何获焦请参考[设置组件是否可获焦](docroot://ui/arkts-common-events-focus-event.md#设置组件是否可获焦)。
  * > Image组件默认不获焦，需将[focusable]{@link CommonMethod#focusable}属性设置为true，即可使用Tab键将焦点切换到组件上，再将
  * > [focusOnTouch]{@link CommonMethod#focusOnTouch}属性设置为true，即可实现点击获焦。
  * >
- * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link ./common}。
+ * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link CommonMethod}。
  * >
  * > - 动图的播放依赖于Image节点的可见性变化，其默认行为是不播放的。当节点可见时，通过回调启动动画，当节点不可见时，停止动画。可见性状态的判断是通过
  * > [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange(ratios: Array<number>, event: VisibleAreaChangeCallback)}
@@ -464,13 +464,13 @@ interface ImageInterface {
    *     <br>1. PixelMap格式为像素图，常用于图片编辑的场景。
    *     <br>2. ResourceStr包含Resource和string格式。
    *     <br>string格式可用于加载网络图片和本地图片。当
-   *     [使用相对路径显示图片]{@link ./image}时，不支持跨包/跨模块调用该
+   *     [使用相对路径显示图片]{@link @global:Image}时，不支持跨包/跨模块调用该
    *     Image组件，建议使用Resource格式来管理需全局使用的图片资源。
    *     <br>从DevEco Studio 6.0.0 Beta2版本开始，新建工程或模块时，默认创建的模块不会对非resource目录下的资源进行打包，需使能相关开关：模块的build-profile.json5中
    *     buildOption > resOptions > copyCodeResource > enable 设置为true。
    *     <br>- 支持`Base64`字符串。
    *     <br>- 传入的字符串为https网络图片地址时，建议参考
-   *     [示例2（下载与显示静态网络图片）]{@link ./image}。
+   *     [示例2（下载与显示静态网络图片）]{@link @global:Image}。
    *     <br>- 支持file://路径前缀的字符串，应用沙箱URI：file://<bundleName>/<sandboxPath>。应用沙箱路径URI构造可参考
    *     [constructor]{@link @ohos.file.fileuri:fileUri.FileUri#constructor}。沙箱路径需要使用
    *     [fileUri.getUriFromPath(path)]{@link @ohos.file.fileuri:fileUri.getUriFromPath}方法将路径转换为应用沙箱URI，然后传入显示。同时需要保证目录包
@@ -496,7 +496,7 @@ interface ImageInterface {
    * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent } src - 图片的数据源，支持本地图片和网络图片，引用方式请参考
    *     [加载图片资源](docroot://ui/arkts-graphics-display.md#加载图片资源)。
    *     <br>PixelMap、ResourceStr和DrawableDescriptor的使用请参考
-   *     [Image]{@link ./image}的src参数说明。
+   *     [Image]{@link @global:Image}的src参数说明。
    *     <br> 传入[ImageContent]{@link ImageContent}类型，指定图像内容。
    *     <br>**说明：**<br/>- ArkTS卡片上支持gif图片格式动效，但仅在显示时播放一次。<br/>- ArkTS卡片上不支持http://等网络相关路径前缀和file://路径前缀的字符串。
    * @returns { ImageAttribute }
@@ -515,7 +515,7 @@ interface ImageInterface {
    * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent } src - 图片的数据源，支持本地图片和网络图片，引用方式请参考
    *     [加载图片资源](docroot://ui/arkts-graphics-display.md#加载图片资源)。
    *     <br>PixelMap、ResourceStr和DrawableDescriptor的使用请参考
-   *     [Image]{@link ./image}的src参数说明。
+   *     [Image]{@link @global:Image}的src参数说明。
    *     <br>传入[ImageContent]{@link ImageContent}类型，指定图像内容。
    *     <br>**说明：**<br/>- ArkTS卡片上支持gif图片格式动效，但仅在显示时播放一次。<br/>- ArkTS卡片上不支持http://等网络相关路径前缀和file://路径前缀的字符串。
    * @param { string } [reloadKey] - 图片重新加载的标识。当reloadKey的值发生变化时，将不使用缓存重新加载图片。适用于图片源地址不变但图片内容已更新的场景（例如本地图片内容被重写）。
@@ -531,12 +531,12 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent, reloadKey?: string): ImageAttribute;
 
   /**
-   * Image新增[ImageAIOptions]{@link ImageAIOptions}参数，为组件设置AI分析选项。
+   * Image新增[ImageAIOptions]{@link @global:ImageAIOptions}参数，为组件设置AI分析选项。
    *
    * @param { PixelMap | ResourceStr | DrawableDescriptor } src - 图片的数据源，支持本地图片和网络图片，引用方式请参考
    *     [加载图片资源](docroot://ui/arkts-graphics-display.md#加载图片资源)。
    *     <br>PixelMap、ResourceStr和DrawableDescriptor的使用请参考
-   *     [Image]{@link ./image}的src参数说明。
+   *     [Image]{@link @global:Image}的src参数说明。
    *     <br>**说明：**<br/>- ArkTS卡片上支持gif图片格式动效，但仅在显示时播放一次。<br/>- ArkTS卡片上不支持http://等网络相关路径前缀和file://路径前缀的字符串。
    * @param { ImageAIOptions } imageAIOptions - 给组件设置一个AI分析选项，通过此项可配置分析类型或绑定一个分析控制器。
    * @returns { ImageAttribute }
@@ -548,12 +548,12 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor, imageAIOptions: ImageAIOptions): ImageAttribute;
 
   /**
-   * 获取图片，支持通过[ImageAIOptions]{@link ImageAIOptions}参数设置AI分析选项。当reloadKey的值发生变化时，将不使用缓存重新加载图片。
+   * 获取图片，支持通过[ImageAIOptions]{@link @global:ImageAIOptions}参数设置AI分析选项。当reloadKey的值发生变化时，将不使用缓存重新加载图片。
    *
    * @param { PixelMap | ResourceStr | DrawableDescriptor } src - 图片的数据源，支持本地图片和网络图片，引用方式请参考
    *     [加载图片资源](docroot://ui/arkts-graphics-display.md#加载图片资源)。
    *     <br>PixelMap、ResourceStr和DrawableDescriptor的使用请参考
-   *     [Image]{@link ./image}的src参数说明。
+   *     [Image]{@link @global:Image}的src参数说明。
    *     <br>**说明：**<br/>- ArkTS卡片上支持gif图片格式动效，但仅在显示时播放一次。<br/>- ArkTS卡片上不支持http://等网络相关路径前缀和file://路径前缀的字符串。
    * @param { ImageAIOptions } [imageAIOptions] - 给组件设置一个AI分析选项，通过此项可配置分析类型或绑定一个分析控制器。
    * @param { string } [reloadKey] - 图片重新加载的标识。当reloadKey的值发生变化时，将不使用缓存重新加载图片。适用于图片源地址不变但图片内容已更新的场景（例如本地图片内容被重写）。
@@ -751,14 +751,14 @@ declare class ColorContent {
  *
  * > - 从API version 23开始，图片类型新增支持tiff格式。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * >
  * > - 使用快捷组合键对Image组件复制时，Image组件必须处于获焦状态，如何获焦请参考[设置组件是否可获焦]
  * >   (docroot://ui/arkts-common-events-focus-event.md#设置组件是否可获焦)。Image组件默认不获焦，
  * >   需将[focusable]{@link CommonMethod#focusable}属性设置为true，即可使用Tab键将焦点切换到组件上，再将
  * >   [focusOnTouch]{@link CommonMethod#focusOnTouch}属性设置为true，即可实现点击获焦。
  * >
- * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link ./common}。
+ * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link CommonMethod}。
  * >
  * > - 动图的播放依赖于Image节点的可见性变化，其默认行为是不播放的。当节点可见时，
  * >   通过回调启动动画，当节点不可见时，停止动画。
@@ -771,7 +771,7 @@ declare class ColorContent {
  * >   当某帧的时长值大于0时，系统直接使用该原始值，不做最小帧时长限制。
  * >
  *
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -915,7 +915,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
   /**
    * 设置填充颜色。仅对SVG图源生效，设置后会替换SVG图片中所有可绘制元素的填充颜色。如需对png图片进行修改颜色，可以使用
    * [colorFilter]{@link ImageAttribute#colorFilter(value: ColorFilter | DrawingColorFilter)}。如果想重置填充颜色可以传入
-   * [ColorContent]{@link ColorContent}类型。支持通过传入[ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型设置P3色域颜色值<!-
+   * [ColorContent]{@link ColorContent}类型。支持通过传入[ColorMetrics]{@link @ohos.arkui.node:ColorMetrics}类型设置P3色域颜色值<!-
    * -Del-->，从API version 24开始，支持BT2020色域颜色值<!--DelEnd-->，可在支持高色域的设备上获得更丰富的色彩表现。
    *
    * 当组件的参数类型为[AnimatedDrawableDescriptor]{@link @ohos.arkui.drawableDescriptor:AnimatedDrawableDescriptor}时设置该属性不生效。
@@ -1739,7 +1739,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
   orientation(orientation: ImageRotateOrientation) : ImageAttribute;
 
   /**
-   * 开启或关闭[SVG标签解析能力增强功能]{@link ./image}，开启后相关SVG图片显示效果会有变化。
+   * 开启或关闭[SVG标签解析能力增强功能]{@link @global:SVG标签解析能力增强功能}，开启后相关SVG图片显示效果会有变化。
    *
    * Image组件创建后，不支持动态修改该属性的值。
    *
@@ -1781,13 +1781,13 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
  * >
  * > - 从API version 23开始，图片类型新增支持tiff格式。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * >
  * > - 使用快捷组合键对Image组件复制时，Image组件必须处于获焦状态，如何获焦请参考[设置组件是否可获焦](docroot://ui/arkts-common-events-focus-event.md#设置组件是否可获焦)。
  * > Image组件默认不获焦，需将[focusable]{@link CommonMethod#focusable}属性设置为true，即可使用Tab键将焦点切换到组件上，再将
  * > [focusOnTouch]{@link CommonMethod#focusOnTouch}属性设置为true，即可实现点击获焦。
  * >
- * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link ./common}。
+ * > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明]{@link CommonMethod}。
  * >
  * > - 动图的播放依赖于Image节点的可见性变化，其默认行为是不播放的。当节点可见时，通过回调启动动画，当节点不可见时，停止动画。可见性状态的判断是通过
  * > [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange(ratios: Array<number>, event: VisibleAreaChangeCallback)}

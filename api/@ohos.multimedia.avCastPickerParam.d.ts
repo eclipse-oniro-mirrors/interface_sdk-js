@@ -35,7 +35,7 @@ export declare enum AVCastPickerState {
    * @since 11 dynamic
    * @since 23 static
    */
-  STATE_APPEARING,
+  STATE_APPEARING = 0,
 
   /**
    * The picker finishes presenting.
@@ -45,7 +45,7 @@ export declare enum AVCastPickerState {
    * @since 11 dynamic
    * @since 23 static
    */
-  STATE_DISAPPEARING,
+  STATE_DISAPPEARING = 1
 }
 
 /**
@@ -64,7 +64,7 @@ export declare enum AVCastPickerStyle {
    * @since 12 dynamic
    * @since 23 static
    */
-  STYLE_PANEL,
+  STYLE_PANEL = 0,
 
   /**
    * The picker shows in a menu style.
@@ -73,7 +73,7 @@ export declare enum AVCastPickerStyle {
    * @since 12 dynamic
    * @since 23 static
    */
-  STYLE_MENU,
+  STYLE_MENU = 1
 }
 
 /**
@@ -86,13 +86,13 @@ export declare enum AVCastPickerStyle {
  */
 export declare enum AVCastPickerColorMode {
   /**
-   * Auto mode that follows the system definition.
+   * Auto mode which follows the definition of system.
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
    */
-  AUTO,
+  AUTO = 0,
 
   /**
    * Dark mode.
@@ -101,7 +101,7 @@ export declare enum AVCastPickerColorMode {
    * @since 12 dynamic
    * @since 23 static
    */
-  DARK,
+  DARK = 1,
 
   /**
    * Light mode.
@@ -110,5 +110,5 @@ export declare enum AVCastPickerColorMode {
    * @since 12 dynamic
    * @since 23 static
    */
-  LIGHT,
+  LIGHT = 2
 }

@@ -40,6 +40,8 @@ import _AppForegroundStateObserver from './application/AppForegroundStateObserve
 import { AbilityFirstFrameStateObserver as _AbilityFirstFrameStateObserver } from './application/AbilityFirstFrameStateObserver';
 import { AbilityFirstFrameStateData as _AbilityFirstFrameStateData } from './application/AbilityFirstFrameStateData';
 /*** endif */
+import _FocusedApplicationObserver from './application/FocusedApplicationObserver';
+import _FocusedApplicationInfo from './application/FocusedApplicationInfo';
 
 /**
  * The appManager module implements application management. You can use the APIs of this module to query whether the
@@ -1036,6 +1038,40 @@ declare namespace appManager {
    * @since 23 static
    */
   function offAbilityFirstFrameStateChange(observer?: AbilityFirstFrameStateObserver): void;
+
+  /**
+   * Registers an observer to listen for focused application changes.
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { FocusedApplicationObserver } observer - Observer used to listen for focused application changes.
+   * @returns { int } ID of the observer registered. You can pass this ID to
+   *     [offFocusedApplicationChanged]{@link appManager.offFocusedApplicationChanged} to unregister the observer.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onFocusedApplicationChanged(observer: FocusedApplicationObserver): int;
+
+  /**
+   * Unregisters the observer used to listen for focused application changes.
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { int } observerId - ID of the observer registered, which is the listener ID returned by
+   *     [onFocusedApplicationChanged]{@link appManager.onFocusedApplicationChanged}.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - The observer does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offFocusedApplicationChanged(observerId: int): void;
 
   /**
    * Obtains applications that are running in the foreground. The application information is defined by
@@ -2095,6 +2131,24 @@ declare namespace appManager {
    * @since 23 static
    */
   export type AbilityFirstFrameStateData = _AbilityFirstFrameStateData;
+
+  /**
+   * Defines the observer used to listen for focused application changes.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationObserver = _FocusedApplicationObserver;
+
+  /**
+   * Defines the focused application information reported when the focused application changes.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationInfo = _FocusedApplicationInfo;
 
   /**
    * Defines the information of an application in multi-app mode in the running state.

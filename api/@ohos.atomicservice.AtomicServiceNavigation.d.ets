@@ -139,7 +139,7 @@ export declare enum BackgroundTheme {
 /**
  * **AtomicServiceNavigation** is a component that serves as the root container of a page. By default, it includes a
  * title bar, content area, and toolbar. The content area switches between the home page content (child components of
- * [NavDestination]{@link ./@internal/component/ets/nav_destination}) and non-home page content through routing.
+ * [NavDestination]{@link NavDestination}) and non-home page content through routing.
  * 
  * > **NOTE**
  * >
@@ -520,8 +520,8 @@ export declare enum TitleBarType {
 /**
  * Defines the content of the **NavDestination** component.
  *
- * @param { string } name - Name of the [NavDestination]{@link ./@internal/component/ets/nav_destination} page.
- * @param { Object } [param] - Settings of the [NavDestination]{@link ./@internal/component/ets/nav_destination} page.
+ * @param { string } name - Name of the [NavDestination]{@link NavDestination} page.
+ * @param { Object } [param] - Settings of the [NavDestination]{@link NavDestination} page.
  *     The default value is undefined.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @atomicservice

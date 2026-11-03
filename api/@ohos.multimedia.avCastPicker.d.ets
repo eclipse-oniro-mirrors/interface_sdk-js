@@ -104,5 +104,19 @@ declare struct AVCastPicker {
    * @since 11 dynamic
    */
   onStateChange?: (state: AVCastPickerState) => void;
+
+  /**
+   * Indicates whether the playback component is an independent process.
+   * If this parameter is not set and multiple playback components exist on the application page, each playback
+   * component has an independent process.
+   * Default value: true.
+   *
+   * @syscap SystemCapability.Multimedia.AVSession.AVCast
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  @Prop
+  isIndependent?: boolean;
 }
 export default AVCastPicker;

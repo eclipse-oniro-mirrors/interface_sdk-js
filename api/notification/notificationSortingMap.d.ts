@@ -14,15 +14,15 @@
  */
 
 /**
- * @file The **NotificationSortingMap** module provides APIs for defining the sorting information of active notifications in all subscribed notifications.
+ * @file NotificationSortingMap
  * @kit NotificationKit
  */
 
 import { NotificationSorting } from './notificationSorting';
 
 /**
- * The **NotificationSortingMap** module provides APIs for defining the sorting information of active notifications in 
- * all subscribed notifications.
+ * The **NotificationSortingMap** module provides APIs for defining the sorting information of active notifications
+ * in all subscribed notifications.
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -31,7 +31,7 @@ import { NotificationSorting } from './notificationSorting';
  */
 export interface NotificationSortingMap {
   /**
-   * Array of notification sorting information.
+   * [Notification sorting](docroot://notification/notification-glossary.md#notification-sorting) information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

@@ -296,6 +296,19 @@ declare interface DepthComponentOptions {
   depthSpace?: DepthSpaceType;
 
   /**
+   * 渲染表面的色彩空间。设置后，色彩空间信息会应用到底层渲染表面。未设置时不应用色彩空间信息，渲染表面保留默认色彩空间。
+   * 默认值：**colorSpaceManager.ColorSpace.SRGB**。
+   *
+   * @default colorSpaceManager.ColorSpace.SRGB
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.0 dynamic
+   */
+  colorSpace?: import('../api/@ohos.graphics.colorSpaceManager').default.ColorSpace;
+
+  /**
    * 3D渲染窗口的缩放比例，同时作用于宽度和高度。取值范围：(0.0, 1.0]，超出该范围的值无效（继承之前的取值，如果之前未设置取默认值）。默认值：1.0。
    *
    * @default 1.0

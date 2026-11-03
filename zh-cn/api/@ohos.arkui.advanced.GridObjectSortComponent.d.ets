@@ -20,8 +20,8 @@
  * >
  * > - 该组件仅可在Stage模型下使用。
  * >
- * > - 如果GridObjectSortComponent设置[通用属性]{@link ./@internal/component/ets/common}和
- * > [通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
+ * > - 如果GridObjectSortComponent设置[通用属性]{@link CommonMethod}和
+ * > [通用事件]{@link CommonMethod}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
  * > GridObjectSortComponent本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议GridObjectSortComponent设置通用属性和通用事件。
  *
  * ######  子组件
@@ -30,7 +30,7 @@
  *
  * ###### 事件
  *
- * 不建议设置[通用事件]{@link ./@internal/component/ets/common}，设置后可能不生效或不符合预期。
+ * 不建议设置[通用事件]{@link CommonMethod}，设置后可能不生效或不符合预期。
  *
  * @file
  * @kit ArkUI

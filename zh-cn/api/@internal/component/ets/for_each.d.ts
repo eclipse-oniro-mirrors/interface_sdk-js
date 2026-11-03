@@ -19,7 +19,7 @@
  */
 
 /**
- * 支持[拖拽排序]{@link ./common}属性。
+ * 支持[拖拽排序]{@link CommonMethod}属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -46,8 +46,8 @@ declare class ForEachAttribute extends DynamicNode<ForEachAttribute> {}
  */
 interface ForEachInterface {
   /**
-   * 该接口需要与容器组件配合使用，且接口返回的组件应当是允许包含在ForEach父容器组件中的子组件。例如，[ListItem]{@link ./list_item}组件要求ForEach的父容器组件必须为
-   * [List]{@link ./list}组件或[ListItemGroup]{@link ./list_item_group}组件。
+   * 该接口需要与容器组件配合使用，且接口返回的组件应当是允许包含在ForEach父容器组件中的子组件。例如，[ListItem]{@link @global:ListItem}组件要求ForEach的父容器组件必须为
+   * [List]{@link @global:List}组件或[ListItemGroup]{@link @global:ListItemGroup}组件。
    *
    * @param { Array<any> } arr - 数据源，为`Array`类型。
    *     <br>设置为`undefined`时ForEach接口不生效。

@@ -14,8 +14,14 @@
  */
 
 /**
-  * @file
-  * @kit ArkUI
+ * DatePickerComponent组件用于选择日期（年月日）和时间（时分秒）。
+ *
+ * ###### 子组件
+ *
+ * 无
+ *
+ * @file
+ * @kit ArkUI
  */
 
 /**
@@ -111,6 +117,13 @@ export declare enum DisplayMode {
  * DatePickerComponentResult定义日期时间选择器的选择结果，包含用户选择的年、月、日、时、分、秒信息，用于在onChange和onScrollStop回调中
  * 传递选择的具体日期时间值。
  *
+ * 说明
+ * 当[enableHideYear]{@link DateOptions}为**true**时，如果用户选择了"----"。
+ * [year]{@link DatePickerComponentResult}不返回，如果选择了具体的年份，则
+ * [year]{@link DatePickerComponentResult}为选择的年份。在农历模式下，返回的是年月日。
+ * 和day为农历值，在公历模式下，返回值为公历值。
+ * 当[enableHideYear]{@link DateOptions}为**false**时，固定年、月、日以返回公历值。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -120,6 +133,9 @@ export declare enum DisplayMode {
 export declare class DatePickerComponentResult {
   /**
    * 所选日期的年份。
+   * 当[enableHideYear]{@link DateOptions}为**true**且用户选择"----"时，不返回年份；当
+   * 选择了特定年份，值是选择的年份。
+   * 取值限定为整数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -334,6 +350,23 @@ export declare class CommonOptions {
   selected?: Date;
 
   /**
+   * 选中日期或时间。
+   *
+   * **说明：**
+   *
+   * > 优先级高于[selected]{@link CommonOptions}；同时设置时，**selected** 不生效。
+   * > 当[hideYear]{@link DateOptions}为**true**时，可省略year（或传undefined），表示年份列选中"----"选项。
+   *
+   * 默认值：当前系统日期或时间。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  extendSelected?: Date | DatePickerComponentResult;
+
+  /**
    * 设置是否启用循环模式。
    *
    * - true：启用循环模式，支持滚动到边界时继续循环选择。
@@ -452,6 +485,28 @@ export declare class DateOptions extends CommonOptions {
    * @since 26.0.0 dynamic
    */
   lunar?: boolean;
+
+  /**
+   * 是否启用"隐藏年份"选项。
+   * - **true**：在[end]{@link CommonOptions}后面追加一个"----"选项。用户可以选择"----"
+   * 表示不关心具体年份，适用于生日、纪念日等无需具体年份的场景。
+   * - **false**：不显示"----"选项。年份列仅展示
+   * [start]{@link CommonOptions}和[end]{@link CommonOptions}范围内的具体年份。
+   * **说明：**
+   * 1. 该属性仅在[displayMode]{@link DatePickerComponentOptions}为DisplayMode.DATE或
+   * DisplayMode.DATE_TIME，且[mode]{@link DateOptions}为DateMode.DATE或
+   * DateMode.YEAR_AND_MONTH时生效。
+   * 2. 该属性为true时，用户仍可滚动选择具体年份，"----"选项与具体年份可自由切换。
+   * 3. 该属性支持运行时动态切换，属性值变化时年份列随之更新。
+   * 默认值：禁用。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  hideYear?: boolean;
 }
 
 /**
@@ -557,11 +612,7 @@ export declare class DatePickerComponentOptions {
 }
 
 /**
- * DatePickerComponent组件用于选择日期（年月日）和时间（时分秒）。
- *
- * ###### 子组件
- *
- * 无
+ * 定义日期时间选择器组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -118,8 +118,7 @@ declare interface MenuItemOptions {
  * > **NOTE**
  * >
  * > - This component is supported since API version 9. Newly added APIs will be marked with a superscript to indicate
- * > their
- * >
+ * > their earliest API version.
  * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -294,8 +293,7 @@ declare class MenuItemAttribute extends CommonMethod<MenuItemAttribute> {
  * > **NOTE**
  * >
  * > - This component is supported since API version 9. Newly added APIs will be marked with a superscript to indicate
- * > their
- * >
+ * > their earliest API version.
  * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
  *
  * ###### Child Components

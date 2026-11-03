@@ -713,6 +713,78 @@ declare namespace networkManager {
   }
 
   /**
+   * User permission information for the shared path.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface UserPathInfo {
+    /**
+     * User name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userName: string;
+
+    /**
+     * The user's permissions for this shared path.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userPermission: string;
+  }
+
+  /**
+   * Path shared data.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface PathSharedData {
+    /**
+     * Path sharing name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareName: string;
+
+    /**
+     * URI of the shared path.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareUri: string;
+
+    /**
+     * User path information list, used for permission management.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    userPathInfoList: Array<UserPathInfo>;
+
+    /**
+     * The maximum number of users allowed to access this shared resource.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    shareLimit: number;
+  }
+
+  /**
    * Obtains all activated wired network interfaces. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_GET_NETWORK_INFO
@@ -1869,6 +1941,22 @@ declare namespace networkManager {
    * @since 23
    */
   function setEthernetConfig(admin: Want, networkInterface: string, config: InterfaceConfig): void;
+
+/**
+   * Obtain a list of all folder paths that are shared through the network domain on the device.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @returns { Array<PathSharedData> } Return the array of shared path information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getSharedList(): Array<PathSharedData>;
 }
 
 export default networkManager;

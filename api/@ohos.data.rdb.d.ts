@@ -47,8 +47,8 @@ declare namespace rdb {
    * RDB store based on service requirements and call APIs to perform data operations.
    *
    * @param { Context } context - Application context.
-   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context}.
-   *     <br>For details about the application context of the stage model, see [Context]{@link ./app/context}.
+   *     <br>For details about the application context of the FA model, see [Context]{@link ./app/context:Context}.
+   *     <br>For details about the application context of the stage model, see [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { number } version - RDB store version.<br>Currently, automatic RDB upgrades and downgrades performed based
    *     on **version** is not supported.
@@ -65,8 +65,8 @@ declare namespace rdb {
    * on service requirements and call APIs to perform data operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.
-   *     <br>For details about the application context of the stage model, see [Context]{@link ./app/context}.
+   *     [Context]{@link ./app/context:Context}.
+   *     <br>For details about the application context of the stage model, see [Context]{@link ./application/Context:Context}.
    * @param { StoreConfig } config - Configuration of the RDB store.
    * @param { number } version - RDB store version.<br>Currently, automatic RDB upgrades and downgrades performed based
    *     on **version** is not supported.
@@ -81,8 +81,8 @@ declare namespace rdb {
    * Deletes an RDB store. This API uses an asynchronous callback to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.
-   *     <br>For details about the application context of the stage model, see [Context]{@link ./app/context}.
+   *     [Context]{@link ./app/context:Context}.
+   *     <br>For details about the application context of the stage model, see [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
@@ -95,8 +95,8 @@ declare namespace rdb {
    * Deletes an RDB store. This API uses a promise to return the result.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
-   *     [Context]{@link ./app/context}.
-   *     <br>For details about the application context of the stage model, see [Context]{@link ./app/context}.
+   *     [Context]{@link ./app/context:Context}.
+   *     <br>For details about the application context of the stage model, see [Context]{@link ./application/Context:Context}.
    * @param { string } name - Name of the RDB store to delete.
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core

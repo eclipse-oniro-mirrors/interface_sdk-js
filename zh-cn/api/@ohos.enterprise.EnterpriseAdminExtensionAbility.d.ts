@@ -370,4 +370,18 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.0.1
    */
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
+
+  /**
+   * 密码认证失败事件回调。当密码认证失败时触发此回调。
+   * 需要通过接口
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
+   *
+   * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
+   * @param { number } userId - 发生密码认证失败的用户ID。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
 }

@@ -45,7 +45,7 @@ interface ColumnSplitInterface {
  * 
  * > **说明：**
  * >
- * > 与[RowSplit]{@link ./row_split}相同，ColumnSplit的分割线可调整上下两侧子组件的高度，子组件的高度调整范围受其最大最小高度限制。
+ * > 与[RowSplit]{@link @global:RowSplit}相同，ColumnSplit的分割线可调整上下两侧子组件的高度，子组件的高度调整范围受其最大最小高度限制。
  * >
  * > 支持[clip]{@link CommonMethod#clip(value: boolean)}、[margin]{@link CommonMethod#margin}等通用属性，未设置clip属性时，其默认值为true。
  *

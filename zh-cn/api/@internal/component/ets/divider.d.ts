@@ -81,7 +81,7 @@ interface DividerInterface {
      * @param { ResourceColor } value - 分割线颜色。
      * <br>默认值：'#33182431'
      * <br>非法值：按默认值处理。
-     * <br>支持通过[WithTheme]{@link with_theme}设置通用分割线颜色。
+     * <br>支持通过[WithTheme]{@link @global:WithTheme}设置通用分割线颜色。
      * @returns { DividerAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @crossplatform [since 10]

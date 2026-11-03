@@ -54,7 +54,7 @@ declare namespace abilityManager {
    */
   export enum AbilityState {
     /**
-     * 表示ability为初始化状态。
+     * 表示Ability为初始化状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic
@@ -63,7 +63,7 @@ declare namespace abilityManager {
     INITIAL = 0,
 
     /**
-     * 表示ability为获焦状态。
+     * 表示Ability为获焦状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic
@@ -72,7 +72,7 @@ declare namespace abilityManager {
     FOCUS = 2,
 
     /**
-     * 表示ability为前台状态。
+     * 表示Ability为前台状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic
@@ -81,7 +81,7 @@ declare namespace abilityManager {
     FOREGROUND = 9,
 
     /**
-     * 表示ability为后台状态。
+     * 表示Ability为后台状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic
@@ -90,7 +90,7 @@ declare namespace abilityManager {
     BACKGROUND = 10,
 
     /**
-     * 表示ability为前台调度中状态。
+     * 表示Ability为前台调度中状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic
@@ -99,7 +99,7 @@ declare namespace abilityManager {
     FOREGROUNDING = 11,
 
     /**
-     * 表示ability为后台调度中状态。
+     * 表示Ability为后台调度中状态。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @since 14 dynamic

@@ -1346,6 +1346,24 @@ export declare interface AccessibilityElement {
    */
   screenRect?: Rect;
   /**
+   * Zoom ratio of the window in the X axis direction.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  windowScaleX?: double;
+  /**
+   * Zoom ratio of the window in the Y axis direction.
+   *
+   * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  windowScaleY?: double;
+  /**
    * Whether the element is scrollable. The value **true** indicates that the element is scrollable, and **false** 
    * indicates the opposite. When the value conflicts with that of accessibilityScrollable, the value of 
    * accessibilityScrollable prevails.
@@ -1549,7 +1567,7 @@ export declare interface AccessibilityElement {
    */
   hotArea?: Rect;
   /**
-   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType} type of the element.
+   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link @global:AccessibilityRoleType} type of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
@@ -2600,7 +2618,7 @@ export interface ElementAttributeValues {
    */
   accessibilityNextFocusId?: long;
   /**
-   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link ./../@internal/component/ets/common:AccessibilityRoleType} of the element. The 
+   * Custom component type. Corresponds to the [AccessibilityRoleType]{@link @global:AccessibilityRoleType} of the element. The 
    * default value is an empty string.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core

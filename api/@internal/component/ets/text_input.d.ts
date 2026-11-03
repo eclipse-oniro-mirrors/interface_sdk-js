@@ -916,7 +916,7 @@ declare enum TextInputStyle {
  * > to indicate their initial version.
  * >
  * > - This component supports only a single text style. To implement rich text style, use the
- * > [RichEditor]{@link ./rich_editor} component.
+ * > [RichEditor]{@link @global:RichEditor} component.
  * >
  * > - To set whether to clear text selection and handles when touching outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.
@@ -1038,7 +1038,7 @@ declare type OnContentScrollCallback = (totalOffsetX: number, totalOffsetY: numb
 declare type OnPasteCallback = (content: string, event: PasteEvent) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported:
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported:
  *
  * > **NOTE**
  * >
@@ -1077,7 +1077,7 @@ declare type OnPasteCallback = (content: string, event: PasteEvent) => void;
  * >
  * > Since API version 10, a single-line input box can be set with .width('auto') to make the component width adapt to
  * > the text width. During adaptation, the component width is limited by the constraintSize attribute and the maximum
- * > and minimum widths passed by the parent container. For other usage, see [Sizing]{@link ./common}.
+ * > and minimum widths passed by the parent container. For other usage, see [Sizing]{@link CommonMethod}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2901,7 +2901,7 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
  * > to indicate their initial version.
  * >
  * > - This component supports only a single text style. To implement rich text style, use the
- * > [RichEditor]{@link ./rich_editor} component.
+ * > [RichEditor]{@link @global:RichEditor} component.
  * >
  * > - To set whether to clear text selection and handles when touching outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.

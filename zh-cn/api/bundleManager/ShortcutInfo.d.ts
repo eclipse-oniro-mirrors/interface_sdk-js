@@ -246,7 +246,7 @@ export interface ShortcutWant {
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   action?: string;
 
@@ -256,18 +256,19 @@ export interface ShortcutWant {
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   uri?: string;
 
   /**
    * 拉起快捷方式时Want对象的处理方式，取值为枚举类型[Flags]{@link ./../@ohos.app.ability.wantConstant:wantConstant.Flags}，
    * 与[Want]{@link ./../@ohos.app.ability.Want:Want#flags}的**flags**字段一致。
+   * 取值限定为整数。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Launcher
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   flags?: int;
 }

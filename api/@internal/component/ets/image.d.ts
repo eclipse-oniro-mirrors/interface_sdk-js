@@ -407,7 +407,7 @@ declare enum ImageRotateOrientation {
  * > **NOTE**
  * >
  * > This topic describes only system APIs provided by the module. For details about its public APIs, see
- * > [Image]{@link ./image}.
+ * > [Image]{@link @global:Image}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -561,7 +561,7 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent, reloadKey?: string): ImageAttribute;
 
   /**
-   * Obtains an image. The [imageAIOptions]{@link ImageAIOptions} parameter allows you to set AI image analysis options.
+   * Obtains an image. The [imageAIOptions]{@link @global:ImageAIOptions} parameter allows you to set AI image analysis options.
    *
    * @param { PixelMap | ResourceStr | DrawableDescriptor } src - Data source of the image. Local and online sources are
    *     supported. For details about how to reference an image, see
@@ -581,7 +581,7 @@ interface ImageInterface {
   (src: PixelMap | ResourceStr | DrawableDescriptor, imageAIOptions: ImageAIOptions): ImageAttribute;
 
   /**
-   * Obtains an image. The [ImageAIOptions]{@link ImageAIOptions} parameter allows you to set AI image analysis options.
+   * Obtains an image. The [ImageAIOptions]{@link @global:ImageAIOptions} parameter allows you to set AI image analysis options.
    * You can use the **reloadKey** parameter to trigger image reloading. When the value of **reloadKey** changes, the
    * image will be reloaded without using the cache.
    *
@@ -755,7 +755,7 @@ declare class ColorContent {
  * > [focusable]{@link CommonMethod#focusable} and [focusOnTouch]{@link CommonMethod#focusOnTouch} attributes to
  * > **true**.
  * >
- * > - The **Image** component supports SVG image sources. For details about SVG tags, see [SVG Tags]{@link ./common}.
+ * > - The **Image** component supports SVG image sources. For details about SVG tags, see [SVG Tags]{@link CommonMethod}.
  * >
  * > - For animated images, animation playback is disabled by default and depends on the visibility of the **Image**
  * > component. When the component is visible, the animation is started through the callback. When the component is
@@ -955,7 +955,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
    * will replace the fill colors of all drawable elements within the SVG image. To set the fill color for a PNG image,
    * use [colorFilter]{@link ImageAttribute#colorFilter(value: ColorFilter | DrawingColorFilter)}. To reset the fill
    * color, pass a value of the [ColorContent]{@link ColorContent} type. You can set P3 color gamut values by passing in
-   * the [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics} type, which can achieve richer color performance on
+   * the [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} type, which can achieve richer color performance on
    * devices that support high color gamut.
    *
    * This attribute does not take effect when the parameter type of the component is
@@ -1892,7 +1892,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
  * > **NOTE**
  * >
  * > This topic describes only system APIs provided by the module. For details about its public APIs, see
- * > [Image]{@link ./image}.
+ * > [Image]{@link @global:Image}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

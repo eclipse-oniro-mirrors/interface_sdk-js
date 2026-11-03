@@ -521,7 +521,8 @@ declare namespace inputDevice {
   function getDeviceInfoSync(deviceId: int): InputDeviceData;
 
   /**
-   * 查询指定输入设备是否支持指定按键，使用callback异步回调。
+   * 查询指定输入设备是否支持指定按键，使用callback异步回调。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @param { Array<KeyCode> } keys - 需要查询的键值，最多支持5个按键查询。
@@ -536,7 +537,8 @@ declare namespace inputDevice {
   function supportKeys(deviceId: int, keys: Array<KeyCode>, callback: AsyncCallback<Array<boolean>>): void;
 
   /**
-   * 查询指定输入设备是否支持指定按键，使用Promise异步回调。
+   * 查询指定输入设备是否支持指定按键，使用Promise异步回调。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @param { Array<KeyCode> } keys - 需要查询的键值，最多支持查询5个按键。
@@ -550,7 +552,8 @@ declare namespace inputDevice {
   function supportKeys(deviceId: int, keys: Array<KeyCode>): Promise<Array<boolean>>;
 
   /**
-   * 查询指定id的输入设备对指定键值的支持情况。
+   * 查询指定id的输入设备对指定键值的支持情况。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @param { Array<KeyCode> } keys - 需要查询的键值，最多支持查询5个按键。
@@ -564,7 +567,8 @@ declare namespace inputDevice {
   function supportKeysSync(deviceId: int, keys: Array<KeyCode>): Array<boolean>;
 
   /**
-   * 获取输入设备的键盘类型，如全键盘、小键盘等。输入设备的键盘类型以接口返回结果为准。使用callback异步回调。
+   * 获取输入设备的键盘类型，如全键盘、小键盘等。输入设备的键盘类型以接口返回结果为准。使用callback异步回调。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @param { AsyncCallback<KeyboardType> } callback - 回调函数。当查询成功，err为undefined，data为输入设备的键盘类型；否则为错误对象。
@@ -577,7 +581,8 @@ declare namespace inputDevice {
   function getKeyboardType(deviceId: int, callback: AsyncCallback<KeyboardType>): void;
 
   /**
-   * 获取输入设备的键盘类型，使用Promise异步回调。
+   * 获取输入设备的键盘类型，使用Promise异步回调。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @returns { Promise<KeyboardType> } Promise对象，返回输入设备的键盘类型。
@@ -590,7 +595,8 @@ declare namespace inputDevice {
   function getKeyboardType(deviceId: int): Promise<KeyboardType>;
 
   /**
-   * 获取输入设备的键盘类型。
+   * 获取输入设备的键盘类型。调用此接口前，需要先调用
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)}接口获取输入设备的ID。
    *
    * @param { int } deviceId - 输入设备的唯一标识，同一个物理设备反复插拔或重启，设备ID可能会发生变化。
    * @returns { KeyboardType } 返回查询结果。

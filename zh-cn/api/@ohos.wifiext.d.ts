@@ -87,7 +87,7 @@ declare namespace wifiext {
    * > 从API version 8开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerModel>> } callback - 回调函数。当操作成功时，err为0，data表示支持的功率模式。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<Array<PowerModel>> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -119,7 +119,7 @@ declare namespace wifiext {
    * > 从API version 8开始支持，从API version 9开始废弃。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerModel> } callback - 回调函数。当操作成功时，err为0，data表示功率模式。如果err为非0，表示处理出现错误。
+   * @param { AsyncCallback<PowerModel> } callback - 回调函数。
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9

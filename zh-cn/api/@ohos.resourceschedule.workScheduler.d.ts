@@ -206,6 +206,17 @@ declare namespace workScheduler {
      * @since 23 static
      */
     earliestStartTime?: int;
+    /**
+     * 是否是性能敏感任务。这个参数限制比较严格，系统会对运行时长、运行频率以及整机总运行时长进行限制。
+     * - true表示是性能敏感任务，当该标记置true时，isCharging和isDeepIdle参数必须为true，如果是周期性任务，repeatCycleTime参数需要大于等于24小时；
+     * - false表示不是性能敏感任务。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.ResourceSchedule.WorkScheduler
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    isPerformanceSensitive?: boolean;
   }
 
   /**

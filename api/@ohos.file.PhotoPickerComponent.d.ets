@@ -249,7 +249,7 @@ export declare struct PhotoPickerComponent {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.1 dynamic
+   * @since 26.1.0 dynamic
    */
   onPickerRecovery?: PickerRecoveryCallback;
 
@@ -1490,7 +1490,7 @@ export declare class CompletedResult {
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.1 dynamic
+ * @since 26.1.0 dynamic
  */
 export declare class RecoveryResult {
   /**
@@ -1499,7 +1499,7 @@ export declare class RecoveryResult {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.1 dynamic
+   * @since 26.1.0 dynamic
    */
   albumUri: string;
 
@@ -1509,7 +1509,7 @@ export declare class RecoveryResult {
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.1 dynamic
+   * @since 26.1.0 dynamic
    */
   albumName: string;
 }
@@ -2140,7 +2140,7 @@ export type ErrorCallback = (pickerError: PickerError) => void;
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.1 dynamic
+ * @since 26.1.0 dynamic
  */
 export type PickerRecoveryCallback = (recoveryResult: RecoveryResult) => void;
 

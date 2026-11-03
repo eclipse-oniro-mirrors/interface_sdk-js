@@ -22,7 +22,7 @@
 
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 
-import { BaseItemInfo, PickerColorMode } from '@ohos.file.PhotoPickerComponent';
+import { BaseItemInfo, PickerColorMode, ErrorCallback } from '@ohos.file.PhotoPickerComponent';
 
 import { Component, Builder } from '@ohos.arkui.component';
 
@@ -73,6 +73,15 @@ export declare struct RecentPhotoComponent {
    * @since 26.0.0 static
    */
   onRecentPhotoCheckInfo?: RecentPhotoCheckInfoCallback;
+
+  /**
+   * Callback when an error occurs in the RecentPhotoComponent.
+   * @type { ?ErrorCallback }
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  onError?: ErrorCallback;
 
   /**
    * Build function of RecentPhotoComponent
@@ -126,7 +135,14 @@ export type RecentPhotoCheckInfoCallback = (recentPhotoExists: boolean, info: Re
  */
 export declare class RecentPhotoOptions {
   /**
-   * Support set period time
+   * Time range for displaying the recent images or videos, measured in seconds. After setting, the system shows
+   * the latest image sorted by creation time taken within the specified time from the current moment. The longest
+   * duration you can set is 2147483647 (INT_MAX) seconds.
+   *
+   * If the value is set to Number.POSITIVE_INFINITY, the system shows the latest one within the INT_MAX range.
+   * If the value is less than or equal to 0, greater than INT_MAX, or not set, the system uses 1 day by default.
+   * If there are no images or videos within the set time range, the component does not show anything.
+   *
    * @type { ?int }
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -169,6 +185,42 @@ export declare class RecentPhotoOptions {
    * @since 26.0.0 static
    */
   public colorMode?: PickerColorMode;
+
+  /**
+   * Whether to keep the component alive after click.
+   * true: component will not be destroyed after click.
+   * false: component will be destroyed after click (default).
+   * @type { ?boolean }
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  public isPersistAfterClick?: boolean;
+
+  /**
+   * Media asset filter, with a maximum length of 50 items. If the limit is exceeded, only the first 50 items are
+   * used.
+   * **NOTE**
+   * 1. When this filter is applied, other filters become invalid.
+   * 2. When setting multiple conditions, enclose the filter conditions in parentheses to prevent conflicts with
+   *    internal filter items.
+   * @type { ?Array<photoAccessHelper.OperationItem> }
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  public assetFilter?: Array<photoAccessHelper.OperationItem>;
+
+  /**
+   * Whether to show the badge on the displayed photo.
+   * true: show the badge info, such as moving photo badge and video duration (default).
+   * false: do not show any badge; only the photo thumbnail is displayed.
+   * @type { ?boolean }
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  public isShowBadge?: boolean;
 }
 
 /**

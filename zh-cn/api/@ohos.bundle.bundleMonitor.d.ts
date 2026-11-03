@@ -73,7 +73,9 @@ declare namespace bundleMonitor {
    * 监听的事件类型。
    * 
    * 取值类型为下表类型中的一个。
-   *
+   * @unionmember { 'add' } 监听应用安装事件，值固定为'add'字符串。
+   * @unionmember { 'update' } 监听应用更新事件，值固定为'update'字符串。
+   * @unionmember { 'remove' } 监听应用卸载事件，值固定为'remove'字符串。
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @systemapi
    * @since 9 dynamic

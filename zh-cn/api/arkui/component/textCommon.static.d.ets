@@ -73,7 +73,7 @@ export declare enum TextDataDetectorType {
    * @stagemodelonly
    * @since 23 static
    */
-  DATE_TIME = 4,
+  DATE_TIME = 4
 }
 
 /**
@@ -893,6 +893,7 @@ export declare interface TextEditControllerEx extends TextBaseController {
    *
    * @returns { int | undefined }
    当前光标所在位置。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -958,6 +959,7 @@ export declare interface StyledStringController {
    *
    * @returns { MutableStyledString | undefined }
    富文本组件显示的属性字符串。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -1467,6 +1469,15 @@ export declare class TextMenuItemId {
    * @since 23 static
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * 快捷翻译，为一级菜单项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 /**
  * TextMenuItem

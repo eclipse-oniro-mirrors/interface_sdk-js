@@ -70,7 +70,7 @@ declare enum BadgePosition {
  * > When `borderWidth` is greater than 0 and the colors of `borderColor` and `badgeColor` are different, the badge is
  * > drawn first and then the border. Because edge pixels are anti-aliased, semi-transparent pixels are generated, and
  * > border lines in the `badgeColor` color appear at the four corners. To implement such a scenario, you are advised to
- * > use the [Text]{@link ./text} component and set [outline]{@link CommonMethod#outline(value: OutlineOptions)} instead
+ * > use the [Text]{@link @global:Text} component and set [outline]{@link CommonMethod#outline(value: OutlineOptions)} instead
  * > of the Badge component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -446,7 +446,7 @@ interface BadgeInterface {
 }
 
 /**
- * The [universal attributes]{@link ./common} are supported.
+ * The [universal attributes]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

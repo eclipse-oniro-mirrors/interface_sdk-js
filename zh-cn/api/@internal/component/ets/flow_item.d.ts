@@ -19,11 +19,11 @@
  */
 
 /**
-* 瀑布流组件[WaterFlow]{@link ./water_flow}的子组件，用于展示瀑布流中的具体项。
+* 瀑布流组件[WaterFlow]{@link @global:WaterFlow}的子组件，用于展示瀑布流中的具体项。
 *
 * > **说明：**
 * >
-* > * 仅支持作为[WaterFlow]{@link ./water_flow}组件的子组件使用。
+* > * 仅支持作为[WaterFlow]{@link @global:WaterFlow}组件的子组件使用。
 * >
 * > * 在滑动场景中，由于FlowItem及其子组件的频繁创建与销毁，建议将FlowItem中的组件封装为自定义组件，并使用@Reusable装饰器修饰，以增强组件的复用能力，从而减少ArkUI框架内部重复创建和销毁节点的开销。最佳实
 * > 践请参考
@@ -39,7 +39,7 @@
 interface FlowItemInterface {
 
   /**
-   * 用于创建瀑布流子组件，仅支持作为[WaterFlow]{@link ./water_flow}组件的子组件使用。
+   * 用于创建瀑布流子组件，仅支持作为[WaterFlow]{@link @global:WaterFlow}组件的子组件使用。
    *
    * @returns { FlowItemAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -64,13 +64,13 @@ interface FlowItemInterface {
 declare class FlowItemAttribute extends CommonMethod<FlowItemAttribute> {}
 
 /**
-* 瀑布流组件[WaterFlow]{@link ./water_flow}的子组件，用于展示瀑布流中的具体项。
+* 瀑布流组件[WaterFlow]{@link @global:WaterFlow}的子组件，用于展示瀑布流中的具体项。
 *
 * > **说明：**
 * >
 * > *
 * >
-* > * 仅支持作为[WaterFlow]{@link ./water_flow}组件的子组件使用。
+* > * 仅支持作为[WaterFlow]{@link @global:WaterFlow}组件的子组件使用。
 * >
 * > * 在滑动场景中，由于FlowItem及其子组件的频繁创建与销毁，建议将FlowItem中的组件封装为自定义组件，并使用@Reusable装饰器修饰，以增强组件的复用能力，从而减少ArkUI框架内部重复创建和销毁节点的开销。最佳实
 * > 践请参考

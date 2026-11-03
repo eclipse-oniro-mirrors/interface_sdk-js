@@ -556,7 +556,7 @@ declare interface GridRowOptions {
  * The responsive grid layout provides rules for layout design and resolves issues of dynamic layout across devices with
  * different sizes, thereby ensuring layout consistency across layouts on different devices.
  *
- * The **GridRow** component is used in a grid layout, together with its child component [GridCol]{@link ./grid_col}.
+ * The **GridRow** component is used in a grid layout, together with its child component [GridCol]{@link @global:GridCol}.
  *
  * It supports dynamically adjusting the number of columns and gutter sizes based on device sizes and breakpoints to
  * implement responsive layout.
@@ -575,7 +575,7 @@ interface GridRowInterface {
    * @param { GridRowOptions } option - Layout options of the grid row layout container. This parameter is passed when
    *     you need to customize the grid layout (such as setting the number of columns, gutter, breakpoint positions, and
    *     arrangement direction). If not passed, the default configuration is used. **GridRow** must be used together
-   *     with [GridCol]{@link ./grid_col} child components.
+   *     with [GridCol]{@link @global:GridCol} child components.
    * @returns { GridRowAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -607,7 +607,7 @@ declare class GridRowAttribute extends CommonMethod<GridRowAttribute> {
    *
    * > **NOTE**
    * >
-   * > - When [breakpointsreference]{@link BreakpointsReference} is set to **BreakpointsReference.ComponentSize**, do
+   * > - When [breakpointsreference]{@link @global:BreakpointsReference} is set to **BreakpointsReference.ComponentSize**, do
    * > not dynamically modify the [padding]{@link CommonMethod#padding} or [margin]{@link CommonMethod#margin} attribute
    * > of the **GridRow** component in the **onBreakpointChange** callback. Otherwise, it may cause cyclic triggering of
    * > component size calculation, layout jitter, or rendering performance degradation.
@@ -649,7 +649,7 @@ declare class GridRowAttribute extends CommonMethod<GridRowAttribute> {
  * The responsive grid layout provides rules for layout design and resolves issues of dynamic layout across devices with
  * different sizes, thereby ensuring layout consistency across layouts on different devices.
  *
- * The **GridRow** component is used in a grid layout, together with its child component [GridCol]{@link ./grid_col}.
+ * The **GridRow** component is used in a grid layout, together with its child component [GridCol]{@link @global:GridCol}.
  *
  * It supports dynamically adjusting the number of columns and gutter sizes based on device sizes and breakpoints to
  * implement responsive layout.

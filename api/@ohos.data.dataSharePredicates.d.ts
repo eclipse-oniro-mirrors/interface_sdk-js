@@ -24,8 +24,8 @@ import { ValueType } from './@ohos.data.ValuesBucket';
  * **DataSharePredicates** provides a filter object to query data in a database by using **DataShare** APIs. It is often
  * used to update, delete, and query data.
  *
- * The APIs provided by **DataSharePredicates** correspond to the filter criteria of the database. Before using the APIs
- * , you need to have basic database knowledge.
+ * The APIs provided by **DataSharePredicates** correspond to the filter criteria of the database. Before using the APIs,
+ * you need to have basic database knowledge.
  *
  * **DataSharePredicates** applies to the following scenario:
  *
@@ -35,9 +35,9 @@ import { ValueType } from './@ohos.data.ValuesBucket';
  *
  * <!--Del-->
  *
- * - It is used as a search criterion when APIs of the
+ * - It is used as the search criteria when APIs of the
  * [RDB store](docroot://apis-arkdata/js-apis-data-relationalStore-sys.md) and
- * [KV store](docroot://apis-arkdata/js-apis-distributedKVStore-sys.md) are called. In this scenario, use the
+ * [distributed KV store](docroot://apis-arkdata/js-apis-distributedKVStore-sys.md) are called. In this scenario, use the
  * corresponding predicate based on the database type.
  *
  * <!--DelEnd-->
@@ -73,10 +73,10 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or
+     *     **null**, the predicate configured by this interface call is invalid.
+     * @param { ValueType } value - Value to match with the predicate. If **value** is **undefined** or **null**, the predicate configured by
+     *     this interface call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @StageModelOnly
@@ -92,12 +92,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If this parameter is set to **undefined** or
+     *     **null**, the predicate used is invalid. If this parameter is set to 'null' or 'undefined' in string, the
+     *     matching result may not be as expected or an exception may be thrown when the predicate is used by the
+     *     key-value database and relational database APIs.
+     * @param { ValueType } value - Value to match with the predicate. If this parameter is set to **undefined** or
+     *     **null**, the predicate used is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -171,7 +171,7 @@ declare namespace dataSharePredicates {
     and(): DataSharePredicates;
 
     /**
-     * Creates a **DataSharePredicates** object to match the data that contains the specified value.
+     * This API is used to configure the predicate to match the field that contains the specified value.
      *
      * Currently, only RDB store supports this predicate.
      *
@@ -253,13 +253,14 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { string } value - Wildcard expression to match.In the expression, '%' represents zero, one, or more
-     *     digits or characters, and '_' represents a single digit or character. It is case insensitive.If this
-     *     parameter is set to **undefined** or **null**, the predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { string } value - Wildcard expression to match with the predicate. In the expression, '%' represents
+     *     zero, one, or more digits or characters, and '_' represents a single digit or character. It is case
+     *     insensitive. If **value** is **undefined** or **null**, the predicate configured by this API call is
+     *     invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -276,7 +277,7 @@ declare namespace dataSharePredicates {
      * Currently, both the RDB store and KV store support this predicate.
      *
      * @param { string } field - Column name in the database table.
-     * @param { string } value - Wildcard expression to match.In the expression, '%' represents zero, one, or more
+     * @param { string } value - Wildcard expression to match. In the expression, '%' represents zero, one, or more
      *     digits or characters, and '_' represents a single digit or character. It is case insensitive.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
@@ -293,7 +294,7 @@ declare namespace dataSharePredicates {
      * Currently, only RDB store supports this predicate.
      *
      * @param { string } field - Column name in the database table.
-     * @param { string } value - Wildcard expression to match.In the expression, '*' represents zero, one, or more
+     * @param { string } value - Wildcard expression to match. In the expression, '*' represents zero, one, or more
      *     digits or characters, and '?' represents a single digit or character. It is case sensitive.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
@@ -310,18 +311,18 @@ declare namespace dataSharePredicates {
      *
      * Currently, only RDB store supports this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } low - Minimum value of the range to set.If **low** is set to a number, the matching
-     *     range is specified based on the numeric order.If **low** is set to a string, the matching range is
-     *     specified based on the lexicographical order.If **low** is set to boolean, the matching range is
-     *     specified based on the numeric order.
-     * @param { ValueType } high - Maximum value to match the **DataAbilityPredicates**.If **high** is set to a
-     *     number, the matching range is specified based on the numeric order.If **high** is set to a string, the
-     *     matching range is specified based on the lexicographical order.If **high** is set to boolean, the
-     *     matching range is specified based on the numeric order.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { ValueType } low - Indicate matching with the predicate as the minimum value. When **low** is a number,
+     *     sort by numeric value to specify the matching range. When **low** is a string, sort in lexicographical
+     *     order to specify the matching range. When **low** is a boolean, sort by numeric value to specify the
+     *     matching range.
+     * @param { ValueType } high - Indicate matching with the predicate as the maximum value. When **high** is a
+     *     number, sort by numeric value to specify the matching range. When **high** is a string, sort in
+     *     lexicographical order to specify the matching range. When **high** is a boolean, sort by numeric value to
+     *     specify the matching range.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -338,18 +339,16 @@ declare namespace dataSharePredicates {
      *
      * Currently, only RDB store supports this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } low - Minimum value of the range to set.If **low** is set to a number, the matching
-     *     range is specified based on the numeric order.If **low** is set to a string, the matching range is
-     *     specified based on the lexicographical order.If **low** is set to boolean, the matching range is
-     *     specified based on the numeric order.
-     * @param { ValueType } high - Maximum value to match the **DataAbilityPredicates**.If **high** is set to a
-     *     number, the matching range is specified based on the numeric order.If **high** is set to a string, the
-     *     matching range is specified based on the lexicographical order.If **high** is set to boolean, the
-     *     matching range is specified based on the numeric order.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string 'null' or 'undefined', the
+     *     key-value database and relational database APIs may return unexpected matching results or throw an exception
+     *     when using this predicate.
+     * @param { ValueType } low - Minimum value matching with the predicate. If **low** is number, sort by numeric
+     *     value to specify the matching range. If **low** is string, sort in lexicographical order to specify the
+     *     matching range. If **low** is boolean, sort by numeric value to specify the matching range.
+     * @param { ValueType } high - Maximum value matching with the predicate. If **high** is number, sort by numeric
+     *     value to specify the matching range. If **high** is string, sort in lexicographical order to specify the
+     *     matching range. If **high** is boolean, sort by numeric value to specify the matching range.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -365,12 +364,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { ValueType } value - Value to match with the predicate. If **value** is **undefined** or **null**,
+     *     the predicate configured by this API call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -386,12 +385,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If field is null or undefined, the predicate
-     *     configured by calling this API is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **null** or **undefined**, the
+     *     predicate configured by calling this API is invalid. If this parameter is set to **'null'** or
+     *     **'undefined'** in string, the matching result may not be as expected or an exception may be thrown when
+     *     the predicate is used by the KV store and RDB store APIs.
+     * @param { ValueType } value - Value to match with the predicate. If **value** is **undefined** or **null**,
+     *     the predicate configured by calling this API is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -407,11 +406,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { ValueType } value - Value to match with the predicate. If **value** is **undefined** or **null**,
+     *     the predicate configured by this API call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -427,12 +427,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { ValueType } value - Value to match.If this parameter is set to **undefined** or **null**, the
-     *     predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { ValueType } value - Value to match with the predicate. If **value** is **undefined** or **null**,
+     *     the predicate configured by this API call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -448,8 +448,8 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or
+     *     **null**, the predicate configured by this interface call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @StageModelOnly
@@ -465,8 +465,8 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or
+     *     **null**, the predicate configured by this interface call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @StageModelOnly
@@ -496,17 +496,18 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { int } total - Maximum number of records.If the KV store is used and **total** is **undefined** or
-     *     **null**, the maximum number of records is 0. For details about the value range, see the description of this
-     *     parameter in [limit]{@link @ohos.data.distributedKVStore:distributedKVStore.Query.limit}.If the RDB store
-     *     is used and **total** is **undefined** or **null**, the maximum number of records is not limited. For details
-     *     about the value range, see the description of this parameter in
-     *     [limitAs]{@link @ohos.data.distributedKVStore:distributedKVStore.Query.limit}.
-     * @param { int } offset - Start position of the query result.If this parameter is set to **undefined** or
-     *     **null**, the start position is the beginning of the result set.For details about the value range in a KV
-     *     store, see the description of this parameter in
-     *     [limit]{@link @ohos.data.distributedKVStore:distributedKVStore.Query.limit}.For details about the value
-     *     range in an RDB store, see the description of the **rowOffset** parameter in
+     * @param { int } total - Maximum number of records. If the key-value database is used and **total** is
+     *     **undefined** or **null**, the maximum number of records is limited to 0. If the relational database is
+     *     used and **total** is **undefined** or **null**, the maximum number of records is not limited. When using a
+     *     key-value database, for details about the value range, see the description of the **total** parameter in
+     *     [limit]{@link @ohos.data.distributedKVStore:distributedKVStore.Query.limit}. When using a relational
+     *     database, for details about the value range, see the description of the **value** parameter in
+     *     [limitAs]{@link @ohos.data.relationalStore:relationalStore.RdbPredicates.limitAs}.
+     * @param { int } offset - Start position of the query result. If **offset** is **undefined** or **null**, the
+     *     start position is the beginning of the result set. When using a key-value database, for details about the
+     *     value range, see the description of the **offset** parameter in
+     *     [limit]{@link @ohos.data.distributedKVStore:distributedKVStore.Query.limit}. When using a relational
+     *     database, for details about the value range, see the description of the **rowOffset** parameter in
      *     [offsetAs]{@link @ohos.data.relationalStore:relationalStore.RdbPredicates.offsetAs}.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
@@ -554,9 +555,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.
-     * @param { Array<ValueType> } value - Array of the values to match.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { Array<ValueType> } value - Value to match, specified as an array of the ValueType type. If
+     *     **value** is **undefined** or **null**, the predicate configured by this API call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @StageModelOnly
@@ -567,13 +571,17 @@ declare namespace dataSharePredicates {
     in(field: string, value: Array<ValueType>): DataSharePredicates;
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is ValueType array and values
-     * are within a given range.
-     * Currently only used for RDB and KVDB(schema).
+     * Creates a **DataSharePredicates** object to match the data that is within the specified range.
      *
-     * @param { string } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } value - Indicates the values to match with DataSharePredicates.
-     * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
+     * Currently, both the RDB store and KV store support this predicate.
+     *
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { Array<ValueType> } value - Value to match, specified as an array of the ValueType type. If
+     *     **value** is **undefined** or **null**, the predicate configured by this API call is invalid.
+     * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @stagemodelonly
      * @since 23 static
@@ -585,12 +593,12 @@ declare namespace dataSharePredicates {
      *
      * Currently, both the RDB store and KV store support this predicate.
      *
-     * @param { string } field - Column name in the database table.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.If this parameter is set to **'null'** or **'undefined'** in
-     *     string, the matching result may not be as expected or an exception may be thrown when the predicate is used
-     *     by the KV store and RDB store APIs.
-     * @param { Array<ValueType> } value - Array of the values to match.If this parameter is set to **undefined** or
-     *     **null**, the predicate used is invalid.
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { Array<ValueType> } value - Value to match, specified as an array of the ValueType type. If
+     *     **value** is **undefined** or **null**, the predicate configured by this API call is invalid.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @systemapi [since 9 - 22]
@@ -601,13 +609,17 @@ declare namespace dataSharePredicates {
     notIn(field: string, value: Array<ValueType>): DataSharePredicates;
 
     /**
-     * Configure {@code DataSharePredicates} to match the specified field whose data type is String array and values
-     * are out of a given range.
-     * Currently only used for RDB and KVDB(schema).
+     * Creates a **DataSharePredicates** object to match the data that is not in the specified value.
      *
-     * @param { string } field - Indicates the column name in the database table.
-     * @param { Array<ValueType> } value - Indicates the values to match with DataSharePredicates.
-     * @returns { DataSharePredicates } Returns DataSharePredicates that matches the specified field.
+     * Currently, both the RDB store and KV store support this predicate.
+     *
+     * @param { string } field - Column name in the database table. If **field** is **undefined** or **null**, the
+     *     predicate configured by this API call is invalid. When **field** is the string **'null'** or
+     *     **'undefined'**, the key-value database and relational database APIs may return unexpected matching
+     *     results or throw an exception when using this predicate.
+     * @param { Array<ValueType> } value - Value to match, specified as an array of the ValueType type. If
+     *     **value** is **undefined** or **null**, the predicate configured by this API call is invalid.
+     * @returns { DataSharePredicates } **DataSharePredicates** object created.
      * @syscap SystemCapability.DistributedDataManager.DataShare.Core
      * @stagemodelonly
      * @since 23 static
@@ -617,7 +629,7 @@ declare namespace dataSharePredicates {
     /**
      * Creates a **DataSharePredicates** object to match the data with the specified key prefix.
      *
-     * Currently, only the KVDB supports this **DataSharePredicates** object.
+     * Currently, only the KV store supports this predicate.
      *
      * @param { string } prefix - Key prefix to match.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.
@@ -632,7 +644,7 @@ declare namespace dataSharePredicates {
     /**
      * Creates a **DataSharePredicates** object to match the data whose keys are within the given range.
      *
-     * Currently, only the KVDB supports this **DataSharePredicates** object.
+     * Currently, only the KV store supports this predicate.
      *
      * @param { Array<string> } keys - Array of the keys to match.
      * @returns { DataSharePredicates } **DataSharePredicates** object created.

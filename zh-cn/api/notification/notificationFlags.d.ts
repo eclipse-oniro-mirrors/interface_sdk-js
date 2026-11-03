@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Some states and flags for notifications
+ * @file NotificationFlags
  * @kit NotificationKit
  */
 
@@ -63,7 +63,8 @@ export enum NotificationFlagStatus {
 }
 
 /**
- * 描述通知标志位。
+ * 描述[通知标志位](docroot://notification/notification-glossary.md#notification-flags通知标志位)。应用可以使用`NotificationFlags`按需削减通知的提醒
+ * 方式。
  *
  * @syscap SystemCapability.Notification.Notification
  * @since 8 dynamic
@@ -108,7 +109,7 @@ export interface NotificationFlags {
 
   /**
    * 是否启用输入信息提示功能。
-   * 
+   *
    * - bit0：铃声提示。0表示关闭，1表示开启。 
    * - bit1：锁屏。0表示关闭，1表示开启。 
    * - bit2：横幅。0表示关闭，1表示开启。 

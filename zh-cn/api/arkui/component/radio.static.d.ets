@@ -249,6 +249,18 @@ export declare interface RadioAttribute extends CommonMethod {
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<RadioAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置Radio选项。
+     *
+     * @param { RadioOptions } options - Radio构造器选项
+     * @returns { RadioAttribute } 返回RadioAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setRadioOptions(options: RadioOptions): this;
 }
 /**
  * 开发者需要自定义class实现ContentModifier接口。继承自[CommonConfiguration]{@link CommonConfiguration}。

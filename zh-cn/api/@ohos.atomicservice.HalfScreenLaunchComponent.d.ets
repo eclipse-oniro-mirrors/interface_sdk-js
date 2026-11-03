@@ -20,7 +20,7 @@
  *
  * ###### 属性
  *
- * 不支持[通用属性]{@link ./@internal/component/ets/common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  *
  * @file Defines the halfScreen launch component
  * @kit ArkUI
@@ -40,8 +40,8 @@ import { Callback, ErrorCallback } from '@ohos.base';
  * > [EmbeddableUIAbility]{@link @ohos.app.ability.EmbeddableUIAbility:EmbeddableUIAbility}。若不继承自EmbeddableUIAbility，系统无
  * > 法确保原子化服务正常运行。
  * >
- * > - 如果HalfScreenLaunchComponent设置[通用属性]{@link ./@internal/component/ets/common}和
- * > [通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
+ * > - 如果HalfScreenLaunchComponent设置[通用属性]{@link CommonMethod}和
+ * > [通用事件]{@link CommonMethod}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到
  * > HalfScreenLaunchComponent本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议HalfScreenLaunchComponent设置通用属性和通用事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

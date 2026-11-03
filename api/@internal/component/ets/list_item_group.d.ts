@@ -98,7 +98,12 @@ declare enum ListItemGroupHeaderFooterStyle {
 declare interface ListItemGroupOptions {
 
   /**
-   * Header of the list item group.
+   * Header component of the **ListItemGroup**.
+   * <p><strong>NOTE</strong>
+   * <br>It can contain a single child component or no child component. If it is not set, there is no header
+   * component. This parameter has a lower priority than **headerComponent**. That is, if both header and
+   * **headerComponent** are set, the value of **headerComponent** takes effect.
+   * </p>
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -182,7 +187,21 @@ declare interface ListItemGroupOptions {
   spaceWidth?: Dimension;
 
   /**
-   * Style of the list item.
+   * Card style of the **ListItemGroup** component.
+   * <br>Default value: **ListItemGroupStyle.NONE**
+   * <br>When set to **ListItemGroupStyle.NONE**, no style is applied.
+   * <br>When set to **ListItemGroupStyle.CARD**, it is recommended to use it together with **ListItemStyle.CARD**
+   * of [ListItem](ts-container-listitem.md) to display the default card style.
+   * <br>In card style, the default specifications of **ListItemGroup** are as follows: left and right margins of
+   * 12 vp, and top, bottom, left, and right padding of 4 vp.
+   * <br>In card style, default **focused**, **hover**, **pressed**, **selected**, and **disabled** styles are
+   * provided for the list items in the card.
+   * <p><strong>NOTE</strong>
+   * <br>When set to **ListItemGroupStyle.CARD**, the **listDirection** attribute of List must be
+   * **Axis.Vertical**. If it is set to **Axis.Horizontal**, the display will be disordered. The
+   * [alignListItem](ts-container-list.md#alignlistitem9) attribute of **List** defaults to
+   * **ListItemAlign.Center**, which centers the items.
+   * </p>
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -224,7 +243,7 @@ declare interface ListItemGroupOptions {
 /**
  * This component is used to display list item groups. It supports custom group header and footer areas, card style,
  * dividers, lazy loading, and preloading. It is suitable for scenarios where list items need to be logically grouped
- * for display. By default, it spans the entire width of the [List]{@link ./list} component and must be used with the
+ * for display. By default, it spans the entire width of the [List]{@link @global:List} component and must be used with the
  * **List** component.
  *
  * Lazy loading of **ListItemGroup** loads the child components in the visible area as required. Compared with full
@@ -268,7 +287,7 @@ declare interface ListItemGroupOptions {
  *
  * > **NOTE**
  * >
- * > - The parent component of this component can only be [List]{@link ./list}.
+ * > - The parent component of this component can only be [List]{@link @global:List}.
  * >
  * > - The **ListItemGroup** component does not support the
  * > [universal attribute aspectRatio]{@link CommonMethod#aspectRatio}.
@@ -328,7 +347,7 @@ declare class ListItemGroupAttribute extends CommonMethod<ListItemGroupAttribute
    *
    * **strokeWidth**, **startMargin**, and **endMargin** cannot be set in percentage.
    *
-   * When a list item has [polymorphic styles]{@link ./common} applied, the dividers above and below the pressed child
+   * When a list item has [polymorphic styles]{@link CommonMethod} applied, the dividers above and below the pressed child
    * component are not rendered.
    *
    * @param { {
@@ -387,7 +406,7 @@ declare const ListItemGroupInstance: ListItemGroupAttribute;
 /**
  * This component is used to display list item groups. It supports custom group header and footer areas, card style,
  * dividers, lazy loading, and preloading. It is suitable for scenarios where list items need to be logically grouped
- * for display. By default, it spans the entire width of the [List]{@link ./list} component and must be used with the
+ * for display. By default, it spans the entire width of the [List]{@link @global:List} component and must be used with the
  * **List** component.
  *
  * Lazy loading of **ListItemGroup** loads the child components in the visible area as required. Compared with full
@@ -431,7 +450,7 @@ declare const ListItemGroupInstance: ListItemGroupAttribute;
  *
  * > **NOTE**
  * >
- * > - The parent component of this component can only be [List]{@link ./list}.
+ * > - The parent component of this component can only be [List]{@link @global:List}.
  * >
  * > - The **ListItemGroup** component does not support the
  * > [universal attribute aspectRatio]{@link CommonMethod#aspectRatio}.
@@ -451,7 +470,7 @@ declare const ListItemGroupInstance: ListItemGroupAttribute;
  *
  * ###### Child Components
  *
- * Contains the [ListItem]{@link ./list_item} child component. Child components can be dynamically generated using
+ * Contains the [ListItem]{@link @global:ListItem} child component. Child components can be dynamically generated using
  * rendering control types [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md),
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md),
  * [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), and

@@ -15,12 +15,6 @@
 
 /**
  * 文本下载按钮，可显示具体下载进度。
- * @file
- * @kit ArkUI
- */
-
-/**
- * 创建ProgressButton组件。
  * 
  * > **说明：**
  * >
@@ -28,12 +22,18 @@
  * > 编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到ProgressButton本身。
  * > 这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议ProgressButton设置通用属性和通用事件。
  *
+ * @file
+ * @kit ArkUI
+ */
+
+/**
+ * 创建ProgressButton组件。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 22]
  * @atomicservice [since 11]
  * @since 10 dynamic
- * @noninterop
  */
 @Component
 export declare struct ProgressButton {

@@ -1038,7 +1038,7 @@ declare namespace text {
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     borderColor?: common2D.Color;
 
@@ -1049,7 +1049,7 @@ declare namespace text {
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     borderWidth?: double;
   }

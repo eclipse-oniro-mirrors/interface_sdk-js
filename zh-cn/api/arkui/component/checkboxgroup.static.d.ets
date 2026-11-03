@@ -254,6 +254,18 @@ export declare interface CheckboxGroupAttribute extends CommonMethod {
      * @since 23 static
      */
     default contentModifier(modifier: ContentModifier<CheckBoxGroupConfiguration> | undefined): this;
+
+    /**
+     * 设置CheckboxGroup选项。
+     *
+     * @param { CheckboxGroupOptions } [options] - CheckboxGroup构造器选项
+     * @returns { CheckboxGroupAttribute } 返回CheckboxGroupAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setCheckboxGroupOptions(options?: CheckboxGroupOptions): this;
 }
 
 /**

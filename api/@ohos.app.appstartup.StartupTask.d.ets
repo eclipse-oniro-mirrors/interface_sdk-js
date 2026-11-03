@@ -31,7 +31,14 @@ import AbilityStageContext from './application/AbilityStageContext';
 @Sendable
 declare class StartupTask {
   /**
-   * Called when the dependent startup task is complete.
+   * Called when the dependent startup task is complete. Developers can process the execution result of the
+   * dependent task in this method.
+   *
+   * > **NOTE**
+   * >
+   * > Triggered once each time a dependent task is complete. This method is called before the init
+   * > method and can be used to process the execution result of a single dependent task. The init
+   * > method is called once after all dependent tasks are complete.
    *
    * @param { string } dependency - Name of the dependent startup task.
    * @param { Object } result - Execution result of [init]{@link StartupTask#init(context: AbilityStageContext)} of the
@@ -48,7 +55,7 @@ declare class StartupTask {
    *
    * @param { AbilityStageContext } context - Context environment of the
    *     [AbilityStage]{@link @ohos.app.ability.AbilityStage:AbilityStage}.
-   * @returns { Promise<Object | void> } Promise used to return the execution result.
+   * @returns { Promise<Object | void> } Promise used to return the execution result object of the startup task or void.
    * @syscap SystemCapability.Ability.AppStartup
    * @stagemodelonly
    * @since 12 dynamic

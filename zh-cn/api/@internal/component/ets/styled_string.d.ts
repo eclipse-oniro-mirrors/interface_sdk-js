@@ -14,12 +14,27 @@
  */
 
 /**
- * @file
+ * @file 属性字符串是一种将文本样式与文本内容关联管理的对象，样式通过start和length指定文本区间，多种样式可叠加应用于同一区间。
+ * 可通过[TextController]{@link ./text:setStyledString}中的[setStyledString]{@link ./text:setStyledString}方法与Text组件绑定，也可通过
+ * [RichEditorStyledStringController]{@link ./rich_editor:RichEditorStyledStringController}中的 
+ * [setStyledString]{@link ./rich_editor:setStyledString}方法与[RichEditor]{@link ./rich_editor}。适用于富文本编辑、聊天消息显示、
+ * 文档标注等需要灵活设置文本样式的场景，可动态修改样式内容，支持样式叠加和冲突处理。
+ * 
+ * >  **说明**
+ * > - 从API version 20开始，支持通过[getParagraphs]{@link MeasureUtils#getParagraphs}获取属性字符串的文本布局信息。
+ * >
+ * > - 属性字符串目前不支持在worker线程中使用。
+ * >
+ * > - 属性字符串通过controller绑定时，需要等待布局完成后，绑定生效。当[measure]{@link ./FrameNode:measure}和setStyledString同时使用，开发者需要通过
+ *   [@ohos.arkui.inspector (布局回调)]{@link @ohos.arkui.inspector}判断布局完成，再绑定属性字符串。
  * @kit ArkUI
  */
-
 /**
  * 属性字符串自定义序列化对象类型，需要开发者定义序列化和反序列化的方式。
+ *
+ * |类型|说明|
+ * | ------ | ---------- |
+ * |[UserDataSpan]{@link UserDataSpan}|UserDataSpan自定义数据跨度|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -55,6 +70,14 @@ declare type StyledStringUnmarshallCallback = (buf: ArrayBuffer) => StyledString
 
 /**
  * 属性字符串。
+ *
+ * ###### 规则说明
+ * * 当组件样式和属性字符串中的样式冲突时，冲突部分以属性字符串设置的样式为准，未冲突部分则生效组件的样式。
+ * * 当属性字符串和 [Text]{@link ./text}子组件冲突时，属性字符串优先级高，即当Text组件中绑定了属性字符串，忽略Text组件下包含[Span]{@link ./span}等子组件的情况。
+ * * 不支持[@State](docroot://ui/state-management/arkts-state.md)修饰。
+ * * 建议将StyledString定义为成员变量，从而避免应用退后台后被销毁。
+ * * 不支持在[loadContent()]{@link @ohos.window:window.Window.loadContent(path: string, storage: LocalStorage,
+ * * callback: AsyncCallback<void>)}之前创建
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -189,8 +212,8 @@ declare class StyledString {
    * 本不同。
    *
    * 使用方法参考
-   * [示例12（fromHtml和toHtml互相转换）](docroot://reference/apis-arkui/arkui-ts/ts-universal-styled-string.md#示例12fromhtml和tohtml互相转换)
-   * 和[示例18（fromHtml转换）](docroot://reference/apis-arkui/arkui-ts/ts-universal-styled-string.md#示例18fromhtml转换)。
+   * [示例12（fromHtml和toHtml互相转换）]{@link StyledString}
+   * 和[示例18（fromHtml转换）]{@link StyledString}。
    *
    * | 标签名称 | 说明                   |
    * | ------------- | ---------------------------- |
@@ -208,18 +231,18 @@ declare class StyledString {
    * | \<del\><sup>20+</sup>     | 删除线（中划线）。            |
    * | \<sup\><sup>20+</sup>     | 上标文本。                   |
    * | \<sub\><sup>20+</sup>     | 下标文本。                   |
-   * | \<cite\>    | 斜体文本。        |
-   * | \<dfn\>     | 斜体文本。        |
-   * | \<small\>   | 缩小字号标签。字号缩放为父容器字号属性的0.8倍，支持嵌套叠加。        |
-   * | \<h1\>      | 一级标题。        |
-   * | \<h2\>      | 二级标题。        |
-   * | \<h3\>      | 三级标题。        |
-   * | \<h4\>      | 四级标题。        |
-   * | \<h5\>      | 五级标题。        |
-   * | \<h6\>      | 六级标题。        |
-   * | \<ol\>      | 有序列表。        |
-   * | \<ul\>      | 无序列表。        |
-   * | \<li\>      | 列表项。          |
+   * | \<cite\>    | 斜体文本。<br>**起始版本：** 26.0.0        |
+   * | \<dfn\>     | 斜体文本。<br>**起始版本：** 26.0.0        |
+   * | \<small\>   | 缩小字号标签。字号缩放为父容器字号属性的0.8倍，支持嵌套叠加。<br>**起始版本：** 26.0.0        |
+   * | \<h1\>      | 一级标题。<br>**起始版本：** 26.0.0        |
+   * | \<h2\>      | 二级标题。<br>**起始版本：** 26.0.0        |
+   * | \<h3\>      | 三级标题。<br>**起始版本：** 26.0.0        |
+   * | \<h4\>      | 四级标题。<br>**起始版本：** 26.0.0        |
+   * | \<h5\>      | 五级标题。<br>**起始版本：** 26.0.0        |
+   * | \<h6\>      | 六级标题。<br>**起始版本：** 26.0.0        |
+   * | \<ol\>      | 有序列表。<br>**起始版本：** 26.0.0        |
+   * | \<ul\>      | 无序列表。<br>**起始版本：** 26.0.0        |
+   * | \<li\>      | 列表项。<br>**起始版本：** 26.0.0          |
    *
    * @param { string } html - html格式的字符串。
    * @returns { Promise<StyledString> } 属性字符串。resolve返回转换后的属性字符串；reject抛出异常。
@@ -517,12 +540,26 @@ declare class TextStyle {
 
   /**
    * 获取属性字符串的文本字体粗细。
-   *
    * 默认值：400
-   *
    * **说明：**
-   *
    * 返回值为string类型，具体返回值和设置值关系参见下方表格。
+   * <br>|参数|返回值|
+   * | ----------- | ----------- |
+   * | 100 |'0'|
+   * | 200 |'1'|
+   * | 300 |'2'|
+   * | 400 |'3'|
+   * | 500 |'4'|
+   * | 600 |'5'|
+   * | 700 |'6'|
+   * | 800 |'7'|
+   * | 900 |'8'|
+   * | FontWeight.Bold或'bold'|'9'|
+   * | FontWeight.Normal或'normal'|'10'|
+   * | FontWeight.Bolder或'bolder'|'11'|
+   * | FontWeight.Lighter或'Lighter'|'12'|
+   * | FontWeight.Medium或'media'|'13'|
+   * |FontWeight.Regular 或'regular'|'14'|。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1871,7 +1908,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除指定范围内容的指定类型样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * 当属性字符串中包含图片时，同样生效。
    *
@@ -1893,7 +1930,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除指定范围内容的所有样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * 当属性字符串中包含图片时，同样生效。
    *
@@ -1914,7 +1951,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * 清除属性字符串对象的所有样式。
    *
-   * 被清空样式类型对象属性使用的是对应[Text]{@link ./text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
+   * 被清空样式类型对象属性使用的是对应[Text]{@link @global:Text}组件属性的设置值，若Text组件未设置值，则使用对应Text组件属性的默认值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2286,7 +2323,7 @@ declare class ImageAttachment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   readonly imageTag?: string;
 }
@@ -2421,7 +2458,7 @@ declare interface ResourceImageAttachmentOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -2526,7 +2563,7 @@ declare interface ImageAttachmentInterface {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }

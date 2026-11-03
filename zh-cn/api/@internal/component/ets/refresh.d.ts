@@ -208,15 +208,15 @@ interface RefreshOptions {
  *
  * > **说明：**
  * >
- * > - 该组件从API version 12开始支持与垂直滚动的[Swiper]{@link ./swiper}和
- * > [Web]{@link ./web}的联动。当[Swiper]{@link ./swiper}设置
- * > [loop]{@link SwiperAttribute#loop}属性为true时，Refresh无法和[Swiper]{@link ./swiper}产生联动。
+ * > - 该组件从API version 12开始支持与垂直滚动的[Swiper]{@link @global:Swiper}和
+ * > [Web]{@link @global:Web}的联动。当[Swiper]{@link @global:Swiper}设置
+ * > [loop]{@link SwiperAttribute#loop}属性为true时，Refresh无法和[Swiper]{@link @global:Swiper}产生联动。
  * >
- * > - Refresh和内容大小小于组件自身的[List]{@link ./list}组件嵌套使用并且中间还有其他组件时，手势可能会被中间组件响应，导致Refresh未产生下拉刷新效果。此时可以将
- * > [alwaysEnabled]{@link EdgeEffectOptions}参数设为true，[List]{@link ./list}会响应手势并通过嵌套滚动带动Refresh组件产生下拉刷新效果。具体可以参考
- * > [示例9（不满一屏场景实现下拉刷新）]{@link ./refresh}。
+ * > - Refresh和内容大小小于组件自身的[List]{@link @global:List}组件嵌套使用并且中间还有其他组件时，手势可能会被中间组件响应，导致Refresh未产生下拉刷新效果。此时可以将
+ * > [alwaysEnabled]{@link EdgeEffectOptions}参数设为true，[List]{@link @global:List}会响应手势并通过嵌套滚动带动Refresh组件产生下拉刷新效果。具体可以参考
+ * > [示例9（不满一屏场景实现下拉刷新）]{@link @global:Refresh}。
  * >
- * > - 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > - 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  * >
  * > - 组件无法通过鼠标按下拖动操作进行下拉刷新。
  *
@@ -244,9 +244,9 @@ interface RefreshInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -409,15 +409,15 @@ declare class RefreshAttribute extends CommonMethod<RefreshAttribute> {
  *
  * > **说明：**
  * >
- * > - 该组件从API version 12开始支持与垂直滚动的[Swiper]{@link ./swiper}和
- * > [Web]{@link ./web}的联动。当[Swiper]{@link ./swiper}设置
- * > [loop]{@link SwiperAttribute#loop}属性为true时，Refresh无法和[Swiper]{@link ./swiper}产生联动。
+ * > - 该组件从API version 12开始支持与垂直滚动的[Swiper]{@link @global:Swiper}和
+ * > [Web]{@link @global:Web}的联动。当[Swiper]{@link @global:Swiper}设置
+ * > [loop]{@link SwiperAttribute#loop}属性为true时，Refresh无法和[Swiper]{@link @global:Swiper}产生联动。
  * >
- * > - Refresh和内容大小小于组件自身的[List]{@link ./list}组件嵌套使用并且中间还有其他组件时，手势可能会被中间组件响应，导致Refresh未产生下拉刷新效果。此时可以将
- * > [alwaysEnabled]{@link EdgeEffectOptions}参数设为true，[List]{@link ./list}会响应手势并通过嵌套滚动带动Refresh组件产生下拉刷新效果。具体可以参考
- * > [示例9（不满一屏场景实现下拉刷新）]{@link ./refresh}。
+ * > - Refresh和内容大小小于组件自身的[List]{@link @global:List}组件嵌套使用并且中间还有其他组件时，手势可能会被中间组件响应，导致Refresh未产生下拉刷新效果。此时可以将
+ * > [alwaysEnabled]{@link EdgeEffectOptions}参数设为true，[List]{@link @global:List}会响应手势并通过嵌套滚动带动Refresh组件产生下拉刷新效果。具体可以参考
+ * > [示例9（不满一屏场景实现下拉刷新）]{@link @global:Refresh}。
  * >
- * > - 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > - 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  * >
  * > - 组件无法通过鼠标按下拖动操作进行下拉刷新。
  *

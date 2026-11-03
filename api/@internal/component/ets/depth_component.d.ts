@@ -556,7 +556,8 @@ interface DepthComponentInterface {
 }
 
 /**
- * Defines DepthComponent Component.
+ * Provides the **DepthComponent** component. This component composites a depth map with the background content to
+ * render depth-based spatial effects.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi

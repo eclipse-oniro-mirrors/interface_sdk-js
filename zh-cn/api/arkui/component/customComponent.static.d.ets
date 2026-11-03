@@ -45,8 +45,8 @@ import { RecordData } from '@ohos.base';
 export declare class ReuseObject {
 
   /**
-     * Get the raw data of ReuseObject to get values.
-     *
+   * Get the raw data of ReuseObject to get values.
+   *
    * @returns { RecordData } - Returns the raw data of ReuseObject.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -226,6 +226,51 @@ export @interface ComponentV2 {
    * @since 26.0.0 static
    */
   poolAccepts: string[] = [];
+}
+
+ /**
+ * 定义内存优化策略的类型。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare enum ReusableMemOptStrategy {
+    /**
+    * 无内存优化策略。
+    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    DEFAULT = 0,
+    /**
+    * CustomComponent处理内存优化。
+    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    ENABLE_AUTO_CACHE_OPTIMIZATION = 1 << 0,
+}
+
+/**
+ * 定义Resuable ClassDecorator的可选参数。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface CustomComponentBaseOptions {
+    /**
+    * CustomComponent Reuse的内存优化策略
+    *
+    * @type { ?ReusableMemOptStrategy }
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 26.0.0 static
+    */
+    memoryOptimizationStrategy? : ReusableMemOptStrategy;
 }
 
 /**
@@ -590,24 +635,34 @@ export interface LayoutCallbacks {
     };
 }
 
-/** 
- * Defining interface for _invokeImpl options. 
- * 
- * @syscap SystemCapability.ArkUI.ArkUI.Full 
- * @stagemodelonly 
- * @since 24 static 
- */ 
-export interface CustomComponentInvokeOptions { 
-    /** 
-     * CustomComponent Class object. Used to generate default reuse key. 
-     * 
-     * @type { ?Class } 
-     * @syscap SystemCapability.ArkUI.ArkUI.Full 
-     * @stagemodelonly 
-     * @since 24 static 
-     */ 
-    sClass?: Class; 
+/**
+ * 定义_invokeImpl的配置选项
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 24 static
+ */
+export interface CustomComponentInvokeOptions extends CustomComponentBaseOptions {
+    /**
+     * 自定义组件自身的Class类型，用于生成默认的复用键
+     *
+     * @type { ?Class }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 24 static
+     */
+    sClass?: Class;
 }
+
+/**
+ * 定义_invokeImpl选项的接口。
+ *
+ * @typedef CustomComponentV1InvokeOptions
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export interface CustomComponentV1InvokeOptions extends CustomComponentBaseOptions {}
 
 /**
  * CustomComponentLifecycle用于监控自定义组件生命周期的变化，开发者可以通过

@@ -24,14 +24,14 @@
  * time and memory overhead.
  *
  * In versions earlier than API version 26.0.0, the parent component of the **LazyVGridLayout** component supports the
- * [WaterFlow]{@link ./water_flow} and [FlowItem]{@link ./flow_item} components. You can also encapsulate the parent
- * component using a custom component or [NodeContainer]{@link ./node_container} component and use it in **WaterFlow**
+ * [WaterFlow]{@link @global:WaterFlow} and [FlowItem]{@link @global:FlowItem} components. You can also encapsulate the parent
+ * component using a custom component or [NodeContainer]{@link @global:NodeContainer} component and use it in **WaterFlow**
  * or **FlowItem**.
  *
- * Since API version 26.0.0, the parent component of this component also supports [List]{@link ./list},
- * [Scroll]{@link ./scroll}, or
+ * Since API version 26.0.0, the parent component of this component also supports [List]{@link @global:List},
+ * [Scroll]{@link @global:Scroll}, or
  * [LazyColumnLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazycolumnlayout.md). Additionally, custom
- * components or [NodeContainer]{@link ./node_container} components can be encapsulated and then used in **List**,
+ * components or [NodeContainer]{@link @global:NodeContainer} components can be encapsulated and then used in **List**,
  * **Scroll**, or **LazyColumnLayout**.
  *
  * For more usage scenarios and complete examples of lazy loading layouts, see
@@ -260,9 +260,9 @@ declare class LazyGridLayoutAttribute<T> extends CommonMethod<T> {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -337,7 +337,7 @@ declare class LazyVGridLayoutAttribute extends LazyGridLayoutAttribute<LazyVGrid
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   columnsTemplate(template: string | ItemFillPolicy): LazyVGridLayoutAttribute;
 }
@@ -348,14 +348,14 @@ declare class LazyVGridLayoutAttribute extends LazyGridLayoutAttribute<LazyVGrid
  * time and memory overhead.
  *
  * In versions earlier than API version 26.0.0, the parent component of the **LazyVGridLayout** component supports the
- * [WaterFlow]{@link ./water_flow} and [FlowItem]{@link ./flow_item} components. You can also encapsulate the parent
- * component using a custom component or [NodeContainer]{@link ./node_container} component and use it in **WaterFlow**
+ * [WaterFlow]{@link @global:WaterFlow} and [FlowItem]{@link @global:FlowItem} components. You can also encapsulate the parent
+ * component using a custom component or [NodeContainer]{@link @global:NodeContainer} component and use it in **WaterFlow**
  * or **FlowItem**.
  *
- * Since API version 26.0.0, the parent component of this component also supports [List]{@link ./list},
- * [Scroll]{@link ./scroll}, or
+ * Since API version 26.0.0, the parent component of this component also supports [List]{@link @global:List},
+ * [Scroll]{@link @global:Scroll}, or
  * [LazyColumnLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazycolumnlayout.md). Additionally, custom
- * components or [NodeContainer]{@link ./node_container} components can be encapsulated and then used in **List**,
+ * components or [NodeContainer]{@link @global:NodeContainer} components can be encapsulated and then used in **List**,
  * **Scroll**, or **LazyColumnLayout**.
  *
  * For more usage scenarios and complete examples of lazy loading layouts, see

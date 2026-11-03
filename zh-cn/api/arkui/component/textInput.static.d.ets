@@ -681,7 +681,7 @@ export declare enum TextInputStyle {
    * @stagemodelonly
    * @since 23 static
    */
-  Default = 0,
+  Default,
   /**
    * 内联输入风格，也称内联模式。文本选中底板高度与输入框高度相同。
    *
@@ -691,7 +691,7 @@ export declare enum TextInputStyle {
    * @stagemodelonly
    * @since 23 static
    */
-  Inline = 1
+  Inline
 }
 /**
  * PasswordIcon对象。

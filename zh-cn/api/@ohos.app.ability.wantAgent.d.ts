@@ -116,7 +116,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - WantAgent对象。
    * @param { AsyncCallback<Want> } callback - 回调函数。当获取WantAgent对象want成功，err中code为0，data为获取到的Want数据；否则err会返回对应的错误码和错误信息。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -134,7 +134,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - WantAgent对象。
    * @returns { Promise<Want> } Promise对象，返回WantAgent对象的want。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000007 - Service busy. There are concurrent tasks. Try again later.
@@ -202,8 +202,9 @@ declare namespace wantAgent {
    * @param { TriggerInfo } triggerInfo - TriggerInfo对象。
    * @param { Context } context - 请求触发WantAgent的UIAbility/ExtensionAbility的Context。
    * @returns { Promise<CompleteData> } Promise对象，返回主动激发WantAgent获得的数据。
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000020 - The context is not ability context.
    * @throws { BusinessError } 16000151 - Invalid wantAgent object.
    * @throws { BusinessError } 16000153 - The WantAgent has been canceled.
@@ -319,7 +320,7 @@ declare namespace wantAgent {
    * 开启或者关闭WantAgent多线程传递功能。
    *
    * @param { boolean } isMultithreadingSupported - 	表示是否开启多线程传递功能。true表示开启，false表示关闭。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -339,7 +340,7 @@ declare namespace wantAgent {
    *
    * @param { LocalWantAgentInfo } info - Information about the local WantAgent object to create.
    * @returns { WantAgent } Returns the created WantAgent.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -353,7 +354,7 @@ declare namespace wantAgent {
    *
    * @param { WantAgent } agent - Indicates the WantAgent.
    * @returns { boolean } Returns true if the WantAgent is local.
-   * @throws { BusinessError } 202 - Not System app. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly

@@ -3305,5 +3305,15 @@ export declare enum KeyCode {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  KEYCODE_PTZ_APERTURE_RIGHT = 3243
+  KEYCODE_PTZ_APERTURE_RIGHT = 3243,
+
+  /**
+   * Return to desktop
+   *
+   * @syscap SystemCapability.MultimodalInput.Input.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  KEYCODE_DESKTOP = 3245
+
 }

@@ -16,7 +16,7 @@
 /**
  * **ConnectOptions** can be used as an input parameter to receive status changes during the connection to a background 
  * service. For example, it is used as an input parameter of 
- * [connectServiceExtensionAbility]{@link ./application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility} 
+ * [connectServiceExtensionAbility]{@link ./../application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility} 
  * to connect to a ServiceExtensionAbility.
  *
  * @file
@@ -58,7 +58,7 @@ type OnFailedFn = (code: int) => void;
 /**
  * **ConnectOptions** can be used as an input parameter to receive status changes during the connection to a
  * background service. For example, it is used as an input parameter of
- * [connectServiceExtensionAbility]{@link ./application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility}
+ * [connectServiceExtensionAbility]{@link ./../application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility}
  * to connect to a ServiceExtensionAbility.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core

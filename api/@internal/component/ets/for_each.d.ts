@@ -19,7 +19,7 @@
  */
 
 /**
- * The [drag-and-drop sorting]{@link ./common} attribute is supported.
+ * The [drag-and-drop sorting]{@link CommonMethod} attribute is supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -51,8 +51,8 @@ interface ForEachInterface {
   /**
    * This API must be used together with a container component, and the components returned by the API must be child
    * components that are allowed to be contained in the **ForEach** parent container component. For example, the
-   * [ListItem]{@link ./list_item} component requires that the parent container component of **ForEach** must be a
-   * [List]{@link ./list} component or a [ListItemGroup]{@link ./list_item_group} component.
+   * [ListItem]{@link @global:ListItem} component requires that the parent container component of **ForEach** must be a
+   * [List]{@link @global:List} component or a [ListItemGroup]{@link @global:ListItemGroup} component.
    *
    * @param { Array<any> } arr - Data source, of the `Array` type.
    *     <br>If it is set to `undefined`, the **ForEach** API does not take effect.

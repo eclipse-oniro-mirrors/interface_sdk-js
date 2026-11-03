@@ -164,8 +164,9 @@ declare namespace application {
    *     is used by default.
    * @param { string } moduleName - Module name.
    * @returns { Promise<Context> } Promise used to return the context created.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -202,8 +203,9 @@ declare namespace application {
    * @param { string } hostBundleName - Bundle name of the application for which the plugin is installed.
    * @returns { Promise<Context> } Promise used to return the context created, in which the **processName** and **config**
    *     properties are the same as those of the input context.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -228,8 +230,9 @@ declare namespace application {
    * @param { Context } context - Application context.
    * @param { string } bundleName - Bundle name of the application.
    * @returns { Promise<Context> } Promise used to return the context created.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Permission denied, non-system app called system api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified;
    *     2.Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -304,7 +307,8 @@ declare namespace application {
    *     **true** to add the current process to the head of the list, **false** to add the current process to the tail of the
    *     list.
    * @returns { Promise<void> } Promise that returns no result.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000115 - The current process cannot be set as a candidate master process.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -320,7 +324,8 @@ declare namespace application {
    * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
    *
    * @returns { Promise<void> } Promise that returns no result.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000116 - The current process is already a master process and does not support cancellation.
    * @throws { BusinessError } 16000117 - The current process is not a candidate master process and does not support
    *     cancellation.
@@ -338,7 +343,8 @@ declare namespace application {
    * code 801 is returned.
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000118 - Not a master process.
    * @throws { BusinessError } 16000119 - Cannot exit because there is an unfinished request.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

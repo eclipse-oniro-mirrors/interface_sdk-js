@@ -222,7 +222,7 @@ type PasteButtonCallback = (event: ClickEvent, result: PasteButtonOnClickResult,
 
 /**
  * Universal attributes are not supported. This component can only inherit the
- * [universal attributes of security components]{@link ./security_component}.
+ * [universal attributes of security components]{@link ./security_component:SecurityComponentMethod}.
  *
  * Universal events are not supported. Only the following events are supported.
  *

@@ -73,7 +73,7 @@ type OnFailedFn = (code: int) => void;
 
 /**
  * 在连接指定的后台服务时作为入参，用于接收连接过程中的状态变化，如作为
- * [connectServiceExtensionAbility]{@link ./application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility}
+ * [connectServiceExtensionAbility]{@link ./../application/UIAbilityContext:UIAbilityContext.connectServiceExtensionAbility}
  * 的入参，连接指定的ServiceExtensionAbility。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core

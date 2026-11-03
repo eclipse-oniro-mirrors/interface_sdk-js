@@ -22,7 +22,7 @@ import { Content } from './Content';
 import { FrameNode } from './FrameNode';
 
 /**
- * **NodeContent** is a manager for [ContentSlot]{@link ../@internal/component/ets/content_slot} provided by ArkUI. It
+ * **NodeContent** is a manager for [ContentSlot]{@link @global:ContentSlot} provided by ArkUI. It
  * manages the FrameNode node content mounted on **ContentSlot**, and supports dynamic addition and removal of
  * FrameNodes. It is applicable to scenarios where FrameNode node content needs to be dynamically managed through
  * **ContentSlot**, for example, dynamically adding or removing custom FrameNodes such as text and images based on user

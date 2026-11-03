@@ -502,7 +502,7 @@ type GestureType = 'left' | 'leftThenRight' | 'leftThenUp' | 'leftThenDown' |
  *
  * @unionmember { 'pageContentUpdate' } 表示页面内容更新。
  * @unionmember { 'pageStateUpdate' } 表示页面状态更新。
- * @unionmember { 'pageStatePreUpdate' } 表示页面状态即将更新。 [since 26.2.0]
+ * @unionmember { 'pageStatePreUpdate' } 表示页面状态即将更新。 [since 26.1.0]
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @since 9 dynamiconly
  */

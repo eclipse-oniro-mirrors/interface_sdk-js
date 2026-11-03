@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Common Event
  * @kit API10LessDeprecatedModules
  */
 
@@ -37,8 +37,10 @@ declare namespace commonEvent {
   /**
    * Publishes a common event with given properties. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result of publishing a common event.
+   * @param { string } event - Common event to publish. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
@@ -49,9 +51,11 @@ declare namespace commonEvent {
   /**
    * Publishes a common event with given properties. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
    * @param { CommonEventPublishData } options - Properties of the common event to publish.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result of publishing a common event.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
@@ -62,9 +66,11 @@ declare namespace commonEvent {
   /**
    * Publishes a common event to a specific user. This API uses an asynchronous callback to return the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
    * @param { number } userId - ID of the user to whom the common event is published.
-   * @param { AsyncCallback<void> } callback - Callback used to return the common event publication result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @systemapi
    * @since 8
@@ -77,15 +83,18 @@ declare namespace commonEvent {
    * Publishes a common event with given properties to a specific user. This API uses an asynchronous callback to return
    * the result.
    *
-   * @param { string } event - Name of the common event to publish.
+   * @param { string } event - Common event to publish. The value can contain a maximum of 254 bytes. Excess content
+   *     will be truncated.
    * @param { number } userId - ID of the user to whom the common event is published.
    * @param { CommonEventPublishData } options - Properties of the common event to publish.
-   * @param { AsyncCallback<void> } callback - Callback used to return the common event publication result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @systemapi
    * @since 8
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.publishAsUser( event: string, userId: int, options: CommonEventPublishData, callback: AsyncCallback<void> )
+   * @useinstead @ohos.commonEventManager:commonEventManager.publishAsUser(event: string, userId: int, options: CommonEventPublishData,
+   *     callback: AsyncCallback<void>)
    */
   function publishAsUser(
     event: string,
@@ -98,11 +107,14 @@ declare namespace commonEvent {
    * Creates a subscriber. This API uses an asynchronous callback to return the result.
    *
    * @param { CommonEventSubscribeInfo } subscribeInfo - Subscriber information.
-   * @param { AsyncCallback<CommonEventSubscriber> } callback - Callback used to return the result.
+   * @param { AsyncCallback<CommonEventSubscriber> } callback - Callback used to return the result. If the public event
+   *     subscriber is created successfully, **err** is **undefined** and **data** is the public event subscriber
+   *     obtained. Otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.createSubscriber( subscribeInfo: CommonEventSubscribeInfo, callback: AsyncCallback<CommonEventSubscriber> )
+   * @useinstead @ohos.commonEventManager:commonEventManager.createSubscriber(subscribeInfo: CommonEventSubscribeInfo,
+   *     callback: AsyncCallback<CommonEventSubscriber>)
    */
   function createSubscriber(
     subscribeInfo: CommonEventSubscribeInfo,
@@ -125,11 +137,13 @@ declare namespace commonEvent {
    * Subscribes to common events. This API uses an asynchronous callback to return the result.
    *
    * @param { CommonEventSubscriber } subscriber - Subscriber object.
-   * @param { AsyncCallback<CommonEventData> } callback - Callback to be invoked when a common event is subscribed to.
+   * @param { AsyncCallback<CommonEventData> } callback - Callback used to return the result. If the public event is
+   *     subscribed to successfully, **err** is **undefined** and **data** is the public event data obtained. Otherwise,
+   *     **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.subscribe
+   * @useinstead @ohos.commonEventManager:commonEventManager.subscribe(subscriber: CommonEventSubscriber, callback: AsyncCallback<CommonEventData>)
    */
   function subscribe(subscriber: CommonEventSubscriber, callback: AsyncCallback<CommonEventData>): void;
 
@@ -137,18 +151,21 @@ declare namespace commonEvent {
    * Unsubscribes from common events. This API uses an asynchronous callback to return the result.
    *
    * @param { CommonEventSubscriber } subscriber - Subscriber object.
-   * @param { AsyncCallback<void> } [callback] - Callback used to return the result.
+   * @param { AsyncCallback<void> } [callback] - Callback used to return the result. If the public event is unsubscribed
+   *     from successfully, **err** is **undefined**; otherwise, **err** is an error object.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7
    * @deprecated since 9
-   * @useinstead @ohos.commonEventManager:commonEventManager.unsubscribe
+   * @useinstead @ohos.commonEventManager:commonEventManager.unsubscribe(subscriber: CommonEventSubscriber, callback?: AsyncCallback<void>)
    */
   function unsubscribe(subscriber: CommonEventSubscriber, callback?: AsyncCallback<void>): void;
 
   /**
-   * A system common event is an event that is published by a system service or system application and requires specific
-   * permissions to subscribe to. To publish or subscribe to this type of event, you must follow the event-specific 
-   * definitions.
+   * [System common events](docroot://basic-services/common-event/common-event-glossary.md#system-common-event) refer to
+   * events released by system services or system apps. Subscribing to these events requires specific permissions. To 
+   * publish or subscribe to this type of event, you must follow the event-specific definitions.
+   *
+   * For details about the definitions of all system common events, see [System Common Events]{@link commonEvent}.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7

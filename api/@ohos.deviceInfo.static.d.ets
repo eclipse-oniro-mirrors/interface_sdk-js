@@ -145,7 +145,7 @@ declare namespace deviceInfo {
     get brand(): string;
 
     /**
-     * Device brand.
+     * Device marketName.
      * 
      * Example: HUAWEI
      *
@@ -216,18 +216,6 @@ declare namespace deviceInfo {
      * @since 24 static
      */
     get hardwareModel(): string;
-
-    /**
-     * Hardware model.
-     * 
-     * Example: <!--RP6-->TASA00CVN1<!--RP6End-->
-     *
-     * @returns { string }
-     * @syscap SystemCapability.Startup.SystemInfo
-     * @stagemodelonly
-     * @since 24 static
-     */
-    get hardwareProfile(): string;
 
     /**
      * Device serial number (SN).
@@ -742,13 +730,12 @@ declare namespace deviceInfo {
      * This API provides compatibility check across different OpenHarmony/Distribution OS versions.
      * A suitable version check method is automatically selected based on the input format and supported API versions.
      *
-     * @param { string | int } version - API version number to be verified. The value can be an integer or in the
-     *     dotted format.
-     *     - String format shall be in M.S.F (e.g., "26.0.0", "5.0.1"):
-     *     - For API 26.0.0 & 26.0.0+ (version >= 26.0.0): Represents both OpenHarmony and Distribution OS API versions
-     *     - For API 26.0.0- (version < 26.0.0): Represents Distribution OS API version
-     *     - Number format (e.g., 13): Represents OpenHarmony SDK API version (API 26- only)
-     *     M>=26,0<=S<=99,0<=F<=99. A compilation error occurs when an invalid literal is input.
+     * @param { string | int } version - API version to be verified. Supports both integer and string formats.
+     *     <br> The string uses the M.S.F format (for example, "26.0.0" and "5.0.1"), where 0<=S<=99 and 0<=F<=99: 
+     *     <br>&emsp;&emsp;For API 26.0.0 and later (version >= 26.0.0), it represents the OpenHarmony and distribution OS API version.
+     *     <br>&emsp;&emsp;For API earlier than 26.0.0 (version < 26.0.0), it represents the distribution OS API version. 
+     *     <br> The integer format (for example, 13): 
+     *     <br>&emsp;&emsp;Represents the OpenHarmony SDK API version. (Only API earlier than 26 is supported.)
      * @returns { boolean } Boolean value. The value **true** indicates that the current version number is
      *     later than or equal to the input parameter version number; **false** indicates that the current
      *     device's API version is lower than the input version number, or the input version number is in an invalid
@@ -769,5 +756,15 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     get kernelVersion(): string;
+
+    /**
+     * Obtains the system installation UTC timestamp.
+     * Example: 1790784000000.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    get installTime(): string;
 }
 export default deviceInfo;

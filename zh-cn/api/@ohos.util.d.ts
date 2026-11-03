@@ -1811,7 +1811,7 @@ declare namespace util {
      * MIME 规范的 Base64 编码（带换行）以及 URL 安全的 Base64 编码。
      *
      * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
      *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
@@ -1864,7 +1864,7 @@ declare namespace util {
      * 将输入内容编码为字符串。该接口使用 promise 返回结果。
      *
      * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。<br>-
      *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：
@@ -2685,7 +2685,7 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
   }

@@ -539,6 +539,8 @@ declare interface SliderConfiguration extends CommonConfiguration<SliderConfigur
  * 滑动条组件，通常用于快速调节设置值，如音量调节、亮度调节等应用场景。支持样式定制、方向配置、交互方式和无障碍功能，能解决UI一致性问题，提升开发效率，从而改善用户体验并降低开发成本。
  *
  * > **说明：**
+ * >
+ * > - 从API版本26.0.0开始，向Slider组件传入材质参数时，使用组件内部预设的视觉参数。传入的材质参数仅作为开启系统材质的开关标记，不影响实际视觉效果，主要影响Slider组件的视觉属性（如滑块大小、滑块样式、阴影等）。传入undefined时，系统材质不生效，显示原先的滑动条样式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

@@ -1277,7 +1277,7 @@ declare namespace backup {
      *
      * @permission ohos.permission.BACKUP
      * @param { PathInfo } pathInfo - Path information containing source and destination paths.
-     * @param { FileMeta } fileMeta - File metadata containing bundleName and optional fileName.
+     * @param { FileMeta } fileMeta - File metadata containing bundleName and uri.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
      * @throws { BusinessError } 202 - Permission verification failed,

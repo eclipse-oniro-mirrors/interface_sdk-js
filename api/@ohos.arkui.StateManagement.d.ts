@@ -138,7 +138,7 @@ export class ConnectOptions<T extends object> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   ignoreReadOnlyProperties?: boolean;
 }
@@ -511,6 +511,9 @@ export declare type TypeDecorator = <T>(type: TypeConstructor<T>) => PropertyDec
  *
  * Marks the original type of a property, ensuring that the complex type information of the property is correctly
  * retained and restored during serialization.
+ *
+ * type: Original type of the class property to be marked. The value is the constructor of the corresponding class and
+ * must be the same as the type of the decorated property.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1534,6 +1537,19 @@ export declare interface CustomComponentContext {
    * @since 26.0.0 dynamic
    */
   getReusePool(): IReusePool | undefined;
+
+  /**
+   * Obtains the default reuse pool of the custom component.
+   *
+   * @returns { IDefaultReusePool | undefined } If a default reuse pool is available for the current component, the
+   *     default reuse pool is returned. Otherwise, **undefined** is returned.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
 }
 
 /**
@@ -1602,6 +1618,33 @@ export declare interface IReusePool {
    * @since 26.0.0 dynamic
    */
   preRender(builder: WrappedBuilder<[]>, times: number): Promise<void>;
+}
+
+/**
+ * The **IDefaultReusePool** API provides the features related to the default reuse pool of a custom component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface IDefaultReusePool {
+
+  /**
+   * Clears the nodes in the reuse pool of the custom component.
+   *
+   * If **reuseId** is specified, only the nodes of the reusable custom component with the specified **reuseId** are
+   * cleared. If it is not specified, all nodes in the reuse pool are cleared.
+   *
+   * @param { string } [reuseId] - Reuse ID of the reusable custom component in the reuse pool to be cleared.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**

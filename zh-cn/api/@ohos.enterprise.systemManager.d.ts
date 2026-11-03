@@ -778,6 +778,24 @@ declare namespace systemManager {
   }
 
   /**
+   * 音量类型.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export enum AudioVolumeType {
+    /**
+     * 媒体音量.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    STREAM_MUSIC = 1
+  }
+
+  /**
    * 设置NTP(Network Time Protocol)时间服务器。设置成功后，系统将使用指定的NTP服务器进行时间同步，校准系统时间。适用于企业设备需要统一时间同步的场景，确保企业设备时间与标准时间保持一致，避免因时间不准确导致
    * 的业务问题，如日志时间戳不一致、证书验证失败等。
    *
@@ -1558,6 +1576,87 @@ declare namespace systemManager {
    * @since 26.0.1
    */
   function destroyExactTimer(timer: number): Promise<void>;
+
+  /**
+   * 设置设备的本地HOTA域。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } domain - 要设置的本地HOTA域。取值必须符合
+   *     域名规则。校验规则如下：
+   *     1.长度不能超过64个字符。
+   *     2.不支持IP地址和localhost。
+   *     3.域需要完整的请求根地址，必须以https://开头。
+   *     4.域必须匹配以下正则表达式：
+   *     ^(?:[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])？\\.)+[a-zA-Z]{2,}$
+   *     5.传递空字符串意味着将域恢复为其默认值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200018 - This device is not an enterprise device.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function setLocalHotaDomain(domain: string): void;
+
+  /**
+   * 获取设备的本地HOTA域。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @returns { string } 返回本地HOTA域。
+   *     当前设备，返回空字符串作为默认值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200018 - This device is not an enterprise device.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function getLocalHotaDomain(): string;
+
+  /**
+   * 设置指定音量类型的音量值。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - 音量类型。
+   * @param { number } degree - 音量值，取值范围为0～100。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setVolumeDegree(volumeType: AudioVolumeType, degree: number): void;
+
+  /**
+   * 获取指定音量类型的音量值。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { AudioVolumeType } volumeType - 音量类型。
+   * @returns { number } degree - 返回指定音量类型的音量值。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getVolumeDegree(volumeType: AudioVolumeType): number;
 }
 
 export default systemManager;

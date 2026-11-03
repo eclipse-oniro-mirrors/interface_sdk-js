@@ -416,7 +416,8 @@ declare namespace inputConsumer {
   function getAllSystemHotkeys(): Promise<Array<HotkeyOptions>>;
 
   /**
-   * 订阅应用快捷键。获取满足条件的组合按键输入事件，使用callback异步回调。
+   * 订阅应用快捷键。获取满足条件的组合按键输入事件，使用callback异步回调。调用此接口前，建议先调用
+   * [getAllSystemHotkeys]{@link inputConsumer.getAllSystemHotkeys()}接口查询系统快捷键列表，确认待订阅的组合按键未被系统占用，避免订阅失败。
    *
    * @param { 'hotkeyChange' } type - 事件类型，固定取值为'hotkeyChange'。
    * @param { HotkeyOptions } hotkeyOptions - 快捷键选项。

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Provides sorting information about an active notification
+ * @file NotificationSorting
  * @kit NotificationKit
  */
 
@@ -50,7 +50,7 @@ export interface NotificationSorting {
   readonly hashCode: string;
 
   /**
-   * 通知级别，不设置则根据通知渠道类型有默认值。
+   * 通知级别，不设置则根据[通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)类型有默认值。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

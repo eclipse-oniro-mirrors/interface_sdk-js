@@ -170,7 +170,7 @@ export type PasteButtonCallback
   = (event: ClickEvent, result: PasteButtonOnClickResult, error?: BusinessError<void>) => void;
 
 /**
- * 不支持通用属性，仅继承[安全控件通用属性]{@link ./securityComponent}。
+ * 不支持通用属性，仅继承[安全控件通用属性]{@link ./securityComponent:SecurityComponentMethod}。
  *
  * 不支持通用事件，仅支持以下事件。
  *

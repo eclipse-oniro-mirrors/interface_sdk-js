@@ -105,6 +105,7 @@ declare namespace sensor {
      * 气压计传感器类型，用于测量大气压力。
      *
      * @syscap SystemCapability.Sensors.Sensor
+     * @atomicservice [since 26.1.0]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -1456,6 +1457,7 @@ declare namespace sensor {
    * @throws { BusinessError } 14500101 - Service exception. Possible causes: 1. Sensor hdf service exception;
    *     <br> 2. Sensor service ipc exception;3. Sensor data channel exception.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 9 dynamic
    */
   function on(type: SensorId.BAROMETER, callback: Callback<BarometerResponse>, options?: Options): void;
@@ -2285,6 +2287,7 @@ declare namespace sensor {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br> 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 9 dynamic
    */
   function off(type: SensorId.BAROMETER, callback?: Callback<BarometerResponse>): void;
@@ -2298,6 +2301,7 @@ declare namespace sensor {
    * @throws { BusinessError } 14500101 - Service exception. Possible causes: 1. Sensor hdf service exception;
    *     <br> 2. Sensor service ipc exception;3. Sensor data channel exception.
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 19 dynamic
    */
   function off(type: SensorId.BAROMETER, sensorInfoParam?: SensorInfoParam, callback?: Callback<BarometerResponse>): void;
@@ -5984,6 +5988,7 @@ declare namespace sensor {
    * 气压计传感器数据，继承于[Response]{@link sensor.Response}。
    *
    * @syscap SystemCapability.Sensors.Sensor
+   * @atomicservice [since 26.1.0]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -5992,6 +5997,7 @@ declare namespace sensor {
      * 大气压力值。单位：hPa（百帕）。
      *
      * @syscap SystemCapability.Sensors.Sensor
+     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      * @since 23 static
      */

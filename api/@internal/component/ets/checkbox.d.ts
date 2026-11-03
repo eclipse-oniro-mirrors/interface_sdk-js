@@ -51,7 +51,7 @@ declare interface CheckboxOptions {
    *
    * **Note:**
    *
-   * This value is useless when the [CheckboxGroup]{@link ./checkboxgroup} component is not used together.
+   * This value is useless when the [CheckboxGroup]{@link @global:CheckboxGroup} component is not used together.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -136,8 +136,7 @@ declare interface CheckBoxConfiguration extends CommonConfiguration<CheckBoxConf
  * >
  * > Since API version 11, the default style of the **Checkbox** component is changed from rounded square to circle.
  * >
- * > By default, this component has a [margin]{@link CommonMethod#margin} of {&nbsp;top: '14px',&nbsp;right: '14px',&
- * > nbsp;bottom: '14px',&nbsp;left: '14px' }.
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -179,7 +178,7 @@ interface CheckboxInterface {
 declare type OnCheckboxChangeCallback = (value: boolean) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -443,8 +442,7 @@ declare class CheckboxAttribute extends CommonMethod<CheckboxAttribute> {
  * >
  * > Since API version 11, the default style of the **Checkbox** component is changed from rounded square to circle.
  * >
- * > By default, this component has a [margin]{@link CommonMethod#margin} of {&nbsp;top: '14px',&nbsp;right: '14px',&
- * > nbsp;bottom: '14px',&nbsp;left: '14px' }.
+ * > By default, this component has a [margin]{@link CommonMethod#margin} of { top: '14px', right: '14px', bottom: '14px', left: '14px' }.
  *
  * ###### Child Components
  *

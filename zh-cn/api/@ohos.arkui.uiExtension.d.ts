@@ -23,8 +23,8 @@ import window from './@ohos.window';
 /**
  * 用于[EmbeddedUIExtensionAbility](docroot://application-models/embeddeduiextensionability.md)（或
  * [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}）中获取宿主应用的窗口信息或对应的
- * [EmbeddedComponent]{@link ./@internal/component/ets/embedded_component}<!--Del-->（或
- * [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}）<!--DelEnd-->组件的信息。
+ * [EmbeddedComponent]{@link EmbeddedComponent}<!--Del-->（或
+ * [UIExtensionComponent]{@link UIExtensionComponent}）<!--DelEnd-->组件的信息。
  * 
  * > **说明**
  * >
@@ -214,8 +214,8 @@ declare namespace uiExtension {
      * 
      * > **说明：**
      * >
-     * > - 不安全窗口是指可能遮挡[EmbeddedComponent]{@link ./@internal/component/ets/embedded_component}（或
-     * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}）组件的窗口，如全局悬浮窗、宿主子窗口和宿主创建的Dialog窗口
+     * > - 不安全窗口是指可能遮挡[EmbeddedComponent]{@link EmbeddedComponent}（或
+     * > [UIExtensionComponent]{@link UIExtensionComponent}）组件的窗口，如全局悬浮窗、宿主子窗口和宿主创建的Dialog窗口
      * > （不包括系统应用创建的上述类型窗口）。
      * >
      * > - 当EmbeddedComponent（或UIExtensionComponent）组件被用来显示敏感操作提示内容时，可以选择隐藏不安全窗口，保护敏感操作提示内容不会被遮挡。当EmbeddedComponent（或

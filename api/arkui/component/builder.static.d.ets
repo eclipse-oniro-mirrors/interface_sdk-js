@@ -54,7 +54,7 @@ export declare @interface Builder {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   isPlaceholder: boolean = false;
 }
@@ -195,7 +195,7 @@ export type ConstructorT<T> = (() => T);
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @unpublished
- * @since 26.2.0 staticonly
+ * @since 26.1.0 staticonly
  * @noninterop
  */
 export declare function __aceBeginScrollPlaceholder__(): void;
@@ -206,7 +206,7 @@ export declare function __aceBeginScrollPlaceholder__(): void;
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @unpublished
- * @since 26.2.0 staticonly
+ * @since 26.1.0 staticonly
  * @noninterop
  */
 export declare function __aceEndScrollPlaceholder__(): void;

@@ -27,9 +27,6 @@
  *
  * > **NOTE**
  * >
- * > - This component is supported since API version 11. New APIs of later versions are marked with a superscript to
- * > indicate their
- * >
  * > - This component supports inheriting the attributes of the parent **Text** component. That is, if the child
  * > component does not set an attribute but the parent component does, the child component inherits all the attributes
  * > set by the parent component.
@@ -254,9 +251,6 @@ declare class SymbolSpanAttribute extends CommonMethod<SymbolSpanAttribute> {
  *
  * > **NOTE**
  * >
- * > - This component is supported since API version 11. New APIs of later versions are marked with a superscript to
- * > indicate their
- * >
  * > - This component supports inheriting the attributes of the parent **Text** component. That is, if the child
  * > component does not set an attribute but the parent component does, the child component inherits all the attributes
  * > set by the parent component.
@@ -265,7 +259,7 @@ declare class SymbolSpanAttribute extends CommonMethod<SymbolSpanAttribute> {
  *
  * ###### Child Components
  *
- * Not supported
+ * Not supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

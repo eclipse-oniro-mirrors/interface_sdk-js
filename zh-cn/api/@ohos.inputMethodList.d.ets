@@ -49,7 +49,11 @@
  * <br>
  * <br>###### 属性
  * <br>
- * <br>不支持[通用属性]{@link ./@internal/component/ets/common}
+ * <br>不支持[通用属性]{@link CommonMethod}
+ * <br>
+ * <br>###### 事件
+ * <br>
+ * <br>不支持[通用事件]{@link CommonMethod}
  * <br>
  * <br>###### 子组件
  * <br>

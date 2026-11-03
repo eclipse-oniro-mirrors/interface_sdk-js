@@ -214,6 +214,36 @@ declare namespace ConfigurationConstant {
      */
     SCREEN_DENSITY_XXXLDPI = 640
   }
+
+  /**
+   * Enumerates the brand color strategies.
+   *
+   * @syscap SystemCapability.Ability.AbilityBase
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum BrandColorStrategy {
+    /**
+     * The brand color strategy follows the system.
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BRAND_COLOR_FOLLOW_SYSTEM = 0,
+
+    /**
+     * The brand color strategy follows the UIExtensionComponent.
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BRAND_COLOR_FOLLOW_UEC = 1
+  }
 }
 
 export default ConfigurationConstant;

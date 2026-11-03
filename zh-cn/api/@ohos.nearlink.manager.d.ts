@@ -25,7 +25,7 @@ import type { Callback } from '@ohos.base';
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
- * @atomicservice [since 26.2.0]
+ * @atomicservice [since 26.1.0]
  * @since 26.0.0 dynamic
  * @since 26.0.1 static
  */
@@ -37,7 +37,7 @@ declare namespace manager {
    * @returns { boolean } 表示当前设备是否支持星闪。返回true：设备支持星闪。返回false：设备不支持星闪。
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -50,7 +50,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function isFrameType4Supported(): boolean;
 
@@ -71,7 +71,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [disable]{@link disable(): void} 关闭星闪。
@@ -97,7 +97,7 @@ declare namespace manager {
    * @systemapi
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function enableWithOptions(options?: EnableOptions): void;
 
@@ -117,7 +117,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [enable]{@link enable(): void} 打开星闪。
@@ -136,7 +136,7 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -160,7 +160,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -182,7 +182,7 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -204,7 +204,7 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -232,7 +232,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -255,7 +255,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -273,7 +273,7 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offStateChange]{@link offStateChange(callback?: Callback<NearlinkState>): void} 取消订阅星闪开关状态变化事件。
@@ -293,7 +293,7 @@ declare namespace manager {
    * @throws { BusinessError } 36100099 - Operation failed.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onStateChange]{@link onStateChange(callback: Callback<NearlinkState>): void} 订阅星闪开关状态变化事件。
@@ -305,7 +305,7 @@ declare namespace manager {
    *
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -315,7 +315,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -325,7 +325,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -335,7 +335,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -345,7 +345,7 @@ declare namespace manager {
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -358,7 +358,7 @@ declare namespace manager {
    * @syscap SystemCapability.Communication.NearLink.Base
    * @systemapi
    * @stagemodelonly
-   * @atomicservice [since 26.2.0]
+   * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    */
@@ -369,7 +369,7 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -380,7 +380,7 @@ declare namespace manager {
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly
-     * @atomicservice [since 26.2.0]
+     * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      */
@@ -394,7 +394,7 @@ declare namespace manager {
    * @systemapi
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface EnableOptions {
     /**
@@ -405,7 +405,7 @@ declare namespace manager {
      * @systemapi
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     autoConnPolicy?: AutoConnectPolicy;
   }
@@ -417,7 +417,7 @@ declare namespace manager {
    * @systemapi
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   enum AutoConnectPolicy {
     /**
@@ -427,7 +427,7 @@ declare namespace manager {
      * @systemapi
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     AUTO_CONN_GENERAL = 0,
     /**
@@ -437,7 +437,7 @@ declare namespace manager {
      * @systemapi
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     AUTO_CONN_EXCEPT_AUDIO_DEVICES = 1,
     /**
@@ -447,7 +447,7 @@ declare namespace manager {
      * @systemapi
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     AUTO_CONN_EXCEPT_USER_DISCONNECTED_DEVICES = 2
   }

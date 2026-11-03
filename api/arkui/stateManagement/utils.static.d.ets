@@ -609,6 +609,17 @@ export declare interface CustomComponentContext {
   getReusePool(): IReusePool | undefined;
 
   /**
+   * Get default reuse pool from current custom component.
+   *
+   * @returns { IDefaultReusePool | undefined } If a default reuse pool is available for the current component, the
+   *     default reuse pool is returned. Otherwise, **undefined** is returned.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
+
+  /**
    * Register active and inactive callback.
    *
    * @param { ActiveAndInactiveCallbackType } [active] - active function callback.
@@ -619,6 +630,26 @@ export declare interface CustomComponentContext {
    */
   registerActiveAndInactiveCallback(active?: ActiveAndInactiveCallbackType,
     inactive?: ActiveAndInactiveCallbackType): void;
+}
+
+/**
+ * IDefaultReusePool is a default reuse pool interface for custom component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface IDefaultReusePool {
+
+  /**
+   * The clearCache function clears the nodes in the reuse pool.
+   *
+   * @param { string } [reuseId] - the reuse-id of the nodes to be cleared. If it is not set, all nodes are cleared.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**

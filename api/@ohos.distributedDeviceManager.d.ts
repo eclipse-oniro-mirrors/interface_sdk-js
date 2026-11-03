@@ -1495,8 +1495,8 @@ declare namespace distributedDeviceManager {
      *
      * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { 'serviceDie' } type - Event type, which has a fixed value of **'serviceDie'**.
-     * @param { Callback<{}> } callback - Callback invoked when the **DeviceManager** service is terminated
-     *     unexpectedly.
+     * @param { Callback<{}> } [callback] - Callback invoked when the **DeviceManager** service is terminated
+     *     unexpectedly. If this parameter is not passed, the death callback notification cannot be received.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1507,7 +1507,7 @@ declare namespace distributedDeviceManager {
      * @syscap SystemCapability.DistributedHardware.DeviceManager
      * @since 10 dynamic
      */
-    on(type: 'serviceDie', callback: Callback<{}>): void;
+    on(type: 'serviceDie', callback?: Callback<{}>): void;
 
     /**
      * Register a serviceError callback so that the application can be notified when devicemanager service died

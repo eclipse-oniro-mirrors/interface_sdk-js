@@ -232,12 +232,12 @@ declare interface FlexSpaceOptions {
  * > **NOTE**
  * >
  * > - The **Flex** component involves a secondary layout process during rendering. Therefore, in scenarios with strict
- * > performance requirements, you are advised to use [Column]{@link ./column} or [Row]{@link ./row} instead. For best
+ * > performance requirements, you are advised to use [Column]{@link @global:Column} or [Row]{@link @global:Row} instead. For best
  * > practices, see the layout optimization guide - Proper Use of Layout Components.
  * >
  * > - When the main axis length of the **Flex** component is not set, it fills the parent container by default. If a
  * > child component with [position]{@link CommonMethod#position} set is included, the **Flex** component will not fill
- * > the parent container. When the main axis length of the [Column]{@link ./column} or [Row]{@link ./row} component is
+ * > the parent container. When the main axis length of the [Column]{@link @global:Column} or [Row]{@link @global:Row} component is
  * > not set, it follows the child node size by default.
  * >
  * > - When the **Flex**, **Column**, or **Row** component has no child nodes and no width or height is set, the default
@@ -312,12 +312,12 @@ declare class FlexAttribute extends CommonMethod<FlexAttribute> {
  * > **NOTE**
  * >
  * > - The **Flex** component involves a secondary layout process during rendering. Therefore, in scenarios with strict
- * > performance requirements, you are advised to use [Column]{@link ./column} or [Row]{@link ./row} instead. For best
+ * > performance requirements, you are advised to use [Column]{@link @global:Column} or [Row]{@link @global:Row} instead. For best
  * > practices, see the layout optimization guide - Proper Use of Layout Components.
  * >
  * > - When the main axis length of the **Flex** component is not set, it fills the parent container by default. If a
  * > child component with [position]{@link CommonMethod#position} set is included, the **Flex** component will not fill
- * > the parent container. When the main axis length of the [Column]{@link ./column} or [Row]{@link ./row} component is
+ * > the parent container. When the main axis length of the [Column]{@link @global:Column} or [Row]{@link @global:Row} component is
  * > not set, it follows the child node size by default.
  * >
  * > - When the **Flex**, **Column**, or **Row** component has no child nodes and no width or height is set, the default

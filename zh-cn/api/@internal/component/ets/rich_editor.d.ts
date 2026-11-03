@@ -448,7 +448,7 @@ declare interface RichEditorTextStyle {
   textBackgroundStyle?: TextBackgroundStyle;
 
   /**
-   * 文本描边宽度。如果LengthMetrics的unit值是[PERCENT]{@link ../../../arkui/Graphics:LengthUnit}，当前设置不生效，作为0处理。
+   * 文本描边宽度。如果LengthMetrics的unit值是[PERCENT]{@link @ohos.arkui.node:LengthUnit}，当前设置不生效，作为0处理。
    * 
    * 值小于0时为实体字，大于0时为轮廓字，等于0时无描边效果。
    * 
@@ -1501,7 +1501,7 @@ declare interface RichEditorImageSpanResult {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -1794,7 +1794,7 @@ declare interface RichEditorImageSpanOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   imageTag?: string;
 }
@@ -1867,7 +1867,7 @@ declare interface RichEditorBuilderSpanOptions {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderSpanInfo {
   /**
@@ -1878,7 +1878,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   id?: string;
 
@@ -1890,7 +1890,7 @@ declare interface BuilderSpanInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: number;
 }
@@ -1906,7 +1906,7 @@ declare interface BuilderSpanInfo {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface RichEditorBuilderSpan {
   /**
@@ -1916,7 +1916,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   builder: CustomBuilder;
 
@@ -1928,7 +1928,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onAttach?: Callback<BuilderSpanInfo>;
 
@@ -1946,7 +1946,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onDetach?: Callback<BuilderSpanInfo>;
 
@@ -1957,7 +1957,7 @@ declare interface RichEditorBuilderSpan {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -2889,7 +2889,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): number;
 
@@ -2991,7 +2991,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo>;
 
@@ -3142,9 +3142,9 @@ declare class RichEditorStyledStringController extends RichEditorBaseController 
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link ./common}外，还支持[OnDidChangeCallback]{@link OnDidChangeCallback}、
+ * 除支持[通用事件]{@link CommonMethod}外，还支持[OnDidChangeCallback]{@link OnDidChangeCallback}、
  * [StyledStringChangedListener]{@link StyledStringChangedListener}、
  * [StyledStringChangeValue]{@link StyledStringChangeValue}和以下事件：
  *
@@ -3338,7 +3338,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   copyOptions(value: CopyOptions): RichEditorAttribute;
 
   /**
-   * 设置自定义选择菜单。支持自定义菜单风格和触发条件，适合需要深度自定义菜单的场景。自定义菜单超长时，建议内部嵌套[Scroll]{@link ./scroll}组件使用，避免键盘被遮挡。
+   * 设置自定义选择菜单。支持自定义菜单风格和触发条件，适合需要深度自定义菜单的场景。自定义菜单超长时，建议内部嵌套[Scroll]{@link @global:Scroll}组件使用，避免键盘被遮挡。
    *
    * @param { RichEditorSpanType } spanType - 菜单的类型。
    *     <br>默认值：RichEditorSpanType.TEXT
@@ -4166,7 +4166,7 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  * 
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4220,7 +4220,7 @@ declare const RichEditorInstance: RichEditorAttribute;
  * 
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * 
  * ###### 子组件
  * 

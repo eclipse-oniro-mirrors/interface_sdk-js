@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中常用的基本资源类型。
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -21,6 +23,8 @@
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
+
+import image from '../@ohos.multimedia.image';
 import { Vec2, Vec3, Vec4, Aabb, Quaternion } from './SceneTypes';
 import { Callback } from '../@ohos.base';
 
@@ -251,7 +255,7 @@ export enum MaterialType {
   OCCLUSION = 4,
 
   /**
-   * 仅对阴影进行绘制，当材质开启Blend属性，与背景融合模拟透明材质效果。
+   * 仅对阴影进行绘制，当材质开启[Blend]{@link Blend}属性，与背景融合模拟透明材质效果。
    * 
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @systemapi
@@ -497,7 +501,7 @@ export interface MaterialProperty {
   factor: Vec4;
 
   /**
-   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V、W方向的寻址模式为重复（REPEAT）。
+   * 纹理贴图采样器，默认使用放大、缩小和mipmap过滤模式为线性过滤（LINEAR），纹理贴图U、V方向的寻址模式为重复（REPEAT）。
    * 
    * @type { ?Sampler }
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -1262,6 +1266,28 @@ export interface ImageStream extends Image {
    * @since 26.0.0 dynamic&static
    */
   readonly surfaceId: string;
+}
+
+/**
+ * 渲染目标类型，继承自[Image]{@link Image}，用于离屏渲染。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTarget extends Image {
+  /**
+   * 从渲染目标对象获取渲染结果的PixelMap，返回的PixelMap不可编辑，使用Promise异步回调。渲染目标对象已销毁时调用该接口抛出错误码25601006。
+   *
+   * @returns { Promise<image.PixelMap> } Promise对象，返回渲染结果对应的PixelMap。
+   * @throws { BusinessError } 25601006 - Expired or invalid resource.
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  getPixelMap(): Promise<image.PixelMap>;
 }
 
 /**

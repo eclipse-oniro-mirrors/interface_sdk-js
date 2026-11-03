@@ -17,15 +17,15 @@
  * @file RunningAppClone
  * @kit AbilityKit
  */
+
 /**
- * # How to Use
+ * The RunningAppClone module defines the information of an application clone in the running state.
+ *
+ * ###### How to Use
  *
  * The RunningAppClone struct is obtained from
  * [getRunningMultiAppInfo]{@link ./../@ohos.app.ability.appManager:appManager.getRunningMultiAppInfo} of
  * **appManager**.
- */
-/**
- * The RunningAppClone module defines the information of an application clone in the running state.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @systemapi
@@ -34,7 +34,9 @@
  */
 export interface RunningAppClone {
   /**
-   * Index of an application clone.
+   * Index of the app clone, used to identify different clone instances. The index starts from 0 and
+   *  increments in the order in which clones are created. 0 indicates the primary app instance, and
+   *  1 or greater indicates a clone instance.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -54,7 +56,8 @@ export interface RunningAppClone {
   uid: int;
 
   /**
-   * Process ID set of the application.
+   * Set of process IDs of the application, including the process IDs of all running processes of the application.
+   *  An application may run multiple processes, so an array is returned.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

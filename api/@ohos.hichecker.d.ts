@@ -180,7 +180,10 @@ declare namespace hichecker {
    * You can use **grep HiChecker** to check for the application running information in the hilog.
    *
    * @param { bigint } rule - Rule to be added.
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static
@@ -191,7 +194,10 @@ declare namespace hichecker {
    * Removes one or more rules. The removed rules will become ineffective.
    *
    * @param { bigint } rule - Rule to be removed.
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static
@@ -205,7 +211,10 @@ declare namespace hichecker {
    * @param { bigint } rule - Rule to be checked.
    * @returns { boolean } Check result. If the rule exists in the collection of added rules, **true** is returned;
    *     otherwise, **false** is returned.
-   * @throws { BusinessError } 401 - the parameter check failed, only one bigint type parameter is needed
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.HiviewDFX.HiChecker
    * @since 9 dynamic
    * @since 23 static

@@ -30,6 +30,8 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
   * 本模块提供管理Web模块的能力。
   *
+  * ## 需要权限
+  *
   * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
   *
   * @namespace webview
@@ -4522,6 +4524,46 @@ declare namespace webview {
         setErrorPageEnabled(enable: boolean): void;
 
         /**
+         * 设置是否启用错误页面的自动重载。
+         *
+         * 启用后，Web组件会在出现网络错误时自动重试加载，
+         * 使用重试退避序列：1s → 5s → 30s → 1min → 5min → 10min → 30min。
+         * 最多重试7次后停止。
+         *
+         * > **说明**
+         * >
+         * > - 只有网络错误才会触发自动重新加载。不包括以下内容：
+         * > 证书错误、SSL（安全套接字层）协议错误、身份验证错误、
+         * > POST请求、非HTTP(S)协议和客户端拦截的错误。
+         * > - 自动重新加载不会影响{@link onOverrideErrorPage}回调。
+         * > - 当触发自动重新加载时，{@link onErrorReceive}回调将被
+         * > 每次重试都会重新调用。
+         *
+         * @param { boolean } enable - 是否启用自动重载。值**true**启用它，
+         *     和**false**禁用它。
+         * @throws { BusinessError } 17100001 - 初始化错误。
+         *     WebviewController必须与Web组件关联。
+         *     调用该接口前，请确保WebviewController关联了Web组件。
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        enableAutoReload(enable: boolean): void;
+
+        /**
+         * 获取是否启用错误页面的自动重载。
+         *
+         * @returns { boolean } 是否使能自动重新加载。如果启用，则返回**true**，否则返回**false**。
+         * @throws { BusinessError } 17100001 - 初始化错误。
+         *     WebviewController必须与Web组件关联。
+         *     调用该接口前，请确保WebviewController关联了Web组件。
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        isAutoReloadEnabled(): boolean;
+
+        /**
          * After enable PrivateNetworkAccess feature, ArkWeb will send a CORS preflight request before issuing any
          * sub-resource private network requests to request explicit permission from the target server.
          * After disable PrivateNetworkAccess, ArkWeb will no longer check whether the private network request
@@ -4699,7 +4741,7 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         setZoomFactor(zoomFactor: double): void;
 
@@ -4712,7 +4754,7 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         getZoomFactor(): double;
     }

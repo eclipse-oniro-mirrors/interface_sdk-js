@@ -372,13 +372,13 @@ declare enum VisibilityChangeReason {
 }
 
 /**
-* NavDestination作为[Navigation]{@link navigation}的子页面根容器，用于显示Navigation的内容区。支持自定义标题栏和工具栏、管理页面生命周期、配置系统/自定义转场动画、
+* NavDestination作为[Navigation]{@link @global:Navigation}的子页面根容器，用于显示Navigation的内容区。支持自定义标题栏和工具栏、管理页面生命周期、配置系统/自定义转场动画、
 * 绑定可滚动组件联动等功能。当需要实现多页面导航、管理页面状态、自定义页面交互效果时，使用本组件。
 *
 * > **说明：**
 *
 * > - 该组件从API version 11开始默认支持安全区避让特性(默认值为：expandSafeArea([SafeAreaType.SYSTEM],
-* > [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link common}属性实现
+* > [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link CommonMethod}属性实现
 * > 安全区避让。
 * >
 * > - NavDestination组件必须配合Navigation使用，作为Navigation目的页面的根节点，单独使用只能作为普通容器组件，不具备路由相关属性能力。
@@ -399,7 +399,7 @@ declare enum VisibilityChangeReason {
 declare interface NavDestinationInterface {
 
   /**
-   * 创建[Navigation]{@link navigation}子页面的根容器。
+   * 创建[Navigation]{@link @global:Navigation}子页面的根容器。
    *
    * @returns { NavDestinationAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -642,9 +642,9 @@ declare interface NavDestinationTransition {
 }
 
 /**
-* 支持[通用属性]{@link common}。
+* 支持[通用属性]{@link CommonMethod}。
 *
-* 除支持[通用事件]{@link common}外，还支持如下事件：
+* 除支持[通用事件]{@link CommonMethod}外，还支持如下事件：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1078,8 +1078,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   systemTransition(type: NavigationSystemTransitionType): NavDestinationAttribute;
 
   /**
-   * 绑定NavDestination组件和可滚动容器组件（支持[List]{@link list}、[Scroll]{@link scroll}、[Grid]{@link grid}、
-   * [WaterFlow]{@link water_flow}），当滑动可滚动容器组件时，会触发所有与其绑定的NavDestination组件的标题栏和工具栏的显示和隐藏动效，上滑隐藏，下滑显示。一个NavDestination可与多
+   * 绑定NavDestination组件和可滚动容器组件（支持[List]{@link @global:List}、[Scroll]{@link @global:Scroll}、[Grid]{@link @global:Grid}、
+   * [WaterFlow]{@link @global:WaterFlow}），当滑动可滚动容器组件时，会触发所有与其绑定的NavDestination组件的标题栏和工具栏的显示和隐藏动效，上滑隐藏，下滑显示。一个NavDestination可与多
    * 个可滚动容器组件绑定，一个可滚动容器组件也可与多个NavDestination绑定。使用示例参见
    * [示例1](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#示例1标题栏工具栏与可滚动类组件联动)。
    *
@@ -1103,8 +1103,8 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
   bindToScrollable(scrollers: Array<Scroller>): NavDestinationAttribute;
 
   /**
-   * 绑定NavDestination组件和嵌套的可滚动容器组件（支持[List]{@link list}、[Scroll]{@link scroll}、[Grid]{@link grid}、
-   * [WaterFlow]{@link water_flow}），当滑动父组件或子组件时，会触发所有与其绑定的NavDestination组件的标题栏和工具栏的显示和隐藏动效，上滑隐藏，下滑显示。一个NavDestination可与多
+   * 绑定NavDestination组件和嵌套的可滚动容器组件（支持[List]{@link @global:List}、[Scroll]{@link @global:Scroll}、[Grid]{@link @global:Grid}、
+   * [WaterFlow]{@link @global:WaterFlow}），当滑动父组件或子组件时，会触发所有与其绑定的NavDestination组件的标题栏和工具栏的显示和隐藏动效，上滑隐藏，下滑显示。一个NavDestination可与多
    * 个嵌套的可滚动容器组件绑定，嵌套的可滚动容器组件也可与多个NavDestination绑定。使用示例参见
    * [示例1](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-navdestination.md#示例1标题栏工具栏与可滚动类组件联动)。
    *
@@ -1335,12 +1335,12 @@ declare class NavDestinationAttribute extends CommonMethod<NavDestinationAttribu
 }
 
 /**
-* 作为子页面的根容器，用于显示[Navigation]{@link navigation}的内容区。
+* 作为子页面的根容器，用于显示[Navigation]{@link @global:Navigation}的内容区。
 *
 * > **说明：**
 *
 * > - 该组件从API version 11开始默认支持安全区避让特性(默认值为：expandSafeArea([SafeAreaType.SYSTEM],
-* > [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link common}属性实现
+* > [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link CommonMethod}属性实现
 * > 安全区避让。
 * >
 * > - NavDestination组件必须配合Navigation使用，作为Navigation目的页面的根节点，单独使用只能作为普通容器组件，不具备路由相关属性能力。

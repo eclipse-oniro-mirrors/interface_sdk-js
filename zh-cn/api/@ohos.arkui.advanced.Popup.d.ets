@@ -14,6 +14,16 @@
 */
 
 /**
+ * Popup是用于显示特定样式气泡的组件，支持图标、文本和按钮的灵活组合，适用于通知提示、信息确认、警告提示等场景。通过可定制的样式选项，能够快速实现一致的气泡交互体验。
+ * 
+ * >  **说明：**
+ * >
+ * > - 建议结合[Popup控制]{@link common}中的自定义气泡功能。
+ * 
+ * ###### 子组件
+ * 
+ * 无
+ * 
  * @file
  * @kit ArkUI
  */
@@ -179,7 +189,7 @@ export interface PopupIconOptions {
   /**
    * 设置图标宽度。单位：vp。
    * 
-   * 默认值：32VP
+   * 默认值：32vp
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -192,7 +202,7 @@ export interface PopupIconOptions {
   /**
    * 设置图标高度。单位：vp。
    * 
-   * 默认值：32VP
+   * 默认值：32vp
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -348,7 +358,7 @@ export interface PopupOptions {
    * **说明：** 
    * 
    * 1. 在使用引用资源类型时，规定其参数类型要与属性方法本身类型一致。
-   * 2. maxWidth是数字类型，支持float和integer，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`。
+   * 2. maxWidth是[Dimension]{@link Dimension}类型，支持数字类型和百分比字符串类型。数字类型支持float和integer，例如`$r('app.float.maxWidth')`、`$r('app.integer.maxWidth')`；百分比字符串，例如'50%'。
    * 3. 当类型为Resource时，如果未设置单位，默认单位为px。
    * 
    * 默认值：400vp

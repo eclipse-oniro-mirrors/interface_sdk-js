@@ -81,7 +81,8 @@ export declare enum SecurityComponentRoleType {
  * 安全控件通用属性模块，提供安全控件的布局、尺寸、文字、图标、颜色、边框和交互等通用属性的统一配置能力。
  *
  * 本模块主要用于以下场景：
- * - 为[PasteButton]{@link ./pasteButton}、[SaveButton]{@link ./saveButton}等安全控件统一设置布局、尺寸、文字、图标、颜色、边框和交互相关属性。
+ * - 为[PasteButton]{@link ./pasteButton:PasteButton}、[SaveButton]{@link ./saveButton:SaveButton}等安全控件统一设置
+ * 布局、尺寸、文字、图标、颜色、边框和交互相关属性。
  * - 在满足安全控件规范的前提下，调整安全控件显示效果和交互体验。具体约束请参见
  * [约束与限制](docroot://security/AccessToken/security-component-overview.md#约束与限制)。
  * - 通过链式调用方式复用安全控件通用属性能力。
@@ -431,12 +432,12 @@ export declare interface SecurityComponentMethod {
    */
   align(alignType: Alignment | undefined): this;
   /**
-   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relativeContainer}时生效。
+   * 设置在相对容器中子组件的对齐规则，仅当父容器为[RelativeContainer]{@link ./relativeContainer:RelativeContainer}时生效。
    * 水平方向上，LocalizedAlignRuleOptions以start和end分别替代AlignRuleOption的left和right，以便在RTL模式下能镜像显示，
    * 建议优先使用LocalizedAlignRuleOptions。
    *
    * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } alignRule - 对齐规则配置对象，包含top、bottom、left/start、
-   *     right/end、center等锚点对齐配置，用于指定安全控件在[RelativeContainer]{@link ./relativeContainer}中的对齐位置和方式。
+   *     right/end、center等锚点对齐配置，用于指定安全控件在[RelativeContainer]{@link ./relativeContainer:RelativeContainer}中的对齐位置和方式。
    *     <br>设置undefined时不生效。
    * @returns { SecurityComponentMethod } 返回安全控件的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -457,10 +458,10 @@ export declare interface SecurityComponentMethod {
    */
   id(id: string | undefined): this;
   /**
-   * 设置以该组件为链头所构成的链式布局的参数（包括链的方向和样式），仅当父容器为[RelativeContainer]{@link ./relativeContainer}时生效。
+   * 设置以该组件为链头所构成的链式布局的参数（包括链的方向和样式），仅当父容器为[RelativeContainer]{@link ./relativeContainer:RelativeContainer}时生效。
    *
-   * @param { Axis | undefined } direction - 链式布局的方向，用于指定以该组件为链头的链在[RelativeContainer]{@link ./relativeContainer}
-   *     中的排列方向。
+   * @param { Axis | undefined } direction - 链式布局的方向，用于指定以该组件为链头的链在
+   *     [RelativeContainer]{@link ./relativeContainer:RelativeContainer}中的排列方向。
    *     <br>设置undefined时不生效。
    * @param { ChainStyle | undefined } style - 链式布局的样式，用于控制链内子组件的分布方式，如均匀分布、两端对齐或紧凑排列等，
    *     具体取值及效果请参考[ChainStyle]{@link ChainStyle}。
