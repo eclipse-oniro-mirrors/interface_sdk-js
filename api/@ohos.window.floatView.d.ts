@@ -101,7 +101,7 @@ declare namespace floatView {
    * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
    *     1. This window context is abnormal.
    *     2. System error, such as a null pointer, insufficient memory or a JS engine exception.
-   * @throws { BusinessError } 1300016 - Parameter validation error.
+   * @throws { BusinessError } 1300016 - Parameter error.
    *     Possible cause: Invalid template type.
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -192,7 +192,7 @@ declare namespace floatView {
    *     System error, such as a null pointer, insufficient memory or a JS engine exception.
    * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
    *     Internal IPC error.
-   * @throws { BusinessError } 1300016 - Parameter validation error. Possible cause: Invalid template type.
+   * @throws { BusinessError } 1300016 - Parameter error. Possible cause: Invalid template type.
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -289,7 +289,7 @@ declare namespace floatView {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
-     * @throws { BusinessError } 1300016 - Parameter validation error. Possible causes: Invalid path.
+     * @throws { BusinessError } 1300016 - Parameter error. Possible causes: Invalid path.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -304,7 +304,7 @@ declare namespace floatView {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
-     * @throws { BusinessError } 1300016 - Parameter validation error. Possible causes: Invalid name.
+     * @throws { BusinessError } 1300016 - Parameter error. Possible causes: Invalid name.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -326,7 +326,7 @@ declare namespace floatView {
      *     The float view controller object is null.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
      *     Internal IPC error.
-     * @throws { BusinessError } 1300016 - Parameter validation error.
+     * @throws { BusinessError } 1300016 - Parameter error.
      *     Possible cause: The value of the size is less than or equal to 0.
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -349,7 +349,7 @@ declare namespace floatView {
      *     The float view controller object is null.
      * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause:
      *     Internal IPC error.
-     * @throws { BusinessError } 1300016 - Parameter validation error. Possible cause:
+     * @throws { BusinessError } 1300016 - Parameter error. Possible cause:
      *     1. Invalid template type.
      *     2. The value of the size is less than or equal to 0.
      * @syscap SystemCapability.Window.SessionManager
