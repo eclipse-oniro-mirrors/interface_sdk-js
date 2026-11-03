@@ -7047,7 +7047,7 @@ declare namespace media {
    *     enter the released state.
    * @unionmember { 'error' } The AVRecorder enters this state when an irreversible error occurs in the AVRecorder
    *     instance. In this state, the
-   *     [AVRecorder.on('error') event]{@link @ohos.multimedia.media:media.AVRecorder.on(type: 'error', callback: ErrorCallback)}
+   *     [AVRecorder.on('error')]{@link @ohos.multimedia.media:media.AVRecorder.on(type: 'error', callback: ErrorCallback)}
    *     is reported, with the detailed error cause. In the error state, you must call
    *     [AVRecorder.reset()]{@link @ohos.multimedia.media:media.AVRecorder.reset(callback: AsyncCallback<void>)} to
    *     reset the AVRecorder instance or call
@@ -7076,10 +7076,18 @@ declare namespace media {
   type OnAVRecorderStateChangeHandler = (state: AVRecorderState, reason: StateChangeReason) => void;
 
   /**
-   * AVRecorder is a class for audio and video recording management. It provides APIs to record media assets. Before 
-   * calling any API in AVRecorder, you must use 
-   * [createAVRecorder()]{@link @ohos.multimedia.media:media.createAVRecorder(callback: AsyncCallback<AVRecorder>)} to 
-   * create an AVRecorder instance.
+   * The **AVRecorder** class is used to manage the entire audio and video recording process, including audio recording,
+   * video recording, and audio-video recording. It can be used to flexibly configure encoding parameters, add
+   * watermarks, set metadata, and listen for the recording status and error events. It can be used to record audio and
+   * video and saved them to files, including scenarios where recording continuity needs to be maintained when the audio
+   * is interrupted and audio amplitude needs to be monitored in real time. Before calling the methods of the AVRecorder
+   * class, you need to call the [createAVRecorder]{@link media.createAVRecorder()} API to create an **AVRecorder**
+   * instance. Typical recording process: [createAVRecorder]{@link media.createAVRecorder()} →
+   * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} →
+   * [getInputSurface]{@link media.AVRecorder#getInputSurface()} (for video-only or audio and video recording) →
+   * [start]{@link media.AVRecorder#start()} →
+   * [pause]{@link media.AVRecorder#pause()}/[resume]{@link media.AVRecorder#resume()} →
+   * [stop]{@link media.AVRecorder#stop()} → [release]{@link media.AVRecorder#release()}.
    * 
    * For details about the audio and video recording demo, see 
    * [Audio Recording](docroot://media/media/using-avrecorder-for-recording.md) and 
@@ -7098,15 +7106,24 @@ declare namespace media {
    */
   interface AVRecorder {
     /**
-     * Sets audio and video recording parameters. This API uses an asynchronous callback to return the result.
+     * Prepares for recording. This method can be used to set audio and video recording parameters and initializes the
+     * recording context. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called before [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}. After this
+     * API is successfully called, the recording enters the prepared state. For audio-only recording, you can directly
+     * call [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)} to start recording. For video-only or
+     * audio and video recording, you need to call
+     * [getInputSurface]{@link media.AVRecorder#getInputSurface(callback: AsyncCallback<string>)} to obtain the surface
+     * and then call [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)} to start recording.
      *
      * @permission ohos.permission.MICROPHONE
-     * @param { AVRecorderConfig } config - Audio and video recording parameters to set.
+     * @param { AVRecorderConfig } config - Audio and video recording parameters to set. You need to set
+     *     **audioSourceType** for audio recording and **videoSourceType** for video recording.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
-     * @throws { BusinessError } 201 - Permission denied. Return by callback.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. Return by callback.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7117,15 +7134,22 @@ declare namespace media {
     prepare(config: AVRecorderConfig, callback: AsyncCallback<void>): void;
 
     /**
-     * Sets audio and video recording parameters. This API uses a promise to return the result.
-     * The MICROPHONE permission is required only if audio recording is involved.
+     * Prepares for recording. This method can be used to set audio and video recording parameters and initializes the
+     * recording context. This API uses a promise to return the result.<br>
+     * This API must be called before [start]{@link media.AVRecorder#start()}. After this API is successfully called,
+     * the recording enters the prepared state. For audio-only recording, you can directly call
+     * [start]{@link media.AVRecorder#start()} to start recording. For video-only or audio and video recording, you need
+     * to call [getInputSurface]{@link media.AVRecorder#getInputSurface()} to obtain the surface and then call
+     * [start]{@link media.AVRecorder#start()} to start recording.
      * 
      * @permission ohos.permission.MICROPHONE
-     * @param { AVRecorderConfig } config - Audio and video recording parameters to set.
+     * @param { AVRecorderConfig } config - Audio and video recording parameters to set. You need to set
+     *     **audioSourceType** for audio recording and **videoSourceType** for video recording.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied. Return by promise.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7137,11 +7161,11 @@ declare namespace media {
     prepare(config: AVRecorderConfig): Promise<void>;
 
     /**
-     * Obtains the real-time configuration of this AVRecorder. This API uses an asynchronous callback to return the 
-     * result.
-     * 
-     * This API can be called only after 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} is called.
+     * Obtains the real-time configuration of this AVRecorder. This method is applicable to scenarios where you need to
+     * check whether the recording configuration is correctly applied, such as debugging recording parameters and
+     * verifying whether the configuration takes effect. This API uses an asynchronous callback to return the result.
+     * <br>This API must be called after
+     * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}.
      *
      * @param { AsyncCallback<AVRecorderConfig> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined** and **data** is the real-time configuration obtained; otherwise, **err**
@@ -7172,10 +7196,10 @@ declare namespace media {
     getAVRecorderConfig(callback: AsyncCallback<AVRecorderConfig | undefined>): void;
 
     /**
-     * Obtains the real-time configuration of this AVRecorder. This API uses a promise to return the result.
-     * 
-     * This API can be called only after [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} is 
-     * called.
+     * Obtains the real-time configuration of this AVRecorder. This method is applicable to scenarios where you need to
+     * check whether the recording configuration is correctly applied, such as debugging recording parameters and
+     * verifying whether the configuration takes effect. This API uses a promise to return the result.<br>
+     * This API must be called after [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}.
      *
      * @returns { Promise<AVRecorderConfig> } Promise used to return the real-time configuration.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -7200,16 +7224,17 @@ declare namespace media {
     getAVRecorderConfig(): Promise<AVRecorderConfig | undefined>;
 
     /**
-     * Obtains the surface required for recording. This API uses an asynchronous callback to return the result.
-     * 
-     * The caller obtains the surface buffer from this surface and fills in the corresponding video data.
-     * 
-     * Note that the video data must carry the timestamp (in ns) and buffer size, and the start time of the timestamp 
-     * must be based on the system startup time.
-     * 
-     * This API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called.
+     * Obtains the surface required for recording. This method is applicable to scenarios where a surface is required to
+     * transfer video data during video-only or audio-video recording. The camera module is required for video
+     * recording. For details about how to use the camera module API, see
+     * [Camera Management]{@link @ohos.multimedia.camera:camera}. This API uses an asynchronous callback to return the
+     * result.<br>
+     * The caller obtains the surface buffer from this surface and fills in data of the video to be recorded.<br>
+     * The video data must contain the timestamp (in ns) and buffer size. The start time of the timestamp must be based
+     * on the system startup time.<br>
+     * This API must be called between
+     * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} and
+     * [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}.
      *
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined** and **data** is the surface ID obtained; otherwise, **err** is an error object.
@@ -7242,17 +7267,17 @@ declare namespace media {
     getInputSurface(callback: AsyncCallback<string | undefined>): void;
 
     /**
-     * Obtains the surface required for recording. This API uses a promise to return the result.
-     * 
-     * The caller obtains the surface buffer from this surface and fills in the corresponding video data.
-     * 
-     * Note that the video data must carry the timestamp (in ns) and buffer size, and the start time of the timestamp 
-     * must be based on the system startup time.
-     * 
-     * This API can be called only after the [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} API 
-     * is called.
+     * Obtains the surface required for recording. This method is applicable to scenarios where a surface is required to
+     * transfer video data during video-only or audio-video recording. The camera module is required for video
+     * recording. For details about how to use the camera module API, see
+     * [Camera Management]{@link @ohos.multimedia.camera:camera}. This API uses a promise to return the result.<br>
+     * The caller obtains the surface buffer from this surface and fills in data of the video to be recorded. The video
+     * data to be filled must contain the timestamp (in ns) and buffer size. The start time of the timestamp must be
+     * based on the system startup time.<br>
+     * This API must be called between [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and
+     * [start]{@link media.AVRecorder#start()}.
      *
-     * @returns { Promise<string> } Promise used to return the surface buffer obtained from the surface.
+     * @returns { Promise<string> } Promise used to return the obtained surface ID.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7286,7 +7311,7 @@ declare namespace media {
      * @returns { Promise<string> } A Promise instance used to return the input surface id in string.
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7303,7 +7328,7 @@ declare namespace media {
      * @returns { Promise<string | undefined> } A Promise instance used to return the input surface id in string.
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7316,7 +7341,7 @@ declare namespace media {
     /**
      * Checks whether the device supports the hardware digital watermark. This API uses a promise to return the result.
      * 
-     * This API can be called after the prepare(), start(), or paused() event is triggered.
+     * This API can be called after the prepare(), start(), or pause() event is triggered.
      *
      * @returns { Promise<boolean> } Promise used to return the check result. The value **true** means that
      *     the device supports the hardware digital watermark, and **false** means the opposite.
@@ -7335,7 +7360,10 @@ declare namespace media {
      * @param { image.PixelMap } watermark : Watermark image.
      * @param { WatermarkConfig } config : Configures of the watermark.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - The parameter check failed.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types.
+     *     3. Parameter verification failed.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @systemapi
@@ -7345,13 +7373,16 @@ declare namespace media {
     setWatermark(watermark: image.PixelMap, config: WatermarkConfig): Promise<void>
 
     /**
-     * add a watermark for the AVRecorder. This API uses a promise to return the result.
-     * App can add up to 5 watermarks.
-     * This API can be called only before the prepared state.
+     * Adds a custom watermark to a video. This method is applicable to scenarios where watermarks such as brand logos,
+     * copyright information, or timestamps need to be embedded into videos. This API uses a promise to return the
+     * result.<br>
+     * > **NOTE**
+     * > - A maximum of five watermarks can be added to an application.
+     * > - This API must be called before [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}.
      *
-     * @param { image.PixelMap } watermark - : Watermark image.
-     * @param { WatermarkConfiguration } config - : Configuration of the watermark.
-     * @returns { Promise<int> } Promise that returns the watermark id.
+     * @param { image.PixelMap } watermark - : Watermark image. The image will be overlaid as a watermark on the video.
+     * @param { WatermarkConfiguration } config - : Parameters for configuring the watermark of video recording.
+     * @returns { Promise<int> } Promise used to return the ID of the added watermark. The value range is [1, 5].
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7363,17 +7394,18 @@ declare namespace media {
     addWatermark(watermark: image.PixelMap, config: WatermarkConfiguration): Promise<int>;
 
     /**
-     * Set metadata (key-value pairs) for the recording file of the recorder.
-     * This metadata overwrites the value in config.metadata.customInfo (see {prepare()} and {AVRecorderConfig})
-     * if they have same key.
-     * 
-     * This API can be called only after the prepare() event is successfully triggered and
-     * before the stop() API is called.
+     * Sets the metadata information to record. This method is applicable to scenarios where you need to embed custom
+     * metadata (such as the author, title, and tags) into recorded files. If the **metadata** parameter contains the
+     * same key as **config.metadata.customInfo** (refer to
+     * [prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and
+     * [AVRecorderConfig]{@link media.AVRecorderConfig}), the value of the former will overwrite that of the latter.<br>
+     * This API must be called after [prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and before
+     * [stop()]{@link media.AVRecorder#stop()}.
      *
-     * @param { Record<string, string> } metadata - Tag and value of the metadata in key-value pairs.
-     *     <br>- The first string is the key.<br>- The second string is the value.
-     *     <br> The key string should start with "com.openharmony.", the length of value can't be more than 256 bytes.
-     * @throws { BusinessError } 202 - Not System App. [since 19 - 24]
+     * @param { Record<string, string> } metadata - Metadata information to record.<br>The value is a string key-value
+     *     pair. The key must start with **com.openharmony**. If not, the key-value pair will be ignored. The value can
+     *     contain 0 to 256 bytes. If the value is out of range, error code 5400108 is returned.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 19 - 24]
      * @throws { BusinessError } 5400101 - No memory. [since 26.0.0]
      * @throws { BusinessError } 5400102 - Operation not allowed. [since 26.0.0]
      * @throws { BusinessError } 5400108 - Parameter check failed. [since 26.0.0]
@@ -7386,15 +7418,17 @@ declare namespace media {
     setMetadata(metadata: Record<string, string>): void;
 
     /**
-     * Updates the video rotation angle, in degrees. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} event
-     * is triggered and before the [start()]{@link media.AVRecorder.start(callback: AsyncCallback<void>)} API is called.
+     * Updates the video rotation angle. This API applies to scenarios where the rotation angle of the video to record
+     * needs to be dynamically adjusted when the device orientation changes (for example, switching between landscape
+     * and portrait modes). This API uses a promise to return the result.<br>
+     * This API must be called between [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and
+     * [start]{@link media.AVRecorder#start()}.
      *
-     * @param { int } rotation - Rotation angle, which can only be 0, 90, 180, or 270 degrees.
+     * @param { int } rotation - Angle to rotate, in degrees (°), which can only be **0**, **90**, **180**, or **270**.
+     *     If an invalid value is passed, error code 401 is returned.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7405,11 +7439,18 @@ declare namespace media {
     updateRotation(rotation: int): Promise<void>;
 
     /**
-     * Sets whether to mute the current audio recording stream when an audio interruption occurs. This API uses a 
-     * promise to return the result.
+     * Sets whether to mute the current audio recording stream when an audio interruption occurs. After this function is
+     * enabled, the recording will be muted instead of being stopped when the audio recording stream is interrupted by
+     * an audio stream with a higher priority. This function is applicable to scenarios where recording continuity needs
+     * to be maintained during interruptions, such as conference recording and voice notes. If this function is
+     * disabled, the default interruption mode is used, that is, recording stops when the audio stream is interrupted.
+     * This API uses a promise to return the result.<br>
+     * This API must be called before [prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}.
      *
-     * @param { boolean } muteWhenInterrupted - Whether to mute the current audio recording stream during an audio
-     *     interruption. **true** to mute, **false** otherwise.
+     * @param { boolean } muteWhenInterrupted - Sets whether to mute the current audio recording stream when an audio
+     *     interruption occurs. The value **true** indicates that the function is enabled, and the recording is muted
+     *     when the audio stream is interrupted. The value **false** indicates that the function is disabled, and the
+     *     recording stops when the audio stream is interrupted.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7420,15 +7461,15 @@ declare namespace media {
     setWillMuteWhenInterrupted(muteWhenInterrupted: boolean): Promise<void>;
 
     /**
-     * Starts video recording. This API uses an asynchronous callback to return the result.
-     * 
-     * For audio-only recording, this API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called. For video-only recording, this API can be called only after the 
-     * [getInputSurface()]{@link media.AVRecorder.getInputSurface(callback: AsyncCallback<string>)} API is called.
+     * Starts recording. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called after
+     * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}. After this
+     * API is successfully called, the AVRecorder enters the started state. For video recording, this API can be called
+     * only after the [getInputSurface]{@link media.AVRecorder#getInputSurface(callback: AsyncCallback<string>)} API is
+     * successfully called.
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the recording starts
+     *     successfully, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
@@ -7440,12 +7481,10 @@ declare namespace media {
     start(callback: AsyncCallback<void>): void;
 
     /**
-     * Starts video recording. This API uses a promise to return the result.
-     * 
-     * For audio-only recording, this API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} API is called. For video-only recording, 
-     * this API can be called only after the [getInputSurface()]{@link media.AVRecorder.getInputSurface()} API is 
-     * called.
+     * Starts recording. This API uses a promise to return the result.<br>
+     * This API must be called after [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}. After this API
+     * is successfully called, the AVRecorder enters the started state. For video recording, this API can be called only
+     * after the [getInputSurface]{@link media.AVRecorder#getInputSurface()} API is successfully called.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -7460,14 +7499,13 @@ declare namespace media {
     start(): Promise<void>;
 
     /**
-     * Pauses video recording. This API uses an asynchronous callback to return the result.
-     * 
-     * This API can be called only after the [start()]{@link media.AVRecorder.start(callback: AsyncCallback<void>)} API 
-     * is called. You can call [resume()]{@link media.AVRecorder.resume(callback: AsyncCallback<void>)} to resume 
-     * recording.
+     * Pauses recording. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called after [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}. After this
+     * API is successfully called, the AVRecorder enters the paused state. You can then call
+     * [resume]{@link media.AVRecorder#resume(callback: AsyncCallback<void>)} to resume recording.
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the recording is paused
+     *     successfully, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
@@ -7479,10 +7517,10 @@ declare namespace media {
     pause(callback: AsyncCallback<void>): void;
 
     /**
-     * Pauses video recording. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the [start()]{@link media.AVRecorder.start()} API is called. You can call 
-     * [resume()]{@link media.AVRecorder.resume()} to resume recording.
+     * Pauses recording. This API uses a promise to return the result.<br>
+     * This API must be called after [start]{@link media.AVRecorder#start()}. After this API is successfully called, the
+     * AVRecorder enters the paused state. You can then call [resume]{@link media.AVRecorder#resume()} to resume
+     * recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -7497,13 +7535,14 @@ declare namespace media {
     pause(): Promise<void>;
 
     /**
-     * Resumes video recording. This API uses an asynchronous callback to return the result.
-     * 
-     * This API can be called only after the [pause()]{@link media.AVRecorder.pause(callback: AsyncCallback<void>)} API 
-     * is called.
+     * Resumes recording. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called after [pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}. After this
+     * API is successfully called, the AVRecorder enters the started state. You can then call
+     * [pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)} again to pause recording or call
+     * [stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)} to stop recording.
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the recording is resumed
+     *     successfully, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
@@ -7515,9 +7554,10 @@ declare namespace media {
     resume(callback: AsyncCallback<void>): void;
 
     /**
-     * Resumes video recording. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the [pause()]{@link media.AVRecorder.pause()} API is called.
+     * Resumes recording. This API uses a promise to return the result.<br>
+     * This API must be called after [pause]{@link media.AVRecorder#pause()}. After this API is successfully called, the
+     * AVRecorder enters the started state. You can then call [pause]{@link media.AVRecorder#pause()} again to pause
+     * recording or call [stop]{@link media.AVRecorder#stop()} to stop recording.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
@@ -7532,11 +7572,13 @@ declare namespace media {
     resume(): Promise<void>;
 
     /**
-     * Stops video recording. This API uses an asynchronous callback to return the result.
-     * 
-     * This API can be called only after the [start()]{@link media.AVRecorder.start(callback: AsyncCallback<void>)} or 
-     * [pause()]{@link media.AVRecorder.pause(callback: AsyncCallback<void>)} API is called.
-     * 
+     * Stop recording. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called after [start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)} or
+     * [pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}. After this API is successfully called, the
+     * AVRecorder enters the stopped state. When **FileGenerationMode** is used during media file creation in the
+     * configuration of **prepare()**, the
+     * [on('photoAssetAvailable')]{@link media.AVRecorder#on(type: 'photoAssetAvailable', callback: Callback<photoAccessHelper.PhotoAsset>)}
+     * callback will be triggered after this API is called.<br>
      * For audio-only recording, you can call 
      * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} again for re
      * -recording. For video-only recording or audio and video recording, you can call 
@@ -7544,8 +7586,8 @@ declare namespace media {
      * [getInputSurface()]{@link media.AVRecorder.getInputSurface(callback: AsyncCallback<string>)} again for re-
      * recording.
      *
-     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     *     **err** is **undefined**; otherwise, **err** is an error object.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result. If the recording is stopped
+     *     successfully, **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
@@ -7557,11 +7599,12 @@ declare namespace media {
     stop(callback: AsyncCallback<void>): void;
 
     /**
-     * Stops video recording. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the [start()]{@link media.AVRecorder.start()} or 
-     * [pause()]{@link media.AVRecorder.pause()} API is called.
-     * 
+     * Stop recording. This API uses a promise to return the result.<br>
+     * This API must be called after [start]{@link media.AVRecorder#start()} or [pause]{@link media.AVRecorder#pause()}.
+     * After this API is successfully called, the AVRecorder enters the stopped state. When **FileGenerationMode** is
+     * used during media file creation in the configuration of **prepare()**, the
+     * [on('photoAssetAvailable')]{@link media.AVRecorder#on(type: 'photoAssetAvailable', callback: Callback<photoAccessHelper.PhotoAsset>)}
+     * callback will be triggered after this API is called.<br>
      * For audio-only recording, you can call [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} 
      * again for re-recording. For video-only recording or audio and video recording, you can call 
      * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} and 
@@ -7580,8 +7623,10 @@ declare namespace media {
     stop(): Promise<void>;
 
     /**
-     * Resets audio and video recording. This API uses an asynchronous callback to return the result.
-     * 
+     * Resets audio and video recording, restoring the recorder to the initial state for reconfiguration of parameters.
+     * This API uses an asynchronous callback to return the result.<br>
+     * This API must be called when the AVRecorder is not in the released state. After this API is successfully called,
+     * the AVRecorder enters the idle state.<br>
      * For audio-only recording, you can call 
      * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} again for re
      * -recording. For video-only recording or audio and video recording, you can call 
@@ -7601,8 +7646,10 @@ declare namespace media {
     reset(callback: AsyncCallback<void>): void;
 
     /**
-     * Resets audio and video recording. This API uses a promise to return the result.
-     * 
+     * Resets audio and video recording, restoring the recorder to the initial state for reconfiguration of parameters.
+     * This API uses a promise to return the result.<br>
+     * This API must be called when the AVRecorder is not in the released state. After this API is successfully called,
+     * the AVRecorder enters the idle state.<br>
      * For audio-only recording, you can call [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} 
      * again for re-recording. For video-only recording or audio and video recording, you can call 
      * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig)} and 
@@ -7620,8 +7667,11 @@ declare namespace media {
 
     /**
      * Releases the audio and video recording resources. This API uses an asynchronous callback to return the result.
-     * 
-     * After the resources are released, you can no longer perform any operation on the AVRecorder instance.
+     * <br>This API must be called when the AVRecorder is not in the released state. After this API is successfully
+     * called, the AVRecorder enters the released state.<br>
+     * This API is used together with [createAVRecorder]{@link media.createAVRecorder()}. After the recording process is
+     * complete, call this API to release resources. After the resources are released, you can no longer perform any
+     * operation on the AVRecorder instance.
      *
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -7634,12 +7684,15 @@ declare namespace media {
     release(callback: AsyncCallback<void>): void;
 
     /**
-     * Releases the audio and video recording resources. This API uses a promise to return the result.
-     * 
-     * After the resources are released, you can no longer perform any operation on the AVRecorder instance.
+     * Releases the audio and video recording resources. This API uses a promise to return the result.<br>
+     * This API must be called when the AVRecorder is not in the released state. After this API is successfully called,
+     * the AVRecorder enters the released state.<br>
+     * This API is used together with [createAVRecorder]{@link media.createAVRecorder()}. After the recording process is
+     * complete, call this API to release resources. After the resources are released, you can no longer perform any
+     * operation on the AVRecorder instance.
      *
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 5400105 - Service died. Return by callback.
+     * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -7649,13 +7702,12 @@ declare namespace media {
     release(): Promise<void>;
 
     /**
-     * Obtains the information about the current audio capturer. This API uses an asynchronous callback to return the 
-     * result.
-     * 
-     * This API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called. If this API is called after [stop()]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)} is 
-     * successfully called, an error is reported.
+     * Obtains the information about the current audio capturer. This API is applicable to scenarios where you need to
+     * confirm the type of the current audio capture device or verify the audio configuration. This API uses an
+     * asynchronous callback to return the result.<br>
+     * This API must be called after
+     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} and before
+     * [stop()]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)}.
      *
      * @param { AsyncCallback<audio.AudioCapturerChangeInfo> } callback - Callback used to return the result. If the
      *     operation is successful, **err** is **undefined** and **data** is the audio.AudioCapturerChangeInfo object
@@ -7688,12 +7740,11 @@ declare namespace media {
     getCurrentAudioCapturerInfo(callback: AsyncCallback<audio.AudioCapturerChangeInfo | undefined>): void;
 
     /**
-     * Obtains the information about the current audio capturer. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called. If this API is called after [stop()]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)} is 
-     * successfully called, an error is reported.
+     * Obtains the information about the current audio capturer. This API is applicable to scenarios where you need to
+     * confirm the type of the current audio capture device or verify the audio configuration. This API uses a promise
+     * to return the result.<br>
+     * This API must be called after [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and before
+     * [stop]{@link media.AVRecorder#stop()}.
      *
      * @returns { Promise<audio.AudioCapturerChangeInfo> } Promise used to return the audio capturer information.
      * @throws { BusinessError } 5400102 - Operation not allowed.
@@ -7721,14 +7772,12 @@ declare namespace media {
     getCurrentAudioCapturerInfo(): Promise<audio.AudioCapturerChangeInfo | undefined>;
 
     /**
-     * Obtains the maximum amplitude of the current audio capturer. This API uses an asynchronous callback to return the
-     * result.
-     * 
-     * This API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called. If this API is called after [stop()]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)} is 
-     * successfully called, an error is reported.
-     * 
+     * Obtains the maximum amplitude of the current audio capturer. This API is applicable to scenarios where the audio
+     * amplitude needs to be monitored in real time, such as displaying the recording volume and checking the audio
+     * quality. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called after
+     * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} and before
+     * [stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}.<br>
      * The return value is the maximum amplitude within the duration from the time the maximum amplitude is obtained 
      * last time to the current time. For example, if you have obtained the maximum amplitude at 1s and you call this 
      * API again at 2s, then the return value is the maximum amplitude within the duration from 1s to 2s.
@@ -7745,13 +7794,11 @@ declare namespace media {
     getAudioCapturerMaxAmplitude(callback: AsyncCallback<int>): void;
 
     /**
-     * Obtains the maximum amplitude of the current audio capturer. This API uses a promise to return the result.
-     * 
-     * This API can be called only after the 
-     * [prepare()]{@link media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)} API is 
-     * called. If this API is called after [stop()]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)} is 
-     * successfully called, an error is reported.
-     * 
+     * Obtains the maximum amplitude of the current audio capturer. This API is applicable to scenarios where the audio
+     * amplitude needs to be monitored in real time, such as displaying the recording volume and checking the audio
+     * quality. This API uses a promise to return the result.<br>
+     * This API must be called after [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)} and before
+     * [stop]{@link media.AVRecorder#stop()}.<br>
      * The return value is the maximum amplitude within the duration from the time the maximum amplitude is obtained 
      * last time to the current time. For example, if you have obtained the maximum amplitude at 1s and you call this 
      * API again at 2s, then the return value is the maximum amplitude within the duration from 1s to 2s.
@@ -7766,7 +7813,9 @@ declare namespace media {
     getAudioCapturerMaxAmplitude(): Promise<int>;
 
     /**
-     * Obtains available encoders. This API uses an asynchronous callback to return the result.
+     * Obtains available encoders. This method is suitable for scenarios where an appropriate encoder needs to be
+     * selected based on the device capability. This API uses an asynchronous callback to return the result.<br>
+     * This API must be called when the AVRecorder is not in the released or error state.
      *
      * @param { AsyncCallback<Array<EncoderInfo>> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **undefined** and **data** is the available encoders obtained; otherwise, **err** is
@@ -7780,7 +7829,9 @@ declare namespace media {
     getAvailableEncoder(callback: AsyncCallback<Array<EncoderInfo>>): void;
 
     /**
-     * Obtains available encoders. This API uses a promise to return the result.
+     * Obtains available encoders. This method is suitable for scenarios where an appropriate encoder needs to be
+     * selected based on the device capability. This API uses a promise to return the result.<br>
+     * This API must be called when the AVRecorder is not in the released or error state.
      *
      * @returns { Promise<Array<EncoderInfo>> } Promise used to return the information about the available encoders.
      * @throws { BusinessError } 5400102 - Operation not allowed.
@@ -7803,16 +7854,18 @@ declare namespace media {
     readonly state: AVRecorderState;
 
     /**
-     * Subscribes to audio capturer configuration changes. Any configuration change triggers the callback that returns 
-     * the entire configuration information. This API uses an asynchronous callback to return the result.
-     * 
-     * When the application initiates multiple subscriptions to this event, the last subscription is applied.
+     * Subscribes to audio capturer configuration changes. When the audio capturer configuration changes, the callback
+     * is triggered to return the full information about the new configuration. This API uses an asynchronous callback
+     * to return the result.<br>
+     * An app can subscribe to only one audio capturer configuration change event. When the app initiates multiple
+     * subscriptions to this event, the last subscription is applied.
      *
      * @param { 'audioCapturerChange' } type - Event type, which is **'audioCapturerChange'** in this case.
-     * @param { Callback<audio.AudioCapturerChangeInfo> } callback - Callback used to return the changed audio capturer
-     *     configuration.
+     * @param { Callback<audio.AudioCapturerChangeInfo> } callback - Callback used to receive the audio capturer
+     *     configuration after change. The callback parameter is **audio.AudioCapturerChangeInfo**, which indicates the
+     *     audio capturer configuration after change.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 11 dynamic
      */
@@ -7825,12 +7878,14 @@ declare namespace media {
      * after the [stop]{@link media.AVRecorder.stop(callback: AsyncCallback<void>)} operation is complete. This API uses
      * an asynchronous callback to return the result.
      * 
-     * When the application initiates multiple subscriptions to this event, the last subscription is applied.
+     * An app can subscribe to only one media asset callback event. When the app initiates multiple subscriptions to
+     * this event, the last subscription is applied.
      *
-     * @param { 'photoAssetAvailable' } type - Event type, which is **'photoAssetAvailable'** in this case. The event is
-     *     triggered when a photo asset is available.
-     * @param { Callback<photoAccessHelper.PhotoAsset> } callback - Callback used to return the PhotoAsset object
-     *     corresponding to the resource file created by the system.
+     * @param { 'photoAssetAvailable' } type - Event type, which is **'photoAssetAvailable'** in this case.
+     * @param { Callback<photoAccessHelper.PhotoAsset> } callback - Callback used to receive the **PhotoAsset** object
+     *     corresponding to the resource file created by the system. When **FileGenerationMode** is used during media
+     *     file creation in the configuration of **prepare()**, this callback is triggered only after the **stop**
+     *     operation is complete.
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7838,14 +7893,16 @@ declare namespace media {
      */
     on(type: 'photoAssetAvailable', callback: Callback<photoAccessHelper.PhotoAsset>): void;
     /**
-     * Subscribes to AVRecorder state changes. An application can subscribe to only one AVRecorder state change event. 
-     * When the application initiates multiple subscriptions to this event, the last subscription is applied. This API 
-     * uses an asynchronous callback to return the result.
+     * Subscribes to [AVRecorderState]{@link media.AVRecorderState} changes. An app can subscribe to only one callback.
+     * When the app initiates multiple subscriptions, the last subscription is applied. This API uses an asynchronous
+     * callback to return the result.
      *
      * @param { 'stateChange' } type - Event type, which is **'stateChange'** in this case. This event can be triggered
      *     by both user operations and the system.
      * @param { function } callback - Callback used to return the state change event. [since 9 - 11]
-     * @param { OnAVRecorderStateChangeHandler } callback - Callback used to return the state change event. [since 12]
+     * @param { OnAVRecorderStateChangeHandler } callback - Callback used to receive the state change event. The
+     *     callback parameters include **state** (recording state, which is of the **AVRecorderState** type) and
+     *     **reason** (state change reason, which is of the **StateChangeReason** type). [since 12]
      * @throws { BusinessError } 5400103 - IO error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7856,26 +7913,28 @@ declare namespace media {
     on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler): void;
 
     /**
-     * Subscribes to AVRecorder errors. This event is used only for error prompt and does not require the user to stop 
-     * recording control. If the [AVRecorderState]{@link @ohos.multimedia.media:media.AVRecorderState} is also switched 
-     * to error, call [reset()]{@link media.AVRecorder.reset(callback: AsyncCallback<void>)} or [release()]
-     * [release()]{@link media.AVRecorder.release(callback: AsyncCallback<void>)} to exit the recording. This API uses 
+     * Subscribes to AVRecorder error events. This event is used only for error prompt and does not require the user to
+     * stop recording. If the [AVRecorderState]{@link @ohos.multimedia.media:media.AVRecorderState} is also switched to
+     * error, call [reset()]{@link media.AVRecorder.reset(callback: AsyncCallback<void>)} or
+     * [release()]{@link media.AVRecorder.release(callback: AsyncCallback<void>)} to exit the recording. This API uses
      * an asynchronous callback to return the result.
      * 
      * An application can subscribe to only one AVRecorder error event. When the application initiates multiple 
      * subscriptions to this event, the last subscription is applied.
      *
-     * @param { 'error' } type - Event type, which is **'error'** in this case.<br>This event is triggered when an error
-     *     occurs during recording.
-     * @param { ErrorCallback } callback - Callback used to return the recording error event.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @param { 'error' } type - Event type, which is **'error'** in this case.
+     * @param { ErrorCallback } callback - Callback used to receive AVRecorder error events. The callback parameter is
+     *     **err**, which is an object of the **BusinessError** type and contains the error code and error message.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
-     * @throws { BusinessError } 5400104 - Time out.
+     * @throws { BusinessError } 5400104 - Operation timeout.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
      * @throws { BusinessError } 5400107 - Audio interrupted. [since 11]
@@ -7891,7 +7950,7 @@ declare namespace media {
      *
      * @param { 'stateChange' } type - Event type, which is **'stateChange'** in this case. This event can be triggered
      *     by both user operations and the system.
-     * @param { OnAVRecorderStateChangeHandler } callback - Callback used to return the state change event. If this
+     * @param { OnAVRecorderStateChangeHandler } callback - Callback used to receive the state change event. If this
      *     parameter is specified, the subscription to the specified event with the specified callback is canceled. (The
      *     callback object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with
      *     all the callbacks are canceled.<br>This parameter is supported since API version 12. [since 12]
@@ -7903,12 +7962,10 @@ declare namespace media {
     off(type: 'stateChange', callback?: OnAVRecorderStateChangeHandler): void;
 
     /**
-     * Unsubscribes from AVRecorder errors. After the unsubscription, your application can no longer receive AVRecorder 
-     * errors. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from AVRecorder error events. This API uses an asynchronous callback to return the result.
      *
-     * @param { 'error' } type - Event type, which is **'error'** in this case.<br>This event is triggered when an error
-     *     occurs during recording.
-     * @param { ErrorCallback } callback - Callback used to return the recording error event. If this parameter is
+     * @param { 'error' } type - Event type, which is **'error'** in this case.
+     * @param { ErrorCallback } callback - Callback used to receive AVRecorder error events. If this parameter is
      *     specified, the subscription to the specified event with the specified callback is canceled. (The callback
      *     object cannot be an anonymous function.) Otherwise, the subscriptions to the specified event with all the
      *     callbacks are canceled.<br>This parameter is supported since API version 12. [since 12]
@@ -7920,14 +7977,15 @@ declare namespace media {
     off(type: 'error', callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to audio capturer configuration changes. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from audio capturer configuration changes. This API uses an asynchronous callback to return the
+     * result.
      *
      * @param { 'audioCapturerChange' } type - Event type, which is **'audioCapturerChange'** in this case.
-     * @param { Callback<audio.AudioCapturerChangeInfo> } callback - Callback used to return the changed audio capturer
-     *     configuration. If this parameter is specified, the subscription to the specified event with the specified
-     *     callback is canceled. (The callback object cannot be an anonymous function.) Otherwise, the subscriptions to
-     *     the specified event with all the callbacks are canceled.<br>This parameter is supported since API version 12
-     *     . [since 12]
+     * @param { Callback<audio.AudioCapturerChangeInfo> } callback - Callback used to receive the audio capturer
+     *     configuration after change. If this parameter is specified, the subscription to the specified event with the
+     *     specified callback is canceled. (The callback object cannot be an anonymous function.) Otherwise, the
+     *     subscriptions to the specified event with all the callbacks are canceled.<br>This parameter is supported
+     *     since API version 12. [since 12]
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 11 dynamic
      */
@@ -7937,7 +7995,7 @@ declare namespace media {
      * Unsubscribes from media asset callback events. This API uses an asynchronous callback to return the result.
      *
      * @param { 'photoAssetAvailable' } type - Event type, which is **'photoAssetAvailable'** in this case.
-     * @param { Callback<photoAccessHelper.PhotoAsset> } callback - Callback used to return the PhotoAsset object
+     * @param { Callback<photoAccessHelper.PhotoAsset> } callback - Callback used to receive the **PhotoAsset** object
      *     corresponding to the resource file created by the system. If this parameter is specified, the subscription to
      *     the specified event with the specified callback is canceled. (The callback object cannot be an anonymous
      *     function.) Otherwise, the subscriptions to the specified event with all the callbacks are canceled.
@@ -7955,7 +8013,7 @@ declare namespace media {
      * @param { Callback<audio.AudioCapturerChangeInfo> } callback - Callback used to return the entire configuration
      *     information about the audio capturer.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 23 static
      */
@@ -8000,10 +8058,12 @@ declare namespace media {
      * This event is triggered when an error occurs during recording.
      *
      * @param { ErrorCallback } callback - Callback invoked when the event is triggered.
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
@@ -8367,7 +8427,7 @@ declare namespace media {
     location?: Location;
 
     /**
-     * audio encoding format MIME. it used to replace audioEncoder.
+     * Audio encoding format.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 8 dynamiconly
@@ -8376,7 +8436,7 @@ declare namespace media {
      */
     audioEncoderMime?: CodecMimeType;
     /**
-     * output file format. see @ContainerFormatType , it used to replace "format".
+     * Container format of a file.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 8 dynamiconly
@@ -8387,9 +8447,12 @@ declare namespace media {
   }
 
   /**
-   * AudioRecorder is a class for audio recording management. It provides APIs to record audio. Before calling any API 
-   * in AudioRecorder, you must use [createAudioRecorder()]{@link @ohos.multimedia.media:media.createAudioRecorder} to 
-   * create an AudioRecorder instance.
+   * **AudioRecorder** is a class for audio recording management. It provides APIs to record audio. It supports
+   * operations such as preparing, starting, pausing, resuming, stopping, releasing, and resetting audio recording. The
+   * APIs of this class are applicable to scenarios where audio needs to be recorded, such as voice notes, call
+   * recording, and music recording. Before calling any API in **AudioRecorder**, you must use
+   * [createAudioRecorder()]{@link @ohos.multimedia.media:media.createAudioRecorder} to create an **AudioRecorder**
+   * instance.
    *
    * @syscap SystemCapability.Multimedia.Media.AudioRecorder
    * @since 6 dynamiconly
@@ -8398,7 +8461,8 @@ declare namespace media {
    */
   interface AudioRecorder {
     /**
-     * Prepares for recording.
+     * Prepares for recording. This method can be used to initialize recording resources (including the encoder,
+     * sampling rate, and number of audio channels) based on the input configuration parameters.
      *
      * @permission ohos.permission.MICROPHONE
      * @param { AudioRecorderConfig } config - Audio recording parameters, including the audio output URI, encoding
@@ -8412,7 +8476,7 @@ declare namespace media {
     prepare(config: AudioRecorderConfig): void;
 
     /**
-     * Starts audio recording. This API can be called only after the **'prepare'** event is triggered.
+     * Starts recording. This API can be called only after the **prepare()** API is called.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8422,7 +8486,7 @@ declare namespace media {
     start(): void;
 
     /**
-     * Pauses audio recording. This API can be called only after the **'start'** event is triggered.
+     * Pauses recording. This API can be called only after the **start()** API is called.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8432,7 +8496,7 @@ declare namespace media {
     pause(): void;
 
     /**
-     * Resumes audio recording. This API can be called only after the **'pause'** event is triggered.
+     * Resumes recording. This API can be called only after the **pause()** API is called.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8442,7 +8506,8 @@ declare namespace media {
     resume(): void;
 
     /**
-     * Stops audio recording.
+     * Stops recording and saves the recorded audio data to a file. This API can be called only after the **start()**
+     * API is called.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8452,7 +8517,7 @@ declare namespace media {
     stop(): void;
 
     /**
-     * Releases the audio recording resources.
+     * Releases recording resources. After the resources are released, other recording methods cannot be called.
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8462,7 +8527,7 @@ declare namespace media {
     release(): void;
 
     /**
-     * Resets audio recording.
+     * Resets recording.
      * 
      * Before resetting audio recording, you must call **stop()** to stop recording. After audio recording is reset, you
      * must call **prepare()** to set the recording configurations for another recording.
@@ -8478,14 +8543,14 @@ declare namespace media {
      * Subscribes to the audio recording events.
      *
      * @param { 'prepare' | 'start' | 'pause' | 'resume' | 'stop' | 'release' | 'reset' } type - Event type. The
-     *     following events are supported: 'prepare'|'start'|  'pause' | 'resume' |'stop'|'release'|'reset'<br>- '
-     *     prepare': triggered when the **prepare()** API is called and the audio recording parameters are set.<br>- '
-     *     start': triggered when the **start()** API is called and audio recording starts.<br>- 'pause': triggered when
-     *     the **pause()** API is called and audio recording is paused.<br>- 'resume': triggered when the **resume()**
-     *     API is called and audio recording is resumed.<br>- 'stop': triggered when the **stop()** API is called and
-     *     audio recording stops.<br>- 'release': triggered when the **release()** API is called and the recording
-     *     resources are released.<br>- 'reset': triggered when the **reset()** API is called and audio recording is
-     *     reset.
+     *     following events are supported: 'prepare', 'start', 'pause', 'resume', 'stop', 'release', and 'reset'.<br>
+     *     -&nbsp;'prepare'&nbsp;: triggered when the **prepare()** API is called and the audio recording parameters are
+     *     set.<br>-&nbsp;'start'&nbsp;: triggered when the **start()** API is called and audio recording starts.<br>
+     *     -&nbsp;'pause'&nbsp;: triggered when the **pause()** API is called and audio recording is paused.<br>
+     *     -&nbsp;'resume'&nbsp;: triggered when the **resume()** API is called and audio recording is resumed.<br>
+     *     -&nbsp;'stop'&nbsp;: triggered when the **stop()** API is called and audio recording stops.<br>
+     *     -&nbsp;'release'&nbsp;: triggered when the **release()** API is called and the recording resources are
+     *     released.<br>-&nbsp;'reset'&nbsp;: triggered when the **reset()** API is called and audio recording is reset.
      * @param { function } callback - Callback invoked when the event is triggered.
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
@@ -8495,8 +8560,8 @@ declare namespace media {
     on(type: 'prepare' | 'start' | 'pause' | 'resume' | 'stop' | 'release' | 'reset', callback: () => void): void;
 
     /**
-     * Subscribes to audio recording error events. After an error event is reported, you must handle the event and exit 
-     * the recording.
+     * Subscribes to the audio recording error event. After an error event is received, you must handle the error,
+     * release resources, and exit the current recording.
      *
      * @param { 'error' } type - Event type, which is **'error'** in this case.<br>This event is triggered when an error
      *     occurs during audio recording.
@@ -10175,8 +10240,8 @@ declare namespace media {
      */
     url: string;
     /**
-     * Sets the video rotation angle in output file, and for the file to playback, in degrees. mp4 support.
-     * the range of rotation angle should be {0, 90, 180, 270}, default is 0.
+     * Rotation angle of the video to record, in degrees. The value can only be **0°** (default), **90°**, **180°**, or
+     * **270°**.
      *
      * @syscap SystemCapability.Multimedia.Media.VideoRecorder
      * @systemapi
@@ -10350,7 +10415,7 @@ declare namespace media {
   }
 
   /**
-   * Describes the audio and video recording profile.
+   * Describes the audio and video recording configuration parameters.
    *
    * @syscap SystemCapability.Multimedia.Media.AVRecorder
    * @crossplatform [since 12]
@@ -10468,20 +10533,24 @@ declare namespace media {
     videoCodec?: CodecMimeType;
 
     /**
-     * Width of a video frame, in px. This parameter is mandatory for video recording. The value range is [176 - 4096].
+     * Width of the output video frame, in pixels. The minimum value is 240p, and the maximum value depends on the
+     * encoder capability of the device. The default value is the width of the source video frame.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
+     * @atomicservice [since 22]
      * @since 9 dynamic
      * @since 23 static
      */
     videoFrameWidth?: int;
 
     /**
-     * Height of a video frame, in px. This parameter is mandatory for video recording. The value range is [144 - 4096].
+     * Height of the output video frame, in pixels. The minimum value is 240p, and the maximum value depends on the
+     * encoder capability of the device. The default value is the height of the source video frame.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
+     * @atomicservice [since 22]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -10607,8 +10676,7 @@ declare namespace media {
      */
     profile: AVRecorderProfile;
     /**
-     * Recording output URL: fd://xx (fd number).<br>This parameter is mandatory.<br>**Atomic service API**:
-     * This API can be used in atomic services since API version 12.
+     * Recording output URL: fd://xx (fd number) ![img](figures/image-url.png) This parameter is mandatory.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
@@ -10627,9 +10695,10 @@ declare namespace media {
      */
     fileGenerationMode?: FileGenerationMode;
     /**
-     * Rotation angle of the recorded video, in degrees. The value can be 0 (default), 90, 180, or 270 for MP4 videos.
-     * <br>This API is supported since API version 6 and deprecated since API version 12. You are advised to use.
-     * **AVMetadata.videoOrientation** instead. If both parameters are set, **AVMetadata.videoOrientation** is used.
+     * Rotation angle of the video to record, in degrees. For MP4 videos, the value can be **0°** (default), **90°**,
+     * **180°**, or **270°**.<br>This API is supported since API version 6 and deprecated since API version 12. You are
+     * advised to use **[AVMetadata]{@link media.AVMetadata}.videoOrientation** instead.<br>If both parameters are set,
+     * **[AVMetadata]{@link media.AVMetadata}.videoOrientation** is used.
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 9 dynamiconly
@@ -10836,7 +10905,7 @@ declare namespace media {
      */
     VIDEO_H263 = 'video/h263',
     /**
-     * Video in AVC format.
+     * Video in H.264 format.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @crossplatform [since 12]
@@ -10875,7 +10944,7 @@ declare namespace media {
     VIDEO_VP8 = 'video/x-vnd.on2.vp8',
 
     /**
-     * Audio in MP4A-LATM format.
+     * Audio in AAC format.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @crossplatform [since 12]
@@ -10952,7 +11021,7 @@ declare namespace media {
     AUDIO_AMR_WB = 'audio/amr-wb',
 
     /**
-     * Audio in raw streams format.
+     * Audio in RAW format.
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
