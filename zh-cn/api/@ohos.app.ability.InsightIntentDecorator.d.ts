@@ -155,9 +155,8 @@ declare interface IntentDecoratorInfo {
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
    *
-   * - 当取值为'systemOnly'时，表示该意图仅对系统应用可见。
-   * - 当取值为'thirdParty'时，表示该意图也对三方Agent可见。
-   * - 当不配置该字段时，按'systemOnly'处理。
+   * - 当取值为true时，表示该意图也对三方Agent可见。
+   * - 当取值为false或不配置时，表示该意图仅对系统应用可见。
    *
    * > **说明**
    * >
@@ -168,7 +167,7 @@ declare interface IntentDecoratorInfo {
    * @atomicservice
    * @since 27
    */
-  exported?: 'systemOnly' | 'thirdParty';
+  exported?: boolean;
 }
 
 /**

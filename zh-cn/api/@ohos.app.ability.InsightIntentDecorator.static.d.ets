@@ -206,14 +206,14 @@ export @interface InsightIntentLink {
 
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为'systemOnly'或'thirdParty'，不配置时默认为'systemOnly'。
+   * 取值为true或false，不配置时默认为false。
    * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 27 static
    */
-  exported: string = 'systemOnly';
+  exported: boolean = false;
 
   /**
    * 表示意图的uri信息。
@@ -366,14 +366,14 @@ export @interface InsightIntentPage {
 
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为'systemOnly'或'thirdParty'，不配置时默认为'systemOnly'。
+   * 取值为true或false，不配置时默认为false。
    * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 27 static
    */
-  exported: string = 'systemOnly';
+  exported: boolean = false;
 
   /**
    * 表示与意图绑定的UIAbility名称。
@@ -555,14 +555,14 @@ export @interface InsightIntentFunctionMethod {
 
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为'systemOnly'或'thirdParty'，不配置时默认为'systemOnly'。
+   * 取值为true或false，不配置时默认为false。
    * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 27 static
    */
-  exported: string = 'systemOnly';
+  exported: boolean = false;
 }
 /**
  * 使用该注解装饰[FormExtensionAbility]{@link @ohos.app.form.FormExtensionAbility}并配置FormExtensionAbility绑定的卡片名称，便于AI入口通过意图添加卡
@@ -684,14 +684,14 @@ export @interface InsightIntentForm {
 
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为'systemOnly'或'thirdParty'，不配置时默认为'systemOnly'。
+   * 取值为true或false，不配置时默认为false。
    * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 27 static
    */
-  exported: string = 'systemOnly';
+  exported: boolean = false;
 
   /**
    * 表示FormExtensionAbility绑定的卡片名称。
@@ -835,14 +835,14 @@ export @interface InsightIntentEntry {
 
   /**
    * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为'systemOnly'或'thirdParty'，不配置时默认为'systemOnly'。
+   * 取值为true或false，不配置时默认为false。
    * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 27 static
    */
-  exported: string = 'systemOnly';
+  exported: boolean = false;
 
   /**
    * 表示与意图绑定的Ability名称。

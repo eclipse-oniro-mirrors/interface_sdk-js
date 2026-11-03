@@ -205,9 +205,8 @@ declare interface IntentDecoratorInfo {
   /**
    * Whether the intent can be discovered and invoked by third-party agents.
    *
-   * If this parameter is set to 'systemOnly', the intent is visible only to system applications.
-   * If this parameter is set to 'thirdParty', the intent is also visible to third-party agents.
-   * If this parameter is left unspecified, 'systemOnly' is used.
+   * If this parameter is set to true, the intent is also visible to third-party agents.
+   * If this parameter is set to false or left unspecified, the intent is visible only to system applications.
    *
    * > **NOTE**
    * >
@@ -218,7 +217,7 @@ declare interface IntentDecoratorInfo {
    * @atomicservice
    * @since 27
    */
-  exported?: 'systemOnly' | 'thirdParty';
+  exported?: boolean;
 }
 
 /**
