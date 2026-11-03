@@ -163,7 +163,7 @@ declare enum NavRouteMode {
 }
 
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -226,7 +226,7 @@ declare class NavRouterAttribute extends CommonMethod<NavRouterAttribute> {
  * ###### Child Components
  *
  * This component must contain two child components, the second of which must be
- * [NavDestination]{@link nav_destination}.
+ * [NavDestination]{@link @global:NavDestination}.
  *
  * > **NOTE**
  * >

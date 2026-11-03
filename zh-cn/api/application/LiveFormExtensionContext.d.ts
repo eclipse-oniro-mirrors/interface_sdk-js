@@ -24,7 +24,7 @@
  * >
  * > 本模块接口仅可在Stage模型下使用。
  * 
- * @file
+ * @file LiveFormExtensionAbility上下文-LiveFormExtensionContext
  * @kit FormKit
  */
  

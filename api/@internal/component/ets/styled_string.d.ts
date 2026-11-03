@@ -1990,7 +1990,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * Removes the style for the specified range of this styled string.
    *
-   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link ./text} component
+   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link @global:Text} component
    * is used. If the value is not set, the default value is used.
    *
    * This API equally works when the styled string contains an image.
@@ -2013,7 +2013,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * Removes all styles for the specified range of this styled string.
    *
-   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link ./text} component
+   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link @global:Text} component
    * is used. If the value is not set, the default value is used.
    *
    * This API equally works when the styled string contains an image.
@@ -2035,7 +2035,7 @@ declare class MutableStyledString extends StyledString {
   /**
    * Removes all styles of this styled string.
    *
-   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link ./text} component
+   * After a style is removed, the value set for the corresponding style attribute in the [Text]{@link @global:Text} component
    * is used. If the value is not set, the default value is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

@@ -519,7 +519,7 @@ export interface AnimationController {
 
 /**
  * Defines a descriptor object used to play animated content (for example, **PixelMap** arrays or animated image
- * resources) using the [Image]{@link ./@internal/component/ets/image} component. It inherits from
+ * resources) using the [Image]{@link @global:Image} component. It inherits from
  * [DrawableDescriptor]{@link DrawableDescriptor}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -562,10 +562,10 @@ export class AnimatedDrawableDescriptor extends DrawableDescriptor {
    * Obtains the animation controller for playback control.
    *
    * @param { string } [id] - ID of the target component.
-   *     <br>Optional when the [Image]{@link ./@internal/component/ets/image} component and
+   *     <br>Optional when the [Image]{@link @global:Image} component and
    *     **AnimatedDrawableDescriptor** object have a 1:1 relationship.
    *     <br>Required when the same **AnimatedDrawableDescriptor** object is bound to multiple
-   *     [Image]{@link ./@internal/component/ets/image} components (in this case, you must ensure the ID uniqueness).
+   *     [Image]{@link @global:Image} components (in this case, you must ensure the ID uniqueness).
    *     <br>This rule is based on the design principle of the animation system: Animation data can be shared across
    *     multiple components, but each component's animation runs independently. Correspondingly, an
    *     **AnimationController** object maintains a strict 1:1 relationship with a component, meaning one component is

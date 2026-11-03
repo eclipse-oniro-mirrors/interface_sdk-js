@@ -640,7 +640,7 @@ declare class ReplaceSymbolEffect extends SymbolEffect {
 declare class PulseSymbolEffect extends SymbolEffect {}
 
 /**
- * 支持[通用属性]{@link ./common}，不支持文本通用属性，仅支持以下特有属性：
+ * 支持[通用属性]{@link CommonMethod}，不支持文本通用属性，仅支持以下特有属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -696,7 +696,7 @@ declare class SymbolGlyphAttribute extends CommonMethod<SymbolGlyphAttribute> {
 
   /**
    * 设置SymbolGlyph组件的字体颜色，相比[fontColor]{@link SymbolGlyphAttribute#fontColor(value: Array<ResourceColor>)}接口，本接口支持传入
-   * [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型参数。
+   * [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics}类型参数。
    *
    * > **说明：**
    * >

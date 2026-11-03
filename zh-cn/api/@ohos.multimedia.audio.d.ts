@@ -9368,6 +9368,79 @@ declare namespace audio {
   }
 
   /**
+   * 降噪模式变更原因枚举。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum NoiseReductionModeChangeReason {
+    /**
+     * 用户通过系统录音控制面板UX界面手动切换导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
+
+    /**
+     * 应用调用AudioCapturer.setNoiseReductionMode接口设置降噪模式，用户可能并不感知应用有调用设置。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    APP_SETTING = 1,
+
+    /**
+     * 因音频输入设备变更导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DEVICE_CHANGE = 2,
+
+    /**
+     * 因录音流并发冲突导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STREAM_CONCURRENCY = 3,
+  }
+
+  /**
+   * 降噪模式变更信息。该接口作为{@link #onNoiseReductionModeChanged}的回调参数。
+   * 使用场景：当录音流的降噪模式发生变更时，该结构体携带最新的降噪模式和变更原因。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface NoiseReductionModeChangeInfo {
+    /**
+     * 降噪模式变更原因。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reason: NoiseReductionModeChangeReason;
+
+    /**
+     * 当前降噪模式，默认值为{@link NoiseReductionMode#FIDELITY}。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    noiseReductionMode: NoiseReductionMode;
+  }
+
+  /**
    * 移动全景声管理器，支持蓝牙设备与本地扬声器协同播放音频。适用于系统应用控制移动全景声功能场景。
    * 在使用AudioCollaborativeManager的接口前，需要先使用[getCollaborativeManager]{@link audio.AudioManager.getCollaborativeManager}获取
    * AudioCollaborativeManager实例。
@@ -13563,6 +13636,10 @@ declare namespace audio {
      * > 噪模式，其他录音流默认仅返回[NoiseReductionMode.FIDELITY]{@link @ohos.multimedia.audio:audio.NoiseReductionMode}。
      * >
      * > - 返回结果仅考虑音频格式和设备平台，不考虑当前输入设备和录音并发情况。
+     * 
+     * 获取当前设备支持应用设置的录音降噪模式。返回的是应用调用setNoiseReductionMode可以设置切换的降噪模式。
+     * 部分场景的降噪模式只能由系统设置，该接口不会返回这些模式。应用可以通过getNoiseReductionMode
+     * 和onNoiseReductionModeChanged感知系统当前选择的降噪模式。
      *
      * @returns { Array<NoiseReductionMode> } 支持的录音降噪模式数组，默认支持
      *     [NoiseReductionMode.FIDELITY]{@link @ohos.multimedia.audio:audio.NoiseReductionMode}。
@@ -13572,6 +13649,35 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSupportedNoiseReductionModes(): Array<NoiseReductionMode>;
+
+    /**
+     * 订阅降噪模式变更事件，当音频采集器的降噪模式发生变更时触发。
+     * 变更可能由用户通过系统录音控制面板切换、应用调用{@link #setNoiseReductionMode}接口设置，或系统因设备变更、录音流并发冲突而调整降噪模式触发。详见{@link NoiseReductionModeChangeReason}。
+     *
+     * 使用场景：适用于应用需要实时感知降噪模式变更的场景，如
+     * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE}直播、[SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC}录音、 [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER}录像、[SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION}VoIP、 [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}语音消息等。应用感知到降噪模式变更后，可根据情况自行决策是否需要关闭应用自身叠加的降噪算法，从而达到端到端的整体降噪体验最佳。
+     * 使用约束：多次订阅时，如果订阅的callback函数对象不同，会记录所有callback函数，按照订阅顺序依次回调。请勿在回调中调用AudioCapturer相关接口。
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } callback - 返回降噪模式变更信息的回调。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
+
+    /**
+     * 取消订阅降噪模式变更事件。
+     * 
+     * 使用场景：当应用不再需要感知降噪模式变更时调用。
+     * 使用约束：如果传入callback参数，则仅取消与该callback实例匹配的已注册回调；如果不传callback参数，则取消所有已注册的降噪模式变更回调。
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } [callback] - 回调函数，用于取消订阅。不传入时，表示取消所有已注册的回调。
+     * <br>默认值：缺省行为：默认取消所有已注册的降噪模式变更回调。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
 
   /**

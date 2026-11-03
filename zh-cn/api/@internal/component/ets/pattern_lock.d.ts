@@ -177,7 +177,7 @@ declare class PatternLockController {
  * >
  * > - 如果开发者有其他功能需求，可以使用[自定义组件](docroot://ui/state-management/arkts-create-custom-components.md)。例如自定义组件<!--RP1-->
  * > [CustomPatternLock](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/UI/CustomPatternLock)
- * > <!--RP1End-->，通过[Canvas]{@link ./canvas}组件实现了图案密码锁功能，开发者可在此基础上自行进行功能扩展。
+ * > <!--RP1End-->，通过[Canvas]{@link @global:Canvas}组件实现了图案密码锁功能，开发者可在此基础上自行进行功能扩展。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -201,7 +201,7 @@ interface PatternLockInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -407,7 +407,7 @@ declare class PatternLockAttribute extends CommonMethod<PatternLockAttribute> {
  * >
  * > - 如果开发者有其他功能需求，可以使用[自定义组件](docroot://ui/state-management/arkts-create-custom-components.md)。例如自定义组件<!--RP1-->
  * > [CustomPatternLock](https://gitcode.com/openharmony/applications_app_samples/tree/master/code/UI/CustomPatternLock)
- * > <!--RP1End-->，通过[Canvas]{@link ./canvas}组件实现了图案密码锁功能，开发者可在此基础上自行进行功能扩展。
+ * > <!--RP1End-->，通过[Canvas]{@link @global:Canvas}组件实现了图案密码锁功能，开发者可在此基础上自行进行功能扩展。
  *
  * ###### 子组件
  *

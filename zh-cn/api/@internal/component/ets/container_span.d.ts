@@ -19,7 +19,7 @@
  */
 
 /**
- * [Text]{@link ./text}组件的子组件，用于统一管理多个[Span]{@link ./span}、[ImageSpan]{@link ./image_span}的背景色及圆角弧度，适用于需要为文本片段和图片组合设置统一背
+ * [Text]{@link @global:Text}组件的子组件，用于统一管理多个[Span]{@link @global:Span}、[ImageSpan]{@link @global:ImageSpan}的背景色及圆角弧度，适用于需要为文本片段和图片组合设置统一背
  * 景样式的场景。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -87,10 +87,12 @@ declare class ContainerSpanAttribute {
 }
 
 /**
- * [Text]{@link ./text}组件的子组件，用于统一管理多个[Span]{@link ./span}、[ImageSpan]{@link ./image_span}的背景色及圆角弧度，适用于需要为文本片段和图片组合设置统一背
+ * [Text]{@link @global:Text}组件的子组件，用于统一管理多个[Span]{@link @global:Span}、[ImageSpan]{@link @global:ImageSpan}的背景色及圆角弧度，适用于需要为文本片段和图片组合设置统一背
  * 景样式的场景。
+ * 
  * ###### 子组件
- * 可以包含[Span]{@link ./span}、[ImageSpan]{@link ./image_span} 子组件。
+ *
+ * 可以包含[Span]{@link @global:Span}、[ImageSpan]{@link @global:ImageSpan} 子组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
