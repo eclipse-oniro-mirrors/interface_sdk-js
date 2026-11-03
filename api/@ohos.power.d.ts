@@ -165,9 +165,9 @@ declare namespace power {
    *
    * @returns { DevicePowerMode }Indicates the power mode of the current device. The value can be Standard, Power
    *     Saving, Performance, or Super Power Saving.
-   * When the power mode of the current device fails to be obtained, the value 0 is returned. The value is not within
-   * the value range defined by the [DevicePwerMode]{@link DevicePowerMode} enumeration. Developers should check whether
-   * the return value is a valid enumerated value (600 or more).
+   *     When the power mode of the current device fails to be obtained, the value 0 is returned. The value is not 
+   *     within the value range defined by the [DevicePwerMode]{@link DevicePowerMode} enumeration. Developers
+   *     should check whether the return value is a valid enumerated value (600 or more).
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
