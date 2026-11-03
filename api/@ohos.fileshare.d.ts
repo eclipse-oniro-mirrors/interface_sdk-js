@@ -309,6 +309,7 @@ declare namespace fileShare {
    * Enumerates the status of the URI permission granted by user.
    *
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
@@ -317,6 +318,7 @@ declare namespace fileShare {
      * The URI permission is not granted.
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
@@ -326,6 +328,7 @@ declare namespace fileShare {
      * The URI permission is granted.
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
