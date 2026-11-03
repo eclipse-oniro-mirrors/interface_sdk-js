@@ -34,7 +34,6 @@ import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * Provides information about a live form.
- * @typedef { LiveFormInfo }
  * @syscap SystemCapability.Ability.Form
  * @stagemodelonly
  * @atomicservice

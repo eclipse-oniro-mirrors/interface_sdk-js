@@ -14,6 +14,16 @@
  */
 
 /**
+ * LiveFormExtensionContext是[LiveFormExtensionAbility]{@link @ohos.app.form.LiveFormExtensionAbility}的上下文，继承自
+ * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}。它提供访问特定于LiveFormExtensionAbility资源的能力，支持在互动卡片中拉起应用页面，适用
+ * 于需要在互动卡片中响应用户点击并跳转到应用页面的场景，解决了互动卡片无法主动拉起应用页面的限制问题。
+ * 
+ * > **说明：**
+ * >
+ * > 本模块首批接口从API version 20开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > 本模块接口仅可在Stage模型下使用。
+ * 
  * @file
  * @kit FormKit
  */
@@ -25,9 +35,7 @@ import type { ConnectOptions } from '../ability/connectOptions';
 /*** endif */
 
 /**
- * LiveFormExtensionContext是[LiveFormExtensionAbility]{@link @ohos.app.form.LiveFormExtensionAbility}的上下文，继承自
- * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}。它提供访问特定于LiveFormExtensionAbility资源的能力，支持在互动卡片中拉起应用页面，适用
- * 于需要在互动卡片中响应用户点击并跳转到应用页面的场景，解决了互动卡片无法主动拉起应用页面的限制问题。
+ * LiveFormExtensionContext提供访问特定于LiveFormExtensionAbility资源的能力。
  *
  * @syscap SystemCapability.Ability.Form
  * @stagemodelonly
@@ -43,11 +51,12 @@ declare class LiveFormExtensionContext extends ExtensionContext {
    * 
    * 该接口仅限在点击事件回调中调用，且需要直接调用，不支持延时后调用，否则会抛出错误码16501011。
    * 
+   * **使用场景：**
    * - 互动卡片激活态中点击跳转到应用主页或详情页。
    *
    * @param { Want } want - 需要被拉起的应用页面信息。取值原则：仅支持使用显式Want，必须包含bundleName和abilityName字段。详见
    *     [使用显式Want启动应用组件](docroot://application-models/ability-startup-with-explicit-want.md)。
-   * @returns { Promise<void> } The promise returned by the function.
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 801 - Capability not supported due to limited device capabilities.
    * @throws { BusinessError } 16500050 - An IPC connection error happened.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.

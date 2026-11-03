@@ -106,7 +106,6 @@ declare namespace formBindingData {
   /**
    * Defines the createFormBindingData result interface.
    *
-   * @typedef FormBindingData
    * @syscap SystemCapability.Ability.Form
    * @atomicservice [since 11]
    * @since 9 dynamic
@@ -162,7 +161,6 @@ declare namespace formBindingData {
   /**
    * Defines the form proxy data.
    *
-   * @typedef ProxyData
    * @syscap SystemCapability.Ability.Form
    * @StageModelOnly
    * @atomicservice [since 11]

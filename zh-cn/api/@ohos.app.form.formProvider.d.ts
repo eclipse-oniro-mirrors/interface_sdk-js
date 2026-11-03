@@ -389,11 +389,16 @@ declare namespace formProvider {
   function openFormManager(want: Want): void;
 
   /**
-   * Open the view of forms belonging to the specified bundle.
-   * Client to communication with FormManagerService.
+   * 打开卡片管理页面。
    *
    * @permission ohos.permission.PUBLISH_FORM_CROSS_BUNDLE
-   * @param { Want } want - The want of the form to open.
+   * @param { Want } want - 打开卡片管理页面的请求中的want参数，需包含以下字段。
+         <br>bundleName: 卡片所属应用的包名。
+         <br>abilityName: 卡片所属的ability名称。
+         <br>parameters:
+         <br>- ohos.extra.param.key.form_dimension: [卡片尺寸]{@link @ohos.app.form.formInfo:formInfo.FormDimension}。
+         <br>- ohos.extra.param.key.form_name: 卡片名称。
+         <br>- ohos.extra.param.key.module_name: 卡片所属的模块名称。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @throws { BusinessError } 801 - Capability not supported.
