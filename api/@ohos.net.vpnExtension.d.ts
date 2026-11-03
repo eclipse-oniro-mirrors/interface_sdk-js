@@ -275,7 +275,6 @@ declare namespace vpnExtension {
      * > 1. You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)} to destroy the VPN and clear
      * > resources when the VPN is not needed.
-     * >
      * > 2. When error code 2200003 is returned by calling this interface, check whether the ohos.permission.INTERNET permission has been applied for.
      * 
      * @param { VpnConfig } config - VPN configuration.
