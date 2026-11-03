@@ -32814,3 +32814,72 @@ declare interface SmartGestureShortcutOptions {
    */
   selectable?: boolean;
 }
+
+/**
+ * Defines the text style shared by DatePickerComponent and UIPickerComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface PickerComponentTextStyle {
+  /**
+   * Font color.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  color?: ResourceColor;
+
+  /**
+   * Text style. Only size and weight are supported.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+
+  /**
+   * Minimum font size for the text. Used with maxFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see minFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minFontSize?: number | ResourceStr;
+
+  /**
+   * Maximum font size for the text. Used with minFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see maxFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxFontSize?: number | ResourceStr;
+
+  /**
+   * Text overflow behavior. This property has no effect when set to MARQUEE. For details, see textOverflow of
+   * TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflow?: TextOverflow;
+}
