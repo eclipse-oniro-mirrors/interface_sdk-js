@@ -328,6 +328,34 @@ declare namespace wifiManager {
   function addCandidateConfig(config: WifiDeviceConfig, callback: AsyncCallback<int>): void;
 
   /**
+   * 断开networkId标识的候选网络一段时间。
+   * 断开的候选网络在阻塞持续时间内不会重新关联。
+   * 您只能断开由主叫方添加的候选网络。
+   *
+   * @permission ohos.permission.SET_WIFI_INFO
+   * @param { int } networkId - 标识要断开的候选网络。
+   *     取值必须为大于等于 0 的整数。
+   *     <br>单位为：秒。取值限定为整数。
+   *     <br>不合法的值区间: 取值必须为大于等于 0 的整数。
+   *     <br>单位为：秒。取值限定为整数。
+   * @param { int } blockDuration - 网络被禁止重新关联的时长，单位为秒。
+   *     取值必须为整数。
+   *     如果取值为 -1，则该候选网络被永久禁止重新关联。
+   *     <br>取值限定为整数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2501000 - Operation failed, possibly causes:
+   *     <br>The network identified by networkId does not exist.
+   *     <br>The candidate network was not added by the caller.
+   *     <br>The caller is not running in the foreground.
+   * @throws { BusinessError } 2501001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function disconnectFromCandidateConfig(networkId: int, blockDuration: int): void;
+
+  /**
    * 移除候选网络配置，使用Promise异步回调。
    * 
    * - 从系统中删除指定网络ID的Wi-Fi候选配置，清理不再需要的Wi-Fi候选配置，释放系统资源。
