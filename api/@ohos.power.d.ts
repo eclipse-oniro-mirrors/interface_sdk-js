@@ -108,7 +108,8 @@ declare namespace power {
    * - A device with a screen is active when the screen is on and inactive when the screen is off.
    * - A device without a screen is active when it exits the sleep mode and inactive when it enters the sleep mode.
    *
-   * @returns { boolean } Return value **true** if the device is active; returns **false** otherwise.
+   * @returns { boolean } The value true is returned for the active state, and false is returned for the inactive
+   *     state or failure to obtain the device active state.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -158,9 +159,15 @@ declare namespace power {
   function suspend(isImmediate?: boolean): void;
 
   /**
-   * Obtains the power mode of this device.
+   * Obtains the power mode of the current device. Different power modes correspond to different device behavior
+   * policies. Developers can adjust application behavior based on the returned mode value to adapt to the current mode.
+   * For the definition and description of each mode, see DevicePowerMode.
    *
-   * @returns { DevicePowerMode } Power mode.
+   * @returns { DevicePowerMode }Indicates the power mode of the current device. The value can be Standard, Power
+   *     Saving, Performance, or Super Power Saving.
+   *     When the power mode of the current device fails to be obtained, the value 0 is returned. The value is not 
+   *     within the value range defined by the [DevicePwerMode]{@link DevicePowerMode} enumeration. Developers
+   *     should check whether the return value is a valid enumerated value (600 or more).
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static

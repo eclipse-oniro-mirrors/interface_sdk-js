@@ -105,7 +105,7 @@ declare namespace power {
    * - 有屏的设备亮屏时为活动状态，灭屏时为非活动状态。
    * - 无屏的设备非休眠时为活动状态，休眠时为非活动状态。
    *
-   * @returns { boolean } 活动状态返回true，非活动状态返回false。
+   * @returns { boolean } 活动状态返回true，非活动状态或获取设备活动状态失败时返回false。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -151,7 +151,8 @@ declare namespace power {
   /**
    * 获取当前设备的电源模式。不同电源模式对应不同的设备行为策略，开发者可根据返回的模式值调整应用行为以适配当前模式。各模式定义及说明请参见DevicePowerMode。
    *
-   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、超级省电模式等。
+   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、超级省电模式等。当获取当前设备的电源模式失败时返回0，
+   *     该值不在[DevicePowerMode](#devicepowermode9)枚举定义范围内。开发者应检查返回值是否为有效枚举值（600及以上）。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
