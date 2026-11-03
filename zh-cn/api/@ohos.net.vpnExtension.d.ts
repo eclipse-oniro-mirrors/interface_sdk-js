@@ -258,7 +258,6 @@ declare namespace vpnExtension {
      * >
      * > 1. 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)}接口销毁启动的VPN网络，并执行资源清理等操作。
-     * >
      * > 2. 当调用该接口返回错误码2200003时，请排查是否已申请ohos.permission.INTERNET权限。
      *
      * @param { VpnConfig } config - 指定VPN网络的配置信息。
