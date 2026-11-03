@@ -54,6 +54,7 @@ import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
 import { OnScrollFrameBeginCallback } from "./scroll";
 import dragController from '../../@ohos.arkui.dragController';
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
 /**
  * Define the ratio of characters entered by the the percentage of InputCounterOptions.
  *
@@ -7601,6 +7602,18 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     titleBarHoverMode?: SheetTitleBarHoverMode;
+
+    /**
+     * Set the touch follow mode of the semi-modal page.
+     * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+     * -FOLLOW_GRIP_HAND: The layout follows the grip.
+     * -NONE: Retain the current layout.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    adaptToHandedness?: HandednessFollowMode;
 }
 /**
  * Enum of title bar hover modes.
@@ -11647,9 +11660,10 @@ export declare interface CommonMethod {
      */
     default onHoverMove(event: Callback<HoverEvent> | undefined): this;
     /**
-     * Trigger a accessibility hover event.
+     * Triggered in accessibility mode when a single finger touches the bound component.
      *
-     * @param { AccessibilityCallback | undefined } callback - A callback instance used when the component is touched after accessibility mode is enabled.
+     * @param { AccessibilityCallback | undefined } callback - Callback invoked in accessibility mode when a single finger
+     * touches the bound component.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11658,10 +11672,11 @@ export declare interface CommonMethod {
     default onAccessibilityHover(callback: AccessibilityCallback | undefined): this;
 
     /**
-     * prompt for current component and descendants unable to handle accessibility hover event
+     * Triggered if a finger touch occurs within the component area while an accessibility service is running, but the
+     * accessibility system finds no focusable elements within the component hierarchy.
      *
-     * @param { AccessibilityTransparentCallback | undefined } callback - A callback instance used when current component and 
-     * descendants not handled accessibility hover event
+     * @param { AccessibilityTransparentCallback | undefined } callback - Callback invoked when a touch interaction occurs
+     * within the area of the component that does not respond to the accessibility hover event.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13493,8 +13508,10 @@ export declare interface CommonMethod {
      */
     default accessibilityRole(role: AccessibilityRoleType | undefined): this;
     /**
-     * Register accessibility focus callback,when the component is focused or out of focus,the callback will be executed
-     * @param { AccessibilityFocusCallback | undefined } callback - accessibility focus callback function
+     * Triggered when the accessibility component gains or loses focus.
+     *
+     * @param { AccessibilityFocusCallback | undefined } callback - Callback that notifies the registered component of
+     * focus and blur events.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13502,9 +13519,13 @@ export declare interface CommonMethod {
      */
     default onAccessibilityFocus(callback: AccessibilityFocusCallback | undefined): this;
     /**
-     * Register accessibility action intercept callback,
-     * when accessibility action is to be executed,the callback will be executed
-     * @param { AccessibilityActionInterceptCallback | undefined } callback - accessibility action intercept callback function
+     * Registers a callback to intercept accessibility control actions in accessibility mode. The callback is invoked
+     * before an accessibility action is triggered, allowing the component to determine whether to intercept the action.
+     * This callback is not supported by components that lack click capability.
+     *
+     * @param { AccessibilityActionInterceptCallback | undefined } callback - Callback to be invoked before an accessibility
+     * action is triggered. The application that registers this callback can decide whether to intercept the action.
+     * Set to undefined to unregister the callback.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15824,8 +15845,8 @@ export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
  * The value of isHover indicates whether the touch is hovering over the component.
  * The value of event contains information about AccessibilityHoverEvent.
  *
- * @param { boolean } isHover
- * @param { AccessibilityHoverEvent } event
+ * @param { boolean } isHover - Hover state. true: the finger enters the component. false: the finger exits the component.
+ * @param { AccessibilityHoverEvent } event - AccessibilityHoverEvent object.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -15833,9 +15854,10 @@ export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 export type AccessibilityCallback = (isHover: boolean, event: AccessibilityHoverEvent) => void;
 
 /**
- * Defines the callback type used in accessibility hover transparent event.
+ * Defines the callback type for touch events that do not trigger accessibility responses in accessibility mode.
  *
- * @param { TouchEvent } event - The value of event contains information about original accessibility hover event.
+ * @param { TouchEvent } event - Original touch event. The TouchEvent object's TouchType corresponds to four accessibility
+ * hover event types: HOVER_ENTER, HOVER_MOVE, HOVER_EXIT, and HOVER_CANCEL.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

@@ -189,7 +189,7 @@ export declare class TabTitleBarTabItem {
  * >
  * > - 该组件仅可在Stage模型下使用。
  * >
- * > - 设置TabTitleBar的[通用属性]{@link ./@internal/component/ets/common}或[通用事件]{@link ./@internal/component/ets/common}时，编译工具
+ * > - 设置TabTitleBar的[通用属性]{@link CommonMethod}或[通用事件]{@link CommonMethod}时，编译工具
  * > 链会在__Common__节点上挂载而非直接应用到组件本身，可能导致设置不生效或不符合预期，因此不建议设置。
  *
  * ###### 子组件
@@ -198,7 +198,7 @@ export declare class TabTitleBarTabItem {
  *
  * ###### TabTitleBarAttribute
  * 
- * 不支持[通用事件]{@link common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -177,6 +177,7 @@ declare namespace power {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. [since 26.1.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900301 - Setting the power mode failed. [since 23]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
@@ -195,6 +196,7 @@ declare namespace power {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. [since 26.1.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900301 - Setting the power mode failed. [since 23]
    * @syscap SystemCapability.PowerManager.PowerManager.Core

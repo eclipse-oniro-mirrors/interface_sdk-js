@@ -289,7 +289,7 @@ declare enum TextAreaType {
 declare type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: SubmitEvent) => void;
 
 /**
- * 除支持[通用属性]{@link ./common}，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}，还支持以下属性：
  *
  * > **说明：**
  * >
@@ -308,7 +308,7 @@ declare type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: Submi
  * }
  *
  * > 从API version 11开始，多行输入框可设置.width('auto')使组件宽度自适应文本宽度，自适应时组件宽度受constraintSize属性以及父容器传递的最大最小宽度限制，其余使用方式参考
- * > [尺寸设置]{@link ./common}。
+ * > [尺寸设置]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -476,7 +476,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
    *
    * 内联模式，主动配置textOverflow才会生效按[maxLines]{@link TextAreaAttribute#maxLines(value: number)}截断效果，不配置时，默认不截断。
    *
-   * 文本截断是按字截断。例如，英文以单词为最小单位进行截断，若需要以字母为单位进行截断，[wordBreak]{@link WordBreak}属性可设置为WordBreak.BREAK_ALL。
+   * 文本截断是按字截断。例如，英文以单词为最小单位进行截断，若需要以字母为单位进行截断，[wordBreak]{@link @global:WordBreak}属性可设置为WordBreak.BREAK_ALL。
    *
    * 当textOverflow设置为TextOverflow.None、TextOverflow.Clip、TextOverflow.Ellipsis时，需配合
    * [maxLines]{@link TextAreaAttribute#maxLines(value: number)}使用，单独设置不生效。设置TextOverflow.None与TextOverflow.Clip效果一样。
@@ -1154,7 +1154,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
   /**
    * 设置文本的行高，设置值不大于0时，不限制文本行高，自适应字体大小。
    *
-   * @param { number | string | Resource } value - 文本的行高。需要显式指定[像素单位]{@link ./common}，如'10px'，也可设置百分比字符串，如'100%'。
+   * @param { number | string | Resource } value - 文本的行高。需要显式指定[像素单位]{@link CommonMethod}，如'10px'，也可设置百分比字符串，如'100%'。
    *     <br>**说明**：不指定像素单位时，默认单位fp，如'10'，等同于10。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

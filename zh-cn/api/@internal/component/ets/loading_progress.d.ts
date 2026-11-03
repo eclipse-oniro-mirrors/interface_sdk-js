@@ -73,7 +73,7 @@ declare enum LoadingProgressStyle {
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -98,7 +98,7 @@ interface LoadingProgressInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * > **说明：**
  * >
@@ -194,7 +194,7 @@ declare interface LoadingProgressConfiguration extends CommonConfiguration<Loadi
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * ###### 子组件
  *

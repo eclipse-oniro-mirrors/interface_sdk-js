@@ -443,7 +443,7 @@ declare interface ChainAnimationOptions {
 }
 
 /**
- * frameNode中[getEvent('List')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'List')}方法的返
+ * frameNode中[getEvent('List')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'List')}方法的返
  * 回值，可用于给List节点设置滚动事件。
  *
  * UIListEvent继承于[UIScrollableCommonEvent]{@link UIScrollableCommonEvent}。
@@ -514,7 +514,7 @@ declare interface UIListEvent extends UIScrollableCommonEvent {
 }
 
 /**
- * 收起[EXPANDED]{@link SwipeActionState}状态[ListItem]{@link ./list_item}回调事件集合，用于设置收起动画完成后回调事件。
+ * 收起[EXPANDED]{@link SwipeActionState}状态[ListItem]{@link @global:ListItem}回调事件集合，用于设置收起动画完成后回调事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -672,7 +672,7 @@ declare type OnListScrollIndexCallback = (start: number, end: number, center: nu
 declare class ListScroller extends Scroller {
 
   /**
-   * 获取[ListItemGroup]{@link ./list_item_group}中的[ListItem]{@link ./list_item}的大小和相对于List的位置。
+   * 获取[ListItemGroup]{@link @global:ListItemGroup}中的[ListItem]{@link @global:ListItem}的大小和相对于List的位置。
    *
    * @param { number } index - ListItemGroup在List中的索引值。
    * @param { number } indexInGroup - ListItem在ListItemGroup中的索引值。
@@ -714,9 +714,9 @@ declare class ListScroller extends Scroller {
   scrollToItemInGroup(index: number, indexInGroup:number, smooth?: boolean, align?: ScrollAlign): void;
 
   /**
-   * 将[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link ./list_item}收起，并设置回调事件。
+   * 将[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link @global:ListItem}收起，并设置回调事件。
    *
-   * @param { CloseSwipeActionOptions } options - 收起[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link ./list_item}的回
+   * @param { CloseSwipeActionOptions } options - 收起[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link @global:ListItem}的回
    *     调事件集合。不传入时不设置回调事件。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
@@ -854,8 +854,8 @@ interface ListOptions {
    *
    * **说明：**
    *
-   * 不允许和其他滚动类组件，如：[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link ./list}、[Grid]{@link ./grid}、
-   * [Scroll]{@link ./scroll}和[WaterFlow]{@link ./water_flow}绑定同一个滚动控制对象。
+   * 不允许和其他滚动类组件，如：[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、
+   * [Scroll]{@link @global:Scroll}和[WaterFlow]{@link @global:WaterFlow}绑定同一个滚动控制对象。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -916,7 +916,7 @@ declare enum ScrollSnapAnimationSpeed {
  * Repeat结合，它的懒加载行为和ForEach一致。
  *
  * 如果可滚动组件嵌套List组件，并且滚动方向相同，List组件又没有设置主轴尺寸时，List组件会全量加载子组件，导致懒加载失效。该场景推荐使用List嵌套
- * [ListItemGroup]{@link ./list_item_group}组件以优化性能。
+ * [ListItemGroup]{@link @global:ListItemGroup}组件以优化性能。
  *
  * List的预加载是指除了加载显示区域内可见的子组件外，还支持在空闲时隙提前加载部分显示区域外不可见的子组件。使用预加载可以减少滚动丢帧，提升流畅性。预加载需要结合懒加载才会生效。List支持通过
  * [cachedCount]{@link ListAttribute#cachedCount(value: number)}设置预加载的数量。默认会预加载显示区域上下各一屏子组件（最大预加载16行子组件）。List和
@@ -931,7 +931,7 @@ declare enum ScrollSnapAnimationSpeed {
  *
  * > **说明：**
  * >
- * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -1056,10 +1056,10 @@ declare interface ListDividerOptions {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还
+ * 除支持[通用属性]{@link CommonMethod}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还
  * 支持以下属性：
  *
- * 除支持[通用事件]{@link ./common}和[滚动组件通用事件](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#事件)外，还
+ * 除支持[通用事件]{@link CommonMethod}和[滚动组件通用事件](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#事件)外，还
  * 支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1253,7 +1253,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    *
    * 多列模式下，ListItem与ListItem之间的分割线起始边距从每一列的交叉轴方向起始边开始计算，单列模式从List交叉轴方向起始边开始计算。
    *
-   * ListItem设置[多态样式]{@link common}时，被按压的子组件上下的分割线不绘制。
+   * ListItem设置[多态样式]{@link CommonMethod}时，被按压的子组件上下的分割线不绘制。
    *
    * @param { object | null } value - Style of the divider for the list items.<br>Default value: **null** [since 7 - 8]
    * @param { {strokeWidth: Length;color?: ResourceColor;startMargin?: Length;endMargin?: Length;} | null }
@@ -1425,7 +1425,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   chainAnimationOptions(value: ChainAnimationOptions): ListAttribute;
 
   /**
-   * 配合[ListItemGroup]{@link ./list_item_group}组件使用，设置ListItemGroup中header是否要吸顶或footer是否要吸底。从API version 20开始，sticky属性支持
+   * 配合[ListItemGroup]{@link @global:ListItemGroup}组件使用，设置ListItemGroup中header是否要吸顶或footer是否要吸底。从API version 20开始，sticky属性支持
    * StickyStyle.BOTH枚举值，可直接设置为StickyStyle.BOTH以同时支持header吸顶和footer吸底，效果与StickyStyle.Header | StickyStyle.Footer相同。API
    * version 20之前，可通过StickyStyle.Header | StickyStyle.Footer达到相同效果。
    *
@@ -1612,7 +1612,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   editModeOptions(options?: EditModeOptions): ListAttribute;
 
   /**
-   * 设置List是否启用编辑模式，启用编辑模式后可以在List组件内滑动多选[ListItem]{@link ./list_item}。未通过该接口设置时，不启用编辑模式。
+   * 设置List是否启用编辑模式，启用编辑模式后可以在List组件内滑动多选[ListItem]{@link @global:ListItem}。未通过该接口设置时，不启用编辑模式。
    *
    * @param { boolean | undefined } enabled - 是否启用编辑模式，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md)双向绑定
    *     变量。<br/>设置为true时启用编辑模式，可以滑动多选；设置为false或undefined时关闭编辑模式，不可滑动多选。
@@ -1818,7 +1818,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDelete(event: (index: number) => boolean): ListAttribute;
 
   /**
-   * List的子组件[ListItem]{@link ./list_item}发生移动时触发。
+   * List的子组件[ListItem]{@link @global:ListItem}发生移动时触发。
    *
    * @param { function } event
    * @returns { ListAttribute }
@@ -1832,7 +1832,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemMove(event: (from: number, to: number) => boolean): ListAttribute;
 
   /**
-   * 开始拖拽List的子组件[ListItem]{@link ./list_item}时触发。
+   * 开始拖拽List的子组件[ListItem]{@link @global:ListItem}时触发。
    *
    * 不支持拖动到List边缘时触发List的自动滚动，可以使用ForEach、LazyForEach、Repeat的
    * [onMove]{@link CommonMethod#onMove}接口实现该效果，参考
@@ -1848,7 +1848,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    *     earlier versions, the parameter type is **(event: ItemDragInfo, itemIndex: number) => (() => any) | void**. For
    *     details about the **event** and **itemIndex** parameters, see
    *     [OnItemDragStartCallback]{@link OnItemDragStartCallback}. [since 8 - 22]
-   * @param { OnItemDragStartCallback } event - List的子组件[ListItem]{@link ./list_item}拖拽开始时触发的回调。
+   * @param { OnItemDragStartCallback } event - List的子组件[ListItem]{@link @global:ListItem}拖拽开始时触发的回调。
    *     <br> API version 22及之前版本，该参数类型为(event: ItemDragInfo, itemIndex: number) => (() => any) | void，其中event和itemIndex
    *     参数含义参考[OnItemDragStartCallback]{@link OnItemDragStartCallback}。 [since 23]
    * @returns { ListAttribute }
@@ -1861,7 +1861,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragStart(event: OnItemDragStartCallback): ListAttribute;
 
   /**
-   * 拖拽List的子组件[ListItem]{@link ./list_item}进入列表范围内时触发。
+   * 拖拽List的子组件[ListItem]{@link @global:ListItem}进入列表范围内时触发。
    *
    * @param { function } event - 拖拽点的信息。
    * @returns { ListAttribute }
@@ -1874,7 +1874,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragEnter(event: (event: ItemDragInfo) => void): ListAttribute;
 
   /**
-   * 拖拽List的子组件[ListItem]{@link ./list_item}在列表范围内移动时触发。
+   * 拖拽List的子组件[ListItem]{@link @global:ListItem}在列表范围内移动时触发。
    *
    * @param { function } event
    * @returns { ListAttribute }
@@ -1887,7 +1887,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   onItemDragMove(event: (event: ItemDragInfo, itemIndex: number, insertIndex: number) => void): ListAttribute;
 
   /**
-   * 拖拽List的子组件[ListItem]{@link ./list_item}离开列表范围时触发。
+   * 拖拽List的子组件[ListItem]{@link @global:ListItem}离开列表范围时触发。
    *
    * @param { function } event
    * @returns { ListAttribute }
@@ -1959,7 +1959,7 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
  * Repeat结合，它的懒加载行为和ForEach一致。
  *
  * 如果可滚动组件嵌套List组件，并且滚动方向相同，List组件又没有设置主轴尺寸时，List组件会全量加载子组件，导致懒加载失效。该场景推荐使用List嵌套
- * [ListItemGroup]{@link ./list_item_group}组件以优化性能。
+ * [ListItemGroup]{@link @global:ListItemGroup}组件以优化性能。
  *
  * List的预加载是指除了加载显示区域内可见的子组件外，还支持在空闲时隙提前加载部分显示区域外不可见的子组件。使用预加载可以减少滚动丢帧，提升流畅性。预加载需要结合懒加载才会生效。List支持通过
  * [cachedCount]{@link ListAttribute#cachedCount(value: number)}设置预加载的数量。默认会预加载显示区域上下各一屏子组件（最大预加载16行子组件）。List和
@@ -1974,11 +1974,11 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
  *
  * > **说明：**
  * >
- * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+ * > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
  *
  * ###### 子组件
  *
- * 仅支持[ListItem]{@link ./list_item}、[ListItemGroup]{@link ./list_item_group}子组件和自定义组件。自定义组件在List下使用时，请使用ListItem或
+ * 仅支持[ListItem]{@link @global:ListItem}、[ListItemGroup]{@link @global:ListItemGroup}子组件和自定义组件。自定义组件在List下使用时，请使用ListItem或
  * ListItemGroup作为自定义组件的顶层组件，请勿直接给自定义组件设置属性和事件方法，因为List通过ListItem或ListItemGroup管理子组件的布局和事件处理，直接设置可能导致部分功能无法正常生效。
  *
  * 支持通过渲染控制类型（[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、

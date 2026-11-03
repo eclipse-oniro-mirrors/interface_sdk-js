@@ -1461,7 +1461,7 @@ declare namespace webview {
      *     <br>The value is **false** when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1483,7 +1483,7 @@ declare namespace webview {
      *     <br>The value is **false** when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1526,7 +1526,7 @@ declare namespace webview {
      *     <br>If the operation fails, the geolocation permission status of the specified origin is not found.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1553,7 +1553,7 @@ declare namespace webview {
      *     <br>Throws an exception error with error code 401 when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1704,7 +1704,10 @@ declare namespace webview {
    *
    * > **NOTE**
    * >
-   * > - Static methods must be used on the user interface (UI) thread.
+   * > - By default, static methods must be called on the user interface (UI) thread. Starting from API version 26.0.1,
+   * > static methods can be called on non-UI threads when
+   * > [setLazyInitializeWebEngine]{@link webview.WebCookieManager.setLazyInitializeWebEngine(lazy: boolean)} is
+   * > set to true.
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -2326,7 +2329,7 @@ declare namespace webview {
      * > initialization of the ArkWeb kernel when initializing CookieManager. You need to initialize the ArkWeb kernel
      * > separately afterwards.
      * > 
-     * > -Since API version 26.0.1, when set to **true**, CookieManager interfaces can be used in asynchronous threads.
+     * > - Since API version 26.0.1, when set to **true**, WebCookieManager interfaces can be called in non-UI threads.
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -4703,6 +4706,9 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScript is called multiple times, scripts are executed sequentially in the order of invocation;
+     * > however, the order in which promise results are returned is not guaranteed to match the call order.
      *
      * @param { string } script - JavaScript script.
      * @returns { Promise<string> } Promise used to return the result if the operation is successful and null otherwise.
@@ -4737,6 +4743,9 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScript is called multiple times, scripts are executed sequentially in the order of invocation;
+     * > however, the order in which callback results are returned is not guaranteed to match the call order.
      *
      * @param { string } script - JavaScript script.
      * @param { AsyncCallback<string> } callback - Callback used to return the result. **null** is returned if the
@@ -4762,6 +4771,10 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScriptExt is called multiple times, scripts are executed sequentially in the order of
+     * > invocation; however, the order in which promise results are returned is not guaranteed to match the
+     * > call order.
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript script. [since 12]
@@ -4786,6 +4799,10 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScriptExt is called multiple times, scripts are executed sequentially in the order of
+     * > invocation; however, the order in which callback results are returned is not guaranteed to match the
+     * > call order.
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript script. [since 12]
@@ -4974,7 +4991,7 @@ declare namespace webview {
     getBackForwardEntries(): BackForwardList;
 
     /**
-     * Removes all resource caches generated by Webview in the app.
+     * Clears the resource cache associated with the current WebView context.
      *
      * @param { boolean } clearRom - Whether to clear the cache files in both ROM and RAM. If this parameter is set to
      *     **true**, the cache files in both ROM and RAM are cleared. If this parameter is set to **false**, only the

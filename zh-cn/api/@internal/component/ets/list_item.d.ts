@@ -501,7 +501,7 @@ declare interface ListItemOptions {
  *
  * > **说明：**
  * >
- * > - 该组件的父组件只能是[List]{@link ./list}或者[ListItemGroup]{@link ./list_item_group}。
+ * > - 该组件的父组件只能是[List]{@link @global:List}或者[ListItemGroup]{@link @global:ListItemGroup}。
  * >
  * > - 当ListItem配合[LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)使用时，ListItem子组件在
  * > ListItem创建时创建。配合[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
@@ -548,7 +548,7 @@ interface ListItemInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -590,7 +590,7 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
   editable(value: boolean | EditMode): ListItemAttribute;
 
   /**
-   * 设置当前ListItem元素是否可以被鼠标框选。外层[List]{@link ./list}组件设置[multiSelectable]{@link ListAttribute#multiSelectable}为true开启鼠标框选
+   * 设置当前ListItem元素是否可以被鼠标框选。外层[List]{@link @global:List}组件设置[multiSelectable]{@link ListAttribute#multiSelectable}为true开启鼠标框选
    * 时，ListItem的框选才生效。
    *
    * @param { boolean } value
@@ -606,7 +606,7 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
 
   /**
    * 设置当前ListItem选中状态。该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。该属性需要在设置
-   * [多态样式]{@link ./common}前使用才能生效选中态样式。
+   * [多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * @param { boolean } value - 当前ListItem选中状态。设置为true时为选中状态，设置为false时为默认状态。<br/>默认值：false<br/>**说明：** 需要在设置多态样式前使用才能生效选
    *     中态样式。
@@ -636,7 +636,7 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
   /**
    * ListItem元素被鼠标框选的状态改变时触发回调。
    *
-   * 外层[List]{@link ./list}组件设置[multiSelectable]{@link ListAttribute#multiSelectable}为true开启鼠标框选，且当前ListItem的
+   * 外层[List]{@link @global:List}组件设置[multiSelectable]{@link ListAttribute#multiSelectable}为true开启鼠标框选，且当前ListItem的
    * [selectable]{@link ListItemAttribute#selectable}属性为true时，触发该回调。
    *
    * @param { function } event
@@ -669,7 +669,7 @@ declare const ListItemInstance: ListItemAttribute;
  *
  * > **说明：**
  * >
- * > - 该组件的父组件只能是[List]{@link ./list}或者[ListItemGroup]{@link ./list_item_group}。
+ * > - 该组件的父组件只能是[List]{@link @global:List}或者[ListItemGroup]{@link @global:ListItemGroup}。
  * >
  * > - 当ListItem配合[LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)使用时，ListItem子组件在
  * > ListItem创建时创建。配合[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、

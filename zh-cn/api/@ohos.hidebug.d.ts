@@ -537,6 +537,18 @@ declare namespace hidebug {
    */
   function getAppVMObjectUsedSize(): bigint;
 
+    /**
+   * 获取虚拟机中共享堆对象所占用的内存大小。
+   *
+   * @returns { bigint } 虚拟机中共享堆对象所占用的内存大小, 单位为KB。
+   * @throws { BusinessError } 11400104 - VM instance exception.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  function getAppSharedHeapObjectUsedSize(): bigint;
+
   /**
    * 读取/proc/{pid}/smaps_rollup和/proc/{pid}/statm节点的数据以获取应用进程内存信息，使用Promise异步回调。
    *

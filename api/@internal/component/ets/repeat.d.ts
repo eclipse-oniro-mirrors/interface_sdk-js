@@ -446,6 +446,42 @@ declare class RepeatAttribute<T> extends DynamicNode<RepeatAttribute<T>> {
 }
 
 /**
+ * Defines a controller of the **Repeat** component. You can bind the controller to the **Repeat** component through
+ * the **controller** field in [RepeatOptions]{@link RepeatOptions} and call
+ * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the **Repeat** component
+ * as needed.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare class RepeatController {
+  /**
+   * A constructor used to create a <em>RepeatController</em> object.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor();
+
+  /**
+   * Clears the nodes in the reuse pool of the **Repeat** component bound to this controller.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(): void;
+}
+
+/**
  * Defines a union type for **Repeat** data source parameters.
  *
  * @unionmember { Array<T> } Regular array type.
@@ -491,6 +527,18 @@ interface RepeatOptions {
    * @since 26.1.0 dynamic
    */
   allowReuseInAnimation?: boolean;
+  /**
+   * Controller bound to the **Repeat** component. When the controller is bound, you can call
+   * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the **Repeat** component
+   * as needed.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  controller?: RepeatController;
 }
 
 /**
@@ -498,7 +546,7 @@ interface RepeatOptions {
  *
  * @param { RepeatArray<T> } arr - The Data Source.
  * @param { RepeatOptions } [options] - Options for creating the **Repeat** component. [since 26.1.0]
- * @returns { RepeatAttribute<T> }
+ * @returns { RepeatAttribute<T> } - The Attribute of Repeat.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

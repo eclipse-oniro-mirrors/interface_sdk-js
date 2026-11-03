@@ -511,6 +511,191 @@ declare namespace uniformDataStruct {
   }
 
   /**
+   * Describes the common metadata of a virtual file system item used for on-demand drag data.
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualBaseItem {
+    /**
+     * Item name. The value cannot contain a slash, backslash, **.**, or **..**, and is at most 255 bytes.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    name: string;
+ 
+    /**
+     * Item type.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'file' | 'dir';
+ 
+    /**
+     * Last modification time, in milliseconds since the Unix epoch.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    modifyTime: long;
+  }
+ 
+  /**
+   * Describes a virtual file whose bytes are provided on demand.
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualFileItem extends VirtualBaseItem {
+    /**
+     * Identifier passed to virtual file callbacks. The value is at most 1024 bytes.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    id: string;
+    /**
+     * File item discriminator.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'file';
+    /**
+     * Required file size in bytes. It must be a non-negative integer; zero represents an empty file.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    size: long;
+  }
+ 
+  /**
+   * Describes a virtual directory and its optional child items.
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualDirItem extends VirtualBaseItem {
+    /**
+     * Directory item discriminator.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'dir';
+    /**
+     * Child items exposed when the target application enumerates this directory.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    subItems?: Array<VirtualItemType>;
+  }
+ 
+  /**
+   * Virtual file or directory metadata.
+   *
+   * @typedef VirtualItemType
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualItemType = VirtualFileItem | VirtualDirItem;
+ 
+  /**
+   * Callback that obtains current metadata for a virtual file.
+   *
+   * @typedef { function } VirtualFileOnStat
+   * @param { string } id - Identifier of the virtual file.
+   * @returns { Promise<VirtualFileItem> } Virtual file metadata returned through a promise.
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnStat = (id: string) => Promise<VirtualFileItem>;
+  /**
+   * Callback that reads at most **length** bytes from a virtual file. A single request is at most 5 MiB.
+   *
+   * @typedef { function } VirtualFileOnRead
+   * @param { string } id - Identifier of the virtual file.
+   * @param { long } offset - Zero-based byte offset to read.
+   * @param { int } length - Maximum number of bytes to read.
+   * @returns { Promise<Uint8Array> } File bytes returned through a promise. An empty array indicates end of file.
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnRead = (id: string, offset: long, length: int) => Promise<Uint8Array>;
+  /**
+   * Callback that cancels pending work for the specified virtual file identifiers.
+   *
+   * @typedef { function } VirtualFileOnCancel
+   * @param { Array<string> } idList - Identifiers of the virtual files to cancel.
+   * @returns { Promise<void> } Promise used to return the result.
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnCancel = (idList: Array<string>) => Promise<void>;
+ 
+  /**
+   * Defines a virtual root and the callbacks used by UDMF to serve it after a successful drag drop.
+   * Callback state remains in the source process and is never returned by a target-side get operation.
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualFileInfo {
+    /**
+     * Virtual file or directory used as the root item.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    itemInfo: VirtualItemType;
+    /**
+     * Optional metadata callback used to obtain current file metadata.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onStat?: VirtualFileOnStat;
+    /**
+     * On-demand read callback.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onRead: VirtualFileOnRead;
+    /**
+     * Optional cancellation callback. If omitted, cancellation succeeds without notifying the provider.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onCancel?: VirtualFileOnCancel;
+  }
+
+  /**
    * Defines the file URI typed data, which is used to describe the URI address information of a file. After a FileUri
    * object is created, it can be used in scenarios such as file drag-and-drop and file sharing, support controlling
    * file access permissions through uriAuthorizationPolicies, and implement cross-application file data transfer and
@@ -579,6 +764,15 @@ declare namespace uniformDataStruct {
      * @since 26.0.0 dynamic&static
      */
     uriAuthorizationPolicies?: Array<int>;
+
+    /**
+     * Virtual file content supplied on demand. Every file must declare a non-negative size.
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    virtualEntry?: VirtualFileInfo;
   }
 
   /**

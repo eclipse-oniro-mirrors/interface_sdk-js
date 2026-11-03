@@ -507,7 +507,7 @@ export interface AnimationController {
 }
 
 /**
- * 使用[Image]{@link ./@internal/component/ets/image}组件播放PixelMap数组或动图资源时传入
+ * 使用[Image]{@link @global:Image}组件播放PixelMap数组或动图资源时传入
  * AnimatedDrawableDescriptor对象，
  * 该对象继承自[DrawableDescriptor]{@link DrawableDescriptorLoadedResult}。
  *
@@ -549,9 +549,9 @@ export class AnimatedDrawableDescriptor extends DrawableDescriptor {
   /**
    * 获取动画控制器。
    *
-   * @param { string } [id] - 组件的id。<br/>当[Image]{@link ./@internal/component/ets/image}组件与
-   *     AnimatedDrawableDescriptor确保1比1持有（仅传入一个[Image]{@link ./@internal/component/ets/image}组件）时，
-   *     id非必填；<br/>若同一AnimatedDrawableDescriptor需绑定多个[Image]{@link ./@internal/component/ets/image}组件，
+   * @param { string } [id] - 组件的id。<br/>当[Image]{@link @global:Image}组件与
+   *     AnimatedDrawableDescriptor确保1比1持有（仅传入一个[Image]{@link @global:Image}组件）时，
+   *     id非必填；<br/>若同一AnimatedDrawableDescriptor需绑定多个[Image]{@link @global:Image}组件，
    *     则必须设置唯一id以准确获取对应组件的动画控制器（唯一性由开发者保证）。<br/>
    *     此规则基于动画系统设计原则：动画数据可多组
    *     件共享，但各组件动画独立运行，AnimationController与组件严格1比1持有关系

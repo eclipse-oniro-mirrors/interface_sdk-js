@@ -19,15 +19,10 @@
  */
 
 /**
- * As a child component of the [Text]{@link ./text} component, the **ContainerSpan** component is used to manage the
- * background colors and rounded corners of multiple [Span]{@link ./span} and [ImageSpan]{@link ./image_span} components
+ * As a child component of the [Text]{@link @global:Text} component, the **ContainerSpan** component is used to manage the
+ * background colors and rounded corners of multiple [Span]{@link @global:Span} and [ImageSpan]{@link @global:ImageSpan} components
  * in a unified manner. It applies to scenarios where a unified background style needs to be set for a combination of
  * text segments and images.
- *
- * > **NOTE**
- * >
- * > - This component is supported since API version 11. Newly added APIs will be marked with a superscript to indicate
- * > their.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -99,19 +94,14 @@ declare class ContainerSpanAttribute {
 }
 
 /**
- * As a child component of the [Text]{@link ./text} component, the **ContainerSpan** component is used to manage the
- * background colors and rounded corners of multiple [Span]{@link ./span} and [ImageSpan]{@link ./image_span} components
+ * As a child component of the [Text]{@link @global:Text} component, the **ContainerSpan** component is used to manage the
+ * background colors and rounded corners of multiple [Span]{@link @global:Span} and [ImageSpan]{@link @global:ImageSpan} components
  * in a unified manner. It applies to scenarios where a unified background style needs to be set for a combination of
  * text segments and images.
  *
- * > **NOTE**
- * >
- * > - This component is supported since API version 11. Newly added APIs will be marked with a superscript to indicate
- * > their
- *
  * ###### Child Components
  *
- * This component can contain the [Span]{@link ./span} and [ImageSpan]{@link ./image_span} child components.
+ * This component can contain the [Span]{@link @global:Span} and [ImageSpan]{@link @global:ImageSpan} child components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

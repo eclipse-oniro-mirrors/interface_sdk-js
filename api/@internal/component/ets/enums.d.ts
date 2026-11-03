@@ -6855,7 +6855,7 @@ declare enum ImmersiveStrategy {
   /**
    * Expand the title area of bindSheet as safe area for the content region.
    *
-  * > **NOTE**
+   * > **NOTE**
    * >
    * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
    * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to

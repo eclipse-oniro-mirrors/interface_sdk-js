@@ -31,13 +31,13 @@ import { WrappedBuilder } from 'wrappedBuilderObject';
  *
  * **ComponentContent** represents an entity encapsulation of component content, which can be created and transmitted
  * outside of UI components. It allows you to encapsulate and decouple dialog box components. Its underlying
- * implementation uses BuilderNode. For details, see [BuilderNode]{@link ./BuilderNode}.
+ * implementation uses BuilderNode. For details, see [BuilderNode]{@link @ohos.arkui.node:BuilderNode}.
  *
  * **ReactiveComponentContent** represents an entity encapsulation of component content, and its objects can be created
  * and transmitted outside of UI components. It supports automatic updates of responsive data, complete lifecycle
  * management, and component reuse, making it suitable for scenarios requiring high-performance rendering such as long
  * lists. Its underlying layer uses **ReactiveBuilderNode**. For specific usage specifications, see
- * [ReactiveBuilderNode]{@link ./BuilderNode:ReactiveBuilderNode}.
+ * [ReactiveBuilderNode]{@link @ohos.arkui.node:ReactiveBuilderNode}.
  *
  * > **NOTE**
  * >
@@ -268,7 +268,7 @@ export class ComponentContent<T extends Object> extends Content {
  * ReactiveComponentContent is inherited from
  * [Content](docroot://reference/apis-arkui/js-apis-arkui-Content.md#content-1) and is a container component used to
  * dynamically bear and reuse UI content. It uses the @Builder function to build the UI and uses
- * [ReactiveBuilderNode]{@link ./BuilderNode:ReactiveBuilderNode} to generate and manage the component tree. The core
+ * [ReactiveBuilderNode]{@link @ohos.arkui.node:ReactiveBuilderNode} to generate and manage the component tree. The core
  * value of this component is to provide complete lifecycle management for dynamic content so that it can be integrated
  * into the ArkUI component reuse system. This component is especially suitable for scenarios that require high-
  * performance rendering, such as long lists.

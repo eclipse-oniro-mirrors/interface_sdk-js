@@ -239,6 +239,18 @@ export declare interface CheckboxAttribute extends CommonMethod {
      */
     default attributeModifier(
         modifier: AttributeModifier<CheckboxAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置多选框选项。
+     *
+     * @param { CheckboxOptions } [options] - 多选框构造器选项
+     * @returns { CheckboxAttribute } 返回CheckboxAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setCheckboxOptions(options?: CheckboxOptions): this;
 }
 
 /**

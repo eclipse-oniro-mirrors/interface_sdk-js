@@ -1537,6 +1537,19 @@ export declare interface CustomComponentContext {
    * @since 26.0.0 dynamic
    */
   getReusePool(): IReusePool | undefined;
+
+  /**
+   * Obtains the default reuse pool of the custom component.
+   *
+   * @returns { IDefaultReusePool | undefined } If a default reuse pool is available for the current component, the
+   *     default reuse pool is returned. Otherwise, **undefined** is returned.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
 }
 
 /**
@@ -1605,6 +1618,33 @@ export declare interface IReusePool {
    * @since 26.0.0 dynamic
    */
   preRender(builder: WrappedBuilder<[]>, times: number): Promise<void>;
+}
+
+/**
+ * The **IDefaultReusePool** API provides the features related to the default reuse pool of a custom component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface IDefaultReusePool {
+
+  /**
+   * Clears the nodes in the reuse pool of the custom component.
+   *
+   * If **reuseId** is specified, only the nodes of the reusable custom component with the specified **reuseId** are
+   * cleared. If it is not specified, all nodes in the reuse pool are cleared.
+   *
+   * @param { string } [reuseId] - Reuse ID of the reusable custom component in the reuse pool to be cleared.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**

@@ -19,7 +19,7 @@
  */
 
 /**
- * **ImageSpan** is a child component of [Text]{@link ./text} and [ContainerSpan]{@link ./container_span}, used to
+ * **ImageSpan** is a child component of [Text]{@link @global:Text} and [ContainerSpan]{@link @global:ContainerSpan}, used to
  * display inline images in text. It supports setting the image alignment, scale type, loading placeholder image, and
  * color filter, and is suitable for scenarios where images need to be embedded in text paragraphs to implement image-
  * text layout.
@@ -64,8 +64,8 @@ interface ImageSpanInterface {
 }
 
 /**
- * The attributes inherit from [BaseSpan]{@link BaseSpan}. Among the universal attributes, [size]{@link ./common},
- * [background]{@link ./common}, and [border]{@link ./common} are supported.
+ * The attributes inherit from [BaseSpan]{@link BaseSpan}. Among the universal attributes, [size]{@link CommonMethod},
+ * [background]{@link CommonMethod}, and [border]{@link CommonMethod} are supported.
  *
  * @extends CommonMethod<ImageSpanAttribute> [since 10 - 10]
  * @extends BaseSpan<ImageSpanAttribute> [since 11]
@@ -221,7 +221,7 @@ declare class ImageSpanAttribute extends BaseSpan<ImageSpanAttribute> {
 }
 
 /**
- * **ImageSpan** is a child component of [Text]{@link ./text} and [ContainerSpan]{@link ./container_span}, used to
+ * **ImageSpan** is a child component of [Text]{@link @global:Text} and [ContainerSpan]{@link @global:ContainerSpan}, used to
  * display inline images in text. It supports setting the image alignment, scale type, loading placeholder image, and
  * color filter, and is suitable for scenarios where images need to be embedded in text paragraphs to implement image-
  * text layout.

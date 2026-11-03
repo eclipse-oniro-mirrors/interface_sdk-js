@@ -129,7 +129,7 @@ interface CircleInterface {
  */
 declare class CircleAttribute extends CommonShapeMethod<CircleAttribute> {
   /**
-   * Sets the stroke color. [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics} can be used to describe the color
+   * Sets the stroke color. [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} can be used to describe the color
    * for HDR brightening. This attribute can be dynamically set using
    * [attributeModifier]{@link CommonMethod#attributeModifier}. If this attribute is not set, the default stroke color
    * is [Color]{@link Color}.Transparent, that is, no stroke is drawn. Abnormal values undefined and null are treated as
@@ -150,7 +150,7 @@ declare class CircleAttribute extends CommonShapeMethod<CircleAttribute> {
   stroke(value: ResourceColor | ColorMetrics): CircleAttribute;
   
   /**
-   * Sets the color of the fill area. [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics} can be used to describe
+   * Sets the color of the fill area. [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} can be used to describe
    * the color for HDR brightening. This attribute can be dynamically set using
    * [attributeModifier]{@link CommonMethod#attributeModifier}. If this attribute is not set, the default fill color is
    * [Color]{@link Color}.Black. Abnormal values **undefined**, **null**, **NaN**, and **Infinity** are treated as the
