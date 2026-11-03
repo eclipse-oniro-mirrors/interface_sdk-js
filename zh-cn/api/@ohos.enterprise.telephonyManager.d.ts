@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 通话管理
+ * @file Telephony Management
  * @kit MDMKit
  */
 
@@ -383,38 +383,170 @@ declare namespace telephonyManager {
   function getDefaultData(admin: Want): number;
 
   /**
-   * 根据指定的时间范围和电话号码查询通话记录。
+   * 根据指定的时间范围和电话号码查询短信消息。
    *
-   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
-   * @param { Want } admin - 企业设备管理扩展组件。
+   * @permission ohos.permission.ENTERPRISE_READ_MESSAGES
    * @param { TelephonyQueryConfig } queryConfig - 查询选项，包括时间范围和电话号码。
-   * @returns { Promise<Array<CallLogInfo>> } 符合查询条件的通话记录列表。
+   * @returns { Promise<Array<SmsMessageInfo>> } Promise对象，返回符合查询条件的短信消息列表。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200016 - Service execution timeout.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
-  function getCallLogs(admin: Want, queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
+  function getSmsMessages(queryConfig: TelephonyQueryConfig): Promise<Array<SmsMessageInfo>>;
 
   /**
-   * 查询通话记录的选项。
+   * 根据指定的时间范围和电话号码查询通话记录。企业MDM应用可通过此接口读取设备通话记录进行审计。
+   * 支持按时间范围和号码进行筛选查询。查询时间范围不能超过31天，号码采用完全匹配。
+   * 通话记录最多保存5000条，超过时自动删除最早的记录。
+   * 该接口使用Promise方式异步返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
+   * @param { TelephonyQueryConfig } queryConfig - 查询配置，包括时间范围和电话号码。
+   * @returns { Promise<Array<CallLogInfo>> } Promise对象，返回符合查询条件的通话记录列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCallLogs(queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
+
+  /**
+   * 获取短信发送的允许或禁用（白名单或黑名单）号码列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询策略。
+   * @returns { Array<string> } 白名单或黑名单中的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getSendSmsPolicyNumbers(policy: adminManager.Policy, queryPolicy?: common.QueryPolicy): Array<string>;
+
+  /**
+   * 获取短信接收的允许或禁用（白名单或黑名单）号码列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询策略。
+   * @returns { Array<string> } 白名单或黑名单中的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getReceiveSmsPolicyNumbers(policy: adminManager.Policy, queryPolicy?: common.QueryPolicy): Array<string>;
+
+  /**
+   * 添加短信发送的允许或禁用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { Array<string> } numbers - 要添加的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addSendSmsPolicyNumbers(policy: adminManager.Policy, numbers: Array<string>): void;
+
+  /**
+   * 移除短信发送的允许或禁用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { Array<string> } numbers - 要移除的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeSendSmsPolicyNumbers(policy: adminManager.Policy, numbers: Array<string>): void;
+
+  /**
+   * 添加短信接收的允许或禁用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { Array<string> } numbers - 要添加的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addReceiveSmsPolicyNumbers(policy: adminManager.Policy, numbers: Array<string>): void;
+
+  /**
+   * 移除短信接收的允许或禁用名单。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
+   * @param { adminManager.Policy } policy - 策略类型（白名单或黑名单）。
+   * @param { Array<string> } numbers - 要移除的电话号码列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
+   *     capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeReceiveSmsPolicyNumbers(policy: adminManager.Policy, numbers: Array<string>): void;
+
+  /**
+   * 查询短信和通话记录的选项。
    * 提供电话相关查询的通用查询参数。
    *
-   * @property { number } startTime - Query start time (timestamp, in seconds). Matched by call log creation time.
-   * @property { number } endTime - Query end time (timestamp, in seconds). Matched by call log creation time.
-   * @property { string } [telephoneNumber] - Telephone number to filter by (optional).
+   * @property { number } startTime - Query start time (timestamp, in milliseconds).
+   * @property { number } endTime - Query end time (timestamp, in milliseconds).
+   * @property { string } [phoneNumber] - Phone number to filter by (optional).
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
   interface TelephonyQueryConfig {
     /**
-     * 查询开始时间（时间戳，单位秒）。按通话记录创建时间匹配。
+     * 查询开始时间（时间戳，单位：秒）。按通话/短信记录创建时间匹配。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -423,7 +555,7 @@ declare namespace telephonyManager {
     startTime: number;
 
     /**
-     * 查询结束时间（时间戳，单位秒）。按通话记录创建时间匹配。
+     * 查询结束时间（时间戳，单位：秒）。按通话/短信记录创建时间匹配。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -432,7 +564,7 @@ declare namespace telephonyManager {
     endTime: number;
 
     /**
-     * 电话号码，用于过滤查询结果。不传则查询所有号码的通话记录。
+     * 要过滤的电话号码（可选）。默认值为空字符串，表示查询时所有记录。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -442,22 +574,81 @@ declare namespace telephonyManager {
   }
 
   /**
+   * 短信消息信息。
+   * 提供短信的详细信息，包括消息内容、发送方/接收方信息、时间戳以及使用的SIM卡槽位。
+   *
+   * @property { number } time - SMS receive/send time (millisecond timestamp).
+   * @property { boolean } isSender - SMS direction: **true** indicates send, **false** indicates receive.
+   * @property { number } slotId - SIM card slot ID.
+   * @property { string } phoneNumber - Phone number of the other party.
+   * @property { string } content - SMS content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface SmsMessageInfo {
+    /**
+     * 短信接收/发送时间（毫秒时间戳）。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    time: number;
+
+    /**
+     * 短信方向：**true** 表示发送，**false** 表示接收。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isSender: boolean;
+
+    /**
+     * SIM 卡槽位 ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    slotId: number;
+
+    /**
+     * 对方电话号码。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+
+    /**
+     * 短信内容。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
+  }
+
+  /**
    * 通话记录信息。
    * 提供通话记录的详细信息，包括通话时长、通话方向（呼入/呼出）、时间戳以及使用的SIM卡槽位。
    *
-   * @property { number } createTime - Call log creation time (timestamp, in seconds).
-   * @property { number } startTime - Call start time (timestamp, in seconds). 0 if the call was not connected.
-   * @property { number } endTime - Call end time (timestamp, in seconds). For unanswered calls, this is the hangup time.
+   * @property { number } startTime - Call start time (timestamp, in milliseconds).
+   * @property { number } endTime - Call end time (timestamp, in milliseconds).
    * @property { boolean } isIncoming - Call direction: **TRUE** indicates incoming, **false** indicates outgoing.
    * @property { number } slotId - SIM card slot ID.
-   * @property { string } telephoneNumber - Telephone number.
+   * @property { string } phoneNumber - Phone number.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
   interface CallLogInfo {
     /**
-     * 通话记录创建时间（时间戳，单位秒）。来电时为开始振铃时刻，去电时为拨出时刻。
+     * 通话记录创建时间（时间戳，单位：秒）。来电时为开始振铃时刻，去电时为拨出时刻。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -466,7 +657,7 @@ declare namespace telephonyManager {
     createTime: number;
 
     /**
-     * 通话接通时间（时间戳，单位秒）。通话未接通时为0。
+     * 通话接通时间（时间戳，单位：秒）。通话未接通时为0。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -475,7 +666,7 @@ declare namespace telephonyManager {
     startTime: number;
 
     /**
-     * 通话结束时间（时间戳，单位秒）。通话未接通时为挂断时间。
+     * 通话结束时间（时间戳，单位：秒）。通话未接通时为挂断时间。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -484,7 +675,7 @@ declare namespace telephonyManager {
     endTime: number;
 
     /**
-     * 通话方向：**true**表示呼入，**false**表示呼出。
+     * 通话方向：**true** 表示来电（呼入），**false** 表示去电（呼出）。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
@@ -493,7 +684,7 @@ declare namespace telephonyManager {
     isIncoming: boolean;
 
     /**
-     * SIM卡槽ID。
+     * SIM 卡槽位 ID。0表示卡槽1，1表示卡槽2。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
