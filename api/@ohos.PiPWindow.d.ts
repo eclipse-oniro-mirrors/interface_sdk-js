@@ -963,8 +963,8 @@ declare namespace PiPWindow {
 
     /**
      * Status of a component that can be switched. For example, for a microphone on/off component group, a camera on/off
-     * component group, and a mute/unmute component group, the value **PiPControlStatus.PLAY** means that the component
-     * is enabled and **PiPControlStatus.PAUSE** means that the component is disabled. For the hang-up component, the
+     * component group, and a mute/unmute component group, the value **PiPControlStatus.OPEN** means that the component
+     * is enabled and **PiPControlStatus.CLOSE** means that the component is disabled. For the hang-up component, the
      * default value is **-1**.
      *
      * @syscap SystemCapability.Window.SessionManager

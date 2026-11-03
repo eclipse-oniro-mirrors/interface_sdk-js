@@ -915,7 +915,7 @@ declare namespace PiPWindow {
     controlType: PiPControlType;
 
     /**
-     * 表示可切换状态的控件当前的状态，如具备播放和暂停两种状态的麦克风控件组、摄像头控件组和静音控件组，播放为PiPControlStatus.PLAY，暂停为PiPControlStatus.PAUSE。如不具备开/关和播放/暂停
+     * 表示可切换状态的控件当前的状态，如具备打开和关闭两种状态的麦克风控件组、摄像头控件组和静音控件组，打开为PiPControlStatus.OPEN，关闭为PiPControlStatus.CLOSE。如不具备开/关和播放/暂停
      * 状态的挂断控件默认返回值为-1。
      *
      * @syscap SystemCapability.Window.SessionManager
