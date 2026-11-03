@@ -5179,6 +5179,27 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     isFastRecordingSupported(streamInfo: AudioStreamInfo, source: SourceType): boolean;
+
+    /**
+     * 获取路由到指定设备的播放流实际所选通路中最高规格的流信息。
+     *
+     * > **说明：**
+     * > 返回的格式是系统路由后实际所选通路的格式，可能与创建流时请求的格式不同。不指定uid时查询所有应用的流。没有播放流路由到指定设备时返回null，包括应用没有创建AudioRenderer或应用创建的AudioRenderer输出设备不是传入的设备。
+     *
+     * @param { AudioDeviceDescriptor } deviceDescriptor -音频设备描述符。
+     * @param { int } [uid] - 表示要指定查询的应用ID。该参数为可选参数。
+     *    <br>取值限定为整数。默认值：不指定是查询所有应用的流信息。
+     * @returns { Promise<AudioStreamInfo | null> } Promise用于返回流信息。
+     * @throws { BusinessError } 202 - The caller is not a system application.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. Eusure that the specified
+     *    AudioDeviceDescriptor is valid and the device exists. Ensure that the specified uid is valid.
+     * @throws { BusinessError } 6800301 - System error. An unexpected error occurred in audio system.
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getHighestPipeStreamInfo(deviceDescriptor: AudioDeviceDescriptor, uid?: int): Promise<AudioStreamInfo | null>;
   }
 
   /**
