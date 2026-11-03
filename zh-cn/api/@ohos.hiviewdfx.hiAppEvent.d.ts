@@ -1815,6 +1815,38 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     useRefinedLogFileName?: boolean;
+
+    /**
+     * 是否使能资源泄漏事件的JSVM堆日志。
+     *
+     * true：使能资源泄漏事件的JSVM堆日志。
+     *
+     * false：不使能资源泄漏事件的JSVM堆日志。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    jsvmHeapLogEnable?: boolean;
+
+    /**
+     * 是否使能资源泄漏事件的V8堆日志。
+     *
+     * true：使能资源泄漏事件的V8堆日志。
+     *
+     * false：不使能资源泄漏事件的V8堆日志。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    v8HeapLogEnable?: boolean;
   }
 
   /**
