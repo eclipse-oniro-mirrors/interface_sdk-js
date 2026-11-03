@@ -62,18 +62,16 @@ declare namespace runningLock {
     lock(timeout: number): void;
 
     /**
-     * Lock and hold the RunningLock. This is applicable in scenarios where the system needs to prevent sleep
-     * when an application requires continuous background operation (such as background downloads, long-term
-     * location tracking, etc.) or when the screen needs to be controlled to trun on or off based on proximity sensor
-     * input during a call. After calling this method, you must call unhold() to release the lock once it is no longer
-     * needed, or set a timeout release time when calling the method so that the system automatically releases the lock.
-     * This method should be used in conjunction with the ubhold() method. Failure to release the lock will cause the
-     * sleep prevention or screen control functionality to remain active indefinitely. Repeated calls to hold()
-     * will not result in an error. Note: If you first call hold(-1) (to hold the lock permanently) and then  call
-     * hold(timeout) (to hold the lock for a specific duration), the lock will be released after the timeout
-     * milliseconds, meaning the timeout parameter of the latter call will owerride the former. It is recommended that
-     * if you need to update the timeout duration, first call unhold() to release the lock and then
-     * call hold(newTimeout).
+     * Lock and hold RunningLock. This mode is applicable to scenarios where the system sleeps when apps are running
+     * continuously in the background(such as background download and long-term location tracking) or scenarios where
+     * the proximity sensor is required to turn on and off the screen during a call. When this method is called,
+     * You must call unhold() to release the lock when the use is complete, or set the timeout release time when the
+     * call is complete so that the system automatically releases the lock. This method is used together with the
+     * unhold() method. If the lock is not released, the sleep or screen control function will continue to take effect.
+     * No error is reported when hold() is called repeatedly. Note: If hold(-1) is called before hold(timeout) is
+     * called, the lock is released after timeout milliseconds. That is, the timeout parameter of the next call
+     * overwrites the previous one.
+     * To update the timeout interval, call unhold() to release the lock and then call hold(newTimeout).
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @param { int } timeout - Duration for locking and holding the **RunningLock** object, in ms.<br>The value must be
@@ -123,9 +121,8 @@ declare namespace runningLock {
     unlock(): void;
 
     /**
-     * Releases this running lock. This method is used together with the hold() method. After the lock is held by
-     * calling the hold() method, this method is called to release the lock. If the unhold() method is called for
-     * a lock that is not held, no error is reported and the operation is regarded as no operation.
+     * Release the RunningLock lock. This method is used in conjunction with hold() to release the lock after holding()
+     * is called. Calling unhold() on an unheld lock does not report an error and is considered as no operation.
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @throws { BusinessError } 201 - If the permission is denied.
@@ -174,9 +171,9 @@ declare namespace runningLock {
      * event and release this lock after receiving the event. The behavior of this lock varies with devices. For details
      * about how to use this type of lock, see
      * [Preventing the Idle System from Entering Sleep Mode](docroot://basic-services/powermgr/runningLock/runningLock-dev.md).
-     * If the device does not support the BACKGROUND_USER_IDLE type, the create() method still returns a success
-     * message. However, the subsequen hold() call will not take effect amd no error will be reported.
-     * You are advised to use isSupported() to check whether the device supports this type after calling create().
+     * If the device does not support the BACKGBACK_USER_IDLE type, create() still returns success, but hold() does not
+     * take effect and no error is reported. You are advised to use isSupported() after creating() to check whether the
+     * device supports this type.
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 23 dynamic&static
@@ -262,9 +259,9 @@ declare namespace runningLock {
 
   /**
    * Creates a {@link RunningLock} object. This API uses an asynchronous callback to return the result.
-   * After creating the lock object, the hold() method must be called to lock and hold the lock in order for the lock
-   * functionality to take effect. It is not recommended to concurrently call create to create lock objects
-   * cross multiple Workers/TaskPools.
+   * After a lock object is created, you need to call the hold() method to lock and hold the lock to make
+   * the lock function take effect. You are not advised to invoke create concurrently in multiple
+   * Worker/TaskPools to create lock objects.
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - Name of the **RunningLock** object. The value must be a string.
@@ -283,9 +280,9 @@ declare namespace runningLock {
 
   /**
    * Creates a {@link RunningLock} object. This API uses a promise to return the result.
-   * After creating the lock object, the hold() method must be called to lock and hold the lock in order for the lock
-   * functionality to take effect. It is not recommended to concurrently call create to create lock objects
-   * cross multiple Workers/TaskPools.
+   * After a lock object is created, you need to call the hold() method to lock and hold the lock to make
+   * the lock function take effect. You are not advised to invoke create concurrently in multiple
+   * Worker/TaskPools to create lock objects.
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - Name of the **RunningLock** object. The value must be a string.

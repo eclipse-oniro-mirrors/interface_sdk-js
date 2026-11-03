@@ -117,8 +117,10 @@ declare namespace thermal {
   function subscribeThermalLevel(callback: AsyncCallback<ThermalLevel>): void;
 
   /**
-   * 订阅热档位变化时的回调提醒。使用callback异步回调。当设备温度跨越档位阈值导致热档位发生变化时，系统自动触发回调通知，通过callback返回变化后的热档位等级。
-   * 此方法与[thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback}配对使用， 用于取消先前注册的热档位回调。
+   * 订阅热档位变化时的回调提醒。使用callback异步回调。
+   * 当设备温度跨越档位阈值导致热档位发生变化时，系统自动触发回调通知，通过callback返回变化后的热档位等级。
+   * 此方法与[thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback}配对使用，
+   * 用于取消先前注册的热档位回调。
    *
    * - 每个进程仅支持订阅一个回调，重复订阅将覆盖。
    * - 回调函数应尽快返回，不可执行耗时操作（如同步文件 I/O），否则可能阻塞系统热档位通知投递。
@@ -139,7 +141,6 @@ declare namespace thermal {
    * 取消订阅热档位变化时的回调提醒。使用callback异步回调。此方法与thermal.subscribeThermalLevel配对使用，用于取消先前订阅的热档位回调。
    *
    * @param { AsyncCallback<void> } [callback] - 回调函数，用来执行取消热档位变化回调后的资源回收等操作，无返回值。
-
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 8 dynamiconly
    * @deprecated since 9

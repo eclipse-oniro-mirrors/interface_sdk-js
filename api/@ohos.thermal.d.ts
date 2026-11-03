@@ -121,23 +121,24 @@ declare namespace thermal {
   function subscribeThermalLevel(callback: AsyncCallback<ThermalLevel>): void;
 
   /**
-   * Subscribes to the callback notification when the thermal level changes. This API uses an asynchronous callback.
-   * When Then device temperature crosses the threshold of a thermal level, the system automatically triggers a callback
-   * notification and returns the new thermal level through the callback. This method used in pairs
-   * with [thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback} to cancel the
-   * previously registered thermal level callback.
+   * Subscribe to the callback notification when the hot level changes. Use callback asynchronous callback.
+   * When the device temperature exceeds the threshold and the heat level changes, the system automatically triggers a
+   * callback notification and returns the changed heat level through the callback.
+   * This method is used in conjunction with
+   * [thermal.unregisterThermalLevelCallback]{@link thermal.unregisterThermalLevelCallback},
+   * Used to cancel a previously registered hot gear callback.
    *
-   * - Only one callback can be subscribed to in each process. Repeatde subscriptions will overwrite the previous one.
-   * - The callback function must return as soon as possible and cannot perform time-consuming operations (such as
-   * synchronous file I/O). Otherwise, the delivery of the thermal level notification may be blocked.
-   * - After the thermal management service restarts unexpectedly, the registered callback will automatically bacome
-   * invalid and no notifucation will be received. You need to call registerThrrmalLevelCallback again to
-   * resume the subscription.
-   * - When the thermal management service is unavailable, the subscription may fail silently and no exception will be
-   * thrown. You cannot determine whether the subscrption is successful based on the return value.
-   * It is recommended that you call [thermal.getLevel]{@link thermal.getLevel} to check whether the service is
-   * available after the subscription. If [thermal.getLevel]{@link thermal.getLevel} return COOL and the device
-   * is obviously overheating, the service may be unavailable.
+   * - Only one callback is supported per process, and repeated subscriptions will be overwritten.
+   * - The callback function must be returned as soon as possible. Do not perform time-consuming operations(such as
+   * synchronizing file I/Os). Otherwise, the delivery of system hot-level notifications may be blocked.
+   * - When the hot management service restarts abnormally, the registered callback will automatically become invalid
+   * and no notification will be received. The developer needs to call registerThermalLevelCallback again to resume the
+   * subscription.
+   * - Subscriptions may fail silently without throwing an exception when the hot management service is unavailable.
+   * Developers cannot determine whether the subscription is successful based on the returned value. It is recommended
+   * to verify service availability via [thermal.getLevel]{@link thermal.getLevel} after subscription
+   * (If the [thermal.getLevel]{@link thermal.getLevel} returns COOL and the device is significantly hot, the service
+   * may not be available).
    *
    * @param { Callback<ThermalLevel> } callback - Callback used to return thermal level. This parameter is of the
    *     function type.
@@ -162,16 +163,16 @@ declare namespace thermal {
   function unsubscribeThermalLevel(callback?: AsyncCallback<void>): void;
 
   /**
-   * Unregisters from the thermal level changes. This API uses an asynchronous callback to return the result.
-   * It is used together with [thermal.registerThermalLevelCallback]{@link thermal.registerThermalLevelCallback} to
-   * cancel the previously registered  thermal level callback. If the callback to be unregistered is not registered,
-   * no error will be reported and the operation is regarded as not performed.
+   * Unsubscribe from the callback notification when the hot level changes. Use callback asynchronous callback. This
+   * method is used in conjunction with thermal.registerThermalLevelCallback,
+   * Used to cancel a previously registered hot gear callback. No error is reported when unsubscribing from an
+   * unregistered callback, and no operation is performed.
    *
-   * @param { Callback<void> } callback - (Optional) Callback function. This is a notification callback triggered
-   * after the unregistration is completed, with no return value. This parameter is only used to receive notifications
-   * about the completion of unsubscription. The callback fountion will be invoked once the unsubscription is
-   * successfully completed. If this parameter is not passed, the unsubscription will still take effect,
-   * but the callback notification will not be triggered.
+   * @param { Callback<void> } [callback] - Callback function. Notification callback after the deregistration is
+   *     complete. No value is returned.
+   * This parameter is used only to receive notifications indicating that the subscription is canceled. This callback
+   * function is invoked when the subscription is canceled successfully. If this parameter is not transferred, the
+   * subscription cancellation still takes effect, but no callback notification is triggered.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Incorrect parameter types.
    * @syscap SystemCapability.PowerManager.ThermalManager
    * @since 9 dynamic
