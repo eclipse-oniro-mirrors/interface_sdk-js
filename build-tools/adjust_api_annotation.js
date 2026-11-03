@@ -103,10 +103,14 @@ function adjustApiAnnotation(utFiles) {
         const annotationArray = annotation.split("\n");
         const newAnnotation = [];
         let isNeedChange = false;
+        let hasTagStarted = false;
         annotationArray.forEach((item) => {
+          if (!hasTagStarted && ANNOTATION_KEYWORD.test(item)) {
+            hasTagStarted = true;
+          }
           const match = item.match(ANNOTATION_SINCE_REGEX);
           let annotationTemp = item;
-          if (match) {
+          if (match && hasTagStarted) {
             const matchText = match[1];
             const apiVersionRange = matchText.split("-").map((item) => item.trim());
             try {
@@ -252,7 +256,6 @@ function compareVersions(version1, version2) {
       const z = parseInt(match[3]);
       return x * 10000 + y * 100 + z;
     }
-    
     const num = parseFloat(str);
     if (!isNaN(num)) return num * 10000;
     return null;
