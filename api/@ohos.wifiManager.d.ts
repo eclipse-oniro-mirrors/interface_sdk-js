@@ -465,7 +465,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2501001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.STA
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function disconnectFromCandidateConfig(networkId: int, blockDuration: int): void;
 
