@@ -280,10 +280,9 @@ declare namespace PiPWindow {
      *
      * **false**: disables corner snapping.
      *
-     * The default value is **true**.
-     *
      * This API can be properly called on phones and tablets. If it is called on other device types, it has no effect.
      *
+     * @default true
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
      * @since 22 dynamic
