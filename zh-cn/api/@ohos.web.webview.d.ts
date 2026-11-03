@@ -1437,7 +1437,7 @@ declare namespace webview {
      *     <br>传入null或undefined时为false。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1471,7 +1471,7 @@ declare namespace webview {
      *     <br>获取失败，表示不存在指定源的权限状态。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1492,7 +1492,7 @@ declare namespace webview {
      *     <br>传入null或undefined时会抛出异常错误码401。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
