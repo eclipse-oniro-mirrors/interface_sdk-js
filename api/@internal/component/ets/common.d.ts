@@ -2113,7 +2113,7 @@ declare function getContext(component?: Object): Context;
  *
  * options: Parameters of the reusable custom component, used to configure the memory optimization policy. If this
  * parameter is not specified, no memory optimization policy is applied. You are advised to configure this parameter
- * in scenarios where components are frequently created and destroyed to achieve memory optimization.
+ * in scenarios where components are frequently created and destroyed to achieve memory optimization.**Since:** 26.0.0
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
