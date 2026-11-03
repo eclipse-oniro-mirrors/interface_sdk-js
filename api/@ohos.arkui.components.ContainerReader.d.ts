@@ -155,8 +155,8 @@ export interface BreakpointOptions {
  * >
  * > - The size of the **ContainerReader** component is determined by its parent container and its own layout, and is 
  * > not affected by its child components. Layout specifications under different parent containers: when the parent 
- * > container is [Flex]{@link ./flex}, [Column]{@link ./column}, or 
- * > [Row]{@link ./row}, the remaining space of **ContainerReader** is filled; when the parent 
+ * > container is [Flex]{@link @global:Flex}, [Column]{@link @global:Column}, or 
+ * > [Row]{@link @global:Row}, the remaining space of **ContainerReader** is filled; when the parent 
  * > container is of other types, the parent container is filled.
  * >
  * > - The parameters of the **ContainerReader** API must use state variables combined with the two-way binding (
@@ -236,8 +236,8 @@ export declare class ContainerReaderAttribute extends CommonMethod<ContainerRead
  * >
  * > - The size of the **ContainerReader** component is determined by its parent container and its own layout, and is 
  * > not affected by its child components. Layout specifications under different parent containers: when the parent 
- * > container is [Flex]{@link ./flex}, [Column]{@link ./column}, or 
- * > [Row]{@link ./row}, the remaining space of **ContainerReader** is filled; when the parent 
+ * > container is [Flex]{@link @global:Flex}, [Column]{@link @global:Column}, or 
+ * > [Row]{@link @global:Row}, the remaining space of **ContainerReader** is filled; when the parent 
  * > container is of other types, the parent container is filled.
  * >
  * > - The parameters of the **ContainerReader** API must use state variables combined with the two-way binding (

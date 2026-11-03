@@ -59,7 +59,7 @@ interface MenuInterface {
    * > - The minimum width is 64 vp.
    * >
    * > - Common attributes that are not supported by **Menu** include the following: attributes
-   * > [Outline Styling]{@link ./common} and the
+   * > [Outline Styling]{@link CommonMethod} and the
    * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} attribute.
    *
    * @returns { MenuAttribute }
@@ -115,7 +115,7 @@ declare enum SubMenuExpandingMode {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -291,7 +291,7 @@ declare class MenuAttribute extends CommonMethod<MenuAttribute> {
  *
  * ###### Child Components
  *
- * This component contains the [MenuItem]{@link ./menu_item} and [MenuItemGroup]{@link ./menu_item_group} child
+ * This component contains the [MenuItem]{@link @global:MenuItem} and [MenuItemGroup]{@link @global:MenuItemGroup} child
  * components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

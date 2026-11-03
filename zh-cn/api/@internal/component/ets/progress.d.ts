@@ -574,7 +574,7 @@ declare interface CapsuleStyleOptions extends ScanEffectOptions, CommonProgressS
    * 
    * 文本大小（不支持百分比设置）：12fp 
    * 
-   * 其他文本参数跟随[Text]{@link ./text}组件的主题值。
+   * 其他文本参数跟随[Text]{@link @global:Text}组件的主题值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -788,7 +788,7 @@ interface ProgressInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
  * > **说明：**
  * >
@@ -824,7 +824,7 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    * 设置进度条前景色。
    * 
    * 从API version 10开始支持利用[LinearGradient]{@link LinearGradient}设置Ring样式的渐变色。Ring类型不建议设置透明度，如需设置透明度，建议使用
-   * [DataPanel]{@link ./data_panel}。
+   * [DataPanel]{@link @global:DataPanel}。
    * 
    * 从API version 23开始支持利用LinearGradient设置Linear样式和Capsule样式的渐变色。API version 22及之前版本使用该方式设置时，会以默认主题色显示。
    *
@@ -882,7 +882,7 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    *     <br> 默认值：false
    *     <br>**说明：** 
    *     <br>设置null表示不敏感。<!--Del-->
-   *     <br>需要在卡片中使用Progress，并用[FormComponent]{@link ./form_component}组件设置[隐私遮罩]{@link ./common}属性，显示卡片时才有隐私遮罩效果。<!--
+   *     <br>需要在卡片中使用Progress，并用[FormComponent]{@link @global:FormComponent}组件设置[隐私遮罩]{@link CommonMethod}属性，显示卡片时才有隐私遮罩效果。<!--
    *     DelEnd-->
    * @returns { ProgressAttribute<Type> }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

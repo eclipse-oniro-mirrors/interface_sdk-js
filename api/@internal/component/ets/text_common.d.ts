@@ -182,7 +182,7 @@ declare enum TextContentAlign {
 }
 
 /**
- * This configuration is only available for the [Text]{@link ./text} and [RichEditor]{@link ./rich_editor} components.
+ * This configuration is only available for the [Text]{@link @global:Text} and [RichEditor]{@link @global:RichEditor} components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1553,8 +1553,8 @@ declare class TextMenuItemId {
 
   /**
    * Auto fill, a first-level menu item. Tapping it expands the second-level menu item "Password vault". It is supported
-   * only by [Search]{@link ./search}, [TextInput]{@link ./text_input}, [TextArea]{@link ./text_area}, or
-   * [RichEditor]{@link ./rich_editor}.
+   * only by [Search]{@link @global:Search}, [TextInput]{@link @global:TextInput}, [TextArea]{@link @global:TextArea}, or
+   * [RichEditor]{@link @global:RichEditor}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1565,8 +1565,8 @@ declare class TextMenuItemId {
 
   /**
    * Password vault, a second-level menu item. Tapping this menu item opens the password vault application, which
-   * provides the capability of auto-filling account and password. It is supported only by [Search]{@link ./search},
-   * [TextInput]{@link ./text_input}, [TextArea]{@link ./text_area}, or [RichEditor]{@link ./rich_editor}.
+   * provides the capability of auto-filling account and password. It is supported only by [Search]{@link @global:Search},
+   * [TextInput]{@link @global:TextInput}, [TextArea]{@link @global:TextArea}, or [RichEditor]{@link @global:RichEditor}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1986,7 +1986,7 @@ declare enum TextMenuShowMode {
    * separate window.
    *
    * When a text component is already displayed in a subwindow-type [Popup]{@link @ohos.arkui.advanced.Popup},
-   * [Dialog]{@link @ohos.arkui.advanced.Dialog}, [Toast](docroot://ui/arkts-create-toast.md), or [Menu]{@link ./menu},
+   * [Dialog]{@link @ohos.arkui.advanced.Dialog}, [Toast](docroot://ui/arkts-create-toast.md), or [Menu]{@link @global:Menu},
    * the corresponding text selection menu cannot be displayed in a separate window.
    *
    * When TextInput and TextArea support triggering AutoFill, the corresponding text selection menu cannot be displayed
@@ -2538,7 +2538,7 @@ declare enum AutoCapitalizationMode {
  */
 declare interface MaxLinesOptions {
   /**
-   * `overflowMode` configures the non-inline mode of the [TextArea]{@link ./text_area} component. When the number of
+   * `overflowMode` configures the non-inline mode of the [TextArea]{@link @global:TextArea} component. When the number of
    * lines exceeds the configured `maxLines`, scrolling is enabled. It must be used together with
    * [textOverflow]{@link TextAreaAttribute#textOverflow}, and `MaxLinesMode` takes effect only when `textOverflow` is
    * set to None or Clip. By default, the value of `MaxLinesMode` is Clip, and text is truncated when the number of

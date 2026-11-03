@@ -199,7 +199,7 @@ declare interface GridColOptions {
 
 /**
  * A column component in the grid layout system. It must be used as a child component of the grid container component (
- * [GridRow]{@link ./grid_row}). It is suitable for responsive layout, multi-device adaptation, and other scenarios that
+ * [GridRow]{@link @global:GridRow}). It is suitable for responsive layout, multi-device adaptation, and other scenarios that
  * require dynamic column width adjustment. It supports responsive breakpoint configuration, cross-column layout,
  * offset, and sorting. Using the **GridCol** component enables quick implementation of responsive layouts, simplifying
  * multi-device adaptation development.
@@ -305,7 +305,7 @@ declare class GridColAttribute extends CommonMethod<GridColAttribute> {
 
 /**
  * A column component in the grid layout system. It must be used as a child component of the grid container component (
- * [GridRow]{@link ./grid_row}). It is suitable for responsive layout, multi-device adaptation, and other scenarios that
+ * [GridRow]{@link @global:GridRow}). It is suitable for responsive layout, multi-device adaptation, and other scenarios that
  * require dynamic column width adjustment. It supports responsive breakpoint configuration, cross-column layout,
  * offset, and sorting. Using the **GridCol** component enables quick implementation of responsive layouts, simplifying
  * multi-device adaptation development.

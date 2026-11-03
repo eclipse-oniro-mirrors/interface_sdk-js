@@ -85,7 +85,7 @@ declare interface PolylineOptions {
  * >
  * > This component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class since API version 20.
+ * > [AttributeUpdater]{@link @global:AttributeUpdater} class since API version 20.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -173,7 +173,7 @@ declare class PolylineAttribute extends CommonShapeMethod<PolylineAttribute> {
  * >
  * > This component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class since API version 20.
+ * > [AttributeUpdater]{@link @global:AttributeUpdater} class since API version 20.
  *
  * ###### Child Components
  *

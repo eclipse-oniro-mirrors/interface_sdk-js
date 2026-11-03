@@ -321,7 +321,7 @@ export declare class SelectOptions {
  */
 export declare class SymbolOptions {
   /**
-   * Size of the [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Size of the [symbol glyph]{@link @global:SymbolGlyph}.
    *
    * For the number type, the value must be greater than or equal to 0.
    *
@@ -338,7 +338,7 @@ export declare class SymbolOptions {
   fontSize?: number | string | Resource;
 
   /**
-   * Color of the [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Color of the [symbol glyph]{@link @global:SymbolGlyph}.
    *
    * Default value: depending on the rendering strategy
    *
@@ -351,7 +351,7 @@ export declare class SymbolOptions {
   fontColor?: Array<ResourceColor>;
 
   /**
-   * Weight of the [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Weight of the [symbol glyph]{@link @global:SymbolGlyph}.
    *
    * For the number type, the value ranges from 100 to 900, at an interval of 100. A larger value indicates a heavier
    * font weight. The default value is **400**.
@@ -371,7 +371,7 @@ export declare class SymbolOptions {
   fontWeight?: number | FontWeight | string;
 
   /**
-   * Effect strategy of the [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Effect strategy of the [symbol glyph]{@link @global:SymbolGlyph}.
    *
    * Default value: **SymbolEffectStrategy.NONE**.
    *
@@ -388,7 +388,7 @@ export declare class SymbolOptions {
   effectStrategy?: SymbolEffectStrategy;
 
   /**
-   * Rendering strategy of the [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Rendering strategy of the [symbol glyph]{@link @global:SymbolGlyph}.
    *
    * Default value: **SymbolRenderingStrategy.SINGLE**.
    *
@@ -417,8 +417,8 @@ export declare class SymbolOptions {
  * >
  * > - This component can be used only in the stage model.
  * >
- * > - If the **SubHeader** component has [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > - If the **SubHeader** component has [universal attributes]{@link CommonMethod} and
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
  * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **SubHeader** component itself. As a result, the configured universal attributes and universal
  * > events may fail to take effect or behave as intended. For this reason, avoid using universal attributes and events
@@ -453,7 +453,7 @@ export declare struct SubHeader {
   icon?: ResourceStr;
 
   /**
-   * Settings when icon is [SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}.
+   * Settings when icon is [SymbolGlyph]{@link @global:SymbolGlyph}.
    *
    * Default value: **undefined**, indicating that no icon is displayed.
    *
@@ -481,7 +481,7 @@ export declare struct SubHeader {
 
   /**
    * End icon symbol options. This parameter is available when **endIcon** is set to a
-   * [symbol glyph]{@link ./@internal/component/ets/symbolglyph}.
+   * [symbol glyph]{@link @global:SymbolGlyph}.
    * Default value: **undefined**, indicating that no end icon symbol style is set.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -567,7 +567,7 @@ export declare struct SubHeader {
 
   /**
    * Settings when **operationType** is **OperationType.ICON_GROUP**, **operationItem** is set with multiple icons, and
-   * the icons are [SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}.
+   * the icons are [SymbolGlyph]{@link @global:SymbolGlyph}.
    *
    * Default value: **undefined**, indicating that no symbol icon is set.
    *

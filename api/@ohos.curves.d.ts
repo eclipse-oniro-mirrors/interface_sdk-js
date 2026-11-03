@@ -465,15 +465,15 @@ declare namespace curves {
    *     <br>A value less than 0 evaluates to the default value **0**.
    *     <br>The spring animation curve is physics-based. Its duration depends on the **springMotion** parameters and
    *     the previous velocity, rather than the **duration** parameter in
-   *     [animation]{@link ./@internal/component/ets/common}, [animateTo]{@link ./@internal/component/ets/common}, or
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}. The time cannot be normalized. Therefore,
+   *     [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized. Therefore,
    *     the interpolation cannot be obtained using the **interpolate** function of the curve.
    * @returns { ICurve } Curve.
    *     <br>**NOTE**
    *     <br>The spring animation curve is physics-based. Its duration depends on the **springMotion** parameters and
    *     the previous velocity, rather than the **duration** parameter in
-   *     [animation]{@link ./@internal/component/ets/common}, [animateTo]{@link ./@internal/component/ets/common}, or
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}. The time cannot be normalized. Therefore,
+   *     [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized. Therefore,
    *     the interpolation cannot be obtained using the [interpolate]{@link curves.ICurve.interpolate} function of the
    *     curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -511,8 +511,8 @@ declare namespace curves {
    *     **responsiveSpringMotion**, you are advised to retain the default settings.
    *     <br>The duration of the responsive spring animation depends on the **responsiveSpringMotion** parameters and
    *     the previous velocity, rather than the duration parameter in
-   *     [animation]{@link ./@internal/component/ets/common}, [animateTo]{@link ./@internal/component/ets/common}, or
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}. In addition, the interpolation cannot be
+   *     [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. In addition, the interpolation cannot be
    *     obtained using the **interpolate** function of the curve.
    * @returns { ICurve } Curve.
    *     <br>**NOTE**
@@ -520,8 +520,8 @@ declare namespace curves {
    *     **responsiveSpringMotion**, you are advised to retain the default settings.
    *     <br>2. The duration of the responsive spring animation depends on the **responsiveSpringMotion** parameters and
    *     the previous velocity, rather than the duration parameter in
-   *     [animation]{@link ./@internal/component/ets/common}, [animateTo]{@link ./@internal/component/ets/common}, or
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}. In addition, the interpolation cannot be
+   *     [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. In addition, the interpolation cannot be
    *     obtained using the [interpolate]{@link curves.ICurve.interpolate} function of the curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -564,9 +564,9 @@ declare namespace curves {
    *     </p>
    * @returns { ICurve } Curve.
    *     <br>Note: The spring animation curve is physics-based. Its duration depends on the **interpolatingSpring**
-   *     parameters, rather than the **duration** parameter in [animation]{@link ./@internal/component/ets/common},
-   *     [animateTo]{@link ./@internal/component/ets/common}, or
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}. The time cannot be normalized. Therefore,
+   *     parameters, rather than the **duration** parameter in [animation]{@link CommonMethod},
+   *     [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized. Therefore,
    *     the interpolation cannot be obtained using the [interpolate]{@link curves.ICurve.interpolate} function of the
    *     curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -653,8 +653,8 @@ declare namespace curves {
    *     <br>A value less than 0 evaluates to the default value **0**.
    *     <br>
    *     The spring animation curve is physics-based. Its duration depends on the **springMotion** parameters and
-   *     the previous velocity, rather than the **duration** parameter in [animation]{@link common},
-   *     [animateTo]{@link common}, or [pageTransition]{@link page_transition}. The time cannot be normalized.
+   *     the previous velocity, rather than the **duration** parameter in [animation]{@link CommonMethod},
+   *     [animateTo]{@link CommonMethod}, or [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized.
    *     Therefore, the interpolation cannot be obtained using the **interpolate** function of the curve.
    * @param { TrailOptimization } [trail] - Trail optimization configuration. When the animation progress reaches
    *     **progressThreshold**, the response of each frame becomes the previous frame's response multiplied by
@@ -662,8 +662,8 @@ declare namespace curves {
    * @returns { ICurve } Curve.
    *     <br>**NOTE**
    *     <br>The spring animation curve is physics-based. Its duration depends on the **springMotion** parameters
-   *     and the previous velocity, rather than the **duration** parameter in [animation]{@link common},
-   *     [animateTo]{@link common}, or [pageTransition]{@link page_transition}. The time cannot be normalized.
+   *     and the previous velocity, rather than the **duration** parameter in [animation]{@link CommonMethod},
+   *     [animateTo]{@link CommonMethod}, or [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized.
    *     Therefore, the interpolation cannot be obtained using the [interpolate]{@link curves.ICurve.interpolate}
    *     function of the curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -705,8 +705,8 @@ declare namespace curves {
    *     values. To apply custom settings for a spring animation, you are advised to use **springMotion**. When using
    *     **responsiveSpringMotion**, you are advised to retain the default settings.
    *     <br>The duration of the responsive spring animation depends on the **responsiveSpringMotion** parameters and
-   *     the previous velocity, rather than the duration parameter in [animation]{@link common},
-   *     [animateTo]{@link common}, or [pageTransition]{@link page_transition}. In addition, the interpolation cannot be
+   *     the previous velocity, rather than the duration parameter in [animation]{@link CommonMethod},
+   *     [animateTo]{@link CommonMethod}, or [pageTransition]{@link @global:PageTransitionEnter}. In addition, the interpolation cannot be
    *     obtained using the **interpolate** function of the curve.
    * @param { TrailOptimization } [trail] - Trail optimization configuration. When the animation progress reaches
    *     **progressThreshold**, the response of each frame becomes the previous frame's response multiplied by
@@ -717,8 +717,8 @@ declare namespace curves {
    *     **responsiveSpringMotion**, you are advised to retain the default settings.
    *     <br>2. The duration of the responsive spring animation depends on the **responsiveSpringMotion** parameters and
    *     the
-   *     previous velocity, rather than the duration parameter in [animation]{@link common}, [animateTo]{@link common},
-   *     or [pageTransition]{@link page_transition}. In addition, the interpolation cannot be obtained using the
+   *     previous velocity, rather than the duration parameter in [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod},
+   *     or [pageTransition]{@link @global:PageTransitionEnter}. In addition, the interpolation cannot be obtained using the
    *     [interpolate]{@link curves.ICurve.interpolate} function of the curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -764,8 +764,8 @@ declare namespace curves {
    *     **responseDecayFactor** to accelerate convergence and optimize the trail duration.
    * @returns { ICurve } Curve.
    *     <br>Note: The spring animation curve is physics-based. Its duration depends on the **interpolatingSpring**
-   *     parameters, rather than the **duration** parameter in [animation]{@link common}, [animateTo]{@link common}, or
-   *     [pageTransition]{@link page_transition}. The time cannot be normalized. Therefore, the interpolation cannot be
+   *     parameters, rather than the **duration** parameter in [animation]{@link CommonMethod}, [animateTo]{@link CommonMethod}, or
+   *     [pageTransition]{@link @global:PageTransitionEnter}. The time cannot be normalized. Therefore, the interpolation cannot be
    *     obtained using the [interpolate]{@link curves.ICurve.interpolate} function of the curve.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

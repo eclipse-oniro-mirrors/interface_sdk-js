@@ -109,16 +109,16 @@ declare interface ScrollBarOptions {
 }
 
 /**
- * 滚动条组件ScrollBar，用于配合可滚动组件使用，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link ./list}、[Grid]{@link ./grid}、
- * [Scroll]{@link ./scroll}、[WaterFlow]{@link ./water_flow}，提供可视化的滚动指示和控制能力，支持自定义滚动条样式。
+ * 滚动条组件ScrollBar，用于配合可滚动组件使用，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、
+ * [Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}，提供可视化的滚动指示和控制能力，支持自定义滚动条样式。
  *
  * > **说明：**
  * >
  * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
  * >
- * > - ScrollBar主轴方向不设置大小时，采用父组件[布局约束]{@link ../../../arkui/FrameNode:LayoutConstraint}中的maxSize作为主轴方向大小。如果ScrollBar的父组件
- * > 存在可滚动组件，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link ./list}、[Grid]{@link ./grid}、[Scroll]{@link ./scroll}、
- * > [WaterFlow]{@link ./water_flow}，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
+ * > - ScrollBar主轴方向不设置大小时，采用父组件[布局约束]{@link @ohos.arkui.node:LayoutConstraint}中的maxSize作为主轴方向大小。如果ScrollBar的父组件
+ * > 存在可滚动组件，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、
+ * > [WaterFlow]{@link @global:WaterFlow}，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -144,7 +144,7 @@ interface ScrollBarInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -190,16 +190,16 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
 }
 
 /**
-* 滚动条组件ScrollBar，用于配合可滚动组件使用，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link list}、[Grid]{@link grid}、
-* [Scroll]{@link scroll}、[WaterFlow]{@link water_flow}。
+* 滚动条组件ScrollBar，用于配合可滚动组件使用，如[ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、
+* [Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}。
 *
 * > **说明：**
 * >
 * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
 * >
-* > - ScrollBar主轴方向不设置大小时，采用父组件[布局约束]{@link FrameNode:LayoutConstraint}中的maxSize作为主轴方向大小。如果ScrollBar的父组件存在可滚动组件，如
-* > [ArcList]{@link @ohos.arkui.ArcList}、[List]{@link list}、[Grid]{@link grid}、[Scroll]{@link scroll}、
-* > [WaterFlow]{@link water_flow}，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
+* > - ScrollBar主轴方向不设置大小时，采用父组件[布局约束]{@link @ohos.arkui.node:LayoutConstraint}中的maxSize作为主轴方向大小。如果ScrollBar的父组件存在可滚动组件，如
+* > [ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、
+* > [WaterFlow]{@link @global:WaterFlow}，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
 *
 * ###### 子组件
 *
@@ -226,9 +226,9 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
 *
 * | 名称 | 类型 | 只读 | 可选 | 说明 |
 * | -------- | -------- | -------- | -- | -------- |
-* | scroller | [Scroller]{@link scroll:Scroller} | 否 | 否 | 可滚动组件的控制器。用于与可滚动组件进行绑定。 |
+* | scroller | [Scroller]{@link @global:Scroller} | 否 | 否 | 可滚动组件的控制器。用于与可滚动组件进行绑定。 |
 * | direction | [ScrollBarDirection](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-scrollbar.md#scrollbardirection枚举说明) | 否 | 是 | 滚动条的方向，控制可滚动组件对应方向的滚动。<br/>默认值：ScrollBarDirection.Vertical |
-* | state | [BarState]{@link enums:BarState} | 否 | 是 | 滚动条状态。<br/>默认值：BarState.Auto |
+* | state | [BarState]{@link @global:BarState} | 否 | 是 | 滚动条状态。<br/>默认值：BarState.Auto |
 *
 * ###### ScrollBarDirection枚举说明
 *

@@ -229,7 +229,7 @@ declare interface GridLayoutOptions {
  * > **NOTE**
  * >
  * > The component has been bound with gestures to implement functions such as follow-up scrolling. If you need to add
- * > custom gestures, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > custom gestures, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -245,8 +245,8 @@ interface GridInterface {
    * @param { Scroller } scroller - Controller of the scrollable component. It is used to bind to the scrollable
    *     component. If it is not set, no external controller is bound, and the component manages the scrolling behavior
    *     by itself.<br/>**NOTE**<br/>It is not allowed to bind the same scroll control object to other scrollable
-   *     components, such as [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./list}, [Grid]{@link ./grid},
-   *     [Scroll]{@link ./scroll}, and [WaterFlow]{@link ./water_flow}.
+   *     components, such as [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List}, [Grid]{@link @global:Grid},
+   *     [Scroll]{@link @global:Scroll}, and [WaterFlow]{@link @global:WaterFlow}.
    * @param { GridLayoutOptions } layoutOptions - Grid layout options, used to configure layout information such as
    *     **GridItem** spanning rows and columns. If it is not passed in, the **Grid** performs layout based on regular
    *     attributes such as **rowsTemplate** and **columnsTemplate** and the attributes of **GridItem** itself, without
@@ -402,7 +402,7 @@ declare interface ComputedBarAttribute {
 
 /**
  * Represents the return value of the
- * [getEvent('Grid')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'Grid')} method in
+ * [getEvent('Grid')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'Grid')} method in
  * **frameNode**, which can be used to set scroll events for a **Grid** node.
  *
  * **UIGridEvent** inherits from [UIScrollableCommonEvent]{@link UIScrollableCommonEvent}.
@@ -488,11 +488,11 @@ declare type OnGridScrollIndexCallback = (first: number, last: number) => void;
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
 /**
- * In addition to [universal attributes]{@link ./common} and
+ * In addition to [universal attributes]{@link CommonMethod} and
  * [scrollable component common attributes](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#attributes),
  * the following attributes are also supported.
  *
- * In addition to [universal events]{@link ./common} and
+ * In addition to [universal events]{@link CommonMethod} and
  * [scrollable component common events](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#events),
  * the following events are also supported.
  *
@@ -532,7 +532,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * auto-fill, 20)') or columnsTemplate('repeat(auto-fill, 20 80px)').
    *
    * For details about the effect, see
-   * [Example 8]{@link ./grid}.
+   * [Example 8]{@link @global:Grid}.
    *
    * If this attribute is set to **'0fr'**, the column width is 0, and grid item in the column is not displayed. If this
    * attribute is set to any other invalid value, the grid item is displayed as one column.
@@ -833,7 +833,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   cachedCount(count: number, show: boolean): GridAttribute;
 
   /**
-   * Sets whether to enable edit mode. In edit mode, the user can drag the [grid items]{@link ./gridItem} in the
+   * Sets whether to enable edit mode. In edit mode, the user can drag the [grid items]{@link @global:GridItem} in the
    * **Grid** component.
    *
    * > **NOTE**
@@ -855,7 +855,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   /**
    * Sets whether to enable multiselect. After multiselect is enabled, you can use **GridItem**'s **selected** attribute
    * and **onSelect** event to obtain the selection state of **GridItem**. Additionally, you can set the selected state
-   * style of **GridItem** using [Polymorphic Style]{@link ./common} (by default, **GridItem** has no selected state
+   * style of **GridItem** using [Polymorphic Style]{@link CommonMethod} (by default, **GridItem** has no selected state
    * style).
    *
    * @param { boolean } value - Whether to enable multiselect.
@@ -1037,7 +1037,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), and
    * [Repeat](docroot://ui/rendering-control/arkts-new-rendering-control-repeat.md) to implement this effect. For
    * details, see
-   * [Example 22 (Dragging with OnMove)]{@link ./grid}.
+   * [Example 22 (Dragging with OnMove)]{@link @global:Grid}.
    * It also supports dragging of **GridItem** that spans rows and columns, but note that the **Grid** must be
    * scrollable.
    *
@@ -1277,7 +1277,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
 
   /**
    * Sets whether to enable the edit mode for the **Grid** component. After the edit mode is enabled, you can swipe to
-   * select multiple [GridItem]{@link ./gridItem} components in the **Grid** component. If this API is not called, the
+   * select multiple [GridItem]{@link @global:GridItem} components in the **Grid** component. If this API is not called, the
    * edit mode is not enabled.
    *
    * @param { boolean | undefined } enabled - Whether to enable the editing mode. This parameter supports two-way
@@ -1457,11 +1457,11 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
  * > **NOTE**
  * >
  * > The component has been bound with gestures to implement functions such as follow-up scrolling. If you need to add
- * > custom gestures, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > custom gestures, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  *
  * ###### Child Components
  *
- * Child components are limited to [GridItem]{@link ./gridItem} and custom components. When using custom components
+ * Child components are limited to [GridItem]{@link @global:GridItem} and custom components. When using custom components
  * inside **Grid**, it is recommended to wrap the custom component with a **GridItem** as the top-level container.
  * Setting attributes or event methods directly on custom components is not recommended.
  *
