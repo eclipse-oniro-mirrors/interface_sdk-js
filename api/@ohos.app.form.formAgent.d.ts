@@ -103,7 +103,7 @@ declare namespace formAgent {
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object dose not exist.
+   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object does not exist.
    * @throws { BusinessError } 16500060 - Possible cause Service State error. Such as the form is recovering.
    * @throws { BusinessError } 16501000 - Possible cause internal functional error. Such as virtualization failed.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
