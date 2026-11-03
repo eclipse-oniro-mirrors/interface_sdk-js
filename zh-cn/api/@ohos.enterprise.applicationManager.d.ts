@@ -1249,6 +1249,24 @@ declare namespace applicationManager {
    */
   function isAppKioskAllowed(appIdentifier: string): boolean;
 
+/**
+   * 获取应用的图标数据。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { string } bundleName - 应用的Bundle名称。
+   * @returns { string } 应用的Base64编码的图标数据。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201015 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getApplicationIconData(bundleName: string): string;
+
   /**
    * 设置Kiosk模式的特征。通过本接口可以控制在Kiosk模式下能否进入通知中心、控制中心。
    *

@@ -1388,6 +1388,24 @@ declare namespace applicationManager {
    */
   function isAppKioskAllowed(appIdentifier: string): boolean;
 
+/**
+   * Obtains the icon data of an application.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { string } bundleName - Bundle name of the application.
+   * @returns { string } Base64 encoded icon data of the application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201015 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getApplicationIconData(bundleName: string): string;
+
   /**
    * Sets the features of the kiosk mode. You can use this API to control whether the notification center and control
    * panel can be accessed in kiosk mode.
