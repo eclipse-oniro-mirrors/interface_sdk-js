@@ -156,7 +156,7 @@ declare enum ScrollAlign {
  */
 declare enum FastScrollMode {
   /**
-   * No fast scroll optimization. All intermediate items are created and measured before the animation starts.
+   * Uses the component's existing `scrollToIndex` behavior without fast scroll optimization.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -167,11 +167,9 @@ declare enum FastScrollMode {
   NONE = 0,
 
   /**
-   * Fast scroll optimization with skipping intermediate item measurement. Intermediate items are created but not
-   * measured. This mode is suitable for scenarios where the list has multiple columns and both ListItem and
-   * ListItemGroup exist. In this case, ListItem occupies only one column in a row, but ListItemGroup occupies an entire
-   * row. Therefore, the List needs to create all intermediate items to obtain the types of these items and calculate
-   * the row position of the target index.
+   * Skips measuring intermediate items that displayed content and the target's actual layout do not require.
+   * The component may create intermediate items to determine which rows and columns they occupy.
+   * A multi-column `List` that contains both `ListItem` and `ListItemGroup` needs item types to determine rows.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -182,10 +180,8 @@ declare enum FastScrollMode {
   SKIP_MEASURE = 1,
 
   /**
-   * Fast scroll optimization with skipping intermediate item creation and measurement. Intermediate items are neither
-   * created nor measured. This mode provides maximum performance optimization. However, this mode is not suitable for
-   * the scenarios where the list has multiple columns and both ListItem and ListItemGroup exist. In this scenario,
-   * use SKIP_MEASURE.
+   * Skips creating and measuring intermediate items that displayed content and the target's actual layout do not require.
+   * For a multi-column `List` that contains both `ListItem` and `ListItemGroup`, use `SKIP_MEASURE`.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -283,10 +279,32 @@ declare interface ScrollToIndexOptions {
 
   /**
    * Fast scroll mode for scrolling to a specified index.
-   * When set to a value other than NONE, the scroll animation estimates the target position and skips some intermediate
-   * items during the animation. This parameter is valid only when the smooth attribute of the scrollToIndex interface
-   * is set to true.
-   * Default value: FastScrollMode.NONE.
+   * When `fastScroll` selects `SKIP_MEASURE` or `SKIP_CREATE_AND_MEASURE`, the animation estimates the target
+   * position and skips some intermediate items. This parameter takes effect only when `smooth` is `true`.
+   * Default value: `FastScrollMode.NONE`. Unrecognized values use `FastScrollMode.NONE`.
+   * The setting applies only to this call. The next call uses `NONE` if `fastScroll` is omitted.
+   *
+   * For `Grid`, express special row or column placement through `GridLayoutOptions`.
+   * `SKIP_CREATE_AND_MEASURE` does not discover explicit placement specified only when creating a cold `GridItem`.
+   * This usage requirement does not change `SKIP_MEASURE` or `NONE`.
+   *
+   * For `Grid`, retained items include those in the viewports at the start and end of the animation,
+   * items needed to determine the target's actual layout, and spanning items that overlap the target viewport.
+   *
+   * For `SKIP_CREATE_AND_MEASURE`, configure complete row and column spans through {@link GridLayoutOptions}
+   * before requesting the scroll if any uncreated item's spans are unknown. The information must be available
+   * before the corresponding `GridItem` is created. In `GridLayoutOptions`, `regularSize` describes regular
+   * items' spans, `irregularIndexes` identifies irregular items, and `onGetIrregularSizeByIndex` supplies their spans.
+   * Follow the requirements documented for these fields. For custom positioning, follow the position and span
+   * requirements documented for `GridLayoutOptions.onGetRectByIndex`.
+   * Include every spanning item whose row or column occupancy affects the target position, even if the item
+   * is outside the target viewport. Providing only the target's spans is insufficient. Every span must match
+   * the actual content. This requirement concerns row and column occupancy, not measured pixel sizes.
+   *
+   * This mode supports only inputs that meet this span requirement. No scrolling result is guaranteed for
+   * missing or inconsistent spans. The mode does not automatically fall back to another mode.
+   * The scroll request does not synchronously report arrival or a missing-span error.
+   * `SKIP_MEASURE` and `NONE` do not add this span requirement.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -166,7 +166,7 @@ declare enum ScrollAlign {
  */
 declare enum FastScrollMode {
   /**
-   * 不启用快速滚动优化。在动画开始前创建并测量所有中间子组件。
+   * 不启用快速滚动优化，使用组件原有的 `scrollToIndex` 行为。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -177,9 +177,8 @@ declare enum FastScrollMode {
   NONE = 0,
 
   /**
-   * 快速滚动优化，跳过中间子组件的测量。中间子组件会被创建但不会被测量。
-   * 该模式适用于List多列且ListItem和ListItemGroup同时存在的场景。
-   * 此时ListItem只占一行中的一列，但ListItemGroup会占满一整行，因此List需要创建所有中间子组件来获取这些子组件类型从而计算出目标索引的行位置。
+   * 跳过实际显示及确定目标实际布局不需要的中间子项测量。组件可创建中间子项，以取得其占用的行列信息。
+   * 对于多列且 `ListItem` 和 `ListItemGroup` 同时存在的 `List`，需要取得子组件类型以确定行位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -190,9 +189,8 @@ declare enum FastScrollMode {
   SKIP_MEASURE = 1,
 
   /**
-   * 快速滚动优化，跳过中间子组件的创建和测量。中间子组件既不会被创建，也不会被测量。
-   * 该模式提供最大限度的优化性能。但该模式不适用于List多列且ListItem和ListItemGroup同时存在的场景。
-   * 在此场景下，请使用SKIP_MEASURE。
+   * 跳过实际显示及确定目标实际布局不需要的中间子组件创建和测量。
+   * 对于多列且 `ListItem` 和 `ListItemGroup` 同时存在的 `List`，请使用 `SKIP_MEASURE`。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -289,9 +287,27 @@ declare interface ScrollToIndexOptions {
 
   /**
    * 快速滚动模式，用于滚动到指定索引。
-   * 当设置为NONE以外的值时，滚动动画将估算目标位置并在动画过程中跳过一些中间子组件。
-   * 当scrollToIndex接口的smooth属性为true时，该参数才生效。
-   * 默认值：FastScrollMode.NONE。
+   * 当 `fastScroll` 为 `SKIP_MEASURE` 或 `SKIP_CREATE_AND_MEASURE` 时，滚动动画估算目标位置并跳过部分中间子项。
+   * 仅当 `smooth` 为 `true` 时生效。默认值为 `FastScrollMode.NONE`，非法值按 `FastScrollMode.NONE` 处理。
+   * 此字段只对本次调用生效。下一次调用省略 `fastScroll` 时使用 `NONE`。
+   *
+   * `Grid` 的特殊行列位置效果通过 `GridLayoutOptions` 表达。
+   * `SKIP_CREATE_AND_MEASURE` 不负责发现仅在创建冷 `GridItem` 时才设置的显式位置。
+   * 此使用约定不改变 `SKIP_MEASURE` 或 `NONE`。
+   *
+   * 对于 `Grid`，保留的子项包括动画开始和结束时视口内的子项、确定目标实际布局所需的子项，以及与目标视口相交的跨行跨列项。
+   *
+   * 使用 `SKIP_CREATE_AND_MEASURE` 时，若尚未创建的子项跨度未知，须在请求滚动前通过 {@link GridLayoutOptions}
+   * 配置完整行列跨度，确保相应 `GridItem` 创建前可获取这些信息。`GridLayoutOptions.regularSize` 描述规则子项的跨度，
+   * `irregularIndexes` 指定不规则子项的索引，`onGetIrregularSizeByIndex` 提供对应子项的跨度。
+   * 这些字段须遵循 `GridLayoutOptions` 文档中的使用要求。自定义定位须遵循 `GridLayoutOptions.onGetRectByIndex`
+   * 文档规定的行列位置和跨度要求。
+   * 跨度信息须覆盖所有占用行列会影响目标位置的跨行跨列项，包括目标视口外的中间项。调用者不能只提供目标项的跨度。
+   * 每个跨度须与实际内容一致。此要求针对占用的行列，不要求预先知道测量后的像素尺寸。
+   *
+   * 此模式仅支持满足上述跨度前提的输入。所需跨度缺失或与实际内容不一致时，不保证滚动结果。
+   * 此模式不自动降级到其他模式。滚动请求不提供同步到达结果或跨度缺失错误。
+   * `SKIP_MEASURE` 和 `NONE` 不增加上述跨度要求。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
