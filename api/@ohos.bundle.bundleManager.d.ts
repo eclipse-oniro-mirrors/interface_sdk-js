@@ -3818,6 +3818,53 @@ declare namespace bundleManager {
   function getSharedBundleInfo(bundleName: string, moduleName: string): Promise<Array<SharedBundleInfo>>;
 
   /**
+   * Enables or disables the standby module.
+   *
+   * @permission ohos.permission.INSTALL_BUNDLE
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - Indicates the module name.
+   * @param { long } versionCode - Version number of a module.
+   * @param { boolean } isEnabled - **true** to enable the standby module; **false** to disable it.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long,
+    isEnabled: boolean): Promise<void>;
+
+  /**
+   * Query the enable status of the standby module.
+   *
+   * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @param { string } bundleName - Bundle name.
+   * @param { string } moduleName - Indicates the module name.
+   * @param { long } versionCode - Version number of a module.
+   * @returns { Promise<boolean> } Promise that resolves to **true** if the standby module is enabled or **false**
+   *     if it is disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700001 - The specified bundle is not found.
+   * @throws { BusinessError } 17700002 - The specified module is not existed.
+   * @throws { BusinessError } 17700096 - The specified version of the module is not found.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function isAlternateModuleEnabled(bundleName: string, moduleName: string, versionCode: long): Promise<boolean>;
+
+  /**
    * Obtains the [provision]{@link bundleManager/AppProvisionInfo} configuration file information of all applications
    * based in the device on the given user ID. This API uses a promise to return the result.
    *
