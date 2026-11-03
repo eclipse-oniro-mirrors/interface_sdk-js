@@ -203,19 +203,15 @@ declare interface IntentDecoratorInfo {
   result?: Record<string, Object>;
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   *
-   * If this parameter is set to true, the intent is also visible to third-party agents.
-   * If this parameter is set to false or left unspecified, the intent is visible only to system applications.
-   *
-   * > **NOTE**
-   * >
-   * > This parameter is ignored by the {@link InsightIntentForm} decorator and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @atomicservice
-   * @since 27
+   * @since 26.2.0 dynamic
    */
   exported?: boolean;
 }

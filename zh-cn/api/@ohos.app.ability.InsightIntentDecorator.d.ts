@@ -153,19 +153,14 @@ declare interface IntentDecoratorInfo {
   result?: Record<string, Object>;
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   *
-   * - 当取值为true时，表示该意图也对三方Agent可见。
-   * - 当取值为false或不配置时，表示该意图仅对系统应用可见。
-   *
-   * > **说明**
-   * >
-   * > 该字段在[InsightIntentForm]{@link InsightIntentForm}装饰器以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @atomicservice
-   * @since 27
+   * @since 26.2.0 dynamic
    */
   exported?: boolean;
 }

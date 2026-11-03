@@ -197,13 +197,15 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   * The value is true or false, and defaults to false when omitted.
-   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -350,13 +352,15 @@ export @interface InsightIntentPage {
   result: string = '';
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   * The value is true or false, and defaults to false when omitted.
-   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -528,13 +532,15 @@ export @interface InsightIntentFunctionMethod {
   result: string = '';
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   * The value is true or false, and defaults to false when omitted.
-   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 }
@@ -649,13 +655,15 @@ export @interface InsightIntentForm {
   result: string = '';
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   * The value is true or false, and defaults to false when omitted.
-   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -791,13 +799,15 @@ export @interface InsightIntentEntry {
   result: string = '';
 
   /**
-   * Whether the intent can be discovered and invoked by third-party agents.
-   * The value is true or false, and defaults to false when omitted.
-   * This field is ignored by the InsightIntentForm annotation and by intents bound to UIExtensionAbility.
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 

@@ -205,13 +205,14 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为true或false，不配置时默认为false。
-   * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -365,13 +366,14 @@ export @interface InsightIntentPage {
   result: string = '';
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为true或false，不配置时默认为false。
-   * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -554,13 +556,14 @@ export @interface InsightIntentFunctionMethod {
   result: string = '';
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为true或false，不配置时默认为false。
-   * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 }
@@ -683,13 +686,14 @@ export @interface InsightIntentForm {
   result: string = '';
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为true或false，不配置时默认为false。
-   * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
@@ -834,13 +838,14 @@ export @interface InsightIntentEntry {
   result: string = '';
 
   /**
-   * 表示该意图是否允许被三方Agent发现和调用。
-   * 取值为true或false，不配置时默认为false。
-   * 该字段在InsightIntentForm注解以及绑定UIExtensionAbility的意图上不生效，配置后忽略。
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
    * @stagemodelonly
-   * @since 27 static
+   * @since 26.2.0 static
    */
   exported: boolean = false;
 
