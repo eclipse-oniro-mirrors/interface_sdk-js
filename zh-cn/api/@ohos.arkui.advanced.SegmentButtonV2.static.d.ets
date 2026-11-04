@@ -388,6 +388,7 @@ export declare class SegmentButtonV2Item {
    * @returns { boolean }
    选项是否有图文混合配置。
    *     <br>true：有图文混合配置；false：无图文混合配置。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    * @noninterop
@@ -435,6 +436,7 @@ export declare class SegmentButtonV2Items extends Array<SegmentButtonV2Item> {
    * @returns { boolean }
    是否支持图文混合选项。
    *     <br>true：有图文混合选项；false：无图文混合选项。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    * @noninterop
