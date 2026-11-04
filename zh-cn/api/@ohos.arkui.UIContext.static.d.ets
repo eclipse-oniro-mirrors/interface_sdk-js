@@ -1376,7 +1376,9 @@ export const enum NodeRenderState {
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
- * UIObserver监听的敏感输入事件类型枚举。
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由NodeSensitiveInputInfo中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1384,7 +1386,7 @@ export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, nod
  */
 export const enum NodeSensitiveInputEventType {
   /**
-   * 触摸事件。
+   * 上报的事件为触摸事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1393,7 +1395,7 @@ export const enum NodeSensitiveInputEventType {
   TOUCH = 0,
 
   /**
-   * 鼠标事件。
+   * 上报的事件为鼠标事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1402,7 +1404,7 @@ export const enum NodeSensitiveInputEventType {
   MOUSE = 1,
 
   /**
-   * 按键事件。
+   * 上报的事件为按键事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1412,7 +1414,7 @@ export const enum NodeSensitiveInputEventType {
 }
 
 /**
- * UIObserver监听到的敏感输入事件信息。
+ * 定义输入事件分发到**nodeIdentity**指定节点前上报的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1420,7 +1422,8 @@ export const enum NodeSensitiveInputEventType {
  */
 export interface NodeSensitiveInputInfo {
   /**
-   * 输入事件是否被系统识别为可信GUI Agent输入。
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1429,7 +1432,7 @@ export interface NodeSensitiveInputInfo {
   isAgent: boolean;
 
   /**
-   * 输入事件类型。
+   * 上报的输入事件类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1438,7 +1441,7 @@ export interface NodeSensitiveInputInfo {
   type: NodeSensitiveInputEventType;
 
   /**
-   * 触摸事件信息。仅当**type**为**NodeSensitiveInputEventType.TOUCH**时，该属性有效。
+   * 触摸事件，仅当**type**为**NodeSensitiveInputEventType.TOUCH**时有效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1447,7 +1450,7 @@ export interface NodeSensitiveInputInfo {
   touchEvent?: TouchEvent;
 
   /**
-   * 鼠标事件信息。仅当**type**为**NodeSensitiveInputEventType.MOUSE**时，该属性有效。
+   * 鼠标事件，仅当**type**为**NodeSensitiveInputEventType.MOUSE**时有效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1456,7 +1459,7 @@ export interface NodeSensitiveInputInfo {
   mouseEvent?: MouseEvent;
 
   /**
-   * 按键事件信息。仅当**type**为**NodeSensitiveInputEventType.KEY**时，该属性有效。
+   * 按键事件，仅当**type**为**NodeSensitiveInputEventType.KEY**时有效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1466,10 +1469,10 @@ export interface NodeSensitiveInputInfo {
 }
 
 /**
- * UIObserver监听指定节点敏感输入事件时使用的回调类型。
+ * 定义监听指定节点输入事件的回调类型。
  *
- * @param { NodeSensitiveInputInfo } info - 敏感输入事件信息。
- * @param { FrameNode } [node] - 接收输入事件的节点。
+ * @param { NodeSensitiveInputInfo } info - 即将分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.1.0 static
@@ -2117,11 +2120,20 @@ export declare class UIObserver {
   offNodeRenderState(nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
 
   /**
-   * 注册回调，监听指定节点自身收到的触摸、鼠标和按键输入尝试。该回调在应用输入回调前执行。可信GUI Agent
-   * 输入即使被阻止分发，也会触发该回调。子节点收到输入不会触发父节点上注册的监听。使用无效节点注册时不生效。
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过**NodeSensitiveInputInfo**中的
+   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被**agentControlMode**阻止的Agent生成事件
+   * 仍会上报，以便感知对敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
    *
    * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
-   * @param { NodeSensitiveInputCallback } callback - 目标节点收到输入尝试时执行的回调函数。
+   * @param { NodeSensitiveInputCallback } callback - 输入事件分发到组件节点前执行的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -2129,10 +2141,11 @@ export declare class UIObserver {
   onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
 
   /**
-   * 注销指定节点的敏感输入事件监听回调。
+   * 移除节点敏感输入监听回调。
    *
    * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
-   * @param { NodeSensitiveInputCallback } [callback] - 需要注销的回调函数。未传入时，注销指定节点的全部敏感输入事件监听回调。
+   * @param { NodeSensitiveInputCallback } [callback] - 待移除的回调函数。未传入此参数时，移除指定节点的
+   *     全部回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static

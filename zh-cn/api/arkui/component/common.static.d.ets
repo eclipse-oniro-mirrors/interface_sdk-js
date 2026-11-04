@@ -11501,13 +11501,13 @@ export declare interface CommonMethod {
     default hitTestBehavior(value: HitTestMode | undefined): this;
 
     /**
-     * 设置当前组件处理系统可信GUI Agent输入事件的方式。未设置该属性或传入**undefined**时，使用
-     * **AgentControlMode.ALLOW**。该属性不影响系统未识别为Agent输入的事件。
-     * 仅当接收应用具有ohos.permission.CONTROL_COMPONENT权限时，该管控模式生效。
-     * 无此权限时忽略节点标签，Agent输入沿既有路径分发。
+     * 设置组件对Agent生成事件的输入管控级别。
      *
-     * @param { AgentControlMode | undefined } value - 系统可信Agent输入事件的管控模式。传入**undefined**时，
-     *     将管控模式重置为**AgentControlMode.ALLOW**。
+     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+     * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+     * 输入事件或其他注入事件。
+     *
+     * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
      * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
