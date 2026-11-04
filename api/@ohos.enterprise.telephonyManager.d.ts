@@ -17,7 +17,6 @@
  * @file Telephony Management
  * @kit MDMKit
  */
-
 import type Want from './@ohos.app.ability.Want';
 import adminManager from './@ohos.enterprise.adminManager';
 
@@ -30,13 +29,39 @@ import adminManager from './@ohos.enterprise.adminManager';
  * > [MDM Kit Development](docroot://mdm/mdm-kit-guide.md).
  * >
  * > The global restriction policy is provided by **restrictions**. To disable telephony globally, see
- * > [@ohos.enterprise.restrictions (restrictions)]{@link @ohos.enterprise.restrictions:restrictions}.
+ * > [@ohos.enterprise.restrictions (Restrictions)]{@link @ohos.enterprise.restrictions:restrictions}.
  *
  * @syscap SystemCapability.Customization.EnterpriseDeviceManager
  * @stagemodelonly
  * @since 20
  */
 declare namespace telephonyManager {
+
+  /**
+   * Query call records based on the specified time range and phone number. Enterprise MDM applications can use this
+   * interface to read device call records for audit.
+   * Supports filtering and query by time range and number. The query time range cannot exceed 31 days. The full match
+   * mode is used.
+   * A maximum of 5000 call records can be stored. When the number of call records exceeds 5000, the earliest call
+   * records are automatically deleted.
+   * This interface returns the result asynchronously in Promise mode.
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
+   * @param { TelephonyQueryConfig } queryConfig - Query the configuration, including the time range and phone number.
+   * If telephoneNumber is not transferred or is an empty string, all call records within the time range are returned.
+   * @returns { Promise<Array<CallLogInfo>> }Promise object, which is used to return the list of call records that
+   *     meet the query conditions.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCallLogs(queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
 
   /**
    * Disables the SIM card in the specified slot. After being disabled, the SIM card in the specified slot cannot be
@@ -130,9 +155,11 @@ declare namespace telephonyManager {
    *     EnterpriseAdminExtensionAbility and the bundle name of the application.
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
-   * @param { Array<string> } numbers - List of phone numbers. Currently, only full number matching is supported. The
-   *     total length of the array must not exceed 1,000. For example, if there are already 100 numbers in the current
-   *     trustlist array, this API supports adding up to 900 more numbers.
+   * @param { Array<string> } numbers - Call number list. Currently, only full number matching is supported. In versions
+   *     earlier than API 26.1.0, the total length of the array cannot exceed 1000. For example, if there are 100 numbers in
+   *     the allowed list, a maximum of 900 numbers can be added through this API. The total length of the array in API
+   *     26.1.0 and later versions cannot exceed 10000. For example, if there are 1000 numbers in the allowed list, a
+   *     maximum of 9000 numbers can be added through this API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -245,9 +272,11 @@ declare namespace telephonyManager {
    *     EnterpriseAdminExtensionAbility and the bundle name of the application.
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
-   * @param { Array<string> } numbers - List of phone numbers. Currently, only full number matching is supported. The
-   *     total length of the array must not exceed 1,000. For example, if there are already 100 numbers in the current
-   *     trustlist array, this API supports adding up to 900 more numbers.
+   * @param { Array<string> } numbers - Call number list. Currently, only full number matching is supported. In versions
+   *     earlier than API 26.1.0, the total array length cannot exceed 1000. For example, if 100 numbers exist in the
+   *     allowed list, a maximum of 900 numbers can be added through this API. For API 26.1.0 and later versions, the total
+   *     array length cannot exceed 10000. For example, if there are 1000 numbers in the allowed list array, a maximum of
+   *     9000 numbers can be added through this API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -462,6 +491,109 @@ declare namespace telephonyManager {
    * @since 26.0.0
    */
   function getDefaultData(admin: Want): number;
+
+  /**
+   * Config for querying SMS messages and call logs.
+   * Provides common query parameters for telephony-related queries.
+   *
+   * @property { number } startTime - Query start time (timestamp, in milliseconds).
+   * @property { number } endTime - Query end time (timestamp, in milliseconds).
+   * @property { string } [phoneNumber] - Phone number to filter by (optional).
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface TelephonyQueryConfig {
+    /**
+     * Query start time (timestamp, in seconds). Match by call/SMS record creation time.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    startTime: number;
+
+    /**
+     * Query end time (timestamp, in seconds). Match by call/SMS record creation time.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    endTime: number;
+
+    /**
+     * The phone number to filter (optional). The default value is an empty string, indicating that all records are queried.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber?: string;
+  }
+
+  /**
+   * Call log information.
+   * Provides detailed information about a call log entry, including call duration, direction
+   * (incoming/outgoing), timestamp, and SIM card slot used.
+   *
+   * @property { number } startTime - Call start time (timestamp, in milliseconds).
+   * @property { number } endTime - Call end time (timestamp, in milliseconds).
+   * @property { boolean } isIncoming - Call direction: **TRUE** indicates incoming, **false** indicates outgoing.
+   * @property { number } slotId - SIM card slot ID.
+   * @property { string } phoneNumber - Phone number.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface CallLogInfo {
+    /**
+     * Time when a call record is created(timestamp, in seconds). When an incoming call is made, the ringing start time
+     * is displayed. When an outgoing call is made, the ringing start time is displayed.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    createTime: number;
+
+    /**
+     * Call connection time (timestamp, in seconds). The value is 0 when the call is not connected.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    startTime: number;
+
+    /**
+     * Call end time(timestamp, in seconds). When a call is not connected, the time when the call is hung up is the time
+     * when the call is disconnected.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    endTime: number;
+
+    /**
+     * SIM card slot ID. The value 0 indicates card slot 1, and the value 1 indicates card slot 2.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    slotId: number;
+
+    /**
+     * Phone number of the other party.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+  }
 }
 
 export default telephonyManager;
