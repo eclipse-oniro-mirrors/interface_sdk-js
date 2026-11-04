@@ -61,6 +61,7 @@ declare namespace selectionManager {
    * @syscap SystemCapability.SelectionInput.Selection
    * @systemapi [since 20 - 23]
    * @publicapi [since 24]
+   * @stagemodelonly
    * @since 20 dynamic
    */
   function on(type: 'selectionCompleted', callback: Callback<SelectionInfo>): void;
@@ -89,6 +90,7 @@ declare namespace selectionManager {
    * @syscap SystemCapability.SelectionInput.Selection
    * @systemapi [since 20 - 23]
    * @publicapi [since 24]
+   * @stagemodelonly
    * @since 20 dynamic
    */
   function off(type: 'selectionCompleted', callback?: Callback<SelectionInfo>): void;
@@ -119,6 +121,7 @@ declare namespace selectionManager {
    * @syscap SystemCapability.SelectionInput.Selection
    * @systemapi [since 22 - 23]
    * @publicapi [since 24]
+   * @stagemodelonly
    * @since 22 dynamic
    * @since 24 static
    */
@@ -371,6 +374,7 @@ declare namespace selectionManager {
      * @syscap SystemCapability.SelectionInput.Selection
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
+     * @stagemodelonly
      * @since 20 dynamic
      * @since 24 static
      */
@@ -435,6 +439,7 @@ declare namespace selectionManager {
      * @syscap SystemCapability.SelectionInput.Selection
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
+     * @stagemodelonly
      * @since 20 dynamic
      */
     on(type: 'destroyed', callback: Callback<void>): void;
@@ -459,6 +464,7 @@ declare namespace selectionManager {
      * @syscap SystemCapability.SelectionInput.Selection
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
+     * @stagemodelonly
      * @since 20 dynamic
      */
     off(type: 'destroyed', callback?: Callback<void>): void;
@@ -484,6 +490,7 @@ declare namespace selectionManager {
      * @syscap SystemCapability.SelectionInput.Selection
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
+     * @stagemodelonly
      * @since 20 dynamic
      */
     on(type: 'hidden', callback: Callback<void>): void;
@@ -508,6 +515,7 @@ declare namespace selectionManager {
      * @syscap SystemCapability.SelectionInput.Selection
      * @systemapi [since 20 - 23]
      * @publicapi [since 24]
+     * @stagemodelonly
      * @since 20 dynamic
      */
     off(type: 'hidden', callback?: Callback<void>): void;

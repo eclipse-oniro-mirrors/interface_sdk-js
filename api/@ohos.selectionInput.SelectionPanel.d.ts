@@ -52,7 +52,6 @@ export interface PanelInfo {
   /**
    * Word selection panel types, which include two options. For details, see [PanelType]{@link PanelType}.
    *
-   * @default MENU_PANEL
    * @syscap SystemCapability.SelectionInput.Selection
    * @systemapi [since 20 - 23]
    * @publicapi [since 24]
