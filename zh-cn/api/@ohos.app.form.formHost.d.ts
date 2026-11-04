@@ -648,7 +648,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用callback异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @param { AsyncCallback<formInfo.FormStateInfo> } callback - 回调函数。当获取卡片状态成功，error为undefined，data为获取到的卡片状态；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
@@ -669,7 +669,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用Promise异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @returns { Promise<formInfo.FormStateInfo> } Promise对象。返回卡片状态。
    * @throws { BusinessError } 201 - Permissions denied.
@@ -856,7 +856,7 @@ declare namespace formHost {
   /**
    * 指定formId和远程设备Id进行卡片分享。使用callback异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.DISTRIBUTED_DATASYNC
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.DISTRIBUTED_DATASYNC
    * @param { string } formId - 卡片标识。
    * @param { string } deviceId - 远程设备标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当指定formId和远程设备Id进行卡片分享成功，error为undefined，否则为错误对象。
@@ -878,7 +878,7 @@ declare namespace formHost {
   /**
    * 指定formId和远程设备Id进行卡片分享。使用Promise异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM 和 ohos.permission.DISTRIBUTED_DATASYNC
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.DISTRIBUTED_DATASYNC
    * @param { string } formId - 卡片标识。
    * @param { string } deviceId - 远程设备标识。
    * @returns { Promise<void> } Promise对象，无返回结果。
