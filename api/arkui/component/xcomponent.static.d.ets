@@ -511,6 +511,16 @@ export declare interface XComponentAttribute extends CommonMethod {
    */
   default bufferQueueCount(count: int): this;
   /**
+   * Enable the surface visibility lifecycle for XComponent.
+   *
+   * @param { boolean | undefined } isVisibilityLifecycle - Whether to enable the surface visibility lifecycle.
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default enableSurfaceVisibilityLifecycle(isVisibilityLifecycle: boolean | undefined): this;
+  /**
    * Call attributeModifier.
    *
    * @param { AttributeModifier<XComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
