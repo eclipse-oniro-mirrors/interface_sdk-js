@@ -577,6 +577,15 @@ declare namespace telephonyManager {
     endTime: number;
 
     /**
+     * Call direction: **true** indicates an incoming call, and **false** indicates an outgoing call.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isIncoming: boolean;
+
+    /**
      * SIM card slot ID. The value 0 indicates card slot 1, and the value 1 indicates card slot 2.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
