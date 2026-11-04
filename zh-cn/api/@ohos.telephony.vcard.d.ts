@@ -32,13 +32,14 @@ import type Context from './application/BaseContext';
  */
 declare namespace vcard {
   /**
-   * 将VCard文件导入联系人数据库。使用callback异步回调。
+   * 将VCard文件导入联系人数据库。适用于从其他设备或应用接收VCard文件后批量导入联系人、联系人数据恢复等场景。使用callback异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { string } filePath - VCF(vcard file)文件地址。
+   * @param { string } filePath - VCF(VCard file)文件地址。
    * @param { int } accountId - 联系人账户ID。
+   *     <br>取值限定为整数。
    * @param { AsyncCallback<void> } callback - 回调函数，返回导入成功或失败的状态码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
@@ -56,14 +57,16 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * 将VCard文件导入联系人数据库。使用Promise异步回调。
+   * 将VCard文件导入联系人数据库。适用于从其他设备或应用接收VCard文件后批量导入联系人、联系人数据恢复等场景。使用Promise异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { string } filePath - VCF(vcard file)文件地址。
-   * @param { int } accountId - 联系人账户ID。
-   * @returns { Promise<void> } Promise对象，返回重置的结果码。
+   * @param { string } filePath - VCF(VCard file)文件地址。
+   * @param { int } [accountId] - 联系人账户ID。不传入时使用默认账户。
+   *     <br>取值限定为整数。
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -80,12 +83,12 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, accountId?: int): Promise<void>;
 
   /**
-   * 将VCard文件导入联系人数据库。使用callback异步回调。
+   * 将VCard文件导入联系人数据库。适用于从其他设备或应用接收VCard文件后批量导入联系人、联系人数据恢复等场景。使用callback异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { string } filePath - VCF(vcard file)文件地址。
+   * @param { string } filePath - VCF(VCard file)文件地址。
    * @param { AsyncCallback<void> } callback - 回调函数，返回导入成功或失败的状态码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
@@ -103,13 +106,13 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, callback: AsyncCallback<void>): void;
 
   /**
-   * 将联系人导出为 VCF(vcard file)文件。使用callback异步回调。
+   * 将联系人导出为 VCF(VCard file)文件。适用于联系人数据备份、跨设备迁移联系人、通过文件分享联系人等场景。使用callback异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。
+   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。用于筛选要导出的联系人数据。
    * @param { VCardBuilderOptions } options - VCard版本与编码类型。
-   * @param { AsyncCallback<string> } callback - 回调函数。生成的 VCF(vcard file)文件地址。
+   * @param { AsyncCallback<string> } callback - 回调函数。生成的VCF(VCard file)文件地址。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -126,13 +129,13 @@ declare namespace vcard {
   function exportVCard(context: Context, predicates: dataSharePredicates.DataSharePredicates, options: VCardBuilderOptions, callback: AsyncCallback<string>): void;
 
   /**
-   * 将联系人导出为 VCF(vcard file)文件。使用Promise异步回调。
+   * 将联系人导出为 VCF(VCard file)文件。适用于联系人数据备份、跨设备迁移联系人、通过文件分享联系人等场景。使用Promise异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。
-   * @param { VCardBuilderOptions } options - VCard版本与编码类型。
-   * @returns { Promise<string> } Promise对象，返回重置的结果码。
+   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。用于筛选要导出的联系人数据。
+   * @param { VCardBuilderOptions } [options] - VCard版本与编码类型。
+   * @returns { Promise<string> } Promise对象，返回生成的VCF(VCard file)文件地址。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -149,12 +152,12 @@ declare namespace vcard {
   function exportVCard(context: Context, predicates: dataSharePredicates.DataSharePredicates, options?: VCardBuilderOptions): Promise<string>;
 
   /**
-   * 将联系人导出为 VCF(vcard file)文件。使用callback异步回调。
+   * 将联系人导出为 VCF(VCard file)文件。适用于联系人数据备份、跨设备迁移联系人、通过文件分享联系人等场景。使用callback异步回调。
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - 应用上下文。
-   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。
-   * @param { AsyncCallback<string> } callback - 回调函数。生成的 VCF(vcard file)文件地址。
+   * @param { dataSharePredicates.DataSharePredicates } predicates - 查询语句。用于筛选要导出的联系人数据。
+   * @param { AsyncCallback<string> } callback - 回调函数。生成的 VCF(VCard file)文件地址。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
