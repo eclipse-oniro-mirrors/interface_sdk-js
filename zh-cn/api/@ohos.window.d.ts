@@ -5385,7 +5385,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在快捷栏上显示图标及Hover缩略图。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -5397,7 +5397,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在多任务视图中显示。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
