@@ -1128,6 +1128,36 @@ declare namespace window {
      * @since 23 static
      */
     vsyncTimestamp: long;
+
+    /**
+     * Total duration required to render this frame and send it to the display subsystem.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    totalDuration?: long;
+
+    /**
+     * The expected start timestamp of the current frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    intendedVsyncTimestamp?: long;
+
+    /**
+     * The total duration spent executing all animation callbacks in a frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    animationDuration?: long;
   }
 
   /**
