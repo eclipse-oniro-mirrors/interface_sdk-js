@@ -205,7 +205,7 @@ export @interface InsightIntentLink {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   exported: boolean = false;
 
@@ -360,7 +360,7 @@ export @interface InsightIntentPage {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   exported: boolean = false;
 
@@ -540,7 +540,7 @@ export @interface InsightIntentFunctionMethod {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   exported: boolean = false;
 }
@@ -663,7 +663,7 @@ export @interface InsightIntentForm {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   exported: boolean = false;
 
@@ -807,7 +807,7 @@ export @interface InsightIntentEntry {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   exported: boolean = false;
 
