@@ -880,7 +880,7 @@ declare namespace cryptoFramework {
   }
 
   /**
-   * 公钥，是[Key]{@link cryptoFramework.Key}的子类，在非对称加密、签名验证、密钥协商时需要将其对象作为输入使用。
+   * 公钥，是[Key]{@link cryptoFramework.Key}的子类，在非对称加密、验签、密钥协商时需要将其对象作为输入使用。
    *
    * <br>公钥可以通过非对称密钥生成器[AsyKeyGenerator]{@link cryptoFramework.AsyKeyGenerator}、
    * [AsyKeyGeneratorBySpec]{@link cryptoFramework.AsyKeyGeneratorBySpec}来生成。
@@ -2527,8 +2527,8 @@ declare namespace cryptoFramework {
      *
      * <br>特殊值：
      * - 对于签名操作，您也可以将值设置为 -1，以使用摘要长度作为盐值长度；或设置为 -2 或 -3，以自动计算最大盐值长度。推荐使用 -1。
-     * - 对于验证操作，您也可以将值设置为 -1，以使用摘要长度作为盐值长度；设置为 -2，以自动计算盐值长度；或设置为 -3，以使用最大盐值长度。
-     * 推荐使用 -2。
+     * - 对于验证操作，您也可以将值设置为 -1，以使用摘要长度作为盐值长度；设置为 -2，以自动计算盐值长度；
+     * 或设置为 -3，以使用最大盐值长度。推荐使用 -2。
      *
      * @syscap SystemCapability.Security.CryptoFramework [since 10 - 11]
      * @syscap SystemCapability.Security.CryptoFramework.Signature [since 12]
@@ -2607,10 +2607,10 @@ declare namespace cryptoFramework {
    *
    * <br>一次完整的加/解密流程在对称加密和非对称加密中略有不同：
    *
-   * - 对称加解密：init为必选，update为可选（且允许多次update加/解密大数据），doFinal为必选；doFinal结束后可以重新init开始新一轮加/解密
-   * 流程。
-   * - RSA、SM2非对称加解密：init为必选，不支持update操作，doFinal为必选（允许连续多次doFinal加/解密大数据）；RSA不支持重复init，切换
-   * 加解密模式或填充方式时，需要重新创建Cipher对象。
+   * - 对称加解密：init为必选，update为可选（且允许多次update加/解密大数据），doFinal为必选；
+   * doFinal结束后可以重新init开始新一轮加/解密流程。
+   * - RSA、SM2非对称加解密：init为必选，不支持update操作，doFinal为必选（允许连续多次doFinal加/解密大数据）；
+   * RSA不支持重复init，切换加解密模式或填充方式时，需要重新创建Cipher对象。
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 9 - 11]
    * @syscap SystemCapability.Security.CryptoFramework.Cipher [since 12]
@@ -3001,7 +3001,7 @@ declare namespace cryptoFramework {
     updateSync(data: DataBlob): DataBlob | null;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。使用Callback异步回调。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。使用Callback异步回调。
      *
      * @param { DataBlob } data - 表示最终要加密或解密的数据。
      * @param { AsyncCallback<DataBlob> } callback - 回调函数。当加/解密成功时，err为undefined，data为加/解密结果DataBlob；否则
@@ -3024,7 +3024,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob, callback: AsyncCallback<DataBlob>): void;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。使用Callback异步回调。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。使用Callback异步回调。
      *
      * <br>（1）在对称加解密中**doFinal**用于处理剩余数据和本次传入的数据，并最终结束加密或解密操作，使用callback异步回调函数获取加密或解密后的
      * 数据。如果数据量较小，可以在**doFinal**中一次性传入数据，而不使用**update**；如果在本次加解密流程中已经使用**update**传入过数据，
@@ -3110,7 +3110,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob | null, callback: AsyncCallback<DataBlob | null>): void;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。使用Promise异步回调。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。使用Promise异步回调。
      *
      * @param { DataBlob } data - 表示最终要加密或解密的数据。
      * @returns { Promise<DataBlob> } Promise对象，返回加密或解密的数据。
@@ -3133,7 +3133,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob): Promise<DataBlob>;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。使用Promise异步回调。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。使用Promise异步回调。
      *
      * <br>（1）在对称加解密中，**doFinal**加/解密（分组模式产生的）剩余数据和本次传入的数据，最后结束加密或者解密数据操作，使用Promise异步回
      * 调获取加密或者解密数据。
@@ -3145,8 +3145,8 @@ declare namespace cryptoFramework {
      * **doFinal**的结果就是authTag）
      * authTag需要填入解密时的[GcmParamsSpec]{@link cryptoFramework.GcmParamsSpec}或
      * [CcmParamsSpec]{@link cryptoFramework.CcmParamsSpec}；密文则作为解密时的入参data。
-     * - 对于其他模式的对称加解密及GCM和CCM模式的对称解密：一次加解密流程中，每次**update**和**doFinal**的结果拼接起来，得到完整的明文或
-     * 密文。
+     * - 对于其他模式的对称加解密及GCM和CCM模式的对称解密：一次加解密流程中，每次**update**和**doFinal**的结果拼接起来，
+     * 得到完整的明文或密文。
      *
      * （2）在RSA和SM2非对称加解密中，使用**doFinal**方法加解密传入的数据，并使用Promise异步回调获取加密或解密结果。如果数据量较大，可以
      * 多次调用**doFinal**，拼接结果以获得完整的明文或密文。
@@ -3187,7 +3187,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob | null): Promise<DataBlob>;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。使用Promise异步回调。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。使用Promise异步回调。
      *
      * > **说明：**
      * >
@@ -3222,7 +3222,7 @@ declare namespace cryptoFramework {
     doFinal(data: DataBlob | null): Promise<DataBlob | null>;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。
      *
      * <br>（1）在对称加解密中，**doFinal**加/解密（分组模式产生的）剩余数据和本次传入的数据，最后结束加密或者解密数据操作，使用Promise异步
      * 回调获取加密或者解密数据。
@@ -3234,8 +3234,8 @@ declare namespace cryptoFramework {
      * **doFinal**的结果就是authTag）
      * authTag需要填入解密时的[GcmParamsSpec]{@link cryptoFramework.GcmParamsSpec}或
      * [CcmParamsSpec]{@link cryptoFramework.CcmParamsSpec}；密文则作为解密时的入参data。
-     * - 对于其他模式的对称加解密及GCM和CCM模式的对称解密：一次加解密流程中，每次**update**和**doFinal**的结果拼接起来，得到完整的明文或
-     * 密文。
+     * - 对于其他模式的对称加解密及GCM和CCM模式的对称解密：一次加解密流程中，每次**update**和**doFinal**的结果拼接起来，
+     * 得到完整的明文或密文。
      *
      * （2）在RSA和SM2非对称加解密中，使用**doFinal**方法加解密传入的数据，并使用Promise异步回调获取加密或解密结果。如果数据量较大，可以
      * 多次调用**doFinal**，拼接结果以获得完整的明文或密文。
@@ -3267,7 +3267,7 @@ declare namespace cryptoFramework {
     doFinalSync(data: DataBlob | null): DataBlob;
 
     /**
-     * 完成加密操作，对输入数据进行加密或解密，然后反馈输出数据。加密操作完成后，数据无法更新。
+     * 完成加解密操作，对输入数据进行加密或解密，然后反馈输出数据。加解密操作完成后，数据无法更新。
      *
      * <br><br>**说明：**
      * <br>建议优先使用异步API，{@link doFinal}。同步API可能因系统繁忙、高负载等原因耗时较长而阻塞主线程。
@@ -4249,7 +4249,7 @@ declare namespace cryptoFramework {
     /**
      * 设置验签参数。常用的验签参数直接通过[createVerify]{@link cryptoFramework.createVerify} 来指定，剩余参数通过本接口指定。
      *
-     * <br>支持RSA算法和SM2算法，从API version 11开始，支持SM2算法设置签名验证参数。
+     * <br>支持RSA算法和SM2算法，从API version 11开始，支持SM2算法设置验签参数。
      *
      * <br>验签的参数应当与签名的参数保持一致。
      *
@@ -4272,9 +4272,9 @@ declare namespace cryptoFramework {
     setVerifySpec(itemType: SignSpecItem, itemValue: int): void;
 
     /**
-     * 设置签名验证参数。
+     * 设置验签参数。
      *
-     * <br>当前仅支持RSA算法中的PSS_SALT_LEN和SM2签名验证中的USER_ID。
+     * <br>当前仅支持RSA算法中的PSS_SALT_LEN和SM2验签中的USER_ID。
      *
      * <br>验签的参数应当与签名的参数保持一致。
      *
@@ -4300,7 +4300,7 @@ declare namespace cryptoFramework {
     setVerifySpec(itemType: SignSpecItem, itemValue: int | Uint8Array): void;
 
     /**
-     * 设置签名验证参数。
+     * 设置验签参数。
      *
      * <br>当前仅支持RSA算法中的PSS_SALT_LEN，SM2算法中的USER_ID以及ML-DSA算法中的ML_DSA_DETERMINISTIC、ML_DSA_MU和ML_DSA_CONTEXT。
      *
@@ -4407,7 +4407,7 @@ declare namespace cryptoFramework {
    *
    * <br>支持的规格详见[签名验签规格](docroot://security/CryptoArchitectureKit/crypto-sign-sig-verify-overview.md)。
    *
-   * @param { string } algName - 指定签名验证算法。当前支持RSA、ECC、DSA、SM2<sup>10+</sup>，Ed25519<sup>11+</sup>和
+   * @param { string } algName - 指定验签算法。当前支持RSA、ECC、DSA、SM2<sup>10+</sup>，Ed25519<sup>11+</sup>和
    *     ML-DSA<sup>26.0.0+</sup>。
    *     <br>使用RSA PKCS1模式时需设置摘要；使用RSA PSS模式时需设置摘要和掩码摘要。使用RSA算法验签时，设置recover参数可支持验签恢复。
    *     <br>支持的规格详见
@@ -6467,7 +6467,7 @@ declare namespace cryptoFramework {
    *
    * > **说明：**
    * >
-   * > password 是原始密码。如果使用 string 类型，需直接传入用于密钥派生的数据，而不是 HexString 或 base64 等字符串类型，并确保该字符串
+   * > password 是原始密码。如果使用string类型，需直接传入用于密钥派生的数据，而不是HexString或Base64等字符串类型，并确保该字符串
    * > 为 UTF-8 编码，否则派生结果会有差异。
    *
    * @syscap SystemCapability.Security.CryptoFramework [since 11 - 11]
@@ -6595,7 +6595,7 @@ declare namespace cryptoFramework {
    *
    * > **说明：**
    * >
-   * > passphrase指的是原始密码，如果使用string类型，需要直接传入用于密钥派生的数据，而不是HexString、base64等字符串类型，同时需要确保该
+   * > passphrase指的是原始密码，如果使用string类型，需要直接传入用于密钥派生的数据，而不是HexString、Base64等字符串类型，同时需要确保该
    * > 字符串为utf-8编码，否则派生结果会有差异。
    *
    * @syscap SystemCapability.Security.CryptoFramework.Kdf
