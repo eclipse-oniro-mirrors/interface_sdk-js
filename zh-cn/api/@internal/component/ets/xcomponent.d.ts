@@ -679,6 +679,17 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
    * @since 18 dynamic
    */
   enableTransparentLayer(enabled: boolean): XComponentAttribute;
+
+  /**
+   * 为XComponent启用surface可见性生命周期。
+   *
+   * @param { Optional<boolean> } isVisibilityLifecycle - 是否启用surface可见性生命周期。
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enableSurfaceVisibilityLifecycle(isVisibilityLifecycle: Optional<boolean>): XComponentAttribute;
 }
 
 /**
