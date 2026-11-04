@@ -15,6 +15,16 @@ from pathlib import Path
 import sys
 
 
+def _relative_depfile_inputs(paths):
+    result = []
+    for path in paths:
+        try:
+            result.append(os.path.relpath(path))
+        except ValueError:
+            result.append(path)  # Different Windows drives cannot be rebased.
+    return sorted(result)
+
+
 def record(depfile, output, inputs):
     if not depfile:
         return
@@ -32,4 +42,4 @@ def record(depfile, output, inputs):
         dependencies.update(os.path.join(directory, name) for name in files)
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'build'))
     from scripts.util.build_utils import write_depfile
-    write_depfile(depfile, output, sorted(dependencies))
+    write_depfile(depfile, output, _relative_depfile_inputs(dependencies))
