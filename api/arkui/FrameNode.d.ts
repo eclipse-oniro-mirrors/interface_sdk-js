@@ -205,7 +205,7 @@ declare interface InteractionEventBindingInfo {
 export enum ExpandMode {
   /**
    * The child nodes of the current FrameNode are not expanded. If the FrameNode contains
-   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * [LazyForEach]{@link @global:LazyForEach} child nodes, the child nodes of the current FrameNode
    * are not expanded when the child nodes on the main node tree are being obtained. The child node sequence numbers are
    * calculated based on the child nodes on the main node tree.
    *
@@ -222,7 +222,7 @@ export enum ExpandMode {
 
   /**
    * The child nodes of the current FrameNode are expanded. If the FrameNode contains
-   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * [LazyForEach]{@link @global:LazyForEach} child nodes, the child nodes of the current FrameNode
    * are expanded when all child nodes are being obtained. The child node sequence numbers are calculated based on all
    * child nodes.
    *
@@ -238,7 +238,7 @@ export enum ExpandMode {
 
   /**
    * The child nodes of the current FrameNode are expanded on demand. If the FrameNode contains
-   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, the child nodes of the current FrameNode
+   * [LazyForEach]{@link @global:LazyForEach} child nodes, the child nodes of the current FrameNode
    * are not expanded when the child nodes on the main node tree are being obtained, and are expanded when the child
    * nodes not on the main node tree are being obtained. The child node sequence numbers are calculated based on all
    * child nodes.
@@ -255,7 +255,7 @@ export enum ExpandMode {
 
   /**
    * The child nodes of the current FrameNode are not expanded. If the FrameNode contains
-   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each} child nodes, already expanded child nodes can be
+   * [LazyForEach]{@link @global:LazyForEach} child nodes, already expanded child nodes can be
    * returned directly. When obtaining unexpanded child nodes, only the node at the corresponding position is created
    * without expanding all child nodes. The child node sequence numbers are calculated based on all child nodes.
    *
@@ -283,7 +283,7 @@ export enum ExpandMode {
 export enum ChildrenCountMode {
   /**
    * Counting all child nodes after expansion. When a lazy loading node (such as
-   * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}) is encountered, the node is expanded and the total
+   * [LazyForEach]{@link @global:LazyForEach}) is encountered, the node is expanded and the total
    * number of child nodes is returned.
    *
    * Whether to expand lazy loading nodes: yes
@@ -434,9 +434,9 @@ declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) 
 /**
  * **FrameNode** represents an entity node in the component tree, supporting capabilities such as node tree operations,
  * custom drawing and layout, position query, and animation. It can be used by a
- * [NodeController]{@link ./NodeController:NodeController} to mount a [BuilderNode]{@link ./BuilderNode} (that holds the
- * FrameNode) to a [NodeContainer]{@link ../@internal/component/ets/node_container} or mount a
- * [RenderNode]{@link ./RenderNode:RenderNode} to another FrameNode. It is suitable for scenarios where component node
+ * [NodeController]{@link @ohos.arkui.node:NodeController} to mount a [BuilderNode]{@link @ohos.arkui.node:BuilderNode} (that holds the
+ * FrameNode) to a [NodeContainer]{@link @global:NodeContainer} or mount a
+ * [RenderNode]{@link @ohos.arkui.node:RenderNode} to another FrameNode. It is suitable for scenarios where component node
  * trees need to be dynamically created and managed through code, enabling flexible UI composition and custom rendering
  * requirements that cannot be directly met by declarative components.
  *
@@ -448,7 +448,7 @@ declare type UIStatesChangeHandler = (node: FrameNode, currentUIStates: number) 
  * >
  * > - FrameNode objects do not support JSON serialization.
  * >
- * > - When the API of the [FrameNode]{@link FrameNode} object is invoked in the scenario of
+ * > - When the API of the [FrameNode]{@link @ohos.arkui.node:FrameNode} object is invoked in the scenario of
  * > [ambiguous UI context](docroot://ui/arkts-global-interface.md#ambiguous-ui-context), you are advised to use the
  * > [runScopedTask]{@link @ohos.arkui.UIContext:UIContext.runScopedTask} API of
  * > [UIContext]{@link @ohos.arkui.UIContext} to specify the UI context. For details, see
@@ -477,7 +477,7 @@ export class FrameNode {
   constructor(uiContext: UIContext);
 
   /**
-   * Obtains the [RenderNode]{@link ./RenderNode:RenderNode} held by the FrameNode.
+   * Obtains the [RenderNode]{@link @ohos.arkui.node:RenderNode} held by the FrameNode.
    *
    * @returns { RenderNode | null } **RenderNode** instance. If the current FrameNode does not hold any RenderNode,
    *     **null** is returned. If the current FrameNode is a node created by a declarative component, **null** is
@@ -551,7 +551,7 @@ export class FrameNode {
    *
    * @param { FrameNode } node - FrameNode to add.<br/> The node cannot be a non-modifiable FrameNode (for example, a
    *     declarative component node obtained through APIs such as **getFrameNodeById**). Only the FrameNode obtained
-   *     through the **getFrameNode** API of [BuilderNode]{@link ./BuilderNode} can be added as a declarative child
+   *     through the **getFrameNode** API of [BuilderNode]{@link @ohos.arkui.node:BuilderNode} can be added as a declarative child
    *     node. If the child node does not meet the specifications, an exception is thrown.<br/> The node cannot have a
    *     parent node; otherwise, an exception is thrown.
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
@@ -574,7 +574,7 @@ export class FrameNode {
    *
    * @param { FrameNode } child - Child node to add.<br/>The child node cannot be a non-modifiable FrameNode (for
    *     example, a declarative component node obtained through APIs such as **getFrameNodeById**). Only the FrameNode
-   *     obtained by [BuilderNode]{@link ./BuilderNode} through the **getFrameNode** API can be added as a declarative
+   *     obtained by [BuilderNode]{@link @ohos.arkui.node:BuilderNode} through the **getFrameNode** API can be added as a declarative
    *     child node. If the child node does not meet the specifications, an exception is thrown.<br/>The child node
    *     cannot have a parent node; otherwise, an exception is thrown.
    * @param { FrameNode | null } sibling - Node after which the new child node will be inserted. If this parameter is
@@ -766,9 +766,9 @@ export class FrameNode {
    * > operations: [Stack]{@link typeNode.Stack}, [XComponent]{@link typeNode.XComponent}. This API does not work for
    * > other node types.
    * >
-   * > This API only supports [BuilderNode]{@link ./BuilderNode:BuilderNode} with root components of these types:
-   * > [Stack]{@link ../@internal/component/ets/stack}, [XComponent]{@link ../@internal/component/ets/xcomponent},
-   * > [EmbeddedComponent]{@link ../@internal/component/ets/embedded_component}. This API does not work for other
+   * > This API only supports [BuilderNode]{@link @ohos.arkui.node:BuilderNode} with root components of these types:
+   * > [Stack]{@link @global:Stack}, [XComponent]{@link @global:XComponent},
+   * > [EmbeddedComponent]{@link @global:EmbeddedComponent}. This API does not work for other
    * > component types.
    *
    * @param { FrameNode } targetParent - Target parent node.
@@ -912,10 +912,10 @@ export class FrameNode {
 
   /**
    * Obtains the node ID set by the user, which is the same as the value of the
-   * [component ID]{@link ../@internal/component/ets/common}.
+   * [component ID]{@link CommonMethod}.
    *
    * @returns { string } Node ID set by the user, which is the same as the value of the
-   *     [component ID]{@link ../@internal/component/ets/common}.
+   *     [component ID]{@link CommonMethod}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -938,7 +938,7 @@ export class FrameNode {
 
   /**
    * Obtains the type of the node. For built-in components, the node type corresponds to the component name. For
-   * example, the node type of the [Button]{@link ../@internal/component/ets/button} component is **Button**. For custom
+   * example, the node type of the [Button]{@link @global:Button} component is **Button**. For custom
    * components that implement rendering, the node type is **__Common__**.
    *
    * @returns { string } Type of the node.
@@ -1075,7 +1075,7 @@ export class FrameNode {
   /**
    * Obtains the **UIGestureEvent** object held by this FrameNode, which is used to set gesture events bound to the
    * component. Gesture events set using the **gestureEvent** API will not override gestures bound using the
-   * [gesture binding API]{@link ../@internal/component/ets/common}. If both APIs are used to set gestures, the gesture
+   * [gesture binding API]{@link CommonMethod}. If both APIs are used to set gestures, the gesture
    * binding API takes precedence.
    *
    * In LazyForEach scenarios, due to node destruction and reconstruction, gesture event callbacks must be re-set for
@@ -1092,15 +1092,15 @@ export class FrameNode {
 
   /**
    * Obtains the **CommonAttribute** API associated with the FrameNode, which is used to configure
-   * [universal attributes]{@link ../@internal/component/ets/common} and
-   * [universal events]{@link ../@internal/component/ets/common}.
+   * [universal attributes]{@link CommonMethod} and
+   * [universal events]{@link CommonMethod}.
    *
    * Note that only the attributes of a custom node can be modified.
    *
    * > **NOTE**
    * >
    * > The visual representation of the FrameNode is similar to that of a
-   * > [Stack]{@link ../@internal/component/ets/stack} container that is aligned to the top start edge.
+   * > [Stack]{@link @global:Stack} container that is aligned to the top start edge.
    * >
    * > For details about the supported attributes, see
    * > [attributeModifier Support for Attributes and Events](docroot://ui/arkts-user-defined-extension-attributeModifier.md#attributemodifier-support-for-attributes-and-events).
@@ -1120,7 +1120,7 @@ export class FrameNode {
    * Implements custom drawing for the FrameNode. This API overrides the default drawing behavior and is invoked during
    * FrameNode content rendering.
    *
-   * Note: The Canvas provided in the [DrawContext]{@link ./Graphics:DrawContext} parameter is a temporary command-
+   * Note: The Canvas provided in the [DrawContext]{@link @ohos.arkui.node:DrawContext} parameter is a temporary command-
    * recording canvas, not the actual rendering canvas of the node. For usage instructions, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-arktsNode-frameNode.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -1737,7 +1737,7 @@ export class FrameNode {
    * then level-2 child nodes, and so on. The search stops as soon as a matching node is found.
    *
    * @param { string } id - ID of the child node to be queried, which is the same as the
-   *     [component ID]{@link ../@internal/component/ets/common}.
+   *     [component ID]{@link CommonMethod}.
    * @returns { FrameNode | null } First node that matches the specified ID, which is returned by searching for all
    *     child nodes layer by layer from the current node (which is used as the root node). If no child node of the
    *     current node matches the specified ID, a null is returned.
@@ -1767,7 +1767,7 @@ export class FrameNode {
 }
 
 /**
- * Extends [FrameNode]{@link FrameNode} to define a FrameNode with specific type constraints. It supports various
+ * Extends [FrameNode]{@link @ohos.arkui.node:FrameNode} to define a FrameNode with specific type constraints. It supports various
  * component types such as **Text**, **Image**, **Button**, and **Column**, and is suitable for scenarios where
  * component nodes of specific types need to be dynamically created through code.
  *
@@ -1806,9 +1806,9 @@ export interface TypedFrameNode<C, T> extends FrameNode {
  * and be displayed using a placeholder container. It is suitable for scenarios where component nodes of specific types
  * need to be dynamically created through code and custom-mounted.
  *
- * When **typeNode** is used to create [Text]{@link ../@internal/component/ets/text},
- * [Image]{@link ../@internal/component/ets/image}, [Select]{@link ../@internal/component/ets/select}, or
- * [Toggle]{@link ../@internal/component/ets/toggle} nodes, if the UI instance corresponding to the input
+ * When **typeNode** is used to create [Text]{@link @global:Text},
+ * [Image]{@link @global:Image}, [Select]{@link @global:Select}, or
+ * [Toggle]{@link @global:Toggle} nodes, if the UI instance corresponding to the input
  * [UIContext]{@link @ohos.arkui.UIContext} is destroyed, this API returns an invalid FrameNode that cannot be properly
  * mounted or displayed.
  *
@@ -2370,7 +2370,7 @@ export namespace typeNode {
   function createNode(context: UIContext, nodeType: 'LoadingProgress'): LoadingProgress;
 
   /**
-   * Obtains the attributes of a [LoadingProgress]{@link ../@internal/component/ets/loading_progress} node. If the node
+   * Obtains the attributes of a [LoadingProgress]{@link @global:LoadingProgress} node. If the node
    * is not created using ArkTS, cross-language access must be enabled; otherwise, **undefined** is returned. This API
    * does not support declaratively created nodes.
    *
@@ -2706,7 +2706,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Button'): ButtonAttribute | undefined;
 
   /**
-   * Represents a FrameNode of the **ListItemGroup** type. Only [ListItem]{@link ../@internal/component/ets/list_item}
+   * Represents a FrameNode of the **ListItemGroup** type. Only [ListItem]{@link @global:ListItem}
    * child components can be added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2748,7 +2748,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'ListItemGroup'): ListItemGroupAttribute | undefined;
 
   /**
-   * Represents a FrameNode of the **WaterFlow** type. Only [FlowItem]{@link ../@internal/component/ets/flow_item} child
+   * Represents a FrameNode of the **WaterFlow** type. Only [FlowItem]{@link @global:FlowItem} child
    * components can be added.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3142,7 +3142,7 @@ export namespace typeNode {
   export function getAttribute(node: FrameNode, nodeType: 'Slider'): SliderAttribute | undefined;
 
   /**
-   * FrameNode of the [Toggle]{@link ../@internal/component/ets/toggle} type.
+   * FrameNode of the [Toggle]{@link @global:Toggle} type.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3523,7 +3523,7 @@ export namespace typeNode {
 
 /**
  * Provides lazy loading capabilities for FrameNode data, implementing API functionality through
- * [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}. It is suitable for scenarios such as long lists where
+ * [LazyForEach]{@link @global:LazyForEach}. It is suitable for scenarios such as long lists where
  * node data needs to be loaded on demand, improving rendering performance and reducing memory usage.
  *
  * > **NOTE**

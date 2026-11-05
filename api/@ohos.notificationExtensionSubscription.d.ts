@@ -34,6 +34,13 @@ import image from './@ohos.multimedia.image';
  * and setting the 
  * [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) status.
  *
+ * > **NOTE**
+ * >
+ * > Notification extension events subscribed through this module are not delivered through the callbacks of this module
+ * > 's APIs. Instead, they are delivered through the callbacks (such as **onReceiveMessage**) of 
+ * > [NotificationSubscriberExtensionAbility]{@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility},
+ * > and these callbacks are executed on the main thread of the **ExtensionAbility** instance.
+ *
  * @syscap SystemCapability.Notification.Notification
  * @since 22 dynamic
  * @since 23 static

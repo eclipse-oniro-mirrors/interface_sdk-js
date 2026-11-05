@@ -1312,7 +1312,7 @@ export interface Circle {
  */
 export interface CommandPath {
   /**
-   * 路径绘制的指令字符串。像素单位的转换方法请参考[像素单位]{@link ../@internal/component/ets/common}。
+   * 路径绘制的指令字符串。像素单位的转换方法请参考[像素单位]{@link CommonMethod}。
    * 
    * 单位：px
    *

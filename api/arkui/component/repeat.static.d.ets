@@ -321,6 +321,37 @@ export interface RepeatAttribute<T> extends DynamicNode {
 }
 
 /**
+ * Defines a controller of the Repeat component. You can bind the controller to the Repeat component through the
+ * **controller** field in [RepeatOptions]{@link RepeatOptions} and call
+ * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the Repeat component
+ * as needed.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare class RepeatController {
+
+  /**
+   * A constructor used to create a RepeatController object.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  constructor();
+
+  /**
+   * Clears the nodes in the reuse pool of the Repeat component bound to this controller.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(): void;
+}
+
+/**
  * Defines the options of the Repeat component.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -346,6 +377,16 @@ export interface RepeatOptions {
    * @since 26.1.0 static
    */
   allowReuseInAnimation?: boolean;
+  /**
+   * Controller bound to the Repeat component. When the controller is bound, you can call
+   * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the Repeat component
+   * as needed.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  controller?: RepeatController;
 }
 
 /**

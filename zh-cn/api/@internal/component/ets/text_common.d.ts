@@ -14,7 +14,9 @@
  */
 
 /**
- * @file
+ * @file 文本类组件公共接口提供了文本处理的基础能力，包括光标样式设置、布局管理、文本选择控制、菜单项定制等功能。
+ *  该模块适用于需要对文本组件进行精细控制的场景，例如文本编辑器、富文本应用、输入表单等。通过这些接口，开发者可以
+ *  自定义光标样式、获取文本布局信息、处理文本选择、定制编辑菜单等，提升应用的文本交互体验。
  * @kit ArkUI
  */
 
@@ -178,7 +180,7 @@ declare enum TextContentAlign {
 }
 
 /**
- * 该配置只支持[Text]{@link ./text}组件和[RichEditor]{@link ./rich_editor}组件。
+ * 该配置只支持[Text]{@link @global:Text}组件和[RichEditor]{@link @global:RichEditor}组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1462,8 +1464,8 @@ declare class TextMenuItemId {
   static readonly askAI: TextMenuItemId;
 
   /**
-   * 自动填充，为一级菜单项。点击后会展开二级菜单项“密码保险箱”，仅支持[Search]{@link ./search}、[TextInput]{@link ./text_input}、
-   * [TextArea]{@link ./text_area}或[RichEditor]{@link ./rich_editor}。
+   * 自动填充，为一级菜单项。点击后会展开二级菜单项“密码保险箱”，仅支持[Search]{@link @global:Search}、[TextInput]{@link @global:TextInput}、
+   * [TextArea]{@link @global:TextArea}或[RichEditor]{@link @global:RichEditor}。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1473,8 +1475,8 @@ declare class TextMenuItemId {
   static readonly autoFill: TextMenuItemId;
 
   /**
-   * 密码保险箱，为二级菜单项。点击该菜单项后会拉起密码保险箱应用，该应用提供自动填充账号密码能力，仅支持[Search]{@link ./search}、[TextInput]{@link ./text_input}、
-   * [TextArea]{@link ./text_area}或[RichEditor]{@link ./rich_editor}。
+   * 密码保险箱，为二级菜单项。点击该菜单项后会拉起密码保险箱应用，该应用提供自动填充账号密码能力，仅支持[Search]{@link @global:Search}、[TextInput]{@link @global:TextInput}、
+   * [TextArea]{@link @global:TextArea}或[RichEditor]{@link @global:RichEditor}。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1482,6 +1484,16 @@ declare class TextMenuItemId {
    * @since 23 dynamic
    */
   static readonly passwordVault: TextMenuItemId;
+
+  /**
+   * 快捷翻译，为一级菜单项。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static readonly TRANSLATE_INPUT: TextMenuItemId;
 }
 
 /**
@@ -1860,7 +1872,7 @@ declare enum TextMenuShowMode {
    * 在[UIExtension]{@link @ohos.arkui.uiExtension:uiExtension}中不支持将文本选择菜单显示在独立窗口中。
    *
    * 当文本类组件已经显示在子窗类型的[Popup]{@link @ohos.arkui.advanced.Popup}、[Dialog]{@link @ohos.arkui.advanced.Dialog}、
-   * [Toast](docroot://ui/arkts-create-toast.md)、[Menu]{@link ./menu}中时，不支持将其对应的文本选择菜单显示在独立窗口中。
+   * [Toast](docroot://ui/arkts-create-toast.md)、[Menu]{@link @global:Menu}中时，不支持将其对应的文本选择菜单显示在独立窗口中。
    *
    * 当TextInput、TextArea可支持拉起AutoFill时，不支持将其对应的文本选择菜单显示在独立窗口中。
    *
@@ -2398,7 +2410,7 @@ declare enum AutoCapitalizationMode {
  */
 declare interface MaxLinesOptions {
   /**
-   * `overflowMode`可配置[TextArea]{@link ./text_area}组件的非内联模式。当超出设置的`maxLines`最大行数时，会启用滚动效果。需同时配置
+   * `overflowMode`可配置[TextArea]{@link @global:TextArea}组件的非内联模式。当超出设置的`maxLines`最大行数时，会启用滚动效果。需同时配置
    * [textOverflow]{@link TextAreaAttribute#textOverflow}，且仅当`textOverflow`为None或Clip时，`MaxLinesMode`才能生效。默认情况下，
    * `MaxLinesMode`的值为Clip，超出`maxLines`后文本会被截断。
    *
@@ -2564,7 +2576,7 @@ declare enum TextChangeReason {
   ACCESSIBILITY = 10,
 
   /**
-   * 跨端拍照。
+   * 跨端拍照协同输入。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

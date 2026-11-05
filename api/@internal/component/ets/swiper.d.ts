@@ -1012,10 +1012,10 @@ declare enum SwiperDisplayMode {
  * > **NOTE**
  * >
  * > - The **Swiper** component implements the scrolling carousel effect through the built-in
- * > [PanGesture]{@link @global:@PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
+ * > [PanGesture]{@link @global:PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
  * > to **true**, the gesture listening is disabled, thereby preventing the scrolling operation.
  * >
- * > - When [NodeContainer]{@link ./node_container} is reused in the **Swiper** component, recursive updates of parent
+ * > - When [NodeContainer]{@link @global:NodeContainer} is reused in the **Swiper** component, recursive updates of parent
  * > component state variables by child nodes are prohibited.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1493,9 +1493,9 @@ declare type OnSwiperAnimationEndCallback = (index: number, extraInfo: SwiperAni
 declare type OnSwiperGestureSwipeCallback = (index: number, extraInfo: SwiperAnimationEvent) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2697,10 +2697,10 @@ declare type ContentWillScrollCallback = (result: SwiperContentWillScrollResult)
  * > **NOTE**
  * >
  * > - The **Swiper** component implements the scrolling carousel effect through the built-in
- * > [PanGesture]{@link @global:@PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
+ * > [PanGesture]{@link @global:PanGesture} gesture. When the [disableSwipe]{@link SwiperAttribute#disableSwipe} attribute is set
  * > to **true**, the gesture listening is disabled, thereby preventing the scrolling operation.
  * >
- * > - When [NodeContainer]{@link ./node_container} is reused in the **Swiper** component, recursive updates of parent
+ * > - When [NodeContainer]{@link @global:NodeContainer} is reused in the **Swiper** component, recursive updates of parent
  * > component state variables by child nodes are prohibited.
  *
  * ###### Child Components

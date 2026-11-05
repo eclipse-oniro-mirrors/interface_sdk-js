@@ -2169,7 +2169,8 @@ declare class HttpAuthHandler {
    *
    * @param { string } userName - HTTP authentication user name, which must be a non-empty string.
    * @param { string } password - HTTP authentication password, which must be a non-empty string.
-   * @returns { boolean } Returns **true** if authentication succeeds; returns **false** otherwise.
+   * @returns { boolean } The return value indicates only the call status, not the authentication outcome.
+   *     Returns **true** if the call is successful; returns **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]

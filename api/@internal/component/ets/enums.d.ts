@@ -4639,7 +4639,7 @@ declare enum DialogButtonStyle {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @form
+ * @form [since 26.1.0]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -4651,7 +4651,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4664,7 +4664,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4678,7 +4678,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4691,7 +4691,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 18 dynamic
    */
@@ -4816,6 +4816,7 @@ declare enum IlluminatedType {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 26.1.0]
  * @atomicservice [since 12]
  * @since 11 dynamic
  */
@@ -4826,6 +4827,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4837,6 +4839,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4848,6 +4851,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4859,6 +4863,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -4870,6 +4875,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -6855,7 +6861,7 @@ declare enum ImmersiveStrategy {
   /**
    * Expand the title area of bindSheet as safe area for the content region.
    *
-  * > **NOTE**
+   * > **NOTE**
    * >
    * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
    * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to

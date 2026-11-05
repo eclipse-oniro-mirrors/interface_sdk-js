@@ -5128,7 +5128,7 @@ export const enum CustomKeyboardContinueFeature {
   /**
    * Enable custom keyboard continuation.
    *
-   * @syscap SystemCapability. ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -5137,7 +5137,7 @@ export const enum CustomKeyboardContinueFeature {
   /**
    * Disable custom keyboard continuation.
    *
-   * @syscap SystemCapability. ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */

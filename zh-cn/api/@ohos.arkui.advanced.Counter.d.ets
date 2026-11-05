@@ -14,7 +14,20 @@
  */
 
 /**
- * @file
+ * @file Counter组件用于精确调节数值，支持列表型、紧凑型、数值内联型和日期内联型四种样式，适用于购物数量调节、参数设置、日期选择等场
+ * 景，具有灵活的样式配置和事件回调能力。
+ *
+ * #######子组件
+ * 无
+ *
+ * > **说明：**
+ *>
+ *>-如果Counter设置[通用属性]{@link CommonMethod} and 
+ * > [universal events]{@link CommonMethod} set, the compilation toolchain generates an additional
+ * > node named \_\_Common\_\_ and attaches the universal attributes or events to \_\_Common\_\_ instead of directly
+ * > applying them to the **Counter** component. This may cause the universal attributes or events to not take effect or
+ * > behave unexpectedly. Therefore, setting universal attributes and events for the **Counter** component is not
+ * > recommended.
  * @kit ArkUI
  */
 
@@ -637,22 +650,7 @@ declare class CounterOptions {
 }
 
 /**
- * Counter组件用于精确调节数值，支持列表型、紧凑型、数值内联型和日期内联型四种样式，适用于购物数量调节、参数设置、日期选择等场景，具有灵活的样式配置和事件回调能力。
- *
- * > **说明：**
- * >
- * > - 如果Counter设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会额外
- * > 生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Counter本身。这可能导致开发者设置的通用属性或通用事件的效果不生效或不符合预期，因此，不建议为Counter设置通用属性和通用
- * > 事件。
- * ## 导入模块
- *
- * ```ts
- * import { CounterType, CounterComponent, CounterOptions, DateData } from '@kit.ArkUI';
- * ```
- *
- * ## 子组件
- *
- * 无
+ * 创建Counter组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

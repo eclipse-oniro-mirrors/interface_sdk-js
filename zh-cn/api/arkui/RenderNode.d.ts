@@ -26,7 +26,7 @@ import { DrawContext, Size, Offset, Position, Pivot, Scale, Translation, Matrix4
  * 
  * > **说明：**
  * >
- * > - 不建议对[BuilderNode]{@link ./BuilderNode}中的RenderNode进行修改操作。BuilderNode中持有的[FrameNode]{@link ./FrameNode}仅用于将该
+ * > - 不建议对[BuilderNode]{@link @ohos.arkui.node:BuilderNode}中的RenderNode进行修改操作。BuilderNode中持有的[FrameNode]{@link @ohos.arkui.node:FrameNode}仅用于将该
  * > BuilderNode作为子节点挂载到其他FrameNode上，对该FrameNode或对应的RenderNode进行属性设置与子节点操作可能会产生未定义行为，包括但不限于显示异常、事件异常、稳定性问题等。
  * >
  * > - RenderNode对象不支持使用JSON序列化。
@@ -772,7 +772,7 @@ export class RenderNode {
   /**
    * 绘制方法，需要开发者进行实现。该方法会在RenderNode进行绘制时被调用。
    * 
-   * 该接口的[DrawContext]{@link ./Graphics:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见
+   * 该接口的[DrawContext]{@link @ohos.arkui.node:DrawContext}中的Canvas是用于记录指令的临时Canvas，并非节点的真实Canvas。使用请参见
    * [调整自定义绘制Canvas的变换矩阵](docroot://ui/arkts-user-defined-arktsNode-renderNode.md#调整自定义绘制canvas的变换矩阵)。
    * 
    * > **说明：**

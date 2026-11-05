@@ -204,8 +204,8 @@ export declare class TabTitleBarTabItem {
  * >
  * > - This component can only be used in the stage model.
  * >
- * > - When setting [universal attributes]{@link ./@internal/component/ets/common} or
- * > [universal events]{@link ./@internal/component/ets/common} of **TabTitleBar**, the compilation toolchain mounts
+ * > - When setting [universal attributes]{@link CommonMethod} or
+ * > [universal events]{@link CommonMethod} of **TabTitleBar**, the compilation toolchain mounts
  * > them on the \_\_Common\_\_ node instead of directly applying them to the component itself, which may cause the
  * > settings to not take effect or not work as expected. Therefore, setting them is not recommended.
  *

@@ -394,7 +394,7 @@ declare class TabsController {
 }
 
 /**
-* Tabs组件参数，设置Tabs的页签位置，当前显示页签的索引，Tabs控制器和页签栏（TabBar）的[通用属性]{@link common}。
+* Tabs组件参数，设置Tabs的页签位置，当前显示页签的索引，Tabs控制器和页签栏（TabBar）的[通用属性]{@link CommonMethod}。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -455,7 +455,7 @@ declare interface TabsOptions {
   controller?: TabsController;
 
   /**
-   * 设置TabBar的[通用属性]{@link common}，用于通过CommonModifier统一管理TabBar的样式、布局等通用属性。
+   * 设置TabBar的[通用属性]{@link CommonMethod}，用于通过CommonModifier统一管理TabBar的样式、布局等通用属性。
    * 当需要动态修改TabBar的通用属性或实现属性的状态管理时传入此参数，不传入时TabBar使用默认样式和布局，无额外通用属性设置。
    *
    * **说明：**
@@ -477,7 +477,7 @@ declare interface TabsOptions {
    * [BarMode.Scrollable]{@link TabsAttribute#barMode(value: BarMode.Scrollable, options: ScrollableBarModeOptions)}模式下生
    * 效，且Tabs为横向时还需[nonScrollableLayoutStyle]{@link ScrollableBarModeOptions}未设置或设置为异常值时才能生效。
    *
-   * [TabContent]{@link tab_content}组件的
+   * [TabContent]{@link @global:TabContent}组件的
    * [tabBar]{@link TabContentAttribute#tabBar(content: ComponentContent | SubTabBarStyle | BottomTabBarStyle | string | Resource | CustomBuilder |  TabBarOptions)}
    * 属性为底部页签样式时不支持拖拽功能。
    *
@@ -997,9 +997,9 @@ declare type OnTabsContentWillChangeCallback = (currentIndex: number, comingInde
 declare type OnTabsContentDidScrollCallback = (selectedIndex: number, index: number, position: number, mainAxisLength: number) => void;
 
 /**
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
-* 除支持[通用事件]{@link common}外，还支持以下事件：
+* 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1459,7 +1459,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * 4. 目前自定义切换动画只支持两种场景触发：点击页签和调用TabsController.changeIndex()接口。
    * 5. 当使用自定义切换动画时，Tabs组件支持的事件中，除了onGestureSwipe，其他事件均支持。
    * 6. [onChange]{@link TabsAttribute#onChange}和[onAnimationEnd]{@link TabsAttribute#onAnimationEnd}事件的触发时机需要特殊说明：如果在第一次自定义动画执行过程中，触发了第二次自定义动画，那么在开始第二次自定义动画时，就会触发第一次自定义动画的onChange和onAnimationEnd事件。
-   * 7. 当使用自定义动画时，参与动画的页面布局方式会改为[Stack]{@link stack}布局。如果开发者未主动设置相关页面的[zIndex]{@link CommonMethod#zIndex}属性，那么所有页面的zIndex值是一样的，页面的渲染层级会按照在组件树上的顺序（即页面的index值顺序）确定。因此，开发者需要主动修改页面的zIndex属性，来控制页面的渲染层级。
+   * 7. 当使用自定义动画时，参与动画的页面布局方式会改为[Stack]{@link @global:Stack}布局。如果开发者未主动设置相关页面的[zIndex]{@link CommonMethod#zIndex}属性，那么所有页面的zIndex值是一样的，页面的渲染层级会按照在组件树上的顺序（即页面的index值顺序）确定。因此，开发者需要主动修改页面的zIndex属性，来控制页面的渲染层级。
    * 8. 此属性不支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    *
    * > **说明：**
@@ -1728,7 +1728,7 @@ declare interface TabContentTransitionProxy {
 *
 * ###### 子组件
 *
-* 仅支持子组件[TabContent]{@link tab_content}，以及渲染控制类型
+* 仅支持子组件[TabContent]{@link @global:TabContent}，以及渲染控制类型
 * [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)和
 * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)，不建议自定义组件作为子组件。并且if/else和ForEach下也仅支持
 * TabContent作为子组件，不建议自定义组件作为子组件。
@@ -1738,7 +1738,7 @@ declare interface TabContentTransitionProxy {
 * > Tabs子组件设置了通用属性[visibility]{@link CommonMethod#visibility}的值为None，或者设置值为Hidden时，对应子组件不显示，但依然会在视窗内占位。
 * >
 * > 已经显示的Tabs子组件TabContent后续隐藏时不会被销毁，若需要页面懒加载和释放，可以参考
-* > [示例13]{@link ./tabs}。
+* > [示例13]{@link @global:Tabs}。
 * >
 * > Tabs设置[height]{@link CommonMethod#height(value: Length)}为auto时，可根据子组件高度自适应高度大小。设置
 * > [width]{@link CommonMethod#width(value: Length)}为auto时，可根据子组件宽度自适应宽度大小。

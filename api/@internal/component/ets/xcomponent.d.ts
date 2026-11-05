@@ -457,7 +457,7 @@ declare interface XComponentOptions {
 
 /**
  * Defines the specific configuration parameters used by XComponent on the native side. An XComponent created with this
- * constructor can pass its corresponding [FrameNode]{@link ../../../arkui/FrameNode} object to the native side, where
+ * constructor can pass its corresponding [FrameNode]{@link @ohos.arkui.node:FrameNode} object to the native side, where
  * NDK APIs can be used to configure the surface lifecycle and [add event listeners]
  * (docroot://ui/ndk-listen-to-component-events.md).
  *
@@ -645,7 +645,7 @@ declare type OnNativeLoadCallback = (event?: object) => void;
 /**
  * In addition to universal attributes, the following attributes are supported.
  *
- * Since API version 12, the [universal events]{@link ./common} are supported when **type** is set to **SURFACE** or
+ * Since API version 12, the [universal events]{@link CommonMethod} are supported when **type** is set to **SURFACE** or
  * **TEXTURE**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

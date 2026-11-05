@@ -257,22 +257,22 @@ interface RefreshOptions {
  * > - This component is supported since API version 8. Updates will be marked with a superscript to indicate their
  * > earliest API version.
  * >
- * > - Since API version 12, this component supports linkage with vertically scrolling [Swiper]{@link ./swiper} and
+ * > - Since API version 12, this component supports linkage with vertically scrolling [Swiper]{@link @global:Swiper} and
  * > [Web](docroot://reference/apis-arkui/arkui-js/js-components-basic-web.md). When the
- * > [loop]{@link SwiperAttribute#loop} attribute of [Swiper]{@link ./swiper} is set to **true**, **Refresh** cannot
- * > link with [Swiper]{@link ./swiper}.
+ * > [loop]{@link SwiperAttribute#loop} attribute of [Swiper]{@link @global:Swiper} is set to **true**, **Refresh** cannot
+ * > link with [Swiper]{@link @global:Swiper}.
  * >
- * > - When the **Refresh** component is nested with a [List]{@link ./list} component whose content size is smaller
+ * > - When the **Refresh** component is nested with a [List]{@link @global:List} component whose content size is smaller
  * > than the component itself, and there are other components in between, gestures may be intercepted by the
  * > intermediate components, preventing the pull-to-refresh effect. In such cases, set the
- * > [alwaysEnabled]{@link EdgeEffectOptions} parameter to **true** to allow [List]{@link ./list} to respond to gestures
+ * > [alwaysEnabled]{@link EdgeEffectOptions} parameter to **true** to allow [List]{@link @global:List} to respond to gestures
  * > and drive the **Refresh** component through nested scrolling for the pull-to-refresh effect. For details, see
  * > [Example 9: Implementing Pull-to-Refresh in the Non-Full-Screen Scenario]
  * > (docroot://reference/apis-arkui/arkui-ts/ts-container-refresh.md#example-9-implementing-pull-to-refresh-in-the-
  * > non-full-screen-scenario).
  * >
  * > - The component has built-in gestures for functions such as drag-follow scrolling. To add custom gesture
- * > operations, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > operations, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > - Pull-to-refresh cannot be triggered by mouse click-and-drag operations.
  *
@@ -300,9 +300,9 @@ interface RefreshInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -499,22 +499,22 @@ declare class RefreshAttribute extends CommonMethod<RefreshAttribute> {
  * > - This component is supported since API version 8. Updates will be marked with a superscript to indicate their
  * > earliest API version.
  * >
- * > - Since API version 12, this component supports linkage with vertically scrolling [Swiper]{@link ./swiper} and
+ * > - Since API version 12, this component supports linkage with vertically scrolling [Swiper]{@link @global:Swiper} and
  * > [Web](docroot://reference/apis-arkui/arkui-js/js-components-basic-web.md). When the
- * > [loop]{@link SwiperAttribute#loop} attribute of [Swiper]{@link ./swiper} is set to **true**, **Refresh** cannot
- * > link with [Swiper]{@link ./swiper}.
+ * > [loop]{@link SwiperAttribute#loop} attribute of [Swiper]{@link @global:Swiper} is set to **true**, **Refresh** cannot
+ * > link with [Swiper]{@link @global:Swiper}.
  * >
- * > - When the **Refresh** component is nested with a [List]{@link ./list} component whose content size is smaller
+ * > - When the **Refresh** component is nested with a [List]{@link @global:List} component whose content size is smaller
  * > than the component itself, and there are other components in between, gestures may be intercepted by the
  * > intermediate components, preventing the pull-to-refresh effect. In such cases, set the
- * > [alwaysEnabled]{@link EdgeEffectOptions} parameter to **true** to allow [List]{@link ./list} to respond to gestures
+ * > [alwaysEnabled]{@link EdgeEffectOptions} parameter to **true** to allow [List]{@link @global:List} to respond to gestures
  * > and drive the **Refresh** component through nested scrolling for the pull-to-refresh effect. For details, see
  * > [Example 9: Implementing Pull-to-Refresh in the Non-Full-Screen Scenario]
  * > (docroot://reference/apis-arkui/arkui-ts/ts-container-refresh.md#example-9-implementing-pull-to-refresh-in-the-
  * > non-full-screen-scenario).
  * >
  * > - The component has built-in gestures for functions such as drag-follow scrolling. To add custom gesture
- * > operations, refer to [Gesture Blocking Enhancement]{@link ./common}.
+ * > operations, refer to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > - Pull-to-refresh cannot be triggered by mouse click-and-drag operations.
  *

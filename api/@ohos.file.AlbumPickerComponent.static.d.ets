@@ -15,7 +15,33 @@
  */
 
 /**
- * @file A component which supports applications to select album
+ * The **AlbumPickerComponent** displays a list of albums in an app for users to select an album to browse images or 
+ * videos. For example, in a social media app, users can select an album to upload photos. With this component, apps can
+ * access the album list in the public directory without requesting the album access permission. This simplifies the 
+ * permission request process, reduces development costs, and improves user experience.
+ * 
+ * The album picker component must be used together with the photo picker component. When a user selects an album, the 
+ * system triggers the **onAlbumClick** callback and passes **AlbumInfo** (including the album URI and name) to the app.
+ * The app needs to pass the URI to the photo picker component through the **PickerController** to refresh the images 
+ * and videos in the selected album. For details about the collaboration mechanism, see 
+ * [@ohos.file.PhotoPickerComponent (PhotoPickerComponent)]{@link @ohos.file.PhotoPickerComponent}.
+ * 
+ * Note that the album picker component does not support nesting. Additionally, prevent overlaying components with the 
+ * **overlay** attribute or of higher levels on top the component, as this will prevent it from receiving gesture 
+ * events.
+ * 
+ * > **NOTE**
+ * >
+ * > - This component is supported since API version 12. Newly added APIs will be marked with a superscript to indicate 
+ * > their 
+ * >
+ * > - This component does not support [same-layer rendering](docroot://web/web-same-layer.md).
+ * 
+ * ###### Attributes
+ * 
+ * The [universal attributes]{@link ./@internal/component/ets/common} are supported.
+ *
+ * @file AlbumPickerComponent
  * @kit MediaLibraryKit
  */
 
@@ -25,9 +51,12 @@ import { Component, Builder } from '@ohos.arkui.component';
 import { Observed } from '@ohos.arkui.stateManagement';
 
 /**
- * AlbumPickerComponent: can select a certain album and display the images in that album through PhotoPickerComponent
+ * AlbumPickerComponent({albumPickerOptions?: AlbumPickerOptions, onAlbumClick?: (albumInfo: AlbumInfo) => boolean,
+ * onEmptyAreaClick?: EmptyAreaClickCallback, albumPickerController?: AlbumPickerController })
  *
- * @struct { AlbumPickerComponent }
+ * The album picker component embedded in the UI of an application allows the application to access the albums in the
+ * user directory without any permission.
+ *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @since 26.0.0 static
@@ -36,6 +65,7 @@ import { Observed } from '@ohos.arkui.stateManagement';
 export declare struct AlbumPickerComponent {
   /**
    * AlbumPickerOptions
+   *
    * @type { ?AlbumPickerOptions }
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -45,6 +75,7 @@ export declare struct AlbumPickerComponent {
 
   /**
    * Callback when select an album, will return album uri
+   *
    * @type { ?AlbumClickCallback }
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -54,6 +85,7 @@ export declare struct AlbumPickerComponent {
 
   /**
    * Callback when click the empty area of the album component
+   *
    * @type { ?EmptyAreaClickCallback }
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -63,6 +95,7 @@ export declare struct AlbumPickerComponent {
 
   /**
    * AlbumPickerController
+   *
    * @type { ?AlbumPickerController }
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -82,8 +115,8 @@ export declare struct AlbumPickerComponent {
 }
 
 /**
- * The callback of onEmptyAreaClick event
- * @typedef { function }
+ * Called when the blank area of the **AlbumPickerComponent** is tapped.
+ *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @since 26.0.0 static
@@ -92,6 +125,7 @@ export type EmptyAreaClickCallback = () => void;
 
 /**
  * The callback of onAlbumClick event
+ *
  * @typedef { function }
  * @param { AlbumInfo } albumInfo
  * @returns { boolean } boolean
@@ -102,7 +136,7 @@ export type EmptyAreaClickCallback = () => void;
 export type AlbumClickCallback = (albumInfo: AlbumInfo) => boolean;
 
 /**
- * AlbumPickerOptions Object
+ * Represents the **AlbumPicker** configuration.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
@@ -110,8 +144,8 @@ export type AlbumClickCallback = (albumInfo: AlbumInfo) => boolean;
  */
 export declare class AlbumPickerOptions {
   /**
-   * AlbumPickerComponent theme color
-   * @type { ?PickerColorMode }
+   * Theme color of the album list. The options are **AUTO**, **Light**, and **Dark**. The default value is **AUTO**.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static
@@ -119,8 +153,9 @@ export declare class AlbumPickerOptions {
   public themeColorMode?: PickerColorMode;
 
   /**
-   * The type of the content displayed in the album
-   * @type { ?photoAccessHelper.PhotoViewMIMETypes }
+   * Type of the filter. You can use it to display images, videos, or both. If this parameter is not specified, the
+   * album component displays all image and video resources.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static
@@ -128,8 +163,10 @@ export declare class AlbumPickerOptions {
   public filterType?: photoAccessHelper.PhotoViewMIMETypes;
 
   /**
-   * The size of the font displayed in the album. When `fontSize` is an int type, must use 'fp' unit
-   * @type { ?(int | string) }
+   * Font size. For details about the value range, see [fontSize]{@link TextAttribute#fontSize}. If this parameter is
+   * not set, the default font size is used. You can also dynamically set the font size using
+   * [AlbumPickerController]{@link AlbumPickerController}.setFontSize.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static
@@ -137,9 +174,8 @@ export declare class AlbumPickerOptions {
   public fontSize?: int | string;
 }
 
-
 /**
- * AlbumInfo: include album uri
+ * Represents album information.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
@@ -147,8 +183,8 @@ export declare class AlbumPickerOptions {
  */
 export declare class AlbumInfo {
   /**
-   * Album uri
-   * @type { ?string }
+   * Album URI.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static
@@ -156,8 +192,8 @@ export declare class AlbumInfo {
   public uri?: string;
 
   /**
-   * Album name
-   * @type { ?string }
+   * Album name.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static
@@ -166,7 +202,7 @@ export declare class AlbumInfo {
 }
 
 /**
- * The class for AlbumPickerController
+ * A controller that enables applications to send data to the **AlbumPickerComponent**.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
@@ -175,9 +211,11 @@ export declare class AlbumInfo {
 @Observed
 export declare class AlbumPickerController {
   /**
-   * Set font size to album picker component. Invalid value will result in the default font size being shown.
+   * Sets the font size of the album list. The **albumPickerController** parameter needs to be passed when the album
+   * picker component is created.
    *
-   * @param { int | string } fontSize - font size of album picker component
+   * @param { int | string } fontSize - Font size. For details about the value range, see
+   *     [fontSize]{@link TextAttribute#fontSize}.
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @since 26.0.0 static

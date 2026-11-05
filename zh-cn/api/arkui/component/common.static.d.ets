@@ -10467,6 +10467,37 @@ export declare interface DepthColorRGB {
 }
 
 /**
+ * Spatial position mode. Indicates the coordinate system used by the corner positions.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare enum SpatialPositionMode {
+  /**
+   * World XYZ coordinate mode. The X, Y, and Z components are all in world coordinates.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  WORLD_XYZ = 0,
+
+  /**
+   * NDC XY and world Z coordinate mode. The X and Y components use NDC (Normalized Device Coordinates),
+   * and the Z component is in world coordinates.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  NDC_XY_WORLD_Z = 1
+}
+
+/**
  * Spatial corner positions in 3D space.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10514,6 +10545,17 @@ export declare interface SpatialPosition {
    * @since 26.0.0 static
    */
   rightBottom: DepthVector3;
+
+  /**
+   * Coordinate mode of the corner positions.
+   *
+   * @default SpatialPositionMode.WORLD_XYZ
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  positionMode?: SpatialPositionMode;
 }
 
 /**
@@ -10808,7 +10850,7 @@ export declare interface AttributeModifier<T> {
    *
    * @returns { int } - Bitmask combination of states to be monitored
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @FaAndStageModel
+   * @stagemodelonly
    * @since 23 staticonly
    */
   default monitoredStates(): int;
@@ -15407,7 +15449,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+     *    <br>true：支持鼠标左键按下拖动滚动。
+     *    <br>false：不支持鼠标左键按下拖动滚动。
+     *    <br>undefined：使用默认值。
+     *    <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

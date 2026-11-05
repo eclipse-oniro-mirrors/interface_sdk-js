@@ -38,7 +38,6 @@ declare namespace formInfo {
   /**
    * Provides information about a form.
    *
-   * @typedef FormInfo
    * @syscap SystemCapability.Ability.Form
    * @atomicservice [since 11]
    * @since 9 dynamic
@@ -540,7 +539,6 @@ declare namespace formInfo {
   /**
    * Provides state information about a form.
    *
-   * @typedef FormStateInfo
    * @syscap SystemCapability.Ability.Form
    * @atomicservice [since 11]
    * @since 9 dynamic
@@ -1059,7 +1057,6 @@ declare namespace formInfo {
    * The optional options used as filters to ask
    * getFormsInfo to return formInfos from only forms that match the options.
    *
-   * @typedef FormInfoFilter
    * @syscap SystemCapability.Ability.Form
    * @atomicservice [since 11]
    * @since 9 dynamic
@@ -1328,7 +1325,6 @@ declare namespace formInfo {
   /**
    * The result of publish form.
    *
-   * @typedef PublishFormResult
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -1435,7 +1431,6 @@ declare namespace formInfo {
   /**
    * Information about a running form.
    *
-   * @typedef FormProviderFilter
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -1503,7 +1498,6 @@ declare namespace formInfo {
   /**
    * The class of a running form information.
    *
-   * @typedef RunningFormInfo
    * @syscap SystemCapability.Ability.Form
    * @systemapi [since 10 - 19]
    * @publicapi [since 20]
@@ -1515,7 +1509,6 @@ declare namespace formInfo {
     /**
      * Obtains the id of the this form.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1528,7 +1521,6 @@ declare namespace formInfo {
     /**
      * Obtains the bundle name of the application to which this form belongs.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1541,7 +1533,6 @@ declare namespace formInfo {
     /**
      * Obtains the bundle name of the form host application.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 10 dynamic
@@ -1552,7 +1543,6 @@ declare namespace formInfo {
     /**
      * The location of this form.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 12 - 19]
      * @publicapi [since 20]
@@ -1565,7 +1555,6 @@ declare namespace formInfo {
     /**
      * Obtains the visibility of this form.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 10 dynamic
@@ -1576,7 +1565,6 @@ declare namespace formInfo {
     /**
      * Obtains the name of the application module to which this form belongs.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1589,7 +1577,6 @@ declare namespace formInfo {
     /**
      * Obtains the class name of the ability to which this form belongs.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1602,7 +1589,6 @@ declare namespace formInfo {
     /**
      * Obtains the name of this form.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1616,7 +1602,6 @@ declare namespace formInfo {
      * Obtains the grid style of this form.
      * The value must be a positive integer, refer to {@link formInfo.FormDimension}.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1650,7 +1635,6 @@ declare namespace formInfo {
     /**
      * Obtains the extra data of the this form.
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 12 dynamic
@@ -1826,7 +1810,6 @@ declare namespace formInfo {
   /**
    * Provides OverflowInfo about funInteraction or sceneAnimation form
    *
-   * @typedef { OverflowInfo }
    * @syscap SystemCapability.Ability.Form
    * @atomicservice
    * @since 20 dynamic
@@ -1868,7 +1851,6 @@ declare namespace formInfo {
   /**
    * Indicates rectangle, unit is vp.
    *
-   * @typedef Rect
    * @syscap SystemCapability.Ability.Form
    * @atomicservice 
    * @since 20 dynamic
@@ -1920,7 +1902,6 @@ declare namespace formInfo {
   /**
    * The fun interaction form params.
    *
-   * @typedef { FunInteractionParams }
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1971,7 +1952,6 @@ declare namespace formInfo {
   /**
    * The scene animation form params.
    *
-   * @typedef { SceneAnimationParams }
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2014,7 +1994,6 @@ declare namespace formInfo {
   /**
    * Provides OverflowRequest about request/cancel form's overflow
    *
-   * @typedef { OverflowRequest }
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2055,7 +2034,6 @@ declare namespace formInfo {
   /**
    * ChangeSceneAnimationStateRequest
    *
-   * @typedef { ChangeSceneAnimationStateRequest }
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2087,7 +2065,6 @@ declare namespace formInfo {
   /**
    * Get form rect info callback
    *
-   * @typedef { function } GetFormRectInfoCallback
    * @param { string } formId
    * @returns { Promise<formInfo.Rect> } form rect info
    * @throws { BusinessError } 202 - The application must be system application.
@@ -2101,7 +2078,6 @@ declare namespace formInfo {
   /**
    * Get live form status info callback
    *
-   * @typedef { function } GetLiveFormStatusCallback
    * @returns { Record<string, string> } form status info, the key is formId, value is one of "INACTIVE" "PAUSE" "ACTIVE".
    * @throws { BusinessError } 202 - The application is not a system application.
    * @syscap SystemCapability.Ability.Form
@@ -2114,7 +2090,6 @@ declare namespace formInfo {
   /**
    * TemplateFormDetailInfo
    *
-   * @typedef TemplateFormDetailInfo
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -2205,7 +2180,6 @@ declare namespace formInfo {
   /**
    * template form detail info callback.
    *
-   * @typedef { function } TemplateFormDetailInfoCallback
    * @param { Array<TemplateFormDetailInfo> } info - Template form detail info.
    * @throws { BusinessError } 202 - The application is not a system application.
    * @syscap SystemCapability.Ability.Form
@@ -2218,7 +2192,6 @@ declare namespace formInfo {
   /**
    * PublishFormCrossBundleInfo
    *
-   * @typedef PublishFormCrossBundleInfo
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -2259,7 +2232,6 @@ declare namespace formInfo {
   /**
    * publish form cross bundle control callback.
    *
-   * @typedef { function } PublishFormCrossBundleControlCallback
    * @param { PublishFormCrossBundleInfo } info - Publish form cross bundle info.
    * @returns { boolean } Publish form cross bundle control result, true indicates success, false indicates failure.
    * @syscap SystemCapability.Ability.Form
@@ -2293,7 +2265,6 @@ declare namespace formInfo {
   /**
    * Get want parameters callback.
    *
-   * @typedef { function }
    * @param { Array<formInfo.FormInfo> } formInfo - The list of the form information.
    * @returns { Array<Record<string, Object>> } The want parameters list of the forms.
    * @syscap SystemCapability.Ability.Form
@@ -2306,7 +2277,6 @@ declare namespace formInfo {
   /**
    * FormCustomConfig
    *
-   * @typedef FormCustomConfig
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -2388,7 +2358,6 @@ declare namespace formInfo {
   /**
    * Callback for updating the forms.
    *
-   * @typedef { function }
    * @param { Array<FormCustomConfig> } configInfo - the config info list of the forms.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -2400,7 +2369,6 @@ declare namespace formInfo {
   /**
    * callback for deleting the forms.
    *
-   * @typedef { function }
    * @param { Array<string> } formIds - the form Id list of the forms to delete.
    * @syscap SystemCapability.Ability.Form
    * @systemapi

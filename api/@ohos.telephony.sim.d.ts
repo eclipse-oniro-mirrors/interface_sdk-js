@@ -786,12 +786,16 @@ declare namespace sim {
   function getIMSI(slotId: int): Promise<string>;
 
   /**
-   * Indicates whether the SIM card in a specified slot is a specified operator.
+   * This API is used to check whether the SIM card in a specified card slot is a SIM card of a specified carrier. For
+   * example, a carrier-dedicated app can use this interface to determine whether the current SIM card is a
+   * carrier-dedicated app and determine whether to display carrier-dedicated services or functions.
    *
-   * @param { int } slotId - Indicates the card slot index number,
-   *     ranging from 0 to the maximum card slot index number supported by the device.
-   * @param { OperatorSimCard } operator - Indicates the operator of sim.
-   * @returns { boolean } Returns {@code true} if the SIM card is specified operator; return {@code false} otherwise.
+   * @param { int } slotId - Card slot ID. <br/>- 0: card slot 1<br/>- 1: card slot 2.
+   *     <br>The value should be an integer.
+   * @param { OperatorSimCard } operator - Carrier card name. (Currently, only China Telecom cards are supported.).
+   * @returns { boolean } Returns whether the specified card slot is a specified carrier card.
+   *     <br/>- true: yes
+   *     <br/>- false: no
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.

@@ -1383,7 +1383,7 @@ declare class CanvasRenderer extends CanvasPath {
    * @crossplatform [since 10]
    * @form [since 9]
    * @atomicservice [since 11]
-   * @since 8 dynami
+   * @since 8 dynamic
    */
   clip(path: Path2D, fillRule?: CanvasFillRule): void;
 

@@ -76,8 +76,8 @@ interface TextInterface {
    * Defines the constructor of Text.
    *
    * @param { string | Resource } content - Plain text. This parameter is required when the text content needs to be
-   *     directly displayed. This parameter does not take effect when the subcomponent [Span]{@link ./span} is contained
-   *     or the [styled string]{@link ./styled_string} is set.
+   *     directly displayed. This parameter does not take effect when the subcomponent [Span]{@link @global:Span} is contained
+   *     or the [styled string]{@link @global:StyledString} is set.
    *     <br>Default value: **' '**
    *     <br>**NOTE**
    *     <br>Priority of displayed content: Styled string > Content of the **Span** component > Text content of the
@@ -98,7 +98,7 @@ interface TextInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -826,8 +826,8 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    *
    * Since API version 20, copied text from the **Text** component includes HTML-formatted content in the pasteboard.
    *
-   * - When the **Text** component contains child elements, only [Span]{@link ./span} and
-   * [ImageSpan]{@link ./image_span} support HTML-formatted pasteboard content.
+   * - When the **Text** component contains child elements, only [Span]{@link @global:Span} and
+   * [ImageSpan]{@link @global:ImageSpan} support HTML-formatted pasteboard content.
    * - For styled strings, refer to [toHtml]{@link StyledString#toHtml} for supported HTML conversion scope.
    *
    * When **copyOption** is set to **CopyOptions.InApp** or **CopyOptions.LocalDevice**:
@@ -977,6 +977,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -1192,6 +1193,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -1288,7 +1290,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * is 800 ms. When both are bound and their triggering methods are set to long press, **bindSelectionMenu** takes
    * precedence.
    *
-   * When the custom menu is too long, it is recommended that nest a [Scroll]{@link ./scroll} component inside to
+   * When the custom menu is too long, it is recommended that nest a [Scroll]{@link @global:Scroll} component inside to
    * prevent the keyboard from being obscured.
    *
    * Since API version 26.0.0, when the text component calls this API, the image preview menu takes effect if the
@@ -1360,10 +1362,10 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * > the value is an integer. If the typesetting engine rounds up the value instead, the right side of the text may be
    * > clipped.
    * >
-   * > When multiple **Text** components are placed in the [Row]{@link ./row} container with no specific layout or space
+   * > When multiple **Text** components are placed in the [Row]{@link @global:Row} container with no specific layout or space
    * > allocation settings configured, the components are laid out based on the maximum size of the container. To make
    * > sure the sum of the components' main axis sizes does not exceed the main axis size of the container, you can set
-   * > [layoutWeight]{@link CommonMethod#layoutWeight} or use the [flex layout]{@link ./common}.
+   * > [layoutWeight]{@link CommonMethod#layoutWeight} or use the [flex layout]{@link CommonMethod}.
    * >
    * > The system's default font supports the following ligatures: Th, fb, ff, fb, ffb, ffh, ffi, ffk, ffl, fh, fi, fk,
    * > fl, rf, rt, rv, rx, ry. These ligatures may cause unexpected effects of spans and styled strings. Disabling the
@@ -1781,8 +1783,8 @@ declare const TextInstance: TextAttribute;
  *
  * ###### Child Components
  *
- * This component can contain the [Span]{@link ./span}, [ImageSpan]{@link ./image_span},
- * [SymbolSpan]{@link ./symbol_span}, and [ContainerSpan]{@link ./container_span} child components.
+ * This component can contain the [Span]{@link @global:Span}, [ImageSpan]{@link @global:ImageSpan},
+ * [SymbolSpan]{@link @global:SymbolSpan}, and [ContainerSpan]{@link @global:ContainerSpan} child components.
  *
  * > **NOTE**
  * >
@@ -1798,7 +1800,7 @@ declare const TextInstance: TextAttribute;
 declare const Text: TextInterface;
 
 /**
- * Provides the [span]{@link ./span} type information.
+ * Provides the [span]{@link @global:Span} type information.
  *
  * > **NOTE**
  * >

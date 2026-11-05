@@ -50,7 +50,7 @@ interface MenuInterface {
      * > >
      * > >   - Menu支持设置的最小宽度为64vp。
      * >
-     * > - Menu不支持的通用属性：[外描边设置]{@link common}下的属性、
+     * > - Menu不支持的通用属性：[外描边设置]{@link CommonMethod}下的属性、
      * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}。
      *
      * @returns { MenuAttribute }
@@ -106,7 +106,7 @@ declare enum SubMenuExpandingMode {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -238,7 +238,7 @@ declare class MenuAttribute extends CommonMethod<MenuAttribute> {
  * 
  * ###### 子组件
  * 
- * 包含[MenuItem]{@link menu_item}、[MenuItemGroup]{@link menu_item_group}子组件。
+ * 包含[MenuItem]{@link @global:MenuItem}、[MenuItemGroup]{@link @global:MenuItemGroup}子组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

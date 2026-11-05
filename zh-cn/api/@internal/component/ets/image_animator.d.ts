@@ -23,7 +23,7 @@
  *
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -170,9 +170,9 @@ interface ImageFrameInfo {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -401,7 +401,7 @@ declare class ImageAnimatorAttribute extends CommonMethod<ImageAnimatorAttribute
  *
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * ###### 子组件
  *
