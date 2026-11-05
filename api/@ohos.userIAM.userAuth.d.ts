@@ -923,19 +923,7 @@ declare namespace userAuth {
    *
    * It consists of the fields in **Type** in the following table.
    *
-   * @unionmember { 'result' } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **result**,
-   *     the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **result**, the [callback]{@link userAuth.AuthEvent.callback } If the
-   *     first parameter of [on]{@link userAuth.AuthInstance.on} is **result**, the
-   *     [callback]{@link userAuth.AuthEvent.callback } If the first parameter of [on]{@link userAuth.AuthInstance.on}
-   *     is **result**, the [callback]{@link userAuth.AuthEvent.callback} returns the authentication result.
-   * @unionmember { 'tip' } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **tip**, the
-   *     [callback]{@link userAuth.AuthEvent.callback } If the first parameter of [on]{@link userAuth.AuthInstance.on}
-   *     is **tip**, the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **tip**, the [callback]{@link userAuth.AuthEvent.callback } If the
-   *     first parameter of [on]{@link userAuth.AuthInstance.on} is **tip**, the
+   * @unionmember { 'result' } If the first parameter of [on]{@link userAuth.AuthInstance.on} is **tip**, the
    *     [callback]{@link userAuth.AuthEvent.callback} returns the authentication tip information.
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @since 9 dynamiconly
@@ -1167,6 +1155,25 @@ declare namespace userAuth {
    * authentication failures. If the query is successful (no error is thrown), the authentication capability is
    * available. If an error is thrown, the application should determine the cause based on the error code and take
    * appropriate measures.
+   * 
+   * Error code return sequence description:
+   *
+   * If the corresponding executor is not registered, the system does not support the authentication capability and
+   * returns 12500005.
+   *
+   * If the corresponding executor has been registered, the function is not disabled, but the authentication security
+   * level is lower than that specified by the service, 12500006 is returned.
+   *
+   * If the corresponding executor has been registered, the function is not disabled, but the user does not register the
+   * credential, 12500010 needs to be returned.
+   *
+   * If the corresponding executor has been registered, the function is not disabled, but the password expires, 12500013
+   * needs to be returned.
+   *
+   * Note:
+   *
+   * If the screen lock password is a 4-digit PIN, the authentication trust level is ATL3. When this interface is
+   * invoked to query whether ATL4 password authentication is supported, 12500010 is returned.
    *
    * @permission ohos.permission.ACCESS_BIOMETRIC
    * @param { UserAuthType } authType - Authentication type. This parameter specifies the authentication type to be
@@ -1614,7 +1621,6 @@ declare namespace userAuth {
      * when a specific user instead of the current login user needs to be authenticated. If this parameter is not
      * passed, the ID of the current login user is used by default. The value is a non-negative integer.
      *
-     * @default The ID of the current user. The value is a positive integer greater than or equal to 0.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @systemapi Hide this for inner system use.
      * @since 18 dynamic
