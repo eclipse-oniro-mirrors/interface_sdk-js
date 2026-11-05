@@ -4612,30 +4612,6 @@ declare namespace webview {
         static setSocketIdleTimeout(timeout: int): void;
 
         /**
-         * 删除当前应用中指定时间点之后（含该时间点）发生变化的已访问链接记录，并通过回调通知完成。
-         *
-         * @param { Date } date - 移除范围的起始时间点。该时间点之后（含该时间点）发生变化的记录将被删除。
-         * @param { Callback<void> } callback - 移除完成后的回调。
-         * @throws { BusinessError } 17100001 - Init error.
-         * @static
-         * @syscap SystemCapability.Web.Webview.Core
-         * @since 26.2.0 static
-         */
-        static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
-
-        /**
-         * 删除当前应用中指定时间点之后（含该时间点）发生变化的已访问链接记录，并通过Promise形式返回结果。
-         *
-         * @param { Date } date - 移除范围的起始时间点。该时间点之后（含该时间点）发生变化的记录将被删除。
-         * @returns { Promise<void> } - 移除完成后resolve的Promise。
-         * @throws { BusinessError } 17100001 - Init error.
-         * @static
-         * @syscap SystemCapability.Web.Webview.Core
-         * @since 26.2.0 static
-         */
-        static removeVisitedLinksSince(date: Date): Promise<void>;
-
-        /**
          * Set the WebSoftKeyboardBehaviorMode to decide whether the keyboard will be shown/hidden automatically
          * in particular situation, for example, when web is inactive or active.
          *
@@ -4739,6 +4715,32 @@ declare namespace webview {
          * @since 26.2.0 static
          */
         getZoomFactor(): double;
+
+        /**
+         * 删除指定日期之后发生变化的已访问链接记录。
+         * 该接口使用异步回调返回结果。
+         *
+         * @param { Date } date - 数据删除的时间点。
+         *     已访问链接记录删除该日期后发生变化的数据。
+         * @param { Callback<void> } callback - 回调函数，用于返回结果。
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 dynamic
+         */
+        static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+        /**
+         * 删除指定日期之后发生变化的已访问链接记录。
+         * 该接口使用Promise异步回调。
+         *
+         * @param { Date } date - 数据删除的时间点。
+         *     已访问链接记录删除该日期后发生变化的数据。
+         * @returns { Promise<void> } Promise对象，无返回结果。
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 dynamic
+         */
+        static removeVisitedLinksSince(date: Date): Promise<void>;
     }
 
     /**

@@ -9211,29 +9211,31 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   flingSpeedLimit(speedLimit: number): WebAttribute;
 
   /**
-   * 设置是否开启已访问链接持久化。开启后，已访问链接记录存储在应用本地数据库中。
-   * 当开发者希望用户在应用重启后仍能通过链接颜色区分已访问过的链接（如资讯、内容聚合类应用）时，
-   * 使用本属性。
-   * 开启后，已访问URL记录将写入本地数据库，应用重启后已访问链接着色保持；关闭后，记录仅保存在内存中，
-   * 应用退出后消失。
+   * 设置Web组件是否开启已访问链接持久化。
+   *
+   * 开启后，已访问链接记录存储在数据库文件中，应用重启后记录仍保留，
+   * 已访问链接着色在应用重启后保持一致。
+   * 关闭后，已访问链接记录仅存储在共享内存中，应用退出后记录丢失。
    *
    * > **说明**
-   * >
-   * > - 已访问链接记录保存30天，上限20000条，过期或超限记录会被自动清理。
-   * > - 记录按应用隔离存储于应用沙箱目录。
-   * > - 当Web组件以隐私模式（incognitoMode）创建时，本属性不生效，此时已访问链接记录仅在内存中保存，
-   * > 不写入数据库。
-   * > - 默认不开启本属性，已访问链接行为与既有行为一致。
+   * > 默认值为`false`。未显式调用本属性时，
+   * > 已访问链接仅存储在共享内存中。
    *
-   * @param { boolean } value - 是否开启已访问链接持久化。
-   *     <br>**true**表示开启已访问链接持久化，**false**表示关闭。
-   *     <br>默认值：**false**。
+   * > 开启持久化后，记录按应用隔离，
+   * > 最多保存20000条，保存期限为30天。
+   *
+   * > 过期记录和超出数量上限的记录会在后台线程中自动清理。
+   *
+   * > 当Web组件处于隐私模式（通过`incognitoMode:true`开启）时，本属性不生效，
+   * > 已访问链接记录仅存储在共享内存中，不会写入磁盘。
+   *
+   * @param { boolean } enabled - 是否开启已访问链接持久化。默认值为**false**。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
-  visitedLinkPersistEnabled(value: boolean): WebAttribute;
+  visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
 }
 
 /**

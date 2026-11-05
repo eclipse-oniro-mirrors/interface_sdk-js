@@ -10455,34 +10455,32 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
 
-  /**
-   * Sets whether to enable visited link persistence. When persistence is enabled, records of visited links
-   * are stored in the local database of the application.
-   * Use this attribute when you want users to distinguish visited links by link color after the application
-   * is restarted, for example in news or content aggregation applications.
-   * Once enabled, records of visited URLs are written to the local database and the visited link coloring is
-   * retained after the application restarts; once disabled, the records are kept in memory only and are lost
-   * when the application exits.
+   /**
+   * Sets whether to enable visited link persistence for the **Web** component.
+   *
+   * When enabled, visited link records are stored in database file. The records persist across app restarts,
+   * and the visited link coloring remains consistent after the app is restarted.
+   * When disabled, visited link records are stored only in shared memory and are lost when the app exits.
    *
    * > **NOTE**
-   * >
-   * > - Visited link records are retained for 30 days, with a maximum of 20000 entries. Expired or excessive
-   * > records are automatically cleaned up.
-   * > - Records are isolated per application and stored in the application sandbox directory.
-   * > - This attribute does not take effect when the Web component is created with **incognitoMode** enabled.
-   * > In this case, visited link records are kept in memory only and are not written to the database.
-   * > - By default, this attribute is disabled, and the visited link behavior is the same as the existing
-   * > behavior.
+   * > The default value is `false`. When this attribute is not explicitly called,
+   * > visited links are stored only in shared memory.
    *
-   * @param { boolean } value - Whether to enable visited link persistence.
-   *     <br>The value **true** means to enable visited link persistence, and **false** means to disable it.
-   *     <br>The default value is **false**.
+   * > When persistence is enabled, records are isolated per app,
+   * > with a maximum of 20,000 records and a retention period of 30 days.
+   *
+   * > Expired records and excess records are automatically cleaned up in background threads.
+   *
+   * > When the Web component is in incognito mode (via `incognitoMode:true`), this attribute
+   * > does not take effect. Visited link records are stored only in shared memory and are never persisted to disk.
+   *
+   * @param { boolean } enabled - Whether to enable visited link persistence. The default value is **false**.
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
-  visitedLinkPersistEnabled(value: boolean): WebAttribute;
+  visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
 }
 
 /**
