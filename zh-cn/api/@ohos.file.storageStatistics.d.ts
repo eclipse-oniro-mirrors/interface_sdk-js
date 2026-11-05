@@ -40,9 +40,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - 获取指定卷设备总空间之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -61,9 +61,9 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } Promise对象，返回指定卷的可用空间大小（单位为Byte）。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -81,9 +81,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - 获取指定卷可用空间之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-  parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -102,9 +102,9 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } Promise对象，返回指定卷的可用空间大小（单位为Byte）。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -209,8 +209,8 @@ declare namespace storageStatistics {
    * 应用异步获取当前应用存储空间大小（单位为Byte），使用callback异步回调。
    *
    * @param { AsyncCallback<BundleStats> } callback - 获取指定卷上的应用存储空间大小之后的回调。
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -224,8 +224,8 @@ declare namespace storageStatistics {
    * 应用异步获取当前应用存储空间大小（单位为Byte），以Promise方式返回。
    *
    * @returns { Promise<BundleStats> } Promise对象，返回指定卷上的应用存储空间大小（单位为Byte）。
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -242,8 +242,8 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - 获取系统数据的空间大小之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -260,8 +260,8 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } Promise对象，返回系统数据的空间大小（单位为Byte）。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -353,9 +353,9 @@ declare namespace storageStatistics {
    * @returns { Promise<StorageStats> } Promise对象，返回当前用户各类别存储空间大小（单位为Byte）。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -372,9 +372,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<StorageStats> } callback - 返回用户各类别存储空间大小之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -392,9 +392,9 @@ declare namespace storageStatistics {
    * @returns { Promise<StorageStats> } Promise对象，返回指定用户各类别存储空间大小（单位为Byte）。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600009 - User if out of range.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -413,9 +413,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<StorageStats> } callback - 返回指定用户各类别存储空间大小之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600009 - User if out of range.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -433,8 +433,8 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - 获取内置存储的总空间大小之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed. [since 9 - 14]
    * @throws { BusinessError } 202 - The caller is not a system application. [since 9 - 14]
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -488,8 +488,8 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - 获取内置存储的可用空间大小之后的回调。
    * @throws { BusinessError } 201 - Permission verification failed. [since 9 - 14]
    * @throws { BusinessError } 202 - The caller is not a system application. [since 9 - 14]
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
