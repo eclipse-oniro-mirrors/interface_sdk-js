@@ -5680,6 +5680,8 @@ declare namespace osAccount {
      * @throws { BusinessError } 12300109 - The authentication, enrollment, or update operation is canceled.
      * @throws { BusinessError } 12300111 - The operation time out.
      * @throws { BusinessError } 12300116 - Credential complexity verification failed. [since 12]
+     * @throws { BusinessError } 12300121 - The credential has been used recently and cannot be reused.
+     *     Suggested solutions: Use an unused credential. [since 26.1.0]
      * @syscap SystemCapability.Account.OsAccount
      * @systemapi Hide this for inner system use.
      * @since 8 dynamic
