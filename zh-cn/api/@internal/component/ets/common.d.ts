@@ -1617,22 +1617,9 @@ declare const Sendable: ClassDecorator;
  * Defining  CustomDialog ClassDecorator
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 7
- */
-/**
- * Defining  CustomDialog ClassDecorator
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- */
-/**
- * Defining  CustomDialog ClassDecorator
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 7 dynamic
  */
 declare const CustomDialog: ClassDecorator;
 
