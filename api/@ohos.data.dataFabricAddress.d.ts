@@ -44,16 +44,7 @@ declare namespace dataFabricAddress {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    SCENARIO_NAVIGATION_COMMUTE = 0,
-    /**
-     * Indicates other business scenario types.
-     *
-     * @syscap SystemCapability.DistributedDataManager.DataFabric.Address
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    OTHERS = 1
+    SCENARIO_NAVIGATION_COMMUTE = 0
   }
 
   /**
@@ -353,7 +344,7 @@ declare namespace dataFabricAddress {
   /**
    * Unsubscribes from address data fabric interface.
    * This method should be called after successfully subscribing with onDataFabricAddress. Calling this method without
-   *     <br> a successful subscription will result in error 36900004.
+   *     <br> a successful subscription will result in error 36900003.
    *
    * @permission ohos.permission.LOCATION and ohos.permission.APPROXIMATELY_LOCATION and
    *     ohos.permission.LOCATION_IN_BACKGROUND
@@ -365,7 +356,6 @@ declare namespace dataFabricAddress {
    *     <br> limited device capabilities.
    * @throws { BusinessError } 36900001 - Internal error in the API.
    * @throws { BusinessError } 36900003 - Unsubscription failed.
-   * @throws { BusinessError } 36900004 - Operation not supported.
    * @throws { BusinessError } 36900005 - Invalid parameter.
    * @syscap SystemCapability.DistributedDataManager.DataFabric.Address
    * @systemapi

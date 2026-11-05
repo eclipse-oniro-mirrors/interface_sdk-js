@@ -21,8 +21,8 @@
  * 
  * > **NOTE**
  * >
- * > - If the **Filter** component has [universal attributes]{@link common} and 
- * > [universal events]{@link common} configured, the compiler toolchain automatically generates an additional 
+ * > - If the **Filter** component has [universal attributes]{@link CommonMethod} and 
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically generates an additional 
  * > \_\_Common\_\_ node and mounts the universal attributes and universal events on this node rather than 
  * > the **Filter** component itself. As a result, the configured universal attributes and universal events 
  * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes 

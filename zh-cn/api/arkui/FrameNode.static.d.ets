@@ -762,9 +762,9 @@ export declare class FrameNode {
   getUserConfigSize(): SizeT<LengthMetrics>;
 
   /**
-   * 获取用户设置的节点ID（通用属性设置的[组件标识]{@link common}）。
+   * 获取用户设置的节点ID（通用属性设置的[组件标识]{@link CommonMethod}）。
    *
-   * @returns { string } - 用户设置的节点ID（通用属性设置的[组件标识]{@link common}）。
+   * @returns { string } - 用户设置的节点ID（通用属性设置的[组件标识]{@link CommonMethod}）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -871,7 +871,7 @@ export declare class FrameNode {
   get commonEvent(): UICommonEvent;
 
   /**
-   * 获取FrameNode中持有的UIGestureEvent对象，用于设置组件绑定的手势事件。通过gestureEvent接口设置的手势不会覆盖通过声明式手势接口[（绑定手势事件）]{@link common}绑定的手势，两者同时设
+   * 获取FrameNode中持有的UIGestureEvent对象，用于设置组件绑定的手势事件。通过gestureEvent接口设置的手势不会覆盖通过声明式手势接口[（绑定手势事件）]{@link CommonMethod}绑定的手势，两者同时设
    * 置了手势时，优先回调声明式接口设置的手势事件。
    *
    * @returns { UIGestureEvent } - UIGestureEvent对象，用于设置组件绑定的手势。
@@ -882,7 +882,7 @@ export declare class FrameNode {
   get gestureEvent(): UIGestureEvent;
 
   /**
-   * 获取FrameNode中持有的CommonAttribute接口，用于设置[通用属性]{@link common}和[通用事件]{@link common}。
+   * 获取FrameNode中持有的CommonAttribute接口，用于设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}。
    *
    * 仅可以修改自定义节点的属性。
    *
@@ -1348,7 +1348,7 @@ export declare class FrameNode {
    *
    * .0.0
    *
-   * @param { string } id - 查询的子节点id，为通用属性设置的[组件标识]{@link common}。
+   * @param { string } id - 查询的子节点id，为通用属性设置的[组件标识]{@link CommonMethod}。
    * @returns { FrameNode | null } The first child node with the specified ID, or null if not found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

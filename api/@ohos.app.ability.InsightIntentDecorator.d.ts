@@ -201,6 +201,19 @@ declare interface IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   result?: Record<string, Object>;
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  exported?: boolean;
 }
 
 /**

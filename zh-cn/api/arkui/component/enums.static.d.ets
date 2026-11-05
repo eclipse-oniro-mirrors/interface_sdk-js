@@ -428,7 +428,7 @@ export declare enum RenderStrategy {
    * 
    * 1. 离屏绘制模式相比在线绘制模式会带来额外的性能损失。
    * 2. 离屏绘制模式是指将内容绘制到主画布之前，先在一个额外的画布上完成绘制工作，然后将绘制结果绘制到主画布上。
-   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link common}或[前景色]{@link common}时才可使能离屏绘制模式。
+   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link CommonMethod}或[前景色]{@link CommonMethod}时才可使能离屏绘制模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

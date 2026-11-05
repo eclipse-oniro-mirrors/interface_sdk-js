@@ -502,6 +502,16 @@ export declare interface XComponentAttribute extends CommonMethod {
    */
   default hdrBrightness(brightness: double | undefined, type?: HdrType): this;
   /**
+   * 为XComponent启用surface可见性生命周期。
+   *
+   * @param { boolean | undefined } isVisibilityLifecycle - 是否启用surface可见性生命周期。
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default enableSurfaceVisibilityLifecycle(isVisibilityLifecycle: boolean | undefined): this;
+  /**
    * 设置XComponent组件的属性修改器。
    *
    * @param { AttributeModifier<XComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - XComponent组件的属性修改器。取值为undefined时，不使用attributeModifier。

@@ -696,7 +696,7 @@ export declare interface SliderPrefixOptions extends SliderCustomContentOptions 
 export declare interface SliderSuffixOptions extends SliderCustomContentOptions {
 }
 /**
- * 支持除触摸热区以外的[通用属性]{@link common}。
+ * 支持除触摸热区以外的[通用属性]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

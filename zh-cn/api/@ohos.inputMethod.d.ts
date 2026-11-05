@@ -18,6 +18,7 @@
  * @kit IMEKit
  */
 import type { Callback, AsyncCallback } from './@ohos.base';
+import inputMethodEngine from './@ohos.inputMethodEngine';
 import InputMethodSubtype from './@ohos.InputMethodSubtype';
 import { UIContext } from './@ohos.arkui.UIContext';
 /*** if arkts dynamic */
@@ -571,6 +572,9 @@ declare namespace inputMethod {
    * <br>
    * <br>下列API均需使用[getSetting]{@link inputMethod.getSetting}获取到InputMethodSetting实例后，通过实例调用。
    *
+   * 在ArkTS动态调用中，on/off及onImeChangeWithUserId/offImeChangeWithUserId传入无效的事件类型或回调函数时，将抛出BusinessError 401。
+   * 注册监听时，callback必须为函数；取消监听时，不传callback或传入null、undefined将移除该事件的所有回调，传入其他值时必须为函数。
+   *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 8 dynamic
    * @since 23 static
@@ -581,6 +585,8 @@ declare namespace inputMethod {
      *
      * @param { 'imeChange' } type - 设置监听类型，固定取值为'imeChange'。
      * @param { function } callback - 回调函数，返回输入法属性对象及子类型对象。
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 9 dynamic
      */
@@ -592,8 +598,12 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法及子类型变化监听事件。使用callback异步回调。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { 'imeChange' } type - 设置监听类型，固定取值为'imeChange'。
      * @param { function } [callback] - 回调函数，返回取消订阅的输入法属性对象及子类型对象。
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 9 dynamic
      */
@@ -614,6 +624,8 @@ declare namespace inputMethod {
      * @param { 'imeShow' } type - 设置监听类型，固定取值为'imeShow'。
      * @param { function } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -623,9 +635,14 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘显示事件。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { 'imeShow' } type - 设置监听类型，固定取值'imeShow'。
      * @param { function } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -644,6 +661,8 @@ declare namespace inputMethod {
      * @param { 'imeHide' } type - 设置监听类型，固定取值为'imeHide'。
      * @param { function } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -653,9 +672,14 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘隐藏事件。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { 'imeHide' } type - 设置监听类型，固定取值'imeHide'。
      * @param { function } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -759,6 +783,7 @@ declare namespace inputMethod {
 
     /**
      * 获取指定用户指定输入法的子类型列表。同步接口。
+     * 返回空数组表示查询成功但没有子类型，查询失败时将抛出错误。
      *
      * @param { string } bundleName - 指定输入法的包名。
      * @param { int } [userId] - 用户ID。取值范围为有效用户的ID。如果不提供：
@@ -1080,6 +1105,8 @@ declare namespace inputMethod {
      * 订阅输入法及子类型变化监听事件。使用callback异步回调。
      *
      * @param { ImeChangeCallback } callback - 回调函数，返回输入法属性对象及子类型对象。
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -1088,7 +1115,11 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法及子类型变化监听事件。使用callback异步回调。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { ImeChangeCallback } [callback] - 回调函数，返回取消订阅的输入法属性对象及子类型对象。
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -1104,6 +1135,8 @@ declare namespace inputMethod {
      *
      * @param { ImeChangeWithUserIdCallback } callback - 回调函数，返回输入法属性对象、子类型对象及用户ID。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1114,8 +1147,12 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法及子类型变化监听事件，携带发生输入法变更的用户ID。使用callback异步回调。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { ImeChangeWithUserIdCallback } [callback] - 回调函数，返回取消订阅的输入法属性对象、子类型对象及用户ID。<br>参数不填写时，取消订阅所有的回调事件
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1128,6 +1165,8 @@ declare namespace inputMethod {
      *
      * @param { Callback<Array<InputWindowInfo>> } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1138,8 +1177,13 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘显示事件。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { Callback<Array<InputWindowInfo>> } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1152,6 +1196,8 @@ declare namespace inputMethod {
      *
      * @param { Callback<Array<InputWindowInfo>>} callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -1161,8 +1207,13 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘隐藏事件。
      *
+     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
+     *
      * @param { Callback<Array<InputWindowInfo>> } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -1234,6 +1285,9 @@ declare namespace inputMethod {
    * <br> >
    * <br> > attach和detach必须配对使用，showTextInput和hideTextInput必须配对使用，否则可能导致资源泄漏或状态不一致。
    *
+   * 在ArkTS动态调用中，on/off传入无效的事件类型或回调函数时，将抛出BusinessError 401。
+   * 注册监听时，callback必须为函数；取消监听时，不传callback或传入null、undefined将移除该事件的所有回调，传入其他值时必须为函数。
+   *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 6 dynamic
    * @since 23 static
@@ -1267,6 +1321,14 @@ declare namespace inputMethod {
      * <br> > 设置为不可获焦窗口时，系统将无法保证自绘输入控件与输入法正常交互。若开发者希望在不可获焦窗口中绘制输入框，建议参考
      * <br> > [不可获焦窗口中输入框与输入法交互指南](docroot://inputmethod/use-inputmethod-in-not-focusable-window.md)。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次绑定，并通过callback的错误参数返回BusinessError 12800006。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
+     *
      * @param { boolean } showKeyboard - 绑定输入法成功后，是否拉起输入法键盘。
      *     <br>- true表示拉起。
      *     <br>- false表示不拉起。
@@ -1277,6 +1339,8 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800006 - Input method controller error: the operation queue is full
+     * or the queue wait timed out (ArkTS dynamic only).
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -1296,6 +1360,14 @@ declare namespace inputMethod {
      * <br> > 设置为不可获焦窗口时，系统将无法保证自绘输入控件与输入法正常交互。若开发者希望在不可获焦窗口中绘制输入框，建议参考
      * <br> > [不可获焦窗口中输入框与输入法交互指南](docroot://inputmethod/use-inputmethod-in-not-focusable-window.md)。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次绑定，并通过Promise拒绝返回BusinessError 12800006。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
+     *
      * @param { boolean } showKeyboard - 绑定输入法成功后，是否拉起输入法键盘。
      *     <br>- true表示拉起。
      *     <br>- false表示不拉起。
@@ -1306,6 +1378,8 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800006 - Input method controller error: the operation queue is full
+     * or the queue wait timed out (ArkTS dynamic only).
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -1325,6 +1399,14 @@ declare namespace inputMethod {
      * <br> > 设置为不可获焦窗口时，系统将无法保证自绘输入控件与输入法正常交互。若开发者希望在不可获焦窗口中绘制输入框，建议参考
      * <br> > [不可获焦窗口中输入框与输入法交互指南](docroot://inputmethod/use-inputmethod-in-not-focusable-window.md)。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次绑定，并通过Promise拒绝返回BusinessError 12800006。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
+     *
      * @param { boolean } showKeyboard - 绑定输入法成功后，是否拉起输入法键盘。
      *     <br>- true表示拉起。
      *     <br>- false表示不拉起。
@@ -1336,6 +1418,8 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800006 - Input method controller error: the operation queue is full
+     * or the queue wait timed out (ArkTS dynamic only).
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -1350,6 +1434,14 @@ declare namespace inputMethod {
      * <br> >
      * <br> > 需要先调用此接口，完成自绘控件与输入法的绑定，才能使用以下功能：显示/隐藏键盘、更新光标信息、更改编辑框选中范围、保存配置信息、监听处理由输入法应用发送的信息或命令等。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次绑定，并通过Promise拒绝返回BusinessError 12800006。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
+     *
      * @param { UIContext } uiContext - UIContext实例对象。
      * @param { TextConfig } textConfig - 编辑框的配置信息。
      * @param { AttachOptions } [attachOptions] - 绑定附加选项。
@@ -1357,6 +1449,8 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800006 - Input method controller error: the operation queue is full
+     * or the queue wait timed out (ArkTS dynamic only).
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
@@ -1538,6 +1632,9 @@ declare namespace inputMethod {
      * <br>相关接口间的配合/制约关系：detach必须与attach配对使用。建议在hideTextInput之后调用detach，完整流程为：attach → showTextInput → hideTextInput → 
      * detach。
      *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
+     *
      * @param { AsyncCallback<void> } callback - 回调函数。当解绑定输入法成功时，err为undefined；否则为错误对象。
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
@@ -1560,6 +1657,9 @@ declare namespace inputMethod {
      * <br>使用后效果：解除绑定后，不能再调用需要绑定状态的接口。输入法软键盘将被隐藏。
      * <br>
      * <br>相关接口间的配合/制约关系：detach必须与attach配对使用。
+     *
+     * 原生层绑定或解绑操作无法按序执行时，将中止操作并返回BusinessError 12800003。
+     * 原生任务无法进入队列或等待执行超时时，不会变更会话状态。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
@@ -1592,6 +1692,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1615,6 +1716,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1638,6 +1740,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1661,6 +1764,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1686,6 +1790,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1711,6 +1816,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1730,6 +1836,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1753,6 +1860,7 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
      *     a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -2012,6 +2120,11 @@ declare namespace inputMethod {
      * <br> >
      * <br> > msgId最大限制256B，msgParam最大限制128KB。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次消息发送，并通过Promise拒绝返回BusinessError 12800003。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
      * @param { string } msgId - 需要发送至输入法应用的自定义数据的标识符。
      * @param { ArrayBuffer } [msgParam] - 需要发送至输入法应用的自定义数据的消息体。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -2020,6 +2133,8 @@ declare namespace inputMethod {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
      * @throws { BusinessError } 12800014 - the input method is in basic mode.
      * @throws { BusinessError } 12800015 - the other side does not accept the request.
@@ -2650,6 +2765,32 @@ declare namespace inputMethod {
      * @since 23 static
      */
     offSetPreviewText(callback?:SetPreviewTextCallback): void;
+
+   /**
+     * 订阅带样式的预上屏文本事件。使用callback异步回调。
+     * <br>
+     * <br> > **说明：**
+     * <br> >
+     * <br> > 使用带样式的预上屏文本功能，需在调用
+     * <br> > [attach]{@link inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig, callback: AsyncCallback<void>)}
+     * <br> > 前订阅此事件。
+     *
+     * @param { SetPreviewTextWithStyleCallback } callback - 回调函数。用于接收带样式的预上屏文本内容。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onSetPreviewTextWithStyle(callback: SetPreviewTextWithStyleCallback): void;
+   /**
+     * 取消订阅带样式的预上屏文本事件。
+     *
+     * @param { SetPreviewTextWithStyleCallback } [callback] - 取消订阅的回调函数，需要与on接口传入的保持一致。
+     *     <br>参数不填写时，取消订阅type对应的所有回调事件。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+   offSetPreviewTextWithStyle(callback?:SetPreviewTextWithStyleCallback): void;
 
    /**
      * 订阅结束文本预览事件。使用callback异步回调。
@@ -3755,7 +3896,88 @@ declare namespace inputMethod {
    */
   export type SetPreviewTextCallback = (text: string, range: Range) => void;
 
- /**
+  /**
+   * 当输入法框架需要显示带样式的预览文本时触发的回调。
+   *
+   * @param { string } text - 预览文本内容。
+   * @param { Range } range - 文本的选中范围。
+   * @param { PreviewTextStyle } style - 预上屏文本的样式。
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type SetPreviewTextWithStyleCallback = (text: string, range: Range, style: PreviewTextStyle) => void;
+
+  /**
+   * 枚举预上屏文本的下划线样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * 无下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * 实线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * 波浪线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * 虚线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
+
+  /**
+   * 预上屏文本的样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface PreviewTextStyle {
+    /**
+     * 下划线样式。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * 下划线颜色，格式为0xRRGGBB。可选参数，不传时下划线颜色应遵循应用主题颜色。若携带透明度，透明度无效，将被编辑器忽略。
+     * 取值限定为整数。默认值：缺省行为：不传递颜色给编辑框，由编辑框处理，默认跟随光标色。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
+  }
+
+  /**
    * 枚举，定义了文本首字母大写的不同模式。
    * <br>
    * | 名称 | 值 | 说明 |

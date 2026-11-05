@@ -646,6 +646,26 @@ declare class ApplicationContext extends Context {
   setFont(font: string): void;
 
   /**
+   * 设置应用的字体类型。仅支持主线程调用。
+   *
+   * > **说明：**
+   * >
+   * > 调用该接口前，需要确保窗口已完成创建、且UIAbility对应的页面已完成加载，即在
+   * > [onWindowStageCreate()]{@link ./../@ohos.app.ability.UIAbility:UIAbility.onWindowStageCreate}生命周期中通过
+   * > [loadContent]{@link @ohos.window:window.WindowStage.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}方法加载页面之后调用。
+   *
+   * @param { string } font - 设置字体类型，字体可以通过
+   *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}方法进行注册使用。
+   * @param { boolean } enableAnimation - 设置字体类型时是否使用动画，true表示使用动画，false表示不使用动画。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic&static
+   */
+  setFont(font: string, enableAnimation: boolean): void;
+
+  /**
   * 启用当前进程延迟退出功能，使用Promise异步回调。仅支持主线程调用。
   * 在正常情况下，应用进程中最后一个UIAbility退出后，进程将退出。调用此接口，在最后一个UIAbility退出后，进程将延迟10秒退出。
   * 如果在当前进程的10秒内启动该进程的新UIAbility，进程将不再退出。

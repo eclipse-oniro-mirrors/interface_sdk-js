@@ -249,7 +249,7 @@ export interface TemplateOptions {
 }
 
 /**
-* 除支持[拖拽排序]{@link common}属性外，还支持以下属性。
+* 除支持[拖拽排序]{@link CommonMethod}属性外，还支持以下属性。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
