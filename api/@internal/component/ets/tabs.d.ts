@@ -1504,6 +1504,41 @@ declare interface TabsBreakpointType<T> {
   lg?: T;
 }
 
+/**
+ * Defines ths options for the title bar of the sidebar tab bar. The title bar is displayed above the header area.
+ * When the title bar is set, the expand/collapse button moves from the default left side to the right side of the
+ * title bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TabsSidebarTitleBarOptions<T> {
+  /**
+   * Icon of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  icon?: ResourceStr;
+
+  /**
+   * Text of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  text?: ResourceStr;
+}
+
 
 
 /**
@@ -2574,6 +2609,20 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.1.0 dynamic
    */
   showSidebarControlButton(value: Optional<boolean>): TabsAttribute;
+
+  /**
+   * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
+   * set, the expand/collapse button moves from the default left side to the right side of the title bar.
+   *
+   * @param { Optional<TabsSidebarTitleBarOptions> } value - Title bar options of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sidebarTitleBar(value: Optional<TabsSidebarTitleBarOptions>): TabsAttribute;
 }
 
 /**
