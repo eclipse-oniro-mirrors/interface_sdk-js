@@ -301,9 +301,9 @@ interface SideBarContainerInterface {
 *
 * > **说明：**
 *
-* > 针对侧边栏子组件设置[通用属性宽高]{@link common}时，宽高都不生效。
+* > 针对侧边栏子组件设置[通用属性宽高]{@link CommonMethod}时，宽高都不生效。
 *
-* > 针对侧边栏内容区设置[通用属性宽高]{@link common}时，宽高都不生效，默认占满SideBarContainer的剩余空间。
+* > 针对侧边栏内容区设置[通用属性宽高]{@link CommonMethod}时，宽高都不生效，默认占满SideBarContainer的剩余空间。
 *
 * > 当[showSideBar]{@link SideBarContainerAttribute#showSideBar}属性未设置时，依据组件大小进行自动显示：
 *
@@ -398,9 +398,9 @@ interface DividerStyle {
 }
 
 /**
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
-* 除支持[通用事件]{@link common}外，还支持以下事件：
+* 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -532,7 +532,7 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   /**
    * 设置侧边栏最小宽度。设置为小于0的值时按默认值显示。值不能超过侧边栏容器本身宽度，超过则使用侧边栏容器本身宽度。与
    * [minSideBarWidth]{@link SideBarContainerAttribute#minSideBarWidth(value: number)}相比，value参数新增了对百分比字符串和其他
-   * [像素单位]{@link common}的支持。
+   * [像素单位]{@link CommonMethod}的支持。
    *
    * minSideBarWidth优先于侧边栏子组件minWidth，minSideBarWidth未设置时默认值优先级高于侧边栏子组件minWidth。
    *
@@ -549,7 +549,7 @@ declare class SideBarContainerAttribute extends CommonMethod<SideBarContainerAtt
   /**
    * 设置侧边栏最大宽度。设置为小于0的值时按默认值显示。值不能超过侧边栏容器本身宽度，超过则使用侧边栏容器本身宽度。与
    * [maxSideBarWidth]{@link SideBarContainerAttribute#maxSideBarWidth(value: number)}相比，value参数新增了对百分比字符串和其他
-   * [像素单位]{@link common}的支持。
+   * [像素单位]{@link CommonMethod}的支持。
    *
    * maxSideBarWidth优先于侧边栏子组件maxWidth，maxSideBarWidth未设置时默认值优先级高于侧边栏子组件maxWidth。
    *

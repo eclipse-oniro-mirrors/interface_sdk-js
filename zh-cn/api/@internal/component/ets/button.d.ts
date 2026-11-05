@@ -34,7 +34,7 @@
  * > [fontStyle]{@link ButtonAttribute#fontStyle}、[fontFamily]{@link ButtonAttribute#fontFamily}、
  * > [fontWeight]{@link ButtonAttribute#fontWeight}进行设置。
  * >
- * > - 设置[颜色渐变]{@link common}需先设置[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}为透明色。
+ * > - 设置[颜色渐变]{@link CommonMethod}需先设置[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}为透明色。
  * >
  * > - 在不设置borderRadius时，圆角矩形按钮的圆角大小保持默认值不变。圆角大小不会随按钮高度变化而变化，和controlSize属性有关，controlSize为NORMAL时圆角大小20vp，controlSize为
  * > SMALL时圆角大小14vp。
@@ -551,9 +551,9 @@ declare interface LabelStyle {
     textAlign?: TextAlign;
 }
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 支持[通用事件]{@link common}。
+ * 支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
