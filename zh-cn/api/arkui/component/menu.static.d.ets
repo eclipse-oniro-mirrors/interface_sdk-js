@@ -198,6 +198,16 @@ export declare interface MenuAttribute extends CommonMethod {
      */
     default attributeModifier(
         modifier: AttributeModifier<MenuAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+    /**
+     * 设置菜单选项。
+     *
+     * @returns { MenuAttribute } 返回MenuAttribute的实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setMenuOptions(): this;
 }
 
 /**
