@@ -507,7 +507,7 @@ declare namespace relationalStore {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    dumpStackOnFileDel?: boolean;
+    dumpStackOnFileDeletion?: boolean;
 
     /**
      * Specifies whether data can be searched.
