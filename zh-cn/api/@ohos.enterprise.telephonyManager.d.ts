@@ -484,6 +484,15 @@ declare namespace telephonyManager {
     endTime: number;
 
     /**
+     * 通话方向：**true** 表示来电（呼入），**false** 表示去电（呼出）。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isIncoming: boolean;
+
+    /**
      * SIM 卡槽位 ID。0表示卡槽1，1表示卡槽2。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
