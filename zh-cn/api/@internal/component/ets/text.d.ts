@@ -68,8 +68,8 @@ declare interface TextOverflowOptions {
 interface TextInterface {
   /**
    *
-   * @param { string | Resource } content - 文本内容。当需要直接显示文本内容时传入此参数。包含子组件[Span]{@link ./span}或设置了
-   *     [属性字符串]{@link ./styled_string}时，该参数不生效。
+   * @param { string | Resource } content - 文本内容。当需要直接显示文本内容时传入此参数。包含子组件[Span]{@link @global:Span}或设置了
+   *     [属性字符串]{@link @global:StyledString}时，该参数不生效。
    *     <br>默认值：' '
    *     <br>**说明：**
    *     <br>显示内容的优先级：属性字符串>Span>Text的文本内容。
@@ -87,7 +87,7 @@ interface TextInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -705,7 +705,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    *
    * 从API version 20开始，当Text组件执行复制操作时，会将HTML格式的内容添加到剪贴板中。
    *
-   * - 当Text组件包含子组件时，仅支持[Span]{@link ./span}和[ImageSpan]{@link ./image_span}子组件向剪贴板中添加HTML格式的内容。
+   * - 当Text组件包含子组件时，仅支持[Span]{@link @global:Span}和[ImageSpan]{@link @global:ImageSpan}子组件向剪贴板中添加HTML格式的内容。
    * - 设置Text组件的属性字符串时，请参考属性字符串[toHtml]{@link StyledString#toHtml}接口文档，以了解支持转换为HTML的范围。
    *
    * 设置copyOption为CopyOptions.InApp或者CopyOptions.LocalDevice时：
@@ -833,6 +833,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -954,7 +955,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeWidth(width: Optional<LengthMetrics>): TextAttribute;
 
@@ -968,7 +969,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeColor(color: Optional<ResourceColor>): TextAttribute;
 
@@ -983,7 +984,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   strokeJoinStyle(strokeJoinStyle: StrokeJoinStyle | undefined): TextAttribute;
 
@@ -1020,6 +1021,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -1097,7 +1099,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
    * 的长按响应时长为800ms，当两者同时绑定且触发方式均为长按时，优先响应bindSelectionMenu。
    *
-   * 自定义菜单超长时，建议内部嵌套使用[Scroll]{@link ./scroll}组件，避免键盘被遮挡。
+   * 自定义菜单超长时，建议内部嵌套使用[Scroll]{@link @global:Scroll}组件，避免键盘被遮挡。
    *
    * 从API版本26.0.0开始，文本组件调用该接口时，options中的menuType属性传入MenuType.PREVIEW_MENU，设置图片预览菜单的能力生效。
    *
@@ -1159,8 +1161,8 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * >
    * > 字体排版引擎会对开发者传入的宽度[width]{@link CommonMethod#width(value: Length)}进行向下取整，保证是整型像素后进行排版。如果向上取整，可能会出现文字右侧被截断。
    * >
-   * > 当多个Text组件在[Row]{@link ./row}容器内布局且没有设置具体的布局分配信息时，Text会以Row的最大尺寸进行布局。如果需要子组件主轴累加的尺寸不超过Row容器主轴的尺寸，可以设置
-   * > [layoutWeight]{@link CommonMethod#layoutWeight}或者是以[Flex]{@link ./common}布局来约束子组件的主轴尺寸。
+   * > 当多个Text组件在[Row]{@link @global:Row}容器内布局且没有设置具体的布局分配信息时，Text会以Row的最大尺寸进行布局。如果需要子组件主轴累加的尺寸不超过Row容器主轴的尺寸，可以设置
+   * > [layoutWeight]{@link CommonMethod#layoutWeight}或者是以[Flex]{@link CommonMethod}布局来约束子组件的主轴尺寸。
    * >
    * > 系统默认字体支持的liga连字：Th fb ff fb ffb ffh ffi ffk ffl fh fi fk fl rf rt rv rx ry。常导致Span、属性字符串的效果不符合预期，关闭liga连字特性可以规避。
    * >
@@ -1523,8 +1525,8 @@ declare const TextInstance: TextAttribute;
  *
  * ###### 子组件
  *
- * 可以包含[Span]{@link ./span}、[ImageSpan]{@link ./image_span}、[SymbolSpan]{@link ./symbol_span}和
- * [ContainerSpan]{@link ./container_span}子组件。
+ * 可以包含[Span]{@link @global:Span}、[ImageSpan]{@link @global:ImageSpan}、[SymbolSpan]{@link @global:SymbolSpan}和
+ * [ContainerSpan]{@link @global:ContainerSpan}子组件。
  *
  * > **说明：**
  * >
@@ -1540,7 +1542,7 @@ declare const TextInstance: TextAttribute;
 declare const Text: TextInterface;
 
 /**
- * [Span]{@link ./span}类型信息。
+ * [Span]{@link @global:Span}类型信息。
  *
  * > **说明：**
  * >

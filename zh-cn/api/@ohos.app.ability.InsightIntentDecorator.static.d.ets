@@ -205,6 +205,18 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
+
+  /**
    * 表示意图的uri信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -321,11 +333,14 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -349,6 +364,18 @@ export @interface InsightIntentPage {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * 表示与意图绑定的UIAbility名称。
@@ -496,11 +523,14 @@ export @interface InsightIntentFunctionMethod {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -524,6 +554,18 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 }
 /**
  * 使用该注解装饰[FormExtensionAbility]{@link @ohos.app.form.FormExtensionAbility}并配置FormExtensionAbility绑定的卡片名称，便于AI入口通过意图添加卡
@@ -644,6 +686,18 @@ export @interface InsightIntentForm {
   result: string = '';
 
   /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
+
+  /**
    * 表示FormExtensionAbility绑定的卡片名称。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -751,11 +805,14 @@ export @interface InsightIntentEntry {
   keywords: string[] = [];
 
   /**
-   * 表示该意图所需的权限。
+   * 调用该意图所需的权限列表，为可选字段。
+   * 该字段仅用于调用方查询或参考。
+   * 系统不会自动校验这些权限。
+   * 权限校验必须由意图提供方（服务端）实现。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -779,6 +836,18 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * 表示与意图绑定的Ability名称。

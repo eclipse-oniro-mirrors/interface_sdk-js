@@ -30,7 +30,7 @@
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface ScrollSnapOffsetProvider {
   /**
@@ -45,7 +45,7 @@ export declare interface ScrollSnapOffsetProvider {
    * @returns { double } Approach offset magnitude, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   calculateApproachOffset(velocity: double, decayOffset: double): double;
 
@@ -62,7 +62,7 @@ export declare interface ScrollSnapOffsetProvider {
    * @returns { double } Absolute target scroll offset, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   calculateSnapOffset(velocity: double): double;
 }

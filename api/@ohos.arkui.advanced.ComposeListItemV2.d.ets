@@ -14,6 +14,25 @@
  */
 
 /**
+ * The **ComposeListItemV2** component is used to display a series of list items with the same width, suitable for 
+ * presenting continuous, multi-row combinations of similar data (such as images and text).
+ * 
+ * This component is implemented based on 
+ * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
+ * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1), 
+ * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no 
+ * longer limited to the component level. With state management V2, you can more flexibly control the data and state of 
+ * list items through this component, achieving more efficient UI refresh.
+ * 
+ * > **NOTE**
+ * >
+ * > - If [universal attributes]{@link ./@internal/component/ets/common} and 
+ * > [universal events]{@link ./@internal/component/ets/common} are set for **ComposeListItemV2**, the compilation 
+ * > toolchain will generate an additional node \_\_Common\_\_ and mount the universal attributes or universal events on
+ * > \_\_Common\_\_, rather than directly applying them to **ComposeListItemV2** itself. This may cause the set 
+ * > universal attributes or universal events to not take effect or behave unexpectedly. Therefore, it is not 
+ * > recommended to set universal attributes and universal events on **ComposeListItemV2**.
+ * 
  * @file
  * @kit ArkUI
  */
@@ -1287,24 +1306,7 @@ export declare class OperateItemV2 {
 }
 
 /**
- * The **ComposeListItemV2** component is used to display a series of list items with the same width, suitable for
- * presenting continuous, multi-row combinations of similar data (such as images and text).
- *
- * This component is implemented based on
- * [state management V2](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2). Compared
- * with [state management V1](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1),
- * state management V2 delivers enhanced capabilities for deep observation and management of data objects, and is no
- * longer limited to the component level. With state management V2, you can more flexibly control the data and state of
- * list items through this component, achieving more efficient UI refresh.
- *
- * > **NOTE**
- * >
- * > - If [universal attributes]{@link ./@internal/component/ets/common} and
- * > [universal events]{@link ./@internal/component/ets/common} are set for **ComposeListItemV2**, the compilation
- * > toolchain will generate an additional node \_\_Common\_\_ and mount the universal attributes or universal events on
- * > \_\_Common\_\_, rather than directly applying them to **ComposeListItemV2** itself. This may cause the set
- * > universal attributes or universal events to not take effect or behave unexpectedly. Therefore, it is not
- * > recommended to set universal attributes and universal events on **ComposeListItemV2**.
+ * Defines the left element, middle element, and right display content of the list item.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

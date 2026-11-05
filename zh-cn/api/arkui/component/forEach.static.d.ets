@@ -79,6 +79,7 @@ export interface ForEachAttribute extends DynamicNode {
    * @param { KeyGeneratorFunc<T> } [keyGenerator] - 键生成器函数。
    * @returns { this } ForEachAttribute实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -87,9 +88,10 @@ export interface ForEachAttribute extends DynamicNode {
         keyGenerator?: KeyGeneratorFunc<T>): this;
 
   /**
-     * Notify ForEach已经完成了其属性的设置。
-     *
+   * 通知ForEach已经完成属性设置。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
    * @since 26.0.1 staticonly
    */
@@ -115,11 +117,12 @@ export declare function ForEach<T = Any>(arr: Array<T>,
 ): ForEachAttribute;
 
 /**
- * 定义ForEach组件。需要在组件属性设置开始时调用setForEachOptions，并在组件属性设置结束时调用applyAttributeFinish。
+ * 定义ForEach组件。需要在组件属性设置开始时调用setForEachOptions，并在组件属性设置结束时调用applyAttributesFinish。
  *
  * @param { CustomBuilderT<ForEachAttribute> } style - 用于设置ForEach属性的回调。
  * @returns { ForEachAttribute } ForEach属性实例。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
  * @since 26.0.1 staticonly
  */

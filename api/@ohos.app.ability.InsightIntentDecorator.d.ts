@@ -201,6 +201,19 @@ declare interface IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   result?: Record<string, Object>;
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  exported?: boolean;
 }
 
 /**
@@ -394,12 +407,15 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
   navDestinationName?: string;
 
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }
@@ -431,12 +447,15 @@ export declare const InsightIntentPage: ((intentInfo: PageIntentDecoratorInfo) =
  */
 declare interface FunctionIntentDecoratorInfo extends IntentDecoratorInfo {
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }
@@ -506,12 +525,15 @@ declare interface EntryIntentDecoratorInfo extends IntentDecoratorInfo {
   executeMode: insightIntent.ExecuteMode[];
 
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   permissions?: string[];
 }

@@ -129,9 +129,9 @@ declare namespace backgroundTaskManager {
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
-   * @param { BackgroundMode } bgMode  - 向系统申请的后台模式。
-   * @param { WantAgent } wantAgent  - 通知参数，用于指定长时任务通知点击后跳转的界面。
-   * @param { AsyncCallback<void> } callback  - 回调函数，申请长时任务成功时，err为undefined，否则为错误对象。
+   * @param { BackgroundMode } bgMode - 向系统申请的后台模式。
+   * @param { WantAgent } wantAgent - 通知参数，用于指定长时任务通知点击后跳转的界面。
+   * @param { AsyncCallback<void> } callback - 回调函数，申请长时任务成功时，err为undefined，否则为错误对象。
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 8
    * @deprecated since 9
@@ -146,8 +146,8 @@ declare namespace backgroundTaskManager {
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
-   * @param { BackgroundMode } bgMode  - 向系统申请的后台模式。
-   * @param { WantAgent } wantAgent  - 通知参数，用于指定长时任务通知点击跳转的界面。
+   * @param { BackgroundMode } bgMode - 向系统申请的后台模式。
+   * @param { WantAgent } wantAgent - 通知参数，用于指定长时任务通知点击跳转的界面。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 8
@@ -162,7 +162,7 @@ declare namespace backgroundTaskManager {
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
    *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
-   * @param { AsyncCallback<void> } callback  - 回调函数，取消长时任务成功时，err为undefined，否则为错误对象。
+   * @param { AsyncCallback<void> } callback - 回调函数，取消长时任务成功时，err为undefined，否则为错误对象。
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 8
    * @deprecated since 9

@@ -200,6 +200,8 @@ interface DistortionComponentInterface {
 /**
  * Defines the DistortionComponent attribute functions
  *
+ * The [universal events]{@link CommonMethod} are supported.
+ * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
  * @stagemodelonly

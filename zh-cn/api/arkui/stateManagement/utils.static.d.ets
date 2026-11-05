@@ -210,8 +210,8 @@ export declare class Binding<T> {
   /**
    * 提供get访问器以获取当前绑定值。
    *
-   * @returns { T }
-   返回值类型为泛型参数T，与Binding<T>定义的类型一致。
+   * @returns { T } 返回值类型为泛型参数T，与Binding<T>定义的类型一致。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -629,6 +629,16 @@ export declare interface CustomComponentContext {
   getReusePool(): IReusePool | undefined;
 
   /**
+   * 从当前自定义组件获取默认复用池。
+   *
+   * @returns { IDefaultReusePool | undefined } 当前组件存在默认复用池时，返回默认复用池，否则返回`undefined`。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
+
+  /**
    * 注册激活和非激活回调。
    *
    * @param { ActiveAndInactiveCallbackType } [active] - 激活函数回调
@@ -641,6 +651,26 @@ export declare interface CustomComponentContext {
    */
   registerActiveAndInactiveCallback(active?: ActiveAndInactiveCallbackType,
     inactive?: ActiveAndInactiveCallbackType): void;
+}
+
+/**
+ * `IDefaultReusePool` 接口提供自定义组件上的默认复用池的相关功能。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface IDefaultReusePool {
+
+  /**
+   * 清理复用池中的节点。
+   *
+   * @param { string } [reuseId] - 要清理的节点的复用标识ID，未指定时清理复用池中的全部节点。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**

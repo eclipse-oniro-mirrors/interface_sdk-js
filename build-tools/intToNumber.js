@@ -276,7 +276,7 @@ function parseJSDocVisitEachChild1(context, node) {
       }
     });
   }
-  
+
   function parseTypeExpr(typeExpr) {
     let newTypeExpr = typeExpr;
     if (typeExpr.type.kind === ts.SyntaxKind.JSDocNullableType) {
@@ -346,7 +346,7 @@ function processSignatureContent(content) {
  * @returns {string} 处理后参数，格式不变
  */
 function processSingleParameter(param) {
-  if (!param.includes(':')){
+  if (!param.includes(':')) {
     return param;
   }
   const colonIndex = param.indexOf(':');
@@ -354,13 +354,13 @@ function processSingleParameter(param) {
   const typePart = param.substring(colonIndex + 1);
   const typeItems = typePart.split(/\s*\|\s*/);
   const newTypeItems = [];
-  let hasNumber = false;
+  const numberTypes = new Set();
   for (const type of typeItems) {
     const trimmedType = type.trim();
-    if (trimmedType === 'number') {
-      if (!hasNumber) {
+    if (trimmedType.startsWith('number')) {
+      if (!numberTypes.has(trimmedType)) {
         newTypeItems.push(type);
-        hasNumber = true;
+        numberTypes.add(trimmedType);
       }
     } else {
       newTypeItems.push(type);

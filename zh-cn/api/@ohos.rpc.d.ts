@@ -1665,7 +1665,7 @@ declare namespace rpc {
      *     1.The parameter is an empty array;
      *     2.The number of parameters is incorrect;
      *     3.The parameter type does not match;
-     *     4.The element does not exist in the array.
+     *     4.The element does not exist in the array;
      *     5.The type of the element in the array is incorrect.
      * @throws { BusinessError } 1900009 - Failed to write data to the message sequence.
      * @syscap SystemCapability.Communication.IPC.Core

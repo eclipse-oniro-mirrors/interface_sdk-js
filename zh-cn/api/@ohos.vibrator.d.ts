@@ -610,7 +610,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EFFECT_IME_STRENGTH1 = 'haptic.grade.normal.strength1',
 
@@ -619,7 +619,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EFFECT_IME_STRENGTH2 = 'haptic.grade.normal.strength2',
 
@@ -628,7 +628,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EFFECT_IME_STRENGTH3 = 'haptic.grade.normal.strength3',
 
@@ -637,7 +637,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EFFECT_IME_STRENGTH4 = 'haptic.grade.normal.strength4',
 
@@ -646,7 +646,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     EFFECT_IME_STRENGTH5 = 'haptic.grade.normal.strength5'
   }
@@ -1439,7 +1439,7 @@ declare namespace vibrator {
      *
      * @syscap SystemCapability.Sensors.MiscDevice
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     isSupportIntensity?: boolean;
 

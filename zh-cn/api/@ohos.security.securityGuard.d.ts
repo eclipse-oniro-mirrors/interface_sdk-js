@@ -14,15 +14,15 @@
  */
 
 /**
- * @file 本模块提供设备风险管理平台能力。
+ * @file This module provides the capabilities to security guard.
  * @kit SecurityGuardKit
  */
 
 import type { Callback } from '@ohos.base';
 
 /**
- * 提供安全事件存取、风险分析等功能。
- * 基于事件信息，您将能够分析设备的运行状态。
+ * Provides security event management and security model management.
+ * Based on event information, you will be able to analyze the running status of devices.
  *
  * @namespace securityGuard
  * @syscap SystemCapability.Security.SecurityGuard
@@ -32,7 +32,7 @@ import type { Callback } from '@ohos.base';
 declare namespace securityGuard {
 
   /**
-   * 提供SecurityEvent类型，包括事件ID、版本信息和上报内容。
+   * Provides the SecurityEvent type, including the event id, version info, report content.
    *
    * @typedef SecurityEvent
    * @syscap SystemCapability.Security.SecurityGuard
@@ -41,7 +41,7 @@ declare namespace securityGuard {
    */
   interface SecurityEvent {
     /**
-     * 安全事件类型。
+     * The event id
      *
      * @type { number }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -51,7 +51,7 @@ declare namespace securityGuard {
     eventId: number;
 
     /**
-     * 安全事件版本号。
+     * The version of a security event. Different versions indicate different data formats.
      *
      * @type { string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -61,7 +61,7 @@ declare namespace securityGuard {
     version: string;
 
     /**
-     * 安全事件内容，json格式。
+     * The report content
      *
      * @type { string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -71,7 +71,7 @@ declare namespace securityGuard {
     content: string;
 
     /**
-     * 事件时间戳，格式为YYYYMMDDHHMMSS。
+     * The event timestamp, format is YYYYMMDDHHMMSS.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -82,16 +82,16 @@ declare namespace securityGuard {
   }
 
   /**
-   * 安全事件上报接口。
+   * Report security information to the security guard.
    *
    * @permission ohos.permission.REPORT_SECURITY_EVENT
-   * @param { SecurityEvent } securityEvent - 表示要上报的事件信息。
+   * @param { SecurityEvent } securityEvent - indicates the information to be reported.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -100,7 +100,7 @@ declare namespace securityGuard {
   function reportSecurityEvent(securityEvent: SecurityEvent): void;
 
   /**
-   * 用户获取安全数据的规则。
+   * Provides the conditions of querySecurityEvent.
    *
    * @interface SecurityEventRule
    * @syscap SystemCapability.Security.SecurityGuard
@@ -109,7 +109,7 @@ declare namespace securityGuard {
    */
   interface SecurityEventRule {
     /**
-     * 需要获取的安全事件ID。
+     * The security event ids.
      *
      * @type { number }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -117,9 +117,9 @@ declare namespace securityGuard {
      * @since 12
      */
     eventId: number;
-    
+
     /**
-     * 需要获取数据的起始时间，格式为YYYYMMDDHHMMSS。
+     * The begin time, format is YYYYMMDDHHMMSS.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -129,7 +129,7 @@ declare namespace securityGuard {
     beginTime?: string;
 
     /**
-     * 需要获取数据的终止时间，格式为YYYYMMDDHHMMSS。
+     * The end time, format is YYYYMMDDHHMMSS.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -139,7 +139,7 @@ declare namespace securityGuard {
     endTime?: string;
 
     /**
-     * 额外查询参数。
+     * The query condition.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -150,7 +150,7 @@ declare namespace securityGuard {
   }
 
   /**
-   * 用于接收安全数据的回调函数。
+   * Definition callback of receiving the query data.
    *
    * @interface Querier
    * @syscap SystemCapability.Security.SecurityGuard
@@ -159,7 +159,7 @@ declare namespace securityGuard {
    */
   interface Querier {
     /**
-     * 返回数据时触发。
+     * Triggered when data is returned.
      *
      * @type { function }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -169,7 +169,7 @@ declare namespace securityGuard {
     onQuery: (events: Array<SecurityEvent>) => void;
 
     /**
-     * 获取数据结束时触发。
+     * Triggered when data is complete.
      *
      * @type { function }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -179,7 +179,7 @@ declare namespace securityGuard {
     onComplete: () => void;
 
     /**
-     * 查询存在失败时触发。
+     * Triggered when error.
      *
      * @type { function }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -190,17 +190,17 @@ declare namespace securityGuard {
   }
 
   /**
-   * 用于获取安全事件信息。
+   * Query security event information from security guard.
    *
    * @permission ohos.permission.QUERY_SECURITY_EVENT
-   * @param { Array<SecurityEventRule> } rules - 获取数据的规则。
-   * @param { Querier } querier - 用于接收数据的回调函数。
+   * @param { Array<SecurityEventRule> } rules - rule of get security event information.
+   * @param { Querier } querier - callback of receiving the query data.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -209,7 +209,7 @@ declare namespace securityGuard {
   function querySecurityEvent(rules: Array<SecurityEventRule>, querier: Querier): void;
 
   /**
-   * 安全事件采集规则。
+   * Provides the conditions of Collector.
    *
    * @typedef CollectorRule
    * @syscap SystemCapability.Security.SecurityGuard
@@ -218,7 +218,7 @@ declare namespace securityGuard {
    */
   interface CollectorRule {
     /**
-     * 安全事件ID。
+     * The event id
      *
      * @type { number }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -228,7 +228,7 @@ declare namespace securityGuard {
     eventId: number;
 
     /**
-     * 额外查询条件。
+     * The query condition.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -239,16 +239,16 @@ declare namespace securityGuard {
   }
 
   /**
-   * 开始采集事件。
+   * start the collector to collect data
    *
    * @permission ohos.permission.QUERY_SECURITY_EVENT
-   * @param { CollectorRule } rule - 采集规则。
+   * @param { CollectorRule } rule - rule of collect security event information.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -257,16 +257,16 @@ declare namespace securityGuard {
   function startSecurityEventCollector(rule: CollectorRule): void;
 
   /**
-   * 停止采集事件。
+   * stop the collector.
    *
    * @permission ohos.permission.QUERY_SECURITY_EVENT
-   * @param { CollectorRule } rule - 采集规则。
+   * @param { CollectorRule } rule - rule of collect security event information.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -275,7 +275,7 @@ declare namespace securityGuard {
   function stopSecurityEventCollector(rule: CollectorRule): void;
 
   /**
-   * 安全模型规则。
+   * Provides the ModelRule type.
    *
    * @typedef ModelRule
    * @syscap SystemCapability.Security.SecurityGuard
@@ -284,7 +284,7 @@ declare namespace securityGuard {
    */
   interface ModelRule {
     /**
-     * 安全模型名称。
+     * The security model rule
      *
      * @type { string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -294,18 +294,18 @@ declare namespace securityGuard {
     modelName: string;
 
     /**
-     * 额外模型参数。
+     * The model param.
      *
      * @type { ?string }
      * @syscap SystemCapability.Security.SecurityGuard
      * @systemapi Hide this for inner system use.
      * @since 12
      */
-    param?: string
+    param?: string;
   }
 
   /**
-   * 安全模型结果。
+   * Provides the ModelResult type.
    *
    * @typedef ModelResult
    * @syscap SystemCapability.Security.SecurityGuard
@@ -314,7 +314,7 @@ declare namespace securityGuard {
    */
   interface ModelResult {
     /**
-     * 安全模型结果。
+     * The result of security model.
      *
      * @type { string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -325,17 +325,17 @@ declare namespace securityGuard {
   }
 
   /**
-   * 请求安全模型检测结果。
+   * Request security model result from security guard.
    *
    * @permission ohos.permission.QUERY_SECURITY_MODEL_RESULT
-   * @param { ModelRule } rule -  安全模型规则，指定模型名称与参数。
-   * @returns { Promise<ModelResult> } 以Promise形式返回模型结果。
+   * @param { ModelRule } rule -  indicates the security model rule.
+   * @returns { Promise<ModelResult> } model Results with Promises.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -344,7 +344,7 @@ declare namespace securityGuard {
   function getModelResult(rule: ModelRule): Promise<ModelResult>;
 
   /**
-   * 调用订阅接口使用的事件信息。
+   * Provides the conditions of on/off.
    *
    * @interface SecurityEventInfo
    * @syscap SystemCapability.Security.SecurityGuard
@@ -353,7 +353,7 @@ declare namespace securityGuard {
    */
   interface SecurityEventInfo {
     /**
-     * 安全事件ID。
+     * The security event id.
      *
      * @type { number }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -364,18 +364,18 @@ declare namespace securityGuard {
   }
 
   /**
-   * 订阅安全事件。
+   * Subscribe the security event.
    *
    * @permission ohos.permission.QUERY_SECURITY_EVENT
-   * @param {'securityEventOccur'} type - 订阅类型。
-   * @param { SecurityEventInfo } securityEventInfo - 订阅的安全事件信息。
-   * @param { Callback<SecurityEvent> } callback - 安全事件发生时的监听回调函数。
+   * @param {'securityEventOccur'} type
+   * @param { SecurityEventInfo } securityEventInfo - Indicates the subscribed event information.
+   * @param { Callback<SecurityEvent> } callback - Indicates the listener when the security event occurs.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -384,18 +384,18 @@ declare namespace securityGuard {
   function on(type: 'securityEventOccur', securityEventInfo: SecurityEventInfo, callback: Callback<SecurityEvent>): void;
 
   /**
-   * 解订阅安全事件。
+   * Unsubscribe the security event.
    *
    * @permission ohos.permission.QUERY_SECURITY_EVENT
-   * @param {'securityEventOccur'} type - 订阅类型。
-   * @param { SecurityEventInfo } securityEventInfo - 订阅的安全事件信息。
-   * @param { Callback<SecurityEvent> } callback - 安全事件发生时的监听回调函数。
+   * @param {'securityEventOccur'} type
+   * @param { SecurityEventInfo } securityEventInfo - Indicates the subscribed event information.
+   * @param { Callback<SecurityEvent> } callback - Indicates the listener when the security event occurs.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
@@ -404,7 +404,7 @@ declare namespace securityGuard {
   function off(type: 'securityEventOccur', securityEventInfo: SecurityEventInfo, callback?: Callback<SecurityEvent>): void;
 
   /**
-   * 配置文件信息。
+   * Provides policy file information.
    *
    * @interface PolicyFile
    * @syscap SystemCapability.Security.SecurityGuard
@@ -413,7 +413,7 @@ declare namespace securityGuard {
    */
   interface PolicyFile {
     /**
-     * 配置文件名称。
+     * The policy file name.
      *
      * @type { string }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -423,7 +423,7 @@ declare namespace securityGuard {
     name: string;
 
     /**
-     * 配置文件的文件描述符。
+     * The policy file descriptor.
      *
      * @type { number }
      * @syscap SystemCapability.Security.SecurityGuard
@@ -434,23 +434,360 @@ declare namespace securityGuard {
   }
 
   /**
-   * 更新配置文件。
+   * Update the policy file.
    *
    * @permission ohos.permission.MANAGE_SECURITY_GUARD_CONFIG
-   * @param { PolicyFile } policyFile - 配置文件信息。
-   * @returns { Promise<void> } 以Promise形式返回结果。
+   * @param { PolicyFile } policyFile - Indicates the policy file information.
+   * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - check permission fail.
    * @throws { BusinessError } 202 - non-system application uses the system API.
-   * @throws { BusinessError } 401 - invalid parameters. 
-   * Possible causes: 
-   *   1. Mandatory parameters are left unspecified. 
-   *   2. Incorrect parameter types. 
+   * @throws { BusinessError } 401 - invalid parameters.
+   * Possible causes:
+   *   1. Mandatory parameters are left unspecified.
+   *   2. Incorrect parameter types.
    *   3. Parameter verification failed.
    * @syscap SystemCapability.Security.SecurityGuard
    * @systemapi Hide this for inner system use.
    * @since 12
    */
   function updatePolicyFile(policyFile: PolicyFile): Promise<void>;
+
+  /**
+   * 阻断事件信息。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthEventInfo {
+    /**
+     * 事件类型ID。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    eventId: number;
+
+    /**
+     * 事件版本号。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    version: string;
+
+    /**
+     * 事件内容，JSON字符串格式。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
+
+    /**
+     * 客户端会话状态列表。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clientStatus?: AuthClientStatus[];
+  }
+
+  /**
+   * 客户端会话状态。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthClientStatus {
+    /**
+     * 客户端会话唯一标识。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clientId: string;
+
+    /**
+     * 事件是否降级，降级的事件仅上报通知，不需要接收阻断结果。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isDegraded: boolean;
+  }
+
+  /**
+   * 客户端会话信息。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthClientInfo {
+    /**
+     * 客户端会话唯一标识。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clientId: string;
+
+    /**
+     * 应用包名。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bundleName: string;
+
+    /**
+     * 客户端订阅的事件类型ID列表。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    subscribedEvents: number[];
+
+    /**
+     * 超时默认阻断策略。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    defaultTimeoutStrategy: AuthStrategy;
+
+    /**
+     * 客户端响应超时时间。
+     * 单位为：毫秒。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    defaultTimeoutMs: number;
+  }
+
+  /**
+   * 单个客户端阻断结果。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface ClientAuthResult {
+    /**
+     * 客户端会话唯一标识。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clientId: string;
+
+    /**
+     * 阻断策略。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    authStrategy: AuthStrategy;
+  }
+
+  /**
+   * 所有客户端阻断结果。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthResult {
+    /**
+     * 所有客户端汇聚后的阻断策略。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    mergedAuthStrategy: AuthStrategy;
+
+    /**
+     * 客户端阻断结果列表。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clientAuthResult: ClientAuthResult[];
+  }
+
+  /**
+   * 阻断策略枚举。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum AuthStrategy {
+    /**
+     * 允许通过。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ALLOW = 0,
+
+    /**
+     * 拒绝阻断。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DENY = 1,
+
+    /**
+     * 超时。
+     *
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    TIMEOUT = 2
+  }
+
+  /**
+   * Provider 回调接口，在 createAuthProvider 时传入。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthProviderCallback {
+    /**
+     * 关联的客户端会话状态变更时回调。
+     *
+     * @param { AuthClientInfo[] } clientInfos - 全部客户端会话信息列表。
+     * @throws { BusinessError } 202 - Non-system application attempted to use a system API.
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    onClientStatusChanged: (clientInfos: AuthClientInfo[]) => void;
+  }
+
+  /**
+   * AuthProvider 接口，由 createAuthProvider 工厂函数创建。
+   *
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface AuthProvider {
+    /**
+     * 请求事件的阻断结果。
+     *
+     * @permission ohos.permission.AUTH_SERVICE_ACCESS
+     * @param { AuthEventInfo } event - 阻断事件信息。
+     * @returns { Promise<AuthResult> } Promise对象，返回事件阻断结果。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     * @throws { BusinessError } 202 - Non-system application attempted to use a system API.
+     * @throws { BusinessError } 27000001 - Internal system error.
+     *     <br>The possible causes are as follows:
+     *     <br>1. The inter-process IPC call fails.
+     *     <br>2. The system service process is faulty.
+     * @throws { BusinessError } 27000004 - Concurrent request count has reached the upper limit.
+     * @syscap SystemCapability.Security.SecurityGuard
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    requestAuthResult(event: AuthEventInfo): Promise<AuthResult>;
+  }
+
+  /**
+   * 创建 AuthProvider 会话。
+   * 同一进程最多 1 个 Provider 实例，全局最多 16 个。
+   * 成功后 onClientStatusChanged 回调可收到已有客户端的信息。
+   *
+   * @permission ohos.permission.AUTH_SERVICE_ACCESS
+   * @param { AuthProviderCallback } callback - Provider 回调接口。
+   * @param { string } serviceId - 服务标识。
+   * @returns { AuthProvider } AuthProvider 实例。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - Non-system application attempted to use a system API.
+   * @throws { BusinessError } 27000001 - Internal system error.
+   *     <br>The possible causes are as follows:
+   *     <br>1. The inter-process IPC call fails.
+   *     <br>2. The system service process is faulty.
+   * @throws { BusinessError } 27000002 - Provider count of the current process has reached the upper limit.
+   * @throws { BusinessError } 27000003 - Global provider count has reached the upper limit.
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @see [destroyAuthProvider]{@link securityAudit.destroyAuthProvider} Destroys an **AuthProvider** session.
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function createAuthProvider(callback: AuthProviderCallback, serviceId: string): AuthProvider;
+
+  /**
+   * 销毁 AuthProvider 会话。
+   *
+   * @permission ohos.permission.AUTH_SERVICE_ACCESS
+   * @param { AuthProvider } provider - 要销毁的 AuthProvider 实例，销毁后不可再用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - Non-system application attempted to use a system API.
+   * @throws { BusinessError } 27000001 - Internal system error.
+   *     <br>The possible causes are as follows:
+   *     <br>1. The inter-process IPC call fails.
+   *     <br>2. The system service process is faulty.
+   * @syscap SystemCapability.Security.SecurityGuard
+   * @systemapi Hide this for inner system use.
+   * @see [createAuthProvider]{@link securityAudit.createAuthProvider} 创建 AuthProvider 会话。
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function destroyAuthProvider(provider: AuthProvider): void;
 }
 
 export default securityGuard;

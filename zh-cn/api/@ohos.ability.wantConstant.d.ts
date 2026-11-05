@@ -328,7 +328,6 @@ declare namespace wantConstant {
    * Flags说明。用于表示处理Want的方式。
    *
    * @syscap SystemCapability.Ability.AbilityBase
-   * @systemapi
    * @since 6
    * @deprecated since 9
    * @useinstead ohos.app.ability.wantConstant/wantConstant#Flags

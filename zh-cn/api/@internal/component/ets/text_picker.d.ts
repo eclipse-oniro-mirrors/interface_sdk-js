@@ -409,7 +409,7 @@ declare interface PickerBackgroundStyle {
    *
    * > **说明：**
    * >
-   * > 1. [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}类型的value参数同时作用于四个圆角半径大小，
+   * > 1. [LengthMetrics]{@link @ohos.arkui.node:LengthMetrics}类型的value参数同时作用于四个圆角半径大小，
    * > unit参数用于设置单位。
    * > 2. [BorderRadiuses]{@link BorderRadiuses}类型可以设置四个不同值的圆角半径，所有单位固定为vp。
    * > 3. [LocalizedBorderRadiuses]{@link LocalizedBorderRadiuses}类型可以设置四个不同值的圆角半径，并且可以单独设置每个圆角的单位。
@@ -470,9 +470,9 @@ declare type OnTextPickerChangeCallback = (selectItem: string | string[], index:
 declare type TextPickerEnterSelectedAreaCallback = (value: string | string[], index: number | number[]) => void;
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -790,7 +790,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
    *     <br>**说明：**
    *     <br>设置为true时，滑动过程中无字号、字重、字体颜色等变化动效，且文本均显示为[defaultTextStyle]
    * {@link TextPickerAttribute#defaultTextStyle}属性设置的样式。如未设置[defaultTextStyle]
-   * {@link TextPickerAttribute#defaultTextStyle}，则显示为[Text]{@link ./text}组件默认样式。设置为false时，使用系统默认的滑动文本
+   * {@link TextPickerAttribute#defaultTextStyle}，则显示为[Text]{@link @global:Text}组件默认样式。设置为false时，使用系统默认的滑动文本
    * 样式变化动效。
    * @returns { TextPickerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -806,7 +806,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
    * 仅当[disableTextStyleAnimation]{@link TextPickerAttribute#disableTextStyleAnimation}为true时生效。
    *
    * @param { TextPickerTextStyle } style - 设置关闭滑动过程中文本样式变化的动效时，各个选项的文本样式。
-   *     <br>默认值：与[Text]{@link ./text}组件默认值相同。
+   *     <br>默认值：与[Text]{@link @global:Text}组件默认值相同。
    * @returns { TextPickerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -817,7 +817,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
   defaultTextStyle(style: TextPickerTextStyle): TextPickerAttribute;
 
   /**
-   * 点击弹窗中的“确定”按钮时触发该回调。该事件仅在[文本滑动选择器弹窗]{@link ./text_picker}中生效。
+   * 点击弹窗中的“确定”按钮时触发该回调。该事件仅在[文本滑动选择器弹窗]{@link @global:TextPicker}中生效。
    *
    * > **说明：**
    * >
@@ -833,7 +833,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
   onAccept(callback: (value: string, index: number) => void): TextPickerAttribute;
 
   /**
-   * 点击弹窗中的“取消”按钮时触发该回调。该事件仅在[文本滑动选择器弹窗]{@link ./text_picker}中生效。
+   * 点击弹窗中的“取消”按钮时触发该回调。该事件仅在[文本滑动选择器弹窗]{@link @global:TextPicker}中生效。
    *
    * > **说明：**
    * >
@@ -1347,7 +1347,7 @@ declare interface TextPickerDialogOptions extends TextPickerOptions {
    * > **说明：**
    * >
    * > 设置为true时，滑动过程中无字号、字重、字体颜色等变化动效，且文本均显示为defaultTextStyle属性设置的样式。如未设置defaultTextStyle，
-   * > 则显示为[Text]{@link ./text}组件默认样式。
+   * > 则显示为[Text]{@link @global:Text}组件默认样式。
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1361,7 +1361,7 @@ declare interface TextPickerDialogOptions extends TextPickerOptions {
   /**
    * 设置关闭滑动过程中文本样式变化动效时的各个选项的文本样式，仅当disableTextStyleAnimation为true时生效。
    *
-   * 默认值：与[Text]{@link ./text}组件默认值相同。
+   * 默认值：与[Text]{@link @global:Text}组件默认值相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1876,7 +1876,7 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * > **说明：**
    * >
    * > 设置为true时，滑动过程中无字号、字重、字体颜色等变化动效，且文本均显示为defaultTextStyle属性设置的样式。如未设置defaultTextStyle，
-   * > 则显示为[Text]{@link ./text}组件默认样式。
+   * > 则显示为[Text]{@link @global:Text}组件默认样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1889,7 +1889,7 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
   /**
    * 设置关闭滑动过程中文本样式变化动效时的各个选项的文本样式，仅当disableTextStyleAnimation为true时生效。
    *
-   * 默认值：与[Text]{@link ./text}组件默认值相同。
+   * 默认值：与[Text]{@link @global:Text}组件默认值相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2288,6 +2288,19 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * @since 26.0.0 dynamic
    */
   edgeLightMode?: EdgeLightMode;
+
+  /**
+   * 是否以及如何使对话框适配惯用手。
+   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
+   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
+   *
+   * @default HandednessFollowMode.NONE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**

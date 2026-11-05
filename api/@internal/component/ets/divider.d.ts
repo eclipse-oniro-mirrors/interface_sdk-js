@@ -85,7 +85,7 @@ declare class DividerAttribute extends CommonMethod<DividerAttribute> {
    * @param { ResourceColor } value - Color of the divider.
    *     <br>Default value: **'#33182431'**
    *     <br>Invalid values are treated as the default value.
-   *     <br>You can set a common divider color using [WithTheme]{@link with_theme}.
+   *     <br>You can set a common divider color using [WithTheme]{@link @global:WithTheme}.
    * @returns { DividerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

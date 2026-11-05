@@ -27,7 +27,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
  * 本模块提供管理Web模块的能力。
- * 
+ *
+ * ## 需要权限
+ *
  * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
  * @namespace webview
@@ -1325,6 +1327,10 @@ declare namespace webview {
   /**
    * Web组件数据库管理对象。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用WebDataBase下的方法，都需要先加载Web组件。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -1393,6 +1399,10 @@ declare namespace webview {
    * 加权限：ohos.permission.LOCATION、ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION_IN_BACKGROUND，具体权限说明请参
    * 考[申请位置权限开发指导](docroot://device/location/location-permission-guidelines.md)。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用GeolocationPermissions下的方法，都需要先加载Web组件。
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -1407,9 +1417,9 @@ declare namespace webview {
      * @param { boolean } incognito - true表示隐私模式下允许指定源使用地理位置，false表示正常非隐私模式下允许指定源使用地理位置。
      *     <br>默认值：false。
      *     <br>传入null或undefined时为false。 [since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1427,7 +1437,7 @@ declare namespace webview {
      *     <br>传入null或undefined时为false。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1461,7 +1471,7 @@ declare namespace webview {
      *     <br>获取失败，表示不存在指定源的权限状态。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1482,7 +1492,7 @@ declare namespace webview {
      *     <br>传入null或undefined时会抛出异常错误码401。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1618,7 +1628,9 @@ declare namespace webview {
    * 
    * > **说明：**
    * >
-   * > - 静态方法必须在用户界面（UI）线程上使用。
+   * > - 默认情况下，静态方法必须在用户界面（UI）线程上使用。从API版本26.0.1开始，
+   * > 调用[setLazyInitializeWebEngine]{@link webview.WebCookieManager.setLazyInitializeWebEngine(lazy: boolean)}
+   * > 设置为true后，静态方法支持在非用户界面（UI）线程使用。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -2180,6 +2192,8 @@ declare namespace webview {
      * >
      * > - 该接口仅适用于调用后会初始化CookieManager的接口，比如本类WebCookieManager的其他接口。调用本接口设置为true后，再调用适用的接口，会在初始化CookieManager时跳过初始化
      * > ArkWeb内核，后续需自行初始化ArkWeb内核。
+     * >
+     * > - 从API版本26.0.1开始，调用本接口设置为true后，WebCookieManager的接口支持在异步线程使用。
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -4046,7 +4060,13 @@ declare namespace webview {
     /**
      * 调整当前网页的缩放比例，[zoomAccess]{@link WebAttribute#zoomAccess}需为true。
      *
-     * @param { number } factor - 基于当前网页所需调整的相对缩放比例，入参要求大于0，当入参为1时为默认加载网页的缩放比例，入参小于1为缩小，入参大于1为放大。
+     * > **说明：**
+     * >
+     * > 入参超出取值范围时，本次调用不生效，网页缩放比例保持不变。
+     * >
+     * > 当网页缩放比例已达到最大值或最小值时，继续同向缩放的调用同样不生效。
+     *
+     * @param { number } factor - 缩放倍数，与当前网页缩放比例相乘得到新的缩放比例。入参为1时缩放比例保持不变，入参小于1为缩小，入参大于1为放大。
      *     <br>取值范围：(0，100]。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
@@ -4373,6 +4393,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @returns { Promise<string> } Promise实例，返回脚本执行的结果，执行失败返回null。
@@ -4402,6 +4424,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @param { AsyncCallback<string> } callback - 回调执行JavaScript脚本结果。JavaScript脚本若执行失败或无返回值时，返回null。
@@ -4424,6 +4448,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4445,6 +4471,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4628,10 +4656,6 @@ declare namespace webview {
 
     /**
      * 清除与当前WebView上下文相关的资源缓存。
-     * 
-     * > **说明：**
-     * >
-     * > 可以通过在data/storage/el2/base/cache/web/Cache目录下查看Webview的缓存。
      *
      * @param { boolean } clearRom - 设置为true时同时清除ROM和RAM中的缓存，设置为false时只清除RAM中的缓存。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -4684,6 +4708,10 @@ declare namespace webview {
 
     /**
      * 在指定时间内将页面滚动指定的偏移量。
+     *
+     * > **说明：**
+     * >
+     * > 嵌套滚动场景中，调用scrollBy不会触发父组件的嵌套滚动。
      *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。
      *     <br>单位：vp。
@@ -5983,6 +6011,46 @@ declare namespace webview {
     getSubframeErrorPageEnabled(): boolean;
 
     /**
+     * 设置是否启用错误页面的自动重载。
+     *
+     * 启用后，Web组件会在出现网络错误时自动重试加载，
+     * 使用重试退避序列：1s → 5s → 30s → 1min → 5min → 10min → 30min。
+     * 最多重试7次后停止。
+     *
+     * > **说明**
+     * >
+     * > - 只有网络错误才会触发自动重新加载。不包括以下内容：
+     * > 证书错误、SSL（安全套接字层）协议错误、身份验证错误、
+     * > POST请求、非HTTP(S)协议和客户端拦截的错误。
+     * > - 自动重新加载不会影响{@link onOverrideErrorPage}回调。
+     * > - 当触发自动重新加载时，{@link onErrorReceive}回调将被
+     * > 每次重试都会重新调用。
+     *
+     * @param { boolean } enable - 是否启用自动重载。值**true**启用它，
+     *     和**false**禁用它。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    enableAutoReload(enable: boolean): void;
+
+    /**
+     * 获取是否启用错误页面的自动重载。
+     *
+     * @returns { boolean } 是否使能自动重新加载。如果启用，则返回**true**，否则返回**false**。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isAutoReloadEnabled(): boolean;
+
+    /**
      * 根据指定的内存压力等级，主动清理Web组件占用的缓存。
      *
      * @param { PressureLevel } level - 需要清理内存的内存等级。
@@ -6030,6 +6098,13 @@ declare namespace webview {
 
     /**
      * 将页面滚动指定的偏移量，返回值表示此次滚动是否执行成功。
+     *
+     * > **说明：**
+     * >
+     * > - 返回值场景：Web页面处于触摸中状态时，返回false，否则返回true。
+     * > - 同层渲染场景中，Web的同层渲染区域处于触摸中状态时，返回值为true。
+     * > - 嵌套滚动场景中，调用scrollByWithResult不会触发父组件的嵌套滚动。
+     * > - 此接口不保证滑动帧率性能。
      *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。 
      *     <br>单位：vp。
@@ -6380,33 +6455,96 @@ declare namespace webview {
     executeAIPageCommand(command: string): Promise<string>;
 
     /**
-     * 调用此接口设置当前网页的浏览器级缩放倍率。文字与图片同时缩放，页面重新布局（reflow）以适应Web组件宽度。
-     * 该接口与{@link zoom}、{@link zoomIn}、{@link zoomOut}（仅视觉缩放，不触发重新布局）以及
-     * {@link textZoomRatio}（仅缩放文字）相互独立。缩放倍率仅作用于当前Web组件实例，页面内跨文档跳转后保持不变。
+     * 设置当前网页的页面缩放倍率。页面缩放会同时缩放文字和图片，并触发页面重新布局以适应Web组件宽度。
      *
-     * @param { number } zoomFactor - 要设置的浏览器级缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+     * > **说明：**
+     * >
+     * > - 页面缩放倍率按网页的主机名（Host）管理。在同一浏览数据上下文中，设置成功后，已打开的同Host Web组件会同步缩放，后续打开的同Host网页也会使用已保存的倍率；不同Host互不影响。当前Web组件导航至其他Host时，使用目标Host的页面缩放倍率，而非继续沿用原Host的倍率。
+     * >
+     * > - 如需让不同Host的网页使用相同倍率，可在网页开始加载时通过[onPageBegin]{@link WebAttribute#onPageBegin}针对当前Web组件再次调用本接口；原Host的倍率不会自动应用到目标Host。
+     * >
+     * > - [zoomControlAccess]{@link WebAttribute#zoomControlAccess}是Web组件的用户缩放开关：设置为**true**时，用户可通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整页面缩放倍率；设置为**false**时，上述用户操作无效。该开关不限制本接口的程序化设置。
+     * >
+     * > - 需要按指定倍率调整页面布局时，建议使用本接口；{@link zoom}、{@link zoomIn}、{@link zoomOut}适用于视觉缩放，[textZoomRatio]{@link WebAttribute#textZoomRatio}适用于文字缩放，三者相互独立。
+     * >
+     * > - 本接口需在Controller关联Web组件后调用，无需等待网页加载完成。若浏览器实例尚未创建，设置的倍率会在缩放控制器可用后应用。
+     *
+     * @param { number } zoomFactor - 要设置的页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
      *     <br>取值范围：[0.25, 5]。
      *     <br>超出该范围的值会被裁剪到边界值。
      * @throws { BusinessError } 17100001 - Init error.
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     setZoomFactor(zoomFactor: number): void;
 
     /**
-     * 获取当前网页的浏览器级缩放倍率。
+     * 获取当前网页的页面缩放倍率。
      *
-     * @returns { number } 当前浏览器级缩放倍率。**1**表示不缩放。
+     * > **说明：**
+     * >
+     * > - 本接口返回当前Web组件实际生效的页面缩放倍率。该倍率可能由本Controller通过{@link setZoomFactor}设置，也可能在[zoomControlAccess]{@link WebAttribute#zoomControlAccess}开启时由用户通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整，还可能受其他同Host Web组件的缩放操作影响，因此不一定等于本Controller上次设置的值。
+     * >
+     * > - 浏览器实例尚未创建时，**getZoomFactor**返回默认值**1.0**，不会返回尚待应用的设置值。
+     *
+     * @returns { number } 当前页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
      *     <br>取值范围：[0.25, 5.0]，默认值为**1**。
      * @throws { BusinessError } 17100001 - Init error.
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * 在当前导航条目上设置用户数据的键值对。
+     *
+     * 用户数据与导航入口生命周期相关联。当前导航条目
+     * 指导航历史记录中的活动条目。当条目被销毁时
+     * （例如，通过历史导航或clearHistory）清除用户数据。如果一个具有
+     * 相同的键已经存在，它将被覆盖。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @param { string } value - 用户数据的价值。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * 获取与当前导航条目上的指定键关联的用户数据值。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @returns { string } 用户数据的值，如果键不存在，则为空字符串。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * 从当前导航条目中删除与指定键关联的用户数据。
+     * 如果密钥不存在，则此API不执行任何操作。
+     *
+     * @param { string } key - 要删除的用户数据的密钥。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
 
     /**
      * 删除指定日期之后发生变化的已访问链接记录。

@@ -811,7 +811,7 @@ export declare interface TextAttribute extends CommonMethod {
      * @returns { TextAttribute } returns the instance of the TextAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default strokeWidth(width: LengthMetrics | undefined): this;
 
@@ -824,7 +824,7 @@ export declare interface TextAttribute extends CommonMethod {
      * @returns { TextAttribute } returns the instance of the TextAttribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default strokeColor(color: ResourceColor | undefined): this;
 
@@ -837,7 +837,7 @@ export declare interface TextAttribute extends CommonMethod {
      * @returns { TextAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     default strokeJoinStyle(strokeJoinStyle: StrokeJoinStyle | undefined): this;
 

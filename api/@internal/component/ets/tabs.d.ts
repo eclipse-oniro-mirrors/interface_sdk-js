@@ -503,7 +503,7 @@ declare class TabsController {
 
 /**
  * Provides parameters for configuring the **Tabs** component, including tab positions, the current index of the
- * displayed tab, the **Tabs** controller, and [universal attributes]{@link ./common} for the **TabBar**.
+ * displayed tab, the **Tabs** controller, and [universal attributes]{@link CommonMethod} for the **TabBar**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -570,7 +570,7 @@ declare interface TabsOptions {
   controller?: TabsController;
 
   /**
-   * Used to set the [universal attributes]{@link ./common} of tab bar, used to uniformly manage the style, layout, and
+   * Used to set the [universal attributes]{@link CommonMethod} of tab bar, used to uniformly manage the style, layout, and
    * other universal attributes of tab bar through **CommonModifier**. Pass this parameter when you need to dynamically
    * modify the universal attributes of **TabBar** or implement state management of attributes. When it is not passed,
    * tab bar uses the default style and layout without additional universal attribute settings.
@@ -600,7 +600,7 @@ declare interface TabsOptions {
    *
    * The
    * [tabBar]{@link TabContentAttribute#tabBar(content: ComponentContent | SubTabBarStyle | BottomTabBarStyle | string | Resource | CustomBuilder |  TabBarOptions)}
-   * attribute of the [TabContent]{@link ./tab_content} component does not support the drag function when it is in the
+   * attribute of the [TabContent]{@link @global:TabContent} component does not support the drag function when it is in the
    * bottom tab style.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1061,7 +1061,7 @@ interface FloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxWidth?: Length;
 
@@ -1072,7 +1072,7 @@ interface FloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: Position | Edges | LocalizedEdges;
 }
@@ -1084,7 +1084,7 @@ interface FloatingTabBarStyle {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 interface TopFloatingTabBarStyle {
   /**
@@ -1094,7 +1094,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barWidth?: Length;
   /**
@@ -1104,7 +1104,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barSideMargin?: Length;
   /**
@@ -1114,7 +1114,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   barTopMargin?: Length;
   /**
@@ -1124,7 +1124,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maskColor?: ResourceColor;
   /**
@@ -1134,7 +1134,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maskHeight?: Length;
   /**
@@ -1144,7 +1144,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxWidth?: Length;
   /**
@@ -1154,7 +1154,7 @@ interface TopFloatingTabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   offset?: Position | Edges | LocalizedEdges;
 }
@@ -1338,7 +1338,7 @@ declare enum TabBarStyle {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   TOP = 3,
 }
@@ -1455,7 +1455,7 @@ declare enum TabBarDisplayMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   TOP_TABBAR = 2,
 }
@@ -1507,9 +1507,9 @@ declare interface TabsBreakpointType<T> {
 
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2050,7 +2050,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    *    the **onChange** and **onAnimationEnd** events of the first custom animation are triggered
    *    when the second custom animation starts.
    * 7. When the custom animation is used, the layout mode of the pages participating in the animation is
-   *    changed to [Stack]{@link ./stack} layout. If the developer does not proactively set the
+   *    changed to [Stack]{@link @global:Stack} layout. If the developer does not proactively set the
    *    [zIndex]{@link CommonMethod#zIndex} attribute of the related pages, all pages have the same **zIndex** value,
    *    and the rendering hierarchy of the pages is determined by their order in the component tree (that is,
    *    the order of the page index values). Therefore, the developer needs to proactively modify the **zIndex**
@@ -2254,7 +2254,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   topBarFloatingStyle(style: Optional<TopFloatingTabBarStyle>): TabsAttribute;
 
@@ -2546,7 +2546,7 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarFooter(footer: Optional<ComponentContent>): TabsAttribute;
 
@@ -2559,9 +2559,21 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   sidebarBottomBar(bottomBar: Optional<ComponentContent>): TabsAttribute;
+
+  /**
+   * Sets whether to display the sidebar control button.
+   * @param { Optional<boolean> } value - Whether to display the sidebar control button.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  showSidebarControlButton(value: Optional<boolean>): TabsAttribute;
 }
 
 /**
@@ -2678,7 +2690,7 @@ declare interface TabContentTransitionProxy {
  *
  * ###### Child Components
  *
- * Only the child component [TabContent]{@link ./tab_content} and the rendering control types
+ * Only the child component [TabContent]{@link @global:TabContent} and the rendering control types
  * [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) and
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md) are supported. Custom components are not
  * recommended as child components. In addition, under **if/else** and **ForEach**, only **TabContent** is supported as

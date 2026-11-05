@@ -120,6 +120,18 @@ declare interface LazyForEachOptions {
    * @since 26.0.0 dynamic
    */
   releaseStrategy?: LazyForEachReleaseStrategy;
+
+  /**
+   * 绑定到LazyForEach组件上的控制器。绑定后，需要清理缓存时可调用
+   * [clearCache]{@link LazyForEachController#clearCache}清理LazyForEach组件预加载的子组件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  controller?: LazyForEachController;
 }
 
 /**
@@ -952,6 +964,40 @@ declare interface IDataSource {
    * @since 7 dynamic
    */
   unregisterDataChangeListener(listener: DataChangeListener): void;
+}
+
+/**
+ * LazyForEach组件的控制器。通过[LazyForEachOptions]{@link LazyForEachOptions}中的controller字段将控制器绑定到LazyForEach组件上，
+ * 需要清理缓存时调用[clearCache]{@link LazyForEachController#clearCache}清理LazyForEach组件预加载的子组件。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare class LazyForEachController {
+  /**
+   * 构造函数，用于创建一个<em>LazyForEachController</em>对象。
+   * 
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor();
+
+  /**
+   * 清理该控制器绑定的LazyForEach组件预加载的子组件。
+   * 
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(): void;
 }
 
 /**

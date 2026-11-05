@@ -671,7 +671,7 @@ declare class ReplaceSymbolEffect extends SymbolEffect {
 declare class PulseSymbolEffect extends SymbolEffect {}
 
 /**
- * The [universal attributes]{@link ./common} are supported. For text attributes, only the following attributes are
+ * The [universal attributes]{@link CommonMethod} are supported. For text attributes, only the following attributes are
  * supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -733,7 +733,7 @@ declare class SymbolGlyphAttribute extends CommonMethod<SymbolGlyphAttribute> {
   /**
    * Sets the font color of the **SymbolGlyph** component. Compared with the
    * [fontColor]{@link SymbolGlyphAttribute#fontColor(value: Array<ResourceColor>)} API, this API supports passing in a
-   * parameter of the [ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics} type.
+   * parameter of the [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} type.
    *
    * > **NOTE**
    * >

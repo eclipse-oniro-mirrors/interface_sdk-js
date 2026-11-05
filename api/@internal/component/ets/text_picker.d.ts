@@ -452,7 +452,7 @@ declare interface PickerBackgroundStyle {
    *
    * **NOTE**
    *
-   * 1. The value parameter of the [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics} type applies to the
+   * 1. The value parameter of the [LengthMetrics]{@link @ohos.arkui.node:LengthMetrics} type applies to the
    * radius of all four corners, and the unit parameter is used to set the unit.
    * 2. The [BorderRadiuses]{@link BorderRadiuses} type can set four different corner radii, with all units fixed to vp.
    * 3. The [LocalizedBorderRadiuses]{@link LocalizedBorderRadiuses} type can set four different corner radii, and the
@@ -523,9 +523,9 @@ declare type OnTextPickerChangeCallback = (selectItem: string | string[], index:
 declare type TextPickerEnterSelectedAreaCallback = (value: string | string[], index: number | number[]) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -851,7 +851,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
    *     <br>When set to true, there is no animation of font size, font weight, or font color changes during scrolling,
    *     and the text is displayed in the style set by [defaultTextStyle]{@link TextPickerAttribute#defaultTextStyle}.
    *     If [defaultTextStyle]{@link TextPickerAttribute#defaultTextStyle} is not set, the default style of the
-   *     [Text]{@link ./text} component is used. When set to false, the system default animation of text style changes
+   *     [Text]{@link @global:Text} component is used. When set to false, the system default animation of text style changes
    *     during scrolling is used.
    * @returns { TextPickerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -869,7 +869,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
    *
    * @param { TextPickerTextStyle } style - Text style of each item when the text style change animation during the
    *     sliding process is disabled.
-   *     <br>Default value: same as the default value of the [Text]{@link ./text} component.
+   *     <br>Default value: same as the default value of the [Text]{@link @global:Text} component.
    * @returns { TextPickerAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -881,7 +881,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
 
   /**
    * Triggered when the OK button in the dialog box is clicked. This event can be triggered only in the
-   * [text picker dialog box]{@link ./text_picker}.
+   * [text picker dialog box]{@link @global:TextPicker}.
    *
    * > **NOTE**
    * >
@@ -900,7 +900,7 @@ declare class TextPickerAttribute extends CommonMethod<TextPickerAttribute> {
 
   /**
    * Triggered when the cancel button in the dialog box is clicked. This event can be triggered only in the
-   * [text picker dialog box]{@link ./text_picker}.
+   * [text picker dialog box]{@link @global:TextPicker}.
    *
    * > **NOTE**
    * >
@@ -1496,7 +1496,7 @@ declare interface TextPickerDialogOptions extends TextPickerOptions {
    *
    * When this API is used with **true**, there are no text style changes, including the font size, weight, and color,
    * during scrolling, and all text is displayed in the style set by **defaultTextStyle**. If **defaultTextStyle** is
-   * not set, the default style of the [Text]{@link ./text} component is used.
+   * not set, the default style of the [Text]{@link @global:Text} component is used.
    *
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1511,7 +1511,7 @@ declare interface TextPickerDialogOptions extends TextPickerOptions {
    * Style of the text items when the text style change animation during the scrolling process is disabled. It is
    * effective only when **disableTextStyleAnimation** is **true**.
    *
-   * Default value: same as the default value of the [Text]{@link ./text} component
+   * Default value: same as the default value of the [Text]{@link @global:Text} component
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2084,7 +2084,7 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    *
    * When this API is used with **true**, there are no text style changes, including the font size, weight, and color,
    * during scrolling, and all text is displayed in the style set by **defaultTextStyle**. If **defaultTextStyle** is
-   * not set, the default style of the [Text]{@link ./text} component is used.
+   * not set, the default style of the [Text]{@link @global:Text} component is used.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2098,7 +2098,7 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * Style of the text items when the text style change animation during the scrolling process is disabled. It is
    * effective only when **disableTextStyleAnimation** is **true**.
    *
-   * Default value: same as the default value of the [Text]{@link ./text} component
+   * Default value: same as the default value of the [Text]{@link @global:Text} component
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2534,6 +2534,23 @@ declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
    * @since 26.0.0 dynamic
    */
   edgeLightMode?: EdgeLightMode;
+
+  /**
+   * Whether and how the dialog adapts to the handedness.
+   * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+   * triggers it (the last interacted component); falls back to the current layout
+   * when no trigger component exists.
+   * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding
+   * the device, distinguished from the operating hand) reported by the awareness
+   * platform; falls back to the current layout when unavailable.
+   *
+   * @default HandednessFollowMode.NONE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**

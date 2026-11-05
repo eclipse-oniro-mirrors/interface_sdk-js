@@ -14,6 +14,8 @@
  */
 
 /**
+ * 本模块作为ArkGraphics 3D基础模块，提供场景加载参数等数据类型。同时提供场景加载等方法。
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -21,9 +23,29 @@
 /*** if arkts static */
 import { ResourceStr } from '@ohos.arkui.component';
 /*** endif */
-import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream } from './SceneResources';
+import { Shader, MaterialType, Material, Animation, Environment, Image, MeshResource, Sampler, SceneResource, Effect, ImageStream, RenderTarget } from './SceneResources';
 import { Camera, LightType, Light, Node, NodeType, Geometry } from './SceneNodes';
 import { Position3, Color, GeometryDefinition, RenderingPipelineType, Vec2, Vec3, Vec4, ShadowAlgorithmType } from './SceneTypes';
+
+/**
+ * 渲染目标参数对象，继承自[SceneResourceParameters]{@link SceneResourceParameters}，用于描述渲染目标。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RenderTargetParameters extends SceneResourceParameters {
+  /**
+   * 渲染目标的尺寸，x表示宽度，y表示高度，单位为像素（px），取值必须大于0，当取值为浮点数时向下取整。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  size: Vec2;
+}
 
 /**
  * 场景加载参数对象，用于指定加载3D模型资源时的额外配置选项。典型使用场景为从MP4容器文件中加载内嵌的glb模型。
@@ -238,6 +260,7 @@ export interface RenderResourceFactory {
 
   /**
    * 从指定的资源URI创建一个新的场景。如果不指定URI，则创建一个空场景，使用Promise异步回调。
+   * 该接口为耗时操作。在异步任务执行期间，调用其他接口可能会被阻塞，直到该异步任务完成。
    *
    * @param { ResourceStr } [uri] - 创建场景使用的资源路径，如果未传入资源路径，则默认创建一个空场景。
    * @returns { Promise<Scene> } Promise对象，返回创建的场景对象。
@@ -249,6 +272,7 @@ export interface RenderResourceFactory {
 
   /**
    * 根据指定的资源路径和场景加载参数创建场景，使用Promise异步回调。
+   * 该接口为耗时操作。在异步任务执行期间，调用其他接口可能会被阻塞，直到该异步任务完成。
    *
    * @param { ResourceStr } uri - 创建场景使用的资源路径。
    * @param { SceneLoadParams } param - 场景加载参数。
@@ -657,9 +681,10 @@ export declare class Scene {
 
   /**
    * 通过传入的资源路径加载资源，使用Promise异步回调。
-   * 调用后，应该在Scene使用完毕时调用destroy释放资源，否则可能导致资源泄漏。
+   * 调用后，应该在Scene使用完毕时调用[destroy]{@link destroy}释放资源，否则可能导致资源泄漏。
+   * 该接口为耗时操作。在异步任务执行期间，调用其他接口可能会被阻塞，直到该异步任务完成。
    *
-   * @param { ResourceStr } [uri] - 待加载的模型文件资源路径，默认值为undefined。
+   * @param { ResourceStr } uri - 待加载的模型文件资源路径，默认值为undefined。
    * @returns { Promise<Scene> } Promise对象，返回场景对象。
    * @static
    * @syscap SystemCapability.ArkUi.Graphics3D
@@ -670,6 +695,7 @@ export declare class Scene {
 
   /**
    * 根据指定的资源路径和场景加载参数加载资源，使用Promise异步回调。
+   * 该接口为耗时操作。在异步任务执行期间，调用其他接口可能会被阻塞，直到该异步任务完成。
    *
    * @param { ResourceStr } uri - 待加载的模型文件资源路径。
    * @param { SceneLoadParams } param - 场景加载参数。
@@ -835,4 +861,29 @@ export declare class Scene {
    * @since 23 dynamic&static
    */
   cloneNode(node: Node, parent: Node, name: string): Node | null;
+
+  /**
+   * 对当前场景进行离屏渲染。根据传入的相机列表和渲染目标参数列表，使用离屏渲染方式生成各相机视角的渲染结果，使用Promise异步回调。
+   *
+   * 每个相机与对应位置的渲染目标参数一一对应，渲染完成后可通过返回的[RenderTarget]{@link RenderTarget}对象获取[PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
+   * @param { Camera[] } cameras - 用于离屏渲染的相机列表。列表中的相机不能重复，且在屏渲染模式下不能包含场景的主相机（详见[Camera]{@link Camera}）。离屏渲染相机会占用相机槽位，槽位规则及上限说明请参见[Camera]{@link Camera}。
+   *     <br>出现以下任一情况时，系统抛出错误码25603001：
+   *     <br>- 相机数组为空；
+   *     <br>- 相机数组中存在重复相机；
+   *     <br>- 相机数组包含场景主相机；
+   *     <br>- 离屏渲染后，场景总占用的相机槽位数超过上限。
+   * @param { RenderTargetParameters[] } params - 渲染目标参数列表与相机列表一一对应，用于指定每个渲染目标的尺寸等信息。
+   *     <br>数组长度与相机数组长度不一致时抛出错误码25603002，渲染目标的宽度或高度小于或等于0时抛出错误码25603001。
+   *     <br>系统先校验25603002（相机数组与渲染目标参数数组长度是否一致），再校验25603001（数组元素合法性）。
+   * @returns { Promise<RenderTarget[]> } Promise对象，返回渲染目标对象列表，与传入的相机列表一一对应。
+   * @throws { BusinessError } 25601002 - Scene used after destruction.
+   * @throws { BusinessError } 25601005 - Memory allocation failed.
+   * @throws { BusinessError } 25603001 - Parameter exceeds the allowed range.
+   * @throws { BusinessError } 25603002 - Input parameter type or count mismatch.
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  snapshot(cameras: Camera[], params: RenderTargetParameters[]): Promise<RenderTarget[]>;
 }

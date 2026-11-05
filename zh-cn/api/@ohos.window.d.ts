@@ -1111,6 +1111,33 @@ declare namespace window {
      * @since 23 static
      */
     vsyncTimestamp: long;
+
+    /**
+     * 渲染该帧并将其发送至显示子系统所需的总耗时（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    totalDuration?: long;
+
+    /**
+     * 当前帧预期的垂直同步（VSync）起始时间戳（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    intendedVsyncTimestamp?: long;
+
+    /**
+     * 一帧中执行所有动画回调的总耗时（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    animationDuration?: long;
   }
 
   /**
@@ -3297,8 +3324,8 @@ declare namespace window {
    * 若无应用子窗口或子窗口未调用[showWindow()]{@link @ohos.window:window.Window.showWindow(callback: AsyncCallback<void>)}进行显示，则返回应用主
    * 窗口。
    *
-   * @param { BaseContext } ctx - Current application context.
-   * @param { AsyncCallback<Window> } callback - Callback used to return the top window obtained.
+   * @param { BaseContext } ctx - 当前应用上下文信息。
+   * @param { AsyncCallback<Window> } callback - 回调函数。返回当前应用内层级最高的窗口对象。
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -4015,8 +4042,7 @@ declare namespace window {
   /**
    * 关闭应用进程获焦状态变化的监听。
    *
-   * @param { Callback<boolean> } [callback] - Callback used to return the result whether application process
-   *     focused or not. If not provided, all callbacks for the given event type will be removed.
+   * @param { Callback<boolean> } [callback] - 已注册的回调函数。如果传入参数，则关闭该监听。如果未传入参数，则关闭所有应用进程焦点状态变化的监听。
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -4641,7 +4667,25 @@ declare namespace window {
      * @since 20 dynamic
      * @since 23 static
      */
-    SCROLL_SHOT_ABORT = 4
+    SCROLL_SHOT_ABORT = 4,
+
+    /**
+     * 小艺指关节圈选截屏事件
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CELIA_SNAP_START = 5,
+
+    /**
+     * 小艺双指长按识屏事件。
+     *
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CELIA_EYE_START = 6
   }
 
   /**
@@ -5263,7 +5307,7 @@ declare namespace window {
    */
   interface StartAnimationParams {
     /**
-     * The type of window animation
+     * 窗口动画类型，用于指定窗口启动时使用的动画效果，如淡入淡出等。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -5281,7 +5325,7 @@ declare namespace window {
    */
   interface WindowCreateParams {
     /**
-     * The params of start animation
+     * 启动动画参数配置。默认值为undefined，若不配置将保持系统默认动效。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -5300,9 +5344,11 @@ declare namespace window {
      */
     systemAnimationParams?: StartAnimationSystemParams;
     /**
-     * 窗口拉起时是否需要动画
+     * 是否启用窗口创建动效。
      *
-     * 默认跟随产品配置，例如PC设备上拉起主窗默认有动画，Phone上拉起子窗默认无动画。当产品支持配置，跟随开发者设置的值。
+     * 传入true时，跟随系统默认动效。传入false时，表示关闭窗口创建动效，仅在[自由窗口状态](docroot://windowmanager/window-terminology.md#freeform-window自由窗口)的情况下生效。
+     *
+     * 此参数不填时，默认为undefined，跟随系统默认动效。<br> **模型约束：** 此接口仅可在Stage模型下使用。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -5339,7 +5385,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在快捷栏上显示图标及Hover缩略图。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -5351,7 +5397,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在多任务视图中显示。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -9968,7 +10014,8 @@ declare namespace window {
      * 从API version 22开始，调用[createVirtualScreen]{@link @ohos.display:display.createVirtualScreen}接口创建虚拟屏，并设置
      * supportsFocus配置项为false时，位于该虚拟屏的窗口无法调用该接口修改窗口的可获焦能力，如果调用，会抛出1300002错误码。
      *
-     * @param { boolean } isFocusable can be focus if true, or can not be focus if false.
+     * @param { boolean } isFocusable 窗口是否可获焦。true表示支持；false表示不支持。设置为false时，该窗口不支持绑定输入法和接收键盘事件，
+     *     如需处理输入逻辑，建议参考[不可获焦窗口中输入框与输入法交互指南](docroot://inputmethod/use-inputmethod-in-not-focusable-window.md)。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -9990,8 +10037,9 @@ declare namespace window {
      * 从API version 22开始，调用[createVirtualScreen]{@link @ohos.display:display.createVirtualScreen}接口创建虚拟屏，并设置
      * supportsFocus配置项为false时，位于该虚拟屏的窗口无法调用该接口修改窗口的可获焦能力，如果调用，会抛出1300002错误码。
      *
-     * @param { boolean } isFocusable can be focus if true, or can not be focus if false.
-     * @param { AsyncCallback<void> } callback Callback used to return the result.
+     * @param { boolean } isFocusable 窗口是否可获焦。true表示支持；false表示不支持。设置为false时，该窗口不支持绑定输入法和接收键盘事件，
+     *     如需处理输入逻辑，建议参考[不可获焦窗口中输入框与输入法交互指南](docroot://inputmethod/use-inputmethod-in-not-focusable-window.md)。
+     * @param { AsyncCallback<void> } callback 回调函数。当设置窗口可获焦属性成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -10037,10 +10085,7 @@ declare namespace window {
      * 
      * 此接口对主窗、模态窗不生效。
      *
-     * @param { boolean } exclusivelyHighlighted Whether the window can become highlight exclusively when it gain focus.
-     *     The value
-     *     true means that the window can cause the window outside the current window link to
-     *     lose its highlight state, and false means the opposite.
+     * @param { boolean } exclusivelyHighlighted 窗口是否独占激活态。true表示独占激活态；false表示不独占激活态。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;

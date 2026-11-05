@@ -657,7 +657,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音频流类型。
+   * 表示音频音量类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Volume
    * @crossplatform [since 12]
@@ -766,7 +766,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，可获取的设备种类。
+   * 表示音频设备类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Device
    * @crossplatform [since 12]
@@ -1095,7 +1095,7 @@ declare namespace audio {
     /**
      * 助听器设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -1108,7 +1108,7 @@ declare namespace audio {
     /**
      * 星闪设备。
      * 
-     * 应用调用获取设备的相关接口时，该类型默认返回匿名类型。从API版本26.0.0开始，如需获取具体设备类型，可先调用
+     * 该类型默认以BLUETOOTH_SCO作为匿名类型返回。从API版本26.0.0开始，如需获取具体设备类型，可先调用
      * [declareDeviceTypesCompatibility](./arkts-apis-audio-AudioRoutingManager.md#declaredevicetypescompatibility)进行设备类
      * 型兼容声明。
      *
@@ -2569,11 +2569,11 @@ declare namespace audio {
   }
 
   /**
-   * 表示音频打断是否由系统强制执行的枚举。
-   * 当用户监听到音频打断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
-   * 此类型表示音频打断提示[InterruptHint]{@link audio.InterruptHint}是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
-   * 其中，INTERRUPT_HINT_RESUME对应的forceType一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
-   * 关于音频打断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
+   * 表示音频中断提示对应的操作是否由系统强制执行的枚举。
+   * 当用户监听到音频中断事件（即收到[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}事件）时，获取此信息。
+   * 此类型表示音频中断提示[InterruptHint]{@link audio.InterruptHint}对应的操作是否已由系统强制执行，具体操作信息（如音频暂停、停止等）可通过[InterruptHint]{@link audio.InterruptHint}获取。
+   * 其中，INTERRUPT_HINT_RESUME对应的[InterruptForceType]{@link audio.InterruptForceType}一定为INTERRUPT_SHARE，即恢复操作无法由系统强制执行，需应用自行触发。
+   * 关于音频中断策略的详细说明可参考文档[音频焦点介绍](docroot://media/audio/audio-playback-concurrency.md)。
    *
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @crossplatform [since 12]
@@ -2583,7 +2583,7 @@ declare namespace audio {
    */
   enum InterruptForceType {
     /**
-     * 强制执行类型，即打断提示[InterruptHint]{@link audio.InterruptHint}对应操作已由系统强制执行。
+     * 强制执行类型，即中断提示[InterruptHint]{@link audio.InterruptHint}对应的操作已由系统强制执行。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
@@ -3701,9 +3701,9 @@ declare namespace audio {
     getRecordingManager(): AudioRecordingManager;
 
     /**
-     * 获取AudioSuiteDownloadManager实例，用于下载音频编辑算法。
+     * 获取AudioSuiteDownloadManager实例，用于下载音频编创特性。
      *
-     * @returns { AudioSuiteDownloadManager } 返回音频套件下载管理器的实例。
+     * @returns { AudioSuiteDownloadManager } AudioSuiteDownloadManager实例。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -3726,6 +3726,26 @@ declare namespace audio {
      * @since 23 static
      */
     disableSafeMediaVolume(): Promise<void>;
+
+    /**
+     * Reports user allowed result for playback capture request to audio system from specific system application.
+     * The system will continue to start playback capture or return a failure based on result.
+     * This API uses a promise to return the result.
+     *
+     * @permission ohos.permission.CAPTURE_PLAYBACK
+     * @param { long } streamId - Stream id of the capturer.
+     * @param { boolean } allowed - User allowed result, true means user allows to start playback capture,
+     *  otherwise false.
+     * @returns { Promise<void> } - Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 202 - Caller is not a system application.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, streamId does not exist.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reportPlaybackCaptureUserAllowed(streamId: long, allowed: boolean): Promise<void>;
   }
 
   /**
@@ -9348,6 +9368,79 @@ declare namespace audio {
   }
 
   /**
+   * 降噪模式变更原因枚举。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum NoiseReductionModeChangeReason {
+    /**
+     * 用户通过系统录音控制面板UX界面手动切换导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
+
+    /**
+     * 应用调用AudioCapturer.setNoiseReductionMode接口设置降噪模式，用户可能并不感知应用有调用设置。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    APP_SETTING = 1,
+
+    /**
+     * 因音频输入设备变更导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DEVICE_CHANGE = 2,
+
+    /**
+     * 因录音流并发冲突导致降噪模式变更。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STREAM_CONCURRENCY = 3,
+  }
+
+  /**
+   * 降噪模式变更信息。该接口作为{@link #onNoiseReductionModeChanged}的回调参数。
+   * 使用场景：当录音流的降噪模式发生变更时，该结构体携带最新的降噪模式和变更原因。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface NoiseReductionModeChangeInfo {
+    /**
+     * 降噪模式变更原因。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reason: NoiseReductionModeChangeReason;
+
+    /**
+     * 当前降噪模式，默认值为{@link NoiseReductionMode#FIDELITY}。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    noiseReductionMode: NoiseReductionMode;
+  }
+
+  /**
    * 移动全景声管理器，支持蓝牙设备与本地扬声器协同播放音频。适用于系统应用控制移动全景声功能场景。
    * 在使用AudioCollaborativeManager的接口前，需要先使用[getCollaborativeManager]{@link audio.AudioManager.getCollaborativeManager}获取
    * AudioCollaborativeManager实例。
@@ -10219,7 +10312,6 @@ declare namespace audio {
     updateUi: boolean;
     /**
      * 变化前的音量值。
-     * 取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Audio.Volume
      * @since 23 dynamic&static
@@ -12128,6 +12220,24 @@ declare namespace audio {
      * @since 24 dynamic&static
      */
     setIndependentAudioSessionStrategy(strategy: AudioSessionStrategy, behavior: int): void;
+
+    /**
+     * 进入或退出音频standby状态。
+     * standby状态主要用于音频播放过程中短暂无数据的情况，如流媒体播放等待网络下载。
+     * 进入standby状态后，音频通路保持不变，仅向应用请求数据的循环线程暂停，也不接收主动写入数据，已写入系统的数据会继续播放。
+     * 只有在播放流状态为{@link AudioState.STATE_RUNNING}时可以调用此接口进入standby状态。standby状态下才能再次调用接口退出。
+     * standby状态下也可以直接调用{@link pause}, {@link stop}, {@link release}停止播放，但不可调用{@link start}。
+     * 注意，此接口并不会改变通过{@link state}获取的状态。
+     * 使用Promise异步回调。
+     * 
+     * @param { boolean } on - 进入或退出standby状态，true表示进入，false表示退出。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 6800103 - 当前状态下不允许操作。
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    standby(on: boolean): Promise<void>;
   }
 
   /**
@@ -12508,7 +12618,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actualUsingAppTokenId?: int;
   }
@@ -12591,7 +12701,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     actualUsingAppTokenId?: int;
   }
@@ -13526,6 +13636,10 @@ declare namespace audio {
      * > 噪模式，其他录音流默认仅返回[NoiseReductionMode.FIDELITY]{@link @ohos.multimedia.audio:audio.NoiseReductionMode}。
      * >
      * > - 返回结果仅考虑音频格式和设备平台，不考虑当前输入设备和录音并发情况。
+     * 
+     * 获取当前设备支持应用设置的录音降噪模式。返回的是应用调用setNoiseReductionMode可以设置切换的降噪模式。
+     * 部分场景的降噪模式只能由系统设置，该接口不会返回这些模式。应用可以通过getNoiseReductionMode
+     * 和onNoiseReductionModeChanged感知系统当前选择的降噪模式。
      *
      * @returns { Array<NoiseReductionMode> } 支持的录音降噪模式数组，默认支持
      *     [NoiseReductionMode.FIDELITY]{@link @ohos.multimedia.audio:audio.NoiseReductionMode}。
@@ -13535,6 +13649,35 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSupportedNoiseReductionModes(): Array<NoiseReductionMode>;
+
+    /**
+     * 订阅降噪模式变更事件，当音频采集器的降噪模式发生变更时触发。
+     * 变更可能由用户通过系统录音控制面板切换、应用调用{@link #setNoiseReductionMode}接口设置，或系统因设备变更、录音流并发冲突而调整降噪模式触发。详见{@link NoiseReductionModeChangeReason}。
+     *
+     * 使用场景：适用于应用需要实时感知降噪模式变更的场景，如
+     * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE}直播、[SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC}录音、 [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER}录像、[SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION}VoIP、 [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}语音消息等。应用感知到降噪模式变更后，可根据情况自行决策是否需要关闭应用自身叠加的降噪算法，从而达到端到端的整体降噪体验最佳。
+     * 使用约束：多次订阅时，如果订阅的callback函数对象不同，会记录所有callback函数，按照订阅顺序依次回调。请勿在回调中调用AudioCapturer相关接口。
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } callback - 返回降噪模式变更信息的回调。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
+
+    /**
+     * 取消订阅降噪模式变更事件。
+     * 
+     * 使用场景：当应用不再需要感知降噪模式变更时调用。
+     * 使用约束：如果传入callback参数，则仅取消与该callback实例匹配的已注册回调；如果不传callback参数，则取消所有已注册的降噪模式变更回调。
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } [callback] - 回调函数，用于取消订阅。不传入时，表示取消所有已注册的回调。
+     * <br>默认值：缺省行为：默认取消所有已注册的降噪模式变更回调。
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
 
   /**
@@ -15346,59 +15489,102 @@ declare namespace audio {
   }
 
   /**
+   * 枚举声卡类型。
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum SoundCardType {
+    /**
+     * 板载声卡。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ONBOARD = 0,
+    /**
+     * USB声卡。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    USB = 1
+  }
+
+  /**
    * 描述声卡信息。
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
-   * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface SoundCardInfo {
     /**
      * 声卡名称。
+     * 最大长度为256。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     name: string;
     /**
      * 声卡厂商。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     vendor: string;
     /**
      * 声卡型号。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     model: string;
     /**
      * 声卡总线地址。
+     * 最大长度为256。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     busAddress: string;
     /**
      * 声卡驱动信息。
+     * 最大长度为128。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     driver: string;
+    /**
+     * 声卡ID。
+     * 最大长度为128。默认值：默认使用板载声卡的声卡Id。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cardId?: string;
+    /**
+     * 声卡类型。
+     * 默认值：默认是板载声卡类型。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cardType?: SoundCardType;
   }
 
   /**
@@ -15427,6 +15613,24 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSoundCardInfo(): Promise<SoundCardInfo>;
+    /**
+     * 获取声卡信息列表，包括板载声卡和USB声卡。使用Promise异步回调返回查询结果。
+     * 使用场景：应用需要获取设备上所有声卡信息，包括板载声卡和USB声卡，用于资产管理与监控等场景。
+     *
+     * 使用约束：
+     * - 应用必须申请ohos.permission.GET_AUDIO_ADAPTER_INFO权限。
+     * -此接口仅支持PC设备。非PC设备调用该接口，返回错误码801。
+     *
+     * @permission ohos.permission.GET_AUDIO_ADAPTER_INFO
+     * @returns { Promise<Array<SoundCardInfo>> } Promise用于返回声卡信息列表。
+     * @throws { BusinessError } 201 - Permission verification failed.
+     * The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - The current device model does not support this function.
+     * @syscap SystemCapability.Multimedia.Audio.DeviceEnhance
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getSoundCardInfoList(): Promise<Array<SoundCardInfo>>;
 
     /**
      * 查询系统是否支持当前管理器提供的增强路由能力。
@@ -15566,7 +15770,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举音频编创套件的特性类型。
+   * 枚举，音频编创特性类型。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15622,7 +15826,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举音频编创套件的特性状态。
+   * 枚举，音频编创特性状态。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15649,7 +15853,7 @@ declare namespace audio {
      */
     INITIALIZED = 0,
     /**
-     * 云ROM状态正在检查版本。
+     * 特性正在检查版本。
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15658,7 +15862,7 @@ declare namespace audio {
      */
     VERSION_CHECKING = 10,
     /**
-     * 查看版本失败状态。
+     * 检测版本失败状态。
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15667,7 +15871,7 @@ declare namespace audio {
      */
     VERSION_CHECK_FAILED = 11,
     /**
-     * 查看版本成功状态。
+     * 检测版本成功状态。
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15786,7 +15990,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举音频套件下载的网络类型。
+   * 枚举，音频编创特性下载的网络类型。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15815,7 +16019,7 @@ declare namespace audio {
   }
 
   /**
-   * 定义音频编创套件特性的状态信息。
+   * 定义音频编创特性的状态信息。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15873,7 +16077,7 @@ declare namespace audio {
   }
 
   /**
-   * 定义音频编创套件特性的状态信息数组。
+   * 定义音频编创特性的状态信息数组。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15883,7 +16087,7 @@ declare namespace audio {
   type AudioSuiteFeatureStatusInfoArray = Array<AudioSuiteFeatureStatusInfo>;
 
   /**
-   * 定义音频编创套件特性的版本信息。
+   * 定义音频编创特性的版本信息。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15930,7 +16134,7 @@ declare namespace audio {
     size: long;
     /**
      * 特性进入异常状态后的错误码。
-     * <br>如果错误码为6800301，表示系统内部数据库异常或io异常，与应用调用无关。
+     * <br>如果错误码为6800301，表示系统内部数据库异常或IO异常，与应用调用无关。
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15941,7 +16145,7 @@ declare namespace audio {
   }
 
   /**
-   * 提供音频编创套件下载管理能力，包括启动、暂停、
+   * 提供音频编创特性下载管理能力，包括启动、暂停、
    * 取消下载、查询状态、卸载特性功能。
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
@@ -15951,15 +16155,12 @@ declare namespace audio {
    */
   interface AudioSuiteDownloadManager {
     /**
-     * 获取指定特性是否已安装。
-     * 使用Promise异步回调。
+     * 获取指定特性是否已安装。使用Promise异步回调。
      *
-     * 此接口仅基于特性本地安装状态查询，不会联网。
+     * 此接口仅基于特性本地安装状态查询，不依赖网络环境。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特征类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<Array<boolean>> } Promise用于返回安装状态数组。
-     *     每个元素对应于featureTypes中相同索引处的特征。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
+     * @returns { Promise<Array<boolean>> } Promise对象，返回安装状态数组。每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -15971,14 +16172,13 @@ declare namespace audio {
     isFeatureInstalled(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<boolean>>;
 
     /**
-     * 获取指定特性的状态。
-     * 使用Promise异步回调。
+     * 获取指定特性的状态。使用Promise异步回调。
      *
-     * 此接口仅基于特性本地安装状态查询，不会联网。
+     * 此接口仅基于特性本地安装状态查询，不依赖网络环境。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特征类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise用于返回特征状态数组。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
+     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise对象，返回特性状态数组。
+     *     每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -15990,14 +16190,13 @@ declare namespace audio {
     getFeatureStatus(featureTypes: Array<AudioSuiteFeatureType>): Promise<AudioSuiteFeatureStatusInfoArray>;
 
     /**
-     * 获取指定特性的最新版本信息。
-     * 使用Promise异步回调。
+     * 获取指定特性的最新版本信息。使用Promise异步回调。
      *
-     * 此接口会通过网络查询信息。
+     * 调用此接口前，需确保设备已连接可用网络。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特征类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise用于返回版本信息数组。每个元素对应于featureTypes中相同索引处的特征。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
+     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise对象，返回版本信息数组。
+     *     每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16011,15 +16210,17 @@ declare namespace audio {
     getNewVersionInfo(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<AudioSuiteFeatureVersionInfo>>;
 
     /**
-     * 根据指定的网络开始下载特性。
-     * 应在调用{@link getNewVersionInfo}搜包成功，特性状态变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}。
+     * 根据指定的网络开始下载特性。使用Promise异步回调。
+     * 先调用{@link getNewVersionInfo}查询新版本；查询成功且状态变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}后调用本接口，
+     * 或者在{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}状态调用本接口继续下载，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}。
+     * 下载成功后自动进入{@link audio.AudioSuiteFeatureStatus.INSTALLING}状态。
      *
-     * 接口在开始下载后就返回，下载过程中可以通过{@link onDownloadStatusChange}订阅的下载状态变化事件获取下载进度。
+     * 接口在开始下载后就返回，下载过程中可以通过
+     * {@link onDownloadStatusChange}订阅的下载状态变化事件获取下载进度。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的功能的类型。
-     *     <br>最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的特性类型。最大长度为5。
      * @param { NetworkType } networkType - 下载的网络类型。
-     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16034,14 +16235,13 @@ declare namespace audio {
     startDownload(featureTypes: Array<AudioSuiteFeatureType>, networkType: NetworkType): Promise<void>;
 
     /**
-     * 暂停下载指定特性。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}。
+     * 暂停下载指定特性。使用Promise异步回调。
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}。
      *
-     * 不在有效状态时调用，接口会直接返回，保持原有状态。
+     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}时调用本接口，接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要暂停的特性类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要暂停的特性类型。最大长度为5。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16053,14 +16253,14 @@ declare namespace audio {
     pauseDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * 取消下载指定特性。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}时调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}。
+     * 取消下载指定特性。使用Promise异步回调。
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用，
+     * 调用后状态会变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}。
      *
-     * 不在有效状态时调用，接口会直接返回，保持原有状态。
+     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用本接口，接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要取消的功能的类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要取消的特性类型。最大长度为5。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16072,16 +16272,14 @@ declare namespace audio {
     cancelDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * 开始后台下载特性。
-     * 如果当前网络条件为wifi场景。会直接下载特性。如果非wifi网络，系统音频服务会在切换到wifi网络后自动进行下载。
-     * 可以在任意{@link audio.AudioSuiteFeatureStatus}状态调用。
-     * 客户端进程退出后，系统音频服务会持续监听网络环境直到任务下载成功。
+     * 开始后台下载特性。使用Promise异步回调。
+     * 如果当前网络条件为Wi-Fi网络场景，系统音频服务会直接下载特性；如果非Wi-Fi网络，系统音频服务会在切换到Wi-Fi网络后自动进行下载。
+     * 可以在任意{@link audio.AudioSuiteFeatureStatus}状态调用。客户端进程退出后，系统音频服务会持续监听网络环境直到任务下载成功。
      *
      * 接口在发送命令后就返回，下载过程中可以通过{@link onDownloadStatusChange}订阅的下载状态变化事件获取下载进度。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的功能的类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的特性类型。最大长度为5。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16093,17 +16291,16 @@ declare namespace audio {
     startBackgroundDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * 卸载已下载的特性。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.UNINSTALLING}。
+     * 卸载已下载的特性。使用Promise异步回调。
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.UNINSTALLING}则开始卸载。
      *
-     * 不在有效状态时调用，接口会直接返回，保持原有状态。
+     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}时调用本接口，接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要卸载的功能类型。
-     *     <br>最大长度为5。
-     * @returns { Promise<void> } 不返回任何值的Promise。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要卸载的特性类型。最大长度为5。
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
-     * @throws { BusinessError } 6800302 - Audio client call audio service error.
+     * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
      * @stagemodelonly
@@ -16113,7 +16310,7 @@ declare namespace audio {
 
     /**
      * 订阅下载状态变化事件。
-     * 当任一特性模块的下载状态发生变化时，会触发订阅的回调。
+     * 当任一特性的下载状态、下载进度发生变化时，会触发订阅的回调。
      *
      * @param { Callback<AudioSuiteFeatureStatusInfoArray> } callback - 回调函数，返回变化后的下载状态变化信息数组。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -16129,7 +16326,8 @@ declare namespace audio {
      * 取消订阅下载状态变化事件。
      * 取消后，系统将不再触发回调。
      *
-     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - 待取消的回调。
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - 需要取消的回调函数，
+     *     默认值为空。若不设置此参数值，则取消之前在当前进程中订阅的所有回调。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine

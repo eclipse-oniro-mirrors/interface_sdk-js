@@ -1016,7 +1016,7 @@ declare namespace text {
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     borderColor?: common2D.Color;
 
@@ -1026,7 +1026,7 @@ declare namespace text {
      * @syscap SystemCapability.Graphics.Drawing
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     borderWidth?: double;
   }
@@ -3618,12 +3618,9 @@ declare namespace text {
   /**
    * 将文本行中每个字符的偏移量和索引值作为参数的回调方法。
    *
-   * @param { double } offset - Offset of each character in a text line. The value is a floating point number.
-   * @param { int } index - Index of each character in a text line. The value is an integer.
-   * @param { boolean } leadingEdge - Whether the cursor is located at the front of the character. The value true means
-   *     that the cursor is located at the front of the character, that is, the offset does not contain the character
-   *     width. The value false means that the cursor is located at the rear of the character, that is, the offset
-   *     contains the character width.
+   * @param { double } offset - 文本行中每个字符的偏移量，浮点数，单位为物理像素px。
+   * @param { int } index - 文本行中每个字符的索引值，整数。
+   * @param { boolean } leadingEdge - 光标是否位于字符的前缘，true表示位于字符前缘，即偏移量不包含该字符宽度，false表示位于字符后缘，即偏移量包含该字符宽度。
    * @returns { boolean } 表示是否停止调用该回调函数，true表示停止调用该回调函数，false表示继续调用该回调函数。
    * @syscap SystemCapability.Graphics.Drawing
    * @crossplatform [since 24]

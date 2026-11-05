@@ -272,6 +272,17 @@ declare class WaterFlowSections {
 /**
  * Enumerates the layout modes of the **WaterFlow** component.
  *
+ * | Comparison Item| ALWAYS_TOP_DOWN (Default)| SLIDING_WINDOW |
+ * |---------|------------------------|----------------|
+ * | Applicable scenario | Fixed number of columns | Dynamic number of columns, large data volume, and screen rotation |
+ * | Layout policy| Complete layout from the top| Sliding window layout|
+ * | Performance| Depends on all flow items above.| Only considers the layout in the viewport|
+ * | Jump efficiency| Calculates all layouts above| Quick jump without complete calculation|
+ * | Column-count switching| Recalculates all layouts.| Re-lays out only the content in the viewport|
+ * | Screen rotation| Supported, but poor performance| Supported with good performance|
+ * | Scrollbar display| Always supported| Supported in API version 18 and later|
+ * | Layout consistency| Always consistent| May be inconsistent after jump|
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -437,7 +448,7 @@ declare interface WaterFlowOptions {
 
 /**
  * Represents the return value of the
- * [getEvent('WaterFlow')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}
+ * [getEvent('WaterFlow')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}
  * method in **frameNode**, which can be used to set scroll events for a **WaterFlow** node.
  *
  * **UIWaterFlowEvent** inherits from [UIScrollableCommonEvent]{@link UIScrollableCommonEvent}.
@@ -529,7 +540,7 @@ declare type OnWaterFlowScrollIndexCallback = (first: number, last: number) => v
  * > child element dragging.
  * >
  * > The component has built-in gestures for functions such as scroll-following. To add custom gesture operations, refer
- * > to [Gesture Blocking Enhancement]{@link ./common}.
+ * > to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > For more development instructions on **WaterFlow**, see
  * > [Creating a Waterfall Flow (WaterFlow)](docroot://ui/arkts-layout-development-create-waterflow.md). For NDK
@@ -569,16 +580,16 @@ interface WaterFlowInterface {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
 /**
- * In addition to [universal attributes]{@link ./common} and
+ * In addition to [universal attributes]{@link CommonMethod} and
  * [universal attributes of scrollable components](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#attributes),
  * the following attributes are supported:
  *
- * In addition to [universal events]{@link ./common} and
+ * In addition to [universal events]{@link CommonMethod} and
  * [scrollable component common events](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#events),
  * the following events are also supported.
  *
@@ -769,7 +780,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): WaterFlowAttribute;
 
@@ -982,6 +993,19 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * >
    * > This API can be called in [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20.
    *
+   * The **last** parameter can be used to determine whether to continue to load data. For details,
+   * see the processing logic of adding data in advance
+   * when the bottom is about to be touched in [Example 3](#example-3-using-waterflowsections).
+   * When the **WaterFlow** component is empty,
+   * the return values of the **onScrollIndex** event vary according to the **WaterFlowOptions** parameter.
+   * For details, see the following table.
+   *
+   * | layoutMode | sections | first | last |
+   * | --- | --- | --- | --- |
+   * | ALWAYS_TOP_DOWN | None| 0 | 0 |
+   * | ALWAYS_TOP_DOWN | Available| 0 | -1 |
+   * | SLIDING_WINDOW | Optional| 1000000 | -1 |
+   *
    * @param { function } event - Callback function, triggered when the first or last item
    *     displayed in the waterflow changes.
    *     "first": the index of the first item displayed in the waterflow,
@@ -1020,7 +1044,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   scrollPlaceholder(provider?: PlaceholderProvider): WaterFlowAttribute;
 }
@@ -1038,7 +1062,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
  * > child element dragging.
  * >
  * > The component has built-in gestures for functions such as scroll-following. To add custom gesture operations, refer
- * > to [Gesture Blocking Enhancement]{@link ./common}.
+ * > to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > For more development instructions on **WaterFlow**, see
  * > [Creating a Waterfall Flow (WaterFlow)](docroot://ui/arkts-layout-development-create-waterflow.md). For NDK
@@ -1049,7 +1073,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
  *
  * ###### Child Components
  *
- * Only the [FlowItem]{@link ./flow_item} child component and custom components are supported. When a custom component
+ * Only the [FlowItem]{@link @global:FlowItem} child component and custom components are supported. When a custom component
  * is used in **WaterFlow**, you are advised to use **FlowItem** as the top-level component of the custom component. You
  * are not advised to set attributes and event methods for the custom component.
  *

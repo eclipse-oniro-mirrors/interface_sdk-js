@@ -14,6 +14,9 @@
  */
 
 /**
+ * 本模块提供ArkGraphics 3D中场景资源节点的类型及操作方法。
+ * SceneNode是3D场景的基础构建单元，它允许开发者通过层级结构管理场景中的对象，实现高效的场景组织与交互控制。
+ *
  * @file
  * @kit ArkGraphics3D
  */
@@ -359,10 +362,32 @@ export enum LightType {
    * @since 23 static
    */
   SPOT = 2,
+
+  /**
+   * 点光源类型
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  POINT = 3,
+
+  /**
+   * 矩形面光源类型。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  RECT = 4
 }
 
 /**
  * 光源，继承自[Node]{@link Node}。
+ * 
+ * > **说明：**
+ * >
+ * > 单个场景中所有光源的数量上限为64。当光源数量超过64时，超过该上限后添加的光源将被直接舍弃，不参与场景渲染。
  *
  * @extends Node
  * @interface Light
@@ -477,7 +502,83 @@ export interface DirectionalLight extends Light {
 }
 
 /**
+ * 点光源类型，继承自[Light]{@link Light}。点光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。
+ * 
+ * 点光源从空间中的单个点向所有方向均匀发射光，强度随着距离光源位置的增加而衰减。
+ *
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface PointLight extends Light {
+  /**
+   * 点光源影响的最大距离，超过该范围光强为0。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0。若未设置此参数或取值小于等于0。系统根据设置的intensity值计算一个经验值作为range。
+   *
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  range?: double;
+}
+
+/**
+ * 矩形面光源类型，继承自[Light]{@link Light}。矩形面光源不支持阴影投射，设置[Light]{@link Light}的shadowEnabled属性不生效。
+ *
+ * 矩形面光源从矩形面发射光，模拟柔和的区域照明效果，强度随着距离的增加而衰减。矩形面光源功耗较高、性能开销较大，建议优先使用[DirectionalLight]{@link DirectionalLight}等其他光源类型近似想要的渲染效果。
+ * 
+ * @syscap SystemCapability.ArkUi.Graphics3D
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface RectLight extends Light {
+  /**
+   * 矩形面光源的宽度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
+   *
+   * @default 1
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  width?: double;
+
+  /**
+   * 矩形面光源的高度。单位为世界坐标系下的场景单位（比如cm、m、km等），取值大于0，若未设置，默认值为1。
+   *
+   * @default 1
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  height?: double;
+
+  /**
+   * 矩形面光源是否从矩形面的两侧发光。true表示矩形面光源两侧发光，false表示矩形面光源单侧发光。默认值为false。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUi.Graphics3D
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  twoSided?: boolean;
+}
+
+/**
  * 相机类型，Camera继承自[Node]{@link Node}。
+ *
+ * 场景中可包含多个相机，其中负责将场景渲染到屏幕（即Component3D控件）的相机称为主相机（main camera）。引擎在遍历场景中的相机时，会将第一个enabled属性为true的相机作为主相机。主相机的渲染结果直接呈现给用户，其余相机可用于离屏渲染等用途。
+ *
+ * 引擎最多支持16个相机槽位，由场景中所有相机共享。各类相机的槽位占用规则如下：
+ *
+ * - 主相机：在屏渲染时固定占1个槽位。
+ * - 离屏渲染相机：每台相机各占1个槽位。
+ * - 阴影相机：每盏开启阴影的灯光占1个槽位，用于生成阴影贴图。
+ * - 透射材质预通道相机：场景含透射材质时，主相机和每台离屏相机各额外占1个槽位。
+ *
+ * 当没有离屏渲染相机时，主相机、阴影相机及透射材质预通道相机总占用数超过16时，阴影相机优先级最低，会被最先丢弃，导致对应光源的阴影消失。
+ *
+ * 当存在离屏渲染相机时，相机总占用数超过16时，系统直接抛出错误码25603001。
+ *
+ * 建议合理控制场景中阴影光源及离屏渲染相机的数量，避免槽位耗尽。
  *
  * @extends Node
  * @interface Camera

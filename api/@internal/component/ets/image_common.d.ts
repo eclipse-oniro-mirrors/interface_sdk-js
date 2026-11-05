@@ -124,7 +124,7 @@ declare interface ImageAnalyzerConfig {
  * >
  * > This API depends on device capabilities and must be used together with the
  * > [enableAnalyzer]{@link ImageAttribute#enableAnalyzer} API of the corresponding component (for example, the
- * > [Image]{@link ./image} component).
+ * > [Image]{@link @global:Image} component).
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -428,7 +428,7 @@ export declare enum RenderStrategy {
    * 
    * 1. 离屏绘制模式相比在线绘制模式会带来额外的性能损失。
    * 2. 离屏绘制模式是指将内容绘制到主画布之前，先在一个额外的画布上完成绘制工作，然后将绘制结果绘制到主画布上。
-   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link common}或[前景色]{@link common}时才可使能离屏绘制模式。
+   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link CommonMethod}或[前景色]{@link CommonMethod}时才可使能离屏绘制模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5327,4 +5327,55 @@ export declare enum EdgeLightPosition {
    * @since 26.0.0 static
    */
   RIGHT = 7
+}
+
+/**
+ * 安全区域的沉浸式策略枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum ImmersiveStrategy {
+  /**
+   * 扩展bindSheet的标题区作为内容区的安全区。
+   *
+   * > **NOTE**
+   * >
+   * > 通过UIContext.applyDefaultImmersiveStrategy应用此策略后，
+   * > bindSheet的SheetOptions.titleBarHoverMode默认为
+   * > SheetTitleBarHoverMode.SAFE_AREA_PADDING。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BIND_SHEET_EXPAND_SAFE_AREA = 7,
+}
+
+/**
+ * 阴影不填充时的裁切方式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum ShadowClipMode {
+    /**
+     * 按默认形状裁切（优先级顺序：shadowShape > clipShape > 控件 bounds）。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    DEFAULT_SHAPE = 0,
+
+    /**
+     * 按控件 bounds 范围裁切。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    BOUNDS_SHAPE = 1,
 }

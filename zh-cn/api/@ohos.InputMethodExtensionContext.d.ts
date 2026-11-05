@@ -33,7 +33,7 @@ import { ConnectOptions } from './ability/connectOptions';
  * <br>本模块提供两大核心能力：1）通过`destroy()`销毁输入法ExtensionAbility自身，实现输入法应用的生命周期终止；2）通过`startAbility()`拉起目标应用，使输入法应用能够启动其他Ability进行交互，
  * 拓展输入法功能的灵活性和可扩展性。
  * <br>
- * <br>当开发输入法ExtensionAbility并需要在其生命周期内执行上下文级操作时使用本模块。典型场景包括：输入法应用在`onDestroy`回调中主动销毁自身、输入法应用需要拉起设置页面或其他辅助应用等。
+ * <br>当开发输入法ExtensionAbility并需要在其生命周期内执行上下文级操作时使用本模块。典型场景包括：输入法应用在完成特定任务后主动请求终止自身、输入法应用需要拉起设置页面或其他辅助应用等。
  * <br>
  * <br> > **说明：**
  * <br> >
@@ -44,8 +44,8 @@ import { ConnectOptions } from './ability/connectOptions';
  * <br>1. 生命周期管理：`destroy()`用于销毁输入法ExtensionAbility自身，终止输入法应用运行。
  * <br>2. Ability交互：`startAbility()`用于从输入法应用拉起目标Ability（如设置页面等），拓展输入法应用与其他应用的交互能力。
  * <br>
- * <br>典型使用流程：在`InputMethodExtensionAbility`的`onCreate`回调中获取`this.context` → 在需要终止输入法时调用`context.destroy()` → 在需要拉起其他应用时调用
- * `context.startAbility(want)`。
+ * <br>典型使用流程：在`InputMethodExtensionAbility`的`onCreate`回调中获取`this.context`；运行期间按需调用`context.startAbility(want)`拉起其他应用；
+ * 需要主动终止时调用`context.destroy()`，随后在`onDestroy`回调中清理应用自身资源，不再调用`destroy()`。
  * <br>
  * | Class | 说明 |
  * |---|---|
@@ -64,9 +64,15 @@ import { ConnectOptions } from './ability/connectOptions';
  *     let context = this.context; // InputMethodExtensionContext实例
  *   }
  * 
+ *   requestExit() {
+ *     // 在正常运行期间由应用业务逻辑调用，主动请求终止
+ *     this.context.destroy().catch((err) => {
+ *       console.error('Request termination failed: ' + err.code);
+ *     });
+ *   }
+ *
  *   onDestroy() {
- *     // 在生命周期回调中销毁自身
- *     this.context.destroy();
+ *     // 仅清理应用自身资源，不再调用context.destroy()
  *   }
  * }
  * 
@@ -80,8 +86,8 @@ import { ConnectOptions } from './ability/connectOptions';
  * <br>
  * <br> > **说明：**
  * <br> >
- * <br> > `InputMethodExtensionContext`实例通过`InputMethodExtensionAbility`子类的`this.context`属性获取，不可直接创建。`destroy()`通常在
- * `onDestroy`生命周期回调中调用，也可在其他时机主动调用以终止输入法ExtensionAbility。
+ * <br> > `InputMethodExtensionContext`实例通过`InputMethodExtensionAbility`子类的`this.context`属性获取，不可直接创建。应在`onDestroy`前调用
+ * `destroy()`请求终止输入法ExtensionAbility，不要在`onDestroy`生命周期回调中再次调用。
  * <br> 
  * <br> ## 使用说明
  * <br>
@@ -108,10 +114,12 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    * 销毁输入法应用。使用callback异步回调。
    * <br>
    * <br>- 含义/功能：销毁当前的InputMethodExtensionAbility，终止输入法应用的运行。调用后系统将触发`InputMethodExtensionAbility.onDestroy()`生命周期回调。
-   * <br>- 使用场景：当输入法应用需要主动终止自身运行时使用。例如：输入法应用在处理完特定任务后主动退出、或在`onDestroy`回调中配合销毁以确保资源释放。
-   * <br>- 使用后效果：调用成功后，当前的InputMethodExtensionAbility将被销毁，系统触发`onDestroy()`生命周期回调，输入法应用进程终止。调用后再进行其他上下文操作将不起效。
+   * <br>- 使用场景：当输入法应用需要主动终止自身运行时使用。例如：输入法应用在处理完特定任务后主动退出。
+   * <br>- 使用后效果：调用成功仅表示终止请求已被接受，不代表销毁或进程退出已完成。系统将异步完成生命周期处理，销毁后不要再使用该上下文。
    *
-   * @param { AsyncCallback<void> } callback - 回调函数。当销毁输入法应用成功时，err为undefined；否则为错误对象。
+   * @param { AsyncCallback<void> } callback - 回调函数。当终止请求成功时，err为undefined；否则为错误对象。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 9 dynamic
@@ -124,9 +132,11 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    * <br>
    * <br>- 含义/功能：销毁当前的InputMethodExtensionAbility，终止输入法应用的运行。调用后系统将触发`InputMethodExtensionAbility.onDestroy()`生命周期回调。
    * <br>- 使用场景：当输入法应用需要主动终止自身运行时使用。与callback形式功能相同，适合需要使用Promise链式调用的场景。
-   * <br>- 使用后效果：调用成功后，当前的InputMethodExtensionAbility将被销毁，系统触发`onDestroy()`生命周期回调，输入法应用进程终止。
+   * <br>- 使用后效果：调用成功仅表示终止请求已被接受，不代表销毁或进程退出已完成。系统将异步完成生命周期处理，销毁后不要再使用该上下文。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 9 dynamic
@@ -136,8 +146,11 @@ declare class InputMethodExtensionContext extends ExtensionContext {
 
   /**
    * 销毁输入法ExtensionAbility。使用callback异步回调。
+   * 调用成功仅表示终止请求已被接受，生命周期处理将异步完成。
    *
    * @param { AsyncCallback<void> } callback - 回调函数。当销毁输入法应用成功时，err为undefined；否则为错误对象。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @systemapi
    * @stagemodelonly
@@ -149,8 +162,11 @@ declare class InputMethodExtensionContext extends ExtensionContext {
 
   /**
    * 销毁输入法ExtensionAbility。使用Promise异步回调。
+   * 调用成功仅表示终止请求已被接受，生命周期处理将异步完成。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @systemapi
    * @stagemodelonly
@@ -284,7 +300,7 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 用于指定目标ServiceExtensionAbility的Want类型信息。
    * @param { ConnectOptions } options - 连接回调，用于返回连接成功、中断或失败的信息。
-   * @returns { number } 连接的数字标识，用于后续断开连接时传入。
+   * @returns { number } 连接标识，用于后续断开连接。获取到标识并不代表连接成功，应通过options.onConnect或options.onFailed判断连接结果；本地调度或连接失败时上报错误码1。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -346,7 +362,7 @@ declare class InputMethodExtensionContext extends ExtensionContext {
    *
    * @param { Want } want - 用于指定目标ServiceExtensionAbility的Want类型信息。
    * @param { ConnectOptions } options - 连接回调，用于返回连接成功、中断或失败的信息。.
-   * @returns { number } 连接的数字标识，用于后续断开连接时传入。
+   * @returns { number } 连接标识，用于后续断开连接。获取到标识并不代表连接成功，应通过options.onConnect或options.onFailed判断连接结果；本地调度或连接失败时上报错误码1。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.

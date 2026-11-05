@@ -14,7 +14,7 @@
  */
 
 /**
- * @file The subscriber of common event
+ * @file CommonEventSubscriber
  * @kit BasicServicesKit
  */
 
@@ -23,12 +23,12 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
 
 /**
  * # How to Use
- * 
+ *
  * Before using the **CommonEventSubscriber** module, you must obtain a **subscriber** object by calling 
  * **commonEventManager.createSubscriberSync**.
- * 
+ *
  * <!--code_no_check-->
- * 
+ *
  * ```ts
  * import { commonEventManager } from '@kit.BasicServicesKit';
  * import { BusinessError } from '@kit.BasicServicesKit';
@@ -41,16 +41,38 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
  * // Create a subscriber.
  * subscriber = commonEventManager.createSubscriberSync(subscribeInfo);
  * ```
+ *
+ * # Constraints and invalidation behaviors:
+ *
+ * - The data processing and process control methods (**getCode**, **getData**, **getAbortCommonEvent**, **setCode**,
+ * **setData**, **setCodeAndData**, **abortCommonEvent**, **clearAbortCommonEvent**, **finishCommonEvent**, and their
+ * corresponding sync methods) of this class are valid only when the **onReceiveEvent** callback of the subscribed
+ * [ordered common event](../../basic-services/common-event/common-event-glossary.md#ordered-common-event)
+ * is being executed.
+ * - When this API is called in the callback for receiving unordered common events, after the event is unsubscribed
+ * from, or in other contexts, no error is reported, but the call does not take effect:
+ *   - The get methods (**getCode**, **getData**, **getAbortCommonEvent**, and their corresponding sync methods) return
+ *   default values (**0**, empty string, and **false**), which cannot be distinguished from the actual data.
+ *   - The set and process control methods (**setCode**, **setData**, **setCodeAndData**, **abortCommonEvent**,
+ *   **clearAbortCommonEvent**, **finishCommonEvent**, and their corresponding sync methods) return success
+ *   silently, but the settings do not take effect.
+ * - The preceding invalid calls are recorded only in system logs, and the app cannot detect them through return values
+ * or error codes.
+ * - The processing duration of an ordered common event for each subscriber is limited to 10 seconds. If the processing
+ * times out, the system automatically ends the processing for the current subscriber and delivers the event to the
+ * subscriber with the next highest priority. After that, the **setCode**, **setData**, **setCodeAndData**, and
+ * **finishCommonEvent** methods called by the current subscriber will no longer take effect.
  */
 /**
- * Represents the subscriber of a common event. The **CommonEventSubscriber** module
- * provides the capabilities for processing ordered common events, including obtaining
- * and setting the data and code transferred by events, checking whether the current
- * common event is an ordered or sticky event, terminating an ordered common event or
- * clearing the termination status, ending the processing of the current ordered common
- * event, and obtaining subscription information of a subscriber. This module is
- * applicable to data processing and process control of the received common event by
- * the subscriber.
+ * The **CommonEventSubscriber** module provides APIs for describing the common event subscriber. The
+ * **CommonEventSubscriber** module provides the capabilities for processing
+ * [ordered common events](docroot://basic-services/common-event/common-event-glossary.md#ordered-common-event),
+ * including obtaining and setting the code and data transferred by events, checking whether the current common
+ * event is an ordered or
+ * [sticky common event](docroot://basic-services/common-event/common-event-glossary.md#sticky-common-event),
+ * terminating an ordered common event or clearing the termination status, ending the processing of the current
+ * ordered common event, and obtaining subscription information of a subscriber. This module is applicable to data
+ * processing and process control of the received common event by the subscriber.
  *
  * @syscap SystemCapability.Notification.CommonEvent
  * @atomicservice [since 11]
@@ -59,12 +81,17 @@ import { CommonEventSubscribeInfo } from './commonEventSubscribeInfo';
  */
 export interface CommonEventSubscriber {
   /**
-   * Obtains the result code of an ordered common event. This API uses an asynchronous callback to return 
-   * the result.
+   * Obtains the result code of an ordered common event. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the result code
-   *     (number type) of an ordered common event is successfully obtained, **err** is **undefined**, and
-   *     **data** is the code obtained; otherwise, **err** is an error object.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **0** is returned through the callback or promise.
+   *
+   * @param { AsyncCallback<int> } callback - Callback used to return the result. If the result data of an ordered
+   *     common event is successfully obtained, **err** is **undefined**, and **data** is the data obtained; otherwise,
+   *     **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -77,7 +104,13 @@ export interface CommonEventSubscriber {
   /**
    * Obtains the result code of an ordered common event. This API uses a promise to return the result.
    *
-   * @returns { Promise<int> } Promise used to return the result code.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **0** is returned.
+   *
+   * @returns { Promise<int> } Promise used to return the result code of an ordered common event.
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
    * @since 7 dynamic
@@ -86,9 +119,15 @@ export interface CommonEventSubscriber {
   getCode(): Promise<int>;
 
   /**
-   * Obtains the result code of an ordered common event. This API returns the result synchronously.
+   * Obtains the result code of an ordered common event synchronously.
    *
-   * @returns { int } Code delivered by the ordered common event.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **0** is returned.
+   *
+   * @returns { int } Result code of an ordered common event.
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
    * @since 10 dynamic
@@ -97,10 +136,20 @@ export interface CommonEventSubscriber {
   getCodeSync(): int;
 
   /**
-   * Sets the code of an ordered common event. This API uses an asynchronous callback to return the
+   * Sets the result code and data of an ordered common event. This API uses an asynchronous callback to return the 
    * result.
    *
-   * @param { int } code - Code delivered by the ordered common event.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -113,9 +162,19 @@ export interface CommonEventSubscriber {
   setCode(code: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the result code of an ordered common event. This API uses a promise to return the result.
+   * Sets the result code and data of an ordered common event. This API uses a promise to return the result.
    *
-   * @param { int } code - Code delivered by the ordered common event.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -127,9 +186,19 @@ export interface CommonEventSubscriber {
   setCode(code: int): Promise<void>;
 
   /**
-   * Sets the result code of an ordered common event. This API returns the result synchronously.
+   * Sets the result code of an ordered common event synchronously.
    *
-   * @param { int } code - Code delivered by the ordered common event.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -140,12 +209,17 @@ export interface CommonEventSubscriber {
   setCodeSync(code: int): void;
 
   /**
-   * Obtains the data of an ordered common event. This API uses an asynchronous callback to return 
-   * the result.
+   * Obtains the result code of an ordered common event. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<string> } callback - Callback used to return the result. If the result data
-   *     (string type) of an ordered common event is successfully obtained, **err** is **undefined**, and
-   *     **data** is the data obtained; otherwise, **err** is an error object.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, an empty string is returned through the callback or promise by default.
+   *
+   * @param { AsyncCallback<string> } callback - Callback used to return the result. If the result data of an ordered
+   *     common event is successfully obtained, **err** is **undefined**, and **data** is the data obtained; otherwise,
+   *     **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -156,9 +230,15 @@ export interface CommonEventSubscriber {
   getData(callback: AsyncCallback<string>): void;
 
   /**
-   * Obtains the data of an ordered common event. This API uses a promise to return the result.
+   * Obtains the result code of an ordered common event. This API uses a promise to return the result.
    *
-   * @returns { Promise<string> } Promise used to return the result data (string type) of an ordered common event.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, an empty string is returned through the callback or promise by default.
+   *
+   * @returns { Promise<string> } Promise used to return the result code of an ordered common event.
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
    * @since 7 dynamic
@@ -167,9 +247,15 @@ export interface CommonEventSubscriber {
   getData(): Promise<string>;
 
   /**
-   * Obtains the data of an ordered common event. This API returns the result synchronously.
+   * Obtains the result code of an ordered common event synchronously.
    *
-   * @returns { string } Data delivered by the ordered common event.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, an empty string is returned.
+   *
+   * @returns { string } Result code of an ordered common event.
    * @syscap SystemCapability.Notification.CommonEvent
    * @atomicservice [since 11]
    * @since 10 dynamic
@@ -178,12 +264,21 @@ export interface CommonEventSubscriber {
   getDataSync(): string;
 
   /**
-   * Sets the data of an ordered common event. This API uses an asynchronous callback to return the
+   * Sets the result code and data of an ordered common event. This API uses an asynchronous callback to return the 
    * result.
    *
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -196,11 +291,20 @@ export interface CommonEventSubscriber {
   setData(data: string, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the result data of an ordered common event. This API uses a promise to return the result.
+   * Sets the result code and data of an ordered common event. This API uses a promise to return the result.
    *
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -212,11 +316,20 @@ export interface CommonEventSubscriber {
   setData(data: string): Promise<void>;
 
   /**
-   * Sets the result data of an ordered common event. This API returns the result synchronously.
+   * Sets the result code of an ordered common event synchronously.
    *
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -230,10 +343,19 @@ export interface CommonEventSubscriber {
    * Sets the result code and data of an ordered common event. This API uses an asynchronous callback to return the 
    * result.
    *
-   * @param { int } code - Code delivered by the ordered common event.
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -248,10 +370,19 @@ export interface CommonEventSubscriber {
   /**
    * Sets the result code and data of an ordered common event. This API uses a promise to return the result.
    *
-   * @param { int } code - Code delivered by the ordered common event.
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
@@ -263,12 +394,21 @@ export interface CommonEventSubscriber {
   setCodeAndData(code: int, data: string): Promise<void>;
 
   /**
-   * Sets the code and data of an ordered common event. This API returns the result synchronously.
+   * Sets the result code of an ordered common event synchronously.
    *
-   * @param { int } code - Code delivered by the ordered common event.
-   * @param { string } data - Data delivered by the ordered common event. The value is a string
-   *     containing a maximum of 65,536 characters. If the length exceeds the limit, the API
-   *     setting becomes invalid.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the call times
+   * > out, the system automatically delivers the event to the subscriber with the next highest priority, and the 
+   * > configured data will not be used.
+   *
+   * @param { int } code - Result code of an ordered common event.
+   * @param { string } data - Result data of an ordered common event. The value is a string containing a maximum of
+   *     65,536 characters. If the length exceeds the limit, the API setting becomes invalid.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -282,9 +422,15 @@ export interface CommonEventSubscriber {
    * Checks whether the current common event is an ordered common event. This API uses an asynchronous callback to 
    * return the result.
    *
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is
-   *     successful, **err** is **undefined**. If **data** is **true**, the common event is ordered; if
-   *     **data** is **false**, the common event is not ordered. Otherwise, **err** is an error object.
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called after the event is unsubscribed 
+   * > from. Instead, **false** is returned through the callback or promise.
+   *
+   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is successful,
+   *     **err** is **undefined**. If **data** is **true**, the common event is ordered; if **data** is **false**, the
+   *     common event is not ordered. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -296,8 +442,15 @@ export interface CommonEventSubscriber {
   /**
    * Checks whether the current common event is an ordered common event. This API uses a promise to return the result.
    *
-   * @returns { Promise<boolean> } Promise used to return the result. Returns **true** if the common event is an ordered
-   *     one; returns **false** if the common event is an unordered one.
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called after the event is unsubscribed 
+   * > from. Instead, **false** is returned.
+   *
+   * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates an ordered common
+   *     event, and the value **false** indicates an
+   *     [unordered common event](docroot://basic-services/common-event/common-event-glossary.md#unordered-common-event).
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
    * @since 23 static
@@ -305,7 +458,13 @@ export interface CommonEventSubscriber {
   isOrderedCommonEvent(): Promise<boolean>;
 
   /**
-   * Checks whether a common event is an ordered one. This API returns the result synchronously.
+   * Checks whether the current common event is an ordered common event synchronously.
+   *
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called after the event is unsubscribed 
+   * > from. Instead, **false** is returned through the callback or promise.
    *
    * @returns { boolean } Returns **true** if the common event is an ordered one; returns **false** if the common event
    *     is an unordered one.
@@ -316,11 +475,18 @@ export interface CommonEventSubscriber {
   isOrderedCommonEventSync(): boolean;
 
   /**
-   * Checks whether the current common event is a sticky common event. This API uses an asynchronous callback to return the result.
+   * Checks whether the current common event is a sticky common event. This API uses an asynchronous callback to return 
+   * the result.
+   * 
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called outside the callback or after 
+   * > the event is unsubscribed from. However, the result returned through the callback or promise is unreliable.
    *
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is
-   *     successful, **err** is **undefined**. If **data** is **true**, the common event is sticky; if
-   *     **data** is **false**, the common event is not sticky. Otherwise, **err** is an error object.
+   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is successful,
+   *     **err** is **undefined**. If **data** is **true**, the common event is sticky; if **data** is **false**, the
+   *     common event is not sticky. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -332,6 +498,12 @@ export interface CommonEventSubscriber {
   /**
    * Checks whether the current common event is a sticky common event. This API uses a promise to return the result.
    *
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called outside the callback or after 
+   * > the event is unsubscribed from. However, the return value is unreliable.
+   *
    * @returns { Promise<boolean> } Promise used to return the result. Returns **true** if the common event is a sticky
    *     one; returns **false** otherwise.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -341,7 +513,13 @@ export interface CommonEventSubscriber {
   isStickyCommonEvent(): Promise<boolean>;
 
   /**
-   * Checks whether the current common event is a sticky common event. This API returns the result synchronously.
+   * Checks whether the current common event is a sticky common event synchronously.
+   *
+   * > **NOTE**
+   * >
+   * > This API can accurately reflect the current common event only when it is called in the callback for receiving 
+   * > common events (**onReceiveEvent**). No error is reported when this API is called outside the callback or after 
+   * > the event is unsubscribed from. However, the return value is unreliable.
    *
    * @returns { boolean } Returns **true** if the common event is a sticky one; returns **false** otherwise.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -352,8 +530,14 @@ export interface CommonEventSubscriber {
 
   /**
    * Aborts an ordered common event. This API is used with 
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}. After the abort,
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}. After the abort,
    * the common event is not sent to the next subscriber. This API uses an asynchronous callback to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -366,9 +550,15 @@ export interface CommonEventSubscriber {
   abortCommonEvent(callback: AsyncCallback<void>): void;
 
   /**
-   * Aborts an ordered common event. This API is used with
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}. After the abort,
+   * Aborts an ordered common event. This API is used with 
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}. After the abort,
    * the common event is not sent to the next subscriber. This API uses a promise to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -378,9 +568,15 @@ export interface CommonEventSubscriber {
   abortCommonEvent(): Promise<void>;
 
   /**
-   * Aborts an ordered common event when used with
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}. With the abort
-   * state, the common event is not sent to the next subscriber. This API returns the result synchronously.
+   * Aborts an ordered common event synchronously. This API is used with 
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}. After the abort,
+   * the common event is not sent to the next subscriber.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
@@ -390,8 +586,14 @@ export interface CommonEventSubscriber {
 
   /**
    * Clears the abort state of an ordered common event. Use this API together with 
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}, and the common 
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}, and the common 
    * event can be passed to the next subscriber. This API uses an asynchronous callback to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
    *     **err** is **undefined**; otherwise, **err** is an error object.
@@ -404,9 +606,15 @@ export interface CommonEventSubscriber {
   clearAbortCommonEvent(callback: AsyncCallback<void>): void;
 
   /**
-   * Clears the abort state of this ordered common event. Use this API together with 
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}, and the common 
+   * Clears the abort state of an ordered common event. Use this API together with 
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}, and the common 
    * event can be passed to the next subscriber. This API uses a promise to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -416,9 +624,15 @@ export interface CommonEventSubscriber {
   clearAbortCommonEvent(): Promise<void>;
 
   /**
-   * Clears the abort state of an ordered common event when used with
-   * [finishCommonEvent]{@link CommonEventSubscriber.finishCommonEvent}. After the
-   * clearance, the common event is sent to the next subscriber. This API returns the result synchronously.
+   * Clears the abort state of an ordered common event synchronously. Use this API together with 
+   * [finishCommonEvent]{@link CommonEventSubscriber#finishCommonEvent(callback: AsyncCallback<void>)}, and the common 
+   * event can be passed to the next subscriber.
+   *
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the setting does not take effect.
    *
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
@@ -430,10 +644,15 @@ export interface CommonEventSubscriber {
    * Checks whether this ordered common event should be aborted. This API uses an asynchronous callback to return the 
    * result.
    *
-   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is
-   *     successful, **err** is **undefined** and **data** is **true** if the current ordered common event is
-   *     in the abort state, or **false** if the current ordered common event is not in the abort state.
-   *     If the operation fails, **err** is an error object.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **false** is returned through the callback or promise.
+   *
+   * @param { AsyncCallback<boolean> } callback - Callback used to return the result. If the query is successful,
+   *     **err** is **undefined**. If **data** is **true**, the ordered common event is aborted. If **data** is
+   *     **false**, the ordered common event is not aborted. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -445,8 +664,14 @@ export interface CommonEventSubscriber {
   /**
    * Checks whether this ordered common event should be aborted. This API uses a promise to return the result.
    *
-   * @returns { Promise<boolean> } Promise used to return the result. The **true** indicates that the
-   *     ordered common event is in the abort state; the value **false** indicates otherwise.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **false** is returned.
+   *
+   * @returns { Promise<boolean> } Promise used to return the result. Returns **true** if the ordered common event is in
+   *     the abort state; returns **false** otherwise.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 7 dynamic
    * @since 23 static
@@ -454,10 +679,16 @@ export interface CommonEventSubscriber {
   getAbortCommonEvent(): Promise<boolean>;
 
   /**
-   * Checks whether an ordered common event is aborted. This API returns the result synchronously.
+   * Checks whether an ordered common event is aborted synchronously.
    *
-   * @returns { boolean } The value **true** indicates that the ordered common event is in the abort state; the
-   *     value **false** indicates otherwise.
+   * > **NOTE**
+   * >
+   * > This API can be called only in the callback for receiving ordered common events. No error is reported when this 
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > Instead, the default value **false** is returned.
+   *
+   * @returns { boolean } Returns **true** if the ordered common event is in the abort state; returns **false**
+   *     otherwise.
    * @syscap SystemCapability.Notification.CommonEvent
    * @since 10 dynamic
    * @since 23 static
@@ -467,9 +698,9 @@ export interface CommonEventSubscriber {
   /**
    * Obtains the subscriber information. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<CommonEventSubscribeInfo> } callback - Callback used to return the result. If
-   *     the subscriber information is successfully obtained, **err** is **undefined** and **data** is the
-   *     subscription information of the subscriber. Otherwise, **err** is an error object.
+   * @param { AsyncCallback<CommonEventSubscribeInfo> } callback - Callback used to return the result. If the subscriber
+   *     information is successfully obtained, **err** is **undefined** and **data** is the subscription information of
+   *     the subscriber. Otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -513,7 +744,7 @@ export interface CommonEventSubscriber {
   getSubscribeInfo(): Promise<CommonEventSubscribeInfo|null>;
 
   /**
-   * Obtains the subscriber information. This API returns the result synchronously.
+   * Obtains the subscriber information synchronously.
    *
    * @returns { CommonEventSubscribeInfo } Subscriber information.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -534,9 +765,19 @@ export interface CommonEventSubscriber {
   /**
    * Finishes this ordered common event. This API uses an asynchronous callback to return the result.
    *
-   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the subscriber
-   *     successfully finishes this ordered common event, **err** is **undefined**; otherwise, **err** is
-   *     an error object.
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the call does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the processing
+   * > times out, the system automatically ends the processing for the current subscriber and delivers the event to the 
+   * > subscriber with the next highest priority. The current subscriber will not be notified of the timeout. After 
+   * > that, calling this API will not report an error, but the call will not take effect.
+   *
+   * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
+   *     **err** is **undefined**; otherwise, **err** is an error object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Notification.CommonEvent
@@ -547,6 +788,17 @@ export interface CommonEventSubscriber {
 
   /**
    * Finishes this ordered common event. This API uses a promise to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > - This API can be called only in the callback for receiving ordered common events. No error is reported when this
+   * > API is called in the callback for receiving unordered common events or after the event is unsubscribed from. 
+   * > However, the call does not take effect.
+   * >
+   * > - The maximum processing duration of an ordered common event for each subscriber is 10 seconds. If the processing
+   * > times out, the system automatically ends the processing for the current subscriber and delivers the event to the 
+   * > subscriber with the next highest priority. The current subscriber will not be notified of the timeout. After 
+   * > that, calling this API will not report an error, but the call will not take effect.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @syscap SystemCapability.Notification.CommonEvent

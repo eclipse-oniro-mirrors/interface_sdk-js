@@ -145,7 +145,7 @@ declare namespace deviceInfo {
     get brand(): string;
 
     /**
-     * Device brand.
+     * Device marketName.
      * 
      * Example: HUAWEI
      *
@@ -216,18 +216,6 @@ declare namespace deviceInfo {
      * @since 24 static
      */
     get hardwareModel(): string;
-
-    /**
-     * Hardware model.
-     * 
-     * Example: <!--RP6-->TASA00CVN1<!--RP6End-->
-     *
-     * @returns { string }
-     * @syscap SystemCapability.Startup.SystemInfo
-     * @stagemodelonly
-     * @since 24 static
-     */
-    get hardwareProfile(): string;
 
     /**
      * Device serial number (SN).
@@ -768,5 +756,15 @@ declare namespace deviceInfo {
      * @since 26.0.1 static
      */
     get kernelVersion(): string;
+
+    /**
+     * Obtains the system installation UTC timestamp.
+     * Example: 1790784000000.
+     *
+     * @syscap SystemCapability.Startup.SystemInfo
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    get installTime(): string;
 }
 export default deviceInfo;

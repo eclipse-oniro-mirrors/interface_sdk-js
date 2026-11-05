@@ -30,7 +30,7 @@ import type { Size } from './@ohos.arkui.node';
  * > **说明：**
  * >
  * > - UIObserver仅能监听到本进程内的相关信息，不支持获取<!--Del-->
- * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}等<!--DelEnd-->跨进程场景的信息。
+ * > [UIExtensionComponent]{@link @global:UIExtensionComponent}等<!--DelEnd-->跨进程场景的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -168,7 +168,7 @@ declare namespace uiObserver {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     ABOUT_TO_APPEAR = 10,
  
@@ -179,7 +179,7 @@ declare namespace uiObserver {
      * @stagemodelonly
      * @crossplatform
      * @atomicservice
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     ABOUT_TO_DISAPPEAR = 11,
 
@@ -1013,9 +1013,9 @@ declare namespace uiObserver {
   export function off(type: 'navDestinationUpdate', callback?: Callback<NavDestinationInfo>): void;
 
   /**
-   * 监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link ./@internal/component/ets/list}、
-   * [Grid]{@link ./@internal/component/ets/grid}、[Scroll]{@link ./@internal/component/ets/scroll}、
-   * [WaterFlow]{@link ./@internal/component/ets/water_flow}、[ArcList]{@link @ohos.arkui.ArcList}。
+   * 监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、
+   * [Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、
+   * [WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
    * @param { ObserverOptions } options - 指定监听的滚动组件的id。
@@ -1029,9 +1029,9 @@ declare namespace uiObserver {
   export function on(type: 'scrollEvent', options: ObserverOptions, callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * 取消监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link ./@internal/component/ets/list}、
-   * [Grid]{@link ./@internal/component/ets/grid}、[Scroll]{@link ./@internal/component/ets/scroll}、
-   * [WaterFlow]{@link ./@internal/component/ets/water_flow}、[ArcList]{@link @ohos.arkui.ArcList}。
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、
+   * [Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、
+   * [WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
    * @param { ObserverOptions } options - 指定监听的滚动组件的id。
@@ -1045,8 +1045,8 @@ declare namespace uiObserver {
   export function off(type: 'scrollEvent', options: ObserverOptions, callback?: Callback<ScrollEventInfo>): void;
 
   /**
-   * 监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link ./@internal/component/ets/list}、[Grid]{@link ./@internal/component/ets/grid}、
-   * [Scroll]{@link ./@internal/component/ets/scroll}、[WaterFlow]{@link ./@internal/component/ets/water_flow}、
+   * 监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、[Grid]{@link @global:Grid}、
+   * [Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}、
    * [ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
@@ -1060,9 +1060,9 @@ declare namespace uiObserver {
   export function on(type: 'scrollEvent', callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * 取消监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link ./@internal/component/ets/list}、
-   * [Grid]{@link ./@internal/component/ets/grid}、[Scroll]{@link ./@internal/component/ets/scroll}、
-   * [WaterFlow]{@link ./@internal/component/ets/water_flow}、[ArcList]{@link @ohos.arkui.ArcList}。
+   * 取消监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、
+   * [Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、
+   * [WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { 'scrollEvent'} type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
    * @param { Callback<ScrollEventInfo> } [callback] - 回调函数。返回滚动事件的信息。

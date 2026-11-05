@@ -46,11 +46,11 @@ declare namespace eSIM {
   function isSupported(slotId: int): boolean;
 
   /**
-   * 通过该接口拉起下载界面，允许用户添加单个配置文件。使用Promise异步回调。
+   * 当用户需要激活新eSIM（如新开卡或换卡）时，调用此接口引导完成配置文件的下载与添加流程。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE_OPEN
    * @param { DownloadableProfile } profile - 可下载的配置文件信息。
-   * @returns { Promise<boolean> } 以Promise形式返回最终用户添加单个配置文件的结果。返回true为成功，false为失败。
+   * @returns { Promise<boolean> } 以Promise形式返回用户添加单个配置文件的结果。返回true表示成功，false表示失败。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
@@ -92,6 +92,7 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
    * @returns { Promise<OsuStatus> } Promise对象，返回操作系统升级的状态。<br/> 1. 正在升级。 <br/>   2. 升级失败。<br/>  3. 升级成功。<br/>  4. 当前版本是
    *     最新版本。<br/> 5. 升级服务不可用。
    * @throws { BusinessError } 201 - Permission denied.
@@ -111,10 +112,11 @@ declare namespace eSIM {
   function getOsuStatus(slotId: int): Promise<OsuStatus>;
 
   /**
-   * 如果指定卡槽的操作系统不是最新的，则执行操作系统升级。使用Promise异步回调。
+   * 如果指定卡槽的操作系统不是最新的，则执行操作系统升级。执行升级后，可通过getOsuStatus接口查询升级状态（如正在升级、升级成功、升级失败等）。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
    * @returns { Promise<OsuStatus> } Promise对象，返回操作系统升级的状态。<br/> 1. 正在升级。 <br/>   2. 升级失败。<br/>  3. 升级成功。<br/>  4. 当前版本是
    *     最新版本。<br/> 5. 升级服务不可用。
    * @throws { BusinessError } 201 - Permission denied.
@@ -134,11 +136,13 @@ declare namespace eSIM {
   function startOsu(slotId: int): Promise<OsuStatus>;
 
   /**
-   * 填充可下载配置文件的元数据。使用Promise异步回调。
+   * 根据传入的可下载配置文件信息（含激活码），向SM-DP+服务器请求并获取该配置文件的元数据（如服务提供商名称、配置文件类等）。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @param { int } portIndex - 插槽的端口索引。
+   *     <br>取值限定为整数。
+   * @param { int } portIndex - 插槽的端口索引。<br/>- 0：端口1。<br/>- 1：端口2。
+   *     <br>取值限定为整数。
    * @param { DownloadableProfile } profile - 可下载的配置文件信息。
    * @param { boolean } forceDisableProfile - 是否可直接去激活配置文件。true表示切换配置文件时，如果需要去激活当前的配置文件，则可以直接操作。false表示如果需要去激活当前的配置文件，则会
    *     返回错误，并得到用户授权后再继续调用该接口，执行切换配置文件操作。
@@ -239,7 +243,8 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @returns { Promise<EuiccInfo> } Promise对象，返回eUicc信息。
+   *     <br>取值限定为整数。
+   * @returns { Promise<EuiccInfo> } Promise对象，返回eUICC信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -257,11 +262,12 @@ declare namespace eSIM {
   function getEuiccInfo(slotId: int): Promise<EuiccInfo>;
 
   /**
-   * 删除配置文件。使用Promise异步回调。
+   * 删除配置文件。使用 Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @param { string } iccid - 配置文件的ID。
+   *     <br>取值限定为整数。
+   * @param { string } iccid - 配置文件的ID，ICCID通常为19-20位数字。
    * @returns { Promise<ResultCode> } Promise对象，返回删除配置文件的结果码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -331,11 +337,12 @@ declare namespace eSIM {
   function setProfileNickname(slotId: int, iccid: string, nickname: string): Promise<ResultCode>;
 
   /**
-   * 清除所有特定配置文件并重置eUICC。使用Promise异步回调。
+   * 清除所有特定配置文件并重置eUICC。与reserveProfilesForFactoryRestore不同，本接口会清除配置文件；若需恢复出厂设置并保留已有配置文件，请使用reserveProfilesForFactoryRestore。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @param { ResetOption } [options] - 重置状态。
+   *     <br>取值限定为整数。
+   * @param { ResetOption } [options] - 重置状态。不传入该参数时使用缺省配置，传入对应枚举值可指定重置选项，支持按位或组合多个选项。
    * @returns { Promise<ResultCode> } Promise对象，返回重置的结果码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -354,10 +361,11 @@ declare namespace eSIM {
   function resetMemory(slotId: int, options?:ResetOption): Promise<ResultCode>;
 
   /**
-   * 恢复出厂设置，并保留profiles。使用Promise异步回调。
+   * 恢复出厂设置，并保留配置文件。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
    * @returns { Promise<ResultCode> } Promise对象，返回恢复出厂设置的结果码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -380,7 +388,8 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @param { string } address - 要设置的默认SM-DP+地址。
+   *     <br>取值限定为整数。
+   * @param { string } address - 要设置的默认SM-DP+地址，需为合法的URL格式，如https://example.com。
    * @returns { Promise<ResultCode> } Promise对象，返回设置默认SM-DP+地址的结果码。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -421,11 +430,12 @@ declare namespace eSIM {
   function getDefaultSmdpAddress(slotId: int): Promise<string>;
 
   /**
-   * 取消会话。使用Promise异步回调。
+   * 取消与SM-DP+服务器之间正在进行的eSIM业务会话（如配置文件下载会话）。通过传入业务ID和取消原因，终止当前进行中的会话操作。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
-   * @param { string } transactionId - 业务ID。
+   *     <br>取值限定为整数。
+   * @param { string } transactionId - 要取消的会话的事务ID，由下载配置文件等操作返回。
    * @param { CancelReason } cancelReason - 取消会话的原因。
    * @returns { Promise<ResultCode> } Promise对象，返回取消会话的结果码。
    * @throws { BusinessError } 201 - Permission denied.
@@ -445,10 +455,11 @@ declare namespace eSIM {
   function cancelSession(slotId: int, transactionId: string, cancelReason: CancelReason): Promise<ResultCode>;
 
   /**
-   * 获取开通eSIM需要的，加密的esim id等信息。
+   * 获取开通eSIM需要的，加密的EID等信息。
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
    * @param { ContractRequestData } requestData - 用来加密的信息。
    * @returns { Promise<string> } Promise对象，返回TLV(Tag-Length-Value)格式的，加密信息。
    * @throws { BusinessError } 201 - Permission denied.
@@ -464,10 +475,11 @@ declare namespace eSIM {
   function getContractInfo(slotId: int, requestData: ContractRequestData) : Promise<string>;
 
   /**
-   * 获取手机支持的公钥ID信息。
+   * 获取手机支持的公钥ID信息，用于eSIM开通流程中的安全认证。在调用getContractInfo接口进行加密认证前，需先调用本接口获取可用的公钥ID。
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
    * @returns { Promise<string> } Promise对象，返回TLV(Tag-Length-Value)格式的，手机支持的公钥ID信息。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -491,8 +503,8 @@ declare namespace eSIM {
    */
   export interface ContractRequestData {
     /**
-      * 公钥。
-      *
+     * 公钥，采用Base64编码格式。
+     *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
      * @since 20 dynamic
@@ -501,8 +513,8 @@ declare namespace eSIM {
     publicKey: string;
 
     /**
-      * 随机数。
-      *
+     * 随机数，采用十六进制编码格式。
+     *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
      * @since 20 dynamic
@@ -511,8 +523,8 @@ declare namespace eSIM {
     nonce: string;
 
     /**
-      * 选择的公钥ID。
-      *
+     * 选择的公钥ID，需从getSupportedPkids接口返回的值中选择。
+     *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
      * @since 20 dynamic
@@ -524,34 +536,20 @@ declare namespace eSIM {
   /**
    * 访问规则。
    *
-   * @interface AccessRule
    * @syscap SystemCapability.Telephony.CoreService.Esim
-   * @systemapi Hide this for inner system use.
-   * @since 18
-   */
-  /**
-   * 访问规则。
-   *
-   * @interface AccessRule
-   * @syscap SystemCapability.Telephony.CoreService.Esim
-   * @since 20 dynamic
+   * @systemapi Hide this for inner system use. [since 18 - 19]
+   * @publicapi [since 20]
+   * @since 18 dynamic
    * @since 23 static
    */
   export interface AccessRule {
     /**
-     * 证书哈希的十六进制字符串。
+     * 证书哈希的十六进制字符串，仅包含数字0-9和字母a-f（或A-F），长度为40或64个字符。
      *
-     * @type { string }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * 证书哈希的十六进制字符串。
-     *
-     * @type { string }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     certificateHashHexStr: string;
@@ -559,17 +557,10 @@ declare namespace eSIM {
     /**
      * 规则适用的程序包名称。
      *
-     * @type { string }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * 规则适用的程序包名称。
-     *
-     * @type { string }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     packageName: string;
@@ -577,17 +568,10 @@ declare namespace eSIM {
     /**
      * 规则的类型。
      *
-     * @type { int }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * 规则的类型。
-     *
-     * @type { int }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     accessType: int;
@@ -611,7 +595,7 @@ declare namespace eSIM {
     activationCode: string;
 
     /**
-     * 确认码。
+     * 确认码。不传入时默认为空字符串。
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -620,7 +604,7 @@ declare namespace eSIM {
     confirmationCode?: string;
 
     /**
-     * 订阅名称。
+     * 订阅名称。不传入时默认为空字符串。
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -629,7 +613,7 @@ declare namespace eSIM {
     carrierName?: string;
 
     /**
-     * 访问规则数组。
+     * 访问规则数组。不传入时默认为空数组。
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -849,7 +833,7 @@ declare namespace eSIM {
   }
 
   /**
-   * 获取eUICC芯片/设备的相关信息。
+   * 运营商标识信息。
    *
    * @syscap SystemCapability.Telephony.CoreService.Esim
    * @systemapi Hide this for inner system use.
@@ -968,7 +952,7 @@ declare namespace eSIM {
     profileClass: ProfileClass;
 
     /**
-     * 配置文件的操作ID。
+     * 配置文件的运营商ID。
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
@@ -1749,7 +1733,7 @@ declare namespace eSIM {
   }
 
   /**
-   * 通过该接口获取eUICC硬件的剩余存储空间。使用Promise异步回调。
+   * 获取eUICC硬件的剩余存储空间。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @returns { Promise<int> } Promise对象，返回eUICC硬件的剩余存储空间，以KB为单位。

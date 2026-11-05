@@ -27,7 +27,7 @@ import ExtensionContext from './ExtensionContext';
  * [ExtensionContext]{@link ./ExtensionContext:ExtensionContext}.
  *
  * AgentExtensionContext provides developers with the capability to access the
- * [AgentCard]{@link ./AgentCard} information configured by the current
+ * [AgentCard]{@link AgentCard} information configured by the current
  * [AgentExtensionAbility]{@link @ohos.app.agent.AgentExtensionAbility} agent.
  *
  * > **NOTE**

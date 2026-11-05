@@ -4525,7 +4525,7 @@ declare enum DialogButtonStyle {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @form
+ * @form [since 26.1.0]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -4536,6 +4536,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4547,6 +4548,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4559,6 +4561,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4570,6 +4573,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 18 dynamic
    */
@@ -4691,6 +4695,7 @@ declare enum IlluminatedType {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 26.1.0]
  * @atomicservice [since 12]
  * @since 11 dynamic
  */
@@ -4701,6 +4706,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4712,6 +4718,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4723,6 +4730,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4734,6 +4742,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -4745,6 +4754,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -6611,7 +6621,7 @@ declare enum OperateIntention {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum ImmersiveStrategy {
 
@@ -6628,7 +6638,40 @@ declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   BIND_SHEET_EXPAND_SAFE_AREA = 7,
+}
+
+/**
+ * 阴影不填充时的裁切方式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum ShadowClipMode {
+  /**
+   * 按默认形状裁切（优先级顺序：shadowShape > clipShape > 控件 bounds）。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT_SHAPE = 0,
+
+  /**
+   * 按控件 bounds 范围裁切。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BOUNDS_SHAPE = 1,
 }

@@ -34,6 +34,7 @@ import type ApplicationStateChangeCallback from '../@ohos.app.ability.Applicatio
 /*** if arkts static */
 import ApplicationStateChangeCallback from '../@ohos.app.ability.ApplicationStateChangeCallback';
 /*** endif */
+import AppProcessStateObserver from '../@ohos.app.ability.AppProcessStateObserver';
 import systemConfiguration from '../@ohos.app.ability.systemConfiguration';
 import UIAbility from '../@ohos.app.ability.UIAbility';
 
@@ -355,6 +356,37 @@ declare class ApplicationContext extends Context {
   offApplicationStateChange(callback?: ApplicationStateChangeCallback): void;
 
   /**
+   * Registers a listener for process state changes within the application, including process
+   * creation and termination. It can be called only on the main thread.
+   *
+   * @param { AppProcessStateObserver } observer - Observer triggered when a process is created or
+   *     destroyed within the application.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  onAppProcessStateChange(observer: AppProcessStateObserver): void;
+
+  /**
+   * Unregisters the listener for process state changes within the application. It can be called
+   * only on the main thread.
+   *
+   * @param { AppProcessStateObserver } [observer] - Observer registered by calling
+   *     [ApplicationContext.onAppProcessStateChange]{@link ApplicationContext#onAppProcessStateChange}.
+   *     If a defined observer is passed in, the listener for that observer is unregistered. If
+   *     no value is passed in, all the listeners registered by current process are unregistered.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - If the observer does not exist
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  offAppProcessStateChange(observer?: AppProcessStateObserver): void;
+
+  /**
    * Obtains the information about running processes. This API uses a promise to return the result.
    *
    * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
@@ -621,8 +653,9 @@ declare class ApplicationContext extends Context {
    * @permission ohos.permission.PRELOAD_UI_EXTENSION_ABILITY
    * @param { Want } want - Want information of the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -665,7 +698,8 @@ declare class ApplicationContext extends Context {
    *     false otherwise.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -698,6 +732,28 @@ declare class ApplicationContext extends Context {
   setFont(font: string): void;
   
   /**
+   * Sets the font for this application. This API can be called only on the main thread.
+   *
+   * > **NOTE**
+   * >
+   * > Before calling this API, ensure that the window has been created and the page corresponding to the UIAbility has
+   * > been loaded (using the
+   * > [loadContent]{@link @ohos.window:window.WindowStage.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)} API in the
+   * > [onWindowStageCreate()]{@link ./../@ohos.app.ability.UIAbility:UIAbility.onWindowStageCreate} lifecycle).
+   *
+   * @param { string } font - Font, which can be registered by calling
+   *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}.
+   * @param { boolean } enableAnimation - Whether using animation during this setting,
+   *     using animation if true or not using animation if false.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamic&static
+   */
+  setFont(font: string, enableAnimation: boolean): void;
+
+  /**
   * Enables delayed exit of the current process. This API uses a Promise asynchronous callback. It can be
   * called only on the main thread.
   * Normally, after the last UIAbility in an application process exits, the process exits. After this API
@@ -705,7 +761,8 @@ declare class ApplicationContext extends Context {
   * is started within the 10 seconds, the process will not exit.
   * 
   * @returns { Promise<void> } Promise object. No return result.
-  * @throws { BusinessError } 801 - Capability not supported.
+  * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+  *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
   * @throws { BusinessError } 16000050 - Internal error. Possible causes: Fail to connect system service.
   * @throws { BusinessError } 16000150 - The current process has no UIAbility, and this API cannot be called.
   * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -721,7 +778,8 @@ declare class ApplicationContext extends Context {
    * [ApplicationContext.enableDelayedProcessExit]{@link enableDelayedProcessExit}.
    *
    * @returns { Promise<void> } Promise object. No return result.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Fail to connect system service.
    * @throws { BusinessError } 16000150 - The current process has no UIAbility, and this API cannot be called.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -736,7 +794,8 @@ declare class ApplicationContext extends Context {
    *
    * @param { Want } want - Want parameter, which carries the information about the UIAbility to start.
    * @returns { Promise<void> } Promise object that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support
+   *     the capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
    * @throws { BusinessError } 16000008 - The crowdtesting application expires.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.

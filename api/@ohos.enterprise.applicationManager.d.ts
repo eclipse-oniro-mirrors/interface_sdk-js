@@ -2196,7 +2196,11 @@ declare namespace applicationManager {
    * @param { number } duration - Exemption duration.
    *     <br>Unit: Seconds. The value must be greater than 0.
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -2215,7 +2219,11 @@ declare namespace applicationManager {
    * @param { StandbyResourceType } resourceType - Standby resource type.
    * @param { string } bundleName - Bundle name of the application to release the resource exemption for.
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -2248,6 +2256,64 @@ declare namespace applicationManager {
    * @since 26.0.1
    */
   function publishFormToDesktop(formInfo: FormInfo): string;
+
+  /**
+   * Adds applications to the battery optimization exclusion list.
+   * This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be added.
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * Removes applications from the battery optimization exclusion list.
+   * This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be removed.
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * Obtains the battery optimization exclusion list.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @param { common.QueryPolicy } [queryPolicy] - Query policy. If this parameter is not specified, the default value
+   *     {@link common.QueryPolicy.SELF} is used.
+   * @returns { Array<string> } Returns the bundle names of the applications in the exclusion list.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getOptimizationBatteryExclusionApps(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default applicationManager;

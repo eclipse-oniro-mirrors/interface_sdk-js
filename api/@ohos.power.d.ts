@@ -108,7 +108,8 @@ declare namespace power {
    * - A device with a screen is active when the screen is on and inactive when the screen is off.
    * - A device without a screen is active when it exits the sleep mode and inactive when it enters the sleep mode.
    *
-   * @returns { boolean } Return value **true** if the device is active; returns **false** otherwise.
+   * @returns { boolean } The value true is returned for the active state, and false is returned for the inactive
+   *     state or failure to obtain the device active state.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -146,7 +147,7 @@ declare namespace power {
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
-   *     1. Not allowed to turn off the screen during the exam. [since 26.2.0]
+   *     1. Not allowed to turn off the screen during the exam. [since 26.0.1]
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 19]
    * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices. [since 26.0.1]
@@ -158,9 +159,15 @@ declare namespace power {
   function suspend(isImmediate?: boolean): void;
 
   /**
-   * Obtains the power mode of this device.
+   * Obtains the power mode of the current device. Different power modes correspond to different device behavior
+   * policies. Developers can adjust application behavior based on the returned mode value to adapt to the current mode.
+   * For the definition and description of each mode, see DevicePowerMode.
    *
-   * @returns { DevicePowerMode } Power mode.
+   * @returns { DevicePowerMode }Indicates the power mode of the current device. The value can be Standard, Power
+   *     Saving, Performance, or Super Power Saving.
+   *     When the power mode of the current device fails to be obtained, the value 0 is returned. The value is not 
+   *     within the value range defined by the [DevicePwerMode]{@link DevicePowerMode} enumeration. Developers
+   *     should check whether the return value is a valid enumerated value (600 or more).
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -177,6 +184,7 @@ declare namespace power {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. [since 26.1.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900301 - Setting the power mode failed. [since 23]
    * @syscap SystemCapability.PowerManager.PowerManager.Core
@@ -195,6 +203,7 @@ declare namespace power {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies. [since 26.1.0]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 4900301 - Setting the power mode failed. [since 23]
    * @syscap SystemCapability.PowerManager.PowerManager.Core

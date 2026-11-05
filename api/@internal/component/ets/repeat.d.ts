@@ -340,7 +340,7 @@ declare type TemplateTypedFunc<T> = (item: T, index: number) => string;
 declare type RepeatItemBuilder<T> = (repeatItem: RepeatItem<T>) => void;
 
 /**
- * In addition to the [drag-and-drop sorting]{@link common} attribute, the following attributes are supported.
+ * In addition to the [drag-and-drop sorting]{@link CommonMethod} attribute, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -446,6 +446,42 @@ declare class RepeatAttribute<T> extends DynamicNode<RepeatAttribute<T>> {
 }
 
 /**
+ * Defines a controller of the **Repeat** component. You can bind the controller to the **Repeat** component through
+ * the **controller** field in [RepeatOptions]{@link RepeatOptions} and call
+ * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the **Repeat** component
+ * as needed.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare class RepeatController {
+  /**
+   * A constructor used to create a <em>RepeatController</em> object.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor();
+
+  /**
+   * Clears the nodes in the reuse pool of the **Repeat** component bound to this controller.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(): void;
+}
+
+/**
  * Defines a union type for **Repeat** data source parameters.
  *
  * @unionmember { Array<T> } Regular array type.
@@ -461,10 +497,56 @@ declare class RepeatAttribute<T> extends DynamicNode<RepeatAttribute<T>> {
 declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
 
 /**
+ * Defines the options for creating a **Repeat** component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+interface RepeatOptions {
+  /**
+   * Whether to allow child components to be reused during the animation when the **Repeat** component is updated.
+   * This parameter takes effect only when the parent container of **Repeat** is a **List**, **Grid**, or
+   * **WaterFlow** component.
+   * When **Repeat** is used together with animations, the reuse capability of **Repeat** may conflict with the
+   * animations, causing abnormal animation effects. In this case, you can set this parameter to **false**. In this
+   * way, **Repeat** does not reuse child components when it is updated during the animation, thereby adapting to the
+   * animations.
+   * **true**: Allow child components to be reused during the animation.
+   * **false**: Do not allow child components to be reused during the animation.
+   * if the parent container of **Repeat** is a **List** component; **true** if it is a
+   * **Grid** or **WaterFlow** component.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  allowReuseInAnimation?: boolean;
+  /**
+   * Controller bound to the **Repeat** component. When the controller is bound, you can call
+   * [clearCache]{@link RepeatController#clearCache} to clear the nodes in the reuse pool of the **Repeat** component
+   * as needed.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  controller?: RepeatController;
+}
+
+/**
  * Indicates the type of Repeat.
  *
- * @param { RepeatArray<T> } arr - The Data Source
- * @returns { RepeatAttribute<T> }
+ * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatOptions } [options] - Options for creating the **Repeat** component. [since 26.1.0]
+ * @returns { RepeatAttribute<T> } - The Attribute of Repeat.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -472,7 +554,7 @@ declare type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
  * @atomicservice
  * @since 18 dynamic
  */
-declare type RepeatInterface = <T>(arr: RepeatArray<T>) => RepeatAttribute<T>;
+declare type RepeatInterface = <T>(arr: RepeatArray<T>, options?: RepeatOptions) => RepeatAttribute<T>;
 
 /**
  * Defines Repeat Component, and Add More Array Type.

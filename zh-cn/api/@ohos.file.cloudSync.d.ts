@@ -209,24 +209,6 @@ declare namespace cloudSync {
    */
   enum SyncType {
     /**
-     * 正常同步。
-     *
-     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    NORMAL = 0,
-    /**
-     * 强制同步。
-     *
-     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.0.1 dynamic&static
-     */
-    FORCE = 1,
-    /**
      * 强制缩略图同步。
      *
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -234,7 +216,7 @@ declare namespace cloudSync {
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    FORCE_THM = 2
+    FORCE_THM = 0,
   }
 
   /**
@@ -300,10 +282,10 @@ declare namespace cloudSync {
      */
     on(evt: 'progress', callback: (pg: SyncProgress) => void): void;
     /**
-     * Subscribes to sync progress change event. This method uses a callback to get sync progress changes.
+     * 添加同步过程事件监听。使用callback异步回调。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
-     * @param { Callback<SyncProgress> } callback - callback function with a `SyncProgress` argument.
+     * @param { Callback<SyncProgress> } callback - 回调函数。同步过程事件。
      * @throws { BusinessError } 201 - Permission verification failed.
      * @throws { BusinessError } 202 - The caller is not a system application.
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
@@ -333,10 +315,10 @@ declare namespace cloudSync {
      */
     off(evt: 'progress', callback: (pg: SyncProgress) => void): void;
     /**
-     * Unsubscribes from sync progress event.
+     * 移除同步过程事件监听。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
-     * @param { Callback<SyncProgress> } callback - callback function with a `SyncProgress` argument.
+     * @param { Callback<SyncProgress> } callback - 回调函数。同步过程事件。
      * @throws { BusinessError } 201 - Permission verification failed.
      * @throws { BusinessError } 202 - The caller is not a system application.
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
@@ -364,7 +346,7 @@ declare namespace cloudSync {
      */
     off(evt: 'progress'): void;
     /**
-     * Unsubscribes all callbacks objects from sync progress event.
+     * 移除全部同步过程事件监听。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -528,7 +510,7 @@ declare namespace cloudSync {
      */
     STOPPED = 3,
     /**
-     * Indicates that the download task is missing.
+     * 云文件下载任务缺失。
      *
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
      * @systemapi
@@ -961,10 +943,10 @@ declare namespace cloudSync {
      */
     on(evt: 'progress', callback: (pg: DownloadProgress) => void): void;
     /**
-     * Subscribes to download progress change event. This method uses a callback to get download progress changes.
+     * 添加云文件下载过程事件监听。使用callback异步回调。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
-     * @param { Callback<DownloadProgress> } callback - callback function with a `DownloadProgress` argument.
+     * @param { Callback<DownloadProgress> } callback - 回调函数。云文件下载过程事件。
      * @throws { BusinessError } 201 - Permission verification failed.
      * @throws { BusinessError } 202 - The caller is not a system application.
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
@@ -994,10 +976,10 @@ declare namespace cloudSync {
      */
     off(evt: 'progress', callback: (pg: DownloadProgress) => void): void;
     /**
-     * Unsubscribes from download progress event.
+     * 移除云文件下载过程事件监听。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
-     * @param { Callback<DownloadProgress> } callback - callback function with a `DownloadProgress` argument.
+     * @param { Callback<DownloadProgress> } callback - 回调函数。云文件下载过程事件。
      * @throws { BusinessError } 201 - Permission verification failed.
      * @throws { BusinessError } 202 - The caller is not a system application.
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
@@ -1025,7 +1007,7 @@ declare namespace cloudSync {
      */
     off(evt: 'progress'): void;
     /**
-     * Unsubscribes all callbacks objects from download progress event.
+     * 移除全部云文件下载过程事件监听。
      *
      * @permission ohos.permission.CLOUDFILE_SYNC
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -1164,9 +1146,9 @@ declare namespace cloudSync {
      */
     on(event: 'progress', callback: Callback<SyncProgress>): void;
     /**
-     * Subscribes to sync progress change event. This method uses a callback to get sync progress changes.
+     * 云盘同步对象添加同步过程事件监听。使用callback异步回调。
      *
-     * @param { Callback<SyncProgress> } callback - callback function with a `SyncProgress` argument.
+     * @param { Callback<SyncProgress> } callback - 回调函数。云文件同步过程事件。
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
      *     <br>1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
      * @throws { BusinessError } 13600001 - IPC error
@@ -1187,9 +1169,9 @@ declare namespace cloudSync {
      */
     off(event: 'progress', callback?: Callback<SyncProgress>): void;
     /**
-     * Unsubscribes from sync progress event.
+     * 移除云文件同步过程事件监听。
      *
-     * @param { Callback<SyncProgress> } [callback] - callback function with a `SyncProgress` argument.
+     * @param { Callback<SyncProgress> } [callback] - 回调函数。同步过程事件。
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Incorrect parameter types.
      * @throws { BusinessError } 13600001 - IPC error
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -1413,7 +1395,7 @@ declare namespace cloudSync {
    */
   class CloudFileCache {
     /**
-     * A constructor used to create a **CloudFileCache** instance. Data is not shared between multiple instances.
+     * 云盘文件缓存流程的构造函数，用于获取CloudFileCache类的实例。多个实例之间不互相共享数据。
      *
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Incorrect parameter types.
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -1422,7 +1404,7 @@ declare namespace cloudSync {
      */
     constructor();
     /**
-     * A constructor used to create a CloudFileCache object.
+     * 用于获取CloudFileCache类的实例。
      *
      * @param { string } bundleName - Name of the bundle that need to start download task and subscribes download
      *     progress.
@@ -1447,10 +1429,9 @@ declare namespace cloudSync {
      */
     on(event: 'progress', callback: Callback<DownloadProgress>): void;
     /**
-     * Subscribes to cloud file cache download progress change event.
-     * This method uses a callback to get download progress changes.
+     * 添加云盘文件缓存过程事件监听。使用callback异步回调。
      *
-     * @param { Callback<DownloadProgress> } callback - callback function with a `DownloadProgress` argument.
+     * @param { Callback<DownloadProgress> } callback - 回调函数。云文件下载过程事件。
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
      *     <br>1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
      * @throws { BusinessError } 13600001 - IPC error
@@ -1473,10 +1454,9 @@ declare namespace cloudSync {
      */
     on(event: 'batchDownload', callback: Callback<MultiDownloadProgress>): void;
     /**
-     * Subscribes to a batch of cloud file cache download progress change event.
-     * This method uses a callback to get download progress changes.
+     * 添加云文件批量缓存事件的监听。使用callback异步回调。
      *
-     * @param { Callback<MultiDownloadProgress> } callback - callback function with a `MultiDownloadProgress` argument.
+     * @param { Callback<MultiDownloadProgress> } callback - 回调函数。云文件批量下载过程事件。
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:
      *     <br>1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
      * @throws { BusinessError } 22400005 - Inner error. Possible causes:
@@ -1500,9 +1480,9 @@ declare namespace cloudSync {
      */
     off(event: 'progress', callback?: Callback<DownloadProgress>): void;
     /**
-     * Unsubscribes from cloud file cache download progress event.
+     * 移除云盘文件缓存过程事件监听。
      *
-     * @param { Callback<DownloadProgress> } [callback] - callback function with a `DownloadProgress` argument.
+     * @param { Callback<DownloadProgress> } [callback] - 回调函数。云文件下载过程事件。
      * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Incorrect parameter types.
      * @throws { BusinessError } 13600001 - IPC error
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
@@ -1527,9 +1507,9 @@ declare namespace cloudSync {
      */
     off(event: 'batchDownload', callback?: Callback<MultiDownloadProgress>): void;
     /**
-     * Unsubscribes from cloud file cache download progress event.
+     * 移除云盘文件缓存过程事件监听。
      *
-     * @param { Callback<MultiDownloadProgress> } [callback] - callback function with a `MultiDownloadProgress` argument.
+     * @param { Callback<MultiDownloadProgress> } [callback] - 回调函数。云文件批量缓存事件。
      * @throws { BusinessError } 13900020 - Invalid argument. Possible causes:Incorrect parameter types.
      * @throws { BusinessError } 22400005 - Inner error. Possible causes:
      *     <br>1.Failed to access the database or execute the SQL statement.
@@ -1595,7 +1575,7 @@ declare namespace cloudSync {
      */
     startBatch(uris: Array<string>, fileType?: DownloadFileType): Promise<long>;
     /**
-     * Stop the cloud file cache download task.
+     * 停止云文件下载任务。
      *
      * @param { string } uri - 待下载文件uri。
      * @returns { Promise<void> } - Promise对象，无返回结果。
@@ -1609,10 +1589,9 @@ declare namespace cloudSync {
      * @since 11
      */
     /**
-     * Stops downloading a file from the Drive Kit to the local device. This API uses a promise to return the result.
+     * 异步方法停止云盘文件缓存。使用Promise异步回调。
      *
-     * When **stop()** is called, the current file download process terminates, and downloaded files are retained by
-     * default. You can call **start()** to resume the download.
+     * 调用stop接口，当前文件下载流程会终止，默认不删除缓存文件，再次调用start接口重新启动下载。
      *
      * @param { string } uri - 待下载文件uri。
      * @param { boolean } [needClean] - 是否删除已下载的文件。默认值为false表示不删除；true表示删除。<br>从API version12开始支持该参数。 [since 12]
@@ -1725,11 +1704,9 @@ declare namespace cloudSync {
      */
     getDownloadList(uris: Array<string>): Promise<Array<DownloadProgress>>;
     /**
+     * 查询缓存文件的总大小。
      *
-     *
-     *
-     *
-     * @returns { Promise<long> } - Return the total size of cached files.
+     * @returns { Promise<long> } - 返回缓存文件的总大小。
      * @throws { BusinessError } 13900010 - Try again.
      * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSync.Core
      * @stagemodelonly
@@ -1737,9 +1714,7 @@ declare namespace cloudSync {
      */
     getCachedTotalSize(): Promise<long>;
     /**
-     *
-     *
-     *
+     * 清理所有已下载的文件，但尚未迁移到云端的文件或正在写入的文件除外。
      *
      * @returns { Promise<void> } - Return Promise.
      * @throws { BusinessError } 13900010 - Try again.
@@ -2407,7 +2382,7 @@ declare namespace cloudSync {
    */
   class FileVersion {
     /**
-     * A constructor used to create a FileVersion object.
+     * 端云文件版本管理的构造函数，用于获取FileVersion类的实例。
      *
      * @throws { BusinessError } 22400005 - Inner error. Possible causes:
      *     <br>1.Failed to access the database or execute the SQL statement.

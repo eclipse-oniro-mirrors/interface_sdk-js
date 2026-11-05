@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -48,7 +48,7 @@ import UIServiceExtensionConnectCallback from './UIServiceExtensionConnectCallba
 /*** endif */
 
 /**
- * UIAbilityContext是需要保存状态的[UIAbility]{@link ./../@ohos.app.ability.UIAbility}所对应的context，继承自[Context]{@link ./../app/context}，提供
+ * UIAbilityContext是需要保存状态的[UIAbility]{@link ./../@ohos.app.ability.UIAbility}所对应的context，继承自[Context]{@link ./Context:Context}，提供
  * UIAbility的相关配置信息以及操作UIAbility和ServiceExtensionAbility的方法，如启动UIAbility，停止当前UIAbilityContext所属的UIAbility，启动、停止、连接、断开连接
  * ServiceExtensionAbility等。
  *
@@ -1453,10 +1453,46 @@ declare class UIAbilityContext extends Context {
    * @atomicservice
    * @since 12 dynamic
    * @since 23 static
-   * @deprecated since 26.2.0
+   * @deprecated since 26.1.0
    * @useinstead UIAbilityContext#backToCallerAppWithResult(abilityResult: AbilityResult, requestCode: string)
    */
   backToCallerAbilityWithResult(abilityResult: AbilityResult, requestCode: string): Promise<void>;
+
+  /**
+   * 当通过
+   * [startAbilityForResult]{@link UIAbilityContext.startAbilityForResult(want: Want, callback: AsyncCallback<AbilityResult>)}、
+   * [openLink]{@link UIAbilityContext.openLink}或[openAtomicService]{@link UIAbilityContext.openAtomicService}
+   * 拉起目标方UIAbility，且需要目标方返回结果时，目标方可以通过该接口将结果返回并拉起调用方。与
+   * [terminateSelfWithResult]{@link UIAbilityContext.terminateSelfWithResult(parameter: AbilityResult, callback: AsyncCallback<void>)}
+   * 不同的是，本接口在返回时不会销毁当前UIAbility。使用Promise异步回调。
+   *
+   * > **说明：**
+   * >
+   * > - 如果调用方位于后台，还需要具备ohos.permission.START_ABILITIES_FROM_BACKGROUND（该权限仅系统应用可申请）。
+   * >   更多的组件启动规则详见[组件启动规则（Stage模型）](docroot://application-models/component-startup-rules.md)。
+   *
+   * @permission ohos.permission.START_ABILITIES_FROM_BACKGROUND
+   * @param { AbilityResult } abilityResult - 包含目标方返回给拉起方的结果。
+   * @param { string } requestCode - 通过
+   *     [startAbilityForResult]{@link UIAbilityContext.startAbilityForResult(want: Want, callback: AsyncCallback<AbilityResult>)}、
+   *     [openLink]{@link UIAbilityContext.openLink}或[openAtomicService]{@link UIAbilityContext.openAtomicService}
+   *     拉起目标方Ability且需要目标方返回结果时，系统生成的用于标识本次调用的requestCode。该值可以通过want中的
+   *     [CALLER_REQUEST_CODE]{@link ./../@ohos.app.ability.wantConstant:wantConstant}字段获取。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1.Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 16000074 - The caller does not exist.
+   * @throws { BusinessError } 16000075 - BackToCaller is not supported.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  backToCallerAppWithResult(abilityResult: AbilityResult, requestCode: string): Promise<void>;
 
   /**
    * 将当前UIAbility连接到一个[ServiceExtensionAbility](docroot://application-models/extensionability-overview.md)，通过返回的proxy与

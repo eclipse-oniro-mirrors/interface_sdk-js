@@ -75,7 +75,7 @@ interface LineOptions {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  * >
  * > - Line组件无法形成闭合区域，fill和fillOpacity属性设置无效。
@@ -176,7 +176,7 @@ declare class LineAttribute extends CommonShapeMethod<LineAttribute> {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  * >
  * > - Line组件无法形成闭合区域，fill和fillOpacity属性设置无效。

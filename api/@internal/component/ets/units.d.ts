@@ -48,7 +48,7 @@ declare type Resource = import('../api/global/resource').Resource;
 /**
  * Defines a size unit.
  *
- * @unionmember { string } String type. Specify the length [unit]{@link ./common} explicitly, for example, **'10px'**,
+ * @unionmember { string } String type. Specify the length [unit]{@link CommonMethod} explicitly, for example, **'10px'**,
  *     or provide the length in percentage, for example, **'100%'**.
  *     <br>**NOTE**
  *     <br>If the unit is not specified, the default unit vp is used, in which case **'10'** is equivalent to 10 vp.
@@ -160,7 +160,6 @@ declare type Dimension = PX | VP | FP | LPX | Percentage | Resource;
  * @unionmember { string } String type.
  * @unionmember { Resource } String referenced from system or app resources.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
  * @crossplatform [since 10]
  * @form [since 9]
  * @atomicservice [since 11]
@@ -1448,9 +1447,9 @@ declare interface Bias {
  *
  * > **NOTE**
  * >
- * > In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
+ * > In the [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [RelativeContainer]{@link @global:RelativeContainer}
  * > components, setting **width** and **height** to **auto** means that the size adapts to the size of their child
- * > components. In the [TextInput]{@link ./text_input} component, setting **width** to **auto** means that the width
+ * > components. In the [TextInput]{@link @global:TextInput} component, setting **width** to **auto** means that the width
  * > adapts to the width of the text content.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2112,7 +2111,7 @@ declare interface AccessibilityOptions {
 /**
  * Defines optional parameters for accessibility operations of a component, which is used to restrict or modify the
  * operations initiated by accessibility apps such as the screen reader. This API is supported only by the
- * [Slider]{@link ./slider} component. If this API is used on other components, compilation succeeds but the API does
+ * [Slider]{@link @global:Slider} component. If this API is used on other components, compilation succeeds but the API does
  * not take effect.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2127,7 +2126,7 @@ declare interface AccessibilityActionOptions {
    * Operation step count for an accessibility scroll action triggered by an accessibility gesture. The default value is
    * determined by the component.
    * This setting does not take effect on unsupported components.
-   * Currently, the [Slider]{@link ./slider} component is supported. This API triggers sliding for the **Slider**
+   * Currently, the [Slider]{@link @global:Slider} component is supported. This API triggers sliding for the **Slider**
    * component through swipe gestures after the component gains focus. Scrolling distance: scrollStep *
    * [step]{@link SliderOptions}.  The default value is
    * **1**. Out-of-range values fall back to **1**. For non-integer values within the valid range, the value is rounded

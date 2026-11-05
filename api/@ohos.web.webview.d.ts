@@ -28,6 +28,8 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
  * This module provides the capability to manage web modules.
  *
+ * ## Required Permissions
+ *
  * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
  * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
  *
@@ -1459,7 +1461,7 @@ declare namespace webview {
      *     <br>The value is **false** when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1481,7 +1483,7 @@ declare namespace webview {
      *     <br>The value is **false** when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1524,7 +1526,7 @@ declare namespace webview {
      *     <br>If the operation fails, the geolocation permission status of the specified origin is not found.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1551,7 +1553,7 @@ declare namespace webview {
      *     <br>Throws an exception error with error code 401 when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1702,7 +1704,10 @@ declare namespace webview {
    *
    * > **NOTE**
    * >
-   * > - Static methods must be used on the user interface (UI) thread.
+   * > - By default, static methods must be called on the user interface (UI) thread. Starting from API version 26.0.1,
+   * > static methods can be called on non-UI threads when
+   * > [setLazyInitializeWebEngine]{@link webview.WebCookieManager.setLazyInitializeWebEngine(lazy: boolean)} is
+   * > set to true.
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -2324,7 +2329,7 @@ declare namespace webview {
      * > initialization of the ArkWeb kernel when initializing CookieManager. You need to initialize the ArkWeb kernel
      * > separately afterwards.
      * > 
-     * > -Since API version 26.0.1, when set to **true**, CookieManager interfaces can be used in asynchronous threads.
+     * > - Since API version 26.0.1, when set to **true**, WebCookieManager interfaces can be called in non-UI threads.
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -4701,6 +4706,9 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScript is called multiple times, scripts are executed sequentially in the order of invocation;
+     * > however, the order in which promise results are returned is not guaranteed to match the call order.
      *
      * @param { string } script - JavaScript script.
      * @returns { Promise<string> } Promise used to return the result if the operation is successful and null otherwise.
@@ -4735,6 +4743,9 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScript is called multiple times, scripts are executed sequentially in the order of invocation;
+     * > however, the order in which callback results are returned is not guaranteed to match the call order.
      *
      * @param { string } script - JavaScript script.
      * @param { AsyncCallback<string> } callback - Callback used to return the result. **null** is returned if the
@@ -4760,6 +4771,10 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScriptExt is called multiple times, scripts are executed sequentially in the order of
+     * > invocation; however, the order in which promise results are returned is not guaranteed to match the
+     * > call order.
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript script. [since 12]
@@ -4784,6 +4799,10 @@ declare namespace webview {
      * >
      * > - The string data type passed from the frontend page to the app side is treated as JSON-formatted data and
      * > needs to be deserialized with JSON.parse.
+     * >
+     * > - When runJavaScriptExt is called multiple times, scripts are executed sequentially in the order of
+     * > invocation; however, the order in which callback results are returned is not guaranteed to match the
+     * > call order.
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript script. [since 12]
@@ -4972,7 +4991,7 @@ declare namespace webview {
     getBackForwardEntries(): BackForwardList;
 
     /**
-     * Removes all resource caches generated by Webview in the app.
+     * Clears the resource cache associated with the current WebView context.
      *
      * @param { boolean } clearRom - Whether to clear the cache files in both ROM and RAM. If this parameter is set to
      *     **true**, the cache files in both ROM and RAM are cleared. If this parameter is set to **false**, only the
@@ -5027,6 +5046,10 @@ declare namespace webview {
 
     /**
      * Scrolls the page by the specified amount within a specified period.
+     *
+     * > **NOTE**
+     * >
+     * > Calling **scrollBy** does not trigger the nested scrolling of the parent component.
      *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp
@@ -6486,6 +6509,46 @@ declare namespace webview {
     getSubframeErrorPageEnabled(): boolean;
 
     /**
+     * Enables or disables automatic reload for error pages.
+     *
+     * When enabled, the Web component automatically retries loading on network errors
+     * using a retry backoff sequence: 1s → 5s → 30s → 1min → 5min → 10min → 30min.
+     * Retries stop after 7 attempts with increasing delays.
+     *
+     * > **NOTE**
+     * >
+     * > - Only network errors trigger auto-reload. The following are excluded:
+     * > certificate errors, SSL (Secure Sockets Layer) protocol errors, authentication errors,
+     * > POST requests, non-HTTP(S) protocols, and errors blocked by the client.
+     * > - Auto-reload does not affect the {@link onOverrideErrorPage} callback.
+     * > - When auto-reload is triggered, the {@link onErrorReceive} callback will be
+     * > invoked again for each retry attempt.
+     *
+     * @param { boolean } enable - Whether to enable automatic reload. The value **true** enables it,
+     *     and **false** disables it.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    enableAutoReload(enable: boolean): void;
+
+    /**
+     * Returns whether automatic reload for error pages is enabled.
+     *
+     * @returns { boolean } Whether automatic reload is enabled. Returns **true** if enabled, **false** otherwise.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isAutoReloadEnabled(): boolean;
+
+    /**
      * Clears the cache occupied by **Web** component based on the specified memory pressure level.
      *
      * @param { PressureLevel } level - Pressure level of the memory to be cleared.
@@ -6537,6 +6600,13 @@ declare namespace webview {
 
     /**
      * Scrolls the page by the specified amount and returns value to indicate whether the scrolling is successful.
+     *
+     * > **NOTE**
+     * >
+     * > - If the web page is being touched, **false** is returned. Otherwise, **true** is returned.
+     * > - If the rendering area at the same layer of the web page is being touched, **true** is returned.
+     * > - Calling **scrollByWithResult** does not trigger the nested scrolling of the parent component.
+     * > - This API does not support the high frame rate of scrolling performance.
      *
      * @param { number } deltaX - Amount to scroll by along the x-axis. The positive direction is rightward.
      *     <br>Unit: vp
@@ -6976,7 +7046,7 @@ declare namespace webview {
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     setZoomFactor(zoomFactor: number): void;
 
@@ -6989,9 +7059,56 @@ declare namespace webview {
      *     The WebviewController must be associated with a Web component.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
-     * @since 26.2.0 dynamic
+     * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * Sets a key-value pair of user data on the current navigation entry.
+     *
+     * The user data is associated with the NavigationEntry lifecycle. The current navigation entry
+     * refers to the active entry in the navigation history. When the entry is destroyed
+     * (e.g., via history navigation or clearHistory), the user data is cleared. If a value with
+     * the same key already exists, it will be overwritten.
+     *
+     * @param { string } key - Key of the user data.
+     * @param { string } value - Value of the user data.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * Obtains the user data value associated with the specified key on the current navigation entry.
+     *
+     * @param { string } key - Key of the user data.
+     * @returns { string } Value of the user data, or an empty string if the key does not exist.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * Removes the user data associated with the specified key from the current navigation entry.
+     * If the key does not exist, this API does nothing.
+     *
+     * @param { string } key - Key of the user data to remove.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
 
     /**
      * Removes visited link records that changed after the specified date.

@@ -138,7 +138,7 @@ export declare enum BackgroundTheme {
 
 /**
  * 作为Page页面的根容器使用，其内部默认包含了标题栏、内容区。其中，内容区在首页默认显示导航内容，在非首页显示
- * [NavDestination]{@link ./@internal/component/ets/nav_destination}的子组件，首页和非首页通过路由进行切换。
+ * [NavDestination]{@link NavDestination}的子组件，首页和非首页通过路由进行切换。
  * 
  * > **说明：**
  * >
@@ -494,8 +494,8 @@ export declare enum TitleBarType {
 /**
  * 用于创建NavDestination组件内容的构建器类型。
  *
- * @param { string } name - [NavDestination]{@link ./@internal/component/ets/nav_destination}页面名称。
- * @param { Object } [param] - [NavDestination]{@link ./@internal/component/ets/nav_destination}页面详细参数。默认值为空。
+ * @param { string } name - [NavDestination]{@link NavDestination}页面名称。
+ * @param { Object } [param] - [NavDestination]{@link NavDestination}页面详细参数。默认值为空。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @atomicservice
  * @since 12 dynamiconly

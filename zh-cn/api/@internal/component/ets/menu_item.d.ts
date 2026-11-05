@@ -136,7 +136,7 @@ interface MenuItemInterface {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -247,7 +247,7 @@ declare class MenuItemAttribute extends CommonMethod<MenuItemAttribute> {
   labelFontColor(value: ResourceColor): MenuItemAttribute;
 
   /**
-   * Create the submenu for custom menu item.
+   * 设置子菜单内容构建器。
    *
    * @param { CustomBuilder } builder - Indicates the builder function for submenu.
    * @returns { MenuItemAttribute }

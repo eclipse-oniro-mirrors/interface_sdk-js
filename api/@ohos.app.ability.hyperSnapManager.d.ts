@@ -19,7 +19,20 @@
  */
 
 /**
- * This module provides the capability to manage HyperSnap.
+ * The initialization process during app startup can be performed in advance as quick launch initialization,
+ *  so that apps started via Quick Launch do not repeat the initialization process, thereby accelerating startup.
+ *  The hyperSnapManager module provides Quick Launch management capabilities, including enabling or disabling the
+ *  Quick Launch feature of an app and requesting re-initialization of Quick Launch.
+ *
+ * > **NOTE**
+ * >
+ * > The initial APIs of this module are supported since API version 24. Newly added APIs will be marked with a
+ * > superscript to indicate their earliest API version.
+ *
+ * ###### Implementation Principle
+ *
+ * Quick Launch initializes an app only once, which saves the time required for app initialization and AbilityStage
+ *  creation during Quick Launch startup.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
@@ -232,5 +245,27 @@ declare namespace hyperSnapManager {
      * @since 26.0.1 dynamic&static
      */
     function getLastError(errType: HyperSnapErrorType): Promise<HyperSnapErrorInfo>;
+
+    /**
+     * Checks whether the current process is undergoing Hyper Snap initialization.
+     * This API uses a promise to return the result.
+     *
+     * During the Hyper Snap template process initialization (including preloading and image creation phases),
+     * this method returns **true**. Once the snapshot is complete, fails, or the process is not a template
+     * process, this method returns **false**.
+     *
+     * This is useful for applications to distinguish between a normal cold start and a Hyper Snap template
+     * process initialization, allowing them to adjust their initialization logic accordingly.
+     *
+     * @returns { Promise<boolean> } Promise used to return the result.
+     *     The value **true** indicates the current process is undergoing Hyper Snap initialization,
+     *     and **false** indicates the current process is not undergoing Hyper Snap initialization
+     *     (snapshot completed, failed, or the process is not a template process).
+     * @throws { BusinessError } 16000050 - Connect to system service failed.
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    function isHyperSnapInitializing(): Promise<boolean>;
 }
 export default hyperSnapManager;

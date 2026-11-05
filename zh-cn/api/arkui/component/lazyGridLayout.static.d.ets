@@ -103,7 +103,7 @@ export declare interface LazyGridLayoutAttribute extends CommonMethod {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * ###### columnsGap
  *
@@ -177,7 +177,7 @@ export declare interface LazyVGridLayoutAttribute extends LazyGridLayoutAttribut
    * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   default columnsTemplate(template: ItemFillPolicy | undefined): this;
 

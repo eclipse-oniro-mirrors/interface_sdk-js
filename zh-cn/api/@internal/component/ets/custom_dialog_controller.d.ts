@@ -719,6 +719,19 @@ declare interface CustomDialogControllerOptions {
    * @since 26.0.0 dynamic
    */
   edgeLightMode?: EdgeLightMode;
+
+  /**
+   * 是否以及如何使对话框适配惯用手。
+   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
+   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
+   *
+   * @default HandednessFollowMode.NONE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -795,7 +808,7 @@ declare class CustomDialogController {
    * > 自定义弹窗的所有参数，不支持动态刷新，但可以通过设置customStyle为true，并在自定义组件上设置背景色
    * > [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、背景模糊
    * > [backgroundBlurStyle]{@link CommonMethod#backgroundBlurStyle(value: BlurStyle, options?: BackgroundBlurStyleOptions)}
-   * > 、[尺寸设置]{@link common}等属性，通过属性绑定的状态变量来实现动态刷新的效果。
+   * > 、[尺寸设置]{@link CommonMethod}等属性，通过属性绑定的状态变量来实现动态刷新的效果。
    * >
    * > 在CustomDialogController作为全局变量以实现全局自定义弹窗的场景下，若对controller重新赋值，则无法通过其关闭之前的弹窗。建议在重新赋值前先关闭弹窗。
    * >

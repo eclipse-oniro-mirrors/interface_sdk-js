@@ -5696,7 +5696,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5809,7 +5809,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { PositionArea } area - Area from which the pixels will be read.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -5862,6 +5862,68 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @since 26.0.0 dynamic&static
      */
     writePixelsFromAreaSync(area: PositionArea): void;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to a certain area of the PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * The value of PositionArea.stride must be greater than or equal to PositionArea.region.size.width multiplied by
+     * the number of bytes per pixel of sourcePixelFormat. The minimum required buffer size is calculated as follows:
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * bytesPerPixel(sourcePixelFormat).
+     *
+     * @param { PositionArea } area - Area of the PixelMap to write the data.
+     *     Data will be copied from PositionArea.pixels to the PixelMap.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to a certain area of the PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * The value of PositionArea.stride must be greater than or equal to PositionArea.region.size.width multiplied by
+     * the number of bytes per pixel of sourcePixelFormat. The minimum required buffer size is calculated as follows:
+     * PositionArea.offset + (PositionArea.region.size.height - 1) * PositionArea.stride +
+     * PositionArea.region.size.width * bytesPerPixel(sourcePixelFormat).
+     * This API returns the result synchronously.
+     *
+     * @param { PositionArea } area - Area of the PixelMap to write the data.
+     *     Data will be copied from PositionArea.pixels to the PixelMap.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. PositionArea.pixels is too small. 2. PositionArea.region is out of range.
+     *     3. PositionArea.offset or PositionArea.stride is invalid. 4. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat): void;
 
     /**
      * Reads the pixels in the [PositionArea]{@link @ohos.multimedia.image:image.PositionArea}.region buffer in the
@@ -5923,7 +5985,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { PositionArea } area - Area to which the pixels will be written.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -5977,6 +6039,62 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     writeAllPixelsFromBufferSync(src: ArrayBuffer): void;
 
     /**
+     * Writes pixel data in the specified pixel format from a buffer to the entire PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * Source rows must be tightly packed without row padding. The minimum required buffer size is the PixelMap width
+     * multiplied by the PixelMap height and the number of bytes per pixel of sourcePixelFormat. To write source data
+     * with a customized row stride or offset, use {@link writePixelsFromArea} instead.
+     *
+     * @param { ArrayBuffer } src - Buffer that contains the source pixel data.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBuffer(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): Promise<void>;
+
+    /**
+     * Writes pixel data in the specified pixel format from a buffer to the entire PixelMap.
+     * The supported source pixel formats are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     *
+     * Source rows must be tightly packed without row padding. The minimum required buffer size is the PixelMap width
+     * multiplied by the PixelMap height and the number of bytes per pixel of sourcePixelFormat. To write source data
+     * with a customized row stride or offset, use {@link writePixelsFromAreaSync} instead.
+     * This API returns the result synchronously.
+     *
+     * @param { ArrayBuffer } src - Buffer that contains the source pixel data.
+     * @param { PixelMapFormat } sourcePixelFormat - Pixel format of the source data.
+     *     The supported values are RGBA_8888, RGB_888, RGB_565, and RGBA_F16.
+     * @throws { BusinessError } 7600104 - Failed to get image data.
+     *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
+     * @throws { BusinessError } 7600105 - The PixelMap has been released.
+     * @throws { BusinessError } 7600106 - The PixelMap has been passed to another thread.
+     * @throws { BusinessError } 7600201 - Unsupported operation because the PixelMap is not editable or is locked.
+     * @throws { BusinessError } 7600203 - Unsupported conversion.
+     *     Possible cause: Conversion between the source pixel format and the PixelMap pixel format is not supported.
+     * @throws { BusinessError } 7600206 - Invalid parameter.
+     *     Possible causes: 1. The source buffer is too small. 2. sourcePixelFormat is not supported.
+     * @throws { BusinessError } 7600302 - Failed to copy or convert the pixel data.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    writeAllPixelsFromBufferSync(src: ArrayBuffer, sourcePixelFormat: PixelMapFormat): void;
+
+    /**
      * Reads the pixels in the buffer based on the PixelMap's pixel format and writes the data to this PixelMap object.
      * This API uses a promise to return the result.
      *
@@ -6023,7 +6141,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     [getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6075,7 +6193,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Obtains the image information. This API returns the result synchronously.
      *
      * @returns { ImageInfo } Image information.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
      * @form
@@ -6209,7 +6327,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } rate - Opacity rate. The value range is (0,1].
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6301,7 +6419,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6403,7 +6521,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - Scale factor of the height.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6424,7 +6542,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @form
@@ -6445,7 +6563,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { AntiAliasingLevel } level - Anti-aliasing level.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6464,7 +6582,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6481,7 +6599,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 18 dynamic
      * @since 23 static
@@ -6583,7 +6701,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } y - Y coordinate to translate, in px.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6680,7 +6798,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @param { double } angle - Angle to rotate. Unit: degrees.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6783,7 +6901,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     **false** otherwise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -6879,7 +6997,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *     image.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -7097,7 +7215,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * @param { boolean } detached - Whether to detach from the original thread. **true** to detach, **false**
      *     otherwise.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
      * @since 23 static
@@ -7111,7 +7229,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { HdrMetadataValue } Value of the metadata with the given key.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -7129,7 +7247,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.The length of the input parameter is too
      *     long.
      *     2.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980286 - Memory format not supported.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 13 dynamic
@@ -7141,7 +7259,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Copies this PixelMap object. This API returns the result synchronously.
      *
      * @returns { PixelMap } PixelMap object. If the operation fails, an error is thrown.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7159,7 +7277,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * Copies this PixelMap object. This API uses a promise to return the result.
      *
      * @returns { Promise<PixelMap> } Promise used to return the PixelMap object.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980102 - Image malloc abnormal. This status code is thrown when an error occurs
      *     during the process of copying data.
      * @throws { BusinessError } 62980103 - Image YUV And ASTC types are not supported.
@@ -7181,7 +7299,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @throws { BusinessError } 62980173 - The DMA memory does not exist.
      * @throws { BusinessError } 62980302 - Memory copy failed. Possibly caused by invalid metadata value.
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -16198,14 +16316,14 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * Only visible ASCII characters are supported. Spaces, newlines, tabs, and other control characters will be
      * filtered out. If the filtered result consists entirely of digits, a prefix "ImageReceiver:" will be automatically
-     * prepended.The length of name must not exceed 256 bytes.
+     * prepended.The length of name must not exceed 255 bytes.
      *
      * @param { string } name - Memory name to set.
-     *     <br>The maximum length is 256.
+     *     <br>The maximum length is 255.
      * @throws { BusinessError } 7900201 - Invalid parameter. Possible causes:
      *     <ol><li>Name is empty.</li>
      *     <li>Name contains no visible characters after filtering.</li>
-     *     <li>The length of name exceeds 256 bytes.</li>
+     *     <li>The length of name exceeds 255 bytes.</li>
      *     <li>Ensure the name parameter contains visible ASCII characters.</li></ol>
      * @syscap SystemCapability.Multimedia.Image.ImageReceiver
      * @stagemodelonly

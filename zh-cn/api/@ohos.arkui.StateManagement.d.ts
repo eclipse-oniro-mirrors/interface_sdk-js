@@ -127,7 +127,7 @@ export class ConnectOptions<T extends object> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   ignoreReadOnlyProperties?: boolean;
 
@@ -436,7 +436,15 @@ export interface TypeConstructor<T> {
 export declare type TypeDecorator = <T>(type: TypeConstructor<T>) => PropertyDecorator;
 
 /**
+ * @Type装饰类属性，用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)，确保序列化类时不丢失属性的复杂类型。
+ * 在使用[PersistenceV2]{@link PersistenceV2}等持久化能力对复杂类对象进行序列化和反序列化时，类的属性类型信息可能会丢失。通过@Type标记属性的原始类型，
+ * 可确保在序列化过程中正确保留和还原属性的复杂类型信息，适用于需要持久化或序列化复杂对象的场景，例如应用状态持久化存储、跨组件复杂数据传递等。
+ *
+ * 开发指南参考：[@Type装饰器：标记类属性的类型](docroot://ui/state-management/arkts-new-type.md)。
+ *
  * @Type标记属性的原始类型，可确保在序列化过程中正确保留和还原属性的复杂类型信息。
+ *
+ * type：标记类属性的原始类型，取值为对应类的构造函数，需与被装饰属性的类型一致。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1331,6 +1339,18 @@ export declare interface CustomComponentContext {
    * @since 26.0.0 dynamic
    */
   getReusePool(): IReusePool | undefined;
+
+  /**
+   * 返回该自定义组件拥有的默认复用池。
+   *
+   * @returns { IDefaultReusePool | undefined } 当前组件存在默认复用池时，返回默认复用池，否则返回`undefined`。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
 }
 
 /**
@@ -1385,6 +1405,31 @@ export declare interface IReusePool {
    * @since 26.0.0 dynamic
    */
   preRender(builder: WrappedBuilder<[]>, times: number): Promise<void>;
+}
+
+/**
+ * `IDefaultReusePool`接口提供自定义组件上的默认复用池的相关功能，包括清理复用池中的节点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface IDefaultReusePool {
+  /**
+   * 清理复用池中的节点。
+   *
+   * 指定reuseId时，仅清理该reuseId对应的可复用自定义组件的节点；未指定时，清理复用池中的全部节点。
+   *
+   * @param { string } [reuseId] - 需要清理的复用池中可复用自定义组件的复用标识ID。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(reuseId?: string): void;
 }
 
 /**

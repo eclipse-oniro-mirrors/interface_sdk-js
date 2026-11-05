@@ -15,7 +15,7 @@
  */
 
 /**
- * @file
+ * @file NotificationInfo
  * @kit NotificationKit
  */
 
@@ -23,7 +23,7 @@ import type notificationManager from '../@ohos.notificationManager';
 import { NotificationExtensionContent } from './NotificationExtensionContent';
 
 /**
- * 通知订阅扩展能力中
+ * [通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)扩展能力中
  * [onReceiveMessage]{@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility#onReceiveMessage}
  * 回调的通知信息。
  *
@@ -42,8 +42,8 @@ export interface NotificationInfo {
   readonly hashCode: string;
 
   /**
-   * 通知渠道类型，标识通知所属的渠道分类（如社交通讯、服务提醒等）。
-   * 不同渠道类型对应不同的提醒方式。
+   * [通知渠道](docroot://notification/notification-glossary.md#notification-slot通知渠道)类型，标识通知所属的渠道分类（如社交通讯、服务提醒等）。不同渠道类型对应不同
+   * 的提醒方式。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
@@ -52,14 +52,14 @@ export interface NotificationInfo {
   readonly notificationSlotType: notificationManager.SlotType;
 
   /**
-   * 通知内容。包含通知的标题和正文。
+   * [通知内容](docroot://notification/notification-glossary.md#notification-content通知内容)。包含通知的标题和正文。
    *
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
    * @since 23 static
    */
   readonly content: NotificationExtensionContent;
-  
+
   /**
    * 创建通知的应用包名。
    *
@@ -80,7 +80,9 @@ export interface NotificationInfo {
 
   /**
    * 通知发布的时间戳。
+   *
    * 数据格式：时间戳。
+   *
    * 单位：毫秒。
    *
    * @syscap SystemCapability.Notification.Notification

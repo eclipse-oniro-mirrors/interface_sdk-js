@@ -198,6 +198,16 @@ declare namespace insightIntentDriver {
      * @since 26.0.0 dynamic&static
      */
     deviceId?: string;
+
+    /**
+     * 表示工具调用ID，用于将此意图执行与某个测试步骤关联。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    toolCallId?: string;
   }
 
   /**
@@ -980,12 +990,15 @@ declare namespace insightIntentDriver {
     readonly subIntentInfoForConfiguration?: SubIntentInfoForConfiguration;
 
     /**
-     * 表示该意图所需的权限。
+     * 调用该意图所需的权限列表，为可选字段。
+     * 该字段仅用于调用方查询或参考。
+     * 系统不会自动校验这些权限。
+     * 权限校验必须由意图提供方（服务端）实现。
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     readonly permissions?: string[];
   }

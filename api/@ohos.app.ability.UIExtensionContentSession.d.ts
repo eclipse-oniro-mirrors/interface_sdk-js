@@ -80,7 +80,7 @@ declare class UIExtensionContentSession {
    *
    * @param { object } data - Data to send. [since 10 - 10]
    * @param { Record<string, Object> } data - Data to send. [since 11]
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -95,7 +95,7 @@ declare class UIExtensionContentSession {
    * Send data from an ui extension to an ui extension component.
    *
    * @param { Record<string, RecordData> } data - Indicates the data send to ui extension component.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -109,7 +109,7 @@ declare class UIExtensionContentSession {
    *  result.
    *
    * @param { function } callback - Callback used to return the received data.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -124,7 +124,7 @@ declare class UIExtensionContentSession {
    * Sets the callback for the ui extension to receive data from an ui extension component.
    *
    * @param { OnReceiveDataCallback } callback - Indicates the receive data callback to set.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -138,7 +138,7 @@ declare class UIExtensionContentSession {
    * callback to return the result.
    *
    * @param { function } callback - Callback used to return the received data with a return value.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -153,7 +153,7 @@ declare class UIExtensionContentSession {
    * Sets the callback with return value for the ui extension to receive data from an ui extension component.
    *
    * @param { OnReceiveDataForResultCallback } callback - Indicates the receive data callback to set.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error. Possible causes: Failed to communicate with dependency module.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -221,8 +221,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - Want information about the target ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is 
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -267,8 +268,9 @@ declare class UIExtensionContentSession {
    * @param { StartOptions } options - Parameters used for starting the ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the ability is started, **err** is 
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -310,8 +312,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - Want information about the target ability.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -352,8 +355,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - Want information about the target ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -395,8 +399,9 @@ declare class UIExtensionContentSession {
    * @param { StartOptions } options - Parameters used for starting the ability.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **err** is
    *     **undefined**; otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -434,8 +439,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - Want information about the target ability.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - The application is not system-app, can not use system-api.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -492,8 +498,9 @@ declare class UIExtensionContentSession {
    * @param { AsyncCallback<AbilityResult> } callback - Callback used to return the result. If the ability is started and 
    *     terminated, **err** is **undefined** and **data** is the obtained result code and data; otherwise, **err** is an 
    *     error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -551,8 +558,9 @@ declare class UIExtensionContentSession {
    * @param { AsyncCallback<AbilityResult> } callback - Callback used to return the result. If the ability is started and 
    *     terminated, **err** is **undefined** and **data** is the obtained result code and data; otherwise, **err** is an 
    *     error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -606,8 +614,9 @@ declare class UIExtensionContentSession {
    * @param { Want } want - Want information about the target ability.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
    * @returns { Promise<AbilityResult> } Promise used to return the result code and data.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -698,7 +707,7 @@ declare class UIExtensionContentSession {
    *
    * @param { string } color - Background color to set. The value is a hexadecimal RGB or ARGB color code and is case 
    *     insensitive, for example, **#00FF00** or **#FF00FF00**.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @throws { BusinessError } 16000050 - Internal error.
@@ -717,7 +726,8 @@ declare class UIExtensionContentSession {
    * @permission ohos.permission.PRIVACY_WINDOW
    * @param { boolean } isPrivacyMode - Whether to enable the privacy mode. **true** to enable, **false** otherwise.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -735,7 +745,8 @@ declare class UIExtensionContentSession {
    * @param { boolean } isPrivacyMode - Whether to enable the privacy mode. **true** to enable, **false** otherwise.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the setting is successful, **err** is 
    *     **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     2. Incorrect parameter types.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -757,7 +768,7 @@ declare class UIExtensionContentSession {
    * @param { AbilityStartCallback } abilityStartCallback - Execution result of starting the UIExtensionAbility.
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, **err** is
    *     **undefined**. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -799,7 +810,7 @@ declare class UIExtensionContentSession {
    * @param { Record<string, Object> } wantParam - Parameters passed for starting the UIExtensionAbility.
    * @param { AbilityStartCallback } abilityStartCallback - Execution result of starting the UIExtensionAbility.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - The application does not have permission to call the interface. [since 11 - 11]
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 11 - 11]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 16000001 - The specified ability does not exist. [since 11 - 11]
@@ -835,7 +846,7 @@ declare class UIExtensionContentSession {
    * avoided area.
    *
    * @returns { uiExtensionHost.UIExtensionHostWindowProxy } Window information of the host application.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000050 - Internal error.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

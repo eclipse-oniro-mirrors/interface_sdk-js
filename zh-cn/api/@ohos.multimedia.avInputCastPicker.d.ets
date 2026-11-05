@@ -24,7 +24,7 @@ import { AVCastPickerState } from './@ohos.multimedia.avCastPickerParam';
 
 /**
  * 录音设备选择组件，可用于切换音频输入设备。
- * 
+ *
  * 该组件为自定义组件，开发者在使用前需要先了解[@Component](docroot://ui/state-management/arkts-create-custom-components.md#component)。
  *
  * @struct { AVInputCastPicker }
@@ -58,10 +58,9 @@ export declare struct AVInputCastPicker {
 }
 
 /**
- * Callback for picker state
  *
  * @typedef { function } OnPickerStateCallback
- * @param { AVCastPickerState } state - the picker state.
+ * @param { AVCastPickerState } state - 设备列表状态。
  * @returns { void }
   * @syscap SystemCapability.Multimedia.AVSession.AVInputCast
  * @atomicservice

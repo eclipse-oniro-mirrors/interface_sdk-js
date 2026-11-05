@@ -41,7 +41,7 @@ declare namespace formAgent {
    *     <br>bundleName: 目标卡片所属应用的bundleName。
    *     <br>abilityName: 目标卡片所属应用的Ability。
    *     <br>parameters:
-   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格，取值原则：1-2x2、2-2x4、3-4x4等，具体规格见卡片配置。
+   *     <br>- ohos.extra.param.key.form_dimension: 目标卡片规格。
    *     <br>- ohos.extra.param.key.form_name: 目标卡片名。
    *     <br>- ohos.extra.param.key.module_name: 目标卡片moduleName。
    * @param { AsyncCallback<string> } callback - 回调函数，用于异步返回卡片标识。回调参数：error为错误对象（成功时为null），data为卡片标识（string类型）。
@@ -100,7 +100,7 @@ declare namespace formAgent {
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permissions denied.
    * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object dose not exist.
+   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object does not exist.
    * @throws { BusinessError } 16500060 - Possible cause Service State error. Such as the form is recovering.
    * @throws { BusinessError } 16501000 - Possible cause internal functional error. Such as virtualization failed.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -160,5 +160,27 @@ declare namespace formAgent {
    */
   function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
     formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;
+
+  /**
+   * 获取可见卡片区域，使用Promise异步回调。
+   *
+   * @param { string } formId - 卡片id。
+   * @returns { Promise<formInfo.Rect> } Promise对象，返回卡片相对于屏幕左上角的位置和尺寸，单位为 vp。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16500060 - Service connection error.
+   * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
+   * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
+   * @throws { BusinessError } 16501003 - The form cannot be operated by the current application.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function getVisibleFormRect(formId: string): Promise<formInfo.Rect>;
 }
 export default formAgent;

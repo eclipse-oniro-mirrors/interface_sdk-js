@@ -197,6 +197,19 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
+
+  /**
    * The uri of a link.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -307,11 +320,14 @@ export @interface InsightIntentPage {
   keywords: string[] = [];
 
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -334,6 +350,19 @@ export @interface InsightIntentPage {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * The uiAbility name bound to the intent.
@@ -471,11 +500,14 @@ export @interface InsightIntentFunctionMethod {
   keywords: string[] = [];
 
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -498,6 +530,19 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 }
 /**
  * Define InsightIntentForm Annotation.
@@ -610,6 +655,19 @@ export @interface InsightIntentForm {
   result: string = '';
 
   /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
+
+  /**
    * The form name bound to the intent.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -709,11 +767,14 @@ export @interface InsightIntentEntry {
   keywords: string[] = [];
 
   /**
-   * Indicates the permissions required by the intent.
+   * Optional list of permissions required to invoke this intent.
+   * This is for caller-side query/reference only.
+   * The system does not enforce these permissions automatically.
+   * Permission validation must be implemented on the intent provider (server side).
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   permissions: string[] = [];
 
@@ -736,6 +797,19 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * The ability name bound to the intent.

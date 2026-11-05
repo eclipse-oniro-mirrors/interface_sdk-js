@@ -1811,7 +1811,7 @@ declare namespace util {
      * MIME 规范的 Base64 编码（带换行）以及 URL 安全的 Base64 编码。
      *
      * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
      *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
@@ -1864,7 +1864,7 @@ declare namespace util {
      * 将输入内容编码为字符串。该接口使用 promise 返回结果。
      *
      * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.2.0]
+     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
      * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
      *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。<br>-
      *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：
@@ -2583,6 +2583,46 @@ declare namespace util {
   }
 
   /**
+   * 枚举，提示触发GC的紧急程度。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamiconly
+   */
+  enum UrgencyLevel {
+    /**
+     * 紧急程度低，GC触发阈值较高但仍低于正常的GC触发阈值。
+     * 适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    LOW = 0,
+    /**
+     * 紧急程度中等，GC触发阈值介于LOW和HIGH之间。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    MEDIUM = 1,
+    /**
+     * 紧急程度高，GC触发阈值低。
+     * 适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    HIGH = 2,
+  }
+
+  /**
    * 为开发者提供虚拟机维测能力的类。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -2685,9 +2725,28 @@ declare namespace util {
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
+
+    /**
+     * 提示当前ArkTS虚拟机主动触发GC的接口。
+     * 虚拟机根据当前内存状态和紧急程度决定是否触发GC。
+     * 默认参数值是Urgency.LOW。
+     * 不推荐高频调用，因为GC可能带来较高的性能开销
+     *
+     * @param { UrgencyLevel } [level] - 紧急程度.<br>可选的参数值如下:
+     *     <br>- **Urgency.LOW** (默认值): 紧急程度低, GC触发阈值相对较高,
+     *     适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *     <br>- **Urgency.MEDIUM**: 紧急程度中等, GC触发阈值介于LOW和HIGH之间。
+     *     <br>- **Urgency.HIGH**: 紧急程度高, GC触发阈值低,
+     *     适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static hintGC(level?: UrgencyLevel): void;
   }
 
   /**

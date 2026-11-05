@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file NotificationExtensionContent
  * @kit NotificationKit
  */
 
@@ -27,7 +27,9 @@
  */
 export interface NotificationExtensionContent {
   /**
-   * 通知标题。不可为空字符串，大小不超过1024字节，超出部分会被截断。
+   * 通知标题。
+   *
+   * 不可为空字符串，大小不超过1024字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
    * @crossplatform
@@ -37,7 +39,9 @@ export interface NotificationExtensionContent {
   title: string;
 
   /**
-   * 通知正文内容。不可为空字符串，大小不超过3072字节，超出部分会被截断。
+   * 通知正文内容。
+   *
+   * 不可为空字符串，大小不超过3072字节，超出部分会被截断。
    *
    * @syscap SystemCapability.Notification.Notification
    * @crossplatform

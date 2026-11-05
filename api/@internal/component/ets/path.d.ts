@@ -71,7 +71,7 @@ declare interface PathOptions {
 
   /**
    * Command string for path drawing, complying with the
-   * [SVG Path Syntax]{@link ./path#svg-path-syntax}, in px.
+   * [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *
    * Default value: empty string
    *
@@ -96,7 +96,7 @@ declare interface PathOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -156,19 +156,17 @@ interface PathInterface {
 declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
   /**
    * Sets the command string that complies with the
-   * [SVG Path Syntax]{@link ./path#svg-path-syntax}, in px.
+   * [SVG Path Syntax]{@link svg-path-syntax}, in px.
    * The command string determines the drawing shape and trajectory of the path. This attribute can be dynamically set
    * using [attributeModifier]{@link CommonMethod#attributeModifier}. For details about the pixel unit conversion
-   * method, see [Pixel Units]{@link ./common}.
+   * method, see [Pixel Units]{@link CommonMethod}.
    *
    * @param { string } value - Command string for path drawing. It must comply with the
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}, in
-   *     px.
+   *     [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *     <br>Default value: empty string
    *     <br>Abnormal values **undefined** and **null** are processed as the default value. [since 7 - 19]
    * @param { ResourceStr } value - Command string for path drawing. It must comply with the
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}, in
-   *     px.
+   *     [SVG Path Syntax]{@link svg-path-syntax}, in px.
    *     <br>Default value: empty string
    *     <br>Abnormal values **undefined** and **null** are processed as the default value. [since 20]
    * @returns { PathAttribute }
@@ -189,7 +187,7 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * ###### Child Components
  *

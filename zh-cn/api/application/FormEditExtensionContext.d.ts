@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file FormEditExtensionAbility上下文-FormEditExtensionContext
  * @kit FormKit
  */
 
@@ -54,7 +54,11 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	startSecondPage(want: Want): Promise<AbilityResult>;
 
      /**
-      * 拉起卡片所属应用的UIAbility。使用Promise异步回调。说明：需在卡片编辑页面处于前台时调用，页面不在前台时调用将返回错误码16501014。
+      * 拉起卡片所属应用的UIAbility。使用Promise异步回调。
+      * 
+      * > **说明：**
+      * >
+      * > 需在卡片编辑页面处于前台时调用，页面不在前台时调用将返回错误码16501014。
       *
       * @param { Want } want - 用于指定要拉起的UIAbility的Want信息。必须包含abilityName字段。
       * @returns { Promise<void> } Promise对象，无返回结果。
@@ -71,14 +75,15 @@ declare class FormEditExtensionContext extends UIExtensionContext {
      startUIAbility(want: Want): Promise<void>;
 
 	/**
-	 * 设置卡片编辑页的背景色
+	 * 设置卡片编辑页的背景色, 使用Promise异步回调。
 	 *
-	 * @param { string } color - 要设置的背景颜色。该值是一个十六进制 RGB 或 ARGB 颜色代码，不区分大小写，例如 **#00FF00** 或 **#FF00FF00**。它也可以是一个资源字符串。
-	 * @returns { Promise<void> } 不返回值
+	 * @param { string } color - 要设置的背景颜色。该值是一个十六进制 RGB 或 ARGB 颜色代码，不区分大小写，例如 **#00FF00** 或 **#FF00FF00**。
+	 * @returns { Promise<void> } Promise对象，无返回结果。
 	 * @throws { BusinessError } 16500050 - An IPC connection error happened.
+	 * @throws { BusinessError } 16501026 - Invalid color value.
 	 * @syscap SystemCapability.Ability.Form
 	 * @stagemodelonly
-	 * @since 26.2.0 dynamic&static
+	 * @since 26.1.0 dynamic&static
 	 */
 	setWindowBackgroundColor(color: string): Promise<void>;
 }

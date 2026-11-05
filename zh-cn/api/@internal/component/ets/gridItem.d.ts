@@ -90,9 +90,7 @@ declare interface GridItemOptions {
 *
 * > **说明：**
 * >
-* > *
-* >
-* > * 仅支持作为[Grid]{@link ./grid}组件的子组件使用。
+* > * 仅支持作为[Grid]{@link @global:Grid}组件的子组件使用。
 * >
 * > * 当GridItem配合[LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)使用时，GridItem子组件在
 * > GridItem创建时创建。配合[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
@@ -145,8 +143,8 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    *
    * @param { number } value - 当前元素起始行号。<br/>需要指定GridItem起始行列号和所占行列数的场景推荐使用Grid的
    *     [GridLayoutOptions]{@link GridLayoutOptions}参数，详细可参考Grid的
-   *     [示例1（固定行列Grid）]{@link ./grid}和
-   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link ./grid}。<br/>取值
+   *     [示例1（固定行列Grid）]{@link @global:Grid}和
+   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link @global:Grid}。<br/>取值
    *     范围：[0, 总行数-1]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -162,8 +160,8 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    *
    * @param { number } value - 当前元素终点行号。<br/>需要指定GridItem起始行列号和所占行列数的场景推荐使用Grid的
    *     [GridLayoutOptions]{@link GridLayoutOptions}参数，详细可参考Grid的
-   *     [示例1（固定行列Grid）]{@link ./grid}和
-   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link ./grid}。<br/>取值
+   *     [示例1（固定行列Grid）]{@link @global:Grid}和
+   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link @global:Grid}。<br/>取值
    *     范围：[0, 总行数-1]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -179,8 +177,8 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    *
    * @param { number } value - 当前元素起始列号。<br/>需要指定GridItem起始行列号和所占行列数的场景推荐使用Grid的
    *     [GridLayoutOptions]{@link GridLayoutOptions}参数，详细可参考Grid的
-   *     [示例1（固定行列Grid）]{@link ./grid}和
-   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link ./grid}。<br/>取值
+   *     [示例1（固定行列Grid）]{@link @global:Grid}和
+   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link @global:Grid}。<br/>取值
    *     范围：[0, 总列数-1]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -196,8 +194,8 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    *
    * @param { number } value - 当前元素终点列号。<br/>需要指定GridItem起始行列号和所占行列数的场景推荐使用Grid的
    *     [GridLayoutOptions]{@link GridLayoutOptions}参数，详细可参考Grid的
-   *     [示例1（固定行列Grid）]{@link ./grid}和
-   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link ./grid}。<br/>取值
+   *     [示例1（固定行列Grid）]{@link @global:Grid}和
+   *     [示例3（可滚动Grid设置跨行跨列节点）]{@link @global:Grid}。<br/>取值
    *     范围：[0, 总列数-1]
    * @returns { GridItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -227,7 +225,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * 设置当前GridItem元素是否可以被鼠标框选。外层Grid容器的鼠标框选开启时，GridItem的框选才生效。
    *
-   * 该属性需要在设置[多态样式]{@link ./common}前使用才能生效选中态样式。
+   * 该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * @param { boolean } value - 当前GridItem元素是否可以被鼠标框选。设置为true时可以被鼠标框选，设置为false时无法被鼠标框选。<br/>默认值：true
    * @returns { GridItemAttribute }
@@ -242,7 +240,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
   /**
    * 设置当前GridItem选中状态。该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *
-   * 该属性需要在设置[多态样式]{@link ./common}前使用才能生效选中态样式。
+   * 该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * @param { boolean } value - 当前GridItem选中状态。设置为true时为选中状态，设置为false时为非选中状态。<br/>默认值：false
    * @returns { GridItemAttribute } the attribute of the gridItem.
@@ -273,9 +271,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
  *
  * > **说明：**
  * >
- * > *
- * >
- * > * 仅支持作为[Grid]{@link ./grid}组件的子组件使用。
+ * > * 仅支持作为[Grid]{@link @global:Grid}组件的子组件使用。
  * >
  * > * 当GridItem配合[LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)使用时，GridItem子组件在
  * > GridItem创建时创建。配合[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、

@@ -549,7 +549,9 @@ declare namespace inputDevice {
 
   /**
    * Queries whether a specified input device supports specified keys. This API uses an asynchronous callback to return
-   * the result.
+   * the result. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -568,6 +570,9 @@ declare namespace inputDevice {
 
   /**
    * Checks whether the input device supports the specified keys. This API uses a promise to return the result.
+   * Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -583,7 +588,9 @@ declare namespace inputDevice {
   function supportKeys(deviceId: int, keys: Array<KeyCode>): Promise<Array<boolean>>;
 
   /**
-   * Checks whether the input device supports the specified keys.
+   * Checks whether the input device supports the specified keys. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -601,7 +608,9 @@ declare namespace inputDevice {
   /**
    * Obtains the keyboard type of the input device, such as full keyboard and numeric keypad. The keyboard type of the
    * input device is subject to the result returned by this API. This API uses an asynchronous callback to return the
-   * result.
+   * result. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -617,6 +626,9 @@ declare namespace inputDevice {
 
   /**
    * Obtains the keyboard type of an input device. This API uses a promise to return the result.
+   * Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.
@@ -630,7 +642,9 @@ declare namespace inputDevice {
   function getKeyboardType(deviceId: int): Promise<KeyboardType>;
 
   /**
-   * Obtains the keyboard type of the input device.
+   * Obtains the keyboard type of the input device. Before calling this API, call
+   * [getDeviceList]{@link inputDevice.getDeviceList(callback: AsyncCallback<Array<int>>)} first to obtain the ID of
+   * the input device.
    *
    * @param { int } deviceId - Unique ID of the input device. If a physical device is repeatedly reinstalled or
    *     restarted, its ID may change.

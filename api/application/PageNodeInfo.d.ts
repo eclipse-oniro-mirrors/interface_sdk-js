@@ -54,7 +54,7 @@ export default interface PageNodeInfo {
   id: int;
 
   /**
-   * The depth of page node.
+   * Depth of the page node, in px.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -78,7 +78,7 @@ export default interface PageNodeInfo {
   autoFillType: AutoFillType;
 
   /**
-   * The tag of page node.
+   * Tag name of the page node, used to identify the component type of the node.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -89,7 +89,8 @@ export default interface PageNodeInfo {
   tag: string;
 
   /**
-   * The value of page node.
+   * Value currently displayed on the page node or entered by the user. This value is filled into the
+   * corresponding node during auto-fill.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
@@ -102,7 +103,8 @@ export default interface PageNodeInfo {
   value: string;
 
   /**
-   * The placeholder of page node.
+   * Placeholder text of the page node, usually displayed in the input control to prompt the user for
+   * the expected input. It can help the auto-fill service identify the fill type.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 11 - 24]
@@ -115,7 +117,8 @@ export default interface PageNodeInfo {
   placeholder?: string;
 
   /**
-   * The password rules of page node.
+   * Rule for auto-generating a password, used to specify the format and constraints of the generated password
+   * (such as length and character types). It takes effect only when the auto-fill type is password.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -126,7 +129,7 @@ export default interface PageNodeInfo {
   passwordRules?: string;
 
   /**
-   * The auto fill flag of page node.
+   * Status of the auto-fill feature. true if enabled, false otherwise.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi
@@ -150,9 +153,9 @@ export default interface PageNodeInfo {
   rect: AutoFillRect;
 
   /**
-   * Is the page node in the focus. 
-   *    The value **true** means the current node is focused;
-   *    The value **false** means the current node is not focused.
+   * Whether the current node has focus. The value true indicates that the current node has focus,
+   * and false indicates the opposite.
+   *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi [since 12 - 24]
    * @publicapi [since 26.0.0]
@@ -164,7 +167,8 @@ export default interface PageNodeInfo {
   isFocus: boolean;
 
   /**
-   * The metadata of a node.
+   * Metadata of the page node, used to carry custom attributes or configuration information of the node to
+   * help the auto-fill service perform more precise matching and filling. The default value is an empty string.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.AbilityCore
    * @systemapi

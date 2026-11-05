@@ -1476,7 +1476,7 @@ declare const Watch: (value: string) => PropertyDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface BuilderDecoratorConfig {
   /**
@@ -1489,7 +1489,7 @@ declare interface BuilderDecoratorConfig {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isPlaceholder: boolean;
 }
@@ -1504,7 +1504,7 @@ declare interface BuilderDecoratorConfig {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodDecorator;
 
@@ -1512,7 +1512,7 @@ declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodD
  * Defining Builder MethodDecorator
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & BuilderMethodDecorator } [since 26.2.0]
+ * @type { MethodDecorator & BuilderMethodDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1550,7 +1550,7 @@ declare const LocalBuilder: MethodDecorator;
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface VersionCondition {
   /**
@@ -1563,7 +1563,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   minApiVersion?: number | string;
 
@@ -1577,7 +1577,7 @@ declare interface VersionCondition {
    * @crossplatform
    * @form
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   maxApiVersion?: number | string;
 }
@@ -1592,9 +1592,24 @@ declare interface VersionCondition {
  * @crossplatform
  * @form
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare type StylesVersionDecorator = (versionCondition: VersionCondition) => MethodDecorator;
+
+/**
+ * Define Extend Decorator type with version control.
+ *
+ * @param { any } value
+ * @param { VersionCondition } versionCondition
+ * @returns { MethodDecorator } Extend decorator
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCondition) => MethodDecorator;
 
 /**
  * The @Styles decorator is used to extract multiple style settings into a method, which can be directly called at the 
@@ -1603,7 +1618,7 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
  * consistency. 
  *
  * @type { MethodDecorator } [since 8 - 26.0.1]
- * @type { MethodDecorator & StylesVersionDecorator } [since 26.2.0]
+ * @type { MethodDecorator & StylesVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1615,11 +1630,19 @@ declare type StylesVersionDecorator = (versionCondition: VersionCondition) => Me
 declare const Styles: MethodDecorator & StylesVersionDecorator;
 
 /**
- * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style 
- * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter 
- * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing 
+ * The @Extend decorator is used to extend the styles of specified components. It supports defining multiple style
+ * attributes in a unified manner within the decorated function, and enables flexible style reuse through parameter
+ * passing. This is suitable for scenarios where the same styles need to be applied to multiple components, reducing
  * style code duplication.
  *
+ * value: Target built-in UI component type (such as **Text** and **Column**) for which the style is to be extended.
+ * Pass in the component type rather than a component instance. Custom components are not supported. The style
+ * attributes defined in the @Extend decorator will be bound to this component type, so that they can be called on the
+ * component in a chained manner.
+ * MethodDecorator: Method decorator. Developers do not need to pay attention to this return value.
+ *
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) } [since 8 - 26.0.1] 
+ * @type { MethodDecorator & ((value: any) => MethodDecorator) & ExtendVersionDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1628,7 +1651,8 @@ declare const Styles: MethodDecorator & StylesVersionDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Extend: MethodDecorator & ((value: any) => MethodDecorator);
+declare const Extend: MethodDecorator
+  & ((value: any) => MethodDecorator) & ExtendVersionDecorator;
 
 /**
  * The @AnimatableExtend decorator is used to customize animatable property methods.
@@ -2089,7 +2113,7 @@ declare function getContext(component?: Object): Context;
  *
  * options: Parameters of the reusable custom component, used to configure the memory optimization policy. If this
  * parameter is not specified, no memory optimization policy is applied. You are advised to configure this parameter
- * in scenarios where components are frequently created and destroyed to achieve memory optimization.
+ * in scenarios where components are frequently created and destroyed to achieve memory optimization.**Since:** 26.0.0
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4767,8 +4791,8 @@ declare interface LinearGradientOptions {
  * >
  * > When using the **metricsColors** parameter, take note of the following:
  * >
- * > [ColorMetrics]{@link Graphics:ColorMetrics} represents the fill color, which can be constructed with a specified 
- * > color gamut attribute using the [colorWithSpace]{@link Graphics:ColorMetrics#colorWithSpace} API. **number** 
+ * > [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} represents the fill color, which can be constructed with a specified 
+ * > color gamut attribute using the [colorWithSpace]{@link @ohos.arkui.node:ColorMetrics.colorWithSpace} API. **number** 
  * > represents the position of the specified color, with a value range of [0, 1.0]. **0** indicates the start of the 
  * > container where the gradient color is set, and **1.0** indicates the end of the container. To achieve multi-color 
  * > gradients, the **number** parameters in the array should be set in ascending order. If a later number is less than
@@ -6171,7 +6195,7 @@ declare class DrawModifier {
    * Draws the content background. Override this method to implement custom content background drawing. The background
    * is located below the component content layer, and is suitable for scenarios where decorative background elements
    * need to be added at the bottom layer of the component. The Canvas in the
-   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * [DrawContext]{@link @ohos.arkui.node:DrawContext} of this API is a temporary canvas used to record
    * instructions, not the actual canvas of the node. For usage, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -6189,7 +6213,7 @@ declare class DrawModifier {
    * Draws the content. Override this method to implement custom content drawing, which will replace the component's
    * default content drawing function. It is suitable for scenarios where the component content drawing needs to be
    * fully customized and the component's original content drawing logic is not used. The Canvas in the
-   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * [DrawContext]{@link @ohos.arkui.node:DrawContext} of this API is a temporary canvas used to record
    * instructions, not the actual canvas of the node. For usage, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -6207,7 +6231,7 @@ declare class DrawModifier {
    * Draws the content foreground. Override this method to implement custom content foreground drawing. The content
    * foreground is located between the content and the foreground, and is suitable for scenarios where drawing content
    * needs to be added above the component content and below the component foreground. The Canvas in the
-   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * [DrawContext]{@link @ohos.arkui.node:DrawContext} of this API is a temporary canvas used to record
    * instructions, not the actual canvas of the node. For usage, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -6227,7 +6251,7 @@ declare class DrawModifier {
    * above the content foreground and below the mask layer. drawFront is suitable for drawing the foreground effect of
    * the component content itself, while drawForeground is suitable for scenarios where an additional foreground effect
    * needs to be added above the content foreground. The Canvas in the
-   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this API is a temporary canvas used to record
+   * [DrawContext]{@link @ohos.arkui.node:DrawContext} of this API is a temporary canvas used to record
    * instructions, not the actual canvas of the node. For usage, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -6245,7 +6269,7 @@ declare class DrawModifier {
    * Interface for custom drawing of the mask. If this method is overridden, custom drawing of the mask can be
    * performed. The mask is the topmost drawing layer, suitable for scenarios where a mask effect (such as highlighting
    * or masking) needs to be added to the topmost layer of a component. The Canvas in
-   * [DrawContext]{@link ./arkui/Graphics:DrawContext} of this interface is a temporary canvas used to record
+   * [DrawContext]{@link @ohos.arkui.node:DrawContext} of this interface is a temporary canvas used to record
    * instructions, not the actual canvas of the node. For usage, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-extension-drawModifier.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *
@@ -6654,24 +6678,9 @@ interface PreviewParams {
  *
  * @interface ItemDragInfo
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 8
- */
-/**
- * ItemDragInfo object description
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @since 10
- */
-/**
- * ItemDragInfo object description
- *
- * @interface ItemDragInfo
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @crossplatform
- * @atomicservice
- * @since 11 dynamic
+ * @crossplatform [since 10]
+ * @atomicservice [since 11]
+ * @since 8 dynamic
  */
 declare interface ItemDragInfo {
   /**
@@ -6894,7 +6903,7 @@ declare interface DragItemInfo {
    *
    * **NOTE**
    *
-   * Global builder definition is not supported. If the [Image]{@link image} component is used in the builder, enable
+   * Global builder definition is not supported. If the [Image]{@link @global:Image} component is used in the builder, enable
    * synchronous loading whenever possible, that is, set the [syncLoad]{@link ImageAttribute#syncLoad} attribute of the
    * component to **true**. The builder is used only to generate the image displayed during the current dragging.
    * Changes to the builder, if any, apply to the next dragging, but not to the current dragging.
@@ -6944,7 +6953,7 @@ declare interface DragItemInfo {
  * > [aboutToDisappear](docroot://reference/apis-arkui/arkui-ts/ts-custom-component-lifecycle.md#abouttodisappear), 
  * > the component is being destroyed, so animations should not be used.
  * >
- * > - When a component appears or disappears, you can add animation effects through the [transition]{@link common} 
+ * > - When a component appears or disappears, you can add animation effects through the [transition]{@link CommonMethod} 
  * > attribute.
  * >
  * > - For attributes not supported by component transitions, see 
@@ -9021,7 +9030,7 @@ declare enum SafeAreaEdge {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum SafeAreaInsetAlignment {
   /**
@@ -9034,7 +9043,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   START = 0,
 
@@ -9046,7 +9055,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   CENTER = 1,
 
@@ -9060,7 +9069,7 @@ declare enum SafeAreaInsetAlignment {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   END = 2
 }
@@ -9073,7 +9082,7 @@ declare enum SafeAreaInsetAlignment {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetEdgeConfig {
   /**
@@ -9089,7 +9098,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   content: CustomBuilder;
 
@@ -9105,7 +9114,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   spacing?: LengthMetrics;
 
@@ -9119,7 +9128,7 @@ declare interface SafeAreaInsetEdgeConfig {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   alignment?: SafeAreaInsetAlignment;
 }
@@ -9132,7 +9141,7 @@ declare interface SafeAreaInsetEdgeConfig {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface SafeAreaInsetOptions {
   /**
@@ -9146,7 +9155,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   top?: SafeAreaInsetEdgeConfig;
 
@@ -9162,7 +9171,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   end?: SafeAreaInsetEdgeConfig;
 
@@ -9177,7 +9186,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   bottom?: SafeAreaInsetEdgeConfig;
 
@@ -9193,7 +9202,7 @@ declare interface SafeAreaInsetOptions {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   start?: SafeAreaInsetEdgeConfig;
 }
@@ -10588,7 +10597,7 @@ declare interface MouseEvent extends BaseEvent {
    * **NOTE**
    *
    * This field is used when dispatching events using the
-   * [postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy} API. Each time an event is
+   * [postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy} API. Each time an event is
    * dispatched, this field is increased by 100000.
    *
    * Using the same **eventHandleId** for multiple event dispatches will cause abnormal event responses. This field only
@@ -11263,7 +11272,7 @@ declare interface TouchEvent extends BaseEvent {
    *
    * **NOTE**
    *
-   * This API is only supported by the [Hyperlink]{@link hyperlink} component. Using it with unsupported
+   * This API is only supported by the [Hyperlink]{@link @global:Hyperlink} component. Using it with unsupported
    * components throws an exception. Asynchronous calls and **Modifier** API integration are not yet supported.
    *
    * @throws { BusinessError } 100017 - Component does not support prevent function.
@@ -11283,7 +11292,7 @@ declare interface TouchEvent extends BaseEvent {
    * **NOTE**
    *
    * This field is used when dispatching events using the
-   * [postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy} API. Each time an event is
+   * [postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy} API. Each time an event is
    * dispatched, this field is increased by 100000.
    *
    * Using the same **eventHandleId** for multiple event dispatches will cause abnormal event responses. This field only
@@ -11444,7 +11453,7 @@ declare interface AxisEvent extends BaseEvent {
    * **NOTE**
    *
    * This field is used when dispatching events using the
-   * [postInputEventWithStrategy]{@link BuilderNode:BuilderNode#postInputEventWithStrategy} API. Each time an event is
+   * [postInputEventWithStrategy]{@link @ohos.arkui.node:BuilderNode.postInputEventWithStrategy} API. Each time an event is
    * dispatched, this field is increased by 100000.
    *
    * Using the same **eventHandleId** for multiple event dispatches will cause abnormal event responses. This field only
@@ -11622,10 +11631,12 @@ declare type ShouldRecognizerParallelWithCallback = (current: GestureRecognizer,
 declare type TransitionFinishCallback = (transitionIn: boolean) => void;
 
 /**
- * Defines the callback type used in onNeedSoftkeyboard.
- * Called when component is focused, the return value indicates whether keyboard is needed.
+ * This callback is triggered when the component bound to this method determines whether a keyboard is required.
+ * Prerequisite: The component must be focusable; otherwise, this API does not take effect.
  *
- * @returns { boolean } True means keyboard is needed, false means keyboard is not needed.
+ * @returns { boolean } Whether the component needs a keyboard.
+ *     <br>If the return value of this callback is `true`, the component needs a keyboard; if the return value is
+ *     `false`, the component does not need a keyboard.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -14670,6 +14681,19 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.1 dynamiconly
    */
   closeButtonMaterial?: SystemUiMaterial;
+
+  /**
+   * Set the touch follow mode of the semi-modal page.
+   * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+   * -FOLLOW_GRIP_HAND: The layout follows the grip.
+   * -NONE: Retain the current layout.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -14733,7 +14757,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskExtraHeight?: LengthMetrics;
 
@@ -14741,16 +14765,11 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * Base color of the gradient mask.
    * This color serves as the maximum color at the top of the mask.
    * The system applies a built-in transparency curve to gradually fade it from top to bottom.
-   * When not set:
-   * on mid-to-high-performance devices: #CCF1F3F5 is used in light mode,
-   * and #66202224 is used in dark mode.
-   * On low-performance devices: #F2F1F3F5 is used in light mode,
-   * and #E5202224 is used in dark mode.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   maskColor?: ResourceColor;
 
@@ -14762,7 +14781,7 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   effectiveDistance?: LengthMetrics;
 }
@@ -14808,7 +14827,7 @@ declare enum SheetTitleBarHoverMode {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   SAFE_AREA_PADDING = 2
 }
@@ -14998,7 +15017,7 @@ declare enum DismissReason {
    * 
    * **NOTE**
    * 
-   * This API is effective only in [sheet transition]{@link common}.
+   * This API is effective only in [sheet transition]{@link CommonMethod}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -15014,7 +15033,7 @@ declare enum DismissReason {
    * 
    * **NOTE**
    * 
-   * This API is effective only in [sheet transition]{@link common}.
+   * This API is effective only in [sheet transition]{@link CommonMethod}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -18773,7 +18792,7 @@ declare class TouchResult {
  */
 declare interface DepthVector3 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18784,7 +18803,7 @@ declare interface DepthVector3 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18795,7 +18814,7 @@ declare interface DepthVector3 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18817,7 +18836,7 @@ declare interface DepthVector3 {
  */
 declare interface DepthVector4 {
   /**
-   * X component.
+   * X component of the depth space vector. This value has no unit.
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -18829,7 +18848,7 @@ declare interface DepthVector4 {
   x: double;
 
   /**
-   * Y component.
+   * Y component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18840,7 +18859,7 @@ declare interface DepthVector4 {
   y: double;
 
   /**
-   * Z component.
+   * Z component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -18851,7 +18870,7 @@ declare interface DepthVector4 {
   z: double;
 
   /**
-   * W component.
+   * W component of the depth space vector. This value has no unit.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -19183,28 +19202,9 @@ declare interface FadingEdgeOptions {
  * @interface NestedScrollOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 10
- */
-/**
- * Implements an object used to configure the
- * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 11 dynamic
- */
-/**
- * Implements an object used to configure the
- * [nestedScroll]{@link ScrollableCommonMethod#nestedScroll(value: NestedScrollOptions)} attribute.
- *
- * @interface NestedScrollOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 23 dynamic
+ * @crossplatform [since 23]
+ * @atomicservice [since 11]
+ * @since 10 dynamic
  */
 declare interface NestedScrollOptions {
   /**
@@ -19213,17 +19213,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Set NestedScrollMode when the scrollable component scrolls forward
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollForward: NestedScrollMode;
 
@@ -19233,17 +19225,9 @@ declare interface NestedScrollOptions {
    * @type { NestedScrollMode }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 10
-   */
-  /**
-   * Set NestedScrollMode when the scrollable component scrolls backward
-   *
-   * @type { NestedScrollMode }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 11]
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   scrollBackward: NestedScrollMode;
 }
@@ -19368,7 +19352,7 @@ declare interface MenuElement {
  * | MarqueeAttribute | [Attributes]{@link MarqueeAttribute} of Marquee. |
  * | MenuAttribute | [Attributes]{@link MenuAttribute} of Menu. |
  * | MenuItemAttribute | [Attributes]{@link MenuItemAttribute} of MenuItem. |
- * | MenuItemGroupAttribute | Attributes of [MenuItemGroup]{@link ./menu_item_group}. |
+ * | MenuItemGroupAttribute | Attributes of [MenuItemGroup]{@link @global:MenuItemGroup}. |
  * | NavDestinationAttribute | [Attributes]{@link NavDestinationAttribute} of NavDestination. |
  * | NavigationAttribute | [Attributes]{@link NavigationAttribute} of Navigation. |
  * | NavigatorAttribute | [Attributes]{@link NavigatorAttribute} of Navigator. |
@@ -19423,7 +19407,7 @@ declare interface MenuElement {
  * | <!--DelRow-->PluginComponentAttribute | [Attributes]{@link PluginComponentAttribute} of PluginComponent. |
  * | <!--DelRow-->RemoteWindowAttribute | [Attributes]{@link RemoteWindowAttribute} of RemoteWindow. |
  * | UIExtensionComponentAttribute | [Attributes]{@link UIExtensionComponentAttribute} of UIExtensionComponent. |
- * | ContainerReaderAttribute | [Attributes]{@link ContainerReaderAttribute} of ContainerReader.<br>**Since:** 26.0.0|
+ * | ContainerReaderAttribute | [Attributes]{@link @ohos.arkui.components.ContainerReader:ContainerReaderAttribute} of ContainerReader.<br>**Since:** 26.0.0|
  * 
  * > **NOTE**
  * >
@@ -19473,9 +19457,9 @@ declare interface AttributeModifier<T> {
    * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
    *     setting, for example, the
    *     [attribute]{@link ButtonAttribute} (
-   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     **ButtonAttribute**) of the [Button]{@link @global:Button} component and the
    *     [attribute]{@link TextAttribute} (**TextAttribute**)
-   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     of the [Text]{@link @global:Text} component. For details about the values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19494,9 +19478,9 @@ declare interface AttributeModifier<T> {
    * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
    *     setting, for example, the
    *     [attribute]{@link ButtonAttribute} (
-   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     **ButtonAttribute**) of the [Button]{@link @global:Button} component and the
    *     [attribute]{@link TextAttribute} (**TextAttribute**)
-   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     of the [Text]{@link @global:Text} component. For details about the values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19513,9 +19497,9 @@ declare interface AttributeModifier<T> {
    * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
    *     setting, for example, the
    *     [attribute]{@link ButtonAttribute} (
-   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     **ButtonAttribute**) of the [Button]{@link @global:Button} component and the
    *     [attribute]{@link TextAttribute} (**TextAttribute**)
-   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     of the [Text]{@link @global:Text} component. For details about the values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19532,9 +19516,9 @@ declare interface AttributeModifier<T> {
    * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
    *     setting, for example, the
    *     [attribute]{@link ButtonAttribute} (
-   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     **ButtonAttribute**) of the [Button]{@link @global:Button} component and the
    *     [attribute]{@link TextAttribute} (**TextAttribute**)
-   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     of the [Text]{@link @global:Text} component. For details about the values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19555,9 +19539,9 @@ declare interface AttributeModifier<T> {
    * @param { T } instance - Attribute class of the component, used to identify the component type for attribute
    *     setting, for example, the
    *     [attribute]{@link ButtonAttribute} (
-   *     **ButtonAttribute**) of the [Button]{@link ./button} component and the
+   *     **ButtonAttribute**) of the [Button]{@link @global:Button} component and the
    *     [attribute]{@link TextAttribute} (**TextAttribute**)
-   *     of the [Text]{@link ./text} component. For details about the values, see
+   *     of the [Text]{@link @global:Text} component. For details about the values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -19573,9 +19557,9 @@ declare interface AttributeModifier<T> {
    *
    * @param { T } instance - Component attribute class, used to identify the component type for attribute setting, for
    *     example, the [attributes]{@link ButtonAttribute} (
-   *     ButtonAttribute) of the [Button]{@link ./button} component and the
+   *     ButtonAttribute) of the [Button]{@link @global:Button} component and the
    *     [attributes]{@link TextAttribute} (TextAttribute) of
-   *     the [Text]{@link ./text} component. For details about the specific values, see
+   *     the [Text]{@link @global:Text} component. For details about the specific values, see
    *     [Attribute Type Support Scope]{@link AttributeModifier}.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -20028,8 +20012,8 @@ declare interface DragInteractionOptions {
 
   /**
    * Whether to enable multi-select clustering during drag operations. **true** to enable, **false** otherwise. This
-   * parameter takes effect only for the [grid items]{@link ./gridItem} and [list items]{@link ./list_item} in the
-   * [Grid]{@link ./grid} and [List]{@link ./list} containers.
+   * parameter takes effect only for the [grid items]{@link @global:GridItem} and [list items]{@link @global:ListItem} in the
+   * [Grid]{@link @global:Grid} and [List]{@link @global:List} containers.
    *
    * When this feature is enabled, child components cannot be dragged individually. Preview priority: string in
    * [dragPreview]{@link CommonMethod#dragPreview(value: CustomBuilder | DragItemInfo | string)} > PixelMap in
@@ -20511,7 +20495,7 @@ declare class CommonMethod<T> {
    * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
    * >    **auto** means adapting to the width of the largest index item.
    * >
-   * >  - In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
+   * >  - In the [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [RelativeContainer]{@link @global:RelativeContainer}
    * >    components, setting width to auto means adapting to the child components.
    *
    * @param { Length } value - Width of the component to set.<br>Unit: vp<br>When a percentage is set, the
@@ -20553,7 +20537,7 @@ declare class CommonMethod<T> {
    *
    * >  **NOTE**
    * >
-   * >  In the [Row]{@link ./row}, [Column]{@link ./column}, and [RelativeContainer]{@link ./relative_container}
+   * >  In the [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [RelativeContainer]{@link @global:RelativeContainer}
    * >  components, setting **width** and **height** to **auto** means that the size adapts to the size of their
    * >  child components.
    *
@@ -20600,7 +20584,7 @@ declare class CommonMethod<T> {
    *     drawing behavior and does not perform custom drawing.
    *     <br>Default value: **undefined**.
    *     <br>**Note:**
-   *     <br>Each custom drawing modifier takes effect only on the [FrameNode]{@link ./arkui/FrameNode:FrameNode}
+   *     <br>Each custom drawing modifier takes effect only on the [FrameNode]{@link @ohos.arkui.node:FrameNode}
    *     of
    *     the currently bound component, and does not take effect on its child nodes. Each DrawModifier instance can be
    *     set to only one component, and repeated setting is prohibited.
@@ -20909,7 +20893,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the layout weight of a component so that the component is allocated a size in the main-axis
-   * direction of the parent container ([Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex})
+   * direction of the parent container ([Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex})
    * according to the weight. It applies to scenarios where the parent container size is determined and
    * multiple child components need to allocate the remaining space proportionally.
    *
@@ -20922,7 +20906,7 @@ declare class CommonMethod<T> {
    *     the **width**\/**height** settings of the child components are ignored, but the **minWidth**\/
    *     **minHeight** constraints are retained.<br>Default value: 0<br>Value range: [0, +∞)<br>When the value
    *     is out of range: if a value less than 0 is passed in, it is processed as 0.<br>**NOTE**<br>This
-   *     attribute takes effect only in the [Row]{@link ./row}/[Column]{@link ./column}/[Flex]{@link ./flex}
+   *     attribute takes effect only in the [Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}
    *     layout.<br>The optional value is a number greater than or equal to 0, or a string that can be converted
    *     to a number (integer and decimal formats are supported).<br>If a child component in the container has
    *     the **layoutWeight** attribute set and the set value is greater than 0, all child components are no
@@ -20941,7 +20925,7 @@ declare class CommonMethod<T> {
   /**
    * Sets the weight of the component in a chain, which is used to re-lay out components that form the chain. This
    * attribute takes effect only when the parent container is
-   * [RelativeContainer]{@link ./relative_container}.
+   * [RelativeContainer]{@link @global:RelativeContainer}.
    *
    * **NOTE**
    *
@@ -21042,7 +21026,7 @@ declare class CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   safeAreaInset(options?: SafeAreaInsetOptions): T;
 
@@ -21056,7 +21040,7 @@ declare class CommonMethod<T> {
    *     of the **Length** type, the margins in all four directions take effect at the same time.<br>Default
    *     value: **0**<br>Unit: vp<br>When **margin** is set as a percentage, the top, bottom, left, and right
    *     margins all use the width of the parent container as the base value. When laying out in the
-   *     cross-axis direction of [Row]{@link ./row}, [Column]{@link ./column}, and [Flex]{@link ./flex}, the
+   *     cross-axis direction of [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [Flex]{@link @global:Flex}, the
    *     space occupied by a child component in the cross-axis direction includes the size of the child
    *     component itself and the **margin** value.<br>For example, if a **Column** container has a width of
    *     100, a child component has a width of 50, and the left and right margins are 10 and 20 respectively,
@@ -22031,7 +22015,7 @@ declare class CommonMethod<T> {
    * their parent components by default.
    *
    * @param { ResourceColor | ColoringStrategy } value - Foreground color. The value can be a specific color or a
-   *     coloring strategy. The [attribute animation]{@link common} is not supported.
+   *     coloring strategy. The [attribute animation]{@link CommonMethod} is not supported.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -22362,7 +22346,7 @@ declare class CommonMethod<T> {
    * is scrolled or two fingers on the touchpad slide or pinch.
    *
    * @param { Callback<AxisEvent> } event - Callback invoked when an axis event is triggered. It is used to receive the
-   *     [AxisEvent]{@link AxisEvent} object, which contains information such as the action type, coordinates, and
+   *     [AxisEvent]{@link @global:AxisEvent} object, which contains information such as the action type, coordinates, and
    *     scroll step of the axis event.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -22378,9 +22362,9 @@ declare class CommonMethod<T> {
    *
    * @param { boolean } value - Whether the component is focusable.<br>**true**: The component is focusable.<br>
    *     **false**: The component is not focusable.<br>**NOTE**<br>Components that have default interaction logic, such
-   *     as [Button]{@link button} and [TextInput]{@link text_input}, are focusable by default. Other components, such
-   *     as [Text]{@link text} and [Image]{@link image}, are not focusable by default. Only focusable components can
-   *     trigger a [focus event]{@link common}.
+   *     as [Button]{@link @global:Button} and [TextInput]{@link @global:TextInput}, are focusable by default. Other components, such
+   *     as [Text]{@link @global:Text} and [Image]{@link @global:Image}, are not focusable by default. Only focusable components can
+   *     trigger a [focus event]{@link CommonMethod}.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -24128,7 +24112,7 @@ declare class CommonMethod<T> {
    *     resides. The value 0 means the component does not participate in the allocation of remaining space and keeps
    *     its original size. When the value is greater than 0, the remaining space of the parent container is allocated
    *     proportionally; the larger the value, the more space is allocated.<br>Value range: [0, +∞)<br>Default value:
-   *     0<br>When the parent container is [Column]{@link ./column} or [Row]{@link ./row}, you need to set the size along
+   *     0<br>When the parent container is [Column]{@link @global:Column} or [Row]{@link @global:Row}, you need to set the size along
    *     the main axis (width/height/size); otherwise, the remaining space allocation effect of flexGrow may be
    *     affected.<br>[constraintSize]{@link constraintSize} restricts the size range of the component. When the
    *     component size after flexGrow expansion exceeds the maximum limit of constraintSize, it is constrained by
@@ -24163,10 +24147,10 @@ declare class CommonMethod<T> {
    *     attribute belongs when the parent container space is insufficient. The value 0 indicates that the component
    *     does not participate in compression; when the value is greater than 0, compression is performed
    *     proportionally, and a larger value indicates a larger compression amount.<br>When the parent container is
-   *     [Column]{@link ./column} or [Row]{@link ./row}, default value: 0, value range: [0, +∞).<br>When the parent
-   *     container is [Flex]{@link ./flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
+   *     [Column]{@link @global:Column} or [Row]{@link @global:Row}, default value: 0, value range: [0, +∞).<br>When the parent
+   *     container is [Flex]{@link @global:Flex}, default value: 1, value range: [0, +∞).<br>[constraintSize]{@link
    *     constraintSize} restricts the size range of the component. Even if [constraintSize]{@link constraintSize}
-   *     is set for [Column]{@link ./column} and [Row]{@link ./row}, when the main axis size (width/height/size) is not
+   *     is set for [Column]{@link @global:Column} and [Row]{@link @global:Row}, when the main axis size (width/height/size) is not
    *     set in the parent container, the default layout behavior is still followed, and the component size is
    *     adapted to the children on the main axis. In this case, flexShrink does not take effect.<br>When an
    *     exception value is set, this attribute uses the default value.
@@ -24212,7 +24196,7 @@ declare class CommonMethod<T> {
    * attribute is supported only by Flex, Column, Row, DynamicLayout, and GridRow containers.
    *
    * @param { ItemAlign } value - Alignment format of the child component on the cross axis of the parent container,
-   *     which overrides the alignItems setting in the [Flex]{@link ./flex}, [Column]{@link ./column}, [Row]{@link ./row},
+   *     which overrides the alignItems setting in the [Flex]{@link @global:Flex}, [Column]{@link @global:Column}, [Row]{@link @global:Row},
    *     DynamicLayout, and [GridRow]{@link GridRow} layout containers. Use it when a child
    *     component needs a different alignment from other child components in the parent container (typical scenarios:
    *     most child components in the parent container are center-aligned, but a specific child component needs top or
@@ -24257,7 +24241,7 @@ declare class CommonMethod<T> {
    *     range is [0, +∞).
    *     <br>Default value: **1**
    *     <br>**NOTE**<br>
-   *     Takes effect only in [Row]{@link ./row}/[Column]{@link ./column}/[Flex (single-line)]{@link Flex} container
+   *     Takes effect only in [Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex (single-line)]{@link Flex} container
    *     components.
    *     <br>Used when the container space is limited and the display order of components needs to be controlled or
    *     low-priority components need to be hidden (for example, dynamically displaying content based on the available
@@ -24442,7 +24426,7 @@ declare class CommonMethod<T> {
    * > **NOTE**
    * >
    * > - The effect of **position** on the position takes effect after the component's size measurement is complete.
-   * > - When the parent component is [Row]{@link ./row}, [Column]{@link ./column}, or [Flex]{@link ./flex}, a child component
+   * > - When the parent component is [Row]{@link @global:Row}, [Column]{@link @global:Column}, or [Flex]{@link @global:Flex}, a child component
    * with **position** set does not occupy space. In this scenario, if all child components contained in the parent
    * component have **position** set, the parent component's size cannot be determined by other child components, and
    * layout measurement is performed based on the size (0, 0).
@@ -24456,7 +24440,7 @@ declare class CommonMethod<T> {
    * > - This attribute is applicable to scenarios where components such as top-displayed elements and floating buttons
    * have fixed positions within the parent component.
    * > - This attribute is not supported on layout components with zero width and height.
-   * > - When the parent component is [RelativeContainer]{@link ./relative_container} and the child component has the
+   * > - When the parent component is [RelativeContainer]{@link @global:RelativeContainer} and the child component has the
    * [alignRules]{@link alignRules} attribute set, the child component's **position** attribute does not take effect.
    * > - If the parent component of the component where this attribute is located does not have a fixed width and
    * height, this component performs absolute positioning with reference to the first ancestor component that has a
@@ -24593,7 +24577,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rule for child components within the relative container. This attribute only takes effect when
-   * the parent container is [RelativeContainer]{@link ./relative_container},
+   * the parent container is [RelativeContainer]{@link @global:RelativeContainer},
    * and supports dynamic configuration via [attributeModifier]{@link attributeModifier}.
    *
    * @param { AlignRuleOption } value - Alignment rules in the relative container.
@@ -24608,7 +24592,7 @@ declare class CommonMethod<T> {
 
   /**
    * Sets the alignment rules in the relative container. This API is valid only when the container is
-   * [RelativeContainer]{@link ./relative_container},.
+   * [RelativeContainer]{@link @global:RelativeContainer},.
    * This attribute replaces the original **left** and **right** directional parameters with **start** and **end** to
    * support proper mirroring in right-to-left (RTL) layout modes. It is recommended that you use this attribute for
    * configuring child component alignment rules in relative containers. This attribute supports dynamic configuration
@@ -24750,8 +24734,8 @@ declare class CommonMethod<T> {
    * - If drag data is set, it is used in place of the default drag data.
    *
    * The custom drag preview is not supported for dragging selected text in the following components:
-   * [Text]{@link text}, [Search]{@link search}, [TextInput]{@link text_input}, [TextArea]{@link text_area},
-   * [RichEditor]{@link rich_editor} When **onDragStart** is used with menu preview or any component that provides
+   * [Text]{@link @global:Text}, [Search]{@link @global:Search}, [TextInput]{@link @global:TextInput}, [TextArea]{@link @global:TextArea},
+   * [RichEditor]{@link @global:RichEditor} When **onDragStart** is used with menu preview or any component that provides
    * default drag and drop capabilities, custom content on menu items and the preview cannot be dragged.
    *
    * **Event priority**: When the long press event trigger time is less than 500 ms, the long press event is responded
@@ -25325,6 +25309,39 @@ declare class CommonMethod<T> {
   shadow(options: Optional<ShadowOptions | ShadowStyle>): T;
 
   /**
+   * Sets the shadow shape for the component. The shadow is rendered according to the specified shape.
+   *
+   * This API works with the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} attribute.
+   * The shadow shape is recalculated when the component size changes.
+   *
+   * @param { CircleShape | EllipseShape | PathShape | RectShape | undefined } shape - Shadow shape.
+   *     When the value type is {@link CircleShape}, {@link EllipseShape},
+   *     {@link PathShape}, or {@link RectShape}, the shadow is rendered as the
+   *     corresponding shape. When the value is **undefined**, the shadow shape is cleared.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowShape(shape: CircleShape | EllipseShape | PathShape | RectShape | undefined): T;
+
+  /**
+   * Sets the clip mode for the [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)} when it is
+   * not filled. This API takes effect only when [ShadowOptions#fill]{@link ShadowOptions#fill} is set to **false**.
+   *
+   * @param { ShadowClipMode | undefined } mode - Clip mode of the shadow.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  shadowClipMode(mode: ShadowClipMode | undefined): T;
+
+  /**
    * Sets the edge light effect for the component.
    * 
    * <p><strong>NOTE</strong>:
@@ -25781,6 +25798,11 @@ declare class CommonMethod<T> {
   /**
   * Tips control
   *
+  * > **NOTE**
+  * >
+  * > When the [enabled]{@link CommonMethod#enabled} universal attribute of the component bound with **bindTips** is
+  * > set to **false**, the floating bubble can still be displayed.
+  *
   * @param { TipsMessageType } message
   * @param { TipsOptions } [options]
   * @returns { T }
@@ -25811,6 +25833,13 @@ declare class CommonMethod<T> {
 
   /**
    * Menu control
+   *
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
+   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
+   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
+   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
    *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
@@ -25843,6 +25872,12 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
+   *
    * @param { CustomBuilder } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
    *     is not supported.
@@ -25858,6 +25893,12 @@ declare class CommonMethod<T> {
   /**
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByResponseType** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
    *
    * @param { CustomBuilder | Array<MenuElement> } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu. Long pressing with a mouse device
@@ -25877,6 +25918,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | undefined } content - Indicates the content of context menu. Undefined
    *     means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25893,6 +25939,11 @@ declare class CommonMethod<T> {
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Custom or fixed-style menu items are supported. Long pressing with a mouse device is not supported.
    *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuWithResponse** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   *
    * @param { CustomBuilderT<ResponseType> | Array<MenuElement> | undefined } content - Indicates the content of
    *     context menu. Undefined means unbinding.
    * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
@@ -25908,6 +25959,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShown settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShown - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -25930,6 +25986,11 @@ declare class CommonMethod<T> {
 
   /**
    * Binds a context menu to the component, whose visibility is subject to the isShow settings.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenuByIsShow** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
    *
    * @param { boolean } isShow - true means display content, false means hide content, default is false.
    *     <p><strong>NOTE</strong>:
@@ -26085,7 +26146,7 @@ declare class CommonMethod<T> {
    * >
    * > - The following calculation scenarios are not supported: clipping by sibling nodes, clipping by siblings of any
    * > ancestor node, window-level occlusion, and component rotation. Examples include layouts using
-   * > [Stack]{@link stack}, [z-order control]{@link CommonMethod#zIndex}, and
+   * > [Stack]{@link @global:Stack}, [z-order control]{@link CommonMethod#zIndex}, and
    * > [rotate]{@link CommonMethod#rotate(value: RotateOptions)} transformations.
    * >
    * > - It does not support visibility change calculations for nodes that are not in the component tree. For example,
@@ -26126,7 +26187,7 @@ declare class CommonMethod<T> {
    * >
    * > - The following calculation scenarios are not supported: clipping by sibling nodes, clipping by siblings of any
    * > ancestor node, window-level occlusion, and component rotation. Examples include layouts using
-   * > [Stack]{@link stack}, [z-order control]{@link CommonMethod#zIndex}, and
+   * > [Stack]{@link @global:Stack}, [z-order control]{@link CommonMethod#zIndex}, and
    * > [rotate]{@link CommonMethod#rotate(value: RotateOptions)} transformations.
    * >
    * > - It does not support visibility change calculations for nodes that are not in the component tree. For example,
@@ -26177,7 +26238,7 @@ declare class CommonMethod<T> {
    * >
    * > - The following calculation scenarios are not supported: clipping by sibling nodes, clipping by siblings of any
    * > ancestor node, window-level occlusion, and component rotation. Examples include layouts using
-   * > [Stack]{@link stack}, [z-order control]{@link CommonMethod#zIndex}, and
+   * > [Stack]{@link @global:Stack}, [z-order control]{@link CommonMethod#zIndex}, and
    * > [rotate]{@link CommonMethod#rotate(value: RotateOptions)} transformations.
    * >
    * > - It does not support visibility change calculations for nodes that are not in the component tree. For example,
@@ -26302,7 +26363,12 @@ declare class CommonMethod<T> {
   /**
    * Applies a spatial effect to component.
    *
-   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters.
+   * This effect takes effect only on the child components of **DepthComponent** and only when the related parameters
+   * are correctly set. It is not supported on the **Web**, **XComponent**, **RichEditor**, **RichText**, **Video**,
+   * **Component3D**, or **EmbeddedComponent** components.
+   *
+   * @param { SpatialEffectParams | undefined } params - Spatial effect parameters. If this parameter is set to
+   * **undefined**, the spatial effect is removed.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -26365,12 +26431,12 @@ declare class CommonMethod<T> {
    * Sets custom key combinations for a component.
    *
    * @param { string | FunctionKey } value - Single character of the hotkey (a character that can be entered through
-   *     the keyboard) or [function key]{@link FunctionKey}.<br>An empty string means to cancel the keyboard shortcut
+   *     the keyboard) or [function key]{@link @global:FunctionKey}.<br>An empty string means to cancel the keyboard shortcut
    *     binding; a component with multiple keyboard shortcuts bound cannot unbind a keyboard shortcut.<br>When
    *     **value** contains multiple characters, the key combination is not bound, and the previously bound key
    *     combination remains valid.<br>
    * @param { Array<ModifierKey> } keys - Key combination.<br>The value of **keys** can be empty only when **value** is
-   *     a [function key]{@link FunctionKey}.<br>When **keys** contains duplicate modifier keys, the key combination
+   *     a [function key]{@link @global:FunctionKey}.<br>When **keys** contains duplicate modifier keys, the key combination
    *     is not bound, and the previously bound key combination remains valid.<br>
    * @param { function } [action] - Callback for the custom event triggered after the key combination shortcut is
    *     successfully triggered. If this parameter is not set, the behavior of the key combination shortcut is the
@@ -26833,10 +26899,10 @@ declare class CommonMethod<T> {
    * Sets how the component content is obscured.
    *
    * @param { Array<ObscuredReasons> } reasons - How the component content is obscured.<br>This API is only available
-   *     for the [Image]{@link ./image}<!--Del-->, [FormComponent]{@link ./form_component}<sup>12+</sup>,<!--DelEnd--> and
-   *     [Text]{@link ./text} components.<br>**NOTE**<br>To obscure an image when it is being loaded, you must set the width
+   *     for the [Image]{@link @global:Image}<!--Del-->, [FormComponent]{@link @global:FormComponent}<sup>12+</sup>,<!--DelEnd--> and
+   *     [Text]{@link @global:Text} components.<br>**NOTE**<br>To obscure an image when it is being loaded, you must set the width
    *     and height of the **Image** component.<br>Obscuring is not available for **Text** components that have child
-   *     components or have any [styled string]{@link ./styled_string} configured.
+   *     components or have any [styled string]{@link @global:StyledString} configured.
    *     <br>Default value: [].
    * @returns { T } Returns the current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27155,7 +27221,7 @@ declare class CommonMethod<T> {
    * > animations compare the layout state before the animation starts with the state after the animation closure is
    * > executed. If the **onSizeChange** callback is triggered synchronously during the pre-animation layout phase, the
    * > changes made in this callback will be processed as part of the animation, along with the changes in the animation
-   * > closure. To avoid this issue, you can use [setTimeout]{@link api/@internal/ets/global:setTimeout} or
+   * > closure. To avoid this issue, you can use [setTimeout]{@link @global:setTimeout} or
    * > [postFrameCallback]{@link @ohos.arkui.UIContext:UIContext#postFrameCallback} (with a 0 ms delay) inside
    * > **onSizeChange** to defer the UI processing logic to asynchronous execution.
    *
@@ -27305,15 +27371,41 @@ declare class CommonMethod<T> {
   /**
    * Called when component is focused, the return value indicates whether keyboard is needed.
    *
-   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - Callback executed when an event is
-   *     triggered. The system determines whether a keyboard is required based on the return value of the callback. If this
-   *     parameter is set to undefined, no callback is triggered, and the input box component returns true. For other
-   *     components, false is returned. Prerequisite: The component must be able to obtain focus. Otherwise, this interface
-   *     does not take effect. When the return value is true, the self-drawn text box needs to actively invoke the
-   *     [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig:
-   *     TextConfig, requestKeyboardReason: RequestKeyboardReason)} method to establish input method communication when the
-   *     focus is obtained. Otherwise, the keyboard does not respond.
-   * @returns { T }
+   * This API does not take effect for components that cannot gain focus.
+   *
+   * For the text box, if the return value of this API is set to **false**, the keyboard will not be displayed when the
+   * text box is tapped.
+   *
+   * When the **Web** component uses this method, if the return value is `true`, the **Web** component checks whether
+   * there are editable nodes in the component and retains the keyboard only if editable nodes exist; if the return
+   * value is `false`, the keyboard is not retained regardless of whether editable nodes exist.
+   *
+   * When the **XComponent** component uses this method, the keyboard is retained only if the return value is `true` and
+   * the **XComponent** component sets [OH_ArkUI_XComponent_SetNeedSoftKeyboard()](docroot://reference/apis-arkui/
+   * capi-native-interface-xcomponent-h.md#oh_arkui_xcomponent_setneedsoftkeyboard)
+   * to request a keyboard; if the return value is `false`, the keyboard is not retained regardless of how the component
+   * is configured.
+   *
+   * When the return value is `true`, the self-drawn input box of the application needs to proactively call [attach]
+   * {@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean, textConfig: TextConfig,
+   * requestKeyboardReason: RequestKeyboardReason)} upon focus acquisition to establish the communication between the
+   * input method framework and the input method application; otherwise, tapping the keyboard will not respond.
+   * Note: The communication between the input method framework and the input method application is disconnected upon
+   * focus loss and needs to be re-established upon focus acquisition.
+   *
+   * This API is applicable only to the scenario of input method application continuation and does not take effect for
+   * custom keyboards. For custom keyboard continuation, see
+   * [setCustomKeyboardContinueFeature]{@link @ohos.arkui.UIContext:UIContext#setCustomKeyboardContinueFeature}.
+   *
+   * @param { OnNeedSoftkeyboardCallback | undefined } onNeedSoftkeyboardCallback - Callback invoked when the event is
+   *     triggered. The system determines whether the keyboard is needed based on the return value of the callback.
+   *     <br>When set to undefined, the callback is not triggered, and input box components behave as if returning true.
+   *     Other components behave as if returning false. Prerequisite: The component must be focusable; otherwise, this
+   *     API does not take effect. When the return value is true, the self-drawn input box must proactively call the
+   *     [attach]{@link @ohos.inputMethod:inputMethod.InputMethodController.attach(showKeyboard: boolean,
+   *     textConfig: TextConfig, requestKeyboardReason: RequestKeyboardReason)} method upon focus acquisition to
+   *     establish communication with the input method; otherwise, tapping the keyboard will not respond.
+   * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -28884,6 +28976,16 @@ declare type Theme = import('../api/@ohos.arkui.theme').Theme;
 declare type PromptActionDialogController = import('../api/@ohos.promptAction').promptAction.DialogController;
 
 /**
+ * Import the HandednessFollowMode type from a dialog.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type HandednessFollowMode = import('../api/@ohos.arkui.dialog').HandednessFollowMode;
+
+/**
  * Custom Component
  *
  * @extends CommonAttribute [since 7 - 17]
@@ -29459,7 +29561,7 @@ declare interface RectResult {
  */
 declare interface CaretOffset {
   /**
-   * Index of the caret position.
+   * Index of the position where the caret is located. The value starts from 0 and ranges from 0 to the text length.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -29547,7 +29649,7 @@ declare abstract class TextContentControllerBase {
    * > - The position information in the return value is the position of the caret relative to the editable component.
    * >
    * > - When the caret position cannot be obtained (for example, when [TextInputController]{@link TextInputController}
-   * > is not bound to the [TextInput]{@link ./text_input} component), this API returns undefined.
+   * > is not bound to the [TextInput]{@link @global:TextInput} component), this API returns undefined.
    *
    * @returns { CaretOffset } Position of the caret relative to the text box.
    *     <br>If no component is bound to the controller or the component bound to the controller is released,
@@ -29563,6 +29665,13 @@ declare abstract class TextContentControllerBase {
   /**
    * Obtains the position of the edited text area relative to the component and its size. The unit of the return value
    * is pixel.
+   *
+   * > **NOTE**
+   * > - If no text is entered, the return value contains the position information, but the size is 0.
+   * > - The position information is the offset of the first character relative to the editable area.
+   * > - For the **Search** component, the returned position information is the offset of the first character relative
+   * to the search icon in the component.
+   * > - If there is input, the width in the return value is the fixed width of the editable area.
    *
    * @returns { RectResult } Position of the edited text area relative to the component and its size.
    *     <br>If no component is bound to the controller or the component bound to the controller is released,
@@ -29601,9 +29710,8 @@ declare abstract class TextContentControllerBase {
    * preview text state.
    *
    * > **NOTE**
-   * >
    * > When the controller is not bound to a component or the component bound to the controller is released, this API
-   * > does not take effect.
+   * does not take effect.
    *
    * @param { string } text - Text to insert.
    * @param { TextContentControllerOptions } [textOperationOptions] - Configuration options for inserting text, used to
@@ -29675,7 +29783,10 @@ declare abstract class TextContentControllerBase {
   getSelection(): TextRange;
 
   /**
-   * Obtains the text content within a specified range.
+   * Obtains the text content within a specified range.This API can be used in the following scenarios:
+   * - Obtain the text content selected by the user in a text editor for processing.
+   * - Obtain the text content within a specific range for checking during content validation.
+   * - Extract part of the text content for analysis or conversion in a text processing application.
    *
    * @param { TextRange } [range] - Range of the text content to obtain, defined by start and end positions.<br>If the
    *     range is not specified, the entire text is obtained by default. If the start position is not specified, it defaults
@@ -29755,6 +29866,9 @@ declare abstract class TextContentControllerBase {
    *
    * This API is not effective in the state of dragged text.
    *
+   * `deleteBackward` only affects the internal UI behavior of the application and does not affect the internal logic of
+   * the input method application. It is not supported in the preview text scenario.
+   *
    * > **NOTE**
    * >
    * > When the controller is not bound to a component or the component bound to the controller is released, this API is
@@ -29823,19 +29937,9 @@ declare enum ContentClipMode {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 12]
  * @atomicservice
- * @since 11
- */
-/**
- * CommonScrollableMethod
- *
- * @extends CommonMethod<T>
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @form
- * @atomicservice
- * @since 12 dynamic
+ * @since 11 dynamic
  */
 declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
@@ -30160,9 +30264,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
    *    pressed.
-   *    <br>Default value: For API versions earlier than 26.2.0,the defalut value is false.
-   *    For API versions 26.2.0 and later, the defalut value is true when the scrollable component scrolls
-   *    horizontally,false otherwise.
+   *    <br>true: Supports dragging to scroll with the left mouse button pressed.
+   *    <br>false: Not support dragging to scroll with the left mouse button pressed.
+   *    <br>undefined: When first set to undefined, the default value is used. When set to undefined subsequently, 
+   *    the previous setting remains unchanged.
+   *    <br>Default value: For API versions earlier than 26.1.0, the default value is false.
+   *    For API versions 26.1.0 and later, the default value is true when the scrollable component scrolls
+   *    horizontally, false otherwise.
    * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -30203,7 +30311,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * scroll operation. The offset returned in the callback is the calculated offset to be scrolled, not the final actual
    * scroll offset. You can specify the offset to be scrolled by the scrollable component through the return value of 
    * this callback. The parameter type of the [onWillScroll]{@link ScrollAttribute#onWillScroll} API of the 
-   * [Scroll]{@link ./scroll} component is [ScrollOnWillScrollCallback]{@link ScrollOnWillScrollCallback}.
+   * [Scroll]{@link @global:Scroll} component is [ScrollOnWillScrollCallback]{@link ScrollOnWillScrollCallback}.
    * 
    * > **NOTE**
    * >
@@ -30432,7 +30540,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * Sets the content clipping area for this scrollable component.
    *
    * Since API version 26.0.0, child components within the content-layer clipping area can be displayed normally. In
-   * versions earlier than API version 26.0.0, when the content-layer clipping area of the [List]{@link ./list}
+   * versions earlier than API version 26.0.0, when the content-layer clipping area of the [List]{@link @global:List}
    * component is larger than the component itself, child components that are completely outside the component area but
    * within the clipping area are not displayed by default. To display them, set the **show** parameter of the
    * **cachedCount** attribute of the component to **true**. However, because the preloaded child components set by the
@@ -30457,7 +30565,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   /**
    * Sets the sensitivity of the digital crown's response to events.
    * 
-   * A component must have focus to receive [crown events]{@link ./common}. Focus control can be managed using 
+   * A component must have focus to receive [crown events]{@link CommonMethod}. Focus control can be managed using 
    * [focusable]{@link CommonMethod#focusable}, [defaultFocus]{@link CommonMethod#defaultFocus}, and 
    * [focusOnTouch]{@link CommonMethod#focusOnTouch}.
    *
@@ -30533,7 +30641,7 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enableScrollWithKeyboard(enabled: boolean | undefined): T;
 }
@@ -30663,7 +30771,7 @@ declare type OnDidStopDraggingCallback = (willFling: boolean) => void;
 /**
  * Defines the callback type invoked when the indexes of the child components displayed by the lazy loading layout
  * containers [LazyColumnLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazycolumnlayout.md),
- * [LazyVGridLayout]{@link ./lazy_grid_layout}, and
+ * [LazyVGridLayout]{@link @global:LazyVGridLayout}, and
  * [LazyVWaterFlowLayout](docroot://reference/apis-arkui/arkui-ts/ts-container-lazyvwaterflowlayout.md) change.
  *
  * > **NOTE**
@@ -30763,6 +30871,40 @@ declare interface ItemDragEventHandler {
 /**
  * Define DynamicNode.
  *
+ * Drag sorting is used to implement manual sorting of list items or grid items,
+ * and is applicable to scenarios where users need to customize the order of items,
+ * such as to-do list sorting and playlist management. By using ForEach/LazyForEach/Repeat within a List
+ * or Grid component and setting the onMove event, drag sorting can be enabled when each iteration generates a ListItem
+ * or GridItem. After the drag is released, if the data position changes,
+ * the onMove event is triggered to report the start index and target index of the data movement. In the onMove event,
+ * the data source must be modified based on the reported start index and target index.
+ * Ensure that only the order of the data changes so that the placement animation can be executed properly.
+ *
+ * > **NOTE**
+ * >
+ * > - Supported since API version 12. If new content is added in later versions,
+ * > - a superscript is used to mark the earliest API version of the content.
+ * >
+ * > - Since API version 26.0.0, Grid supports onMove drag sorting. Currently,
+ * > - Grid supports onMove drag sorting only in scrollable scenarios.
+ * > - When a Grid contains GridItems spanning rows and columns,
+ * > - if the next GridItem to be placed cannot fully fit in the current row,
+ * > - the system searches downward row by row until it can be placed.
+ * > - Therefore, when drag sorting is performed in a Grid with GridItems spanning rows and columns,
+ * > - the new layout after dragging may contain some gaps.
+ * > - You can drag again to adjust the GridItem positions to fill the gaps.
+ * >
+ * > - When setting nodes spanning rows and columns in a Grid,
+ * > - use [GridLayoutOptions](ts-container-grid.md#gridlayoutoptions10).
+ * > - In the onMove event, the application should synchronously modify the corresponding irregular node information
+ * > - to keep it consistent with the new layout after dragging.
+ * > - For details, see
+ * > - [Example 4](#example-4-using-foreach-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback),
+ * > - [Example 5](#example-5-using-lazyforeach-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback)
+ * > - ,and [Example 6](#example-6-using-repeats-onmove-for-drag-sorting-in-grid-irregular-layout-and-setting-the-drag-event-callback).
+ * >
+ * > - The APIs of this module can be used only in the stage model.
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -30772,7 +30914,7 @@ declare interface ItemDragEventHandler {
 declare class DynamicNode<T> {
   /**
    * Callback for data movement during drag sorting. It takes effect only when the parent container component is
-   * [List]{@link ./list} or [Grid]{@link ./grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
+   * [List]{@link @global:List} or [Grid]{@link @global:Grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
    * or GridItem component. After being called, the drag sorting feature is enabled. After the drag is released, if the
    * data position changes, the handler callback is triggered to report the start index and target index of the data
    * movement. The data source must be modified in the callback, and it must be ensured that only the order of the data
@@ -30792,7 +30934,7 @@ declare class DynamicNode<T> {
 
   /**
    * Callback for data movement during drag sorting. It takes effect only when the parent container component is
-   * [List]{@link ./list} or [Grid]{@link ./grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
+   * [List]{@link @global:List} or [Grid]{@link @global:Grid} and each iteration of ForEach/LazyForEach/Repeat generates a ListItem
    * or GridItem component. After being called, the drag sorting feature is enabled. After the drag is released, if the
    * data position changes, the handler callback is triggered to report the start index and target index of the data
    * movement. The data source must be modified in the callback, and it must be ensured that only the order of the data
@@ -30816,15 +30958,6 @@ declare class DynamicNode<T> {
   onMove(handler: Optional<OnMoveHandler>, eventHandler: ItemDragEventHandler): T;
   
 /**
- * Define EdgeEffect Options.
- *
- * @interface EdgeEffectOptions
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @since 11
- */
-/**
  * Implements an object used to configure the
  * [edgeEffect]{@link ScrollableCommonMethod#edgeEffect(edgeEffect: EdgeEffect, options?: EdgeEffectOptions)} attribute.
  *
@@ -30832,8 +30965,8 @@ declare class DynamicNode<T> {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @atomicservice
- * @since 12 dynamic
+ * @atomicservice [since 12]
+ * @since 11 dynamic
  */
 declare interface EdgeEffectOptions {
   /**
@@ -31787,7 +31920,7 @@ declare interface UICommonEvent {
   setOnDisappear(callback: Callback<void> | undefined): void;
 
   /**
-    * Sets the callback for the [key event]{@link common}. When **callback** is undefined, resets the callback for the
+    * Sets the callback for the [key event]{@link CommonMethod}. When **callback** is undefined, resets the callback for the
     * key event.
     *
     * @param { Callback<KeyEvent> | undefined } callback - Callback function for the key event. The signature is
@@ -32368,7 +32501,7 @@ declare interface InputEventInterceptResult {
  * > - The object is empty and does not contain any accessible members.
  * >
  * > - Developers cannot create this object on their own. It can only be obtained by registering through the
- * > [addLocalInputEventMonitor]{@link UIContext:UIContext#addLocalInputEventMonitor} API.
+ * > [addLocalInputEventMonitor]{@link @ohos.arkui.UIContext:UIContext.addLocalInputEventMonitor} API.
  * >
  * > - It is used for identity verification when unregistering later.
  *

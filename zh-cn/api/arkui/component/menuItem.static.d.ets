@@ -114,7 +114,7 @@ export declare interface MenuItemOptions {
     builder?: CustomBuilder;
 }
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -203,7 +203,7 @@ export declare interface MenuItemAttribute extends CommonMethod {
      * 设置MenuItem组件的属性修改器。
      *
      * @param { AttributeModifier<MenuItemAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - MenuItem
-     *     组件的属性修改器。取值为undefined时，则不使用属性修改器。<br/>CommonMethod：[通用属性]{@link common}
+     *     组件的属性修改器。取值为undefined时，则不使用属性修改器。<br/>CommonMethod：[通用属性]{@link CommonMethod}
      * @returns { MenuItemAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

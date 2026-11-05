@@ -124,7 +124,7 @@ export declare interface GridItemAttribute extends CommonMethod {
   /**
    * 设置当前GridItem元素是否可以被鼠标框选。外层Grid容器的鼠标框选开启时，GridItem的框选才生效。
    *
-   * 该属性需要在设置[多态样式]{@link common}前使用才能生效选中态样式。
+   * 该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * @param { boolean | undefined } value
    * @returns { GridItemAttribute }
@@ -139,7 +139,7 @@ export declare interface GridItemAttribute extends CommonMethod {
    *
    * 从API version 23开始，该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *
-   * 该属性需要在设置[多态样式]{@link common}前使用才能生效选中态样式。
+   * 该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * @param { boolean | Bindable<boolean> | undefined } value
    * @returns { GridItemAttribute }

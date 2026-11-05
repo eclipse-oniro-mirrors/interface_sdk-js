@@ -30,6 +30,8 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 /**
   * This module provides the capability to manage web modules.
   *
+  * ## Required Permissions
+  *
   * **ohos.permission.INTERNET**, required for accessing online web pages. For details about how to apply for a permission,
   * see [Declaring Permissions](docroot://security/AccessToken/declare-permissions.md).
   *
@@ -4614,6 +4616,46 @@ declare namespace webview {
         getSubframeErrorPageEnabled(): boolean;
 
         /**
+         * Enables or disables automatic reload for error pages.
+         *
+         * When enabled, the Web component automatically retries loading on network errors
+         * using a retry backoff sequence: 1s → 5s → 30s → 1min → 5min → 10min → 30min.
+         * Retries stop after 7 attempts with increasing delays.
+         *
+         * > **NOTE**
+         * >
+         * > - Only network errors trigger auto-reload. The following are excluded:
+         * > certificate errors, SSL (Secure Sockets Layer) protocol errors, authentication errors,
+         * > POST requests, non-HTTP(S) protocols, and errors blocked by the client.
+         * > - Auto-reload does not affect the {@link onOverrideErrorPage} callback.
+         * > - When auto-reload is triggered, the {@link onErrorReceive} callback will be
+         * > invoked again for each retry attempt.
+         *
+         * @param { boolean } enable - Whether to enable automatic reload. The value **true** enables it,
+         *     and **false** disables it.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        enableAutoReload(enable: boolean): void;
+
+        /**
+         * Returns whether automatic reload for error pages is enabled.
+         *
+         * @returns { boolean } Whether automatic reload is enabled. Returns **true** if enabled, **false** otherwise.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        isAutoReloadEnabled(): boolean;
+
+        /**
          * After enable PrivateNetworkAccess feature, ArkWeb will send a CORS preflight request before issuing any
          * sub-resource private network requests to request explicit permission from the target server.
          * After disable PrivateNetworkAccess, ArkWeb will no longer check whether the private network request
@@ -4797,7 +4839,7 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         setZoomFactor(zoomFactor: double): void;
 
@@ -4810,9 +4852,56 @@ declare namespace webview {
          *     The WebviewController must be associated with a Web component.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         getZoomFactor(): double;
+
+        /**
+         * Sets a key-value pair of user data on the current navigation entry.
+         *
+         * The user data is associated with the NavigationEntry lifecycle. The current navigation entry
+         * refers to the active entry in the navigation history. When the entry is destroyed
+         * (e.g., via history navigation or clearHistory), the user data is cleared. If a value with
+         * the same key already exists, it will be overwritten.
+         *
+         * @param { string } key - Key of the user data.
+         * @param { string } value - Value of the user data.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        setNavigationEntryUserData(key: string, value: string): void;
+
+        /**
+         * Obtains the user data value associated with the specified key on the current navigation entry.
+         *
+         * @param { string } key - Key of the user data.
+         * @returns { string } Value of the user data, or an empty string if the key does not exist.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        getNavigationEntryUserData(key: string): string;
+
+        /**
+         * Removes the user data associated with the specified key from the current navigation entry.
+         * If the key does not exist, this API does nothing.
+         *
+         * @param { string } key - Key of the user data to remove.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this API.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        removeNavigationEntryUserData(key: string): void;
 
         /**
          * Removes visited link records that changed after the specified date.

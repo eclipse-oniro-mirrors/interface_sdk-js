@@ -78,7 +78,7 @@ declare namespace wifiManagerExt {
    * 获取支持的功率模式。使用callback异步回调。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerMode>> } callback - 回调函数。当操作成功时，err为0，data表示支持的功率模式。如果err为非0，表示获取支持的功率模式操作出现错误。
+   * @param { AsyncCallback<Array<PowerMode>> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.
@@ -104,7 +104,7 @@ declare namespace wifiManagerExt {
    * 获取功率模式。使用callback异步回调。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerMode> } callback - 回调函数。当操作成功时，err为0，data表示功率模式。如果err为非0，表示获取功率模式操作出现错误。
+   * @param { AsyncCallback<PowerMode> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2701000 - Operation failed.

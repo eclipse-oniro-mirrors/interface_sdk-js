@@ -68,7 +68,7 @@ declare interface PathOptions {
   height?: Length;
 
   /**
-   * 路径绘制的命令字符串，符合[SVG路径描述规范]{@link ./path#svg路径描述规范}，单位为px。
+   * 路径绘制的命令字符串，符合[SVG路径描述规范]{@link svg路径描述规范}，单位为px。
    * 
    * 默认值：空字符串
    * 
@@ -90,7 +90,7 @@ declare interface PathOptions {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -98,7 +98,7 @@ declare interface PathOptions {
  * @form [since 9]
  * @atomicservice [since 11]
  * @since 7 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 interface PathInterface {
   /**
@@ -142,20 +142,20 @@ interface PathInterface {
  * @form [since 9]
  * @atomicservice [since 11]
  * @since 7 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
   /**
-   * 设置符合[SVG路径描述规范]{@link ./path#svg路径描述规范}的命令字符串，单位为px。命令字符串决
+   * 设置符合[SVG路径描述规范]{@link svg路径描述规范}的命令字符串，单位为px。命令字符串决
    * 定了路径的绘制形状和轨迹。支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。像素单位转换方法请参考
-   * [像素单位转换]{@link ./common}。
+   * [像素单位转换]{@link CommonMethod}。
    *
    * @param { string } value - 路径绘制的命令字符串，需符合
-   *     [SVG路径描述规范]{@link ./path#svg路径描述规范}，单位为px。
+   *     [SVG路径描述规范]{@link svg路径描述规范}，单位为px。
    *     <br>默认值：空字符串
    *     <br>异常值undefined和null按照默认值处理。 [since 7 - 19]
    * @param { ResourceStr } value - 路径绘制的命令字符串，需符合
-   *     [SVG路径描述规范]{@link ./path#svg路径描述规范}，单位为px。
+   *     [SVG路径描述规范]{@link svg路径描述规范}，单位为px。
    *     <br>默认值：空字符串
    *     <br>异常值undefined和null按照默认值处理。 [since 20]
    * @returns { PathAttribute }
@@ -173,14 +173,14 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
  * 
  * > **说明：**
  * >
- * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link ../../../arkui/AttributeUpdater}类的
+ * > 该组件从API version 20开始支持使用[AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater}类的
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#属性)接口更新构造参数。
  *
  * ###### 子组件
  * 
  * 无
  * 
- * ## SVG路径描述规范
+ * ###### SVG路径描述规范
  * 
  * SVG路径描述规范支持的命令如下：
  * 
@@ -252,7 +252,7 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
  * @form [since 9]
  * @atomicservice [since 11]
  * @since 7 dynamic
- * @noninterop
+ * @noninterop [since 11]
  */
 declare const Path: PathInterface;
 

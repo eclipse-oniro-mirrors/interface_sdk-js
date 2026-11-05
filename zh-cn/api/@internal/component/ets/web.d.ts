@@ -1547,7 +1547,7 @@ type OnContextMenuHideCallback = () => void;
  *     <br>默认值：见options的默认值。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: WebContextMenuOptions) => void;
 
@@ -1556,7 +1556,7 @@ type OnContextMenuUpdateCallback = (menuItemId: WebContextMenuItemId, options?: 
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare enum WebContextMenuItemId {
   /**
@@ -1564,7 +1564,7 @@ declare enum WebContextMenuItemId {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   MENU_COPY_LINK = 11
 }
@@ -1574,7 +1574,7 @@ declare enum WebContextMenuItemId {
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface WebContextMenuOptions {
   /**
@@ -1583,7 +1583,7 @@ declare interface WebContextMenuOptions {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   enable?: boolean;
 }
@@ -1794,6 +1794,12 @@ declare class FileSelectorParam {
   /**
    * 获取文件过滤类型。
    *
+   * > **说明：**
+   * >
+   * > 与getMimeTypes和getAcceptableFileTypes的对应关系：getAcceptType和getMimeTypes对应HTML input标签的accept属性，
+   * > getAcceptableFileTypes对应HTML showOpenFilePicker、showDirectoryPicker、showSaveFilePicker接口参数options的types属性。
+   * > 根据HTML规范，accept属性与types属性为互斥关系，不应同时使用。
+   *
    * @returns { Array<string> } 返回文件过滤类型数组，包含用于限制文件选择器可选文件范围的类型信息。元素为扩展名（如'.png'），对应HTML accept属性。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -1988,7 +1994,7 @@ declare class HttpAuthHandler {
    *
    * @param { string } userName - HTTP认证用户名，需为非空字符串。
    * @param { string } password - HTTP认证密码，需为非空字符串。
-   * @returns { boolean } 认证成功时返回true，失败返回false。
+   * @returns { boolean } 返回值仅表示接口调用状态，不代表认证结果。true表示调用成功，false表示调用失败。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -3007,7 +3013,7 @@ declare class WebContextMenuParam {
    * @returns { boolean } **true**表示当前选中文本可用于生成Text Fragment链接；**false**表示不可用。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   shouldOfferLinkToText(): boolean;
 
@@ -3019,7 +3025,7 @@ declare class WebContextMenuParam {
    * @returns { string } 包含**#:~:text=**片段、符合W3C Text Fragments规范的Text Fragment链接URL。若当前选中文本不支持链接生成，返回空字符串。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   getTextFragmentGeneratedLink(): string;
 
@@ -3031,7 +3037,7 @@ declare class WebContextMenuParam {
    * @returns { boolean } **true**表示当前页面存在Text Fragment高亮；**false**表示不存在。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   isOverTextFragment(): boolean;
 }
@@ -3149,6 +3155,10 @@ declare class WebContextMenuResult {
   /**
    * 执行重做操作，重新执行被撤销的操作。
    * 
+   * **配合关系：**
+   * - 与undo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。
@@ -3161,6 +3171,10 @@ declare class WebContextMenuResult {
   /**
    * 执行撤销操作，撤销上一次的编辑操作。
    * 
+   * **配合关系：**
+   * - 与redo()方法配合使用，调用undo()后，可以通过redo()重新执行被撤销的操作。
+   * - 如果用户未执行过撤销操作，则无法使用redo()方法。
+   *
    * > **说明：**
    * >
    * > 完成操作后，应调用[closeContextMenu]{@link WebContextMenuResult#closeContextMenu}关闭菜单，未调用可能导致菜单资源未正确释放。
@@ -3221,7 +3235,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   copyLinkToTextMenu(): void;
 
@@ -3236,7 +3250,7 @@ declare class WebContextMenuResult {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   removeFragments(): void;
 }
@@ -3959,7 +3973,7 @@ declare class WebController {
    * 
    * 当baseUrl为“http/https”协议时，编码后的data字符串将被Web组件以类似loadUrl的方式以非编码字符串处理。
    *
-   * @param { object } options The options with the data or URL and other information.
+   * @param { object } options 包含数据或URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3974,7 +3988,7 @@ declare class WebController {
    * 
    * 而通过registerJavaScriptProxy注入的对象，在loadUrl导航到新的页面也会有效。
    *
-   * @param { object } options The options with the URL and other information.
+   * @param { object } options 包含URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -4347,10 +4361,12 @@ declare interface IntelligentTrackingPreventionDetails {
 interface WebInterface {
   /**
    * Sets Value.
-   * 
+   *
    * > **说明：**
    * >
-   * > - 在HTML5侧，调用console.log或console.info对应ConsoleMessage的信息级别都为MessageLevel.Info。
+   * > - 不支持转场动画。
+   * >
+   * > - 为了保证各Web组件间的独立性和性能隔离，同一页面内的多个Web组件应分别绑定不同的WebviewController实例。
    *
    * @param { WebOptions } value - Web组件的初始化配置选项，用于设置加载的网页资源（src）、绑定的控制器（controller）以及渲染模式等行为参数。具体属性结构请参考WebOptions接口定义。
    * @returns { WebAttribute }
@@ -6329,6 +6345,270 @@ declare interface BlankScreenDetectionEventInfo {
 type OnDetectBlankScreenCallback = (event: BlankScreenDetectionEventInfo) => void;
 
 /**
+ * 白屏归因的具体原因，从网络层、资源层、渲染与JS层、内核与进程层、容器层标识白屏问题的根因，帮助开发者快速定位白屏问题来源，提升页面加载问题的排查效率和用户体验。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare enum BlankScreenReason {
+  /**
+   * DNS解析失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  DNS_RESOLVE_FAILED = 101,
+  /**
+   * 主文档加载超时。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REQUEST_TIMED_OUT = 102,
+  /**
+   * 连接被拒绝。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_REFUSED = 103,
+  /**
+   * 连接被重置。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CONNECTION_RESET = 104,
+  /**
+   * 发生SSL错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  SSL_ERROR = 105,
+  /**
+   * 发生证书错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CERT_ERROR = 106,
+  /**
+   * 网络已断开。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  INTERNET_DISCONNECTED = 107,
+  /**
+   * 发生重定向循环。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  REDIRECT_LOOP = 108,
+  /**
+   * 发生代理错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  PROXY_ERROR = 109,
+  /**
+   * 其他网络错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  OTHER_NETWORK_ERROR = 199,
+  /**
+   * 主文档为空。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MAIN_DOC_EMPTY = 201,
+  /**
+   * 发生HTTP 4xx错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_4XX_ERROR = 202,
+  /**
+   * 发生HTTP 5xx错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  HTTP_5XX_ERROR = 203,
+  /**
+   * JavaScript全局bundle加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_GLOBAL_BUNDLE_LOAD_FAILED = 210,
+  /**
+   * CSS加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSS_LOAD_FAILED = 211,
+  /**
+   * 多个资源加载失败。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MULTI_RESOURCE_LOAD_FAILED = 212,
+  /**
+   * 请求被CORS拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CORS_BLOCKED = 213,
+  /**
+   * 请求被CSP拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  CSP_BLOCKED = 214,
+  /**
+   * 混合内容被拦截。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  MIXED_CONTENT_BLOCKED = 215,
+  /**
+   * 发生JavaScript运行时错误。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  JS_RUNTIME_ERROR = 301,
+  /**
+   * 未发生首次内容绘制。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  NO_FIRST_CONTENTFUL_PAINT = 312,
+  /**
+   * 渲染进程崩溃。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_CRASHED = 401,
+  /**
+   * 渲染进程被终止。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  RENDERER_KILLED = 402,
+  /**
+   * GPU进程崩溃。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_CRASHED = 403,
+  /**
+   * GPU进程看门狗超时。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  GPU_PROCESS_WATCHDOG_TIMEOUT = 404,
+  /**
+   * Web组件尺寸为0。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  WEB_VIEW_ZERO_SIZE = 501
+}
+
+/**
+ * 提供监测到白屏并完成根因归因时的事件信息，包括页面URL、归因原因和附加详情。适用于需要监控页面白屏问题并分析根因的场景，提升白屏问题的定位效率和用户体验。
+ *
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+declare interface MonitoredBlankScreenEventInfo {
+  /**
+   * 监测到白屏时，页面的url。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  url: string;
+
+  /**
+   * 本次白屏的归因原因。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  reason: BlankScreenReason;
+
+  /**
+   * 白屏归因原因的附加信息，JSON格式的字符串，包含根因归因报告的详细内容。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  extraMsg: string;
+}
+
+/**
+ * 监测到白屏并完成根因归因时触发此回调。
+ *
+ * @param { MonitoredBlankScreenEventInfo } event - 监测到白屏并完成归因时的详细信息。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.0.1 dynamic
+ */
+type OnMonitorBlankScreenCallback = (event: MonitoredBlankScreenEventInfo) => void;
+
+/**
  * onTextSelectionChange的回调，选区内容改变时触发。
  *
  * @param { string } selectionText - 返回所选文本的内容。
@@ -6522,7 +6802,43 @@ declare enum WebKeyboardAppearanceMode {
 }
 
 /**
- * 定义了Web属性函数。
+ * 通用属性仅支持[aspectRatio]{@link CommonMethod#aspectRatio}、[backdropBlur]{@link CommonMethod#backdropBlur}、
+ * [backgroundColor]{@link CommonMethod#backgroundColor}、[bindContentCover]{@link CommonMethod#bindContentCover}、
+ * [bindContextMenu]{@link CommonMethod#bindContextMenu}、[bindMenu]{@link CommonMethod#bindMenu}、
+ * [bindSheet]{@link CommonMethod#bindSheet}、[borderColor]{@link CommonMethod#borderColor}、
+ * [borderRadius]{@link CommonMethod#borderRadius}、[borderStyle]{@link CommonMethod#borderStyle}、
+ * [borderWidth]{@link CommonMethod#borderWidth}、[clip]{@link CommonMethod#clip}、
+ * [constraintSize]{@link CommonMethod#constraintSize}、[defaultFocus]{@link CommonMethod#defaultFocus}、
+ * [focusable]{@link CommonMethod#focusable}、[tabIndex]{@link CommonMethod#tabIndex}、
+ * [groupDefaultFocus]{@link CommonMethod#groupDefaultFocus}、[displayPriority]{@link CommonMethod#displayPriority}、
+ * [enabled]{@link CommonMethod#enabled}、[flexBasis]{@link CommonMethod#flexBasis}、
+ * [flexShrink]{@link CommonMethod#flexShrink}、[layoutWeight]{@link CommonMethod#layoutWeight}、
+ * [id]{@link CommonMethod#id}、[gridOffset]{@link CommonMethod#gridOffset}、
+ * [gridSpan]{@link CommonMethod#gridSpan}、[useSizeType]{@link CommonMethod#useSizeType}、
+ * [height]{@link CommonMethod#height}、[touchable]{@link CommonMethod#touchable}、
+ * [margin]{@link CommonMethod#margin}、[markAnchor]{@link CommonMethod#markAnchor}、
+ * [offset]{@link CommonMethod#offset}、[width]{@link CommonMethod#width}、
+ * [zIndex]{@link CommonMethod#zIndex}、[visibility]{@link CommonMethod#visibility}、
+ * [scale]{@link CommonMethod#scale}、[translate]{@link CommonMethod#translate}、
+ * [responseRegion]{@link CommonMethod#responseRegion}、[size]{@link CommonMethod#size}、
+ * [opacity]{@link CommonMethod#opacity}、[shadow]{@link CommonMethod#shadow}、
+ * [sharedTransition]{@link CommonMethod#sharedTransition}、[transition]{@link CommonMethod#transition}、
+ * [position]{@link CommonMethod#position}、[direction]{@link CommonMethod#direction}。
+ *
+ * 通用事件仅支持[onAppear]{@link CommonMethod#onAppear}、[onDisAppear]{@link CommonMethod#onDisAppear}、
+ * [onBlur]{@link CommonMethod#onBlur}、[onFocus]{@link CommonMethod#onFocus}、[onDragEnd]{@link CommonMethod#onDragEnd}、
+ * [onDragEnter]{@link CommonMethod#onDragEnter}、[onDragStart]{@link CommonMethod#onDragStart}、
+ * [onDragMove]{@link CommonMethod#onDragMove}、[onDragLeave]{@link CommonMethod#onDragLeave}、
+ * [onDrop]{@link CommonMethod#onDrop}、[onHover]{@link CommonMethod#onHover}、[onMouse]{@link CommonMethod#onMouse}、
+ * [onKeyEvent]{@link CommonMethod#onKeyEvent}、[onTouch]{@link CommonMethod#onTouch}、
+ * [onVisibleAreaChange]{@link CommonMethod#onVisibleAreaChange}。
+ *
+ * ## 概述
+ *
+ * Web组件属性用于在ArkUI声明式语法下以链式调用的方式配置Web组件的网页加载行为、安全策略、运行环境与交互能力，是定制Web组件行为的主要入口。
+ * 其中通用的样式与布局类属性（如尺寸、边距、背景、可见性等）请参考[尺寸设置]{@link CommonMethod}，本章仅描述Web组件特有的属性；
+ * 运行期动态控制类能力（如加载URL、前进后退、注册/反注册JS对象、运行JavaScript、注入CSS等）请配合
+ * [WebviewController]{@link @ohos.web.webview:webview.WebviewController}使用。
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -7403,7 +7719,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute } 返回WebAttribute对象，支持链式调用。
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onContextMenuUpdate(callback: OnContextMenuUpdateCallback): WebAttribute;
 
@@ -8221,8 +8537,8 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * >
    * > - 可以设置上下左右四个方向，或者设置向前、向后两个方向的嵌套滚动模式，实现与父组件的滚动联动。
    * >
-   * > - 支持嵌套滚动的容器：[Grid]{@link ./grid}、[List]{@link ./list}、[Scroll]{@link ./scroll}、[Swiper]{@link ./swiper}、
-   * > [Tabs]{@link ./tabs}、[WaterFlow]{@link ./water_flow}、[Refresh]{@link ./refresh}、
+   * > - 支持嵌套滚动的容器：[Grid]{@link Grid}、[List]{@link List}、[Scroll]{@link Scroll}、[Swiper]{@link Swiper}、
+   * > [Tabs]{@link Tabs}、[WaterFlow]{@link WaterFlow}、[Refresh]{@link Refresh}、
    * > [bindSheet]{@link CommonMethod#bindSheet}。
    * >
    * > - 支持嵌套滚动的输入事件：使用手势、鼠标、触控板。
@@ -8478,7 +8794,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * > 本接口在与[editMenuOptions]{@link WebAttribute#editMenuOptions}同时使用时，本接口不生效。
    *
    * @param { Array<ExpandedMenuItemOptions> } expandedMenuOptions - 扩展菜单选项。<br/>菜单项数量，及菜单的content大小、startIcon图标尺寸，与
-   *     ArkUI [Menu]{@link ./menu}组件保持一致。
+   *     ArkUI [Menu]{@link Menu}组件保持一致。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @since 12 dynamiconly
@@ -8561,7 +8877,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * selectionMenuOptions<sup>(deprecated)</sup>不生效。
    *
    * @param { EditMenuOptions } editMenu - Web自定义文本菜单选项。
-   *     <br>菜单项数量，及菜单的content大小、icon图标尺寸，与ArkUI [Menu]{@link ./menu}组件保持一致。
+   *     <br>菜单项数量，及菜单的content大小、icon图标尺寸，与ArkUI [Menu]{@link Menu}组件保持一致。
    *     <br>菜单中系统自带的id枚举值（[TextMenuItemId]{@link TextMenuItemId}）在Web中仅支持CUT、COPY、PASTE、SELECT_ALL、TRANSLATE、SEARCH、
    *     AI_WRITER七项。
    *     <br>onMenuItemClick函数中textRange参数在Web中无意义，传入值为-1。
@@ -8859,6 +9175,21 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   onDetectedBlankScreen(callback: OnDetectBlankScreenCallback): WebAttribute;
 
   /**
+   * Web组件监测到白屏并完成根因归因时触发此回调。
+   *
+   * > **说明：**
+   * >
+   * > - 需配合enableBlankScreenMonitor使用。未开启白屏监控时，不会触发本回调。
+   *
+   * @param { OnMonitorBlankScreenCallback } callback - 监测到白屏并完成根因归因时触发。事件对象包含页面URL、白屏根因、归因详情等诊断信息。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  onMonitoredBlankScreen(callback: OnMonitorBlankScreenCallback): WebAttribute;
+
+  /**
    * 设置白屏检测的策略配置，如使能开关、检测时间和检测策略等。当属性没有显式调用时，默认关闭白屏检测。
    * 
    * > **说明：**
@@ -8877,6 +9208,17 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 22 dynamic
    */
   blankScreenDetectionConfig(detectConfig: BlankScreenDetectionConfig): WebAttribute;
+
+  /**
+   * 设置是否开启白屏监控。开启白屏监控后，监测到白屏时会触发回调onMonitoredBlankScreen。
+   *
+   * @param { boolean } enable - 是否开启白屏监控。true表示开启，false表示关闭。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.0.1 dynamic
+   */
+  enableBlankScreenMonitor(enable: boolean): WebAttribute;
 
   /**
    * 设置Web组件是否启用点击状态栏网页回到顶部功能。当属性没有显式调用时，默认开启状态栏网页回到顶部功能。
@@ -9179,7 +9521,7 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   caretColor(value: ResourceColor): WebAttribute;
 
@@ -9191,22 +9533,21 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   onZoomChange(callback: OnZoomChangeCallback): WebAttribute;
 
   /**
    * 设置Web组件惯性滚动的最大速度。
    *
-   * 通过该TypeScript API配置的值优先于通过其他API配置的值生效。
+   * 通过该TypeScript API配置的值优先于通过前端viewport max-fling-speed-x/y接口设置的值。
    *
-   * @param { number } speedLimit - 惯性滚动最大速度，单位vp/s。当值小于等于0、
-   *     {@code NaN}、{@code +Infinity}或{@code -Infinity}时，使用默认值：PC设备为9000 vp/s，
-   *     非PC设备为17000 vp/s。
+   * @param { number } speedLimit - 惯性滚动的速度上限，单位为vp/s。取值范围为(0, +∞)。
+   *     传入范围外的值时使用默认值：PC设备默认9000 vp/s，非PC设备默认17000 vp/s。
    * @returns { WebAttribute }
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
 
@@ -9241,8 +9582,6 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
 /**
  * 定义 Web 组件。
  *
- * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
- *
  * <p><strong>接口说明</strong>:
  *
  * <strong>性能说明</strong>:
@@ -9251,6 +9590,14 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
  * <p>当由于复杂的网页解析导致白屏时间较长时，
  * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
  * </p>
+ *
+ * ## 需要权限
+ *
+ * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
+ *
+ * ## 子组件
+ *
+ * 无
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
@@ -9510,7 +9857,7 @@ declare interface EmbedOptions {
    * @default false
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   supportTransformRotateAndSkew?: boolean;
 }
@@ -9965,7 +10312,7 @@ type OnAISessionCallback = (state: AISessionResultType, content: string) => void
  * @param { OnZoomChangeEvent } zoomChangeInfo - 浏览器级缩放倍率变化信息。
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
 
@@ -9974,7 +10321,7 @@ type OnZoomChangeCallback = (zoomChangeInfo: OnZoomChangeEvent) => void;
  *
  * @syscap SystemCapability.Web.Webview.Core
  * @stagemodelonly
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 declare interface OnZoomChangeEvent {
   /**
@@ -9982,7 +10329,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   oldZoomFactor: number;
 
@@ -9991,7 +10338,7 @@ declare interface OnZoomChangeEvent {
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @stagemodelonly
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
 }

@@ -139,6 +139,19 @@ declare interface LazyForEachOptions {
    * @since 26.0.0 dynamic
    */
   releaseStrategy?: LazyForEachReleaseStrategy;
+
+  /**
+   * Controller bound to the **LazyForEach** component. When the controller is bound, you can call
+   * [clearCache]{@link LazyForEachController#clearCache} to clear the child components prebuilt by the
+   * **LazyForEach** component as needed.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  controller?: LazyForEachController;
 }
 
 /**
@@ -1044,6 +1057,42 @@ declare interface IDataSource {
    * @since 7 dynamic
    */
   unregisterDataChangeListener(listener: DataChangeListener): void;
+}
+
+/**
+ * Defines a controller of the **LazyForEach** component. You can bind the controller to the **LazyForEach** component
+ * through the **controller** field in [LazyForEachOptions]{@link LazyForEachOptions} and call
+ * [clearCache]{@link LazyForEachController#clearCache} to clear the child components prebuilt by the **LazyForEach**
+ * component as needed.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare class LazyForEachController {
+  /**
+   * A constructor used to create a <em>LazyForEachController</em> object.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  constructor();
+
+  /**
+   * Clears the child components prebuilt by the **LazyForEach** component bound to this controller.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(): void;
 }
 
 /**

@@ -166,6 +166,10 @@ declare interface StarStyleOptions {
  * > - If the parent node of the **Rating** component has fixed dimensions, you must also specify the width and height
  * > for the **Rating** component, or set its parent node's [clip]{@link CommonMethod#clip(clip: Optional<boolean>)}
  * > attribute to **true**.
+ * >
+ * > - **Keyboard navigation**: **Tab** moves focus to or from the component; **Left/Right arrow** decreases or
+ * > increases the rating; **Home/End** sets the rating to the minimum or maximum value; **Space/Enter** confirms
+ * > the rating.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -301,7 +305,7 @@ declare interface RatingConfiguration extends CommonConfiguration<RatingConfigur
 declare type OnRatingChangeCallback = (rating: number) => void;
 
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -379,7 +383,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   stepSize(size: Optional<number>): RatingAttribute;
 
   /**
-   * Sets the star style. For details about the supported image types, see [Image]{@link ./image}.
+   * Sets the star style. For details about the supported image types, see [Image]{@link @global:Image}.
    *
    * Local and network images are supported. The PixelMap type is not supported.
    *
@@ -407,7 +411,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   starStyle(options: StarStyleOptions): RatingAttribute;
 
   /**
-   * Sets the star style. For details about the supported image types, see [Image]{@link ./image}.
+   * Sets the star style. For details about the supported image types, see [Image]{@link @global:Image}.
    *
    * Local and network images are supported. The PixelMap type is not supported.
    *
@@ -512,6 +516,10 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
  * > - If the parent node of the **Rating** component has fixed dimensions, you must also specify the width and height
  * > for the **Rating** component, or set its parent node's [clip]{@link CommonMethod#clip(clip: Optional<boolean>)}
  * > attribute to **true**.
+ * >
+ * > - **Keyboard navigation**: **Tab** moves focus to or from the component; **Left/Right arrow** decreases or
+ * > increases the rating; **Home/End** sets the rating to the minimum or maximum value; **Space/Enter** confirms
+ * > the rating.
  *
  * ###### Child Components
  *

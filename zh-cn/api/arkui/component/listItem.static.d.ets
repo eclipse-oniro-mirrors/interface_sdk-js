@@ -320,7 +320,7 @@ export declare interface ListItemOptions {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -341,7 +341,7 @@ export declare interface ListItemAttribute extends CommonMethod {
   default selectable(value: boolean | undefined): this;
 
   /**
-   * 设置当前ListItem选中状态。该属性需要在设置[多态样式]{@link common}前使用才能生效选中态样式。
+   * 设置当前ListItem选中状态。该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * 从API version 22开始，该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *

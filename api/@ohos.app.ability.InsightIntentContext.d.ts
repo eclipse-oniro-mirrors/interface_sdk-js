@@ -59,9 +59,19 @@ declare class InsightIntentContext {
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamic&static
+   * @since 26.0.1 dynamic&static
    */
   readonly toolCallId?: string;
+
+  /**
+   * The insight intent execution info.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  readonly insightIntentExecutionInfo?: insightIntent.InsightIntentExecutionInfo;
 
   /**
    * Starts a UIAbility. This API can only be used to start UIAbility components within the same application. This API
@@ -151,24 +161,6 @@ declare class InsightIntentContext {
    * @since 23 dynamic&static
    */
   setReturnModeForUIExtensionAbility(returnMode: insightIntent.ReturnMode): void;
-
-  /**
-   * Get insight intent execution info.
-   *
-   * @param { int } instanceId - The insight intent instance ID.
-   *     It is from InsightIntentEntryExecutor.context.instanceId.
-   *     <br>The value should be an integer.
-   * @returns { Promise<insightIntent.InsightIntentExecutionInfo> } - Promise used to return the insight intent
-   *     execution info.
-   * @throws { BusinessError } 16000003 - The specified ID does not exist.
-   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
-   *     2.Send restart message to system service failed; 3.System service failed to communicate with dependency module.
-   * @syscap SystemCapability.Ability.AbilityRuntime.Core
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.2.0 dynamic&static
-   */
-  getInsightIntentExecutionInfo(instanceId: int): Promise<insightIntent.InsightIntentExecutionInfo>;
 }
 
 export default InsightIntentContext;

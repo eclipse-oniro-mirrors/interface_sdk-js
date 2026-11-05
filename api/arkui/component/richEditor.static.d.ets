@@ -990,7 +990,7 @@ export declare interface RichEditorImageSpanResult {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     imageTag?: string;
 }
@@ -1200,7 +1200,7 @@ export declare interface RichEditorImageSpanOptions {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     imageTag?: string;
 }
@@ -1259,7 +1259,7 @@ export declare interface RichEditorBuilderSpanOptions {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface BuilderSpanInfo {
     /**
@@ -1269,7 +1269,7 @@ export declare interface BuilderSpanInfo {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     id?: string;
     /**
@@ -1278,7 +1278,7 @@ export declare interface BuilderSpanInfo {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     offset?: int;
 }
@@ -1292,7 +1292,7 @@ export declare interface BuilderSpanInfo {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export declare interface RichEditorBuilderSpan {
     /**
@@ -1300,7 +1300,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     builder: CustomBuilder;
     /**
@@ -1309,7 +1309,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     onAttach?: Callback<BuilderSpanInfo>;
     /**
@@ -1324,7 +1324,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     onDetach?: Callback<BuilderSpanInfo>;
     /**
@@ -1333,7 +1333,7 @@ export declare interface RichEditorBuilderSpan {
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     accessibilitySpanOptions?: AccessibilitySpanOptions;
 }
@@ -1944,7 +1944,7 @@ export declare class RichEditorController extends RichEditorBaseController {
      * @returns { int | undefined } Index of the added builderSpan among all Spans.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     addRichEditorBuilderSpan(value: RichEditorBuilderSpan, info?: BuilderSpanInfo): int | undefined;
     /**
@@ -2017,7 +2017,7 @@ export declare class RichEditorController extends RichEditorBaseController {
      *     Returns **undefined** when the controller is not bound to a component or the bound component is released.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.2.0 static
+     * @since 26.1.0 static
      */
     getRichEditorBuilderSpans(value?: RichEditorRange): Array<BuilderSpanInfo> | undefined;
     /**

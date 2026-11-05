@@ -22,6 +22,7 @@ import type { AsyncCallback } from './@ohos.base';
 import type Want from './@ohos.app.ability.Want';
 import common from './@ohos.enterprise.common';
 import statistics from './@ohos.net.statistics';
+import formInfo from './@ohos.app.form.formInfo';
 
 /**
  * 本模块提供应用管理能力，包括管理应用运行禁止名单、应用运行允许名单、开机自启动应用名单、保活应用名单、不可关停应用名单、后台防冻结应用名单、允许发送通知应用名单、允许跨设备应用名单等。适用于企业设备管理场景，可实现应用运行权限管控、开
@@ -302,6 +303,60 @@ declare namespace applicationManager {
      * @since 26.0.1
      */
     NETWORK = 1
+  }
+
+  /**
+   * 卡片信息
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  interface FormInfo {
+    /**
+     * 卡片所属应用包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    bundleName: string;
+
+    /**
+     * 卡片所属应用模块名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    moduleName: string;
+
+    /**
+     * 卡片所属应用组件名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    abilityName: string;
+
+    /**
+     * 卡片名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    name: string;
+
+    /**
+     * 卡片尺寸
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.0.1
+     */
+    dimension: formInfo.FormDimension;
   }
 
   /**
@@ -1868,7 +1923,11 @@ declare namespace applicationManager {
    * @param { number } duration - 豁免时长。
    *     <br>单位为：秒。取值应＞0。
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -1887,7 +1946,11 @@ declare namespace applicationManager {
    * @param { StandbyResourceType } resourceType - 资源类型。
    * @param { string } bundleName - 要为其释放资源豁免的应用包名。
    * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -1898,6 +1961,84 @@ declare namespace applicationManager {
    * @since 26.0.1
    */
   function releaseExemptionResource(resourceType: StandbyResourceType, bundleName: string): void;
+
+  /**
+   * 卡片加桌。
+   *
+   * @permission ohos.permission.ENTERPRISE_REQUEST_PUBLISH_FORM
+   * @param { FormInfo } formInfo - 卡片信息。
+   * @returns { string } 卡片ID。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201047 - Form count limit reached or insufficient home screen space to add forms.
+   * @throws { BusinessError } 9201049 - The form does not exist.
+   * @throws { BusinessError } 9201050 - The form type is not supported.
+   * @throws { BusinessError } 9201051 - Failed to add the form to the desktop.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.0.1
+   */
+  function publishFormToDesktop(formInfo: FormInfo): string;
+
+  /**
+   * 添加应用至电池优化排除列表。使用异步回调返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - 待添加应用的Bundle名称。
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * 将应用从电池优化排除列表中移除。使用异步回调返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - 待移除应用的Bundle名称。
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * 获取电池优化排除列表。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询策略。如果不指定该参数，则默认使用了
+   *     {@link common.QueryPolicy.SELF}。
+   * @returns { Array<string> } 返回电池优化排除列表中的应用包名。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getOptimizationBatteryExclusionApps(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default applicationManager;

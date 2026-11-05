@@ -45,7 +45,7 @@ declare namespace huksExternalCrypto {
      *
      * @syscap SystemCapability.Security.Huks.CryptoExtension
      * @FaAndStageModel
-     * @since 26.2.0
+     * @since 26.0.1
      */
     HUKS_EXT_CRYPTO_TAG_TYPE_UINT = 2 << 28,
     /**

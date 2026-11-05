@@ -19,6 +19,48 @@
  */
 
 /**
+ * Indicates how a dialog follows the handedness.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export enum HandednessFollowMode {
+  /**
+   * No adaptation. The dialog keeps the current layout. Default value.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+
+  /**
+   * The dialog follows the position of the component that triggers it
+   * (the last interacted component).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_ANCHOR = 1,
+
+  /**
+   * The dialog follows the grip hand (the hand holding the device,
+   * distinguished from the operating hand interacting with the screen).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_GRIP_HAND = 2,
+}
+
+/**
  * Provides unified dialog APIs.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -652,6 +694,22 @@ declare namespace dialog {
      * @since 26.0.1 dynamic
      */
     edgeLightMode?: EdgeLightMode;
+
+    /**
+     * Whether and how the dialog adapts to the handedness.
+     * FOLLOW_ANCHOR: the dialog is offset towards the position of the component that
+     * triggers it; falls back to the current layout when no trigger component exists.
+     * FOLLOW_GRIP_HAND: the dialog is offset towards the grip hand (the hand holding the
+     * device, distinguished from the operating hand) reported by the awareness
+     * platform; falls back to the current layout when unavailable.
+     *
+     * @default HandednessFollowMode.NONE
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    adaptToHandedness?: HandednessFollowMode;
   }
 
   /**
