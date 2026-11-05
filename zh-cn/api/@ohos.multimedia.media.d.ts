@@ -11349,10 +11349,13 @@ declare namespace media {
     resumeRecording(): Promise<void>;
 
     /**
-     * 录屏时，应用仅能对本应用的隐私窗口做安全豁免。使用Promise异步回调。
+     * 录屏豁免指定隐私窗口列表。使用Promise异步回调。
      * 
-     * 如录屏时，用户在本应用进行输入密码等操作，应用不会进行黑屏处理。
-     *
+     * > **说明：**
+     * >
+     * > 录屏时，应用仅能对本应用的隐私窗口做安全豁免。例如，用户在本应用内输入密码等操作时，默认该隐私窗口会被黑屏遮挡；豁免后该窗口在录制画面中正常显示。
+     * 
+     * 
      * @param { Array<int> } windowIDs - 需要豁免隐私的窗口列表，包括主窗口id和子窗口id，窗口属性获取方法可以参考
      *     [getWindowProperties]{@link @ohos.window:window.Window.getWindowProperties}。
      * @returns { Promise<void> } Promise对象，无返回结果。
