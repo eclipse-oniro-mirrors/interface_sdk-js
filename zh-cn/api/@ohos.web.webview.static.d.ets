@@ -4725,7 +4725,7 @@ declare namespace webview {
          * @param { Callback<void> } callback - 回调函数，用于返回结果。
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 dynamic
+         * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
 
@@ -4738,7 +4738,7 @@ declare namespace webview {
          * @returns { Promise<void> } Promise对象，无返回结果。
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 dynamic
+         * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date): Promise<void>;
     }

@@ -7193,9 +7193,9 @@ export declare interface WebAttribute extends CommonMethod {
     * @returns { WebAttribute }
     * @syscap SystemCapability.Web.Webview.Core
     * @stagemodelonly
-    * @since 26.1.0 dynamic
+    * @since 26.1.0 static
     */
-    visitedLinkPersistEnabled(enabled: boolean | undefined): WebAttribute;
+    default visitedLinkPersistEnabled(enabled: boolean | undefined): WebAttribute;
 }
 
 /**

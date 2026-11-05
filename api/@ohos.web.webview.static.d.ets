@@ -4823,11 +4823,11 @@ declare namespace webview {
          * @param { Callback<void> } callback - Callback used to return the result.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 dynamic
+         * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
 
-         /**
+        /**
          * Removes visited link records that changed after the specified date.
          * This API uses a promise to return the result.
          *
@@ -4836,7 +4836,7 @@ declare namespace webview {
          * @returns { Promise<void> } Promise that returns no value.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.1.0 dynamic
+         * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date): Promise<void>;
     }
