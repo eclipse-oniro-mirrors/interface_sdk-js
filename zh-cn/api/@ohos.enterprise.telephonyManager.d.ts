@@ -14,7 +14,8 @@
  */
 
 /**
- * @file  * @kit MDMKit
+ * @file 通话管理
+ * @kit MDMKit
  */
 import type Want from './@ohos.app.ability.Want';
 import adminManager from './@ohos.enterprise.adminManager';
