@@ -533,6 +533,51 @@ declare namespace common {
    * @since 23
    */
   export type EnterpriseAdminExtensionContext = _EnterpriseAdminExtensionContext.default;
+
+  /**
+   * SMS received information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface SmsReceiveInfo {
+    /**
+     * SIM card slot ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    slotId: number;
+ 
+    /**
+     * Telephone number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+ 
+    /**
+     * Number of SMS messages.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    count: number;
+ 
+    /**
+     * SMS content.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
+  }
 }
 
 export default common;
