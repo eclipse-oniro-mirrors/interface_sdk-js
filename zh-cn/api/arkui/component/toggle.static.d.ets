@@ -350,6 +350,18 @@ export declare interface ToggleAttribute extends CommonMethod {
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<ToggleAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置Toggle选项。
+     *
+     * @param { ToggleOptions } options - Toggle构造选项。
+     * @returns { ToggleAttribute } Returns the instance of the ToggleAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setToggleOptions(options: ToggleOptions): this;
 }
 
 /**
