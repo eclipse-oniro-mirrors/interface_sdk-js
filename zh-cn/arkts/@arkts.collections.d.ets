@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Defines the collections for ArkTS
+ * @file 定义ArkTS容器集
  * @kit ArkTS
  */
 
@@ -26,19 +26,19 @@ import lang from './@arkts.lang'
  * 本模块提供的ArkTS容器集，可以用于并发场景下的高性能数据传递。功能与JavaScript内建的对应容器类似，但ArkTS容器实例无法通过`"."`或者`"[]"`添加或更新属性。
  * ArkTS容器在多个并发实例间传递时，其默认行为是引用传递，支持多个并发实例可以同时操作同一个容器实例。另外，也支持拷贝传递，即每个并发实例持有一个ArkTS容器实例。
  * ArkTS容器并不是线程安全的，内部使用了fail-fast（快速失败）机制：当检测多个并发实例同时对容器进行结构性改变时，会触发异常。因此，在多线程读写容器时，容器使用方需要使用ArkTS提供的异步锁机制保证ArkTS容器的安全访问。
- * 当前ArkTS容器集主要包含以下几种容器：[Array]{@link collections.Array},
- * [Map]{@link collections.Map}, [Set]{@link collections.Set}, TypedArray
- * ([Int8Array]{@link collections.Int8Array},
- * [Uint8Array]{@link collections.Uint8Array},
- * [Int16Array]{@link collections.Int16Array},
- * [Uint16Array]{@link collections.Uint16Array},
- * [Int32Array]{@link collections.Int32Array},
- * [Uint32Array]{@link collections.Uint32Array},
- * [Uint8ClampedArray]{@link collections.Uint8ClampedArray} and
- * [Float32Array]{@link collections.Float32Array}),
- * [ArrayBuffer]{@link collections.ArrayBuffer},
- * [BitVector]{@link collections.BitVector}, and
- * [ConcatArray]{@link collections.ConcatArray}.
+ * 当前ArkTS容器集主要包含以下几种容器：[Array]{@link collections.Array}、
+ * [Map]{@link collections.Map}、 [Set]{@link collections.Set}、 TypedArray
+ * （[Int8Array]{@link collections.Int8Array}、
+ * [Uint8Array]{@link collections.Uint8Array}、
+ * [Int16Array]{@link collections.Int16Array}、
+ * [Uint16Array]{@link collections.Uint16Array}、
+ * [Int32Array]{@link collections.Int32Array}、
+ * [Uint32Array]{@link collections.Uint32Array}、
+ * [Uint8ClampedArray]{@link collections.Uint8ClampedArray}、
+ * [Float32Array]{@link collections.Float32Array}）、
+ * [ArrayBuffer]{@link collections.ArrayBuffer}、
+ * [BitVector]{@link collections.BitVector}、
+ * [ConcatArray]{@link collections.ConcatArray}。
  *
  * > **说明**
  * >
@@ -52,6 +52,8 @@ import lang from './@arkts.lang'
 declare namespace collections {
   /**
    * ArkTS TypedArray映射函数类型。
+   *
+   * 此类型被TypedArray类的from()接口使用。
    *
    * @param { FromElementType } value - 当前遍历的用于构造ArkTS TypedArray的元素。
    * @param { number } index - 当前遍历的用于构造ArkTS TypedArray的元素索引，从0开始。
@@ -92,6 +94,8 @@ declare namespace collections {
   /**
    * ArkTS TypedArray转换映射函数类型。
    *
+   * 此类型被TypedArray类的map()接口使用。
+   *
    * @param { ElementType } value - 当前映射的ArkTS TypedArray元素。
    * @param { number } index - 当前映射的ArkTS TypedArray元素索引，从0开始。
    * @param { ArrayType } array - 当前映射的ArkTS TypedArray实例。
@@ -105,6 +109,8 @@ declare namespace collections {
     (value: ElementType, index: number, array: ArrayType) => ElementType;
   /**
    * ArkTS TypedArray归约函数类型。
+   *
+   * 此类型被TypedArray类的reduce()和reduceRight()接口使用。
    *
    * @param { AccType } previousValue - 当前遍历所累积的值。
    * @param { ElementType } currentValue - 当前遍历的ArkTS TypedArray元素。
@@ -120,6 +126,8 @@ declare namespace collections {
     (previousValue: AccType, currentValue: ElementType, currentIndex: number, array: ArrayType) => AccType;
   /**
    * ArkTS TypedArray排序函数类型。
+   *
+   * 此类型被TypedArray类的sort()接口使用。
    *
    * @param { ElementType } first - 当前待比较的第一个元素。
    * @param { ElementType } second - 当前待比较的第二个元素。
@@ -176,7 +184,7 @@ declare namespace collections {
    *
    * @param { AccType } previousValue - 当前遍历所累积的值。
    * @param { ElementType } currentValue - 当前遍历的ArkTS Array元素，该元素将与previousValue进行归约计算。
-   * @param { number } currentIndex - 当前遍历的ArkTS Array元素索引。
+   * @param { number } currentIndex - 当前遍历的ArkTS Array元素索引，从0开始。
    * @param { ArrayType } array - 当前遍历的ArkTS Array实例。
    * @returns { AccType } 归约函数的结果，该结果会作为下一次调用ArrayReduceCallback时的previousValue参数。
    * @syscap SystemCapability.Utils.Lang
@@ -290,7 +298,7 @@ declare namespace collections {
     /**
      * 生成一个固定长度的ArkTS Array，其中每个元素的初始值为给定的初始值。
      *
-     * @param { number } arrayLength - ArkTS Array的长度。
+     * @param { number } arrayLength - 用于构造ArkTS Array的长度。取值应为非负整数，否则会抛出异常。
      * @param { T } initialValue - ArkTS Array中每个元素的初始值。
      * @returns { Array<T> } 新创建的ArkTS Array实例。
      * @throws { BusinessError } 10200011 - The create method cannot be bound. [since 12 - 17]
@@ -363,7 +371,7 @@ declare namespace collections {
      * ArkTS Array的构造函数，通过开发者提供的元素进行初始化。
      *
      * @param { T } first - 初始化ArkTS Array的第一个元素。
-     * @param { T[] } left - 初始化ArkTS Array的剩余元素。
+     * @param { T[] } [left] - 初始化ArkTS Array的剩余元素。默认值为空数组。
      * @throws { BusinessError } 10200012 - The Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -374,7 +382,7 @@ declare namespace collections {
     /**
      * ArkTS Array的构造函数，通过开发者提供的元素进行初始化。
      *
-     * @param { T[] } items - 初始化ArkTS Array的元素，默认值为空数组。
+     * @param { T[] } [items] - 初始化ArkTS Array的元素，默认值为空数组。
      * @throws { BusinessError } 10200012 - The Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -398,7 +406,7 @@ declare namespace collections {
     /**
      * 在ArkTS Array的末尾添加元素，并返回新的Array长度。
      *
-     * @param { T[] } items - 要添加到Array末尾的元素，默认值为空数组。
+     * @param { T[] } [items] - 要添加到Array末尾的元素，默认值为空数组。
      * @returns { number } 新Array的长度。
      * @throws { BusinessError } 10200011 - The push method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -438,7 +446,7 @@ declare namespace collections {
     /**
      * 在ArkTS Array的首端插入元素，并返回新的Array长度。
      *
-     * @param { T[] } items - 要插入到Array首端的元素，默认值为空数组。
+     * @param { T[] } [items] - 要插入到Array首端的元素，默认值为空数组。
      * @returns { number } 新Array的长度。
      * @throws { BusinessError } 10200011 - The unshift method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -481,7 +489,8 @@ declare namespace collections {
      * 返回在ArkTS Array中搜索元素首次出现的索引，如果不存在则返回**-1**。
      *
      * @param { T } searchElement - 要搜索的值。
-     * @param { number } [fromIndex] - 开始搜索的索引，从0开始。默认值为**0**。
+     * @param { number } [fromIndex] - 开始搜索的索引，从0开始，默认值为0。如果下标大于等于ArkTS Array的长度，则返回-1。如果fromIndex < 0，则会从fromIndex
+     *     + array.length位置开始搜索。
      * @returns { number } 搜索元素首次出现的索引；如果不存在，则返回**-1**。
      * @throws { BusinessError } 10200011 - The indexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -584,6 +593,8 @@ declare namespace collections {
     /**
      * 获取一个迭代器，迭代器的每一项都是一个 JavaScript 对象。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<T> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -650,7 +661,8 @@ declare namespace collections {
      * 判断ArkTS Array是否包含指定的元素，并返回一个布尔值。
      *
      * @param { T } searchElement - 要搜索的元素。
-     * @param { number } [fromIndex] - 开始搜索的索引。默认值为**0**。
+     * @param { number } [fromIndex] - 开始搜索的索引。默认值为0。如果下标大于等于ArkTS Array的长度，则返回false。如果fromIndex < 0，则会从fromIndex +
+     *     array.length位置开始搜索。
      * @returns { boolean } 检查结果。如果Array包含指定的元素，则返回**true**；否则返回
      *     **false**。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
@@ -757,9 +769,10 @@ declare namespace collections {
      * 使用指定的值填充ArkTS Array中指定范围的所有元素。
      *
      * @param { T } value - 要填充的值。
-     * @param { number } [start] - 开始填充的索引。默认值为**0**。
-     * @param { number } [end] - 结束填充的索引（不包括该元素）。如果未传入，
-     *     则指代数组的最后一个元素。
+     * @param { number } [start] - 开始填充的索引。默认值为0。如果start < 0，则取max(start + len, 0)。如果start > 数组长度或start >
+     *     end，则不做填充。填充过程中包含start位置下标所在的元素。
+     * @param { number } [end] - 结束填充的索引（不包括该元素）。如果end < 0，则取max(end + len, 0)。如果省略或end >
+     *     数组长度，则填充到Array的最后一个元素。如果start > end，则不做填充。填充过程中不包含end位置下标所在的元素。
      * @returns { Array<T> } 填充后的Array。
      * @throws { BusinessError } 10200011 - The fill method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -810,7 +823,7 @@ declare namespace collections {
     /**
      * 将ArkTS Array与一个或多个数组拼接。
      *
-     * @param { ConcatArray<T>[] } items - 用于拼接ArkTS Array的一个或多个数组，省略时返回原数组的浅拷贝。
+     * @param { ConcatArray<T>[] } [items] - 拼接两个或多个数组，省略时返回原数组的浅拷贝。
      * @returns { Array<T> } 拼接后生成的新Array。
      * @throws { BusinessError } 10200011 - The concat method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -868,8 +881,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Array。
      *
-     * @param { T[] } items - 用于创建数组的元素集合，参数个数可以是0个、1个
-     *     或多个。
+     * @param { T[] } [items] - 用于创建数组的元素集合，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Array<T> } 新创建的ArkTS Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
@@ -1154,7 +1166,7 @@ declare namespace collections {
     /**
      * 删除该Map中的指定键及其对应值。
      *
-     * > **NOTE**
+     * > **说明**
      * >
      * > - 返回**undefined**时无法直接区分是键不存在还是键存在但值为**undefined**，可在使用本接口前先使用
      * >   **has**接口判断键是否存在，进而区分返回的**undefined**所属情况。
@@ -1173,7 +1185,7 @@ declare namespace collections {
     /**
      * 按插入顺序对该Map中的每个键值对执行一次回调函数。
      *
-     * @param { function } callbackFn - 对每个键值对运行的回调函数。
+     * @param { function } callbackFn - 回调函数。回调执行期间不能修改当前Map对象，否则会触发并发修改错误。value为当前遍历到的元素键值对的值，key为当前遍历到的元素键值对的键，map为当前Map实例对象。
      * @throws { BusinessError } 10200011 - The forEach method cannot be bound with non-sendable.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1212,7 +1224,7 @@ declare namespace collections {
     /**
      * 向该Map添加或更新一个指定的键值对，并返回该键之前关联的值。
      *
-     * > **NOTE**
+     * > **说明**
      * >
      * > - 返回**undefined**时无法直接区分是键不存在还是键存在但值为**undefined**，可在使用本接口前先使用
      * >   **has**接口判断键是否存在，进而区分返回的**undefined**所属情况。
@@ -1410,7 +1422,7 @@ declare namespace collections {
     /**
      * 对此Set中的每个键值对执行一次回调函数。
      *
-     * @param { function } callbackFn - 对每个键值对运行的回调函数。
+     * @param { function } callbackFn - 回调函数。回调执行期间不应修改当前Set对象，否则会触发并发修改错误。value为当前遍历到的元素键值对的值，value2为当前遍历到的元素键值对的键，set为当前Set实例对象。
      * @throws { BusinessError } 10200011 - The forEach method cannot be bound with non-sendable.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1846,7 +1858,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。默认为0。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Int8Array的长度。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -1994,6 +2006,8 @@ declare namespace collections {
     /**
      * 返回ArkTS Int8Array指定索引位置的元素。
      *
+     * 所需元素的从零开始的索引。取值范围为[0, Int8Array.length - 1]。
+     *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
      * @atomicservice
@@ -2076,7 +2090,7 @@ declare namespace collections {
      * 通过可变数量的参数创建一个新的ArkTS Int8Array对象。
      *
      * @static [since 18 - 21]
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Int8Array } 新的ArkTS Int8Array实例。可能的错误原因：1.必填参数未指定；
      *     <br>2.参数类型不正确；3.参数校验失败。
      * @syscap SystemCapability.Utils.Lang
@@ -2194,7 +2208,7 @@ declare namespace collections {
      * 构造函数，以ArrayBuffer创建一个ArkTS Uint8ClampedArray对象，且ArkTS Uint8ClampedArray和ArrayBuffer共享内存。
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Uint8ClampedArray的ArrayBuffer对象。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认为0。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，取值为非负整数且须小于buffer.byteLength，从0开始，默认为0。
      * @param { number } [length] - 指定ArkTS Uint8ClampedArray的长度，默认为0。byteOffset和length的总和不能超过buffer.byteLength。
      * @throws { BusinessError } 10200012 - The Uint8ClampedArray's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
@@ -2425,7 +2439,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。默认为0。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Uint8ClampedArray的长度。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -2509,6 +2523,8 @@ declare namespace collections {
     /**
      * 返回一个迭代器，迭代器的每一项都是一个数字对象。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 返回一个迭代器对象，迭代出数字。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -2570,6 +2586,8 @@ declare namespace collections {
     includes(searchElement: number, fromIndex?: number): boolean;
     /**
      * 返回Uint8ClampedArray指定索引位置的元素。
+     *
+     * 所需元素的从零开始的索引。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -2652,7 +2670,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Uint8ClampedArray对象，参数个数可以是0个、1个或者多个。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Uint8ClampedArray } 新的ArkTS Uint8ClampedArray实例。可能的错误原因：1.必填参数未指定；
      *     <br>2.参数类型不正确；3.参数校验失败。
      * @syscap SystemCapability.Utils.Lang
@@ -3021,7 +3039,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 当前数组中要写入值的起始位置索引。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Uint8Array的长度。超出范围时将抛出异常。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3158,7 +3176,8 @@ declare namespace collections {
      * 判断ArkTS Uint8Array是否包含特定元素，包含则返回true，否则返回false。
      *
      * @param { number } searchElement - 待搜索的元素。
-     * @param { number } [fromIndex] - 在数组中开始搜索searchElement的位置。
+     * @param { number } [fromIndex] - 开始搜索的索引，默认值为0。如果fromIndex < 0，则会从fromIndex +
+     *     Uint8Array.length位置开始从前向后搜索。如果fromIndex的值导致搜索区间和数组范围没有重叠，则返回false。
      * @returns { boolean } 检查结果。如果该元素存在则返回**true**；否则返回
      *     **false**。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
@@ -3171,6 +3190,8 @@ declare namespace collections {
     includes(searchElement: number, fromIndex?: number): boolean;
     /**
      * 返回指定索引位置的元素。
+     *
+     * 所需元素的从零开始的索引。取值范围为[0, Uint8Array.length - 1]。超出范围时或不为整数时返回undefined。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -3252,7 +3273,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Uint8Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Uint8Array } 新的ArkTS Uint8Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
@@ -3372,8 +3393,9 @@ declare namespace collections {
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Int16Array的ArrayBuffer对象。buffer所占的字节数须是
      *     2的整数倍。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认为**0**。
-     * @param { number } [length] - 指定ArkTS Int16Array的长度，默认为**0**。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认值为0。byteOffset需为2的整数倍。
+     * @param { number } [length] - 指定ArkTS Int16Array的长度，需为非负整数。默认值为0。且需满足byteOffset + length * 2 <=
+     *     buffer.byteLength。
      * @throws { BusinessError } 10200012 - The Int16Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -3546,8 +3568,7 @@ declare namespace collections {
     /**
      * 对ArkTS Int16Array中的每个元素应用指定的回调函数，并使用结果创建一个新的ArkTS Int16Array对象。
      *
-     * @param { TypedArrayMapCallback<number, Int16Array> } callbackFn - 回调函数。回调执行期间不能修改当前Map对象，否则会触发并发修改错误。
-     *     map方法对数组中的每个元素调用一次callbackfn函数。
+     * @param { TypedArrayMapCallback<number, Int16Array> } callbackFn - 回调函数。
      * @returns { Int16Array } 新ArkTS Int16Array对象。
      * @throws { BusinessError } 10200011 - The map method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -3617,7 +3638,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。默认为0。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Int16Array的长度。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -3766,6 +3787,8 @@ declare namespace collections {
     /**
      * 返回ArkTS Int16Array指定索引位置的元素。
      *
+     * 所需元素的从零开始的索引。取值范围为[0, Int16Array.length - 1]。
+     *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
      * @atomicservice
@@ -3776,8 +3799,8 @@ declare namespace collections {
      * 返回ArkTS Int16Array中最后一次出现指定值的索引。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为ArkTS Int16Array长度减1（即从末尾开始）。如果下标大于等于ArkTS Int16Array的长度，
-     *     则返回**-1**。如果提供的下标值是负数，则被当做距离数组尾部的偏移，从后到前搜索。
+     * @param { number } [fromIndex] - 搜索的起始索引，从该位置开始往前查找。默认值为ArkTS Int16Array长度减1（即从末尾开始）。如果索引大于等于ArkTS
+     *     Int16Array的长度，则从末尾开始往前查找。如果提供的索引值是负数，则被当作距离数组尾部的偏移，从后到前搜索。
      * @returns { number } 元素最后一次出现的索引；如果不存在，则返回**-1**。
      * @throws { BusinessError } 10200011 - The lastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -3851,7 +3874,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Int16Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Int16Array } 新的ArkTS Int16Array实例。可能原因：1. 必填参数未指定；
      *     <br>2. 参数类型不正确；3. 参数校验失败。
      * @syscap SystemCapability.Utils.Lang
@@ -3970,8 +3993,8 @@ declare namespace collections {
      * 构造函数，以ArrayBuffer创建一个ArkTS Uint16Array对象。
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Uint16Array的ArrayBuffer对象。buffer所占的字节数须是2的整数倍。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始。默认值为**0**。
-     * @param { number } [length] - 指定ArkTS Uint16Array的长度。默认值为**0**。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，需为非负整数。默认值为0。
+     * @param { number } [length] - 指定ArkTS Uint16Array的长度，需为非负整数。默认值为0，此时表示从byteOffset开始到buffer末尾的全部元素。
      * @throws { BusinessError } 10200012 - The Uint16Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -4211,7 +4234,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。默认为0。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -4294,6 +4317,8 @@ declare namespace collections {
     /**
      * 返回一个迭代器，迭代器的每一项都是一个数字。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -4342,7 +4367,7 @@ declare namespace collections {
      * 判断ArkTS Uint16Array是否包含特定元素。
      *
      * @param { number } searchElement - 待搜索的元素。
-     * @param { number } [fromIndex] - 开始搜索的索引。
+     * @param { number } [fromIndex] - 开始搜索的索引，默认值为0。如果fromIndex < 0，则会从fromIndex + Uint16Array.length位置开始从前向后搜索。
      * @returns { boolean } 如果ArkTS Uint16Array包含指定的元素，则返回true；否则返回false。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -4355,6 +4380,8 @@ declare namespace collections {
     /**
      * 返回Uint16Array指定索引位置的元素。
      *
+     * 所需元素的从零开始的索引。
+     *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
      * @atomicservice
@@ -4365,8 +4392,8 @@ declare namespace collections {
      * 返回ArkTS Uint16Array实例中最后一次出现searchElement的索引，如果不包含该元素，则返回-1。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为ArkTS Uint16Array长度减1（即从末尾开始）。如果下标大于等于ArkTS Uint16Array的长度，则返回**-1**。
-     *     如果提供的下标值是负数，则被当做距离数组尾部的偏移，从后到前搜索。
+     * @param { number } [fromIndex] - 搜索的起始索引，从该位置开始往前查找。默认值为ArkTS Uint16Array长度减1（即从末尾开始）。如果索引大于等于ArkTS
+     *     Uint16Array的长度，则从末尾开始往前查找。如果提供的索引值是负数，则被当作距离数组尾部的偏移，从后到前搜索。
      * @returns { number } 数组中给定元素的最后一个索引；没有找到，则返回**-1**。
      * @throws { BusinessError } 10200011 - The lastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -4436,7 +4463,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Uint16Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Uint16Array } 新的ArkTS Uint16Array实例。可能的异常原因：1.必填参数未指定；
      *     <br>2.参数类型不正确；3.参数校验失败。
      * @syscap SystemCapability.Utils.Lang
@@ -4554,8 +4581,9 @@ declare namespace collections {
      * 构造函数，以ArkTS ArrayBuffer创建一个ArkTS Int32Array对象。
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Int32Array的ArrayBuffer对象。buffer所占的字节数需是4的整数倍。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始。默认值为**0**。
-     * @param { number } [length] - 指定ArkTS Int32Array的长度。默认值为**0**。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认值为0。byteOffset需为4的整数倍。
+     * @param { number } [length] - 指定ArkTS Int32Array的长度，需为非负整数。默认值为0。且需满足byteOffset + length * 4 <=
+     *     buffer.byteLength。
      * @throws { BusinessError } 10200012 - The Int32Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -4695,11 +4723,11 @@ declare namespace collections {
      */
     forEach(callbackFn: TypedArrayForEachCallback<number, Int32Array>): void;
     /**
-     * 返回在ArkTS Float32Array中给定元素的第一个索引，如果不存在，则返回**-1**。
+     * 返回在ArkTS Int32Array中给定元素的第一个索引，如果不存在，则返回**-1**。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为**0**。如果下标大于等于ArkTS Float32Array的长度，
-     *     则返回**-1**。如果传入负数，则从ArkTS Float32Array末尾开始搜索。
+     * @param { number } [fromIndex] - 搜索的起始索引。默认值为0。如果索引大于等于ArkTS Int32Array的长度，则返回-1。如果索引为负数，则从fromIndex +
+     *     Int32Array.length位置开始从前到后搜索。
      * @returns { number } 数组中元素的第一个索引；如果未找到，则返回**-1**。
      * @throws { BusinessError } 10200011 - The indexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -4710,7 +4738,7 @@ declare namespace collections {
      */
     indexOf(searchElement: number, fromIndex?: number): number;
     /**
-     * 将ArkTS Float32Array的所有元素拼接成一个字符串，元素之间使用指定的分隔符分隔。
+     * 将ArkTS Int32Array的所有元素拼接成一个字符串，元素之间使用指定的分隔符分隔。
      *
      * @param { string } [separator] - 分隔字符串。如果省略，则使用逗号（,）作为分隔符。
      * @returns { string } 包含所有元素拼接成的字符串。如果数组为空，则返回空字符串。
@@ -4796,7 +4824,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 当前数组中开始写入值的位置索引。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Int32Array的长度。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -4877,6 +4905,8 @@ declare namespace collections {
     /**
      * 返回一个迭代器，迭代器的每一项都是一个number。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 迭代number的迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -4886,7 +4916,7 @@ declare namespace collections {
      */
     [Symbol.iterator](): IterableIterator<number>;
     /**
-     * 返回一个新的迭代器对象，该对象包含ArkTS Float32Array中每个元素的键值对。
+     * 返回一个新的迭代器对象，该对象包含ArkTS Int32Array中每个元素的键值对。
      *
      * @returns { IterableIterator<[number, number]> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The entries method cannot be bound.
@@ -4898,7 +4928,7 @@ declare namespace collections {
      */
     entries(): IterableIterator<[number, number]>;
     /**
-     * 返回一个新的迭代器对象，该对象包含ArkTS Float32Array中每个元素的键（下标）。
+     * 返回一个新的迭代器对象，该对象包含ArkTS Int32Array中每个元素的键（下标）。
      *
      * @returns { IterableIterator<number> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The keys method cannot be bound.
@@ -4910,7 +4940,7 @@ declare namespace collections {
      */
     keys(): IterableIterator<number>;
     /**
-     * 返回一个新的迭代器对象，该对象包含ArkTS Float32Array中每个元素的值。
+     * 返回一个新的迭代器对象，该对象包含ArkTS Int32Array中每个元素的值。
      *
      * @returns { IterableIterator<number> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The values method cannot be bound.
@@ -4922,10 +4952,10 @@ declare namespace collections {
      */
     values(): IterableIterator<number>;
     /**
-     * 判断ArkTS Float32Array是否包含特定元素。
+     * 判断ArkTS Int32Array是否包含特定元素。
      *
      * @param { number } searchElement - 待搜索的元素。
-     * @param { number } [fromIndex] - 开始搜索的索引位置。
+     * @param { number } [fromIndex] - 开始搜索的索引，默认值为0。如果fromIndex < 0，则会从fromIndex + Int32Array.length位置开始从前向后搜索。
      * @returns { boolean } 检查结果。如果包含指定元素则返回**true**；否则返回**false**。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -4938,6 +4968,8 @@ declare namespace collections {
     /**
      * 返回ArkTS Int32Array指定索引位置的元素。
      *
+     * 所需元素的从零开始的索引。取值范围为[0, Int32Array.length - 1]。
+     *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
      * @atomicservice
@@ -4948,8 +4980,8 @@ declare namespace collections {
      * 返回ArkTS Int32Array实例中最后一次出现searchElement的索引，如果对象不包含，则为**-1**。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为ArkTS Int32Array长度减1（即从末尾开始）。如果下标大于等于ArkTS Int32Array的长度，
-     *     则返回**-1**。如果传入负数，则从ArkTS Int32Array末尾开始搜索。
+     * @param { number } [fromIndex] - 搜索的起始索引，从该位置开始往前查找。默认值为ArkTS Int32Array长度减1（即从末尾开始）。如果索引大于等于ArkTS
+     *     Int32Array的长度，则从末尾开始往前查找。如果提供的索引值是负数，则被当作距离数组尾部的偏移，从后到前搜索。
      * @returns { number } 数组中给定元素的最后一个索引；如果未找到，则返回**-1**。
      * @throws { BusinessError } 10200011 - The lastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -5021,7 +5053,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Int32Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Int32Array } 新的ArkTS Int32Array实例。可能原因：1.必填参数未指定；
      *     <br>2.参数类型不正确；3.参数校验失败。
      * @syscap SystemCapability.Utils.Lang
@@ -5138,8 +5170,8 @@ declare namespace collections {
      * 构造函数，以ArrayBuffer创建一个ArkTS Uint32Array对象。Uint32Array与传入的ArrayBuffer共享同一份底层数据。
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Uint32Array的ArrayBuffer对象。buffer所占的字节数须是4的整数倍。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始。默认值为**0**。
-     * @param { number } [length] - 指定ArkTS Uint32Array的长度。默认值为**0**。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认值为0。byteOffset需为4的整数倍。
+     * @param { number } [length] - 指定ArkTS Uint32Array的长度，需为非负整数。默认值为0。
      * @throws { BusinessError } 10200012 - The Uint32Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -5282,8 +5314,8 @@ declare namespace collections {
      * 返回在ArkTS Uint32Array中给定元素的第一个索引，如果不存在，则返回**-1**。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为**0**。如果下标大于等于ArkTS Uint32Array的长度，
-     *     则返回**-1**。如果传入负数，则从ArkTS Uint32Array的末尾开始向前搜索。
+     * @param { number } [fromIndex] - 搜索的起始下标。默认值为0。如果下标大于等于ArkTS Uint32Array的长度，则返回-1。如果下标为负数，则从fromIndex +
+     *     Uint32Array.length位置开始从前到后搜索。
      * @returns { number } 数组中给定元素的第一个索引；如果不存在，则返回**-1**。
      * @throws { BusinessError } 10200011 - The indexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -5382,7 +5414,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -5463,6 +5495,8 @@ declare namespace collections {
     /**
      * 返回一个迭代器，迭代器的每一项都是一个数字。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 产出数字的迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -5511,7 +5545,7 @@ declare namespace collections {
      * 判断ArkTS Uint32Array是否包含特定元素。
      *
      * @param { number } searchElement - 待搜索的元素。
-     * @param { number } [fromIndex] - 开始搜索的位置。
+     * @param { number } [fromIndex] - 开始搜索的索引，默认值为0。如果fromIndex < 0，则会从fromIndex + Uint32Array.length位置开始从前向后搜索。
      * @returns { boolean } 检查结果。如果ArkTS Uint32Array包含指定的元素，则返回**true**；否则返回**false**。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -5523,6 +5557,8 @@ declare namespace collections {
     includes(searchElement: number, fromIndex?: number): boolean;
     /**
      * 返回ArkTS Uint32Array指定索引位置的元素。
+     *
+     * 所需元素的从零开始的索引。取值范围为[0, Uint32Array.length - 1]。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -5603,7 +5639,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Uint32Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Uint32Array } 新的ArkTS Uint32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
@@ -5721,8 +5757,9 @@ declare namespace collections {
      * 构造函数，以ArkTS ArrayBuffer创建一个ArkTS Float32Array对象。
      *
      * @param { ArrayBuffer } buffer - 用于构造ArkTS Float32Array的ArrayBuffer对象。buffer所占的字节数需是4的整数倍。
-     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认为**0**。
-     * @param { number } [length] - 指定ArkTS Float32Array的长度，默认为**0**。
+     * @param { number } [byteOffset] - 指定buffer的字节偏移，从0开始，默认值为0。byteOffset需为4的整数倍。
+     * @param { number } [length] - 指定ArkTS Float32Array的长度，需为非负整数。默认值为0。且需满足byteOffset + length * 4 <=
+     *     buffer.byteLength。
      * @throws { BusinessError } 10200012 - The Float32Array's constructor cannot be directly invoked.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -5947,7 +5984,7 @@ declare namespace collections {
      * 将传入的ArrayLike元素依次写入到指定的起始位置。
      *
      * @param { ArrayLike<number> } array - 用于设置的ArrayLike对象。
-     * @param { number } [offset] - 写入的起始位置。默认为0。
+     * @param { number } [offset] - 写入的起始位置，需为非负整数。默认值为0。offset与array.length之和不能超过ArkTS Float32Array的长度。
      * @throws { BusinessError } 10200011 - The set method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
      * @syscap SystemCapability.Utils.Lang
@@ -6027,6 +6064,8 @@ declare namespace collections {
     /**
      * 返回包含ArkTS Float32Array中每个元素的迭代器。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -6075,7 +6114,7 @@ declare namespace collections {
      * 判断ArkTS Float32Array是否包含特定元素。
      *
      * @param { number } searchElement - 待搜索的元素。
-     * @param { number } [fromIndex] - 开始搜索的索引。
+     * @param { number } [fromIndex] - 开始搜索的索引，默认值为0。如果fromIndex < 0，则会从fromIndex + Float32Array.length位置开始从前向后搜索。
      * @returns { boolean } 检查结果。如果ArkTS Float32Array包含指定的元素，则返回**true**，否则返回**false**。
      * @throws { BusinessError } 10200011 - The includes method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6088,6 +6127,8 @@ declare namespace collections {
     /**
      * 返回ArkTS Float32Array指定索引位置的元素。
      *
+     * 所需元素的从零开始的索引。取值范围为[0, Float32Array.length - 1]。
+     *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
      * @atomicservice
@@ -6098,8 +6139,8 @@ declare namespace collections {
      * 返回ArkTS Float32Array实例中最后一次出现searchElement的索引，如果对象不包含，则为**-1**。
      *
      * @param { number } searchElement - 待索引的值。
-     * @param { number } [fromIndex] - 搜索的起始下标。默认值为ArkTS Float32Array长度减1（即从末尾开始）。
-     *     如果下标大于等于ArkTS Float32Array的长度，则返回**-1**。如果提供的下标值是负数，则被当做距离数组尾部的偏移，从后到前搜索。
+     * @param { number } [fromIndex] - 搜索的起始索引，从该位置开始往前查找。默认值为ArkTS Float32Array长度减1（即从末尾开始）。如果索引大于等于ArkTS
+     *     Float32Array的长度，则从末尾开始往前查找。如果提供的索引值是负数，则被当作距离数组尾部的偏移，从后到前搜索。
      * @returns { number } 数组中给定元素的最后一个索引；没有找到，则返回**-1**。
      * @throws { BusinessError } 10200011 - The lastIndexOf method cannot be bound.
      * @throws { BusinessError } 10200201 - Concurrent modification error.
@@ -6165,7 +6206,7 @@ declare namespace collections {
     /**
      * 通过可变数量的参数创建一个新的ArkTS Float32Array对象。
      *
-     * @param { number[] } items - 用于创建数组的元素，参数个数可以是0个、1个或者多个。
+     * @param { number[] } [items] - 用于创建数组的元素，参数个数可以是0个、1个或者多个。默认值为空数组。
      * @returns { Float32Array } 新的ArkTS Float32Array实例。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
@@ -6399,6 +6440,8 @@ declare namespace collections {
     /**
      * 返回一个迭代器，用于迭代 BitVector 中的元素。
      *
+     * 本接口不支持在.ets文件中使用。
+     *
      * @returns { IterableIterator<number> } 一个新的可迭代迭代器对象。
      * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
      * @syscap SystemCapability.Utils.Lang
@@ -6421,6 +6464,8 @@ declare namespace collections {
     values(): IterableIterator<number>;
     /**
      * 返回指定索引位置的元素。
+     *
+     * 所需代码单元的从零开始的索引。当index < 0或者index >= length时，会抛出错误。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]

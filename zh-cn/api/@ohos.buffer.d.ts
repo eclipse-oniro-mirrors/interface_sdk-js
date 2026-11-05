@@ -460,13 +460,13 @@ declare namespace buffer {
     get byteOffset(): int;
 
     /**
-     * 使用value填充当前对象指定位置的数据，当value的长度小于需要填充的范围时会重复value进行填充，并返回填充后的Buffer对象。
+     * 使用`value`填充当前对象指定位置的数据，当`value`的长度小于需要填充的范围时会重复`value`进行填充，并返回填充后的Buffer对象。
      *
      * @param { string | Buffer | Uint8Array | number } value - 用于填充的值。[since 9 - 10]
      * @param { string | Buffer | Uint8Array | int | double | long } value - 用于填充的值。[since 11]
      * @param { int } [offset] - 起始偏移量。取值范围：>= 0且<= Buffer.length。默认值：0。
-     * @param { int } [end] - 结束偏移量（不包含结束位置）。默认值：当前对象的字节长度。
-     * @param { BufferEncoding } [encoding] - 字符编码格式（value为string才有意义）。默认值：'utf8'。
+     * @param { int } [end] - 结束偏移量（不包含结束位置）。 默认值：当前对象的字节长度。
+     * @param { BufferEncoding } [encoding] - 字符编码格式（`value`参数为string才有意义）。默认值：'utf8'。
      * @returns { Buffer } 返回填充后的Buffer对象。
      * @throws { BusinessError } 10200001 - The value of "[offset/end]" is out of range. It must be >= 0 and <=
      *     [right range]. Received value is: [offset/end]
@@ -487,12 +487,11 @@ declare namespace buffer {
      * 比较当前Buffer对象与目标Buffer或Uint8Array对象，并返回在排序中的结果。
      *
      * @param { Buffer | Uint8Array } target - 要比较的实例对象。
-     * @param { number } [targetStart] - target实例中开始的偏移量。取值范围：>= 0且<= target的字节长度。默认值：0。
-     * @param { number } [targetEnd] - target实例中结束的偏移量（不包含结束位置）。默认值：目标对象的字节长度。
-     * @param { number } [sourceStart] - this实例中开始的偏移量。默认值：0。
-     * @param { number } [sourceEnd] - this实例中结束的偏移量（不包含结束位置）。默认值：当前对象的字节长度。
-     * @returns { -1 | 0 | 1 } 比较结果。如果两个Buffer对象相同，则返回0；如果当前对象在排序时位于目标对象之后，则返回1；
-     *     如果当前对象在排序时位于目标对象之前，则返回-1。
+     * @param { number } [targetStart] - `target`实例中开始的偏移量。取值范围：>= 0且<= target的字节长度。默认值：0。
+     * @param { number } [targetEnd] - `target`实例中结束的偏移量（不包含结束位置）。默认值：目标对象的字节长度。
+     * @param { number } [sourceStart] - `this`实例中开始的偏移量。默认值：0。
+     * @param { number } [sourceEnd] - `this`实例中结束的偏移量（不包含结束位置）。默认值：当前对象的字节长度。
+     * @returns { -1 | 0 | 1 } 返回比较结果。-1：当前排列在目标前，0：当前与目标相同，1：当前排列在目标后。
      * @throws { BusinessError } 10200001 - The value of "[targetStart/targetEnd/sourceStart/sourceEnd]" is out of
      *     range.
      *     It must be >= 0 and <= [right range]. Received value is: [targetStart/targetEnd/sourceStart/sourceEnd]
@@ -567,13 +566,13 @@ declare namespace buffer {
     equals(otherBuffer: Uint8Array | Buffer): boolean;
 
     /**
-     * 检查Buffer对象是否包含value值。
+     * 检查Buffer对象是否包含`value`值。
      *
      * @param { string | number | Buffer | Uint8Array } value - 要搜索的内容。[since 9 - 10]
      * @param { string | int | double | long | Buffer | Uint8Array } value - 要搜索的内容。[since 11]
      * @param { int } [byteOffset] - 字节偏移量。如果为负数，则从末尾开始计算偏移量。默认值：0。
-     * @param { BufferEncoding } [encoding] - 字符编码格式（value为string才有意义）。默认值：'utf8'。
-     * @returns { boolean } 存在返回true，否则返回false。
+     * @param { BufferEncoding } [encoding] - 字符编码格式（`value`参数为string时才有意义）。默认值：'utf8'。
+     * @returns { boolean } 存在为true，否则为false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -583,12 +582,12 @@ declare namespace buffer {
     includes(value: string | int | double | long | Buffer | Uint8Array, byteOffset?: int, encoding?: BufferEncoding): boolean;
 
     /**
-     * 返回当前对象中首次出现value的索引，如果不包含value，则返回-1。
+     * 返回当前对象中首次出现`value`的索引，如果不包含`value`，则返回-1。
      *
      * @param { string | number | Buffer | Uint8Array } value - 要查找的内容。[since 9 - 10]
      * @param { string | int | double | long | Buffer | Uint8Array } value - 要查找的内容。[since 11]
      * @param { int } [byteOffset] - 字节偏移量。如果为负数，则从末尾开始计算偏移量。默认值：0。
-     * @param { BufferEncoding } [encoding] - 字符编码格式（value为string才有意义）。默认值：'utf8'。
+     * @param { BufferEncoding } [encoding] - 字符编码格式（`value`参数为string时才有意义）。默认值：'utf8'。
      * @returns { int } 第一次出现位置。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -613,7 +612,7 @@ declare namespace buffer {
     /**
      * 返回一个包含value的迭代器。
      *
-     * @returns { IterableIterator<long> } 迭代器。
+     * @returns { IterableIterator<long> } 返回包含Buffer中每个字节值的迭代器。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -636,13 +635,13 @@ declare namespace buffer {
     entries(): IterableIterator<[int, long]>;
 
     /**
-     * 返回this实例中最后一次出现value的索引，如果对象不包含value，则返回-1。
+     * 返回`this`实例中最后一次出现`value`的索引，如果对象不包含`value`，则返回-1。
      *
      * @param { string | number | Buffer | Uint8Array } value - 要搜索的内容。[since 9 - 10]
      * @param { string | int | double | long | Buffer | Uint8Array } value - 要搜索的内容。[since 11]
      * @param { int } [byteOffset] - 字节偏移量。如果为负数，则从末尾开始计算偏移量。默认值：Buffer.length。
-     * @param { BufferEncoding } [encoding] - 字符编码格式（value为string才有意义）。默认值：'utf8'。
-     * @returns { int } 最后一次出现value值的索引。
+     * @param { BufferEncoding } [encoding] - 字符编码格式（`value`参数为string时才有意义）。默认值：'utf8'。
+     * @returns { int } 最后一次出现`value`值的索引。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -654,7 +653,7 @@ declare namespace buffer {
     /**
      * 从指定的`offset`处读取有符号的大端序64位整数。
      *
-     * @param { int } [offset] - 偏移量。默认值：0。取值范围：0 <= offset <= Buffer.length - 8。当Buffer长度小于8时无法使用此方法。
+     * @param { int } [offset] - 偏移量。默认值：0。取值范围：0 <= offset <= Buffer.length - 8。
      * @returns { bigint } 读取的有符号大端序64位整数值。
      * @throws { BusinessError } 10200001 - The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8
      *     . Received value is: [offset]
@@ -669,7 +668,7 @@ declare namespace buffer {
     /**
      * 从指定的`offset`处读取有符号的小端序64位整数。
      *
-     * @param { int } [offset] - 偏移量。取值范围：0 <= offset <= Buffer.length - 8，默认值：0。
+     * @param { int } [offset] - 偏移量。默认值：0。取值范围：0 <= offset <= Buffer.length - 8。当Buffer长度小于8时无法使用此方法。
      * @returns { bigint } 从Buffer中读取的有符号小端序64位整数值，可用于高精度整数运算的二进制数据处理。
      * @throws { BusinessError } 10200001 - The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8
      *     . Received value is: [offset]
@@ -849,7 +848,7 @@ declare namespace buffer {
     /**
      * 从指定的`offset`处读取byteLength个字节，并将结果解释为支持最高48位精度的大端序、二进制补码有符号值。
      *
-     * @param { int } offset - 偏移量。取值范围：0 <= offset <= Buffer.length - byteLength，默认值：0。
+     * @param { int } offset - 偏移量。取值范围：0 <= offset <= Buffer.length - byteLength。
      * @param { int } byteLength - 读取的字节数。取值范围：1 <= byteLength <= 6。
      * @returns { long } 读取的内容。当offset为小数时，返回undefined。
      * @throws { BusinessError } 10200001 - The value of "[param]" is out of range. It must be >= [left range] and <=
@@ -986,7 +985,7 @@ declare namespace buffer {
     readUIntLE(offset: int, byteLength: int): long;
 
     /**
-     * 截取当前对象指定位置的数据并返回。返回的Buffer与原Buffer共享内存，修改任一对象都会影响另一个对象。
+     * 截取当前对象指定位置的数据并返回。返回的Buffer与原Buffer共享同一块内存区域，修改任一对象的数据会同步影响另一对象。
      *
      * @param { int } [start] - 截取开始位置。默认值：0。
      * @param { int } [end] - 截取结束位置（不包含结束位置）。默认值：当前对象的字节长度。在传入null时返回空Buffer。
@@ -1108,7 +1107,7 @@ declare namespace buffer {
      *
      * @param { string } str - 要写入Buffer的字符串。
      * @param { int } [offset] - 偏移量。取值范围：>= 0且<= Buffer.length。默认值：0。
-     * @param { int } [length] - 最大字节长度。默认值：（Buffer.length - offset）。
+     * @param { int } [length] - 最大字节长度。默认值：(Buffer.length - offset)。
      * @param { string } [encoding] - 字符编码，支持的格式范围为BufferEncoding。默认值：'utf8'。
      * @returns { int } 写入的字节数。
      * @throws { BusinessError } 10200001 - The value of "[offset/length]" is out of range. It must be >= 0 and <=
@@ -1333,7 +1332,7 @@ declare namespace buffer {
      * 在Buffer对象的offset偏移处写入大端序的有符号数据，字节长度为byteLength。
      *
      * @param { long } value - 写入Buffer的数据。
-     * @param { int } offset - 偏移量。默认值：0。取值范围：0 <= offset <= Buffer.length - byteLength。
+     * @param { int } offset - 偏移量。取值范围：0 <= offset <= Buffer.length - byteLength。
      * @param { int } byteLength - 要写入的字节数，取值范围：1 <= byteLength <= 6。
      * @returns { int } 偏移量offset加上写入的字节数。
      * @throws { BusinessError } 10200001 - The value of "[param]" is out of range. It must be >= [left range] and <=
@@ -1599,9 +1598,9 @@ declare namespace buffer {
     /**
      * 创建并返回一个包含原Blob对象中指定长度数据的新Blob对象。
      *
-     * @param { int } [start] - 起始位置。默认值：0。
-     * @param { int } [end] - 结束位置。默认值：原Blob对象中的数据长度。
-     * @param { string } [type] - 内容类型。默认值：''。
+     * @param { int } [start] - 起始位置。默认值为0。
+     * @param { int } [end] - 结束位置。默认值为原Blob对象中的数据长度。
+     * @param { string } [type] - 内容类型。默认值为''。
      * @returns { Blob } 新的Blob实例对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]

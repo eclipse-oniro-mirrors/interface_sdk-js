@@ -245,7 +245,7 @@ declare class HashMap<K, V> {
    * >
    * > 不建议在forEach遍历过程中使用set、remove方法，因其可能导致迭代过程中的状态异常，如需在遍历中插入或删除元素，建议使用for循环来进行安全的插入与删除操作。
    *
-   * @param { function } callbackFn - 回调函数，在遍历每个元素时被调用，用于对元素执行自定义操作。
+   * @param { function } callbackFn - 回调函数，在遍历每个元素时被调用，用于对元素执行自定义操作。 value是当前键值对的值；key是当前键值对的键；map是当前调用的HashMap实例，默认值为当前实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值。当需要在回调函数中访问其他对象的属性或方法时，可传入自定义thisArg。不传入时默认值为当前实例对象。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
