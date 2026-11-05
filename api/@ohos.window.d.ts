@@ -3282,7 +3282,7 @@ declare namespace window {
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow
+   * @useinstead window.findWindow(name: string)
    */
   function find(id: string, callback: AsyncCallback<Window>): void;
 
@@ -3295,7 +3295,7 @@ declare namespace window {
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow
+   * @useinstead window.findWindow(name: string)
    */
   function find(id: string): Promise<Window>;
 
@@ -5877,10 +5877,10 @@ declare namespace window {
      * >
      * > Before calling this API, you are advised to load the page by using
      * > [loadContent]{@link window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)} or
-     * > [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}. If the main window has not
-     * > finished loading and you call this API directly, the starting window keeps showing. Similarly, if the system
-     * > window, application child window, or global floating window has finished loading and you call this API directly
-     * > , the window is in the foreground but is not visible.
+     * [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}. If the main window has not
+     * finished loading and you call this API directly, the starting window keeps showing. Similarly, if the system
+     * window, application child window, or global floating window has finished loading and you call this API directly
+     * , the window is in the foreground but is not visible.
      *
      * @param { ShowWindowOptions } options - options of window shown
      * @returns { Promise<void> } Promise that returns no value.
@@ -8271,7 +8271,7 @@ declare namespace window {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing
+     * @useinstead window.Window.isWindowShowing()
      */
     isShowing(callback: AsyncCallback<boolean>): void;
 
@@ -8283,7 +8283,7 @@ declare namespace window {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing
+     * @useinstead window.Window.isWindowShowing()
      */
     isShowing(): Promise<boolean>;
 
@@ -10917,7 +10917,7 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses a promise to return the result.
      *
-     * @param { boolean } isTouchable is touchable if true, or not if false.
+     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10935,7 +10935,7 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses an asynchronous callback to return the result.
      *
-     * @param { boolean } isTouchable is touchable if true, or not if false.
+     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
      * @param { AsyncCallback<void> } callback Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -14954,7 +14954,7 @@ declare namespace window {
      * Set the application modality of the windowStage.
      *
      * @param { boolean } isModal - Enable the window modal if true, otherwise means the opposite.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } - Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
