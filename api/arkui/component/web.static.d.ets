@@ -7170,7 +7170,7 @@ export declare interface WebAttribute extends CommonMethod {
     default flingSpeedLimit(speedLimit: double | undefined): this;
 
     /**
-     * Sets whether to enable visited link persistence for the **Web** component.
+     * Sets whether to enable visited link persistence for the Web component.
      *
      * When enabled, visited link records are stored in database file. The records persist across app restarts,
      * and the visited link coloring remains consistent after the app is restarted.
