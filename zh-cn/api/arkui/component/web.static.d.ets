@@ -7083,7 +7083,7 @@ export declare interface WebAttribute extends CommonMethod {
      * @stagemodelonly
      * @since 26.1.0 static
      */
-    default visitedLinkPersistEnabled(enabled: boolean | undefined): WebAttribute;
+    default visitedLinkPersistEnabled(enabled: boolean | undefined): this;
 }
 
 /**
