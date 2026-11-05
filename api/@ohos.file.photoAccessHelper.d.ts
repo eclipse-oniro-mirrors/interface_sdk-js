@@ -19542,7 +19542,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } uri - Input uri.
      * @returns { boolean } Whether the asset specified by the uri is a single file moving photo,
-     *     return true if yes, and false otherwise..
+     *     return true if yes, and false otherwise.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
      *     <br>1. The uri is invalid.
      *     <br>2. The uri can not be opened.
