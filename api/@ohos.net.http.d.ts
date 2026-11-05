@@ -136,45 +136,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     extraData?: string | Object | ArrayBuffer;
-
-    /**
-     * Additional data for sending a request. This parameter is not used by default. Since API version 26, you are
-     * advised to use the **body** and **queryParams** parameters preferentially.
-     *
-     * **Note**: Do not add this parameter if no extra data is available. If this parameter must be added, set it to
-     * **undefined** or **null**. Do not pass the parameter as "".
-     *
-     * - If the HTTP request uses a POST, PUT, or DELETE method, this field serves as the content of the HTTP request
-     * and is encoded in UTF-8 format.
-     *
-     * Example:
-     *
-     * (1) If **content-Type** is **application/x-www-form-urlencoded**, the data in the request body must be encoded in
-     * the format of **key1=value1&key2=value2&key3=value3** after URL transcoding (**encodeURIComponent/encodeURI**)
-     * and this field is usually in the String format.
-     *
-     * (2) If **content-Type** is **text/xml**, this field is usually in the String format.
-     *
-     * (3) If **content-Type** is **application/json**, this field is usually in the Object format.
-     *
-     * (4) If **content-Type** is **application/octet-stream**, this field is usually in the ArrayBuffer format.
-     *
-     * (5) If **content-Type** is **multipart/form-data** and the content to be uploaded is a file, this field is
-     * usually in the ArrayBuffer format.
-     *
-     * The preceding information is for reference only and may vary according to the actual situation.
-     *
-     * - If the HTTP request uses the GET, OPTIONS, TRACE, or CONNECT method, this parameter serves as a supplement
-     * to HTTP request parameters. Parameters of the string type need to be encoded before being passed to the HTTP
-     * request. Parameters of the object type do not need to be precoded and will be directly concatenated to the URL.
-     * Parameters of the ArrayBuffer type will not be concatenated to the URL.
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    extraData?: string | RecordData | ArrayBuffer;
 
     /**
      * Type of the returned data. This parameter is not used by default. If this parameter is set, the system returns
@@ -228,21 +192,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     header?: Object;
-
-    /**
-     * HTTP request header field. When the request method is "POST", "PUT", "DELETE", or "", the default is
-     * {'content-Type': 'application/json'}; otherwise, the default is
-     * {'content-Type': 'application/x-www-form-urlencoded'}.
-     *
-     * If header contains a field of the number type, the maximum supported value is an int64 integer.
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header?: Record<string, string>;
 
     /**
      * Read timeout, in milliseconds (ms), with a default value of 60000 ms. The value passed in must be an integer
@@ -1393,16 +1345,9 @@ declare namespace http {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
-
-    /**
-     * Form data content.
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    data?: string | RecordData | ArrayBuffer;
 
     /**
      * File path of the form data. If **data** is not specified, **filePath** must be set.
@@ -2992,23 +2937,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     result: string | Object | ArrayBuffer;
-
-    /**
-     * Response content returned based on **Content-type** in the response header. If **HttpRequestOptions** does not
-     * contain the **expectDataType** field, the response content is returned according to the following rules:
-     * - application/json: string in JSON format
-     * - application/octet-stream: ArrayBuffer
-     * - image: ArrayBuffer
-     * - Others: string
-     * If **HttpRequestOptions** contains the **expectDataType** field, the response content must be of the same type as
-     * the data returned by the server.
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    result: string | RecordData | ArrayBuffer;
 
     /**
      * Type of the return value.
@@ -3047,22 +2978,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     header: Object;
-
-    /**
-     * Response header. The return value is a string in JSON format. If you want to use specific content in the
-     * response, you need to implement parsing of that content. Common fields and parsing methods are as follows:
-     * - content-type: header['content-type']
-     * - status-line: header['status-line']
-     * - date: header.date/header['date']
-     * - server: header.server/header['server']
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header: Record<string, string>;
 
     /**
      * Original cookies returned by the server. How to process the cookies is up to your decision.

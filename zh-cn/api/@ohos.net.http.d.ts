@@ -125,17 +125,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     extraData?: string | Object | ArrayBuffer;
-
-    /**
-     * 请求的附加数据。
-     * extraData可以是字符串、Object（API 6）或ArrayBuffer（API 8）。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    extraData?: string | RecordData | ArrayBuffer;
 
     /**
      * 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。
@@ -182,17 +174,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     header?: Object;
-
-    /**
-     * HTTP请求头字段。默认为{'content-Type': 'application/json'}。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header?: Record<string, string>;
 
     /**
      * 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。
@@ -1260,16 +1244,9 @@ declare namespace http {
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
+     * @since 23 static
      */
     data?: string | Object | ArrayBuffer;
-
-    /**
-     * 此参数从内存数据中设置mime部分的正文内容。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    data?: string | RecordData | ArrayBuffer;
 
     /**
      * 此参数将文件路径指向的文件内容设置为表单数据，如果未指定data内容，则必须设置filePath。
@@ -2786,17 +2763,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     result: string | Object | ArrayBuffer;
-
-    /**
-     * result可以是字符串（API 6）或ArrayBuffer（API 8）。从API 8开始，Object类型不再支持。
-     * 如果设置了{@link HttpRequestOptions#expectDataType}，系统将优先返回此参数。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @since 26.0.1 static
-     */
-    result: string | RecordData | ArrayBuffer;
 
     /**
      * 返回值类型。
@@ -2832,17 +2801,9 @@ declare namespace http {
      * @crossplatform [since 10]
      * @atomicservice [since 11]
      * @since 6 dynamic
+     * @since 23 static
      */
     header: Object;
-
-    /**
-     * 服务器响应中的所有请求头。
-     *
-     * @syscap SystemCapability.Communication.NetStack
-     * @FaAndStageModel
-     * @since 26.0.1 static
-     */
-    header: Record<string, string>;
 
     /**
      * 服务器返回的原始cookies。开发者可自行处理。
