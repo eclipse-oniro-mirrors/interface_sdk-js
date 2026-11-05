@@ -2039,6 +2039,24 @@ declare namespace applicationManager {
    * @since 26.1.0
    */
   function getOptimizationBatteryExclusionApps(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
+
+  /**
+   * 删除指定用户的所有通知。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { number } accountId - 用户帐号ID。
+   *     <br>取值应≥0。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllNotifications(accountId: number): void;
 }
 
 export default applicationManager;
