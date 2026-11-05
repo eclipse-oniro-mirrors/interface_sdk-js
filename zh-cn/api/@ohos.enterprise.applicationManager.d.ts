@@ -2027,8 +2027,8 @@ declare namespace applicationManager {
    * @param { Array<string> } appIdentifiers - 待添加应用的Bundle名称。
    * @param { number } accountId - 用户帐号ID。
    *     <br>取值应≥0。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -2045,8 +2045,8 @@ declare namespace applicationManager {
    * @param { Array<string> } appIdentifiers - 待移除应用的Bundle名称。
    * @param { number } accountId - 用户帐号ID。
    *     <br>取值应≥0。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -2065,8 +2065,8 @@ declare namespace applicationManager {
    * @param { common.QueryPolicy } [queryPolicy] - 查询策略。如果不指定该参数，则默认使用了
    *     {@link common.QueryPolicy.SELF}。
    * @returns { Array<string> } 返回电池优化排除列表中的应用包名。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
