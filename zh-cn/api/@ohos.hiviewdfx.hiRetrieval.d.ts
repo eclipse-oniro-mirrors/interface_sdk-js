@@ -72,7 +72,7 @@ declare namespace hiRetrieval {
   }
 
   /**
-   * 初始化应用灰度模块。多实例应用不支持调用此接口。
+   * 初始化应用灰度模块。
    *
    * @syscap SystemCapability.HiviewDFX.HiRetrieval
    * @FaAndStageModel
