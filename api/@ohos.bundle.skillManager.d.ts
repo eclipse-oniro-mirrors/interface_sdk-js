@@ -28,6 +28,7 @@ import { SkillInfo as _SkillInfo, SkillType as _SkillType } from './bundleManage
  * @stagemodelonly
  * @atomicservice
  * @since 26.0.0 dynamic
+ * @since 26.1.0 static
  */
 declare namespace skillManager {
   /**
@@ -39,6 +40,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   export enum SkillInfoFlag {
     /**
@@ -48,6 +50,7 @@ declare namespace skillManager {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
+     * @since 26.1.0 static
      */
     GET_SKILL_INFO_DEFAULT = 0x00000000,
     /**
@@ -57,6 +60,7 @@ declare namespace skillManager {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
+     * @since 26.1.0 static
      */
     GET_SKILL_INFO_WITH_DESCRIPTION = 0x00000001,
     /**
@@ -66,6 +70,7 @@ declare namespace skillManager {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
+     * @since 26.1.0 static
      */
     GET_SKILL_INFO_WITH_SRC_ENTRIES = 0x00000002,
     /**
@@ -75,6 +80,7 @@ declare namespace skillManager {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
+     * @since 26.1.0 static
      */
     GET_SKILL_INFO_WITH_PERMISSIONS = 0x00000004,
     /**
@@ -84,6 +90,7 @@ declare namespace skillManager {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
+     * @since 26.1.0 static
      */
     GET_SKILL_INFO_WITH_REQUEST_PERMISSIONS = 0x00000008,
   }
@@ -102,6 +109,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   function getSkillInfoForSelf(moduleName: string, skillName: string, flags: int): Promise<SkillInfo>;
 
@@ -119,6 +127,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   function getSkillInfosForSelf(flags: int): Promise<Array<SkillInfo>>;
 
@@ -144,6 +153,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   function getSkillInfo(bundleName: string, moduleName: string, skillName: string,
     flags: int, userId?: int): Promise<SkillInfo>;
@@ -166,6 +176,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   function getSkillInfos(bundleName: string, flags: int, userId?: int): Promise<Array<SkillInfo>>;
 
@@ -185,6 +196,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   function getAllSkillInfos(flags: int, userId?: int): Promise<Array<SkillInfo>>;
 
@@ -196,6 +208,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   export type SkillInfo = _SkillInfo;
 
@@ -207,6 +220,7 @@ declare namespace skillManager {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   export type SkillType = _SkillType;
 }
