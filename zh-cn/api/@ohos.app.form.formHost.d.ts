@@ -43,9 +43,9 @@ declare namespace formHost {
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @returns { Promise<formInfo.RunningFormInfo> } Promise对象。返回符合条件的卡片信息，包括卡片名称、尺寸等。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -64,9 +64,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当删除指定的卡片成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -86,9 +86,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -108,9 +108,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当释放指定的卡片成功，error为undefined；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -133,9 +133,9 @@ declare namespace formHost {
    *     <br>false: 表示不释放缓存。
    * @param { AsyncCallback<void> } callback - 回调函数。当释放指定的卡片成功，error为undefined；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -158,9 +158,9 @@ declare namespace formHost {
    *     <br>false: 表示不释放缓存。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -180,9 +180,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当请求卡片更新成功，error为undefined；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -202,9 +202,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -225,9 +225,9 @@ declare namespace formHost {
    * @param { Record<string, Object> } [wantParams] - 更新参数。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -247,9 +247,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当将指定的临时卡片转换为普通卡片成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -269,9 +269,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -291,9 +291,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @param { AsyncCallback<void> } callback - 回调函数。当向卡片框架发送通知以使指定的卡片可见成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -311,9 +311,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -331,9 +331,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @param { AsyncCallback<void> } callback - 回调函数。当向卡片框架发送通知以使指定的卡片不可见成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -351,9 +351,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -371,9 +371,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @param { AsyncCallback<void> } callback - 回调函数。当向卡片框架发送通知以使指定的卡片可以更新成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -392,9 +392,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -413,9 +413,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @param { AsyncCallback<void> } callback - 回调函数。当向卡片框架发送通知以使指定的卡片不可以更新成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -435,9 +435,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识列表。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -453,10 +453,10 @@ declare namespace formHost {
   /**
    * 检查系统是否准备好。使用callback异步回调。
    *
-   * @param { AsyncCallback<void> } callback - 回调函数。当检查系统是否准备好成功，error为undefined，否则为错误对象。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+    * @param { AsyncCallback<void> } callback - 回调函数。当检查系统是否准备好成功，error为undefined，否则为错误对象。
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -468,7 +468,7 @@ declare namespace formHost {
    * 检查系统是否准备好。使用Promise异步回调。
    *
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -480,12 +480,12 @@ declare namespace formHost {
    * 获取设备上所有应用提供的卡片信息（不包含模板卡片）。使用callback异步回调。
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-   * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上所有应用提供的卡片信息成功，error为undefined，data为查询到的卡片信
-   *     息；否则为错误对象。
-   * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上所有应用提供的卡片信息成功，error为undefined，data为查询到的卡片信
+    *     息；否则为错误对象。
+    * @throws { BusinessError } 201 - Permissions denied.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -502,7 +502,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -521,9 +521,9 @@ declare namespace formHost {
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上指定应用程序提供的卡片信息成功，error为undefined，data为查询到的卡
    *     片信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -544,9 +544,9 @@ declare namespace formHost {
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上指定应用程序提供的卡片信息成功，error为undefined，data为查询到的卡
    *     片信息；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -570,9 +570,9 @@ declare namespace formHost {
    * @param { string } [moduleName] - 要查询的模块名称，缺省默认为空。
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -591,9 +591,9 @@ declare namespace formHost {
    * @param { formInfo.FormInfoFilter } filter - 卡片信息过滤器。
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到符合条件的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -612,9 +612,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 有效卡片列表。
    * @param { AsyncCallback<int> } callback - 回调函数。当根据列表删除应用程序的无效卡片成功，error为undefined，data为删除的卡片个数；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -632,9 +632,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 有效卡片标识列表。
    * @returns { Promise<int> } Promise对象。返回删除的卡片个数。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -652,9 +652,9 @@ declare namespace formHost {
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @param { AsyncCallback<formInfo.FormStateInfo> } callback - 回调函数。当获取卡片状态成功，error为undefined，data为获取到的卡片状态；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -673,9 +673,9 @@ declare namespace formHost {
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @returns { Promise<formInfo.FormStateInfo> } Promise对象。返回卡片状态。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -696,9 +696,9 @@ declare namespace formHost {
    *
    * @param { "formUninstall" } type - 填写'formUninstall'，表示卡片卸载事件。
    * @param { Callback<string> } callback - 回调函数，返回卡片标识。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -711,9 +711,9 @@ declare namespace formHost {
    * You can use this method to listen to the event of uninstall form.
    *
    * @param { Callback<string> } callback - The callback of formUninstall.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -730,9 +730,9 @@ declare namespace formHost {
    * @param { "formUninstall" } type - 填写'formUninstall'，表示卡片卸载事件。
    * @param { Callback<string> } [callback] - 回调函数，返回卡片标识。缺省时，表示注销所有已注册事件回调。
    *     <br> 需与对应on('formUninstall')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -745,9 +745,9 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of uninstall form.
    *
    * @param { Callback<string> } [callback] - The callback of formUninstall.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -764,9 +764,9 @@ declare namespace formHost {
    *     <br>false: 表示卡片不可见。
    * @param { AsyncCallback<void> } callback - 回调函数。当通知卡片是否可见成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -788,9 +788,9 @@ declare namespace formHost {
    *     <br>false: 表示卡片不可见。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -811,9 +811,9 @@ declare namespace formHost {
    *     <br>true: 表示卡片启用更新状态。false: 表示卡片没有启用更新状态。
    * @param { AsyncCallback<void> } callback - 回调函数。当通知卡片是否启用更新状态成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -839,9 +839,9 @@ declare namespace formHost {
    *     <br>false: 表示卡片没有启用更新状态。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -861,9 +861,9 @@ declare namespace formHost {
    * @param { string } deviceId - 远程设备标识。
    * @param { AsyncCallback<void> } callback - 回调函数。当指定formId和远程设备Id进行卡片分享成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -883,9 +883,9 @@ declare namespace formHost {
    * @param { string } deviceId - 远程设备标识。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -907,9 +907,9 @@ declare namespace formHost {
    *     <br>false: 表示卡片不需要进行隐私保护状态。
    * @param { AsyncCallback<void> } callback - 回调函数。当指定卡片设置隐私保护属性成功，error为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -934,9 +934,9 @@ declare namespace formHost {
    *     <br>false: 表示卡片不需要进行隐私保护状态。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -955,9 +955,9 @@ declare namespace formHost {
    * @param { AsyncCallback<{ [key: string]: Object }> } callback - 以callback方式返回接口运行结果及卡片提供方数据。 [since 10 - 10]
    * @param { AsyncCallback<Record<string, Object>> } callback - 以callback方式返回接口运行结果及卡片提供方数据。 [since 11]
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -979,9 +979,9 @@ declare namespace formHost {
    * @returns { Promise<{ [key: string]: Object }> } 以Promise方式返回接口运行结果及卡片提供方数据。 [since 10 - 10]
    * @returns { Promise<Record<string, Object>> } 以Promise方式返回接口运行结果及卡片提供方数据。 [since 11]
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -1012,9 +1012,9 @@ declare namespace formHost {
    * @param { Callback<Want> } proxy - 回调函数。返回跳转所需要的Want信息。
    * @param { AsyncCallback<void> } callback - 回调函数，当指定卡片设置router跳转代理成功时，error为undefined；否则抛出异常。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1043,9 +1043,9 @@ declare namespace formHost {
    * @param { Callback<Want> } proxy - 回调函数。返回跳转所需要的Want信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1064,9 +1064,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @param { AsyncCallback<void> } callback - 回调函数，当指定卡片清除router跳转代理成功时，error为undefined；否则抛出异常。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1085,9 +1085,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1106,9 +1106,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { formInfo.PublishFormResult } result - 发布卡片加桌结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1128,9 +1128,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1149,9 +1149,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @param { AsyncCallback<void> } callback - 回调函数，当设置卡片可回收成功时，error为undefined；否则抛出异常。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1170,9 +1170,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1191,9 +1191,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1212,9 +1212,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - 卡片标识数组。
    * @param { AsyncCallback<void> } callback - 回调函数，当恢复卡片成功时，error为undefined；否则抛出异常。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1233,9 +1233,9 @@ declare namespace formHost {
    * @param { string } formId - 卡片标识。
    * @param { formInfo.FormLocation } location - 卡片位置。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1259,7 +1259,7 @@ declare namespace formHost {
    * @param { boolean } isLocked - 标识卡片是否为管控状态，true表示管控状态，false表示非管控状态。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1277,7 +1277,7 @@ declare namespace formHost {
    *
    * @param { 'formOverflow' } type - 事件回调类型，支持的事件为'formOverflow'，表示互动卡片动效请求。
    * @param { Callback<formInfo.OverflowRequest> } callback - 回调函数，用于卡片使用方对动效请求进行处理。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1290,7 +1290,7 @@ declare namespace formHost {
    * You can use this method to listen to the event of formOverflow.
    *
    * @param { Callback<formInfo.OverflowRequest> } callback - The callback of formOverflow.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1302,7 +1302,7 @@ declare namespace formHost {
    *
    * @param { 'formOverflow' } type - 事件回调类型，支持的事件为'formOverflow'，表示互动卡片动效请求。
    * @param { Callback<formInfo.OverflowRequest> } [callback] - 回调函数，对应已订阅互动卡片动效请求。缺省时，表示注销所有已注册互动卡片动效请求事件回调。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1315,7 +1315,7 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of formOverflow.
    *
    * @param { Callback<formInfo.OverflowRequest> } [callback] - The callback of formOverflow.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1330,7 +1330,7 @@ declare namespace formHost {
    * @param { formInfo.FormDimension } newDimension - 卡片尺寸，例如 Dimension_1_2，表示 1 x 2 卡片。
    * @param { formInfo.Rect } newRect - 卡片位置信息，包括卡片左上角顶点的xy坐标和卡片的宽高。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
    * @throws { BusinessError } 16501012 - The dimension parameter is incorrect
@@ -1347,7 +1347,7 @@ declare namespace formHost {
    *
    * @param { 'changeSceneAnimationState' } type - 事件回调类型，支持的事件为'changeSceneAnimationState'，表示互动卡片状态切换。
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } callback - 回调函数，用于卡片使用方处理状态切换请求。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1362,7 +1362,7 @@ declare namespace formHost {
    *
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } callback - The callback of
    *     change scene animation state.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1376,7 +1376,7 @@ declare namespace formHost {
    * @param { 'changeSceneAnimationState' } type - 事件回调类型，支持的事件为'changeSceneAnimationState'，表示互动卡片状态切换。
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } [callback] - 回调函数，对应已订阅互动卡片状态切换请求。缺省时，表示注销所有已注册互动卡片状
    *     态切换事件回调。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1391,7 +1391,7 @@ declare namespace formHost {
    *
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } [callback] - The callback of
    *     change scene animation state.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1403,7 +1403,7 @@ declare namespace formHost {
     *
     * @param { 'getFormRect' } type - 事件回调类型，支持的事件为'getFormRect'，表示卡片位置尺寸查询。
     * @param { formInfo.GetFormRectInfoCallback } callback - 回调函数，卡片使用方对查询请求进行处理，返回卡片相对屏幕左上角的位置信息和卡片尺寸信息。
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @syscap SystemCapability.Ability.Form
     * @systemapi
     * @since 20 dynamic
@@ -1416,7 +1416,7 @@ declare namespace formHost {
    * You can use this method to listen to the event of get form rect.
    *
    * @param { formInfo.GetFormRectInfoCallback } callback - The callback of get form rect.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1428,7 +1428,7 @@ declare namespace formHost {
    *
    * @param { 'getFormRect' } type - 事件回调类型，支持的事件为'getFormRect'，表示卡片位置尺寸查询。
    * @param { formInfo.GetFormRectInfoCallback } [callback] - 回调函数，对应已订阅卡片位置尺寸查询请求。缺省时，表示注销所有已注册卡片位置、尺寸查询事件回调。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1441,7 +1441,7 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of get form rect.
    *
    * @param { formInfo.GetFormRectInfoCallback } [callback] - The callback of get form rect.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1453,7 +1453,7 @@ declare namespace formHost {
    *
    * @param { 'getLiveFormStatus' } type - 事件回调类型，支持的事件为'getLiveFormStatus'，表示在线卡片状态查询。
    * @param { formInfo.GetLiveFormStatusCallback } callback  - 回调函数，卡片使用方对查询请求进行处理，返回所有实时卡片的运行状态。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1464,7 +1464,7 @@ declare namespace formHost {
    * Listens to the event of get live form status.
    *
    * @param { formInfo.GetLiveFormStatusCallback } callback  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1476,7 +1476,7 @@ declare namespace formHost {
    *
    * @param { 'getLiveFormStatus' } type - 事件回调类型，支持的事件为'getLiveFormStatus'，表示卡片位置尺寸查询。
    * @param { formInfo.GetLiveFormStatusCallback } [callback]  - 回调函数，对应已订阅卡片位置尺寸查询请求。缺省时，表示注销所有实时卡片的运行状态查询事件回调。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1488,7 +1488,7 @@ declare namespace formHost {
    * Cancels Listening to the event of get live form status.
    *
    * @param { formInfo.GetLiveFormStatusCallback } [callback]  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1501,7 +1501,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1517,7 +1517,7 @@ declare namespace formHost {
    * @param { string } [moduleName] - 要查询的模块名称，缺省默认为空。
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1531,7 +1531,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.TemplateFormDetailInfoCallback } callback - 回调函数，监控模板卡片静态配置信息变化。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1546,7 +1546,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.TemplateFormDetailInfoCallback } [callback] - 回调函数，监控模板卡片静态配置信息变化。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1562,7 +1562,7 @@ declare namespace formHost {
     * @param { formInfo.FormLocation } location - 卡片位置。
     * @returns { Promise<Array<string>> } Promise对象。返回查询到的卡片标识列表。
     * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @throws { BusinessError } 16500050 - IPC connection error.
     * @throws { BusinessError } 16501016 - The location of the widget is invalid.
     * @syscap SystemCapability.Ability.Form
@@ -1577,7 +1577,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.GetWantParamsCallback } callback - 回调函数，返回卡片参数信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1592,7 +1592,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.GetWantParamsCallback } [callback] - 回调函数，返回卡片参数信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1607,7 +1607,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.UpdateFormsConfigCallback } callback - 回调函数，返回卡片配置更新信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1622,7 +1622,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.UpdateFormsConfigCallback } [callback] - 回调函数，返回卡片配置更新信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1637,7 +1637,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.DeleteFormsCallback } callback - 回调函数，返回被删除的卡片标识列表。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1652,7 +1652,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.DeleteFormsCallback } [callback] - 回调函数，返回被删除的卡片标识列表。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1668,7 +1668,7 @@ declare namespace formHost {
    * @param { formInfo.FormHostServiceInfo } service - 注册到卡片管理服务的卡片使用方服务信息。
    * @returns { Promise<string> } Promise对象，返回注册成功的卡片使用方服务的服务Id。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -1685,7 +1685,7 @@ declare namespace formHost {
    * @param { string } serviceId - 待注销的卡片使用方服务的服务Id。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501019 - A form service not owned by you cannot be unregistered.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.

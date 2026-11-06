@@ -2067,7 +2067,7 @@ declare namespace formInfo {
    *
    * @param { string } formId
    * @returns { Promise<formInfo.Rect> } form rect info
-   * @throws { BusinessError } 202 - The application must be system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2079,7 +2079,7 @@ declare namespace formInfo {
    * Get live form status info callback
    *
    * @returns { Record<string, string> } form status info, the key is formId, value is one of "INACTIVE" "PAUSE" "ACTIVE".
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2181,7 +2181,7 @@ declare namespace formInfo {
    * template form detail info callback.
    *
    * @param { Array<TemplateFormDetailInfo> } info - Template form detail info.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly

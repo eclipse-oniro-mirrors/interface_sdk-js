@@ -47,8 +47,8 @@ declare namespace formBindingData {
    *     versions, the maximum number of image files is 5, and the maximum memory size of each image is 2 MB. Exceeding this 
    *     2 MB limit for any image will result in abnormal display.
    * @returns { FormBindingData } **FormBindingData** object created based on the passed data.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @atomicservice [since 11]
    * @since 9 dynamic

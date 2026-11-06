@@ -2034,7 +2034,7 @@ declare namespace formInfo {
    *
    * @param { string } formId - 卡片Id。
    * @returns { Promise<formInfo.Rect> } Promise对象，返回卡片相对屏幕左上角的位置信息和卡片尺寸信息。
-   * @throws { BusinessError } 202 - The application must be system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2046,7 +2046,7 @@ declare namespace formInfo {
    * 获取互动卡片状态的回调。
    *
    * @returns { Record<string, string> } 返回卡片的状态信息。key为formID，value为卡片的状态信息。状态信息有"INACTIVE"、"PAUSE"、"ACTIVE"。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2148,7 +2148,7 @@ declare namespace formInfo {
    * 模板卡真实卡片信息回调。
    *
    * @param { Array<TemplateFormDetailInfo> } info - 模板卡真实卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
