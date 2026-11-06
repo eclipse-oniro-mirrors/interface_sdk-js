@@ -101,9 +101,7 @@ template("ohos_copy_internal") {
     deps += [ ":$_module_info_target" ]
     inputs = []
     depfile = "${target_gen_dir}/${target_name}.d"
-    outputs = [
-      target_out_dir + "/${target_name}",
-    ]
+    outputs = [ target_out_dir + "/${target_name}" ]
     script = "//interface/sdk-js/process_internal.py"
     args = [
       "--input",
@@ -147,9 +145,7 @@ template("ohos_declaration_template") {
     deps += [ ":$_module_info_target" ]
     inputs = []
     depfile = "${target_gen_dir}/${target_name}.d"
-    outputs = [
-      root_out_dir + "/ohos_declaration/${target_name}",
-    ]
+    outputs = [ root_out_dir + "/ohos_declaration/${target_name}" ]
 
     # 处理api文件下全部文件，过滤特定文件
     script = "//interface/sdk-js/remove_internal.py"
