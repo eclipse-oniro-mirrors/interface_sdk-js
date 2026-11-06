@@ -13823,21 +13823,6 @@ export declare interface CommonMethod {
      */
     default onGestureCollectIntercept(callback: GestureCollectInterceptCallback): this;
     /**
-     * Set system-styled materials for the component. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of the component.
-     *
-     * Device Behavior Differences:The effect of the same material may vary across different devices depending on
-     * their computing power.
-     *
-     * @param { SystemUiMaterial | undefined } material - System-styled material. Undefined indicates reverting to
-     *     the effect of no system material.
-     * @returns { this }
-     * @syscap SystemCapability.ArkUI.ArkUI.Full
-     * @systemapi
-     * @stagemodelonly
-     * @since 23 static
-     */
-    /**
      * Set system-styled materials for the component. The material effect behaves differently on devices with different
      * level of computing powers. On devices with lower computing power, it affects attributes such as the
      * backgroundColor, borderWidth, borderColor, shadow. On devices with higher computing power, it adds a filter effect
@@ -13847,8 +13832,10 @@ export declare interface CommonMethod {
      *     the effect of no system material.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi [since 23 - 24]
+     * @publicapi [since 26.0.0]
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 23 static
      */
     default systemMaterial(material: SystemUiMaterial | undefined): this;
     /**
@@ -14580,16 +14567,10 @@ export type Filter = uiEffect.Filter;
  * SystemUiMaterial
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @systemapi
+ * @systemapi [since 23 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @since 23 static
- */
-/**
- * SystemUiMaterial
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @since 26.0.0 static
  */
 export type SystemUiMaterial = uiMaterial.Material;
 
