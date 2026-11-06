@@ -6249,7 +6249,7 @@ declare namespace audio {
      *
      * @param { boolean } mute - 应用自身给系统音频模块上报的静音状态。true表示应用将当前流静音，false表示取消静音。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800103 - Operation not permit at current state, there is no audio
+     * @throws { BusinessError } 6800103 - Operation not permitted at current state, there is no audio
      *     capturer running.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
