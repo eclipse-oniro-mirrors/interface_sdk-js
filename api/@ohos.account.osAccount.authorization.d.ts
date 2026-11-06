@@ -92,12 +92,12 @@ declare namespace authorization {
      * displayed in modal application mode. If a valid authorization already exists, it will be reused.
      *
      * @permission ohos.permission.REQUEST_LOCAL_ACCOUNT_AUTHORIZATION
-     * @param { Array<Privilege> } privileges - Target privilege list. Must be a non-empty array.
-     *     For available values, see [Privilege]{@link authorization.Privilege}.
+     * @param { Array<Privilege> } privileges - Target batch privileges. For available value, see
+     *     [Privilege]{@link authorization.Privilege}.
+     *     <br>The maxium length is 5 and connot be empty
      * @param { UIAbilityContext } context - The [UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext}
      *     that hosts the authorization dialog.
-     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise used to return the authorization results,
-     *     one [AuthorizationResult]{@link authorization.AuthorizationResult} per input privilege.
+     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise used to return the authorization results.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.

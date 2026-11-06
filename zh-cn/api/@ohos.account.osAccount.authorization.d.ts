@@ -84,11 +84,10 @@ declare namespace authorization {
      * 当应用处于前台且不存在有效授权时，将以模应用方式显示授权弹窗。若已存在有效授权，则会直接复用。
      *
      * @permission ohos.permission.REQUEST_LOCAL_ACCOUNT_AUTHORIZATION
-     * @param { Array<Privilege> } privileges - 目标特权列表。必须为非空数组。
-     *     有关可用值，请参阅[Privilege]{@link authorization.Privilege}。
+     * @param { Array<Privilege> } privileges - 目标批量特权。有关可用值，请参阅[Privilege]{@link authorization.Privilege}。
+     *     <br>最大长度为5，且不能为空。
      * @param { UIAbilityContext } context - 承载授权对话框的[UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext}。
-     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise用于返回授权结果，
-     *     每个输入特权对应一个[AuthorizationResult]{@link authorization.AuthorizationResult}。
+     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise用于返回授权结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 12300001 - The system service works abnormally.
