@@ -1479,6 +1479,23 @@ declare namespace inputMethod {
     discardTypingText(): Promise<void>;
 
     /**
+     * 请求系统输入能力。使用promise异步回调。
+     * <br>
+     * <br>当type为TRANSLATION时，当前输入法须为系统预置默认输入法，否则请求被拒绝。
+     *
+     * @param { InputCapabilityType } type - 系统输入能力类型。
+     * @returns { Promise } Promise对象，无返回结果。
+     * @throws { BusinessError } 12800008 - 输入法管理服务错误。可能原因：系统错误，如空指针、IPC异常。
+     * @throws { BusinessError } 12800009 - 输入法客户端断开连接。
+     * @throws { BusinessError } 12800010 - 当前输入法应用不是系统配置的默认输入法。
+     * @throws { BusinessError } 12800029 - 输入类型不支持。
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    requestSystemInputCapability(type: InputCapabilityType): Promise<void>;
+
+    /**
      * 进入文本编辑状态。使用callback异步回调。
      * <br>
      * <br>含义/功能：拉起软键盘，使编辑框进入文本编辑状态。
@@ -4105,6 +4122,27 @@ declare namespace inputMethod {
      * @since 23 dynamic&static
      */
     requestKeyboardReason?: RequestKeyboardReason;
+  }
+
+  /**
+   * 系统输入能力类型。用于{@link inputMethod.InputMethodController.requestSystemInputCapability}指定请求的系统输入能力类型。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InputCapabilityType {
+    /**
+     * 翻译输入能力。
+     * <br>
+     * <br>使用场景：用于请求输入法切换到翻译模式。当前输入法须为系统预置默认输入法，
+     * 否则请求将被拒绝并返回12800010错误码。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TRANSLATION = 0
   }
 }
 
