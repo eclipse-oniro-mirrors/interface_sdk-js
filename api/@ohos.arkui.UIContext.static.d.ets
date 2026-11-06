@@ -23,7 +23,7 @@
 import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui.component';
 
 import { ClickEvent, ExpectedFrameRateRange, DragItemInfo, AnimateParam, KeyframeAnimateParam, KeyframeState,
-  SheetOptions, PopupCommonOptions, MenuOptions, KeyEvent, MouseEvent, TouchEvent, ModifierKey,
+  SheetOptions, PopupCommonOptions, MenuOptions, KeyEvent, MouseEvent, TouchEvent, ModifierKey, FunctionKey,
   ContentCoverOptions } from '@ohos.arkui.component';
 
 import { InputEventMonitor, InputEventListener } from '@ohos.arkui.component';
@@ -3767,7 +3767,7 @@ export declare class UIContext {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
 
   /**

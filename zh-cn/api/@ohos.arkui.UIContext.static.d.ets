@@ -67,7 +67,7 @@ import { ResourceStr, SizeOptions, VoidCallback } from './arkui/component/units'
 
 import { KeyProcessingMode } from '@ohos.arkui.component';
 import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType,
-  ModifierKey } from './arkui/component/enums';
+  ModifierKey, FunctionKey } from './arkui/component/enums';
 
 import { TextMenuOptions, TextLayoutOptions, StyledString, Paragraph } from '@ohos.arkui.component';
 import { TimePickerDialogOptions } from './arkui/component/timePicker';
@@ -3684,7 +3684,7 @@ export declare class UIContext {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
 
   /**

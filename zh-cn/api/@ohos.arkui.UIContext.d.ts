@@ -4724,7 +4724,7 @@ export class UIContext {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
 
   /**
