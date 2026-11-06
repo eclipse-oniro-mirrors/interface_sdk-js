@@ -11,6 +11,9 @@
 # limitations under the License.
 """Track SDK copy inputs and existing generated files without changing selection."""
 import os
+import json
+import re
+import tempfile
 from pathlib import Path
 import sys
 
@@ -43,3 +46,52 @@ def record(depfile, output, inputs):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'build'))
     from scripts.util.build_utils import write_depfile
     write_depfile(depfile, output, _relative_depfile_inputs(dependencies))
+
+
+def reconcile(depfile, output, produced):
+    """Remove only previously recorded files owned by this copy action."""
+    if not depfile:
+        return
+    output = Path(output).absolute()
+    manifest = Path(str(depfile) + '.outputs.json')
+    current = {str(Path(path).absolute().relative_to(output)) for path in produced}
+    try:
+        old = json.loads(manifest.read_text())
+        if not isinstance(old, list) or not all(isinstance(name, str) for name in old):
+            raise ValueError('Invalid SDK copy ownership manifest: ' + str(manifest))
+    except FileNotFoundError:
+        # Older depfiles already recorded all generated files in this dedicated
+        # output. Adopt those paths; do not infer ownership of arbitrary files.
+        old = []
+        if Path(depfile).is_file():
+            text = Path(depfile).read_text().replace('\\\n', '')
+            for word in re.findall(r'(?:\\.|[^\s])+', text.partition(': ')[2]):
+                name = re.sub(r'\\([ \t#\\:])', r'\1', word).replace('$$', '$')
+                path = Path(os.path.abspath(name))
+                try:
+                    relative = path.relative_to(output)
+                except ValueError:
+                    continue
+                if path.is_file():
+                    old.append(str(relative))
+    for name in old:
+        relative = Path(name)
+        if relative.is_absolute() or '..' in relative.parts:
+            raise ValueError('Unsafe SDK copy ownership path: ' + name)
+        path = output / relative
+        # Never follow a replaced parent symlink outside the owned output.
+        try:
+            path.parent.resolve().relative_to(output.resolve())
+        except ValueError:
+            raise ValueError('Linked SDK output escapes its owner: ' + str(path))
+        if name not in current and (path.is_file() or path.is_symlink()):
+            path.unlink()
+    manifest.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary = tempfile.mkstemp(dir=manifest.parent, prefix=manifest.name+'.')
+    try:
+        with os.fdopen(descriptor, 'w') as stream:
+            json.dump(sorted(current), stream)
+        os.replace(temporary, manifest)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)

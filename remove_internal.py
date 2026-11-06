@@ -18,7 +18,7 @@ import sys
 import optparse
 import shutil
 import time
-from sdk_copy_dependencies import record
+from sdk_copy_dependencies import record, reconcile
 
 # d.ts directories to be deleted 需要排除的目录名称的列表
 remove_list = ["@internal", "common", "form", "liteWearable", "config", "syscapCheck"]
@@ -52,6 +52,13 @@ def main(argv):
         os.makedirs(options.output)
 
     copy_files(options.input, options.output)
+    produced = []
+    for directory, directories, files in os.walk(options.input):
+        if directory == options.input:
+            directories[:] = [name for name in directories if name not in remove_list]
+        produced.extend(os.path.join(options.output, os.path.relpath(os.path.join(directory, name), options.input))
+                        for name in files)
+    reconcile(options.depfile, options.output, produced)
     # Record completion after copying: generated files are tracked by the
     # depfile and must not appear newer than their declared directory output.
     os.utime(options.output)
