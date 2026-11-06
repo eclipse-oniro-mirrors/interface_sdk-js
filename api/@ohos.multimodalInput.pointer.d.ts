@@ -2030,6 +2030,52 @@ declare namespace pointer {
    * @since 24 dynamic&static
    */
   function getMouseScrollDirection(): Promise<boolean>;
+
+  /**
+   * Set a global high-priority cursor. Once set successfully, the cursor style will be locked and restricted
+   * when the cursor is visible, unaffected by other styles, until it is cleared or overridden by a new global
+   * high-priority cursor.
+   *
+   * @permission ohos.permission.MANAGE_CURSOR_STYLE
+   * @param { CustomCursor } customCursor - cursor resource info.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
+   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @syscap SystemCapability.MultimodalInput.Input.Pointer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setGlobalPriorityCursor(customCursor: CustomCursor): Promise<void>;
+
+  /**
+   * Clear the global high-priority cursor. Only the global high-priority cursor set by the caller can be cleared.
+   *
+   * @permission ohos.permission.MANAGE_CURSOR_STYLE
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
+   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @throws { BusinessError } 26500002 - The global high-priority cursor was not set by the caller and
+   *     cannot be cleared.
+   * @syscap SystemCapability.MultimodalInput.Input.Pointer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unsetGlobalPriorityCursor(): Promise<void>;
+
 }
 
 export default pointer;

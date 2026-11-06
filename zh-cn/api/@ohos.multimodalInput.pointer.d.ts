@@ -1838,6 +1838,50 @@ declare namespace pointer {
    * @since 24 dynamic&static
    */
   function getMouseScrollDirection(): Promise<boolean>;
+
+  /**
+   * 设置全局高优先级光标。设置成功后，当光标可见时光标样式将被锁定和限制，不受其他样式的影响，
+   * 直到它被清除或被新的全局高优先级光标覆盖。
+   *
+   * @permission ohos.permission.MANAGE_CURSOR_STYLE
+   * @param { CustomCursor } customCursor - 光标资源信息。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
+   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @syscap SystemCapability.MultimodalInput.Input.Pointer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setGlobalPriorityCursor(customCursor: CustomCursor): Promise<void>;
+
+  /**
+   * 清除全局高优先级光标。只有调用者设置的全局高优先级光标才能被清除。
+   *
+   * @permission ohos.permission.MANAGE_CURSOR_STYLE
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
+   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
+   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @throws { BusinessError } 26500002 - The global high-priority cursor was not set by the caller and
+   *     cannot be cleared.
+   * @syscap SystemCapability.MultimodalInput.Input.Pointer
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unsetGlobalPriorityCursor(): Promise<void>;
 }
 
 export default pointer;
