@@ -5307,17 +5307,14 @@ export class UIContext {
    * The shortcut takes effect globally in the application. When the shortcut is triggered, the callback receives the
    * **UIContext** of the UI instance where the shortcut is triggered.
    * Each registration returns a positive integer registration ID unique within the application, even when the
-   * shortcut and callback are identical. All matching registrations are invoked in increasing registration ID order.
-   * A matching component-level shortcut handles the event first. Application shortcuts run only if the event
-   * has not been handled by a component-level shortcut.
-   * The callbacks for an event are selected before invocation. Registration and unregistration during a callback
-   * affect subsequent events. Form rendering and dynamic rendering do not support this feature.
-   * Registration returns 0 on failure and does not throw an exception.
+   * shortcut and callback are identical. Multiple registrations of the same shortcut are retained, and only the
+   * latest registration that has not been unregistered takes effect. Registration IDs are not reused during the
+   * application lifetime.
    *
    * @param { string } value - Character key of the shortcut.
-   * @param { Array<ModifierKey> } keys - Modifier keys: any combination of CTRL, SHIFT, and ALT, without duplicates.
+   * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
    * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback invoked when the shortcut is triggered.
-   * @returns { int } Unique positive registration ID on success, or 0 on failure.
+   * @returns { int } Unique registration ID of this shortcut binding.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5330,13 +5327,11 @@ export class UIContext {
   /**
    * Unregisters the application-level keyboard shortcut binding identified by the registration ID.
    *
-   * Only the specified binding is removed. Other bindings of the same shortcut remain active.
-   * Callbacks already selected for the current event can still run; subsequent events skip the removed binding.
-   * If the ID does not exist or has already been unregistered, this method does nothing.
-   * Unregistration has no effect in form rendering or dynamic rendering.
+   * Only the specified binding is removed. Other bindings are unaffected. If the active binding is removed,
+   * the most recent remaining registration of the same shortcut takes effect. If the ID does not exist or has
+   * already been unregistered, this method does nothing.
    *
    * @param { int } registrationId - Registration ID returned when registering the shortcut.
-   * @throws { BusinessError } 401 - Parameter error. registrationId must be a 32-bit integer.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
