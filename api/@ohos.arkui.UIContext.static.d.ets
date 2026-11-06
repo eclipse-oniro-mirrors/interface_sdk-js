@@ -3718,7 +3718,7 @@ export declare class ResolvedUIContext extends UIContext {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export interface ApplicationShortcutCallbackInfo {
   /**
@@ -3727,7 +3727,7 @@ export interface ApplicationShortcutCallbackInfo {
    * @type { UIContext }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   uiContext: UIContext;
 }
@@ -3765,7 +3765,7 @@ export declare class UIContext {
    * @returns { int } Unique registration ID of this shortcut binding.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
@@ -3780,7 +3780,7 @@ export declare class UIContext {
    * @param { int } registrationId - Registration ID returned when registering the shortcut.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   static unregisterApplicationShortcut(registrationId: int): void;
 

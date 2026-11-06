@@ -3637,7 +3637,7 @@ export declare class ResolvedUIContext extends UIContext {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.2.0 static
+ * @since 26.1.0 static
  */
 export interface ApplicationShortcutCallbackInfo {
   /**
@@ -3646,7 +3646,7 @@ export interface ApplicationShortcutCallbackInfo {
    * @type { UIContext }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   uiContext: UIContext;
 }
@@ -3682,7 +3682,7 @@ export declare class UIContext {
    * @returns { int } 本次快捷键绑定的唯一注册标识符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
@@ -3696,7 +3696,7 @@ export declare class UIContext {
    * @param { int } registrationId - 注册快捷键时返回的注册标识符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.2.0 static
+   * @since 26.1.0 static
    */
   static unregisterApplicationShortcut(registrationId: int): void;
 

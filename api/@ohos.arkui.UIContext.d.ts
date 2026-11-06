@@ -5212,7 +5212,7 @@ export class ResolvedUIContext extends UIContext {
  * @stagemodelonly
  * @crossplatform
  * @atomicservice
- * @since 26.2.0 dynamic
+ * @since 26.1.0 dynamic
  */
 export interface ApplicationShortcutCallbackInfo {
   /**
@@ -5223,7 +5223,7 @@ export interface ApplicationShortcutCallbackInfo {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   uiContext: UIContext;
 }
@@ -5319,7 +5319,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
     callback: Callback<ApplicationShortcutCallbackInfo>): int;
@@ -5336,7 +5336,7 @@ export class UIContext {
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
-   * @since 26.2.0 dynamic
+   * @since 26.1.0 dynamic
    */
   static unregisterApplicationShortcut(registrationId: int): void;
 
