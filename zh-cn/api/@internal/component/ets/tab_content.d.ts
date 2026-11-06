@@ -108,6 +108,40 @@ declare enum LayoutMode {
 }
 
 /**
+ * 选项卡可见性。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum TabVisibility {
+
+  /**
+   * 页签可见。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  VISIBLE = 0,
+
+  /**
+   * 该选项卡被隐藏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  HIDDEN = 1
+}
+
+/**
 * 下划线风格对象。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1051,6 +1085,35 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @since 12 dynamic
    */
   onWillHide(event: VoidCallback): TabContentAttribute;
+
+  /**
+   * 设置选项卡的默认可见性。
+   *
+   * > **说明**
+   * >
+   * > -当**可见性**为**TabVisibility.HIDDEN**且**displayMode***为*TabBarDisplayMode.sideBAR*时，选项卡
+   * > 不会显示在侧边栏中，但在底部选项卡栏中仍然可见。
+   * > -当**visibility**为**TabVisibility.HIDDEN**且**displayMode***为*TabBarDisplayMode.BOTTOM_TABBAR**时，
+   * > tab不显示在底部选项卡栏中，但在侧边栏中保持可见。
+   * > -当**visibility**为**TabVisibility.HIDDEN**且**displayMode***未设置时，选项卡不显示在
+   * > 两种显示模式。
+   * > -隐藏的选项卡内容仍然可以使用**TabsController.changeIndex()**或通过修改
+   * > **索引**状态变量。
+   *
+   * @param { TabVisibility } visibility - 选项卡的可见性。
+   *     <br>默认值：**TabVisibility.VISIBLE**。
+   * @param { TabBarDisplayMode } [displayMode] - 可见性对应的显示模式.<br>不设置时，
+   *     **可见性**适用于侧边栏和底部选项卡栏。<br>当设置为**TabBarDisplayMode.sideBAR**时，
+   *     **可见性**仅适用于侧边栏。<br>设置为**TabBarDisplayMode.BOTTOM_TABBAR**时，
+   *     **可见性**仅适用于底部选项卡栏。
+   * @returns { TabContentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  tabBarVisibility(visibility: TabVisibility, displayMode?: TabBarDisplayMode): TabContentAttribute;
 }
 
 /**

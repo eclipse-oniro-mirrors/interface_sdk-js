@@ -5555,8 +5555,8 @@ export class UIContext {
    * > [像素单位转换接口替换为UIContext接口](docroot://ui/arkts-global-interface.md#像素单位转换接口替换为uicontext接口)。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5581,8 +5581,8 @@ export class UIContext {
    * > [像素单位转换接口替换为UIContext接口](docroot://ui/arkts-global-interface.md#像素单位转换接口替换为uicontext接口)。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5607,8 +5607,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5633,8 +5633,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5654,8 +5654,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5675,8 +5675,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
