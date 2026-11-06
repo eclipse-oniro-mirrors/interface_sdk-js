@@ -12319,9 +12319,10 @@ declare namespace audio {
     SOURCE_TYPE_VOICE_CALL = 4,
 
     /**
-     * 语音通话场景的音频源（单独启动录制不会开启3A算法，需同时使用[STREAM_USAGE_VOICE_COMMUNICATION]{@link audio.StreamUsage}或
-     * [STREAM_USAGE_VIDEO_COMMUNICATION]{@link audio.StreamUsage}类型的AudioRender起播才会触发开启3A算法）。
-     *
+     * 语音通话场景的音频源。
+     * 在API版本23之前，单独启动录制不会开启3A算法，需同时使用{@link audio.StreamUsage.STREAM_USAGE_VOICE_COMMUNICATION}或
+     * {@link audio.StreamUsage.STREAM_USAGE_VIDEO_COMMUNICATION}类型播放才会触发开启3A算法。
+     * 在API版本23及更高的版本中，单独启动此类型的录制，也会开启3A算法。
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
