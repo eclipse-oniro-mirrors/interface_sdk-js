@@ -13015,6 +13015,21 @@ export declare interface CommonMethod {
      */
     default advancedBlendMode(effect: BlendMode | Blender | undefined, type?: BlendApplyType): this;
     /**
+     * Add a blender effect to the current component using a BlenderBase instance.
+     * Cannot be used together with the blendMode interface.
+     *
+     * @param { BlenderBase | undefined } effect - Blender base type, which is the entry point for creating various Blender effects.
+     *     A BlenderBase instance must be created through member methods of the BlenderBase class.
+     * @param { BlendApplyType } [type] - Whether the blend effect is implemented offscreen.
+     *     Default value: BlendApplyType.FAST.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default advancedBlendMode(effect: BlenderBase | undefined, type?: BlendApplyType): this;
+    /**
      * Sets whether to clip the areas of child components that extend beyond this component's boundaries,
      * That is, whether to perform clipping based on the edge contour of the parent container.
      *
@@ -14600,6 +14615,15 @@ export type SystemUiMaterial = uiMaterial.Material;
  * @since 23 static
  */
 export type Blender = uiEffect.Blender;
+/**
+ * Blender base type, which is the entry point for creating various Blender effects.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type BlenderBase = uiEffect.BlenderBase;
 /**
  * Import the DialogController type from promptAction.
  *
