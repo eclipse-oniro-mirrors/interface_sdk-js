@@ -150,7 +150,7 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
    * @returns { ImageAnimatorAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setImageAnimatorOptions(): this;
 
@@ -263,7 +263,6 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
      *     的不可见回调暂停，则在属性由true改为false后，组件会从上次暂停的位置重新开始播放。<br/>
      *     由该属性导致的不可见暂停和可见暂停操作不会改变用户设置的[state]{@link ImageAnimatorAttribute.state}值。
    * @returns { ImageAnimatorAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -330,7 +329,7 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
      *
    * @param { AttributeModifier<ImageAnimatorAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { ImageAnimatorAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -359,7 +358,7 @@ export declare function ImageAnimator(): ImageAnimatorAttribute;
  * @returns { ImageAnimatorAttribute } ImageAnimator的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder
