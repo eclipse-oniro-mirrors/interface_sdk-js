@@ -3760,7 +3760,7 @@ export declare class UIContext {
    * application lifetime.
    *
    * @param { string | FunctionKey } value - A single character of the hotkey (a character that can be entered using a
-   *     keyboard) or a FunctionKey.
+   *     keyboard) or a function key.
    * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
    * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback that provides information about the UI instance
    *     that triggers the hotkey (ApplicationShortcutCallbackInfo).

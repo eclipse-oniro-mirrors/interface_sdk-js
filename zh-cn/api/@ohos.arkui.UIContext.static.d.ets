@@ -3676,7 +3676,7 @@ export declare class UIContext {
    * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
    * 注册标识符在应用运行期间不复用。
    *
-   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或FunctionKey。
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
    * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
    * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
    * @returns { int } 本次快捷键绑定的唯一注册标识符。
