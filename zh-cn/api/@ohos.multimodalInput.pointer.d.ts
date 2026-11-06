@@ -1852,8 +1852,8 @@ declare namespace pointer {
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     1. The hardware does not support the capability; 2. The chip does not support the capability;
    *     3. A dependent service feature is not supported.
-   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
-   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @throws { BusinessError } 3800001 - Input service exception. Possible causes: 1. Memory allocation failure.
+   *     2. Thread busy. 3. Service terminated abnormally. 4. Other unexpected errors. Try again later.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
    * @systemapi
    * @stagemodelonly
@@ -1872,8 +1872,8 @@ declare namespace pointer {
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     1. The hardware does not support the capability; 2. The chip does not support the capability;
    *     3. A dependent service feature is not supported.
-   * @throws { BusinessError } 3800001 - Input service exception.Possible causes: 1.Memory allocation failure.
-   *     2.Thread busy. 3.Service terminated abnormally. 4.Other unexpected errors. Try again later.
+   * @throws { BusinessError } 3800001 - Input service exception. Possible causes: 1. Memory allocation failure.
+   *     2. Thread busy. 3. Service terminated abnormally. 4. Other unexpected errors. Try again later.
    * @throws { BusinessError } 26500002 - The global high-priority cursor was not set by the caller and
    *     cannot be cleared.
    * @syscap SystemCapability.MultimodalInput.Input.Pointer
