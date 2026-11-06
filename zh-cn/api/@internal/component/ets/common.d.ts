@@ -7081,7 +7081,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Repeat = 0,
+  Repeat,
 
   /**
    * 被切割的图片会以拉伸填充的方式铺满图片边框。
@@ -7107,7 +7107,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Stretch = 1,
+  Stretch,
 
   /**
    * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会压缩图片。
@@ -7133,7 +7133,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Round = 2,
+  Round,
 
   /**
    * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会以空白填充。
@@ -7159,7 +7159,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Space = 3
+  Space
 }
 
 /**
