@@ -4716,7 +4716,7 @@ export class UIContext {
    *
    * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或FunctionKey。
    * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
-   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 快捷键触发时调用的回调函数。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
    * @returns { int } 本次快捷键绑定的唯一注册标识符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

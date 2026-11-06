@@ -3762,7 +3762,8 @@ export declare class UIContext {
    * @param { string | FunctionKey } value - A single character of the hotkey (a character that can be entered using a
    *     keyboard) or a FunctionKey.
    * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
-   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback invoked when the shortcut is triggered.
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback that provides information about the UI instance
+   *     that triggers the hotkey (ApplicationShortcutCallbackInfo).
    * @returns { int } Unique registration ID of this shortcut binding.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
