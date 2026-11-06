@@ -2833,12 +2833,24 @@ declare namespace util {
      *     <br>- **Urgency.HIGH**: high urgency level, GC threshold is low,
      *     suitable for scenarios the ArkTS memory pressure of the application is extremely high,
      *     developers expect the system to trigger GC as soon as possible to reclaim memory.
+     *
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @since 26.1.0 dynamiconly
      */
     static hintGC(level?: UrgencyLevel): void;
+
+    /**
+     * Enable the proportional handle/primitive storage shrink optimization. OFF by default; once enabled it cannot
+     * be turned off. Before enablement the legacy conservative shrink is used.
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static enableHandleMemoryOptimization(): void;
   }
 
   /**
