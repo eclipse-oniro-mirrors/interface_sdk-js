@@ -3759,7 +3759,7 @@ export declare class UIContext {
    * latest registration that has not been unregistered takes effect. Registration IDs are not reused during the
    * application lifetime.
    *
-   * @param { string } value - Character key of the shortcut.
+   * @param { string | FunctionKey } value - Character key of the shortcut.
    * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
    * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback invoked when the shortcut is triggered.
    * @returns { int } Unique registration ID of this shortcut binding.
