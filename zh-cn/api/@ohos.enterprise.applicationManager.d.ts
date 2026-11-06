@@ -360,6 +360,42 @@ declare namespace applicationManager {
   }
 
   /**
+   * 主窗口显示信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface MainWindowStates {
+    /**
+     * 应用进程ID。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    pid: number;
+
+    /**
+     * 应用包名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bundleName: string;
+
+    /**
+     * 主窗口状态。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    state: WindowState;
+  }
+
+  /**
    * 添加应用至应用运行禁止名单，添加至禁止名单的应用不允许在当前用户下运行，不在禁止名单中的应用允许运行。使用callback异步回调。从API version 21开始，如果应用运行允许名单
    * [addAllowedRunningBundles]{@link applicationManager.addAllowedRunningBundles}非空，就不能再通过本接口添加应用运行禁止名单，否则会报9200010冲突错误
    * 码。
@@ -2057,6 +2093,22 @@ declare namespace applicationManager {
    * @since 26.1.0
    */
   function removeAllNotifications(accountId: number): void;
+
+  /**
+   * 获取所有主窗口的状态。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @returns { Array<MainWindowStates> } 返回主窗口状态。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllMainWindowStates(): Array<MainWindowStates>;
 }
 
 export default applicationManager;

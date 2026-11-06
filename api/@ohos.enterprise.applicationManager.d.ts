@@ -373,6 +373,42 @@ declare namespace applicationManager {
   }
 
   /**
+   * Main window states information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface MainWindowStates {
+    /**
+     * Process ID of the application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    pid: number;
+
+    /**
+     * Bundle name of the application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bundleName: string;
+
+    /**
+     * State of the main window.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    state: WindowState;
+  }
+
+  /**
    * Adds the applications that are not allowed to run under the current user. This API uses an asynchronous callback to
    * return the result. From API version 21, if the allowed application list
    * [addAllowedRunningBundles]{@link applicationManager.addAllowedRunningBundles} is not empty, the prohibited
@@ -2332,6 +2368,22 @@ declare namespace applicationManager {
    * @since 26.1.0
    */
   function removeAllNotifications(accountId: number): void;
+
+  /**
+   * Obtains the states of all main windows.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @returns { Array<MainWindowStates> } Return the main window states.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllMainWindowStates(): Array<MainWindowStates>;
 }
 
 export default applicationManager;
