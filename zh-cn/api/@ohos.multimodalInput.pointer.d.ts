@@ -1844,7 +1844,7 @@ declare namespace pointer {
    * 直到它被清除或被新的全局高优先级光标覆盖。
    *
    * @permission ohos.permission.MANAGE_CURSOR_STYLE
-   * @param { CustomCursor } customCursor - 光标资源信息。
+   * @param { CustomCursor } cursor - 光标资源信息。
    * @returns { Promise<void> } 不返回任何值的Promise。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -1859,7 +1859,7 @@ declare namespace pointer {
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function setGlobalPriorityCursor(customCursor: CustomCursor): Promise<void>;
+  function setGlobalPriorityCursor(cursor: CustomCursor): Promise<void>;
 
   /**
    * 清除全局高优先级光标。只有调用者设置的全局高优先级光标才能被清除。

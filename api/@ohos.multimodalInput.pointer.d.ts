@@ -2037,7 +2037,7 @@ declare namespace pointer {
    * high-priority cursor.
    *
    * @permission ohos.permission.MANAGE_CURSOR_STYLE
-   * @param { CustomCursor } customCursor - cursor resource info.
+   * @param { CustomCursor } cursor - cursor resource info.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -2052,7 +2052,7 @@ declare namespace pointer {
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function setGlobalPriorityCursor(customCursor: CustomCursor): Promise<void>;
+  function setGlobalPriorityCursor(cursor: CustomCursor): Promise<void>;
 
   /**
    * Clear the global high-priority cursor. Only the global high-priority cursor set by the caller can be cleared.
