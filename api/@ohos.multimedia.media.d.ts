@@ -6323,53 +6323,6 @@ declare namespace media {
     bitrate: int;
   }
 
-    /**
-   * Transparent video layout enumeration definition in side-by-side mode;
-   * It is used to specify the position of alpha data of the transparent video in the image, so that the player can
-   * correctly synthesize the transparent video.
-   *
-   * @syscap SystemCapability.Multimedia.Media.Core
-   * @stagemodelonly
-   * @since 26.2.0 dynamic&static
-   */
-  enum SideBySideTransparentVideoLayoutMode {  
-    /**
-     * Indicates that the transparent video is left-right layout, and the left data is alpha data.
-     *
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    SIDE_BY_SIDE_LAYOUT_HORIZONTAL = 0,
- 
-    /**
-     * Indicates that the transparent video is in the top-down layout, and the upper part of the data is alpha data.
-     *
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    SIDE_BY_SIDE_LAYOUT_VERTICAL = 1,
- 
-    /**
-     * Indicates that the transparent video layout is left-right layout, and the right half of the data is alpha data.
-     *
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    SIDE_BY_SIDE_LAYOUT_HORIZONTAL_REVERSE = 2,
- 
-    /**
-     * Indicates that the transparent video layout is top-down layout, and the lower part of the data is alpha data.
-     *
-     * @syscap SystemCapability.Multimedia.Media.Core
-     * @stagemodelonly
-     * @since 26.2.0 dynamic&static
-     */
-    SIDE_BY_SIDE_LAYOUT_VERTICAL_REVERSE = 3
-  }
-
   /**
    * Transparent video layout enumeration definition in side-by-side mode;
    * It is used to specify the position of alpha data of the transparent video in the image, so that the player can
