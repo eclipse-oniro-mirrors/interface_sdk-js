@@ -2540,7 +2540,7 @@ declare namespace webview {
          *     <br>This value cannot be null.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         static setDataDirectorySuffix(suffix: string): void;
 
@@ -2552,7 +2552,7 @@ declare namespace webview {
          * @returns { string } The current data directory suffix, or an empty string if not set.
          * @syscap SystemCapability.Web.Webview.Core
          * @stagemodelonly
-         * @since 26.2.0 static
+         * @since 26.1.0 static
          */
         static getDataDirectorySuffix(): string;
 
