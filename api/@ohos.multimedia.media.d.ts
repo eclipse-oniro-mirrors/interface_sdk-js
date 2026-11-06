@@ -6324,6 +6324,53 @@ declare namespace media {
   }
 
   /**
+   * Transparent video layout enumeration definition in side-by-side mode;
+   * It is used to specify the position of alpha data of the transparent video in the image, so that the player can
+   * correctly synthesize the transparent video.
+   *
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum SideBySideTransparentVideoLayoutMode {  
+    /**
+     * Indicates that the transparent video is left-right layout, and the left data is alpha data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL = 0,
+ 
+    /**
+     * Indicates that the transparent video is in the top-down layout, and the upper part of the data is alpha data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL = 1,
+ 
+    /**
+     * Indicates that the transparent video layout is left-right layout, and the right half of the data is alpha data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL_REVERSE = 2,
+ 
+    /**
+     * Indicates that the transparent video layout is top-down layout, and the lower part of the data is alpha data.
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL_REVERSE = 3
+  }
+
+  /**
    * The MediaSource class defines the media data information, which is from 
    * [createMediaSourceWithUrl]{@link @ohos.multimedia.media:media.createMediaSourceWithUrl(url: string, headers?: Record<string, string>)}.
    *
@@ -6355,6 +6402,19 @@ declare namespace media {
      * @since 23 static
      */
     setMediaResourceLoaderDelegate(resourceLoader: MediaSourceLoader): void;
+
+    /**
+     * Sets the layout information of the video source in stitching mode, which is used to guide the player to
+     * synthesize the correct transparent video.
+     *
+     * If this parameter is not set, the video is played as a common video.
+     *
+     * @param { SideBySideTransparentVideoLayoutMode } mode - Layout mode value of the side-by-side video.
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setTransparentVideoLayoutMode(mode : SideBySideTransparentVideoLayoutMode):void;
 
     /**
     * Sets whether to enable offline caching during video playback.

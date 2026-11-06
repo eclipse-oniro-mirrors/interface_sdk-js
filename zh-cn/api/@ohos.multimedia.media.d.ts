@@ -5885,6 +5885,52 @@ declare namespace media {
   }
 
   /**
+   * 拼接模式的透明视频布局枚举定义;
+   * 用于指明透明视频的alpha数据在图像中的位置，便于播放器正确合成透明效果的视频；
+   *
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+   enum SideBySideTransparentVideoLayoutMode {  
+    /**
+     * 指示透明视频为左右布局，左边数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL = 0,
+ 
+    /**
+     * 指示透明视频为上下布局，上半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL = 1,
+ 
+    /**
+     * 指示透明视频布局为左右布局，右半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL_REVERSE = 2,
+ 
+    /**
+     * 指示透明视频布局为上下布局，下半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL_REVERSE = 3
+  }
+
+  /**
    * 媒体数据信息。来源于
    * [createMediaSourceWithUrl]{@link @ohos.multimedia.media:media.createMediaSourceWithUrl(url: string, headers?: Record<string, string>)}
    * 。
@@ -5921,6 +5967,18 @@ declare namespace media {
      * @since 23 static
      */
     setMediaResourceLoaderDelegate(resourceLoader: MediaSourceLoader): void;
+    
+    /**
+     * 设置拼接模式的视频源的布局信息，用于指导播放器合成出来正确的透明视频
+     *
+     * 若不配置，按普通视频进行播放;
+     *
+     * @param { SideBySideTransparentVideoLayoutMode } mode - 拼接视频的布局模式值。
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setTransparentVideoLayoutMode(mode : SideBySideTransparentVideoLayoutMode):void;
 
     /**
     * 是否在视频播放期间启用离线缓存。
