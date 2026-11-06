@@ -12187,8 +12187,11 @@ declare namespace photoAccessHelper {
      * Private moving photo.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi [since 13 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 13 dynamic
+     * @since 23 static
      */
     PRIVATE_MOVING_PHOTO_RESOURCE = 4,
 
