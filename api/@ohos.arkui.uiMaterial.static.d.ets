@@ -387,6 +387,7 @@ declare namespace uiMaterial {
    * @since 26.0.0 static
    */
   export function convertToECMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
+
   /**
    * Convert from ImmersiveMaterial to another ImmersiveMaterial set on sub component of EffectComponent.
    *

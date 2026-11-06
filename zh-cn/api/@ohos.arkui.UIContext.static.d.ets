@@ -4390,22 +4390,33 @@ export declare class UIContext {
   getWindowHeightBreakpoint(): HeightBreakpoint;
 
   /**
-   * Open the BindSheet.
+   * 创建并弹出以bindSheetContent作为内容的半模态页面，使用Promise异步回调。通过该接口弹出的半模态页面样式完全按照bindSheetContent中设置的样式显示。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } [sheetOptions] - The options of sheet.
-   * @param { int } [targetId] - The uniqueId of the FrameNode to which BindSheet is attached.
+   * > **说明：**
+   * >
+   * > 1. 使用该接口时，若未传入有效的targetId，则不支持设置SheetOptions.preferType为POPUP模式、不支持设置SheetOptions.mode为EMBEDDED模式。
+   * > 2. 由于updateBindSheet和closeBindSheet依赖bindSheetContent去更新或者关闭指定的半模态页面，开发者需自行维护传入的bindSheetContent。
+   * > 3. 不支持设置SheetOptions.UIContext。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } [sheetOptions] - 半模态页面样式。
+   *     <br>**说明：**
+   *     <br>1. 不支持设置SheetOptions.uiContext，该属性的值固定为当前实例的UIContext。
+   *     <br>2. 若不传递targetId，则不支持设置SheetOptions.preferType为POPUP样式，若设置了POPUP样式则使用CENTER样式替代。
+   *     <br>3. 若不传递targetId，则不支持设置SheetOptions.mode为EMBEDDED模式，默认为OVERLAY模式。
+   *     <br>4. 其余属性的默认值参考SheetOptions文档。
+   * @param { int } [targetId] - 需要绑定组件的ID，若不指定则不绑定任何组件。id不存在时返回错误码120004。在传入undefined时返回错误码401。
    *     <br>Value range:(0, +∞)
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120002 - The bindSheetContent already exists.
-   * @throws { BusinessError } 120004 - The targetId does not exist.
-   * @throws { BusinessError } 120005 - The node of targetId is not in the component tree.
-   * @throws { BusinessError } 120006 - The node of targetId is not a child of the page node or NavDestination node.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120002 - 内容节点对应半模态页面已存在。
+   * @throws { BusinessError } 120004 - 指定的targetId不存在。
+   * @throws { BusinessError } 120005 - 指定的targetId对应的节点未挂载在组件树上。
+   * @throws { BusinessError } 120006 - 指定的targetId对应的节点并不是page节点或NavDestination节点的子节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4413,20 +4424,27 @@ export declare class UIContext {
   openBindSheet(bindSheetContent: ComponentContentBase, sheetOptions?: SheetOptions, targetId?: int): Promise<void>;
 
   /**
-   * Update the BindSheet with sheetOptions.
+   * 更新bindSheetContent对应的半模态页面的样式，使用Promise异步回调。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } sheetOptions - The update options of sheet.
-   * @param { boolean } [partialUpdate] - If true, only the specified properties in the sheetOptions are updated,
-   *     otherwise the rest of the properties are overwritten with the default values.
-   *     Default value is false.
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120003 - The bindSheetContent cannot be found.
+   * > **说明：**
+   * >
+   * > 不支持更新SheetOptions.UIContext、SheetOptions.mode、回调函数。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } sheetOptions - 半模态页面样式。
+   *     <br>**说明：**
+   *     <br>不支持更新SheetOptions.uiContext、SheetOptions.mode、回调函数。
+   * @param { boolean } [partialUpdate] - 半模态页面更新方式，默认值为false。
+   *     <br>**说明：**
+   *     <br>1. true为增量更新，保留当前值，更新SheetOptions中的指定属性。
+   *     <br>2. false为全量更新，除SheetOptions中的指定属性，其他属性恢复默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120003 - 无法找到内容节点对应的半模态页面。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

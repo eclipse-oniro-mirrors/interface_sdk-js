@@ -8088,24 +8088,6 @@ declare enum ShadowType {
 declare interface ShadowOptions {
   /**
    * 阴影模糊半径。
-   * 
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   * 
-   * 单位：px
-   * 
-   * **说明：**  
-   * 
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理，此时不绘制阴影；从API版本26.0.0开始，设置的值即为最终取值，值为0时仍绘制阴影，设置负数值时不绘制阴影。
-   * 
-   * 如需使用vp单位的数值可用[vp2px]{@link @ohos.arkui.UIContext:UIContext.vp2px}进行转换。
-   * 
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影模糊半径。
    *
    * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
    *
@@ -8113,59 +8095,17 @@ declare interface ShadowOptions {
    *
    * **说明：**
    *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
+   * API版本26.0.0之前，设置小于0的值时，按值为0处理，此时不绘制阴影。从API版本26.0.0开始，设置的值即为最终取值，值为0时仍绘制阴影，设置负数值时不绘制阴影。
    *
    * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
    *
    * 如果radius为Resource类型，则传入的值需为number类型。
    *
-   * @type { number | Resource }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影模糊半径。
-   *
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @type { number | Resource }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影模糊半径。
-   *
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @type { number | Resource }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   radius: number | Resource;
 
@@ -8208,22 +8148,6 @@ declare interface ShadowOptions {
 
   /**
    * 阴影的X轴偏移量。
-   * 
-   * 默认值：0
-   * 
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影的X轴偏移量。
    *
    * 默认值：0
    *
@@ -8235,70 +8159,16 @@ declare interface ShadowOptions {
    *
    * 如果offsetX为Resource类型，则传入的值需为number类型。
    *
-   * @type { ?(number | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影的X轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影的X轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   offsetX?: number | Resource;
 
   /**
    * 阴影的Y轴偏移量。
-   * 
-   * 默认值：0
-   * 
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影的Y轴偏移量。
    *
    * 默认值：0
    *
@@ -8310,49 +8180,11 @@ declare interface ShadowOptions {
    *
    * 如果offsetY为Resource类型，则传入的值需为number类型。
    *
-   * @type { ?(number | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影的Y轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影的Y轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   offsetY?: number | Resource;
 
@@ -14292,6 +14124,22 @@ declare interface SheetOptions extends BindOptions {
   blurSnapshot?: BlurSnapshotOptions;
 
   /**
+   * 标题栏背景模糊效果，支持自定义模糊参数。仅当标题栏存在时生效。
+   *
+   * 默认值：undefined，表示不设置标题栏背景模糊效果
+   *
+   * **说明：**
+   *
+   * 全屏模态样式（CONTENT_COVER）下不支持标题栏背景模糊，该属性设置无效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  titleBarBackgroundBlur?: SheetTitleBarBackgroundBlurOptions;
+
+  /**
    * 标题栏悬浮模式。
    * 
    * - STANDARD：标题栏与内容上下排布，无重叠。
@@ -14309,6 +14157,149 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.1 dynamic
    */
   titleBarHoverMode?: SheetTitleBarHoverMode;
+
+  /**
+   * 半模态内容区Scroll滚动条的显示状态。
+   *
+   * 默认值：BarState.Off
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  scrollBarState?: BarState;
+
+  /**
+   * 关闭按钮的系统材质效果。
+   *
+   * 默认值：undefined，表示不设置系统材质
+   *
+   * 从API版本26.0.1开始，当该属性未设置时，使用半模态的systemMaterial接口设置材质会赋予关闭按钮一种系统内置的材质效果。
+   *
+   * 通过该接口设置的材质效果会覆盖由半模态的systemMaterial接口带来的关闭按钮的内置材质效果。
+   *
+   * **说明：**
+   *
+   * 全屏模态样式（CONTENT_COVER）下不支持关闭按钮系统材质，该属性设置无效。
+   *
+   * **系统接口：** 此接口为系统接口。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  closeButtonMaterial?: SystemUiMaterial;
+
+  /**
+   * 半模态如何适配握持习惯。
+   *
+   * 默认值：HandednessFollowMode.NONE，不适配握持习惯
+   *
+   * **说明：**
+   *
+   * 该属性仅在preferType设置为SheetType.CENTER（居中弹窗）时生效，其他弹窗样式下该属性不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
+}
+
+/**
+ * 标题栏背景模糊样式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamiconly
+ */
+declare enum SheetTitleBarBackgroundBlur {
+  /**
+   * 无模糊效果。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  NONE = 0,
+
+  /**
+   * 渐变模糊，从标题栏顶部向下渐变至透明。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  GRADIENT = 1
+}
+
+/**
+ * 标题栏背景模糊效果层的自定义参数，所有子属性均为可选，未设置的属性使用系统默认值。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamiconly
+ */
+declare interface SheetTitleBarBackgroundBlurOptions {
+  /**
+   * 模糊效果层的模糊样式，设置为GRADIENT启用渐变模糊效果。
+   *
+   * 默认值：SheetTitleBarBackgroundBlur.NONE
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  blurStyle?: SheetTitleBarBackgroundBlur;
+
+  /**
+   * 模糊效果层的额外高度，以标题栏高度为基础的额外效果高度。
+   *
+   * 默认值：32vp
+   *
+   * 当取值为0vp时，模糊效果层下边沿与标题栏等高。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  maskExtraHeight?: LengthMetrics;
+
+  /**
+   * 模糊效果层的渐变基色，作为渐变顶部的最大颜色值，系统应用内置透明度曲线从顶部到底部逐渐将其淡化。
+   *
+   * 未设置时：浅色模式使用半透明白色效果，深色模式使用半透明黑色效果。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  maskColor?: ResourceColor;
+
+  /**
+   * 模糊效果从完全隐藏到完全可见所需的滑动距离。
+   *
+   * 取值范围：大于等于0，小于0的值按0处理
+   *
+   * 默认值：8vp
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  effectiveDistance?: LengthMetrics;
 }
 
 /**
@@ -25712,6 +25703,25 @@ declare class CommonMethod<T> {
    * @since 23 dynamic
    */
   systemMaterial(material: SystemUiMaterial | undefined): T;
+
+   /**
+    * 标记节点是否为独立图层进行绘制，基于该分层标记使能离屏缓存并且在后续帧会复用此缓存，缓存需要刷新时会基于脏区进行局部刷新，达到降负载效果。未通过该接口设置时，节点不标记为独立图层进行绘制。
+    *
+    * @param { boolean | undefined } value - 标记节点是否为独立图层进行绘制。true表示标记为独立图层进行绘制；false表示不标记为独立图层进行绘制。当value的值为undefined时，按false处理。
+    *     <br>**说明：**
+    *     <br>以下场景不应设置分层渲染：
+    *     <br>1. 当前节点不透明度opacity小于1。
+    *     <br>2. 当前节点的任意孩子节点设置了系统材质systemMaterial、背景模糊（backgroundBlurStyle、backgroundEffect、backdropBlur、foregroundBlurStyle、foregroundEffect、blur）。
+    *     <br>3. 当前节点的任意孩子节点为自绘制图层，如XComponent、Canvas、Video、Web。
+    *     <br>4. 当前节点的子树在动效期间频繁大面积更新。
+    *     <br>5. 当前节点已使用节点组renderGroup。
+    * @returns { T } 返回当前组件，用于链式调用。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @systemapi
+    * @stagemodelonly
+    * @since 26.0.1 dynamiconly
+    */
+   markLayeredRender(value: boolean | undefined): T;
 
   /**
    * 设置组件判断是否需要键盘时触发的回调。主要用于键盘接续场景，当焦点从输入框切换到其他组件时，如果切换后的组件回调函数[OnNeedSoftkeyboardCallback]{@link OnNeedSoftkeyboardCallback}的返回值设置为`true`，则表示该组件需要键盘，此时键盘将不会收起，如果返回值设置为`false`，则表示该组件不需要键盘，此时键盘将收起。
