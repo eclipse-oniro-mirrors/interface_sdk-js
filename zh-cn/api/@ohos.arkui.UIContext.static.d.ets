@@ -19,6 +19,8 @@
  * @file
  * @kit ArkUI
  */
+import { ModifierKey } from '@ohos.arkui.component';
+
 import font from './@ohos.font';
 
 import type { AsyncCallback } from './@ohos.base';
@@ -3632,6 +3634,25 @@ export declare class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.2.0 static
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  uiContext: UIContext;
+}
+
+/**
  * UIContext类
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3647,6 +3668,41 @@ export declare class UIContext {
    * @since 24 static
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，所有匹配的回调按注册标识符递增顺序依次执行。
+   * 匹配的组件级快捷键优先处理事件；组件级快捷键已处理时，不再触发应用级快捷键。
+   * 当前事件开始分发时确定本次回调集合；回调中的注册和注销操作从下次事件起生效。
+   * 卡片和动态渲染场景不支持注册、注销和触发本接口。注册失败返回0，不抛出异常。
+   *
+   * @param { string } value - 快捷键中的字符键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键，可组合CTRL、SHIFT和ALT，各修饰键不得重复。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 快捷键触发时调用的回调函数。
+   * @returns { int } 注册成功时返回本次绑定的唯一正整数标识符，失败时返回0。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，同快捷键的其他绑定仍然有效。
+   * 已进入当前事件回调集合的回调仍可执行；后续事件不再调用已注销的回调。
+   * 标识符不存在或已注销时，不执行任何操作。卡片和动态渲染场景下不执行注销。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.2.0 static
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取与当前调用作用域关联的 UIContext

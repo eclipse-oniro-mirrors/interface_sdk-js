@@ -5206,6 +5206,29 @@ export class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * Provides information about the UI instance that triggers an application-level keyboard shortcut.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.2.0 dynamic
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * UIContext of the UI instance that triggers the application-level keyboard shortcut.
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  uiContext: UIContext;
+}
+
+/**
  * Implements a **UIContext** instance.
  *
  * > **NOTE**
@@ -5277,6 +5300,50 @@ export class UIContext {
    * @since 22 dynamic
    */
   constructor();
+
+  /**
+   * Registers an application-level keyboard shortcut.
+   *
+   * The shortcut takes effect globally in the application. When the shortcut is triggered, the callback receives the
+   * **UIContext** of the UI instance where the shortcut is triggered.
+   * Each registration returns a positive integer registration ID unique within the application, even when the
+   * shortcut and callback are identical. All matching registrations are invoked in increasing registration ID order.
+   * A matching component-level shortcut handles the event first. Application shortcuts run only if the event
+   * has not been handled by a component-level shortcut.
+   * The callbacks for an event are selected before invocation. Registration and unregistration during a callback
+   * affect subsequent events. Form rendering and dynamic rendering do not support this feature.
+   * Registration returns 0 on failure and does not throw an exception.
+   *
+   * @param { string } value - Character key of the shortcut.
+   * @param { Array<ModifierKey> } keys - Modifier keys: any combination of CTRL, SHIFT, and ALT, without duplicates.
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback invoked when the shortcut is triggered.
+   * @returns { int } Unique positive registration ID on success, or 0 on failure.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  static registerApplicationShortcut(value: string, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * Unregisters the application-level keyboard shortcut binding identified by the registration ID.
+   *
+   * Only the specified binding is removed. Other bindings of the same shortcut remain active.
+   * Callbacks already selected for the current event can still run; subsequent events skip the removed binding.
+   * If the ID does not exist or has already been unregistered, this method does nothing.
+   * Unregistration has no effect in form rendering or dynamic rendering.
+   *
+   * @param { int } registrationId - Registration ID returned when registering the shortcut.
+   * @throws { BusinessError } 401 - Parameter error. registrationId must be a 32-bit integer.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.2.0 dynamic
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * Obtains the UIContext of this [calling scope](docroot://ui/arkts-global-interface.md#basic-concepts). This API
