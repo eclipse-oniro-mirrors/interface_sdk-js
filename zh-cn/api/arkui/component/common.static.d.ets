@@ -11507,7 +11507,6 @@ export declare interface CommonMethod {
      * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
      * 输入事件或其他注入事件。
      *
-     * @permission ohos.permission.CONTROL_COMPONENT
      * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
      * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full

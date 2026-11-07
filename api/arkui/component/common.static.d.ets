@@ -11167,7 +11167,6 @@ export declare interface CommonMethod {
      * input events, such as touch and mouse events. It does not affect user-generated input events or other
      * injected events.
      *
-     * @permission ohos.permission.CONTROL_COMPONENT
      * @param { AgentControlMode | undefined } value - Input control level for System Agent-generated events.
      * @returns { this } Current component.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
