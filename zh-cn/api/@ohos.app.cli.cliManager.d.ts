@@ -269,6 +269,16 @@ declare namespace cliManager {
      * @since 26.1.0 dynamiconly
      */
     taskId?: string;
+
+    /**
+     * 代理所代表的实体的唯一标识符。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    subjectId?: string;
   }
 
   /**
