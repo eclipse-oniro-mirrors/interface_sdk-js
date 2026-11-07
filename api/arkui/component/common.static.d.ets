@@ -54,6 +54,7 @@ import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
 import { OnScrollFrameBeginCallback } from "./scroll";
 import dragController from '../../@ohos.arkui.dragController';
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
 /**
  * Define the ratio of characters entered by the the percentage of InputCounterOptions.
  *
@@ -7601,6 +7602,18 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     titleBarHoverMode?: SheetTitleBarHoverMode;
+
+    /**
+     * Set the touch follow mode of the semi-modal page.
+     * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+     * -FOLLOW_GRIP_HAND: The layout follows the grip.
+     * -NONE: Retain the current layout.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    adaptToHandedness?: HandednessFollowMode;
 }
 /**
  * Enum of title bar hover modes.
@@ -13827,21 +13840,6 @@ export declare interface CommonMethod {
      */
     default onGestureCollectIntercept(callback: GestureCollectInterceptCallback): this;
     /**
-     * Set system-styled materials for the component. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of the component.
-     *
-     * Device Behavior Differences:The effect of the same material may vary across different devices depending on
-     * their computing power.
-     *
-     * @param { SystemUiMaterial | undefined } material - System-styled material. Undefined indicates reverting to
-     *     the effect of no system material.
-     * @returns { this }
-     * @syscap SystemCapability.ArkUI.ArkUI.Full
-     * @systemapi
-     * @stagemodelonly
-     * @since 23 static
-     */
-    /**
      * Set system-styled materials for the component. The material effect behaves differently on devices with different
      * level of computing powers. On devices with lower computing power, it affects attributes such as the
      * backgroundColor, borderWidth, borderColor, shadow. On devices with higher computing power, it adds a filter effect
@@ -13851,8 +13849,10 @@ export declare interface CommonMethod {
      *     the effect of no system material.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi [since 23 - 24]
+     * @publicapi [since 26.0.0]
      * @stagemodelonly
-     * @since 26.0.0 static
+     * @since 23 static
      */
     default systemMaterial(material: SystemUiMaterial | undefined): this;
     /**
@@ -14584,16 +14584,10 @@ export type Filter = uiEffect.Filter;
  * SystemUiMaterial
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @systemapi
+ * @systemapi [since 23 - 24]
+ * @publicapi [since 26.0.0]
  * @stagemodelonly
  * @since 23 static
- */
-/**
- * SystemUiMaterial
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @since 26.0.0 static
  */
 export type SystemUiMaterial = uiMaterial.Material;
 
@@ -15130,9 +15124,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
      *    pressed.
-     *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
-     *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
-     *    horizontally,false otherwise.
+     *    <br>true: Supports dragging to scroll with the left mouse button pressed.
+     *    <br>false: Not support dragging to scroll with the left mouse button pressed.
+     *    <br>undefined:Use default value.
+     *    <br>Default value: For API versions earlier than 26.1.0, the default value is false.
+     *    For API versions 26.1.0 and later, the default value is true when the scrollable component scrolls
+     *    horizontally, false otherwise.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

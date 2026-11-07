@@ -905,7 +905,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    *
    * 多列模式下，ListItem与ListItem之间的分割线起始边距从每一列的交叉轴方向起始边开始计算，单列模式从List交叉轴方向起始边开始计算。
    *
-   * ListItem设置[多态样式]{@link common}时，被按压的子组件上下的分割线不绘制。
+   * ListItem设置[多态样式]{@link CommonMethod}时，被按压的子组件上下的分割线不绘制。
    *
    * @param { ListDividerOptions | null | undefined } value - ListItem分割线样式。<br/>默认值：null
    * @returns { this }

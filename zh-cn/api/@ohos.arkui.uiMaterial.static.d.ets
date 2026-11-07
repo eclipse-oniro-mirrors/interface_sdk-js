@@ -107,7 +107,7 @@ declare namespace uiMaterial {
     /**
      * 使能模式。[弹出框Dialog](docroot://ui/arkts-base-dialog-overview.md)、[即时反馈（Toast）](docroot://ui/arkts-create-toast.md)、
      * [AlphabetIndexer]{@link alphabet_indexer}、[ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}、
-     * [Chip]{@link @ohos.arkui.advanced.Chip}、[Select]{@link select}、[菜单控制]{@link common}、[Toggle]{@link toggle}、
+     * [Chip]{@link @ohos.arkui.advanced.Chip}、[Select]{@link select}、[菜单控制]{@link CommonMethod}、[Toggle]{@link toggle}、
      * [SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}、
      * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}、[Slider]{@link slider}、
      * [bindSheet]{@link CommonMethod#bindSheet}、[SelectionMenu]{@link @ohos.arkui.advanced.SelectionMenu}组件默认开启沉浸式系统材质；
@@ -191,7 +191,7 @@ declare namespace uiMaterial {
      */
     THIN = 1,
     /**
-     * 常规样式。材质层的厚度常规。
+     * 常规样式。材质层的厚度常规，具有适度的透明和模糊效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -199,7 +199,7 @@ declare namespace uiMaterial {
      */
     REGULAR = 2,
     /**
-     * 厚样式。模糊效果强。
+     * 厚样式。材质层厚，模糊效果较强。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -207,14 +207,207 @@ declare namespace uiMaterial {
      */
     THICK = 3,
     /**
-     * 超厚样式。模糊效果很强。
+     * 超厚样式。材质层超厚，模糊效果很强。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 static
      */
-    ULTRA_THICK = 4
+    ULTRA_THICK = 4,
+    /**
+     * 超薄样式。材质层超薄，具有很强的透明效果。
+     *
+     * 适用于EffectComponent。配合对应的ULTRA_THIN_EC_SUB后缀样式枚举一起使用，以实现材质效果绘制的合并优化。设置在EffectComponent上的材质模糊最终将生效在子组件上。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    ULTRA_THIN_EC = 5,
+    /**
+     * 薄样式。材质层薄，具有较强的透明效果。
+     *
+     * 适用于EffectComponent。配合对应的THIN_EC_SUB后缀样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    THIN_EC = 6,
+    /**
+     * 常规样式。材质层厚度适中，具有适度的透明与模糊效果。
+     *
+     * 适用于EffectComponent。配合对应的REGULAR_EC_SUB后缀样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    REGULAR_EC = 7,
+    /**
+     * 厚样式。模糊效果强。
+     *
+     * 适用于EffectComponent。配合对应的THICK_EC_SUB后缀样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    THICK_EC = 8,
+    /**
+     * 超厚样式。模糊效果很强。
+     *
+     * 适用于EffectComponent。配合对应的ULTRA_THICK_EC_SUB后缀样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    ULTRA_THICK_EC = 9,
+    /**
+     * 超薄样式。材质层超薄，具有很强的透明效果。
+     *
+     * 适用于EffectComponent的子组件。配合对应的ULTRA_THIN_EC样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    ULTRA_THIN_EC_SUB = 10,
+    /**
+     * 薄样式。材质层薄，具有较强的透明效果。
+     *
+     * 适用于EffectComponent的子组件。配合对应的THIN_EC样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    THIN_EC_SUB = 11,
+    /**
+     * 常规样式。材质层厚度适中，具有适度的透明与模糊效果。
+     *
+     * 适用于EffectComponent的子组件。配合对应的REGULAR_EC样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    REGULAR_EC_SUB = 12,
+    /**
+     * 厚样式。模糊效果强。
+     *
+     * 适用于EffectComponent的子组件。配合对应的THICK_EC样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    THICK_EC_SUB = 13,
+    /**
+     * 超厚样式。模糊效果很强。
+     *
+     * 适用于EffectComponent的子组件。配合对应的ULTRA_THICK_EC样式枚举一起使用，以实现材质效果绘制的合并优化。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    ULTRA_THICK_EC_SUB = 14
   }
+
+  /**
+   * 材质等级枚举，表示设备的算力等级。可通过[getGlobalMaterialLevel]{@link uiMaterial.getGlobalMaterialLevel()}获取当前设备的材质等级。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  export enum MaterialLevel {
+    /**
+     * 高算力设备的材质等级。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    EXQUISITE = 0,
+    /**
+     * 中算力设备的材质等级。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    GENTLE = 1,
+    /**
+     * 低算力设备的材质等级。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    SMOOTH = 2
+  }
+
+  /**
+   * 获取全局材质等级，与设备算力相关。在需要根据设备算力等级选择不同材质效果实现方式时，可调用此方法获取材质等级。该配置项由设备定义，不可修改。
+   *
+   * @returns { MaterialLevel } 返回设备的材质等级，表示设备算力档次，不同等级对应沉浸式材质在当前设备上的不同渲染效果级别。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  export function getGlobalMaterialLevel(): MaterialLevel;
+
+  /**
+   * 判断当前设备是否支持沉浸式系统材质ImmersiveMaterial。在开发需要沉浸式材质效果的功能时，可先调用此方法判断设备是否支持，以决定是否为组件设置沉浸式材质。
+   * 该配置项由设备定义，不可修改。
+   *
+   * @returns { boolean } 当前设备是否支持ImmersiveMaterial。true表示当前设备支持ImmersiveMaterial，false表示不支持。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  export function isImmersiveMaterialSupported(): boolean;
+
+  /**
+   * 将一个ImmersiveMaterial材质转换为适用于EffectComponent的ImmersiveMaterial材质。
+   * 与convertToECSubMaterial的区别：本方法转换后的材质适用于EffectComponent本身，且materialColor、applyShadow、interactive、lightEffect属性不会生效；
+   * convertToECSubMaterial转换后的材质适用于EffectComponent的子组件。两者通常配合使用，以实现材质效果绘制的合并优化。
+   *
+   * EffectComponent组件上不生效材质中的materialColor、applyShadow、interactive、lightEffect属性，经过该接口转换后的材质若配置了上述属性，也将不会生效。
+   *
+   * @param { uiMaterial.ImmersiveMaterial } material - 待转换的沉浸式材质。注意：转换后材质中的materialColor、applyShadow、interactive、lightEffect属性将不会生效。
+   * @returns { uiMaterial.ImmersiveMaterial } 经过转换后适用于EffectComponent的沉浸式材质。转换后的材质不生效materialColor、applyShadow、interactive、lightEffect属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  export function convertToECMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
+
+  /**
+   * 将一个ImmersiveMaterial材质转换为适用于EffectComponent子组件的ImmersiveMaterial材质。
+   *
+   * @param { uiMaterial.ImmersiveMaterial } material - 经过转换后适用于EffectComponent子组件的沉浸式材质，该材质配合EffectComponent使用以实现材质效果绘制的合并优化。
+   * @returns { uiMaterial.ImmersiveMaterial } 经过转换后适用于EffectComponent子组件的沉浸式材质。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  export function convertToECSubMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
 
   /**
    * 沉浸式材质参数。

@@ -38,7 +38,7 @@ export declare class ModifierUtils {
    * different components.
    *
    * @param { T } instance - Instance to check. T is the component attribute type that inherits from
-   *     [universal attributes]{@link ../@internal/component/ets/common} (CommonMethod).
+   *     [universal attributes]{@link CommonMethod} (CommonMethod).
    * @param { string } componentName - Name of the component type to check. The value is the component class name (such
    *     as 'Text' or 'Button') and must exactly match the component class name (case-sensitive). Returns **false** if
    *     an invalid or nonexistent component class name is passed in.

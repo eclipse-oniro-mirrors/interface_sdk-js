@@ -108,7 +108,7 @@ declare namespace cert {
     ERR_CRYPTO_OPERATION = 19030001,
 
     /**
-     * 证书签名验证错误。
+     * 证书验签错误。
      *
      * @syscap SystemCapability.Security.Cert
      * @crossplatform [since 11]
@@ -275,7 +275,7 @@ declare namespace cert {
     ERR_CRL_HAS_EXPIRED = 19030017,
 
     /**
-     * 证书吊销列表签名验证失败。
+     * 证书吊销列表验签失败。
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -315,7 +315,7 @@ declare namespace cert {
     ERR_OCSP_RESPONSE_INVALID = 19030021,
 
     /**
-     * OCSP签名验证失败。
+     * OCSP验签失败。
      *
      * @syscap SystemCapability.Security.Cert
      * @stagemodelonly
@@ -3216,7 +3216,7 @@ declare namespace cert {
     keyUsage?: Array<KeyUsageType>;
 
     /**
-     * 用户ID。用于验证国密SM2证书时设置签名验证所需的用户标识符。最大长度：128。
+     * 用户ID。用于验证国密SM2证书时设置验签所需的用户标识符。最大长度：128。
      * <br>国密证书场景最常用的值为
      * [0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38]
      * （对应ASCII字符串为"1234567812345678"，16字节）。
@@ -3346,7 +3346,7 @@ declare namespace cert {
      * 3. 信任锚锁定：一旦在信任锚来源中找到颁发者，后续查找过程将不会再回至非信任证书，即后续证书必须来自信任锚来源。
      * 4. 构建完成条件：若partialChain为false（默认值），则仅在找到根证书（自签名证书）时构建完成。若partialChain为true，则在首次在
      * 信任锚来源中找到颁发者时构建完成。
-     * 5. 后续验证：证书链构建完成后，执行其他验证操作，如证书签名验证和证书吊销检查。
+     * 5. 后续验证：证书链构建完成后，执行其他验证操作，如证书验签和证书吊销检查。
      *
      * @param { X509Cert } cert - 待验证的证书。
      * @param { CertValidationParams } params - 证书验证参数。

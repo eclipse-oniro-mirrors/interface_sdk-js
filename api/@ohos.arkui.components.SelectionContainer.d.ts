@@ -242,9 +242,9 @@ export declare class SelectionContainerController {
  * > **NOTE**
  * >
  * > - The text content returned by the selected text related callbacks in this component is concatenated in the top-to-
- * > bottom display order of the [Text]{@link ./@internal/component/ets/text} components.
+ * > bottom display order of the [Text]{@link @global:Text} components.
  * >
- * > - By default, this component uses the [Stack]{@link ./@internal/component/ets/stack} layout. If other container
+ * > - By default, this component uses the [Stack]{@link @global:Stack} layout. If other container
  * > layout requirements exist, place a container component in **SelectionContainer**.
  * >
  * > - When text is selected in **SelectionContainer**, the magnifier is not displayed, and
@@ -252,7 +252,7 @@ export declare class SelectionContainerController {
  * >
  * > - Dragging is not supported when text is selected in **SelectionContainer**.
  * >
- * > - Text under the [Repeat]{@link ./@internal/component/ets/repeat} component in **SelectionContainer** does not
+ * > - Text under the [Repeat]{@link @global:Repeat} component in **SelectionContainer** does not
  * > support cross-node selection.
  * >
  * > - Only the text content in **Text** components participates in cross-node selection and text concatenation.
@@ -279,13 +279,13 @@ export interface SelectionContainerInterface {
 }
 
 /**
- * [Universal attributes]{@link ./@internal/component/ets/common} are supported.
+ * [Universal attributes]{@link CommonMethod} are supported.
  *
  * > **NOTE**
  * >
- * > - The [obscuring]{@link ./@internal/component/ets/common} attribute is not supported.
+ * > - The [obscuring]{@link CommonMethod} attribute is not supported.
  * >
- * > - The [transformation]{@link ./@internal/component/ets/common} attribute is not supported. In the
+ * > - The [transformation]{@link CommonMethod} attribute is not supported. In the
  * > **SelectionContainer** container, the **Text** child component does not support transformation.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -417,7 +417,7 @@ export declare class SelectionContainerAttribute extends CommonMethod<SelectionC
    * > is 800 ms. When both are bound and both are triggered by a long press, **bindSelectionMenu** is responded to
    * > first.
    * >
-   * > - When the custom menu is too long, you are advised to nest a [Scroll]{@link ./@internal/component/ets/scroll}
+   * > - When the custom menu is too long, you are advised to nest a [Scroll]{@link @global:Scroll}
    * > component inside it to prevent the keyboard from being obscured.
    * >
    * > - When the selection spans non-copyable text, the menu is displayed and processed based only on the copyable text
@@ -553,9 +553,9 @@ export declare class SelectionContainerAttribute extends CommonMethod<SelectionC
  * > **NOTE**
  * >
  * > - The text content returned by the selected text related callbacks in this component is concatenated in the top-to-
- * > bottom display order of the [Text]{@link ./@internal/component/ets/text} components.
+ * > bottom display order of the [Text]{@link @global:Text} components.
  * >
- * > - By default, this component uses the [Stack]{@link ./@internal/component/ets/stack} layout. If other container
+ * > - By default, this component uses the [Stack]{@link @global:Stack} layout. If other container
  * > layout requirements exist, place a container component in **SelectionContainer**.
  * >
  * > - When text is selected in **SelectionContainer**, the magnifier is not displayed, and
@@ -563,7 +563,7 @@ export declare class SelectionContainerAttribute extends CommonMethod<SelectionC
  * >
  * > - Dragging is not supported when text is selected in **SelectionContainer**.
  * >
- * > - Text under the [Repeat]{@link ./@internal/component/ets/repeat} component in **SelectionContainer** does not
+ * > - Text under the [Repeat]{@link @global:Repeat} component in **SelectionContainer** does not
  * > support cross-node selection.
  * >
  * > - Only the text content in **Text** components participates in cross-node selection and text concatenation.

@@ -146,7 +146,7 @@ interface CheckboxGroupInterface {
   /**
    * 创建多选框群组，用于控制群组内Checkbox的全选或取消全选状态，具有相同group值的Checkbox和CheckboxGroup属于同一群组。
    * 
-   * 在结合带缓存功能的组件使用时（如[List]{@link list}），未被创建的Checkbox选中状态需要应用手动控制。详细示例请参考
+   * 在结合带缓存功能的组件使用时（如[List]{@link @global:List}），未被创建的Checkbox选中状态需要应用手动控制。详细示例请参考
    * [示例4]{@link CheckboxGroup}。
    *
    * @param { CheckboxGroupOptions } options - 配置多选框群组参数。 <br/> 未设置时，按照CheckboxGroupOptions中各参数的默认值配置。
@@ -219,9 +219,9 @@ declare interface CheckBoxGroupConfiguration extends CommonConfiguration<CheckBo
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -233,9 +233,9 @@ declare interface CheckBoxGroupConfiguration extends CommonConfiguration<CheckBo
  */
 declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute> {
   /**
-   * 设置是否全选。若同组的[Checkbox]{@link checkbox}显式设置了select属性，则Checkbox的优先级高。
+   * 设置是否全选。若同组的[Checkbox]{@link @global:Checkbox}显式设置了select属性，则Checkbox的优先级高。
    * 
-   * 在与带有缓存功能的组件（如[List]{@link list}）配合使用时，未创建的Checkbox选中状态需由开发者控制。
+   * 在与带有缓存功能的组件（如[List]{@link @global:List}）配合使用时，未创建的Checkbox选中状态需由开发者控制。
    * 
    * 从API version 10开始，该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    * 
@@ -253,10 +253,10 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
   selectAll(value: boolean): CheckboxGroupAttribute;
 
   /**
-   * 设置是否全选。若同组的[Checkbox]{@link checkbox}显式设置了select属性，则Checkbox的优先级高。与
+   * 设置是否全选。若同组的[Checkbox]{@link @global:Checkbox}显式设置了select属性，则Checkbox的优先级高。与
    * [selectAll]{@link CheckboxGroupAttribute#selectAll(value: boolean)}相比，isAllSelected参数新增了对undefined类型的支持。
    * 
-   * 在与带有缓存功能的组件（如[List]{@link list}）配合使用时，未创建的Checkbox选中状态需由开发者控制。
+   * 在与带有缓存功能的组件（如[List]{@link @global:List}）配合使用时，未创建的Checkbox选中状态需由开发者控制。
    * 
    * 该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)、
    * [!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
@@ -359,7 +359,7 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
   mark(style: Optional<MarkStyle>): CheckboxGroupAttribute;
 
   /**
-   * CheckboxGroup的选中状态或群组内的Checkbox的选中状态发生变化时，触发回调。在与带有缓存功能的组件（如[List]{@link list}）配合使用时，需注意未创建的Checkbox的选中状态对回调结果的影响。
+   * CheckboxGroup的选中状态或群组内的Checkbox的选中状态发生变化时，触发回调。在与带有缓存功能的组件（如[List]{@link @global:List}）配合使用时，需注意未创建的Checkbox的选中状态对回调结果的影响。
    *
    * @param { function } callback - 多选框群组的信息。 [since 8 - 17]
    * @param { OnCheckboxGroupChangeCallback } callback - 多选框群组的信息。 [since 18]
@@ -376,7 +376,7 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
   /**
    * CheckboxGroup的选中状态或群组内的Checkbox的选中状态发生变化时，触发回调。与
    * [onChange]{@link CheckboxGroupAttribute#onChange(callback: OnCheckboxGroupChangeCallback)}相比，callback参数新增了对
-   * undefined类型的支持。在与带有缓存功能的组件（如[List]{@link list}）配合使用时，需注意未创建的Checkbox的选中状态对回调结果的影响。
+   * undefined类型的支持。在与带有缓存功能的组件（如[List]{@link @global:List}）配合使用时，需注意未创建的Checkbox的选中状态对回调结果的影响。
    *
    * @param { Optional<OnCheckboxGroupChangeCallback> } callback - 多选框群组的信息。<br/>当callback的值为undefined时，不使用回调函数。
    * @returns { CheckboxGroupAttribute }

@@ -1008,7 +1008,7 @@ export declare enum ParticleUpdater {
 }
 
 /**
- * 除支持[通用属性]{@link common}外还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1071,13 +1071,14 @@ export declare interface ParticleAttribute extends CommonMethod {
      */
     default attributeModifier(modifier: AttributeModifier<ParticleAttribute> | AttributeModifier<CommonMethod> | undefined): this;
     /**
-     * Set Particle options.
+     * 设置粒子选项。
      *
-     * @param { Particles } particles - The options to create an Particle.
-     * @returns { ParticleAttribute } Returns instance of  ParticleAttribute.
+     * @param { Particles } particles - 创建粒子的选项。
+     * @returns { ParticleAttribute } 返回ParticleAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setParticleOptions(particles: Particles): this;
 }

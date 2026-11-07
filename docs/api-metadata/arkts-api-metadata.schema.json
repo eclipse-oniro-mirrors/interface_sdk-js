@@ -1,0 +1,1658 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openharmony.io/schemas/api-metadata/arkts-api-metadata-1.0.0.json",
+  "title": "OpenHarmony ArkTS API metadata",
+  "description": "Structured metadata for ArkTS API declarations. The format is designed for .d.ts/.d.ets generation, validation, and semantic comparison.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "language",
+    "source",
+    "file",
+    "apis"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "language": {
+      "const": "arkts"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "file": {
+      "$ref": "#/$defs/fileInfo"
+    },
+    "apis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/apiObject"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{7,40}$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "fileInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packageName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "imports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "exports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crossplatform",
+        "atomicservice",
+        "form"
+      ],
+      "properties": {
+        "crossplatform": {
+          "$ref": "#/$defs/platformSupport"
+        },
+        "atomicservice": {
+          "$ref": "#/$defs/platformSupport"
+        },
+        "form": {
+          "$ref": "#/$defs/platformSupport"
+        }
+      }
+    },
+    "apiObject": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "name",
+        "qualifiedName",
+        "declaration",
+        "filePath",
+        "startLine",
+        "endLine",
+        "accessLevel",
+        "since",
+        "syscap",
+        "permissions",
+        "platform",
+        "applicationModel",
+        "description"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.-]*$"
+        },
+        "parentId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Za-z0-9_][A-Za-z0-9_.-]*$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualifiedName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "declaration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "filePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startLine": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endLine": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "language": {
+          "const": "arkts"
+        },
+        "changeKind": {
+          "enum": [
+            "added",
+            "modified",
+            "removed",
+            "deprecated"
+          ]
+        },
+        "isExported": {
+          "type": "boolean"
+        },
+        "accessLevel": {
+          "enum": [
+            "public",
+            "system",
+            "inner"
+          ]
+        },
+        "kit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "since": {
+          "type": "string",
+          "minLength": 1
+        },
+        "syscap": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "platform": {
+          "$ref": "#/$defs/platform"
+        },
+        "applicationModel": {
+          "enum": [
+            "fa-only",
+            "stage-only",
+            "fa-and-stage"
+          ]
+        },
+        "deprecated": {
+          "type": "boolean"
+        },
+        "useInstead": {
+          "type": "string",
+          "minLength": 1
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "description": {
+          "$ref": "#/$defs/localizedApiDescription"
+        },
+        "deviceSupport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/deviceSupport"
+          }
+        },
+        "deviceDifferences": {
+          "$ref": "#/$defs/deviceDifferences"
+        },
+        "specRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(AC|BR|SC)-[A-Za-z0-9.-]+$"
+          }
+        },
+        "confirmation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/confirmation"
+          }
+        },
+        "attributionParts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tagType": {
+          "enum": [
+            "static",
+            "dynamic",
+            "static-only",
+            "dynamic-only",
+            "dynamic-and-static"
+          ]
+        },
+        "parentArkTs": {
+          "enum": [
+            "static",
+            "dynamic",
+            "static-only",
+            "dynamic-only",
+            "dynamic-and-static",
+            ""
+          ]
+        },
+        "annotation": {
+          "$ref": "#/$defs/annotationKind"
+        },
+        "decorator": {
+          "$ref": "#/$defs/decoratorKind"
+        },
+        "retention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "policy"
+          ],
+          "properties": {
+            "policy": {
+              "enum": [
+                "SOURCE",
+                "CLASS",
+                "RUNTIME"
+              ]
+            }
+          }
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "CLASS",
+              "CLASS_METHOD",
+              "CLASS_FIELD",
+              "CLASS_CONSTRUCTOR",
+              "FUNCTION",
+              "METHOD",
+              "FIELD",
+              "PROPERTY",
+              "PARAMETER",
+              "TYPE",
+              "TYPE_ALIAS",
+              "LAMBDA",
+              "INTERFACE_METHOD",
+              "ANNOTATION_TYPE",
+              "PACKAGE",
+              "LOCAL_VARIABLE",
+              "OTHER"
+            ]
+          }
+        },
+        "decoratorForm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "constant",
+              "factory"
+            ]
+          }
+        },
+        "decoratorType": {
+          "$ref": "#/$defs/arktsType"
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/namespaceKind"
+            },
+            {
+              "$ref": "#/$defs/classKind"
+            },
+            {
+              "$ref": "#/$defs/interfaceKind"
+            },
+            {
+              "$ref": "#/$defs/structKind"
+            },
+            {
+              "$ref": "#/$defs/methodKind"
+            },
+            {
+              "$ref": "#/$defs/functionKind"
+            },
+            {
+              "$ref": "#/$defs/constructorKind"
+            },
+            {
+              "$ref": "#/$defs/propertyKind"
+            },
+            {
+              "$ref": "#/$defs/constKind"
+            },
+            {
+              "$ref": "#/$defs/enumKind"
+            },
+            {
+              "$ref": "#/$defs/enumMemberKind"
+            },
+            {
+              "$ref": "#/$defs/typeAliasKind"
+            },
+            {
+              "$ref": "#/$defs/accessorKind"
+            },
+            {
+              "$ref": "#/$defs/callSignatureKind"
+            },
+            {
+              "$ref": "#/$defs/constructSignatureKind"
+            },
+            {
+              "$ref": "#/$defs/indexSignatureKind"
+            },
+            {
+              "$ref": "#/$defs/annotationKind"
+            },
+            {
+              "$ref": "#/$defs/decoratorKind"
+            }
+          ]
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "namespaceKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "namespace"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "modulePath": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "classKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "class"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "extends": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "implements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        },
+        "isAbstract": {
+          "type": "boolean"
+        },
+        "isSealed": {
+          "type": "boolean"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "constructors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "staticMembers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "interfaceKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "interface"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "extends": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "callSignatures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "constructSignatures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "indexSignatures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "structKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "struct"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "implements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        },
+        "decorators": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "lifecycleHooks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "methodKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "parameters",
+        "returnType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "method"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returnType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "isStatic": {
+          "type": "boolean"
+        },
+        "isAbstract": {
+          "type": "boolean"
+        },
+        "isOptional": {
+          "type": "boolean"
+        },
+        "overloadGroup": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/overloadGroup"
+            }
+          ]
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        },
+        "concurrency": {
+          "$ref": "#/$defs/concurrency"
+        }
+      }
+    },
+    "functionKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "parameters",
+        "returnType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "function"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returnType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "overloadGroup": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/overloadGroup"
+            }
+          ]
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        },
+        "concurrency": {
+          "$ref": "#/$defs/concurrency"
+        }
+      }
+    },
+    "constructorKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "parameters"
+      ],
+      "properties": {
+        "kind": {
+          "const": "constructor"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "overloadGroup": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/overloadGroup"
+            }
+          ]
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        }
+      }
+    },
+    "propertyKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "propertyType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "property"
+        },
+        "propertyType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "isOptional": {
+          "type": "boolean"
+        },
+        "isReadonly": {
+          "type": "boolean"
+        },
+        "isStatic": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "initializer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accessors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Za-z_$][A-Za-z0-9_$]*$"
+        }
+      }
+    },
+    "constKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "constType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "const"
+        },
+        "constType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "initializer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isUniqueSymbol": {
+          "type": "boolean"
+        },
+        "isReadonly": {
+          "const": true
+        }
+      }
+    },
+    "enumKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "enum"
+        },
+        "underlyingType": {
+          "enum": [
+            "string",
+            "number",
+            "mixed"
+          ]
+        },
+        "isFlags": {
+          "type": "boolean"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "enumMemberKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "value",
+        "valueType",
+        "ownerEnum"
+      ],
+      "properties": {
+        "kind": {
+          "const": "enumMember"
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "initializer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "valueType": {
+          "enum": [
+            "string",
+            "number"
+          ]
+        },
+        "ownerEnum": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "typeAliasKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "typeExpression",
+        "aliasKind"
+      ],
+      "properties": {
+        "kind": {
+          "const": "typeAlias"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "typeExpression": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "aliasKind": {
+          "enum": [
+            "reference",
+            "union",
+            "intersection",
+            "tuple",
+            "function",
+            "conditional",
+            "literal",
+            "other"
+          ]
+        },
+        "unionMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        }
+      }
+    },
+    "accessorKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "accessorKind",
+        "propertyType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "accessor"
+        },
+        "accessorKind": {
+          "enum": [
+            "get",
+            "set"
+          ]
+        },
+        "propertyType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "setterParameter": {
+          "$ref": "#/$defs/parameter"
+        },
+        "isReadOnly": {
+          "type": "boolean"
+        },
+        "pairedAccessor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        }
+      }
+    },
+    "callSignatureKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "parameters",
+        "returnType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "callSignature"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returnType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        }
+      }
+    },
+    "constructSignatureKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "parameters",
+        "newType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "constructSignature"
+        },
+        "typeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeParameter"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "newType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "errorCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        }
+      }
+    },
+    "indexSignatureKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "keyName",
+        "keyType",
+        "valueType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "indexSignature"
+        },
+        "keyName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "keyType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "valueType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "isReadonly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "arktsType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "primitive",
+            "reference",
+            "union",
+            "intersection",
+            "tuple",
+            "object",
+            "function",
+            "promise",
+            "void",
+            "literal",
+            "other",
+            "array"
+          ]
+        },
+        "typeArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        },
+        "unionMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/arktsType"
+          }
+        },
+        "elementType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "description": {
+          "$ref": "#/$defs/localizedText"
+        }
+      }
+    },
+    "typeParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraint": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "defaultType": {
+          "$ref": "#/$defs/arktsType"
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/localizedText"
+          }
+        }
+      }
+    },
+    "overloadGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "index",
+        "members"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "canonicalSignature": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commonDescription": {
+          "$ref": "#/$defs/localizedApiDescription"
+        }
+      }
+    },
+    "errorCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "condition"
+      ],
+      "properties": {
+        "code": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "constant": {
+          "type": "string",
+          "minLength": 1
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "handling": {
+          "$ref": "#/$defs/localizedText"
+        }
+      }
+    },
+    "concurrency": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concurrentSafe": {
+          "enum": [
+            "NOT_SUPPORT",
+            "CONCURRENT_CONTEXT_PROHIBITED",
+            "CONCURRENT_SAFE",
+            "NOT_CONCURRENT_SAFE",
+            "NONE"
+          ]
+        },
+        "staticConcurrentSafe": {
+          "enum": [
+            "NOT_SUPPORT",
+            "CONCURRENT_CONTEXT_PROHIBITED",
+            "CONCURRENT_SAFE",
+            "NOT_CONCURRENT_SAFE",
+            "NONE"
+          ]
+        }
+      }
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "zh"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zh": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "localizedApiDescription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "zh"
+      ],
+      "properties": {
+        "en": {
+          "$ref": "#/$defs/apiDescriptionText"
+        },
+        "zh": {
+          "$ref": "#/$defs/apiDescriptionText"
+        }
+      }
+    },
+    "apiDescriptionText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "function",
+        "scenario",
+        "effect"
+      ],
+      "properties": {
+        "function": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario": {
+          "type": "string",
+          "minLength": 1
+        },
+        "effect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "similarAPIs": {
+          "type": "string",
+          "minLength": 1
+        },
+        "defaultBehavior": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraints": {
+          "type": "string",
+          "minLength": 1
+        },
+        "activation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "deviceSupport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deviceModelName",
+        "apiLevel"
+      ],
+      "properties": {
+        "deviceModelName": {
+          "enum": [
+            "phone",
+            "tablet",
+            "pc",
+            "2in1",
+            "wearable",
+            "liteWearable",
+            "tv",
+            "car",
+            "default"
+          ]
+        },
+        "deviceModelId": {
+          "type": "integer"
+        },
+        "apiLevel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "closedApiLevel": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "deviceDifferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "items"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/deviceDifference"
+          }
+        }
+      }
+    },
+    "deviceDifference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deviceModelName",
+        "diffPerformance",
+        "diffReason",
+        "diffDescription"
+      ],
+      "properties": {
+        "deviceModelName": {
+          "enum": [
+            "phone",
+            "tablet",
+            "pc",
+            "2in1",
+            "wearable",
+            "liteWearable",
+            "tv",
+            "car",
+            "default"
+          ]
+        },
+        "deviceModelId": {
+          "type": "integer"
+        },
+        "diffPerformance": {
+          "enum": [
+            "IMPLEMENT_CONSISTENT",
+            "IMPLEMENT_DIFF",
+            "RETURN_801_ERROR",
+            "RETURN_BUSINESS_ERROR",
+            "NO_RESPONSE",
+            "RETURN_DEFAULT",
+            "RETURN_EMPTY",
+            "OTHER"
+          ]
+        },
+        "diffPerformanceDesc": {
+          "type": "string"
+        },
+        "diffReason": {
+          "enum": [
+            "产品业务诉求",
+            "硬件差异导致",
+            "芯片差异导致",
+            "其他",
+            "无差异"
+          ]
+        },
+        "diffDescription": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "confirmedBy"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confirmedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "platformSupport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "since": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[0-9]+(?:\\.[0-9]+){0,2}$"
+        },
+        "until": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[0-9]+(?:\\.[0-9]+){0,2}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "enabled": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "since"
+            ]
+          }
+        }
+      ],
+      "if": {
+        "properties": {
+          "enabled": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "since"
+              ]
+            },
+            {
+              "required": [
+                "until"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "annotationKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "members"
+      ],
+      "properties": {
+        "kind": {
+          "const": "annotation"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "retention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "policy"
+          ],
+          "properties": {
+            "policy": {
+              "enum": [
+                "SOURCE",
+                "CLASS",
+                "RUNTIME"
+              ]
+            }
+          }
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "CLASS",
+              "CLASS_METHOD",
+              "CLASS_FIELD",
+              "CLASS_CONSTRUCTOR",
+              "FUNCTION",
+              "METHOD",
+              "FIELD",
+              "PROPERTY",
+              "PARAMETER",
+              "TYPE",
+              "TYPE_ALIAS",
+              "LAMBDA",
+              "INTERFACE_METHOD",
+              "ANNOTATION_TYPE",
+              "PACKAGE",
+              "LOCAL_VARIABLE",
+              "OTHER"
+            ]
+          }
+        }
+      }
+    },
+    "decoratorKind": {
+      "type": "object",
+      "required": [
+        "kind",
+        "decoratorForm",
+        "targetTypes",
+        "decoratorType"
+      ],
+      "properties": {
+        "kind": {
+          "const": "decorator"
+        },
+        "decoratorForm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "constant",
+              "factory"
+            ]
+          }
+        },
+        "targetTypes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "class",
+              "method",
+              "field",
+              "property",
+              "parameter",
+              "function",
+              "type",
+              "type-alias",
+              "lambda",
+              "interface-method",
+              "annotation",
+              "other"
+            ]
+          }
+        },
+        "decoratorType": {
+          "$ref": "#/$defs/arktsType"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameter"
+          }
+        },
+        "returnType": {
+          "$ref": "#/$defs/arktsType"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decoratorForm": {
+                "type": "array",
+                "contains": {
+                  "const": "factory"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "parameters",
+              "returnType"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

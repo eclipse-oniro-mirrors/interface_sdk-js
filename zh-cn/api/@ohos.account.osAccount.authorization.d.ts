@@ -79,6 +79,31 @@ declare namespace authorization {
     requestAuthorization(privilege: Privilege, context: UIAbilityContext): Promise<AuthorizationResult>;
 
     /**
+     * 请求将指定的批量特权授予当前进程。该接口使用Promise返回结果。
+     *
+     * 当应用处于前台且不存在有效授权时，将以模应用方式显示授权弹窗。若已存在有效授权，则会直接复用。
+     *
+     * @permission ohos.permission.REQUEST_LOCAL_ACCOUNT_AUTHORIZATION
+     * @param { Array<Privilege> } privileges - 目标批量特权。有关可用值，请参阅[Privilege]{@link authorization.Privilege}。
+     *     <br>最大长度为5，且不能为空。
+     * @param { UIAbilityContext } context - 承载授权对话框的[UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext}。
+     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise用于返回授权结果。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 12300001 - The system service works abnormally.
+     * @throws { BusinessError } 12300002 - The privileges array is empty or exceeds the batch limit.
+     * @throws { BusinessError } 12300302 - User interaction is required but not allowed.
+     *     Possible causes: 1. The specified UI context is invalid; 2. The application is not in the foreground.
+     *     Suggested solutions: Ensure the application is in the foreground and pass a valid UIAbilityContext.
+     * @throws { BusinessError } 12300304 - Authorization service is busy.
+     *     Possible cause: Another authorization is being processed.
+     * @syscap SystemCapability.Account.OsAccount
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    requestBatchAuthorization(privileges: Array<Privilege>, context: UIAbilityContext): Promise<Map<Privilege, AuthorizationResult>>;
+
+    /**
      * 检查当前进程是否拥有指定特权的授权。该接口使用Promise返回结果。
      *
      * @param { Privilege } privilege - 目标特权。可用值请参阅[Privilege]{@link authorization.Privilege}。

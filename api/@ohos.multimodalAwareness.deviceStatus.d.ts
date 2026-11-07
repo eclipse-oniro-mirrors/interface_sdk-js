@@ -175,5 +175,60 @@ declare namespace deviceStatus {
    * @since 23 static
    */
   function offSteadyStandingDetect(callback?: Callback<SteadyStandingStatus>): void;
+
+  /**
+   * Defines the phone drop detection status.
+   * 
+   * Indicates the device's drop detection state, including normal state and dropped state.
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DropDetectionStatus {
+    /**
+     * Normal state, indicating the device is in a normal held or placed state.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_NORMAL = 0,
+    /**
+     * Dropped state, indicating the device has detected a drop event.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_DROPPED = 1
+  }
+
+  /**
+   * Subscribes to drop detection events. 
+   *
+   * @param { Callback<DropDetectionStatus> } callback - Indicates the callback for device-drop event.
+   *     Repeated subscriptions with the same callback throw error 32500002.
+   * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500002 - Subscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onDropDetect(callback: Callback<DropDetectionStatus>): void;
+
+  /**
+   * Unsubscribes from drop detection events.
+   *
+   * @param { Callback<DropDetectionStatus> } [callback] - Indicates the callback for device-drop event.
+   * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500003 - Unsubscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offDropDetect(callback?: Callback<DropDetectionStatus>): void;
 }
 export default deviceStatus;

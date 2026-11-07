@@ -272,15 +272,14 @@ declare namespace vpnExtension {
      *
      * > **NOTE**
      * >
-     * > You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
+     * > 1. You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)} to destroy the VPN and clear
      * > resources when the VPN is not needed.
+     * > 2. When error code 2200003 is returned by calling this interface, check whether the ohos.permission.INTERNET permission has been applied for.
      * 
-     * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - VPN configuration.
      * @returns { Promise<int> } Promise used to return the result, which is the file descriptor of the virtual network
      *     interface card (vNIC).
-     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2200001 - Invalid parameter value.
      * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.

@@ -373,6 +373,42 @@ declare namespace applicationManager {
   }
 
   /**
+   * Main window states information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface MainWindowStates {
+    /**
+     * Process ID of the application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    pid: number;
+
+    /**
+     * Bundle name of the application.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    bundleName: string;
+
+    /**
+     * State of the main window.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    state: WindowState;
+  }
+
+  /**
    * Adds the applications that are not allowed to run under the current user. This API uses an asynchronous callback to
    * return the result. From API version 21, if the allowed application list
    * [addAllowedRunningBundles]{@link applicationManager.addAllowedRunningBundles} is not empty, the prohibited
@@ -2256,6 +2292,98 @@ declare namespace applicationManager {
    * @since 26.0.1
    */
   function publishFormToDesktop(formInfo: FormInfo): string;
+
+  /**
+   * Adds applications to the battery optimization exclusion list.
+   * This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be added.
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * Removes applications from the battery optimization exclusion list.
+   * This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be removed.
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeOptimizationBatteryExclusionApps(appIdentifiers: Array<string>, accountId: number): void;
+
+  /**
+   * Obtains the battery optimization exclusion list.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @param { common.QueryPolicy } [queryPolicy] - Query policy. If this parameter is not specified, the default value
+   *     {@link common.QueryPolicy.SELF} is used.
+   * @returns { Array<string> } Returns the bundle names of the applications in the exclusion list.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getOptimizationBatteryExclusionApps(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
+
+  /**
+   * Delete all notifications of a specified user.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { number } accountId - User account ID.
+   *     <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeAllNotifications(accountId: number): void;
+
+  /**
+   * Obtains the states of all main windows.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @returns { Array<MainWindowStates> } Return the main window states.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getAllMainWindowStates(): Array<MainWindowStates>;
 }
 
 export default applicationManager;

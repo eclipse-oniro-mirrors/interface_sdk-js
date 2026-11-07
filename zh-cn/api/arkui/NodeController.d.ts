@@ -23,7 +23,7 @@ import { FrameNode } from './FrameNode';
 import { Size } from './Graphics';
 
 /**
- * NodeController用于管理自定义节点的创建、显示、更新等操作，并负责将自定义节点挂载到[NodeContainer]{@link ../@internal/component/ets/node_container}上，适用于
+ * NodeController用于管理自定义节点的创建、显示、更新等操作，并负责将自定义节点挂载到[NodeContainer]{@link @global:NodeContainer}上，适用于
  * 需要在页面中动态创建、更新、复用自定义节点的场景。
  * 
  * > **说明：**
@@ -38,24 +38,24 @@ import { Size } from './Graphics';
  */
 export abstract class NodeController {
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}创建时触发此回调。回调方法将返回一个节点，该节点将被挂载至
-   * [NodeContainer]{@link ../@internal/component/ets/node_container}。
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}创建时触发此回调。回调方法将返回一个节点，该节点将被挂载至
+   * [NodeContainer]{@link @global:NodeContainer}。
    * 
    * 或者可以通过NodeController的rebuild()方法触发回调。
    * 
    * > **说明：**
    * >
-   * > [NodeContainer]{@link ../@internal/component/ets/node_container}不支持跨实例复用。如果出现跨实例复用
-   * > [NodeContainer]{@link ../@internal/component/ets/node_container}，传入
-   * > [NodeContainer]{@link ../@internal/component/ets/node_container}的[NodeController]{@link NodeController}触发
+   * > [NodeContainer]{@link @global:NodeContainer}不支持跨实例复用。如果出现跨实例复用
+   * > [NodeContainer]{@link @global:NodeContainer}，传入
+   * > [NodeContainer]{@link @global:NodeContainer}的[NodeController]{@link NodeController}触发
    * > [makeNode]{@link NodeController#makeNode}回调方法时，入参中的[UIContext]{@link @ohos.arkui.UIContext}对象可能为undefined，此时需要开发者
    * > 判断该对象是否为undefined，防止后续使用此入参时出现[UIContext无效的JS异常](docroot://ui/arkts-wrong-uicontext-debug.md#定位uicontext错误问题)。
    *
-   * @param { UIContext } uiContext - 回调该方法时，绑定[NodeContainer]{@link ../@internal/component/ets/node_container}的UI上下文。跨实
-   *     例复用[NodeContainer]{@link ../@internal/component/ets/node_container}时，该参数可能为undefined，需要开发者自行判断。
+   * @param { UIContext } uiContext - 回调该方法时，绑定[NodeContainer]{@link @global:NodeContainer}的UI上下文。跨实
+   *     例复用[NodeContainer]{@link @global:NodeContainer}时，该参数可能为undefined，需要开发者自行判断。
    * @returns { FrameNode | null } 一个FrameNode对象，返回的节点将被挂载至
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的占位节点上。若返回null对象，将清空对应
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的子节点。
+   *     [NodeContainer]{@link @global:NodeContainer}的占位节点上。若返回null对象，将清空对应
+   *     [NodeContainer]{@link @global:NodeContainer}的子节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -65,7 +65,7 @@ export abstract class NodeController {
   abstract makeNode(uiContext: UIContext): FrameNode | null;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}布局时触发此回调。
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}布局时触发此回调。
    *
    * @param { Size } size - 组件布局大小的宽和高，单位为vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -77,7 +77,7 @@ export abstract class NodeController {
   aboutToResize?(size: Size): void;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}挂载显示后触发此回调。
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}挂载显示后触发此回调。
    * 
    * > **说明：**
    * >
@@ -92,7 +92,7 @@ export abstract class NodeController {
   aboutToAppear?(): void;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}销毁时触发此回调。
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}销毁时触发此回调。
    * 
    * > **说明：**
    * >
@@ -107,7 +107,7 @@ export abstract class NodeController {
   aboutToDisappear?(): void;
 
   /**
-   * 调用此接口通知[NodeContainer]{@link ../@internal/component/ets/node_container}组件重新回调
+   * 调用此接口通知[NodeContainer]{@link @global:NodeContainer}组件重新回调
    * [makeNode]{@link NodeController#makeNode}方法，更改子节点。例如，当NodeContainer展示的内容数据发生变化、需要更新显示的子节点时，可调用此方法触发重新构建。
    * 
    * > **说明：**
@@ -126,7 +126,7 @@ export abstract class NodeController {
   rebuild(): void;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}收到触摸事件时触发此回调。
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}收到触摸事件时触发此回调。
    *
    * @param { TouchEvent } event - 触摸事件，包含触摸点的坐标、触摸动作类型等信息，具体结构详见TouchEvent。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -138,7 +138,7 @@ export abstract class NodeController {
   onTouchEvent?(event: TouchEvent): void;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}挂载至主节点树时触发此回调。与
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}挂载至主节点树时触发此回调。与
    * [aboutToAppear]{@link NodeController#aboutToAppear}不同，aboutToAppear在NodeContainer挂载显示后触发，onAttach在NodeContainer挂载至主
    * 节点树时触发，两者触发时机可能不同。
    * 
@@ -155,7 +155,7 @@ export abstract class NodeController {
   onAttach?(): void;
 
   /**
-   * 当NodeController绑定的[NodeContainer]{@link ../@internal/component/ets/node_container}从主节点树卸载时触发此回调。与
+   * 当NodeController绑定的[NodeContainer]{@link @global:NodeContainer}从主节点树卸载时触发此回调。与
    * [aboutToDisappear]{@link NodeController#aboutToDisappear}不同，aboutToDisappear在NodeContainer销毁时触发，onDetach在
    * NodeContainer从主节点树卸载时触发，两者触发时机可能不同。
    * 
@@ -172,11 +172,11 @@ export abstract class NodeController {
   onDetach?(): void;
 
   /**
-   * 当NodeController与[NodeContainer]{@link ../@internal/component/ets/node_container}即将绑定前触发此回调。该回调先于
+   * 当NodeController与[NodeContainer]{@link @global:NodeContainer}即将绑定前触发此回调。该回调先于
    * [onBind]{@link NodeController#onBind}触发，两者均为可选回调，可根据需要在绑定前或绑定后执行相应逻辑。
    *
    * @param { number } containerId - 回调该方法时，即将与NodeController绑定的
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的标识。
+   *     [NodeContainer]{@link @global:NodeContainer}的标识。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -186,11 +186,11 @@ export abstract class NodeController {
   onWillBind?(containerId: number): void;
 
   /**
-   * 当NodeController与[NodeContainer]{@link ../@internal/component/ets/node_container}即将解绑前触发此回调。该回调先于
+   * 当NodeController与[NodeContainer]{@link @global:NodeContainer}即将解绑前触发此回调。该回调先于
    * [onUnbind]{@link NodeController#onUnbind}触发，两者均为可选回调，可根据需要在解绑前或解绑后执行相应逻辑。
    *
    * @param { number } containerId - 回调该方法时，即将与NodeController解绑的
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的标识。
+   *     [NodeContainer]{@link @global:NodeContainer}的标识。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -200,11 +200,11 @@ export abstract class NodeController {
   onWillUnbind?(containerId: number): void;
 
   /**
-   * 当NodeController与[NodeContainer]{@link ../@internal/component/ets/node_container}绑定后触发此回调。该回调后于
+   * 当NodeController与[NodeContainer]{@link @global:NodeContainer}绑定后触发此回调。该回调后于
    * [onWillBind]{@link NodeController#onWillBind}触发，两者均为可选回调，可根据需要在绑定前或绑定后执行相应逻辑。
    *
    * @param { number } containerId - 回调该方法时，已完成与NodeController绑定的
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的标识。
+   *     [NodeContainer]{@link @global:NodeContainer}的标识。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -214,11 +214,11 @@ export abstract class NodeController {
   onBind?(containerId: number): void;
 
   /**
-   * 当NodeController与[NodeContainer]{@link ../@internal/component/ets/node_container}解绑后触发此回调。该回调后于
+   * 当NodeController与[NodeContainer]{@link @global:NodeContainer}解绑后触发此回调。该回调后于
    * [onWillUnbind]{@link NodeController#onWillUnbind}触发，两者均为可选回调，可根据需要在解绑前或解绑后执行相应逻辑。
    *
    * @param { number } containerId - 回调该方法时，已完成与NodeController解绑的
-   *     [NodeContainer]{@link ../@internal/component/ets/node_container}的标识。
+   *     [NodeContainer]{@link @global:NodeContainer}的标识。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

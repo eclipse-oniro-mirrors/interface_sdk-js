@@ -62,7 +62,7 @@ export interface CipherRsaOptions {
 
   /**
    * 待加密或解密的文本内容。待加密的文本内容应该是一段普通文本，长度不能超过keySize / 8 - 66，其中keySize是密钥的长度
-   * （例如密钥长度为1024时，text不能超过62个字节）。待解密的文本内容应该是经过base64编码的一段二进制值。base64编码使用
+   * （例如密钥长度为1024时，text不能超过62个字节）。待解密的文本内容应该是经过Base64编码的一段二进制值。Base64编码使用
    * 默认风格。
    *
    * @syscap SystemCapability.Security.Cipher
@@ -146,7 +146,7 @@ export interface CipherAesOptions {
   action: string;
 
   /**
-   * 待加密或解密的文本内容。待加密的文本内容应该是一段普通文本。待解密的文本内容应该是经过 base64 编码的一段二进制值。base64 编码使用默认风格。
+   * 待加密或解密的文本内容。待加密的文本内容应该是一段普通文本。待解密的文本内容应该是经过Base64编码的一段二进制值。Base64编码使用默认风格。
    *
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly
@@ -156,7 +156,7 @@ export interface CipherAesOptions {
   text: string;
 
   /**
-   * 加密或解密使用到的密钥，经过 base64 编码后生成的字符串。
+   * 加密或解密使用到的密钥，经过Base64编码后生成的字符串。
    *
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly
@@ -176,7 +176,7 @@ export interface CipherAesOptions {
   transformation?: string;
 
   /**
-   * AES加解密的初始向量，经过base64编码后的字符串，默认值为key值。
+   * AES加解密的初始向量，经过Base64编码后的字符串，默认值为key值。
    *
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly

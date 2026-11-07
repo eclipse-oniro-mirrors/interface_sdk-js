@@ -200,7 +200,7 @@ export declare interface MenuOutlineOptions {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -596,6 +596,7 @@ export declare interface SelectAttribute extends CommonMethod {
      * @returns { SelectAttribute } - The attribute of the select.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi [since 23 - 24]
+     * @publicapi [since 26.0.0]
      * @stagemodelonly
      * @since 23 static
      */
@@ -645,6 +646,17 @@ export declare interface SelectAttribute extends CommonMethod {
      * @since 26.0.0 static
      */
     default menuEdgeLightMode(mode: EdgeLightMode | undefined): this;
+    /**
+     * 设置Select选项。
+     *
+     * @param { Array<SelectOption> } optionArray - Select构造器选项
+     * @returns { SelectAttribute } 返回SelectAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setSelectOptions(optionArray: Array<SelectOption>): this;
 }
 /**
  * 菜单项配置接口，用于ContentModifier中。

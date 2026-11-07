@@ -94,7 +94,7 @@ export declare interface CounterAttribute extends CommonMethod {
      * @returns { CounterAttribute } 返回Counter属性实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setCounterOptions(): this;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,6 +14,19 @@
  */
 
 /**
+ * ###### 使用说明
+ *
+ * 在使用DriverExtensionContext的功能前，需要通过DriverExtensionAbility子类实例获取。
+ *
+ * ```ts
+ *   let context: DriverExtensionContext | undefined;
+ *   class EntryAbility extends DriverExtensionAbility {
+ *     onInit() {
+ *       context = this.context; // 获取DriverExtensionContext
+ *     }
+ *   }
+ * ```
+ *
  * @file 定义驱动扩展的上下文
  * @kit DriverDevelopmentKit
  */
@@ -22,13 +35,13 @@ import ExtensionContext from './ExtensionContext';
 
 /**
  * DriverExtensionContext模块是DriverExtensionAbility的上下文环境，继承自ExtensionContext。
- * 
+ *
  * DriverExtensionContext模块提供DriverExtensionAbility实现中需要主动发起的操作。
  *
  * > **说明：**
  * > 本模块首批接口从API version 10开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * > 本模块接口仅可在Stage模型下使用。
- *
+ * 
  * @syscap SystemCapability.Driver.ExternalDevice
  * @StageModelOnly
  * @since 10 dynamic

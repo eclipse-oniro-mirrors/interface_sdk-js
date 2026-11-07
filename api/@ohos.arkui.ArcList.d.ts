@@ -62,10 +62,10 @@ declare interface ArkListOptions {
    * of **ArcList**. If not set, no scroll controller is bound.
    *
    * **Note:** It is not allowed to bind the same scroll control object with other scrollable components, such as
-   * [List]{@link ./@internal/component/ets/list},
-   * [Grid]{@link ./@internal/component/ets/grid},
-   * [Scroll]{@link ./@internal/component/ets/scroll}, and
-   * [WaterFlow]{@link ./@internal/component/ets/water_flow}.
+   * [List]{@link @global:List},
+   * [Grid]{@link @global:Grid},
+   * [Scroll]{@link @global:Scroll}, and
+   * [WaterFlow]{@link @global:WaterFlow}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @crossplatform
@@ -158,9 +158,9 @@ export interface ArcListItemInterface {
 
 /**
  * In addition to the
- * [universal attributes]{@link common}, the following
+ * [universal attributes]{@link CommonMethod}, the following
  * attributes are supported (the
- * [scrollable component common attributes]{@link common:ScrollableCommonMethod}
+ * [scrollable component common attributes]{@link @global:ScrollableCommonMethod}
  * are not supported):
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -189,7 +189,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
    * @param { Optional<LengthMetrics> } space - Spacing between child components in the list.
    *     <br>Default value: **LengthMetrics.vp(0)**
    *     <br>When the
-   *     [visibility]{@link common:CommonMethod#visibility}
+   *     [visibility]{@link @global:CommonMethod#visibility}
    *     attribute of an **ArcList** child component is set to **None**, the child component is not displayed, but the
    *     **space** above and below it still takes effect.
    * @returns { ArcListAttribute }
@@ -274,7 +274,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
    *
    * @param { Optional<boolean> } enable - Whether to enable the chained linkage effect. The chained linkage effect
    *     takes effect only when the edge effect is
-   *     [EdgeEffect.Spring]{@link ./@internal/component/ets/enums:EdgeEffect.Spring}.
+   *     [EdgeEffect.Spring]{@link @global:EdgeEffect.Spring}.
    *     <br>Default value: **false**, the chained linkage is not enabled; **true**, the chained linkage is enabled.
    * @returns { ArcListAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -289,14 +289,14 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
    *
    * @param { Optional<ChildrenMainSize> } size - Provides precise size information of all child components in the main
    *     axis direction to the **ArcList** component through the
-   *     [ChildrenMainSize]{@link common:ChildrenMainSize}
+   *     [ChildrenMainSize]{@link @global:ChildrenMainSize}
    *     object. This ensures that the **ArcList** component can maintain the accuracy of its scroll position in
    *     scenarios such as inconsistent child component main axis sizes, addition or removal of child components, and
-   *     when using [scrollToIndex]{@link ./@internal/component/ets/scroll:Scroller#scrollToIndex}. It
-   *     further guarantees that [scrollTo]{@link ./@internal/component/ets/scroll:Scroller#scrollTo} can
+   *     when using [scrollToIndex]{@link @global:Scroller#scrollToIndex}. It
+   *     further guarantees that [scrollTo]{@link @global:Scroller#scrollTo} can
    *     accurately jump to the specified position,
-   *     [currentOffset]{@link ./@internal/component/ets/scroll:Scroller#currentOffset} or
-   *     [offset]{@link ./@internal/component/ets/scroll:Scroller#offset} accurately reflects the
+   *     [currentOffset]{@link @global:Scroller#currentOffset} or
+   *     [offset]{@link @global:Scroller#offset} accurately reflects the
    *     current scroll position, and the built-in scrollbar can move smoothly without any jumps or abrupt changes.
    *     Since API version 23, the **offset** API is added.
    *     <br> **NOTE**
@@ -318,7 +318,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
    *
    * @param { Optional<boolean> } enable - Whether to support the scroll gesture. When set to **true**, the list can be
    *     scrolled by finger or mouse. When set to **false**, the list cannot be scrolled by finger or mouse, but the
-   *     scrolling API of the [Scroller]{@link ./@internal/component/ets/scroll:Scroller}
+   *     scrolling API of the [Scroller]{@link @global:Scroller}
    *     controller is not affected.
    *     <br>Default value: **true**
    * @returns { ArcListAttribute }
@@ -337,7 +337,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
    *     <br>When **fadingEdge** takes effect, it is recommended not to set background-related attributes on this
    *     component, as they may affect the fading display effect.
    *     <br>When **fadingEdge** takes effect, the component is clipped to the boundary, and setting the component's
-   *     [clip]{@link common:CommonMethod#clip} attribute to
+   *     [clip]{@link @global:CommonMethod#clip} attribute to
    *     **false** does not take effect.
    *     <br>The value **true** enables the edge fading effect, and **false** disables it.
    *     <br>Default value: **false**
@@ -438,7 +438,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
   /**
    * Triggered when the list starts scrolling initiated by the user's finger dragging the list or its scrollbar. This
    * event is also triggered when the animation contained in the scrolling triggered by
-   * [Scroller]{@link ./@internal/component/ets/scroll:Scroller} starts.
+   * [Scroller]{@link @global:Scroller} starts.
    *
    * @param { Optional<VoidCallback> } handler - Callback triggered when the list starts scrolling.
    * @returns { ArcListAttribute }
@@ -452,7 +452,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
   /**
    * Triggered when the list stops scrolling after the user's finger leaves the screen. This event is also triggered
    * when the animation contained in the scrolling triggered by
-   * [Scroller]{@link ./@internal/component/ets/scroll:Scroller} stops.
+   * [Scroller]{@link @global:Scroller} stops.
    *
    * @param { Optional<VoidCallback> } handler - Callback triggered when the list stops scrolling.
    * @returns { ArcListAttribute }
@@ -491,7 +491,7 @@ export declare class ArcListAttribute extends CommonMethod<ArcListAttribute> {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./@internal/component/ets/common}, the following attributes are
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are
  * supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
@@ -588,7 +588,7 @@ export declare const ArcListItemInstance: ArcListItemAttribute;
  * > index values are updated.
  * >
  * > - Child components of **ArcList** with the
- * > [visibility]{@link common:CommonMethod#visibility} attribute
+ * > [visibility]{@link @global:CommonMethod#visibility} attribute
  * > set to **Hidden** or **None** still have their index values calculated.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle

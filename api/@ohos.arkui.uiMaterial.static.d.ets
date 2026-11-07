@@ -103,7 +103,7 @@ declare namespace uiMaterial {
      * Enabled state. The immersive system material is enabled by default for the 
      * [Dialog](docroot://ui/arkts-base-dialog-overview.md), [Toast](docroot://ui/arkts-create-toast.md), 
      * [AlphabetIndexer]{@link alphabet_indexer}, [ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}, 
-     * [Chip]{@link @ohos.arkui.advanced.Chip}, [Select]{@link select}, [Menu Control]{@link common}, 
+     * [Chip]{@link @ohos.arkui.advanced.Chip}, [Select]{@link select}, [Menu Control]{@link CommonMethod}, 
      * [Toggle]{@link toggle}, [SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}, 
      * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}, [Slider]{@link slider}, 
      * [bindSheet]{@link CommonMethod#bindSheet}, and [SelectionMenu]{@link @ohos.arkui.advanced.SelectionMenu}. After 
@@ -387,6 +387,7 @@ declare namespace uiMaterial {
    * @since 26.0.0 static
    */
   export function convertToECMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
+
   /**
    * Convert from ImmersiveMaterial to another ImmersiveMaterial set on sub component of EffectComponent.
    *

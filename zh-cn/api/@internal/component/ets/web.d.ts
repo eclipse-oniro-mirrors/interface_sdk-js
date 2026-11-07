@@ -1994,7 +1994,7 @@ declare class HttpAuthHandler {
    *
    * @param { string } userName - HTTP认证用户名，需为非空字符串。
    * @param { string } password - HTTP认证密码，需为非空字符串。
-   * @returns { boolean } 认证成功时返回true，失败返回false。
+   * @returns { boolean } 返回值仅表示接口调用状态，不代表认证结果。true表示调用成功，false表示调用失败。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -3973,7 +3973,7 @@ declare class WebController {
    * 
    * 当baseUrl为“http/https”协议时，编码后的data字符串将被Web组件以类似loadUrl的方式以非编码字符串处理。
    *
-   * @param { object } options The options with the data or URL and other information.
+   * @param { object } options 包含数据或URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3988,7 +3988,7 @@ declare class WebController {
    * 
    * 而通过registerJavaScriptProxy注入的对象，在loadUrl导航到新的页面也会有效。
    *
-   * @param { object } options The options with the URL and other information.
+   * @param { object } options 包含URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9

@@ -249,7 +249,7 @@ export interface TemplateOptions {
 }
 
 /**
-* 除支持[拖拽排序]{@link common}属性外，还支持以下属性。
+* 除支持[拖拽排序]{@link CommonMethod}属性外，还支持以下属性。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -369,6 +369,35 @@ export interface RepeatAttribute<T> extends DynamicNode {
 }
 
 /**
+ * Repeat组件的控制器。通过[RepeatOptions]{@link RepeatOptions}中的controller字段将控制器绑定到Repeat组件上，
+ * 需要清理缓存时调用[clearCache]{@link RepeatController#clearCache}清理Repeat组件复用池中的节点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare class RepeatController {
+
+  /**
+   * 构造函数，用于创建一个RepeatController对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  constructor();
+
+  /**
+   * 清理该控制器绑定的Repeat组件复用池中的节点。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  clearCache(): void;
+}
+
+/**
 * 创建Repeat组件时的配置项。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -388,6 +417,15 @@ export interface RepeatOptions {
    * @since 26.1.0 static
    */
   allowReuseInAnimation?: boolean;
+  /**
+   * 绑定到Repeat组件上的控制器。绑定后，需要清理缓存时可调用
+   * [clearCache]{@link RepeatController#clearCache}清理Repeat组件复用池中的节点。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  controller?: RepeatController;
 }
 
 /**

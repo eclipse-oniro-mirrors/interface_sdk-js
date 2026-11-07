@@ -47,9 +47,9 @@ declare namespace formAgent {
    *     <br>- **ohos.extra.param.key.form_name**: name of the target widget.
    *     <br>- **ohos.extra.param.key.module_name**: module name of the target widget.
    * @param { AsyncCallback<string> } callback - Callback used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified;2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified;2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -77,9 +77,9 @@ declare namespace formAgent {
    *     <br>- **ohos.extra.param.key.form_name**: name of the target widget.
    *     <br>- **ohos.extra.param.key.module_name**: module name of the target widget.
    * @returns { Promise<string> } Promise used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -102,8 +102,8 @@ declare namespace formAgent {
    * @param { formBindingData.FormBindingData } formBindingData - Data to be used for the update.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object dose not exist.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 16500050 - Possible cause IPC connection error. Such as the remote object does not exist.
    * @throws { BusinessError } 16500060 - Possible cause Service State error. Such as the form is recovering.
    * @throws { BusinessError } 16501000 - Possible cause internal functional error. Such as virtualization failed.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -123,7 +123,7 @@ declare namespace formAgent {
    * @returns { Promise<Array<formInfo.PeerFormHostServiceInfo>> } Promise used to return
    *     the peer form host service info list.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -149,7 +149,7 @@ declare namespace formAgent {
    * @returns { Promise<formInfo.PublishFormCrossDeviceResult > } Promise used to return the result of
    *     publishing the form across device.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501020 - Remote form service is unavailable.
    * @throws { BusinessError } 16501021 - The peer form application is not installed or the version is too old.
@@ -165,5 +165,26 @@ declare namespace formAgent {
    */
   function requestPublishFormCrossDevice(peerServiceInfo: formInfo.PeerFormHostServiceInfo, want: Want,
     formBindingData?: formBindingData.FormBindingData): Promise<formInfo.PublishFormCrossDeviceResult>;
+
+  /**
+   * Obtains the visible position and dimension of a widget. This API uses a promise to return the result.
+   *
+   * @param { string } formId - Widget ID.
+   * @returns { Promise<formInfo.Rect> } Promise used to return the position and dimension of the widget relative to the
+   *     upper-left corner of the screen, in vp.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16500050 - IPC connection error.
+   * @throws { BusinessError } 16500060 - Service connection error.
+   * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
+   * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
+   * @throws { BusinessError } 16501003 - The form cannot be operated by the current application.
+   * @syscap SystemCapability.Ability.Form
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  function getVisibleFormRect(formId: string): Promise<formInfo.Rect>;
 }
 export default formAgent;

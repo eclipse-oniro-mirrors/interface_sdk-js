@@ -4705,8 +4705,7 @@ export declare class UIContext {
    * @stagemodelonly
    * @since 23 static
    */
-  openBindSheet(bindSheetContent: ComponentContentBase,
-    sheetOptions?: SheetOptions, targetId?: int): Promise<void>;
+  openBindSheet(bindSheetContent: ComponentContentBase, sheetOptions?: SheetOptions, targetId?: int): Promise<void>;
 
   /**
    * Update the BindSheet with sheetOptions.
@@ -4727,8 +4726,7 @@ export declare class UIContext {
    * @stagemodelonly
    * @since 23 static
    */
-  updateBindSheet(bindSheetContent: ComponentContentBase,
-    sheetOptions: SheetOptions, partialUpdate?: boolean): Promise<void>;
+  updateBindSheet(bindSheetContent: ComponentContentBase, sheetOptions: SheetOptions, partialUpdate?: boolean): Promise<void>;
 
   /**
    * Close the BindSheet.
@@ -5274,7 +5272,7 @@ export const enum CustomKeyboardContinueFeature {
   /**
    * Enable custom keyboard continuation.
    *
-   * @syscap SystemCapability. ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -5283,7 +5281,7 @@ export const enum CustomKeyboardContinueFeature {
   /**
    * Disable custom keyboard continuation.
    *
-   * @syscap SystemCapability. ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */

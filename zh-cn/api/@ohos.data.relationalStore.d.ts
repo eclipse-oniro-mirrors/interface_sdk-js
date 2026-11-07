@@ -454,7 +454,7 @@ declare namespace relationalStore {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    dumpStackOnFileDel?: boolean;
+    dumpStackOnFileDeletion?: boolean;
 
     /**
      * 指定数据库是否支持搜索，true表示支持搜索，false表示不支持搜索，默认不支持搜索。
