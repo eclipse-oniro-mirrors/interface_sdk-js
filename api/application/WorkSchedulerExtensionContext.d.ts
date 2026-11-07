@@ -56,7 +56,6 @@ declare class WorkSchedulerExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000012 - The application is controlled.
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
@@ -85,7 +84,6 @@ declare class WorkSchedulerExtensionContext extends ExtensionContext {
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
