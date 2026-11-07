@@ -432,6 +432,16 @@ export interface ApplicationInfo {
    * @since 26.0.1 dynamic&static
    */
   readonly applicationReservedFlag?: bundleManager.ApplicationReservedFlag;
+
+  /**
+   * 标识应用卸载时是否保留数据。true表示保留，false表示不保留，默认值为false。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  readonly keepDataOnUninstall?: boolean;
 }
 
 /**

@@ -486,6 +486,16 @@ export interface ApplicationInfo {
    * @since 26.0.1 dynamic&static
    */
   readonly applicationReservedFlag?: bundleManager.ApplicationReservedFlag;
+
+  /**
+   * Whether application data is retained upon uninstallation. **true** if retained, **false** otherwise. The default value is **false**.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  readonly keepDataOnUninstall?: boolean;
 }
 
 /**
