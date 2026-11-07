@@ -650,7 +650,7 @@ declare namespace restrictions {
     NOTIFICATION_CENTER = 60,
 
     /**
-     * 健康使用设备
+     * Parent Control
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
