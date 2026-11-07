@@ -39,8 +39,8 @@ declare namespace formProvider {
    * @param { string } formId - Widget ID.
    * @param { int } minute - Time after which a widget is updated. The value is greater than or equal to 5, in minutes.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -61,8 +61,8 @@ declare namespace formProvider {
    * @param { string } formId - Widget ID.
    * @param { int } minute - Time after which a widget is updated. The value is greater than or equal to 5, in minutes.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -90,8 +90,8 @@ declare namespace formProvider {
    * @param { string } formId - ID of the widget to update.
    * @param { formBindingData.FormBindingData } formBindingData - Data to be used for the update.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -122,8 +122,8 @@ declare namespace formProvider {
    * @param { string } formId - ID of the widget to update.
    * @param { formBindingData.FormBindingData } formBindingData - Data to be used for the update.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -143,8 +143,8 @@ declare namespace formProvider {
    *
    * @param { formInfo.FormInfoFilter } filter - Filter criterion.
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - Callback used to return the information obtained.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -160,8 +160,8 @@ declare namespace formProvider {
    * result.
    *
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - Callback used to return the information obtained.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -179,8 +179,8 @@ declare namespace formProvider {
    * @param { formInfo.FormInfoFilter } [filter] - Filter criterion. By default, no value is passed, indicating that no 
    *     filtering is performed.
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -200,9 +200,9 @@ declare namespace formProvider {
    *     ohos.extra.param.key.form_name'<br>'ohos.extra.param.key.module_name'
    * @param { formBindingData.FormBindingData } formBindingData - Data used for creating the widget.
    * @param { AsyncCallback<string> } callback - Callback used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -229,9 +229,9 @@ declare namespace formProvider {
    *     <br>**abilityName**: ability of the target widget.<br>**parameters**:<br>'ohos.extra.param.key.form_dimension'<br>'
    *     ohos.extra.param.key.form_name'<br>'ohos.extra.param.key.module_name'
    * @param { AsyncCallback<string> } callback - Callback used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -256,9 +256,9 @@ declare namespace formProvider {
    * @param { formBindingData.FormBindingData } [formBindingData] - Data used for creating the widget. By default, no value 
    *     is passed, indicating that no data is provided.
    * @returns { Promise<string> } Promise used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -279,9 +279,9 @@ declare namespace formProvider {
    *
    * @param { AsyncCallback<boolean> } callback - Callback function that returns the query result.<br>**true**: The widget 
    *     can be added to the widget host.<br>**false**: The widget cannot be added to the widget host.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -299,7 +299,7 @@ declare namespace formProvider {
    *     **true**: The widget can be added to the widget host.
    *     
    *     **false**: The widget cannot be added to the widget host.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -411,8 +411,9 @@ declare namespace formProvider {
    * @permission ohos.permission.PUBLISH_FORM_CROSS_BUNDLE
    * @param { Want } want - The want of the form to open.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -428,8 +429,8 @@ declare namespace formProvider {
    * @param { string } formId - Widget ID.
    * @param { boolean } [isMainPage] - Whether the page is the main editing page.<br>- **true**: The page is the main
    *     editing page.<br>- **false**: The page is not the main editing page.<br>Default value: **true**.
-   * @throws { BusinessError } 801 - Capability not supported.function openFormEditAbility cannot work correctly due to
-   *     limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -450,9 +451,9 @@ declare namespace formProvider {
    *
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.function activateSceneAnimation
-   *     cannot work correctly due to limited device capabilities.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -476,9 +477,9 @@ declare namespace formProvider {
    *
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.function deactivateSceneAnimation can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -504,8 +505,8 @@ declare namespace formProvider {
    * @param { string } formId - Widget ID.
    * @param { formInfo.OverflowInfo } overflowInfo - Animation request parameter information.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.function requestOverflow can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -527,8 +528,8 @@ declare namespace formProvider {
    *
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 801 - Capability not supported.function cancelOverflow can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -549,8 +550,8 @@ declare namespace formProvider {
    * @param { string } formId - Widget ID.
    * @returns { Promise<formInfo.Rect> } Promise used to return the position and dimension of the widget relative to the 
    *     upper-left corner of the screen, in vp.
-   * @throws { BusinessError } 801 - Capability not supported.function getFormRect cannot work correctly
-   *     due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -612,7 +613,7 @@ declare namespace formProvider {
    * @param { Array<formInfo.TemplateFormDetailInfo> } templateFormInfo - Static configuration information of a specified 
    *     template widget.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501013 - The system does not support the current operation.
    * @syscap SystemCapability.Ability.Form
@@ -630,7 +631,7 @@ declare namespace formProvider {
    * @param { formInfo.PublishFormCrossBundleControlCallback } callback - Callback function used to return the control
    *     result on cross-bundle widget addition to the home screen.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -647,7 +648,7 @@ declare namespace formProvider {
    * @param { formInfo.PublishFormCrossBundleControlCallback } [callback] - Callback function used to return the
    *     control result on cross-bundle widget addition to the home screen.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -661,7 +662,8 @@ declare namespace formProvider {
    *
    * @param { boolean } [isMainPage] - Whether to close the main editing page. The value **true** means closing the main 
    *     editing page, and **false** means closing a non-main editing page.<br>Default value: **true**.
-   * @throws { BusinessError } 801 - Capability not supported due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501015 - Cannot close the widget editing page opened by other apps.
    * @syscap SystemCapability.Ability.Form
