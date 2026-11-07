@@ -314,11 +314,11 @@ declare namespace fileShare {
    * @param { wantConstant.Flags } flag - 授权的权限，可取wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION或
    * wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION。
    * @param { AsyncCallback<void> } callback - 异步授权之后的回调。
-   * @throws { BusinessError } 201 - Permission verification failed
-   * @throws { BusinessError } 202 - The caller is not a system application
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory parameters are left unspecified;
    * <br>2.Incorrect parameter types.
-   * @throws { BusinessError } 14300001 - IPC error
+   * @throws { BusinessError } 14300001 - IPC error.
    * @syscap SystemCapability.FileManagement.AppFileService
    * @systemapi
    * @since 9 dynamic
@@ -340,11 +340,11 @@ declare namespace fileShare {
    * @param { wantConstant.Flags } flag - 授权的权限，可取wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION或
    * wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 201 - Permission verification failed
-   * @throws { BusinessError } 202 - The caller is not a system application
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory parameters are left unspecified;
    * <br>2.Incorrect parameter types.
-   * @throws { BusinessError } 14300001 - IPC error
+   * @throws { BusinessError } 14300001 - IPC error.
    * @syscap SystemCapability.FileManagement.AppFileService
    * @systemapi
    * @since 9 dynamic
@@ -379,11 +379,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - 需要持久化授权的URI策略信息数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -397,11 +397,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - 需要取消持久化授权的URI策略信息数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -418,7 +418,7 @@ declare namespace fileShare {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -439,8 +439,8 @@ declare namespace fileShare {
    * <br>2.Incorrect parameter types; 3.Invalid policy size.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -458,8 +458,8 @@ declare namespace fileShare {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -474,11 +474,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - 需要激活权限的URI策略信息数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -492,11 +492,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - 需要取消激活权限的URI策略信息数组。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -510,10 +510,10 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - 需要校验持久化授权状态的URI策略信息数组。
    * @returns { Promise<Array<boolean>> } Promise对象，返回URI权限的持久化状态数组。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 12
    */
@@ -522,10 +522,10 @@ declare namespace fileShare {
    * 
    * @param { Array<PolicyInfo> } policies - 需要校验持久化授权状态的URI策略信息数组。
    * @returns { Promise<Array<boolean>> } Promise对象，返回URI权限的持久化状态数组。
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 17 dynamic
    * @since 23 static
@@ -541,9 +541,9 @@ declare namespace fileShare {
    * @param { PolicyType } policyType - 要查询的授权类型，使用TEMPORARY_TYPE查询临时授权，使用PERSISTENT_TYPE查询持久化授权。
    * @returns { Promise<Array<boolean>> } Promise对象，返回授权状态校验结果数组。返回true表示授权类型匹配policyType的查询类型，否则返回false。
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 202 - The caller is not a system application
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
