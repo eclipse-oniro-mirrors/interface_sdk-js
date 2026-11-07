@@ -4857,7 +4857,7 @@ declare namespace inputMethodEngine {
    *     If called again with different options, the new options take effect (last wins).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 12800027 - The caller is not a focused application.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -4884,7 +4884,7 @@ declare namespace inputMethodEngine {
    * more.
    *
    * @returns { ProxyInputMethodAbility | null } **ProxyInputMethodAbility** instance.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -4899,7 +4899,7 @@ declare namespace inputMethodEngine {
    * selection change event, and more.
    *
    * @returns { ProxyKeyboardDelegate | null } **ProxyKeyboardDelegate** instance.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
