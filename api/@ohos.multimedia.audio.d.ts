@@ -5727,7 +5727,7 @@ declare namespace audio {
      *
      * @param { boolean } mute - Use true if application recording stream muted by application if self.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 6800103 - Operation not permit at current state, there is no audio capturer running.
+     * @throws { BusinessError } 6800103 - Operation not permitted at current state, there is no audio capturer running.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
      * @since 24 dynamic&static
