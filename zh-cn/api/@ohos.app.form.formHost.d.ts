@@ -453,9 +453,9 @@ declare namespace formHost {
   /**
    * 检查系统是否准备好。使用callback异步回调。
    *
-    * @param { AsyncCallback<void> } callback - 回调函数。当检查系统是否准备好成功，error为undefined，否则为错误对象。
-    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   * @param { AsyncCallback<void> } callback - 回调函数。当检查系统是否准备好成功，error为undefined，否则为错误对象。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -480,11 +480,11 @@ declare namespace formHost {
    * 获取设备上所有应用提供的卡片信息（不包含模板卡片）。使用callback异步回调。
    *
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
-    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上所有应用提供的卡片信息成功，error为undefined，data为查询到的卡片信
-    *     息；否则为错误对象。
-    * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。当获取设备上所有应用提供的卡片信息成功，error为undefined，data为查询到的卡片信
+   *     息；否则为错误对象。
+   * @throws { BusinessError } 201 - Permissions denied.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
