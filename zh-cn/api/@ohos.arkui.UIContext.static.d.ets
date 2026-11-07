@@ -66,7 +66,8 @@ import { Scroller } from '@ohos.arkui.component';
 import { ResourceStr, SizeOptions, VoidCallback } from './arkui/component/units';
 
 import { KeyProcessingMode } from '@ohos.arkui.component';
-import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType } from './arkui/component/enums';
+import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType,
+  ModifierKey, FunctionKey } from './arkui/component/enums';
 
 import { TextMenuOptions, TextLayoutOptions, StyledString, Paragraph } from '@ohos.arkui.component';
 import { TimePickerDialogOptions } from './arkui/component/timePicker';
@@ -3632,6 +3633,25 @@ export declare class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  uiContext: UIContext;
+}
+
+/**
  * UIContext类
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3647,6 +3667,38 @@ export declare class UIContext {
    * @since 24 static
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
+   * 注册标识符在应用运行期间不复用。
+   *
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
+   * @returns { int } 本次快捷键绑定的唯一注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，其他绑定不受影响。如果移除的是当前生效的绑定，
+   * 则最近一次仍未注销的同快捷键绑定恢复生效。标识符不存在或已注销时，不执行任何操作。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取与当前调用作用域关联的 UIContext

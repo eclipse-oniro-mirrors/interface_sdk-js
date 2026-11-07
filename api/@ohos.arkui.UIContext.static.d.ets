@@ -23,7 +23,7 @@
 import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui.component';
 
 import { ClickEvent, ExpectedFrameRateRange, DragItemInfo, AnimateParam, KeyframeAnimateParam, KeyframeState,
-  SheetOptions, PopupCommonOptions, MenuOptions, KeyEvent, MouseEvent, TouchEvent,
+  SheetOptions, PopupCommonOptions, MenuOptions, KeyEvent, MouseEvent, TouchEvent, ModifierKey, FunctionKey,
   ContentCoverOptions } from '@ohos.arkui.component';
 
 import { InputEventMonitor, InputEventListener } from '@ohos.arkui.component';
@@ -3714,6 +3714,25 @@ export declare class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * Provides information about the UI instance that triggers an application-level keyboard shortcut.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * UIContext of the UI instance that triggers the application-level keyboard shortcut.
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  uiContext: UIContext;
+}
+
+/**
  * class UIContext
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3729,6 +3748,43 @@ export declare class UIContext {
    * @since 24 static
    */
   constructor();
+
+  /**
+   * Registers an application-level keyboard shortcut.
+   *
+   * The shortcut takes effect globally in the application. When the shortcut is triggered, the callback receives the
+   * **UIContext** of the UI instance where the shortcut is triggered.
+   * Each registration returns a positive integer registration ID unique within the application, even when the
+   * shortcut and callback are identical. Multiple registrations of the same shortcut are retained, and only the
+   * latest registration that has not been unregistered takes effect. Registration IDs are not reused during the
+   * application lifetime.
+   *
+   * @param { string | FunctionKey } value - A single character of the hotkey (a character that can be entered using a
+   *     keyboard) or a function key.
+   * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback that provides information about the UI instance
+   *     that triggers the hotkey (ApplicationShortcutCallbackInfo).
+   * @returns { int } Unique registration ID of this shortcut binding.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * Unregisters the application-level keyboard shortcut binding identified by the registration ID.
+   *
+   * Only the specified binding is removed. Other bindings are unaffected. If the active binding is removed,
+   * the most recent remaining registration of the same shortcut takes effect. If the ID does not exist or has
+   * already been unregistered, this method does nothing.
+   *
+   * @param { int } registrationId - Registration ID returned when registering the shortcut.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * Gets the UIContext associated with the current calling scope.
