@@ -118,7 +118,7 @@ declare enum SlideEffect {
    * @atomicservice
    * @since 12 dynamic
    */
-  START,
+  START = 5,
 
   /**
    * 设置LTR入场时表示从右边滑入，退场时表示滑出到右边。RTL入场时表示从左边滑入，退场时表示滑出到左边。
@@ -129,7 +129,7 @@ declare enum SlideEffect {
    * @atomicservice
    * @since 12 dynamic
    */
-  END,
+  END = 6,
 }
 
 /**
