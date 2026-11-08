@@ -7118,3 +7118,54 @@ declare enum ShadowClipMode {
    */
   BOUNDS_SHAPE = 1,
 }
+
+/**
+ * Defines the vibrancy modes, which specify whether to apply a brighten or darken effect to the content to improve
+ * readability against translucent material backgrounds.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum VibrancyMode {
+  /**
+   * Vibrancy effect is disabled, the content has no vibrancy effect.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DISABLED = 0,
+  /**
+   * Auto mode. When the system material of the component itself or an ancestor component can auto color-invert,
+   * the vibrancy effect follows the material's color-invert result (brighten when the material samples a dark color,
+   * darken when it samples a light color);
+   * otherwise follows the control's dark/light color mode (brighten in dark mode, darken in light mode).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  AUTO = 1,
+  /**
+   * Brighten mode. Fixedly brightens the content to improve readability against dark backgrounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  BRIGHTEN = 2,
+  /**
+   * Darken mode. Fixedly darkens the content to improve readability against light backgrounds.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DARKEN = 3
+}
