@@ -10433,7 +10433,7 @@ declare namespace audio {
     hint?: InterruptHint;
 
     /**
-     * 焦点获取/释放是否成功。true表示焦点获取/释放成功，false表示焦点获得/释放失败。
+     * 焦点获取/释放是否成功。true表示焦点获取/释放成功，false表示焦点获取/释放失败。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @since 7 dynamiconly
@@ -10448,8 +10448,11 @@ declare namespace audio {
    *
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，无替代接口。
-   *
+   * > 从API version 7开始支持，从API version 9开始废弃。
+   * > 申请音频焦点时，建议使用[AudioRendererOptions]{@link @ohos.multimedia.audio:audio.AudioRendererOptions}.rendererInfo替代，[StreamUsage]{@link @ohos.multimedia.audio:audio.StreamUsage}决定音频流的焦点策略。
+   * > 建议使用[on('audioInterrupt')]{@link @ohos.multimedia.audio:audio.AudioRenderer.on_audioInterrupt}接口监听音频焦点事件[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}，替代音频中断事件。
+   * > 使用已废弃的接口[on('interrupt')]{@link @ohos.multimedia.audio:audio.AudioManager.on_interrupt}不会打断新机制的音频流，也不会收到焦点中断事件。
+   * 
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @since 7 dynamiconly
    * @deprecated since 9
