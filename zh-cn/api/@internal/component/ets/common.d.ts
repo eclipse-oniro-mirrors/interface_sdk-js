@@ -20343,6 +20343,23 @@ declare class CommonMethod<T> {
   hitTestBehavior(value: HitTestMode): T;
 
   /**
+   * 设置组件对Agent生成事件的输入管控级别。
+   *
+   * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+   * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+   * 输入事件或其他注入事件。
+   *
+   * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  agentControlMode(value: AgentControlMode | undefined): T;
+
+  /**
    * 当前组件通过设置回调，可自定义触摸测试并控制触摸测试中的子节点行为。
    *
    * > **说明：**

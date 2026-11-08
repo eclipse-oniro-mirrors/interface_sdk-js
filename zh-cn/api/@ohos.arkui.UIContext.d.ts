@@ -1568,6 +1568,135 @@ export declare type NodeIdentity = string | number;
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由[NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点时上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为
+   * [NodeSensitiveInputEventType.TOUCH]{@link NodeSensitiveInputEventType#TOUCH}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为
+   * [NodeSensitiveInputEventType.MOUSE]{@link NodeSensitiveInputEventType#MOUSE}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为
+   * [NodeSensitiveInputEventType.KEY]{@link NodeSensitiveInputEventType#KEY}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
+
+/**
  * 定义了用于在UIObserver中监控特定手势触发信息的回调类型。
  *
  * @param { GestureTriggerInfo } info - 交互触发的手势详情。
@@ -2557,6 +2686,47 @@ export class UIObserver {
    * @since 20 dynamic
    */
   off(type: 'nodeRenderState', nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过
+   * [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中的**isAgent**判断事件是否由系统Agent生成，
+   * 或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被
+   * [agentControlMode]{@link CommonMethod#agentControlMode}阻止的Agent生成事件仍会上报，以便感知对
+   * 敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。string类型表示通过[id]{@link CommonMethod#id}属性设置的
+   *     inspector ID；number类型表示通过FrameNode的[getUniqueId]{@link FrameNode#getUniqueId}获取的唯一ID。
+   * @param { NodeSensitiveInputCallback } callback - 用于返回结果的回调，通过**NodeSensitiveInputInfo**提供
+   *     输入事件信息，通过[FrameNode]{@link FrameNode}提供组件信息。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 注销监听**nodeIdentity**指定节点输入事件的回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。
+   * @param { NodeSensitiveInputCallback } [callback] - 待注销的目标监听器。未传入此参数时，注销指定节点的
+   *     全部敏感输入事件监听器。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * Registers a callback function to be called when text field's content is changed.

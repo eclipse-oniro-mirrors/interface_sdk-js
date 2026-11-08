@@ -1377,6 +1377,110 @@ export const enum NodeRenderState {
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由NodeSensitiveInputInfo中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点前上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为**NodeSensitiveInputEventType.TOUCH**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为**NodeSensitiveInputEventType.MOUSE**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为**NodeSensitiveInputEventType.KEY**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 即将分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
+
+/**
  * 表示触发的手势回调阶段的枚举类型，对应
  * the action callbacks defined in gesture.d.ts. Therefore, not all gesture types have all the following
  * phase definitions. For example, SwipeGesture only has one callback named onAction, so it also only has
@@ -2015,6 +2119,39 @@ export declare class UIObserver {
    * @since 26.0.0 static
    */
   offNodeRenderState(nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过**NodeSensitiveInputInfo**中的
+   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被**agentControlMode**阻止的Agent生成事件
+   * 仍会上报，以便感知对敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } callback - 输入事件分发到组件节点前执行的回调函数。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 移除节点敏感输入监听回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } [callback] - 待移除的回调函数。未传入此参数时，移除指定节点的
+   *     全部回调。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * 注册一个回调函数，当窗口大小布局断点改变时调用。

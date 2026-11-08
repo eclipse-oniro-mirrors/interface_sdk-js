@@ -6454,6 +6454,42 @@ declare enum EdgeLightPosition {
 }
 
 /**
+ * 定义Agent生成事件的输入管控模式。
+ *
+ * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+ * 注入的事件。管控仅适用于此类Agent生成的输入事件。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum AgentControlMode {
+  /**
+   * 允许Agent生成的输入操作，无需用户确认。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  ALLOW = 0,
+
+  /**
+   * 阻止Agent生成的输入操作。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DENY = 1
+}
+
+/**
  * 组件的智慧手势响应优先级枚举。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

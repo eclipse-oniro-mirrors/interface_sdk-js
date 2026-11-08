@@ -42,7 +42,7 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
@@ -11578,6 +11578,22 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default hitTestBehavior(value: HitTestMode | undefined): this;
+
+    /**
+     * 设置组件对Agent生成事件的输入管控级别。
+     *
+     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+     * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+     * 输入事件或其他注入事件。
+     *
+     * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
+     * @returns { this } 返回当前组件。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default agentControlMode(value: AgentControlMode | undefined): this;
+
     /**
      * Called to specify how to perform the touch test on the children of this component.
      *
