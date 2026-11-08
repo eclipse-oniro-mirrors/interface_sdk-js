@@ -127,6 +127,7 @@ import { SwipeRefresher } from '@ohos.arkui.advanced.SwipeRefresher';
 import { SwipeRefresherV2 } from '@ohos.arkui.advanced.SwipeRefresherV2';
 import { TabTitleBar, TabTitleBarMenuItem, TabTitleBarTabItem } from '@ohos.arkui.advanced.TabTitleBar';
 import { ItemState, ToolBar, ToolBarOption, ToolBarOptions, ToolBarModifier } from '@ohos.arkui.advanced.ToolBar';
+import { ToolBarContainer } from '@ohos.arkui.advanced.ToolBarContainer';
 import {
   ToolBarV2ItemState, ToolBarV2SymbolGlyph, ToolBarV2SymbolGlyphOptions, ToolBarV2ItemText, ToolBarV2ItemTextOptions,
   ToolBarV2ItemIconType, ToolBarV2ItemImage, ToolBarV2ItemImageOptions, ToolBarV2, ToolBarV2Item, ToolBarV2ItemOptions,
@@ -357,6 +358,7 @@ export {
   SubHeaderV2, SubHeaderV2OperationType, SubHeaderV2OperationItem, SubHeaderV2OperationItemType,
   TabSegmentButtonConstructionOptions, TabSegmentButtonOptions, TabTitleBar, TabTitleBarMenuItem, TabTitleBarTabItem,
   TipsDialog, ToolBar, ToolBarOption, ToolBarOptions, ToolBarModifier, Translation, TreeController, TreeListenType, TreeListener,
+  ToolBarContainer,
   ToolBarV2ItemState, ToolBarV2SymbolGlyph, ToolBarV2SymbolGlyphOptions, ToolBarV2ItemText, ToolBarV2ItemTextOptions, ToolBarV2ItemIconType,
   ToolBarV2ItemImage, ToolBarV2ItemImageOptions, ToolBarV2, ToolBarV2Item, ToolBarV2ItemOptions, ToolBarV2Modifier, ToolBarV2ItemAction,
   AdvancedToolbarV2Item, AdvancedToolbarV2ItemOptions, 
