@@ -464,6 +464,20 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
+   * Callback for SMS received event. This callback is triggered when an SMS is received.
+   * You should register the **MANAGED_EVENT_SMS_RECEIVED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { common.SmsReceiveInfo } smsInfo - SMS received information, including slot ID, phone number,
+   *     SMS count, and content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onSmsReceived(smsInfo: common.SmsReceiveInfo): void;
+
+  /**
    * Callback for the password authentication failure event. This callback is triggered when password authentication fails.
    * You should register the **MANAGED_EVENT_PASSWORD_FAILED** event through the
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}

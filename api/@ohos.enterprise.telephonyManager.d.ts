@@ -36,6 +36,24 @@ import adminManager from './@ohos.enterprise.adminManager';
  * @since 20
  */
 declare namespace telephonyManager {
+  /**
+   * Query SMS messages based on the specified time range and phone number.
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_MESSAGES
+   * @param { TelephonyQueryConfig } queryConfig - Query options, including time range and phone number.
+   * @returns { Promise<Array<SmsMessageInfo>> }Promise object, which is used to return the list of SMs that meet
+   *     the query conditions.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getSmsMessages(queryConfig: TelephonyQueryConfig): Promise<Array<SmsMessageInfo>>;
 
   /**
    * Query call records based on the specified time range and phone number. Enterprise MDM applications can use this
@@ -602,6 +620,58 @@ declare namespace telephonyManager {
      * @since 26.1.0
      */
     telephoneNumber: string;
+  }
+
+  /**
+   * SMS message information.
+   * Provides detailed information about an SMS message, including the message content, sender/receiver
+   * information, timestamp, and SIM card slot used.
+   *
+   * @property { number } time - SMS receive/send time (millisecond timestamp).
+   * @property { boolean } isSender - SMS direction: **true** indicates send, **false** indicates receive.
+   * @property { number } slotId - SIM card slot ID.
+   * @property { string } phoneNumber - Phone number of the other party.
+   * @property { string } content - SMS content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface SmsMessageInfo {
+    /**
+     * SMS receive/send time (millisecond timestamp).
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    time: number;
+ 
+    /**
+     * SMS direction: **true** indicates send, **false** indicates receive.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isSender: boolean;
+ 
+    /**
+     * Telephone number of the other party.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+ 
+    /**
+     * SMS content.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
   }
 }
 
