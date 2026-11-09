@@ -256,13 +256,12 @@ declare namespace vpnExtension {
      *
      * > **说明：**
      * >
-     * > 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
+     * > 1. 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)}接口销毁启动的VPN网络，并执行资源清理等操作。
+     * > 2. 当调用该接口返回错误码2200003时，请排查是否已申请ohos.permission.INTERNET权限。
      *
-     * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - 指定VPN网络的配置信息。
      * @returns { Promise<int> } Promise对象，返回指定虚拟网卡的文件描述符 fd。
-     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2200001 - Invalid parameter value.
      * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.

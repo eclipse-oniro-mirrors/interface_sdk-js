@@ -67,7 +67,7 @@ declare namespace url {
         constructor(init?: string[][] | Record<string, string> | string | URLSearchParams);
 
         /**
-         * 将新的键值对插入到查询字符串。与set方法不同，append不会替换已存在的键名对应的值，而是追加一个新的键值对，允许同一键名存在多个值。如需替换已有键值，请使用set方法。
+         * 将新的键值对插入到查询字符串。
          *
          * @param { string } name - 需要插入搜索参数的键名。
          * @param { string } value - 需要插入搜索参数的值。
@@ -79,7 +79,7 @@ declare namespace url {
         append(name: string, value: string): void;
 
         /**
-         * 删除指定名称的所有键值对。如果指定名称不存在，则不做任何操作。
+         * 删除指定名称的键值对。
          *
          * @param { string } name - 需要删除的键值名称。
          * @syscap SystemCapability.Utils.Lang
@@ -90,7 +90,7 @@ declare namespace url {
         delete(name: string): void;
 
         /**
-         * 获取指定名称的所有键对应值的集合。若查找一个不存在的键值对名称时返回值为空数组。
+         * 获取指定名称的所有键对应值的集合。
          *
          * @param { string } name - 指定的键值名称。
          * @returns { string[] } 返回指定名称的所有键对应值的集合。
@@ -102,9 +102,9 @@ declare namespace url {
         getAll(name: string): string[];
 
         /**
-         * 返回一个ES6的迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。
+         * 返回一个迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。
          *
-         * @returns { IterableIterator<[string, string]> } 返回一个ES6的迭代器。
+         * @returns { IterableIterator<[string, string]> } 返回一个迭代器，迭代器的每一项为包含name和value的[string, string]数组。
          * @syscap SystemCapability.Utils.Lang
          * @since 7 dynamiconly
          * @deprecated since 9
@@ -116,6 +116,7 @@ declare namespace url {
          * 通过回调函数来遍历URLSearchParams实例对象上的键值对。
          *
          * @param { function } callbackFn - 回调函数。
+         *     value为当前遍历到的值，key为键名，searchParams为当前调用forEach方法的实例对象。
          * @param { Object } thisArg - callbackFn被调用时用作this值，默认值是本对象。
          * @syscap SystemCapability.Utils.Lang
          * @since 7 dynamiconly
@@ -126,6 +127,10 @@ declare namespace url {
 
         /**
          * 获取指定名称对应的第一个值。
+         *
+         * > **说明：**
+         * >
+         * > 若查找一个不存在的键值对名称时返回值为undefined。
          *
          * @param { string } name - 指定键值对的名称。
          * @returns { string | null } 返回第一个值，如果没找到，返回 null。
@@ -149,7 +154,7 @@ declare namespace url {
         has(name: string): boolean;
 
         /**
-         * 将与name关联的URLParams对象中的值设置为value。如果存在名称为name的键值对，请将第一个键值对的值设置为value并删除所有其他值。如果不存在该键名，则将键值对附加到查询字符串。
+         * 将与name关联的URLSearchParams对象中的值设置为value。如果存在名称为name的键值对，请将第一个键值对的值设置为value并删除所有其他值。如果不是，则将键值对附加到查询字符串。
          *
          * @param { string } name - 将要设置的参数的键值名。
          * @param { string } value - 所要设置的参数值。
@@ -193,7 +198,7 @@ declare namespace url {
         values(): IterableIterator<string>;
 
         /**
-         * 返回一个迭代器，允许遍历此对象中包含的所有键值对。
+         * 返回一个迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。
          *
          * @returns { IterableIterator<[string, string]> } 返回一个迭代器，迭代器的每一项为包含name和value的[string, string]数组。
          * @syscap SystemCapability.Utils.Lang
@@ -300,9 +305,9 @@ declare namespace url {
         getAll(name: string): string[];
 
         /**
-         * 返回一个ES6的迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。
+         * 返回一个迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。该方法与[Symbol.iterator]行为一致，均返回键值对的迭代器。
          *
-         * @returns { IterableIterator<[string, string]> } 返回一个ES6的迭代器。
+         * @returns { IterableIterator<[string, string]> } 返回一个迭代器，迭代器的每一项为包含name和value的[string, string]数组。
          * @syscap SystemCapability.Utils.Lang
          * @crossplatform [since 10]
          * @atomicservice [since 11]
@@ -315,6 +320,7 @@ declare namespace url {
          * 通过回调函数按照插入顺序遍历URLParams实例对象上的键值对。
          *
          * @param { function } callbackFn - 遍历键值对时执行的回调函数，对每个键值对调用一次。
+         *     value为当前遍历到的值，key为键名，searchParams为当前调用forEach方法的实例对象。
          * @param { Object } [thisArg] - callbackFn被调用时用作this值，默认值是本对象。
          * @syscap SystemCapability.Utils.Lang
          * @crossplatform [since 10]
@@ -336,6 +342,10 @@ declare namespace url {
 
         /**
          * 获取指定名称对应的第一个值。
+         *
+         * > **说明：**
+         * >
+         * > 若查找一个不存在的键值对名称时返回值为undefined。
          *
          * @param { string } name - 指定键名。
          * @returns { string | null } 返回第一个值，如果没找到，返回 null。
@@ -428,7 +438,7 @@ declare namespace url {
         values(): IterableIterator<string>;
 
         /**
-         * 获取一个迭代器，迭代器的每一项都是一个JavaScript数组，数组的第一项和第二项分别是键和值。
+         * 返回一个迭代器，迭代器的每一项都是一个Array。Array的第一项是name，Array的第二项是value。
          *
          * @returns { IterableIterator<[string, string]> } 返回一个迭代器，迭代器的每一项为包含name和value的[string, string]数组。
          * @syscap SystemCapability.Utils.Lang
@@ -472,10 +482,11 @@ declare namespace url {
      */
     class URLUtil {
         /**
-         * 将指定的URLParams对象序列化为字符串，其中空格被百分比编码为%20（而非'+'）。
+         * 将URLParams对象序列化为查询字符串，其中空格百分比编码为%20（而非'+'）。该接口不会修改入参urlParams及其所属URL对象的状态。
          *
-         * @param { URLParams } urlParams - 待序列化的URLParams对象。
+         * @param { URLParams } urlParams - 待序列化的URLParams对象。可通过构造函数创建，也可通过[URL]{@link url.URL}对象的params属性获取。
          * @returns { string } 返回序列化后的字符串，其中空格被编码为%20。
+         *     此方法不会修改入参及其所属URL对象的状态；没有键值对时返回空字符串。
          * @syscap SystemCapability.Utils.Lang
          * @stagemodelonly
          * @crossplatform
@@ -497,7 +508,7 @@ declare namespace url {
      */
     class URL {
         /**
-         * URL的构造函数。与parseURL方法功能相同，但parseURL为静态工厂方法，推荐使用parseURL来创建URL对象。
+         * URL的构造函数。与[parseURL]{@link url.URL.parseURL}方法功能相同，但parseURL为静态工厂方法，推荐使用parseURL来创建URL对象。
          *
          * @param { string } url - 一个表示绝对URL或相对URL的字符串，必须是合法的URL格式。
          *     <br/>如果url是相对URL，则需要指定base，用于解析最终的URL。
@@ -512,7 +523,7 @@ declare namespace url {
         constructor(url: string, base?: string | URL);
 
         /**
-         * URL的无参构造函数，不建议直接调用。请使用parseURL方法创建URL对象。
+         * URL的无参构造函数，不建议直接调用。请使用[parseURL]{@link url.URL.parseURL}方法创建URL对象。
          *
          * @syscap SystemCapability.Utils.Lang
          * @crossplatform [since 10]
@@ -529,7 +540,7 @@ declare namespace url {
          * >
          * > 当入参url是相对URL时，调用该接口解析后的URL并不是简单地将入参url和base直接拼接。
          * > url内容为相对路径格式时，会相对于base的当前目录进行解析，包括base中path字段最后一个斜杠前的所有路径片段，
-         * > 但不包括其后的部分（参照示例中url1）。url内容为指向根目录的格式时，会相对于base的原始地址（origin）进行解析（参照示例中url2）。
+         * > 但不包括其后的部分（参照示例中url1）。url内容为指向根目录的格式时，会相对于 base 的原始地址（origin）进行解析（参照示例中url2）。
          *
          * @param { string } url - 一个表示绝对URL或相对URL的字符串。
          *     <br/>如果 url 是相对URL，则需要指定 base，用于解析最终的URL。

@@ -2169,7 +2169,8 @@ declare class HttpAuthHandler {
    *
    * @param { string } userName - HTTP authentication user name, which must be a non-empty string.
    * @param { string } password - HTTP authentication password, which must be a non-empty string.
-   * @returns { boolean } Returns **true** if authentication succeeds; returns **false** otherwise.
+   * @returns { boolean } The return value indicates only the call status, not the authentication outcome.
+   *     Returns **true** if the call is successful; returns **false** otherwise.
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -10539,6 +10540,33 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
+
+   /**
+   * Sets whether to enable visited link persistence for the **Web** component.
+   *
+   * When enabled, visited link records are stored in database file. The records persist across app restarts,
+   * and the visited link coloring remains consistent after the app is restarted.
+   * When disabled, visited link records are stored only in shared memory and are lost when the app exits.
+   *
+   * > **NOTE**
+   * > The default value is `false`. When this attribute is not explicitly called,
+   * > visited links are stored only in shared memory.
+   *
+   * > When persistence is enabled, records are isolated per app,
+   * > with a maximum of 20,000 records and a retention period of 30 days.
+   *
+   * > Expired records and excess records are automatically cleaned up in background threads.
+   *
+   * > When the Web component is in incognito mode (via `incognitoMode:true`), this attribute
+   * > does not take effect. Visited link records are stored only in shared memory and are never persisted to disk.
+   *
+   * @param { boolean } enabled - Whether to enable visited link persistence. The default value is **false**.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
 }
 
 /**

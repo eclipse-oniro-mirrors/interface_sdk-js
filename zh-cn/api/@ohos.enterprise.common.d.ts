@@ -522,6 +522,51 @@ declare namespace common {
    * @since 23
    */
   export type EnterpriseAdminExtensionContext = _EnterpriseAdminExtensionContext.default;
+
+  /**
+   * 短信接收信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface SmsReceiveInfo {
+    /**
+     * SIM卡槽号。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    slotId: number;
+ 
+    /**
+     * 电话号码。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+ 
+    /**
+     * 短信条数。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    count: number;
+ 
+    /**
+     * 短信内容。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
+  }
 }
 
 export default common;

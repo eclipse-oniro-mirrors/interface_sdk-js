@@ -63,7 +63,7 @@ declare interface MenuItemGroupOptions {
  * >
  * > - This component is supported since API version 9. Newly added APIs will be marked with a superscript to indicate
  * > their earliest API version.
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -110,11 +110,11 @@ declare class MenuItemGroupAttribute extends CommonMethod<MenuItemGroupAttribute
  * >
  * > - This component is supported since API version 9. Newly added APIs will be marked with a superscript to indicate
  * > their earliest API version.
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * ###### Child Components
  *
- * This component contains the [MenuItem]{@link ./menu_item} child component.
+ * This component contains the [MenuItem]{@link @global:MenuItem} child component.
  *
  * ###### Sample
  *

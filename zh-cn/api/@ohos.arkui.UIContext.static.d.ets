@@ -66,7 +66,8 @@ import { Scroller } from '@ohos.arkui.component';
 import { ResourceStr, SizeOptions, VoidCallback } from './arkui/component/units';
 
 import { KeyProcessingMode } from '@ohos.arkui.component';
-import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType } from './arkui/component/enums';
+import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType,
+  ModifierKey, FunctionKey } from './arkui/component/enums';
 
 import { TextMenuOptions, TextLayoutOptions, StyledString, Paragraph } from '@ohos.arkui.component';
 import { TimePickerDialogOptions } from './arkui/component/timePicker';
@@ -1376,6 +1377,110 @@ export const enum NodeRenderState {
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由NodeSensitiveInputInfo中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点前上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为**NodeSensitiveInputEventType.TOUCH**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为**NodeSensitiveInputEventType.MOUSE**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为**NodeSensitiveInputEventType.KEY**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 即将分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
+
+/**
  * 表示触发的手势回调阶段的枚举类型，对应
  * the action callbacks defined in gesture.d.ts. Therefore, not all gesture types have all the following
  * phase definitions. For example, SwipeGesture only has one callback named onAction, so it also only has
@@ -2014,6 +2119,39 @@ export declare class UIObserver {
    * @since 26.0.0 static
    */
   offNodeRenderState(nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过**NodeSensitiveInputInfo**中的
+   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被**agentControlMode**阻止的Agent生成事件
+   * 仍会上报，以便感知对敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } callback - 输入事件分发到组件节点前执行的回调函数。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 移除节点敏感输入监听回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } [callback] - 待移除的回调函数。未传入此参数时，移除指定节点的
+   *     全部回调。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * 注册一个回调函数，当窗口大小布局断点改变时调用。
@@ -3632,6 +3770,25 @@ export declare class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  uiContext: UIContext;
+}
+
+/**
  * UIContext类
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3647,6 +3804,38 @@ export declare class UIContext {
    * @since 24 static
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
+   * 注册标识符在应用运行期间不复用。
+   *
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
+   * @returns { int } 本次快捷键绑定的唯一注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，其他绑定不受影响。如果移除的是当前生效的绑定，
+   * 则最近一次仍未注销的同快捷键绑定恢复生效。标识符不存在或已注销时，不执行任何操作。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取与当前调用作用域关联的 UIContext
@@ -4390,22 +4579,34 @@ export declare class UIContext {
   getWindowHeightBreakpoint(): HeightBreakpoint;
 
   /**
-   * Open the BindSheet.
+   * 创建并弹出以bindSheetContent作为内容的半模态页面，使用Promise异步回调。通过该接口弹出的半模态页面样式完全按照bindSheetContent中设置的样式显示。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } [sheetOptions] - The options of sheet.
-   * @param { int } [targetId] - The uniqueId of the FrameNode to which BindSheet is attached.
+   * > **说明：**
+   * >
+   * > 1. 使用该接口时，若未传入有效的targetId，则不支持设置SheetOptions.preferType为POPUP模式、不支持设置SheetOptions.mode为EMBEDDED模式。
+   * >
+   * > 2. 由于[updateBindSheet]{@link UIContext#updateBindSheet}和[closeBindSheet]{@link UIContext#closeBindSheet}依赖
+   * > bindSheetContent去更新或者关闭指定的半模态页面，开发者需自行维护传入的bindSheetContent。
+   * >
+   * > 3. 不支持设置SheetOptions.UIContext。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } [sheetOptions] - 半模态页面样式。<br/>**说明：** <br/>1. 不支持设置SheetOptions.uiContext，该属性的值固定为当前实例的
+   *     UIContext。<br/>2. 若不传递targetId，则不支持设置SheetOptions.preferType为POPUP样式，若设置了POPUP样式则使用CENTER样式替代。<br/>3. 若不传递
+   *     targetId，则不支持设置SheetOptions.mode为EMBEDDED模式，默认为OVERLAY模式。<br/>4. 其余属性的默认值参考[SheetOptions]{@link SheetOptions}文
+   *     档。
+   * @param { int } [targetId] - 需要绑定组件的ID，若不指定则不绑定任何组件。id不存在时返回错误码120004。在传入undefined时返回错误码401。
    *     <br>Value range:(0, +∞)
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120002 - The bindSheetContent already exists.
-   * @throws { BusinessError } 120004 - The targetId does not exist.
-   * @throws { BusinessError } 120005 - The node of targetId is not in the component tree.
-   * @throws { BusinessError } 120006 - The node of targetId is not a child of the page node or NavDestination node.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120002 - 内容节点对应半模态页面已存在。
+   * @throws { BusinessError } 120004 - 指定的targetId不存在。
+   * @throws { BusinessError } 120005 - 指定的targetId对应的节点未挂载在组件树上。
+   * @throws { BusinessError } 120006 - 指定的targetId对应的节点并不是page节点或NavDestination节点的子节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4413,20 +4614,24 @@ export declare class UIContext {
   openBindSheet(bindSheetContent: ComponentContentBase, sheetOptions?: SheetOptions, targetId?: int): Promise<void>;
 
   /**
-   * Update the BindSheet with sheetOptions.
+   * 更新bindSheetContent对应的半模态页面的样式，使用Promise异步回调。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } sheetOptions - The update options of sheet.
-   * @param { boolean } [partialUpdate] - If true, only the specified properties in the sheetOptions are updated,
-   *     otherwise the rest of the properties are overwritten with the default values.
-   *     Default value is false.
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120003 - The bindSheetContent cannot be found.
+   * > **说明：**
+   * >
+   * > 不支持更新SheetOptions.UIContext、SheetOptions.mode、回调函数。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } sheetOptions - 半模态页面样式。<br/>**说明：** <br/>不支持更新SheetOptions.uiContext、SheetOptions.mode、回调函
+   *     数。
+   * @param { boolean } [partialUpdate] - 半模态页面更新方式，默认值为false。<br/>**说明：** <br/>1. true为增量更新，保留当前值，更新SheetOptions中的指定属
+   *     性。<br/>2. false为全量更新，除SheetOptions中的指定属性，其他属性恢复默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120003 - 无法找到内容节点对应的半模态页面。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4608,10 +4813,15 @@ export declare class UIContext {
   getTextMenuController(): TextMenuController;
 
   /**
-   * Create a UI instance singleton without window and get its UIContext object.
+   * 创建一个不依赖窗口的UI实例，并返回其UI上下文。该接口所创建的UI实例是单例。
    *
-   * @param { common.UIAbilityContext | common.ExtensionContext } context - UIAbilityContext or ExtensionContext.
-   * @returns { UIContext | undefined } object UIContext, or undefined when failed.
+   * > **说明：**
+   * >
+   * > 返回的UI上下文只可用于创建[自定义节点](docroot://ui/arkts-user-defined-node.md)，不能执行其他UI操作。
+   *
+   * @param { common.UIAbilityContext | common.ExtensionContext } context - [UIAbility]{@link @ohos.app.ability.UIAbility}或
+   *     [ExtensionAbility]{@link @ohos.app.ability.ExtensionAbility:ExtensionAbility}所对应的上下文环境。
+   * @returns { UIContext | undefined } 创建的UI实例的上下文，创建失败时返回undefined。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. The number of parameters is incorrect.
    * <br> 2. Invalid parameter type of context.

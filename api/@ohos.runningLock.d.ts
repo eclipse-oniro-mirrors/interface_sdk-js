@@ -32,7 +32,17 @@ import { AsyncCallback, BusinessError } from './@ohos.base';
 declare namespace runningLock {
 
   /**
-   * Defines a **RunningLock** object.
+   * The lock that prevents the system from sleeping or enanles the proximity sensor to control screen on/off.
+   * Different types of locks have diffrent functions. For details, see [RunningLockType]{@link runninglocktype}.
+   * This API must be used together with [create]{@liink runninglockcreate9} to create a lock, [hold]{@link hold9}
+   * to hold the lock, and [unhold]{@link unhold9} to release the lock. For details, see the example.
+   * A RunningLock object cannot be shared among multiple Worker or TaskPool threads. The hold(), unhold(),
+   * and isHolding() methods of the same RunningLock instance must be called in the same thread.
+   * If the methods are called in different threads, the lock status may be inconsistent and no error
+   * will be reported. After the power service restarts unexpectedly, the craeted RunningLock object is still valid,
+   * but the service restart scenario and call the hold() method again if necessary. When the JS object of a
+   * RunningLock is garbage collected, the lock held by the underlying layer is automatically released.
+   * To hold the lock for a long time, keep the reference to the RunningLock object.
    *
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 7 dynamic
@@ -52,7 +62,16 @@ declare namespace runningLock {
     lock(timeout: number): void;
 
     /**
-     * Holds a running lock.
+     * Lock and hold RunningLock. This mode is applicable to scenarios where the system sleeps when apps are running
+     * continuously in the background(such as background download and long-term location tracking) or scenarios where
+     * the proximity sensor is required to turn on and off the screen during a call. When this method is called,
+     * You must call unhold() to release the lock when the use is complete, or set the timeout release time when the
+     * call is complete so that the system automatically releases the lock. This method is used together with the
+     * unhold() method. If the lock is not released, the sleep or screen control function will continue to take effect.
+     * No error is reported when hold() is called repeatedly. Note: If hold(-1) is called before hold(timeout) is
+     * called, the lock is released after timeout milliseconds. That is, the timeout parameter of the next call
+     * overwrites the previous one.
+     * To update the timeout interval, call unhold() to release the lock and then call hold(newTimeout).
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @param { int } timeout - Duration for locking and holding the **RunningLock** object, in ms.<br>The value must be
@@ -102,7 +121,8 @@ declare namespace runningLock {
     unlock(): void;
 
     /**
-     * Releases this running lock.
+     * Release the RunningLock lock. This method is used in conjunction with hold() to release the lock after holding()
+     * is called. Calling unhold() on an unheld lock does not report an error and is considered as no operation.
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @throws { BusinessError } 201 - If the permission is denied.
@@ -151,6 +171,9 @@ declare namespace runningLock {
      * event and release this lock after receiving the event. The behavior of this lock varies with devices. For details
      * about how to use this type of lock, see
      * [Preventing the Idle System from Entering Sleep Mode](docroot://basic-services/powermgr/runningLock/runningLock-dev.md).
+     * If the device does not support the BACKGBACK_USER_IDLE type, create() still returns success, but hold() does not
+     * take effect and no error is reported. You are advised to use isSupported() after creating() to check whether the
+     * device supports this type.
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 23 dynamic&static
@@ -236,6 +259,9 @@ declare namespace runningLock {
 
   /**
    * Creates a {@link RunningLock} object. This API uses an asynchronous callback to return the result.
+   * After a lock object is created, you need to call the hold() method to lock and hold the lock to make
+   * the lock function take effect. You are not advised to invoke create concurrently in multiple
+   * Worker/TaskPools to create lock objects.
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - Name of the **RunningLock** object. The value must be a string.
@@ -254,6 +280,9 @@ declare namespace runningLock {
 
   /**
    * Creates a {@link RunningLock} object. This API uses a promise to return the result.
+   * After a lock object is created, you need to call the hold() method to lock and hold the lock to make
+   * the lock function take effect. You are not advised to invoke create concurrently in multiple
+   * Worker/TaskPools to create lock objects.
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - Name of the **RunningLock** object. The value must be a string.

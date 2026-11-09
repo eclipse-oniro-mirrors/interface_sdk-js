@@ -350,7 +350,7 @@ declare interface SearchOptions {
  * > indicate their earliest version.
  * >
  * > - This component supports only a single text style. To implement a rich text style, use the
- * > [RichEditor]{@link ./rich_editor} component.
+ * > [RichEditor]{@link @global:RichEditor} component.
  * >
  * > - To set whether to clear text selection and handles when touching outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.
@@ -562,7 +562,7 @@ interface CancelButtonSymbolOptions {
 declare type SearchSubmitCallback = (searchContent: string, event?: SubmitEvent) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported:
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported:
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1952,7 +1952,7 @@ declare class SearchAttribute extends CommonMethod<SearchAttribute> {
  * > indicate their earliest version.
  * >
  * > - This component supports only a single text style. To implement a rich text style, use the
- * > [RichEditor]{@link ./rich_editor} component.
+ * > [RichEditor]{@link @global:RichEditor} component.
  * >
  * > - To set whether to clear text selection and handles when touching outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.

@@ -81,8 +81,8 @@ declare namespace proxyChannelManager {
    * channelStateChange回调将自动取消订阅，正在传输的数据将中断。未及时关闭代理通道可能导致通道资源泄漏。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32390
-   *     006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
@@ -107,10 +107,10 @@ declare namespace proxyChannelManager {
    * 事件监测通道状态，在通道不可用时暂停数据发送，通道恢复后继续发送。数据通过已建立的代理通道经蓝牙BR链路传输至对端设备，数据长度最大为4096字节，超出将返回错误码32390103。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32390
-   *     006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { ArrayBuffer } data - 向对端发送的二进制数据，数据格式由应用层自定义，最大长度为4096字节。超出长度限制时返回错误码32390103。
-   * @returns { Promise<void> } 无返回值的Promise的对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 801 - Capability not supported because bluetooth proxy function has
@@ -137,8 +137,8 @@ declare namespace proxyChannelManager {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'receiveData' } type - 设置订阅类型，固定取值为'receiveData'。
-   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } callback - 回调函数，用于接收代理通道的数据。回调参数为[DataInfo]{@link proxyChannelManager.DataInfo}对象，包含
    *     channelId（通道ID）和data（接收到的字节数据）。需先通过openProxyChannel打开代理通道后才能接收数据。多次注册时，仅最后一次注册的生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -161,8 +161,8 @@ declare namespace proxyChannelManager {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'receiveData' } type - 设置订阅类型，固定取值为'receiveData'。
-   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的数据接收事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；传入其他回调函数
    *     不会生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -185,8 +185,8 @@ declare namespace proxyChannelManager {
    * 取消订阅，避免回调持续触发。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } callback - 回调函数，用于接收代理通道的数据。回调参数为[DataInfo]{@link proxyChannelManager.DataInfo}对象，包含
    *     channelId（通道ID）和data（接收到的字节数据）。需先通过openProxyChannel打开代理通道后才能接收数据。多次注册时，仅最后一次注册的生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -208,8 +208,8 @@ declare namespace proxyChannelManager {
    * 配对使用，用于取消之前通过on('receiveData')注册的数据接收回调。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<DataInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的数据接收事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；传入其他回调函数
    *     不会生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -234,8 +234,8 @@ declare namespace proxyChannelManager {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'channelStateChange' } type - 设置订阅类型，固定取值为'channelStateChange'。
-   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } callback - 回调函数，用于接收代理通道的状态变更信息。回调参数为
    *     [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo}对象，包含channelId（通道ID）和state（通道连接状态）。需先通过
    *     openProxyChannel打开代理通道后才能接收通道状态。多次注册时，仅最后一次注册的回调函数生效。
@@ -259,8 +259,8 @@ declare namespace proxyChannelManager {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'channelStateChange' } type - 设置订阅类型，固定取值为'channelStateChange'。
-   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { number } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的通道状态事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；
    *     传入其他回调函数不会生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -284,8 +284,8 @@ declare namespace proxyChannelManager {
    * 订阅。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } callback - 回调函数，用于接收代理通道的状态变更信息。回调参数为
    *     [ChannelStateInfo]{@link proxyChannelManager.ChannelStateInfo}对象，包含channelId（通道ID）和state（通道连接状态）。需先通过
    *     openProxyChannel打开代理通道后才能接收通道状态。多次注册时，仅最后一次注册的回调函数生效。
@@ -308,8 +308,8 @@ declare namespace proxyChannelManager {
    * 配对使用，用于取消之前通过on('channelStateChange')注册的通道状态回调。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码32
-   *     390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
+   * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
+   *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
    * @param { Callback<ChannelStateInfo> } [callback] - 注册的回调函数。默认效果：不传入此参数时取消订阅所有的通道状态事件。需传入on方法最后一次注册的回调函数，用于取消该回调的订阅；
    *     传入其他回调函数不会生效。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission

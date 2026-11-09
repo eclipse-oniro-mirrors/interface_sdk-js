@@ -55,7 +55,7 @@ export interface ExtensionRunningInfo {
   pid: int;
 
   /**
-   * UID of the application.
+   * User ID of the application to which the Extension belongs.
    *
    * @default user id
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -88,7 +88,7 @@ export interface ExtensionRunningInfo {
   startTime: long;
 
   /**
-   * Names of all packages in the process.
+   * List of package names of the client applications connected to the Extension.
    *
    * @default All package names under the current process
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

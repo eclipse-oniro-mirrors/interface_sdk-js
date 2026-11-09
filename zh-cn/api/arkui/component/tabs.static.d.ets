@@ -333,6 +333,16 @@ export declare class TabsController {
    * @since 23 static
    */
   setTabBarOpacity(opacity: double): void;
+
+  /**
+   * 获取选项卡的当前显示模式。
+   *
+   * @returns { TabBarDisplayMode } 当前显示模式。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  getBarDisplayMode(): TabBarDisplayMode;
 }
 
 /**
@@ -555,6 +565,135 @@ export interface ScrollableBarModeOptions {
    */
   nonScrollableLayoutStyle?: LayoutStyle;
 }
+/**
+ * 提供了一个接口，用于设置不同断点处的tab宽度的浮动栏宽度。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export interface FloatingTabBarWidth {
+  /**
+   * 小设备的条形宽度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  smallBarWidth?: Length;
+  /**
+   * 介质设备的条形宽度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  mediumBarWidth?: Length;
+  /**
+   * 大型设备的条形宽度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  largeBarWidth?: Length;
+}
+/**
+ * 提供悬浮页签栏的能力接口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export interface FloatingTabBarStyle {
+  /**
+   * 不同断点处的tab宽度的条形宽度。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  barWidth?: FloatingTabBarWidth;
+  /**
+   * 条形的左右边距的宽度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  barSideMargin?: Length;
+  /**
+   * 栏与选项卡底部之间的距离。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  barBottomMargin?: Length;
+  /**
+   * 蒙版的颜色。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  maskColor?: ResourceColor;
+  /**
+   * 遮罩的高度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  maskHeight?: Length;
+  /**
+   * 是否适应手感。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  adaptToHandedness?: boolean;
+  /**
+   * 材质的样式
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  systemMaterial?: uiMaterial.ImmersiveMaterial;
+
+  /**
+   * 页签栏的最大宽度。不能以百分比形式设置。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxWidth?: Length;
+
+  /**
+   * 页签栏的偏移量。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offset?: Position | Edges | LocalizedEdges;
+
+  /**
+   * 浮动标签栏的MiniBar配置。
+   * 设置后，MiniBar节点将作为标签栏的子节点挂载，从而呈现
+   * 配置构建器内容并应用指定的宽度、样式和布局模式。
+   * 如果未设置，则不显示MiniBar。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  minibar?: TabsMiniBar;
+}
 
 /**
  * 切换动画开始时触发的回调。
@@ -663,6 +802,197 @@ export type OnTabsContentWillChangeCallback = (currentIndex: int, comingIndex: i
  * @since 23 static
  */
 export type OnTabsContentDidScrollCallback = (selectedIndex: int, index: int, position: double, mainAxisLength: double) => void;
+
+/**
+ * 枚举标签栏的显示样式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare enum TabBarStyle {
+  /**
+   * 底部标签栏样式。标签栏的位置可以通过**Tabs***的**垂直**属性来调整。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  BOTTOM = 0,
+
+  /**
+   * 侧边栏样式。标签栏显示为侧边栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  SIDEBAR = 1,
+
+  /**
+   * 可适应的侧边栏样式。标签栏可以在底部标签栏和侧边栏模式之间切换
+   * 基于Tabs容器的大小。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * 顶部浮动页签栏样式。页签栏始终以浮动形式显示在顶部。
+   * 使用此样式时，**BarPosition**设置将被忽略。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP = 3,
+
+  /**
+   * 自适应的顶部浮动页签栏样式。页签栏的位置会自动切换到
+   * 基于Tabs容器大小断点的顶部和底部浮动。
+   * 使用此样式时，**BarPosition**设置将被忽略。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP_ADAPTABLE = 4
+}
+
+/**
+ * 搜索过滤器回调。
+ *
+ * @param { int } tabIndex - 要筛选的选项卡的索引。
+ *     <br>取值限定为整数。
+ * @param { string } text - 当前搜索文本。
+ * @returns { boolean } 如果选项卡与搜索条件匹配，则返回**true**，否则返回**false**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export type TabsSidebarSearchFilterCallback = (tabIndex: int, text: string) => boolean;
+
+/**
+ * 定义可搜索侧边栏标签栏的选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface TabsSidebarSearchableOptions {
+  /**
+   * 设置搜索文本框中的文本输入。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  searchText?: ResourceStr;
+
+  /**
+   * 搜索输入为空时显示的占位符文本。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  placeholder?: ResourceStr;
+
+  /**
+   * 当搜索文本发生变化时触发的回调。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  searchCallback?: Callback<string>;
+
+  /**
+   * 过滤器函数，用于根据搜索文本确定是否应显示选项卡。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  searchFilter?: TabsSidebarSearchFilterCallback;
+}
+
+/**
+ * 枚举不同Tabs容器大小下标签栏的实际显示方式。
+ * 此枚举用于[barDisplayModeBreakpoint]{@link TabsAttribute#barDisplayModeBreakpoint}中指定
+ * 不同断点大小的显示模式。只有当**TabBarStyle**设置为
+ * **侧栏自适应表**或**侧栏**。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare enum TabBarDisplayMode {
+  /**
+   * 底部显示标签栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  BOTTOM_TABBAR = 0,
+
+  /**
+   * 标签栏显示为侧边栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  SIDEBAR = 1,
+
+  /**
+   * 页签栏显示为顶部浮动栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOP_TABBAR = 2
+}
+
+/**
+ * 定义不同Tabs容器大小的值类型。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface TabsBreakpointType<T> {
+  /**
+   * 小Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  sm?: T;
+
+  /**
+   * 中等Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  md?: T;
+
+  /**
+   * 大Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  lg?: T;
+}
 
 /**
  * 除支持[通用属性]{@link ./../../@internal/component/ets/common}外，还支持以下属性：
@@ -1232,6 +1562,146 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.0.0 staticonly
    */
   default setTabsOptions(options?: TabsOptions): this;
+
+  /**
+     * 为bar启用浮动样式。
+     *
+   * @param { FloatingTabBarStyle | undefined } style - bar的浮动样式
+   * @returns { this } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  default barFloatingStyle(style: FloatingTabBarStyle | undefined): this;
+
+  /**
+   * 设置tab bar的显示样式。
+   *
+   * @param { TabBarStyle | undefined } style - 标签栏显示样式.BOTTOM**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default barStyle(style: TabBarStyle | undefined): this;
+
+  /**
+   * 设置侧边栏标签栏的位置。
+   * 侧边栏标签栏的位置不受**垂直***属性的影响。
+   * 它始终位于Tabs容器的开始或结束一侧，无论**垂直**设置如何。
+   *
+   * @param { BarPosition | undefined } position - 侧边栏标签栏的位置。开始**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarPosition(position: BarPosition | undefined): this;
+
+  /**
+   * 设置侧边栏标签栏的标题内容。
+   *
+   * @param { ComponentContentBase | undefined } header - 侧边栏标签栏的标题内容。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarHeader(header: ComponentContentBase | undefined): this;
+
+  /**
+   * 设置侧边栏标签栏的搜索选项。
+   *
+   * @param { TabsSidebarSearchableOptions | undefined } searchOptions - Search options for the sidebar tab bar.
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarSearchable(searchOptions: TabsSidebarSearchableOptions | undefined): this;
+
+  /**
+   * 为不同的Tabs容器大小设置tab栏的显示方式。
+   *
+   * @param { TabsBreakpointType<TabBarDisplayMode> | undefined } style - Display mode of the tab bar for different Tabs
+   *     container sizes.
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default barDisplayModeBreakpoint(style: TabsBreakpointType<TabBarDisplayMode> | undefined): this;
+
+  /**
+   * 为不同的Tabs容器大小设置tab栏的显示方式。
+   *
+   * @param { Callback<TabBarDisplayMode> | undefined } callback - 显示模式变更回调。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default onBarDisplayModeChange(callback: Callback<TabBarDisplayMode> | undefined): this;
+
+  /**
+   * 设置侧边栏模式下选项卡图标的选定颜色。
+   *
+   * @param { ResourceColor | undefined } value - 侧边栏模式下选项卡图标的选定颜色。
+   *     <br>默认值：**#ff182431**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarSelectedIconColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡文本的选定颜色。
+   *
+   * @param { ResourceColor | undefined } value - 侧边栏模式下选项卡文本的选定颜色。
+   *     <br>默认值：**#ff182431**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarSelectedTextColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡图标的未选中颜色。
+   *
+   * @param { ResourceColor | undefined } value - 侧边栏模式下Tab图标的未选中颜色。
+   *     <br>默认值：**#99182431**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarUnselectedIconColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡文本的未选中颜色。
+   *
+   * @param { ResourceColor | undefined } value - 侧边栏模式下选项卡文本的未选中颜色。
+   *     <br>默认值：**#99182431**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarUnselectedTextColor(value: ResourceColor | undefined): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下tab板的选择颜色。
+   *
+   * @param { ResourceColor | undefined } value - 侧边栏模式tab板选择颜色。
+   *     <br>默认值：**#19007DFF**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  default sidebarSelectedBoardColor(value: ResourceColor | undefined): TabsAttribute;
 }
 
 /**

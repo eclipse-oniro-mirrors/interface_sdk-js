@@ -133,14 +133,15 @@ export declare interface UnionEffectContainerAttribute extends CommonMethod {
     default attributeModifier(modifier: AttributeModifier<UnionEffectContainerAttribute>
         | AttributeModifier<CommonMethod> | undefined): this;
     /**
-     * Set UnionEffectContainer options.
+     * 设置UnionEffectContainer的选项。
      *
-     * @param { UnionEffectContainerOptions } [options] - The options to create an UnionEffectContainer.
-     * @returns { UnionEffectContainerAttribute } Returns instance of  UnionEffectContainerAttribute.
+     * @param { UnionEffectContainerOptions } [options] - 创建UnionEffectContainer的选项。
+     * @returns { UnionEffectContainerAttribute } 返回UnionEffectContainerAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setUnionEffectContainerOptions(options?: UnionEffectContainerOptions): this;
 }

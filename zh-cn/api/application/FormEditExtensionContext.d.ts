@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file FormEditExtensionAbility上下文-FormEditExtensionContext
  * @kit FormKit
  */
 
@@ -54,7 +54,11 @@ declare class FormEditExtensionContext extends UIExtensionContext {
 	startSecondPage(want: Want): Promise<AbilityResult>;
 
      /**
-      * 拉起卡片所属应用的UIAbility。使用Promise异步回调。说明：需在卡片编辑页面处于前台时调用，页面不在前台时调用将返回错误码16501014。
+      * 拉起卡片所属应用的UIAbility。使用Promise异步回调。
+      * 
+      * > **说明：**
+      * >
+      * > 需在卡片编辑页面处于前台时调用，页面不在前台时调用将返回错误码16501014。
       *
       * @param { Want } want - 用于指定要拉起的UIAbility的Want信息。必须包含abilityName字段。
       * @returns { Promise<void> } Promise对象，无返回结果。

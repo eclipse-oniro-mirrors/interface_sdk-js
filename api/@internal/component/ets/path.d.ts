@@ -96,7 +96,7 @@ declare interface PathOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -159,7 +159,7 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
    * [SVG Path Syntax]{@link svg-path-syntax}, in px.
    * The command string determines the drawing shape and trajectory of the path. This attribute can be dynamically set
    * using [attributeModifier]{@link CommonMethod#attributeModifier}. For details about the pixel unit conversion
-   * method, see [Pixel Units]{@link ./common}.
+   * method, see [Pixel Units]{@link CommonMethod}.
    *
    * @param { string } value - Command string for path drawing. It must comply with the
    *     [SVG Path Syntax]{@link svg-path-syntax}, in px.
@@ -187,7 +187,7 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * ###### Child Components
  *

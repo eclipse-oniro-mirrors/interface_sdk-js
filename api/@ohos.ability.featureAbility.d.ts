@@ -18,12 +18,6 @@
  * @kit AbilityKit
  */
 
-/**
- * # Constraints
- * 
- * The APIs of the FeatureAbility module can be called only by PageAbilities.
- */
-
 import { AsyncCallback } from './@ohos.base';
 import { Callback } from './@ohos.base';
 import Want from './@ohos.app.ability.Want';
@@ -40,6 +34,17 @@ import window from './@ohos.window';
  * The FeatureAbility module provides APIs that enable user interaction. You can use the APIs to start or terminate an
  * ability, obtain a dataAbilityHelper object, obtain the window corresponding to the current ability, and connect to or
  * disconnect from a ServiceAbility.
+ *
+ * > **NOTE**
+ * >
+ * > The initial APIs of this module are supported since API version 6. Newly added APIs will be marked with a
+ * > superscript to indicate their earliest API version.
+ * >
+ * > The APIs of this module can be used only in the FA model.
+ *
+ * ###### Constraints
+ *
+ * The APIs of the FeatureAbility module can be called only by PageAbilities.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.FAModel
  * @famodelonly
@@ -68,7 +73,8 @@ declare namespace featureAbility {
   function getWant(): Promise<Want>;
 
   /**
-   * Starts an ability. This API uses an asynchronous callback to return the result.
+   * Starts an ability. This API uses an asynchronous callback to return the result. It is used to start an ability
+   * for page navigation, launching other applications, opening third-party applications, and other scenarios.
    *
    * > **NOTE**
    * >
@@ -85,7 +91,8 @@ declare namespace featureAbility {
   function startAbility(parameter: StartAbilityParameter, callback: AsyncCallback<number>): void;
 
   /**
-   * Starts an ability. This API uses a promise to return the result.
+   * Starts an ability. This API uses a promise to return the result. It is used to start an ability
+   * for page navigation, launching other applications, opening third-party applications, and other scenarios.
    *
    * > **NOTE**
    * >

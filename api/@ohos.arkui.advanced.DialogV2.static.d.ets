@@ -29,7 +29,7 @@
  * 
  * > **NOTE**
  * >
- * > - If the **DialogV2** component has [universal attributes]{@link common} and [universal events]{@link common}
+ * > - If the **DialogV2** component has [universal attributes]{@link CommonMethod} and [universal events]{@link CommonMethod}
  * > configured,
  * > the compiler toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal
  * > attributes and universal events

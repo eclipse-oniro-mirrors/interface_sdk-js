@@ -857,10 +857,10 @@ declare enum SwiperDisplayMode {
 *
 * > **说明：**
 *
-* > - Swiper组件通过内置的[PanGesture]{@link @global:@PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
+* > - Swiper组件通过内置的[PanGesture]{@link @global:PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
 * > 时，会禁用该手势监听，从而阻止滑动操作。
 * >
-* > - Swiper中复用[NodeContainer]{@link node_container}时，禁止递归流程中子节点更新父节点状态变量。
+* > - Swiper中复用[NodeContainer]{@link @global:NodeContainer}时，禁止递归流程中子节点更新父节点状态变量。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -1315,9 +1315,9 @@ declare type OnSwiperAnimationEndCallback = (index: number, extraInfo: SwiperAni
 declare type OnSwiperGestureSwipeCallback = (index: number, extraInfo: SwiperAnimationEvent) => void;
 
 /**
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
-* 除支持[通用事件]{@link common}外，还支持以下事件：
+* 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
 *
 * > **说明：**
 *
@@ -2062,6 +2062,18 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    * @since 20 dynamic
    */
   maintainVisibleContentPosition(enabled: boolean): SwiperAttribute;
+
+  /**
+   * 设置当子组件的[visibility](ts-universal-attributes-visibility.md#visibility)属性设置为Visibility.None时，该子组件是否在视窗中占位。
+   *
+   * @param { boolean } enabled - 设置当子组件的visibility属性设置为Visibility.None时，该子组件是否在视窗中占位。<br/>true：设置为隐藏的子组件不在视窗中占位。<br/>false：设置为隐藏的子组件依然在视窗中占位。<br/>异常值按false处理。
+   * @returns { SwiperAttribute } 返回SwiperAttribute的实例。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   */
+  ignoreHiddenItem(enabled: boolean): SwiperAttribute;
 }
 
 /**
@@ -2262,10 +2274,10 @@ declare type ContentWillScrollCallback = (result: SwiperContentWillScrollResult)
 *
 * > **说明：**
 *
-* > - Swiper组件通过内置的[PanGesture]{@link @global:@PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
+* > - Swiper组件通过内置的[PanGesture]{@link @global:PanGesture}拖动手势实现滑动轮播效果，将[disableSwipe]{@link SwiperAttribute#disableSwipe}属性设为true
 * > 时，会禁用该手势监听，从而阻止滑动操作。
 * >
-* > - Swiper中复用[NodeContainer]{@link node_container}时，禁止递归流程中子节点更新父节点状态变量。
+* > - Swiper中复用[NodeContainer]{@link @global:NodeContainer}时，禁止递归流程中子节点更新父节点状态变量。
 *
 * ###### 子组件
 *

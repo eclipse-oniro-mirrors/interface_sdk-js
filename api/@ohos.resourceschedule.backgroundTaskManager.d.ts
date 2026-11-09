@@ -221,7 +221,7 @@ declare namespace backgroundTaskManager {
      * @atomicservice [since 26.0.0]
      * @since 21 dynamic
      */
-    continuousTaskId?: number;
+    continuousTaskId?: int;
 
     /**
      * Continuous task ID. The default value is **-1**.
@@ -288,7 +288,8 @@ declare namespace backgroundTaskManager {
      * Requests user authorization to run tasks continuously in the background. This API uses an asynchronous callback
      * to return the result. If the API call is successful, a banner notification with a sound is sent. This API is
      * applicable only to continuous tasks of the
-     * [MODE_SPECIAL_SCENARIO_PROCESSING]{@link backgroundTaskManager.BackgroundTaskMode} type.
+     * [MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING} type.
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - Application context.
@@ -308,12 +309,19 @@ declare namespace backgroundTaskManager {
     requestAuthFromUser(context: Context, callback: Callback<UserAuthResult>): void;
 
     /**
-     * Requesting MODE_SPECIAL_SCENARIO_PROCESSING authorization from users,
-     *     a dialog box will be displayed.
+     * Requests user authorization to run tasks continuously in the background.
+     * This API uses an asynchronous callback to return the result.
+     * If the API call is successful, a dialog box is displayed for authorization. 
+     * The user can choose to grant authorization once, grant authorization always, or not to grant authorization.
+     * When the app requests authorization again, the previous authorization result will be directly returned,
+     * and no dialog box will be displayed. It is recommended that this API be called when the application is running
+     * in the foreground to prompt the user to grant authorization. This API is applicable only to continuous tasks of the
+     * [MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING} type.
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - App running context.
-     * @param { Callback<UserAuthResult> } callback - The callback of the function.
+     * @param { Callback<UserAuthResult> } callback - Callback used to return the user authorization result.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -348,6 +356,14 @@ declare namespace backgroundTaskManager {
     /**
      * Check whether the application can request MODE_SPECIAL_SCENARIO_PROCESSING.
      * No exception will be thrown whether authorized or not.
+     * 
+     * Checks whether the user has authorized tasks to run continuously in the background.
+     * This API uses a promise to return the result. If the user has not granted authorization,
+     * [NOT_DETERMINED]{@link backgroundTaskManager.UserAuthResult.NOT_DETERMINED} is returned.
+     * If no continuous task of the [MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING} type is configured,
+     * [NOT_SUPPORTED]{@link backgroundTaskManager.UserAuthResult.NOT_SUPPORTED} is returned.
+     * 
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - App running context.
@@ -490,7 +506,6 @@ declare namespace backgroundTaskManager {
     requestId: int;
     /**
      * Actual duration of the transient task requested by the application, in milliseconds.
-     * <br>Unit:ms
      * 
      * Note: The maximum duration of a transient task is 3 minutes in normal cases. In the case of a low battery (
      * [BatteryCapacityLevel]{@link @ohos.batteryInfo:batteryInfo.BatteryCapacityLevel} set to **LEVEL_LOW**), the 
@@ -1706,7 +1721,7 @@ declare namespace backgroundTaskManager {
    *     canceling a continuous task.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     <br> 2. Register a exist callback type; 3. Parameter verification failed.
+   *     <br> 2. Register an existing callback type; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1736,7 +1751,7 @@ declare namespace backgroundTaskManager {
     *     parameter is left unspecified, all registered callbacks are cancelled.
     * @throws { BusinessError } 201 - Permission denied.
     * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-    *     <br> 2. Unregister type has not register; 3. Parameter verification failed.
+    *     <br> 2. Unregister type has not been registered; 3. Parameter verification failed.
     * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
     * @since 15 dynamic
     */
@@ -2221,9 +2236,13 @@ declare namespace backgroundTaskManager {
 
   
   /**
-   * Defines the subtype of a continuous task. It is usually used together with the main type 
-   * [BackgroundTaskMode]{@link backgroundTaskManager.BackgroundTaskMode}. For details, see the mapping table. The two 
-   * types are newly added in API version 21 for requesting and updating continuous tasks.
+   * Defines the subtype of a continuous task. It is usually used together with the main type
+   * [BackgroundTaskMode]{@link backgroundTaskManager.BackgroundTaskMode}. For details, see the mapping table. The two
+   * types are newly added in API version 21 for
+   * [requesting]{@link backgroundTaskManager.startBackgroundRunning(context: Context, request: ContinuousTaskRequest)}
+   * and
+   * [updating]{@link backgroundTaskManager.updateBackgroundRunning(context: Context, request: ContinuousTaskRequest)}
+   * continuous tasks.
    *
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]

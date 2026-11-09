@@ -794,7 +794,7 @@ declare class VideoControllerAsync {
  * > The **Video** component provides only simple video playback and cannot support complex video playback control
  * > scenarios. For complex development scenarios, you are advised to use the
  * > [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer} playback control API and the
- * > [XComponent]{@link ./xcomponent} component.
+ * > [XComponent]{@link @global:XComponent} component.
  * > <br>
  * >
  * > When the **Video** component uses [expandSafeArea]{@link CommonMethod#expandSafeArea} to expand the safe area, the
@@ -1197,7 +1197,7 @@ declare class VideoAttribute extends CommonMethod<VideoAttribute> {
  * > The **Video** component provides only simple video playback and cannot support complex video playback control
  * > scenarios. For complex development scenarios, you are advised to use the
  * > [AVPlayer]{@link @ohos.multimedia.media:media.AVPlayer} playback control API and the
- * > [XComponent]{@link ./xcomponent} component.
+ * > [XComponent]{@link @global:XComponent} component.
  * > <br>
  * >
  * > When the **Video** component uses [expandSafeArea]{@link CommonMethod#expandSafeArea} to expand the safe area, the

@@ -448,7 +448,7 @@ declare interface RichEditorTextStyle {
   textBackgroundStyle?: TextBackgroundStyle;
 
   /**
-   * 文本描边宽度。如果LengthMetrics的unit值是[PERCENT]{@link ../../../arkui/Graphics:LengthUnit}，当前设置不生效，作为0处理。
+   * 文本描边宽度。如果LengthMetrics的unit值是[PERCENT]{@link @ohos.arkui.node:LengthUnit}，当前设置不生效，作为0处理。
    * 
    * 值小于0时为实体字，大于0时为轮廓字，等于0时无描边效果。
    * 
@@ -822,7 +822,7 @@ declare interface RichEditorImageSpanStyle {
   layoutStyle?: RichEditorLayoutStyle;
 
   /**
-   * 图片拉伸选项。
+   * 图像拉伸时可调整大小的图像选项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1418,7 +1418,7 @@ declare interface RichEditorImageSpanStyleResult {
   layoutStyle?: RichEditorLayoutStyle;
 
   /**
-   * 图片拉伸选项。
+   * 图像拉伸时可调整大小的图像选项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1788,7 +1788,7 @@ declare interface RichEditorImageSpanOptions {
   onHover?: OnHoverCallback;
 
   /**
-   * 图片文本标签。
+   * 图片文本标签。省略时，不设置图片文本标签。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1871,8 +1871,8 @@ declare interface RichEditorBuilderSpanOptions {
  */
 declare interface BuilderSpanInfo {
   /**
-   * 开发者自定义的追踪标识，用于跟踪BuilderSpan。框架不强制唯一性约束，由开发者自行保证唯一性。
-   * 未传入时，值为**undefined**。
+   * 开发者自定义的身份标识，用于标识BuilderSpan。框架不强制唯一性约束，由开发者自行保证唯一性。
+   * 未传入时，值为**undefined**，表示该BuilderSpan为匿名BuilderSpan。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1883,7 +1883,9 @@ declare interface BuilderSpanInfo {
   id?: string;
 
   /**
-   * BuilderSpan在文本内容中的当前偏移位置。
+   * 当作为[addRichEditorBuilderSpan]{@link RichEditorController#addRichEditorBuilderSpan}的参数传入时，表示BuilderSpan的插入位置。
+   * 省略或当值小于0或大于所有内容长度时，添加到所有内容最后面。
+   * 当通过[getRichEditorBuilderSpans]{@link RichEditorController#getRichEditorBuilderSpans}或回调获取时，表示BuilderSpan在文本内容中的当前偏移位置，
    * 该值由框架维护，随文本内容变化动态更新。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3142,9 +3144,9 @@ declare class RichEditorStyledStringController extends RichEditorBaseController 
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link ./common}外，还支持[OnDidChangeCallback]{@link OnDidChangeCallback}、
+ * 除支持[通用事件]{@link CommonMethod}外，还支持[OnDidChangeCallback]{@link OnDidChangeCallback}、
  * [StyledStringChangedListener]{@link StyledStringChangedListener}、
  * [StyledStringChangeValue]{@link StyledStringChangeValue}和以下事件：
  *
@@ -3338,7 +3340,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   copyOptions(value: CopyOptions): RichEditorAttribute;
 
   /**
-   * 设置自定义选择菜单。支持自定义菜单风格和触发条件，适合需要深度自定义菜单的场景。自定义菜单超长时，建议内部嵌套[Scroll]{@link ./scroll}组件使用，避免键盘被遮挡。
+   * 设置自定义选择菜单。支持自定义菜单风格和触发条件，适合需要深度自定义菜单的场景。自定义菜单超长时，建议内部嵌套[Scroll]{@link @global:Scroll}组件使用，避免键盘被遮挡。
    *
    * @param { RichEditorSpanType } spanType - 菜单的类型。
    *     <br>默认值：RichEditorSpanType.TEXT
@@ -3912,6 +3914,19 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
 
   /**
    * 设置是否在首行和尾行增加间距以避免文字截断。适用于自定义字体行高较小导致文字被裁剪、紧凑排版等场景。不通过该接口设置，默认不增加间距。
+   * 
+   * 从API版本26.1.0开始，该接口与[fallbackLineSpacing]{@link RichEditorAttribute#fallbackLineSpacing}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } include - 是否在首行和尾行增加间距以避免文字截断。
    *     <br>true表示在首行和尾行增加间距，false表示在首行和尾行不增加间距。
@@ -3933,6 +3948,19 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
    * 
    * 该接口依赖[RichEditorTextStyle]{@link RichEditorTextStyle}的lineHeight属性。当lineHeight设置值小于当前字号下文本渲染出的实际高度时，
    * fallbackLineSpacing属性将生效。
+   * 
+   * 从API版本26.1.0开始，该接口与[includeFontPadding]{@link RichEditorAttribute#includeFontPadding}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } enabled - 行高是否基于文字实际高度自适应。
    *     <br>true表示行高基于文字实际高度自适应，false表示行高不基于文字实际高度自适应。
@@ -4166,7 +4194,7 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  * 
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4220,7 +4248,7 @@ declare const RichEditorInstance: RichEditorAttribute;
  * 
  * > **说明：**
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * 
  * ###### 子组件
  * 

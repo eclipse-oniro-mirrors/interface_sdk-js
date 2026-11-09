@@ -3535,9 +3535,9 @@ declare namespace audio {
     getRecordingManager(): AudioRecordingManager;
 
     /**
-     * Obtains the AudioSuiteDownloadManager instance for downloading audio suite algorithms.
+     * Obtain the AudioSuiteDownloadManager instance for downloading the audio editing feature.
      *
-     * @returns { AudioSuiteDownloadManager } Returns an instance of audio suite download manager.
+     * @returns { AudioSuiteDownloadManager }AudioSuiteDownloadManager instance.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -5669,9 +5669,9 @@ declare namespace audio {
      * registered clients will receive the callback.
      *
      * @param { Callback<AudioSessionDeactivatedEvent> } callback -
-     *     Callback invoked for the audio session deactivated event. [since 23]
-     * @throws { BusinessError } 6800101 - Parameter verification failed. [since 23]
-     * @syscap SystemCapability.Multimedia.Audio.Core [since 23]
+     *     Callback invoked for the audio session deactivated event.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Core
      * @atomicservice [since 26.0.0]
      * @since 23 static
      */
@@ -5700,9 +5700,9 @@ declare namespace audio {
      * Unsubscribes to audio session deactivated event.
      *
      * @param { Callback<AudioSessionDeactivatedEvent> } callback - Callback invoked for
-     *     the audio session deactivated event. [since 23]
-     * @throws { BusinessError } 6800101 - Parameter verification failed. [since 23]
-     * @syscap SystemCapability.Multimedia.Audio.Core [since 23]
+     *     the audio session deactivated event.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Core
      * @atomicservice [since 26.0.0]
      * @since 23 static
      */
@@ -5727,7 +5727,7 @@ declare namespace audio {
      *
      * @param { boolean } mute - Use true if application recording stream muted by application if self.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 6800103 - Operation not permit at current state, there is no audio capturer running.
+     * @throws { BusinessError } 6800103 - Operation not permitted at current state, there is no audio capturer running.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
      * @since 24 dynamic&static
@@ -9067,6 +9067,82 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     STANDARD = 2
+  }
+
+  /**
+   * Enumerates the reasons for noise reduction mode change.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  enum NoiseReductionModeChangeReason {
+    /**
+     * The noise reduction mode is changed due to manual switchover on the system recording control panel UX.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    USER_SETTING_BY_SYSTEM_RECORD_CONTROLLER = 0,
+
+    /**
+     * The application calls AudioCapturer.setNoiseReductionMode to set the noise reduction mode. Users may not be aware
+     * of the calling setting.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    APP_SETTING = 1,
+
+    /**
+     * The noise reduction mode is changed due to the change of the audio input device.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DEVICE_CHANGE = 2,
+
+    /**
+     * The noise reduction mode is changed due to concurrent recording stream conflicts.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STREAM_CONCURRENCY = 3,
+  }
+
+  /**
+   * Indicates the change information about the noise reduction mode.
+   * This interface is used as the callback parameter of {@link #onNoiseReductionModeChanged}.
+   * Application scenario: When the NR mode of a recording stream changes, this data structure carries the latest NR
+   * mode and change reason.
+   *
+   * @syscap SystemCapability.Multimedia.Audio.Capturer
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface NoiseReductionModeChangeInfo {
+    /**
+     * The reason for the noise reduction mode change.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    reason: NoiseReductionModeChangeReason;
+
+    /**
+     * Current noise reduction mode. The default value is {@link NoiseReductionMode#FIDELITY}.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    noiseReductionMode: NoiseReductionMode;
   }
 
   /**
@@ -13600,6 +13676,20 @@ declare namespace audio {
      * The actual effect may vary from different audio devices, and will be invalid when there are multiple
      * recording streams running simultaneously.
      * The mode can only be changed in created and stopped state.
+     * 
+     * Sets the noise reduction mode of the current recording stream. You are advised to call
+     * [getSupportedNoiseReductionModes]{@link audio.AudioCapturer.getSupportedNoiseReductionModes} to obtain the
+     * NR mode supported by the current recording stream, and then call this API to set the NR mode.
+     *
+     * > **NOTE**
+     * >
+     * > - Currently, only the recording streams created by
+     * > [SourceType.SOURCE_TYPE_VOICE_MESSAGE]{@link @ohos.multimedia.audio:audio.SourceType} can be used to set
+     * > the noise reduction mode. Other stream types may be supported in the future.
+     * > - The noise reduction effect is affected by the device platform, audio device, and recording concurrency.
+     * > - This interface can be invoked only when recording is not started after the recording stream is created
+     * > or when recording is stopped. The call throws an exception when the recording stream is running or has
+     * > been released.
      *
      * @param { NoiseReductionMode } noiseReductionMode - The noise reduction mode to set.
      * @throws { BusinessError } 6800101 - Parameter verification failed.
@@ -13632,6 +13722,12 @@ declare namespace audio {
      * The supported modes will only consider the audio format and device platform,
      * audio input device and stream concurrency will not be considered.
      *
+     * Obtains the recording noise reduction mode supported by the current device.
+     * The application can call {@link #setNoiseReductionMode} to set the noise reduction mode to be switched.
+     * The NR modes in some scenarios can be set only by the system. These modes are not returned by this API.
+     * The application can sense the noise reduction mode currently selected by the system through
+     * {@link #getNoiseReductionMode} and {@link #onNoiseReductionModeChanged}.
+     *
      * @returns { Array<NoiseReductionMode> } The supported noise reduction mode array, at least
      *     {@link NoiseReductionMode#FIDELITY} is supported.
      * @throws { BusinessError } 6800301 - Audio server process died.
@@ -13640,6 +13736,49 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     getSupportedNoiseReductionModes(): Array<NoiseReductionMode>;
+
+    /**
+     * Subscribes to the noise reduction mode change event, which is triggered when the noise reduction mode
+     * is changed for the audio capturer.
+     * The change may be triggered by the user through the system record controller panel, by the application calling
+     * {@link #setNoiseReductionMode}, or by the system adjusting the mode due to device changes or
+     * stream concurrency. For details, see {@link NoiseReductionModeChangeReason}.
+     * 
+     * Application scenario: Applies to scenarios where applications need to detect noise reduction mode changes in real
+     * time, such as
+     * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE} live broadcast,
+     * [SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC} recording,
+     * [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER} recording,
+     * [SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION} VoIP, and
+     * [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE} voice messages. After detecting the noise
+     * reduction mode change, an application can determine whether to disable the noise reduction algorithm superimposed
+     * by the application based on the actual situation to achieve the best E2E overall noise reduction experience.
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } callback - Callback used to return the noise reduction mode
+     *     change information.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onNoiseReductionModeChanged(callback: Callback<NoiseReductionModeChangeInfo>): void;
+
+    /**
+     * Unsubscribe from the NR mode change event.
+     * 
+     * Application scenario: This interface is invoked when the application no longer needs to detect the NR mode
+     * change.
+     * Constraint: If the callback parameter is transferred, only the registered callback that matches the callback
+     * instance is canceled. If the callback parameter is not transferred, all registered NR mode change callbacks are
+     * canceled.
+     *
+     * @param { Callback<NoiseReductionModeChangeInfo> } [callback] - Callback function, which is used to cancel
+     *     subscription. If this parameter is not specified, all registered callbacks are canceled.
+     *     <br>Default value: Default behavior: Cancel all registered noise reduction mode change callbacks by default.
+     * @syscap SystemCapability.Multimedia.Audio.Capturer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offNoiseReductionModeChanged(callback?: Callback<NoiseReductionModeChangeInfo>): void;
   }
 
   /**
@@ -15513,7 +15652,7 @@ declare namespace audio {
   }
 
   /**
-   * Enumerates the feature type for audio suite.
+   * Enumerated audio encoding feature type.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15569,7 +15708,7 @@ declare namespace audio {
   }
 
   /**
-   * Enumerates the status for audio suite feature.
+   * Enumerated value, indicating the status of the audio encoding feature.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15596,7 +15735,7 @@ declare namespace audio {
      */
     INITIALIZED = 0,
     /**
-     * Checking the version status.
+     * Feature is checking version.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15605,7 +15744,7 @@ declare namespace audio {
      */
     VERSION_CHECKING = 10,
     /**
-     * Checking the version failed status.
+     * Check the version failure status.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15614,7 +15753,7 @@ declare namespace audio {
      */
     VERSION_CHECK_FAILED = 11,
     /**
-     * Checking the version succeeded status.
+     * Check version success status.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15733,7 +15872,7 @@ declare namespace audio {
   }
 
   /**
-   * Enumerates the network types for audio suite download.
+   * Network type for downloading the audio encoding feature.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15762,7 +15901,7 @@ declare namespace audio {
   }
 
   /**
-   * Defines the audio suite feature status information.
+   * Defines the status of the audio encoding feature.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15821,7 +15960,7 @@ declare namespace audio {
   }
 
   /**
-   * Defines the audio suite feature status information array.
+   * Defines the status information array of the audio encoding feature.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15831,7 +15970,7 @@ declare namespace audio {
   type AudioSuiteFeatureStatusInfoArray = Array<AudioSuiteFeatureStatusInfo>;
 
   /**
-   * Defines the audio suite feature version information.
+   * Defines the version information of the audio editing feature.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15877,7 +16016,7 @@ declare namespace audio {
      */
     size: long;
     /**
-     * Error code when the feature enters the error state.
+     * Error code after a feature enters the abnormal state.
      * <br>If the error code is 6800301, it indicates that the internal database or I/O of the system is abnormal, which
      * is irrelevant to application invoking.
      *
@@ -15890,8 +16029,8 @@ declare namespace audio {
   }
 
   /**
-   * Provides audio suite download management capabilities, including starting, pausing,
-   * canceling downloads, querying status, and uninstalling features.
+   * Provides the capability of downloading and managing the audio editing feature, including starting, pausing,
+   * Cancel the download, status query, and uninstallation functions.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15900,11 +16039,10 @@ declare namespace audio {
    */
   interface AudioSuiteDownloadManager {
     /**
-     * Obtains whether a specified feature has been installed.
-     * This API uses a promise to return the result.
+     * Obtains whether a specified feature has been installed. Use Promise asynchronous callback.
      *
-     * This interface is used only to query the local installation status of a feature and is not connected to the
-     * network.
+     * This interface is used to query the local installation status of a feature and does not depend on the network
+     * environment.
      *
      * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
      *     <br>The maximum length is 5.
@@ -15921,15 +16059,15 @@ declare namespace audio {
     isFeatureInstalled(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<boolean>>;
 
     /**
-     * Obtains the status of a specified feature.
-     * This API uses a promise to return the result.
+     * Obtain the status of a specified feature. Use Promise asynchronous callback.
      *
-     * This interface is used only to query the local installation status of a feature and is not connected to the
-     * network.
+     * This interface is used to query the local installation status of a feature and does not depend on the network
+     * environment.
      *
      * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
      *     <br>The maximum length is 5.
-     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise used to return the feature status array.
+     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> }Promise object, which returns an array of attribute states.
+     * Each element corresponds to a feature at the same index in featureTypes.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -15941,10 +16079,9 @@ declare namespace audio {
     getFeatureStatus(featureTypes: Array<AudioSuiteFeatureType>): Promise<AudioSuiteFeatureStatusInfoArray>;
 
     /**
-     * Obtains the latest version information of a specified feature.
-     * This API uses a promise to return the result.
+     * Obtain the latest version of a specified feature. Use Promise asynchronous callback.
      *
-     * This interface queries information through the network.
+     * Before calling this API, ensure that the device is connected to an available network.
      *
      * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
      *     <br>The maximum length is 5.
@@ -15963,14 +16100,17 @@ declare namespace audio {
     getNewVersionInfo(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<AudioSuiteFeatureVersionInfo>>;
 
     /**
-     * Start downloading features based on the specified network.
-     * This interface must be called after the feature status changes to
-     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED} after the package search succeeds in invoking
-     * {@link getNewVersionInfo} is called. After this interface is called, the feature status changes to
-     * {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
+     * Start downloading features based on the specified network. Use Promise asynchronous callbacks.
+     * Invoke {@link getNewVersionInfo} to query the new version. The query is successful and the status changes to
+     * This interface is invoked after {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED},
+     * Alternatively, in the {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED} state, invoke this interface to
+     * continue the download,
+     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
+     * After the download is successful, the system automatically enters the
+     * {@link audio.AudioSuiteFeatureStatus.INSTALLING} state.
      *
-     * The interface returns after the download starts. During the download, you can obtain the download progress
-     * through the {@link onDownloadStatusChange} subscribed download status change event.
+     * The interface is returned after the download starts. During the download, you can use the
+     * {@link onDownloadStatusChange} Obtains the download progress of the subscribed download status change event.
      *
      * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to download.
      *     <br>The maximum length is 5.
@@ -15990,16 +16130,16 @@ declare namespace audio {
     startDownload(featureTypes: Array<AudioSuiteFeatureType>, networkType: NetworkType): Promise<void>;
 
     /**
-     * Pauses the download of a specified feature.
-     * This function is called after the feature status is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}. After this
-     * function is called, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}.
+     * Pause the download of a specified feature. Use Promise asynchronous callback.
+     * Should be called after the property state is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING},
+     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}.
      *
-     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
-     * retains the original state.
+     * If this interface is invoked when the feature status is not {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}, a
+     * success message is returned and the original status remains unchanged.
      *
      * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to pause.
      *     <br>The maximum length is 5.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> }Promise object. No result is returned.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16011,17 +16151,18 @@ declare namespace audio {
     pauseDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Cancels the download of a specified feature.
-     * It should be called when the feature state is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
-     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSE}. After this function is called, the state changes to
-     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}.
+     * Cancel the download of a specified feature. Use Promise asynchronous callbacks.
+     * Should be in the characteristic state {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
+     * This interface is invoked when {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUTE} is invoked,
+     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}.
      *
-     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
-     * retains the original state.
+     * When the feature status is not {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUTE} This interface is invoked. A success response is returned
+     * and the original status remains unchanged.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to cancel.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - The type of property to cancel.
+     * <br>The maximum length is 5.
+     * @returns { Promise<void> }Promise object. No result is returned.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16033,19 +16174,19 @@ declare namespace audio {
     cancelDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Start the background download feature.
-     * If the current network condition is Wi-Fi: The feature will be downloaded directly. If it is not a Wi-Fi network,
-     * the system audio service automatically downloads after switching to the Wi-Fi network.
+     * Start the background download feature. Use Promise asynchronous callbacks.
+     * If the current network condition is Wi-Fi, the system audio service will directly download the feature.
+     * If a non-Wi-Fi network, the system audio service automatically downloads after switching to a Wi-Fi network.
      * It can be called in any {@link audio.AudioSuiteFeatureStatus} state.
      * After the client process exits, the system audio service continuously listens to the network environment until
      * the task is downloaded successfully.
      *
-     * The interface returns a message after sending a command. During the download, you can obtain the download
-     * progress through the {@link onDownloadStatusChange} subscribed download status change event.
+     * The interface returns a message after the command is sent. During the download, the download progress can be
+     * obtained through the download status change event subscribed by {@link onDownloadStatusChange}.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to download.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - The type of feature to download.
+     * <br>The maximum length is 5.
+     * @returns { Promise<void> }Promise object. No result is returned.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16057,21 +16198,19 @@ declare namespace audio {
     startBackgroundDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Uninstall the downloaded features.
-     * This function should be called after the feature status is
-     * {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}. After this function is called, the status changes
-     * to
-     * {@link audio.AudioSuiteFeatureStatus.UNINSTALLING}.
+     * Uninstall downloaded features. Use Promise asynchronous callbacks.
+     * Should be called after the property state is {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED},
+     * If the status changes to {@link audio.AudioSuiteFeatureStatus.UNINSTALLING}, the uninstallation starts.
      *
-     * If the interface is invoked when the interface is not in the valid state, the interface directly returns and
-     * retains the original state.
+     * This interface is invoked when the feature status is not {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED},
+     * The interface returns a success message and retains the original status.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to uninstall.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<void> } Promise that returns no value.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - The property type to unload.
+     * <br>The maximum length is 5.
+     * @returns { Promise<void> }Promise object. No result is returned.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
-     * @throws { BusinessError } 6800302 - Audio client call audio service error.
+     * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
      * @stagemodelonly
@@ -16080,8 +16219,8 @@ declare namespace audio {
     uninstallFeature(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Subscribes to download status change event.
-     * When the download status of any feature module changes, the subscription callback is triggered.
+     * Subscribe to download status change events.
+     * When the download status or progress of any feature changes, the subscription callback is triggered.
      *
      * @param { Callback<AudioSuiteFeatureStatusInfoArray> } callback - Callback function, which is used to return the
      *     array of changed download status information.
@@ -16098,8 +16237,9 @@ declare namespace audio {
      * Unsubscribe from the download status change event.
      * After you cancel the callback, the system does not trigger the callback.
      *
-     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - Callback to be unsubscribed.
-     *     <br>If the callback parameter is not transferred, all subscriptions are canceled.
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - Callback function to be canceled,
+     * The default value is null. If this parameter is not set, all callbacks that have been subscribed to in the
+     * current process are canceled.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine

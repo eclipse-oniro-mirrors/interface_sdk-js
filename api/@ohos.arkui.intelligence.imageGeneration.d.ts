@@ -36,11 +36,10 @@ import common from './@ohos.app.ability.common';
  * @since 23 dynamic
  */
 declare namespace imageGeneration {
-
   /**
    * Provides stream output result type definition.
    *
-   * @enum { int } Constants
+   * @enum { int }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -73,7 +72,7 @@ declare namespace imageGeneration {
      * @stagemodelonly
      * @since 23 dynamic
      */
-    PARTIAL_FAIL = 2,
+    PARTIAL_FAIL = 2
   }
 
   /**
@@ -129,7 +128,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     images: Array<ImageItem>;
-
     /**
      * Location reference map for multi-image generated tasks.
      *
@@ -140,7 +138,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     positionImage?: image.PixelMap;
-
     /**
      * Path information for lasso selection in AI-generated image tasks.
      *
@@ -151,7 +148,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     selectPath?: Array<common2D.Point>;
-
     /**
      * Description information for AI-generated image tasks.
      *
@@ -162,7 +158,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     prompt: string;
-
     /**
      * the style of AI-generated image in one task.
      *
@@ -173,7 +168,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     style?: string;
-
     /**
      * the size information of AI-generated image in one task.
      *
@@ -184,7 +178,6 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     imageSize: image.Size;
-
     /**
      * the number of AI-generated image in one task.
      *
@@ -219,7 +212,7 @@ declare namespace imageGeneration {
     type: PartialResultType;
 
     /**
-     * Sequence number of the image corresponding to AI-generated image task, available in partial and partial error result.
+     * Sequence number of the image corresponding to AI-generated image task, available in partial result.
      *
      * @type { ?int }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -230,7 +223,7 @@ declare namespace imageGeneration {
     imageIndex?: int;
 
     /**
-     * Image data of the image corresponding to AI-generated image task, available in partial result.
+     * image data of the image corresponding to AI-generated image task, available in partial result.
      *
      * @type { ?string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -305,14 +298,14 @@ declare namespace imageGeneration {
      * @since 23 dynamic
      */
     getModelSupportStyles(): Array<ImageStyle>;
-
     /**
      * Request AI image generation task to get the generated image.
      *
      * @param { int } sessionId - The session id for requesting an AI image generation task.
-     *     <br>Value: range:[0, +∞]
-     * @param { GenerateImageTaskOptions } params - Parameters for requesting an AI image generation task.
-     * @param { Callback<GenerateImageTaskPartialResult> } callback - the callback used to return the GenerateImageTaskPartialResult.
+     *     <br>Value range:[0, +∞]
+     * @param { GenerateImageTaskParams } params - Parameters for requesting an AI image generation task.
+     * @param { Callback<GenerateImageTaskPartialResult> } callback - the callback
+     *     used to return the GenerateImageTaskPartialResult.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -320,24 +313,22 @@ declare namespace imageGeneration {
      */
     requestImageGeneration(sessionId: int, params: GenerateImageTaskParams,
       callback: Callback<GenerateImageTaskPartialResult>): void;
-
     /**
      * Cancel AI image generation task.
      *
-     * @param { int } sessionId - The session id for cancel an AI image generation task.
-     *     <br>Value: range: [0, +∞]
+     * @param { int } sessionId - The session id for canceling an AI image generation task.
+     *     <br>Value range:[0, +∞]
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
      */
     cancelImageGeneration(sessionId: int): void;
-
     /**
-     * User use complaint menu to complain the result of an AI-generated image task.
+     * User uses complaint menu to complain the result of an AI-generated image task.
      *
      * @param { int } sessionId - The session id of AI image generation task.
-     *     <br>Value: range: [0, +∞]
+     *     <br>Value range:[0, +∞]
      * @param { GenerateImageTaskParams } request - The origin request for AI-generated image task.
      * @param { GenerateImageTaskResult } result - The result for AI-generated image task.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -473,10 +464,10 @@ declare namespace imageGeneration {
      */
     cancelTextGeneration(sessionId: int): void;
     /**
-     * User use complaint menu to complain the result of an AI-generated text task.
+     * User uses complaint menu to complain the result of an AI-generated text task.
      *
      * @param { int } sessionId - The session id of AI text generation task.
-     *     <br>Value: range: [0, +∞]
+     *     <br>Value range:[0, +∞]
      * @param { string } request - The origin request for AI-generated text task.
      * @param { GenerateTextTaskResult } result - The result for AI-generated text task.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -686,6 +677,7 @@ declare namespace imageGeneration {
      */
     statistic: TaskStatistic;
   }
+
   /**
    * Custom icon object in the generation result page of ImageGeneratorDialog.
    *
@@ -885,17 +877,16 @@ declare namespace imageGeneration {
      */
     customImportIcon?: CustomImportIcon;
     /**
- 	   * Information for LiveView in AI image generation.
- 	   *
- 	   * @type { ?LiveViewInfo }
- 	   * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	   * @systemapi
- 	   * @stagemodelonly
- 	   * @since 26.0.0 dynamic
- 	   */
-  	liveViewInfo?: LiveViewInfo;
+     * Information for LiveView in AI image generation.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    liveViewInfo?: LiveViewInfo;
     /**
-     * Indicates whether to enable minimize during image generation.
+     * Indicates whether to enable minimization during image generation.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -904,51 +895,49 @@ declare namespace imageGeneration {
      */
     minimizeDuringGeneration?: boolean;
   }
-
   /**
-  	 * Information for LiveView in AI image generation.
- 	 *
- 	 * @interface LiveViewInfo
- 	 * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	 * @systemapi
- 	 * @stagemodelonly
- 	 * @since 26.0.0 dynamic
- 	 */
- 	interface LiveViewInfo {
- 	  /**
- 	   * Get the Want object for LiveView.
- 	   *
- 	   * @returns { Want } Returns the Want object.
- 	   * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	   * @systemapi
- 	   * @stagemodelonly
- 	   * @since 26.0.0 dynamic
- 	   */
- 	  getWant(): Want;
- 	
- 	  /**
- 	   * Get the long-term task ID for LiveView.
- 	   *
- 	   * @returns { int } Returns the long-term task ID.
- 	   * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	   * @systemapi
- 	   * @stagemodelonly
- 	   * @since 26.0.0 dynamic
- 	   */
- 	  getLongTermTaskId(): int;
- 	
- 	  /**
- 	   * Check whether LiveView is needed.
- 	   *
- 	   * @returns { boolean } Returns true if LiveView is needed, false otherwise.
- 	   * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	   * @systemapi
- 	   * @stagemodelonly
- 	   * @since 26.0.0 dynamic
- 	   */
- 	  isLiveViewNeeded(): boolean;
- 	}
+   * Information for LiveView in AI image generation.
+   *
+   * @interface LiveViewInfo
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   */
+  interface LiveViewInfo {
+    /**
+     * Get the Want object for LiveView.
+     *
+     * @returns { Want } Returns the Want object.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    getWant(): Want;
 
+    /**
+     * Get the long-term task ID for LiveView.
+     *
+     * @returns { int } Returns the long-term task ID.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    getLongTermTaskId(): int;
+
+    /**
+     * Check whether LiveView is needed.
+     *
+     * @returns { boolean } Returns true if LiveView is needed, false otherwise.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    isLiveViewNeeded(): boolean;
+  }
   /**
    * Open the AI image generation task popup and perform AI image generation operations.
    *
@@ -1058,15 +1047,14 @@ declare namespace imageGeneration {
      */
     customImportIcon?: CustomImportIcon;
     /**
- 	   * Information for LiveView in AI image generation.
- 	   *
- 	   * @type { ?LiveViewInfo }
- 	   * @syscap SystemCapability.ArkUI.ArkUI.Full
- 	   * @systemapi
- 	   * @stagemodelonly
- 	   * @since 26.0.0 dynamic
- 	   */
- 	  liveViewInfo?: LiveViewInfo;    
+     * Information for LiveView in AI image generation.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 dynamic
+     */
+    liveViewInfo?: LiveViewInfo;
   }
 
   /**

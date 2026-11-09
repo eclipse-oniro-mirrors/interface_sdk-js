@@ -674,6 +674,22 @@ export declare class LengthMetrics {
    * @since 23 static
    */
   public value: double;
+
+  /**
+   * 为LengthMetrics对象设置自动刷新。
+   * 启用时，当系统配置发生变化时，由LengthMetrics.resource()创建的对象的长度值将自动更新
+   *
+   * @param { boolean } value - 当系统配置发生变化时，是否自动刷新长度值。
+   *     <br>如果设置为true，则由LengthMetrics.resource()创建的对象的长度值将自动更新
+   *     当系统配置发生变化时。如果设置为false，则由创建的对象的长度值
+   *     LengthMetrics.resource()会在系统配置发生变化时自动更新。
+   *     默认值为false。
+   * @returns { LengthMetrics } 返回用于链式调用的LengthMetrics对象。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  autoRefresh(value: boolean): LengthMetrics;
 }
 
 /**
@@ -1226,7 +1242,7 @@ export interface Circle {
 export interface CommandPath {
 
   /**
-   * 路径绘制的指令字符串。像素单位的转换方法请参考[像素单位]{@link common}。
+   * 路径绘制的指令字符串。像素单位的转换方法请参考[像素单位]{@link CommonMethod}。
    * 单位：px。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

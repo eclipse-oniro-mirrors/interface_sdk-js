@@ -1994,7 +1994,7 @@ declare class HttpAuthHandler {
    *
    * @param { string } userName - HTTP认证用户名，需为非空字符串。
    * @param { string } password - HTTP认证密码，需为非空字符串。
-   * @returns { boolean } 认证成功时返回true，失败返回false。
+   * @returns { boolean } 返回值仅表示接口调用状态，不代表认证结果。true表示调用成功，false表示调用失败。
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -3973,7 +3973,7 @@ declare class WebController {
    * 
    * 当baseUrl为“http/https”协议时，编码后的data字符串将被Web组件以类似loadUrl的方式以非编码字符串处理。
    *
-   * @param { object } options The options with the data or URL and other information.
+   * @param { object } options 包含数据或URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -3988,7 +3988,7 @@ declare class WebController {
    * 
    * 而通过registerJavaScriptProxy注入的对象，在loadUrl导航到新的页面也会有效。
    *
-   * @param { object } options The options with the URL and other information.
+   * @param { object } options 包含URL及其他信息的选项。
    * @syscap SystemCapability.Web.Webview.Core
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -9550,6 +9550,33 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
+
+  /**
+   * 设置Web组件是否开启已访问链接持久化。
+   *
+   * 开启后，已访问链接记录存储在数据库文件中，应用重启后记录仍保留，
+   * 已访问链接着色在应用重启后保持一致。
+   * 关闭后，已访问链接记录仅存储在共享内存中，应用退出后记录丢失。
+   *
+   * > **说明**
+   * > 默认值为`false`。未显式调用本属性时，
+   * > 已访问链接仅存储在共享内存中。
+   *
+   * > 开启持久化后，记录按应用隔离，
+   * > 最多保存20000条，保存期限为30天。
+   *
+   * > 过期记录和超出数量上限的记录会在后台线程中自动清理。
+   *
+   * > 当Web组件处于隐私模式（通过`incognitoMode:true`开启）时，本属性不生效，
+   * > 已访问链接记录仅存储在共享内存中，不会写入磁盘。
+   *
+   * @param { boolean } enabled - 是否开启已访问链接持久化。默认值为**false**。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
 }
 
 /**

@@ -14,7 +14,7 @@
  */
 
 /**
- * **FolderStack** extends the [Stack]{@link ./stack} container, adding the <!--RP1-->foldable screen hover<!--RP1End-->
+ * **FolderStack** extends the [Stack]{@link @global:Stack} container, adding the <!--RP1-->foldable screen hover<!--RP1End-->
  * capability. By setting child component IDs in the **upperItems** array of the
  * [FolderStackOptions]{@link FolderStackOptions} configuration, the corresponding child components automatically avoid
  * the fold crease area and move to the upper screen. **FolderStack** is designed for the hover status scenario of dual-
@@ -94,7 +94,7 @@ interface FolderStackOptions {
  */
 interface FolderStackInterface {
   /**
-   * A foldable screen hover layout container that extends [Stack]{@link ./stack}. It implements the foldable screen
+   * A foldable screen hover layout container that extends [Stack]{@link @global:Stack}. It implements the foldable screen
    * hover capability through the **upperItems** configuration. When the device is in hover status, the specified child
    * components automatically move to the upper screen, while other components are stacked on the lower screen.
    *
@@ -351,7 +351,7 @@ declare interface HoverEventParam {
   windowStatusType: WindowStatusType;
 }
 /**
- * A foldable screen hover layout container that extends [Stack]{@link ./stack}.
+ * A foldable screen hover layout container that extends [Stack]{@link @global:Stack}.
  * It implements the foldable screen hover capability through the **upperItems** configuration.
  * When the device is in hover status, the specified child components automatically
  * move to the upper screen, while other components are stacked on the lower screen.

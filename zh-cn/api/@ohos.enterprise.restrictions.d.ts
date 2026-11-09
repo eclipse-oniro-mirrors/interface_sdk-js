@@ -579,7 +579,25 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.0.1
      */
-    SUPER_PRIVACY = 53
+    SUPER_PRIVACY = 53,
+
+    /**
+     * 控制中心。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    CONTROL_CENTER = 59,
+
+    /**
+     * 通知中心。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    NOTIFICATION_CENTER = 60
   }
 
   /**

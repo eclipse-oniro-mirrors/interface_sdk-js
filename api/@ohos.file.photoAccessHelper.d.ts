@@ -1645,6 +1645,47 @@ declare namespace photoAccessHelper {
     readonly result: Array<string|null>;
   }
 
+  /**
+   * Describes the operation result of a media asset URI.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AssetUriResult {
+    /**
+     * URI of the original asset corresponding to the operation.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly originalUri: string;
+
+    /**
+     * URI of the asset corresponding to the operation result. The value is an empty string if the operation fails.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly resultUri: string;
+
+    /**
+     * Whether the operation is successful. **true** if the operation is successful, **false** otherwise.
+     * If the operation fails, **resultUri** is an empty string.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isSuccess: boolean;
+  }
+
 
   /**
    * for interrupting batch operations.
@@ -12187,8 +12228,11 @@ declare namespace photoAccessHelper {
      * Private moving photo.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi [since 13 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static
+     * @since 13 dynamic
+     * @since 23 static
      */
     PRIVATE_MOVING_PHOTO_RESOURCE = 4,
 
@@ -13673,6 +13717,76 @@ declare namespace photoAccessHelper {
      * @since 26.0.0 static
      */
     static deleteLocalAssetsWithUri(context: Context, assetUris: string[]): Promise<void>;
+
+    /**
+     * Deletes local media assets (images or videos) to the trash in batches and returns the operation result of each
+     * asset. This API uses a promise to return the result.
+     *
+     * > **NOTE**
+     * >
+     * > - If the asset exists only on the local device, it is directly deleted to the trash. If the operation is
+     * > successful, **resultUri** is the new URI of the asset in the trash.
+     * >
+     * > - If the asset exists only in the cloud, no processing is performed. In the operation result, **isSuccess**
+     * > is **false**, and **resultUri** is an empty string.
+     * >
+     * > - For assets stored on both the local device and the cloud, after this API is called, only the cloud asset is
+     * > retained, the local asset enters the trash, and if the operation is successful, **resultUri** is the new URI
+     * > of the local asset in the trash.
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - Context of the ability instance.
+     * @param { string[] } assetUris - Array of URIs of the images or videos to be deleted. The array can contain a
+     *     maximum of 500 elements.
+     * @returns { Promise<Array<AssetUriResult>> } Promise used to return the operation result array of each asset.
+     *     The result array is in one-to-one correspondence with the input **assetUri** array.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static deleteLocalAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
+
+    /**
+     * Recovers the assets corresponding to the specified URI string array from the trash in batches and returns the
+     * operation result of each asset. After the operation is successful, the asset is recovered from the trash to the
+     * normal state, and **resultUri** is the new URI of the recovered asset. If the operation fails, **isSuccess** is
+     * **false**, and **resultUri** is an empty string. This API uses a promise to return the result.
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - Context of the ability instance.
+     * @param { string[] } assetUris - Array of URIs of the assets to be recovered from the trash. The array can
+     *     contain a maximum of 500 elements.
+     * @returns { Promise<Array<AssetUriResult>> } Promise used to return the operation result array of each asset.
+     *     The result array is in one-to-one correspondence with the input **assetUri** array.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static recoverAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
 
     /**
      * Deletes cloud media assets to the trash in batches. This API uses a promise to return the result.
@@ -19542,7 +19656,7 @@ declare namespace photoAccessHelper {
      *
      * @param { string } uri - Input uri.
      * @returns { boolean } Whether the asset specified by the uri is a single file moving photo,
-     *     return true if yes, and false otherwise..
+     *     return true if yes, and false otherwise.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
      *     <br>1. The uri is invalid.
      *     <br>2. The uri can not be opened.

@@ -372,6 +372,16 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
+   * 短信接收回调。当收到短信时触发此回调。
+   * @param { common.SmsReceiveInfo } smsInfo - SMS received information, including slot ID, phone number,
+   *     SMS count, and content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onSmsReceived(smsInfo: common.SmsReceiveInfo): void;
+
+  /**
    * 密码认证失败事件回调。当密码认证失败时触发此回调。
    * 需要通过接口
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}

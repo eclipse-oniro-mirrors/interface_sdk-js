@@ -20,6 +20,8 @@
  * @kit ArkUI
  */
 
+import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
+
 import { ResourceColor, Offset, VoidCallback } from "./units";
 
 import { CommonMethod, PickerTextStyle, PickerDialogButtonStyle, Rectangle, BlurStyle, ShadowOptions, ShadowStyle, HoverModeAreaType, BackgroundBlurStyleOptions, BackgroundEffectOptions, Callback, DateTimeOptions, Bindable, DistortionMode, EdgeLightMode, SystemUiMaterial } from './common';
@@ -813,6 +815,18 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
+
+  /**
+   * 是否以及如何使对话框适配惯用手。
+   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
+   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
+   *
+   * @default HandednessFollowMode.NONE
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**

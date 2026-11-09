@@ -197,6 +197,19 @@ export @interface InsightIntentLink {
   result: string = '';
 
   /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
+
+  /**
    * The uri of a link.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -337,6 +350,19 @@ export @interface InsightIntentPage {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * The uiAbility name bound to the intent.
@@ -504,6 +530,19 @@ export @interface InsightIntentFunctionMethod {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 }
 /**
  * Define InsightIntentForm Annotation.
@@ -614,6 +653,19 @@ export @interface InsightIntentForm {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * The form name bound to the intent.
@@ -745,6 +797,19 @@ export @interface InsightIntentEntry {
    * @since 26.0.0 static
    */
   result: string = '';
+
+  /**
+   * Specifies whether the intent can be called by third-party applications.
+   * The value true indicates the intent can be called by third-party applications. The value false indicates the
+   * intent cannot be called by third-party applications.
+   * Default value: false.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  exported: boolean = false;
 
   /**
    * The ability name bound to the intent.

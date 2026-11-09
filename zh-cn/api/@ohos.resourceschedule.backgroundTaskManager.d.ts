@@ -192,7 +192,7 @@ declare namespace backgroundTaskManager {
      * @atomicservice [since 26.0.0]
      * @since 21 dynamic
      */
-    continuousTaskId?: number;
+    continuousTaskId?: int;
 
     /**
      * 长时任务ID，默认值为-1。
@@ -253,7 +253,8 @@ declare namespace backgroundTaskManager {
      * 请求用户授权是否能在后台长时间运行，使用callback异步回调。接口调用成功后会发送带提示音的用户授权横幅通知。
      * 用户授权“本次允许”或“始终允许”后，再次请求授权时将直接回调上次授权结果，不再弹出横幅通知。
      * 建议应用在前台时调用该接口，提示用户进行授权。仅适用于特殊场景类型
-     * [MODE_SPECIAL_SCENARIO_PROCESSING]{@link backgroundTaskManager.BackgroundTaskMode}的长时任务。
+     * [MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING}的长时任务。
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - 应用运行的上下文。
@@ -275,11 +276,12 @@ declare namespace backgroundTaskManager {
      * 请求用户授权是否能在后台长时间运行，使用callback异步回调。接口调用成功后会发送授权弹窗。
      * 用户授权“本次允许”、“始终允许”或“不允许”后，再次请求授权时将直接回调上次授权结果，不再弹出授权弹窗。
      * 建议应用在前台时调用该接口，提示用户进行授权。仅适用于特殊场景类型
-     * [MODE_SPECIAL_SCENARIO_PROCESSING]{@link backgroundTaskManager.BackgroundTaskMode}的长时任务。
+     * [MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING}的长时任务。
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
-     * @param { Context } context - App running context.
-     * @param { Callback<UserAuthResult> } callback - The callback of the function.
+     * @param { Context } context - 应用运行的上下文。
+     * @param { Callback<UserAuthResult> } callback - 用户操作后，返回授权结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 9800004 - System service operation failed.
      * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -310,16 +312,17 @@ declare namespace backgroundTaskManager {
 
     /**
      * 查询用户是否授权能在后台长时间运行。使用Promise异步回调。
-     * 当未授权时，返回授权结果[NOT_DETERMINED]{@link backgroundTaskManager.UserAuthResult}；
-     * 当未配置特殊场景类型[MODE_SPECIAL_SCENARIO_PROCESSING]{@link backgroundTaskManager.BackgroundTaskMode}的长时任务时，
-     * 返回授权结果为[NOT_SUPPORTED]{@link backgroundTaskManager.UserAuthResult}。
+     * 当未授权时，返回授权结果[NOT_DETERMINED]{@link backgroundTaskManager.UserAuthResult.NOT_DETERMINED}；
+     * 当未配置特殊场景类型[MODE_SPECIAL_SCENARIO_PROCESSING]
+     * {@link backgroundTaskManager.BackgroundTaskMode.MODE_SPECIAL_SCENARIO_PROCESSING}的长时任务时，
+     * 返回授权结果为[NOT_SUPPORTED]{@link backgroundTaskManager.UserAuthResult.NOT_SUPPORTED}。
      *
      * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
      * @param { Context } context - 应用上下文
      * @returns { Promise<UserAuthResult> } 用户授权结果
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-     * @throws { BusinessError } 9800004 - 系统服务无响应
-     * @throws { BusinessError } 9800005 - 长时任务校验错误
+     * @throws { BusinessError } 9800004 - System service operation failed.
+     * @throws { BusinessError } 9800005 - Continuous task verification failed.
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -474,7 +477,6 @@ declare namespace backgroundTaskManager {
     requestId: int;
     /**
      * 应用实际申请的短时任务时间，单位：ms。
-     * <br>Unit:ms
      * 
      * **说明：** 申请时间最长为3分钟，低电量（[BatteryCapacityLevel]{@link @ohos.batteryInfo:batteryInfo.BatteryCapacityLevel}为LEVEL_LOW）
      * 时最长为1分钟。
@@ -542,7 +544,7 @@ declare namespace backgroundTaskManager {
      */
     contentType: notificationManager.ContentType;
     /**
-     * 长时任务通知 Id。
+     * 长时任务通知 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @atomicservice
@@ -551,7 +553,7 @@ declare namespace backgroundTaskManager {
      */
     notificationId: int;
     /**
-     * 长时任务 Id。
+     * 长时任务 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @atomicservice [since 26.0.0]
@@ -672,7 +674,7 @@ declare namespace backgroundTaskManager {
      */
     backgroundSubModes: string[];
     /**
-     * 通知 Id。
+     * 通知 ID。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @since 20 dynamic
@@ -1345,7 +1347,7 @@ declare namespace backgroundTaskManager {
   /**
    * 取消当前UIAbility（FA模型则为ServiceAbility）下所有长时任务，使用callback异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, continuousTaskId: int)}
-   * 接口取消指定Id的长时任务。适用于应用功能已完成、应用即将退出等场景。
+   * 接口取消指定ID的长时任务。适用于应用功能已完成、应用即将退出等场景。
    *
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
@@ -1372,7 +1374,7 @@ declare namespace backgroundTaskManager {
   /**
    * 取消当前UIAbility（FA模型则为ServiceAbility）下所有长时任务，使用Promise异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, continuousTaskId: int)}
-   * 接口取消指定Id的长时任务。适用于应用功能已完成、应用即将退出等场景。
+   * 接口取消指定ID的长时任务。适用于应用功能已完成、应用即将退出等场景。
    *
    * @param { Context } context - 应用运行的上下文。
    *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
@@ -1397,7 +1399,7 @@ declare namespace backgroundTaskManager {
   function stopBackgroundRunning(context: Context): Promise<void>;
 
   /**
-   * 取消指定Id的长时任务，使用Promise异步回调。也可以通过
+   * 取消指定ID的长时任务，使用Promise异步回调。也可以通过
    * [stopBackgroundRunning]{@link backgroundTaskManager.stopBackgroundRunning(context: Context, callback:AsyncCallback<void>)}
    * 取消当前UIAbility下所有长时任务。。适用于应用功能已完成、应用即将退出等场景。
    *
@@ -1612,7 +1614,7 @@ declare namespace backgroundTaskManager {
    * @param { Callback<ContinuousTaskCancelInfo> } callback  - 回调函数，返回长时任务取消原因等信息。当长时任务被取消时触发此回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Register a exist callback type; 3. Parameter verification failed.
+   *     2. Register an existing callback type; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1632,21 +1634,21 @@ declare namespace backgroundTaskManager {
   function onContinuousTaskCancel(callback: Callback<ContinuousTaskCancelInfo>): void;
 
   /**
-   * 解除长时任务取消的监听，使用callback异步回调。
+   * 取消长时任务取消的监听，使用callback异步回调。
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { 'continuousTaskCancel' } type  - 事件回调类型，固定取值为'continuousTaskCancel'，表示长时任务取消。
    * @param { Callback<ContinuousTaskCancelInfo> } [callback]  - 需要取消监听的回调函数，未传入则取消所有注册回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Unregister type has not register; 3. Parameter verification failed.
+   *     2. Unregister type has not been registered; 3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
    function off(type: 'continuousTaskCancel', callback?: Callback<ContinuousTaskCancelInfo>): void;
    
    /**
-   * 解除长时任务取消的监听，使用callback异步回调。
+   * 取消长时任务取消的监听，使用callback异步回调。
    *
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskCancelInfo> } [callback] - the callback of continuous task cancel.
@@ -1855,8 +1857,6 @@ declare namespace backgroundTaskManager {
 
     /**
      * WLAN相关。
-     * 
-     * **系统API**: 此接口为系统接口。
      *
      * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
      * @systemapi Hide this for inner system use.
@@ -2086,7 +2086,9 @@ declare namespace backgroundTaskManager {
    * 长时任务子类型。
    * 
    * 通常与长时任务主类型[BackgroundTaskMode]{@link backgroundTaskManager.BackgroundTaskMode}配合使用，对照关系请参考长时任务主类型与子类型对照表，两者
-   * 共同作为API version 21新增的申请、更新长时任务接口入参，用于指定长时任务类型。
+   * 共同作为API version 21新增的[申请]{@link backgroundTaskManager.startBackgroundRunning(context: Context, request: ContinuousTaskRequest)}、
+   * [更新]{@link backgroundTaskManager.updateBackgroundRunning(context: Context, request: ContinuousTaskRequest)}长时任务接口入参，
+   * 用于指定长时任务类型。
    *
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @atomicservice [since 26.0.0]

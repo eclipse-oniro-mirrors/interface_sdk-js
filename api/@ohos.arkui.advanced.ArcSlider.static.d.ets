@@ -29,11 +29,11 @@
  * 
  * ###### Attributes
  * 
- * The [universal attributes]{@link common} are not supported.
+ * The [universal attributes]{@link CommonMethod} are not supported.
  * 
  * ###### Events
  * 
- * The [universal events]{@link common} are not supported.
+ * The [universal events]{@link CommonMethod} are not supported.
  * 
  * @file
  * @kit ArkUI

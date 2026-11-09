@@ -28,7 +28,7 @@ import { DrawContext, Size, Offset, Position, Pivot, Scale, Translation, Matrix4
  *
  * > **NOTE**
  * >
- * > - Avoid modifying RenderNodes in [BuilderNode]{@link ./BuilderNode}. The [FrameNode]{@link ./FrameNode} associated
+ * > - Avoid modifying RenderNodes in [BuilderNode]{@link @ohos.arkui.node:BuilderNode}. The [FrameNode]{@link @ohos.arkui.node:FrameNode} associated
  * > with BuilderNode is designed solely for mounting the BuilderNode as a child component. Modifying attributes or
  * > operations on the FrameNode's child nodes or their corresponding RenderNodes may lead to undefined behavior,
  * > including display, event handling, and stability issues.
@@ -788,7 +788,7 @@ export class RenderNode {
   /**
    * Performs drawing. You need to implement this API. It is called when the RenderNode performs drawing.
    *
-   * Note: The Canvas provided in the [DrawContext]{@link ./Graphics:DrawContext} parameter is a temporary command-
+   * Note: The Canvas provided in the [DrawContext]{@link @ohos.arkui.node:DrawContext} parameter is a temporary command-
    * recording canvas, not the actual rendering canvas of the node. For usage instructions, see
    * [Adjusting the Transformation Matrix of the Custom Drawing Canvas](docroot://ui/arkts-user-defined-arktsNode-renderNode.md#adjusting-the-transformation-matrix-of-the-custom-drawing-canvas).
    *

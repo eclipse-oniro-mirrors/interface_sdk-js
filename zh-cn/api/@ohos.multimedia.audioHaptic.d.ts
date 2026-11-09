@@ -118,7 +118,7 @@ declare namespace audioHaptic {
     fd: int;
 
     /**
-     * 文件中数据读取的偏移量，单位为字节。默认情况下，偏移量为0。
+     * 文件中数据读取的偏移量，单位为字节。默认情况下，偏移量为0。需与length配合使用，且两者必须符合实际文件长度。
      *
      * @type { ?long }
      * @syscap SystemCapability.Multimedia.AudioHaptic.Core
@@ -128,7 +128,7 @@ declare namespace audioHaptic {
     offset?: long;
 
     /**
-     * 读取数据的字节长度。默认情况下，长度为文件中从偏移量位置开始的剩余字节数。
+     * 读取数据的字节长度。默认情况下，长度为文件中从偏移量位置开始的剩余字节数。需与offset配合使用，且两者必须符合实际文件长度。
      *
      * @type { ?long }
      * @syscap SystemCapability.Multimedia.AudioHaptic.Core
@@ -197,7 +197,7 @@ declare namespace audioHaptic {
      * >
      * > 对于不再需要使用的资源，建议应用及时取消注册，避免出现资源泄漏或资源数量超上限等问题。
      *
-     * @param { int } id - 已注册资源的source id。
+     * @param { int } id - 通过[registerSource]{@link audioHaptic.AudioHapticManager.registerSource}或[registerSourceFromFd]{@link audioHaptic.AudioHapticManager.registerSourceFromFd}方法注册后返回的资源标识符，用于标识具体的音振资源。从API版本20开始支持registerSourceFromFd。
      * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *                                 1.Mandatory parameters are left unspecified;
@@ -211,7 +211,7 @@ declare namespace audioHaptic {
     /**
      * 设置音频时延模式。
      *
-     * @param { int } id - 已注册资源的source id。
+     * @param { int } id - 通过[registerSource]{@link audioHaptic.AudioHapticManager.registerSource}或[registerSourceFromFd]{@link audioHaptic.AudioHapticManager.registerSourceFromFd}方法注册后返回的资源标识符，用于标识具体的音振资源。从API版本20开始支持registerSourceFromFd。
      * @param { AudioLatencyMode } latencyMode - 音频时延模式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *                                 1.Mandatory parameters are left unspecified;
@@ -226,7 +226,7 @@ declare namespace audioHaptic {
     /**
      * 设置音频流使用类型。
      *
-     * @param { int } id - 已注册资源的source id。
+     * @param { int } id - 通过[registerSource]{@link audioHaptic.AudioHapticManager.registerSource}或[registerSourceFromFd]{@link audioHaptic.AudioHapticManager.registerSourceFromFd}方法注册后返回的资源标识符，用于标识具体的音振资源。从API版本20开始支持registerSourceFromFd。
      * @param { audio.StreamUsage } usage - 音频流使用类型。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *                                 1.Mandatory parameters are left unspecified;
@@ -243,8 +243,8 @@ declare namespace audioHaptic {
      * 创建音振播放器。使用Promise异步回调。
      *
      * @permission ohos.permission.VIBRATE
-     * @param { number } id - 已注册资源的source id。
-     * @param { AudioHapticPlayerOptions } options - 音振播放器选项。
+     * @param { number } id - 通过[registerSource]{@link audioHaptic.AudioHapticManager.registerSource}或[registerSourceFromFd]{@link audioHaptic.AudioHapticManager.registerSourceFromFd}方法注册后返回的资源标识符，用于标识具体的音振资源。从API版本20开始支持registerSourceFromFd。
+     * @param { AudioHapticPlayerOptions } options - 音振播放器选项，用于配置播放时的音频和振动行为（如是否静音音频、是否禁止振动）。当需要自定义播放行为时传入此参数，不传入时使用默认播放配置（正常播放声音和振动）。
      * @returns { Promise<AudioHapticPlayer> } Promise对象，返回创建的音振播放器。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -261,8 +261,8 @@ declare namespace audioHaptic {
     /**
      * 创建音振播放器。使用Promise异步回调。
      * @permission ohos.permission.VIBRATE
-     * @param { int } id - Source id.
-     * @param { AudioHapticPlayerOptions } [options] - 音振播放器选项。
+     * @param { int } id - 通过[registerSource]{@link audioHaptic.AudioHapticManager.registerSource}或[registerSourceFromFd]{@link audioHaptic.AudioHapticManager.registerSourceFromFd}方法注册后返回的资源标识符，用于标识具体的音振资源。从API版本20开始支持registerSourceFromFd。
+     * @param { AudioHapticPlayerOptions } [options] - 音振播放器选项，用于配置播放时的音频和振动行为（如是否静音音频、是否禁止振动）。当需要自定义播放行为时传入此参数，不传入时使用默认播放配置（正常播放声音和振动）。
      * @returns { Promise<AudioHapticPlayer | null> } Promise对象，返回创建的音振播放器。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 5400102 - Operation not allowed.
@@ -314,8 +314,8 @@ declare namespace audioHaptic {
     /**
      * 查询该音振类型是否被静音。
      *
-     * @param { AudioHapticType } type - 音振类型。
-     * @returns { boolean } 表示查询的音振类型是否被静音。true表示静音，false表示非静音。
+     * @param { AudioHapticType } type - 音振类型，用于查询音频是否静音或振动是否禁止。
+     * @returns { boolean } 表示查询的音振类型是否被静音。true表示音频被静音或振动被禁止，false表示音频未被静音或振动未被禁止。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *                                 1.Mandatory parameters are left unspecified;
      *                                 2.Parameter verification failed.
@@ -503,7 +503,7 @@ declare namespace audioHaptic {
      * 取消监听流结束事件。使用callback异步回调。
      *
      * @param { 'endOfStream' } type - 事件回调类型，支持的事件为'endOfStream'，当取消监听流结束事件时，触发该事件。
-     * @param { Callback<void> } [callback] - 回调函数，无返回结果。
+     * @param { Callback<void> } [callback] - 回调函数。传入回调函数时，仅取消该回调对应的监听事件，需与[on('endOfStream')](#onendofstream)绑定同一回调函数；不传参数时，取消此事件类型下所有已订阅的监听事件。
      * @syscap SystemCapability.Multimedia.AudioHaptic.Core
      * @since 11 dynamic
      */
@@ -522,7 +522,7 @@ declare namespace audioHaptic {
      * 监听音频中断事件（当音频焦点发生变化时触发）。使用callback异步回调。
      *
      * @param { 'audioInterrupt' } type - 事件回调类型，支持的事件为'audioInterrupt'，当音频焦点状态发生变化时，触发该事件。
-     * @param { Callback<audio.InterruptEvent> } callback - 回调函数，返回中断事件信息。
+     * @param { Callback<audio.InterruptEvent> } callback - 回调函数。传入回调函数时，仅取消该回调对应的监听事件，需与[on('audioInterrupt')](#onaudiointerrupt)绑定同一回调函数；不传参数时，取消此事件类型下所有已订阅的监听事件。
      * @syscap SystemCapability.Multimedia.AudioHaptic.Core
      * @since 11 dynamic
      */
