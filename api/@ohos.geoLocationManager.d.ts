@@ -1922,8 +1922,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   function addFusionFence(fenceRequestParams: FusionFenceRequestParams): Promise<void>;
 
@@ -1942,8 +1942,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   function removeFusionFence(identifier: string): Promise<void>;
   
@@ -1957,8 +1957,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   function isFusionFenceSupported(): boolean;
 
@@ -2418,8 +2418,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     tac?: int;
 
@@ -4892,8 +4892,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface FusionFenceRequestParams {  
     /**
@@ -4904,8 +4904,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     identifier: string;
 
@@ -4915,8 +4915,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     scene: FusionFenceScene;
 
@@ -4929,8 +4929,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     fenceType: int;
 
@@ -4940,8 +4940,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     poiType?: string;
 
@@ -4951,8 +4951,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     poiLocation: Point;
 
@@ -4965,8 +4965,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     monitorTransitionEvents: int;
 	
@@ -4979,8 +4979,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     loiterTimeMs: int;
 	
@@ -4990,8 +4990,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     gnssFences?: Array<GnssFence>;
 	
@@ -5001,8 +5001,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     cellFences?: Array<CellFence>;
 	
@@ -5012,8 +5012,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     wifiFences?: Array<WifiFence>;
 
@@ -5023,8 +5023,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     expirationMs: double;
 
@@ -5034,8 +5034,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     fenceTransitionCallback: Callback<FusionFenceTransition>;
   }
@@ -5046,8 +5046,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface FusionFenceTransition {  
     /**
@@ -5056,8 +5056,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     identifier: string;
 
@@ -5067,8 +5067,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     scene: FusionFenceScene;
 
@@ -5078,8 +5078,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     transitionEvent: GeofenceTransitionEvent;
   }
@@ -5090,8 +5090,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface GnssFence {  
     /**
@@ -5102,8 +5102,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     gnssFenceType: int;
 	
@@ -5113,8 +5113,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     circularFence?: Geofence;
 	
@@ -5124,8 +5124,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     polygon?: Array<Point>;
   }
@@ -5136,8 +5136,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface CellFence {  
     /**
@@ -5146,8 +5146,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     cellInfos: Array<CellInfo>;
   }
@@ -5158,8 +5158,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface WifiFence {  
     /**
@@ -5168,8 +5168,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     type: WifiFingerprintType;
 
@@ -5179,8 +5179,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     wifiFeatures: Array<WirelessSignalFeature>;
   }
@@ -5191,8 +5191,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface WirelessSignalFeature {  
     /**
@@ -5202,8 +5202,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     rssiAvg: int;
 
@@ -5213,8 +5213,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     rssiStandardDeviation: double;
 	
@@ -5224,8 +5224,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     mac: Array<string>;
   }
@@ -5235,8 +5235,8 @@ declare namespace geoLocationManager {
    *
    * @syscap SystemCapability.Location.Location.Core
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export interface Point {  
     /**
@@ -5244,8 +5244,8 @@ declare namespace geoLocationManager {
      *
      * @syscap SystemCapability.Location.Location.Core
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     latitude: double;
 	
@@ -5254,8 +5254,8 @@ declare namespace geoLocationManager {
      *
      * @syscap SystemCapability.Location.Location.Core
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     longitude: double;
   }
@@ -5375,8 +5375,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export enum GnssFenceType {  
     /**
@@ -5385,8 +5385,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     POLYGON = 1,
 
@@ -5396,8 +5396,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     CIRCULAR = 2
   }
@@ -5408,8 +5408,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export enum WifiFingerprintType {  
     /**
@@ -5418,8 +5418,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     SEMANTIC = 1,
 
@@ -5429,8 +5429,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     LOCATION = 2
   }
@@ -5441,8 +5441,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export enum FusionFenceType {  
     /**
@@ -5451,8 +5451,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     GNSS = 1,
 	
@@ -5462,8 +5462,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     CELLULAR = 2,
 	
@@ -5473,8 +5473,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     WIFI = 4,
 	
@@ -5484,8 +5484,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     BLUETOOTH = 8
   }
@@ -5496,8 +5496,8 @@ declare namespace geoLocationManager {
    * @syscap SystemCapability.Location.Location.Geofence
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 dynamic
+   * @since 26.1.0 static
    */
   export enum FusionFenceScene {  
     /**
@@ -5506,8 +5506,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     AIRPORT = 1,
 
@@ -5517,8 +5517,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     TRAIN_STATION = 2,
 	
@@ -5528,8 +5528,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     SUBWAY = 3,
 
@@ -5539,8 +5539,8 @@ declare namespace geoLocationManager {
      * @syscap SystemCapability.Location.Location.Geofence
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 dynamic
+     * @since 26.1.0 static
      */
     SHOP = 4
   }
