@@ -1340,6 +1340,18 @@ declare namespace camera {
      * @since 23 static
      */
     createControlCenterSession(): ControlCenterSession;
+    /**
+     * 获取控制中心的高度。
+     *
+     * @returns { double } 控制中心的高度。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    getControlCenterHeight(): double;
+
 
     /**
      * 查询相机设备是否支持预启动。
@@ -1965,7 +1977,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     GLASSES = 0xA31
   }
@@ -7654,7 +7666,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
 
@@ -7665,7 +7677,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
@@ -7685,7 +7697,7 @@ declare namespace camera {
    * @since 11 dynamic
    * @since 23 static
    */
-  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion, ImagingMode {
+  interface VideoSessionForSys extends VideoSession, Beauty, ColorEffect, ColorManagement, Macro, Aperture, ColorReservation, EffectSuggestion, ImagingMode, ColorControls {
   }
 
   /**
@@ -8464,7 +8476,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     onCameraSwitchRequest(callback: Callback<CameraDevice>): void;
 
@@ -8475,7 +8487,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.1.0 dynamic&static
+     * @since 26.0.1 dynamic&static
      */
     offCameraSwitchRequest(callback?: Callback<CameraDevice>): void;
   }
@@ -14362,6 +14374,32 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     enableAutoExtendedGainmapDelivery(enabled: boolean): void;
+
+    /**
+     * 检查是否支持C2PA签名。
+     *
+     * @returns { boolean } C2PA签名是否支持的检查结果。**true**表示支持，**false**表示不支持。如果接口调用失败，返回undefined。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isC2PASignatureSupported(): boolean;
+
+    /**
+     * 配置C2PA签名设置。该接口用于启用或禁用C2PA签名，并可选地设置C2PA签名的作者信息。
+     *
+     * 调用该接口前，请先通过[isC2PASignatureSupported]{@link camera.PhotoOutput.isC2PASignatureSupported}检查是否支持C2PA签名。
+     *
+     * @param { boolean } enableC2PA - 是否启用C2PA签名。**true**表示启用，**false**表示禁用。
+     * @param { C2PASignatureConfig } [config] - C2PA签名配置，包含作者名称和作者ID。该参数可选。如果不传入，生成的C2PA签名将不包含作者信息。
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    configureC2PASignature(enableC2PA: boolean, config?: C2PASignatureConfig): void;
   }
 
   /**
@@ -15949,6 +15987,32 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     unlockMetadataObjectTracking(): void;
+
+    /**
+     * 启用或禁用编码器的帧内元数据传递。
+     * > **说明**
+     * >
+     * > 调用该方法前，请先通过{@link isInFrameMetadataForEncoderSupported}检查相机设备是否支持编码器的帧内元数据传递。
+     * @param { boolean } enable - 编码器帧内元数据传递的目标状态。
+     * @throws { BusinessError } 801 - Capability not supported. Check if the camera device supports the required in frame metadata delivery for encoder by using capability query APIs.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    setInFrameMetadataForEncoderEnabled(enable: boolean): void;
+
+    /**
+     * 检查是否支持编码器的帧内元数据。
+     *
+     * @returns { boolean } 如果支持帧内元数据传递，返回**true**；否则返回**false**。
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    isInFrameMetadataForEncoderSupported(): boolean;
   }
 
   /**
@@ -17600,6 +17664,36 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     AUTOMOTIVE_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT = 14
+  }
+
+  /**
+   * 描述C2PA签名配置，包含用于生成C2PA签名的作者名称和作者ID。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig{
+    /**
+     * C2PA签名的作者ID。该字段可选。如果不设置，C2PA签名中将不包含作者ID。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * C2PA签名的作者名称。该字段可选。如果不设置，C2PA签名中将不包含作者名称。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
   }
 }
 
