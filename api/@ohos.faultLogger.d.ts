@@ -24,9 +24,13 @@ import type { AsyncCallback } from './@ohos.base';
  * The **faultLogger** APIs can be used to query fault logs of an application cached on the system. The APIs use the
  * application bundle name and the UID allocated by the system as the unique key value.
  *
- * The number of application fault logs stored in the system is limited by the system log pressure. You are advised to
- * use [@ohos.hiviewdfx.hiAppEvent]{@link @ohos.hiviewdfx.hiAppEvent:hiAppEvent} to subscribe to fault events such as
- * **APP_CRASH** and **APP_FREEZE**. For details, see:
+ * The fault information and application fault logs stored on the system are subject to system pressure limits
+ * and will be deleted due to aging. After the fault information is aged out, no result can be queried.
+ * If the fault information still exists but the fault log file has been aged out,
+ * `fullLog` in the queried fault information data structure prints the error message `Fail to get log, fd is -1`.
+ * It is recommended that you use [@ohos.hiviewdfx.hiAppEvent](js-apis-hiviewdfx-hiappevent.md) to subscribe
+ * to fault events such as APP_CRASH and APP_FREEZE.
+ * For details, see:
  * - [Migrating Crash Events from the FaultLogger API](docroot://dfx/hiappevent-watcher-crash-events-arkts.md#migrating-crash-events-from-the-faultlogger-api)
  * - [Migrating Application Freeze Events from the Faultlogger API](docroot://dfx/hiappevent-watcher-freeze-events-arkts.md#migrating-application-freeze-events-from-the-faultlogger-api)
  *
@@ -120,7 +124,7 @@ declare namespace FaultLogger {
    *     the information retrieval. In this case, an error string will be returned.
    * @throws { BusinessError } 801 - Capability not supported.
    *     Possible causes: The specified SystemCapability name was not found.
-   * @throws { BusinessError } 10600001 - The service is not started or is faulty
+   * @throws { BusinessError } 10600001 - The service is not started or is faulty.
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly
    * @deprecated since 18
@@ -139,7 +143,7 @@ declare namespace FaultLogger {
    *     an exception occurs during the information retrieval.
    * @throws { BusinessError } 801 - Capability not supported.
    *     Possible causes: The specified SystemCapability name was not found.
-   * @throws { BusinessError } 10600001 - The service is not started or is faulty
+   * @throws { BusinessError } 10600001 - The service is not started or is faulty.
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly
    * @deprecated since 18
