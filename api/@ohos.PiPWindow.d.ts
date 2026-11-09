@@ -272,15 +272,15 @@ declare namespace PiPWindow {
     defaultWindowSizeType?: int;
 
     /**
-     * Whether the PiP window automatically snaps to screen corners. When this feature is enabled, the screen is divided
-     * into four hot zones (top-left, top-right, bottom-left, and bottom-right). When users lift their finger while
-     * dragging the PiP window within a hot zone, the PiP window is automatically snapped to the nearest corner.
+     * Whether to enable PiP corner snapping. When this feature is enabled, the screen is divided into four hot zones
+     * by the horizontal and vertical midlines, forming the top-left, top-right, bottom-left, and bottom-right areas.
+     * When the PiP window is started, it appears in the corresponding corner based on the position where it disappeared
+     * last time. The user can drag the window freely, and once the user releases the window, it automatically snaps to
+     * the screen edge.
      *
      * **true**: enables corner snapping.
      *
      * **false**: disables corner snapping.
-     *
-     * This API can be properly called on phones and tablets. If it is called on other device types, it has no effect.
      *
      * @default true
      * @syscap SystemCapability.Window.SessionManager
