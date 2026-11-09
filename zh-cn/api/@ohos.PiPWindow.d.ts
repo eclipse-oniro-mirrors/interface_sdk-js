@@ -250,8 +250,6 @@ declare namespace PiPWindow {
      *
      * false：表示关闭画中画四角吸附功能。
      *
-     * 该接口在Phone、Tablet设备上可正常调用，在其他设备上不生效。
-     *
      * @default true
      * @syscap SystemCapability.Window.SessionManager
      * @atomicservice
