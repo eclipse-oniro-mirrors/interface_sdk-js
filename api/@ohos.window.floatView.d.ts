@@ -64,8 +64,6 @@ import { LocalStorage } from '@ohos.arkui.stateManagement';
  *  - The float view can be bound to the [floating ball]{@link @ohos.window.floatingBall:floatingBall} for joint use,
  * enabling more complex scenarios.
  *
- * **Start version**: 26.0.0
- *
  * > **NOTE**
  * >
  * > - Use [canIUse()](docroot://reference/common/js-apis-syscap.md#caniuse) to check whether the device supports the
