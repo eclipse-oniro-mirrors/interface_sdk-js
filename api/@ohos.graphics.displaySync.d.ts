@@ -24,7 +24,7 @@ import { ExpectedFrameRateRange } from './arkui/component/common';
 /*** endif */
 
 /**
- * The displaySync module allows your application to draw its custom UI content at a specified frame rate.
+ * Variable frame rate support allows developers to run UI services at a specified frame rate. It is generally used in scenarios where developers draw the UI themselves and have specific requirements for the frame rate. The system adjusts the drawing frequency based on the set expected frame rate, minimum frame rate, and maximum frame rate to meet the requirements of different scenarios.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @atomicservice [since 26.0.1]
@@ -33,8 +33,7 @@ import { ExpectedFrameRateRange } from './arkui/component/common';
  */
 declare namespace displaySync {
   /**
-   * You can obtain the timestamp information from the event callback, including the timestamp when the current frame 
-   * arrives and the timestamp when the next frame is expected to arrive.
+   * Developers can obtain the timestamp information of frame drawing from the callback function, including the timestamp when the current frame arrives and the targetTimestamp when the next frame is expected to arrive.
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @atomicservice [since 26.0.1]
@@ -43,7 +42,7 @@ declare namespace displaySync {
    */
   interface IntervalInfo {
     /**
-     * Time when the current frame arrives, in nanoseconds.
+     * Time when the current frame arrives (in nanoseconds). Monotonically increasing time since system startup.
      * 
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
@@ -53,7 +52,7 @@ declare namespace displaySync {
     timestamp: long;
 
     /**
-     * Expected arrival time of the next frame, in nanoseconds.
+     * Expected arrival time of the next frame (in nanoseconds). Monotonically increasing time since system startup. The value must be greater than timestamp.
      * 
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
@@ -64,10 +63,8 @@ declare namespace displaySync {
   }
 
   /**
-   * An object that implements the setting of the frame rate and callback. It provides APIs for you to set the frame 
-   * rate, register a callback, and start/stop the callback.
-   * Before calling any of the following APIs, you must use [displaySync.create()]{@link displaySync.create} to create
-   * a **DisplaySync** instance.
+   * An instance for setting the expected frame rate and callback function. It is used to set the expected frame rate range, register the frame callback function, and start and stop the frame callback.
+   * Before calling any of the following APIs, you must use displaySync.create() to create a DisplaySync instance and then call the corresponding method through this instance.
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @atomicservice [since 26.0.1]
@@ -76,14 +73,16 @@ declare namespace displaySync {
    */
   interface DisplaySync {
     /**
-     * Sets the expected frame rate range.
+     * Sets the expected frame rate range. The expected frame rate range is used as a reference for system scheduling, and the system tries to adjust the drawing frame rate within this range.
+     * If this API is not called or ExpectedFrameRateRange(0, 0, 0) is passed in, the current frame rate of the application is followed. It is recommended to set the range before calling start so that it takes effect immediately. Setting the range after calling start also takes effect, but there may be a delay.
      * 
-     * @param { ExpectedFrameRateRange } rateRange - Expected frame rate range.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 
-     *     <br> 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameters types.
-     *     <br> 3. Parameter verification failed.
-     *     or check if ExpectedFrameRateRange is valid.
+     * @param { ExpectedFrameRateRange } rateRange - Sets the expected frame rate range of DisplaySync, which contains three fields: expected, min, and max, in frames per second (fps).
+     *                                               The fields must be non-negative integers, with a value range of [0, the maximum frame rate of the device], and must satisfy min <= expected <= max. If the value is out of the valid range, error code 401 is thrown.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     *                                 1. Mandatory parameters are left unspecified.
+     *                                 2. Incorrect parameter types.
+     *                                 3. Parameter verification failed.
+     *                                 Or check if ExpectedFrameRateRange is valid.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
      * @since 11 dynamic
@@ -92,10 +91,12 @@ declare namespace displaySync {
     setExpectedFrameRateRange(rateRange: ExpectedFrameRateRange) : void;
 
     /**
-     * Subscribes to change events of each frame.
+     * Subscribes to change events of each frame. After the callback function is registered, you must call start to start the DisplaySync object; only then will the system trigger the callback on each frame.
+     * This API is used together with off('frame') to unregister the callback function. The callback function is executed on the UI main thread. The callback frequency is affected by the frame rate range set by setExpectedFrameRateRange.
+     * If the callback takes too long to execute, frame freezing may occur. It is recommended that only lightweight business logic be performed in the callback.
      * 
-     * @param { 'frame' } type - Event type. The value is fixed at **'frame'**.
-     * @param { Callback<IntervalInfo> } callback - Callback used for subscription.
+     * @param { 'frame' } type - Type of the callback to set (only 'frame' is supported).
+     * @param { Callback<IntervalInfo> } callback - Callback function for subscribing to frame changes. IntervalInfo contains two attributes: timestamp (the arrival time of the current frame) and targetTimestamp (the expected arrival time of the next frame), both in nanoseconds.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
      * @since 11 dynamic
@@ -112,11 +113,10 @@ declare namespace displaySync {
     onFrame(callback: Callback<IntervalInfo>): void;
 
     /**
-     * Unsubscribes from change events of each frame.
+     * Unsubscribes from change events of each frame. This API is used together with on('frame'). After the unsubscription succeeds, the callback function will no longer be triggered.
      * 
-     * @param { 'frame' } type - Event type. The value is fixed at **'frame'**.
-     * @param { Callback<IntervalInfo> } [callback] - Callback used for unsubscription.
-     *     If no value is passed in, all subscriptions to the specified event are canceled.
+     * @param { 'frame' } type - Type of the callback to set (only 'frame' is supported).
+     * @param { Callback<IntervalInfo> } [callback] - Callback function registered when on('frame') is called, used to unsubscribe from the callback function. It must be used after the callback has been registered through on('frame').
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
      * @since 11 dynamic
@@ -126,15 +126,14 @@ declare namespace displaySync {
     /**
      * Unsubscribes from change events of each frame.
      * 
-     * @param { Callback<IntervalInfo> } [callback] - Callback used for unsubscription.
-     *     If no value is passed in, all subscriptions to the specified event are canceled.
+     * @param { Callback<IntervalInfo> } [callback] - Callback used for unsubscription. If no value is passed in, all subscriptions to the specified event are canceled.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @since 23 static
      */
     offFrame(callback?: Callback<IntervalInfo>): void;
 
     /**
-     * Starts callback for each frame.
+     * Makes the expected frame rate range set by setExpectedFrameRateRange take effect. If a callback function is registered through on('frame'), this API starts requesting VSync signals and triggers the registered callback once per frame. This API is used together with stop.
      * 
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
@@ -144,7 +143,8 @@ declare namespace displaySync {
     start(): void;
 
     /**
-     * Stops callback for each frame.
+     * Closes the expected frame rate range and stops the callback for each frame. This method must be called after start. After it is stopped, the DisplaySync configurations (such as the expected frame rate range and callback function) are retained and can be restarted at any time through start.
+     * The stop method disassociates DisplaySync from the UI context and window, and usually no specific UI context is required.
      * 
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @atomicservice [since 26.0.1]
@@ -155,9 +155,9 @@ declare namespace displaySync {
   }
 
   /**
-   * Creates a **DisplaySync** object, through which you can set the frame rate of the custom UI content.
+   * Creates a DisplaySync object, through which you can set the frame rate of the custom UI content.
    * 
-   * @returns { DisplaySync } **DisplaySync** object created.
+   * @returns { DisplaySync } Returns a DisplaySync object instance, which is used to set the frame rate range, register the frame callback function, and control the start and stop of the callback.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @atomicservice [since 26.0.1]
    * @since 11 dynamic
