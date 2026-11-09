@@ -27,6 +27,7 @@
  * @atomicservice
  * @since 8 dynamic
  * @since 23 static
+ * test
  */
 declare namespace hidebug {
   /**
