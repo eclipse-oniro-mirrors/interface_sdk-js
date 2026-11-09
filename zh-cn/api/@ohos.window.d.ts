@@ -1111,6 +1111,33 @@ declare namespace window {
      * @since 23 static
      */
     vsyncTimestamp: long;
+
+    /**
+     * 渲染该帧并将其发送至显示子系统所需的总耗时（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    totalDuration?: long;
+
+    /**
+     * 当前帧预期的垂直同步（VSync）起始时间戳（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    intendedVsyncTimestamp?: long;
+
+    /**
+     * 一帧中执行所有动画回调的总耗时（单位：纳秒）。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    animationDuration?: long;
   }
 
   /**
@@ -5358,7 +5385,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在快捷栏上显示图标及Hover缩略图。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -5370,7 +5397,7 @@ declare namespace window {
      * 如果为true，则当前窗口不会在多任务视图中显示。
      * 该参数只在同应用内生效，只适用于PC/2in1设备，并且需绑定托盘图标。
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static

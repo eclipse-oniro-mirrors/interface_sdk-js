@@ -428,7 +428,7 @@ export declare enum RenderStrategy {
    * 
    * 1. 离屏绘制模式相比在线绘制模式会带来额外的性能损失。
    * 2. 离屏绘制模式是指将内容绘制到主画布之前，先在一个额外的画布上完成绘制工作，然后将绘制结果绘制到主画布上。
-   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link common}或[前景色]{@link common}时才可使能离屏绘制模式。
+   * 3. 离屏绘制模式仅针对需要多层组件切圆角的场景使用，单组件需设置[clip]{@link CommonMethod#clip(value: boolean)}属性、[背景]{@link CommonMethod}或[前景色]{@link CommonMethod}时才可使能离屏绘制模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5134,6 +5134,36 @@ export declare enum RawInputEventType {
    * @since 26.0.0 static
    */
   MOUSE = 1
+}
+
+/**
+ * 定义Agent生成事件的输入管控模式。
+ *
+ * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+ * 注入的事件。管控仅适用于此类Agent生成的输入事件。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum AgentControlMode {
+  /**
+   * 允许Agent生成的输入操作，无需用户确认。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ALLOW = 0,
+
+  /**
+   * 阻止Agent生成的输入操作。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  DENY = 1
 }
 
 /**

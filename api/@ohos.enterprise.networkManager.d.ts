@@ -1942,6 +1942,22 @@ declare namespace networkManager {
    */
   function setEthernetConfig(admin: Want, networkInterface: string, config: InterfaceConfig): void;
 
+  /**
+   * Clears the DNS cache for a specified network. This API uses an asynchronous callback to return the result.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { number } netId - Network ID. The value must be greater than or equal to 100.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function clearDnsCache(netId: number): void;
+
 /**
    * Obtain a list of all folder paths that are shared through the network domain on the device.
    *

@@ -6249,7 +6249,7 @@ declare namespace audio {
      *
      * @param { boolean } mute - 应用自身给系统音频模块上报的静音状态。true表示应用将当前流静音，false表示取消静音。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800103 - Operation not permit at current state, there is no audio
+     * @throws { BusinessError } 6800103 - Operation not permitted at current state, there is no audio
      *     capturer running.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @stagemodelonly
@@ -12319,9 +12319,10 @@ declare namespace audio {
     SOURCE_TYPE_VOICE_CALL = 4,
 
     /**
-     * 语音通话场景的音频源（单独启动录制不会开启3A算法，需同时使用[STREAM_USAGE_VOICE_COMMUNICATION]{@link audio.StreamUsage}或
-     * [STREAM_USAGE_VIDEO_COMMUNICATION]{@link audio.StreamUsage}类型的AudioRender起播才会触发开启3A算法）。
-     *
+     * 语音通话场景的音频源。
+     * 在API版本23之前，单独启动录制不会开启3A算法，需同时使用{@link audio.StreamUsage.STREAM_USAGE_VOICE_COMMUNICATION}或
+     * {@link audio.StreamUsage.STREAM_USAGE_VIDEO_COMMUNICATION}类型播放才会触发开启3A算法。
+     * 在API版本23及更高的版本中，单独启动此类型的录制，也会开启3A算法。
      * SystemCapability.Multimedia.Audio.Core
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
@@ -16159,7 +16160,8 @@ declare namespace audio {
      *
      * 此接口仅基于特性本地安装状态查询，不依赖网络环境。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<Array<boolean>> } Promise对象，返回安装状态数组。每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16176,7 +16178,8 @@ declare namespace audio {
      *
      * 此接口仅基于特性本地安装状态查询，不依赖网络环境。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise对象，返回特性状态数组。
      *     每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -16194,8 +16197,9 @@ declare namespace audio {
      *
      * 调用此接口前，需确保设备已连接可用网络。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。最大长度为5。
-     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise对象，返回版本信息数组。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要查询的特性类型。
+     *     <br>最大长度为5。
+     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> }  Promise对象，返回版本信息数组。
      *     每个元素对应于featureTypes中相同索引处的特性。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16211,14 +16215,17 @@ declare namespace audio {
 
     /**
      * 根据指定的网络开始下载特性。使用Promise异步回调。
-     * 先调用{@link getNewVersionInfo}查询新版本；查询成功且状态变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}后调用本接口，
-     * 或者在{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}状态调用本接口继续下载，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}。
+     * 先调用{@link getNewVersionInfo}查询新版本，查询成功且状态变为
+     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}后调用本接口，
+     * 或者在{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}状态调用本接口继续下载，
+     * 调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}。
      * 下载成功后自动进入{@link audio.AudioSuiteFeatureStatus.INSTALLING}状态。
      *
      * 接口在开始下载后就返回，下载过程中可以通过
      * {@link onDownloadStatusChange}订阅的下载状态变化事件获取下载进度。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的功能的类型。
+     *     <br>最大长度为5。
      * @param { NetworkType } networkType - 下载的网络类型。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -16236,11 +16243,13 @@ declare namespace audio {
 
     /**
      * 暂停下载指定特性。使用Promise异步回调。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}。
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}后调用，
+     * 调用后状态会变为{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}。
      *
      * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}时调用本接口，接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要暂停的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要暂停的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16254,12 +16263,15 @@ declare namespace audio {
 
     /**
      * 取消下载指定特性。使用Promise异步回调。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用，
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用，
      * 调用后状态会变为{@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}。
      *
-     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或{@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用本接口，接口会返回成功，保持原有状态不变。
+     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.DOWNLOADING}或
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}时调用本接口，接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要取消的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要取消的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16273,12 +16285,15 @@ declare namespace audio {
 
     /**
      * 开始后台下载特性。使用Promise异步回调。
-     * 如果当前网络条件为Wi-Fi网络场景，系统音频服务会直接下载特性；如果非Wi-Fi网络，系统音频服务会在切换到Wi-Fi网络后自动进行下载。
-     * 可以在任意{@link audio.AudioSuiteFeatureStatus}状态调用。客户端进程退出后，系统音频服务会持续监听网络环境直到任务下载成功。
+     * 如果当前网络条件为Wi-Fi网络场景，系统音频服务会直接下载特性；
+     * 如果非Wi-Fi网络，系统音频服务会在切换到Wi-Fi网络后自动进行下载。
+     * 可以在任意{@link audio.AudioSuiteFeatureStatus}状态调用。
+     * 客户端进程退出后，系统音频服务会持续监听网络环境直到任务下载成功。
      *
      * 接口在发送命令后就返回，下载过程中可以通过{@link onDownloadStatusChange}订阅的下载状态变化事件获取下载进度。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要下载的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16292,11 +16307,14 @@ declare namespace audio {
 
     /**
      * 卸载已下载的特性。使用Promise异步回调。
-     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}后调用，调用后状态会变为{@link audio.AudioSuiteFeatureStatus.UNINSTALLING}则开始卸载。
+     * 应在特性状态为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}后调用，
+     * 调用后状态会变为{@link audio.AudioSuiteFeatureStatus.UNINSTALLING}则开始卸载。
      *
-     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}时调用本接口，接口会返回成功，保持原有状态不变。
+     * 当特性状态不为{@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}时调用本接口，
+     * 接口会返回成功，保持原有状态不变。
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要卸载的特性类型。最大长度为5。
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - 要卸载的特性类型。
+     *     <br>最大长度为5。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.

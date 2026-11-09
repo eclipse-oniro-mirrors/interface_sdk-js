@@ -22,7 +22,7 @@
  * 
  * >  **NOTE**
  * >
- * > - It is recommended to use this component together with the custom popup feature in [Popup Control]{@link common}.
+ * > - It is recommended to use this component together with the custom popup feature in [Popup Control]{@link CommonMethod}.
  * 
  * ###### Child Components
  * 

@@ -696,7 +696,7 @@ export declare interface SliderPrefixOptions extends SliderCustomContentOptions 
 export declare interface SliderSuffixOptions extends SliderCustomContentOptions {
 }
 /**
- * 支持除触摸热区以外的[通用属性]{@link common}。
+ * 支持除触摸热区以外的[通用属性]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1054,6 +1054,18 @@ export declare interface SliderAttribute extends CommonMethod {
      * @since 23 static
      */
     default trackColorMetrics(color: ColorMetricsLinearGradient | undefined): this;
+
+    /**
+     * 设置滑块选项。
+     *
+     * @param { SliderOptions } [options] - 滑块构造选项。
+     * @returns { SliderAttribute } Returns the instance of the SliderAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setSliderOptions(options?: SliderOptions): this;
 }
 
 /**

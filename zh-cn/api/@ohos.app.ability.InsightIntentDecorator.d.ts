@@ -151,6 +151,18 @@ declare interface IntentDecoratorInfo {
    * @since 20 dynamiconly
    */
   result?: Record<string, Object>;
+
+  /**
+   * 表示该意图是否可被三方应用调用。
+   * 取值为true表示该意图可被三方应用调用，取值为false表示该意图不可被三方应用调用。
+   * 默认值：false。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  exported?: boolean;
 }
 
 /**

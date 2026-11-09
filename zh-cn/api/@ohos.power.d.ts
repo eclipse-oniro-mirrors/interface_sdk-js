@@ -105,7 +105,7 @@ declare namespace power {
    * - 有屏的设备亮屏时为活动状态，灭屏时为非活动状态。
    * - 无屏的设备非休眠时为活动状态，休眠时为非活动状态。
    *
-   * @returns { boolean } 活动状态返回true，非活动状态返回false。
+   * @returns { boolean } 活动状态返回true，非活动状态或获取设备活动状态失败时返回false。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -150,8 +150,10 @@ declare namespace power {
 
   /**
    * 获取当前设备的电源模式。不同电源模式对应不同的设备行为策略，开发者可根据返回的模式值调整应用行为以适配当前模式。各模式定义及说明请参见DevicePowerMode。
+   * 如需获取当前设备的电源模式子模式，请使用[getPowerSubMode]{@link getPowerSubMode}。
    *
-   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、超级省电模式等。
+   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、扩展省电模式等。当获取当前设备的电源模式失败时返回0，
+   *     该值不在[DevicePowerMode](#devicepowermode9)枚举定义范围内。开发者应检查返回值是否为有效枚举值（600及以上）。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -179,6 +181,7 @@ declare namespace power {
 
   /**
    * 设置当前设备的电源模式，不同的电源模式会影响设备的性能与功耗策略。使用Promise异步回调。
+   * 如需同时设置电源模式及其子模式，请使用[setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}。
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
@@ -195,6 +198,41 @@ declare namespace power {
    * @since 23 static
    */
   function setPowerMode(mode: DevicePowerMode): Promise<void>;
+
+  /**
+   * 获取当前设备的电源模式子模式。各子模式定义及说明请参见DevicePowerSubMode。
+   * 如需获取当前设备的电源模式，请使用[getPowerMode]{@link getPowerMode}。
+   *
+   * @returns { DevicePowerSubMode } 电源模式子模式。当前电源模式不支持子模式时返回 SUB_MODE_INVALID。
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getPowerSubMode(): DevicePowerSubMode;
+
+  /**
+   * 设置当前设备的电源模式及其子模式。使用 Promise 异步回调。
+   * 如仅需设置电源模式，请使用[setPowerMode(promise)][setPowerMode(promise)]{@link setPowerMode(mode: DevicePowerMode)}或 [setPowerMode(callback)]{@link setPowerMode(mode: DevicePowerMode, callback: AsyncCallback<void>)}。
+   *
+   * @permission ohos.permission.POWER_OPTIMIZATION
+   * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
+   * @param { DevicePowerSubMode } [subMode] - 电源模式子模式。各模式含义请参见DevicePowerSubMode枚举说明。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+    * @throws { BusinessError } 4900301 - Failed to set the power mode. Possible causes:
+    *     <br>1. The power mode switching constraint is not met;
+    *     <br>2. The power mode does not support the sub-mode, or the sub-mode does not match the power mode.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode): Promise<void>;
 
   /**
    * 检测当前设备是否进入待机低功耗续航模式。待机模式下系统会采取降低功耗的策略，开发者应据此调整应用的后台任务和资源使用策略，避免在待机时执行高耗能操作。
@@ -369,7 +407,7 @@ declare namespace power {
      */
     MODE_PERFORMANCE,
     /**
-     * 表示超级省电模式。
+     * 表示扩展省电模式。此模式支持子模式，子模式定义见 [DevicePowerSubMode]{@link power.DevicePowerSubMode}。
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 9 dynamic
@@ -384,6 +422,47 @@ declare namespace power {
      * @since 23 static
      */
     MODE_CUSTOM_POWER_SAVE = 650
+  }
+
+  /**
+   * 电源模式子模式枚举。
+   *
+   * 枚举值由电源模式值和序号组成：
+   * - 前缀：子模式所属的电源模式枚举值。例如 603001 中的 603 表示该子模式属于[MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+   * - 后缀：同一电源模式下的子模式序号，从 001 开始递增。
+   *
+   * SUB_MODE_INVALID（-1）不遵循此规则，表示当前电源模式不支持子模式。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DevicePowerSubMode {
+    /**
+     * 非法子模式值。当前电源模式不支持子模式时使用此值。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_INVALID = -1,
+    /**
+     * 超级省电子模式。适用于电源模式 [MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_SUPER_POWER_SAVE = 603001,
+    /**
+     * 应急子模式。适用于电源模式[MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+     * 此值为 MODE_EXTREME_POWER_SAVE 的默认子模式。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_EMERGENCY = 603002
   }
 
   /**

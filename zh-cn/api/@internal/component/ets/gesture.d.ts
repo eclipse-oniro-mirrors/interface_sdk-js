@@ -3168,7 +3168,7 @@ declare class EventTargetInfo {
   /**
    * 返回当前组件的组件标识。
    *
-   * @returns { string } 当前组件的[组件标识]{@link common}。
+   * @returns { string } 当前组件的[组件标识]{@link CommonMethod}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

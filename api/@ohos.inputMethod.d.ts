@@ -26,6 +26,7 @@
  * @kit IMEKit
  */
 import type { Callback, AsyncCallback } from './@ohos.base';
+import inputMethodEngine from './@ohos.inputMethodEngine';
 import InputMethodSubtype from './@ohos.InputMethodSubtype';
 import { UIContext } from "./@ohos.arkui.UIContext";
 /*** if arkts dynamic */
@@ -2342,6 +2343,25 @@ declare namespace inputMethod {
     recvMessage(msgHandler?: MessageHandler): void;
 
     /**
+     * Requests system input capability. This API uses a promise to return the result.
+     * <br>
+     * <br>For {@link InputCapabilityType#TRANSLATION}, the current input method must be the system default
+     * input method; otherwise, the request is rejected.
+     *
+     * @param { InputCapabilityType } type - The input capability type.
+     * @returns { Promise } Promise that returns no result.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
+     * @throws { BusinessError } 12800009 - input method client detached.
+     * @throws { BusinessError } 12800010 - current ime application is not the system-configured default input method.
+     * @throws { BusinessError } 12800029 - the input type is not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    requestSystemInputCapability(type: InputCapabilityType): Promise<void>;
+
+    /**
      * Enables listening for the select-by-range event. This API uses an asynchronous callback to return the result.
      *
      * @param { 'selectByRange' } type - Type of the listener to set. The value is fixed at 'selectByRange'.
@@ -2994,6 +3014,27 @@ declare namespace inputMethod {
      * @since 23 static
      */
     offSetPreviewText(callback?:SetPreviewTextCallback): void;
+
+   /**
+     * <p>Subscribe 'setPreviewTextWithStyle' event.</p>
+     * <p>To support the preview text with style feature, developers should subscribe to this event before calling attach.</p>
+     *
+     * @param { SetPreviewTextWithStyleCallback } callback - the callback called when the input method sets preview text with style.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onSetPreviewTextWithStyle(callback: SetPreviewTextWithStyleCallback): void;
+   /**
+     * Unsubscribe 'setPreviewTextWithStyle' event.
+     *
+     * @param { SetPreviewTextWithStyleCallback } [callback] - optional, the callback called when the input method
+     * sets preview text with style.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+   offSetPreviewTextWithStyle(callback?:SetPreviewTextWithStyleCallback): void;
 
    /**
      * <p>Subscribe 'finishTextPreview' event.</p>
@@ -4157,7 +4198,91 @@ declare namespace inputMethod {
    */
   export type SetPreviewTextCallback = (text: string, range: Range) => void;
 
- /**
+  /**
+   * Callback triggered when the input method framework needs to display the text preview with style.
+   *
+   * @param { string } text - Preview text content.
+   * @param { Range } range - Selected range of the text.
+   * @param { PreviewTextStyle } style - Style of the preview text.
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type SetPreviewTextWithStyleCallback = (text: string, range: Range, style: PreviewTextStyle) => void;
+
+  /**
+   * Enumerates the underline styles for preview text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * No underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * Solid underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * Wavy underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * Dashed underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
+
+  /**
+   * Style of the preview text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface PreviewTextStyle {
+    /**
+     * Underline style.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * Underline color in 0xRRGGBB format. Optional; when not specified, the underline color
+     * should follow the application's theme color. If transparency is provided, it is invalid
+     * and will be ignored by the editor.
+     * The value must be an integer. Default: when not provided, no color is passed to the edit box;
+     * the edit box handles it and defaults to following the cursor color.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
+  }
+
+  /**
    * Enumerates the modes of capitalizing the first letter of a text.
    * <br>
    * | Name | Value | Description |
@@ -4266,6 +4391,29 @@ declare namespace inputMethod {
      * @since 23 static
      */
     SERVICE_ABNORMAL
+  }
+  /**
+   * Enumerates the input capability types.
+   * <br>
+   * <br>Used by {@link inputMethod.InputMethodController.requestSystemInputCapability} to specify the system input
+   * capability to request.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InputCapabilityType {
+    /**
+     * Translation input capability.
+     * <br>
+     * <br>Usage scenarios: Used to request the input method to switch to translation mode. The current input method
+     * must be the system default input method; otherwise, the request is rejected with error 12800010.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TRANSLATION = 0
   }
   /**
    * Defines additional options for binding an input method.

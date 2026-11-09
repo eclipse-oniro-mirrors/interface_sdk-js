@@ -27,7 +27,7 @@
  * 
  * > **NOTE**
  * >
- * > - If [universal attributes]{@link common} and [universal events]{@link common} are set for **ExceptionPromptV2**, 
+ * > - If [universal attributes]{@link CommonMethod} and [universal events]{@link CommonMethod} are set for **ExceptionPromptV2**, 
  * > the compilation toolchain will generate an additional node \_\_Common\_\_ and mount the universal attributes or 
  * > universal events on \_\_Common\_\_, rather than directly applying them to **ExceptionPromptV2** itself. 
  * > This may cause the set universal attributes or universal events to not take effect or behave unexpectedly. 

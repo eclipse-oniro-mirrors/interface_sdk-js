@@ -376,8 +376,9 @@ export declare interface SelectionContainerAttribute extends CommonMethod {
    *
    * @returns { SelectionContainerAttribute } returns the instance of the SelectionContainerAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setSelectionContainerOptions(): this;
 }
@@ -401,8 +402,9 @@ export declare function SelectionContainer(content_?: CustomBuilder): SelectionC
  * @param { CustomBuilderT<SelectionContainerAttribute> } style - 设置SelectionContainer属性的回调。
  * @returns { SelectionContainerAttribute } returns the instance of the SelectionContainerAttribute.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function SelectionContainer(

@@ -42,7 +42,7 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, TextOverflow, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, TextOverflow, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
@@ -3487,6 +3487,7 @@ export declare enum RepeatMode {
 /**
  * 模糊样式类型。
  *
+ * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -3507,7 +3508,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    Regular,
+    Regular = 1,
     /**
      * 厚材质模糊。
      *
@@ -3515,7 +3516,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    Thick,
+    Thick = 2,
     /**
      * 近距景深模糊。
      *
@@ -3523,7 +3524,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_THIN,
+    BACKGROUND_THIN = 3,
     /**
      * 中距景深模糊。
      *
@@ -3531,7 +3532,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_REGULAR,
+    BACKGROUND_REGULAR = 4,
     /**
      * 远距景深模糊。
      *
@@ -3539,7 +3540,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_THICK,
+    BACKGROUND_THICK = 5,
     /**
      * 超远距景深模糊。
      *
@@ -3547,7 +3548,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_ULTRA_THICK,
+    BACKGROUND_ULTRA_THICK = 6,
     /**
      * 关闭模糊。
      *
@@ -3555,7 +3556,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    NONE,
+    NONE = 7,
     /**
      * 组件超轻薄材质模糊。
      *
@@ -3742,7 +3743,7 @@ export declare enum ModalTransition {
      * @stagemodelonly
      * @since 23 static
      */
-    NONE,
+    NONE = 1,
     /**
      * 全屏模态透明度渐变动画。
      *
@@ -3750,7 +3751,7 @@ export declare enum ModalTransition {
      * @stagemodelonly
      * @since 23 static
      */
-    ALPHA
+    ALPHA = 2
 }
 /**
  * 继承自[BlurStyleOptions]{@link BlurStyleOptions}。
@@ -7346,6 +7347,30 @@ export type TripleLengthDetents = [
     SheetSize | Length | undefined
 ];
 /**
+ * 模糊快照优化选项。设置该对象后，将开启模糊优化。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface BlurSnapshotOptions {
+  /**
+   * 设置模糊快照是否开启冻结优化。开启后，在模糊快照时应用冻结优化以降低渲染开销；未设置或设置为false时，冻结优化关闭，采用常规渲染方式。
+   *
+   * 拉起半模态后支持动态切换该参数值。
+   *
+   * 默认值：false
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  enableFreeze?: boolean;
+}
+/**
  * 继承自[BindOptions]{@link BindOptions}。
  * 
  * 半模态页面内容选项。
@@ -7957,6 +7982,18 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 半模态模糊快照优化选项，用于降低模糊渲染的计算开销。当使用blurStyle或systemMaterial设置模糊或材质效果时发现功耗明显增加时，可开启模糊优化。开启后，若半模态配置了blurStyle或systemMaterial，其模糊效果将使用快照渲染以降低计算开销；若未设置blurStyle或systemMaterial，则开启enableBlurSnapshot不产生模糊优化效果。该属性在半模态展示后不支持和undefined之间的动态切换，若在展示后尝试切换则设置不生效。半模态的POPUP类型不支持模糊优化，若在POPUP类型上设置enableBlurSnapshot=true则该设置不生效。
+     *
+     * 默认值：undefined，关闭模糊优化
+     *
+     * @default undefined
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    blurSnapshot?: BlurSnapshotOptions;
     /**
      * 标题栏悬浮模式。
      * - STANDARD：标题栏与内容上下排布，无重叠。
@@ -11541,6 +11578,22 @@ export declare interface CommonMethod {
      * @since 23 static
      */
     default hitTestBehavior(value: HitTestMode | undefined): this;
+
+    /**
+     * 设置组件对Agent生成事件的输入管控级别。
+     *
+     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+     * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+     * 输入事件或其他注入事件。
+     *
+     * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
+     * @returns { this } 返回当前组件。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default agentControlMode(value: AgentControlMode | undefined): this;
+
     /**
      * Called to specify how to perform the touch test on the children of this component.
      *
@@ -14170,15 +14223,25 @@ export declare interface CommonMethod {
      */
     default onGestureCollectIntercept(callback: GestureCollectInterceptCallback): this;
     /**
-     * Set system-styled materials for the component. The material effect behaves differently on devices with different
-     * level of computing powers. On devices with lower computing power, it affects attributes such as the
-     * backgroundColor, borderWidth, borderColor, shadow. On devices with higher computing power, it adds a filter effect
-     * at the system material layer, which can produce an effect similar to glass.
+     * 设置组件的系统材质。不同系统材质对应不同的属性影响效果，该接口可以影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、
+     * 阴影shadow、材质层滤镜materialFilter效果，影响的属性与设备材质等级相关，参考ImmersiveMaterial。
      *
-     * @param { SystemUiMaterial | undefined } material - System-styled material. Undefined indicates reverting to
-     *     the effect of no system material. [since 23]
-     * @returns { this } [since 23]
-     * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+     * > **说明：**
+     * >
+     * > - 通过该属性设置组件的系统材质时，仅在Navigation或NavDestination的标题栏，或横向Tabs中barPosition为BarPosition.End的底部TabBar中生效。
+     * > - ImmersiveMaterial只有在支持沉浸式材质的设备上设置才有效果，在不支持沉浸式材质的设备上可设置但无效果，
+     *     可通过isImmersiveMaterialSupported判断设备是否支持沉浸式材质。在不支持沉浸式材质的设备上，设置ImmersiveMaterial后，组件的样式仍由已设置的通用属性决定，
+     *     ImmersiveMaterial不会覆盖任何通用属性。
+     * > - 当systemMaterial与其影响的通用属性（背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow、材质层滤镜materialFilter）同时设置时，
+     *     二者会发生冲突。除阴影外，总体原则为后设置的生效；对于阴影属性，哪个生效取决于ImmersiveMaterial的applyShadow参数。
+     * > - 对于所有设备算力档位均需要材质颜色的场景，可以通过ImmersiveMaterial的materialColor参数承载，不再设置backgroundColor属性。
+     * > - 该样式仅限当前组件使用，不会影响或继承至子组件。
+     *
+     * @param { SystemUiMaterial | undefined } material - 组件的系统材质对象。仅在支持沉浸式材质的设备上设置才有效果，在不支持沉浸式材质的设备上可设置但无效果，
+     *   可通过isImmersiveMaterialSupported判断设备是否支持沉浸式材质。设置为undefined时恢复为无材质的效果，
+     *   若同时设置了材质对象影响的通用属性，会恢复至对应通用属性设置的值，冲突的属性由材质对象决定，参考ImmersiveMaterial。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi [since 23 - 24]
      * @publicapi [since 26.0.0]
      * @stagemodelonly
@@ -14907,9 +14970,9 @@ export type VisualEffect = uiEffect.VisualEffect;
  */
 export type Filter = uiEffect.Filter;
 /**
- * SystemUiMaterial
+ * 系统材质对象基类。
  *
- * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi [since 23 - 24]
  * @publicapi [since 26.0.0]
  * @stagemodelonly
@@ -15449,7 +15512,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+     *    <br>true：支持鼠标左键按下拖动滚动。
+     *    <br>false：不支持鼠标左键按下拖动滚动。
+     *    <br>undefined：使用默认值。
+     *    <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

@@ -664,7 +664,7 @@ export interface IDataSource<T> {
 }
 
 /**
-* 支持[拖拽排序]{@link common}和
+* 支持[拖拽排序]{@link CommonMethod}和
 * [debugLine](docroot://reference/apis-arkui/arkui-ts/ts-rendering-control-lazyforeach-sta.md#debugline24)属性。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

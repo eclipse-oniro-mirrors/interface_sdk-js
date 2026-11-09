@@ -89,7 +89,7 @@ declare interface PolygonOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -179,7 +179,7 @@ declare class PolygonAttribute extends CommonShapeMethod<PolygonAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * ###### Child Components
  *

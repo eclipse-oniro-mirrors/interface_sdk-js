@@ -355,7 +355,7 @@ export declare interface UIGridEvent extends UIScrollableCommonEvent {
 export type OnGridScrollIndexCallback = (first: int, last: int) => void;
 
 /**
- * 除支持[通用属性]{@link common}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还支持
+ * 除支持[通用属性]{@link CommonMethod}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还支持
  * 以下属性：
  *
  * > **说明：**
@@ -566,7 +566,7 @@ export declare interface GridAttribute extends ScrollableCommonMethod {
   /**
    * 设置是否开启鼠标框选。开启框选后，可以配合GridItem的[selected]{@link GridItemAttribute#selected}属性和
    * [onSelect]{@link UIScrollableCommonEvent#onSelect}事件获取GridItem的选中状态，还可以通过
-   * [多态样式]{@link common}设置GridItem的选中态样式（GridItem默认无选中态样式）。
+   * [多态样式]{@link CommonMethod}设置GridItem的选中态样式（GridItem默认无选中态样式）。
    *
    * @param { boolean | undefined } value
    * @returns { this }

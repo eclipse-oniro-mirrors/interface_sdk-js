@@ -39,7 +39,7 @@ declare enum SizeType {
    * @deprecated since 9
    * @useinstead grid_col/GridColColumnOption and grid_row/GridRowColumnOption
    */
-  Auto = 0,
+  Auto,
 
   /**
    * 最小宽度类型设备，宽度≤320vp。

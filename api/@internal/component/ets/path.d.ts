@@ -96,7 +96,7 @@ declare interface PathOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -187,7 +187,7 @@ declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * ###### Child Components
  *

@@ -7062,6 +7062,53 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * Sets a key-value pair of user data on the current navigation entry.
+     *
+     * The user data is associated with the NavigationEntry lifecycle. The current navigation entry
+     * refers to the active entry in the navigation history. When the entry is destroyed
+     * (e.g., via history navigation or clearHistory), the user data is cleared. If a value with
+     * the same key already exists, it will be overwritten.
+     *
+     * @param { string } key - Key of the user data.
+     * @param { string } value - Value of the user data.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * Obtains the user data value associated with the specified key on the current navigation entry.
+     *
+     * @param { string } key - Key of the user data.
+     * @returns { string } Value of the user data, or an empty string if the key does not exist.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * Removes the user data associated with the specified key from the current navigation entry.
+     * If the key does not exist, this API does nothing.
+     *
+     * @param { string } key - Key of the user data to remove.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
   }
 
   /**

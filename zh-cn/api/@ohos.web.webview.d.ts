@@ -6498,6 +6498,53 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * 在当前导航条目上设置用户数据的键值对。
+     *
+     * 用户数据与导航入口生命周期相关联。当前导航条目
+     * 指导航历史记录中的活动条目。当条目被销毁时
+     * （例如，通过历史导航或clearHistory）清除用户数据。如果一个具有
+     * 相同的键已经存在，它将被覆盖。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @param { string } value - 用户数据的价值。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * 获取与当前导航条目上的指定键关联的用户数据值。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @returns { string } 用户数据的值，如果键不存在，则为空字符串。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * 从当前导航条目中删除与指定键关联的用户数据。
+     * 如果密钥不存在，则此API不执行任何操作。
+     *
+     * @param { string } key - 要删除的用户数据的密钥。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
   }
 
   /**

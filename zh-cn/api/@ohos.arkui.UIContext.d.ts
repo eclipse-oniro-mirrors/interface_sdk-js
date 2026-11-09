@@ -1018,6 +1018,7 @@ export class PromptAction {
    * <br> 3. Parameter verification failed.
    * @throws { BusinessError } 100001 - Internal error.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
    * @crossplatform
    * @since 10 dynamiconly
    * @deprecated since 11
@@ -1565,6 +1566,135 @@ export declare type NodeIdentity = string | number;
  * @since 20 dynamic
  */
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
+
+/**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由[NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点时上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为
+   * [NodeSensitiveInputEventType.TOUCH]{@link NodeSensitiveInputEventType#TOUCH}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为
+   * [NodeSensitiveInputEventType.MOUSE]{@link NodeSensitiveInputEventType#MOUSE}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为
+   * [NodeSensitiveInputEventType.KEY]{@link NodeSensitiveInputEventType#KEY}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
 
 /**
  * 定义了用于在UIObserver中监控特定手势触发信息的回调类型。
@@ -2556,6 +2686,47 @@ export class UIObserver {
    * @since 20 dynamic
    */
   off(type: 'nodeRenderState', nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过
+   * [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中的**isAgent**判断事件是否由系统Agent生成，
+   * 或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被
+   * [agentControlMode]{@link CommonMethod#agentControlMode}阻止的Agent生成事件仍会上报，以便感知对
+   * 敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。string类型表示通过[id]{@link CommonMethod#id}属性设置的
+   *     inspector ID；number类型表示通过FrameNode的[getUniqueId]{@link FrameNode#getUniqueId}获取的唯一ID。
+   * @param { NodeSensitiveInputCallback } callback - 用于返回结果的回调，通过**NodeSensitiveInputInfo**提供
+   *     输入事件信息，通过[FrameNode]{@link FrameNode}提供组件信息。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 注销监听**nodeIdentity**指定节点输入事件的回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。
+   * @param { NodeSensitiveInputCallback } [callback] - 待注销的目标监听器。未传入此参数时，注销指定节点的
+   *     全部敏感输入事件监听器。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * Registers a callback function to be called when text field's content is changed.
@@ -4648,6 +4819,29 @@ export class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  uiContext: UIContext;
+}
+
+/**
 * UIContext实例对象。
 *
 * > **说明：**
@@ -4682,6 +4876,42 @@ export class UIContext {
    * @since 22 dynamic
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
+   * 注册标识符在应用运行期间不复用。
+   *
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
+   * @returns { int } 本次快捷键绑定的唯一注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，其他绑定不受影响。如果移除的是当前生效的绑定，
+   * 则最近一次仍未注销的同快捷键绑定恢复生效。标识符不存在或已注销时，不执行任何操作。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取当前[调用作用域](docroot://ui/arkts-global-interface.md#基本概念)的UIContext，调用作用域不明确时返回undefined。
@@ -5103,23 +5333,14 @@ export class UIContext {
   showAlertDialog(options: AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions): void;
 
   /**
-   * actionSheet display.
-   *
-   * @param { ActionSheetOptions } value - Options.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
    * Shows an action sheet in the given settings.
    *
    * @param { ActionSheetOptions } value - Parameters of the action sheet.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   showActionSheet(value: ActionSheetOptions): void;
 
