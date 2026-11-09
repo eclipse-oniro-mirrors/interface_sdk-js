@@ -238,7 +238,7 @@ declare namespace hidebug {
   /**
    * 获取系统服务信息。
    *
-   * @permission ohos.permission.DUMP
+    * @permission ohos.permission.DUMP，仅系统应用可申请。
    * @param { int } serviceid - 系统服务ID，用于标识要获取信息的系统服务。取值由系统定义，取值范围[0, 255]。传入无效值时返回错误码401。
    * @param { int } fd - 文件描述符，接口会向该fd写入数据。传入无效文件描述符时返回错误码401。
    * @param { Array<string> } args - 系统服务的dump接口参数列表。string长度的最大值为254，超出部分将会被截断。
@@ -367,54 +367,61 @@ declare namespace hidebug {
    * @since 23 static
    */
   interface NativeMemInfo {
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 实际占用的物理内存大小(比例分配共享库占用的内存)，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Pss + SwapPss。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     pss: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 占用的虚拟内存大小(包括共享库所占用的内存)，以KB为单位，计算方式：/proc/{pid}/statm: size * 4。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     vss: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 实际占用的物理内存大小(包括共享库占用)，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Rss。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     rss: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 共享脏内存大小，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Shared_Dirty。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     sharedDirty: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 私有脏内存大小，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Private_Dirty。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     privateDirty: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 共享净内存大小，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Shared_Clean。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     sharedClean: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 私有干净内存大小，以KB为单位，计算方式：/proc/{pid}/smaps_rollup: Private_Clean。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     privateClean: bigint;
   }
 
@@ -443,33 +450,39 @@ declare namespace hidebug {
    * @since 23 static
    */
   interface MemoryLimit {
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 应用程序进程可用的物理内存限制，以KB为单位，实际当前系统未对进程可用物理内存做限制，但是进程的可用物理内存仍然不会
+      *     超过设备的实际最大可用物理内存，当前设备的物理内存使用情况可通过
+      *     [hidebug.getSystemMemInfo]{@link hidebug.getSystemMemInfo}获取。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     rssLimit: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 进程的虚拟内存限制，以KB为单位。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     vssLimit: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 当前线程的 JS VM 堆大小限制，以KB为单位。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     vmHeapLimit: bigint;
-    /**
-     *
-     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-     * @since 12 dynamic
-     * @since 23 static
-     */
+     /**
+      * 当前进程的 JS 堆内存大小限制，以KB为单位。
+      *
+      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+      * @since 12 dynamic
+      * @since 23 static
+      */
     vmTotalHeapSize: bigint;
   }
 
@@ -603,11 +616,16 @@ declare namespace hidebug {
   }
 
   /**
-   *
-   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-   * @since 12 dynamic
-   * @since 23 static
-   */
+    * 支持trace使用场景的标签，用户可通过[hitrace](docroot://dfx/hitrace.md)抓取指定标签的trace内容。
+    *
+    * > **注意**：
+    * >
+    * > 以下标签实际值由系统定义，可能随版本升级而发生改变，为避免升级后出现兼容性问题，在生产中应直接使用标签名称而非标签数值。
+    *
+    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+    * @since 12 dynamic
+    * @since 23 static
+    */
   namespace tags {
     /**
      * 能力管理标签，hitrace命令行工具对应tagName:ability。
@@ -889,8 +907,8 @@ declare namespace hidebug {
    * @param { long[] } tags - trace范围，详情请见[tags]{@link hidebug.tags}。
    * @param { TraceFlag } flag - 详情请见[TraceFlag]{@link hidebug.TraceFlag}。
    * @param { int } limitSize - 开启trace文件大小限制，单位为Byte，取值范围（0, 500MB]。超出范围时返回错误码401。
-   * @returns { string } 返回trace文件名路径（接口返回真实物理路径，若应用内需要访问，请参考
-   *     应用沙箱路径和真实物理路径的对应关系进行路径转换）。
+    * @returns { string } 返回trace文件名路径（接口返回真实物理路径，若应用内需要访问，请参考
+    *     [应用沙箱路径和真实物理路径的对应关系](docroot://file-management/app-sandbox-directory.md#应用沙箱路径和真实物理路径的对应关系)进行路径转换）。
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
@@ -972,7 +990,7 @@ declare namespace hidebug {
    *
    * 采集trace返回的.sys文件在目录下最多存储3份，数量大于等于3份时再次调用接口会抛出错误码11400120。
    *
-   * 接口不支持在输入法应用中使用。
+    * 接口不支持在[输入法应用](docroot://inputmethod/ime-kit-intro.md)中使用。
    *
    * @param { RequestTraceConfig } config - trace采集配置信息。
    * @returns { Promise<string> } Promise对象，返回以.sys作为后缀的trace文件的应用沙箱路径。
@@ -987,16 +1005,21 @@ declare namespace hidebug {
   function requestTrace(config: RequestTraceConfig): Promise<string>;
 
   /**
-   * 描述用于存储GC统计信息的键值对。该类型不支持多线程操作，如果应用中存在多线程同时访问，需加锁保护。
-   *
-   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
-   * @since 12 dynamic
-   * @since 23 static
-   */
+    * 描述用于存储GC统计信息的键值对。该类型不支持多线程操作，如果应用中存在多线程同时访问，需加锁保护。包含以下键值信息：
+    * <br/>"ark.gc.gc-count"：当前线程的GC次数。
+    * <br/>"ark.gc.gc-time"：当前线程触发的GC总耗时，以ms为单位。
+    * <br/>"ark.gc.gc-bytes-allocated"：当前线程Ark虚拟机已分配的内存大小，以B为单位。
+    * <br/>"ark.gc.gc-bytes-freed"：当前线程GC成功回收的内存，以B为单位。
+    * <br/>"ark.gc.fullgc-longtime-count"：当前线程超长fullGC次数。
+    *
+    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+    * @since 12 dynamic
+    * @since 23 static
+    */
   type GcStats = Record<string, long>;
 
   /**
-   * 获取系统GC统计信息。
+    * 获取系统[GC](docroot://arkts-utils/gc-introduction.md)统计信息。
    *
    * @returns { GcStats } 系统GC统计信息。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -1006,7 +1029,7 @@ declare namespace hidebug {
   function getVMRuntimeStats(): GcStats;
 
   /**
-   * 根据参数获取指定的系统GC统计信息。
+    * 根据参数获取指定的系统[GC](docroot://arkts-utils/gc-introduction.md)统计信息。
    *
    * @param { string } item - 所需统计信息的类型。可获取的统计信息类型如下：<br/>"ark.gc.gc-count"：当前线程的GC次数。<br/>"ark.gc.gc-time"：当前线程触发的GC总耗
    *     时，以ms为单位。<br/>"ark.gc.gc-bytes-allocated"：当前线程Ark虚拟机已分配的内存大小，以B为单位。<br/>"ark.gc.gc-bytes-freed"：当前线程GC成功回收的内存，以
@@ -1025,8 +1048,8 @@ declare namespace hidebug {
   /**
    * 设置应用的文件描述符数量、线程数量、JS内存或Native内存资源限制。
    *
-   * 主要应用场景在于构造内存泄漏故障，参见订阅资源泄漏事件（ArkTS）、
-   * 订阅资源泄漏事件（C/C++）。
+    * 主要应用场景在于构造内存泄漏故障，参见[订阅资源泄漏事件（ArkTS）](docroot://dfx/hiappevent-watcher-resourceleak-events-arkts.md)、
+    * [订阅资源泄漏事件（C/C++）](docroot://dfx/hiappevent-watcher-resourceleak-events-ndk.md)。
    *
    * > **注意**：
    * >
@@ -1167,8 +1190,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-   * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，需使用API version 20之后的
-   * > rawheap-translator工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
+    * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，需使用API version 20之后的
+    * > [rawheap-translator](docroot://tools/rawheap-translator.md)工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
    * >
    * > 该接口影响[dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}的结果。
    *
@@ -1180,8 +1203,8 @@ declare namespace hidebug {
   function setJsRawHeapTrimLevel(level: JsRawHeapTrimLevel): void;
 
   /**
-   * 为当前线程转储虚拟机的原始堆快照，并生成的rawheap格式文件，使用Promise异步回调完成。该文件可通过
-   * rawheap-translator工具转化为heapsnapshot格式文件进行解析。
+    * 为当前线程转储虚拟机的原始堆快照，并生成的rawheap格式文件，使用Promise异步回调完成。该文件可通过
+    * [rawheap-translator工具](docroot://tools/rawheap-translator.md)转化为heapsnapshot格式文件进行解析。
    *
    * > **注意**：
    * >
@@ -1189,9 +1212,9 @@ declare namespace hidebug {
    * >
    * > 建议在开发者模式下调用该接口，可免除调用配额限制，当设置的开发者选项开关打开并重启设备后即可生效。
    *
-   * @param { boolean } needGC - 转储堆快照前是否需要GC。true：需要GC。false：不需GC。默认值：true。
-   * @returns { Promise<string> } Promise对象，返回生成的快照文件路径（
-   *     应用沙箱内路径）。
+    * @param { boolean } needGC - 转储堆快照前是否需要GC。true：需要GC。false：不需GC。默认值：true。
+    * @returns { Promise<string> } Promise对象，返回生成的快照文件路径（
+    *     [应用沙箱内路径](docroot://file-management/app-sandbox-directory.md#应用沙箱路径和真实物理路径的对应关系)）。
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
    * @throws { BusinessError } 11400108 - Failed to wait for the child process to finish.
@@ -1208,8 +1231,8 @@ declare namespace hidebug {
   function dumpJsRawHeapData(needGC?: boolean): Promise<string>;
 
   /**
-   * 为当前线程转储虚拟机的原始堆快照，并支持清除nodeId缓存。生成的文件为rawheap格式，使用Promise异步回调完成。该文件可通过
-   * rawheap-translator工具转化为heapsnapshot格式文件进行解析。
+    * 为当前线程转储虚拟机的原始堆快照，并支持清除nodeId缓存。生成的文件为rawheap格式，使用Promise异步回调完成。该文件可通过
+    * [rawheap-translator工具](docroot://tools/rawheap-translator.md)转化为heapsnapshot格式文件进行解析。
    *
    * > **注意**：
    * >
@@ -1218,9 +1241,9 @@ declare namespace hidebug {
    * > 建议在开发者模式下调用该接口，可免除调用配额限制，当设置的开发者选项开关打开并重启设备后即可生效。
    *
    * @param { boolean } needGC - 转储堆快照前是否需要GC。true：需要GC；false：不需要GC。
-   * @param { boolean } needClean - 转储堆快照前是否需要清除nodeId。true：需要清除；false：不需要清除。
-   * @returns { Promise<string> } Promise对象，返回生成的快照文件路径（
-   *     应用沙箱内路径）。
+    * @param { boolean } needClean - 转储堆快照前是否需要清除nodeId。true：需要清除；false：不需要清除。
+    * @returns { Promise<string> } Promise对象，返回生成的快照文件路径（
+    *     [应用沙箱内路径](docroot://file-management/app-sandbox-directory.md#应用沙箱路径和真实物理路径的对应关系)）。
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
    * @throws { BusinessError } 11400108 - Failed to wait for the child process to finish.
@@ -1238,8 +1261,8 @@ declare namespace hidebug {
   function dumpJsRawHeapData(needGC: boolean, needClean: boolean): Promise<string>;
 
   /**
-   * 为当前线程或其所属进程生成虚拟机的原始堆快照，并支持清除nodeId缓存，生成的文件为rawheap格式。使用Promise异步回调。文件可通过
-   * rawheap-translator工具转换为heapsnapshot格式文件进行解析。
+    * 为当前线程或其所属进程生成虚拟机的原始堆快照，并支持清除nodeId缓存，生成的文件为rawheap格式。使用Promise异步回调。文件可通过
+    * [rawheap-translator工具](docroot://tools/rawheap-translator.md)转换为heapsnapshot格式文件进行解析。
    *
    * > **注意**：
    * >
@@ -1250,8 +1273,8 @@ declare namespace hidebug {
    * @param { boolean } needGC - 转储堆快照前是否需要GC。true：需要GC；false：不需要GC。
    * @param { boolean } needClean - 转储堆快照前是否需要清除nodeId。true：需要清除；false：不需要清除。
    * @param { boolean } processDump - 是否转储当前线程所属进程的原始堆快照。true：转储当前线程所属进程的原始堆快照。
-   * @returns { Promise<Array<string>> } Promise对象，返回生成的快照文件路径数组（
-   *     应用沙箱内路径）。
+    * @returns { Promise<Array<string>> } Promise对象，返回生成的快照文件路径数组（
+    *     [应用沙箱内路径](docroot://file-management/app-sandbox-directory.md#应用沙箱路径和真实物理路径的对应关系)）。
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
    * @throws { BusinessError } 11400108 - Failed to wait for the child process to finish.
