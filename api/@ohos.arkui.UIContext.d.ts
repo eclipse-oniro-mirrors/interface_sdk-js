@@ -4423,7 +4423,7 @@ export declare class ContextMenuController {
  * > [onIdle]{@link FrameCallback#onIdle} method to implement specific service logic.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel
+ * @stagemodelonly
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic

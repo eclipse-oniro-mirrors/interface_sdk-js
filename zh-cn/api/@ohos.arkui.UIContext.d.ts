@@ -3992,7 +3992,7 @@ export declare class ContextMenuController {
 * > [onFrame]{@link FrameCallback#onFrame}或[onIdle]{@link FrameCallback#onIdle}方法，实现具体的业务逻辑。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @FaAndStageModel
+ * @stagemodelonly
  * @crossplatform
  * @atomicservice
  * @since 12 dynamic
