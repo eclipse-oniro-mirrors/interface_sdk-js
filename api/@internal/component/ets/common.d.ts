@@ -974,6 +974,7 @@ declare class WritableSystemEnvKey<T> extends SystemEnvKey<T> {}
  * @since 26.0.0 dynamic
  */
 declare class ReadonlySystemEnvKey<T> extends SystemEnvKey<T> {}
+
 /**
  * Defines the type of the key for a custom environment variable.
  *
