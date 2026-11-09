@@ -2756,12 +2756,23 @@ declare namespace util {
      *     <br>- **Urgency.MEDIUM**: 紧急程度中等, GC触发阈值介于LOW和HIGH之间。
      *     <br>- **Urgency.HIGH**: 紧急程度高, GC触发阈值低,
      *     适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     *
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @since 26.1.0 dynamiconly
      */
     static hintGC(level?: UrgencyLevel): void;
+
+    /**
+     * 开启按比例的 handle/原始类型存储收缩优化。默认关闭；一旦开启将无法关闭。开启前使用传统的保守收缩策略。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static enableHandleMemoryOptimization(): void;
   }
 
   /**
