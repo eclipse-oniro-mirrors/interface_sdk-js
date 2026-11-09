@@ -272,11 +272,10 @@ declare namespace PiPWindow {
     defaultWindowSizeType?: int;
 
     /**
-     * Whether to enable PiP corner snapping. When this feature is enabled, the screen is divided into four hot zones
-     * by the horizontal and vertical midlines, forming the top-left, top-right, bottom-left, and bottom-right areas.
-     * When the PiP window is started, it appears in the corresponding corner based on the position where it disappeared
-     * last time. The user can drag the window freely, and once the user releases the window, it automatically snaps to
-     * the screen edge.
+     * Whether the PiP window automatically snaps to screen corners. When this feature is enabled, the screen is divided
+     * into four hot zones (top-left, top-right, bottom-left, and bottom-right). When the PiP window is displayed, it
+     * appears in the corresponding corner of the screen based on the position where it disappears last time. The user
+     * can drag the window freely, and once the user releases the window, it automatically snaps to the screen edge.
      *
      * **true**: enables corner snapping.
      *
