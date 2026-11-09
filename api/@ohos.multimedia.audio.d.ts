@@ -5669,9 +5669,9 @@ declare namespace audio {
      * registered clients will receive the callback.
      *
      * @param { Callback<AudioSessionDeactivatedEvent> } callback -
-     *     Callback invoked for the audio session deactivated event. [since 23]
-     * @throws { BusinessError } 6800101 - Parameter verification failed. [since 23]
-     * @syscap SystemCapability.Multimedia.Audio.Core [since 23]
+     *     Callback invoked for the audio session deactivated event.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Core
      * @atomicservice [since 26.0.0]
      * @since 23 static
      */
@@ -5700,9 +5700,9 @@ declare namespace audio {
      * Unsubscribes to audio session deactivated event.
      *
      * @param { Callback<AudioSessionDeactivatedEvent> } callback - Callback invoked for
-     *     the audio session deactivated event. [since 23]
-     * @throws { BusinessError } 6800101 - Parameter verification failed. [since 23]
-     * @syscap SystemCapability.Multimedia.Audio.Core [since 23]
+     *     the audio session deactivated event.
+     * @throws { BusinessError } 6800101 - Parameter verification failed.
+     * @syscap SystemCapability.Multimedia.Audio.Core
      * @atomicservice [since 26.0.0]
      * @since 23 static
      */
