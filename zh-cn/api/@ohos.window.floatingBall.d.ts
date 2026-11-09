@@ -455,7 +455,7 @@ declare namespace floatingBall {
     /**
      * 闪控球标题文字颜色，为不带透明度的十六进制颜色格式（例如'#008EF5'或'#FF008EF5'）。不传入时根据背景色色度自动填充，若背景色为亮色则填充黑色('#E5000000')，若背景色为暗色则填充白色('#E5FFFFFF')。配置此属性时，必须配置背景色backgroundColor，否则返回错误码1300019。
      *
-     * @default 根据'backgroundColor'设置不同的默认值。当'backgroundColor'为浅色时，默认值为'#E5000000'，否则为'#E5FFFFFF'。
+     * @default 根据'backgroundColor'设置不同的默认值。当'backgroundColor'为亮色时，默认值为'#E5000000'，否则为'#E5FFFFFF'。
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -474,7 +474,7 @@ declare namespace floatingBall {
     /**
      * 闪控球内容文字颜色，为不带透明度的十六进制颜色格式（例如'#008EF5'或'#FF008EF5'）。不传入时根据背景色色度自动填充，若背景色为亮色则填充黑色('#99000000')，若背景色为暗色则填充白色('#99FFFFFF')。配置此属性时，必须配置背景色backgroundColor，否则返回错误码1300019。
      *
-     * @default 根据'backgroundColor'设置不同的默认值。当'backgroundColor'为浅色时，默认值为'#99000000'，否则为'#99FFFFFF'。
+     * @default 根据'backgroundColor'设置不同的默认值。当'backgroundColor'为亮色时，默认值为'#99000000'，否则为'#99FFFFFF'。
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
