@@ -2950,6 +2950,19 @@ declare class Component {
    * @test
    */
   getOriginalText(): Promise<string>;
+
+  /**
+   * 判断此控件是否可触达。若控件的中心点被层叠顺序中zIndex值更高的其他控件所覆盖，则该控件不可触达。
+   *
+   * @returns { Promise<boolean> } - Promise对象，返回控件是否可触达。true：可触达。false：不可触达。
+   * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
+   * @syscap SystemCapability.Test.UiTest
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   * @test
+   */
+  isReachable(): Promise<boolean>;
  }
 
 /**

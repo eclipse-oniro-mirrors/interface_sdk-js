@@ -2882,6 +2882,19 @@ declare class Component {
    * @test
    */
   getOriginalText(): Promise<string>;
+  /**
+   * Checks whether this component is reachable. A component is unreachable if its center point
+   * is covered by another component with a higher zIndex value in the stacking order.
+   *
+   * @returns { Promise<boolean> } - Promise used to return whether the component is reachable.
+   * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
+   * @syscap SystemCapability.Test.UiTest
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   * @test
+   */
+  isReachable(): Promise<boolean>;
  }
 
 /**
