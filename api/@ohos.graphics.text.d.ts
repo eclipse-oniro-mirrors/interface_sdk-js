@@ -3753,8 +3753,7 @@ declare namespace text {
    * >
    * > The figure shows the typesetting boundaries for the string "j" or "E".
    * >
-   * > !
-   * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+   * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @crossplatform [since 24]
@@ -3936,8 +3935,7 @@ declare namespace text {
      * >
      * > The figure shows the typesetting boundaries for the string "j" or "E".
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } Describes the typographic boundaries of a text line.
      * @syscap SystemCapability.Graphics.Drawing
@@ -4250,8 +4248,7 @@ declare namespace text {
      * >
      * > The figure shows the typesetting boundaries for the string "j" or "E".
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } Typographic boundaries of the run.
      * @syscap SystemCapability.Graphics.Drawing
