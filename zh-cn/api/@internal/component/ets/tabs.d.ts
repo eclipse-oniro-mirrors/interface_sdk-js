@@ -391,6 +391,18 @@ declare class TabsController {
    * @since 13 dynamic
    */
   setTabBarOpacity(opacity: number): void;
+
+  /**
+   * 获取选项卡的当前显示模式。
+   *
+   * @returns { TabBarDisplayMode } 当前显示模式。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  getBarDisplayMode(): TabBarDisplayMode;
 }
 
 /**
@@ -995,6 +1007,237 @@ declare type OnTabsContentWillChangeCallback = (currentIndex: number, comingInde
  * @since 23 dynamic
  */
 declare type OnTabsContentDidScrollCallback = (selectedIndex: number, index: number, position: number, mainAxisLength: number) => void;
+
+/**
+ * 枚举标签栏的显示样式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum TabBarStyle {
+  /**
+   * 底部标签栏样式。标签栏的位置可以通过**Tabs***的**垂直**属性来调整。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  BOTTOM = 0,
+
+  /**
+   * 侧边栏样式。标签栏显示为侧边栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  SIDEBAR = 1,
+
+  /**
+   * 可适应的侧边栏样式。标签栏可以在底部标签栏和侧边栏模式之间切换
+   * 基于Tabs容器的大小。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  SIDEBAR_ADAPTABLE = 2,
+
+  /**
+   * 顶部浮动页签栏样式。页签栏始终以浮动形式显示在顶部。
+   * 使用此样式时，**BarPosition**设置将被忽略。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOP = 3,
+
+  /**
+   * 自适应的顶部浮动页签栏样式。页签栏的位置会自动切换到
+   * 基于Tabs容器大小断点的顶部和底部浮动。
+   * 使用此样式时，**BarPosition**设置将被忽略。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOP_ADAPTABLE = 4
+}
+
+/**
+ * 定义可搜索侧边栏标签栏的选项。
+ *
+ * @param { number } tabIndex - 要筛选的选项卡的索引。
+ * @param { string } text - 当前搜索文本。
+ * @returns { boolean } 如果选项卡与搜索条件匹配，则返回**true**，否则返回**false**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare type TabsSidebarSearchFilterCallback = (tabIndex: number, text: string) => boolean;
+
+/**
+ * 定义可搜索侧边栏标签栏的选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare interface TabsSidebarSearchableOptions {
+  /**
+   * 设置搜索文本框中的文本输入。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  searchText?: ResourceStr;
+
+  /**
+   * 搜索输入为空时显示的占位符文本。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  placeholder?: ResourceStr;
+
+  /**
+   * 当搜索文本发生变化时触发的回调。
+   *
+   * @param { string } text - The current search text.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  searchCallback?: (text: string) => void;
+
+  /**
+   * 过滤器函数，用于根据搜索文本确定是否应显示选项卡。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  searchFilter?: TabsSidebarSearchFilterCallback;
+}
+
+/**
+ * 枚举不同Tabs容器大小下标签栏的实际显示方式。
+ * 此枚举用于[barDisplayModeBreakpoint]{@link TabsAttribute#barDisplayModeBreakpoint}中指定
+ * 不同断点大小的显示模式。只有当**TabBarStyle**设置为
+ * **侧栏自适应表**或**侧栏**。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare enum TabBarDisplayMode {
+  /**
+   * 底部显示标签栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  BOTTOM_TABBAR = 0,
+
+  /**
+   * 标签栏显示为侧边栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  SIDEBAR = 1,
+
+  /**
+   * 页签栏显示为顶部浮动栏。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOP_TABBAR = 2
+}
+
+/**
+ * 定义不同Tabs容器大小的值类型。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare interface TabsBreakpointType<T> {
+  /**
+   * 小Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sm?: T;
+
+  /**
+   * 中等Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  md?: T;
+
+  /**
+   * 大Tabs容器大小的值。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  lg?: T;
+}
 
 /**
 * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
@@ -1619,6 +1862,157 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.0.0 dynamic
    */
   barFloatingStyle(style: Optional<FloatingTabBarStyle>): TabsAttribute;
+
+  /**
+   * 设置tab bar的显示样式。
+   *
+   * @param { Optional<TabBarStyle> } style - 标签栏显示样式.BOTTOM**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  barStyle(style: Optional<TabBarStyle>): TabsAttribute;
+
+  /**
+   * 设置侧边栏标签栏的位置。
+   * 侧边栏标签栏的位置不受**垂直***属性的影响。
+   * 它始终位于Tabs容器的开始或结束一侧，无论**垂直**设置如何。
+   *
+   * @param { Optional<BarPosition> } position - 侧边栏标签栏的位置。开始**。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarPosition(position: Optional<BarPosition>): TabsAttribute;
+
+  /**
+   * 设置侧边栏标签栏的标题内容。
+   *
+   * @param { Optional<ComponentContent> } header - Header content of the sidebar tab bar.
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarHeader(header: Optional<ComponentContent>): TabsAttribute;
+
+  /**
+   * 设置侧边栏标签栏的搜索选项。
+   *
+   * @param { TabsSidebarSearchableOptions } [searchOptions] - 侧边栏标签栏的搜索选项。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarSearchable(searchOptions?: TabsSidebarSearchableOptions): TabsAttribute;
+
+  /**
+   * 为不同的Tabs容器大小设置tab栏的显示方式。
+   *
+   * @param { Optional<TabsBreakpointType<TabBarDisplayMode>> } style - Display mode of the tab bar for different Tabs
+   *     container sizes.
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  barDisplayModeBreakpoint(style: Optional<TabsBreakpointType<TabBarDisplayMode>>): TabsAttribute;
+
+  /**
+   * TabBar显示方式改变后触发。
+   *
+   * @param { Optional<Callback<TabBarDisplayMode>> } callback - 显示模式变更回调。
+   * @returns { TabsAttribute } -选项卡的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  onBarDisplayModeChange(callback: Optional<Callback<TabBarDisplayMode>>): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡图标的选定颜色。
+   *
+   * @param { Optional<ResourceColor> } value - 侧边栏模式下tab图标的选中颜色。
+   *     <br>默认值：**#ff182431**。
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarSelectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡文本的选定颜色。
+   *
+   * @param { Optional<ResourceColor> } value - 侧边栏模式下选项卡文本的选定颜色。
+   *     <br>默认值：**#ff182431**。
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarSelectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡图标的未选中颜色。
+   *
+   * @param { Optional<ResourceColor> } value - 侧边栏模式下选项卡图标的未选中颜色。
+   *     <br>默认值：**#99182431**。
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarUnselectedIconColor(value: Optional<ResourceColor>): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下选项卡文本的未选中颜色。
+   *
+   * @param { Optional<ResourceColor> } value - 侧边栏模式下选项卡文本的未选中颜色。
+   *     <br>默认值：**#99182431**。
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarUnselectedTextColor(value: Optional<ResourceColor>): TabsAttribute;
+
+  /**
+   * 设置侧边栏模式下tab板的选择颜色。
+   *
+   * @param { Optional<ResourceColor> } value - 侧边栏模式下tab板选择的颜色。
+   *     <br>默认值：**#19007DFF**。
+   * @returns { TabsAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  sidebarSelectedBoardColor(value: Optional<ResourceColor>): TabsAttribute;
 }
 
 /**
