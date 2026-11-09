@@ -538,6 +538,26 @@ export declare interface NavDestinationModuleInfo {
 }
 
 /**
+ * 自定义页面状态保存回调。
+ *
+ * @returns { Record<string, Object> | null } 自定义页面状态。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export type SaveStateCallback = () => Record<string, Object> | null;
+
+/**
+ * 自定义页面状态恢复回调。
+ *
+ * @param { Record<string, Object> | null } savedState - onSaveState保存的自定义页面状态。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export type RestoreStateCallback = (savedState: Record<string, Object> | null) => void;
+
+/**
  * 支持[通用属性]{@link ./../../@internal/component/ets/common}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1156,6 +1176,35 @@ export declare interface NavDestinationAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default fullScreenOverlay(fullScreenOverlay: boolean | undefined): this;
+
+  /**
+   * 设置自定义页面状态保存回调。
+   *
+   * 当页面被隐藏时触发。保存自定义页面状态以备恢复。
+   * 用于创建页面的初始参数由导航单独保留。
+   * 状态对象必须是可序列化的。
+   *
+   * @param { SaveStateCallback | undefined } callback - 自定义状态保存回调
+   * @returns { NavDestinationAttribute } 返回NavDestinationAttribute的实例。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  default onSaveState(callback: SaveStateCallback | undefined): this;
+
+  /**
+   * 设置自定义页面状态恢复回调。
+   *
+   * 当页面重构时触发。由onSaveState保存的自定义状态将传递给此回调。
+   * 如果没有保存自定义状态，则传递Null。
+   *
+   * @param { RestoreStateCallback | undefined } callback - 自定义状态恢复回调
+   * @returns { NavDestinationAttribute } 返回NavDestinationAttribute的实例。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  default onRestoreState(callback: RestoreStateCallback | undefined): this;
 
   /**
    * 设置navDestination选项。

@@ -32,6 +32,12 @@ import image from './@ohos.multimedia.image';
  * 本模块提供管理通知扩展的能力，具体包括：打开通知扩展订阅设置界面、订阅和取消订阅通知扩展、获取和设置
  * [通知授权](docroot://notification/notification-glossary.md#notification-authorization通知授权)状态。
  *
+ * > **说明：**
+ * >
+ * > 通过本模块订阅的通知扩展事件不通过本模块的接口回调投递，而是通过
+ * > [NotificationSubscriberExtensionAbility]{@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility}
+ * > 的回调（如onReceiveMessage）投递，相关回调在该ExtensionAbility实例的主线程上执行。
+ *
  * @syscap SystemCapability.Notification.Notification
  * @since 22 dynamic
  * @since 23 static
@@ -287,7 +293,7 @@ declare namespace notificationExtensionSubscription {
    *     2.Memory operation error. 3.The user does not exist.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
-   * @throws { BusinessError } 1600022 - The application does not implement the
+   * @throws { BusinessError } 1600023 - The application does not implement the
    *     NotificationSubscriberExtensionAbility.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

@@ -468,7 +468,7 @@ declare namespace wifiManager {
    * @since 26.1.0 dynamic&static
    */
   function disconnectFromCandidateConfig(networkId: int, blockDuration: int): void;
-  
+
   /**
    * Connect to Wi-Fi hotspot by networkId.
    *

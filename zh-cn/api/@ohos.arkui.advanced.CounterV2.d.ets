@@ -14,7 +14,25 @@
  */
 
 /**
- * @file
+ * @file  CounterV2组件用于精确调节数值，包含列表型、紧凑型、数值内联型和日期内联型四种类型，适用于购物车数量调节、日期选择等场景。
+ *
+ * 该组件基于
+ * [状态管理（V2）](docroot://ui/state-Management/arkts-state-Management-overview.md#状态管理v2)实现，相较于
+ * [状态管理（V1）](docroot://ui/state-Management/arkts-state-Management-overview.md#状态管理v1)，
+ * 状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制
+ * CounterV2的数据和状态，实现更高效的用户界面刷新。
+ *
+ * #######子组件
+ *
+ * 无。
+ *
+ * > **说明：**
+ * >
+ * >-如果CounterV2设置[通用属性]{@link CommonMethod} and [universal events]{@link CommonMethod} are set for 
+ * > **CounterV2**,the compilation toolchain generates an additional node \_\_Common\_\_ and attaches the universal 
+ * > attributes or universal events to \_\_Common\_\_, rather than directly applying them to **CounterV2** itself. 
+ * > This may cause the universal attributes or universal events you set to not take effect or behave unexpectedly. 
+ * > Therefore, setting universal attributes and universal events for **CounterV2** is not recommended.
  * @kit ArkUI
  */
 
@@ -684,21 +702,7 @@ declare class CounterV2Options {
 }
 
 /**
- * CounterV2组件用于精确调节数值，包含列表型、紧凑型、数值内联型和日期内联型四种类型，适用于购物车数量调节、日期选择等场景。
- *
- * 该组件基于[状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)实现，相较于
- * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v1)，状态管理（V2）增强了对数据对象的深度观察与管理能力，不再局限于组
- * 件层级。借助状态管理（V2），开发者可以通过该组件更灵活地控制CounterV2的数据和状态，实现更高效的用户界面刷新。
- *
- * > **说明：**
- * >
- * > - 如果CounterV2设置[通用属性]{@link ./@internal/component/ets/common}或[通用事件]{@link ./@internal/component/ets/common}，编译工具链会
- * > 额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到CounterV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议CounterV2设置通用属性和
- * > 通用事件。
- *
- * ###### 子组件
- *
- * 无
+ * 定义CounterV2。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -485,9 +485,9 @@ declare class ShapeAttribute extends CommonMethod<ShapeAttribute> {
  *
  * ###### Child Components
  *
- * The following child components are supported: [Rect]{@link rect}, [Path]{@link path}, [Circle]{@link circle},
- * [Ellipse]{@link ellipse}, [Polyline]{@link polyline}, [Polygon]{@link polygon}, [Image]{@link image},
- * [Text]{@link text}, [Column]{@link column}, [Row]{@link row}, and **Shape**.
+ * The following child components are supported: [Rect]{@link @global:Rect}, [Path]{@link @global:Path}, [Circle]{@link @global:Circle},
+ * [Ellipse]{@link @global:Ellipse}, [Polyline]{@link @global:Polyline}, [Polygon]{@link @global:Polygon}, [Image]{@link @global:Image},
+ * [Text]{@link @global:Text}, [Column]{@link @global:Column}, [Row]{@link @global:Row}, and **Shape**.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

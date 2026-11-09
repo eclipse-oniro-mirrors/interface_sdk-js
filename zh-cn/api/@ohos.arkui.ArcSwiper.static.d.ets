@@ -147,8 +147,8 @@ export declare class ArcDotIndicator {
    * 设置弧形指示器的方向。未通过该接口设置时，形指示器的方向默认为6点钟方向。
    *
    * @param { ArcDirection | undefined } direction - 设置弧形指示器的方向。<br/>取值为undefined时，弧形指示器的方向为6点钟方向。
-   * @returns { ArcDotIndicator }
-   提供弧形圆点指示器属性及功能。
+   * @returns { ArcDotIndicator } 提供弧形圆点指示器属性及功能。
+   * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -158,8 +158,8 @@ export declare class ArcDotIndicator {
    * 设置弧形指示器中，未选中导航点的颜色。未通过该接口设置时，未选中导航点的颜色默认为'#A9FFFFFF'。
    *
    * @param { ResourceColor | undefined } color - 设置弧形指示器中，未选中导航点的颜色。<br/>取值为undefined时，未选中导航点的颜色为'#A9FFFFFF'。
-   * @returns { ArcDotIndicator }
-   提供弧形圆点指示器属性及功能。
+   * @returns { ArcDotIndicator } 提供弧形圆点指示器属性及功能。
+   * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -169,8 +169,8 @@ export declare class ArcDotIndicator {
    * 设置弧形指示器中，选中导航点的颜色。未通过该接口设置时，选中导航点的颜色默认为'#FF5EA1FF'。
    *
    * @param { ResourceColor | undefined } color - 设置弧形指示器中，选中导航点的颜色。<br/>取值为undefined时，选中导航点的颜色为'#FF5EA1FF'。
-   * @returns { ArcDotIndicator }
-   提供弧形圆点指示器属性及功能。
+   * @returns { ArcDotIndicator } 提供弧形圆点指示器属性及功能。
+   * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -181,8 +181,8 @@ export declare class ArcDotIndicator {
    *
    * @param { ResourceColor | undefined } color - 设置弧形指示器被长按时，弧形指示器的颜色。<br/>取值为undefined时，弧形指示器被长按时，弧形指示器的颜色为'#FF404040'
    *     。
-   * @returns { ArcDotIndicator }
-   提供弧形圆点指示器属性及功能。
+   * @returns { ArcDotIndicator } 提供弧形圆点指示器属性及功能。
+   * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -193,8 +193,8 @@ export declare class ArcDotIndicator {
    *
    * @param { LinearGradient | undefined } color - 设置弧形指示器的遮罩渐变色。<br/>取值为undefined时，弧形指示器的遮罩渐变色起始颜色为'#00000000'，结束颜色为'#
    *     FF000000'。
-   * @returns { ArcDotIndicator }
-   提供弧形圆点指示器属性及功能。
+   * @returns { ArcDotIndicator } 提供弧形圆点指示器属性及功能。
+   * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly
    * @since 26.0.0 static
    */

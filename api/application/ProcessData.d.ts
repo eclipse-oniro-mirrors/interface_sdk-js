@@ -87,7 +87,8 @@ declare class ProcessData {
   isContinuousTask: boolean;
 
   /**
-   * Whether the process is a resident task. **true** if yes, **false** otherwise.
+   * Whether the process is a resident process. The value true means the process is a resident process,
+   *  and false means the opposite.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @since 14 dynamic

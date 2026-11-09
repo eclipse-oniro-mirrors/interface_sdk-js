@@ -42,7 +42,7 @@ declare type Resource = import('../api/global/resource').Resource;
 /**
  * 长度类型，用于描述尺寸单位。
  *
- * @unionmember { string } 需要显式指定[像素单位]{@link ./common}，如'10px'，也可设置百分比字符串，如'100%'。<br/>**说明：** <br/>不指定像素单位时，
+ * @unionmember { string } 需要显式指定[像素单位]{@link CommonMethod}，如'10px'，也可设置百分比字符串，如'100%'。<br/>**说明：** <br/>不指定像素单位时，
  * 默认单位vp，如'10'，等同于10。
  * @unionmember { number } 默认单位vp。
  * @unionmember { Resource } 资源引用类型，引入系统资源或者应用资源中的尺寸。
@@ -1426,8 +1426,8 @@ declare interface Bias {
  *
  * > **说明：**
  * >
- * > 在[Row]{@link ./row}、[Column]{@link ./column}、[RelativeContainer]{@link ./relative_container}组件中，width、height设置auto表
- * > 示自适应子组件。在[TextInput]{@link ./text_input}组件中，width设置auto表示自适应文本宽度。
+ * > 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，width、height设置auto表
+ * > 示自适应子组件。在[TextInput]{@link @global:TextInput}组件中，width设置auto表示自适应文本宽度。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2061,7 +2061,7 @@ declare interface AccessibilityOptions {
 }
 
 /**
- * 设置组件的无障碍操作的可选参数，用于限制或修改屏幕朗读等辅助应用发起的操作行为。仅[Slider]{@link ./slider}组件支持使用。在其他组件使用该接口时，编译环节可正常通过，但接口功能不生效。
+ * 设置组件的无障碍操作的可选参数，用于限制或修改屏幕朗读等辅助应用发起的操作行为。仅[Slider]{@link @global:Slider}组件支持使用。在其他组件使用该接口时，编译环节可正常通过，但接口功能不生效。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2074,7 +2074,7 @@ declare interface AccessibilityActionOptions {
   /**
    * 无障碍手势触发的无障碍滚动操作中的组件操作步数。默认值基于组件默认值。
    * 不支持的组件配置不生效。
-   * 当前支持组件：[slider]{@link ./slider}，用于slider组件聚焦后通过手势上下扫动触发slider组件的滑动操作。滑动距离：scrollStep*
+   * 当前支持组件：[slider]{@link @global:Slider}，用于slider组件聚焦后通过手势上下扫动触发slider组件的滑动操作。滑动距离：scrollStep*
    * [step](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-slider.md#slideroptions)。取值范围：
    * [1, ([max](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-slider.md#slideroptions) - [min](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-slider.md#slideroptions))/[step](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-slider.md#slideroptions)]，
    * 默认值为1。超出取值范围时取默认值1；在取值范围内，scrollStep为非整数时向下取整。

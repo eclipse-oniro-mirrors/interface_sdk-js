@@ -428,15 +428,15 @@ declare namespace curves {
    *     <br>取值范围：[0, +∞)
    *     <br> **说明：**  
    *     <br>设置小于0的值时，按默认值0处理。
-   *     <br>弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前
+   *     <br>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前
    *     的速度。时间不能归一，故不能通过该曲线的interpolate函数获得插值。
    * @returns { ICurve } 曲线对象。
    *     <br>**说明：**  
-   *     <br>弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前
+   *     <br>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前
    *     的速度。时间不能归一，故不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -467,14 +467,14 @@ declare namespace curves {
    *     <br>**说明：** 
    *     <br>设置小于0的值时，按默认值0.25处理。
    *     <br>弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线。如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。
-   *     <br>[animation]{@link ./@internal/component/ets/common}、[animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于
+   *     <br>[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于
    *     responsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的interpolate函数获得插值。
    * @returns { ICurve } 曲线对象。
    *     <br>**说明：** 
    *     <br>1、弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线；如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。
-   *     <br>2、[animation]{@link ./@internal/component/ets/common}、[animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于
+   *     <br>2、[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于
    *     responsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -501,9 +501,9 @@ declare namespace curves {
    *     <br>**说明：** 
    *     <br>设置的值小于等于0时，按1处理。
    * @returns { ICurve } 曲线对象。
-   *     <br>**说明：** 弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}等动画参数中的duration参数不生效，动画持续时间取决于
+   *     <br>**说明：** 弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}等动画参数中的duration参数不生效，动画持续时间取决于
    *     interpolatingSpring动画曲线参数。时间不能归一，故不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -561,11 +561,11 @@ declare namespace curves {
    *     1为过阻尼，运动过程中逐渐趋于目标值。<br/>默认值：0.825<br/>取值范围：[0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.825处理。
    * @param { number } [overlapDuration] - 弹性动画衔接时长。发生动画继承时，如果前后两个弹性动画response不一致，response参数会在overlapDuration时间内平滑过渡。<br
    *     />默认值：0<br/>单位：秒<br/>取值范围：
-   *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0处理。<br/>弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、[animateTo]{@link ./@internal/component/ets/common}、[pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于trailOptimizedSpringMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的interpolate函数获得插值。
+   *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0处理。<br/>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于trailOptimizedSpringMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的interpolate函数获得插值。
    * @param { TrailOptimization } [trail] - 尾迹优化配置。
-   * @returns { ICurve } 曲线对象。<br/>**说明：** <br/>弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于
+   * @returns { ICurve } 曲线对象。<br/>**说明：** <br/>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于
    *     trailOptimizedSpringMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -582,12 +582,12 @@ declare namespace curves {
    * @param { number } [dampingFraction] - 解释同springMotion中的dampingFraction。<br/>默认值：0.86<br/>取值范围：
    *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.86处理。
    * @param { number } [overlapDuration] - 解释同springMotion中的overlapDuration。<br/>默认值：0.25<br/>单位：秒<br/>取值范围：
-   *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.25处理。<br/>弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线。如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>[animation]{@link ./@internal/component/ets/common}、[animateTo]{@link ./@internal/component/ets/common}、[pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于trailOptimizedResponsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的interpolate函数获得插值。
+   *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.25处理。<br/>弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线。如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于trailOptimizedResponsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的interpolate函数获得插值。
    * @param { TrailOptimization } [trail] - 尾迹优化配置。
    * @returns { ICurve } 曲线对象。<br/>**说明：** <br/>1. 弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲
-   *     线；如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>2. [animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}中的duration参数不生效，动画持续时间取决于
+   *     线；如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>2. [animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}中的duration参数不生效，动画持续时间取决于
    *     trailOptimizedResponsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -609,9 +609,9 @@ declare namespace curves {
    * @param { number } damping - 阻尼。用于描述系统在受到扰动后震荡及衰减的情形。阻尼越大，弹性运动的震荡次数越少、震荡幅度越小。<br/>取值范围：(0, +∞)<br/>**说明：** <br/>设置的值
    *     小于等于0时，按1处理。
    * @param { TrailOptimization } [trail] - 尾迹优化配置。
-   * @returns { ICurve } 曲线对象。<br/>**说明：** 弹性动画曲线为物理曲线，[animation]{@link ./@internal/component/ets/common}、
-   *     [animateTo]{@link ./@internal/component/ets/common}、
-   *     [pageTransition]{@link ./@internal/component/ets/page_transition}等动画参数中的duration参数不生效，动画持续时间取决于
+   * @returns { ICurve } 曲线对象。<br/>**说明：** 弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、
+   *     [animateTo]{@link CommonMethod}、
+   *     [pageTransition]{@link @global:PageTransitionEnter}等动画参数中的duration参数不生效，动画持续时间取决于
    *     trailOptimizedInterpolatingSpring动画曲线参数。时间不能归一，故不能通过该曲线的[interpolate]{@link curves.ICurve.interpolate}函数获得插值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

@@ -554,7 +554,7 @@ declare type OnNativeLoadCallback = (event?: object) => void;
  *
  * 除通用属性外，还支持以下属性。
  *
- * 从API版本12开始，当type设置为**SURFACE**或**TEXTURE**时，支持[通用事件]{@link ./common}。
+ * 从API版本12开始，当type设置为**SURFACE**或**TEXTURE**时，支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 12]
@@ -679,6 +679,17 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
    * @since 18 dynamic
    */
   enableTransparentLayer(enabled: boolean): XComponentAttribute;
+
+  /**
+   * 为XComponent启用surface可见性生命周期。
+   *
+   * @param { Optional<boolean> } isVisibilityLifecycle - 是否启用surface可见性生命周期。
+   * @returns { XComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enableSurfaceVisibilityLifecycle(isVisibilityLifecycle: Optional<boolean>): XComponentAttribute;
 }
 
 /**

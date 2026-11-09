@@ -69,7 +69,7 @@ declare enum ItemState {
    *
    * **说明：**
    *
-   * 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link swiper}替代。
+   * 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link @global:Swiper}替代。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -98,11 +98,11 @@ declare enum ItemState {
 }
 
 /**
-* 用作[Stepper]{@link stepper}组件的页面子组件。
+* 用作[Stepper]{@link @global:Stepper}组件的页面子组件。
 *
 * > **说明：**
 *
-* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link swiper}替代。
+* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link @global:Swiper}替代。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -115,12 +115,12 @@ declare enum ItemState {
 interface StepperItemInterface {
 
   /**
-   * 创建[Stepper]{@link stepper}组件的页面子组件。
+   * 创建[Stepper]{@link @global:Stepper}组件的页面子组件。
    *
    * > **说明：**
    *
    * > 从API version 8开始支持，从API version 22开始废弃，建议使用
-   * > [Swiper]{@link ./swiper}替代。
+   * > [Swiper]{@link @global:Swiper}替代。
    *
    * @returns { StepperItemAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -214,11 +214,11 @@ declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
 declare const StepperItemInstance: StepperItemAttribute;
 
 /**
-* 用作[Stepper]{@link stepper}组件的页面子组件。
+* 用作[Stepper]{@link @global:Stepper}组件的页面子组件。
 *
 * > **说明：**
 *
-* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link swiper}替代。
+* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link @global:Swiper}替代。
 *
 * ###### 子组件
 *

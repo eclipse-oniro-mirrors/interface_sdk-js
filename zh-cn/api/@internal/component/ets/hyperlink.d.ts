@@ -51,7 +51,7 @@ interface HyperlinkInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 20]
@@ -88,7 +88,7 @@ declare class HyperlinkAttribute extends CommonMethod<HyperlinkAttribute> {
  *
  * ###### 子组件
  *
- * 可以包含[Image]{@link ./image}子组件。
+ * 可以包含[Image]{@link @global:Image}子组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 20]

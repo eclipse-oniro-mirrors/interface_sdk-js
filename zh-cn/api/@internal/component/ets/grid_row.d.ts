@@ -316,7 +316,7 @@ declare enum BreakpointsReference {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  WindowSize = 0,
+  WindowSize,
 
   /**
    * 以容器为参照。断点计算基于GridRow组件自身尺寸，适用于需要根据组件容器尺寸变化进行响应式布局的场景，例如GridRow嵌套在其他容器中时。
@@ -327,7 +327,7 @@ declare enum BreakpointsReference {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  ComponentSize = 1
+  ComponentSize,
 }
 
 /**
@@ -363,7 +363,7 @@ declare enum GridRowDirection {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Row = 0,
+  Row,
 
   /**
    * 栅格元素按照逆序行方向排列，适用于RTL（从右到左）语言布局或需要反向排列的场景。
@@ -374,7 +374,7 @@ declare enum GridRowDirection {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  RowReverse = 1
+  RowReverse,
 }
 
 /**
@@ -513,7 +513,7 @@ declare interface GridRowOptions {
 /**
  * 栅格布局可以为布局提供规律性的结构，解决多尺寸多设备的动态布局问题，保证不同设备上各个模块的布局一致性。
  * 
- * 栅格容器组件，仅可以和栅格子组件([GridCol]{@link ./grid_col})在栅格布局场景中使用。
+ * 栅格容器组件，仅可以和栅格子组件([GridCol]{@link @global:GridCol})在栅格布局场景中使用。
  * 
  * 支持根据设备尺寸和断点动态调整列数与间距，实现响应式布局。
  *
@@ -595,7 +595,7 @@ declare class GridRowAttribute extends CommonMethod<GridRowAttribute> {
 /**
  * 栅格布局可以为布局提供规律性的结构，解决多尺寸多设备的动态布局问题，保证不同设备上各个模块的布局一致性。
  * 
- * 栅格容器组件，仅可以和栅格子组件([GridCol]{@link ./grid_col})在栅格布局场景中使用。
+ * 栅格容器组件，仅可以和栅格子组件([GridCol]{@link @global:GridCol})在栅格布局场景中使用。
  * 
  * 支持根据设备尺寸和断点动态调整列数与间距，实现响应式布局。
  *

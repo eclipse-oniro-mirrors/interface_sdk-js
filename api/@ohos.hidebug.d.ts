@@ -575,6 +575,18 @@ declare namespace hidebug {
   function getAppVMObjectUsedSize(): bigint;
 
   /**
+   * Obtains the memory usage of ArkTS shared heap objects in the virtual machine.
+   *
+   * @returns { bigint } The memory usage of shared heap ArkTS objects, in KB.
+   * @throws { BusinessError } 11400104 - VM instance exception.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  function getAppSharedHeapObjectUsedSize(): bigint;
+
+  /**
    * Obtains the memory information of application processes by reading the data of the **\/proc/{pid}/smaps_rollup** and
    * **\/proc/{pid}/statm** nodes. This API uses a promise to return the result.
    *

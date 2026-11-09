@@ -155,7 +155,7 @@ declare enum NavRouteMode {
 }
 
 /**
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -206,7 +206,7 @@ declare class NavRouterAttribute extends CommonMethod<NavRouterAttribute> {
 *
 * ###### 子组件
 *
-* 必须包含两个子组件，其中第二个子组件必须为[NavDestination]{@link nav_destination}。
+* 必须包含两个子组件，其中第二个子组件必须为[NavDestination]{@link @global:NavDestination}。
 *
 * > **说明：**
 * >

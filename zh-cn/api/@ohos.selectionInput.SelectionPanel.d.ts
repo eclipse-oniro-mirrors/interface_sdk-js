@@ -42,7 +42,6 @@ export interface PanelInfo {
   /**
    * 划词面板类型枚举，有两种面板可供选择，详见[PanelType]{@link PanelType}。
    *
-   * @default MENU_PANEL
    * @syscap SystemCapability.SelectionInput.Selection
    * @systemapi [since 20 - 23]
    * @publicapi [since 24]

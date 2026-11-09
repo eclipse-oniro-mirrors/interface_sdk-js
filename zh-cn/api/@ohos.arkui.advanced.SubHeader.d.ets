@@ -303,7 +303,7 @@ export declare class SelectOptions {
  */
 export declare class SymbolOptions {
   /**
-   * 设置[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}大小。
+   * 设置[SymbolGlyph]{@link @global:SymbolGlyph}大小。
    * 
    * number类型取值范围：大于等于0。
    * 
@@ -320,7 +320,7 @@ export declare class SymbolOptions {
   fontSize?: number | string | Resource;
 
   /**
-   * 设置[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}颜色。
+   * 设置[SymbolGlyph]{@link @global:SymbolGlyph}颜色。
    * 
    * 默认值：不同渲染策略下默认值不同。
    *
@@ -333,7 +333,7 @@ export declare class SymbolOptions {
   fontColor?: Array<ResourceColor>;
 
   /**
-   * 设置[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}粗细。
+   * 设置[SymbolGlyph]{@link @global:SymbolGlyph}粗细。
    * 
    * number类型取值[100,900]，取值间隔为100，默认为400，取值越大，字体越粗。
    * 
@@ -350,7 +350,7 @@ export declare class SymbolOptions {
   fontWeight?: number | FontWeight | string;
 
   /**
-   * 设置[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}动效策略。
+   * 设置[SymbolGlyph]{@link @global:SymbolGlyph}动效策略。
    * 
    * 默认值：SymbolEffectStrategy.NONE
    * 
@@ -367,7 +367,7 @@ export declare class SymbolOptions {
   effectStrategy?: SymbolEffectStrategy;
 
   /**
-   * 设置[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}渲染策略。
+   * 设置[SymbolGlyph]{@link @global:SymbolGlyph}渲染策略。
    * 
    * 默认值：SymbolRenderingStrategy.SINGLE
    * 
@@ -392,7 +392,7 @@ export declare class SymbolOptions {
  * >
  * > - 该组件仅可在Stage模型下使用。
  * >
- * > - 如果SubHeader设置[通用属性]{@link ./@internal/component/ets/common}和[通用事件]{@link ./@internal/component/ets/common}，编译工具链会
+ * > - 如果SubHeader设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}，编译工具链会
  * > 额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到SubHeader本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议SubHeader设置通用属性和
  * > 通用事件。
  *
@@ -406,7 +406,7 @@ export declare class SymbolOptions {
  *
  * ###### SubHeaderAttribute
  * 
- * 不支持[通用事件]{@link common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -436,7 +436,7 @@ export declare struct SubHeader {
   icon?: ResourceStr;
 
   /**
-   * icon为[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}时的设置项。
+   * icon为[SymbolGlyph]{@link @global:SymbolGlyph}时的设置项。
    * 
    * 默认值：undefined，表示不显示图标。
    *
@@ -463,7 +463,7 @@ export declare struct SubHeader {
   endIcon?: ResourceStr;
 
   /**
-   * endIcon为[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}时的设置项。
+   * endIcon为[SymbolGlyph]{@link @global:SymbolGlyph}时的设置项。
    *
    * 默认值：undefined，表示不设置标题尾部Symbol图标样式。
    *
@@ -548,7 +548,7 @@ export declare struct SubHeader {
   /**
    * operationType为OperationType.ICON_GROUP，
    * 
-   * operationItem设置多个图标，图标为[SymbolGlyph]{@link ./@internal/component/ets/symbolglyph}时的设置项。
+   * operationItem设置多个图标，图标为[SymbolGlyph]{@link @global:SymbolGlyph}时的设置项。
    * 
    * 默认值：undefined，表示不设置Symbol图标。
    *

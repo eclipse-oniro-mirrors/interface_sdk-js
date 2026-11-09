@@ -334,7 +334,7 @@ declare interface NavigationMenuItem {
    *
    * **NOTE**
    *
-   * The [SymbolGlyphModifier]{@link ../../../arkui/SymbolGlyphModifier:SymbolGlyphModifier} object's
+   * The [SymbolGlyphModifier]{@link @global:SymbolGlyphModifier} object's
    * [fontSize]{@link SymbolGlyphAttribute#fontSize} attribute cannot be used to change the icon size,
    * [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy} attribute cannot be used to change the animation
    * effect, and [symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}
@@ -1524,7 +1524,7 @@ declare interface HomePathInfo {
  * The **Navigation** component is the root view container for navigation. It typically functions as the root container
  * of a page and includes a title bar, content area, and toolbar. The content area switches between the home page
  * content (child components of **Navigation**) and non-home page content (child components of
- * [NavDestination]{@link ./nav_destination}) through routing.
+ * [NavDestination]{@link @global:NavDestination}) through routing.
  *
  * > **NOTE**
  * >
@@ -1558,7 +1558,7 @@ declare interface HomePathInfo {
 interface NavigationInterface {
   /**
    * Creates a root view container for route navigation, suitable for page routing using the
-   * [NavRouter]{@link ./nav_router} component.
+   * [NavRouter]{@link @global:NavRouter} component.
    *
    * @returns { NavigationAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1738,7 +1738,7 @@ declare interface ToolbarItem {
    *
    * **NOTE**
    *
-   * The [SymbolGlyphModifier]{@link ../../../arkui/SymbolGlyphModifier:SymbolGlyphModifier} object's
+   * The [SymbolGlyphModifier]{@link @global:SymbolGlyphModifier} object's
    * [fontSize]{@link SymbolGlyphAttribute#fontSize} attribute cannot be used to change the icon size,
    * [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy} attribute cannot be used to change the animation
    * effect, and [symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}
@@ -1793,7 +1793,7 @@ declare interface ToolbarItem {
    *
    * **NOTE**
    *
-   * The [SymbolGlyphModifier]{@link ../../../arkui/SymbolGlyphModifier:SymbolGlyphModifier} object's
+   * The [SymbolGlyphModifier]{@link @global:SymbolGlyphModifier} object's
    * [fontSize]{@link SymbolGlyphAttribute#fontSize} attribute cannot be used to change the icon size,
    * [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy} attribute cannot be used to change the animation
    * effect, and [symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}
@@ -1876,7 +1876,7 @@ declare interface ScrollEffectOptions {
    * this value, the blur effect starts to be applied.
    *
    * The minimum sliding distance cannot be set using
-   * [LengthMetrics.percent]{@link ../../../arkui/Graphics:LengthMetrics#percent}.
+   * [LengthMetrics.percent]{@link @ohos.arkui.node:LengthUnit.percent}.
    *
    * Default value: **0vp**
    *
@@ -1893,7 +1893,7 @@ declare interface ScrollEffectOptions {
    * value, the blur effect reaches the final state.
    *
    * The maximum sliding distance cannot be set using
-   * [LengthMetrics.percent]{@link ../../../arkui/Graphics:LengthMetrics#percent}.
+   * [LengthMetrics.percent]{@link @ohos.arkui.node:LengthUnit.percent}.
    *
    * Default value: **8vp**
    *
@@ -2433,7 +2433,7 @@ declare interface NavigationConfiguration {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2541,7 +2541,7 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
    *
    * > **NOTE**
    * >
-   * > The [SymbolGlyphModifier]{@link ../../../arkui/SymbolGlyphModifier:SymbolGlyphModifier} object's
+   * > The [SymbolGlyphModifier]{@link @global:SymbolGlyphModifier} object's
    * > [fontSize]{@link SymbolGlyphAttribute#fontSize} attribute cannot be used to change the icon size,
    * > [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy} attribute cannot be used to change the animation
    * > effect, and
@@ -3129,7 +3129,7 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
   /**
    * Sets whether to enable the linkage between the [onShown]{@link NavDestinationAttribute#onShown} and
    * [onHidden]{@link NavDestinationAttribute#onHidden} lifecycle callbacks of the
-   * [NavDestination]{@link ./nav_destination} page and the full-modal triggering.
+   * [NavDestination]{@link @global:NavDestination} page and the full-modal triggering.
    *
    * > **NOTE**
    * >
@@ -3455,7 +3455,7 @@ declare interface NavigationDividerStyle {
  * The **Navigation** component is the root view container for navigation. It typically functions as the root container
  * of a page and includes a title bar, content area, and toolbar. The content area switches between the home page
  * content (child components of **Navigation**) and non-home page content (child components of
- * [NavDestination]{@link ./nav_destination}) through routing.
+ * [NavDestination]{@link @global:NavDestination}) through routing.
  *
  * > **NOTE**
  * >
@@ -3484,7 +3484,7 @@ declare interface NavigationDividerStyle {
  *
  * Supported
  *
- * Since API version 9, it is recommended that this component be used together with the [NavRouter]{@link ./nav_router}
+ * Since API version 9, it is recommended that this component be used together with the [NavRouter]{@link @global:NavRouter}
  * component.
  *
  * Since API version 10, it is recommended that this component be used together with the

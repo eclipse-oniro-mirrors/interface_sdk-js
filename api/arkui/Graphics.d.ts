@@ -1368,7 +1368,7 @@ export interface Circle {
 export interface CommandPath {
   /**
    * Commands for drawing a path. For details about how to convert pixel units, see
-   * [Pixel Units]{@link ../@internal/component/ets/common}.
+   * [Pixel Units]{@link CommonMethod}.
    *
    * Unit: px
    *

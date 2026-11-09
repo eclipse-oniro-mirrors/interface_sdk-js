@@ -24,6 +24,7 @@ import { ExpectedFrameRateRange } from './arkui/component/common';
 /**
  * 定义动画选项。
  *
+ * @interface AnimatorOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -33,6 +34,7 @@ export interface AnimatorOptions {
     /**
      * 动画播放的时长，单位毫秒。
      *
+     * @type {int}
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static

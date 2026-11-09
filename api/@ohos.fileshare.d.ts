@@ -309,6 +309,7 @@ declare namespace fileShare {
    * Enumerates the status of the URI permission granted by user.
    *
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+   * @systemapi
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
@@ -317,6 +318,7 @@ declare namespace fileShare {
      * The URI permission is not granted.
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
@@ -326,6 +328,7 @@ declare namespace fileShare {
      * The URI permission is granted.
      *
      * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
+     * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
@@ -381,11 +384,11 @@ declare namespace fileShare {
    * @param { string } bundleName bundleName
    * @param { wantConstant.Flags } flag wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION or wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION
    * @param { AsyncCallback<void> } callback
-   * @throws { BusinessError } 201 - Permission verification failed
-   * @throws { BusinessError } 202 - The caller is not a system application
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory parameters are left unspecified;
    * <br>2.Incorrect parameter types.
-   * @throws { BusinessError } 14300001 - IPC error
+   * @throws { BusinessError } 14300001 - IPC error.
    * @syscap SystemCapability.FileManagement.AppFileService
    * @systemapi
    * @since 9 dynamic
@@ -406,11 +409,11 @@ declare namespace fileShare {
    * @param { string } bundleName bundleName
    * @param { wantConstant.Flags } flag wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION or wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION
    * @returns { Promise<void> } no callback return Promise otherwise return void
-   * @throws { BusinessError } 201 - Permission verification failed
-   * @throws { BusinessError } 202 - The caller is not a system application
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory parameters are left unspecified;
    * <br>2.Incorrect parameter types.
-   * @throws { BusinessError } 14300001 - IPC error
+   * @throws { BusinessError } 14300001 - IPC error.
    * @syscap SystemCapability.FileManagement.AppFileService
    * @systemapi
    * @since 9 dynamic
@@ -445,11 +448,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -463,11 +466,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -484,7 +487,7 @@ declare namespace fileShare {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -505,8 +508,8 @@ declare namespace fileShare {
    * <br>2.Incorrect parameter types; 3.Invalid policy size.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -524,8 +527,8 @@ declare namespace fileShare {
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -540,11 +543,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -558,11 +561,11 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<void> } the promise returned by the function.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 11 dynamic
    * @since 23 static
@@ -576,10 +579,10 @@ declare namespace fileShare {
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<Array<boolean>> } Returns the persistent state of uri permissions.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 12
    */
@@ -588,10 +591,10 @@ declare namespace fileShare {
    * 
    * @param { Array<PolicyInfo> } policies - Policy information to grant permission on URIs.
    * @returns { Promise<Array<boolean>> } Returns the persistent state of uri permissions.
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 13900042 - Out of memory
+   * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @since 17 dynamic
    * @since 23 static
@@ -607,9 +610,9 @@ declare namespace fileShare {
    * @param { PolicyType } policyType - Persistent or temporary type.
    * @returns { Promise<Array<boolean>> } Returns the permission state of paths.
    * @throws { BusinessError } 201 - Permission verification failed, usually the result returned by VerifyAccessToken.
-   * @throws { BusinessError } 202 - The caller is not a system application
-   * @throws { BusinessError } 401 - Parameter error.Possible causes:1.Mandatory parameters are left unspecified;
-   * <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * <br>2. Incorrect parameter types.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 13900042 - Out of memory.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
@@ -683,8 +686,8 @@ declare namespace fileShare {
    *     <br>2. The chip does not support the capability.
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -708,8 +711,8 @@ declare namespace fileShare {
    *     <br>2. The chip does not support the capability.
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly
@@ -733,8 +736,8 @@ declare namespace fileShare {
    *     <br>2. The chip does not support the capability.
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 13900001 - Operation not permitted.
-   * @throws { BusinessError } 13900011 - Out of memory
-   * @throws { BusinessError } 13900020 - Invalid tokenID
+   * @throws { BusinessError } 13900011 - Out of memory.
+   * @throws { BusinessError } 13900020 - Invalid tokenID.
    * @syscap SystemCapability.FileManagement.AppFileService.FolderAuthorization
    * @systemapi
    * @stagemodelonly

@@ -592,7 +592,7 @@ export declare interface ImageAttribute extends CommonMethod {
    * @returns { ImageAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setImageOptions(
         src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent | undefined, 
@@ -608,7 +608,7 @@ export declare interface ImageAttribute extends CommonMethod {
    * @returns { ImageAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setImageOptions(
         src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent | undefined, 
@@ -624,7 +624,7 @@ export declare interface ImageAttribute extends CommonMethod {
    * @returns { ImageAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   default setImageOptions(
         src: PixelMap | ResourceStr | DrawableDescriptor | ImageContent | undefined, 
@@ -916,6 +916,7 @@ export declare interface ImageAttribute extends CommonMethod {
      *     SRC_ATOP模式进行绘制。<br/>当传入undefined时，图片显示无滤镜效果。 [since 26.0.0]
    * @returns { ImageAttribute }
    [since 23]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -936,6 +937,7 @@ export declare interface ImageAttribute extends CommonMethod {
      *     SRC_ATOP模式进行绘制。<br/>当传入undefined时，图片显示无滤镜效果。 [since 26.0.0]
    * @returns { ImageAttribute }
    [since 23]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -1221,6 +1223,17 @@ export declare interface ImageAttribute extends CommonMethod {
    * @since 23 static
    */
   default antialiased(isAntialiased: boolean | undefined): this;
+
+  /**
+   * Set the attribute modifier.
+   *
+   * @param { AttributeModifier<ImageAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+   * @returns { ImageAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 23 static
+   */
+  default attributeModifier(modifier: AttributeModifier<ImageAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 }
 
 /**
@@ -1439,7 +1452,7 @@ export declare function Image(
  * @returns { ImageAttribute } Image的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  * @noninterop
  */
 @Builder

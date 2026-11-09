@@ -23,8 +23,8 @@
 *
 * > **说明：**
 *
-* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link swiper}替代。详细示例请参考
-* > [示例2]{@link ./stepper}。
+* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link @global:Swiper}替代。详细示例请参考
+* > [示例2]{@link @global:Stepper}。
 *
  * @interface StepperInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -151,12 +151,12 @@ declare class StepperAttribute extends CommonMethod<StepperAttribute> {
 *
 * > **说明：**
 *
-* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link swiper}替代。详细示例请参考
-* > [示例2]{@link ./stepper}。
+* > - 从API version 8开始支持，从API version 22开始废弃，建议使用[Swiper]{@link @global:Swiper}替代。详细示例请参考
+* > [示例2]{@link @global:Stepper}。
 *
 * ###### 子组件
 *
-* 仅能包含子组件[StepperItem]{@link stepper_item}。
+* 仅能包含子组件[StepperItem]{@link @global:StepperItem}。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

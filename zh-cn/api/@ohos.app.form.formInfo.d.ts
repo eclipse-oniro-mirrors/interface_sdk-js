@@ -414,11 +414,11 @@ declare namespace formInfo {
     readonly isTemplateForm?: boolean;
 
     /**
-     * 卡片是否支持在灵动显示界面展示。
+     * 卡片是否支持在待机屏保界面展示。
      * 
-     * - true：支持灵动显示。
+     * - true：支持待机屏保。
      * 
-     * - false：不支持灵动显示。
+     * - false：不支持待机屏保。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -429,11 +429,11 @@ declare namespace formInfo {
 
     
     /**
-     * 卡片是否已适配灵动显示规则。
+     * 卡片是否已适配待机屏保规则。
      * 
-     * - true：已适配灵动显示。
+     * - true：已适配待机屏保。
      * 
-     * - false：未适配灵动显示。
+     * - false：未适配待机屏保。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -469,6 +469,20 @@ declare namespace formInfo {
      * @since 26.0.0 dynamic&static
      */
     isFontScaleFollowSystem?: boolean;
+
+    /**
+     * 表示卡片是否使能深浅色模式切换触发刷新，默认值为false。
+     *
+     * - true：使能。
+     * 
+     * - false：不使能。
+     * 
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
 
     /**
      * 获取卡片是否启用赋色。
@@ -794,8 +808,6 @@ declare namespace formInfo {
 
     /**
      * 主题标识。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -806,8 +818,6 @@ declare namespace formInfo {
 
     /**
      * 设备标识。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -912,8 +922,6 @@ declare namespace formInfo {
      * - true：表示只显示特定单张卡片。
      * 
      * - false：表示显示所有卡片。
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -923,8 +931,6 @@ declare namespace formInfo {
 
     /**
      * 模板卡片id。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -934,8 +940,6 @@ declare namespace formInfo {
       
     /**
      * 模板卡片数据。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -945,8 +949,6 @@ declare namespace formInfo {
 
     /**
      * 模板卡片显示名称。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -956,8 +958,6 @@ declare namespace formInfo {
     
     /**
      * 模板卡片描述。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -966,13 +966,7 @@ declare namespace formInfo {
     TEMPLATE_FORM_DESCRIPTION = 'ohos.extra.param.key.template_form_description',
 
     /**
-     * Indicates the key specifying the reason for the form update.
-     * which is represented as
-     * want: {
-     *   "parameters": {
-     *       UPDATE_FORM_REASON_KEY: FormUpdateReason.FORM_NODE_REUSE
-     *    }
-     * }.
+     * 卡片更新的原因，请参考[FormUpdateReason]{@link formInfo.FormUpdateReason}
      *
      * @syscap SystemCapability.Ability.Form
      * @stagemodelonly
@@ -983,8 +977,6 @@ declare namespace formInfo {
 
     /**
      * 卡片字体大小缩放键值。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -995,8 +987,6 @@ declare namespace formInfo {
 
     /**
      * 卡片字重缩放键值。 
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1027,8 +1017,6 @@ declare namespace formInfo {
   interface FormInfoFilter {
     /**
      * 选填，仅保留含bundleName与提供值相符的卡片信息，未填写时则不通过bundleName进行过滤。
-     * 
-     * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1038,8 +1026,7 @@ declare namespace formInfo {
     bundleName?: string;
 
     /**
-     * optional moduleName that used to ask getFormsInfo to return
-     * form infos with the same moduleName.
+     * 卡片所属模块的名称，用于过滤卡片信息。仅保留含moduleName与提供值相符的卡片信息，未填写时则不通过moduleName进行过滤。
      *
      * @syscap SystemCapability.Ability.Form
      * @atomicservice [since 11]
@@ -1051,11 +1038,9 @@ declare namespace formInfo {
     /**
      * 选填，仅保留含supportedDimensions提供值相符的卡片信息，未填写时则不通过supportedDimensions进行过滤。
      * 
-     * **系统接口：** 此接口为系统接口。
-     * 
      * **说明：** 最大长度为9，数值取值范围[1, 9]的整数的数组，数值5从API version 9开始支持，从API version 20开始废弃。
      * 
-     * 具体规格参考 [formInfo.FormDimension]{@link formInfo.FormDimension}。
+     * 具体规格参考 [FormDimension]{@link formInfo.FormDimension}。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1066,8 +1051,6 @@ declare namespace formInfo {
 
     /**
      * 选填，仅保留含supportedShapes提供值相符的卡片信息，未填写时则不通过supportedShapes进行过滤。
-     * 
-     * **系统接口：** 此接口为系统接口。
      * 
      * **说明：** 只有1和2两个值。1代表方形，2代表圆形。
      *
@@ -1400,9 +1383,8 @@ declare namespace formInfo {
   }
 
   /**
-   * Information about a running form.
+   * 卡片提供方信息。
    *
-   * @typedef FormProviderFilter
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
@@ -1411,7 +1393,7 @@ declare namespace formInfo {
    */
   interface FormProviderFilter {
     /**
-     * Obtains the bundle name of the provider application.
+     * 提供方卡片所属包的Bundle名称。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1422,7 +1404,7 @@ declare namespace formInfo {
     bundleName: string;
 
     /**
-     * Obtains the form name of the provider application form.
+     * 卡片名称。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1433,7 +1415,7 @@ declare namespace formInfo {
     formName ?: string;
 
     /**
-     * Obtains the module name of the provider application module.
+     * 卡片所属模块的名称。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1444,7 +1426,7 @@ declare namespace formInfo {
     moduleName ?: string;
 
     /**
-     * Obtains the ability name of the provider application module.
+     * 卡片所属的Ability名称。
      *
      * @syscap SystemCapability.Ability.Form
      * @systemapi
@@ -1455,7 +1437,13 @@ declare namespace formInfo {
     abilityName ?: string;
 
     /**
-     * Indicates whether to include unused form.
+     * 是否包含未使用的卡片。
+     * 
+     * - true：包含未使用的卡片。
+     * 
+     * - false：不包含未使用的卡片。
+     * 
+     * 默认值：false。
      *
      * @default false
      * @syscap SystemCapability.Ability.Form
@@ -1468,7 +1456,7 @@ declare namespace formInfo {
   }
 
   /**
-   * 已经添加到桌面的卡片信息。
+   * 已添加的卡片信息，包括使用中的以及未使用的卡片。
    *
    * @syscap SystemCapability.Ability.Form
    * @systemapi [since 10 - 19]
@@ -1481,7 +1469,6 @@ declare namespace formInfo {
     /**
      * 卡片唯一标识，用于识别和管理已添加到桌面的卡片实例。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1494,7 +1481,6 @@ declare namespace formInfo {
     /**
      * 卡片提供方所属包的Bundle名称，用于定位卡片提供方应用。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1507,7 +1493,6 @@ declare namespace formInfo {
     /**
      * 使用方卡片所属包的Bundle名称。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 10 dynamic
@@ -1518,7 +1503,6 @@ declare namespace formInfo {
     /**
      * 卡片位置信息，用于标识卡片当前所在的位置（如桌面、卡片中心等）。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 12 - 19]
      * @publicapi [since 20]
@@ -1531,7 +1515,6 @@ declare namespace formInfo {
     /**
      * 卡片当前可见类型枚举。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 10 dynamic
@@ -1542,7 +1525,6 @@ declare namespace formInfo {
     /**
      * 卡片所属模块的名称，用于定位卡片提供方的具体模块。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1555,7 +1537,6 @@ declare namespace formInfo {
     /**
      * 卡片所属的Ability名称，用于定位卡片提供方的具体Ability组件。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1568,7 +1549,6 @@ declare namespace formInfo {
     /**
      * 卡片名称，用于标识和区分同一模块中的不同卡片。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1583,7 +1563,6 @@ declare namespace formInfo {
      * 
      * **说明：** 取值范围[1, 9]的整数，数值5从API version 9开始支持，从API version 20开始废弃。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi [since 10 - 19]
      * @publicapi [since 20]
@@ -1617,13 +1596,26 @@ declare namespace formInfo {
     /**
      * 卡片的额外数据。
      *
-     * @default -
      * @syscap SystemCapability.Ability.Form
      * @systemapi
      * @since 12 dynamic
      * @since 23 static
      */
     readonly extraData?: Record<string, Object>;
+
+    /**
+     * 表示卡片是否使能深浅色模式切换触发刷新，默认值为false。
+     *
+     * - true：使能。
+     * 
+     * - false：不使能。
+     * 
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isColorModeRefreshEnabled?: boolean;
   }
 
   /**
@@ -1769,7 +1761,7 @@ declare namespace formInfo {
     AI_SUGGESTION = 7,
 
     /**
-     * 表示卡片位于灵动显示界面。
+     * 表示卡片位于待机屏保界面。
      *
      * @syscap SystemCapability.Ability.Form
      * @stagemodelonly
@@ -1782,7 +1774,6 @@ declare namespace formInfo {
   /**
    * 互动卡片动效信息。
    *
-   * @typedef { OverflowInfo }
    * @syscap SystemCapability.Ability.Form
    * @atomicservice
    * @since 20 dynamic
@@ -1827,7 +1818,6 @@ declare namespace formInfo {
   /**
    * 通用矩形区域信息。可用于描述卡片坐标区域、互动卡片动效区域等信息。
    *
-   * @typedef Rect
    * @syscap SystemCapability.Ability.Form
    * @atomicservice 
    * @since 20 dynamic
@@ -2044,7 +2034,7 @@ declare namespace formInfo {
    *
    * @param { string } formId - 卡片Id。
    * @returns { Promise<formInfo.Rect> } Promise对象，返回卡片相对屏幕左上角的位置信息和卡片尺寸信息。
-   * @throws { BusinessError } 202 - The application must be system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2053,11 +2043,10 @@ declare namespace formInfo {
   type GetFormRectInfoCallback = (formId: string) => Promise<formInfo.Rect>;
 
   /**
-   * Get live form status info callback
+   * 获取互动卡片状态的回调。
    *
-   * @typedef { function } GetLiveFormStatusCallback
-   * @returns { Record<string, string> } form status info, the key is formId, value is one of "INACTIVE" "PAUSE" "ACTIVE".
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @returns { Record<string, string> } 返回卡片的状态信息。key为formID，value为卡片的状态信息。状态信息有"INACTIVE"、"PAUSE"、"ACTIVE"。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -2159,7 +2148,7 @@ declare namespace formInfo {
    * 模板卡真实卡片信息回调。
    *
    * @param { Array<TemplateFormDetailInfo> } info - 模板卡真实卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @stagemodelonly
