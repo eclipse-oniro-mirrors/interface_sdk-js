@@ -7056,6 +7056,34 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.1.0 static
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
+
+    /**
+     * 设置Web组件是否开启已访问链接持久化。
+     *
+     * 开启后，已访问链接记录存储在数据库文件中，应用重启后记录仍保留，
+     * 已访问链接着色在应用重启后保持一致。
+     * 关闭后，已访问链接记录仅存储在共享内存中，应用退出后记录丢失。
+     *
+     * > **说明**
+     * > 默认值为`false`。未显式调用本属性时，
+     * > 已访问链接仅存储在共享内存中。
+     *
+     * > 开启持久化后，记录按应用隔离，
+     * > 最多保存20000条，保存期限为30天。
+     *
+     * > 过期记录和超出数量上限的记录会在后台线程中自动清理。
+     *
+     * > 当Web组件处于隐私模式（通过`incognitoMode:true`开启）时，本属性不生效，
+     * > 已访问链接记录仅存储在共享内存中，不会写入磁盘。
+     *
+     * @param { boolean | undefined } enabled - 是否开启已访问链接持久化。
+     *     传入undefined时，本属性恢复为默认值（false）。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default visitedLinkPersistEnabled(enabled: boolean | undefined): this;
 }
 
 /**

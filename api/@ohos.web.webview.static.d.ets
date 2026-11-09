@@ -4902,6 +4902,32 @@ declare namespace webview {
          * @since 26.1.0 static
          */
         removeNavigationEntryUserData(key: string): void;
+
+        /**
+         * Removes visited link records that changed after the specified date.
+         * This API uses an asynchronous callback to return the result.
+         *
+         * @param { Date } date - The time point for the data removal.
+         *     The visited link records remove data that changed after the date.
+         * @param { Callback<void> } callback - Callback used to return the result.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+        /**
+         * Removes visited link records that changed after the specified date.
+         * This API uses a promise to return the result.
+         *
+         * @param { Date } date - The time point for the data removal.
+         *     The visited link records remove data that changed after the date.
+         * @returns { Promise<void> } Promise that returns no value.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static removeVisitedLinksSince(date: Date): Promise<void>;
     }
 
     /**
