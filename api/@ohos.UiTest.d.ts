@@ -2883,14 +2883,17 @@ declare class Component {
    */
   getOriginalText(): Promise<string>;
   /**
-   * Checks whether this component is reachable. A component is unreachable if its center point
-   * is covered by another component with a higher zIndex value in the stacking order.
+   * Checks whether this component is reachable, that is, whether the component is visible, has non-zero area, and
+   * the center point of the component bounds is not occluded by any other component with a higher z-index on the same
+   * display. This API uses a promise to return the result.
    *
-   * @returns { Promise<boolean> } - Promise used to return whether the component is reachable.
+   * @returns { Promise<boolean> } - Promise used to return the result. The value **true** indicates that the component
+   *     is reachable, and **false** indicates that the component is occluded, invisible, or zero-area.
+   * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
    * @syscap SystemCapability.Test.UiTest
    * @FaAndStageModel
-   * @atomicservice
+   * @atomicservice [since 26.1.0]
    * @since 26.1.0 dynamic&static
    * @test
    */

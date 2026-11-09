@@ -2952,13 +2952,14 @@ declare class Component {
   getOriginalText(): Promise<string>;
 
   /**
-   * 判断此控件是否可触达。若控件的中心点被层叠顺序中zIndex值更高的其他控件所覆盖，则该控件不可触达。
+   * 检查此组件是否可触达，即组件是否可见、面积非零，且组件边界中心点未被同屏中具有更高z-index的任何其他组件遮挡。使用Promise异步回调。
    *
-   * @returns { Promise<boolean> } - Promise对象，返回控件是否可触达。true：可触达。false：不可触达。
+   * @returns { Promise<boolean> } - Promise对象，返回组件是否可触达。true：可触达。false：被遮挡、不可见或面积为零。
+   * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
    * @syscap SystemCapability.Test.UiTest
    * @FaAndStageModel
-   * @atomicservice
+   * @atomicservice [since 26.1.0]
    * @since 26.1.0 dynamic&static
    * @test
    */
