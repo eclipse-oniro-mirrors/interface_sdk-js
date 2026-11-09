@@ -80,7 +80,7 @@ declare namespace wifiManager {
    * 查询Wi-Fi开关是否已激活。
    *
    * @permission ohos.permission.GET_WIFI_INFO [since 9 - 12]
-   * @returns { boolean } true:已激活， false:未激活。
+   * @returns { boolean } true表示已激活，false表示未激活。
    * @throws {BusinessError} 201 - Permission denied. [since 9 - 12]
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -165,7 +165,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO and (ohos.permission.GET_WIFI_PEERS_MAC or
    *     (ohos.permission.LOCATION and ohos.permission.APPROXIMATELY_LOCATION))
-   * @param { AsyncCallback<Array<WifiScanInfo>> } callback - 回调函数，返回扫描到的WLAN热点信息（如果有）。
+   * @param { AsyncCallback<Array<WifiScanInfo>> } callback - 回调函数，返回扫描到的Wi-Fi热点信息（如果有）。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -193,7 +193,7 @@ declare namespace wifiManager {
   function getScanResultsSync(): Array<WifiScanInfo>;
 
   /**
-   * 获取包含当前时间点前30s内的缓存扫描结果。
+   * 获取包含当前时间点前30秒内的缓存扫描结果。
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @returns { Array<WifiScanInfo> } 返回扫描到的热点列表。如果应用申请了ohos.permission.GET_WIFI_PEERS_MAC权限，则返回结果中的bssid为真实设备地址，否则为随机设备
@@ -216,7 +216,7 @@ declare namespace wifiManager {
    * - 主要用于支持网络发现和位置定位等场景。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.SET_WIFI_CONFIG
-   * @param { boolean } isScanAlwaysAllowed - 是否始终允许扫描。true:允许扫描， false:不允许扫描
+   * @param { boolean } isScanAlwaysAllowed - 是否始终允许扫描。true表示允许扫描，false表示不允许扫描
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified. 2.
@@ -250,7 +250,7 @@ declare namespace wifiManager {
    * 添加网络配置。使用Promise异步回调。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.SET_WIFI_CONFIG
-   * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType无指定值，则bssidType默认为随机设备地址类型。
+   * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType未指定值，则bssidType默认为随机设备地址类型。
    * @returns { Promise<int> } Promise对象。表示网络配置ID。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -268,7 +268,7 @@ declare namespace wifiManager {
    * 添加网络配置。使用callback异步回调。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.SET_WIFI_CONFIG
-   * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType无指定值，则bssidType默认为随机设备地址类型。
+   * @param { WifiDeviceConfig } config - Wi-Fi配置信息。如果bssidType未指定值，则bssidType默认为随机设备地址类型。
    * @param { AsyncCallback<int> } callback - 回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -326,34 +326,6 @@ declare namespace wifiManager {
    * @since 23 static
    */
   function addCandidateConfig(config: WifiDeviceConfig, callback: AsyncCallback<int>): void;
-
-  /**
-   * 断开networkId标识的候选网络一段时间。
-   * 断开的候选网络在阻塞持续时间内不会重新关联。
-   * 您只能断开由主叫方添加的候选网络。
-   *
-   * @permission ohos.permission.SET_WIFI_INFO
-   * @param { int } networkId - 标识要断开的候选网络。
-   *     取值必须为大于等于 0 的整数。
-   *     <br>单位为：秒。取值限定为整数。
-   *     <br>不合法的值区间: 取值必须为大于等于 0 的整数。
-   *     <br>单位为：秒。取值限定为整数。
-   * @param { int } blockDuration - 网络被禁止重新关联的时长，单位为秒。
-   *     取值必须为整数。
-   *     如果取值为 -1，则该候选网络被永久禁止重新关联。
-   *     <br>取值限定为整数。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2501000 - Operation failed, possibly causes:
-   *     <br>The network identified by networkId does not exist.
-   *     <br>The candidate network was not added by the caller.
-   *     <br>The caller is not running in the foreground.
-   * @throws { BusinessError } 2501001 - Wi-Fi STA disabled.
-   * @syscap SystemCapability.Communication.WiFi.STA
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function disconnectFromCandidateConfig(networkId: int, blockDuration: int): void;
 
   /**
    * 移除候选网络配置，使用Promise异步回调。
@@ -544,9 +516,9 @@ declare namespace wifiManager {
    * 查询Wi-Fi信号强度。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { int } rssi - 热点的信号强度(dBm)。
+   * @param { int } rssi - 热点的信号强度，单位：dBm。
    * @param { int } band - Wi-Fi接入点的频段，1表示2.4GHz；2表示5GHz。
-   * @returns { int } 信号强度，取值范围为[0, 4]。
+   * @returns { int } 信号强度，取值范围为[0, 4]。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -657,7 +629,7 @@ declare namespace wifiManager {
    * 查询Wi-Fi是否已连接。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { boolean } true:已连接， false:未连接。
+   * @returns { boolean } true表示已连接，false表示未连接。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -673,9 +645,9 @@ declare namespace wifiManager {
    * 查询设备支持的特性。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { long } 支持的特性值。枚举值如下：<br/>- 0x0001: 基础结构模式特性。<br/>- 0x0002: 5 GHz带宽特性。<br/>- 0x0004: GAS/ANQP特性。<br/>- 0x
-   *     0008: WiFi-Direct特性。<br/>- 0x0010: Soft AP特性。<br/>- 0x0040: Wi-Fi Aware组网特性。<br/>- 0x8000: AP STA共存特性。<br/>- 0x
-   *     8000000: WPA3-Personal SAE特性。<br/>- 0x10000000: WPA3-Enterprise Suite-B。<br/>- 0x20000000: 增强开放特性。
+   * @returns { long } 支持的特性值。枚举值如下：<br/>- 0x0001: 基础结构模式特性。<br/>- 0x0002: 5 GHz带宽特性。<br/>- 0x0004: GAS/ANQP特性。<br/>- 0x
+   *     0008: Wi-Fi Direct特性。<br/>- 0x0010: Soft AP特性。<br/>- 0x0040: Wi-Fi Aware组网特性。<br/>- 0x8000: AP STA共存特性。<br/>- 0x
+   *     8000000: WPA3-Personal SAE特性。<br/>- 0x10000000: WPA3-Enterprise Suite-B。<br/>- 0x20000000: 增强开放特性。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -691,10 +663,10 @@ declare namespace wifiManager {
    * 判断设备是否支持指定的Wi-Fi特性。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { long } featureId - 特性ID值。枚举值如下：<br/>- 0x0001: 基础结构模式特性。<br/>- 0x0002: 5 GHz带宽特性。<br/>- 0x0004: GAS/ANQP特性。
-   *     <br/>- 0x0008: Wifi-Direct特性。<br/>- 0x0010: Soft AP特性。<br/>- 0x0040: Wi-Fi AWare组网特性。<br/>- 0x8000: AP STA共存特性。
-   *     <br/>- 0x8000000: WPA3-Personal SAE特性。<br/>- 0x10000000: WPA3-Enterprise Suite-B。<br/>- 0x20000000: 增强开放特性。
-   * @returns { boolean } true:支持， false:不支持。
+   * @param { long } featureId - 特性ID值。枚举值如下：<br/>- 0x0001: 基础结构模式特性。<br/>- 0x0002: 5 GHz带宽特性。<br/>- 0x0004: GAS/ANQP特性。
+   *     <br/>- 0x0008: Wi-Fi Direct特性。<br/>- 0x0010: Soft AP特性。<br/>- 0x0040: Wi-Fi Aware组网特性。<br/>- 0x8000: AP STA共存特性。
+   *     <br/>- 0x8000000: WPA3-Personal SAE特性。<br/>- 0x10000000: WPA3-Enterprise Suite-B。<br/>- 0x20000000: 增强开放特性。
+   * @returns { boolean } true表示支持，false表示不支持。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.
@@ -851,8 +823,8 @@ declare namespace wifiManager {
    * 如果isAllowed为true，则可以再次关联该网络，否则不可。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.MANAGE_WIFI_CONNECTION
-   * @param { int } netId 标识要设置的网络。networkId的值不能小于0。
-   * @param { boolean } isAllowed 标识是否允许自动连接。
+   * @param { int } netId - 标识要设置的网络。netId的值不能小于0。
+   * @param { boolean } isAllowed - 是否允许自动连接。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Invalid parameters. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -944,8 +916,8 @@ declare namespace wifiManager {
    * 判断当前频段是否支持。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { WifiBandType } bandType - Wifi 频段类型。
-   * @returns { boolean } true:支持， false:不支持。
+   * @param { WifiBandType } bandType - Wi-Fi频段类型。
+   * @returns { boolean } true表示支持，false表示不支持。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -975,7 +947,7 @@ declare namespace wifiManager {
    * 获取最近一次断连原因。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.GET_WIFI_CONFIG
-   * @returns { DisconnectedReason } 最近断开的原因
+   * @returns { DisconnectedReason } 最近断开的原因。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1003,10 +975,10 @@ declare namespace wifiManager {
   function startPortalCertification(): void;
 
   /**
-   * 查询设备当前连接的wifi是否是手机热点。
+   * 查询设备当前连接的Wi-Fi是否是手机热点。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { boolean } true:是手机热点， false:不是手机热点。
+   * @returns { boolean } true表示是手机热点，false表示不是手机热点。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1021,7 +993,7 @@ declare namespace wifiManager {
    * 设置是否使能hiLink。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.MANAGE_WIFI_CONNECTION
-   * @param { boolean } isHiLinkEnable - 是否使能hiLink。true:使能， false:去使能。
+   * @param { boolean } isHiLinkEnable - 是否使能HiLink。true表示使能，false表示去使能。
    * @param { string } bssid - 热点的MAC地址，例如：00:11:22:33:44:55。
    * @param { WifiDeviceConfig } config - Wi-Fi的配置信息。config.bssid必须和第二个参数bssid保持一致。如果bssidType未指定值，则bssidType默认为随机设备地址类
    *     型。
@@ -1088,7 +1060,7 @@ declare namespace wifiManager {
    * 检查当前设备的Wi-Fi热点功能是否支持双频段（同时支持2.4GHz和5GHz频段）。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @returns { boolean } true:支持， false:不支持。
+   * @returns { boolean } true表示支持，false表示不支持。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1104,7 +1076,7 @@ declare namespace wifiManager {
    * 检查在某些情况下是否能够操作Wi-Fi热点。当飞行模式开启时，如果系统不支持SoftAP和STA共存，也不支持信号桥接，则无法操作热点开关。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @returns { boolean } true:允许， false:不允许。
+   * @returns { boolean } true表示允许，false表示不允许。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1120,7 +1092,7 @@ declare namespace wifiManager {
    * 热点是否已开启。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { boolean } 热点是否已开启。true:已开启， false:未开启。
+   * @returns { boolean } 热点是否已开启。true表示已开启，false表示未开启。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application. [since 9 - 14]
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1461,8 +1433,8 @@ declare namespace wifiManager {
   function stopDiscoverDevices(): void;
 
   /**
-   * 删除指定网络ID的永久Wi-Fi组配置。该接口用于清除已保存的Wi-Fi网络配置信息，使其不再自动连接。
-   * 
+   * 删除指定网络ID的永久Wi-Fi组配置。该接口用于清除已保存的P2P永久组配置信息，使其不再自动连接。
+   *
    * - 根据网络ID删除之前与P2P设备建立的永久组信息，后续与该P2P设备进行P2P连接时需要重新进行P2P协商。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.MANAGE_WIFI_CONNECTION
@@ -1556,10 +1528,10 @@ declare namespace wifiManager {
   function on(type: 'wifiStateChange', callback: Callback<number>): void;
 
   /**
-   * 注册WLAN状态改变事件。
+   * 注册Wi-Fi状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback - 状态改变回调函数。返回0：未激活，1：已激活，2：正在激活，3：正在去激活。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 未激活。<br/>- 1: 已激活。<br/>- 2: 激活中。<br/>- 3: 去激活中。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1593,7 +1565,7 @@ declare namespace wifiManager {
    * 如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } [callback] - the callback of off
+   * @param { Callback<int> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1626,7 +1598,7 @@ declare namespace wifiManager {
    * 注册Wi-Fi连接状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback - 状态改变回调函数。返回0：已断开，1：已连接。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 已断开。<br/>- 1: 已连接。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1659,7 +1631,7 @@ declare namespace wifiManager {
    * 如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } [callback] - the callback of off
+   * @param { Callback<int> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1690,7 +1662,7 @@ declare namespace wifiManager {
    * 注册扫描状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback - 状态改变回调函数。返回0：扫描失败，1：扫描成功。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 扫描失败。<br/>- 1: 扫描成功。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2501000 - Operation failed.
@@ -1795,7 +1767,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
    * @param { 'streamChange' } type - 固定填"streamChange"字符串。
-   * @param { Callback<number> } callback - 状态改变回调函数，返回0:无，1:向下，2:向上，3:双向。
+   * @param { Callback<number> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 无。<br/>- 1: 向下。<br/>- 2: 向上。<br/>- 3: 双向。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1809,10 +1781,10 @@ declare namespace wifiManager {
   function on(type: 'streamChange', callback: Callback<number>): void;
 
   /**
-   * Subscribe Wi-Fi stream change events.
+   * 注册Wi-Fi流变更事件。
    *
    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
-   * @param { Callback<int> } callback - the callback of on, 1: stream down, 2: stream up, 3: stream bidirectional
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 无。<br/>- 1: 向下。<br/>- 2: 向上。<br/>- 3: 双向。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1830,7 +1802,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
    * @param { 'streamChange' } type - 固定填"streamChange"字符串。
-   * @param { Callback<number> } [callback] - 状态改变回调函数，返回0:无，1:向下，2:向上，3:双向。
+   * @param { Callback<number> } [callback] - 状态改变回调函数。返回状态值枚举：<br/>- 0: 无。<br/>- 1: 向下。<br/>- 2: 向上。<br/>- 3: 双向。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1844,7 +1816,7 @@ declare namespace wifiManager {
   function off(type: 'streamChange', callback?: Callback<number>): void;
 
   /**
-   * 取消注册WLAN接收信号强度(RSSI)变化事件。
+   * 取消注册Wi-Fi流变更事件。
    * 如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    *
    * @permission ohos.permission.MANAGE_WIFI_CONNECTION
@@ -1865,7 +1837,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @param { 'deviceConfigChange' } type - 固定填"deviceConfigChange"字符串。
-   * @param { Callback<number> } callback - 状态改变回调函数，返回值为 0: 添加配置。1: 更改配置。2: 删除配置。
+   * @param { Callback<number> } callback - 状态改变回调函数。返回值为：<br/>- 0: 配置已添加。<br/>- 1: 配置已改变。<br/>- 2: 配置已移除。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1882,8 +1854,8 @@ declare namespace wifiManager {
    * 注册设备配置改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback -  状态改变回调函数,
-   *     0: 配置已添加，1: 配置已改变，2: 配置已移除。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回值为：<br/>- 0: 配置已添加。<br/>- 1: 配置已改变。
+   *     <br/>- 2: 配置已移除。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1899,7 +1871,7 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO
    * @param { 'deviceConfigChange' } type - 固定填"deviceConfigChange"字符串。
-   * @param { Callback<number> } [callback] - 状态改变回调函数，返回值为 0: 添加配置。1: 更改配置。2: 删除配置。
+   * @param { Callback<number> } [callback] - 状态改变回调函数。返回值为：<br/>- 0: 配置已添加。<br/>- 1: 配置已改变。<br/>- 2: 配置已移除。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -1916,8 +1888,8 @@ declare namespace wifiManager {
    * 注册设备配置改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数，
-   *     0: 配置已添加, 1: 配置已改变, 2: 配置已移除。
+   * @param { Callback<int> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
+   *     返回值为：<br/>- 0: 配置已添加。<br/>- 1: 配置已改变。<br/>- 2: 配置已移除。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -1948,8 +1920,8 @@ declare namespace wifiManager {
    * 注册热点状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback - 状态改变回调函数，
-   *     0: 未激活，1: 已激活，2: 激活中， 3: 去激活中。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 0: 未激活。<br/>- 1: 已激活。<br/>- 2: 激活中。
+   *     <br/>- 3: 去激活中。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2601000 - Operation failed.
@@ -2045,7 +2017,7 @@ declare namespace wifiManager {
    * 如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @param { Callback<StationInfo> } [callback] - the callback of off
+   * @param { Callback<StationInfo> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -2079,7 +2051,7 @@ declare namespace wifiManager {
    * 注册热点STA离开事件。
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @param { Callback<StationInfo> } callback - the callback of on
+   * @param { Callback<StationInfo> } callback - 状态改变回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -2112,7 +2084,7 @@ declare namespace wifiManager {
    * 取消注册热点STA离开事件。
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT
-   * @param { Callback<StationInfo> } [callback] - the callback of off
+   * @param { Callback<StationInfo> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -2144,7 +2116,7 @@ declare namespace wifiManager {
    * 注册P2P开关状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<int> } callback - 状态改变回调函数。返回1：空闲，2：打开中，3：已打开，4：关闭中，5：已关闭。
+   * @param { Callback<int> } callback - 状态改变回调函数。返回状态值枚举：<br/>- 1: 空闲。<br/>- 2: 打开中。<br/>- 3: 已打开。<br/>- 4: 关闭中。<br/>- 5: 已关闭。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -2203,7 +2175,7 @@ declare namespace wifiManager {
    * 注册P2P连接状态改变事件。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<WifiP2pLinkedInfo> } callback - 状态改变回调函数。
+   * @param { Callback<WifiP2pLinkedInfo> } callback - 状态改变回调函数。返回P2P连接的相关信息。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
@@ -2292,7 +2264,7 @@ declare namespace wifiManager {
   /**
    * 取消注册P2P本端设备状态改变事件。
    *
-   * @param { Callback<WifiP2pDevice> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数
+   * @param { Callback<WifiP2pDevice> } [callback] - 状态改变回调函数。如果未指定callback参数，将取消注册该事件关联的所有回调函数。
    * @throws {BusinessError} 801 - Capability not supported.
    * @throws {BusinessError} 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
@@ -2787,7 +2759,7 @@ declare namespace wifiManager {
   }
 
   /**
-   * 表示WiFi代理方法的枚举。
+   * 表示Wi-Fi代理方法的枚举。
    *
    * @syscap SystemCapability.Communication.WiFi.STA
    * @systemapi Hide this for inner system use.
@@ -2835,7 +2807,7 @@ declare namespace wifiManager {
    */
   enum WifiCategory {
     /**
-     * Default。Wifi6以下的wifi类别。
+     * Default。Wi-Fi6以下的Wi-Fi类别。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 12 dynamic
@@ -2844,7 +2816,7 @@ declare namespace wifiManager {
     DEFAULT = 1,
 
     /**
-     * Wifi6。
+     * Wi-Fi6。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 12 dynamic
@@ -2853,7 +2825,7 @@ declare namespace wifiManager {
     WIFI6 = 2,
 
     /**
-     * Wifi6+。
+     * Wi-Fi6+。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 12 dynamic
@@ -2862,7 +2834,7 @@ declare namespace wifiManager {
     WIFI6_PLUS = 3,
 
     /**
-     * Wifi7。
+     * Wi-Fi7。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 15 dynamic
@@ -2871,7 +2843,7 @@ declare namespace wifiManager {
     WIFI7 = 4,
 
     /**
-     * Wifi7+。
+     * Wi-Fi7+。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 15 dynamic
@@ -2916,7 +2888,7 @@ declare namespace wifiManager {
     WIFI7_MLSR = 2,
 
     /**
-     * Wi-Fi7 EMLSR（enhanced multi-link single-radio，增强型多链路单天线）连接。
+     * Wi-Fi7 EMLSR（enhanced multi-link single-radio，增强型多链路单射频）连接。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 18 dynamic
@@ -2935,7 +2907,7 @@ declare namespace wifiManager {
   }
 
   /**
-   * Wifi 代理配置。
+   * Wi-Fi代理配置。
    *
    * @syscap SystemCapability.Communication.WiFi.STA
    * @systemapi Hide this for inner system use.
@@ -2954,7 +2926,7 @@ declare namespace wifiManager {
     proxyMethod?: ProxyMethod;
 
     /**
-     * 自动配置代理的PAC web 地址。
+     * 自动配置代理的PAC网址。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -3184,9 +3156,9 @@ declare namespace wifiManager {
      * 热点的密钥，最大长度为64字节。
      * 
      * 当securityType为WIFI_SEC_TYPE_OPEN时该字段需为空串，其他加密类型不能为空串。
-     * 
-     * 当securityType为WIFI_SEC_TYPE_WEP时，该字段长度只允许为5、10、13、26、16和32字节其中之一，并且当字段长度为偶数时，该字段必须为纯十六进制数字构成。
-     * 
+     *
+     * 当securityType为WIFI_SEC_TYPE_WEP时，该字段长度只能为5、10、13、16、26或32字节之一，并且当字段长度为偶数时，该字段必须由纯十六进制数字构成。
+     *
      * 当securityType为WIFI_SEC_TYPE_SAE时，该字段最小长度为1字节。
      * 
      * 当securityType为WIFI_SEC_TYPE_PSK时，该字段最小长度为8字节。
@@ -3238,7 +3210,7 @@ declare namespace wifiManager {
      * 
      * 5 - 认证无凭据，6 - 永久无互联网连接 
      * 
-     * 7 - 由WIFI管理器禁用，8 - 由于密码错误禁用 
+     * 7 - 由Wi-Fi管理器禁用，8 - 由于密码错误禁用 
      * 
      * 9 - 认证无订阅，10 - 私有EAP认证错误 
      * 
@@ -3307,7 +3279,7 @@ declare namespace wifiManager {
     ipType?: IpType;
 
     /**
-     * 静态IP家族: 0 - IPv4, 1 - Ipv6.
+     * 静态IP协议版本。0: IPv4，1: IPv6。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
@@ -3385,8 +3357,8 @@ declare namespace wifiManager {
     configStatus?: int;
 
     /**
-     * 是否允许自动连接。false:不允许，true:允许自动连接。
-     * 
+     * 是否允许自动连接。true表示允许自动连接，false表示不允许自动连接。
+     *
      * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
@@ -3397,8 +3369,8 @@ declare namespace wifiManager {
     isAutoConnectAllowed?: boolean;
 
     /**
-     * 安全Wi-Fi检测。false:不是安全Wi-Fi，true:是安全Wi-Fi。
-     * 
+     * 安全Wi-Fi检测。true表示是安全Wi-Fi，false表示不是安全Wi-Fi。
+     *
      * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
@@ -3735,7 +3707,7 @@ declare namespace wifiManager {
     securityType: WifiSecurityType;
 
     /**
-     * 热点的信号强度(dBm)。
+     * 热点的信号强度，单位：dBm。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @atomicservice [since 12]
@@ -3818,7 +3790,7 @@ declare namespace wifiManager {
     supportedWifiCategory: WifiCategory;
 
     /**
-     * 热点是否支持hiLink，true表示支持， false表示不支持。
+     * 热点是否支持HiLink，true表示支持，false表示不支持。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 12 dynamic
@@ -3868,7 +3840,7 @@ declare namespace wifiManager {
     WIFI_SEC_TYPE_OPEN = 1,
 
     /**
-     * Wired Equivalent Privacy (WEP)加密类型。候选网络(添加网络配置信息)配置不支持该加密类型。
+     * Wired Equivalent Privacy (WEP)加密类型。添加候选网络配置时不支持该加密类型。
      *
      * @syscap SystemCapability.Communication.WiFi.Core
      * @since 9 dynamic
@@ -3986,7 +3958,7 @@ declare namespace wifiManager {
   }
 
   /**
-   * 表示WIFI频段类型的枚举。
+   * 表示Wi-Fi频段类型的枚举。
    *
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 10 dynamic
@@ -4040,7 +4012,7 @@ declare namespace wifiManager {
   }
 
   /**
-   * 表示WIFI标准的枚举。
+   * 表示Wi-Fi标准的枚举。
    *
    * @syscap SystemCapability.Communication.WiFi.STA
    * @since 10 dynamic
@@ -4048,7 +4020,7 @@ declare namespace wifiManager {
    */
   enum WifiStandard {
     /**
-     * 无效WIFI标准类型。
+     * 无效Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4057,7 +4029,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_UNDEFINED,
 
     /**
-     * 802.11a WiFi标准类型。
+     * 802.11a Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4066,7 +4038,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11A,
 
     /**
-     * 802.11b WiFi标准类型。
+     * 802.11b Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4075,7 +4047,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11B,
 
     /**
-     * 802.11g WiFi标准类型。
+     * 802.11g Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4084,7 +4056,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11G,
 
     /**
-     * 802.11n WiFi标准类型。
+     * 802.11n Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4093,7 +4065,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11N,
 
     /**
-     * 802.11ac WiFi标准类型。
+     * 802.11ac Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4102,7 +4074,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11AC,
 
     /**
-     * 802.11ax WiFi标准类型。
+     * 802.11ax Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4111,7 +4083,7 @@ declare namespace wifiManager {
     WIFI_STANDARD_11AX,
 
     /**
-     * 802.11ad WiFi标准类型。
+     * 802.11ad Wi-Fi标准类型。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4163,8 +4135,8 @@ declare namespace wifiManager {
     networkId: int;
 
     /**
-     * 热点的信号强度(dBm)。
-     * 
+     * 热点的信号强度，单位：dBm。
+     *
      * RSSI（Received Signal Strength Indicator，接收信号强度指示），其标准取值范围为-127dBm至0dBm。在正常使用场景下，常见有效范围为-100dBm（弱信号）至-30dBm（强信号），接
      * 近0dBm表示信号极强。
      *
@@ -4185,7 +4157,7 @@ declare namespace wifiManager {
     band: int;
 
     /**
-     * Wi-Fi接入点的上行速度，单位Mbps。
+     * Wi-Fi接入点的上行速度，单位：Mbps。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 9 dynamic
@@ -4194,7 +4166,7 @@ declare namespace wifiManager {
     linkSpeed: int;
 
     /**
-     * Wi-Fi接入点的下行速度，单位Mbps。
+     * Wi-Fi接入点的下行速度，单位：Mbps。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4203,7 +4175,7 @@ declare namespace wifiManager {
     rxLinkSpeed: int;
 
     /**
-     * 当前支持的最大上行速率，单位Mbps。
+     * 当前支持的最大上行速率，单位：Mbps。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4212,7 +4184,7 @@ declare namespace wifiManager {
     maxSupportedTxLinkSpeed: int;
 
     /**
-     * 当前支持的最大下行速率，单位Mbps。
+     * 当前支持的最大下行速率，单位：Mbps。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 10 dynamic
@@ -4273,7 +4245,7 @@ declare namespace wifiManager {
     snr: int;
 
     /**
-     * MAC地址类型。0 - 设备MAC地址，1 - 随机MAC地址。
+     * MAC地址类型。0 - 随机MAC地址，1 - 设备MAC地址。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 9 dynamic
@@ -4292,9 +4264,9 @@ declare namespace wifiManager {
 
     /**
      * Wi-Fi连接的IP地址。
-     * 
-     * 1. IP地址在WiFi连接信息和"设置 > 关于本机 > 状态信息"中可以查看。
-     * 2. ipAddress值为number类型，需要转换为点分十进制格式的IP地址（如192.168.1.1），具体请参考[IP格式转换](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-connectivity-4)。
+     *
+     * 1. IP地址在Wi-Fi连接信息和"设置 > 关于本机 > 状态信息"中可以查看。
+     * 2. ipAddress值为int类型，需要转换为点分十进制格式的IP地址（如192.168.1.1），具体请参考[IP格式转换](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-connectivity-4)。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 9 dynamic
@@ -4351,7 +4323,7 @@ declare namespace wifiManager {
     supportedWifiCategory: WifiCategory;
 
     /**
-     * 热点是否支持hilink，true表示支持， false表示不支持。
+     * 热点是否支持HiLink，true表示支持，false表示不支持。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @since 12 dynamic
@@ -4381,8 +4353,8 @@ declare namespace wifiManager {
     wifiLinkType?: WifiLinkType;
 
     /**
-     * 。用于指示Wi-Fi的发送（Tx, Transmitting）和接收（Rx, Receiving）功能是否都在正常工作。
-     * 
+     * Wi-Fi收发功能有效性标志。用于指示Wi-Fi的发送（Tx, Transmitting）和接收（Rx, Receiving）功能是否都在正常工作。
+     *
      * **系统接口：** 此接口为系统接口。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
@@ -4402,7 +4374,7 @@ declare namespace wifiManager {
    */
   interface IpInfo {
     /**
-     * IP地址。（ipAddress值为number类型，需要转换为IP常用格式，具体请参考
+     * IP地址。（ipAddress值为int类型，需要转换为IP常用格式，具体请参考
      * [IP格式转换](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-connectivity-4)）。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
@@ -4586,7 +4558,7 @@ declare namespace wifiManager {
     withUserAction?: boolean;
   
     /**
-     * 提示用户进行信任确认弹框显示时间（单位秒）有效值范围1-30秒，默认10秒 。
+     * 提示用户进行信任确认弹框显示时间，单位：秒。取值范围为[1, 30]，默认值为10秒。
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @stagemodelonly
@@ -4636,7 +4608,7 @@ declare namespace wifiManager {
     securityType: WifiSecurityType;
 
     /**
-     * 热点的带宽。1: 2.4G, 2: 5G, 3: 双模频段
+     * 热点的带宽。1: 2.4GHz，2: 5GHz，3: 双模频段。
      *
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
@@ -4646,7 +4618,7 @@ declare namespace wifiManager {
     band: int;
 
     /**
-     * 热点的信道（2.4G：1~14,5G：7~196）。
+     * 热点的信道（2.4GHz：1~14，5GHz：7~196）。
      *
      * @syscap SystemCapability.Communication.WiFi.AP.Core
      * @systemapi Hide this for inner system use.
@@ -5165,7 +5137,7 @@ declare namespace wifiManager {
     interface: string;
 
     /**
-     * Interface name
+     * 接口名称。
      *
      * @syscap SystemCapability.Communication.WiFi.P2P
      * @since 23 static
@@ -5375,7 +5347,7 @@ declare namespace wifiManager {
    * 随机MAC地址是否被禁用。
    *
    * @permission ohos.permission.GET_WIFI_INFO and ohos.permission.GET_WIFI_CONFIG
-   * @returns { boolean } true:禁用随机MAC地址; false:未禁用随机MAC地址。
+   * @returns { boolean } true表示禁用随机MAC地址; false表示未禁用随机MAC地址。
    * @throws {BusinessError} 201 - Permission denied.
    * @throws {BusinessError} 202 - System API is not allowed called by Non-system application.
    * @throws {BusinessError} 801 - Capability not supported.
@@ -5388,7 +5360,7 @@ declare namespace wifiManager {
   function isRandomMacDisabled(): boolean;
 
   /**
-   * 发起WiFi网络探测。
+   * 发起Wi-Fi网络探测。
    *
    * @permission ohos.permission.SET_WIFI_INFO and ohos.permission.MANAGE_WIFI_CONNECTION
    * @throws {BusinessError} 201 - Permission denied.
@@ -5407,7 +5379,7 @@ declare namespace wifiManager {
    * 设置Wi-Fi能力。
    *
    * @permission ohos.permission.SET_WIFI_CONFIG
-   * @param { WifiCapability } capability - wifi能力枚举。
+   * @param { WifiCapability } capability - Wi-Fi能力枚举值。
    * @param { boolean } enable - 是否开启Wi-Fi能力，true表示开启，false表示关闭。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - System API is not allowed called by Non-system application.
@@ -5424,8 +5396,8 @@ declare namespace wifiManager {
    * 获取Wi-Fi支持的能力。
    *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { WifiCapability } capability - wifi能力枚举。
-   * @returns { boolean } true:已使能， false:未使能。
+   * @param { WifiCapability } capability - Wi-Fi能力枚举值。
+   * @returns { boolean } true表示已使能，false表示未使能。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - System API is not allowed called by Non-system application.
    * @throws { BusinessError } 801 - Capability not supported.
@@ -5438,9 +5410,9 @@ declare namespace wifiManager {
   function getWifiCapability(capability: WifiCapability): boolean;
 
   /**
-   * 查询是否可用Wi-Fi网络。
+   * 查询Wi-Fi网络是否可用。
    *
-   * @returns { boolean } Wi-Fi是否可用。true表示Wi-Fi可用， false表示Wi-Fi不可用。
+   * @returns { boolean } Wi-Fi是否可用。true表示Wi-Fi可用，false表示Wi-Fi不可用。
    * @throws { BusinessError } 2401000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.Core
    * @stagemodelonly
@@ -5543,15 +5515,15 @@ declare namespace wifiManager {
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
    * @param { string } instanceName - 实例名，用于对端服务发现，最大长度为63字符。
-   * @param { string } serviceType - 服务类型，用于对端服务发现，最大长度为63字符。不能为空字符串，可自定义，推荐格式为"_<ServiceName>._<Protocol>"，例如"
-   *     _http._tcp"。
+   * @param { string } serviceType - 服务类型，用于对端服务发现，最大长度为63字符。不能为空字符串，可自定义，推荐格式为"_<ServiceName>._<Protocol>"，
+   *     例如"_http._tcp"。
    * @param { Map<string, string> } txtRecord - 包含键值对的TXT记录。键不能包含等号（=），单条记录长度（key.length + value.length）必须小于255字节。建议所有键和
-   *     值序列化后的总大小保持在200–400字节以内，超出单个mDNS数据包的限制会导致数据无法正确广播或被对端忽略。键值对数量无限制。定义格式见
+   *     值序列化后的总大小保持在200-400字节以内，超出单个mDNS数据包的限制会导致数据无法正确广播或被对端忽略。键值对数量无限制。定义格式见
    *     [draft-cheshire-dnsext-dns-sd-11.txt](http://files.dns-sd.org/draft-cheshire-dnsext-dns-sd.txt)。
    * @param { string } serviceName - 用于标识本地服务对象的服务名称，最大长度为63字符。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801000 - Operation failed.
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
@@ -5564,18 +5536,18 @@ declare namespace wifiManager {
    * 添加并注册一个UPnP（Universal Plug and Play，通用即插即用）本地P2P服务描述，供对端进行服务发现。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } uuid - 该UUID的字符串表示形式，格式参见[RFC 4122](http://www.ietf.org/rfc/rfc4122.txt)。标准固定长度为36个字符，不允许包含空格，例如"
-   *     6859dede-8574-59ab-9332-123456789012"。
+   * @param { string } uuid - 该UUID的字符串表示形式，格式参见[RFC 4122](http://www.ietf.org/rfc/rfc4122.txt)。标准固定长度为36个字符，不允许包含空格，
+   *     例如"6859dede-8574-59ab-9332-123456789012"。
    * @param { string } device - UPnP设备类型，字符串表示形式，格式参见
    *     [UPnP Device Architecture 1.1](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)。长度取决于标准定义，
-   *     不允许包含空格，通常为几十个字符，建议保持在255字节以内，例如"urn:schemas-upnp-org:device:MediaServer:1"。
+   *     不允许包含空格，建议保持在255字节以内，例如"urn:schemas-upnp-org:device:MediaServer:1"。
    * @param { Array<string> } services - UPnP服务类型列表，字符串表示形式，格式参见
    *     [UPnP Device Architecture 1.1](http://www.upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf)。每个服务的长度不得超
-   *     过512字节，建议Array中的元素数量不宜过多，例如"urn:schemas-upnp-org:service:ContentDirectory:1"。
+   *     过512字节，数组中的元素数量不宜过多，例如"urn:schemas-upnp-org:service:ContentDirectory:1"。
    * @param { string } serviceName - 用于标识本地服务对象的服务名称，最大长度为63字符。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801000 - Operation failed.
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
@@ -5592,7 +5564,7 @@ declare namespace wifiManager {
    * @param { WifiP2pServiceInfo } srvInfo - 与已注册服务一致的服务描述。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801000 - Operation failed.
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
@@ -5607,7 +5579,7 @@ declare namespace wifiManager {
    * @returns { Promise<Array<WifiP2pServiceInfo>> } Promise对象。用于返回已注册的本地P2P服务列表。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2801000 - The Wi-Fi service is not started properly, or there is an Wi-Fi service error.
+   * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -5615,15 +5587,15 @@ declare namespace wifiManager {
   function getLocalP2pServices(): Promise<Array<WifiP2pServiceInfo>>;
 
   /**
-   * 添加DNS-SD服务发现请求，用于匹配DNS-SD服务。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } [serviceType] - 服务类型，用于对端服务发现。推荐格式为"_<服务名>._<协议>"，例如："_http._tcp"。
-   *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参serviceType对应。
-   *     未指定该参数时，默认为空字符串，匹配所有服务类型。
-   * @param { string } [instanceName] - 实例名称，用于发现对端服务。
-   *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参instanceName对应。
-   *     未指定该参数时，默认为空字符串。
+    * 添加DNS-SD服务发现请求，用于匹配DNS-SD服务。
+    *
+    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+    * @param { string } [serviceType] - 服务类型，用于对端服务发现。推荐格式为"_<服务名>._<协议>"，例如："_http._tcp"。
+    *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参serviceType对应。
+    *     未指定该参数时，默认为空字符串，匹配所有服务类型。
+    * @param { string } [instanceName] - 实例名称，用于发现对端服务。
+    *     与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参instanceName对应。
+    *     未指定该参数时，默认为空字符串。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5635,20 +5607,20 @@ declare namespace wifiManager {
   function addDnsSdServiceRequest(serviceType?: string, instanceName?: string): void;
 
   /**
-   * 添加UPnP服务发现请求，用于匹配指定的搜索目标。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { string } [searchTarget] - UPnP搜索目标。未指定该参数时，默认为空字符串。<br>
-   *     入参类型示例如下：<br>
-   *     <ul>
-   *     <li>搜索所有UPnP设备和服务："ssdp:all"
-   *     <li>搜索特定根设备："upnp:rootdevice"
-   *     <li>搜索特定设备类型（urn:schemas-upnp-org:device:...）：<br>
-   *         例如"urn:schemas-upnp-org:device:MediaServer:2"
-   *     <li>搜索特定服务类型（urn:schemas-upnp-org:service:...）：<br>
-   *         例如"urn:schemas-upnp-org:service:ContentDirectory:2"
-   *     <li>搜索特定UUID：例如："uuid:6859dede-8574-59ab-9332-123456789012"
-   *     </ul>
+    * 添加UPnP服务发现请求，用于匹配指定的搜索目标。
+    *
+    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+    * @param { string } [searchTarget] - UPnP搜索目标。未指定该参数时，默认为空字符串。<br>
+    *     入参类型示例如下：<br>
+    *     <ul>
+    *     <li>搜索所有UPnP设备和服务："ssdp:all"
+    *     <li>搜索特定根设备："upnp:rootdevice"
+    *     <li>搜索特定设备类型（urn:schemas-upnp-org:device:...）：<br>
+    *         例如"urn:schemas-upnp-org:device:MediaServer:2"
+    *     <li>搜索特定服务类型（urn:schemas-upnp-org:service:...）：<br>
+    *         例如"urn:schemas-upnp-org:service:ContentDirectory:2"
+    *     <li>搜索特定UUID：例如："uuid:6859dede-8574-59ab-9332-123456789012"
+    *     </ul>
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5660,10 +5632,10 @@ declare namespace wifiManager {
   function addUpnpServiceRequest(searchTarget?: string): void;
 
   /**
-   * 查询待处理的P2P服务发现请求，使用Promise异步回调。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @returns { Promise<Array<WifiP2pServiceRequest>> } Promise对象。用于返回待处理的服务发现请求列表。
+    * 查询待处理的P2P服务发现请求，使用Promise异步回调。
+    *
+    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+    * @returns { Promise<Array<WifiP2pServiceRequest>> } Promise对象。用于返回待处理的服务发现请求列表。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5675,10 +5647,10 @@ declare namespace wifiManager {
   function getP2pServiceRequest(): Promise<Array<WifiP2pServiceRequest>>;
 
   /**
-   * 移除指定的服务发现请求。可以通过[getP2pServiceRequest]{@link wifiManager.getP2pServiceRequest}获取已注册的服务发现请求列表。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
-   * @param { WifiP2pServiceRequest } request - 待移除的服务发现请求。
+    * 移除指定的服务发现请求。可以通过[getP2pServiceRequest]{@link wifiManager.getP2pServiceRequest}获取已注册的服务发现请求列表。
+    *
+    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
+    * @param { WifiP2pServiceRequest } request - 待移除的服务发现请求。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5690,7 +5662,7 @@ declare namespace wifiManager {
   function removeP2pServiceRequest(request: WifiP2pServiceRequest): void;
 
   /**
-   * 移除所有待处理的服务发现请求。
+    * 移除所有待处理的服务发现请求。
    *
    * @permission ohos.permission.GET_WIFI_INFO_INTERNAL
    * @throws { BusinessError } 201 - Permission denied.
@@ -5704,9 +5676,9 @@ declare namespace wifiManager {
   function removeAllP2pServiceRequests(): void;
 
   /**
-   * 启动P2P服务发现。使用待处理请求的TLV查询进行发现，如果待处理列表为空，则回退为发现所有服务类型。
-   * 启动发现前，请先通过[addDnsSdServiceRequest]{@link wifiManager.addDnsSdServiceRequest}或
-   * [addUpnpServiceRequest]{@link wifiManager.addUpnpServiceRequest}添加服务请求。
+    * 启动P2P服务发现。使用待处理请求的TLV查询进行发现，如果待处理列表为空，则回退为发现所有服务类型。
+    * 启动发现前，请先通过[addDnsSdServiceRequest]{@link wifiManager.addDnsSdServiceRequest}或
+    * [addUpnpServiceRequest]{@link wifiManager.addUpnpServiceRequest}添加服务请求。
    *
    * @permission ohos.permission.GET_WIFI_PEERS_MAC
    * @throws { BusinessError } 201 - Permission denied.
@@ -5720,10 +5692,10 @@ declare namespace wifiManager {
   function discoverServices(): void;
 
   /**
-   * 订阅来自对端设备的通用服务响应事件。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<P2pServiceDiscoveryInfo> } callback - 收到对端设备的服务发现响应时触发的回调函数。
+    * 订阅来自对端设备的通用服务响应事件。
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @param { Callback<P2pServiceDiscoveryInfo> } callback - 收到对端设备的服务发现响应时触发的回调函数。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5734,11 +5706,11 @@ declare namespace wifiManager {
   function onP2pServiceDiscovery(callback: Callback<P2pServiceDiscoveryInfo>): void;
 
   /**
-   * 取消订阅通用服务响应事件。
-   *
-   * @permission ohos.permission.GET_WIFI_INFO
-   * @param { Callback<P2pServiceDiscoveryInfo> } [callback] - 待取消注册的回调函数。未指定该参数时，
-   *     取消注册该事件类型的所有回调。
+    * 取消订阅通用服务响应事件。 
+    *
+    * @permission ohos.permission.GET_WIFI_INFO
+    * @param { Callback<P2pServiceDiscoveryInfo> } [callback] - 待取消注册的回调函数。未指定该参数时，
+    *     取消注册该事件类型的所有回调。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2801000 - Operation failed.
@@ -5748,5 +5720,7 @@ declare namespace wifiManager {
    */
   function offP2pServiceDiscovery(callback?: Callback<P2pServiceDiscoveryInfo>): void;
 }
+
+
 
 export default wifiManager;
