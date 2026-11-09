@@ -2747,6 +2747,7 @@ export declare interface RotateAngleOptions {
 /**
  * 转场边缘类型。
  *
+ * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -2783,7 +2784,7 @@ export declare enum TransitionEdge {
      * @stagemodelonly
      * @since 23 static
      */
-    END
+    END = 3
 }
 /**
  * Defines the option of asymmetric transition.

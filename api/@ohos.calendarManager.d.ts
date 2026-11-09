@@ -346,6 +346,7 @@ declare namespace calendarManager {
      * @param { Event[] } events - Array of Event objects.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -365,6 +366,7 @@ declare namespace calendarManager {
      * @param { Event[] } events - Array of Event objects.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1] 
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -404,6 +406,7 @@ declare namespace calendarManager {
      *
      * @param { number[] } ids - Array of event IDs.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @syscap SystemCapability.Applications.CalendarData
      * @since 10
@@ -415,6 +418,7 @@ declare namespace calendarManager {
      *
      * @param { number[] } ids - Array of event IDs.
      * @param {AsyncCallback<void>} callback - Callback used to return the result.
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @syscap SystemCapability.Applications.CalendarData
      * @atomicservice [since 21]
@@ -462,6 +466,7 @@ declare namespace calendarManager {
      * attendee, reminderTime, and identifier if this parameter is left empty. The field is not returned if it is empty.
      * @returns { Promise<Event[]> } Promise used to return the result, which is an array of Event objects.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -482,6 +487,7 @@ declare namespace calendarManager {
      * @param { (keyof Event)[] } eventKey - Filter field.
      * @param { AsyncCallback<Event[]> } callback - Callback used to return an array of events.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;
@@ -569,6 +575,7 @@ declare namespace calendarManager {
      * isAllDay, description, timeZone, location, and service. The field is not returned if it is empty.
      * @returns { Promise<Event[]> } Promise used to return the result, which is an array of Event objects.
      * @throws { BusinessError } 201 - Permission denied. [since 23]
+     * @throws { BusinessError } 23900001 - Parameter value error. [since 23]
      * @throws { BusinessError } 23900003 - The specified account was not found. [since 26.0.1]
      * @throws { BusinessError } 23900004 - Internal program errors. Possible causes:
      *     <br>1. dataShare database execution error;

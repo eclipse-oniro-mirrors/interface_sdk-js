@@ -101,6 +101,65 @@ declare namespace pinAuth {
   function getPinDeletionDisabledState(userId: int): boolean | undefined;
 
   /**
+   * 设置更改PIN时要检查的最近历史PIN数。
+   * 设置策略后，用户不能重用任何指定数量的
+   * 更改PIN时的最新历史PIN。
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - 用户ID。如果取值为0，则对所有用户生效，否则对指定用户生效。
+   *     <br>取值限定为整数。
+   * @param { int } historyRange - 要检查的最近历史PIN的数量。取值范围为1~5。
+   *     <br>取值限定为整数。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setPinHistoryCheckRange(userId: int, historyRange: int): void;
+ 
+  /**
+   * 获取更改PIN时要检查的最近历史PIN数。
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - 用户ID。
+   *     <br>取值限定为整数。
+   * @returns { int | undefined } 要检查的最近历史PIN数。如果尚未为指定的用户设置历史检查范围，则返回undefined。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getPinHistoryCheckRange(userId: int): int | undefined;
+
+  /**
+   * 清除PIN历史检查范围策略。清除策略后，用户在更改PIN时可以重用任何历史PIN。
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - 用户ID。如果取值为0，则对所有用户生效，否则对指定用户生效。
+   *     <br>取值限定为整数。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function clearPinHistoryCheckRange(userId: int): void;
+
+  /**
    * PIN码复杂度检查策略及说明。
    *
    * @syscap SystemCapability.UserIAM.UserAuth.Core
