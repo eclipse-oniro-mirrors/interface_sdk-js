@@ -446,6 +446,28 @@ declare namespace wifiManager {
    * @since 23 static
    */
   function connectToCandidateConfigWithUserAction(networkId: int): Promise<void>;
+
+  /**
+   * Disconnects a candidate network identified by networkId for a period of time.
+   * The disconnected candidate network will not be re-associated during the block duration.
+   * You can only disconnect candidate networks that were added by the caller.
+   *
+   * @permission ohos.permission.SET_WIFI_INFO
+   * @param { int } networkId - Identifies the candidate network to be disconnected.
+   * @param { int } blockDuration - Duration for which the network is blocked from re-associated, in seconds.
+   *     If the value is -1, the candidate network is permanently blocked from re-associated.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 2501000 - Operation failed, possibly causes:
+   *     <br>The network identified by networkId does not exist.
+   *     <br>The candidate network was not added by the caller.
+   *     <br>The caller is not running in the foreground.
+   * @throws { BusinessError } 2501001 - Wi-Fi STA disabled.
+   * @syscap SystemCapability.Communication.WiFi.STA
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function disconnectFromCandidateConfig(networkId: int, blockDuration: int): void;
   
   /**
    * Connect to Wi-Fi hotspot by networkId.
