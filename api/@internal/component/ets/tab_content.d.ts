@@ -1087,83 +1087,6 @@ declare class BottomTabBarStyle {
 }
 
 /**
- * Enumeration of the title font style.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamic
- */
-declare enum SidebarSectionTitleStyle {
-  /**
-   * Title style for standard fonts.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  STANDARD = 0,
- 
-  /**
-   * Heading style for accent fonts.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  EMPHASIZED = 1
-}
- 
-/**
- * Defines a partial grouping of sidebars with headings.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @crossplatform
- * @atomicservice
- * @since 26.1.0 dynamic
- */
-declare interface SidebarSection {
-  /**
-   * The section title.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  title: ResourceStr;
- 
-  /**
-   * Sort order for the sidebar grouping.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  order?: number;
- 
-  /**
-   * Font style of the title.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  titleStyle?: SidebarSectionTitleStyle;
-}
-
-/**
  * The **TabContent** component is used to define the content view of each tab in the [Tabs]{@link ./tabs} component. It
  * supports features such as rendering a single child component, content cropping control, and customizing the page in
  * approved sample mode. This component is applicable to application scenarios where multiple tabs need to be switched,
@@ -1365,19 +1288,6 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @since 26.0.1 dynamic
    */
   tabBarVisibility(visibility: TabVisibility, displayMode?: TabBarDisplayMode): TabContentAttribute;
-
-  /**
-   * Sets the sidebar section grouping for this TabContent.
-   *
-   * @param { Optional<SidebarSection> } value - The sidebar section.
-   * @returns { TabContentAttribute } - the attribute of the tab content.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.1.0 dynamic
-   */
-  sidebarSection(value: Optional<SidebarSection>): TabContentAttribute;
 }
 
 /**
