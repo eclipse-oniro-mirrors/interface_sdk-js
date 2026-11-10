@@ -96,7 +96,7 @@ declare namespace webSocket {
     header?: Object;
 
     /**
-     * HTTP request header.
+     * 建立WebSocket连接可选参数，代表建立连接时携带的HTTP头信息。参数内容自定义，也可以不指定。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -187,7 +187,11 @@ declare namespace webSocket {
     minSupportTlsProtocol?: TlsProtocol;
 
     /**
-     * 支持源端口的选项。
+     * Origin是WebSocket握手请求中的HTTP请求头字段，用于标识请求来源，服务端可据此进行来源校验。该参数用于控制Origin字段是否携带自定义端口号。默认值为false。
+     * 设置为true时：
+     * - 调用[connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)}接口后，若其第一个参数url中指定的协议为ws，且显式指定的端口号不是80，则Origin字段中会携带对应的端口；其他情况不携带端口号。
+     * - 调用[connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)}接口后，若其第一个参数url中指定的协议为wss，且显式指定的端口号不是443，则Origin字段中会携带对应的端口号；其他情况不携带端口号。
+     * 设置为false时，Origin字段不会携带端口号。
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -374,7 +378,7 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     protocol?: string;
- 	}
+  }
 
   /**
    * 服务器发送的响应头。
@@ -388,7 +392,8 @@ declare namespace webSocket {
   };
 
   /**
-   * HTTP response headers.
+   * response回应头信息
+   *
    * @syscap SystemCapability.Communication.NetStack [since 23]
    * @crossplatform [since 24]
    * @since 23 static
@@ -406,8 +411,8 @@ declare namespace webSocket {
    */
   export interface WebSocket {
     /**
-     * 根据URL地址，建立一个WebSocket连接，使用callback异步回调。
-     * 
+     * 根据URL地址，建立一个WebSocket连接。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > callback中返回的boolean值仅表示连接请求创建是否成功。如需感知WebSocket是否连接成功，需要在调用该接口前调用
@@ -418,7 +423,7 @@ declare namespace webSocket {
      *
      * @permission ohos.permission.INTERNET
      * @param { string } url - 建立WebSocket连接的URL地址。
-     * @param { AsyncCallback<boolean> } callback - 回调函数。true:连接请求创建成功；false:连接请求创建失败。
+     * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示连接请求创建成功；返回false表示连接请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302999 - Websocket other unknown error. [since 10]
@@ -435,8 +440,8 @@ declare namespace webSocket {
     connect(url: string, callback: AsyncCallback<boolean>): void;
 
     /**
-     * 根据URL地址，建立一个WebSocket连接，使用callback异步回调。
-     * 
+     * 根据URL地址，建立一个WebSocket连接。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > callback中返回的boolean值仅表示连接请求创建是否成功。如需感知WebSocket是否连接成功，需要在调用该接口前调用
@@ -449,7 +454,7 @@ declare namespace webSocket {
      * @param { string } url - 建立WebSocket连接的URL地址。
      * @param { WebSocketRequestOptions } options - 参考[WebSocketRequestOptions]{@link webSocket.WebSocketRequestOptions}
      *     。
-     * @param { AsyncCallback<boolean> } callback - 回调函数。true:连接请求创建成功；false:连接请求创建失败。
+     * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示连接请求创建成功；返回false表示连接请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302999 - Websocket other unknown error. [since 10]
@@ -467,7 +472,7 @@ declare namespace webSocket {
 
     /**
      * 根据URL地址和header，建立一个WebSocket连接。使用Promise异步回调。
-     * 
+     *
      * > **说明：**
      * >
      * > callback中返回的boolean值仅表示连接请求创建是否成功。如需感知WebSocket是否连接成功，需要在调用该接口前调用
@@ -480,7 +485,7 @@ declare namespace webSocket {
      * @param { string } url - 建立WebSocket连接的URL地址。
      * @param { WebSocketRequestOptions } options - 参考[WebSocketRequestOptions]{@link webSocket.WebSocketRequestOptions}
      *     。
-     * @returns { Promise<boolean> } 回调函数。true:连接请求创建成功；false:连接请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示连接请求创建成功；返回false表示连接请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302999 - Websocket other unknown error. [since 10]
@@ -497,13 +502,17 @@ declare namespace webSocket {
     connect(url: string, options?: WebSocketRequestOptions): Promise<boolean>;
 
     /**
-     * 通过WebSocket连接发送数据，使用callback异步回调。
+     * 通过WebSocket连接发送数据。使用callback异步回调。
+     *
+     * > **说明：**
+     * >
+     * > send接口必须在监听到open事件后才可以调用。
      *
      * @permission ohos.permission.INTERNET
      * @param { string | ArrayBuffer } data - 发送的数据。
      *     <br>API 6及更早版本仅支持string类型。API 8起同时支持string和ArrayBuffer类型。最大支持发送5242864字节数据(即5 * 1024 * 1024 - 16)，超过该大小会返回401
      *     错误码。
-     * @param { AsyncCallback<boolean> } callback - 回调函数。true:发送请求创建成功；false:发送请求创建失败。
+     * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示发送请求创建成功；返回false表示发送请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -517,11 +526,15 @@ declare namespace webSocket {
     /**
      * 通过WebSocket连接发送数据。使用Promise异步回调。
      *
+     * > **说明：**
+     * >
+     * > send接口必须在监听到open事件后才可以调用。
+     *
      * @permission ohos.permission.INTERNET
      * @param { string | ArrayBuffer } data - 发送的数据。
      *     <br>API 6及更早版本仅支持string类型。API 8起同时支持string和ArrayBuffer类型。最大支持发送5242864字节数据(即5 * 1024 * 1024 - 16)，超过该大小会返回401
      *     错误码。
-     * @returns { Promise<boolean> } 以Promise形式返回发送数据的结果。true:发送请求创建成功；false:发送请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示发送请求创建成功；返回false表示发送请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -533,10 +546,10 @@ declare namespace webSocket {
     send(data: string | ArrayBuffer): Promise<boolean>;
 
     /**
-     * 关闭WebSocket连接，使用callback异步回调。
+     * 关闭WebSocket连接。使用callback异步回调。
      *
      * @permission ohos.permission.INTERNET
-     * @param { AsyncCallback<boolean> } callback - 回调函数。true:关闭请求创建成功；false:关闭请求创建失败。
+     * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示关闭请求创建成功；返回false表示关闭请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -548,11 +561,11 @@ declare namespace webSocket {
     close(callback: AsyncCallback<boolean>): void;
 
     /**
-     * 根据参数options，关闭WebSocket连接，使用callback异步回调。
+     * 根据参数options，关闭WebSocket连接。使用callback异步回调。
      *
      * @permission ohos.permission.INTERNET
      * @param { WebSocketCloseOptions } options - 参考[WebSocketCloseOptions]{@link webSocket.WebSocketCloseOptions}。
-     * @param { AsyncCallback<boolean> } callback - 回调函数。true:关闭请求创建成功；false:关闭请求创建失败。
+     * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示关闭请求创建成功；返回false表示关闭请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -568,7 +581,7 @@ declare namespace webSocket {
      *
      * @permission ohos.permission.INTERNET
      * @param { WebSocketCloseOptions } options - 参考[WebSocketCloseOptions]{@link webSocket.WebSocketCloseOptions}。
-     * @returns { Promise<boolean> } 以Promise形式返回关闭连接的结果。true:关闭请求创建成功；false:关闭请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示关闭请求创建成功；返回false表示关闭请求创建失败。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -580,7 +593,7 @@ declare namespace webSocket {
     close(options?: WebSocketCloseOptions): Promise<boolean>;
 
     /**
-     * 订阅WebSocket的打开事件，使用callback异步回调。该事件用于指示WebSocket是否连接成功。该接口需要在调用
+     * 订阅WebSocket的打开事件。使用callback异步回调。该事件用于指示WebSocket是否连接成功。该接口需要在调用
      * [connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)}发起连接请求前调用。
      *
      * @param { 'open' } type - 订阅的事件类型。'open'：WebSocket的打开事件。
@@ -604,8 +617,8 @@ declare namespace webSocket {
     onOpen(callback: Callback<OpenResult>): void;
 
     /**
-     * 取消订阅WebSocket的打开事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的打开事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -631,8 +644,8 @@ declare namespace webSocket {
     offOpen(callback?: Callback<OpenResult>): void;
 
     /**
-     * 订阅WebSocket的接收服务器消息事件，使用callback异步回调。
-     * 
+     * 订阅WebSocket的接收服务器消息事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > AsyncCallback中的数据可以是字符串（API version 6开始支持）或ArrayBuffer（API version 8开始支持）。
@@ -647,7 +660,7 @@ declare namespace webSocket {
     on(type: 'message', callback: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * 订阅WebSocket的打开信息事件，使用callback异步回调。该事件用于获取WebSocket连接成功后的详细信息。该接口需要在调用
+     * 订阅WebSocket的打开信息事件。使用callback异步回调。该事件用于获取WebSocket连接成功后的详细信息。该接口需要在调用
      * [connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)}发起连接请求前调用。
      *
      * @param { 'openInfo' } type - 订阅的事件类型。'openInfo'：WebSocket的打开信息事件。
@@ -659,9 +672,9 @@ declare namespace webSocket {
     on(type: 'openInfo', callback: AsyncCallback<WebSocketOpenInfo>): void;
 
     /**
-     * 开启监听WebSocket连接的open info事件。
+     * 订阅WebSocket连接的成功信息事件。
      *
-     * @param { Callback<WebSocketOpenInfo> } callback - 用于返回结果的回调函数。
+     * @param { Callback<WebSocketOpenInfo> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.1 static
@@ -669,8 +682,8 @@ declare namespace webSocket {
     onOpenInfo(callback: Callback<WebSocketOpenInfo>): void;
 
     /**
-     * 取消订阅WebSocket的打开信息事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的打开信息事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -684,9 +697,9 @@ declare namespace webSocket {
     off(type: 'openInfo', callback?: AsyncCallback<WebSocketOpenInfo>): void;
 
     /**
-     * 取消监听WebSocket连接的open info事件。
+     * 取消订阅WebSocket连接的成功信息事件。
      *
-     * @param { Callback<WebSocketOpenInfo> } [callback] - 用于返回结果的回调函数。
+     * @param { Callback<WebSocketOpenInfo> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.1 static
@@ -706,8 +719,8 @@ declare namespace webSocket {
     onMessage(callback: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * 取消订阅WebSocket的接收服务器消息事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的接收服务器消息事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > AsyncCallback中的数据可以是字符串(API 6)或ArrayBuffer(API 8)。
@@ -736,7 +749,7 @@ declare namespace webSocket {
     offMessage(callback?: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * 订阅WebSocket的关闭事件，使用callback异步回调。
+     * 订阅WebSocket的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 订阅的事件类型。'close'：WebSocket的关闭事件。
      * @param { AsyncCallback<CloseResult> } callback - 回调函数。
@@ -760,8 +773,8 @@ declare namespace webSocket {
     onWebSocketClose(callback: AsyncCallback<CloseResult>): void;
 
     /**
-     * 取消订阅WebSocket的关闭事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的关闭事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -788,8 +801,8 @@ declare namespace webSocket {
     offWebSocketClose(callback?: AsyncCallback<CloseResult>): void;
 
     /**
-     * 订阅WebSocket的Error事件，使用callback异步回调。
-     * 
+     * 订阅WebSocket的Error事件。使用callback异步回调。
+     *
      * 关于[error]{@link webSocket.WebSocket.on(type: 'error', callback: ErrorCallback)}事件回调的错误码说明：WebSocket的本质是HTTP协议升级，若
      * 服务器同意升级，服务器会返回101。状态码表示协议从HTTP切换为WebSocket协议（触发open回调），而如果服务器拒绝了升级或出现其他异常，则返回200，表示服务器只是将请求当作普通的HTTP请求来处理。
      *
@@ -813,8 +826,8 @@ declare namespace webSocket {
     onWebSocketError(callback: ErrorCallback): void;
 
     /**
-     * 取消订阅WebSocket的Error事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的Error事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -839,7 +852,7 @@ declare namespace webSocket {
     offWebSocketError(callback?: ErrorCallback): void;
 
     /**
-     * 订阅WebSocket的数据接收结束事件，使用callback异步回调。
+     * 订阅WebSocket的数据接收结束事件。使用callback异步回调。
      *
      * @param { 'dataEnd' } type - 订阅的事件类型。'dataEnd'：WebSocket的数据接收结束事件。
      * @param { Callback<void> } callback - 回调函数。
@@ -860,14 +873,14 @@ declare namespace webSocket {
     onDataEnd(callback: Callback<void>): void;
 
     /**
-     * 取消订阅WebSocket的数据接收结束事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocket的数据接收结束事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
      *
      * @param { 'dataEnd' } type - 取消订阅的事件类型。'dataEnd'：WebSocket的数据接收结束事件。
-     * @param { Callback<void> } [ callback ] - 回调函数。
+     * @param { Callback<void> } [ callback ] - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
@@ -885,7 +898,7 @@ declare namespace webSocket {
     offDataEnd(callback?: Callback<void>): void;
 
     /**
-     * 订阅HTTP Response Header事件，使用callback异步回调。
+     * 订阅HTTP Response Header事件。使用callback异步回调。
      *
      * @param { 'headerReceive'} type - 订阅的事件类型。'headerReceive'：WebSocket的headerReceive事件。
      * @param { Callback<ResponseHeaders> } callback - 回调函数，返回订阅事件。
@@ -906,8 +919,8 @@ declare namespace webSocket {
     onHeaderReceive(callback: Callback<ResponseHeaders>): void;
 
     /**
-     * 取消订阅HTTP Response Header事件，使用callback异步回调。
-     * 
+     * 取消订阅HTTP Response Header事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -1074,7 +1087,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     clientPort: int;
-    }
+  }
 
   /**
    * 从指定客户端接收到的消息，包括客户端的信息和数据。
@@ -1104,13 +1117,13 @@ declare namespace webSocket {
      * @since 23 static
      */
     data: string | ArrayBuffer;
-    }
+  }
 
   /**
    * 关闭WebSocketServer连接时，订阅close事件得到的指定客户端的关闭结果。
    *
-   * @param { WebSocketConnection } clientConnection - the connection which is closed.
-   * @param { CloseResult } closeReason - the error code and reason why the connection is closed.
+   * @param { WebSocketConnection } clientConnection - 客户端信息，包括客户端的ip地址和端口号port。
+   * @param { CloseResult } closeReason - 关闭WebSocket连接时，订阅close事件得到的关闭结果。
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 19 dynamic
@@ -1130,14 +1143,14 @@ declare namespace webSocket {
   export interface WebSocketServer {
     /**
      * 配置config参数，启动服务端service。使用Promise异步回调。
-     * 
+     *
      * > **说明：**
      * >
      * > 在多次调用该接口时，应避免监听同一端口。
      *
      * @permission ohos.permission.INTERNET
      * @param { WebSocketServerConfig } config - 启动websocketServer服务器。
-     * @returns { Promise<boolean> } promise对象。返回true表示服务器启动成功；返回false表示服务启动失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示服务器启动成功；返回false表示服务启动失败。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302002 - Websocket certificate file does not exist.
      * @throws { BusinessError } 2302004 - Can't listen on the given NIC.
@@ -1155,7 +1168,7 @@ declare namespace webSocket {
      * 停止服务端服务。使用Promise异步回调。
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<boolean> } promise对象。返回true表示停止服务端service请求创建成功；返回false表示停止服务端service请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示停止服务端service请求创建成功；返回false表示停止服务端service请求创建失败。
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
@@ -1166,13 +1179,13 @@ declare namespace webSocket {
 
     /**
      * 获取与服务端连接的所有客户端信息。
-     * 
+     *
      * > **说明：**
      * >
      * > 该接口为异步调用，返回结果需通过await关键字等待异步操作完成，以确保正确获取到所有客户端连接信息。
      *
      * @permission ohos.permission.INTERNET
-     * @returns { WebSocketConnection[] } an array consists connections from all clients.
+     * @returns { WebSocketConnection[] } 以字符串数组形式返回所有客户端的信息。
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
@@ -1183,7 +1196,7 @@ declare namespace webSocket {
 
     /**
      * 通过WebSocket连接发送数据。使用Promise异步回调。
-     * 
+     *
      * > **说明：**
      * >
      * > send接口必须在监听到connect事件后才可以调用。
@@ -1192,7 +1205,7 @@ declare namespace webSocket {
      * @param { string | ArrayBuffer } data - 服务端发送消息的数据，同时支持string（字符串）和ArrayBuffer（二进制）类型。最大支持发送5242864字节数据(即5 * 1024
      *     * 1024 - 16)，超过该大小会返回401错误码。
      * @param { WebSocketConnection } connection - 发送的客户端信息。
-     * @returns { Promise<boolean> } promise对象。返回true表示发送请求创建成功；返回false表示发送请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示发送请求创建成功；返回false表示发送请求创建失败。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302006 - websocket connection does not exist.
      * @syscap SystemCapability.Communication.NetStack
@@ -1209,7 +1222,7 @@ declare namespace webSocket {
      * @param { WebSocketConnection } connection - 客户端信息，包括客户端的ip地址和端口号port。
      * @param { webSocket.WebSocketCloseOptions } options - 关闭WebSocket连接时，可选参数的类型和说明。
      *     <br>- 错误码默认：200。原因值默认：Websocket connect failed。
-     * @returns { Promise<boolean> } promise对象。返回true表示关闭请求创建成功；返回false表示关闭请求创建失败。
+     * @returns { Promise<boolean> } Promise对象。返回true表示关闭请求创建成功；返回false表示关闭请求创建失败。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2302006 - websocket connection does not exist.
      * @syscap SystemCapability.Communication.NetStack
@@ -1220,7 +1233,7 @@ declare namespace webSocket {
     close(connection: WebSocketConnection, options?: webSocket.WebSocketCloseOptions): Promise<boolean>;
 
     /**
-     * 订阅WebSocketServer的连接事件（客户端与服务端建链成功），使用callback异步回调。
+     * 订阅WebSocketServer的连接事件（客户端与服务端建链成功）。使用callback异步回调。
      *
      * @param { 'connect' } type - 事件回调类型，支持的事件为'connect'，当onconnect()调用完成，客户端与服务端建链成功。
      * @param { Callback<WebSocketConnection> } callback - 回调函数。连接的客户端信息。
@@ -1241,8 +1254,8 @@ declare namespace webSocket {
     onConnect(callback: Callback<WebSocketConnection>): void;
 
     /**
-     * 取消订阅WebSocketServer的连接事件（客户端与服务端建链成功），使用callback异步回调。
-     * 
+     * 取消订阅WebSocketServer的连接事件（客户端与服务端建链成功）。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -1266,7 +1279,7 @@ declare namespace webSocket {
     offConnect(callback?: Callback<WebSocketConnection>): void;
 
     /**
-     * 订阅WebSocketServer的接收客户端消息的事件，使用callback异步回调。
+     * 订阅WebSocketServer的接收客户端消息的事件。使用callback异步回调。
      *
      * @param { 'messageReceive' } type - 事件回调类型，支持的事件为'messageReceive'，当onmessageReceive()调用完成，接收到客户端消息成功。
      * @param { Callback<WebSocketMessage> } callback - 回调函数。
@@ -1288,8 +1301,8 @@ declare namespace webSocket {
     onMessageReceive(callback: Callback<WebSocketMessage>): void;
 
     /**
-     * 取消订阅WebSocketServer的接收到客户端消息事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocketServer的接收到客户端消息事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -1315,7 +1328,7 @@ declare namespace webSocket {
     offMessageReceive(callback?: Callback<WebSocketMessage>): void;
 
     /**
-     * 订阅WebSocketServer的关闭事件，使用callback异步回调。
+     * 订阅WebSocketServer的关闭事件。使用callback异步回调。
      *
      * @param { 'close' } type - 事件回调类型，支持的事件为'close'，当onclose()调用完成，连接关闭成功。
      * @param { ClientConnectionCloseCallback } callback - 回调函数。
@@ -1327,7 +1340,8 @@ declare namespace webSocket {
     on(type: 'close', callback: ClientConnectionCloseCallback): void;
 
     /**
-     * Enables listening for events that a connection from a given client has been closed.
+     * 订阅指定客户端连接已关闭的事件。
+     *
      * @param { ClientConnectionCloseCallback } callback - the callback function when a client connection is closed.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
@@ -1336,8 +1350,8 @@ declare namespace webSocket {
     onWebSocketServerClose(callback: ClientConnectionCloseCallback): void;
 
     /**
-     * 取消订阅WebSocketServer的关闭事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocketServer的关闭事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -1352,8 +1366,9 @@ declare namespace webSocket {
     off(type: 'close', callback?: ClientConnectionCloseCallback): void;
 
     /**
-     * Cancels listening for events that a connection from a given client has been closed.
-     * @param { ClientConnectionCloseCallback } callback - the callback used to return the result.
+     * 取消订阅指定客户端连接已关闭的事件。
+     *
+     * @param { ClientConnectionCloseCallback } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 26.0.0 static
@@ -1361,7 +1376,7 @@ declare namespace webSocket {
     offWebSocketServerClose(callback?: ClientConnectionCloseCallback): void;
 
     /**
-     * 订阅WebSocketServer的Error事件，使用callback异步回调。
+     * 订阅WebSocketServer的Error事件。使用callback异步回调。
      *
      * @param { 'error' } type - 事件回调类型，支持的事件为'error'，当onerror()调用完成，error事件发生。
      * @param { ErrorCallback } callback - 回调函数。
@@ -1382,8 +1397,8 @@ declare namespace webSocket {
     onWebSocketServerError(callback: ErrorCallback): void;
 
     /**
-     * 取消订阅WebSocketServer的Error事件，使用callback异步回调。
-     * 
+     * 取消订阅WebSocketServer的Error事件。使用callback异步回调。
+     *
      * > **说明：**
      * >
      * > 可以指定传入on中的callback取消一个订阅，也可以不指定callback清空所有订阅。
@@ -1405,7 +1420,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     offWebSocketServerError(callback?: ErrorCallback): void;
-    }
+  }
 
   /**
    * TLS协议类型。

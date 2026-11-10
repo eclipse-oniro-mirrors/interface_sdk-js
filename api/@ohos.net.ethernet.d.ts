@@ -82,7 +82,7 @@ declare namespace ethernet {
   function getIfaceConfig(iface: string): Promise<InterfaceConfiguration>;
 
   /**
-   * Sets the network interface configuration information. This API uses an asynchronous callback to return the result.
+   * Sets the network interface configuration. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { string } iface - Interface name.
@@ -92,7 +92,7 @@ declare namespace ethernet {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201004 - Invalid Ethernet profile.
@@ -107,17 +107,16 @@ declare namespace ethernet {
   function setIfaceConfig(iface: string, ic: InterfaceConfiguration, callback: AsyncCallback<void>): void;
 
   /**
-   * Sets the network interface configuration information. This API uses a promise to return the result.
+   * Sets the network interface configuration. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { string } iface - Interface name.
    * @param { InterfaceConfiguration } ic - Network interface configuration to set.
-   * @returns { Promise<void> } Promise used to return the result. If the operation is successful, the return result is
-   *     empty. If the operation fails, an error code is returned.
+   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
-   * @throws { BusinessError } 2100001 - Invalid parameter value.
+   * @throws { BusinessError } 2200001 - Invalid parameter value.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
    * @throws { BusinessError } 2200003 - System internal error.
    * @throws { BusinessError } 2201004 - Invalid Ethernet profile.
@@ -132,7 +131,7 @@ declare namespace ethernet {
   function setIfaceConfig(iface: string, ic: InterfaceConfiguration): Promise<void>;
 
   /**
-   * Checks whether the interface is activated. This API uses an asynchronous callback to return the result.
+   * Checks whether the interface is active. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { string } iface - Interface name. If this parameter is left empty, the API checks for any active network
@@ -155,14 +154,13 @@ declare namespace ethernet {
   function isIfaceActive(iface: string, callback: AsyncCallback<int>): void;
 
   /**
-   * Checks whether the interface is activated. This API uses a promise to return the result.
+   * Checks whether the interface is active. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { string } iface - Interface name. If this parameter is left empty, the API checks for any active network
    *     interface.
-   * @returns { Promise<int> } Promise used to return the result. The value **1** means that the network interface is
-   *     active, **0** means that the network interface is inactive, and any other value means that an error has
-   *     occurred.
+   * @returns { Promise<int> } Promise used to return the result. 1 if activated; 0 if not activated; otherwise, an
+   *     error code indicating the failure to obtain the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -178,7 +176,7 @@ declare namespace ethernet {
   function isIfaceActive(iface: string): Promise<int>;
 
   /**
-   * Obtains the active network interface. This API uses an asynchronous callback to return the result.
+   * Obtains the active network interfaces. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
    * @param { AsyncCallback<Array<string>> } callback - Callback used to return the result.
@@ -194,10 +192,11 @@ declare namespace ethernet {
   function getAllActiveIfaces(callback: AsyncCallback<Array<string>>): void;
 
   /**
-   * Obtains the active network interface. This API uses a promise to return the result.
+   * Obtains the active network interfaces. This API uses a promise to return the result.
    *
    * @permission ohos.permission.GET_NETWORK_INFO
-   * @returns { Promise<Array<string>> } Promise used to return the result.
+   * @returns { Promise<Array<string>> } Promise used to return the result. The return value is the corresponding API
+   *     name.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 2200002 - Failed to connect to the service.
@@ -272,12 +271,12 @@ declare namespace ethernet {
   function offInterfaceStateChange(callback?: Callback<InterfaceStateInfo>): void;
 
   /**
-   * Obtains the names and MAC addresses of all Ethernet NICs. This API uses a promise to return the result.
-   *
-   * **Required permission**: ohos.permission.GET_ETHERNET_LOCAL_MAC
+   * Obtains the names of all Ethernet NICs and the MAC address information of the corresponding NICs. This API uses a
+   * promise to return the result.
    *
    * @permission ohos.permission.GET_ETHERNET_LOCAL_MAC
-   * @returns { Promise<Array<MacAddressInfo>> } Promise used to return the result.
+   * @returns { Promise<Array<MacAddressInfo>> } Promise used to return the names of all Ethernet NICs and the
+   *     corresponding MAC address information.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
    * @throws { BusinessError } 2201005 - Device information does not exist.
@@ -533,7 +532,7 @@ declare namespace ethernet {
    */
   export interface MacAddressInfo {
     /**
-     * Name of the Ethernet NIC.
+     * Ethernet NIC name, for example, "eth0". It can be obtained through [getMacAddress]{@link ethernet.getMacAddress}.
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @since 14 dynamic
@@ -542,7 +541,7 @@ declare namespace ethernet {
     iface: string;
 
     /**
-     * MAC address of the Ethernet NIC.
+     * MAC address information of the Ethernet NIC, in the format of "XX:XX:XX:XX:XX:XX".
      *
      * @syscap SystemCapability.Communication.NetManager.Ethernet
      * @since 14 dynamic
@@ -629,6 +628,7 @@ declare namespace ethernet {
      * @since 26.0.1 static
      */
     maximumRate: string;
+
   }
 
   /**
@@ -663,4 +663,3 @@ declare namespace ethernet {
 }
 
 export default ethernet;
- 

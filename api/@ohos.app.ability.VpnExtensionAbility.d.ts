@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Enhanced VPN Management
+ * @file
  * @kit NetworkKit
  */
 
@@ -25,7 +25,7 @@ import type Want from './@ohos.app.ability.Want';
  * **VpnExtensionContext** represents the context of **VpnExtensionAbility** and is inherited from
  * [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}.
  *
- * This module provides the context required for APIs to access the resources of a **VpnExtensionAbility** object.
+ * This module provides lifecycle callbacks for third-party VPNs, including VPN creation and destruction.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
@@ -34,7 +34,8 @@ import type Want from './@ohos.app.ability.Want';
  */
 export default class VpnExtensionAbility {
   /**
-   * Specified context.
+   * Context of the VpnExtension. This context is inherited from
+   * [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -44,12 +45,12 @@ export default class VpnExtensionAbility {
   context: VpnExtensionContext;
 
   /**
-   * Represents the callback triggered when the extended VPN is initialized.
+   * Called when the third-party VPN is initialized upon startup.
    *
    * > **NOTE**
    * >
    * > You are advised to call [onDestroy]{@link VpnExtensionAbility#onDestroy} to listen to the destruction of the
-   * > extended VPN and clear resources in a timely manner.
+   * > third-party VPN and clear resources in a timely manner.
    *
    * @param { Want } want - Want information.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -60,7 +61,7 @@ export default class VpnExtensionAbility {
   onCreate(want: Want): void;
 
   /**
-   * Represents the callback triggered when the extended VPN is destroyed.
+   * Called when the third-party VPN is destroyed to clear resources.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
