@@ -848,17 +848,6 @@ declare class XComponentAttribute extends CommonMethod<XComponentAttribute> {
    * @since 26.1.0 dynamic
    */
   bufferQueueCount(count: number): XComponentAttribute;
-
-  /**
-   * Enable the surface visibility lifecycle for XComponent.
-   *
-   * @param { Optional<boolean> } isVisibilityLifecycle - Whether to enable the surface visibility lifecycle.
-   * @returns { XComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 26.1.0 dynamic
-   */
-  enableSurfaceVisibilityLifecycle(isVisibilityLifecycle: Optional<boolean>): XComponentAttribute;
 }
 
 /**
