@@ -597,7 +597,7 @@ declare namespace certificateManagerDialog {
    * @throws { BusinessError } 29700002 - The user cancels the authentication operation or operation timed out.
    * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
    *     The USB key certificate does not exist.
-   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   *     The USB key status is abnormal. Please ask the user to check the status of the Ukey.
    *     The Ukey authentication dialog box cannot be opened concurrently. Please try again later.
    * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
    *     For example, the parameter format is incorrect or the value range is invalid.
@@ -682,7 +682,7 @@ declare namespace certificateManagerDialog {
    * @throws { BusinessError } 29700002 - The user cancels the authentication operation.
    * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
    *     The USB key certificate does not exist.
-   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   *     The USB key status is abnormal. Please ask the user to check the status of the Ukey.
    * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy. Only the
    *     PC/2in1 device can open the dialog box of the UkeyAuthExtensionAbility type.
    * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
@@ -750,7 +750,7 @@ declare namespace certificateManagerDialog {
    * @since 26.1.0 dynamic&static
    */
   export interface InstallCertificateRequest {
- 
+
     /**
      * 安装的证书类型。目前支持**CA_CERT**、**CREDENTIAL_USER**和
      * **CREDENTIAL_SYSTEM**。
@@ -760,17 +760,16 @@ declare namespace certificateManagerDialog {
      * @since 26.1.0 dynamic&static
      */
     certType: CertificateType;
- 
+
     /**
-     * 待安装证书的使用范围。**当前用户**和
-     * **NOT_Specific**目前支持。
+     * 待安装证书的使用范围。目前支持**当前用户**和**NOT_Specific**。
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     certScope: CertificateScope;
- 
+
     /**
      * 证书数据。大小不能超过8KB。<br>certType为CA_CERT时，证书数据必须为PEM或DER格式。<br>certType为CREDENTIAL_USER或CREDENTIAL_SYSTEM时，必须为P12编码格式。
      *
@@ -779,10 +778,10 @@ declare namespace certificateManagerDialog {
      * @since 26.1.0 dynamic&static
      */
     cert: Uint8Array;
- 
+
     /**
      * 密钥库文件的密码。该参数仅当certType取值为CREDENTIAL_USER或CREDENTIAL_SYSTEM时有效，如果指定了keystorePwd参数，则对话框中无需用户输入密码。
-     * 最大长度为128。
+     * 最大长度为32字节。
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
@@ -790,7 +789,7 @@ declare namespace certificateManagerDialog {
      */
     keystorePwd?: string;
   }
- 
+
   /**
    * 打开证书管理安装证书对话框。证书安装成功后，
    * 返回证书的唯一标识符。应用程序可以使用该标识符来使用证书。
