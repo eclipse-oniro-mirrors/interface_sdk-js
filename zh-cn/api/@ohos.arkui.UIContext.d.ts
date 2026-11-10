@@ -1625,7 +1625,7 @@ export const enum NodeSensitiveInputEventType {
 export interface NodeSensitiveInputInfo {
   /**
    * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
-   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   * ohos.permission.CONTROL_COMPONENT权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2691,7 +2691,7 @@ export class UIObserver {
    * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
    * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过
    * [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中的**isAgent**判断事件是否由系统Agent生成，
-   * 或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   * 或由具有ohos.permission.CONTROL_COMPONENT权限的应用注入。
    *
    * 即使事件最终未分发到节点，也会触发回调。例如，被
    * [agentControlMode]{@link CommonMethod#agentControlMode}阻止的Agent生成事件仍会上报，以便感知对
