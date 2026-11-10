@@ -3854,6 +3854,20 @@ declare namespace webview {
         static getDefaultUserAgent(): string;
 
         /**
+         * Obtains the default user agent without initializing the ArkWeb kernel.
+         *
+         * Unlike getDefaultUserAgent, this API does not trigger web engine initialization, so it can be
+         * called during application startup to report the user agent to a server without extra memory
+         * cost. If the ArkWeb engine library is unavailable, an empty string is returned.
+         *
+         * @returns {string} The default user agent string.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static getDefaultUserAgentLite(): string;
+
+        /**
          * Called when the
          * [application takes over media playback of the web page](docroot://reference/apis-arkweb/arkts-basic-components-web-attributes.md#enablenativemediaplayer12)
          * and a media file is played on the web page.
