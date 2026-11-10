@@ -787,7 +787,7 @@ declare namespace certificateManagerDialog {
     certType: CertificateType;
 
     /**
-     * Application scope of the certificate to be installed. Currently, **Current User** and **NOT_Specific** are
+     * Application scope of the certificate to be installed. Currently, **CURRENT_USER** and **NOT_SPECIFIED** are
      * supported.
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
