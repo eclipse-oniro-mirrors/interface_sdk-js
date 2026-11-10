@@ -5562,7 +5562,7 @@ declare namespace window {
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
-   * @since 26.2.0 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   interface WindowShowParams {
     /**
@@ -5572,7 +5572,7 @@ declare namespace window {
      * @default true
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     windowFocused?: boolean;
 
@@ -5583,7 +5583,7 @@ declare namespace window {
      * @default true
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     raiseTop?: boolean;
   }
