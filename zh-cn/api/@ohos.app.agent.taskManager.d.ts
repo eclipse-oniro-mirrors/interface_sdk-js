@@ -62,12 +62,41 @@ declare namespace taskManager {
   }
 
   /**
-   * 以指定任务 ID 启动任务。任务立即激活，系统按指定优先级对归因到该任务的进程进行管控。
+   * 描述待启动任务的配置信息。
+   *
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface TaskInfo {
+    /**
+     * 任务 ID，作为任务执行期间所拉起进程的归因主键。长度范围为 1~256 个字符。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    taskId: string;
+    /**
+     * 任务优先级。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     * @default TaskPriority.MEDIUM
+     */
+    priority?: TaskPriority;
+  }
+
+  /**
+   * 以指定任务信息启动任务。任务立即激活，系统按指定优先级对归因到该任务的进程进行管控。
    * 任务持续存活，直至调用 finishTask 或系统自动结束（如任务超时、创建者进程退出）。
    * 若指定任务 ID 的任务已存在，该 promise 被拒绝。
    *
-   * @param { string } taskId - 任务 ID，作为任务执行期间所拉起进程的归因主键。长度范围为 1~256 个字符。
-   * @param { TaskPriority } [priority] - 任务优先级。默认值为**MEDIUM**。
+   * @param { TaskInfo } taskInfo - 待启动任务的配置信息。
    * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 16000301 - Task already exists.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -75,7 +104,7 @@ declare namespace taskManager {
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function startTask(taskId: string, priority?: TaskPriority): Promise<void>;
+  function startTask(taskInfo: TaskInfo): Promise<void>;
 
   /**
    * 以指定任务 ID 结束任务。撤销对归因到该任务的进程施加的资源管控，恢复进程的调度状态。

@@ -63,15 +63,44 @@ declare namespace taskManager {
   }
 
   /**
-   * Starts a task with the specified task ID. The task is activated immediately, and the
+   * Describes the configuration of a task to start.
+   *
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface TaskInfo {
+    /**
+     * ID of the task, which is used as the attribution key for the processes
+     * launched during the task execution. The value must contain 1 to 256 characters.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    taskId: string;
+    /**
+     * Priority of the task.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     * @default TaskPriority.MEDIUM
+     */
+    priority?: TaskPriority;
+  }
+
+  /**
+   * Starts a task with the specified task information. The task is activated immediately, and the
    * processes attributed to the task are managed by the system according to the specified
    * priority. The task remains active until finishTask is called or the task is automatically
    * ended by the system (for example, when the task times out or the creator process exits).
    * If a task with the specified task ID already exists, this promise is rejected.
    *
-   * @param { string } taskId - ID of the task, which is used as the attribution key for the
-   * processes launched during the task execution. The value must contain 1 to 256 characters.
-   * @param { TaskPriority } [priority] - Priority of the task. The default value is **MEDIUM**.
+   * @param { TaskInfo } taskInfo - Configuration of the task to start.
    * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
    * @throws { BusinessError } 16000301 - Task already exists.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -79,7 +108,7 @@ declare namespace taskManager {
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function startTask(taskId: string, priority?: TaskPriority): Promise<void>;
+  function startTask(taskInfo: TaskInfo): Promise<void>;
 
   /**
    * Ends the task with the specified task ID. The resource management applied to the processes
