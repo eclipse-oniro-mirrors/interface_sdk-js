@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ 
 /**
- * @file Suspend Manager
+ * @file 冻结管理
  * @kit BackgroundTasksKit
  */
-
+ 
 import { AsyncCallback, BusinessError } from './@ohos.base';
-
+ 
 /**
  * 提供查询应用卡顿状态和注册监听器的API。
  * 挂起状态改变。
@@ -71,7 +71,7 @@ declare namespace suspendManager {
      */
     FROZEN = 2
   }
-
+ 
   /**
    * 定义挂起状态变化的观察者。
    *
@@ -118,7 +118,7 @@ declare namespace suspendManager {
      */
     onFrozen(pidList: Array<int>, uid: int): void;
   }
-
+ 
   /**
    * 注册一个挂起状态观察者来监听应用的挂起状态变化。
    *
@@ -154,7 +154,7 @@ declare namespace suspendManager {
    * @since 26.1.0 dynamiconly
    */
   function unregisterSuspendStateObserver(observer: SuspendStateObserver): void;
-
+ 
   /**
    * 根据进程的PID查询进程的冻结状态。
    *
@@ -174,5 +174,5 @@ declare namespace suspendManager {
    */
   function getSuspendStateByPidList(pidList: Array<int>): Array<FreezeState>;
 }
-
+ 
 export default suspendManager;

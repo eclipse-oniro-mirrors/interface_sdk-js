@@ -134,9 +134,8 @@ declare namespace suspendManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 31800005 - Parameter error. Possible cause: Duplicate observer registration.
-   * @throws { BusinessError } 31800006 - Failed to get suspend manager service. Possible cause: A necessary system
-   *     service is not ready.
+   * @throws { BusinessError } 31800005 - Parameter error.
+   * @throws { BusinessError } 31800006 - Failed to get suspend manager service.
    * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -152,9 +151,8 @@ declare namespace suspendManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 31800005 - Parameter error. Possible cause: Observer not registered.
-   * @throws { BusinessError } 31800006 - Failed to get suspend manager service. Possible cause: A necessary system
-   *     service is not ready.
+   * @throws { BusinessError } 31800005 - Parameter error.
+   * @throws { BusinessError } 31800006 - Failed to get suspend manager service.
    * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -171,9 +169,8 @@ declare namespace suspendManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 31800005 - Parameter error. Possible cause: PID does not exist.
-   * @throws { BusinessError } 31800006 - Failed to get suspend manager service. Possible cause: A necessary system
-   *     service is not ready.
+   * @throws { BusinessError } 31800005 - Parameter error.
+   * @throws { BusinessError } 31800006 - Failed to get suspend manager service.
    * @syscap SystemCapability.Resourceschedule.BackgroundProcessManager
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
