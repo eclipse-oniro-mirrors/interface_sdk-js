@@ -550,7 +550,16 @@ declare namespace access {
      * @since 20 dynamic
      * @since 23 static
      */
-    BLUETOOTH_SWITCH = 0
+    BLUETOOTH_SWITCH = 0,
+    /**
+     * 蓝牙取消配对对话框。
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BLUETOOTH_UNPAIR = 1
   }
 }
 
