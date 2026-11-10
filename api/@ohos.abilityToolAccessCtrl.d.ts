@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * @file This module provides the capabilities of tools access control
  * @kit AbilityKit
@@ -143,8 +144,8 @@ declare namespace abilityToolAccessCtrl {
     needTicket?: boolean;
 
     /**
-     * Ticket expiration time in milliseconds.
-     * Unit: milliseconds. The value must be greater than 0. Value constraint: Greater than 0.
+     * Credential expiration time, in milliseconds. The value must be greater than 0.
+     * Value restriction: The value must be greater than 0.
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -679,7 +680,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum Role {
     /**
-     * Controller device.
+     * Master device.
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -689,7 +690,7 @@ declare namespace abilityToolAccessCtrl {
     CONTROLLER = 0x01,
 
     /**
-     * Controlled device.
+     * Charged equipment.
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -910,8 +911,8 @@ declare namespace abilityToolAccessCtrl {
      */
     authToken?: Uint8Array;
     /**
-     * Valid duration of auth token.
-     * Unit: seconds. Value range: (0,60].
+     * Validity period of the trusted possession authentication credential.
+     *The unit is millisecond. Value range: (0, 86400000].
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -948,7 +949,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * Control permission status result for an application.
+   * Control permission status result of the application.
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -975,17 +976,17 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * Queries tool permissions based on the specified operations.
-   * This function checks the permission status for CLI commands or APIs specified in permissionQuery.operationInfo.
+   * Query tool permissions based on specified operations.
+   * This function is used to check the permission status of the CLI command or API specified in the permission query.
    * For each operation, it returns the permission status, authorization status, and whether a user dialog is required.
-   * When needTicket is set to true, a ticket will be generated for remote authorization.
+   * When needTicket is set to true, remote authorization generates a credential.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { PermissionQuery } permissionQuery - Permission query information.
-   * @returns { Promise<PermissionQueryResult> } Promise used to return ${PermissionQueryResult}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<PermissionQueryResult> }Promise object that returns ${PermissionQueryResult}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
    *     specified callerTokenId does not exist, ticketExpireTime exceeds 24h, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1002,16 +1003,16 @@ declare namespace abilityToolAccessCtrl {
   export function requestToolPermissions(permissionQuery: PermissionQuery): Promise<PermissionQueryResult>;
 
   /**
-   * Grants tool permissions based on user authorization results.
-   * This function grants permissions for tools (CLI commands or APIs) according to the user's authorization decisions.
-   * After successful authorization, tickets are generated which can be used for permission verification.
+   * Grant tool permissions based on user authorization results.
+   * This function determines the permissions granted to the tool (CLI command or API) based on the user's authorization.
+   * After the authorization is successful, a credential is generated for permission verification.
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
    * @param { UserAuthResult[] } userAuthResult - User authorization result list.
-   * @returns { Promise<TicketInfo[]> } Promise used to return ${TicketInfo[]}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<TicketInfo[]> }Promise object, which returns ${TicketInfo[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. PermissionName exceeds 256 characters,
    *     permissionStatus is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1029,16 +1030,16 @@ declare namespace abilityToolAccessCtrl {
   export function grantToolPermissionsByUser(userAuthResult: UserAuthResult[]): Promise<TicketInfo[]>;
 
   /**
-   * Generates an authorization package for the controller device.
-   * This function generates a remote authorization package based on the remote user authorization results.
+   * Generate the authorization package of the main control device.
+   * Generate a remote authorization package based on the remote user authorization result.
    * The generated package can be sent to the controlled device for permission verification.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteUserAuthResults[] } remoteUserAuthResult - Remote user authorization result list.
-   * @returns { Promise<RemoteAuthPackage[]> } Promise used to return ${RemoteAuthPackage[]}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteAuthPackage[]> }Promise object that returns ${RemoteAuthPackage[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
    *     specified callerTokenId does not exist, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1054,16 +1055,16 @@ declare namespace abilityToolAccessCtrl {
     Promise<RemoteAuthPackage[]>;
 
   /**
-   * Generates an authorization package for the controlled device.
-   * This function generates a remote authorization package based on the permission query list.
-   * The generated package can be sent to the controller device for permission verification.
+   * Generate the authorization package of the controlled device.
+   * Generate a remote authorization package based on the permission query list.
+   * The generated package can be sent to the master device for permission verification.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { PermissionQuery[] } permissionQuery - Permission query list.
-   * @returns { Promise<RemoteAuthPackage[]> } Promise used to return ${RemoteAuthPackage[]}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteAuthPackage[]> }Promise object that returns ${RemoteAuthPackage[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Permission exceeds 256 characters,
    *     specified tokenId is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1078,17 +1079,17 @@ declare namespace abilityToolAccessCtrl {
   export function generateControlledDevicePackage(permissionQuery: PermissionQuery[]): Promise<RemoteAuthPackage[]>;
 
   /**
-   * Verifies the authorization package from the controller device.
-   * This function verifies the remote authorization package sent by the controller device.
-   * It validates the ticket and remote device information to ensure the authorization is legitimate.
+   * Verify the authorization package from the master device.
+   * Verify the remote authorization package sent by the master device.
+   * Validate ticket and remote device information to ensure that authorization is legitimate.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteAuthPackage[] } ticketInfo - Remote authorization package list.
    * @param { RemoteInfo } remoteInfo - Remote device information.
-   * @returns { Promise<boolean[]> } Promise used to return ${boolean[]}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<boolean[]> }Promise object that returns ${boolean[]}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo or remoteInfo is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1103,16 +1104,16 @@ declare namespace abilityToolAccessCtrl {
     Promise<boolean[]>;
 
   /**
-   * Verifies the authorization package from the controlled device.
-   * This function verifies the remote authorization package sent by the controlled device.
-   * It validates the ticket to ensure the authorization is legitimate.
+   * Verify the authorization package of the controlled device.
+   * Verify the remote authorization package sent by the controlled device.
+   * Validate the ticket to ensure that the authorization is legitimate.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteAuthPackage[] } ticketInfo - Remote authorization package list.
    * @returns { Promise<boolean[]> } Promise used to return ${boolean[]}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1132,10 +1133,10 @@ declare namespace abilityToolAccessCtrl {
    *    when disabled, remote authorization is not allowed.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @returns { Promise<RemoteGrantStatus> } Promise used to return ${RemoteGrantStatus}.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteGrantStatus> }Promise object that returns ${RemoteGrantStatus}.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1154,10 +1155,10 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
    * @param { RemoteGrantStatus } remoteGrantStatus - Remote grant status to be set.
-   * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. RemoteGrantStatus is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1179,8 +1180,9 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
    * @param { CliCmdInfo[] } cliCmdInfos - CLI command list.
-   * @param { TicketParams } ticketParams - Used to generate ticket parameters.
-   * @returns { Promise<TicketQueryResult> } Promise used to return ${TicketQueryResult}。
+   *
+   * @param { TicketParams } ticketParams - Parameters used to generate credentials.
+   * @returns { Promise<TicketQueryResult> }Promise object, return ${TicketQueryResult}
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
@@ -1202,11 +1204,11 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { TaskIdentityInfo } taskIdentityInfo - Task identity info to generate authentication identity.
-   * @returns { Promise<TaskIdentity> } Promise used to return ${TaskIdentity}。
+   * @returns { Promise<TaskIdentity> }Promise object that returns ${TaskIdentity}.
    * @throws { BusinessError } 201 - Permission verification failed.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TaskId is empty, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1218,16 +1220,16 @@ declare namespace abilityToolAccessCtrl {
   export function generateTaskIdentity(taskIdentityInfo: TaskIdentityInfo): Promise<TaskIdentity>;
 
   /**
-   * Batch revoke task authentication identities for agent commands.
-   * This function batch revokes the task authentication identities and deletes the local cache of task attributes.
+   * Task authentication ID of the batch deregistration proxy command.
+   * This function is used to cancel task authentication IDs in batches and delete the local cache of task attributes.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { string[] } taskId - Task ID list to revoke authentication identity.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { string[] } taskId - ID list of tasks to be canceled. The maximum length of the list is 100.
+   * @returns { Promise<void> }Promise object. No result is returned.
    * @throws { BusinessError } 201 - Permission verification failed.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010000 - Invalid parameter. Task ID is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1239,13 +1241,14 @@ declare namespace abilityToolAccessCtrl {
   export function revokeTaskIdentity(taskId: string[]): Promise<void>;
 
   /**
-   * Queries the control permission status for the specified applications.
+   * This API is used to query the control permission status of a specified application.
    * This function checks whether each application in the input list is allowed or denied
-   * to be controlled by external tools. The result list corresponds to the input order.
+   * Controlled by external tools. The result list corresponds to the input order.
    *
    * @permission ohos.permission.CONTROL_DEVICE
    * @param { AppInfo[] } appInfo - Application information list.
-   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   *
+   * @returns { Promise<ControlAppStatusResult[]> }Promise object that returns ${ControlAppStatusResult[]}.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
@@ -1259,14 +1262,15 @@ declare namespace abilityToolAccessCtrl {
   export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
 
   /**
-   * Requests the control permission for the specified applications from the user.
-   * This function displays a user dialog to obtain authorization decisions for controlling
-   * each application. The result reflects the user's allow or deny decision for each app.
+   * Request the control permission of a specified application from a user.
+   * This function pops up a user dialog box to obtain the control authorization decision for each application.
+   * The returned result reflects the user's decision to allow or deny each application.
    *
    * @permission ohos.permission.CONTROL_DEVICE
-   * @param { Context } context - Context object for displaying the user dialog.
+   * @param { Context } context - Context object for displaying the
+   * user dialog.
    * @param { AppInfo[] } appInfo - Application information list.
-   * @returns { Promise<ControlAppStatusResult[]> } Promise used to return ${ControlAppStatusResult[]}.
+   * @returns { Promise<ControlAppStatusResult[]> }Promise object that returns ${ControlAppStatusResult[]}.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
@@ -1281,12 +1285,12 @@ declare namespace abilityToolAccessCtrl {
   export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
     Promise<ControlAppStatusResult[]>;
   /**
-   * Generate the challenge for task auth token generation.
-   * This function generates a challenge based on task identity info.
+   * Generate a challenge value for the task authentication token.
+   * This function generates challenge values based on task identity information.
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { TaskIdentityInfo } taskIdentityInfo - Task identity info to generate challenge.
-   * @returns { Promise<Uint8Array> } Promise used to return ${Uint8Array}.
+   * @returns { Promise<Uint8Array> }Promise object, which returns the challenge value in the format of ${Uint8Array}.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
