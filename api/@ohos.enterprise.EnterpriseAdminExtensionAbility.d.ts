@@ -484,10 +484,10 @@ export default class EnterpriseAdminExtensionAbility {
    * API.
    *
    * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
-   * @param { number } userId - ID of the user whose password authentication failed.
+   * @param { number } accountId - ID of the user whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
-  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
+  onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
 }

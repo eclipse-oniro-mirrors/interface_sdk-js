@@ -388,10 +388,10 @@ export default class EnterpriseAdminExtensionAbility {
    * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
    *
    * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
-   * @param { number } userId - 发生密码认证失败的用户ID。
+   * @param { number } accountId - 发生密码认证失败的用户ID。
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
-  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
+  onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
 }
