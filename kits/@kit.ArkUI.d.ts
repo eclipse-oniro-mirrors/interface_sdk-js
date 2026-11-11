@@ -139,13 +139,13 @@ import {
   ToolBarState, DockArea, DockCornerMode, ToolBarSafeAreaMode, HandednessAdaptationMode,
   ToolBarFloatingOptions, ToolBarFloatingConfigs,
   ToolBarMinimizeOptions, ToolBarMinimizeConfigs,
-  ToolBarController, ToolBarInitialParam,
+  ToolBarController, ToolBarInitialParams,
   ToolBarParams, ToolBarConfigs, ToolBarCallbacks,
   ToolBarDockOffsetOptions, ToolBarSafeAreaOptions,
   ToolBarContainerOptions, ToolBarContainerConfigs,
   ToolBarContainer,
   ToolBarDragStateCallback, ToolBarDragOffsetCallback, ToolBarStateCallback, ToolBarDockCallback,
-} from '@ohos.arkui.advanced.ToolBarContainer'
+} from '@ohos.arkui.advanced.ToolBarContainer';
 import {
   CallbackParam, NodeParam, TreeController, TreeListenType, TreeListener, TreeListenerManager, TreeView
 } from '@ohos.arkui.advanced.TreeView';
@@ -375,7 +375,7 @@ export {
   ToolBarV2ItemPlacement, ToolBarV2OverflowMenuStyle, ToolBarV2PaddingOptions, ToolBarV2StyleConfigs,
   ToolBarV2StyleOptions, ToolBarV2TitleConfigs, ToolBarV2TitleOptions, ToolBarV2TitleStyle, ToolBarV2TitleStyleOptions, ToolBarV2MaterialStyle,
   ToolBarState, DockArea, DockCornerMode, ToolBarSafeAreaMode, HandednessAdaptationMode, ToolBarFloatingOptions, ToolBarFloatingConfigs,
-  ToolBarMinimizeOptions, ToolBarMinimizeConfigs, ToolBarController, ToolBarInitialParam, ToolBarParams, ToolBarConfigs, ToolBarCallbacks, ToolBarDockOffsetOptions, ToolBarSafeAreaOptions,
+  ToolBarMinimizeOptions, ToolBarMinimizeConfigs, ToolBarController, ToolBarInitialParams, ToolBarParams, ToolBarConfigs, ToolBarCallbacks, ToolBarDockOffsetOptions, ToolBarSafeAreaOptions,
   ToolBarContainerOptions, ToolBarContainerConfigs, ToolBarContainer, ToolBarDragStateCallback, ToolBarDragOffsetCallback, ToolBarStateCallback, ToolBarDockCallback,
   TreeListenerManager, TreeView, UIContext, UIInspector, UIObserver, PlaceholderRegister, PageInfo, WindowExtensionAbility, WindowExtensionContext, WithEnv, WithEnvAttribute, XComponentNode,
   LengthMetrics, LengthUnit, ColorMetrics, BackgroundBlur, ContentBlur, ForegroundBlur, LengthMetricsUnit, LayoutConstraint, ComponentContent, ReactiveComponentContent, NodeContent, Content, Edges,
