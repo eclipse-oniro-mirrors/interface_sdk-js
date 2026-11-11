@@ -3474,8 +3474,8 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **NOTE**
      * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * <br> > state.
+     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED**, **FLG_FLOATING**,
+     * <br> > or **FLG_DETACHED** state.
      * <br> >
      * <br> > This API returns the result synchronously. The return only indicates that the system has received the request
      * <br> > for updating the hot zone, not that the hot zone has been updated.
@@ -3492,6 +3492,35 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     updateRegion(inputRegion: Array<window.Rect>): void;
+
+    /**
+     * Updates the hot zone on the input method panel in the current state. This API is a synchronous version of
+     * [updateRegion]{@link inputMethodEngine.Panel.updateRegion(inputRegion: Array<window.Rect>)}.
+     * Use this API together with
+     * [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: PanelRect)}
+     * to ensure that panel size adjustment and hot zone update are executed sequentially in call order,
+     * avoiding timing issues caused by mixing synchronous and asynchronous calls.
+     * <br>
+     * <br> > **NOTE**
+     * <br> >
+     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED**, **FLG_FLOATING**,
+     * <br> > or **FLG_DETACHED** state.
+     * <br> >
+     * <br> > This API returns the result synchronously. The return only indicates that the system has received the request
+     * <br> > for updating the hot zone, not that the hot zone has been updated.
+     *
+     * @param { Array<window.Rect> } inputRegion - Region for receiving input events.
+     * <br>    - The array size is limited to [1, 4].
+     * <br>    - The input hot zone is relative to the left vertex of the input method panel window.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    updateRegionSync(inputRegion: Array<window.Rect>): void;
 
     /**
      * Enables listening for the panel size change. This API uses an asynchronous callback to return the result.
@@ -4054,9 +4083,10 @@ declare namespace inputMethodEngine {
    * <br>
    * | Name        | Value| Description              |
    * | ------------ | -- | ------------------ |
-   * | FLG_FIXED  | 0 | Fixed state type.|
-   * | FLG_FLOATING | 1 | Floating state type.|
-   * | FLAG_CANDIDATE<sup>15+</sup> | 2 | Candidate state type.|
+    * | FLG_FIXED  | 0 | Fixed state type.|
+    * | FLG_FLOATING | 1 | Floating state type.|
+    * | FLAG_CANDIDATE<sup>15+</sup> | 2 | Candidate state type.|
+    * | FLG_DETACHED<sup>26.1.0+</sup> | 3 | Detached state type.|
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 10 dynamic
@@ -4100,6 +4130,18 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     FLAG_CANDIDATE
+
+    /**
+     * Detached style.
+     * <br>
+     * <br><p>It's provided for the panel with type of SOFT_KEYBOARD.
+     * When the flag is set, the soft keyboard is detached into left and right parts with a hollow area in the middle.
+     * The panel width equals the display width, and the panel can only be moved vertically.</p>
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @since 26.1.0 dynamic&static
+     */
+    FLG_DETACHED
   }
 
   /**
