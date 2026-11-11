@@ -1847,7 +1847,7 @@ declare namespace dlpPermission {
      * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE
      * @param { EnterprisePolicy } policy - 待设置的企业应用防护策略，设置后将按策略对企业DLP文件进行访问控制和行为限制。
      * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @throws { BusinessError } 19100021 - Failed to set the enterprise policy.
