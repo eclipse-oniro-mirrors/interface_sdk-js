@@ -109,7 +109,7 @@ declare namespace hiSysEvent {
     name: string;
 
     /**
-     * 事件类型。参数需满足验证、字符串类型参数大小限制、参数总数限制、数组类型参数数量限制等要求。详见[系统事件错误码](errorcode-hisysevent-sys.md)：11200001-11200054。
+     * 事件类型。
      *
      * @syscap SystemCapability.HiviewDFX.HiSysEvent
      * @systemapi hide for inner use
@@ -130,7 +130,7 @@ declare namespace hiSysEvent {
     params?: object;
 
     /**
-     * 事件参数。
+     * 事件参数。参数需满足验证、字符串类型参数大小限制、参数总数限制、数组类型参数数量限制等要求。详见[系统事件错误码](errorcode-hisysevent-sys.md)：11200001-11200054。
      *
      * @syscap SystemCapability.HiviewDFX.HiSysEvent
      * @systemapi hide for inner use
@@ -458,8 +458,10 @@ declare namespace hiSysEvent {
      * 参数：指定事件参数的键值。
      *
      * 操作符支持：=、!=、<、<=、>和>=。
+     * 
+     * value：比较值，类型可为string、number等。
      *
-     * 支持在“and”数组中配置多个条件，查询结果取交集。
+     * 支持在“and”数组中配置多个条件，查询结果取交集。建议避免配置过多复杂条件以优化查询性能。默认不传该参数时不进行额外参数过滤。
      *
      * @syscap SystemCapability.HiviewDFX.HiSysEvent
      * @systemapi hide for inner use
