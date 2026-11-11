@@ -25553,6 +25553,7 @@ declare class CommonMethod<T> {
    *    2、如果开发者通过[parallelGesture]{@link parallelGesture(gesture: GestureType, mask?: GestureMask)}绑定了与子组件同时触发的手势，如PanGesture，子组件设置了独占控制且首个响应事件，则父组件的手势不会响应。
    * @returns { T }
    返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice [since 12]
