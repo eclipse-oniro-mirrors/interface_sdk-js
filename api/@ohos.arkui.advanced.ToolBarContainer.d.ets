@@ -19,7 +19,7 @@
  */
 
 import { LengthMetrics, ColorMetrics } from '@ohos.arkui.node';
-import { SymbolGlyphModifier } from 'ohos.arkui.modifier';
+import { SymbolGlyphModifier } from '@ohos.arkui.modifier';
 import { AdvancedToolBarV2Item, AdvancedToolBarV2Modifier } from '@ohos.arkui.advanced.ToolBarV2';
 
 /**
