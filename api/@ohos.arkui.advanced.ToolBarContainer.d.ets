@@ -18,12 +18,12 @@
  * @kit ArkUI
  */
 
-import {LengthMetrics, ColorMetrics} from '@ohos.arkui.node'
-import {SymbolGlyphModifier} from 'ohos.arkui.modifier'
-import {AdvancedToolBarV2Item, AdvancedToolBarV2Modifer} from '@ohos.arkui.advanced.ToolBarV2';
+import { LengthMetrics, ColorMetrics } from '@ohos.arkui.node';
+import { SymbolGlyphModifier } from 'ohos.arkui.modifier';
+import { AdvancedToolBarV2Item, AdvancedToolBarV2Modifier } from '@ohos.arkui.advanced.ToolBarV2';
 
 /**
- *  工具栏的拖拽状态回调，拖拽开始或结束时触发时使用
+ * 工具栏的拖拽状态回调，拖拽开始或结束时触发时使用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -33,10 +33,10 @@ import {AdvancedToolBarV2Item, AdvancedToolBarV2Modifer} from '@ohos.arkui.advan
  */
 export declare type ToolBarDragStateCallback = () => void;
 /**
- *  相对于ToolBarContainer容器的拖拽偏移量回调。
+ * 相对于ToolBarContainer容器的拖拽偏移量回调。
  *
- * @param { number } x - X 轴偏移量，单位为vp。
- * @param { number } y - Y 轴偏移量，单位为vp。
+ * @param { number } x - X 轴偏移量，单位为 vp。
+ * @param { number } y - Y 轴偏移量，单位为 vp。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -47,7 +47,7 @@ export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
 /**
  *  工具栏状态变化时的回调。
  *
- * @param { ToolBarState } state - 当前工具栏状态
+ * @param { ToolBarState } state - 当前工具栏状态。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -57,10 +57,10 @@ export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
  */
 export declare type ToolBarStateCallback = (state: ToolBarState) => void;
 /**
- *  工具栏停靠到指定区域和方向的回调。
+ *  工具栏停靠到指定区域和方向时的回调。
  *
- * @param {DockArea} area - 工具栏停靠的区域。
- * @param {Axis} direction - 停靠方向。
+ * @param { DockArea } area - 工具栏停靠的区域。
+ * @param { Axis } direction - 停靠方向。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -70,7 +70,7 @@ export declare type ToolBarStateCallback = (state: ToolBarState) => void;
  */
 export declare type ToolBarDockCallback = (area: DockArea, direction: Axis) => void;
 /**
- *  定义工具栏接入智感握姿模式。
+ * 定义工具栏接入智感握姿模式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -80,7 +80,7 @@ export declare type ToolBarDockCallback = (area: DockArea, direction: Axis) => v
  */
 export enum HandednessAdaptationMode {
   /**
-   *  工具栏不启用智感握姿。
+   * 工具栏不启用智感握姿。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -90,7 +90,7 @@ export enum HandednessAdaptationMode {
    */
   NONE = 0,
   /**
-   *  工具栏适配启用默认智感握姿适配。
+   * 工具栏适配启用默认智感握姿适配。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -101,7 +101,7 @@ export enum HandednessAdaptationMode {
   DEFAULT = 1,
 }
 /**
- *  定义工具栏状态。
+ * 定义工具栏状态。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -109,9 +109,9 @@ export enum HandednessAdaptationMode {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export enum ToolBarState{
+export enum ToolBarState {
   /**
-   *  工具栏固定在当前位置
+   * 工具栏固定在当前位置
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -119,9 +119,9 @@ export enum ToolBarState{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  FIXED=0,
+  FIXED = 0,
   /**
-   *  工具栏处于浮动状态，可被拖拽。
+   * 工具栏处于浮动状态，可被拖拽。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -129,9 +129,9 @@ export enum ToolBarState{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  FLOATING=1,
+  FLOATING = 1,
   /**
-   *  工具栏固定在当前位置
+   * 工具栏固定在当前位置
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -139,11 +139,11 @@ export enum ToolBarState{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  MINIMIZED=2
+  MINIMIZED = 2
 }
 
 /**
- *  定义浮动工具栏可停靠的区域。
+ * 定义浮动工具栏可停靠的区域。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -151,7 +151,7 @@ export enum ToolBarState{
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export enum DockArea{
+export enum DockArea {
   /**
    * 停靠在顶部边缘。
    *
@@ -161,7 +161,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  TOP=0,
+  TOP = 0,
   /**
    * 停靠在底部边缘。
    *
@@ -171,7 +171,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  BOTTOM=1,
+  BOTTOM = 1,
   /**
    * 停靠在左侧边缘。
    *
@@ -181,7 +181,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  LEFT=2,
+  LEFT = 2,
   /**
    * 停靠在右侧边缘。
    *
@@ -191,7 +191,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  RIGHT=3,
+  RIGHT = 3,
   /**
    * 停靠在左上角。
    *
@@ -201,7 +201,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  TOP_LEFT=4,
+  TOP_LEFT = 4,
   /**
    * 停靠在右上角。
    *
@@ -211,7 +211,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  TOP_RIGHT=5,
+  TOP_RIGHT = 5,
   /**
    * 停靠在左下角。
    *
@@ -221,7 +221,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  BOTTOM_LEFT=6,
+  BOTTOM_LEFT = 6,
   /**
    * 停靠在右下角。
    *
@@ -231,7 +231,7 @@ export enum DockArea{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  BOTTOM_RIGHT=7
+  BOTTOM_RIGHT = 7
 }
 
 /**
@@ -243,7 +243,7 @@ export enum DockArea{
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export enum DockCornerMode{
+export enum DockCornerMode {
   /**
    * 吸附到角落并最小化；点击角落后跟随所在边缘。
    *
@@ -253,7 +253,7 @@ export enum DockCornerMode{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  MINIMIZED=0,
+  MINIMIZED = 0,
   /**
    * 保持拖拽方向，不进行最小化。
    *
@@ -263,7 +263,7 @@ export enum DockCornerMode{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  EXPAND=1
+  EXPAND = 1
 }
 
 /**
@@ -275,7 +275,7 @@ export enum DockCornerMode{
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export enum ToolBarSafeAreaMode{
+export enum ToolBarSafeAreaMode {
   /**
    *  不应用安全区内边距。
    *
@@ -285,7 +285,7 @@ export enum ToolBarSafeAreaMode{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  NONE=0,
+  NONE = 0,
   /**
    * 应用等于安全区内边距的 padding。
    *
@@ -295,7 +295,7 @@ export enum ToolBarSafeAreaMode{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  PADDING=1,
+  PADDING = 1,
   /**
    * 同时应用安全区内边距和额外的 padding。
    *
@@ -305,7 +305,7 @@ export enum ToolBarSafeAreaMode{
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  SAFEAREA_PADDING=2
+  SAFEAREA_PADDING = 2
 }
 
 /**
@@ -319,7 +319,7 @@ export enum ToolBarSafeAreaMode{
  */
 export interface ToolBarFloatingOptions {
   /**
-   * 浮动工具栏是否可拖拽。默认值：true
+   * 浮动工具栏是否可拖拽。默认值：true。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -340,7 +340,7 @@ export interface ToolBarFloatingOptions {
    */
   dockAreas?: DockArea[];
   /**
-   * 浮动工具栏悬浮球的最小化配置，默认值为 undefined。
+   * 浮动工具栏悬浮球的最小化配置。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -362,7 +362,7 @@ export interface ToolBarFloatingOptions {
 }
 
 /**
- * 浮动工具栏行为的可观察配置存储。
+ * 浮动工具栏行为的可观察配置存储，
  * 与 {@link ToolBarFloatingOptions} 对应。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -492,7 +492,7 @@ export interface ToolBarMinimizeOptions {
    */
   builder?: CustomBuilder;
   /**
-   * 图标尺寸。单位为 vp。默认值为 undefined。
+   * 图标尺寸，单位为 vp。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -502,7 +502,7 @@ export interface ToolBarMinimizeOptions {
    */
   iconSize?: LengthMetrics;
   /**
-   * 最小化悬浮球的直径。默认：undefined。
+   * 最小化悬浮球的直径。默认值：undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -514,7 +514,7 @@ export interface ToolBarMinimizeOptions {
 }
 
 /**
- * 最小化悬浮球的可观察配置存储。
+ * 最小化悬浮球的可观察配置存储，
  * 与 {@link ToolBarMinimizeOptions} 对应。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -523,10 +523,10 @@ export interface ToolBarMinimizeOptions {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-@Observed
+@ObservedV2
 export class ToolBarMinimizeConfigs {
   /**
-   * 文本标签。默认值为空的ResourceStr。
+   * 文本标签。默认值为空的 ResourceStr。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -537,7 +537,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   text?: ResourceStr;
   /**
-   * 图标。默认值为 undefind。
+   * 图标。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -603,7 +603,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   buoySize?: LengthMetrics;
   /**
-   * 构造函数，当 options 省略时，所有字段使用各自的默认值。
+   * 构造函数.当 options 省略时，所有字段使用各自的默认值。
    *
    * @param { ToolBarMinimizeOptions } [options] - 最小化悬浮球选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -636,7 +636,7 @@ export class ToolBarController {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  setDock(area: DockArea, direction?: Axis):void;
+  setDock(area: DockArea, direction?: Axis): void;
   /**
    * 将工具栏固定为 FIXED 状态。
    *
@@ -668,7 +668,7 @@ export class ToolBarController {
    */
   minimize(): void;
   /**
-   * 将最小化悬浮球恢复成浮动工具栏，从 MINIMIZED 切换为 FLOATING。
+   * 将最小化悬浮球恢复为浮动工具栏，从 MINIMIZED 切换为 FLOATING。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -678,7 +678,7 @@ export class ToolBarController {
    */
   restore(): void;
   /**
-   * 获取当前工具栏的状态。
+   * 获取当前工具栏状态。
    *
    * @returns { ToolBarState } 当前工具栏状态。
    *
@@ -746,7 +746,7 @@ export interface ToolBarInitialParams {
    */
   direction?: Axis;
   /**
-   * 工具栏的初始状态。默认值：{@link ToolBarState.FLOATING}。
+   * 工具栏初始状态。默认值：{@link ToolBarState.FLOATING}。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -820,7 +820,7 @@ export class ToolBarCallbacks {
 }
 
 /**
- * 构造工具栏的参数，包括项列表、modifer、浮动配置和回调。
+ * 构造工具栏的参数，包括项列表、modifier、浮动配置和回调。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -936,7 +936,7 @@ export class ToolBarConfigs {
   @Trace
   advancedToolBarModifier?: AdvancedToolBarV2Modifier;
   /**
-   * 高级工具栏的浮动配置。默认值为：undefined。
+   * 高级工具栏的浮动配置。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -970,7 +970,7 @@ export class ToolBarConfigs {
   /**
    * 从给定参数构造工具栏配置。
    *
-   * @param { ToolBarParams } params - 工具栏构造函数。
+   * @param { ToolBarParams } params - 工具栏构造参数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1034,7 +1034,7 @@ export interface ToolBarDockOffsetOptions {
 }
 
 /**
- * 配置工具栏各边安全区域避让模式的选项。
+ * 配置工具栏各边安全区避让模式的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1106,7 +1106,7 @@ export interface ToolBarContainerOptions {
    */
   dockOffset?: ToolBarDockOffsetOptions;
   /**
-   * 工具栏超长溢出时的避让间隔。默认值为：undefined。
+   * 工具栏超长溢出时的避让间隔。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1161,7 +1161,7 @@ export class ToolBarContainerConfigs {
   @Trace
   dockOffset?: ToolBarDockOffsetOptions;
   /**
-   * 工具栏溢出间隔，单位为 vp。默认值为 undefined。
+   * 工具栏溢出时间隔，单位为 vp。默认值为 undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1203,12 +1203,12 @@ export class ToolBarContainerConfigs {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options: ToolBarContainerOptions);
+  constructor(options?: ToolBarContainerOptions);
 }
 
 /**
  * ToolBarContainer 组件，用于承载一个或多个浮动工具栏，
- * 支持停靠，安全区避让和握姿适配。
+ * 支持停靠、安全区避让和握姿适配。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
