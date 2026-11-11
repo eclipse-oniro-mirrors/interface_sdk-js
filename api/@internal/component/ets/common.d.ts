@@ -20490,10 +20490,10 @@ declare class CommonMethod<T> {
    *
    * >  **NOTE**
    * >
-   * >  - In the [TextInput](./ts-basic-components-textinput.md) component, setting width to **auto** means
+   * >  - In the [TextInput]{@link @global:TextInput} component, setting width to **auto** means
    * >    adapting to the text width.
    * >
-   * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
+   * >  - In the [AlphabetIndexer]{@link @global:AlphabetIndexer} component, setting **width** to
    * >    **auto** means adapting to the width of the largest index item.
    * >
    * >  - In the [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [RelativeContainer]{@link @global:RelativeContainer}

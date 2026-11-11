@@ -20035,9 +20035,9 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[TextInput](./ts-basic-components-textinput.md)组件中，width设置auto表示自适应文本宽度。
+   * > - 在[TextInput]{@link @global:TextInput}组件中，width设置auto表示自适应文本宽度。
    * >
-   * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
+   * > - 在[AlphabetIndexer]{@link @global:AlphabetIndexer}组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
    * > - 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，width设置auto表示自适应子组件。
    * >
