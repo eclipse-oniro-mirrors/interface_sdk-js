@@ -4139,8 +4139,8 @@ export class MeasureUtils {
    *
    * > **NOTE**
    * >
-   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link
-   * > ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
+   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link 
+   * ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
    * > ensure the correctness of the time sequence, you are advised to monitor the font scaling changes by yourself to
    * > ensure the accuracy of the calculation result.
    *
