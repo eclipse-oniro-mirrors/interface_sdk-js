@@ -1660,7 +1660,7 @@ declare namespace dlpPermission {
      * > 该接口由[MDM](docroot://mdm/mdm-kit-intro.md)配置使能，且使能场景为企业设备。其他设备（如消费者终端设备）无需关注该接口，如若调用该接口，则返回值为false。
      *
      * @returns { Promise<boolean> } Promise对象。返回true表示当前系统提供加密保护特性，返回false表示不提供加密保护特性。
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @syscap SystemCapability.Security.DataLossPrevention
      * @since 12
@@ -1740,7 +1740,7 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1771,7 +1771,7 @@ declare namespace dlpPermission {
      * @returns { Promise<string> } Promise对象，返回当前DLP策略的JSON字符串。长度不超过4194304字节。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1804,7 +1804,7 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1882,7 +1882,7 @@ declare namespace dlpPermission {
          * @param { string } requestData - SA（System Ability）侧传递的数据。无范围限制。
          * @param { Callback<string> } callback - SA（System Ability）侧传递的接口，用于回调。无范围限制。
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100011 - The system ability works abnormally.
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
@@ -1906,7 +1906,7 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
          */
@@ -1924,7 +1924,7 @@ declare namespace dlpPermission {
          *     便SA侧调用时能够通过回调返回处理结果。
          * @returns { number } 注册结果，返回该回调的唯一标识ID。取值范围为[0, 2<sup>53</sup>-1]。
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1945,7 +1945,7 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
