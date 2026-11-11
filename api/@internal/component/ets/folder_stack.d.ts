@@ -143,7 +143,7 @@ interface OnFoldStatusChangeInfo {
 }
 
 /**
- * Triggered when the fold status changes<!--RP4-->, which takes effect only in landscape mode<!--RP4End-->.
+ * Triggered when the fold status changes, which takes effect only in landscape mode.
  *
  * @param { OnFoldStatusChangeInfo } event - Information about the fold status change. This takes effect only in
  *     landscape mode.
@@ -208,8 +208,8 @@ declare class FolderStackAttribute extends CommonMethod<FolderStackAttribute> {
   alignContent(value: Alignment): FolderStackAttribute;
 
   /**
-   * Triggered when the fold status of the current device changes <!--RP3-->(This callback takes effect only in
-   * landscape mode.)<!--RP3End-->.
+   * Triggered when the fold status of the current device changes(This callback takes effect only in
+   * landscape mode.).
    *
    * Typical usage: Adjust the app layout based on the fold status, for example, displaying a two-column layout in the
    * expanded state and adjusting the content distribution between the upper and lower screens in the half-fold status.
