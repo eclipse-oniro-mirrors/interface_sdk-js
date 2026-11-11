@@ -45,7 +45,7 @@ export declare type ToolBarDragStateCallback = () => void;
  */
 export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
 /**
- *  工具栏状态变化时的回调。
+ * 工具栏状态变化时的回调。
  *
  * @param { ToolBarState } state - 当前工具栏状态。
  *
@@ -57,7 +57,7 @@ export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
  */
 export declare type ToolBarStateCallback = (state: ToolBarState) => void;
 /**
- *  工具栏停靠到指定区域和方向时的回调。
+ * 工具栏停靠到指定区域和方向时的回调。
  *
  * @param { DockArea } area - 工具栏停靠的区域。
  * @param { Axis } direction - 停靠方向。
@@ -111,7 +111,7 @@ export enum HandednessAdaptationMode {
  */
 export enum ToolBarState {
   /**
-   * 工具栏固定在当前位置
+   * 工具栏固定在当前位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -131,7 +131,7 @@ export enum ToolBarState {
    */
   FLOATING = 1,
   /**
-   * 工具栏固定在当前位置
+   * 工具栏被最小化为悬浮球。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -253,7 +253,7 @@ export enum DockCornerMode {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  MINIMIZED = 0,
+  MINIMIZE = 0,
   /**
    * 保持拖拽方向，不进行最小化。
    *
@@ -267,7 +267,7 @@ export enum DockCornerMode {
 }
 
 /**
- * 定义工具栏的安全区的内边距模式。
+ * 定义工具栏的安全区内边距模式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -277,7 +277,7 @@ export enum DockCornerMode {
  */
 export enum ToolBarSafeAreaMode {
   /**
-   *  不应用安全区内边距。
+   * 不应用安全区内边距。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -603,7 +603,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   buoySize?: LengthMetrics;
   /**
-   * 构造函数.当 options 省略时，所有字段使用各自的默认值。
+   * 构造函数。当 options 省略时，所有字段使用各自的默认值。
    *
    * @param { ToolBarMinimizeOptions } [options] - 最小化悬浮球选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -934,7 +934,7 @@ export class ToolBarConfigs {
    * @since 26.1.0 dynamic
    */
   @Trace
-  advancedToolBarModifier?: AdvancedToolBarV2Modifier;
+  advancedToolBarModifier: AdvancedToolBarV2Modifier;
   /**
    * 高级工具栏的浮动配置。默认值为 undefined。
    *
