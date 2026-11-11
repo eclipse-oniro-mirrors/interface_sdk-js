@@ -39,6 +39,7 @@ action("ohos_base_split") {
     deps = []
   }
   script = "//build/ohos/sdk/parse_interface_sdk.py"
+  depfile = "${target_gen_dir}/${target_name}.d"
   args = [
     "--root-build-dir",
     rebase_path("//", root_build_dir),
@@ -58,9 +59,12 @@ action("ohos_base_split") {
     "${sdk_build_check_level}",
     "--sdk-api-version",
     "${platform_version}",
+    "--stamp",
+    rebase_path("${target_out_dir}/${target_name}.timestamp", root_build_dir),
+    "--depfile",
+    rebase_path(depfile, root_build_dir),
   ]
   outputs = [
-    "${interface_sdk_path}",
     "${interface_sdk_path_ets1}/api/bundle/bundleStatusCallback.d.ts",
     "${target_out_dir}/${target_name}.timestamp",
   ]
@@ -96,10 +100,8 @@ template("ohos_copy_internal") {
     deps = [ ":ohos_base_split" ]
     deps += [ ":$_module_info_target" ]
     inputs = []
-    outputs = [
-      target_out_dir + "/${target_name}",
-      "${target_out_dir}/${target_name}.timestamp",
-    ]
+    depfile = "${target_gen_dir}/${target_name}.d"
+    outputs = [ target_out_dir + "/${target_name}" ]
     script = "//interface/sdk-js/process_internal.py"
     args = [
       "--input",
@@ -116,6 +118,8 @@ template("ohos_copy_internal") {
       "${target_name}",
       "--output",
       rebase_path(target_out_dir + "/${target_name}", root_build_dir),
+      "--depfile",
+      rebase_path(depfile, root_build_dir),
     ]
   }
   _target_name = target_name
@@ -140,10 +144,8 @@ template("ohos_declaration_template") {
     deps = [ ":ohos_base_split" ]
     deps += [ ":$_module_info_target" ]
     inputs = []
-    outputs = [
-      root_out_dir + "/ohos_declaration/${target_name}",
-      "${target_out_dir}/${target_name}.timestamp",
-    ]
+    depfile = "${target_gen_dir}/${target_name}.d"
+    outputs = [ root_out_dir + "/ohos_declaration/${target_name}" ]
 
     # 处理api文件下全部文件，过滤特定文件
     script = "//interface/sdk-js/remove_internal.py"
@@ -153,6 +155,8 @@ template("ohos_declaration_template") {
       "--output",
       rebase_path(root_out_dir + "/ohos_declaration/${target_name}/",
                   root_build_dir),
+      "--depfile",
+      rebase_path(depfile, root_build_dir),
     ]
   }
   _target_name = target_name
