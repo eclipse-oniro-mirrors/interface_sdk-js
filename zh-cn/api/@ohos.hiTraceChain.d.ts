@@ -81,7 +81,7 @@ declare namespace hiTraceChain {
      * 无开始结束信息标志。
      * 
      * 调试场景下设置该标志，调用开始跟踪接口[begin()]{@link hiTraceChain.begin}和结束跟踪接口[end()]{@link hiTraceChain.end}时，
-     * 分别会打印开始、结束跟踪信息hilo日志；默认不打印开始、结束跟踪信息hilog日志。
+     * 分别会打印开始、结束跟踪信息hilog日志；默认不打印开始、结束跟踪信息hilog日志。
      *
      * @syscap SystemCapability.HiviewDFX.HiTrace
      * @since 8 dynamic
@@ -274,6 +274,8 @@ declare namespace hiTraceChain {
    * 
    * 当前线程TLS（Thread Local Storage，线程本地存储）中不存在有效的HiTraceId时，生成有效的HiTraceId并设置到当前线程TLS中，返回该
    * HiTraceId。当前线程TLS中已存在有效的HiTraceId时，不会开始新的跟踪，返回各属性值均为0的无效HiTraceId。
+   *
+   * 该接口需与结束跟踪接口[end()]{@link hiTraceChain.end}配套使用。
    *
    * @param { string } name - 跟踪业务名。该参数的长度不超过63Byte，超出部分将被截断。
    * @param { int } [flags] - 跟踪标志组合，具体可参考[HiTraceFlag]{@link hiTraceChain.HiTraceFlag}。当需要跟踪异步调用时设置
