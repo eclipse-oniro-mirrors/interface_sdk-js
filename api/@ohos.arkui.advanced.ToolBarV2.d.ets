@@ -24,10 +24,10 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
 /**
  * 工具栏子项状态枚举。
  *
- * | 名称      | 值| 说明             |
+ * | 名称       | 值 | 说明              |
  * | -------- | - | --------------- |
- * | ENABLE   | 1 | 工具栏子项为正常可点击状态。 |
- * | DISABLE  | 2 | 工具栏子项为不可点击状态。  |
+ * | ENABLE   | 1 | 工具栏子项为正常可点击状态。  |
+ * | DISABLE  | 2 | 工具栏子项为不可点击状态。   |
  * | ACTIVATE | 3 | 工具栏子项为激活状态，可点击。 |
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -95,6 +95,7 @@ export class ToolBarV2SymbolGlyph {
   normal: SymbolGlyphModifier;
   /**
    * 工具栏symbol图标激活态样式。
+   *
    * 默认值：fontColor：$r('sys.color.icon_emphasize')，fontSize：24vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -176,7 +177,8 @@ export declare class ToolBarV2ItemText {
   @Trace
   text: ResourceStr;
   /**
-   * 工具栏子项的文本颜色。
+   * 工具栏子项的文本的颜色。
+   *
    * 默认值：$r('sys.color.font_primary')
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -188,9 +190,9 @@ export declare class ToolBarV2ItemText {
   @Trace
   color?: ColorMetrics;
   /**
-   * 工具栏子项再激活态下文本的颜色。
+   * 工具栏子项在激活态下文本的颜色。
    *
-   *  </div>默认值：$r('sys.color.font_emphasize')
+   * </div>默认值：$r('sys.color.font_emphasize')
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -235,7 +237,7 @@ export interface ToolBarV2ItemTextOptions {
    */
   text: ResourceStr;
   /**
-   * 工具栏子项文本的颜色。
+   * 工具栏子项的文本的颜色。
    *
    * 默认值：$r('sys.color.font_primary')
    *
@@ -249,7 +251,7 @@ export interface ToolBarV2ItemTextOptions {
   /**
    * 工具栏子项在激活态下文本的颜色。
    *
-   * 默认值：$r('sys.color.font_emphasize')。
+   * 默认值：$r('sys.color.font_emphasize')
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -275,7 +277,7 @@ export interface ToolBarV2ItemTextOptions {
 export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2SymbolGlyph;
 
 /**
- * 定义工具栏子项的普通图标
+ * 定义工具栏子项的普通图标。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -467,6 +469,7 @@ export declare class ToolBarV2Item {
    * The accessibilityLevel of item.
    * 默认值："自动"。
    *
+   * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -500,7 +503,7 @@ export declare class ToolBarV2Item {
  */
 export interface ToolBarV2ItemOptions {
   /**
-   * 定义工具栏子项的文本。
+   * 工具栏子项的文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -534,7 +537,7 @@ export interface ToolBarV2ItemOptions {
    */
   icon?: ToolBarV2ItemIconType;
   /**
-   * 工具栏子项状态。
+   * 工具栏子项的状态。
    *
    * 默认为ToolBarV2ItemState.ENABLE。
    *
@@ -546,7 +549,7 @@ export interface ToolBarV2ItemOptions {
    */
   state?: ToolBarV2ItemState;
   /**
-   * 工具栏子项的无障碍文本属性。当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了说明组件。为了解决此场景，开发人员可为不包含文字信息的组件设置无障碍文本，当屏幕朗读选中此组件时播报无障碍文本的内容，帮
+   * 工具栏子项的无障碍文本属性。当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。为了解决此场景，开发人员可为不包含文字信息的组件设置无障碍文本，当屏幕朗读选中此组件时播报无障碍文本的内容，帮
    * 助屏幕朗读的使用者清楚地知道自己选中了什么组件。
    *
    * 默认值为当前项content属性内容。
@@ -562,7 +565,7 @@ export interface ToolBarV2ItemOptions {
    * 工具栏子项的无障碍描述。此描述用于向用户详细解释当前组件，开发人员应为组件的这一属性提供较为详尽的文本说明，以协助用户理解即将执行的操作及其可能产生的后果。特别是当这些后果无法仅从组件的属性和无障碍文本中直接获知时。如果组件同时具
    * 备文本属性和无障碍说明属性，当组件被选中时，系统将首先播报组件的文本属性，随后播报无障碍说明属性的内容。
    *
-   * 默认值为"单指双击即可执行"。
+   * 默认值为“单指双击即可执行”。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -572,9 +575,9 @@ export interface ToolBarV2ItemOptions {
    */
   accessibilityDescription?: ResourceStr;
   /**
-   * 工具栏子项的无障碍重要性。用于控制当前项是否可被无障碍辅助服务所识别。
+   * 工具栏子项无障碍重要性。用于控制当前项是否可被无障碍辅助服务所识别。
    *
-   * </div>支持的值为:
+   * </div>支持的值为：
    *
    * "auto"：当前值转换为"yes"。
    *
@@ -582,7 +585,7 @@ export interface ToolBarV2ItemOptions {
    *
    * "no"：当前组件不可被无障碍辅助服务所识别。
    *
-   * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务锁识别。
+   * "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。
    *
    * 默认值："auto"
    *
@@ -617,6 +620,7 @@ export type ToolBarV2ItemAction = (index: number) => void;
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
+ * @noninterop
  */
 export declare class ToolBarV2Modifier {
   /**
@@ -656,7 +660,7 @@ export declare class ToolBarV2Modifier {
    */
   padding(padding: LengthMetrics): ToolBarV2Modifier;
   /**
-   * 设置是否显示按压效果的接口。
+   * 设置是否显示按压态效果的接口。
    *
    * @param { boolean } stateEffect - press status effect.
    * @returns { ToolBarV2Modifier } 设置按压态效果后的ToolBarV2Modifier对象，可用于链式调用其他方法进一步自定义工具栏样式。
@@ -700,7 +704,7 @@ export declare enum ToolBarV2ItemPlacement {
    */
   LEADING = 1,
   /**
-   * 后半区。适合于导航或放置在主要内容之后的次要或溢出操作。
+   * 后半区。适用于放置在主要内容之后的次要或溢出操作。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -745,7 +749,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   builder?: CustomBuilder;
   /**
-   * 定义高级工具栏V2标题配置。如果不提供，则不显示标题。
+   * 定义高级工具栏V2标题设置。如果不提供，则不显示标题。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -781,10 +785,10 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   displayPriority?: number;
   /**
-   * 处于ACTIVATE状态的项目背景色（激活的背景色）
-   * 仅适用于仅有图标的项目，图标和文本项目不能设置背景颜色。
+   * 处于ACTIVATE状态的项目背景色（激活的背景色）。
+   * 仅适用于仅有图标的项目，图标+文本项目不能设置背景颜色。
    * 默认值：undefined。未设置时无颜色。建议使用
-   * $r('sys.color.comp_background_emphasize') (鸿蒙蓝色)。
+   * $r（'sys.color.comp_background_emphasize'） （鸿蒙蓝色）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -806,7 +810,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   id?: string;
   /**
-   * 工具栏项的项大小（宽x高）。
+   * 工具栏项的项大小（宽×高）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -819,7 +823,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   /**
    * 是否在该项后显示分隔符。
    * 如果为true，则在该项之后呈现分隔符（而不是在工具栏中的最后一项之后）。
-   * 默认值：undefined。不设置时，默认值为false，不显示分隔符。
+   * 默认值：undefined。不设置时，默认为false，不显示分隔符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -857,7 +861,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   isShowOverflowMenu?: boolean;
   /**
    * 组标识。相同非空groupID的项作为一个视觉群体。
-   * 同一个groupID的第一个项决定组的位置。
+   * 同一groupID的第一个项决定组的位置。
    * 默认值：undefined。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -885,20 +889,20 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   /**
    * 用于创建AdvancedToolBarV2Item对象的构造函数。
    *
-   * @param { AdvancedToolBarV2ItemOptions } params - 构造参数信息。
+   * @param { AdvancedToolBarV2ItemParams } params - 构造参数信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: AdvancedToolBarV2ItemOptions);
+  constructor(options?: AdvancedToolBarV2ItemParams);
 }
 
 /**
  * 声明AdvancedToolBarV2Item的选项。
  *
- * 使用高级字段阔扎按{@link ToolBarV2ItemOptions}。内容时
+ * 使用高级字段扩展按{@link ToolBarV2ItemOptions}。内容是
  * 作为必填字段继承；在项上使用isShowText来控制
  * 文本是否被渲染。
  *
@@ -954,7 +958,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   displayPriority?: number;
   /**
-   * 处于ACTIVATED状态的项目背景色（激活的背景色）。
+   * 处于ACTIVATE状态的项目背景色（激活的背景色）。
    * 仅适用于仅有图标的项目，图标+文本项目不能设置背景颜色。
    * 建议使用$r('sys.color.comp_background_emphasize')。
    * 默认值：undefined，表示无颜色。
@@ -978,7 +982,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   id?: string;
   /**
-   * 工具栏项的大小（宽x高）。
+   * 工具栏项的项大小（宽×高）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -988,7 +992,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   itemSize?: Size;
   /**
-   * 是否在该项后显示分割符。
+   * 是否在该项后显示分隔符。
    * 如果为true，则在该项之后呈现分隔符（而不是在工具栏中的最后一项之后）。
    * 默认值：false，表示不显示分隔符。
    *
@@ -1014,7 +1018,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
   isShowText?: boolean;
   /**
    * 此项中是否显示为工具栏的溢出菜单。
-   * 默认值：undefind。值为undefined或不设置时默认为false。
+   * 默认值：undefined。值为undefined或不设置时默认为false。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1026,7 +1030,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
   /**
    * 组标识。相同非空groupID的项作为一个视觉群体。
    * 同一groupID的第一个项决定组的位置。
-   * 默认值：undefined，标识没有groupID。
+   * 默认值：undefined，表示没有groupID。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1050,7 +1054,7 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
 }
 
 /**
- * 工具栏沿主轴的padding配置。
+ * ToolBar沿主轴的padding配置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1084,7 +1088,7 @@ export interface ToolBarV2PaddingOptions {
 }
 
 /**
- * 溢出菜单项的字体配置。
+ * 溢出菜单弹出窗口的样式配置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1124,7 +1128,7 @@ export interface ToolBarV2OverflowMenuStyle {
    */
   radius?: Dimension | BorderRadiuses;
   /**
-   * 单个溢出菜单项之间的分割线样式。
+   * 单个溢出菜单项之间的分隔线样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1223,7 +1227,7 @@ export declare class ToolBarV2TitleStyle {
   fontSize?: LengthMetrics;
   /**
    * 标题文本颜色。
-   * 默认值：undefined。值为undefined或不设置时，标题文本的默认颜色为$r('sys.color.font_primary').
+   * 默认值：undefined。值为undefined或不设置时，标题文本的默认颜色为$r('sys.color.font_primary')，
    * 副标题文本的默认颜色为$r('sys.color.font_secondary')。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1331,7 +1335,7 @@ export interface ToolBarV2TitleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  style?: ToolBarV2TitleStyle;;
+  style?: ToolBarV2TitleStyle;
   /**
    * 副标题文字样式。
    *
@@ -1349,7 +1353,7 @@ export interface ToolBarV2TitleOptions {
  *
  * 标题参与布局，与工具栏项处于同一级别。
  * 标题重用ToolBarV2ItemPlacement
- * 来确认渲染区域，并与具有相同位置的项目排列在同一区域。
+ * 来确定渲染区域，并与具有相同位置的项目排列在同一区域。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1381,8 +1385,7 @@ export declare class ToolBarV2TitleConfigs {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  @Trace
-  subTitleContent: ResourceStr;
+  subTitleContent?: ResourceStr;
   /**
    * 标题位置。
    * 默认值：ToolBarV2ItemPlacement.LEADING。
@@ -1397,7 +1400,7 @@ export declare class ToolBarV2TitleConfigs {
   placement?: ToolBarV2ItemPlacement;
   /**
    * 标题是否可见。
-   * 默认值：true。true标识标题可见，false表示标题不可见。
+   * 默认值: true。true表示标题可见，false表示标题不可见。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1493,7 +1496,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * 组容器的边界边框圆角半径。
    *
@@ -1546,7 +1549,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2ItemGroupStyle {
+export declare class ToolBarV2ItemGroupStyle {
   /**
    * 组在工具栏中的放置位置。
    * 组放置优先于组中单个项目的放置。
@@ -1559,7 +1562,7 @@ export declare class ToolbarV2ItemGroupStyle {
    * @since 26.1.0 dynamic
    */
   @Trace
-  placement?: ToolbarV2ItemPlacement;
+  placement?: ToolBarV2ItemPlacement;
   /**
    * 组内项目之间的间距。
    * 默认值：0vp。
@@ -1574,7 +1577,7 @@ export declare class ToolbarV2ItemGroupStyle {
   space?: LengthMetrics;
   /**
    * 组容器的背景颜色。
-   * 默认值: 值为undefined或不设置时，值为$r('sys.color.comp_background_primary').
+   * 默认值：值为undefined或不设置时，值为$r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1595,7 +1598,7 @@ export declare class ToolbarV2ItemGroupStyle {
    * @since 26.1.0 dynamic
    */
   @Trace
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * 组容器的边界边框圆角半径。
    * 默认值：undefined。值为undefined或不设置时，默认值为工具栏交叉轴长度的一半。
@@ -1647,14 +1650,14 @@ export declare class ToolbarV2ItemGroupStyle {
   /**
    * 构造ToolBarV2ItemGroupStyle实例。
    *
-   * @param { ToolbarV2ItemGroupStyleOptions } [options] - 构造函数选项。
+   * @param { ToolBarV2ItemGroupStyleOptions } [options] - 构造函数选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2ItemGroupStyleOptions);
+  constructor(options?: ToolBarV2ItemGroupStyleOptions);
 }
 
 /**
@@ -1698,7 +1701,7 @@ export declare enum ToolBarV2MaterialStyle {
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface ToolbarV2StyleOptions {
+export interface ToolBarV2StyleOptions {
   /**
    * 工具栏内边距。
    *
@@ -1708,7 +1711,7 @@ export interface ToolbarV2StyleOptions {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * 工具栏背景颜色。
    * 默认值：undefined。不设置时，默认为$r('sys.color.comp_background_primary')。
@@ -1744,7 +1747,7 @@ export interface ToolbarV2StyleOptions {
   systemBackgroundMaterial?: uiMaterial.Material;
   /**
    * 工具栏的简化系统材质样式。
-   * 如果两者systemBackgroundMaterial和systemMaterialStyle都设置了
+   * 如果两者systemBackgroundMaterial和systemMaterialStyle都设置了，
    * systemBackgroundMaterial优先生效。
    * 默认值：undefined。值为undefined或不设置时，默认为ToolBarV2MaterialStyle.NONE效果。
    *
@@ -1756,8 +1759,8 @@ export interface ToolbarV2StyleOptions {
    */
   systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
-   * 工具栏的组间距。工具栏分组和分组之间、分组与独立项之间的间距。
-   * 默认值：undefined。值为undefined或不设置时，默认间距为12vp，取值范围在[8vp, 20vp]。
+   * 工具栏的组间距。工具栏分组与分组之间、分组与独立项之间的间距。
+   * 默认值: undefined。值为undefined或不设置时，默认间距为12vp，取值范围在[8vp, 20vp]。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1779,7 +1782,7 @@ export interface ToolbarV2StyleOptions {
   itemSize?: Size;
   /**
    * 工具栏项里的文本的默认字体大小。
-   * 默认值：undefined。值为undefined或不设置时，字体大小为 $r('sys.float.ohos_id_text_size_caption')。
+   * 默认值：undefined。值为undefined或不设置时，字体大小为$r('sys.float.ohos_id_text_size_caption')。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1800,7 +1803,7 @@ export interface ToolbarV2StyleOptions {
    */
   borderWidth?: LengthMetrics;
   /**
-   * 工具栏的边距颜色。
+   * 工具栏的边框颜色。
    * 默认值：undefined。值为undefined或不设置时，无颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1844,7 +1847,7 @@ export interface ToolbarV2StyleOptions {
  * @since 26.1.0 dynamic
  */
 @ObservedV2
-export declare class ToolbarV2StyleConfigs {
+export declare class ToolBarV2StyleConfigs {
   /**
    * 工具栏内边距。
    *
@@ -1855,7 +1858,7 @@ export declare class ToolbarV2StyleConfigs {
    * @since 26.1.0 dynamic
    */
   @Trace
-  padding?: ToolbarV2PaddingOptions;
+  padding?: ToolBarV2PaddingOptions;
   /**
    * 工具栏背景颜色。
    * 默认值：undefined。值为undefined或不设置时，
@@ -1909,7 +1912,7 @@ export declare class ToolbarV2StyleConfigs {
   systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
    * 工具栏的组间距。工具栏分组与分组之间、分组与独立项之间的间距。
-   * 默认值：undefined。值为undefined或不设置时，默认间距为12vp，取值范围在[8vp, 20vp]。
+   * 默认值: undefined。值为undefined或不设置时,默认间距为12vp，取值范围在[8vp, 20vp]。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1933,7 +1936,7 @@ export declare class ToolbarV2StyleConfigs {
   itemSize?: Size;
   /**
    * 工具栏项里的文本的默认字体大小。
-   * 默认值：undefined。值为undefined或不设置时，字体大小$r('sys.float.ohos_id_text_size_caption')。
+   * 默认值：undefined。值为undefined或不设置时，字体大小为$r('sys.float.ohos_id_text_size_caption')。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1944,7 +1947,7 @@ export declare class ToolbarV2StyleConfigs {
   @Trace
   fontSize?: LengthMetrics;
   /**
-   * 工具栏边框宽度。
+   * 工具栏的边框宽度。
    * 默认值：undefined。值为undefined或不设置时，无宽度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1956,7 +1959,7 @@ export declare class ToolbarV2StyleConfigs {
   @Trace
   borderWidth?: LengthMetrics;
   /**
-   * 工具栏的边距颜色。
+   * 工具栏的边框颜色。
    * 默认值：undefined。值为undefined或不设置时，无颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1992,20 +1995,21 @@ export declare class ToolbarV2StyleConfigs {
   @Trace
   stateEffect?: boolean;
   /**
-   * Constructs a ToolbarV2StyleConfigs instance.
+   * 构造ToolBarV2StyleOptions实例。
    *
-   * @param { ToolbarV2StyleOptions } [options] - 构造函数选项。
+   * @param { ToolBarV2StyleOptions } [options] - 构造函数选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: ToolbarV2StyleOptions);
+  constructor(options?: ToolBarV2StyleOptions);
 }
 
 /**
- * ToolBarV2的高级修饰符。合并布局属性、样式配置、和溢出菜单样式到单个修饰符类中。
+ * ToolBarV2的高级修饰符。合并布局属性、样式配置、
+ * 和溢出菜单样式到单个修饰符类中。
  *
  * 使用可链接的setter方法，这些方法接受原始配置对象。
  *
@@ -2036,6 +2040,7 @@ export declare class AdvancedToolBarV2Modifier {
    * 设置工具栏垂直于布局方向的宽度。
    *
    * 水平：控制高度。垂直：控制宽度。
+   * 默认值：undefined。值为undefined或未设置时，值为56vp。
    *
    * @param { LengthMetrics } value - 垂直于布局方向的宽度值。
    * @returns { AdvancedToolBarV2Modifier } 返回用于链接的此修饰符。
@@ -2061,11 +2066,11 @@ export declare class AdvancedToolBarV2Modifier {
    */
   direction(value: Axis): AdvancedToolBarV2Modifier;
   /**
-   * 设置工具栏的样式配置。
+   * 设置工具栏样式配置。
    *
    * 控制背景、填充、groupSpace、边框和项目活动/禁用的颜色。
    *
-   * @param { ToolbarV2StyleConfigs } styleConfigs - 样式配置对象。
+   * @param { ToolBarV2StyleConfigs } styleConfigs - 样式配置对象。
    * @returns { AdvancedToolBarV2Modifier } 返回用于链接的此修饰符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2073,11 +2078,11 @@ export declare class AdvancedToolBarV2Modifier {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  style(styleConfigs: ToolbarV2StyleConfigs): AdvancedToolBarV2Modifier;
+  style(styleConfigs: ToolBarV2StyleConfigs): AdvancedToolBarV2Modifier;
   /**
    * 设置溢出菜单弹出窗口的样式配置。
    *
-   * @param { ToolbarV2OverflowMenuStyle } menuStyle - 溢出菜单样式配置对象。
+   * @param { ToolBarV2OverflowMenuStyle } menuStyle - 溢出菜单样式配置对象。
    * @returns { AdvancedToolBarV2Modifier } 返回用于链接的此修饰符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2085,19 +2090,19 @@ export declare class AdvancedToolBarV2Modifier {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  overflowMenuStyle(menuStyle: ToolbarV2OverflowMenuStyle): AdvancedToolBarV2Modifier;
+  overflowMenuStyle(menuStyle: ToolBarV2OverflowMenuStyle): AdvancedToolBarV2Modifier;
 }
 
 /**
  * 工具栏用于显示当前界面内容的操作选项。它显示在屏幕底部，适合需要为用户提供快速操作入口的场景。
- * 普通工具栏最多可以显示五个条目，超过条目会被收起到“更多”项中，显示在最右侧。
+ * 普通工具栏最多可以显示五个条目，超过的条目会被收起到“更多”项中，显示在最右侧。
  * 它适用于需要对当前页面内容进行快速操作的场景，帮助用户快速访问常用功能，提高操作效率。
- * ToolBarV2支持通过AdvancedToolBarV2Item（继承自TooLBarV2Item）配置高级工具栏项。
+ * ToolBarV2支持通过AdvancedToolBarV2Item（继承自ToolBarV2Item）配置高级工具栏项。
  * 配置了高级项的哦工具栏更加灵活，可以自定义标题、溢出菜单、条目分组等。
  * 该组件基于
- * [状态挂案例 (V2)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2)实现。
- * * 与
- * [状态管理 (V1)](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1)相比，
+ * [状态管理 （V2）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2)实现。
+ *  *与
+ * [状态管理 （V1）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1)相比，
  * 状态管理（V2）增强了对数据对象的深度观察和管理能力，不再局限于组件级别。使用状态管理（V2），开发者可以通过这个组件
  * 更灵活地控制工具栏的数据和状态，实现更高效的UI刷新。
  * <br>
@@ -2106,10 +2111,11 @@ export declare class AdvancedToolBarV2Modifier {
  * >
  * > - 该组件只能用于Stage模型。
  * >
- * > - 如果 [通用属性]{@link ./@internal/component/ets/common} 且
- * > [通用事件]{@link ./@internal/component/ets/common} 为设置给 **ToolBarV2**，编译工具链设置
+ * > - 如果[通用属性]{@link ./@internal/component/ets/common}且
+ * > [通用事件]{@link ./@internal/component/ets/common}为设置给**ToolBarV2**，编译工具链设置
  * > 会生成一个额外的节点__Common__，并将通用属性或通用事件附加到__Common__，而不是直接应用到**ToolBarV2**本身。
- * > 这可能导致通用属性或开发者设定的普遍事件不会生效或表现出意料之外的行为。因此，不推荐为**ToolBarV2**设置通用属性和通用事件。
+ * > 这可能导致通用属性或开发者设定的普遍事件不会生效或表现出意料之外的行为。因此，
+ * > 不推荐为**ToolBarV2**设置通用属性和通用事件。
  * >
  * > - 当系统在明暗模式切换时，工具栏的背景颜色不会自动跟随开关。
  *
@@ -2123,7 +2129,7 @@ export declare class AdvancedToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * 定义ToolbarV2项目列表。使用ToolBarV2Item可构建普通工具栏。
+   * 定义toolbarV2项目列表。使用ToolBarV2Item可构建普通工具栏。
    * AdvancedToolBarV2Item（继承自ToolBarV2Item）可用于更高级的布局场景，比如标题、溢出菜单以及项目分组。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2136,7 +2142,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * 定义ToolbarV2激活项的索引，默认值是-1。仅用于ToolBarV2Item组成的普通工具栏。
+   * 定义toolbarV2激活项的索引，默认值是-1。仅用于ToolBarV2Item组成的普通工具栏。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2147,7 +2153,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: number;
   /**
-   * 定义toolbarv2分隔符修改器。仅用于ToolBarV2Item组成的普通工具栏。
+   * 定义toolbarV2分隔符修改器。仅用于ToolBarV2Item组成的普通工具栏。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
