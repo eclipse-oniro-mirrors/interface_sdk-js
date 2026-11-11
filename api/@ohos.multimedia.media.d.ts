@@ -6640,6 +6640,17 @@ declare namespace media {
      * @since 23 static
      */
     enableCameraPostprocessing?: boolean;
+
+    /**
+     * Configure the media type to be disabled during playback.
+     * Value constraint: See the definition of MediaType. Default value: If this parameter is not set, no media is
+     * disabled by default.
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    disableMedia?: MediaType;
   }
 
   /**
