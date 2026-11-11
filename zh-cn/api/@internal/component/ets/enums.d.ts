@@ -3885,6 +3885,138 @@ declare enum FunctionKey {
    * @since 12 dynamic
    */
   DPAD_RIGHT,
+
+  /**
+   * 表示键盘上的CapsLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * 表示键盘上的ScrollLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SCROLL_LOCK = 20,
+
+  /**
+   * 表示键盘上的Pause/Break键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAUSE_BREAK = 21,
+
+  /**
+   * 表示键盘上的NumLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  NUM_LOCK = 22,
+
+  /**
+   * 表示键盘上的Insert键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  INSERT = 23,
+
+  /**
+   * 表示键盘上的Delete键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DELETE = 24,
+
+  /**
+   * 表示键盘上的Home键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  HOME = 25,
+
+  /**
+   * 表示键盘上的End键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 26,
+
+  /**
+   * 表示键盘上的Page Up键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_UP = 27,
+
+  /**
+   * 表示键盘上的Page Down键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_DOWN = 28,
+
+  /**
+   * 表示键盘上的Enter键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  ENTER = 29,
+
+  /**
+   * 表示键盘上的Backspace键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BACKSPACE = 30,
 }
 
 /**
