@@ -350,7 +350,7 @@ export interface ToolBarFloatingOptions {
    */
   minimizeConfigs?: ToolBarMinimizeConfigs;
   /**
-   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND 表示保持拖拽方向。
+   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND表示保持拖拽方向。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -408,7 +408,7 @@ export class ToolBarFloatingConfigs {
   @Trace
   minimizeConfigs?: ToolBarMinimizeConfigs;
   /**
-   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND 表示保持拖拽方向。
+   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND表示保持拖拽方向。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -442,7 +442,7 @@ export class ToolBarFloatingConfigs {
  */
 export interface ToolBarMinimizeOptions {
   /**
-   * 文本标签。默认值为undefined。表示无文本内容。
+   * 文本标签。默认值为undefined，表示无文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -452,7 +452,7 @@ export interface ToolBarMinimizeOptions {
    */
   text?: ResourceStr;
   /**
-   * 图标。默认值为undefined。表示无图标内容。
+   * 图标。默认值为undefined，表示无图标内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -462,7 +462,7 @@ export interface ToolBarMinimizeOptions {
    */
   icon?: ResourceStr | SymbolGlyphModifier;
   /**
-   * 文本颜色。默认值为$r('sys.color.font_primary')
+   * 文本颜色。默认值为$r('sys.color.font_primary')。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
