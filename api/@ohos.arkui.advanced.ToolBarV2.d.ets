@@ -896,7 +896,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(params?: AdvancedToolBarV2ItemParams);
+  constructor(params: AdvancedToolBarV2ItemParams);
 }
 
 /**
