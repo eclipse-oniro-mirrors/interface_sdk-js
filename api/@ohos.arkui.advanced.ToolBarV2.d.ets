@@ -788,7 +788,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
    * 处于ACTIVATE状态的项目背景色（激活的背景色）。
    * 仅适用于仅有图标的项目，图标+文本项目不能设置背景颜色。
    * 默认值：undefined。未设置时无颜色。建议使用
-   * $r（'sys.color.comp_background_emphasize'） （鸿蒙蓝色）。
+   * $r（'sys.color.comp_background_emphasize'）（鸿蒙蓝色）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -896,13 +896,13 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  constructor(options?: AdvancedToolBarV2ItemParams);
+  constructor(params?: AdvancedToolBarV2ItemParams);
 }
 
 /**
  * 声明AdvancedToolBarV2Item的选项。
  *
- * 使用高级字段扩展按{@link ToolBarV2ItemOptions}。内容是
+ * 使用高级字段扩展{@link ToolBarV2ItemOptions}。内容是
  * 作为必填字段继承；在项上使用isShowText来控制
  * 文本是否被渲染。
  *
@@ -1577,7 +1577,7 @@ export declare class ToolBarV2ItemGroupStyle {
   space?: LengthMetrics;
   /**
    * 组容器的背景颜色。
-   * 默认值：值为undefined或不设置时，值为$r('sys.color.comp_background_primary').
+   * 默认值：undefined。值为undefined或不设置时，值为$r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1995,7 +1995,7 @@ export declare class ToolBarV2StyleConfigs {
   @Trace
   stateEffect?: boolean;
   /**
-   * 构造ToolBarV2StyleOptions实例。
+   * 构造ToolBarV2StyleConfigs实例。
    *
    * @param { ToolBarV2StyleOptions } [options] - 构造函数选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2098,11 +2098,11 @@ export declare class AdvancedToolBarV2Modifier {
  * 普通工具栏最多可以显示五个条目，超过的条目会被收起到“更多”项中，显示在最右侧。
  * 它适用于需要对当前页面内容进行快速操作的场景，帮助用户快速访问常用功能，提高操作效率。
  * ToolBarV2支持通过AdvancedToolBarV2Item（继承自ToolBarV2Item）配置高级工具栏项。
- * 配置了高级项的哦工具栏更加灵活，可以自定义标题、溢出菜单、条目分组等。
+ * 配置了高级项的工具栏更加灵活，可以自定义标题、溢出菜单、条目分组等。
  * 该组件基于
- * [状态管理 （V2）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2)实现。
+ * [状态管理（V2）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v2)实现。
  *  *与
- * [状态管理 （V1）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1)相比，
+ * [状态管理（V1）](docroot://ui/state-management/arkts-state-management-overview.md#state-management-v1)相比，
  * 状态管理（V2）增强了对数据对象的深度观察和管理能力，不再局限于组件级别。使用状态管理（V2），开发者可以通过这个组件
  * 更灵活地控制工具栏的数据和状态，实现更高效的UI刷新。
  * <br>
