@@ -2018,7 +2018,7 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 -  Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
