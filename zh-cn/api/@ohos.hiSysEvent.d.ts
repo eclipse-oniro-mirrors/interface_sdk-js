@@ -455,7 +455,7 @@ declare namespace hiSysEvent {
     /**
      * 事件的额外参数条件，格式：{"version":"V1","condition":{"and":[{"param":"参数","op":"操作符","value":"比较值"}]}}。
      *
-     * 参数：指定事件参数的键值。
+     * 参数：指定事件参数的键值，类型为string。
      *
      * 操作符支持：=、!=、<、<=、>和>=。
      * 
