@@ -1807,15 +1807,16 @@ export interface RecoverableConnectOptions<T extends object, S extends object> {
    */
   key?: string;
   /**
-   * Constructor for obtaining the default value. It is used when the variable is connected for the first time
-   * (neither memory nor a snapshot holds the key) and as the fallback when restoration fails.
+   * Constructor for obtaining the default value. It is mandatory and is used when the variable is connected
+   * for the first time (neither memory nor a snapshot holds the key) and as the fallback when restoration
+   * fails.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  defaultCreator?: StorageDefaultCreator<T>;
+  defaultCreator: StorageDefaultCreator<T>;
   /**
    * Constructor for the nested **\@Type** members of a collection. It is used to rebuild nested objects during
    * restoration.
@@ -1884,11 +1885,13 @@ export declare class RecoverableStorage {
    * >
    * > 5. Variables are isolated by the window-level instance ID obtained from **component**. Variables of
    > > different instances do not affect each other.
+   >
+   * > 6. An empty key or a key whose length is not less than **1024** bytes throws **BusinessError(140124)**.
    *
    * @param { RecoverableConnectOptions<T, S> } options - Options of the connection.
-   * @returns { T | undefined } Returns the restored value or the default value if the connection is successful;
-   *     returns **undefined** if the key is invalid.
-   * @throws { BusinessError } 140124 - The type or a parameter is not supported.
+   * @returns { T } Returns the restored value or the default value if the connection is successful.
+   * @throws { BusinessError } 140124 - The type or a parameter is not supported, or the key is an empty
+   *     string or its length is not less than 1024 bytes.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
@@ -1896,7 +1899,7 @@ export declare class RecoverableStorage {
    */
   static connect<T extends object, S extends object>(
     options: RecoverableConnectOptions<T, S>
-  ): T | undefined;
+  ): T;
 
   /**
    * Obtains all keys of the recoverable state variables registered by the current instance (identified by the

@@ -1578,14 +1578,14 @@ export interface RecoverableConnectOptions<T extends object, S extends object> {
    */
   key?: string;
   /**
-   * 默认值构造器。首次连接（内存与快照中均不存在该key）时使用，恢复失败时作为回退。
+   * 默认值构造器。必选参数。首次连接（内存与快照中均不存在该key）时使用，恢复失败时作为回退。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
  * @since 26.1.0 dynamic
    */
-  defaultCreator?: StorageDefaultCreator<T>;
+  defaultCreator: StorageDefaultCreator<T>;
   /**
    * 集合嵌套**\@Type**成员的构造器，恢复时用于重建嵌套对象。
    *
@@ -1644,10 +1644,12 @@ export declare class RecoverableStorage {
    * > 4. 典型用法为修改所连接对象的属性。对V1 **\@State**变量整体重新赋值会导致已存引用失效，不被跟踪。
    * >
    * > 5. 变量按**component**获取的窗口级实例ID隔离，不同实例的变量互不影响。
+   >
+   * > 6. key为空字符串或长度不小于**1024**字节时，**抛出****BusinessError(140124)**。
    *
    * @param { RecoverableConnectOptions<T, S> } options - 连接选项。
-   * @returns { T | undefined } 连接成功时返回恢复值或默认值；key非法时返回**undefined**。
-   * @throws { BusinessError } 140124 - 类型或参数不支持。
+   * @returns { T } 连接成功时返回恢复值或默认值。
+   * @throws { BusinessError } 140124 - 类型或参数不支持，或key为空字符串或长度不小于1024字节。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @atomicservice
@@ -1655,7 +1657,7 @@ export declare class RecoverableStorage {
    */
   static connect<T extends object, S extends object>(
     options: RecoverableConnectOptions<T, S>
-  ): T | undefined;
+  ): T;
 
   /**
    * 获取当前实例（以**component**的窗口级实例ID标识）注册的所有可恢复状态变量的key。
