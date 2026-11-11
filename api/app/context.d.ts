@@ -257,7 +257,7 @@ export interface Context extends BaseContext {
    * ability in the ACTIVE state.
    * The interface can only take effect in API8 and below versions.
    *
-   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen](docroot://reference/apis-arkui/js-apis-window-sys.md#setshowonlockscreen9) instead.<!--DelEnd--> The substitute API is available only for system applications.
+   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen} instead.<!--DelEnd--> The substitute API is available only for system applications.
    *
    * @param { boolean } show - Specifies whether to show this ability on top of the lock screen. The value true means
    *     to show it on the lock screen, and the value false means not.
@@ -274,7 +274,7 @@ export interface Context extends BaseContext {
    * ability in the ACTIVE state.
    * The interface can only take effect in API8 and below versions.
    *
-   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen](docroot://reference/apis-arkui/js-apis-window-sys.md#setshowonlockscreen9) instead.<!--DelEnd--> The substitute API is available only for system applications.
+   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen} instead.<!--DelEnd--> The substitute API is available only for system applications.
    *
    * @param { boolean } show - Specifies whether to show this ability on top of the lock screen. The value true means to
    *     show it on the lock screen, and the value false means not.

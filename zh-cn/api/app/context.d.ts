@@ -234,7 +234,7 @@ export interface Context extends BaseContext {
   /**
    * 设置每当显示锁屏时是否在锁屏顶部显示此功能，使该功能保持激活状态。使用callback异步回调。
    *
-   * 从API version 7开始支持，从API version 9开始废弃，<!--Del-->建议使用[setShowOnLockScreen](docroot://reference/apis-arkui/js-apis-window-sys.md#setshowonlockscreen9)替代，<!--DelEnd-->替代接口仅面向系统应用开放。
+   * 从API version 7开始支持，从API version 9开始废弃，<!--Del-->建议使用[setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen}替代，<!--DelEnd-->替代接口仅面向系统应用开放。
    *
    * @param { boolean } show - 指定是否在锁屏顶部显示此功能。值true表示在锁屏上显示，值false表示不显示。
    * @param { AsyncCallback<void> } callback - 回调函数。当设置每当显示锁屏时是否在锁屏顶部显示此功能并使该功能保持激活状态的操作成功，err为undefined，否则为错误对象。
@@ -248,7 +248,7 @@ export interface Context extends BaseContext {
   /**
    * 设置每当显示锁屏时是否在锁屏顶部显示此功能，使该功能保持激活状态。使用Promise异步回调。
    *
-   * 从API version 7开始支持，从API version 9开始废弃，<!--Del-->建议使用[setShowOnLockScreen](docroot://reference/apis-arkui/js-apis-window-sys.md#setshowonlockscreen9)替代，<!--DelEnd-->替代接口仅面向系统应用开放。
+   * 从API version 7开始支持，从API version 9开始废弃，<!--Del-->建议使用[setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen}替代，<!--DelEnd-->替代接口仅面向系统应用开放。
    *
    * @param { boolean } show - 指定是否在锁屏顶部显示此功能。值true表示在锁屏上显示，值false表示不显示。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
