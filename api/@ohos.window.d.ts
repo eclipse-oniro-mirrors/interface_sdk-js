@@ -7763,7 +7763,7 @@ declare namespace window {
      * UIExtension in window secure limit change callback on.
      *
      * @param { Callback<boolean> } callback
-     *     Callback used to return the result whether the APP has uiextension secure limit.
+     *     Callback used to return the result whether the APP has UIExtension secure limit.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -10917,7 +10917,7 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses a promise to return the result.
      *
-     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
+     * @param { boolean } isTouchable Whether the window is touchable. **true** if touchable, **false** otherwise.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10935,7 +10935,7 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses an asynchronous callback to return the result.
      *
-     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
+     * @param { boolean } isTouchable Whether the window is touchable. **true** if touchable, **false** otherwise.
      * @param { AsyncCallback<void> } callback Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -14954,7 +14954,7 @@ declare namespace window {
      * Set the application modality of the windowStage.
      *
      * @param { boolean } isModal - Enable the window modal if true, otherwise means the opposite.
-     * @returns { Promise<void> } - Promise that returns no value.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device

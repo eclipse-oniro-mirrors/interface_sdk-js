@@ -2987,7 +2987,6 @@ declare namespace window {
     windowId: int,
     /**
      * 主窗口的前后台状态。true表示主窗口在前台，false表示主窗口不在前台。
-     * otherwise.
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 21 dynamic
@@ -7396,13 +7395,13 @@ declare namespace window {
       void;
 
     /**
-     * 开启窗口内uiExtension安全限制变化事件的监听, 建议在窗口创建后立即监听。
+     * 开启窗口内UIExtension安全限制变化事件的监听, 建议在窗口创建后立即监听。
      *
-     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内uiExtension安全限制变
+     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制变
      *     化事件。
-     * @param { Callback<boolean> } callback - 回调函数。当窗口内uiExtension安全限制变化时触发回调。当返回参数为true表示窗口内uiExtension开启了隐藏不安全窗口；当返回参
-     *     数为false表示窗口内uiExtension关闭了隐藏不安全窗口。若窗口内存在多个uiExtension，当返回参数为true表示窗口内至少一个uiExtension开启了隐藏不安全窗口；当返回参数为false表示窗
-     *     口内所有uiExtension关闭了隐藏不安全窗口。
+     * @param { Callback<boolean> } callback - 回调函数。当窗口内UIExtension安全限制变化时触发回调。当返回参数为true表示窗口内UIExtension开启了隐藏不安全窗口；当返回参
+     *     数为false表示窗口内UIExtension关闭了隐藏不安全窗口。若窗口内存在多个UIExtension，当返回参数为true表示窗口内至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗
+     *     口内所有UIExtension关闭了隐藏不安全窗口。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7415,9 +7414,9 @@ declare namespace window {
     on(eventType: 'uiExtensionSecureLimitChange', callback: Callback<boolean>): void;
 
     /**
-     * 开启窗口内uiExtension安全限制变化事件的监听。
+     * 开启窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } callback - 回调函数。当窗口内uiExtension安全限制变化时触发回调。
+     * @param { Callback<boolean> } callback 回调函数。当窗口内UIExtension安全限制变化时触发回调。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7429,9 +7428,9 @@ declare namespace window {
     onUiExtensionSecureLimitChange(callback: Callback<boolean>): void;
 
     /**
-     * 关闭窗口内uiextension安全限制变化事件的监听。
+     * 关闭窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内uiExtension安全限制变
+     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制变
      *     化事件。
      * @param { Callback<boolean> } [callback] - 回调函数。若传入参数，则关闭该监听。若未传入参数，则关闭所有窗口安全限制变化的监听。
      * @throws { BusinessError } 801 - Capability not supported.
@@ -7446,9 +7445,9 @@ declare namespace window {
     off(eventType: 'uiExtensionSecureLimitChange', callback?: Callback<boolean>): void;
 
     /**
-     * 关闭窗口内uiextension安全限制变化事件的监听。
+     * 关闭窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } [callback]- 回调函数。若传入参数，则关闭该监听。
+     * @param { Callback<boolean> } [callback] 回调函数。若传入参数，则关闭该监听。
      *     若未传入参数，则关闭所有窗口安全限制变化的监听。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function off('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
@@ -10395,7 +10394,7 @@ declare namespace window {
      * 
      * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable - 窗口是否为可触状态。true表示可触；false表示不可触。
+     * @param { boolean } isTouchable 窗口是否为可点击状态。true表示可点击；false表示不可点击。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10415,8 +10414,8 @@ declare namespace window {
      * 
      * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable - 窗口是否为可触状态。true表示可触；false表示不可触。
-     * @param { AsyncCallback<void> } callback - 回调函数。
+     * @param { boolean } isTouchable 窗口是否为可点击状态。true表示可点击；false表示不可点击。
+     * @param { AsyncCallback<void> } callback 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -11884,10 +11883,10 @@ declare namespace window {
     getDecorButtonStyle(): DecorButtonStyle;
 
     /**
-     * 实现设置窗口可触摸区域；不设置时默认整个窗口区域可触摸；设置窗口可触摸区域后，区域外触摸事件将被透传；如果窗口区域发生变化需要重新设置。
+     * 实现设置窗口可点击区域；不设置时默认整个窗口区域可点击；设置窗口可点击区域后，区域外点击事件将被透传；如果窗口区域发生变化需要重新设置。
      *
      * @permission ohos.permission.SET_WINDOW_TOUCH_AREAS [since 26.0.0]
-     * @param { Array<Rect> } rects - 窗口可触摸区域。可触摸区域最大个数不能超过10个，且范围不能超出窗口区域。
+     * @param { Array<Rect> } rects - 窗口可点击区域。可点击区域最大个数不能超过10个，且范围不能超出窗口区域。
      * @returns { Promise<void> } 无返回结果的Promise对象。 [since 26.0.0]
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
@@ -13743,7 +13742,7 @@ declare namespace window {
     /**
      * 销毁WindowStage的主窗口页面内容，使用Promise异步回调。
      *
-     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @returns { Promise<void> } Promise对象，无返回结果。如果窗口状态异常，则抛出异常。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.WindowManager.WindowManager.Core
