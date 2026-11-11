@@ -400,7 +400,7 @@ declare namespace window {
      */
     TYPE_MUTISCREEN_COLLABORATION = 26,
     /**
-     * 无障碍窗口
+     * 无障碍通话窗口
      *
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
