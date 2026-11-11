@@ -2018,7 +2018,7 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 -  Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -2053,7 +2053,7 @@ declare namespace dlpPermission {
      *     4,194,304 bytes.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -2091,7 +2091,7 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -2138,7 +2138,7 @@ declare namespace dlpPermission {
      * @param { EnterprisePolicy } policy - Enterprise application protection policy to be set. Access control and
      *     behavior restrictions of enterprise DLP files are implemented based on the policy.
      * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @throws { BusinessError } 19100021 - Failed to set the enterprise policy.
@@ -2178,7 +2178,7 @@ declare namespace dlpPermission {
          * @param { Callback<string> } callback - API transferred by the SA, which is used for callback. No value range
          *     restriction is specified.
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100011 - The system ability works abnormally.
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
@@ -2203,7 +2203,7 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
          */
@@ -2224,7 +2224,7 @@ declare namespace dlpPermission {
          * @returns { number } Registration result. The unique ID of the callback is returned. The value range is
          *     [0, 2<sup>53</sup>-1].
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
@@ -2245,7 +2245,7 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
