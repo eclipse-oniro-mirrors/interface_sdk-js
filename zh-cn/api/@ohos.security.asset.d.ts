@@ -325,17 +325,18 @@ declare namespace asset {
    */
   function updateAsUser(userId: number, query: AssetMap, attributesToUpdate: AssetMap): Promise<void>;
 
-
-
   /**
    * 批量更新符合条件的关键资产。使用Promise异步回调。
-   * 
+   *
    * 批量更新的关键资产必须具有相同的[Tag.GROUP_ID]{@link asset.TagType}和[Tag.REQUIRE_ATTR_ENCRYPTED]{@link asset.TagType}属性。
-   * 
+   *
    * 批量更新的关键资产数量最大值为100。
    *
    * @param { Array<AssetMap> } sourceAttributes - 待更新关键资产的搜索条件数组。
+   *     <br>数组最大长度为100，数组中所有元素的{@link Tag.GROUP_ID}和{@link Tag.REQUIRE_ATTR_ENCRYPTED}属性值必须相同。
    * @param { Array<AssetMap> } destAttributes - 待更新关键资产的属性集合数组。
+   *     <br>数组最大长度为100，且应与sourceAttributes长度保持一致，
+   *     数组中所有元素的{@link Tag.GROUP_ID}和{@link Tag.REQUIRE_ATTR_ENCRYPTED}属性值必须相同。
    * @returns { Promise<BatchResult> } Promise对象，返回批量操作结果，包含失败关键资产的错误信息。
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000006 - Insufficient memory.
@@ -672,10 +673,9 @@ declare namespace asset {
   /**
    * 关键资产属性的内容，用作[AssetMap]{@link asset.AssetMap}的值。
    *
-   * @unionmember { boolean } The value is a boolean value, with a range of true or false.
-   * @unionmember { number } The value is a number, and the value range is the enumerated value or number
-   *     corresponding to the tag.
-   * @unionmember { Uint8Array } The value is a byte array, and the content is defined by the service.
+   * @unionmember { boolean } 表示值类型为布尔类型，取值为true或false。
+   * @unionmember { number } 表示值类型为数字，取值为枚举值或对应Tag支持的数字。
+   * @unionmember { Uint8Array } 表示值类型为字节数组，内容由业务定义。
    * @syscap SystemCapability.Security.Asset
    * @atomicservice [since 14]
    * @since 11
@@ -1321,7 +1321,10 @@ declare namespace asset {
      */
     NOT_SYSTEM_APPLICATION = 202,
     /**
-     * 参数错误。
+     * 参数错误。可能原因：
+     * 1. 必选参数未指定。
+     * 2. 参数类型错误。
+     * 3. 参数校验失败。
      *
      * @syscap SystemCapability.Security.Asset
      * @atomicservice [since 14]
