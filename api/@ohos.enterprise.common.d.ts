@@ -578,6 +578,294 @@ declare namespace common {
      */
     content: string;
   }
+
+  /**
+   * Indicates the USB device configuration information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface USBDeviceConfigInfo {
+    /**
+     * Bus number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    busNum: number;
+
+    /**
+     * Device address.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    devAddress: number;
+
+    /**
+     * Configuration unique identifier.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    configId?: number;
+
+    /**
+     * Interface unique identifier.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    interfaceId?: number;
+  }
+
+  /**
+   * Indicates the USB interface information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface USBInterfaceInfo {
+    /**
+     * Interface ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    id: number;
+
+    /**
+     * Interface protocol.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    protocol: number;
+
+    /**
+     * Device class.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clazz: number;
+
+    /**
+     * Device subclass.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    subClass: number;
+
+    /**
+     * Interface name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    name: string;
+
+    /**
+     * Interface state.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isMount: boolean;
+  }
+
+  /**
+   * Indicates the USB configuration information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface USBConfigurationInfo {
+    /**
+     * Configuration ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    id: number;
+
+    /**
+     * Configuration name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    name: string;
+
+    /**
+     * Configuration state.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isMount: boolean;
+
+    /**
+     * USB interface information list.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    interfaces: Array<USBInterfaceInfo>;
+  }
+
+  /**
+   * Indicates the USB device information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  export interface UsbDeviceInfo {
+    /**
+     * Bus number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    busNum: number;
+
+    /**
+     * Device address.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    devAddress: number;
+
+    /**
+     * Serial number.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    serial: string;
+
+    /**
+     * Device name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    name: string;
+
+    /**
+     * Manufacturer name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    manufacturerName: string;
+
+    /**
+     * Product name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    productName: string;
+
+    /**
+     * Device version.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    version: string;
+
+    /**
+     * Vendor ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    vendorId: number;
+
+    /**
+     * Product ID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    productId: number;
+
+    /**
+     * Device class.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    clazz: number;
+
+    /**
+     * Device subclass.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    subClass: number;
+
+    /**
+     * Device protocol.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    protocol: number;
+
+    /**
+     * Device state.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isMount: boolean;
+
+    /**
+     * USB configuration information list.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    configs: Array<USBConfigurationInfo>;
+  }
 }
 
 export default common;

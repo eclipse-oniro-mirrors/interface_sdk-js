@@ -939,6 +939,77 @@ declare namespace usbManager {
    * @since 26.0.1
    */
   function getExternalStorageDeviceInfos(): Array<common.ExternalStorageDeviceInfo>;
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { boolean } enable - Whether to enable the USB interception.
+   *     true: Enable the USB interception.
+   *     false: Disable the USB interception.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setUsbInterceptEnable(enable: boolean): void;
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { boolean } Returns true if the USB interception is enabled; returns false otherwise.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function isUsbInterceptEnable(): boolean;
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @returns { Array<common.UsbDeviceInfo> } Returns the list of USB device information.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getUsbDeviceInfos(): Array<common.UsbDeviceInfo>;
+
+  /**
+   * 
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_USB
+   * @param { common.USBDeviceConfigInfo } usbDeviceConfigInfo - USB device configuration information.
+   * @param { boolean } isEnable - Whether to enable the USB device.
+   *     true: Enable the USB device.
+   *     false: Disable the USB device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setUsbDeviceStates(usbDeviceConfigInfo: common.USBDeviceConfigInfo, isEnable: boolean): void;
 }
 
 export default usbManager;

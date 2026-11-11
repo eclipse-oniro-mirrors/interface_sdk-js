@@ -410,4 +410,15 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * 
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB device information, including bus number, device address,
+   *     serial number, vendor ID, product ID, and other device attributes.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }

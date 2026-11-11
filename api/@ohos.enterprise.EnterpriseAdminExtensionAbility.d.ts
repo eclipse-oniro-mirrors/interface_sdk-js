@@ -508,4 +508,17 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * Callback for USB device added events.
+   * Called when a USB device is added to the device. This callback is triggered when a USB device is plugged in
+   * and the system has recognized it.
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB device information, including bus number, device address,
+   *     serial number, vendor ID, product ID, and other device attributes.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }
