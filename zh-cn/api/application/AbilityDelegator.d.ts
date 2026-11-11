@@ -38,7 +38,7 @@ import { InteropAbilityMonitor } from './InteropAbilityMonitor';
  * 
  * > **说明：**
  * >
- * > 本模块接口仅可在[单元测试框架](docroot://application-test/unittest-guidelines.md)中使用。
+ * > 本模块接口仅可在[单元测试框架](https://developer.huawei.com/consumer/cn/doc/doccenter-testing/unittest-guidelines)中使用。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @crossplatform [since 10]
