@@ -1181,6 +1181,28 @@ declare namespace privacyManager {
      * @since 26.0.0 dynamic&static
      */
     enhancedIdentity?: string;
+    /**
+     * 目标应用的身份标识。仅在权限名称为
+     * ohos.permission.AUTOMATION_CONTROL时返回有效值，表示被自动化控制的目标应用的身份标识。非自动化控制访问记录下，该参数返回值为0。
+     * 取值限定为整数。默认值：0。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetTokenId?: int;
+    /**
+     * 目标应用的包名。仅在权限名称为
+     * ohos.permission.AUTOMATION_CONTROL时该值有效，表示被自动化控制的目标应用的包名。非自动化控制访问记录场景下，该值为空字符串。
+     * 默认值：空。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetBundleName?: string;
   }
 
   /**
