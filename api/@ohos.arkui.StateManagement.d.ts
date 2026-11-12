@@ -1710,15 +1710,15 @@ export declare interface IReusableInfo {
  */
 declare type ReusableComponentConstructor = Function;
 /**
- * Defines the error information reported through the callback of
- * [RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md).
+   * Defines the error information reported through the callback of
+   * [RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md).
  *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
  */
-export interface RecoverableStorageError {
+export declare interface RecoverableStorageError {
   /**
    * Reason of the error. The value can be **'serialization'** (serialization failed,
    * for example, the serialization budget is exceeded or a field cannot be serialized) or
@@ -1768,15 +1768,15 @@ export interface RecoverableStorageError {
 export type NotifyOnErrorCallback = (error: RecoverableStorageError) => void;
 
 /**
- * Defines the options of
- * [RecoverableStorage.connect]{@link RecoverableStorage.connect}.
+   * Defines the options of
+   * [RecoverableStorage.connect]{@link RecoverableStorage.connect}.
  *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
  */
-export interface RecoverableConnectOptions<T extends object, S extends object> {
+export declare class RecoverableConnectOptions<T extends object, S extends object> {
   /**
    * Custom component instance, for which **this** is passed to obtain the window-level instance ID used for
    * per-instance isolation.
@@ -1840,28 +1840,28 @@ export interface RecoverableConnectOptions<T extends object, S extends object> {
 }
 
 /**
- * Provides the capability of automatically saving and restoring declared state variables when the application
- * is killed due to resource control or exits abnormally. After a variable is declared through
- * [connect]{@link RecoverableStorage.connect}, its value is saved automatically on the save occasions of the
- * system recovery pipeline and restored automatically on the next recovery restart.
+   * Provides the capability of automatically saving and restoring declared state variables when the application
+   * is killed due to resource control or exits abnormally. After a variable is declared through
+   * [connect]{@link RecoverableStorage.connect}, its value is saved automatically on the save occasions of the
+   * system recovery pipeline and restored automatically on the next recovery restart.
  *
- * > **NOTE**
- * >
- * > 1. For an application killed due to resource control (for example, low memory), the value saved when the
- * > application switches to the background is restored after the restart.
- * >
- * > 2. For **JS_ERROR** and **APP_FREEZE** exits, the value at the moment the error occurs is saved and then
- * > restored after the system automatically restarts the application. This requires the application to have
- * > called **enableAppRecovery** (default parameters meet the requirement) and not registered an error observer.
- * >
- * > 3. Restoration is performed only when the application is restarted by the system with the recovery restart
- * > parameter. Starting the application manually always performs a cold start, where **connect** returns the
- * > default value.
+   * > **NOTE**
+   * >
+   * > 1. For an application killed due to resource control (for example, low memory), the value saved when the
+   * > application switches to the background is restored after the restart.
+   * >
+   * > 2. For **JS_ERROR** and **APP_FREEZE** exits, the value at the moment the error occurs is saved and then
+   * > restored after the system automatically restarts the application. This requires the application to have
+   * > called **enableAppRecovery** (default parameters meet the requirement) and not registered an error observer.
+   * >
+   * > 3. Restoration is performed only when the application is restarted by the system with the recovery restart
+   * > parameter. Starting the application manually always performs a cold start, where **connect** returns the
+   * > default value.
  *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
  */
 export declare class RecoverableStorage {
   /**
@@ -1885,20 +1885,17 @@ export declare class RecoverableStorage {
    * >
    * > 5. Variables are isolated by the window-level instance ID obtained from **component**. Variables of
    > > different instances do not affect each other.
-   >
-   * > 6. An empty key or a key whose length is not less than **1024** bytes throws **BusinessError(140124)**.
-   *
-   * @param { RecoverableConnectOptions<T, S> } options - Options of the connection.
+
+   * @param { RecoverableConnectOptions<T, S> } params - Connection options.
    * @returns { T } Returns the restored value or the default value if the connection is successful.
-   * @throws { BusinessError } 140124 - The type or a parameter is not supported, or the key is an empty
-   *     string or its length is not less than 1024 bytes.
+   * @throws { BusinessError } 140124 - Unsupported type or parameters.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
    * @since 26.1.0 dynamic
    */
   static connect<T extends object, S extends object>(
-    options: RecoverableConnectOptions<T, S>
+    params: RecoverableConnectOptions<T, S>
   ): T;
 
   /**

@@ -1496,35 +1496,35 @@ declare type ReusableComponentConstructor = Function;
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface RecoverableStorageError {
+export declare interface RecoverableStorageError {
   /**
    * 错误原因。取值为**'serialization'**（序列化失败，如超出序列化上限或字段不可序列化）或
    * **'deserialization'**（反序列化失败，如数据损坏、类型不匹配）。**connect**入口错误（类型不支持、
-   * 参数非法）以**BusinessError(140124)**直接**抛出**，不经本回调上报；I/O错误恒输出错误日志。
-   * 推荐用户数据总量：每实例≤100KB（200KB序列化预算，与系统数据共享）。
+   * 参数非法）以**BusinessError(140124)**直接**抛出**，不经本回调上报。
+   * 推荐用户数据总量：每实例≤100KB（150KB序列化预算，与系统数据共享）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   reason: 'serialization' | 'deserialization';
   /**
    * 受错误影响的key列表。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   keys: Array<string>;
   /**
    * 错误的附加信息。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   message: string;
 }
@@ -1549,71 +1549,71 @@ export type NotifyOnErrorCallback = (error: RecoverableStorageError) => void;
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface RecoverableConnectOptions<T extends object, S extends object> {
+export declare class RecoverableConnectOptions<T extends object, S extends object> {
   /**
    * 自定义组件实例，传入**this**，用于获取窗口级实例ID实现实例间隔离。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   component: BaseCustomComponent;
   /**
    * 可恢复状态变量的类型。仅支持对象类型；**number**、**string**、**boolean**等简单类型会被拒绝。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   type: TypeConstructorWithArgs<T>;
   /**
    * 可恢复状态变量的key。不指定时使用类型名作为key。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   key?: string;
   /**
-   * 默认值构造器。必选参数。首次连接（内存与快照中均不存在该key）时使用，恢复失败时作为回退。
+   * 默认值构造器。首次连接（内存与快照中均不存在该key）时使用，恢复失败时作为回退。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   defaultCreator: StorageDefaultCreator<T>;
   /**
    * 集合嵌套**\@Type**成员的构造器，恢复时用于重建嵌套对象。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   defaultSubCreator?: StorageDefaultCreator<S>;
   /**
    * 序列化/反序列化错误回调。不指定时错误在内部处理，不会导致应用崩溃。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   notifyOnError?: NotifyOnErrorCallback;
 }
 
 /**
- * 提供在应用被资源管控查杀或异常退出时自动保存与恢复所声明的状态变量的能力。通过
+ * 提供在应用被资源管控终止或异常退出时自动保存与恢复所声明的状态变量的能力。通过
  * [connect]{@link RecoverableStorage.connect}声明变量后，其值在系统恢复链路的保存时机自动保存，并在下一次
  * 恢复重启时自动恢复。
  *
  * > **说明：**
  * >
- * > 1. 资源管控查杀（如低内存）场景：恢复退后台时保存的值。
+ * > 1. 资源管控终止（如低内存）场景：恢复退后台时保存的值。
  * >
  * > 2. **JS_ERROR**与**APP_FREEZE**异常退出场景：异常发生时刻的值被保存，并在系统自动重启后恢复。前提是
  * > 应用已调用**enableAppRecovery**（默认参数即可满足）且未注册错误观察者。
@@ -1644,19 +1644,17 @@ export declare class RecoverableStorage {
    * > 4. 典型用法为修改所连接对象的属性。对V1 **\@State**变量整体重新赋值会导致已存引用失效，不被跟踪。
    * >
    * > 5. 变量按**component**获取的窗口级实例ID隔离，不同实例的变量互不影响。
-   >
-   * > 6. key为空字符串或长度不小于**1024**字节时，**抛出****BusinessError(140124)**。
    *
-   * @param { RecoverableConnectOptions<T, S> } options - 连接选项。
+   * @param { RecoverableConnectOptions<T, S> } params - 连接选项。
    * @returns { T } 连接成功时返回恢复值或默认值。
-   * @throws { BusinessError } 140124 - 类型或参数不支持，或key为空字符串或长度不小于1024字节。
+   * @throws { BusinessError } 140124 - Unsupported type or parameters.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   static connect<T extends object, S extends object>(
-    options: RecoverableConnectOptions<T, S>
+    params: RecoverableConnectOptions<T, S>
   ): T;
 
   /**
@@ -1669,9 +1667,9 @@ export declare class RecoverableStorage {
    * @param { BaseCustomComponent } component - 自定义组件实例，传入**this**。
    * @returns { Array<string> } 当前实例注册的所有key。未注册变量时返回空数组。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   static keys(component: BaseCustomComponent): Array<string>;
 
@@ -1687,9 +1685,9 @@ export declare class RecoverableStorage {
    * @param { string | TypeConstructorWithArgs<T> } keyOrType - 待注销的key。若传入类型，则注销以该类型名为
    *     key的变量。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.1.0 dynamic
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
    */
   static remove<T>(component: BaseCustomComponent, keyOrType: string | TypeConstructorWithArgs<T>): void;
 }
