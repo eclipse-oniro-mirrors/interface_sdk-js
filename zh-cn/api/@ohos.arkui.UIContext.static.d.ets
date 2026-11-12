@@ -1424,7 +1424,7 @@ export const enum NodeSensitiveInputEventType {
 export interface NodeSensitiveInputInfo {
   /**
    * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
-   * ohos.permission.CONTROL_DEVICE权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   * ohos.permission.CONTROL_COMPONENT权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2123,7 +2123,7 @@ export declare class UIObserver {
   /**
    * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
    * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过**NodeSensitiveInputInfo**中的
-   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_DEVICE权限的应用注入。
+   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_COMPONENT权限的应用注入。
    *
    * 即使事件最终未分发到节点，也会触发回调。例如，被**agentControlMode**阻止的Agent生成事件
    * 仍会上报，以便感知对敏感控件的操控尝试。
@@ -4584,16 +4584,17 @@ export declare class UIContext {
    * > **说明：**
    * >
    * > 1. 使用该接口时，若未传入有效的targetId，则不支持设置SheetOptions.preferType为POPUP模式、不支持设置SheetOptions.mode为EMBEDDED模式。
-   * > 2. 由于updateBindSheet和closeBindSheet依赖bindSheetContent去更新或者关闭指定的半模态页面，开发者需自行维护传入的bindSheetContent。
+   * >
+   * > 2. 由于[updateBindSheet]{@link UIContext#updateBindSheet}和[closeBindSheet]{@link UIContext#closeBindSheet}依赖
+   * > bindSheetContent去更新或者关闭指定的半模态页面，开发者需自行维护传入的bindSheetContent。
+   * >
    * > 3. 不支持设置SheetOptions.UIContext。
    *
    * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
-   * @param { SheetOptions } [sheetOptions] - 半模态页面样式。
-   *     <br>**说明：**
-   *     <br>1. 不支持设置SheetOptions.uiContext，该属性的值固定为当前实例的UIContext。
-   *     <br>2. 若不传递targetId，则不支持设置SheetOptions.preferType为POPUP样式，若设置了POPUP样式则使用CENTER样式替代。
-   *     <br>3. 若不传递targetId，则不支持设置SheetOptions.mode为EMBEDDED模式，默认为OVERLAY模式。
-   *     <br>4. 其余属性的默认值参考SheetOptions文档。
+   * @param { SheetOptions } [sheetOptions] - 半模态页面样式。<br/>**说明：** <br/>1. 不支持设置SheetOptions.uiContext，该属性的值固定为当前实例的
+   *     UIContext。<br/>2. 若不传递targetId，则不支持设置SheetOptions.preferType为POPUP样式，若设置了POPUP样式则使用CENTER样式替代。<br/>3. 若不传递
+   *     targetId，则不支持设置SheetOptions.mode为EMBEDDED模式，默认为OVERLAY模式。<br/>4. 其余属性的默认值参考[SheetOptions]{@link SheetOptions}文
+   *     档。
    * @param { int } [targetId] - 需要绑定组件的ID，若不指定则不绑定任何组件。id不存在时返回错误码120004。在传入undefined时返回错误码401。
    *     <br>Value range:(0, +∞)
    * @returns { Promise<void> } Promise对象，无返回结果。
@@ -4620,13 +4621,10 @@ export declare class UIContext {
    * > 不支持更新SheetOptions.UIContext、SheetOptions.mode、回调函数。
    *
    * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
-   * @param { SheetOptions } sheetOptions - 半模态页面样式。
-   *     <br>**说明：**
-   *     <br>不支持更新SheetOptions.uiContext、SheetOptions.mode、回调函数。
-   * @param { boolean } [partialUpdate] - 半模态页面更新方式，默认值为false。
-   *     <br>**说明：**
-   *     <br>1. true为增量更新，保留当前值，更新SheetOptions中的指定属性。
-   *     <br>2. false为全量更新，除SheetOptions中的指定属性，其他属性恢复默认值。
+   * @param { SheetOptions } sheetOptions - 半模态页面样式。<br/>**说明：** <br/>不支持更新SheetOptions.uiContext、SheetOptions.mode、回调函
+   *     数。
+   * @param { boolean } [partialUpdate] - 半模态页面更新方式，默认值为false。<br/>**说明：** <br/>1. true为增量更新，保留当前值，更新SheetOptions中的指定属
+   *     性。<br/>2. false为全量更新，除SheetOptions中的指定属性，其他属性恢复默认值。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - 参数错误。可能的原因：
    *     <br> 1. 必填参数未指定。

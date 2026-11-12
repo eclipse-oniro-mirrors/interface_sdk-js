@@ -14,7 +14,7 @@
  */
 
 /**
-  * @file 三方VPN能力
+  * @file
   * @kit NetworkKit
  */
 
@@ -22,10 +22,7 @@ import type VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
 
 /**
- * VpnExtensionContext是VpnExtensionAbility的上下文环境，继承自
- * [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}。
- * 
- * VpnExtensionContext可直接作为VpnExtension的上下文环境，提供允许访问特定于VpnExtensionAbility的资源的能力。
+ * VpnExtensionAbility模块提供三方VPN相关能力，提供三方VPN创建、销毁等生命周期回调。
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
@@ -34,7 +31,7 @@ import type Want from './@ohos.app.ability.Want';
  */
 export default class VpnExtensionAbility {
   /**
-   * 指定context。
+   * VpnExtension的上下文环境，继承自[ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -44,11 +41,11 @@ export default class VpnExtensionAbility {
   context: VpnExtensionContext;
 
   /**
-   * 拓展VPN启动初始化的时候进行回调。
+   * 在启动三方VPN进行初始化时回调。
    * 
    * > **说明：**
    * >
-   * > 建议配对调用[onDestroy]{@link VpnExtensionAbility#onDestroy}监听拓展VPN的销毁，及时执行资源清理等操作。
+   * > 建议配对调用[onDestroy]{@link VpnExtensionAbility#onDestroy}监听三方VPN的销毁，执行资源清理等操作。
    *
    * @param { Want } want - 指示要启动的信息。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -59,7 +56,7 @@ export default class VpnExtensionAbility {
   onCreate(want: Want): void;
 
   /**
-   * 拓展VPN销毁之前进行回调。
+   * VpnExtensionAbility生命周期回调，在销毁时回调，执行资源清理等操作。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

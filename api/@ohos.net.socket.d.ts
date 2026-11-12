@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,9 @@ import type cert from './@ohos.security.cert';
  * @since 26.0.1 static
  */
 declare namespace socket {
+
   /**
-   * Define a network address.
+   * Defines the destination address.
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
    * @crossplatform [since 24]
@@ -319,7 +320,7 @@ declare namespace socket {
 
     /**
      * Whether to reuse addresses. The value **true** means to reuse addresses, and the value **false** means the
-     * opposite.
+     * opposite. The default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -329,7 +330,8 @@ declare namespace socket {
     reuseAddress?: boolean;
 
     /**
-     * Timeout duration of the local socket connection, in ms.
+     * Timeout duration of the local socket connection, in ms. The default value is **0**, indicating that the timeout
+     * period is not set.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -633,7 +635,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** is successfully called.
      *
-     * @returns { Promise<NetAddress> } Promise used to return the result.
+     * @returns { Promise<NetAddress> } Promise used to return the result of obtaining the local socket address.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2301009 - Bad file descriptor.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -754,7 +756,7 @@ declare namespace socket {
      * > This API can be called only after **bind** is successfully called.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<SocketStateBase> } Promise used to return the result.
+     * @returns { Promise<SocketStateBase> } Promise used to return the result of obtaining the UDPSocket state.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -808,7 +810,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **UDPSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. [since 7 - 10]
      * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. [since 11]
@@ -832,7 +836,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **UDPSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. You can pass the callback of the **on** function if you want to cancel listening for a certain
      *     type of events. If you do not pass the callback, you will cancel listening for all events. [since 7 - 10]
@@ -859,7 +865,8 @@ declare namespace socket {
      * Subscribes to **listening** events or **close** events of the **UDPSocket** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'listening' | 'close' } type - Event type.<br/>
+     * @param { 'listening' | 'close' } type - Event type.
+     *     <br/>
      *     <br>- **listening**: data packet message event.
      *     <br>- **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result.
@@ -877,7 +884,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onClose(callback: Callback<void>): void;
+    onListening(callback: Callback<void>): void;
 
     /**
      * Listens for data packet message events or close events of the UDPSocket connection.
@@ -887,7 +894,7 @@ declare namespace socket {
      * @crossplatform
      * @since 26.0.1 static
      */
-    onListening(callback: Callback<void>): void;
+    onClose(callback: Callback<void>): void;
 
     /**
      * Unsubscribes from **listening** events or **close** events of the **UDPSocket** object. This API uses an
@@ -929,7 +936,9 @@ declare namespace socket {
      * Subscribes to **error** events of the **UDPSocket** object. This API uses an asynchronous callback to return the
      * result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -951,7 +960,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **UDPSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1211,7 +1222,7 @@ declare namespace socket {
      * > [addMembership]{@link socket.MulticastSocket.addMembership(multicastAddress: NetAddress, callback: AsyncCallback<void>)}
      * > is called.
      *
-     * @returns { Promise<int> } Promise used to return the result.
+     * @returns { Promise<int> } Promise used to return the current TTL value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2301088 - Not a socket.
      * @syscap SystemCapability.Communication.NetStack
@@ -1466,7 +1477,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** or **connect** is successfully called.
      *
-     * @returns { Promise<SocketStateBase> } Promise used to return the result.
+     * @returns { Promise<SocketStateBase> } Promise used to return and obtain the result of the LocalSocket state.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
@@ -1487,7 +1498,7 @@ declare namespace socket {
      * > [close]{@link socket.LocalSocket.close} method to close the socket connection, instead of directly operating
      * > the file descriptor.
      *
-     * @returns { Promise<int> } Promise used to return the result.
+     * @returns { Promise<int> } Promise used to return the file descriptor of the socket.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
@@ -1521,7 +1532,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** or **connect** is successfully called.
      *
-     * @returns { Promise<ExtraOptionsBase> } Promise used to return the result.
+     * @returns { Promise<ExtraOptionsBase> } Promise used to return the properties of the LocalSocket socket.
      * @throws { BusinessError } 2301009 - Bad file descriptor.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -1537,7 +1548,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** is successfully called.
      *
-     * @returns { Promise<string> } Promise used to return the result.
+     * @returns { Promise<string> } Promise used to return the local socket address.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2301009 - Bad file descriptor.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -1552,7 +1563,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **LocalSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<LocalSocketMessageInfo> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -1575,7 +1588,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **LocalSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<LocalSocketMessageInfo> } callback - Callback used to return the result. You can pass the
      *     callback of the **on** function if you want to cancel listening for a certain type of events. If you do not
      *     pass the callback, you will cancel listening for all events.
@@ -1600,7 +1615,8 @@ declare namespace socket {
      * Subscribes to **connect** events of the **LocalSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'connect' } type - Event type.<br/>
+     * @param { 'connect' } type - Event type.
+     *     <br/>
      * @param { Callback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -1623,7 +1639,9 @@ declare namespace socket {
      * Unsubscribes from **connect** events of the **LocalSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'connect' } type - Event type.<br/> 'connect': connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     'connect': connection event.
      * @param { Callback<void> } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1671,7 +1689,9 @@ declare namespace socket {
      * Unsubscribes from **close** events of the **LocalSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1719,7 +1739,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **LocalSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> 'error': error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     'error': error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1739,7 +1761,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offLocalSocketError(callback?: ErrorCallback): void;
-
   }
 
   /**
@@ -1802,7 +1823,7 @@ declare namespace socket {
      * Obtains the local socket address of a **LocalSocketConnection** connection. This API uses a promise to return the
      * result.
      *
-     * @returns { Promise<string> } Promise used to return the result.
+     * @returns { Promise<string> } Promise used to return the result of obtaining the local socket address.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2301009 - Bad file descriptor.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -1817,7 +1838,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **LocalSocketConnection** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<LocalSocketMessageInfo> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -1840,7 +1863,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **LocalSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<LocalSocketMessageInfo> } callback - Callback used to return the result. You can pass the
      *     callback of the **on** function if you want to cancel listening for a certain type of events. If you do not
      *     pass the callback, you will cancel listening for all events.
@@ -1865,7 +1890,9 @@ declare namespace socket {
      * Unsubscribes from **close** events of the **LocalSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -1888,7 +1915,9 @@ declare namespace socket {
      * Unsubscribes from **close** events of the **LocalSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1913,7 +1942,9 @@ declare namespace socket {
      * Subscribes to **error** events of the **LocalSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -1936,7 +1967,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **LocalSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -1968,8 +2001,8 @@ declare namespace socket {
      * > close API is called).
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.LocalSocket.close} method to close the socket connection, instead of directly operating
-     * > the file descriptor.
+     * > [close]{@link socket.LocalSocketConnection.close} method to close the socket connection, instead of directly
+     * > operating the file descriptor.
      *
      * @returns { Promise<int> } Promise used to return the socket file descriptor.
      * @syscap SystemCapability.Communication.NetStack
@@ -2002,8 +2035,7 @@ declare namespace socket {
      * > local socket file is passed for binding, a socket file is automatically created when this API is called.
      *
      * @param { LocalAddress } address - Destination address.
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2303109 - Bad file number.
      * @throws { BusinessError } 2301013 - Insufficient permissions.
@@ -2023,7 +2055,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @returns { Promise<SocketStateBase> } Promise used to return the result.
+     * @returns { Promise<SocketStateBase> } Promise used to return and obtain the LocalSocketServer status.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
      * @since 11 dynamic
@@ -2056,7 +2088,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @returns { Promise<ExtraOptionsBase> } Promise used to return the result.
+     * @returns { Promise<ExtraOptionsBase> } Promise used to return the socket properties.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -2073,7 +2105,7 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @returns { Promise<string> } Promise used to return the result.
+     * @returns { Promise<string> } Promise used to return the result of obtaining the local socket address.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2301009 - Bad file descriptor.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -2090,8 +2122,9 @@ declare namespace socket {
      *
      * > **NOTE**
      * >
-     * > This API does not close existing connections. To close the connection, call the [close] (#close11-1) API of
-     * > [LocalSocketConnection] (#localsocketconnection11).
+     * > This API does not close existing connections. To close the connection, call the
+     * > [close]{@link socket.LocalSocketConnection.close} API of
+     * > [LocalSocketConnection]{@link socket.LocalSocketConnection}.
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -2110,7 +2143,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'connect' } type - Event type.<br/> **connect**: connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     **connect**: connection event.
      * @param { Callback<LocalSocketConnection> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -2118,7 +2153,7 @@ declare namespace socket {
      * @since 11 dynamic
      */
     on(type: 'connect', callback: Callback<LocalSocketConnection>): void;
-    
+
     /**
      * Listens for connect events of the LocalSocketServer connection.
      *
@@ -2133,7 +2168,9 @@ declare namespace socket {
      * Unsubscribes from **connect** events of the **LocalSocketServer** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'connect' } type - Event type.<br/> 'connect': connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     'connect': connection event.
      * @param { Callback<LocalSocketConnection> } callback - Callback used to return the result. You can pass the
      *     callback of the **on** function if you want to cancel listening for a certain type of events. If you do not
      *     pass the callback, you will cancel listening for all events.
@@ -2162,7 +2199,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -2185,7 +2224,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **LocalSocketServer** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -2219,7 +2260,7 @@ declare namespace socket {
      * > close is called).
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.TCPSocketServer.close} method to close the socket connection, instead of directly
+     * > [close]{@link socket.LocalSocketServer.close} method to close the socket connection, instead of directly
      * > operating the file descriptor.
      *
      * @returns { Promise<int> } Promise used to return the socket file descriptor.
@@ -2316,10 +2357,10 @@ declare namespace socket {
    * @crossplatform
    * @since 26.0.1 static
    */
-  export interface SocketLingerOptions {  
+  export interface SocketLingerOptions {
     /**
-     * Whether to enable socket linger. The value true means to enable socket linger and false means the
-     * opposite. The default value is **false**.
+     * Whether to enable socket linger. The value true means to enable socket linger and false means the opposite. The
+     * default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -2327,8 +2368,8 @@ declare namespace socket {
      */
     on?: boolean;
     /**
-     * Linger time, in ms. The value ranges from **0** to **65535**. The default value is **0**.
-     * The value should be an integer.
+     * Linger time, in ms.
+     * The value should be an integer. Value constraint: '[0, 65535]'. Default value: Default value: 0.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -2645,7 +2686,7 @@ declare namespace socket {
      * > This API can be called only after **connect** is successfully called.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<NetAddress> } Promise used to return the result.
+     * @returns { Promise<NetAddress> } Promise used to return the result of obtaining the peer socket address.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2680,7 +2721,7 @@ declare namespace socket {
      * > This API can be called only after **bind** or **connect** is successfully called.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<SocketStateBase> } Promise used to return the result.
+     * @returns { Promise<SocketStateBase> } Promise used to return and obtain the TCPSocket state.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2698,7 +2739,7 @@ declare namespace socket {
      * > - This API can be called only after **bind** or **connect** is successfully called.
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.UDPSocket.close(callback: AsyncCallback<void>)} method to close the socket connection,
+     * > [close]{@link socket.TCPSocket.close(callback: AsyncCallback<void>)} method to close the socket connection,
      * > instead of directly operating the file descriptor.
      *
      * @param { AsyncCallback<int> } callback - Callback used to return the result. If the operation is successful, the
@@ -2718,10 +2759,10 @@ declare namespace socket {
      * > - This API can be called only after **bind** or **connect** is successfully called.
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.UDPSocket.close(callback: AsyncCallback<void>)} method to close the socket connection,
+     * > [close]{@link socket.TCPSocket.close(callback: AsyncCallback<void>)} method to close the socket connection,
      * > instead of directly operating the file descriptor.
      *
-     * @returns { Promise<int> } Promise used to return the result.
+     * @returns { Promise<int> } Promise used to return the file descriptor of the socket.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 10 dynamic
@@ -2792,7 +2833,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **TCPSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. [since 7 - 10]
      * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. [since 11]
@@ -2816,7 +2859,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **TCPSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. You can pass the callback of the **on** function if you want to cancel listening for a certain
      *     type of events. If you do not pass the callback, you will cancel listening for all events. [since 7 - 10]
@@ -2843,7 +2888,8 @@ declare namespace socket {
      * Subscribes to **connect** or **close** events of the **TCPSocket** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'connect' | 'close' } type - Event type.<br/>
+     * @param { 'connect' | 'close' } type - Event type.
+     *     <br/>
      *     <br>- **connect**: connection event.
      *     <br>- **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result.
@@ -2877,7 +2923,8 @@ declare namespace socket {
      * Unsubscribes from **connect** or **close** events of the **TCPSocket** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'connect' | 'close' } type - Event type.<br/>
+     * @param { 'connect' | 'close' } type - Event type.
+     *     <br/>
      *     <br>- **connect**: connection event.
      *     <br>- **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. You can pass the callback of the **on**
@@ -2913,7 +2960,9 @@ declare namespace socket {
      * Subscribes to **error** events of the **TCPSocket** object. This API uses an asynchronous callback to return the
      * result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -2935,7 +2984,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **TCPSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -2954,7 +3005,6 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     offTcpError(callback?: ErrorCallback): void;
-
   }
 
   /**
@@ -3034,8 +3084,8 @@ declare namespace socket {
     /**
      * Obtains the remote address of a TLS socket connection. This API uses a promise to return the result.
      *
-     * @returns { Promise<NetAddress> } Promise used to return the result. If the operation fails, an error message is
-     *     returned.
+     * @returns { Promise<NetAddress> } Promise used to return the result of obtaining the local socket address. On
+     *     failure, returns the error code and error message.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3063,8 +3113,8 @@ declare namespace socket {
     /**
      * Obtains the status of the TLS socket connection. This API uses a promise to return the result.
      *
-     * @returns { Promise<SocketStateBase> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<SocketStateBase> } Promise used to return and obtain the result of the TLSSocket state. On
+     *     failure, returns the error code and error message.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3136,7 +3186,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** is successfully called.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. [since 9 - 10]
      * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. [since 11]
@@ -3161,10 +3213,14 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **TLSSocket** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. [since 9 - 10]
-     * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. [since 11]
+     * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. You can pass the callback
+     *     of the **on** function if you want to cancel listening for a certain type of events. If you do not pass the
+     *     callback, you will cancel listening for all events. [since 11]
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -3190,7 +3246,8 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** is successfully called.
      *
-     * @param { 'connect' | 'close' } type - Event type.<br/>
+     * @param { 'connect' | 'close' } type - Event type.
+     *     <br/>
      *     <br>- **connect**: connection event.
      *     <br>- **close**: close event.
      * @param {Callback<void> } callback - Callback used to return the result.
@@ -3226,7 +3283,8 @@ declare namespace socket {
      * Unsubscribes from **connect** or **close** events of the **TLSSocket** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'connect' | 'close' } type - Event type.<br/>
+     * @param { 'connect' | 'close' } type - Event type.
+     *     <br/>
      *     <br>- **connect**: connection event.
      *     <br>- **close**: close event.
      * @param {Callback<void> } callback - Callback used to return the result.
@@ -3265,7 +3323,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **bind** is successfully called.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3288,7 +3348,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **TLSSocket** object. This API uses an asynchronous callback to return
      * the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3327,8 +3389,8 @@ declare namespace socket {
      * Obtains the local digital certificate after a **TLSSocket** connection is established. This API is applicable to
      * two-way authentication. It uses a promise to return the result.
      *
-     * @returns { Promise<X509CertRawData> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<X509CertRawData> } Promise used to return the local digital certificate. Returns an error code
+     *     and error message on failure.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303504 - An error occurred when verifying the X.509 certificate.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -3358,8 +3420,8 @@ declare namespace socket {
      * Obtains the digital certificate of the server after a **TLSSocket** connection is established. This API uses a
      * promise to return the result.
      *
-     * @returns { Promise<X509CertRawData> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<X509CertRawData> } Promise used to return the server's digital certificate. If the operation
+     *     fails, an error code and error message are returned.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3389,8 +3451,8 @@ declare namespace socket {
      * Obtains the communication protocol version after a **TLSSocket** connection is established. This API uses a
      * promise to return the result.
      *
-     * @returns { Promise<string> } Promise used to return the result. If the operation fails, an error message is
-     *     returned.
+     * @returns { Promise<string> } Promise used to return the protocol of the communication. On failure, returns the
+     *     error code and error message.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303505 - An error occurred in the TLS system call.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -3422,8 +3484,8 @@ declare namespace socket {
      * Obtains the cipher suite negotiated by both communication parties after a **TLSSocket** connection is
      * established. This API uses a promise to return the result.
      *
-     * @returns { Promise<Array<string>> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<Array<string>> } Promise used to return the cipher suites supported by both communicating
+     *     parties. On failure, returns an error code and error message.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303502 - An error occurred when reading data on the TLS socket.
      * @throws { BusinessError } 2303505 - An error occurred in the TLS system call.
@@ -3454,7 +3516,8 @@ declare namespace socket {
      * Obtains the signing algorithm negotiated by both communication parties after a **TLSSocket** connection is
      * established. This API is applicable to two-way authentication. It uses a promise to return the result.
      *
-     * @returns { Promise<Array<string>> } Promise used to return the result.
+     * @returns { Promise<Array<string>> } Promise used to return the obtained signature algorithms supported by both
+     *     parties.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -3475,7 +3538,7 @@ declare namespace socket {
      * > [close]{@link socket.TLSSocket.close(callback: AsyncCallback<void>)} method to close the socket connection,
      * > instead of directly operating the file descriptor.
      *
-     * @returns { Promise<int> } Promise used to return the result.
+     * @returns { Promise<int> } Promise used to return the file descriptor of the socket.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 16 dynamic
@@ -3534,8 +3597,7 @@ declare namespace socket {
      * optional since API version 12.
      *
      * @param { TLSConnectOptions } options - Parameters required for the connection.
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2303104 - Interrupted system call.
      * @throws { BusinessError } 2303109 - Bad file number.
@@ -3667,7 +3729,7 @@ declare namespace socket {
     ca?: string | Array<string>;
 
     /**
-     * Digital certificate of the local client. An array can be passed since API version 24. A maximum of 1000
+     * Digital certificate of the local client. Starting from API version 24, an array can be passed in, and up to 1000
      * certificates can be set.
      *
      * @type {?string} [since 9 - 23]
@@ -3752,6 +3814,8 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     isBidirectionalAuthentication?: boolean;
+
+
   }
 
   /**
@@ -3824,6 +3888,8 @@ declare namespace socket {
      * @since 26.0.1 static
      */
     timeout?: int;
+
+
   }
 
   /**
@@ -3981,7 +4047,7 @@ declare namespace socket {
      * > This API can be called only after a connection with the client is set up.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<NetAddress> } Promise used to return the result.
+     * @returns { Promise<NetAddress> } Promise used to return the result of obtaining the local socket address.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -4011,7 +4077,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **TCPSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. If the operation fails, an error message is returned. [since 10 - 10]
      * @param { Callback<SocketMessageInfo> } callback - Callback used to return the result. If the operation fails, an
@@ -4037,7 +4105,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **TCPSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. You can pass the callback of the **on** function if you want to cancel listening for a certain
      *     type of events. If you do not pass the callback, you will cancel listening for all events. [since 10 - 10]
@@ -4065,7 +4135,9 @@ declare namespace socket {
      * Subscribes to **close** events of the **TCPSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. If the operation fails, an error message
      *     is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4089,7 +4161,9 @@ declare namespace socket {
      * Unsubscribes from **close** events of the **TCPSocketConnection** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -4114,7 +4188,9 @@ declare namespace socket {
      * Subscribes to **error** events of the **TCPSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation fails, an error message
      *     is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4136,7 +4212,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **TCPSocketConnection** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -4300,7 +4378,7 @@ declare namespace socket {
      * > This API can be called only after **listen** is successfully called.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { Promise<SocketStateBase> } Promise used to return the result.
+     * @returns { Promise<SocketStateBase> } Promise used to return the result of obtaining the TCPSocket state.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
@@ -4382,7 +4460,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'connect' } type - Event type.<br/> **connect**: connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     **connect**: connection event.
      * @param { Callback<TCPSocketConnection> } callback - Callback used to return the result. If the operation fails,
      *     an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4406,7 +4486,9 @@ declare namespace socket {
      * Unsubscribes from **connect** events of the **TCPSocketServer** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'connect' } type - Event type.<br/> **connect**: connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     **connect**: connection event.
      * @param { Callback<TCPSocketConnection> } callback - Callback used to return the result. You can pass the callback
      *     of the **on** function if you want to cancel listening for a certain type of events. If you do not pass the
      *     callback, you will cancel listening for all events.
@@ -4435,7 +4517,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation fails, an error message
      *     is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4457,7 +4541,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **TCPSocketServer** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. You can pass the callback of the **on**
      *     function if you want to cancel listening for a certain type of events. If you do not pass the callback, you
      *     will cancel listening for all events.
@@ -4535,7 +4621,8 @@ declare namespace socket {
      * asynchronous callback to return the result.
      *
      * @param { string } data - Parameters for sending data over a TLS socket server connection. [since 10 - 11]
-     * @param { string | ArrayBuffer } data - Parameters for sending data over a TLS socket server connection. [since 12]
+     * @param { string | ArrayBuffer } data - Parameters for sending data over a TLS
+     *     socket server connection. [since 12]
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful, no
      *     value is returned. If the operation fails, an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4556,9 +4643,9 @@ declare namespace socket {
      * return the result.
      *
      * @param { string } data - Parameters for sending data over a TLS socket server connection. [since 10 - 11]
-     * @param { string | ArrayBuffer } data - Parameters for sending data over a TLS socket server connection. [since 12]
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned.
+     * @param { string | ArrayBuffer } data - Parameters for sending data over a TLS
+     *     socket server connection. [since12]
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303503 - An error occurred when writing data on the TLS socket.
@@ -4592,9 +4679,7 @@ declare namespace socket {
     /**
      * Closes a **TLSSocketServer** connection. This API uses a promise to return the result.
      *
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned. If the operation fails, an error message is
-     *     returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303505 - An error occurred in the TLS system call.
      * @throws { BusinessError } 2303506 - Failed to close the TLS connection.
@@ -4625,8 +4710,8 @@ declare namespace socket {
     /**
      * Obtains the remote address of a TLS socket server connection. This API uses a promise to return the result.
      *
-     * @returns { Promise<NetAddress> } Promise used to return the result. If the operation fails, an error message is
-     *     returned.
+     * @returns { Promise<NetAddress> } Promise used to return and obtain the result of the local socket address. On
+     *     failure, returns the error code and error message.
      * @throws { BusinessError } 2300002 - System internal error.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
      * @syscap SystemCapability.Communication.NetStack
@@ -4658,8 +4743,8 @@ declare namespace socket {
      * uses a promise to return the result. It applies only to the scenario where the client sends a certificate to the
      * server.
      *
-     * @returns { Promise<X509CertRawData> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<X509CertRawData> } Promise used to return the peer's digital certificate. On failure, returns
+     *     the error code and error message.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -4723,7 +4808,8 @@ declare namespace socket {
      * Obtains the signing algorithm negotiated by both communication parties after a **TLSSocketServer** connection is
      * established. This API uses a promise to return the result.
      *
-     * @returns { Promise<Array<string>> } Promise used to return the result.
+     * @returns { Promise<Array<string>> } Promise used to return the obtained signature algorithms supported by both
+     *     parties.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -4756,7 +4842,9 @@ declare namespace socket {
      * Subscribes to **message** events of the **TLSSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. If the operation is successful, the TLS socket connection information is returned. If the
      *     operation fails, an error message is returned. [since 10 - 10]
@@ -4784,7 +4872,9 @@ declare namespace socket {
      * Unsubscribes from **message** events of the **TLSSocketConnection** object. This API uses an asynchronous
      * callback to return the result.
      *
-     * @param { 'message' } type - Event type.<br/> **message**: message receiving event.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: message receiving event.
      * @param { Callback<{ message: ArrayBuffer, remoteInfo: SocketRemoteInfo }> } callback - Callback used to return
      *     the result. If the operation is successful, the TLS socket connection information is returned. If the
      *     operation fails, an error message is returned. [since 10 - 10]
@@ -4812,7 +4902,9 @@ declare namespace socket {
      * Subscribes to **close** events of the **TLSSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. If the operation is successful, no value
      *     is returned. If the operation fails, an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4836,7 +4928,9 @@ declare namespace socket {
      * Unsubscribes from **close** events of the **TLSSocketConnection** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: close event.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: close event.
      * @param { Callback<void> } callback - Callback used to return the result. If the operation is successful, no value
      *     is returned. If the operation fails, an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4860,7 +4954,9 @@ declare namespace socket {
      * Subscribes to **error** events of the **TLSSocketConnection** object. This API uses an asynchronous callback to
      * return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation is successful, no value
      *     is returned. If the operation fails, an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4882,7 +4978,9 @@ declare namespace socket {
      * Unsubscribes from **error** events of the **TLSSocketConnection** object. This API uses an asynchronous callback
      * to return the result.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation is successful, no value
      *     is returned. If the operation fails, an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -4911,7 +5009,7 @@ declare namespace socket {
      * > close API is called).
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.TCPSocketConnection.close(callback: AsyncCallback<void>)} method to close the socket
+     * > [close]{@link socket.TLSSocketConnection.close(callback: AsyncCallback<void>)} method to close the socket
      * > connection, instead of directly operating the file descriptor.
      *
      * @permission ohos.permission.INTERNET
@@ -4966,9 +5064,9 @@ declare namespace socket {
    */
   export interface TLSSocketServer {
     /**
-     * Listens for client connections after **bind** is successfully called to bind the IP address and port of
-     * **TLSSocketServer**. This API uses an asynchronous callback to return the result. After a connection is
-     * established, a TLS session will be created and initialized and a certificate key will be loaded and verified.
+     * Binds the IP address and port. After the bind operation succeeds on the **TLSSocketServer**, listens for client
+     * connections, creates and initializes a TLS session, implements the connection establishment process, and loads
+     * and verifies the certificate and key. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -4998,14 +5096,13 @@ declare namespace socket {
     listen(options: TLSConnectOptions, callback: AsyncCallback<void>): void;
 
     /**
-     * Listens for client connections after **bind** is successfully called to bind the IP address and port of
-     * **TLSSocketServer**. This API uses an asynchronous callback to return the result. After a connection is
-     * established, a TLS session will be created and initialized and a certificate key will be loaded and verified.
+     * Binds the IP address and port. After the bind operation succeeds on the **TLSSocketServer**, listens for client
+     * connections, creates and initializes a TLS session, implements the connection establishment process, and loads
+     * and verifies the certificate and key. This API uses a promise to return the result.
      *
      * @permission ohos.permission.INTERNET
      * @param { TLSConnectOptions } options - Parameters required for the connection.
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -5027,12 +5124,12 @@ declare namespace socket {
 
     /**
      * Stops listening for events of the **TLSSocketServer** object and releases the port bound by
-     * [listen]{@link socket.TCPSocketServer.listen}. This API uses a promise to return the result.
+     * [listen]{@link socket.TLSSocketServer.listen(options: TLSConnectOptions)}. This API uses a promise to return the result.
      *
      * > **NOTE**
      * >
      * > This API does not close existing connections. To close the connection, call the
-     * > [close]{@link socket.TCPSocketConnection.close(callback: AsyncCallback<void>)} API of
+     * > [close]{@link socket.TLSSocketConnection.close(callback: AsyncCallback<void>)} API of
      * > [TLSSocketConnection]{@link socket.TLSSocketConnection}.
      *
      * @permission ohos.permission.INTERNET
@@ -5075,8 +5172,8 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @returns { Promise<SocketStateBase> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<SocketStateBase> } Promise used to return the result of obtaining the TLSSocketServer state.
+     *     On failure, returns the error code and error message.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
      * @throws { BusinessError } 2300002 - System internal error.
      * @syscap SystemCapability.Communication.NetStack
@@ -5116,8 +5213,7 @@ declare namespace socket {
      * > This API can be called only after **listen** is successfully called.
      *
      * @param { TCPExtraOptions } options - Other properties of the **TLSSocketServer** object.
-     * @returns { Promise<void> } Promise used to return the result. If the operation is successful, no value is
-     *     returned. If the operation fails, an error message is returned.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2303188 - Socket operation on non-socket.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -5157,8 +5253,8 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @returns { Promise<X509CertRawData> } Promise used to return the result. If the operation fails, an error message
-     *     is returned.
+     * @returns { Promise<X509CertRawData> } Promise used to return the result of the local digital certificate. On
+     *     failure, returns the Error Code and Error Message.
      * @throws { BusinessError } 2303501 - SSL is null.
      * @throws { BusinessError } 2303504 - An error occurred when verifying the X.509 certificate.
      * @throws { BusinessError } 2300002 - System internal error.
@@ -5236,7 +5332,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'connect' } type - Event type.<br/> **connect**: connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     **connect**: connection event.
      * @param { Callback<TLSSocketConnection> } callback - Callback used to return the result. If the operation fails,
      *     an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -5267,7 +5365,9 @@ declare namespace socket {
      * > You can pass the callback of the **on** function if you want to cancel listening for a certain type of events.
      * > If you do not pass the callback, you will cancel listening for all events.
      *
-     * @param { 'connect' } type - Event type.<br/> **connect**: connection event.
+     * @param { 'connect' } type - Event type.
+     *     <br/>
+     *     **connect**: connection event.
      * @param { Callback<TLSSocketConnection> } callback - Callback used to return the result. If the operation fails,
      *     an error message is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -5295,7 +5395,9 @@ declare namespace socket {
      * >
      * > This API can be called only after **listen** is successfully called.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation fails, an error message
      *     is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -5326,7 +5428,9 @@ declare namespace socket {
      * > You can pass the callback of the **on** function if you want to cancel listening for a certain type of events.
      * > If you do not pass the callback, you will cancel listening for all events.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: error event.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: error event.
      * @param { ErrorCallback } callback - Callback used to return the result. If the operation fails, an error message
      *     is returned.
      * @throws { BusinessError } 401 - Parameter error.
@@ -5352,7 +5456,7 @@ declare namespace socket {
      *
      * > **NOTE**
      * >
-     * > - This method can be called only after the [listen]{@link socket.TCPSocketServer.listen} method is successfully
+     * > - This method can be called only after the [listen]{@link socket.TLSSocketServer.listen(options: TLSConnectOptions, callback: AsyncCallback<void>)} method is successfully
      * > called. When listen is called for multiple times, the file descriptor bound to the latest listening port is
      * > obtained.
      * >
@@ -5360,7 +5464,7 @@ declare namespace socket {
      * > close is called).
      * >
      * > - The lifecycle of the file descriptor is managed by the system. The application can use the
-     * > [close]{@link socket.TCPSocketServer.close} method to close the socket connection, instead of directly
+     * > [close]{@link socket.TLSSocketServer.close()} method to close the socket connection, instead of directly
      * > operating the file descriptor.
      *
      * @permission ohos.permission.INTERNET

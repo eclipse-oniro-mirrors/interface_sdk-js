@@ -13691,6 +13691,26 @@ declare namespace window {
     isReceiveDragEventEnabled(): boolean;
 
     /**
+     * Sets whether to enable pointer event interception for the window.
+     *
+     * @param { boolean } isInterceptable - Whether to intercept the pointer event of this window.
+     *     The value **true** indicates to intercept, and **false** indicates the opposite.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability.
+     *     <br>2. The chip does not support the capability.
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     *     Possible cause: Internal IPC error.
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPointerInterceptable(isInterceptable: boolean): Promise<void>;
+
+    /**
      * Enables conversion between window orientation, screen orientation, and screen angle.
      *
      * Window orientation refers to the direction of the screen where the window resides, using the Window module's

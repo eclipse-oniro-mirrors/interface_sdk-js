@@ -34,7 +34,7 @@ import { InteropAbilityMonitor as _InteropAbilityMonitor } from './application/I
  *
  * > **NOTE**
  * >
- * > The APIs of this module can be used only in [JsUnit](docroot://application-test/unittest-guidelines.md).
+ * > The APIs of this module can be used only in [JsUnit](https://developer.huawei.com/consumer/cn/doc/doccenter-testing/unittest-guidelines).
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @crossplatform [since 10]

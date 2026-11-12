@@ -19,7 +19,7 @@
  */
 
 /**
- * 本模块为应用程序提供网络防火墙能力。应用程序可以对机器进行防火墙拦截记录的查询。
+ * 网络防火墙模块为应用程序提供查询防火墙能力。 通过配置防火墙策略，应用程序可以对机器进行防火墙策略管控，并提供防火墙拦截记录的查询。
  *
  * @syscap SystemCapability.Communication.NetManager.NetFirewall
  * @since 14 dynamic
@@ -28,7 +28,7 @@
 declare namespace netFirewall {
   /**
    * 设置系统用户ID的防火墙策略，包含防火墙开关状态，默认的出站/入站行为（允许/阻止）。支持不同的系统用户ID配置不同的防火墙策略。使用Promise异步回调。
-   * 
+   *
    * > **说明：**
    * >
    * > 同一系统用户下，多应用调用该接口下发策略，会以最新下发的策略为准。
@@ -36,7 +36,7 @@ declare namespace netFirewall {
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { int } userId - 系统用户ID，只能是存在的用户ID。
    * @param { NetFirewallPolicy } policy - 设置的防火墙策略。
-   * @returns { Promise<void> } 无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -54,7 +54,7 @@ declare namespace netFirewall {
    *
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - 系统用户ID，只能是存在的用户ID。
-   * @returns { Promise<NetFirewallPolicy> } 以Promise形式返回当前用户防火墙策略。
+   * @returns { Promise<NetFirewallPolicy> } Promise对象，返回当前用户防火墙策略。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -69,13 +69,13 @@ declare namespace netFirewall {
 
   /**
    * 添加系统用户ID的防火墙规则，目前支持的规则类型有：IP、Domain、DNS。使用Promise异步回调。
-   * 
-   * > **说明**
+   *
+   * > **说明：**
    * >
-   * > 1. 防火墙规则优先级说明（[setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy}和
+   * > 1. 防火墙规则优先级说明（[setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy}和
    * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule}无调用顺序要求）：
    * >
-   * > - 调用[setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy}设置默认策略为阻止，调用
+   * > - 调用[setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy}设置默认策略为阻止，调用
    * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule}新增显式规则，规则优先级由高到低为：
    * >
    * > - 显式阻止规则
@@ -84,7 +84,7 @@ declare namespace netFirewall {
    * >
    * > - 默认阻止策略
    * >
-   * > - 调用[setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy}设置默认策略为允许，调用
+   * > - 调用[setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy}设置默认策略为允许，调用
    * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule}新增显式规则，规则优先级由高到低为：
    * >
    * > - 显式允许规则
@@ -99,11 +99,17 @@ declare namespace netFirewall {
    * >
    * > - 若以IP方式访问，遵循以下原则：
    * >
-   * > - 域名规则放行，若以IP方式访问之前经历过域名解析过程，则IP规则拦截或者默认策略拦截是不生效的，最终以IP方式访问是放行的。
+   * > - 域名规则放行时，IP规则或默认策略的拦截均不生效，最终以IP方式访问放行。
    * >
-   * > - 域名规则放行，若以IP方式访问之前未经历过域名解析过程，则IP规则拦截或者默认策略拦截是生效的，最终以IP方式访问是拦截的。
+   * > - 域名规则拦截时，IP规则或默认策略的放行仍生效，最终以IP方式访问放行。
    * >
-   * > - 域名规则拦截，则IP规则放行或者默认策略放行是生效的，最终以IP方式访问是放行的。
+   * > - 系统侧识别域名访问与IP访问的方式：
+   * >
+   * > - 若目标IP与系统网络层域名缓存表中的IP地址匹配，则认为应用侧以域名形式访问；
+   * >
+   * > - 若目标IP未匹配上系统网络层域名缓存表中的任意IP地址，则认为应用侧以IP形式访问；
+   * >
+   * > - 其中，系统网络层会主动查询防火墙配置的DNS信息，并缓存对应的IP地址，使域名放行规则生效。
    * >
    * > 2. 规则类型补充说明：
    * >
@@ -125,7 +131,7 @@ declare namespace netFirewall {
    *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { NetFirewallRule } rule - 防火墙规则。
-   * @returns { Promise<int> } 以Promise形式返回防火墙规则ID，防火墙规则ID由系统自动生成。
+   * @returns { Promise<int> } Promise对象，返回防火墙规则ID，防火墙规则ID由系统自动生成。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -149,7 +155,7 @@ declare namespace netFirewall {
    *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { NetFirewallRule } rule - 防火墙规则。
-   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -174,7 +180,7 @@ declare namespace netFirewall {
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { int } userId - 系统用户ID，只能是存在的用户ID。
    * @param { int } ruleId - 防火墙规则ID。
-   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -194,7 +200,7 @@ declare namespace netFirewall {
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - 系统用户ID，只能是存在的用户ID。
    * @param { RequestParam } requestParam - 分页查询参数，其中orderField字段仅支持根据防火墙规则名排序。
-   * @returns { Promise<FirewallRulePage> } 以Promise形式返回防火墙分页规则列表。
+   * @returns { Promise<FirewallRulePage> } Promise对象，返回防火墙分页规则列表。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -213,7 +219,7 @@ declare namespace netFirewall {
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - 系统用户ID，只能是存在的用户ID。
    * @param { int } ruleId - 防火墙规则ID。
-   * @returns { Promise<NetFirewallRule> } 以Promise形式返回防火墙规则。
+   * @returns { Promise<NetFirewallRule> } Promise对象，返回防火墙规则。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -228,12 +234,12 @@ declare namespace netFirewall {
   function getNetFirewallRule(userId: int, ruleId: int): Promise<NetFirewallRule>;
 
   /**
-   * 按userId获取截获的记录，需要指定分页查询参数。
+   * 按userId获取拦截记录，需要指定分页查询参数。使用Promise异步回调。
    *
    * @permission ohos.permission.GET_NET_FIREWALL
-   * @param { int } userId - Indicates the user ID. It cannot be the ID of a user that does not exist.
-   * @param { RequestParam } requestParam - Paging query input parameters.
-   * @returns { Promise<InterceptedRecordPage> } Block Record List.
+   * @param { int } userId - 用户ID，取值范围只能为系统中存在的用户ID。
+   * @param { RequestParam } requestParam - 查询参数。
+   * @returns { Promise<InterceptedRecordPage> } Promise对象，返回拦截记录列表。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -331,13 +337,13 @@ declare namespace netFirewall {
      * @since 15 dynamic
      * @since 26.0.1 static
      */
-    RULE_DNS = 3,
+    RULE_DNS = 3
   }
 
   /**
    * 枚举类型，防火墙规则排序方法。
-   * 
-   * > **说明**
+   *
+   * > **说明：**
    * >
    * > [getNetFirewallRules]{@link netFirewall.getNetFirewallRules}接口，仅支持ORDER_BY_RULE_NAME字段。
    *
@@ -537,7 +543,12 @@ declare namespace netFirewall {
      */
     isWildcard: boolean;
     /**
-     * 当isWildcard为false时，需要确定的完整域， 例如"www.example.cn"。
+     * 当isWildcard为false时，需要确定的完整域名，例如"www.example.com"；当isWildcard为true时，支持通配符规则，具体格式见下文说明。
+     * 当isWildcard为true时，domain支持使用通配符"*"，"*"可出现在域名的首部、尾部或首尾同时出现，表示匹配任意长度（包括零）的任意字符。支持以下通配符格式：
+     * - `"*.xxx.xxx"`：前缀通配，匹配xxx.xxx及其所有子域名。例如"*.example.com"可匹配"example.com"、"www.example.com"、"a.b.example.com"。（从API版本21开始支持）
+     * - `"*xx.xxx.xxx"`：前缀通配，匹配以"xx.xxx.xxx"结尾的域名。例如"*a.example.com"可匹配"a.example.com"、"www.a.example.com"。（从API版本26.0.1开始支持）
+     * - `"xxx.xxx.xxx.*"`：后缀通配，匹配以"xxx.xxx.xxx."开头的域名。例如"www.example.*"可匹配"www.example.com"、"www.example.cn"。（从API版本26.0.1开始支持）
+     * - `"xxx.xxx.xxx.xx*"`：后缀通配，匹配以"xxx.xxx.xxx.xx"开头的域名。例如"www.example.co*"可匹配"www.example.com"、"www.example.com.cn"。（从API版本26.0.1开始支持）。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -548,8 +559,8 @@ declare namespace netFirewall {
 
   /**
    * 防火墙规则DNS信息。
-   * 
-   * > **说明**
+   *
+   * > **说明：**
    * >
    * > 当[addNetFirewallRule]{@link netFirewall.addNetFirewallRule}的入参rule.type配置为RULE_DNS时，该字段不能为空。
    *
@@ -713,7 +724,7 @@ declare namespace netFirewall {
      */
     dns?: NetFirewallDnsParams;
     /**
-     * 接口名：当type=RULE_IP时有效，否则忽略。
+     * 物理网卡名称，例如wlan0。当type=RULE_IP时有效，否则将被忽略。可选，最多16个字符。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @stagemodelonly
@@ -721,7 +732,7 @@ declare namespace netFirewall {
      */
     interface?: string;
     /**
-     * 接口名称：仅当type取值为RULE_IP时有效，否则忽略该参数。
+     * 接口名称：当type=RULE_IP时有效，否则忽略。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @stagemodelonly
@@ -731,7 +742,7 @@ declare namespace netFirewall {
   }
 
   /**
-   * 拦截记录。
+   * 拦截记录信息结构。
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
    * @systemapi Hide this for inner system use.
@@ -740,7 +751,7 @@ declare namespace netFirewall {
    */
   interface InterceptedRecord {
     /**
-     * Time stamp.
+     * 时间戳。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -749,6 +760,7 @@ declare namespace netFirewall {
      */
     time: int;
     /**
+     * 本地IP。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -757,6 +769,7 @@ declare namespace netFirewall {
      */
     localIp?: string;
     /**
+     * 远端IP。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -765,7 +778,7 @@ declare namespace netFirewall {
      */
     remoteIp?: string;
     /**
-     * Local port.
+     * 本地端口，默认值为0。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -774,7 +787,7 @@ declare namespace netFirewall {
      */
     localPort?: int;
     /**
-     * Remote port.
+     * 远端端口，默认值为0。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -783,7 +796,7 @@ declare namespace netFirewall {
      */
     remotePort?: int;
     /**
-     * Transport layer protocol.
+     * 传输层协议，默认值为0。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -792,7 +805,7 @@ declare namespace netFirewall {
      */
     protocol?: int;
     /**
-     * Application or service ID.
+     * 应用程序或服务UID，默认值为0。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -801,6 +814,7 @@ declare namespace netFirewall {
      */
     appUid?: int;
     /**
+     * 域名。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -895,7 +909,7 @@ declare namespace netFirewall {
   }
 
   /**
-   * 拦截记录分页信息。
+   * 拦截记录分页信息结构。
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
    * @systemapi Hide this for inner system use.
@@ -904,7 +918,7 @@ declare namespace netFirewall {
    */
   interface InterceptedRecordPage {
     /**
-     * Current page number: indicates the page number of this query.
+     * 当前页码。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -913,7 +927,7 @@ declare namespace netFirewall {
      */
     page: int;
     /**
-     * Page size: maximum number of records on a page for this query.
+     * 页面大小。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -922,7 +936,7 @@ declare namespace netFirewall {
      */
     pageSize: int;
     /**
-     * Total pages: total number of pages.
+     * 总页数。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -931,6 +945,7 @@ declare namespace netFirewall {
      */
     totalPage: int;
     /**
+     * 页面数据。
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.

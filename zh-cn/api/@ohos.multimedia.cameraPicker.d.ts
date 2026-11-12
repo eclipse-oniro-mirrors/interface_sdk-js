@@ -70,6 +70,26 @@ declare namespace cameraPicker {
      * @since 23 static
      */
     videoDuration?: int;
+
+    /**
+     * 启用或禁用拍照输出的C2PA签名功能。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    enableC2PA?: boolean;
+
+    /**
+     * C2PA签名配置。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    c2PASignatureConfig?: C2PASignatureConfig;
   }
 
   /**
@@ -159,6 +179,47 @@ declare namespace cameraPicker {
    * @since 23 static
    */
   function pick(context: Context, mediaTypes: Array<PickerMediaType>, pickerProfile: PickerProfile): Promise<PickerResult>;
+
+  /**
+   * 描述C2PA签名配置，包含用于生成C2PA签名的作者名称和作者ID。
+   *
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  interface C2PASignatureConfig {
+    /**
+     * C2PA签名的作者ID。该字段可选。如果不设置，C2PA签名中将不包含作者ID。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorID?: string;
+
+    /**
+     * C2PA签名的作者名称。该字段可选。如果不设置，C2PA签名中将不包含作者名称。
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.0.1 dynamic&static
+     */
+    authorName?: string;
+  }
+
+  /**
+   * 检查是否支持C2PA签名。
+   *
+   * @returns { boolean } C2PA签名是否支持的检查结果。**true**表示支持，**false**表示不支持。如果接口调用失败，返回undefined。
+   * @syscap SystemCapability.Multimedia.Camera.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.0.1 dynamic&static
+   */
+  function isC2PASignatureSupported(): boolean;
 }
 
 export default cameraPicker;

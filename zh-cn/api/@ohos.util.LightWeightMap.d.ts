@@ -32,6 +32,9 @@
  * 针对LightWeightMap的操作，其结果可能与预期不一致。这是因为，当key为number类型且值超出INT32范围时，存储结构会发生改变，
  * 进而导致hash值和映射结果发生变化。
  *
+ * 例如，计算1758783600000 / 1000时，超出INT32范围的1758783600000通过TaggedDouble存储；
+ * 范围内的1758783600通过TaggedInt存储。即使数值相等，存储方式不同也可能产生不同的hash值和映射结果。
+ *
  * @file 非线性容器LightWeightMap
  * @kit ArkTS
  */
@@ -333,7 +336,7 @@ declare class LightWeightMap<K, V> {
   /**
    * 通过回调函数来遍历实例对象上的元素及其键值对信息。
    *
-   * @param { function } callbackFn - 回调函数，用于遍历LightWeightMap实例中的元素及下标。
+   * @param { function } callbackFn - 回调函数，用于遍历LightWeightMap实例中的元素及下标。 value是当前键值对的值；key是当前键值对的键；map是当前调用的LightWeightMap实例，默认值为当前实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值。当需要回调函数中的this指向非当前实例对象时传入此参数，当不需要改变this指向时可不传入。不传入时，默认值为当前实例对象。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang

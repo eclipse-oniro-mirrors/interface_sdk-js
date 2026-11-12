@@ -1709,3 +1709,228 @@ export declare interface IReusableInfo {
  * @since 26.0.0 dynamic
  */
 declare type ReusableComponentConstructor = Function;
+/**
+ * Defines the error information reported through the callback of
+ * [RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md).
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface RecoverableStorageError {
+  /**
+   * Reason of the error. The value can be **'serialization'** (serialization failed,
+   * for example, the serialization budget is exceeded or a field cannot be serialized) or
+   * **'deserialization'** (deserialization failed, for example, the data is corrupted or the type does
+   * not match). Connect entry errors (unsupported type, invalid parameters) are **thrown** as
+   * BusinessError **140124** and are not reported through this callback.
+   * Recommended total user data: ≤100KB per instance (150KB serialization
+   * budget shared with system data).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  reason: 'serialization' | 'deserialization';
+  /**
+   * Keys affected by the error.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keys: Array<string>;
+  /**
+   * Extra information about the error.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  message: string;
+}
+
+/**
+ * Defines a callback used to report errors of
+ * [RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md). The callback is invoked
+ * on the UI thread and must not throw exceptions.
+ *
+ * @param { RecoverableStorageError } error - Error information.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export type NotifyOnErrorCallback = (error: RecoverableStorageError) => void;
+
+/**
+ * Defines the options of
+ * [RecoverableStorage.connect]{@link RecoverableStorage.connect}.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class RecoverableConnectOptions<T extends object, S extends object> {
+  /**
+   * Custom component instance, for which **this** is passed to obtain the window-level instance ID used for
+   * per-instance isolation.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  component: BaseCustomComponent;
+  /**
+   * Type of the recoverable state variable. Only object types are supported; simple types such as **number**,
+   * **string**, and **boolean** are rejected.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: TypeConstructorWithArgs<T>;
+  /**
+   * Key of the recoverable state variable. If this parameter is not specified, the name of the type is used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  key?: string;
+  /**
+   * Constructor for obtaining the default value. It is used when the variable is connected for the first time (neither memory nor a snapshot holds the key) and as the fallback when restoration
+   * fails.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  defaultCreator: StorageDefaultCreator<T>;
+  /**
+   * Constructor for the nested **\@Type** members of a collection. It is used to rebuild nested objects during
+   * restoration.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  defaultSubCreator?: StorageDefaultCreator<S>;
+  /**
+   * Callback for reporting serialization or deserialization errors. If this parameter is not specified, errors
+   * are handled internally without crashing the application.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  notifyOnError?: NotifyOnErrorCallback;
+}
+
+/**
+ * Provides the capability of automatically saving and restoring declared state variables when the application
+ * is terminated due to resource control or exits abnormally. After a variable is declared through
+ * [connect]{@link RecoverableStorage.connect}, its value is saved automatically on the save occasions of the
+ * system recovery pipeline and restored automatically on the next recovery restart.
+ *
+ * > **NOTE**
+ * >
+ * > 1. For an application terminated due to resource control (for example, low memory), the value saved when the
+ * > application switches to the background is restored after the restart.
+ * >
+ * > 2. For **JS_ERROR** and **APP_FREEZE** exits, the value at the moment the error occurs is saved and then
+ * > restored after the system automatically restarts the application. This requires the application to have
+ * > called **enableAppRecovery** (default parameters meet the requirement) and not registered an error observer.
+ * >
+ * > 3. Restoration is performed only when the application is restarted by the system with the recovery restart
+ * > parameter. Starting the application manually always performs a cold start, where **connect** returns the
+ * > default value.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class RecoverableStorage {
+  /**
+   * Declares a recoverable state variable. If the variable has been stored (in memory or in a snapshot), the
+   * stored value is returned; otherwise, a default value is constructed through **defaultCreator** and returned.
+   *
+   * > **NOTE**
+   * >
+   * > 1. Only object types are supported. Connecting simple types such as **number**, **string**, and **boolean**
+   * > throws **BusinessError(140124)** (same as PersistenceV2).
+   * >
+   * > 2. If the same key of the same instance is connected again with the same type, the existing reference is
+   * > returned; connecting with a mismatched type throws **BusinessError(140124)**.
+   * >
+   * > 3. On a recovery restart, the restored value takes precedence over the default value. If restoration fails,
+   * > the default value constructed through **defaultCreator** is returned and the error is reported through
+   * **notifyOnError**.
+   * >
+   * > 4. The typical usage is mutating properties of the connected object. Reassigning the whole value of a V1
+   * **\@State** variable causes the stored reference to be stale and is not tracked.
+   * >
+   * > 5. Variables are isolated by the window-level instance ID obtained from **component**. Variables of
+   > > different instances do not affect each other.
+
+   * @param { RecoverableConnectOptions<T, S> } params - Connection options.
+   * @returns { T } Returns the restored value or the default value if the connection is successful.
+   * @throws { BusinessError } 140124 - Unsupported type or parameters.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static connect<T extends object, S extends object>(
+    params: RecoverableConnectOptions<T, S>
+  ): T;
+
+  /**
+   * Obtains all keys of the recoverable state variables registered by the current instance (identified by the
+   * window-level instance ID of **component**).
+   *
+   * > **NOTE**
+   * >
+   > > The order of keys in the array is not sequential and unrelated to the order in which keys are registered.
+   *
+   * @param { BaseCustomComponent } component - Custom component instance, for which **this** is passed.
+   * @returns { Array<string> } All keys registered by the current instance. If no variable is registered, an
+   *     empty array is returned.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static keys(component: BaseCustomComponent): Array<string>;
+
+  /**
+   * Unregisters the recoverable state variable of the specified key from the current instance (identified by the
+   * window-level instance ID of **component**). After the unregistration, the variable is no longer saved or
+   * restored, and connecting the key again returns the default value.
+   *
+   * > **NOTE**
+   * >
+   * > If a key that does not exist is unregistered, a warning is reported.
+   *
+   * @param { BaseCustomComponent } component - Custom component instance, for which **this** is passed.
+   * @param { string | TypeConstructorWithArgs<T> } keyOrType - Key to be unregistered. If a type is specified,
+   *     the key to be unregistered is the name of that type.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static remove<T>(component: BaseCustomComponent, keyOrType: string | TypeConstructorWithArgs<T>): void;
+}

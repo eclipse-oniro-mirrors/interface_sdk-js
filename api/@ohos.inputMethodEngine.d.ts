@@ -522,6 +522,7 @@ declare namespace inputMethodEngine {
    * @returns { boolean } whether to consume this key event.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type InputKeyEventCallback = (event: InputKeyEvent) => boolean;
 
@@ -533,6 +534,7 @@ declare namespace inputMethodEngine {
    * @param { double } height - the height of the cursor, unit is px.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type CursorContextChangeCallback = (x: double, y: double, height: double) => void;
 
@@ -545,6 +547,7 @@ declare namespace inputMethodEngine {
    * @param { int } newEnd - the new end of the selected text.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type SelectionChangeCallback = (oldBegin: int, oldEnd: int, newBegin: int, newEnd: int) => void;
 
@@ -4936,6 +4939,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4951,6 +4955,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4966,6 +4971,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4980,6 +4986,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4995,6 +5002,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text before the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5010,6 +5018,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text after the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5023,6 +5032,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<EditorAttribute> } Promise used to return the attribute of the edit box.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5035,6 +5045,7 @@ declare namespace inputMethodEngine {
      * @param { int } direction - Direction in which the cursor moves.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5049,6 +5060,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5062,6 +5074,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5074,6 +5087,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<int> } Promise used to return the result.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5088,6 +5102,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5113,6 +5128,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static

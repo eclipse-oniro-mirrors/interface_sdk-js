@@ -157,7 +157,7 @@ export default class Want {
    * verification: **ohos.aafwk.param.callerPid**, **ohos.aafwk.param.callerToken**, and **ohos.aafwk.param.callerUid**.
    * 
    * 2. Certain keys are defined by the system, and their values need to be manually assigned. For details about the 
-   * keys and their values, see [wantConstant.Params]{@link ./@ohos.app.ability.wantConstant:wantConstant.params}.
+   * keys and their values, see [wantConstant.Params]{@link ./@ohos.app.ability.wantConstant:wantConstant.Params}<!--Del--> and [wantConstant.Params (system applications only)]{@link ./@ohos.app.ability.wantConstant:wantConstant.Params}<!--DelEnd-->.
    * 3. In addition to the foregoing cases, applications may further agree on the key-value pairs to transfer.
    * 
    * **NOTE**
@@ -212,7 +212,7 @@ export default class Want {
    * verification: **ohos.aafwk.param.callerPid**, **ohos.aafwk.param.callerToken**, and **ohos.aafwk.param.callerUid**.
    * 
    * 2. Certain keys are defined by the system, and their values need to be manually assigned. For details about the 
-   * keys and their values, see [wantConstant.Params]{@link ./@ohos.app.ability.wantConstant:wantConstant.params}.
+   * keys and their values, see [wantConstant.Params]{@link ./@ohos.app.ability.wantConstant:wantConstant.Params}<!--Del--> and [wantConstant.Params (system applications only)]{@link ./@ohos.app.ability.wantConstant:wantConstant.Params}<!--DelEnd-->.
    * 3. In addition to the foregoing cases, applications may further agree on the key-value pairs to transfer.
    * 
    * **NOTE**

@@ -2747,6 +2747,7 @@ export declare interface RotateAngleOptions {
 /**
  * 转场边缘类型。
  *
+ * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -2783,7 +2784,7 @@ export declare enum TransitionEdge {
      * @stagemodelonly
      * @since 23 static
      */
-    END
+    END = 3
 }
 /**
  * Defines the option of asymmetric transition.
@@ -11582,7 +11583,7 @@ export declare interface CommonMethod {
     /**
      * 设置组件对Agent生成事件的输入管控级别。
      *
-     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_COMPONENT权限的应用
      * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
      * 输入事件或其他注入事件。
      *

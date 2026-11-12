@@ -15200,6 +15200,7 @@ declare interface PopupCommonOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -16104,6 +16105,7 @@ declare interface PopupOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -20033,9 +20035,9 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[TextInput](./ts-basic-components-textinput.md)组件中，width设置auto表示自适应文本宽度。
+   * > - 在[TextInput]{@link @global:TextInput}组件中，width设置auto表示自适应文本宽度。
    * >
-   * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
+   * > - 在[AlphabetIndexer]{@link @global:AlphabetIndexer}组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
    * > - 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，width设置auto表示自适应子组件。
    * >
@@ -20345,7 +20347,7 @@ declare class CommonMethod<T> {
   /**
    * 设置组件对Agent生成事件的输入管控级别。
    *
-   * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_DEVICE权限的应用
+   * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_COMPONENT权限的应用
    * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
    * 输入事件或其他注入事件。
    *
@@ -25551,6 +25553,7 @@ declare class CommonMethod<T> {
    *    2、如果开发者通过[parallelGesture]{@link parallelGesture(gesture: GestureType, mask?: GestureMask)}绑定了与子组件同时触发的手势，如PanGesture，子组件设置了独占控制且首个响应事件，则父组件的手势不会响应。
    * @returns { T }
    返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice [since 12]
@@ -28319,10 +28322,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * 设置是否支持左键拖动滚动。
    * 
    * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-   *    <br>true：支持鼠标左键按下拖动滚动。
-   *    <br>false：不支持鼠标左键按下拖动滚动。
-   *    <br>undefined：首次设置为undefined时，使用默认值。非首次设置为undefined时，保持上一次设置的效果不变。
-   *    <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
+   *     <br>true：支持鼠标左键按下拖动滚动。
+   *     <br>false：不支持鼠标左键按下拖动滚动。
+   *     <br>undefined：首次设置为undefined时，使用默认值。非首次设置为undefined时，保持上一次设置的效果不变。
+   *     <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
    * @returns { T } 当前滚动组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

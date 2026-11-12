@@ -3560,8 +3560,7 @@ declare namespace text {
    * >
    * > 示意图展示了字符串为"j"或"E"的排版边界。
    * >
-   * > !
-   * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+   * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
    *
    * @syscap SystemCapability.Graphics.Drawing
    * @crossplatform [since 24]
@@ -3732,8 +3731,7 @@ declare namespace text {
      * >
      * > 示意图展示了字符串为"j"或"E"的排版边界。
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } 文本行的排版边界。
      * @syscap SystemCapability.Graphics.Drawing
@@ -4016,8 +4014,7 @@ declare namespace text {
      * >
      * > 示意图展示了字符串为"j"或"E"的排版边界。
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } 该排版单元的排版边界。
      * @syscap SystemCapability.Graphics.Drawing

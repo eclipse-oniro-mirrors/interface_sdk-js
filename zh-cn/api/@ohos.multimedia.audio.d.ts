@@ -25,8 +25,8 @@ import { ErrorCallback, AsyncCallback, Callback, BusinessError } from './@ohos.b
  *
  * - [AudioManager]{@link audio.AudioManager}：音频管理器。
  * - [AudioDeviceEnhanceManager]{@link audio.AudioDeviceEnhanceManager}：音频设备增强管理器。
- * - [AudioRenderer]{@link audio.AudioRenderer}：音频渲染，用于播放PCM（Pulse Code Modulation）音频数据。
- * - [AudioCapturer]{@link audio.AudioCapturer}：音频采集，用于录制PCM音频数据。
+ * - [AudioRenderer]{@link audio.AudioRenderer}：音频渲染器，用于播放PCM（Pulse Code Modulation）音频数据。
+ * - [AudioCapturer]{@link audio.AudioCapturer}：音频采集器，用于录制PCM音频数据。
  *
  * @syscap SystemCapability.Multimedia.Audio.Core [since 12]
  * @crossplatform [since 12]
@@ -10433,7 +10433,7 @@ declare namespace audio {
     hint?: InterruptHint;
 
     /**
-     * 焦点获取/释放是否成功。true表示焦点获取/释放成功，false表示焦点获得/释放失败。
+     * 焦点获取/释放是否成功。true表示焦点获取/释放成功，false表示焦点获取/释放失败。
      *
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @since 7 dynamiconly
@@ -10448,8 +10448,11 @@ declare namespace audio {
    *
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，无替代接口。
-   *
+   * > 从API version 7开始支持，从API version 9开始废弃。
+   * > 申请音频焦点时，建议使用[AudioRendererOptions]{@link @ohos.multimedia.audio:audio.AudioRendererOptions}.rendererInfo替代，[StreamUsage]{@link @ohos.multimedia.audio:audio.StreamUsage}决定音频流的焦点策略。
+   * > 建议使用[on('audioInterrupt')]{@link @ohos.multimedia.audio:audio.AudioRenderer.on_audioInterrupt}接口监听音频焦点事件[InterruptEvent]{@link @ohos.multimedia.audio:audio.InterruptEvent}，替代音频中断事件。
+   * > 使用已废弃的接口[on('interrupt')]{@link @ohos.multimedia.audio:audio.AudioManager.on_interrupt}不会打断新机制的音频流，也不会收到焦点中断事件。
+   * 
    * @syscap SystemCapability.Multimedia.Audio.Renderer
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -11916,7 +11919,7 @@ declare namespace audio {
      * 取消监听标记到达事件。使用callback异步回调。
      *
      * @param { 'markReach' } type - 事件回调类型，支持的事件为'markReach'，当取消监听标记到达事件时，触发该事件。
-     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。
+     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。 [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
      * @since 8 dynamic
@@ -11960,7 +11963,7 @@ declare namespace audio {
      * 取消监听标记到达事件。使用callback异步回调。
      *
      * @param { 'periodReach' } type - 事件回调类型，支持的事件为'periodReach'，当取消监听标记到达事件时，触发该事件。
-     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。
+     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。 [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @crossplatform [since 12]
      * @since 8 dynamic
@@ -12241,7 +12244,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音源类型。
+   * 表示录制音频源类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
@@ -12585,7 +12588,7 @@ declare namespace audio {
 
     /**
      * 内录模式。可设置为AudioPlaybackCaptureMode中的枚举值或其按位或组合，当前仅支持MODE_DEFAULT（0x0）、MODE_MEDIA（0x1）、MODE_EXCLUDING_SELF（0x8000），
-     * 以及MODE_MEDIA和MODE_EXCLUDING_SELF的按位或组合（0x8001）。。
+     * 以及MODE_MEDIA和MODE_EXCLUDING_SELF的按位或组合（0x8001）。
      *
      * SystemCapability.Multimedia.Audio.PlaybackCapture
      *
@@ -13262,7 +13265,7 @@ declare namespace audio {
      * 取消监听标记到达事件。使用callback异步回调。
      *
      * @param { 'periodReach' } type - 事件回调类型，支持的事件为'periodReach'，当取消监听标记到达事件时，触发该事件。
-     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。
+     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。 [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
      * @since 8 dynamic

@@ -237,6 +237,24 @@ export default class EnterpriseAdminExtensionAbility {
   onAccountSwitched(accountId: number): void;
 
   /**
+   * Callback for account switched events.
+   * Called when the current user account is switched from one account to another.
+   * This callback differs from the existing onAccountSwitched(accountId: number) by providing both source and
+   * target account IDs for more detailed account transition tracking.
+   *
+   * You should register the **MANAGED_EVENT_ACCOUNT_SWITCHED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { number } fromAccountId - ID of the account that was switched from.
+   * @param { number } toAccountId - ID of the account that was switched to.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onAccountSwitched(fromAccountId: number, toAccountId: number): void;
+
+  /**
    * Called when the system account is removed. You should register the **MANAGED_EVENT_ACCOUNT_REMOVED** event through
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}.
    * The enterprise administrator application can subscribe to system account removal events. When a system account is
@@ -464,16 +482,30 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
+   * Callback for SMS received event. This callback is triggered when an SMS is received.
+   * You should register the **MANAGED_EVENT_SMS_RECEIVED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { common.SmsReceiveInfo } smsInfo - SMS received information, including slot ID, phone number,
+   *     SMS count, and content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onSmsReceived(smsInfo: common.SmsReceiveInfo): void;
+
+  /**
    * Callback for the password authentication failure event. This callback is triggered when password authentication fails.
    * You should register the **MANAGED_EVENT_PASSWORD_FAILED** event through the
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * API.
    *
    * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
-   * @param { number } userId - ID of the user whose password authentication failed.
+   * @param { number } accountId - ID of the user whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
-  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
+  onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
 }

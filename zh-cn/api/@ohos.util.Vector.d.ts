@@ -97,7 +97,7 @@ declare class Vector<T> {
    */
   get(index: number): T;
   /**
-   * 获取指定元素第一次出现的下标值，如果未找到则返回-1。
+   * 返回指定元素第一次出现时的下标值，查找失败返回-1。与getLastIndexOf的区别：getIndexOf返回元素首次出现的位置，getLastIndexOf返回元素末次出现的位置。
    *
    * @param { T } element - 指定元素。
    * @returns { number } 返回指定元素第一次出现时的下标值，查找失败返回-1。
@@ -107,7 +107,7 @@ declare class Vector<T> {
    */
   getIndexOf(element: T): number;
   /**
-   * 获取Vector实例中的第一个元素。Vector为空时返回undefined。
+   * 获取实例中的第一个元素。Vector为空时返回undefined。
    *
    * @returns { T } 返回Vector实例中的第一个元素；若Vector为空，返回undefined。
    * @syscap SystemCapability.Utils.Lang
@@ -135,9 +135,9 @@ declare class Vector<T> {
    */
   removeByIndex(index: number): T;
   /**
-   * 删除指定元素第一次出现的元素。
+   * 删除查找到的第一个指定的元素，并将其后续元素向左移动。
    *
-   * @param { T } element - 待删除的元素。
+   * @param { T } element - 指定元素。
    * @returns { boolean } 删除成功返回true，删除失败返回false。
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly
@@ -156,7 +156,7 @@ declare class Vector<T> {
    */
   set(index: number, element: T): T;
   /**
-   * 获取指定元素最后一次出现的下标值，如果未找到则返回-1。
+   * 返回指定元素最后一次出现时的下标值，查找失败返回-1。
    *
    * @param { T } element - 指定元素。
    * @returns { number } 返回指定元素最后一次出现时的下标值，查找失败返回-1。
@@ -201,7 +201,7 @@ declare class Vector<T> {
    * 通过回调函数操作Vector中的元素，用回调函数返回的元素替换原元素。
    *
    * @param { function } callbackFn - 回调函数，用于操作Vector中的元素，并用操作后的结果替换原元素。回调函数依次接收value、index和vector参数，
-   *     分别表示当前元素的值、元素下标和当前调用replaceAllElements方法的Vector实例。
+   *     分别表示当前遍历到的元素、当前遍历到的下标值和当前调用replaceAllElements方法的实例对象，默认值为当前实例对象。
    * @param { Object } thisArg - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly
@@ -212,7 +212,7 @@ declare class Vector<T> {
    * 通过回调函数来遍历Vector实例对象上的元素以及元素对应的下标。
    *
    * @param { function } callbackFn - 回调函数，用于遍历Vector中的每个元素。回调函数依次接收value、index和vector参数，
-   *     分别表示当前元素的值、元素下标和当前调用forEach方法的Vector实例。
+   *     分别表示当前遍历到的元素、当前遍历到的下标值和当前调用forEach方法的实例对象，默认值为当前实例对象。
    * @param { Object } thisArg - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly
@@ -229,7 +229,7 @@ declare class Vector<T> {
    */
   sort(comparator?: (firstValue: T, secondValue: T) => number): void;
   /**
-   * 获取Vector实例中指定范围内的元素，包括起始位置但不包括结束位置的元素，作为一个新的Vector实例返回。
+   * 根据下标截取Vector中的一段元素，并返回这一段Vector实例，包括起始值但不包括终止值。
    *
    * @param { number } fromIndex - 起始下标，取值范围：0 ≤ fromIndex < length。
    * @param { number } toIndex - 终止下标，取值范围：0 ≤ toIndex ≤ length，且toIndex应大于fromIndex。
@@ -240,7 +240,7 @@ declare class Vector<T> {
    */
   subVector(fromIndex: number, toIndex: number): Vector<T>;
   /**
-   * 清除Vector中的所有元素，并将length置为0。
+   * 清除Vector中的所有元素，并把length置为0。
    *
    * @syscap SystemCapability.Utils.Lang
    * @since 8 dynamiconly
@@ -248,7 +248,7 @@ declare class Vector<T> {
    */
   clear(): void;
   /**
-   * 克隆一个实例，并返回克隆后的实例。修改克隆后的实例并不会影响原实例。
+   * 克隆一个与Vector相同的实例，并返回克隆后的实例。修改克隆后的实例并不会影响原实例。
    *
    * @returns { Vector<T> } 返回与原实例内容相同的克隆Vector对象实例，修改克隆实例不影响原实例。
    * @syscap SystemCapability.Utils.Lang
@@ -266,7 +266,7 @@ declare class Vector<T> {
    */
   setLength(newSize: number): void;
   /**
-   * 获取Vector实例的容量大小。
+   * 获取当前实例的容量大小。
    *
    * @returns { number } 返回Vector的容量大小。
    * @syscap SystemCapability.Utils.Lang
@@ -275,7 +275,7 @@ declare class Vector<T> {
    */
   getCapacity(): number;
   /**
-   * 将Vector实例转换为数组。
+   * 把当前Vector实例转换成数组，并返回转换后的数组。
    *
    * @returns { Array<T> } 返回包含Vector中所有元素的数组。
    * @syscap SystemCapability.Utils.Lang
@@ -284,7 +284,7 @@ declare class Vector<T> {
    */
   convertToArray(): Array<T>;
   /**
-   * 判断Vector是否为空。
+   * 判断该Vector是否为空。
    *
    * @returns { boolean } 为空返回true，不为空返回false。
    * @syscap SystemCapability.Utils.Lang
@@ -302,7 +302,7 @@ declare class Vector<T> {
    */
   increaseCapacityTo(newCapacity: number): void;
   /**
-   * 用逗号（,）将Vector实例中的元素拼接成字符串。
+   * 用","将Vector实例中的元素按顺序拼接成字符串。
    *
    * @returns { string } 返回用","将Vector中的元素按顺序拼接成的字符串。
    * @syscap SystemCapability.Utils.Lang
@@ -319,7 +319,7 @@ declare class Vector<T> {
    */
   trimToCurrentLength(): void;
   /**
-   * 将Vector中的元素复制到指定数组中，覆盖数组中相同下标的元素。
+   * 将Vector实例中的元素按索引对应关系复制到指定数组中对应位置。
    *
    * @param { Array<T> } array - 接收复制元素的目标数组。
    * @syscap SystemCapability.Utils.Lang

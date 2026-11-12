@@ -593,6 +593,28 @@ declare interface NavigationOptions {
 }
 
 /**
+ * 预加载页面的选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare interface PreloadOptions {
+  /**
+   * 预加载页面被系统销毁时的回调。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  onDestroy?: Callback<void>;
+}
+
+/**
 * Navigation导航控制器，以栈的数据结构管理Navigation中所有的子页面，并提供栈操作的方法用于控制Navigation中子页面的切换。
 *
 * 从API version 12开始，NavPathStack允许被继承，派生类对象可以替代基类NavPathStack对象使用。使用示例参见
@@ -1183,6 +1205,26 @@ declare class NavPathStack {
    * @since 19 dynamic
    */
   setPathStack(pathStack: Array<NavPathInfo>, animated?: boolean): void;
+
+  /**
+   * 预加载**info**指定的导航目标页面。
+   * 预加载的页面不会立即显示，而是会被缓存。
+   * 稍后使用匹配的参数调用**pushPath**时，预加载的实例
+   * 将用于快速显示。
+   *
+   * @param { NavPathInfo } info - 表示要预加载的NavDestination。
+   * @param { PreloadOptions } [options] - 表示预加载的选项。
+   * @returns { Promise<void> } 函数返回的promise。
+   * @throws { BusinessError } 100001 - Internal error.
+   * @throws { BusinessError } 100005 - Builder function not registered.
+   * @throws { BusinessError } 100006 - NavDestination not found.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  preloadPath(info: NavPathInfo, options?: PreloadOptions): Promise<void>;
 }
 
 /**
@@ -2190,6 +2232,32 @@ declare interface NavigationConfiguration {
    * @since 26.0.0 dynamic
    */
   stackSizeLimit?: number;
+
+  /**
+   * 当收到低内存信号时，是否回收不可见页。
+   * 启用时，导航在接收后回收不可见的NavDestination页面实例
+   * 低内存压力通知。NavPathInfo是保留的，以后可以重新构造页面。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  recyclePagesOnLowMemory?: boolean;
+
+  /**
+   * 在导航分栏模式下，启用后，从主节点触发的导航会清除主节点之后的旧导航页面，同时保留当前操作创建的所有导航页面。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  clearContentStackOnPrimaryNavigation?: boolean;
 }
 
 /**

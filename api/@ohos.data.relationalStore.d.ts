@@ -3401,8 +3401,6 @@ declare namespace relationalStore {
      * @returns { string } Column name obtained. If the result set contains duplicate column names, the return value is
      *     not as expected.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3511,8 +3509,6 @@ declare namespace relationalStore {
      *     to move the pointer backward, and a negative value means to move the pointer forward.
      * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3544,8 +3540,6 @@ declare namespace relationalStore {
      * @param { int } position - Destination position to move to.
      * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3701,8 +3695,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { Uint8Array } Value obtained.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3740,8 +3732,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { string } Value obtained.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3784,8 +3774,6 @@ declare namespace relationalStore {
       *     the value is out of this range, use [getDouble]{@link relationalStore.ResultSet.getDouble} for DOUBLE values
       *     and [getString]{@link relationalStore.ResultSet.getString} for INTEGER values.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3821,8 +3809,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { double } Value obtained.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3857,8 +3843,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { Asset } Value obtained.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3893,8 +3877,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { Assets } Value obtained.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3929,8 +3911,6 @@ declare namespace relationalStore {
      *
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { ValueType } Allowed data field types.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error.
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted.
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -3964,8 +3944,6 @@ declare namespace relationalStore {
      *
      * @param { int } columnIndex - Indicates the specified column index, which starts from 0.
      * @returns { Float32Array } The value of the specified column as a float array.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -4154,8 +4132,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - Index of the target column, starting from 0.
      * @returns { boolean } Returns **true** if the value is null; returns **false** otherwise.
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -6395,6 +6371,7 @@ declare namespace relationalStore {
      * @param { Array<string> } [columns] - The specified columns to query.
      * @returns { Promise<ResultSet> } -The promise returned by the function.
      *     {@link ResultSet} is query result.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -6433,6 +6410,7 @@ declare namespace relationalStore {
      *     The specified query condition by the instance object of {@link RdbPredicates}.
      * @param { AsyncCallback<ResultSet> } callback - The callback of querySharingResource.
      *     {@link ResultSet} is query result.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -6472,6 +6450,7 @@ declare namespace relationalStore {
      * @param { Array<string> } columns - The specified columns to query.
      * @param { AsyncCallback<ResultSet> } callback - The callback of querySharingResource.
      *     {@link ResultSet} is query result.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -7091,7 +7070,6 @@ declare namespace relationalStore {
     /**
      * Set table to be distributed table.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - Indicates the table names you want to set.
      * @param { AsyncCallback<void> } callback - The callback of setDistributedTables.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -7110,7 +7088,6 @@ declare namespace relationalStore {
     /**
      * Set table to be distributed table.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - Indicates the table names you want to set.
      * @returns { Promise<void> } The promise returned by the function.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -7129,7 +7106,6 @@ declare namespace relationalStore {
     /**
      * Set table to be distributed table.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - Indicates the table names you want to set.
      * @param { DistributedType } type - Indicates the distributed type {@link DistributedType}.
      *     ohos.permission.DISTRIBUTED_DATASYNC is required only when type is DISTRIBUTED_DEVICE.
@@ -7151,7 +7127,6 @@ declare namespace relationalStore {
     /**
      * Set table to be distributed table.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - Indicates the table names you want to set.
      * @param { DistributedType } type - Indicates the distributed type {@link DistributedType}.
      *     ohos.permission.DISTRIBUTED_DATASYNC is required only when type is DISTRIBUTED_DEVICE.
@@ -7180,7 +7155,6 @@ declare namespace relationalStore {
     /**
      * Set table to be a distributed table.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - Indicates the table names you want to set.
      * @param { DistributedType } type - Indicates the distributed type {@link DistributedType}.
      *     ohos.permission.DISTRIBUTED_DATASYNC is required only when type is DISTRIBUTED_DEVICE.
@@ -7254,7 +7228,6 @@ declare namespace relationalStore {
      * Obtain distributed table name of specified remote device according to local table name.
      * When query remote device database, distributed table name is needed.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } device - Indicates the remote device.
      * @param { string } table - {string}: the distributed table name.
      * @param { AsyncCallback<string> } callback
@@ -7275,7 +7248,6 @@ declare namespace relationalStore {
      * Obtain distributed table name of specified remote device according to local table name.
      * When query remote device database, distributed table name is needed.
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } device - Indicates the remote device.
      * @param { string } table
      * @returns { Promise<string> } {string}: the distributed table name.
@@ -7620,7 +7592,6 @@ declare namespace relationalStore {
      *     {Array<ChangeInfo>}: The change info of data change events in the distributed database.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -7835,7 +7806,6 @@ declare namespace relationalStore {
      *     {Array<ChangeInfo>}: the change info already registered.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -8592,7 +8562,7 @@ declare namespace relationalStore {
      * @throws { BusinessError } 14800047 - The WAL file size exceeds the default limit.
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @crossplatform
-     * @since 23 static
+     * @since 23 staticonly
      */
     insertSync(table: string, values: ValuesBucket, conflict?: ConflictResolution): long;
 
@@ -9405,7 +9375,7 @@ declare namespace relationalStore {
      * @param { string } sql - SQL statement to run.
      * @param { Array<ValueType> } [args] - Arguments in the SQL statement. The value corresponds to the placeholders in
      *     the SQL parameter statement. If this parameter is left blank or set to **null** or **undefined**, the SQL
-     *     statement is complete. The default value is null.
+     *     statement is complete. The default value is an empty array.
      * @returns { ValueType } SQL execution result.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
@@ -9453,7 +9423,7 @@ declare namespace relationalStore {
    * | Non-encryption| Encryption                         | The RDB store is opened in encrypted mode.  |
    * | Encryption| Non-encryption                         | The RDB store is opened in non-encrypted mode.  |
    * 
-   * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
+   * Currently, **getRdbStore()** supports multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
    *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see
@@ -9500,7 +9470,7 @@ declare namespace relationalStore {
    * | Non-encryption| Encryption                         | The RDB store is opened in encrypted mode.  |
    * | Encryption| Non-encryption                         | The RDB store is opened in non-encrypted mode.  |
    * 
-   * Currently, **getRdbStore()** does not support multi-thread concurrent operations.
+   * Currently, **getRdbStore()** supports multi-thread concurrent operations.
    *
    * @param { Context } context - Application context.<br>For details about the application context of the FA model, see
    *     [Context]{@link ./app/context:Context}.<br>For details about the application context of the stage model, see

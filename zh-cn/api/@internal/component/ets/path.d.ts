@@ -68,7 +68,7 @@ declare interface PathOptions {
   height?: Length;
 
   /**
-   * 路径绘制的命令字符串，符合[SVG路径描述规范]{@link svg路径描述规范}，单位为px。
+   * 路径绘制的命令字符串，符合[SVG路径描述规范]{@link @global:Path}，单位为px。
    * 
    * 默认值：空字符串
    * 
@@ -146,16 +146,16 @@ interface PathInterface {
  */
 declare class PathAttribute extends CommonShapeMethod<PathAttribute> {
   /**
-   * 设置符合[SVG路径描述规范]{@link svg路径描述规范}的命令字符串，单位为px。命令字符串决
+   * 设置符合[SVG路径描述规范]{@link @global:Path}的命令字符串，单位为px。命令字符串决
    * 定了路径的绘制形状和轨迹。支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。像素单位转换方法请参考
    * [像素单位转换]{@link CommonMethod}。
    *
    * @param { string } value - 路径绘制的命令字符串，需符合
-   *     [SVG路径描述规范]{@link svg路径描述规范}，单位为px。
+   *     [SVG路径描述规范]{@link @global:Path}，单位为px。
    *     <br>默认值：空字符串
    *     <br>异常值undefined和null按照默认值处理。 [since 7 - 19]
    * @param { ResourceStr } value - 路径绘制的命令字符串，需符合
-   *     [SVG路径描述规范]{@link svg路径描述规范}，单位为px。
+   *     [SVG路径描述规范]{@link @global:Path}，单位为px。
    *     <br>默认值：空字符串
    *     <br>异常值undefined和null按照默认值处理。 [since 20]
    * @returns { PathAttribute }

@@ -2565,6 +2565,34 @@ declare namespace webview {
          * @since 23 static
          */
         static isActiveWebEngineEvergreen(): boolean;
+        /**
+         * Sets the data directory suffix for the WebEngine in current process.
+         * 
+         * The provided suffix is appended to the data directory path to achieve data isolation for different processes.
+         * If this API is not called, no suffix will be used. The WebEngine in current process uses the default data directory.
+         * This API must be called before WebEngine is initialized.
+         * 
+         * @param { string } suffix - The data directory suffix.
+         *     <br>The maximum length is 128.
+         *     <br>Must not contain a path separator.
+         *     <br>This value cannot be null.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static setDataDirectorySuffix(suffix: string): void;
+
+        /**
+         * Obtains the data directory suffix for current process.
+         * 
+         * If the data directory suffix has not been set, an empty string is returned.
+         *
+         * @returns { string } The current data directory suffix, or an empty string if not set.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static getDataDirectorySuffix(): string;
 
         /**
          * Checks whether the web page can go forward.
@@ -3448,6 +3476,30 @@ declare namespace webview {
          */
         setCustomUserAgent(userAgent: string): void;
 
+    /**
+     * Set NavigationThrottle to intercept navigation requests in multiple phases.
+     *
+     * NavigationThrottle provides callbacks for four navigation phases: `willStartRequest`, `willRedirectRequest`,
+     * `willProcessResponse`, `willFailRequest`. Each callback can return whether it isPROCEED, CANCEL, or DEFER.
+     * When DEFER is returned, navigation pauses until `proceed()` or `cancel()` of DeferThrottleCallback is called.
+     *
+     * > **Description* *
+     * >
+     * > - Invoking this interface replaces the previously set NavigationThrottle, and the original navigationThrottle
+     * > is no longer invoked.
+     * > - This interface does not affect {@link onOverrideUrlLoading}. When both are set,
+     * > Invoke {@link onOverrideUrlLoading} and then the NavigationThrottle callback.
+     *
+     * @param { NavigationThrottle | null } throttle - The NavigationThrottle instance used to intercept navigation.
+     * Pass **null** to clear the current NavigationThrottle.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    setNavigationThrottle(throttle: NavigationThrottle | null): void;
+
         /**
          * Prefetch the resources required by the page, but will not execute js or render the page.
          * <p><strong>API Note</strong>:<br>
@@ -3852,6 +3904,20 @@ declare namespace webview {
          * @since 23 static
          */
         static getDefaultUserAgent(): string;
+
+        /**
+         * Obtains the default user agent without initializing the ArkWeb kernel.
+         *
+         * Unlike getDefaultUserAgent, this API does not trigger web engine initialization, so it can be
+         * called during application startup to report the user agent to a server without extra memory
+         * cost. If the ArkWeb engine library is unavailable, an empty string is returned.
+         *
+         * @returns {string} The default user agent string.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static getDefaultUserAgentLite(): string;
 
         /**
          * Called when the
@@ -4902,6 +4968,32 @@ declare namespace webview {
          * @since 26.1.0 static
          */
         removeNavigationEntryUserData(key: string): void;
+
+        /**
+         * Removes visited link records that changed after the specified date.
+         * This API uses an asynchronous callback to return the result.
+         *
+         * @param { Date } date - The time point for the data removal.
+         *     The visited link records remove data that changed after the date.
+         * @param { Callback<void> } callback - Callback used to return the result.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+        /**
+         * Removes visited link records that changed after the specified date.
+         * This API uses a promise to return the result.
+         *
+         * @param { Date } date - The time point for the data removal.
+         *     The visited link records remove data that changed after the date.
+         * @returns { Promise<void> } Promise that returns no value.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        static removeVisitedLinksSince(date: Date): Promise<void>;
     }
 
     /**
@@ -6129,6 +6221,283 @@ declare namespace webview {
          */
         DECODE_ERROR = 3
     }
+
+  /**
+   * NavigationThrottle callback action enumeration.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  enum NavigationThrottleAction {
+    /**
+     *Allow navigation to continue. This action is used by default when the callback is not implemented or an invalid
+     * value is returned.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    PROCEED = 0,
+
+    /**
+     * Cancel navigation. Use when navigation should be blocked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    CANCEL = 1,
+    /**
+    :: Suspend decision-making. Navigation pauses until `proceed()` or `cancel()` is called on
+     * {@link DeferThrottleCallback}.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    DEFER = 2
+  }
+
+  /**
+   * Navigation information passed to the {@link NavigationThrottle} callback. Different fields are valid in different
+   * callback phases:
+   * - **willStartRequest**: url, isMainFrame, hasUserGesture, pageTransition, requestMethod, and isRendererInitiated
+   * are valid.
+   * - **willRedirectRequest**: url (redirect target), isMainFrame, hasUserGesture, isRedirect, pageTransition,
+   * requestMethod and isRendererInitiated are valid.
+   * - **willProcessResponse**: URL, isMainFrame, statusCode, mimeType, and contentDisposition are valid.
+   * - **willFailRequest**: URL, isMainFrame, errorCode, and errorDescription are valid.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  interface NavigationInfo {
+    /**
+     * URL of the navigation request.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    url: string;
+
+    /**
+     * Whether to navigate the main frame.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    isMainFrame: boolean;
+
+    /**
+     * Whether navigation is triggered by user gestures.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    hasUserGesture: boolean;
+
+    /**
+     * Indicates whether redirection is performed on the server. This parameter is valid only in willRedirectRequest.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    isRedirect: boolean;
+
+    /**
+     * Page redirection value, which is obtained by bitwise ORing the core type and modifier flag defined in
+     * [PageTransition]{@link webview.PageTransition}.
+     * The mask constants(`CORE_MASK`, `QUALATOR_MASK`, and `IS_REDIRECT_MASK`) can be used for disassembly. The value
+     * must be an integer.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    pageTransition: int;
+
+    /**
+     * HTTP method of the navigation request, such as `GET` and `POST`.
+     * Valid for the first time in the willStartRequest phase; It may be updated in the willRedirectRequest phase(for
+     * example, redirection may change the method). The subsequent phases remain the same.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    requestMethod: string;
+
+    /**
+     * Whether navigation is initiated by the rendering process. `true` indicates that it is initiated by the rendering
+     * process(such as clicking a link or redirecting a script).
+     * `false` indicates that the request is initiated by a browser process (for example, through an API).
+     * Valid for the first time in the willStartRequest phase; The subsequent phases remain the same.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    isRendererInitiated: boolean;
+
+    /**
+     * HTTP status code of the response. The value ranges from 100 to 599. This parameter is valid only in
+     * willProcessResponse.
+     * The value must be an integer.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    statusCode: int;
+
+    /**
+     * MIME(Multipurpose Internet Mail Extensions) type of the response. This parameter is valid only in
+     * willProcessResponse.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    mimeType: string;
+
+    /**
+     * Content-Disposition header of the response. This parameter is valid only in willProcessResponse.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    contentDisposition: string;
+
+    /**
+     * Network error code. This parameter is valid only in willFailRequest. For details, see {@link WebNetErrorList}.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    errorCode: WebNetErrorList;
+
+    /**
+     * Error description. This parameter is valid only in willFailRequest.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    errorDescription: string;
+  }
+
+  /**
+   * Provide asynchronous decision capabilities for {@link NavigationThrottle} callbacks that return DEFER.
+   *
+   * Navigation pauses when the NavigationThrottle callback returns {@link NavigationThrottleAction}.DEFER. Second of
+   * NavigationThrottle callback method
+   * The parameter is DeferThrottleCallback. Call `proceed()` to resume navigation, or call `cancel()` to cancel
+   * navigation.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  interface DeferThrottleCallback {
+    /**
+     *Resumes suspended navigation. Repeated calls, or after `cancel()`, are invalid.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    proceed(): void;
+
+    /**
+     * Unsuspended navigation. Repeated calls, or after `proceed()`, have no effect.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    cancel(): void;
+  }
+
+  /**
+   * Interface to intercept navigation requests at multiple stages.
+   *
+   * Set the NavigationThrottle for the Web component through {@link WebviewController#setNavigationThrottle}. Each
+   * callback receives one
+   * {@link NavigationInfo} and a {@link DeferThrottleCallback}, and returns a {@link NavigationThrottleAction}.
+   *
+   * > **Description* *
+   * >
+   * > - When the callback is not implemented or an invalid value(for example, undefined) is returned, the default
+   * > value PROCEED is used.
+   * > - Navigation pauses when the callback returns to DEFER, resumes or cancels asynchronously using
+   * > {@link DeferThrottleCallback}.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  interface NavigationThrottle {
+    /**
+     * Called when the navigation request is about to start.
+     *
+     * @param { NavigationInfo } info - Navigation information.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    willStartRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * This interface is invoked when the navigation is redirected by the server.
+     *
+     * @param { NavigationInfo } info - Navigation information. The **url** field is the redirect target.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    willRedirectRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * This interface is invoked when a response from the navigation server is received.
+     *
+     * @param { NavigationInfo } info - Navigation information. **statusCode**, **mimeType**, and
+     *     **contentDisposition** are valid.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    willProcessResponse(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * Invoked when navigation fails.
+     *
+     * @param { NavigationInfo } info - Navigation information. **errorCode** and **errorDescription** are valid.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    willFailRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+  }
 
     /**
      * Implements a **NativeMediaPlayerHandler** object used as a parameter of the
