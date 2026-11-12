@@ -1718,14 +1718,14 @@ declare type ReusableComponentConstructor = Function;
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface RecoverableStorageError {
+export declare interface RecoverableStorageError {
   /**
    * Reason of the error. The value can be **'serialization'** (serialization failed,
    * for example, the serialization budget is exceeded or a field cannot be serialized) or
    * **'deserialization'** (deserialization failed, for example, the data is corrupted or the type does
    * not match). Connect entry errors (unsupported type, invalid parameters) are **thrown** as
-   * BusinessError **140124** and are not reported through this callback. An error log is always
-   * output for I/O errors. Recommended total user data: ≤100KB per instance (200KB serialization
+   * BusinessError **140124** and are not reported through this callback.
+   * Recommended total user data: ≤100KB per instance (150KB serialization
    * budget shared with system data).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1776,7 +1776,7 @@ export type NotifyOnErrorCallback = (error: RecoverableStorageError) => void;
  * @atomicservice
  * @since 26.1.0 dynamic
  */
-export interface RecoverableConnectOptions<T extends object, S extends object> {
+export declare class RecoverableConnectOptions<T extends object, S extends object> {
   /**
    * Custom component instance, for which **this** is passed to obtain the window-level instance ID used for
    * per-instance isolation.
@@ -1807,8 +1807,7 @@ export interface RecoverableConnectOptions<T extends object, S extends object> {
    */
   key?: string;
   /**
-   * Constructor for obtaining the default value. It is mandatory and is used when the variable is connected
-   * for the first time (neither memory nor a snapshot holds the key) and as the fallback when restoration
+   * Constructor for obtaining the default value. It is used when the variable is connected for the first time (neither memory nor a snapshot holds the key) and as the fallback when restoration
    * fails.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1841,13 +1840,13 @@ export interface RecoverableConnectOptions<T extends object, S extends object> {
 
 /**
  * Provides the capability of automatically saving and restoring declared state variables when the application
- * is killed due to resource control or exits abnormally. After a variable is declared through
+ * is terminated due to resource control or exits abnormally. After a variable is declared through
  * [connect]{@link RecoverableStorage.connect}, its value is saved automatically on the save occasions of the
  * system recovery pipeline and restored automatically on the next recovery restart.
  *
  * > **NOTE**
  * >
- * > 1. For an application killed due to resource control (for example, low memory), the value saved when the
+ * > 1. For an application terminated due to resource control (for example, low memory), the value saved when the
  * > application switches to the background is restored after the restart.
  * >
  * > 2. For **JS_ERROR** and **APP_FREEZE** exits, the value at the moment the error occurs is saved and then
@@ -1885,20 +1884,17 @@ export declare class RecoverableStorage {
    * >
    * > 5. Variables are isolated by the window-level instance ID obtained from **component**. Variables of
    > > different instances do not affect each other.
-   >
-   * > 6. An empty key or a key whose length is not less than **1024** bytes throws **BusinessError(140124)**.
-   *
-   * @param { RecoverableConnectOptions<T, S> } options - Options of the connection.
+
+   * @param { RecoverableConnectOptions<T, S> } params - Connection options.
    * @returns { T } Returns the restored value or the default value if the connection is successful.
-   * @throws { BusinessError } 140124 - The type or a parameter is not supported, or the key is an empty
-   *     string or its length is not less than 1024 bytes.
+   * @throws { BusinessError } 140124 - Unsupported type or parameters.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @atomicservice
    * @since 26.1.0 dynamic
    */
   static connect<T extends object, S extends object>(
-    options: RecoverableConnectOptions<T, S>
+    params: RecoverableConnectOptions<T, S>
   ): T;
 
   /**
