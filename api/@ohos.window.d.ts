@@ -406,6 +406,15 @@ declare namespace window {
      */
     TYPE_MUTISCREEN_COLLABORATION = 26,
     /**
+     * Window for accessibility.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ACCESSIBILITY_CALL_HELPER = 27,
+    /**
      * Main window of an application.
      *
      * This window type cannot be used during window creation.
