@@ -508,6 +508,122 @@ declare namespace power {
      */
     LONG_PRESS_FILTERING_ONCE = 1
   }
+
+  /**
+   * 枚举函数调用方式。
+   * 表示API调用是如何执行的，以及它的结果是如何交付的。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InvokeMode {
+    /**
+     * 同步调用。调用方阻塞，直到API返回结果。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SYNC = 0,
+    /**
+     * 异步调用。调用者立即返回，结果通过Promise传递。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ASYNC = 1
+  }
+
+  /**
+   * 唤醒设备。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { string } detail - 唤醒原因。值必须为字符串。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API需要的权限。
+   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function wakeup(detail: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 使设备进入休眠状态。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { boolean } [isImmediate] - 设备是否立即进入休眠状态。值**true**
+   *     熄屏后立即进入休眠状态；**false**
+   *     表示由系统控制设备进入休眠状态的时间。如果不设置该参数，则
+   *     使用默认值**false**。如果只是想关屏，建议不要设置
+   *     参数。
+   *     <br>默认值：false。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @throws { BusinessError } 4900701 - 挂起设备失败。可能原因：
+   *     1.考试过程中不允许熄屏。
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
+   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function suspend(isImmediate?: boolean, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 系统关机。与reboot方法的区别：shutdown使设备完全关机不再运行，reboot使设备关机后自动重启。
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - 关机原因。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function shutdown(reason: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 重启设备。
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - 重启原因。例如，“updater”表示重启后进入更新模式。传入空字符串时，系统将在重启后进入正常模式。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需的权限。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function reboot(reason: string, mode?: InvokeMode): void | Promise<void>;
+
 }
 
 export default power;

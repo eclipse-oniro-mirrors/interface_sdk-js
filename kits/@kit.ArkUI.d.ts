@@ -172,10 +172,7 @@ import {
   PromptAction, Router, UIContext, UIInspector, UIObserver, PageInfo, SwiperDynamicSyncScene, SwiperDynamicSyncSceneType, MarqueeDynamicSyncScene,
   MarqueeDynamicSyncSceneType, MeasureUtils, FrameCallback, OverlayManagerOptions, TargetInfo, TextMenuController,
   NodeIdentity, NodeRenderState, NodeRenderStateChangeCallback, Magnifier, ResolvedUIContext, TextSelectionClearPolicy, CustomKeyboardContinueFeature,
-  BackgroundLuminanceSamplingConfigs, LuminanceSampler,
-  GestureListenerType, GestureActionPhase, GestureTriggerInfo, GestureObserverConfigs, GestureListenerCallback,
-  SwiperContentInfo, SwiperItemInfo,
-  BackPressActionProposal, BaseGestureHandlingProposal, ClickActionProposal, GestureHandlingResolution, NoneActionProposal, PageSwitchActionProposal, ScrollActionProposal, SelectActionProposal, SmartGestureController, TargetedGestureProposal
+  BackgroundLuminanceSamplingConfigs, LuminanceSampler
 } from '@ohos.arkui.UIContext';
 import curves from '@ohos.curves';
 import {
@@ -298,6 +295,9 @@ import {
   MultiCapsuleSegmentButtonV2
 } from '@ohos.arkui.advanced.SegmentButtonV2';
 import { HalfScreenLaunchComponent } from '@ohos.atomicservice.HalfScreenLaunchComponent';
+import { GestureListenerType, GestureActionPhase, GestureTriggerInfo, GestureObserverConfigs, GestureListenerCallback } from '@ohos.arkui.UIContext';
+import { SwiperContentInfo, SwiperItemInfo } from '@ohos.arkui.UIContext';
+import { BackPressActionProposal, BaseGestureHandlingProposal, ClickActionProposal, GestureHandlingResolution, NoneActionProposal, PageSwitchActionProposal, ScrollActionProposal, SelectActionProposal, SmartGestureController, TargetedGestureProposal } from '@ohos.arkui.UIContext';
 import imageGeneration from '@ohos.arkui.intelligence.imageGeneration';
 import uiMaterial from '@ohos.arkui.uiMaterial';
 import { RowLayoutAlgorithm, ColumnLayoutAlgorithm, StackLayoutAlgorithm, GridLayoutAlgorithm, CustomLayoutAlgorithm, LayoutAlgorithm } from '@ohos.arkui.layoutAlgorithm';

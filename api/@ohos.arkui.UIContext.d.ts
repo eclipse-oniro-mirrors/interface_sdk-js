@@ -4139,8 +4139,8 @@ export class MeasureUtils {
    *
    * > **NOTE**
    * >
-   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link
-   * > ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
+   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link 
+   * ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
    * > ensure the correctness of the time sequence, you are advised to monitor the font scaling changes by yourself to
    * > ensure the accuracy of the calculation result.
    *
@@ -6570,7 +6570,8 @@ export class UIContext {
    *     if this API is called in a page within a UIAbility window, the returned context type is
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}. If this API is called in a page within an
    *     ExtensionAbility window, the returned context type is
-   *     {@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
+   *     [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}. 
+   *     If the ability context does not exist,
    *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

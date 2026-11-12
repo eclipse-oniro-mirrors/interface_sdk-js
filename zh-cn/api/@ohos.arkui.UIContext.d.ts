@@ -2386,7 +2386,8 @@ export class UIObserver {
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件执行前的指令下发情况，所注册回调将于Pan手势
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件触发前触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2419,7 +2420,8 @@ export class UIObserver {
    *     [onActionEnd]{@link PanGestureInterface.onActionEnd}事件执行前的指令下发情况，所注册回调将于Pan手势
    *     [onActionEnd]{@link PanGestureInterface.onActionEnd}事件触发前触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2452,7 +2454,8 @@ export class UIObserver {
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件执行后的指令下发情况，所注册回调将于Pan手势
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件触发后触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2483,8 +2486,8 @@ export class UIObserver {
    *
    * @param { 'afterPanEnd' } type - 监听事件，固定为'afterPanEnd'，用于监听Pan手势[onActionEnd]{@link PanGestureInterface.onActionEnd}
    *     事件执行后的指令下发情况，所注册回调将于Pan手势[onActionEnd]{@link PanGestureInterface.onActionEnd}事件触发后触发。
-   * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的[GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2656,14 +2659,16 @@ export class UIObserver {
    *
    * 注意节点数量的限制。出于性能考虑，在单个UI实例中，注册节点太多，将会抛出异常。
    *
-   * 通常，当组件被移动到屏幕外时，会收到RENDER_OUT的通知。但在某些情况下，即使组件移动到屏幕外也不会触发RENDER_OUT通知。例如，具有缓存功能的组件[Swiper]{@link @global:Swiper}，即使
+   * 通常，当组件被移动到屏幕外时，会收到RENDER_OUT的通知。但在某些情况下，即使组件移动到屏幕外也不会触发RENDER_OUT通知。例如，具有缓存功能的组件
+   * [Swiper]{@link @global:Swiper}，即使
    * [cachedCount]{@link SwiperAttribute#cachedCount(count: number, isShown: boolean)}属性中的参数isShown配置为true，也不会触发
    * RENDER_OUT通知。
    *
    * @param { 'nodeRenderState' } type - 监听事件，固定为'nodeRenderState'，用于监听节点渲染状态发生改变。
    * @param { NodeIdentity } nodeIdentity - 节点标识。
    * @param { NodeRenderStateChangeCallback } callback - 回调函数。可以获得节点渲染状态改变事件的
-   *     [NodeRenderState]{@link NodeRenderState}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [NodeRenderState]{@link NodeRenderState}和组件的
+   *     [FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @throws { BusinessError } 161001 - The count of nodes monitoring render state is over the limitation.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4060,13 +4065,15 @@ export type Context = common.Context;
 export class ComponentSnapshot {
 
   /**
-   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图。使用callback异步回调。
+   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，适用于生成组件预览图、保存或分享局部UI截图等场景。使用callback异步回
+   * 调。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当截图返回结果成功，err为undefined，data为获取到的image.
    *     [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}；否则为错误对象。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
@@ -4085,13 +4092,14 @@ export class ComponentSnapshot {
   get(id: string, callback: AsyncCallback<image.PixelMap>, options?: componentSnapshot.SnapshotOptions): void;
 
   /**
-   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图。使用Promise异步回调。
+   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，适用与生成组件预览图、保存或分享局部UI截图等场景。使用Promise异步回调。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4183,14 +4191,16 @@ export class ComponentSnapshot {
     checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * 获取已加载的组件的截图。传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，同步等待截图完成返回[PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
-   * 本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后未返回将会抛出异常。
+   * 获取已加载的组件的截图。传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，同步等待截图完成返回
+   * [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}，适用于需要及时获取截图结果或对性能要求不高的场景。本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后
+   * 未返回将会抛出异常。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。 <br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。 
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { image.PixelMap } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4216,8 +4226,8 @@ export class ComponentSnapshot {
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
    * @param { number } uniqueId - 目标组件的uniqueId。FrameNode节点的uniqueId可通过
-   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。 <br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截
-   *     图。
+   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件uniqueId对应的是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4242,8 +4252,8 @@ export class ComponentSnapshot {
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
    * @param { number } uniqueId - 目标组件的uniqueId。FrameNode节点的uniqueId可通过
-   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截
-   *     图。
+   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。
+   *     <br>**说明：** 不支持未挂树组件，当传入的uniqueId对应离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { image.PixelMap } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -5924,7 +5934,7 @@ export class UIContext {
    *     if this API is called in a page within a UIAbility window, the returned context type is
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}. If this API is called in a page within an
    *     ExtensionAbility window, the returned context type is
-   *     {@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
+   *     [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
    *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6608,7 +6618,9 @@ export class TextMenuController {
    * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法[onCreateMenu]{@link
    * > EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
    * > >
-   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、[TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、[RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
    * > >
    * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
    * > >
@@ -6645,8 +6657,8 @@ export class TextMenuController {
    * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法
    * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
    * > >
-   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}
-   * > 、[TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
    * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
    * > >
    * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。

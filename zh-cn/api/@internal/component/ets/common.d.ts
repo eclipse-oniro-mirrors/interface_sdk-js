@@ -25553,6 +25553,7 @@ declare class CommonMethod<T> {
    *    2、如果开发者通过[parallelGesture]{@link parallelGesture(gesture: GestureType, mask?: GestureMask)}绑定了与子组件同时触发的手势，如PanGesture，子组件设置了独占控制且首个响应事件，则父组件的手势不会响应。
    * @returns { T }
    返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice [since 12]
@@ -28321,10 +28322,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * 设置是否支持左键拖动滚动。
    * 
    * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-   *    <br>true：支持鼠标左键按下拖动滚动。
-   *    <br>false：不支持鼠标左键按下拖动滚动。
-   *    <br>undefined：首次设置为undefined时，使用默认值。非首次设置为undefined时，保持上一次设置的效果不变。
-   *    <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
+   *     <br>true：支持鼠标左键按下拖动滚动。
+   *     <br>false：不支持鼠标左键按下拖动滚动。
+   *     <br>undefined：首次设置为undefined时，使用默认值。非首次设置为undefined时，保持上一次设置的效果不变。
+   *     <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
    * @returns { T } 当前滚动组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

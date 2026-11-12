@@ -974,6 +974,7 @@ declare class WritableSystemEnvKey<T> extends SystemEnvKey<T> {}
  * @since 26.0.0 dynamic
  */
 declare class ReadonlySystemEnvKey<T> extends SystemEnvKey<T> {}
+
 /**
  * Defines the type of the key for a custom environment variable.
  *
@@ -20384,33 +20385,14 @@ declare interface BackgroundOptions {
   /**
    * Set the alignment of the custom background and component.
    *
-   * @type { ?Alignment} align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Set the alignment of the custom background and component.
-   *
-   * @type { ?Alignment} align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Set the alignment of the custom background and component.
-   * 
    * Anonymous Object Rectification.
    * @type { ?Alignment }
-   * @default Alignment.Center
+   * @default Alignment.Center [since 20]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   align?: Alignment;
   /**
@@ -21076,44 +21058,21 @@ declare class CommonMethod<T> {
   margin(value: Margin | Length | LocalizedMargin): T;
 
   /**
-   * Sets the background color of the component.
-   *
-   * @param { CustomBuilder } builder - Custom background.
-   * @param { object } options - Alignment mode between the custom background and the component.
-   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
-   *     <br>They will all take effect, with **background** at the top layer.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Sets the background color of the component.
-   *
-   * @param { CustomBuilder } builder - Custom background.
-   * @param { object } options - Alignment mode between the custom background and the component.
-   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
-   *     <br>They will all take effect, with **background** at the top layer.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * Add a background for the component.
    *
    * Anonymous Object Rectification.
-   * @param { CustomBuilder | ResourceColor } content
-   * @param { BackgroundOptions } [options]
+   * @param { CustomBuilder } builder - Custom background. [since 10 - 19]
+   * @param { CustomBuilder | ResourceColor } content [since 20]
+   * @param { object } options - Alignment mode between the custom background and the component.
+   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
+   *     <br>They will all take effect, with **background** at the top layer. [since 10 - 19]
+   * @param { BackgroundOptions } [options] [since 20]
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   background(content: CustomBuilder | ResourceColor, options?: BackgroundOptions): T;
 
@@ -21123,37 +21082,10 @@ declare class CommonMethod<T> {
    * @param { ResourceColor } value
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundColor(value: ResourceColor): T;
 
@@ -21243,60 +21175,15 @@ declare class CommonMethod<T> {
    * Background image
    * src: Image address url
    *
-   * @param { ResourceStr } src
+   * @param { ResourceStr } src [since 7 - 11]
+   * @param { ResourceStr | PixelMap } src [since 12]
    * @param { ImageRepeat } repeat
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr | PixelMap } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImage(src: ResourceStr | PixelMap, repeat?: ImageRepeat): T;
 
@@ -21318,40 +21205,13 @@ declare class CommonMethod<T> {
   /**
    * Background image size
    *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image size
-   *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image size
-   *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image size
-   *
    * @param { SizeOptions | ImageSize } value - The width and height of the background image.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImageSize(value: SizeOptions | ImageSize): T;
 
@@ -21362,40 +21222,10 @@ declare class CommonMethod<T> {
    * @param { Position | Alignment } value
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImagePosition(value: Position | Alignment): T;
 
