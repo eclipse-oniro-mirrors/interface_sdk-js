@@ -131,11 +131,10 @@ export declare interface ContainerReaderAttribute extends CommonMethod {
   default breakpointConfig(value?: BreakpointOptions): this;
 
   /**
-   * Set ContainerReader options.
+   * 设置容器断点组件的选项。
    *
-   * @param { ContainerReaderInfo } value - Used to specify the parameters for container dimension reading and
-   *     breakpoint analysis.
-   * @returns { this }
+   * @param { ContainerReaderInfo } value - 容器读取配置选项，包含尺寸数据和断点配置。
+   * @returns { this } 返回当前组件对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @unpublished
    * @stagemodelonly
@@ -144,9 +143,10 @@ export declare interface ContainerReaderAttribute extends CommonMethod {
   default setContainerReaderOptions(value: ContainerReaderInfo): this;
 
   /**
-   * Sets the attribute modifier.
+   * 设置组件的动态属性。
    *
-   * @param { AttributeModifier<ContainerReaderAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+   * @param { AttributeModifier<ContainerReaderAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 动态设置ContainerReader组件的属性。<br>
+   *    取值为undefined时，按当前组件的属性方法默认值处理。
    * @returns { this }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

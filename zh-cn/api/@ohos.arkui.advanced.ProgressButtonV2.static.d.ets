@@ -121,7 +121,8 @@ export declare struct ProgressButtonV2 {
   @Param
   progressButtonRadius?: LengthMetrics;
   /**
-   * The method to build component.
+   * 构建组件的方法。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

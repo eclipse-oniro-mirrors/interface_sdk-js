@@ -881,11 +881,16 @@ export interface ChipOptions {
   backgroundColor?: ResourceColor;
 
   /**
-   * Chip背景颜色。
+   * 设置组件系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。
+   * 不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * [border]{@link CommonMethod#border}、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}等视觉属性。
    *
-   * 默认值：$r('sys.color.ohos_id_color_button_normal')。
+   * 默认值：undefined
    *
-   * 值为undefined时，按默认值处理。
+   * 值为undefined时，不应用材质样式。
+   *
+   * **说明**：当设置backgroundSystemMaterial时，应将backgroundColor设为Color.Transparent，否则会与系统材质冲突；当backgroundSystemMaterial为
+   * undefined时，backgroundColor属性生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -909,7 +914,16 @@ export interface ChipOptions {
   activatedBackgroundColor?: ResourceColor;
 
   /**
-   *    =* Set system-styled materials for the component which is activated. Different materials have different effects,
+   * 设置组件激活状态下的系统材质样式。需要将组件放置在Navigation或NavDestination的标题栏，或横向Tabs的底部TabBar中，沉浸光感效果才会生效。适用于需要激活状态下保持或切换材质效果的交互场景，如标签选中、状态切换等。
+   * 不同材质具有不同的效果，能够影响组件的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * [border]{@link CommonMethod#border}、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}等视觉属性。
+   *
+   * 默认值：undefined
+   *
+   * 值为undefined时，不应用材质样式。
+   *
+   * **说明**：当设置activatedBackgroundSystemMaterial时，应将activatedBackgroundColor设为Color.Transparent，否则会与系统材质冲突；当
+   * activatedBackgroundSystemMaterial为undefined时，activatedBackgroundColor属性生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -1465,7 +1465,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Column.
+   * 定义Column类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1486,11 +1486,10 @@ export declare namespace typeNode {
   export function createColumnNode(context: UIContext, options?: FrameNodeOptions): Column;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例，用于设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { ColumnAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { ColumnAttribute | undefined } 返回FrameNode的属性实例，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1519,7 +1518,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Row.
+   * 定义Row类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1540,11 +1539,10 @@ export declare namespace typeNode {
   export function createRowNode(context: UIContext, options?: FrameNodeOptions): Row;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例，用于设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { RowAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { RowAttribute | undefined } 返回FrameNode的属性实例，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1573,7 +1571,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Stack.
+   * 定义Stack类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1594,11 +1592,10 @@ export declare namespace typeNode {
   export function createStackNode(context: UIContext, options?: FrameNodeOptions): Stack;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例，用于设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { StackAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { StackAttribute | undefined } 返回FrameNode的属性实例，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1627,7 +1624,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for GridRow.
+   * 定义GridRow类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1636,10 +1633,10 @@ export declare namespace typeNode {
   type GridRow = GridRowFrameNode;
 
   /**
-   * Create a FrameNode of GridRow type.
+   * 创建GridRow类型的FrameNode。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { GridRow } - Return GridRow type FrameNode.
+   * @param { UIContext } context - 用于创建FrameNode的UI上下文。
+   * @returns { GridRow } 返回GridRow类型的FrameNode。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1668,7 +1665,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for GridCol.
+   * 定义GridCol类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1677,10 +1674,10 @@ export declare namespace typeNode {
   type GridCol = GridColFrameNode;
 
   /**
-   * Create a FrameNode of GridCol type.
+   * 创建GridCol类型的FrameNode。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { GridCol } - Return GridCol type FrameNode.
+   * @param { UIContext } context - 用于创建FrameNode的UI上下文。
+   * @returns { GridCol } 返回GridCol类型的FrameNode。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1709,7 +1706,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Flex.
+   * 定义Flex类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1730,11 +1727,10 @@ export declare namespace typeNode {
   export function createFlexNode(context: UIContext, options?: FrameNodeOptions): Flex;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例，用于设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { FlexAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { FlexAttribute | undefined } 返回FrameNode的属性实例，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1762,7 +1758,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for RelativeContainer.
+   * 定义RelativeContainer类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1783,11 +1779,10 @@ export declare namespace typeNode {
   export function createRelativeContainerNode(context: UIContext, options?: FrameNodeOptions): RelativeContainer;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例，用于设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { RelativeContainerAttribute | undefined } - Return the attribute instance of FrameNode, and return
-   *     undefined if it does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { RelativeContainerAttribute | undefined } 返回FrameNode的属性实例，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1815,7 +1810,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Divider.
+   * 定义Divider类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1824,10 +1819,10 @@ export declare namespace typeNode {
   type Divider = DividerFrameNode;
 
   /**
-   * Create a FrameNode of Divider type.
+   * 创建Divider类型的FrameNode。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Divider } - Return Divider type FrameNode.
+   * @param { UIContext } context - 用于创建FrameNode的UI上下文。
+   * @returns { Divider } 返回Divider类型的FrameNode。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1909,7 +1904,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Blank.
+   * 定义Blank类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1918,10 +1913,10 @@ export declare namespace typeNode {
   type Blank = BlankFrameNode;
 
   /**
-   * Create a FrameNode of Blank type.
+   * 创建Blank类型的FrameNode。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Blank } - Return Blank type FrameNode.
+   * @param { UIContext } context - 用于创建FrameNode的UI上下文。
+   * @returns { Blank } 返回Blank类型的FrameNode。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

@@ -164,10 +164,11 @@ export declare interface ColumnAttribute extends CommonMethod {
      */
     default reverse(isReversed: boolean | undefined): this;
     /**
-     * Set Column options.
+     * 设置Column选项。
      *
-     * @param { ColumnOptions | ColumnOptionsV2 } [options] - Column constructor options
-     * @returns { ColumnAttribute } Returns the instance of the ColumnAttribute.
+     * @param { ColumnOptions | ColumnOptionsV2 } options - Column组件的间距配置选项。通过space属性设置纵向布局元素垂直方向间距，space支持设置number、
+     *    string或Resource类型。当需要为子组件设置固定垂直间距时传入此参数；省略时不设置子组件间距。
+     * @returns { ColumnAttribute } 返回ColumnAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
      * @stagemodelonly
@@ -228,7 +229,7 @@ export declare function Column(
 ): ColumnAttribute;
 
 /**
- * Defines the Extendable Column.
+ * 可扩展的Column组件。
  *
  * @implements ColumnAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -272,10 +273,11 @@ export declare abstract class ExtendableColumn implements ColumnAttribute {
     ): void;
     
     /**
-     * Set the Column Options.
+     * 设置Column选项。
      *
-     * @param { ColumnOptions | ColumnOptionsV2 } [options]
-     * @returns { ExtendableColumn }
+     * @param { ColumnOptions | ColumnOptionsV2 } options - Column组件的间距配置选项。通过space属性设置纵向布局元素垂直方向间距，space支持设置number、
+     *    string或Resource类型。当需要为子组件设置固定垂直间距时传入此参数；省略时不设置子组件间距。
+     * @returns { ExtendableColumn } 返回ExtendableColumn实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 staticonly

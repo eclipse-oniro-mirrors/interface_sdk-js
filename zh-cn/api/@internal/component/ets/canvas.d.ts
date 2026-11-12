@@ -585,7 +585,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
    * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -599,7 +599,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
    * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。

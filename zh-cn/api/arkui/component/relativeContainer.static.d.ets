@@ -350,7 +350,7 @@ export declare function RelativeContainer(
 ): RelativeContainerAttribute;
 
 /**
- * Defines the Extendable RelativeContainer.
+ * 可扩展的RelativeContainer组件。
  *
  * @implements RelativeContainerAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -392,9 +392,9 @@ export declare abstract class ExtendableRelativeContainer implements RelativeCon
     ): void;
 
     /**
-     * Set the RelativeContainer Options.
+     * 设置RelativeContainer选项。
      *
-     * @returns { ExtendableRelativeContainer }
+     * @returns { ExtendableRelativeContainer } 返回ExtendableRelativeContainer实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 staticonly
