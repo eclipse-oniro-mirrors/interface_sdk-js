@@ -1031,7 +1031,7 @@ declare namespace drm {
       createMediaKeySession(level: ContentProtectionLevel): MediaKeySession | undefined;
   
       /**
-       * 创建DRM解决方案默认内容保护级别的MediaKeySession实例。
+       * 创建默认内容保护级别的MediaKeySession实例。
        *
        * @returns { MediaKeySession } MediaKeySession实例。
        * @throws { BusinessError } 24700101 - All unknown errors.
@@ -1044,7 +1044,7 @@ declare namespace drm {
       createMediaKeySession(): MediaKeySession;
   
       /**
-       * 创建DRM解决方案默认内容保护级别的MediaKeySession实例。
+       * 创建默认内容保护级别的MediaKeySession实例。
        *
        * @returns { MediaKeySession | undefined } MediaKeySession实例或undefined。
        * @throws { BusinessError } 24700101 - All unknown errors.
