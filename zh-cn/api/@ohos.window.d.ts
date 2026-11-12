@@ -3206,7 +3206,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow(name: string)}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @param { AsyncCallback<Window> } callback - 回调函数。返回当前查找到的窗口对象。
@@ -3222,7 +3222,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow(name: string)}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @returns { Promise<Window> } Promise对象。返回当前查找的窗口对象。
@@ -7878,7 +7878,7 @@ declare namespace window {
      * 
      * > **说明：**
      * >
-     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing}替代。
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing()}替代。
      *
      * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示当前窗口已显示，返回false表示当前窗口未显示。
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -7893,7 +7893,7 @@ declare namespace window {
      * 
      * > **说明：**
      * >
-     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing}替代。
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing()}替代。
      *
      * @returns { Promise<boolean> } Promise对象。返回true表示当前窗口已显示，返回false表示当前窗口未显示。
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -13718,7 +13718,7 @@ declare namespace window {
 
     /**
      * 根据指定路由页面名称为当前窗口加载[命名路由](../../ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。
-     * 
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
      * 
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
@@ -13883,8 +13883,8 @@ declare namespace window {
     /**
      * 开启点击主窗三键区的关闭按钮监听事件。
      *
-     * @param { 'windowStageClose' } eventType - 固定为'windowStageClose'，即主窗口标题栏关闭按钮的点击事件。
-     * @param { Callback<void> } callback - 回调函数。回调函数内部逻辑需要有boolean类型的返回值，
+     * @param { 'windowStageClose' } eventType 固定为'windowStageClose'，即主窗口标题栏关闭按钮的点击事件。
+     * @param { Callback<void> } callback 回调函数。回调函数内部逻辑需要有boolean类型的返回值，
      *     该返回值决定当前主窗口是否继续关闭。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
@@ -14096,7 +14096,7 @@ declare namespace window {
      * 设置主窗口的模态属性是否启用。
      *
      * @param { boolean } isModal - 设置主窗口模态属性是否启用，true为启用，false为不启用。
-     * @returns { Promise<void> } - 无返回结果的Promise对象。
+     * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
