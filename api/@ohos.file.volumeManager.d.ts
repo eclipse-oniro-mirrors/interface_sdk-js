@@ -1333,6 +1333,134 @@ declare namespace volumeManager {
    * @since 26.0.1 dynamic&static
    */
   function getExternalVolumeInfos(): Promise<Array<ExternalVolumeInfo>>;
+
+  /**
+   * Local disk hardware information.
+   *
+   * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @since 26.1.0 dynamic&static
+   */
+  export interface LocalDiskInfo {
+    /**
+     * Physical path of the disk device node, e.g. /sys/block/nvme0n1.
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    sysPath: string;
+
+    /**
+     * Disk model string defined by the manufacturer.
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    model: string;
+
+    /**
+     * User-friendly disk description. The value is the same as the model field.
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    description: string;
+
+    /**
+     * Total size of the disk. Unit: Byte.
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    size: long;
+
+    /**
+     * Disk media type.
+     *
+     * **1**: SSD (Solid State Drive).
+     * **2**: HDD (Hard Disk Drive).
+     * **255**: Unknown.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    mediaType: int;
+
+    /**
+     * Disk running state. Values include "live", "connecting", "resetting", "dead".
+     *
+     * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @since 26.1.0 dynamic&static
+     */
+    state: string;
+  }
+
+  /**
+   * Obtains hardware information about all local disks. This API uses a promise to return the result.
+   * Only supported on PC products.
+   *
+   * @permission ohos.permission.GET_STORAGE_VOLUME_INFO
+   * @returns { Promise<Array<LocalDiskInfo>> } Promise used to return the hardware information of all local disks.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 13600001 - IPC error.
+   * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getLocalDiskInfos(): Promise<Array<LocalDiskInfo>>;
+
+  /**
+   * Obtains the serial number of the specified disk. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.ACCESS_DISK_PHY_INFO
+   * @param { string } sysPath - Physical path of the disk device node, e.g. /sys/block/nvme0n1.
+   * @returns { Promise<string> } Promise used to return the disk serial number.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 13600001 - IPC error.
+   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
+   * @throws { BusinessError } 13600002 - The file system is not supported.
+   * @throws { BusinessError } 13600008 - The object does not exist.
+   * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getDiskSerialNumber(sysPath: string): Promise<string>;
+
+  /**
+   * Obtains the number of complete power cycle count of the specified disk since manufacturing.
+   * This API uses a promise to return the result. Returns 0 if the ioctl fails (e.g., SATA HDD not supported).
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_DISK
+   * @param { string } sysPath - Physical path of the disk device node, e.g. /sys/block/nvme0n1.
+   * @returns { Promise<int> } Promise used to return the power cycle count.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 13600001 - IPC error.
+   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
+   * @throws { BusinessError } 13600002 - The file system is not supported.
+   * @throws { BusinessError } 13600008 - The object does not exist.
+   * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getDiskPowerCycleCount(sysPath: string): Promise<int>;
+
+  /**
+   * Obtains the total power-on hours of the specified disk since manufacturing.
+   * This API uses a promise to return the result. Returns 0 if the ioctl fails (e.g., SATA HDD not supported).
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_DISK
+   * @param { string } sysPath - Physical path of the disk device node, e.g. /sys/block/nvme0n1.
+   * @returns { Promise<int> } Promise used to return the power-on hours.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 13600001 - IPC error.
+   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
+   * @throws { BusinessError } 13600002 - The file system is not supported.
+   * @throws { BusinessError } 13600008 - The object does not exist.
+   * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getDiskPowerOnHours(sysPath: string): Promise<int>;
 }
 
 export default volumeManager;
