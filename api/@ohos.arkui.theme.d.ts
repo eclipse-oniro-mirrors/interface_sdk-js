@@ -42,6 +42,7 @@ export declare interface Theme {
 
 /**
  * Defines the color resources of a theme.
+ * <!--RP1--><!--RP1End-->
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

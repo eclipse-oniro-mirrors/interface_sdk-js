@@ -110,13 +110,9 @@ declare namespace uiAppearance {
    * 获取系统当前的深浅色模式配置。适用于需要根据系统外观模式动态适配应用UI主题的场景，例如应用内实现深色/浅色主题风格自动切换。
    *
    * <!--Del-->
-   *
    * > **说明：**
-   *
-   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请
-   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
-   * > 权限。
-   *
+   * >
+   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请[ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)权限。
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 10 - 19]
@@ -153,13 +149,9 @@ declare namespace uiAppearance {
    * 获取系统当前的字体大小缩放比例。该比例为系统设置中用户配置的字体大小相对于默认字体大小的倍数，取值范围请参考系统字体大小设置。开发者可基于该比例值调整应用内字体大小，以适配用户的字体偏好设置。
    *
    * <!--Del-->
-   *
    * > **说明：**
-   *
-   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请
-   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
-   * > 权限。
-   *
+   * >
+   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请[ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)权限。
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 12 - 19]
@@ -194,13 +186,9 @@ declare namespace uiAppearance {
    * 获取系统当前的字体粗细缩放比例。该比例为系统设置中用户配置的字体粗细相对于默认字体粗细的倍数，取值范围请参考系统字体粗细设置。开发者可基于该比例值调整应用内字体粗细，以适配用户的字体粗细偏好设置。
    *
    * <!--Del-->
-   *
    * > **说明：**
-   *
-   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请
-   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
-   * > 权限。
-   *
+   * >
+   * > 该接口在API version 19及之前版本中为系统接口。开发者使用该接口时需要申请[ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)权限。
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 12 - 19]

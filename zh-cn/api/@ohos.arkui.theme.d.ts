@@ -42,6 +42,7 @@ export declare interface Theme {
 
 /**
    * 主题颜色资源。
+   * <!--RP1--><!--RP1End-->
    *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
