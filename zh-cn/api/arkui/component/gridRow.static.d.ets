@@ -345,15 +345,15 @@ export declare interface GridRowAttribute extends CommonMethod {
      */
     default alignItems(value: ItemAlign | undefined): this;
     /**
- 	 * Set GridRow options.
- 	 *
- 	 * @param { GridRowOptions } [options] - GridRow constructor options
- 	 * @returns { GridRowAttribute } Returns the instance of the GridRowAttribute.
+     * 设置GridRow选项。
+     *
+     * @param { GridRowOptions } options - 栅格行布局选项，包含columns、gutter、breakpoints等布局属性。不传入时使用各属性默认值。
+     * @returns { GridRowAttribute } 返回GridRowAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setGridRowOptions(options?: GridRowOptions): this;
     /**
      * 设置组件的动态属性。

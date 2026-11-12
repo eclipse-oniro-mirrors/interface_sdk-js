@@ -136,7 +136,11 @@ import { AlertDialogParamWithConfirm, AlertDialogParamWithButtons, AlertDialogPa
 import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui.component';
 
 /**
- * class MediaQuery
+ * 提供根据不同媒体类型定义不同的样式。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMediaQuery()]{@link getMediaQuery}方法获取MediaQuery实例，再通过此实例调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -144,10 +148,10 @@ import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui
  */
 export declare class MediaQuery {
   /**
-   * Sets the media query criteria and returns the corresponding listening handle
+   * 设置媒体查询的查询条件，并返回对应的监听句柄。
    *
-   * @param { string } condition - media conditions
-   * @returns { mediaQuery.MediaQueryListener } the corresponding listening handle
+   * @param { string } condition - 媒体查询的匹配条件，具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
+   * @returns { mediaQuery.MediaQueryListener } 媒体事件监听句柄，用于注册和去注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3956,9 +3960,9 @@ export declare class UIContext {
   isAvailable(): boolean;
 
   /**
-   * get object mediaQuery.
+   * 获取MediaQuery对象。
    *
-   * @returns { MediaQuery } object MediaQuery.
+   * @returns { MediaQuery } MediaQuery实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

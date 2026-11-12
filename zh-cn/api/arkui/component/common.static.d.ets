@@ -164,8 +164,7 @@ export declare interface TextDecorationOptions {
     thicknessScale?: double;
 }
 /**
- * Provides an interface for the style of an divider including stroke width, color, start margin
- * and end margin
+ * 分割线样式对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -173,7 +172,13 @@ export declare interface TextDecorationOptions {
  */
 export declare interface DividerStyle {
     /**
-     * Define the stroke width of the divider
+     * 分割线的线宽（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -181,7 +186,9 @@ export declare interface DividerStyle {
      */
     strokeWidth: Length | undefined;
     /**
-     * Define the color of the divider
+     * 分割线的颜色。
+     *
+     * 默认值：#33182431
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -189,7 +196,13 @@ export declare interface DividerStyle {
      */
     color?: ResourceColor;
     /**
-     * Define the start margin of the divider
+     * 分割线与侧边栏顶端的距离（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -198,7 +211,13 @@ export declare interface DividerStyle {
      */
     startMargin?: Length;
     /**
-     * Define the end margin of the divider
+     * 分割线与侧边栏底端的距离（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4329,7 +4348,7 @@ export declare enum SafeAreaType {
     KEYBOARD = 2
 }
 /**
- * Enumerates the safe area edges.
+ * 扩展安全区域的边缘。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4338,7 +4357,7 @@ export declare enum SafeAreaType {
  */
 export declare enum SafeAreaEdge {
     /**
-     * Top edge.
+     * 上方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4346,7 +4365,7 @@ export declare enum SafeAreaEdge {
      */
     TOP = 0,
     /**
-     * Bottom edge.
+     * 下方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4354,7 +4373,7 @@ export declare enum SafeAreaEdge {
      */
     BOTTOM = 1,
     /**
-     * Start edge.
+     * 前部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4362,7 +4381,7 @@ export declare enum SafeAreaEdge {
      */
     START = 2,
     /**
-     * End edge.
+     * 尾部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4539,7 +4558,7 @@ export declare enum LayoutSafeAreaType {
     SYSTEM = 0
 }
 /**
- *  Define the edges for expanding the safe area in layout.
+ * 扩展安全区域的边缘。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4548,7 +4567,7 @@ export declare enum LayoutSafeAreaType {
  */
 export declare enum LayoutSafeAreaEdge {
     /**
-     * Top edge.
+     * 上方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4556,7 +4575,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     TOP = 0,
     /**
-     * Bottom edge.
+     * 下方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4564,7 +4583,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     BOTTOM = 1,
     /**
-     * Start edge of the safe area.
+     * 前部区域。LTR模式时表示左侧区域，RTL模式表示右侧区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4572,7 +4591,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     START = 2,
     /**
-     * End edge of the safe area.
+     * 尾部区域。LTR模式时表示右侧区域，RTL模式表示左侧区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4580,7 +4599,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     END = 3,
     /**
-     * Vertical edge of the safe area.
+     * 垂直区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4588,7 +4607,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     VERTICAL = 4,
     /**
-     * Horizontal edge of the safe area.
+     * 水平区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4596,7 +4615,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     HORIZONTAL = 5,
     /**
-     * All edges of the safe area.
+     * 全部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4845,7 +4864,27 @@ export declare interface BorderImageOption {
     fill?: boolean;
 }
 /**
- * Defines the policy of Layout
+ * 用于组件宽度和高度的布局策略。提供matchParent、wrapContent、fixAtIdealSize三种布局策略选项，分别用于组件自适应父组件布局、根据内容自适应但不超过父组件尺寸、根据内容自适应且可超过父组件尺寸的场景。
+ *
+ * > **说明：**
+ * >
+ * > - LayoutPolicy支持设置三种布局策略：matchParent（自适应父组件布局）、wrapContent（根据内容自适应但不超过父组件尺寸的布局）和fixAtIdealSize（根据内容自适应，可能超过父组件尺寸的布局
+ * > ）。具体示例代码参见[设置布局策略](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-size.md#示例5设置布局策略)。
+ * >
+ * > - wrapContent和fixAtIdealSize场景，组件无法通过内容确定大小时，如果组件大小有默认值，则按照默认值进行测算，组件最终以默认大小显示；如果没有默认值，则按照宽高(0,0)进行测算，组件最终以零尺寸显示。
+ * >
+ * > - 容器设置wrapContent，并且有子组件设置matchParent时（包括仅一边设置matchParent），容器先由确定大小的子组件撑大，设置matchParent的子组件再匹配容器大小；如果没有确定大小的子组件，容器和
+ * > 子组件大小均为0。
+ * >
+ * > - LayoutPolicy的设置会被constraintSize约束，即当同时设置LayoutPolicy和constraintSize时，constraintSize的约束优先生效。
+ * >
+ * > - 从API version 15开始，仅Row和Column组件的width和height属性支持设置LayoutPolicy类型参数，其他组件设置LayoutPolicy类型参数后与不设置宽度或高度表现一致；从API
+ * > version 20开始，所有基础组件均支持设置LayoutPolicy类型参数。
+ * >
+ * > - 当Row、Column、Flex组件主轴尺寸自适应子组件，且子组件A仅交叉轴设置matchParent时，API版本26.0.0之前，子组件A不参与Row、Column、Flex组件的主轴尺寸测量过程，此时Row、Column
+ * > 、Flex组件主轴方向不自适应子组件A的尺寸；从API版本26.0.0开始，子组件A会参与Row、Column、Flex组件的主轴尺寸测量过程，此时Row、Column、Flex组件主轴方向会自适应子组件A的尺寸。交叉轴方向同理。
+ * > 具体变更效果参见
+ * > [示例6（子组件单方向设置matchParent效果）](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-size.md#示例6子组件单方向设置matchparent效果)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4853,7 +4892,7 @@ export declare interface BorderImageOption {
  */
 export declare class LayoutPolicy {
     /**
-     * The component fills its parent which means its size is as large as its parent.
+     * 当前组件自适应父组件布局时，其大小与父组件内容区相等，不包括padding，border和safeAreaPadding。适用于需要组件填满父容器内容区的场景，例如列表项、卡片容器等。
      *
      * @readonly
      * @static
@@ -4864,8 +4903,7 @@ export declare class LayoutPolicy {
     static readonly matchParent: LayoutPolicy;
 
     /**
-     * The component fills its content which means its size is as large as its children but it is constained by its
-     *     parent.
+     * 当前组件自适应子组件（内容）时，其大小与子组件（内容）相等，并且其大小受父组件内容区大小约束。适用于需要根据内容自动调整大小但不能超出父容器的场景，例如文本容器、弹窗内容区等。
      *
      * @readonly
      * @static
@@ -4876,7 +4914,7 @@ export declare class LayoutPolicy {
     static readonly wrapContent: LayoutPolicy;
 
     /**
-     * The component fills its content which means its size is as large as its children.
+     * 当前组件自适应子组件（内容）时，其大小与子组件（内容）相等，并且其大小不受父组件内容区大小约束。适用于需要根据内容自动调整大小且可以超出父容器的场景，例如悬浮提示、下拉菜单等。
      *
      * @readonly
      * @static
@@ -11441,26 +11479,28 @@ export declare type CustomProperty = undefined | null | Object | Record<string, 
  */
 export declare interface CommonMethod {
     /**
-     * Sets the width of the component or its horizontal layout policy. By default, the
-     * component uses the width required for its content. If the width of the component is
-     * greater than that of the parent container, the component will be drawn beyond the
-     * parent container scope.
+     * 设置组件自身的宽度或水平方向布局策略，缺省时使用子组件自身内容需要的宽度。若子组件的宽大于父组件的宽，则子组件会溢出显示在父组件外部。
      *
-     * @param { Length | LayoutPolicy | undefined } widthValue
-     * @returns { this }
+     * 从API version 15开始，当参数为Length类型时，该接口支持calc计算特性。
+     *
+     * @param { Length | LayoutPolicy | undefined } widthValue - 要设置的组件宽度或水平方向布局策略。
+     *    <br>单位：vp
+     *    <br>设置百分比时，以父容器的宽度作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default width(widthValue: Length | LayoutPolicy | undefined): this;
     /**
-     * Sets the height of the component or its vertical layout policy. By default, the
-     * component uses the height required for its content. If the height of the component
-     * is greater than that of the parent container, the component will be drawn beyond
-     * the parent container scope.
+     * 设置组件自身的高度或垂直方向布局策略，缺省时使用子组件自身内容需要的高度。若子组件的高大于父组件的高，则子组件会溢出显示在父组件外部。
      *
-     * @param { Length | LayoutPolicy | undefined } heightValue
-     * @returns { this }
+     * 从API version 15开始，当参数为Length类型时，该接口支持calc计算特性。
+     *
+     * @param { Length | LayoutPolicy | undefined } heightValue - 要设置的组件高度或垂直方向布局策略。
+     *    <br>单位：vp
+     *    <br>设置百分比时，以父容器的高度作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11491,26 +11531,68 @@ export declare interface CommonMethod {
      */
     default customProperty(name: string, value: CustomProperty): this;
     /**
-     * Sets the safe area to be expanded to.
-     * <br>default:{types: [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD],
-     * edges: [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]}
+     * 控制组件扩展其安全区域，实现沉浸式效果。
      *
-     * @param { Array<SafeAreaType> } [types] - Indicates the types of the safe area.
-     * @param { Array<SafeAreaEdge> } [edges] - Indicates the edges of the safe area.
-     * @returns { this } The component instance.
+     * >  **说明：**
+     * >
+     * > - 设置expandSafeArea属性进行组件绘制扩展时，建议组件尺寸不要设置固定宽高（百分比除外），当设置固定宽高（包括设置'auto'）时，扩展安全区域的方向只支持[SafeAreaEdge.TOP,
+     * SafeAreaEdge.START]，扩展后的组件尺寸保持不变。
+     * >
+     * > - 安全区域不会限制内部组件的布局和大小，不会裁剪内部组件。
+     * >
+     * > - 当父容器为滚动容器时，组件设置expandSafeArea属性后，自身不会延伸，但仍可触发其子节点中设置了expandSafeArea的延伸范围更新。
+     * >
+     * > - 设置expandSafeArea()时，不传参，走默认值处理；设置expandSafeArea([],[])时，相当于入参是空数组，此时expandSafeArea属性设置无效。
+     * >
+     * > - 组件设置expandSafeArea生效的条件为：
+     * >  1.type为SafeAreaType.KEYBOARD时默认生效，表现为组件不避让键盘。<br/>
+     * >  2.设置其他type，组件的边界与安全区域重合时组件能够延伸到安全区域下。例如：设备顶部状态栏高度100，那么组件在屏幕中的绝对位置需要为0 <= y <= 100。
+     * >
+     * > - 组件延伸到避让区时，在避让区的事件如点击事件等可能会被系统拦截，优先给状态栏等系统组件响应。
+     * >
+     * > - 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，
+     * 否则expandSafeArea属性在滚动后可能会失效，写法参考[示例7](#示例7滚动类容器扩展安全区)。
+     * >
+     * > - expandSafeArea属性仅作用于当前组件，不会向父组件或子组件传递，因此使用过程中，所有相关组件均需配置。
+     * >
+     * > - 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。
+     * 对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置expandSafeArea属性将不生效，如弹窗和半模态组件。
+     * >
+     * > - 对于expandSafeArea属性无法生效的场景，若要将组件部署在避让区，需要手动调整组件的坐标。
+     *
+     * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。默认值包含SafeAreaType.CUTOUT，
+     *    但未添加[Metadata](docroot:../../apis-ability-kit/js-apis-bundleManager-metadata.md)配置项时，页面不避让挖孔，CUTOUT类型不生效。
+     *    <br>默认值：[SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD]
+     *    <br>非法值：按默认值处理。
+     * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘，默认扩展至所有避让区域。
+     *    <br>默认值：[SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
+     *    <br>非法值：按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default expandSafeArea(types?: Array<SafeAreaType>, edges?: Array<SafeAreaEdge>): this;
     /**
-     * Expands the layout safe area of a component.
+     * 扩展组件布局时的安全区。
      *
-     * @param { Array<LayoutSafeAreaType> | undefined } [types] - The region type to expand the component's layout safe area into.
-     *     The default value is LayoutSafeAreaType.SYSTEM.
-     * @param { Array<LayoutSafeAreaEdge> | undefined } [edges] - The set of edges for which to ignore layout safe area.
-     *     The default value is LayoutSafeAreaEdge.ALL.
-     * @returns { this }
+     * >  **说明：**
+     * >
+     * >
+     * 忽略布局安全区边缘的组件，如果其宽度或高度设置了 [LayoutPolicy.matchParent]{@link LayoutPolicy.matchParent}，其大小和位置都会改变，否则仅改变
+     * 其位置。
+     * >
+     * > 依据safeAreaPadding累积功能，组件可扩展其安全区边缘到所有能感知的连续安全区域。
+     * >
+     * > 滚动类组件的子元素忽略布局安全区边缘时在滚动方向不考虑滚动组件自身及其父组件的安全区域，包括：List、ArcListItem、Grid、WaterFlow、Swiper和Tabs。
+     * >
+     * > 忽略布局安全区属性.ignoreLayoutSafeArea和忽略渲染安全区属性.expandSafeArea都设置时，.ignoreLayoutSafeArea先生效，.expandSafeArea在前者基础上再生效。
+     *
+     * @param { Array<LayoutSafeAreaType> | undefined } types - 扩展布局安全区域的类型。<br
+     *    />默认值：[LayoutSafeAreaType.SYSTEM]，扩展至所有安全区域，比如：状态栏，导航栏和组件级安全区（safeAreaPadding）。<br/>非法值：按默认值处理。
+     * @param { Array<LayoutSafeAreaEdge> | undefined } edges - 扩展布局安全区的边缘，并且支持镜像能力。<br />默认值：[LayoutSafeAreaEdge.ALL]，扩展组件所有边缘。<br
+     *    />非法值：按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11547,33 +11629,49 @@ export declare interface CommonMethod {
     */
     default responseRegionList(regions: Array<ResponseRegion> | undefined): this;
     /**
-     * Sets the size of the component.
+     * 设置组件自身的宽高尺寸。设置后会影响组件在父容器中的布局和显示大小。
      *
-     * @param { SizeOptions | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { SizeOptions | undefined } value - 设置宽高尺寸。
+     *    <br>异常值：参数为undefined时，属性设置不生效；其它异常值时，size属性恢复到不配置时的默认行为。
+     *    <br>单位：vp
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default size(value: SizeOptions | undefined): this;
     /**
-     * Sets the constraint size of the component, which is used to limit the size range during component layout.
-     * Default value: **{minWidth: 0, maxWidth: Infinity, minHeight: 0, maxHeight: Infinity}**.
+     * 设置约束尺寸，组件布局时进行尺寸范围限制。设置后组件的宽度和高度将被限制在指定的最小值和最大值范围内，constraintSize的优先级高于width和height属性。
      *
-     * @param { ConstraintSizeOptions | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { ConstraintSizeOptions | undefined } value - 设置约束尺寸。constraintSize的优先级高于
+     *    [width]{@link CommonMethod#width(value: Length)}和[height]{@link CommonMethod#height(value: Length)}。取值结果参考
+     *    constraintSize取值对width/height影响。
+     *    <br>默认值：
+     *    <br>{
+     *    <br>minWidth: 0,
+     *    <br>maxWidth: Infinity,
+     *    <br>minHeight: 0,
+     *    <br>maxHeight: Infinity
+     *    <br>}
+     *    <br>异常值：数值开头的字符串仅解析出数字部分，非数值开头的字符串解析为0；其它异常值时，constraintSize属性恢复到不配置时的默认行为。
+     *    <br>单位：vp
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default constraintSize(value: ConstraintSizeOptions | undefined): this;
     /**
-     * Sets how the component behaves during hit testing.
+     * 设置组件的触摸测试类型。如果组件不设置hitTestBehavior，其默认触摸测试类型为HitTestMode.Default。
      *
-     * @param { HitTestMode | undefined } value - the hit test mode.
+     * @param { HitTestMode | undefined } value - 设置当前组件的触摸测试类型。
      * @default HitTestMode.default - Both the node and its child nodes respond to the hit test of a touch event,
      *     but its sibling nodes are blocked from the hit test. The hit test for ancestor nodes is not affected.
-     * @returns { this }
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11606,46 +11704,69 @@ export declare interface CommonMethod {
      */
     default onChildTouchTest(event: ((value: Array<TouchTestInfo>) => TouchResult) | undefined): this;
     /**
-     * Sets the weight of the component during layout. A component with this attribute is allocated space
-     * along the main axis of its parent container (Row, Column, or Flex) based on its specified weight.
-     * Default value: **0**.
+     * 设置组件的布局权重，使组件在父容器（[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}）的主轴方向按照权重分配尺寸。适用于父容器尺寸确定、需要多个子组件
+     * 按比例分配剩余空间的场景。
      *
-     * @param { double | string | undefined } value
-     * @returns { this }
+     * @param { double | string | undefined } value - 父容器尺寸确定时，不设置layoutWeight属性或者layoutWeight属性生效值为0的子组件优先占位，这些子组件占位后在主轴留下的空间称为主轴剩余空
+     *    间。设置了layoutWeight属性且layoutWeight属性生效值大于0的子组件会从主轴剩余空间中按照各自所设置的权重占比分配尺寸，分配时会忽略子组件本身的width/height设置，但保留minWidth/
+     *    minHeight约束。
+     *    <br>默认值：0
+     *    <br>取值范围：[0, +∞)
+     *    <br>超出范围时：传入小于0的值时，按0处理。
+     *    <br>**说明：**
+     *    <br>仅在[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}布局中生效。
+     *    <br>可选值为大于等于0的数字，或者可以转换为数字的字符串（支持整数、小数格式）。
+     *    <br>如果容器中有子组件设置了layoutWeight属性，且设置的属性值大于0，则所有子组件不会再基于[flexShrink]{@link CommonMethod#flexShrink}和
+     *    [flexGrow]{@link CommonMethod#flexGrow}布局。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default layoutWeight(value: double | string | undefined): this;
     /**
-     * Sets the weight of the component in a chain, which is used to re-lay out components that form the chain.
-     * <br>This API has effect only when the parent container is RelativeContainer.
+     * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效。
      *
-     * @param { ChainWeightOptions | undefined } chainWeight
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > 从API version 23开始，支持 [attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。
+     *
+     * @param { ChainWeightOptions | undefined } chainWeight - 设置了chainWeight属性的组件与同一条链上的兄弟组件在水平或竖直方向的尺寸会按照设置的权重进行分配，分配时会忽略组件本身尺寸设置，按分配的权重自适应占满剩余空间。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default chainWeight(chainWeight: ChainWeightOptions | undefined): this;
     /**
-     * Sets the padding of the component.
-     * Default value: **0**.
+     * 设置组件的内边距属性。设置后会在组件内容和边框之间创建额外空间，影响组件内部内容的布局区域。
      *
-     * @param { Padding | Length | LocalizedPadding | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { Padding | Length | LocalizedPadding | undefined } value - 设置组件的内边距。
+     *    <br>参数为Length类型时，四个方向内边距同时生效。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>padding设置百分比时，上下左右内边距均以父容器的width作为基础值。 [since 12]
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default padding(value: Padding | Length | LocalizedPadding | undefined): this;
     /**
-     * Sets the safe area padding. It enables a container to add a component-level
-     * safe area for child components to expand into.
-     * Default value: **LengthMetrics.vp(0)**
+     * 设置安全区边距属性。允许容器向自身添加组件级安全区域，供子组件延伸，支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。与padding不同，
+     * safeAreaPadding用于设置组件级安全区域供子组件延伸使用，而padding用于设置组件内容区域的内边距，两者可同时设置、分别生效。
      *
-     * @param { Padding | LengthMetrics | LocalizedPadding | undefined } paddingValue - Indicates safeArea padding values
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+     *
+     * @param { Padding | LengthMetrics | LocalizedPadding | undefined } paddingValue - 设置组件的安全区边距，用于在组件内部创建组件级安全区域供子组件延伸使用。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>paddingValue设置百分比时，上下左右内边距均以父容器的width作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11670,11 +11791,19 @@ export declare interface CommonMethod {
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
-     * Sets the margin of the component.
-     * Default value: **0**.
+     * 设置组件的外边距属性。在计算位置时外边距视为组件大小的一部分，从而影响组件位置。
      *
-     * @param { Margin | Length | LocalizedMargin | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { Margin | Length | LocalizedMargin | undefined } value - 设置组件的外边距。
+     *    <br>参数为Length类型时，四个方向外边距同时生效。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}交叉轴上布
+     *    局时，子组件在交叉轴方向占用的空间包含子组件本身尺寸和margin值。
+     *    <br>例如Column容器宽100，其中子组件宽50，margin left为10，right为20，子组件宽度与左右margin之和为50+10+20=80，小于容器宽度100，子组件在交叉轴方向居中对齐，此时水平方向
+     *    左侧和右侧各有(100-80)/2=10的空白区域。 [since 12]
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11702,11 +11831,23 @@ export declare interface CommonMethod {
      */
     default backgroundColor(value: ResourceColor | ColorMetrics | undefined): this;
     /**
-     * Sets the pixel rounding policy for the current component in the specified direction.
-     * <br>If a direction is not set, the pixels are rounded to the nearest whole number in that direction.
+     * 指定当前组件在指定方向上的像素取整对齐方式，使用后组件边界坐标将按指定策略取整，从而避免因浮点数绘制产生的视觉异常（如1px缝隙、组件重叠、分割线消失）。从API version 12开始，某方向不设置时默认在该方向进行四舍五入取整。
      *
-     * @param { PixelRoundPolicy | undefined } value - indicates the rounding policy for the bounds of the component.
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > - 在API version 11，本接口采用半像素对齐方式（即0\~0.25取0，0.25\~0.75取0.5，0.75\~1.0取1）。该方式通过保留0.5像素值来减少连续取整可能带来的累积误差。从API version 12开始，未设置取整策略的方向默认采用四舍五入的取整方式，并支持通过PixelRoundCalcPolicy.NO_FORCE_ROUND关闭指定方向的像素取整。
+     * >
+     * > - 从API version12开始，该接口支持在[attributeModifier](ts-universal-attributes-attribute-modifier.md#attributemodifier)中调用。
+     *
+     * 正常计算时，上下方向与组件高度相对应，左右方向（镜像的起始方向称为左）与宽度相对应。为方便描述将两组方向称为左上和右下。
+     *
+     * - 计算当前组件左上角坐标： 左上角相对父容器偏移量。
+     * - 计算当前组件右下角坐标： 左上角相对于父容器偏移量 + 组件自身尺寸。
+     * - 重新计算当前组件尺寸： 右下角坐标四舍五入取整 - 左上角坐标四舍五入取整（API version 11采用半像素对齐方式，API version 12采用四舍五入方式）。
+     *
+     * @param { PixelRoundPolicy | undefined } value - 指定当前组件边界取整策略。[PixelRoundPolicy]{@link PixelRoundPolicy}包含start、top、end、bottom四个可选属性，分别对应组件前部、上部、尾部、底部边界。每个属性可设置[PixelRoundCalcPolicy]{@link PixelRoundCalcPolicy}枚举值。设置PixelRoundCalcPolicy.NO_FORCE_ROUND可关闭对应方向上的像素取整，未设置的属性默认按四舍五入规则取整。
+     *    <br>**说明：**<br/>该属性用于因浮点数绘制产生视觉异常的场景。取整结果不仅和组件的宽高有关，也与组件的位置有关。即使设置组件的宽高相同，由于以浮点数描述的组件位置不同，舍入后组件的最终宽高也可能不同。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12879,10 +13020,12 @@ export declare interface CommonMethod {
      */
     default alignSelf(value: ItemAlign | undefined): this;
     /**
-     * Defines the align rules of child component in Stack container.
+     * 单独设置Stack组件中子组件的对齐规则，仅当父组件为Stack时生效。与align属性同时使用时，layoutGravity优先级更高，支持[attributeModifier]{@link
+     * attributeModifier}动态设置属性方法。
      *
-     * @param { LocalizedAlignment | undefined } alignment
-     * @returns { this }
+     * @param { LocalizedAlignment | undefined } alignment - 指定设置在Stack组件中子组件的对齐规则。<br/>默认值：LocalizedAlignment.CENTER
+     *    。说明：当传入异常值时，按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12921,56 +13064,96 @@ export declare interface CommonMethod {
      */
     default sharedTransition(id: string | undefined, options?: sharedTransitionOptions): this;
     /**
-     * Sets how elements are laid out along the main axis of the container.
-     * Default value: **Direction.Auto**.
+     * 设置当前组件绘制区域内主轴方向上的布局，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Direction | undefined } value
-     * @returns { this }
+     * @param { Direction | undefined } value - 设置当前组件绘制区域内主轴方向上的布局。<br/>属性配置为auto的时候，按照系统语言方向进行布局。<br/>该属性在Column组件上不生效。<br/>默认值：Direction.Auto
+     *    <br/>direction取undefined或null时按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default direction(value: Direction | undefined): this;
     /**
-     * Sets the alignment mode of the component content in the drawing area.
-     * Default value: **Alignment.Center**.
+     * 设置当前组件绘制区域内的子组件的对齐方式，增加支持镜像的能力，支持[attributeModifier]{@link attributeModifier}。
      *
-     * @param { Alignment | LocalizedAlignment | undefined } alignment
-     * @returns { this }
+     * @param { Alignment | LocalizedAlignment | undefined } alignment - 设置当前组件绘制区域内的子组件的对齐方式，增加支持镜像的能力。<br/>[LocalizedAlignment]{@link LocalizedAlignment}只在[Shape]{@link Shape},
+     *    [Button]{@link Button},
+     *    [GridItem]{@link GridItem},
+     *    [FlowItem]{@link FlowItem},
+     *    [ImageAnimator]{@link ImageAnimator},
+     *    [LoadingProgress]{@link LoadingProgress},
+     *    [PatternLock]{@link PatternLock},
+     *    [Progress]{@link Progress},
+     *    [QRCode]{@link QRCode},
+     *    [TextClock]{@link TextClock},
+     *    [TextTimer]{@link TextTimer},
+     *    [StepperItem]{@link StepperItem},
+     *    [MenuItem]{@link MenuItem},
+     *    [Toggle]{@link MenuItem},
+     *    [Checkbox]{@link Checkbox}, and
+     *    [ListItem]{@link
+     *    ListItem}中有效果。<br/>其中，除ListItem与Alignment的效果保持一致以外，其他组件镜像切换均生效；其他设置LocalizedAlignment无效果的组件按其默认效果显示。<br/>默认值：Al
+     *    ignment.Center、LocalizedAlignment.CENTER<br/>设置异常值按默认值处理，效果为居中显示。<br/>**说明：**
+     *    <br/>Alignment类型不支持镜像能力；LocalizedAlignment类型支持镜像能力，选择LocalizedAlignment中的枚举值，根据direction或系统语言方向的改变实现镜像切换。其中dire
+     *    ction的优先级高于系统语言方向，当设置direction且不为auto时，LocalizedAlignment的镜像按照direction进行布局；当设置direction为auto或未设置时，LocalizedAli
+     *    gnment的镜像按照系统语言方向进行布局。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default align(alignment: Alignment | LocalizedAlignment | undefined): this;
     /**
-     * Sets the absolute position of the component relative to the position of the parent component.
-     * <br>The attribute is not available for a layout container whose width and height are zero.
+     * 绝对定位，确定子组件相对父组件内容区的位置，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | Edges | LocalizedEdges | undefined } value
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > - position对位置的影响作用在组件的尺寸测量完成之后。
+     * > - 当父组件为[Row]{@link @global:Row}、[Column]{@link @global:Column}或[Flex]{@link
+     * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
+     * > -
+     * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
+     * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
+     * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
+     * > - 本属性不支持在宽高为零的布局组件上设置。
+     * > - 当父组件为[RelativeContainer]{@link @global:RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+     * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
+     *
+     * @param { Position | Edges | LocalizedEdges | undefined } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
+     *    父组件大小减去[border]{@link border}、[padding]{@link padding}、[safeAreaPadding]{@link safeAreaPadding}后提供给子组件可布局的内容区域大小。
+     *    <br/>设置异常值时该属性不生效。[since 12].
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default position(value: Position | Edges | LocalizedEdges | undefined): this;
     /**
-     * Sets the anchor for locating the component, which is used to move the component
-     * further away from the position specified by position or offset.
+     * 设置元素在位置定位时的锚点，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | LocalizedPosition | undefined } value
-     * @returns { this }
+     * @param { Position | LocalizedPosition | undefined } value - 设置元素在位置定位时的锚点，基于position或offset的初始位置，进行进一步的偏移调整。
+     *    <br/>设置.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})，效果等于设置.position({x: value1 - value3, y: value2 - value4})，offset同理。
+     *    <br/>单独设置.markAnchor({x: value1, y: value2})，效果等于设置.offset({x: -value1, y: -value2})。
+     *    <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+     *    <br/>API version 10：无默认值。
+     *    <br/>设置异常值时该属性不生效。 [since 12]
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default markAnchor(value: Position | LocalizedPosition | undefined): this;
     /**
-     * Sets the offset of the component relative to its original position.
-     * <br>The offset attribute does not affect the layout of the parent container.
-     * It adjusts the component position only during drawing.
+     * 相对偏移，组件相对原本的布局位置进行偏移。和position一起使用时，position生效，offset不生效，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | Edges | LocalizedEdges | undefined } value
-     * @returns { this }
+     * @param { Position | Edges | LocalizedEdges | undefined } value - 相对偏移，组件基于原本的布局位置进行偏移。offset属性不影响父组件布局，仅在绘制时调整位置。
+     *    <br/>Position类型基于组件自身左上角偏移，Edges类型基于组件自身四边偏移。 offset属性设置{x: x, y: y}与设置{left: x, top: y}以及{right: -x, bottom: -y}效果相同，类型LocalizedEdges支持镜像模式：LTR模式下start等同于x，RTL模式下start等同于-x。
+     *    <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+     *    <br/>默认单位：vp
+     *    <br/>API version 10：无默认值。
+     *    <br/>设置异常值时该属性不生效。[since 12]
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12988,28 +13171,21 @@ export declare interface CommonMethod {
      */
     default enabled(value: boolean | undefined): this;
     /**
-     * Sets the alignment rules in the relative container.
-     * <br>This API is valid only when the container is RelativeContainer.
-     * <br>LocalizedAlignRuleOptions takes the right-to-left scripts into account, using start and end instead of
-     *     left and right for alignment in the horizontal direction. Prioritize this API in aligning
-     *     child components in the relative container.
+     * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效，支持[attributeModifier]{@link
+     * attributeModifier}动态设置属性方法。
      *
-     * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } value
-     * @returns { this }
+     * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } value - 指定设置在相对布局组件中子组件的对齐规则。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default alignRules(value: AlignRuleOption | LocalizedAlignRuleOptions | undefined): this;
     /**
-     * Sets the parameters of the chain in which the component is the head.
-     * <br>This parameter has effect only when the parent container is RelativeContainer.
-     * <br>The chain head is the first component in the chain that satisfies the chain formation rules.
-     * In a horizontal layout, it starts from the left (or from the right in a mirrored language
-     * layout). In a vertical layout, it starts from the top.
+     * 指定以该组件为链头所构成的链的参数，仅当父组件为RelativeContainer时生效。链头指满足成链规则时链的第一个组件（水平方向从左边起始，镜像语言下从右边起始；竖直方向从上边起始）。
      *
-     * @param { Axis | undefined } direction - indicates direction of the chain
-     * @param { ChainStyle | undefined } style - indicates style of the chain
+     * @param { Axis | undefined } direction - 链的方向。
+     * @param { ChainStyle | undefined } style - 链的样式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13798,39 +13974,33 @@ export declare interface CommonMethod {
     default spatialEffect(params: SpatialEffectParams | undefined): this;
 
     /**
-     * Applies a pixel stretch effect to the component.
+     * 设置组件的图像边缘像素扩展距离。
      *
-     * @param { PixelStretchEffectOptions | undefined } options - Pixel stretch effect options.
-     *     <br>The value includes the length by which a pixel is stretched toward the four edges.
-     *     <p>**NOTE**:
-     *     <br>1. If the length is a positive value, the original image is stretched, and the image size increases. The edge
-     *     pixels grow by the set length toward the top, bottom, left, and right edges.
-     *     <br>2. If the length is a negative value, the original image shrinks as follows, but the image size remains
-     *     unchanged:
-     *     <br>Shrinking mode:
-     *     <br>(1) The image shrinks from the four edges by the absolute value of length set through **options**.
-     *     <br>(2) The image is stretched back to the original size with edge pixels.
-     *     <br>3. Constraints on **options**:
-     *     <br>(1) The length values for the four edges must be all positive or all negative. That is, the four edges are
-     *     stretched or shrink at the same time in the same direction.
-     *     <br>(2) The length values must all be a percentage or a specific value. Combined use of the percentage and
-     *     specific value is not allowed.
-     *     <br>(3) If the input value is invalid, the image is displayed as {0, 0, 0, 0}, that is, the image is the same as
-     *     the original image.
-     *     </p>
-     * @returns { this }
+     * @param { PixelStretchEffectOptions | undefined } options - 设置组件的图像边缘像素扩展距离。
+     *    <br>参数`options`包括上下左右四个方向的边缘像素扩展距离。
+     *    <br>**说明：**
+     *    <br>1. 如果距离为正值，表示向外扩展，放大原来图像大小。上下左右四个方向分别用边缘像素填充，填充的距离即为设置的边缘扩展的距离。
+     *    <br>2. 如果距离为负值，表示内缩，但是最终图像大小不变。
+     *    <br>内缩方式：
+     *    <br>图像根据`options`的设置缩小，缩小大小为四个方向边缘扩展距离的绝对值。
+     *    <br>图像用边缘像素扩展到原来大小。
+     *    <br>3. 对`options`的输入约束：
+     *    <br>上下左右四个方向的扩展统一为非正值或者非负值。即四个边同时向外扩或者内缩，方向一致。
+     *    <br>所有方向的输入均为百分比或者具体值，不支持百分比和具体值混用。
+     *    <br>所有异常情况下，显示为{0, 0, 0, 0}效果，即跟原图保持一致。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default pixelStretchEffect(options: PixelStretchEffectOptions | undefined): this;
     /**
-     * Sets hot keys
+     * 设置组件的自定义组合键。
      *
-     * @param { string | FunctionKey | undefined } value - Character of the combination key.
-     * @param { Array<ModifierKey> | undefined } keys - The modifier keys modify the action of key when the key are pressed at the same time.
-     * @param { function } [action] - Callback function, triggered when the shortcut keyboard is pressed.
-     * @returns { this }
+     * @param { string | FunctionKey | undefined } value - 热键的单个字符（可以通过键盘输入的字符）或[FunctionKey]{@link @global:FunctionKey}。<br />空字符串意为取消快捷键绑定。<br/>
+     * @param { Array<ModifierKey> | undefined } keys - 热键组合。<br />仅当value为[FunctionKey]{@link @global:FunctionKey}的情况下keys的值可以为空。<br/>
+     * @param { function } action - 组合快捷键触发成功后的自定义事件回调。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14027,10 +14197,17 @@ export declare interface CommonMethod {
      */
     default accessibilitySelected(isSelect: boolean | undefined): this;
     /**
-     * Sets obscured
+     * 设置组件内容的隐私遮罩类型，在屏幕录制或屏幕共享等场景下对组件内容进行隐私遮挡。
      *
-     * @param { Array<ObscuredReasons> | undefined } reasons - reasons of obscuration
-     * @returns { this }
+     * @param { Array<ObscuredReasons> | undefined } reasons - 设置组件内容的遮罩类型，在屏幕录制或屏幕共享等场景下对组件内容进行隐私遮挡。取值原则：请参考
+     *    [ObscuredReasons]{@link ObscuredReasons}枚举定义，如PLACEHOLDER表示使用占位图遮罩。
+     *    <br>默认值：[]，未设置遮罩原因时，不对组件内容进行隐私遮罩处理。
+     *    <br>隐私遮罩效果仅在[Image]{@link @global:Image}组件、[Text]{@link @global:Text}组件<!--Del-->和[FormComponent]{@link @global:FormComponent}组件
+     *    <sup>12+</sup><!--DelEnd-->上生效。
+     *    <br>**说明：**
+     *    <br>如需在图片加载过程中显示隐私遮罩，需要设置Image组件的宽度和高度；若未设置宽度和高度，图片加载过程中将不会显示隐私遮罩效果。
+     *    <br>Text组件设置子组件或设置[属性字符串]{@link @global:StyledString}时，不支持隐私遮罩。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14438,11 +14615,10 @@ export type FractionStop = [
  */
 export declare interface CommonShapeMethod extends CommonMethod {
     /**
-     * Sets the stroke color.
-     * If this attribute is not set, the component does not have any stroke.
-     * If the value is invalid, no stroke will be drawn.
+     * 设置边框颜色，支持attributeModifier动态设置属性方法，不设置时，默认边框透明度为0，即无边框。
      *
-     * @param { ResourceColor | undefined } value - Stroke color.
+     * @param { ResourceColor | undefined } value - 边框颜色。
+     *    <br>默认值：Color.Transparent<br/>异常值undefined和null按照默认值处理，NaN和Infinity按照Color.Black处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14450,11 +14626,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default stroke(value: ResourceColor | undefined): this;
     /**
-     * Sets the color of the fill area.
-     * An invalid value is handled as the default value.
-     * If this attribute and the universal attribute foregroundColor are both set, whichever is set later takes effect.
+     * 设置填充区域的颜色，支持attributeModifier动态设置属性方法，异常值按照默认值处理。与通用属性foregroundColor同时设置时，后设置的属性生效。
      *
-     * @param { ResourceColor | undefined } value - Color of the fill area. Default value: Color.Black.
+     * @param { ResourceColor | undefined } value - 填充区域颜色。
+     *    <br>默认值：Color.Black
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14462,12 +14638,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default fill(value: ResourceColor | undefined): this;
     /**
-     * Sets the offset of the start point for drawing the stroke.
-     * An invalid value is handled as the default value.
+     * 设置边框绘制起点的偏移量，支持attributeModifier动态设置属性方法。异常值按照默认值处理。
      *
-     * @param { double | string | undefined } value - Offset of the start point for drawing the stroke.
-     *     Default value: 0
-     *     Default unit: vp
+     * @param { double | string | undefined } value - 边框绘制起点的偏移量。
+     *    <br>默认值：0<br/>默认单位：vp
+     *    <br>异常值undefined和null按照默认值处理，NaN和Infinity会导致strokeDashArray失效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14475,9 +14650,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeDashOffset(value: double | string | undefined): this;
     /**
-     * Sets the cap style of the stroke.
+     * 设置边框端点绘制样式，支持attributeModifier动态设置属性方法。
      *
-     * @param { LineCapStyle | undefined } value - Cap style of the stroke. Default value: LineCapStyle.Butt
+     * @param { LineCapStyle | undefined } value - 边框端点绘制样式。
+     *    <br>默认值：LineCapStyle.Butt
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14485,10 +14662,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeLineCap(value: LineCapStyle | undefined): this;
     /**
-     * Sets the join style of the stroke.
-     * This attribute does not work for the Circle component, which does not have corners.
+     * 设置边框拐角绘制样式，支持attributeModifier动态设置属性方法。
      *
-     * @param { LineJoinStyle | undefined } value - Join style of the stroke. Default value: LineJoinStyle.Miter
+     * @param { LineJoinStyle | undefined } value - 边框拐角绘制样式。
+     *    <br>默认值：LineJoinStyle.Miter
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14496,9 +14674,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeLineJoin(value: LineJoinStyle | undefined): this;
     /**
-     * Limits for drawing acute angles as bevels
+     * 设置斜接长度与边框宽度比值的极限值，支持attributeModifier动态设置属性方法。斜接长度表示外边框外边交点到内边交点的距离，边框宽度即strokeWidth属性的值。该属性取值需在strokeLineJoin属性取值LineJoinStyle.Miter时生效。该属性的合法值范围应当大于等于1.0，当取值范围在[0,1)时按1.0处理，其余异常值按默认值处理。
      *
-     * @param { double | string | undefined } value
+     * @param { double | string | undefined } value - 斜接长度与边框宽度比值的极限值。
+     *    <br>默认值：4
+     *    <br>异常值undefined、null和NaN按照默认值处理，Infinity会导致stroke失效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14506,12 +14686,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeMiterLimit(value: double | string | undefined): this;
     /**
-     * Sets the stroke opacity.
-     * The value range is [0.0, 1.0].
-     * A value less than 0.0 evaluates to the value 0.0. A value greater than 1.0 evaluates to the value 1.0.
-     * Any other value evaluates to the value 1.0.
+     * 设置边框透明度，支持attributeModifier动态设置属性方法。该属性的取值范围是[0.0, 1.0]，若给定值小于0.0，则取值为0.0；若给定值大于1.0，则取值为1.0。
      *
-     * @param { double | string | Resource | undefined } value - Stroke opacity. Default value: 1
+     * @param { double | string | Resource | undefined } value - 边框透明度。
+     *    <br>默认值：stroke接口设置的透明度
+     *    <br>异常值NaN按0.0处理，undefined、null和Infinity按1.0处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14519,12 +14698,10 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeOpacity(value: double | string | Resource | undefined): this;
     /**
-     * Sets the opacity of the fill area.
-     * The value range is [0.0, 1.0].
-     * A value less than 0.0 evaluates to the value 0.0. A value greater than 1.0 evaluates to the value 1.0.
-     * Any other value evaluates to the value 1.0.
+     * 设置填充区域透明度，支持attributeModifier动态设置属性方法。
      *
-     * @param { double | string | Resource | undefined } value - Opacity of the fill area. Default value: 1
+     * @param { double | string | Resource | undefined } value - 填充区域透明度。
+     *    <br>默认值：1.0
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14532,14 +14709,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default fillOpacity(value: double | string | Resource | undefined): this;
     /**
-     * Sets the stroke width.
-     * If this attribute is of the string type, percentage values are not supported and will be treated as 1 px.
+     * 设置边框宽度，支持attributeModifier动态设置属性方法。该属性若为string类型，暂不支持百分比，百分比按照1px处理。
      *
-     * @param { Length | undefined } value - Stroke width.
-     *     The value must be greater than or equal to 0.
-     *     Default value: 1.
-     *     Default unit: vp.
-     *     An invalid value is handled as the default value.
+     * @param { Length | undefined } value - 边框宽度，取值范围≥0。
+     *    <br>默认值：1
+     *    <br>默认单位：vp<br/>异常值undefined、null和NaN按照默认值处理，Infinity按0处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14547,12 +14721,12 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeWidth(value: Length | undefined): this;
     /**
-     * Specifies whether anti-aliasing is enabled.
+     * 设置是否开启抗锯齿效果，支持attributeModifier动态设置属性方法。
      *
-     * @param { boolean | undefined } value - Whether anti-aliasing is enabled.
-     *     true: Anti-aliasing is enabled.
-     *     false: Anti-aliasing is disabled.
-     *     Default value: true
+     * @param { boolean | undefined } value - 是否开启抗锯齿效果。
+     *    <br>true：开启抗锯齿；false：关闭抗锯齿。
+     *    <br>默认值：true
+     *    <br>异常值undefined和null按照false处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14560,9 +14734,12 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default antiAlias(value: boolean | undefined): this;
     /**
-     * Sets the gap for the border.
+     * 设置边框的虚线长度和虚线间隙长度，支持attributeModifier动态设置属性方法。取值范围≥0。异常值将按默认值处理。
      *
-     * @param { Array<Length> | undefined } value
+     * @param { Array<Length> | undefined } value - 定义Rect边框的虚线模式的数组，数组元素交替表示线段长度和间隙长度。
+     *    <br>默认值：[]（空数组）
+     *    <br>默认单位：vp
+     *    <br>异常值undefined和null按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14570,18 +14747,16 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeDashArray(value: Array<Length> | undefined): this;
     /**
-    * Set whether the component enables the ability to invert colors.
-    * This interface needs to be set as the first attribute of the component.
-    *
-    * @param { boolean } value - value indicates whether the component enables the ability to invert colors.
-    *     <br>If set to true, the component will use the inverse color capability.
-    *     If set to false, the component and its child components will not use the inverse color capability
-    *     and will not be affected by the settings of the parent or ancestor components. The default value is true.
-    * @returns { this }
+     * 设置组件是否允许强制深色。该接口需要设置为组件的第一个属性。
+     *
+     * @param { boolean } value - value表示组件是否允许强制深色。
+     *    <br>设置为true时，组件使用强制深色能力。
+     *    设置为false时，组件及其子组件不使用强制深色能力，且不受父组件或祖先组件设置的影响。默认值为true。
+     * @returns { this }
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
-    */
+     */
     default allowForceDark(value: boolean): this;
 }
 /**
@@ -14772,39 +14947,36 @@ export declare interface Layoutable {
      */
     uniqueId?: int;
     /**
-     * Applies the specified position information to the child component.
+     * 调用此方法设置子组件的位置信息。
      *
-     * @param { Position | undefined } position
+     * @param { Position | undefined } position - 绝对位置，包含x和y坐标（原点为父组件左上角，x轴向右为正，y轴向下为正）。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     layout(position: Position | undefined): void;
     /**
-     * Obtains the margin of the child component.
+     * 调用此方法获取子组件的margin信息，返回其外边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the margin of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的外边距对象，包含四个方向的边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getMargin(): DirectionalEdgesT<double> | undefined;
     /**
-     * Call this method to get the padding of sub component.
+     * 调用此方法获取子组件的padding信息，返回其内边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Padding of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的内边距对象，包含四个方向的内边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getPadding(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the border width of the child component.
+     * 调用此方法获取子组件的borderWidth信息，返回其边框宽度。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the borderWidth of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的边框宽度对象，包含四个方向的边框宽度值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14829,41 +15001,37 @@ export declare interface Measurable {
      */
     uniqueId?: int;
     /**
-     * Applies the size constraint to the child component.
+     * 调用此方法限制子组件的尺寸范围，返回测量后的组件布局信息。
      *
-     * @param { ConstraintSizeOptions | undefined } constraint
-     * @returns { MeasureResult | undefined } Provides the measurement result of the component. If some errors
-     *     occur in the internal runtime environment, returns undefined.
+     * @param { ConstraintSizeOptions | undefined } constraint - 约束尺寸，包含minWidth、maxWidth、minHeight、maxHeight等约束条件，用于限制子组件的尺寸范围。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
+     * @returns { MeasureResult | undefined } 测量后的组件布局信息，包含测量后的宽度和高度。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     measure(constraint: ConstraintSizeOptions | undefined): MeasureResult | undefined;
     /**
-     * Obtains the margin of the child component.
+     * 获取子组件的margin信息，返回其外边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Margin of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的外边距对象，包含四个方向的边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getMargin(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the padding of the child component.
+     * 获取子组件的padding信息，返回其内边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the padding of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的内边距对象，包含四个方向的内边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getPadding(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the border width of the child component.
+     * 获取子组件的borderWidth信息，返回其边框宽度。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Border width of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的边框宽度对象，包含四个方向的边框宽度值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14905,7 +15073,7 @@ export declare interface SizeResult {
     height: double;
 }
 /**
- * Provides the measurement result of the component.
+ * 测量后的组件布局信息。
  *
  * @extends SizeResult
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14923,7 +15091,7 @@ export declare interface MeasureResult extends SizeResult {
  */
 export type NavDestinationInfo = uiObserver.NavDestinationInfo;
 /**
- * The navigation information.
+ * NavigationInfo实例对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14931,7 +15099,7 @@ export type NavDestinationInfo = uiObserver.NavDestinationInfo;
  */
 export type NavigationInfo = uiObserver.NavigationInfo;
 /**
- * The router page information.
+ * RouterPageInfo实例对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14991,7 +15159,7 @@ export type SystemUiMaterial = uiMaterial.Material;
  */
 export type Blender = uiEffect.Blender;
 /**
- * Import the DialogController type from promptAction.
+ * 从promptAction导入弹出框控制器类型
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

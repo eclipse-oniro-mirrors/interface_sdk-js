@@ -316,10 +316,10 @@ export declare interface ShapeAttribute extends CommonMethod {
      */
     default mesh(value: Array<double> | undefined, column: int | undefined, row: int | undefined): this;
     /**
-     * Set Shape options.
+     * 设置Shape选项。
      *
-     * @param { PixelMap } [value] - Shape constructor options
-     * @returns { ShapeAttribute } Returns the instance of the ShapeAttribute.
+     * @param { PixelMap } value - 绘制目标，可将图形绘制在指定的PixelMap对象中，若未设置，则默认在当前绘制目标中进行绘制。<br/>异常值undefined和null按照无效值处理，本次设置不生效。
+     * @returns { ShapeAttribute } 返回ShapeAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
      * @stagemodelonly
@@ -327,9 +327,10 @@ export declare interface ShapeAttribute extends CommonMethod {
      */
     default setShapeOptions(value?: PixelMap): this;
     /**
-     * Call attributeModifier.
+     * 设置组件的动态属性。
      *
-     * @param { AttributeModifier<ShapeAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+     * @param { AttributeModifier<ShapeAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 动态设置Shape组件的属性。<br>
+     *    取值为undefined时，按当前组件的属性方法默认值处理。
      * @returns { ShapeAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

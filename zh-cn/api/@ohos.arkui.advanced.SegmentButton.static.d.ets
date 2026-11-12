@@ -384,7 +384,7 @@ declare enum SegmentButtonInteractionMode {
 declare enum BorderRadiusMode {
 
   /**
-   * Default mode, radius is auto calculated by framework.
+   * 默认模式，框架自动计算边框圆角。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -394,7 +394,7 @@ declare enum BorderRadiusMode {
   DEFAULT = 0,
 
   /**
-   * Custom mode, radius can be set by developers.
+   * 自定义模式，开发者设置边框圆角。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

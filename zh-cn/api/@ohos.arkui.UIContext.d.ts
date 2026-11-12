@@ -5039,9 +5039,9 @@ export class UIContext {
   getFont(): Font;
 
   /**
-   * get object mediaQuery.
+   * 获取MediaQuery对象。
    *
-   * @returns { MediaQuery } object MediaQuery.
+   * @returns { MediaQuery } MediaQuery实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

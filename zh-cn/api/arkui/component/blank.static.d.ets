@@ -59,10 +59,13 @@ export declare interface BlankAttribute extends CommonMethod {
      */
     default attributeModifier(modifier: AttributeModifier<BlankAttribute> | AttributeModifier<CommonMethod> | undefined): this;
     /**
-     * Set Blank options.
+     * 设置Blank选项。
      *
-     * @param { double | string } [min] - Minimum size of the Blank component in the container along the main axis.
-     * @returns { BlankAttribute } Returns instance of BlankAttribute.
+     * @param { double | string } min - 空白填充组件在容器主轴上的最小大小。
+     *    <br>默认值：0，number类型单位为vp，取值范围为[0, +∞)；string类型可以显式指定像素单位，如'10px'。不指定像素单位时，默认单位vp，如'10'，等同于10vp。
+     *    <br>非法值：按默认值处理。
+     *    <br>**说明：** <br/>不支持设置百分比。负值使用默认值。当最小值大于容器可用空间时，使用最小值作为自身大小并超出容器。
+     * @returns { BlankAttribute } 返回BlankAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
      * @stagemodelonly
