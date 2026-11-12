@@ -405,7 +405,7 @@ declare namespace window {
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
-     * @since 26.1.0 dynamic&static 
+     * @since 26.1.0 dynamic&static
      */
     ACCESSIBILITY_CALL_HELPER = 27,
     /**
