@@ -2024,14 +2024,20 @@ declare namespace applicationManager {
    * 添加应用至电池优化排除列表。使用异步回调返回结果。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @param { Array<string> } appIdentifiers - 待添加应用的Bundle名称。
-   * @param { number } accountId - 用户帐号ID。
+   * @param { Array<string> } appIdentifiers - 待添加应用的唯一标识符。
+   * @param { number } accountId - 用户账号ID。
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @throws { BusinessError } 9201015 - The application is not installed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2042,14 +2048,19 @@ declare namespace applicationManager {
    * 将应用从电池优化排除列表中移除。使用异步回调返回结果。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @param { Array<string> } appIdentifiers - 待移除应用的Bundle名称。
-   * @param { number } accountId - 用户帐号ID。
+   * @param { Array<string> } appIdentifiers - 待移除应用的唯一标识符。
+   * @param { number } accountId - 用户账号ID。
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2060,16 +2071,20 @@ declare namespace applicationManager {
    * 获取电池优化排除列表。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @param { number } accountId - 用户帐号ID。
+   * @param { number } accountId - 用户账号ID。
    *     <br>取值应≥0。
    * @param { common.QueryPolicy } [queryPolicy] - 查询策略。如果不指定该参数，则默认使用了
    *     {@link common.QueryPolicy.SELF}。
-   * @returns { Array<string> } 返回电池优化排除列表中的应用包名。
+   * @returns { Array<string> } 返回电池优化排除列表中的应用唯一标识符。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
