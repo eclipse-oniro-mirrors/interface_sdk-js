@@ -418,7 +418,7 @@ declare namespace uiObserver {
     pathStack: NavPathStack;
 
     /**
-     * The uniqueId of the navigation.
+     * Navigation组件的uniqueId。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -756,7 +756,7 @@ declare namespace uiObserver {
     context: UIAbilityContext | UIContext;
 
     /**
-     * From navigation content info.
+      * 页面切换的源页面。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -765,7 +765,7 @@ declare namespace uiObserver {
     from: NavDestinationInfo | NavBar;
 
     /**
-     * To navigation content info.
+      * 页面切换的目的页面。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -774,7 +774,7 @@ declare namespace uiObserver {
     to: NavDestinationInfo | NavBar;
 
     /**
-     * The operation type.
+      * 页面切换操作类型。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -821,7 +821,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * Indicates the options of NavDestination switch.
+   * Navigation组件页面切换事件的监听选项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -830,7 +830,7 @@ declare namespace uiObserver {
   export interface NavDestinationSwitchObserverOptions {
 
     /**
-     * The navigationId that need observation
+      * 指定需要监听的Navigation的ID。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -888,7 +888,7 @@ declare namespace uiObserver {
   export function offNavDestinationUpdate(callback?: Callback<NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { ObserverOptions } options - The options object.
    * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event start or
@@ -900,7 +900,7 @@ declare namespace uiObserver {
   export function onScrollEvent(options: ObserverOptions, callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { ObserverOptions } options - The options object.
    * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks 
@@ -912,7 +912,7 @@ declare namespace uiObserver {
   export function offScrollEvent(options: ObserverOptions, callback?: Callback<ScrollEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event
    *     start or stop.
@@ -923,7 +923,7 @@ declare namespace uiObserver {
   export function onScrollEvent(callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。滚动组件包括[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}、[WaterFlow]{@link @global:WaterFlow}、[ArcList]{@link @ohos.arkui.ArcList}。
    *
    * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks
    *     for the given event type will be removed.
@@ -956,7 +956,7 @@ declare namespace uiObserver {
   export function offRouterPageUpdate(context: UIAbilityContext | UIContext, callback?: Callback<RouterPageInfo>): void;
 
   /**
-   * Registers a callback function to be called when the screen density is updated.
+   * 监听屏幕像素密度变化。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<DensityInfo> } callback - The callback function to be called when the screen density is updated.
@@ -967,7 +967,7 @@ declare namespace uiObserver {
   export function onDensityUpdate(context: UIContext, callback: Callback<DensityInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听屏幕像素密度的变化。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<DensityInfo> } [callback] - The callback function to remove. If not provided, all callbacks
@@ -979,7 +979,7 @@ declare namespace uiObserver {
   export function offDensityUpdate(context: UIContext, callback?: Callback<DensityInfo>): void;
 
   /**
-   * Registers a callback function to be called when the draw command will be drawn.
+   * 监听每一帧绘制指令下发情况。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<void> } callback - The callback function to be called when the draw command will be drawn.
@@ -990,7 +990,7 @@ declare namespace uiObserver {
   export function onWillDraw(context: UIContext, callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧绘制指令下发情况。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
@@ -1002,7 +1002,7 @@ declare namespace uiObserver {
   export function offWillDraw(context: UIContext, callback?: Callback<void>): void;
 
   /**
-   * Registers a callback function to be called when the layout is done.
+   * 监听每一帧布局完成情况。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<void> } callback - The callback function to be called when the layout is done.
@@ -1013,7 +1013,7 @@ declare namespace uiObserver {
   export function onDidLayout(context: UIContext, callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧布局完成情况。
    *
    * @param { UIContext } context - The context scope of the observer.
    * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the

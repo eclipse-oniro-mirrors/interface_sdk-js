@@ -138,7 +138,7 @@ export declare class TabTitleBarMenuItem {
 }
 
 /**
- * Declaration of the tab item.
+ * 声明页签项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

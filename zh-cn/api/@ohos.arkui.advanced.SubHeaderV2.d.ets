@@ -130,7 +130,7 @@ export interface SubHeaderV2TitleOptions {
 @ObservedV2
 export declare class SubHeaderV2Title {
   /**
-   * The first line text of content area.
+   * 内容区首行文本。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -140,7 +140,7 @@ export declare class SubHeaderV2Title {
   @Trace
   primaryTitle?: ResourceStr;
   /**
-   * Text modifier for primary title.
+   * 主标题文本修饰符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -150,7 +150,7 @@ export declare class SubHeaderV2Title {
   @Trace
   primaryTitleModifier?: TextModifier;
   /**
-   * The secondary line text of content area.
+   * 内容区次行文本。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -160,7 +160,7 @@ export declare class SubHeaderV2Title {
   @Trace
   secondaryTitle?: ResourceStr;
   /**
-   * Text modifier for secondary title.
+   * 副标题文本修饰符。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -329,7 +329,7 @@ export interface SubHeaderV2SelectOptions {
 @ObservedV2
 export declare class SubHeaderV2Select {
   /**
-   * Sets the options of the SubHeaderV2SelectOptions.
+   * 设置SubHeaderV2SelectOptions的选项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -340,7 +340,7 @@ export declare class SubHeaderV2Select {
   @Trace
   options: SelectOption[];
   /**
-   * Sets the selected index of the SubHeaderV2SelectOptions.
+   * 设置SubHeaderV2SelectOptions的选中索引。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -363,7 +363,7 @@ export declare class SubHeaderV2Select {
   @Trace
   selectedContent?: ResourceStr;
   /**
-   * Sets the onSelect of the SubHeaderV2SelectOptions.
+   * 设置SubHeaderV2SelectOptions的onSelect。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -636,7 +636,7 @@ export interface SubHeaderV2OperationItemOptions {
 @ObservedV2
 export declare class SubHeaderV2OperationItem {
   /**
-   * The content of text or the address of icon.
+   * 文本内容或图标地址。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -646,7 +646,7 @@ export declare class SubHeaderV2OperationItem {
   @Trace
   content: SubHeaderV2OperationItemType;
   /**
-   * callback function when operate the text or icon.
+   * 操作文本或图标时的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -667,7 +667,7 @@ export declare class SubHeaderV2OperationItem {
    */
   constructor(options: SubHeaderV2OperationItemOptions);
   /**
-   * The accessibilityText of this text or icon.
+   * 该文本或图标的无障碍文本。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -677,7 +677,7 @@ export declare class SubHeaderV2OperationItem {
   @Trace
   accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of this text or icon.
+   * 该文本或图标的无障碍描述。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -687,13 +687,13 @@ export declare class SubHeaderV2OperationItem {
   @Trace
   accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of this text or icon.
-   * @default "auto".The options are as follows:<br/>
-   *     "auto":The value is converted to "yes" or "no" based on the component.
-   *     "yes": the current component is selectable for the accessibility service.
-   *     "no": The current component is not selectable for the accessibility service.
-   *     "no-hide-descendants":The current component and all its child components are not selectable<br/>
-   *     for the accessibility service.
+   * 该文本或图标的无障碍重要性级别。
+   * @default "auto"。取值如下：<br/>
+   *     "auto"：该值根据组件转换为"yes"或"no"。
+   *     "yes"：当前组件可被无障碍辅助服务所识别。
+   *     "no"：当前组件不可被无障碍辅助服务所识别。
+   *     "no-hide-descendants"：当前组件及其所有子组件不可被<br/>
+   *     无障碍辅助服务所识别。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -703,7 +703,7 @@ export declare class SubHeaderV2OperationItem {
   @Trace
   accessibilityLevel?: string;
   /**
-   * Sets the default focus state of the text or icon.
+   * 设置文本或图标的默认焦点状态。
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

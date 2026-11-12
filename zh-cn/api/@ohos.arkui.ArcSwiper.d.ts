@@ -204,7 +204,7 @@ export class ArcDotIndicator {
 }
 
 /**
-* Provide an interface for ArcSwiper.
+* 提供ArcSwiper的接口。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform
@@ -559,7 +559,7 @@ declare class ArcSwiperAttribute extends CommonMethod<ArcSwiperAttribute> {
 }
 
 /**
-* Defines the ArcSwiper Component that can provide the ability for sub components to swipe and display.
+* 弧形滑块视图容器，提供子组件滑动轮播显示的能力。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Circle
  * @crossplatform

@@ -574,7 +574,7 @@ declare class TabBarSymbol {
 declare interface TabBarOptions {
 
   /**
-   * TabBar icon.
+   * 页签内的图片内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -584,7 +584,7 @@ declare interface TabBarOptions {
   icon?: string | Resource;
 
   /**
-   * TabBar text.
+   * 页签内的文字内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

@@ -90,9 +90,9 @@ export declare enum TreeListenType {
   NODE_MOVE = 'NodeMove'
 }
 /**
- * Callback method of Event registration and processing.
+ * 事件注册和处理的回调方法。
  *
- * @param { CallbackParam } callbackParam - The result of event.
+ * @param { CallbackParam } callbackParam - 事件结果。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 staticonly
@@ -302,7 +302,7 @@ export declare struct TreeView {
    */
   treeController: TreeController;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

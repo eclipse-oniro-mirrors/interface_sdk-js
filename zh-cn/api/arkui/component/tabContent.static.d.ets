@@ -458,7 +458,7 @@ export declare interface TabBarIconStyle {
 }
 
 /**
- * TabBarSymbol object.
+ * 页签内symbol图标样式对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

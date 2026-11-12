@@ -97,7 +97,7 @@ export declare enum SideBarContainerType {
 export declare enum SideBarPosition {
 
   /**
-   * The sidebar is on the Start of the container
+   * 侧边栏位于容器左侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -106,7 +106,7 @@ export declare enum SideBarPosition {
   Start,
 
   /**
-   * The sidebar is on the End of the container
+   * 侧边栏位于容器右侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

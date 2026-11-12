@@ -1732,26 +1732,22 @@ export interface OrderOverlayOptions {
 export class UIObserver {
 
   /**
+   * 通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**, which indicates the state change event
-   *     <br>of the **NavDestination** component.
-   * @param { object } options - ID of the target **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current
-   *     <br>state of the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
+   * 通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**, which indicates the state change event
-   *     <br>of the **NavDestination** component.
-   * @param { object } options - ID of the target **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current
-   *     <br>state of the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1761,26 +1757,22 @@ export class UIObserver {
   on(type: 'navDestinationUpdate', options: { navigationId: ResourceStr }, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
+   * 取消通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdate'.
-   * @param { object } options - Specify the id of observed navigation.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     navigation ID will be removed.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
+   * 取消通过Navigation的id监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdate'.
-   * @param { object } options - The options object.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     navigation ID will be removed.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { object } options - 指定监听的Navigation的id。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1790,26 +1782,20 @@ export class UIObserver {
   off(type: 'navDestinationUpdate', options: { navigationId: ResourceStr }, callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Subscribes to status changes of this **NavDestination** component.
+   * 监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   * The value is fixed at **'navDestinationUpdate'**, which indicates the state change event of
-   * <br>the **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current state of
-   * <brthe **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Subscribes to status changes of this **NavDestination** component.
+   * 监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate' } type - Event type.
-   *     The value is fixed at **'navDestinationUpdate'**,
-   *     <br>which indicates the state change event of the **NavDestination** component.
-   * @param { Callback<observer.NavDestinationInfo> } callback - Callback used to return the current state of
-   *     <br>the **NavDestination** component.
+   * @param { 'navDestinationUpdate' } type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1819,26 +1805,20 @@ export class UIObserver {
   on(type: 'navDestinationUpdate', callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate'} type - The type of event to remove the listener for. Must be 'navDestinationUpdate
-   *     '.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdate'} type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdate'} type - The type of event to remove the listener for. Must be 'navDestinationUpdate
-   *     '.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdate'} type - 监听事件，固定为'navDestinationUpdate'，即NavDestination组件的状态变化。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1848,13 +1828,11 @@ export class UIObserver {
   off(type: 'navDestinationUpdate', callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the navigation destination is updated.
+   * 通过Navigation的uniqueId监听NavDestination组件的状态变化，uniqueId可通过queryNavigationInfo获取。
    *
-   * @param { 'navDestinationUpdateByUniqueId' } type - The type of event to listen for. Must be '
-   *     navDestinationUpdateByUniqueId'.
-   * @param { number } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } callback - The callback function to be called when the navigation
-   *     destination is updated.
+   * @param { 'navDestinationUpdateByUniqueId' } type - 监听事件，固定为'navDestinationUpdateByUniqueId'，即NavDestination组件的状态变化。
+   * @param { number } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } callback - 回调函数。返回当前的NavDestination组件状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1864,14 +1842,11 @@ export class UIObserver {
   on(type: 'navDestinationUpdateByUniqueId', navigationUniqueId: number, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消通过Navigation的uniqueId监听NavDestination组件的状态变化。
    *
-   * @param { 'navDestinationUpdateByUniqueId'} type - The type of event to remove the listener for. Must be '
-   *     navDestinationUpdateByUniqueId'.
-   * @param { number } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'navDestinationUpdateByUniqueId'} type - 监听事件，固定为'navDestinationUpdateByUniqueId'，即NavDestination组件的状态变化。
+   * @param { number } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1941,22 +1916,20 @@ export class UIObserver {
   off(type: 'scrollEvent', callback?: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Unsubscribes to state changes of the page in the router.
+   * 监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - Event type.
-   *     <br>The value is fixed at 'routerPageUpdate', which indicates the state change event of the page in the router.
-   * @param { Callback<observer.RouterPageInfo> } callback - Callback to be unregistered.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } callback - 回调函数。携带RouterPageInfo，返回当前的page页面状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @since 11
    */
   /**
-   * Unsubscribes to state changes of the page in the router.
+   * 监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - Event type.
-   *     <br>The value is fixed at 'routerPageUpdate', which indicates the state change event of the page in the router.
-   * @param { Callback<observer.RouterPageInfo> } callback - Callback to be unregistered.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } callback - 回调函数。携带RouterPageInfo，返回当前的page页面状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1966,12 +1939,10 @@ export class UIObserver {
   on(type: 'routerPageUpdate', callback: Callback<observer.RouterPageInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听router中page页面的状态变化。
    *
-   * @param { 'routerPageUpdate' } type - The type of event to remove the listener for. Must be 'routerPageUpdate'.
-   * @param { Callback<observer.RouterPageInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'routerPageUpdate' } type - 监听事件，固定为'routerPageUpdate'，即router中page页面的状态变化。
+   * @param { Callback<observer.RouterPageInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有router中page页面状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2061,11 +2032,10 @@ export class UIObserver {
   off(type: 'didLayout', callback?: Callback<void>): void;
 
   /**
-   * Registers a callback function to be called when the navigation switched to a new navDestination.
+   * 监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to listen for. Must be 'navDestinationSwitch'.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - The callback function to be called when
-   *                                                                   the navigation switched to a new navDestination.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2078,13 +2048,10 @@ export class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationSwitch'.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove. If not
-   *     provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有Navigation页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2097,12 +2064,11 @@ export class UIObserver {
   ): void;
 
   /**
-   * Registers a callback function to be called when the navigation switched to a new navDestination.
+   * 通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to listen for. Must be 'navDestinationSwitch'.
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - The callback function to be called when the
-   *                                                                   navigation switched to a new navDestination.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } callback - 回调函数。携带NavDestinationSwitchInfo，返回页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2116,14 +2082,11 @@ export class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { 'navDestinationSwitch' } type - The type of event to remove the listener for. Must be '
-   *     navDestinationSwitch'.
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove. If not
-   *     provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'navDestinationSwitch' } type - 监听事件，固定为'navDestinationSwitch'，即Navigation的页面切换事件。
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2380,12 +2343,11 @@ export class UIObserver {
   off(type: 'afterPanEnd', callback?: PanListenerCallback): void;
 
   /**
-   * Registers a callback function to be called when the tabContent is showed or hidden.
+   * 监听指定Tabs组件id的TabContent页面切换事件。相比on('tabChange')，本接口不支持监听Tabs组件初始化时，显示首个页签的事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to listen for. Must be 'tabContentUpdate'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to be called
-   *                                                         when the tabContent show or hide.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } callback - 回调函数。携带TabContentInfo，返回TabContent页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2395,12 +2357,11 @@ export class UIObserver {
   on(type: 'tabContentUpdate', options: observer.ObserverOptions, callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定Tabs组件id的TabContent页面切换事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to remove the listener for. Must be 'tabContentUpdate'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to remove. If not provided,
-   *                                              all callbacks for the given event type and Tabs ID will be removed.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } callback - 需要被注销的回调函数。不传参数时，取消options指定的Tabs组件上的所有TabContent页面切换事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2410,11 +2371,10 @@ export class UIObserver {
   off(type: 'tabContentUpdate', options: observer.ObserverOptions, callback?: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Registers a callback function to be called when the tabContent is showed or hidden.
+   * 监听TabContent页面的切换事件。相比on('tabChange')，本接口不支持监听Tabs组件初始化时，显示首个页签的事件。
    *
-   * @param { 'tabContentUpdate' } type - The type of event to listen for. Must be 'tabContentUpdate'.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to be called
-   *                                                         when the tabContent is showed or hidden.
+   * @param { 'tabContentUpdate' } type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { Callback<observer.TabContentInfo> } callback - 回调函数。携带TabContentInfo，返回TabContent页面切换事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2424,11 +2384,10 @@ export class UIObserver {
   on(type: 'tabContentUpdate', callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听TabContent页面的切换事件。
    *
-   * @param { 'tabContentUpdate'} type - The type of event to remove the listener for. Must be 'tabContentUpdate'.
-   * @param { Callback<observer.TabContentInfo> } callback - The callback function to remove. If not provided,
-   *                                              all callbacks for the given event type and Tabs ID will be removed.
+   * @param { 'tabContentUpdate'} type - 监听事件，固定为'tabContentUpdate'，即TabContent页面的切换事件。
+   * @param { Callback<observer.TabContentInfo> } callback - 需要被注销的回调函数。不传参数时，取消所有TabContent页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -4909,9 +4868,9 @@ export class UIContext {
   getFilteredInspectorTreeById(id: string, depth: number, filters?: Array<string>): string;
 
   /**
-   * Obtains a Router object.
+   * 获取Router对象。
    *
-   * @returns { Router } Router object.
+   * @returns { Router } 返回Router实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5422,11 +5381,12 @@ export class UIContext {
   getPageInfoByUniqueId(id: number): PageInfo;
 
   /**
-   * Get navigation information of the frameNode with uniqueId.
+   * 通过组件的uniqueId获取该节点对应的Navigation页面信息。
+   * 1. 当uniqueId对应的节点在Navigation节点中，返回其对应的Navigation信息；
+   * 2. 当uniqueId对应的节点无对应的Navigation信息时，返回undefined。
    *
-   * @param { number } id - The uniqueId of the target FrameNode.
-   * @returns { observer.NavigationInfo | undefined } - The navigation information of the frameNode with the
-   *     target uniqueId, or undefined if the frameNode is not existed or does not have navigation information.
+   * @param { number } id - 节点对应的UniqueId。
+   * @returns { observer.NavigationInfo | undefined } - 返回节点对应的Navigation信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5927,7 +5887,7 @@ export class UIContext {
   getMaxFontScale(): number;
 
   /**
-   * Bind tabs to scrollable container component to automatically hide tab bar.
+   * 将页签绑定到可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -5940,7 +5900,7 @@ export class UIContext {
   bindTabsToScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Unbind tabs from scrollable container component.
+   * 将页签从可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -5953,7 +5913,7 @@ export class UIContext {
   unbindTabsFromScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Bind tabs to nested scrollable container components to automatically hide tab bar.
+   * 将页签绑定到嵌套可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -5967,7 +5927,7 @@ export class UIContext {
   bindTabsToNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * Unbind tabs from nested scrollable container components.
+   * 将页签从嵌套可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -5981,9 +5941,9 @@ export class UIContext {
   unbindTabsFromNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * whether to enable or disable swipe to back event.
+   * 设置是否支持应用内横向滑动返回上一级。
    *
-   * @param { Optional<boolean> } enabled - enable or disable swipe to back event.
+   * @param { Optional<boolean> } enabled - 是否支持应用内横向滑动返回，默认值为true。<br>当值为true时，支持应用内横向滑动返回。<br>当值为false时，不支持应用内横向滑动返回。
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @atomicservice
    * @since 18 dynamic

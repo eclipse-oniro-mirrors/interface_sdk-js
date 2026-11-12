@@ -76,7 +76,7 @@ export declare enum OperationType {
 }
 
 /**
- * Declare type OperationOption
+ * 声明OperationOption类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 18]
@@ -191,7 +191,7 @@ export declare class OperationOption {
 }
 
 /**
- * Declare type SelectOption
+ * 声明SelectOption类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 18]
@@ -294,7 +294,7 @@ export declare class SelectOptions {
 }
 
 /**
- * Declare type SymbolOptions
+ * 声明SymbolOptions类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform [since 18]

@@ -68,7 +68,7 @@ declare interface WithThemeOptions {
 }
 
 /**
- * Define the function of WithThemeInterface.
+ * 定义WithThemeInterface的函数。
  *
  * @param { WithThemeOptions } options
  * @returns { WithThemeAttribute } withThemeAttribute object

@@ -3116,7 +3116,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Swiper.
+   * 定义 Swiper 的 FrameNode 类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
