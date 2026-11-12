@@ -1134,7 +1134,7 @@ declare namespace drm {
        *     [on('mediaKeySystemInfoUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'mediaKeySystemInfoUpdate', callback: Callback<Array<drm.MediaKeySystemInfo>>)}
        *     ）获取DRM信息，从中提取pssh字段生成initData。具体开发流程可参考
        *     [基于AVPlayer播放DRM节目(ArkTS)](docroot://media/drm/drm-avplayer-arkts-integration.md)。
-       * @param { int } mediaKeyType - 媒体密钥类型。取值范围为[0, 1]。0表示在线，1表示离线。<br>传入指定范围外的参数会导致参数校验失败，抛出错误码401。
+       * @param { int } mediaKeyType - 媒体密钥类型。取值范围为[0, 1]。1表示在线，0表示离线。<br>传入指定范围外的参数会导致参数校验失败，抛出错误码401。
        * @param { OptionsData[] } options - 可选数据。默认值为空数组。
        * @returns { Promise<MediaKeyRequest> } Promise对象，媒体密钥请求。
        * @throws { BusinessError } 401 -The parameter check failed. Possibly because:
