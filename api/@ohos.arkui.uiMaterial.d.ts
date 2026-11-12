@@ -692,6 +692,20 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     lightEffect?: LightEffectOptions | null;
+
+    /**
+     * Material color mode.
+     * Note: Fix the material's light/dark mode, overriding WithTheme and independent of the system theme.
+     * This affects only the material effect, leaving child components and other properties unchanged.
+     * Default value: **ThemeColorMode.SYSTEM**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    colorMode?: ThemeColorMode;
   }
 
   /**
