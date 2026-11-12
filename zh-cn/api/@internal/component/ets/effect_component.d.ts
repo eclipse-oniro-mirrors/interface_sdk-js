@@ -137,7 +137,7 @@ declare interface EffectComponentOptions {
  */
 declare class EffectComponentAttribute extends CommonMethod<EffectComponentAttribute> {
   /**
-   * Use snapshot when Effect Component have no visual effect.
+   * 在Effect Component没有视觉效果时使用快照。
    *
    * @param { boolean } enable
    * @returns { EffectComponentAttribute }
@@ -176,7 +176,7 @@ declare class EffectComponentAttribute extends CommonMethod<EffectComponentAttri
 declare const EffectComponent: EffectComponentInterface;
 
 /**
- * Defines Effect Component instance.
+ * 特效合并组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi

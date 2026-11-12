@@ -120,7 +120,7 @@ export declare interface UnionEffectContainerAttribute extends CommonMethod {
      */
     default unionMode(mode: UnionMode | undefined): this;
     /**
-     * Sets the attribute modifier for UnionEffectContainer.
+     * 设置属性修饰符。
      *
      * @param { AttributeModifier<UnionEffectContainerAttribute> | AttributeModifier<CommonMethod> | undefined }
      *     modifier
@@ -147,11 +147,12 @@ export declare interface UnionEffectContainerAttribute extends CommonMethod {
 }
 
 /**
- * Provides a UnionEffectContainer Component that generates a component fusion effect for descendant components with
- * "useUnionEffect(true)" set inside it, when their distance is less than a certain threshold.
+ * 形状融合容器，配合后代组件的[useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}属性使用。该容器会收集所有设置了
+ * [useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}的后代组件形状，将收集的形状融合后作为该容器的绘制形状。若后代组件未设置
+ * [useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}属性，则容器不会产生融合效果。
  *
- * @param { UnionEffectContainerOptions } [options] - The options to create a UnionEffectContainer.
- * @param { CustomBuilder } [content_] - Subcomponents of UnionEffectContainer
+ * @param { UnionEffectContainerOptions } [options] - UnionEffectContainer构造参数，用于决定收集到的后代组件形状的融合形变程度。
+ * @param { CustomBuilder } [content_] - UnionEffectContainer的子组件。
  * @returns { UnionEffectContainerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -165,10 +166,12 @@ export declare function UnionEffectContainer(
 ): UnionEffectContainerAttribute;
 
 /**
- * Defines UnionEffectContainer
+ * 形状融合容器，配合后代组件的[useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}属性使用。该容器会收集所有设置了
+ * [useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}的后代组件形状，将收集的形状融合后作为该容器的绘制形状。若后代组件未设置
+ * [useUnionEffect]{@link CommonMethod#useUnionEffect(value: boolean | undefined)}属性，则容器不会产生融合效果。
  *
- * @param { CustomBuilderT<UnionEffectContainerAttribute> } style_ - UnionEffectContainer attribute instance
- * @param { CustomBuilder } [content_] - container
+ * @param { CustomBuilderT<UnionEffectContainerAttribute> } style_ - UnionEffectContainer属性实例
+ * @param { CustomBuilder } [content_] - 容器内容
  * @returns { UnionEffectContainerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
