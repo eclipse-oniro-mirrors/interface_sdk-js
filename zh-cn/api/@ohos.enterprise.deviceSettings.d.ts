@@ -202,7 +202,43 @@ declare namespace deviceSettings {
      * @stagemodelonly
      * @since 24
      */
-    FLOATING_NAVIGATION = 1
+    FLOATING_NAVIGATION = 1,
+
+    /**
+     * Screen off policy for battery power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_OFF_DC = 2,
+
+    /**
+     * Screen off policy for AC power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SCREEN_OFF_AC = 3,
+
+    /**
+     * Power policy for battery power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_POLICY_DC = 4,
+
+    /**
+     * Power policy for AC power supply scenario.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_POLICY_AC = 5
   }
 
   /**
@@ -1079,6 +1115,40 @@ declare namespace deviceSettings {
   function setValueForAccount(admin: Want, item: SettingsItem, accountId: number, value: string): void;
 
   /**
+   * 设置指定用户的设备设置策略，无需传入管理员Want。
+   *
+   * 调用方必须预先通过[enableAdmin]{@link @ohos.enterprise.adminManager:adminManager.enableAdmin}等接口激活为企业管理员，
+   * 本接口会自动使用调用方自身的管理员信息。仅支持跨用户设置的策略项（SCREEN_OFF_DC、SCREEN_OFF_AC、POWER_POLICY_DC、POWER_POLICY_AC）
+   * 可以通过本次重载设置。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { SettingsItem } item - 设备设置策略类型。仅支持 SCREEN_OFF_DC、SCREEN_OFF_AC、POWER_POLICY_DC、POWER_POLICY_AC。
+   * @param { number } accountId - 用户ID，取值范围：大于等于100。accountId小于100返回9200006错误码。
+   * @param { string } value - 策略类型值。<br/>当item为[SettingsItem.DEVICE_NAME]{@link deviceSettings.SettingsItem}时，value为设备名
+   *     称的字符串。 字符串长度范围：大于等于1，小于等于100。只允许设置当前用户的设备名称，设置其他用户的设备名称返回9200012错误码。<br/>当item为
+   *     [SettingsItem.FLOATING_NAVIGATION]{@link deviceSettings.SettingsItem}时，在Phone和Tablet设备中可正常调用，在其他设备中返回801错误码。只允许
+   *     设置当前用户的三键导航，设置其他用户的三键导航不会生效，value为三键导航的开关状态。<br/>- '0'：表示开启三键导航（通过接口
+   *     [enterKioskMode]{@link @ohos.app.ability.kioskManager:kioskManager.enterKioskMode}进入Kiosk模式下，三键导航显示依赖底部手势开启；即三键
+   *     导航开关和底部手势开关同时开启时，三键导航才会显示。底部手势可通过接口
+   *     [applicationManager.setKioskFeatures]{@link @ohos.enterprise.applicationManager:applicationManager.setKioskFeatures}
+   *     设置开启或关闭）。<br/>- '1'：表示关闭三键导航。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - 非法的账号ID（accountId小于100）。
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200020 - 不允许跨用户设置。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setValueForAccount(item: SettingsItem, accountId: number, value: string): void;
+
+  /**
    * 获取指定用户的设备设置策略。该接口可以获取指定用户在设置应用中的某个参数，比如获取用户100的设备名称等。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
@@ -1102,6 +1172,31 @@ declare namespace deviceSettings {
    * @since 24
    */
   function getValueForAccount(admin: Want, item: SettingsItem, accountId: number): string;
+
+  /**
+   * 获取指定用户的设备设置策略。该接口可以获取指定用户在设置应用中的某个参数，比如获取用户100的设备名称等。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { SettingsItem } item - 设备设置策略类型。支持的策略类型包括：DEVICE_NAME（设备名称）、FLOATING_NAVIGATION（三键导航）。
+   * @param { number } accountId - 用户ID，取值范围：大于等于0。<br/>accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}等接口来获取。
+   * @returns { string } 策略类型值。<br/>当item为[SettingsItem.DEVICE_NAME]{@link deviceSettings.SettingsItem}时，返回当前用户的设备名称，查询非
+   *     当前用户的设备名称返回9200012错误码。 <br/>当item为[SettingsItem.FLOATING_NAVIGATION]{@link deviceSettings.SettingsItem}时，返回指定用户
+   *     的三键导航的开关状态。<br/>当item为[SettingsItem.FLOATING_NAVIGATION]{@link deviceSettings.SettingsItem}时，该接口在Phone和Tablet设备
+   *     中可正常调用，在其他设备中返回空字符串。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified user ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getValueForAccount(item: SettingsItem, accountId: number): string;
 
   /**
    * 设置开关的状态。支持设置星闪、蓝牙、Wi-Fi、NFC的状态为开启或关闭，设置完毕后，用户可以手动开关。支持设置蓝牙、NFC的状态为强制开启，设置完毕后，用户不可以手动开关。若已经通过
