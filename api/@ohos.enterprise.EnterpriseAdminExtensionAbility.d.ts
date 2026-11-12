@@ -237,6 +237,24 @@ export default class EnterpriseAdminExtensionAbility {
   onAccountSwitched(accountId: number): void;
 
   /**
+   * Callback for account switched events.
+   * Called when the current user account is switched from one account to another.
+   * This callback differs from the existing onAccountSwitched(accountId: number) by providing both source and
+   * target account IDs for more detailed account transition tracking.
+   *
+   * You should register the **MANAGED_EVENT_ACCOUNT_SWITCHED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { number } fromAccountId - ID of the account that was switched from.
+   * @param { number } toAccountId - ID of the account that was switched to.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onAccountSwitched(fromAccountId: number, toAccountId: number): void;
+
+  /**
    * Called when the system account is removed. You should register the **MANAGED_EVENT_ACCOUNT_REMOVED** event through
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}.
    * The enterprise administrator application can subscribe to system account removal events. When a system account is

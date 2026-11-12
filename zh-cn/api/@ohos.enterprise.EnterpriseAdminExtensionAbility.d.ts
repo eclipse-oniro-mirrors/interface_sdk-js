@@ -193,6 +193,22 @@ export default class EnterpriseAdminExtensionAbility {
   onAccountSwitched(accountId: number): void;
 
   /**
+   * 系统账号切换事件回调。当系统账号从一个账号切换到另一个账号时触发。与已有的onAccountSwitched(accountId: number)
+   * 相比，该回调同时提供切出账号ID和切入账号ID，便于更详细地跟踪账号切换过程。
+   *
+   * 通过接口
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * 注册MANAGED_EVENT_ACCOUNT_SWITCHED事件才能收到此回调。
+   *
+   * @param { number } fromAccountId - 切换前的用户ID，即切出的账号ID。
+   * @param { number } toAccountId - 切换后的用户ID，即切入的账号ID。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onAccountSwitched(fromAccountId: number, toAccountId: number): void;
+
+  /**
    * 系统账号删除事件回调。通过接口
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * 注册MANAGED_EVENT_ACCOUNT_REMOVED事件才能收到此回调。企业设备管理场景下，设备管理应用订阅系统账号删除事件，系统账号删除事件通知设备管理应用，设备管理应用可以在此回调函数中进行事件上报，通知企业管理员。
