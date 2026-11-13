@@ -104,12 +104,12 @@ declare namespace proxyChannelManager {
    * [ChannelState]{@link proxyChannelManager.ChannelState}.CHANNEL_WAIT_RESUME、CHANNEL_EXCEPTION_SOFTWARE_FAILED、
    * CHANNEL_BR_NO_PAIRED）时，调用此方法将失败，建议订阅
    * [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
-   * 事件监测通道状态，在通道不可用时暂停数据发送，通道恢复后继续发送。数据通过已建立的代理通道经蓝牙BR链路传输至对端设备，数据长度最大为4096字节，超出将返回错误码32390103。
+   * 事件监测通道状态，在通道不可用时暂停数据发送，通道恢复后继续发送。数据通过已建立的代理通道经蓝牙BR链路传输至对端设备，数据长度最大为4194304字节，超出将返回错误码32390103。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { int } channelId - 打开代理通道时获取的channelId，取值范围为1~2147483647。使用无效或已关闭的channelId将返回错误码32390004，超出取值范围时返回错误码
    *     32390006。channelId仅在代理通道可用时生效，通道关闭或断连后将不可用。
-   * @param { ArrayBuffer } data - 向对端发送的二进制数据，数据格式由应用层自定义，最大长度为4096字节。超出长度限制时返回错误码32390103。
+   * @param { ArrayBuffer } data - 向对端发送的二进制数据，数据格式由应用层自定义，最大长度为4194304字节。超出长度限制时返回错误码32390103。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -344,7 +344,7 @@ declare namespace proxyChannelManager {
     channelId: int;
 
     /**
-     * 接收到的字节数据，长度最大为4096字节。
+     * 接收到的字节数据，长度最大为4194304字节。
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly
