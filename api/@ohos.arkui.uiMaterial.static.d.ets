@@ -351,6 +351,35 @@ declare namespace uiMaterial {
   }
 
   /**
+   * Material color blend mode.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  export enum MaterialColorBlendMode {
+    /**
+     * Linear mix mode. The material color is mixed with the material background in a linear manner.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    LINEAR_MIX = 0,
+    /**
+     * Tinted glass mode. The material color is applied as a tinted glass effect, maintaining background transparency.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    TINTED_GLASS = 1
+  }
+
+  /**
    * Obtains the global material level, which is related to the device computing power. This configuration item
    * is defined by the device and cannot be modified.
    *
@@ -519,6 +548,20 @@ declare namespace uiMaterial {
      * @since 26.0.0 static
      */
     lightEffect?: LightEffectOptions | null;
+    /**
+     * Material color blend mode.
+     * Default value: uiMaterial.MaterialColorBlendMode.LINEAR_MIX.
+     * Note: 1. This parameter takes effect only on the display effect of high- and medium- computing power devices
+     * that support immersive material.
+     * 2. **TINTED_GLASS** takes effect only on some components. Currently supported components include:
+     * Button, Chip, ChipGroup, and Toggle. For other components, **TINTED_GLASS** does not take effect.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    colorBlendMode?: MaterialColorBlendMode;
   }
 
   /**
