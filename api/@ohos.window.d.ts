@@ -413,7 +413,7 @@ declare namespace window {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    ACCESSIBILITY_CALL_HELPER = 27,
+    TYPE_ACCESSIBILITY_CALL_HELPER = 27,
     /**
      * Main window of an application.
      *
