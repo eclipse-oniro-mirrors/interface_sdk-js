@@ -121,7 +121,7 @@ declare enum ImageRenderMode {
   Original,
 
   /**
-   * Render the image as a template image, ignoring the color information of the image.
+   * 黑白渲染模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -221,7 +221,7 @@ declare enum ImageInterpolation {
   None,
 
   /**
-   * Low usage of interpolated image data.
+   * 双线性插值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -233,7 +233,7 @@ declare enum ImageInterpolation {
   Low,
 
   /**
-   * Interpolated image data is used moderately.
+   * MipMap插值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -245,7 +245,7 @@ declare enum ImageInterpolation {
   Medium,
 
   /**
-   * High usage of interpolated image data may affect the speed of image rendering.
+   * Cubic插值，插值质量最高，可能会影响图片渲染的速度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -1286,11 +1286,10 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
    * @since 10
    */
   /**
-   * Triggered when an image is successfully loaded or decoded.
-   * The size of the image source that is successfully loaded is returned, in pixels.
+   * 图片加载成功或解码成功时触发。返回成功加载的图片的尺寸，单位为像素。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>This event is not triggered if the parameter type of the component is AnimatedDrawableDescriptor.
+   * <p><strong>说明：</strong>
+   * <br>当组件的参数类型为AnimatedDrawableDescriptor时，不触发该事件。
    * </p>
    *
    * @param { function } callback
@@ -1305,14 +1304,14 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
   onComplete(
     callback: (event?: {
       /**
-       * The width of the image source.
+       * 图片的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
        * @since 7
        */
       /**
-       * The width of the image source.
+       * 图片的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1320,7 +1319,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The width of the image source.
+       * 图片的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1329,7 +1328,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The width of the image source.
+       * 图片的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1340,14 +1339,14 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       width: number;
       /**
-       * The height of the image source.
+       * 图片的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
        * @since 7
        */
       /**
-       * The height of the image source.
+       * 图片的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1355,7 +1354,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The height of the image source.
+       * 图片的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1364,7 +1363,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The height of the image source.
+       * 图片的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1375,14 +1374,14 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       height: number;
       /**
-       * The width of the component source.
+       * 组件的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
        * @since 7
        */
       /**
-       * The width of the component source.
+       * 组件的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1390,7 +1389,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The width of the component source.
+       * 组件的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1399,7 +1398,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The width of the component source.
+       * 组件的宽。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1410,14 +1409,14 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       componentWidth: number;
       /**
-       * The height of the component source.
+       * 组件的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
        * @since 7
        */
       /**
-       * The height of the component source.
+       * 组件的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1425,7 +1424,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The height of the component source.
+       * 组件的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1434,7 +1433,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The height of the component source.
+       * 组件的高。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1445,18 +1444,14 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       componentHeight: number;
       /**
-       * The value of the status of the image being loaded successfully.
-       * If the returned status value is 0, the image data is successfully loaded.
-       * If the returned status value is 1, the image is successfully decoded.
+       * 图片加载成功的状态值。返回的状态值为0时，表示图片数据加载成功。返回的状态值为1时，表示图片解码成功。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
        * @since 7
        */
       /**
-       * The value of the status of the image being loaded successfully.
-       * If the returned status value is 0, the image data is successfully loaded.
-       * If the returned status value is 1, the image is successfully decoded.
+       * 图片加载成功的状态值。返回的状态值为0时，表示图片数据加载成功。返回的状态值为1时，表示图片解码成功。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1464,9 +1459,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The value of the status of the image being loaded successfully.
-       * If the returned status value is 0, the image data is successfully loaded.
-       * If the returned status value is 1, the image is successfully decoded.
+       * 图片加载成功的状态值。返回的状态值为0时，表示图片数据加载成功。返回的状态值为1时，表示图片解码成功。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1475,9 +1468,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The value of the status of the image being loaded successfully.
-       * If the returned status value is 0, the image data is successfully loaded.
-       * If the returned status value is 1, the image is successfully decoded.
+       * 图片加载成功的状态值。返回的状态值为0时，表示图片数据加载成功。返回的状态值为1时，表示图片解码成功。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1488,7 +1479,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       loadingStatus: number;
       /**
-       * The width of the picture that is actually drawn.
+       * 图片实际绘制的宽度。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1498,7 +1489,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The width of the picture that is actually drawn.
+       * 图片实际绘制的宽度。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1510,7 +1501,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       contentWidth: number;
       /**
-       * The height of the picture that is actually drawn.
+       * 图片实际绘制的高度。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1520,7 +1511,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The height of the picture that is actually drawn.
+       * 图片实际绘制的高度。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1532,7 +1523,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       contentHeight: number;
       /**
-       * The actual draw is offset from the x-axis of the component itself.
+       * 实际绘制内容相对于组件自身的x轴偏移。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1542,7 +1533,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The actual draw is offset from the x-axis of the component itself.
+       * 实际绘制内容相对于组件自身的x轴偏移。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1554,7 +1545,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        */
       contentOffsetX: number;
       /**
-       * The actual draw is offset from the y-axis of the component itself.
+       * 实际绘制内容相对于组件自身的y轴偏移。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1564,7 +1555,7 @@ declare class ImageAttribute extends CommonMethod<ImageAttribute> {
        * @form
        */
       /**
-       * The actual draw is offset from the y-axis of the component itself.
+       * 实际绘制内容相对于组件自身的y轴偏移。
        *
        * @type { number }
        * @syscap SystemCapability.ArkUI.ArkUI.Full

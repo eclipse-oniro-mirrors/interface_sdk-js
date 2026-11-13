@@ -74,7 +74,7 @@ export interface DrawableDescriptorLoadedResult {
  */
 export class DrawableDescriptor {
   /**
-   * Creates a new DrawableDescriptor.
+   * 创建一个新的DrawableDescriptor实例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi Hide this for inner system use.

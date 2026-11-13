@@ -9025,7 +9025,7 @@ declare interface BaseEvent {
 }
 
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9034,7 +9034,7 @@ declare interface BaseEvent {
  * @since 9
  */
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9044,7 +9044,7 @@ declare interface BaseEvent {
  * @since 10
  */
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11333,20 +11333,20 @@ declare type GestureCollectInterceptCallback = (recognizers: Array<GestureRecogn
    touchRecognizers?: Array<TouchRecognizer>) => GestureCollectIntervention;
 
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  */
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @typedef { import('../api/@ohos.multimedia.image').default.PixelMap } PixelMap
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11367,7 +11367,7 @@ declare type PixelMap = import('../api/@ohos.multimedia.image').default.PixelMap
 declare interface PixelMapMock {
 
   /**
-   * release function.
+   * 释放函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

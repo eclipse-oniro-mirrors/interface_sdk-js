@@ -96,6 +96,8 @@ export type ImageMatrix = matrix4.Matrix4Transit;
 export type RequestDownloadInfo = cacheDownload.DownloadInfo;
 
 /**
+ * 图片的渲染模式。
+ *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -106,7 +108,7 @@ export type RequestDownloadInfo = cacheDownload.DownloadInfo;
 export declare enum ImageRenderMode {
 
   /**
-     * Render according to the original image, including colors.
+     * 原色渲染模式。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -115,7 +117,7 @@ export declare enum ImageRenderMode {
   Original = 0,
 
   /**
-     * Render the image as a template image, ignoring the color information of the image.
+     * 黑白渲染模式。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -181,6 +183,8 @@ export declare enum DynamicRangeMode {
 }
 
 /**
+ * 图片的插值效果。
+ *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -189,7 +193,7 @@ export declare enum DynamicRangeMode {
 export declare enum ImageInterpolation {
 
   /**
-     * Do not use interpolated image data.
+     * 最近邻插值。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -198,7 +202,7 @@ export declare enum ImageInterpolation {
   None = 0,
 
   /**
-     * Low usage of interpolated image data.
+     * 双线性插值。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -207,7 +211,7 @@ export declare enum ImageInterpolation {
   Low = 1,
 
   /**
-     * Interpolated image data is used moderately.
+     * MipMap插值。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -216,7 +220,7 @@ export declare enum ImageInterpolation {
   Medium = 2,
 
   /**
-     * High usage of interpolated image data may affect the speed of image rendering.
+     * Cubic插值，插值质量最高，可能会影响图片渲染的速度。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1392,11 +1396,11 @@ export declare interface ResizableOptions {
 }
 
 /**
- * Defines the Image component.
+ * 通过图片数据源获取图片，用于后续渲染展示。
  *
- * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent | undefined } src - image resource type.
- * @param { ImageAIOptions } [imageAIOptions] - Options for AI analyzer.
- * @returns { ImageAttribute } The attribute of the Image.
+ * @param { PixelMap | ResourceStr | DrawableDescriptor | ImageContent | undefined } src - 图片的数据源。
+ * @param { ImageAIOptions } [imageAIOptions] - 给组件设置一个AI分析选项。
+ * @returns { ImageAttribute } Image的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

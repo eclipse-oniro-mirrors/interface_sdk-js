@@ -209,7 +209,7 @@ export declare enum ColoringStrategy {
 }
 
 /**
- * Image display mode.
+ * 用于设置图片填充效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -218,7 +218,7 @@ export declare enum ColoringStrategy {
  */
 export declare enum ImageFit {
   /**
-   * Zoom in or out without maintaining the aspect ratio so that the image fills the display boundary.
+   * 不保持宽高比进行放大缩小，使得图片充满显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -227,7 +227,7 @@ export declare enum ImageFit {
   Fill = 0,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that the image is completely displayed within the display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片完全显示在显示边界内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -236,8 +236,7 @@ export declare enum ImageFit {
   Contain = 1,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that both sides of the image are greater than or equal to the
-   * display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片两边都大于或等于显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,7 +245,7 @@ export declare enum ImageFit {
   Cover = 2,
 
   /**
-   * Adaptive display
+   * 图片根据其自身尺寸和组件的尺寸进行适当缩放，以在保持比例的同时填充视图。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -255,7 +254,7 @@ export declare enum ImageFit {
   Auto = 3,
 
   /**
-   * Keep the original size and display it in the center.
+   * 保持原有尺寸进行显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -264,7 +263,7 @@ export declare enum ImageFit {
   None = 5,
 
   /**
-   * Keep the aspect ratio displayed, and the image zooms out or remains unchanged.
+   * 保持宽高比进行显示，图片缩小或者保持不变。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -273,7 +272,7 @@ export declare enum ImageFit {
   ScaleDown = 6,
 
   /**
-   * Top Start.
+   * 图片显示在组件的顶部起始端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -282,7 +281,7 @@ export declare enum ImageFit {
   TOP_START = 7,
 
   /**
-   * The top is centered horizontally.
+   * 图片显示在组件的顶部横向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -291,7 +290,7 @@ export declare enum ImageFit {
   TOP = 8,
 
   /**
-   * Top tail end.
+   * 图片显示在组件的顶部尾端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -300,7 +299,7 @@ export declare enum ImageFit {
   TOP_END = 9,
 
   /**
-   * The starting end is centered longitudinally.
+   * 图片显示在组件的起始端纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -309,7 +308,7 @@ export declare enum ImageFit {
   START = 10,
 
   /**
-   * Center horizontal and vertical.
+   * 图片显示在组件的横向和纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -318,7 +317,7 @@ export declare enum ImageFit {
   CENTER = 11,
 
   /**
-   * The tail end is centered longitudinally.
+   * 图片显示在组件的尾端纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -327,7 +326,7 @@ export declare enum ImageFit {
   END = 12,
 
   /**
-   * Bottom starting end.
+   * 图片显示在组件的底部起始端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -336,7 +335,7 @@ export declare enum ImageFit {
   BOTTOM_START = 13,
 
   /**
-   * The bottom is centered horizontally.
+   * 图片显示在组件的底部横向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -345,7 +344,7 @@ export declare enum ImageFit {
   BOTTOM = 14,
 
   /**
-   * Bottom end.
+   * 图片显示在组件的底部尾端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -354,7 +353,7 @@ export declare enum ImageFit {
   BOTTOM_END = 15,
 
   /**
-   * Matrix of Image.
+   * 配合imageMatrix使用，使图像在Image组件自定义位置显示，且保持原有尺寸。不支持svg图源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1193,7 +1192,7 @@ export declare enum EdgeEffect {
  */
 export declare enum Alignment {
   /**
-   * Top Start.
+   * 顶部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1202,7 +1201,7 @@ export declare enum Alignment {
   TopStart = 0,
 
   /**
-   * The top is centered horizontally.
+   * 顶部水平居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1211,7 +1210,7 @@ export declare enum Alignment {
   Top = 1,
 
   /**
-   * Top tail end.
+   * 顶部末尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1220,7 +1219,7 @@ export declare enum Alignment {
   TopEnd = 2,
 
   /**
-   * The starting end is centered longitudinally.
+   * 起始端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1229,7 +1228,7 @@ export declare enum Alignment {
   Start = 3,
 
   /**
-   * Center horizontal and vertical.
+   * 水平垂直居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1238,7 +1237,7 @@ export declare enum Alignment {
   Center = 4,
 
   /**
-   * The tail end is centered longitudinally.
+   * 末尾端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1247,7 +1246,7 @@ export declare enum Alignment {
   End = 5,
 
   /**
-   * Bottom starting end.
+   * 底部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1256,7 +1255,7 @@ export declare enum Alignment {
   BottomStart = 6,
 
   /**
-   * The bottom is centered horizontally.
+   * 底部水平居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1265,7 +1264,7 @@ export declare enum Alignment {
   Bottom = 7,
 
   /**
-   * Bottom end.
+   * 底部末尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1284,7 +1283,7 @@ export declare enum Alignment {
  */
 export declare enum LocalizedAlignment {
   /**
-   * Top Start.
+   * 顶部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1873,7 +1872,7 @@ export declare enum VerticalAlign {
 }
 
 /**
- * ImageRepeat enumeration description
+ * 用于设置图片重复样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1882,7 +1881,7 @@ export declare enum VerticalAlign {
  */
 export declare enum ImageRepeat {
   /**
-   * Do not draw the picture again.
+   * 不重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1891,7 +1890,7 @@ export declare enum ImageRepeat {
   NoRepeat = 0,
 
   /**
-   * Repeat the drawing only on the horizontal axis.
+   * 只在水平轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1900,7 +1899,7 @@ export declare enum ImageRepeat {
   X = 1,
 
   /**
-   * Repeat the drawing only on the vertical axis.
+   * 只在垂直轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1909,7 +1908,7 @@ export declare enum ImageRepeat {
   Y = 2,
 
   /**
-   * Draw the picture repeatedly on both axes.
+   * 在两个轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1919,7 +1918,7 @@ export declare enum ImageRepeat {
 }
 
 /**
- * ImageSize enumeration description
+ * 用于设置图片宽高效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1928,7 +1927,7 @@ export declare enum ImageRepeat {
  */
 export declare enum ImageSize {
   /**
-   * Keep the scale of the original image unchanged.
+   * 保持原图的比例不变。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1937,8 +1936,7 @@ export declare enum ImageSize {
   Auto = 2,
 
   /**
-   * Keep the aspect ratio to zoom in or out the image so that both sides of the image are greater than or equal to the
-   * display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片两边都大于或等于显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1947,7 +1945,7 @@ export declare enum ImageSize {
   Cover = 1,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that the image is completely displayed within the display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片完全显示在显示边界内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1956,7 +1954,7 @@ export declare enum ImageSize {
   Contain = 0,
 
   /**
-   * Zoom in or out without maintaining the aspect ratio so that the image fills the display boundary.
+   * 不保持宽高比进行放大缩小，使得图片充满显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

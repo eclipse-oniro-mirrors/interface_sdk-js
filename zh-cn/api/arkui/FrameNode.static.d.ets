@@ -1968,7 +1968,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Image.
+   * 定义Image类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1980,7 +1980,7 @@ export declare namespace typeNode {
    * 创建 Image 类型的 FrameNode
    *
    * @param { UIContext } context - 用于创建 FrameNode 的 UI 上下文
-   * @param { FrameNodeOptions } [options] - Options for configuring FrameNode creation. [since 24]
+   * @param { FrameNodeOptions } [options] - 配置FrameNode创建的选项。[since 24]
    * @returns { Image } - 返回 Image 类型的 FrameNode
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1989,11 +1989,10 @@ export declare namespace typeNode {
   export function createImageNode(context: UIContext, options?: FrameNodeOptions): Image;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FrameNode的属性实例以设置属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { ImageAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 目标FrameNode。
+   * @returns { ImageAttribute | undefined } - 返回FrameNode的属性实例，如果不存在则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
