@@ -16,7 +16,7 @@
  */
 
 /**
- * @file
+ * @file UIContext实例
  * @kit ArkUI
  */
 import font from './@ohos.font';
