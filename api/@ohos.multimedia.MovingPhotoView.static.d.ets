@@ -371,6 +371,29 @@ export declare class MovingPhotoViewController {
      * @since 26.0.0 static
      */
     notifyMovingPhotoTransition(): void;
+    /**
+     * Start play moving photo.
+     * 
+     * @param { DisplayMode } mode - Display mode
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    startPlayback(mode: DisplayMode): void;
+    /**
+     * Set display mode, and trigger callback completion.
+     * 
+     * @param { DisplayMode } mode - Display mode
+     * @param { MovingPhotoViewEventCallback } callback - Set display mode completion callback
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    setDisplayMode(mode: DisplayMode, callback: MovingPhotoViewEventCallback): void;
 }
 /**
  * Dynamic range mode of moving photo.
@@ -480,6 +503,34 @@ export declare enum PixelMapFormat {
      * @since 26.0.0 static
      */
     UNKNOWN = 0
+}
+/**
+ * Enums for display mode.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum DisplayMode {
+    /**
+     * Display video and cover image.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    IMAGE_AND_VIDEO = 0,
+    /**
+     * Display only video.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    VIDEO_ONLY = 1
 }
 /**
  * Defines the MovingPhotoView component.
