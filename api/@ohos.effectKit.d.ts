@@ -26,6 +26,7 @@ import image from './@ohos.multimedia.image';
 import { AsyncCallback } from './@ohos.base';
 import image from './@ohos.multimedia.image';
 import { FractionStop } from './arkui/component/common';
+import type common2D from './@ohos.graphics.common2D';
 /*** endif */
 
 /**
@@ -115,7 +116,8 @@ declare namespace effectKit {
     blur(radius: double, tileMode: TileMode): Filter;
 
     /**
-     * Adds the elliptical gradient blur effect to the filter linked list, and returns the head node of the linked list.
+     * Adds the elliptical gradient blur effect to the filter linked list, and returns the head node of the linked
+     * list.
      *
      * @param { double } blurRadius - Blur radius, in pixels. The blur effect is proportional to the configured value.
      *     A larger value indicates a more obvious effect.
@@ -213,6 +215,63 @@ declare namespace effectKit {
     setColorMatrix(colorMatrix: Array<double>): Filter;
 
     /**
+     * Adds the outline and shadow effects to the effect chain and returns the head node of the chain. This effect
+     * extracts the contour of non-transparent areas in the image to generate an outline, and generates a projection
+     * based on the shadow configuration.
+     *
+     * > **NOTE**
+     * >
+     * > The input image should be a cutout image containing only a single subject with a clear contour, where the
+     * > subject area is fully opaque and the background area is fully transparent. Input images that do not meet
+     * > this standard may produce abnormal effects.
+     * > The pixel format of the input PixelMap should be RGBA_8888, BGRA_8888, RGBA_F16, or RGBA_1010102. Pixel
+     * > formats that do not meet this standard will cause abnormal output.
+     *
+     * @param { double } outlineWidth - Outline width, in px. The subject extends outward with a white edge of the
+     * width specified by outlineWidth, which is automatically truncated beyond the image range. Value range:
+     * [0, +∞). Values outside the value range are clamped to the boundary value.
+     * @param { ShadowOptions } [shadowOptions] - Optional. Shadow configuration parameters. When not specified,
+     * the default shadow configuration is used.
+     * @returns { Filter } Returns the Filter instance with the added effects, for further adding effects or
+     * obtaining the processed image.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    outline(outlineWidth: double, shadowOptions?: ShadowOptions): Filter;
+
+    /**
+     * Adds the halftone, outline, and shadow effects to the effect chain and returns the head node of the chain.
+     * This effect
+     * divides the original image into a regular grid and generates halftone dots based on the sampled color and its
+     * brightness at the center of each grid. Each grid has a white background, and the dots consist of a black inner
+     * circle and a colored ring.
+     *
+     * > **NOTE**
+     * >
+     * > The input image should be a cutout image containing only a single subject with a clear contour, where the
+     * > subject area is fully opaque and the background area is fully transparent. Input images that do not meet
+     * > this standard may produce abnormal effects.
+     * > The pixel format of the input PixelMap should be RGBA_8888, BGRA_8888, RGBA_F16, or RGBA_1010102. Pixel
+     * > formats that do not meet this standard will cause abnormal output.
+     *
+     * @param { HalftoneParam } halftoneParam - Halftone configuration parameters.
+     * @param { double } [outlineWidth] - Optional. Outline width, in px. The subject extends outward with a white
+     * edge of the width specified by outlineWidth, which is automatically truncated beyond the image range.
+     * Value range: [0, +∞). Values outside the value range are clamped to the boundary value. Default value: 0.0.
+     * @param { ShadowOptions } [shadowOptions] - Optional. Shadow configuration parameters. When not specified,
+     * the default shadow configuration is used.
+     * @returns { Filter } Returns the Filter instance with the added effects, for further adding effects or
+     * obtaining the processed image.
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    halftone(halftoneParam: HalftoneParam, outlineWidth?: double, shadowOptions?: ShadowOptions): Filter;
+
+    /**
      * Obtains image.PixelMap of the source image to which the effect chain has been added. It is commonly used
      * in scenarios where the processed image needs to be saved or displayed.
      *
@@ -267,6 +326,165 @@ declare namespace effectKit {
      * @since 23 static
      */
     getEffectPixelMap(useCpuRender : boolean): Promise<image.PixelMap>;
+  }
+
+  /**
+   * Shadow configuration parameters.
+   *
+   * > **NOTE**
+   * >
+   * > Shadows beyond the image range are truncated.
+   *
+   * @syscap SystemCapability.Multimedia.Image.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface ShadowOptions {
+    /**
+     * Optional. Shadow blur radius, in px. Value range: [0, +∞). Default value: 0. Values outside the value range
+     * are clamped to the boundary value. When the value is 0, no shadow effect is applied. A larger value produces
+     * a softer shadow edge.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    radius?: double;
+    /**
+     * Optional. Light direction vector. Default value: (0, 0). Value range: (-∞, +∞). The positive X-axis direction
+     * is to the right, and the positive Y-axis direction is downward. The light direction vector indicates the
+     * direction of shadow offset. When the vector is (0, 0), the shadow does not shift for any shadowDistance value.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    lightDirection?: common2D.Point;
+    /**
+     * Optional. Shadow offset distance, in px. Value range: [0, +∞). Default value: 0. Values outside the value
+     * range are clamped to the boundary value. This parameter determines the shadow offset distance, and together
+     * with lightDirection, determines the shadow coverage area. When the value is 0, the shadow does not shift
+     * for any lightDirection value.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    shadowDistance?: double;
+    /**
+     * Optional. Shadow color. Default value: black {red:0, green:0, blue:0, alpha:26}. The shadow opacity can be
+     * set through the Alpha channel.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    color?: common2D.Color;
+  }
+
+  /**
+   * Halftone configuration parameters.
+   *
+   * @syscap SystemCapability.Multimedia.Image.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HalftoneParam {
+    /**
+     * Grid cell side length, i.e., the center distance between adjacent dots, in px. Value range: [3, +∞). Values
+     * outside the value range are clamped to the boundary value. A larger value produces larger overall dot size
+     * and sparser arrangement.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    gridSize: double;
+    /**
+     * Optional. Ratio of the outer circle diameter upper limit to the grid side length. Value range: [0, 1].
+     * Default value: 1. Values outside the value range are clamped to the boundary value. The outer circle
+     * diameter is truncated by maxRadiusRatio * gridSize. When the value is 1, the maximum allowed outer circle
+     * diameter equals the grid side length.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    maxRadiusRatio?: double;
+    /**
+     * Optional. Influence coefficient of brightness on the outer circle radius. Value range: [0, +∞). Default
+     * value: 0. Values outside the value range are clamped to the boundary value. The actual outer circle radius
+     * is clamp(1 - lum * lumCoeff, 0, maxRadiusRatio) * gridSize / 2, where lum is the brightness of the sampled
+     * color at the grid center. This value is obtained from sampling and does not need to be set. When other
+     * parameters remain unchanged, a larger lumCoeff produces a stronger shrinking effect of brightness on the
+     * outer circle radius.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    lumCoeff?: double;
+    /**
+     * Optional. Colored ring width coefficient. Value range: [0, 1]. Default value: 0.5. Values outside the value
+     * range are clamped to the boundary value. The set width is colorWidthRatio * gridSize / 2. The black inner
+     * circle radius is the actual outer circle radius minus this width, and when the result is less than 0, it is
+     * treated as 0. When the value is 0, there is no colored ring. When the set width is greater than or equal to
+     * the outer circle radius, the effect is equivalent to the entire area within the outer circle radius being
+     * colored.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    colorWidthRatio?: double;
+    /**
+     * Optional. Saturation interpolation coefficient of the colored area, used to interpolate between the grayscale
+     * color corresponding to the sampled color and the sampled color. Value range: [0, 1]. Default value: 1.
+     * Values outside the value range are clamped to the boundary value. When the value is 0, the grayscale color
+     * is used. When the value is 1, the sampled color is preserved.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    saturation?: double;
+    /**
+     * Optional. Ratio of the edge transition band half-width to gridSize. Value range: [0, +∞). Default value: 0.
+     * Values outside the value range are clamped to the boundary value. With the inner circle and outer circle
+     * boundaries as centers, it extends smoothness * gridSize to both sides respectively, forming a transition
+     * band with a total width of 2 * smoothness * gridSize. The inner circle edge is processed first, then the
+     * outer circle edge. When the value is 0, there is no transition band and the edge has no smooth transition.
+     * A larger value
+     * produces a wider transition band and softer edges.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    smoothness?: double;
+    /**
+     * Optional. Rotation angle of the grid coordinates, with counterclockwise as the positive direction.
+     * Unit: rad (radians). Used to adjust the dot arrangement direction. Value range: (-∞, +∞). Default value: 0.
+     * When the value is 0, the grid does not rotate, and the dot arrangement direction is horizontal to the right.
+     *
+     * @syscap SystemCapability.Multimedia.Image.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    angle?: double;
   }
 
   /**
@@ -805,7 +1023,8 @@ declare namespace effectKit {
    * @since 10 dynamic
    * @since 23 static
    */
-  function createColorPicker(source: image.PixelMap, region: Array<double>, callback: AsyncCallback<ColorPicker>): void;
+  function createColorPicker(source: image.PixelMap, region: Array<double>,
+    callback: AsyncCallback<ColorPicker>): void;
 
   /**
    * Enumerates the tile modes of the shader effect.
