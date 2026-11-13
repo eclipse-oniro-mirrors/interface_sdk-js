@@ -1598,5 +1598,256 @@ declare namespace hidebug {
    * @since 26.0.1 dynamic&static
    */
   function getAppRunningUniqueId(): string;
+
+  /**
+   * Enumerates the profiler resource type.
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  enum ProfilerResourceType {
+    /**
+     * File descriptor.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    FD = 0,
+
+    /**
+     * Thread.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    THREAD = 1,
+
+    /**
+     * Native Memory.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    NATIVE = 2,
+
+    /**
+     * GPU Memory.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    GPU = 3,
+
+    /**
+     * Global Handle.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    GLOBAL_HANDLE = 4,
+
+    /**
+     * DMA Memory.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    DMA = 5,
+
+    /**
+     * Ashmem Memory.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    ASHMEM = 6,
+
+    /**
+     * Composite heap.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    COMPOSITE_HEAP = 7
+  }
+
+  /**
+   * Profiler configuration.
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ProfilerConfig {
+    /**
+     * Maximum duration in second.
+     * The value must be an integer within [1,3600]. Default value: 900.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxDurationSec?: int;
+
+    /**
+     * Filter size in bytes.
+     * Value range: [1,4294967295]. Default value: 1024.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    filterSize?: int;
+
+    /**
+     * Maximum stack depth.
+     * Value range: [1, 30]. Default value: 30.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxStackDepth?: int;
+
+    /**
+     * Maximum async nesting depth.
+     * Value range: [0,16]. Default value: 1.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxAsyncNestingDepth?: int;
+
+    /**
+     * Maximum async task stack depth.
+     * The value must be an integer within [1,256]. Default value: 16.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    maxAsyncTaskStackDepth?: int;
+
+    /**
+     * Statistics interval in seconds.
+     * The value must be an integer within [1,3600]. Default value: 10.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    statisticsIntervalSec?: int;
+
+    /**
+     * Sample interval in bytes.
+     * Value range: [384,4294967295]. Default value: 384.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    sampleIntervalBytes?: int;
+
+    /**
+     * Discard destroyed records.
+     * Default value: true.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    discardDestroyed?: boolean;
+  }
+
+  /**
+   * Profiler result.
+   *
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ProfilerResult {
+    /**
+     * Profiler resource type.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    type: ProfilerResourceType;
+
+    /**
+     * Profiler result file path. If no file is collected, a string of 0 characters is returned.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    filePath: string;
+  }
+
+  /**
+   * Profiler callback type
+   *
+   * @param { ProfilerResult } result - Profiler result.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  type ProfilerCallback = (result: ProfilerResult) => void;
+
+  /**
+   * Start the profiler to capture data. After starting, when the duration reaches the specified or default maximum
+   * value,  or the size of the result file exceeds the limit, the system automatically stops capturing data and
+   * notifies the application through the callback function.
+   *
+   * @param { ProfilerResourceType } type - Target profiler resource type.
+   * @param { ProfilerCallback } callback - Callback function.
+   * @param { ProfilerConfig } [config] - Profiler configuration.
+   *     <br>Default value: Use the default values for all configuration parameters.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 11400416 - Invalid resource type.
+   * @throws { BusinessError } 11400411 - Invalid maximum duration.
+   * @throws { BusinessError } 11400412 - Invalid filter size.
+   * @throws { BusinessError } 11400413 - Invalid stack depth.
+   * @throws { BusinessError } 11400431 - Invalid nesting depth.
+   * @throws { BusinessError } 11400432 - Invalid async-stack depth.
+   * @throws { BusinessError } 11400414 - Invalid statistics interval.
+   * @throws { BusinessError } 11400415 - Invalid sample interval bytes.
+   * @throws { BusinessError } 11400421 - Resource profiler already started.
+   * @throws { BusinessError } 11400423 - The number of resource profiling processes exceeds.
+   * @throws { BusinessError } 11400424 - Resource profiling conflicts with CLI tools or system profiling tasks.
+   * @throws { BusinessError } 11400426 - The daily quota for resource collection has been exhausted.
+   * @throws { BusinessError } 11400427 - The system CPU is overloaded.
+   * @throws { BusinessError } 11400428 - The available memory space is insufficient.
+   * @throws { BusinessError } 11400429 - The available storage space is insufficient.
+   * @throws { BusinessError } 11400430 - Other profiling errors.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  function startProfiler(type: ProfilerResourceType, callback: ProfilerCallback, config?: ProfilerConfig): Promise<void>;
+
+  /**
+   * Stop the profiler that has already started.
+   *
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 11400422 - Failed to stop resource profiling because it is not started.
+   * @throws { BusinessError } 11400430 - Other profiling errors.
+   * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  function stopProfiler(): Promise<void>;
 }
 export default hidebug;
