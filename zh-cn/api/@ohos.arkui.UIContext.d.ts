@@ -3069,8 +3069,20 @@ export class ComponentUtils {
 }
 
 /**
-* class OverlayManager
-*
+ * 提供绘制浮层的能力。
+ *
+ * > **说明：**
+ * >
+ * > - 该类的初始API从API version 12开始支持。
+ * >
+ * > - 在以下API示例中，必须先在**UIContext**中使用[getOverlayManager()]{@link UIContext#getOverlayManager}获取**OverlayManager**实例，然后使用该实例调用API。
+ * >
+ * > - **OverlayManager**上的节点位于页面层级之上，但在**Dialog**、**Popup**、**Menu**、**BindSheet**、**BindContentCover**和**Toast**等组件之下。
+ * >
+ * > - **OverlayManager**上节点在安全区内外的绘制方式与页面一致，键盘避让方式也与页面相同。
+ * >
+ * > - 对于与**OverlayManager**相关的属性，建议使用AppStorage在应用内进行全局存储，以避免切换页面时属性值发生变化导致业务错误。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -3080,18 +3092,17 @@ export class ComponentUtils {
 export class OverlayManager {
 
   /**
-   * Adds a specified ComponentContent node to the OverlayManager.
+   * 向OverlayManager添加指定的ComponentContent节点。
    *
-   * @param { ComponentContent } content -  Content to add to the target node on the **OverlayManager**.<br>
-   *     **NOTE**<br>
-   *     By default, the new node is centered on the page and stacked according to its stacking level.
-   * @param { number } [ index ] - Stacking level of the new node on the **OverlayManager**.<br>
-   *     **NOTE**<br>
-   *     If the value is greater than or equal to 0, a larger value means a higher layer for
-   *     the **ComponentContent** node. If multiple **ComponentContent** nodes have the same index,
-   *     the later-added ones appear above earlier ones.<br>If the value is less than 0, **null**, or **undefined**,
-   *     the **ComponentContent** node is added at the highest level by default.<br>
-   *     If the same **ComponentContent** node is added multiple times, only the last added one is retained.
+   * @param { ComponentContent } content -  添加到**OverlayManager**目标节点上的内容。<br>
+   *     **注意**<br>
+   *     默认情况下，新节点在页面中居中，并根据其堆叠级别进行堆叠。
+   * @param { number } [ index ] - 新节点在**OverlayManager**上的堆叠级别。<br>
+   *     **注意**<br>
+   *     如果值大于等于0，值越大表示**ComponentContent**节点的层级越高。
+   *     如果多个**ComponentContent**节点具有相同的index，后添加的节点显示在先添加的节点上方。<br>如果值小于0、**null**或**undefined**，
+   *     **ComponentContent**节点默认添加到最高层级。<br>
+   *     如果同一个**ComponentContent**节点被多次添加，仅保留最后添加的节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3101,15 +3112,15 @@ export class OverlayManager {
   addComponentContent(content: ComponentContent, index?: number): void;
 
   /**
-   * Creates a floating layer node with the specified display order.
-   * This API allows you to define the stacking order of the nodes when they are created.
+   * 创建具有指定显示顺序的浮层节点。
+   * 该接口允许在创建节点时定义节点的堆叠顺序。
    *
-   * @param { ComponentContent } content - Content to add to the target node on the **OverlayManager**.
-   *     <br>**NOTE**<br>
-   *     By default, the new node is centered on the page and stacked according to its stacking level.
-   * @param { LevelOrder } [ levelOrder ] - Display order of the new floating layer node.<br>
-   *     **NOTE**<br>
-   *     - Default value: **LevelOrder.clamp(0)**
+   * @param { ComponentContent } content - 添加到**OverlayManager**目标节点上的内容。
+   *     <br>**注意**<br>
+   *     默认情况下，新节点在页面中居中，并根据其堆叠级别进行堆叠。
+   * @param { LevelOrder } [ levelOrder ] - 新浮层节点的显示顺序。<br>
+   *     **注意**<br>
+   *     - 默认值：**LevelOrder.clamp(0)**
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3119,9 +3130,9 @@ export class OverlayManager {
   addComponentContentWithOrder(content: ComponentContent, levelOrder?: LevelOrder): void;
 
   /**
-   * Removes a specified ComponentContent node from the OverlayManager
+   * 从OverlayManager移除指定的ComponentContent节点。
    *
-   * @param { ComponentContent } content - Content to remove from the **OverlayManager**.
+   * @param { ComponentContent } content - 要从**OverlayManager**中移除的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3131,9 +3142,9 @@ export class OverlayManager {
   removeComponentContent(content: ComponentContent): void;
 
   /**
-   * Show the ComponentContent.
+   * 显示ComponentContent。
    *
-   * @param { ComponentContent } content - Content to show on the **OverlayManager**.
+   * @param { ComponentContent } content - 要在**OverlayManager**上显示的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3143,9 +3154,9 @@ export class OverlayManager {
   showComponentContent(content: ComponentContent): void;
 
   /**
-   * Hide the ComponentContent.
+   * 隐藏ComponentContent。
    *
-   * @param { ComponentContent } content - Content to hide on the **OverlayManager**.
+   * @param { ComponentContent } content - 要在**OverlayManager**上隐藏的内容。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3155,7 +3166,7 @@ export class OverlayManager {
   hideComponentContent(content: ComponentContent): void;
 
   /**
-   * Show all ComponentContents on the OverlayManager.
+   * 显示OverlayManager上的所有ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3166,7 +3177,7 @@ export class OverlayManager {
   showAllComponentContents(): void;
 
   /**
-   * Hide all ComponentContents on the OverlayManager.
+   * 隐藏OverlayManager上的所有ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5209,9 +5220,9 @@ export class UIContext {
   getUIObserver(): UIObserver;
 
   /**
-   * Obtains the OverlayManager object.
+   * 获取OverlayManager对象。
    *
-   * @returns { OverlayManager } OverlayManager instance obtained.
+   * @returns { OverlayManager } 返回OverlayManager实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5233,11 +5244,11 @@ export class UIContext {
   getMagnifier(): Magnifier;
 
   /**
-   * Init OverlayManager.
+   * 初始化OverlayManager。
    *
-   * @param { OverlayManagerOptions } options - Options.
-   * @returns { boolean } Returns true if it is called first and before getting an OverlayManager instance; returns
-   *     false otherwise.
+   * @param { OverlayManagerOptions } options - 选项。
+   * @returns { boolean } 在首次调用且在获取OverlayManager实例之前调用时返回true；否则
+   *     返回false。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5247,9 +5258,9 @@ export class UIContext {
   setOverlayManagerOptions(options: OverlayManagerOptions): boolean;
 
   /**
-   * Get object OverlayManagerOptions.
+   * 获取OverlayManagerOptions对象。
    *
-   * @returns { OverlayManagerOptions } object OverlayManagerOptions.
+   * @returns { OverlayManagerOptions } 返回OverlayManagerOptions对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5746,9 +5757,9 @@ export class UIContext {
   removeLocalInputEventMonitor(monitor: InputEventMonitor): void;
 
   /**
-   * Get object context menu controller.
+   * 获取上下文菜单控制器对象。
    *
-   * @returns { ContextMenuController } object context menu controller.
+   * @returns { ContextMenuController } 返回上下文菜单控制器对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

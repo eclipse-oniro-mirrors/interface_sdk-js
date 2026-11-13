@@ -352,7 +352,7 @@ declare namespace promptAction {
          */
         TOP_MOST = 1,
         /**
-         * Toast shows in SYSTEM_TOAST window.
+         * Toast显示在系统Toast窗。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @systemapi
@@ -742,7 +742,7 @@ declare namespace promptAction {
          */
         systemMaterial?: SystemUiMaterial;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -752,7 +752,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1272,7 +1272,7 @@ declare namespace promptAction {
          */
         systemMaterial?: SystemUiMaterial;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1282,7 +1282,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1821,7 +1821,7 @@ declare namespace promptAction {
          */
         systemMaterial?: SystemUiMaterial;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1831,7 +1831,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
