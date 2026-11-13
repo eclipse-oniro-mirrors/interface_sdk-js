@@ -219,6 +219,43 @@ export declare enum LayoutStyle {
 }
 
 /**
+ * Declare the overlap mode of the tab bar and tab content.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum BarOverlapMode {
+  /**
+   * The tab bar does not overlap with the tab content. The tab content height equals the Tabs height minus the tab bar
+   * height. This is equivalent to barOverlap(false).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  STANDARD = 0,
+  /**
+   * The tab bar floats on top of the tab content. The tab content occupies all available space. This is equivalent to
+   * barOverlap(true).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  STACK = 1,
+  /**
+   * The tab bar area becomes part of the safe area padding for the tab content. The tab content can extend into the
+   * tab bar area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SAFE_AREA_PADDING = 2
+}
+
+/**
  * Declare the cache mode of the child components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1349,6 +1386,22 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 23 static
    */
   default barOverlap(value: boolean | undefined): this;
+
+  /**
+   * Sets the overlap mode of the tab bar and TabContent component.
+   *
+   * @param { BarOverlapMode | undefined } value - Overlap mode of the tab bar and tab content.
+   * **BarOverlapMode.STACK**: The tab bar overlaps with the tab content with a blurred background.
+   * **BarOverlapMode.STANDARD**: There is no blur or overlap effect.
+   * **BarOverlapMode.SAFE_AREA_PADDING**: The tab bar area becomes part of the safe area padding for the tab
+   * content.
+   * Default value is **BarOverlapMode.STANDARD**.
+   * @returns { TabsAttribute } the attribute of the tabs
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default barOverlap(value: BarOverlapMode | undefined): this;
 
   /**
    * Set the background color of the tab bar.
