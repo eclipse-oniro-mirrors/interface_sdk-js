@@ -29,6 +29,7 @@ import { BusinessError, Callback } from './@ohos.base';
  * > 2. 本模块为系统接口。
  *
  * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
+ * @systemapi
  * @since 20 dynamic
  * @since 23 static
  */
@@ -38,6 +39,7 @@ declare namespace onScreen {
    * 定义屏上内容的场景类型。
    *
    * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
+   * @systemapi
    * @since 20 dynamic
    * @since 23 static
    */
@@ -66,6 +68,7 @@ declare namespace onScreen {
    * 定义控制事件的类型。
    *
    * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
+   * @systemapi
    * @since 20 dynamic
    * @since 23 static
    */
