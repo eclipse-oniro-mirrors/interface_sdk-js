@@ -843,6 +843,27 @@ declare namespace dataShare {
     delTemplate(uri: string, subscriberId: string): void;
 
     /**
+     * Uses the valid subscriber IDs to clean up the data of invalid subscriber IDs.
+     *
+     * Templates whose subscriber ID is not in the valid subscriber ID list will be removed
+     * from the server. Only silent access is supported.
+     *
+     * @param { Array<string> } validSubscribers - Valid subscriber IDs used to clean up the
+     *     data of invalid subscriber IDs.
+     *     <br>The maximum length is 50 and the array must not be empty.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 15700013 - The DataShareHelper instance is already closed.
+     * @throws { BusinessError } 15700016 - Parameter error.Possible causes:
+     *     <br>1. The array parameter exceeds the allowed length.
+     *     <br>2. The array parameter is empty.
+     * @syscap SystemCapability.DistributedDataManager.DataShare.Consumer
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    cleanInvalidData(validSubscribers: Array<string>): Promise<void>;
+
+    /**
      * Subscribes to the changes of the data corresponding to the specified URI and template. Only silent access is
      * supported. This function does not support cross-user notification subscription.
      *
