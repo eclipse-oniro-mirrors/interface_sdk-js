@@ -2716,6 +2716,7 @@ declare namespace media {
      * 表示音画不同步的指标事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LIP_ASYNC = 2,
@@ -2724,6 +2725,7 @@ declare namespace media {
      * 表示加载速率变化超过10%的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADINGRATE_CHANGE = 3,
@@ -2732,6 +2734,7 @@ declare namespace media {
      * 表示加载数据请求错误的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADING_ERROR = 4,
@@ -2740,6 +2743,7 @@ declare namespace media {
      * 表示播放内容切换的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_CHANGED = 5,
@@ -2748,6 +2752,7 @@ declare namespace media {
      * 表示播放内容不连续的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_DISCONTINUITY = 6,
@@ -2756,6 +2761,7 @@ declare namespace media {
      * 表示音频状态变化的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_AUDIO_ABNORMAL = 7
@@ -3135,13 +3141,11 @@ declare namespace media {
      *
      * @param { MediaType } trackType - 指定的媒体类型，见[MediaType]{@link #MediaType}.
      * @returns { Promise<int> } Promise对象，返回已选择轨道索引。
-     * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 5400101 - No memory. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - I/O error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -3841,7 +3845,6 @@ declare namespace media {
      * 默认值: PRIVACY_TYPE_PUBLIC.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @crossplatform
      * @since 26.0.0 dynamic&static
@@ -4789,8 +4792,8 @@ declare namespace media {
      * 连接或断开连接时通过参考“响应音频输出设备更改”来实现播放器行为。
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } callback - 用于监听设备更改事件的回调。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
@@ -5040,8 +5043,8 @@ declare namespace media {
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } [callback] - 回调用于返回
      *     当前音频流的输出设备描述符和更改原因。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
