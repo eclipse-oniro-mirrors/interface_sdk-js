@@ -1575,12 +1575,12 @@ declare namespace certificateManager {
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
    * @returns { Promise<CMResult> } Promise用于返回操作结果，即
-   *     [CMResult]{@link ./@ohos.security.certManager:certificateManager.CMResult}对象中的**certList**。
+   *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult}对象中的**certList**。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 17500001 - Internal error. Possible causes:
-   *     <br>1. IPC communication failed;
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
+   *     <br>2. Memory operation error; 3. File operation error. Please try again.
    *     <br>2. Memory operation error;
    *     <br>3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
