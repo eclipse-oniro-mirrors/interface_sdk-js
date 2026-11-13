@@ -1405,7 +1405,7 @@ declare namespace behaviorAwareness {
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - Callback used to return the
    *     awareness event. 
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1432,7 +1432,7 @@ declare namespace behaviorAwareness {
    *     <br>Default value: If this parameter is not specified, all subscriptions of the current package
    *     are canceled.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1453,7 +1453,7 @@ declare namespace behaviorAwareness {
    *
    * @param { FeedbackData } feedback - Feedback data.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
