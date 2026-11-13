@@ -319,10 +319,10 @@ declare namespace screenshot {
     blackWindowIds?: Array<int>;
 
     /**
-     * Indicates the pixel format of the captured image. The default value is image.PixelMapFormat.RGBA_8888.Only the
+     * Pixel format of the captured image. Only
      * [RGBA_8888]{@link @ohos.multimedia.image:image.PixelMapFormat} and
-     * [BGRA_8888]{@link @ohos.multimedia.image:image.PixelMapFormat} formats are supported.
-     * Passing any other pixel format returns a parameter error with error code 401.
+     * [BGRA_8888]{@link @ohos.multimedia.image:image.PixelMapFormat} are supported.
+     * If this parameter is not specified, the default value **image.PixelMapFormat.RGBA_8888** is used.
      *
      * [@default](https://gitcode.com/default) image.PixelMapFormat.RGBA_8888
      * @syscap SystemCapability.WindowManager.WindowManager.Core
