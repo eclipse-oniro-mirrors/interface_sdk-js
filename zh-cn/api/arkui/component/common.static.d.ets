@@ -10761,7 +10761,7 @@ export declare interface ClickEffect {
     scale?: double;
 }
 /**
- * Defines the fadingEdge options.
+ * fadingEdge属性边缘渐隐参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10769,7 +10769,7 @@ export declare interface ClickEffect {
  */
 export declare interface FadingEdgeOptions {
     /**
-     * The length of FadingEdge.
+     * 设置边缘渐隐长度。
      *
      * @default 32vp
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10779,7 +10779,7 @@ export declare interface FadingEdgeOptions {
     fadingEdgeLength?: LengthMetrics;
 }
 /**
- * Define nested scroll options
+ * 定义嵌套滚动选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10787,7 +10787,7 @@ export declare interface FadingEdgeOptions {
  */
 export declare interface NestedScrollOptions {
     /**
-     * Set NestedScrollMode when the scrollable component scrolls forward
+     * 滚动组件往末尾端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -10795,7 +10795,7 @@ export declare interface NestedScrollOptions {
      */
     scrollForward: NestedScrollMode;
     /**
-     * Set NestedScrollMode when the scrollable component scrolls backward
+     * 滚动组件往起始端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15378,7 +15378,7 @@ export declare abstract class TextContentControllerBase {
     scrollToVisible(range?: TextRange): void
 }
 /**
- * Enum of scrollable containers' content clip mode.
+ * 表示滚动容器的内容裁剪模式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15387,7 +15387,7 @@ export declare abstract class TextContentControllerBase {
  */
 export declare enum ContentClipMode {
     /**
-     * Clip to content rect inside margin & padding.
+     * 按内容区裁剪，对应图中的绿色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15395,7 +15395,7 @@ export declare enum ContentClipMode {
      */
     CONTENT_ONLY = 0,
     /**
-     * Clip to scrollable's outer rect, including padding but inside margin.
+     * 按组件区域裁剪，对应图中的整个蓝色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15403,7 +15403,7 @@ export declare enum ContentClipMode {
      */
     BOUNDARY = 1,
     /**
-     * Clip to the safeArea of scrollable container.
+     * 按组件配置的SafeArea区域裁剪，对应图中的整个黄色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15423,11 +15423,11 @@ export declare enum ContentClipMode {
  */
 export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
-     * Sets the scrollbar state.
+     * 设置滚动条状态。
      *
-     * @param { BarState | undefined } barState - Scrollbar state.<br>Default value: <em>BarState.Auto</em>
-     *     for the <em>List</em>, <em>Grid</em>, and <em>Scroll</em> components and <em>BarState.Off</em>
-     *     for the <em>WaterFlow</em> component
+     * @param { BarState | undefined } barState - 滚动条状态。<br>默认值：<em>BarState.Auto</em>
+     *     适用于<em>List</em>、<em>Grid</em>和<em>Scroll</em>组件，以及<em>BarState.Off</em>
+     *     适用于<em>WaterFlow</em>组件。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15435,12 +15435,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBar(barState: BarState | undefined): this;
     /**
-     * Sets the scrollbar color.
+     * 设置滚动条的颜色。
      *
-     * @param { Color | int | string | Resource | undefined } color - Scrollbar color.
-     *     <br>Default value: <em>'\#182431'</em> (40% opacity)
-     *     <br>A number value indicates a HEX color in RGB or ARGB format, for example, <em>0xffffff</em>.
-     *     A string value indicates a color in RGB or ARGB format, for example, <em>'#ffffff'</em>.
+     * @param { Color | int | string | Resource | undefined } color - 滚动条的颜色。
+     *     <br>默认值：<em>'\#182431'</em>（40%不透明度）
+     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：<em>0xffffff</em>。
+     *     string为rgb或者argb格式颜色，示例：<em>'#ffffff'</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15448,12 +15448,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarColor(color: Color | int | string | Resource | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
-     * @param { double | string | undefined } value - Scrollbar width.<br>Default value: <em>4</em>
-     *     <br>Unit: vp
-     *     <br>If this parameter is set to a value less than or equal to 0, the default value is used.
-     *     The value <em>0</em> means not to show the scrollbar.
+     * @param { double | string | undefined } value - 滚动条的宽度。<br>默认值：<em>4</em>
+     *     <br>单位：vp
+     *     <br>设置为小于0的值时，按默认值处理。
+     *     设置为<em>0</em>时，不显示滚动条。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15461,13 +15461,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: double | string | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
-     * @param { Resource | undefined } value  - Scrollbar width.
-     *     <br>Unit: vp
-     *     <br>Default value: <em>4</em>
-     *     <br>If this parameter is set to a value less than or equal to 0, the default value is used.
-     *     The value <em>0</em> means not to show the scrollbar.
+     * @param { Resource | undefined } value  - 滚动条的宽度。
+     *     <br>单位：vp
+     *     <br>默认值：<em>4</em>
+     *     <br>设置为小于0的值时，按默认值处理。
+     *     设置为<em>0</em>时，不显示滚动条。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15475,10 +15475,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: Resource | undefined): this;
     /**
-     * Margin of the scrollbar.
+     * 设置滚动条的边距。
      *
-     * @param { ScrollBarMargin | undefined } margin - Margin of the scrollbar.
-     *     <br>Passing undefined will restore the default value.Default value: {start: LengthMetrics.vp(0), end: 
+     * @param { ScrollBarMargin | undefined } margin - 滚动条起始、末尾边距。
+     *     <br>传入undefined时恢复默认值。默认值：{start: LengthMetrics.vp(0), end:
      *     LengthMetrics.vp(0)}.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15487,11 +15487,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarMargin(margin: ScrollBarMargin | undefined): this;
     /**
-     * Set the scroll bar auto adjust the margin to avoid the padding, safeAreaPadding, and
-     * contentStartOffset/contentEndOffset of the component.
+     * 设置滚动条自动调整边距，以避让组件的padding、safeAreaPadding和
+     * contentStartOffset/contentEndOffset区域。
      *
-     * @param { boolean | undefined } enable - Whether to enable automatic adjustment of scroll bar margin.
-     *     <br>Default value: false.
+     * @param { boolean | undefined } enable - 是否自动调整边距。
+     *     <br>默认值：false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15499,19 +15499,19 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default autoAdjustScrollBarMargin(enable: boolean | undefined): this;
     /**
-     * Sets the effect used when the scroll boundary is reached.
+     * 设置边缘滑动效果。
      *
-     * @param { EdgeEffect | undefined } edgeEffect - Effect used when the scroll boundary is
-     *     reached. The spring and shadow effects are supported. Default value:
-     *     <em>EdgeEffect.None</em> for the <em>Grid</em>, <em>Scroll</em>, and <em>WaterFlow</em>
-     *     components and <em>EdgeEffect.Spring</em> for the <em>List</em> component
-     * @param { EdgeEffectOptions } [options] - Whether to enable the scroll effect when the
-     *     component content is smaller than the component itself. The value
-     *     <em>{ alwaysEnabled: true }</em> means to enable the scroll effect, and
-     *     <em>{ alwaysEnabled: false }</em> means the opposite. Default value:
-     *     <em>{ alwaysEnabled: false }</em> for the <em>List</em>, <em>Grid</em>,
-     *     and <em>WaterFlow</em> components, and <em>{ alwaysEnabled: true }</em>
-     *     for the <em>Scroll</em> component
+     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，
+     *     支持弹簧效果和阴影效果。默认值：
+     *     <em>EdgeEffect.None</em>适用于<em>Grid</em>、<em>Scroll</em>和<em>WaterFlow</em>
+     *     组件，<em>EdgeEffect.Spring</em>适用于<em>List</em>组件。
+     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，
+     *     是否开启滑动效果。
+     *     <em>{ alwaysEnabled: true }</em>表示开启滑动效果，
+     *     <em>{ alwaysEnabled: false }</em>表示不开启。默认值：
+     *     <em>{ alwaysEnabled: false }</em>适用于<em>List</em>、<em>Grid</em>、
+     *     <em>WaterFlow</em>组件，<em>{ alwaysEnabled: true }</em>
+     *     适用于<em>Scroll</em>组件。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15519,10 +15519,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default edgeEffect(edgeEffect: EdgeEffect | undefined, options?: EdgeEffectOptions): this;
     /**
-     * Called when setting whether to enable fading Edge effect.
+     * 设置是否开启边缘渐隐效果。
      *
-     * @param { boolean | undefined } enabled - Whether to turn on the edge fade effect
-     * @param { FadingEdgeOptions } [options] - The options of fadingEdge.
+     * @param { boolean | undefined } enabled - 是否开启边缘渐隐效果。
+     * @param { FadingEdgeOptions } [options] - 边缘渐隐参数对象。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15530,9 +15530,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default fadingEdge(enabled: boolean | undefined, options?: FadingEdgeOptions): this;
     /**
-     * Sets the nested scrolling options.
+     * 设置嵌套滚动选项。
      *
-     * @param { NestedScrollOptions | undefined } value - Nested scrolling options.
+     * @param { NestedScrollOptions | undefined } value - 嵌套滚动选项。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15540,9 +15540,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default nestedScroll(value: NestedScrollOptions | undefined): this;
     /**
-     * Sets whether to support scroll gestures.
+     * 设置是否支持滚动手势。
      *
-     * @param { boolean | undefined } value - Whether to support scroll gestures.<br>Default value: <em>true</em>
+     * @param { boolean | undefined } value - 是否支持滚动手势。<br>默认值：<em>true</em>
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15550,9 +15550,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollInteraction(value: boolean | undefined): this;
     /**
-     * Sets the friction coefficient.
+     * 设置摩擦系数。
      *
-     * @param { double | Resource | undefined } value - Friction coefficient.
+     * @param { double | Resource | undefined } value - 摩擦系数。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15560,11 +15560,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default friction(value: double | Resource | undefined): this;
     /**
-     * Sets the offset from the start of the content to the boundary of the scrollable display area.
+     * 设置从内容起始位置到可滚动显示区域边界的偏移量。
      *
-     * @param { double | Resource | undefined } offset - Offset from the start of the content to the boundary of
-     *     the scrollable display area.
-     *     <br>Unit: vp, <br>Passing undefined will restore the default value. Default value: <em>0</em>.
+     * @param { double | Resource | undefined } offset - 内容区域起始偏移量。滚动组件滚动到起始位置时，
+     *     内容与组件显示区域边界保留指定距离。
+     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15572,11 +15572,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default contentStartOffset(offset: double | Resource | undefined): this;
     /**
-     * Sets the offset from the end of the content to the boundary of the scrollable display area.
+     * 设置从内容末尾位置到可滚动显示区域边界的偏移量。
      *
-     * @param { double | Resource | undefined } offset - Offset from the end of the content to the boundary of
-     *     the scrollable display area.
-     *     <br>Unit: vp, <br>Passing undefined will restore the default value.Default value: <em>0</em>. 
+     * @param { double | Resource | undefined } offset - 内容区末尾偏移量。滚动组件滚动到末尾位置时，
+     *     内容与组件显示区域边界保留指定距离。
+     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15617,10 +15617,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onDidStopDragging(handler: OnDidStopDraggingCallback | undefined): this;
     /**
-     * Called when the scrollable will start fling.
+     * 滚动组件将要开始惯性动效时触发。
      *
-     * @param { VoidCallback | undefined } handler - callback of start fling.
-     *     <br>Passing undefined will unregister the callback.
+     * @param { VoidCallback | undefined } handler - 滚动组件将要开始惯性动效时触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15628,10 +15628,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onWillStartFling(handler: VoidCallback | undefined): this;
     /**
-     * Called when the scrollable did stop fling.
+     * 滚动组件结束惯性动效后触发。
      *
-     * @param { VoidCallback | undefined } handler - callback of stop fling.
-     *     <br>Passing undefined will unregister the callback.
+     * @param { VoidCallback | undefined } handler - 滚动组件结束惯性动效后触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15653,10 +15653,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollWithMouse(enabled: boolean | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the start position.
+     * 滚动组件到达起始位置时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable reaches
-     *     the start position.
+     * @param { function | undefined } event - 滚动组件到达起始位置时
+     *     触发的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15664,9 +15664,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the end position.
+     * 滚动组件到达末尾位置时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable reaches the end position.
+     * @param { function | undefined } event - 滚动组件到达末尾位置时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15674,10 +15674,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachEnd(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component starts scrolling initiated by the user's finger dragging the
-     * component or its scrollbar.
+     * 当用户手指拖动滚动组件或其滚动条，滚动组件开始滚动时
+     * 触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable starts scrolling.
+     * @param { function | undefined } event - 滚动开始时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15685,9 +15685,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when scrolling stops after the user's finger leaves the screen.
+     * 用户手指离开屏幕后，滚动停止时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable stops scrolling.
+     * @param { function | undefined } event - 滚动停止时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15695,12 +15695,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStop(event: (() => void) | undefined): this;
     /**
-     * Sets the maximum initial velocity at the start of the fling animation that occurs after gesture-driven scrolling ends.
+     * 限制跟手滑动结束后，惯性动效开始时的最大初始速度。
      *
-     * @param { double | undefined } speedLimit - Maximum initial velocity at the start of the fling animation.
-     *     <br>Default value: <em>9000</em>
-     *     <br>Unit: vp/s
-     *     <br>Value range: (0, +∞). If this parameter is set to a value less than or equal to 0, the default value is used.
+     * @param { double | undefined } speedLimit - 惯性动效开始时的最大初始速度。
+     *     <br>默认值：<em>9000</em>
+     *     <br>单位：vp/s
+     *     <br>取值范围：(0, +∞)，设置为小于等于0的值时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15708,9 +15708,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
     /**
-     * Sets the content clipping area for this scrollable component.
+     * 设置滚动容器的内容层裁剪区域。
      *
-     * @param { ContentClipMode | RectShape | undefined } clip - A value from enum ContentClipMode or a customized clip rect.
+     * @param { ContentClipMode | RectShape | undefined } clip - ContentClipMode枚举值或自定义裁剪区域。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15718,20 +15718,20 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default clipContent(clip: ContentClipMode | RectShape | undefined): this;
     /**
-     * Set the sensitivity of rotating crown.
+     * 设置表冠响应事件灵敏度。
      *
-     * @param { CrownSensitivity | undefined } sensitivity - The sensitivity of rotating crown, default value is { MEDIUM }.
-     * @returns { this } The component instance.
+     * @param { CrownSensitivity | undefined } sensitivity - 表冠响应灵敏度，默认值为{ MEDIUM }。
+     * @returns { this } 返回当前滚动组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
     /**
-     * Sets whether to enable the back-to-top feature for a scrollable component when the status bar is touched.
+     * 设置滚动组件是否支持点击状态栏回到顶部。
      *
-     * @param { boolean | undefined } backToTop - Whether to enable the backtotop feature for a scrollable
-     *     component when the status bar is touched. <br>Default value: <em>false</em>
+     * @param { boolean | undefined } backToTop - 设置滚动组件是否支持点击状态栏
+     *     回到顶部。<br>默认值：<em>false</em>
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15739,12 +15739,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default backToTop(backToTop: boolean | undefined): this;
     /**
-     * Sets the scrollbar track height.
+     * 设置滚动条滑轨高度。
      *
-     * @param { LengthMetrics | undefined } height - Scrollbar track height.
-     *     <br>The value must be greater than or equal to 0, If set to undefined or a value less than 0, the default
-     *     value is used, If set to 0, the scrollbar is not displayed.
-     *     <br>Default value: adaptive to the height of the scrollable component.
+     * @param { LengthMetrics | undefined } height - 滚动条滑轨高度。
+     *     <br>值必须大于等于0。设置为undefined或小于0时，按默认值
+     *     处理；设置为0时，不显示滚动条。
+     *     <br>默认值：自适应滚动组件高度。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15765,15 +15765,15 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
- * The actual offset by which the scrollable scrolls.
+ * 滚动组件实际滚动的偏移量。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class ScrollResult {
     /**
-     * Get the actual offset by which the scrollable scrolls in vp.
-     * @returns { double } actual offset by which the scrollable scrolls in vp.
+     * 获取滚动组件实际滚动的偏移量，单位为vp。
+     * @returns { double } 滚动组件实际滚动的偏移量，单位vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15781,8 +15781,8 @@ export declare class ScrollResult {
     get offsetRemain(): double;
 
     /**
-     * Set the actual offset by which the scrollable scrolls in vp.
-     * @param { double } offsetRemain - actual offset by which the scrollable scrolls in vp.
+     * 设置滚动组件实际滚动的偏移量，单位为vp。
+     * @param { double } offsetRemain - 滚动组件实际滚动的偏移量，单位vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15790,23 +15790,23 @@ export declare class ScrollResult {
     set offsetRemain(offsetRemain: double);
 }
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * 在滚动前调用，以允许开发者控制滚动组件的实际滚动偏移量。
  *
- * @param { double } scrollOffset - offset this frame will scroll, which may or may not be reached.
- * @param { ScrollState } scrollState - current scroll state.
- * @param { ScrollSource } scrollSource - source of current scroll.
- * @returns { undefined | ScrollResult } the remain offset for the scrollable,
- *     same as scrollOffset when no ScrollResult is returned.
+ * @param { double } scrollOffset - 相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。单位vp。
+ * @param { ScrollState } scrollState - 当前滑动状态。
+ * @param { ScrollSource } scrollSource - 当前滑动操作的来源。
+ * @returns { undefined | ScrollResult } 返回ScrollResult时按照开发者指定的相对上一帧的偏移量滑动；
+ *     不返回时按回调参数scrollOffset滑动。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export type OnWillScrollCallback = (scrollOffset: double, scrollState: ScrollState, scrollSource: ScrollSource) => (undefined | ScrollResult);
 /**
-  * On scroll callback using in scrollable onDidScroll.
+  * 滚动组件滑动时触发的回调。
   *
-  * @param { double } scrollOffset - offset this frame did scroll.
-  * @param { ScrollState } scrollState - current scroll state.
+  * @param { double } scrollOffset - 相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。单位vp。
+  * @param { ScrollState } scrollState - 当前滑动状态。
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
@@ -15843,7 +15843,7 @@ export type OnDidStopDraggingCallback = (willFling: boolean) => void;
   */
 export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (CustomBuilder | undefined);
 /**
-  * Defines the callback type used in onGetPreviewBadge of EditModeOptions.
+  * 即将启动多选长按聚拢动画时，触发用于获取选中数量的回调。
   *
   * @returns { boolean | int }
   * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15852,20 +15852,20 @@ export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (
   */
 export type OnGetPreviewBadgeCallback = () => (boolean | int);
 /**
- * Defines the callback type used in OnVisibleIndexesChange.
+ * 定义OnVisibleIndexesChange使用的回调类型。
  *
- * @param { int } start - the first index in visible content.
- * @param { int } end - the last index in visible content.
+ * @param { int } start - 可视区域起始位置的索引值。
+ * @param { int } end - 可视区域终止位置的索引值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.0.0 static
  */
 export type OnVisibleIndexesChangeCallback = (start: int, end: int) => void;
 /**
- * Defines the onMove callback.
+ * 定义数据源拖拽回调。
  *
- * @param { int } from - Index number for moving elements.
- * @param { int } to - Target index number for moving elements.
+ * @param { int } from - 数据源拖拽起始索引号。取值范围是[0, 数据源长度-1]。
+ * @param { int } to - 数据源拖拽目标索引号。取值范围是[0, 数据源长度-1]。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -15921,7 +15921,7 @@ export declare interface ItemDragEventHandler {
  */
 export declare interface DynamicNode {
     /**
-     * Set the move action.
+     * 设置拖拽排序数据移动回调。
      *
      * @param { OnMoveHandler | undefined } handler
      * @returns { this }
@@ -15951,7 +15951,7 @@ export declare interface DynamicNode {
  */
 export declare interface EdgeEffectOptions {
     /**
-     * Enable Sliding effect when component does not full screen.
+     * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15959,7 +15959,7 @@ export declare interface EdgeEffectOptions {
      */
     alwaysEnabled: boolean;
     /**
-     * Set the effective edge of the edge effect.
+     * 设置边缘效果生效的边缘。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15968,7 +15968,7 @@ export declare interface EdgeEffectOptions {
     effectEdge?: int;
 }
 /**
- * Enumerates the effective edge of the edge effect.
+ * 表示当前边缘效果要生效的边缘。
  *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15977,7 +15977,7 @@ export declare interface EdgeEffectOptions {
  */
 export declare enum EffectEdge {
     /**
-     * Effective only for the starting edge.
+     * 起始边生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15985,7 +15985,7 @@ export declare enum EffectEdge {
      */
     START = 1,
     /**
-     * Effective only for the end edge.
+     * 末尾边生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16074,7 +16074,7 @@ export declare class ChildrenMainSize {
 }
 
 /**
- * Define edit mode options.
+ * List/Grid组件编辑模式选项属性参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16082,7 +16082,7 @@ export declare class ChildrenMainSize {
  */
 export declare interface EditModeOptions {
     /**
-     * Define whether to gather selected items in grid or list when item is long pressed for context menu.
+     * 是否启用多选聚拢动画。设置true时启用聚拢动画，设置为false时关闭聚拢动画。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16092,11 +16092,11 @@ export declare interface EditModeOptions {
     enableGatherSelectedItemsAnimation?: boolean;
 
     /**
-     * Called to return whether to display the number badge or the number displayed on the badge
-     * for the context menu preview. If not set, the number of selected items within the display range will be used.
-     * Returning false means not displaying the badge.
-     * Returning true means using the number of selected items within the display range.
-     * Returning a number to include selected items outside the display range.
+     * 即将启动多选长按聚拢动画时，触发用于获取选中数量的回调。缺省时用Grid或List显示范围内选中item的数量作为
+     * 多选长按聚拢动画后菜单预览图的角标。
+     * 返回false表示不显示角标。
+     * 返回true表示显示选中数量角标，对应Grid或List显示范围内选中item数量。
+     * 返回数字时默认显示角标，该数字表示角标中需要显示的数量。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16105,10 +16105,10 @@ export declare interface EditModeOptions {
     onGetPreviewBadge?: OnGetPreviewBadgeCallback;
 
     /**
-     * Use default multi-select style.
-     * {@code true} indicates that the check box is displayed for GridItem or ListItem after entering the
-     * multi-select state.
-     * {@code false} indicates that there is no default style after entering the multi-select state.
+     * 是否使用默认多选样式。
+     * {@code true}表示GridItem或ListItem进入多选状态后
+     * 显示勾选框。
+     * {@code false}表示进入多选状态后无默认样式。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16118,9 +16118,9 @@ export declare interface EditModeOptions {
     useDefaultMultiSelectStyle?: boolean;
 
     /**
-     * Enable two-finger swipe multi-selection.
-     * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
-     * {@code false} indicates that two-finger swiping cannot perform multi-selection.
+     * 是否开启双指滑动多选。
+     * {@code true}表示双指滑动可以进入编辑模式并进行多选。
+     * {@code false}表示双指滑动不可进行多选。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16609,7 +16609,7 @@ export declare interface UICommonEvent {
     setOnVisibleAreaApproximateChange(options: VisibleAreaEventOptions, event: VisibleAreaChangeCallback | undefined): void;
 }
 /**
- * Defines a UIScrollableCommonEvent which is used to set event to target component.
+ * 用于设置滚动事件回调。
  *
  * @extends UICommonEvent
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16618,53 +16618,53 @@ export declare interface UICommonEvent {
  */
 export declare interface UIScrollableCommonEvent extends UICommonEvent {
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the start position.
+   * 设置或重置滚动到达起始位置时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling reaches
-   *     the start position.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onReachStart事件的回调函数，滚动组件到达起始位置时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnReachStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the end position.
+   * 设置或重置滚动到达末尾位置时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the
-   *     scrolling reaches the end position.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onReachEnd事件的回调函数，滚动组件到达末尾位置时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnReachEnd(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling started.
+   * 设置或重置滚动开始时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling started.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onScrollStart事件的回调函数。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnScrollStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling stopped.
+   * 设置或重置滚动停止时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling stopped.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onScrollStop事件的回调函数。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnScrollStop(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when scrolling begin each frame.
+   * 设置或重置每帧滚动开始时触发的回调。
    *
-   * @param { OnScrollFrameBeginCallback | undefined } callback - callback function, triggered when the
-   *     scrolling begin each frame.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { OnScrollFrameBeginCallback | undefined } callback - onScrollFrameBegin事件的回调函数，每帧滚动开始时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static

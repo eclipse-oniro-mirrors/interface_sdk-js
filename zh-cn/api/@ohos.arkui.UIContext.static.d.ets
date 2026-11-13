@@ -1759,11 +1759,11 @@ export declare class UIObserver {
   onScrollEvent(options: observer.ObserverOptions, callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and scroll ID will be removed.
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 回调函数。返回滚动事件的信息。
+   *     不传参数时，取消该id下所有滚动事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1782,10 +1782,10 @@ export declare class UIObserver {
   onScrollEvent(callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type will be removed.
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 需要被注销的回调函数。
+   *     若不指定具体的回调函数，则注销该UIContext下所有scrollEvent事件监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

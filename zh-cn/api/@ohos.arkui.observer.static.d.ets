@@ -239,7 +239,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * ScrollEvent type.
+   * 滚动事件的类型。
    *
    * @enum { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -249,7 +249,7 @@ declare namespace uiObserver {
   export enum ScrollEventType {
 
     /**
-     * When the ScrollEvent start.
+     * 滚动事件开始。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -258,7 +258,7 @@ declare namespace uiObserver {
     SCROLL_START = 0,
 
     /**
-     * When the ScrollEvent stop.
+     * 滚动事件结束。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -428,7 +428,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * ScrollEvent info.
+   * ScrollEvent滚动信息。
    *
    * @interface ScrollEventInfo
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -448,7 +448,7 @@ declare namespace uiObserver {
     id: string;
 
     /**
-     * The uniqueId of the scrollable component.
+     * 滚动组件的uniqueId。
      *
      * @type { int }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -458,7 +458,7 @@ declare namespace uiObserver {
     uniqueId: int;
 
     /**
-     * Changed ScrollEvent type.
+     * 滚动事件的类型。
      *
      * @type { ScrollEventType }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -468,7 +468,7 @@ declare namespace uiObserver {
     scrollEvent: ScrollEventType;
 
     /**
-     * Changed ScrollEvent offset.
+     * 滚动组件的当前偏移量。
      *
      * @type { double }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -888,11 +888,11 @@ declare namespace uiObserver {
   export function offNavDestinationUpdate(callback?: Callback<NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { ObserverOptions } options - The options object.
-   * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event start or
-   *     stop.
+   * @param { ObserverOptions } options - 指定监听的滚动组件的id。
+   * @param { Callback<ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -900,11 +900,11 @@ declare namespace uiObserver {
   export function onScrollEvent(options: ObserverOptions, callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { ObserverOptions } options - The options object.
-   * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks 
-   *     for the given event type and scroll ID will be removed.
+   * @param { ObserverOptions } options - 指定监听的滚动组件的id。
+   * @param { Callback<ScrollEventInfo> } [callback] - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -912,10 +912,10 @@ declare namespace uiObserver {
   export function offScrollEvent(options: ObserverOptions, callback?: Callback<ScrollEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { Callback<ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -923,10 +923,10 @@ declare namespace uiObserver {
   export function onScrollEvent(callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks
-   *     for the given event type will be removed.
+   * @param { Callback<ScrollEventInfo> } [callback] - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

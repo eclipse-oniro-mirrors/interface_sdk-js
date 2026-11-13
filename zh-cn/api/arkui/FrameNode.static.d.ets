@@ -2021,7 +2021,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for List.
+   * List类型的FrameNode节点类型。只允许添加ListItem、ListItemGroup类型子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2100,7 +2100,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for ListItem.
+   * ListItem类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2154,7 +2154,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for ListItemGroup.
+   * ListItemGroup类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2262,7 +2262,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Scroll.
+   * Scroll类型的FrameNode节点类型。允许添加一个子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2424,7 +2424,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Grid.
+   * Grid类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2445,11 +2445,11 @@ export declare namespace typeNode {
   export function createGridNode(context: UIContext, options?: FrameNodeOptions): Grid;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取Grid节点的属性。若该节点非ArkTS语言创建，则需要设置是否支持跨语言访问，如果不支持跨语言访问，则返回undefined。该接口不支持声明式方式创建的节点。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { GridAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 获取属性时所需的目标节点。
+   * @returns { GridAttribute | undefined } - Grid节点类型的属性，若获取失败，
+   *     则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -2457,11 +2457,11 @@ export declare namespace typeNode {
   export function getGridAttribute(node: FrameNode): GridAttribute | undefined;
 
   /**
-   * Get the event instance of Grid node.
+   * 获取Grid节点中持有的UIGridEvent对象，用于设置滚动事件。若该节点非ArkTS语言创建，则需要设置是否支持跨语言访问，如果不支持跨语言访问，则返回undefined。该接口不支持声明式方式创建的节点。设置的滚动事件与声明式定义的事件平行；设置的滚动事件不覆盖原有的声明式事件。同时设置两个事件回调的时候，优先回调声明式事件。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { UIGridEvent | undefined } - Return the event instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 获取事件时所需的目标节点。
+   * @returns { UIGridEvent | undefined } - Grid节点类型的滚动事件，若获取失败，
+   *     则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -2503,7 +2503,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for GridItem.
+   * GridItem类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2557,7 +2557,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for WaterFlow.
+   * WaterFlow类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2635,7 +2635,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for FlowItem.
+   * FlowItem类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2656,11 +2656,11 @@ export declare namespace typeNode {
   export function createFlowItemNode(context: UIContext, options?: FrameNodeOptions): FlowItem;
 
   /**
-   * Get the attribute instance of FrameNode to set attributes.
+   * 获取FlowItem节点的属性。若该节点非ArkTS语言创建，则需要设置是否支持跨语言访问，如果不支持跨语言访问，则返回undefined。该接口不支持声明式方式创建的节点。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { FlowItemAttribute | undefined } - Return the attribute instance of FrameNode, and return undefined if it
-   *     does not exist.
+   * @param { FrameNode } node - 获取属性时所需的目标节点。
+   * @returns { FlowItemAttribute | undefined } - FlowItem节点类型的属性，若获取失败，
+   *     则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static

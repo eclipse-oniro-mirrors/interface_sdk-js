@@ -34,7 +34,7 @@ import { FrameNode } from '../FrameNode';
 export declare enum SwipeEdgeEffect {
 
   /**
-   * Elastic physical action, sliding to the edge can continue to slide for a distance based on the initial speed or touch event, and spring back when released.
+   * 弹簧效果，滑动距离超过滑出组件大小后可继续滑动并按弹簧阻尼曲线回弹。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -43,7 +43,7 @@ export declare enum SwipeEdgeEffect {
   Spring,
 
   /**
-   * Sliding to the edge has no effect.
+   * 无弹簧效果，滑动距离不能超过滑出组件大小。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -62,7 +62,7 @@ export declare enum SwipeEdgeEffect {
 export declare enum SwipeActionState {
 
   /**
-   * Collapsed type.
+   * 收起状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -71,7 +71,7 @@ export declare enum SwipeActionState {
   COLLAPSED,
 
   /**
-   * EXPANDED type.
+   * 展开状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -80,7 +80,7 @@ export declare enum SwipeActionState {
   EXPANDED,
 
   /**
-   * Action type.
+   * 长距离状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
