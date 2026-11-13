@@ -23487,15 +23487,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)  
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23522,15 +23520,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    *     <br>If **translate** is
    *     **undefined**, the component reverts to its original state with no translation.
    * @returns { T } Current component.
@@ -23659,8 +23655,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23690,8 +23685,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
@@ -23737,8 +23731,7 @@ declare class CommonMethod<T> {
    *     <br>centerZ: 0,
    *     <br>perspective: 0
    *     <br>}
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
