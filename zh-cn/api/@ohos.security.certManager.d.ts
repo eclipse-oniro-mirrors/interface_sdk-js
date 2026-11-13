@@ -513,7 +513,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     certStoreInfo?: CertStoreInfo;
   }
@@ -1574,7 +1574,7 @@ declare namespace certificateManager {
    * 获取系统信任的CA证书列表。该接口仅由证书管理应用调用。该接口使用Promise返回结果。
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
-   * @param { CertAlgorithm } [certAlg] - 表示系统根证书库的证书算法类型。 [since 26.2.0]
+   * @param { CertAlgorithm } [certAlg] - 表示系统根证书库的证书算法类型。 [since 26.1.0]
    *     <br>默认值：缺省行为：获取国密和国际算法的系统证书列表。
    * @returns { Promise<CMResult> } Promise用于返回操作结果，即
    *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult}对象中的**certList**。
@@ -2036,7 +2036,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface CertStoreInfo {
     /**
@@ -2045,7 +2045,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     certStoreVersion: string;
 
@@ -2055,7 +2055,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     smCertStoreVersion?: string;
   }
@@ -2066,7 +2066,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface ConfigItem {
     /**
@@ -2075,7 +2075,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     name: string;
 
@@ -2085,7 +2085,7 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.2.0 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     value: string;
   }
@@ -2108,7 +2108,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.2.0 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function getCertManagerConfig(configNames: Array<string>) : Promise<Array<ConfigItem>>;
 }
