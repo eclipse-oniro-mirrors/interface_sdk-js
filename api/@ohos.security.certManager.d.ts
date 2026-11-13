@@ -2142,7 +2142,7 @@ declare namespace certificateManager {
      * @since 26.1.0 dynamiconly
      */
     name: string;
-
+ 
     /**
      * Configuration item value.
      *
@@ -2150,10 +2150,10 @@ declare namespace certificateManager {
      * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamiconly
-     */ 
+     */
     value: string;
   }
-
+ 
   /**
    * Queries the certificate management system configuration information.
    *
