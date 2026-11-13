@@ -508,6 +508,16 @@ declare namespace certificateManager {
      * @since 26.0.0 dynamic&static
      */
     uriList?: Array<string>;
+
+    /**
+     * Certificate store information.
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    certStoreInfo?: CertStoreInfo;
   }
 
   /**
@@ -1604,6 +1614,10 @@ declare namespace certificateManager {
    * application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
+   * @param { CertAlgorithm } [certAlg] - Indicates the certificate algorithm type of the
+   *     system root certificate store. [since 26.1.0]
+   *     <br>Default value: Default behavior: Obtain the system certificate list of Chinese cryptographic algorithms and
+   *     international algorithms.
    * @returns { Promise<CMResult> } Promise used to return the operation result, that is, **certList** in the
    *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed.
@@ -1616,7 +1630,7 @@ declare namespace certificateManager {
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
-  function getSystemTrustedCertificateList(): Promise<CMResult>;
+  function getSystemTrustedCertificateList(certAlg?: CertAlgorithm): Promise<CMResult>;
 
   /**
    * Obtains details about a CA certificate trusted by the system. This API is called only by the certificate management
@@ -2081,6 +2095,36 @@ declare namespace certificateManager {
   function importUkeyCertificate(keyUri: string, cert: Uint8Array, ukeyInfo: UkeyInfo): Promise<void>;
 
   /**
+   * Represents the certificate store information.
+   *
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  export interface CertStoreInfo {
+    /**
+     * Version number of the international algorithm system certificate store.
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    certStoreVersion: string;
+
+    /**
+     * Version number of the SM (commercial cryptographic) algorithm system certificate store.
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    smCertStoreVersion?: string;
+  }
+
+  /**
    * Represents a certificate management configuration item.
    *
    * @syscap SystemCapability.Security.CertificateManager
@@ -2098,7 +2142,7 @@ declare namespace certificateManager {
      * @since 26.1.0 dynamiconly
      */
     name: string;
- 
+
     /**
      * Configuration item value.
      *
@@ -2106,10 +2150,10 @@ declare namespace certificateManager {
      * @systemapi
      * @stagemodelonly
      * @since 26.1.0 dynamiconly
-     */
+     */ 
     value: string;
   }
- 
+
   /**
    * Queries the certificate management system configuration information.
    *
