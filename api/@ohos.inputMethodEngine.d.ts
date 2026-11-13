@@ -3494,35 +3494,6 @@ declare namespace inputMethodEngine {
     updateRegion(inputRegion: Array<window.Rect>): void;
 
     /**
-     * Updates the hot zone on the input method panel in the current state. This API is a synchronous version of
-     * [updateRegion]{@link inputMethodEngine.Panel.updateRegion(inputRegion: Array<window.Rect>)}.
-     * Use this API together with
-     * [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: PanelRect)}
-     * to ensure that panel size adjustment and hot zone update are executed sequentially in call order,
-     * avoiding timing issues caused by mixing synchronous and asynchronous calls.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED**, **FLG_FLOATING**,
-     * <br> > or **FLG_DETACHED** state.
-     * <br> >
-     * <br> > This API returns the result synchronously. The return only indicates that the system has received the request
-     * <br> > for updating the hot zone, not that the hot zone has been updated.
-     *
-     * @param { Array<window.Rect> } inputRegion - Region for receiving input events.
-     * <br>    - The array size is limited to [1, 4].
-     * <br>    - The input hot zone is relative to the left vertex of the input method panel window.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
-     * @throws { BusinessError } 12800013 - window manager service error.
-     * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
-     * @syscap SystemCapability.MiscServices.InputMethodFramework
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    updateRegionSync(inputRegion: Array<window.Rect>): void;
-
-    /**
      * Enables listening for the panel size change. This API uses an asynchronous callback to return the result.
      * <br>
      * <br> > **NOTE**
