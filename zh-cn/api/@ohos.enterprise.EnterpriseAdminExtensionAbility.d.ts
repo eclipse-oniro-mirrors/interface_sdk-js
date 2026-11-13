@@ -403,7 +403,7 @@ export default class EnterpriseAdminExtensionAbility {
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
    *
-   * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
+   * @param { number } cumulativeFailedCount - 密码失败的累计尝试次数。
    * @param { number } accountId - 发生密码认证失败的用户ID。
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly

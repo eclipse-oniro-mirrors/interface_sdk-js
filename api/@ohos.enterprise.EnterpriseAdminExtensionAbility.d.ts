@@ -501,8 +501,8 @@ export default class EnterpriseAdminExtensionAbility {
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * API.
    *
-   * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
-   * @param { number } accountId - ID of the user whose password authentication failed.
+   * @param { number } cumulativeFailedCount - Total number of failed password attempts.
+   * @param { number } accountId - ID of the account whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
