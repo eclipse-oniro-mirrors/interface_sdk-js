@@ -3423,7 +3423,7 @@ declare namespace notificationManager {
   /**
    * 将应用包名添加到通知发布权限管控名单，以阻止应用发布通知。支持启用或关闭该功能。
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - 是否启用通知发布权限管控名单（true：开启，false：关闭）。
    * @param { Array<string> } bundleList - 指定通知发布权限管控名单的应用列表，使用包名代表应用。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
@@ -3444,7 +3444,7 @@ declare namespace notificationManager {
   /**
    * 将应用包名添加到通知发布权限管控名单，以阻止应用发布通知。使用Promise异步回调。
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - 表示是否启用通知发布权限管控名单。true表示启用，false表示关闭。
    * @param { Array<string> } bundleList - 指定通知发布权限管控名单的应用列表，使用包名表示应用。
    * @param { int } userId - 表示用户ID。
