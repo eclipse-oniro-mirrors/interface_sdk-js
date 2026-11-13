@@ -1153,8 +1153,8 @@ declare class SelectAttribute extends CommonMethod<SelectAttribute> {
   showDefaultSelectedIcon(show: boolean): SelectAttribute;
 
   /**
-   * Sets whether the drop-down menu avoids the soft keyboard. If this API is not used, the drop-down menu avoids the
-   * soft keyboard by default.
+   * Sets whether the drop-down menu avoids the soft keyboard. If this API is not used, the drop-down menu does not
+   * avoid the soft keyboard by default.
    *
    * @param { Optional<MenuKeyboardAvoidMode> } mode - Whether the drop-down menu avoids the soft keyboard. If the value
    *     is **undefined**, it is treated as **MenuKeyboardAvoidMode.NONE**.
