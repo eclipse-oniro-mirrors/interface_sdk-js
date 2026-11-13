@@ -1665,6 +1665,27 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   scrollSnapAlign(value: ScrollSnapAlign): ListAttribute;
 
   /**
+   * Sets a two-stage scroll snap strategy for the List.
+   *
+   * **ScrollSnapAlign.START**, **ScrollSnapAlign.CENTER**, and **ScrollSnapAlign.END** select
+   * built-in strategies. **ScrollSnapAlign.NONE** is invalid and throws exception 401.
+   * A custom provider requires **calculateSnapOffset** to be a function. Passing
+   * **undefined** or no argument clears the strategy.
+   *
+   * This attribute and **scrollSnapAlign** use last-set-wins semantics. The final snap uses
+   * the List spring animation and follows **scrollSnapAnimationSpeed**.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
+   * @returns { ListAttribute } The attribute of the list.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): ListAttribute;
+
+  /**
    * Sets the nested scrolling mode in the forward and backward directions to implement scrolling linkage with the
    * parent component.
    *
