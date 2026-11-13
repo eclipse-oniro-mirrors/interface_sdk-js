@@ -147,6 +147,11 @@ declare namespace hidebug {
    * **startProfiling(filename: string)** always occurs before **stopProfiling()**. You are advised not to call either
    * of these methods repeatedly. Otherwise, an exception may occur.
    *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.startJsCpuProfiling]{@link hidebug.startJsCpuProfiling} instead.
+   *
    * @param { string } filename - Custom file name of the sampling data. The .json file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -158,8 +163,13 @@ declare namespace hidebug {
 
   /**
    * Stops the VM profiling method. **stopProfiling()** and **startProfiling(filename: string)** are called in pairs.
-   * **startProfiling(filename: string)** always occurs before **stopProfiling()**. You are advised not to call either
-   * of these methods repeatedly. Otherwise, an exception may occur.
+   * **startProfiling()** always occurs before **stopProfiling()**. You are advised not to call either of these
+   * methods repeatedly. Otherwise, an exception may occur.
+   *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.stopJsCpuProfiling]{@link hidebug.stopJsCpuProfiling} instead.
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
@@ -170,6 +180,11 @@ declare namespace hidebug {
 
   /**
    * Dumps the VM heap data and generates the **filename.heapsnapshot** file.
+   *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData} instead.
    *
    * @param { string } filename - User-defined heap file name. The .heapsnapshot file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
@@ -256,7 +271,7 @@ declare namespace hidebug {
   /**
    * Obtains system service information.
    *
-   * @permission ohos.permission.DUMP
+   * @permission ohos.permission.DUMP (available only for system applications).
    * @param { int } serviceid - Service ID used to obtain system service information.
    * @param { int } fd - File descriptor to which data is written by the API.
    * @param { Array<string> } args - Parameter list of the **Dump** API of the system service. The maximum length of a
@@ -1097,11 +1112,11 @@ declare namespace hidebug {
    * Obtains the specified system [GC](docroot://arkts-utils/gc-introduction.md) statistics based on parameters.
    *
    * @param { string } item - Type of the statistics to obtain. The following statistics can be obtained:
-   *     <br>**"ark.gc.gc-count"**: number of GC times of the current thread.
-   *     <br>**"ark.gc.gc-time"**: total GC duration triggered by the current thread, in milliseconds.
-   *     <br>**"ark.gc.gc-bytes-allocated"**: size of the Ark VM memory allocated to the current thread, in bytes.
-   *     <br>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
-   *     <br> **"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
+   *     <br/>**"ark.gc.gc-count"**: number of GC times of the current thread.
+   *     <br/>**"ark.gc.gc-time"**: total GC duration triggered by the current thread, in milliseconds.
+   *     <br/>**"ark.gc.gc-bytes-allocated"**: size of the Ark VM memory allocated to the current thread, in bytes.
+   *     <br/>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
+   *     <br/> **"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
    * @returns { long } System GC statistics returned based on the input parameters.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
@@ -1125,21 +1140,21 @@ declare namespace hidebug {
    * > Enable **System resource leak log** in **Developer options** and restart the device for the API to take effect.
    *
    * @param { string } type - Types of leak resources:
-   *     <br>- pss_memory (native memory)
-   *     <br>- js_heap (JavaScript heap memory)
-   *     <br>- fd (file descriptor)
-   *     <br>- thread (thread)
+   *     <br/>- pss_memory (native memory)
+   *     <br/>- js_heap (JavaScript heap memory)
+   *     <br/>- fd (file descriptor)
+   *     <br/>- thread (thread)
    * @param { int } value - Value range of the maximum values of the leak resource types:
-   *     <br>- pss_memory: **[1024, 4 × 1024 × 1024]** (Unit: KB)
-   *     <br>- js_heap: **[85, 95]** (85% to 95% of the upper size limit of the JS heap memory)
-   *     <br>- fd: **[10, 10000]**
-   *     <br>- thread: **[1, 1000]**. If the value is out of range, the feature becomes invalid.
+   *     <br/>- pss_memory: **[1024, 4 × 1024 × 1024]** (Unit: KB)
+   *     <br/>- js_heap: **[85, 95]** (85% to 95% of the upper size limit of the JS heap memory)
+   *     <br/>- fd: **[10, 10000]**
+   *     <br/>- thread: **[1, 1000]**. If the value is out of range, the feature becomes invalid.
    * @param { boolean } enableDebugLog - Whether to enable external debugging logs. Enable external debugging logs only
    *     in the grayscale version (test version released to a small number of users before the official version is
    *     released). Collecting debugging logs occupies a large number of CPU and memory resources, which may cause
    *     application smoothness problems.
-   *     <br>The value **true** means to enable external debugging logs, and false means the opposite.
-   *     <br>
+   *     <br/>The value **true** means to enable external debugging logs, and false means the opposite.
+   *     <br/>
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
@@ -1229,7 +1244,7 @@ declare namespace hidebug {
    *
    * @param { int } [interval] - Validity period of the cached GPU memory data, in seconds. Default value: **300** The
    *     value ranges from 2 to 3600. If the input value is out of the value range, the default value will be used.
-   *     <br>If the cached GPU memory data exists for a period longer than the value of this parameter, the latest GPU
+   *     <br/>If the cached GPU memory data exists for a period longer than the value of this parameter, the latest GPU
    *     memory data is obtained and the cache value is updated. Otherwise, the cache value is directly obtained.
    * @returns { Promise<GraphicsMemorySummary> } Promise used to return the GPU memory data of the application.
    * @throws { BusinessError } 11400104 - Failed to get the application memory due to a remote exception.
@@ -1551,9 +1566,9 @@ declare namespace hidebug {
    * @param { boolean } enable - When SharedHeap OOM occurs in a process, the system dumps the heap snapshot of the
    *     corresponding level based on the information recorded when the process calls the API for the last time in its
    *     lifecycle.
-   *     <br>**true**: process level.
-   *     <br>**false**: thread level.
-   *     <br> The default value is **false**.
+   *     <br/>**true**: process level.
+   *     <br/>**false**: thread level.
+   *     <br/> The default value is **false**.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @stagemodelonly
    * @atomicservice

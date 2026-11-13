@@ -179,7 +179,11 @@ declare namespace hichecker {
    * Adds one or more check rules. HiChecker detects unexpected operations or gives feedback based on the added rules.
    * You can use **grep HiChecker** to check for the application running information in the hilog.
    *
-   * @param { bigint } rule - Rule to be added.
+   * If the rule level of the passed-in rule is thread level, the rule takes effect only in the current thread.
+   *
+   * @param { bigint } rule - Rule to add. Multiple rules can be combined using the OR operation. Available values
+   *     include:<br/>**RULE_CAUTION_PRINT_LOG** (log recording), **RULE_CAUTION_TRIGGER_CRASH** (application exit),
+   *     and **RULE_THREAD_CHECK_SLOW_PROCESS** (detect time-consuming function calls). For details, see the constants.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
@@ -193,7 +197,11 @@ declare namespace hichecker {
   /**
    * Removes one or more rules. The removed rules will become ineffective.
    *
-   * @param { bigint } rule - Rule to be removed.
+   * If the rule level of the passed-in rule is thread level, the rule is removed only from the current thread.
+   *
+   * @param { bigint } rule - Rule to remove. Multiple rules can be combined using the OR operation. Available values
+   *     include:<br/>**RULE_CAUTION_PRINT_LOG** (log recording), **RULE_CAUTION_TRIGGER_CRASH** (application exit),
+   *     and **RULE_THREAD_CHECK_SLOW_PROCESS** (detect time-consuming function calls). For details, see the constants.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
