@@ -3476,7 +3476,7 @@ export declare enum SourceTool {
     JOYSTICK = 10
 }
 /**
- * Defines the Border Image Repeat Mode.
+ * 用于设置被切割的图片在边框上的重复方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3485,7 +3485,7 @@ export declare enum SourceTool {
  */
 export declare enum RepeatMode {
     /**
-     * The source image's slices are tiled. Tiles beyond the border box will be clipped.
+     * 被切割的图片会重复铺平在图片边框上，超出部分会被剪裁。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3493,7 +3493,7 @@ export declare enum RepeatMode {
      */
     Repeat = 0,
     /**
-     * The source image's slices are stretched to fill the border box.
+     * 被切割的图片会以拉伸填充的方式铺满图片边框。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3501,7 +3501,7 @@ export declare enum RepeatMode {
      */
     Stretch = 1,
     /**
-     * The source image's slices are tiled to fill the border box. Tiles may be compressed when needed.
+     * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会压缩图片。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3509,7 +3509,7 @@ export declare enum RepeatMode {
      */
     Round = 2,
     /**
-     * The source image's slices are tiled to fill the border box. Extra space will be distributed in between tiles.
+     * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会以空白填充。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4812,7 +4812,7 @@ export declare interface BaseEvent {
     axisPinch?: double;
 }
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4820,8 +4820,7 @@ export declare interface BaseEvent {
  */
 export declare interface BorderImageOption {
     /**
-     * Slice width of the upper left corner, upper right corner, lower left corner,
-     * and lower right corner of the border image.
+     * 设置边框图片左上角、右上角、左下角以及右下角的切割宽高。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4830,7 +4829,7 @@ export declare interface BorderImageOption {
      */
     slice?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Repeat mode of the source image's slices on the border.
+     * 设置被切割的图片在边框上的重复方式。
      *
      * @default RepeatMode.Stretch
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4839,7 +4838,7 @@ export declare interface BorderImageOption {
      */
     repeat?: RepeatMode;
     /**
-     * Border image source
+     * 边框图源或者渐变色设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4847,7 +4846,7 @@ export declare interface BorderImageOption {
      */
     source?: string | Resource | LinearGradientOptions;
     /**
-     * Width of the border image.
+     * 设置图片边框宽度。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4856,7 +4855,7 @@ export declare interface BorderImageOption {
      */
     width?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Amount by which the border image is extended beyond the border box.
+     * 设置边框图片向外延伸距离。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4865,9 +4864,9 @@ export declare interface BorderImageOption {
      */
     outset?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Whether to fill the center of the border image.
-     * true: Fill the center of the border image.
-     * false: Do not fill the center of the border image.
+     * 设置边框图片是否中心填充。
+     * true: 中心填充。
+     * false: 非中心填充。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5943,7 +5942,7 @@ export type GestureCollectInterceptCallback = (recognizers: Array<GestureRecogni
  */
 export type OnNeedSoftkeyboardCallback = () => boolean;
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -5953,7 +5952,7 @@ export type PixelMap = image.PixelMap;
 
 
 /**
- * pixelmap object with release function.
+ * 带有release函数的像素图对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -5962,7 +5961,7 @@ export type PixelMap = image.PixelMap;
  */
 declare interface PixelMapMock {
   /**
-   * release function.
+   * 释放函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi

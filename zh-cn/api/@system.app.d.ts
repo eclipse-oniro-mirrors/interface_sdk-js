@@ -201,29 +201,29 @@ export default class App {
    */
   static requestFullWindow(options?: RequestFullWindowOptions): void;
 
-  /**
-   * Set image cache capacity of decoded image count.
-   * if not set, the application will not cache any decoded image.
-   *
-   * @param { number } value - capacity of decoded image count.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @FaAndStageModel
-   * @atomicservice [since 12]
-   * @since 7 dynamic
-   */
-  static setImageCacheCount(value: number): void;
+   /**
+    * 设置内存中缓存解码后图片的数量上限，提升再次加载同源图片的加载速度。
+    * 如果不设置则默认为0，不进行缓存。
+    *
+    * @param { number } value - 内存中解码后图片的缓存数量。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @FaAndStageModel
+    * @atomicservice [since 12]
+    * @since 7 dynamic
+    */
+   static setImageCacheCount(value: number): void;
 
   /**
-   * Set image cache capacity of raw image data size in bytes before decode.
-   * if not set, the application will not cache any raw image data.
-   *
-   * @param { number } value - capacity of raw image data size in bytes.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @FaAndStageModel
-   * @atomicservice [since 12]
-   * @since 7 dynamic
-   */
-  static setImageRawDataCacheSize(value: number): void;
+    * 设置内存中缓存解码前图片数据的大小上限，单位为字节，提升再次加载同源图片的加载速度。
+    * 如果不设置则默认为0，不进行缓存。
+    *
+    * @param { number } value - 内存中解码前图片数据的缓存大小，单位为字节。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @FaAndStageModel
+    * @atomicservice [since 12]
+    * @since 7 dynamic
+    */
+   static setImageRawDataCacheSize(value: number): void;
 
   /**
    * 设置图像文件在解码前在磁盘上的缓存大小（字节）。

@@ -69,7 +69,7 @@ export interface DrawableDescriptorLoadedResult {
 export declare class DrawableDescriptor {
 
   /**
-   * Creates a new DrawableDescriptor.
+   * 创建一个新的DrawableDescriptor实例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi Hide this for inner system use.
@@ -268,11 +268,11 @@ export declare class LayeredDrawableDescriptor extends DrawableDescriptor {
   setBlendMode(mode: drawing.BlendMode | undefined): void;
 
   /**
-   * Creates a new LayeredDrawableDescriptor.
+   * LayeredDrawableDescriptor的构造函数。
    *
-   * @param { DrawableDescriptor } [foreground] - Indicates the foreground option to create LayeredDrawableDescriptor.
-   * @param { DrawableDescriptor } [background] - Indicates the background option to create LayeredDrawableDescriptor.
-   * @param { DrawableDescriptor } [mask] - Indicates the mask option to create LayeredDrawableDescriptor.
+   * @param { DrawableDescriptor } [foreground] - 分层图标的前景图片选项。
+   * @param { DrawableDescriptor } [background] - 分层图标的背景图片选项。
+   * @param { DrawableDescriptor } [mask] - 分层图标的蒙版选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 23 static
    */
