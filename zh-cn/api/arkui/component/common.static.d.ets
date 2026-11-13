@@ -10657,7 +10657,7 @@ export declare interface FadingEdgeOptions {
     fadingEdgeLength?: LengthMetrics;
 }
 /**
- * Define nested scroll options
+ * 定义嵌套滚动选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10665,7 +10665,7 @@ export declare interface FadingEdgeOptions {
  */
 export declare interface NestedScrollOptions {
     /**
-     * Set NestedScrollMode when the scrollable component scrolls forward
+     * 滚动组件往末尾端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -10673,7 +10673,7 @@ export declare interface NestedScrollOptions {
      */
     scrollForward: NestedScrollMode;
     /**
-     * Set NestedScrollMode when the scrollable component scrolls backward
+     * 滚动组件往起始端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15188,7 +15188,7 @@ export declare enum ContentClipMode {
  */
 export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
-     * Sets the scrollbar state.
+     * 设置滚动条状态。
      *
      * @param { BarState | undefined } barState - Scrollbar state.<br>Default value: <em>BarState.Auto</em>
      *     for the <em>List</em>, <em>Grid</em>, and <em>Scroll</em> components and <em>BarState.Off</em>
@@ -15200,7 +15200,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBar(barState: BarState | undefined): this;
     /**
-     * Sets the scrollbar color.
+     * 设置滚动条的颜色。
      *
      * @param { Color | int | string | Resource | undefined } color - Scrollbar color.
      *     <br>Default value: <em>'\#182431'</em> (40% opacity)
@@ -15213,7 +15213,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarColor(color: Color | int | string | Resource | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
      * @param { double | string | undefined } value - Scrollbar width.<br>Default value: <em>4</em>
      *     <br>Unit: vp
@@ -15226,7 +15226,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: double | string | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
      * @param { Resource | undefined } value  - Scrollbar width.
      *     <br>Unit: vp
@@ -15240,7 +15240,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: Resource | undefined): this;
     /**
-     * Margin of the scrollbar.
+     * 设置滚动条的边距。
      *
      * @param { ScrollBarMargin | undefined } margin - Margin of the scrollbar.
      *     <br>Passing undefined will restore the default value.Default value: {start: LengthMetrics.vp(0), end: 
@@ -15252,8 +15252,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarMargin(margin: ScrollBarMargin | undefined): this;
     /**
-     * Set the scroll bar auto adjust the margin to avoid the padding, safeAreaPadding, and
-     * contentStartOffset/contentEndOffset of the component.
+     * 设置滚动条自动调整边距，以避让组件的padding、safeAreaPadding和
+     * contentStartOffset/contentEndOffset区域。
      *
      * @param { boolean | undefined } enable - Whether to enable automatic adjustment of scroll bar margin.
      *     <br>Default value: false.
@@ -15264,7 +15264,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default autoAdjustScrollBarMargin(enable: boolean | undefined): this;
     /**
-     * Sets the effect used when the scroll boundary is reached.
+     * 设置边缘滑动效果。
      *
      * @param { EdgeEffect | undefined } edgeEffect - Effect used when the scroll boundary is
      *     reached. The spring and shadow effects are supported. Default value:
@@ -15284,7 +15284,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default edgeEffect(edgeEffect: EdgeEffect | undefined, options?: EdgeEffectOptions): this;
     /**
-     * Called when setting whether to enable fading Edge effect.
+     * 设置是否开启边缘渐隐效果。
      *
      * @param { boolean | undefined } enabled - Whether to turn on the edge fade effect
      * @param { FadingEdgeOptions } [options] - The options of fadingEdge.
@@ -15295,7 +15295,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default fadingEdge(enabled: boolean | undefined, options?: FadingEdgeOptions): this;
     /**
-     * Sets the nested scrolling options.
+     * 设置嵌套滚动选项。
      *
      * @param { NestedScrollOptions | undefined } value - Nested scrolling options.
      * @returns { this }
@@ -15305,7 +15305,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default nestedScroll(value: NestedScrollOptions | undefined): this;
     /**
-     * Sets whether to support scroll gestures.
+     * 设置是否支持滚动手势。
      *
      * @param { boolean | undefined } value - Whether to support scroll gestures.<br>Default value: <em>true</em>
      * @returns { this }
@@ -15315,7 +15315,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollInteraction(value: boolean | undefined): this;
     /**
-     * Sets the friction coefficient.
+     * 设置摩擦系数。
      *
      * @param { double | Resource | undefined } value - Friction coefficient.
      * @returns { this }
@@ -15325,7 +15325,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default friction(value: double | Resource | undefined): this;
     /**
-     * Sets the offset from the start of the content to the boundary of the scrollable display area.
+     * 设置从内容起始位置到可滚动显示区域边界的偏移量。
      *
      * @param { double | Resource | undefined } offset - Offset from the start of the content to the boundary of
      *     the scrollable display area.
@@ -15337,7 +15337,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default contentStartOffset(offset: double | Resource | undefined): this;
     /**
-     * Sets the offset from the end of the content to the boundary of the scrollable display area.
+     * 设置从内容末尾位置到可滚动显示区域边界的偏移量。
      *
      * @param { double | Resource | undefined } offset - Offset from the end of the content to the boundary of
      *     the scrollable display area.
@@ -15382,7 +15382,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onDidStopDragging(handler: OnDidStopDraggingCallback | undefined): this;
     /**
-     * Called when the scrollable will start fling.
+     * 滚动组件将要开始惯性动效时触发。
      *
      * @param { VoidCallback | undefined } handler - callback of start fling.
      *     <br>Passing undefined will unregister the callback.
@@ -15393,7 +15393,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onWillStartFling(handler: VoidCallback | undefined): this;
     /**
-     * Called when the scrollable did stop fling.
+     * 滚动组件结束惯性动效后触发。
      *
      * @param { VoidCallback | undefined } handler - callback of stop fling.
      *     <br>Passing undefined will unregister the callback.
@@ -15415,7 +15415,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollWithMouse(enabled: boolean | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the start position.
+     * 滚动组件到达起始位置时触发。
      *
      * @param { function | undefined } event - Callback function, triggered when the scrollable reaches
      *     the start position.
@@ -15426,7 +15426,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the end position.
+     * 滚动组件到达末尾位置时触发。
      *
      * @param { function | undefined } event - Callback function, triggered when the scrollable reaches the end position.
      * @returns { this }
@@ -15436,8 +15436,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachEnd(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component starts scrolling initiated by the user's finger dragging the
-     * component or its scrollbar.
+     * 当用户手指拖动滚动组件或其滚动条，滚动组件开始滚动时
+     * 触发。
      *
      * @param { function | undefined } event - Callback function, triggered when the scrollable starts scrolling.
      * @returns { this }
@@ -15447,7 +15447,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when scrolling stops after the user's finger leaves the screen.
+     * 用户手指离开屏幕后，滚动停止时触发。
      *
      * @param { function | undefined } event - Callback function, triggered when the scrollable stops scrolling.
      * @returns { this }
@@ -15457,7 +15457,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStop(event: (() => void) | undefined): this;
     /**
-     * Sets the maximum initial velocity at the start of the fling animation that occurs after gesture-driven scrolling ends.
+     * 限制跟手滑动结束后，惯性动效开始时的最大初始速度。
      *
      * @param { double | undefined } speedLimit - Maximum initial velocity at the start of the fling animation.
      *     <br>Default value: <em>9000</em>
@@ -15470,7 +15470,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
     /**
-     * Sets the content clipping area for this scrollable component.
+     * 设置滚动容器的内容层裁剪区域。
      *
      * @param { ContentClipMode | RectShape | undefined } clip - A value from enum ContentClipMode or a customized clip rect.
      * @returns { this }
@@ -15480,7 +15480,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default clipContent(clip: ContentClipMode | RectShape | undefined): this;
     /**
-     * Set the sensitivity of rotating crown.
+     * 设置表冠响应事件灵敏度。
      *
      * @param { CrownSensitivity | undefined } sensitivity - The sensitivity of rotating crown, default value is { MEDIUM }.
      * @returns { this } The component instance.
@@ -15490,7 +15490,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
     /**
-     * Sets whether to enable the back-to-top feature for a scrollable component when the status bar is touched.
+     * 设置滚动组件是否支持点击状态栏回到顶部。
      *
      * @param { boolean | undefined } backToTop - Whether to enable the backtotop feature for a scrollable
      *     component when the status bar is touched. <br>Default value: <em>false</em>
@@ -15501,7 +15501,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default backToTop(backToTop: boolean | undefined): this;
     /**
-     * Sets the scrollbar track height.
+     * 设置滚动条滑轨高度。
      *
      * @param { LengthMetrics | undefined } height - Scrollbar track height.
      *     <br>The value must be greater than or equal to 0, If set to undefined or a value less than 0, the default
@@ -15527,14 +15527,14 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
- * The actual offset by which the scrollable scrolls.
+ * 滚动组件实际滚动的偏移量。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class ScrollResult {
     /**
-     * Get the actual offset by which the scrollable scrolls in vp.
+     * 获取滚动组件实际滚动的偏移量，单位为vp。
      * @returns { double } actual offset by which the scrollable scrolls in vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15543,7 +15543,7 @@ export declare class ScrollResult {
     get offsetRemain(): double;
 
     /**
-     * Set the actual offset by which the scrollable scrolls in vp.
+     * 设置滚动组件实际滚动的偏移量，单位为vp。
      * @param { double } offsetRemain - actual offset by which the scrollable scrolls in vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15552,7 +15552,7 @@ export declare class ScrollResult {
     set offsetRemain(offsetRemain: double);
 }
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * 在滚动前调用，以允许开发者控制滚动组件的实际滚动偏移量。
  *
  * @param { double } scrollOffset - offset this frame will scroll, which may or may not be reached.
  * @param { ScrollState } scrollState - current scroll state.
@@ -15565,7 +15565,7 @@ export declare class ScrollResult {
  */
 export type OnWillScrollCallback = (scrollOffset: double, scrollState: ScrollState, scrollSource: ScrollSource) => (undefined | ScrollResult);
 /**
-  * On scroll callback using in scrollable onDidScroll.
+  * 滚动组件滑动时触发的回调。
   *
   * @param { double } scrollOffset - offset this frame did scroll.
   * @param { ScrollState } scrollState - current scroll state.
@@ -15605,7 +15605,7 @@ export type OnDidStopDraggingCallback = (willFling: boolean) => void;
   */
 export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (CustomBuilder | undefined);
 /**
-  * Defines the callback type used in onGetPreviewBadge of EditModeOptions.
+  * 即将启动多选长按聚拢动画时，触发用于获取选中数量的回调。
   *
   * @returns { boolean | int }
   * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15614,7 +15614,7 @@ export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (
   */
 export type OnGetPreviewBadgeCallback = () => (boolean | int);
 /**
- * Defines the callback type used in OnVisibleIndexesChange.
+ * 定义OnVisibleIndexesChange使用的回调类型。
  *
  * @param { int } start - the first index in visible content.
  * @param { int } end - the last index in visible content.
@@ -15624,7 +15624,7 @@ export type OnGetPreviewBadgeCallback = () => (boolean | int);
  */
 export type OnVisibleIndexesChangeCallback = (start: int, end: int) => void;
 /**
- * Defines the onMove callback.
+ * 定义数据源拖拽回调。
  *
  * @param { int } from - Index number for moving elements.
  * @param { int } to - Target index number for moving elements.
@@ -15683,7 +15683,7 @@ export declare interface ItemDragEventHandler {
  */
 export declare interface DynamicNode {
     /**
-     * Set the move action.
+     * 设置拖拽排序数据移动回调。
      *
      * @param { OnMoveHandler | undefined } handler
      * @returns { this }
@@ -16371,7 +16371,7 @@ export declare interface UICommonEvent {
     setOnVisibleAreaApproximateChange(options: VisibleAreaEventOptions, event: VisibleAreaChangeCallback | undefined): void;
 }
 /**
- * Defines a UIScrollableCommonEvent which is used to set event to target component.
+ * 用于设置滚动事件回调。
  *
  * @extends UICommonEvent
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16380,7 +16380,7 @@ export declare interface UICommonEvent {
  */
 export declare interface UIScrollableCommonEvent extends UICommonEvent {
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the start position.
+   * 设置或重置滚动到达起始位置时触发的回调。
    *
    * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling reaches
    *     the start position.
@@ -16391,7 +16391,7 @@ export declare interface UIScrollableCommonEvent extends UICommonEvent {
    */
   setOnReachStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the end position.
+   * 设置或重置滚动到达末尾位置时触发的回调。
    *
    * @param { VoidCallback | undefined } callback - callback function, triggered when the
    *     scrolling reaches the end position.
@@ -16402,7 +16402,7 @@ export declare interface UIScrollableCommonEvent extends UICommonEvent {
    */
   setOnReachEnd(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling started.
+   * 设置或重置滚动开始时触发的回调。
    *
    * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling started.
    *     <br>Passing undefined will unregister the callback.
@@ -16412,7 +16412,7 @@ export declare interface UIScrollableCommonEvent extends UICommonEvent {
    */
   setOnScrollStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling stopped.
+   * 设置或重置滚动停止时触发的回调。
    *
    * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling stopped.
    *     <br>Passing undefined will unregister the callback.
@@ -16422,7 +16422,7 @@ export declare interface UIScrollableCommonEvent extends UICommonEvent {
    */
   setOnScrollStop(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when scrolling begin each frame.
+   * 设置或重置每帧滚动开始时触发的回调。
    *
    * @param { OnScrollFrameBeginCallback | undefined } callback - callback function, triggered when the
    *     scrolling begin each frame.

@@ -28739,7 +28739,7 @@ declare class ScrollResult {
 }
 
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * 滚动组件滑动前触发的回调。
  *
  * @typedef { function } OnWillScrollCallback
  * @param { number } scrollOffset - offset this frame will scroll, which may or may not be reached.

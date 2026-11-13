@@ -42,7 +42,7 @@ export declare enum ListItemGroupStyle {
   NONE = 0,
 
   /**
-   * Show default style.
+   * 显示默认卡片样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

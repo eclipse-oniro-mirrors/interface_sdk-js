@@ -34,7 +34,7 @@ import { FrameNode } from 'arkui.FrameNode';
 export declare enum ScrollDirection {
 
   /**
-   * Only vertical scrolling is supported.
+   * 仅支持竖直方向滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -43,7 +43,7 @@ export declare enum ScrollDirection {
   Vertical,
 
   /**
-   * Only horizontal scrolling is supported.
+   * 仅支持水平方向滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -52,7 +52,7 @@ export declare enum ScrollDirection {
   Horizontal,
 
   /**
-   * Scrolling is disabled.
+   * 不可滚动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -80,7 +80,7 @@ export declare enum ScrollDirection {
 export declare enum ScrollAlign {
 
   /**
-   * The start edge of the list item is flush with the start edge of the list.
+   * 首部对齐。指定item首部与滚动容器组件首部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -89,7 +89,7 @@ export declare enum ScrollAlign {
   START,
 
   /**
-   * The list item is centered along the main axis of the list.
+   * 居中对齐。指定item主轴方向居中对齐于滚动容器组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -98,7 +98,7 @@ export declare enum ScrollAlign {
   CENTER,
 
   /**
-   * The end edge of the list item is flush with the end edge of the list.
+   * 尾部对齐。指定item尾部与滚动容器组件尾部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -107,7 +107,7 @@ export declare enum ScrollAlign {
   END,
 
   /**
-   * The list item is automatically aligned.
+   * 自动对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

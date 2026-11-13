@@ -239,7 +239,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * ScrollEvent type.
+   * 滚动事件的类型。
    *
    * @enum { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -249,7 +249,7 @@ declare namespace uiObserver {
   export enum ScrollEventType {
 
     /**
-     * When the ScrollEvent start.
+     * 滚动事件开始。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -258,7 +258,7 @@ declare namespace uiObserver {
     SCROLL_START = 0,
 
     /**
-     * When the ScrollEvent stop.
+     * 滚动事件结束。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -428,7 +428,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * ScrollEvent info.
+   * ScrollEvent滚动信息。
    *
    * @interface ScrollEventInfo
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -448,7 +448,7 @@ declare namespace uiObserver {
     id: string;
 
     /**
-     * The uniqueId of the scrollable component.
+     * 滚动组件的uniqueId。
      *
      * @type { int }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -458,7 +458,7 @@ declare namespace uiObserver {
     uniqueId: int;
 
     /**
-     * Changed ScrollEvent type.
+     * 滚动事件的类型。
      *
      * @type { ScrollEventType }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -468,7 +468,7 @@ declare namespace uiObserver {
     scrollEvent: ScrollEventType;
 
     /**
-     * Changed ScrollEvent offset.
+     * 滚动组件的当前偏移量。
      *
      * @type { double }
      * @syscap SystemCapability.ArkUI.ArkUI.Full

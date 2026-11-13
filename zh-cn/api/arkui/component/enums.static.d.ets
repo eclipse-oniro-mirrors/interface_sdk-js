@@ -1109,7 +1109,7 @@ export declare enum Direction {
 }
 
 /**
- * Used to set the status of the scroll bar.
+ * 用于设置滚动条的状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1118,7 +1118,7 @@ export declare enum Direction {
  */
 export declare enum BarState {
   /**
-   * Not displayed.
+   * 不显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1127,7 +1127,7 @@ export declare enum BarState {
   Off = 0,
 
   /**
-   * On-demand display (displayed when you touch it and disappears after 2 seconds).
+   * 按需显示（触摸时显示，2s后消失）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1136,7 +1136,7 @@ export declare enum BarState {
   Auto = 1,
 
   /**
-   * Resident display.
+   * 常驻显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3207,7 +3207,7 @@ export declare enum XComponentType {
 }
 
 /**
- * Nested scroll nested mode
+ * 定义嵌套滚动组件中的嵌套模式。
 
  * @enum { number } NestedScrollMode
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3216,7 +3216,7 @@ export declare enum XComponentType {
  */
 export declare enum NestedScrollMode {
   /**
-   * Only Self response scrolling.
+   * 只自身滚动，不与父组件联动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3225,7 +3225,7 @@ export declare enum NestedScrollMode {
   SELF_ONLY = 0,
 
   /**
-   * Self priority response scrolling.
+   * 自身先滚动，自身滚动到边缘以后父组件滚动。父组件滚动到边缘以后，如果父组件有边缘效果，则父组件触发边缘效果，否则子组件触发边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3234,7 +3234,7 @@ export declare enum NestedScrollMode {
   SELF_FIRST = 1,
 
   /**
-   * Parent scrollable component priority response scrolling.
+   * 父组件先滚动，父组件滚动到边缘以后自身滚动。自身滚动到边缘后，如果有边缘效果，会触发自身的边缘效果，否则触发父组件的边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3243,7 +3243,7 @@ export declare enum NestedScrollMode {
   PARENT_FIRST = 2,
 
   /**
-   * Both self and parent scrollable component response scrolling.
+   * 自身和父组件同时滚动，自身和父组件都到达边缘以后，如果自身有边缘效果，则自身触发边缘效果，否则父组件触发边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3253,7 +3253,7 @@ export declare enum NestedScrollMode {
 }
 
 /**
- * The possible source of scroll event
+ * 滑动操作的来源。
  * @enum { number } ScrollSource
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3269,7 +3269,7 @@ export declare enum ScrollSource {
   DRAG = 0,
 
   /**
-   * Fling after the drag has ended with velocity.
+   * 拖拽结束之后的惯性滑动。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3277,7 +3277,7 @@ export declare enum ScrollSource {
   FLING = 1,
 
   /**
-   * Over scroll with EdgeEffect.Spring.
+   * EdgeEffect.Spring的边缘滚动效果。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3285,7 +3285,7 @@ export declare enum ScrollSource {
   EDGE_EFFECT = 2,
 
   /**
-   * Other user input except drag, such as mouse wheel, key event.
+   * 除拖拽外的其他用户输入，如鼠标滚轮、键盘事件等。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3293,7 +3293,7 @@ export declare enum ScrollSource {
   OTHER_USER_INPUT = 3,
 
   /**
-   * Drag events of scroll bar.
+   * 滚动条的拖拽事件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3301,7 +3301,7 @@ export declare enum ScrollSource {
   SCROLL_BAR = 4,
 
   /**
-   * Fling after the drag on scroll bar has ended with velocity.
+   * 滚动条拖拽结束后的带速度的惯性滑动。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3309,7 +3309,7 @@ export declare enum ScrollSource {
   SCROLL_BAR_FLING = 5,
 
   /**
-   * Member methods of Scroller without animation.
+   * Scroller的不带动效方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3317,7 +3317,7 @@ export declare enum ScrollSource {
   SCROLLER = 6,
 
   /**
-   * Member methods of Scroller with animation.
+   * Scroller的带动效方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

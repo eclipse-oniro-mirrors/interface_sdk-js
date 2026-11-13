@@ -67,7 +67,7 @@ declare enum RefreshStatus {
   OverDrag,
 
   /**
-   * After the pull-down, it rebounds to the refresh distance and enters the refresh state.
+   * 下拉结束，回弹至刷新距离，进入刷新中状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel

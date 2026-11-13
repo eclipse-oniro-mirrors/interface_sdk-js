@@ -24,7 +24,7 @@ import { PropRef } from '@ohos.arkui.stateManagement';
 import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
 import { Builder } from '@ohos.arkui.component';
 /**
- * Declare enum IconType
+ * 列表左侧图标类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -33,7 +33,7 @@ import { Builder } from '@ohos.arkui.component';
  */
 export declare enum IconType {
   /**
-   * Badge type.
+   * 左侧图标为badge类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -41,7 +41,7 @@ export declare enum IconType {
    */
   BADGE = 1,
   /**
-   * Normal icon type.
+   * 左侧图标为小图标类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -49,7 +49,7 @@ export declare enum IconType {
    */
   NORMAL_ICON = 2,
   /**
-   * System icon type.
+   * 左侧图标为系统图标类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -57,7 +57,7 @@ export declare enum IconType {
    */
   SYSTEM_ICON = 3,
   /**
-   * HeadSculpture type.
+   * 左侧图标为头像类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -65,7 +65,7 @@ export declare enum IconType {
    */
   HEAD_SCULPTURE = 4,
   /**
-   * App icon type.
+   * 左侧图标为应用图标类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -73,7 +73,7 @@ export declare enum IconType {
    */
   APP_ICON = 5,
   /**
-   * Preview type.
+   * 左侧图标为预览图类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -81,7 +81,7 @@ export declare enum IconType {
    */
   PREVIEW = 6,
   /**
-   * Longitudinal type.
+   * 左侧图标为横向特殊比例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -89,7 +89,7 @@ export declare enum IconType {
    */
   LONGITUDINAL = 7,
   /**
-   * Vertical type.
+   * 左侧图标为竖向特殊比例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -98,7 +98,7 @@ export declare enum IconType {
   VERTICAL = 8
 }
 /**
- * Declare type OperateIcon
+ * 列表右侧图标元素的类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -107,7 +107,7 @@ export declare enum IconType {
  */
 export declare class OperateIcon {
   /**
-   * The content of text or the address of icon.
+   * 右侧图标/箭头资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -115,7 +115,7 @@ export declare class OperateIcon {
    */
   public value: ResourceStr;
   /**
-   * The content of text or the address of symbol.
+   * 右侧Symbol图标/箭头资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -124,7 +124,7 @@ export declare class OperateIcon {
   public symbolStyle?: SymbolGlyphModifier;
 
   /**
-   * Callback function when operate the icon.
+   * 右侧图标/箭头点击事件。
    *
    *
    *
@@ -134,7 +134,7 @@ export declare class OperateIcon {
    */
   public action?: () => void;
   /**
-   * The accessibilityText of the icon.
+   * 右侧图标/箭头的无障碍文本属性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -142,7 +142,7 @@ export declare class OperateIcon {
    */
   public accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of the icon.
+   * 右侧图标/箭头的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -150,7 +150,7 @@ export declare class OperateIcon {
    */
   public accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of the icon.
+   * 右侧图标/箭头的无障碍重要性。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -160,7 +160,7 @@ export declare class OperateIcon {
   public accessibilityLevel?: string;
 }
 /**
- * Declare type OperateCheck
+ * 列表右侧元素为Switch、CheckBox、Radio的类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -169,7 +169,7 @@ export declare class OperateIcon {
  */
 export declare class OperateCheck {
   /**
-   * Whether is checked on default.
+   * 右侧Switch/CheckBox/Radio选中状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -177,7 +177,7 @@ export declare class OperateCheck {
    */
   public isCheck?: boolean;
   /**
-   * Callback function when operate the checkbox/switch/radio.
+   * 右侧Switch/CheckBox/Radio选中状态改变时触发回调。
    *
    *
    *
@@ -187,7 +187,7 @@ export declare class OperateCheck {
    */
   public onChange?: (value: boolean) => void;
   /**
-   * The accessibilityText of the checkbox/switch/radio.
+   * 右侧Switch/CheckBox/Radio的无障碍文本属性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -203,7 +203,7 @@ export declare class OperateCheck {
    */
   public accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of the checkbox/switch/radio.
+   * 右侧Switch/CheckBox/Radio的无障碍重要性。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -213,7 +213,7 @@ export declare class OperateCheck {
   public accessibilityLevel?: string;
 }
 /**
- * Declare type OperateButton
+ * 列表右侧按钮元素的类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -222,7 +222,7 @@ export declare class OperateCheck {
  */
 export declare class OperateButton {
   /**
-   * The text on the button.
+   * 右侧按钮文字。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -230,7 +230,7 @@ export declare class OperateButton {
    */
   public text?: ResourceStr;
   /**
-   * The accessibilityText of the button.
+   * 右侧按钮的无障碍文本属性。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -238,7 +238,7 @@ export declare class OperateButton {
    */
   public accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of the button.
+   * 右侧按钮的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,7 +246,7 @@ export declare class OperateButton {
    */
   public accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of the button.
+   * 右侧按钮的无障碍重要性。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -265,7 +265,7 @@ export declare class OperateButton {
  */
 export declare class ContentItem {
   /**
-   * The type of icon.
+   * 左侧元素的图标样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -273,7 +273,7 @@ export declare class ContentItem {
    */
   public iconStyle?: IconType;
   /**
-   * Sets the icon.
+   * 左侧元素的图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -281,7 +281,7 @@ export declare class ContentItem {
    */
   public icon?: ResourceStr;
   /**
-   * Sets the symbol.
+   * 左侧元素的Symbol图标样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -289,7 +289,7 @@ export declare class ContentItem {
    */
   public symbolStyle?: SymbolGlyphModifier;
   /**
-   * Sets the primaryText.
+   * 中间元素的标题内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -297,7 +297,7 @@ export declare class ContentItem {
    */
   public primaryText?: ResourceStr;
   /**
-   * Sets the secondaryText.
+   * 中间元素的副标题内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -305,7 +305,7 @@ export declare class ContentItem {
    */
   public secondaryText?: ResourceStr;
   /**
-   * Sets the description.
+   * 中间元素的描述内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -323,7 +323,7 @@ export declare class ContentItem {
  */
 export declare class OperateItem {
   /**
-   * Sets the icon.
+   * 右侧元素的第一个图标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -331,7 +331,7 @@ export declare class OperateItem {
    */
   public icon?: OperateIcon;
   /**
-   * Sets the subIcon.
+   * 右侧元素的第二个图标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -339,7 +339,7 @@ export declare class OperateItem {
    */
   public subIcon?: OperateIcon;
   /**
-   * Sets the button.
+   * 右侧元素为按钮。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -347,7 +347,7 @@ export declare class OperateItem {
    */
   public button?: OperateButton;
   /**
-   * Sets the toggle.
+   * 右侧元素为开关。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -355,7 +355,7 @@ export declare class OperateItem {
    */
   public toggle?: OperateCheck;
   /**
-   * Sets the checkBox.
+   * 右侧元素为多选框。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -363,7 +363,7 @@ export declare class OperateItem {
    */
   public checkbox?: OperateCheck;
   /**
-   * Sets the radio.
+   * 右侧元素为单选框。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -371,7 +371,7 @@ export declare class OperateItem {
    */
   public radio?: OperateCheck;
   /**
-   * Sets the image.
+   * 右侧元素为图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -379,7 +379,7 @@ export declare class OperateItem {
    */
   public image?: ResourceStr;
   /**
-   * Sets the symbolStyle.
+   * 右侧元素为Symbol图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -387,7 +387,7 @@ export declare class OperateItem {
    */
   public symbolStyle?: SymbolGlyphModifier;
   /**
-   * Sets the text.
+   * 右侧元素为文字。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -395,7 +395,7 @@ export declare class OperateItem {
    */
   public text?: ResourceStr;
   /**
-   * Sets the arrow.
+   * 右侧元素为箭头。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -432,7 +432,7 @@ export declare struct ComposeListItem {
   @PropRef
   operateItem?: OperateItem;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

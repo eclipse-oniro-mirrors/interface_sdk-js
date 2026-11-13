@@ -1650,7 +1650,7 @@ export declare class UIObserver {
   onScrollEvent(options: observer.ObserverOptions, callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
    * @param { observer.ObserverOptions } options - The options object.
    * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
@@ -1673,7 +1673,7 @@ export declare class UIObserver {
   onScrollEvent(callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
    * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
    *     callbacks for the given event type will be removed.
