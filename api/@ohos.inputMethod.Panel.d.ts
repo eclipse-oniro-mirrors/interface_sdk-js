@@ -205,6 +205,19 @@ export enum PanelFlag {
    * @since 23 static
    */
   FLAG_CANDIDATE
+
+  /**
+   * Detached state panel type.
+   * <br>
+   * <br>‑ When the input panel is in detached state, the soft keyboard is split into left and right parts with a hollow
+   * area in the middle.
+   * <br>
+   * <br>‑ The panel width equals the display width, and the panel can only be moved vertically.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @since 26.1.0 dynamic&static
+   */
+  FLAG_DETACHED
 }
 
 /**
