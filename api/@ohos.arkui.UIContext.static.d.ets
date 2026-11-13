@@ -16,7 +16,7 @@
  */
 
 /**
- * @file
+ * @file UIContext instance
  * @kit ArkUI
  */
 
