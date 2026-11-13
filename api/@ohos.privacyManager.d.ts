@@ -1314,6 +1314,32 @@ declare namespace privacyManager {
      * @since 26.0.0 dynamic&static
      */
     enhancedIdentity?: string;
+    /**
+     * Identity identifier of the target application. Only valid when permissionName is
+     * ohos.permission.AUTOMATION_CONTROL, indicating the target application being controlled in an
+     * automation control scenario. A value of 0 indicates a normal permission record (non-automation control).
+     * The value should be an integer.
+     * <br>Default value: 0.
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetTokenId?: int;
+    /**
+     * Bundle name of the target application. Only valid when permissionName is
+     * ohos.permission.AUTOMATION_CONTROL, indicating the bundle name of the target application being
+     * controlled in an automation control scenario. An empty string indicates a normal permission
+     * record (non-automation control).
+     * <br>Default value: "".
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetBundleName?: string;
   }
 
   /**
