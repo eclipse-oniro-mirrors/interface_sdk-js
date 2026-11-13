@@ -14893,7 +14893,9 @@ declare interface PopupCommonOptions {
   offset?: Position;
 
   /**
-   * Set the width of the popup.
+   * 气泡宽度，未设置或者异常值场景下，气泡自适应内容宽度。
+   *
+   * 单位：vp
    *
    * @type { ?Dimension }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14905,7 +14907,9 @@ declare interface PopupCommonOptions {
   width?: Dimension;
 
   /**
-   * The position of the sharp corner of popup.
+   * 气泡箭头相对于父组件显示位置，气泡箭头在垂直和水平方向上有Start、Center、End三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。
+   *
+   * 默认值：ArrowPointPosition.CENTER
    *
    * @type { ?ArrowPointPosition }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14917,7 +14921,15 @@ declare interface PopupCommonOptions {
   arrowPointPosition?: ArrowPointPosition;
 
   /**
-   * The width of the arrow.
+   * 设置箭头宽度。若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+   *
+   * 默认值：16
+   *
+   * 单位：vp
+   *
+   * **说明：**
+   *
+   * 不支持设置百分比。
    *
    * @type { ?Dimension }
    * @default 16.0_vp.
@@ -14930,7 +14942,15 @@ declare interface PopupCommonOptions {
   arrowWidth?: Dimension;
 
   /**
-   * The height of the arrow.
+   * 设置箭头高度。
+   *
+   * 默认值：8
+   *
+   * 单位：vp
+   *
+   * **说明：**
+   *
+   * 不支持设置百分比。
    *
    * @type { ?Dimension }
    * @default 8.0_vp.
@@ -14943,7 +14963,11 @@ declare interface PopupCommonOptions {
   arrowHeight?: Dimension;
 
   /**
-   * The round corners of the popup.
+   * 设置气泡圆角半径。
+   *
+   * 默认值：20
+   *
+   * 单位：vp
    *
    * @type { ?Dimension }
    * @default 20.0_vp.
@@ -14956,7 +14980,9 @@ declare interface PopupCommonOptions {
   radius?: Dimension;
 
   /**
-   * The style of popup Shadow.
+   * 设置气泡阴影。
+   *
+   * 默认值：ShadowStyle.OUTER_DEFAULT_MD
    *
    * @type { ?(ShadowOptions | ShadowStyle) }
    * @default ShadowStyle.OUTER_DEFAULT_MD.
@@ -14969,7 +14995,9 @@ declare interface PopupCommonOptions {
   shadow?: ShadowOptions | ShadowStyle;
 
   /**
-   * Defines popup background blur Style
+   * 设置气泡模糊背景参数。
+   *
+   * 默认值：BlurStyle.COMPONENT_ULTRA_THICK
    *
    * @type { ?BlurStyle }
    * @default BlurStyle.COMPONENT_ULTRA_THICK
@@ -15489,14 +15517,14 @@ declare interface PopupOptions {
    */
   primaryButton?: {
     /**
-     * Button text value
+     * 气泡里主按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @since 7
      */
     /**
-     * Button text value
+     * 气泡里主按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15504,7 +15532,7 @@ declare interface PopupOptions {
      * @since 10
      */
     /**
-     * Button text value
+     * 气泡里主按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15555,14 +15583,14 @@ declare interface PopupOptions {
    */
   secondaryButton?: {
     /**
-     * Button text value
+     * 气泡里辅助按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @since 7
      */
     /**
-     * Button text value
+     * 气泡里辅助按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15570,7 +15598,7 @@ declare interface PopupOptions {
      * @since 10
      */
     /**
-     * Button text value
+     * 气泡里辅助按钮的文本。
      *
      * @type { string }
      * @syscap SystemCapability.ArkUI.ArkUI.Full

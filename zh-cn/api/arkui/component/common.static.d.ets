@@ -8164,7 +8164,7 @@ export declare interface StateStyles {
     hovered?: CustomStyles;
 }
 /**
- * Defines the options of popup message.
+ * 气泡文本的样式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8172,7 +8172,7 @@ export declare interface StateStyles {
  */
 export declare interface PopupMessageOptions {
     /**
-     * Sets the color of popup text.
+     * 设置气泡信息文本颜色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8180,7 +8180,12 @@ export declare interface PopupMessageOptions {
      */
     textColor?: ResourceColor;
     /**
-     * Sets the font of popup text.
+     * 设置气泡信息字体属性。
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置family。
+     * 2. Font中的weight属性不支持传入number类型。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8247,7 +8252,7 @@ export declare enum DismissReason {
     SLIDE = 4
 }
 /**
- * Component popup dismiss
+ * 气泡关闭的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8255,7 +8260,7 @@ export declare enum DismissReason {
  */
 export declare interface DismissPopupAction {
     /**
-     * Defines popup dismiss function
+     * Popup关闭回调函数。开发者需要退出时调用，不需要退出时无需调用。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8263,7 +8268,7 @@ export declare interface DismissPopupAction {
      */
     dismiss(): void;
     /**
-     * Defines popup dismiss reason
+     * 关闭原因，返回本次拦截Popup消失的事件原因。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8272,7 +8277,7 @@ export declare interface DismissPopupAction {
     reason: DismissReason;
 }
 /**
- * Popup state change param
+ * 气泡的显示状态。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8290,7 +8295,7 @@ export declare interface PopupStateChangeParam {
     isVisible: boolean;
 }
 /**
- * Popup state change callback
+ * 气泡状态变化事件回调。
  *
  * @param { PopupStateChangeParam } event - The parameter of state change callback.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8299,7 +8304,7 @@ export declare interface PopupStateChangeParam {
  */
 export type PopupStateChangeCallback = (event: PopupStateChangeParam) => void;
 /**
- * Popup mask type
+ * 设置遮罩层颜色。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8317,7 +8322,7 @@ export declare interface PopupMaskType {
     color: ResourceColor;
 }
 /**
- * Popup border LinearGradient
+ * 设置描边线性渐变的颜色和方向。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8325,7 +8330,13 @@ export declare interface PopupMaskType {
  */
 export declare interface PopupBorderLinearGradient {
     /**
-     * direction: Direction of Linear Gradient.
+     * 线性渐变的方向。
+     *
+     * 默认值：GradientDirection.Bottom
+     *
+     * **说明：**
+     *
+     * 当线性渐变的方向设置为GradientDirection.None时，显示默认值。
      *
      * @default GradientDirection.Bottom
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8334,10 +8345,16 @@ export declare interface PopupBorderLinearGradient {
      */
     direction?: GradientDirection;
     /**
-     * Sets the colors and positions of the gradient.
+     * 指定渐变色颜色和其对应的百分比位置的数组，设置非法颜色直接跳过。
      *
-     * When the color setting is undefined, use the default value Color.Black.
-     * The position setting ranges from 0 to 1.
+     * **说明：**
+     *
+     * 颜色设置方式可参考：ResourceColor，非ResourceColor范围内的颜色值即为非法颜色。
+     * 数组内颜色设置为undefined或者null时，默认为黑色。
+     *
+     * colors参数的约束：
+     * ResourceColor表示填充的颜色，number表示指定颜色所处的位置，取值范围为[0,1.0]，0表示需要设置渐变色的容器的起始位置，1.0表示容器的结束位置。
+     * 为实现多个颜色渐变效果，建议多个数组中number参数递增设置，如后一个数组number参数比前一个数组number参数小时，按照等于前一个数组number参数的值处理。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8346,7 +8363,7 @@ export declare interface PopupBorderLinearGradient {
     colors: Array<[ResourceColor | undefined, double]>;
 }
 /**
- * Popup common options
+ * 配置弹出气泡的参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8354,7 +8371,9 @@ export declare interface PopupBorderLinearGradient {
  */
 export declare interface PopupCommonOptions {
     /**
-     * placement of popup.
+     * 气泡组件优先显示的位置，当前位置显示不下时，会自动调整位置。
+     *
+     * 默认值：Placement.Bottom
      *
      * @default Placement.Bottom
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8363,7 +8382,9 @@ export declare interface PopupCommonOptions {
      */
     placement?: Placement;
     /**
-     * Set the background color of the popup.
+     * 气泡的颜色。如需去除模糊背景填充效果，需将backgroundBlurStyle设置为BlurStyle.NONE。
+     *
+     * 默认值：透明色TRANSPARENT加模糊背景填充效果COMPONENT_ULTRA_THICK。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8371,7 +8392,11 @@ export declare interface PopupCommonOptions {
      */
     popupColor?: ResourceColor;
     /**
-     * whether show arrow
+     * 设置是否显示箭头。值为true时显示箭头，值为false时不显示箭头。
+     *
+     * 如果箭头所在方位侧的气泡长度不足以显示下箭头，则会默认不显示箭头。比如：placement设置为Left，此时如果气泡高度小于箭头的宽度（32vp）与气泡圆角两倍（48vp）之和（80vp），则实际不会显示箭头。
+     *
+     * 默认值：true
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8380,7 +8405,11 @@ export declare interface PopupCommonOptions {
      */
     enableArrow?: boolean;
     /**
-     * Whether hide popup when click mask
+     * 页面有操作时，气泡是否自动关闭。
+     *
+     * true：自动关闭气泡；false：气泡不会自动关闭。
+     *
+     * 默认值：true
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8397,7 +8426,19 @@ export declare interface PopupCommonOptions {
      */
     onStateChange?: PopupStateChangeCallback;
     /**
-     * The offset of the sharp corner of popup.
+     * Popup箭头在气泡处的偏移。
+     *
+     * 箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。
+     * 箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。
+     * 显示在屏幕边缘时，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 没设置arrowOffset的情况下，气泡箭头与四个角的距离不能小于圆角半径。
+     * 2. 只有arrowPointPosition不设置或者设置为null、undefined时，arrowOffset属性才生效。
+     * 3. 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8405,7 +8446,11 @@ export declare interface PopupCommonOptions {
      */
     arrowOffset?: Length;
     /**
-     * Whether to display in the sub window.
+     * 气泡是否显示在创建的子窗里。
+     *
+     * true：气泡会显示在创建的子窗里；false：气泡会显示在对应的主窗中。
+     *
+     * 默认值：false
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8413,9 +8458,9 @@ export declare interface PopupCommonOptions {
      */
     showInSubWindow?: boolean;
     /**
-     * The mask to block gesture events of popup.
-     * When mask is set false, gesture events are not blocked.
-     * When mask is set true, gesture events are blocked and mask color is transparent.
+     * 设置气泡是否有遮罩层及遮罩颜色。设置为false时不显示遮罩层，设置为true时显示透明色遮罩层，设置为PopupMaskType时显示指定颜色的遮罩层。
+     *
+     * 默认值：true
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8423,7 +8468,11 @@ export declare interface PopupCommonOptions {
      */
     mask?: boolean | PopupMaskType;
     /**
-     * Sets the space of between the popup and target.
+     * 设置Popup与宿主节点的间隙。不支持设置百分比。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8431,7 +8480,15 @@ export declare interface PopupCommonOptions {
      */
     targetSpace?: Length;
     /**
-     * Sets the position offset of the popup.
+     * 设置Popup组件相对于placement设置的显示位置的偏移。
+     *
+     * 默认值：{ x: 0, y: 0 }
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8439,7 +8496,9 @@ export declare interface PopupCommonOptions {
      */
     offset?: Position;
     /**
-     * Set the width of the popup.
+     * 气泡宽度，未设置或者异常值场景下，气泡自适应内容宽度。
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8447,7 +8506,9 @@ export declare interface PopupCommonOptions {
      */
     width?: Dimension;
     /**
-     * The position of the sharp corner of popup.
+     * 气泡箭头相对于父组件显示位置，气泡箭头在垂直和水平方向上有Start、Center、End三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。
+     *
+     * 默认值：ArrowPointPosition.CENTER
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8455,7 +8516,15 @@ export declare interface PopupCommonOptions {
      */
     arrowPointPosition?: ArrowPointPosition;
     /**
-     * The width of the arrow.
+     * 设置箭头宽度。若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+     *
+     * 默认值：16
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 16.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8464,7 +8533,15 @@ export declare interface PopupCommonOptions {
      */
     arrowWidth?: Dimension;
     /**
-     * The height of the arrow.
+     * 设置箭头高度。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 8.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8473,7 +8550,11 @@ export declare interface PopupCommonOptions {
      */
     arrowHeight?: Dimension;
     /**
-     * The round corners of the popup.
+     * 设置气泡圆角半径。
+     *
+     * 默认值：20
+     *
+     * 单位：vp
      *
      * @default 20.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8482,7 +8563,9 @@ export declare interface PopupCommonOptions {
      */
     radius?: Dimension;
     /**
-     * The style of popup Shadow.
+     * 设置气泡阴影。
+     *
+     * 默认值：ShadowStyle.OUTER_DEFAULT_MD
      *
      * @default ShadowStyle.OUTER_DEFAULT_MD.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8491,7 +8574,9 @@ export declare interface PopupCommonOptions {
      */
     shadow?: ShadowOptions | ShadowStyle;
     /**
-     * Defines popup background blur Style
+     * 设置气泡模糊背景参数。
+     *
+     * 默认值：BlurStyle.COMPONENT_ULTRA_THICK
      *
      * @default BlurStyle.COMPONENT_ULTRA_THICK
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8500,7 +8585,11 @@ export declare interface PopupCommonOptions {
      */
     backgroundBlurStyle?: BlurStyle;
     /**
-     * Set popup focusable
+     * 设置气泡弹出后是否获焦。
+     *
+     * true：气泡可以获焦；false：气泡不会获焦。
+     *
+     * 默认值：false
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8509,7 +8598,13 @@ export declare interface PopupCommonOptions {
      */
     focusable?: boolean;
     /**
-     * Defines the transition effect of popup opening and closing
+     * 自定义设置Popup气泡显示和退出的动画效果。
+     *
+     * **说明：**
+     *
+     * 1. 如果不设置，则使用默认的显示/退出动效。
+     * 2. 显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。
+     * 3. 退出动效中按back键，不会打断退出动效，退出动效继续执行，back键不被响应。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8517,8 +8612,15 @@ export declare interface PopupCommonOptions {
      */
     transition?: TransitionEffect;
     /**
-     * Callback function when the popup interactive dismiss.
-     * Use boolean to respond all interactive dismiss event. Use Callback to customize which event should be responded.
+     * 设置Popup交互式关闭拦截开关及拦截回调函数，默认值为true，Popup响应点击、侧滑（左滑/右滑）、三键back。
+     *
+     * 1. 当为boolean类型时，如果设置为false，则不响应点击、侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC退出事件，仅当设置“气泡显示状态”参数show值为false时才退出；如果设置为true，则正常响应退出事件；
+     *
+     * 2. 如果设置为函数类型，则拦截退出事件且执行回调函数。侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC在回调函数中返回的reason为PRESS_BACK，点击为TOUCH_OUTSIDE。
+     *
+     * **说明：**
+     *
+     * 在onWillDismiss回调中，不能再做onWillDismiss拦截。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8526,7 +8628,15 @@ export declare interface PopupCommonOptions {
      */
     onWillDismiss?: boolean | Callback<DismissPopupAction>;
     /**
-     * Determine if it is compatible popup's half folded.
+     * Popup组件是否响应悬停态（半折叠状态）变化，即在悬停态下是否触发避让折痕区域。
+     *
+     * 默认值：false，2in1设备默认为true。未设置或者值为非法值时，生效默认值。
+     *
+     * **说明：**
+     *
+     * 1. 如果Popup的弹出位置在悬停态折痕区域，Popup组件不会响应悬停态。
+     * 2. 2in1设备从API version 20开始生效。
+     * 3. 2in1设备仅在窗口瀑布模式下生效。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8535,7 +8645,11 @@ export declare interface PopupCommonOptions {
      */
     enableHoverMode?: boolean;
     /**
-     * Determine if popup can follow the target node when it has rotation or scale.
+     * 气泡绑定的宿主组件或其宿主组件的父容器添加了旋转、缩放等变换时，气泡是否跟随宿主组件变换。
+     *
+     * true：气泡可以拿到变换后宿主的位置，显示到相应位置；false：气泡拿不到宿主变换后的位置，可能显示异常。
+     *
+     * 默认值：false
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8544,7 +8658,9 @@ export declare interface PopupCommonOptions {
      */
     followTransformOfTarget?: boolean;
     /**
-     * Determine if popup can avoid the target when the display space is insufficient.
+     * 设置Popup避让时是否覆盖指向组件。
+     *
+     * 默认值：AvoidanceMode.COVER_TARGET
      *
      * @default AvoidanceMode.COVER_TARGET
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8553,7 +8669,17 @@ export declare interface PopupCommonOptions {
      */
     avoidTarget?: AvoidanceMode;
     /**
-     * The width of popup's outline.
+     * 设置Popup组件外描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件外描边的情况下，该接口需要和outlineLinearGradient配合使用。
+     * 3. 当设置双描边时，建议外描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8561,7 +8687,17 @@ export declare interface PopupCommonOptions {
      */
     outlineWidth?: Dimension;
     /**
-     * The width of popup's border.
+     * 设置Popup组件内描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件内描边的情况下，该接口需要和borderLinearGradient配合使用。
+     * 3. 当设置双描边时，建议内描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8569,7 +8705,12 @@ export declare interface PopupCommonOptions {
      */
     borderWidth?: Dimension;
     /**
-     * The LinearGradient of popup's outline.
+     * 设置Popup组件外描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. outlineLinearGradient不设置或者设置为null、undefined时，外描边没有线性渐变效果。
+     * 2. outlineLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8577,7 +8718,12 @@ export declare interface PopupCommonOptions {
      */
     outlineLinearGradient?: PopupBorderLinearGradient;
     /**
-     * The LinearGradient of popup's innerline.
+     * 设置Popup组件内描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. borderLinearGradient不设置或者设置为null、undefined时，内描边没有线性渐变效果。
+     * 2. borderLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8585,7 +8731,15 @@ export declare interface PopupCommonOptions {
      */
     borderLinearGradient?: PopupBorderLinearGradient;
     /**
- 	 * Define the popup theme color mode.
+ 	 * 设置气泡深浅色模式，默认跟随绑定组件深浅色模式。
+ 	 *
+ 	 * 默认值：AnchoredColorMode.FOLLOW_TARGET
+ 	 *
+ 	 * **说明：**
+ 	 *
+ 	 * 1. 仅当绑定组件使用了WithTheme标签时，该属性才会生效。
+ 	 * 2. 该属性仅影响组件的默认样式，以及开发者设置的涉及深浅色资源的属性。
+ 	 * 3. 设置为AnchoredColorMode.FOLLOW_SYSTEM时，模糊材质可以跟随，文字颜色以及涉及深浅色资源的属性仍保持跟随绑定组件的深浅色配置。
  	 * 
  	 * @default AnchoredColorMode.FOLLOW_TARGET
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8594,8 +8748,13 @@ export declare interface PopupCommonOptions {
  	 */
  	colorMode?: AnchoredColorMode;
     /**
-     * Set system-styled materials for popup. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of popup.
+     * 设置组件的系统材质。
+     *
+     * 默认值：undefined，会清除由该接口设置的材质效果。
+     *
+     * **说明：**
+     *
+     * 不同系统材质对应不同的属性影响效果，该接口影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow，当设置系统材质时，上述接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8603,7 +8762,7 @@ export declare interface PopupCommonOptions {
      */
     systemMaterial?: SystemUiMaterial;
     /**
-     * Defines the popup's background blur style with options
+     * 背景模糊效果。默认值请参考BackgroundBlurStyleOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8611,7 +8770,7 @@ export declare interface PopupCommonOptions {
      */
     backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
     /**
-     * Defines the popup's background effect with options
+     * 背景效果参数。默认值请参考BackgroundEffectOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8620,7 +8779,9 @@ export declare interface PopupCommonOptions {
     backgroundEffect?: BackgroundEffectOptions;
 
     /**
-     * Defines the display level of the popup.
+     * 设置气泡的显示层级模式。
+     *
+     * 默认值：LevelMode.OVERLAY
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8629,7 +8790,7 @@ export declare interface PopupCommonOptions {
     levelMode?: LevelMode;
 
   /**
-   * Callback function when the popup disappears.
+   * 气泡消失后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8638,7 +8799,7 @@ export declare interface PopupCommonOptions {
   onDidDisappear?: VoidCallback;
 
   /**
-   * Callback function before the popup closeAnimation starts.
+   * 气泡退出动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8647,7 +8808,7 @@ export declare interface PopupCommonOptions {
   onWillDisappear?: VoidCallback;
 
   /**
-   * Callback function before the popup openAnimation starts.
+   * 气泡显示动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8656,7 +8817,7 @@ export declare interface PopupCommonOptions {
   onWillAppear?: VoidCallback;
 
   /**
-   * Callback function when the popup appears.
+   * 气泡弹出后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -8665,7 +8826,7 @@ export declare interface PopupCommonOptions {
   onDidAppear?: VoidCallback;
 }
 /**
- * Defines the Tips options.
+ * 悬浮气泡自定义参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8673,7 +8834,11 @@ export declare interface PopupCommonOptions {
  */
 export declare interface TipsOptions {
     /**
-     * Defines the delay time for appearing.
+     * 设置悬浮气泡的显示时延。显示时延的最大值为4000ms，设置超过4000ms的值以4000ms为准。
+     *
+     * 默认值：700
+     *
+     * 单位：ms
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8681,7 +8846,11 @@ export declare interface TipsOptions {
      */
     appearingTime?: int;
     /**
-     * Defines the delay time for disappearing.
+     * 设置悬浮气泡的隐藏时延。隐藏时延的最大值为4000ms，设置超过4000ms的值以4000ms为准。
+     *
+     * 默认值：300
+     *
+     * 单位：ms
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8689,7 +8858,11 @@ export declare interface TipsOptions {
      */
     disappearingTime?: int;
     /**
-     * Define the delay time for the appearance of continuous operations.
+     * 多个组件连续弹出悬浮气泡时，悬浮气泡的显示时延。显示时延的最大值为4000ms，设置超过4000ms的值以4000ms为准。
+     *
+     * 默认值：300
+     *
+     * 单位：ms
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8697,7 +8870,11 @@ export declare interface TipsOptions {
      */
     appearingTimeWithContinuousOperation?: int;
     /**
-     * Define the delay time for the disappearance of continuous operations.
+     * 多个组件连续弹出悬浮气泡时，悬浮气泡的隐藏时延。隐藏时延的最大值为4000ms，设置超过4000ms的值以4000ms为准。
+     *
+     * 默认值：0
+     *
+     * 单位：ms
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8705,7 +8882,15 @@ export declare interface TipsOptions {
      */
     disappearingTimeWithContinuousOperation?: int;
     /**
-     * whether show arrow
+     * 设置是否显示气泡箭头。
+     *
+     * true：显示箭头；false：不显示箭头。
+     *
+     * 默认值：true
+     *
+     * **说明：**
+     *
+     * 当页面可用空间无法让气泡完全避让时，气泡会覆盖到组件上并且不显示气泡箭头。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8714,7 +8899,9 @@ export declare interface TipsOptions {
      */
     enableArrow?: boolean;
     /**
-     * The position of the sharp corner of Tips.
+     * 气泡箭头相对于父组件显示位置，气泡箭头在垂直和水平方向上有Start、Center、End三个位置点可选。所有位置点均位于父组件区域范围内，不会超出父组件的边界范围，也不会覆盖圆角范围。
+     *
+     * 默认值：ArrowPointPosition.CENTER
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8722,7 +8909,15 @@ export declare interface TipsOptions {
      */
     arrowPointPosition?: ArrowPointPosition;
     /**
-     * The width of the arrow.
+     * 设置气泡箭头宽度。若所设置的宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+     *
+     * 默认值：16
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 16.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8731,7 +8926,15 @@ export declare interface TipsOptions {
      */
     arrowWidth?: Dimension;
     /**
-     * The height of the arrow.
+     * 设置气泡箭头高度。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 8.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8740,7 +8943,13 @@ export declare interface TipsOptions {
      */
     arrowHeight?: Dimension;
     /**
-     * Set the display location mode for tips. Tips can be shown around the component or follow the mouse cursor.
+     * 设置Tips跟随类型。
+     *
+     * 默认值：TipsAnchorType.TARGET
+     *
+     * **说明：**
+     *
+     * Tips的跟随类型为TipsAnchorType.CURSOR时，Tips不显示箭头。
      *
      * @default TipsAnchorType.TARGET
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8749,8 +8958,13 @@ export declare interface TipsOptions {
      */
     showAtAnchor?: TipsAnchorType;
     /**
-     * Set system-styled materials for tips. Different materials have different effects, which can influence
-     * backgroundColor, border, shadow, and other visual attributes of tips.
+     * 设置悬浮气泡的系统材质。
+     *
+     * 默认值：undefined，会清除由该接口设置的材质效果。
+     *
+     * **说明：**
+     *
+     * 不同系统材质对应不同的属性影响效果，该接口影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow，当设置系统材质时，上述接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8759,7 +8973,7 @@ export declare interface TipsOptions {
     systemMaterial?: SystemUiMaterial;
 }
 /**
- * Defines the popup button.
+ * 定义Popup按钮。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8767,7 +8981,7 @@ export declare interface TipsOptions {
  */
 export declare interface PopupButton {
     /**
-     * Button text value
+     * 气泡按钮的文本。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8784,7 +8998,7 @@ export declare interface PopupButton {
     action: VoidCallback;
 }
 /**
- * Defines the popup options.
+ * 基础气泡的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -8792,7 +9006,7 @@ export declare interface PopupButton {
  */
 export declare interface PopupOptions {
     /**
-     * Content of the popup message.
+     * 气泡信息内容。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8800,8 +9014,9 @@ export declare interface PopupOptions {
      */
     message: string;
     /**
-     * The placement of popup.
-     * Supports all positions defined in Placement.
+     * 设置Popup组件相对于宿主节点的显示位置，默认值为Placement.Bottom。
+     *
+     * 支持Placement中定义的所有位置。
      *
      * @default Placement.Bottom
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8810,7 +9025,7 @@ export declare interface PopupOptions {
      */
     placement?: Placement;
     /**
-     * The first button.
+     * 主按钮。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8818,7 +9033,7 @@ export declare interface PopupOptions {
      */
     primaryButton?: PopupButton;
     /**
-     * The second button.
+     * 辅助按钮。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8834,7 +9049,19 @@ export declare interface PopupOptions {
      */
     onStateChange?: PopupStateChangeCallback;
     /**
-     * The offset of the sharp corner of popup.
+     * Popup箭头在气泡处的偏移。
+     *
+     * 箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。
+     * 箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。
+     * 显示在屏幕边缘时，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 没设置arrowOffset的情况下，气泡箭头与四个角的距离不能小于圆角半径。
+     * 2. 只有arrowPointPosition不设置或者设置为null、undefined时，arrowOffset属性才生效。
+     * 3. 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8842,7 +9069,11 @@ export declare interface PopupOptions {
      */
     arrowOffset?: Length;
     /**
-     * Whether to display in the sub window.
+     * 气泡是否显示在创建的子窗里。
+     *
+     * true：气泡会显示在创建的子窗里；false：气泡会显示在对应的主窗中。
+     *
+     * 默认值：false
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8850,9 +9081,11 @@ export declare interface PopupOptions {
      */
     showInSubWindow?: boolean;
     /**
-     * The mask to block gesture events of popup.
-     * When mask is set false, gesture events are not blocked.
-     * When mask is set true, gesture events are blocked and mask color is transparent.
+     * 设置气泡是否有遮罩层及遮罩颜色。
+     *
+     * true：显示透明色遮罩层；false：不显示遮罩层。Color：显示指定颜色的遮罩层。
+     *
+     * 默认值：true
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8860,7 +9093,7 @@ export declare interface PopupOptions {
      */
     mask?: boolean | PopupMaskType;
     /**
-     * Parameters of the popup message.
+     * 设置气泡信息文本参数。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8868,7 +9101,11 @@ export declare interface PopupOptions {
      */
     messageOptions?: PopupMessageOptions;
     /**
-     * Sets the space of between the popup and target.
+     * 设置Popup与宿主节点的间隙。不支持设置百分比。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8876,7 +9113,15 @@ export declare interface PopupOptions {
      */
     targetSpace?: Length;
     /**
-     * whether show arrow
+     * 设置是否显示箭头。
+     *
+     * true：显示箭头；false：不显示箭头。
+     *
+     * 默认值：true
+     *
+     * **说明：**
+     *
+     * 当页面可用空间无法让气泡完全避让时，气泡会覆盖到组件上并且不显示箭头。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8885,7 +9130,15 @@ export declare interface PopupOptions {
      */
     enableArrow?: boolean;
     /**
-     * Sets the position offset of the popup.
+     * 设置Popup组件相对于placement设置的显示位置的偏移。
+     *
+     * 默认值：{ x: 0, y: 0 }
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8893,7 +9146,9 @@ export declare interface PopupOptions {
      */
     offset?: Position;
     /**
-     * Set the background color of the popup.
+     * 气泡的颜色。如需去除模糊背景填充效果，需将backgroundBlurStyle设置为BlurStyle.NONE。
+     *
+     * 默认值：透明色TRANSPARENT加模糊背景填充效果COMPONENT_ULTRA_THICK。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8901,7 +9156,11 @@ export declare interface PopupOptions {
      */
     popupColor?: Color | string | Resource | long;
     /**
-     * Whether hide popup when click mask
+     * 页面有操作时，气泡是否自动关闭。
+     *
+     * true：自动关闭气泡；false：气泡不会自动关闭。
+     *
+     * 默认值：true
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8910,7 +9169,9 @@ export declare interface PopupOptions {
      */
     autoCancel?: boolean;
     /**
-     * Set the width of the popup.
+     * 气泡宽度，未设置或者异常值场景下，气泡自适应内容宽度。
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8918,7 +9179,9 @@ export declare interface PopupOptions {
      */
     width?: Dimension;
     /**
-     * The position of the sharp corner of popup.
+     * 气泡箭头相对于父组件显示位置，气泡箭头在垂直和水平方向上有Start、Center、End三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。
+     *
+     * 默认值：ArrowPointPosition.CENTER
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8926,7 +9189,15 @@ export declare interface PopupOptions {
      */
     arrowPointPosition?: ArrowPointPosition;
     /**
-     * The width of the arrow.
+     * 设置气泡箭头宽度。若所设置的宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+     *
+     * 默认值：16
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 16.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8935,7 +9206,15 @@ export declare interface PopupOptions {
      */
     arrowWidth?: Dimension;
     /**
-     * The height of the arrow.
+     * 设置气泡箭头高度。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 8.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8944,7 +9223,11 @@ export declare interface PopupOptions {
      */
     arrowHeight?: Dimension;
     /**
-     * The round corners of the popup.
+     * 设置气泡圆角半径。
+     *
+     * 默认值：20
+     *
+     * 单位：vp
      *
      * @default 20.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8953,7 +9236,9 @@ export declare interface PopupOptions {
      */
     radius?: Dimension;
     /**
-     * The style of popup Shadow.
+     * 设置气泡阴影。
+     *
+     * 默认值：ShadowStyle.OUTER_DEFAULT_MD
      *
      * @default ShadowStyle.OUTER_DEFAULT_MD.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8962,7 +9247,9 @@ export declare interface PopupOptions {
      */
     shadow?: ShadowOptions | ShadowStyle;
     /**
-     * Defines popup background blur Style
+     * 设置气泡模糊背景参数。
+     *
+     * 默认值：BlurStyle.COMPONENT_ULTRA_THICK
      *
      * @default BlurStyle.COMPONENT_ULTRA_THICK
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8971,7 +9258,13 @@ export declare interface PopupOptions {
      */
     backgroundBlurStyle?: BlurStyle;
     /**
-     * Defines the transition effect of popup opening and closing
+     * 自定义设置Popup气泡显示和退出的动画效果。
+     *
+     * **说明：**
+     *
+     * 1. 不设置时使用默认的显示/退出动效。
+     * 2. 显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。
+     * 3. 退出动效中按back键，不会打断退出动效，back键不被响应。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8979,7 +9272,15 @@ export declare interface PopupOptions {
      */
     transition?: TransitionEffect;
     /**
-     * Callback function when the popup interactive dismiss
+     * 设置Popup交互式关闭拦截开关及拦截回调函数，默认值为true，Popup响应点击、侧滑（左滑/右滑）、三键back。
+     *
+     * 1. 当为boolean类型时，如果设置为false，则不响应点击、侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC退出事件，仅当设置“气泡显示状态”参数show值为false时才退出；如果设置为true，则正常响应退出事件；
+     *
+     * 2. 如果设置为函数类型，则拦截退出事件且执行回调函数。侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC在回调函数中返回的reason为PRESS_BACK，点击为TOUCH_OUTSIDE。
+     *
+     * **说明：**
+     *
+     * 在onWillDismiss回调中，不能再做onWillDismiss拦截。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -8987,7 +9288,15 @@ export declare interface PopupOptions {
      */
     onWillDismiss?: boolean | Callback<DismissPopupAction>;
     /**
-     * Determine if it is compatible popup's half folded.
+     * Popup组件是否响应悬停态（半折叠状态）变化，即在悬停态下是否触发避让折痕区域。
+     *
+     * 默认值：false，2in1设备默认为true。未设置或者值为非法值时，生效默认值。
+     *
+     * **说明：**
+     *
+     * 1. 如果Popup的弹出位置在悬停态折痕区域，Popup组件不会响应悬停态。
+     * 2. 2in1设备从API version 20开始生效。
+     * 3. 2in1设备仅在窗口瀑布模式下生效。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -8996,7 +9305,11 @@ export declare interface PopupOptions {
      */
     enableHoverMode?: boolean;
     /**
-     * Determine if popup can follow the target node when it has rotation or scale.
+     * 气泡绑定的宿主组件或其宿主组件的父容器添加了旋转、缩放等变换时，气泡是否跟随宿主组件变换。
+     *
+     * true：气泡可以拿到变换后宿主的位置，显示到相应位置；false：气泡拿不到宿主变换后的位置，可能显示异常。
+     *
+     * 默认值：false
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9005,7 +9318,9 @@ export declare interface PopupOptions {
      */
     followTransformOfTarget?: boolean;
     /**
-     * Define the popup avoid keyboard mode.
+     * 气泡是否避让软键盘，默认不避让。设置为避让后，气泡显示空间不足时，由原先居中覆盖父组件的方式改为平移覆盖父组件，且气泡箭头不指向宿主时，不再显示箭头。
+     *
+     * 默认值：KeyboardAvoidMode.NONE
      *
      * @default KeyboardAvoidMode.NONE
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9014,7 +9329,13 @@ export declare interface PopupOptions {
      */
     keyboardAvoidMode?: KeyboardAvoidMode;
     /**
-     * Determine if popup can avoid the target when the display space is insufficient.
+     * 设置Popup避让时是否覆盖指向组件。
+     *
+     * 默认值：AvoidanceMode.COVER_TARGET
+     *
+     * **说明：**
+     *
+     * 设置avoidTarget为AvoidanceMode.AVOID_AROUND_TARGET时，气泡在剩余显示空间不足的情况下会进行压缩，此时气泡内容需结合Scroll使用，否则气泡内容会出现遮挡。
      *
      * @default AvoidanceMode.COVER_TARGET
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9023,7 +9344,17 @@ export declare interface PopupOptions {
      */
     avoidTarget?: AvoidanceMode;
     /**
-     * The width of popup's outline.
+     * 设置Popup组件外描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件外描边的情况下，该接口需要和outlineLinearGradient配合使用。
+     * 3. 当设置双描边时，建议外描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9031,7 +9362,17 @@ export declare interface PopupOptions {
      */
     outlineWidth?: Dimension;
     /**
-     * The width of popup's border.
+     * 设置Popup组件内描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件内描边的情况下，该接口需要和borderLinearGradient配合使用。
+     * 3. 当设置双描边时，建议内描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9039,7 +9380,12 @@ export declare interface PopupOptions {
      */
     borderWidth?: Dimension;
     /**
-     * The LinearGradient of popup's outline.
+     * 设置Popup组件外描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. outlineLinearGradient不设置或者设置为null、undefined时，外描边没有线性渐变效果。
+     * 2. outlineLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9047,7 +9393,12 @@ export declare interface PopupOptions {
      */
     outlineLinearGradient?: PopupBorderLinearGradient;
     /**
-     * The LinearGradient of popup's innerline.
+     * 设置Popup组件内描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. borderLinearGradient不设置或者设置为null、undefined时，内描边没有线性渐变效果。
+     * 2. borderLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9055,7 +9406,15 @@ export declare interface PopupOptions {
      */
     borderLinearGradient?: PopupBorderLinearGradient;
     /**
- 	 * Define the popup theme color mode.
+ 	 * 设置气泡深浅色模式，默认跟随绑定组件深浅色模式。
+ 	 *
+ 	 * 默认值：AnchoredColorMode.FOLLOW_TARGET
+ 	 *
+ 	 * **说明：**
+ 	 *
+ 	 * 1. 仅当绑定组件使用了WithTheme标签时，该属性才会生效。
+ 	 * 2. 该属性仅影响组件的默认样式，以及开发者设置的涉及深浅色资源的属性。
+ 	 * 3. 设置为AnchoredColorMode.FOLLOW_SYSTEM时，模糊材质可以跟随，文字颜色以及涉及深浅色资源的属性仍保持跟随绑定组件的深浅色配置。
  	 * 
  	 * @default AnchoredColorMode.FOLLOW_TARGET
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9064,8 +9423,13 @@ export declare interface PopupOptions {
  	 */
  	colorMode?: AnchoredColorMode;
     /**
-     * Set system-styled materials for popup. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of popup.
+     * 设置组件的系统材质。
+     *
+     * 默认值：undefined，会清除由该接口设置的材质效果。
+     *
+     * **说明：**
+     *
+     * 不同系统材质对应不同的属性影响效果，该接口影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow，当设置系统材质时，上述接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9073,7 +9437,7 @@ export declare interface PopupOptions {
      */
     systemMaterial?: SystemUiMaterial;
     /**
-     * Defines the popup's background blur style with options
+     * 背景模糊效果。默认值请参考BackgroundBlurStyleOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9081,7 +9445,7 @@ export declare interface PopupOptions {
      */
     backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
     /**
-     * Defines the popup's background effect with options
+     * 背景效果参数。默认值请参考BackgroundEffectOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9090,7 +9454,9 @@ export declare interface PopupOptions {
     backgroundEffect?: BackgroundEffectOptions;
 
     /**
-     * Defines the display level of the popup.
+     * 设置气泡的显示层级模式。
+     *
+     * 默认值：LevelMode.OVERLAY
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9099,7 +9465,7 @@ export declare interface PopupOptions {
     levelMode?: LevelMode;
 
   /**
-   * Callback function before the popup closeAnimation starts.
+   * 气泡退出动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9108,7 +9474,7 @@ export declare interface PopupOptions {
   onWillDisappear?: VoidCallback;
 
   /**
-   * Callback function when the popup appears.
+   * 气泡弹出后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9117,7 +9483,7 @@ export declare interface PopupOptions {
   onDidAppear?: VoidCallback;
 
   /**
-   * Callback function before the popup openAnimation starts.
+   * 气泡显示动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9126,7 +9492,7 @@ export declare interface PopupOptions {
   onWillAppear?: VoidCallback;
 
   /**
-   * Callback function when the popup disappears.
+   * 气泡消失后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9135,7 +9501,7 @@ export declare interface PopupOptions {
   onDidDisappear?: VoidCallback;
 }
 /**
- * Defines the custom popup options.
+ * 弹出自定义气泡的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -9143,15 +9509,13 @@ export declare interface PopupOptions {
  */
 export declare interface CustomPopupOptions {
     /**
-     * Popup builder.
-     * <p><strong>NOTE</strong>:
-     * <br>The popup attribute is a universal attribute. A custom popup does not support display of another popup.
-     * <br>The position attribute cannot be used for the first-layer container in the builder.
-     * <br>If the position attribute is used, the popup will not be displayed.
-     * <br>If a custom component is used in the builder, the aboutToAppear and aboutToDisappear lifecycle callbacks
-     * of the custom component are irrelevant to the visibility of the popup. As such, the lifecycle of the
-     * custom component cannot be used to determine whether the popup is displayed or not.
-     * </p>
+     * 提示气泡内容的构造器。
+     *
+     * **说明：**
+     *
+     * 1. Popup为通用属性，自定义Popup中不支持再次弹出Popup。对builder下的第一层容器组件不支持使用position属性，如果使用将导致气泡不显示。
+     * 2. builder中若使用自定义组件，自定义组件的aboutToAppear和aboutToDisappear生命周期与Popup气泡的显隐无关，不能使用其生命周期判断Popup气泡的显隐。
+     * 3. 该构造器的builder仅支持定义在UI组件中，例如可以定义在Builder函数、方法或者build方法里。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9159,8 +9523,9 @@ export declare interface CustomPopupOptions {
      */
     builder: CustomBuilder;
     /**
-     * Preferred position of the popup. If the set position is insufficient for holding the popup,
-     * it will be automatically adjusted.
+     * 气泡组件优先显示的位置，当前位置显示不下时，会自动调整位置。
+     *
+     * 默认值：Placement.Bottom
      *
      * @default Placement.Bottom
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9169,7 +9534,9 @@ export declare interface CustomPopupOptions {
      */
     placement?: Placement;
     /**
-     * Color of the popup. To remove the background blur, set backgroundBlurStyle to BlurStyle.NONE.
+     * 气泡的颜色。如需去除模糊背景填充效果，需将backgroundBlurStyle设置为BlurStyle.NONE。
+     *
+     * 默认值：透明色TRANSPARENT加模糊背景填充效果COMPONENT_ULTRA_THICK。
      *
      * @default TRANSPARENT plus COMPONENT_ULTRA_THICK
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9178,7 +9545,13 @@ export declare interface CustomPopupOptions {
      */
     popupColor?: Color | string | Resource | long;
     /**
-     * whether show arrow
+     * 是否显示箭头。
+     *
+     * true：显示箭头；false：不显示箭头。
+     *
+     * 如果箭头所在方位侧的气泡长度不足以显示下箭头，则会默认不显示箭头。比如：placement设置为Left，此时如果气泡高度小于箭头的宽度（32vp）与气泡圆角两倍（48vp）之和（80vp），则实际不会显示箭头。
+     *
+     * 默认值：true
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9187,12 +9560,15 @@ export declare interface CustomPopupOptions {
      */
     enableArrow?: boolean;
     /**
-     * Whether to automatically dismiss the popup when an operation is performed on the page.
-     * <p><strong>NOTE</strong>:
-     * <br>To enable the popup to disappear upon a click on it, place a layout component in the builder place the
-     * <Popup> component in the layout component, and modify the value of the bindPopup variable (show: boolean)
-     * in the onClick event of the layout component.
-     * </p>
+     * 页面有操作时，气泡是否自动关闭。
+     *
+     * true：自动关闭气泡；false：气泡不会自动关闭。
+     *
+     * 默认值：true
+     *
+     * **说明：**
+     *
+     * 如果要实现点击气泡内消失需要在builder中先放一个布局组件，然后再将Popup高级组件放在布局组件里面，再在布局组件的onClick事件中修改控制显隐的状态变量show为false。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9209,14 +9585,19 @@ export declare interface CustomPopupOptions {
      */
     onStateChange?: PopupStateChangeCallback;
     /**
-     * The offset of the sharp corner of popup.
+     * Popup箭头在气泡处的偏移。
      *
-     * Offset of the popup arrow relative to the popup. When the arrow is at the top or bottom of the popup:
-     * <br>The value 0 indicates that the arrow is located on the leftmost, and any other value indicates the distance
-     * from the arrow to the leftmost; the arrow is centered by default. When the arrow is on the left or right
-     * side of the popup: The value indicates the distance from the arrow to the top; the arrow is centered by
-     * default. When the popup is displayed on either edge of the screen, it will automatically deviate leftward
-     * or rightward to stay within the safe area. When the value is 0, the arrow always points to the bound component.
+     * 箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。
+     * 箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。
+     * 显示在屏幕边缘时，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 没设置arrowOffset的情况下，气泡箭头与四个角的距离不能小于圆角半径。
+     * 2. 只有arrowPointPosition不设置或者设置为null、undefined时，arrowOffset属性才生效。
+     * 3. 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9224,7 +9605,11 @@ export declare interface CustomPopupOptions {
      */
     arrowOffset?: Length;
     /**
-     * Whether to display in the sub window.
+     * 气泡是否显示在创建的子窗里。
+     *
+     * true：气泡会显示在创建的子窗里；false：气泡会显示在对应的主窗中。
+     *
+     * 默认值：false
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9233,9 +9618,9 @@ export declare interface CustomPopupOptions {
      */
     showInSubWindow?: boolean;
     /**
-     * The mask to block gesture events of popup.
-     * When mask is set false, gesture events are not blocked.
-     * When mask is set true, gesture events are blocked and mask color is transparent.
+     * 设置气泡是否有遮罩层及遮罩颜色。如果设置为false，则没有遮罩层；如果设置为true，则设置有遮罩层并且颜色为透明色；如果设置为Color，则为遮罩层的颜色。
+     *
+     * 默认值：true
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9243,7 +9628,11 @@ export declare interface CustomPopupOptions {
      */
     mask?: boolean | PopupMaskType;
     /**
-     * Sets the space of between the popup and target.
+     * 设置Popup与宿主节点的间隙。不支持设置百分比。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9251,7 +9640,15 @@ export declare interface CustomPopupOptions {
      */
     targetSpace?: Length;
     /**
-     * Sets the position offset of the popup.
+     * 设置Popup组件相对于placement设置的显示位置的偏移。
+     *
+     * 默认值：{ x: 0, y: 0 }
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9259,7 +9656,9 @@ export declare interface CustomPopupOptions {
      */
     offset?: Position;
     /**
-     * Width of the popup.
+     * 气泡宽度，未设置或者异常值场景下，气泡自适应内容宽度。
+     *
+     * 单位：vp
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9267,8 +9666,9 @@ export declare interface CustomPopupOptions {
      */
     width?: Dimension;
     /**
-     * Position of the popup arrow relative to its parent component. Available positions are Start, Center, and End,
-     * in both vertical and horizontal directions. All these positions are within the parent component area.
+     * 气泡箭头相对于父组件显示位置，气泡箭头在垂直和水平方向上有Start、Center、End三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。
+     *
+     * 默认值：ArrowPointPosition.CENTER
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9276,11 +9676,15 @@ export declare interface CustomPopupOptions {
      */
     arrowPointPosition?: ArrowPointPosition;
     /**
-     * Arrow thickness. If the arrow thickness exceeds the length of the edge minus twice the size of the popup
-     * rounded corner, the arrow is not drawn.
-     * <p><strong>NOTE</strong>:
-     * <br>This parameter cannot be set in percentage.
-     * </p>
+     * 设置箭头宽度。若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
+     *
+     * 默认值：16
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 16.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9289,10 +9693,15 @@ export declare interface CustomPopupOptions {
      */
     arrowWidth?: Dimension;
     /**
-     * The height of the arrow.
-     * <p><strong>NOTE</strong>:
-     * <br>This parameter cannot be set in percentage.
-     * </p>
+     * 设置箭头高度。
+     *
+     * 默认值：8
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 不支持设置百分比。
      *
      * @default 8.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9301,7 +9710,11 @@ export declare interface CustomPopupOptions {
      */
     arrowHeight?: Dimension;
     /**
-     * Rounded corner radius of the popup.
+     * 设置气泡圆角半径。
+     *
+     * 默认值：20
+     *
+     * 单位：vp
      *
      * @default 20.0_vp.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9310,7 +9723,9 @@ export declare interface CustomPopupOptions {
      */
     radius?: Dimension;
     /**
-     * Popup shadow.
+     * 设置气泡阴影。
+     *
+     * 默认值：ShadowStyle.OUTER_DEFAULT_MD
      *
      * @default ShadowStyle.OUTER_DEFAULT_MD.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9319,7 +9734,9 @@ export declare interface CustomPopupOptions {
      */
     shadow?: ShadowOptions | ShadowStyle;
     /**
-     * Background blur style of the popup.
+     * 设置气泡模糊背景参数。
+     *
+     * 默认值：BlurStyle.COMPONENT_ULTRA_THICK
      *
      * @default BlurStyle.COMPONENT_ULTRA_THICK
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9328,7 +9745,11 @@ export declare interface CustomPopupOptions {
      */
     backgroundBlurStyle?: BlurStyle;
     /**
-     * Set popup focusable
+     * 设置气泡弹出后是否获焦。
+     *
+     * true：气泡可以获焦；false：气泡不会获焦。
+     *
+     * 默认值：false
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9337,7 +9758,13 @@ export declare interface CustomPopupOptions {
      */
     focusable?: boolean;
     /**
-     * Defines the transition effect of popup opening and closing
+     * 自定义设置Popup气泡显示和退出的动画效果。
+     *
+     * **说明：**
+     *
+     * 1. 如果不设置，则使用默认的显示/退出动效。
+     * 2. 显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。
+     * 3. 退出动效中按back键，不会打断退出动效，退出动效继续执行，back键不被响应。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9345,16 +9772,15 @@ export declare interface CustomPopupOptions {
      */
     transition?: TransitionEffect;
     /**
-     * Whether to perform dismissal event interception and interception callback.
-     * 1. If this parameter is set to false, the system does not respond to the dismissal event initiated by
-     * touching the Back button, swiping left or right on the screen, or pressing the Esc key; and the system
-     * dismisses the popup only when show is set to false. If this parameter is set to true, the system responds
-     * to the dismissal event as expected.
-     * 2. If this parameter is set to a function, the dismissal event is intercepted and the callback function
-     * is executed.
-     * <p><strong>NOTE</strong>:
-     * <br>No more onWillDismiss callback is allowed in an onWillDismiss callback.
-     * </p>
+     * 设置Popup交互式关闭拦截开关及拦截回调函数，默认值为true，Popup响应点击、侧滑（左滑/右滑）、三键back。
+     *
+     * 1. 当为boolean类型时，如果设置为false，则不响应点击、侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC退出事件，仅当设置“气泡显示状态”参数show值为false时才退出；如果设置为true，则正常响应退出事件；
+     *
+     * 2. 如果设置为函数类型，则拦截退出事件且执行回调函数。侧滑（左滑/右滑）、三键back、路由跳转或键盘ESC在回调函数中返回的reason为PRESS_BACK，点击为TOUCH_OUTSIDE。
+     *
+     * **说明：**
+     *
+     * 在onWillDismiss回调中，不能再做onWillDismiss拦截。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9363,7 +9789,15 @@ export declare interface CustomPopupOptions {
      */
     onWillDismiss?: boolean | Callback<DismissPopupAction>;
     /**
-      * Determine if it is compatible popup's half folded.
+      * Popup组件是否响应悬停态（半折叠状态）变化，即在悬停态下是否触发避让折痕区域。
+      *
+      * 默认值：false，2in1设备默认为true。未设置或者值为非法值时，生效默认值。
+      *
+      * **说明：**
+      *
+      * 1. 如果Popup的弹出位置在悬停态折痕区域，Popup组件不会响应悬停态。
+      * 2. 2in1设备从API version 20开始生效。
+      * 3. 2in1设备仅在窗口瀑布模式下生效。
       *
       * @default false
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9372,7 +9806,11 @@ export declare interface CustomPopupOptions {
       */
     enableHoverMode?: boolean;
     /**
-     * Determine if popup can follow the target node when it has rotation or scale.
+     * 气泡绑定的宿主组件或其宿主组件的父容器添加了旋转、缩放等变换时，气泡是否跟随宿主组件变换。
+     *
+     * true：气泡可以拿到变换后宿主的位置，显示到相应位置；false：气泡拿不到宿主变换后的位置，可能显示异常。
+     *
+     * 默认值：false
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9381,7 +9819,9 @@ export declare interface CustomPopupOptions {
      */
     followTransformOfTarget?: boolean;
     /**
-     * Define the popup avoid keyboard mode.
+     * 气泡是否避让软键盘，默认不避让。设置为避让后，气泡显示空间不足时，由原先居中覆盖父组件的方式改为平移覆盖父组件，且气泡箭头不指向宿主时，不再显示箭头。
+     *
+     * 默认值：KeyboardAvoidMode.NONE
      *
      * @default KeyboardAvoidMode.NONE
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9390,7 +9830,13 @@ export declare interface CustomPopupOptions {
      */
     keyboardAvoidMode?: KeyboardAvoidMode;
     /**
-     * Determine if popup can avoid the target when the display space is insufficient.
+     * 设置Popup避让时是否覆盖指向组件。
+     *
+     * 默认值：AvoidanceMode.COVER_TARGET
+     *
+     * **说明：**
+     *
+     * 设置avoidTarget为AvoidanceMode.AVOID_AROUND_TARGET时，气泡在剩余显示空间不足的情况下会进行压缩，此时气泡内容需结合Scroll使用，否则气泡内容会出现遮挡。
      *
      * @default AvoidanceMode.COVER_TARGET
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9399,7 +9845,17 @@ export declare interface CustomPopupOptions {
      */
     avoidTarget?: AvoidanceMode;
     /**
-     * The width of popup's outline.
+     * 设置Popup组件外描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件外描边的情况下，该接口需要和outlineLinearGradient配合使用。
+     * 3. 当设置双描边时，建议外描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9407,7 +9863,17 @@ export declare interface CustomPopupOptions {
      */
     outlineWidth?: Dimension;
     /**
-     * The width of popup's border.
+     * 设置Popup组件内描边的宽度。
+     *
+     * 默认值：1
+     *
+     * 单位：vp
+     *
+     * **说明：**
+     *
+     * 1. 不支持设置百分比，设置百分比时按0处理。
+     * 2. 在没有设置Popup组件内描边的情况下，该接口需要和borderLinearGradient配合使用。
+     * 3. 当设置双描边时，建议内描边宽度不超过10vp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9415,7 +9881,12 @@ export declare interface CustomPopupOptions {
      */
     borderWidth?: Dimension;
     /**
-     * The LinearGradient of popup's outline.
+     * 设置Popup组件外描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. outlineLinearGradient不设置或者设置为null、undefined时，外描边没有线性渐变效果。
+     * 2. outlineLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9423,7 +9894,12 @@ export declare interface CustomPopupOptions {
      */
     outlineLinearGradient?: PopupBorderLinearGradient;
     /**
-     * The LinearGradient of popup's innerline.
+     * 设置Popup组件内描边线性渐变的颜色。
+     *
+     * **说明：**
+     *
+     * 1. borderLinearGradient不设置或者设置为null、undefined时，内描边没有线性渐变效果。
+     * 2. borderLinearGradient设置时，direction默认值是：GradientDirection.Bottom。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9431,7 +9907,15 @@ export declare interface CustomPopupOptions {
      */
     borderLinearGradient?: PopupBorderLinearGradient;
     /**
- 	 * Define the popup theme color mode.
+ 	 * 设置气泡深浅色模式，默认跟随绑定组件深浅色模式。
+ 	 *
+ 	 * 默认值：AnchoredColorMode.FOLLOW_TARGET
+ 	 *
+ 	 * **说明：**
+ 	 *
+ 	 * 1. 仅当绑定组件使用了WithTheme标签时，该属性才会生效。
+ 	 * 2. 该属性仅影响组件的默认样式，以及开发者设置的涉及深浅色资源的属性。
+ 	 * 3. 设置为AnchoredColorMode.FOLLOW_SYSTEM时，模糊材质可以跟随，文字颜色以及涉及深浅色资源的属性仍保持跟随绑定组件的深浅色配置。
  	 * 
  	 * @default AnchoredColorMode.FOLLOW_TARGET
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9440,8 +9924,13 @@ export declare interface CustomPopupOptions {
  	 */
  	colorMode?: AnchoredColorMode;
     /**
-     * Set system-styled materials for popup. Different materials have different effects, which can influence
-     * the backgroundColor, border, shadow, and other visual attributes of popup.
+     * 设置组件的系统材质。
+     *
+     * 默认值：undefined，会清除由该接口设置的材质效果。
+     *
+     * **说明：**
+     *
+     * 不同系统材质对应不同的属性影响效果，该接口影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow，当设置系统材质时，上述接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9449,7 +9938,7 @@ export declare interface CustomPopupOptions {
      */
     systemMaterial?: SystemUiMaterial;
     /**
-     * Defines the popup's background blur style with options
+     * 背景模糊效果。默认值请参考BackgroundBlurStyleOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9457,7 +9946,7 @@ export declare interface CustomPopupOptions {
      */
     backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
     /**
-     * Defines the popup's background effect with options
+     * 背景效果参数。默认值请参考BackgroundEffectOptions类型说明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9466,7 +9955,9 @@ export declare interface CustomPopupOptions {
     backgroundEffect?: BackgroundEffectOptions;
 
     /**
-     * Defines the display level of the popup.
+     * 设置气泡的显示层级模式。
+     *
+     * 默认值：LevelMode.OVERLAY
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -9475,7 +9966,7 @@ export declare interface CustomPopupOptions {
     levelMode?: LevelMode;
 
   /**
-   * Callback function when the popup appears.
+   * 气泡弹出后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9484,7 +9975,7 @@ export declare interface CustomPopupOptions {
   onDidAppear?: VoidCallback;
 
   /**
-   * Callback function before the popup closeAnimation starts.
+   * 气泡退出动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9493,7 +9984,7 @@ export declare interface CustomPopupOptions {
   onWillDisappear?: VoidCallback;
 
   /**
-   * Callback function when the popup disappears.
+   * 气泡消失后的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -9502,7 +9993,7 @@ export declare interface CustomPopupOptions {
   onDidDisappear?: VoidCallback;
 
   /**
-   * Callback function before the popup openAnimation starts.
+   * 气泡显示动效前的事件回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -11335,7 +11826,7 @@ export declare interface InvertOptions {
  */
 export type Optional<T> = T | undefined;
 /**
- * Defines the TipsMessageType property with ResourceStr and StyledString.
+ * 悬浮气泡信息类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -13637,7 +14128,7 @@ export declare interface CommonMethod {
      */
     default geometryTransition(id: string | undefined, options?: GeometryTransitionOptions): this;
     /**
-    * Tips control
+    * 为组件绑定Tips悬浮气泡。
     *
     * @param { TipsMessageType | undefined } message
     * @param { TipsOptions } [options]
@@ -13648,11 +14139,11 @@ export declare interface CommonMethod {
     */
     default bindTips(message: TipsMessageType | undefined, options?: TipsOptions): this;
     /**
-     * Popup control
-     * <p><strong>NOTE</strong>:
-     * <br>The popup can be displayed only after the entire page is fully constructed. Therefore, to avoid incorrect
-     * display positions and shapes, do not set this parameter to true while the page is still being constructed.
-     * </p>
+     * 为组件绑定Popup气泡。
+     *
+     * **说明：**
+     *
+     * 请等待页面全部构建完成后再展示Popup气泡，不要在页面构建中将show设置为true，否则会导致Popup气泡显示位置及形状错误。
      *
      * @param { boolean | undefined } show - Whether to show the popup, default is false.
      * @param { PopupOptions | CustomPopupOptions | undefined } popup

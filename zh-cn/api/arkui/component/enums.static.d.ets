@@ -2486,7 +2486,7 @@ export declare enum HoverEffect {
 }
 
 /**
- * Placement enumeration description
+ * 气泡显示的位置。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2495,7 +2495,7 @@ export declare enum HoverEffect {
  */
 export declare enum Placement {
   /**
-   * Left placement
+   * 气泡提示位于组件左侧，与组件左侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2504,7 +2504,7 @@ export declare enum Placement {
   Left = 0,
 
   /**
-   * Right placement
+   * 气泡提示位于组件右侧，与组件右侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2513,7 +2513,7 @@ export declare enum Placement {
   Right = 1,
 
   /**
-   * Top placement
+   * 气泡提示位于组件上侧，与组件上侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2522,7 +2522,7 @@ export declare enum Placement {
   Top = 2,
 
   /**
-   * Bottom placement
+   * 气泡提示位于组件下侧，与组件下侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2531,7 +2531,7 @@ export declare enum Placement {
   Bottom = 3,
 
   /**
-   * TopLeft placement
+   * 气泡提示位于组件上侧，从API version 9开始，与组件左侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2540,7 +2540,7 @@ export declare enum Placement {
   TopLeft = 4,
 
   /**
-   * TopRight placement
+   * 气泡提示位于组件上侧，从API version 9开始，与组件右侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2549,7 +2549,7 @@ export declare enum Placement {
   TopRight = 5,
 
   /**
-   * BottomLeft placement
+   * 气泡提示位于组件下侧，从API version 9开始，与组件左侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2558,7 +2558,7 @@ export declare enum Placement {
   BottomLeft = 6,
 
   /**
-   * BottomRight placement
+   * 气泡提示位于组件下侧，从API version 9开始，与组件右侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2567,7 +2567,7 @@ export declare enum Placement {
   BottomRight = 7,
 
   /**
-   * LeftTop placement
+   * 气泡提示位于组件左侧，与组件上侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2576,7 +2576,7 @@ export declare enum Placement {
   LeftTop = 8,
 
   /**
-   * LeftBottom placement
+   * 气泡提示位于组件左侧，与组件下侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2585,7 +2585,7 @@ export declare enum Placement {
   LeftBottom = 9,
 
   /**
-   * RightTop placement
+   * 气泡提示位于组件右侧，与组件上侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2594,7 +2594,7 @@ export declare enum Placement {
   RightTop = 10,
 
   /**
-   * RightBottom placement
+   * 气泡提示位于组件右侧，与组件下侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2604,7 +2604,7 @@ export declare enum Placement {
 }
 
 /**
- * ArrowPointPosition enumeration description
+ * 气泡箭头的位置。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2613,7 +2613,7 @@ export declare enum Placement {
  */
 export declare enum ArrowPointPosition {
   /**
-   * Target start position
+   * 水平方向：位于父组件最左侧；垂直方向：位于父组件最上侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2622,7 +2622,7 @@ export declare enum ArrowPointPosition {
   START = 'Start',
 
   /**
-   * Target center position
+   * 位于父组件居中位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2631,7 +2631,7 @@ export declare enum ArrowPointPosition {
   CENTER = 'Center',
 
   /**
-   * Target end position
+   * 水平方向：位于父组件最右侧；垂直方向：位于父组件最下侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4506,7 +4506,7 @@ export declare enum EventQueryType {
 }
 
 /**
- * Tips show position type.
+ * 指定Tips跟随类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4515,7 +4515,7 @@ export declare enum EventQueryType {
  */
 export declare enum TipsAnchorType {
   /**
-   * Tips display position based on bound component.
+   * Tips跟随目标物。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4524,7 +4524,7 @@ export declare enum TipsAnchorType {
   TARGET = 0,
 
   /**
-   * Tips display position based on cursor position.
+   * Tips跟随鼠标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
