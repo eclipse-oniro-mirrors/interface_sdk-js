@@ -1528,8 +1528,7 @@ declare namespace settings {
   /**
    * Open the input method settings page.
    *
-   * @param { Context } context - Application context. Only UIAbilityContext, UIExtensionContext, and
-   *    InputMethodExtensionContext are supported.
+   * @param { Context } context - Application context. Only UIAbilityContext and UIExtensionContext are supported.
    * @throws { BusinessError } 16900010 - Parameter error.
    * @syscap SystemCapability.Applications.Settings.Core
    * @StageModelOnly
