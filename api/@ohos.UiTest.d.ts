@@ -2885,7 +2885,7 @@ declare class Component {
   /**
    * Checks whether this component is reachable, that is, whether the component is visible, has non-zero area, and
    * the center point of the component bounds is not occluded by any other component with a higher z-index, or with
-   * the same z-index but drawn later, on the same display. This API uses a promise to return the result.
+   * the same z-index but drawn later. This API uses a promise to return the result.
    *
    * @returns { Promise<boolean> } - Promise used to return the result. The value **true** indicates that the component
    *     is reachable, and **false** indicates that the component is occluded, invisible, or zero-area.

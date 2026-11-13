@@ -2952,7 +2952,7 @@ declare class Component {
   getOriginalText(): Promise<string>;
 
   /**
-   * 检查此组件是否可触达，即组件是否可见、面积非零，且组件边界中心点未被同屏中具有更高z-index或相同z-index但绘制顺序更靠后的任何其他组件遮挡。使用Promise异步回调。
+   * 检查此组件是否可触达，即组件是否可见、面积非零，且组件边界中心点未被具有更高z-index或相同z-index但绘制顺序更靠后的任何其他组件遮挡。使用Promise异步回调。
    *
    * @returns { Promise<boolean> } - Promise对象，返回组件是否可触达。true：可触达。false：被遮挡、不可见或面积为零。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
