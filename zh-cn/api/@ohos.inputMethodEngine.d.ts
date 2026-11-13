@@ -4519,8 +4519,8 @@ declare namespace inputMethodEngine {
     /**
      * 分离态面板类型。
      * <br>
-     * <br><p>提供给 SOFT_KEYBOARD 类型的面板。当该标志被设置时，软键盘分离为左右两部分，中间为镂空区域。
-     * 面板宽度等于屏幕宽度，面板仅可纵向移动。</p>
+     * <br><p>提供给 SOFT_KEYBOARD 类型的面板。面板宽度等于屏幕宽度，面板仅可纵向移动。
+     * 系统面板无抬高区域（insets 为 {0, 0, 0}）。</p>
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 26.1.0 dynamic&static

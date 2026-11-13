@@ -4106,8 +4106,8 @@ declare namespace inputMethodEngine {
      * Detached style.
      * <br>
      * <br><p>It's provided for the panel with type of SOFT_KEYBOARD.
-     * When the flag is set, the soft keyboard is detached into left and right parts with a hollow area in the middle.
-     * The panel width equals the display width, and the panel can only be moved vertically.</p>
+     * The panel width equals the display width, and the panel can only be moved vertically.
+     * The system panel has no elevated area (insets are {0, 0, 0}).</p>
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 26.1.0 dynamic&static
