@@ -1830,7 +1830,7 @@ export interface OrderOverlayOptions {
   levelMode?: LevelMode;
 
   /**
-   * The uniqueId of any node in the router or navigation page.
+   * 路由器或导航页面中任何节点的唯一ID。
    *
    * @type { ?int }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5075,29 +5075,24 @@ export class UIContext {
   getLuminanceSampler(target: TargetInfo): LuminanceSampler | undefined;
 
   /**
-   * get the filtered attributes of the component tree.
+   * 获取组件树及组件属性。此接口耗时较长，仅适用于测试场景。
    *
-   * @param { Array<string> } [filters] - List of component attributes used for filtering. Currently, only the following
-   *     filter fields are supported:
-   *     <br>**"id"**: unique ID of the component.
-   *     <br>**"src"**: source of the resource.
-   *     <br>**"content"**: information or data contained in the element, component, or object.
-   *     <br>**"editable"**: whether the component is editable.
-   *     <br>**"scrollable"**: whether the component is scrollable.
-   *     <br>**"selectable"**: whether the component is selectable.
-   *     <br>**"focusable"**: whether the component is focusable.
-   *     <br>**"focused"**: whether the component is currently focused.
-   *     <br>If **filters** includes one or more fields, unspecified fields will be filtered out from the results.
-   *     <br>If **filters** is not provided or is an empty array, none of the aforementioned fields
-   *     <br>will be filtered out.
-   *     <br>The following filter field is supported since API version 20:
-   *     <br>**"isLayoutInspector"**: whether the component tree contains custom components.
-   *     <br>If **filters** is omitted or
-   *     <br>does not contain **"isLayoutInspector"**, the returned component tree
-   *     <br>will not include custom component details.
-   *     <br>Other filter fields are used only in testing scenarios.
-   * @returns { string } JSON string of the component tree and component attributes. For details about each field in
-   *     the component, see the return value description of [getInspectorInfo]{@link FrameNode#getInspectorInfo}.
+   * @param { Array<string> } [filters] - 需要获取的组件属性的过滤列表。目前仅支持过滤字段：
+   *     <br>"id"：组件唯一标识。
+   *     <br>"src"：资源来源。
+   *     <br>"content"：元素、组件或对象所包含的信息或数据。
+   *     <br>"editable"：是否可编辑。
+   *     <br>"scrollable"：是否可滚动。
+   *     <br>"selectable"：是否可选择。
+   *     <br>"focusable"：是否可聚焦。
+   *     <br>"focused"：是否已聚焦。
+   *     <br>如果在filters参数中包含以上一个或者多个字段，则未包含的字段会在组件属性查询结果中被过滤掉。如果用户未传入filters参数或者filters参数为空数组，则以上字段全部不会在组件属性查询结果中被过滤掉。
+   *     <br>从API version 20开始，支持该过滤字段：
+   *     <br>"isLayoutInspector"：返回组件树是否包含自定义组件。如果用户未传入filters参数或者filters数组不包含isLayoutInspector，返回的组件树将缺少自定义组件的信息。
+   *     <br>从API版本26.1.0开始，支持该过滤字段：
+   *     <br>"isWebEnable"：返回的组件树是否包含Web组件所加载网页的组件树。如果用户未传入filters参数或者filters数组不包含isWebEnable，返回的组件树将缺少Web组件所加载网页的组件树信息。
+   *     <br>其余字段仅供测试场景使用。
+   * @returns { string } - 获取组件树及组件属性的JSON字符串。组件中每个字段的含义请参考[getInspectorInfo]{@link FrameNode#getInspectorInfo}的返回值说明。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -5111,31 +5106,24 @@ export class UIContext {
   getFilteredInspectorTree(filters?: Array<string>): string;
 
   /**
-   * get the filtered attributes of the component tree with the specified id and depth
+   * 获取指定的组件及其子组件的属性。此接口耗时较长，仅适用于测试场景。
    *
-   * @param { string } id - [ID]{@link CommonMethod#id} of the target component.
-   * @param { number } depth - Number of layers of child components. If the value is **0**, the attributes of the
-   *     specified component and all its child components are obtained. If the value is **1**, only the attributes of
-   *     <br>the specified component are obtained. If the value is **2**, the attributes of
-   *     <br>the specified component and its
-   *     <br>level-1 child components are obtained. The rest can be deduced by analogy.
-   * @param { Array<string> } [filters] - List of component attributes used for filtering. Currently, only the following
-   *     filter fields are supported:
-   *     <br>**"id"**: unique ID of the component.
-   *     <br>**"src"**: source of the resource.
-   *     <br>**"content"**: information or data contained in the element, component, or object.
-   *     <br>**"editable"**: whether the component is editable.
-   *     <br>**"scrollable"**: whether the component is scrollable.
-   *     <br>**"selectable"**: whether the component is selectable.
-   *     <br>**"focusable"**: whether the component is focusable.
-   *     <br>**"focused"**: whether the component is currently focused.
-   *     <br>If **filters** includes one or more fields, unspecified fields will be filtered out from the results.
-   *     <br>If **filters** is not provided or is an empty array, none of the aforementioned fields
-   *     <br>will be filtered out.
-   *     <br>Other filter fields are used only in testing scenarios.
-   * @returns { string } JSON string of the attributes of the specified component and its child components. For details
-   *     about each field in the component, see the return value
-   *     <br>description of [getInspectorInfo]{@link FrameNode#getInspectorInfo}.
+   * @param { string } id - 指定的[组件标识]{@link CommonMethod#id}id。
+   * @param { number } depth - 获取子组件的层数。当取值0时，获取指定的组件及其所有的子孙组件的属性。当取值1时，仅获取指定的组件的属性。当取值2时，指定的组件及其1层子组件的属性。以此类推。
+   * @param { Array<string> } [filters] - 需要获取的组件属性的过滤列表。目前仅支持过滤字段：
+   *     <br>"id"：组件唯一标识。
+   *     <br>"src"：资源来源。
+   *     <br>"content"：元素、组件或对象所包含的信息或数据。
+   *     <br>"editable"：是否可编辑。
+   *     <br>"scrollable"：是否可滚动。
+   *     <br>"selectable"：是否可选择。
+   *     <br>"focusable"：是否可聚焦。
+   *     <br>"focused"：是否已聚焦。
+   *     <br>如果在filters参数中包含以上一个或者多个字段，则未包含的字段会在组件属性查询结果中被过滤掉。如果用户未传入filters参数或者filters参数为空数组，则以上字段全部不会在组件属性查询结果中被过滤掉。
+   *     <br>从API版本26.1.0开始，支持该过滤字段：
+   *     <br>"isWebEnable"：返回的组件树是否包含Web组件所加载网页的组件树。如果用户未传入filters参数或者filters数组不包含isWebEnable，返回的组件树将缺少Web组件所加载网页的组件树信息。
+   *     <br>其余字段仅供测试场景使用。
+   * @returns { string } - 获取指定的组件及其子组件的属性的JSON字符串。组件中每个字段的含义请参考[getInspectorInfo]{@link FrameNode#getInspectorInfo}的返回值说明。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -6134,9 +6122,10 @@ export class UIContext {
   clearResourceCache(): void;
 
   /**
-   * Checks whether current font scale follows the system.
+   * 获取当前UI上下文是否跟随系统字体倍率。
    *
-   * @returns { boolean } Returns true if current font scale follows the system; returns false otherwise.
+   * @returns { boolean } - 当前UI上下文是否跟随系统字体倍率。
+   *     true表示UI上下文跟随系统倍率，false表示UI上下文不跟随系统倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6686,13 +6675,7 @@ export class TextMenuController {
 }
 
 /**
-* An enumeration type that identifies the current node's rendering state. The UI components used in
-* the application are automatically managed by the system and controlled for participation in graphical
-* rendering by either mounting them onto the render tree or removing them from it. Only nodes that
-* participate in graphical rendering have the potential to be displayed. However, participating in
-* rendering does not equal to the node's visibility, as there may be many occlusion scenarios in the
-* actual implementation of the application. Nevertheless, if a node does not participate in rendering,
-* it will definitely not be visible.
+* 节点的渲染状态。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -6703,11 +6686,7 @@ export class TextMenuController {
 export const enum NodeRenderState {
 
   /**
-   * The node has been mount on to the render tree and will soon be rendered. Generally, after the next frame,
-   * the user will be able to see this node. However, this is not always the case, as in reality, the node may be
-   * occluded by other nodes, meaning it is rendered but not be visible.
-   * When registering a listener for the render state using the UIObserver interface, the system will immediately
-   * trigger the callback once, and the state notified at this time typically represents the current state.
+   * 该节点已挂载到渲染树上，通常会在下一帧渲染并对用户可见，但节点被渲染不代表一定可见。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6718,10 +6697,7 @@ export const enum NodeRenderState {
   ABOUT_TO_RENDER_IN = 0,
 
   /**
-   * The node has been removed from the render tree and will no longer be rendered shortly. Generally speaking,
-   * after the next frame, the user will no longer be able to see this node.
-   * When registering a listener for the render state using the UIObserver interface, the system will immediately
-   * trigger the callback once, and the state notified at this time typically represents the current state.
+   * 该节点已从渲染树中删除，一般下一帧不会被渲染，用户将不会看到此节点。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -311,7 +311,7 @@ export declare interface ReuseOptions {
  */
 export type Context = OriginalContext;
 /**
- * Defines the data type of the interface restriction.
+ * 数据类型。用于设置颜色模式和字体缩放倍数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -319,7 +319,7 @@ export type Context = OriginalContext;
  */
 export declare interface Configuration {
     /**
-     * Set colorMode.
+     * 颜色模式。
      *
      * @readonly
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -328,7 +328,7 @@ export declare interface Configuration {
      */
     readonly colorMode: string;
     /**
-     * Set fontScale.
+     * 字体缩放。
      *
      * @readonly
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -500,7 +500,7 @@ export declare function $r(value: string, ...params: RecordData[]): Resource;
  */
 export declare function $rawfile(value: string): Resource;
 /**
- * Defines the same page mode
+ * 当前跨进程嵌入式显示的组件和宿主应用的同page模式。
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -508,15 +508,14 @@ export declare function $rawfile(value: string): Resource;
  */
 export declare enum AccessibilitySamePageMode {
     /**
-    * the first page and root page event is not send.but if application load new page whith navigation,the page event will be sent.
-    * this mode is to solve skipping focus
+    * 跨进程嵌入式显示的组件拉起来的进程的page事件中如果是首次加载页面或者该事件页面的根节点发送的page事件会被忽略。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SEMI_SILENT = 0,
     /**
-     * the all page event is not send
+     * 跨进程嵌入式显示的组件将忽略所有的page事件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -524,7 +523,7 @@ export declare enum AccessibilitySamePageMode {
     FULL_SILENT = 1
 }
 /**
- * Enum for accessibility component type
+ * 定义组件的屏幕朗读功能角色类型。
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -532,875 +531,875 @@ export declare enum AccessibilitySamePageMode {
  */
 export declare enum AccessibilityRoleType {
     /**
-    * ActionSheet component type
+    * 列表弹窗。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ACTION_SHEET = 0,
     /**
-    * AlertDialog component type
+    * 显示警告弹窗组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ALERT_DIALOG = 1,
     /**
-    * AlphabetIndexer component type
+    * 索引器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     INDEXER_COMPONENT = 2,
     /**
-    * badge component type
+    * 信息标记组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     BADGE_COMPONENT = 3,
     /**
-    * blank component type
+    * 空白填充组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     BLANK = 4,
     /**
-    * button component type
+    * 按钮。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     BUTTON = 5,
     /**
-    * button component type
+    * 大图页返回按钮。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     BACK_BUTTON = 6,
     /**
-    * sheet drag bar component type
+    * 滑动条。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SHEET_DRAG_BAR = 7,
     /**
-    * calendar picker component type
+    * 日历选择器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CALENDAR_PICKER = 8,
     /**
-    * calendar component type
+    * 日历。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CALENDAR = 9,
     /**
-    * canvas component type
+    * 提供画布组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CANVAS = 10,
     /**
-    * canvas gradient component type
+    * 渐变对象。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CANVAS_GRADIENT = 11,
     /**
-    * canvas pattern component type
+    * 通过指定图像和重复方式创建图片填充的模板。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CANVAS_PATTERN = 12,
     /**
-    * checkbox component type
+    * 提供多选框组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CHECKBOX = 13,
     /**
-    * checkbox group component type
+    * 多选框群组。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CHECKBOX_GROUP = 14,
     /**
-    * circle component type
+    * 用于绘制圆形的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CIRCLE = 15,
     /**
-    * column split component type
+    * 将子组件纵向布局，并在每个子组件之间插入一根横向的分割线。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     COLUMN_SPLIT = 16,
     /**
-    * column component type
+    * 沿垂直方向布局的容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     COLUMN = 17,
     /**
-    * canvas rendering context 2d component type
+    * 用于在画布组件上绘制矩形、文本、图片等。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CANVAS_RENDERING_CONTEXT_2D = 18,
     /**
-    * chart component type
+    * 图表组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CHART = 19,
     /**
-    * counter component type
+    * 计数器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
      * @since 23 static
     */
     COUNTER = 20,
     /**
-    * counter modal component type
+    * 模态容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     CONTAINER_MODAL = 21,
     /**
-    * data panel component type
+    * 数据面板组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     DATA_PANEL = 22,
     /**
-    * data picker component type
+    * 选择日期的滑动选择器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     DATE_PICKER = 23,
     /**
-    * dialog component type
+    * 弹出框。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     DIALOG = 24,
     /**
-    * divider component type
+    * 提供分隔器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     DIVIDER = 25,
     /**
-    * drag bar component type
+    * 拖拽条。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     DRAG_BAR = 26,
     /**
-    * effect component type
+    * 特效合并容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     EFFECT_COMPONENT = 27,
     /**
-    * ellipse component type
+    * 椭圆绘制组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ELLIPSE = 28,
     /**
-    * flex component type
+    * 以弹性方式布局子组件的容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     FLEX = 29,
     /**
-    * flow item component type
+    * 瀑布流组件的子组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     FLOW_ITEM = 30,
     /**
-    * form component type
+    * 提供卡片组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     FORM_COMPONENT = 31,
     /**
-    * form link component type
+    * 静态卡片交互组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     FORM_LINK = 32,
     /**
-    * gauge component type
+    * 数据量规图表组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GAUGE = 33,
     /**
-    * grid component type
+    * 网格容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GRID = 34,
     /**
-    * grid col component type
+    * 栅格子组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GRID_COL = 35,
     /**
-    * grid container component type
+    * 纵向排布栅格布局容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GRID_CONTAINER = 36,
     /**
-    * grid item component type
+    * 网格容器中单项内容容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GRID_ITEM = 37,
     /**
-    * grid row component type
+    * 栅格容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     GRID_ROW = 38,
     /**
-    * hyperlink component type
+    * 超链接组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     HYPERLINK = 39,
     /**
-    * image component type
+    * 图片组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     IMAGE = 40,
     /**
-    * image animator component type
+    * 提供帧动画组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     IMAGE_ANIMATOR = 41,
     /**
-    * image bitmap component type
+    * 存储canvas渲染的像素数据。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     IMAGE_BITMAP = 42,
     /**
-    * image data component type
+    * 存储canvas渲染的像素数据。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     IMAGE_DATA = 43,
     /**
-    * image span component type
+    * 用于显示行内图片。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     IMAGE_SPAN = 44,
     /**
-    * label component type
+    * 标签。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LABEL = 45,
     /**
-    * line component type
+    * 线型。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LINE = 46,
     /**
-    * list component type
+    * 列表。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LIST = 47,
     /**
-    * list item component type
+    * 用来展示列表具体item。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LIST_ITEM = 48,
     /**
-    * list item group component type
+    * 用来展示列表item分组。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LIST_ITEM_GROUP = 49,
     /**
-    * loading progress component type
+    * 用于显示加载动效的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     LOADING_PROGRESS = 50,
     /**
-    * marquee component type
+    * 跑马灯组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     MARQUEE = 51,
     /**
-    * matrix2d component type
+    * 矩阵对象。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     MATRIX2D = 52,
     /**
-    * menu component type
+    * 菜单。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     MENU = 53,
     /**
-    * menu item component type
+    * 菜单项。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     MENU_ITEM = 54,
     /**
-    * menu item group component type
+    * 菜单项分组。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     MENU_ITEM_GROUP = 55,
     /**
-    * navdestination component type
+    * 显示Navigation的内容区。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAV_DESTINATION = 56,
     /**
-    * navrouter component type
+    * 导航组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAV_ROUTER = 57,
     /**
-    * navigation component type
+    * 路由导航的根视图容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAVIGATION = 58,
     /**
-    * navigation bar component type
+    * 导航栏。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAVIGATION_BAR = 59,
     /**
-    * navigation menu component type
+    * 导航菜单。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAVIGATION_MENU = 60,
     /**
-    * navigator component type
+    * 路由容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     NAVIGATOR = 61,
     /**
-    * offscreen canvas component type
+    * 用于自定义绘制图形。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     OFFSCREEN_CANVAS = 62,
     /**
-    * offscreen canvas rendering context2d component type
+    * 2D绘制对象，用于在画布组件上绘制矩形、文本、图片等。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     OFFSCREEN_CANVAS_RENDERING_CONTEXT2D = 63,
     /**
-    * option component type
+    * 具体项目。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     OPTION = 64,
     /**
-    * panel component type
+    * 可滑动面板。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PANEL = 65,
     /**
-    * paper page component type
+    * 页面。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PAPER_PAGE = 66,
     /**
-    * path component type
+    * 路径绘制组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PATH = 67,
     /**
-    * path 2d component type
+    * 路径对象。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PATH2D = 68,
     /**
-    * pattern lock component type
+    * 图案密码锁组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PATTERN_LOCK = 69,
     /**
-    * picker component type
+    * 选择器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PICKER = 70,
     /**
-    * picker view component type
+    * 选择器视图。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PICKER_VIEW = 71,
     /**
-    * plugin component type
+    * 新增插件组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PLUGIN_COMPONENT = 72,
     /**
-    * polygon component type
+    * 多边形绘制组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     POLYGON = 73,
     /**
-    * polyline component type
+    * 折线绘制组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     POLYLINE = 74,
     /**
-    * pop up component type
+    * 显示特定样式气泡。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     POPUP = 75,
     /**
-    * progress component type
+    * 进度条组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     PROGRESS = 76,
     /**
-    * qr code component type
+    * 二维码。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     QRCODE = 77,
     /**
-    * radio component type
+    * 单选框。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RADIO = 78,
     /**
-    * rating component type
+    * 提供在给定范围内选择评分的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RATING = 79,
     /**
-    * rect component type
+    * 矩形绘制组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RECT = 80,
     /**
-    * refresh component type
+    * 下拉刷新容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     REFRESH = 81,
     /**
-    * relative container component type
+    * 相对布局组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RELATIVE_CONTAINER = 82,
     /**
-    * remote window component type
+    * 远程控制窗口组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     REMOTE_WINDOW = 83,
     /**
-    * rich editor component type
+    * 支持图文混排和文本交互式编辑的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RICH_EDITOR = 84,
     /**
-    * rich text component type
+    * 富文本组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     RICH_TEXT = 85,
     /**
-    * rolepager component type
+    * 分页。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ROLE_PAGER = 86,
     /**
-    * row component type
+    * 沿水平方向布局容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ROW = 87,
     /**
-    * row split component type
+    * 将子组件横向布局，并在每个子组件之间插入一根纵向的分割线。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     ROW_SPLIT = 88,
     /**
-    * scroll component type
+    * 可滚动的容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SCROLL = 89,
     /**
-    * scroll bar component type
+    * 滚动条。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SCROLL_BAR = 90,
     /**
-    * search component type
+    * 搜索框组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SEARCH = 91,
     /**
-    * search field component type
+    * 搜索框。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SEARCH_FIELD = 92,
     /**
-    * select component type
+    * 下拉选择菜单组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SELECT = 93,
     /**
-    * shape component type
+    * 绘制组件的父组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SHAPE = 94,
     /**
-    * sidebar container component type
+    * 提供侧边栏可以显示和隐藏的侧边栏容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SIDEBAR_CONTAINER = 95,
     /**
-    * slider component type
+    * 滑动条组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SLIDER = 96,
     /**
-    * span component type
+    * 用于显示行内文本的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SPAN = 97,
     /**
-    * stack component type
+    * 堆叠容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     STACK = 98,
     /**
-    * stepper component type
+    * 步骤导航器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     STEPPER = 99,
     /**
-    * stepper item component type
+    * 用作Stepper组件的页面子组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     STEPPER_ITEM = 100,
     /**
-    * swiper component type
+    * 滑块视图容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SWIPER = 101,
     /**
-    * swiper indicator component type
+    * 定义 Swiper 组件的导航指示器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SWIPER_INDICATOR = 102,
     /**
-    * switch component type
+    * 开关。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SWITCH = 103,
     /**
-    * symbol glyph component type
+    * 显示图标小符号的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     SYMBOL_GLYPH = 104,
     /**
-    * tab content component type
+    * 仅在Tabs中使用，对应一个切换页签的内容视图。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TAB_CONTENT = 105,
     /**
-    * tab bar component type
+    * 页签栏。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TAB_BAR = 106,
     /**
-    * tabs component type
+    * 通过页签进行内容视图切换的容器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TABS = 107,
     /**
-    * text component type
+    * 文本。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT = 108,
     /**
-    * text clock component type
+    * 文本时钟组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_CLOCK = 109,
     /**
-    * text entry component type
+    * 文本输入。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_ENTRY = 110,
     /**
-    * text input component type
+    * 输入框组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_INPUT = 111,
     /**
-    * text picker component type
+    * 文本类滑动选择器组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_PICKER = 112,
     /**
-    * text timer component type
+    * 通过文本显示计时信息并控制其计时器状态的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_TIMER = 113,
     /**
-    * text area component type
+    * 输入区域组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_AREA = 114,
     /**
-    * text field component type
+    * 文本框。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TEXT_FIELD = 115,
     /**
-    * time picker component type
+    * 时间选择组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TIME_PICKER = 116,
     /**
-    * title bar component type
+    * 标题栏。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TITLE_BAR = 117,
     /**
-    * toggler component type
+    * 状态组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     TOGGLER = 118,
     /**
-    * uiextensioncomponent component type
+    * 用户界面扩展组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     UI_EXTENSION_COMPONENT = 119,
     /**
-    * video component type
+    * 用于播放视频文件并控制其播放状态的组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     VIDEO = 120,
     /**
-    * water flow component type
+    * 瀑布流容器。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     WATER_FLOW = 121,
     /**
-    * web component type
+    * 加载网页组件。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     WEB = 122,
     /**
-    * xcomponent component type
+    * 自定义渲染。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     XCOMPONENT = 123,
     /**
-    * none component type: screen reader will not broadcast the component type.
+    * 不设置特定的无障碍组件类型，组件按照自身默认类型进行屏幕朗读播报。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
@@ -1408,9 +1407,8 @@ export declare enum AccessibilityRoleType {
     ROLE_NONE = 124
 }
 /**
- * Defines the callback type used in accessibility focus. The value of isFocus indicates whether
- * the current component is focused
- * @param {boolean} isFocus - if component is focused,isFocus will be true. else isFocus is false.
+ * 定义onAccessibilityFocus中使用的回调类型。
+ * @param {boolean} isFocus - 用于表示组件是否获焦。<br>true：当前组件获焦。<br>false：当前组件失焦。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1418,7 +1416,7 @@ export declare enum AccessibilityRoleType {
 export type AccessibilityFocusCallback = (isFocus: boolean) => void;
 
 /**
- * Enum for accessibility action type
+ * 辅助功能操作类型的枚举
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1426,14 +1424,14 @@ export type AccessibilityFocusCallback = (isFocus: boolean) => void;
  */
 export declare enum AccessibilityAction {
   /**
-  * undefined action type
+  * 未定义的操作类型
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
   */
   UNDEFINED_ACTION = 0,
   /**
-  * accessibility click action
+  * 辅助功能单击操作
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
@@ -1442,7 +1440,7 @@ export declare enum AccessibilityAction {
 }
 
 /**
- * Enum for the result of accessibility action intercept function
+ * intercept action的枚举
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1450,21 +1448,21 @@ export declare enum AccessibilityAction {
  */
 export declare enum AccessibilityActionInterceptResult {
   /**
-  * intercept the accessibility action
+  * 拦截无障碍Action
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
   */
   ACTION_INTERCEPT = 0,
   /**
-  * the accessibility action can be continued
+  * continue action动作
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
   */
   ACTION_CONTINUE = 1,
   /**
-  * the accessibility action need to bubble up for execution
+  * 需要冒泡向上透传的类型枚举
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
@@ -1473,10 +1471,9 @@ export declare enum AccessibilityActionInterceptResult {
 }
 
 /**
- * Defines the callback type used in accessibility action intercept.
- * The value of action indicates the accessibility action type.
- * @param { AccessibilityAction } action - the enum of accessibility action type.
- * @returns { AccessibilityActionInterceptResult } the result of continuing to execute the action or interrupting it or bubbling up
+ * 定义onAccessibilityActionIntercept中使用的回调类型。
+ * @param { AccessibilityAction } action - 当前触发的无障碍控制操作类型。
+ * @returns { AccessibilityActionInterceptResult } - 无障碍控制操作拦截结果，用于决定是否拦截当前组件的无障碍控制操作及后续处理方式。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -5362,7 +5359,7 @@ export declare interface MouseHistoricalPoint {
   timestamp: long;
 }
 /**
- * The accessibility hover action triggers this method invocation.
+ * 无障碍悬浮事件对象，用于获取触发无障碍悬浮事件时的详细信息，包括无障碍悬浮动作类型（type）、手指相对于组件/窗口/屏幕的坐标（x、y、windowX、windowY、displayX、displayY、globalDisplayX、globalDisplayY）等属性。
  *
  * @extends BaseEvent
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5371,7 +5368,7 @@ export declare interface MouseHistoricalPoint {
  */
 export declare interface AccessibilityHoverEvent extends BaseEvent {
     /**
-     * Type of the accessibility hover event.
+     * 无障碍悬浮动作类型，包括HOVER_ENTER（手指按下时触发）、HOVER_MOVE（触摸移动时触发）、HOVER_EXIT（手指抬起时触发）和HOVER_CANCEL（打断取消当前触发的事件）。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5379,7 +5376,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     type: AccessibilityHoverType;
     /**
-     * X coordinate of the accessibility hover point relative to the left edge of the event hit element.
+     * 手指位置相对于当前组件左上角的x轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5387,7 +5386,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     x: double;
     /**
-     * Y coordinate of the accessibility hover point relative to the upper edge of the event hit element.
+     * 手指位置相对于当前组件左上角的y轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5395,7 +5396,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     y: double;
     /**
-     * X coordinate of the accessibility hover point relative to the left edge of the device screen.
+     * 手指位置相对于应用屏幕左上角的x轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5403,7 +5406,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     displayX: double;
     /**
-     * Y coordinate of the accessibility hover point relative to the upper edge of the device screen.
+     * 手指位置相对于应用屏幕左上角的y轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5411,7 +5416,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     displayY: double;
     /**
-     * X coordinate of the accessibility hover point relative to the left edge of the current window.
+     * 手指位置相对于应用窗口左上角的x轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5419,7 +5426,9 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     windowX: double;
     /**
-     * Y coordinate of the accessibility hover point relative to the upper edge of the current window.
+     * 手指位置相对于应用窗口左上角的y轴坐标。
+     * 单位：vp
+     * 取值范围：[0, +∞)
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5427,7 +5436,7 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
      */
     windowY: double;
     /**
-     * X coordinate of the point relative to the global display.
+     * 点相对于全局显示的 X 坐标。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5436,7 +5445,7 @@ export declare interface AccessibilityHoverEvent extends BaseEvent {
     globalDisplayX?: double;
 
     /**
-     * Y coordinate of the point relative to the global display.
+     * 相对于全局显示的点的 Y 坐标。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -10954,7 +10963,7 @@ export declare interface ContentModifier<T> {
     applyContent(): WrappedBuilder<CustomBuilderT<T>>;
 }
 /**
- * Defines the common configuration.
+ * 开发者需要自定义class实现ContentModifier接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10962,8 +10971,7 @@ export declare interface ContentModifier<T> {
  */
 export declare interface CommonConfiguration<T> {
     /**
-     * If the value is true, the contentModifier is available and can respond to operations such as triggerChange.
-     *  If it is set to false, triggerChange operations are not responded.
+     * 如果该值为true，则contentModifier可用，并且可以响应triggerChange等操作，如果设置为false，则不会响应triggerChange等操作。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11327,7 +11335,7 @@ export declare interface InvertOptions {
     thresholdRange: double;
 }
 /**
- * Defines the type that can be undefined.
+ * 定义可选类型，其值可以是undefined。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -11535,11 +11543,14 @@ export declare interface CommonMethod {
      */
     default drawModifier(modifier: DrawModifier | undefined): this;
     /**
-     * Sets the custom property of the current component.
-     * This API does not work for custom components.
+     * 设置组件的自定义属性。
      *
-     * @param { string } name - the name of the custom property.
-     * @param { CustomProperty } value - the value of the custom property.
+     * API版本26.0.0之前，[自定义组件](docroot://ui/state-management/arkts-create-custom-components.md)不支持设置自定义属性。
+     *
+     * 从API版本26.0.0开始，自定义组件支持设置并读取自定义属性。
+     *
+     * @param { string } name - 自定义属性的名称。
+     * @param { CustomProperty } value - 自定义属性的值。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12237,9 +12248,9 @@ export declare interface CommonMethod {
      */
     default onHoverMove(event: Callback<HoverEvent> | undefined): this;
     /**
-     * Trigger a accessibility hover event.
+     * 开启无障碍模式后，单指触摸绑定了该回调且可被无障碍聚焦的组件时，触发该回调。
      *
-     * @param { AccessibilityCallback | undefined } callback - A callback instance used when the component is touched after accessibility mode is enabled.
+     * @param { AccessibilityCallback | undefined } callback - 提供开启无障碍模式后的无障碍悬浮回调事件，当单指触摸绑定该回调的可被无障碍识别为可聚焦的组件时触发该回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12248,10 +12259,13 @@ export declare interface CommonMethod {
     default onAccessibilityHover(callback: AccessibilityCallback | undefined): this;
 
     /**
-     * prompt for current component and descendants unable to handle accessibility hover event
+     * 当开启朗读类辅助应用（如屏幕朗读器）且手指触摸在组件区域，同时该组件及子组件全部没有被无障碍悬浮识别为可聚焦时，会触发该回调，并通过回调参数返回该触摸事件对应的TouchEvent。仅支持手指触摸。
+     * 不支持触摸位置位于以下组件区域内的场景，包括UIExtension、Web、FormComponent、XComponent，以及与第三方UI框架对接的场景。在上述场景下，该回调接口无法生效。
+     * 组件无法被无障碍悬浮识别为可聚焦的主要原因包括，组件的无障碍重要性accessibilityLevel为"no"或者"no-hide-descendants"；
+     * 组件无文本且未配置无障碍文本accessibilityText，同时不支持点击或长按操作。
      *
-     * @param { AccessibilityTransparentCallback | undefined } callback - A callback instance used when current component and 
-     * descendants not handled accessibility hover event
+     * @param { AccessibilityTransparentCallback | undefined } callback - 提供开启朗读类辅助应用后未能被无障碍悬浮响应的触摸事件。
+     *             当手指触摸在组件区域，且该组件及子组件全部没有被无障碍悬浮识别为可聚焦时，触发该回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -12372,7 +12386,7 @@ export declare interface CommonMethod {
      */
     default nextFocus(nextStep: FocusMovement | undefined): this;
     /**
-     * Set TabStop on component focus
+     * 设置当前容器组件的tabStop，可决定焦点在走焦时是否会停留在当前容器。
      *
      * @param { boolean | undefined } isTabStop
      * @returns { this }
@@ -13968,25 +13982,21 @@ export declare interface CommonMethod {
      */
     default keyboardShortcut(value: string | FunctionKey | undefined, keys: Array<ModifierKey> | undefined, action?: () => void): this;
     /**
-     * Sets whether to enable accessibility grouping.
+     * 设置是否启用无障碍分组。启用无障碍分组后，组件及其子组件作为一整个可选中组件，无障碍服务不再关注子组件内容。
+     * 若组件启用无障碍分组，当组件不包含通用文本属性，同时未设置无障碍文本accessibilityText时，将默认拼接其子组件的通用文本属性作为组件的合并文本。
+     * 若某一子组件没有通用文本属性，则忽略该子组件不进行拼接，此时合并文本不使用子组件的无障碍文本。
+     * 当子组件accessibilityLevel设置为"yes"时则不受accessibilityGroup约束，在满足屏幕朗读其他规则下，子组件可聚焦。
+     * 通过accessibilityPreferred启用优先拼接无障碍文本进行朗读后，将优先拼接其子组件的无障碍文本属性作为组件的合并文本。
+     * 若某一子组件未设置无障碍文本，则继续拼接该子组件的通用文本属性，若该子组件没有通用文本属性，则忽略该子组件不进行拼接。
+     * 从API version 23开始，通过accessibilityOptions中的相关配置项（stateControllerRoleType或stateControllerId、
+     * actionControllerRoleType或actionControllerId），可以指定一个特定子组件，由该子组件的状态信息和点击事件来接管当前聚合组件的无障碍能力。
      *
-     * <p><strong>NOTE</strong>
-     * <br>Whether to enable accessibility grouping. When accessibility grouping is enabled,
-     * <br>the component and all its children are treated as a single selectable unit, and the accessibility
-     * <br>service will no longer focus on the individual child components.
-     *
-     * <br>If accessibility grouping is enabled and the component does not contain a universal text attribute
-     * <br>or an accessibility text attribute, the system will concatenate the universal text attributes of
-     * <br>its child components to form a merged text for the component. If a child component lacks a universal
-     * <br>text attribute, it will be ignored in the concatenation process.
-     *
-     * <br>When accessibilityPreferred is set to true, the system will prioritize concatenating the accessibility
-     * <br>text attributes of the child components to form the merged text. If a child component lacks an
-     * <br>accessibility text attribute, the system will continue to concatenate its universal text attribute.
-     * <br>If a child component lacks both, it will be ignored.</p>
-     *
-     * @param { boolean | undefined } isGroup - set group with accessibility, default value is false.
-     * @param { ?AccessibilityOptions } [accessibilityOptions] - options for accessibility, default value is false.
+     * @param { boolean | undefined } isGroup - 无障碍分组，设置为true时表示该组件及其所有子组件为一整个可以选中的组件，无障碍服务将不再关注其子组件内容，会合并子组件的文本与无障碍信息，并将其发送至无障碍服务；设置为false表示不启用无障碍分组。
+     *     <br>默认值：false
+     * @param { ?AccessibilityOptions } [accessibilityOptions] - 无障碍分组的配置选项对象，包含以下属性：
+     *     <br>- accessibilityPreferred：设置为true时，使应用优先拼接无障碍文本进行朗读；设置为false时，应用进行屏幕朗读时不会优先使用无障碍文本。
+     *     <br>- stateControllerRoleType或stateControllerId：从API version 23开始支持，指定一个特定子组件，使用该子组件的状态信息作为当前聚合组件的无障碍状态。
+     *     <br>- actionControllerRoleType或actionControllerId：从API version 23开始支持，指定一个特定子组件，使用该子组件的点击事件作为当前聚合组件的无障碍操作。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13994,8 +14004,9 @@ export declare interface CommonMethod {
      */
     default accessibilityGroup(isGroup: boolean | undefined, accessibilityOptions?: AccessibilityOptions): this;
     /**
-     * Sets accessibility next focus id
-     * @param { string | undefined } nextId - set component next accessibility focus id
+     * 指定屏幕朗读扫动走焦过程中组件的下一个焦点，并支持配置详细参数。
+     * 通过AccessibilityNextFocusParams参数，可以配置是否在无障碍下一个焦点处理过程中查找后代节点中的焦点。
+     * @param { string | undefined } nextId - 下一个被指定聚焦组件的唯一标识id。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14003,8 +14014,8 @@ export declare interface CommonMethod {
      */
     default accessibilityNextFocusId(nextId: string | undefined): this;
     /**
-     * Sets the accessibility default foucs flag
-     * @param { boolean | undefined } focus - if the component is accessibility default focus,focus set true
+     * 为页面设置屏幕朗读初始焦点。屏幕朗读首次进入当前页面时，会将焦点定位到设置为true的组件，便于开发者引导用户优先关注页面核心内容。
+     * @param { boolean | undefined } focus - 为页面设置屏幕朗读初始焦点。值为true则表示该组件为当前页默认首焦点，值为false则不设置该组件为默认首焦点。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14012,8 +14023,10 @@ export declare interface CommonMethod {
      */
     default accessibilityDefaultFocus(focus: boolean | undefined): this;
     /**
-     * Sets accessibility same page mode
-     * @param { AccessibilitySamePageMode | undefined } pageMode - accessibility same page mode
+     * 设置当前组件和宿主应用为同page模式。
+     * 针对跨进程嵌入式显示的组件，例如EmbeddedComponent，其子树场景中出现的跳焦问题，可通过设置accessibilityUseSamePage属性解决。
+     * 因跨进程嵌入式显示的组件启动进程的页面变化事件与宿主页面变化事件发送时序不一致，可能导致焦点从当前组件移至另一组件，此现象称为“跳焦”。
+     * @param { AccessibilitySamePageMode | undefined } pageMode - 当前跨进程嵌入式显示的组件和宿主应用的同page模式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14021,8 +14034,11 @@ export declare interface CommonMethod {
      */
     default accessibilityUseSamePage(pageMode: AccessibilitySamePageMode | undefined): this;
     /**
-     * Sets accessibilityScrollTriggerable
-     * @param { boolean | undefined } isTriggerable - set property of supporting scroll in accessibility
+     * 设置无障碍节点是否支持屏幕朗读滚动操作。当屏幕朗读在扫动走焦时，若容器内当前页面无可聚焦的组件，会发起一次自动滚动操作。
+     * @param { boolean | undefined } isTriggerable - 用于表示组件是否支持该能力。<br/>支持的值为：<br/>true：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，需要自动滚动操作。
+     *         false：屏幕朗读焦点切换而容器内当前页面无可聚焦的组件时，不需要自动滚动操作。<br/>undefined：还原默认值。<br/>默认值：true。<br/>**说明：**
+     *         1. 该属性不影响原先无障碍节点属性ElementAttributeValues中的scrollable。<br/>2. 组件在屏幕朗读下的滚动逻辑由屏幕朗读根据该属性和组件是否支持scroll来决定。
+     *         3. 该属性为通用属性，所有基础组件均可配置。建议配置的滚动组件类型，如List、Grid、Scroll、WaterFlow等。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14030,16 +14046,12 @@ export declare interface CommonMethod {
      */
     default accessibilityScrollTriggerable(isTriggerable: boolean | undefined): this;
     /**
-     * Sets the accessibility text.
-     * <p><strong>NOTE</strong>
-     * <br>When a component does not contain a text attribute, you can use this API to set an accessibility
-     * <br>text attribute, so that accessibility services can announce the specified content for the component.
-     * <br>If a component has both text content and accessibility text, only the accessibility text is announced.
-     * <br>If a component is grouped for accessibility purposes but lacks both text content and accessibility
-     * <br>text, the screen reader will concatenate text from its child components (depth-first traversal).
-     * <br>To prioritize accessibility text concatenation, set accessibilityPreferred in accessibilityGroup.
-     * </p>
-     * @param { Resource | string | undefined } text - set accessibility text, default value is "".
+     * 设置无障碍文本，支持通过Resource引用资源文件。当组件不包含文本属性时，开发人员可通过设置无障碍文本属性，使不包含文字信息的组件能够播报无障碍文本的内容；当组件同时包含文本属性时，在朗读场景仅播报无障碍文本。
+     * @param { Resource | string | undefined } text - 无障碍文本引用资源，当组件不包含文本属性时，屏幕朗读选中此组件时不播报，使用者无法清楚地知道当前选中了什么组件。为了解决此场景，开发人员可为不包含文字信息的组件设置无障碍文本，当屏幕朗读选中此组件时播报无障碍文本的内容，帮助屏幕朗读的使用者清楚地知道自己选中了什么组件。
+     *     <br>**说明：**
+     *     <br>若组件既拥有文本属性，又拥有无障碍文本属性，则组件被选中时，仅播报无障碍文本内容。
+     *     <br>若组件设置了无障碍分组属性为true，但是既没有无障碍文本属性，也没有文本属性，会对其子节点的组件进行文本拼接（深度优先）。
+     *     <br>不对无障碍文本属性进行拼接，如需优先拼接无障碍文本，则需设置accessibilityGroup的accessibilityPreferred。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14047,8 +14059,8 @@ export declare interface CommonMethod {
      */
     default accessibilityText(text: Resource | string | undefined): this;
     /**
-     * Sets accessibility role,role indicates the custom type of the component
-     * @param { AccessibilityRoleType | undefined } role - set accessibility component type
+     * 设置无障碍组件类型，不同组件类型有对应的朗读方式，可以根据应用诉求，修改组件类型，用于控制无障碍模式下对组件的朗读方式和朗读内容。
+     * @param { AccessibilityRoleType | undefined } role - 屏幕朗读播报的组件类型，如按钮、图表。具体类型可由开发者根据需要选择。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14056,8 +14068,8 @@ export declare interface CommonMethod {
      */
     default accessibilityRole(role: AccessibilityRoleType | undefined): this;
     /**
-     * Register accessibility focus callback,when the component is focused or out of focus,the callback will be executed
-     * @param { AccessibilityFocusCallback | undefined } callback - accessibility focus callback function
+     * 该接口在无障碍模式下，设置无障碍节点获焦、失焦状态的回调函数。当无障碍焦点移入或移出当前组件，导致获焦、失焦状态发生变化时，触发回调函数。
+     * @param { AccessibilityFocusCallback | undefined } callback - 在无障碍模式下，当组件获焦、失焦状态发生变化时，向注册方通知当前状态。入参设置为undefined时，取消回调注册。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14065,9 +14077,9 @@ export declare interface CommonMethod {
      */
     default onAccessibilityFocus(callback: AccessibilityFocusCallback | undefined): this;
     /**
-     * Register accessibility action intercept callback,
-     * when accessibility action is to be executed,the callback will be executed
-     * @param { AccessibilityActionInterceptCallback | undefined } callback - accessibility action intercept callback function
+     * 该接口在无障碍模式下，可在无障碍控制操作触发前通知注册的回调函数，由注册方决定是否拦截该次无障碍控制操作。对不支持点击操作的组件，即使注册该回调也不会被触发。
+     * @param { AccessibilityActionInterceptCallback | undefined } callback - 在无障碍模式且组件支持点击的前提下，在无障碍控制操作触发前通知注册方该次无障碍控制操作，
+     *             由注册方决定是否拦截该操作。未开启无障碍模式或组件不支持点击时，回调均不会触发。<br> 入参设置为undefined时，取消回调注册。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14075,9 +14087,9 @@ export declare interface CommonMethod {
      */
     default onAccessibilityActionIntercept(callback: AccessibilityActionInterceptCallback | undefined): this;
     /**
-     * Sets accessibilityTextHint
+     * 设置组件的文本提示信息，仅在与车机交互的场景下供车机的无障碍服务监听并响应。
      *
-     * @param { string | undefined } value - set accessibility text hint
+     * @param { string | undefined } value - 组件的文本提示信息，仅在与车机交互的场景下供车机的无障碍服务监听并响应。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14085,18 +14097,8 @@ export declare interface CommonMethod {
      */
     default accessibilityTextHint(value: string | undefined): this;
     /**
-     * Sets accessibilityDescription
-     *
-     * with support for resource references using Resource.
-     * This property provides additional context or explanation for the component,
-     * helping users understand the action or function it performs.
-     * <p><strong>NOTE</strong>:
-     * <br>Reference resource of the accessibility description. You can specify further explanation
-     * <br>of the current component, for example, possible operation consequences, especially those that
-     * <br>cannot be learned from component attributes and accessibility text. If a component contains
-     * <br>both text information and the accessibility description, the text is read first and then the
-     * <br>accessibility description, when the component is selected.</p>
-     * @param { Resource | string | undefined } description - set description of accessibility, default value is "".
+     * 设置无障碍说明，支持通过Resource引用资源文件。该属性用于为用户进一步说明当前组件，开发人员可为组件设置相对较详细的解释文本，帮助用户理解将要执行的操作。
+     * @param { Resource | string | undefined } description - 无障碍说明引用资源，用于为用户进一步说明当前组件，开发人员可为组件的该属性设置相对较详细的解释文本，帮助用户理解将要执行的操作。如帮助用户理解将要执行的操作可能导致什么后果，尤其是当这些后果无法从组件本身属性与无障碍文本中了解到时。若组件既拥有文本属性又拥有无障碍说明属性，则组件被选中时，先播报组件的文本属性，再播报无障碍说明属性的内容。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14104,23 +14106,14 @@ export declare interface CommonMethod {
      */
     default accessibilityDescription(description: Resource | string | undefined): this;
     /**
-     * Sets the accessibility level.
-     * This property determines whether the component can be recognized by accessibility services.
-     * <p>
-     * Accessibility level, which is used to decide whether a component can be identified by the accessibility service.
-     * <br>The options are as follows:
-     * <br>"auto": The component's recognizability is determined by the accessibility grouping service and ArkUI.
-     * <br>"yes": The component can be recognized by accessibility services.
-     * <br>"no": The component cannot be recognized by accessibility services.
-     * <br>"no-hide-descendants": Neither the component nor its child components can be recognized by accessibility services.
-     * <strong>NOTE</strong>
-     * <br>When accessibilityLevel is set to "auto", the component's recognizability depends on the following factors:
-     * <br>1. The accessibility service internally determines whether the component can be recognized.
-     * <br>2. If the parent component's accessibilityGroup property has isGroup set to true, the accessibility service will
-     * <br>not focus on its child components, making them unrecognizable.
-     * <br>3. If the parent component's accessibilityLevel is set to "no-hide-descendants", the component will not be
-     * <br>recognized by accessibility services.</p>
-     * @param { string | undefined } value - set accessibility level, default value is auto.
+     * 设置无障碍重要性。该属性用于控制某个组件是否可被无障碍辅助服务所识别。
+     * @param { string | undefined } value - 无障碍重要性，用于控制某个组件是否可被无障碍辅助服务所识别。<br/>支持的值为：<br/>
+     *             "auto"：当前组件由无障碍辅助服务和ArkUI进行综合判断组件是否可被无障碍辅助服务所识别。
+     *         "yes"：当前组件可被无障碍辅助服务所识别。当父组件启用无障碍分组时，设置为"yes"的子组件不受分组约束，在满足屏幕朗读其他规则下仍可聚焦。<br/>"no"：当前组件不可被无障碍辅助服务所识别。
+     *         "no-hide-descendants"：当前组件及其所有子组件不可被无障碍辅助服务所识别。<br/>默认值："auto"<br/>**说明：**
+     *         当accessibilityLevel设置成"auto"时，组件是否可被无障碍辅助服务所识别取决于以下多方面因素：<br/>1. 组件是否可被识别由无障碍辅助服务内部判断，自行选择。
+     *         2. 若组件的父组件accessibilityGroup属性中isGroup设置为true，无障碍服务将不再关注其子组件内容，组件不可被无障碍辅助服务所识别。
+     *         3. 若组件的父组件accessibilityLevel属性设置为"no-hide-descendants"，组件不可被无障碍辅助服务所识别。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14128,9 +14121,11 @@ export declare interface CommonMethod {
      */
     default accessibilityLevel(value: string | undefined): this;
     /**
-     * Sets accessibilityVirtualNode
+     * 设置无障碍虚拟子节点。对自绘制组件传入一个CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
+     * 如使用画布组件Canvas时，可以通过虚拟节点设置相应位置和大小匹配的占位组件，让无障碍服务识别到对应区域的自绘制信息。
      *
-     * @param { CustomBuilder | undefined } builder - set virtual node of accessibility
+     * @param { CustomBuilder | undefined } builder - 无障碍虚拟子节点，使开发者可以对自绘制组件传入一个CustomBuilder，该CustomBuilder中的组件在后端仅做布局不做显示，
+     *             辅助应用获取无障碍节点信息时会返回CustomBuilder中的节点信息。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14138,9 +14133,15 @@ export declare interface CommonMethod {
      */
    default accessibilityVirtualNode(builder: CustomBuilder | undefined): this;
     /**
-     * Sets accessibilityChecked
+     * 无障碍节点是否选中的状态维护，用于支持多选，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
      *
-     * @param { boolean | undefined } isCheck - set accessibility checked status
+     * @param { boolean | undefined } isCheck - 用于表示组件是否被选中。<br/>支持的值为：<br/>true：当前组件被选中。<br/>false：当前组件未被选中。<br/>
+     *             undefined：由组件自行确定选中状态。<br/>默认值：undefined
+     *         **说明：**<br/>1. 使用该接口设置true或false后，会默认修改该组件的checkable属性为true。
+     *         2. accessibilityChecked属性代表组件是多选模式，而accessibilitySelected属性代表组件是单选模式。
+     *     组件不能同时存在两种选择模式，会造成无障碍状态冲突，导致屏幕朗读等无障碍辅助应用无法正确识别选中状态。如使用当前接口设置组件为多选模式（设置为true、false），
+     *     则需要保证未使用accessibilitySelected函数设置属性为true或者false，如果已设置，需使用accessibilitySelected函数设置accessibilitySelected属性为undefined
+     *     模式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14148,9 +14149,15 @@ export declare interface CommonMethod {
      */
     default accessibilityChecked(isCheck: boolean | undefined): this;
     /**
-     * Sets accessibilitySelected
+     * 无障碍节点是否选中的状态维护，用于支持单选，表示组件是否被选中。此接口只影响屏幕朗读场景下的组件状态播报信息。
      *
-     * @param { boolean | undefined } isSelect - set accessibility selected status
+     * @param { boolean | undefined } isSelect - 用于表示组件是否被选中。<br/>支持的值为：<br/>true：当前组件被选中。<br/>false：当前组件未被选中。<br/>
+     *             undefined：由组件自行确定选中状态。<br/>默认值：undefined
+     *         **说明：**
+     *         1. accessibilityChecked属性代表组件是多选模式，而accessibilitySelected属性代表组件是单选模式。
+     *     组件不能同时存在两种选择模式，会造成无障碍状态冲突，导致屏幕朗读等无障碍辅助应用无法正确识别选中状态。
+     *         如使用当前接口设置组件为单选模式（true、false），则需要保证未使用accessibilityChecked函数设置属性为true或者false；
+     *         如果已设置，需使用accessibilityChecked函数设置accessibilityChecked属性为undefined模式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14327,9 +14334,10 @@ export declare interface CommonMethod {
      */
     default onSizeChange(event: SizeChangeCallback | undefined): this;
     /**
-     * Accessibility focus draw level, and the default value is FocusDrawLevel.SELF.
+     * 设置无障碍焦点绿框的绘制层级。
      *
-     * @param { FocusDrawLevel | undefined } drawLevel - indicates accessibility focus draw level.
+     * @param { FocusDrawLevel | undefined } drawLevel - 无障碍焦点绿框的绘制层级，用于控制绿框的绘制位置。默认情况下在聚焦节点层级绘制（即绘制聚焦节点本身）。
+     *             可选值及含义参见FocusDrawLevel枚举，包括在聚焦节点层级绘制和在Z序控制顶层绘制两种模式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14398,31 +14406,35 @@ export declare interface CommonMethod {
      */
     default onNeedSoftkeyboard(onNeedSoftkeyboardCallback: OnNeedSoftkeyboardCallback | undefined): this;
     /**
-     * Sets the state anouncement text of the component under accessibility.
+     * 设置组件的状态播报文本，用于屏幕朗读场景下清晰说明组件当前的实时状态。屏幕朗读时会优先播报该状态文本。
      *
-     * @param { string | Resource | undefined } description the state anouncement text of the component under accessibility.
-     *     if incoming is undefined, it will be processed as empty string.
-     * @returns { this } return component instance who call the method.
+     * @param { string | Resource | undefined } description - 需要播报组件当前状态的语音播报文本。<br/>设置文本超过1000字符时，截取前1000字符进行播报。<br/>
+     *             undefined：播报文本默认为空。
+     * @returns { this } - 返回当前对象。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default accessibilityStateDescription(description: string | Resource | undefined): this;
     /**
-     * Sets AccessibilityActionOptions that can affect operation under accessibility.
+     * 设置组件无障碍操作的可选参数，用于限制或修改屏幕朗读等辅助应用发起的操作行为。
      *
-     * @param { AccessibilityActionOptions | undefined } option - set accessibility specific operation options.
-     * @returns { this } return component instance who call the method.
+     * @param { AccessibilityActionOptions | undefined } option - 无障碍操作的参数，用于限制或者修改无障碍操作下的滑动行为。<br/>
+     *             AccessibilityActionOptions中的scrollStep用于设置无障碍操作下的滑动步数。
+     *         取值为undefined时scrollStep按1处理。
+     * @returns { this } - 返回当前对象。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default accessibilityActionOptions(option: AccessibilityActionOptions | undefined): this;
     /**
-     * Sets AccessibilityCustomActions that can be processed in custom action processing under accessibility.
+     * 设置组件的自定义无障碍操作，支持开发者设置一个自定义actions的数组，用于给组件按操作名进行自定义操作的回调绑定。
      *
-     * @param { Array<AccessibilityCustomAction> | undefined } actions - set accessibility custom action.
-     * @returns { this } return component instance who call method.
+     * @param { Array<AccessibilityCustomAction> | undefined } actions - 自定义无障碍操作数组，每个操作包含操作名称和回调，用于给组件按操作名进行自定义操作的回调绑定。
+     *             <br/>**说明：**<br/>数组长度最大支持16个，超出部分将不生效。
+     *         取值为undefined时，不设置自定义操作。
+     * @returns { this } - 返回当前对象。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 static
@@ -14458,14 +14470,13 @@ export declare interface CommonMethod {
      */
     default inspectorLabel(label: string | undefined): this;
     /**
-     * Sets the next accessibility focus ID for the component, with optional detailed parameters.
-     * The detailed parameters can provide additional behavior for the accessibility focus transition.
+     * 指定屏幕朗读扫动走焦过程中组件的下一个焦点，并支持配置详细参数。
+     * 通过AccessibilityNextFocusParams参数，可以配置是否在无障碍下一个焦点处理过程中查找后代节点中的焦点。
      *
-     * @param { string } nextId - set component next accessibility focus id.
-     * @param { AccessibilityNextFocusParams | undefined } nextFocusParams - the detailed parameters for
-     *     accessibility next focus processing.
-     *     Undefined indicates reverting to the default of the detailed parameters.
-     * @returns { this } return component instance who call the method.
+     * @param { string } nextId - 下一个被指定聚焦组件的唯一标识id。若唯一标识id无对应组件，则设置的accessibilityNextFocusId不存在，设置无效。
+     * @param { AccessibilityNextFocusParams | undefined } nextFocusParams - 无障碍下一个焦点处理的详细参数，用于配置是否在后代节点中查找可聚焦节点。
+     *     <br>取值为undefined时，不配置下一个焦点处理的详细参数，不在后代节点中查找焦点。
+     * @returns { this } - 返回当前对象。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 static
@@ -16426,9 +16437,7 @@ export type Callback<T, V = void> = (data: T) => V;
  */
 export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 /**
- * Defines the callback type used in accessibility hover events.
- * The value of isHover indicates whether the touch is hovering over the component.
- * The value of event contains information about AccessibilityHoverEvent.
+ * 提供开启无障碍模式后的无障碍悬浮回调事件类型。
  *
  * @param { boolean } isHover
  * @param { AccessibilityHoverEvent } event
@@ -16439,9 +16448,10 @@ export type HoverCallback = (isHover: boolean, event: HoverEvent) => void;
 export type AccessibilityCallback = (isHover: boolean, event: AccessibilityHoverEvent) => void;
 
 /**
- * Defines the callback type used in accessibility hover transparent event.
+ * 提供开启朗读类辅助应用后未能被无障碍悬浮响应的触摸事件回调类型。
  *
- * @param { TouchEvent } event - The value of event contains information about original accessibility hover event.
+ * @param { TouchEvent } event - 原始Touch事件对象，用于获取无法被无障碍悬浮识别为可聚焦组件的触摸事件的详细信息，包括触摸点坐标、触摸类型等属性。
+ *             <br>**说明：** TouchEvent对象的触摸事件类型TouchType为四种无障碍悬浮事件类型中的一种，分别为HOVER_ENTER、HOVER_MOVE、HOVER_EXIT和HOVER_CANCEL。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

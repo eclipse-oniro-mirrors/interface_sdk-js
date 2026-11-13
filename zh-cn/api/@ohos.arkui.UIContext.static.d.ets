@@ -1328,13 +1328,7 @@ export interface OrderOverlayOptions {
 export declare type NodeIdentity = string | int;
 
 /**
- * An enumeration type that identifies the current node's rendering state. The UI components used in
- * the application are automatically managed by the system and controlled for participation in graphical
- * rendering by either mounting them onto the render tree or removing them from it. Only nodes that
- * participate in graphical rendering have the potential to be displayed. However, participating in
- * rendering does not equal to the node's visibility, as there may be many occlusion scenarios in the
- * actual implementation of the application. Nevertheless, if a node does not participate in rendering,
- * it will definitely not be visible.
+ * 节点的渲染状态。
  *
  * @enum { number } NodeRenderState
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1826,10 +1820,10 @@ export declare class UIObserver {
   onDensityUpdate(callback: Callback<observer.DensityInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听屏幕像素密度的变化。
    *
-   * @param { Callback<observer.DensityInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type will be removed.
+   * @param { Callback<observer.DensityInfo> } [callback] - 需要被注销的回调函数。若不指定具体的回调函数，则注销该
+   *         [UIContext]{@link @ohos.arkui.UIContext}下所有屏幕像素密度变化事件监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1847,10 +1841,9 @@ export declare class UIObserver {
   onWillDraw(callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧绘制指令下发情况。
    *
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。不传参数时，取消所有绘制指令下发事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1868,10 +1861,9 @@ export declare class UIObserver {
   onDidLayout(callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧布局完成情况。
    *
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。不传参数时，取消所有布局完成的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4263,9 +4255,9 @@ export declare class UIContext {
   recycleInvisibleImageMemory(enabled: boolean): void;
 
   /**
-   * Run custom functions inside the UIContext scope.
+   * 在当前UIContext对应的UI实例作用域内执行传入的回调函数。
    *
-   * @param { function } callback - The function called through UIContext.
+   * @param { function } callback - 需要在当前UIContext对应的UI实例作用域内执行的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4312,11 +4304,12 @@ export declare class UIContext {
   getPixelRoundMode(): PixelRoundMode;
 
   /**
-   * Dispach keyboard event to the frameNode with inspector key.
+   * 按键事件应分发给指定的组件。为了确保行为的可预测性，目标组件必须位于分发组件的子树中。
    *
-   * @param { int | string } node - The uniqueId or inspector key of the target FrameNode.
-   * @param { KeyEvent } event - The keyboard event.
-   * @returns { boolean } Returns whether the key event is consumed.
+   * @param { int | string } node - 组件的id或者节点UniqueID。
+   * @param { KeyEvent } event - KeyEvent对象。
+   * @returns { boolean } - 按键事件是否成功分发给指定的组件。
+   *     true表示分发成功，false表示分发失败。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4441,11 +4434,14 @@ export declare class UIContext {
   getNavigationInfoByUniqueId(id: int): observer.NavigationInfo | undefined;
 
   /**
-   * Dynamic dimming.
+   * 通过该方法设置组件的压暗程度。
    *
-   * @param { string } id - The id of FrameNode.
-   * @param { double } value - Compared to the original level of dimming.value range [0,1],
-   *     set values less than 0 to 0 and values greater than 1 to 1.
+   * > **说明：**
+   * >
+   * > 设置该属性后设置其他效果类属性会导致效果冲突。
+   *
+   * @param { string } id - 组件id。
+   * @param { double } value - 组件压暗程度取值范围[0,1], 由0到1逐渐变亮。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -4684,9 +4680,9 @@ export declare class UIContext {
   closeBindSheet(bindSheetContent: ComponentContentBase): Promise<void>;
 
   /**
-   * Post a frame callback to run on the next frame.
+   * 注册一个回调，仅在下一帧渲染时调用。
    *
-   * @param { FrameCallback } frameCallback - The frame callback to run on the next frame.
+   * @param { FrameCallback } frameCallback - 下一帧需要执行的回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4694,10 +4690,10 @@ export declare class UIContext {
   postFrameCallback(frameCallback: FrameCallback): void;
 
   /**
-   * Post a frame callback to run on the next frame after the specified delay.
+   * 注册一个回调，在延迟一段时间后的下一帧进行渲染时执行。
    *
-   * @param { FrameCallback } frameCallback - The frame callback to run on the next frame.
-   * @param { long } delayTime - The delay time in milliseconds,
+   * @param { FrameCallback } frameCallback - 下一帧需要执行的回调。
+   * @param { long } delayTime - 延迟的时间，以毫秒为单位。传入null、undefined或小于0的值，会按0处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4728,9 +4724,10 @@ export declare class UIContext {
   clearResourceCache(): void;
 
   /**
-   * Checks whether current font scale follows the system.
+   * 获取当前UI上下文是否跟随系统字体倍率。
    *
-   * @returns { boolean } Returns true if current font scale follows the system; returns false otherwise.
+   * @returns { boolean } - 当前UI上下文是否跟随系统字体倍率。
+   *     true表示UI上下文跟随系统倍率，false表示UI上下文不跟随系统倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4805,10 +4802,9 @@ export declare class UIContext {
   enableSwipeBack(enabled: boolean | undefined): void;
 
   /**
-   * Sets the component freezing flag based on the component id to prevent the
-   * UI component from marking and updating dirty areas.
-   * @param { string } id - Id of the frame node.
-   * @param { boolean } isFrozen  - whether the component is frozen.
+   * 通过id设置组件冻结状态，防止组件被标记为脏从而触发布局更新。
+   * @param { string } id - 组件的id。
+   * @param { boolean } isFrozen - 是否设置冻结。<br/>true表示设置冻结，false表示设置不冻结。<br/>默认值为false。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -4862,7 +4858,7 @@ export declare class UIContext {
   static createUIContextWithoutWindow(context: common.UIAbilityContext | common.ExtensionContext) : UIContext | undefined;
 
   /**
-   * Destroy the UI instance singleton without window.
+   * 销毁[createUIContextWithoutWindow]{@link UIContext#createUIContextWithoutWindow}创建的UI实例。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
