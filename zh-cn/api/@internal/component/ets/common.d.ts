@@ -30666,10 +30666,77 @@ declare interface SmartGestureShortcutOptions {
    * 
    * 当enabled为true时，默认值为true；当enabled为false时，默认值为false。
    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @atomicservice
+    * @since 26.0.0 dynamic
+    */
+   selectable?: boolean;
+}
+
+/**
+ * 定义DatePickerComponent与UIPickerComponent共用的文本样式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface PickerComponentTextStyle {
+  /**
+   * 字体颜色。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 26.1.0 dynamic
    */
-  selectable?: boolean;
+  color?: ResourceColor;
+
+  /**
+   * 文本样式。仅支持size与weight。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+
+  /**
+   * 文本最小字号，与maxFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。
+   * 详见TextAttribute的minFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minFontSize?: number | ResourceStr;
+
+  /**
+   * 文本最大字号，与minFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。详见TextAttribute的maxFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxFontSize?: number | ResourceStr;
+
+  /**
+   * 设置文本超长时的显示方式。设置为MARQUEE时不生效。详见TextAttribute的textOverflow。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflow?: TextOverflow;
 }
