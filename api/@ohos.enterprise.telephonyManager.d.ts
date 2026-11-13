@@ -174,8 +174,8 @@ declare namespace telephonyManager {
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
    * @param { Array<string> } numbers - Call number list. Currently, only full number matching is supported. In versions
-   *     earlier than API 26.1.0, the total length of the array cannot exceed 1000. For example, if there are 100 numbers in
-   *     the allowed list, a maximum of 900 numbers can be added through this API. The total length of the array in API
+   *     earlier than API 26.1.0, the total length of the array cannot exceed 10000. For example, if there are 1000 numbers in
+   *     the allowed list, a maximum of 9000 numbers can be added through this API. The total length of the array in API
    *     26.1.0 and later versions cannot exceed 10000. For example, if there are 1000 numbers in the allowed list, a
    *     maximum of 9000 numbers can be added through this API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -210,7 +210,7 @@ declare namespace telephonyManager {
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
    * @param { Array<string> } numbers - List of call numbers to remove. The total length of the array must not exceed 1,
-   *     000.
+   *     0000.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -291,8 +291,8 @@ declare namespace telephonyManager {
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
    * @param { Array<string> } numbers - Call number list. Currently, only full number matching is supported. In versions
-   *     earlier than API 26.1.0, the total array length cannot exceed 1000. For example, if 100 numbers exist in the
-   *     allowed list, a maximum of 900 numbers can be added through this API. For API 26.1.0 and later versions, the total
+   *     earlier than API 26.1.0, the total array length cannot exceed 10000. For example, if 1000 numbers exist in the
+   *     allowed list, a maximum of 9000 numbers can be added through this API. For API 26.1.0 and later versions, the total
    *     array length cannot exceed 10000. For example, if there are 1000 numbers in the allowed list array, a maximum of
    *     9000 numbers can be added through this API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -327,7 +327,7 @@ declare namespace telephonyManager {
    * @param { adminManager.Policy } policy - Policy for trustlist or blocklist. **BLOCK_LIST** indicates a blocklist,
    *     and **TRUST_LIST** indicates a trustlist.
    * @param { Array<string> } numbers - List of call numbers to remove. The total length of the array must not exceed 1,
-   *     000.
+   *     0000.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.

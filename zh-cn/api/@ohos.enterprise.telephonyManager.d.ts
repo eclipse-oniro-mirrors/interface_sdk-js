@@ -146,7 +146,7 @@ declare namespace telephonyManager {
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前数组总长度不能超过1000，例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个；API 26.1.0及以后数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
+   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个；API 26.1.0及以后数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -174,7 +174,7 @@ declare namespace telephonyManager {
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 待移除的通话号码数组。数组总长度不能超过1000。
+   * @param { Array<string> } numbers - 待移除的通话号码数组。数组总长度不能超过10000。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
@@ -240,7 +240,7 @@ declare namespace telephonyManager {
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前，数组总长度不能超过1000，例如，若当前允许名单数组中已有100个号码，则最多支持通过该接口再添加900个；API 26.1.0及以后，数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
+   * @param { Array<string> } numbers - 通话号码列表，当前仅支持全号码匹配。API 26.1.0之前，数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个；API 26.1.0及以后，数组总长度不能超过10000，例如，若当前允许名单数组中已有1000个号码，则最多支持通过该接口再添加9000个。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200010 - A conflict policy has been configured.
@@ -266,7 +266,7 @@ declare namespace telephonyManager {
    * @permission ohos.permission.ENTERPRISE_MANAGE_TELEPHONY
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。
    * @param { adminManager.Policy } policy - 允许或禁用名单策略。BLOCK_LIST为禁用名单，TRUST_LIST为允许名单。
-   * @param { Array<string> } numbers - 待移除的通话号码数组。数组总长度不能超过1000。
+   * @param { Array<string> } numbers - 待移除的通话号码数组。数组总长度不能超过10000。
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
