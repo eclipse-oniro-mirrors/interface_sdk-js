@@ -1146,7 +1146,7 @@ export declare enum BarState {
 }
 
 /**
- * Sliding effect
+ * 定义滚动容器的滑动效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1155,8 +1155,7 @@ export declare enum BarState {
  */
 export declare enum EdgeEffect {
   /**
-   * Elastic physical action, sliding to the edge can continue to slide for a distance based on the initial speed or
-   * touch event, and spring back when released.
+   * 弹性物理动效，滑动到边缘后可以根据初始速度或通过触摸事件继续滑动一段距离，松手后回弹。<br />API version 22及之前版本，拖动滚动条，滚动组件的弹性物理动效不生效。<br />从API version 23开始，通过手指拖动滚动条，滚动组件的弹性物理动效可以生效。通过鼠标拖动滚动条，滚动组件的弹性物理动效不能生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1174,7 +1173,7 @@ export declare enum EdgeEffect {
   Fade = 1,
 
   /**
-   * Sliding to the edge has no effect.
+   * 滑动到边缘后无效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

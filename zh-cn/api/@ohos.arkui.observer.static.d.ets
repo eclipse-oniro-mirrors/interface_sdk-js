@@ -888,11 +888,11 @@ declare namespace uiObserver {
   export function offNavDestinationUpdate(callback?: Callback<NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { ObserverOptions } options - The options object.
-   * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event start or
-   *     stop.
+   * @param { ObserverOptions } options - 指定监听的滚动组件的id。
+   * @param { Callback<ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -900,11 +900,11 @@ declare namespace uiObserver {
   export function onScrollEvent(options: ObserverOptions, callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { ObserverOptions } options - The options object.
-   * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks 
-   *     for the given event type and scroll ID will be removed.
+   * @param { ObserverOptions } options - 指定监听的滚动组件的id。
+   * @param { Callback<ScrollEventInfo> } [callback] - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -912,10 +912,10 @@ declare namespace uiObserver {
   export function offScrollEvent(options: ObserverOptions, callback?: Callback<ScrollEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event starts or stops.
+   * 监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { Callback<ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -923,10 +923,10 @@ declare namespace uiObserver {
   export function onScrollEvent(callback: Callback<ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all callbacks
-   *     for the given event type will be removed.
+   * @param { Callback<ScrollEventInfo> } [callback] - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

@@ -195,7 +195,7 @@ export declare class OperateCheck {
    */
   public accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of the checkbox/switch/radio.
+   * 右侧Switch/CheckBox/Radio的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
