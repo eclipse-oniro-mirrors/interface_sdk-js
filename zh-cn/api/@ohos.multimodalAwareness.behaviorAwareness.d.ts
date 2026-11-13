@@ -1399,7 +1399,7 @@ declare namespace behaviorAwareness {
    * @param { SubscribeInfo } info - 订阅选项。
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - 用于返回感知事件的回调。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1423,7 +1423,7 @@ declare namespace behaviorAwareness {
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 用于返回感知事件的回调。用于清除所有订阅的感知事件。
    *     <br>默认值：不传则取消当前包名下的所有订阅。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1444,7 +1444,7 @@ declare namespace behaviorAwareness {
    *
    * @param { FeedbackData } feedback - 反馈数据。
    * @returns { Promise<void> } Promise对象，无返回结果。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
