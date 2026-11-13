@@ -19674,7 +19674,7 @@ declare namespace photoAccessHelper {
      * @param { string } outVideoParentFolder - Video output parent folder.
      * @returns { string[] } Returns the path to pictures and videos
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. SingleFileMovingPhotoUri、outImageParentFolder、outVideoParentFolder are empty or can not open.
+     *     <br>1. SingleFileMovingPhotoUri, outImageParentFolder, outVideoParentFolder are empty or can not open.
      *     <br>2. When saving generated files, a naming conflict occurs after more than 10 attempts.
      * @throws { BusinessError } 23800109 - Incorrect file format.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -19694,7 +19694,7 @@ declare namespace photoAccessHelper {
      * @param { string } outParentFolder - Output single file moving photo parent folder.
      * @returns { string } Returns the single file moving photo path.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. ImageUri、videoUri and outParentFolder are empty or can not open.
+     *     <br>1. imageUri, videoUri and outParentFolder are empty or can not open.
      *     <br>2. The image and video formats do not satisfy jpeg/jpg/heic/heif+mp4.
      *     <br>3. When saving generated files, a naming conflict occurs after more than 10 attempts.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
