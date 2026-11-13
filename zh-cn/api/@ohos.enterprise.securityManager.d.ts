@@ -1593,14 +1593,15 @@ declare namespace securityManager {
   }
 
   /**
-   * 获取企业重置策略。该接口同步返回结果。
+   * 获取企业复位策略。同步返回策略。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @returns { EnterpriseResetPolicy } 企业重置策略。
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -1608,16 +1609,20 @@ declare namespace securityManager {
   function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
 
   /**
-   * 设置企业重置策略。
+   * 设置企业复位策略。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
    * @param { EnterpriseResetPolicy } policy - 要设置的企业重置策略。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 801 - The device does not support this API.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
