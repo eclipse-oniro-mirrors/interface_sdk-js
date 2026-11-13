@@ -1614,23 +1614,46 @@ declare namespace certificateManager {
    * application. This API uses a promise to return the result.
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
-   * @param { CertAlgorithm } [certAlg] - Indicates the certificate algorithm type of the
-   *     system root certificate store. [since 26.1.0]
-   *     <br>Default value: Default behavior: Obtain the system certificate list of Chinese cryptographic algorithms and
-   *     international algorithms.
    * @returns { Promise<CMResult> } Promise used to return the operation result, that is, **certList** in the
-   *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult} object.
+   *     [CMResult]{@link ./@ohos.security.certManager:certificateManager.CMResult} object.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
-   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes:
+   *     <br>1. IPC communication failed;
+   *     <br>2. Memory operation error;
+   *     <br>3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
-  function getSystemTrustedCertificateList(certAlg?: CertAlgorithm): Promise<CMResult>;
+  function getSystemTrustedCertificateList(): Promise<CMResult>;
+
+  /**
+   * Obtains the list of CA certificates trusted by the system. This API is called only by the certificate management
+   * application. This API uses a promise to return the result.
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
+   * @param { CertAlgorithm } certAlg - Indicates the certificate algorithm type of the
+   *     system root certificate store.
+   * @returns { Promise<CMResult> } Promise used to return the operation result, that is, **certList** in the
+   *     [CMResult]{@link ./@ohos.security.certManager:certificateManager.CMResult} object.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     <br>The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes:
+   *     <br>1. IPC communication failed;
+   *     <br>2. Memory operation error;
+   *     <br>3. File operation error. Please try again.
+   * @throws { BusinessError } 17500011 - The input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function getSystemTrustedCertificateList(certAlg: CertAlgorithm): Promise<CMResult>;
 
   /**
    * Obtains details about a CA certificate trusted by the system. This API is called only by the certificate management
