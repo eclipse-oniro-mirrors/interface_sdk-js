@@ -793,7 +793,7 @@ declare namespace uiMaterial {
 }
 
 /**
- * export uiMaterial namespace.
+ * 本模块提供系统材质的接口定义。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi [since 23 - 24]

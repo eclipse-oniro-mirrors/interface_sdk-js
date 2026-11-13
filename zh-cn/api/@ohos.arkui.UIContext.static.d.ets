@@ -4126,10 +4126,11 @@ export declare class UIContext {
   getOverlayManagerOptions(): OverlayManagerOptions;
 
   /**
-   * Create an animator object for custom animation.
+   * 创建animator动画结果对象（AnimatorResult）。与[createAnimator]{@link @ohos.arkui.UIContext:UIContext#createAnimator}相比，新增对
+   * [SimpleAnimatorOptions]{@link @ohos.animator:SimpleAnimatorOptions}类型入参的支持。
    *
-   * @param { AnimatorOptions | SimpleAnimatorOptions } options - Options.
-   * @returns { AnimatorResult }
+   * @param { AnimatorOptions | SimpleAnimatorOptions } options - 定义动画选项。
+   * @returns { AnimatorResult } Animator结果接口。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -4141,10 +4142,33 @@ export declare class UIContext {
   createAnimator(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
 
   /**
-   * Defining animation function
+   * 提供animateTo接口，用于为闭包代码中的状态变化添加过渡动画效果。
    *
-   * @param { AnimateParam } value - parameters for animation.
-   * @param { function } event - the closure base on which, the system will create animation automatically
+   * > **说明：**
+   * >
+   * > - 不推荐在aboutToAppear、aboutToDisappear中调用动画。
+   * >
+   * > - 如果在[aboutToAppear]{@link BaseCustomComponent#aboutToAppear}中调用动
+   * > 画，自定义组件内的build还未执行，内部组件还未创建，动画时机过早，动画属性没有初值无法对组件产生动画。
+   * >
+   * > - 执行[aboutToDisappear]{@link BaseCustomComponent#aboutToDisappear}
+   * > 时，组件即将销毁，不能在aboutToDisappear里面做动画。
+   * >
+   * > - 在组件出现和消失时，可以通过[组件内转场]{@link CommonMethod}添加动画效果。
+   * >
+   * > - 组件内转场不支持的属性，可以参考[显式动画]{@link CommonMethod}中的
+   * > [示例2]{@link CommonMethod}，使用animateTo实现动画执行结束后组件消失的效
+   * > 果。
+   * >
+   * > - 某些场景下，在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中使用animateTo动画，会产生异常效果，
+   * > 具体可参考：[在状态管理V2中使用animateTo动画效果异常](docroot://ui/state-management/arkts-new-local.md#在状态管理v2中使用animateto动画效果异常)。
+   * >
+   * > - UIAbility从前台切换至后台时会立即结束仍在步进中的有限循环动画，从而触发动画播放完成回调[onFinish]{@link AnimateParam}。
+   * >
+   * > - 在设置的开发者选项中关闭过渡动画，动画会当帧结束，onFinish动画播放完成回调会立即执行，请避免在回调中加入时序相关的功能逻辑。
+   *
+   * @param { AnimateParam } value - 设置动画效果相关参数。
+   * @param { function } event - 指定显示动效的闭包函数，在闭包函数中导致的状态变化系统会自动插入过渡动画。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4327,10 +4351,10 @@ export declare class UIContext {
   getMeasureUtils(): MeasureUtils;
 
   /**
-   * Defining keyframe animation function.
+   * 产生关键帧动画。该接口的使用说明请参考[keyframeAnimateTo]{@link CommonMethod}。
    *
-   * @param { KeyframeAnimateParam } param - overall animation parameters
-   * @param { Array<KeyframeState> } keyframes - all keyframe states
+   * @param { KeyframeAnimateParam } param - 关键帧动画的整体动画参数。
+   * @param { Array<KeyframeState> } keyframes - 所有的关键帧状态的列表。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

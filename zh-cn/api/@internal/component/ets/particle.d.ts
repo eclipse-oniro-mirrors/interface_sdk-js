@@ -422,15 +422,15 @@ interface EmitterProperty {
   size?: SizeT<number>;
 
   /**
-    * 环形发射器参数。需要对应index的发射器形状为环形才生效，且对于环形发射器，position和size不生效。
-    *
-    * @syscap SystemCapability.ArkUI.ArkUI.Full
-    * @stagemodelonly
-    * @crossplatform
-    * @atomicservice
-    * @since 20 dynamic
-    */
-   annulusRegion?: ParticleAnnulusRegion;
+   * 环形发射器参数。需要对应index的发射器形状为环形才生效，且对于环形发射器，position和size不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 20 dynamic
+   */
+  annulusRegion?: ParticleAnnulusRegion;
 }
 
 /**
@@ -1152,7 +1152,7 @@ interface Particles<
 }
 
 /**
- * Defines the particle Interface.
+ * 定义粒子接口。
  *
  * @interface ParticleInterface
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1164,19 +1164,17 @@ interface Particles<
  */
 interface ParticleInterface {
   /**
-   * create a particle array.
+   * 创建粒子数组。
    *
-   * Anonymous Object Rectification.
-   * @param { object } value - Particle value
-   *     particles - list of ParticleOptions. [since 10 - 17]
+   * @param { object } value - 粒子动画的集合。 [since 10 - 17]
    * @param { Particles<PARTICLE, COLOR_UPDATER, OPACITY_UPDATER, SCALE_UPDATER, ACC_SPEED_UPDATER, ACC_ANGLE_UPDATER,
-  *     SPIN_UPDATER> } particles - Array of particles. [since 18]
-  * @returns { ParticleAttribute } Returns the particle attribute.
-  * @syscap SystemCapability.ArkUI.ArkUI.Full
-  * @stagemodelonly
-  * @crossplatform 
-  * @atomicservice [since 11]
-  * @since 10 dynamic
+   *     SPIN_UPDATER> } particles - 粒子动画的集合，详见Particles属性说明。 [since 18]
+   * @returns { ParticleAttribute } 返回粒子属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform 
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   <
     PARTICLE extends ParticleType,
@@ -1276,15 +1274,15 @@ declare enum ParticleEmitterShape {
   ELLIPSE = 'ellipse',
 
   /**
-    * 粒子发射器为环形。使用此形状时必须配置annulusRegion参数，且position和size参数不生效。
-    *
-    * @syscap SystemCapability.ArkUI.ArkUI.Full
-    * @stagemodelonly
-    * @crossplatform
-    * @atomicservice
-    * @since 20 dynamic
-    */
-   ANNULUS = 'annulus'
+   * 粒子发射器为环形。使用此形状时必须配置annulusRegion参数，且position和size参数不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 20 dynamic
+   */
+  ANNULUS = 'annulus'
 }
 
 /**

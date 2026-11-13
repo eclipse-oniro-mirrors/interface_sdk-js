@@ -731,7 +731,7 @@ export declare enum MouseAction {
 }
 
 /**
- * Animation status.
+ * 用于动画播放状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -740,7 +740,7 @@ export declare enum MouseAction {
  */
 export declare enum AnimationStatus {
   /**
-   * Initial state of the animation.
+   * 动画初始状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -749,7 +749,7 @@ export declare enum AnimationStatus {
   Initial = 0,
 
   /**
-   * The animation is playing.
+   * 动画处于播放状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -758,7 +758,7 @@ export declare enum AnimationStatus {
   Running = 1,
 
   /**
-   * The animation is paused.
+   * 动画处于暂停状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -767,7 +767,7 @@ export declare enum AnimationStatus {
   Paused = 2,
 
   /**
-   * The animation is stopped.
+   * 动画处于停止状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

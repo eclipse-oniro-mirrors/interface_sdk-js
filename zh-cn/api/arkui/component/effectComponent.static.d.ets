@@ -87,7 +87,9 @@ export declare interface EffectComponentOptions {
 }
 
 /**
- * Define the EffectComponentAttribute.
+ * 支持通用属性，目前仅支持对backgroundBlurStyle属性做绘制合并优化。
+ *
+ * 不支持通用事件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -97,11 +99,11 @@ export declare interface EffectComponentOptions {
  */
 export declare interface EffectComponentAttribute extends CommonMethod {
   /**
-   * Use snapshot when Effect Component have no visual effect.
+   * 在Effect Component没有视觉效果时使用快照。
    *
-   * @param { boolean | undefined } enable - <br>true indicates using the snapshot method,
-   *     false indicates not using the snapshot method.
-   *     undefined means the default value false.
+   * @param { boolean | undefined } enable - <br>true表示使用快照方法，
+   *     false表示不使用快照方法。
+   *     undefined表示默认值false。
    * @returns { EffectComponentAttribute }
    * @throws { BusinessError } 202 - Permission verification failed. A nonsystem application calls a system API.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -111,7 +113,7 @@ export declare interface EffectComponentAttribute extends CommonMethod {
    */
   alwaysSnapshot(enable: boolean | undefined): this;
   /**
-   * Set the attribute modifier for EffectComponent.
+   * 设置属性修饰符。
    *
    * @param { AttributeModifier<EffectComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { EffectComponentAttribute }
@@ -123,10 +125,10 @@ export declare interface EffectComponentAttribute extends CommonMethod {
   default attributeModifier(modifier: AttributeModifier<EffectComponentAttribute>
       | AttributeModifier<CommonMethod> | undefined): this;
   /**
-   * Set EffectComponent options.
+   * 设置EffectComponent的选项。
    *
-   * @param { EffectComponentOptions } [options] - The options to create an EffectComponent.
-   * @returns { EffectComponentAttribute } Returns instance of  EffectComponentAttribute.
+   * @param { EffectComponentOptions } [options] - 创建EffectComponent的选项。
+   * @returns { EffectComponentAttribute } 返回EffectComponentAttribute实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @unpublished
@@ -137,10 +139,22 @@ export declare interface EffectComponentAttribute extends CommonMethod {
 }
 
 /**
- * Defines EffectComponent Component
+ * 特效合并容器组件，用于子节点特效绘制的合并，实现特效的绘制性能优化。
  *
- * @param { EffectComponentOptions } [options] - The options to create an EffectComponent.
- * @param { CustomBuilder } [content_] - Subcomponents of EffectComponent
+ * > **说明：**
+ * >
+ * > - 该组件从API Version 10开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 本模块为系统接口。
+ * >
+ * > - 本模块接口仅可在Stage模型下使用。
+ * >
+ * > - 目前该组件仅支持子组件背景模糊效果的绘制合并优化。
+ * >
+ * > - 在对子组件的背景模糊特效进行绘制合并时，需要将子组件的backgroundBlurStyle(BlurStyle)属性替换成useEffect(true)。
+ *
+ * @param { EffectComponentOptions } [options] - EffectComponent构造参数。
+ * @param { CustomBuilder } [content_] - EffectComponent的子组件。
  * @returns { EffectComponentAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -155,10 +169,10 @@ export declare function EffectComponent(
 ): EffectComponentAttribute;
 
 /**
- * Defines EffectComponent
+ * 特效合并容器组件，用于子节点特效绘制的合并，实现特效的绘制性能优化。
  *
- * @param { CustomBuilderT<EffectComponentAttribute> } style_ - EffectComponent attribute instance
- * @param { CustomBuilder } [content_] - container
+ * @param { CustomBuilderT<EffectComponentAttribute> } style_ - EffectComponent属性实例
+ * @param { CustomBuilder } [content_] - 容器内容
  * @returns { EffectComponentAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
