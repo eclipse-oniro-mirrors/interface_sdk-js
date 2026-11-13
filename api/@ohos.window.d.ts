@@ -5558,6 +5558,37 @@ declare namespace window {
   }
 
   /**
+   * Describes the window parameters during application show.
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WindowShowParams {
+    /**
+     * Whether the window automatically gains focus. If true, the window gains focus.
+     * If false, the window will not automatically gain focus.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    windowFocused?: boolean;
+
+    /**
+     * Whether the window automatically raise to top. If true, the window will be raised to top.
+     * If false, the window will not raise to top.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    raiseTop?: boolean;
+  }
+
+  /**
    * Configuration for window snapshot animation.
    *
    * @syscap SystemCapability.Window.SessionManager
