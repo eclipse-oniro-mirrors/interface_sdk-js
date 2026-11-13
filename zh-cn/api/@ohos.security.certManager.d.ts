@@ -39,7 +39,6 @@ declare namespace certificateManager {
    */
   export enum CMErrorCode {
     /**
-     * 表示应用程序无权限调用接口。
      *
      * @syscap SystemCapability.Security.CertificateManager
      * @since 11 dynamic
@@ -507,6 +506,16 @@ declare namespace certificateManager {
      * @since 26.0.0 dynamic&static
      */
     uriList?: Array<string>;
+
+    /**
+     * 证书库信息。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    certStoreInfo?: CertStoreInfo;
   }
 
   /**
@@ -1033,7 +1042,8 @@ declare namespace certificateManager {
    * @permission ohos.permission.ACCESS_CERT_MANAGER
    * @param { Uint8Array } handle - 表示操作句柄，需先调用init方法获得。
    *     <br>最大长度为8字节。
-   * @param { Uint8Array } [signature] - 表示用于验签操作的签名数据。签名操作时无需传入此参数。
+   * @param { Uint8Array } [signature] - 表示操作句柄，需先调用init方法获得。
+   *     <br>最大长度为8字节。
    * @returns { Promise<CMResult> } Promise对象。执行签名操作时，返回签名的结果，返回值为[CMResult]{@link certificateManager.CMResult}对象中的
    *     outData属性；执行验签操作时，无返回值。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -1564,6 +1574,8 @@ declare namespace certificateManager {
    * 获取系统信任的CA证书列表。该接口仅由证书管理应用调用。该接口使用Promise返回结果。
    *
    * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
+   * @param { CertAlgorithm } [certAlg] - 表示系统根证书库的证书算法类型。 [since 26.2.0]
+   *     <br>默认值：缺省行为：获取国密和国际算法的系统证书列表。
    * @returns { Promise<CMResult> } Promise用于返回操作结果，即
    *     [CMResult]{@link @ohos.security.certManager:certificateManager.CMResult}对象中的**certList**。
    * @throws { BusinessError } 201 - Permission verification failed.
@@ -1576,7 +1588,7 @@ declare namespace certificateManager {
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
-  function getSystemTrustedCertificateList(): Promise<CMResult>;
+  function getSystemTrustedCertificateList(certAlg?: CertAlgorithm): Promise<CMResult>;
 
   /**
    * 获取系统信任的CA证书详情，仅证书管理应用调用。使用Promise异步回调。
@@ -2017,14 +2029,44 @@ declare namespace certificateManager {
    * @since 26.0.0 dynamic&static
    */
   function importUkeyCertificate(keyUri: string, cert: Uint8Array, ukeyInfo: UkeyInfo): Promise<void>;
- 
+
+  /**
+   * 表示证书库信息。
+   *
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.2.0 dynamiconly
+   */
+  export interface CertStoreInfo {
+    /**
+     * 国际算法系统证书库的版本号。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    certStoreVersion: string;
+
+    /**
+     * 国密算法系统证书库的版本号。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.2.0 dynamiconly
+     */
+    smCertStoreVersion?: string;
+  }
+
   /**
    * 表示证书管理配置项。
    *
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   export interface ConfigItem {
     /**
@@ -2033,21 +2075,21 @@ declare namespace certificateManager {
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     name: string;
- 
+
     /**
      * 配置项值。
      *
      * @syscap SystemCapability.Security.CertificateManager
      * @systemapi
      * @stagemodelonly
-     * @since 26.1.0 dynamiconly
+     * @since 26.2.0 dynamiconly
      */
     value: string;
   }
- 
+
   /**
    * 查询证书管理系统配置信息。
    *
@@ -2066,7 +2108,7 @@ declare namespace certificateManager {
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
-   * @since 26.1.0 dynamiconly
+   * @since 26.2.0 dynamiconly
    */
   function getCertManagerConfig(configNames: Array<string>) : Promise<Array<ConfigItem>>;
 }
