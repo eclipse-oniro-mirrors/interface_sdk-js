@@ -1539,7 +1539,49 @@ declare interface TabsSidebarTitleBarOptions<T> {
   text?: ResourceStr;
 }
 
+/**
+ * Defines the centralized customization configuration for the sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+interface TabViewCustomization {
+  /**
+   * A map of TabContent index to sidebar visibility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  visibilityMap?: Map<number, TabVisibility>;
 
+  /**
+   * A map of TabContent index to sidebar section.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sectionMap?: Map<number, SidebarSection>;
+
+  /**
+   * A map of TabContent index to the display priority of tab items in the sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  orderMap?: Map<number, number>;
+}
 
 /**
  * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
@@ -2623,6 +2665,19 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.1.0 dynamic
    */
   sidebarTitleBar(value: Optional<TabsSidebarTitleBarOptions>): TabsAttribute;
+
+  /**
+   * Sets the centralized customization configuration for the sidebar tab bar.
+   *
+   * @param { Optional<TabViewCustomization> } value - The centralized customization configuration.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  tabViewCustomization(value: Optional<TabViewCustomization>): TabsAttribute;
 }
 
 /**
