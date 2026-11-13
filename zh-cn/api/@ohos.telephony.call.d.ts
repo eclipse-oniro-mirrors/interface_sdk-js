@@ -253,6 +253,24 @@ declare namespace call {
   function makeCallWithToken(phoneNumber: string, options?: MakeCallOptions): Promise<string>;
 
   /**
+   * 应用一键拨打电话。
+   *
+   * @permission ohos.permission.DIRECT_CALL
+   * @param { string } phoneNumber - 电话号码。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 8300001 - Invalid parameter value.
+   * @throws { BusinessError } 8300002 - Operation failed. Cannot connect to service.
+   * @throws { BusinessError } 8300003 - System internal error.
+   * @throws { BusinessError } 8300005 - Airplane mode is on.
+   * @throws { BusinessError } 8300006 - Network not in service.
+   * @syscap SystemCapability.Telephony.CallManager
+   * @stagemodelonly
+   * @since 26.0.1 dynamic&static
+   */
+  function makeDirectCall(phoneNumber: string): Promise<void>;
+
+  /**
    * 判断是否存在通话。使用callback异步回调。
    *
    * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示当前存在通话，false表示当前不存在通话。
