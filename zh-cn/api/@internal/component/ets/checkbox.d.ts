@@ -416,7 +416,7 @@ declare class CheckboxAttribute extends CommonMethod<CheckboxAttribute> {
 declare const Checkbox: CheckboxInterface;
 
 /**
- * Defines Checkbox Component instance.
+ * 定义Checkbox组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

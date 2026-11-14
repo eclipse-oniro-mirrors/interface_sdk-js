@@ -563,7 +563,7 @@ export declare struct ArcButton {
   @Param
   readonly options: ArcButtonOptions;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @since 23 staticonly
