@@ -488,6 +488,16 @@ export interface ApplicationInfo {
   readonly applicationReservedFlag?: bundleManager.ApplicationReservedFlag;
 
   /**
+   * Indicates the appUid of the application.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  readonly appUid?: int;
+
+  /**
    * Whether application data is retained upon uninstallation. **true** if retained, **false** otherwise. The default value is **false**.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
