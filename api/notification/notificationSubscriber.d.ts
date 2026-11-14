@@ -531,7 +531,9 @@ export interface BadgeEnabledChangedCallback {
  */
 export interface VoiceContent {
   /**
-   * Text voice broadcast content.
+   * Text content of the voice broadcast. In the Chinese mainland, it is intelligent broadcast content. 
+   * Since API version 26.1.0, voice broadcast of notifications is supported outside the Chinese mainland. 
+   * The fixed broadcast content contains only the application name and the notification body.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
