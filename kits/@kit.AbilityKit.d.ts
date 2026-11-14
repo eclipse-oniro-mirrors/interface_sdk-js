@@ -133,6 +133,7 @@ import pluginBundleManager from '@ohos.bundle.pluginBundleManager';
 import appMemoryOptimizer from '@ohos.app.ability.appMemoryOptimizer';
 import AppProcessStateObserver from '@ohos.app.ability.AppProcessStateObserver';
 import { ConfigurationStrategy } from '@ohos.app.ability.UIExtensionAbility';
+import launchServiceManager from '@ohos.app.ability.launchServiceManager';
 
 export {
   Ability, AbilityConstant, AbilityLifecycleCallback, AbilityStage, ActionExtensionAbility,
@@ -156,7 +157,7 @@ export {
   CompletionHandlerForAtomicService, CompletionHandlerForAbilityStartCallback, AbilityStartFailureCode, FailureCode, InteropAbilityLifecycleCallback,
   systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager, hyperSnapManager, cliManager, pluginBundleManager,
   functionManager, appMemoryOptimizer, CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap,
-  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl, AppProcessStateObserver
+  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl, AppProcessStateObserver, launchServiceManager
 };
 
 /*** if arkts static */
@@ -252,6 +253,7 @@ import errorManager from '@ohos.app.ability.errorManager';
 import appMemoryOptimizer from '@ohos.app.ability.appMemoryOptimizer';
 import AppProcessStateObserver from '@ohos.app.ability.AppProcessStateObserver';
 import { ConfigurationStrategy } from '@ohos.app.ability.UIExtensionAbility';
+import launchServiceManager from '@ohos.app.ability.launchServiceManager';
 
 export {
   appControl, bundleManager, bundleMonitor, bundleResourceManager, defaultAppManager, distributedBundleManager,
@@ -272,6 +274,6 @@ export {
   StartupTask, startupManager, systemConfiguration, PhotoEditorExtensionAbility, AgentExtensionAbility, 
   AgentUIExtensionAbility, agentConstant, agentManager, InsightIntentLink, InsightIntentPage, InsightIntentFunctionMethod, InsightIntentFunction, 
   InsightIntentEntry, LinkParamCategory, LinkIntentParamMapping, InsightIntentEntity, InsightIntentEntryExecutor, InsightIntentForm, hyperSnapManager, 
-  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager, AppProcessStateObserver, ConfigurationStrategy
+  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager, AppProcessStateObserver, ConfigurationStrategy, launchServiceManager
 };
 /*** endif */
