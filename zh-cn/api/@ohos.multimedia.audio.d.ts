@@ -1761,7 +1761,7 @@ declare namespace audio {
   }
 
   /**
-   * 枚举，音频流使用类型。
+   * 表示播放音频流类型的枚举。
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
@@ -10848,7 +10848,7 @@ declare namespace audio {
    */
   enum AudioLatencyType {
     /**
-     * 输入以获取所有音频处理单元（包括软件和硬件）的延迟。
+     * 计算包含软件和硬件在内的整体音频处理链路时延。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10857,7 +10857,7 @@ declare namespace audio {
     LATENCY_TYPE_ALL = 0,
 
     /**
-     * 输入以获取软件部分的延迟，包括软件中的音频效果。
+     * 计算软件侧时延，包含软件音效。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10866,7 +10866,7 @@ declare namespace audio {
     LATENCY_TYPE_SOFTWARE = 1,
 
     /**
-     * 输入以获取硬件部分的延迟，包括HAL、驱动程序和硬件中的音频效果。
+     * 计算硬件侧时延，包含HAL、驱动和硬件。
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @stagemodelonly
@@ -10876,7 +10876,7 @@ declare namespace audio {
   }
 
   /**
-   * 回调函数类型，用于音频渲染器的数据写入，回调函数结束后，音频服务会把data指向的数据放入队列里等待播放，因此请勿在回调外再次更改data指向的数据, 且务必保证往data填满待播放数据, 否则会导致音频服务播放杂音。
+   * 回调函数类型，用于音频渲染器的数据写入，回调函数结束后，音频服务会把data指向的数据放入队列里等待播放，因此请勿在回调外再次更改data指向的数据，且务必保证往data填满待播放数据，否则会导致音频服务播放杂音。
    *
    * @param { ArrayBuffer } data - 待写入缓冲区的数据。
    * @returns { AudioDataCallbackResult | void } 如果返回 void 或 AudioDataCallbackResult.VALID：表示数据有效，将播放音频数据；如果返回
@@ -13242,7 +13242,7 @@ declare namespace audio {
      * 取消监听标记到达事件。使用callback异步回调。
      *
      * @param { 'markReach' } type - 事件回调类型，支持的事件为'markReach'，当取消监听标记到达事件时，触发该事件。
-     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。
+     * @param { Callback<long> } callback - 回调函数，返回frame参数的值。 [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
      * @since 8 dynamic
@@ -15232,7 +15232,7 @@ declare namespace audio {
      *
      * @param { double } volume - 音量值范围为[0.0, 1.0]。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800101 - Parameter verification failed, form 0.0 to 1.0.
+     * @throws { BusinessError } 6800101 - Parameter verification failed, from 0.0 to 1.0.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @since 20 dynamic
      * @since 23 static
