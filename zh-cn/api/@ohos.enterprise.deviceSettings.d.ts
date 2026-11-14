@@ -1115,15 +1115,12 @@ declare namespace deviceSettings {
   function setValueForAccount(admin: Want, item: SettingsItem, accountId: number, value: string): void;
 
   /**
-   * 设置指定用户的设备设置策略，无需传入管理员Want。
-   *
-   * 调用方必须预先通过[enableAdmin]{@link @ohos.enterprise.adminManager:adminManager.enableAdmin}等接口激活为企业管理员，
-   * 本接口会自动使用调用方自身的管理员信息。仅支持跨用户设置的策略项（SCREEN_OFF_DC、SCREEN_OFF_AC、POWER_POLICY_DC、POWER_POLICY_AC）
-   * 可以通过本次重载设置。
+   * 设置指定用户的设备设置策略。该接口可以设置指定用户在设置应用中的某个参数，比如设置用户100的设备名称等。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
-   * @param { SettingsItem } item - 设备设置策略类型。仅支持 SCREEN_OFF_DC、SCREEN_OFF_AC、POWER_POLICY_DC、POWER_POLICY_AC。
-   * @param { number } accountId - 用户ID，取值范围：大于等于100。accountId小于100返回9200006错误码。
+   * @param { SettingsItem } item - 设备设置策略类型。
+   * @param { number } accountId - 用户ID，取值范围：大于等于0。<br/>accountId可以通过
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}等接口来获取。
    * @param { string } value - 策略类型值。<br/>当item为[SettingsItem.DEVICE_NAME]{@link deviceSettings.SettingsItem}时，value为设备名
    *     称的字符串。 字符串长度范围：大于等于1，小于等于100。只允许设置当前用户的设备名称，设置其他用户的设备名称返回9200012错误码。<br/>当item为
    *     [SettingsItem.FLOATING_NAVIGATION]{@link deviceSettings.SettingsItem}时，在Phone和Tablet设备中可正常调用，在其他设备中返回801错误码。只允许
@@ -1134,14 +1131,16 @@ declare namespace deviceSettings {
    *     设置开启或关闭）。<br/>- '1'：表示关闭三键导航。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200006 - 非法的账号ID（accountId小于100）。
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
-   * @throws { BusinessError } 9200020 - 不允许跨用户设置。
+   * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -1188,7 +1187,7 @@ declare namespace deviceSettings {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200006 - The specified user ID is invalid.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
