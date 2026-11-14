@@ -628,7 +628,6 @@ export type TabsCustomContentTransitionCallback = (from: int, to: int) => (TabCo
  *     取值限定为整数。
  * @returns { boolean }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
@@ -1229,7 +1228,8 @@ export declare interface TabsAttribute extends CommonMethod {
    * @returns { TabsAttribute } Returns the instance of the TabsAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setTabsOptions(options?: TabsOptions): this;
 }

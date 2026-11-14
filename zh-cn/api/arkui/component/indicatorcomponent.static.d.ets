@@ -168,7 +168,8 @@ export declare interface IndicatorComponentAttribute extends CommonMethod {
    * @returns { IndicatorComponentAttribute } 返回IndicatorComponentAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setIndicatorComponentOptions(controller?: IndicatorComponentController): this;
 }
@@ -194,9 +195,10 @@ export declare function IndicatorComponent(
  * @param { CustomBuilderT<IndicatorComponentAttribute> } style_ - indicatorComponent属性实例
  * @returns { IndicatorComponentAttribute }
   * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @since 26.0.0 staticonly
- */
+  * @stagemodelonly
+  * @since 26.0.1 staticonly
+  * @unpublished
+  */
 @Builder
 export declare function IndicatorComponent(
  style_: CustomBuilderT<IndicatorComponentAttribute>,

@@ -4644,10 +4644,10 @@ export declare class UIContext {
    * 如果缓存上限设置过高，存在内存开销过大的风险。
    * 建议根据实际需要进行配置。
    *
-   * @param { int } count - The cache limit of resource manager for HSP, must be non-negative integers.
+   * @param { int } count - The cache limit of resource manager for HSP, must be non negative integers.
    * @throws { BusinessError } 100101 - The parameter is less than 0.
-   * @throws { BusinessError } 100102 - The parameter value cannot be a floating-point number.
-   * @throws { BusinessError } 100103 - The function cannot be called from a non-main thread.
+   * @throws { BusinessError } 100102 - The parameter value cannot be a floating point number.
+   * @throws { BusinessError } 100103 - The function cannot be called from a non main thread.
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
