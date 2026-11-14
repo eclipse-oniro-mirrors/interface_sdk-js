@@ -1228,11 +1228,13 @@ declare namespace deviceSettings {
    * @param { string } value - device settings policy.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200006 - Invalid account ID (the account ID is less than 100).
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
@@ -1292,7 +1294,7 @@ declare namespace deviceSettings {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200006 - Invalid account ID (the account ID is less than 100).
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200020 - Cross-user configuration is not supported.
