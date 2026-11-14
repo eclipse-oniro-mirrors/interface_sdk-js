@@ -5509,7 +5509,186 @@ declare namespace wifiManager {
      */
     queryList: Array<string>;
   }
-  
+
+  /**
+   * 表示P2P服务发现请求（TLV查询）。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WifiP2pServiceRequest {
+    /**
+     * 服务协议类型。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    protocolType: P2pServiceProtocolType;
+
+    /**
+     * 查询字节数据。
+     * 最大长度为256。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    query: Uint8Array;
+  }
+
+  /**
+   * 表示从对端设备收到的DNS-SD服务响应信息。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface P2pDnsSdInfo {
+    /**
+     * 已发现的Bonjour服务实例名。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    instanceName: string;
+
+    /**
+     * 已发现的Bonjour服务注册类型。其前缀与[addDnsSdLocalP2pService]{@link wifiManager.addDnsSdLocalP2pService}的入参serviceType相同，
+     * 末尾追加".local."。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    registrationType: string;
+
+    /**
+     * 响应该服务的对端设备。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    device: WifiP2pDevice;
+  }
+
+  /**
+   * 表示从对端设备收到的DNS-SD TXT记录信息。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface P2pDnsSdTxtInfo {
+    /**
+     * TXT记录的完整域名。格式为instanceName + "." + serviceType + ".local."。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    wholeDomainName: string;
+
+    /**
+     * 包含键值对的TXT记录。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    txtRecord: Map<string, string>;
+
+    /**
+     * 响应该TXT记录的对端设备。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    device: WifiP2pDevice;
+  }
+
+  /**
+   * 表示从对端设备收到的UPnP服务响应信息。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface P2pUpnpInfo {
+    /**
+     * 已发现的唯一服务名称列表。单条数据记录的最大大小为1024字节，数据量与目标设备上的服务数量有关。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    uniqueServiceNames: Array<string>;
+
+    /**
+     * 响应该UPnP服务的对端设备。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    device: WifiP2pDevice;
+  }
+
+  /**
+   * 表示从对端设备收到的通用服务响应信息。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface P2pGenericInfo {
+    /**
+     * 响应的服务协议类型。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    protocolType: P2pServiceProtocolType;
+
+    /**
+     * 来自对端设备的原始响应数据。
+     * 最大长度为1024。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    responseData: Uint8Array;
+
+    /**
+     * 响应该服务的对端设备。
+     *
+     * @syscap SystemCapability.Communication.WiFi.P2P
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    device: WifiP2pDevice;
+  }
+
+  /**
+   * 表示从对端设备收到的P2P服务发现响应信息。
+   * 具体类型由响应的服务协议类型决定。
+   *
+   * @unionmember { P2pDnsSdInfo } 从对端设备收到的DNS-SD服务响应信息。
+   * @unionmember { P2pDnsSdTxtInfo } 从对端设备收到的DNS-SD TXT记录信息。
+   * @unionmember { P2pUpnpInfo } 从对端设备收到的UPnP服务响应信息。
+   * @unionmember { P2pGenericInfo } 从对端设备收到的通用服务响应信息。
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type P2pServiceDiscoveryInfo = P2pDnsSdInfo | P2pDnsSdTxtInfo | P2pUpnpInfo | P2pGenericInfo;
+
   /**
    * 添加并注册一个DNS-SD（DNS Service Discovery，基于DNS的服务发现）本地P2P服务描述，供对端进行服务发现。
    *
@@ -5602,7 +5781,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addDnsSdServiceRequest(serviceType?: string, instanceName?: string): void;
 
@@ -5627,7 +5806,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function addUpnpServiceRequest(searchTarget?: string): void;
 
@@ -5642,7 +5821,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function getP2pServiceRequest(): Promise<Array<WifiP2pServiceRequest>>;
 
@@ -5657,7 +5836,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function removeP2pServiceRequest(request: WifiP2pServiceRequest): void;
 
@@ -5671,7 +5850,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function removeAllP2pServiceRequests(): void;
 
@@ -5687,7 +5866,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801001 - Wi-Fi STA disabled.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function discoverServices(): void;
 
@@ -5701,7 +5880,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function onP2pServiceDiscovery(callback: Callback<P2pServiceDiscoveryInfo>): void;
 
@@ -5716,7 +5895,7 @@ declare namespace wifiManager {
    * @throws { BusinessError } 2801000 - Operation failed.
    * @syscap SystemCapability.Communication.WiFi.P2P
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.1.0 dynamic&static
    */
   function offP2pServiceDiscovery(callback?: Callback<P2pServiceDiscoveryInfo>): void;
 }
