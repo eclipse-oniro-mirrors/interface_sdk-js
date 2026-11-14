@@ -259,9 +259,16 @@ export default class Prompt {
    *
    * @param { ShowToastOptions } options - Options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @since 3
+   */
+  /**
+   * Displays the notification text.
+   *
+   * @param { ShowToastOptions } options - Options.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
-   * @atomicservice [since 11]
-   * @since 3 dynamic
+   * @atomicservice
+   * @since 11 dynamic
    */
   static showToast(options: ShowToastOptions): void;
 
