@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from '@ohos.base';
 import type Want from '@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * This **restrictions** module provides APIs for disallowing general features of devices. You can globally disable and
@@ -630,6 +631,15 @@ declare namespace restrictions {
      * @since 26.0.1
      */
     SUPER_PRIVACY = 53,
+
+    /**
+     * Power saving mode, including battery saver, ultra battery saver and expedition.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 57,
 
     /**
      * Control Center.
@@ -1782,6 +1792,63 @@ declare namespace restrictions {
    * @since 26.0.0
    */
   function getUserRestrictedForAccount(admin: Want | null, settingsItem: SettingsForAccount, accountId: int): boolean;
+
+  /**
+   * Enable or disable the feature of a specified device. After the feature is disabled, the feature cannot be used.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - Specifies the device characteristics to disable or allow. <br/> **Note: *
+   *     * The application applies for the permission ohos.permission.PERSONAL_MANAGE_RESTRICTIONS and activates it as
+   *     the [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod device administrator) through the
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}. You can use this
+   *     interface to set the following features: the status of the features marked with "√" in the BYOD
+   *     column in [FeatureForDevice]{@link restrictions.FeatureForDevice}.
+   * @param { boolean } disallow - The value true indicates that the function is forbidden, and the value false
+   *     indicates that the function is allowed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *     but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicy(feature: FeatureForDevice, disallow: boolean): void;
+
+  /**
+   * Query whether the feature of a specified device is disabled.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - Specifies the device feature to be queried. <br/> **Note: * * An
+   *     application applies for the permission ohos.permission.PERSONAL_MANAGE_RESTRICTIONS and activates it as the
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod device administrator) through
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}. This interface can
+   *     be used to obtain the status of the following features: the status of the features marked with "√" in the BYOD
+   *     column in [FeatureForDevice]{@link restrictions.FeatureForDevice}.
+   * @param { common.QueryPolicy } [queryPolicy] - Indicates the policy to be queried.
+   * <br>Default value: common.QueryPolicy.SELF.
+   * @returns { boolean }If true is returned, the device feature corresponding to the feature is disabled. If false
+   *     is returned, the device feature corresponding to the feature is not disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicy(feature: FeatureForDevice, queryPolicy?: common.QueryPolicy): boolean;
 }
 
 export default restrictions;
