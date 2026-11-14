@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version  2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -14,7 +14,7 @@
  */
 
 /**
- * @file log print
+ * @file HiLOG Logging
  * @kit PerformanceAnalysisKit
  */
 
@@ -23,30 +23,29 @@ import { RecordData } from '@ohos.base';
 /*** endif */
 
 /**
- * # Parameter Format
+ * The hilog module is a logging subsystem provided by OpenHarmony that allows applications or services to output logs
+ * with specified log types, log levels, and format strings. Developers can use hilog to record key process information,
+ * exceptions, and error events during application runtime, thereby understanding the application's running status and
+ *     facilitating better debugging. hilog is applicable for recording runtime logs during development and debugging phases,
+ *     and also for scenarios where log output is reduced and privacy data is protected through level control in release versions.
  *
- * Parameters in the log are printed in the following format:
+ * The hilog module provides the following core features:
  *
- * %{[private flag]}specifier
+ * **Log Printing**: Provides five level functions: debug, info, warn, error, and fatal. Developers can select an
+ * appropriate level to output logs based on the severity of the information. Log content supports formatted strings and
+ * privacy flags for structured recording and protection of sensitive data.
  *
- * |  Private Flag| Description|
- * | ------------ | ---- |
- * |      Unspecified     | The default value is **private**, indicating that parameters in plaintext are not printed.|
- * |  private     | Prints private parameters.|
- * |  public      | Prints parameters in plaintext.|
+ * **Log Level Control**: Uses setMinLogLevel to set the minimum log level to filter out lower-level logs, or uses
+ * setLogLevel with PreferStrategy to flexibly determine the effective relationship between the newly set level and the
+ * system control level, avoiding redundant logs.
  *
- * | Specifier| Description| Example|
- * | ------------ | ---- | ---- |
- * |      d/i      | Prints logs of the **number** and **bigint** types.| 123 |
- * |   s     | Prints logs of the **string undefined bool** and **null** types.| "123" |
- * | o/O | Prints logs of the **object**, **undefined**, and **null** types.<br>This specifier is supported since API
- * version 20.| { 'name': "Jack", 'age': 22 } |
+ * **Log Output Management**: Uses setOutputType to set log output to console, private sandbox, or shared sandbox, uses
+ * setOutputTypeByDomain to finely control different output methods by domain ID list, and provides sandbox log directory
+ *     query, sandbox log file retrieval, sandbox log flush and cleanup management capabilities.
  *
  */
+
 /**
- * The HiLog subsystem allows your applications or services to output logs based on the specified type, level, and
- * format string. Such logs help you learn the running status of applications and better debug programs.
- *
  * @syscap SystemCapability.HiviewDFX.HiLog
  * @crossplatform [since 10]
  * @atomicservice [since 11]
@@ -56,23 +55,23 @@ import { RecordData } from '@ohos.base';
 declare namespace hilog {
 
   /**
-   * Prints DEBUG logs.
+   * Prints a DEBUG-level log.
    *
-   * DEBUG logs are not recorded in official versions by default. They are available in debug versions or in official
-   * versions with the debug function enabled.
+   * DEBUG-level logs are not printed by default in release versions. They are only printed in debug versions or when
+   * the debug switch is enabled.
    *
-   * @param { number } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and type of
-   *     parameters must map to the identifier in the format string.
+   * @param { number } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and types of
+   *     parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -81,20 +80,20 @@ declare namespace hilog {
   function debug(domain: number, tag: string, format: string, ...args: any[]): void;
 
   /**
-   * Prints DEBUG logs.
+   * Prints a DEBUG-level log.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and
-   *     type of parameters must map to the identifier in the format string.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and types
+   *     of parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -103,20 +102,20 @@ declare namespace hilog {
   function debug(domain: int, tag: string, format: string, ...args: RecordData[]): void;
 
   /**
-   * Prints INFO logs.
+   * Prints an INFO-level log.
    *
-   * @param { number } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and type of
-   *     parameters must map to the identifier in the format string.
+   * @param { number } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and types of
+   *     parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -125,20 +124,20 @@ declare namespace hilog {
   function info(domain: number, tag: string, format: string, ...args: any[]): void;
 
   /**
-   * Prints INFO logs.
+   * Prints an INFO-level log.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and
-   *     type of parameters must map to the identifier in the format string.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and types
+   *     of parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -147,20 +146,20 @@ declare namespace hilog {
   function info(domain: int, tag: string, format: string, ...args: RecordData[]): void;
 
   /**
-   * Prints WARN logs.
+   * Prints a WARN-level log.
    *
-   * @param { number } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and type of
-   *     parameters must map to the identifier in the format string.
+   * @param { number } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and types of
+   *     parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -169,20 +168,20 @@ declare namespace hilog {
   function warn(domain: number, tag: string, format: string, ...args: any[]): void;
 
   /**
-   * Prints WARN logs.
+   * Prints a WARN-level log.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and
-   *     type of parameters must map to the identifier in the format string.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and types
+   *     of parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -191,20 +190,20 @@ declare namespace hilog {
   function warn(domain: int, tag: string, format: string, ...args: RecordData[]): void;
 
   /**
-   * Prints ERROR logs.
+   * Prints an ERROR-level log.
    *
-   * @param { number } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and type of
-   *     parameters must map to the identifier in the format string.
+   * @param { number } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and types of
+   *     parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -213,20 +212,20 @@ declare namespace hilog {
   function error(domain: number, tag: string, format: string, ...args: any[]): void;
 
   /**
-   * Prints ERROR logs.
+   * Prints an ERROR-level log.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and
-   *     type of parameters must map to the identifier in the format string.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and types
+   *     of parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -235,20 +234,20 @@ declare namespace hilog {
   function error(domain: int, tag: string, format: string, ...args: RecordData[]): void;
 
   /**
-   * Prints FATAL logs.
+   * Prints a FATAL-level log.
    *
-   * @param { number } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and type of
-   *     parameters must map to the identifier in the format string.
+   * @param { number } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { any[] } args - Variable-length parameter list corresponding to the format string. The number and types of
+   *     parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -257,20 +256,20 @@ declare namespace hilog {
   function fatal(domain: number, tag: string, format: string, ...args: any[]): void;
 
   /**
-   * Prints FATAL logs.
+   * Prints a FATAL-level log.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value
-   *     exceeds the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
-   * @param { string } format - Format string used to output logs in a specified format. It can contain several elements
-   *     , where the parameter type and privacy identifier are mandatory.<br>Parameters labeled **{public}** are public
-   *     data and are displayed in plaintext; parameters labeled **{private}** (default value) are private data and are
-   *     filtered by **<private>**.
-   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and
-   *     type of parameters must map to the identifier in the format string.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
+   * @param { string } format - Format string for formatted log output. The format string can contain multiple parameters,
+   * each requiring a parameter type and privacy flag.<br>Privacy flags are divided into {public} and {private}, defaulting
+   *     to {private}. Content marked with {public} is output in plaintext, while content marked with {private} is displayed
+   *     as <private>. The privacy flag mechanism helps developers protect privacy-sensitive data.
+   * @param { RecordData[] } args - Variable-length parameter list corresponding to the format string. The number and types
+   *     of parameters must match the placeholders in the format string one-to-one. When the format string does not contain
+   *     placeholders, this parameter can be omitted, and only the format string itself is output.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -279,17 +278,16 @@ declare namespace hilog {
   function fatal(domain: int, tag: string, format: string, ...args: RecordData[]): void;
 
   /**
-   * Checks whether logs are printable based on the specified service domain, log tag, and log level.
+   * Called before printing a log to check whether a log with the specified domain identifier, tag, and level can be printed.
    *
-   * @param { int } domain - Service domain of logs. The value ranges from **0x0** to **0xFFFF**. If the value exceeds
-   *     the range, logs cannot be printed.<br>You can define the value as required.
-   * @param { string } tag - Log tag in the string format. You are advised to use this parameter to identify a
-   *     particular service behavior or the class holding the ongoing method. A tag can contain a maximum of 31 bytes.
-   *     If a tag exceeds this limit, it will be truncated. Chinese characters are not recommended because garbled
-   *     characters or alignment problems may occur.
+   * @param { int } domain - Domain identifier for the log, ranging from 0x0 to 0xFFFF. Logs outside this range
+   *     cannot be printed.<br/>It is recommended that developers define and divide domains as needed within the application.
+   * @param { string } tag - Specifies the log tag, which can be any string. It is recommended to identify the calling
+   * class or business behavior. The recommended tag length should not exceed 31 bytes. Chinese characters are not
+   * recommended as they may cause garbled text or alignment issues.
    * @param { LogLevel } level - Log level.
-   * @returns { boolean } Returns **true** logs are printable based on the specified service domain, log tag, and log
-   *     level; returns **false** otherwise.
+   * @returns { boolean } Returns true if the log with the specified domain identifier, tag, and level can be printed;
+   *     otherwise false.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @atomicservice [since 11]
    * @since 7 dynamic
@@ -298,14 +296,15 @@ declare namespace hilog {
   function isLoggable(domain: int, tag: string, level: LogLevel): boolean;
 
   /**
-   * Sets the minimum log level.
+   * Sets the minimum log level for application log printing to filter out lower-level logs. Used when optimizing
+   * application performance or reducing interference from low-value logs to avoid redundant logs.
    *
-   * > **NOTE**
+   * > **Note:**
    * >
-   * > If the set log level is lower than the
-   * > [global log level](docroot://dfx/hilog.md#displaying-and-setting-log-levels), the setting does not take effect.
+   * > If the set log level is lower than the [global log level](docroot://dfx/hilog.md#viewing-and-setting-log-levels),
+   * the setting does not take effect.
    * >
-   * > This function does not take effect for debug applications.
+   * > This function does not take effect in debug-version applications.
    *
    * @param { LogLevel } level - Log level.
    * @syscap SystemCapability.HiviewDFX.HiLog
@@ -316,14 +315,14 @@ declare namespace hilog {
   function setMinLogLevel(level: LogLevel): void;
 
   /**
-   * Sets the minimum log level of the current application process.
+   * Sets the minimum log level for the current application process.
    *
-   * You can configure different preference strategies using the **prefer** parameter. The **PREFER_CLOSE_LOG** strategy
-   * has the same effect as the **setMinLogLevel()** function.
+   * Different preference strategies can be configured via the prefer parameter. If the strategy PREFER_CLOSE_LOG is
+   * selected, it is equivalent to calling the setMinLogLevel function.
    *
-   * > **NOTE**
+   * > **Note:**
    * >
-   * > This function does not take effect for debug applications.
+   * > This function does not take effect in debug-version applications.
    *
    * @param { LogLevel } level - Log level.
    * @param { PreferStrategy } prefer - Preference strategy.
@@ -333,12 +332,13 @@ declare namespace hilog {
    * @since 23 static
    */
   function setLogLevel(level: LogLevel, prefer: PreferStrategy): void;
-  
+
   /**
-   * Sets the output type of hilog.
-   * 
-   * @param { OutputType } type - output type of hilog.
-   * @returns { OutputType } previous output type of hilog.
+   * Sets the hilog output type.
+   *
+   * @param { OutputType } type - The log output type of hilog, used to set the output target of hilog logs
+   *     (such as console or sandbox).
+   * @returns { OutputType } Returns the previously set output type.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
@@ -347,71 +347,71 @@ declare namespace hilog {
   function setOutputType(type: OutputType): OutputType;
 
   /**
-   * Sets the output type for hilog for the domainID list.
-   * 
-   * @param { OutputType } type - output type for hilog.
-   * @param { Array<int> } domainIDs - domainID list, if isExclude is true, the output type for the domainID
-   *     list is set to DEFAULT, and the output type for the remaining domainIDs is set to the currently
-   *     specified output type; if isExclude is false, the output type for the domainID list is set to the
-   *     currently specified output type, and the output type for the remaining domainIDs is set to DEFAULT
-   * @param { boolean } isExclude - determine whether the domainIDs take effect for the currently specified output type.
-   * @returns { OutputType } previous value of output type.
+   * Sets the hilog output type and configures the domain ID list for output. You can choose to output only the domain IDs
+   * in the list, or exclude the domain IDs in the list from output.
+   *
+   * @param { OutputType } type - The output type of hilog.
+   * @param { Array<int> } domainIDs - Domain ID list. Each domain ID ranges from 0x0000 to 0xFFFF. Only effective for
+   *     application domains.
+   * @param { boolean } isExclude - Determines whether the domainIDs are excluded from the output type.
+   *     <br>true means the domain IDs in the list are excluded from output; false means only the domain IDs in the list
+   *     are output.
+   * @returns { OutputType } Returns the previously set output type.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
   function setOutputTypeByDomainID(type: OutputType, domainIDs: Array<int>, isExclude: boolean): OutputType;
-  
+
   /**
-   * Returns the current output type of hilog.
-   * 
-   * @returns { OutputType } current output type for hilog.
+   * Gets the current hilog output type.
+   *
+   * @returns { OutputType } Returns the current hilog output type.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
   function getOutputType(): OutputType;
-  
+
   /**
-   * Returns the directory path of hilog logs in the sandbox.
-   *     If the output type of hilog is DEFAULT, an empty string is returned.
-   * 
-   * @returns { string } the directory path of hilog logs in the sandbox.
+   * Returns the path of hilog logs in the sandbox. If the hilog output type is DEFAULT, an empty string is returned.
+   *
+   * @returns { string } The sandbox path of hilog logs.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
   function getOutputDir(): string;
-  
+
   /**
-   * Delete all hilog logs in the sandbox.
-   * 
+   * Deletes all hilog logs in the sandbox.
+   *
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
   function clean(): void;
-  
+
   /**
-   * Flush hilog logs in the sandbox.
-   * 
+   * Flushes hilog logs in the sandbox to ensure logs are persisted to disk.
+   *
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
    * @since 26.0.0 dynamic&static
    */
   function flush(): void;
-  
+
   /**
-   * Returns the list of hilog log file paths in the sandbox for the specified recent time period.
-   * 
-   * @param { int } latestSeconds - the specified time period from a given number of seconds in the past to the present.
-   * @returns { Array<string> } list of hilog log file paths in the sandbox for the specified rencent time period,
-   *                            with newer files appearing first in the list.
+   * Returns hilog sandbox log files that have been modified within the specified number of seconds.
+   *
+   * @param { int } latestSeconds - The time interval from now, in seconds.
+   *     <br>If the value is less than 0, it is invalid and the return value is empty.
+   * @returns { Array<string> } List of sandbox files that have been written within the specified time period.
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @FaAndStageModel
    * @atomicservice
@@ -420,7 +420,7 @@ declare namespace hilog {
   function getLogFile(latestSeconds: int): Array<string>;
 
   /**
-   * Enumerates the log levels.
+   * Log level.
    *
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
@@ -430,8 +430,7 @@ declare namespace hilog {
    */
   enum LogLevel {
     /**
-     * Log level used to record more detailed process information than INFO logs to help developers analyze service
-     * processes and locate faults.
+     * Detailed process records. Logs at this level can be used to analyze business processes and locate issues in detail.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform [since 10]
@@ -441,12 +440,12 @@ declare namespace hilog {
      */
     DEBUG = 3,
     /**
-     * Log level used to record key service process nodes and exceptions that occur during service running,
+     * Used to record key business process nodes, which can restore the main running process of the business;
      *
-     * for example, no network signal or login failure.
+     * Used to record information about expected abnormal situations, such as no network signal, login failure, etc.
      *
-     * These logs should be recorded by the dominant module in the service to avoid repeated logging conducted by
-     * multiple invoked modules or low-level functions.
+     * These logs should be recorded by the dominant module in the business, avoiding duplicate recording in multiple
+     * called modules or low-level functions.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform [since 10]
@@ -456,8 +455,8 @@ declare namespace hilog {
      */
     INFO = 4,
     /**
-     * Log level used to record severe, unexpected faults that have little impact on users and can be rectified by the
-     * programs themselves or through simple operations.
+     * Used to record relatively severe unexpected situations that have little impact on users. The application can
+     * recover automatically or through simple operations.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform [since 10]
@@ -467,8 +466,8 @@ declare namespace hilog {
      */
     WARN = 5,
     /**
-     * Log level used to record program or functional errors that affect the normal running or use of the functionality
-     * and can be fixed at a high cost, for example, by resetting data.
+     * The application has encountered an error that affects normal function operation or user experience. Recovery is
+     * possible but at a high cost, such as resetting data.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform [since 10]
@@ -478,7 +477,7 @@ declare namespace hilog {
      */
     ERROR = 6,
     /**
-     * Log level used to record program or functionality crashes that cannot be rectified.
+     * A major fatal exception indicating that the application is about to crash and the fault cannot be recovered.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform [since 10]
@@ -490,7 +489,19 @@ declare namespace hilog {
   }
 
   /**
-   * Enumerates the preference strategies.
+   * Preference strategy.
+   *
+   * Example: With the global log level set to INFO, 5 logs of different levels are printed. setLogLevel is called twice
+   * during the printing process:
+   *
+   * Since the global log starts at INFO, the first log can be printed normally.
+   *
+   * After setting the process minimum log level to WARN with strategy PREFER_OPEN_LOG, the effective minimum log level
+   * is the global log level INFO, so both the second and third logs can be printed normally.
+   *
+   * After setting the process minimum log level to DEBUG with strategy PREFER_CLOSE_LOG (equivalent to
+   * hilog.setMinLogLevel(hilog.LogLevel.DEBUG)), but the global log level is INFO at this time, so the fourth log does
+   *     not meet the global log level and fails to print. The fifth log can be printed.
    *
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
@@ -500,7 +511,7 @@ declare namespace hilog {
    */
   enum PreferStrategy {
     /**
-     * The setting is cleared. The system-controlled minimum log level takes effect.
+     * Clears the setting. The effective minimum log level is the minimum level controlled by the system.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform
@@ -510,7 +521,8 @@ declare namespace hilog {
      */
     UNSET_LOGLEVEL = 0,
     /**
-     * The larger value of the new log level and the system-controlled minimum log level takes effect.
+     * The effective minimum log level is the larger of the newly set level and the system-controlled minimum level.
+     * Suitable for scenarios that require strict restriction of log output.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform
@@ -520,7 +532,8 @@ declare namespace hilog {
      */
     PREFER_CLOSE_LOG = 1,
     /**
-     * The smaller value of the new log level and the system-controlled minimum log level takes effect.
+     * The effective minimum log level is the smaller of the newly set level and the system-controlled minimum level.
+     * Suitable for scenarios that require as much log output as possible.
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform
@@ -530,78 +543,80 @@ declare namespace hilog {
      */
     PREFER_OPEN_LOG = 2
   }
-
   /**
-   * Enumerates output type of hilog.
-   * 
-   * @enum { int }
+   * Enum values for hilog output types. DEFAULT and CONSOLE_ONLY are suitable for console-only output scenarios,
+   * PRIVATE_SANDBOX_ONLY is suitable for privacy log storage, SHARE_SANDBOX_ONLY is suitable for scenarios requiring
+   *     cloud log collection, PRIVATE_SANDBOX_WITH_CONSOLE and SHARE_SANDBOX_WITH_CONSOLE are suitable for scenarios
+   *     requiring both console output and sandbox storage.
+   *
    * @syscap SystemCapability.HiviewDFX.HiLog
-   * @FaAndStageModel
    * @crossplatform
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 21 dynamic
+   * @since 23 static
    */
   enum OutputType {
-      /**
-       * DEFAULT Default output type, equivalent to CONSOLE_ONLY.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      DEFAULT = 0,
-      /**
-       * CONSOLE_ONLY Hilog is output to the console only, equivalent to DEFAULT.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      CONSOLE_ONLY = 0,
-      /**
-       * PRIVATE_SANDBOX_ONLY Hilog is output to files in its own private sandbox.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      PRIVATE_SANDBOX_ONLY = 1,
-      /**
-       * SHARE_SANDBOX_ONLY Hilog is output to files in its own sandbox, accessible to itself and the hiview service.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      SHARE_SANDBOX_ONLY = 2,
-      /**
-       * PRIVATE_SANDBOX_WITH_CONSOLE Enable both CONSOLE_ONLY and PRIVATE_SANDBOX_ONLY at the same time.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      PRIVATE_SANDBOX_WITH_CONSOLE = 3,
-      /**
-       * SHARE_SANDBOX_WITH_CONSOLE Enable both CONSOLE_ONLY and SHARE_SANGBOX_ONLY at the same time.
-       * 
-       * @syscap SystemCapability.HiviewDFX.HiLog
-       * @FaAndStageModel
-       * @crossplatform
-       * @atomicservice
-       * @since 26.0.0 dynamic&static
-       */
-      SHARE_SANDBOX_WITH_CONSOLE = 4
+    /**
+     * Default output type. hilog outputs to console only, equivalent to CONSOLE_ONLY.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    DEFAULT = 0,
+    /**
+     * hilog outputs to console only, equivalent to DEFAULT.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    CONSOLE_ONLY = 0,
+    /**
+     * hilog logs are persisted to the application private sandbox. This path is only accessible by the application itself.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    PRIVATE_SANDBOX_ONLY = 1,
+    /**
+     * hilog logs are persisted to the application shared sandbox. This path is accessible by both the application and
+     * the system.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    SHARE_SANDBOX_ONLY = 2,
+    /**
+     * Simultaneously enables CONSOLE_ONLY and PRIVATE_SANDBOX_ONLY.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    PRIVATE_SANDBOX_WITH_CONSOLE = 3,
+    /**
+     * Simultaneously enables CONSOLE_ONLY and SHARE_SANDBOX_ONLY.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynamic&static
+     */
+    SHARE_SANDBOX_WITH_CONSOLE = 4
   }
 }
 
