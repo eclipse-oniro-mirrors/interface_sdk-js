@@ -147,6 +147,11 @@ declare namespace hidebug {
    * **startProfiling(filename: string)** always occurs before **stopProfiling()**. You are advised not to call either
    * of these methods repeatedly. Otherwise, an exception may occur.
    *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.startJsCpuProfiling]{@link hidebug.startJsCpuProfiling} instead.
+   *
    * @param { string } filename - Custom file name of the sampling data. The .json file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -158,8 +163,13 @@ declare namespace hidebug {
 
   /**
    * Stops the VM profiling method. **stopProfiling()** and **startProfiling(filename: string)** are called in pairs.
-   * **startProfiling(filename: string)** always occurs before **stopProfiling()**. You are advised not to call either
-   * of these methods repeatedly. Otherwise, an exception may occur.
+   * **startProfiling()** always occurs before **stopProfiling()**. You are advised not to call either of these
+   * methods repeatedly. Otherwise, an exception may occur.
+   *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.stopJsCpuProfiling]{@link hidebug.stopJsCpuProfiling} instead.
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
@@ -170,6 +180,11 @@ declare namespace hidebug {
 
   /**
    * Dumps the VM heap data and generates the **filename.heapsnapshot** file.
+   *
+   * > **NOTE**
+   * >
+   * > This API is supported since API version 8 and deprecated since API version 9. You are advised to use
+   * > [hidebug.dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData} instead.
    *
    * @param { string } filename - User-defined heap file name. The .heapsnapshot file is generated in the **files**
    *     directory of the application based on the specified file name. The maximum length of a string is 128.
@@ -256,7 +271,7 @@ declare namespace hidebug {
   /**
    * Obtains system service information.
    *
-   * @permission ohos.permission.DUMP
+   * @permission ohos.permission.DUMP (available only for system applications).
    * @param { int } serviceid - Service ID used to obtain system service information.
    * @param { int } fd - File descriptor to which data is written by the API.
    * @param { Array<string> } args - Parameter list of the **Dump** API of the system service. The maximum length of a
@@ -392,7 +407,9 @@ declare namespace hidebug {
    */
   interface NativeMemInfo {
     /**
-     * Process proportional set size memory, in kilobyte
+     * Size of the occupied physical memory (including the proportionally allocated memory occupied by the shared
+     * library), in KB. The value of this parameter is obtained by summing up the values of **Pss** and **SwapPss** in
+     * the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -400,7 +417,8 @@ declare namespace hidebug {
      */
     pss: bigint;
     /**
-     * Virtual set size memory, in kilobyte
+     * Size of the occupied virtual memory (including the memory occupied by the shared library), in KB. The value of
+     * this parameter is obtained by multiplying the value of **size** in the **\/proc/{pid}/statm** node by **4**.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -408,7 +426,8 @@ declare namespace hidebug {
      */
     vss: bigint;
     /**
-     * Resident set size, in kilobyte
+     * Size of the occupied physical memory (including the memory occupied by the shared library), in KB. The value of
+     * this parameter is obtained by reading the value of **Rss** in the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -416,7 +435,8 @@ declare namespace hidebug {
      */
     rss: bigint;
     /**
-     * The size of the shared dirty memory, in kilobyte
+     * Size of the shared dirty memory, in KB. The value of this parameter is obtained by reading the value of
+     * **Shared_Dirty** in the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -424,7 +444,8 @@ declare namespace hidebug {
      */
     sharedDirty: bigint;
     /**
-     * The size of the private dirty memory, in kilobyte
+     * Size of the private dirty memory, in KB. The value of this parameter is obtained by reading the value of
+     * **Private_Dirty** in the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -432,7 +453,8 @@ declare namespace hidebug {
      */
     privateDirty: bigint;
     /**
-     * The size of the shared clean memory, in kilobyte
+     * Size of the shared clean memory, in KB. The value of this parameter is obtained by reading the value of
+     * **Shared_Clean** in the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -440,7 +462,8 @@ declare namespace hidebug {
      */
     sharedClean: bigint;
     /**
-     * The size of the private clean memory, in kilobyte
+     * Size of the private clean memory, in KB. The value of this parameter is obtained by reading the value of
+     * **Private_Clean** in the **\/proc/{pid}/smaps_rollup** node.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -477,7 +500,10 @@ declare namespace hidebug {
    */
   interface MemoryLimit {
     /**
-     * The limit of the application process's resident set, in kilobyte
+     * Limit on the physical memory size of the application process, in KB. Currently, the system does not limit the
+     * physical memory size of the process. However, the available physical memory of the process cannot exceed the
+     * maximum physical memory of the device. You can call [hidebug.getSystemMemInfo]{@link hidebug.getSystemMemInfo}
+     * to obtain the physical memory usage of the device.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -485,7 +511,7 @@ declare namespace hidebug {
      */
     rssLimit: bigint;
     /**
-     * The limit of the application process's virtual memory, in kilobyte
+     * Limit on the virtual memory size, in KB.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -493,7 +519,7 @@ declare namespace hidebug {
      */
     vssLimit: bigint;
     /**
-     * The limit of the js vm heap size of current virtual machine, in kilobyte
+     * Limit on the JS VM heap size of the calling thread, in KB.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -501,7 +527,7 @@ declare namespace hidebug {
      */
     vmHeapLimit: bigint;
     /**
-     * The limit of the total js vm heap size of process, in kilobyte
+     * Limit on the JS heap memory size of the process, in KB.
      *
      * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
      * @since 12 dynamic
@@ -646,7 +672,13 @@ declare namespace hidebug {
   }
 
   /**
-   * Provide trace tags
+   * Enumerates the tags used in trace collection. You can use the [HiTrace](docroot://dfx/hitrace.md) commands to
+   * capture the trace data of a specified tag.
+   *
+   * > **NOTE**
+   * >
+   * > The following tag values are defined by the system and may change with the version upgrade. To avoid
+   * > compatibility issues after the upgrade, use the tag names instead of the tag values in application development.
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
@@ -942,7 +974,7 @@ declare namespace hidebug {
    * @param { int } limitSize - Limit on the trace file size, in bytes. The maximum size of a single file is 500 MB.
    * @returns { string } Trace file path. (The API returns the actual physical path. If the path needs to be accessed in
    *     the application, convert the path by referring to
-   *     Mappings Between Application Sandbox Paths and Physical Paths.
+   *     [Mappings Between Application Sandbox Paths and Physical Paths](docroot://file-management/app-sandbox-directory.md#mappings-between-application-sandbox-paths-and-physical-paths).
    *     )
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
@@ -966,8 +998,8 @@ declare namespace hidebug {
    * trace may exceed the **limitSize** value, causing the system to automatically call **stopAppTraceCapture()**. In
    * this case, if **stopAppTraceCapture()** is called again, an error code 11400105 will be displayed.
    *
-   * @throws { BusinessError } 11400104 - The status of the trace is abnormal
-   * @throws { BusinessError } 11400105 - No capture trace running
+   * @throws { BusinessError } 11400104 - The status of the trace is abnormal.
+   * @throws { BusinessError } 11400105 - No capture trace running.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
    * @since 23 static
@@ -1036,7 +1068,7 @@ declare namespace hidebug {
    * A maximum of three .sys files returned by trace collection can be stored in the directory. If the number of .sys
    * files is greater than or equal to three, error code 11400120 is reported when the API is called again.
    *
-   * This API cannot be used in the input method applications.
+   * This API cannot be used in the [input method applications](docroot://inputmethod/ime-kit-intro.md).
    *
    * @param { RequestTraceConfig } config - Trace collection configuration information.
    * @returns { Promise<string> } Promise used to return the application sandbox path of the .sys trace file.
@@ -1052,7 +1084,13 @@ declare namespace hidebug {
 
   /**
    * Describes the key-value pair used to store GC statistics. This type does not support multi-thread operations. If
-   * this type is operated by multiple threads at the same time in an application, use a lock for it.
+   * this type is operated by multiple threads at the same time in an application, use a lock for it. It contains the
+   * following key-value information:
+   * <br>**"ark.gc.gc-count"**: number of GC times of the current thread.
+   * <br>**"ark.gc.gc-time"**: total GC duration triggered by the current thread, in milliseconds.
+   * <br>**"ark.gc.gc-bytes-allocated"**: size of the Ark VM memory allocated to the current thread, in bytes.
+   * <br>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
+   * <br>**"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
@@ -1061,7 +1099,7 @@ declare namespace hidebug {
   type GcStats = Record<string, long>;
 
   /**
-   * Obtains the system GC statistics.
+   * Obtains the system [GC](docroot://arkts-utils/gc-introduction.md) statistics.
    *
    * @returns { GcStats } System GC statistics.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -1071,14 +1109,14 @@ declare namespace hidebug {
   function getVMRuntimeStats(): GcStats;
 
   /**
-   * Obtains the specified system GC statistics based on parameters.
+   * Obtains the specified system [GC](docroot://arkts-utils/gc-introduction.md) statistics based on parameters.
    *
    * @param { string } item - Type of the statistics to obtain. The following statistics can be obtained:
-   *     <br>**"ark.gc.gc-count"**: number of GC times of the current thread.
-   *     <br>**"ark.gc.gc-time"**: total GC duration triggered by the current thread, in milliseconds.
-   *     <br>**"ark.gc.gc-bytes-allocated"**: size of the Ark VM memory allocated to the current thread, in bytes.
-   *     <br>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
-   *     <br> **"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
+   *     <br/>**"ark.gc.gc-count"**: number of GC times of the current thread.
+   *     <br/>**"ark.gc.gc-time"**: total GC duration triggered by the current thread, in milliseconds.
+   *     <br/>**"ark.gc.gc-bytes-allocated"**: size of the Ark VM memory allocated to the current thread, in bytes.
+   *     <br/>**"ark.gc.gc-bytes-freed"**: memory freed by GC of the current thread, in bytes.
+   *     <br/> **"ark.gc.fullgc-longtime-count"**: number of longtime full GC times triggered by the current thread.
    * @returns { long } System GC statistics returned based on the input parameters.
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
@@ -1094,34 +1132,34 @@ declare namespace hidebug {
    * Sets the number of FDs, number of threads, JS memory, or native memory limit of the application.
    *
    * This API is used to construct a memory leak. For details, see
-   * Subscribing to Resource Leak Events (ArkTS) and
-   * Subscribing to Resource Leak Events (C/C++).
+   * [Subscribing to Resource Leak Events (ArkTS)](docroot://dfx/hiappevent-watcher-resourceleak-events-arkts.md) and
+   * [Subscribing to Resource Leak Events (C/C++)](docroot://dfx/hiappevent-watcher-resourceleak-events-ndk.md).
    *
    * > **NOTE**
    * >
    * > Enable **System resource leak log** in **Developer options** and restart the device for the API to take effect.
    *
    * @param { string } type - Types of leak resources:
-   *     <br>- pss_memory (native memory)
-   *     <br>- js_heap (JavaScript heap memory)
-   *     <br>- fd (file descriptor)
-   *     <br>- thread (thread)
+   *     <br/>- pss_memory (native memory)
+   *     <br/>- js_heap (JavaScript heap memory)
+   *     <br/>- fd (file descriptor)
+   *     <br/>- thread (thread)
    * @param { int } value - Value range of the maximum values of the leak resource types:
-   *     <br>- pss_memory: **[1024, 4 × 1024 × 1024]** (Unit: KB)
-   *     <br>- js_heap: **[85, 95]** (85% to 95% of the upper size limit of the JS heap memory)
-   *     <br>- fd: **[10, 10000]**
-   *     <br>- thread: **[1, 1000]**. If the value is out of range, the feature becomes invalid.
+   *     <br/>- pss_memory: **[1024, 4 × 1024 × 1024]** (Unit: KB)
+   *     <br/>- js_heap: **[85, 95]** (85% to 95% of the upper size limit of the JS heap memory)
+   *     <br/>- fd: **[10, 10000]**
+   *     <br/>- thread: **[1, 1000]**. If the value is out of range, the feature becomes invalid.
    * @param { boolean } enableDebugLog - Whether to enable external debugging logs. Enable external debugging logs only
    *     in the grayscale version (test version released to a small number of users before the official version is
    *     released). Collecting debugging logs occupies a large number of CPU and memory resources, which may cause
    *     application smoothness problems.
-   *     <br>The value **true** means to enable external debugging logs, and false means the opposite.
-   *     <br>
+   *     <br/>The value **true** means to enable external debugging logs, and false means the opposite.
+   *     <br/>
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception
+   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice
    * @since 12 dynamiconly
@@ -1206,7 +1244,7 @@ declare namespace hidebug {
    *
    * @param { int } [interval] - Validity period of the cached GPU memory data, in seconds. Default value: **300** The
    *     value ranges from 2 to 3600. If the input value is out of the value range, the default value will be used.
-   *     <br>If the cached GPU memory data exists for a period longer than the value of this parameter, the latest GPU
+   *     <br/>If the cached GPU memory data exists for a period longer than the value of this parameter, the latest GPU
    *     memory data is obtained and the cache value is updated. Otherwise, the cache value is directly obtained.
    * @returns { Promise<GraphicsMemorySummary> } Promise used to return the GPU memory data of the application.
    * @throws { BusinessError } 11400104 - Failed to get the application memory due to a remote exception.
@@ -1259,7 +1297,7 @@ declare namespace hidebug {
    * > **NOTE**
    * >
    * > The default trimming level is **TRIM_LEVEL_1**. If **TRIM_LEVEL_2** is set, you need to use
-   * > rawheap-translator since API version 20 to convert the .rawheap file to
+   * > [rawheap-translator](docroot://tools/rawheap-translator.md) since API version 20 to convert the .rawheap file to
    * > the .heapsnapshot file. Otherwise, the conversion may fail.
    * >
    * > This API affects the result of [dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}.
@@ -1275,7 +1313,7 @@ declare namespace hidebug {
   /**
    * Dumps the original heap snapshot of the VM for the current thread and generates a .rawheap file. This API uses a
    * promise to return the result. The file can be converted into a heapsnapshot file using
-   * rawheap-translator for parsing.
+   * [rawheap-translator](docroot://tools/rawheap-translator.md) for parsing.
    *
    * > **NOTE**
    * >
@@ -1288,7 +1326,7 @@ declare namespace hidebug {
    * @param { boolean } needGC - Whether GC is required before storing heap snapshots. The value **true** indicates that
    *     GC is required, and **false** indicates the opposite. The default value is **true**.
    * @returns { Promise<string> } Path of the generated snapshot file. (
-   *     Application Sandbox
+   *     [Application Sandbox](docroot://file-management/app-sandbox-directory.md#application-file-directory-and-application-file-path)
    *     )
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
@@ -1308,7 +1346,7 @@ declare namespace hidebug {
   /**
    * Dumps the original heap snapshot of the VM for the current thread and clears the **nodeId** cache. The generated
    * file is in the rawheap format. This API uses a promise to return the result. The file can be converted into a
-   * heapsnapshot file using rawheap-translator for parsing.
+   * heapsnapshot file using [rawheap-translator](docroot://tools/rawheap-translator.md) for parsing.
    *
    * > **NOTE**
    * >
@@ -1322,7 +1360,7 @@ declare namespace hidebug {
    * @param { boolean } needClean - Whether to clear the node ID before dumping heap snapshots. **true**: yes;
    *     **false**: no.
    * @returns { Promise<string> } Path of the generated snapshot file. (
-   *     Application Sandbox
+   *     [Application Sandbox](docroot://file-management/app-sandbox-directory.md#application-file-directory-and-application-file-path)
    *     )
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
@@ -1343,8 +1381,8 @@ declare namespace hidebug {
   /**
    * Dumps the original heap snapshot of the VM for the current thread or the process to which the current thread
    * belongs, clears the nodeId cache, and generates a .rawheap file. This API uses a promise to return the result. The
-   * file can be converted into a heapsnapshot file using rawheap-translator
-   * for parsing.
+   * file can be converted into a heapsnapshot file using
+   * [rawheap-translator](docroot://tools/rawheap-translator.md) for parsing.
    *
    * > **NOTE**
    * >
@@ -1360,7 +1398,7 @@ declare namespace hidebug {
    * @param { boolean } processDump - Whether to dump the original heap snapshot of the process to which the current
    *     thread belongs. **true**: yes.
    * @returns { Promise<Array<string>> } Array of paths of the generated snapshot files. (
-   *     Application Sandbox
+   *     [Application Sandbox](docroot://file-management/app-sandbox-directory.md#application-file-directory-and-application-file-path)
    *     )
    * @throws { BusinessError } 11400106 - Quota exceeded.
    * @throws { BusinessError } 11400107 - Fork operation failed.
@@ -1528,9 +1566,9 @@ declare namespace hidebug {
    * @param { boolean } enable - When SharedHeap OOM occurs in a process, the system dumps the heap snapshot of the
    *     corresponding level based on the information recorded when the process calls the API for the last time in its
    *     lifecycle.
-   *     <br>**true**: process level.
-   *     <br>**false**: thread level.
-   *     <br> The default value is **false**.
+   *     <br/>**true**: process level.
+   *     <br/>**false**: thread level.
+   *     <br/> The default value is **false**.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @stagemodelonly
    * @atomicservice

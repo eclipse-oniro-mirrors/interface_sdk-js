@@ -129,11 +129,12 @@ declare namespace hidebug {
   function getCpuUsage() : double;
 
   /**
+   * 启动虚拟机Profiling方法跟踪，`startProfiling(filename: string)`方法的调用需要与`stopProfiling()`方法的调用一一对应，
+   * 先开启后关闭，请避免重复开启或重复关闭的调用方式，否则会接口调用异常。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 启动虚拟机Profiling方法跟踪，`startProfiling(filename: string)`方法的调用需要与`stopProfiling()`方法的调用一一对应，先开启后关闭，请避免重复开启或重复关闭的调用方式，
-   * > 否则会接口调用异常。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.startJsCpuProfiling]{@link hidebug.startJsCpuProfiling}替代。
    *
    * @param { string } filename - 用户自定义的采样结果输出的文件名，将在应用的`files`目录下生成以该参数命名的json文件。string长度的最大值为128。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
@@ -144,11 +145,12 @@ declare namespace hidebug {
   function startProfiling(filename: string): void;
 
   /**
+   * 停止虚拟机Profiling方法跟踪，`stopProfiling()`方法的调用需要与`startProfiling(filename: string)`方法的调用一一对应，
+   * 先开启后关闭，请避免重复开启或重复关闭的调用方式，否则会接口调用异常。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 停止虚拟机Profiling方法跟踪，`stopProfiling()`方法的调用需要与`startProfiling(filename: string)`方法的调用一一对应，先开启后关闭，请避免重复开启或重复关闭的调用方式，
-   * > 否则会接口调用异常。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.stopJsCpuProfiling]{@link hidebug.stopJsCpuProfiling}替代。
    *
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
@@ -158,16 +160,17 @@ declare namespace hidebug {
   function stopProfiling(): void;
 
   /**
+   * 虚拟机堆数据转储，生成`filename.heapsnapshot`文件。
+   *
    * > **说明**：
    * >
-   * > 从API version 8支持，从API version 9开始废弃，
-   * > 虚拟机堆数据转储，生成`filename.heapsnapshot`文件。
+   * > 从API version 8支持，从API version 9开始废弃，建议使用[hidebug.dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}替代。
    *
    * @param { string } filename - 用户自定义的虚拟机堆转储文件名，将在应用的`files`目录下生成以该参数命名的heapsnapshot文件。string长度的最大值为128。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 8 dynamiconly
    * @deprecated since 9
-   * @useinstead hidebug.dumpJsHeapData
+   * @useinstead hidebug.dumpJsRawHeapData
    */
   function dumpHeapData(filename: string): void;
 
@@ -430,8 +433,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-   * > 由于读取/proc/{pid}/smaps_rollup耗时较长，推荐使用异步接口
-   * > [hidebug.getAppNativeMemInfoAsync]{@link hidebug.getAppNativeMemInfoAsync}，以避免应用丢帧或卡顿。
+   * > 由于读取/proc/{pid}/smaps_rollup耗时较长，
+   * > 推荐使用异步接口[hidebug.getAppNativeMemInfoAsync]{@link hidebug.getAppNativeMemInfoAsync}，以避免应用丢帧或卡顿。
    * >
    * > 推荐使用[hidebug.getRssInfo]{@link hidebug.getRssInfo}接口获取应用的rss使用信息
    *
@@ -928,8 +931,8 @@ declare namespace hidebug {
    * 调用startAppTraceCapture接口，如果没有合理传入limitSize参数，生成trace的大小大于传入的limitSize大小，系统内部会自动调用stopAppTraceCapture，再次手动调用
    * stopAppTraceCapture就会抛出错误码11400105。
    *
-   * @throws { BusinessError } 11400104 - The status of the trace is abnormal
-   * @throws { BusinessError } 11400105 - No capture trace running
+   * @throws { BusinessError } 11400104 - The status of the trace is abnormal.
+   * @throws { BusinessError } 11400105 - No capture trace running.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @since 12 dynamic
    * @since 23 static
@@ -1065,7 +1068,7 @@ declare namespace hidebug {
    *     <br>1. Mandatory parameters are left unspecified.
    *     <br>2. Incorrect parameter types.
    *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception
+   * @throws { BusinessError } 11400104 - Set limit failed due to remote exception.
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
    * @atomicservice
    * @since 12 dynamiconly
@@ -1190,8 +1193,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-    * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，需使用API version 20之后的
-    * > [rawheap-translator](docroot://tools/rawheap-translator.md)工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
+   * > 默认裁剪级别是TRIM_LEVEL_1。如果设置了TRIM_LEVEL_2裁剪，
+   * > 需使用API version 20之后的[rawheap-translator](docroot://tools/rawheap-translator.md)工具才能将.rawheap文件转换为.heapsnapshot文件，否则可能导致转换失败。
    * >
    * > 该接口影响[dumpJsRawHeapData]{@link hidebug.dumpJsRawHeapData}的结果。
    *
@@ -1466,8 +1469,8 @@ declare namespace hidebug {
    *
    * > **注意**：
    * >
-   * > 读取/proc/{pid}/status耗时很短，与[hidebug.getAppNativeMemInfo]{@link hidebug.getAppNativeMemInfo}接口中获取的`rss`值相比存在一点误差，但该
-   * > 接口更加轻量，为避免应用丢帧或卡顿推荐使用该接口。
+   * > 读取/proc/{pid}/status耗时很短，与[hidebug.getAppNativeMemInfo]{@link hidebug.getAppNativeMemInfo}接口中获取的`rss`值相比存在一点误差，
+   * > 但该接口更加轻量，为避免应用丢帧或卡顿推荐使用该接口。
    *
    * @returns { RssInfo } 应用进程的物理内存信息。
    * @syscap SystemCapability.HiviewDFX.HiProfiler.HiDebug
