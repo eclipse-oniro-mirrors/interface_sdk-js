@@ -668,6 +668,16 @@ export declare interface CustomDialogControllerOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * Set the component bound to the dialog.
+     *
+     * @type { ?ExtendableComponent }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    baseComponent?: ExtendableComponent;
 
     /**
      * 是否以及如何使对话框适配惯用手。

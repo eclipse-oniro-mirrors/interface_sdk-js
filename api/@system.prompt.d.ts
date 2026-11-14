@@ -249,15 +249,9 @@ export interface ShowActionMenuOptions {
  * Defines the prompt interface.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @since 3
- */
-/**
- * Defines the prompt interface.
- *
- * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
- * @atomicservice
- * @since 11 dynamic
+ * @atomicservice [since 11]
+ * @since 3 dynamic
  */
 export default class Prompt {
   /**
@@ -283,16 +277,9 @@ export default class Prompt {
    *
    * @param { ShowDialogOptions } options - Options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 3
-   */
-  /**
-   * Displays the dialog box.
-   *
-   * @param { ShowDialogOptions } options - Options.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 3 dynamic
    */
   static showDialog(options: ShowDialogOptions): void;
 
@@ -301,16 +288,9 @@ export default class Prompt {
    *
    * @param { ShowActionMenuOptions } options - Options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 6
-   */
-  /**
-   * Displays the menu.
-   *
-   * @param { ShowActionMenuOptions } options - Options.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 6 dynamic
    */
   static showActionMenu(options: ShowActionMenuOptions): void;
 }
