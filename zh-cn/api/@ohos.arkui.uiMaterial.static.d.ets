@@ -361,6 +361,35 @@ declare namespace uiMaterial {
   }
 
   /**
+   * 材质颜色混合模式。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  export enum MaterialColorBlendMode {
+    /**
+     * 普通混色模式。材质颜色与材质背景以线性方式混合。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    LINEAR_MIX = 0,
+    /**
+     * 彩色玻璃模式。材质颜色以彩色玻璃效果呈现，保持背景通透。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    TINTED_GLASS = 1
+  }
+
+  /**
    * 获取全局材质等级，与设备算力相关。在需要根据设备算力等级选择不同材质效果实现方式时，可调用此方法获取材质等级。该配置项由设备定义，不可修改。
    *
    * @returns { MaterialLevel } 返回设备的材质等级，表示设备算力档次，不同等级对应沉浸式材质在当前设备上的不同渲染效果级别。
@@ -511,6 +540,18 @@ declare namespace uiMaterial {
      * @since 26.0.0 static
      */
     lightEffect?: LightEffectOptions | null;
+    /**
+     * 材质颜色混色模式。
+     * 默认值：uiMaterial.MaterialColorBlendMode.LINEAR_MIX。
+     * **说明**：1. 该参数仅对支持沉浸式材质的高算力和中算力设备的显示效果生效。
+     * 2. **TINTED_GLASS**仅对部分组件生效，当前支持的组件包括：Button、Chip、ChipGroup、Toggle，其他组件设置无效。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    colorBlendMode?: MaterialColorBlendMode;
   }
 
   /**
