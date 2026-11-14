@@ -591,7 +591,7 @@ action("build_dynamic_sdk_interop_inner") {
 }
 
 ohos_copy("ohos_ets_dynamic_api_declaration") {
-  if (build_framework_enable_incremental_build && !build_xts) {
+  if (build_framework_enable_incremental_build) {
     # Other targets also populate children of this output directory.
     stable_directory_copy = true
     stable_directory_copy_preserve =
@@ -630,7 +630,7 @@ ohos_copy("ohos_ets_dynamic_kits") {
 }
 
 ohos_copy("ohos_ets_static_api_declaration") {
-  if (build_framework_enable_incremental_build && !build_xts) {
+  if (build_framework_enable_incremental_build) {
     # Other targets also populate children of this output directory.
     stable_directory_copy = true
     stable_directory_copy_preserve =
@@ -663,7 +663,7 @@ ohos_copy("ohos_ets_static_kits") {
 }
 
 ohos_copy("ohos_ets_api") {
-  if (build_framework_enable_incremental_build && !build_xts) {
+  if (build_framework_enable_incremental_build) {
     stable_directory_copy = true
   }
   deps = [
