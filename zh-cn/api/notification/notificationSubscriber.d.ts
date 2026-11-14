@@ -524,7 +524,7 @@ export interface BadgeEnabledChangedCallback {
  */
 export interface VoiceContent {
   /**
-   * 文本语音播报内容。
+   * 文本语音播报内容。中国境内（香港特别行政区、澳门特别行政区、中国台湾除外）播报内容为智能化播报内容。从API版本26.1.0开始，支持中国境内之外地区通知语音播报，播报内容固定为应用名+通知正文。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
