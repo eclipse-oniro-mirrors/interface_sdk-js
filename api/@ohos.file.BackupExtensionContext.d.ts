@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Backup and restore extention context
  * @kit CoreFileKit
  */
 
