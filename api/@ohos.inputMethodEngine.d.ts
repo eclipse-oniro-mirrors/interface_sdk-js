@@ -522,6 +522,7 @@ declare namespace inputMethodEngine {
    * @returns { boolean } whether to consume this key event.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type InputKeyEventCallback = (event: InputKeyEvent) => boolean;
 
@@ -533,6 +534,7 @@ declare namespace inputMethodEngine {
    * @param { double } height - the height of the cursor, unit is px.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type CursorContextChangeCallback = (x: double, y: double, height: double) => void;
 
@@ -545,6 +547,7 @@ declare namespace inputMethodEngine {
    * @param { int } newEnd - the new end of the selected text.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type SelectionChangeCallback = (oldBegin: int, oldEnd: int, newBegin: int, newEnd: int) => void;
 
@@ -2219,6 +2222,39 @@ declare namespace inputMethodEngine {
      * @since 23 static
      */
     setPreviewTextSync(text: string, range: Range): void;
+
+    /**
+     * Sets the preview text with style.
+     *
+     * @param { string } text - Preview text to set.
+     * @param { Range } range - Range of the preview text.
+     * @param { PreviewTextStyle } style - Style of the preview text.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyle(text: string, range: Range, style: PreviewTextStyle): Promise<void>;
+
+    /**
+     * Sets the preview text with style.
+     *
+     * @param { string } text - Preview text to set.
+     * @param { Range } range - Range of the preview text.
+     * @param { PreviewTextStyle } style - Style of the preview text.
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyleSync(text: string, range: Range, style: PreviewTextStyle): void;
 
     /**
      * Finishes the text preview. This API uses a promise to return the result.
@@ -4824,7 +4860,7 @@ declare namespace inputMethodEngine {
    *     If called again with different options, the new options take effect (last wins).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 12800027 - The caller is not a focused application.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -4851,7 +4887,7 @@ declare namespace inputMethodEngine {
    * more.
    *
    * @returns { ProxyInputMethodAbility | null } **ProxyInputMethodAbility** instance.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -4866,7 +4902,7 @@ declare namespace inputMethodEngine {
    * selection change event, and more.
    *
    * @returns { ProxyKeyboardDelegate | null } **ProxyKeyboardDelegate** instance.
-   * @throws { BusinessError } 12800028 - The caller is an input method extension.
+   * @throws { BusinessError } 12800028 - The input method extension is not allowed.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -4903,6 +4939,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4918,6 +4955,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4933,6 +4971,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4947,6 +4986,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4962,6 +5002,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text before the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4977,6 +5018,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text after the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4990,6 +5032,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<EditorAttribute> } Promise used to return the attribute of the edit box.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5002,6 +5045,7 @@ declare namespace inputMethodEngine {
      * @param { int } direction - Direction in which the cursor moves.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5016,6 +5060,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5029,6 +5074,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5041,6 +5087,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<int> } Promise used to return the result.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5055,6 +5102,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5080,6 +5128,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5291,6 +5340,78 @@ declare namespace inputMethodEngine {
      * @since 26.1.0 dynamic&static
      */
     offEditorAttributeChanged(callback?: Callback<EditorAttribute>): void;
+  }
+
+  /**
+   * Enumerates the underline styles for preview text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * No underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * Solid underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * Wavy underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * Dashed underline.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
+
+  /**
+   * Style of the preview text.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface PreviewTextStyle {
+    /**
+     * Underline style.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * Underline color in 0xRRGGBB format. Optional; when not specified, the underline color
+     * should follow the application's theme color. If transparency is provided, it is invalid
+     * and will be ignored by the editor.
+     * The value must be an integer. Default: when not provided, no color is passed to the edit box;
+     * the edit box handles it and defaults to following the cursor color.
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
   }
 }
 

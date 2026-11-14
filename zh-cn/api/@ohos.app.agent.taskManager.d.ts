@@ -19,70 +19,38 @@
  */
 
 /**
- * **taskManager**模块提供任务生命周期管理接口。任务是用户意图执行的归因单元：任务存活期间，
- * 系统按任务优先级对归因到该任务的进程进行管控。
+ * **taskManager**模块提供任务生命周期管理接口。任务是用户意图执行的归因单元。在任务存活期间，
+ * 所有归因至该任务的进程均由系统统一调度。
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
+ * @systemapi
  * @stagemodelonly
  * @since 26.1.0 dynamic&static
  */
 declare namespace taskManager {
   /**
-   * 任务优先级枚举。
+   * 以指定任务ID启动任务。任务立即激活，归因到该任务的进程由系统统一调度。
+   * 任务持续存活，直至调用finishTask或系统自动结束（如任务超时、创建者进程退出）。
+   * 若指定任务ID的任务已存在，该promise被拒绝。
    *
-   * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  export enum TaskPriority {
-    /**
-     * 低优先级。
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    LOW = 100,
-    /**
-     * 中优先级。
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    MEDIUM = 200,
-    /**
-     * 高优先级。
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    HIGH = 300,
-  }
-
-  /**
-   * 以指定任务 ID 启动任务。任务立即激活，系统按指定优先级对归因到该任务的进程进行管控。
-   * 任务持续存活，直至调用 finishTask 或系统自动结束（如任务超时、创建者进程退出）。
-   * 若指定任务 ID 的任务已存在，该 promise 被拒绝。
-   *
-   * @param { string } taskId - 任务 ID，作为任务执行期间所拉起进程的归因主键。长度范围为 1~256 个字符。
-   * @param { TaskPriority } [priority] - 任务优先级。默认值为**MEDIUM**。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @param { string } taskId - 任务ID，作为任务执行期间所拉起进程的归因主键。长度范围为 1~256 个字符。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000301 - Task already exists.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function startTask(taskId: string, priority?: TaskPriority): Promise<void>;
+  function startTask(taskId: string): Promise<void>;
 
   /**
-   * 以指定任务 ID 结束任务。撤销对归因到该任务的进程施加的资源管控，恢复进程的调度状态。
-   * 任务不存在或已结束时，该 promise 被拒绝。
+   * 以指定任务ID结束任务。撤销对归因到该任务的进程施加的资源管控，恢复进程的调度状态。
+   * 任务不存在或已结束时，该promise被拒绝。
    *
-   * @param { string } taskId - 任务 ID。
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @param { string } taskId - 任务ID。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000302 - Task not found.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi

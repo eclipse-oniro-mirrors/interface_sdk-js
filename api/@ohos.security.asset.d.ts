@@ -328,17 +328,18 @@ declare namespace asset {
    */
   function updateAsUser(userId: number, query: AssetMap, attributesToUpdate: AssetMap): Promise<void>;
 
-
-
   /**
    * Updates assets in batches based on an attributes array.
    *
    * Only assets with the same {@link Tag.GROUP_ID} and {@link Tag.REQUIRE_ATTR_ENCRYPTED} can be updated in batches.
    *
-   * @param { Array<AssetMap> } sourceAttributes - an array of map objects containing asset attributes to query.
-   *     <br>The {@link Tag.GROUP_ID} and {@link Tag.REQUIRE_ATTR_ENCRYPTED} attributes of all assets must be the same.
-   * @param { Array<AssetMap> } destAttributes - an array of map objects containing asset attributes to be updated.
-   *     <br>The {@link Tag.GROUP_ID} and {@link Tag.REQUIRE_ATTR_ENCRYPTED} attributes of all assets must be the same.
+   * @param { Array<AssetMap> } sourceAttributes - Array of search criteria for key assets to be updated.
+   * <br>The maximum length of the array is 100. The values of {@link Tag.GROUP_ID} and
+   * {@link Tag.REQUIRE_ATTR_ENCRYPTED} of all elements in the array must be the same.
+   * @param { Array<AssetMap> } destAttributes - Attribute set array of key assets to be updated.
+   * <br>The maximum length of the array is 100, which must be the same as the length of sourceAttributes,
+   * The values of {@link Tag.GROUP_ID} and {@link Tag.REQUIRE_ATTR_ENCRYPTED} attributes must be the same for all
+   * elements in the array.
    * @returns { Promise<BatchResult> } the promise object returned by the function.
    * @throws { BusinessError } 24000001 - The ASSET service is unavailable.
    * @throws { BusinessError } 24000006 - Insufficient memory.
@@ -708,10 +709,11 @@ declare namespace asset {
   /**
    * Represents the value of each attribute in [AssetMap]{@link asset.AssetMap}.
    *
-   * @unionmember { boolean } The value is a boolean value, with a range of true or false.
-   * @unionmember { number } The value is a number, and the value range is the enumerated value or number
-   *     corresponding to the tag.
-   * @unionmember { Uint8Array } The value is a byte array, and the content is defined by the service.
+   * @unionmember { boolean } The value type is Boolean. The value can be true or false.
+   * @unionmember { number } Indicates that the value type is a number. The value can be an enumerated value or a
+   *     number supported by the corresponding tag.
+   * @unionmember { Uint8Array } Indicates that the value type is a byte array, and the content is defined by the
+   *     service.
    * @syscap SystemCapability.Security.Asset
    * @atomicservice [since 14]
    * @since 11
@@ -773,15 +775,6 @@ declare namespace asset {
      */
     NONE = 0x00,
     /**
-     * Private PIN type, supports only system applications.
-     *
-     * @syscap SystemCapability.Security.Asset
-     * @systemapi
-     * @FaAndStageModel
-     * @since 26.0.0
-     */
-    PRIVATE_PIN = 0x100,
-    /**
      * The asset can be accessed if any user authentication (such as PIN, facial, or fingerprint authentication) is
      * successful.
      *
@@ -789,7 +782,16 @@ declare namespace asset {
      * @atomicservice [since 14]
      * @since 11
      */
-    ANY = 0xFF
+    ANY = 0xFF,
+    /**
+     * Private PIN type, supports only system applications.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.0.0
+     */
+    PRIVATE_PIN = 0x100
   }
 
   /**
@@ -958,14 +960,6 @@ declare namespace asset {
      */
     index: number;
     /**
-     * The error code of the batch operation.
-     *
-     * @syscap SystemCapability.Security.Asset
-     * @FaAndStageModel
-     * @since 26.0.0
-     */
-    errCode: number;
-    /**
      * The error message of the batch operation.
      *
      * @syscap SystemCapability.Security.Asset
@@ -973,6 +967,14 @@ declare namespace asset {
      * @since 26.0.0
      */
     message: string;
+    /**
+     * The error code of the batch operation.
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.0.0
+     */
+    errCode: number;
   }
 
   /**
@@ -1360,7 +1362,10 @@ declare namespace asset {
      */
     NOT_SYSTEM_APPLICATION = 202,
     /**
-     * The argument is invalid.
+     * Parameter error. Possible causes:
+     * 1. Mandatory parameters are not specified.
+     * 2. The parameter type is incorrect.
+     * 3. Parameter verification failed.
      *
      * @syscap SystemCapability.Security.Asset
      * @atomicservice [since 14]

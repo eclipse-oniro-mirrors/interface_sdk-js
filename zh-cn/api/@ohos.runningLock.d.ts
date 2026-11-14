@@ -33,6 +33,9 @@ declare namespace runningLock {
   /**
    * 阻止系统睡眠或使能接近光控制亮灭屏的锁，不同的锁类型具有不同的功能，详见[RunningLockType]{@link runningLock.RunningLockType}。
    * 需结合[create]{@link create}创建锁、[hold]{@link hold}持锁、[unhold]{@link unhold}释放锁使用。具体使用方法见示例。
+   * RunningLock 对象不可在多个 Worker/TaskPool 线程间共享。同一 RunningLock 实例的 hold()、unhold()、isHolding() 方法必须在同一线程调用，
+   * 跨线程共享可能导致锁状态不一致且不报错。当电源服务异常重启后，已创建的 RunningLock 对象仍然有效，但锁的持有状态可能丢失。建议在服务重启场景下通过 isHolding() 检查锁状态，必要时重新调用 hold()。
+   * 当 RunningLock 的 JS 对象被垃圾回收时，底层持有的锁会被自动释放。如需长期持锁，请保持对 RunningLock 对象的引用。
    *
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 7 dynamic
@@ -54,6 +57,8 @@ declare namespace runningLock {
     /**
      * 锁定和持有RunningLock。适用于应用需要在后台持续运行（如后台下载、长时间定位追踪等）时阻止系统睡眠的场景或通话时需要接近光控制亮灭屏的场景等。调用此方法后，
      * 必须在使用完毕时调用unhold()释放锁，或者在调用时设置超时释放时间由系统自动释放，与unhold()方法配对使用。未释放锁会导致阻止睡眠或者控制亮灭屏功能持续生效。
+     * 重复调用hold()不会报错。注意：如果先调用hold(-1)（永久持锁）再调用 hold(timeout)（定时持锁），锁将在timeout毫秒后释放，即后一次调用的超时参数会覆盖前一次。
+     * 建议如需更新超时时间，先调用unhold()释放锁后再调用hold(newTimeout)。
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @param { int } timeout - 锁定和持有RunningLock的时长，单位：毫秒。<br>**-1**：永久持锁，需要主动释放。<br>**0**：默认3s后超时释放。<br>
@@ -100,7 +105,7 @@ declare namespace runningLock {
     unlock(): void;
 
     /**
-     * 释放RunningLock锁。此方法与hold()配对使用，在调用hold()锁定后调用此方法释放锁。
+     * 释放RunningLock锁。此方法与hold()配对使用，在调用hold()锁定后调用此方法释放锁。对未持有的锁调用unhold()不会报错，视为无操作。
      *
      * @permission ohos.permission.RUNNING_LOCK
      * @throws { BusinessError } 201 - If the permission is denied.
@@ -143,6 +148,7 @@ declare namespace runningLock {
      * [COMMON_EVENT_ENTER_FORCE_SLEEP](docroot://reference/apis-basic-services-kit/common_event/commonEventManager-definitions.md#common_event_enter_force_sleep12)
      * ，监听到事件后释放该锁。该类型锁行为存在设备差异，使用该类型锁请参考
      * [阻止系统闲时进入睡眠开发指南](docroot://basic-services/powermgr/runningLock/runningLock-dev.md)。
+     * 当设备不支持 BACKGROUND_USER_IDLE 类型时，create() 仍返回成功，但后续 hold() 调用不会生效且不报错。建议在 create() 后通过 isSupported() 确认设备是否支持该类型。
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 23 dynamic&static
@@ -217,7 +223,7 @@ declare namespace runningLock {
   function createRunningLock(name: string, type: RunningLockType): Promise<RunningLock>;
 
   /**
-   * 创建RunningLock锁对象。使用callback异步回调。创建锁对象后，需调用hold()方法锁定和持有该锁，才能使锁功能生效。
+   * 创建RunningLock锁对象。使用callback异步回调。创建锁对象后，需调用hold()方法锁定和持有该锁，才能使锁功能生效。不建议在多个 Worker/TaskPool 中并发调用 create 创建锁对象。
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - 锁的名字。建议使用包名或类名加后缀的方式命名。
@@ -233,7 +239,7 @@ declare namespace runningLock {
   function create(name: string, type: RunningLockType, callback: AsyncCallback<RunningLock>): void;
 
   /**
-   * 创建RunningLock锁对象。使用Promise异步回调。创建锁对象后，需调用hold()方法锁定和持有该锁，才能使锁功能生效。
+   * 创建RunningLock锁对象。使用Promise异步回调。创建锁对象后，需调用hold()方法锁定和持有该锁，才能使锁功能生效。不建议在多个 Worker/TaskPool 中并发调用 create 创建锁对象。
    *
    * @permission ohos.permission.RUNNING_LOCK
    * @param { string } name - 锁的名字。建议使用包名或类名加后缀的方式命名。

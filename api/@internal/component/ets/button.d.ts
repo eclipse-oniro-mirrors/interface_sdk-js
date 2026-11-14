@@ -38,7 +38,7 @@
  * > [fontColor]{@link ButtonAttribute#fontColor}, [fontStyle]{@link ButtonAttribute#fontStyle},
  * > [fontFamily]{@link ButtonAttribute#fontFamily}, and [fontWeight]{@link ButtonAttribute#fontWeight}.
  * >
- * > - Before setting the [gradient color]{@link common}, you need to set
+ * > - Before setting the [gradient color]{@link CommonMethod}, you need to set
  * > [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)} to transparent.
  * >
  * > - When **borderRadius** is not set, the corner radius of the rounded rectangle button remains at the default value.
@@ -573,9 +573,9 @@ declare interface LabelStyle {
   textAlign?: TextAlign;
 }
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * The [universal events]{@link common} are supported.
+ * The [universal events]{@link CommonMethod} are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

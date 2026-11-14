@@ -949,7 +949,7 @@ export declare enum ParticleEmitterShape {
     ANNULUS = 'annulus'
 }
 /**
- * Enumerates the color distribution types of a particle.
+ * 初始颜色随机值分布类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -957,7 +957,7 @@ export declare enum ParticleEmitterShape {
  */
 export declare enum DistributionType {
     /**
-     * Uniform distribution.
+     * 初始颜色随机值分布为均匀分布。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -965,7 +965,7 @@ export declare enum DistributionType {
      */
     UNIFORM = 0,
     /**
-     * Gaussian distribution.
+     * 初始颜色随机值分布为高斯分布。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1008,7 +1008,7 @@ export declare enum ParticleUpdater {
 }
 
 /**
- * 除支持[通用属性]{@link common}外还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1020,7 +1020,7 @@ export declare interface ParticleAttribute extends CommonMethod {
      * 设置扰动场。
      *
      * @param { Array<DisturbanceFieldOptions> | undefined } fields - 扰动场数组。
-     * @returns { ParticleAttribute } Returns the particle attribute.
+     * @returns { ParticleAttribute } 返回ParticleAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -1030,7 +1030,7 @@ export declare interface ParticleAttribute extends CommonMethod {
      * 支持发射器位置动态更新。
      *
      * @param { Array<EmitterProperty> | undefined } value - 需要更新的emitter参数数组
-     * @returns { ParticleAttribute } Returns the particle attribute.
+     * @returns { ParticleAttribute } 返回ParticleAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -1060,24 +1060,24 @@ export declare interface ParticleAttribute extends CommonMethod {
     default velocityFields(fields: Array<VelocityFieldOptions> | undefined): this;
 
     /**
-     * Add particle attribute modifier.
+     * 设置属性修饰符。
      *
-     * @param { AttributeModifier<ParticleAttribute> | AttributeModifier<CommonMethod> | undefined } modifier -
-     *     The AttributeModifier.
-     * @returns { ParticleAttribute } Returns the particle attribute.
+     * @param { AttributeModifier<ParticleAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 属性修饰符。
+     * @returns { ParticleAttribute } 返回ParticleAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<ParticleAttribute> | AttributeModifier<CommonMethod> | undefined): this;
     /**
-     * Set Particle options.
+     * 设置粒子选项。
      *
-     * @param { Particles } particles - The options to create an Particle.
-     * @returns { ParticleAttribute } Returns instance of  ParticleAttribute.
+     * @param { Particles } particles - 创建粒子的选项。
+     * @returns { ParticleAttribute } 返回ParticleAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setParticleOptions(particles: Particles): this;
 }
@@ -1234,7 +1234,7 @@ export declare enum DisturbanceFieldShape {
  */
 export declare interface ParticleAnnulusRegion {
     /**
-     * The coordinates of the center of the annulus
+     * 圆环的圆心坐标，组件的左上角为坐标原点。
      *
      * @default {x:LengthMetrics.percent(0.5),y:LengthMetrics.percent(0.5)}
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1243,7 +1243,7 @@ export declare interface ParticleAnnulusRegion {
      */
     center?: PositionT<LengthMetrics>;
     /**
-     * The outer radius of the annulus
+     * 圆环的外圆半径。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1251,7 +1251,7 @@ export declare interface ParticleAnnulusRegion {
      */
     outerRadius: LengthMetrics;
     /**
-     * The inner radius of the annulus
+     * 圆环的内圆半径。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1259,7 +1259,7 @@ export declare interface ParticleAnnulusRegion {
      */
     innerRadius: LengthMetrics;
     /**
-     * The start angle of the annulus, in degree
+     * 圆环的起始角度，单位为度。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1268,7 +1268,7 @@ export declare interface ParticleAnnulusRegion {
      */
     startAngle?: double;
     /**
-     * The end angle of the annulus, in degree
+     * 圆环的结束角度，单位为度。
      *
      * @default 360
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1287,7 +1287,7 @@ export declare interface ParticleAnnulusRegion {
  */
 export declare interface FieldRegion {
   /**
-   * The shape of the field
+   * 粒子场的区域形状。
    *
    * @default DisturbanceFieldShape.RECT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1296,8 +1296,7 @@ export declare interface FieldRegion {
    */
   shape?: DisturbanceFieldShape;
   /**
-   * The coordinates of the center position of the field. The top-left corner of the component is the origin of the
-   * coordinate system. The coordinate unit is vp.
+   * 粒子场的区域中心位置。坐标单位为vp。
    *
    * @default {x:0,y:0}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1306,7 +1305,7 @@ export declare interface FieldRegion {
    */
   position?: PositionT<double>;
   /**
-   * The size of the field. The unit of value is vp.
+   * 粒子场的区域大小。值的单位为vp。
    *
    * @default {width:0,height:0}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1325,8 +1324,9 @@ export declare interface FieldRegion {
  */
 export declare interface RippleFieldOptions {
   /**
-   * The amplitude of the ripple field. The greater the amplitude, the stronger the force of the ripple field.
-   * Range of values:[0, +∞)
+   * 描述粒子波动场波的幅值。幅值越大，波动场的力越大。
+   * 取值范围：[0, +∞)
+   * 设置为负值时取默认值。
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1335,9 +1335,9 @@ export declare interface RippleFieldOptions {
    */
   amplitude?: double;
   /**
-   * Wavelength, which is the distance over which a wave cycle changes. The larger
-   * the wavelength, the slower the wave changes with distance, and the less pronounced the wave fluctiations.
-   * Range of values:[0, +∞)
+   * 描述粒子波动场的波长，即一个波周期的变化距离。波长越大，则随距离的变化，波的变化越慢，波动越不明显。
+   * 取值范围：[0, +∞)
+   * 设置为负值时取默认值。
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1346,8 +1346,9 @@ export declare interface RippleFieldOptions {
    */
   wavelength?: double;
   /**
-   * Wave speed. The greater the wave speed, the faster the wave changes over time, and the more pronounced the wave
-   * motion. Range of values:[0, +∞)
+   * 描述粒子波动场的波速。波速越大，则随时间的变化，波的变化越快，波动越明显。
+   * 取值范围：[0, +∞)
+   * 设置为负值时取默认值。
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1356,8 +1357,9 @@ export declare interface RippleFieldOptions {
    */
   waveSpeed?: double;
   /**
-   * The attenuation coefficient of the ripple field. The larger the attenuation coefficient, the faster the wave
-   * attenuates over time. Range of values:[0,1]
+   * 描述粒子波动场波的衰减系数。衰减系数越大，则随时间的变化，波的衰减越快。
+   * 取值范围：[0, 1]
+   * 设置的数值不在范围内时取默认值。
    *
    * @default 0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1366,8 +1368,7 @@ export declare interface RippleFieldOptions {
    */
   attenuation?: double;
   /**
-   * The central point where the ripple field generates force. The top-left corner of the component is the origin of
-   * coordinates. The coordinate unit is vp.
+   * 粒子波动场产生力的中心位置。组件的左上角为坐标原点。坐标单位为vp。
    *
    * @default {x:0,y:0}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1376,7 +1377,7 @@ export declare interface RippleFieldOptions {
    */
   center?: PositionT<double>;
   /**
-   * The region influenced by the ripple field.
+   * 粒子波动场影响的区域信息，其中区域信息包括区域形状、区域大小以及区域中心位置。
    *
    * @default {shape:DisturbanceFieldShape.RECT,position:{x:0,y:0},size:{width:0,height:0}}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1395,9 +1396,7 @@ export declare interface RippleFieldOptions {
  */
 export declare interface VelocityFieldOptions {
   /**
-   * The velocity values in each direction of the velocity field. Particles only acquire this velocity when within
-   * the range of the velocity field; once they leave the range of the velocity field, they are no longer influenced
-   * by it and do not gain this additional velocity.
+   * 粒子速度场的各方向速度值。粒子只有在速度场作用范围内时获得该速度，离开速度场范围后不受该速度场影响，不获得该额外的速度。
    *
    * @default {x:0,y:0}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1406,7 +1405,7 @@ export declare interface VelocityFieldOptions {
    */
   velocity?: Vector2T<double>;
   /**
-   * The region influenced by the velocity field.
+   * 粒子速度场影响的区域信息，其中区域信息包括区域形状、区域大小以及区域中心位置。
    *
    * @default {shape:DisturbanceFieldShape.RECT,position:{x:0,y:0},size:{width:0,height:0}}
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1417,10 +1416,10 @@ export declare interface VelocityFieldOptions {
 }
 
 /**
- * Defines Particle Component
+ * 定义粒子组件。
  *
- * @param { Particles } particles - particle constructor options [since 23]
- * @param { CustomBuilder } [content_] - container [since 23 - 23]
+ * @param { Particles } particles - 粒子动画的集合，详见Particles属性说明。 [since 23]
+ * @param { CustomBuilder } [content_] - Particle的子组件。 [since 23 - 23]
  * @returns { ParticleAttribute } [since 23]
  * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
  * @stagemodelonly
@@ -1433,9 +1432,9 @@ export declare function Particle(
 ): ParticleAttribute;
 
 /**
- * Defines Particle
+ * 定义粒子组件。
  *
- * @param { CustomBuilderT<ParticleAttribute> } style_ - Particle attribute instance
+ * @param { CustomBuilderT<ParticleAttribute> } style_ - Particle属性实例
  * @returns { ParticleAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

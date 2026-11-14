@@ -1748,6 +1748,79 @@ declare namespace securityManager {
    * @since 26.1.0
    */
   function getPasswordLastChangedTime(accountId: number): number;
+
+  /**
+   * Indicates the enterprise reset policy.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  enum EnterpriseResetPolicy {
+    /**
+     * Default policy.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DEFAULT = 0,
+
+    /**
+     * Enterprise account authentication is enabled.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ENTERPRISE_ACCOUNT_AUTH_ON = 1,
+
+    /**
+     * Enterprise account authentication is disabled.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ENTERPRISE_ACCOUNT_AUTH_OFF = 2
+  }
+
+  /**
+   * Obtains the enterprise reset policy. This API returns the policy synchronously.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @returns { EnterpriseResetPolicy } Enterprise reset policy.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
+
+  /**
+   * Sets the enterprise reset policy.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { EnterpriseResetPolicy } policy - Enterprise reset policy to set.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setEnterpriseResetPolicy(policy: EnterpriseResetPolicy): void;
 }
 
 /*** if arkts dynamic */

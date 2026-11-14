@@ -683,6 +683,80 @@ export declare class DatePickerComponentOptions {
    * @since 26.0.0 dynamic
    */
   timeOptions?: TimeOptions;
+
+  /**
+   * Text style of the selected item.
+   * Default value:
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '14vp' (when the number of displayed columns is 6 or greater) or '16vp' (otherwise),
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectedTextStyle?: PickerComponentTextStyle;
+
+  /**
+   * Text style of all items. When both selectedTextStyle and itemTextStyle are set, itemTextStyle applies to items
+   * other than the selected item.
+   * Default value:
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '14vp' (when the number of displayed columns is 6 or greater) or '16vp' (otherwise),
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  itemTextStyle?: PickerComponentTextStyle;
+
+  /**
+   * Style of the selected item indicator.
+   * Default value:
+   * {
+   * type: PickerIndicatorType.BACKGROUND,
+   * strokeWidth: {
+   * value: 2,
+   * unit: LengthUnit.px
+   * },
+   * dividerColor: 'sys.color.comp_divider',
+   * startMargin: {
+   * value: 0,
+   * unit: LengthUnit.px
+   * },
+   * endMargin: {
+   * value: 0,
+   * unit: LengthUnit.px
+   * },
+   * borderRadius: {
+   * value: 12,
+   * unit: LengthUnit.vp
+   * },
+   * backgroundColor: 'sys.color.comp_background_tertiary'
+   * }
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectionIndicator?: PickerIndicatorStyle;
 }
 
 /**

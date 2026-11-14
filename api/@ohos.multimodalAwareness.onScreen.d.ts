@@ -649,7 +649,7 @@ declare namespace onScreen {
     sampleId?: string;
     /**
      * Page collection policy, which is the bitwise OR operation combination of
-     *    <br> [CollectStrategy]{@link onScreen. CollectStrategy}.
+     * [CollectStrategy]{@link onScreen. CollectStrategy}.
      * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
      * @systemapi
      * @stagemodelonly
@@ -805,8 +805,8 @@ declare namespace onScreen {
   
   /**
    * Proactively triggers screen behavior interaction to identify screen behaviors and return behavior receipts. For
-   *     <br> example, after a link is clicked, the system accurately jumps to the specified paragraph and
-   *     <br> highlights the text based on the receipt information.
+   * example, after a link is clicked, the system accurately jumps to the specified paragraph and
+   * highlights the text based on the receipt information.
    *
    * @permission ohos.permission.GET_SCREEN_CONTENT [since 23 - 24]
    * @permission ohos.permission.GET_SCREEN_CONTENT or ohos.permission.ONSCREEN_AWARENESS [since 26.0.0]

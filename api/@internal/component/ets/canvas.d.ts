@@ -776,7 +776,7 @@ declare class Path2D extends CanvasPath {
    * description specifications.
    *
    * @param { string } d - Path string that complies with the SVG path description
-   *     specification. For the format, see [SVG Path Syntax]{@link ./path#svg-path-syntax}.
+   *     specification. For the format, see [SVG Path Syntax]{@link @global:Path}.
    *     Abnormal values are treated as invalid values.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -793,7 +793,7 @@ declare class Path2D extends CanvasPath {
    *
    * @param { string } description - Path string that conforms to the SVG path
    *     description specification. For details about the format, see
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}.
+   *     [SVG Path Syntax]{@link @global:Path}.
    *     Abnormal values are handled as invalid values.
    * @param { LengthMetricsUnit } [unit] - Unit mode for configuring the **Path2D**
    *     object. After configuration, it cannot be dynamically changed. The

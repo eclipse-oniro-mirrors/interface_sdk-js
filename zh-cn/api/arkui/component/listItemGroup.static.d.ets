@@ -42,7 +42,7 @@ export declare enum ListItemGroupStyle {
   NONE = 0,
 
   /**
-   * Show default style.
+   * 显示默认卡片样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -191,7 +191,7 @@ export declare interface ListItemGroupAttribute extends CommonMethod {
    *
    * strokeWidth，startMargin和endMargin不支持设置百分比。
    *
-   * ListItem设置[多态样式]{@link common}时，被按压的子组件上下的分割线不绘制。
+   * ListItem设置[多态样式]{@link CommonMethod}时，被按压的子组件上下的分割线不绘制。
    *
    * @param { ListDividerOptions | null | undefined } value
    * @returns { this }

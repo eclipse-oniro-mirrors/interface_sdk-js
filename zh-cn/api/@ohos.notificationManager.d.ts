@@ -998,6 +998,7 @@ declare namespace notificationManager {
    * @param { AsyncCallback<void> } callback - 设定通知使能回调函数。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -1020,6 +1021,7 @@ declare namespace notificationManager {
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
    * @throws { BusinessError } 1600001 - Internal error.
@@ -3421,7 +3423,7 @@ declare namespace notificationManager {
   /**
    * 将应用包名添加到通知发布权限管控名单，以阻止应用发布通知。支持启用或关闭该功能。
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - 是否启用通知发布权限管控名单（true：开启，false：关闭）。
    * @param { Array<string> } bundleList - 指定通知发布权限管控名单的应用列表，使用包名代表应用。
    * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
@@ -3442,7 +3444,7 @@ declare namespace notificationManager {
   /**
    * 将应用包名添加到通知发布权限管控名单，以阻止应用发布通知。使用Promise异步回调。
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - 表示是否启用通知发布权限管控名单。true表示启用，false表示关闭。
    * @param { Array<string> } bundleList - 指定通知发布权限管控名单的应用列表，使用包名表示应用。
    * @param { int } userId - 表示用户ID。
@@ -4017,6 +4019,30 @@ declare namespace notificationManager {
    * @since 26.0.0 dynamic&static
    */
   function isNotificationSlotEnabledByBundles(bundles: Array<BundleOption>, type: SlotType): Promise<Map<BundleOption, boolean>>;
+
+  /**
+   * 获取通知开关受限的应用列表。使用Promise异步回调。
+   *
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
+   * @param { int } userId - 用户ID。
+   *     <br>取值限定为整数。
+   * @returns { Promise<Map<string, boolean>> } Promise对象，返回应用通知开关状态的键值对集合。
+   *     <br> - true: 表示开启。
+   *     <br> - false: 表示关闭。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Not system application to call the interface.
+   * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
+   *     2.Memory operation error.
+   * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
+   * @throws { BusinessError } 1600003 - Failed to connect to the service.
+   * @throws { BusinessError } 1600008 - The user does not exist.
+   * @throws { BusinessError } 1600012 - No memory space.
+   * @syscap SystemCapability.Notification.Notification
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getNotificationSwitchLimitedBundles(userId: int): Promise<Map<string, boolean>>; 
 
   /**
    * 根据**hashCode**获取活跃的通知。使用Promise异步回调。

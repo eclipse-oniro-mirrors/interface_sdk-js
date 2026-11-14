@@ -17,7 +17,6 @@
  * @file 通话管理
  * @kit MDMKit
  */
-
 import type Want from './@ohos.app.ability.Want';
 import adminManager from './@ohos.enterprise.adminManager';
 
@@ -38,6 +37,46 @@ import adminManager from './@ohos.enterprise.adminManager';
  * @since 20
  */
 declare namespace telephonyManager {
+
+  /**
+   * 根据指定的时间范围和电话号码查询短信消息。
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_MESSAGES
+   * @param { TelephonyQueryConfig } queryConfig - 查询选项，包括时间范围和电话号码。
+   * @returns { Promise<Array<SmsMessageInfo>> } Promise对象，返回符合查询条件的短信消息列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getSmsMessages(queryConfig: TelephonyQueryConfig): Promise<Array<SmsMessageInfo>>;
+
+  /**
+   * 根据指定的时间范围和电话号码查询通话记录。企业MDM应用可通过此接口读取设备通话记录进行审计。
+   * 支持按时间范围和号码进行筛选查询。查询时间范围不能超过31天，号码采用完全匹配。
+   * 通话记录最多保存5000条，超过时自动删除最早的记录。
+   * 该接口使用Promise方式异步返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
+   * @param { TelephonyQueryConfig } queryConfig - 查询配置，包括时间范围和电话号码。
+   *     telephoneNumber未传或为空字符串时不按号码过滤，返回时间范围内全部通话记录。
+   * @returns { Promise<Array<CallLogInfo>> } Promise对象，返回符合查询条件的通话记录列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCallLogs(queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
 
   /**
    * 禁用指定卡槽的SIM卡。禁用后，无法使用该卡槽的SIM卡接打电话、收发短信、上网。例如，企业设备管理员可在员工离职或设备丢失时，禁用SIM卡防止未授权使用。适用于企业需要限制员工设备通话能力的场景，例如员工离职或设备遗失时防止
@@ -383,27 +422,6 @@ declare namespace telephonyManager {
   function getDefaultData(admin: Want): number;
 
   /**
-   * 根据指定的时间范围和电话号码查询通话记录。企业MDM应用可通过此接口读取设备通话记录进行审计。
-   * 支持按时间范围和号码进行筛选查询。查询时间范围不能超过31天，号码采用完全匹配。
-   * 通话记录最多保存5000条，超过时自动删除最早的记录。
-   * 该接口使用Promise方式异步返回结果。
-   *
-   * @permission ohos.permission.ENTERPRISE_READ_CALL_LOG
-   * @param { TelephonyQueryConfig } queryConfig - 查询配置，包括时间范围和电话号码。
-   * @returns { Promise<Array<CallLogInfo>> } Promise对象，返回符合查询条件的通话记录列表。
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 9200016 - Service timeout.
-   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-   * @stagemodelonly
-   * @since 26.1.0
-   */
-  function getCallLogs(queryConfig: TelephonyQueryConfig): Promise<Array<CallLogInfo>>;
-
-  /**
    * 查询短信和通话记录的选项。
    * 提供电话相关查询的通用查询参数。
    *
@@ -510,6 +528,57 @@ declare namespace telephonyManager {
      * @since 26.1.0
      */
     telephoneNumber: string;
+  }
+
+  /**
+   * 短信消息信息。
+   * 提供短信的详细信息，包括消息内容、发送方/接收方信息、时间戳以及使用的SIM卡槽位。
+   *
+   * @property { number } time - SMS receive/send time (millisecond timestamp).
+   * @property { boolean } isSender - SMS direction: **true** indicates send, **false** indicates receive.
+   * @property { number } slotId - SIM card slot ID.
+   * @property { string } phoneNumber - Phone number of the other party.
+   * @property { string } content - SMS content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface SmsMessageInfo {
+    /**
+     * 短信接收/发送时间（毫秒时间戳）。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    time: number;
+ 
+    /**
+     * 短信方向：**true** 表示发送，**false** 表示接收。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    isSender: boolean;
+ 
+    /**
+     * 对方电话号码。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    telephoneNumber: string;
+ 
+    /**
+     * 短信内容。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    content: string;
   }
 }
 

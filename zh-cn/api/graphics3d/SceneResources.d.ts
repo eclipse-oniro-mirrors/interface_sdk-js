@@ -1278,7 +1278,7 @@ export interface ImageStream extends Image {
  */
 export interface RenderTarget extends Image {
   /**
-   * 从渲染目标对象获取渲染结果的PixelMap，返回的PixelMap不可编辑，使用Promise异步回调。渲染目标对象已销毁时调用该接口抛出错误码25601006。
+   * 从渲染目标对象获取渲染结果的PixelMap，返回的PixelMap不可编辑，使用Promise异步回调。
    *
    * @returns { Promise<image.PixelMap> } Promise对象，返回渲染结果对应的PixelMap。
    * @throws { BusinessError } 25601006 - Expired or invalid resource.

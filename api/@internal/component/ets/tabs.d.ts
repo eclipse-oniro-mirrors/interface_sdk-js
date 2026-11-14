@@ -1504,7 +1504,84 @@ declare interface TabsBreakpointType<T> {
   lg?: T;
 }
 
+/**
+ * Defines ths options for the title bar of the sidebar tab bar. The title bar is displayed above the header area.
+ * When the title bar is set, the expand/collapse button moves from the default left side to the right side of the
+ * title bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TabsSidebarTitleBarOptions<T> {
+  /**
+   * Icon of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  icon?: ResourceStr;
 
+  /**
+   * Text of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  text?: ResourceStr;
+}
+
+/**
+ * Defines the centralized customization configuration for the sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+interface TabViewCustomization {
+  /**
+   * A map of TabContent index to sidebar visibility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  visibilityMap?: Map<number, TabVisibility>;
+
+  /**
+   * A map of TabContent index to sidebar section.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sectionMap?: Map<number, SidebarSection>;
+
+  /**
+   * A map of TabContent index to the display priority of tab items in the sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  orderMap?: Map<number, number>;
+}
 
 /**
  * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
@@ -2574,6 +2651,33 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.1.0 dynamic
    */
   showSidebarControlButton(value: Optional<boolean>): TabsAttribute;
+
+  /**
+   * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
+   * set, the expand/collapse button moves from the default left side to the right side of the title bar.
+   *
+   * @param { Optional<TabsSidebarTitleBarOptions> } value - Title bar options of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sidebarTitleBar(value: Optional<TabsSidebarTitleBarOptions>): TabsAttribute;
+
+  /**
+   * Sets the centralized customization configuration for the sidebar tab bar.
+   *
+   * @param { Optional<TabViewCustomization> } value - The centralized customization configuration.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  tabViewCustomization(value: Optional<TabViewCustomization>): TabsAttribute;
 }
 
 /**

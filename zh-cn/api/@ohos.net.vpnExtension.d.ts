@@ -17,8 +17,8 @@
  * @file VPN增强管理
  * @kit NetworkKit
  */
-
 import type { Callback } from './@ohos.base';
+
 import type connection from './@ohos.net.connection';
 import type _VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
@@ -54,7 +54,7 @@ import type Want from './@ohos.app.ability.Want';
  */
 declare namespace vpnExtension {
   /**
-   * 获取网络链接信息。
+   * 获取网络链路信息。
    *
    * @syscap SystemCapability.Communication.NetManager.Core
    * @since 11 dynamic
@@ -104,7 +104,7 @@ declare namespace vpnExtension {
   /**
    * 停止同一应用程序中的服务。使用Promise异步回调。
    *
-   * @param { Want } want - 指示要启动的信息。
+   * @param { Want } want - 指示要停止的信息。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -126,7 +126,7 @@ declare namespace vpnExtension {
    * @permission ohos.permission.MANAGE_VPN
    * @param { boolean } enable - always on启用或禁用。true：always on启用；false：always on禁用。
    * @param { string } bundleName - 设置了always on vpn的包名，是指三方应用的bundleName。
-   * @returns { Promise<void> } 无返回值的Promise对象。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -143,7 +143,7 @@ declare namespace vpnExtension {
    *
    * @permission ohos.permission.MANAGE_VPN
    * @param { string } bundleName - 设置了always on vpn的包名，通常指三方应用的bundleName。
-   * @returns { Promise<boolean>} Promise对象。返回true表示应用alway on vpn开启状态；返回false表示关闭状态。
+   * @returns { Promise<boolean>} Promise对象。返回true表示应用always on vpn开启状态；返回false表示关闭状态。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -201,7 +201,7 @@ declare namespace vpnExtension {
 
   /**
    * VPN观察者对象。用于监听VPN相关事件。在调用VpnObserver的方法前，需要先通过[vpnExtension.createVpnObserver]{@link vpnExtension.createVpnObserver}
-   * 创建VPN连接对象。
+   * 创建VPN观察者对象。
    *
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @stagemodelonly
@@ -217,7 +217,7 @@ declare namespace vpnExtension {
      * >
      * > 多次调用该接口时，仅最后一次传入的callback生效。
      *
-     * @param { Callback<boolean> } callback - 回调函数，用于返回用户授权结果。true表示用户同意授权，false表示用户拒绝授权。
+     * @param { Callback<boolean> } callback - 回调函数。返回true表示用户同意授权；返回false表示用户拒绝授权。
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -243,7 +243,7 @@ declare namespace vpnExtension {
   }
 
   /**
-   * VPN连接对象。在调用VpnConnection的方法前，需要先通过vpnExt.createVpnConnection创建VPN连接对象。
+   * VPN连接对象。在调用VpnConnection的方法前，需要先通过vpnExtension.createVpnConnection创建VPN连接对象。
    *
    * @syscap SystemCapability.Communication.NetManager.Vpn
    * @since 11 dynamic
@@ -253,16 +253,15 @@ declare namespace vpnExtension {
 
     /**
      * 使用config创建一个VPN网络。使用Promise异步回调。
-     * 
+     *
      * > **说明：**
      * >
-     * > 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
+     * > 1. 建议在不需要VPN网络的时候配对调用[destroy()]{@link vpnExtension.VpnConnection.destroy()}或
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)}接口销毁启动的VPN网络，并执行资源清理等操作。
+     * > 2. 当调用该接口返回错误码2200003时，请排查是否已申请ohos.permission.INTERNET权限。
      *
-     * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - 指定VPN网络的配置信息。
-     * @returns { Promise<int> } 以 Promise 形式返回获取结果，返回指定虚拟网卡的文件描述符 fd。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @returns { Promise<int> } Promise对象，返回指定虚拟网卡的文件描述符 fd。
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2200001 - Invalid parameter value.
      * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
@@ -284,7 +283,7 @@ declare namespace vpnExtension {
      * >
      * > 当前系统多VPN能力仅支持IPv4。
      *
-     * @returns { Promise<string> } 以Promise形式返回获取结果，返回vpnId。
+     * @returns { Promise<string> } Promise对象，返回vpnId。
      * @throws { BusinessError } 19900001 - Invalid parameter value.
      * @throws { BusinessError } 19900002 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
@@ -294,7 +293,7 @@ declare namespace vpnExtension {
     generateVpnId(): Promise<string>;
 
     /**
-     * 保护套接字不受VPN连接影响，通过该套接字发送的数据将直接基于物理网络收发，因此其流量不会通过VPN转发。使用Promise方式作为异步方法。
+     * 保护套接字不受VPN连接影响，通过该套接字发送的数据将直接基于物理网络收发，因此其流量不会通过VPN转发。使用Promise异步回调。
      *
      * @param { int } socketFd - 指定保护的 socketfd，该文件描述符通过
      *     [getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd()}获取。
@@ -413,7 +412,7 @@ declare namespace vpnExtension {
     routes?: Array<RouteInfo>;
 
     /**
-     * DNS服务器地址信息。当配置DNS服务器地址后，VPN启动状态下被代理的应用上网时，使用配置的DNS服务器做DNS查询。
+     * DNS服务器地址信息。当配置DNS服务器地址后，VPN启动状态下被代理的应用上网时，使用配置的DNS服务器做DNS查询。最多可配置64个DNS服务器地址。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -431,7 +430,7 @@ declare namespace vpnExtension {
     searchDomains?: Array<string>;
 
     /**
-     * 最大传输单元MTU值（单位：字节）。取值范围：[576，1500]。
+     * 最大传输单元MTU值（单位：字节）。取值范围：[576, 1500]。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -440,7 +439,7 @@ declare namespace vpnExtension {
     mtu?: int;
 
     /**
-     * 是否支持IPv4。true表示支持，false表示不支持, 默认值为true。
+     * 是否支持IPv4。true表示支持，false表示不支持，默认值为true。
      * 
      * **注意**：若支持IPv4功能，需要在addresses中配置IPv4类型的IP地址。
      *
@@ -451,7 +450,7 @@ declare namespace vpnExtension {
     isIPv4Accepted?: boolean;
 
     /**
-     * 是否支持IPv6。true表示支持，false表示不支持, 默认值为false。
+     * 是否支持IPv6。true表示支持，false表示不支持，默认值为false。
      * 
      * **注意**：若支持IPv6功能，需要在addresses中配置IPv6类型的IP地址。
      *
@@ -462,7 +461,7 @@ declare namespace vpnExtension {
     isIPv6Accepted?: boolean;
 
     /**
-     * 是否支持内置VPN。true表示支持，false表示不支持, 默认值为false。
+     * 是否支持内置VPN。true表示支持，false表示不支持，默认值为false。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -471,7 +470,7 @@ declare namespace vpnExtension {
     isInternal?: boolean;
 
     /**
-     * 是否阻塞模式。true表示阻塞模式，false表示非阻塞模式, 默认值为false。
+     * 是否阻塞模式。true表示阻塞模式，false表示非阻塞模式，默认值为false。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -492,9 +491,9 @@ declare namespace vpnExtension {
     trustedApplications?: Array<string>;
 
     /**
-     * 被阻止的应用信息列表，string类型表示的包名。当配置该列表后，该列表中的应用数据不会被VPN代理，其他应用可以根据routes配置被VPN代理。API version 23前最多可配置64个被阻止的应用包名；从API 
+     * 被阻止的应用信息列表，string类型表示的包名。当配置该列表后，该列表中的应用数据不会被VPN代理，其他应用可以根据routes配置被VPN代理。API version 23前最多可配置64个被阻止的应用包名；从API
      * version 23开始最多可配置256个被阻止的应用包名。
-     * 
+     *
      * **注意**：trustedApplications和blockedApplications列表不能同时配置。
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
@@ -502,7 +501,7 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     blockedApplications?: Array<string>;
+
   }
 }
-
 export default vpnExtension;

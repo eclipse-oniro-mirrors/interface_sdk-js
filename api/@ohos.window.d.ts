@@ -1128,6 +1128,36 @@ declare namespace window {
      * @since 23 static
      */
     vsyncTimestamp: long;
+
+    /**
+     * Total duration required to render this frame and send it to the display subsystem.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    totalDuration?: long;
+
+    /**
+     * The expected start timestamp of the current frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    intendedVsyncTimestamp?: long;
+
+    /**
+     * The total duration spent executing all animation callbacks in a frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    animationDuration?: long;
   }
 
   /**
@@ -5493,7 +5523,7 @@ declare namespace window {
     /**
      * Whether the window starts in a minimized state.
      * If true, the window will not be brought to the foreground.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices.
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -5505,9 +5535,9 @@ declare namespace window {
     /**
      * Whether to hide the dock icon and the hover thumbnail preview.
      * If true, the current window will not display its icon and hover thumbnail preview on the dock.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -5517,14 +5547,45 @@ declare namespace window {
     /**
      * Whether to hide the window from the multitasking center.
      * If true, the current window will not be displayed in the multitasking center.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
+  }
+
+  /**
+   * Describes the window parameters during application show.
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WindowShowParams {
+    /**
+     * Whether the window automatically gains focus. If true, the window gains focus.
+     * If false, the window will not automatically gain focus.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    windowFocused?: boolean;
+
+    /**
+     * Whether the window automatically raise to top. If true, the window will be raised to top.
+     * If false, the window will not raise to top.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    raiseTop?: boolean;
   }
 
   /**
@@ -13659,6 +13720,26 @@ declare namespace window {
      * @since 23 dynamic&static
      */
     isReceiveDragEventEnabled(): boolean;
+
+    /**
+     * Sets whether to enable pointer event interception for the window.
+     *
+     * @param { boolean } isInterceptable - Whether to intercept the pointer event of this window.
+     *     The value **true** indicates to intercept, and **false** indicates the opposite.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability.
+     *     <br>2. The chip does not support the capability.
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     *     Possible cause: Internal IPC error.
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPointerInterceptable(isInterceptable: boolean): Promise<void>;
 
     /**
      * Enables conversion between window orientation, screen orientation, and screen angle.

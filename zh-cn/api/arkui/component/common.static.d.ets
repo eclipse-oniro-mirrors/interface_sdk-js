@@ -42,7 +42,7 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, TextOverflow, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
@@ -164,8 +164,7 @@ export declare interface TextDecorationOptions {
     thicknessScale?: double;
 }
 /**
- * Provides an interface for the style of an divider including stroke width, color, start margin
- * and end margin
+ * 分割线样式对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -173,7 +172,13 @@ export declare interface TextDecorationOptions {
  */
 export declare interface DividerStyle {
     /**
-     * Define the stroke width of the divider
+     * 分割线的线宽（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -181,7 +186,9 @@ export declare interface DividerStyle {
      */
     strokeWidth: Length | undefined;
     /**
-     * Define the color of the divider
+     * 分割线的颜色。
+     *
+     * 默认值：#33182431
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -189,7 +196,13 @@ export declare interface DividerStyle {
      */
     color?: ResourceColor;
     /**
-     * Define the start margin of the divider
+     * 分割线与侧边栏顶端的距离（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -198,7 +211,13 @@ export declare interface DividerStyle {
      */
     startMargin?: Length;
     /**
-     * Define the end margin of the divider
+     * 分割线与侧边栏底端的距离（不支持百分比设置）。
+     *
+     * 默认值：0.0
+     *
+     * 单位：vp
+     *
+     * 取值范围：[0, +∞)。设置为小于0的值时，按默认值显示。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1917,7 +1936,7 @@ export declare interface GeometryTransitionOptions {
     hierarchyStrategy?: TransitionHierarchyStrategy
 }
 /**
- * Defines the options of linear gradient.
+ * 线性渐变的参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1925,9 +1944,9 @@ export declare interface GeometryTransitionOptions {
  */
 export declare interface LinearGradientOptions {
     /**
-     * Defines starting angle of linear gradient.
+     * 线性渐变的角度，number类型时单位为度（°）。角度为0度时渐变方向从下往上，顺时针旋转为正向角度。
      *
-     * Anonymous Object Rectification.
+     * 取值范围：(-∞,+∞)，设置的值大于0时，按顺时针方向，小于0时，按逆时针方向。
      * @default 180
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1935,9 +1954,7 @@ export declare interface LinearGradientOptions {
      */
     angle?: double | string;
     /**
-     * Defines the direction of linear gradient.
-     *
-     * Anonymous Object Rectification.
+     * 线性渐变的方向，设置angle为非undefined后，direction不生效。设置为GradientDirection.None时，按默认方向渐变。默认值：GradientDirection.Bottom。
      * @default GradientDirection.Bottom
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -1945,9 +1962,10 @@ export declare interface LinearGradientOptions {
      */
     direction?: GradientDirection;
     /**
-     * Defines color description for gradients.
-     *
-     * Anonymous Object Rectification.
+     * 指定渐变色颜色和其对应的百分比位置的数组，设置非法颜色直接跳过。ResourceColor表示颜色，number表示该颜色所处的位置，
+     * 取值范围为[0, 1.0]，设置的值小于0时，按0处理，设置的值大于1.0时，按1.0处理。0表示需要设置渐变色的开始处，1.0表示渐变色的结束处。
+     * 为了实现多个颜色渐变效果，多个数组中的number类型参数应递增设置。如果后一个数组中的number类型参数小于前一个数组的number类型参数，
+     * 将按照等于前一个数组number值处理。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -1957,9 +1975,13 @@ export declare interface LinearGradientOptions {
         double
     ]>;
     /**
-     * Defines gradient colors with repeated coloring.
+     * 设置渐变颜色是否在组件范围内循环重复填充。
      *
-     * Anonymous Object Rectification.
+     * 默认值：false。
+     *
+     * true：渐变效果在组件范围内循环重复。
+     *
+     * false：渐变效果仅在指定范围内显示一次。
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2012,7 +2034,7 @@ export declare enum TransitionHierarchyStrategy {
 }
 
 /**
- * Defines the options of sweep gradient.
+ * 角度渐变参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2020,9 +2042,7 @@ export declare enum TransitionHierarchyStrategy {
  */
 export declare interface SweepGradientOptions {
     /**
-     * Defines center point for angle gradient.
-     *
-     * Anonymous Object Rectification.
+     * 为角度渐变的中心点，即相对于当前组件左上角的坐标，number类型时单位为vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2032,9 +2052,10 @@ export declare interface SweepGradientOptions {
         Length
     ];
     /**
-     * Defines the starting point of angle gradient.
+     * 角度渐变的起点。未设置start时，默认值为0，即起始角度为0度。
      *
-     * Anonymous Object Rectification.
+     * 角度为字符串时，合法的取值为数字（默认单位为度，即deg）或数字后带"deg"（度）、"rad"（弧度）、"grad"（梯度）、"turn"（圈）单位。例如："90"、 "90deg"、"1.57rad"。传入非法格式的字符串时，
+     * 按默认值0处理。取值有0到360度的限制，转换为度的单位之后，值在0到360度之间，设置为小于0度的值时，按值为0度处理，设置为大于360度的值时，按值为360度处理。
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2042,9 +2063,10 @@ export declare interface SweepGradientOptions {
      */
     start?: double | string;
     /**
-     * Defines end point of angle gradient.
+     * 角度渐变的终点。取值范围：[0, 360]。转换为度的单位之后，设置为小于0度的值时，按值为0度处理，设置为大于360度的值时，按值为360度处理。默认值：0。
      *
-     * Anonymous Object Rectification.
+     * 角度为字符串时，合法的取值为数字（默认单位为度，即deg）或数字后带"deg"（度）、"rad"（弧度）、"grad"（梯度）、"turn"（圈）单位。例如："90"、 "90deg"、"1.57rad"。传入非法格式的字符串时，
+     * 按默认值0处理。
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2052,9 +2074,10 @@ export declare interface SweepGradientOptions {
      */
     end?: double | string;
     /**
-     * Defines the rotation angle of the gradient.
+     * 角度渐变的旋转角度。未设置rotation时，默认值为0，即不旋转。
      *
-     * Anonymous Object Rectification.
+     * 角度为字符串时，合法的取值为数字或数字后带"deg"（度）、"rad"（弧度）、"grad"（梯度）、"turn"（圈）单位。例如："90"、 "90deg"、"1.57rad"。传入非法格式的字符串时，按默认值0处理。取值有0到
+     * 360度的限制，转换为度的单位之后，值在0到360度之间，设置为小于0度的值时，按值为0度处理，设置为大于360度的值时，按值为360度处理。
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2062,9 +2085,11 @@ export declare interface SweepGradientOptions {
      */
     rotation?: double | string;
     /**
-     * Defines color description for gradients.
+     * 指定渐变色和其对应的百分比位置的数组，设置不符合ResourceColor格式要求的颜色值时，该颜色项直接跳过不生效。设置metricsColors时此参数失效。ResourceColor表示颜色。number表示该颜色所处的位
+     * 置，取值范围为[0, 1.0]，设置的值小于0时，按0处理，设置的值大于1.0时，按1.0处理。0表示需要设置渐变色的开始处，1.0表示渐变色的结束处。为了实现多个颜色渐变效果，多个数组中的number类型参数应递增设置。如果后一
+     * 个数组中的number类型参数小于前一个数组的number类型参数，将按照等于前一个数组number值处理。
      *
-     * Anonymous Object Rectification.
+     * 默认值：[]，无渐变效果。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2074,9 +2099,8 @@ export declare interface SweepGradientOptions {
         double
     ]>;
     /**
-     * Defines color description in ColorMetrics format for gradients.
-     * This parameter takes precedence over colors parameter.
-     *
+     * 指定渐变颜色和其对应的百分比位置的数组，设置非法颜色直接跳过。当需要使用广色域（如P3色域）颜色时，应使用metricsColors代替colors。设置metricsColors时colors失效。每个渐变
+     * ColorMetrics的色域属性应当统一，设置不同色域属性则认为非法。使用广色域（如DISPLAY_P3）时，需先通过setColorSpace接口将当前窗口设置为广色域。默认不设置，不设置时使用colors参数。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2086,9 +2110,13 @@ export declare interface SweepGradientOptions {
         double
     ]>;
     /**
-     * Defines gradient colors with repeated coloring.
+     * 设置渐变颜色是否在组件范围内循环重复填充。
      *
-     * Anonymous Object Rectification.
+     * 默认值：false。
+     *
+     * true：渐变效果在组件范围内循环重复。
+     *
+     * false：渐变效果仅在指定范围内显示一次。
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2097,7 +2125,7 @@ export declare interface SweepGradientOptions {
     repeating?: boolean;
 }
 /**
- * Defines the options of radial gradient.
+ * 径向渐变参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2105,9 +2133,7 @@ export declare interface SweepGradientOptions {
  */
 export declare interface RadialGradientOptions {
     /**
-     * Defines center point for radial gradient.
-     *
-     * Anonymous Object Rectification.
+     * 径向渐变的中心点，即相对于当前组件左上角的坐标，number类型时单位为vp。第一个元素为x坐标，第二个元素为y坐标。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2117,18 +2143,20 @@ export declare interface RadialGradientOptions {
         Length
     ];
     /**
-     * Defines radius of the radial gradient.
+     * 径向渐变的半径，number类型时单位为vp。
      *
-     * Anonymous Object Rectification.
+     * 取值范围：[0,+∞)。设置的值小于0时，按值为0处理。设置的值为undefined时，系统将根据组件尺寸自动计算渐变半径。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     radius: Length;
     /**
-     * Defines color description for gradients.
+     * 指定渐变色和其对应的百分比位置的数组，设置非法颜色直接跳过。ResourceColor表示颜色，number表示该颜色所处的位置，取值范围为[0, 1.0]，设置的值小于0时，按0处理，设置的值大于1.0时，按1.0处理。0表示需
+     * 要设置渐变色的开始处，1.0表示渐变色的结束处。为了实现多个颜色渐变效果，多个数组中的number类型参数应递增设置。如果后一个数组中的number类型参数小于前一个数组的number类型参数，将按照等于前一个数组number值处
+     * 理。
      *
-     * Anonymous Object Rectification.
+     * 默认值：[]，无渐变效果。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2138,9 +2166,13 @@ export declare interface RadialGradientOptions {
         double
     ]>;
     /**
-     * Defines gradient colors with repeated coloring.
+     * 设置渐变颜色是否在组件范围内循环重复填充。
      *
-     * Anonymous Object Rectification.
+     * 默认值：false。
+     *
+     * true：渐变效果在组件范围内循环重复。
+     *
+     * false：渐变效果仅在指定范围内显示一次。
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2149,7 +2181,7 @@ export declare interface RadialGradientOptions {
     repeating?: boolean;
 }
 /**
- * Defines the options of translate.
+ * 定义平移选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2746,6 +2778,7 @@ export declare interface RotateAngleOptions {
 /**
  * 转场边缘类型。
  *
+ * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -2782,10 +2815,10 @@ export declare enum TransitionEdge {
      * @stagemodelonly
      * @since 23 static
      */
-    END
+    END = 3
 }
 /**
- * Defines the option of asymmetric transition.
+ * 定义非对称转场选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2793,7 +2826,7 @@ export declare enum TransitionEdge {
  */
 export declare interface AsymmetricTransitionOption {
     /**
-     * TransitionEffect used for appearing
+     * 组件出现时使用的转场效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2801,7 +2834,7 @@ export declare interface AsymmetricTransitionOption {
      */
     appear: TransitionEffect;
     /**
-     * TransitionEffect used for disappearing
+     * 组件消失时使用的转场效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3108,7 +3141,7 @@ export declare interface ItemDragInfo {
     y: double;
 }
 /**
- * Enum of using the effects template mode.
+ * 使用效果模板种类的枚举值。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3117,7 +3150,7 @@ export declare interface ItemDragInfo {
  */
 export declare enum EffectType {
     /**
-     * Define use the effects template defined by the parent effectComponent.
+     * 使用父级EffectComponent定义的效果模板来渲染组件特效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3125,7 +3158,7 @@ export declare enum EffectType {
      */
     DEFAULT = 0,
     /**
-     * Define use the effects template defined by the window.
+     * 使用窗口定义的效果模板来渲染组件特效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3442,7 +3475,7 @@ export declare enum SourceTool {
     JOYSTICK = 10
 }
 /**
- * Defines the Border Image Repeat Mode.
+ * 用于设置被切割的图片在边框上的重复方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3451,7 +3484,7 @@ export declare enum SourceTool {
  */
 export declare enum RepeatMode {
     /**
-     * The source image's slices are tiled. Tiles beyond the border box will be clipped.
+     * 被切割的图片会重复铺平在图片边框上，超出部分会被剪裁。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3459,7 +3492,7 @@ export declare enum RepeatMode {
      */
     Repeat = 0,
     /**
-     * The source image's slices are stretched to fill the border box.
+     * 被切割的图片会以拉伸填充的方式铺满图片边框。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3467,7 +3500,7 @@ export declare enum RepeatMode {
      */
     Stretch = 1,
     /**
-     * The source image's slices are tiled to fill the border box. Tiles may be compressed when needed.
+     * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会压缩图片。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3475,7 +3508,7 @@ export declare enum RepeatMode {
      */
     Round = 2,
     /**
-     * The source image's slices are tiled to fill the border box. Extra space will be distributed in between tiles.
+     * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会以空白填充。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3486,6 +3519,7 @@ export declare enum RepeatMode {
 /**
  * 模糊样式类型。
  *
+ * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -3506,7 +3540,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    Regular,
+    Regular = 1,
     /**
      * 厚材质模糊。
      *
@@ -3514,7 +3548,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    Thick,
+    Thick = 2,
     /**
      * 近距景深模糊。
      *
@@ -3522,7 +3556,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_THIN,
+    BACKGROUND_THIN = 3,
     /**
      * 中距景深模糊。
      *
@@ -3530,7 +3564,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_REGULAR,
+    BACKGROUND_REGULAR = 4,
     /**
      * 远距景深模糊。
      *
@@ -3538,7 +3572,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_THICK,
+    BACKGROUND_THICK = 5,
     /**
      * 超远距景深模糊。
      *
@@ -3546,7 +3580,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    BACKGROUND_ULTRA_THICK,
+    BACKGROUND_ULTRA_THICK = 6,
     /**
      * 关闭模糊。
      *
@@ -3554,7 +3588,7 @@ export declare enum BlurStyle {
      * @stagemodelonly
      * @since 23 static
      */
-    NONE,
+    NONE = 7,
     /**
      * 组件超轻薄材质模糊。
      *
@@ -3692,7 +3726,7 @@ export declare enum AnchoredColorMode {
 }
 
 /**
- * Defines adaptive color
+ * 取色模式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3701,8 +3735,7 @@ export declare enum AnchoredColorMode {
  */
 export declare enum AdaptiveColor {
     /**
-     * Adaptive color mode is not used.
-     * The default color is used as the mask color. Using a mode other than **DEFAULT** can be more time-consuming.
+     * 不使用取色模糊。使用系统预设颜色作为蒙版颜色。采用非DEFAULT方式的取色计算耗时高于DEFAULT方式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3710,7 +3743,7 @@ export declare enum AdaptiveColor {
      */
     DEFAULT = 0,
     /**
-     * Adaptive color mode is used. The average color value of the color picking area is used as the mask color.
+     * 使用取色模糊。将取色区域的颜色平均值作为蒙版颜色。采用AVERAGE方式较DEFAULT方式耗时，在性能敏感场景建议使用DEFAULT。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3741,7 +3774,7 @@ export declare enum ModalTransition {
      * @stagemodelonly
      * @since 23 static
      */
-    NONE,
+    NONE = 1,
     /**
      * 全屏模态透明度渐变动画。
      *
@@ -3749,7 +3782,7 @@ export declare enum ModalTransition {
      * @stagemodelonly
      * @since 23 static
      */
-    ALPHA
+    ALPHA = 2
 }
 /**
  * 继承自[BlurStyleOptions]{@link BlurStyleOptions}。
@@ -3781,7 +3814,7 @@ export declare interface BackgroundBlurStyleOptions extends BlurStyleOptions {
     inactiveColor?: ResourceColor;
 }
 /**
- * Defines the options of ForegroundBlurStyle
+ * 继承自[BlurStyleOptions]{@link BlurStyleOptions}。
  *
  * @extends BlurStyleOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3791,7 +3824,7 @@ export declare interface BackgroundBlurStyleOptions extends BlurStyleOptions {
 export declare interface ForegroundBlurStyleOptions extends BlurStyleOptions {
 }
 /**
- * Defines the options of blur
+ * 灰阶模糊参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3799,7 +3832,8 @@ export declare interface ForegroundBlurStyleOptions extends BlurStyleOptions {
  */
 export declare interface BlurOptions {
     /**
-     * Fuzzy gray scale parameter. Undefined value means no grayscale.
+     * 灰阶模糊参数，两参数取值范围均为[0,127]。对图像中的黑白色进行色阶调整，使其趋于灰色，视觉过渡更加柔和，对图像中的彩色调整没有效果。
+     * 参数一表示对黑色的提亮程度，参数二表示对白色的压暗程度，参数值越大调整效果越明显（黑白色变得越灰）。undefined表示不进行灰阶调整。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -3830,7 +3864,7 @@ export declare interface SystemAdaptiveOptions {
     disableSystemAdaptation?: boolean;
 }
 /**
- * Defines the options of blurStyle
+ * 模糊样式选项，用于配置模糊效果的深浅色模式、取色模式、灰阶模糊参数和模糊程度。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3838,8 +3872,8 @@ export declare interface SystemAdaptiveOptions {
  */
 export declare interface BlurStyleOptions {
     /**
-     * Color mode used for the foreground blur.
-     * <br>Default value: **ThemeColorMode.SYSTEM**.
+     * 内容模糊效果使用的深浅色模式。
+     * <br>默认值：**ThemeColorMode.SYSTEM**。
      *
      * @default ThemeColorMode.SYSTEM
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3848,8 +3882,8 @@ export declare interface BlurStyleOptions {
      */
     colorMode?: ThemeColorMode;
     /**
-     * Adaptive color mode.
-     * <br>Default value: **AdaptiveColor.DEFAULT**.
+     * 内容模糊效果使用的自适应取色模式。
+     * <br>默认值：**AdaptiveColor.DEFAULT**。
      *
      * @default AdaptiveColor.DEFAULT
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3858,9 +3892,9 @@ export declare interface BlurStyleOptions {
      */
     adaptiveColor?: AdaptiveColor;
     /**
-     * Foreground blur scale.
-     * <br>Default value: **1.0**.
-     * <br>Value range: [0.0, 1.0].
+     * 内容模糊效果程度。
+     * <br>默认值：**1.0**。
+     * <br>取值范围：[0.0, 1.0]。
      *
      * @default 1.0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3869,7 +3903,7 @@ export declare interface BlurStyleOptions {
      */
     scale?: double;
     /**
-     * Defines the options of blur
+     * 灰阶模糊参数，仅对图像中的黑白色生效，对彩色无效果。
      *
      * @default { grayScale: [0,0] }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3961,7 +3995,7 @@ export declare interface BackgroundEffectOptions {
     inactiveColor?: ResourceColor;
 }
 /**
- * Defines the options of ForegroundEffect
+ * 前景效果参数，用于配置组件前景的模糊半径，控制前景内容的模糊程度。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3969,7 +4003,8 @@ export declare interface BackgroundEffectOptions {
  */
 export declare interface ForegroundEffectOptions {
     /**
-     * Define the radius size of ForegroundEffect.The range of this value is [0, ∞). Undefined means 0.
+     * 模糊半径，设置后组件前景呈现模糊效果，数值越大模糊程度越高。取值范围：[0, +∞)，0表示不产生模糊效果。传入负数时自动修正为0。
+     * 仅在组件范围内生效，与backgroundBlur等效果类接口连用时超出组件范围的效果无法生效。undefined表示不产生模糊效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4100,7 +4135,7 @@ export declare interface PickerDialogButtonStyle {
     primary?: boolean;
 }
 /**
- * Define the type of shadow
+ * 阴影类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4109,7 +4144,7 @@ export declare interface PickerDialogButtonStyle {
  */
 export declare enum ShadowType {
     /**
-     * Define a color type of shadow
+     * 颜色阴影，基于指定颜色值绘制阴影效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4117,7 +4152,7 @@ export declare enum ShadowType {
      */
     COLOR = 0,
     /**
-     * Blur.
+     * 模糊阴影，基于组件内容模糊绘制阴影效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4126,7 +4161,7 @@ export declare enum ShadowType {
     BLUR = 1
 }
 /**
- * Define the options of shadow
+ * 阴影属性集合，用于设置阴影的模糊半径、阴影的颜色、X轴和Y轴的偏移量。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4134,18 +4169,18 @@ export declare enum ShadowType {
  */
 export declare interface ShadowOptions {
     /**
-     * Blur radius of the shadow.
-     * Default value: 0px.
+     * 阴影模糊半径。
+     * 默认值：0px。
      *
-     *     undefined means setting to default value.
+     *     undefined表示设置为默认值。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     radius: double | Resource | undefined;
     /**
-     * Shadow type.
-     * <br>Default value: **COLOR**.
+     * 阴影类型。
+     * <br>默认值：**COLOR**。
      *
      * @default ShadowType.COLOR
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4154,7 +4189,7 @@ export declare interface ShadowOptions {
      */
     type?: ShadowType;
     /**
-     * Color of the shadow. Default value: **Black**
+     * 阴影的颜色。默认为黑色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4162,7 +4197,7 @@ export declare interface ShadowOptions {
      */
     color?: Color | string | Resource | ColoringStrategy;
     /**
-     * Offset of the shadow along the x-axis. Unit is px. Default value is 0.
+     * 阴影的X轴偏移量。单位：px。默认值：0。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4170,7 +4205,7 @@ export declare interface ShadowOptions {
      */
     offsetX?: double | Resource;
     /**
-     * Offset of the shadow along the y-axis. Unit is px. Default value is 0.
+     * 阴影的Y轴偏移量。单位：px。默认值：0。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4178,11 +4213,10 @@ export declare interface ShadowOptions {
      */
     offsetY?: double | Resource;
     /**
-     * Whether to fill the inside of the component with shadow. **true**: Fill
-     * the inside of the component with shadow.
-     * <br>**false**: Do not fill the inside of the component with shadow.
-     * <br>The default value is **false**.
-     * <br>**NOTE**<br>This attribute does not take effect in textShadow.
+     * 阴影是否内部填充。**true**: 阴影在内部填充。
+     * <br>**false**: 阴影不在内部填充。
+     * <br>默认值：**false**。
+     * <br>**说明**<br>该属性在textShadow中不生效。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4192,7 +4226,7 @@ export declare interface ShadowOptions {
     fill?: boolean;
 }
 /**
- * enum Shadow style
+ * 组件阴影效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4201,7 +4235,7 @@ export declare interface ShadowOptions {
  */
 export declare enum ShadowStyle {
     /**
-     * Defines the super small default shadow style.
+     * 超小阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4209,7 +4243,7 @@ export declare enum ShadowStyle {
      */
     OUTER_DEFAULT_XS = 0,
     /**
-     * Defines the small default shadow style.
+     * 小阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4217,7 +4251,7 @@ export declare enum ShadowStyle {
      */
     OUTER_DEFAULT_SM = 1,
     /**
-     * Defines the medium default shadow style.
+     * 中阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4225,7 +4259,7 @@ export declare enum ShadowStyle {
      */
     OUTER_DEFAULT_MD = 2,
     /**
-     * Defines the large default shadow style.
+     * 大阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4233,7 +4267,7 @@ export declare enum ShadowStyle {
      */
     OUTER_DEFAULT_LG = 3,
     /**
-     * Defines the small floating shadow style.
+     * 浮动小阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4241,7 +4275,7 @@ export declare enum ShadowStyle {
      */
     OUTER_FLOATING_SM = 4,
     /**
-     * Defines the medium floating shadow style.
+     * 浮动中阴影。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4326,7 +4360,7 @@ export declare enum SafeAreaType {
     KEYBOARD = 2
 }
 /**
- * Enumerates the safe area edges.
+ * 扩展安全区域的边缘。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4335,7 +4369,7 @@ export declare enum SafeAreaType {
  */
 export declare enum SafeAreaEdge {
     /**
-     * Top edge.
+     * 上方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4343,7 +4377,7 @@ export declare enum SafeAreaEdge {
      */
     TOP = 0,
     /**
-     * Bottom edge.
+     * 下方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4351,7 +4385,7 @@ export declare enum SafeAreaEdge {
      */
     BOTTOM = 1,
     /**
-     * Start edge.
+     * 前部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4359,7 +4393,7 @@ export declare enum SafeAreaEdge {
      */
     START = 2,
     /**
-     * End edge.
+     * 尾部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4536,7 +4570,7 @@ export declare enum LayoutSafeAreaType {
     SYSTEM = 0
 }
 /**
- *  Define the edges for expanding the safe area in layout.
+ * 扩展安全区域的边缘。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4545,7 +4579,7 @@ export declare enum LayoutSafeAreaType {
  */
 export declare enum LayoutSafeAreaEdge {
     /**
-     * Top edge.
+     * 上方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4553,7 +4587,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     TOP = 0,
     /**
-     * Bottom edge.
+     * 下方区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4561,7 +4595,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     BOTTOM = 1,
     /**
-     * Start edge of the safe area.
+     * 前部区域。LTR模式时表示左侧区域，RTL模式表示右侧区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4569,7 +4603,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     START = 2,
     /**
-     * End edge of the safe area.
+     * 尾部区域。LTR模式时表示右侧区域，RTL模式表示左侧区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4577,7 +4611,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     END = 3,
     /**
-     * Vertical edge of the safe area.
+     * 垂直区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4585,7 +4619,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     VERTICAL = 4,
     /**
-     * Horizontal edge of the safe area.
+     * 水平区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4593,7 +4627,7 @@ export declare enum LayoutSafeAreaEdge {
      */
     HORIZONTAL = 5,
     /**
-     * All edges of the safe area.
+     * 全部区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4777,7 +4811,7 @@ export declare interface BaseEvent {
     axisPinch?: double;
 }
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4785,8 +4819,7 @@ export declare interface BaseEvent {
  */
 export declare interface BorderImageOption {
     /**
-     * Slice width of the upper left corner, upper right corner, lower left corner,
-     * and lower right corner of the border image.
+     * 设置边框图片左上角、右上角、左下角以及右下角的切割宽高。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4795,7 +4828,7 @@ export declare interface BorderImageOption {
      */
     slice?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Repeat mode of the source image's slices on the border.
+     * 设置被切割的图片在边框上的重复方式。
      *
      * @default RepeatMode.Stretch
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4804,7 +4837,7 @@ export declare interface BorderImageOption {
      */
     repeat?: RepeatMode;
     /**
-     * Border image source
+     * 边框图源或者渐变色设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4812,7 +4845,7 @@ export declare interface BorderImageOption {
      */
     source?: string | Resource | LinearGradientOptions;
     /**
-     * Width of the border image.
+     * 设置图片边框宽度。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4821,7 +4854,7 @@ export declare interface BorderImageOption {
      */
     width?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Amount by which the border image is extended beyond the border box.
+     * 设置边框图片向外延伸距离。
      *
      * @default 0
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4830,9 +4863,9 @@ export declare interface BorderImageOption {
      */
     outset?: Length | EdgeWidths | LocalizedEdgeWidths;
     /**
-     * Whether to fill the center of the border image.
-     * true: Fill the center of the border image.
-     * false: Do not fill the center of the border image.
+     * 设置边框图片是否中心填充。
+     * true: 中心填充。
+     * false: 非中心填充。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4842,7 +4875,27 @@ export declare interface BorderImageOption {
     fill?: boolean;
 }
 /**
- * Defines the policy of Layout
+ * 用于组件宽度和高度的布局策略。提供matchParent、wrapContent、fixAtIdealSize三种布局策略选项，分别用于组件自适应父组件布局、根据内容自适应但不超过父组件尺寸、根据内容自适应且可超过父组件尺寸的场景。
+ *
+ * > **说明：**
+ * >
+ * > - LayoutPolicy支持设置三种布局策略：matchParent（自适应父组件布局）、wrapContent（根据内容自适应但不超过父组件尺寸的布局）和fixAtIdealSize（根据内容自适应，可能超过父组件尺寸的布局
+ * > ）。具体示例代码参见[设置布局策略](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-size.md#示例5设置布局策略)。
+ * >
+ * > - wrapContent和fixAtIdealSize场景，组件无法通过内容确定大小时，如果组件大小有默认值，则按照默认值进行测算，组件最终以默认大小显示；如果没有默认值，则按照宽高(0,0)进行测算，组件最终以零尺寸显示。
+ * >
+ * > - 容器设置wrapContent，并且有子组件设置matchParent时（包括仅一边设置matchParent），容器先由确定大小的子组件撑大，设置matchParent的子组件再匹配容器大小；如果没有确定大小的子组件，容器和
+ * > 子组件大小均为0。
+ * >
+ * > - LayoutPolicy的设置会被constraintSize约束，即当同时设置LayoutPolicy和constraintSize时，constraintSize的约束优先生效。
+ * >
+ * > - 从API version 15开始，仅Row和Column组件的width和height属性支持设置LayoutPolicy类型参数，其他组件设置LayoutPolicy类型参数后与不设置宽度或高度表现一致；从API
+ * > version 20开始，所有基础组件均支持设置LayoutPolicy类型参数。
+ * >
+ * > - 当Row、Column、Flex组件主轴尺寸自适应子组件，且子组件A仅交叉轴设置matchParent时，API版本26.0.0之前，子组件A不参与Row、Column、Flex组件的主轴尺寸测量过程，此时Row、Column
+ * > 、Flex组件主轴方向不自适应子组件A的尺寸；从API版本26.0.0开始，子组件A会参与Row、Column、Flex组件的主轴尺寸测量过程，此时Row、Column、Flex组件主轴方向会自适应子组件A的尺寸。交叉轴方向同理。
+ * > 具体变更效果参见
+ * > [示例6（子组件单方向设置matchParent效果）](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-size.md#示例6子组件单方向设置matchparent效果)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4850,7 +4903,7 @@ export declare interface BorderImageOption {
  */
 export declare class LayoutPolicy {
     /**
-     * The component fills its parent which means its size is as large as its parent.
+     * 当前组件自适应父组件布局时，其大小与父组件内容区相等，不包括padding，border和safeAreaPadding。适用于需要组件填满父容器内容区的场景，例如列表项、卡片容器等。
      *
      * @readonly
      * @static
@@ -4861,8 +4914,7 @@ export declare class LayoutPolicy {
     static readonly matchParent: LayoutPolicy;
 
     /**
-     * The component fills its content which means its size is as large as its children but it is constained by its
-     *     parent.
+     * 当前组件自适应子组件（内容）时，其大小与子组件（内容）相等，并且其大小受父组件内容区大小约束。适用于需要根据内容自动调整大小但不能超出父容器的场景，例如文本容器、弹窗内容区等。
      *
      * @readonly
      * @static
@@ -4873,7 +4925,7 @@ export declare class LayoutPolicy {
     static readonly wrapContent: LayoutPolicy;
 
     /**
-     * The component fills its content which means its size is as large as its children.
+     * 当前组件自适应子组件（内容）时，其大小与子组件（内容）相等，并且其大小不受父组件内容区大小约束。适用于需要根据内容自动调整大小且可以超出父容器的场景，例如悬浮提示、下拉菜单等。
      *
      * @readonly
      * @static
@@ -5889,7 +5941,7 @@ export type GestureCollectInterceptCallback = (recognizers: Array<GestureRecogni
  */
 export type OnNeedSoftkeyboardCallback = () => boolean;
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -5899,7 +5951,7 @@ export type PixelMap = image.PixelMap;
 
 
 /**
- * pixelmap object with release function.
+ * 带有release函数的像素图对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -5908,7 +5960,7 @@ export type PixelMap = image.PixelMap;
  */
 declare interface PixelMapMock {
   /**
-   * release function.
+   * 释放函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -6092,10 +6144,11 @@ export declare enum DragResult {
     DROP_DISABLED = 4
 }
 /**
- * Enum for BlendMode.
- * Blend modes for compositing current component
- * with overlapping content. Use overlapping content
- * as dst, current component as src.
+ * 混合模式。
+ *
+ * > **说明：**
+ * >
+ * > blendMode枚举中，s表示源像素，d表示目标像素，sa表示源像素透明度，da表示目标像素透明度，r表示混合后像素，ra表示混合后像素透明度。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6104,7 +6157,7 @@ export declare enum DragResult {
  */
 export declare enum BlendMode {
     /**
-     * The top image is superimposed on the bottom image without any blending.
+     * 将上层图像直接覆盖到下层图像上，不进行任何混合操作。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6112,7 +6165,7 @@ export declare enum BlendMode {
      */
     NONE = 0,
     /**
-     * The target pixels covered by the source pixels are erased by being turned to completely transparent.
+     * 将源像素覆盖的目标像素清除为完全透明。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6120,7 +6173,7 @@ export declare enum BlendMode {
      */
     CLEAR = 1,
     /**
-     * r = s: Only the source pixels are displayed.
+     * r = s，只显示源像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6128,7 +6181,7 @@ export declare enum BlendMode {
      */
     SRC = 2,
     /**
-     * r = d
+     * r = d，只显示目标像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6136,7 +6189,7 @@ export declare enum BlendMode {
      */
     DST = 3,
     /**
-     * r = s + (1 - sa) * d: The source pixels are blended based on opacity and cover the target pixels.
+     * r = s + (1 - sa) * d，将源像素按照透明度进行混合，覆盖在目标像素上。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6144,7 +6197,7 @@ export declare enum BlendMode {
      */
     SRC_OVER = 4,
     /**
-     * r = d + (1 - da) * s: The target pixels are blended based on opacity and cover on the source pixels.
+     * r = d + (1 - da) * s，将目标像素按照透明度进行混合，覆盖在源像素上。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6152,7 +6205,7 @@ export declare enum BlendMode {
      */
     DST_OVER = 5,
     /**
-     * r = s * da: Only the part of the source pixels that overlap with the target pixels is displayed.
+     * r = s * da，只显示源像素中与目标像素重叠的部分。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6160,7 +6213,7 @@ export declare enum BlendMode {
      */
     SRC_IN = 6,
     /**
-     * r = d * sa: Only the part of the target pixels that overlap with the source pixels is displayed.
+     * r = d * sa，只显示目标像素中与源像素重叠的部分。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6168,7 +6221,7 @@ export declare enum BlendMode {
      */
     DST_IN = 7,
     /**
-     * r = s * (1 - da)
+     * r = s * (1 - da)，只显示源像素中与目标像素不重叠的部分。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6176,7 +6229,7 @@ export declare enum BlendMode {
      */
     SRC_OUT = 8,
     /**
-     * r = d * (1 - sa), retains the parts of the destination pixels that do not overlap with the source.
+     * r = d * (1 - sa)，只显示目标像素中与源像素不重叠的部分。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6184,8 +6237,7 @@ export declare enum BlendMode {
      */
     DST_OUT = 9,
     /**
-     * r = s * da + d * (1 - sa): The part of the source pixels that overlap with the target pixels is displayed
-     * and the part of the target pixels that do not overlap with the source pixels are displayed.
+     * r = s * da + d * (1 - sa)，在源像素和目标像素重叠的地方绘制源像素，在源像素和目标像素不重叠的地方绘制目标像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6193,8 +6245,7 @@ export declare enum BlendMode {
      */
     SRC_ATOP = 10,
     /**
-     * r = d * sa + s * (1 - da): The part of the target pixels that overlap with the source pixels
-     * and the part of the source pixels that do not overlap with the target pixels are displayed.
+     * r = d * sa + s * (1 - da)，在源像素和目标像素重叠的地方绘制目标像素，在源像素和目标像素不重叠的地方绘制源像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6202,7 +6253,7 @@ export declare enum BlendMode {
      */
     DST_ATOP = 11,
     /**
-     * r = s * (1 - da) + d * (1 - sa)
+     * r = s * (1 - da) + d * (1 - sa)，在源像素和目标像素重叠的地方不显示像素，不重叠的地方显示源像素和目标像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6210,8 +6261,7 @@ export declare enum BlendMode {
      */
     XOR = 12,
     /**
-     * r = min(s + d, 1):
-     * New pixels resulting from adding the source pixels to the target pixels are displayed.
+     * r = min(s + d, 1)，将源像素值与目标像素值相加，并将结果作为新的像素值。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6219,7 +6269,7 @@ export declare enum BlendMode {
      */
     PLUS = 13,
     /**
-     * r = s * d
+     * r = s * d，将源像素与目标像素进行乘法运算，并将结果作为新的像素值。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6227,7 +6277,7 @@ export declare enum BlendMode {
      */
     MODULATE = 14,
     /**
-     * r = s + d - s * d
+     * r = s + d - s * d，将两个图像的像素值相加，然后减去它们的乘积来实现混合。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6235,7 +6285,7 @@ export declare enum BlendMode {
      */
     SCREEN = 15,
     /**
-     * multiply or screen, depending on destination
+     * 根据目标像素来决定使用MULTIPLY混合模式还是SCREEN混合模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6243,7 +6293,7 @@ export declare enum BlendMode {
      */
     OVERLAY = 16,
     /**
-     * rc = s + d - max(s * da, d * sa), ra = kSrcOver
+     * rc = s + d - max(s * da, d * sa), ra = kSrcOver，当两个颜色重叠时，较暗的颜色会覆盖较亮的颜色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6251,7 +6301,7 @@ export declare enum BlendMode {
      */
     DARKEN = 17,
     /**
-     * rc = s + d - min(s * da, d * sa), ra = kSrcOver
+     * rc = s + d - min(s * da, d * sa), ra = kSrcOver，将源图像和目标图像中的像素进行比较，选取两者中较亮的像素作为最终的混合结果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6259,7 +6309,7 @@ export declare enum BlendMode {
      */
     LIGHTEN = 18,
     /**
-     * brighten destination to reflect source
+     * 使目标像素变得更亮来反映源像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6267,7 +6317,7 @@ export declare enum BlendMode {
      */
     COLOR_DODGE = 19,
     /**
-     * darken destination to reflect source
+     * 使目标像素变得更暗来反映源像素。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6275,7 +6325,7 @@ export declare enum BlendMode {
      */
     COLOR_BURN = 20,
     /**
-     * multiply or screen, depending on source
+     * 根据源像素的值来决定目标像素变得更亮或者更暗。根据源像素来决定使用MULTIPLY混合模式还是SCREEN混合模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6283,7 +6333,7 @@ export declare enum BlendMode {
      */
     HARD_LIGHT = 21,
     /**
-     * The LIGHTEN or DARKEN mode is used, depending on the source pixels.
+     * 根据源像素来决定使用LIGHTEN混合模式还是DARKEN混合模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6291,8 +6341,7 @@ export declare enum BlendMode {
      */
     SOFT_LIGHT = 22,
     /**
-     * rc = s + d - 2 * (min(s * da, d * sa)), ra = kSrcOver: The final pixel is the result of subtracting
-     * the darker of the two pixels (source and target) from the lighter one.
+     * rc = s + d - 2 * (min(s * da, d * sa)), ra = kSrcOver，对比源像素和目标像素，亮度更高的像素减去亮度更低的像素，产生高对比度的效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6300,7 +6349,7 @@ export declare enum BlendMode {
      */
     DIFFERENCE = 23,
     /**
-     * rc = s + d - two(s * d), ra = kSrcOver
+     * rc = s + d - 2 * (s * d), ra = kSrcOver，对比源像素和目标像素，亮度更高的像素减去亮度更低的像素，产生柔和的效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6308,8 +6357,7 @@ export declare enum BlendMode {
      */
     EXCLUSION = 24,
     /**
-     * r = s * (1 - da) + d * (1 - sa) + s * d:
-     * The final pixel is the result of multiplying the source pixel by the target pixel.
+     * r = s * (1 - da) + d * (1 - sa) + s * d，将源图像与目标图像进行乘法混合，得到一张新的图像。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6317,7 +6365,7 @@ export declare enum BlendMode {
      */
     MULTIPLY = 25,
     /**
-     * hue of source with saturation and luminosity of destination
+     * 保留源图像的亮度和饱和度，但会使用目标图像的色调来替换源图像的色调。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6325,7 +6373,7 @@ export declare enum BlendMode {
      */
     HUE = 26,
     /**
-     * saturation of source with hue and luminosity of destination
+     * 保留目标像素的亮度和色调，但会使用源像素的饱和度来替换目标像素的饱和度。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6333,7 +6381,7 @@ export declare enum BlendMode {
      */
     SATURATION = 27,
     /**
-     * hue and saturation of source with luminosity of destination
+     * 保留源像素的饱和度和色调，但会使用目标像素的亮度来替换源像素的亮度。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6341,7 +6389,7 @@ export declare enum BlendMode {
      */
     COLOR = 28,
     /**
-     * luminosity of source with hue and saturation of destination
+     * 保留目标像素的色调和饱和度，但会用源像素的亮度替换目标像素的亮度。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6350,9 +6398,7 @@ export declare enum BlendMode {
     LUMINOSITY = 29
 }
 /**
- * Enum for BlendApplyType.
- * Indicate how to apply specified blend mode to
- * the view's content.
+ * 标识如何将指定的混合模式应用于视图的内容。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6361,7 +6407,7 @@ export declare enum BlendMode {
  */
 export declare enum BlendApplyType {
     /**
-     * The content of the view is blended in sequence on the target image.
+     * 在目标图像上按顺序混合视图的内容。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6369,8 +6415,7 @@ export declare enum BlendApplyType {
      */
     FAST = 0,
     /**
-     * The content of the component and its child components are drawn on the
-     * offscreen canvas, and then blended with the existing content on the canvas.
+     * 将此组件和子组件内容绘制到离屏画布上，然后整体进行混合。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -6378,15 +6423,14 @@ export declare enum BlendApplyType {
      */
     OFFSCREEN = 1,
     /**
-    * The content of the component and its child components are drawn on the
-    * offscreen canvas, and then blended with the existing content on the canvas.
-    * The offscreen canvas will copy background to initialize itself when created.
-    * 
-    * @syscap SystemCapability.ArkUI.ArkUI.Full
-    * @systemapi
-    * @stagemodelonly
-    * @since 23 static
-    */
+     * 创建离屏画布时，先拷贝一份带有背景的画布作为初始化底色（BlendApplyType.OFFSCREEN类型的画布初始为透明背景），再将此组件和子组件内容绘制到离屏画布上，然后整体进行混合。两者在其他功能特性上与
+     * BlendApplyType.OFFSCREEN保持一致。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 23 static
+     */
     OFFSCREEN_WITH_BACKGROUND = 2
 }
 /**
@@ -7345,6 +7389,30 @@ export type TripleLengthDetents = [
     SheetSize | Length | undefined
 ];
 /**
+ * 模糊快照优化选项。设置该对象后，将开启模糊优化。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface BlurSnapshotOptions {
+  /**
+   * 设置模糊快照是否开启冻结优化。开启后，在模糊快照时应用冻结优化以降低渲染开销；未设置或设置为false时，冻结优化关闭，采用常规渲染方式。
+   *
+   * 拉起半模态后支持动态切换该参数值。
+   *
+   * 默认值：false
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  enableFreeze?: boolean;
+}
+/**
  * 继承自[BindOptions]{@link BindOptions}。
  * 
  * 半模态页面内容选项。
@@ -7956,6 +8024,18 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * 半模态模糊快照优化选项，用于降低模糊渲染的计算开销。当使用blurStyle或systemMaterial设置模糊或材质效果时发现功耗明显增加时，可开启模糊优化。开启后，若半模态配置了blurStyle或systemMaterial，其模糊效果将使用快照渲染以降低计算开销；若未设置blurStyle或systemMaterial，则开启enableBlurSnapshot不产生模糊优化效果。该属性在半模态展示后不支持和undefined之间的动态切换，若在展示后尝试切换则设置不生效。半模态的POPUP类型不支持模糊优化，若在POPUP类型上设置enableBlurSnapshot=true则该设置不生效。
+     *
+     * 默认值：undefined，关闭模糊优化
+     *
+     * @default undefined
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    blurSnapshot?: BlurSnapshotOptions;
     /**
      * 标题栏悬浮模式。
      * - STANDARD：标题栏与内容上下排布，无重叠。
@@ -10680,7 +10760,7 @@ export declare interface ClickEffect {
     scale?: double;
 }
 /**
- * Defines the fadingEdge options.
+ * fadingEdge属性边缘渐隐参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10688,7 +10768,7 @@ export declare interface ClickEffect {
  */
 export declare interface FadingEdgeOptions {
     /**
-     * The length of FadingEdge.
+     * 设置边缘渐隐长度。
      *
      * @default 32vp
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10698,7 +10778,7 @@ export declare interface FadingEdgeOptions {
     fadingEdgeLength?: LengthMetrics;
 }
 /**
- * Define nested scroll options
+ * 定义嵌套滚动选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -10706,7 +10786,7 @@ export declare interface FadingEdgeOptions {
  */
 export declare interface NestedScrollOptions {
     /**
-     * Set NestedScrollMode when the scrollable component scrolls forward
+     * 滚动组件往末尾端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -10714,7 +10794,7 @@ export declare interface NestedScrollOptions {
      */
     scrollForward: NestedScrollMode;
     /**
-     * Set NestedScrollMode when the scrollable component scrolls backward
+     * 滚动组件往起始端滚动时的嵌套滚动选项。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11192,7 +11272,7 @@ export declare interface PreviewConfiguration {
     delayCreating?: boolean;
 }
 /**
- * Define the options of invert
+ * 前景智能取反色。基于灰度阈值区间决定反色取值，参见[invert]{@link CommonMethod#invert(value: number | InvertOptions | undefined)}中的详细机制说明。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -11200,7 +11280,9 @@ export declare interface PreviewConfiguration {
  */
 export declare interface InvertOptions {
     /**
-     * Defines the low value of threshold
+     * 背景颜色灰度值大于阈值区间时的取值。
+     *
+     * 取值范围：[0, 1]。设置小于0的值时，按值为0处理。设置大于1的值时，按值为1处理。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11208,7 +11290,9 @@ export declare interface InvertOptions {
      */
     low: double;
     /**
-     * Defines the high value of threshold
+     * 背景颜色灰度值小于阈值区间时的取值。
+     *
+     * 取值范围：[0, 1]。设置小于0的值时，按值为0处理。设置大于1的值时，按值为1处理。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11216,7 +11300,9 @@ export declare interface InvertOptions {
      */
     high: double;
     /**
-     * Defines the threshold
+     * 灰度阈值。与thresholdRange配合使用，灰度阈值上下偏移thresholdRange构成阈值区间。
+     *
+     * 取值范围：[0, 1]
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11224,7 +11310,13 @@ export declare interface InvertOptions {
      */
     threshold: double;
     /**
-     * Defines the threshold range
+     * 阈值范围。
+     *
+     * 取值范围：[0, 1]。设置小于0的值时，按值为0处理；设置大于1的值时，按值为1处理。
+     *
+     * **说明：**
+     *
+     * 灰度阈值上下偏移thresholdRange构成阈值区间，背景颜色灰度值在区间内取值由high线性渐变到low。
      *
      * @type { double }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11402,26 +11494,28 @@ export declare type CustomProperty = undefined | null | Object | Record<string, 
  */
 export declare interface CommonMethod {
     /**
-     * Sets the width of the component or its horizontal layout policy. By default, the
-     * component uses the width required for its content. If the width of the component is
-     * greater than that of the parent container, the component will be drawn beyond the
-     * parent container scope.
+     * 设置组件自身的宽度或水平方向布局策略，缺省时使用子组件自身内容需要的宽度。若子组件的宽大于父组件的宽，则子组件会溢出显示在父组件外部。
      *
-     * @param { Length | LayoutPolicy | undefined } widthValue
-     * @returns { this }
+     * 从API version 15开始，当参数为Length类型时，该接口支持calc计算特性。
+     *
+     * @param { Length | LayoutPolicy | undefined } widthValue - 要设置的组件宽度或水平方向布局策略。
+     *    <br>单位：vp
+     *    <br>设置百分比时，以父容器的宽度作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default width(widthValue: Length | LayoutPolicy | undefined): this;
     /**
-     * Sets the height of the component or its vertical layout policy. By default, the
-     * component uses the height required for its content. If the height of the component
-     * is greater than that of the parent container, the component will be drawn beyond
-     * the parent container scope.
+     * 设置组件自身的高度或垂直方向布局策略，缺省时使用子组件自身内容需要的高度。若子组件的高大于父组件的高，则子组件会溢出显示在父组件外部。
      *
-     * @param { Length | LayoutPolicy | undefined } heightValue
-     * @returns { this }
+     * 从API version 15开始，当参数为Length类型时，该接口支持calc计算特性。
+     *
+     * @param { Length | LayoutPolicy | undefined } heightValue - 要设置的组件高度或垂直方向布局策略。
+     *    <br>单位：vp
+     *    <br>设置百分比时，以父容器的高度作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11452,26 +11546,68 @@ export declare interface CommonMethod {
      */
     default customProperty(name: string, value: CustomProperty): this;
     /**
-     * Sets the safe area to be expanded to.
-     * <br>default:{types: [SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD],
-     * edges: [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]}
+     * 控制组件扩展其安全区域，实现沉浸式效果。
      *
-     * @param { Array<SafeAreaType> } [types] - Indicates the types of the safe area.
-     * @param { Array<SafeAreaEdge> } [edges] - Indicates the edges of the safe area.
-     * @returns { this } The component instance.
+     * >  **说明：**
+     * >
+     * > - 设置expandSafeArea属性进行组件绘制扩展时，建议组件尺寸不要设置固定宽高（百分比除外），当设置固定宽高（包括设置'auto'）时，扩展安全区域的方向只支持[SafeAreaEdge.TOP,
+     * SafeAreaEdge.START]，扩展后的组件尺寸保持不变。
+     * >
+     * > - 安全区域不会限制内部组件的布局和大小，不会裁剪内部组件。
+     * >
+     * > - 当父容器为滚动容器时，组件设置expandSafeArea属性后，自身不会延伸，但仍可触发其子节点中设置了expandSafeArea的延伸范围更新。
+     * >
+     * > - 设置expandSafeArea()时，不传参，走默认值处理；设置expandSafeArea([],[])时，相当于入参是空数组，此时expandSafeArea属性设置无效。
+     * >
+     * > - 组件设置expandSafeArea生效的条件为：
+     * >  1.type为SafeAreaType.KEYBOARD时默认生效，表现为组件不避让键盘。<br/>
+     * >  2.设置其他type，组件的边界与安全区域重合时组件能够延伸到安全区域下。例如：设备顶部状态栏高度100，那么组件在屏幕中的绝对位置需要为0 <= y <= 100。
+     * >
+     * > - 组件延伸到避让区时，在避让区的事件如点击事件等可能会被系统拦截，优先给状态栏等系统组件响应。
+     * >
+     * > - 滚动类容器内的组件不建议设置expandSafeArea属性，如果设置，需要按照组件嵌套关系，将当前节点到滚动类祖先容器间所有直接节点设置expandSafeArea属性，
+     * 否则expandSafeArea属性在滚动后可能会失效，写法参考[示例7](#示例7滚动类容器扩展安全区)。
+     * >
+     * > - expandSafeArea属性仅作用于当前组件，不会向父组件或子组件传递，因此使用过程中，所有相关组件均需配置。
+     * >
+     * > - 同时设置expandSafeArea和position属性时，position属性会优先生效，expandSafeArea属性会后生效。
+     * 对于未设置position、offset等绘制属性的组件，如果其边界未与避让区重叠，设置expandSafeArea属性将不生效，如弹窗和半模态组件。
+     * >
+     * > - 对于expandSafeArea属性无法生效的场景，若要将组件部署在避让区，需要手动调整组件的坐标。
+     *
+     * @param { Array<SafeAreaType> } types - 配置扩展安全区域的类型。默认值包含SafeAreaType.CUTOUT，
+     *    但未添加[Metadata](docroot:../../apis-ability-kit/js-apis-bundleManager-metadata.md)配置项时，页面不避让挖孔，CUTOUT类型不生效。
+     *    <br>默认值：[SafeAreaType.SYSTEM, SafeAreaType.CUTOUT, SafeAreaType.KEYBOARD]
+     *    <br>非法值：按默认值处理。
+     * @param { Array<SafeAreaEdge> } edges - 配置扩展安全区域的边缘，默认扩展至所有避让区域。
+     *    <br>默认值：[SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM, SafeAreaEdge.START, SafeAreaEdge.END]。
+     *    <br>非法值：按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default expandSafeArea(types?: Array<SafeAreaType>, edges?: Array<SafeAreaEdge>): this;
     /**
-     * Expands the layout safe area of a component.
+     * 扩展组件布局时的安全区。
      *
-     * @param { Array<LayoutSafeAreaType> | undefined } [types] - The region type to expand the component's layout safe area into.
-     *     The default value is LayoutSafeAreaType.SYSTEM.
-     * @param { Array<LayoutSafeAreaEdge> | undefined } [edges] - The set of edges for which to ignore layout safe area.
-     *     The default value is LayoutSafeAreaEdge.ALL.
-     * @returns { this }
+     * >  **说明：**
+     * >
+     * >
+     * 忽略布局安全区边缘的组件，如果其宽度或高度设置了 [LayoutPolicy.matchParent]{@link LayoutPolicy.matchParent}，其大小和位置都会改变，否则仅改变
+     * 其位置。
+     * >
+     * > 依据safeAreaPadding累积功能，组件可扩展其安全区边缘到所有能感知的连续安全区域。
+     * >
+     * > 滚动类组件的子元素忽略布局安全区边缘时在滚动方向不考虑滚动组件自身及其父组件的安全区域，包括：List、ArcListItem、Grid、WaterFlow、Swiper和Tabs。
+     * >
+     * > 忽略布局安全区属性.ignoreLayoutSafeArea和忽略渲染安全区属性.expandSafeArea都设置时，.ignoreLayoutSafeArea先生效，.expandSafeArea在前者基础上再生效。
+     *
+     * @param { Array<LayoutSafeAreaType> | undefined } types - 扩展布局安全区域的类型。<br
+     *    />默认值：[LayoutSafeAreaType.SYSTEM]，扩展至所有安全区域，比如：状态栏，导航栏和组件级安全区（safeAreaPadding）。<br/>非法值：按默认值处理。
+     * @param { Array<LayoutSafeAreaEdge> | undefined } edges - 扩展布局安全区的边缘，并且支持镜像能力。<br />默认值：[LayoutSafeAreaEdge.ALL]，扩展组件所有边缘。<br
+     *    />非法值：按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11508,38 +11644,70 @@ export declare interface CommonMethod {
     */
     default responseRegionList(regions: Array<ResponseRegion> | undefined): this;
     /**
-     * Sets the size of the component.
+     * 设置组件自身的宽高尺寸。设置后会影响组件在父容器中的布局和显示大小。
      *
-     * @param { SizeOptions | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { SizeOptions | undefined } value - 设置宽高尺寸。
+     *    <br>异常值：参数为undefined时，属性设置不生效；其它异常值时，size属性恢复到不配置时的默认行为。
+     *    <br>单位：vp
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default size(value: SizeOptions | undefined): this;
     /**
-     * Sets the constraint size of the component, which is used to limit the size range during component layout.
-     * Default value: **{minWidth: 0, maxWidth: Infinity, minHeight: 0, maxHeight: Infinity}**.
+     * 设置约束尺寸，组件布局时进行尺寸范围限制。设置后组件的宽度和高度将被限制在指定的最小值和最大值范围内，constraintSize的优先级高于width和height属性。
      *
-     * @param { ConstraintSizeOptions | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { ConstraintSizeOptions | undefined } value - 设置约束尺寸。constraintSize的优先级高于
+     *    [width]{@link CommonMethod#width(value: Length)}和[height]{@link CommonMethod#height(value: Length)}。取值结果参考
+     *    constraintSize取值对width/height影响。
+     *    <br>默认值：
+     *    <br>{
+     *    <br>minWidth: 0,
+     *    <br>maxWidth: Infinity,
+     *    <br>minHeight: 0,
+     *    <br>maxHeight: Infinity
+     *    <br>}
+     *    <br>异常值：数值开头的字符串仅解析出数字部分，非数值开头的字符串解析为0；其它异常值时，constraintSize属性恢复到不配置时的默认行为。
+     *    <br>单位：vp
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default constraintSize(value: ConstraintSizeOptions | undefined): this;
     /**
-     * Sets how the component behaves during hit testing.
+     * 设置组件的触摸测试类型。如果组件不设置hitTestBehavior，其默认触摸测试类型为HitTestMode.Default。
      *
-     * @param { HitTestMode | undefined } value - the hit test mode.
+     * @param { HitTestMode | undefined } value - 设置当前组件的触摸测试类型。
      * @default HitTestMode.default - Both the node and its child nodes respond to the hit test of a touch event,
      *     but its sibling nodes are blocked from the hit test. The hit test for ancestor nodes is not affected.
-     * @returns { this }
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default hitTestBehavior(value: HitTestMode | undefined): this;
+
+    /**
+     * 设置组件对Agent生成事件的输入管控级别。
+     *
+     * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_COMPONENT权限的应用
+     * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+     * 输入事件或其他注入事件。
+     *
+     * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
+     * @returns { this } 返回当前组件。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default agentControlMode(value: AgentControlMode | undefined): this;
+
     /**
      * Called to specify how to perform the touch test on the children of this component.
      *
@@ -11551,46 +11719,69 @@ export declare interface CommonMethod {
      */
     default onChildTouchTest(event: ((value: Array<TouchTestInfo>) => TouchResult) | undefined): this;
     /**
-     * Sets the weight of the component during layout. A component with this attribute is allocated space
-     * along the main axis of its parent container (Row, Column, or Flex) based on its specified weight.
-     * Default value: **0**.
+     * 设置组件的布局权重，使组件在父容器（[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}）的主轴方向按照权重分配尺寸。适用于父容器尺寸确定、需要多个子组件
+     * 按比例分配剩余空间的场景。
      *
-     * @param { double | string | undefined } value
-     * @returns { this }
+     * @param { double | string | undefined } value - 父容器尺寸确定时，不设置layoutWeight属性或者layoutWeight属性生效值为0的子组件优先占位，这些子组件占位后在主轴留下的空间称为主轴剩余空
+     *    间。设置了layoutWeight属性且layoutWeight属性生效值大于0的子组件会从主轴剩余空间中按照各自所设置的权重占比分配尺寸，分配时会忽略子组件本身的width/height设置，但保留minWidth/
+     *    minHeight约束。
+     *    <br>默认值：0
+     *    <br>取值范围：[0, +∞)
+     *    <br>超出范围时：传入小于0的值时，按0处理。
+     *    <br>**说明：**
+     *    <br>仅在[Row]{@link @global:Row}/[Column]{@link @global:Column}/[Flex]{@link @global:Flex}布局中生效。
+     *    <br>可选值为大于等于0的数字，或者可以转换为数字的字符串（支持整数、小数格式）。
+     *    <br>如果容器中有子组件设置了layoutWeight属性，且设置的属性值大于0，则所有子组件不会再基于[flexShrink]{@link CommonMethod#flexShrink}和
+     *    [flexGrow]{@link CommonMethod#flexGrow}布局。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default layoutWeight(value: double | string | undefined): this;
     /**
-     * Sets the weight of the component in a chain, which is used to re-lay out components that form the chain.
-     * <br>This API has effect only when the parent container is RelativeContainer.
+     * 对形成链的组件进行重新布局。仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效。
      *
-     * @param { ChainWeightOptions | undefined } chainWeight
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > 从API version 23开始，支持 [attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。
+     *
+     * @param { ChainWeightOptions | undefined } chainWeight - 设置了chainWeight属性的组件与同一条链上的兄弟组件在水平或竖直方向的尺寸会按照设置的权重进行分配，分配时会忽略组件本身尺寸设置，按分配的权重自适应占满剩余空间。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default chainWeight(chainWeight: ChainWeightOptions | undefined): this;
     /**
-     * Sets the padding of the component.
-     * Default value: **0**.
+     * 设置组件的内边距属性。设置后会在组件内容和边框之间创建额外空间，影响组件内部内容的布局区域。
      *
-     * @param { Padding | Length | LocalizedPadding | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { Padding | Length | LocalizedPadding | undefined } value - 设置组件的内边距。
+     *    <br>参数为Length类型时，四个方向内边距同时生效。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>padding设置百分比时，上下左右内边距均以父容器的width作为基础值。 [since 12]
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default padding(value: Padding | Length | LocalizedPadding | undefined): this;
     /**
-     * Sets the safe area padding. It enables a container to add a component-level
-     * safe area for child components to expand into.
-     * Default value: **LengthMetrics.vp(0)**
+     * 设置安全区边距属性。允许容器向自身添加组件级安全区域，供子组件延伸，支持[attributeModifier]{@link CommonMethod#attributeModifier}动态设置属性方法。与padding不同，
+     * safeAreaPadding用于设置组件级安全区域供子组件延伸使用，而padding用于设置组件内容区域的内边距，两者可同时设置、分别生效。
      *
-     * @param { Padding | LengthMetrics | LocalizedPadding | undefined } paddingValue - Indicates safeArea padding values
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > 从API version 18开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+     *
+     * @param { Padding | LengthMetrics | LocalizedPadding | undefined } paddingValue - 设置组件的安全区边距，用于在组件内部创建组件级安全区域供子组件延伸使用。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>paddingValue设置百分比时，上下左右内边距均以父容器的width作为基础值。
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11615,11 +11806,19 @@ export declare interface CommonMethod {
      */
     default safeAreaInset(options?: SafeAreaInsetOptions): this;
     /**
-     * Sets the margin of the component.
-     * Default value: **0**.
+     * 设置组件的外边距属性。在计算位置时外边距视为组件大小的一部分，从而影响组件位置。
      *
-     * @param { Margin | Length | LocalizedMargin | undefined } value
-     * @returns { this }
+     * 从API version 10开始，该接口支持calc计算特性。
+     *
+     * @param { Margin | Length | LocalizedMargin | undefined } value - 设置组件的外边距。
+     *    <br>参数为Length类型时，四个方向外边距同时生效。
+     *    <br>默认值：0
+     *    <br>单位：vp
+     *    <br>margin设置百分比时，上下左右外边距均以父容器的width作为基础值。在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[Flex]{@link @global:Flex}交叉轴上布
+     *    局时，子组件在交叉轴方向占用的空间包含子组件本身尺寸和margin值。
+     *    <br>例如Column容器宽100，其中子组件宽50，margin left为10，right为20，子组件宽度与左右margin之和为50+10+20=80，小于容器宽度100，子组件在交叉轴方向居中对齐，此时水平方向
+     *    左侧和右侧各有(100-80)/2=10的空白区域。 [since 12]
+     * @returns { this } 返回当前组件对象，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11647,11 +11846,23 @@ export declare interface CommonMethod {
      */
     default backgroundColor(value: ResourceColor | ColorMetrics | undefined): this;
     /**
-     * Sets the pixel rounding policy for the current component in the specified direction.
-     * <br>If a direction is not set, the pixels are rounded to the nearest whole number in that direction.
+     * 指定当前组件在指定方向上的像素取整对齐方式，使用后组件边界坐标将按指定策略取整，从而避免因浮点数绘制产生的视觉异常（如1px缝隙、组件重叠、分割线消失）。从API version 12开始，某方向不设置时默认在该方向进行四舍五入取整。
      *
-     * @param { PixelRoundPolicy | undefined } value - indicates the rounding policy for the bounds of the component.
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > - 在API version 11，本接口采用半像素对齐方式（即0\~0.25取0，0.25\~0.75取0.5，0.75\~1.0取1）。该方式通过保留0.5像素值来减少连续取整可能带来的累积误差。从API version 12开始，未设置取整策略的方向默认采用四舍五入的取整方式，并支持通过PixelRoundCalcPolicy.NO_FORCE_ROUND关闭指定方向的像素取整。
+     * >
+     * > - 从API version12开始，该接口支持在[attributeModifier](ts-universal-attributes-attribute-modifier.md#attributemodifier)中调用。
+     *
+     * 正常计算时，上下方向与组件高度相对应，左右方向（镜像的起始方向称为左）与宽度相对应。为方便描述将两组方向称为左上和右下。
+     *
+     * - 计算当前组件左上角坐标： 左上角相对父容器偏移量。
+     * - 计算当前组件右下角坐标： 左上角相对于父容器偏移量 + 组件自身尺寸。
+     * - 重新计算当前组件尺寸： 右下角坐标四舍五入取整 - 左上角坐标四舍五入取整（API version 11采用半像素对齐方式，API version 12采用四舍五入方式）。
+     *
+     * @param { PixelRoundPolicy | undefined } value - 指定当前组件边界取整策略。[PixelRoundPolicy]{@link PixelRoundPolicy}包含start、top、end、bottom四个可选属性，分别对应组件前部、上部、尾部、底部边界。每个属性可设置[PixelRoundCalcPolicy]{@link PixelRoundCalcPolicy}枚举值。设置PixelRoundCalcPolicy.NO_FORCE_ROUND可关闭对应方向上的像素取整，未设置的属性默认按四舍五入规则取整。
+     *    <br>**说明：**<br/>该属性用于因浮点数绘制产生视觉异常的场景。取整结果不仅和组件的宽高有关，也与组件的位置有关。即使设置组件的宽高相同，由于以浮点数描述的组件位置不同，舍入后组件的最终宽高也可能不同。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11754,10 +11965,10 @@ export declare interface CommonMethod {
      */
     default backgroundImageResizable(value: ResizableOptions | undefined): this;
     /**
-     * Foreground effect.
+     * 设置前景效果。
      *
-     * @param { ForegroundEffectOptions | undefined } options - options indicates the effect options.
-     * @returns { this }
+     * @param { ForegroundEffectOptions | undefined } options - 设置组件前景效果，包括：模糊半径。效果仅在组件范围内生效，与backgroundEffect、blur等接口连用时超出组件范围的效果无法生效。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -11814,12 +12025,12 @@ export declare interface CommonMethod {
      */
     default materialFilter(filter: Filter | undefined): this;
     /**
-     * Applies a foreground blur style to the component.
+     * 为组件设置内容模糊效果。
      *
-     * @param { BlurStyle | undefined } style - Settings of the foreground blur style.
-     * @param { ForegroundBlurStyleOptions } [options]
-     * @param { SystemAdaptiveOptions } [sysOptions] - system adaptive options.
-     * @returns { this }
+     * @param { BlurStyle | undefined } style - 内容模糊样式。
+     * @param { ForegroundBlurStyleOptions } [options] - 内容模糊选项。不传入时使用系统默认模糊效果配置。
+     * @param { SystemAdaptiveOptions } [sysOptions] - 系统自适应调节参数。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12336,163 +12547,153 @@ export declare interface CommonMethod {
      */
     default parallelGesture(gesture: GestureType, mask?: GestureMask): this;
     /**
-     * Adds the content blurring effect for the current component. The input parameter is the blurring radius.
-     * The larger the blurring radius, the more blurring the content.
-     * If the value is 0, the content blurring effect is not blurring.
+     * 为组件添加内容模糊效果。入参为模糊半径，模糊半径越大内容越模糊，为0时不模糊。
      *
-     * @param { double | undefined } blurRadius - value indicates radius of backdrop blur.
-     * @param { BlurOptions } [options] - options indicates blur options.
-     * @param { SystemAdaptiveOptions } [sysOptions] - system adaptive options.
-     * @returns { this }
+     * @param { double | undefined } blurRadius - 模糊半径，模糊半径越大越模糊，值小于等于0时不模糊。
+     *     <br>单位：px
+     *     <br>当blurRadius的值为undefined时，维持之前取值。从未设置该属性时，默认值为0，表示不模糊。
+     * @param { BlurOptions } [options] - 灰阶模糊参数。对图像中的黑白色进行色阶调整，使其趋于灰色更为柔和美观，对图像中的彩色调整没有效果。
+     *     <br>默认值：grayscale: [0,0]
+     * @param { SystemAdaptiveOptions } [sysOptions] - 系统自适应调节参数。
+     *     <br>默认值：{ disableSystemAdaptation: false }
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default blur(blurRadius: double | undefined, options?: BlurOptions, sysOptions?: SystemAdaptiveOptions): this;
     /**
-     * Applies a linear gradient foreground blur effect to the component.
+     * 为组件添加内容线性渐变模糊效果。
      *
-     * @param { double | undefined } value - the blurring radius. The larger the blurring radius, the more
-     *     blurring the content, and if the value is 0, the content blurring effect is not blurring.
-     * @param { LinearGradientBlurOptions | undefined } options - the linear gradient blur options.
-     * @returns { this }
+     * @param { double | undefined } value - 模糊半径，模糊半径越大越模糊，为0时不模糊。
+     *     <br>单位：px
+     *     <br>取值范围：[0, 1000]
+     *     <br>当value的值为undefined时，恢复为渐变模糊为0的效果。
+     * @param { LinearGradientBlurOptions | undefined } options - 设置线性渐变模糊效果。
+     *     <br>线性渐变参数，包含模糊程度和模糊位置数组fractionStops，及渐变模糊方向direction。
+     *     <br>当options的值为undefined时，恢复为无线性渐变模糊的效果。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default linearGradientBlur(value: double | undefined, options: LinearGradientBlurOptions | undefined): this;
     /**
-     * Apply a motion blur effect to the component being scaled or moved.
-     * 1.Do not use this API in intra-component transitions, shared element transitions,
-     * implicit element transitions, or particle animations. Doing so may cause unexpected results.
-     * 2.The **radius** parameter of **motionBlur** must be set to **0** for the initial state.
-     * Otherwise, there may be unexpected results during a cold start.
-     * 3.This API must be used together with the **onFinish** parameter of **AnimateParam**.
-     * Its **radius** parameter must be set to **0** when the animation ends; otherwise, there may be unexpected
-     * results.
-     * 4.When using this API, do not frequently change the blur radius of the same component;
-     * otherwise, there may be unexpected results.
-     * For example, if you frequently click the image in the example, the blur effect may not work sometimes.
-     * 5.To avoid unexpected results, make sure the coordinates of
-     * the motion blur anchor point are the same as those of the animation scaling anchor point.
-     * 6.To avoid unexpected results, set the blur radius to a value less than 1.
+     * 在当前组件由缩放大小或位移变化引起的运动过程中，增加运动模糊效果。
      *
-     * @param { MotionBlurOptions | undefined } value - Motion blur options.
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > - 不建议在组件内转场、共享元素转场、组件内隐式元素转场和粒子动画场景中使用该属性，否则会产生非预期效果。
+     * >
+     * > - 该属性需要在组件初始状态将motionBlur的参数radius设置为0，否则冷启动时会有非预期效果。
+     * >
+     * > - 该属性需要与动画的[AnimateParam]{@link AnimateParam}的onFinish参数配合使用，需要在运动模糊动画结束后将motionBlur的参数radius置为0，否则会产生非预期效果。
+     * >
+     * > - 使用该属性时，不要频繁更改同一个组件的模糊半径，否则会产生非预期效果。
+     * >
+     * > - 运动模糊锚点坐标需要与动画缩放[scale]{@link CommonMethod#scale(value: ScaleOptions)}属性的锚点（centerX/centerY）保持一致，否则会产生非预期效果。
+     * >
+     * > - 模糊半径建议取值不超过1.0，否则会产生非预期效果。
+     *
+     * @param { MotionBlurOptions | undefined } value - 定义运动模糊参数。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default motionBlur(value: MotionBlurOptions | undefined): this;
     /**
-     * Applies a brightness effect to the component.
+     * 设置组件的亮度效果。
      *
-     * @param { double | undefined } value - Brightness of the component. The value **1** indicates no effects.
-     *     The value **0** indicates the complete darkness. If the value is less than **1**, the brightness
-     *     decreases. If the value is greater than **1**, the brightness increases. A larger value indicates
-     *     a higher brightness. A brightness of 2 turns the component completely white.
-     *     <br>Default value: **1.0**<br>Recommended value range: [0, 2].
-     *     <br>**NOTE**
-     *     <br>A value less than 0 evaluates to the value **0**.
-     *     <br>**Widget capability**: This API can be used in ArkTS widgets since API version 9.
-     * @returns { this }
+     * @param { double | undefined } value - 为当前组件添加高光效果，入参为高光比例，值为1时没有效果，小于1时亮度变暗，小于或等于0为全黑，大于1时亮度增加，数值越大亮度越大，亮度大于或等于2时会变为全白。
+     *     <br>取值范围：[0, +∞)
+     *     <br>推荐取值范围：[0, 2]
+     *     <br>**说明：**
+     *     <br>设置小于0的值时，按值为0处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default brightness(value: double | undefined): this;
     /**
-     * Applies a contrast effect to the component.
+     * 设置组件的对比度效果。
      *
-     * @param { double | undefined } value - Contrast of the component. The input parameter is a
-     *     contrast value. If the value is **1**, the source image is displayed. If the
-     *     value is greater than 1, a larger value indicates a higher contrast and a clearer
-     *     image. If the value is less than 1, a smaller value indicates a lower contrast is.
-     *     If the value is **0**, the image becomes all gray. The unit is percentage.
-     *     <br>Default value: **1.0**.
-     *     <br>Recommended value range: [0, 10).
-     *     <br>**NOTE**
-     *     <br>A value less than 0 evaluates to the value **0**.
-     * @returns { this }
+     * @param { double | undefined } value - 为当前组件添加对比度效果，入参为对比度的值。值为1时，显示原图，大于1时，值越大对比度越高，图像越清晰醒目，小于1时，值越小对比度越低，当对比度为0时，图像变为全灰。
+     *     <br>取值范围：[0, +∞)
+     *     <br>推荐取值范围：[0, 10)
+     *     <br>**说明：**
+     *     <br>设置小于0的值时，按值为0处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default contrast(value: double | undefined): this;
     /**
-     * Applies a grayscale effect to the component.
+     * 为组件添加灰度效果。
      *
-     * @param { double | undefined } value - Grayscale conversion ratio of the component.
-     *     <br>If the value is **1.0**, the component is completely converted to grayscale.
-     *     <br>If the value is **0.0**, the component remains unchanged. Between **0** and **1**,
-     *     <br>the value applies a linear multiplier on the grayscale effect. The unit is percentage.
-     *     <br>Default value: **0.0**.
-     *     <br>Value range: [0.0, 1.0].
-     *     <p>**NOTE**:
-     *     <br>A value less than **0.0** evaluates to the value **0.0**.
-     *     <br>A value greater than **1.0** evaluates to the value **1.0**.
-     *     </p>
-     * @returns { this }
+     * @param { double | undefined } value - 为当前组件添加灰度效果。值定义为灰度转换的比例，入参1.0则完全转为灰度图像，入参0.0则图像无变化，入参在0.0和1.0之间时，效果呈线性变化。
+     *     <br>取值范围：[0.0, 1.0]
+     *     <br>**说明：**
+     *     <br>设置小于0.0的值时，按值为0.0处理，设置大于1.0的值时，按值为1.0处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default grayscale(value: double | undefined): this;
     /**
-     * Applies a color blend effect to the component.
+     * 为组件添加颜色叠加效果。
      *
-     * @param { Color | string | Resource | undefined } value - Color to blend with the component.
-     * @returns { this }
+     * @param { Color | string | Resource | undefined } value - 为当前组件添加颜色叠加效果，入参为叠加的颜色。取值可为Color类型、string类型或Resource类型。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default colorBlend(value: Color | string | Resource | undefined): this;
     /**
-     * Applies a saturation effect to the component.
+     * 为组件添加饱和度效果。
      *
-     * @param { double | undefined } value - Saturation of the component. The saturation is the ratio of the
-     *     chromatic component to the achromatic component (gray) in a color. If the value is **1**,
-     *     the original image is displayed. If the value is greater than **1**, a higher percentage of
-     *     the chromatic component indicates a higher saturation. If the value is less than **1**, a higher
-     *     percentage of the achromatic component indicates a lower saturation. The unit is percentage.
-     *     <br>Default value: **1.0**.
-     *     <br>Recommended value range: [0, 50).
-     *     <br>**NOTE**
-     *     <br>A value less than 0 evaluates to the value **0**.
-     * @returns { this }
+     * @param { double | undefined } value - 为当前组件添加饱和度效果，饱和度为颜色中的含色成分和消色成分（灰）的比例，入参为1时，显示原图像，大于1时含色成分越大，饱和度越大，小于1时消色成分越大，饱和度越小。
+     *     <br>取值范围：[0, +∞)
+     *     <br>推荐取值范围：[0, 50)
+     *     <br>**说明：**
+     *     <br>设置小于0的值时，按值为0处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default saturate(value: double | undefined): this;
     /**
-     * Sepia conversion ratio of the component.
+     * 将图像转换为深褐色。
      *
-     * @param { double | undefined } value - Sepia conversion ratio of the component. If the value is **1**, the image
-     *     is completely sepia. If the value is **0**, the component remains unchanged. The unit is percentage.
-     *     <br> Value range: [0, +∞).
-     * @returns { this }
+     * @param { double | undefined } value - 将图像转换为深褐色，降低色彩度，产生温暖复古的图像风格。入参为褐色滤镜强度，值为1则完全是深褐色的，值小于等于0则图像无变化，值大于1会进一步放大色彩偏移比例，图像整体会变得更亮。
+     *     <br>取值范围：[0, +∞)
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default sepia(value: double | undefined): this;
     /**
-     * Invert the input image. Value defines the scale of the conversion. 100% of the value is a complete reversal.
-     * A value of 0% does not change the image. (Percentage)
+     * 反色输入图像。value定义反色比例，值为100%时完全反色，值为0%时图像无变化。（百分比）
      *
-     * @param { double | InvertOptions | undefined } value - value indicates the scale of the conversion or the options
-     *     of invert.
-     * @returns { this }
+     * @param { double | InvertOptions | undefined } value - 反转输入的图像。
+     *     <br>入参对象为number时，入参为图像反转的比例，值为1时完全反转，值为0则图像无变化。
+     *     <br>取值范围：[0, 1]。
+     *     <br>设置小于0的值时，按值为0处理。设置大于1的值时，按值为1处理。
+     *     <br>入参对象为InvertOptions时，对比背景颜色灰度值和阈值区间，背景颜色灰度值小于阈值区间时反色取high值，当背景颜色灰度值大于阈值区间时反色取low值，背景颜色灰度值在阈值区间内取值由high线性渐变到low。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default invert(value: double | InvertOptions | undefined): this;
     /**
-     * Applies a system bar effect to the component, which means to invert colors based on the background and add a
-     * blur.
+     * 根据背景颜色自动判断反色区域和反色程度，并叠加模糊效果。智能反色基于背景内容的颜色与亮度特征自动确定反色策略，使组件在不同背景下保持内容可视性；模糊效果对背景内容进行模糊处理，增强系统栏与背景的视觉融合效果。
      *
      * @returns { this } return the component attribute.
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -12501,77 +12702,65 @@ export declare interface CommonMethod {
      */
     default systemBarEffect(): this;
     /**
-     * Rotates the hue of the component.
+     * 色相旋转效果。
      *
-     * @param { double | string | undefined } value - Hue rotation angle of the component.
-     *     <br>A rotation of 360 degrees leaves the color unchanged.
-     *     <br>A rotation of 180 degrees and then -180 degrees also leaves the color unchanged.
-     *     <br>When the data type is number, the value **90** is equivalent to **'90deg'**.
-     * @returns { this }
+     * @param { double | string | undefined } value - 色相旋转效果，输入参数为旋转角度。
+     *     <br>色相旋转360度会显示原始颜色。先将色相旋转180度，然后再旋转-180度会显示原始颜色。数据类型为number时，值为90和'90deg'效果一致。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default hueRotate(value: double | string | undefined): this;
     /**
-     * Sets whether to draw shadows of child nodes in the component at the same layer,
-     * so that the shadows of elements at the same layer overlap.
+     * 设置是否将组件的子节点阴影绘制在同一图层上，使同一图层上的元素阴影重叠。
      *
-     * @param { boolean | undefined } value - Whether to draw shadows of child nodes in the component
-     *     at the same layer, so that the shadows of elements at the same layer overlap.
-     *     <br>Default value: **false**.
-     *     <br>**NOTE**
-     *     <br>1. When this feature is disabled (default), if the shadow radius of a child node
-     *     is large, the shadows of the child nodes may overlap. This overlap issue does not occur
-     *     when the feature is enabled.
-     *     <br>2. Avoid nesting **useShadowBatching**. When used in nested mode, **useShadowBatching**
-     *     takes effect for the current child node only and cannot be recursively used.
-     * @returns { this }
+     * @param { boolean | undefined } value - 控件内部子节点的阴影是否进行同层绘制。
+     *     <br>默认值：false
+     *     <br> true：控件内部子节点的阴影进行同层绘制，子节点的阴影不会产生重叠覆盖效果。
+     *     <br> false：控件内部子节点的阴影不进行同层绘制，子节点的阴影重叠区域有覆盖效果。
+     *     <br>**说明：**
+     *     <br>1. 默认不开启，如果子节点的阴影半径较大，阴影有重叠区域，后绘制的子节点阴影会覆盖在之前绘制的子节点阴影之上。当开启时，子节点的阴影将同时绘制，不会产生覆盖效果。
+     *     <br>2. 不推荐useShadowBatching嵌套使用，如果嵌套使用，只会对当前的子节点生效，无法递推。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default useShadowBatching(value: boolean | undefined): this;
     /**
-    * Specifies whether to apply the effect defined by <!--Del-->the parent
-    * [EffectComponent](ts-container-effectcomponent-sys.md) or <!--DelEnd-->the window.
+    * 用于设置组件是否应用父级EffectComponent或窗口定义的效果模板。
     *
-    * @param { boolean | undefined } useEffect - Whether to apply the effect defined by <!--Del-->the parent
-    *     **EffectComponent** or <!--DelEnd-->the window.
-    *     <br>The value **true** means to apply the effect defined by <!--Del-->the parent **EffectComponent**
-    *     or <!--DelEnd-->the window.
-    *     <br>Default value: **false**.
-    * @param { EffectType | undefined } effectType - Type of effect to apply to the component, which is defined by
-    *     <!--Del-->the parent **EffectComponent** or <!--DelEnd-->the window.
-    *     <br>Default value: **EffectType.DEFAULT**.
-    * @returns { this } return the component attribute.
+    * @param { boolean | undefined } useEffect - 是否应用父级EffectComponent或窗口定义的效果模板。
+    *     <br>true表示应用，false表示不应用。
+    *     <br>默认值：false。
+    * @param { EffectType | undefined } effectType - 应用到组件的效果模板类型，由父级EffectComponent或窗口定义。
+    *     <br>默认值：EffectType.DEFAULT。
+    * @returns { this } 返回当前组件，用于链式调用。
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
     */
     default useEffect(useEffect: boolean | undefined, effectType: EffectType | undefined): this;
     /**
-     * Specifies whether to combine the drawing of special effects, such as background blur.
+     * 用于设置组件是否合并特效绘制，如背景模糊。
      *
-     * @param { boolean | undefined } value - Whether the component inherits the special effect settings of the
-     *     **EffectComponent** component.<br>The value **true** means that the component inherits the
-     *     special effect settings of the **EffectComponent** component, and **false** means the opposite.
-     *     <br>Default value: **false**.
-     * @returns { this } return the component attribute.
+     * @param { boolean | undefined } value - 组件是否继承EffectComponent组件的特效设置。<br>true表示继承，false表示不继承。
+     *     <br>默认值：false。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default useEffect(value: boolean | undefined): this;
     /**
-     * Specify whether the current component participates in the fusion effect of the ancestor component
-     * UnionEffectContainer
+     * 设置当前组件是否参与祖先组件UnionEffectContainer的融合效果。
      *
-     * @param { boolean | undefined } value - Whether the component participates in the fusion effect of
-     *     the ancestor component **UnionEffectContainer**.<br>The value **true** means that the component participates
-     *     in the fusion effect of the ancestor component **UnionEffectContainer**, and **false** means the opposite.
-     *     <br>Default value: **false**. Undefined means to default value.
-     * @returns { this } return the component attribute.
+     * @param { boolean | undefined } value - 表示是否使用祖先组件UnionEffectContainer的融合效果。
+     *     <br>取值为true时，当前组件使用祖先组件UnionEffectContainer的融合效果，在祖先组件UnionEffectContainer计算形状时会作为UnionEffectContainer的一部分；若当前组件不存在祖先UnionEffectContainer，则设置useUnionEffect为true不产生融合效果。
+     *     <br>取值为false时，当前组件不使用祖先组件UnionEffectContainer的融合效果。
+     *     <br>设置为undefined时恢复为不使用祖先组件UnionEffectContainer的融合效果。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -12579,16 +12768,15 @@ export declare interface CommonMethod {
      */
     default useUnionEffect(value: boolean | undefined): this;
     /**
-     * Specify whether the current component participates in the fusion effect of the ancestor component
-     * UnionEffectContainer
+     * 设置当前组件是否参与祖先组件UnionEffectContainer的融合效果。
      *
-     * @param { boolean | undefined } value - Whether the component participates in the fusion effect of
-     *     the ancestor component **UnionEffectContainer**.<br>The value **true** means that the component participates
-     *     in the fusion effect of the ancestor component **UnionEffectContainer**, and **false** means the opposite.
-     *     <br>Default value: **false**. Undefined means to default value.
-     * @param { GravityCenterOptions } [options] - Gravitational center parameter.
-     *     This parameter must be used together with UnionMode.GRAVITY_UNION.
-     * @returns { this } return the component attribute.
+     * @param { boolean | undefined } value - 表示是否使用祖先组件UnionEffectContainer的融合效果。
+     *     <br>取值为true时，当前组件使用祖先组件UnionEffectContainer的融合效果，在祖先组件UnionEffectContainer计算形状时会作为UnionEffectContainer的一部分；若当前组件不存在祖先UnionEffectContainer，则取值为true不产生融合效果。
+     *     <br>取值为false时，当前组件不使用祖先组件UnionEffectContainer的融合效果。
+     *     <br>设置为undefined时，恢复为不使用祖先组件UnionEffectContainer的融合效果。
+     * @param { GravityCenterOptions } [options] - 引力中心参数。
+     *     此参数必须与UnionMode.GRAVITY_UNION一起使用。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -12609,30 +12797,25 @@ export declare interface CommonMethod {
      */
     default backdropBlur(radius: double | undefined, options?: BlurOptions, sysOptions?: SystemAdaptiveOptions): this;
     /**
-     * Sets whether the component and its child components are rendered off
-     * the screen as a whole before being blended with its parent.
+     * 设置组件及其子组件是否整体离屏渲染后再与父组件混合。
      *
-     * @param { boolean | undefined } value - Whether the component and its child components are rendered
-     *     off the screen as a whole before being blended with its parent. If the opacity of the
-     *     component is not 1, the drawing effect may vary depending on the value.
-     *     <br>Default value: **false**.
-     *     <br> The value **true** means the component and its child components are rendered off
-     *     the screen as a whole, and **false** means the opposite.
-     * @returns { this }
+     * @param { boolean | undefined } value - 设置当前组件和子组件是否组成节点组。
+     *     <br> false表示不组成节点组，不进行离屏渲染直接绘制。
+     *     <br> true表示当前组件和子组件组成节点组，进行离屏渲染后再与父组件融合绘制。
+     *     <br>当value的值为undefined时，按照不组成节点组处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default renderGroup(value: boolean | undefined): this;
     /**
-     * Set the component and its child components not to render off the screen following the parent component.
-     * Must be used in conjunction with renderGroup.
+     * 设置组件及其子组件不跟随父组件离屏渲染。需与renderGroup配合使用。
      *
-     * @param { boolean | undefined } exclude - Whether the component and its child components are not
-     *     rendered off the screen following the parent component.
-     *     True means to not follow the parent component.
-     *     Default value: false.
-     *     Undefined means to default value.
+     * @param { boolean | undefined } exclude - 组件及其子组件是否不跟随父组件离屏渲染。
+     *     true表示不跟随父组件。
+     *     默认值：false。
+     *     undefined表示默认值。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -12641,16 +12824,12 @@ export declare interface CommonMethod {
      */
     default excludeFromRenderGroup(exclude: boolean | undefined): this;
     /**
-     * Sets whether to freeze the component. When frozen, the component and its children are cached for
-     * repeated drawing after offscreen rendering, without updating internal attributes.
+     * 设置当前控件和子控件是否整体离屏渲染绘制后重复绘制缓存，不再进行内部属性更新。当freeze设置为true时，组件属性更新将被冻结；若需恢复属性更新，需先将freeze设置为false。
      *
-     * @param { boolean | undefined } value - Whether to freeze the component. When frozen, the component and its children
-     *     are cached for repeated drawing after offscreen rendering, without updating internal attributes. If the
-     *     opacity of the component is not 1, the drawing effect may vary depending on the value.
-     *     <br>Default value: **false**.
-     *     <br> **true**: Freeze the component.
-     *     <br>**false**: Do not freeze the component.
-     * @returns { this }
+     * @param { boolean | undefined } value - 设置当前控件和子控件是否整体离屏渲染绘制后重复绘制缓存，不再进行内部属性更新。当前控件的不透明度不为1时绘制效果可能有差异。
+     *     <br>默认值：false
+     *     <br> true时离屏渲染绘制后重复绘制缓存，false时离屏渲染绘制后不重复绘制缓存。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12824,10 +13003,12 @@ export declare interface CommonMethod {
      */
     default alignSelf(value: ItemAlign | undefined): this;
     /**
-     * Defines the align rules of child component in Stack container.
+     * 单独设置Stack组件中子组件的对齐规则，仅当父组件为Stack时生效。与align属性同时使用时，layoutGravity优先级更高，支持[attributeModifier]{@link
+     * attributeModifier}动态设置属性方法。
      *
-     * @param { LocalizedAlignment | undefined } alignment
-     * @returns { this }
+     * @param { LocalizedAlignment | undefined } alignment - 指定设置在Stack组件中子组件的对齐规则。<br/>默认值：LocalizedAlignment.CENTER
+     *    。说明：当传入异常值时，按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12866,56 +13047,96 @@ export declare interface CommonMethod {
      */
     default sharedTransition(id: string | undefined, options?: sharedTransitionOptions): this;
     /**
-     * Sets how elements are laid out along the main axis of the container.
-     * Default value: **Direction.Auto**.
+     * 设置当前组件绘制区域内主轴方向上的布局，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Direction | undefined } value
-     * @returns { this }
+     * @param { Direction | undefined } value - 设置当前组件绘制区域内主轴方向上的布局。<br/>属性配置为auto的时候，按照系统语言方向进行布局。<br/>该属性在Column组件上不生效。<br/>默认值：Direction.Auto
+     *    <br/>direction取undefined或null时按默认值处理。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default direction(value: Direction | undefined): this;
     /**
-     * Sets the alignment mode of the component content in the drawing area.
-     * Default value: **Alignment.Center**.
+     * 设置当前组件绘制区域内的子组件的对齐方式，增加支持镜像的能力，支持[attributeModifier]{@link attributeModifier}。
      *
-     * @param { Alignment | LocalizedAlignment | undefined } alignment
-     * @returns { this }
+     * @param { Alignment | LocalizedAlignment | undefined } alignment - 设置当前组件绘制区域内的子组件的对齐方式，增加支持镜像的能力。<br/>[LocalizedAlignment]{@link LocalizedAlignment}只在[Shape]{@link Shape},
+     *    [Button]{@link Button},
+     *    [GridItem]{@link GridItem},
+     *    [FlowItem]{@link FlowItem},
+     *    [ImageAnimator]{@link ImageAnimator},
+     *    [LoadingProgress]{@link LoadingProgress},
+     *    [PatternLock]{@link PatternLock},
+     *    [Progress]{@link Progress},
+     *    [QRCode]{@link QRCode},
+     *    [TextClock]{@link TextClock},
+     *    [TextTimer]{@link TextTimer},
+     *    [StepperItem]{@link StepperItem},
+     *    [MenuItem]{@link MenuItem},
+     *    [Toggle]{@link MenuItem},
+     *    [Checkbox]{@link Checkbox}, and
+     *    [ListItem]{@link
+     *    ListItem}中有效果。<br/>其中，除ListItem与Alignment的效果保持一致以外，其他组件镜像切换均生效；其他设置LocalizedAlignment无效果的组件按其默认效果显示。<br/>默认值：Al
+     *    ignment.Center、LocalizedAlignment.CENTER<br/>设置异常值按默认值处理，效果为居中显示。<br/>**说明：**
+     *    <br/>Alignment类型不支持镜像能力；LocalizedAlignment类型支持镜像能力，选择LocalizedAlignment中的枚举值，根据direction或系统语言方向的改变实现镜像切换。其中dire
+     *    ction的优先级高于系统语言方向，当设置direction且不为auto时，LocalizedAlignment的镜像按照direction进行布局；当设置direction为auto或未设置时，LocalizedAli
+     *    gnment的镜像按照系统语言方向进行布局。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default align(alignment: Alignment | LocalizedAlignment | undefined): this;
     /**
-     * Sets the absolute position of the component relative to the position of the parent component.
-     * <br>The attribute is not available for a layout container whose width and height are zero.
+     * 绝对定位，确定子组件相对父组件内容区的位置，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | Edges | LocalizedEdges | undefined } value
-     * @returns { this }
+     * > **说明：**
+     * >
+     * > - position对位置的影响作用在组件的尺寸测量完成之后。
+     * > - 当父组件为[Row]{@link @global:Row}、[Column]{@link @global:Column}或[Flex]{@link
+     * Flex}时，设置position的子组件不占位。在上述场景中，如果父组件包含的所有子组件均设置了position，此时父组件尺寸无法通过其他子组件确定，将基于尺寸(0, 0)进行布局测算。
+     * > -
+     * Position类型基于父组件内容区左上角确定位置；Edges类型基于父组件内容区四边确定位置，top/left/right/bottom分别为组件各边距离父组件内容区相应边的边距，通过边距来确定组件相对于父组件内容区的位置；Lo
+     * calizedEdges类型基于父组件内容区四边确定位置，支持镜像模式。
+     * > - 本属性适用于置顶显示、悬浮按钮等组件在父组件中位置固定的场景。
+     * > - 本属性不支持在宽高为零的布局组件上设置。
+     * > - 当父组件为[RelativeContainer]{@link @global:RelativeContainer}，且子组件设置了alignRules属性时，子组件的position属性不生效。
+     * > - 若本属性所在组件的父组件未设置固定宽高，那么本组件会参考第一个设置固定宽高的祖先组件进行绝对定位。
+     *
+     * @param { Position | Edges | LocalizedEdges | undefined } value - 绝对定位，确定子组件相对父组件内容区的位置，父组件内容区的大小为
+     *    父组件大小减去[border]{@link border}、[padding]{@link padding}、[safeAreaPadding]{@link safeAreaPadding}后提供给子组件可布局的内容区域大小。
+     *    <br/>设置异常值时该属性不生效。[since 12].
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default position(value: Position | Edges | LocalizedEdges | undefined): this;
     /**
-     * Sets the anchor for locating the component, which is used to move the component
-     * further away from the position specified by position or offset.
+     * 设置元素在位置定位时的锚点，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | LocalizedPosition | undefined } value
-     * @returns { this }
+     * @param { Position | LocalizedPosition | undefined } value - 设置元素在位置定位时的锚点，基于position或offset的初始位置，进行进一步的偏移调整。
+     *    <br/>设置.position({x: value1, y: value2}).markAnchor({x: value3, y: value4})，效果等于设置.position({x: value1 - value3, y: value2 - value4})，offset同理。
+     *    <br/>单独设置.markAnchor({x: value1, y: value2})，效果等于设置.offset({x: -value1, y: -value2})。
+     *    <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+     *    <br/>API version 10：无默认值。
+     *    <br/>设置异常值时该属性不生效。 [since 12]
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default markAnchor(value: Position | LocalizedPosition | undefined): this;
     /**
-     * Sets the offset of the component relative to its original position.
-     * <br>The offset attribute does not affect the layout of the parent container.
-     * It adjusts the component position only during drawing.
+     * 相对偏移，组件相对原本的布局位置进行偏移。和position一起使用时，position生效，offset不生效，支持[attributeModifier]{@link attributeModifier}动态设置属性方法。
      *
-     * @param { Position | Edges | LocalizedEdges | undefined } value
-     * @returns { this }
+     * @param { Position | Edges | LocalizedEdges | undefined } value - 相对偏移，组件基于原本的布局位置进行偏移。offset属性不影响父组件布局，仅在绘制时调整位置。
+     *    <br/>Position类型基于组件自身左上角偏移，Edges类型基于组件自身四边偏移。 offset属性设置{x: x, y: y}与设置{left: x, top: y}以及{right: -x, bottom: -y}效果相同，类型LocalizedEdges支持镜像模式：LTR模式下start等同于x，RTL模式下start等同于-x。
+     *    <br/>API version 9及以前，默认值为：{x: 0, y: 0}
+     *    <br/>默认单位：vp
+     *    <br/>API version 10：无默认值。
+     *    <br/>设置异常值时该属性不生效。[since 12]
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -12933,28 +13154,21 @@ export declare interface CommonMethod {
      */
     default enabled(value: boolean | undefined): this;
     /**
-     * Sets the alignment rules in the relative container.
-     * <br>This API is valid only when the container is RelativeContainer.
-     * <br>LocalizedAlignRuleOptions takes the right-to-left scripts into account, using start and end instead of
-     *     left and right for alignment in the horizontal direction. Prioritize this API in aligning
-     *     child components in the relative container.
+     * 指定设置在相对布局组件中子组件的对齐规则，仅当父组件为[RelativeContainer]{@link @global:RelativeContainer}时生效，支持[attributeModifier]{@link
+     * attributeModifier}动态设置属性方法。
      *
-     * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } value
-     * @returns { this }
+     * @param { AlignRuleOption | LocalizedAlignRuleOptions | undefined } value - 指定设置在相对布局组件中子组件的对齐规则。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default alignRules(value: AlignRuleOption | LocalizedAlignRuleOptions | undefined): this;
     /**
-     * Sets the parameters of the chain in which the component is the head.
-     * <br>This parameter has effect only when the parent container is RelativeContainer.
-     * <br>The chain head is the first component in the chain that satisfies the chain formation rules.
-     * In a horizontal layout, it starts from the left (or from the right in a mirrored language
-     * layout). In a vertical layout, it starts from the top.
+     * 指定以该组件为链头所构成的链的参数，仅当父组件为RelativeContainer时生效。链头指满足成链规则时链的第一个组件（水平方向从左边起始，镜像语言下从右边起始；竖直方向从上边起始）。
      *
-     * @param { Axis | undefined } direction - indicates direction of the chain
-     * @param { ChainStyle | undefined } style - indicates style of the chain
+     * @param { Axis | undefined } direction - 链的方向。
+     * @param { ChainStyle | undefined } style - 链的样式。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13185,64 +13399,51 @@ export declare interface CommonMethod {
      */
     default toolbar(value: CustomBuilder | undefined): this;
     /**
-     * Linear Gradient
-     * angle: Angle of Linear Gradient. The default value is 180;
-     * direction: Direction of Linear Gradient. The default value is GradientDirection.Bottom;
-     * colors: Color description for gradients.
-     * repeating: repeating. The default value is false
+     * 设置组件的线性渐变效果。
      *
-     * @param { LinearGradientOptions | undefined } value - Linear gradient.
-     *     <br>If **options** is **undefined**, the linear gradient is disabled.
-     * @returns { this }
+     * @param { LinearGradientOptions | undefined } value - 线性渐变的配置选项。
+     *     <br>当options的值为undefined时，恢复为无线性渐变的效果。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default linearGradient(value: LinearGradientOptions | undefined): this;
     /**
-     * Creates a sweep gradient.
+     * 设置组件的角度渐变效果。
      *
-     * @param { SweepGradientOptions | undefined } value - Sweep gradient, which can sweep around the specified
-     *     center point in the 0–360 degree range. If the rotation angle exceeds the range, a monochrome
-     *     color instead of a gradient will be drawn.<br>- **center**: center of the sweep gradient, that
-     *     is, the coordinates relative to the upper left corner of the current component.
-     *     <br>- **start**: start angle of the sweep gradient.
-     *     <br> Default value: **0**<br>If the angle is specified with a string, only the deg, grad, rad,
-     *     and turn types are supported.<br>- **end**: end angle of the sweep gradient.
-     *     <br> Default value: **0**<br>If the angle is specified with a string, only the deg, grad, rad,
-     *     and turn types are supported.<br>- **rotation**: rotation angle of the sweep gradient.
-     *     <br> Default value: **0**<br>If the angle is specified with a string, only the deg, grad, rad,
-     *     and turn types are supported.<br>- colors: array of color stops,
-     *     each of which consists of a color and its stop position. Invalid colors are automatically skipped.
-     *     <br>- **repeating**: whether the colors are repeated.
-     *     <br>  Default value: **false**.
-     *     <br>**NOTE**
-     *     <br>A value less than 0 is treated as **0**. A value greater than 360 is treated as **360**.
-     *     <br>When **start**, **end**, or **rotation** is specified with a string, the string must be a number
-     *     or a number followed by one of the following units: deg, rad, grad, and turn. Valid value examples
-     *     are "90", "90deg", and "1.57rad".
-     * @returns { this }
+     * @param { SweepGradientOptions | undefined } value - 角度渐变的配置选项。仅绘制0-360度范围内的角度，超出0-360度范围时不绘制渐变过渡效果，仅以渐变边界处对应的颜色填充。
+     *     <br>- **center**: 角度渐变的中心点，即相对于当前组件左上角的坐标。
+     *     <br>- **start**: 角度渐变的起始角度。
+     *     <br> 默认值：**0**<br>角度为字符串时，支持deg、grad、rad、turn类型。
+     *     <br>- **end**: 角度渐变的终止角度。
+     *     <br> 默认值：**0**<br>角度为字符串时，支持deg、grad、rad、turn类型。
+     *     <br>- **rotation**: 角度渐变的旋转角度。
+     *     <br> 默认值：**0**<br>角度为字符串时，支持deg、grad、rad、turn类型。
+     *     <br>- colors: 颜色数组，每个颜色由颜色值和位置组成。非法颜色自动跳过。
+     *     <br>- **repeating**: 颜色是否重复。
+     *     <br> 默认值：**false**。
+     *     <br>**说明**
+     *     <br>设置小于0的值时按**0**处理，设置大于360的值时按**360**处理。
+     *     <br>当**start**、**end**或**rotation**为字符串时，字符串必须为数字或数字后带deg、rad、grad、turn单位。合法取值示例："90"、"90deg"、"1.57rad"。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default sweepGradient(value: SweepGradientOptions | undefined): this;
     /**
-     * Creates a radial gradient.
-     *
-     * Anonymous Object Rectification.
-     * @param { RadialGradientOptions | undefined } value - Radial gradient.
-     *     <br>- **center**: center of the radial gradient, that is, the coordinates relative
-     *     to the upper left corner of the current component.
-     *     <br>- **radius**: radius of the radial gradient.
-     *     <br> Value range: [0, +∞).
-     *     <br>**NOTE**
-     *     <br>A value less than 0 is treated as **0**.
-     *     <br>- colors: array of color stops, each of which consists
-     *     of a color and its stop position. Invalid colors are automatically skipped.
-     *     <br>- **repeating**: whether the colors are repeated.
-     *     <br>  Default value: **false**.
-     * @returns { this }
+     * 设置组件的径向渐变效果。
+     * @param { RadialGradientOptions | undefined } value - 径向渐变的配置选项。
+     *     <br>- **center**: 径向渐变的中心点，即相对于当前组件左上角的坐标。
+     *     <br>- **radius**: 径向渐变的半径。
+     *     <br> 取值范围：[0, +∞)。
+     *     <br>**说明**
+     *     <br>设置小于0的值时按**0**处理。
+     *     <br>- colors: 颜色数组，每个颜色由颜色值和位置组成。非法颜色自动跳过。
+     *     <br>- **repeating**: 颜色是否重复。
+     *     <br> 默认值：**false**。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -13260,13 +13461,12 @@ export declare interface CommonMethod {
      */
     default motionPath(value: MotionPathOptions | undefined): this;
     /**
-     * Applies a shadow effect to the component.
+     * 为组件添加阴影效果。
      *
-     * @param { ShadowOptions | ShadowStyle | undefined } value - Shadow of the component.
-     *     <br>When the value type is **ShadowOptions**, the blur radius, shadow color,
-     *     and offset along the x-axis and y-axis can be specified.
-     *     <br>When the value type is **ShadowStyle**, the shadow style can be specified.
-     * @returns { this }
+     * @param { ShadowOptions | ShadowStyle | undefined } value - 组件的阴影。
+     *     <br>当值类型为**ShadowOptions**时，可指定模糊半径、阴影颜色和X轴、Y轴偏移量。
+     *     <br>当值类型为**ShadowStyle**时，可指定阴影样式。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -13298,18 +13498,16 @@ export declare interface CommonMethod {
      */
     default shadowClipMode(mode: ShadowClipMode | undefined): this;
     /**
-     * Sets the edge light effect for the component.
+     * 为组件设置边缘光效。
      *
-     * <p><strong>NOTE</strong>:
-     * <br>The edge light effect creates a glowing light effect along the component's edges,
-     * starting from the specified position and extending along the edge.
-     * <br>This effect can enhance the visual appeal and highlight important components.
+     * <p><strong>说明</strong>：
+     * <br>边缘光效沿组件边缘产生发光效果，从指定位置开始沿边缘延伸。
+     * <br>该效果可以增强视觉吸引力并突出重要组件。
      * </p>
      *
-     * @param { EdgeLightParams | undefined } params - Edge light effect parameters.
-     *     Defines the position, length, intensity, color, and thickness of the light effect.
-     *     If params is undefined, the edge light effect is removed.
-     * @returns { this }
+     * @param { EdgeLightParams | undefined } params - 边缘光效参数。
+     *     定义边缘光效的位置、长度、强度、颜色和粗细。如果params为undefined，则移除边缘光效。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -13317,16 +13515,14 @@ export declare interface CommonMethod {
      */
     default edgeLight(params: EdgeLightParams | undefined): this;
     /**
-     * Defines how the component's content (including the content of it child components)
-     * is blended with the existing content on the canvas (possibly offscreen canvas) below.
+     * 设置组件内容（含子组件内容）与画布上已有内容（可能是离屏画布）的混合方式。
      *
-     * @param { BlendMode | undefined } value - Blend mode.
-     *     <br>Default value: **BlendMode.NONE**.
-     *     <br>**NOTE**
-     *     <br>When **BlendMode.NONE** is used, the blend effect is **BlendMode.SRC_OVER**
-     *     by default, and **BlendApplyType** does not take effect.
-     * @param { BlendApplyType } [type] - Whether the blend mode is implemented offscreen.
-     *     <br>Default value: **BlendApplyType.FAST**.
+     * @param { BlendMode | undefined } value - 混合模式。
+     *     <br>默认值：**BlendMode.NONE**。
+     *     <br>**说明**
+     *     <br>当使用**BlendMode.NONE**时，混合效果默认为**BlendMode.SRC_OVER**，且**BlendApplyType**不生效。
+     * @param { BlendApplyType } [type] - 混合模式是否离屏实现。
+     *     <br>默认值：**BlendApplyType.FAST**。
      *     <br>**NOTE**
      *     <br>1. **BlendApplyType.FAST**: The blend mode is not implemented offscreen.
      *     <br>2. **BlendApplyType.OFFSCREEN**: An offscreen canvas of the size of the current component
@@ -13343,12 +13539,11 @@ export declare interface CommonMethod {
 
 
     /**
-     * Add a blendMode effect to the current component.Cannot be used together with the blendMode interface.
+     * 为当前组件添加混合模式效果。不能与blendMode接口同时使用。
      *
-     * @param { BlendMode | Blender | undefined } effect - When the effect type is BlendMode type, define Different
-     *     hybrid modes.
-     * @param { BlendApplyType } [type] - Different blend apply type
-     *     Default value: BlendApplyType.FAST.
+     * @param { BlendMode | Blender | undefined } effect - 当effect类型为BlendMode时，定义不同的混合模式。
+     * @param { BlendApplyType } [type] - 不同的混合应用类型。
+     *     默认值：BlendApplyType.FAST。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
@@ -13696,34 +13891,29 @@ export declare interface CommonMethod {
      */
     default onVisibleAreaApproximateChange(options: VisibleAreaEventOptions | undefined, event: VisibleAreaChangeCallback | undefined): this;
     /**
-     * Applies a spherical effect to the component.
+     * 为组件添加球面效果。
      *
-     * @param { double | undefined } value - Spherical degree of the component.
-     *     <br>The value ranges from 0 to 1.
-     *     <p>**NOTE**:
-     *     <br>1. If the value is **0**, the component remains unchanged. If the value is 1, the component is completely
-     *     spherical. Between **0** and **1**, a larger value indicates a higher spherical degree. A value less than 0 is
-     *     handled as the value **0**. A value greater than 1 is handled as the value **1**.
-     *     <br>2. The component's shadow and outer stroke do not support spherical effects.
-     *     <br>3. If the value is greater than 0, the component is frozen and not updated, and its content is drawn to the
-     *     transparent offscreen buffer. To update the component attributes, set the value to **0**.
+     * @param { double | undefined } value - 组件的球面程度。
+     *     <br>取值范围：[0, 1]。
+     *     <p>**说明**：
+     *     <br>1. 值为0时组件保持不变，值为1时组件完全球面化。0到1之间，值越大球面程度越高。设置小于0的值时按0处理，设置大于1的值时按1处理。
+     *     <br>2. 组件的阴影和外描边不支持球面效果。
+     *     <br>3. 值大于0时，组件会被冻结不更新，其内容绘制到透明离屏缓冲区。更新组件属性时需将值设为0。
      *     </p>
-     * @returns { this }
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default sphericalEffect(value: double | undefined): this;
     /**
-     * Applies a light up effect to the component.
+     * 为组件添加提亮效果。
      *
-     * @param { double | undefined } value - Light up degree of the component.
-     *     <br>The value ranges from 0 to 1.
-     *     <br>If the value is **0**, the component is dark. If the value is **1**, the component is fully illuminated.
-     *     <br>Between **0** and **1**, a larger value indicates higher luminance.
-     *     <br>A value less than 0 is handled as the value **0**.
-     *     <br>A value greater than 1 is handled as the value **1**.
-     * @returns { this }
+     * @param { double | undefined } value - 组件的提亮程度。
+     *     <br>取值范围：[0, 1]。
+     *     <br>值为0时组件为暗，值为1时组件完全点亮。0到1之间，值越大亮度越高。
+     *     <br>设置小于0的值时按0处理，设置大于1的值时按1处理。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -13743,39 +13933,34 @@ export declare interface CommonMethod {
     default spatialEffect(params: SpatialEffectParams | undefined): this;
 
     /**
-     * Applies a pixel stretch effect to the component.
+     * 设置组件的图像边缘像素扩展距离。
      *
-     * @param { PixelStretchEffectOptions | undefined } options - Pixel stretch effect options.
-     *     <br>The value includes the length by which a pixel is stretched toward the four edges.
-     *     <p>**NOTE**:
-     *     <br>1. If the length is a positive value, the original image is stretched, and the image size increases. The edge
-     *     pixels grow by the set length toward the top, bottom, left, and right edges.
-     *     <br>2. If the length is a negative value, the original image shrinks as follows, but the image size remains
-     *     unchanged:
-     *     <br>Shrinking mode:
-     *     <br>(1) The image shrinks from the four edges by the absolute value of length set through **options**.
-     *     <br>(2) The image is stretched back to the original size with edge pixels.
-     *     <br>3. Constraints on **options**:
-     *     <br>(1) The length values for the four edges must be all positive or all negative. That is, the four edges are
-     *     stretched or shrink at the same time in the same direction.
-     *     <br>(2) The length values must all be a percentage or a specific value. Combined use of the percentage and
-     *     specific value is not allowed.
-     *     <br>(3) If the input value is invalid, the image is displayed as {0, 0, 0, 0}, that is, the image is the same as
-     *     the original image.
-     *     </p>
-     * @returns { this }
+     * @param { PixelStretchEffectOptions | undefined } options - 设置组件的图像边缘像素扩展距离。
+     *     <br>参数`options`包括上下左右四个方向的边缘像素扩展距离。
+     *     <br>**说明：**
+     *     <br>1. 如果距离为正值，表示向外扩展，放大原来图像大小。上下左右四个方向分别用边缘像素填充，填充的距离即为设置的边缘扩展的距离。
+     *     <br>2. 如果距离为负值，表示内缩，但是最终图像大小不变。
+     *     <br>内缩方式：
+     *     <br>图像根据`options`的设置缩小，缩小大小为四个方向边缘扩展距离的绝对值。
+     *     <br>图像用边缘像素扩展到原来大小。
+     *     <br>3. 对`options`的输入约束：
+     *     <br>上下左右四个方向的扩展统一为非正值或者非负值。即四个边同时向外扩或者内缩，方向一致。
+     *     <br>所有方向的输入均为百分比或者具体值，不支持百分比和具体值混用。
+     *     <br>所有异常情况下，显示为{0, 0, 0, 0}效果，即跟原图保持一致。
+     *     <br>当options的值为undefined时，恢复为无像素扩展效果。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default pixelStretchEffect(options: PixelStretchEffectOptions | undefined): this;
     /**
-     * Sets hot keys
+     * 设置组件的自定义组合键。
      *
-     * @param { string | FunctionKey | undefined } value - Character of the combination key.
-     * @param { Array<ModifierKey> | undefined } keys - The modifier keys modify the action of key when the key are pressed at the same time.
-     * @param { function } [action] - Callback function, triggered when the shortcut keyboard is pressed.
-     * @returns { this }
+     * @param { string | FunctionKey | undefined } value - 热键的单个字符（可以通过键盘输入的字符）或[FunctionKey]{@link @global:FunctionKey}。<br />空字符串意为取消快捷键绑定。<br/>
+     * @param { Array<ModifierKey> | undefined } keys - 热键组合。<br />仅当value为[FunctionKey]{@link @global:FunctionKey}的情况下keys的值可以为空。<br/>
+     * @param { function } action - 组合快捷键触发成功后的自定义事件回调。
+     * @returns { this } 返回当前组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -13972,10 +14157,17 @@ export declare interface CommonMethod {
      */
     default accessibilitySelected(isSelect: boolean | undefined): this;
     /**
-     * Sets obscured
+     * 设置组件内容的隐私遮罩类型，在屏幕录制或屏幕共享等场景下对组件内容进行隐私遮挡。
      *
-     * @param { Array<ObscuredReasons> | undefined } reasons - reasons of obscuration
-     * @returns { this }
+     * @param { Array<ObscuredReasons> | undefined } reasons - 设置组件内容的遮罩类型，在屏幕录制或屏幕共享等场景下对组件内容进行隐私遮挡。取值原则：请参考
+     *    [ObscuredReasons]{@link ObscuredReasons}枚举定义，如PLACEHOLDER表示使用占位图遮罩。
+     *    <br>默认值：[]，未设置遮罩原因时，不对组件内容进行隐私遮罩处理。
+     *    <br>隐私遮罩效果仅在[Image]{@link @global:Image}组件、[Text]{@link @global:Text}组件<!--Del-->和[FormComponent]{@link @global:FormComponent}组件
+     *    <sup>12+</sup><!--DelEnd-->上生效。
+     *    <br>**说明：**
+     *    <br>如需在图片加载过程中显示隐私遮罩，需要设置Image组件的宽度和高度；若未设置宽度和高度，图片加载过程中将不会显示隐私遮罩效果。
+     *    <br>Text组件设置子组件或设置[属性字符串]{@link @global:StyledString}时，不支持隐私遮罩。
+     * @returns { this } 返回当前组件，用于链式调用。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14169,15 +14361,25 @@ export declare interface CommonMethod {
      */
     default onGestureCollectIntercept(callback: GestureCollectInterceptCallback): this;
     /**
-     * Set system-styled materials for the component. The material effect behaves differently on devices with different
-     * level of computing powers. On devices with lower computing power, it affects attributes such as the
-     * backgroundColor, borderWidth, borderColor, shadow. On devices with higher computing power, it adds a filter effect
-     * at the system material layer, which can produce an effect similar to glass.
+     * 设置组件的系统材质。不同系统材质对应不同的属性影响效果，该接口可以影响背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、
+     * 阴影shadow、材质层滤镜materialFilter效果，影响的属性与设备材质等级相关，参考ImmersiveMaterial。
      *
-     * @param { SystemUiMaterial | undefined } material - System-styled material. Undefined indicates reverting to
-     *     the effect of no system material. [since 23]
-     * @returns { this } [since 23]
-     * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+     * > **说明：**
+     * >
+     * > - 通过该属性设置组件的系统材质时，仅在Navigation或NavDestination的标题栏，或横向Tabs中barPosition为BarPosition.End的底部TabBar中生效。
+     * > - ImmersiveMaterial只有在支持沉浸式材质的设备上设置才有效果，在不支持沉浸式材质的设备上可设置但无效果，
+     *     可通过isImmersiveMaterialSupported判断设备是否支持沉浸式材质。在不支持沉浸式材质的设备上，设置ImmersiveMaterial后，组件的样式仍由已设置的通用属性决定，
+     *     ImmersiveMaterial不会覆盖任何通用属性。
+     * > - 当systemMaterial与其影响的通用属性（背景色backgroundColor、边框颜色borderColor、边框宽度borderWidth、阴影shadow、材质层滤镜materialFilter）同时设置时，
+     *     二者会发生冲突。除阴影外，总体原则为后设置的生效；对于阴影属性，哪个生效取决于ImmersiveMaterial的applyShadow参数。
+     * > - 对于所有设备算力档位均需要材质颜色的场景，可以通过ImmersiveMaterial的materialColor参数承载，不再设置backgroundColor属性。
+     * > - 该样式仅限当前组件使用，不会影响或继承至子组件。
+     *
+     * @param { SystemUiMaterial | undefined } material - 组件的系统材质对象。仅在支持沉浸式材质的设备上设置才有效果，在不支持沉浸式材质的设备上可设置但无效果，
+     *   可通过isImmersiveMaterialSupported判断设备是否支持沉浸式材质。设置为undefined时恢复为无材质的效果，
+     *   若同时设置了材质对象影响的通用属性，会恢复至对应通用属性设置的值，冲突的属性由材质对象决定，参考ImmersiveMaterial。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi [since 23 - 24]
      * @publicapi [since 26.0.0]
      * @stagemodelonly
@@ -14373,11 +14575,10 @@ export type FractionStop = [
  */
 export declare interface CommonShapeMethod extends CommonMethod {
     /**
-     * Sets the stroke color.
-     * If this attribute is not set, the component does not have any stroke.
-     * If the value is invalid, no stroke will be drawn.
+     * 设置边框颜色，支持attributeModifier动态设置属性方法，不设置时，默认边框透明度为0，即无边框。
      *
-     * @param { ResourceColor | undefined } value - Stroke color.
+     * @param { ResourceColor | undefined } value - 边框颜色。
+     *    <br>默认值：Color.Transparent<br/>异常值undefined和null按照默认值处理，NaN和Infinity按照Color.Black处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14385,11 +14586,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default stroke(value: ResourceColor | undefined): this;
     /**
-     * Sets the color of the fill area.
-     * An invalid value is handled as the default value.
-     * If this attribute and the universal attribute foregroundColor are both set, whichever is set later takes effect.
+     * 设置填充区域的颜色，支持attributeModifier动态设置属性方法，异常值按照默认值处理。与通用属性foregroundColor同时设置时，后设置的属性生效。
      *
-     * @param { ResourceColor | undefined } value - Color of the fill area. Default value: Color.Black.
+     * @param { ResourceColor | undefined } value - 填充区域颜色。
+     *    <br>默认值：Color.Black
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14397,12 +14598,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default fill(value: ResourceColor | undefined): this;
     /**
-     * Sets the offset of the start point for drawing the stroke.
-     * An invalid value is handled as the default value.
+     * 设置边框绘制起点的偏移量，支持attributeModifier动态设置属性方法。异常值按照默认值处理。
      *
-     * @param { double | string | undefined } value - Offset of the start point for drawing the stroke.
-     *     Default value: 0
-     *     Default unit: vp
+     * @param { double | string | undefined } value - 边框绘制起点的偏移量。
+     *    <br>默认值：0<br/>默认单位：vp
+     *    <br>异常值undefined和null按照默认值处理，NaN和Infinity会导致strokeDashArray失效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14410,9 +14610,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeDashOffset(value: double | string | undefined): this;
     /**
-     * Sets the cap style of the stroke.
+     * 设置边框端点绘制样式，支持attributeModifier动态设置属性方法。
      *
-     * @param { LineCapStyle | undefined } value - Cap style of the stroke. Default value: LineCapStyle.Butt
+     * @param { LineCapStyle | undefined } value - 边框端点绘制样式。
+     *    <br>默认值：LineCapStyle.Butt
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14420,10 +14622,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeLineCap(value: LineCapStyle | undefined): this;
     /**
-     * Sets the join style of the stroke.
-     * This attribute does not work for the Circle component, which does not have corners.
+     * 设置边框拐角绘制样式，支持attributeModifier动态设置属性方法。
      *
-     * @param { LineJoinStyle | undefined } value - Join style of the stroke. Default value: LineJoinStyle.Miter
+     * @param { LineJoinStyle | undefined } value - 边框拐角绘制样式。
+     *    <br>默认值：LineJoinStyle.Miter
+     *    <br>异常值undefined、null、NaN和Infinity按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14431,9 +14634,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeLineJoin(value: LineJoinStyle | undefined): this;
     /**
-     * Limits for drawing acute angles as bevels
+     * 设置斜接长度与边框宽度比值的极限值，支持attributeModifier动态设置属性方法。斜接长度表示外边框外边交点到内边交点的距离，边框宽度即strokeWidth属性的值。该属性取值需在strokeLineJoin属性取值LineJoinStyle.Miter时生效。该属性的合法值范围应当大于等于1.0，当取值范围在[0,1)时按1.0处理，其余异常值按默认值处理。
      *
-     * @param { double | string | undefined } value
+     * @param { double | string | undefined } value - 斜接长度与边框宽度比值的极限值。
+     *    <br>默认值：4
+     *    <br>异常值undefined、null和NaN按照默认值处理，Infinity会导致stroke失效。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14441,12 +14646,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeMiterLimit(value: double | string | undefined): this;
     /**
-     * Sets the stroke opacity.
-     * The value range is [0.0, 1.0].
-     * A value less than 0.0 evaluates to the value 0.0. A value greater than 1.0 evaluates to the value 1.0.
-     * Any other value evaluates to the value 1.0.
+     * 设置边框透明度，支持attributeModifier动态设置属性方法。该属性的取值范围是[0.0, 1.0]，若给定值小于0.0，则取值为0.0；若给定值大于1.0，则取值为1.0。
      *
-     * @param { double | string | Resource | undefined } value - Stroke opacity. Default value: 1
+     * @param { double | string | Resource | undefined } value - 边框透明度。
+     *    <br>默认值：stroke接口设置的透明度
+     *    <br>异常值NaN按0.0处理，undefined、null和Infinity按1.0处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14454,12 +14658,10 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeOpacity(value: double | string | Resource | undefined): this;
     /**
-     * Sets the opacity of the fill area.
-     * The value range is [0.0, 1.0].
-     * A value less than 0.0 evaluates to the value 0.0. A value greater than 1.0 evaluates to the value 1.0.
-     * Any other value evaluates to the value 1.0.
+     * 设置填充区域透明度，支持attributeModifier动态设置属性方法。
      *
-     * @param { double | string | Resource | undefined } value - Opacity of the fill area. Default value: 1
+     * @param { double | string | Resource | undefined } value - 填充区域透明度。
+     *    <br>默认值：1.0
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14467,14 +14669,11 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default fillOpacity(value: double | string | Resource | undefined): this;
     /**
-     * Sets the stroke width.
-     * If this attribute is of the string type, percentage values are not supported and will be treated as 1 px.
+     * 设置边框宽度，支持attributeModifier动态设置属性方法。该属性若为string类型，暂不支持百分比，百分比按照1px处理。
      *
-     * @param { Length | undefined } value - Stroke width.
-     *     The value must be greater than or equal to 0.
-     *     Default value: 1.
-     *     Default unit: vp.
-     *     An invalid value is handled as the default value.
+     * @param { Length | undefined } value - 边框宽度，取值范围≥0。
+     *    <br>默认值：1
+     *    <br>默认单位：vp<br/>异常值undefined、null和NaN按照默认值处理，Infinity按0处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14482,12 +14681,12 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeWidth(value: Length | undefined): this;
     /**
-     * Specifies whether anti-aliasing is enabled.
+     * 设置是否开启抗锯齿效果，支持attributeModifier动态设置属性方法。
      *
-     * @param { boolean | undefined } value - Whether anti-aliasing is enabled.
-     *     true: Anti-aliasing is enabled.
-     *     false: Anti-aliasing is disabled.
-     *     Default value: true
+     * @param { boolean | undefined } value - 是否开启抗锯齿效果。
+     *    <br>true：开启抗锯齿；false：关闭抗锯齿。
+     *    <br>默认值：true
+     *    <br>异常值undefined和null按照false处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14495,9 +14694,12 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default antiAlias(value: boolean | undefined): this;
     /**
-     * Sets the gap for the border.
+     * 设置边框的虚线长度和虚线间隙长度，支持attributeModifier动态设置属性方法。取值范围≥0。异常值将按默认值处理。
      *
-     * @param { Array<Length> | undefined } value
+     * @param { Array<Length> | undefined } value - 定义Rect边框的虚线模式的数组，数组元素交替表示线段长度和间隙长度。
+     *    <br>默认值：[]（空数组）
+     *    <br>默认单位：vp
+     *    <br>异常值undefined和null按照默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14505,18 +14707,16 @@ export declare interface CommonShapeMethod extends CommonMethod {
      */
     default strokeDashArray(value: Array<Length> | undefined): this;
     /**
-    * Set whether the component enables the ability to invert colors.
-    * This interface needs to be set as the first attribute of the component.
-    *
-    * @param { boolean } value - value indicates whether the component enables the ability to invert colors.
-    *     <br>If set to true, the component will use the inverse color capability.
-    *     If set to false, the component and its child components will not use the inverse color capability
-    *     and will not be affected by the settings of the parent or ancestor components. The default value is true.
-    * @returns { this }
+     * 设置组件是否允许强制深色。该接口需要设置为组件的第一个属性。
+     *
+     * @param { boolean } value - value表示组件是否允许强制深色。
+     *    <br>设置为true时，组件使用强制深色能力。
+     *    设置为false时，组件及其子组件不使用强制深色能力，且不受父组件或祖先组件设置的影响。默认值为true。
+     * @returns { this }
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
     * @since 23 static
-    */
+     */
     default allowForceDark(value: boolean): this;
 }
 /**
@@ -14569,7 +14769,7 @@ export declare interface PixelRoundPolicy {
     bottom?: PixelRoundCalcPolicy;
 }
 /**
- * Linear Gradient Blur Interface
+ * 线性渐变模糊选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14577,7 +14777,7 @@ export declare interface PixelRoundPolicy {
  */
 export declare interface LinearGradientBlurOptions {
     /**
-     * Percentage of blurring effect. Undefined value means no fractionStops.
+     * 数组中保存的每一个二元数组（取值0-1，小于0则为0，大于1则为1）表示[模糊分数, 模糊位置]；模糊位置需严格递增，开发者传入的数据不符合规范会记录日志，渐变模糊数组中二元数组个数必须大于等于2，否则渐变模糊不生效。undefined表示无fractionStops。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14585,7 +14785,7 @@ export declare interface LinearGradientBlurOptions {
      */
     fractionStops: FractionStop[] | undefined;
     /**
-     * Direction of linear gradient blur. Undefined value means GradientDirection.Left.
+     * 渐变模糊方向。undefined表示GradientDirection.Left。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14594,7 +14794,7 @@ export declare interface LinearGradientBlurOptions {
     direction: GradientDirection | undefined;
 }
 /**
- * Define motion blur anchor coordinates.
+ * 运动模糊锚点坐标。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14602,7 +14802,7 @@ export declare interface LinearGradientBlurOptions {
  */
 export declare interface MotionBlurAnchor {
     /**
-     * Define anchor coordinate x-value.Value range [0.0, 1.0]. Undefined value means 0.0.
+     * 锚点坐标x值，取值范围[0.0, 1.0]，0.0表示组件左边缘，1.0表示组件右边缘，0.5表示水平中心。undefined表示0.0。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14610,7 +14810,7 @@ export declare interface MotionBlurAnchor {
      */
     x: double | undefined;
     /**
-     * Define anchor coordinate y-value.Value range [0.0, 1.0]. Undefined value means 0.0.
+     * 锚点坐标y值，取值范围[0.0, 1.0]，0.0表示组件上边缘，1.0表示组件下边缘，0.5表示垂直中心。undefined表示0.0。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14619,7 +14819,7 @@ export declare interface MotionBlurAnchor {
     y: double | undefined;
 }
 /**
- * Define motion blur options.
+ * 运动模糊选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14627,7 +14827,7 @@ export declare interface MotionBlurAnchor {
  */
 export declare interface MotionBlurOptions {
     /**
-     * Define the size of motion blur radius.The range of this value is  [0.0, ∞). Undefined value means 0.0.
+     * 模糊半径，单位：vp，取值范围[0.0, +∞)，建议取值不超过1.0来实现较为美观的效果。传入负数时自动修正为0.0，超出建议值1.0时可能产生非预期效果。undefined表示0.0。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14635,7 +14835,7 @@ export declare interface MotionBlurOptions {
      */
     radius: double | undefined;
     /**
-     * Define motion blur anchor coordinates. Undefined value means default MotionBlurAnchor.
+     * 运动模糊锚点坐标，需要与动画缩放[scale]{@link CommonMethod#scale(value: ScaleOptions)}属性的锚点（centerX/centerY）保持一致，否则会产生非预期效果。undefined表示默认MotionBlurAnchor。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14707,39 +14907,36 @@ export declare interface Layoutable {
      */
     uniqueId?: int;
     /**
-     * Applies the specified position information to the child component.
+     * 调用此方法设置子组件的位置信息。
      *
-     * @param { Position | undefined } position
+     * @param { Position | undefined } position - 绝对位置，包含x和y坐标（原点为父组件左上角，x轴向右为正，y轴向下为正）。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     layout(position: Position | undefined): void;
     /**
-     * Obtains the margin of the child component.
+     * 调用此方法获取子组件的margin信息，返回其外边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the margin of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的外边距对象，包含四个方向的边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getMargin(): DirectionalEdgesT<double> | undefined;
     /**
-     * Call this method to get the padding of sub component.
+     * 调用此方法获取子组件的padding信息，返回其内边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Padding of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的内边距对象，包含四个方向的内边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getPadding(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the border width of the child component.
+     * 调用此方法获取子组件的borderWidth信息，返回其边框宽度。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the borderWidth of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的边框宽度对象，包含四个方向的边框宽度值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14764,41 +14961,37 @@ export declare interface Measurable {
      */
     uniqueId?: int;
     /**
-     * Applies the size constraint to the child component.
+     * 调用此方法限制子组件的尺寸范围，返回测量后的组件布局信息。
      *
-     * @param { ConstraintSizeOptions | undefined } constraint
-     * @returns { MeasureResult | undefined } Provides the measurement result of the component. If some errors
-     *     occur in the internal runtime environment, returns undefined.
+     * @param { ConstraintSizeOptions | undefined } constraint - 约束尺寸，包含minWidth、maxWidth、minHeight、maxHeight等约束条件，用于限制子组件的尺寸范围。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
+     * @returns { MeasureResult | undefined } 测量后的组件布局信息，包含测量后的宽度和高度。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     measure(constraint: ConstraintSizeOptions | undefined): MeasureResult | undefined;
     /**
-     * Obtains the margin of the child component.
+     * 获取子组件的margin信息，返回其外边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Margin of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的外边距对象，包含四个方向的边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getMargin(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the padding of the child component.
+     * 获取子组件的padding信息，返回其内边距。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } the padding of sub component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的内边距对象，包含四个方向的内边距值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getPadding(): DirectionalEdgesT<double> | undefined;
     /**
-     * Obtains the border width of the child component.
+     * 获取子组件的borderWidth信息，返回其边框宽度。
      *
-     * @returns { DirectionalEdgesT<double> | undefined } Border width of the child component, unit is vp. If some errors
-     * occur in the internal runtime environment, returns undefined.
+     * @returns { DirectionalEdgesT<double> | undefined } 子组件的边框宽度对象，包含四个方向的边框宽度值。单位：vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -14840,7 +15033,7 @@ export declare interface SizeResult {
     height: double;
 }
 /**
- * Provides the measurement result of the component.
+ * 测量后的组件布局信息。
  *
  * @extends SizeResult
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -14858,7 +15051,7 @@ export declare interface MeasureResult extends SizeResult {
  */
 export type NavDestinationInfo = uiObserver.NavDestinationInfo;
 /**
- * The navigation information.
+ * NavigationInfo实例对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14866,7 +15059,7 @@ export type NavDestinationInfo = uiObserver.NavDestinationInfo;
  */
 export type NavigationInfo = uiObserver.NavigationInfo;
 /**
- * The router page information.
+ * RouterPageInfo实例对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -14906,9 +15099,9 @@ export type VisualEffect = uiEffect.VisualEffect;
  */
 export type Filter = uiEffect.Filter;
 /**
- * SystemUiMaterial
+ * 系统材质对象基类。
  *
- * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi [since 23 - 24]
  * @publicapi [since 26.0.0]
  * @stagemodelonly
@@ -14926,7 +15119,7 @@ export type SystemUiMaterial = uiMaterial.Material;
  */
 export type Blender = uiEffect.Blender;
 /**
- * Import the DialogController type from promptAction.
+ * 从promptAction导入弹出框控制器类型
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -15184,7 +15377,7 @@ export declare abstract class TextContentControllerBase {
     scrollToVisible(range?: TextRange): void
 }
 /**
- * Enum of scrollable containers' content clip mode.
+ * 表示滚动容器的内容裁剪模式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15193,7 +15386,7 @@ export declare abstract class TextContentControllerBase {
  */
 export declare enum ContentClipMode {
     /**
-     * Clip to content rect inside margin & padding.
+     * 按内容区裁剪，对应图中的绿色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15201,7 +15394,7 @@ export declare enum ContentClipMode {
      */
     CONTENT_ONLY = 0,
     /**
-     * Clip to scrollable's outer rect, including padding but inside margin.
+     * 按组件区域裁剪，对应图中的整个蓝色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15209,7 +15402,7 @@ export declare enum ContentClipMode {
      */
     BOUNDARY = 1,
     /**
-     * Clip to the safeArea of scrollable container.
+     * 按组件配置的SafeArea区域裁剪，对应图中的整个黄色区域。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15229,11 +15422,11 @@ export declare enum ContentClipMode {
  */
 export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
-     * Sets the scrollbar state.
+     * 设置滚动条状态。
      *
-     * @param { BarState | undefined } barState - Scrollbar state.<br>Default value: <em>BarState.Auto</em>
-     *     for the <em>List</em>, <em>Grid</em>, and <em>Scroll</em> components and <em>BarState.Off</em>
-     *     for the <em>WaterFlow</em> component
+     * @param { BarState | undefined } barState - 滚动条状态。<br>默认值：<em>BarState.Auto</em>
+     *     适用于<em>List</em>、<em>Grid</em>和<em>Scroll</em>组件，以及<em>BarState.Off</em>
+     *     适用于<em>WaterFlow</em>组件。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15241,12 +15434,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBar(barState: BarState | undefined): this;
     /**
-     * Sets the scrollbar color.
+     * 设置滚动条的颜色。
      *
-     * @param { Color | int | string | Resource | undefined } color - Scrollbar color.
-     *     <br>Default value: <em>'\#182431'</em> (40% opacity)
-     *     <br>A number value indicates a HEX color in RGB or ARGB format, for example, <em>0xffffff</em>.
-     *     A string value indicates a color in RGB or ARGB format, for example, <em>'#ffffff'</em>.
+     * @param { Color | int | string | Resource | undefined } color - 滚动条的颜色。
+     *     <br>默认值：<em>'\#182431'</em>（40%不透明度）
+     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：<em>0xffffff</em>。
+     *     string为rgb或者argb格式颜色，示例：<em>'#ffffff'</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15254,12 +15447,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarColor(color: Color | int | string | Resource | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
-     * @param { double | string | undefined } value - Scrollbar width.<br>Default value: <em>4</em>
-     *     <br>Unit: vp
-     *     <br>If this parameter is set to a value less than or equal to 0, the default value is used.
-     *     The value <em>0</em> means not to show the scrollbar.
+     * @param { double | string | undefined } value - 滚动条的宽度。<br>默认值：<em>4</em>
+     *     <br>单位：vp
+     *     <br>设置为小于0的值时，按默认值处理。
+     *     设置为<em>0</em>时，不显示滚动条。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15267,13 +15460,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: double | string | undefined): this;
     /**
-     * Sets the scrollbar width.
+     * 设置滚动条的宽度。
      *
-     * @param { Resource | undefined } value  - Scrollbar width.
-     *     <br>Unit: vp
-     *     <br>Default value: <em>4</em>
-     *     <br>If this parameter is set to a value less than or equal to 0, the default value is used.
-     *     The value <em>0</em> means not to show the scrollbar.
+     * @param { Resource | undefined } value  - 滚动条的宽度。
+     *     <br>单位：vp
+     *     <br>默认值：<em>4</em>
+     *     <br>设置为小于0的值时，按默认值处理。
+     *     设置为<em>0</em>时，不显示滚动条。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15281,10 +15474,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarWidth(value: Resource | undefined): this;
     /**
-     * Margin of the scrollbar.
+     * 设置滚动条的边距。
      *
-     * @param { ScrollBarMargin | undefined } margin - Margin of the scrollbar.
-     *     <br>Passing undefined will restore the default value.Default value: {start: LengthMetrics.vp(0), end: 
+     * @param { ScrollBarMargin | undefined } margin - 滚动条起始、末尾边距。
+     *     <br>传入undefined时恢复默认值。默认值：{start: LengthMetrics.vp(0), end:
      *     LengthMetrics.vp(0)}.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15293,11 +15486,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default scrollBarMargin(margin: ScrollBarMargin | undefined): this;
     /**
-     * Set the scroll bar auto adjust the margin to avoid the padding, safeAreaPadding, and
-     * contentStartOffset/contentEndOffset of the component.
+     * 设置滚动条自动调整边距，以避让组件的padding、safeAreaPadding和
+     * contentStartOffset/contentEndOffset区域。
      *
-     * @param { boolean | undefined } enable - Whether to enable automatic adjustment of scroll bar margin.
-     *     <br>Default value: false.
+     * @param { boolean | undefined } enable - 是否自动调整边距。
+     *     <br>默认值：false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15305,19 +15498,19 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default autoAdjustScrollBarMargin(enable: boolean | undefined): this;
     /**
-     * Sets the effect used when the scroll boundary is reached.
+     * 设置边缘滑动效果。
      *
-     * @param { EdgeEffect | undefined } edgeEffect - Effect used when the scroll boundary is
-     *     reached. The spring and shadow effects are supported. Default value:
-     *     <em>EdgeEffect.None</em> for the <em>Grid</em>, <em>Scroll</em>, and <em>WaterFlow</em>
-     *     components and <em>EdgeEffect.Spring</em> for the <em>List</em> component
-     * @param { EdgeEffectOptions } [options] - Whether to enable the scroll effect when the
-     *     component content is smaller than the component itself. The value
-     *     <em>{ alwaysEnabled: true }</em> means to enable the scroll effect, and
-     *     <em>{ alwaysEnabled: false }</em> means the opposite. Default value:
-     *     <em>{ alwaysEnabled: false }</em> for the <em>List</em>, <em>Grid</em>,
-     *     and <em>WaterFlow</em> components, and <em>{ alwaysEnabled: true }</em>
-     *     for the <em>Scroll</em> component
+     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，
+     *     支持弹簧效果和阴影效果。默认值：
+     *     <em>EdgeEffect.None</em>适用于<em>Grid</em>、<em>Scroll</em>和<em>WaterFlow</em>
+     *     组件，<em>EdgeEffect.Spring</em>适用于<em>List</em>组件。
+     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，
+     *     是否开启滑动效果。
+     *     <em>{ alwaysEnabled: true }</em>表示开启滑动效果，
+     *     <em>{ alwaysEnabled: false }</em>表示不开启。默认值：
+     *     <em>{ alwaysEnabled: false }</em>适用于<em>List</em>、<em>Grid</em>、
+     *     <em>WaterFlow</em>组件，<em>{ alwaysEnabled: true }</em>
+     *     适用于<em>Scroll</em>组件。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15325,10 +15518,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default edgeEffect(edgeEffect: EdgeEffect | undefined, options?: EdgeEffectOptions): this;
     /**
-     * Called when setting whether to enable fading Edge effect.
+     * 设置是否开启边缘渐隐效果。
      *
-     * @param { boolean | undefined } enabled - Whether to turn on the edge fade effect
-     * @param { FadingEdgeOptions } [options] - The options of fadingEdge.
+     * @param { boolean | undefined } enabled - 是否开启边缘渐隐效果。
+     * @param { FadingEdgeOptions } [options] - 边缘渐隐参数对象。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15336,9 +15529,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default fadingEdge(enabled: boolean | undefined, options?: FadingEdgeOptions): this;
     /**
-     * Sets the nested scrolling options.
+     * 设置嵌套滚动选项。
      *
-     * @param { NestedScrollOptions | undefined } value - Nested scrolling options.
+     * @param { NestedScrollOptions | undefined } value - 嵌套滚动选项。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15346,9 +15539,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default nestedScroll(value: NestedScrollOptions | undefined): this;
     /**
-     * Sets whether to support scroll gestures.
+     * 设置是否支持滚动手势。
      *
-     * @param { boolean | undefined } value - Whether to support scroll gestures.<br>Default value: <em>true</em>
+     * @param { boolean | undefined } value - 是否支持滚动手势。<br>默认值：<em>true</em>
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15356,9 +15549,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollInteraction(value: boolean | undefined): this;
     /**
-     * Sets the friction coefficient.
+     * 设置摩擦系数。
      *
-     * @param { double | Resource | undefined } value - Friction coefficient.
+     * @param { double | Resource | undefined } value - 摩擦系数。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15366,11 +15559,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default friction(value: double | Resource | undefined): this;
     /**
-     * Sets the offset from the start of the content to the boundary of the scrollable display area.
+     * 设置从内容起始位置到可滚动显示区域边界的偏移量。
      *
-     * @param { double | Resource | undefined } offset - Offset from the start of the content to the boundary of
-     *     the scrollable display area.
-     *     <br>Unit: vp, <br>Passing undefined will restore the default value. Default value: <em>0</em>.
+     * @param { double | Resource | undefined } offset - 内容区域起始偏移量。滚动组件滚动到起始位置时，
+     *     内容与组件显示区域边界保留指定距离。
+     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15378,11 +15571,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default contentStartOffset(offset: double | Resource | undefined): this;
     /**
-     * Sets the offset from the end of the content to the boundary of the scrollable display area.
+     * 设置从内容末尾位置到可滚动显示区域边界的偏移量。
      *
-     * @param { double | Resource | undefined } offset - Offset from the end of the content to the boundary of
-     *     the scrollable display area.
-     *     <br>Unit: vp, <br>Passing undefined will restore the default value.Default value: <em>0</em>. 
+     * @param { double | Resource | undefined } offset - 内容区末尾偏移量。滚动组件滚动到末尾位置时，
+     *     内容与组件显示区域边界保留指定距离。
+     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15423,10 +15616,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onDidStopDragging(handler: OnDidStopDraggingCallback | undefined): this;
     /**
-     * Called when the scrollable will start fling.
+     * 滚动组件将要开始惯性动效时触发。
      *
-     * @param { VoidCallback | undefined } handler - callback of start fling.
-     *     <br>Passing undefined will unregister the callback.
+     * @param { VoidCallback | undefined } handler - 滚动组件将要开始惯性动效时触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15434,10 +15627,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onWillStartFling(handler: VoidCallback | undefined): this;
     /**
-     * Called when the scrollable did stop fling.
+     * 滚动组件结束惯性动效后触发。
      *
-     * @param { VoidCallback | undefined } handler - callback of stop fling.
-     *     <br>Passing undefined will unregister the callback.
+     * @param { VoidCallback | undefined } handler - 滚动组件结束惯性动效后触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15448,7 +15641,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持左键按下拖动滚动。
      * 
      * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-     *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+     *    <br>true：支持鼠标左键按下拖动滚动。
+     *    <br>false：不支持鼠标左键按下拖动滚动。
+     *    <br>undefined：使用默认值。
+     *    <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15456,10 +15652,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default enableScrollWithMouse(enabled: boolean | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the start position.
+     * 滚动组件到达起始位置时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable reaches
-     *     the start position.
+     * @param { function | undefined } event - 滚动组件到达起始位置时
+     *     触发的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15467,9 +15663,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component reaches the end position.
+     * 滚动组件到达末尾位置时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable reaches the end position.
+     * @param { function | undefined } event - 滚动组件到达末尾位置时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15477,10 +15673,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onReachEnd(event: (() => void) | undefined): this;
     /**
-     * Triggered when the scrollable component starts scrolling initiated by the user's finger dragging the
-     * component or its scrollbar.
+     * 当用户手指拖动滚动组件或其滚动条，滚动组件开始滚动时
+     * 触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable starts scrolling.
+     * @param { function | undefined } event - 滚动开始时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15488,9 +15684,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStart(event: (() => void) | undefined): this;
     /**
-     * Triggered when scrolling stops after the user's finger leaves the screen.
+     * 用户手指离开屏幕后，滚动停止时触发。
      *
-     * @param { function | undefined } event - Callback function, triggered when the scrollable stops scrolling.
+     * @param { function | undefined } event - 滚动停止时的回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15498,12 +15694,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default onScrollStop(event: (() => void) | undefined): this;
     /**
-     * Sets the maximum initial velocity at the start of the fling animation that occurs after gesture-driven scrolling ends.
+     * 限制跟手滑动结束后，惯性动效开始时的最大初始速度。
      *
-     * @param { double | undefined } speedLimit - Maximum initial velocity at the start of the fling animation.
-     *     <br>Default value: <em>9000</em>
-     *     <br>Unit: vp/s
-     *     <br>Value range: (0, +∞). If this parameter is set to a value less than or equal to 0, the default value is used.
+     * @param { double | undefined } speedLimit - 惯性动效开始时的最大初始速度。
+     *     <br>默认值：<em>9000</em>
+     *     <br>单位：vp/s
+     *     <br>取值范围：(0, +∞)，设置为小于等于0的值时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15511,9 +15707,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
     /**
-     * Sets the content clipping area for this scrollable component.
+     * 设置滚动容器的内容层裁剪区域。
      *
-     * @param { ContentClipMode | RectShape | undefined } clip - A value from enum ContentClipMode or a customized clip rect.
+     * @param { ContentClipMode | RectShape | undefined } clip - ContentClipMode枚举值或自定义裁剪区域。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15521,20 +15717,20 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default clipContent(clip: ContentClipMode | RectShape | undefined): this;
     /**
-     * Set the sensitivity of rotating crown.
+     * 设置表冠响应事件灵敏度。
      *
-     * @param { CrownSensitivity | undefined } sensitivity - The sensitivity of rotating crown, default value is { MEDIUM }.
-     * @returns { this } The component instance.
+     * @param { CrownSensitivity | undefined } sensitivity - 表冠响应灵敏度，默认值为{ MEDIUM }。
+     * @returns { this } 返回当前滚动组件。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
     /**
-     * Sets whether to enable the back-to-top feature for a scrollable component when the status bar is touched.
+     * 设置滚动组件是否支持点击状态栏回到顶部。
      *
-     * @param { boolean | undefined } backToTop - Whether to enable the backtotop feature for a scrollable
-     *     component when the status bar is touched. <br>Default value: <em>false</em>
+     * @param { boolean | undefined } backToTop - 设置滚动组件是否支持点击状态栏
+     *     回到顶部。<br>默认值：<em>false</em>
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15542,12 +15738,12 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      */
     default backToTop(backToTop: boolean | undefined): this;
     /**
-     * Sets the scrollbar track height.
+     * 设置滚动条滑轨高度。
      *
-     * @param { LengthMetrics | undefined } height - Scrollbar track height.
-     *     <br>The value must be greater than or equal to 0, If set to undefined or a value less than 0, the default
-     *     value is used, If set to 0, the scrollbar is not displayed.
-     *     <br>Default value: adaptive to the height of the scrollable component.
+     * @param { LengthMetrics | undefined } height - 滚动条滑轨高度。
+     *     <br>值必须大于等于0。设置为undefined或小于0时，按默认值
+     *     处理；设置为0时，不显示滚动条。
+     *     <br>默认值：自适应滚动组件高度。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15568,15 +15764,15 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default enableScrollWithKeyboard(enabled: boolean | undefined): this;
 }
 /**
- * The actual offset by which the scrollable scrolls.
+ * 滚动组件实际滚动的偏移量。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class ScrollResult {
     /**
-     * Get the actual offset by which the scrollable scrolls in vp.
-     * @returns { double } actual offset by which the scrollable scrolls in vp.
+     * 获取滚动组件实际滚动的偏移量，单位为vp。
+     * @returns { double } 滚动组件实际滚动的偏移量，单位vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15584,8 +15780,8 @@ export declare class ScrollResult {
     get offsetRemain(): double;
 
     /**
-     * Set the actual offset by which the scrollable scrolls in vp.
-     * @param { double } offsetRemain - actual offset by which the scrollable scrolls in vp.
+     * 设置滚动组件实际滚动的偏移量，单位为vp。
+     * @param { double } offsetRemain - 滚动组件实际滚动的偏移量，单位vp。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15593,23 +15789,23 @@ export declare class ScrollResult {
     set offsetRemain(offsetRemain: double);
 }
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * 在滚动前调用，以允许开发者控制滚动组件的实际滚动偏移量。
  *
- * @param { double } scrollOffset - offset this frame will scroll, which may or may not be reached.
- * @param { ScrollState } scrollState - current scroll state.
- * @param { ScrollSource } scrollSource - source of current scroll.
- * @returns { undefined | ScrollResult } the remain offset for the scrollable,
- *     same as scrollOffset when no ScrollResult is returned.
+ * @param { double } scrollOffset - 相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。单位vp。
+ * @param { ScrollState } scrollState - 当前滑动状态。
+ * @param { ScrollSource } scrollSource - 当前滑动操作的来源。
+ * @returns { undefined | ScrollResult } 返回ScrollResult时按照开发者指定的相对上一帧的偏移量滑动；
+ *     不返回时按回调参数scrollOffset滑动。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export type OnWillScrollCallback = (scrollOffset: double, scrollState: ScrollState, scrollSource: ScrollSource) => (undefined | ScrollResult);
 /**
-  * On scroll callback using in scrollable onDidScroll.
+  * 滚动组件滑动时触发的回调。
   *
-  * @param { double } scrollOffset - offset this frame did scroll.
-  * @param { ScrollState } scrollState - current scroll state.
+  * @param { double } scrollOffset - 相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。单位vp。
+  * @param { ScrollState } scrollState - 当前滑动状态。
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
@@ -15646,7 +15842,7 @@ export type OnDidStopDraggingCallback = (willFling: boolean) => void;
   */
 export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (CustomBuilder | undefined);
 /**
-  * Defines the callback type used in onGetPreviewBadge of EditModeOptions.
+  * 即将启动多选长按聚拢动画时，触发用于获取选中数量的回调。
   *
   * @returns { boolean | int }
   * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15655,20 +15851,20 @@ export type OnItemDragStartCallback = (event: ItemDragInfo, itemIndex: int) => (
   */
 export type OnGetPreviewBadgeCallback = () => (boolean | int);
 /**
- * Defines the callback type used in OnVisibleIndexesChange.
+ * 定义OnVisibleIndexesChange使用的回调类型。
  *
- * @param { int } start - the first index in visible content.
- * @param { int } end - the last index in visible content.
+ * @param { int } start - 可视区域起始位置的索引值。
+ * @param { int } end - 可视区域终止位置的索引值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.0.0 static
  */
 export type OnVisibleIndexesChangeCallback = (start: int, end: int) => void;
 /**
- * Defines the onMove callback.
+ * 定义数据源拖拽回调。
  *
- * @param { int } from - Index number for moving elements.
- * @param { int } to - Target index number for moving elements.
+ * @param { int } from - 数据源拖拽起始索引号。取值范围是[0, 数据源长度-1]。
+ * @param { int } to - 数据源拖拽目标索引号。取值范围是[0, 数据源长度-1]。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -15724,7 +15920,7 @@ export declare interface ItemDragEventHandler {
  */
 export declare interface DynamicNode {
     /**
-     * Set the move action.
+     * 设置拖拽排序数据移动回调。
      *
      * @param { OnMoveHandler | undefined } handler
      * @returns { this }
@@ -15754,7 +15950,7 @@ export declare interface DynamicNode {
  */
 export declare interface EdgeEffectOptions {
     /**
-     * Enable Sliding effect when component does not full screen.
+     * 组件内容大小小于组件自身时，设置是否开启滑动效果。设置为true开启滑动效果，设置为false关闭滑动效果。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15762,7 +15958,7 @@ export declare interface EdgeEffectOptions {
      */
     alwaysEnabled: boolean;
     /**
-     * Set the effective edge of the edge effect.
+     * 设置边缘效果生效的边缘。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15771,7 +15967,7 @@ export declare interface EdgeEffectOptions {
     effectEdge?: int;
 }
 /**
- * Enumerates the effective edge of the edge effect.
+ * 表示当前边缘效果要生效的边缘。
  *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15780,7 +15976,7 @@ export declare interface EdgeEffectOptions {
  */
 export declare enum EffectEdge {
     /**
-     * Effective only for the starting edge.
+     * 起始边生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15788,7 +15984,7 @@ export declare enum EffectEdge {
      */
     START = 1,
     /**
-     * Effective only for the end edge.
+     * 末尾边生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15877,7 +16073,7 @@ export declare class ChildrenMainSize {
 }
 
 /**
- * Define edit mode options.
+ * List/Grid组件编辑模式选项属性参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -15885,7 +16081,7 @@ export declare class ChildrenMainSize {
  */
 export declare interface EditModeOptions {
     /**
-     * Define whether to gather selected items in grid or list when item is long pressed for context menu.
+     * 是否启用多选聚拢动画。设置true时启用聚拢动画，设置为false时关闭聚拢动画。
      *
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15895,11 +16091,11 @@ export declare interface EditModeOptions {
     enableGatherSelectedItemsAnimation?: boolean;
 
     /**
-     * Called to return whether to display the number badge or the number displayed on the badge
-     * for the context menu preview. If not set, the number of selected items within the display range will be used.
-     * Returning false means not displaying the badge.
-     * Returning true means using the number of selected items within the display range.
-     * Returning a number to include selected items outside the display range.
+     * 即将启动多选长按聚拢动画时，触发用于获取选中数量的回调。缺省时用Grid或List显示范围内选中item的数量作为
+     * 多选长按聚拢动画后菜单预览图的角标。
+     * 返回false表示不显示角标。
+     * 返回true表示显示选中数量角标，对应Grid或List显示范围内选中item数量。
+     * 返回数字时默认显示角标，该数字表示角标中需要显示的数量。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15908,10 +16104,10 @@ export declare interface EditModeOptions {
     onGetPreviewBadge?: OnGetPreviewBadgeCallback;
 
     /**
-     * Use default multi-select style.
-     * {@code true} indicates that the check box is displayed for GridItem or ListItem after entering the
-     * multi-select state.
-     * {@code false} indicates that there is no default style after entering the multi-select state.
+     * 是否使用默认多选样式。
+     * {@code true}表示GridItem或ListItem进入多选状态后
+     * 显示勾选框。
+     * {@code false}表示进入多选状态后无默认样式。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15921,9 +16117,9 @@ export declare interface EditModeOptions {
     useDefaultMultiSelectStyle?: boolean;
 
     /**
-     * Enable two-finger swipe multi-selection.
-     * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
-     * {@code false} indicates that two-finger swiping cannot perform multi-selection.
+     * 是否开启双指滑动多选。
+     * {@code true}表示双指滑动可以进入编辑模式并进行多选。
+     * {@code false}表示双指滑动不可进行多选。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16412,7 +16608,7 @@ export declare interface UICommonEvent {
     setOnVisibleAreaApproximateChange(options: VisibleAreaEventOptions, event: VisibleAreaChangeCallback | undefined): void;
 }
 /**
- * Defines a UIScrollableCommonEvent which is used to set event to target component.
+ * 用于设置滚动事件回调。
  *
  * @extends UICommonEvent
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16421,53 +16617,53 @@ export declare interface UICommonEvent {
  */
 export declare interface UIScrollableCommonEvent extends UICommonEvent {
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the start position.
+   * 设置或重置滚动到达起始位置时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling reaches
-   *     the start position.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onReachStart事件的回调函数，滚动组件到达起始位置时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnReachStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling reaches the end position.
+   * 设置或重置滚动到达末尾位置时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the
-   *     scrolling reaches the end position.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onReachEnd事件的回调函数，滚动组件到达末尾位置时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnReachEnd(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling started.
+   * 设置或重置滚动开始时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling started.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onScrollStart事件的回调函数。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnScrollStart(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when the scrolling stopped.
+   * 设置或重置滚动停止时触发的回调。
    *
-   * @param { VoidCallback | undefined } callback - callback function, triggered when the scrolling stopped.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { VoidCallback | undefined } callback - onScrollStop事件的回调函数。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   setOnScrollStop(callback: VoidCallback | undefined): void;
   /**
-   * Set or reset the callback which is triggered when scrolling begin each frame.
+   * 设置或重置每帧滚动开始时触发的回调。
    *
-   * @param { OnScrollFrameBeginCallback | undefined } callback - callback function, triggered when the
-   *     scrolling begin each frame.
-   *     <br>Passing undefined will unregister the callback.
+   * @param { OnScrollFrameBeginCallback | undefined } callback - onScrollFrameBegin事件的回调函数，每帧滚动开始时
+   *     触发。
+   *     <br>方法入参为undefined时，会重置事件回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -17013,7 +17209,7 @@ export declare enum EdgeLightMode {
 }
 
 /**
- * Enum for distortion animation mode.
+ * 非线性形变动画模式的枚举。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -17023,7 +17219,7 @@ export declare enum EdgeLightMode {
 export declare enum DistortionMode {
 
   /**
-   * Adaptive implementation of edgeLight animation
+   * distortion动画自适应实现
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17033,7 +17229,7 @@ export declare enum DistortionMode {
   DISTORTION_AUTO = 0,
 
   /**
-   * Distortion animation is enabled.
+   * distortion动画一直使能。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17043,7 +17239,7 @@ export declare enum DistortionMode {
   DISTORTION_ENABLED = 1,
 
   /**
-   * Distortion animation is disabled.
+   * 禁用distortion动画。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17053,7 +17249,7 @@ export declare enum DistortionMode {
   DISTORTION_DISABLED = 2,
 }
 /**
- * Defines the parameters of the edge light effect.
+ * 定义边缘流光效果参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -17062,7 +17258,7 @@ export declare enum DistortionMode {
  */
 export declare interface EdgeLightParams {
   /**
-   * The location of the edge light effect.
+   * 边缘流光位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17072,8 +17268,12 @@ export declare interface EdgeLightParams {
   position: EdgeLightPosition;
  
   /**
-   * Projection length of the edge streamer along the flow direction.
-   * <br>Negative values are treated as 0.
+   * 沿流动方向的边缘流光的投影长度（不支持百分比，传入百分比时不生效）。
+   * <br>取值范围：[0, +∞)
+   * <br>单位：vp
+   * <br>**说明：**
+   * <br>length为0时，无边缘流光投影效果。
+   * <br>设置小于0的值时，按值为0处理。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17083,12 +17283,14 @@ export declare interface EdgeLightParams {
   length: Length;
  
   /**
-   * The luminous intensity of the Edge Streamer effect.
-   * <br>Valid range: [0.0, 1.0].Default value is 1.
-   * <br>Value 0.0 means the light effect is completely invisible.
-   * <br>Value 1.0 means the light effect is at maximum brightness.
-   * <br>Values exceeding 1.0 will be clamped to 1.0.
-   * <br>Negative values are treated as 0.0.
+   * 边缘流光效果的发光强度。
+   * <br>取值范围：[0, 1]
+   * <br>默认值：1
+   * <br>**说明：**
+   * <br>值为0时，流光效果完全不可见。
+   * <br>值为1时，流光效果达到最大亮度。
+   * <br>设置大于1的值时，按值为1处理。
+   * <br>设置小于0的值时，按值为0处理。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17098,8 +17300,8 @@ export declare interface EdgeLightParams {
   intensity?: double;
  
   /**
-   * The color of the light effect.
-   * <br>If not specified, the default color is white (#FFFFFF).
+   * 边缘流光颜色。
+   * <br>默认值：#FFFFFF，显示为白色。
    *
    * @default #FFFFFF
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -17110,9 +17312,13 @@ export declare interface EdgeLightParams {
   color?: ResourceColor;
  
   /**
-   * The thickness (width) of the light effect line.
-   * <br>Negative values are treated as 0.
-   * <br>If not specified, the default value is 0vp.
+   * 边缘流光线条粗细（不支持百分比，传入百分比时不生效）。
+   * <br>取值范围：[0, +∞)
+   * <br>单位：vp
+   * <br>默认值：0
+   * <br>**说明：**
+   * <br>thickness为0时，边缘流光线条不可见。
+   * <br>设置小于0的值时，按值为0处理。
    *
    * @default 0vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -17124,7 +17330,12 @@ export declare interface EdgeLightParams {
 }
  
 /**
- * Defines the parameters of the center of gravity.
+ * 定义引力中心参数。
+ *
+ * > **说明：**
+ * >
+ * > 此参数必须与[unionMode]{@link UnionEffectContainerAttribute#unionMode}一起使用，且unionMode须为UnionMode.GRAVITY_UNION，
+ * > 同时useUnionEffect的value须为true时才生效，单独设置不生效。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -17133,8 +17344,9 @@ export declare interface EdgeLightParams {
  */
 export declare interface GravityCenterOptions {
   /**
-   * Specifies whether the current component is the center of gravity.
-   * <br>Default value:false.
+   * 指定当前组件是否为引力中心。
+   * <br>设置为true表示当前组件是引力中心；设置为false表示当前组件不是引力中心。
+   * <br>默认值：false
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17144,9 +17356,10 @@ export declare interface GravityCenterOptions {
   gravityCenter?: boolean;
  
   /**
-   * Defines the gravitational strength of the attraction/repulsion force at the gravitational center.
-   * <br>Default value:0.
-   * <br>Negative numbers are repulsion, positive numbers are attractionn.
+   * 定义引力中心处吸引力或排斥力的强度。
+   * <br>仅在gravityCenter为true时生效。
+   * <br>默认值：0
+   * <br>负数表示排斥力，正数表示吸引力。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -17154,4 +17367,59 @@ export declare interface GravityCenterOptions {
    * @since 26.0.0 static
    */
   gravityIntensity?: double;
+}
+
+/**
+ * 定义DatePickerComponent与UIPickerComponent共用的文本样式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface PickerComponentTextStyle {
+  /**
+   * 字体颜色。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  color?: ResourceColor;
+
+  /**
+   * 文本样式。仅支持size与weight。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  font?: Font;
+
+  /**
+   * 文本最小字号，与maxFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。
+   * 详见TextAttribute的minFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  minFontSize?: double | ResourceStr;
+
+  /**
+   * 文本最大字号，与minFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。详见TextAttribute的maxFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxFontSize?: double | ResourceStr;
+
+  /**
+   * 设置文本超长时的显示方式。设置为MARQUEE时不生效。详见TextAttribute的textOverflow。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  overflow?: TextOverflow;
 }

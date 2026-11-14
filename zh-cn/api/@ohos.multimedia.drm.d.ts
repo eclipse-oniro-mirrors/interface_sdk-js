@@ -19,7 +19,10 @@
  */
 
 /**
- * DRM（Digital Rights Management）框架组件支持音视频媒体业务数字版权管理功能的开发。开发者可以调用系统提供的DRM插件，完成以下功能：
+ * DRM（Digital Rights Management）框架组件采用插件化架构，通过统一的插件接口对接不同的DRM方案，
+ * 支持音视频媒体业务数字版权管理功能的开发。适用于在线视频播放、音乐应用、电子书等需要版权保护的业务场景，
+ * 有效防止内容盗版和未授权访问，保护内容提供商的权益，确保音视频内容的安全播放。
+ * 开发者可以调用系统提供的DRM插件，完成以下功能：
  * 
  * - DRM证书管理：生成证书请求、设置证书响应，实现对证书Provision（下载）功能。
  * - DRM媒体密钥管理：生成媒体密钥请求、设置媒体密钥响应、管理离线媒体密钥功能。
@@ -170,7 +173,7 @@ declare namespace drm {
      */
     enum MediaKeyType {
       /**
-       * 离线。
+       * 离线媒体密钥，用于离线播放场景。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -179,7 +182,7 @@ declare namespace drm {
        */
       MEDIA_KEY_TYPE_OFFLINE = 0,
       /**
-       * 在线。
+       * 在线媒体密钥，用于在线播放场景。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -217,7 +220,7 @@ declare namespace drm {
        */
       OFFLINE_MEDIA_KEY_STATUS_USABLE = 1,
       /**
-       * 失活状态。
+       * 失活状态，可能因密钥过期或被服务端禁用导致，需要重新获取密钥。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -255,7 +258,7 @@ declare namespace drm {
        */
       CERT_STATUS_NOT_PROVISIONED = 1,
       /**
-       * 设备证书过期。
+       * 设备证书过期，需要重新申请设备证书。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -302,7 +305,7 @@ declare namespace drm {
        */
       MEDIA_KEY_REQUEST_TYPE_UNKNOWN = 0,
       /**
-       * 初始化请求。
+       * 初始化请求，在首次获取媒体密钥时触发。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -311,7 +314,7 @@ declare namespace drm {
        */
       MEDIA_KEY_REQUEST_TYPE_INITIAL = 1,
       /**
-       * 续订请求。
+       * 续订请求，在许可证即将过期或需要延长有效期时触发。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -320,7 +323,7 @@ declare namespace drm {
        */
       MEDIA_KEY_REQUEST_TYPE_RENEWAL = 2,
       /**
-       * 释放请求。
+       * 释放请求，在主动释放离线密钥或关闭会话时触发，用于通知服务端释放资源。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -367,7 +370,7 @@ declare namespace drm {
        */
       CONTENT_PROTECTION_LEVEL_UNKNOWN = 0,
       /**
-       * 软件内容保护级别。
+       * 软件内容保护级别，使用软件解密，适用于对安全性要求不高的播放场景。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -376,7 +379,7 @@ declare namespace drm {
        */
       CONTENT_PROTECTION_LEVEL_SW_CRYPTO = 1,
       /**
-       * 硬件内容保护级别。
+       * 硬件内容保护级别，使用硬件解密，安全性较高，适用于大多数商业内容播放场景。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -385,7 +388,7 @@ declare namespace drm {
        */
       CONTENT_PROTECTION_LEVEL_HW_CRYPTO = 2,
       /**
-       * 硬件增强内容保护级别。
+       * 硬件增强内容保护级别，使用硬件安全模块解密，安全性最高，适用于高价值内容播放场景。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -443,7 +446,7 @@ declare namespace drm {
      */
     interface OptionsData {
       /**
-       * 可选数据名。
+       * 可选数据名，用于标识可选数据的键名。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -452,7 +455,7 @@ declare namespace drm {
        */
       name: string;
       /**
-       * 可选数据值。
+       * 可选数据值，与可选数据名对应的值。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -490,7 +493,7 @@ declare namespace drm {
        */
       data: Uint8Array;
       /**
-       * 媒体密钥服务URL。
+       * 媒体密钥服务URL。需符合URL格式规范，建议使用HTTPS协议。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -539,7 +542,7 @@ declare namespace drm {
      */
     interface StatisticKeyValue {
       /**
-       * 度量记录名。
+       * 度量记录名，用于标识度量指标的键名。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -548,7 +551,7 @@ declare namespace drm {
        */
       name: string;
       /**
-       * 度量记录值。
+       * 度量记录值，表示度量指标的数值或状态。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 14]
@@ -577,7 +580,7 @@ declare namespace drm {
        */
       name: string;
       /**
-       * 媒体密钥状态值。
+       * 媒体密钥状态值，表示与状态名称对应的具体状态信息。
        *
        * @syscap SystemCapability.Multimedia.Drm.Core
        * @atomicservice [since 12]
@@ -1028,7 +1031,7 @@ declare namespace drm {
       createMediaKeySession(level: ContentProtectionLevel): MediaKeySession | undefined;
   
       /**
-       * 创建DRM解决方案默认内容保护级别的MediaKeySession实例。
+       * 创建默认内容保护级别的MediaKeySession实例。
        *
        * @returns { MediaKeySession } MediaKeySession实例。
        * @throws { BusinessError } 24700101 - All unknown errors.
@@ -1041,7 +1044,7 @@ declare namespace drm {
       createMediaKeySession(): MediaKeySession;
   
       /**
-       * 创建DRM解决方案默认内容保护级别的MediaKeySession实例。
+       * 创建默认内容保护级别的MediaKeySession实例。
        *
        * @returns { MediaKeySession | undefined } MediaKeySession实例或undefined。
        * @throws { BusinessError } 24700101 - All unknown errors.
@@ -1131,7 +1134,7 @@ declare namespace drm {
        *     [on('mediaKeySystemInfoUpdate')]{@link @ohos.multimedia.media:media.AVPlayer.on(type: 'mediaKeySystemInfoUpdate', callback: Callback<Array<drm.MediaKeySystemInfo>>)}
        *     ）获取DRM信息，从中提取pssh字段生成initData。具体开发流程可参考
        *     [基于AVPlayer播放DRM节目(ArkTS)](docroot://media/drm/drm-avplayer-arkts-integration.md)。
-       * @param { int } mediaKeyType - 媒体密钥类型。取值范围为[0, 1]。0表示在线，1表示离线。<br>传入指定范围外的参数会导致参数校验失败，抛出错误码401。
+       * @param { int } mediaKeyType - 媒体密钥类型。取值范围为[0, 1]。1表示在线，0表示离线。<br>传入指定范围外的参数会导致参数校验失败，抛出错误码401。
        * @param { OptionsData[] } options - 可选数据。默认值为空数组。
        * @returns { Promise<MediaKeyRequest> } Promise对象，媒体密钥请求。
        * @throws { BusinessError } 401 -The parameter check failed. Possibly because:

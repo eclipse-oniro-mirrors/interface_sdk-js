@@ -20,66 +20,33 @@
 
 /**
  * The **taskManager** module provides APIs for managing the lifecycle of tasks. A task is the
- * attribution unit for the execution of user intents: during the lifetime of a task, the
- * processes attributed to the task are managed by the system according to the task priority.
+ * attribution unit for the execution of user intents. During the lifetime of a task, all
+ * processes attributed to the task are centrally scheduled by the system.
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
+ * @systemapi
  * @stagemodelonly
  * @since 26.1.0 dynamic&static
  */
 declare namespace taskManager {
   /**
-   * Enumerates the task priorities.
-   *
-   * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  export enum TaskPriority {
-    /**
-     * Low priority.
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    LOW = 100,
-    /**
-     * Medium priority.
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    MEDIUM = 200,
-    /**
-     * High priority.
-     *
-     * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    HIGH = 300,
-  }
-
-  /**
    * Starts a task with the specified task ID. The task is activated immediately, and the
-   * processes attributed to the task are managed by the system according to the specified
-   * priority. The task remains active until finishTask is called or the task is automatically
-   * ended by the system (for example, when the task times out or the creator process exits).
-   * If a task with the specified task ID already exists, this promise is rejected.
+   * processes attributed to the task are centrally scheduled by the system. The task remains active
+   * until finishTask is called or the task is automatically ended by the system (for example,
+   * when the task times out or the creator process exits). If a task with the specified task
+   * ID already exists, this promise is rejected.
    *
    * @param { string } taskId - ID of the task, which is used as the attribution key for the
    * processes launched during the task execution. The value must contain 1 to 256 characters.
-   * @param { TaskPriority } [priority] - Priority of the task. The default value is **MEDIUM**.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000301 - Task already exists.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
-  function startTask(taskId: string, priority?: TaskPriority): Promise<void>;
+  function startTask(taskId: string): Promise<void>;
 
   /**
    * Ends the task with the specified task ID. The resource management applied to the processes
@@ -87,7 +54,8 @@ declare namespace taskManager {
    * If the task does not exist or has already ended, this promise is rejected.
    *
    * @param { string } taskId - ID of the task.
-   * @throws { BusinessError } 202 - Not System App. Interface caller is not a system app.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16000302 - Task not found.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi

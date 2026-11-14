@@ -292,8 +292,8 @@ export declare class Indicator {
   /**
    * 返回一个DotIndicator对象。
    *
-   * @returns { DotIndicator }
-   圆点指示器对象，用于设置Swiper组件的圆点导航样式。
+   * @returns { DotIndicator } 圆点指示器对象，用于设置Swiper组件的圆点导航样式。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -302,8 +302,8 @@ export declare class Indicator {
   /**
    * 返回一个DigitIndicator对象。
    *
-   * @returns { DigitIndicator }
-   数字指示器对象，用于设置Swiper组件的数字导航样式。
+   * @returns { DigitIndicator } 数字指示器对象，用于设置Swiper组件的数字导航样式。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -444,6 +444,17 @@ export declare class DotIndicator extends Indicator {
    * @since 23 static
    */
   space(space: LengthMetrics | undefined): this;
+
+  /**
+   * 设置导航点标。
+   *
+   * @param { Array<IndicatorIconInfo> | undefined } iconList - 需要设置的导航点索引。
+   * @returns { DotIndicator } 返回DotIndicator。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  indicatorIcon(iconList: Array<IndicatorIconInfo> | undefined): this;
 }
 
 /**
@@ -757,6 +768,33 @@ export declare interface CachedCountOptions {
    * @since 26.0.0 static
    */
   independent?: boolean;
+}
+
+/**
+ * 为指定的导航点索引设置的图标。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface IndicatorIconInfo {
+  /**
+   * 指定索引。
+   * 取值范围为全体整数。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  index: int;
+  /**
+   * 需要设置的图标。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  icon: ResourceStr | SymbolGlyphModifier;
 }
 
 /**
@@ -1489,6 +1527,18 @@ export declare interface SwiperAttribute extends CommonMethod {
    * @since 26.0.0 staticonly
    */
   default setSwiperOptions(controller?: SwiperController): this;
+
+  /**
+   * 设置当子组件的[visibility](ts-universal-attributes-visibility.md#visibility)属性设置为Visibility.None时，该子组件是否在视窗中占位。
+   *
+   * @param { boolean | undefined } enabled - 设置当子组件的visibility属性设置为Visibility.None时，该子组件是否在视窗中占位。<br/>true：设置为隐藏的子组件不在视窗中占位。<br/>false：设置为隐藏的子组件依然在视窗中占位。<br/>异常值按false处理。
+   * @returns { SwiperAttribute } 返回SwiperAttribute的实例。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  default ignoreHiddenItem(enabled: boolean | undefined): this;
 }
 
 /**

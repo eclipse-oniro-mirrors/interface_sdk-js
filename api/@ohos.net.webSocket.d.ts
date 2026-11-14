@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -113,7 +113,8 @@ declare namespace webSocket {
     header?: Object;
 
     /**
-     * HTTP request header.
+     * Optional parameters for establishing a WebSocket connection, representing the HTTP header information carried
+     * when establishing the connection. You can customize the parameter or leave it unspecified.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -122,10 +123,10 @@ declare namespace webSocket {
     header?: Record<string, string>;
 
     /**
-     * Path of CA certificates. If a path is set, the system uses the CA certificates in this path. If a path is not
-     * set, the system uses the preset CA certificate, namely, **\/etc/ssl/certs/cacert.pem**. This path is the sandbox
-     * mapping path, which can be obtained by using **UIAbilityContext** APIs. Currently, only text certificates in PEM
-     * format are supported.
+     * Path of the CA certificate. If a path is set, the system uses the CA certificate in this path. If a path is not
+     * set, the system uses the system-preset CA certificate, namely, **\/etc/ssl/certs/cacert.pem**. This path is the
+     * sandbox mapping path, which can be obtained by using capabilities provided by **UIAbilityContext**. Currently,
+     * only text certificates in PEM format are supported.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -188,9 +189,9 @@ declare namespace webSocket {
     pingInterval?: int;
 
     /**
-     * Timeout interval for disconnecting a connection after heartbeat detection is initiated. The default value is 30s.
-     * If no response is received during the specified interval, the connection is disconnected. The maximum value is 30
-     * 000s, and the minimum value is 0s. **pongTimeout** must be less than or equal to **pingInterval**.
+     * Custom timeout interval for disconnecting a connection after heartbeat detection is initiated. The default value
+     * is 30s. If no response is received during the specified interval, the connection is disconnected. The maximum
+     * value is 30 000s, and the minimum value is 0s. **pongTimeout** must be less than or equal to **pingInterval**.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
@@ -200,8 +201,8 @@ declare namespace webSocket {
     pongTimeout?: int;
 
     /**
-     * Custom minimum TLS version supported. For example, if this parameter is set to **TLS_V_1_1**, the client supports
-     * TLS 1.1, TLS 1.2, and TLS 1.3.
+     * Custom minimum supported TLS protocol version. For example, if this parameter is set to **TLS_V_1_1**, the client
+     * can support TLS protocol versions TLS1.1, TLS1.2, and TLS1.3.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -211,7 +212,18 @@ declare namespace webSocket {
     minSupportTlsProtocol?: TlsProtocol;
 
     /**
-     * The option of supporting origin port.
+     * Origin is an HTTP request header field in the WebSocket handshake request, used to identify the request source,
+     * based on which the server can perform source verification. This parameter controls whether the Origin field
+     * carries a custom port number. The default value is **false**. When set to **true**:
+     *
+     * - After the [connect]{@link webSocket.WebSocket.connect(url: string, options?: WebSocketRequestOptions)} API is called, if the protocol specified in the first
+     * parameter **url** is **ws** and the explicitly specified port number is not 80, the Origin field carries the
+     * corresponding port; otherwise, no port number is carried.
+     * - After the [connect]{@link webSocket.WebSocket.connect(url: string, options?: WebSocketRequestOptions)} API is called, if the protocol specified in the first
+     * parameter **url** is **wss** and the explicitly specified port number is not 443, the Origin field carries the
+     * corresponding port number; otherwise, no port number is carried.
+     *
+     * When set to **false**, the Origin field does not carry a port number.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -366,7 +378,7 @@ declare namespace webSocket {
   }
 
   /**
-   * The result for open info of a WebSocket connection.
+   * Detailed information after a WebSocket connection is successfully established.
    *
    * @syscap SystemCapability.Communication.NetStack
    * @stagemodelonly
@@ -375,7 +387,8 @@ declare namespace webSocket {
    */
   export interface WebSocketOpenInfo {
     /**
-     * result status.
+     * Status code returned by the server. For example, 101 indicates that the connection is successfully established
+     * and upgraded to the WebSocket protocol.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -385,7 +398,8 @@ declare namespace webSocket {
     status: int;
 
     /**
-     * result message.
+     * Status information returned by the server. It corresponds to the **status** field. For example, when
+     * **status=101** is set, this field returns "Switching Protocols".
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -395,7 +409,7 @@ declare namespace webSocket {
     message: string;
 
     /**
-     * Negotiated protocol.
+     * Negotiated protocol returned by the server.
      *
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
@@ -403,7 +417,7 @@ declare namespace webSocket {
      * @since 26.0.1 static
      */
     protocol?: string;
- 	}
+  }
 
   /**
    * Enumerates the response headers sent by the server.
@@ -437,8 +451,7 @@ declare namespace webSocket {
    */
   export interface WebSocket {
     /**
-     * Initiates a WebSocket request to establish a WebSocket connection to a given URL. This API uses an asynchronous
-     * callback to return the result.
+     * Establishes a WebSocket connection based on the URL. This API uses an asynchronous callback to return the result.
      *
      * > **NOTE**
      * >
@@ -472,8 +485,7 @@ declare namespace webSocket {
     connect(url: string, callback: AsyncCallback<boolean>): void;
 
     /**
-     * Initiates a WebSocket request to establish a WebSocket connection to a given URL. This API uses an asynchronous
-     * callback to return the result.
+     * Establishes a WebSocket connection based on the URL. This API uses an asynchronous callback to return the result.
      *
      * > **NOTE**
      * >
@@ -545,7 +557,11 @@ declare namespace webSocket {
     connect(url: string, options?: WebSocketRequestOptions): Promise<boolean>;
 
     /**
-     * Sends data through a WebSocket connection. This API uses an asynchronous callback to return the result.
+     * Sends data through the WebSocket connection. This API uses an asynchronous callback to return the result.
+     *
+     * > **NOTE**
+     * >
+     * > The **send** API can be called only after an **open** event is listened.
      *
      * @permission ohos.permission.INTERNET
      * @param { string | ArrayBuffer } data - Data to send.
@@ -566,6 +582,10 @@ declare namespace webSocket {
 
     /**
      * Sends data through the WebSocket connection. This API uses a promise to return the result.
+     *
+     * > **NOTE**
+     * >
+     * > The **send** API can be called only after an **open** event is listened.
      *
      * @permission ohos.permission.INTERNET
      * @param { string | ArrayBuffer } data - Data to send.
@@ -607,8 +627,8 @@ declare namespace webSocket {
      * @permission ohos.permission.INTERNET
      * @param { WebSocketCloseOptions } options - Request options. For details, see
      *     [WebSocketCloseOptions]{@link webSocket.WebSocketCloseOptions}.
-     * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** indicates
-     *     that the operation is successful, and the value **false** indicates the opposite.
+     * @param { AsyncCallback<boolean> } callback - Callback used to return the result of creating the close request.
+     *     Returns true if the close request is created successfully; returns false otherwise.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
@@ -638,12 +658,14 @@ declare namespace webSocket {
     close(options?: WebSocketCloseOptions): Promise<boolean>;
 
     /**
-     * Subscribes to WebSocket open events. This API uses an asynchronous callback to return the result. This event
-     * indicates whether the WebSocket connection is successful. This API must be called before
-     * [connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)} is called to initiate
-     * a connection request.
+     * Subscribes to the open event of the WebSocket. This API uses an asynchronous callback to return the result. The
+     * event is used to indicate whether the WebSocket connection is successful. This API must be called before calling
+     * [connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)} to initiate a
+     * connection request.
      *
-     * @param { 'open' } type - Event type.<br/> **open**: event indicating that a WebSocket connection has been opened.
+     * @param { 'open' } type - Event type.
+     *     <br/>
+     *     **open**: event indicating that a WebSocket connection has been opened.
      * @param { AsyncCallback<Object> } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -664,7 +686,7 @@ declare namespace webSocket {
     onOpen(callback: Callback<OpenResult>): void;
 
     /**
-     * Unsubscribes from WebSocket open events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the open event of the WebSocket. This API uses an asynchronous callback to return the result.
      *
      * > **NOTE**
      * >
@@ -693,15 +715,15 @@ declare namespace webSocket {
     offOpen(callback?: Callback<OpenResult>): void;
 
     /**
-     * Subscribes to WebSocket server message receiving events. This API uses an asynchronous callback to return the
-     * result.
+     * Subscribes to the event of receiving server messages over WebSocket. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
      * > The data in **AsyncCallback** can be in the format of string (API version 6) or ArrayBuffer (API version 8).
      *
-     * @param { 'message' } type - Event type.<br/> **message**: event indicating that a message has been received from
-     *     the server.
+     * @param { 'message' } type - Event type.
+     *     <br/>
+     *     **message**: event indicating that a message has been received from the server.
      * @param { AsyncCallback<string | ArrayBuffer> } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -711,10 +733,13 @@ declare namespace webSocket {
     on(type: 'message', callback: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * Enables listening for the open info events of a WebSocket connection.
+     * Subscribes to the open information event of WebSocket. This API uses an asynchronous callback. This event is used
+     * to obtain the detailed information after the WebSocket connection is established. This API must be called before
+     * [connect]{@link webSocket.WebSocket.connect(url: string, callback: AsyncCallback<boolean>)} is called to initiate a connection request.
      *
-     * @param { 'openInfo' } type - event indicating that the open info of a WebSocket connection is returned.
-     * @param { AsyncCallback<WebSocketOpenInfo> } callback - the callback used to return the result.
+     * @param { 'openInfo' } type - Type of the event to subscribe to. **'openInfo'**: WebSocket open information event.
+     * @param { AsyncCallback<WebSocketOpenInfo> } callback - Callback used to return the detailed information of the
+     *     WebSocket connection.
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -732,10 +757,15 @@ declare namespace webSocket {
     onOpenInfo(callback: Callback<WebSocketOpenInfo>): void;
 
     /**
-     * Cancels listening for the open info events of a WebSocket connection.
+     * Unsubscribes from the open information event of WebSocket. This API uses an asynchronous callback.
+     * > **NOTE**
+     * >
+     * > You can pass the callback of the **on** function to cancel a specific subscription, or you can cancel all
+     * > subscriptions by not specifying a callback.
      *
-     * @param { 'openInfo' } type - event indicating that the open info of a WebSocket connection is returned.
-     * @param { AsyncCallback<WebSocketOpenInfo> } [callback] - the callback used to return the result.
+     * @param { 'openInfo' } type - Type of the event to unsubscribe from. **'openInfo'**: WebSocket open information
+     *     event.
+     * @param { AsyncCallback<WebSocketOpenInfo> } [callback] - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -753,8 +783,8 @@ declare namespace webSocket {
     offOpenInfo(callback?: Callback<WebSocketOpenInfo>): void;
 
     /**
-     * Enables listening for the message events of a WebSocket connection.
-     * data in AsyncCallback can be a string(API 6) or an ArrayBuffer(API 8).
+     * Enables listening for the message events of a WebSocket connection. data in AsyncCallback can be a string(API 6)
+     * or an ArrayBuffer(API 8).
      *
      * @param { AsyncCallback<string | ArrayBuffer> } callback - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
@@ -765,8 +795,7 @@ declare namespace webSocket {
     onMessage(callback: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * Unsubscribes from WebSocket server message receiving events. This API uses an asynchronous callback to return the
-     * result.
+     * Unsubscribes from the event of receiving server messages over WebSocket. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -786,8 +815,8 @@ declare namespace webSocket {
     off(type: 'message', callback?: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * Cancels listening for the message events of a WebSocket connection.
-     * data in AsyncCallback can be a string(API 6) or an ArrayBuffer(API 8).
+     * Cancels listening for the message events of a WebSocket connection. data in AsyncCallback can be a string(API 6)
+     * or an ArrayBuffer(API 8).
      *
      * @param { AsyncCallback<string | ArrayBuffer> } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
@@ -798,13 +827,13 @@ declare namespace webSocket {
     offMessage(callback?: AsyncCallback<string | ArrayBuffer>): void;
 
     /**
-     * Subscribes to WebSocket close events. This API uses an asynchronous callback to return the result.
+     * Subscribes to the close event of WebSocket. This API uses an asynchronous callback.
      *
-     * @param { 'close' } type - Event type.<br/> **close**: event indicating that a WebSocket connection has been
-     *     closed.
-     * @param { AsyncCallback<CloseResult> } callback - Callback used to return the result.
-     *     <br>**close** and **reason** indicate the error code and error cause for closing the connection,
-     *     respectively.
+     * @param { 'close' } type - Event type.
+     *     <br/>
+     *     **close**: event indicating that a WebSocket connection has been closed.
+     * @param { AsyncCallback<CloseResult> } callback - Callback used to return the result. <br>**close** and **reason**
+     *     indicate the error code and error cause for closing the connection, respectively.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -824,7 +853,7 @@ declare namespace webSocket {
     onWebSocketClose(callback: AsyncCallback<CloseResult>): void;
 
     /**
-     * Unsubscribes from WebSocket close events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the close event of WebSocket. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -833,9 +862,8 @@ declare namespace webSocket {
      *
      * @param { 'close' } type - Event type.<br /> **close**: event indicating that a WebSocket connection has been
      *     closed.
-     * @param { AsyncCallback<CloseResult> } callback - Callback used to return the result.
-     *     <br>**close** and **reason** indicate the error code and error cause for closing the connection,
-     *     respectively.
+     * @param { AsyncCallback<CloseResult> } callback - Callback used to return the result. <br>**close** and **reason**
+     *     indicate the error code and error cause for closing the connection, respectively.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -855,7 +883,7 @@ declare namespace webSocket {
     offWebSocketClose(callback?: AsyncCallback<CloseResult>): void;
 
     /**
-     * Subscribes to WebSocket error events. This API uses an asynchronous callback to return the result.
+     * Subscribes to the error event of WebSocket. This API uses an asynchronous callback.
      *
      * The error code of the [error]{@link webSocket.WebSocket.on(type: 'error', callback: ErrorCallback)} event
      * callback is described as follows: WebSocket is essentially an HTTP protocol upgrade. If the server agrees to the
@@ -863,8 +891,9 @@ declare namespace webSocket {
      * the **open** callback is triggered). If the server rejects the upgrade or other exceptions occur, the server
      * returns 200, indicating that the server only processes the request as a common HTTP request.
      *
-     * @param { 'error' } type - Event type.<br/> **error**: event indicating the WebSocket connection has encountered
-     *     an error.
+     * @param { 'error' } type - Event type.
+     *     <br/>
+     *     **error**: event indicating the WebSocket connection has encountered an error.
      * @param { ErrorCallback } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 10]
@@ -884,7 +913,7 @@ declare namespace webSocket {
     onWebSocketError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from WebSocket error events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the error event of WebSocket. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -912,11 +941,11 @@ declare namespace webSocket {
     offWebSocketError(callback?: ErrorCallback): void;
 
     /**
-     * Subscribes to the WebSocket data receiving end event. This API uses an asynchronous callback to return the
-     * result.
+     * Subscribes to the data reception end event of WebSocket. This API uses an asynchronous callback.
      *
-     * @param { 'dataEnd' } type - Event type.<br/> **dataEnd**: event indicating the data receiving over the WebSocket
-     *     connection has ended.
+     * @param { 'dataEnd' } type - Event type.
+     *     <br/>
+     *     **dataEnd**: event indicating the data receiving over the WebSocket connection has ended.
      * @param { Callback<void> } callback - Callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 12]
@@ -935,8 +964,7 @@ declare namespace webSocket {
     onDataEnd(callback: Callback<void>): void;
 
     /**
-     * Unsubscribes from WebSocket data receiving end events. This API uses an asynchronous callback to return the
-     * result.
+     * Unsubscribes from the data reception end event of WebSocket. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -963,10 +991,12 @@ declare namespace webSocket {
     offDataEnd(callback?: Callback<void>): void;
 
     /**
-     * Subscribes to HTTP response header events. This API uses an asynchronous callback to return the result.
+     * Subscribes to the HTTP Response Header event. This API uses an asynchronous callback to return the result.
      *
-     * @param { 'headerReceive'} type - Event type.<br/> Event type. The value is **headerReceive**.
-     * @param { Callback<ResponseHeaders> } callback - Callback used to return the result.
+     * @param { 'headerReceive'} type - Event type.
+     *     <br/>
+     *     Event type. The value is **headerReceive**.
+     * @param { Callback<ResponseHeaders> } callback - Callback used to return the subscribed event.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
@@ -984,7 +1014,7 @@ declare namespace webSocket {
     onHeaderReceive(callback: Callback<ResponseHeaders>): void;
 
     /**
-     * Unsubscribes from HTTP response header events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the HTTP Response Header event. This API uses an asynchronous callback to return the result.
      *
      * > **NOTE**
      * >
@@ -992,7 +1022,7 @@ declare namespace webSocket {
      * > If you do not pass the callback, you will cancel listening for all events.
      *
      * @param { 'headerReceive' } type - Event type.<br /> Event type. The value is **headerReceive**.
-     * @param { Callback<ResponseHeaders> } [callback] - Callback used to return the result.
+     * @param { Callback<ResponseHeaders> } [callback] - Callback used to return the subscribed event.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
      * @since 12 dynamic
@@ -1157,7 +1187,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     clientPort: int;
-    }
+  }
 
   /**
    * Callback used to return the result, which contains:
@@ -1187,13 +1217,14 @@ declare namespace webSocket {
      * @since 23 static
      */
     data: string | ArrayBuffer;
-    }
+  }
 
   /**
    * Callback invoked when the WebSocketServer connection is closed.
    *
-   * @param { WebSocketConnection } clientConnection - the connection which is closed.
-   * @param { CloseResult } closeReason - the error code and reason why the connection is closed.
+   * @param { WebSocketConnection } clientConnection - Client information, including the IP address and port number.
+   * @param { CloseResult } closeReason - Represents the result obtained from the close event reported when the
+   *     WebSocket connection is closed.
    * @syscap SystemCapability.Communication.NetStack
    * @crossplatform [since 24]
    * @since 19 dynamic
@@ -1219,7 +1250,6 @@ declare namespace webSocket {
      * > **NOTE**
      * >
      * > You are advised not to listen for the same port when calling this API multiple times.
-     * > **Required permission**: ohos.permission.INTERNET
      *
      * @permission ohos.permission.INTERNET
      * @param { WebSocketServerConfig } config - Starts the WebSocket server.
@@ -1255,8 +1285,6 @@ declare namespace webSocket {
     /**
      * Obtains information about all clients connected to the server.
      *
-     * **Required permission**: ohos.permission.INTERNET
-     *
      * > **NOTE**
      * >
      * > This API is called asynchronously. The **await** keyword needs to be used to wait until the asynchronous
@@ -1264,7 +1292,7 @@ declare namespace webSocket {
      * > obtained.
      *
      * @permission ohos.permission.INTERNET
-     * @returns { WebSocketConnection[] } an array consists connections from all clients.
+     * @returns { WebSocketConnection[] } Information of all clients in a string array.
      * @throws { BusinessError } 201 - Permission denied.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform [since 24]
@@ -1279,7 +1307,6 @@ declare namespace webSocket {
      * > **NOTE**
      * >
      * > The **send** API can be called only after a **connect** event is listened.
-     * > **Required permission**: ohos.permission.INTERNET
      *
      * @permission ohos.permission.INTERNET
      * @param { string | ArrayBuffer } data - Data to send, which can be of the string or ArrayBuffer type. A maximum of
@@ -1317,8 +1344,8 @@ declare namespace webSocket {
     close(connection: WebSocketConnection, options?: webSocket.WebSocketCloseOptions): Promise<boolean>;
 
     /**
-     * Subscribes to the WebSocketServer connection event (the connection between the client and server is successfully
-     * established). This API uses an asynchronous callback to return the result.
+     * Subscribes to the connection event of WebSocketServer (when a client successfully establishes a connection with
+     * the server). This API uses an asynchronous callback to return the result.
      *
      * @param { 'connect' } type - Event type, which has a fixed value of **connect**. Successful calling of
      *     **onconnect()** indicates that a connection is established between the client and server.
@@ -1341,8 +1368,8 @@ declare namespace webSocket {
     onConnect(callback: Callback<WebSocketConnection>): void;
 
     /**
-     * Unsubscribes from WebSocketServer connection events (the connection between the client and server is successfully
-     * established). This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the connection event of WebSocketServer (the client is successfully connected to the server).
+     * This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -1370,8 +1397,8 @@ declare namespace webSocket {
     offConnect(callback?: Callback<WebSocketConnection>): void;
 
     /**
-     * Subscribes to the WebSocketServer event of receiving client messages. This API uses an asynchronous callback to
-     * return the result.
+     * Subscribes to the event of WebSocketServer receiving messages from the client. This API uses an asynchronous
+     * callback.
      *
      * @param { 'messageReceive' } type - Event type, which has a fixed value of **messageReceive**. Successful calling
      *     of **onmessageReceive()** indicates that a message is received from the client.
@@ -1395,8 +1422,8 @@ declare namespace webSocket {
     onMessageReceive(callback: Callback<WebSocketMessage>): void;
 
     /**
-     * Unsubscribes from the WebSocketServer event of receiving client messages. This API uses an asynchronous callback
-     * to return the result.
+     * Unsubscribes from the event of WebSocketServer receiving messages from the client. This API uses an asynchronous
+     * callback.
      *
      * > **NOTE**
      * >
@@ -1425,7 +1452,7 @@ declare namespace webSocket {
     offMessageReceive(callback?: Callback<WebSocketMessage>): void;
 
     /**
-     * Subscribes to WebSocketServer close events. This API uses an asynchronous callback to return the result.
+     * Subscribes to the close event of WebSocketServer. This API uses an asynchronous callback.
      *
      * @param { 'close' } type - Event type, which has a fixed value of **close**. Successful calling of **onclose()**
      *     indicates that the connection is closed successfully.
@@ -1440,6 +1467,7 @@ declare namespace webSocket {
 
     /**
      * Enables listening for events that a connection from a given client has been closed.
+     *
      * @param { ClientConnectionCloseCallback } callback - the callback function when a client connection is closed.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
@@ -1448,7 +1476,7 @@ declare namespace webSocket {
     onWebSocketServerClose(callback: ClientConnectionCloseCallback): void;
 
     /**
-     * Unsubscribes from WebSocketServer close events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the close event of WebSocketServer. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -1468,7 +1496,8 @@ declare namespace webSocket {
 
     /**
      * Cancels listening for events that a connection from a given client has been closed.
-     * @param { ClientConnectionCloseCallback } callback - the callback used to return the result.
+     *
+     * @param { ClientConnectionCloseCallback } [callback] - the callback used to return the result.
      * @syscap SystemCapability.Communication.NetStack
      * @crossplatform
      * @since 26.0.0 static
@@ -1476,7 +1505,7 @@ declare namespace webSocket {
     offWebSocketServerClose(callback?: ClientConnectionCloseCallback): void;
 
     /**
-     * Subscribes to WebSocketServer error events. This API uses an asynchronous callback to return the result.
+     * Subscribes to the error event of WebSocketServer. This API uses an asynchronous callback.
      *
      * @param { 'error' } type - Event type, which has a fixed value of **error**. Successful calling of **onerror()**
      *     indicates that an error has occurred.
@@ -1498,7 +1527,7 @@ declare namespace webSocket {
     onWebSocketServerError(callback: ErrorCallback): void;
 
     /**
-     * Unsubscribes from WebSocketServer error events. This API uses an asynchronous callback to return the result.
+     * Unsubscribes from the error event of WebSocketServer. This API uses an asynchronous callback.
      *
      * > **NOTE**
      * >
@@ -1523,7 +1552,7 @@ declare namespace webSocket {
      * @since 23 static
      */
     offWebSocketServerError(callback?: ErrorCallback): void;
-    }
+  }
 
   /**
    * Enumerates the TLS protocol types.

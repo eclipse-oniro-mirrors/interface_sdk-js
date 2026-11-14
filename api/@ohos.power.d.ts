@@ -108,7 +108,8 @@ declare namespace power {
    * - A device with a screen is active when the screen is on and inactive when the screen is off.
    * - A device without a screen is active when it exits the sleep mode and inactive when it enters the sleep mode.
    *
-   * @returns { boolean } Return value **true** if the device is active; returns **false** otherwise.
+   * @returns { boolean } The value true is returned for the active state, and false is returned for the inactive
+   *     state or failure to obtain the device active state.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -158,9 +159,16 @@ declare namespace power {
   function suspend(isImmediate?: boolean): void;
 
   /**
-   * Obtains the power mode of this device.
+   * Obtains the power mode of the current device. Different power modes correspond to different device behavior
+   * policies. Developers can adjust application behavior based on the returned mode value to adapt to the current mode.
+   * For the definition and description of each mode, see DevicePowerMode.
+   * To query the sub-mode, use [getPowerSubMode]{@link getPowerSubMode}.
    *
-   * @returns { DevicePowerMode } Power mode.
+   * @returns { DevicePowerMode }Indicates the power mode of the current device. The value can be Standard, Power
+   *     Saving, Performance, or Super Power Saving.
+   *     When the power mode of the current device fails to be obtained, the value 0 is returned. The value is not 
+   *     within the value range defined by the [DevicePwerMode]{@link DevicePowerMode} enumeration. Developers
+   *     should check whether the return value is a valid enumerated value (600 or more).
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -189,6 +197,7 @@ declare namespace power {
 
   /**
    * Sets the power mode of a device. This API uses a promise to return the result.
+   * To set both the power mode and the sub-mode, use [setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}.
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
@@ -205,6 +214,44 @@ declare namespace power {
    * @since 23 static
    */
   function setPowerMode(mode: DevicePowerMode): Promise<void>;
+
+  /**
+   * Obtains the power sub-mode of this device.
+   * To query the power mode, use [getPowerMode]{@link getPowerMode}.
+   *
+   * When the current power mode does not support sub-mode, SUB_MODE_INVALID is returned.
+   *
+   * @returns { DevicePowerSubMode } Power sub-mode. Returns SUB_MODE_INVALID when the
+   *     current power mode does not support sub-mode.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getPowerSubMode(): DevicePowerSubMode;
+
+  /**
+   * Sets the power mode and sub-mode of a device. This API uses a promise to return the result.
+   * To set the power mode only (without sub-mode), use [setPowerMode(promise)]{@link setPowerMode(mode: DevicePowerMode)} or [setPowerMode(callback)]{@link setPowerMode(mode: DevicePowerMode, callback: AsyncCallback<void>)}.
+   *
+   * @permission ohos.permission.POWER_OPTIMIZATION
+   * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
+   * @param { DevicePowerSubMode } subMode - Power sub-mode. The value must be an enum.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 4900301 - Failed to set the power mode. Possible causes:
+   *     <br>1. The power mode switching constraint is not met;
+   *     <br>2. The power mode does not support the sub-mode, or the sub-mode does not match the power mode.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode): Promise<void>;
 
   /**
    * Checks whether the device is in standby mode.
@@ -390,7 +437,7 @@ declare namespace power {
      */
     MODE_PERFORMANCE,
     /**
-     * Ultra power saving mode.
+     * Extended power saving mode. This mode supports sub-modes defined in [DevicePowerSubMode]{@link power.DevicePowerSubMode}.
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 9 dynamic
@@ -405,6 +452,49 @@ declare namespace power {
      * @since 23 static
      */
     MODE_CUSTOM_POWER_SAVE = 650
+  }
+
+  /**
+   * Enumerates power sub-modes.
+   *
+   * The enum value is composed of the power mode value and a sequence number:
+   * - Prefix: the power mode value that this sub-mode belongs to. For example,
+   *   603 in 603001 indicates this sub-mode belongs to [MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}.
+   * - Suffix: the sequence number within the power mode, starting from 001.
+   *
+   * SUB_MODE_INVALID (-1) does not follow this rule and indicates that the
+   * current power mode does not support sub-mode.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DevicePowerSubMode {
+    /**
+     * Invalid sub-mode. Used when the power mode does not support sub-mode.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_INVALID = -1,
+    /**
+     * Super power save sub-mode. Applies to [MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_SUPER_POWER_SAVE = 603001,
+    /**
+     * Emergency sub-mode. Applies to [MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}.
+     * This is the default sub-mode for MODE_EXTREME_POWER_SAVE.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_EMERGENCY = 603002
   }
 
   /**
@@ -452,6 +542,131 @@ declare namespace power {
      */
     LONG_PRESS_FILTERING_ONCE = 1
   }
+
+  /**
+   * Enumerates the API invoking mode.
+   * Indicates how an API call is executed and how its result is delivered.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InvokeMode {
+    /**
+     * Synchronous invocation. The caller blocks until the API returns the result.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SYNC = 0,
+    /**
+     * Asynchronous invocation. The caller returns immediately; the result is delivered via a Promise.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ASYNC = 1
+  }
+
+  /**
+   * Wakes up a device.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { string } detail - Wakeup reason. The value must be a string.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function wakeup(detail: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Enables a device to enter the sleep state.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { boolean } [isImmediate] - Whether the device enters the sleep state immediately. The value **true**
+   *     indicates that the device enters the sleep state immediately after the screen is turned off; **false**
+   *     indicates that the system controls when the device enters the sleep state. If this parameter is not set, the
+   *     default value **false** is used. If you only want to turn off the screen, you are advised not to set this
+   *     parameter.
+   *     <br>Default value: false.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
+   *     1. Not allowed to turn off the screen during the exam.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function suspend(isImmediate?: boolean, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Shuts down the system.
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - Shutdown reason. The value must be a string.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function shutdown(reason: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Reboots a device.
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - Indicates the restart reason. For example, "updater" indicates entering the updater mode
+   *     after the restart. If the parameter is not specified, the system enters the normal mode after the restart.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function reboot(reason: string, mode?: InvokeMode): void | Promise<void>;
+
 }
 
 export default power;

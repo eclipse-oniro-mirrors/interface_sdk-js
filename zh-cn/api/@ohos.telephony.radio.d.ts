@@ -1234,6 +1234,7 @@ declare namespace radio {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -1256,6 +1257,7 @@ declare namespace radio {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -1281,6 +1283,7 @@ declare namespace radio {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -1304,6 +1307,7 @@ declare namespace radio {
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   *     2. Incorrect parameter types.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -2084,7 +2088,7 @@ declare namespace radio {
     RADIO_TECHNOLOGY_EVDO = 7,
 
     /**
-     * 无线接入技术EHRPD(Evolved High Rate Package Data)。
+     * 无线接入技术EHRPD(Evolved High Rate Packet Data)。
      *
      * @syscap SystemCapability.Telephony.CoreService
      * @since 6 dynamic
@@ -3472,7 +3476,7 @@ declare namespace radio {
    * @param { int } slotId - Indicates the card slot index number.
    * @returns { Promise<boolean> } 承诺返回 ManualNetworkScanState。
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Nonsystem applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -3491,7 +3495,7 @@ declare namespace radio {
    * @param { int } slotId - Indicates the card slot index number.
    * @returns { Promise<void> } 返回停止手动搜网结果
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Nonsystem applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.
@@ -3510,7 +3514,7 @@ declare namespace radio {
    * @param { int } slotId - Indicates the card slot index number.
    * @param { Callback< NetworkSearchRealTimeResult> } callback - Indicates the callback for manual network scan
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Nonsystem applications use system APIs.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 8300001 - Invalid parameter value.
    * @throws { BusinessError } 8300002 - Service connection failed.
    * @throws { BusinessError } 8300003 - System internal error.

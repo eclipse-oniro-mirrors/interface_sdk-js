@@ -37,21 +37,35 @@ docs/                         # 文档
 | `.d.ets` | ArkTS 声明文件 |
 | `.static.d.ets` | ArkTS 静态类型声明文件 |
 
-## JSDoc 规范
+## API Design Knowledge Index
 
-JSDoc 标签参考表、书写顺序、适用范围以及新增 API 时的 JSDoc 写作规范，详见 [docs/AGENTS-jsdoc-rules.md](./docs/AGENTS-jsdoc-rules.md)。
+AI agents and tools must use this root `AGENTS.md` as the stable knowledge entry.
+They must not assume or hardcode repository-internal paths; if a document moves,
+update only the links in this index.
 
-## ArkTS 静态类型 API 设计规范
+| Knowledge area | Required when | Entry |
+|----------------|---------------|-------|
+| API version rules and system/API version mapping | every API design or validation task | [AGENTS-version-rules.md](./docs/AGENTS-version-rules.md) |
+| JSDoc / declaration-comment rules | every API design or validation task | [AGENTS-jsdoc-rules.md](./docs/AGENTS-jsdoc-rules.md) |
+| ArkTS API metadata format and schema | generating, validating, or consuming ArkTS metadata | [AGENTS-api-metadata.md](./docs/AGENTS-api-metadata.md) |
+| ArkTS static type API rules | `.static.d.ets`, ArkTS static/dynamic decisions, or static SDK concerns | [AGENTS-arkts-static-types.md](./docs/AGENTS-arkts-static-types.md) |
+| Device support and behavior differences | device support, device removal, or per-device behavior | [AGENTS-device-models.md](./docs/AGENTS-device-models.md) |
 
-设计 ArkTS 静态类型 API 声明文件（`.static.d.ets`）时，类型系统规则、文件结构模板、声明方式、设计约束、二进制兼容性规则和检查清单，详见 [docs/AGENTS-arkts-static-types.md](./docs/AGENTS-arkts-static-types.md)。
+The ArkTS metadata guide dynamically links to:
 
-## 鸿蒙多设备 API 行为差异知识库
+- Schema: `arkts-api-metadata.schema.json`
+- Example: `arkts-api-metadata.example.yaml`
 
-分析 API 的多设备支持能力和行为差异时，设备类型枚举、差异行为分类、差异原因、设备移除规则、自然语言解析规则等知识，详见 [docs/AGENTS-device-models.md](./docs/AGENTS-device-models.md)。
+Consumers must resolve those artifacts through
+[AGENTS-api-metadata.md](./docs/AGENTS-api-metadata.md), not by hardcoding their
+paths.
 
-## API 版本号规则
-
-API 设计各阶段涉及版本号比较时，版本号格式（纯数字、语义版本）和比较规则，详见 [docs/AGENTS-version-rules.md](./docs/AGENTS-version-rules.md)。
+Load only the knowledge areas required by the task, but the version,
+declaration-comment, and applicable metadata-schema entries are mandatory for
+API contract generation. A deterministic repository rule, such as a
+system-release-to-API-version mapping, must be used directly and cited as the
+evidence source; do not ask the developer to reconfirm a fact already resolved
+by this knowledge index.
 
 ## Important Notes
 

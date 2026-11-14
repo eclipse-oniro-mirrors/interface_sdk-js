@@ -27,6 +27,7 @@ import { ComponentContentBase } from '../ComponentContent';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, ICurve } from "./common";
 import { CommonModifier } from '@ohos.arkui.modifier';
+import { TabVisibility, SidebarSection } from './tabContent';
 
 import uiMaterial from '../../@ohos.arkui.uiMaterial'
 
@@ -1023,6 +1024,42 @@ export declare interface TabsBreakpointType<T> {
 }
 
 /**
+ * Defines the centralized customization configuration for the sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface TabViewCustomization {
+  /**
+   * A map of TabContent index to sidebar visibility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  visibilityMap?: Map<int, TabVisibility>;
+
+  /**
+   * A map of TabContent index to sidebar section.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  sectionMap?: Map<int, SidebarSection>;
+
+  /**
+   * A map of TabContent index to the display priority of tab items in the sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  orderMap?: Map<int, int>;
+}
+
+/**
  * The TabsAttribute.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1834,6 +1871,17 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.1.0 static
    */
   default showSidebarControlButton(value: boolean | undefined): this;
+
+  /**
+   * Sets the centralized customization configuration for the sidebar tab bar.
+   *
+   * @param { TabViewCustomization | undefined } value - The centralized customization configuration.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default tabViewCustomization(value: TabViewCustomization | undefined): this;
 }
 
 /**

@@ -34,7 +34,7 @@ import { FrameNode } from '../FrameNode';
 export declare enum SwipeEdgeEffect {
 
   /**
-   * Elastic physical action, sliding to the edge can continue to slide for a distance based on the initial speed or touch event, and spring back when released.
+   * 弹簧效果，滑动距离超过滑出组件大小后可继续滑动并按弹簧阻尼曲线回弹。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -43,7 +43,7 @@ export declare enum SwipeEdgeEffect {
   Spring,
 
   /**
-   * Sliding to the edge has no effect.
+   * 无弹簧效果，滑动距离不能超过滑出组件大小。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -62,7 +62,7 @@ export declare enum SwipeEdgeEffect {
 export declare enum SwipeActionState {
 
   /**
-   * Collapsed type.
+   * 收起状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -71,7 +71,7 @@ export declare enum SwipeActionState {
   COLLAPSED,
 
   /**
-   * EXPANDED type.
+   * 展开状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -80,7 +80,7 @@ export declare enum SwipeActionState {
   EXPANDED,
 
   /**
-   * Action type.
+   * 长距离状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -320,7 +320,7 @@ export declare interface ListItemOptions {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -341,7 +341,7 @@ export declare interface ListItemAttribute extends CommonMethod {
   default selectable(value: boolean | undefined): this;
 
   /**
-   * 设置当前ListItem选中状态。该属性需要在设置[多态样式]{@link common}前使用才能生效选中态样式。
+   * 设置当前ListItem选中状态。该属性需要在设置[多态样式]{@link CommonMethod}前使用才能生效选中态样式。
    *
    * 从API version 22开始，该属性支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *

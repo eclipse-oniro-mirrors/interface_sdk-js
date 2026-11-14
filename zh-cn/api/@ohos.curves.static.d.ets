@@ -57,7 +57,7 @@ declare namespace curves {
     export enum Curve {
 
         /**
-         * Linear. Indicates that the animation has the same velocity from start to finish.
+         * 表示动画从头到尾的速度都是相同的。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -66,8 +66,7 @@ declare namespace curves {
         Linear,
 
         /**
-         * Ease. Indicates that the animation starts at a low speed, then speeds up, and slows down before the end,
-         * CubicBezier(0.25, 0.1, 0.25, 1.0).
+         * 表示动画以低速开始，然后加快，在结束前变慢，cubic-bezier(0.25, 0.1, 0.25, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -76,7 +75,7 @@ declare namespace curves {
         Ease,
 
         /**
-         * EaseIn. Indicates that the animation starts at a low speed, Cubic Bezier (0.42, 0.0, 1.0, 1.0).
+         * 表示动画以低速开始，cubic-bezier(0.42, 0.0, 1.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -85,7 +84,7 @@ declare namespace curves {
         EaseIn,
 
         /**
-         * EaseOut. Indicates that the animation ends at low speed, CubicBezier (0.0, 0.0, 0.58, 1.0).
+         * 表示动画以低速结束，cubic-bezier(0.0, 0.0, 0.58, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -94,7 +93,7 @@ declare namespace curves {
         EaseOut,
 
         /**
-         * EaseInOut. Indicates that the animation starts and ends at low speed, CubicBezier (0.42, 0.0, 0.58, 1.0).
+         * 表示动画以低速开始和结束，cubic-bezier(0.42, 0.0, 0.58, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -103,7 +102,7 @@ declare namespace curves {
         EaseInOut,
          
         /**
-         * FastOutSlowIn. Standard curve, cubic-bezier (0.4, 0.0, 0.2, 1.0).
+         * 标准曲线，cubic-bezier(0.4, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -112,7 +111,7 @@ declare namespace curves {
         FastOutSlowIn,
 
         /**
-         * LinearOutSlowIn. Deceleration curve, cubic-bezier (0.0, 0.0, 0.2, 1.0).
+         * 减速曲线，cubic-bezier(0.0, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -121,7 +120,7 @@ declare namespace curves {
         LinearOutSlowIn,
 
         /**
-         * FastOutLinearIn. Acceleration curve, cubic-bezier (0.4, 0.0, 1.0, 1.0).
+         * 加速曲线，cubic-bezier(0.4, 0.0, 1.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -130,7 +129,7 @@ declare namespace curves {
         FastOutLinearIn,
 
         /**
-         * ExtremeDeceleration. Abrupt curve, cubic-bezier (0.0, 0.0, 0.0, 1.0).
+         * 极缓曲线，cubic-bezier(0.0, 0.0, 0.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -139,7 +138,7 @@ declare namespace curves {
         ExtremeDeceleration,
 
         /**
-         * Sharp. Sharp curves, cubic-bezier (0.33, 0.0, 0.67, 1.0).
+         * 锐利曲线，cubic-bezier(0.33, 0.0, 0.67, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -148,7 +147,7 @@ declare namespace curves {
         Sharp,
 
         /**
-         * Rhythm. Rhythmic curve, cubic-bezier (0.7, 0.0, 0.2, 1.0).
+         * 节奏曲线，cubic-bezier(0.7, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -157,7 +156,7 @@ declare namespace curves {
         Rhythm,
 
         /**
-         * Smooth. Smooth curves, cubic-bezier (0.4, 0.0, 0.4, 1.0).
+         * 平滑曲线，cubic-bezier(0.4, 0.0, 0.4, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -166,7 +165,7 @@ declare namespace curves {
         Smooth,
 
         /**
-         * Friction. Damping curves, CubicBezier (0.2, 0.0, 0.2, 1.0).
+         * 阻尼曲线，cubic-bezier(0.2, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -294,10 +293,10 @@ declare namespace curves {
      *     过阻尼，运动过程中逐渐趋于目标值。<br>默认值：0.825<br/>单位：秒<br/>取值范围：[0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.825处理。
      * @param { double } [overlapDuration] - 弹性动画衔接时长。发生动画继承时，如果前后两个弹性动画response不一致，response参数会在overlapDuration时间内平滑过渡。<
      *     br/>默认值：0<br/>单位：秒<br/>取值范围：
-     *     [0, +∞)<br/> **说明：**  <br/>设置小于0的值时，按默认值0处理。<br>弹性动画曲线为物理曲线，[animation]{@link common}、[animateTo]{@link common}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的interpolate函数获得插值。
+     *     [0, +∞)<br/> **说明：**  <br/>设置小于0的值时，按默认值0处理。<br>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的interpolate函数获得插值。
      * @returns { ICurve } 曲线对象。
      *     <br>**说明:**  
-     *     <br>弹性动画曲线为物理曲线，[animation]{@link common}、[animateTo]{@link common}、[pageTransition]{@link page_transition}中的
+     *     <br>弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link page_transition}中的
      *     duration参数不生效，动画持续时间取决于springMotion动画曲线参数和之前的速度。时间不能归一，故不能通过该曲线的
      *     [interpolate](docroot://reference/apis-arkui/js-apis-curve_static.md#interpolate9)函数获得插值。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -315,11 +314,11 @@ declare namespace curves {
      * @param { double } [dampingFraction] - 解释同springMotion中的dampingFraction。<br/>默认值：0.86<br/>单位：秒<br/>取值范围：
      *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.86处理。
      * @param { double } [overlapDuration] - 解释同springMotion中的overlapDuration。<br/>默认值：0.25<br/>单位：秒<br/>取值范围：
-     *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.25处理。<br/>弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线。如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>[animation]{@link common}、[animateTo]{@link common}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持续时间取决于responsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的interpolate函数获得插值。
+     *     [0, +∞)<br/>**说明：** <br/>设置小于0的值时，按默认值0.25处理。<br/>弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线。如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。<br/>[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持续时间取决于responsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的interpolate函数获得插值。
      * @returns { ICurve } 曲线对象。
      *     <br>**说明:** 
      *     <br>1、弹性跟手动画曲线为springMotion的一种特例，仅默认值不同。如果使用自定义参数的弹性曲线，推荐使用springMotion构造曲线；如果使用跟手动画，推荐使用默认参数的弹性跟手动画曲线。
-     *     <br>2、[animation]{@link common}、[animateTo]{@link common}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持
+     *     <br>2、[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link page_transition}中的duration参数不生效，动画持
      *     续时间取决于responsiveSpringMotion动画曲线参数和之前的速度，也不能通过该曲线的
      *     [interpolate](docroot://reference/apis-arkui/js-apis-curve_static.md#interpolate9)函数获得插值。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -355,7 +354,7 @@ declare namespace curves {
      *     <br>If this parameter is set to a value less than or equal to 0, the value **1** is used.
      *     </p>
      * @returns { ICurve } 曲线对象。
-     *     <br>**说明:** 弹性动画曲线为物理曲线，[animation]{@link common}、[animateTo]{@link common}、[pageTransition]{@link page_transition}中
+     *     <br>**说明:** 弹性动画曲线为物理曲线，[animation]{@link CommonMethod}、[animateTo]{@link CommonMethod}、[pageTransition]{@link page_transition}中
      *     的duration参数不生效，动画持续时间取决于interpolatingSpring动画曲线参数。时间不能归一，故不能通过该曲线的
      *     [interpolate](docroot://reference/apis-arkui/js-apis-curve_static.md#interpolate9)函数获得插值。
      * @syscap SystemCapability.ArkUI.ArkUI.Full

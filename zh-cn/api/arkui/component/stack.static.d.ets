@@ -152,7 +152,7 @@ export declare function Stack(
 ): StackAttribute;
 
 /**
- * Defines the Extendable Stack.
+ * 可扩展的Stack组件。
  *
  * @implements StackAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -196,10 +196,11 @@ export declare abstract class ExtendableStack implements StackAttribute {
     ): void;
 
     /**
-     * Set the Stack Options.
+     * 设置Stack选项。
      *
-     * @param { StackOptions } [options]
-     * @returns { ExtendableStack }
+     * @param { StackOptions } options - 设置子组件在容器内的对齐方式。当需要将子组件对齐到特定位置（如顶部、底部、左上角等）而非默认居中时传入此参数；如果不传入此参数，则使用StackOptions的
+     *    默认配置，其中alignContent默认为Alignment.Center。 [since 18]
+     * @returns { ExtendableStack } 返回ExtendableStack实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 staticonly

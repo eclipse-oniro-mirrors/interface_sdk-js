@@ -660,10 +660,10 @@ export declare interface VideoAttribute extends CommonMethod {
      */
     default enableShortcutKey(enabled: boolean | undefined): this;
     /**
-     * Set background color of the surface holden by Video(only support Color.Black and Color.Transparent).
+     * 设置Video组件中surfaceNode（负责渲染视频画面的节点）的背景色。
      *
-     * @param { ColorMetrics | undefined } color - The surface background color.
-     *     Default value is Color.Black, `undefined` means setting to the default value.
+     * @param { ColorMetrics | undefined } color - 设置Video组件中surfaceNode的背景色，仅支持黑色和透明色两种。其他颜色设置将默认为黑色。
+     *    <br>默认值：Color.Black
      * @returns { VideoAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi

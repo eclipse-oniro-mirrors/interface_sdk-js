@@ -19,7 +19,7 @@
  * @kit ArkUI
  */
 import { ResourceColor, BorderRadiuses, LocalizedBorderRadiuses } from "./units";
-import { CommonMethod } from './common';
+import { CommonMethod, PickerComponentTextStyle } from './common';
 import { LengthMetrics } from './../Graphics';
 import { AttributeModifier } from "./common";
 import { ComponentBuilder, CustomBuilder, CustomBuilderT, Builder } from './builder';
@@ -262,6 +262,27 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default displayedItemCount(count: int | undefined): this;
+
+  /**
+   * Sets the text style of the selected item.
+   *
+   * Default value:
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '20fp',
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }
+   *
+   * @param { PickerComponentTextStyle | undefined } style
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default selectedTextStyle(style: PickerComponentTextStyle | undefined): UIPickerComponentAttribute;
 }
 
 /**

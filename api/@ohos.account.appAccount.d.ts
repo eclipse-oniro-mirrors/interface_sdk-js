@@ -122,8 +122,6 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300004 - Account already exists.
@@ -142,8 +140,6 @@ declare namespace appAccount {
      *     based on service requirements, but do not add sensitive data (such as passwords and tokens).
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or options.
      * @throws { BusinessError } 12300004 - Account already exists.
@@ -163,8 +159,6 @@ declare namespace appAccount {
      *     <br>By default, no value is passed in, which means no additional information needs to be added for the
      *     account.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or options.
      * @throws { BusinessError } 12300004 - Account already exists.
@@ -210,8 +204,6 @@ declare namespace appAccount {
      * @param { string } owner - Owner of the application account. The value is the bundle name of the application.
      *     The value contains a maximum of 1024 characters.
      * @param { AuthCallback } callback - Authenticator callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner.
      * @throws { BusinessError } 12300007 - The number of accounts reaches the upper limit.
@@ -232,8 +224,6 @@ declare namespace appAccount {
      *     The value contains a maximum of 1024 characters.
      * @param { CreateAccountImplicitlyOptions } options - Options for implicitly creating the account.
      * @param { AuthCallback } callback - Authenticator callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner or options.
      * @throws { BusinessError } 12300007 - The number of accounts reaches the upper limit.
@@ -289,8 +279,6 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -305,8 +293,6 @@ declare namespace appAccount {
      *
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -445,8 +431,6 @@ declare namespace appAccount {
      * @param { string } bundleName - Bundle name of the application. The value contains a maximum of 512 characters.
      * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means the
      *     application can access the account data; the value **false** means the opposite.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or bundleName.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -464,8 +448,6 @@ declare namespace appAccount {
      * @param { string } bundleName - Bundle name of the application. The value contains a maximum of 512 characters.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the application can
      *     access the account data; the value **false** means the opposite.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or bundleName.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -526,8 +508,6 @@ declare namespace appAccount {
      *     synchronization is enabled for the application account; the value **false** means the opposite.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -547,8 +527,6 @@ declare namespace appAccount {
      *     data synchronization is enabled for the application account; the value **false** means the opposite.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -613,8 +591,6 @@ declare namespace appAccount {
      *     characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the credential is set
      *     successfully, **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, credentialType or credential.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -634,8 +610,6 @@ declare namespace appAccount {
      * @param { string } credential - Credential value. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, credentialType or credential.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -745,8 +719,6 @@ declare namespace appAccount {
      *     **err** is **null**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -766,8 +738,6 @@ declare namespace appAccount {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -828,8 +798,6 @@ declare namespace appAccount {
      *     of 1024 characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, key or value.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -848,8 +816,6 @@ declare namespace appAccount {
      * @param { string } value - Value of the custom data. Do not include sensitive data. The value contains a maximum
      *     of 1024 characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, key or value.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -918,8 +884,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<Array<AppAccountInfo>> } callback - Callback used to return the result.
      *     If the operation is successful, **err** is **null** and **data** is a list of accessible application
      *     accounts. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @syscap SystemCapability.Account.AppAccount
      * @since 9 dynamic
@@ -1088,8 +1052,6 @@ declare namespace appAccount {
      *     characters.
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the credential obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or credentialType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1107,8 +1069,6 @@ declare namespace appAccount {
      * @param { string } credentialType - Credential type. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @returns { Promise<string> } Promise used to return the credential obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or credentialType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1209,8 +1169,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<string> } callback - Callback used to return the result.
      *     If the operation is successful, **err** is **null** and **data** is the custom data value
      *     obtained. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or key.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1228,8 +1186,6 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @param { string } key - Key of the custom data. The value contains a maximum of 1024 characters.
      * @returns { Promise<string> } Promise used to return the custom data value obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or key.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1247,8 +1203,6 @@ declare namespace appAccount {
      * @param { string } name - Name of the application account. The value contains a maximum of 512 characters.
      * @param { string } key - Key of the custom data. The value contains a maximum of 1024 characters.
      * @returns { string } Value of the custom data.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or key.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1334,8 +1288,6 @@ declare namespace appAccount {
      * @param { 'accountChange' } type - Event type to unsubscribe from. The value is **'accountChange'**.
      * @param { Callback<Array<AppAccountInfo>> } [callback] - Callback to unregister. By default, no value is passed,
      *     which means to unregister all callbacks for the specified event.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid type.
      * @syscap SystemCapability.Account.AppAccount
@@ -1391,8 +1343,6 @@ declare namespace appAccount {
      * @param { string } authType - Authentication type. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @param { AuthCallback } callback - Authenticator callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1415,8 +1365,6 @@ declare namespace appAccount {
      *     characters.
      * @param { Record<string, Object> } options - Options for the authentication.
      * @param { AuthCallback } callback - Authenticator callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner, authType or options.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1521,8 +1469,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<string> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null** and **data** is the authorization token value obtained. Otherwise, **err** is an error
      *     object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1543,8 +1489,6 @@ declare namespace appAccount {
      * @param { string } authType - Authentication type. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @returns { Promise<string> } Promise used to return the authorization token obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1610,8 +1554,6 @@ declare namespace appAccount {
      * @param { string } token - Authorization token. The value contains a maximum of 1024 characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, authType or token.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1631,8 +1573,6 @@ declare namespace appAccount {
      *     characters.
      * @param { string } token - Authorization token. The value contains a maximum of 1024 characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, authType or token.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1705,8 +1645,6 @@ declare namespace appAccount {
      *     does not exist, no operation is performed.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner, authType or token.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1729,8 +1667,6 @@ declare namespace appAccount {
      * @param { string } token - Authorization token. The value contains a maximum of 1024 characters. If the token
      *     does not exist, no operation is performed.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner, authType or token.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1912,8 +1848,6 @@ declare namespace appAccount {
      *     **err** is **null** and **data** can be **true** (the authorization token is visible to the application) or
      *     **false** (the authorization token is not visible to the application). If the operation fails, **err** is an
      *     error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, authType or bundleName.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1934,8 +1868,6 @@ declare namespace appAccount {
      * @param { string } bundleName - Bundle name of the application. The value contains a maximum of 512 characters.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the authorization token
      *     is visible to the application; the value **false** means the opposite.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, authType or bundleName.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -1999,8 +1931,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<Array<AuthTokenInfo>> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is a list of all tokens visible to the invoker. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or owner.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2018,8 +1948,6 @@ declare namespace appAccount {
      * @param { string } owner - Owner of the application account. The value is the bundle name of the application. The
      *     value contains a maximum of 1024 characters.
      * @returns { Promise<Array<AuthTokenInfo>> } Promise used to return the tokens obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or owner.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2088,8 +2016,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<Array<string>> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is a list of authorized bundles obtained. Otherwise, **err** is
      *     an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2110,8 +2036,6 @@ declare namespace appAccount {
      * @param { string } authType - Authentication type. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @returns { Promise<Array<string>> } Promise used to return a list of authorized bundles.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or authType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2168,8 +2092,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<AuthCallback> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the authenticator callback object obtained. Otherwise,
      *     **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid sessionId.
      * @throws { BusinessError } 12300108 - Session not found.
@@ -2184,8 +2106,6 @@ declare namespace appAccount {
      *
      * @param { string } sessionId - ID of the authentication session. The value contains a maximum of 1024 characters.
      * @returns { Promise<AuthCallback> } Promise used to return the authenticator callback obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid sessionId.
      * @throws { BusinessError } 12300108 - Session not found.
@@ -2244,8 +2164,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<AuthenticatorInfo> } callback - Callback used to return the result. If the operation is
      *     successful, **err** is **null** and **data** is the authenticator information obtained. Otherwise, **err** is
      *     an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner.
      * @throws { BusinessError } 12300113 - Authenticator service not found.
@@ -2261,8 +2179,6 @@ declare namespace appAccount {
      * @param { string } owner - Owner of the application account. The value is the bundle name of the application. The
      *     value contains a maximum of 1024 characters.
      * @returns { Promise<AuthenticatorInfo> } Promise used to return the authenticator information obtained.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner.
      * @throws { BusinessError } 12300113 - Authenticator service not found.
@@ -2284,8 +2200,6 @@ declare namespace appAccount {
      *     **err** is **null** and **data** can be **true** or **false**. The value **true** means the application
      *     account has the labels; the value **false** means the opposite. If the operation fails, **err** is an error
      *     object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or labels.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2308,8 +2222,6 @@ declare namespace appAccount {
      * @param { Array<string> } labels - Labels to check.
      * @returns { Promise<boolean> } Promise used to return the result. The value **true** means the application account
      *     has the labels; the value **false** means the opposite.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or labels.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2331,8 +2243,6 @@ declare namespace appAccount {
      *     characters.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
      *     **err** is **null**. Otherwise, **err** is an error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or credentialType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2351,8 +2261,6 @@ declare namespace appAccount {
      * @param { string } credentialType - Credential type. The value is user-defined and contains a maximum of 1024
      *     characters.
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or credentialType.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2372,8 +2280,6 @@ declare namespace appAccount {
      * @param { AsyncCallback<Array<AppAccountInfo>> } callback - Callback used to return the result. If the operation
      *     is successful, **err** is **null** and **data** is a list of accounts selected. Otherwise, **err** is an
      *     error object.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid options.
      * @throws { BusinessError } 12300010 - Account service busy.
@@ -2391,8 +2297,6 @@ declare namespace appAccount {
      *
      * @param { SelectAccountsOptions } options - Options for selecting accounts.
      * @returns { Promise<Array<AppAccountInfo>> } Promise used to return the accounts selected.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid options.
      * @throws { BusinessError } 12300010 - Account service busy.
@@ -2411,8 +2315,6 @@ declare namespace appAccount {
      * @param { string } owner - Owner of the application account. The value is the bundle name of the application. The
      *     value contains a maximum of 1024 characters.
      * @param { AuthCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name or owner.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2432,8 +2334,6 @@ declare namespace appAccount {
      *     value contains a maximum of 1024 characters.
      * @param { VerifyCredentialOptions } options - Options for credential verification.
      * @param { AuthCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid name, owner or options.
      * @throws { BusinessError } 12300003 - Account not found.
@@ -2452,8 +2352,6 @@ declare namespace appAccount {
      * @param { string } owner - Owner of the authenticator. The value is the bundle name of the application. The
      *     value contains a maximum of 1024 characters.
      * @param { AuthCallback } callback - Callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner.
      * @throws { BusinessError } 12300010 - Account service busy.
@@ -2471,8 +2369,6 @@ declare namespace appAccount {
      *     The value contains a maximum of 1024 characters.
      * @param { SetPropertiesOptions } options - Authenticator properties to set.
      * @param { AuthCallback } callback - Authenticator callback used to return the result.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br> 2. Incorrect parameter types.
      * @throws { BusinessError } 12300001 - System service exception.
      * @throws { BusinessError } 12300002 - Invalid owner or options.
      * @throws { BusinessError } 12300010 - Account service busy.

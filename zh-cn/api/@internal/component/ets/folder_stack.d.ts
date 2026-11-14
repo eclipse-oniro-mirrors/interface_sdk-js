@@ -124,7 +124,7 @@ interface OnFoldStatusChangeInfo {
 }
 
 /**
- * 当折叠状态改变时触发的回调<!--RP4-->，仅在横屏状态下生效<!--RP4End-->。
+ * 当折叠状态改变时触发的回调，仅在横屏状态下生效。
  *
  * @param { OnFoldStatusChangeInfo } event - 折叠状态改变时的信息，仅在横屏状态下生效。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -183,7 +183,7 @@ declare class FolderStackAttribute extends CommonMethod<FolderStackAttribute> {
   alignContent(value: Alignment): FolderStackAttribute;
 
   /**
-   * 当前设备的折叠状态改变时触发回调<!--RP3-->（该回调仅在横屏状态下生效）<!--RP3End-->。
+   * 当前设备的折叠状态改变时触发回调（该回调仅在横屏状态下生效）。
    * 
    * 典型使用场景：根据折叠状态调整应用布局，例如在展开状态下显示双栏布局，在半折叠状态下调整上半屏和下半屏的内容分布。
    * 

@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIContext instance
  * @kit ArkUI
  */
 
@@ -1582,6 +1582,9 @@ export class PromptAction {
 
 /**
  * Provides unified dialog APIs.
+ * It provides APIs for creating and displaying fixed-style and custom-style dialog boxes, updating and closing
+ * dialog boxes. It applies to scenarios where pop-up interactions such as prompts, confirmations, and selections
+ * are required within an application.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1591,10 +1594,20 @@ export class PromptAction {
  */
 export class DialogPresenter {
   /**
-   * Presents a fixed-style dialog box.
+   * Presents a fixed-style dialog box and returns the dialog result. This API uses a promise to return the result.
+   * It is applicable to scenarios where the system's unified style is used to display prompts or confirmation
+   * information.
+   *
+   * > **NOTE**
+   * >
+   * > Configuration options are used to configure the title, subtitle, message, buttons, and sheet items of the
+   * > dialog box. The dialog box style (background, alignment, mask, avoidance, etc.) inherits from
+   * > **dialog.DialogBaseOptions**. In **dialog.DialogBaseOptions**, **isModal** and **showInSubWindow** cannot be set
+   * > to **true** at the same time.
    *
    * @param { dialog.DialogStyleOptions } [options] - Dialog options.
    * @returns { Promise<DialogResult> } Promise used to return the dialog result.
+   *     The dialog ID is returned via **dialogId** in **DialogResult**.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
    * @throws { BusinessError } 103308 - The dialog cannot be opened due to subwindow create failure.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1608,15 +1621,20 @@ export class DialogPresenter {
   /**
    * Presents a custom-style dialog box with the provided content.
    *
-   * The content parameter accepts CustomBuilder or ComponentContent via union type:
+   * It returns the dialog result via a promise. It is applicable to scenarios where the content, layout, and style
+   * of the dialog box need to be customized.
+   *
+   * The content parameter accepts three types via union type:
    * - CustomBuilder: Builder function for custom dialog content.
-   * - ComponentContent: ComponentContent supporting state-driven updates.
+   * - CustomBuilderWithId: Builder function that supports passing an ID.
+   * - ComponentContent: Component content supporting state-driven updates.
    *
    * isModal = true and showInSubWindow = true cannot be used at the same time.
    *
    * @param { CustomBuilder | CustomBuilderWithId | ComponentContent<Object> } content - Custom dialog content.
    * @param { dialog.DialogCustomOptions } [options] - Custom dialog options.
    * @returns { Promise<DialogResult> } Promise used to return the dialog result.
+   *     The dialog ID is returned via **dialogId** in **DialogResult**.
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103302 - Dialog content already exist. The ComponentContent has already been opened.
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
@@ -1630,7 +1648,12 @@ export class DialogPresenter {
   present(content: CustomBuilder | CustomBuilderWithId | ComponentContent<Object>, options?: dialog.DialogCustomOptions): Promise<DialogResult>;
 
   /**
-   * Updates a presented custom dialog box.
+   * Updates a displayed custom dialog box. This API uses a promise to return the result. It applies to interaction
+   * scenarios where the style or position of a dialog box needs to be dynamically updated after it is displayed.
+   *
+   * > **NOTE**
+   * >
+   * > Currently, only **alignment**, **offset**, **autoCancel**, and **maskColor** can be updated.
    *
    * @param { ComponentContent<Object> } content - The content used to identify the dialog.
    * @param { dialog.DialogBaseOptions } [options] - Options to update.
@@ -1648,6 +1671,8 @@ export class DialogPresenter {
   /**
    * Dismisses a dialog box.
    * Accepts either the dialog ID (returned by present) or the ComponentContent reference.
+   * This API uses a promise to return the result. It is applicable to scenarios where the dialog box needs to be
+   * closed after a user completes the interaction.
    *
    * @param { int | ComponentContent<Object> } target - The dialog ID or ComponentContent to dismiss.
    * @returns { Promise<void> } Promise that returns no value.
@@ -1736,6 +1761,137 @@ export declare type NodeIdentity = string | number;
  * @since 20 dynamic
  */
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
+
+/**
+ * Defines the types of input events that can be reported through the node sensitive input listener.
+ * The event object is carried by the member field of [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}
+ * that matches this type; for example, when the value is **TOUCH**, the event object is carried by **touchEvent**.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * The reported event is a touch event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCH = 0,
+
+  /**
+   * The reported event is a mouse event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOUSE = 1,
+
+  /**
+   * The reported event is a key event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  KEY = 2
+}
+
+/**
+ * Defines the information reported when an input event is delivered to the node specified by **nodeIdentity**.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * Whether the event is an Agent-generated event. The value **true** indicates that the event is generated by a
+   * System Agent or injected by an application with the ohos.permission.CONTROL_COMPONENT permission. The value
+   * **false** indicates a user-generated input event or another injected event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isAgent: boolean;
+
+  /**
+   * Type of the reported input event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * Touch event, which is valid only when **type** is
+   * [NodeSensitiveInputEventType.TOUCH]{@link NodeSensitiveInputEventType#TOUCH}.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * Mouse event, which is valid only when **type** is
+   * [NodeSensitiveInputEventType.MOUSE]{@link NodeSensitiveInputEventType#MOUSE}.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * Key event, which is valid only when **type** is
+   * [NodeSensitiveInputEventType.KEY]{@link NodeSensitiveInputEventType#KEY}.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * Defines the callback type for listening for input events of a specific node.
+ *
+ * @param { NodeSensitiveInputInfo } info - Information about the input event delivered to the node.
+ * @param { FrameNode } [node] - Component that receives the input event; returns **null** if the component has been
+ *     released.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
 
 /**
  * Defines the callback type for listening for specific gesture trigger information in **UIObserver**.
@@ -2786,6 +2942,51 @@ export class UIObserver {
    * @since 20 dynamic
    */
   off(type: 'nodeRenderState', nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * Registers a callback for input events of the node specified by **nodeIdentity**. After the registration, the
+   * callback is invoked before an input event (touch, mouse, or key event) is delivered to the node, regardless
+   * of whether the event is generated by a user or an Agent. You can check **isAgent** in
+   * [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo} to determine whether the event is generated by a System
+   * Agent or injected by an application with the ohos.permission.CONTROL_COMPONENT permission.
+   *
+   * The callback is invoked even if the event is not eventually delivered to the node. For example, an
+   * Agent-generated event blocked by [agentControlMode]{@link CommonMethod#agentControlMode} is still reported, so that a manipulation attempt on the
+   * sensitive control can be perceived.
+   *
+   * Only events whose hit test target is the node itself are reported; events whose hit test target is a
+   * child node are not reported.
+   *
+   * Multiple callbacks can be registered for the same **nodeIdentity**, and all of them are invoked before an
+   * input event is delivered. If the node does not exist, the registration does not take effect and no event is
+   * reported.
+   *
+   * @param { NodeIdentity } nodeIdentity - Node ID. For the string type, it is the inspector ID set through the
+   *     [id]{@link CommonMethod#id} attribute; for the number type, it is the unique ID obtained from the FrameNode
+   *     through [getUniqueId]{@link FrameNode#getUniqueId}.
+   * @param { NodeSensitiveInputCallback } callback - Callback used to return the result. It provides the input
+   *     event information through **NodeSensitiveInputInfo** and the component through [FrameNode]{@link FrameNode}.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * Unregisters the callback for listening for input events of the node specified by **nodeIdentity**.
+   *
+   * @param { NodeIdentity } nodeIdentity - Node ID.
+   * @param { NodeSensitiveInputCallback } [callback] - Target listener to unregister. If no parameter is provided,
+   *     all node sensitive input listeners of the specified node are unregistered.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * Registers a callback function to be called when text field's content is changed.
@@ -3938,8 +4139,8 @@ export class MeasureUtils {
    *
    * > **NOTE**
    * >
-   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link
-   * > ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
+   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link 
+   * ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
    * > ensure the correctness of the time sequence, you are advised to monitor the font scaling changes by yourself to
    * > ensure the accuracy of the calculation result.
    *
@@ -5206,6 +5407,29 @@ export class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * Provides information about the UI instance that triggers an application-level keyboard shortcut.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * UIContext of the UI instance that triggers the application-level keyboard shortcut.
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  uiContext: UIContext;
+}
+
+/**
  * Implements a **UIContext** instance.
  *
  * > **NOTE**
@@ -5277,6 +5501,47 @@ export class UIContext {
    * @since 22 dynamic
    */
   constructor();
+
+  /**
+   * Registers an application-level keyboard shortcut.
+   *
+   * The shortcut takes effect globally in the application. When the shortcut is triggered, the callback receives the
+   * **UIContext** of the UI instance where the shortcut is triggered.
+   * Each registration returns a positive integer registration ID unique within the application, even when the
+   * shortcut and callback are identical. Multiple registrations of the same shortcut are retained, and only the
+   * latest registration that has not been unregistered takes effect. Registration IDs are not reused during the
+   * application lifetime.
+   *
+   * @param { string | FunctionKey } value - A single character of the hotkey (a character that can be entered using a
+   *     keyboard) or a function key.
+   * @param { Array<ModifierKey> } keys - Modifier keys of the shortcut.
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - Callback that provides information about the UI instance
+   *     that triggers the hotkey (ApplicationShortcutCallbackInfo).
+   * @returns { int } Unique registration ID of this shortcut binding.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * Unregisters the application-level keyboard shortcut binding identified by the registration ID.
+   *
+   * Only the specified binding is removed. Other bindings are unaffected. If the active binding is removed,
+   * the most recent remaining registration of the same shortcut takes effect. If the ID does not exist or has
+   * already been unregistered, this method does nothing.
+   *
+   * @param { int } registrationId - Registration ID returned when registering the shortcut.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * Obtains the UIContext of this [calling scope](docroot://ui/arkts-global-interface.md#basic-concepts). This API
@@ -6305,7 +6570,8 @@ export class UIContext {
    *     if this API is called in a page within a UIAbility window, the returned context type is
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}. If this API is called in a page within an
    *     ExtensionAbility window, the returned context type is
-   *     {@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
+   *     [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}. 
+   *     If the ability context does not exist,
    *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

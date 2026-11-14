@@ -375,9 +375,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be cancelled.
+   *     [since 26.2.0]
+   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.2.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.1.0]
+   * @publicapi [since 26.2.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -1141,7 +1145,8 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   function getBleMacByBrMac(brMac: string): string;
 

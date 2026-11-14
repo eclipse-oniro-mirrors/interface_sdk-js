@@ -84,7 +84,7 @@ export declare interface PathOptions {
 export declare interface PathAttribute extends CommonShapeMethod {
     /**
      * 设置符合
-     * [SVG路径描述规范]{@link ./path#svg路径描述规范}
+     * [SVG路径描述规范]{@link @global:Path}
      * 的命令字符串，单位为px。
      * 像素单位转换方法请参考
      * [像素单位转换]{@link Length}。
@@ -99,20 +99,23 @@ export declare interface PathAttribute extends CommonShapeMethod {
      */
     default commands(value: ResourceStr | undefined): this;
     /**
- 	 * Set Path options.
- 	 *
- 	 * @param { PathOptions } [options] - Path constructor options
- 	 * @returns { PathAttribute } Returns the instance of the PathAttribute.
+     * 设置Path选项。
+     *
+     * @param { PathOptions } options - Path组件绘制属性的配置对象。
+     *    <br>省略时不设置绘制属性，组件按默认尺寸显示。默认尺寸根据路径内容自动计算宽度和高度。
+     *    <br>异常值undefined和null按照无效值处理，本次设置不生效。 [since 18]
+     * @returns { PathAttribute } 返回PathAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setPathOptions(options?: PathOptions): this;
     /**
-     * Call attributeModifier.
+     * 设置组件的动态属性。
      *
-     * @param { AttributeModifier<PathAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+     * @param { AttributeModifier<PathAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 动态设置Path组件的属性。<br>
+     *    取值为undefined时，按当前组件的属性方法默认值处理。
      * @returns { PathAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

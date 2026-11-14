@@ -23,7 +23,8 @@ import type { AsyncCallback } from './@ohos.base';
 /**
  * 应用可以使用faultLogger接口查询系统侧缓存的当前应用的故障日志。接口以应用包名和系统分配的UID作为唯一键值。
  *
- * 系统侧保存的应用故障日志数量受系统日志的压力限制，
+ * 系统侧保存的故障信息与应用故障日志受系统压力限制，会被老化删除。故障信息被老化后会查询不到结果。
+ * 故障信息存在但故障日志文件被老化后查询的故障信息数据结构中fullLog会打印错误信息`Fail to get log, fd is -1`。
  * 推荐使用[@ohos.hiviewdfx.hiAppEvent]{@link @ohos.hiviewdfx.hiAppEvent:hiAppEvent}
  * 订阅APP_CRASH及APP_FREEZE等故障事件。详见：
  * - [从Faultlogger接口迁移崩溃事件](docroot://dfx/hiappevent-watcher-crash-events-arkts.md#从faultlogger接口迁移崩溃事件)
@@ -112,7 +113,7 @@ declare namespace FaultLogger {
    *    <br>value拿到故障信息数组；value为undefined表示获取过程中出现异常，error返回错误提示字符串。
    * @throws { BusinessError } 801 - Capability not supported.
    *     Possible causes: The specified SystemCapability name was not found.
-   * @throws { BusinessError } 10600001 - The service is not started or is faulty
+   * @throws { BusinessError } 10600001 - The service is not started or is faulty.
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly
    * @deprecated since 18
@@ -128,7 +129,7 @@ declare namespace FaultLogger {
    *    <br>value拿到故障信息数组；value为undefined表示获取过程中出现异常。
    * @throws { BusinessError } 801 - Capability not supported.
    *     Possible causes: The specified SystemCapability name was not found.
-   * @throws { BusinessError } 10600001 - The service is not started or is faulty
+   * @throws { BusinessError } 10600001 - The service is not started or is faulty.
    * @syscap SystemCapability.HiviewDFX.Hiview.FaultLogger
    * @since 9 dynamiconly
    * @deprecated since 18

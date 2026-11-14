@@ -2716,6 +2716,7 @@ declare namespace media {
      * 表示音画不同步的指标事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LIP_ASYNC = 2,
@@ -2724,6 +2725,7 @@ declare namespace media {
      * 表示加载速率变化超过10%的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADINGRATE_CHANGE = 3,
@@ -2732,6 +2734,7 @@ declare namespace media {
      * 表示加载数据请求错误的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADING_ERROR = 4,
@@ -2740,6 +2743,7 @@ declare namespace media {
      * 表示播放内容切换的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_CHANGED = 5,
@@ -2748,6 +2752,7 @@ declare namespace media {
      * 表示播放内容不连续的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_DISCONTINUITY = 6,
@@ -2756,6 +2761,7 @@ declare namespace media {
      * 表示音频状态变化的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_AUDIO_ABNORMAL = 7
@@ -3135,13 +3141,11 @@ declare namespace media {
      *
      * @param { MediaType } trackType - 指定的媒体类型，见[MediaType]{@link #MediaType}.
      * @returns { Promise<int> } Promise对象，返回已选择轨道索引。
-     * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 5400101 - No memory. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - I/O error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -3841,7 +3845,6 @@ declare namespace media {
      * 默认值: PRIVACY_TYPE_PUBLIC.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @crossplatform
      * @since 26.0.0 dynamic&static
@@ -4789,8 +4792,8 @@ declare namespace media {
      * 连接或断开连接时通过参考“响应音频输出设备更改”来实现播放器行为。
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } callback - 用于监听设备更改事件的回调。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
@@ -5040,8 +5043,8 @@ declare namespace media {
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } [callback] - 回调用于返回
      *     当前音频流的输出设备描述符和更改原因。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
@@ -5885,6 +5888,52 @@ declare namespace media {
   }
 
   /**
+   * 拼接模式的透明视频布局枚举定义;
+   * 用于指明透明视频的alpha数据在图像中的位置，便于播放器正确合成透明效果的视频；
+   *
+   * @syscap SystemCapability.Multimedia.Media.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+   enum SideBySideTransparentVideoLayoutMode {  
+    /**
+     * 指示透明视频为左右布局，左边数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL = 0,
+ 
+    /**
+     * 指示透明视频为上下布局，上半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL = 1,
+ 
+    /**
+     * 指示透明视频布局为左右布局，右半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_HORIZONTAL_REVERSE = 2,
+ 
+    /**
+     * 指示透明视频布局为上下布局，下半部分数据为alpha数据
+     *
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SIDE_BY_SIDE_LAYOUT_VERTICAL_REVERSE = 3
+  }
+
+  /**
    * 媒体数据信息。来源于
    * [createMediaSourceWithUrl]{@link @ohos.multimedia.media:media.createMediaSourceWithUrl(url: string, headers?: Record<string, string>)}
    * 。
@@ -5921,6 +5970,18 @@ declare namespace media {
      * @since 23 static
      */
     setMediaResourceLoaderDelegate(resourceLoader: MediaSourceLoader): void;
+    
+    /**
+     * 设置拼接模式的视频源的布局信息，用于指导播放器合成出来正确的透明视频
+     *
+     * 若不配置，按普通视频进行播放;
+     *
+     * @param { SideBySideTransparentVideoLayoutMode } mode - 拼接视频的布局模式值。
+     * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setTransparentVideoLayoutMode(mode : SideBySideTransparentVideoLayoutMode):void;
 
     /**
     * 是否在视频播放期间启用离线缓存。
@@ -6701,9 +6762,10 @@ declare namespace media {
      * @permission ohos.permission.MICROPHONE
      * @param { AVRecorderConfig } config - 配置音视频录制的相关参数。音频录制时需设置audioSourceType，视频录制时需设置videoSourceType。
      * @param { AsyncCallback<void> } callback - 回调函数。当prepare接口成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 201 - Permission denied. Return by callback.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. Return by callback.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6721,9 +6783,10 @@ declare namespace media {
      * @permission ohos.permission.MICROPHONE
      * @param { AVRecorderConfig } config - 配置音视频录制的相关参数。音频录制时需设置audioSourceType，视频录制时需设置videoSourceType。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 201 - Permission denied. Return by promise.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -6793,7 +6856,7 @@ declare namespace media {
 
     /**
      * 获得录制需要的surface。适用于纯视频或音视频录制时需要获取surface传递视频数据的场景。
-     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理](../apis-camera-kit/arkts-apis-camera.md)。使用callback异步回调。<br>
+     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理]{@link @ohos.multimedia.camera:camera}。使用callback异步回调。<br>
      * 开发者从此surface中获取surfaceBuffer，填入待录制的视频数据。<br>
      * 填入视频数据时需携带时间戳（单位ns）和buffer size。时间戳的起始时间以系统启动时间为基准。<br>
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}和
@@ -6810,7 +6873,7 @@ declare namespace media {
 
     /**
      * 获得录制需要的surface。适用于纯视频或音视频录制时需要获取surface传递视频数据的场景。
-     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理](../apis-camera-kit/arkts-apis-camera.md)。使用callback异步回调。<br>
+     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理]{@link @ohos.multimedia.camera:camera}。使用callback异步回调。<br>
      * 开发者从此surface中获取surfaceBuffer，填入待录制的视频数据。<br>
      * 填入视频数据时需携带时间戳（单位ns）和buffer size。时间戳的起始时间以系统启动时间为基准。<br>
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}和
@@ -6828,7 +6891,7 @@ declare namespace media {
 
     /**
      * 获得录制需要的surface。适用于纯视频或音视频录制时需要获取surface传递视频数据的场景。
-     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理](../apis-camera-kit/arkts-apis-camera.md)。使用callback异步回调。<br>
+     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理]{@link @ohos.multimedia.camera:camera}。使用callback异步回调。<br>
      * 开发者从此surface中获取surfaceBuffer，填入待录制的视频数据。<br>
      * 填入视频数据时需携带时间戳（单位ns）和buffer size。时间戳的起始时间以系统启动时间为基准。<br>
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和
@@ -6845,7 +6908,7 @@ declare namespace media {
 
     /**
      * 获得录制需要的surface。适用于纯视频或音视频录制时需要获取surface传递视频数据的场景。
-     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理](../apis-camera-kit/arkts-apis-camera.md)。使用callback异步回调。<br>
+     * 相机视频录制功能需配合相机模块使用，详情请参考[相机管理]{@link @ohos.multimedia.camera:camera}。使用callback异步回调。<br>
      * 开发者从此surface中获取surfaceBuffer，填入待录制的视频数据。<br>
      * 填入视频数据时需携带时间戳（单位ns）和buffer size。时间戳的起始时间以系统启动时间为基准。<br>
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和
@@ -6867,7 +6930,7 @@ declare namespace media {
      * @returns { Promise<string> } Promise对象，返回输入surface id字符串。
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -6884,7 +6947,7 @@ declare namespace media {
      * @returns { Promise<string | undefined> } Promise对象，返回输入surface id字符串。
      * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -6916,7 +6979,10 @@ declare namespace media {
      * <br/>- 原图像为8K时->水印图像限制范围3072x288，原图像为4K时->水印图像限制范围1536x144。
      * @param { WatermarkConfig } config - 水印的相关配置参数。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 401 - The parameter check failed.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types.
+     *     3. Parameter verification failed.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @systemapi
@@ -6948,11 +7014,11 @@ declare namespace media {
      * 设置录制的元数据信息。适用于需要在录制文件中嵌入自定义元数据（如作者、标题、标签等）的场景。
      * 如果metadata参数与config.metadata.customInfo（参考[prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和
      * [AVRecorderConfig]{@link media.AVRecorderConfig}）中存在相同的键，前者的对应值将覆盖后者。<br>
-     * 必须在[prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和[stop()]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}之间调用。
+     * 必须在[prepare()]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和[stop()]{@link media.AVRecorder#stop()}之间调用。
      *
      * @param { Record<string, string> } metadata - 录制的元数据信息。格式为字符串键值对，其中，键需要以`com.openharmony.`开头，否则该键值对将被忽略；
      *     值的长度范围为0-256个字节，否则返回错误码5400108。
-     * @throws { BusinessError } 202 - Not System App. [since 19 - 24]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API. [since 19 - 24]
      * @throws { BusinessError } 5400101 - No memory. [since 26.0.0]
      * @throws { BusinessError } 5400102 - Operation not allowed. [since 26.0.0]
      * @throws { BusinessError } 5400108 - Parameter check failed. [since 26.0.0]
@@ -6966,12 +7032,12 @@ declare namespace media {
 
     /**
      * 更新视频旋转角度。适用于设备方向发生变化（如横竖屏切换）时需要动态调整录制视频旋转角度的场景。使用Promise异步回调。<br>
-     * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和[start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}之间调用。
+     * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和[start]{@link media.AVRecorder#start()}之间调用。
      *
      * @param { int } rotation - 旋转角度，单位为度（°）。取值仅支持0°、90°、180°和270°。传入不支持的角度值时，返回错误码401。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
@@ -7101,7 +7167,8 @@ declare namespace media {
      * 停止录制。使用callback异步回调。<br>
      * 必须在[start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}或
      * [pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}之后调用，调用成功后进入stopped状态。
-     * 当prepare配置中将FileGenerationMode设置为系统创建媒体文件模式时，本接口调用结束后会触发on('photoAssetAvailable')回调。
+     * 当prepare配置中将FileGenerationMode设置为系统创建媒体文件模式时，本接口调用结束后会触发
+     * [on('photoAssetAvailable')]{@link media.AVRecorder#on(type: 'photoAssetAvailable', callback: Callback<photoAccessHelper.PhotoAsset>)}回调。
      * 纯音频录制时，需要重新调用[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}
      * 接口才能重新录制；纯视频录制、音视频录制时，需要重新调用
      * [prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}和
@@ -7121,7 +7188,8 @@ declare namespace media {
     /**
      * 停止录制。使用Promise异步回调。<br>
      * 必须在[start]{@link media.AVRecorder#start()}或[pause]{@link media.AVRecorder#pause()}之后调用，调用成功后进入stopped状态。
-     * 当prepare配置中将FileGenerationMode设置为系统创建媒体文件模式时，本接口调用结束后会触发on('photoAssetAvailable')回调。
+     * 当prepare配置中将FileGenerationMode设置为系统创建媒体文件模式时，本接口调用结束后会触发
+     * [on('photoAssetAvailable')]{@link media.AVRecorder#on(type: 'photoAssetAvailable', callback: Callback<photoAccessHelper.PhotoAsset>)}回调。
      * 纯音频录制时，需要重新调用[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}接口才能重新录制；
      * 纯视频录制、音视频录制时，需要重新调用[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}和
      * [getInputSurface]{@link media.AVRecorder#getInputSurface()}接口才能重新录制。
@@ -7337,7 +7405,7 @@ declare namespace media {
      * @param { 'audioCapturerChange' } type - 录音配置变化的回调类型，支持的事件：'audioCapturerChange'。
      * @param { Callback<audio.AudioCapturerChangeInfo> } callback - 回调函数，用于接收变化后的录音配置全量信息。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 11 dynamic
      */
@@ -7384,14 +7452,16 @@ declare namespace media {
      *
      * @param { 'error' } type - 录制错误的回调类型，支持的事件：'error'。
      * @param { ErrorCallback } callback - 回调函数，用于接收录制错误事件。回调参数为err（错误对象，类型为BusinessError，包含错误码code和错误信息message）。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     <br>2. Incorrect parameter types. 3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
-     * @throws { BusinessError } 5400104 - Time out.
+     * @throws { BusinessError } 5400104 - Operation time out.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
      * @throws { BusinessError } 5400107 - Audio interrupted. [since 11]
@@ -7456,7 +7526,7 @@ declare namespace media {
      *
      * @param { Callback<audio.AudioCapturerChangeInfo> } callback - 回调函数，用于接收变化后的录音配置全量信息。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @since 23 static
      */
@@ -7499,10 +7569,12 @@ declare namespace media {
      * 用户只能订阅一个错误事件的回调方法，当用户重复订阅时，以最后一次订阅的回调接口为准。
      *
      * @param { ErrorCallback } callback - 回调函数，返回录制错误事件。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     2. Incorrect parameter types. 3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+     *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
@@ -11014,6 +11086,16 @@ declare namespace media {
      * @since 26.1.0 dynamic&static
      */
     contentAutoPauseScenes?: Array<AVScreenCaptureAutoPauseCaptureScene>;
+
+    /**
+     * 录屏指定是否以HDR格式输出图像。<br>
+     * true表示图像为HDR格式，false表示图像为SDR格式。<br>默认为false。
+     *
+     * @syscap SystemCapability.Multimedia.Media.AVScreenCapture
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    enableHDR?: boolean;
   }
 
 
@@ -11328,10 +11410,13 @@ declare namespace media {
     resumeRecording(): Promise<void>;
 
     /**
-     * 录屏时，应用仅能对本应用的隐私窗口做安全豁免。使用Promise异步回调。
+     * 录屏豁免指定隐私窗口列表。使用Promise异步回调。
      * 
-     * 如录屏时，用户在本应用进行输入密码等操作，应用不会进行黑屏处理。
-     *
+     * > **说明：**
+     * >
+     * > 录屏时，应用仅能对本应用的隐私窗口做安全豁免。例如，用户在本应用内输入密码等操作时，默认该隐私窗口会被黑屏遮挡；豁免后该窗口在录制画面中正常显示。
+     * 
+     * 
      * @param { Array<int> } windowIDs - 需要豁免隐私的窗口列表，包括主窗口id和子窗口id，窗口属性获取方法可以参考
      *     [getWindowProperties]{@link @ohos.window:window.Window.getWindowProperties}。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -11853,7 +11938,6 @@ declare namespace media {
      * @param { 'error' } type - 转码错误事件回调类型'error'。 <br>'error'：转码过程中发生错误，触发该事件。
      * @param { ErrorCallback } callback - 转码错误事件回调方法。
      * @throws { BusinessError } 401 - The parameter check failed.
-     * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
@@ -11930,7 +12014,6 @@ declare namespace media {
      *
      * @param { ErrorCallback } callback - 转码错误事件回调方法。
      * @throws { BusinessError } 401 - The parameter check failed.
-     * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.

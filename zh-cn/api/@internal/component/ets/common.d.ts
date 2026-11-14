@@ -7081,7 +7081,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Repeat = 0,
+  Repeat,
 
   /**
    * 被切割的图片会以拉伸填充的方式铺满图片边框。
@@ -7107,7 +7107,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Stretch = 1,
+  Stretch,
 
   /**
    * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会压缩图片。
@@ -7133,7 +7133,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Round = 2,
+  Round,
 
   /**
    * 被切割的图片会以整数次平铺在图片边框上，无法以整数次平铺时会以空白填充。
@@ -7159,7 +7159,7 @@ declare enum RepeatMode {
    * @atomicservice
    * @since 11 dynamic
    */
-  Space = 3
+  Space
 }
 
 /**
@@ -8088,24 +8088,6 @@ declare enum ShadowType {
 declare interface ShadowOptions {
   /**
    * 阴影模糊半径。
-   * 
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   * 
-   * 单位：px
-   * 
-   * **说明：**  
-   * 
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理，此时不绘制阴影；从API版本26.0.0开始，设置的值即为最终取值，值为0时仍绘制阴影，设置负数值时不绘制阴影。
-   * 
-   * 如需使用vp单位的数值可用[vp2px]{@link @ohos.arkui.UIContext:UIContext.vp2px}进行转换。
-   * 
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影模糊半径。
    *
    * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
    *
@@ -8113,59 +8095,17 @@ declare interface ShadowOptions {
    *
    * **说明：**
    *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
+   * API版本26.0.0之前，设置小于0的值时，按值为0处理，此时不绘制阴影。从API版本26.0.0开始，设置的值即为最终取值，值为0时仍绘制阴影，设置负数值时不绘制阴影。
    *
    * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
    *
    * 如果radius为Resource类型，则传入的值需为number类型。
    *
-   * @type { number | Resource }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影模糊半径。
-   *
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @type { number | Resource }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影模糊半径。
-   *
-   * 取值范围：[0, +∞)，API版本26.0.0开始取值范围变更为(-∞, +∞)
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * API版本26.0.0之前，设置小于0的值时，按值为0处理。从API版本26.0.0开始，设置的值即为最终取值，当设置负数值时阴影消失。
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果radius为Resource类型，则传入的值需为number类型。
-   *
-   * @type { number | Resource }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   radius: number | Resource;
 
@@ -8208,22 +8148,6 @@ declare interface ShadowOptions {
 
   /**
    * 阴影的X轴偏移量。
-   * 
-   * 默认值：0
-   * 
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影的X轴偏移量。
    *
    * 默认值：0
    *
@@ -8235,70 +8159,16 @@ declare interface ShadowOptions {
    *
    * 如果offsetX为Resource类型，则传入的值需为number类型。
    *
-   * @type { ?(number | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影的X轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影的X轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetX为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   offsetX?: number | Resource;
 
   /**
    * 阴影的Y轴偏移量。
-   * 
-   * 默认值：0
-   * 
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * 阴影的Y轴偏移量。
    *
    * 默认值：0
    *
@@ -8310,49 +8180,11 @@ declare interface ShadowOptions {
    *
    * 如果offsetY为Resource类型，则传入的值需为number类型。
    *
-   * @type { ?(number | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * 阴影的Y轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * 阴影的Y轴偏移量。
-   *
-   * 默认值：0
-   *
-   * 单位：px
-   *
-   * **说明：**
-   *
-   * 如需使用vp单位的数值可用[vp2px]{@link UIContext#vp2px}进行转换。
-   *
-   * 如果offsetY为Resource类型，则传入的值需为number类型。
-   *
-   * @type { ?(number | Resource) }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   offsetY?: number | Resource;
 
@@ -9193,7 +9025,7 @@ declare interface BaseEvent {
 }
 
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9202,7 +9034,7 @@ declare interface BaseEvent {
  * @since 9
  */
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -9212,7 +9044,7 @@ declare interface BaseEvent {
  * @since 10
  */
 /**
- * Border image option
+ * 图片边框或者渐变色边框设置接口。
  *
  * @interface BorderImageOption
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11501,20 +11333,20 @@ declare type GestureCollectInterceptCallback = (recognizers: Array<GestureRecogn
    touchRecognizers?: Array<TouchRecognizer>) => GestureCollectIntervention;
 
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  */
 /**
- * Defines the PixelMap type object for ui component.
+ * 图像像素类，用于读取或写入图像数据以及获取图像信息。
  *
  * @typedef { import('../api/@ohos.multimedia.image').default.PixelMap } PixelMap
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11535,7 +11367,7 @@ declare type PixelMap = import('../api/@ohos.multimedia.image').default.PixelMap
 declare interface PixelMapMock {
 
   /**
-   * release function.
+   * 释放函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -14292,6 +14124,22 @@ declare interface SheetOptions extends BindOptions {
   blurSnapshot?: BlurSnapshotOptions;
 
   /**
+   * 标题栏背景模糊效果，支持自定义模糊参数。仅当标题栏存在时生效。
+   *
+   * 默认值：undefined，表示不设置标题栏背景模糊效果
+   *
+   * **说明：**
+   *
+   * 全屏模态样式（CONTENT_COVER）下不支持标题栏背景模糊，该属性设置无效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  titleBarBackgroundBlur?: SheetTitleBarBackgroundBlurOptions;
+
+  /**
    * 标题栏悬浮模式。
    * 
    * - STANDARD：标题栏与内容上下排布，无重叠。
@@ -14309,6 +14157,149 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.1 dynamic
    */
   titleBarHoverMode?: SheetTitleBarHoverMode;
+
+  /**
+   * 半模态内容区Scroll滚动条的显示状态。
+   *
+   * 默认值：BarState.Off
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamiconly
+   */
+  scrollBarState?: BarState;
+
+  /**
+   * 关闭按钮的系统材质效果。
+   *
+   * 默认值：undefined，表示不设置系统材质
+   *
+   * 从API版本26.0.1开始，当该属性未设置时，使用半模态的systemMaterial接口设置材质会赋予关闭按钮一种系统内置的材质效果。
+   *
+   * 通过该接口设置的材质效果会覆盖由半模态的systemMaterial接口带来的关闭按钮的内置材质效果。
+   *
+   * **说明：**
+   *
+   * 全屏模态样式（CONTENT_COVER）下不支持关闭按钮系统材质，该属性设置无效。
+   *
+   * **系统接口：** 此接口为系统接口。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  closeButtonMaterial?: SystemUiMaterial;
+
+  /**
+   * 半模态如何适配握持习惯。
+   *
+   * 默认值：HandednessFollowMode.NONE，不适配握持习惯
+   *
+   * **说明：**
+   *
+   * 该属性仅在preferType设置为SheetType.CENTER（居中弹窗）时生效，其他弹窗样式下该属性不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
+}
+
+/**
+ * 标题栏背景模糊样式枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamiconly
+ */
+declare enum SheetTitleBarBackgroundBlur {
+  /**
+   * 无模糊效果。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  NONE = 0,
+
+  /**
+   * 渐变模糊，从标题栏顶部向下渐变至透明。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  GRADIENT = 1
+}
+
+/**
+ * 标题栏背景模糊效果层的自定义参数，所有子属性均为可选，未设置的属性使用系统默认值。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.0.1 dynamiconly
+ */
+declare interface SheetTitleBarBackgroundBlurOptions {
+  /**
+   * 模糊效果层的模糊样式，设置为GRADIENT启用渐变模糊效果。
+   *
+   * 默认值：SheetTitleBarBackgroundBlur.NONE
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.1 dynamiconly
+   */
+  blurStyle?: SheetTitleBarBackgroundBlur;
+
+  /**
+   * 模糊效果层的额外高度，以标题栏高度为基础的额外效果高度。
+   *
+   * 默认值：32vp
+   *
+   * 当取值为0vp时，模糊效果层下边沿与标题栏等高。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  maskExtraHeight?: LengthMetrics;
+
+  /**
+   * 模糊效果层的渐变基色，作为渐变顶部的最大颜色值，系统应用内置透明度曲线从顶部到底部逐渐将其淡化。
+   *
+   * 未设置时：浅色模式使用半透明白色效果，深色模式使用半透明黑色效果。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  maskColor?: ResourceColor;
+
+  /**
+   * 模糊效果从完全隐藏到完全可见所需的滑动距离。
+   *
+   * 取值范围：大于等于0，小于0的值按0处理
+   *
+   * 默认值：8vp
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  effectiveDistance?: LengthMetrics;
 }
 
 /**
@@ -15209,6 +15200,7 @@ declare interface PopupCommonOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -16113,6 +16105,7 @@ declare interface PopupOptions {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
    * @since 26.0.0 dynamic
    */
@@ -20042,9 +20035,9 @@ declare class CommonMethod<T> {
    *
    * >  **说明：**
    * >
-   * > - 在[TextInput](./ts-basic-components-textinput.md)组件中，width设置auto表示自适应文本宽度。
+   * > - 在[TextInput]{@link @global:TextInput}组件中，width设置auto表示自适应文本宽度。
    * >
-   * > - 在[AlphabetIndexer](./ts-container-alphabet-indexer.md)组件中，width设置auto表示自适应宽度最大索引项的宽度。
+   * > - 在[AlphabetIndexer]{@link @global:AlphabetIndexer}组件中，width设置auto表示自适应宽度最大索引项的宽度。
    * >
    * > - 在[Row]{@link @global:Row}、[Column]{@link @global:Column}、[RelativeContainer]{@link @global:RelativeContainer}组件中，width设置auto表示自适应子组件。
    * >
@@ -20350,6 +20343,23 @@ declare class CommonMethod<T> {
    * @since 9 dynamic
    */
   hitTestBehavior(value: HitTestMode): T;
+
+  /**
+   * 设置组件对Agent生成事件的输入管控级别。
+   *
+   * Agent生成的事件包括系统Agent生成的事件，以及具有ohos.permission.CONTROL_COMPONENT权限的应用
+   * 注入的事件。该设置适用于支持的Agent生成输入事件，例如触摸和鼠标事件，不影响用户生成的
+   * 输入事件或其他注入事件。
+   *
+   * @param { AgentControlMode | undefined } value - 系统Agent生成事件的输入管控级别。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  agentControlMode(value: AgentControlMode | undefined): T;
 
   /**
    * 当前组件通过设置回调，可自定义触摸测试并控制触摸测试中的子节点行为。
@@ -24508,98 +24518,59 @@ declare class CommonMethod<T> {
   /**
    * Menu control
    *
-   * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
-   * action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 11]
-   * @param { MenuOptions } options
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Menu control
+   * > **NOTE**
+   * >
+   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
+   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
+   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
+   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
-   * action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 11]
-   * @param { MenuOptions } options - Indicates the options of menu.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Menu control
-   *
+   *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
+   * @param { MenuOptions } [options] - Indicates the options of menu.
    * @param { Array<MenuElement> | CustomBuilder } content - Indicates the content of menu. [since 11]
-   * @param { MenuOptions } options - Indicates the options of menu.
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform [since 10]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions): T;
 
   /**
    * Menu control
    *
-   * @param { boolean } isShow true means display menu, false means hide menu.
+   * @param { boolean } isShow true means display menu, false means hide menu, default is false.
    * @param { Array<MenuElement> | CustomBuilder } content - Indicates the content of menu.
-   * @param { MenuOptions } options - Indicates the options of menu.
+   * @param { MenuOptions } [options] - Indicates the options of menu.
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * Menu control
-   *
-   * @param { boolean } isShow true means display menu, false means hide menu.
-   * @param { Array<MenuElement> | CustomBuilder } content - Indicates the content of menu.
-   * @param { MenuOptions } options - Indicates the options of menu.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   bindMenu(isShow: boolean, content: Array<MenuElement> | CustomBuilder, options?: MenuOptions): T;
 
   /**
-   * ContextMenu control
-   *
-   * @param { CustomBuilder } content
-   * @param { ResponseType } responseType
-   * @param { ContextMenuOptions } options
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 8
-   */
-  /**
-   * ContextMenu control
-   *
-   * @param { CustomBuilder } content - Indicates the content of context menu.
-   * @param { ResponseType } responseType - Indicates response type of context menu.
-   * @param { ContextMenuOptions } options - Indicates the options of context menu.
-   * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @since 10
-   */
-  /**
    * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
    * component. Only custom menu items are supported.
+   *
+   * > **NOTE**
+   * >
+   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
+   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
+   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
    *
    * @param { CustomBuilder } content - Indicates the content of context menu.
    * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
    *     is not supported.
-   * @param { ContextMenuOptions } options - Indicates the options of context menu.
+   * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
    * @returns { T }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @crossplatform [since 10]
+   * @atomicservice [since 11]
+   * @since 8 dynamic
    */
   bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions): T;
 
@@ -25582,6 +25553,7 @@ declare class CommonMethod<T> {
    *    2、如果开发者通过[parallelGesture]{@link parallelGesture(gesture: GestureType, mask?: GestureMask)}绑定了与子组件同时触发的手势，如PanGesture，子组件设置了独占控制且首个响应事件，则父组件的手势不会响应。
    * @returns { T }
    返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
    * @atomicservice [since 12]
@@ -25751,6 +25723,25 @@ declare class CommonMethod<T> {
    * @since 23 dynamic
    */
   systemMaterial(material: SystemUiMaterial | undefined): T;
+
+   /**
+    * 标记节点是否为独立图层进行绘制，基于该分层标记使能离屏缓存并且在后续帧会复用此缓存，缓存需要刷新时会基于脏区进行局部刷新，达到降负载效果。未通过该接口设置时，节点不标记为独立图层进行绘制。
+    *
+    * @param { boolean | undefined } value - 标记节点是否为独立图层进行绘制。true表示标记为独立图层进行绘制；false表示不标记为独立图层进行绘制。当value的值为undefined时，按false处理。
+    *     <br>**说明：**
+    *     <br>以下场景不应设置分层渲染：
+    *     <br>1. 当前节点不透明度opacity小于1。
+    *     <br>2. 当前节点的任意孩子节点设置了系统材质systemMaterial、背景模糊（backgroundBlurStyle、backgroundEffect、backdropBlur、foregroundBlurStyle、foregroundEffect、blur）。
+    *     <br>3. 当前节点的任意孩子节点为自绘制图层，如XComponent、Canvas、Video、Web。
+    *     <br>4. 当前节点的子树在动效期间频繁大面积更新。
+    *     <br>5. 当前节点已使用节点组renderGroup。
+    * @returns { T } 返回当前组件，用于链式调用。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @systemapi
+    * @stagemodelonly
+    * @since 26.0.1 dynamiconly
+    */
+   markLayeredRender(value: boolean | undefined): T;
 
   /**
    * 设置组件判断是否需要键盘时触发的回调。主要用于键盘接续场景，当焦点从输入框切换到其他组件时，如果切换后的组件回调函数[OnNeedSoftkeyboardCallback]{@link OnNeedSoftkeyboardCallback}的返回值设置为`true`，则表示该组件需要键盘，此时键盘将不会收起，如果返回值设置为`false`，则表示该组件不需要键盘，此时键盘将收起。
@@ -28331,7 +28322,10 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    * 设置是否支持左键拖动滚动。
    * 
    * @param { boolean | undefined } enabled - 是否支持左键按下拖动滚动。
-   *    <br>默认值：API版本26.1.0下的版本默认值为 false。API版本26.1.0及以上的版本默认值为可滚动组件水平滚动时为 true，否则为 false。
+   *     <br>true：支持鼠标左键按下拖动滚动。
+   *     <br>false：不支持鼠标左键按下拖动滚动。
+   *     <br>undefined：首次设置为undefined时，使用默认值。非首次设置为undefined时，保持上一次设置的效果不变。
+   *     <br>默认值：API版本26.1.0之前为false。从API版本26.1.0开始，当可滚动组件水平滚动时为true，否则为false。
    * @returns { T } 当前滚动组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -28707,14 +28701,14 @@ declare class ScrollResult {
 }
 
 /**
- * Called before scroll to allow developer to control real offset the Scrollable can scroll.
+ * 滚动组件滑动前触发的回调。
  *
  * @typedef { function } OnWillScrollCallback
- * @param { number } scrollOffset - offset this frame will scroll, which may or may not be reached.
- * @param { ScrollState } scrollState - current scroll state.
- * @param { ScrollSource } scrollSource - source of current scroll.
- * @returns { void | ScrollResult } the remain offset for the scrollable,
- *     same as scrollOffset when no ScrollResult is returned.
+ * @param { number } scrollOffset - 相对于上一帧的偏移量，滚动组件的内容向上滚动时偏移量为正，向下滚动时偏移量为负。<br/>单位vp。
+ * @param { ScrollState } scrollState - 当前滑动状态。
+ * @param { ScrollSource } scrollSource - 当前滑动操作的来源。
+ * @returns { void | ScrollResult } 返回ScrollResult时按照开发者指定的相对上一帧的偏移量滑动；
+ *     不返回时按回调参数scrollOffset滑动。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -30672,10 +30666,77 @@ declare interface SmartGestureShortcutOptions {
    * 
    * 当enabled为true时，默认值为true；当enabled为false时，默认值为false。
    *
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @atomicservice
+    * @since 26.0.0 dynamic
+    */
+   selectable?: boolean;
+}
+
+/**
+ * 定义DatePickerComponent与UIPickerComponent共用的文本样式。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface PickerComponentTextStyle {
+  /**
+   * 字体颜色。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
+   * @crossplatform
    * @atomicservice
-   * @since 26.0.0 dynamic
+   * @since 26.1.0 dynamic
    */
-  selectable?: boolean;
+  color?: ResourceColor;
+
+  /**
+   * 文本样式。仅支持size与weight。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+
+  /**
+   * 文本最小字号，与maxFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。
+   * 详见TextAttribute的minFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minFontSize?: number | ResourceStr;
+
+  /**
+   * 文本最大字号，与minFontSize配合使用以启用字号缩放。当minFontSize与maxFontSize同时设置时，font中的size不生效。详见TextAttribute的maxFontSize。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxFontSize?: number | ResourceStr;
+
+  /**
+   * 设置文本超长时的显示方式。设置为MARQUEE时不生效。详见TextAttribute的textOverflow。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflow?: TextOverflow;
 }

@@ -297,6 +297,20 @@ declare namespace screenshot {
      * @since 23 static
      */
     blackWindowIds?: Array<int>;
+
+    /**
+     * 捕获图像的像素格式。仅
+     * [RGBA_8888]{@link @ohos.multimedia.image:image.PixelMapFormat}和
+     * [BGRA_8888]{@link @ohos.multimedia.image:image.PixelMapFormat}是支持的。
+     * 如果不指定该参数，则使用默认值image.PixelMapFormat.RGBA_8888。
+     *
+     * [@default](https://gitcode.com/default) image.PixelMapFormat.RGBA_8888
+     * @syscap SystemCapability.WindowManager.WindowManager.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    pixelFormat?: image.PixelMapFormat;
   }
 
   /**

@@ -647,7 +647,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-    NOTIFICATION_CENTER = 60
+    NOTIFICATION_CENTER = 60,
+
+    /**
+     * Parent Control
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+     PARENT_CONTROL = 61
   }
 
   /**

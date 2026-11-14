@@ -1634,6 +1634,46 @@ declare namespace photoAccessHelper {
     readonly result: Array<string|null>;
   }
 
+  /**
+   * 媒体资产URI的操作结果信息。
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AssetUriResult {
+    /**
+     * 操作对应的原始资产URI。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly originalUri: string;
+
+    /**
+     * 操作结果对应的资产URI。操作失败时为空字符串。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly resultUri: string;
+
+    /**
+     * 操作是否成功。true表示成功，false表示失败，失败时resultUri为空字符串。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isSuccess: boolean;
+  }
+
 
   /**
    * 用于中断复制操作的信号。
@@ -13299,6 +13339,65 @@ declare namespace photoAccessHelper {
      * @since 26.0.0 static
      */
     static deleteLocalAssetsWithUri(context: Context, assetUris: string[]): Promise<void>;
+
+    /**
+     * 批量删除本地的媒体资产（照片或视频）到回收站，并返回每个资产的操作结果。使用Promise异步回调。
+     *
+     * > **说明：**
+     * >
+     * > - 对仅存在于本端设备的资产，直接删除到回收站，操作成功后resultUri为该资产在回收站中的新URI。
+     * >
+     * > - 对仅存在于云端的资产，不做任何处理，操作结果中isSuccess为false，resultUri为空字符串。
+     * >
+     * > - 对于同时存储在本端设备和云端的资产，调用接口后仅保留云端资产，本地资产进入回收站，操作成功后resultUri为本地资产在回收站中的新URI。
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - 传入Ability实例的context。
+     * @param { string[] } assetUris - 待删除的图片或者视频Uri数组，数组中元素个数不超过500个。
+     * @returns { Promise<Array<AssetUriResult>> } Promise对象，返回每个资产的操作结果数组，结果数组与入参assetUri数组一一对应。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static deleteLocalAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
+
+    /**
+     * 从回收站中批量恢复指定的URI字符串数组所对应的资产，并返回每个资产的操作结果。操作成功后，资产从回收站恢复到正常状态，
+     * resultUri为恢复后资产的新URI。操作失败时，isSuccess为false，resultUri为空字符串。使用Promise异步回调。
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - 传入Ability实例的Context。
+     * @param { string[] } assetUris - 待从回收站中恢复的资产Uri数组，数组中元素个数不超过500个。
+     * @returns { Promise<Array<AssetUriResult>> } Promise对象，返回每个资产的操作结果数组，结果数组与入参assetUri数组一一对应。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static recoverAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
 
     /**
      * 批量删除云端状态的媒体资产（照片或视频）到回收站。使用promise异步回调。

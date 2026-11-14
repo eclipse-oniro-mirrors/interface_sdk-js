@@ -507,6 +507,56 @@ export declare enum LaunchMode {
 }
 
 /**
+ * 导航配置选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.0 static
+ */
+export declare interface NavigationConfiguration {
+  /**
+   * 导航页面堆栈大小限制。
+   * 说明：
+   * -限制导航页面堆栈中活动页面节点的最大数量。
+   * -超过限制时，自动销毁最旧的页节点
+   * 以先进先出（先进先出）的顺序。
+   * -完全保留页面的NavPathInfo，支持页面重建。
+   * - value <=0不限制页面堆栈大小（默认值）。
+   * - value >0将堆栈大小限制为指定值。
+   * 取值范围为全体整数。
+   *
+   * @default 0 (no limit)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  stackSizeLimit?: int;
+
+  /**
+   * 当收到低内存信号时，是否回收不可见页。
+   * 启用时，导航在接收后回收不可见的NavDestination页面实例
+   * 低内存压力通知。NavPathInfo是保留的，以后可以重新构造页面。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  recyclePagesOnLowMemory?: boolean;
+
+  /**
+   * 当从主页触发导航时，是否清除内容堆栈。
+   * 在导航活动分栏模式下，启用时，从主页触发的导航将清除旧的主页之后加载的NavDestinations，同时保留本次路由创建的所有NavDestinations。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  clearContentStackOnPrimaryNavigation?: boolean;
+}
+
+/**
  * Navigation的模块信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -576,6 +626,24 @@ export declare interface NavigationOptions {
    * @since 23 static
    */
   animated?: boolean;
+}
+
+/**
+ * 预加载页面的选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.0.1 static
+ */
+export declare interface PreloadOptions {
+  /**
+   * 预加载页面被系统销毁时的回调。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  onDestroy?: VoidCallback;
 }
 
 /**
@@ -1106,6 +1174,24 @@ export declare class NavPathStack {
    * @since 23 static
    */
   setPathStack(pathStack: Array<NavPathInfo>, animated?: boolean): void;
+
+  /**
+   * 预加载**info**指定的导航目标页面。
+   * 预加载的页面不会立即显示，而是会被缓存。
+   * 稍后使用匹配的参数调用**pushPath**时，预加载的实例
+   * 将用于快速显示。
+   *
+   * @param { NavPathInfo } info - 表示要预加载的NavDestination。
+   * @param { PreloadOptions } [options] - 表示预加载的选项。
+   * @returns { Promise<void> } 函数返回的promise。
+   * @throws { BusinessError } 100001 - Internal error.
+   * @throws { BusinessError } 100005 - Builder function not registered.
+   * @throws { BusinessError } 100006 - NavDestination not found.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.1 static
+   */
+  preloadPath(info: NavPathInfo, options?: PreloadOptions): Promise<void>;
 }
 
 /**
@@ -1593,6 +1679,14 @@ export declare interface NavigationTitleOptions {
    * @since 26.0.0 static
    */
   scrollEffectOptions?: ScrollEffectOptions;
+
+  /**
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  systemMaterial?: uiMaterial.Material;
 }
 
 /**
@@ -2257,6 +2351,17 @@ export declare interface NavigationAttribute extends CommonMethod {
   default attributeModifier(modifier: AttributeModifier<NavigationAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 
   /**
+   * 设置导航配置。
+   *
+   * @param { NavigationConfiguration | undefined } config - 导航配置选项。
+   * @returns { NavigationAttribute } Returns instance of NavigationAttribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.0.0 static
+   */
+  default configuration(config: NavigationConfiguration | undefined): this;
+
+  /**
    * Navigation双栏模式下，支持设置右侧页面显示默认占位页，占位页仅作为UI展示页，不可获焦和响应事件。
    *
    * @param { ComponentContent<Object> | undefined } placeholder - 设置Navigation双栏模式下右侧的默认占位页。
@@ -2265,7 +2370,7 @@ export declare interface NavigationAttribute extends CommonMethod {
    * @stagemodelonly
    * @since 24 static
    */
-  default splitPlaceholder<T extends Object>(placeholder: ComponentContent<T>): this;
+  default splitPlaceholder(placeholder: ComponentContent<Object> | undefined): this;
 }
 
 /**

@@ -14,29 +14,36 @@
  */
 
 /**
- * You can embed the **PhotoPickerComponent** in your application's layout to let users pick images or videos without 
- * requiring extra permissions. Once the users have made their selection, your application gets read-only access to the 
- * chosen images or videos.
- * 
- * Note that **PhotoPickerComponent** does not support nesting. Additionally, prevent overlaying components with the 
- * **overlay** attribute or of higher levels on top it, as this will prevent it from receiving gesture events.
- * 
- * Once embedded, users can directly select images or videos within the **PhotoPickerComponent**.
- * 
+ * The **PhotoPickerComponent** can be embedded in the UI of an app. This component allows the app to select media files
+ * without requesting any permissions. The photo picker component supports two view modes: grid view and large image 
+ * preview. It provides both single and multiple selection modes. Users can take new photos using the camera entry, and 
+ * preview and select moving photos. Once the users have made their selection, your application gets read-only access to
+ * the chosen images or videos.
+ *
+ * Note that the photo picker component does not support nesting. Additionally, prevent overlaying components with the 
+ * **overlay** attribute or of higher levels on top the component, as this will prevent it from receiving gesture 
+ * events.
+ *
+ * The user can directly tap this component to select images or videos.
+ *
  * > **NOTE**
  * >
+ * > - This component is supported since API version 12. Newly added APIs will be marked with a superscript to indicate 
+ * >   their
+ * >
  * > - This component does not support [same-layer rendering](docroot://web/web-same-layer.md).
- * 
+ *
  * ###### Attributes
- * 
+ *
  * The [universal attributes]{@link common} are supported.
- * 
+ *
  * @file PhotoPickerComponent
  * @kit MediaLibraryKit
  */
 
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 import { AsyncCallback } from '@ohos.base';
+import type image from './@ohos.multimedia.image';
 
 /**
  * PhotoPickerComponent({ pickerOptions?: PickerOptions, onSelect?: (uri: string) => void, onDeselect?: (uri: string) =>
@@ -47,16 +54,17 @@ import { AsyncCallback } from '@ohos.base';
  * ExceedMaxSelectedCallback, onCurrentAlbumDeleted?: CurrentAlbumDeletedCallback, onVideoPlayStateChanged?:
  * videoPlayStateChangedCallback, pickerController: PickerController })
  *
- * Allows the application to access images or videos in the user directory without any permission.
+ * The photo picker component embedded in the application UI allows the application to access images or videos in the
+ * user directory without any permission.
  *
  * > **NOTE**
  * >
- * > If the **PhotoPickerComponent** is used with the **Tabs** component, the swipe gestures of the **Tabs** component
- * > conflict with those of the photo browser page.
+ * > - If the photo picker component is used with the **Tabs** component, the swipe gestures of the **Tabs** component
+ * >   conflict with those of the photo browser page.
  * >
- * > To prevent this problem, you can disable the swipe operation for the **Tabs** component in
- * > **onEnterPhotoBrowser()** and enable it in **onExitPhotoBrowser()**. This conflict will be resolved in later
- * > versions.
+ * > -To prevent this problem, you can disable the swipe operation for the **Tabs** component in
+ * >  **onEnterPhotoBrowser()** and enable it in **onExitPhotoBrowser()**. This conflict will be resolved in later
+ * >  versions.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @atomicservice
@@ -274,6 +282,29 @@ export declare struct PhotoPickerComponent {
   onUnselectableItemClicked?: UnselectableItemClickedCallback;
 
   /**
+   * Called when the picker state changes between the default state and the search state.
+   * The initial state is PickerState.DEFAULT.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onPickerStateChanged?: PickerStateChangedCallback;
+
+  /**
+   * Called when the user clicks a recommendation label on the search page.
+   * The label is either a pure text label or a smart entity label.
+   * The third-party app can use the callback payload to render its own search box.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onRecommendedLabelClicked?: RecommendedLabelClickedCallback;
+
+  /**
    * PickerController
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -297,6 +328,11 @@ export declare struct PhotoPickerComponent {
 /**
  * Defines an instance used to send data to the **PhotoPickerComponent**.
  *
+ * > **NOTE**
+ * >
+ * > Before calling this API, ensure that the **onPickerControllerReady** callback has been triggered. Otherwise, the
+ * > API call does not take effect.
+ *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @atomicservice
  * @since 12 dynamic
@@ -315,9 +351,8 @@ export declare class PickerController {
   setData(dataType: DataType, data: Object): void;
 
   /**
-   * Sends additional configuration data to the **PhotoPickerComponent**. The [DataType]{@link DataType} parameter
-   * identifies the type of data to send. In versions earlier than API version 23, only the **SET_BADGE_CONFIGS** type
-   * is supported.
+   * Sends additional configuration data to the **PhotoPickerComponent**. The **DataType** parameter identifies the type
+   * of data to send. In versions earlier than API version 23, only the **SET_BADGE_CONFIGS** type is supported.
    *
    * @param { DataType } dataType - Type of additional configuration data to send.
    * @param { Object } data - Additional configuration data to send.
@@ -328,8 +363,8 @@ export declare class PickerController {
   addData(dataType: DataType, data: Object): void;
 
   /**
-   * Sends removal configuration data to the **PhotoPickerComponent**. The [DataType]{@link DataType} parameter
-   * identifies the type of data to send, and only the **SET_BADGE_CONFIGS** type is supported currently.
+   * Sends removal configuration data to the **PhotoPickerComponent**. The **DataType** parameter identifies the type of
+   * data to send, and only the **SET_BADGE_CONFIGS** type is supported currently.
    *
    * @param { DataType } dataType - Type of removal configuration data to send.
    * @param { Object } data - Removal configuration data to send.
@@ -353,9 +388,13 @@ export declare class PickerController {
    * Switches from the **PhotoPickerComponent** to the photo browser page or from the photo browser page to the image to
    * be viewed.
    *
+   * > **NOTE**
+   * >
+   * > This API does not take effect when **PickerOptions.singleLineConfig** is set to the single-line mode.
+   *
    * @param { string } uri - URI of the image to view. Only the images selected by the user are supported.
-   * @param { PhotoBrowserRange } photoBrowserRange - View range on the photo browser page. The value can be **ALL** or
-   *     **SELECTED_ONLY**. The default value is **ALL**, which means to view all images and videos.
+   * @param { PhotoBrowserRange } [photoBrowserRange] - View range on the photo browser page. The value can be **ALL**
+   *     or **SELECTED_ONLY**. The default value is **ALL**, which means to view all images and videos.
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
    * @since 12 dynamic
@@ -365,6 +404,10 @@ export declare class PickerController {
   /**
    * Exits the photo browser page.
    *
+   * > **NOTE**
+   * >
+   * > This API does not take effect when **PickerOptions.singleLineConfig** is set to the single-line mode.
+   *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
    * @since 13 dynamic
@@ -373,6 +416,10 @@ export declare class PickerController {
 
   /**
    * Sets whether other UI elements are visible on the photo browser page. By default, other UI elements are visible.
+   *
+   * > **NOTE**
+   * >
+   * > This API does not take effect when **PickerOptions.singleLineConfig** is set to the single-line mode.
    *
    * @param { Array<PhotoBrowserUIElement> } elements - Other UI elements on the photo browser page.
    * @param { boolean } isVisible - Whether the specified elements are visible. **true**: visible; **false**: not
@@ -387,8 +434,8 @@ export declare class PickerController {
    * Replaces the image selected by the user in the **PhotoPickerComponent** with the image edited by the application.
    *
    * @param { string } originalUri - URI of the original image, which will be replaced.
-   * @param { string } newUri - URI of the new image. The new image is temporarily stored in the application sandbox
-   *     path. Therefore, this URI specifies a directory in the application sandbox path.
+   * @param { string } newUri - URI of the new image. This is the URI of the image or video that is temporarily stored
+   *     in the app sandbox and is used to replace the original URI on the photo picker component.
    * @param { AsyncCallback<void> } callback - Callback invoked when image replacement is complete.
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -439,7 +486,7 @@ export declare class PickerController {
    *     to **trustedUris** are used.
    * @param { SaveMode } [saveMode] - Mode for saving images or videos.
    *     <br>By default, the **SAVE_AS** mode is used to save the files as new files.
-   * @returns { Promise<Array<string>> } Promise used to return the URI of the new asset.
+   * @returns { Promise<Array<string>> } Promise used to return the URI array of the new asset.
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
    * @atomicservice
@@ -466,11 +513,12 @@ export declare class PickerController {
    * This parameter takes effect only on the photo browser page. **NOT_MOVING_PHOTO** cannot be set.
    *
    * @param { photoAccessHelper.MovingPhotoBadgeStateType } movingPhotoState - State of the moving photo on the photo
-   *     browser page.
+   *     browser page. It can only be set to **MOVING_PHOTO_ENABLED** or **MOVING_PHOTO_DISABLED**, but not
+   *     **NOT_MOVING_PHOTO**.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 23800151 - Scene parameters validate failed, possible causes:
    *     1. An invalid enumeration value was passed. Only MOVING_PHOTO_ENABLED and
-   *     MOVING_PHOTO_DISABLED are supported for configuration;
+   *     MOVING_PHOTO_DISABLED are supported for configuration.
    * @throws { BusinessError } 23800202 - Invalid call context. Possible causes:
    *     1. The API is called outside the photo browsing scenario.
    *     2. The API is called when isMovingPhotoBadgeShown is already set to true.
@@ -492,6 +540,94 @@ export declare class PickerController {
    * @since 26.0.0 dynamic
    */
   completed(): Promise<CompletedResult>;
+
+  /**
+   * Enter the search page of the picker.
+   *
+   * Prerequisites for the call to take effect:
+   *  - The picker has been initialized (onPickerControllerReady has been invoked).
+   *  - The picker option `isSearchSupported` is set to `false`.
+   *
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 23800202 - Invalid call context. That is, one of the
+   *     following conditions is met:
+   *     1. The picker is not ready (onPickerControllerReady has not been invoked).
+   *     2. The search UI is rendered by the picker itself (that is, `isSearchSupported`
+   *        is set to `true`).
+   *     3. The picker is in the photo browsing view.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  enterSearchPage(): Promise<void>;
+
+  /**
+   * Exit the search page and the picker returns to the default album grid.
+   *
+   * Prerequisites:
+   *  - The picker is currently in the search state (PickerState.SEARCH).
+   *
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 23800202 - Invalid call context: the picker is not in the search state.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  exitSearchPage(): Promise<void>;
+
+  /**
+   * Navigates back one level within the search page.
+   *
+   * Prerequisites:
+   *  - The picker is currently in the search state (PickerState.SEARCH).
+   *
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 23800202 - Invalid call context: the picker is not in the search state.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  navigateBackInSearchPage(): Promise<void>;
+
+  /**
+   * Invoke the picker search capability with the given search information.
+   * The picker shows the search result page and the onPickerStateChanged callback
+   * is invoked with PickerState.SEARCH if the picker was not already in the search state.
+   *
+   * Prerequisites:
+   *  - The picker is currently in the search state (PickerState.SEARCH).
+   *    If the picker is in the default state, call enterSearch first.
+   *  - At least one of `searchInfo.text` and `searchInfo.smartEntityIds` is non-empty.
+   *
+   * @param { SearchInfo } searchInfo - The search information.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 23800151 - Scene parameter check failed: empty search info or invalid entity id.
+   * @throws { BusinessError } 23800202 - Invalid call context: the picker is not in the search state.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  search(searchInfo: SearchInfo): Promise<void>;
 }
 
 /**
@@ -506,8 +642,11 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   /**
    * Background color of the check box.
    *
-   * The value is an 8-digit hexadecimal color code. The first two digits indicate the transparency, and the last six
-   * digits indicate the RGB color value.
+   * The value is an 8-digit hexadecimal color code (#AARRGGBB). The first two digits indicate the transparency, and the
+   * last six digits indicate the RGB color value.
+   *
+   * Note: This format is different from the #RRGGBBAA format used in the CSS standard, where alpha is in the last two
+   * digits.
    *
    * For example, '#FFFFFFFF' indicates a white opaque background, and '#80FF0000' indicates a semi-transparent red
    * background.
@@ -519,7 +658,16 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   checkBoxColor?: string;
 
   /**
-   * Background color of the Picker grid page. The value is an 8-digit hexadecimal color code.
+   * Background color of the Picker grid page.
+   *
+   * The value is an 8-digit hexadecimal color code (#AARRGGBB). The first two digits indicate the transparency, and the
+   * last six digits indicate the RGB color value.
+   *
+   * Note: This format is different from the #RRGGBBAA format used in the CSS standard, where alpha is in the last two
+   * digits.
+   *
+   * For example, '#FFFFFFFF' indicates a white opaque background, and '#80FF0000' indicates a semi-transparent red
+   * background.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -538,8 +686,16 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   isRepeatSelectSupported?: boolean;
 
   /**
-   * Text color in the check box. The value is an 8-digit hexadecimal color code. (This parameter is supported since API
-   * version 19. In earlier versions, the system defaults to white.)
+   * Text color in the check box.
+   *
+   * The value is an 8-digit hexadecimal color code (#AARRGGBB). The first two digits indicate the transparency, and the
+   * last six digits indicate the RGB color value.
+   *
+   * Note: This format is different from the #RRGGBBAA format used in the CSS standard, where alpha is in the last two
+   * digits.
+   *
+   * For example, '#FFFFFFFF' indicates a white opaque background, and '#80FF0000' indicates a semi-transparent red
+   * background. (This parameter is supported since API version 19. In earlier versions, the system defaults to white.)
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -548,8 +704,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   checkboxTextColor?: string;
 
   /**
-   * Background color of the photo browser page. The options are **AUTO**, **LIGHT**, and **DARK**. The default value is
-   * **AUTO**.
+   * Background color of the photo browser page. The options are **AUTO**, **LIGHT**, and **DARK**. If this parameter is
+   * not set, the default value is **AUTO**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -559,7 +715,7 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
 
   /**
    * Mode of the reminder when the number of selected items reaches the maximum. The options are **NONE**, **TOAST**,
-   * and **MASK**. The default value **TOAST**.
+   * and **MASK**. If this parameter is not set, the default value is **TOAST**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -568,9 +724,16 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   maxSelectedReminderMode?: ReminderMode;
 
   /**
-   * Sliding preview direction of the grid page. The options are **HORIZONTAL** and **VERTICAL**. The default value is
-   * **VERTICAL**. (This parameter is supported since API version 20. In earlier versions, the system defaults to
-   * vertical.)
+   * Sliding preview direction of the grid page. The options are **HORIZONTAL** and **VERTICAL**.
+   *
+   * If this parameter is not set, the default value is **VERTICAL**.
+   *
+   * Set this parameter to **HORIZONTAL** if you want to browse media files horizontally.
+   *
+   * Set this parameter to **VERTICAL** if you want to browse media files vertically, or leave this parameter empty.
+   *
+   * This capability is supported since API version 20. In versions earlier than API version 20, the default value is
+   * **VERTICAL**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -579,7 +742,13 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   orientation?: PickerOrientation;
 
   /**
-   * Select mode, which can be **SINGLE_SELECT** or **MULTI_SELECT**. The default value is **MULTI_SELECT**.
+   * Selection mode of the photo picker component, including **MULTI_SELECT** and **SINGLE_SELECT**.
+   *
+   * If this parameter is not set, **MULTI_SELECT** is used by default.
+   *
+   * Set this parameter to **SINGLE_SELECT** if only one file needs to be selected.
+   *
+   * Set this parameter to **MULTI_SELECT** if multiple files need to be selected, or leave this parameter empty.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -588,8 +757,10 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   selectMode?: SelectMode;
 
   /**
-   * Maximum number of images that can be selected. The maximum value is **500**, which is limited by **MaxSelected**.
-   * The default value is **500**.
+   * Maximum number of images that can be selected. The value range is [1, 500]. The default value is **500**.
+   *
+   * The value is subject to the maximum number of available items specified by
+   * [BaseSelectOptions]{@link ./@ohos.file.photoAccessHelper:photoAccessHelper.BaseSelectOptions}.maxSelectNumber.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -599,8 +770,10 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   maxPhotoSelectNumber?: number;
 
   /**
-   * Maximum number of videos that can be selected. The maximum value is **500**, and it is restricted by the maximum
-   * number of media files that can be selected in the system. The default value is **500**.
+   * Maximum number of videos that can be selected. The value range is [1, 500]. The default value is **500**.
+   *
+   * The value is subject to the maximum number of available items specified by
+   * [BaseSelectOptions]{@link ./@ohos.file.photoAccessHelper:photoAccessHelper.BaseSelectOptions}.maxSelectNumber.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -610,8 +783,11 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   maxVideoSelectNumber?: number;
 
   /**
-   * Whether to support multiple selections by sliding. **true**: yes; **false**: no. The default value is **false**.
-   * This parameter is not available for repeat selection.
+   * Whether to support multiple selections by sliding. **true**: yes; **false**: no. If this parameter is not set, the
+   * default value **false** is used. This parameter is not available for repeat selection.
+   *
+   * Since API version 26.0.0, the **select** method is supported on cars, but the **isSlidingSelectionSupported**
+   * attribute is not. Therefore, this attribute does not take effect on cars.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -622,7 +798,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   /**
    * Position of the check box on the photo browser page. The first parameter specifies the offset in the X direction,
    * and the second parameter specifies the offset in the Y direction. The value range is [0, 1], which indicates the
-   * offset (from 0% to 100%) to the upper-left corner of the component. The default value is [0, 0].
+   * offset (from 0% to 100%) to the upper-left corner of the component. If this parameter is not set, the default value
+   * **[0, 0]** is used.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -650,8 +827,10 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
 
   /**
    * Single-line display mode of a grid page. In single-line mode, the component does not provide functions for viewing
-   * a larger image. The component does not support callbacks related to large images, and the PickerController does not
-   * support APIs related to large images, making API calls ineffective.
+   * a larger image. The component does not support callbacks related to large image browsing, such as
+   * **onEnterPhotoBrowser** and **onExitPhotoBrowser**. The **PickerController** does not support APIs related to large
+   * image browsing, such as **setPhotoBrowserItem** and **exitPhotoBrowser**. As a result, API calls will be
+   * ineffective.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -662,8 +841,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   /**
    * Picker color mode. Dark/Light color mode (excluding the background color) of other components on the Picker grid
    * page, including the search box, camera entry, safety tips for using Gallery, and recommendation bubble. This
-   * attribute is usually used together with **backgroundColor**. The default value is **PickerColorMode.AUTO**, which
-   * follows the system's dark/light color mode.
+   * attribute is usually used together with **backgroundColor**. If this parameter is not set, the default value
+   * **PickerColorMode.AUTO** is used, which means that the color mode changes with the system dark/light color mode.
    *
    * When setting this attribute, avoid using **PickerColorMode.LIGHT** with a dark backgroundColor, as it may make
    * components or text hard to see. Avoid using **PickerColorMode.DARK** with a light backgroundColor for the same
@@ -676,7 +855,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   uiComponentColorMode?: PickerColorMode;
 
   /**
-   * Space between the top of the component and the first row of the grid thumbnail. The default value is **0**, in vp.
+   * Space between the top of the component and the first row of the grid thumbnail. If this parameter is not set, the
+   * default value **0** is used, in vp.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -695,8 +875,14 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   gridEndOffset?: number;
 
   /**
-   * Unique serial number used to distinguish different picker components. The default value is **-1**, indicating that
-   * no distinction is made.
+   * Unique serial number used to distinguish different picker components. The value range is
+   * [–1, +∞). The default value is **–1**, indicating that the picker component is not distinguished.
+   * If multiple phone picker components are used in an app and different components need to be distinguished,
+   * set different unique IDs for the components.
+   *
+   * When using the **preselectedInfos** attribute to display data, you need to set **pickerIndex** and match it with
+   * **preselectablePickerIndex** in [PreselectedInfo]{@link PreselectedInfo} to display the data in the specified
+   * component.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -705,8 +891,7 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   pickerIndex?: number;
 
   /**
-   * Array of information previously selected by the user, so that the PhotoPickerComponent identified by
-   * **pickerIndex** can display the information.
+   * Displaying the pre-selected data in the image chip selector component with the specified **pickerIndex**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -725,11 +910,17 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   badgeConfig?: BadgeConfig;
 
   /**
-   * Whether scrolling in the **PhotoPickerComponent** is enabled. The value **true** means that scrolling is not
-   * blocked and the component responds to user scroll gestures. The value **false** means that scrolling is blocked and
-   * the component does not respond to user scroll gestures.
+   * Whether to block scrolling of the photo picker component. The value **true** means that scrolling is not blocked
+   * and the component responds to user scroll gestures. The value **false** means that scrolling is blocked and the
+   * component does not respond to user scroll gestures.
    *
    * The default value is **true**.
+   *
+   * **NOTE**
+   *
+   * When **isSlidingSupported** is set to **false**, the grid thumbnail does not respond to the user's tap gesture to
+   * view the full image. Callbacks related to large image browsing, such as **onEnterPhotoBrowser**, will not be
+   * triggered.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -751,7 +942,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   edgeEffect?: EdgeEffect;
 
   /**
-   * Used to display only the album content corresponding to the specified bundle name.
+   * Used to display only the album content corresponding to the specified bundle name. Pass a complete array of bundle
+   * name strings, which must exactly match the app package name.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -761,8 +953,8 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   appAlbumFilters?: Array<string>;
 
   /**
-   * Background opacity of the picker. The value range is [0, 1]. **0** indicates completely transparent, and **1**
-   * indicates completely opaque.
+   * Background transparency of the photo picker component. The value range is [0, 1]. **0** indicates completely
+   * transparent, and **1** indicates completely opaque.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -772,7 +964,12 @@ export declare class PickerOptions extends photoAccessHelper.BaseSelectOptions {
   backgroundOpacity?: number;
 
   /**
-   * Information for restoring the PhotoPicker's state from the last exit.
+   * Information for restoring the photo picker component's state from the last exit. By default, this parameter is left
+   * empty, indicating that the state from the last exit is not restored.
+   *
+   * Note: This parameter must be used together with the [completed]{@link PickerController#completed} method of
+   * **PickerController**. The **contextRecoveryInfo** in the [CompletedResult]{@link CompletedResult} returned by this
+   * method can be used to restore the state.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -823,7 +1020,7 @@ export declare class BaseItemInfo {
   mimeType?: string;
 
   /**
-   * Width of the image or video, in px.
+   * Pointer to the image or video width, in pixels.
    *
    * This parameter is supported only when [ItemType]{@link ItemType} is set to **THUMBNAIL**. Otherwise, it is left
    * empty.
@@ -835,7 +1032,7 @@ export declare class BaseItemInfo {
   width?: number;
 
   /**
-   * Height of the image or video, in px.
+   * Pointer to the image or video height, in pixels.
    *
    * This parameter is supported only when [ItemType]{@link ItemType} is set to **THUMBNAIL**. Otherwise, it is left
    * empty.
@@ -860,9 +1057,9 @@ export declare class BaseItemInfo {
   size?: number;
 
   /**
-   * Video duration, in milliseconds. In versions earlier than API version 23, the value of **duration** is **0** for
-   * moving photos. In API version 23 and later versions, the value of **duration** is the duration of the video clip
-   * attached to moving photos. If an exception occurs, **-1** is returned.
+   * Duration of the video, in milliseconds. In versions earlier than API version 23, the value of **duration** is **0**
+   * for moving photos. In API version 23 and later versions, the value of **duration** is the duration of the video
+   * clip attached to moving photos. If an exception occurs, **-1** is returned.
    *
    * This parameter is supported only when [ItemType]{@link ItemType} is set to **THUMBNAIL**. Otherwise, it is left
    * empty.
@@ -992,7 +1189,7 @@ export declare class PhotoBrowserInfo {
  */
 export declare class AnimatorParams {
   /**
-   * Animation duration, in ms.
+   * Animation effects duration, in milliseconds. The value range is [0, +∞).
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1113,7 +1310,7 @@ export declare class BadgeConfig {
   badgeType?: BadgeType;
 
   /**
-   * URIs of the assets for the badge.
+   * URIs for the badge.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1123,8 +1320,7 @@ export declare class BadgeConfig {
 }
 
 /**
- * Describes the updatable attributes of the **PhotoPickerComponent**. These attributes are a subset of
- * [PickerOptions]{@link PickerOptions}.
+ * New attributes, which are a subset of [PickerOptions]{@link PickerOptions}.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @atomicservice
@@ -1135,6 +1331,10 @@ export declare class UpdatablePickerConfigs {
    * MIME types.
    *
    * If this parameter is not specified, **IMAGE_VIDEO_TYPE** is used by default.
+   *
+   * **NOTE**
+   *
+   * When this parameter is set, the **mimeType** configuration automatically becomes invalid.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1156,9 +1356,7 @@ export declare class UpdatablePickerConfigs {
   mimeTypeFilter?: photoAccessHelper.MimeTypeFilter;
 
   /**
-   * Maximum number of media files that can be selected.
-   *
-   * The maximum value is 500, and the default value is 50.
+   * Maximum number of media files that can be selected. The value range is [0, 500], and the default value is **50**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1167,9 +1365,8 @@ export declare class UpdatablePickerConfigs {
   maxSelectNumber?: number;
 
   /**
-   * Maximum number of images that can be selected (unit: number).
-   *
-   * The maximum value is **500**, which is limited by **MaxSelected**. The default value is **500**.
+   * Maximum number of images that can be selected. The value range is [0, 500], and this parameter is limited by the
+   * total number of images that can be selected. The default value is **500**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1178,10 +1375,8 @@ export declare class UpdatablePickerConfigs {
   maxPhotoSelectNumber?: number;
 
   /**
-   * Maximum number of videos that can be selected (unit: number).
-   *
-   * The maximum value is **500**, and it is restricted by the maximum number of media files that can be selected in the
-   * system. The default value is **500**.
+   * Maximum number of videos that can be selected. The value range is [0, 500]. The value is limited by the maximum
+   * number of media files that can be selected in the system. The default value is **500**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1190,7 +1385,7 @@ export declare class UpdatablePickerConfigs {
   maxVideoSelectNumber?: number;
 
   /**
-   * Picker selection mode.
+   * Selection mode of the photo picker component.
    *
    * **SINGLE_SELECT** or **MULTI_SELECT**. The default value is **MULTI_SELECT**.
    *
@@ -1212,7 +1407,7 @@ export declare class UpdatablePickerConfigs {
   /**
    * Whether a single image can be repeatedly selected.
    *
-   * **true** if supported, **false** otherwise. The default value is **false**.
+   * **true** if supported, **false** otherwise. If this parameter is not set, the default value **false** is used.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1221,7 +1416,12 @@ export declare class UpdatablePickerConfigs {
   isRepeatSelectSupported?: boolean;
 
   /**
-   * URIs of the selected images.
+   * URIs of the preselected images. The array length is specified by
+   * [BaseSelectOptions]{@link @ohos.file.photoAccessHelper:photoAccessHelper.BaseSelectOptions}.maxSelectNumber,
+   * [BaseSelectOptions]{@link @ohos.file.photoAccessHelper:photoAccessHelper.PhotoSelectOptions}.maxPhotoSelectNumber,
+   * and [BaseSelectOptions]{@link @ohos.file.photoAccessHelper:photoAccessHelper.PhotoSelectOptions}.
+   * maxVideoSelectNumber. The value range is [0, 500], and the default value is **50**. If the value is out of the
+   * range, the excess part does not take effect. If this parameter is not set, no image is preselected by default.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1252,9 +1452,10 @@ export declare class UpdatablePickerConfigs {
   checkboxTextColor?: string;
 
   /**
-   * Background color of the Picker grid page.
+   * Background color of the grid page of the photo picker component. The value is an 8-digit hexadecimal color code.
+   * The first two digits indicate the transparency, and the last six digits indicate the RGB color value.
    *
-   * The value is an 8-digit hexadecimal color code.
+   * For example, '#FFFFFFFF' indicates a white opaque background.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1276,10 +1477,10 @@ export declare class UpdatablePickerConfigs {
   /**
    * Color mode of the Picker UI component.
    *
-   * Dark/Light color mode (excluding the background color) of other components on the Picker grid page, including the
-   * search box, camera entry, safety tips for using Gallery, and recommendation bubble. This attribute is usually used
-   * together with **backgroundColor**. The default value is **PickerColorMode.AUTO**, which follows the system's dark/
-   * light color mode.
+   * Dark/light color mode of components other than the background color on the grid page of the photo picker component,
+   * including the search box, camera entry, safety tips for using Gallery, and recommendation bubble. This attribute is
+   * usually used together with **backgroundColor**. The default value is **PickerColorMode.AUTO**, which follows the
+   * system's dark/light color mode.
    *
    * When setting this attribute, avoid using **PickerColorMode.LIGHT** with a dark background color, as it may make
    * components or text hard to see. Avoid using **PickerColorMode.DARK** with a light background color for the same
@@ -1292,11 +1493,17 @@ export declare class UpdatablePickerConfigs {
   uiComponentColorMode?: PickerColorMode;
 
   /**
-   * Whether scrolling in the **PhotoPickerComponent** is enabled. The value **true** means that scrolling is not
-   * blocked and the component responds to user scroll gestures. The value **false** means that scrolling is blocked and
-   * the component does not respond to user scroll gestures.
+   * Whether to block scrolling of the photo picker component. The value **true** means that scrolling is not blocked
+   * and the component responds to user scroll gestures. The value **false** means that scrolling is blocked and the
+   * component does not respond to user scroll gestures.
    *
    * The default value is **true**.
+   *
+   * **NOTE**
+   *
+   * When **isSlidingSupported** is set to **false**, the grid thumbnail does not respond to the user's tap gesture to
+   * view the full image. Callbacks related to large image browsing, such as **onEnterPhotoBrowser**, will not be
+   * triggered.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1306,7 +1513,7 @@ export declare class UpdatablePickerConfigs {
   isSlidingSupported?: boolean;
 
   /**
-   * Scrolling effect when the Picker grid page reaches the edge.
+   * Scrolling effect when the grid page of the photo picker component reaches the edge.
    *
    * The default value is [EdgeEffect.Spring]{@link EdgeEffect}.
    *
@@ -1318,8 +1525,8 @@ export declare class UpdatablePickerConfigs {
   edgeEffect?: EdgeEffect;
 
   /**
-   * Playback mode of the moving photo. The maximum array length is 2. If this limit is exceeded, the first two elements
-   * are used, and the extra ones are automatically ignored.
+   * Automatic playback scenarios for moving photos. A maximum of two automatic playback scenarios can be configured. If
+   * more than two scenarios are configured, only the first two are used, and the extra ones are automatically ignored.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1339,8 +1546,8 @@ export declare class UpdatablePickerConfigs {
   appAlbumFilters?: Array<string>;
 
   /**
-   * Background opacity of the picker. The value range is [0, 1]. **0** indicates completely transparent, and **1**
-   * indicates completely opaque.
+   * Background transparency of the photo picker component. The value range is [0, 1]. **0** indicates completely
+   * transparent, and **1** indicates completely opaque.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1403,7 +1610,7 @@ export declare class ClickResult {
 
 /**
  * Describes the function name, error code, and message of the error returned when an error occurs during the use of the
- * **PhotoPickerComponent** component.
+ * photo picker component.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
@@ -1463,7 +1670,7 @@ export declare class CompletedResult {
   photoUris: Array<string>;
 
   /**
-   * Context information of the PhotoPicker exit status.
+   * Context information of the photo picker component exit status.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1515,7 +1722,7 @@ export declare class RecoveryResult {
 }
 
 /**
- * UnselectableItemInfo
+ * Details about the image that is tapped but cannot be selected.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
@@ -1524,7 +1731,7 @@ export declare class RecoveryResult {
  */
 export declare class UnselectableItemInfo {
   /**
-   * MimeType.
+   * Type of the file.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1534,7 +1741,7 @@ export declare class UnselectableItemInfo {
   public mimeType?: string;
 
   /**
-   * PhotoSubtype. Asset subtype, non-special type images default to DEFAULT(0).
+   * Subtype of the media asset.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @stagemodelonly
@@ -1545,6 +1752,103 @@ export declare class UnselectableItemInfo {
 }
 
 /**
+ * Indicates the search information used to invoke the picker search capability.
+ * At least one of `text` and `smartEntityIds` must be non-empty; otherwise an error is thrown.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class SearchInfo {
+  /**
+   * Search text typed by the user.
+   * If both `text` and `smartEntityIds` are provided, the picker searches using the combined condition.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  text?: string;
+
+  /**
+   * Smart entity id list obtained from the recommendation label callback.
+   * Each id is valid only within the current picker session lifecycle.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  smartEntityIds?: Array<int>;
+}
+
+/**
+ * Indicates a smart entity in the recommendation label.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class SmartEntity {
+  /**
+   * Unique id of the entity, valid within the current picker session lifecycle.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  id: int;
+
+  /**
+   * Name of the entity.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  name?: string;
+
+  /**
+   * Thumbnail to be displayed for the entity, for example a portrait avatar.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  thumbnail?: image.PixelMap;
+}
+
+/**
+ * Indicates the recommendation label clicked by the user on the search page.
+ * A recommendation label is either a pure text label (only `text` is provided)
+ * or a smart entity label (`smartEntity` is provided). The two cases are mutually exclusive.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class RecommendedLabel {
+  /**
+   * Smart entity, applied when the label is generated by association search.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  smartEntity?: SmartEntity;
+}
+
+
+/**
  * Enumerates the types of data sent from **PickerController** to the **PhotoPickerComponent**.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1553,11 +1857,11 @@ export declare class UnselectableItemInfo {
  */
 export declare enum DataType {
   /**
-   * Sends a list of selected items to instruct the **PhotoPickerComponent** to refresh the selection status. A string
+   * Sends a list of selected items to instruct the photo picker component to refresh the selection status. A string
    * array needs to be passed in.
    *
-   * For example, after an image is deleted from an application's page, the application calls **setData()** to notify
-   * the **PhotoPickerComponent** of the remaining selected items. Then, the **PhotoPickerComponent** refreshes the
+   * For example, after an image is deleted from an application's page, the application calls **setData** to notify the
+   * photo picker component of the list of the remaining selected data. Then, the photo picker component refreshes the
    * check box status.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1567,12 +1871,11 @@ export declare enum DataType {
   SET_SELECTED_URIS = 1,
 
   /**
-   * Sends the selected album to instruct the **PhotoPickerComponent** to refresh the album data. A string array needs
-   * to be passed in.
+   * Sends the selected album to instruct the photo picker component to refresh the album data. A string array needs to
+   * be passed in.
    *
    * For example, after an album is selected from an application's page, the application calls **setData** to notify the
-   * **PhotoPickerComponent** of the URI of the selected album. Then, the **PhotoPickerComponent** refreshes the album
-   * data.
+   * photo picker component of the URI of the selected album. Then, the photo picker component refreshes the album data.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1581,9 +1884,9 @@ export declare enum DataType {
   SET_ALBUM_URI = 2,
 
   /**
-   * Sends the URI of the selected file and the index of the selected **PhotoPickerComponent**. If the index of a
-   * **PhotoPickerComponent** matches the one provided in the parameter, the selected file is automatically highlighted
-   * in that **PhotoPickerComponent**.
+   * Sends the URI of the selected file and the index of the selected photo picker component If the index of a photo
+   * picker component matches the one provided in the parameter, the selected file is automatically highlighted in that
+   * photo picker component.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1592,7 +1895,7 @@ export declare enum DataType {
   SET_SELECTED_INFO = 3,
 
   /**
-   * Sends the badge configurations, which are of the [badgeConfig]{@link BadgeConfig} type and include a list of data
+   * Sends the badge configurations, which are of the [BadgeConfig]{@link BadgeConfig} type and include a list of data
    * with badge types and corresponding file URIs. Once configured, the badge of the configured type is displayed in the
    * specified file.
    *
@@ -1706,7 +2009,7 @@ export declare enum PickerOrientation {
  */
 export declare enum SelectMode {
   /**
-   * Select a single option.
+   * Select a single option. Only one image or video can be selected.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1715,7 +2018,7 @@ export declare enum SelectMode {
   SINGLE_SELECT = 0,
 
   /**
-   * Select multiple options.
+   * Select multiple options. Multiple images and videos can be selected at the same time.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1778,7 +2081,7 @@ export declare enum ReminderMode {
   NONE = 0,
 
   /**
-   * Toast message.
+   * Toast message. A toast message is displayed when the number of selected items reaches the maximum.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1850,7 +2153,7 @@ export declare enum PhotoBrowserRange {
   ALL = 0,
 
   /**
-   * View selected images and videos only.
+   * View selected images and videos only. You cannot switch to unselected content.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -1948,7 +2251,6 @@ export declare enum VideoPlayerState {
  * @since 15 dynamic
  */
 export declare enum SaveMode {
-
   /**
    * Saves the image or video as a new one.
    *
@@ -2012,6 +2314,36 @@ export declare enum BadgeType {
    * @since 21 dynamic
    */
   BADGE_UPLOADED = 0
+}
+
+/**
+ * Indicates the picker page state.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare enum PickerState {
+  /**
+   * Default album browsing state.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DEFAULT = 0,
+
+  /**
+   * Search state, including search recommendation page and search result page.
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SEARCH = 1
 }
 
 /**
@@ -2115,6 +2447,9 @@ export type PinchGridSwitchedCallback = (gridLevel: photoAccessHelper.GridLevel)
  * Callback to be invoked when a grid view switches to the photo browser page or the photo browser page is switched.
  *
  * @param { BaseItemInfo } targetPhotoInfo - Basic information about the selected items.
+ *     <br>**NOTE**
+ *     <br>The returned information contains only the **uri**, **photoSubType**, **mimeType**, and
+ *     **movingPhotoBadgeState** fields in [BaseItemInfo]{@link BaseItemInfo}.
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @atomicservice
@@ -2123,7 +2458,7 @@ export type PinchGridSwitchedCallback = (gridLevel: photoAccessHelper.GridLevel)
 export type PhotoBrowserChangeStartCallback = (targetPhotoInfo: BaseItemInfo) => void;
 
 /**
- * Callback to be invoked when an error occurs in the **PhotoPickerComponent**.
+ * Describes the callback to be invoked when an error occurs during the use of the **PhotoPickerComponent**.
  *
  * @param { PickerError } pickerError - Basic information about the error.
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -2145,7 +2480,7 @@ export type ErrorCallback = (pickerError: PickerError) => void;
 export type PickerRecoveryCallback = (recoveryResult: RecoveryResult) => void;
 
 /**
- * Callback to be invoked when the large image is zoomed in or out after the large image is entered through the
+ * Called when the user zooms in or out on a full image after entering the full image view through
  * **PhotoPickerComponent**.
  *
  * @param { double } scale - Scale of the image compared with the original image.
@@ -2157,12 +2492,34 @@ export type PickerRecoveryCallback = (recoveryResult: RecoveryResult) => void;
 export type PhotoBrowserZoomCallback = (scale: double) => void;
 
 /**
- * The callback of onUnselectableItemInfo event
+ * Describes the callback invoked when an unselectable image is tapped on the picker grid or large image preview screen.
  *
- * @param { UnselectableItemInfo } unselectableItemInfo
+ * @param { UnselectableItemInfo } unselectableItemInfo - Details about the image that is tapped but cannot be selected.
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
  * @stagemodelonly
  * @atomicservice
  * @since 26.0.1 dynamic
  */
 export type UnselectableItemClickedCallback = (unselectableItemInfo: UnselectableItemInfo) => void;
+
+/**
+ * The callback of onPickerStateChanged event.
+ *
+ * @param { PickerState } pickerState
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export type PickerStateChangedCallback = (pickerState: PickerState) => void;
+
+/**
+ * The callback of onRecommendedLabelClicked event.
+ *
+ * @param { RecommendedLabel } recommendedLabel
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export type RecommendedLabelClickedCallback = (recommendedLabel: RecommendedLabel) => void;

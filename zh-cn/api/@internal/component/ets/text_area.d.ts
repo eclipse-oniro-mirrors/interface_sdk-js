@@ -1672,6 +1672,19 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
 
   /**
    * 设置是否在首行和尾行增加间距以避免文字截断。未通过该接口设置时，默认不增加间距。
+   * 
+   * 从API版本26.1.0开始，该接口与[fallbackLineSpacing]{@link TextAreaAttribute#fallbackLineSpacing}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } include - 是否在首行和尾行增加间距以避免文字截断。
    *     <br>true表示在首行和尾行增加间距；false表示在首行和尾行不增加间距。
@@ -1686,6 +1699,19 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
 
   /**
    * 针对多行文字叠加，支持行高基于文字实际高度自适应。此接口仅当行高小于文字实际高度时生效。未通过该接口设置时，默认行高不基于文字实际高度自适应。
+   * 
+   * 从API版本26.1.0开始，该接口与[includeFontPadding]{@link TextAreaAttribute#includeFontPadding}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } enabled - 行高是否基于文字实际高度自适应。
    *     <br>true表示行高基于文字实际高度自适应；false表示行高不基于文字实际高度自适应。

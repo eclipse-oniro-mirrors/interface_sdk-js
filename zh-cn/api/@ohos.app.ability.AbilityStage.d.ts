@@ -106,8 +106,8 @@ declare class AbilityStage {
 
   /**
    * 如果UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->配置了在独立进程中运行（即
-   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
-   * DelEnd-->的isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
+   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->的
+   * isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
    * 进程唯一标识。同步接口，不支持异步回调。
    * 
    * 如果该应用已有相同标识的进程存在，则待启动的UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->运行在此进程中，否则创建新的进程。
@@ -124,8 +124,7 @@ declare class AbilityStage {
    * 
    * > **说明：**
    * >
-   * > - 在API version 19及之前版本，仅支持在指定进程中启动UIAbility。<!--Del-->从API version 20开始，新增支持在指定进程中启动UIExtensionAbility。<!--DelEnd
-   * > -->
+   * > - 在API version 19及之前版本，仅支持在指定进程中启动UIAbility。<!--Del-->从API version 20开始，新增支持在指定进程中启动UIExtensionAbility。<!--DelEnd-->
    * >
    * > - 从API version 20开始，当[AbilityStage.onNewProcessRequestAsync]{@link AbilityStage.onNewProcessRequestAsync}实现时，本回调函
    * > 数将不执行。
@@ -141,8 +140,8 @@ declare class AbilityStage {
 
   /**
    * 如果UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->配置了在独立进程中运行（即
-   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--
-   * DelEnd-->的isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
+   * [module.json5配置文件](docroot://quick-start/module-configuration-file.md)中UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->的
+   * isolationProcess字段取值为true），当该UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->被拉起时，会触发该回调，并返回一个string作为
    * 进程唯一标识。使用Promise异步回调。
    * 
    * 如果该应用已有相同标识的进程存在，则待启动的UIAbility<!--Del-->或UIExtensionAbility<!--DelEnd-->运行在此进程中，否则创建新的进程。

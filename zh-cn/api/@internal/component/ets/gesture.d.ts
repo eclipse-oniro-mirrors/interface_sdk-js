@@ -3168,7 +3168,7 @@ declare class EventTargetInfo {
   /**
    * 返回当前组件的组件标识。
    *
-   * @returns { string } 当前组件的[组件标识]{@link common}。
+   * @returns { string } 当前组件的[组件标识]{@link CommonMethod}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3176,18 +3176,6 @@ declare class EventTargetInfo {
    * @since 12 dynamic
    */
   getId(): string;
-
-  /**
-   * Returns the component's unique id.
-   *
-   * @returns { number } - the unique id of the component
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  getUniqueId(): number;
 
   /**
    * 返回当前组件的唯一id。
@@ -3235,19 +3223,6 @@ declare class TouchRecognizer {
    * @since 20 dynamic
    */
   cancelTouch(): void;
-
-  /**
-   * Check whether the current gesture binding node is a descendant of the passed-in component.
-   *
-   * @param { number } uniqueId - the unique id of the component.
-   * @returns { boolean } - the query result.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  isHostBelongsTo(uniqueId: number): boolean;
 
   /**
    * 返回当前触摸识别器绑定节点是否为传入组件的后代节点。

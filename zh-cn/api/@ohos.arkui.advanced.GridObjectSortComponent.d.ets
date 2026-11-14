@@ -305,7 +305,7 @@ export declare struct GridObjectSortComponent {
   onCancel: () => void;
 
   /**
-   * Build function of GridObjectSortComponent.
+   * GridObjectSortComponent的构建函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

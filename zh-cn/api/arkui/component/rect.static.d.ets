@@ -214,9 +214,10 @@ export declare interface RectAttribute extends CommonShapeMethod {
  	 */
  	default setRectOptions(options?: RectOptions | RoundedRectOptions): this;
     /**
-     * Call attributeModifier.
+     * 设置组件的动态属性。
      *
-     * @param { AttributeModifier<RectAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+     * @param { AttributeModifier<RectAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 动态设置Rect组件的属性。<br>
+     *    取值为undefined时，按当前组件的属性方法默认值处理。
      * @returns { RectAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

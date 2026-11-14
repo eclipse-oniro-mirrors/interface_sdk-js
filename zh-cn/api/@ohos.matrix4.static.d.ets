@@ -19,11 +19,11 @@
  */
 
 /**
- * 用于对组件进行[图形变换]{@link common}的各种操作，为组件提供矩阵变换能力，支持对图形进行平移、旋转和缩放等。
+ * 用于对组件进行[图形变换]{@link CommonMethod}的各种操作，为组件提供矩阵变换能力，支持对图形进行平移、旋转和缩放等。
  * 
  * Matrix4的使用场景包括：
  * 
- * [图形变换]{@link common}中的[transform]{@link CommonMethod#transform(transform: Optional<object>)}接口通过使用图形变换矩阵Matrix4对象显示二维
+ * [图形变换]{@link CommonMethod}中的[transform]{@link CommonMethod#transform(transform: Optional<object>)}接口通过使用图形变换矩阵Matrix4对象显示二维
  * 变换时的矩阵变换，[transform3D]{@link CommonMethod#transform3D}接口通过使用图形变换矩阵Matrix4对象设置组件的三维变换矩阵。
  * 
  * > **说明：**

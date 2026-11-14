@@ -144,11 +144,11 @@ declare namespace process {
    */
   export class ProcessManager {
     /**
-     * 判断 uid 是否属于当前应用程序。
+     * 判断uid是否属于当前应用程序。
      *
-     * @param { number } v - 应用程序的 uid。可通过 process.uid 获取。
-     * @returns { boolean } 返回判断结果。如果是应用程序的 uid 则返回 true；
-     *     否则返回 false。
+     * @param { number } v - 应用程序的uid。可通过process.uid获取。
+     * @returns { boolean } 返回判断结果。如果是应用程序的uid则返回true，
+     *     否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -157,10 +157,10 @@ declare namespace process {
     isAppUid(v: number): boolean;
 
     /**
-     * 根据指定的用户名，从系统的用户数据库中获取该用户 uid。
+     * 根据指定的用户名，从系统的用户数据库中获取该用户的uid。
      *
      * @param { string } v - 用户名。
-     * @returns { number } 获取用户 uid，如果用户不存在则返回 -1。
+     * @returns { number } 获取用户uid，如果用户不存在则返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -169,9 +169,9 @@ declare namespace process {
     getUidForName(v: string): number;
 
     /**
-     * 根据指定的 tid 获取线程优先级。
+     * 根据指定的tid获取线程优先级。
      *
-     * @param { number } v - 指定的线程 tid。
+     * @param { number } v - 指定的线程tid。可通过process.tid获取。
      * @returns { number } 返回线程的优先级。优先级顺序取决于当前操作系统。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -184,7 +184,7 @@ declare namespace process {
      * 获取系统配置信息。
      *
      * @param { number } name - 指定系统配置参数名。
-     * @returns { number } 返回系统配置信息。如果配置不存在，返回 -1。
+     * @returns { number } 返回系统配置信息。如果配置不存在，返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -220,7 +220,7 @@ declare namespace process {
     /**
      * 发送信号到指定的进程，结束指定进程（仅支持结束本进程）。
      *
-     * @param { number } signal - 发送特定的信号给指定进程。取值范围：1 <= signal <= 64。
+     * @param { number } signal - 发送特定的信号给指定进程。 取值范围：1 <= signal <= 64。
      * @param { number } pid - 进程的id。可通过process.pid获取。
      * @returns { boolean } 信号是否发送成功。如果信号发送成功则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang

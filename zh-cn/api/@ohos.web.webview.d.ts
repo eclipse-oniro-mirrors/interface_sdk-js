@@ -6498,6 +6498,102 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * 在当前导航条目上设置用户数据的键值对。
+     *
+     * 用户数据与导航入口生命周期相关联。当前导航条目
+     * 指导航历史记录中的活动条目。当条目被销毁时
+     * （例如，通过历史导航或clearHistory）清除用户数据。如果一个具有
+     * 相同的键已经存在，它将被覆盖。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @param { string } value - 用户数据的价值。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * 获取与当前导航条目上的指定键关联的用户数据值。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @returns { string } 用户数据的值，如果键不存在，则为空字符串。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * 从当前导航条目中删除与指定键关联的用户数据。
+     * 如果密钥不存在，则此API不执行任何操作。
+     *
+     * @param { string } key - 要删除的用户数据的密钥。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
+
+    /**
+     * 删除指定日期之后发生变化的已访问链接记录。
+     * 该接口使用异步回调返回结果。
+     *
+     * @param { Date } date - 数据删除的时间点。
+     *     已访问链接记录删除该日期后发生变化的数据。
+     * @param { Callback<void> } callback - 回调函数，用于返回结果。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+    /**
+     * 删除指定日期之后发生变化的已访问链接记录。
+     * 该接口使用Promise异步回调。
+     *
+     * @param { Date } date - 数据删除的时间点。
+     *     已访问链接记录删除该日期后发生变化的数据。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date): Promise<void>;
+  
+    /**
+     * 设置 NavigationThrottle，用于在多个阶段拦截导航请求。
+     *
+     * NavigationThrottle 提供四个导航阶段的回调：`willStartRequest`、`willRedirectRequest`、
+     * `willProcessResponse`、`willFailRequest`。每个回调可返回 PROCEED、CANCEL 或 DEFER。
+     * 返回 DEFER 时，导航暂停，直到调用 DeferThrottleCallback 的`proceed()`或`cancel()`。
+     *
+     * > **说明**
+     * >
+     * > - 调用本接口会替换之前设置的 NavigationThrottle，原 throttle 不再被调用。
+     * > - 本接口不影响{@link onOverrideUrlLoading}。两者同时设置时，
+     * > 先调用{@link onOverrideUrlLoading}，再调用 NavigationThrottle 回调。
+     *
+     * @param { NavigationThrottle } throttle - 用于拦截导航的 NavigationThrottle 实例。
+     *     传入**undefined**或**null**清除当前 NavigationThrottle。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationThrottle(throttle: NavigationThrottle): void;
   }
 
   /**
@@ -9309,6 +9405,263 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     OVERLAY_VISUAL_SCROLLBAR = 2
+  }
+
+  /**
+   * NavigationThrottle 回调可执行的动作枚举。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum NavigationThrottleAction {  
+    /**
+     * 允许导航继续。当回调未实现或返回无效值时，默认使用此动作。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    PROCEED = 0,
+ 
+    /**
+     * 取消导航。当导航应被阻止时使用。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CANCEL = 1,
+ 
+    /**
+     * 暂缓决策。导航暂停，直到在{@link DeferThrottleCallback}上调用`proceed()`或`cancel()`。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    DEFER = 2
+  }
+
+  /**
+   * 传递给{@link NavigationThrottle}回调的导航信息。不同字段在不同回调阶段有效：
+   * - **willStartRequest**：url、isMainFrame、hasUserGesture、pageTransition、requestMethod、isRendererInitiated 有效。
+   * - **willRedirectRequest**：url（重定向目标）、isMainFrame、hasUserGesture、isRedirect、pageTransition、
+   *   requestMethod、isRendererInitiated 有效。
+   * - **willProcessResponse**：url、isMainFrame、statusCode、mimeType、contentDisposition 有效。
+   * - **willFailRequest**：url、isMainFrame、errorCode、errorDescription 有效。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationInfo {
+    /**
+     * 导航请求的URL。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    url: string;
+ 
+    /**
+     * 是否为主帧导航。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isMainFrame: boolean;
+ 
+    /**
+     * 导航是否由用户手势触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    hasUserGesture: boolean;
+
+    /**
+     * 是否为服务端重定向。仅在 willRedirectRequest 中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRedirect: boolean;
+
+    /**
+     * 页面跳转值，由[PageTransition]{@link webview.PageTransition}中定义的核心类型与修饰标志按位或得到。
+     * 可使用掩码常量（`CORE_MASK`、`QUALIFIER_MASK`、`IS_REDIRECT_MASK`）进行拆解。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    pageTransition: number;
+ 
+    /**
+     * 导航请求的 HTTP 方法，如`GET`、`POST`。
+     * 在 willStartRequest 阶段首次有效；在 willRedirectRequest 阶段可能更新（如重定向可能改变方法）；后续阶段保持不变。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    requestMethod: string;
+
+    /**
+     * 导航是否由渲染进程发起。`true`表示由渲染进程发起（如点击链接或脚本重定向），
+     * `false`表示由浏览器进程发起（如通过 API 调用）。
+     * 在 willStartRequest 阶段首次有效；后续阶段保持不变。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRendererInitiated: boolean;
+ 
+    /**
+     * 响应的HTTP状态码，有效范围【100,599】。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    statusCode: number;
+ 
+    /**
+     * 响应的MIME（多用途Internet邮件扩展）类型。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    mimeType: string;
+ 
+    /**
+     * 响应的Content-Disposition头。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    contentDisposition: string;
+ 
+    /**
+     * 网络错误码。仅在 willFailRequest 中有效。详情参见[WebNetErrorList]{@link @ohos.web.netErrorList:WebNetErrorList}。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorCode: WebNetErrorList;
+ 
+    /**
+     * 错误描述。仅在willFailRequest中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorDescription: string;
+  }
+
+  /**
+   * 为返回 DEFER 的{@link NavigationThrottle}回调提供异步决策能力。
+   *
+   * 当 NavigationThrottle 回调返回{@link NavigationThrottleAction}.DEFER 时，导航暂停。NavigationThrottle 回调方法的第二个
+   * 参数为 DeferThrottleCallback。调用`proceed()`恢复导航，或调用`cancel()`取消导航。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface DeferThrottleCallback {  
+    /**
+     * 恢复暂缓的导航。重复调用，或在`cancel()`之后调用，均无效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    proceed(): void;
+ 
+    /**
+     * 取消暂缓的导航。重复调用，或在`proceed()`之后调用，均无效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    cancel(): void;
+  }
+
+  /**
+   * 在多个阶段拦截导航请求的接口。
+   *
+   * 通过{@link WebviewController#setNavigationThrottle}为 Web 组件设置 NavigationThrottle。每个回调接收一个
+   * {@link NavigationInfo}和一个{@link DeferThrottleCallback}，并返回一个{@link NavigationThrottleAction}。
+   *
+   * > **说明**
+   * >
+   * > - 回调未实现或返回无效值（如 undefined）时，默认使用 PROCEED。
+   * > - 回调返回 DEFER 时导航暂停，使用{@link DeferThrottleCallback}异步恢复或取消。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationThrottle {  
+    /**
+     * 导航请求即将开始时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willStartRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 导航被服务端重定向时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**url**字段是重定向目标。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willRedirectRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 收到导航的服务端响应时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**statusCode**、**mimeType**、**contentDisposition**有效。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willProcessResponse(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 导航失败时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**errorCode**和**errorDescription**有效。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willFailRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
   }
 }
 

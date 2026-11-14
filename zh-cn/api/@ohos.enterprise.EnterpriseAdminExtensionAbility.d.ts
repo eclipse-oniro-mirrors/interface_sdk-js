@@ -193,6 +193,22 @@ export default class EnterpriseAdminExtensionAbility {
   onAccountSwitched(accountId: number): void;
 
   /**
+   * 系统账号切换事件回调。当系统账号从一个账号切换到另一个账号时触发。与已有的onAccountSwitched(accountId: number)
+   * 相比，该回调同时提供切出账号ID和切入账号ID，便于更详细地跟踪账号切换过程。
+   *
+   * 通过接口
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * 注册MANAGED_EVENT_ACCOUNT_SWITCHED事件才能收到此回调。
+   *
+   * @param { number } fromAccountId - 切换前的用户ID，即切出的账号ID。
+   * @param { number } toAccountId - 切换后的用户ID，即切入的账号ID。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onAccountSwitched(fromAccountId: number, toAccountId: number): void;
+
+  /**
    * 系统账号删除事件回调。通过接口
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * 注册MANAGED_EVENT_ACCOUNT_REMOVED事件才能收到此回调。企业设备管理场景下，设备管理应用订阅系统账号删除事件，系统账号删除事件通知设备管理应用，设备管理应用可以在此回调函数中进行事件上报，通知企业管理员。
@@ -372,16 +388,26 @@ export default class EnterpriseAdminExtensionAbility {
   onUnmountExternalStorageDevice(deviceInfo: common.ExternalStorageDeviceInfo): void;
 
   /**
+   * 短信接收回调。当收到短信时触发此回调。
+   * @param { common.SmsReceiveInfo } smsInfo - SMS received information, including slot ID, phone number,
+   *     SMS count, and content.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onSmsReceived(smsInfo: common.SmsReceiveInfo): void;
+
+  /**
    * 密码认证失败事件回调。当密码认证失败时触发此回调。
    * 需要通过接口
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * 注册**MANAGED_EVENT_PASSWORD_FAILED**事件。
    *
    * @param { number } cumulativeFailedCount - 密码认证失败的累计次数。
-   * @param { number } userId - 发生密码认证失败的用户ID。
+   * @param { number } accountId - 发生密码认证失败的用户ID。
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
-  onPasswordFailed(cumulativeFailedCount: number, userId: number): void;
+  onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
 }

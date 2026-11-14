@@ -40,7 +40,7 @@ declare enum Sticky {
   None,
 
   /**
-   * Normal mode
+   * 当前item吸顶。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -50,7 +50,7 @@ declare enum Sticky {
   Normal,
 
   /**
-   * Set opacity.
+   * 当前item吸顶显示透明度变化效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel

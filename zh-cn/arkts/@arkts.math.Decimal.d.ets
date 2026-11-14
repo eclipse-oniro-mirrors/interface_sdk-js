@@ -241,7 +241,7 @@ declare class Decimal {
   /**
    * Decimal的构造函数。
    *
-   * @param { Value } n {double | string | Decimal}
+   * @param { Value } n - 构造Decimal时的初始值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -256,7 +256,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的绝对值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回绝对值运算后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -268,7 +268,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal向负无穷方向舍入得到的结果。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回向负无穷方向舍入后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -280,7 +280,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal向正无穷方向舍入得到的结果。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回向正无穷方向舍入后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -290,9 +290,9 @@ declare class Decimal {
   ceil(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将当前Decimal截断为整数部分。
+   * 返回一个新的Decimal对象，其值是将此Decimal截断为整数部分。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回截断之后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -304,9 +304,9 @@ declare class Decimal {
   /**
    * 返回一个将Decimal值限制在min到max范围内的Decimal对象。如果值大于max，返回max；如果值小于min，返回min；否则，返回原值。
    *
-   * @param { Value } min {double | string | Decimal}
-   * @param { Value } max {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } min - 限制的最小值。包含该值。
+   * @param { Value } max - 限制的最大值。包含该值。
+   * @returns { Decimal } 返回符合范围内的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -320,10 +320,10 @@ declare class Decimal {
   clamp(min: Value, max: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将此Decimal的值加上n。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是将此Decimal的值加上n。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 加法运算的加数。
+   * @returns { Decimal } 返回加法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -336,10 +336,10 @@ declare class Decimal {
   add(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将此Decimal的值减去n。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是将此Decimal的值减去n。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 减法运算的减数。
+   * @returns { Decimal } 返回减法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -352,10 +352,10 @@ declare class Decimal {
   sub(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将此Decimal的值乘以n。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是将此Decimal的值乘以n。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 乘法运算的乘数。
+   * @returns { Decimal } 返回乘法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -368,10 +368,10 @@ declare class Decimal {
   mul(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将此Decimal的值除以n。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是将此Decimal的值除以n。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 除法运算的除数。
+   * @returns { Decimal } 返回除法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -384,10 +384,10 @@ declare class Decimal {
   div(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是将此Decimal的值除以n后的模。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是将此Decimal的值除以n后的模。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal }the Decimal type
+   * @param { Value } n - 模运算的除数。
+   * @returns { Decimal } 返回模运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -400,9 +400,9 @@ declare class Decimal {
   mod(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是当前Decimal的平方根。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是当前Decimal的平方根。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回平方根运算后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -412,9 +412,9 @@ declare class Decimal {
   sqrt(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是当前Decimal对象的立方根。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是当前Decimal对象的立方根。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回立方根运算后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -424,10 +424,10 @@ declare class Decimal {
   cbrt(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是这个Decimal值的n次幂。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是这个Decimal值的n次幂。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 幂运算的指数值。
+   * @returns { Decimal } 返回幂运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -441,9 +441,9 @@ declare class Decimal {
   pow(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的自然指数（即以e为底，此Decimal值为指数的幂）。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是此Decimal值的自然指数。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回自然指数运算后的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -454,10 +454,10 @@ declare class Decimal {
   exp(): Decimal;
 
   /**
-   * 返回一个对数运算后的Decimal对象，其值是以n为底的此Decimal的对数值。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个对数运算后的Decimal对象，其值是以n为底的此Decimal的对数值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 对数计算的底数值。
+   * @returns { Decimal } 返回对数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -471,9 +471,9 @@ declare class Decimal {
   log(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的自然对数。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回一个新的Decimal对象，其值是此Decimal值的自然对数。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回自然对数运算后的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -484,9 +484,9 @@ declare class Decimal {
   ln(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal的余弦值。
+   * 返回一个新的Decimal对象，其值是此Decimal的余弦值。输入值以弧度为单位。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算余弦值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -498,7 +498,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的正弦值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算正弦值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -510,7 +510,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的正切值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算正切值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -522,7 +522,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的双曲余弦值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算双曲余弦值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -534,7 +534,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的双曲正弦值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算双曲正弦值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -546,7 +546,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的双曲正切值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算双曲正切值的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -558,7 +558,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的反余弦值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反余弦值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -571,7 +571,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的反正弦值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反正弦值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -584,7 +584,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是此Decimal的反正切值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反正切值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -595,9 +595,9 @@ declare class Decimal {
   atan(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲余弦值。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲余弦。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反双曲余弦值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -608,9 +608,9 @@ declare class Decimal {
   acosh(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正弦值。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正弦。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反双曲正弦值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -621,9 +621,9 @@ declare class Decimal {
   asinh(): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正切值。
+   * 返回一个新的Decimal对象，其值是此Decimal值的反双曲正切。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回计算反双曲正切值的Decimal对象实例。
    * @throws { BusinessError } 10200060 - Precision limit exceeded.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -635,13 +635,9 @@ declare class Decimal {
 
   /**
    * 返回该Decimal与比较值的比较结果。
-   * 1    如果此Decimal大于n的值，
-   * -1    如果此Decimal小于n的值，
-   * 0    如果两者的值相等，
-   * NaN  如果两者中任一Decimal的值为NaN。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { double } the number type
+   * @param { Value } n - 待比较的值。
+   * @returns { double } 返回该Decimal与n的比较结果。<br>1:该Decimal大于比较值。<br>-1:该Decimal小于比较值。<br>0:该Decimal等于比较值。<br>NaN:该Decimal与比较值有一个值为NaN。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -654,10 +650,10 @@ declare class Decimal {
   comparedTo(n: Value): double;
 
   /**
-   * 返回此Decimal是否等于比较值n，相等返回true，否则返回false。
+   * 返回该Decimal是否等于比较值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { boolean } the boolean type
+   * @param { Value } n - 待比较的值。
+   * @returns { boolean } true表示该Decimal与比较值相等，false表示该Decimal与比较值不相等。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -670,10 +666,10 @@ declare class Decimal {
   equals(n: Value): boolean;
 
   /**
-   * 返回此Decimal是否大于比较值n，大于返回true，否则返回false。
+   * 返回该Decimal是否大于比较值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { boolean } the boolean type
+   * @param { Value } n - 待比较的值。
+   * @returns { boolean } true表示该Decimal大于比较值，false表示该Decimal小于等于比较值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -686,10 +682,10 @@ declare class Decimal {
   greaterThan(n: Value): boolean;
 
   /**
-   * 返回此Decimal是否大于等于比较值n，大于等于返回true，否则返回false。
+   * 返回该Decimal是否大于等于比较值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { boolean } the boolean type
+   * @param { Value } n - 待比较的值。
+   * @returns { boolean } true表示该Decimal大于等于比较值，false表示该Decimal小于比较值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -702,10 +698,10 @@ declare class Decimal {
   greaterThanOrEqualTo(n: Value): boolean;
 
   /**
-   * 返回此Decimal是否小于比较值n，小于返回true，否则返回false。
+   * 返回该Decimal是否小于比较值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { boolean } the boolean type
+   * @param { Value } n - 待比较的值。
+   * @returns { boolean } true表示该Decimal小于比较值，false表示该Decimal大于等于比较值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -718,10 +714,10 @@ declare class Decimal {
   lessThan(n: Value): boolean;
 
   /**
-   * 返回此Decimal是否小于等于比较值n，小于等于返回true，否则返回false。
+   * 返回该Decimal是否小于等于比较值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { boolean } the boolean type
+   * @param { Value } n - 待比较的值。
+   * @returns { boolean } true表示该Decimal小于等于比较值，false表示该Decimal大于比较值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -734,9 +730,9 @@ declare class Decimal {
   lessThanOrEqualTo(n: Value): boolean;
 
   /**
-   * 返回此Decimal是否为有限值，是有限值返回true，否则返回false。
+   * 返回该Decimal是否为有限值。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为有限值，false表示该Decimal不是有限值（如Infinity或NaN）。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -746,9 +742,9 @@ declare class Decimal {
   isFinite(): boolean;
 
   /**
-   * 返回此Decimal是否为整数，是整数返回true，否则返回false。
+   * 返回该Decimal是否为整数。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为整数，false表示该Decimal不为整数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -758,9 +754,9 @@ declare class Decimal {
   isInteger(): boolean;
 
   /**
-   * 返回此Decimal是否为无效值（NaN），是NaN返回true，否则返回false。
+   * 返回该Decimal是否为无效值。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为NaN，false表示该Decimal不为NaN。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -770,9 +766,9 @@ declare class Decimal {
   isNaN(): boolean;
 
   /**
-   * 返回此Decimal是否为负数（区分正负零），是负数返回true，否则返回false。
+   * 返回该Decimal是否为负数（区分正负零）。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为负数，false表示该Decimal不为负数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -782,9 +778,9 @@ declare class Decimal {
   isNegative(): boolean;
 
   /**
-   * 返回此Decimal是否为正数（区分正负零），是正数返回true，否则返回false。
+   * 返回该Decimal是否为正数（区分正负零）。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为正数，false表示该Decimal不为正数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -794,9 +790,9 @@ declare class Decimal {
   isPositive(): boolean;
 
   /**
-   * 返回此Decimal是否为0或是-0，是返回true，否则返回false。
+   * 返回该Decimal是否为0或是-0。
    *
-   * @returns { boolean } the boolean type
+   * @returns { boolean } true表示该Decimal为0或是-0，false表示该Decimal不为0且不为-0。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -806,10 +802,10 @@ declare class Decimal {
   isZero(): boolean;
 
   /**
-   * 返回该Decimal除以n后获得的整数部分。按照precision设置有效位数，按照rounding设置舍入模式。
+   * 返回该Decimal除以n后获得的整数部分。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 除法的除数值。
+   * @returns { Decimal } 返回一个Decimal对象，其值是将此Decimal的值除以n值的整数部分。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -822,9 +818,9 @@ declare class Decimal {
   dividedToIntegerBy(n: Value): Decimal;
 
   /**
-   * 返回一个新的Decimal对象，其值将此Decimal的值乘以-1。
+   * 对Decimal值进行取负操作（乘以-1）。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个Decimal对象，其值将此Decimal的值乘以-1。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -836,7 +832,7 @@ declare class Decimal {
   /**
    * 将Decimal转换为二进制表示的字符串。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回二进制表示的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -846,10 +842,11 @@ declare class Decimal {
   toBinary(): string;
 
   /**
-   * 将Decimal转换为二进制表示的字符串，可按照significantDigits设置有效数字。
+   * 将Decimal转换为二进制表示的字符串，并可按照significantDigits设置有效数字。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
-   * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @returns { string } the string type
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
+   * @returns { string } 返回二进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -860,11 +857,11 @@ declare class Decimal {
   toBinary(significantDigits: double): string;
 
   /**
-   * 将Decimal转换为二进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
+   * 将Decimal转换为二进制表示的字符串，并可按照significantDigits设置有效数字，以及按照rounding设置舍入模式。
    *
-   * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
+   * @param { Rounding } rounding 转换时使用的舍入模式，取值范围参考Rounding。
+   * @returns { string } 返回二进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -875,9 +872,9 @@ declare class Decimal {
   toBinary(significantDigits: double, rounding: Rounding): string;
 
   /**
-   * 将Decimal转换为八进制表示的字符串。
+   * 转换为八进制表示的字符串。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回八进制表示的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -887,10 +884,11 @@ declare class Decimal {
   toOctal(): string;
 
   /**
-   * 将Decimal转换为八进制表示的字符串，可按照significantDigits设置有效数字。
+   * 转换为八进制表示的字符串，可按照significantDigits设置有效数字。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
    * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
-   * @returns { string } the string type
+   * @returns { string } 返回八进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -901,11 +899,11 @@ declare class Decimal {
   toOctal(significantDigits: double): string;
 
   /**
-   * 将Decimal转换为八进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
+   * 转换为八进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
    *
    * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @param { Rounding } rounding 转换时使用的舍入模式，取值范围参考Rounding。
+   * @returns { string } 返回八进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -916,9 +914,9 @@ declare class Decimal {
   toOctal(significantDigits: double, rounding: Rounding): string;
 
   /**
-   * 将Decimal转换为十六进制表示的字符串。
+   * 转换为十六进制表示的字符串。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回十六进制表示的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -928,10 +926,11 @@ declare class Decimal {
   toHexadecimal(): string;
 
   /**
-   * 将Decimal转换为十六进制表示的字符串，可按照significantDigits设置有效数字。
+   * 转换为十六进制表示的字符串，可按照significantDigits设置有效数字。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
-   * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @returns { string } the string type
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
+   * @returns { string } 返回十六进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -942,11 +941,11 @@ declare class Decimal {
   toHexadecimal(significantDigits: double): string;
 
   /**
-   * 将Decimal转换为十六进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
+   * 转换为十六进制表示的字符串，可按照significantDigits设置有效数字，可按照rounding设置舍入模式。
    *
-   * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @param { double } significantDigits 转换时保留的有效数字，取值范围为[1, 1e9]的整数。
+   * @param { Rounding } rounding 转换时使用的舍入模式，取值范围参考Rounding。
+   * @returns { string } 返回十六进制表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -957,9 +956,9 @@ declare class Decimal {
   toHexadecimal(significantDigits: double, rounding: Rounding): string;
 
   /**
-   * 返回一个保留小数点后指定位数的Decimal对象，不进行小数的取舍。
+   * 返回一个保留小数点后指定位数的Decimal对象，不进行小数的舍入。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个Decimal对象保留小数点后指定位数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -970,9 +969,10 @@ declare class Decimal {
 
   /**
    * 返回一个保留小数点后指定位数的Decimal对象，可按照decimalPlaces设置小数位数。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @returns { Decimal } the Decimal type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @returns { Decimal } 返回一个Decimal对象保留小数点后指定位数。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -985,9 +985,9 @@ declare class Decimal {
   /**
    * 返回一个保留小数点后指定位数的Decimal对象，可按照decimalPlaces设置小数位数，可按照rounding设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { Decimal } the Decimal type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围参考Rounding。
+   * @returns { Decimal } 返回一个Decimal对象保留小数点后指定位数。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1000,7 +1000,7 @@ declare class Decimal {
   /**
    * 将数值转换为指数表示法的字符串，不进行小数部分的舍入。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回按照指数表示法显示的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1010,10 +1010,11 @@ declare class Decimal {
   toExponential(): string;
 
   /**
-   * 将数值转换为指数表示法的字符串，可按照decimalPlaces设置小数位数。
+   * 将数值转换为按照指数表示法显示的字符串，可按照decimalPlaces设置小数位数。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @returns { string } the string type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @returns { string } 返回按照指数表示法显示的字符串。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1024,11 +1025,11 @@ declare class Decimal {
   toExponential(decimalPlaces: double): string;
 
   /**
-   * 将数值转换为指数表示法的字符串，可按照decimalPlaces设置小数位数，可按照rounding设置舍入模式。
+   * 转换为按照指数表示法显示的字符串，可按照decimalPlaces设置小数位数，可按照rounding设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @param { Rounding } rounding 转换时使用的舍入模式，取值范围参考Rounding。
+   * @returns { string } 返回按照指数表示法显示的字符串。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1039,9 +1040,9 @@ declare class Decimal {
   toExponential(decimalPlaces: double, rounding: Rounding): string;
 
   /**
-   * 将数值转换为十进制定点模式表示的字符串，不进行小数的取舍。
+   * 将数值转换为十进制定点模式表示的字符串，不进行小数的舍入。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回按照正常模式（十进制定点模式）表示的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1052,9 +1053,10 @@ declare class Decimal {
 
   /**
    * 将数值转换为十进制定点模式表示的字符串，可按照decimalPlaces设置小数位数。
+   * 使用DecimalConfig.rounding的值设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @returns { string } the string type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @returns { string } 返回按照正常模式（十进制定点模式）表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1067,9 +1069,9 @@ declare class Decimal {
   /**
    * 将数值转换为十进制定点模式表示的字符串，可按照decimalPlaces设置小数位数，可按照rounding设置舍入模式。
    *
-   * @param { double } decimalPlaces 转换时保留的小数点后有效位数。取值范围为[0, 1e9]的整数。
-   * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @param { double } decimalPlaces 转换时保留的小数点后有效位数，取值范围为[0, 1e9]的整数。
+   * @param { Rounding } rounding 转换时使用的舍入模式，取值范围参考Rounding。
+   * @returns { string } 返回按照正常模式（十进制定点模式）表示的字符串。
    * @throws { BusinessError } 10200001 - The value of `decimalPlaces | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1082,7 +1084,7 @@ declare class Decimal {
   /**
    * 转换为分数表示的数。返回一个长度固定为2的Decimal数组，分别表示分子和分母。
    *
-   * @returns { Decimal[] } the Decimal[] type
+   * @returns { Decimal[] } 返回一个Decimal数组，该数组长度固定为2，其值表示为具有整数分子和整数分母的简单分数。且分子在前，分母在后。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1094,8 +1096,8 @@ declare class Decimal {
   /**
    * 转换为分数表示的数，可以通过maxDenominator设置最大分母值。返回一个长度固定为2的Decimal数组，分别表示分子和分母。
    *
-   * @param { Value } maxDenominator {double | string | Decimal}
-   * @returns { Decimal[] } the Decimal[] type
+   * @param { Value } maxDenominator - 分母的最大值。包含该值。
+   * @returns { Decimal[] } 返回一个Decimal数组，该数组长度固定为2，其值表示为具有整数分子和整数分母的简单分数。且分子在前，分母在后。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1110,8 +1112,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为指定值n的整数倍中最接近原Decimal值的值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 参考的指定值。
+   * @returns { Decimal } 返回一个Decimal对象，为最接近原值的指定值的倍数值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1126,9 +1128,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为指定值n的整数倍中最接近原Decimal值的值，可按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
+   * @param { Value } n - 参考的指定值。
    * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个Decimal对象，为最接近原值的指定值的倍数值。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1144,7 +1146,7 @@ declare class Decimal {
   /**
    * 将Decimal对象转换为字符串。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回一个表示Decimal对象的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1157,7 +1159,7 @@ declare class Decimal {
    * 将数值转换为字符串，可按照significantDigits设置有效数字。
    *
    * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @returns { string } the string type
+   * @returns { string } 返回一个表示Decimal对象的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1172,7 +1174,7 @@ declare class Decimal {
    *
    * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
    * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { string } the string type
+   * @returns { string } 返回一个表示Decimal对象的字符串。
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1185,7 +1187,7 @@ declare class Decimal {
   /**
    * 返回一个按照保留有效数字转换的Decimal对象。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个保留有效数字后的Decimal对象实例。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1198,7 +1200,7 @@ declare class Decimal {
    * 返回一个按照保留有效数字转换的Decimal对象，可按照significantDigits设置有效数字。
    *
    * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个保留有效数字后的Decimal对象实例。
    * @throws { BusinessError } 10200001 - The value of `significantDigits` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1213,7 +1215,7 @@ declare class Decimal {
    *
    * @param { double } significantDigits 转换时保留的有效数字。取值范围为[1, 1e9]的整数。
    * @param { Rounding } rounding 转换时使用的舍入模式。取值范围为0到8的整数。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回一个保留有效数字后的Decimal对象实例。
    * @throws { BusinessError } 10200001 - The value of `significantDigits | rounding` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1226,7 +1228,7 @@ declare class Decimal {
   /**
    * 将值转换为number类型。零保留其符号。
    *
-   * @returns { double } the number type
+   * @returns { double } 返回一个表示Decimal的number值。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1238,7 +1240,7 @@ declare class Decimal {
   /**
    * 返回一个字符串，表示此 Decimal 的值。如果此 Decimal 的正指数等于或大于toExpPos，或负指数等于或小于toExpNeg，则将返回指数表示法。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回一个表示Decimal的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1250,7 +1252,7 @@ declare class Decimal {
   /**
    * 返回一个字符串，表示此 Decimal 的值。与toString不同，负零将包含负号。
    *
-   * @returns { string } the string type
+   * @returns { string } 返回一个表示Decimal的字符串。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1262,7 +1264,7 @@ declare class Decimal {
   /**
    * 返回Decimal对象的小数位数。
    *
-   * @returns { double } the number type
+   * @returns { double } 返回Decimal对象的小数位数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1274,7 +1276,7 @@ declare class Decimal {
   /**
    * 返回Decimal对象的有效数字位数。
    *
-   * @returns { double } the number type
+   * @returns { double } 返回Decimal对象的有效位数。
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -1287,7 +1289,7 @@ declare class Decimal {
    * 返回Decimal对象的有效数字位数，可通过includeZeros判断是否计算整数部分的尾随零。
    *
    * @param { boolean | int } includeZeros 是否计算整数部分尾随零。true或1表示计算，false或0表示不计算。
-   * @returns { double } the number type
+   * @returns { double } 返回Decimal对象的有效位数。
    * @throws { BusinessError } 10200001 - The value of `includeZeros` is out of range.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1300,8 +1302,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，Decimal的值为参数n的绝对值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 取绝对值的参数。
+   * @returns { Decimal } 返回一个值为参数n的绝对值的Decimal。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1316,8 +1318,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为参数n向负无穷方向舍入得到的结果。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要舍入的值。
+   * @returns { Decimal } 返回舍入之后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1332,8 +1334,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为参数n向正无穷方向舍入得到的结果。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要舍入的值。
+   * @returns { Decimal } 返回舍入之后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1348,8 +1350,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为将n截断为整数的结果。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要截断的值。
+   * @returns { Decimal } 返回截断之后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1364,10 +1366,10 @@ declare class Decimal {
   /**
    * 返回一个值为将参数n的值限制在min到max范围内的Decimal对象，当n大于max时返回max，当n小于min时返回min，在范围内返回值不变。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @param { Value } min {double | string | Decimal}
-   * @param { Value } max {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要被限制的值。
+   * @param { Value } min - 限制的最小值。包含该值。
+   * @param { Value } max - 限制的最大值。包含该值。
+   * @returns { Decimal } 返回符合范围的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1383,9 +1385,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为x加y的和。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } x {double | string | Decimal}
-   * @param { Value } y {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } x - 加法的一个加数。
+   * @param { Value } y - 加法的另一个加数。
+   * @returns { Decimal } 返回加法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1402,8 +1404,8 @@ declare class Decimal {
    *
    * 仅对结果进行舍入，不对中间计算结果进行舍入。
    *
-   * @param { Value[] } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value[] } n - 加数的序列。
+   * @returns { Decimal } 返回加法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1418,9 +1420,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为x减y的差。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } x {double | string | Decimal}
-   * @param { Value } y {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } x - 减法的被减数。
+   * @param { Value } y - 减法的减数。
+   * @returns { Decimal } 返回减法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1435,9 +1437,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为x乘以y的积。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } x {double | string | Decimal}
-   * @param { Value } y {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } x - 乘法的被乘数。
+   * @param { Value } y - 乘法的乘数。
+   * @returns { Decimal } 返回乘法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1452,9 +1454,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为x除以y的商。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } x {double | string | Decimal}
-   * @param { Value } y {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } x - 除法的被除数。
+   * @param { Value } y - 除法的除数。
+   * @returns { Decimal } 返回除法运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1469,9 +1471,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是x除以y的模。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } x {double | string | Decimal}
-   * @param { Value } y {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } x - 模运算的被除数。
+   * @param { Value } y - 模运算的除数。
+   * @returns { Decimal } 返回模运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1486,8 +1488,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为n的平方根。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 取平方根的值。
+   * @returns { Decimal } 返回平方根运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1502,8 +1504,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为n的立方根。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 取立方根的值。
+   * @returns { Decimal } 返回立方根运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1520,7 +1522,7 @@ declare class Decimal {
    *
    * @param { Value } base {double | string | Decimal} 幂运算的底数的值。
    * @param { Value } exponent {double | string | Decimal} 幂运算的指数值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回幂运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1536,8 +1538,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为n的自然指数。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求自然指数的值。
+   * @returns { Decimal } 返回自然指数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1553,9 +1555,9 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是以base为底n的对数。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @param { Value } base {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 对数运算的真数。
+   * @param { Value } base - 对数运算的底数。
+   * @returns { Decimal } 返回对数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1571,8 +1573,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为n的自然对数。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 对数运算的真数。
+   * @returns { Decimal } 返回自然对数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1588,8 +1590,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是以2为底n的对数。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 对数运算的真数。
+   * @returns { Decimal } 返回以2为底的对数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1605,8 +1607,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是以10为底n的对数。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 对数运算的真数。
+   * @returns { Decimal } 返回以10为底的对数运算后的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1623,7 +1625,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的余弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的余弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1639,7 +1641,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的正弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的正弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1655,7 +1657,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 以弧度为单位的值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的正切值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1671,7 +1673,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的双曲余弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 需要求双曲函数的数值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的双曲余弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1686,8 +1688,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的双曲正弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求的双曲正弦值的值。
+   * @returns { Decimal } 返回n的双曲正弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1703,7 +1705,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的双曲正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 需要求双曲函数的数值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的双曲正切值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1718,8 +1720,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的反余弦值。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求反余弦值的值。
+   * @returns { Decimal } 返回n的反余弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1735,8 +1737,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的反正弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求反正弦值的值。
+   * @returns { Decimal } 返回n的反正弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1752,8 +1754,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的反正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求反正切值的值。
+   * @returns { Decimal } 返回n的反正切值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1769,8 +1771,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是n的反双曲余弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要求反双曲余弦值的值。
+   * @returns { Decimal } 返回n的反双曲余弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1787,7 +1789,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的反双曲正弦值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 需要求反双曲函数的数值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的反双曲正弦值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1804,7 +1806,7 @@ declare class Decimal {
    * 返回一个新的Decimal对象，其值是n的反双曲正切值。按照precision设置有效位数，按照rounding设置舍入模式。
    *
    * @param { Value } n {double | string | Decimal} 需要求反双曲函数的数值。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回n的反双曲正切值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1822,7 +1824,7 @@ declare class Decimal {
    *
    * @param { Value } y {double | string | Decimal} y坐标值，用于计算y/x的反正切值并确定象限。
    * @param { Value } x {double | string | Decimal} x坐标值，用于计算y/x的反正切值并确定象限。
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 返回-π到π范围内的"y/x"反正切值对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1838,8 +1840,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是参数平方和的平方根。无入参时默认返回0。按照precision设置有效位数，按照rounding设置舍入模式。
    *
-   * @param { Value[] } n {double | string | Decimal} Decimal
-   * @returns { Decimal } the Decimal type
+   * @param { Value[] } n - 需要求平方和的序列。
+   * @returns { Decimal } 返回值为所有参数平方和的平方根的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1854,8 +1856,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是所有参数中的最大值。未传入参数时会抛出运行时异常。
    *
-   * @param { Value[] } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value[] } n - 需要求最大值的序列。
+   * @returns { Decimal } 返回所有参数中的最大值的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1870,8 +1872,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是所有参数中的最小值。未传入参数时会抛出运行时异常。
    *
-   * @param { Value[] } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value[] } n - 需要求最小值的序列。
+   * @returns { Decimal } 返回所有参数中的最小值的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1886,7 +1888,7 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值为大于等于0且小于1的随机值。
    *
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 大于等于0小于1的随机值的Decimal对象实例。
    * @throws { BusinessError } 10200061 - Crypto unavailable.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
@@ -1901,7 +1903,7 @@ declare class Decimal {
    *
    * @param { Value } significantDigits {number} 随机值保留的有效数字。取值范围为[0, 1e9]的整数。[since 12 - 17]
    * @param { double } significantDigits 随机值保留的有效数字。取值范围为[0, 1e9]的整数。[since 18]
-   * @returns { Decimal } the Decimal type
+   * @returns { Decimal } 大于等于0小于1的随机值的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.
@@ -1921,7 +1923,7 @@ declare class Decimal {
    * 0    如果 n 为 0，
    * NaN  其他情况
    *
-   * @param { Value } n {double | string | Decimal}
+   * @param { Value } n - 需要判断的值。
    * @returns { Decimal } 参数的符号判断结果 [since 12 - 17]
    * @returns { double } 参数的符号判断结果 [since 18]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -1938,8 +1940,8 @@ declare class Decimal {
   /**
    * 返回一个新的Decimal对象，其值是使用rounding舍入模式将n舍入为整数的结果。
    *
-   * @param { Value } n {double | string | Decimal}
-   * @returns { Decimal } the Decimal type
+   * @param { Value } n - 需要舍入的值。
+   * @returns { Decimal } 返回舍入之后的整数对应的Decimal对象实例。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Incorrect parameter types;
    *     2. Parameter verification failed.

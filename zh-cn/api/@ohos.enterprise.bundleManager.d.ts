@@ -2311,13 +2311,14 @@ declare namespace bundleManager {
    * @param { DefaultApplicationType } type - Type of the default application.
    * @param { string } bundleName - Bundle name of the application.
    * @param { string } abilityName - Name of the application ability.
-   * @param { number } accountId - User ID, which must be greater than or equal to 0.
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 9200016 - Service timeout.
+   * @param { number } accountId - Account ID, which must be greater than or equal to 0.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2329,14 +2330,15 @@ declare namespace bundleManager {
    *
    * @permission ohos.permission.ENTERPRISE_INSTALL_BUNDLE
    * @param { DefaultApplicationType } type - Type of the default application.
-   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @param { number } accountId - Account ID, which must be greater than or equal to 0.
    * @returns { string } Returns the bundle name of the default application.
-   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
-   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
-   * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0

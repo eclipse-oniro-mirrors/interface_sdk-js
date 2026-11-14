@@ -55,6 +55,18 @@ declare namespace util {
   /**
    * 使用样式化字符串将输入内容按特定格式输出，适用于日志输出、用户界面文本格式化等场景。
    *
+   * | 格式说明符 | 说明 |
+   * | --- | --- |
+   * | %s | 将除Object、BigInt和-0之外的值转换为字符串。 |
+   * | %d | 将除Symbol和BigInt之外的值作为十进制整数格式化输出。 |
+   * | %i | 将字符串转换为十进制整数，不适用于BigInt和Symbol。 |
+   * | %f | 将字符串转换为浮点数，不适用于BigInt和Symbol。 |
+   * | %j | 将JavaScript对象序列化为JSON字符串。 |
+   * | %o | 将JavaScript对象转换为字符串，不包含原型链信息。 |
+   * | %O | 将JavaScript对象转换为字符串。 |
+   * | %c | CSS样式占位符，仅在浏览器中有效，其他环境忽略。 |
+   * | %% | 转义百分号。 |
+   *
    * @param { string } format - 格式化字符串，可以包含零个或多个占位符，用于指定要插入的参数的位置和格式。
    * @param { Object[] } args - 替换format参数中占位符的数据，此参数缺失时，直接返回格式化字符串本身。
    * @returns { string } 格式化后的字符串。
@@ -79,6 +91,18 @@ declare namespace util {
 
   /**
    * 获取系统错误码对应的详细信息。适用于系统调用出错时将数字错误码转换为可读的描述信息，便于开发者快速定位和排查系统级错误，常用于错误日志记录和错误提示显示。
+   *
+   * | 错误码 | 信息 |
+   * | --- | --- |
+   * | -1 | operation not permitted |
+   * | -2 | no such file or directory |
+   * | -3 | no such process |
+   * | -4 | interrupted system call |
+   * | -5 | i/o error |
+   * | -11 | resource temporarily unavailable |
+   * | -12 | not enough memory |
+   * | -13 | permission denied |
+   * | -100 | network is down |
    *
    * @param { number } errno - 系统发生错误产生的错误码。
    * @returns { string } 错误码对应的详细信息，包含可读的错误描述文本，便于开发者定位问题。
@@ -277,7 +301,7 @@ declare namespace util {
    */
   class TextDecoder {
     /**
-     * 用于创建 **TextDecoder** 对象的构造函数。
+     * TextDecoder的构造函数，创建一个默认编码格式为'utf-8'的TextDecoder实例，fatal默认为false，ignoreBOM默认为false。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -320,10 +344,10 @@ declare namespace util {
     readonly ignoreBOM = false;
 
     /**
-     * 用于创建 **TextDecoder** 对象的构造函数。
+     * TextDecoder的构造函数。
      *
-     * @param { string } encoding - 编码格式。默认格式为 **'utf-8'**。
-     * @param { object } options - 解码相关的选项，包含 **fatal** 和 **ignoreBOM**。此参数不填时，对应各属性取其默认值 **false**。
+     * @param { string } encoding - 编码格式，默认值是'utf-8'。
+     * @param { object } options - 解码相关选项参数，存在两个属性fatal和ignoreBOM。此参数不填时，对应各属性取其默认值false。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -332,13 +356,13 @@ declare namespace util {
     constructor(encoding?: string, options?: { fatal?: boolean; ignoreBOM?: boolean });
 
     /**
-     * 创建一个 **TextDecoder** 对象。提供与已弃用的带参构造函数相同的功能。
+     * 替代有参构造函数的功能。
      *
      * @param { string } encoding - 编码格式。默认格式为 **'utf-8'**。[since 9 - 10]
      * @param { object } options - 解码相关的选项，包含 **fatal** 和 **ignoreBOM**。[since 9 - 10]
      * @param { string } [encoding] - 编码格式。默认格式为 **'utf-8'**。[since 11]
      * @param { TextDecoderOptions } [options] - 解码相关的选项，包含 **fatal** 和 **ignoreBOM**。[since 11]
-     * @returns { TextDecoder } 创建的 **TextDecoder** 对象。
+     * @returns { TextDecoder } 返回一个用于将字节数组按指定编码格式解码为字符串的TextDecoder对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -347,15 +371,11 @@ declare namespace util {
     static create(encoding?: string, options?: TextDecoderOptions): TextDecoder;
 
     /**
-     * 将输入内容解码为字符串。
+     * 通过输入参数解码后输出对应文本。
      *
-     * > **说明：**
-     * >
-     * > 该接口会正常解析值为\0的字节，将其转换为Unicode字符\u0000（空字符），不会导致解码中断或错误。
-     *
-     * @param { Uint8Array } input - 要解码的 Uint8Array 对象。
-     * @param { object } options - 解码相关的选项。
-     * @returns { string } 获取到的字符串。
+     * @param { Uint8Array } input - 符合格式需要解码的数组。
+     * @param { object } options - 解码相关选项参数。不传此参数时，stream默认为false，即不跟随附加数据块。
+     * @returns { string } 解码后的数据。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -364,12 +384,12 @@ declare namespace util {
     decode(input: Uint8Array, options?: { stream?: false }): string;
 
     /**
-     * 将输入内容解码为字符串。如果 **input** 是空数组，则返回 **undefined**。
+     * 将输入参数解码后输出对应文本。当input是一个空数组时，返回undefined。
      *
-     * @param { Uint8Array } input - 要解码的 Uint8Array 对象。
+     * @param { Uint8Array } input - 符合格式需要解码的数组。
      * @param { object } options - 解码相关的选项。[since 9 - 10]
      * @param { DecodeWithStreamOptions } [options] - 解码相关的选项。[since 11]
-     * @returns { string } 获取到的字符串。
+     * @returns { string } 解码后的数据。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -379,11 +399,17 @@ declare namespace util {
      */
     decodeWithStream(input: Uint8Array, options?: DecodeWithStreamOptions): string;
     /**
-     * 将输入内容解码为字符串。
+     * 将输入参数解码后输出对应文本。
      *
-     * @param { Uint8Array } input - 要解码的 Uint8Array 对象。
-     * @param { DecodeToStringOptions } [options] - 解码相关的选项。默认值为 **undefined**。
-     * @returns { string } 获取到的字符串。
+     * > **说明：**
+     * >
+     * > 该接口会正常解析值为\0的字节，将其转换为Unicode字符\u0000（空字符），不会导致解码中断或错误。
+     *
+     * @param { Uint8Array } input - 需要解码的数组。
+     * @param { DecodeToStringOptions } [options] - 解码相关选项参数，用于控制解码行为。当需要以流式方式分块处理数据
+     *     且保留不完整字节序列时传入此参数并设置stream为true；不传入时默认为undefined，即不保留不完整字节序列，
+     *     直接在当前调用中解码。
+     * @returns { string } 解码后的数据。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -446,7 +472,7 @@ declare namespace util {
     readonly encoding = 'utf-8';
 
     /**
-     * 用于创建 **TextEncoder** 对象的构造函数。
+     * TextEncoder的构造函数，创建一个默认编码格式为'utf-8'的TextEncoder实例。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -456,9 +482,9 @@ declare namespace util {
     constructor();
 
     /**
-     * 用于创建 **TextEncoder** 对象的构造函数。
+     * TextEncoder的构造函数。
      *
-     * @param { string } [encoding] - 编码格式。默认格式为 **'utf-8'**。
+     * @param { string } [encoding] - 编码格式，支持格式参见encoding属性，默认值为'utf-8'。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -467,10 +493,10 @@ declare namespace util {
     constructor(encoding?: string);
 
     /**
-     * 创建一个 **TextEncoder** 对象。
+     * 创建TextEncoder对象的方法。
      *
-     * @param { string } [encoding] - 编码格式。默认格式为 **'utf-8'**。
-     * @returns { TextEncoder } **TextEncoder** 对象。
+     * @param { string } [encoding] - 编码格式，默认值为'utf-8'。
+     * @returns { TextEncoder } 返回一个用于将字符串按指定编码格式编码为字节数组的TextEncoder对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -479,10 +505,10 @@ declare namespace util {
     static create(encoding?: string): TextEncoder;
 
     /**
-     * 将输入内容编码为 Uint8Array 对象。
+     * 将输入字符串编码后输出对应的Uint8Array字节数组。
      *
-     * @param { string } [input] - 要编码的字符串。默认值为空字符串。
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { string } [input] - 需要编码的字符串，默认值是空字符串。
+     * @returns { Uint8Array } 返回编码后的文本。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -491,10 +517,10 @@ declare namespace util {
     encode(input?: string): Uint8Array;
 
     /**
-     * 将输入内容编码为 Uint8Array 对象。
+     * 将输入参数编码后输出Uint8Array对象。
      *
-     * @param { string } [input] - 要编码的字符串。默认值为空字符串。如果输入参数为空字符串，则返回值为 undefined。
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { string } [input] - 需要编码的字符串，默认值是空字符串。当入参是空字符串时，返回undefined。
+     * @returns { Uint8Array } 返回编码后的Uint8Array对象。当入参为空字符串时，返回undefined。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -503,11 +529,11 @@ declare namespace util {
     encodeInto(input?: string): Uint8Array;
 
     /**
-     * 将生成的 UTF-8 编码文本写入到数组中。
+     * 将生成的utf-8编码文本写入dest数组。
      *
-     * @param { string } input - 要编码的字符串。
-     * @param { Uint8Array } dest - 用于存储 UTF-8 编码文本的 Uint8Array 对象。
-     * @returns { object } 获取到的对象。**read** 表示已编码的字符数，**written** 表示已编码字符所占用的字节数。
+     * @param { string } input - 需要编码的字符串。
+     * @param { Uint8Array } dest - Uint8Array对象实例，用于将生成的utf-8编码文本放入其中。
+     * @returns { object } 返回一个对象，read表示已编码的字符数，written表示编码字符所占用的字节数。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -516,10 +542,10 @@ declare namespace util {
     encodeInto(input: string, dest: Uint8Array): { read: number; written: number };
 
     /**
-     * 对输入内容进行编码，并将结果存储到 Uint8Array 对象中。
+     * 对字符串进行编码，将结果存储到dest数组。
      *
-     * @param { string } input - 要编码的字符串。
-     * @param { Uint8Array } dest - 用于存储 UTF-8 编码文本的 Uint8Array 对象。
+     * @param { string } input - 需要编码的字符串。
+     * @param { Uint8Array } dest - Uint8Array对象实例，用于将生成的utf-8编码文本放入其中。
      * @returns { object } 返回该对象，其中 read 表示已编码的字符数，written 表示已编码字符所占用的字节数。[since 9 - 10]
      * @returns { EncodeIntoUint8ArrayInfo } 获取到的对象。**read** 表示已编码的字符数，**written** 表示已编码字符所占用的
      *     字节数。[since 11]
@@ -541,10 +567,10 @@ declare namespace util {
    */
   class RationalNumber {
     /**
-     * 用于创建 **RationalNumber** 对象的构造函数。无参构造时分子为0、分母为1。
+     * RationalNumber的构造函数。
      *
-     * @param { number } numerator - 分子，为整数。
-     * @param { number } denominator - 分母，为整数。
+     * @param { number } numerator - 分子，整数类型。取值范围：-Number.MAX_VALUE <= numerator <= Number.MAX_VALUE。
+     * @param { number } denominator - 分母，整数类型。取值范围：-Number.MAX_VALUE <= denominator <= Number.MAX_VALUE。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -553,7 +579,7 @@ declare namespace util {
     constructor(numerator: number, denominator: number);
 
     /**
-     * 用于创建 **RationalNumber** 对象的构造函数。
+     * RationalNumber的构造函数，创建一个默认分子为0、分母为1的RationalNumber实例。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -563,16 +589,16 @@ declare namespace util {
     constructor();
 
     /**
-     * 根据给定的分子和分母创建一个 **RationalNumber** 实例。
+     * 创建具有给定分子和分母的RationalNumber实例。
      *
-     * > **NOTE**
+     * > **说明：**
      * >
-     * > **numerator** 和 **denominator** 参数必须为整数。如果传入小数，该函数不会被拦截，但会显示错误信息
+     * > 该接口要求参数numerator和denominator必须是整数类型。如果传入的参数是小数类型，不会进行拦截，但是会输出错误信息
      * > "parseRationalNumber: The type of Parameter must be integer"。
      *
-     * @param { number } numerator - 分子，为整数。取值范围：-Number.MAX_VALUE <= numerator <= Number.MAX_VALUE。
-     * @param { number } denominator - 分母，为整数。取值范围：-Number.MAX_VALUE <= denominator <= Number.MAX_VALUE。
-     * @returns { RationalNumber } 获取到的 **RationalNumber** 对象。
+     * @param { number } numerator - 分子，整数类型。取值范围：-Number.MAX_VALUE <= numerator <= Number.MAX_VALUE。
+     * @param { number } denominator - 分母，整数类型。取值范围：-Number.MAX_VALUE <= denominator <= Number.MAX_VALUE。
+     * @returns { RationalNumber } 具有给定分子和分母的RationalNumber有理数对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -581,15 +607,15 @@ declare namespace util {
     static parseRationalNumber(numerator: number, denominator: number): RationalNumber;
 
     /**
-     * 根据给定的字符串创建一个 **RationalNumber** 对象。
+     * 使用给定的字符串创建RationalNumber对象。
      *
-     * > **NOTE**
+     * > **说明：**
      * >
-     * > **rationalString** 参数必须为字符串。如果传入小数字符串，该函数不会被拦截，但会显示错误信息
+     * > 该接口要求参数rationalString是字符串格式。如果传入的参数是小数类型字符串格式，不会进行拦截，但是会输出错误信息
      * > "createRationalFromString: The type of Parameter must be integer string"。
      *
-     * @param { string } rationalString - 用于创建 **RationalNumber** 对象的字符串。
-     * @returns { RationalNumber } 返回根据给定字符串生成的 RationalNumber 对象。
+     * @param { string } rationalString - 有理数字符串格式，如"3/4"。若传入小数类型字符串格式，不会拦截但会输出错误信息。
+     * @returns { RationalNumber } 由给定字符串创建的RationalNumber有理数对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -598,10 +624,11 @@ declare namespace util {
     static createRationalFromString(rationalString: string): RationalNumber;
 
     /**
-     * 将当前的 RationalNumber 对象与给定对象进行比较。
+     * 比较当前的RationalNumber对象与给定的对象。
      *
-     * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
+     * @param { RationalNumber } another - 其他的有理数对象。
+     * @returns { number } 如果两个对象相等，则返回0；如果给定对象小于当前对象，则返回1；如果给定对象大于当前对象，
+     *     则返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -610,10 +637,10 @@ declare namespace util {
     compareTo(another: RationalNumber): number;
 
     /**
-     * 将当前的 RationalNumber 对象与给定对象进行比较。
+     * 将当前RationalNumber对象与目标RationalNumber对象进行比较，并返回比较结果。
      *
-     * @param { RationalNumber } another - 表示其他有理数的对象。
-     * @returns { number } 相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
+     * @param { RationalNumber } another - 其他的有理数对象。
+     * @returns { number } 两个对象相等时返回0；给定对象小于当前对象时返回1；给定对象大于当前对象时返回-1。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -622,10 +649,10 @@ declare namespace util {
     compare(another: RationalNumber): number;
 
     /**
-     * 判断此 **RationalNumber** 对象与给定对象是否相等。
+     * 比较当前的RationalNumber对象与给定对象是否相等。
      *
-     * @param { Object } obj - 用于与此 **RationalNumber** 对象进行比较的对象。
-     * @returns { boolean } 检查结果。如果两个对象相等，则返回 **true**；否则返回 **false**。
+     * @param { Object } obj - 用于与当前RationalNumber对象比较的对象，传入非RationalNumber类型时返回false。
+     * @returns { boolean } 如果给定对象与当前对象相同，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -634,9 +661,9 @@ declare namespace util {
     equals(obj: Object): boolean;
 
     /**
-     * 获取此 **RationalNumber** 对象的整数或浮点数值。
+     * 获取当前RationalNumber对象的整数或浮点数值。
      *
-     * @returns { number } 整数或浮点数。
+     * @returns { number } 返回整数或者浮点数的值。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -647,9 +674,9 @@ declare namespace util {
     /**
      * 获取两个指定整数的最大公约数。
      *
-     * @param { number } number1 - 用于获取最大公约数的第一个整数。
-     * @param { number } number2 - 用于获取最大公约数的第二个整数。
-     * @returns { number } 获取到的最大公约数。
+     * @param { number } number1 - 整数类型。-Number.MAX_VALUE <= number1 <= Number.MAX_VALUE。
+     * @param { number } number2 - 整数类型。-Number.MAX_VALUE <= number2 <= Number.MAX_VALUE。
+     * @returns { number } 返回两个给定数字的最大公约数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -658,18 +685,16 @@ declare namespace util {
     static getCommonDivisor(number1: number, number2: number): number;
 
     /**
-     * 获取两个指定整数的最大公约数。
+     * 获取两个整数的最大公约数。
      *
-     * > **NOTE**
+     * > **说明：**
      * >
-     * > **number1** 和 **number2** 参数必须为整数。如果传入小数，该函数不会被拦截，但会显示错误信息
+     * > 该接口要求参数number1和number2必须是整数类型。如果传入的参数是小数类型，不会进行拦截，但是会输出错误信息
      * > "getCommonFactor: The type of Parameter must be integer"。
      *
-     * @param { number } number1 - 用于获取最大公约数的第一个整数。取值范围：-Number.MAX_VALUE <= number1 <=
-     *     Number.MAX_VALUE。
-     * @param { number } number2 - 用于获取最大公约数的第二个整数。取值范围：-Number.MAX_VALUE <= number2 <=
-     *     Number.MAX_VALUE。
-     * @returns { number } 获取到的最大公约数。
+     * @param { number } number1 - 整数类型。-Number.MAX_VALUE <= number1 <= Number.MAX_VALUE。
+     * @param { number } number2 - 整数类型。-Number.MAX_VALUE <= number2 <= Number.MAX_VALUE。
+     * @returns { number } 返回两个给定数字的最大公约数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -678,9 +703,9 @@ declare namespace util {
     static getCommonFactor(number1: number, number2: number): number;
 
     /**
-     * 获取此 **RationalNumber** 对象的分母。
+     * 获取当前RationalNumber对象的分母。
      *
-     * @returns { number } 此 **RationalNumber** 对象的分母。
+     * @returns { number } 返回RationalNumber对象的分母。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -689,9 +714,9 @@ declare namespace util {
     getDenominator(): number;
 
     /**
-     * 获取此 **RationalNumber** 对象的分子。
+     * 获取当前RationalNumber对象的分子。
      *
-     * @returns { number } 此 **RationalNumber** 对象的分子。
+     * @returns { number } 返回RationalNumber对象的分子。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -700,10 +725,9 @@ declare namespace util {
     getNumerator(): number;
 
     /**
-     * 判断此 **RationalNumber** 对象表示的是否为有限值。
+     * 检查RationalNumber对象是否表示一个有限值。
      *
-     * @returns { boolean } 检查结果。如果此 **RationalNumber** 对象表示有限值（分母不为 **0**），则返回 **true**；
-     *     否则返回 **false**。
+     * @returns { boolean } 如果分母不为0，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -712,10 +736,9 @@ declare namespace util {
     isFinite(): boolean;
 
     /**
-     * 判断此 **RationalNumber** 对象是否为非数字（NaN）。
+     * 检查当前RationalNumber对象是否表示非数字(NaN)值。
      *
-     * @returns { boolean } 检查结果。如果此 **RationalNumber** 对象为 NaN（分母和分子都为 **0**），则返回 **true**；
-     *     否则返回 **false**。
+     * @returns { boolean } 如果分母和分子都为0，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -724,10 +747,9 @@ declare namespace util {
     isNaN(): boolean;
 
     /**
-     * 判断此 **RationalNumber** 对象的值是否为 **0**。
+     * 检查当前RationalNumber对象是否为0。
      *
-     * @returns { boolean } 检查结果。如果此 **RationalNumber** 对象的值为 **0**，则返回 **true**；否则返回
-     *     **false**。
+     * @returns { boolean } 如果当前对象的值为0，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -736,10 +758,10 @@ declare namespace util {
     isZero(): boolean;
 
     /**
-     * 获取此 **RationalNumber** 对象的字符串表示形式。
+     * 获取RationalNumber对象的字符串表示形式。
      *
-     * @returns { string } 正常情况下返回以分子/分母格式的字符串，例如 3/5；如果此对象的分子为 **0**，则返回
-     *     **0/1**；如果分母为 **0**，则返回 **Infinity**；如果分子和分母都为 **0**，则返回 **NaN**。
+     * @returns { string } 返回Numerator/Denominator格式的字符串，例如3/5，如果分子为0，则返回0/1。如果分母为0，
+     *     则返回Infinity。如果分子和分母都为0，则返回NaN。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -758,9 +780,9 @@ declare namespace util {
    */
   class LruBuffer<K, V> {
     /**
-     * 用于创建 **LruBuffer** 实例的构造函数。缓存的默认容量为 64。
+     * 构造函数用于创建一个新的LruBuffer实例，默认容量为64。
      *
-     * @param { number } [capacity] - 要创建的缓存的容量。默认值为 **64**。
+     * @param { number } [capacity] - 指示要为缓冲区自定义的容量，取值范围为[0, 2147483647]，默认值为64。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -769,9 +791,9 @@ declare namespace util {
     constructor(capacity?: number);
 
     /**
-     * 改变缓存容量。如果新容量小于等于 **0**，则抛出异常。
+     * 将缓冲区容量更新为指定容量，如果newCapacity小于或等于0，则抛出异常。
      *
-     * @param { number } newCapacity - 缓存的新容量，取值范围为 [0, 2147483647]。
+     * @param { number } newCapacity - 指示要为缓冲区自定义的容量，取值范围为[0, 2147483647]。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -780,9 +802,9 @@ declare namespace util {
     updateCapacity(newCapacity: number): void;
 
     /**
-     * 获取此缓存的字符串表示形式。
+     * 返回对象的字符串表示形式。
      *
-     * @returns { string } 此缓存的字符串表示形式。
+     * @returns { string } 返回对象的字符串表示形式。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -801,9 +823,9 @@ declare namespace util {
     length: number;
 
     /**
-     * 获取此缓存的容量。
+     * 获取当前缓冲区的容量。
      *
-     * @returns { number } 缓存的容量。
+     * @returns { number } 返回当前缓冲区的容量。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -812,7 +834,7 @@ declare namespace util {
     getCapacity(): number;
 
     /**
-     * 从此缓存中清除键值对。将调用 **afterRemoval()** API 执行后续操作。
+     * 清除当前缓冲区中的键值对，后续调用[afterRemoval]{@link util.LruBuffer.afterRemoval}方法执行操作。
      *
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
@@ -822,9 +844,9 @@ declare namespace util {
     clear(): void;
 
     /**
-     * 获取 **createDefault()** 的返回值数量。
+     * 获取createDefault()返回值的次数。
      *
-     * @returns { number } **createDefault()** 的返回值数量。
+     * @returns { number } 返回createDefault()返回值的次数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -833,9 +855,9 @@ declare namespace util {
     getCreateCount(): number;
 
     /**
-     * 获取查询值未匹配的次数。
+     * 获取查询值不匹配的次数。
      *
-     * @returns { number } 查询值未匹配的次数。
+     * @returns { number } 返回查询值不匹配的次数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -844,9 +866,9 @@ declare namespace util {
     getMissCount(): number;
 
     /**
-     * 获取从此缓存中移除的次数。
+     * 获取从缓冲区中逐出值的次数。
      *
-     * @returns { number } 从缓存中移除的次数。
+     * @returns { number } 返回从缓冲区中驱逐的次数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -855,9 +877,9 @@ declare namespace util {
     getRemovalCount(): number;
 
     /**
-     * 获取查询值匹配的次数。
+     * 获取查询值匹配成功的次数。
      *
-     * @returns { number } 查询值匹配的次数。
+     * @returns { number } 返回查询值匹配成功的次数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -866,9 +888,9 @@ declare namespace util {
     getMatchCount(): number;
 
     /**
-     * 获取向此缓存添加的次数。
+     * 获取将值添加到缓冲区的次数。
      *
-     * @returns { number } 向缓存添加的次数。
+     * @returns { number } 返回将值添加到缓冲区的次数。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -877,9 +899,9 @@ declare namespace util {
     getPutCount(): number;
 
     /**
-     * 判断此缓存是否为空。
+     * 检查当前缓冲区是否为空。
      *
-     * @returns { boolean } 如果缓存不包含任何值，则返回 **true**。
+     * @returns { boolean } 如果当前缓冲区不包含任何值，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -888,10 +910,10 @@ declare namespace util {
     isEmpty(): boolean;
 
     /**
-     * 获取指定 key 对应的值。
+     * 返回键对应的值。当键不在缓冲区中时，返回undefined。
      *
-     * @param { K } key - 要查询值的 key。
-     * @returns { V | undefined } key 对应的值。如果未找到匹配项，则返回 **undefined**。
+     * @param { K } key - 要查询的键。
+     * @returns { V | undefined } 如果指定的键存在于缓冲区中，则返回与键关联的值；否则返回undefined。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -900,11 +922,11 @@ declare namespace util {
     get(key: K): V | undefined;
 
     /**
-     * 向此缓存添加键值对。
+     * 将键值对添加到缓冲区。
      *
-     * @param { K } key - 要添加的键值对的 key。
-     * @param { V } value - 要添加的键值对的 value。
-     * @returns { V } 添加的值。如果 key 已存在，则返回已存在的值；如果 **key** 或 **value** 传入 **null**，则抛出错误。
+     * @param { K } key - 要添加的键。
+     * @param { V } value - 指示与要添加的键关联的值。
+     * @returns { V } 返回与添加的键关联的值；如果要添加的键已经存在，则返回原始值，如果键或值为空，则抛出此异常。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -913,9 +935,9 @@ declare namespace util {
     put(key: K, value: V): V;
 
     /**
-     * 获取此缓存中的所有值，按从最近最多访问到最近最少访问的顺序排列。
+     * 获取当前缓冲区中所有值从最近访问到最近最少访问的顺序列表。
      *
-     * @returns { V[] } 此缓存中的所有值，按从最近最多访问到最近最少访问的顺序排列。
+     * @returns { V[] } 按从最近访问到最近最少访问的顺序返回当前缓冲区中所有值的列表。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -924,9 +946,9 @@ declare namespace util {
     values(): V[];
 
     /**
-     * 获取此缓存中的所有 key，按从最近最多访问到最近最少访问的顺序排列。
+     * 获取当前缓冲区中所有键从最近访问到最近最少访问的升序列表。
      *
-     * @returns { K[] } 此缓存中的所有 key，按从最近最多访问到最近最少访问的顺序排列。
+     * @returns { K[] } 按升序返回当前缓冲区中所有键的列表，从最近访问到最近最少访问。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -935,11 +957,10 @@ declare namespace util {
     keys(): K[];
 
     /**
-     * 从此缓存中移除指定的 key 及其对应的值。
+     * 删除当前缓冲区中指定的键及其关联的值。
      *
-     * @param { K } key - 要移除的 key。
-     * @returns { V | undefined } 包含被移除键值对的 **Optional** 对象。如果 key 不存在，则返回空的 **Optional**
-     *     对象；如果 **key** 传入 **null**，则抛出错误。
+     * @param { K } key - 要删除的键。
+     * @returns { V | undefined } 返回一个包含已删除键值对的Optional对象；如果key不存在，则返回一个空的Optional对象，如果key为null，则抛出异常。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -948,12 +969,12 @@ declare namespace util {
     remove(key: K): V | undefined;
 
     /**
-     * 在移除值后执行后续操作。
+     * 删除值后执行后续操作。
      *
-     * @param { boolean } isEvict - 容量是否不足。如果值为 **true**，则由于容量不足而调用此 API。
-     * @param { K } key - 被移除的 key。
-     * @param { V } value - 被移除的值。
-     * @param { V } newValue - 如果调用了 **put()** 方法并且要添加的 key 已存在时该 key 的新值。其他情况下此参数为空。
+     * @param { boolean } isEvict - 因容量不足而调用该方法时，参数值为true，其他情况为false。
+     * @param { K } key - 表示删除的键。
+     * @param { V } value - 表示删除的值。
+     * @param { V } newValue - 如果已调用put方法并且要添加的键已经存在，则参数值是关联的新值。其他情况下参数值为空。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -962,10 +983,10 @@ declare namespace util {
     afterRemoval(isEvict: boolean, key: K, value: V, newValue: V): void;
 
     /**
-     * 判断此缓存是否包含指定的 key。
+     * 检查当前缓冲区是否包含指定的键。
      *
-     * @param { K } key - 要检查的 key。
-     * @returns { boolean } 检查结果。如果缓存包含指定的 key，则返回 **true**；否则返回 **false**。
+     * @param { K } key - 表示要检查的键。
+     * @returns { boolean } 如果缓冲区包含指定的键，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -974,10 +995,10 @@ declare namespace util {
     contains(key: K): boolean;
 
     /**
-     * 当指定 key 的值不可用时，创建一个值。
+     * 当缓冲区中未匹配到指定键时，执行后续处理逻辑，参数表示未匹配到的键，返回与该键关联的值，默认返回undefined。
      *
-     * @param { K } key - 缺少值的 key。
-     * @returns { V } key 对应的值。
+     * @param { K } key - 表示丢失的键。
+     * @returns { V } 返回与键关联的值。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -986,9 +1007,9 @@ declare namespace util {
     createDefault(key: K): V;
 
     /**
-     * 获取一个新的迭代器对象，该对象包含此对象中的所有键值对。
+     * 允许迭代包含在这个对象中的所有键值对。
      *
-     * @returns { IterableIterator<[K, V]> } 可迭代的数组。
+     * @returns { IterableIterator<[K, V]> } 返回一个可迭代数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -997,9 +1018,9 @@ declare namespace util {
     entries(): IterableIterator<[K, V]>;
 
     /**
-     * 指定对象的默认迭代器。
+     * 返回一个键值对形式的二维数组。
      *
-     * @returns { IterableIterator<[K, V]> } 返回以键值对形式的二维数组。
+     * @returns { IterableIterator<[K, V]> } 返回一个键值对形式的二维数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1019,7 +1040,7 @@ declare namespace util {
    */
   class LRUCache<K, V> {
     /**
-     * 用于创建 **LRUCache** 实例的构造函数。缓存的默认容量为 64。
+     * 默认构造函数用于创建一个新的LRUCache实例，默认容量为64。
      *
      * @param { number } [capacity] - 要创建的缓存的容量。默认值为 **64**，最大值为 **2147483647**。[since 12]
      * @syscap SystemCapability.Utils.Lang
@@ -1030,9 +1051,9 @@ declare namespace util {
     constructor(capacity?: number);
 
     /**
-     * 改变缓存容量。如果新容量小于等于 **0**，则抛出异常。如果缓存中的值总数大于指定容量，则执行删除操作。
+     * 更新缓存容量为指定值，如果newCapacity小于或等于0，则抛出异常。当缓存中值的总数大于指定容量时，会执行删除操作。
      *
-     * @param { number } newCapacity - 缓存的新容量。最大值为 **2147483647**。
+     * @param { number } newCapacity - 指示要为缓冲区自定义的容量，取值范围为[0, 2147483647]。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1041,9 +1062,10 @@ declare namespace util {
     updateCapacity(newCapacity: number): void;
 
     /**
-     * 获取此缓存的字符串表示形式。
+     * 返回对象的字符串表示，格式为LRUCache[ maxSize = 缓存区最大值, hits = 查询匹配成功次数, misses = 查询匹配失败次数,
+     * hitRate = 查询匹配率 ]。
      *
-     * @returns { string } 此缓存的字符串表示形式。
+     * @returns { string } 返回对象的字符串表示形式。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1062,9 +1084,9 @@ declare namespace util {
     length: number;
 
     /**
-     * 获取此缓存的容量。
+     * 获取当前缓存的容量。
      *
-     * @returns { number } 缓存的容量。
+     * @returns { number } 返回当前缓冲区的容量。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1073,7 +1095,7 @@ declare namespace util {
     getCapacity(): number;
 
     /**
-     * 清除此缓存中的键值对。
+     * 清除当前缓冲区中的键值对，并触发afterRemoval回调方法执行后续操作。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1083,9 +1105,9 @@ declare namespace util {
     clear(): void;
 
     /**
-     * 获取创建对象的次数。
+     * 获取对象创建的次数。
      *
-     * @returns { number } 创建对象的次数。
+     * @returns { number } 返回创建对象的次数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1094,9 +1116,9 @@ declare namespace util {
     getCreateCount(): number;
 
     /**
-     * 获取查询值未匹配的次数。
+     * 获取查询值不匹配的次数。
      *
-     * @returns { number } 查询值未匹配的次数。
+     * @returns { number } 返回查询值不匹配的次数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1105,9 +1127,9 @@ declare namespace util {
     getMissCount(): number;
 
     /**
-     * 获取此缓存中键值对被回收的次数。
+     * 获取缓存键值对的回收次数。
      *
-     * @returns { number } 此缓存中键值对被回收的次数。
+     * @returns { number } 返回缓冲区键值对回收的次数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1116,9 +1138,9 @@ declare namespace util {
     getRemovalCount(): number;
 
     /**
-     * 获取查询值匹配的次数。
+     * 获取查询值匹配成功的次数。
      *
-     * @returns { number } 查询值匹配的次数。
+     * @returns { number } 返回查询值匹配成功的次数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1127,9 +1149,9 @@ declare namespace util {
     getMatchCount(): number;
 
     /**
-     * 获取向此缓存添加的次数。
+     * 获取将值添加到缓存的次数。
      *
-     * @returns { number } 向缓存添加的次数。
+     * @returns { number } 返回将值添加到缓冲区的次数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1138,9 +1160,9 @@ declare namespace util {
     getPutCount(): number;
 
     /**
-     * 判断此缓存是否为空。
+     * 检查缓存是否为空。
      *
-     * @returns { boolean } 如果缓存不包含任何值，则返回 **true**。
+     * @returns { boolean } 如果缓存不包含任何值，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1149,13 +1171,12 @@ declare namespace util {
     isEmpty(): boolean;
 
     /**
-     * 获取 key 对应的值。如果该 key 不在缓存中，则调用
-     * [createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault} 创建该 key 对应的值。如果 **createDefault** 中指定的值
-     * 不为 **undefined**，则调用 [afterRemoval<sup>9+</sup>]{@link util.LRUCache.afterRemoval} 返回 **createDefault**
-     * 中指定的值。
+     * 返回键对应的值。当键不在缓存中时，通过[createDefault<sup>9+</sup>]{@link util.LRUCache.createDefault}接口创建，
+     * 若createDefault创建的值不为undefined时，此时会调用[afterRemoval<sup>9+</sup>]{@link util.LRUCache.afterRemoval}
+     * 接口，返回createDefault创建的值。
      *
-     * @param { K } key - 要查询值的 key。
-     * @returns { V | undefined } key 对应的值。如果未找到匹配项，则返回 **createDefault** 中指定的值。
+     * @param { K } key - 要查询的键。
+     * @returns { V | undefined } 如果指定的键存在于缓冲区中，则返回与键关联的值；否则返回createDefault创建的值。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1164,11 +1185,11 @@ declare namespace util {
     get(key: K): V | undefined;
 
     /**
-     * 向此缓存添加键值对，并返回与该 key 关联的值。如果缓存中的值总数大于指定容量，则执行删除操作。
+     * 将键值对添加到缓存，返回与添加的键关联的值。当缓存中值的总数超过容量时，执行删除操作。
      *
-     * @param { K } key - 要添加的键值对的 key。
-     * @param { V } value - 要添加的键值对的 value。
-     * @returns { V } 添加的键值对的值。如果 key 或 value 为空，则抛出异常。
+     * @param { K } key - 要添加的键。
+     * @param { V } value - 指示与要添加的键关联的值。
+     * @returns { V } 返回与添加的键关联的值。如果键或值为空，则抛出此异常。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1177,9 +1198,9 @@ declare namespace util {
     put(key: K, value: V): V;
 
     /**
-     * 获取此缓存中的所有值，按从最近最少访问到最近最多访问的顺序排列。
+     * 获取当前缓存中所有值，从最近最少访问到最近访问的顺序列表。
      *
-     * @returns { V[] } 此缓存中所有值的列表，按从最近最少访问到最近最多访问的顺序排列。
+     * @returns { V[] } 返回当前缓冲区中所有值的列表，顺序为从最近最少访问（Least Recent）到最近访问（Most Recent）。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1188,9 +1209,9 @@ declare namespace util {
     values(): V[];
 
     /**
-     * 获取此缓存中的所有 key，按从最近最少访问到最近最多访问的顺序排列。
+     * 获取当前缓存中所有键，从最近最少访问到最近访问的顺序列表。
      *
-     * @returns { K[] } 此缓存中所有 key 的列表，按从最近最少访问到最近最多访问的顺序排列。
+     * @returns { K[] } 返回当前缓冲区中所有键的列表，顺序为从最近最少访问（Least Recent）到最近访问（Most Recent）。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1199,11 +1220,10 @@ declare namespace util {
     keys(): K[];
 
     /**
-     * 从此缓存中移除 key 及其关联的值，并返回与该 key 关联的值。如果 key 不存在，则返回 **undefined**。
+     * 从当前缓存中删除指定的键及其关联的值，并返回键关联的值。如果指定的键不存在，则返回undefined。
      *
-     * @param { K } key - 要移除的 key。
-     * @returns { V | undefined } 如果 key 存在于缓存中，则返回与该 key 关联的值；如果 key 不存在
-     *     则返回 **undefined**；如果 **key** 传入 **null**，则抛出错误。
+     * @param { K } key - 要删除的键。
+     * @returns { V | undefined } 返回与已删除键关联的值；如果key不存在，则返回undefined，如果key为null，则抛出异常。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1212,21 +1232,21 @@ declare namespace util {
     remove(key: K): V | undefined;
 
     /**
-     * 在移除值后执行后续操作。后续操作必须由开发者实现。该 API 在删除操作期间会被调用，例如
+     * 删除值后执行后续操作，这些操作由开发者自行实现。本接口会在删除操作时被调用，如
      * [get<sup>9+</sup>]{@link util.LRUCache.get}、[put<sup>9+</sup>]{@link util.LRUCache.put}、
-     * [remove<sup>9+</sup>]{@link util.LRUCache.remove}、[clear<sup>9+</sup>]{@link util.LRUCache.clear} 和
-     * [updateCapacity<sup>9+</sup>]{@link util.LRUCache.updateCapacity}。
+     * [remove<sup>9+</sup>]{@link util.LRUCache.remove}、[clear<sup>9+</sup>]{@link util.LRUCache.clear}、
+     * [updateCapacity<sup>9+</sup>]{@link util.LRUCache.updateCapacity}接口。
      *
-     * > **NOTE**
+     * > **说明：**
      * >
-     * > 如果在调用 [clear<sup>9+</sup>]{@link util.LRUCache.clear} 和
-     * > [updateCapacity<sup>9+</sup>]{@link util.LRUCache.updateCapacity} 后执行回调方法，并且输入的 **key** 和
-     * > **value** 参数为 MapIterator 类型，请参考示例 2 执行后续操作。
+     * > 若此回调方法在[clear<sup>9+</sup>]{@link util.LRUCache.clear}、
+     * > [updateCapacity<sup>9+</sup>]{@link util.LRUCache.updateCapacity}接口调用之后触发执行，传入的key和value参数
+     * > 类型为MapIterator，可参照示例二进行后续操作。
      *
-     * @param { boolean } isEvict - 容量是否不足。如果值为 **true**，则由于容量不足而调用此 API。
-     * @param { K } key - 被移除的 key。
-     * @param { V } value - 被移除的值。
-     * @param { V } newValue - 如果调用了 **put()** 方法并且要添加的 key 已存在时该 key 的新值。其他情况下此参数为空。
+     * @param { boolean } isEvict - 当因容量不足而调用该方法时，参数值设置为true，其他情况设置为false。
+     * @param { K } key - 表示删除的键。
+     * @param { V } value - 表示删除的值。
+     * @param { V } newValue - 如果已调用put方法并且要添加的键已经存在，则参数值是关联的新值。其他情况下参数值为空。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1235,10 +1255,10 @@ declare namespace util {
     afterRemoval(isEvict: boolean, key: K, value: V, newValue: V): void;
 
     /**
-     * 判断此缓存是否包含指定的 key。
+     * 检查当前缓存是否包含指定的键。
      *
-     * @param { K } key - 要检查的 key。
-     * @returns { boolean } 检查结果。如果缓存包含指定的 key，则返回 **true**；否则返回 **false**。
+     * @param { K } key - 要检查的键。
+     * @returns { boolean } 如果缓存包含指定的键，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1247,10 +1267,10 @@ declare namespace util {
     contains(key: K): boolean;
 
     /**
-     * 在缓存中无匹配的 key 时执行后续操作，并返回与该 key 关联的值（默认为 **undefined**）。
+     * 如果在缓存中未匹配到键，则执行后续操作，参数表示未匹配的键，返回与键关联的值，默认返回undefined。
      *
-     * @param { K } key - key。
-     * @returns { V } key 对应的值。
+     * @param { K } key - 表示未匹配的键。
+     * @returns { V } 返回与键关联的值。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1259,9 +1279,10 @@ declare namespace util {
     createDefault(key: K): V;
 
     /**
-     * 返回一个迭代器对象，该对象按插入顺序遍历此对象中的所有键值对（[key, value]）。
+     * 返回一个迭代器对象，用于按插入顺序遍历当前对象中的所有键值对（[key, value]）。
      *
-     * @returns { IterableIterator<[K, V]> } 可迭代的数组。
+     * @returns { IterableIterator<[K, V]> } 返回一个迭代器对象，用于按插入顺序遍历当前缓冲区中的所有键值对
+     *     [key, value]。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1270,9 +1291,9 @@ declare namespace util {
     entries(): IterableIterator<[K, V]>;
 
     /**
-     * 指定对象的默认迭代器。
+     * 返回键值对形式的二维数组。
      *
-     * @returns { IterableIterator<[K, V]> } 返回以键值对形式的二维数组。
+     * @returns { IterableIterator<[K, V]> } 返回一个键值对形式的二维数组。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1291,10 +1312,10 @@ declare namespace util {
    */
   interface ScopeComparable {
     /**
-     * 比较两个值并返回布尔值。
+     * 比较两个值的大小，返回一个布尔值。
      *
-     * @param { ScopeComparable } other - 与当前值进行比较的另一个值。
-     * @returns { boolean } 检查结果。如果当前值大于等于输入值，则返回 **true**；否则返回 **false**。
+     * @param { ScopeComparable } other - 表示要比较的值。
+     * @returns { boolean } 调用compareTo的值大于等于传入的值返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1325,10 +1346,10 @@ declare namespace util {
    */
   class Scope {
     /**
-     * 用于创建具有指定上下限的 **Scope** 对象的构造函数。
+     * 创建指定下限和上限的作用域实例，并返回一个Scope对象。
      *
-     * @param { ScopeType } lowerObj - **Scope** 对象的下限。
-     * @param { ScopeType } upperObj - **Scope** 对象的上限。
+     * @param { ScopeType } lowerObj - 指定作用域实例的下限。
+     * @param { ScopeType } upperObj - 指定作用域实例的上限。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1337,9 +1358,9 @@ declare namespace util {
     constructor(lowerObj: ScopeType, upperObj: ScopeType);
 
     /**
-     * 获取包含此 **Scope** 的字符串表示形式。
+     * 该字符串化方法返回一个包含当前范围的字符串表示形式。
      *
-     * @returns { string } 包含此 **Scope** 的字符串表示形式。
+     * @returns { string } 返回包含当前范围对象的字符串表示形式。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1348,10 +1369,10 @@ declare namespace util {
     toString(): string;
 
     /**
-     * 获取此 **Scope** 与给定 **Scope** 的交集。
+     * 获取给定范围和当前范围的交集。
      *
-     * @param { Scope } range - 指定的 **Scope**。
-     * @returns { Scope } 此 **Scope** 与给定 **Scope** 的交集。
+     * @param { Scope } range - 传入一个给定范围。
+     * @returns { Scope } 返回给定范围和当前范围的交集。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1360,11 +1381,11 @@ declare namespace util {
     intersect(range: Scope): Scope;
 
     /**
-     * 获取此 **Scope** 与给定上下限的交集。
+     * 获取当前范围与给定下限和上限范围的交集。
      *
-     * @param { ScopeType } lowerObj - 下限。
-     * @param { ScopeType } upperObj - 上限。
-     * @returns { Scope } 此 **Scope** 与给定上下限的交集。
+     * @param { ScopeType } lowerObj - 给定范围的下限。
+     * @param { ScopeType } upperObj - 给定范围的上限。
+     * @returns { Scope } 返回当前范围与给定下限和上限范围的交集。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1373,9 +1394,9 @@ declare namespace util {
     intersect(lowerObj: ScopeType, upperObj: ScopeType): Scope;
 
     /**
-     * 获取此 **Scope** 的上限。
+     * 获取当前范围的上限。
      *
-     * @returns { ScopeType } 此 **Scope** 的上限。
+     * @returns { ScopeType } 返回当前范围的上限值。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1384,9 +1405,9 @@ declare namespace util {
     getUpper(): ScopeType;
 
     /**
-     * 获取此 **Scope** 的下限。
+     * 获取当前范围的下限。
      *
-     * @returns { ScopeType } 此 **Scope** 的下限。
+     * @returns { ScopeType } 返回当前范围的下限值。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1395,11 +1416,11 @@ declare namespace util {
     getLower(): ScopeType;
 
     /**
-     * 获取此 **Scope** 与给定上下限的并集。
+     * 创建并返回包括当前范围和给定下限和上限的并集。
      *
-     * @param { ScopeType } lowerObj - 下限。
-     * @param { ScopeType } upperObj - 上限。
-     * @returns { Scope } 此 **Scope** 与给定上下限的并集。
+     * @param { ScopeType } lowerObj - 给定范围的下限。
+     * @param { ScopeType } upperObj - 给定范围的上限。
+     * @returns { Scope } 返回当前范围和给定下限和上限的并集。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1408,10 +1429,10 @@ declare namespace util {
     expand(lowerObj: ScopeType, upperObj: ScopeType): Scope;
 
     /**
-     * 获取此 **Scope** 与给定 **Scope** 的并集。
+     * 创建并返回包括当前范围和给定范围的并集。
      *
-     * @param { Scope } range - 指定的 **Scope**。
-     * @returns { Scope } 此 **Scope** 与给定 **Scope** 的并集。
+     * @param { Scope } range - 传入一个给定范围。
+     * @returns { Scope } 返回包括当前范围和给定范围的并集。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1420,10 +1441,10 @@ declare namespace util {
     expand(range: Scope): Scope;
 
     /**
-     * 获取此 **Scope** 与给定值的并集。
+     * 创建并返回包括当前范围和给定值的并集。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { Scope } 此 **Scope** 与给定值的并集。
+     * @param { ScopeType } value - 传入一个给定值。
+     * @returns { Scope } 返回包括当前范围和给定值的并集。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1432,10 +1453,10 @@ declare namespace util {
     expand(value: ScopeType): Scope;
 
     /**
-     * 判断一个值是否在此 **Scope** 范围内。
+     * 检查给定value是否包含在当前范围内。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { boolean } 检查结果。如果值在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
+     * @param { ScopeType } value - 传入一个给定值。
+     * @returns { boolean } 如果给定值包含在当前范围内返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1444,10 +1465,10 @@ declare namespace util {
     contains(value: ScopeType): boolean;
 
     /**
-     * 判断一个范围是否在此 **Scope** 范围内。
+     * 检查给定range是否在当前范围内。
      *
-     * @param { Scope } range - 指定的 **Scope**。
-     * @returns { boolean } 检查结果。如果范围在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
+     * @param { Scope } range - 传入一个给定范围。
+     * @returns { boolean } 如果给定范围包含在当前范围内返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1456,11 +1477,10 @@ declare namespace util {
     contains(range: Scope): boolean;
 
     /**
-     * 将一个值限制在此 **Scope** 范围内。
+     * 将给定值限定到当前范围内。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { ScopeType } 如果指定值小于下限，则返回 **lowerObj**；如果指定值大于上限，则返回 **upperObj**；如果
-     *     在此 **Scope** 范围内，则返回指定值。
+     * @param { ScopeType } value - 传入的给定值。
+     * @returns { ScopeType } 如果传入的value小于下限，则返回lowerObj；如果大于上限值则返回upperObj；如果在当前范围内，则返回value。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1479,10 +1499,10 @@ declare namespace util {
    */
   class ScopeHelper {
     /**
-     * 用于创建具有指定上下限的 **ScopeHelper** 对象的构造函数。
+     * 创建指定下限和上限的作用域实例，返回一个ScopeHelper对象。
      *
-     * @param { ScopeType } lowerObj - **Scope** 对象的下限。
-     * @param { ScopeType } upperObj - **Scope** 对象的上限。
+     * @param { ScopeType } lowerObj - 指定作用域实例的下限，需具有可比性。
+     * @param { ScopeType } upperObj - 指定作用域实例的上限，需具有可比性。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1491,9 +1511,9 @@ declare namespace util {
     constructor(lowerObj: ScopeType, upperObj: ScopeType);
 
     /**
-     * 获取包含此 **Scope** 的字符串表示形式。
+     * 该字符串化方法返回当前范围的字符串表示形式。
      *
-     * @returns { string } 包含此 **Scope** 的字符串表示形式。
+     * @returns { string } 返回当前范围的字符串表示形式。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1502,10 +1522,10 @@ declare namespace util {
     toString(): string;
 
     /**
-     * 获取此 **Scope** 与给定 **Scope** 的交集。如果交集为空，则抛出异常。
+     * 获取给定范围和当前范围的交集。当交集为空集时，抛出异常。
      *
-     * @param { ScopeHelper } range - 指定的 **Scope**。
-     * @returns { ScopeHelper } 此 **Scope** 与给定 **Scope** 的交集。
+     * @param { ScopeHelper } range - 传入给定范围。
+     * @returns { ScopeHelper } 返回给定范围和当前范围的交集。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1514,11 +1534,11 @@ declare namespace util {
     intersect(range: ScopeHelper): ScopeHelper;
 
     /**
-     * 获取此 **Scope** 与给定上下限的交集。如果交集为空，则抛出异常。
+     * 获取当前范围与指定下限和上限范围的交集。当交集为空集时，抛出异常。
      *
-     * @param { ScopeType } lowerObj - 下限。
-     * @param { ScopeType } upperObj - 上限。
-     * @returns { ScopeHelper } 此 **Scope** 与给定上下限的交集。
+     * @param { ScopeType } lowerObj - 给定范围的下限。
+     * @param { ScopeType } upperObj - 给定范围的上限。
+     * @returns { ScopeHelper } 返回当前范围与给定下限和上限范围的交集。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1527,9 +1547,9 @@ declare namespace util {
     intersect(lowerObj: ScopeType, upperObj: ScopeType): ScopeHelper;
 
     /**
-     * 获取此 **Scope** 的上限。
+     * 获取当前范围的上限。
      *
-     * @returns { ScopeType } 此 **Scope** 的上限。
+     * @returns { ScopeType } 返回当前范围的上限值。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1538,9 +1558,9 @@ declare namespace util {
     getUpper(): ScopeType;
 
     /**
-     * 获取此 **Scope** 的下限。
+     * 获取当前范围的下限。
      *
-     * @returns { ScopeType } 此 **Scope** 的下限。
+     * @returns { ScopeType } 返回当前范围的下限值。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1549,11 +1569,11 @@ declare namespace util {
     getLower(): ScopeType;
 
     /**
-     * 获取此 **Scope** 与给定上下限的并集。
+     * 创建并返回当前范围与给定下限和上限的并集。
      *
-     * @param { ScopeType } lowerObj - 下限。
-     * @param { ScopeType } upperObj - 上限。
-     * @returns { ScopeHelper } 此 **Scope** 与给定上下限的并集。
+     * @param { ScopeType } lowerObj - 给定范围的下限。
+     * @param { ScopeType } upperObj - 给定范围的上限。
+     * @returns { ScopeHelper } 返回当前范围和给定下限和上限的并集。
      * @syscap SystemCapability.Utils.Lang
      * @atomicservice [since 12]
      * @since 9 dynamic
@@ -1561,10 +1581,10 @@ declare namespace util {
     expand(lowerObj: ScopeType, upperObj: ScopeType): ScopeHelper;
 
     /**
-     * 获取此 **Scope** 与给定 **Scope** 的并集。
+     * 创建并返回当前范围和给定范围的并集。
      *
-     * @param { ScopeHelper } range - 指定的 **Scope**。
-     * @returns { ScopeHelper } 此 **Scope** 与给定 **Scope** 的并集。
+     * @param { ScopeHelper } range - 传入一个给定范围。
+     * @returns { ScopeHelper } 返回包括当前范围和给定范围的并集。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1573,10 +1593,10 @@ declare namespace util {
     expand(range: ScopeHelper): ScopeHelper;
 
     /**
-     * 获取此 **Scope** 与给定值的并集。
+     * 创建并返回当前范围和给定值的并集。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { ScopeHelper } 此 **Scope** 与给定值的并集。
+     * @param { ScopeType } value - 要检查是否在当前范围内的值。
+     * @returns { ScopeHelper } 返回包括当前范围和给定值的并集。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1585,10 +1605,10 @@ declare namespace util {
     expand(value: ScopeType): ScopeHelper;
 
     /**
-     * 判断一个值是否在此 **Scope** 范围内。
+     * 检查给定value是否在当前范围内。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { boolean } 检查结果。如果值在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
+     * @param { ScopeType } value - 传入一个给定值。
+     * @returns { boolean } 如果给定值包含在当前范围内返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1597,10 +1617,10 @@ declare namespace util {
     contains(value: ScopeType): boolean;
 
     /**
-     * 判断一个范围是否在此 **Scope** 范围内。
+     * 检查给定range是否在当前范围内。
      *
-     * @param { ScopeHelper } range - 指定的 **Scope**。
-     * @returns { boolean } 检查结果。如果范围在此 **Scope** 范围内，则返回 **true**；否则返回 **false**。
+     * @param { ScopeHelper } range - 传入一个给定范围。
+     * @returns { boolean } 如果给定范围在当前范围内则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1609,11 +1629,10 @@ declare namespace util {
     contains(range: ScopeHelper): boolean;
 
     /**
-     * 将一个值限制在此 **Scope** 范围内。
+     * 将值限定到当前范围内。
      *
-     * @param { ScopeType } value - 指定的值。
-     * @returns { ScopeType } 如果指定值小于下限，则返回 **lowerObj**；如果指定值大于上限，则返回 **upperObj**；如果
-     *     在此 **Scope** 范围内，则返回指定值。
+     * @param { ScopeType } value - 传入的给定值。
+     * @returns { ScopeType } 如果传入的value小于下限，返回lowerObj；如果大于上限值，返回upperObj；如果在当前范围内，返回value。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1632,7 +1651,7 @@ declare namespace util {
    */
   class Base64 {
     /**
-     * 用于创建 **Base64** 对象的构造函数。
+     * Base64的构造函数。
      *
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
@@ -1642,10 +1661,10 @@ declare namespace util {
     constructor();
 
     /**
-     * 对输入的 Uint8Array 字节数组进行 Base64 编码，并返回编码后的 Uint8Array。
+     * 将输入的Uint8Array字节数组进行Base64编码，返回编码后的Uint8Array数组。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { Uint8Array } src - 编码输入Uint8数组。
+     * @returns { Uint8Array } 返回编码后新分配的Uint8数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1654,10 +1673,10 @@ declare namespace util {
     encodeSync(src: Uint8Array): Uint8Array;
 
     /**
-     * 对输入的 Uint8Array 字节数组进行 Base64 编码，并返回编码后的字符串。
+     * 将输入的Uint8Array字节数组进行Base64编码，返回编码后的字符串结果。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @returns { string } 获取到的字符串。
+     * @param { Uint8Array } src - 编码输入Uint8数组。
+     * @returns { string } 返回编码后的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1666,10 +1685,10 @@ declare namespace util {
     encodeToStringSync(src: Uint8Array): string;
 
     /**
-     * 将输入内容解码为 Uint8Array 对象。
+     * 通过输入参数解码后输出对应文本。
      *
-     * @param { Uint8Array | string } src - 要解码的 Uint8Array 对象或字符串。
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { Uint8Array | string } src - 解码输入Uint8数组或者字符串。
+     * @returns { Uint8Array } 返回解码后新分配的Uint8数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1678,10 +1697,10 @@ declare namespace util {
     decodeSync(src: Uint8Array | string): Uint8Array;
 
     /**
-     * 将输入内容编码为 Uint8Array 对象。该接口使用 promise 返回结果。
+     * 通过输入参数异步编码后输出对应文本。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @returns { Promise<Uint8Array> } 用于返回获取到的 Uint8Array 对象的 promise。
+     * @param { Uint8Array } src - 异步编码输入Uint8数组。
+     * @returns { Promise<Uint8Array> } 返回异步编码后新分配的Uint8数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1690,10 +1709,10 @@ declare namespace util {
     encode(src: Uint8Array): Promise<Uint8Array>;
 
     /**
-     * 将输入内容编码为字符串。该接口使用 promise 返回结果。
+     * 通过输入参数异步编码后输出对应文本。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @returns { Promise<string> } 用于返回获取到的字符串的 promise。
+     * @param { Uint8Array } src - 异步编码输入Uint8数组。
+     * @returns { Promise<string> } 返回异步编码后的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1702,10 +1721,10 @@ declare namespace util {
     encodeToString(src: Uint8Array): Promise<string>;
 
     /**
-     * 将输入内容解码为 Uint8Array 对象。该接口使用 promise 返回结果。
+     * 将输入参数异步解码后输出对应文本。
      *
-     * @param { Uint8Array | string } src - 要解码的 Uint8Array 对象或字符串。
-     * @returns { Promise<Uint8Array> } 用于返回获取到的 Uint8Array 对象的 promise。
+     * @param { Uint8Array | string } src - 异步解码输入Uint8数组或者字符串。
+     * @returns { Promise<Uint8Array> } 返回异步解码后新分配的Uint8数组。
      * @syscap SystemCapability.Utils.Lang
      * @since 8 dynamiconly
      * @deprecated since 9
@@ -1783,7 +1802,7 @@ declare namespace util {
    */
   class Base64Helper {
     /**
-     * 用于创建 **Base64Helper** 实例的构造函数。
+     * Base64Helper的构造函数，创建一个用于Base64编解码的Base64Helper实例。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1793,12 +1812,11 @@ declare namespace util {
     constructor();
 
     /**
-     * 将输入内容编码为 Uint8Array 对象。
+     * 通过输入参数编码后输出Uint8Array对象。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。<br>-
-     *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。[since 12]
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { Uint8Array } src - 待编码的Uint8Array对象。
+     * @param { Type } [options] - 从API version 12开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC和util.Type.BASIC_URL_SAFE，默认值为：util.Type.BASIC。<br>util.Type.BASIC表示Base64编码。<br>util.Type.BASIC_URL_SAFE表示Base64URL编码。[since 12]
+     * @returns { Uint8Array } 返回编码后的Uint8Array对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1807,22 +1825,13 @@ declare namespace util {
     encodeSync(src: Uint8Array, options?: Type): Uint8Array;
 
     /**
-     * 对输入的 Uint8Array 字节数组进行 Base64 编码，并返回字符串。该方法支持多种编码格式，包括标准 Base64 编码、符合
-     * MIME 规范的 Base64 编码（带换行）以及 URL 安全的 Base64 编码。
+     * 将输入的Uint8Array字节数组进行Base64编码，返回一个字符串结果。该方法支持多种编码格式，包括标准Base64编码、MIME格式的Base64编码（带有换行符）、URL安全格式的Base64编码等。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
-     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
-     *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
-     *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
-     *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
-     *     且以 '\r\n' 结尾。[since 10 - 11]
-     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
-     *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。如果返回值超过 76 个字符，则每 76 个字符插入一个换
-     *     行，每行以 '\r\n' 结尾。如果返回值少于 76 个字符，则抛出异常。<br>- **util.Type.BASIC_URL_SAFE**：Base64URL
-     *     编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 编码。返回值每行最多 76 个字符
-     *     且以 '\r\n' 结尾。[since 12]
-     * @returns { string } 获取到的字符串。
+     * @param { Uint8Array } src - 待编码的Uint8Array对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 待编码的Uint8Array对象。<br>**说明**：从API version 26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
+     * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE 和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示使用Base64编码。如果返回值超过76个字符，则会在每76个字符处进行换行，并以'\r\n'结束每行。如果返回值少于76个字符，则会抛出异常。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 10 - 11]
+     * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE 和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示使用Base64编码。如果返回值超过76个字符，则会在每76个字符处进行换行，并以'\r\n'结束每行。如果返回值少于76个字符，则会抛出异常。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 12]
+     * @returns { string } 返回编码后的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1831,14 +1840,11 @@ declare namespace util {
     encodeToStringSync(src: Uint8Array | collections.Uint8Array, options?: Type): string;
 
     /**
-     * 将字符串解码为 Uint8Array 对象。该接口同步返回结果。
+     * 将输入参数解码后输出对应Uint8Array对象。
      *
-     * @param { Uint8Array | string } src - 要解码的 Uint8Array 对象或字符串。
-     * @param { Type } [options] - 解码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 解码。<br>-
-     *     **util.Type.MIME**：Base64 解码。输入参数 **src** 包含回车符和换行符。<br>- **util.Type.BASIC_URL_SAFE**：
-     *     Base64URL 解码。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 解码。输入参数 **src** 包含回车符和换行符。
-     *     [since 10]
-     * @returns { Uint8Array } 获取到的 Uint8Array 对象。
+     * @param { Uint8Array | string } src - 待解码的Uint8Array对象或者字符串。
+     * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的解码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64解码。<br>- 当参数取值为util.Type.MIME，表示Base64解码，src入参包含回车符、换行符。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL解码。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL解码，src入参包含回车符、换行符。[since 10]
+     * @returns { Uint8Array } 返回解码后新分配的Uint8Array对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1847,12 +1853,11 @@ declare namespace util {
     decodeSync(src: Uint8Array | string, options?: Type): Uint8Array;
 
     /**
-     * 将输入内容编码为 Uint8Array 对象。该接口使用 promise 返回结果。
+     * 将输入参数异步编码后输出对应Uint8Array对象。使用Promise异步回调。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。
-     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。<br>-
-     *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。[since 12]
-     * @returns { Promise<Uint8Array> } 用于返回获取到的 Uint8Array 对象的 promise。
+     * @param { Uint8Array } src - 待编码Uint8Array对象。
+     * @param { Type } [options] - 从API version 12开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC和util.Type.BASIC_URL_SAFE，默认值为：util.Type.BASIC。<br>util.Type.BASIC表示Base64编码。<br>util.Type.BASIC_URL_SAFE表示Base64URL编码。[since 12]
+     * @returns { Promise<Uint8Array> } Promise对象。编码成功时resolve为新分配的Uint8Array对象，编码失败时reject为错误对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 11]
@@ -1861,15 +1866,12 @@ declare namespace util {
     encode(src: Uint8Array, options?: Type): Promise<Uint8Array>;
 
     /**
-     * 将输入内容编码为字符串。该接口使用 promise 返回结果。
+     * 将输入参数异步编码后输出对应文本。使用Promise异步回调。
      *
-     * @param { Uint8Array } src - 要编码的 Uint8Array 对象。[since 9 - 26.0.1]
-     * @param { Uint8Array | collections.Uint8Array } src - 要编码的 Uint8Array 对象。[since 26.1.0]
-     * @param { Type } [options] - 编码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 编码。返回值不
-     *     包含回车符或换行符。<br>- **util.Type.MIME**：Base64 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。<br>-
-     *     **util.Type.BASIC_URL_SAFE**：Base64URL 编码。返回值不包含回车符或换行符。<br>- **util.Type.MIME_URL_SAFE**：
-     *     Base64URL 编码。返回值每行最多 76 个字符且以 '\r\n' 结尾。[since 10]
-     * @returns { Promise<string> } 用于返回获取到的字符串的 promise。
+     * @param { Uint8Array } src - 异步编码输入的Uint8Array对象。[since 9 - 26.0.1]
+     * @param { Uint8Array | collections.Uint8Array } src - 异步编码输入的Uint8Array对象。<br>**说明**：从API version 26.1.0开始，支持传入collections.Uint8Array（Sendable字节数组），可直接编码跨并发实例（TaskPool/Worker）传递的字节数据，无需先拷贝为普通Uint8Array。[since 26.1.0]
+     * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的编码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC，表示Base64编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME，表示Base64编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL编码，返回值没有回车符、换行符。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL编码，返回值每一行不超过76个字符，而且每行以'\r\n'符结束。[since 10]
+     * @returns { Promise<string> } Promise对象。编码成功时resolve为Base64编码后的字符串，编码失败时reject为错误对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1878,14 +1880,11 @@ declare namespace util {
     encodeToString(src: Uint8Array | collections.Uint8Array, options?: Type): Promise<string>;
 
     /**
-     * 将输入内容解码为 Uint8Array 对象。该接口使用 promise 返回结果。
+     * 将输入参数异步解码后输出对应Uint8Array对象。使用Promise异步回调。
      *
-     * @param { Uint8Array | string } src - 要解码的 Uint8Array 对象或字符串。
-     * @param { Type } [options] - 解码格式。<br>可取值如下：<br>- **util.Type.BASIC**（默认）：Base64 解码。<br>-
-     *     **util.Type.MIME**：Base64 解码。输入参数 **src** 包含回车符和换行符。<br>- **util.Type.BASIC_URL_SAFE**：
-     *     Base64URL 解码。<br>- **util.Type.MIME_URL_SAFE**：Base64URL 解码。输入参数 **src** 包含回车符和换行符。
-     *     [since 10]
-     * @returns { Promise<Uint8Array> } 用于返回获取到的 Uint8Array 对象的 promise。
+     * @param { Uint8Array | string } src - 异步解码输入Uint8Array对象或者字符串。
+     * @param { Type } [options] - 从API version 10开始支持该参数，表示对应的解码格式。<br>此参数可选，可选值为：util.Type.BASIC，util.Type.MIME，util.Type.BASIC_URL_SAFE和util.Type.MIME_URL_SAFE，默认值为：util.Type.BASIC。<br>- 当参数取值为util.Type.BASIC时，表示Base64解码。<br>- 当参数取值为util.Type.MIME时，表示Base64解码，src入参包含回车符、换行符。<br>- 当参数取值为util.Type.BASIC_URL_SAFE，表示Base64URL解码。<br>- 当参数取值为util.Type.MIME_URL_SAFE，表示Base64URL解码，src入参包含回车符、换行符。[since 10]
+     * @returns { Promise<Uint8Array> } 返回异步解码后新分配的Uint8Array对象。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1904,7 +1903,7 @@ declare namespace util {
    */
   class types {
     /**
-     * 用于创建 **Types** 对象的构造函数。
+     * Types的构造函数，创建一个用于内置对象类型检查的types实例。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1913,11 +1912,10 @@ declare namespace util {
      */
     constructor();
     /**
-     * 判断入参是否为 ArrayBuffer 或 SharedArrayBuffer 类型。
+     * 检查value是否为ArrayBuffer或SharedArrayBuffer类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 ArrayBuffer 或 SharedArrayBuffer 类型，则返回 **true**；否则返回
-     *     **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是ArrayBuffer或SharedArrayBuffer类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1925,11 +1923,12 @@ declare namespace util {
      */
     isAnyArrayBuffer(value: Object): boolean;
     /**
-     * 判断入参是否为 ArrayBufferView 类型。ArrayBufferView 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
-     * Uint8ClampedArray、Uint32Array、Float32Array、Float64Array 和 DataView。
+     * 检查value是否为ArrayBufferView类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 ArrayBufferView 类型，则返回 **true**；否则返回 **false**。
+     * ArrayBufferView类型包括：Int8Array、Int16Array、Int32Array、Uint8Array、Uint8ClampedArray、Uint32Array、Float32Array、Float64Array、DataView。
+     *
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是ArrayBufferView类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1937,10 +1936,10 @@ declare namespace util {
      */
     isArrayBufferView(value: Object): boolean;
     /**
-     * 判断入参是否为 **arguments** 对象。
+     * 检查value是否为arguments对象。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 **arguments** 对象，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是arguments对象则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1948,10 +1947,10 @@ declare namespace util {
      */
     isArgumentsObject(value: Object): boolean;
     /**
-     * 判断入参是否为 ArrayBuffer 类型。
+     * 检查value是否为ArrayBuffer类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 ArrayBuffer 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是ArrayBuffer类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1976,10 +1975,10 @@ declare namespace util {
      */
     isAsyncFunction(value: Object): boolean;
     /**
-     * 判断入参是否为 BigInt64Array 类型。
+     * 检查value是否为BigInt64Array类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 BigInt64Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是BigInt64Array类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -1987,10 +1986,10 @@ declare namespace util {
      */
     isBigInt64Array(value: Object): boolean;
     /**
-     * 判断入参是否为 BigUint64Array 类型。
+     * 检查value是否为BigUint64Array类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 BigUint64Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是BigUint64Array类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2031,10 +2030,10 @@ declare namespace util {
      */
     isBoxedPrimitive(value: Object): boolean;
     /**
-     * 判断入参是否为 DataView 类型。
+     * 检查value是否为DataView类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 DataView 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是DataView类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2042,10 +2041,10 @@ declare namespace util {
      */
     isDataView(value: Object): boolean;
     /**
-     * 判断入参是否为 Date 类型。
+     * 检查value是否为Date类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Date 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Date类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2053,10 +2052,10 @@ declare namespace util {
      */
     isDate(value: Object): boolean;
     /**
-     * 判断入参是否为 native external 类型。
+     * 检查value是否为native External类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 native external 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是native External类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2064,10 +2063,10 @@ declare namespace util {
      */
     isExternal(value: Object): boolean;
     /**
-     * 判断入参是否为 Float32Array 类型。
+     * 检查value是否为Float32Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Float32Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Float32Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2075,10 +2074,10 @@ declare namespace util {
      */
     isFloat32Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Float64Array 类型。
+     * 检查value是否为Float64Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Float64Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Float64Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2101,10 +2100,10 @@ declare namespace util {
      */
     isGeneratorFunction(value: Object): boolean;
     /**
-     * 判断入参是否为 generator 对象。
+     * 检查value是否为generator对象类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 generator 对象，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是generator对象则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2112,10 +2111,10 @@ declare namespace util {
      */
     isGeneratorObject(value: Object): boolean;
     /**
-     * 判断入参是否为 Int8Array 类型。
+     * 检查value是否为Int8Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Int8Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Int8Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2123,10 +2122,10 @@ declare namespace util {
      */
     isInt8Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Int16Array 类型。
+     * 检查value是否为Int16Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Int16Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Int16Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2134,10 +2133,10 @@ declare namespace util {
      */
     isInt16Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Int32Array 类型。
+     * 检查value是否为Int32Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Int32Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Int32Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2145,10 +2144,10 @@ declare namespace util {
      */
     isInt32Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Map 类型。
+     * 检查value是否为Map类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Map 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Map类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2156,10 +2155,10 @@ declare namespace util {
      */
     isMap(value: Object): boolean;
     /**
-     * 判断入参是否为 MapIterator 类型。
+     * 检查value是否为Map的Iterator类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 MapIterator 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Map的Iterator类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2167,10 +2166,10 @@ declare namespace util {
      */
     isMapIterator(value: Object): boolean;
     /**
-     * 判断入参是否为模块命名空间对象。
+     * 检查value是否为Module Namespace Object类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为模块命名空间对象，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Module Namespace Object类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2178,10 +2177,10 @@ declare namespace util {
      */
     isModuleNamespaceObject(value: Object): boolean;
     /**
-     * 判断入参是否为 Error 类型。
+     * 检查value是否为Error类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Error 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Error类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2205,10 +2204,10 @@ declare namespace util {
      */
     isNumberObject(value: Object): boolean;
     /**
-     * 判断入参是否为 promise。
+     * 检查value是否为Promise类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 promise，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Promise类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2216,10 +2215,10 @@ declare namespace util {
      */
     isPromise(value: Object): boolean;
     /**
-     * 判断入参是否为 proxy。
+     * 检查value是否为Proxy类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 proxy，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Proxy类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2227,10 +2226,10 @@ declare namespace util {
      */
     isProxy(value: Object): boolean;
     /**
-     * 判断入参是否为 RegExp 类型。
+     * 检查value是否为RegExp类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 RegExp 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是RegExp类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2238,10 +2237,10 @@ declare namespace util {
      */
     isRegExp(value: Object): boolean;
     /**
-     * 判断入参是否为 Set 类型。
+     * 检查value是否为Set类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Set 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Set类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2249,10 +2248,10 @@ declare namespace util {
      */
     isSet(value: Object): boolean;
     /**
-     * 判断入参是否为 SetIterator 类型。
+     * 检查value是否为Set的Iterator类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 SetIterator 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Set的Iterator类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2260,10 +2259,10 @@ declare namespace util {
      */
     isSetIterator(value: Object): boolean;
     /**
-     * 判断入参是否为 SharedArrayBuffer 类型。
+     * 检查value是否为SharedArrayBuffer类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 SharedArrayBuffer 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是SharedArrayBuffer类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2303,11 +2302,12 @@ declare namespace util {
      */
     isSymbolObject(value: Object): boolean;
     /**
-     * 判断入参是否为 TypedArray 类型。TypedArray 类型包括 Int8Array、Int16Array、Int32Array、Uint8Array、
-     * Uint8ClampedArray、Uint16Array、Uint32Array、Float32Array、Float64Array、BigInt64Array 和 BigUint64Array。
+     * 检查value是否为TypedArray类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 TypedArray 类型，则返回 **true**；否则返回 **false**。
+     * TypedArray类型，包括Int8Array、Int16Array、Int32Array、Uint8Array、Uint8ClampedArray、Uint16Array、Uint32Array、Float32Array、Float64Array、BigInt64Array、BigUint64Array。
+     *
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是TypedArray包含的类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2315,10 +2315,10 @@ declare namespace util {
      */
     isTypedArray(value: Object): boolean;
     /**
-     * 判断入参是否为 Uint8Array 类型。
+     * 检查value是否为Uint8Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Uint8Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Uint8Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2326,10 +2326,10 @@ declare namespace util {
      */
     isUint8Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Uint8ClampedArray 类型。
+     * 检查value是否为Uint8ClampedArray数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Uint8ClampedArray 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Uint8ClampedArray数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2337,10 +2337,10 @@ declare namespace util {
      */
     isUint8ClampedArray(value: Object): boolean;
     /**
-     * 判断入参是否为 Uint16Array 类型。
+     * 检查value是否为Uint16Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Uint16Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Uint16Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2348,10 +2348,10 @@ declare namespace util {
      */
     isUint16Array(value: Object): boolean;
     /**
-     * 判断入参是否为 Uint32Array 类型。
+     * 检查value是否为Uint32Array数组类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 Uint32Array 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是Uint32Array数组类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2359,10 +2359,10 @@ declare namespace util {
      */
     isUint32Array(value: Object): boolean;
     /**
-     * 判断入参是否为 WeakMap 类型。
+     * 检查value是否为WeakMap类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 WeakMap 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是WeakMap类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2370,10 +2370,10 @@ declare namespace util {
      */
     isWeakMap(value: Object): boolean;
     /**
-     * 判断入参是否为 WeakSet 类型。
+     * 检查value是否为WeakSet类型。
      *
-     * @param { Object } value - 要检查的对象。
-     * @returns { boolean } 检查结果。如果入参为 WeakSet 类型，则返回 **true**；否则返回 **false**。
+     * @param { Object } value - 待检测对象。
+     * @returns { boolean } 如果是WeakSet类型则返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
      * @atomicservice [since 12]
@@ -2391,14 +2391,15 @@ declare namespace util {
    */
   class Aspect {
     /**
-     * 在类对象的方法前插入一个函数。被插入的函数会先于类对象的原方法执行。
+     * 在指定的类对象的原方法执行前插入一个函数，适用于日志记录、性能监控、权限校验等需要在方法执行前进行拦截处理的场景。
+     * 执行addBefore接口后，先运行插入的函数逻辑，再执行指定类对象的原方法。
      *
-     * @param { Object } targetClass - 目标类对象。
-     * @param { string } methodName - 方法名。不支持只读方法。
-     * @param { boolean } isStatic - 该方法是否为静态方法。值为 **true** 表示静态方法，值为 **false** 表示实例方法。
-     * @param { Function } before - 要插入的函数。如果该函数携带参数，则第一个参数为 **this** 对象：当 **isStatic**
-     *     为 **true** 时为目标类对象（由 **targetClass** 指定），当 **isStatic** 为 **false** 时为该方法的实例对象；
-     *     其余参数为原方法携带的参数。如果该函数不携带任何参数，则不执行任何处理。
+     * @param { Object } targetClass - 指定的类对象。
+     * @param { string } methodName - 指定的原方法名，不支持read-only方法。
+     * @param { boolean } isStatic - 指定的原方法是否为静态方法。true表示静态方法，false表示实例方法。
+     * @param { Function } before - 要插入的函数对象。函数有参数，则第一个参数是this对象（若isStatic为true，则为类对象
+     *     即targetClass；若isStatic为false，则为调用方法的实例对象），其余参数是原方法的参数。函数也可以无参数，
+     *     无参时不做处理。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice [since 12]
@@ -2406,15 +2407,14 @@ declare namespace util {
      */
     static addBefore(targetClass: Object, methodName: string, isStatic: boolean, before: Function): void;
     /**
-     * 在类对象的方法后插入一个函数。最终的返回值为被插入函数的返回值。
+     * 在指定的类方法执行后插入一段逻辑。最终返回插入函数执行后的返回值。
      *
-     * @param { Object } targetClass - 目标类对象。
-     * @param { string } methodName - 方法名。不支持只读方法。
-     * @param { boolean } isStatic - 该方法是否为静态方法。值为 **true** 表示静态方法，值为 **false** 表示实例方法。
-     * @param { Function } after - 要插入的函数。如果该函数携带参数，则第一个参数为 **this** 对象：当 **isStatic**
-     *     为 **true** 时为目标类对象（由 **targetClass** 指定），当 **isStatic** 为 **false** 时为该方法的实例对象；
-     *     第二个参数为原方法的返回值（如果原方法没有返回值则为 **undefined**）；其余参数为原方法携带的参数。如果该函数
-     *     不携带任何参数，则不执行任何处理。
+     * @param { Object } targetClass - 指定的类对象。
+     * @param { string } methodName - 指定的原方法名，不支持read-only方法。
+     * @param { boolean } isStatic - 指定的原方法是否为静态方法。true表示静态方法，false表示实例方法。
+     * @param { Function } after - 要插入的函数。函数有参数时，则第一个参数是this对象（若isStatic为true，则为类对象
+     *     即targetClass；若isStatic为false，则为调用方法的实例对象），第二个参数是原方法的返回值（如果原方法没有返回值，
+     *     则为undefined），其余参数是原方法的参数。函数也可以无参，无参时不做处理。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice [since 12]
@@ -2422,14 +2422,15 @@ declare namespace util {
      */
     static addAfter(targetClass: Object, methodName: string, isStatic: boolean, after: Function): void;
     /**
-     * 使用另一个函数替换类对象的方法。替换后，仅执行新函数的逻辑。最终的返回值为新函数的返回值。
+     * 将指定类的原方法替换为另一个函数，适用于行为替换、兼容性适配、条件执行等需要完全改变方法实现逻辑的场景。
+     * replace接口执行完成后，调用指定的类方法时，仅执行替换后的逻辑。最终返回替换函数执行完毕的返回值。
      *
-     * @param { Object } targetClass - 目标类对象。
-     * @param { string } methodName - 方法名。不支持只读方法。
-     * @param { boolean } isStatic - 该方法是否为静态方法。值为 **true** 表示静态方法，值为 **false** 表示实例方法。
-     * @param { Function } instead - 用于替换的函数。如果该函数携带参数，则第一个参数为 **this** 对象：当 **isStatic**
-     *     为 **true** 时为目标类对象（由 **targetClass** 指定），当 **isStatic** 为 **false** 时为该方法的实例对象；
-     *     其余参数为原方法携带的参数。如果该函数不携带任何参数，则不执行任何处理。
+     * @param { Object } targetClass - 指定的类对象。
+     * @param { string } methodName - 指定的原方法名，不支持read-only方法。
+     * @param { boolean } isStatic - 指定的原方法是否为静态方法。true表示静态方法，false表示实例方法。
+     * @param { Function } instead - 要用来替换原方法的函数。函数有参数时，则第一个参数是this对象（若isStatic为true，
+     *     则为类对象即targetClass；若isStatic为false，则为调用方法的实例对象），其余参数是原方法的参数。
+     *     函数也可以无参，无参时不做处理。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice [since 12]
@@ -2448,9 +2449,9 @@ declare namespace util {
    */
   class StringDecoder {
     /**
-     * 用于创建 **StringDecoder** 实例的构造函数。
+     * StringDecoder的构造函数，创建一个默认编码为'utf-8'的StringDecoder实例。
      *
-     * @param { string } [encoding] - 输入数据的编码类型。默认值为 **utf-8**。
+     * @param { string } [encoding] - 输入数据的编码类型。默认值：'utf-8'。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -2458,11 +2459,10 @@ declare namespace util {
      */
     constructor(encoding?: string);
     /**
-     * 解码字符串。Uint8Array 末尾的任何不完整多字节字符都会从返回的字符串中过滤掉，并存储在内部缓存中以供下次调用使用。
+     * 返回一个解码后的字符串，确保Uint8Array末尾的任何不完整的多字节字符从返回的字符串中被过滤，并保存在一个内部的buffer中用于下次调用。
      *
-     * @param { string | Uint8Array } chunk - 要解码的字符串。基于输入的编码类型进行解码。如果输入为 Uint8Array 类型，
-     *     则正常解码。如果输入为字符串类型，则直接返回该参数。
-     * @returns { string } 解码后的字符串。
+     * @param { string | Uint8Array } chunk - 需要解码的字符串。会根据输入的编码类型进行解码，参数为Uint8Array时正常解码，参数为string时会将参数直接返回。
+     * @returns { string } 返回解码后的字符串，不完整的多字节字符已从返回值中过滤，并保存在内部缓冲区中供下次调用处理。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -2470,11 +2470,10 @@ declare namespace util {
      */
     write(chunk: string | Uint8Array): string;
     /**
-     * 结束解码过程，并将内部缓存中存储的任何剩余输入作为字符串返回。如果传入 **chunk**，则将其作为最后一部分数据进行解码；
-     * 如果未传入 **chunk**，则仅返回内部缓存中不完整字节序列的解码结果，不再处理新数据。
+     * 结束解码过程，以字符串形式返回存储在内部缓冲区中的所有剩余输入。
      *
-     * @param { string | Uint8Array } [chunk] - 要解码的字符串。默认值为 **undefined**。
-     * @returns { string } 解码后的字符串。
+     * @param { string | Uint8Array } [chunk] - 需要解码的最后一部分数据，默认为undefined。当还有剩余数据需要在结束解码时一并处理时传入此参数；不传入时默认为undefined，即仅返回内部缓冲区中存储的不完整字节序列的解码结果，不再处理新数据。
+     * @returns { string } 返回存储在内部缓冲区中的所有剩余解码内容组成的字符串。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -2507,9 +2506,9 @@ declare namespace util {
    */
   interface AutoFinalizer<T> {
     /**
-     * 开发者自定义的用于释放资源的回调。当注册对象被回收时自动触发，并将heldValue传递给onFinalization。
+     * 开发者需要实现该接口，定义对象被回收时自动触发的资源清理回调。
      *
-     * @param { T } heldValue - 传递给 finalizer 的值。
+     * @param { T } heldValue - 当监听的对象被回收时，该值会被传递给`onFinalization`回调方法。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -2583,6 +2582,46 @@ declare namespace util {
   }
 
   /**
+   * 枚举，提示触发GC的紧急程度。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 dynamiconly
+   */
+  enum UrgencyLevel {
+    /**
+     * 紧急程度低，GC触发阈值较高但仍低于正常的GC触发阈值。
+     * 适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    LOW = 0,
+    /**
+     * 紧急程度中等，GC触发阈值介于LOW和HIGH之间。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    MEDIUM = 1,
+    /**
+     * 紧急程度高，GC触发阈值低。
+     * 适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    HIGH = 2,
+  }
+
+  /**
    * 为开发者提供虚拟机维测能力的类。
    *
    * @syscap SystemCapability.Utils.Lang
@@ -2592,10 +2631,12 @@ declare namespace util {
    */
   class ArkTSVM {
     /**
-     * 设置是否开启多线程安全检测。当 **enabled** 设置为 **true** 时开启检测，多线程问题的 cppcrash 文件中将包含多线程相关的
-     * 详细信息。当 **enabled** 设置为 **false** 时关闭检测，相应的 cppcrash 文件中将不包含此类详细信息。
+     * 若enabled为true则开启，为false则关闭。开启多线程安全检测，多线程问题的C/C++崩溃转储文件（cppcrash文件）里会包含
+     * 多线程信息（如线程ID、锁状态等）。关闭多线程安全检测，则C/C++崩溃转储文件（cppcrash文件）里不会包含多线程信息。
      *
-     * @param { boolean } enabled - 控制是否开启多线程安全检测。**true** 表示开启检测，**false** 表示关闭检测。
+     * options是用于配置多线程安全检测的行为参数。
+     *
+     * @param { boolean } enabled - 控制多线程安全检测开关的开启或关闭。true表示开启，false表示关闭。
      * @param { MultithreadingDetectionOptions } [options] - 多线程安全检测的参数配置，此参数不填时，
      * 对应各属性取MultithreadingDetectionOptions的默认值。[since 26.0.0]
      * @syscap SystemCapability.Utils.Lang
@@ -2606,13 +2647,15 @@ declare namespace util {
     static setMultithreadingDetectionEnabled(enabled: boolean, options?: MultithreadingDetectionOptions):void;
 
     /**
-     * 注册一个回调函数，在虚拟机主线程完成GC（垃圾回收）后，按存活对象大小判断堆内存是否超过临界预警阈值时触发。堆碎片和浮动垃圾可能影响判断，无法保证在OOM（内存溢出）前一定触发。
-     * 必须在主线程上调用，且仅能注册一个回调。
+     * 注册一个回调函数，在虚拟机主线程完成垃圾回收后，如果堆内存超过预警阈值则触发回调执行，适用于主动内存管理
+     * （在内存压力较大时触发资源清理）、OOM预防等场景。
      *
-     * @param { Callback<string> } callback - 在 GC 后内存达到阈值时触发的回调。字符串参数表示内存压力事件的类型：
-     *     "LocalHeapMemPressure"、"SharedHeapMemPressure" 或 "ProcessHeapMemPressure"。
-     * @param { HeapMemoryThreshold } heapMemoryThreshold - 表示 GC 后触发回调的堆内存百分比阈值。取值范围为 [70, 95]。
-     * @returns { boolean } 注册成功返回 {@code true}；若不在主线程调用或回调已注册，则返回 {@code false}。
+     * 虚拟机是通过统计存活对象大小来判断是否达到内存预警阈值，由于虚拟机堆存在一定内存碎片以及浮动垃圾，无法保证在OOM前肯定会触发到回调。
+     *
+     * @param { Callback<string> } callback - 垃圾回收后内存达到预警阈值时触发的回调函数，字符串参数表示内存压力事件的类型。
+     *     目前事件的类型有三种取值，"LocalHeapMemPressure"，"SharedHeapMemPressure"，"ProcessHeapMemPressure"。
+     * @param { HeapMemoryThreshold } heapMemoryThreshold - 堆内存预警阈值配置，以百分比设置，取值范围为[70, 95]。超出范围时自动限制到有效区间。
+     * @returns { boolean } 注册成功返回true，当不在主线程调用或回调已注册时返回false。
      * @static
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
@@ -2621,7 +2664,7 @@ declare namespace util {
     static onVMHeapMemoryPressure(callback: Callback<string>, heapMemoryThreshold: HeapMemoryThreshold): boolean;
 
     /**
-     * 取消注册在 GC 后堆内存超过临界预警阈值时触发的回调。必须在主线程上调用。
+     * 取消已注册的内存预警回调函数。此接口需要在主线程调用。
      *
      * @static
      * @syscap SystemCapability.Utils.Lang
@@ -2631,13 +2674,17 @@ declare namespace util {
     static offVMHeapMemoryPressure(): void;
 
     /**
-     * 从 ArkTS-VM 和共享堆中获取所有堆内存信息。
+     * 获取所有VM线程的堆内存信息，包括线程ID、线程名称、堆类型和堆对象大小，适用于内存泄漏排查、内存使用分析等场景。
+     * 使用Promise异步回调。
+     *
+     * 接口获取到的堆包含两种类型：local堆，即应用进程中每个ArkTS线程独有的虚拟机堆；shared堆，即应用进程中所有ArkTS线程共享的虚拟机堆。
      *
      * > **说明：**
      * >
      * > 此接口在执行时会暂停所有VM线程运行以获取内存信息。由于需要等待所有VM线程暂停，高负载场景下调用此接口的耗时可能较高。
      *
-     * @returns { Promise<HeapMemoryInfo[]> } 返回一个 promise，包含 ArkTS-VM 的 local 堆和共享堆中的所有堆内存信息。
+     * @returns { Promise<HeapMemoryInfo[]> } Promise对象，解析为HeapMemoryInfo对象数组，每个对象包含线程ID、线程名称、
+     *     堆类型和堆对象大小。此方法可以获取local堆和shared堆的内存信息。
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @since 24 dynamiconly
@@ -2645,7 +2692,9 @@ declare namespace util {
     static getAllVMHeapMemoryInfo(): Promise<HeapMemoryInfo[]>;
 
     /**
-     * 开启 local handle 检测，以避免在 Libuv 或 EventHandler 的事件循环（event looper）中出现内存泄漏。
+     * EventHandler和libuv的异步事件循环机制在执行异步任务时，任务将不在当前handle scope的管理范围内执行，创建的
+     * napi_value不会被自动回收。若开发者在任务回调中未添加scope，将导致内存泄漏。调用该接口后，可确保这两个机制的任务
+     * 在scope范围内执行，从而避免内存泄漏。
      *
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
@@ -2655,10 +2704,18 @@ declare namespace util {
     static enableLocalHandleDetection(): void;
 
     /**
-     * 开启或关闭进程级的 napi_ref 与全局 handle 之间关联关系追踪，所有线程共享该状态。开启后，堆快照将包含 native 引用地址信息。追踪会增加内存和性能开销，建议无需调试时关闭。关闭后（enable 为
-     * false），将停止追踪，堆快照中不再显示 native 引用与全局 handle 之间的关联关系。
+     * 开启或关闭napi_ref与全局对象之间的关联追踪。开启后，堆快照中全局对象节点将包含napi_ref的地址信息；关闭后
+     * （enable为false），将停止追踪，堆快照中不再显示napi_ref与全局对象之间的关联关系。
      *
-     * @param { boolean } enable - 布尔标志位，指示是开启还是关闭追踪。**true** 表示开启追踪，**false** 表示关闭追踪。
+     * 开启追踪后，虚拟机会额外记录napi_ref与全局对象的关联关系，可能带来一定的内存和性能开销。在不需要调试时，
+     * 建议调用`util.ArkTSVM.setTrackGlobalRef(false)`关闭追踪。
+     *
+     * 该接口的开关为进程级别，进程内的所有线程共享同一开关状态。在任意线程调用本接口设置开关后，将对该进程内所有线程生效。
+     *
+     * 关于napi_ref的详细说明，请参考napi_ref使用指导。
+     *
+     * @param { boolean } enable - 是否开启追踪。true表示开启追踪（可能带来一定的内存和性能开销），false表示关闭追踪。
+     *     建议在不需要调试时设置为false以避免性能开销。
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
@@ -2667,27 +2724,55 @@ declare namespace util {
     static setTrackGlobalRef(enable: boolean): void;
 
     /**
-     * 获取当前调用线程所属 ArkTS 虚拟机正在使用的全局 handle 数量。可用于维测场景，例如根据全局 handle 数量决定是否
-     * 生成内存快照。
+     * 获取当前调用线程所属虚拟机中正在使用的全局句柄（global handle）数量，适用于内存观测等场景。
      *
      * > **说明：**
      * >
-     * > 该计数是在调用线程所属的虚拟机上查询的。在 worker 中调用此接口返回的是该 worker 自身虚拟机的计数，而非主
-     * > 虚拟机的计数。
+     * > 在worker线程中调用本接口时，返回的是该worker线程所属虚拟机的计数，而非主线程虚拟机的计数。
      * >
-     * > 仅统计强引用（global handle）的数量，不包含弱引用（WeakRef）和 Sendable 引用（SendableRef）。弱引用存储在
-     * > 独立的弱引用链表中，Sendable 引用存储在独立的 Sendable 全局存储中，均不在本接口的遍历范围内。
-     * >
-     * > 返回值受强引用创建/删除操作的影响。例如，napi_create_strong_reference、napi_delete_strong_reference 会相应
-     * > 增减计数，而 napi_create_strong_sendable_reference、napi_delete_strong_sendable_reference 不会影响计数结果。
+     * > 该接口仅统计强引用（global handle）的数量，不包含弱引用（WeakRef）和Sendable引用（SendableRef）的数量。
+     * > 弱引用存储在独立的弱引用链表中，Sendable引用存储在独立的Sendable全局存储中，均不在本接口的遍历范围内。
+     * > 返回值受强引用创建/删除操作的影响，例如napi_create_strong_reference、napi_delete_strong_reference等接口
+     * > 会相应增减计数，napi_create_strong_sendable_reference、napi_delete_strong_sendable_reference等接口
+     * > 不会影响计数结果。
      *
-     * @returns { number } 返回当前虚拟机正在使用的全局 handle 数量，该值大于等于 0。
+     * @returns { number } 当前调用线程所属虚拟机中正在使用的全局句柄数量。
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
      * @crossplatform
      * @since 26.1.0 dynamiconly
      */
     static getGlobalHandleCount(): number;
+
+    /**
+     * 提示当前ArkTS虚拟机主动触发GC的接口。
+     * 虚拟机根据当前内存状态和紧急程度决定是否触发GC。
+     * 默认参数值是Urgency.LOW。
+     * 不推荐高频调用，因为GC可能带来较高的性能开销
+     *
+     * @param { UrgencyLevel } [level] - 紧急程度.<br>可选的参数值如下:
+     *     <br>- **Urgency.LOW** (默认值): 紧急程度低, GC触发阈值相对较高,
+     *     适用于开发者期望主动触发GC去回收已死亡的对象但是应用的ArkTS内存压力仍然可控的场景。
+     *     <br>- **Urgency.MEDIUM**: 紧急程度中等, GC触发阈值介于LOW和HIGH之间。
+     *     <br>- **Urgency.HIGH**: 紧急程度高, GC触发阈值低,
+     *     适用于应用的ArkTS内存压力已经非常高，开发者期望系统尽可能快地触发GC去回收内存的场景
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static hintGC(level?: UrgencyLevel): void;
+
+    /**
+     * 开启按比例的 handle/原始类型存储收缩优化。默认关闭；一旦开启将无法关闭。开启前使用传统的保守收缩策略。
+     *
+     * @syscap SystemCapability.Utils.Lang
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamiconly
+     */
+    static enableHandleMemoryOptimization(): void;
   }
 
   /**

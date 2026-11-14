@@ -26,11 +26,11 @@
  * 
  * ###### 属性
  * 
- * 不支持[通用属性]{@link common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  * 
  * ###### 事件
  * 
- * 不支持[通用事件]{@link common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  * 
  * @file
  * @kit ArkUI

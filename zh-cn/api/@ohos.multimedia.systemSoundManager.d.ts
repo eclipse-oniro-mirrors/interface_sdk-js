@@ -636,7 +636,7 @@ declare namespace systemSoundManager {
      */
     mode: ToneHapticsMode;
     /**
-     * 振动 URI。当 {@link ToneHapticsSettings#mode} 为 {@link ToneHapticsMode#NON_SYC} 时，用户可以设置或获取此参数；
+     * 系统铃音的振动路径，当振动模式不是非同步振动应该被忽略，振动的路径可通过[getToneHapticsList]{@link systemSoundManager.SystemSoundManager.getToneHapticsList}获取。
      * 在其他情况下，该 URI 无效，应予以忽略。
      *
      * @syscap SystemCapability.Multimedia.SystemSound.Core
@@ -1571,7 +1571,7 @@ declare namespace systemSoundManager {
     CALL_SIM_CARD_1 = 1,
 
     /**
-     * ESIM卡1的来电铃声的振动。。
+     * ESIM卡1的来电铃声的振动。
      *
      * @syscap SystemCapability.Multimedia.SystemSound.Core
      * @systemapi

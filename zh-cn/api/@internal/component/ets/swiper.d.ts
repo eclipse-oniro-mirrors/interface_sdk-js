@@ -2062,6 +2062,18 @@ declare class SwiperAttribute extends CommonMethod<SwiperAttribute> {
    * @since 20 dynamic
    */
   maintainVisibleContentPosition(enabled: boolean): SwiperAttribute;
+
+  /**
+   * 设置当子组件的[visibility](ts-universal-attributes-visibility.md#visibility)属性设置为Visibility.None时，该子组件是否在视窗中占位。
+   *
+   * @param { boolean } enabled - 设置当子组件的visibility属性设置为Visibility.None时，该子组件是否在视窗中占位。<br/>true：设置为隐藏的子组件不在视窗中占位。<br/>false：设置为隐藏的子组件依然在视窗中占位。<br/>异常值按false处理。
+   * @returns { SwiperAttribute } 返回SwiperAttribute的实例。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   */
+  ignoreHiddenItem(enabled: boolean): SwiperAttribute;
 }
 
 /**

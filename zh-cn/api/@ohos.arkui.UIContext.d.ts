@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIContext实例
  * @kit ArkUI
  */
 
@@ -1018,6 +1018,7 @@ export class PromptAction {
    * <br> 3. Parameter verification failed.
    * @throws { BusinessError } 100001 - Internal error.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
    * @crossplatform
    * @since 10 dynamiconly
    * @deprecated since 11
@@ -1567,6 +1568,135 @@ export declare type NodeIdentity = string | number;
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
 
 /**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由[NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点时上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_COMPONENT权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为
+   * [NodeSensitiveInputEventType.TOUCH]{@link NodeSensitiveInputEventType#TOUCH}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为
+   * [NodeSensitiveInputEventType.MOUSE]{@link NodeSensitiveInputEventType#MOUSE}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为
+   * [NodeSensitiveInputEventType.KEY]{@link NodeSensitiveInputEventType#KEY}时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
+
+/**
  * 定义了用于在UIObserver中监控特定手势触发信息的回调类型。
  *
  * @param { GestureTriggerInfo } info - 交互触发的手势详情。
@@ -1856,12 +1986,12 @@ export class UIObserver {
   off(type: 'navDestinationUpdateByUniqueId', navigationUniqueId: number, callback?: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event start or stop.
+   * 监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to listen for. Must be 'scrollEvent'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1871,13 +2001,13 @@ export class UIObserver {
   on(type: 'scrollEvent', options: observer.ObserverOptions, callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to remove the listener for. Must be 'scrollEvent'.
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and
-   *     scroll ID will be removed.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 需要取消的滚动事件监听回调。
+   *     当只需要取消 options 指定滚动组件上的指定回调时传入该参数；不传参数时，
+   *     取消 options 指定滚动组件上的所有滚动事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1887,11 +2017,11 @@ export class UIObserver {
   off(type: 'scrollEvent', options: observer.ObserverOptions, callback?: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when the scroll event start or stop.
+   * 监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent' } type - The type of event to listen for. Must be 'scrollEvent'.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { 'scrollEvent' } type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。
+   *     返回滚动事件的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1901,12 +2031,12 @@ export class UIObserver {
   on(type: 'scrollEvent', callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { 'scrollEvent'} type - The type of event to remove the listener for. Must be 'scrollEvent'.
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type
-   *     will be removed.
+   * @param { 'scrollEvent'} type - 监听事件，固定为'scrollEvent'，即滚动事件的开始和结束。
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 需要取消的滚动事件监听回调。
+   *     当只需要取消指定回调时传入该参数；不传参数时，
+   *     取消所有滚动事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2219,7 +2349,8 @@ export class UIObserver {
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件执行前的指令下发情况，所注册回调将于Pan手势
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件触发前触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2252,7 +2383,8 @@ export class UIObserver {
    *     [onActionEnd]{@link PanGestureInterface.onActionEnd}事件执行前的指令下发情况，所注册回调将于Pan手势
    *     [onActionEnd]{@link PanGestureInterface.onActionEnd}事件触发前触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2285,7 +2417,8 @@ export class UIObserver {
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件执行后的指令下发情况，所注册回调将于Pan手势
    *     [onActionStart]{@link PanGestureInterface.onActionStart}事件触发后触发。
    * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2316,8 +2449,8 @@ export class UIObserver {
    *
    * @param { 'afterPanEnd' } type - 监听事件，固定为'afterPanEnd'，用于监听Pan手势[onActionEnd]{@link PanGestureInterface.onActionEnd}
    *     事件执行后的指令下发情况，所注册回调将于Pan手势[onActionEnd]{@link PanGestureInterface.onActionEnd}事件触发后触发。
-   * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的
-   *     [GestureEvent]{@link GestureEvent}，[GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   * @param { PanListenerCallback } callback - 回调函数。可以获得Pan手势事件的[GestureEvent]{@link GestureEvent}，
+   *     [GestureRecognizer]{@link GestureRecognizer}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2485,14 +2618,16 @@ export class UIObserver {
    *
    * 注意节点数量的限制。出于性能考虑，在单个UI实例中，注册节点太多，将会抛出异常。
    *
-   * 通常，当组件被移动到屏幕外时，会收到RENDER_OUT的通知。但在某些情况下，即使组件移动到屏幕外也不会触发RENDER_OUT通知。例如，具有缓存功能的组件[Swiper]{@link @global:Swiper}，即使
+   * 通常，当组件被移动到屏幕外时，会收到RENDER_OUT的通知。但在某些情况下，即使组件移动到屏幕外也不会触发RENDER_OUT通知。例如，具有缓存功能的组件
+   * [Swiper]{@link @global:Swiper}，即使
    * [cachedCount]{@link SwiperAttribute#cachedCount(count: number, isShown: boolean)}属性中的参数isShown配置为true，也不会触发
    * RENDER_OUT通知。
    *
    * @param { 'nodeRenderState' } type - 监听事件，固定为'nodeRenderState'，用于监听节点渲染状态发生改变。
    * @param { NodeIdentity } nodeIdentity - 节点标识。
    * @param { NodeRenderStateChangeCallback } callback - 回调函数。可以获得节点渲染状态改变事件的
-   *     [NodeRenderState]{@link NodeRenderState}和组件的[FrameNode]{@link @ohos.arkui.node:FrameNode}。
+   *     [NodeRenderState]{@link NodeRenderState}和组件的
+   *     [FrameNode]{@link @ohos.arkui.node:FrameNode}。
    * @throws { BusinessError } 161001 - The count of nodes monitoring render state is over the limitation.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2515,6 +2650,47 @@ export class UIObserver {
    * @since 20 dynamic
    */
   off(type: 'nodeRenderState', nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
+
+  /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过
+   * [NodeSensitiveInputInfo]{@link NodeSensitiveInputInfo}中的**isAgent**判断事件是否由系统Agent生成，
+   * 或由具有ohos.permission.CONTROL_COMPONENT权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被
+   * [agentControlMode]{@link CommonMethod#agentControlMode}阻止的Agent生成事件仍会上报，以便感知对
+   * 敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。string类型表示通过[id]{@link CommonMethod#id}属性设置的
+   *     inspector ID；number类型表示通过FrameNode的[getUniqueId]{@link FrameNode#getUniqueId}获取的唯一ID。
+   * @param { NodeSensitiveInputCallback } callback - 用于返回结果的回调，通过**NodeSensitiveInputInfo**提供
+   *     输入事件信息，通过[FrameNode]{@link FrameNode}提供组件信息。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 注销监听**nodeIdentity**指定节点输入事件的回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 节点ID。
+   * @param { NodeSensitiveInputCallback } [callback] - 待注销的目标监听器。未传入此参数时，注销指定节点的
+   *     全部敏感输入事件监听器。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
    * Registers a callback function to be called when text field's content is changed.
@@ -3848,13 +4024,15 @@ export type Context = common.Context;
 export class ComponentSnapshot {
 
   /**
-   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图。使用callback异步回调。
+   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，适用于生成组件预览图、保存或分享局部UI截图等场景。使用callback异步回
+   * 调。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当截图返回结果成功，err为undefined，data为获取到的image.
    *     [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}；否则为错误对象。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
@@ -3873,13 +4051,14 @@ export class ComponentSnapshot {
   get(id: string, callback: AsyncCallback<image.PixelMap>, options?: componentSnapshot.SnapshotOptions): void;
 
   /**
-   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图。使用Promise异步回调。
+   * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，适用与生成组件预览图、保存或分享局部UI截图等场景。使用Promise异步回调。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -3971,14 +4150,16 @@ export class ComponentSnapshot {
     checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * 获取已加载的组件的截图。传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，同步等待截图完成返回[PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
-   * 本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后未返回将会抛出异常。
+   * 获取已加载的组件的截图。传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图，同步等待截图完成返回
+   * [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}，适用于需要及时获取截图结果或对性能要求不高的场景。本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后
+   * 未返回将会抛出异常。
    *
    * > **说明：**
    * >
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。 <br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。 
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { image.PixelMap } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4004,8 +4185,8 @@ export class ComponentSnapshot {
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
    * @param { number } uniqueId - 目标组件的uniqueId。FrameNode节点的uniqueId可通过
-   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。 <br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截
-   *     图。
+   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。
+   *     <br>**说明：** 不支持未挂树组件，当传入的组件uniqueId对应的是离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { Promise<image.PixelMap> } Promise used to return the snapshot object.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4030,8 +4211,8 @@ export class ComponentSnapshot {
    * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
    * @param { number } uniqueId - 目标组件的uniqueId。FrameNode节点的uniqueId可通过
-   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截
-   *     图。
+   *     [getUniqueId]{@link @ohos.arkui.node:FrameNode.getUniqueId}接口获取。
+   *     <br>**说明：** 不支持未挂树组件，当传入的uniqueId对应离屏或缓存未挂树的节点时，系统不会对其进行截图。
    * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { image.PixelMap } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -4607,6 +4788,29 @@ export class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  uiContext: UIContext;
+}
+
+/**
 * UIContext实例对象。
 *
 * > **说明：**
@@ -4641,6 +4845,42 @@ export class UIContext {
    * @since 22 dynamic
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
+   * 注册标识符在应用运行期间不复用。
+   *
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
+   * @returns { int } 本次快捷键绑定的唯一注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，其他绑定不受影响。如果移除的是当前生效的绑定，
+   * 则最近一次仍未注销的同快捷键绑定恢复生效。标识符不存在或已注销时，不执行任何操作。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取当前[调用作用域](docroot://ui/arkts-global-interface.md#基本概念)的UIContext，调用作用域不明确时返回undefined。
@@ -4758,9 +4998,9 @@ export class UIContext {
   getFont(): Font;
 
   /**
-   * get object mediaQuery.
+   * 获取MediaQuery对象。
    *
-   * @returns { MediaQuery } object MediaQuery.
+   * @returns { MediaQuery } MediaQuery实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5062,23 +5302,14 @@ export class UIContext {
   showAlertDialog(options: AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions): void;
 
   /**
-   * actionSheet display.
-   *
-   * @param { ActionSheetOptions } value - Options.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
    * Shows an action sheet in the given settings.
    *
    * @param { ActionSheetOptions } value - Parameters of the action sheet.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 11 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   showActionSheet(value: ActionSheetOptions): void;
 
@@ -5515,8 +5746,8 @@ export class UIContext {
    * > [像素单位转换接口替换为UIContext接口](docroot://ui/arkts-global-interface.md#像素单位转换接口替换为uicontext接口)。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5541,8 +5772,8 @@ export class UIContext {
    * > [像素单位转换接口替换为UIContext接口](docroot://ui/arkts-global-interface.md#像素单位转换接口替换为uicontext接口)。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5567,8 +5798,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5593,8 +5824,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5614,8 +5845,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5635,8 +5866,8 @@ export class UIContext {
    * > 调用此接口，否则无法返回准确结果。
    *
    * @param { number } value
-   * @returns { number }
-   转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @returns { number } 转换后的数值。<br/>取值范围：(-∞, +∞)
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform [since 22]
    * @atomicservice
@@ -5663,7 +5894,7 @@ export class UIContext {
    *     if this API is called in a page within a UIAbility window, the returned context type is
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}. If this API is called in a page within an
    *     ExtensionAbility window, the returned context type is
-   *     {@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
+   *     [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
    *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6347,7 +6578,9 @@ export class TextMenuController {
    * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法[onCreateMenu]{@link
    * > EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
    * > >
-   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、[TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、[RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
    * > >
    * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
    * > >
@@ -6384,8 +6617,8 @@ export class TextMenuController {
    * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法
    * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
    * > >
-   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}
-   * > 、[TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
    * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
    * > >
    * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。

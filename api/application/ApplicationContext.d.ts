@@ -745,7 +745,6 @@ declare class ApplicationContext extends Context {
    *     [UIContext.registerFont]{@link ./../@ohos.arkui.UIContext:Font.registerfont}.
    * @param { boolean } enableAnimation - Whether using animation during this setting,
    *     using animation if true or not using animation if false.
-   * @throws { BusinessError } 16000011 - The context does not exist.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @crossplatform

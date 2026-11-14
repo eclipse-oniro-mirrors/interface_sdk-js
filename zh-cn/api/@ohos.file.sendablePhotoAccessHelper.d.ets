@@ -908,7 +908,7 @@ declare namespace sendablePhotoAccessHelper {
   }
 
   /**
-   * Defines the shared photo asset
+   * 共享图片资产。
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
@@ -916,7 +916,7 @@ declare namespace sendablePhotoAccessHelper {
    */
   interface SharedPhotoAsset extends lang.ISendable {
     /**
-     * File id of photo asset
+     * 图片资产标识id。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -924,7 +924,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     fileId: number;
     /**
-     * URI of photo asset
+     * 图片资产uri。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -932,7 +932,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     uri: string;
     /**
-     * Path data of photo asset
+     * 图片资产的路径数据。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -940,7 +940,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     data: string;
     /**
-     * Media type of photo asset
+     * 图片资产的媒体类型。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -948,7 +948,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     mediaType: PhotoType;
     /**
-     * Display name of photo asset
+     * 图片资产的显示名称。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -956,7 +956,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     displayName: string;
     /**
-     * Size of photo asset
+     * 图片资产文件大小。
      * 单位为： Byte，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -965,7 +965,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     size: number;
     /**
-     * Added date of photo asset
+     * 添加图片资产数据。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -974,7 +974,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateAdded: number;
     /**
-     * Modify date of photo asset
+     * 更改了图片资产数据。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -983,7 +983,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateModified: number;
     /**
-     * Duration of video photo asset
+     * 视频类型的图片资产时长。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -992,7 +992,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     duration: number;
     /**
-     * Width of photo asset
+     * 图片资产的像素宽度。
      * 单位为： px，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1001,7 +1001,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     width: number;
     /**
-     * Height of photo asset
+     * 图片资产的像素高度。
      * 单位为： px，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1010,7 +1010,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     height: number;
     /**
-     * DateTaken of photo asset
+     * 图片资产拍照后存入本地时间。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1019,7 +1019,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateTaken: number;
     /**
-     * Orientation of photo asset
+     * 图片资产的旋转角度。
      * 单位为： deg，取值应为[0,359]内的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1028,7 +1028,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     orientation: number;
     /**
-     * Favorite state of photo asset
+     * 是否收藏了此图片。true表示已收藏，false表示未收藏。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1036,7 +1036,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     isFavorite: boolean;
     /**
-     * Title of photo asset
+     * 图片资产的标题。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1044,7 +1044,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     title: string;
     /**
-     * Position of photo asset
+     * 图片资产存在位置。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1052,7 +1052,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     position: PositionType;
     /**
-     * Trashed date of photo asset
+     * 图片资产是否在回收站中。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1060,7 +1060,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateTrashed: number;
     /**
-     * Hidden state of photo asset
+     * 图片资产是否隐藏。true表示已隐藏，false表示未隐藏。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1068,7 +1068,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     hidden: boolean;
     /**
-     * User comment info of photo asset
+     * 图片资产的用户评论信息。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi

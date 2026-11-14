@@ -105,7 +105,7 @@ declare namespace power {
    * - 有屏的设备亮屏时为活动状态，灭屏时为非活动状态。
    * - 无屏的设备非休眠时为活动状态，休眠时为非活动状态。
    *
-   * @returns { boolean } 活动状态返回true，非活动状态返回false。
+   * @returns { boolean } 活动状态返回true，非活动状态或获取设备活动状态失败时返回false。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -150,8 +150,10 @@ declare namespace power {
 
   /**
    * 获取当前设备的电源模式。不同电源模式对应不同的设备行为策略，开发者可根据返回的模式值调整应用行为以适配当前模式。各模式定义及说明请参见DevicePowerMode。
+   * 如需获取当前设备的电源模式子模式，请使用[getPowerSubMode]{@link getPowerSubMode}。
    *
-   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、超级省电模式等。
+   * @returns { DevicePowerMode } 当前设备的电源模式，取值包括标准模式、省电模式、性能模式、扩展省电模式等。当获取当前设备的电源模式失败时返回0，
+   *     该值不在[DevicePowerMode](#devicepowermode9)枚举定义范围内。开发者应检查返回值是否为有效枚举值（600及以上）。
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 9 dynamic
    * @since 23 static
@@ -179,6 +181,7 @@ declare namespace power {
 
   /**
    * 设置当前设备的电源模式，不同的电源模式会影响设备的性能与功耗策略。使用Promise异步回调。
+   * 如需同时设置电源模式及其子模式，请使用[setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}。
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
@@ -195,6 +198,41 @@ declare namespace power {
    * @since 23 static
    */
   function setPowerMode(mode: DevicePowerMode): Promise<void>;
+
+  /**
+   * 获取当前设备的电源模式子模式。各子模式定义及说明请参见DevicePowerSubMode。
+   * 如需获取当前设备的电源模式，请使用[getPowerMode]{@link getPowerMode}。
+   *
+   * @returns { DevicePowerSubMode } 电源模式子模式。当前电源模式不支持子模式时返回 SUB_MODE_INVALID。
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getPowerSubMode(): DevicePowerSubMode;
+
+  /**
+   * 设置当前设备的电源模式及其子模式。使用 Promise 异步回调。
+   * 如仅需设置电源模式，请使用[setPowerMode(promise)][setPowerMode(promise)]{@link setPowerMode(mode: DevicePowerMode)}或 [setPowerMode(callback)]{@link setPowerMode(mode: DevicePowerMode, callback: AsyncCallback<void>)}。
+   *
+   * @permission ohos.permission.POWER_OPTIMIZATION
+   * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
+   * @param { DevicePowerSubMode } [subMode] - 电源模式子模式。各模式含义请参见DevicePowerSubMode枚举说明。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+    * @throws { BusinessError } 4900301 - Failed to set the power mode. Possible causes:
+    *     <br>1. The power mode switching constraint is not met;
+    *     <br>2. The power mode does not support the sub-mode, or the sub-mode does not match the power mode.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode): Promise<void>;
 
   /**
    * 检测当前设备是否进入待机低功耗续航模式。待机模式下系统会采取降低功耗的策略，开发者应据此调整应用的后台任务和资源使用策略，避免在待机时执行高耗能操作。
@@ -369,7 +407,7 @@ declare namespace power {
      */
     MODE_PERFORMANCE,
     /**
-     * 表示超级省电模式。
+     * 表示扩展省电模式。此模式支持子模式，子模式定义见 [DevicePowerSubMode]{@link power.DevicePowerSubMode}。
      *
      * @syscap SystemCapability.PowerManager.PowerManager.Core
      * @since 9 dynamic
@@ -384,6 +422,47 @@ declare namespace power {
      * @since 23 static
      */
     MODE_CUSTOM_POWER_SAVE = 650
+  }
+
+  /**
+   * 电源模式子模式枚举。
+   *
+   * 枚举值由电源模式值和序号组成：
+   * - 前缀：子模式所属的电源模式枚举值。例如 603001 中的 603 表示该子模式属于[MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+   * - 后缀：同一电源模式下的子模式序号，从 001 开始递增。
+   *
+   * SUB_MODE_INVALID（-1）不遵循此规则，表示当前电源模式不支持子模式。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DevicePowerSubMode {
+    /**
+     * 非法子模式值。当前电源模式不支持子模式时使用此值。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_INVALID = -1,
+    /**
+     * 超级省电子模式。适用于电源模式 [MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_SUPER_POWER_SAVE = 603001,
+    /**
+     * 应急子模式。适用于电源模式[MODE_EXTREME_POWER_SAVE]{@link power.DevicePowerMode}。
+     * 此值为 MODE_EXTREME_POWER_SAVE 的默认子模式。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SUB_MODE_EMERGENCY = 603002
   }
 
   /**
@@ -429,6 +508,122 @@ declare namespace power {
      */
     LONG_PRESS_FILTERING_ONCE = 1
   }
+
+  /**
+   * 枚举函数调用方式。
+   * 表示API调用是如何执行的，以及它的结果是如何交付的。
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InvokeMode {
+    /**
+     * 同步调用。调用方阻塞，直到API返回结果。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SYNC = 0,
+    /**
+     * 异步调用。调用者立即返回，结果通过Promise传递。
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ASYNC = 1
+  }
+
+  /**
+   * 唤醒设备。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { string } detail - 唤醒原因。值必须为字符串。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API需要的权限。
+   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function wakeup(detail: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 使设备进入休眠状态。
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { boolean } [isImmediate] - 设备是否立即进入休眠状态。值**true**
+   *     熄屏后立即进入休眠状态；**false**
+   *     表示由系统控制设备进入休眠状态的时间。如果不设置该参数，则
+   *     使用默认值**false**。如果只是想关屏，建议不要设置
+   *     参数。
+   *     <br>默认值：false。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @throws { BusinessError } 4900701 - 挂起设备失败。可能原因：
+   *     1.考试过程中不允许熄屏。
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
+   * @throws { BusinessError } 801 - 不支持的功能。该接口不能在汽车设备中使用。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function suspend(isImmediate?: boolean, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 系统关机。与reboot方法的区别：shutdown使设备完全关机不再运行，reboot使设备关机后自动重启。
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - 关机原因。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需要的权限。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function shutdown(reason: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * 重启设备。
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - 重启原因。例如，“updater”表示重启后进入更新模式。传入空字符串时，系统将在重启后进入正常模式。
+   * @param { InvokeMode } [mode] - 调用方式。建议配置为[InvokeMode.ASYNC](@link ASYNC)。
+   *     如果不配置，则使用默认值[InvokeMode.SYNC](@link SYNC)。
+   *     <br>默认值：InvokeMode.SYNC。
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - 权限校验失败。应用程序没有调用此API所需的权限。
+   * @throws { BusinessError } 202 - 权限校验失败。非系统应用调用系统API。
+   * @throws { BusinessError } 4900101 - 连接服务失败。
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function reboot(reason: string, mode?: InvokeMode): void | Promise<void>;
+
 }
 
 export default power;
