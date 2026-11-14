@@ -359,6 +359,76 @@ declare namespace power {
   function unregisterShutdownCallback(callback?: Callback<void>): void;
 
   /**
+   * Defines the hibernation event callback interface.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HibernateCallback {
+    /**
+     * Called when the device is entering hibernation.
+     *
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onHibernate(): Promise<void>;
+
+    /**
+     * Called when the device is exiting hibernation.
+     *
+     * @param { boolean } hibernateResult - Indicates whether the hibernation succeeded.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onWakeup(hibernateResult: boolean): Promise<void>;
+  }
+
+  /**
+   * Registers a callback to be invoked when the device enters or exits hibernation.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { HibernateCallback } callback - Callback object containing onHibernate and onWakeup methods.
+   *     onHibernate is called when entering hibernation (no parameters).
+   *     onWakeup is called when exiting hibernation, with hibernateResult indicating whether
+   *     the hibernation succeeded.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900400 - Parameter error. Possible causes: The callback object is missing
+   *     onHibernate or onWakeup function members.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerHibernateCallback(callback: HibernateCallback): void;
+
+  /**
+   * Unregisters the callback invoked when the device enters or exits hibernation.
+   * All registered hibernation callbacks are removed.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterHibernateCallback(): void;
+
+  /**
    * Query the power configuration value for a given scene name.
    *
    * @permission ohos.permission.POWER_CONFIG
