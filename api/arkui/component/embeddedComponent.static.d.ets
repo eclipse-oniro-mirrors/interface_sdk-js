@@ -51,7 +51,16 @@ export declare enum EmbeddedDpiFollowStrategy {
    * @stagemodelonly
    * @since 26.0.0 static
    */
-  FOLLOW_UI_EXTENSION_ABILITY_DPI = 1
+  FOLLOW_UI_EXTENSION_ABILITY_DPI = 1,
+
+  /**
+   * The UI and subWindow in the UIExtensionAbility both follow the host resolution.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  FOLLOW_HOST_DPI_ALL = 2
 }
 
 /**

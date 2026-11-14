@@ -50,7 +50,16 @@ export declare enum SecurityDpiFollowStrategy {
    * @stagemodelonly
    * @since 26.0.0 static
    */
-  FOLLOW_UI_EXTENSION_ABILITY_DPI = 1
+  FOLLOW_UI_EXTENSION_ABILITY_DPI = 1,
+  /**
+   * The UI and subWindow in the UIExtensionAbility both follow the host resolution.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  FOLLOW_HOST_DPI_ALL = 2
 }
 /**
  * This interface is used to set the options for SecurityUIExtensionComponentAttribute during construction
