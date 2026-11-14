@@ -2883,17 +2883,13 @@ declare class Component {
    */
   getOriginalText(): Promise<string>;
   /**
-   * Checks whether this component is reachable, that is, whether the component is visible, has non-zero area, and
-   * the center point of the component bounds is not occluded by any other component with a higher z-index, or with
-   * the same z-index but drawn later. Occlusion is judged only among non-kin components: an ancestor or descendant
-   * never occludes by stacking; between kin components the hit-test behavior decides (for example, a child with
-   * **HitTestMode.Block** blocks its ancestors). An invisible or zero-area component is typically removed from the
-   * accessibility tree, in which case this API rejects with error 17000004. This API uses a promise to return the
-   * result.
+   * Checks whether this component is reachable. A component is unreachable if its center point is occluded by
+   * another component stacked above it, or if the component is invisible, has a zero-area bounds, or does not
+   * respond to the touch test. This API uses a promise to return the result.
    *
-   * @returns { Promise<boolean> } - Promise used to return the result. The value **true** indicates that the component
-   *     is reachable, and **false** indicates that the component is occluded by a non-kin blocking component or does
-   *     not respond to the touch test itself (for example, **HitTestMode.None**).
+   * @returns { Promise<boolean> } - Promise used to return whether the component is reachable. The value **true**
+   *     indicates that the component is reachable, and **false** indicates that it is occluded, invisible,
+   *     zero-area, or does not respond to the touch test.
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
    * @syscap SystemCapability.Test.UiTest
