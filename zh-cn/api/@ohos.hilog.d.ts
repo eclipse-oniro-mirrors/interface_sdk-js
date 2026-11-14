@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 日志打印
+ * @file HiLOG日志打印
  * @kit PerformanceAnalysisKit
  */
 
@@ -23,28 +23,21 @@ import { RecordData } from '@ohos.base';
 /*** endif */
 
 /**
- * # 参数格式符
- *
- * 上述接口中，日志打印的格式化参数需按照如下格式打印：
- *
- * %{[private flag]}specifier
- *
- * |  隐私标识符（private flag） | 说明 |
- * | ------------ | ---- |
- * |      无      | 缺省值默认为private，不打印明文参数。 |
- * |  private     | 隐私参数类型，不打印明文参数。 |
- * |  public      | 明文显示参数。 |
- *
- * | 格式说明符（specifier） | 说明 | 示例 |
- * | ------------ | ---- | ---- |
- * |      d/i      | 支持打印number和bigint类型。 | 123 |
- * |   s     | 支持打印string undefined bool 和null类型。 | "123" |
- * | o/O | 支持打印object、undefined和null类型。<br>从API version 20开始，支持该能力。 | { 'name': "Jack", 'age': 22 } |
+ * hilog模块是OpenHarmony提供的日志打印子系统，允许应用或服务按照指定的日志类型、日志级别和格式字符串输出日志。开发者可利用hilog在应用运行过程中记录关键流程信息，异常情况和错误事件，从而了解应用的运行状态并更好地调试
+ *     程序。hilog适用于应用和服务在开发调试记录阶段记录运行日志的场景，也适用于正式发布版本中通过级别控制减少日志输出和保护隐私数据的场景。
+ * 
+ * hilog模块提供以下核心功能：
+ * 
+ * **日志打印**：提供debug、info、warn、error、fatal五个级别函数，开发者可根据信息的严重程度选择合适的级别输出日志。日志内容支持格式化字符串和隐私标识，便于结构化记录和保护敏感数据。
+ * 
+ * **日志级别控制**：通过setMinLogLevel设置最小日志级别过滤低级别日志输出，或通过setLogLevel配合偏好策略（PerferStrategy）灵活决定新设置级别与控制系统级别的生效关系，避免冗余日志。
+ * 
+ * **日志输出管理**：通过setOutputType设置日志输出到控制台、私有沙箱或公有沙箱，通过setOutputTypeByDomain按域ID列表精细化控制不同的的输出方式，并提供沙箱日志目录查询、沙箱日志文件获取、沙箱日志刷新
+ *     与清理等管理能力
  *
  */
+
 /**
- * hilog日志系统，使应用/服务可以按照指定级别、标识和格式字符串输出日志内容，帮助开发者了解应用/服务的运行状态，更好地调试程序。
- *
  * @syscap SystemCapability.HiviewDFX.HiLog
  * @crossplatform [since 10]
  * @atomicservice [since 11]
@@ -59,10 +52,11 @@ declare namespace hilog {
    * DEBUG级别的日志在正式发布版本中默认不被打印，只有在调试版本或打开调试开关的情况下才会打印。
    *
    * @param { number } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br>隐私标识分为{public}和{private}，缺省为{private
-   *     }。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     }。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { any[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -74,10 +68,11 @@ declare namespace hilog {
    * 打印DEBUG级别的日志。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br>隐私标识分为{public}和{private}，缺省为{private
-   *     }。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     }。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -89,10 +84,11 @@ declare namespace hilog {
    * 打印INFO级别的日志。
    *
    * @param { number } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { any[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -104,10 +100,11 @@ declare namespace hilog {
    * 打印INFO级别的日志。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -119,10 +116,11 @@ declare namespace hilog {
    * 打印WARN级别的日志。
    *
    * @param { number } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { any[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -134,10 +132,11 @@ declare namespace hilog {
    * 打印WARN级别的日志。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -149,10 +148,11 @@ declare namespace hilog {
    * 打印ERROR级别的日志。
    *
    * @param { number } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。 tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。 建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { any[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -164,10 +164,11 @@ declare namespace hilog {
    * 打印ERROR级别的日志。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。 tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。 建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
-   * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
+   * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -179,10 +180,11 @@ declare namespace hilog {
    * 打印FATAL级别的日志。
    *
    * @param { number } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { any[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -194,10 +196,11 @@ declare namespace hilog {
    * 打印FATAL级别的日志。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { string } format - 格式字符串，用于日志的格式化输出。格式字符串中可以设置多个参数，参数需要包含参数类型、隐私标识。<br/>隐私标识分为{public}和{private}，缺省为{
-   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。
+   *     private}。标识{public}的内容明文输出，标识{private}的内容以<private>过滤回显。隐私标识机制帮助开发者保护隐私敏感数据。
    * @param { RecordData[] } args - 与格式字符串format对应的可变长度参数列表。参数数目、参数类型必须与格式字符串中的标识一一对应。
+   *     当格式字符串中不包含占位符时，可以不传此参数，仅输出格式字符串本身。
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
    * @atomicservice
@@ -209,7 +212,7 @@ declare namespace hilog {
    * 在打印日志前调用该接口，用于检查指定领域标识、日志标识和级别的日志是否可以打印。
    *
    * @param { int } domain - 日志对应的领域标识，范围是0x0~0xFFFF，超出范围则日志无法打印。<br/>建议开发者在应用内根据需要自定义划分。
-   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。tag长度最多为31字节，超出后会截断，不建议使用中文字符，可能出现乱码或者对齐问题。
+   * @param { string } tag - 指定日志标识，可以为任意字符串，建议用于标识调用所在的类或者业务行为。建议tag长度最多不超过31字节，不建议使用中文字符，可能出现乱码或者对齐问题。
    * @param { LogLevel } level - 日志级别。
    * @returns { boolean } 如果返回true，则该领域标识、日志标识和级别的日志可以打印，否则不能打印。
    * @syscap SystemCapability.HiviewDFX.HiLog
@@ -220,7 +223,7 @@ declare namespace hilog {
   function isLoggable(domain: int, tag: string, level: LogLevel): boolean;
 
   /**
-   * 设置应用日志打印的最低日志级别，用于拦截低级别日志打印。
+   * 设置应用日志打印的最低日志级别，用于拦截低级别日志打印。在需要优化应用性能或减少低价值日志干扰时使用，避免冗余日志。
    *
    * > **注意：**
    * >
@@ -253,6 +256,88 @@ declare namespace hilog {
    * @since 23 static
    */
   function setLogLevel(level: LogLevel, prefer: PreferStrategy): void;
+
+  /**
+   * 设置hilog输出类型。
+   *
+   * @param { OutputType } type - hilog的日志输出类型，用于设置hilog日志的输出目标（如控制台或沙箱）。
+   * @returns { OutputType } 返回上一次设置的输出类型。
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function setOutputType(type: OutputType): OutputType;
+
+  /**
+   * 设置hilog输出类型,并且配置输出domainID列表，可选择仅输出列表中的doaminID，或不输出列表中的domainID。
+   *
+   * @param { OutputType } type - hilog的输出类型。
+   * @param { Array<int> } domainIDs - domainID列表，每个domainID取值范围为0x0000~0xFFFF, 仅对应用domain生效。
+   * @param { boolean } isExclude - 用于决定domainIDs是否对输出类型生效。
+   *     <br>true表示排除domain生效；false表示仅对列表中的domain生效。
+   * @returns { OutputType } 返回上一次设置的输出类型。
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function setOutputTypeByDomainID(type: OutputType, domainIDs: Array<int>, isExclude: boolean): OutputType;
+
+  /**
+   * 获取当前hilog的输出类型。
+   *
+   * @returns { OutputType } 返回当前hilog的输出类型。
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function getOutputType(): OutputType;
+
+  /**
+   * 返回hilog日志在沙箱中的路径，如果hilog输出类型为DEFAULT.则返回空。
+   *
+   * @returns { string } hilog日志的沙箱路径。
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function getOutputDir(): string;
+
+  /**
+   * 删除沙箱中的所有hilog日志。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function clean(): void;
+  
+  /**
+   * 刷新沙箱中的hilog日志，确保日志落盘。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function flush(): void;
+
+  /**
+   * 返回指定秒数内修改过的hilog沙箱日志文件。
+   *
+   * @param { int } latestSeconds - 距离现在的时间间隔，以秒为单位。
+   *     <br>若传入的值小于0，则无效值，返回值为空。
+   * @returns { Array<string> } 指定时间段内写入过的沙箱文件列表。
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
+   * @atomicservice
+   * @since 26.0.0 dynameic&static
+   */
+  function getLogFile(latestSeconds: int): Array<string>;
 
   /**
    * 日志级别。
@@ -322,6 +407,16 @@ declare namespace hilog {
 
   /**
    * 偏好策略。
+   * 
+   * 以全局日志级别为INFO下，打印5条不同级别的hilog日志，在打印过程中调用两次setLogLevel接口为例：
+   * 
+   * 由于全局日志起始为INFO，第一条日志可以正常打印。
+   * 
+   * 在设置进程最低日志级别为WANR, 并选择策略PREFER_OPEN_LOG后，实际生效的最低日志级别是全局日志级别INFO，所以第二条和第三条日志均可正常打印。
+   * 
+   * 在设置进程最低日志级别为DEBUG, 并选择策略PREFER_CLOSE_LOG后(等同于hilog.setMinLogLevel(hilog.LogLevel.DEBUG)), 但是此时全局日志级别为INFO，所以第四条日志不满足全
+   * 
+   * 局日志级别，打印失败，第五条日志可以打印。
    *
    * @syscap SystemCapability.HiviewDFX.HiLog
    * @crossplatform
@@ -341,7 +436,7 @@ declare namespace hilog {
      */
     UNSET_LOGLEVEL = 0,
     /**
-     * 实际生效的最低日志级别是新设置的级别和系统控制的最低级别两个值的较大值。
+     * 实际生效的最低日志级别是新设置的级别和系统控制的最低级别两个值的较大值，适用于需要严格限制日志输出的场景
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform
@@ -351,7 +446,7 @@ declare namespace hilog {
      */
     PREFER_CLOSE_LOG = 1,
     /**
-     * 实际生效的最低日志级别是新设置的级别和系统控制的最低级别两个值的较小值。
+     * 实际生效的最低日志级别是新设置的级别和系统控制的最低级别两个值的较小值，适用于需要尽可能多的打开日志输出的场景
      *
      * @syscap SystemCapability.HiviewDFX.HiLog
      * @crossplatform
@@ -360,6 +455,78 @@ declare namespace hilog {
      * @since 23 static
      */
     PREFER_OPEN_LOG = 2
+  }
+  /**
+   * hilog输出类型的枚举值，DEFAULT和CONSOLE_ONLY适用于仅输出到控制台的场景，PRIVATE_SANDBOX_ONLY适用于隐私日志存储，SHARE_SANDBOX_ONLY适用于需要云端采集日志的场景，
+   * PRIVATE_SANDBOX_WITH_CONSOLE和SHARE_SANDBOX_WITH_CONSOLE适用于同时需要控制台输出和沙箱存储的场景。
+   *
+   * @syscap SystemCapability.HiviewDFX.HiLog
+   * @crossplatform
+   * @atomicservice
+   * @since 21 dynamic
+   * @since 23 static
+   */
+  enum OutputType {
+    /**
+     * 默认输出类型，hilog仅输出至控制台，等价于CONSOLE_ONLY。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    DEFAULT = 0,
+    /**
+     * hilog仅输出至控制台，等价于DEFAULT。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    CONSOLE_ONLY = 0,
+    /**
+     * hilog落盘至应用私有沙箱，该路径仅自身可访问。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    PRIVATE_SANDBOX_ONLY = 1,
+    /**
+     * hilog落盘至应用公有沙箱，该路径允许应用自身及系统访问。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    SHARE_SANDBOX_ONLY = 2,
+    /**
+     * 同时启用CONSOLE_ONLY和PRIVATE_SANDBOX_ONLY。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    PRIVATE_SANDBOX_WITH_CONSOLE = 3,
+    /**
+     * 同时启用CONSOLE_ONLY和SHARE_SANDBOX_ONLY。
+     * 
+     * @syscap SystemCapability.HiviewDFX.HiLog
+     * @FaAndStageModel
+     * @crossplatform
+     * @atomicservice
+     * @since 26.0.0 dynameic&static
+     */
+    SHARE_SANDBOX_WITH_CONSOLE = 4
   }
 }
 
