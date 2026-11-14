@@ -4193,6 +4193,19 @@ declare namespace avSession {
     prepare(item: AVQueueItem): Promise<void>;
 
     /**
+     * 更新投播媒体信息
+     *
+     * @param { AVQueueItem } item - 播放列表中单项的相关属性。
+     * @returns { Promise<void> } 通过promise回调成功。
+     * @throws { BusinessError } 6600101 - Session service exception
+     * @throws { BusinessError } 6600109 - The remote connection is not established
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    update(item: AVQueueItem): Promise<void>;
+
+    /**
      * 获取当前投播的资源信息。结果通过callback异步回调方式返回。
      *
      * @param { AsyncCallback<AVQueueItem> } callback - 回调函数。当命令发送成功，err为undefined，否则返回错误对象。

@@ -4175,6 +4175,21 @@ declare namespace avSession {
     prepare(item: AVQueueItem): Promise<void>;
 
     /**
+     * Update media info for current item.
+     * It is used to update title or media image for sink player or media center, if you need to refresh media url,
+     * use { @link prepare } and { @link start } instead.
+     *
+     * @param { AVQueueItem } item media item info.
+     * @returns { Promise<void> } Promise used to return the result.
+     * @throws {BusinessError} 6600101 - Session service exception.
+     * @throws {BusinessError} 6600109 - The remote connection is not established.
+     * @syscap SystemCapability.Multimedia.AVSession.AVCast
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    update(item: AVQueueItem): Promise<void>;
+
+    /**
      * Get the current playing item
      *
      * @param { AsyncCallback<AVQueueItem> } callback - The triggered asyncCallback.
