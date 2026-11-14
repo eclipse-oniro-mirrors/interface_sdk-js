@@ -2952,9 +2952,9 @@ declare class Component {
   getOriginalText(): Promise<string>;
 
   /**
-   * 检查此组件是否可触达，即组件是否可见、面积非零，且组件边界中心点未被具有更高z-index或相同z-index但绘制顺序更靠后的任何其他组件遮挡。使用Promise异步回调。
+   * 检查此组件是否可触达，即组件是否可见、面积非零，且组件边界中心点未被具有更高z-index或相同z-index但绘制顺序更靠后的任何其他组件遮挡。遮挡判定仅在非亲缘组件间进行：祖先与后代组件之间不因层叠判定遮挡，亲缘组件间由触摸测试行为决定（例如子组件设置**HitTestMode.Block**会阻断其祖先）。不可见或零面积的组件通常会从无障碍树中移除，此时本接口抛出17000004错误码。使用Promise异步回调。
    *
-   * @returns { Promise<boolean> } - Promise对象，返回组件是否可触达。true：可触达。false：被遮挡、不可见或面积为零。
+   * @returns { Promise<boolean> } - Promise对象，返回组件是否可触达。true：可触达。false：被非亲缘的阻断组件遮挡，或自身不响应触摸测试（例如**HitTestMode.None**）。
    * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
    * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
    * @syscap SystemCapability.Test.UiTest
