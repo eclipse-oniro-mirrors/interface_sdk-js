@@ -543,80 +543,82 @@ declare namespace hilog {
      */
     PREFER_OPEN_LOG = 2
   }
+
   /**
    * Enum values for hilog output types. DEFAULT and CONSOLE_ONLY are suitable for console-only output scenarios,
    * PRIVATE_SANDBOX_ONLY is suitable for privacy log storage, SHARE_SANDBOX_ONLY is suitable for scenarios requiring
    *     cloud log collection, PRIVATE_SANDBOX_WITH_CONSOLE and SHARE_SANDBOX_WITH_CONSOLE are suitable for scenarios
    *     requiring both console output and sandbox storage.
-   *
+   * 
+   * @enum { int }
    * @syscap SystemCapability.HiviewDFX.HiLog
+   * @FaAndStageModel
    * @crossplatform
    * @atomicservice
-   * @since 21 dynamic
-   * @since 23 static
+   * @since 26.0.0 dynamic&static
    */
   enum OutputType {
-    /**
-     * Default output type. hilog outputs to console only, equivalent to CONSOLE_ONLY.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    DEFAULT = 0,
-    /**
-     * hilog outputs to console only, equivalent to DEFAULT.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    CONSOLE_ONLY = 0,
-    /**
-     * hilog logs are persisted to the application private sandbox. This path is only accessible by the application itself.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    PRIVATE_SANDBOX_ONLY = 1,
-    /**
-     * hilog logs are persisted to the application shared sandbox. This path is accessible by both the application and
-     * the system.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    SHARE_SANDBOX_ONLY = 2,
-    /**
-     * Simultaneously enables CONSOLE_ONLY and PRIVATE_SANDBOX_ONLY.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    PRIVATE_SANDBOX_WITH_CONSOLE = 3,
-    /**
-     * Simultaneously enables CONSOLE_ONLY and SHARE_SANDBOX_ONLY.
-     *
-     * @syscap SystemCapability.HiviewDFX.HiLog
-     * @FaAndStageModel
-     * @crossplatform
-     * @atomicservice
-     * @since 26.0.0 dynamic&static
-     */
-    SHARE_SANDBOX_WITH_CONSOLE = 4
+      /**
+       * Default output type. hilog outputs to console only, equivalent to CONSOLE_ONLY.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      DEFAULT = 0,
+      /**
+       * hilog outputs to console only, equivalent to DEFAULT.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      CONSOLE_ONLY = 0,
+      /**
+       * hilog logs are persisted to the application private sandbox. This path is only accessible by the application itself.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      PRIVATE_SANDBOX_ONLY = 1,
+      /**
+       * hilog logs are persisted to the application shared sandbox. This path is accessible by both the application and
+       * the system.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      SHARE_SANDBOX_ONLY = 2,
+      /**
+       * Simultaneously enables CONSOLE_ONLY and PRIVATE_SANDBOX_ONLY.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      PRIVATE_SANDBOX_WITH_CONSOLE = 3,
+      /**
+       * Simultaneously enables CONSOLE_ONLY and SHARE_SANDBOX_ONLY.
+       * 
+       * @syscap SystemCapability.HiviewDFX.HiLog
+       * @FaAndStageModel
+       * @crossplatform
+       * @atomicservice
+       * @since 26.0.0 dynamic&static
+       */
+      SHARE_SANDBOX_WITH_CONSOLE = 4
   }
 }
 
