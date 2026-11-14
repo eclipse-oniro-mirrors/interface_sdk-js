@@ -827,7 +827,7 @@ declare enum SwiperDisplayMode {
   AutoLinear,
 
   /**
-   * Carousel map extension.
+   * Swiper滑动一页的宽度为Swiper组件自身的宽度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

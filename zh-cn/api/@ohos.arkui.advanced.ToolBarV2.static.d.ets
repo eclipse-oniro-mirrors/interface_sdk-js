@@ -49,7 +49,7 @@ import { Builder } from './arkui/component/builder';
  */
 export declare enum ToolBarV2ItemState {
   /**
-   * Enable type.
+   * 启用类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -57,7 +57,7 @@ export declare enum ToolBarV2ItemState {
    */
   ENABLE = 1,
   /**
-   * Disable type.
+   * 禁用类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -65,7 +65,7 @@ export declare enum ToolBarV2ItemState {
    */
   DISABLE = 2,
   /**
-   * Activate type.
+   * 激活类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -123,7 +123,7 @@ export declare class ToolBarV2SymbolGlyph {
  */
 export interface ToolBarV2SymbolGlyphOptions {
   /**
-   * Modifier of toolbarV2's normal symbol.
+   * ToolBarV2普通图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -131,7 +131,7 @@ export interface ToolBarV2SymbolGlyphOptions {
    */
   normal: SymbolGlyphModifier;
   /**
-   * Modifier of toolbarV2's activated symbol.
+   * ToolBarV2激活图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -231,7 +231,7 @@ export interface ToolBarV2ItemTextOptions {
 }
 
 /**
- * Defines the icon type of ToolBarV2 item.
+ * 定义ToolBarV2项的图标类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -341,7 +341,7 @@ export interface ToolBarV2ItemImageOptions {
 @ObservedV2
 export declare class ToolBarV2Item {
   /**
-   * Define text content.
+   * 定义文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -350,7 +350,7 @@ export declare class ToolBarV2Item {
   @Trace
   public content: ToolBarV2ItemText;
   /**
-   * Define the action event.
+   * 定义点击事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -359,7 +359,7 @@ export declare class ToolBarV2Item {
   @Trace
   public action?: ToolBarV2ItemAction;
   /**
-   * Define icon resource.
+   * 定义图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -368,7 +368,7 @@ export declare class ToolBarV2Item {
   @Trace
   public icon?: ToolBarV2ItemIconType;
   /**
-   * Define item type.
+   * 定义项类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -377,7 +377,7 @@ export declare class ToolBarV2Item {
   @Trace
   public state?: ToolBarV2ItemState;
   /**
-   * The accessibilityText of item.
+   * 项的无障碍文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -386,7 +386,7 @@ export declare class ToolBarV2Item {
   @Trace
   public accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of item.
+   * 项的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -395,7 +395,7 @@ export declare class ToolBarV2Item {
   @Trace
   public accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of item.
+   * 项的无障碍重要性级别。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -590,7 +590,7 @@ export declare class ToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * Define toolbarV2 item list.
+   * 定义ToolBarV2项列表。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -600,7 +600,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * Define toolbarV2 activate item index, default is -1.
+   * 定义ToolBarV2激活项的索引，默认值为-1。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -609,7 +609,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: int;
   /**
-   * Define divider Modifier.
+   * 定义分割线修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -618,7 +618,7 @@ export declare struct ToolBarV2 {
   @Param
   dividerModifier?: DividerModifier;
   /**
-   * Define toolbarV2 modifier.
+   * 定义ToolBarV2修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -627,7 +627,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarModifier?: ToolBarV2Modifier;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

@@ -87,7 +87,7 @@ declare enum IndexerAlign {
 interface AlphabetIndexerOptions {
 
   /**
-   * Alphabetical index string array.
+   * 字符串数组，每个字符串代表一个索引项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -97,7 +97,7 @@ interface AlphabetIndexerOptions {
   arrayValue: Array<string>;
 
   /**
-   * ID of the selected item.
+   * 选中项的索引值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

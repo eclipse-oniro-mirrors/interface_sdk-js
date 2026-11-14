@@ -476,7 +476,7 @@ export declare interface ExpectedFrameRateRange {
     expected: int;
 }
 /**
- * global $r function
+ * 全局$r函数。
  *
  * @param { string } value
  * @param { RecordData[] } params
@@ -487,12 +487,11 @@ export declare interface ExpectedFrameRateRange {
  */
 export declare function $r(value: string, ...params: RecordData[]): Resource;
 /**
- * global $rawfile function
+ * 全局$rawfile函数。
  *
- * @param { string } value name of the file in the resources/rawfile directory of the project.
- *     When referencing resources of the Resource type, make sure the data type is the same as
- *     that of the attribute method. For example, if an attribute method supports the
- *     string | Resource types, the data type of the Resource type must be string.
+ * @param { string } value 项目resources/rawfile目录下文件的名称。
+ *     引用Resource类型的资源时，需确保数据类型与属性方法的数据类型一致。
+ *     例如，属性方法支持string | Resource类型时，Resource类型的数据类型必须为string。
  * @returns { Resource }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3665,7 +3664,7 @@ export declare enum BlurStyleActivePolicy {
     ALWAYS_INACTIVE = 2
 }
 /**
- * enum color mode
+ * 颜色模式枚举。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3674,7 +3673,7 @@ export declare enum BlurStyleActivePolicy {
  */
 export declare enum ThemeColorMode {
     /**
-     * Defines the mode which is follow up with system.
+     * 跟随系统深浅色模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3682,7 +3681,7 @@ export declare enum ThemeColorMode {
      */
     SYSTEM = 0,
     /**
-     * Defines the light mode.
+     * 固定使用浅色模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3690,7 +3689,7 @@ export declare enum ThemeColorMode {
      */
     LIGHT = 1,
     /**
-     * Defines the dark mode.
+     * 固定使用深色模式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -13317,7 +13316,7 @@ export declare interface CommonMethod {
      */
     default onDragEnd(event: ((event: DragEvent, extraParams?: string) => void) | undefined): this;
     /**
-     * Allowed drop uniformData type for this node.
+     * 设置该组件允许落入的uniformData数据类型。
      *
      * @param { Array<UniformDataType> | null | Array<string> | undefined } value - the uniformData type for this node.
      * @returns { this } - return the component attribute.
@@ -15044,7 +15043,7 @@ export declare interface SizeResult {
 export declare interface MeasureResult extends SizeResult {
 }
 /**
- * The navigation destination information.
+ * NavDestination组件信息，由系统返回给开发者。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

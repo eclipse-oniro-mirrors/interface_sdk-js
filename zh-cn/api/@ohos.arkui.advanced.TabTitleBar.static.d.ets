@@ -44,7 +44,7 @@ import { ResourceStr } from './arkui/component/units';
 import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { BuilderParam, Builder } from './arkui/component/builder';
 /**
- * Declaration of the menu item on the right side.
+ * 声明右侧菜单项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -138,7 +138,7 @@ export declare class TabTitleBarMenuItem {
   public accessibilityLevel?: string;
 }
 /**
- * Declaration of the tab item.
+ * 声明页签项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -214,7 +214,7 @@ export declare struct TabTitleBar {
   @BuilderParam
   swiperContent: () => void;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

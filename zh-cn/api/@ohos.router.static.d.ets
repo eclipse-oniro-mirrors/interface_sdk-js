@@ -39,8 +39,8 @@ declare namespace router {
   export enum RouterMode {
 
     /**
-     * Default route mode.
-     * The page will be added to the top of the page stack.
+     * 默认路由模式。
+     * 页面会被添加到页面栈顶。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -49,10 +49,10 @@ declare namespace router {
     Standard,
 
     /**
-     * Single route mode.
-     * If the target page already has the same url page in the page stack,
-     * the same url page closest to the top of the stack will be moved to the top of the stack.
-     * If the target page url does not exist in the page stack, route will use default route mode.
+     * 单实例路由模式。
+     * 如果目标页面在页面栈中已有相同url的页面，
+     * 则将离栈顶最近的同url页面移动到栈顶。
+     * 如果目标页面的url在页面栈中不存在，则按照默认路由模式进行跳转。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

@@ -2164,28 +2164,28 @@ declare interface ExpectedFrameRateRange {
 }
 
 /**
- * global $r function
+ * $r全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
- * The value format is 'belonging.type.name'.
- * belonging: group to which the resource belongs, which can be 'sys' or 'app'.
- * type: resource type, which can be 'boolean', 'color', 'float', 'intarray', 'integer', 'pattern', 'plural',
- * 'strarray', 'string', or 'media'.
- * name: resource name, which is determined during resource definition.
+ * 取值格式为'belonging.type.name'。
+ * belonging：资源所属组，取值为'sys'或'app'。
+ * type：资源类型，取值为'boolean'、'color'、'float'、'intarray'、'integer'、'pattern'、'plural'、
+ * 'strarray'、'string'或'media'。
+ * name：资源名称，在资源定义时确定。
  * @param { any[] } params
  * @returns { Resource }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * global $r function
+ * $r全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
- * The value format is 'belonging.type.name'.
- * belonging: group to which the resource belongs, which can be 'sys' or 'app'.
- * type: resource type, which can be 'boolean', 'color', 'float', 'intarray', 'integer', 'pattern', 'plural',
- * 'strarray', 'string', or 'media'.
- * name: resource name, which is determined during resource definition.
+ * 取值格式为'belonging.type.name'。
+ * belonging：资源所属组，取值为'sys'或'app'。
+ * type：资源类型，取值为'boolean'、'color'、'float'、'intarray'、'integer'、'pattern'、'plural'、
+ * 'strarray'、'string'或'media'。
+ * name：资源名称，在资源定义时确定。
  * @param { any[] } params
  * @returns { Resource }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2193,14 +2193,14 @@ declare interface ExpectedFrameRateRange {
  * @since 9
  */
 /**
- * global $r function
+ * $r全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
- * The value format is 'belonging.type.name'.
- * belonging: group to which the resource belongs, which can be 'sys' or 'app'.
- * type: resource type, which can be 'boolean', 'color', 'float', 'intarray', 'integer', 'pattern', 'plural',
- * 'strarray', 'string', or 'media'.
- * name: resource name, which is determined during resource definition.
+ * 取值格式为'belonging.type.name'。
+ * belonging：资源所属组，取值为'sys'或'app'。
+ * type：资源类型，取值为'boolean'、'color'、'float'、'intarray'、'integer'、'pattern'、'plural'、
+ * 'strarray'、'string'或'media'。
+ * name：资源名称，在资源定义时确定。
  * @param { any[] } params
  * @returns { Resource }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2209,14 +2209,14 @@ declare interface ExpectedFrameRateRange {
  * @since 10
  */
 /**
- * global $r function
+ * $r全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
- * The value format is 'belonging.type.name'.
- * belonging: group to which the resource belongs, which can be 'sys' or 'app'.
- * type: resource type, which can be 'boolean', 'color', 'float', 'intarray', 'integer', 'pattern', 'plural',
- * 'strarray', 'string', or 'media'.
- * name: resource name, which is determined during resource definition.
+ * 取值格式为'belonging.type.name'。
+ * belonging：资源所属组，取值为'sys'或'app'。
+ * type：资源类型，取值为'boolean'、'color'、'float'、'intarray'、'integer'、'pattern'、'plural'、
+ * 'strarray'、'string'或'media'。
+ * name：资源名称，在资源定义时确定。
  * @param { any[] } params
  * @returns { Resource }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2228,7 +2228,7 @@ declare interface ExpectedFrameRateRange {
 declare function $r(value: string, ...params: any[]): Resource;
 
 /**
- * global $rawfile function
+ * $rawfile全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
  
@@ -2237,7 +2237,7 @@ declare function $r(value: string, ...params: any[]): Resource;
  * @since 7
  */
 /**
- * global $rawfile function
+ * $rawfile全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
  
@@ -2247,7 +2247,7 @@ declare function $r(value: string, ...params: any[]): Resource;
  * @since 9
  */
 /**
- * global $rawfile function
+ * $rawfile全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
  
@@ -2258,7 +2258,7 @@ declare function $r(value: string, ...params: any[]): Resource;
  * @since 10
  */
 /**
- * global $rawfile function
+ * $rawfile全局函数，用于创建Resource类型对象。
  *
  * @param { string } value
  
@@ -25651,9 +25651,9 @@ declare class CommonMethod<T> {
   onDragSpringLoading(callback: Callback<SpringLoadingContext> | null, configuration?: DragSpringLoadingConfiguration): T;
 
   /**
-   * Set whether the component enables the ability to invert colors.
-   * This interface needs to be set as the first attribute of the component.
-   * @param { boolean } value - value indicates whether the component enables the ability to invert colors.
+   * 设置组件是否使用反色能力。
+   * 该接口需要设置为组件的第一个属性。
+   * @param { boolean } value - value表示组件是否使用反色能力。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

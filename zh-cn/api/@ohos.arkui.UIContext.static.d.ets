@@ -1686,11 +1686,10 @@ export declare class UIObserver {
     ): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdate`.
+   * 取消通过监听选项监听NavDestination组件的状态变化。
    *
-   * @param { observer.NavDestinationSwitchObserverOptions } options - The options object.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type and navigation ID will be removed.
+   * @param { observer.NavDestinationSwitchObserverOptions } options - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1712,10 +1711,9 @@ export declare class UIObserver {
   onNavDestinationUpdate(callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdate`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1735,11 +1733,10 @@ export declare class UIObserver {
   onNavDestinationUpdateByUniqueId(navigationUniqueId: int, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdateByUniqueId`.
+   * 取消通过Navigation的uniqueId监听NavDestination组件的状态变化。
    *
-   * @param { int } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { int } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1804,10 +1801,9 @@ export declare class UIObserver {
   onRouterPageUpdate(callback: Callback<observer.RouterPageInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onRouterPageUpdate`.
+   * 取消监听router中page页面的状态变化。
    *
-   * @param { Callback<observer.RouterPageInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { Callback<observer.RouterPageInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有router中page页面状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1890,10 +1886,9 @@ export declare class UIObserver {
   onNavDestinationSwitch(callback: Callback<observer.NavDestinationSwitchInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationSwitch`.
+   * 取消监听Navigation的页面切换事件。
    *
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有Navigation页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1916,11 +1911,10 @@ export declare class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationSwitch`.
+   * 取消通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2196,11 +2190,10 @@ export declare class UIObserver {
   onTabContentUpdate(options: observer.ObserverOptions, callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定Tabs组件id的TabContent页面切换事件。
    *
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type and Tabs ID will be removed.
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消options指定的Tabs组件上的所有TabContent页面切换事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2219,10 +2212,9 @@ export declare class UIObserver {
   onTabContentUpdate(callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听TabContent页面的切换事件。
    *
-   * @param { Callback<observer.TabContentInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type and Tabs ID will be removed.
+   * @param { Callback<observer.TabContentInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有TabContent页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2764,7 +2756,7 @@ export interface AtomicServiceBar {
 }
 
 /**
- * Represents a dynamic synchronization scene.
+ * 提供组件自定义场景下相关帧率的配置，支持设置期望帧率范围和获取当前帧率配置，适用于动画、手势等需要动态调整帧率的场景，有助于优化渲染性能和功耗。动态同步场景用于将组件的帧率需求与系统帧率调度机制进行同步，开发者可通过场景类型区分不同的帧率需求（如动画场景、跟手场景），系统会根据当前激活的场景综合决策最终帧率。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2772,9 +2764,9 @@ export interface AtomicServiceBar {
  */
 export declare class DynamicSyncScene {
   /**
-   * Sets the FrameRateRange of the DynamicSyncScene.
+   * 设置期望帧率范围。
    *
-   * @param { ExpectedFrameRateRange } range - The range of frameRate.
+   * @param { ExpectedFrameRateRange } range - 设置期望的帧率范围。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2782,9 +2774,9 @@ export declare class DynamicSyncScene {
   setFrameRateRange(range: ExpectedFrameRateRange): void;
 
   /**
-   * Gets the FrameRateRange of the DynamicSyncScene.
+   * 获取期望帧率范围。
    *
-   * @returns { ExpectedFrameRateRange } The range of frameRate.
+   * @returns { ExpectedFrameRateRange } 当前动态同步场景配置的期望帧率范围，包含期望的最小帧率(min)、期望的最大帧率(max)和期望的最优帧率(expected)信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4036,9 +4028,9 @@ export declare class UIContext {
   getFilteredInspectorTreeById(id: string, depth: int, filters?: Array<string>): string;
 
   /**
-   * get object router.
+   * 获取Router对象。
    *
-   * @returns { Router } object Router.
+   * @returns { Router } 返回Router实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4483,7 +4475,7 @@ export declare class UIContext {
   getComponentSnapshot(): ComponentSnapshot;
 
   /**
-   * Converts a value in vp units to a value in px.
+   * 将vp单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4493,7 +4485,7 @@ export declare class UIContext {
   vp2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in vp.
+   * 将px单位的数值转换为以vp为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4503,7 +4495,7 @@ export declare class UIContext {
   px2vp(value: double): double;
 
   /**
-   * Converts a value in fp units to a value in px.
+   * 将fp单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4513,7 +4505,7 @@ export declare class UIContext {
   fp2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in fp.
+   * 将px单位的数值转换为以fp为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4523,7 +4515,7 @@ export declare class UIContext {
   px2fp(value: double): double;
 
   /**
-   * Converts a value in lpx units to a value in px.
+   * 将lpx单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4533,7 +4525,7 @@ export declare class UIContext {
   lpx2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in lpx.
+   * 将px单位的数值转换为以lpx为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4716,9 +4708,7 @@ export declare class UIContext {
   requireDynamicSyncScene(id: string): Array<DynamicSyncScene>;
 
   /**
-   * Clear the cache generated by using $r/$rawfile to retrieve resources in HSP. This cache is used to accelerate the
-   * process of repeatedly loading resources. Clearing this cache may slow down the loading speed of resources during
-   * page overload.
+   * 清除跨模块（HSP包）访问资源时生成的资源对象缓存。清除缓存后，下次访问该模块资源的加载时间会增加。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -4748,7 +4738,7 @@ export declare class UIContext {
   getMaxFontScale(): double;
 
   /**
-   * Bind tabs to scrollable container component to automatically hide tab bar.
+   * 将页签绑定到可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -4759,7 +4749,7 @@ export declare class UIContext {
   bindTabsToScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Unbind tabs from scrollable container component.
+   * 将页签从可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -4770,7 +4760,7 @@ export declare class UIContext {
   unbindTabsFromScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Bind tabs to nested scrollable container components to automatically hide tab bar.
+   * 将页签绑定到嵌套可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -4782,7 +4772,7 @@ export declare class UIContext {
   bindTabsToNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * Unbind tabs from nested scrollable container components.
+   * 将页签从嵌套可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -5058,7 +5048,7 @@ export const enum TextSelectionClearPolicy {
  */
 export const enum SwiperDynamicSyncSceneType {
   /**
-   * Scene type is GESTURE.
+   * 手势操作场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5067,7 +5057,7 @@ export const enum SwiperDynamicSyncSceneType {
   GESTURE = 0,
 
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

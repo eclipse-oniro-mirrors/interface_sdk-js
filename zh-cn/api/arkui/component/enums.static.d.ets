@@ -51,7 +51,7 @@ export declare enum CheckBoxShape {
 }
 
 /**
- * common enum of color
+ * 颜色类型。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2788,7 +2788,7 @@ export declare enum HitTestMode {
 }
 
 /**
- * Title height.
+ * 设置标题栏的推荐高度。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2797,7 +2797,7 @@ export declare enum HitTestMode {
  */
 export declare enum TitleHeight {
   /**
-   * Title height when only main title is available.
+   * 只有主标题时，标题栏的推荐高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2806,7 +2806,7 @@ export declare enum TitleHeight {
   MainOnly = 0,
 
   /**
-   * Title height when main title and subtitle are both available.
+   * 同时有主标题和副标题时，标题栏的推荐高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4287,7 +4287,7 @@ export declare enum AxisModel {
 }
 
 /**
- * Page flip mode of Swiper and Tabs on mouse wheel event.
+ * 表示鼠标滚轮翻页模式，适用于Swiper和Tabs组件。
 
  * @enum { number } PageFlipMode
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4296,7 +4296,7 @@ export declare enum AxisModel {
  */
 export declare enum PageFlipMode {
   /**
-   * Turn pages continuously according to the number of mouse wheel events.
+   * 连续翻页模式，鼠标滚轮连续滚动时翻多页。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4305,7 +4305,7 @@ export declare enum PageFlipMode {
   CONTINUOUS = 0,
 
   /**
-   * The page-turning animation remains unresponsive to other mouse wheel events until it completes.
+   * 单次翻页模式，在一次翻页动画结束前不响应滚轮事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4804,7 +4804,7 @@ export enum AttributeModifierState {
 }
 
 /**
- * Specify the number of columns for different responsive breakpoints.
+ * 为不同响应式栅格容器断点指定列数。
  *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4813,9 +4813,8 @@ export enum AttributeModifierState {
  */
 export declare enum PresetFillType {
     /**
-     * For Lists and Swipers: One column is displayed on SM (and smaller), two on MD, and three on LG (and larger)
-     * devices. For Grid and WaterFlow: two column is displayed on SM (and smaller), three on MD, and five on LG
-     * (and larger) devices.
+     * 针对List和Swiper组件：在组件宽度属于sm及更小的断点区间时显示1列，属于md断点区间时显示2列，属于lg及更大的断点区间时显示3列。
+     * 针对Grid和WaterFlow组件：在组件宽度属于sm及更小的断点区间时显示2列，属于md断点区间时显示3列，属于lg及更大的断点区间时显示5列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4823,7 +4822,7 @@ export declare enum PresetFillType {
      */
     BREAKPOINT_DEFAULT = 0,
     /**
-     * For SM (and smaller), MD, and LG (and larger) devices, one, two, and three columns are displayed respectively.
+     * 在组件宽度属于sm及更小的断点区间时显示1列，属于md断点区间时显示2列，属于lg及更大的断点区间时显示3列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4831,7 +4830,7 @@ export declare enum PresetFillType {
      */
     BREAKPOINT_SM1MD2LG3 = 1,
     /**
-     * For SM (and smaller), MD, and LG (and larger) devices, two, three, and five columns are displayed respectively.
+     * 在组件宽度属于sm及更小的断点区间时显示2列，属于md断点区间时显示3列，属于lg及更大的断点区间时显示5列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
