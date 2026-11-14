@@ -5309,7 +5309,7 @@ export class UIContext {
    * > - 在组件出现和消失时，可以通过[组件内转场]{@link CommonMethod}添加动画效果。
    * >
    * > - 组件内转场不支持的属性，可以参考[显式动画]{@link CommonMethod}中的
-   * > [示例2]{@link CommonMethod}，使用animateTo实现动画执行结束后组件消失的效
+   * > [示例2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#示例2动画执行结束后组件消失)，使用animateTo实现动画执行结束后组件消失的效
    * > 果。
    * >
    * > - 某些场景下，在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中使用animateTo动画，会产生异常效果，

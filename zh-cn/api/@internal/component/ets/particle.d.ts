@@ -1172,7 +1172,7 @@ interface ParticleInterface {
    * @returns { ParticleAttribute } 返回粒子属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @crossplatform 
+   * @crossplatform
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
