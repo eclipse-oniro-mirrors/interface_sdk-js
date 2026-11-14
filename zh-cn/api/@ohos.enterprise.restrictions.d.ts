@@ -20,6 +20,7 @@
 
 import type { AsyncCallback } from '@ohos.base';
 import type Want from '@ohos.app.ability.Want';
+import common from './@ohos.enterprise.common';
 
 /**
  * 本模块提供设置通用限制类策略能力。可以全局禁用和解除禁用蓝牙、HDC、USB、Wi-Fi、蜂窝数据、相机、麦克风等特性。
@@ -580,6 +581,15 @@ declare namespace restrictions {
      * @since 26.0.1
      */
     SUPER_PRIVACY = 53,
+
+    /**
+     * 省电模式，包含省电模式、超级省电模式和户外探索。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    POWER_SAVING_MODE = 57,
 
     /**
      * 控制中心。
@@ -1561,6 +1571,59 @@ declare namespace restrictions {
    * @since 26.0.0
    */
   function getUserRestrictedForAccount(admin: Want | null, settingsItem: SettingsForAccount, accountId: int): boolean;
+
+  /**
+   * 设置禁用/启用指定设备特性，禁用后相关设备特性无法被使用。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - 指定要禁用或允许的设备特性。<br/> **说明：** 应用申请权限
+   *     ohos.permission.PERSONAL_MANAGE_RESTRICTIONS并通过
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}激活为
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod设备管理员)，可以使用此接口设置以下特性：
+   *     [FeatureForDevice]{@link restrictions.FeatureForDevice}中“BYOD”列标记为“√”的特性状态。
+   * @param { boolean } disallow - true表示禁止使用，false表示允许使用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *     but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicy(feature: FeatureForDevice, disallow: boolean): void;
+
+  /**
+   * 查询指定设备特性是否被禁用。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS or ohos.permission.PERSONAL_MANAGE_RESTRICTIONS
+   * @param { FeatureForDevice } feature - 指定要查询的设备特性。<br/> **说明：** 应用申请权限
+   *     ohos.permission.PERSONAL_MANAGE_RESTRICTIONS并通过
+   *     [startAdminProvision]{@link @ohos.enterprise.adminManager:adminManager.startAdminProvision}激活为
+   *     [BDA](docroot://mdm/mdm-kit-term.md#byod-device-admin-bdabyod设备管理员)，可以使用此接口获取以下特性状态：
+   *     [FeatureForDevice]{@link restrictions.FeatureForDevice}中“BYOD”列标记为“√”的特性状态。
+   * @param { common.QueryPolicy } [queryPolicy] - 查询的策略。
+   *     <br>默认值：common.QueryPolicy.SELF。
+   * @returns { boolean } 返回true表示feature对应的设备特性被禁用，false表示feature对应的设备特性未被禁用。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicy(feature: FeatureForDevice, queryPolicy?: common.QueryPolicy): boolean;
 }
 
 export default restrictions;
