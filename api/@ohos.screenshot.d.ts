@@ -328,7 +328,7 @@ declare namespace screenshot {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @stagemodelonly
      * @atomicservice
-     * [@since](https://gitcode.com/since) 26.1.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     pixelFormat?: image.PixelMapFormat;
   }
