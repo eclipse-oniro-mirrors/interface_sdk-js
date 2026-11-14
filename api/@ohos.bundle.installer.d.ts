@@ -1276,6 +1276,13 @@ declare namespace installer {
      * certificate distribution type set to **app_gallery** or the signing certificate type set to **debug** support
      * downgrade installation. To use downgrade installation, you must request the ohos.permission.INSTALL_BUNDLE and
      * ohos.permission.INSTALL_ALLOW_DOWNGRADE permissions.
+     * - **ohos.bms.param.originalInstallSource**: Used to specify the original installation source of the application
+     * to be installed. The value is the **installSource** field value in
+     * [ApplicationInfo]{@link ./bundleManager/ApplicationInfo:ApplicationInfo}. If this parameter is used, the
+     * **installSource** of the installed application is set to the specified value. This parameter takes effect only
+     * when the application to be installed is not installed on the device. If the value is a bundle name, the
+     * specified application must have been installed and must be a system application
+     * (supported since API version 23).
      * - **ohos.bms.param.deviceModeDistributionPolicy**: The value is a decimal string of a
      * [DeviceModeDistributionPolicy]{@link @ohos.bundle.bundleManager:bundleManager.DeviceModeDistributionPolicy}
      * enum value (for example, **"4"**). It specifies the device mode distribution policy for the application
@@ -1288,9 +1295,9 @@ declare namespace installer {
      * - **ohos.bms.param.bundleEnableState**: If the value is **false**, the application is installed in disabled
      * state (enabled is false). If the value is **true** or this key is not present, the application is installed
      * in enabled state (enabled is true, default behavior) (supported since API version 26.0.1).
-     * - **ohos.bms.param.notarizationCredentialStatus**: If the value is "0", it indicates that the application
+     * - **ohos.bms.param.notarizationCredentialStatus**: If the value is "1", it indicates that the application
      * possesses a notarized credential when calling the installation interface.
-     * If the value is "1" or the key is not passed in, it indicates that there is no authentication
+     * If the value is "0" or the key is not passed in, it indicates that there is no authentication
      * credential when the application calls the installation interface (supported since API version 26.0.1).
      * - **ohos.bms.param.verifyRecoverRule**: If the value is **true**, the recovery disposed rule is checked to
      * block application recovery. If the value is **false** or this key is not present, the recovery disposed rule
