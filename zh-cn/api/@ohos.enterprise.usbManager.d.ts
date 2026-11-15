@@ -941,12 +941,12 @@ declare namespace usbManager {
   function getExternalStorageDeviceInfos(): Array<common.ExternalStorageDeviceInfo>;
 
   /**
-   * 
+   * 设置USB拦截使能状态。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
-   * @param { boolean } enable - Whether to enable the USB interception.
-   *     true: Enable the USB interception.
-   *     false: Disable the USB interception.
+   * @param { boolean } enable - 是否启用USB拦截。
+   *     true: 启用USB拦截。
+   *     false: 禁用USB拦截。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -960,10 +960,10 @@ declare namespace usbManager {
   function setUsbInterceptEnable(enable: boolean): void;
 
   /**
-   * 
+   * 查询USB拦截使能状态。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
-   * @returns { boolean } Returns true if the USB interception is enabled; returns false otherwise.
+   * @returns { boolean } 返回true表示已启用USB拦截；返回false表示未启用。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -976,10 +976,10 @@ declare namespace usbManager {
   function isUsbInterceptEnable(): boolean;
 
   /**
-   * 
+   * 获取当前已连接的全部USB设备信息。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
-   * @returns { Array<common.UsbDeviceInfo> } Returns the list of USB device information.
+   * @returns { Array<common.UsbDeviceInfo> } USB设备信息列表。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
@@ -992,19 +992,20 @@ declare namespace usbManager {
   function getUsbDeviceInfos(): Array<common.UsbDeviceInfo>;
 
   /**
-   * 
+   * 设置USB设备状态。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_USB
-   * @param { common.USBDeviceConfigInfo } usbDeviceConfigInfo - USB device configuration information.
-   * @param { boolean } isEnable - Whether to enable the USB device.
-   *     true: Enable the USB device.
-   *     false: Disable the USB device.
+   * @param { common.USBDeviceConfigInfo } usbDeviceConfigInfo - USB设备配置信息。
+   * @param { boolean } isEnable - 是否启用该USB设备。
+   *     true: 启用USB设备。
+   *     false: 禁用USB设备。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201059 - Failed to set the state because dynamic USB control is not enabled.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0

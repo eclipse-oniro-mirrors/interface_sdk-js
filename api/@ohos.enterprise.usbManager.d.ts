@@ -1073,6 +1073,7 @@ declare namespace usbManager {
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201059 - Failed to set the state because dynamic USB control is not enabled.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
