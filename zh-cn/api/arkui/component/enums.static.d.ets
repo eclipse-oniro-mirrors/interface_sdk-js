@@ -3019,7 +3019,115 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 23 static
    */
-  DPAD_RIGHT = 17
+  DPAD_RIGHT = 17,
+
+  /**
+   * 表示键盘上的CapsLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * 表示键盘上的ScrollLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SCROLL_LOCK = 20,
+
+  /**
+   * 表示键盘上的Pause/Break键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAUSE_BREAK = 21,
+
+  /**
+   * 表示键盘上的NumLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  NUM_LOCK = 22,
+
+  /**
+   * 表示键盘上的Insert键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  INSERT = 23,
+
+  /**
+   * 表示键盘上的Delete键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  DELETE = 24,
+
+  /**
+   * 表示键盘上的Home键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  HOME = 25,
+
+  /**
+   * 表示键盘上的End键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  END = 26,
+
+  /**
+   * 表示键盘上的Page Up键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_UP = 27,
+
+  /**
+   * 表示键盘上的Page Down键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_DOWN = 28,
+
+  /**
+   * 表示键盘上的Enter键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ENTER = 29,
+
+  /**
+   * 表示键盘上的Backspace键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BACKSPACE = 30
 }
 
 /**
