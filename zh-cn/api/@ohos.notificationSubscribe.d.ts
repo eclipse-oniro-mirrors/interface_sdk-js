@@ -684,7 +684,7 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * 应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)开关状态变化的回调数据。
+   * 应用通知静默提醒开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -694,7 +694,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * 注册应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)使能状态变化的回调函数类型。
+   * 注册应用通知静默提醒使能状态变化的回调函数类型。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

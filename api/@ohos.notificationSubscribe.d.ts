@@ -707,8 +707,7 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * Returns the changes of the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
-   * switch state of application notifications.
+   * Returns the changes of the silent reminder switch state of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -718,8 +717,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * Triggered for registering the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
-   * enabled state change of application notifications.
+   * Triggered for registering the silent reminder enabled state change of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
