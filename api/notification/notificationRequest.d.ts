@@ -885,8 +885,7 @@ export interface NotificationRequest {
 
   /**
    * Information field of message 
-   * [smart aggregation](docroot://notification/notification-glossary.md#notification-smart-aggregation). This parameter
-   * is left empty by default. 
+   * smart aggregation. This parameter is left empty by default. 
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -1115,8 +1114,7 @@ export interface NotificationCheckRequest {
 }
 
 /**
- * Describes the information fields of notification 
- * [smart aggregation](docroot://notification/notification-glossary.md#notification-smart-aggregation).
+ * Describes the information fields of notification smart aggregation.
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi

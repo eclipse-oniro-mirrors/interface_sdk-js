@@ -128,8 +128,7 @@ export interface NotificationSubscriber {
   onEnabledNotificationChanged?:(callbackData: EnabledNotificationCallbackData) => void;
 
   /**
-   * Returns the enabled state change of the application notification 
-   * [silent reminder](docroot://notification/notification-glossary.md#silent-reminder).
+   * Returns the enabled state change of the application notification silent reminder.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -228,7 +227,7 @@ export interface SubscribeCallbackData {
   readonly request: NotificationRequest;
 
   /**
-   * [Notification sorting](docroot://notification/notification-glossary.md#notification-sorting) information.
+   * Notification sorting information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -337,8 +336,7 @@ export interface EnabledNotificationCallbackData {
 }
 
 /**
- * Returns the changes of the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder) switch 
- * state of application notifications.
+ * Returns the changes of the silent reminder switch state of application notifications.
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -393,8 +391,7 @@ export interface EnabledPriorityNotificationCallbackData {
   /**
    * Priority enabled state of all notifications.
    *
-   * - **true**: Allow setting as 
-   * [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   * - **true**: Allow setting as priority notification.
    * - **false**: Prohibit setting as priority notification.
    *
    * @syscap SystemCapability.Notification.Notification
@@ -597,8 +594,7 @@ export type BadgeEnabledChangedCallback = (data: EnabledNotificationCallbackData
 export type SystemUpdateCallback = (data: SubscribeCallbackData) => void;
 
 /**
- * Triggered for registering the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder) 
- * enabled state change of application notifications.
+ * Triggered for registering the silent reminder enabled state change of application notifications.
  *
  * @param { EnabledSilentReminderCallbackData } callbackData - Callback used to return the listened silent reminder
  *     enabled state.

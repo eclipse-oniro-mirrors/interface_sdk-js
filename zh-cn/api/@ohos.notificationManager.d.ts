@@ -260,7 +260,7 @@ declare namespace notificationManager {
   function publish(request: NotificationRequest, userId: int): Promise<void>;
 
   /**
-   * 发布[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用callback异步回调。
+   * 发布代理通知。使用callback异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - 用于设置要发布通知的内容和相关配置信息。
@@ -306,7 +306,7 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * 发布[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用Promise异步回调。
+   * 发布代理通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - 用于设置要发布通知的内容和相关配置信息。
@@ -347,7 +347,7 @@ declare namespace notificationManager {
   function publishAsBundle(request: NotificationRequest, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * 发布[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用Promise异步回调。
+   * 发布代理通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - 被代理应用的包信息。
@@ -496,7 +496,7 @@ declare namespace notificationManager {
   function cancel(representativeBundle: BundleOption, id: int): Promise<void>;
 
   /**
-   * 取消[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用callback异步回调。
+   * 取消代理通知。使用callback异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - 通知ID。
@@ -526,7 +526,7 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * 取消[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用Promise异步回调。
+   * 取消代理通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - 通知ID。
@@ -551,7 +551,7 @@ declare namespace notificationManager {
   function cancelAsBundle(id: int, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * 取消[代理通知](docroot://notification/notification-glossary.md#notification-proxy代理通知)。使用Promise异步回调。
+   * 取消代理通知。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - 被代理应用的包信息。
@@ -3216,7 +3216,7 @@ declare namespace notificationManager {
   function getBundlePriorityConfig(bundle: BundleOption): Promise<string>;
 
   /**
-   * 获取[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)智能服务使能状态。使用Promise异步回调。
+   * 获取优先通知智能服务使能状态。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise对象，返回包含优先通知智能服务使能状态的Promise对象。
@@ -3235,7 +3235,7 @@ declare namespace notificationManager {
   function isPriorityIntelligentEnabled(): Promise<boolean>;
 
   /**
-   * 设置[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)智能服务使能状态。使用Promise异步回调。
+   * 设置优先通知智能服务使能状态。使用Promise异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - 优先通知智能服务使能状态。
@@ -3608,7 +3608,7 @@ declare namespace notificationManager {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - 指定应用的包信息。
    * @param { PriorityEnableStatus } enableStatus - 应用通知优先级开关状态。
-   *     <br> - DISABLE：不允许设置为[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)。
+   *     <br> - DISABLE：不允许设置为优先通知。
    *     <br> - ENABLE_BY_INTELLIGENT：允许经智能识别、用户关键词匹配、应用规则匹配等方式设置为优先通知。
    *     <br> - ENABLE：应用通知均设置为优先通知。
    * @returns { Promise<void> } Promise对象，无返回结果。
@@ -3649,7 +3649,7 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise对象，返回包含通知优先级总开关使能状态的Promise对象。
-   *     <br> - true：允许设置为[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)。
+   *     <br> - true：允许设置为优先通知。
    *     <br> - false：禁止设置为优先通知。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -3666,7 +3666,7 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - 所有通知的优先使能状态。
-   *     <br> - true：允许设置为[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)。
+   *     <br> - true：允许设置为优先通知。
    *     <br> - false：禁止设置为优先通知。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission denied.
@@ -3682,7 +3682,7 @@ declare namespace notificationManager {
   function setPriorityEnabled(enable: boolean): Promise<void>;
 
   /**
-   * 设置[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)的开关状态。使用Promise进行异步回调。
+   * 设置静默提醒的开关状态。使用Promise进行异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - 指定应用的包信息。
@@ -3703,7 +3703,7 @@ declare namespace notificationManager {
   function setSilentReminderEnabled(bundle: BundleOption, enabled: boolean): Promise<void>;
 
   /**
-   * 查询[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)的开关状态。使用Promise进行异步回调。
+   * 查询静默提醒的开关状态。使用Promise进行异步回调。
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - 指定应用的包信息。
@@ -3931,8 +3931,7 @@ declare namespace notificationManager {
   function getBadgeNumber(): Promise<long>;
 
   /**
-   * 设置通知[稍后提醒](docroot://notification/notification-glossary.md#notification-snooze稍后提醒)。该通知在指定时间后再次提醒，每次设置只会提醒一次，提醒方式与该
-   * 通知相同。
+   * 设置通知稍后提醒。该通知在指定时间后再次提醒，每次设置只会提醒一次，提醒方式与该通知相同。
    *
    * 设置后该通知被删除。
    *
@@ -4156,7 +4155,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * [通知校验](docroot://notification/notification-glossary.md#notification-check通知校验)参数。
+   * 通知校验参数。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4252,7 +4251,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * [通知校验](docroot://notification/notification-glossary.md#notification-check通知校验)结果。
+   * 通知校验结果。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4858,7 +4857,7 @@ declare namespace notificationManager {
     reminderFlags: long;
 
     /**
-     * 表示[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)开关使能状态（true：使能，false：禁止）。
+     * 表示静默提醒开关使能状态（true：使能，false：禁止）。
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5202,8 +5201,7 @@ declare namespace notificationManager {
     DISABLE = 0,
 
     /**
-     * 应用通知的优先级开关为智能识别状态。允许经智能识别、用户关键词匹配、应用规则匹配等方式设置为
-     * [优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)。
+     * 应用通知的优先级开关为智能识别状态。允许经智能识别、用户关键词匹配、应用规则匹配等方式设置为优先通知。
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5521,7 +5519,7 @@ declare namespace notificationManager {
   export type NotificationRequest = _NotificationRequest;
 
   /**
-   * 描述通知[智能聚合](docroot://notification/notification-glossary.md#notification-smart-aggregation智能聚合)信息字段。
+   * 描述通知智能聚合信息字段。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
