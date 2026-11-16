@@ -411,7 +411,20 @@ declare namespace wantConstant {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    AGENT_TASK_ID = 'ohos.aafwk.param.agent.taskId'
+    AGENT_TASK_ID = 'ohos.aafwk.param.agent.taskId',
+
+    /**
+     * 启动或连接业务扩展能力时，优先提升标志位。
+     * 设置该参数后，系统将提升目标业务扩展流程的优先级。
+     * 调用方必须具有ohos.permission.PROMOTE_SERVICE_EXTENSION_PRIORITY权限，否则这
+     * 参数将被忽略。
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BACKGROUND_PROCESS_PROMOTE_PRIORITY = 'ohos.param.promoteBackgroundProcessPriority'
   }
 
   /**
