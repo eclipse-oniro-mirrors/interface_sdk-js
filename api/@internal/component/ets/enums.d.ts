@@ -7022,7 +7022,18 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TABS_EXPAND_SAFE_AREA = 9
 }
 
 /**

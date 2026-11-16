@@ -5599,7 +5599,15 @@ export declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TABS_EXPAND_SAFE_AREA = 9
 }
 
 /**
