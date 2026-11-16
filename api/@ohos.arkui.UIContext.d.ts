@@ -7060,9 +7060,9 @@ export class UIContext {
   getPageRootNode(): FrameNode | null;
 
   /**
-   * Checks whether the current UI instance is in easy split mode.
+   * <!--RP1-->Obtains the split view state in compatibility mode of the current UI instance.<!--RP1End-->
    *
-   * @returns { boolean } Returns true if the current UI instance is in easy split mode; returns false otherwise.
+   * @returns { boolean } <!--RP2-->Split view state in compatibility mode of the current UI instance. The value **true** indicates that the split view mode is active, and the value **false** indicates that the split view mode is inactive.<!--RP2End-->
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

@@ -6338,9 +6338,9 @@ export class UIContext {
   getPageRootNode(): FrameNode | null;
 
   /**
-   * 检查当前UI实例是否处于分栏模式。
+   * <!--RP1-->获取当前UI实例的兼容模式分栏状态。<!--RP1End-->
    *
-   * @returns { boolean } 返回当前UI实例是否处于分栏模式。true表示处于分栏模式，false表示未处于分栏模式。
+   * @returns { boolean } <!--RP2-->返回当前UI实例的兼容模式分栏状态。true表示处于分栏模式，false表示未处于分栏模式。<!--RP2End-->
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
