@@ -410,4 +410,14 @@ export default class EnterpriseAdminExtensionAbility {
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * USB设备插入事件回调。当USB设备插入且系统已识别时触发此回调。
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB设备信息，包括总线编号、设备地址、序列号、厂商ID、产品ID及其他设备属性。
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }
