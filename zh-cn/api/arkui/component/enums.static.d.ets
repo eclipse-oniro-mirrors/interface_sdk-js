@@ -4072,7 +4072,7 @@ export declare enum TextSelectableMode {
 }
 
 /**
- * Type of accessibility hover event.
+ * 辅助功能悬停事件的类型。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4081,7 +4081,7 @@ export declare enum TextSelectableMode {
  */
 export declare enum AccessibilityHoverType {
   /**
-   * Hover enter type.
+   * 手指按下时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4090,7 +4090,7 @@ export declare enum AccessibilityHoverType {
   HOVER_ENTER = 0,
 
   /**
-   * Hover move type.
+   * 触摸移动时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4099,7 +4099,7 @@ export declare enum AccessibilityHoverType {
   HOVER_MOVE = 1,
 
   /**
-   * Hover exit type.
+   * 手指抬起时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4108,7 +4108,7 @@ export declare enum AccessibilityHoverType {
   HOVER_EXIT = 2,
 
   /**
-   * Hover cancel type.
+   * 打断取消当前触发的事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

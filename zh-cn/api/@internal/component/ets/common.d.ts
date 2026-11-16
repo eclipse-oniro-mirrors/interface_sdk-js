@@ -1698,17 +1698,11 @@ declare const LocalStorageProp: (value: string) => PropertyDecorator;
  * @since 10
  */
 /**
- * Obtains the Context object associated with a component on the page.
+ * 获取与页面上下文组件关联的Context对象。
  *
- * @param { Object } component - indicate the component on the page.
- * If no component is passed in or the passed-in parameter type is invalid, the default context is returned.
- * The default context is the context obtained by tracing the call chain of the API.
- * If this API is used in an asynchronous callback or not initially called on the current page, the context of the
- * instance may fail to be traced. In this case, undefined is returned.
- * @returns { Context }
- * The context type depends on the ability type.
- * For example, if this API is called on a page of the UIAbility, the return value type is UIAbilityContext;
- * if this API is called on a page of the ExtensionAbility, the return value type is ExtensionContext.
+ * @param { Object } component - 当前自定义组件的实例。当需要获取指定自定义组件关联的Context时，传入该组件实例；不传入component或传入的参数类型非法时，返回默认上下文。默认上下文是指通过追溯当前方法的调用链所跟踪到的Context。传入component时返回该组件关联的Context，不传入时返回通过当前方法调用链跟踪到的默认上下文。
+ * @returns { Context } - 返回当前组件所在Ability的Context，Context的具体类型为当前Ability关联的Context对象。
+ *     例如：在UIAbility（用户界面Ability）窗口中的页面调用该接口，返回类型为UIAbilityContext；在ExtensionAbility（扩展Ability）窗口中的页面调用该接口，返回类型为ExtensionContext。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @StageModelOnly
  * @crossplatform
@@ -1801,7 +1795,7 @@ declare interface ReuseOptions {
   reuseId? : ReuseIdCallback;
 }
 /**
- * Get context.
+ * 返回当前组件所在Ability的Context，Context的具体类型为当前Ability关联的Context对象。例如：在UIAbility窗口中的页面调用该接口，返回类型为UIAbilityContext。在ExtensionAbility窗口中的页面调用该接口，返回类型为ExtensionContext。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @StageModelOnly
@@ -1851,7 +1845,7 @@ declare function postCardAction(component: Object, action: Object): void;
  * @since 10
  */
 /**
- * Defines the data type of the interface restriction.
+ * 数据类型。用于设置颜色模式和字体缩放倍数。
  *
  * @interface Configuration
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1890,7 +1884,7 @@ declare interface Configuration {
    * @since 10
    */
   /**
-   * Set colorMode.
+   * 颜色模式。
    *
    * @type { string }
    * @readonly
@@ -1930,7 +1924,7 @@ declare interface Configuration {
    * @since 10
    */
   /**
-   * Set fontScale.
+   * 字体缩放。
    *
    * @type { number }
    * @readonly
@@ -2947,7 +2941,7 @@ declare enum AccessibilityRoleType {
   NAV_DESTINATION = 56,
 
   /**
-   * navrouter component type
+   * 导航组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3024,7 +3018,7 @@ declare enum AccessibilityRoleType {
   OFFSCREEN_CANVAS_RENDERING_CONTEXT2D = 63,
 
   /**
-   * option component type
+   * 具体项目。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3046,7 +3040,7 @@ declare enum AccessibilityRoleType {
   PANEL = 65,
 
   /**
-   * paper page component type
+   * 页面。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3156,7 +3150,7 @@ declare enum AccessibilityRoleType {
   POPUP = 75,
 
   /**
-   * progress component type
+   * 进度条组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3376,7 +3370,7 @@ declare enum AccessibilityRoleType {
   SIDEBAR_CONTAINER = 95,
 
   /**
-   * slider component type
+   * 滑动条组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3530,7 +3524,7 @@ declare enum AccessibilityRoleType {
   TEXT_CLOCK = 109,
 
   /**
-   * text entry component type
+   * 文本输入。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3618,7 +3612,7 @@ declare enum AccessibilityRoleType {
   TITLE_BAR = 117,
 
   /**
-   * toggler component type
+   * 状态组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -10460,7 +10454,7 @@ declare interface MouseHistoricalPoint {
 }
 
 /**
- * The accessibility hover action triggers this method invocation.
+ * 无障碍悬浮事件对象，用于获取触发无障碍悬浮事件时的详细信息，包括无障碍悬浮动作类型（type）、手指相对于组件/窗口/屏幕的坐标（x、y、windowX、windowY、displayX、displayY、globalDisplayX、globalDisplayY）等属性。
  *
  * @extends BaseEvent
  * @typedef AccessibilityHoverEvent
@@ -10473,7 +10467,7 @@ declare interface MouseHistoricalPoint {
 declare interface AccessibilityHoverEvent extends BaseEvent {
 
   /**
-   * Type of the accessibility hover event.
+   * 无障碍悬浮动作类型，包括HOVER_ENTER（手指按下时触发）、HOVER_MOVE（触摸移动时触发）、HOVER_EXIT（手指抬起时触发）和HOVER_CANCEL（打断取消当前触发的事件）。
    *
    * @type { AccessibilityHoverType }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10485,7 +10479,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   type: AccessibilityHoverType;
 
   /**
-   * X coordinate of the accessibility hover point relative to the left edge of the event hit element.
+   * 手指位置相对于当前组件左上角的x轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10497,7 +10493,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   x: number;
 
   /**
-   * Y coordinate of the accessibility hover point relative to the upper edge of the event hit element.
+   * 手指位置相对于当前组件左上角的y轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10509,7 +10507,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   y: number;
 
   /**
-   * X coordinate of the accessibility hover point relative to the left edge of the device screen.
+   * 手指位置相对于应用屏幕左上角的x轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10521,7 +10521,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   displayX: number;
 
   /**
-   * Y coordinate of the accessibility hover point relative to the upper edge of the device screen.
+   * 手指位置相对于应用屏幕左上角的y轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10533,7 +10535,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   displayY: number;
 
   /**
-   * X coordinate of the accessibility hover point relative to the left edge of the current window.
+   * 手指位置相对于应用窗口左上角的x轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10545,7 +10549,9 @@ declare interface AccessibilityHoverEvent extends BaseEvent {
   windowX: number;
 
   /**
-   * Y coordinate of the accessibility hover point relative to the upper edge of the current window.
+   * 手指位置相对于应用窗口左上角的y轴坐标。
+   * 单位：vp
+   * 取值范围：[0, +∞)
    *
    * @type { number }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27503,9 +27509,9 @@ declare class BaseCustomComponent extends CommonAttribute {
   pageTransition?(): void;
 
   /**
-   * Get current UIContext
+   * 获取UIContext对象。
    *
-   * @returns { UIContext } The UIContext that the custom component belongs to.
+   * @returns { UIContext } - 返回UIContext实例对象。在异步调用的回调方法中使用该接口，或者该接口的起始调用不在当前页面时，可能导致接口调用发生在自定义组件销毁之后，返回 undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -27515,9 +27521,9 @@ declare class BaseCustomComponent extends CommonAttribute {
   getUIContext(): UIContext;
 
   /**
-   * Get uniqueId of the custom component.
+   * 获取当前组件的UniqueId。UniqueId由系统为每个组件分配，可保证在当前应用中唯一。若在组件对应的节点未创建或已销毁时获取，返回无效UniqueId：-1。
    *
-   * @returns { number } - The uniqueId of the custom component.
+   * @returns { number } - 返回当前Component的UniqueId。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

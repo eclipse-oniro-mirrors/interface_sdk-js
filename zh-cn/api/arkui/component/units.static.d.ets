@@ -1796,7 +1796,7 @@ export declare interface ChainWeightOptions {
 }
 
 /**
- * Defines the struct of AccessibilityOptions.
+ * 定义AccessibilityOptions的结构体。
  *
  * @interface AccessibilityOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full

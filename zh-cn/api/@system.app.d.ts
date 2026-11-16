@@ -187,13 +187,10 @@ export default class App {
   static screenOnVisible(options?: ScreenOnVisibleOptions): void;
 
   /**
-   * Requests the application to run in full window.
-   * In some scenarios, such as semi-modal FA, the FA runs in non-full window.
-   * In this case, you can call this API.
-   * This API is invalid for an application already in full-window mode.
+   * 请求应用以全窗口运行，FA在某些场景下（如半模态FA）会以非全窗口运行，调用该接口会从非全窗口切换为全窗口运行，如果已经以全窗口运行则该接口调用无效。
+   * 从API version 7开始，推荐使用@ohos.window (窗口)。
    *
-   * @param { RequestFullWindowOptions } options Transition time from non-full window to full window, in milliseconds.
-   * By default, the value is in direct proportion to the distance between the non-full window and the full window.
+   * @param { RequestFullWindowOptions } options - 请求全窗口时，设定非全窗口到全窗口的过渡时间，单位为毫秒，默认时间与非全窗口到全窗口的距离成正比。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 3 dynamiconly
    * @deprecated since 8

@@ -45,7 +45,13 @@ import { NavPathStack, NavigationOperation, NavBar } from './arkui/component/nav
 import { NavDestinationMode } from './arkui/component/navDestination';
 
 /**
- * Register callbacks to observe ArkUI behavior.
+ * 本模块提供UI组件行为变化的无感监听能力，包括监听页面状态、滚动事件、页面路由、屏幕像素密度、布局和绘制、页面切换以及TabContent状态变化等。适用于需要在不侵入组件业务逻辑的情况下感知UI状态变化的场景。推荐使用
+ * [UIObserver]{@link @ohos.arkui.UIContext}进行组件监听。
+ *
+ * > **说明：**
+ * >
+ * > - UIObserver仅能监听到本进程内的相关信息，不支持获取<!--Del-->
+ * > [UIExtensionComponent]{@link @global:UIExtensionComponent}等<!--DelEnd-->跨进程场景的信息。
  *
  * @namespace uiObserver
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -607,7 +613,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * observer options.
+   * Observer选项。
    *
    * @interface ObserverOptions
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -708,7 +714,7 @@ declare namespace uiObserver {
   }
 
   /**
-   * Density info.
+   * 屏幕像素密度变化回调包含的信息。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -717,7 +723,7 @@ declare namespace uiObserver {
   export class DensityInfo {
 
     /**
-     * The context of the changed screen density.
+     * 屏幕像素密度变化时页面对应的上下文信息。
      *
      * @type { UIContext }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -727,7 +733,9 @@ declare namespace uiObserver {
     context: UIContext;
 
     /**
-     * The changed screen density.
+     * 变化后的屏幕像素密度。
+     *
+     * 取值范围：[0, +∞)
      *
      * @type { double }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -958,8 +966,8 @@ declare namespace uiObserver {
   /**
    * 监听屏幕像素密度变化。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<DensityInfo> } callback - The callback function to be called when the screen density is updated.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<DensityInfo> } callback - 回调函数。携带DensityInfo，返回变化后的屏幕像素密度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -969,9 +977,8 @@ declare namespace uiObserver {
   /**
    * 取消监听屏幕像素密度的变化。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<DensityInfo> } [callback] - The callback function to remove. If not provided, all callbacks
-   *     for the given event type will be removed.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<DensityInfo> } [callback] - 需要被注销的回调函数。若不指定具体的回调函数，则注销指定UIContext下所有densityUpdate事件监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -981,8 +988,8 @@ declare namespace uiObserver {
   /**
    * 监听每一帧绘制指令下发情况。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<void> } callback - The callback function to be called when the draw command will be drawn.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<void> } callback - 回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -992,9 +999,8 @@ declare namespace uiObserver {
   /**
    * 取消监听每一帧绘制指令下发情况。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1004,8 +1010,8 @@ declare namespace uiObserver {
   /**
    * 监听每一帧布局完成情况。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<void> } callback - The callback function to be called when the layout is done.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<void> } callback - 回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1015,9 +1021,8 @@ declare namespace uiObserver {
   /**
    * 取消监听每一帧布局完成情况。
    *
-   * @param { UIContext } context - The context scope of the observer.
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { UIContext } context - 上下文信息，用以指定监听页面的范围。
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
