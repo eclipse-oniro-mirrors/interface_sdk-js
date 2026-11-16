@@ -2047,12 +2047,9 @@ declare namespace applicationManager {
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @throws { BusinessError } 9201015 - The application is not installed.
@@ -2071,12 +2068,9 @@ declare namespace applicationManager {
    *     <br>取值应≥0。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -2096,12 +2090,9 @@ declare namespace applicationManager {
    * @returns { Array<string> } 返回电池优化排除列表中的应用唯一标识符。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
    * @throws { BusinessError } 9200006 - The specified account ID is invalid.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
