@@ -561,7 +561,8 @@ export declare interface NavigationConfiguration {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 export declare interface NavigationModuleInfo {
 
@@ -570,7 +571,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   moduleName: string;
 
@@ -579,7 +581,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   pagePath: string;
 
@@ -590,7 +593,8 @@ export declare interface NavigationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   isUserCreateStack?: boolean;
 }
@@ -2270,14 +2274,14 @@ export declare interface NavigationAttribute extends CommonMethod {
   /**
    * 设置Navigation双栏模式下的分割线样式。
    *
-   * @param { NavigationDividerStyle | null } style - navigation divider style in split mode.[since 23 - 24]
+   * @param { NavigationDividerStyle | null | undefined } style - navigation divider style in split mode.[since 23 - 24]
    *     <br>null: hides the split line.
    * @returns { NavigationAttribute } - 返回Navigation属性对象
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
-  default divider(style: NavigationDividerStyle | null): this;
+  default divider(style: NavigationDividerStyle | null | undefined): this;
 
   /**
    * 控制是否开启单双栏切换时的动效。
@@ -2321,7 +2325,8 @@ export declare interface NavigationAttribute extends CommonMethod {
    * @returns { NavigationAttribute } 返回导航属性的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setNavigationOptions(pathInfos?: NavPathStack, homeDestination?: HomePathInfo, moduleInfo?: NavigationModuleInfo): this;
 
@@ -2333,7 +2338,8 @@ export declare interface NavigationAttribute extends CommonMethod {
    * @returns { NavigationAttribute } 返回导航属性的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setNavigationOptions(pathInfos?: NavPathStack,  moduleInfo?: NavigationModuleInfo): this;
 

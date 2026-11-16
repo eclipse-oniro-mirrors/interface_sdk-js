@@ -657,7 +657,7 @@ export declare enum SwiperDisplayMode {
    * @stagemodelonly
    * @since 23 static
    */
-  STRETCH = 0
+  STRETCH
 }
 
 /**
@@ -1184,13 +1184,13 @@ export declare interface SwiperAttribute extends CommonMethod {
    * @param { boolean | undefined } [swipeByGroup] - if swipe by group.
    *     <br>Default value: false
    *     <br>true: The page is turned by group. The number of subelements in each group is the value of displayCount.
-   *     false: The default page turning behavior is used. That is, pages are turned based on subelements.    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
-   * @returns { SwiperAttribute }    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+   *     false: The default page turning behavior is used. That is, pages are turned based on subelements. [since 23]
+   * @returns { SwiperAttribute } [since 23]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
    * @stagemodelonly
    * @since 23 static
    */
-  default displayCount(value: int | string | SwiperAutoFill | ItemFillPolicy| undefined, swipeByGroup?: boolean | undefined): this;
+  default displayCount(value: int | string | SwiperAutoFill | ItemFillPolicy | undefined, swipeByGroup?: boolean | undefined): this;
 
   /**
    * 设置边缘滑动效果，[loop]{@link SwiperAttribute.loop}为false或Swiper视窗内一屏显示所有子节点时生效。调用
@@ -1524,7 +1524,8 @@ export declare interface SwiperAttribute extends CommonMethod {
    * @returns { SwiperAttribute } 返回SwiperAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setSwiperOptions(controller?: SwiperController): this;
 

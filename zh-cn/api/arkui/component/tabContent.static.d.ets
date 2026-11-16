@@ -575,9 +575,9 @@ export declare interface TabBarOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.0 static
+   * @since 26.1.0 static
    */
-  badge?: BadgeParamWithNumber | BadgeParamWithString;
+  badge?: TabBarBadgeStyle;
 }
 
 /**
@@ -900,7 +900,8 @@ export declare interface TabContentAttribute extends CommonMethod {
    * @returns { TabContentAttribute } 返回TabContentAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setTabContentOptions(): this;
 
@@ -965,7 +966,8 @@ export declare function TabContent(
  * @returns { 选项卡内容Attribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function TabContent(
