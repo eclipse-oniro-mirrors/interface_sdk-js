@@ -192,7 +192,6 @@ export enum PanelFlag {
    * 分离态面板类型。
    * <br>
    * <br>- 面板宽度等于屏幕宽度，面板仅可纵向移动。
-   * <br>- 系统面板无抬高区域（insets 为 {0, 0, 0}）。
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 26.1.0 dynamic&static

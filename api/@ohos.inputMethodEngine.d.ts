@@ -3475,7 +3475,7 @@ declare namespace inputMethodEngine {
      * <br> > **NOTE**
      * <br> >
      * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED**, **FLG_FLOATING**,
-     * <br> > or **FLG_DETACHED** state.
+     * <br> > or **FLAG_DETACHED** state.
      * <br> >
      * <br> > This API returns the result synchronously. The return only indicates that the system has received the request
      * <br> > for updating the hot zone, not that the hot zone has been updated.
@@ -4057,7 +4057,7 @@ declare namespace inputMethodEngine {
     * | FLG_FIXED  | 0 | Fixed state type.|
     * | FLG_FLOATING | 1 | Floating state type.|
     * | FLAG_CANDIDATE<sup>15+</sup> | 2 | Candidate state type.|
-    * | FLG_DETACHED<sup>26.1.0+</sup> | 3 | Detached state type.|
+    * | FLAG_DETACHED<sup>26.1.0+</sup> | 3 | Detached state type.|
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 10 dynamic
@@ -4100,19 +4100,18 @@ declare namespace inputMethodEngine {
      * @since 15 dynamic
      * @since 23 static
      */
-    FLAG_CANDIDATE
+    FLAG_CANDIDATE,
 
     /**
      * Detached style.
      * <br>
      * <br><p>It's provided for the panel with type of SOFT_KEYBOARD.
-     * The panel width equals the display width, and the panel can only be moved vertically.
-     * The system panel has no elevated area (insets are {0, 0, 0}).</p>
+     * The panel width equals the display width, and the panel can only be moved vertically.</p>
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 26.1.0 dynamic&static
      */
-    FLG_DETACHED
+    FLAG_DETACHED
   }
 
   /**
