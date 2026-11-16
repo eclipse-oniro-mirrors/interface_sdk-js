@@ -6354,7 +6354,7 @@ declare namespace relationalStore {
      * @throws { BusinessError } 14800021 - SQLite: Generic error.
      * @throws { BusinessError } 14800024 - SQLite: The database file is locked.
      * @throws { BusinessError } 14800043 - The database does not support this scenario.
-     *     Possible causes: 1. The database type is not support;2. The table type is not supported;
+     *     Possible causes: 1. The database type is not supported;2. The table type is not supported;
      *     3. This is a read-only database.
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @systemapi
