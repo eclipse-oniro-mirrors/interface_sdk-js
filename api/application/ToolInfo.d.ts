@@ -163,6 +163,17 @@ export interface ToolInfo {
    * @since 26.0.0 dynamiconly
    */
   readonly isLockScreenExecutionAllowed?: boolean;
+
+  /**
+   * List of device types supported by the CLI tool. The values are subject to the device types defined by the system,
+   * such as **default**, **tablet**, **tv**, **watch**, and **car**. An empty array indicates that the tool is not
+   * limited to specific device types. The default value is an empty array.
+   *
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  readonly supportedDevices?: Array<string>;
 }
 
 /**
