@@ -2400,7 +2400,7 @@ declare namespace applicationManager {
    * Obtains the states of all main windows.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @returns { Array<MainWindowStates> } Return the main window states.
+   * @returns { Array<MainWindowStates> } Returns the main window states.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
