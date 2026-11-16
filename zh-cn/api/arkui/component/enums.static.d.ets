@@ -23,7 +23,7 @@ import curves from '../../@ohos.curves';
 import { AttributeModifier, CommonMethod } from './common';
 
 /**
- * common enum of the checkbox shape
+ * 复选框形状的通用枚举。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

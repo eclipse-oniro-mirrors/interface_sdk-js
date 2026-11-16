@@ -10415,7 +10415,7 @@ export declare class TouchResult {
 }
 
 /**
- * 3D vector in depth space.
+ * 深度空间的三维向量。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10424,7 +10424,7 @@ export declare class TouchResult {
  */
 export declare interface DepthVector3 {
   /**
-   * X component.
+   * X分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10435,7 +10435,7 @@ export declare interface DepthVector3 {
   x: double;
 
   /**
-   * Y component.
+   * Y分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10446,7 +10446,7 @@ export declare interface DepthVector3 {
   y: double;
 
   /**
-   * Z component.
+   * Z分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10458,7 +10458,7 @@ export declare interface DepthVector3 {
 }
 
 /**
- * 4D vector in depth space.
+ * 深度空间的四维向量。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10467,7 +10467,7 @@ export declare interface DepthVector3 {
  */
 export declare interface DepthVector4 {
   /**
-   * X component.
+   * X分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10478,7 +10478,7 @@ export declare interface DepthVector4 {
   x: double;
 
   /**
-   * Y component.
+   * Y分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10489,7 +10489,7 @@ export declare interface DepthVector4 {
   y: double;
 
   /**
-   * Z component.
+   * Z分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10500,7 +10500,7 @@ export declare interface DepthVector4 {
   z: double;
 
   /**
-   * W component.
+   * W分量。
    *
    * @default 0.0
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10512,7 +10512,7 @@ export declare interface DepthVector4 {
 }
 
 /**
- * RGB color in depth space.
+ * 深度空间的RGB颜色。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10521,7 +10521,7 @@ export declare interface DepthVector4 {
  */
 export declare interface DepthColorRGB {
   /**
-   * Red component (0-255).
+   * 红色分量（0-255）。
    *
    * @default 255
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10532,7 +10532,7 @@ export declare interface DepthColorRGB {
   red: int;
 
   /**
-   * Green component (0-255).
+   * 绿色分量（0-255）。
    *
    * @default 255
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10543,7 +10543,7 @@ export declare interface DepthColorRGB {
   green: int;
 
   /**
-   * Blue component (0-255).
+   * 蓝色分量（0-255）。
    *
    * @default 255
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10555,7 +10555,7 @@ export declare interface DepthColorRGB {
 }
 
 /**
- * Spatial position mode. Indicates the coordinate system used by the corner positions.
+ * 空间位置模式。表示角点位置所使用的坐标系。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10564,7 +10564,7 @@ export declare interface DepthColorRGB {
  */
 export declare enum SpatialPositionMode {
   /**
-   * World XYZ coordinate mode. The X, Y, and Z components are all in world coordinates.
+   * 世界坐标系XYZ模式。X、Y、Z分量均使用世界坐标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10574,8 +10574,8 @@ export declare enum SpatialPositionMode {
   WORLD_XYZ = 0,
 
   /**
-   * NDC XY and world Z coordinate mode. The X and Y components use NDC (Normalized Device Coordinates),
-   * and the Z component is in world coordinates.
+   * NDC XY与世界Z坐标模式。X、Y分量使用NDC（归一化设备坐标），
+   * Z分量使用世界坐标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10586,7 +10586,7 @@ export declare enum SpatialPositionMode {
 }
 
 /**
- * Spatial corner positions in 3D space.
+ * 三维空间中的角点位置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10595,7 +10595,7 @@ export declare enum SpatialPositionMode {
  */
 export declare interface SpatialPosition {
   /**
-   * Left-top corner position in 3D space.
+   * 三维空间中的左上角位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10605,7 +10605,7 @@ export declare interface SpatialPosition {
   leftTop: DepthVector3;
 
   /**
-   * Right-top corner position in 3D space.
+   * 三维空间中的右上角位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10615,7 +10615,7 @@ export declare interface SpatialPosition {
   rightTop: DepthVector3;
 
   /**
-   * Left-bottom corner position in 3D space.
+   * 三维空间中的左下角位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10625,7 +10625,7 @@ export declare interface SpatialPosition {
   leftBottom: DepthVector3;
 
   /**
-   * Right-bottom corner position in 3D space.
+   * 三维空间中的右下角位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10635,7 +10635,7 @@ export declare interface SpatialPosition {
   rightBottom: DepthVector3;
 
   /**
-   * Coordinate mode of the corner positions.
+   * 角点位置的坐标系模式。
    *
    * @default SpatialPositionMode.WORLD_XYZ
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -10647,7 +10647,7 @@ export declare interface SpatialPosition {
 }
 
 /**
- * Spatial effect params.
+ * 景深效果参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi
@@ -10656,7 +10656,7 @@ export declare interface SpatialPosition {
  */
 export declare interface SpatialEffectParams {
   /**
-   * Spatial position defined by corner points.
+   * 由角点定义的空间位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -10666,8 +10666,8 @@ export declare interface SpatialEffectParams {
   position: SpatialPosition | double;
 
   /**
-   * Occlusion weight for spatial effect.
-   * Value range:[0, 1]Default value: 0.
+   * 景深效果的遮挡权重。
+   * 取值范围：[0, 1]，默认值：0。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -13935,9 +13935,9 @@ export declare interface CommonMethod {
     default lightUpEffect(value: double | undefined): this;
 
     /**
-     * Applies a spatial effect to component.
+     * 为组件应用景深效果。
      *
-     * @param { SpatialEffectParams | undefined } params - Spatial effect parameters.
+     * @param { SpatialEffectParams | undefined } params - 景深效果参数。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi

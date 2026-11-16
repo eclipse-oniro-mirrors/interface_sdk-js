@@ -3304,7 +3304,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Button.
+   * 定义Button的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3358,7 +3358,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Checkbox.
+   * 定义Checkbox的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3412,7 +3412,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for CheckboxGroup.
+   * 定义CheckboxGroup的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3454,7 +3454,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Radio.
+   * 定义Radio的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3508,7 +3508,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Rating.
+   * 定义Rating的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3517,7 +3517,7 @@ export declare namespace typeNode {
   type Rating = RatingFrameNode;
 
   /**
-   * Create a FrameNode of Rating type.
+   * 创建Rating类型的FrameNode。
    *
    * @param { UIContext } context - uiContext used to create the FrameNode.
    * @returns { Rating } - Return Rating type FrameNode.
@@ -3590,7 +3590,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Slider.
+   * 定义Slider的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3644,7 +3644,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Toggle.
+   * 定义Toggle的FrameNode类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
