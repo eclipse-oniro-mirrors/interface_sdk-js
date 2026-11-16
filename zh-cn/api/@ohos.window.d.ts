@@ -400,6 +400,15 @@ declare namespace window {
      */
     TYPE_MUTISCREEN_COLLABORATION = 26,
     /**
+     * 无障碍通话窗口
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TYPE_ACCESSIBILITY_CALL_HELPER = 27,
+    /**
      * 表示应用主窗口。
      * 
      * 此窗口类型不支持在创建窗口时使用。
