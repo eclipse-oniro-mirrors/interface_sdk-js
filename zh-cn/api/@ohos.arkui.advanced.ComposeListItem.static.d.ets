@@ -126,8 +126,6 @@ export declare class OperateIcon {
   /**
    * 右侧图标/箭头点击事件。
    *
-   *
-   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -178,8 +176,6 @@ export declare class OperateCheck {
   public isCheck?: boolean;
   /**
    * 右侧Switch/CheckBox/Radio选中状态改变时触发回调。
-   *
-   *
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -256,7 +252,7 @@ export declare class OperateButton {
   public accessibilityLevel?: string;
 }
 /**
- * Declare ContentItem
+ * 列表左侧显示的图标、图标大小以及中间元素文字内容。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -314,7 +310,7 @@ export declare class ContentItem {
   public description?: ResourceStr;
 }
 /**
- * Declare OperateItem
+ * 列表右侧显示的元素类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -404,7 +400,7 @@ export declare class OperateItem {
   public arrow?: OperateIcon;
 }
 /**
- * Declare ComposeListItem
+ * 列表组件，可自定义列表左侧、中间元素以及右侧显示内容。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -414,7 +410,7 @@ export declare class OperateItem {
 @Component
 export declare struct ComposeListItem {
   /**
-   * The ContentItem.
+   * 定义左侧以及中间元素。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -423,7 +419,7 @@ export declare struct ComposeListItem {
   @PropRef
   contentItem?: ContentItem;
   /**
-   * The OperateItem.
+   * 定义右侧元素。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
