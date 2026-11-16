@@ -31020,6 +31020,7 @@ declare interface EditModeOptions {
   /**
    * Define whether to gather selected items in grid or list when item is long pressed for context menu.
    *
+   * @type { ?boolean }
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31036,6 +31037,7 @@ declare interface EditModeOptions {
    * Returning true means using the number of selected items within the display range.
    * Returning a number to include selected items outside the display range.
    *
+   * @type { ?OnGetPreviewBadgeCallback } onGetPreviewBadge
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -31050,6 +31052,7 @@ declare interface EditModeOptions {
    * multi-select state.
    * {@code false} indicates that there is no default style after entering the multi-select state.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31064,6 +31067,7 @@ declare interface EditModeOptions {
    * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
    * {@code false} indicates that two-finger swiping cannot perform multi-selection.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
