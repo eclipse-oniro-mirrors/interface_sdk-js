@@ -26,10 +26,8 @@ import { BusinessError, Callback } from './@ohos.base';
  * > **说明：**
  * >
  * > 1. 本模块首批接口从API version 20开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * > 2. 本模块为系统接口。
  *
  * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
- * @systemapi
  * @since 20 dynamic
  * @since 23 static
  */
@@ -39,7 +37,6 @@ declare namespace onScreen {
    * 定义屏上内容的场景类型。
    *
    * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
-   * @systemapi
    * @since 20 dynamic
    * @since 23 static
    */
@@ -68,7 +65,6 @@ declare namespace onScreen {
    * 定义控制事件的类型。
    *
    * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
-   * @systemapi
    * @since 20 dynamic
    * @since 23 static
    */

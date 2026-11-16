@@ -32,7 +32,6 @@ import { BusinessError, Callback } from './@ohos.base';
  * content, links, screenshots, and other information, identifying application scenarios such as reading
  * and short video, providing entity information such as article titles and body text, as well as
  * interaction information such as clicks and scrolling.
- * > 2.The APIs provided by this module are system APIs.
  *
  * @syscap SystemCapability.MultimodalAwareness.OnScreenAwareness
  * @since 20 dynamic
