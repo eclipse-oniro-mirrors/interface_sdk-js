@@ -3653,18 +3653,6 @@ declare namespace webview {
         closeCamera(): void;
 
         /**
-         * Gets URL of frame that sent the last postMessage to native application.
-         *
-         * @returns { string } The URL of frame that last sent a postMessage.
-         * @throws { BusinessError } 17100001 - Init error.
-         *     The WebviewController must be associated with a Web component.
-         * @syscap SystemCapability.Web.Webview.Core
-         * @stagemodelonly
-         * @since 26.0.0 static
-         */
-        getLastPostMessageURL(): string;
-
-        /**
          * Pause all WebView timers.
          *
          * @throws { BusinessError } 17100001 - Init error.
@@ -4853,6 +4841,24 @@ declare namespace webview {
          * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date): Promise<void>;
+
+        /**
+         * 获取上次向应用程序发送postMessage的帧的URL。
+         * 
+         * 此接口返回通过接收到的最近一次postMessage的发送者的帧的URL。
+         * {@link WebMessagePort#onMessageEvent}或{@link WebMessagePort#onMessageEventExt}。
+         * 如果没有收到postMessage，则返回空字符串。
+         * 
+         * @returns { string } 上次发送postMessage的帧的URL。如果没有收到postMessage，
+         *     返回空字符串。
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this method.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        getLastPostMessageUrl(): string;
     }
 
     /**

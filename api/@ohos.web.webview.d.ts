@@ -7205,6 +7205,26 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     static removeVisitedLinksSince(date: Date): Promise<void>;
+
+    /**
+     * Obtains the URL of the frame that last sent a postMessage to the application.
+     * 
+     * This API returns the frame URL of the sender of the most recent postMessage received through
+     * [onMessageEvent]{@link webview.WebMessagePort.onMessageEvent}
+     * or
+     * [onMessageEventExt]{@link webview.WebMessagePort.onMessageEventExt}.
+     * If no postMessage has been received, an empty string is returned.
+     * 
+     * @returns { string } URL of the frame that last sent a postMessage. If no postMessage has been received,
+     *     an empty string is returned.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this method.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getLastPostMessageUrl(): string;
   }
 
   /**
