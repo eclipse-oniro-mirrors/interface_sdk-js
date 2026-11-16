@@ -1324,6 +1324,7 @@ declare namespace volumeManager {
    * 本地磁盘硬件信息。
    *
    * @syscap SystemCapability.FileManagement.StorageService.Volume
+   * @stagemodelonly
    * @since 26.1.0 dynamic&static
    */
   export interface LocalDiskInfo {
@@ -1331,57 +1332,64 @@ declare namespace volumeManager {
      * 磁盘设备节点的物理路径，如/sys/block/nvme0n1。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     sysPath: string;
-
+ 
     /**
      * 磁盘型号，由厂商定义。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     model: string;
-
+ 
     /**
      * 磁盘描述信息，与model字段取值相同。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     description: string;
-
+ 
     /**
      * 磁盘总空间大小。单位：Byte。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     size: long;
-
+ 
     /**
      * 磁盘介质类型。
      * **1**：SSD（固态硬盘）。
      * **2**：HDD（机械硬盘）。
      * **255**：未知。
      * 该值应为整数。
+     * 取值限定为整数。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     mediaType: int;
-
+ 
     /**
      * 磁盘运行状态，取值包括"live"、"connecting"、"resetting"、"dead"。
      *
      * @syscap SystemCapability.FileManagement.StorageService.Volume
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     state: string;
   }
-
+ 
   /**
-   * 获取所有本地磁盘的硬件信息，使用Promise异步回调。仅PC产品支持。
+   * 获取所有本地磁盘的硬件信息，使用Promise异步回调。
    *
    * @permission ohos.permission.GET_STORAGE_VOLUME_INFO
    * @returns { Promise<Array<LocalDiskInfo>> } Promise对象，返回本地磁盘硬件信息列表。
@@ -1392,33 +1400,16 @@ declare namespace volumeManager {
    * @since 26.1.0 dynamic&static
    */
   function getLocalDiskInfos(): Promise<Array<LocalDiskInfo>>;
-
-  /**
-   * 获取指定磁盘的序列号，使用Promise异步回调。
-   *
-   * @permission ohos.permission.ACCESS_DISK_PHY_INFO
-   * @param { string } sysPath - 磁盘设备节点的物理路径，如/sys/block/nvme0n1。
-   * @returns { Promise<string> } Promise对象，返回磁盘序列号。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   * @throws { BusinessError } 13600001 - IPC error.
-   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
-   * @throws { BusinessError } 13600002 - The file system is not supported.
-   * @throws { BusinessError } 13600008 - The object does not exist.
-   * @syscap SystemCapability.FileManagement.StorageService.Volume
-   * @stagemodelonly
-   * @since 26.1.0 dynamic&static
-   */
-  function getDiskSerialNumber(sysPath: string): Promise<string>;
-
+ 
   /**
    * 获取指定磁盘自出厂以来的完整启停次数，使用Promise异步回调。如果ioctl读取失败（如SATA HDD不支持），返回0。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_DISK
    * @param { string } sysPath - 磁盘设备节点的物理路径，如/sys/block/nvme0n1。
    * @returns { Promise<int> } Promise对象，返回磁盘启停次数。
-   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 13600001 - IPC error.
-   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
    * @throws { BusinessError } 13600002 - The file system is not supported.
    * @throws { BusinessError } 13600008 - The object does not exist.
    * @syscap SystemCapability.FileManagement.StorageService.Volume
@@ -1426,16 +1417,16 @@ declare namespace volumeManager {
    * @since 26.1.0 dynamic&static
    */
   function getDiskPowerCycleCount(sysPath: string): Promise<int>;
-
+ 
   /**
    * 获取指定磁盘自出厂以来的总通电时长，使用Promise异步回调。如果ioctl读取失败（如SATA HDD不支持），返回0。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_DISK
    * @param { string } sysPath - 磁盘设备节点的物理路径，如/sys/block/nvme0n1。
    * @returns { Promise<int> } Promise对象，返回磁盘通电时长。
-   * @throws { BusinessError } 201 - Permission verification failed.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 13600001 - IPC error.
-   * @throws { BusinessError } 13900042 - Unknown error. The sysPath is invalid or the disk does not exist.
    * @throws { BusinessError } 13600002 - The file system is not supported.
    * @throws { BusinessError } 13600008 - The object does not exist.
    * @syscap SystemCapability.FileManagement.StorageService.Volume
