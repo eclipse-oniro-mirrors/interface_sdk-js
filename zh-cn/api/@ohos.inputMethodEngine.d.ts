@@ -3714,7 +3714,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      * <br> >
      * <br> > 此接口为同步接口，接口返回成功仅代表系统侧收到设置的请求，不代表设置完成。如果需要感知执行过程中的异常，建议使用
      * <br> > [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)}或
@@ -3744,7 +3744,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。此接口兼容
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。此接口兼容
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}的调用方法，若入参rect
      * <br> > 仅填写属性landscapeRect和portraitRect，则默认调用
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}。
@@ -3780,7 +3780,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      * <br> >
      * <br> > 此接口为异步接口，接口返回仅代表系统侧收到设置的请求，不代表已完成设置。
      * <br> >
@@ -3807,7 +3807,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。此接口兼容
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。此接口兼容
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}的调用方法，若入参rect
      * <br> > 仅填写属性landscapeRect和portraitRect，则默认调用
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}。
@@ -3842,7 +3842,7 @@ declare namespace inputMethodEngine {
      * <br> > 同步接口阻塞主线程，容易影响UI交互，需谨慎使用。建议优先使用对应的异步接口
      * <br> > [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)}。
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      * <br> >
      * <br> > 此接口为同步接口，接口返回代表系统侧收到设置的请求，并已完成设置。
      * <br> >
@@ -3871,7 +3871,7 @@ declare namespace inputMethodEngine {
      * <br> > 同步接口阻塞主线程，容易影响UI交互，需谨慎使用。建议优先使用对应的异步接口
      * <br> > [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)}。
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。此接口兼容
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。此接口兼容
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}的调用方法，若入参rect
      * <br> > 仅填写属性landscapeRect和portraitRect，则默认调用
      * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}。
@@ -3902,7 +3902,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      * <br> >
      * <br> > 此接口为同步接口，接口返回仅代表系统侧收到更新热区的请求，不代表已完成热区更新。
      * <br> >
@@ -3929,7 +3929,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。输入法通过adjustPanelRect等接口对面板大小进行调节时，系统会根据一定规则校验计算出最终的数值（例如超出屏幕等场景
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。输入法通过adjustPanelRect等接口对面板大小进行调节时，系统会根据一定规则校验计算出最终的数值（例如超出屏幕等场景
      * <br> > ），输入法应用可通过该回调获取的真实面板大小，完成最终的面板布局刷新。
      * <br> >
      * <br> > -  从API version 12-14开始支持，此接口回调函数中仅包含[window.Size]{@link @ohos.window:window.Size}类型的必选参数。
@@ -3952,7 +3952,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。输入法通过adjustPanelRect等接口对面板大小进行调节时，系统会根据一定规则校验计算出最终的数值（例如超出屏幕等场景
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。输入法通过adjustPanelRect等接口对面板大小进行调节时，系统会根据一定规则校验计算出最终的数值（例如超出屏幕等场景
      * <br> > ），输入法应用可通过该回调获取的真实面板大小，完成最终的面板布局刷新。
      * <br> >
      * <br> > -  从API version 12-14开始支持，此接口回调函数中仅包含[window.Size]{@link @ohos.window:window.Size}类型的必选参数。
@@ -3976,7 +3976,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      * 输入法通过[adjustPanelRect](./js-apis-inputmethodengine.md#adjustpanelrect15)等接口对面板大小进行调节时
      * 系统会根据一定规则校验计算出最终的数值（例如：超出屏幕等场景）。输入法应用可通过该回调获取最终的面板大小，完成最终的面板布局刷新。
      *
@@ -3994,7 +3994,7 @@ declare namespace inputMethodEngine {
      * <br>
      * <br> > **说明:**
      * <br> >
-     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLG_DETACHED的面板。
+     * <br> > 仅用于SOFT_KEYBOARD类型，状态为FLG_FIXED、FLG_FLOATING或FLAG_DETACHED的面板。
      *
      * @param { 'sizeUpdate' } type - 取消监听当前面板的大小是否产生变化，固定值为'sizeUpdate'。
      * @param { ?SizeUpdateCallback } [callback] - 回调函数。用于指定要取消监听的回调函数，如果不填则取消所有sizeUpdate监听。
@@ -4475,7 +4475,7 @@ declare namespace inputMethodEngine {
    * | FLG_FIXED  | 0 | 固定态面板类型。 |
    * | FLG_FLOATING | 1 | 悬浮态面板类型。 |
    * | FLAG_CANDIDATE<sup>15+</sup> | 2 | 候选词态面板类型。 |
-   * | FLG_DETACHED<sup>26.1.0+</sup> | 3 | 分离态面板类型。 |
+   * | FLAG_DETACHED<sup>26.1.0+</sup> | 3 | 分离态面板类型。 |
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 10 dynamic
@@ -4514,7 +4514,7 @@ declare namespace inputMethodEngine {
      * @since 15 dynamic
      * @since 23 static
      */
-    FLAG_CANDIDATE
+    FLAG_CANDIDATE,
 
     /**
      * 分离态面板类型。
@@ -4525,7 +4525,7 @@ declare namespace inputMethodEngine {
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 26.1.0 dynamic&static
      */
-    FLG_DETACHED
+    FLAG_DETACHED
   }
 
   /**
