@@ -320,7 +320,8 @@ declare namespace inputEventClient {
     /**
      * 按下按键。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { KeyCode } keyCode - 要按下的按键键码。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -337,7 +338,8 @@ declare namespace inputEventClient {
     /**
      * 抬起按键。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { KeyCode } keyCode - 要抬起的按键键码。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -354,7 +356,8 @@ declare namespace inputEventClient {
   /**
    * 创建键盘控制器，用于模拟按键操作。使用Promise异步回调。
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<KeyboardController> } Promise对象，返回键盘控制器实例。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -380,7 +383,8 @@ declare namespace inputEventClient {
     /**
      * 将鼠标光标移动到指定的显示器坐标。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { int } displayId - 目标显示器ID。
      * @param { int } displayX - 目标位置相对于显示器左边缘的X坐标，单位为像素（px）。若超出显示器有效范围，则实际坐标值会规约到有效范围[0, 显示器宽度-1]。
      * @param { int } displayY - 目标位置相对于显示器上边缘的Y坐标，单位为像素（px）。若超出显示器有效范围，则实际坐标值会规约到有效范围[0, 显示器高度-1]。
@@ -398,7 +402,8 @@ declare namespace inputEventClient {
     /**
      * 按下鼠标按键。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Button } button - 要按下的鼠标按键。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -414,7 +419,8 @@ declare namespace inputEventClient {
     /**
      * 抬起鼠标按键。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Button } button - 要抬起的鼠标按键。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -430,7 +436,8 @@ declare namespace inputEventClient {
     /**
      * 开始轴事件。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - 轴类型。
      * @param { int } value - 轴值。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -447,7 +454,8 @@ declare namespace inputEventClient {
     /**
      * 更新轴事件。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - 轴类型。
      * @param { int } value - 轴值。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -464,7 +472,8 @@ declare namespace inputEventClient {
     /**
      * 结束轴事件。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - 轴类型。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -481,7 +490,8 @@ declare namespace inputEventClient {
   /**
    * 创建鼠标控制器，用于模拟鼠标操作。使用Promise异步回调。
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<MouseController> } Promise对象，返回鼠标控制器实例。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -552,7 +562,8 @@ declare namespace inputEventClient {
     /**
      * 触点按下。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - 与屏幕接触的触点信息。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -570,7 +581,8 @@ declare namespace inputEventClient {
     /**
      * 触点移动。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - 需要移动的触点信息。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -587,7 +599,8 @@ declare namespace inputEventClient {
     /**
      * 触点抬起。使用Promise异步回调。
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - 即将离开屏幕的触点信息。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -605,7 +618,8 @@ declare namespace inputEventClient {
   /**
    * 创建触控控制器，用于模拟触控操作。使用Promise异步回调。
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<TouchController> } Promise对象，返回触控控制器实例。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
