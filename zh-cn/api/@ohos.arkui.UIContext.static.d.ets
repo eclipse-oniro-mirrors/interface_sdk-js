@@ -4188,9 +4188,9 @@ export declare class UIContext {
   showActionSheet(value: ActionSheetOptions): void;
 
   /**
-   * datePickerDialog display.
+   * 定义日期滑动选择器弹窗并弹出。
    *
-   * @param { DatePickerDialogOptions } options - Options.
+   * @param { DatePickerDialogOptions } options - 配置日期滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4198,9 +4198,9 @@ export declare class UIContext {
   showDatePickerDialog(options: DatePickerDialogOptions): void;
 
   /**
-   * timePickerDialog display.
+   * 定义时间滑动选择器弹窗并弹出。
    *
-   * @param { TimePickerDialogOptions } options - Options.
+   * @param { TimePickerDialogOptions } options - 配置时间滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4208,9 +4208,9 @@ export declare class UIContext {
   showTimePickerDialog(options: TimePickerDialogOptions): void;
 
   /**
-   * textPickerDialog display.
+   * 定义文本滑动选择器弹窗并弹出，相比API version 11，新增了TextPickerDialogOptionsExt参数支持。
    *
-   * @param { TextPickerDialogOptions | TextPickerDialogOptionsExt } style - Dialog style.
+   * @param { TextPickerDialogOptions | TextPickerDialogOptionsExt } style - 配置文本滑动选择器弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

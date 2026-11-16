@@ -4013,7 +4013,7 @@ export declare interface ForegroundEffectOptions {
     radius: double | undefined;
 }
 /**
- * Provide an interface for the text style of picker
+ * 选择器组件的文本样式，用于配置选择器中显示文本的外观属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4021,7 +4021,7 @@ export declare interface ForegroundEffectOptions {
  */
 export declare interface PickerTextStyle {
     /**
-     * Font color.
+     * 文本颜色，用于自定义选择器中文字的颜色。当需要使用特定颜色时传入，不传入时使用系统默认文本颜色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4029,7 +4029,7 @@ export declare interface PickerTextStyle {
      */
     color?: ResourceColor;
     /**
-     * Text style.
+     * 文本样式，包括字体大小、字体粗细、字体族等属性。当需要自定义选择器中文字的字体样式时传入，不传入时使用系统默认文本样式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4038,7 +4038,7 @@ export declare interface PickerTextStyle {
     font?: Font;
 }
 /**
- * Provide an interface for the button style of picker
+ * 选择器弹窗的按钮样式，用于配置日期选择器、时间选择器等弹窗中确认和取消按钮的显示样式、角色和行为。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4046,7 +4046,7 @@ export declare interface PickerTextStyle {
  */
 export declare interface PickerDialogButtonStyle {
     /**
-     * Describes the button style.
+     * 按钮显示样式，用于设置按钮的显示类型。当需要自定义按钮显示样式时传入，不传入时使用默认按钮显示样式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4054,7 +4054,7 @@ export declare interface PickerDialogButtonStyle {
      */
     type?: ButtonType;
     /**
-     * Describes the button style.
+     * 按钮的样式和重要程度，用于设置按钮的视觉样式和交互重要级别。当需要自定义按钮样式时传入，不传入时使用默认按钮样式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4062,7 +4062,8 @@ export declare interface PickerDialogButtonStyle {
      */
     style?: ButtonStyleMode;
     /**
-     * Describes the button role.
+     * 按钮角色，用于定义按钮在对话框中的语义角色。可选值包括Normal（正常按钮）、Error（警示按钮），详见ButtonRole枚举说明。
+     *默认值：ButtonRole.NORMAL。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4070,7 +4071,7 @@ export declare interface PickerDialogButtonStyle {
      */
     role?: ButtonRole;
     /**
-     * Describes the button text size.
+     * 文本显示字号，用于自定义按钮文字的大小。单位：fp。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4078,7 +4079,7 @@ export declare interface PickerDialogButtonStyle {
      */
     fontSize?: Length;
     /**
-     * Describes the button text color.
+     * 文本显示颜色，用于自定义按钮文字的颜色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4086,7 +4087,9 @@ export declare interface PickerDialogButtonStyle {
      */
     fontColor?: ResourceColor;
     /**
-     * Describes the button font weight.
+     * 文本的字体粗细。number类型取值[100, 900]，取值间隔为100，取值越大，字体越粗。
+     * string类型仅支持number类型取值的字符串形式，例如"200"，以及"bold"、"bolder"、
+     * "lighter"、"regular"、"medium"，分别对应FontWeight中相应的枚举值。默认值：FontWeight.Normal。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4094,7 +4097,8 @@ export declare interface PickerDialogButtonStyle {
      */
     fontWeight?: FontWeight | int | string;
     /**
-     * Describes the button font style.
+     * 文本的字体样式，用于指定文本是否使用斜体显示。可选值包括Normal（正常样式）、
+     * Italic（斜体样式），详见FontStyle枚举说明。默认值：FontStyle.Normal。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4102,7 +4106,9 @@ export declare interface PickerDialogButtonStyle {
      */
     fontStyle?: FontStyle;
     /**
-     * Describes the button font family.
+     * 字体列表，用于设置按钮文字使用的字体。支持传入单个字体名称字符串，或使用逗号分隔的
+     * 多个字体名称（优先级从左到右，例如'Arial,HarmonyOS Sans'）。默认字体为'HarmonyOS Sans'，
+     * 支持注册自定义字体。不传入时使用默认字体。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4110,7 +4116,7 @@ export declare interface PickerDialogButtonStyle {
      */
     fontFamily?: Resource | string;
     /**
-     * Describes the button background color.
+     * 按钮背景色。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4118,7 +4124,7 @@ export declare interface PickerDialogButtonStyle {
      */
     backgroundColor?: ResourceColor;
     /**
-     * Describes the button border radius.
+     * 圆角半径，用于设置按钮的圆角大小。单位：vp。当需要自定义按钮圆角样式时传入，不传入时使用默认圆角半径。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4126,7 +4132,11 @@ export declare interface PickerDialogButtonStyle {
      */
     borderRadius?: Length | BorderRadiuses;
     /**
-     * Define whether the button default to responding to the Enter key
+     * 控制弹出弹窗后，Enter键是否默认由该按钮响应。弹出弹窗后，若未使用Tab键切换焦点，
+     * primary为true的按钮将默认响应Enter键；若使用Tab键切换了焦点，则Enter键由当前获得焦点的按钮响应。
+     * true：弹出弹窗后，未使用Tab键切换焦点时，按下Enter键会触发该按钮绑定的事件。
+     * false：弹出弹窗后，未使用Tab键切换焦点时，按下Enter键不会触发该按钮绑定的事件。
+     * 默认值：false
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
