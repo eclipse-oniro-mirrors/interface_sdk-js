@@ -2734,11 +2734,10 @@ export class UIObserver {
   offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
 
   /**
-   * Registers a callback function to be called when text field's content is changed.
+   * 全局监听输入框文本变化。
    *
-   * @param { 'textChange' } type - The type of event to listen for. Must be 'textChange'.
-   * @param { Callback<observer.TextChangeEventInfo> } callback - The callback function to be called when
-   *     text field's content is changed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { Callback<observer.TextChangeEventInfo> } callback - 回调函数，返回文本变化的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2748,11 +2747,10 @@ export class UIObserver {
   on(type: 'textChange', callback: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消输入框文本变化的全局监听。
    *
-   * @param { 'textChange' } type - The type of event to remove the listener for. Must be 'textChange'.
-   * @param { Callback<observer.TextChangeEventInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { Callback<observer.TextChangeEventInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消输入框文本变化的所有全局监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2762,12 +2760,11 @@ export class UIObserver {
   off(type: 'textChange', callback?: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Registers a callback function to be called when text field's content is changed.
+   * 指定id的输入框文本变化的局部监听。
    *
-   * @param { 'textChange' } type - The type of event to listen for. Must be 'textChange'.
-   * @param { observer.ObserverOptions } identity - Identity options.
-   * @param { Callback<observer.TextChangeEventInfo> } callback - The callback function to be called when the
-   *     text field's content is changed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { observer.ObserverOptions } identity - 指定监听的文本输入组件的id。
+   * @param { Callback<observer.TextChangeEventInfo> } callback - 回调函数，返回文本变化的信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2777,12 +2774,11 @@ export class UIObserver {
   on(type: 'textChange', identity: observer.ObserverOptions, callback: Callback<observer.TextChangeEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消指定ID对应输入框文本变化的局部监听。
    *
-   * @param { 'textChange' } type - The type of event to remove the listener for. Must be 'textChange'.
-   * @param { observer.ObserverOptions } identity - Identity options.
-   * @param { Callback<observer.TextChangeEventInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { 'textChange' } type - 监听事件，固定为'textChange'，表示文本输入的变化。
+   * @param { observer.ObserverOptions } identity - 指定监听的文本输入组件的id。
+   * @param { Callback<observer.TextChangeEventInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消指定ID输入框文本变化的所有局部监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5683,9 +5679,9 @@ export class UIContext {
   setDynamicDimming(id: string, value: number): void;
 
   /**
-   * Get object cursor controller.
+   * 获取CursorController对象，可通过该对象控制光标。
    *
-   * @returns { CursorController } object cursor controller.
+   * @returns { CursorController } 获取CursorController对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6146,9 +6142,9 @@ export class UIContext {
   isFollowingSystemFontScale(): boolean;
 
   /**
-   * Get the max font scale.
+   * 获取当前UI上下文最大字体倍率。
    *
-   * @returns { number } The max font scale.
+   * @returns { number } 当前UI上下文最大字体倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -6438,7 +6434,7 @@ export class UIContext {
 export const enum KeyboardAvoidMode {
 
   /**
-   * Offset Type, the layout moves up.
+   * 上抬模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6449,7 +6445,7 @@ export const enum KeyboardAvoidMode {
   OFFSET = 0,
 
   /**
-   * Resize Type, the layout is resized.
+   * 压缩模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6460,7 +6456,7 @@ export const enum KeyboardAvoidMode {
   RESIZE = 1,
 
   /**
-   * Offset Type, the layout moves up, and this adjustment also occurs if the caret position in the text box changes.
+   * 上抬模式，输入框光标位置发生变化时也会触发避让。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6471,7 +6467,7 @@ export const enum KeyboardAvoidMode {
   OFFSET_WITH_CARET = 2,
 
   /**
-   * Resize Type, the layout moves up, and this adjustment also occurs if the caret position in the text box changes.
+   * 压缩模式，输入框光标位置发生变化时也会触发避让。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6482,7 +6478,7 @@ export const enum KeyboardAvoidMode {
   RESIZE_WITH_CARET = 3,
 
   /**
-   * None Type, the layout is not adjusted to avoid the keyboard.
+   * 不避让键盘。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6569,7 +6565,7 @@ export const enum SwiperDynamicSyncSceneType {
 export const enum MarqueeDynamicSyncSceneType {
 
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

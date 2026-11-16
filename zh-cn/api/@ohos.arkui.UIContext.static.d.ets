@@ -90,7 +90,13 @@ import { GestureEvent, GestureRecognizer } from '@ohos.arkui.component';
 import { ResourceStr, SizeOptions, VoidCallback } from '@ohos.arkui.component';
 
 /**
- * class Font
+ * Font用于管理自定义字体和系统字体信息，支持注册自定义字体、获取系统字体列表、查询字体详细信息等功能，适用于需要在应用中使用自定义字体或查询系统字体资源的场景。
+  *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getFont()]{@link UIContext.getFont}方法获取到Font对象，再通过该对象调用对应方法。
+ * >
+ * > - 推荐使用字体引擎的[loadFontSync()]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -108,8 +114,15 @@ export declare class Font {
   registerFont(options: font.FontOptions): void;
 
   /**
-   * Gets a list of fonts supported by system.
-   * @returns { Array<string> } A list of font names
+   * 获取系统支持的字体列表。
+   *
+   * 该接口仅在PC/2in1设备上生效，在其他设备上返回空数组。
+   *
+   * > **说明**
+   * > 推荐使用[getSystemFontFullNamesByType()]{@link
+   * @ohos.graphics.text:text.getSystemFontFullNamesByType}接口获取系统最新支持的字体列表数据。
+   *
+   * @returns { Array<string> } 系统支持的字体名称列表，返回的名称可用于getFontByName方法查询对应字体的详细信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -150,7 +163,8 @@ export declare class MediaQuery {
   /**
    * 设置媒体查询的查询条件，并返回对应的监听句柄。
    *
-   * @param { string } condition - 媒体查询的匹配条件，具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
+   * @param { string } condition - 媒体查询的匹配条件，
+   * 具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
    * @returns { mediaQuery.MediaQueryListener } 媒体事件监听句柄，用于注册和去注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2814,7 +2828,12 @@ export declare class SwiperDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
- * Represents a dynamic synchronization scene of Marquee.
+ * 提供Marquee组件动态帧率的配置能力，支持在Marquee组件运行动画时动态调节帧率，优化性能和功耗，适用于需要在跑马灯场景中平衡动画流畅度和系统资源消耗的场景。
+ *
+ * > **说明**
+ * >
+ * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext:DynamicSyncScene}，
+ * 对应[Marquee]{@link @global:Marquee}的动态帧率场景。
  *
  * @extends DynamicSyncScene
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2823,7 +2842,7 @@ export declare class SwiperDynamicSyncScene extends DynamicSyncScene {
  */
 export declare class MarqueeDynamicSyncScene extends DynamicSyncScene {
   /**
-   * Type of the MarqueeDynamicSyncSceneType.
+   * Marquee的动态帧率场景类型。用于指定Marquee组件的动态帧率场景模式，不同场景类型对应不同的帧率调节策略，详见MarqueeDynamicSyncSceneType。
    * @type { MarqueeDynamicSyncSceneType }
    * @readonly
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2978,7 +2997,20 @@ export declare class DragController {
 }
 
 /**
- * class MeasureUtils
+ * MeasureUtils提供文本宽度、高度等相关计算能力，适用于文本自适应布局、多行文本截断、动态UI适配等场景。通过该类可精确计算文本尺寸，帮助开发者在布局前预判文本显示效果，避免文本溢出或布局错乱等问题。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMeasureUtils()]{@link UIContext.getMeasureUtils}方法获取MeasureUtils实例，再通过此实例调用对应方法。
+ * >
+ * > - 如需更多测算文本参数，建议使用图形对应测算接口[Paragraph]{@link @ohos.graphics.text:text.Paragraph}接口。
+ * >
+ * > - 调用文本计算接口时，应避免同时用[ApplicationContext.setFontSizeScale](../apis-ability-kit/js-apis-inner-application-applicationCo
+ * ntext.md#applicationcontextsetfontsizescale13)设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+ * >
+ * > - 在测算裁剪后的文本时，由于某些Unicode字符（如emoji）的码位长度大于1，直接按字符串长度裁剪会导致不准确的结果。建议基于Unicode码点进行迭代处理，避免错误截断字符，确保测算结果准确，
+ * 请参考[measureTextSize]{@link MeasureUtils.measureTextSize}的示例2。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -3908,9 +3940,9 @@ export declare class UIContext {
   static resolveUIContext(): ResolvedUIContext;
 
   /**
-   * get object font.
+   * 获取Font对象。
    *
-   * @returns { Font } object Font.
+   * @returns { Font } Font实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4981,7 +5013,8 @@ export declare class UIContext {
  */
 export const enum KeyboardAvoidMode {
   /**
-   * Default Type, offset the whole page when keyBoard height changed.
+   * 上抬模式。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4989,7 +5022,8 @@ export const enum KeyboardAvoidMode {
   OFFSET = 0,
 
   /**
-   * Resize Type, resize the page when keyBoard height changed.
+   * 压缩模式。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4997,7 +5031,8 @@ export const enum KeyboardAvoidMode {
   RESIZE = 1,
 
   /**
-   * Offset Type, offset the whole page when caret position or keyboard height changed.
+   * 上抬模式，输入框光标位置发生变化时也会触发避让。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -5005,7 +5040,8 @@ export const enum KeyboardAvoidMode {
   OFFSET_WITH_CARET = 2,
 
   /**
-   * Resize Type, resize the whole page when when caret position or keyboard height changed.
+   * 压缩模式，输入框光标位置发生变化时也会触发避让。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -5013,7 +5049,8 @@ export const enum KeyboardAvoidMode {
   RESIZE_WITH_CARET = 3,
 
   /**
-   * None Type, nothing to do when keyboard height changed.
+   * 不避让键盘。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -5039,7 +5076,7 @@ export const enum TextSelectionClearPolicy {
   KEEP_SELECTED_TEXT_ON_EXTERNAL_TOUCH = 0,
 
   /**
-   * Clear the selected text when touch outside of text component.
+   * 在文本组件外部单击时清除选定的文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5077,7 +5114,7 @@ export const enum SwiperDynamicSyncSceneType {
 }
 
 /**
- * Enum of scene type for Marquee
+ * Marquee的动态帧率场景的类型枚举
  *
  * @enum { number } MarqueeDynamicSyncSceneType
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5086,7 +5123,7 @@ export const enum SwiperDynamicSyncSceneType {
  */
 export const enum MarqueeDynamicSyncSceneType {
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5124,7 +5161,13 @@ export const enum CustomKeyboardContinueFeature {
 }
 
 /**
- * class TextMenuController
+ * TextMenuController用于控制文本选择菜单的行为，支持设置菜单显示选项（如优先使用独立窗口显示）、屏蔽系统服务菜单项或指定菜单项，适用于需要自定义文本选择菜单显示方式或限制特定菜单功能的应用场景，
+ * 如在特定业务场景下禁用翻译、搜索等功能。
+ *
+ * > **说明**
+ * > - setMenuOptions接口为非静态API，
+ * 需先使用UIContext中的[getTextMenuController()]{@link UIContext#getTextMenuController}方法获取TextMenuController实例，再通过此实例调用对应方法。
+ * disableSystemServiceMenuItems和disableMenuItems为静态方法，可直接通过TextMenuController类调用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -5142,10 +5185,39 @@ export declare class TextMenuController {
   setMenuOptions(options: TextMenuOptions): void;
 
   /**
-   * Disable all system service menus, such as translation and ai writer.
-   * True means disable, false means enable.
+   * 屏蔽文本选择菜单内所有系统服务菜单项。适用于需要完全自定义文本选择菜单的场景，例如企业安全应用中仅保留复制、剪切、全选、粘贴等基础功能，禁用搜索、翻译、分享等可能涉及数据外发的服务菜单。未通过该接口设置时，
+   * 默认不禁用系统服务菜单项。
    *
-   * @param { boolean } disable - flag to disable service menu items
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * > - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法[onCreateMenu]{@link
+   * > EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先调用的方法为准。例如：先调用disableSystemServiceMenuItems(true)，
+   * 再调用disableMenuItems([...])时，以disableSystemServiceMenuItems的设置为准；反之，先调用disableMenuItems([...])时，
+   * 则以disableMenuItems的设置为准。建议根据实际禁用范围需求选择使用其中一个方法，避免同时调用。
+   * > >
+   * >  - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * >  - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * >  - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
+   *
+   * @param { boolean } disable - 是否禁用系统服务菜单项。true表示禁用，false表示不禁用。
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5154,9 +5226,36 @@ export declare class TextMenuController {
   static disableSystemServiceMenuItems(disable: boolean): void;
 
   /**
-   * Disable menu action by action id.
+   * 屏蔽文本选择菜单内指定的系统服务菜单项。适用于需要按需禁用特定菜单功能的场景，例如禁用搜索和翻译菜单以简化用户界面或限制对外部服务的访问。未通过该接口设置时，默认不禁用任何菜单。
    *
-   * @param { Array<TextMenuItemId> } items - menu item id to disable
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * >  - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法
+   * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先设置的disableSystemServiceMenuItems的设置结果为准。。
+   * > >
+   * > - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * > - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * > - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
+   *
+   * @param { Array<TextMenuItemId> } items - 禁用菜单项的列表。仅支持禁用系统服务菜单项（复制、剪切、全选、粘贴除外），禁用一级菜单项会同时禁用其所有二级菜单项，不支持直接禁用二级菜单项。
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

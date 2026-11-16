@@ -55,7 +55,7 @@ import uiMaterial from '../../@ohos.arkui.uiMaterial';
 import { OnScrollFrameBeginCallback } from "./scroll";
 import dragController from '../../@ohos.arkui.dragController';
 /**
- * Define the ratio of characters entered by the the percentage of InputCounterOptions.
+ * 计数器的配置项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -63,22 +63,9 @@ import dragController from '../../@ohos.arkui.dragController';
  */
 export declare interface InputCounterOptions {
     /**
-     * It is the numerator bit of the percentage and used as a threshold. If the number of characters input
-     * reaches the maximum number of characters multiplied by this threshold, the counter is displayed.
-     *
-     * <p><strong>NOTE</strong>:
-     * <br>Threshold percentage for displaying the character counter.
-     * <br>The character counter is displayed when the number of characters that have been entered is greater than
-     * the maximum number of characters multiplied by the threshold percentage value.
-     * <br>When displayed, the character counter is in the following format:
-     * <br>Number of characters that have been entered/Maximum number of characters allowed.
-     * <br>It is visible when the number of characters entered is greater than
-     * the character limit multiplied by the threshold percentage value.
-     * <br>Value range: [1, 100]
-     * <br>If the value is not an integer, it is rounded down to the nearest integer.
-     * <br>If the value exceeds the valid value range, the character counter is not displayed.
-     * <br>If the value is <em>undefined</em>, the character counter is displayed, but this parameter has no effect.
-     * </p>
+     * thresholdPercentage是可输入字符数占最大字符限制的百分比值。字符计数器显示的样式为当前输入字符数/最大字符数。当输入字符数大于最大字符数乘百分比值时，显示字符计数器。
+     * thresholdPercentage值的有效
+     * 值区间为[1,100]，数值为小数时，向下取整，如果设置的number超出有效值区间内，不显示字符计数器。thresholdPercentage设置为undefined，显示字符计数器，但此参数不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -86,17 +73,9 @@ export declare interface InputCounterOptions {
      */
     thresholdPercentage?: double;
     /**
-     * If the current input character count reaches the maximum character count and users want to exceed the
-     * normal input, the border will turn red. If this parameter is true, the red border displayed.
-     *
-     * <p><strong>NOTE</strong>:
-     * <br>Whether to highlight the text box border and character counter subscript in red.
-     * <br>If options is not set, the text box border and character counter subscript turn red
-     * <br>when the number of characters entered reaches the limit.
-     * <br>If the character counter is displayed and thresholdPercentage is set to a valid value,
-     * the text box border and character counter subscript turn red when the number of entered characters exceeds the limit.
-     * <br>The value true (default) means to highlight the text box border and character counter subscript in red.
-     * </p>
+     * 如果用户设置计数器时不设置InputCounterOptions，那么当前输入字符数达到最大字符数时，边框和计数器下标将变为红色。如果用户设置显示字符计数器同时thresholdPercentage参数数值在有效区间内，
+     * 那么当输入
+     * 字符数超过最大字符数时，边框和计数器下标将变成红色。如果此参数为true，则显示红色边框，参数为false则不显示。
      *
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -105,8 +84,10 @@ export declare interface InputCounterOptions {
      */
     highlightBorder?: boolean;
     /**
-     * It is the color of counter when textField hasn't wanted to exceed the maximum character count.
-     * 
+     * 设置组件中字符计数器的文本颜色。当用户输入字符数大于最大字符数乘百分比值时，计数器会显示当前输入的字符数，并且计数器的文本颜色为counterTextColor指定的颜色。如果不设置counterTextColor，
+     * 则计数器的文本
+     * 颜色为默认颜色，默认颜色为灰色。
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 24 static
@@ -114,8 +95,12 @@ export declare interface InputCounterOptions {
     counterTextColor?: ColorMetrics
 
     /**
-     * It is the color of counter when textField wants to exceed the maximum character count.
-     * 
+     * 设置组件中字符计数器在溢出时的文本颜色。当用户输入的字符数超过计数器最大长度时，计数器的文本颜色和边框的颜色会切换为counterTextOverflowColor指定的颜色，以提醒用户输入已超出限制。
+     * 如果不设置counterTe
+     * xtOverflowColor，则计数器和边框在溢出时的文本颜色为默认颜色，默认颜色为红色。
+     * **说明：**
+     * 当设置了[InputCounterOptions]{@link InputCounterOptions}的highlightBorder属性时，边框颜色才会被同步更改。
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 24 static
@@ -123,7 +108,7 @@ export declare interface InputCounterOptions {
     counterTextOverflowColor?: ColorMetrics
 }
 /**
- * Defines the options of decoration.
+ * 文本装饰线的配置项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -131,7 +116,7 @@ export declare interface InputCounterOptions {
  */
 export declare interface TextDecorationOptions {
     /**
-     * The decoration type.
+     * 文本装饰线类型。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -139,7 +124,8 @@ export declare interface TextDecorationOptions {
      */
     type: TextDecorationType | undefined;
     /**
-     * Sets the color of decoration.
+     * 文本装饰线颜色。
+     * 默认值：Color.Black。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -147,7 +133,8 @@ export declare interface TextDecorationOptions {
      */
     color?: ResourceColor;
     /**
-     * The style value of decoration.
+     * 文本装饰线样式。
+     * 默认值：TextDecorationStyle.SOLID。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -155,7 +142,8 @@ export declare interface TextDecorationOptions {
      */
     style?: TextDecorationStyle;
     /**
-     * The scale value of decoration thickness.
+     * 文本装饰线的粗细缩放比例。
+     * 取值约束：负值按默认值处理。默认值：1。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4285,7 +4273,7 @@ export declare enum ShadowStyle {
     OUTER_FLOATING_MD = 5
 }
 /**
- * Defines the options of Shadow.
+ * 投影样式参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4293,11 +4281,10 @@ export declare enum ShadowStyle {
  */
 export declare interface MultiShadowOptions {
     /**
-     * Shadow blur radius.
-     * Unit: vp.
-     * <p>**NOTE**:
-     * <br>A value less than or equal to 0 is handled as the default value.
-     * </p>
+     * 投影模糊半径。
+     * API version 10及以前，5；API version 11及以后，。
+     * 单位为：vp。取值约束：(0, +∞)。默认值：20。
+     * <br>设置小于等于0的值时，按默认值显示。
      *
      * @default 20
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4306,8 +4293,8 @@ export declare interface MultiShadowOptions {
      */
     radius?: double | Resource;
     /**
-     * Offset on the x-axis.
-     * Unit: vp.
+     * X轴偏移量。
+     * 单位为：vp。默认值：5。
      *
      * @default 5
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4316,8 +4303,8 @@ export declare interface MultiShadowOptions {
      */
     offsetX?: double | Resource;
     /**
-     * Offset on the y-axis.
-     * Unit: vp.
+     * Y轴偏移量。
+     * 单位为：vp。默认值：5。
      *
      * @default 5
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15230,7 +15217,7 @@ export declare interface CaretOffset {
     y: int;
 }
 /**
- * Defines the span options of TextContentController.
+ * 用于设置输入框插入字符时的配置选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -15238,7 +15225,11 @@ export declare interface CaretOffset {
  */
 export declare interface TextContentControllerOptions {
     /**
-     * the offset that add a text at.
+     * 插入文本的位置，取值范围[0, 文本长度]。超出范围时自动修正到有效边界位置。
+     *
+     * > **说明：**
+     * >
+     * > 当需要在指定位置（而非末尾）插入文本时传入此参数。不传入时默认插入到文本末尾。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15255,91 +15246,119 @@ export declare interface TextContentControllerOptions {
  */
 export declare abstract class TextContentControllerBase {
     /**
-     * Get the index and relative position of the CaretOffset.
+     * 返回当前光标所在位置信息。
      *
-     * <p><strong>NOTE</strong>:
-     * <br>If this API is called when the caret position is updated in the current frame, it will not take effect.
-     * <br>For the Search component, the returned position information is the offset of the first character
-     * relative to the search icon in the component.
-     * <br>If no text is entered in the Search component,
-     * the return value contains the position information relative to the component.
-     * <br>The location information in the return value is the location of the caret relative to the editable component.
-     * </p>
+     * > **说明**
+     * >
+     * > - 在当前帧更新光标位置同时调用该接口，该接口不生效。
+     * >
+     * > - 在Search组件中，返回的位置信息是相对Search组件中搜索图标的偏移值。
+     * >
+     * > - 在Search组件中，不输入文本时，返回值中有相对Search组件的位置信息。
+     * >
+     * > - 返回值中的位置信息是光标相对于可编辑组件的位置。
+     * >
+     * > - 当无法获取光标位置时（例如[TextInputController]{@link TextInputController}未与[TextInput]{@link @global:TextInput}组件绑定时），
+     * 该接口返回undefined。
      *
-     * @returns { CaretOffset | undefined } index and relative position of the CaretOffset.
+     * @returns { CaretOffset | undefined } 光标相对输入框的位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getCaretOffset(): CaretOffset | undefined;
     /**
-     * Get the start and end positions of the text content.
+     * 获取已编辑文本内容区域相对于组件的位置和大小，返回值的单位为像素。
+     * > **说明**
+     * > - 初始不输入文本时，返回值中有相对组件的位置信息，大小为0。
+     * > - 返回值中的位置信息是第一个字符相对于可编辑组件的位置。
+     * > - 在Search组件中，返回的位置信息是相对Search组件中搜索图标的偏移值。
+     * > - 有输入时，返回信息中的宽度是组件编辑区域的固定宽度。
      *
-     * <p><strong>NOTE</strong>:
-     * <br>If no text is entered, the return value contains the position information, but the size is 0.
-     * <br>The position information is the offset of the first character relative to the editable area.
-     * <br>For the Search component, the returned position information is the offset of the first character
-     * relative to the search icon in the component.
-     * <br>If there is input, the width in the return value is the fixed width of the editable area.
-     * </p>
-     *
-     * @returns { RectResult | undefined } Text content rect.The unit of the return value is pixel.
+     * @returns { RectResult | undefined } 获取已编辑文本内容区域相对组件的位置和大小。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getTextContentRect(): RectResult | undefined;
     /**
-     * Get the lines number of the text content.
-     * The getTextContentLineCount type is used to obtain the number of lines of the edited text.
+     * 获取已编辑文本内容的行数。
      *
-     * @returns { int | undefined } Text content line count
+     * @returns { int | undefined } 已编辑文本内容行数。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getTextContentLineCount(): int | undefined;
     /**
-     * Add a text.
+     * 在已编辑文本的指定位置插入文本，默认插入至文本末尾。
      *
-     * @param { string } text - text value.
-     * @param { TextContentControllerOptions } [textOperationOptions] - operation info.
-     * @returns { int | undefined } caret index
+     * 拖拽文本的状态下不生效。
+     *
+     * `addText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑。预上屏状态由输入法管理，应用层调用`addText`/`deleteText`会破坏输入法的状态管理，因此应避免在预上屏状态下调用`addText`。
+     *
+     * > **说明**
+     * >
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+     *
+     * @param { string } text - 插入的文本内容。
+     * @param { TextContentControllerOptions } [textOperationOptions] - 插入文本的配置选项，用于自定义插入位置等参数。
+     * @returns { int | undefined } 插入文本后光标的位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     addText(text: string, textOperationOptions?: TextContentControllerOptions): int | undefined;
     /**
-     * Set the styled placeholder.
+     * 触发属性字符串的绑定或更新。
      *
-     * @param { StyledString } styledString - The styledString for placeholder.
-     *     If the parameter is invalid, this method will have no effect.
+     * > **说明：**
+     * >
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+     *
+     * @param { StyledString } styledString - 设置属性字符串样式的Placeholder，其优先级高于纯文本的placeholder属性。<br>Placeholder不支持属性字符串事件手势，
+     * 超链接跳转。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     setStyledPlaceholder(styledString: StyledString): void;
     /**
-     * Delete text in TextRange.
+     * 删除已编辑文本的指定区域的内容。
      *
-     * @param { TextRange } [range] - range for deleting.
+     * 拖拽文本的状态下不生效。
+     *
+     * `deleteText`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑。预上屏状态由输入法管理，应用层调用`addText`/`deleteText`会破坏输入法的状态管理，
+     * 因此应避免在预上屏状态下调用`deleteText`。
+     *
+     * > **说明**
+     * >
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+     * > **与[deleteBackward]{@link TextContentControllerBase#deleteBackward}的差异：**
+     * > - deleteText支持范围删除，可删除任意指定区域的文本；deleteBackward模拟用户删除操作，删除光标前一个字符或已选中文本。
+     * > - deleteText在预上屏状态下应避免调用，deleteBackward在预上屏场景下不支持使用。
+     * > - 建议根据删除需求选择：需要删除指定范围文本时使用deleteText，需要删除光标前字符时使用deleteBackward。
+     *
+     * @param { TextRange } [range] - 删除文本的范围，包括删除文本的起始位置和终止位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     deleteText(range?: TextRange): void;
     /**
-     * Gets the selected range of text content.
+     * 返回当前文本的选择范围。
      *
-     * @returns { TextRange | undefined } range for selecting.
+     * @returns { TextRange | undefined } 文本当前的选择范围，未选中返回光标位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     getSelection(): TextRange | undefined;
     /**
-     * Clear the content of preview.
+     * 通知输入法清除当前的预上屏文本内容。
+     *
+     * > **说明**
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15347,10 +15366,14 @@ export declare abstract class TextContentControllerBase {
      */
     clearPreviewText(): void;
     /**
-     * Gets the text content of the selected range.
+     * 获取指定范围的文本内容。可用于以下场景：
+     * - 文本编辑器中获取用户选中的文本内容进行处理。
+     * - 内容校验时获取特定范围的文本进行检查。
+     * - 文本处理应用中提取部分文本内容进行分析或转换。
      *
-     * @param { TextRange } [range] - selected range.
-     * @returns { string | undefined } text content of the selected range.
+     * @param { TextRange } [range] - 获取文本的范围，包括需要获取文本的起始位置和终止位置。<br>
+     * 未指定范围时，默认将获取全部文本。未指定获取文本的起始位置，则默认从下标0开始；未指定获取文本的终止位置，则默认以文本末尾作为结束点。
+     * @returns { string | undefined } 指定范围的文本内容。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @systemapi
      * @stagemodelonly
@@ -15359,7 +15382,14 @@ export declare abstract class TextContentControllerBase {
     getText(range?: TextRange): string | undefined;
 
     /**
-     * Delete the last character of the input field component.
+     * 删除基础控制器`controller`绑定的文本输入框内文本光标前的一个字符。如果在调用此功能前已用鼠标或键盘选中了部分文本，则会删除被选中的文本。
+     *
+     * 拖拽文本的状态下不生效。
+     *
+     * `deleteBackward`仅影响应用内部的UI表现，不影响输入法应用的内部逻辑，不支持在预上屏场景下使用。
+     *
+     * > **说明**
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15368,9 +15398,12 @@ export declare abstract class TextContentControllerBase {
     deleteBackward(): void;
 
     /**
-     * Scroll the input field component to make the specified content visible.
-     * @param { TextRange } [range] - The visible range.
-     *     If the parameter is invalid, this method will have no effect.
+     * 将起始索引与结束索引传递给与其绑定的输入框（TextInput、TextArea、Search）组件，并将此范围内的文字滚动到可视区域。
+     *
+     * > **说明**
+     * > 当controller未绑定组件或绑定controller的组件被释放时，该接口不生效。
+     *
+     * @param { TextRange } [range] - 滚动到可视区域的文本范围，包括文本起始位置和终止位置。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -16862,7 +16895,7 @@ export declare enum HoverModeAreaType {
     BOTTOM_SCREEN = 1
 }
 /**
- * Defines a range of dates.
+ * 日期区间，用于描述起止日期区间。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16870,7 +16903,7 @@ export declare enum HoverModeAreaType {
  */
 export declare interface DateRange {
     /**
-     * Defines the start date of the date range.
+     * 设置日期区间的开始日期，应不晚于结束日期。不传入、日期格式错误、日期超出系统支持范围或start晚于end时，该日期区间无效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16878,7 +16911,7 @@ export declare interface DateRange {
      */
     start?: Date;
     /**
-     * Defines the end date of the date range.
+     * 设置日期区间的结束日期。不传入、日期格式错误、日期超出系统支持范围或end早于start时，该日期区间无效。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

@@ -1850,7 +1850,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for LoadingProgress.
+   * LoadingProgress类型的FrameNode节点类型。不允许添加子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2208,7 +2208,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Progress.
+   * Progress类型的FrameNode节点类型。不允许添加子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2341,7 +2341,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for TextClock.
+   * TextClock类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2350,10 +2350,10 @@ export declare namespace typeNode {
   type TextClock = TextClockFrameNode;
 
   /**
-   * Create a FrameNode of TextClock type.
+   * 创建TextClock类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { TextClock } - Return TextClock type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { TextClock } TextClock类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2382,7 +2382,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for TextTimer.
+   * TextTimer类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2391,10 +2391,10 @@ export declare namespace typeNode {
   type TextTimer = TextTimerFrameNode;
 
   /**
-   * Create a FrameNode of TextTimer type.
+   * 创建TextTimer类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { TextTimer } - Return TextTimer type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { TextTimer } TextTimer类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2690,7 +2690,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Text.
+   * Text类型的FrameNode节点类型。不允许添加子组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2758,7 +2758,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Search.
+   * Search类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2767,10 +2767,10 @@ export declare namespace typeNode {
   type Search = SearchFrameNode;
 
   /**
-   * Create a FrameNode of Search type.
+   * 创建Search类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Search } - Return Search type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { Search } Search类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2799,7 +2799,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for TextInput.
+   * TextInput类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2867,7 +2867,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for TextArea.
+   * TextArea类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2935,7 +2935,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for SymbolGlyph.
+   * SymbolGlyph类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2944,10 +2944,10 @@ export declare namespace typeNode {
   type SymbolGlyph = SymbolGlyphFrameNode;
 
   /**
-   * Create a FrameNode of SymbolGlyph type.
+   * 创建SymbolGlyph类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { SymbolGlyph } - Return SymbolGlyph type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { SymbolGlyph } SymbolGlyph类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2976,7 +2976,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for QRCode.
+   * QRCode类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2985,10 +2985,10 @@ export declare namespace typeNode {
   type QRCode = QRCodeFrameNode;
 
   /**
-   * Create a FrameNode of QRCode type.
+   * 创建QRCode类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { QRCode } - Return QRCode type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { QRCode } QRCode类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3028,7 +3028,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Badge.
+   * Badge类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3037,10 +3037,10 @@ export declare namespace typeNode {
   type Badge = BadgeFrameNode;
 
   /**
-   * Create a FrameNode of Badge type.
+   * 创建Badge类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Badge } - Return Badge type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { Badge } Badge类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3069,7 +3069,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Marquee.
+   * Marquee类型的FrameNode节点类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3078,10 +3078,10 @@ export declare namespace typeNode {
   type Marquee = MarqueeFrameNode;
 
   /**
-   * Create a FrameNode of Marquee type.
+   * 创建Marquee类型的FrameNode节点。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Marquee } - Return Marquee type FrameNode.
+   * @param { UIContext } context - 创建对应节点时所需的UI上下文。
+   * @returns { Marquee } Marquee类型的FrameNode节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

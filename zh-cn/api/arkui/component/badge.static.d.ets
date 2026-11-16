@@ -34,7 +34,7 @@ import { AttributeModifier } from "./common";
  */
 export declare enum BadgePosition {
     /**
-     * The badge is displayed in the upper right corner of the parent component.
+     * 标记显示在右上角。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -42,7 +42,7 @@ export declare enum BadgePosition {
      */
     RightTop,
     /**
-     * The badge is vertically centered on the right of the parent component.
+     * 标记显示在右侧纵向居中。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -50,7 +50,7 @@ export declare enum BadgePosition {
      */
     Right,
     /**
-     * The badge is vertically centered on the left of the parent component.
+     * 标记显示在左侧纵向居中。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
