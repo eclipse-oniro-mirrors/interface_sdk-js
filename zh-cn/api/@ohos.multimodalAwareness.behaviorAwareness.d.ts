@@ -822,7 +822,7 @@ declare namespace behaviorAwareness {
     recurrence: RecurrenceType;
     /**
      * 星期几（适用于每周重复）。
-     * 取值应为[1,7]内的整数。默认值：默认值为0。
+     * 取值范围：[1,7]。取值应为[1,7]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -831,8 +831,8 @@ declare namespace behaviorAwareness {
      */
     dayOfWeek?: int;
     /**
-     * 月中的第几天（适用于每月重复）。取值范围：1~31。
-     * 单位为：天。取值应为[1,31]内的整数。默认值：默认值为0。
+     * 月中的第几天（适用于每月重复）。取值范围：[1,31]。
+     * 取值应为[1,31]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -853,7 +853,7 @@ declare namespace behaviorAwareness {
   export interface Coordinates {
     /**
      * 纬度。
-     * 单位为：度。取值范围：[-90,90]。
+     * 单位：degree。取值范围：[-90,90]。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -863,7 +863,7 @@ declare namespace behaviorAwareness {
     latitude: double;
     /**
      * 经度。
-     * 单位为：度。取值范围：[-180,180]。
+     * 单位：degree。取值范围：[-180,180]。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -893,7 +893,7 @@ declare namespace behaviorAwareness {
     kind: 'location';
     /**
      * 位置类型（预定义位置，可选）。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -902,7 +902,7 @@ declare namespace behaviorAwareness {
     locationType?: LocationType;
     /**
      * 位置名称。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -910,7 +910,7 @@ declare namespace behaviorAwareness {
      */
     locationName?: string;
     /**
-     * 经纬度坐标。纬度取值范围：-90~90；经度取值范围：-180~180。
+     * 经纬度坐标。纬度取值范围：[-90,90]；经度取值范围：[-180,180]。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -940,7 +940,7 @@ declare namespace behaviorAwareness {
     kind: 'systemEvent';
     /**
      * 应用包名（应用类事件）。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -949,6 +949,7 @@ declare namespace behaviorAwareness {
     packageName?: string;
     /**
      * 应用名称。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -958,6 +959,7 @@ declare namespace behaviorAwareness {
     appName?: string;
     /**
      * 应用 ID（应用类事件）。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -967,7 +969,7 @@ declare namespace behaviorAwareness {
     appId?: string;
     /**
      * 单次使用时长阈值。
-     * 单位为：分钟。取值限定为整数。默认值：默认值为0。
+     * 单位：min。取值限定为整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -977,7 +979,7 @@ declare namespace behaviorAwareness {
     durationThreshold?: int;
     /**
      * 日使用时长阈值（应用时长事件）。
-     * 单位为：分钟。取值应为[0,1440]内的整数。默认值：默认值为0。
+     * 单位：min。取值应为[0,1440]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -987,7 +989,7 @@ declare namespace behaviorAwareness {
     dailyDurationThreshold?: int;
     /**
      * 电池阈值。
-     * 单位为：百分比。取值应为[0,100]内的整数。默认值：默认值为0。
+     * 单位：%。取值应为[0,100]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -997,7 +999,7 @@ declare namespace behaviorAwareness {
     batteryThreshold?: int;
     /**
      * 电池百分比。
-     * 单位为：百分比。取值应为[0,100]内的整数。默认值：默认值为0。
+     * 单位：%。取值应为[0,100]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1007,7 +1009,7 @@ declare namespace behaviorAwareness {
     level?: int;
     /**
      * 蓝牙设备类型（蓝牙类事件）。
-     * 默认值：默认值为0。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1017,7 +1019,7 @@ declare namespace behaviorAwareness {
     bluetoothDeviceType?: BluetoothDeviceType;
     /**
      * 蓝牙设备名称。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -1055,7 +1057,7 @@ declare namespace behaviorAwareness {
     operation: Operation;
     /**
      * 应用包名。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -1073,7 +1075,7 @@ declare namespace behaviorAwareness {
     appName?: string;
     /**
      * 调节方向（brightness/volume 增量调节时用）。
-     *
+     * 默认值：空。
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -1082,7 +1084,7 @@ declare namespace behaviorAwareness {
     adjustment?: AdjustmentDirection;
     /**
      * 绝对值表示亮度或音量的固定值。
-     * 单位为：占比。取值应为[0,100]内的整数。默认值：默认值为0。
+     * 单位：%。取值应为[0,100]内的整数。默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1092,6 +1094,7 @@ declare namespace behaviorAwareness {
     value?: int;
     /**
      * 声音模式。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1139,7 +1142,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * 发生时间戳。
-     * 单位为：毫秒。
+     * 单位：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1149,7 +1152,7 @@ declare namespace behaviorAwareness {
     timestamp: long;
     /**
      * 附加参数。
-     * 默认值：不带附加参数。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1159,6 +1162,7 @@ declare namespace behaviorAwareness {
     params?: Record<string, string | int | boolean>;
     /**
      * 场景属性。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1178,7 +1182,8 @@ declare namespace behaviorAwareness {
    */
   export interface ActionData {
     /**
-     * 动作 ID（特定前缀格式）。
+     * 动作 ID。取值为 onPerception 回调入参中 PerceptionEvent 的 perceptionEventId，
+     * 调用 submitFeedback 时需传入该值。前缀为 habitAwareness_。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1206,7 +1211,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * 附加参数。
-     * 默认值：不带附加参数。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1216,6 +1221,7 @@ declare namespace behaviorAwareness {
     params?: Record<string, string | int | boolean>;
     /**
      * 场景属性。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1292,7 +1298,7 @@ declare namespace behaviorAwareness {
     domain: PerceptionDomain;
     /**
      * 置信度，0表示无置信度，100表示置信度完全置信。
-     * 单位为：百分比。取值应为[0,100]内的整数。
+     * 单位：%。取值应为[0,100]内的整数。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1302,7 +1308,7 @@ declare namespace behaviorAwareness {
     confidence: int;
     /**
      * 生成时间戳。
-     * 单位为：毫秒。
+     * 单位：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1341,7 +1347,7 @@ declare namespace behaviorAwareness {
     domain: PerceptionDomain;
     /**
      * 子类型过滤（可选，不填则订阅该领域下所有模式）。
-     * 默认值：不设置过滤，订阅该领域下所有子类型。
+     * 默认值：空。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1380,7 +1386,7 @@ declare namespace behaviorAwareness {
     feedbackType: FeedbackType;
     /**
      * 反馈时间戳。
-     * 单位为：毫秒。
+     * 单位：ms。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
