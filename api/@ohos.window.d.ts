@@ -1575,6 +1575,63 @@ declare namespace window {
   }
 
   /**
+   * Avoid area insets of the window.
+   *
+   * The avoid area insets indicate the distances that the window content needs to avoid in the four directions(up,
+   * down, left, and right) due to the existence of the [avoid area]{@link window.AvoidArea}.
+   *
+   * > **NOTE**
+   * >
+   * > The calculation of the avoid area insets does not include the avoid area of the
+   * > [TYPE_KEYBOARD]{@link window.AvoidAreaType} type.
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AvoidAreaInsets {
+    /**
+     * Distance to avoid from the top of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * Distance to avoid from the left of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * Distance to avoid from the right of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    right: int;
+
+    /**
+     * Distance to avoid from the bottom of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bottom: int;
+  }
+
+  /**
    * Describes the information about the window avoidance area in units of vp, which requires careful attention during
    * [immersive layout](docroot://windowmanager/window-terminology.md#immersive-layout) adaptation.
    *
@@ -8517,6 +8574,62 @@ declare namespace window {
      * @since 23 static
      */
     offAvoidAreaChange(callback?: Callback<AvoidAreaOptions>): void;
+
+    /**
+     * Obtains the avoid area insets of the current window.
+     *
+     * @returns { AvoidAreaInsets } Avoid area insets.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAvoidAreaInsets(): AvoidAreaInsets;
+
+    /**
+     * Subscribes to the change event of the avoid area insets of a window.
+     *
+     * The callback is triggered when the avoid area of the window changes.
+     * If multiple avoid areas change at the same time, the callback is triggered only once after the related avoid area
+     * information is updated.
+     *
+     * > **NOTE**
+     * >
+     * > You can call [getAvoidAreaInsets]{@link window.Window#getAvoidAreaInsets} in the callback to obtain
+     * > the latest avoid area insets of the window, or use
+     * > [getWindowAvoidArea]{@link window.Window#getWindowAvoidArea} to obtain the avoid area of a specified type.
+     * >
+     * > Changes in the avoid area of the [TYPE_KEYBOARD]{@link window.AvoidAreaType} type do not trigger the callback.
+     *
+     * @param { Callback<void> } callback - Callback function.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onAvoidAreaInsetsChange(callback: Callback<void>): void;
+
+    /**
+     * Unsubscribes from the change event of the avoid area insets of a window.
+     *
+     * @param { Callback<void> } [callback] - Callback function. If a value is passed in, the corresponding listener
+     *     is disabled. If no value is passed in, all listeners for
+     *     the change event are disabled. The default value is **undefined**.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offAvoidAreaInsetsChange(callback?: Callback<void>): void;
 
     /**
      * Subscribes to the event indicating soft keyboard height changes in the fixed state. The system notifies the
