@@ -403,7 +403,7 @@ export interface AbilityFormInfo {
 
   /**
    * Indicates the time for scheduled refresh of the card, in 24-hour format and accurate to the minute. This parameter
-   * and the periodic refresh parameter are mutually exclusive. If both are configured, the scheduled refresh takes
+   * and the periodic refresh parameter are mutually exclusive. If both are configured, the periodic refresh takes
    * precedence.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.FreeInstall
@@ -416,7 +416,7 @@ export interface AbilityFormInfo {
   /**
    * Indicates the update frequency for periodic refresh of the card, in minutes. The value must be a multiple of 30.
    * The maximum refresh frequency of the card is once every 30 minutes. This parameter and the scheduled refresh
-   * parameter are mutually exclusive. If both are configured, the scheduled refresh takes precedence.
+   * parameter are mutually exclusive. If both are configured, the periodic refresh takes precedence.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.FreeInstall
    * @systemapi
