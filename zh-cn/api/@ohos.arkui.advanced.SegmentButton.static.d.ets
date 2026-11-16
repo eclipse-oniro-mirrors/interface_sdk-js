@@ -334,11 +334,11 @@ interface SegmentButtonIconTextItem {
 /**
  * 不支持百分比类型的长度的联合类型。
  *
- * @unionmember { PX }
- * @unionmember { VP }
- * @unionmember { FP }
- * @unionmember { LPX }
- * @unionmember { Resource }
+ * @unionmember { PX } 长度类型，用于描述以px为单位的长度。
+ * @unionmember { VP } 长度类型，用于描述以vp为单位的长度。
+ * @unionmember { FP } 长度类型，用于描述以fp为单位的长度。
+ * @unionmember { LPX } 长度类型，用于描述以lpx为单位的长度。
+ * @unionmember { Resource } 资源引用类型，用于设置组件属性的值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -728,9 +728,9 @@ declare type ItemRestriction<T> = Array<T>;
 /**
  * 用于保存按钮信息的元组的联合类型。
  *
- * @unionmember { ItemRestriction<SegmentButtonTextItem> }
- * @unionmember { ItemRestriction<SegmentButtonIconItem> }
- * @unionmember { ItemRestriction<SegmentButtonIconTextItem> }
+ * @unionmember { ItemRestriction<SegmentButtonTextItem> } 仅文本按钮信息的元组。
+ * @unionmember { ItemRestriction<SegmentButtonIconItem> } 仅图标按钮信息的元组。
+ * @unionmember { ItemRestriction<SegmentButtonIconTextItem> } 图标+文本按钮信息的元组。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -1139,7 +1139,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > SegmentButton是仅支持显示2到5个按钮的分段按钮组件，同时SegmentButtonItemOptionsArray也只保存这2到5个按钮的具体信息，当超过按钮信息个数限制此方法无效。
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 被添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 被添加的第一个按钮信息。
    * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - 被添加的第二个按钮信息。
    * @returns { int } 添加元素后数组的长度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1159,9 +1159,9 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > SegmentButton是仅支持显示2到5个按钮的分段按钮组件，同时SegmentButtonItemOptionsArray也只保存这2到5个按钮的具体信息，当超过按钮信息个数限制此方法无效。
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 被添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 被添加的第一个按钮信息。
    * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - 被添加的第二个按钮信息。
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - 被添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - 被添加的第三个按钮信息。
    * @returns { int } 添加元素后数组的长度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1181,7 +1181,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > 分段按钮组件数组仅支持保存2到5个按钮信息，若移除后按钮组件数量不在个数限制范围内，移除按钮信息元素失败。
    *
-   * @returns { SegmentButtonItemOptions | undefined } Returns the removed element.
+   * @returns { SegmentButtonItemOptions | undefined } 被移除的元素。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1196,7 +1196,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > 分段按钮组件数组仅支持保存2到5个按钮信息，若移除后按钮组件数量不在个数限制范围内，移除按钮信息元素失败。
    *
-   * @returns { SegmentButtonItemOptions | undefined } Returns the removed element.
+   * @returns { SegmentButtonItemOptions | undefined } 被移除的元素。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1227,7 +1227,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > 分段按钮组件数组仅支持保存2到5个按钮信息，若超过分段按钮组件数量个数的限制，添加按钮信息元素失败。
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 添加的第一个按钮信息。
    * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - 添加的第二个按钮信息。
    * @returns { int } 添加元素后数组的长度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1248,9 +1248,9 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * >
    * > SegmentButton是仅支持显示2到5个按钮的分段按钮组件，同时SegmentButtonItemOptionsArray也只保存这2到5个按钮的具体信息，当超过按钮信息个数限制此方法无效。
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - 添加的第一个按钮信息。
    * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - 添加的第二个按钮信息。
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - 添加的第二个按钮信息。
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - 添加的第三个按钮信息。
    * @returns { int } 添加元素后数组的长度。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1273,7 +1273,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * @param { int } start - 删除元素的起始位置。
    * @param { int } deleteCount - 删除元素的数量。
    * @param { SegmentButtonItemOptions[] } items - 从start开始要加入到数组中的元素。<br>默认值：不指定任何元素，将从数组中删除元素。
-   * @returns { SegmentButtonItemOptions[] } Returns a SegmentButtonItemOptions array containing the deleted elements.
+   * @returns { SegmentButtonItemOptions[] } 返回包含了被删除的元素的数组。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
