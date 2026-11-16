@@ -28,7 +28,8 @@ import { FunctionHook, InvokeFunctionParam, FunctionResultWrap } from './applica
  *
  * @namespace functionManager
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.1]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -38,7 +39,8 @@ declare namespace functionManager {
    * Function调用的可选参数。包含Function调用时的应用上下文信息。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -46,7 +48,8 @@ declare namespace functionManager {
     /**
      * 执行Function调用时的应用上下文信息。<br>说明：目前仅支持[UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}。
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -56,7 +59,8 @@ declare namespace functionManager {
      * 工具调用的唯一标识，由Agent分配。取值由字母、数字、'_'和'-'组成，最大长度为256。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.1 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
      */
@@ -66,7 +70,8 @@ declare namespace functionManager {
      * 对话管理（DM）会话标识，唯一标识一次Agent会话。取值由字母、数字、'_'和'-'组成，最大长度为256。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.1 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
      */
@@ -77,7 +82,8 @@ declare namespace functionManager {
    * Function调用的结果。包含Function调用成功时返回的数据，调用失败时的错误码和错误信息。
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -86,7 +92,8 @@ declare namespace functionManager {
      * 调用是否成功（业务逻辑层面）。true：调用成功，data字段包含返回数据；false：调用失败，errorCode和errorMsg字段包含错误信息。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -96,7 +103,8 @@ declare namespace functionManager {
      * 调用成功时返回的数据，类型可以为任意JSON值。仅在success为true时有值。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -106,7 +114,8 @@ declare namespace functionManager {
      * 调用失败时的错误码。仅在success为false时有值。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -116,7 +125,8 @@ declare namespace functionManager {
      * 调用失败时的错误描述。仅在success为false时有值。默认值：undefined。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
-     * @systemapi
+     * @systemapi [since 26.0.0 - 26.0.1]
+     * @publicapi [since 26.1.0]
      * @stagemodelonly
      * @since 26.0.0 dynamiconly
      */
@@ -142,6 +152,22 @@ declare namespace functionManager {
   function queryFunctions(): Promise<Array<FunctionInfo>>;
 
   /**
+   * 查询公开函数（Function），使用Promise异步回调。
+   * 三方应用通过ACL授权获取权限后可调用此接口查询公开函数（Function）。
+   *
+   * @permission ohos.permission.ACCESS_PUBLIC_FUNCTION
+   * @returns { Promise<Array<FunctionInfo>> } Promise对象，返回公开函数信息列表。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function queryPublicFunctions(): Promise<Array<FunctionInfo>>;
+
+  /**
    * 根据Function命名空间和Function名称调用指定的Function，使用Promise异步回调。
    *
    * @permission ohos.permission.ACCESS_FUNCTION
@@ -164,6 +190,30 @@ declare namespace functionManager {
    * @since 26.0.0 dynamiconly
    */
   function invokeFunction(functionNamespace: string, functionName: string,
+    args: Record<string, Object>, options?: InvokeOptions): Promise<InvokeResult>;
+
+  /**
+   * 根据函数命名空间和函数名称调用公开函数（Function），使用Promise异步回调。
+   * 三方应用通过ACL授权获取权限后可调用此接口执行公开函数（Function）。
+   *
+   * @permission ohos.permission.ACCESS_PUBLIC_FUNCTION
+   * @param { string } functionNamespace - 目标函数的命名空间。
+   * @param { string } functionName - 目标函数的名称。
+   * @param { Record<string, Object> } args - 函数的输入参数。
+   * @param { InvokeOptions } [options] - 函数的调用选项。默认值：详见{@link InvokeOptions}的具体属性默认值。
+   * @returns { Promise<InvokeResult> } Promise对象，返回函数执行结果{@link InvokeResult}。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 35600050 - System Error. 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 35600060 - The function does not exist.
+   * @throws { BusinessError } 35600061 - The function execute failed.
+   * @throws { BusinessError } 35600062 - The function execute timeout.
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function invokePublicFunction(functionNamespace: string, functionName: string,
     args: Record<string, Object>, options?: InvokeOptions): Promise<InvokeResult>;
 
   /**
