@@ -116,11 +116,14 @@ declare namespace deviceStatus {
   function on(type: 'steadyStandingDetect', callback: Callback<SteadyStandingStatus>): void;
 
   /**
-   * Unsubscribes from steady standing state events.
+   * Unsubscribes from the device steady standing state (stand mode) event. It is used in scenarios where the
+   * application exits a page or no longer needs to listen for stand mode changes. Related resources are released
+   * after the call.
    *
    * @param { 'steadyStandingDetect' } type - Event type. This field has a fixed value of **steadyStandingDetect**.
-   * @param { Callback<SteadyStandingStatus> } [callback] - Callback used to return the steady standing state of the
-   *     device.
+   * @param { Callback<SteadyStandingStatus> } [callback] - Callback to unregister. It must be the same as the
+   *     callback passed during subscription. If this parameter is not specified, all callbacks currently listening
+   *     for this event are unsubscribed.
    * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
    *     <br> device capabilities.
    * @throws { BusinessError } 32500001 - Service exception.
