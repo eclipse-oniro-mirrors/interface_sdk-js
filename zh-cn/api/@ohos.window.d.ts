@@ -3206,14 +3206,14 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow(name: string)}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @param { AsyncCallback<Window> } callback - 回调函数。返回当前查找到的窗口对象。
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow(name: string)
+   * @useinstead window.findWindow
    */
   function find(id: string, callback: AsyncCallback<Window>): void;
 
@@ -3222,14 +3222,14 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow(name: string)}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，建议使用[findWindow()]{@link window.findWindow}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @returns { Promise<Window> } Promise对象。返回当前查找的窗口对象。
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow(name: string)
+   * @useinstead window.findWindow
    */
   function find(id: string): Promise<Window>;
 
@@ -7397,11 +7397,10 @@ declare namespace window {
     /**
      * 开启窗口内UIExtension安全限制变化事件的监听, 建议在窗口创建后立即监听。
      *
-     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制变
-     *     化事件。
-     * @param { Callback<boolean> } callback - 回调函数。当窗口内UIExtension安全限制变化时触发回调。当返回参数为true表示窗口内UIExtension开启了隐藏不安全窗口；当返回参
-     *     数为false表示窗口内UIExtension关闭了隐藏不安全窗口。若窗口内存在多个UIExtension，当返回参数为true表示窗口内至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗
-     *     口内所有UIExtension关闭了隐藏不安全窗口。
+     * @param { 'uiExtensionSecureLimitChange' } eventType - 监听事件，固定为'uiExtensionSecureLimitChange'，即窗口内UIExtension安全限制
+     *     变化事件。
+     * @param { Callback<boolean> } callback - 回调函数。当窗口内UIExtension安全限制变化时触发回调。当返回参数为true表示窗口内
+     *     至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗口内所有UIExtension关闭了隐藏不安全窗口。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7416,7 +7415,8 @@ declare namespace window {
     /**
      * 开启窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } callback 回调函数。当窗口内UIExtension安全限制变化时触发回调。
+     * @param { Callback<boolean> } callback - 回调函数。返回应用是否已开启UIExtension安全限制的结果。
+     *     当返回参数为true表示窗口内至少一个UIExtension开启了隐藏不安全窗口；当返回参数为false表示窗口内所有UIExtension关闭了隐藏不安全窗口。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7447,7 +7447,7 @@ declare namespace window {
     /**
      * 关闭窗口内UIExtension安全限制变化事件的监听。
      *
-     * @param { Callback<boolean> } [callback] 回调函数。若传入参数，则关闭该监听。
+     * @param { Callback<boolean> } [callback] - 回调函数。若传入参数，则关闭该监听。
      *     若未传入参数，则关闭所有窗口安全限制变化的监听。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function off('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
@@ -7878,13 +7878,13 @@ declare namespace window {
      * 
      * > **说明：**
      * >
-     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing()}替代。
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing}替代。
      *
      * @param { AsyncCallback<boolean> } callback - 回调函数。返回true表示当前窗口已显示，返回false表示当前窗口未显示。
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing()
+     * @useinstead window.Window.isWindowShowing
      */
     isShowing(callback: AsyncCallback<boolean>): void;
 
@@ -7893,13 +7893,13 @@ declare namespace window {
      * 
      * > **说明：**
      * >
-     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing()}替代。
+     * > 从API version 7开始支持，从API version 9开始废弃，建议使用[isWindowShowing()]{@link window.Window.isWindowShowing}替代。
      *
      * @returns { Promise<boolean> } Promise对象。返回true表示当前窗口已显示，返回false表示当前窗口未显示。
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing()
+     * @useinstead window.Window.isWindowShowing
      */
     isShowing(): Promise<boolean>;
 
@@ -10390,11 +10390,11 @@ declare namespace window {
     setTouchable(isTouchable: boolean, callback: AsyncCallback<void>): void;
 
     /**
-     * 设置窗口是否为可点击状态，使用Promise异步回调。
+     * 设置窗口是否为可触摸状态，使用Promise异步回调。
      * 
-     * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
+     * 当窗口处于可触摸状态时，若用户触摸命中该窗口，事件将发送给该窗口处理。当窗口处于不可触摸状态时，透传触摸事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable 窗口是否为可点击状态。true表示可点击；false表示不可点击。
+     * @param { boolean } isTouchable - 窗口是否为可触摸状态。true表示可触摸；false表示不可触摸。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10410,12 +10410,12 @@ declare namespace window {
     setWindowTouchable(isTouchable: boolean): Promise<void>;
 
     /**
-     * 设置窗口是否为可点击状态，使用callback异步回调。
+     * 设置窗口是否为可触摸状态，使用callback异步回调。
      * 
-     * 当窗口处于可点击状态时，若用户点击命中该窗口，事件将发送给该窗口处理。当窗口处于不可点击状态时，透传点击事件，传递给下层窗口。
+     * 当窗口处于可触摸状态时，若用户触摸命中该窗口，事件将发送给该窗口处理。当窗口处于不可触摸状态时，透传触摸事件，传递给下层窗口。
      *
-     * @param { boolean } isTouchable 窗口是否为可点击状态。true表示可点击；false表示不可点击。
-     * @param { AsyncCallback<void> } callback 回调函数。
+     * @param { boolean } isTouchable - 窗口是否为可触摸状态。true表示可触摸；false表示不可触摸。
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -11883,10 +11883,10 @@ declare namespace window {
     getDecorButtonStyle(): DecorButtonStyle;
 
     /**
-     * 实现设置窗口可点击区域；不设置时默认整个窗口区域可点击；设置窗口可点击区域后，区域外点击事件将被透传；如果窗口区域发生变化需要重新设置。
+     * 实现设置窗口可触摸区域；不设置时默认整个窗口区域可触摸；设置窗口可触摸区域后，区域外触摸事件将被透传；如果窗口区域发生变化需要重新设置。
      *
      * @permission ohos.permission.SET_WINDOW_TOUCH_AREAS [since 26.0.0]
-     * @param { Array<Rect> } rects - 窗口可点击区域。可点击区域最大个数不能超过10个，且范围不能超出窗口区域。
+     * @param { Array<Rect> } rects - 窗口可触摸区域。可触摸区域最大个数不能超过10个，且范围不能超出窗口区域。
      * @returns { Promise<void> } 无返回结果的Promise对象。 [since 26.0.0]
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
@@ -13598,9 +13598,9 @@ declare namespace window {
 
     /**
      * 根据当前工程中指定的页面路径为窗口加载具体页面内容，通过LocalStorage传递状态属性给加载的页面，使用callback异步回调。
-     * 
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
      *
      * @param { string } path 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。不支持相对路径写法，需与main_pages.json中的src取值保持一致。
@@ -13672,10 +13672,10 @@ declare namespace window {
     loadContent(path: string, callback: AsyncCallback<void>): void;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](../../ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用callback异步回调。
-     * 
+     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用callback异步回调。
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
      *
      * @param { string } name - 命名路由页面的名称。
@@ -13695,10 +13695,10 @@ declare namespace window {
     loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback<void>): void;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](../../ui/arkts-routing.md#命名路由)页面，使用callback异步回调。
-     * 
+     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，使用callback异步回调。
+     *
      * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
      *
      * @param { string } name - 命名路由页面的名称。
@@ -13717,12 +13717,12 @@ declare namespace window {
     loadContentByName(name: string, callback: AsyncCallback<void>): void;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](../../ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。
+     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。
      *
      * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     * 
+     *
      * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
-     * 
+     *
      * @param { string } name - 命名路由页面的名称。
      * @param { LocalStorage } [storage] - 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。
      * @returns { Promise<void> } 无返回结果的Promise对象。
@@ -13742,7 +13742,7 @@ declare namespace window {
     /**
      * 销毁WindowStage的主窗口页面内容，使用Promise异步回调。
      *
-     * @returns { Promise<void> } Promise对象，无返回结果。如果窗口状态异常，则抛出异常。
+     * @returns { Promise<void> } Promise对象，无返回结果，表示成功完成。
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -13883,9 +13883,8 @@ declare namespace window {
     /**
      * 开启点击主窗三键区的关闭按钮监听事件。
      *
-     * @param { 'windowStageClose' } eventType 固定为'windowStageClose'，即主窗口标题栏关闭按钮的点击事件。
-     * @param { Callback<void> } callback 回调函数。回调函数内部逻辑需要有boolean类型的返回值，
-     *     该返回值决定当前主窗口是否继续关闭。
+     * @param { 'windowStageClose' } eventType - 固定为'windowStageClose'，即主窗口标题栏关闭按钮的点击事件。
+     * @param { Callback<void> } callback - 回调函数。当窗口stage关闭事件发生时触发该回调。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.

@@ -3282,7 +3282,7 @@ declare namespace window {
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow(name: string)
+   * @useinstead window.findWindow
    */
   function find(id: string, callback: AsyncCallback<Window>): void;
 
@@ -3295,7 +3295,7 @@ declare namespace window {
    * @syscap SystemCapability.WindowManager.WindowManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead window.findWindow(name: string)
+   * @useinstead window.findWindow
    */
   function find(id: string): Promise<Window>;
 
@@ -7762,8 +7762,11 @@ declare namespace window {
     /**
      * UIExtension in window secure limit change callback on.
      *
-     * @param { Callback<boolean> } callback
-     *     Callback used to return the result whether the APP has UIExtension secure limit.
+     * @param { Callback<boolean> } callback -
+     *     Callback used to return the result whether the APP has UIExtension secure limit. The value **true**
+     *     means that at least one UIExtensionAbility within the window has enabled the hiding of unsafe windows, and
+     *     **false** means that all UIExtensionAbility components within the window have disabled the hiding of unsafe
+     *     windows.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function on('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -7798,7 +7801,7 @@ declare namespace window {
     /**
      * UIExtension in window secure limit change callback off.
      *
-     * @param { Callback<boolean> } [callback] Unregister the callback function.
+     * @param { Callback<boolean> } [callback] - Unregister the callback function.
      *     If not provided, all callbacks for the given event type will be removed.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Function off('uiExtensionSecureLimitChange') cannot work correctly due to limited device capabilities.
@@ -8271,7 +8274,7 @@ declare namespace window {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing()
+     * @useinstead window.Window.isWindowShowing
      */
     isShowing(callback: AsyncCallback<boolean>): void;
 
@@ -8283,7 +8286,7 @@ declare namespace window {
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @since 7 dynamiconly
      * @deprecated since 9
-     * @useinstead window.Window.isWindowShowing()
+     * @useinstead window.Window.isWindowShowing
      */
     isShowing(): Promise<boolean>;
 
@@ -10917,7 +10920,7 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses a promise to return the result.
      *
-     * @param { boolean } isTouchable Whether the window is touchable. **true** if touchable, **false** otherwise.
+     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -10935,8 +10938,8 @@ declare namespace window {
     /**
      * Sets whether this window is touchable. This API uses an asynchronous callback to return the result.
      *
-     * @param { boolean } isTouchable Whether the window is touchable. **true** if touchable, **false** otherwise.
-     * @param { AsyncCallback<void> } callback Callback used to return the result.
+     * @param { boolean } isTouchable - Whether the window is touchable. **true** if touchable, **false** otherwise.
+     * @param { AsyncCallback<void> } callback - Callback used to return the result.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
@@ -14526,9 +14529,9 @@ declare namespace window {
     loadContent(path: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads the content of a [named route](../../ui/arkts-routing.md#named-route) page to this window, and transfers
-     *     the state attribute to the page through a local storage. This API uses an asynchronous callback to return
-     *     the result.
+     * Loads the content of a [named route](docroot://ui/arkts-routing.md#named-route) page to this window, and
+     *     transfers the state attribute to the page through a local storage. This API uses an asynchronous callback to
+     *     return the result.
      * You are advised to call this API during UIAbility startup. If called repeatedly, this API will destroy the
      *     existing page content (UIContent) before loading the new content. Exercise caution when using it.
      * The execution context of the current UI may be unclear. Therefore, you are advised not to perform UI-related
@@ -14551,7 +14554,7 @@ declare namespace window {
     loadContentByName(name: string, storage: LocalStorage, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads the content of a [named route](../../ui/arkts-routing.md#named-route) page to this window.
+     * Loads the content of a [named route](docroot://ui/arkts-routing.md#named-route) page to this window.
      *     This API uses an asynchronous callback to return the result.
      * You are advised to call this API during UIAbility startup. If called repeatedly, this API will destroy
      *     the existing page content (UIContent) before loading the new content. Exercise caution when using it.
@@ -14597,7 +14600,6 @@ declare namespace window {
      * This API uses a promise to return the result.
      *
      * @returns { Promise<void> } Promise that returns no value, indicating successful completion.
-     *     Throws exception if window state is abnormal.
      * @throws { BusinessError } 1300002 - This window state is abnormal.
      *     Possible cause: The window is not created or destroyed.
      * @syscap SystemCapability.WindowManager.WindowManager.Core
@@ -14747,10 +14749,9 @@ declare namespace window {
     /**
      * Window stage close callback on.
      *
-     * @param { 'windowStageClose' } eventType The value is fixed at 'windowStageClose', indicating the window stage
+     * @param { 'windowStageClose' } eventType - The value is fixed at 'windowStageClose', indicating the window stage
      *     close event.
-     * @param { Callback<void> } callback Callback function requires a boolean return value to determine whether to
-     *     close the current main window.
+     * @param { Callback<void> } callback - Callback invoked when the window stage close event occurs.
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
