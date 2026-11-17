@@ -117,7 +117,25 @@ export declare enum ScrollAlign {
 }
 
 /**
- * Enumerates the fast scroll modes for scrolling to a specified index.
+ * Enumerates the fast scroll modes for scrolling to a specified index, used with the `fastScroll` field of
+ * `ScrollToIndexOptions`.
+ *
+ * > **NOTE**
+ * >
+ * > - When the scroll distance is large and a jump is triggered, the component usually scrolls
+ * >   continuously for about 2 screens from the start position, then jumps to a position about
+ * >   2 screens away from the final stop position and continues scrolling to the final position.
+ * >   One screen refers to the length of the visible area of the scrollable component in the
+ * >   scroll direction.
+ * > - Skipping creation or measurement applies only to the skipped scroll path. Child components
+ * >   required by the two continuous scrolling segments before and after the skip are still created
+ * >   and measured on demand. The actual range also depends on the alignment, extra offset, child
+ * >   component size, and other factors, and is not fixed at 4 screens.
+ * > - Fast scrolling does not guarantee that every child component along the scroll path is
+ * >   traversed and displayed.
+ * > - If `fastScroll` is set to a value not defined in this enum, it is handled as
+ * >   `FastScrollMode.NONE`, and fast scroll optimization is not enabled. The remaining scroll
+ * >   parameters still take effect according to the original rules.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -137,6 +155,7 @@ export enum FastScrollMode {
    * Skips measuring intermediate items that displayed content and the target's actual layout do not require.
    * The component may create intermediate items to determine which rows and columns they occupy.
    * A multi-column `List` that contains both `ListItem` and `ListItemGroup` needs item types to determine rows.
+   * For `Grid`, intermediate `GridItem` components may be created to determine their row and column spans.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -147,6 +166,11 @@ export enum FastScrollMode {
   /**
    * Skips creating and measuring intermediate items that displayed content and the target's actual layout do not require.
    * For a multi-column `List` that contains both `ListItem` and `ListItemGroup`, use `SKIP_MEASURE`.
+   * For `WaterFlow`, this mode is recommended. In `SLIDING_WINDOW` layout mode, WaterFlow locates the target
+   * FlowItem without intermediate child components, while `SKIP_MEASURE` still creates intermediate child
+   * components along the path, causing extra creation overhead.
+   * For `Grid`, if the row or column spans of the target item or intermediate items are unknown, provide complete
+   * and accurate span information in advance through `GridLayoutOptions`.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -223,11 +247,15 @@ export declare interface ScrollToIndexOptions {
   extraOffset?: LengthMetrics;
 
   /**
-   * Fast scroll mode for scrolling to a specified index.
-   * When `fastScroll` selects `SKIP_MEASURE` or `SKIP_CREATE_AND_MEASURE`, the animation estimates the target
-   * position and skips some intermediate items. This parameter applies to `List`, `Grid`, and `WaterFlow` in
-   * `SLIDING_WINDOW` layout mode, and takes effect only when `smooth` is `true`.
-   * Default value: `FastScrollMode.NONE`. Unrecognized values use `FastScrollMode.NONE`.
+   * Fast scroll mode used when scrolling to a specified index.
+   * When set to `SKIP_MEASURE`, intermediate child components are not measured. When set to
+   * `SKIP_CREATE_AND_MEASURE`, intermediate child components are neither created nor measured.
+   * Supported by `List`, `Grid`, and `WaterFlow` in `SLIDING_WINDOW` layout mode, and takes effect only when the
+   * `smooth` parameter of `scrollToIndex` is `true`.
+   * Default value: `FastScrollMode.NONE`, which is the same as not setting this parameter.
+   * Value range: `0`, `1`, and `2` defined in this enum. Other values are handled as `FastScrollMode.NONE`,
+   * without fast scroll optimization, and the remaining scroll parameters still take effect according to the
+   * original rules.
    * The setting applies only to this call. The next call uses `NONE` if `fastScroll` is omitted.
    *
    * For `Grid`, express special row or column placement through `GridLayoutOptions`.
