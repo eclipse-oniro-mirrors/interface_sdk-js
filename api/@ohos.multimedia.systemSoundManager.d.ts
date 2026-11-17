@@ -1605,17 +1605,18 @@ declare namespace systemSoundManager {
     openToneHaptics(context: BaseContext, hapticsUri: string): Promise<int>;
 
     /**
-     * Restore all ringtone and vibration settings to factory defaults with one click, and deletes custom audio ringtones
-     * (retain video ringtones).
+     * Restores all ringtones and vibration settings to their factory defaults with one click, and deletes custom audio
+     * ringtones(video ringtones are retained).
      *
-     * The restoration scope includes the incoming call ringtone, SMS/notification tone, currently selected URI of the
-     * alarm ringtone, and ringtone vibration settings. After the restoration, all items are restored to factory
-     * defaults. Delete the RBT library at the same time
-     * {@link SystemSoundManager#addCustomizedTone} adds custom audio ringtones, but retains video ringtones.
+     * The restoration scope includes the incoming call ringtone, SMS/notification ringtone, selected URI of the alarm
+     * tone, and vibration settings. After the restoration, all items are restored to their factory defaults. In
+     * addition, custom audio ringtones added
+     * using {@link SystemSoundManager#addCustomizedTone} in the ringtone library are deleted, but video ringtones are
+     * retained.
      *
      * > **NOTE**
      * >  The restoration process is executed atomically on the server. If any step fails, the modified items will be
-     * rolled back and an error code will be returned. 
+     * >  rolled back and an error code will be returned. 
      *
      * @permission ohos.permission.WRITE_RINGTONE
      * @returns { Promise<void> } Promise that returns no value.
