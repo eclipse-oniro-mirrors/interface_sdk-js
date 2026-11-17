@@ -71,7 +71,8 @@ def run_unpublished_tool(nodejs, unpublished_tool, input_dir, output_dir, mode, 
     ets2panda_lib = os.path.join(sdk_path, "build-tools", "ets2panda", "lib")
     if os.path.isdir(ets2panda_lib):
         env["LD_LIBRARY_PATH"] = ets2panda_lib + os.pathsep + env.get("LD_LIBRARY_PATH", "")
-        print(f"[copy_runtimeapi] LD_LIBRARY_PATH set to: {ets2panda_lib}")
+        env["DYLD_LIBRARY_PATH"] = ets2panda_lib + os.pathsep + env.get("DYLD_LIBRARY_PATH", "")
+        print(f"[copy_runtimeapi] LD_LIBRARY_PATH/DYLD_LIBRARY_PATH set to: {ets2panda_lib}")
     else:
         print(f"[copy_runtimeapi] WARNING: ets2panda lib dir not found: {ets2panda_lib}")
     print(f"[copy_runtimeapi] running delete_unpublished_plugin.js --mode {mode} on {input_dir}")
