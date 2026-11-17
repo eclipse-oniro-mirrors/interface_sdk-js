@@ -3715,18 +3715,6 @@ declare namespace webview {
         closeCamera(): void;
 
         /**
-         * Gets URL of frame that sent the last postMessage to native application.
-         *
-         * @returns { string } The URL of frame that last sent a postMessage.
-         * @throws { BusinessError } 17100001 - Init error.
-         *     The WebviewController must be associated with a Web component.
-         * @syscap SystemCapability.Web.Webview.Core
-         * @stagemodelonly
-         * @since 26.0.0 static
-         */
-        getLastPostMessageURL(): string;
-
-        /**
          * Pause all WebView timers.
          *
          * @throws { BusinessError } 17100001 - Init error.
@@ -4994,6 +4982,24 @@ declare namespace webview {
          * @since 26.1.0 static
          */
         static removeVisitedLinksSince(date: Date): Promise<void>;
+
+        /**
+         * Obtains the URL of the frame that last sent a postMessage to the application.
+         * 
+         * This API returns the frame URL of the sender of the most recent postMessage received through
+         * {@link WebMessagePort#onMessageEvent} or {@link WebMessagePort#onMessageEventExt}.
+         * If no postMessage has been received, an empty string is returned.
+         * 
+         * @returns { string } URL of the frame that last sent a postMessage. If no postMessage has been
+         *     received, an empty string is returned.
+         * @throws { BusinessError } 17100001 - Init error.
+         *     The WebviewController must be associated with a Web component.
+         *     Ensure that the WebviewController is associated with a Web component before calling this method.
+         * @syscap SystemCapability.Web.Webview.Core
+         * @stagemodelonly
+         * @since 26.1.0 static
+         */
+        getLastPostMessageUrl(): string;
     }
 
     /**
