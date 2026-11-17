@@ -3579,7 +3579,7 @@ export declare enum RenderFit {
  */
 export declare enum DialogButtonStyle {
   /**
-   * Default Style.
+   * 白底蓝字（深色主题下为黑底蓝字）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3587,7 +3587,7 @@ export declare enum DialogButtonStyle {
   DEFAULT = 0,
 
   /**
-   * Highlight Style.
+   * 蓝底白字。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
