@@ -5447,11 +5447,12 @@ export class UIContext {
   getPixelRoundMode(): PixelRoundMode;
 
   /**
-   * Dispach keyboard event to the frameNode with inspector key.
+   * 按键事件应分发给指定的组件。为了确保行为的可预测性，目标组件必须位于分发组件的子树中。
    *
-   * @param { number | string } node - The uniqueId or inspector key of the target FrameNode.
-   * @param { KeyEvent } event - The keyboard event.
-   * @returns { boolean } Returns whether the key event is consumed.
+   * @param { number | string } node - 组件的id或者节点UniqueID。
+   * @param { KeyEvent } event - KeyEvent对象。
+   * @returns { boolean } - 按键事件是否成功分发给指定的组件。
+   *     true表示分发成功，false表示分发失败。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
