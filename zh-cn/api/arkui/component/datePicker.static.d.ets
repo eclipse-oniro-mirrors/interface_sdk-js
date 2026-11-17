@@ -197,8 +197,7 @@ export declare interface DatePickerOptions {
      * 为true时，此参数不生效，默认显示年、月、日三列。
      *
    * @type { ?DatePickerMode }
-   * @default DatePickerMode.DATE - which means to display three columns: year, month, and day.
-   * <br>Decimal values are rounded off.
+   * @default DatePickerMode.DATE - 即显示年、月、日三列。小数值会被取整。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -800,9 +799,9 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
      * minute: 默认为"2-digit"，设置minute是否按照2位数字显示，如果实际数值小于10，则会补充前导0并显示，即为"0X"。
      *
    * @type { ?DateTimeOptions }
-   * @default hour: In the 24-hour format, it defaults to 2-digit, which means a leading zero is used;
-   * <br>In the 12-hour format, it defaults to numeric, which means no leading zero is used.
-   * <br>minute: defaults to 2-digit, which means a leading zero is used.
+   * @default hour: 24小时制默认为2-digit，即使用前导0；
+   * <br>12小时制默认为numeric，即不使用前导0。
+   * <br>minute: 默认为2-digit，即使用前导0。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

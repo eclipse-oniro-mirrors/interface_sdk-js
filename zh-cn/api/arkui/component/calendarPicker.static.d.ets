@@ -157,7 +157,8 @@ export declare interface CalendarOptions {
      * 
      * **说明：**
      * 
-     * 当hintRadius为0.0时表示底板样式为直角矩形；当hintRadius为(0.0, 16.0)时，底板样式为圆角矩形；当hintRadius为负数或大于16.0时，恢复为默认值16.0。
+     * 当hintRadius为0.0时表示底板样式为直角矩形；当hintRadius为(0.0, 16.0)时，底板样式为圆角矩形；
+     * 当hintRadius为负数或大于16.0时，恢复为默认值16.0。
      *
    * @type { ?(double | Resource) }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -244,7 +245,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    * @param { CalendarAlign | undefined } alignType - 对齐方式的类型。<br/>默认值：CalendarAlign.END
      *     <br/>当alignType的值为undefined时，使用默认值。
    * @param { Offset } [offset] - 按照对齐方式的类型对齐后，选择器相对入口组件的偏移量。<br/>默认值：{dx: 0, dy: 0}
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -257,7 +258,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    * @param { PickerTextStyle | undefined } value - 设置入口区的文本颜色、字号、字体粗细。<br/>默认值：<br/>{<br/>color:
      *     '#ff182431',<br/>font: {<br/>size: '16fp', <br/>weight: FontWeight.Regular<br/>}<br/>}
      *     <br/>当value的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -268,7 +269,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
      * 选择日期时触发该事件。不能通过双向绑定的状态变量触发。
      *
    * @param { Callback<Date> | undefined } callback - 选中的日期值。<br>当callback的值为undefined时，不使用回调函数。
-   * @returns { CalendarPickerAttribute } the attribute of the CalendarPicker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -281,7 +282,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    * @param { boolean | undefined } enabled - 设置日历选择器中系统当前日期是否保持高亮显示。<br/>- true：系统当前日期在日历
      *     选择器内保持高亮显示。<br/>- false：系统当前日期在日历选择器内不保持高亮显示。
      *     <br/>默认值：false<br/>当enabled的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -293,7 +294,7 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    *
    * @param { CalendarFirstDayOfWeek | undefined } value - 设置日历选择器每周的起始日。
    *     <br/>默认值：CalendarFirstDayOfWeek.LOCAL（跟随系统区域变化）<br/>当value的值为undefined时，使用默认值。
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -622,7 +623,7 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
 }
 
 /**
- * Defines CalendarPickerDialog which uses show method to show CalendarPicker dialog.
+ * 点击日期弹出日历选择器弹窗，可在弹窗内选择日期。适用于需要在应用中进行日期选择的场景，如日程管理、预订系统、表单填写等。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -644,7 +645,7 @@ export declare class CalendarPickerDialog {
 /**
  * 定义日历选择器组件。
  *
- * @param { CalendarOptions } [options] - calendar options.
+ * @param { CalendarOptions } [options] - 配置日历选择器组件的参数。未设置该参数时使用默认配置。
  * @returns { CalendarPickerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

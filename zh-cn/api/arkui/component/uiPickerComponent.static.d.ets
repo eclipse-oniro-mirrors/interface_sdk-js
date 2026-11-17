@@ -378,9 +378,10 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 /**
  * 定义UIPickerComponent组件。
  *
- * @param { UIPickerComponentOptions } [options] - picker options.
+ * @param { UIPickerComponentOptions } [options] - 配置UIPickerComponent容器的参数，用于自定义初始选中项等配置。
+ *     参数缺省时组件占位，但内容显示为空。当需要设置初始选中项时传入此参数。
  * @param { CustomBuilder } [content_]
- * @returns { UIPickerComponentAttribute } - The attribute of the Picker.
+ * @returns { UIPickerComponentAttribute } - 返回选择器的属性对象。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
