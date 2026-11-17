@@ -13717,11 +13717,7 @@ declare namespace window {
     loadContentByName(name: string, callback: AsyncCallback<void>): void;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。
-     *
-     * 建议在UIAbility启动过程中使用该接口，重复调用该接口将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
-     *
-     * 当前UI的执行上下文可能不明确，所以不建议在本接口的回调函数中做UI相关的操作。
+     * 根据命名路由加载内容。
      *
      * @param { string } name - 命名路由页面的名称。
      * @param { LocalStorage } [storage] - 页面级UI状态存储单元，这里用于为加载到窗口的页面内容传递状态属性。
