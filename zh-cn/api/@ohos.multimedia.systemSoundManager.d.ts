@@ -1488,7 +1488,7 @@ declare namespace systemSoundManager {
      * {@link SystemSoundManager#addCustomizedTone}添加的自定义音频铃声，但保留视频铃声。
      *
      * > **说明**
-     * >  还原过程再服务端原子执行，任一步骤失败将回滚已修改项并以错误码返回。
+     * >  还原过程在服务端原子执行，任一步骤失败将回滚已修改项并以错误码返回。
      *
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permisson verification failed. The application does not have the permission
