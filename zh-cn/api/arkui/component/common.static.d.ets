@@ -265,9 +265,11 @@ export declare interface AnimatableArithmetic<T> {
     equals(rhs: AnimatableArithmetic<T>): boolean;
 }
 /**
-  * ReuseId回调类型，用于计算reuseId。
+  * 获取复用标识ID的回调方法。
   *
-  * @returns { string }
+  * @returns { string } 复用标识ID，由开发者指定。
+  *     未指定或使用空字符串`''`作为复用标识ID时，将默认使用自定义组件名。
+  *     在API版本26.0.0之前，当该回调不是显式返回字符串字面量时，实际复用标识ID将为自定义组件名，回调返回值不生效；在API版本26.0.0及以后，回调的实际返回结果将作为复用标识ID。
   * @syscap SystemCapability.ArkUI.ArkUI.Full
   * @stagemodelonly
   * @since 23 static
@@ -17464,14 +17466,14 @@ export declare interface TerminationInfo {
 export type DateTimeOptions = intl.DateTimeOptions;
 
 /**
- * Defines a bindable property
+ * $$()双向绑定函数的返回值类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare interface Bindable<T> {
     /**
-     * Defines value of the bindable property.
+     * 支持双向绑定的值。
      * @readonly
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -17479,7 +17481,7 @@ export declare interface Bindable<T> {
      */
     readonly value: T;
     /**
-     * Defines the callback of the bindable property which will be invoked when the property is changed.
+     * 定义可绑定属性的回调，该属性将在属性更改时调用。
      * @readonly
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -17555,21 +17557,23 @@ export declare type BindableResourceStr = ResourceStr | Bindable<ResourceStr> | 
 export declare type BindableResourceStrArray = ResourceStr[] | Bindable<ResourceStr[]> | Bindable<Resource[]> | Bindable<string[]>;
 
 /**
- * Convert to a bindable property.
+ * 将支持双向绑定的组件属性转换成Bindable的绑定对象。
  *
- * @param { T } value - indicate the value of a state property.
- * @returns { Bindable<T> }
+ * @param { T } value - 支持双向绑定的属性。
+ * @returns { Bindable<T> } 将支持双向绑定的属性转成绑定对象。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare function $$<T>(value: T): Bindable<T>;
 /**
- * Apply style function on this CommonMethod.
+ * 方法applyStyles将多条样式设置提炼成一个Styles方法，直接在组件声明的位置调用。
+ * 通过applyStyles可以快速定义并复用自定义样式。
+ * 开发指南见[applyStyles：定义组件重用样式](docroot://ui/state-management/arkts-apply-styles.md)。
  *
- * @param { T } this
- * @param { CustomStyles } customStyles
- * @returns { T }
+ * @param { T } this - UI组件。
+ * @param { CustomStyles } customStyles - 给UI组件添加样式的回调函数。
+ * @returns { T } 返回添加样式后的UI组件
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
