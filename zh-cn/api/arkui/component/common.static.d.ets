@@ -265,7 +265,7 @@ export declare interface AnimatableArithmetic<T> {
     equals(rhs: AnimatableArithmetic<T>): boolean;
 }
 /**
-  * ReuseId callback type. It is used to compute reuseId.
+  * ReuseId回调类型，用于计算reuseId。
   *
   * @returns { string }
   * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -274,7 +274,7 @@ export declare interface AnimatableArithmetic<T> {
   */
 export type ReuseIdCallback = () => string;
 /**
- * Defining the reusable configuration parameters.
+ * 定义复用的配置参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -282,7 +282,7 @@ export type ReuseIdCallback = () => string;
  */
 export declare interface ReuseOptions {
     /**
-     * Defining reuseId function. The default reuseId is the custom component name.
+     * 定义reuseId函数。默认的reuseId为自定义组件名。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -2828,8 +2828,8 @@ export declare interface AsymmetricTransitionOption {
     disappear: TransitionEffect;
 }
 /**
- * Defined the draw modifier of node. Provides draw callbacks for the associated Node.
- * Each DrawModifier instance can be set for only one component. Repeated setting is not allowed.
+ * 定义节点的绘制修饰器，为关联的Node提供绘制回调。
+ * 每个DrawModifier实例只能设置给一个组件，不允许重复设置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2837,9 +2837,9 @@ export declare interface AsymmetricTransitionOption {
  */
 export declare class DrawModifier {
     /**
-     * drawBehind Method. Executed before drawing associated Node.
+     * drawBehind方法，在绘制关联的Node之前执行。
      *
-     * @param { DrawContext } drawContext - The drawContext used to draw.
+     * @param { DrawContext } drawContext - 用于绘制的drawContext。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2847,10 +2847,10 @@ export declare class DrawModifier {
     drawBehind(drawContext: DrawContext): void;
 
     /**
-     * drawContent Method. Executed when associated Node is drawing, the default drawContent method will be replaced
-     * if this method is set.
+     * drawContent方法，在关联的Node绘制时执行，若设置了该方法，
+     * 默认的drawContent方法将被替换。
      *
-     * @param { DrawContext } drawContext - The drawContext used to draw.
+     * @param { DrawContext } drawContext - 用于绘制的drawContext。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2858,8 +2858,8 @@ export declare class DrawModifier {
     drawContent(drawContext: DrawContext): void;
 
     /**
-     * drawFront Method. Executed after drawing associated Node and its children.
-     * @param { DrawContext } drawContext - The drawContext used to draw.
+     * drawFront方法，在绘制完关联的Node及其子节点之后执行。
+     * @param { DrawContext } drawContext - 用于绘制的drawContext。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -2867,11 +2867,11 @@ export declare class DrawModifier {
     drawFront(drawContext: DrawContext): void;
 
     /**
-     * drawForeground Method. This method is executed after drawing the associated Node and its children.
-     * It allows you to perform additional drawing operations on top of the already rendered content.
-     * This can be useful for adding visual elements that should appear above the main content.
+     * drawForeground方法，该方法在绘制完关联的Node及其子节点之后执行。
+     * 它允许在已渲染的内容之上执行额外的绘制操作。
+     * 这对于添加需要显示在主内容之上的可视元素很有用。
      *
-     * @param { DrawContext } drawContext - The drawContext used to draw.
+     * @param { DrawContext } drawContext - 用于绘制的drawContext。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 static
@@ -2879,20 +2879,20 @@ export declare class DrawModifier {
     drawForeground(drawContext: DrawContext): void;
 
     /**
-     * Draws content in the overlay layer after the associated Node and all its children have been drawn.
+     * 在关联的Node及其所有子节点绘制完成后，在overlay层绘制内容。
      *
-     * Custom drawing consists of five layers: Behind, Content, Front, Foreground, and Overlay.
-     * - The Foreground and Overlay layers are drawn after child nodes.
-     * - The Overlay layer differs from Foreground in that it can draw outside the bounds of the component.
-     * @param { DrawContext } drawContext - The drawContext used to draw
+     * 自定义绘制由Behind、Content、Front、Foreground和Overlay五层组成。
+     * - Foreground层和Overlay层在子节点之后绘制。
+     * - Overlay层与Foreground层的区别在于，它可以在组件边界之外绘制。
+     * @param { DrawContext } drawContext - 用于绘制的drawContext
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     drawOverlay(drawContext: DrawContext): void;
     /**
-     * Invalidate the component, which will cause a re-render of the component.
-     * No overloading is allowed or needed.
+     * 使组件失效，这将导致组件重新渲染。
+     * 不允许也不需要重载该方法。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -11350,7 +11350,7 @@ export declare interface MenuElement {
 }
 
 /**
- * Defines the attribute modifier.
+ * 定义属性修饰器。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -11358,7 +11358,7 @@ export declare interface MenuElement {
  */
 export declare interface AttributeModifier<T> {
   /**
-   * Defines the normal update attribute function.
+   * 定义正常状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11368,7 +11368,7 @@ export declare interface AttributeModifier<T> {
   default applyNormalAttribute(instance: T) : void;
 
   /**
-   * Defines the pressed update attribute function.
+   * 定义按下状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11378,7 +11378,7 @@ export declare interface AttributeModifier<T> {
   default applyPressedAttribute(instance: T) : void;
 
   /**
-   * Defines the focused update attribute function.
+   * 定义获焦状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11388,7 +11388,7 @@ export declare interface AttributeModifier<T> {
   default applyFocusedAttribute(instance: T) : void;
 
   /**
-   * Defines the disabled update attribute function.
+   * 定义禁用状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11398,7 +11398,7 @@ export declare interface AttributeModifier<T> {
   default applyDisabledAttribute(instance: T) : void;
 
   /**
-   * Defines the selected update attribute function.
+   * 定义选中状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11408,7 +11408,7 @@ export declare interface AttributeModifier<T> {
   default applySelectedAttribute(instance: T) : void;
 
   /**
-   * Defines the function that updates the hovered attribute.
+   * 定义悬停状态的属性更新函数。
    *
    * @param { T } instance
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11418,11 +11418,11 @@ export declare interface AttributeModifier<T> {
   default applyHoveredAttribute(instance: T) : void;
 
   /**
-   * Specifies the states to be monitored.
-   * Override this method to specify which states (Normal, Pressed, Focused, Disabled, Selected) should be
-   * monitoredby returning a bitmask of ModifierState enum values.
+   * 指定需要监听的状态。
+   * 重写该方法，通过返回ModifierState枚举值组成的位掩码来指定需要监听哪些状态
+   * （Normal、Pressed、Focused、Disabled、Selected）。
    *
-   * @returns { int } - Bitmask combination of states to be monitored
+   * @returns { int } - 需要监听的状态的位掩码组合
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -12016,11 +12016,11 @@ export declare interface CommonMethod {
      */
     default height(heightValue: Length | LayoutPolicy | undefined): this;
     /**
-     * Sets the drawModifier of the current component.
+     * 设置当前组件的drawModifier。
      *
-     * @param { DrawModifier | undefined } modifier - drawModifier used to draw, or undefined if it is not available.
-     * Default value: undefined
-     * A custom modifier applies only to the FrameNode of the currently bound component, not to its subnodes.
+     * @param { DrawModifier | undefined } modifier - 用于绘制的drawModifier，不可用时为undefined。
+     * 默认值：undefined
+     * 自定义修饰器仅应用于当前绑定组件的FrameNode，不应用于其子节点。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14667,9 +14667,9 @@ export declare interface CommonMethod {
      */
     default obscured(reasons: Array<ObscuredReasons> | undefined): this;
     /**
-     * Reuse id is used for identify the reuse type for each custom node.
+     * 复用id用于标识每个自定义节点的复用类型。
      *
-     * @param { string | undefined } id - The id for reusable custom node.
+     * @param { string | undefined } id - 可复用自定义节点的id。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -14677,9 +14677,9 @@ export declare interface CommonMethod {
      */
     default reuseId(id: string | undefined): this;
     /**
-    * Reuse id is used for identify the reuse type of each @ComponentV2 custom component, which can give user control of sub-component recycle and reuse.
+    * 复用id用于标识每个@ComponentV2自定义组件的复用类型，用户可以通过它控制子组件的回收和复用。
     *
-    * @param { ReuseOptions | undefined } options - The configuration parameter for reusable custom component.
+    * @param { ReuseOptions | undefined } options - 可复用自定义组件的配置参数。
     * @returns { this }
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly

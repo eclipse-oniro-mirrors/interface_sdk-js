@@ -4843,7 +4843,7 @@ export enum CompetitionStrategy {
 }
 
 /**
- * Defines the state types that can be monitored by AttributeModifiers.
+ * 定义AttributeModifier可监听的状态类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4853,7 +4853,7 @@ export enum CompetitionStrategy {
 export enum AttributeModifierState {
 
   /**
-   * Normal state.
+   * 正常状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4862,7 +4862,7 @@ export enum AttributeModifierState {
   NORMAL = 0,
 
   /**
-   * Pressed state.
+   * 按压状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4871,7 +4871,7 @@ export enum AttributeModifierState {
   PRESSED = 1,
 
   /**
-   * Focused state.
+   * 获焦状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4880,7 +4880,7 @@ export enum AttributeModifierState {
   FOCUSED = 1 << 1,
 
   /**
-   * Disabled state.
+   * 不可用状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4889,7 +4889,7 @@ export enum AttributeModifierState {
   DISABLED = 1 << 2,
 
   /**
-   * Selected state.
+   * 选中状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4898,7 +4898,7 @@ export enum AttributeModifierState {
   SELECTED = 1 << 3,
 
   /**
-   * Hovered state.
+   * 悬停状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

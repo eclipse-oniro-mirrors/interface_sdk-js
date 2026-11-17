@@ -460,7 +460,6 @@ interface RepeatOptions {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
    * @atomicservice
    * @since 26.1.0 dynamic
    */

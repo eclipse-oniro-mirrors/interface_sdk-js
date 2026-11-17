@@ -1264,10 +1264,52 @@ declare const StorageLink: (value: string) => PropertyDecorator;
 declare const Watch: (value: string) => PropertyDecorator;
 
 /**
+ * 定义BuilderDecoratorConfig接口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface BuilderDecoratorConfig {
+  /**
+   * 是否开启占位符功能。
+   * 设置为true表示开启占位符功能，设置为false表示关闭该功能。
+   * 默认值为false。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  isPlaceholder: boolean;
+}
+
+/**
+ * 定义带配置的Builder装饰器类型。
+ *
+ * @param { BuilderDecoratorConfig } value
+ * @returns { MethodDecorator } 方法装饰器。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type BuilderMethodDecorator = (value: BuilderDecoratorConfig) => MethodDecorator;
+
+/**
  * \@Builder装饰的函数也称为“自定义构建函数”，用于封装可复用的UI构建逻辑，可在自定义组件中多次调用，从而减少代码重复、提升UI构建的可维护性，适用于需要复用相同UI结构的场景。
  *
  * 开发指南参考：[@Builder装饰器：自定义构建函数](docroot://ui/state-management/arkts-builder.md)。
  *
+ * @type { MethodDecorator } [since 8 - 26.0.1]
+ * @type { MethodDecorator & BuilderMethodDecorator } [since 26.1.0]
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
  * @crossplatform [since 10]
@@ -1276,7 +1318,7 @@ declare const Watch: (value: string) => PropertyDecorator;
  * @since 7 dynamic
  * @noninterop
  */
-declare const Builder: MethodDecorator;
+declare const Builder: MethodDecorator & BuilderMethodDecorator;
 
 /**
  * `@LocalBuilder`拥有和局部[`@Builder`]{@link Builder}相同的功能，且比局部`@Builder`能够更好地确定组件的父子关系和状态管理的父子关系。
@@ -1292,6 +1334,75 @@ declare const Builder: MethodDecorator;
  * @noninterop
  */
 declare const LocalBuilder: MethodDecorator;
+
+/**
+ * 定义VersionCondition接口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface VersionCondition {
+  /**
+   * 样式或扩展生效的最小API版本。
+   * 表示运行时的设备版本，取值为数字或字符串。
+   * 默认值：undefined，此时版本限制不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minApiVersion?: number | string;
+
+  /**
+   * 样式或扩展生效的最大API版本。
+   * 表示运行时的设备版本，取值为数字或字符串。
+   * 默认值：undefined，此时版本限制不生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @form
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxApiVersion?: number | string;
+}
+
+/**
+ * 定义带版本控制的Styles装饰器类型。
+ *
+ * @param { VersionCondition } versionCondition
+ * @returns { MethodDecorator } Styles装饰器。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type StylesVersionDecorator = (versionCondition: VersionCondition) => MethodDecorator;
+
+/**
+ * 定义带版本控制的Extend装饰器类型。
+ *
+ * @param { any } value
+ * @param { VersionCondition } versionCondition
+ * @returns { MethodDecorator } Extend装饰器。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @form
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type ExtendVersionDecorator = (value: any, versionCondition: VersionCondition) => MethodDecorator;
 
 /**
  * \@Styles装饰器用于将多条样式设置提炼为一个方法，在组件声明处直接调用，实现自定义样式的定义与复用。适用于多个组件需要共享相同样式、减少重复代码、提升样式一致性维护效率的场景。

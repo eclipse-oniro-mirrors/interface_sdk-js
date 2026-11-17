@@ -42,7 +42,7 @@ type RepeatArray<T> = Array<T> | ReadonlyArray<T> | Readonly<Array<T>>;
 *
  * @param { T } item - arr中每一个数据项。T为开发者传入的数据类型。
  * @param { int } index - 当前数据项对应的索引。
- * @returns { string } template type.
+ * @returns { string } 模板类型。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -104,7 +104,7 @@ type OnLazyLoadingFunc = (index: int) => void;
 *
  * @param { T } item - `arr`数组中的数据项。
  * @param { int } index - `arr`数组中的数据项索引。
- * @returns { string } key value.
+ * @returns { string } 键值。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -114,7 +114,7 @@ type KeyGeneratorFunc<T> = (item: T, index: int) => string;
 /**
 * 用于计算期望加载的数据项总数的函数类型。
 *
- * @returns { int } Returns the total data count.
+ * @returns { int } 返回数据总数。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -173,7 +173,7 @@ export interface VirtualScrollOptions {
   reusable?: boolean;
 
   /**
-   * Data lazy loading。
+   * 数据懒加载。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -267,7 +267,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * > > `itemGenerator`的参数为`RepeatItem`，该参数将`item`和`index`结合到了一起，请勿将`RepeatItem`参数拆开使用。
    *
    * @param { RepeatItemBuilder<T> } itemGenerator
-   * @returns { this } RepeatAttribute instance
+   * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -278,7 +278,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * 键值生成函数。
    *
    * @param { KeyGeneratorFunc<T> } keyGenerator
-   * @returns { this } RepeatAttribute instance
+   * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -289,7 +289,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * `Repeat`开启虚拟滚动。
    *
    * @param { VirtualScrollOptions } [virtualScrollOptions] 虚拟滚动配置项。
-   * @returns { this } RepeatAttribute instance
+   * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -302,7 +302,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * @param { string } type 当前模板类型。
    * @param { RepeatItemBuilder<T> } itemBuilder 组件生成函数。
    * @param { TemplateOptions } [templateOptions] 当前模板配置项。
-   * @returns { this } RepeatAttribute instance
+   * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -313,7 +313,7 @@ export interface RepeatAttribute<T> extends DynamicNode {
    * 为当前数据项分配template type。
    *
    * @param { TemplateTypedFunc<T> } typedFunc 生成当前数据项对应的template type。
-   * @returns { this } RepeatAttribute instance
+   * @returns { this } RepeatAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -429,9 +429,9 @@ export interface RepeatOptions {
 }
 
 /**
-* Indicates the type of Repeat.
+* 表示Repeat的类型。
 *
- * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatArray<T> } arr - 数据源。
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -444,7 +444,7 @@ export declare function Repeat<T>(arr: RepeatArray<T>): RepeatAttribute<T>;
 /**
 * 创建带有选项的Repeat。
 *
- * @param { RepeatArray<T> } arr - The Data Source.
+ * @param { RepeatArray<T> } arr - 数据源。
  * @param { RepeatOptions } [options] - 创建Repeat组件时的配置项。
  * @returns { RepeatAttribute<T> }
  * @syscap SystemCapability.ArkUI.ArkUI.Full

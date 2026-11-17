@@ -433,7 +433,7 @@ export declare class FrameNode {
   /**
    * 获取FrameNode中持有的[RenderNode]{@link RenderNode:RenderNode}。
    *
-   * @returns { RenderNode | null } - Returns a RenderNode inside the FrameNode, or null if not contained.
+   * @returns { RenderNode | null } - 返回FrameNode内部的RenderNode，若不包含则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -539,7 +539,7 @@ export declare class FrameNode {
    *
    * @param { int } index - 需要查询的子节点的序列号。index取值范围为[0, +∞)，若当前节点有n个子节点，index取值有效范围为[0, n-1]。
    * @param { ExpandMode | undefined } [expandMode] - 指定子节点展开模式。<br/>默认值：ExpandMode.EXPAND
-   * @returns { FrameNode | null } - Returns a FrameNode. When the required node does not exist, returns null.
+   * @returns { FrameNode | null } - 返回一个FrameNode。当所需节点不存在时，返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -567,9 +567,9 @@ export declare class FrameNode {
   /**
    * 获取当前FrameNode的第一个子节点。
    *
-   * @returns { FrameNode | null } - Returns a FrameNode, which is first child of the current FrameNode.
-   *     If current FrameNode does not have child node, returns null.
-   *     If current FrameNode does not have child node, returns null.
+   * @returns { FrameNode | null } - 返回一个FrameNode，即当前FrameNode的第一个子节点。
+   *     若当前FrameNode没有子节点，返回null。
+   *     若当前FrameNode没有子节点，返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -579,8 +579,8 @@ export declare class FrameNode {
   /**
    * 获取当前FrameNode的下一个同级节点。
    *
-   * @returns { FrameNode | null } - Returns a FrameNode. If current FrameNode does not have next sibling node,
-   *     returns null.
+   * @returns { FrameNode | null } - 返回一个FrameNode。若当前FrameNode没有下一个同级节点，
+   *     则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -590,8 +590,8 @@ export declare class FrameNode {
   /**
    * 获取当前FrameNode的上一个同级节点。
    *
-   * @returns { FrameNode | null } - Returns a FrameNode. If current FrameNode does not have previous sibling node,
-   *     returns null.
+   * @returns { FrameNode | null } - 返回一个FrameNode。若当前FrameNode没有上一个同级节点，
+   *     则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -601,7 +601,7 @@ export declare class FrameNode {
   /**
    * 获取当前FrameNode的父节点。
    *
-   * @returns { FrameNode | null } - Returns a FrameNode. If current FrameNode does not have parent node, returns null.
+   * @returns { FrameNode | null } - 返回一个FrameNode。若当前FrameNode没有父节点，返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -624,8 +624,8 @@ export declare class FrameNode {
    *
    * .0.0
    *
-   * @param { ChildrenCountMode } [countMode] - The children count mode. Default value is ChildrenCountMode.ALL_EXPAND.
-   * @returns { int } - Returns the number of children of the current FrameNode based on the count mode.
+   * @param { ChildrenCountMode } [countMode] - 子节点计数模式。默认值为ChildrenCountMode.ALL_EXPAND。
+   * @returns { int } - 根据计数模式返回当前FrameNode的子节点数量。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -676,9 +676,9 @@ export declare class FrameNode {
   dispose(): void;
 
   /**
-   * Get the position of the node relative to window.
+   * 获取节点相对于窗口的位置。
    *
-   * @returns { NodePosition } - Returns position of the node relative to window.
+   * @returns { NodePosition } - 返回节点相对于窗口的位置。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1062,7 +1062,7 @@ export declare class FrameNode {
    *     - 需要处理目标节点的UI状态。<br>可以通过位或计算同时指定设置多个状态，如：targetUIStates = UIState.PRESSED  |
    *     UIState.FOCUSED。
    * @param { UIStatesChangeHandler } statesChangeHandler - 状态变化时的回调函数。
-   * @param { boolean } [excludeInner=false] - A flag to disable the system's default style handling for states.
+   * @param { boolean } [excludeInner=false] - 用于禁用系统对状态的默认样式处理的标志。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1081,8 +1081,8 @@ export declare class FrameNode {
   /**
    * 支持添加ComponentContent类型的组件内容。要求当前节点是一个可修改的节点，即[isModifiable]{@link FrameNode#isModifiable}的返回值为true，否则抛出异常信息。
    *
-   * @param { ComponentContent<T> | ReactiveComponentContent } content - Newly added ComponentContent or
-   *     ReactiveComponentContent. [since 26.0.0]
+   * @param { ComponentContent<T> | ReactiveComponentContent } content - 新添加的ComponentContent或
+   *     ReactiveComponentContent。 [since 26.0.0]
    * @param { ComponentContent<T> } content - FrameNode节点中显示的组件内容。 [since 23 - 23]
    * @throws { BusinessError } 100021 - The FrameNode is not modifiable.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1194,8 +1194,8 @@ export declare class FrameNode {
    *
    * @param { EventQueryType } eventType - 要查询的交互事件类型。
    * @returns { InteractionEventBindingInfo | undefined }
-   *     - Returns one InteractionEventBindingInfo object indicating the event binding details if any interaction
-   *     events binded on current node, returns undefined if no one binded on.
+   *     - 若当前节点上绑定了任一交互事件，则返回一个表示事件绑定详细信息的InteractionEventBindingInfo对象，
+   *     若未绑定任何交互事件，则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1247,7 +1247,7 @@ export declare class FrameNode {
    * 从节点获取属性值。
    *
    * @param { AnimationPropertyType } property - 动画属性枚举。
-   * @returns { double[] } - the property value on the node.
+   * @returns { double[] } - 节点上的属性值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1334,7 +1334,7 @@ export declare class FrameNode {
    * @param { UIContext } uiContext - 创建对应节点时所需的UI上下文。
    * @param { int } count - 指定创建节点的数量，取值范围为大于零的整型。若给定值小于等于0或不是整数，则返回空数组。
    *     <br>取值限定为整数。
-   * @returns { FrameNode[] } the array of created FrameNode objects.
+   * @returns { FrameNode[] } 创建的FrameNode对象数组。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1349,7 +1349,7 @@ export declare class FrameNode {
    * .0.0
    *
    * @param { string } id - 查询的子节点id，为通用属性设置的[组件标识]{@link CommonMethod}。
-   * @returns { FrameNode | null } The first child node with the specified ID, or null if not found.
+   * @returns { FrameNode | null } 第一个具有指定ID的子节点，若未找到则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -1369,7 +1369,7 @@ export declare class FrameNode {
    *
    * @param { int } id - 查询的子节点的唯一标识UniqueID。
    *     <br>取值限定为整数。
-   * @returns { FrameNode | null } - The FrameNode with the target uniqueId, or null if the frameNode is not existed.
+   * @returns { FrameNode | null } - 具有目标uniqueId的FrameNode，若该FrameNode不存在则返回null。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -3731,9 +3731,9 @@ export declare class NodeAdapter {
   set totalNodeCount(count: int);
 
   /**
-   * Get the total number of node count.
+   * 获取节点总数。
    *
-   * @returns { int } - Return the total number of node count.
+   * @returns { int } - 返回节点总数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3810,7 +3810,7 @@ export declare class NodeAdapter {
   onAttachToNode(target: FrameNode): void;
 
   /**
-   * This callback will be triggered when the binding is released.
+   * 解除绑定时触发此回调。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
