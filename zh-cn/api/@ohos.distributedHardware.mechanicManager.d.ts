@@ -33,8 +33,8 @@ declare namespace mechanicManager {
 
   /**
    * 注册连接状态变化事件的回调监听，等待连接状态变化。使用callback异步回调。
-   * @param { 'attachStateChange' } type Event type.
-   * @param { Callback<AttachStateChangeInfo> } callback Callback used to return the state change.
+   * @param { 'attachStateChange' } type 注册监听事件的类型。取值为：'attachStateChange'。
+   * @param { Callback<AttachStateChangeInfo> } callback 回调函数，返回机械体设备连接变化信息。
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -52,8 +52,8 @@ declare namespace mechanicManager {
 
   /**
    * 取消注册连接状态变化事件的回调监听。使用callback异步回调。
-   * @param { 'attachStateChange' } type Event type.
-   * @param { Callback<AttachStateChangeInfo> } [callback] Callback used to return the state change.
+   * @param { 'attachStateChange' } type 取消注册监听事件的类型。取值为：'attachStateChange'。
+   * @param { Callback<AttachStateChangeInfo> } [callback] 回调函数，返回机械体设备连接变化信息。
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -80,12 +80,12 @@ declare namespace mechanicManager {
   function getAttachedMechDevices(): MechInfo[];
 
   /**
-   * 设置用户操作
+   * 设置用户的连接或断开操作
    *
    * @permission ohos.permission.CONNECT_MECHANIC_HARDWARE
    * @param { Operation } operation 操作类型
-   * @param { string } mac MAC address.
-   * @param { string } params Operation parameters.
+   * @param { string } mac 机械体设备MAC地址
+   * @param { string } params 操作参数
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -121,8 +121,8 @@ declare namespace mechanicManager {
 
   /**
    * 注册跟踪状态变化事件的回调监听。使用callback异步回调。
-   * @param { 'trackingStateChange' } type Event type.
-   * @param { Callback<TrackingEventInfo> } callback Callback used to return the tracking event information.
+   * @param { 'trackingStateChange' } type 注册监听事件的类型。取值为：'trackingStateChange'。
+   * @param { Callback<TrackingEventInfo> } callback 回调函数，返回跟踪事件信息。
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -139,9 +139,9 @@ declare namespace mechanicManager {
   function onTrackingStateChange(callback: Callback<TrackingEventInfo>): void;
 
   /**
-   * 设置相机跟踪布局
-   * @param { 'trackingStateChange' } type Event type.
-   * @param { Callback<TrackingEventInfo> } [callback] Callback used to return the tracking event information.
+   * 取消注册跟踪状态变化事件的回调监听。使用callback异步回调。
+   * @param { 'trackingStateChange' } type 取消注册的监听事件类型。取值为：'trackingStateChange'。
+   * @param { Callback<TrackingEventInfo> } [callback] 回调函数，返回跟踪事件信息。
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
    * @since 20 dynamic
@@ -184,9 +184,9 @@ declare namespace mechanicManager {
 
   /**
    * 将机械设备旋转到相对角度
-   * @param { int } mechId ID of the mechanical device.
-   * @param { RotationAngles } angles Relative angles.
-   * @param { int } duration Rotation duration. Unit: millisecond.
+   * @param { int } mechId 机械体设备ID
+   * @param { RotationAngles } angles 相对当前位置的旋转角度
+   * @param { int } duration 旋转持续时间，单位：ms
    * @returns { Promise<Result> } Promise that return the execution result.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -215,10 +215,10 @@ declare namespace mechanicManager {
   function rotateToEulerAngles(mechId: int, angles: EulerAngles, duration: int): Promise<Result>;
 
   /**
-   * Obtains the maximum continuous rotation duration of a mechanical device.
+   * 获取机械体设备的最大连续旋转持续时间
    *
    * @param { int } mechId 机械设备ID
-   * @returns { int } Maximum rotation duration. Unit: millisecond.
+   * @returns { int } 最大旋转持续时间，单位：ms。
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -230,7 +230,7 @@ declare namespace mechanicManager {
   function getMaxRotationTime(mechId: int): int;
 
   /**
-   * Obtains the maximum rotation speed of a mechanical device.
+   * 获取机械体设备的最大旋转速度
    *
    * @param { int } mechId 机械设备ID
    * @returns { RotationSpeed } 返回最大速度，只返回速度的绝对值
@@ -247,8 +247,8 @@ declare namespace mechanicManager {
   /**
    * 以指定的速度旋转机械设备
    * @param { int } mechId 机械设备ID
-   * @param { RotationSpeed } speed 旋转速度
-   * @param { int } duration 执行时间
+   * @param { RotationSpeed } speed 指定旋转速度。最大旋转速度不超过getMaxRotationSpeed的返回值大小，如果超过最大速度，默认取最大值
+   * @param { int } duration 旋转持续时间，单位：ms。最大时间不超过getMaxRotationTime的返回值大小，如果超过最大时间，默认取最大值
    * @returns { Promise<Result> } 返回执行结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -261,9 +261,9 @@ declare namespace mechanicManager {
   function rotateBySpeed(mechId: int, speed: RotationSpeed, duration: int): Promise<Result>;
 
   /**
-   * 停止转动
+   * 停止机械体设备的移动。使用Promise异步回调
    * @param { int } mechId 机械设备ID
-   * @returns { Promise<void> } 返回操作结果
+   * @returns { Promise<void> } Promise对象，无返回结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -275,9 +275,9 @@ declare namespace mechanicManager {
   function stopMoving(mechId: int): Promise<void>;
 
   /**
-   * 获取机械设备的当前角度
+   * 获取指定机械体设备相对于初始位置的当前旋转角度
    * @param { int } mechId 机械设备ID
-   * @returns { EulerAngles } 返回当前角度
+   * @returns { EulerAngles } 机械体设备的当前旋转角度
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -289,7 +289,7 @@ declare namespace mechanicManager {
   function getCurrentAngles(mechId: int): EulerAngles;
 
   /**
-   * Obtains the maximum rotation angles relative to the reference point for the specified mechanical device.
+   * 获取指定机械体设备相对于初始位置的最大旋转角度
    *
    * @param { int } mechId 机械设备ID
    * @returns { RotationLimits } 最大旋转角度
@@ -306,7 +306,7 @@ declare namespace mechanicManager {
   /**
    * 获取当前转轴状态
    * @param { int } mechId 机械设备ID
-   * @returns { RotationAxesStatus } Rotation axis status.
+   * @returns { RotationAxesStatus } 旋转轴状态
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -321,8 +321,8 @@ declare namespace mechanicManager {
   /**
    * 注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
-   * @param { 'rotationAxesStatusChange' } type - Event type.
-   * @param { Callback<RotationAxesStateChangeInfo> } callback - Rotate axis state changes callback.
+   * @param { 'rotationAxesStatusChange' } type - 注册监听事件的类型。取值为：'rotationAxesStatusChange'
+   * @param { Callback<RotationAxesStateChangeInfo> } callback - 回调函数，返回机械体设备旋转轴状态变化信息
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -346,8 +346,8 @@ declare namespace mechanicManager {
   /**
    * 取消注册旋转轴状态变化事件的回调监听。使用callback异步回调。
    *
-   * @param { 'rotationAxesStatusChange' } type - Event type.
-   * @param { Callback<RotationAxesStateChangeInfo> } [callback] - Rotate axis state changes callback.
+   * @param { 'rotationAxesStatusChange' } type - 取消注册监听事件的类型。取值为：'rotationAxesStatusChange'
+   * @param { Callback<RotationAxesStateChangeInfo> } [callback] - 不填时默认取消所有注册的回调函数
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @syscap SystemCapability.Mechanic.Core
@@ -371,9 +371,9 @@ declare namespace mechanicManager {
   /**
    * 旋转机械体一周搜索目标。使用Promise异步回调。
    *
-   * @param { TargetInfo } target - Target infomation.
-   * @param { SearchParams } params - Parameters to use when searching.
-   * @returns { Promise<SearchResult> } Promise that return the Search result.
+   * @param { TargetInfo } target - 目标人脸信息
+   * @param { SearchParams } params - 搜索方向
+   * @returns { Promise<SearchResult> } Promise对象，返回搜索的结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -392,7 +392,7 @@ declare namespace mechanicManager {
    * @param { int } mechId - 具身设备ID。
    *     <br>取值限定为整数。
    * @param { MoveParams } params - 移动参数。
-   * @returns { Promise<Result> } 202 - 非系统应用
+   * @returns { Promise<Result> } Promise对象，返回移动执行结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -411,7 +411,7 @@ declare namespace mechanicManager {
    * @param { SpeedParams } params - 移动参数。
    * @param { int } duration - 移动时长，单位ms。
    *     <br>取值限定为整数。
-   * @returns { Promise<Result> } 202 - 非系统应用
+   * @returns { Promise<Result> } Promise对象，返回移动执行结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -430,7 +430,7 @@ declare namespace mechanicManager {
    * @param { double } angleSpeed - 角速度。
    * @param { int } duration - 转动时长，单位ms。
    *     <br>取值限定为整数。
-   * @returns { Promise<Result> } 202 - 非系统应用
+   * @returns { Promise<Result> } Promise对象，返回旋转执行结果
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -463,7 +463,7 @@ declare namespace mechanicManager {
    * @param { int } mechId - 具身设备ID。
    *     <br>取值限定为整数。
    * @param { ActionType } actionType - 动作序列类型。
-   * @returns { Promise<Result> } 202 - 非系统应用
+   * @returns { Promise<Result> } Promise对象，返回执行结果。
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -520,7 +520,7 @@ declare namespace mechanicManager {
    * @permission ohos.permission.CONNECT_MECHANIC_HARDWARE
    * @param { AddressInfo } addrInfo - 地址信息。
    * @param { ConnectParam } params - 操作参数。
-   * @returns { Promise<AttachStateChangeInfo> } Promise used to return the attach state change information.
+   * @returns { Promise<AttachStateChangeInfo> } Promise对象，返回设备附加状态。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -537,7 +537,7 @@ declare namespace mechanicManager {
    * @permission ohos.permission.CONNECT_MECHANIC_HARDWARE
    * @param { int } mechId - 具身设备ID。
    *     <br>取值限定为整数。
-   * @returns { Promise<Result> } Promise used to return the execution result.
+   * @returns { Promise<Result> } Promise对象，返回执行结果。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
@@ -568,9 +568,9 @@ declare namespace mechanicManager {
   /**
    * 取消订阅电池电量变化信息
    *
-   * @param { int } mechId - ID of the mechanical device.
-   * @param { Callback<BatteryLevelInfo> } [callback] - Callback function that returns the current battery level.
-   *      <br>If not specified, all callbacks registered for this mechId will be removed.
+   * @param { int } mechId - 需要取消订阅的设备ID。
+   * @param { Callback<BatteryLevelInfo> } [callback] - mechanicManager.offBatteryLevelChange(mechId)注册的回调函数。
+   *      <br>不填时默认取消所有注册的回调函数。
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 33300001 - Service exception.
    * @throws { BusinessError } 33300002 - Device not connected.
@@ -607,7 +607,7 @@ declare namespace mechanicManager {
    */
   export interface MechInfo {
     /**
-     * 机械设备ID
+     * 机械体设备ID，取值为大于等于0的整数。
      *
      * @type { int }
      * @syscap SystemCapability.Mechanic.Core
@@ -629,7 +629,7 @@ declare namespace mechanicManager {
     mechDeviceType: MechDeviceType;
 
     /**
-     * 机械设备名称
+     * 机械体设备名称，长度不超过64字符。
      * @type { string }
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
@@ -929,7 +929,7 @@ declare namespace mechanicManager {
    */
   export enum RotationAxisLimited {
     /**
-     * 不限位
+     * 无限制
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -938,7 +938,7 @@ declare namespace mechanicManager {
     NOT_LIMITED = 0,
 
     /**
-     * 负限位
+     * 负方向受限，可以向相反方向转动
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -947,7 +947,7 @@ declare namespace mechanicManager {
     NEGATIVE_LIMITED = 1,
 
     /**
-     * Positive limited.
+     * 正方向受限，可以向相反方向转动
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
      * @since 20 dynamic
@@ -977,7 +977,7 @@ declare namespace mechanicManager {
     mechId: int;
 
     /**
-     * Rotate axis status.
+     * 旋转轴状态
      * @type { RotationAxesStatus }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -1045,7 +1045,7 @@ declare namespace mechanicManager {
    */
   export interface TargetInfo {
     /**
-     * Target type.
+     * 搜索目标的相关信息
      * @type { TargetType }
      * @syscap SystemCapability.Mechanic.Core
      * @systemapi
@@ -1139,7 +1139,7 @@ declare namespace mechanicManager {
    */
   export enum TrackingEvent {
     /**
-     * 用户操作相机跟踪使能
+     * 用户启用了摄像头跟踪。
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -1147,7 +1147,7 @@ declare namespace mechanicManager {
     CAMERA_TRACKING_USER_ENABLED = 0,
 
     /**
-     * 用户操作相机跟踪关闭
+     * 用户禁用了摄像头跟踪。
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -1155,7 +1155,7 @@ declare namespace mechanicManager {
     CAMERA_TRACKING_USER_DISABLED = 1,
 
     /**
-     * Camera tracking layout changed. You can call getCameraTrackingLayout to obtain the new layout.
+     * 	摄像头跟踪构图变更。
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -1246,7 +1246,7 @@ declare namespace mechanicManager {
    */
   export enum MechDeviceType {
     /**
-     * 云台设备类型
+     * 便携式云台设备
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -1292,7 +1292,7 @@ declare namespace mechanicManager {
   export enum AttachState {
 
     /**
-     * 设备挂载
+     * 设备已连接。
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -1300,7 +1300,7 @@ declare namespace mechanicManager {
     ATTACHED = 0,
 
     /**
-     * 设备卸载
+     * 设备已断开。
      * @syscap SystemCapability.Mechanic.Core
      * @since 20 dynamic
      * @since 23 static
@@ -2030,10 +2030,7 @@ declare namespace mechanicManager {
    */
   export interface BatteryLevelInfo {
     /**
-     * ID of the mechanical device.
-     *        ID of the mechanical device.
-     *      ID of the mechanical device.
-     * 设备ID。
+     * 机械体设备ID。
      * 取值限定为整数。
      *
      * @syscap SystemCapability.Mechanic.Core
