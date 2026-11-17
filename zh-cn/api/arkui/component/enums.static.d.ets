@@ -3188,7 +3188,7 @@ export declare enum ImageSpanAlignment {
  */
 export declare enum ObscuredReasons {
   /**
-   * Displayed data should appear as generic placeholders.
+   * 显示的数据为通用占位符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3571,7 +3571,7 @@ export declare enum RenderFit {
 }
 
 /**
- * The Button Style of dialog,
+ * 弹窗按钮的样式。
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4647,7 +4647,7 @@ export declare enum TipsAnchorType {
  */
 export declare enum DialogDisplayMode {
   /**
-   * The dialog displayed based on screen.
+   * 弹窗在屏幕居中显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4655,7 +4655,7 @@ export declare enum DialogDisplayMode {
    */
   SCREEN_BASED = 0,
   /**
-   * The dialog displayed based on application window.
+   * 弹窗在应用窗口居中显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

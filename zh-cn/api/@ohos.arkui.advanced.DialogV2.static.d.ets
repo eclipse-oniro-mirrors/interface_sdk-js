@@ -443,7 +443,7 @@ export declare struct TipsDialogV2 {
   @Param
   onCheckedChange?: AdvancedDialogV2OnCheckedChange;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -517,7 +517,7 @@ export declare struct SelectDialogV2 {
   @Param
   radioContent: SheetInfo[];
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -615,7 +615,7 @@ export declare struct ConfirmDialogV2 {
   @Param
   onCheckedChange?: AdvancedDialogV2OnCheckedChange;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -693,7 +693,7 @@ export declare struct AlertDialogV2 {
   @Param
   secondaryButton?: AdvancedDialogV2Button;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -726,7 +726,7 @@ export declare struct LoadingDialogV2 {
   @Param
   content?: ResourceStr;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -803,7 +803,7 @@ export declare struct CustomContentDialogV2 {
   @Param
   buttons?: AdvancedDialogV2Button[];
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -866,7 +866,7 @@ export declare struct PopoverDialogV2 {
   @BuilderParam
   targetBuilder: CustomBuilder;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

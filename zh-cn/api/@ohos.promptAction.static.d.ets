@@ -1034,7 +1034,7 @@ declare namespace promptAction {
         showInSubWindow?: boolean;
 
         /**
-         * Defines the dialog display mode when show in subwindow.
+         * 弹窗在子窗口中的显示模式。
          *
          * @type { ?DialogDisplayMode }
          * @default DialogDisplayMode.SCREEN_BASED
