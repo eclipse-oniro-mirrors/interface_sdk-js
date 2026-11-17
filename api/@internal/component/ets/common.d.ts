@@ -30799,6 +30799,7 @@ declare class DynamicNode<T> {
    * @since 20 dynamic
    */
   onMove(handler: Optional<OnMoveHandler>, eventHandler: ItemDragEventHandler): T;
+}
   
 /**
  * Implements an object used to configure the
