@@ -1763,7 +1763,7 @@ declare namespace uiEffect {
     /**
      * 设置棱镜遮罩的归一化半径。
      * 取值范围为 [0, 10]，超出范围的值在实现时会被截断。
-     * 当 maskRadius等于1.0时, 等于组件宽度。
+     * 当 maskRadius等于1.0时, 等于组件高度。
      * 
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
