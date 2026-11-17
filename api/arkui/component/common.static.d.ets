@@ -15237,11 +15237,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default scrollBarHeight(height: LengthMetrics | undefined): this;
 
     /**
-     * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
-     * in response to arrow key presses when focused but not in active focus state.
+     * Sets whether the scrolling component supports scrolling by arrow keys. After this function is enabled, the
+     * scrolling component responds to the arrow keys on the keyboard when the focus is obtained and the focus is not
+     * activated. If this parameter is not set, scrolling by arrow keys is not supported by default.
      *
-     * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
-     *     <br>Default value: true.
+     * @param { boolean | undefined } enabled - Indicates whether to support scrolling by arrow keys on the
+     *     keyboard. <br/>true: scrolling is supported. <br/>false: scrolling is not supported. <br/>undefined:
+     *     scrolling is not supported.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
