@@ -583,7 +583,20 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * 切换上网卡。
+     *
+     * 禁用后，默认上网卡不可切换，且仅允许当前默认上网卡承载上网业务。
+     * 语音、短信业务不受影响。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SWITCH_DATACARD = 54,
+
+    /**
      * 增强信息。
+     *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
      * @stagemodelonly
      * @since 26.1.0
