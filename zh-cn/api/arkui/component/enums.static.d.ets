@@ -3801,7 +3801,7 @@ export declare enum EllipsisMode {
 }
 
 /**
- * A type which can be undefined
+ * 在使用该类型时，其值可以是泛型参数T所指定的类型，也可以是undefined。
  *
  * @typedef { T | undefined } Nullable<T>
  * @syscap SystemCapability.ArkUI.ArkUI.Full
