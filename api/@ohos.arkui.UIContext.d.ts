@@ -7148,8 +7148,8 @@ export class UIContext {
    * > starts on the current page. If it is called after the page enters the first layout process, the applied
    * > strategies remain unchanged and this API does not take effect.
    *
-   * @param { ImmersiveStrategy[] } types - Immersive strategies to apply. An empty array clears all applied
-   *     immersive strategies.
+   * @param { ImmersiveStrategy[] } types - Immersive policy to apply. An empty array clears all applied immersive policies.
+   * <br/>Abnormal values such as **undefined**, **null**, **NaN**, and **Infinity** are treated as an empty array.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
