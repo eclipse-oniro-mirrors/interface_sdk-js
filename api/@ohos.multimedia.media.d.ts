@@ -12202,7 +12202,7 @@ declare namespace media {
     /**
      * Sets video transcoding parameters. This API uses a promise to return the result.
      *
-     * @param {  AVTranscoderConfig  } config - Video transcoding parameters to set.<!--RP1--><!--RP1End-->
+     * @param {  AVTranscoderConfig  } config - Video transcoding parameters to set.
      * @returns {  Promise<void>  } Promise that returns no value.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
