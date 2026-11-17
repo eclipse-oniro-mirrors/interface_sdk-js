@@ -2252,7 +2252,7 @@ export declare class WebContextMenuParam {
     /**
      * Returns a Text Fragment link URL that points to the currently highlighted text.
      *
-     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @returns { string } Return the Text Fragment link URL, or return an empty string if not available.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.1.0 static
