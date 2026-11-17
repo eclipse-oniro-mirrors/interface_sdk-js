@@ -67,7 +67,7 @@ import { ResourceStr, SizeOptions, VoidCallback } from './arkui/component/units'
 
 import { KeyProcessingMode } from '@ohos.arkui.component';
 import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType,
-  ModifierKey, FunctionKey } from './arkui/component/enums';
+  ImmersiveStrategy, ModifierKey, FunctionKey } from './arkui/component/enums';
 
 import { TextMenuOptions, TextLayoutOptions, StyledString, Paragraph } from '@ohos.arkui.component';
 import { TimePickerDialogOptions } from './arkui/component/timePicker';
@@ -4945,6 +4945,23 @@ export declare class UIContext {
    * @since 26.0.0 static
    */
   setTextSelectionClearPolicy(policy: TextSelectionClearPolicy): void;
+
+  /**
+   * 在EntryAbility或应用首页中应用安全区域沉浸式策略。适用于全屏或沉浸式应用等场景。
+   * 在应用首次布局前可以统一配置安全区域沉浸式策略。策略应用后，页面处理安全区域的方式会根据指定的策略进行调整。
+   *
+   * > **说明**
+   * >
+   * > 不支持动态更新。该接口仅在应用首次布局流程开始前调用才生效。
+   * > 如果在页面进入首次布局流程后调用，则应用的策略不变，此接口不生效。
+   *
+   * @param { ImmersiveStrategy[] } types - 应用的沉浸式策略。空数组将清除所有已应用的沉浸式策略。
+   * <br/>设置异常值undefined、null、NaN、Infinity时按空数组处理。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  applyDefaultImmersiveStrategy(...types: ImmersiveStrategy[]): void;
 }
 
 /**

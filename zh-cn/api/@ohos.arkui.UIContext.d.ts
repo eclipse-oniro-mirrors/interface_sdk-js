@@ -6432,7 +6432,8 @@ export class UIContext {
    * >
    * > 不支持动态更新。该接口仅在应用首次布局流程开始前调用才生效。如果在页面进入首次布局流程后调用，则应用的策略不变，此接口不生效。
    *
-   * @param { ImmersiveStrategy[] } types - 应用的沉浸式策略。空数组将清除所有已应用的沉浸式策略。<br/>设置异常值undefined、null、NaN、Infinity时按空数组处理。
+   * @param { ImmersiveStrategy[] } types - 应用的沉浸式策略。空数组将清除所有已应用的沉浸式策略。
+   * <br/>设置异常值undefined、null、NaN、Infinity时按空数组处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
