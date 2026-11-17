@@ -125,7 +125,17 @@ declare namespace systemSoundManager {
      * @since 20 dynamic
      * @since 23 static
      */
-    ERROR_INVALID_PARAM = 20700007
+    ERROR_INVALID_PARAM = 20700007,
+
+    /**
+     * I/O错误。
+     *
+     * @syscap SystemCapability.Multimedia.SystemSound.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ERROR_INVALID_PARAM = 20700008,
   }
 
   /**
@@ -1470,6 +1480,28 @@ declare namespace systemSoundManager {
      * @since 23 static
      */
     openToneHaptics(context: BaseContext, hapticsUri: string): Promise<int>;
+
+    /**
+     * 一键还原所有铃声和震动设置为出厂默认值，并删除自定义音频铃音（保留视频铃声）。
+     *
+     * 还原范围包括：来电铃声、短信/通知提示音、闹钟铃声的当前选中URI，以及铃音振动设置。还原后各项恢复为出厂预置默认值，同时删除铃音库中通过
+     * {@link SystemSoundManager#addCustomizedTone}添加的自定义音频铃声，但保留视频铃声。
+     *
+     * > **说明**
+     * >  还原过程再服务端原子执行，任一步骤失败将回滚已修改项并以错误码返回。
+     *
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permisson verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permisson verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 20700003 - Unsupported operation.
+     * @throws { BusinessError } 20700008 - I/O error.
+     * @syscap SystemCapability.Multimedia.SystemSound.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    factoryReset(): Promise<void>;
   }
 
   /**
