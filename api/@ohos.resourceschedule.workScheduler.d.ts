@@ -696,7 +696,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   export interface FrequencyInfo {
     /**
@@ -706,7 +706,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     uid: int;
     /**
@@ -716,7 +716,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     workId: int;
     /**
@@ -726,7 +726,7 @@ declare namespace workScheduler {
      * @syscap SystemCapability.ResourceSchedule.WorkScheduler
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamiconly
+     * @since 26.1.0 dynamiconly
      */
     interval: int;
   }
@@ -743,7 +743,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function setExecFrequency(info: FrequencyInfo): void;
 
@@ -760,7 +760,7 @@ declare namespace workScheduler {
    * @syscap SystemCapability.ResourceSchedule.WorkScheduler
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamiconly
+   * @since 26.1.0 dynamiconly
    */
   function resetExecFrequency(uid: int): void;
 }
