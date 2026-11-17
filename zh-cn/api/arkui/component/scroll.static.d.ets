@@ -223,12 +223,12 @@ export declare interface ScrollToIndexOptions {
   /**
    * 快速滚动模式，用于滚动到指定索引。
    * 当 `fastScroll` 为 `SKIP_MEASURE` 或 `SKIP_CREATE_AND_MEASURE` 时，滚动动画估算目标位置并跳过部分中间子项。
-   * 仅当 `smooth` 为 `true` 时生效。默认值为 `FastScrollMode.NONE`，非法值按 `FastScrollMode.NONE` 处理。
+   * 该参数支持 `List`、`Grid` 以及采用 `SLIDING_WINDOW` 布局模式的 `WaterFlow`，且仅当 `smooth` 为 `true` 时生效。
+   * 默认值为 `FastScrollMode.NONE`，非法值按 `FastScrollMode.NONE` 处理。
    * 此字段只对本次调用生效。下一次调用省略 `fastScroll` 时使用 `NONE`。
    *
-   * `Grid` 的特殊行列位置效果通过 `GridLayoutOptions` 表达。
-   * `SKIP_CREATE_AND_MEASURE` 不负责发现仅在创建冷 `GridItem` 时才设置的显式位置。
-   * 此使用约定不改变 `SKIP_MEASURE` 或 `NONE`。
+   * 对于 `Grid`，目标项和中间项的跨行、跨列信息在滚动开始时可能尚未确定。使用 `SKIP_MEASURE` 时，可按需创建中间
+   * `GridItem` 以获取这些信息；使用 `SKIP_CREATE_AND_MEASURE` 时，需通过 `GridLayoutOptions` 提前提供完整、准确的跨度信息。
    *
    * 对于 `Grid`，保留的子项包括动画开始和结束时视口内的子项、确定目标实际布局所需的子项，以及与目标视口相交的跨行跨列项。
    *

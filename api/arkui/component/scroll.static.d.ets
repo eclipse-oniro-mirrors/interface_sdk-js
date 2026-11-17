@@ -225,7 +225,8 @@ export declare interface ScrollToIndexOptions {
   /**
    * Fast scroll mode for scrolling to a specified index.
    * When `fastScroll` selects `SKIP_MEASURE` or `SKIP_CREATE_AND_MEASURE`, the animation estimates the target
-   * position and skips some intermediate items. This parameter takes effect only when `smooth` is `true`.
+   * position and skips some intermediate items. This parameter applies to `List`, `Grid`, and `WaterFlow` in
+   * `SLIDING_WINDOW` layout mode, and takes effect only when `smooth` is `true`.
    * Default value: `FastScrollMode.NONE`. Unrecognized values use `FastScrollMode.NONE`.
    * The setting applies only to this call. The next call uses `NONE` if `fastScroll` is omitted.
    *
