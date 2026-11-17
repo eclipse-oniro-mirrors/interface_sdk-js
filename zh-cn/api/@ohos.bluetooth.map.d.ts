@@ -27,7 +27,7 @@ import type constant from './@ohos.bluetooth.constant';
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @since 11 dynamic
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 declare namespace map {
   /**
@@ -35,16 +35,17 @@ declare namespace map {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BaseProfile = baseProfile.BaseProfile;
 
   /**
+   * Indicate the phone book access authorization.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type AccessAuthorization = constant.AccessAuthorization;
 
@@ -53,25 +54,26 @@ declare namespace map {
    * 接状态。适用于蓝牙消息同步、车载蓝牙消息查看等场景。
    *
    * @returns { MapMseProfile } 返回MapMseProfile实例，该实例可用于本端作为MSE设备进行蓝牙消息访问相关操作。
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createMapMseProfile(): MapMseProfile;
 
   /**
    * 该实例表示蓝牙消息访问协议中的MSE角色。
-   * 
+   *
    * - 该类继承于[BaseProfile]{@link map.BaseProfile}，因此可以使用其父类中的方法。
    * - 使用该类的接口前，需通过[createMapMseProfile]{@link map.createMapMseProfile}接口构造该类的实例。
    * - 和该实例角色相对应的是MCE角色。
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface MapMseProfile extends BaseProfile {
     /**
@@ -79,11 +81,17 @@ declare namespace map {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - 远端设备地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -91,7 +99,7 @@ declare namespace map {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
 
@@ -103,11 +111,17 @@ declare namespace map {
      * @param { AccessAuthorization } authorization - 表示对信息访问的授权状态，例如允许访问（ACCESS_ALLOWED）、拒绝访问（ACCESS_DENIED）等。具体枚举值及含义详
      *     见[AccessAuthorization]{@link @ohos.bluetooth.constant:constant.AccessAuthorization}。
      * @returns { Promise<void> } 以Promise的形式返回结果。如果成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -115,7 +129,7 @@ declare namespace map {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setMessageAccessAuthorization(deviceId: string, authorization: AccessAuthorization): Promise<void>;
 
@@ -125,11 +139,17 @@ declare namespace map {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - 表示远端设备地址，例如："XX:XX:XX:XX:XX:XX"。
      * @returns { Promise<AccessAuthorization> } 以Promise的形式返回结果。如果成功，err为undefined，否则为错误对象。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -137,7 +157,7 @@ declare namespace map {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getMessageAccessAuthorization(deviceId: string): Promise<AccessAuthorization>;
   }

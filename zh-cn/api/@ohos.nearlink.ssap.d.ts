@@ -289,7 +289,7 @@ declare namespace ssap {
      *
      * 此接口不支持写入客户端属性配置描述符（CLIENT_PROPERTY_CONFIG），如需配置客户端属性通知或指示，请使用
      * [setPropertyNotification]{@link ssap.Client.setPropertyNotification}或
-     * [setPropertyIndication]{@link ssap.Client.setPropertyIndication}
+     * [setPropertyIndication]{@link ssap.Client.setPropertyIndication}。
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { PropertyDescriptor } descriptor - 服务端属性描述符。需与服务发现时获取的对端Service中的descriptor对应。
@@ -360,7 +360,6 @@ declare namespace ssap {
      *
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { int } mtu - MTU参数，取值范围[22, 1024]，单位：字节。默认值251。
-     *     <br>单位为：字节。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
@@ -468,7 +467,8 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [offConnectionStateChange]{@link ssap.Client.offConnectionStateChange(callback?:
-     *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
+     *     Callback<ConnectionChangeState>): void}
+     *     取消订阅连接状态变化事件。
      */
     onConnectionStateChange(callback: Callback<ConnectionChangeState>): void;
 
@@ -483,7 +483,8 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [onConnectionStateChange]{@link ssap.Client.onConnectionStateChange(callback:
-     *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
+     *     Callback<ConnectionChangeState>): void}
+     *     订阅连接状态变化事件。
      */
     offConnectionStateChange(callback?: Callback<ConnectionChangeState>): void;
 
@@ -555,8 +556,8 @@ declare namespace ssap {
      * 服务端删除服务。
      *
      * @permission ohos.permission.ACCESS_NEARLINK
-     * @param { string } serviceUuid - 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-00000000123
-     *     4，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * @param { string } serviceUuid - 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如：
+     *     FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
@@ -642,7 +643,8 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [offConnectionStateChange]{@link ssap.Server.offConnectionStateChange(callback?:
-     *     Callback<ConnectionChangeState>): void} Unsubscribes from the connection status change event.
+     *     Callback<ConnectionChangeState>): void}
+     *     取消订阅连接状态变化事件。
      */
     onConnectionStateChange(callback: Callback<ConnectionChangeState>): void;
 
@@ -657,7 +659,8 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [onConnectionStateChange]{@link ssap.Server.onConnectionStateChange(callback:
-     *     Callback<ConnectionChangeState>): void} Subscribes to the connection status change event.
+     *     Callback<ConnectionChangeState>): void}
+     *    订阅连接状态变化事件。
      */
     offConnectionStateChange(callback?: Callback<ConnectionChangeState>): void;
 
@@ -673,7 +676,7 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [offPropertyRead]{@link ssap.Server.offPropertyRead(callback?: Callback<PropertyReadRequest>): void}
-          *     取消订阅客户端的读属性请求事件。
+     *     取消订阅客户端的读属性请求事件。
      */
     onPropertyRead(callback: Callback<PropertyReadRequest>): void;
 
@@ -687,7 +690,8 @@ declare namespace ssap {
      * @atomicservice [since 26.1.0]
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
-     * @see [onPropertyRead]{@link ssap.Server.onPropertyRead(callback: Callback<PropertyReadRequest>): void}      *     订阅客户端的读属性请求事件。
+     * @see [onPropertyRead]{@link ssap.Server.onPropertyRead(callback: Callback<PropertyReadRequest>): void}
+     *     订阅客户端的读属性请求事件。
      */
     offPropertyRead(callback?: Callback<PropertyReadRequest>): void;
 
@@ -703,7 +707,7 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [offPropertyWrite]{@link ssap.Server.offPropertyWrite(callback?: Callback<PropertyWriteRequest>): void}
-          *     取消订阅客户端的写属性请求事件。
+     *     取消订阅客户端的写属性请求事件。
      */
     onPropertyWrite(callback: Callback<PropertyWriteRequest>): void;
 
@@ -718,7 +722,7 @@ declare namespace ssap {
      * @since 26.0.0 dynamic
      * @since 26.0.1 static
      * @see [onPropertyWrite]{@link ssap.Server.onPropertyWrite(callback: Callback<PropertyWriteRequest>): void}
-          *     订阅客户端的写属性请求事件。
+     *     订阅客户端的写属性请求事件。
      */
     offPropertyWrite(callback?: Callback<PropertyWriteRequest>): void;
 
@@ -763,7 +767,8 @@ declare namespace ssap {
    */
   interface Service {
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -817,7 +822,8 @@ declare namespace ssap {
    */
   interface Property {
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -882,8 +888,8 @@ declare namespace ssap {
    */
   interface Method {
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
-     * 长度必须为36。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
@@ -940,8 +946,8 @@ declare namespace ssap {
    */
   interface Event {
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
-     * 长度必须为36。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
@@ -986,7 +992,8 @@ declare namespace ssap {
    */
   interface PropertyDescriptor {
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1026,7 +1033,7 @@ declare namespace ssap {
      */
     descriptorType: PropertyDescriptorType;
     /**
-     * 表示描述符是否是可写的。true：可写，false：不可写。默认值为true。
+     * 表示描述符是否可写。true：可写，false：不可写。默认值为true。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1058,7 +1065,8 @@ declare namespace ssap {
      */
     address: string;
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1110,7 +1118,8 @@ declare namespace ssap {
      */
     address: string;
     /**
-     * 星闪服务UUID，个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，表示一个128位标识符。 不允许使用星闪标准UUID。
+     * 星闪服务UUID，36个字符，由32个十六进制数字和4个连字符（-）组成，例如： FFFFFFFF-1234-5678-ABCD-000000001234，
+     * 表示一个128位标识符。 不允许使用星闪标准UUID。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly

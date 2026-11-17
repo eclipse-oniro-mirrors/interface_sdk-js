@@ -302,19 +302,16 @@ declare namespace ssap {
     readDescriptor(descriptor: PropertyDescriptor): Promise<PropertyDescriptor>;
 
     /**
-     * Rewrites the server descriptor. This API uses a promise to return the result.
-     *
-     * This API does not support writing the client property configuration descriptor (**CLIENT_PROPERTY_CONFIG**). To
-     * configure the client property notification or indication, use
-     * [setPropertyNotification]{@link ssap.Client.setPropertyNotification} or
-     * [setPropertyIndication]{@link ssap.Client.setPropertyIndication}
-     *
+     * Rewrite the descriptor on the server. Use Promise asynchronous callbacks. This interface does not support writing
+     * the client attribute configuration descriptor(CLIENT_PROPERTY_CONFIG). To configure the client attribute
+     * notification or indication, use [setPropertyNotification]{@link ssap.Client.setPropertyNotification} or
+     * [setPropertyIndication]{@link ssap.Client.setPropertyIndication}.
      * @permission ohos.permission.ACCESS_NEARLINK
      * @param { PropertyDescriptor } descriptor - Server property descriptor. The value must correspond to the
-     *     descriptor in the service on a remote device obtained during service discovery.
+     *         descriptor in the service on a remote device obtained during service discovery.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
-     *     The application does not have the permission required to call the API.
+     *         The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
      * @throws { BusinessError } 36100043 - Invalid UUID in descriptor.
@@ -383,8 +380,7 @@ declare namespace ssap {
      * Initiates an MTU negotiation request. This API uses a promise to return the result.
      *
      * @permission ohos.permission.ACCESS_NEARLINK
-     * @param { int } mtu - MTU parameter.  The default value is **251**.
-     *     <br>Unit: byte. Value range: [22, 1024],.
+     * @param { int } mtu - Indicates the MTU. The value ranges from 22 to 1024, in bytes. The default value is 251.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
@@ -602,9 +598,9 @@ declare namespace ssap {
      * Removes a service from the server.
      *
      * @permission ohos.permission.ACCESS_NEARLINK
-     * @param { string } serviceUuid - NearLink service UUID, which is a string of 36 characters. The value consists of
-     *     32 hexadecimal digits and four hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which
-     *     indicates a 128-bit ID. The value cannot be set to a standard NearLink UUID.
+     * @param { string } serviceUuid - UUID of the Sparkle service. The value is a string of 36 characters
+     *     consisting of 32 hexadecimal digits and four hyphens(-). For example:
+     * FFFFFFFF-1234-5678-ABCD-000000001234, indicating a 128-bit identifier. Starblink standard UUIDs are not allowed.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 36100003 - NearLink disabled.
@@ -829,9 +825,9 @@ declare namespace ssap {
    */
   interface Service {
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -885,9 +881,9 @@ declare namespace ssap {
    */
   interface Property {
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit identifier.
-     * Standard NearLink UUIDs are not allowed.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -954,9 +950,9 @@ declare namespace ssap {
    */
   interface Method {
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
@@ -1015,9 +1011,9 @@ declare namespace ssap {
    */
   interface Event {
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
@@ -1063,9 +1059,9 @@ declare namespace ssap {
    */
   interface PropertyDescriptor {
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1105,9 +1101,8 @@ declare namespace ssap {
      */
     descriptorType: PropertyDescriptorType;
     /**
-     * Whether a descriptor is writable. The value **true** indicates the descriptor is writable, and the value
-     * **false** indicates the opposite. The default value is **true**.
-     *
+    The asterisk(*) indicates whether the descriptor is writable. true: writable; false: not writable. The default
+     * value is true.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -1138,9 +1133,9 @@ declare namespace ssap {
      */
     address: string;
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1193,9 +1188,9 @@ declare namespace ssap {
      */
     address: string;
     /**
-     * NearLink service UUID, which is a string of 36 characters. The value consists of 32 hexadecimal digits and four
-     * hyphens (-), for example, **FFFFFFFF-1234-5678-ABCD-000000001234**, which indicates a 128-bit ID. The value
-     * cannot be set to a standard NearLink UUID.
+     * Indicates the UUID of the Sparkling service. The value is a string of 36 characters consisting of 32 hexadecimal
+     * digits and four hyphens(-), for example, FFFFFFFF-1234-5678-ABCD-000000001234,
+     * indicates a 128-bit identifier. Starblink standard UUIDs are not allowed.
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly

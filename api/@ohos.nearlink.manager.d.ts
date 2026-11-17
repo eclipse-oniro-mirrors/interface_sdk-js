@@ -21,9 +21,9 @@
 import type { Callback } from '@ohos.base';
 
 /**
- * This module provides basic NearLink management capabilities, including enabling or disabling NearLink, obtaining the
- * MAC address of the local device, and setting the connection mode.
- *
+ * This module provides basic management capabilities for star blinking, including querying whether star blinking is
+ * supported, enabling/disabling star blinking, subscribing to star blinking status change events, and querying paired
+ * devices.
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
  * @atomicservice [since 26.1.0]
@@ -227,8 +227,8 @@ declare namespace manager {
    *
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
    * @param { ConnectionMode } mode - Connection mode to be set.
-   * @param { int } duration - Duration of the mode to set, in seconds.  The value **0** indicates no time limit.
-   *     <br>The value should be an integer.
+   * @param { int } duration - Indicates the duration of the mode, in seconds. The value is an integer greater than
+   *     or equal to 0. If the value is 0, there is no limit.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.

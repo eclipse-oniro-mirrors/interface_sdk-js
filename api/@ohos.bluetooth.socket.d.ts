@@ -26,7 +26,7 @@ import type baseProfile from './@ohos.bluetooth.baseProfile';
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @since 10 dynamic
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 declare namespace socket {
   /**
@@ -36,17 +36,23 @@ declare namespace socket {
    * @param { string } name - Indicates the service name.
    * @param { SppOptions } options - Indicates the listen parameters.
    * @param { AsyncCallback<int> } callback - Callback used to return a server socket ID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900004 - Profile not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function sppListen(name: string, options: SppOptions, callback: AsyncCallback<int>): void;
 
@@ -57,7 +63,7 @@ declare namespace socket {
    * @returns { int } Returns the l2cap socket psm
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 20 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getL2capPsm(serverSocket: int): int;
 
@@ -66,16 +72,17 @@ declare namespace socket {
    *
    * @param { int } serverSocket - Indicates the server socket ID, returned by {@link sppListen}.
    * @param { AsyncCallback<int> } callback - Callback used to return a client socket ID.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900004 - Profile not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function sppAccept(serverSocket: int, callback: AsyncCallback<int>): void;
 
@@ -86,32 +93,122 @@ declare namespace socket {
    * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
    * @param { SppOptions } options - Indicates the connect parameters {@link SppOptions}.
    * @param { AsyncCallback<int> } callback - Callback used to return a client socket ID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900004 - Profile not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function sppConnect(deviceId: string, options: SppOptions, callback: AsyncCallback<int>): void;
+
+  /**
+   * Disables an spp server socket and releases related resources.
+   *
+   * @param { int } socket - Indicates the server socket ID, returned by {@link sppListen}.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900001 - Service stopped.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 10 dynamic
+   * @since 26.1.0 static
+   */
+  function sppCloseServerSocket(socket: int): void;
+
+  /**
+   * Disables an spp client socket and releases related resources.
+   *
+   * @param { int } socket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900001 - Service stopped.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 10 dynamic
+   * @since 26.1.0 static
+   */
+  function sppCloseClientSocket(socket: int): void;
+
+  /**
+   * Write data through the socket.
+   *
+   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
+   * @param { ArrayBuffer } data - Indicates the data to write.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2901054 - IO error.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 10 dynamic
+   * @since 26.1.0 static
+   */
+  function sppWrite(clientSocket: int, data: ArrayBuffer): void;
+
+  /**
+   * Asynchronous interface for writing data to the socket.
+   *
+   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
+   * @param { ArrayBuffer } data - Indicates the data to write.
+   * @returns { Promise<void> } Returns the promise object.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2901054 - IO error.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 18 dynamic
+   * @since 26.1.0 static
+   */
+  function sppWriteAsync(clientSocket: int, data: ArrayBuffer): Promise<void>;
+
+  /**
+   * Asynchronous interface for reading data from the socket.
+   *
+   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
+   * @returns { Promise<ArrayBuffer> } Returns the promise object, used to get the spp read data.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2901054 - IO error.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @since 18 dynamic
+   * @since 26.1.0 static
+   */
+  function sppReadAsync(clientSocket: int): Promise<ArrayBuffer>;
 
   /**
    * Obtain the device id in the client socket.
    *
    * @param { int } clientSocket - Indicates client socket.
    * @returns { string } Returns the connected device id
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   * 1. Mandatory parameters are left unspecified;
-   * 2. Incorrect parameter types;
-   * 3. Parameter verification failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 17 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getDeviceId(clientSocket: int): string;
 
@@ -122,7 +219,7 @@ declare namespace socket {
    * @returns { int } Maximum received data size
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getMaxReceiveDataSize(clientSocket: int): int;
 
@@ -133,7 +230,7 @@ declare namespace socket {
    * @returns { int } Maximum transmitted data size
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getMaxTransmitDataSize(clientSocket: int): int;
 
@@ -144,55 +241,9 @@ declare namespace socket {
    * @returns { boolean } Indicates whether or not it is connected.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 22 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function isConnected(clientSocket: int): boolean;
-
-  /**
-   * Disables an spp server socket and releases related resources.
-   *
-   * @param { int } socket - Indicates the server socket ID, returned by {@link sppListen}.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900001 - Service stopped.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 10 dynamic
-   * @since 26.0.1 static
-   */
-  function sppCloseServerSocket(socket: int): void;
-
-  /**
-   * Disables an spp client socket and releases related resources.
-   *
-   * @param { int } socket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900001 - Service stopped.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 10 dynamic
-   * @since 26.0.1 static
-   */
-  function sppCloseClientSocket(socket: int): void;
-
-  /**
-   * Write data through the socket.
-   *
-   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
-   * @param { ArrayBuffer } data - Indicates the data to write.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2901054 - IO error.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 10 dynamic
-   * @since 26.0.1 static
-   */
-  function sppWrite(clientSocket: int, data: ArrayBuffer): void;
 
   /**
    * Subscribe the event reported when data is read from the socket.
@@ -200,9 +251,10 @@ declare namespace socket {
    * @param { 'sppRead' } type - Type of the spp read event to listen for.
    * @param { number } clientSocket - Client socket ID, which is obtained by sppAccept or sppConnect.
    * @param { Callback<ArrayBuffer> } callback - Callback used to listen for the spp read event.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2901054 - IO error.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -216,23 +268,30 @@ declare namespace socket {
    * @param { int } clientSocket - Client socket ID, which is obtained by sppAccept or sppConnect.
    *     The value should be an integer.
    * @param { Callback<ArrayBuffer> } callback - Callback used to listen for the spp read event.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2901054 - IO error.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function onSppRead(clientSocket: int, callback: Callback<ArrayBuffer>): void;
-
   /**
    * Unsubscribe the event reported when data is read from the socket.
    *
    * @param { 'sppRead' } type - Type of the spp read event to listen for.
    * @param { number } clientSocket - Client socket ID, which is obtained by sppAccept or sppConnect.
-   * @param { Callback<ArrayBuffer> } callback - Callback used to listen for the spp read event.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { Callback<ArrayBuffer> } [callback] - Specifies the callback function notification for unsubscription.
+   * If the parameter is transferred, the parameter must be set to
+   * [socket.on('sppRead')]{@link socket.on(type:'sppRead', clientSocket: number, callback: Callback<ArrayBuffer>)}
+  The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+   * corresponding to the type are unsubscribed from.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
    */
@@ -244,47 +303,21 @@ declare namespace socket {
    * @param { int } clientSocket - Client socket ID, which is obtained by sppAccept or sppConnect.
    *     The value should be an integer.
    * @param { Callback<ArrayBuffer> } [callback] - Callback used to listen for the spp read event.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function offSppRead(clientSocket: int, callback?: Callback<ArrayBuffer>): void;
-
-  /**
-   * Asynchronous interface for writing data to the socket.
-   *
-   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
-   * @param { ArrayBuffer } data - Indicates the data to write.
-   * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2901054 - IO error.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 18 dynamic
-   * @since 26.0.1 static
-   */
-  function sppWriteAsync(clientSocket: int, data: ArrayBuffer): Promise<void>;
-
-  /**
-   * Asynchronous interface for reading data from the socket.
-   *
-   * @param { int } clientSocket - Indicates the client socket ID, returned by {@link sppAccept} or {@link sppConnect}.
-   * @returns { Promise<ArrayBuffer> } Returns the promise object, used to get the spp read data.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2901054 - IO error.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @since 18 dynamic
-   * @since 26.0.1 static
-   */
-  function sppReadAsync(clientSocket: int): Promise<ArrayBuffer>;
 
   /**
    * Describes the spp parameters.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface SppOptions {
     /**
@@ -292,7 +325,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     uuid: string;
     /**
@@ -300,7 +333,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     secure: boolean;
     /**
@@ -308,7 +341,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     type: SppType;
     /**
@@ -316,7 +349,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     psm?: int;
   }
@@ -326,7 +359,7 @@ declare namespace socket {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum SppType {
     /**
@@ -334,7 +367,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SPP_RFCOMM = 0,
     /**
@@ -342,7 +375,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SPP_L2CAP = 1,
     /**
@@ -350,7 +383,7 @@ declare namespace socket {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SPP_L2CAP_BLE = 2
   }

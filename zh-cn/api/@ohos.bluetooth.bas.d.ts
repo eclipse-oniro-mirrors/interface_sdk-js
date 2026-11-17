@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 Huawei Device Co., Ltd.
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,9 +28,8 @@ import type common from './@ohos.bluetooth.common';
  * @systemapi
  * @stagemodelonly
  * @since 26.0.0 dynamic
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
-
 declare namespace bas {
   /**
    * 描述蓝牙设备地址信息的参数结构，包括地址与地址类型。
@@ -39,27 +38,25 @@ declare namespace bas {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BluetoothAddress = common.BluetoothAddress;
-
   /**
    * 判断本机设备是否可以获取远端设备的电量。
    *
    * @returns { boolean } 返回true表示本机支持获取远端设备的电量；返回false表示本机不支持获取远端设备的电量。
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function isBasSupported(): boolean;
-
   /**
    * 查询远端设备的电量信息。
-   * 
+   *
    * 使用此接口前建议使用[isBasSupported]{@link bas.isBasSupported}查询本机是否支持获取远端设备的电量。
    * 只有支持蓝牙标准协议定义的电量服务（UUID：0000180F-0000-1000-8000-00805F9B34FB）的BLE远端设备才支持获取电量信息。
    * 对端蓝牙设备的电量信息变更通过[onBatteryChange]{@link bas.on}的回调结果获取。
@@ -69,11 +66,13 @@ declare namespace bas {
    * @param { BluetoothAddress } deviceId - 表示远端设备的地址信息。
    *     BluetoothAddress中的address、addressType、rawAddressType均为必选参数。
    * @returns { Promise<BatteryInfo> } Promise对象，返回远端设备的电量信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Only can be called on phone, tablet, and 2in1 devices.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900004 - Remote Device profile not supported.
@@ -83,13 +82,13 @@ declare namespace bas {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getRemoteDeviceBatteryInfo(deviceId: BluetoothAddress): Promise<BatteryInfo>;
 
   /**
    * 订阅远端设备电量状态变化事件。
-   * 
+   *
    * 只有支持蓝牙标准协议定义的电量服务（UUID：0000180F-0000-1000-8000-00805F9B34FB）的BLE远端设备才支持上报电量信息，不可与
    * [connection.on('batteryChange')]{@link @ohos.bluetooth.connection:connection.on(type: 'batteryChange', callback: Callback<BatteryInfo>)}
    * 混用。
@@ -97,23 +96,25 @@ declare namespace bas {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BatteryInfo> } callback - 回调函数，返回电量信息。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Only can be called on phone, tablet, and 2in1 devices.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function onBatteryChange(callback: Callback<BatteryInfo>): void;
 
   /**
    * 取消订阅远端设备电量状态变化事件。
-   * 
+   *
    * 不可与
    * [connection.off('batteryChange')]{@link @ohos.bluetooth.connection:connection.off(type: 'batteryChange', callback?: Callback<BatteryInfo>)}
    * 混用。
@@ -121,17 +122,19 @@ declare namespace bas {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<BatteryInfo> } [callback] - 回调函数。
    *     若传参，则需与[bas.onBatteryChange]{@link bas.on}中的回调函数一致；若无传参，则取消订阅电量变化所有回调函数通知。
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Only can be called on phone, tablet, and 2in1 devices.
-   *     Failed to call the API when the short-range chip is not inserted on 2in1 device.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function offBatteryChange(callback?: Callback<BatteryInfo>): void;
 
@@ -142,7 +145,7 @@ declare namespace bas {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface BatteryInfo {
     /**
@@ -152,7 +155,7 @@ declare namespace bas {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     deviceId: BluetoothAddress;
     /**
@@ -162,7 +165,7 @@ declare namespace bas {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     batteryLevel: int;
   }
