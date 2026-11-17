@@ -2384,6 +2384,74 @@ declare namespace applicationManager {
    * @since 26.1.0
    */
   function getAllMainWindowStates(): Array<MainWindowStates>;
+
+  /**
+   * Add the app to the list of enabled notifications.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { Array<string> } bundleNames - Bundle names of the
+   * applications to be added.
+   * @param { number } accountId - User account ID.
+   * <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function addEnabledNotificationBundles(bundleNames: Array<string>, accountId: number): void;
+
+  /**
+   * Remove the application from the list of enabled notifications.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { Array<string> } bundleNames - Bundle names of the
+   * applications to be removed.
+   * @param { number } accountId - User account ID.
+   * <br>The value must be greater than or equal to 0.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function removeEnabledNotificationBundles(bundleNames: Array<string>, accountId: number): void;
+
+  /**
+   * Obtains the enabled notification list.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NOTIFICATION
+   * @param { number } accountId - User account ID.
+   * <br>The value must be greater than or equal to 0.
+   * @param { common.QueryPolicy } [queryPolicy] - Query policy.
+   * If this parameter is not specified, the default value
+   * {@link common.QueryPolicy.SELF} is used.
+   * @returns { Array<string> } Returns the bundle names of the
+   * applications in the enabled list.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnabledNotificationBundles(accountId: number, queryPolicy?: common.QueryPolicy): Array<string>;
 }
 
 export default applicationManager;
