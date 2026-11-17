@@ -1273,14 +1273,14 @@ export interface OverlayManagerOptions {
   enableBackPressedEvent?: boolean;
 
   /**
-   * Callback for intercepting back-press events on an overlay.
-   * **NOTE**
-   * 1. When this callback is registered and **enableBackPressedEvent** is set to **true**,
-   *    the back-press event will not close the overlay automatically. Instead, the overlay invokes this callback
-   *    to decide whether the event should be propagated to the underlying components.
-   * 2. Return **true** to intercept the event (the event is consumed and will not be passed
-   *    to lower layers), or **false** to allow the event to propagate through to the components
-   *    below the overlay.
+   * 拦截浮层上返回按键事件的回调。
+   * **注意**
+   * 1. 当注册该回调且**enableBackPressedEvent**设置为**true**时，
+   *    返回按键事件不会自动关闭浮层，而是由浮层调用该回调
+   *    来决定事件是否向下层组件传递。
+   * 2. 返回**true**表示拦截该事件（事件被消费，不会传递
+   *    到下层），返回**false**表示允许事件继续传递
+   *    到浮层下方的组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

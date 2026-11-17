@@ -310,8 +310,8 @@ declare namespace promptAction {
          */
         hoverModeArea?: HoverModeAreaType;
         /**
- 	     * Set system-styled materials for toast. Different materials have different effects, which can influence
-         * backgroundColor, border, shadow, and other visual attributes of toast.
+ 	     * 设置Toast的系统材质。不同的材质具有不同的效果，可以影响
+         * backgroundColor、border、shadow等Toast的视觉属性。
          *
          * @type { ?SystemUiMaterial }
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -838,7 +838,7 @@ declare namespace promptAction {
          */
         systemMaterial?: uiMaterial.Material;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -848,7 +848,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1291,7 +1291,7 @@ declare namespace promptAction {
          */
         systemMaterial?: uiMaterial.Material;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1301,7 +1301,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1759,7 +1759,7 @@ declare namespace promptAction {
          */
         systemMaterial?: uiMaterial.Material;
         /**
-         * Sets the distortion animation Mode of the dialog.
+         * 设置弹窗的扭曲动画模式。
          *
          * @default DistortionMode.DISTORTION_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1769,7 +1769,7 @@ declare namespace promptAction {
          */
         distortionMode?: DistortionMode;
         /**
-         * Sets the edgeLight animation Mode of the dialog.
+         * 设置弹窗的流光动画模式。
          *
          * @default EdgeLightMode.EDGELIGHT_AUTO
          * @syscap SystemCapability.ArkUI.ArkUI.Full

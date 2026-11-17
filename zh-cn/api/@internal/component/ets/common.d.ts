@@ -24509,19 +24509,18 @@ declare class CommonMethod<T> {
   bindPopup(show: boolean, popup: PopupOptions | CustomPopupOptions): T;
 
   /**
-   * Menu control
+   * 菜单组件。
    *
-   * > **NOTE**
+   * > **说明：**
    * >
-   * > - This API can be called within [attributeModifier]{@link CommonMethod#attributeModifier} since API version 20
-   * >   only if the input parameter type of **content** is Array&lt;MenuElement&gt;.
-   * > - Multi-level menus cannot be displayed using **bindMenu** in **CustomBuilder**. Use the Menu component instead.
-   * > - **bindMenu** can be configured to display in subwindows by setting the **showInSubWindow** property in MenuOptions.
+   * > - 从API version 20开始，仅当**content**的入参类型为Array&lt;MenuElement&gt;时，才可在[attributeModifier]{@link CommonMethod#attributeModifier}中调用此接口。
+   * > - 使用**CustomBuilder**方式的**bindMenu**不支持显示多级菜单，请改用Menu组件。
+   * > - 可通过设置MenuOptions中的**showInSubWindow**属性，将**bindMenu**配置为在子窗口中显示。
    *
    * @param { { value: ResourceStr; icon?: ResourceStr; action: () => void }[] | CustomBuilder } content
-   *     action: () => void }[] | CustomBuilder } content - Indicates the content of menu. [since 7 - 10]
-   * @param { MenuOptions } [options] - Indicates the options of menu.
-   * @param { Array<MenuElement> | CustomBuilder } content - Indicates the content of menu. [since 11]
+   *     action: () => void }[] | CustomBuilder } content - 表示菜单的内容。[since 7 - 10]
+   * @param { MenuOptions } [options] - 表示菜单的选项。
+   * @param { Array<MenuElement> | CustomBuilder } content - 表示菜单的内容。[since 11]
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -24531,11 +24530,11 @@ declare class CommonMethod<T> {
   bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions): T;
 
   /**
-   * Menu control
+   * 菜单组件。
    *
-   * @param { boolean } isShow true means display menu, false means hide menu, default is false.
-   * @param { Array<MenuElement> | CustomBuilder } content - Indicates the content of menu.
-   * @param { MenuOptions } [options] - Indicates the options of menu.
+   * @param { boolean } isShow true表示显示菜单，false表示隐藏菜单，默认值为false。
+   * @param { Array<MenuElement> | CustomBuilder } content - 表示菜单的内容。
+   * @param { MenuOptions } [options] - 表示菜单的选项。
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -24546,19 +24545,18 @@ declare class CommonMethod<T> {
   bindMenu(isShow: boolean, content: Array<MenuElement> | CustomBuilder, options?: MenuOptions): T;
 
   /**
-   * Binds a context menu to this component, which is displayed when the user long-presses or right-clicks the
-   * component. Only custom menu items are supported.
+   * 将上下文菜单绑定到此组件，当用户长按或右键单击该组件时显示。仅支持自定义菜单项。
    *
-   * > **NOTE**
+   * > **说明：**
    * >
-   * > - **bindContextMenu** (implemented in subwindows by default) is not supported in input method windows.
-   * > - This API cannot be called within [attributeModifier]{@link CommonMethod#attributeModifier}.
-   * > - Long pressing with a mouse device is not supported when **responseType** is **ResponseType.RightClick**.
+   * > - **bindContextMenu**（默认在子窗口中实现）在输入法窗口中不支持。
+   * > - 该接口不能在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   * > - 当**responseType**为**ResponseType.RightClick**时，不支持鼠标设备长按。
    *
-   * @param { CustomBuilder } content - Indicates the content of context menu.
-   * @param { ResponseType } responseType - Indicates response type of context menu, Long pressing with a mouse device
-   *     is not supported.
-   * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
+   * @param { CustomBuilder } content - 表示上下文菜单的内容。
+   * @param { ResponseType } responseType - 表示上下文菜单的响应类型，用鼠标设备长按
+   *     不支持。
+   * @param { ContextMenuOptions } [options] - 表示上下文菜单的选项。
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -24616,11 +24614,20 @@ declare class CommonMethod<T> {
     options?: ContextMenuOptions): T;
 
   /**
-   * ContextMenu control
+   * 为组件绑定上下文菜单，其可见性受isShown设置约束。
    *
-   * @param { boolean } isShown - true means display content, false means hide content.
-   * @param { CustomBuilder } content - Indicates the content of context menu.
-   * @param { ContextMenuOptions } [options] - Indicates the options of context menu.
+   * > **说明：**
+   * >
+   * > - **bindContextMenu**（默认在子窗口中实现）在输入法窗口中不支持。
+   * > - 该接口不能在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { boolean } isShown - true表示显示内容，false表示隐藏内容，默认值为false。
+   *     <p><strong>注意</strong>：
+   *     <br>只有在相关页面构建完成后，菜单才能正常显示。如果在构建完成前将该参数设置为true，可能会出现显示异常，如位置偏移、变形或无法弹出
+   *     等问题。不支持通过长按触发拖拽。
+   *     </p>
+   * @param { CustomBuilder } content - 表示上下文菜单的内容。
+   * @param { ContextMenuOptions } [options] - 表示上下文菜单的选项。
    * @returns { T }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

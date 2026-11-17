@@ -2406,7 +2406,7 @@ export declare enum TextHeightAdaptivePolicy {
 }
 
 /**
- * ResponseType for contextMenu
+ * 上下文菜单的触发方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3811,7 +3811,7 @@ export declare enum EllipsisMode {
 export type Nullable<T> = T | undefined;
 
 /**
- * Decide whether the width of select menu fit the trigger or content
+ * 决定选择器菜单的宽度是适配触发器还是内容。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3820,7 +3820,7 @@ export type Nullable<T> = T | undefined;
  */
 export declare enum OptionWidthMode {
   /**
-   * The menu width fit the content.
+   * 菜单宽度适配内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3829,7 +3829,7 @@ export declare enum OptionWidthMode {
   FIT_CONTENT = 'fit_content',
 
   /**
-   * The menu width fit the trigger.
+   * 菜单宽度适配触发器。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
