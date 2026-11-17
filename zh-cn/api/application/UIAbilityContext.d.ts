@@ -268,7 +268,7 @@ declare class UIAbilityContext extends Context {
   startAbility(want: Want, options?: StartOptions): Promise<void>;
 
   /**
-   * 通过<!--RP2-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP2End-->或
+   * 通过<!--RP1-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP1End-->或
    * [Deep Linking](docroot://application-models/deep-linking-startup.md)方式启动UIAbility，并通过回调函数接收被拉起的UIAbility退出时的返回结果。使用
    * Promise异步回调。仅支持在主线程调用。
    * 通过在link字段中传入标准格式的URL，基于隐式want匹配规则拉起目标UIAbility。目标方必须同时具备以下过滤器特征，才能处理App Linking链接：
@@ -2208,7 +2208,7 @@ declare class UIAbilityContext extends Context {
   openAtomicService(appId: string, options?: AtomicServiceOptions): Promise<AbilityResult>;
 
   /**
-   * 将处于前台的UIAbility移动到后台。使用Promise异步回调。仅支持在主线程调用。<br/><!--RP1--><!--RP1End-->
+   * 将处于前台的UIAbility移动到后台。使用Promise异步回调。仅支持在主线程调用。
    * 从API version 12开始，该接口仅在Phone、Wearable和TV设备中可正常调用，在其他设备上返回16000061错误码。
    * 从API version 13开始，该接口仅在Phone、Tablet、Wearable和TV设备中可正常调用，在其他设备上返回16000061错误码。
    *

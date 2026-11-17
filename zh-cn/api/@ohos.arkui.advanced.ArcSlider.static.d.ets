@@ -27,11 +27,11 @@
  * 
  * ###### 属性
  * 
- * 不支持[通用属性]{@link common}。
+ * 不支持[通用属性]{@link CommonMethod}。
  * 
  * ###### 事件
  * 
- * 不支持[通用事件]{@link common}。
+ * 不支持[通用事件]{@link CommonMethod}。
  *
  * @file
  * @kit ArkUI
@@ -592,7 +592,7 @@ export declare class ArcSliderOptions {
 @ComponentV2
 export declare struct ArcSlider {
   /**
-   * The options of a ArcSlider component.
+   * ArcSlider组件的选项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @since 23 static
@@ -600,7 +600,7 @@ export declare struct ArcSlider {
   @Param
   options: ArcSliderOptions;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @stagemodelonly

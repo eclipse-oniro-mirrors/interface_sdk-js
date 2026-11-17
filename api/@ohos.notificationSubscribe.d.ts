@@ -46,6 +46,14 @@ import type { BadgeNumberCallbackData as _BadgeNumberCallbackData } from './noti
  * unsubscription, notification removal, and other capabilities. Generally, only system applications have the 
  * permissions for these operations.
  *
+ * > **NOTE**
+ * >
+ * > When subscribing in a worker thread, call **unsubscribe** to cancel the subscription before the thread exits. If 
+ * > the thread environment is destroyed without canceling the subscription, the system automatically cancels the 
+ * > subscription. Before the cancellation takes effect, events delivered by the server are discarded and do not trigger
+ * > the subscriber callback. After **unsubscribe** is called, in-transit events that have not been dispatched are also 
+ * > discarded and do not trigger the subscriber callback.
+ *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
  * @since 9 dynamic
@@ -699,8 +707,7 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * Returns the changes of the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
-   * switch state of application notifications.
+   * Returns the changes of the silent reminder switch state of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -710,8 +717,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * Triggered for registering the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder)
-   * enabled state change of application notifications.
+   * Triggered for registering the silent reminder enabled state change of application notifications.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

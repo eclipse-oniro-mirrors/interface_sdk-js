@@ -38,13 +38,13 @@ import colorSpaceManager from './@ohos.graphics.colorSpaceManager';
  *
  * > **NOTE**
  * >
- * > - In scenarios where [XComponent]{@link xcomponent} is used to, for example, display video or camera streams,
+ * > - In scenarios where [XComponent]{@link @global:XComponent} is used to, for example, display video or camera streams,
  * > obtain images through
  * > [createPixelMapFromSurface]{@link @ohos.multimedia.image:image.createPixelMapFromSurface(surfaceId: string, region: Region)},
  * > instead of through an API in this module.
  * >
  * > - If the content of a component does not fill the entire area allocated for it, any remaining space in the snapshot
- * > will be rendered as transparent pixels. In addition, if the component uses [image effects]{@link common} or other
+ * > will be rendered as transparent pixels. In addition, if the component uses [image effects]{@link CommonMethod} or other
  * > effect-related attributes, the resulting snapshot may not be as expected. To address these potential issues, check
  * > whether the component's transparent content area needs to be filled, or use the window screenshot API
  * > [snapshot]{@link @ohos.window:window.Window#snapshot(callback: AsyncCallback<image.PixelMap>)} instead.
@@ -505,7 +505,7 @@ declare namespace componentSnapshot {
   }
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
+   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link CommonMethod}. This
    * API uses an asynchronous callback to return the result.
    *
    * > **NOTE**
@@ -517,7 +517,7 @@ declare namespace componentSnapshot {
    * > - The snapshot captures content rendered in the last frame. If this API is called when the component triggers an
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
-   * @param { string } id - [ID]{@link common} of the target component.
+   * @param { string } id - [ID]{@link CommonMethod} of the target component.
    * @param { AsyncCallback<image.PixelMap> } callback - Callback used to return the result.
    * @param { SnapshotOptions } [options] - Custom settings of the snapshot. [since 12]
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -536,7 +536,7 @@ declare namespace componentSnapshot {
   function get(id: string, callback: AsyncCallback<image.PixelMap>, options?: SnapshotOptions): void;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
+   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link CommonMethod}. This
    * API uses a promise to return the result.
    *
    * > **NOTE**
@@ -548,7 +548,7 @@ declare namespace componentSnapshot {
    * > - The snapshot captures content rendered in the last frame. If this API is called when the component triggers an
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
-   * @param { string } id - [ID]{@link common} of the target component.
+   * @param { string } id - [ID]{@link CommonMethod} of the target component.
    * @param { SnapshotOptions } [options] - Custom settings of the snapshot. [since 12]
    * @returns { Promise<image.PixelMap> } Promise used to return the result.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -581,9 +581,9 @@ declare namespace componentSnapshot {
    * > has a delay of less than 500 ms.
    * >
    * > - Components in the builder do not support the setting of animation-related attributes, such as
-   * > [transition]{@link common}.
+   * > [transition]{@link CommonMethod}.
    * >
-   * > - If a component is on a time-consuming task, for example, an [Image]{@link image} or [Web]{@link web} component
+   * > - If a component is on a time-consuming task, for example, an [Image]{@link @global:Image} or [Web]{@link @global:Web} component
    * > that is loading online images, its loading may be still in progress when this API is called. In this case, the
    * > output snapshot does not represent the component in the way it looks when the loading is successfully completed.
    *
@@ -641,9 +641,9 @@ declare namespace componentSnapshot {
    * > has a delay of less than 500 ms.
    * >
    * > - Components in the builder do not support the setting of animation-related attributes, such as
-   * > [transition]{@link common}.
+   * > [transition]{@link CommonMethod}.
    * >
-   * > - If a component is on a time-consuming task, for example, an [Image]{@link image} or [Web]{@link web} component
+   * > - If a component is on a time-consuming task, for example, an [Image]{@link @global:Image} or [Web]{@link @global:Web} component
    * > that is loading online images, its loading may be still in progress when this API is called. In this case, the
    * > output snapshot does not represent the component in the way it looks when the loading is successfully completed.
    *
@@ -685,7 +685,7 @@ declare namespace componentSnapshot {
     checkImageStatus?: boolean, options?: SnapshotOptions): Promise<image.PixelMap>;
 
   /**
-   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link common}. This
+   * Obtains the snapshot of a component that has been loaded based on the provided [component ID]{@link CommonMethod}. This
    * API synchronously waits for the snapshot to complete and returns a
    * [PixelMap]{@link @ohos.multimedia.image:image.PixelMap} object.
    *
@@ -694,7 +694,7 @@ declare namespace componentSnapshot {
    * > The snapshot captures content rendered in the last frame. If this API is called when the component triggers an
    * > update, the re-rendered content will not be included in the obtained snapshot.
    *
-   * @param { string } id - [ID]{@link common} of the target component.
+   * @param { string } id - [ID]{@link CommonMethod} of the target component.
    * @param { SnapshotOptions } [options] - Custom options related to the snapshot, which are passed when custom
    *     snapshot behavior is needed, for example, setting the scale ratio, waiting for rendering to complete,
    *     snapshot area, color space, or dynamic range. Default snapshot configuration is used when this parameter

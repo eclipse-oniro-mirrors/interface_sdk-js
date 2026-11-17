@@ -406,6 +406,15 @@ declare namespace window {
      */
     TYPE_MUTISCREEN_COLLABORATION = 26,
     /**
+     * Window for accessibility.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    TYPE_ACCESSIBILITY_CALL_HELPER = 27,
+    /**
      * Main window of an application.
      *
      * This window type cannot be used during window creation.
@@ -1128,6 +1137,36 @@ declare namespace window {
      * @since 23 static
      */
     vsyncTimestamp: long;
+
+    /**
+     * Total duration required to render this frame and send it to the display subsystem.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    totalDuration?: long;
+
+    /**
+     * The expected start timestamp of the current frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    intendedVsyncTimestamp?: long;
+
+    /**
+     * The total duration spent executing all animation callbacks in a frame.
+     * Unit: nanosecond.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    animationDuration?: long;
   }
 
   /**
@@ -1533,6 +1572,63 @@ declare namespace window {
      * @since 23 static
      */
     bottomRect: Rect;
+  }
+
+  /**
+   * Avoid area insets of the window.
+   *
+   * The avoid area insets indicate the distances that the window content needs to avoid in the four directions(up,
+   * down, left, and right) due to the existence of the [avoid area]{@link window.AvoidArea}.
+   *
+   * > **NOTE**
+   * >
+   * > The calculation of the avoid area insets does not include the avoid area of the
+   * > [TYPE_KEYBOARD]{@link window.AvoidAreaType} type.
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AvoidAreaInsets {
+    /**
+     * Distance to avoid from the top of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * Distance to avoid from the left of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * Distance to avoid from the right of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    right: int;
+
+    /**
+     * Distance to avoid from the bottom of the window.
+     * Unit: px. The value must be an integer.
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bottom: int;
   }
 
   /**
@@ -5493,7 +5589,7 @@ declare namespace window {
     /**
      * Whether the window starts in a minimized state.
      * If true, the window will not be brought to the foreground.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices.
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -5505,9 +5601,9 @@ declare namespace window {
     /**
      * Whether to hide the dock icon and the hover thumbnail preview.
      * If true, the current window will not display its icon and hover thumbnail preview on the dock.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
@@ -5517,14 +5613,45 @@ declare namespace window {
     /**
      * Whether to hide the window from the multitasking center.
      * If true, the current window will not be displayed in the multitasking center.
-     * This parameter only takes effect within the same application.
+     * This parameter only takes effect within the same application, applies exclusively to PC/2in1 devices, and requires binding to a tray icon.
      *
-     * @default false
+     * @default undefined
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
+  }
+
+  /**
+   * Describes the window parameters during application show.
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WindowShowParams {
+    /**
+     * Whether the window automatically gains focus. If true, the window gains focus.
+     * If false, the window will not automatically gain focus.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    windowFocused?: boolean;
+
+    /**
+     * Whether the window automatically raise to top. If true, the window will be raised to top.
+     * If false, the window will not raise to top.
+     *
+     * @default true
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    raiseTop?: boolean;
   }
 
   /**
@@ -8447,6 +8574,62 @@ declare namespace window {
      * @since 23 static
      */
     offAvoidAreaChange(callback?: Callback<AvoidAreaOptions>): void;
+
+    /**
+     * Obtains the avoid area insets of the current window.
+     *
+     * @returns { AvoidAreaInsets } Avoid area insets.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAvoidAreaInsets(): AvoidAreaInsets;
+
+    /**
+     * Subscribes to the change event of the avoid area insets of a window.
+     *
+     * The callback is triggered when the avoid area of the window changes.
+     * If multiple avoid areas change at the same time, the callback is triggered only once after the related avoid area
+     * information is updated.
+     *
+     * > **NOTE**
+     * >
+     * > You can call [getAvoidAreaInsets]{@link window.Window#getAvoidAreaInsets} in the callback to obtain
+     * > the latest avoid area insets of the window, or use
+     * > [getWindowAvoidArea]{@link window.Window#getWindowAvoidArea} to obtain the avoid area of a specified type.
+     * >
+     * > Changes in the avoid area of the [TYPE_KEYBOARD]{@link window.AvoidAreaType} type do not trigger the callback.
+     *
+     * @param { Callback<void> } callback - Callback function.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onAvoidAreaInsetsChange(callback: Callback<void>): void;
+
+    /**
+     * Unsubscribes from the change event of the avoid area insets of a window.
+     *
+     * @param { Callback<void> } [callback] - Callback function. If a value is passed in, the corresponding listener
+     *     is disabled. If no value is passed in, all listeners for
+     *     the change event are disabled. The default value is **undefined**.
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offAvoidAreaInsetsChange(callback?: Callback<void>): void;
 
     /**
      * Subscribes to the event indicating soft keyboard height changes in the fixed state. The system notifies the
@@ -13659,6 +13842,26 @@ declare namespace window {
      * @since 23 dynamic&static
      */
     isReceiveDragEventEnabled(): boolean;
+
+    /**
+     * Sets whether to enable pointer event interception for the window.
+     *
+     * @param { boolean } isInterceptable - Whether to intercept the pointer event of this window.
+     *     The value **true** indicates to intercept, and **false** indicates the opposite.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability.
+     *     <br>2. The chip does not support the capability.
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally.
+     *     Possible cause: Internal IPC error.
+     * @syscap SystemCapability.Window.SessionManager
+     * @systemapi Hide this for inner system use.
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPointerInterceptable(isInterceptable: boolean): Promise<void>;
 
     /**
      * Enables conversion between window orientation, screen orientation, and screen angle.

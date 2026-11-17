@@ -14,7 +14,7 @@
   */
 
 /**
- * @file Metadata binding–specific
+ * @file Metadata Binding
  * @kit MultimodalAwarenessKit
  */
 
@@ -35,10 +35,14 @@ import type { Callback } from './@ohos.base';
  */
 declare namespace metadataBinding {
   /**
-   * Encodes metadata into an image. This API uses a promise to return the result.
+   * Embeds information into an image. This API embeds metadata into the image using a specific encoding algorithm.
+   * The encoding process has minimal impact on the visual presentation of the image, and the embedded information
+   * can be parsed through the decodeImage API. It can be used in scenarios such as anti-counterfeiting and
+   * copyright protection. This API uses a promise to return the result asynchronously.
    *
-   * @param { image.PixelMap } srcImage - Source image.
-   * @param { string } metadata - Metadata to be encoded.
+   * @param { image.PixelMap } srcImage - Original image to be encoded, used to embed metadata.
+   * @param { string } metadata - Information to be embedded. The string encoding format is recommended to be
+   *     UTF-8, the length should not exceed 128 bytes, and non-printable characters should be avoided.
    * @returns { Promise<image.PixelMap> } Promise object, which is used to return the image with encoded metadata.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
@@ -55,7 +59,8 @@ declare namespace metadataBinding {
   /**
    * Decodes the information carried in the image. This API uses a promise to return the result.
    *
-   * @param { image.PixelMap } encodedImage - Image with metadata encoded.
+   * @param { image.PixelMap } encodedImage - Image carrying information, which must be an encoded
+   *     image processed by the encodeImage API.
    * @returns { Promise<string> } Promise object, which is used to return the encoded metadata of the image.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
@@ -70,10 +75,13 @@ declare namespace metadataBinding {
   function decodeImage(encodedImage: image.PixelMap): Promise<string>;
 
   /**
-   * Transfers metadata to the application or service that calls the encoding API. This API uses a promise to return the
-   * result.
+   * Pushes the metadata to be embedded to the application or service that calls the encoding API. The system
+   * pushes the information to the application with the specified bundle name and returns the applink
+   * information of the current page for subsequent encoding. This API uses a promise to return the result
+   * asynchronously.
    *
-   * @param { string } bundleName - Bundle name used to obtain the application link.
+   * @param { string } bundleName - Application bundle name, which must be the bundle name of an
+   *     installed application.
    * @returns { Promise<string> } Promise used to return the application link information of the current page.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 32100001 - Internal handling failed.
@@ -108,8 +116,14 @@ declare namespace metadataBinding {
    *
    * @param { 'operationSubmitMetadata' } type - Event type. This parameter has a fixed value of
    *     **operationSubmitMetadata**, indicating the system application's attempt to obtain the encoded metadata.
-   * @param { string } bundleName - Application bundle name.
-   * @param { Callback<int> } callback - Callback used to return the encoded metadata.
+   * @param { string } bundleName - Application bundle name, used to identify the third-party application that
+   *     registers the subscription event. When the event occurs, the system identifies and notifies the corresponding
+   *     registered application by this bundle name. Ensure that the passed bundle name is a valid application bundle
+   *     name.
+   * @param { Callback<int> } callback - Callback function, used to return the event code. When the event value is 1,
+   *     it indicates a screenshot event. Currently, only the screenshot event is supported.
+   *     Value range: 1 (screenshot event). Note: The callback function should execute quickly to avoid blocking the
+   *     UI thread.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100004 - Subscribe Failed. Possible causes:
    *     <br>1. Abnormal system capability.
@@ -122,13 +136,19 @@ declare namespace metadataBinding {
   function on(type: 'operationSubmitMetadata', bundleName: string, callback: Callback<int>): void;
  
   /**
-   * Unsubscribes from system events that are used to obtain the encoded metadata. The respective callback will be 
-   * unregistered.
+   * Unsubscribes from the event of the system obtaining encoded content. The on('operationSubmitMetadata') method
+   * must be called first to subscribe to the event. Calling this API without a subscription has no effect.
+   * After unsubscribing, the application will no longer receive encoded content transfer events.
    *
    * @param { 'operationSubmitMetadata' } type - Event type. This parameter has a fixed value of
    *     **operationSubmitMetadata**, indicating the system application's attempt to obtain the encoded metadata.
-   * @param { string } bundleName - Application bundle name.
-   * @param { Callback<int> } [callback] - Callback used to return the encoded metadata.
+   * @param { string } bundleName - Application bundle name, which identifies the bundle name of the registered
+   *     application. It must be the same as the bundle name passed in during subscription.
+   * @param { Callback<int> } [callback] - Callback function used to return the event code. The callback function
+   *     to be unsubscribed must be the same as the one passed in during subscription. It is recommended that you
+   *     save the callback function reference during subscription and use the same reference when unsubscribing.
+   *     If this parameter is not specified, all callback functions currently listening for this event are
+   *     unsubscribed.
    * @throws { BusinessError } 32100001 - Internal handling failed.
    * @throws { BusinessError } 32100005 - Unsubscribe Failed. Possible causes:
    *     <br> 1. Abnormal system capability.

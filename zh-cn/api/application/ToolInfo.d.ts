@@ -149,6 +149,15 @@ export interface ToolInfo {
    * @since 26.0.0 dynamiconly
    */
   readonly isLockScreenExecutionAllowed?: boolean;
+
+  /**
+   * CLI工具支持的设备类型列表。取值以系统定义的设备类型为准（如default、tablet、tv、watch、car等）。空数组表示不限制设备类型。默认值为空数组。
+   * 
+   * @syscap SystemCapability.Ability.AgentRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  readonly supportedDevices?: Array<string>;
 }
 
 /**

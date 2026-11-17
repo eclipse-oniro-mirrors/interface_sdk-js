@@ -48,7 +48,7 @@ import { Builder } from './arkui/component/builder';
 import { PropRef } from '@ohos.arkui.stateManagement';
 import { PropRef } from './arkui/stateManagement/decorator';
 /**
- * Declaration of the menu item on the right side.
+ * 声明右侧菜单项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -143,7 +143,7 @@ export declare class SelectTitleBarMenuItem {
   public accessibilityLevel?: string;
 }
 /**
- * Callback method when an option is selected.
+ * 选中某选项时的回调方法。
  *
  * @param { int } index -the result of option.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -239,7 +239,7 @@ export declare struct SelectTitleBar {
    */
   onSelected?: OnSelectedCallback;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

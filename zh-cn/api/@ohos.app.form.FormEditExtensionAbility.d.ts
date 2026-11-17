@@ -14,15 +14,24 @@
  */
 
 /**
+ * FormEditExtensionAbility模块提供卡片编辑功能，支持用户在卡片提供方应用内编辑卡片内容，适用于需要动态更新卡片展示信息、实现卡片个性化配置的场景。继承自
+ * [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}。
+ * 
+ * > **说明：**
+ * >
+ * > 本模块首批接口从API version 18开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
+ * >
+ * > 本模块接口仅可在Stage模型下使用。
+ * 
  * @file 卡片编辑扩展能力-FormEditExtensionAbility
  * @kit FormKit
  */
+
 import UIExtensionAbility from './@ohos.app.ability.UIExtensionAbility';
 import FormEditExtensionContext from './application/FormEditExtensionContext';
 
 /**
- * FormEditExtensionAbility模块提供卡片编辑功能，支持用户在卡片提供方应用内编辑卡片内容，适用于需要动态更新卡片展示信息、实现卡片个性化配置的场景。继承自
- * [UIExtensionAbility]{@link @ohos.app.ability.UIExtensionAbility:UIExtensionAbility}。
+ * 提供卡片编辑功能，继承此类并实现生命周期方法后，可实现卡片编辑界面，用于在用户长按卡片等场景下触发卡片编辑。
  *
  * @syscap SystemCapability.Ability.Form
  * @stagemodelonly

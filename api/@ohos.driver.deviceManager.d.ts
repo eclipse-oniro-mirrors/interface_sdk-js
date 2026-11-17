@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,8 +22,21 @@ import type { AsyncCallback } from './@ohos.base';
 import type rpc from './@ohos.rpc';
 
 /**
- * The **deviceManager** module provides APIs for managing peripheral devices, including querying the peripheral device
- * list and binding or unbinding a peripheral device.
+ * This module is a collection of device management APIs provided by Driver Development Kit. It allows you to query
+ * information about external devices and bind or unbind apps to or from peripheral drivers. The APIs of this module can
+ * be used to implement the following functions:
+ *
+ * - Queries the list of connected peripherals in the system.
+ * - Binds a specified peripheral and obtains the remote driver communication object, so that data can be exchanged with
+ * the peripheral driver through inter-process communication (IPC).
+ * - Unbinds the device and releases resources after use.
+ *
+ * The peripheral access capability of this module requires the combination of multiple APIs. The typical calling
+ * process is as follows: Query the device → Bind the device to obtain the communication object → Interact with the
+ * driver through the communication object → Unbind the device to release resources. The lifecycle view of device
+ * binding is as follows:
+ *
+ * ![DriverDeviceManager_flowchart](docroot://reference/apis-driverdevelopment-kit/figures/DriverDeviceManager_flowchart.png)
  *
  * @syscap SystemCapability.Driver.ExternalDevice
  * @since 10 dynamic
@@ -38,7 +51,8 @@ declare namespace deviceManager {
    * @param { int } busType - Device bus type specified by [BusType]{@link deviceManager.BusType}. If this parameter is
    *     left empty, all types of devices are searched.
    * @returns { Array<Readonly<Device>> } List of peripheral devices obtained.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 22900001 - ExternalDeviceManager service exception or busType parameter error.
    * @syscap SystemCapability.Driver.ExternalDevice
    * @since 10 dynamic
@@ -47,19 +61,22 @@ declare namespace deviceManager {
   function queryDevices(busType?: int): Array<Readonly<Device>>;
 
   /**
-   * Binds a peripheral device based on the device information returned by **queryDevices()**.
+   * Binds a peripheral device based on the device information returned by **queryDevices()**. This function must be
+   * used in pairs with **unbindDevice**.
+   *
    * You need to use [deviceManager.queryDevices()]{@link deviceManager.queryDevices} to obtain the peripheral device
-   * information and device.
+   * list.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<number> } onDisconnect - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
    * @param { AsyncCallback<{deviceId: number; remote: rpc.IRemoteObject;}> } callback - Callback used to return the
    *     result. When the device is bound successfully, **err** is **undefined**, and **data** contains the device ID
    *     and the bound device driver communication object. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified. 2
    *     .Incorrect parameter types.
    *     3.Parameter verification failed.
@@ -73,12 +90,14 @@ declare namespace deviceManager {
     callback: AsyncCallback<{deviceId: number; remote: rpc.IRemoteObject;}>): void;
 
   /**
-   * Binds a peripheral device based on the device information returned by **queryDevices()**.
+   * Binds a peripheral device based on the device information returned by **queryDevices()**. This function must be
+   * used in pairs with **unbindDevice**.
+   *
    * You need to use [deviceManager.queryDevices()]{@link deviceManager.queryDevices} to obtain the peripheral device
-   * information and device.
+   * list.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<number> } onDisconnect - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
@@ -86,7 +105,8 @@ declare namespace deviceManager {
    *     is successfully bound, **err** is **undefined** and **data** is a
    *     [RemoteDeviceDriver]{@link deviceManager.RemoteDeviceDriver} object that contains the device ID and remote
    *     object. Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    *     3.Parameter verification failed.
@@ -100,19 +120,21 @@ declare namespace deviceManager {
     callback: AsyncCallback<RemoteDeviceDriver>): void;
 
   /**
-   * Binds a peripheral device based on the device information returned by **queryDevices()**. This API uses a promise
-   * to return the result.
+   * Binds a peripheral device based on the device information returned by **queryDevices()**. This function must be
+   * used in pairs with **unbindDevice**. This API uses a promise to return the result.
+   *
    * You need to use [deviceManager.queryDevices]{@link deviceManager.queryDevices} to obtain the peripheral device
-   * information and device.
+   * list.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<number> } onDisconnect - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
    * @returns { Promise<{deviceId: number; remote: rpc.IRemoteObject;}> } Promise used to return an object containing
    *     the device ID and **IRemoteObject**.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    *     3.Parameter verification failed.
@@ -126,18 +148,20 @@ declare namespace deviceManager {
     remote: rpc.IRemoteObject;}>;
 
   /**
-   * Binds a peripheral device based on the device information returned by **queryDevices()**. This API uses a promise
-   * to return the result.
+   * Binds a peripheral device based on the device information returned by **queryDevices()**. This function must be
+   * used in pairs with **unbindDevice**. This API uses a promise to return the result.
+   *
    * You need to use [deviceManager.queryDevices]{@link deviceManager.queryDevices} to obtain the peripheral device
-   * information and device.
+   * list.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<number> } onDisconnect - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
    * @returns { Promise<RemoteDeviceDriver> } Promise used to return a **RemoteDeviceDriver** object.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    *     3.Parameter verification failed.
@@ -150,14 +174,15 @@ declare namespace deviceManager {
   function bindDeviceDriver(deviceId: number, onDisconnect: AsyncCallback<number>): Promise<RemoteDeviceDriver>;
 
   /**
-   * Unbinds a peripheral device.
+   * Unbinds a peripheral device. You must call **bindDevice** to bind the device first.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<number> } callback - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    * @throws { BusinessError } 22900001 - ExternalDeviceManager service exception.
@@ -169,12 +194,14 @@ declare namespace deviceManager {
   function unbindDevice(deviceId: number, callback: AsyncCallback<number>): void;
 
   /**
-   * Unbinds a peripheral device. This API uses a promise to return the result.
+   * Unbinds a peripheral device. You must call **bindDevice** to bind the device first. This API uses a promise to
+   * return the result.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { number } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { number } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @returns { Promise<number> } Promise used to return the ID of the unbound device.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
    *     2.Incorrect parameter types.
    *     3.Parameter verification failed.
@@ -191,12 +218,12 @@ declare namespace deviceManager {
    * empty list is returned.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { long } deviceId - Device ID, which is obtained through
-   *     [queryDevices]{@link @ohos.driver.deviceManager:deviceManager.queryDevices}. If no device ID is passed, all
-   *     device information is obtained by default. If no external device is connected and no device ID is passed, an
-   *     empty array is returned.
+   * @param { long } deviceId - Device ID, which is obtained through [queryDevices]{@link deviceManager.queryDevices}.
+   *     If no device ID is passed, information about all devices is obtained by default. If no device is connected, an
+   *     empty list is returned.
    * @returns { Array<Readonly<DeviceInfo>> } List of detailed information about peripherals.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 202 - Permission denied. A non-system application cannot call a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Incorrect parameter types.
    * @throws { BusinessError } 26300001 - ExternalDeviceManager service exception.
@@ -212,9 +239,12 @@ declare namespace deviceManager {
    * connected, an empty list is returned.
    *
    * @permission ohos.permission.ACCESS_EXTENSIONAL_DEVICE_DRIVER
-   * @param { string } driverUid - Driver UID, which can be obtained by using **queryDeviceInfo**.
+   * @param { string } driverUid - Driver UID, which is obtained from the device information returned by
+   *     [queryDeviceInfo]{@link deviceManager.queryDeviceInfo}. If no driver UID is passed, all driver information is
+   *     obtained by default. If a UID is passed but the corresponding driver does not exist, an empty list is returned.
    * @returns { Array<Readonly<DriverInfo>> } List of detailed information about peripheral drivers.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 202 - Permission denied. A non-system application cannot call a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Incorrect parameter types.
    * @throws { BusinessError } 26300001 - ExternalDeviceManager service exception.
@@ -226,18 +256,20 @@ declare namespace deviceManager {
   function queryDriverInfo(driverUid?: string): Array<Readonly<DriverInfo>>;
 
   /**
-   * Binds a peripheral device based on the device information returned by **queryDevices()**. This API uses a promise
-   * to return the result.
+   * Binds a peripheral device based on the device information returned by **queryDevices()**. This API must be used
+   * together with **unbindDriverWithDeviceId**. This API uses a promise to return the result.
+   *
    * You need to use [deviceManager.queryDevices]{@link deviceManager.queryDevices} to obtain the peripheral device
    * list.
    *
    * @permission ohos.permission.ACCESS_DDK_DRIVERS
-   * @param { long } deviceId - Device ID, which can be obtained via **queryDevices()**.
+   * @param { long } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @param { AsyncCallback<long> } onDisconnect - Callback used to return the result. When the bound device is
    *     disconnected, the value of **err** is **undefined** and the value of **data** is the ID of the unbound device.
    *     Otherwise, **err** is an error object.
    * @returns { Promise<RemoteDeviceDriver> } Promise used to return a **RemoteDeviceDriver** object.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 26300001 - ExternalDeviceManager service exception.
    * @throws { BusinessError } 26300002 - The driver service does not allow any client to bind.
    * @syscap SystemCapability.Driver.ExternalDevice
@@ -247,12 +279,14 @@ declare namespace deviceManager {
   function bindDriverWithDeviceId(deviceId: long, onDisconnect: AsyncCallback<long>): Promise<RemoteDeviceDriver>;
 
   /**
-   * Unbinds a peripheral device. This API uses a promise to return the result.
+   * Unbinds a device. Before calling this method, you must call **bindDriverWithDeviceId** to bind the device. This API
+   * uses a promise to return the result.
    *
    * @permission ohos.permission.ACCESS_DDK_DRIVERS
    * @param { long } deviceId - Device ID, which can be obtained via [queryDevices]{@link deviceManager.queryDevices}.
    * @returns { Promise<int> } Promise used to return the ID of the unbound device.
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
    * @throws { BusinessError } 26300001 - ExternalDeviceManager service exception.
    * @throws { BusinessError } 26300003 - There is no binding relationship.
    * @syscap SystemCapability.Driver.ExternalDevice
@@ -316,7 +350,7 @@ declare namespace deviceManager {
   }
 
   /**
-   * USB device information, which is inherited from [Device]{@link deviceManager.queryDevices}.
+   * USB device information, which is inherited from [Device]{@link deviceManager.Device}.
    *
    * @syscap SystemCapability.Driver.ExternalDevice
    * @since 10 dynamic
@@ -360,7 +394,7 @@ declare namespace deviceManager {
     deviceId: long;
 
     /**
-     * Remote driver object.
+     * Remote driver communication object.
      *
      * @syscap SystemCapability.Driver.ExternalDevice
      * @since 11 dynamic
@@ -418,7 +452,6 @@ declare namespace deviceManager {
      */
     bProtocol: int;
   }
-
 
   /**
    * Defines the detailed information about a device.
@@ -552,7 +585,7 @@ declare namespace deviceManager {
     driverVersion: string;
 
     /**
-     * Driver size, in bytes.
+     * Size of the driver file, in bytes. It is used to identify the storage space occupied by the driver file.
      *
      * @syscap SystemCapability.Driver.ExternalDevice
      * @systemapi
@@ -562,7 +595,8 @@ declare namespace deviceManager {
     driverSize: string;
 
     /**
-     * Driver description.
+     * Driver description, which provides detailed information about the driver functions, use scenarios, and
+     * precautions.
      *
      * @syscap SystemCapability.Driver.ExternalDevice
      * @systemapi

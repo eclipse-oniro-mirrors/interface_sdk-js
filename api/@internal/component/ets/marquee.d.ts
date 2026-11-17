@@ -162,12 +162,12 @@ interface MarqueeOptions {
  * >
  * > To ensure that scrolling frame rates are not affected, it is recommended that the number of **Marquee** components
  * > in a scrolling component does not exceed 4, or use [TextOverflow.MARQUEE]{@link TextOverflow} of the
- * > [Text]{@link ./text} component instead.
+ * > [Text]{@link @global:Text} component instead.
  * >
  * > For scenarios where the **Marquee** component requires dynamic frame rates, use the
  * > [MarqueeDynamicSyncScene]{@link @ohos.arkui.UIContext} API.
  * >
- * > When the text width is smaller than the **Marquee** component's width, use the [property animation]{@link ./common}
+ * > When the text width is smaller than the **Marquee** component's width, use the [property animation]{@link CommonMethod}
  * > to implement scrolling.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -195,7 +195,7 @@ interface MarqueeInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -388,12 +388,12 @@ declare class MarqueeAttribute extends CommonMethod<MarqueeAttribute> {
  * >
  * > To ensure that scrolling frame rates are not affected, it is recommended that the number of **Marquee** components
  * > in a scrolling component does not exceed 4, or use [TextOverflow.MARQUEE]{@link TextOverflow} of the
- * > [Text]{@link ./text} component instead.
+ * > [Text]{@link @global:Text} component instead.
  * >
  * > For scenarios where the **Marquee** component requires dynamic frame rates, use the
  * > [MarqueeDynamicSyncScene]{@link @ohos.arkui.UIContext} API.
  * >
- * > When the text width is smaller than the **Marquee** component's width, use the [property animation]{@link ./common}
+ * > When the text width is smaller than the **Marquee** component's width, use the [property animation]{@link CommonMethod}
  * > to implement scrolling.
  *
  * ###### Child Components

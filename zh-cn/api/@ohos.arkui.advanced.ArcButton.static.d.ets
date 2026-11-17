@@ -27,11 +27,11 @@
  * 
  * ###### 属性
  * 
- * 不支持[通用属性]{@link common}
+ * 不支持[通用属性]{@link CommonMethod}
  * 
  * ###### 事件
  * 
- * 通用事件支持[点击事件]{@link common}和[触摸事件]{@link common}。
+ * 通用事件支持[点击事件]{@link CommonMethod}和[触摸事件]{@link CommonMethod}。
  *
  * @file Defines the arc button component
  * @kit ArkUI
@@ -563,7 +563,7 @@ export declare struct ArcButton {
   @Param
   readonly options: ArcButtonOptions;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Circle
    * @since 23 staticonly

@@ -96,7 +96,7 @@ interface GaugeOptions {
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * >
  * > - [startAngle]{@link GaugeAttribute#startAngle}和[endAngle]{@link GaugeAttribute#endAngle}仅决定圆弧路径范围，不影响组件大小。角度差值越小，圆
  * > 弧在组件内占比越小，`min`/`max`标记与圆弧间留白越大。
@@ -240,7 +240,7 @@ declare interface GaugeConfiguration extends CommonConfiguration<GaugeConfigurat
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -433,7 +433,7 @@ declare class GaugeAttribute extends CommonMethod<GaugeAttribute> {
    *     感，false表示关闭隐私敏感。
    *     <br>**说明：**
    *     <br>设置null则不敏感。<!--Del-->
-   *     <br>需要在卡片中使用Gauge，并用[FormComponent]{@link ./form_component}组件设置[隐私遮罩]{@link ./common}属性，显示卡片时才有隐私遮罩效果。<!--
+   *     <br>需要在卡片中使用Gauge，并用[FormComponent]{@link @global:FormComponent}组件设置[隐私遮罩]{@link CommonMethod}属性，显示卡片时才有隐私遮罩效果。<!--
    *     DelEnd-->
    * @returns { GaugeAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -467,7 +467,7 @@ declare class GaugeAttribute extends CommonMethod<GaugeAttribute> {
  * >
  * > - 该组件从API version 8开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link ./with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * >
  * > - [startAngle]{@link GaugeAttribute#startAngle}和[endAngle]{@link GaugeAttribute#endAngle}仅决定圆弧路径范围，不影响组件大小。角度差值越小，圆
  * > 弧在组件内占比越小，`min`/`max`标记与圆弧间留白越大。

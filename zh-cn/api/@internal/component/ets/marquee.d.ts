@@ -155,7 +155,7 @@ interface MarqueeOptions {
  * >
  * > 对于Marquee组件动态帧率的场景，可以使用[MarqueeDynamicSyncScene]{@link @ohos.arkui.UIContext}接口实现。
  * >
- * > 在文本宽度小于跑马灯组件宽度时，使用[属性动画]{@link ./common}实现滚动。
+ * > 在文本宽度小于跑马灯组件宽度时，使用[属性动画]{@link CommonMethod}实现滚动。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -182,7 +182,7 @@ interface MarqueeInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -355,7 +355,7 @@ declare class MarqueeAttribute extends CommonMethod<MarqueeAttribute> {
  * >
  * > 对于Marquee组件动态帧率的场景，可以使用[MarqueeDynamicSyncScene]{@link @ohos.arkui.UIContext}接口实现。
  * >
- * > 在文本宽度小于跑马灯组件宽度时，使用[属性动画]{@link ./common}实现滚动。
+ * > 在文本宽度小于跑马灯组件宽度时，使用[属性动画]{@link CommonMethod}实现滚动。
  *
  * ###### 子组件
  *

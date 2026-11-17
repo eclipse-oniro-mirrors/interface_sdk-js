@@ -111,6 +111,18 @@ declare namespace cliManager {
      * @since 26.1.0 dynamiconly
      */
     taskId?: string;
+
+    /**
+     * Security policy. The value is a JSON string.
+     *
+     * The policy string is parsed by the system service to impose additional security constraints on command execution.
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    policy?: string;
   }
 
   /**

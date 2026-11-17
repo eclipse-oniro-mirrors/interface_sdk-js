@@ -279,7 +279,7 @@ declare class UIAbilityContext extends Context {
   startAbility(want: Want, options?: StartOptions): Promise<void>;
 
   /**
-   * Starts a UIAbility by using <!--RP2-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP2End-
+   * Starts a UIAbility by using <!--RP1-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP1End-
    * -> or [Deep Linking](docroot://application-models/deep-linking-startup.md), and returns the exit result of the 
    * launched UIAbility via a callback. This API uses a promise to return the result. It can be called only on the main 
    * thread.
@@ -2398,7 +2398,7 @@ declare class UIAbilityContext extends Context {
 
   /**
    * Moves this UIAbility from the foreground to the background. This API uses a promise to return the result. It can be
-   *  called only on the main thread.<br><!--RP1--><!--RP1End-->
+   *  called only on the main thread.
    * Starting from API version 12, this API can be properly called on phones, wearables, and TVs. If it is called on 
    * other device types, error code 16000061 is returned.
    * Starting from API version 13, this API can be properly called on phones, tablets, wearables, and TVs. If it is 

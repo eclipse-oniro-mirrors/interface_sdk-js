@@ -574,7 +574,7 @@ declare interface CapsuleStyleOptions extends ScanEffectOptions, CommonProgressS
    * 
    * 文本大小（不支持百分比设置）：12fp 
    * 
-   * 其他文本参数跟随[Text]{@link ./text}组件的主题值。
+   * 其他文本参数跟随[Text]{@link @global:Text}组件的主题值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -763,10 +763,6 @@ declare interface ProgressStyleMap {
 /**
  * 进度条组件，用于显示内容加载或操作处理等进度。支持线性、环形、圆形、胶囊等多种样式，可自定义颜色、渐变效果和动效，适用于文件下载、数据加载、任务处理等需要展示进度状态的场景。通过丰富的样式与动效配置，可快速实现进度可视化，提升用户体
  * 验。
- * 
- * > **说明：**
- * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -792,7 +788,7 @@ interface ProgressInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
  * > **说明：**
  * >
@@ -828,7 +824,7 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    * 设置进度条前景色。
    * 
    * 从API version 10开始支持利用[LinearGradient]{@link LinearGradient}设置Ring样式的渐变色。Ring类型不建议设置透明度，如需设置透明度，建议使用
-   * [DataPanel]{@link ./data_panel}。
+   * [DataPanel]{@link @global:DataPanel}。
    * 
    * 从API version 23开始支持利用LinearGradient设置Linear样式和Capsule样式的渐变色。API version 22及之前版本使用该方式设置时，会以默认主题色显示。
    *
@@ -886,7 +882,7 @@ declare class ProgressAttribute<Type extends keyof ProgressStyleMap = keyof Prog
    *     <br> 默认值：false
    *     <br>**说明：** 
    *     <br>设置null表示不敏感。<!--Del-->
-   *     <br>需要在卡片中使用Progress，并用[FormComponent]{@link ./form_component}组件设置[隐私遮罩]{@link ./common}属性，显示卡片时才有隐私遮罩效果。<!--
+   *     <br>需要在卡片中使用Progress，并用[FormComponent]{@link @global:FormComponent}组件设置[隐私遮罩]{@link CommonMethod}属性，显示卡片时才有隐私遮罩效果。<!--
    *     DelEnd-->
    * @returns { ProgressAttribute<Type> }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -960,14 +956,8 @@ declare interface ProgressConfiguration extends CommonConfiguration<ProgressConf
 /**
  * 进度条组件，用于显示内容加载或操作处理等进度。支持线性、环形、圆形、胶囊等多种样式，可自定义颜色、渐变效果和动效，适用于文件下载、数据加载、任务处理等需要展示进度状态的场景。通过丰富的样式与动效配置，可快速实现进度可视化，提升用户体
  * 验。
- * 
- * > **说明：**
- * >
- * > 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
- * 
  * ###### 子组件
- * 
- * 无
+ * 无。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

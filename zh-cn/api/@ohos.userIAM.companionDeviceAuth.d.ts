@@ -148,7 +148,7 @@ declare namespace companionDeviceAuth {
   }
 
   /**
-   * 设备标识。用于唯一标识一个设备及其用户，包含设备ID类型、设备ID和设备用户ID等信息。
+   * 设备标识。用于唯一标识一个设备及其用户，包含设备ID类型、设备ID、设备用户ID和设备子身份资料ID等信息。
    *
    * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
    * @systemapi Hide this for inner system use.
@@ -189,7 +189,6 @@ declare namespace companionDeviceAuth {
 
     /**
      * 设备子身份资料ID。设备上的子身份资料标识，为非负整数，用于区分同一设备同一用户下的不同子身份资料。
-     * 取值限定为整数。默认值：默认值为-1。
      *
      * @default -1
      * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
@@ -271,7 +270,6 @@ declare namespace companionDeviceAuth {
 
     /**
      * 设备子身份资料名称。对应分布式账号的昵称，作为设备上前台子身份资料的显示名称，用于在设备选择界面展示。
-     * 默认值：默认值为“”。
      *
      * @default ""
      * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
@@ -292,8 +290,8 @@ declare namespace companionDeviceAuth {
    */
   interface TemplateStatus {
     /**
-         * 模板ID。伴随设备认证模板的唯一标识，用于在更新业务范围或订阅认证状态时指定目标模板。
-         *
+     * 模板ID。伴随设备认证模板的唯一标识，用于在更新业务范围或订阅认证状态时指定目标模板。
+     *
      * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -665,10 +663,9 @@ declare namespace companionDeviceAuth {
    */
   function updateEnabledBusinessIds(templateId: Uint8Array, enabledBusinessIds: int[]): Promise<void>;
   /**
-   * 定义用于提交用户输入的密码的回调。
+   * 通行码提交回调函数类型。应用通过此回调将用户输入的通行码提交给系统。
    *
-   * @param { Uint8Array } passcode - 用户输入的密码(例如USB的密码
-   *     安全密钥)。
+   * @param { Uint8Array } passcode - 用户输入的通行码。
    * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -677,9 +674,8 @@ declare namespace companionDeviceAuth {
   type PasscodeSubmitCallback = (passcode: Uint8Array) => void;
 
   /**
-   * 提示输入辅助设备密码时框架携带的选项。
+   * 通行码输入请求的参数，用于传递挑战值等上下文信息。
    *
-   * @interface PasscodePromptParams
    * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -687,9 +683,8 @@ declare namespace companionDeviceAuth {
    */
   interface PasscodePromptParams {
     /**
-       * 当提示输入辅助设备密码时，框架携带的挑战。
-       *
-     * @type { Uint8Array }
+     * 请求通行码时由系统下发的挑战值。
+     *
      * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
      * @systemapi Hide this for inner system use.
      * @stagemodelonly
@@ -699,12 +694,10 @@ declare namespace companionDeviceAuth {
   }
 
   /**
-   * 定义当框架需要辅助设备的密码时调用的回调。
+   * 通行码请求回调函数类型。当系统需要用户输入通行码时，会调用此回调，应用需通过submit回调提交用户输入的通行码。
    *
-   * @param { PasscodeSubmitCallback } submit - 用于提交输入的密码的回调
-   *     用户。
-   * @param { PasscodePromptParams } params - Params carrying contextual information of this
-   *     prompt request.
+   * @param { PasscodeSubmitCallback } submit - 通行码提交回调。应用接收用户输入的通行码后，通过此回调将通行码提交给系统。
+   * @param { PasscodePromptParams } params - 通行码输入请求的参数，包含挑战值等信息。
    * @syscap SystemCapability.UserIAM.UserAuth.CompanionDeviceAuth
    * @systemapi Hide this for inner system use.
    * @stagemodelonly
@@ -714,12 +707,10 @@ declare namespace companionDeviceAuth {
       (submit: PasscodeSubmitCallback, params: PasscodePromptParams) => void;
 
   /**
-   * 注册当框架需要辅助设备密码时调用的回调。
-   * 如果回调已经被注册，则新的回调将替换它。
+   * 注册通行码请求回调。系统请求通行码时会调用此回调。若已注册过回调，新的回调将替换原有回调。
    *
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
-   * @param { PasscodePromptCallback } callback - 框架调用的回调
-   *     密码为必填项。
+   * @param { PasscodePromptCallback } callback - 通行码请求回调函数。系统请求通行码时调用。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application.
    * @throws { BusinessError } 32600001 - The system service is not working properly. Please try again later.
@@ -731,7 +722,7 @@ declare namespace companionDeviceAuth {
   function registerPasscodePromptCallback(callback: PasscodePromptCallback): void;
 
   /**
-   * 取消注册用于提示输入辅助设备密码的回调。
+   * 取消注册通行码请求回调。取消后，系统将不再调用应用注册的通行码请求回调。
    *
    * @permission ohos.permission.ACCESS_USER_AUTH_INTERNAL
    * @throws { BusinessError } 201 - Permission denied.

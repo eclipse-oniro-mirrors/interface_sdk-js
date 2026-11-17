@@ -131,10 +131,10 @@ declare namespace taskpool {
      * Task的构造函数。
      *
      * @param { Function } func - 待执行的函数，必须使用
-     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰。支持的函数返回值类型请参考
+     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，支持的函数返回值类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
      * @param { Object[] } args - 任务执行函数的入参，支持的参数类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为undefined。
      * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -148,10 +148,10 @@ declare namespace taskpool {
      *
      * @param { string } name - 任务名称。
      * @param { Function } func - 待执行的函数，必须使用
-     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰。支持的函数返回值类型请参考
+     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，支持的函数返回值类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
      * @param { Object[] } args - 任务执行函数的入参。支持的类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为undefined。
      * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -161,13 +161,13 @@ declare namespace taskpool {
     constructor(name: string, func: Function, ...args: Object[]);
 
     /**
-     * 检查当前正在运行的任务是否已取消。使用此方法前，需要先创建一个**Task**对象。
+     * 检查当前正在运行的任务是否已取消。使用此方法前，需要先创建一个Task对象。
      *
      * > **说明：**
      * >
      * > isCanceled方法需要和taskpool.cancel方法搭配使用，如果不调用cancel方法，isCanceled方法默认返回false。
      *
-     * @returns { boolean } 如果当前正在运行的任务被取消返回**true**，否则返回**false**。
+     * @returns { boolean } 如果当前正在运行的任务被取消返回true，否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice [since 11]
@@ -176,7 +176,7 @@ declare namespace taskpool {
     static isCanceled(): boolean;
 
     /**
-     * 任务执行过程中向宿主线程发送消息并触发已注册的回调函数。使用此方法前需构造**Task**对象。
+     * 任务执行过程中向宿主线程发送消息并触发回调。使用此方法前需构造Task。
      *
      * > **说明：**
      * >
@@ -185,12 +185,12 @@ declare namespace taskpool {
      * > - 避免在回调函数中调用该方法，否则可能导致消息无法传递到宿主线程。
      * >
      * > - 避免在异步函数中调用该方法，否则可能导致消息无法传递到宿主线程。如果在异步函数中使用，
-     * > 则需要使用**await**来确保该异步函数在任务中同步执行完成。
+     * > 则需要使用await来确保该异步函数在任务中同步执行完成。
      * >
-     * > - 调用该接口时，请确保处理数据的回调函数已在宿主线程注册。
+     * > - 调用该接口时，请确保处理数据的回调函数在宿主线程通过[onReceiveData]{@link taskpool.Task.onReceiveData}注册。
      *
-     * @param { Object[] } args - 作为已注册回调函数入参的数据，可传输对象默认转移；支持的参数类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     * @param { Object[] } args - 可传输对象默认转移，作为回调函数的参数。支持的参数类型请参见
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)，默认值为undefined。
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200022 - The function is not called in the TaskPool thread.
      * @throws { BusinessError } 10200023 - The function is not called in the concurrent function.
@@ -203,14 +203,13 @@ declare namespace taskpool {
     static sendData(...args: Object[]): void;
 
     /**
-     * 设置任务的传输列表。使用该方法前需要先构造**Task**。不调用该接口，则传给任务的数据中的ArrayBuffer默认transfer转移。
+     * 设置任务的传输列表。使用该方法前需要先构造Task对象。不调用该接口，则传给任务的数据中的ArrayBuffer默认transfer转移。
      *
      * > **说明：**
      * >
      * > - 此接口与[setCloneList]{@link taskpool.Task#setCloneList}互斥：同一个ArrayBuffer不能同时设置在transfer列表和clone列表中。
      * >
-     * > 此接口可以设置任务池中ArrayBuffer的transfer列表，transfer列表中的ArrayBuffer对象在传输时不会复制buffer内容到工作线程，
-     * > 而是转移buffer控制权至工作线程，传输后当前的ArrayBuffer失效。若ArrayBuffer为空，则不会transfer转移。
+     * > - 此接口可以设置任务池中ArrayBuffer的transfer列表，transfer列表中的ArrayBuffer对象在传输时不会复制buffer内容到工作线程而是转移buffer控制权至工作线程，传输后当前的ArrayBuffer失效。若ArrayBuffer为空，则不会transfer转移。
      *
      * @param { ArrayBuffer[] } [transfer] - 可传输对象是ArrayBuffer的实例对象，默认为空数组。
      * @throws { BusinessError } 10200029 - An ArrayBuffer cannot be set as both a transfer list and a clone list.
@@ -223,18 +222,18 @@ declare namespace taskpool {
     setTransferList(transfer?: ArrayBuffer[]): void;
 
     /**
-     * 设置任务的拷贝列表。在使用该方法前，需先构造**Task**对象。
+     * 设置任务的拷贝列表。在使用该方法前，需先构造Task对象。
      *
      * > **说明：**
      * >
      * > - 此接口与[setTransferList]{@link taskpool.Task#setTransferList}互斥：同一个ArrayBuffer不能同时设置在transfer列表和clone列表中。
      * >
-     * > 该接口需搭配
+     * > - 需搭配
      * > [@Sendable装饰器](docroot://arkts-utils/arkts-sendable.md#sendable装饰器)使用，否则会抛异常。建议开发者使用该装饰器以避免异常。
      *
      * @param { Object[] | ArrayBuffer[] } cloneList - - 传入数组的类型必须为
      *     [Sendable支持的数据类型](docroot://arkts-utils/arkts-sendable.md#sendable支持的数据类型)或ArrayBuffer。<br>- 所有传入
-     *     **cloneList**的对象所持有的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
+     *     cloneList的对象持有的[Sendable class](docroot://arkts-utils/arkts-sendable.md#sendable-class)实例或ArrayBuffer类型对象，
      *     在线程间传输的行为都会变成拷贝传递，即修改传输后的对象不会对原有对象产生任何影响。
      * @throws { BusinessError } 10200029 - An ArrayBuffer cannot be set as both a transfer list and a clone list.
      * @syscap SystemCapability.Utils.Lang
@@ -249,9 +248,9 @@ declare namespace taskpool {
      *
      * > **说明：**
      * >
-     * > 该方法与[sendData]{@link taskpool.Task.sendData}配对使用。
+     * > - 该方法与[sendData]{@link taskpool.Task.sendData}配对使用。
      * >
-     * > 不支持为同一任务定义多种回调函数。如果多次赋值，只有最后一次赋值的回调函数会生效。
+     * > - 不支持为同一任务定义多种回调函数。如果多次赋值，只有最后一次赋值的回调函数会生效。
      *
      * @param { Function } [callback] - 处理数据的回调函数，发送到宿主线程的数据将会作为入参传入该回调函数。不传参可以取消注册的回调函数。
      * @syscap SystemCapability.Utils.Lang
@@ -262,10 +261,10 @@ declare namespace taskpool {
     onReceiveData(callback?: Function): void;
 
     /**
-     * 为当前任务添加对其他任务的依赖。使用该方法前需先构造**Task**实例。该任务和被依赖的任务不能是任务组任务、串行队列任务、
+     * 为当前任务添加对其他任务的依赖。使用该方法前需先构造Task。该任务和被依赖的任务不能是任务组任务、串行队列任务、
      * 异步队列任务、已执行任务或周期任务。存在依赖关系的任务（依赖其他任务的任务或被依赖的任务）执行后不可再次执行。
      *
-     * @param { Task[] } tasks - 被依赖的任务数组。默认值为**undefined**。
+     * @param { Task[] } tasks - 被依赖的任务数组。默认值为undefined。
      * @throws { BusinessError } 10200026 - There is a circular dependency.
      * @throws { BusinessError } 10200052 - The periodic task cannot have a dependency. [since 12]
      * @throws { BusinessError } 10200056 - The task has been executed by the AsyncRunner. [since 18]
@@ -277,9 +276,9 @@ declare namespace taskpool {
     addDependency(...tasks: Task[]): void;
 
     /**
-     * 删除当前任务对其他任务的依赖。在使用该方法之前，需要先构造**Task**对象。
+     * 删除当前任务对其他任务的依赖。在使用该方法之前，需要先构造Task对象。
      *
-     * @param { Task[] } tasks - 被依赖的任务数组。默认值为**undefined**。
+     * @param { Task[] } tasks - 被依赖的任务数组。默认值为undefined。
      * @throws { BusinessError } 10200027 - The dependency does not exist.
      * @throws { BusinessError } 10200052 - The periodic task cannot have a dependency. [since 12]
      * @throws { BusinessError } 10200056 - The task has been executed by the AsyncRunner. [since 18]
@@ -341,7 +340,7 @@ declare namespace taskpool {
     /**
      * 检查任务是否已完成。
      *
-     * @returns { boolean } 检查结果。任务执行完成时返回**true**，任务未执行完成时返回**false**。
+     * @returns { boolean } 任务执行完成时返回true，任务未执行完成时返回false。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -350,7 +349,7 @@ declare namespace taskpool {
     isDone(): boolean;
 
     /**
-     * 待执行的函数，必须使用[@Concurrent装饰器](../../arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，
+     * 待执行的函数，必须使用@Concurrent装饰器装饰，
      * 支持的函数返回值类型请参考[序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。<br>
      * 从API version 11开始，该接口支持在原子化服务中使用。
      *
@@ -465,13 +464,13 @@ declare namespace taskpool {
     constructor(name: string);
 
     /**
-     * 将待执行的函数添加到任务组中。使用该方法前需要先构造**TaskGroup**实例。
+     * 将待执行的函数添加到任务组中。使用该方法前需要先构造TaskGroup。
      *
      * @param { Function } func - 待执行的函数，必须使用
      *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，支持的函数返回值类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
-     * @param { Object[] } args - 任务执行函数的入参，支持的参数类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     * @param { Object[] } args - 任务执行函数的入参，支持的类型请参考
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)，默认值为undefined。
      * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -481,7 +480,7 @@ declare namespace taskpool {
     addTask(func: Function, ...args: Object[]): void;
 
     /**
-     * 将创建好的任务添加到任务组中。使用此方法前需要先构造**TaskGroup**实例。任务组不能添加其他任务组中的任务、串行队列任务、
+     * 将创建好的任务添加到任务组中。使用此方法前需要先构造TaskGroup。任务组不能添加其他任务组中的任务、串行队列任务、
      * 异步队列任务、有依赖关系的任务、长时任务、周期任务和已执行的任务。
      *
      * @param { Task } task - 需要添加到任务组中的任务。
@@ -516,9 +515,9 @@ declare namespace taskpool {
    */
   class SequenceRunner {
     /**
-     * SequenceRunner的构造函数，用于创建一个**SequenceRunner**实例。
+     * SequenceRunner的构造函数。
      *
-     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
+     * @param { Priority } [priority] - 指定任务的优先级，该参数默认值为taskpool.Priority.MEDIUM。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -527,8 +526,7 @@ declare namespace taskpool {
     constructor(priority?: Priority);
 
     /**
-     * SequenceRunner的构造函数，用于创建一个**SequenceRunner**实例。该实例表示一个全局串行队列。如果传入的名字与已有名字相同，
-     * 将返回同一个串行队列。
+     * SequenceRunner的构造函数。构造一个全局串行队列，如果名字相同，将返回同一个串行队列。
      *
      * > **说明：**
      * >
@@ -537,7 +535,7 @@ declare namespace taskpool {
      * > - 无法修改串行队列的优先级。
      *
      * @param { string } name - 串行队列的名字。
-     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
+     * @param { Priority } [priority] - 指定任务的优先级，该参数默认值为taskpool.Priority.MEDIUM。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -546,7 +544,7 @@ declare namespace taskpool {
     constructor(name: string, priority?: Priority);
 
     /**
-     * 执行串行任务。使用该方法前需先构造**SequenceRunner**实例。串行队列不能执行任务组任务、其他串行队列任务、异步队列任务、
+     * 执行串行任务。使用该方法前需先构造SequenceRunner。串行队列不能执行任务组任务、其他串行队列任务、异步队列任务、
      * 有依赖关系的任务和已执行的任务。使用Promise异步回调。
      *
      * > **说明：**
@@ -556,7 +554,7 @@ declare namespace taskpool {
      * > - 前面的任务执行失败或取消不会影响后续任务的执行。
      *
      * @param { Task } task - 需要添加到串行任务队列中的任务。
-     * @returns { Promise<Object> } Promise对象，返回任务执行的结果。
+     * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。
      * @throws { BusinessError } 10200003 - Worker initialization failed. [since 11 - 17]
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200025 - dependent task not allowed.
@@ -595,13 +593,13 @@ declare namespace taskpool {
    */
   class GenericsTask<A extends Array<Object>, R> extends Task {
     /**
-     * GenericsTask的构造函数，用于创建一个**GenericsTask**对象。
+     * GenericsTask的构造函数。
      *
-     * @param { (...args: A) => R | Promise<R> } func - 执行的逻辑需要传入函数，该函数必须使用
-     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰。支持的函数返回值类型请参考
+     * @param { (...args: A) => R | Promise<R> } func - 待执行的函数，必须使用
+     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，支持的函数返回值类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
-     * @param { A } args - 任务执行传入函数的入参，支持的参数类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     * @param { A } args - 任务执行函数的入参，支持的参数类型请参考
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为undefined。
      * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -611,14 +609,14 @@ declare namespace taskpool {
     constructor(func: (...args: A) => R | Promise<R>, ...args: A);
 
     /**
-     * GenericsTask的构造函数，用于创建一个**GenericsTask**实例，并可指定任务名称。
+     * GenericsTask的构造函数，可以指定任务名称。
      *
      * @param { string } name - 泛型任务名称。
-     * @param { (...args: A) => R | Promise<R> } func - 执行的逻辑需要传入函数，该函数必须使用
-     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰。支持的函数返回值类型请参考
+     * @param { (...args: A) => R | Promise<R> } func - 待执行的函数，必须使用
+     *     [@Concurrent装饰器](docroot://arkts-utils/taskpool-introduction.md#concurrent装饰器)装饰，支持的函数返回值类型请参考
      *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。
      * @param { A } args - 任务执行传入函数的入参，支持的参数类型请参考
-     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为**undefined**。
+     *     [序列化支持类型](docroot://reference/apis-arkts/js-apis-taskpool.md#序列化支持类型)。默认值为undefined。
      * @throws { BusinessError } 10200014 - The function is not marked as concurrent.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 18]
@@ -1084,14 +1082,12 @@ declare namespace taskpool {
    */
   export class AsyncRunner {
     /**
-     * AsyncRunner的构造函数，用于创建一个**AsyncRunner**实例。构造一个非全局的异步队列，即使传入的参数相同，
-     * 也会返回不同的异步队列。
+     * AsyncRunner的构造函数。构造一个非全局的异步队列，即使参数相同，每次调用也会返回不同的异步队列实例。
      *
-     * @param { number } runningCapacity - 指定任务执行的最大并发度，该值必须为正整数。如果传入负数，会报错；如果传入非整数，
-     *     会向下取整。
-     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
-     *     会向下取整。默认值为**0**，表示等待任务列表的容量没有限制。如果传入大于0的值，则表示排队策略为丢弃策略，当加入的任务数量
-     *     超过该值时，等待列表中处于队头的任务会被丢弃。
+     * @param { number } runningCapacity - 指定任务执行的最大并发度，该参数应为正整数，负数时报错，非整数时会向下取整。
+     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，取值需大于等于0，负数时报错，输入非整数时会向下取整。
+     *     默认值为0，表示等待任务列表的容量没有限制。如果设置大于0的值，则表示排队策略为丢弃策略，当加入的任务数量超过该值时，
+     *     等待列表中处于队头的任务会被丢弃。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -1100,8 +1096,7 @@ declare namespace taskpool {
     constructor(runningCapacity: number, waitingCapacity?: number);
 
     /**
-     * AsyncRunner的构造函数，用于创建一个**AsyncRunner**实例。构造一个全局异步队列，如果队列名称与已有名称相同，
-     * 将返回同一个异步队列。
+     * AsyncRunner的构造函数用于构造一个全局异步队列。如果队列名称相同，将返回同一个异步队列实例。
      *
      * > **说明：**
      * >
@@ -1110,11 +1105,10 @@ declare namespace taskpool {
      * > - 无法修改并发度和等待任务列表容量。
      *
      * @param { string } name - 异步队列的名字。
-     * @param { number } runningCapacity - 指定任务执行的最大并发度，该值必须为正整数。如果传入负数，会报错；如果传入非整数，
-     *     会向下取整。
-     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，该值必须大于等于0。如果传入负数，会报错；如果传入非整数，
-     *     会向下取整。默认值为**0**，表示等待任务列表的容量没有限制。如果传入大于0的值，则表示排队策略为丢弃策略，当加入的任务数量
-     *     超过该值时，等待列表中处于队头的任务会被丢弃。
+     * @param { number } runningCapacity - 指定任务执行的最大并发度，该参数应为正整数。负数时报错，非整数会向下取整。
+     * @param { number } [waitingCapacity] - 指定等待任务的列表容量，取值需大于等于0，负数时报错，非整数时会向下取整。
+     *     默认值为0，表示等待任务列表的容量没有限制。如果设置大于0的值，则表示排队策略为丢弃策略，当加入的任务数量超过该值时，
+     *     等待列表中处于队头的任务会被丢弃。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 22]
      * @atomicservice
@@ -1123,7 +1117,7 @@ declare namespace taskpool {
     constructor(name: string, runningCapacity: number, waitingCapacity?: number);
 
     /**
-     * 执行异步任务。使用该方法前需要先构造**AsyncRunner**实例。使用Promise异步回调。
+     * 执行异步任务。使用该方法前需要先构造AsyncRunner。使用Promise异步回调。
      *
      * > **说明：**
      * >
@@ -1135,15 +1129,15 @@ declare namespace taskpool {
      * >
      * > - 不支持执行周期性任务。
      * >
-     * > - 不支持执行延迟任务。
+     * > - 不支持执行延时任务。
      * >
      * > - 不支持执行存在依赖的任务。
      * >
      * > - 不支持执行已执行过的任务。
      *
      * @param { Task } task - 需要添加到异步队列中的任务。
-     * @param { Priority } [priority] - 指定任务的优先级，默认值为**taskpool.Priority.MEDIUM**。
-     * @returns { Promise<Object> } Promise对象，返回任务执行的结果。
+     * @param { Priority } [priority] - 指定任务的优先级，该参数默认值为taskpool.Priority.MEDIUM。
+     * @returns { Promise<Object> } Promise对象，返回任务函数的执行结果。
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @throws { BusinessError } 10200025 - dependent task not allowed.
      * @throws { BusinessError } 10200051 - The periodic task cannot be executed again.

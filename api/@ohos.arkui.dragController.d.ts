@@ -267,7 +267,7 @@ declare namespace dragController {
      * If the proactive dragging source also needs to be hidden, its unique ID must be passed as well.
      *
      * The unique ID of a component can be obtained by using [UIContext.getFrameNodeById()]{@link @ohos.arkui.UIContext:UIContext#getFrameNodeById}
-     * together with [FrameNode.getUniqueId()]{@link FrameNode:FrameNode#getUniqueId}.
+     * together with [FrameNode.getUniqueId()]{@link @ohos.arkui.node:FrameNode.getUniqueId}.
      *
      * You need to restore the component display status as required in the drag end callback.
      *
@@ -426,7 +426,7 @@ declare namespace dragController {
    * > associated with the current UI context.
    *
    * @param { CustomBuilder | DragItemInfo } custom - Object to be dragged.<br>**NOTE**<br>The global builder is not
-   *     supported. If the [Image]{@link image} component is used in the builder, enable synchronous loading, that is,
+   *     supported. If the [Image]{@link @global:Image} component is used in the builder, enable synchronous loading, that is,
    *     set the [syncLoad]{@link ImageAttribute#syncLoad} attribute of the component to **true**. The builder is used
    *     only to generate the image displayed during the current dragging. If the root component of the builder has zero
    *     width or height, it will cause failure in drag image generation, which in turn breaks the entire drag

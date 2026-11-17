@@ -609,6 +609,79 @@ export declare class DatePickerComponentOptions {
    * @since 26.0.0 dynamic
    */
   timeOptions?: TimeOptions;
+
+  /**
+   * 选中项的文本样式。
+   * 默认值：
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '14vp'（显示列数大于或等于6时）或 '16vp'（其他情况），
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectedTextStyle?: PickerComponentTextStyle;
+
+  /**
+   * 全部项的文本样式。当selectedTextStyle与itemTextStyle同时设置时，itemTextStyle应用于非选中项。
+   * 默认值：
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '14vp'（显示列数大于或等于6时）或 '16vp'（其他情况），
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  itemTextStyle?: PickerComponentTextStyle;
+
+  /**
+   * 选中项指示器的样式。
+   * 默认值：
+   * {
+   * type: PickerIndicatorType.BACKGROUND,
+   * strokeWidth: {
+   * value: 2,
+   * unit: LengthUnit.px
+   * },
+   * dividerColor: 'sys.color.comp_divider',
+   * startMargin: {
+   * value: 0,
+   * unit: LengthUnit.px
+   * },
+   * endMargin: {
+   * value: 0,
+   * unit: LengthUnit.px
+   * },
+   * borderRadius: {
+   * value: 12,
+   * unit: LengthUnit.vp
+   * },
+   * backgroundColor: 'sys.color.comp_background_tertiary'
+   * }
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectionIndicator?: PickerIndicatorStyle;
 }
 
 /**

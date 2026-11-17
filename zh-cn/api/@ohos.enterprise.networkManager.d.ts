@@ -1727,6 +1727,22 @@ declare namespace networkManager {
   function setEthernetConfig(admin: Want, networkInterface: string, config: InterfaceConfig): void;
 
   /**
+   * 清除指定网络的DNS缓存。使用异步回调返回结果。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK
+   * @param { number } netId - 网络ID。取值应≥100。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function clearDnsCache(netId: number): void;
+
+  /**
    * 获取设备上通过网络领域共享的所有文件夹路径列表。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_NETWORK

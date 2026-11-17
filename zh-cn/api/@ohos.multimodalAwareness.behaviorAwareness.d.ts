@@ -21,7 +21,7 @@
 import { Callback } from './@ohos.base';
 
 /**
- * **behaviorAwareness** 本模块提供 MSDP 设备状态感知能力，支持用户行为数据采集、序列模式聚类、感知事件判断。
+ * **行为感知**本模块提供MSDP设备状态感知能力，支持用户行为数据采集、序列模式聚类、感知事件判断。
  *
  * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
  * @systemapi
@@ -31,7 +31,7 @@ import { Callback } from './@ohos.base';
 declare namespace behaviorAwareness {
 
   /**
-   * 感知领域类型。用于区分不同的感知领域，每个领域有独立的 payload 结构。
+   * 感知领域类型。用于区分不同的感知领域，每个领域有独立的有效载荷结构。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -41,7 +41,7 @@ declare namespace behaviorAwareness {
   export enum PerceptionDomain {
     /**
      * 习惯感知领域类型能力。
-     * 用于识别用户日常使用习惯，例如应用使用习惯、设备操作习惯等。
+     * 用于识别用户日常使用习惯，如应用使用习惯、设备操作习惯等。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -61,7 +61,7 @@ declare namespace behaviorAwareness {
    */
   export enum PatternType {
     /**
-     * 时间模式：基于时间触发动作的感知模式。
+     * 时间模式：时间到动作组合。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -70,7 +70,7 @@ declare namespace behaviorAwareness {
      */
     TIME_PATTERN = 'timePattern',
     /**
-     * 位置模式：基于地理位置触发动作组合的感知模式。
+     * 位置模式：位置到动作组合。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -79,7 +79,7 @@ declare namespace behaviorAwareness {
      */
     LOCATION_PATTERN = 'locationPattern',
     /**
-     * 事件序列模式：基于事件触发动作组合的感知模式。
+     * 动作序列模式：动作到动作组合。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -99,7 +99,7 @@ declare namespace behaviorAwareness {
    */
   export enum EventType {
     /**
-     * 每日时间点。
+     * 每天的时间点。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -108,7 +108,7 @@ declare namespace behaviorAwareness {
      */
     DAILY_TIME = 'dailyTime',
     /**
-     * 每周时间点。
+     * 每周的时间点。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -117,7 +117,7 @@ declare namespace behaviorAwareness {
      */
     WEEKLY_TIME = 'weeklyTime',
     /**
-     * 每月时间点。
+     * 每月的时间点。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -126,7 +126,7 @@ declare namespace behaviorAwareness {
      */
     MONTHLY_TIME = 'monthlyTime',
     /**
-     * 法定工作日时间点。
+     * 法定工作日的时间点。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -135,7 +135,7 @@ declare namespace behaviorAwareness {
      */
     WORKDAY_TIME = 'workdayTime',
     /**
-     * 位置信息，包含位置以及进出围栏状态。
+     * 位置信息，包括位置、围栏进出状态。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -252,7 +252,7 @@ declare namespace behaviorAwareness {
      */
     BLUETOOTH_DISCONNECT = 'bluetoothDisconnect',
     /**
-     * 本机来电响铃。
+     * 本机来电。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -263,7 +263,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 动作类型枚举。
+   * 操作类型枚举。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -548,7 +548,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 事件推送后用户反馈事件状态类型枚举。
+   * 反馈类型枚举。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -593,7 +593,7 @@ declare namespace behaviorAwareness {
      */
     EDIT = 3,
     /**
-     * 事件未推送。
+     * 未推送事件。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -689,7 +689,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 位置状态类型枚举。用于区分进入或离开地理围栏。
+   * 位置状态类型。用于区分进入或退出地理围栏。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -707,7 +707,7 @@ declare namespace behaviorAwareness {
      */
     ENTER = 'enter',
     /**
-     * 离开地理围栏。
+     * 退出地理围栏。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -821,8 +821,8 @@ declare namespace behaviorAwareness {
      */
     recurrence: RecurrenceType;
     /**
-     * 星期几。
-     * 取值需为 [1,7] 范围内的整数。默认值：默认值为 0。
+     * 星期几（适用于每周重复）。
+     * 取值应为[1,7]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -831,8 +831,8 @@ declare namespace behaviorAwareness {
      */
     dayOfWeek?: int;
     /**
-     * 每月的第几天。
-     * 单位：天。取值需为 [1,31] 范围内的整数。默认值：默认值为 0。
+     * 月中的第几天（适用于每月重复）。取值范围：1~31。
+     * 单位为：天。取值应为[1,31]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -843,7 +843,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 地理坐标。
+   * 经纬度坐标。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -853,7 +853,7 @@ declare namespace behaviorAwareness {
   export interface Coordinates {
     /**
      * 纬度。
-     * 单位：度。取值范围：[-90,90]。
+     * 单位为：度。取值范围：[-90,90]。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -863,7 +863,7 @@ declare namespace behaviorAwareness {
     latitude: double;
     /**
      * 经度。
-     * 单位：度。取值范围：[-180,180]。
+     * 单位为：度。取值范围：[-180,180]。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -892,7 +892,7 @@ declare namespace behaviorAwareness {
      */
     kind: 'location';
     /**
-     * 位置类型。
+     * 位置类型（预定义位置，可选）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -910,7 +910,7 @@ declare namespace behaviorAwareness {
      */
     locationName?: string;
     /**
-     * 地理坐标。
+     * 经纬度坐标。纬度取值范围：-90~90；经度取值范围：-180~180。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -939,7 +939,7 @@ declare namespace behaviorAwareness {
      */
     kind: 'systemEvent';
     /**
-     * 应用包名。
+     * 应用包名（应用类事件）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -957,7 +957,7 @@ declare namespace behaviorAwareness {
      */
     appName?: string;
     /**
-     * 应用 ID（用于应用相关事件）。
+     * 应用 ID（应用类事件）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -967,7 +967,7 @@ declare namespace behaviorAwareness {
     appId?: string;
     /**
      * 单次使用时长阈值。
-     * 单位：分钟。取值应为整数。默认值：默认值为 0。
+     * 单位为：分钟。取值限定为整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -976,8 +976,8 @@ declare namespace behaviorAwareness {
      */
     durationThreshold?: int;
     /**
-     * 当日使用时长阈值。
-     * 单位：分钟。取值需为 [0,1440] 范围内的整数。默认值：默认值为 0。
+     * 日使用时长阈值（应用时长事件）。
+     * 单位为：分钟。取值应为[0,1440]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -986,8 +986,8 @@ declare namespace behaviorAwareness {
      */
     dailyDurationThreshold?: int;
     /**
-     * 电量阈值。
-     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     * 电池阈值。
+     * 单位为：百分比。取值应为[0,100]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -996,8 +996,8 @@ declare namespace behaviorAwareness {
      */
     batteryThreshold?: int;
     /**
-     * 电量百分比。
-     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     * 电池百分比。
+     * 单位为：百分比。取值应为[0,100]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1006,8 +1006,8 @@ declare namespace behaviorAwareness {
      */
     level?: int;
     /**
-     * 蓝牙设备类型。
-     * 默认值：默认值为 0。
+     * 蓝牙设备类型（蓝牙类事件）。
+     * 默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1045,7 +1045,7 @@ declare namespace behaviorAwareness {
      */
     kind: 'systemAction';
     /**
-     * 操作目标（开启/关闭/切换）。
+     * 操作目标（开/关/切换）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1072,7 +1072,7 @@ declare namespace behaviorAwareness {
      */
     appName?: string;
     /**
-     * 调节方向。
+     * 调节方向（brightness/volume 增量调节时用）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1081,8 +1081,8 @@ declare namespace behaviorAwareness {
      */
     adjustment?: AdjustmentDirection;
     /**
-     * 绝对值，表示亮度或音量的固定值。
-     * 单位：百分比。取值需为 [0,100] 范围内的整数。默认值：默认值为 0。
+     * 绝对值表示亮度或音量的固定值。
+     * 单位为：占比。取值应为[0,100]内的整数。默认值：默认值为0。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1111,7 +1111,7 @@ declare namespace behaviorAwareness {
    */
   export interface EventData {
     /**
-     * 事件 ID。
+     * 事件标识。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1139,7 +1139,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * 发生时间戳。
-     * 单位：毫秒。
+     * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1149,7 +1149,7 @@ declare namespace behaviorAwareness {
     timestamp: long;
     /**
      * 附加参数。
-     * 默认值：无附加参数时的默认行为。
+     * 默认值：不带附加参数。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1206,7 +1206,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * 附加参数。
-     * 默认值：无附加参数时的默认行为。
+     * 默认值：不带附加参数。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1226,7 +1226,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 习惯感知领域 payload。HABIT_AWARENESS 领域的具体数据。
+   * 行为感知负载。HABIT_AWARENESS领域的具体数据。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -1264,7 +1264,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 感知事件数据。MSDP 融合感知聚类后生成的事件，推送给业务侧。
+   * 感知事件数据。MSDP融合感知聚类后生成的事件，推送给业务侧。
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -1291,8 +1291,8 @@ declare namespace behaviorAwareness {
      */
     domain: PerceptionDomain;
     /**
-     * 置信度。值 0 表示无置信度，值 100 表示完全确定。
-     * 单位：百分比。取值需为 [0,100] 范围内的整数。
+     * 置信度，0表示无置信度，100表示置信度完全置信。
+     * 单位为：百分比。取值应为[0,100]内的整数。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1302,7 +1302,7 @@ declare namespace behaviorAwareness {
     confidence: int;
     /**
      * 生成时间戳。
-     * 单位：毫秒。
+     * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1331,7 +1331,7 @@ declare namespace behaviorAwareness {
    */
   export interface SubscribeInfo {
     /**
-     * 感知领域类型。
+     * 感知领域类型（必填）。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1340,8 +1340,8 @@ declare namespace behaviorAwareness {
      */
     domain: PerceptionDomain;
     /**
-     * 子类型过滤（可选。不指定时订阅该领域下所有模式。）。
-     * 默认值：不过滤，订阅该领域下所有子类型。
+     * 子类型过滤（可选，不填则订阅该领域下所有模式）。
+     * 默认值：不设置过滤，订阅该领域下所有子类型。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1380,7 +1380,7 @@ declare namespace behaviorAwareness {
     feedbackType: FeedbackType;
     /**
      * 反馈时间戳。
-     * 单位：毫秒。
+     * 单位为：毫秒。
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1391,15 +1391,15 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * 发起订阅。业务侧向 MSDP 注册订阅关系，同时注册感知事件回调。
+   * 发起订阅。业务侧向MSDP注册订阅关系，同时注册感知事件回调。
    *
-   * 当用户执行动作时，MSDP 从感知事件表过滤匹配项并通过回调实时推送。
+   * 当用户执行操作时，MSDP从感知事件表过滤匹配项并通过回调实时推送。
    * 同一订阅目标重复订阅时，后传入的回调覆盖之前的回调。
    *
    * @param { SubscribeInfo } info - 订阅选项。
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - 用于返回感知事件的回调。
-   * @returns { Promise<void> } 无返回值的 Promise。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1416,15 +1416,14 @@ declare namespace behaviorAwareness {
   ): Promise<void>;
 
   /**
-   * 取消订阅。业务侧向 MSDP 注销订阅关系。
+   * 取消订阅。业务侧向MSDP注销订阅关系。
    *
    * 如果传入回调，则仅取消与该回调匹配的订阅；如果不传回调，则取消当前包名下的所有订阅。
    *
-   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 用于返回感知事件的回调。
-   *     用于清除所有订阅的感知事件。
-   *     <br>默认值：不指定时，取消当前包的所有订阅。
-   * @returns { Promise<void> } 无返回值的 Promise。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } [callback] - 用于返回感知事件的回调。用于清除所有订阅的感知事件。
+   *     <br>默认值：不传则取消当前包名下的所有订阅。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1441,11 +1440,11 @@ declare namespace behaviorAwareness {
   ): Promise<void>;
 
   /**
-   * 提交用户反馈。业务侧将用户反馈发送给 MSDP。
+   * 提交用户反馈。业务侧将用户对感知事件的反馈传递给MSDP。
    *
    * @param { FeedbackData } feedback - 反馈数据。
-   * @returns { Promise<void> } 无返回值的 Promise。
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.

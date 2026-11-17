@@ -18,26 +18,6 @@
  * @kit AbilityKit
  */
 
-/**
- * # Constraints
- * 
- * - Currently, only 2-in-1 devices are supported.
- * - To integrate an AppServiceExtensionAbility, applications must request the ACL permission (
- * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION). This ACL permission is available only for enterprise applications.
- */
-
-/**
- * # Lifecycle
- * 
- * The AppServiceExtensionAbility provides the following lifecycle callbacks: 
- * [onCreate()]{@link AppServiceExtensionAbility.onCreate}, [onRequest()]{@link AppServiceExtensionAbility.onRequest}, 
- * [onConnect()]{@link AppServiceExtensionAbility.onConnect}, and 
- * [onDestroy()]{@link AppServiceExtensionAbility.onDestroy}. You can override the callback methods as required. 
- * The following figure shows the AppServiceExtensionAbility lifecycle.
- * 
- * ![AppServiceExtensionAbility-lifecycle](docroot://application-models/figures/AppServiceExtensionAbility-lifecycle.png)
- */
-
 import rpc from './@ohos.rpc';
 import AppServiceExtensionContext from './application/AppServiceExtensionContext';
 import Want from './@ohos.app.ability.Want';
@@ -46,6 +26,22 @@ import ExtensionAbility from './@ohos.app.ability.ExtensionAbility';
 /**
  * The AppServiceExtensionAbility module provides extended capabilities for background services, including lifecycle
  * callbacks for creating, destroying, connecting, and disconnecting background services.
+ *
+ * ###### Constraints
+ *
+ * - Currently, only 2-in-1 devices are supported.
+ * - To integrate an AppServiceExtensionAbility, applications must request the ACL permission
+ * (ohos.permission.SUPPORT_APP_SERVICE_EXTENSION). This ACL permission is available only for enterprise applications.
+ *
+ * ###### Lifecycle
+ *
+ * The AppServiceExtensionAbility provides the following lifecycle callbacks:
+ * [onCreate()]{@link AppServiceExtensionAbility#onCreate}, [onRequest()]{@link AppServiceExtensionAbility#onRequest},
+ * [onConnect()]{@link AppServiceExtensionAbility#onConnect}, and
+ * [onDestroy()]{@link AppServiceExtensionAbility#onDestroy}. You can override the callback methods as required.
+ * The following figure shows the AppServiceExtensionAbility lifecycle.
+ *
+ * ![AppServiceExtensionAbility-lifecycle](docroot://application-models/figures/AppServiceExtensionAbility-lifecycle.png)
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core
  * @stagemodelonly
@@ -56,6 +52,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
   /**
    * Context environment for an AppServiceExtensionAbility. This context inherits from
    * [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}.
+   *
+   * **Device Behavior Differences:** This attribute can be called normally only on PC/2-in-1 devices and
+   * does not take effect on other devices.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -73,6 +72,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * > If an AppServiceExtensionAbility instance has already been created, the **onCreate()** callback is not invoked
    * > again when the instance is started or connected.
    *
+   * **Device Behavior Differences:** This API executes the callback normally only on PC/2-in-1 devices and
+   * does not execute the callback on other devices.
+   *
    * @param { Want } want - Want information about the target AppServiceExtensionAbility instance, including the
    *     ability name and bundle name.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -86,6 +88,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * Called when an AppServiceExtensionAbility instance is destroyed. Applications can perform resource cleanup
    * operations, such as unregistering listeners, in this callback.
    *
+   * **Device Behavior Differences:** This API executes the callback normally only on PC/2-in-1 devices and
+   * does not execute the callback on other devices.
+   *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 20 dynamic
@@ -97,6 +102,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * Called each time an AppServiceExtensionAbility instance is started by calling
    * [startAppServiceExtensionAbility()]{@link ./application/UIAbilityContext:UIAbilityContext.startAppServiceExtensionAbility}
    * .
+   *
+   * **Device Behavior Differences:** This API executes the callback normally only on PC/2-in-1 devices and
+   * does not execute the callback on other devices.
    *
    * @param { Want } want - Want information about the target AppServiceExtensionAbility instance, including the
    *     ability name and bundle name.
@@ -114,6 +122,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * [connectAppServiceExtensionAbility()]{@link ./application/UIAbilityContext:UIAbilityContext.connectAppServiceExtensionAbility}
    * .
    *
+   * **Device Behavior Differences:** This API executes the callback normally only on PC/2-in-1 devices.
+   * On other devices, the callback is not executed.
+   *
    * @param { Want } want - Want information about the target AppServiceExtensionAbility instance, including the
    *     ability name and bundle name.
    * @returns { rpc.RemoteObject } A RemoteObject used for communication between the server and client.
@@ -126,6 +137,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
 
   /**
    * Called when all connections to an AppServiceExtensionAbility instance are interrupted.
+   *
+   * **Device Behavior Differences:** This API executes the callback normally only on PC/2-in-1 devices.
+   * On other devices, the callback is not executed.
    *
    * @param { Want } want - Want information passed by the caller when the AppServiceExtensionAbility instance was most
    *     recently started or connected. This includes information such as the ability name and bundle name.

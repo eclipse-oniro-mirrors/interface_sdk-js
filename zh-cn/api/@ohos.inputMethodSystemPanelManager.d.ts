@@ -348,11 +348,18 @@ declare namespace inputMethodSystemPanelManager {
    * <br>相关接口间的配合/制约关系：本接口是系统面板侧的私有命令发送接口，对应输入法应用侧的[inputMethodEngine.on('privateCommand')](js-apis-inputmethodengine.md#onprivatecommand12)（接收端）。
    * 私有命令通信方向：系统面板 → 输入法应用。
    * 
+   * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次命令发送，并通过Promise拒绝返回BusinessError 12800026。
+   * 请等待操作完成后再发起其他请求。
+   * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+   * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+   *
    * @param { Record<string, CommandDataType> } commandData - 要发送的命令数据，格式为键值对映射，key为命令名称（string类型），value为命令数据值（支持number、string或boolean类型）。
    * <br>使用场景：用于传输系统面板与输入法应用之间的自定义通信数据。<br>取值范围：总大小最大32KB，键值对数量最多5条。超出此范围时返回错误码12800026。
    * <br>说明：需注意IPC传输数据量的约束与限制，一次接口调用在IPC层的总传输数据量等于应用侧发送的数据量加系统层处理所需的必要数据量，因此实际可发送的最大数据量会小于32KB。
    * @returns { Promise<void> } 无返回结果的Promise对象。命令发送成功时resolve，失败时reject并返回BusinessError对象。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+   * a system error, such as null pointer, IPC exception.
    * @throws { BusinessError } 12800026 - input method system panel error. Possible causes:
    *     1. the system panel not connected. 2. ipc failed due to the large amount of data transferred or other reasons.
    *     3. the caller is not system panel.

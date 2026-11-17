@@ -14,7 +14,13 @@
  */
 
 /**
- * @file
+ * @file 文本选择菜单，适用于[RichEditor]{@link RichEditor}组件通过[bindSelectionMenu]{@link RichEditorAttribute#bindSelectionMenu}或 
+ * [Text]{@link Text}组件通过[bindSelectionMenu]{@link TextAttribute#bindSelectionMenu}绑定自定义文本选择菜单，支持编辑菜单和扩展下拉菜 
+ * 单两种类型，可通过配置实现复制、粘贴、剪切、全选等内置功能，也可通过自定义菜单项和事件回调实现扩展功能。建议绑定鼠标右键或鼠标选中方
+ * 式弹出，不支持作为普通组件单独使用。适用于富文本编辑场景，可为用户提供便捷的文本操作入口，提升文本编辑效率。
+ * 
+ * ###### 子组件
+ * 无。
  * @kit ArkUI
  */
 
@@ -184,7 +190,7 @@ export interface SelectionMenuOptions {
    *
    * 点击自定义文本选择菜单内置粘贴功能选项后，空白处粘贴或者选中文本替换粘贴均是保留被复制文本的样式。
    *
-   * 当富文本组件[RichEditor]{@link ./@internal/component/ets/rich_editor}的copyOptions属性设置为`CopyOptions.None`时，内置的复制剪切功能会被限制。
+   * 当富文本组件[RichEditor]{@link @global:RichEditor}的copyOptions属性设置为`CopyOptions.None`时，内置的复制剪切功能会被限制。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -275,7 +281,7 @@ export interface SelectionMenuOptions {
 }
 
 /**
- * 入参为空时，文本选择菜单组件SelectionMenu内容区大小及组件大小为零。例如，富文本组件[RichEditor]{@link ./@internal/component/ets/rich_editor}使用
+ * 入参为空时，文本选择菜单组件SelectionMenu内容区大小及组件大小为零。例如，富文本组件[RichEditor]{@link @global:RichEditor}使用
  * [bindSelectionMenu]{@link RichEditorAttribute#bindSelectionMenu}接口绑定一个SelectionMenu的右键菜单，则右键富文本组件区域时无任何菜单弹出。
  *
  * @param { SelectionMenuOptions } options - 文本选择菜单配置选项，用于配置编辑菜单、扩展下拉菜单、富文本控制器以及复制粘贴剪切等回调事件。

@@ -135,7 +135,7 @@ declare class HashSet<T> {
   /**
    * 在遍历过程中对每个元素调用一次回调函数。不建议在forEach回调中使用add、remove方法修改HashSet，因其可能导致迭代过程中的状态异常。
    *
-   * @param { function } callbackFn - 回调函数，在遍历过程中对每个元素调用一次。回调参数包括value、key和set，详见callbackFn的参数说明。
+   * @param { function } callbackFn - 回调函数，在遍历过程中对每个元素调用一次。 value是当前元素的值，key与value相同，两者每次调用都会传入；set是当前调用的HashSet实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值。当需要改变回调函数内this指向时传入此参数，不传入时默认值为当前实例对象。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
@@ -188,9 +188,6 @@ declare class HashSet<T> {
   entries(): IterableIterator<[T, T]>;
   /**
    * 返回一个迭代器，迭代器的每一项为HashSet中的元素。
-   * > **说明：**
-   * >
-   * > 不建议在Symbol.iterator中使用add、remove方法，因其可能导致迭代过程中的状态异常，建议使用for循环来进行安全的插入与删除操作。
    *
    * @returns { IterableIterator<T> } 返回包含此HashSet中所有元素的迭代器对象。
    * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.

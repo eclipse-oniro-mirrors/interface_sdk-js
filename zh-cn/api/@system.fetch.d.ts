@@ -14,8 +14,8 @@
  */
 
 /**
-  * @file 数据请求
-  * @kit NetworkKit
+ * @file Data Request
+ * @kit NetworkKit
  */
 
 /**

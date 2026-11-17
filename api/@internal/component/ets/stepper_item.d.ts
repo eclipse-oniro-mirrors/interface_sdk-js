@@ -69,7 +69,7 @@ declare enum ItemState {
    * **NOTE**
    *
    * This API is supported since API version 8 and deprecated since API version 22. You are advised to use
-   * [Swiper]{@link ./swiper} instead.
+   * [Swiper]{@link @global:Swiper} instead.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -100,12 +100,12 @@ declare enum ItemState {
 }
 
 /**
- * The **StepperItem** component represents a page component used within a [Stepper]{@link ./stepper} container.
+ * The **StepperItem** component represents a page component used within a [Stepper]{@link @global:Stepper} container.
  *
  * > **NOTE**
  * >
  * > - This component is supported since API version 8 and deprecated since API version 22. You are advised to use
- * > [Swiper]{@link ./swiper} instead.
+ * > [Swiper]{@link @global:Swiper} instead.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -117,12 +117,12 @@ declare enum ItemState {
  */
 interface StepperItemInterface {
   /**
-   * Creates a page component for the [Stepper]{@link ./stepper} container.
+   * Creates a page component for the [Stepper]{@link @global:Stepper} container.
    *
    * > **NOTE**
    * >
    * > This component is supported since API version 8 and deprecated since API version 22. You are advised to use
-   * > [Swiper]{@link ./swiper} instead.
+   * > [Swiper]{@link @global:Swiper} instead.
    *
    * @returns { StepperItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -209,12 +209,12 @@ declare class StepperItemAttribute extends CommonMethod<StepperItemAttribute> {
 declare const StepperItemInstance: StepperItemAttribute;
 
 /**
- * The **StepperItem** component represents a page component used within a [Stepper]{@link ./stepper} container.
+ * The **StepperItem** component represents a page component used within a [Stepper]{@link @global:Stepper} container.
  *
  * > **NOTE**
  * >
  * > - This component is supported since API version 8 and deprecated since API version 22. You are advised to use
- * > [Swiper]{@link ./swiper} instead.
+ * > [Swiper]{@link @global:Swiper} instead.
  *
  * ###### Child Components
  *

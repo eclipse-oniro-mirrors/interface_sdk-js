@@ -40,9 +40,9 @@ declare namespace formObserver {
    * @param { 'formAdd' } type - Indicates event type.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -57,9 +57,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -75,9 +75,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -93,9 +93,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -111,9 +111,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -129,9 +129,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -146,9 +146,9 @@ declare namespace formObserver {
    * @param { 'formRemove' } type - Indicates event type.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -163,9 +163,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -181,9 +181,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -199,9 +199,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -217,9 +217,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -235,9 +235,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -252,9 +252,9 @@ declare namespace formObserver {
    * @param { 'notifyVisible' } type - Indicates event type.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -269,9 +269,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -287,9 +287,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -309,9 +309,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -329,9 +329,9 @@ declare namespace formObserver {
    * @param { 'notifyInvisible' } type - Indicates event type.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -346,9 +346,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -364,9 +364,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -386,9 +386,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -407,9 +407,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                  the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -429,9 +429,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                  the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -450,9 +450,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                         the running form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -472,9 +472,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -492,9 +492,9 @@ declare namespace formObserver {
    *                                                                      RunningFormInfo.
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -513,9 +513,9 @@ declare namespace formObserver {
    * @param { boolean } isUnusedIncluded - Indicates whether to include unused form.
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -536,9 +536,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } Returns the RunningFormInfo.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -556,9 +556,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } Returns the RunningFormInfo.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -578,9 +578,9 @@ declare namespace formObserver {
    * @param { formInfo.FormProviderFilter } formProviderFilter - Indicates the form provider app info.
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } The promise returned by the function.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -601,9 +601,9 @@ declare namespace formObserver {
    * @param { formInfo.FormProviderFilter } formProviderFilter - Indicates the form provider app info.
    * @param { AsyncCallback<Array<formInfo.RunningFormInfo>> } callback - The callback of getFormInstancesByFilter.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -625,9 +625,9 @@ declare namespace formObserver {
    * @param { string } formId - Indicates the form provider formId.
    * @returns { Promise<formInfo.RunningFormInfo> } The promise returned by the function.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -647,9 +647,9 @@ declare namespace formObserver {
    * @param { boolean } isUnusedIncluded - Indicates whether to include unused form.
    * @returns { Promise<formInfo.RunningFormInfo> } The promise returned by the function.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -668,9 +668,9 @@ declare namespace formObserver {
    * @param { string } formId - Indicates the form provider formId.
    * @param { AsyncCallback<formInfo.RunningFormInfo> } callback - The callback of getFormInstancesById.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -690,9 +690,9 @@ declare namespace formObserver {
    * @param { boolean } isUnusedIncluded - Indicates whether to include unused form.
    * @param { AsyncCallback<formInfo.RunningFormInfo> } callback - The callback of getFormInstancesById.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -716,9 +716,9 @@ declare namespace formObserver {
    * @param { 'router' } type - Indicates event type.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -733,9 +733,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -751,9 +751,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -769,9 +769,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -786,9 +786,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -803,9 +803,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -820,9 +820,9 @@ declare namespace formObserver {
    * @param { 'message' } type - Indicates event type.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -837,9 +837,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -855,9 +855,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -873,9 +873,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -890,9 +890,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -907,9 +907,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -924,9 +924,9 @@ declare namespace formObserver {
    * @param { 'call' } type - Indicates event type.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -941,9 +941,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -959,9 +959,9 @@ declare namespace formObserver {
    * @param { string } hostBundleName - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -977,9 +977,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -994,9 +994,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - Indicates the bundle name of the form host application.
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -1011,9 +1011,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static

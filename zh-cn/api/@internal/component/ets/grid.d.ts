@@ -101,13 +101,13 @@ declare type OnGetStartIndexByIndexCallback = (targetIndex: int) => StartLineInf
 /**
 * Grid布局选项。其中，irregularIndexes和onGetIrregularSizeByIndex可对仅设置rowsTemplate或columnsTemplate的Grid使用，可以指定一个index数组，并为其中的
 * index对应的GridItem设置其占据的行数与列数，使用方法参见
-* [示例3]{@link ./grid}；onGetRectByIndex可对同时设置
+* [示例3]{@link @global:Grid}；onGetRectByIndex可对同时设置
 * rowsTemplate和columnsTemplate的Grid使用，为指定的index对应的GridItem设置位置和大小，使用方法参见
-* [示例1]{@link ./grid}。
+* [示例1]{@link @global:Grid}。
 *
 * 为提高Grid在跳转、列数变化等场景的性能，应该尽量使用GridLayoutOptions。即使Grid中没有任何特殊的跨行跨列节点，也可以通过使用'Grid(this.scroller, {regularSize: [1, 1]})
 * '的方式提高跳转性能。参考<!--RP1-->
-* [使用GridLayoutOptions提升Grid性能]{@link ./grid}<!--RP1End-->。
+* [使用GridLayoutOptions提升Grid性能]{@link @global:Grid}<!--RP1End-->。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -209,7 +209,7 @@ declare interface GridLayoutOptions {
 *
 * > **说明：**
 * >
-* > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+* > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -224,8 +224,8 @@ interface GridInterface {
    * 创建网格容器。
    *
    * @param { Scroller } scroller - 可滚动组件的控制器。用于与可滚动组件进行绑定。不设置时不绑定外部控制器，组件自行管理滚动行为。<br/>**说明：** <br/>不允许和其他滚动类组件，如：
-   *     [ArcList]{@link @ohos.arkui.ArcList}、[List]{@link ./list}、[Grid]{@link ./grid}、[Scroll]{@link ./scroll}和
-   *     [WaterFlow]{@link ./water_flow}绑定同一个滚动控制对象。
+   *     [ArcList]{@link @ohos.arkui.ArcList}、[List]{@link @global:List}、[Grid]{@link @global:Grid}、[Scroll]{@link @global:Scroll}和
+   *     [WaterFlow]{@link @global:WaterFlow}绑定同一个滚动控制对象。
    * @param { GridLayoutOptions } layoutOptions - Grid布局选项，用于配置GridItem跨行跨列等布局信息。不传入时，Grid按照rowsTemplate、columnsTemplate
    *     等常规属性以及GridItem自身属性进行布局，不启用GridLayoutOptions提供的布局选项。<br/> [since 10]
    * @returns { GridAttribute } The attribute of the grid
@@ -373,7 +373,7 @@ declare interface ComputedBarAttribute {
 }
 
 /**
-* frameNode中[getEvent('Grid')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'Grid')}方法的返
+* frameNode中[getEvent('Grid')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'Grid')}方法的返
 * 回值，可用于给Grid节点设置滚动事件。
 *
 * UIGridEvent继承于[UIScrollableCommonEvent]{@link UIScrollableCommonEvent}。
@@ -446,7 +446,7 @@ declare type OnGridScrollIndexCallback = (first: number, last: number) => void;
 * 除支持[通用属性]{@link CommonMethod}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还
 * 支持以下属性：
 *
-* 除支持[通用事件]{@link ./common}和[滚动组件通用事件](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#事件)外，还
+* 除支持[通用事件]{@link CommonMethod}和[滚动组件通用事件](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#事件)外，还
 * 支持以下事件：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -712,7 +712,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   cachedCount(count: number, show: boolean): GridAttribute;
 
   /**
-   * 设置Grid是否进入编辑模式，进入编辑模式可以拖拽Grid组件内部[GridItem]{@link ./gridItem}。
+   * 设置Grid是否进入编辑模式，进入编辑模式可以拖拽Grid组件内部[GridItem]{@link @global:GridItem}。
    *
    * > **说明：**
    * >
@@ -729,7 +729,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   editMode(value: boolean): GridAttribute;
 
   /**
-   * 设置是否开启鼠标框选。开启框选后，可以配合GridItem的selected属性和onSelect事件获取GridItem的选中状态，还可以通过[多态样式]{@link ./common}设置GridItem的选中态样式（
+   * 设置是否开启鼠标框选。开启框选后，可以配合GridItem的selected属性和onSelect事件获取GridItem的选中状态，还可以通过[多态样式]{@link CommonMethod}设置GridItem的选中态样式（
    * GridItem默认无选中态样式）。
    *
    * @param { boolean } value - 是否开启鼠标框选。<br/>默认值：false<br/>false：关闭框选。true：开启框选。
@@ -1084,7 +1084,7 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   editModeOptions(options?: EditModeOptions): GridAttribute;
 
   /**
-   * 设置Grid是否启用编辑模式，启用编辑模式后可以在Grid组件内滑动多选[GridItem]{@link ./gridItem}。未通过该接口设置时，不启用编辑模式。
+   * 设置Grid是否启用编辑模式，启用编辑模式后可以在Grid组件内滑动多选[GridItem]{@link @global:GridItem}。未通过该接口设置时，不启用编辑模式。
    *
    * @param { boolean | undefined } enabled - 是否启用编辑模式，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md)双向绑定
    *     变量。设置为true时启用编辑模式，可以滑动多选，设置为false或undefined时关闭编辑模式，不可滑动多选。
@@ -1214,11 +1214,11 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
 *
 * > **说明：**
 * >
-* > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link ./common}进行处理。
+* > 组件内部已绑定手势实现跟手滚动等功能，需要增加自定义手势操作时请参考[手势拦截增强]{@link CommonMethod}进行处理。
 *
 * ###### 子组件
 *
-* 仅支持[GridItem]{@link ./gridItem}子组件和自定义组件。自定义组件在Grid下使用时，建议使用GridItem作为自定义组件的顶层组件，不建议给自定义组件设置属性和事件方法。
+* 仅支持[GridItem]{@link @global:GridItem}子组件和自定义组件。自定义组件在Grid下使用时，建议使用GridItem作为自定义组件的顶层组件，不建议给自定义组件设置属性和事件方法。
 *
 * 支持通过渲染控制类型（[if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md)、
 * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)、

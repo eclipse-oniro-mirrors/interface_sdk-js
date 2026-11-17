@@ -83,7 +83,7 @@ interface LineOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  * >
  * > - The **Line** component cannot form a closed area, so the **fill** and **fillOpacity** attributes do not take
  * > effect.
@@ -207,7 +207,7 @@ declare class LineAttribute extends CommonShapeMethod<LineAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link ../../../arkui/AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  * >
  * > - The **Line** component cannot form a closed area, so the **fill** and **fillOpacity** attributes do not take
  * > effect.

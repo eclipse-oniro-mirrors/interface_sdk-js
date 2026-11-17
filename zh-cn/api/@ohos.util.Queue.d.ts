@@ -112,9 +112,10 @@ declare class Queue<T> {
   pop(): T;
 
   /**
-   * 遍历Queue实例中的每个元素，并对每个元素执行回调函数。
+   * 在遍历Queue实例中的每个元素，并对每个元素执行回调函数。
    *
    * @param { function } callbackFn - 对每个元素执行的回调函数。
+   *     value为当前遍历元素，index默认从0开始，Queue为当前实例对象。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang

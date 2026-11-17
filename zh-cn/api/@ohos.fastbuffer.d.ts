@@ -298,8 +298,6 @@ declare namespace fastbuffer {
         /**
          * 将`this`实例中指定位置的数据复制到`target`的指定位置上，并返回复制的字节总长度。
          *
-         * 如果sourceEnd大于target的长度，则以target的长度为准，超出部分不会被覆盖。
-         *
          * @param { FastBuffer | Uint8Array } target - 要复制到的Buffer或Uint8Array实例。
          * @param { number } [targetStart] - `target`实例中开始写入的偏移量。默认值：0。取值范围：0 <= targetStart <= UINT32_MAX。
          * @param { number } [sourceStart] - `this`实例中开始复制的偏移量。默认值：0。取值范围：0 <= sourceStart <= UINT32_MAX。
@@ -413,7 +411,7 @@ declare namespace fastbuffer {
         /**
          * 从指定的`offset`处读取有符号的大端序64位整数。
          *
-         * @param { number } [offset] - 偏移量。取值范围：0 <= offset <= this.length - 8，默认值：0。
+         * @param { number } [offset] - 偏移量。默认值：0。取值范围：0 <= offset <= this.length - 8。
          * @returns { bigint } 读取出的内容。
          * @throws { BusinessError } 10200001 - The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]
          * @syscap SystemCapability.Utils.Lang
@@ -473,7 +471,7 @@ declare namespace fastbuffer {
         /**
          * 从指定的`offset`处读取64位小端序双精度值。
          *
-         * @param { number } [offset] - 偏移量。默认值：0。取值范围：0 <= offset <= this.length - 8。
+         * @param { number } [offset] - 偏移量。取值范围：0 <= offset <= this.length - 8，默认值：0。
          * @returns { number } 读取出的内容。
          * @throws { BusinessError } 10200001 - The value of "offset" is out of range. It must be >= 0 and <= buf.length - 8. Received value is: [offset]
          * @syscap SystemCapability.Utils.Lang
@@ -737,7 +735,7 @@ declare namespace fastbuffer {
         /**
          * 将当前对象中指定位置的数据转成指定编码格式的字符串并返回。
          *
-         * @param { string } [encoding] - 字符编码格式，支持的格式范围参考BufferEncoding。默认值：'utf8'。
+         * @param { string } [encoding] - 字符编码格式，支持的格式范围参考[BufferEncoding]{@link fastbuffer.BufferEncoding}。默认值：'utf8'。
          * @param { number } [start] - 开始位置。默认值：0。
          * @param { number } [end] - 结束位置。默认值：this.length。
          * @returns { string } 字符串。当start >= this.length或start > end时返回空字符串。
@@ -754,7 +752,7 @@ declare namespace fastbuffer {
          * @param { string } str - 要写入FastBuffer的字符串。
          * @param { number } [offset] - 偏移量。默认值：0。
          * @param { number } [length] - 最大字节长度。默认值：(this.length - offset)。
-         * @param { string } [encoding] - 字符编码格式，支持的格式范围参考BufferEncoding。默认值：'utf8'。
+         * @param { string } [encoding] - 字符编码格式，支持的格式范围参考[BufferEncoding]{@link fastbuffer.BufferEncoding}。默认值：'utf8'。
          * @returns { number } 写入的字节数。
          * @throws { BusinessError } 10200001 - Range error. Possible causes:
          * The value of the parameter is not within the specified range.

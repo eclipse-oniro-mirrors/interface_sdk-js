@@ -81,7 +81,7 @@ export default struct UserAuthIcon {
    * 
    * **注意：** 应用需申请`ohos.permission.ACCESS_BIOMETRIC`权限，否则应用将仅展示图标，无法正常拉起身份认证控件。
    *
-   * @param { userAuth.UserAuthResult } result - Authentication result information.
+   * @param { userAuth.UserAuthResult } result - 用户认证结果。
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @atomicservice
    * @since 12 dynamic

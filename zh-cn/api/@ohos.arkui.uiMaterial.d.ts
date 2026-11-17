@@ -115,8 +115,8 @@ declare namespace uiMaterial {
   enum MaterialState {  
     /**
      * 默认模式。[弹出框Dialog](docroot://ui/arkts-base-dialog-overview.md)、[即时反馈（Toast）](docroot://ui/arkts-create-toast.md)、
-     * [AlphabetIndexer]{@link ./@internal/component/ets/alphabet_indexer}在组件本身未设置背景色、模糊参数和阴影参数时默认开启沉浸式系统材质；
-     * [Text]{@link ./@internal/component/ets/text}设置[copyOption]{@link TextAttribute#copyOption}后长按或双击触发的文本菜单默认开启沉浸式系统材
+     * [AlphabetIndexer]{@link @global:AlphabetIndexer}在组件本身未设置背景色、模糊参数和阴影参数时默认开启沉浸式系统材质；
+     * [Text]{@link @global:Text}设置[copyOption]{@link TextAttribute#copyOption}后长按或双击触发的文本菜单默认开启沉浸式系统材
      * 质；其他组件由应用主动设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -128,13 +128,13 @@ declare namespace uiMaterial {
     DEFAULT = 0,
     /**
      * 使能模式。[弹出框Dialog](docroot://ui/arkts-base-dialog-overview.md)、[即时反馈（Toast）](docroot://ui/arkts-create-toast.md)、
-     * [AlphabetIndexer]{@link ./@internal/component/ets/alphabet_indexer}、
+     * [AlphabetIndexer]{@link @global:AlphabetIndexer}、
      * [ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}、[Chip]{@link @ohos.arkui.advanced.Chip}、
-     * [Select]{@link ./@internal/component/ets/select}、[菜单控制]{@link ./@internal/component/ets/common}、
-     * [Toggle]{@link ./@internal/component/ets/toggle}、[SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}、
-     * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}、[Slider]{@link ./@internal/component/ets/slider}、
+     * [Select]{@link @global:Select}、[菜单控制]{@link CommonMethod}、
+     * [Toggle]{@link @global:Toggle}、[SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}、
+     * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}、[Slider]{@link @global:Slider}、
      * [SelectionMenu]{@link @ohos.arkui.advanced.SelectionMenu}组件默认开启沉浸式系统材质；
-     * [Text]{@link ./@internal/component/ets/text}设置[copyOption]{@link TextAttribute#copyOption}后长按或双击触发的文本菜单默认开启沉浸式系统材
+     * [Text]{@link @global:Text}设置[copyOption]{@link TextAttribute#copyOption}后长按或双击触发的文本菜单默认开启沉浸式系统材
      * 质。此模式下，沉浸式系统材质样式生效的优先级高于组件本身设置的背景色、模糊、阴影和边框样式。其他组件需开发者主动设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -269,7 +269,7 @@ declare namespace uiMaterial {
     /**
      * 超薄样式。材质层超薄，具有很强的透明效果。
      * 
-     * 适用于[EffectComponent]{@link ./@internal/component/ets/effect_component}。配合对应的ULTRA_THICK_EC_SUB后缀样式枚举一起使用，以实现材质效果绘
+     * 适用于[EffectComponent]{@link @global:EffectComponent}。配合对应的ULTRA_THICK_EC_SUB后缀样式枚举一起使用，以实现材质效果绘
      * 制的合并优化。设置在EffectComponent上的材质模糊最终将生效在子组件上。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -438,8 +438,37 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     SMOOTH = 2,
- 	}
- 	 
+  }
+
+  /**
+   * 材质颜色混合模式。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum MaterialColorBlendMode {
+    /**
+     * 普通混色模式。材质颜色与材质背景以线性方式混合。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    LINEAR_MIX = 0,
+    /**
+     * 彩色玻璃模式。材质颜色以彩色玻璃效果呈现，保持背景通透。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    TINTED_GLASS = 1
+  }
+
   /**
    * 获取全局材质等级，与设备算力相关。在需要根据设备算力等级选择不同材质效果实现方式时，可调用此方法获取材质等级。该配置项由设备定义，不可修改。
    *
@@ -467,7 +496,7 @@ declare namespace uiMaterial {
 
   /**
    * 将一个[ImmersiveMaterial]{@link uiMaterial.ImmersiveMaterial}材质转换为适用于
-   * [EffectComponent]{@link ./@internal/component/ets/effect_component}的ImmersiveMaterial材质。与convertToECSubMaterial的区别：
+   * [EffectComponent]{@link @global:EffectComponent}的ImmersiveMaterial材质。与convertToECSubMaterial的区别：
    * 本方法转换后的材质适用于EffectComponent本身，且materialColor、applyShadow、interactive、lightEffect属性不会生效；convertToECSubMaterial转换后的材质
    * 适用于EffectComponent的子组件。两者通常配合使用，以实现材质效果绘制的合并优化。
    * 
@@ -479,7 +508,7 @@ declare namespace uiMaterial {
    *     [materialColor]{@link uiMaterial.ImmersiveOptions}、[applyShadow]{@link uiMaterial.ImmersiveOptions}、
    *     [interactive]{@link uiMaterial.ImmersiveOptions}、[lightEffect]{@link uiMaterial.ImmersiveOptions}属性将不会生效。
    * @returns { uiMaterial.ImmersiveMaterial } 经过转换后适用于
-   *     [EffectComponent]{@link ./@internal/component/ets/effect_component}的沉浸式材质。转换后的材质不生效
+   *     [EffectComponent]{@link @global:EffectComponent}的沉浸式材质。转换后的材质不生效
    *     [materialColor]{@link uiMaterial.ImmersiveOptions}、[applyShadow]{@link uiMaterial.ImmersiveOptions}、
    *     [interactive]{@link uiMaterial.ImmersiveOptions}、[lightEffect]{@link uiMaterial.ImmersiveOptions}属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -492,13 +521,13 @@ declare namespace uiMaterial {
   function convertToECMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
   /**
    * 将一个[ImmersiveMaterial]{@link uiMaterial.ImmersiveMaterial}材质转换为适用于
-   * [EffectComponent]{@link ./@internal/component/ets/effect_component}子组件的ImmersiveMaterial材质。
+   * [EffectComponent]{@link @global:EffectComponent}子组件的ImmersiveMaterial材质。
    *
    * @param { uiMaterial.ImmersiveMaterial } material - 经过转换后适用于
-   *     [EffectComponent]{@link ./@internal/component/ets/effect_component}子组件的沉浸式材质，该材质配合EffectComponent使用以实现材质效果绘制的合并
+   *     [EffectComponent]{@link @global:EffectComponent}子组件的沉浸式材质，该材质配合EffectComponent使用以实现材质效果绘制的合并
    *     优化。
    * @returns { uiMaterial.ImmersiveMaterial } 经过转换后适用于
-   *     [EffectComponent]{@link ./@internal/component/ets/effect_component}子组件的沉浸式材质。
+   *     [EffectComponent]{@link @global:EffectComponent}子组件的沉浸式材质。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -656,6 +685,18 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     lightEffect?: LightEffectOptions | null;
+    /**
+     * 材质颜色混色模式。
+     * 默认值：uiMaterial.MaterialColorBlendMode.LINEAR_MIX。
+     * **说明**：1. 该参数仅对支持沉浸式材质的高算力和中算力设备的显示效果生效。
+     * 2. **TINTED_GLASS**仅对部分组件生效，当前支持的组件包括：Button、Chip、ChipGroup、Toggle，其他组件设置无效。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    colorBlendMode?: MaterialColorBlendMode;
   }
 
   /**
@@ -793,7 +834,7 @@ declare namespace uiMaterial {
 }
 
 /**
- * export uiMaterial namespace.
+ * 导出uiMaterial命名空间。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi [since 23 - 24]

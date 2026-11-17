@@ -174,15 +174,15 @@ export declare interface GridColAttribute extends CommonMethod {
      */
     default order(value: int | GridColColumnOption | undefined): this;
     /**
- 	 * Set GridCol options.
- 	 *
- 	 * @param { GridColOptions } [options] - GridCol constructor options
- 	 * @returns { GridColAttribute } Returns the instance of the GridColAttribute.
+     * 设置GridCol选项。
+     *
+     * @param { GridColOptions } options - 栅格列布局选项，包含span、offset、order等布局属性。不传入时使用各属性默认值。
+     * @returns { GridColAttribute } 返回GridColAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setGridColOptions(options?: GridColOptions): this;
     /**
      * 设置组件的动态属性。

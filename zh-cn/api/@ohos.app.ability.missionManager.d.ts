@@ -69,8 +69,8 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { 'mission' } type - 取消监听的任务名称。固定值：'mission'，表示系统任务状态监听器。
-   * @param { long } listenerId - 系统任务状态监器法的index值，和监听器一一对应，由on方法返回。
-   * @param { AsyncCallback<void> } callback - 执行结果回调函数，返回任务ID数组。解注册任务状态监听器成功，err为undefined，否则为错误对象。
+   * @param { long } listenerId - 系统任务状态监听器的index值，和监听器一一对应，由on方法返回。
+   * @param { AsyncCallback<void> } callback - 执行结果回调函数。解注册任务状态监听器成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -577,7 +577,7 @@ declare namespace missionManager {
    *
    * @permission ohos.permission.MANAGE_MISSIONS
    * @param { Array<int> } missionIds - 任务ID数组。
-   * @returns { Promise<Array<int>> } Promise对象，返回任务ID。
+   * @returns { Promise<Array<int>> } Promise对象，返回任务ID数组。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -671,7 +671,7 @@ declare namespace missionManager {
   export type MissionListener = _MissionListener;
 
   /**
-   * 任务的任务快照对象。
+   * 任务快照信息。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Mission
    * @systemapi

@@ -17,8 +17,8 @@
  * @file Enhanced VPN Management
  * @kit NetworkKit
  */
-
 import type { Callback } from './@ohos.base';
+
 import type connection from './@ohos.net.connection';
 import type _VpnExtensionContext from './application/VpnExtensionContext';
 import type Want from './@ohos.app.ability.Want';
@@ -86,8 +86,9 @@ declare namespace vpnExtension {
    * Enables the VPN extension ability. This API uses a promise to return the result.
    *
    * @param { Want } want - Want information.
-   *     <br> Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for
-   *     the first time.
+   *     <br>
+   *     Note: From API version 22, the **parameters** field in **want** can be passed when the VPN is started for the
+   *     first time.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 401 - If the input parameter is not valid parameter.
    * @throws { BusinessError } 16000001 - The specified ability does not exist.
@@ -228,8 +229,9 @@ declare namespace vpnExtension {
      * >
      * > If this API is called multiple times, only the last callback takes effect.
      *
-     * @param { Callback<boolean> } callback - Callback used to return the user authorization result. The value **true**
-     *     indicates that the user agrees to the authorization, and the value **false** indicates the opposite.
+     * @param { Callback<boolean> } callback - Callback used to return the authorization result. The value **true**
+     *     indicates that the user agrees to the authorization, and the value **false** indicates that the user rejects
+     *     the authorization.
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @stagemodelonly
      * @since 26.0.0 dynamic
@@ -272,15 +274,14 @@ declare namespace vpnExtension {
      *
      * > **NOTE**
      * >
-     * > You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
+     * > 1. You are advised to call [destroy()]{@link vpnExtension.VpnConnection.destroy()} or
      * > [destroy(vpnId: string)]{@link vpnExtension.VpnConnection.destroy(vpnId: string)} to destroy the VPN and clear
      * > resources when the VPN is not needed.
+     * > 2. When error code 2200003 is returned by calling this interface, check whether the ohos.permission.INTERNET permission has been applied for.
      * 
-     * @permission ohos.permission.INTERNET
      * @param { VpnConfig } config - VPN configuration.
      * @returns { Promise<int> } Promise used to return the result, which is the file descriptor of the virtual network
      *     interface card (vNIC).
-     * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 401 - Parameter error.
      * @throws { BusinessError } 2200001 - Invalid parameter value.
      * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
@@ -292,6 +293,7 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     create(config: VpnConfig): Promise<int>;
+
     /**
      * Generates a unique VPN ID. This API uses a promise to return the result.
      *
@@ -302,7 +304,7 @@ declare namespace vpnExtension {
      * >
      * > Currently, the multi-VPN capability of the system supports only IPv4.
      *
-     * @returns { Promise<string> } Promise used to return the result.
+     * @returns { Promise<string> } Promise used to return the **vpnId**.
      * @throws { BusinessError } 19900001 - Invalid parameter value.
      * @throws { BusinessError } 19900002 - System internal error.
      * @syscap SystemCapability.Communication.NetManager.Vpn
@@ -384,7 +386,7 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     vpnId?: string;
-  
+
     /**
      * IP addresses of vNICs. Before API version 23, a maximum of 64 IP addresses are supported. Starting from API
      * version 23, a maximum of 2000 IP addresses are supported.
@@ -406,8 +408,9 @@ declare namespace vpnExtension {
     routes?: Array<RouteInfo>;
 
     /**
-     * IP address of the DNS server. After the IP address is configured, when the VPN is active and proxy-enabled
-     * applications access the Internet, the configured DNS server will be used for DNS queries.
+     * DNS server address information. After the DNS server address is configured, the proxied applications use the
+     * configured DNS server for DNS queries when accessing the network while the VPN is started. A maximum of 64 DNS
+     * server addresses can be configured.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -425,7 +428,7 @@ declare namespace vpnExtension {
     searchDomains?: Array<string>;
 
     /**
-     * Maximum transmission unit (MTU), in bytes. The value range is [576,1500].
+     * Maximum transmission unit (MTU) value, in bytes. Value range: [576, 1500].
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -434,10 +437,10 @@ declare namespace vpnExtension {
     mtu?: int;
 
     /**
-     * Whether IPv4 is supported. The value **true** indicates that the IPv4 is supported, and the value **false**
-     * indicates the opposite. The default value is **true**.
+     * Whether IPv4 is supported. The value **true** indicates support, and **false** indicates not supported. The
+     * default value is **true**.
      *
-     * Note: If the IPv4 is supported, you need to configure IPv4 addresses in **addresses**.
+     * **Note**: If IPv4 is supported, an IPv4 IP address must be configured in **addresses**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -446,10 +449,10 @@ declare namespace vpnExtension {
     isIPv4Accepted?: boolean;
 
     /**
-     * Whether IPv6 is supported. The value **true** indicates that the IPV6 is supported, and the value **false**
-     * indicates the opposite. The default value is **false**.
+     * Whether IPv6 is supported. The value **true** indicates support, and **false** indicates not supported. The
+     * default value is **false**.
      *
-     * Note: If the IPv6 is supported, you need to configure IPv6 addresses in **addresses**.
+     * **Note**: If IPv6 is supported, an IPv6 IP address must be configured in **addresses**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -458,8 +461,8 @@ declare namespace vpnExtension {
     isIPv6Accepted?: boolean;
 
     /**
-     * Whether the built-in VPN is supported. The value **true** indicates that the built-in VPN is supported, and the
-     * value **false** indicates the opposite. The default value is **false**.
+     * Whether the built-in VPN is supported. The value **true** indicates support, and **false** indicates not
+     * supported. The default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -468,8 +471,8 @@ declare namespace vpnExtension {
     isInternal?: boolean;
 
     /**
-     * Whether the blocking mode is used. The value **true** indicates that the blocking mode is used, and the value
-     * **false** indicates the opposite. The default value is **false**.
+     * Whether the blocking mode is used. The value **true** indicates the blocking mode, and **false** indicates the
+     * non-blocking mode. The default value is **false**.
      *
      * @syscap SystemCapability.Communication.NetManager.Vpn
      * @since 11 dynamic
@@ -504,7 +507,7 @@ declare namespace vpnExtension {
      * @since 26.0.1 static
      */
     blockedApplications?: Array<string>;
+
   }
 }
-
 export default vpnExtension;

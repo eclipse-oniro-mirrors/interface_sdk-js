@@ -275,7 +275,7 @@ export declare interface ToggleOptions {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -340,16 +340,28 @@ export declare interface ToggleAttribute extends CommonMethod {
      */
     default switchStyle(value: SwitchStyle | undefined): this;
     /**
-     * Set the attribute modifier of toggle.
+     * 设置Toggle的属性修改器。
      *
      * @param { AttributeModifier<ToggleAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
-     *     The attribute modifier of toggle.
+     *     Toggle的属性修改器。
      * @returns { ToggleAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<ToggleAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置Toggle选项。
+     *
+     * @param { ToggleOptions } options - Toggle构造选项。
+     * @returns { ToggleAttribute } Returns the instance of the ToggleAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setToggleOptions(options: ToggleOptions): this;
 }
 
 /**
@@ -369,7 +381,7 @@ export declare function Toggle(
 ): ToggleAttribute
 
 /**
- * Defines the Extendable Toggle.
+ * 定义可扩展Toggle。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -412,7 +424,7 @@ export declare abstract class ExtendableToggle implements ToggleAttribute {
     ): void;
 
     /**
-     * Set the Toggle Options.
+     * 设置Toggle选项。
      *
      * @param { ToggleOptions } options
      * @returns { ExtendableToggle }

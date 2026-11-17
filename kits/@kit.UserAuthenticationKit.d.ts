@@ -20,21 +20,23 @@
 /*** if arkts dynamic */
 import companionDeviceAuth from '@ohos.userIAM.companionDeviceAuth';
 import faceAuth from '@ohos.userIAM.faceAuth';
+import pinAuth from '@ohos.userIAM.pinAuth';
 import userAccessCtrl from '@ohos.userIAM.userAccessCtrl';
 import userAuth from '@ohos.userIAM.userAuth';
 import UserAuthExtensionAbility from '@ohos.app.ability.UserAuthExtensionAbility';
 import UserAuthIcon from '@ohos.userIAM.userAuthIcon';
 
-export { companionDeviceAuth, faceAuth, userAccessCtrl, userAuth, UserAuthExtensionAbility, UserAuthIcon };
+export { companionDeviceAuth, faceAuth, pinAuth, userAccessCtrl, userAuth, UserAuthExtensionAbility, UserAuthIcon };
 /*** endif */
 
 /*** if arkts static */
 import companionDeviceAuth from '@ohos.userIAM.companionDeviceAuth';
 import faceAuth from '@ohos.userIAM.faceAuth';
+import pinAuth from '@ohos.userIAM.pinAuth';
 import userAccessCtrl from '@ohos.userIAM.userAccessCtrl';
 import userAuth from '@ohos.userIAM.userAuth';
 import UserAuthExtensionAbility from '@ohos.app.ability.UserAuthExtensionAbility';
 import { UserAuthIcon } from '@ohos.userIAM.userAuthIcon';
 
-export { companionDeviceAuth, faceAuth, userAccessCtrl, userAuth, UserAuthExtensionAbility, UserAuthIcon };
+export { companionDeviceAuth, faceAuth, pinAuth, userAccessCtrl, userAuth, UserAuthExtensionAbility, UserAuthIcon };
 /*** endif */

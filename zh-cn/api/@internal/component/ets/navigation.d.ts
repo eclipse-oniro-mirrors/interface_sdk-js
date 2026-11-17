@@ -312,7 +312,7 @@ declare interface NavigationMenuItem {
    *
    * **说明：**
    *
-   * 不支持通过[SymbolGlyphModifier]{@link SymbolGlyphModifier:SymbolGlyphModifier}对象的
+   * 不支持通过[SymbolGlyphModifier]{@link @global:SymbolGlyphModifier}对象的
    * [fontSize]{@link SymbolGlyphAttribute#fontSize}属性修改图标大小、[effectStrategy]{@link SymbolGlyphAttribute#effectStrategy}
    * 属性修改动效、[symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}属性修改动
    * 效类型。
@@ -590,6 +590,28 @@ declare interface NavigationOptions {
    * @since 12 dynamic
    */
   animated?: boolean;
+}
+
+/**
+ * 预加载页面的选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.1 dynamic
+ */
+declare interface PreloadOptions {
+  /**
+   * 预加载页面被系统销毁时的回调。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  onDestroy?: Callback<void>;
 }
 
 /**
@@ -1183,6 +1205,26 @@ declare class NavPathStack {
    * @since 19 dynamic
    */
   setPathStack(pathStack: Array<NavPathInfo>, animated?: boolean): void;
+
+  /**
+   * 预加载**info**指定的导航目标页面。
+   * 预加载的页面不会立即显示，而是会被缓存。
+   * 稍后使用匹配的参数调用**pushPath**时，预加载的实例
+   * 将用于快速显示。
+   *
+   * @param { NavPathInfo } info - 表示要预加载的NavDestination。
+   * @param { PreloadOptions } [options] - 表示预加载的选项。
+   * @returns { Promise<void> } 函数返回的promise。
+   * @throws { BusinessError } 100001 - Internal error.
+   * @throws { BusinessError } 100005 - Builder function not registered.
+   * @throws { BusinessError } 100006 - NavDestination not found.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  preloadPath(info: NavPathInfo, options?: PreloadOptions): Promise<void>;
 }
 
 /**
@@ -1388,7 +1430,7 @@ declare interface HomePathInfo {
 
 /**
 * Navigation组件是路由导航的根视图容器，一般作为Page页面的根容器使用，其内部默认包含了标题栏、内容区和工具栏，其中内容区默认首页显示导航内容（Navigation的子组件）或非首页显示（
-* [NavDestination]{@link nav_destination}的子组件），首页和非首页通过路由进行切换。
+* [NavDestination]{@link @global:NavDestination}的子组件），首页和非首页通过路由进行切换。
 *
 * > **说明：**
 *
@@ -1396,7 +1438,7 @@ declare interface HomePathInfo {
 * > [SafeAreaType.SYSTEM, SafeAreaType.KEYBOARD, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重
 * > 写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link CommonMethod#expandSafeArea}属性实现安全区避让。
 * >
-* > - [NavBar]{@link NavBar}嵌套使用Navigation时，内层NavDestination的生命周期不和外层NavDestination以及[全模态]{@link common}的生命周期进行联动。
+* > - [NavBar]{@link NavBar}嵌套使用Navigation时，内层NavDestination的生命周期不和外层NavDestination以及[全模态]{@link CommonMethod}的生命周期进行联动。
 * >
 * > - Navigation未设置主副标题（[title]{@link NavigationAttribute#title}或[subTitle]{@link NavigationAttribute#subTitle}）且
 * > [hideBackButton]{@link NavigationAttribute#hideBackButton}属性设置为true时，不显示标题栏。
@@ -1414,7 +1456,7 @@ declare interface HomePathInfo {
 interface NavigationInterface {
 
   /**
-   * 创建路由导航的根视图容器，适用于使用[NavRouter]{@link nav_router}组件进行页面路由。
+   * 创建路由导航的根视图容器，适用于使用[NavRouter]{@link @global:NavRouter}组件进行页面路由。
    *
    * @returns { NavigationAttribute }
       * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1441,7 +1483,7 @@ interface NavigationInterface {
   /**
    * 绑定路由栈到Navigation组件，指定一个NavDestination作为Navigation的导航页（主页），适用于使用[NavPathStack]{@link NavPathStack}配合
    * [navDestination]{@link NavigationAttribute#navDestination}属性或者系统路由表进行页面路由。使用示例参考
-   * [示例16（Navigation使用NavDestination作为导航页）]{@link ./nav_destination}。
+   * [示例16（Navigation使用NavDestination作为导航页）]{@link @global:NavDestination}。
    *
    * @param { NavPathStack } pathInfos - 路由栈信息。
    * @param { HomePathInfo } homeDestination - 主页NavDestination信息。
@@ -1584,7 +1626,7 @@ declare interface ToolbarItem {
    *
    * **说明：**
    *
-   * 不支持通过[SymbolGlyphModifier]{@link SymbolGlyphModifier:SymbolGlyphModifier}对象的
+   * 不支持通过[SymbolGlyphModifier]{@link @global:SymbolGlyphModifier}对象的
    * [fontSize]{@link SymbolGlyphAttribute#fontSize}属性修改图标大小、[effectStrategy]{@link SymbolGlyphAttribute#effectStrategy}
    * 属性修改动效、[symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}属性修改动
    * 效类型。
@@ -1637,7 +1679,7 @@ declare interface ToolbarItem {
    *
    * **说明：**
    *
-   * 不支持通过[SymbolGlyphModifier]{@link SymbolGlyphModifier:SymbolGlyphModifier}对象的
+   * 不支持通过[SymbolGlyphModifier]{@link @global:SymbolGlyphModifier}对象的
    * [fontSize]{@link SymbolGlyphAttribute#fontSize}属性修改图标大小、[effectStrategy]{@link SymbolGlyphAttribute#effectStrategy}
    * 属性修改动效、[symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}属性修改动
    * 效类型。
@@ -2190,10 +2232,36 @@ declare interface NavigationConfiguration {
    * @since 26.0.0 dynamic
    */
   stackSizeLimit?: number;
+
+  /**
+   * 当收到低内存信号时，是否回收不可见页。
+   * 启用时，导航在接收后回收不可见的NavDestination页面实例
+   * 低内存压力通知。NavPathInfo是保留的，以后可以重新构造页面。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  recyclePagesOnLowMemory?: boolean;
+
+  /**
+   * 在导航分栏模式下，启用后，从主节点触发的导航会清除主节点之后的旧导航页面，同时保留当前操作创建的所有导航页面。
+   *
+   * @default false
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.0.1 dynamic
+   */
+  clearContentStackOnPrimaryNavigation?: boolean;
 }
 
 /**
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2284,7 +2352,7 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
    *
    * > **说明：**
    * >
-   * > 不支持通过[SymbolGlyphModifier]{@link SymbolGlyphModifier:SymbolGlyphModifier}对象的
+   * > 不支持通过[SymbolGlyphModifier]{@link @global:SymbolGlyphModifier}对象的
    * > [fontSize]{@link SymbolGlyphAttribute#fontSize}属性修改图标大小、
    * > [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy}属性修改动效、
    * > [symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}属性修改动效类型。
@@ -2306,7 +2374,7 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
    * >
    * > 该接口不支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
    * >
-   * > 不支持通过[SymbolGlyphModifier]{@link SymbolGlyphModifier:SymbolGlyphModifier}对象的
+   * > 不支持通过[SymbolGlyphModifier]{@link @global:SymbolGlyphModifier}对象的
    * > [fontSize]{@link SymbolGlyphAttribute#fontSize}属性修改图标大小、
    * > [effectStrategy]{@link SymbolGlyphAttribute#effectStrategy}属性修改动效、
    * > [symbolEffect]{@link SymbolGlyphAttribute#symbolEffect(symbolEffect: SymbolEffect, isActive?: boolean)}属性修改动效类型。
@@ -2761,7 +2829,7 @@ declare class NavigationAttribute extends CommonMethod<NavigationAttribute> {
   splitPlaceholder(placeholder: ComponentContent): NavigationAttribute;
 
   /**
-   * 设置是否启用[NavDestination]{@link nav_destination}页面[onHidden]{@link NavDestinationAttribute#onHidden}、
+   * 设置是否启用[NavDestination]{@link @global:NavDestination}页面[onHidden]{@link NavDestinationAttribute#onHidden}、
    * [onShown]{@link NavDestinationAttribute#onShown}生命周期与全模态的联动触发。
    *
    * > **说明：**
@@ -3079,7 +3147,7 @@ declare interface NavigationDividerStyle {
 
 /**
 * Navigation组件是路由导航的根视图容器，一般作为Page页面的根容器使用，其内部默认包含了标题栏、内容区和工具栏，其中内容区默认首页显示导航内容（Navigation的子组件）或非首页显示（
-* [NavDestination]{@link nav_destination}的子组件），首页和非首页通过路由进行切换。
+* [NavDestination]{@link @global:NavDestination}的子组件），首页和非首页通过路由进行切换。
 *
 * > **说明：**
 *
@@ -3087,7 +3155,7 @@ declare interface NavigationDividerStyle {
 * > [SafeAreaType.SYSTEM, SafeAreaType.KEYBOARD, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]))，开发者可以重
 * > 写该属性覆盖默认行为，API version 11之前的版本需配合[expandSafeArea]{@link CommonMethod#expandSafeArea}属性实现安全区避让。
 * >
-* > - [NavBar]{@link NavBar}嵌套使用Navigation时，内层NavDestination的生命周期不和外层NavDestination以及[全模态]{@link common}的生命周期进行联动。
+* > - [NavBar]{@link NavBar}嵌套使用Navigation时，内层NavDestination的生命周期不和外层NavDestination以及[全模态]{@link CommonMethod}的生命周期进行联动。
 * >
 * > - Navigation未设置主副标题（[title]{@link NavigationAttribute#title}或[subTitle]{@link NavigationAttribute#subTitle}）且
 * > [hideBackButton]{@link NavigationAttribute#hideBackButton}属性设置为true时，不显示标题栏。
@@ -3100,7 +3168,7 @@ declare interface NavigationDividerStyle {
 *
 * 可以包含子组件。
 *
-* 从API version 9开始，推荐与[NavRouter]{@link nav_router}组件搭配使用。
+* 从API version 9开始，推荐与[NavRouter]{@link @global:NavRouter}组件搭配使用。
 *
 * 从API version 10开始，推荐使用[NavPathStack]{@link NavPathStack}配合[navDestination]{@link NavigationAttribute#navDestination}属
 * 性进行页面路由。

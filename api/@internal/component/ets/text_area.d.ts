@@ -307,7 +307,7 @@ declare enum TextAreaType {
 declare type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: SubmitEvent) => void;
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported:
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported:
  *
  * > **NOTE**
  * >
@@ -327,7 +327,7 @@ declare type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: Submi
  *
  * > Since API version 11, the multi-line text box can be set with .width('auto') so that the component width adapts to
  * > the text width. When adapting, the component width is limited by the constraintSize attribute and the maximum and
- * > minimum widths passed by the parent container. For other usage, see [Sizing]{@link ./common}.
+ * > minimum widths passed by the parent container. For other usage, see [Sizing]{@link CommonMethod}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -520,7 +520,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
    * only when textOverflow is actively configured. If it is not configured, the text is not truncated by default.
    *
    * Text is truncated by character. For example, English text is truncated by word as the minimum unit. To truncate by
-   * letter, set [wordBreak]{@link WordBreak} to WordBreak.BREAK_ALL.
+   * letter, set [wordBreak]{@link @global:WordBreak} to WordBreak.BREAK_ALL.
    *
    * When textOverflow is set to TextOverflow.None, TextOverflow.Clip, or TextOverflow.Ellipsis, it must be used
    * together with [maxLines]{@link TextAreaAttribute#maxLines(value: number)}; setting it alone does not take effect.
@@ -1307,7 +1307,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
    * Sets the line height of the text. If the value is not greater than 0, the line height is not limited and adapts to
    * the font size.
    *
-   * @param { number | string | Resource } value - Line height of the text. A [pixel unit]{@link ./common} must be
+   * @param { number | string | Resource } value - Line height of the text. A [pixel unit]{@link CommonMethod} must be
    *     explicitly specified, for example, '10px'. A percentage string can also be set, for example, '100%'.
    *     <br>**Note:** If no pixel unit is specified, the default unit fp is used. For example, '10' is equivalent to 1
    *     0.

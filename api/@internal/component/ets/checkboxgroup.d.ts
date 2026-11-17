@@ -151,7 +151,7 @@ interface CheckboxGroupInterface {
    * Creates a check box group for controlling the select-all or deselect-all state of check boxes within the group.
    * Check boxes and check box groups with the same **group** value belong to the same group.
    *
-   * When this API is used with components that come with the caching mechanism, such as the [List]{@link ./list}
+   * When this API is used with components that come with the caching mechanism, such as the [List]{@link @global:List}
    * component, those check boxes that have not been created yet need to be manually selected or unselected. For
    * details, see
    * [Example 4](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-checkboxgroup.md#example-4-implementing-the-select-all-functionality).
@@ -232,7 +232,7 @@ declare interface CheckBoxGroupConfiguration extends CommonConfiguration<CheckBo
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -244,10 +244,10 @@ declare interface CheckBoxGroupConfiguration extends CommonConfiguration<CheckBo
  */
 declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute> {
   /**
-   * Sets whether to select all. If the **select** attribute is set for a [Checkbox]{@link ./checkbox} component in the
+   * Sets whether to select all. If the **select** attribute is set for a [Checkbox]{@link @global:Checkbox} component in the
    * same group, the setting of the **Checkbox** has a higher priority.
    *
-   * When used with components that have caching functionality (such as [List]{@link ./list}), the selection state of
+   * When used with components that have caching functionality (such as [List]{@link @global:List}), the selection state of
    * uncreated check boxes must be controlled by the developer.
    *
    * Since API version 10, this attribute supports two-way binding through
@@ -258,7 +258,7 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
    *
    * @param { boolean } value - Whether to select all.<br/>Default value: **false**<br/>If the value is **true**, all
    *     check boxes in the group are selected. If the value is **false**, all check boxes in the group are deselected.<
-   *     br/>If the [Checkbox]{@link ./checkbox} in the same group has the **select** attribute explicitly set, the
+   *     br/>If the [Checkbox]{@link @global:Checkbox} in the same group has the **select** attribute explicitly set, the
    *     **select** attribute of the **Checkbox** takes precedence.
    * @returns { CheckboxGroupAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -271,12 +271,12 @@ declare class CheckboxGroupAttribute extends CommonMethod<CheckboxGroupAttribute
   selectAll(value: boolean): CheckboxGroupAttribute;
 
   /**
-   * Sets whether to select all. If the **select** attribute is set for a [Checkbox]{@link ./checkbox} component in the
+   * Sets whether to select all. If the **select** attribute is set for a [Checkbox]{@link @global:Checkbox} component in the
    * same group, the setting of the **Checkbox** has a higher priority. Compared with
    * [selectAll]{@link CheckboxGroupAttribute#selectAll(value: boolean)}, this API supports the **undefined** type for
    * the **isAllSelected** parameter.
    *
-   * When used with components that have caching functionality (such as [List]{@link ./list}), the selected state of
+   * When used with components that have caching functionality (such as [List]{@link @global:List}), the selected state of
    * uncreated check boxes must be controlled by the developer.
    *
    * This attribute supports two-way binding through [$$](docroot://ui/state-management/arkts-two-way-sync.md) and

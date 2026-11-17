@@ -183,7 +183,7 @@ interface DistortionComponentInterface {
 /**
  * Defines the DistortionComponent attribute functions
  *
- * 支持[通用事件]{@link common}。
+ * 支持[通用事件]{@link CommonMethod}。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @systemapi

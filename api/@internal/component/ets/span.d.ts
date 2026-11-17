@@ -49,6 +49,30 @@ declare interface TextBackgroundStyle {
    * @since 11 dynamic
    */
   radius?: Dimension | BorderRadiuses;
+
+  /**
+   * Text background border width.
+   * Default value: **0**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderWidth?: Dimension;
+
+  /**
+   * Text background border color.
+   * Default value: **Color.Transparent**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  borderColor?: ResourceColor;
 }
 
 /**
@@ -63,7 +87,7 @@ declare interface TextBackgroundStyle {
  */
 declare class BaseSpan<T> extends CommonMethod<T> {
   /**
-   * Sets the text background style. When used as a child component of [ContainerSpan]{@link ./container_span}, this
+   * Sets the text background style. When used as a child component of [ContainerSpan]{@link @global:ContainerSpan}, this
    * attribute value can be inherited, and the component's own setting takes precedence. If this API is not used, the
    * default background color is Color.Transparent and the corner radius is 0.
    *
@@ -100,7 +124,7 @@ declare class BaseSpan<T> extends CommonMethod<T> {
 }
 
 /**
- * As a child component of [Text]{@link ./text} and [ContainerSpan]{@link ./container_span}, it is used to display
+ * As a child component of [Text]{@link @global:Text} and [ContainerSpan]{@link @global:ContainerSpan}, it is used to display
  * inline text and supports fine-grained settings of the font, color, size, and other styles of the text. It is suitable
  * for scenarios where different styles are mixed in the same line of text, such as text in different font colors, and
  * adding decorative lines or shadow effects.
@@ -115,12 +139,12 @@ declare class BaseSpan<T> extends CommonMethod<T> {
  * > attribute set by the parent component. The attributes that can be inherited include only: fontColor, fontSize,
  * > fontStyle, fontWeight, decoration, letterSpacing, textCase, fontFamily, and textShadow.
  * >
- * > - It supports the [accessibility attribute]{@link ./common} (
- * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}), [component identifier]{@link ./common} (
- * > [id]{@link CommonMethod#id} and [key]{@link CommonMethod#key}), and [color inversion disabling]{@link ./common} (
- * > [allowForceDark]{@link CommonMethod#allowForceDark}) among the [universal attributes]{@link ./common}, but does not
- * > support other universal attributes. To set other universal attributes, use [Text]{@link ./text}, or use
- * > [CustomSpan]{@link CustomSpan} in [styled strings]{@link ./styled_string} to draw them by yourself.
+ * > - It supports the [accessibility attribute]{@link CommonMethod} (
+ * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}), [component identifier]{@link CommonMethod} (
+ * > [id]{@link CommonMethod#id} and [key]{@link CommonMethod#key}), and [color inversion disabling]{@link CommonMethod} (
+ * > [allowForceDark]{@link CommonMethod#allowForceDark}) among the [universal attributes]{@link CommonMethod}, but does not
+ * > support other universal attributes. To set other universal attributes, use [Text]{@link @global:Text}, or use
+ * > [CustomSpan]{@link CustomSpan} in [styled strings]{@link @global:StyledString} to draw them by yourself.
  * >
  * > - [accessibilityText]{@link CommonMethod#accessibilityText(value: string)} takes effect only when the
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)} event is set for **Span**. The configured
@@ -128,7 +152,7 @@ declare class BaseSpan<T> extends CommonMethod<T> {
  * > announcement, the content of **Span** is still announced, and it is not replaced by the text configured in
  * > accessibilityText.
  * >
- * > - Among the [universal events]{@link ./common}, only the click event
+ * > - Among the [universal events]{@link CommonMethod}, only the click event
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)} and the hover event
  * > [onHover]{@link CommonMethod#onHover} are supported.
  *
@@ -427,7 +451,7 @@ declare class SpanAttribute extends BaseSpan<SpanAttribute> {
 }
 
 /**
- * As a child component of [Text]{@link ./text} and [ContainerSpan]{@link ./container_span}, it is used to display
+ * As a child component of [Text]{@link @global:Text} and [ContainerSpan]{@link @global:ContainerSpan}, it is used to display
  * inline text and supports fine-grained settings of the font, color, size, and other styles of the text. It is suitable
  * for scenarios where different styles are mixed in the same line of text, such as text in different font colors, and
  * adding decorative lines or shadow effects.
@@ -442,12 +466,12 @@ declare class SpanAttribute extends BaseSpan<SpanAttribute> {
  * > attribute set by the parent component. The attributes that can be inherited include only: fontColor, fontSize,
  * > fontStyle, fontWeight, decoration, letterSpacing, textCase, fontFamily, and textShadow.
  * >
- * > - It supports the [accessibility attribute]{@link ./common} (
- * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}), [component identifier]{@link ./common} (
- * > [id]{@link CommonMethod#id} and [key]{@link CommonMethod#key}), and [color inversion disabling]{@link ./common} (
- * > [allowForceDark]{@link CommonMethod#allowForceDark}) among the [universal attributes]{@link ./common}, but does not
- * > support other universal attributes. To set other universal attributes, use [Text]{@link ./text}, or use
- * > [CustomSpan]{@link CustomSpan} in [styled strings]{@link ./styled_string} to draw them by yourself.
+ * > - It supports the [accessibility attribute]{@link CommonMethod} (
+ * > [accessibilityText]{@link CommonMethod#accessibilityText(value: string)}), [component identifier]{@link CommonMethod} (
+ * > [id]{@link CommonMethod#id} and [key]{@link CommonMethod#key}), and [color inversion disabling]{@link CommonMethod} (
+ * > [allowForceDark]{@link CommonMethod#allowForceDark}) among the [universal attributes]{@link CommonMethod}, but does not
+ * > support other universal attributes. To set other universal attributes, use [Text]{@link @global:Text}, or use
+ * > [CustomSpan]{@link CustomSpan} in [styled strings]{@link @global:StyledString} to draw them by yourself.
  * >
  * > - [accessibilityText]{@link CommonMethod#accessibilityText(value: string)} takes effect only when the
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)} event is set for **Span**. The configured
@@ -455,7 +479,7 @@ declare class SpanAttribute extends BaseSpan<SpanAttribute> {
  * > announcement, the content of **Span** is still announced, and it is not replaced by the text configured in
  * > accessibilityText.
  * >
- * > - Among the [universal events]{@link ./common}, only the click event
+ * > - Among the [universal events]{@link CommonMethod}, only the click event
  * > [onClick]{@link CommonMethod#onClick(event: (event: ClickEvent) => void)} and the hover event
  * > [onHover]{@link CommonMethod#onHover} are supported.
  *

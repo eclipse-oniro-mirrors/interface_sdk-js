@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * @file This module provides the capabilities of tools access control
  * @kit AbilityKit
@@ -140,8 +141,8 @@ declare namespace abilityToolAccessCtrl {
     needTicket?: boolean;
 
     /**
-     * 凭据过期时间，单位为毫秒。
-     * 取值范围：(-∞,+∞)。
+     * 凭据过期时间，单位为毫秒。取值必须大于0。
+     * 取值约束：大于0。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -676,7 +677,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum Role {
     /**
-     * 控制器设备。
+     * 主控设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -686,7 +687,7 @@ declare namespace abilityToolAccessCtrl {
     CONTROLLER = 0x01,
 
     /**
-     * 受控设备。
+     * 被控设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -757,7 +758,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 任务标识。
+   * 控制权限状态。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -908,7 +909,7 @@ declare namespace abilityToolAccessCtrl {
     authToken?: Uint8Array;
     /**
      * 可信持有物认证凭据的有效时长。
-     * 单位为：秒。取值范围：(0,60]。
+     * 单位为：毫秒。取值范围：(0,86400000]。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -927,8 +928,8 @@ declare namespace abilityToolAccessCtrl {
    */
   interface AppInfo {
     /**
-     * 应用的包名。
-     *
+      * 应用的包名。
+      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
@@ -945,7 +946,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 应用的相关信息。
+   * 应用的控制权限状态结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -975,14 +976,14 @@ declare namespace abilityToolAccessCtrl {
    * 根据指定的操作查询工具权限。
    * 该函数用于检查权限查询中指定的CLI命令或API的权限状态。
    * 对于每个操作，它返回权限状态、授权状态以及是否需要用户对话框。
-   * 当needTicket设置为true时，远程授权会生成一个票据。
+   * 当needTicket设置为true时，远程授权会生成一个凭据。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { PermissionQuery } permissionQuery - 权限查询信息。
-   * @returns { Promise<PermissionQueryResult> } Promise用于返回${PermissionQueryResult}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<PermissionQueryResult> } Promise对象，返回${PermissionQueryResult}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
    *     specified callerTokenId does not exist, ticketExpireTime exceeds 24h, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1001,14 +1002,14 @@ declare namespace abilityToolAccessCtrl {
   /**
    * 根据用户授权结果授予工具权限。
    * 该功能根据用户的授权决定授予工具（CLI命令或API）的权限。
-   * 授权成功后，会生成工单，用于权限验证。
+   * 授权成功后，会生成凭据，用于权限验证。
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
    * @param { UserAuthResult[] } userAuthResult - 用户授权结果列表
-   * @returns { Promise<TicketInfo[]> } Promise用于返回${TicketInfo[]}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<TicketInfo[]> } Promise对象，返回${TicketInfo[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. PermissionName exceeds 256 characters,
    *     permissionStatus is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1026,16 +1027,16 @@ declare namespace abilityToolAccessCtrl {
   export function grantToolPermissionsByUser(userAuthResult: UserAuthResult[]): Promise<TicketInfo[]>;
 
   /**
-   * 生成控制器设备的授权包。
+   * 生成主控设备的授权包。
    * 根据远程用户授权结果生成远程授权包。
-   * 生成的包可以发送到受控设备进行权限验证。
+   * 生成的包可以发送到被控设备进行权限验证。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteUserAuthResults[] } remoteUserAuthResult - 远程用户授权结果列表
-   * @returns { Promise<RemoteAuthPackage[]> } Promise用于返回${RemoteAuthPackage[]}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回${RemoteAuthPackage[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. OperationType and operationInfo do not match,
    *     specified callerTokenId does not exist, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1051,16 +1052,16 @@ declare namespace abilityToolAccessCtrl {
     Promise<RemoteAuthPackage[]>;
 
   /**
-   * 生成受控设备的授权包。
+   * 生成被控设备的授权包。
    * 根据权限查询列表生成远程授权包。
-   * 生成的包可以发送到控制器设备进行权限验证。
+   * 生成的包可以发送到主控设备进行权限验证。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { PermissionQuery[] } permissionQuery - 权限查询列表。
-   * @returns { Promise<RemoteAuthPackage[]> } Promise用于返回${RemoteAuthPackage[]}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回${RemoteAuthPackage[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Permission exceeds 256 characters,
    *     specified tokenId is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
@@ -1075,17 +1076,17 @@ declare namespace abilityToolAccessCtrl {
   export function generateControlledDevicePackage(permissionQuery: PermissionQuery[]): Promise<RemoteAuthPackage[]>;
 
   /**
-   * 验证来自控制器设备的授权包。
-   * 验证控制器设备发送的远程授权包。
-   * 它验证票证和远程设备信息，以确保授权是合法的。
+   * 验证来自主控设备的授权包。
+   * 验证主控设备发送的远程授权包。
+   * 验证票证和远程设备信息，以确保授权是合法的。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteAuthPackage[] } ticketInfo - 远程授权包列表
    * @param { RemoteInfo } remoteInfo - 远端设备信息
-   * @returns { Promise<boolean[]> } Promise用于返回${boolean[]}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<boolean[]> } Promise对象，返回${boolean[]}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo or remoteInfo is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1100,16 +1101,16 @@ declare namespace abilityToolAccessCtrl {
     Promise<boolean[]>;
 
   /**
-   * 对受控设备的授权包进行校验。
+   * 对被控设备的授权包进行校验。
    * 对被控设备发送的远程授权包进行校验。
-   * 它验证票证以确保授权是合法的。
+   * 验证票证以确保授权是合法的。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { RemoteAuthPackage[] } ticketInfo - 远程授权包列表
    * @returns { Promise<boolean[]> } Promise用于返回${boolean[]}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. Format of ticketInfo is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1129,10 +1130,10 @@ declare namespace abilityToolAccessCtrl {
    * 禁用时，不允许远程授权。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @returns { Promise<RemoteGrantStatus> } Promise用于返回${RemoteGrantStatus}。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<RemoteGrantStatus> } Promise对象，返回${RemoteGrantStatus}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1151,10 +1152,10 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
    * @param { RemoteGrantStatus } remoteGrantStatus - 要设置的远程授权状态
-   * @returns { Promise<void> } 不会返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission denial.
-   *     The interface caller does not have permission "ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS".
-   * @throws { BusinessError } 202 - The caller is not a system application.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 24010000 - Invalid parameter. RemoteGrantStatus is invalid.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
@@ -1174,8 +1175,8 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
    * @param { CliCmdInfo[] } cliCmdInfos - CLI命令列表。
-   * @param { TicketParams } ticketParams - 生成授权凭据选项。
-   * @returns { Promise<TicketQueryResult> } Promise用于返回${TicketQueryResult}
+   * @param { TicketParams } ticketParams - 用于生成凭据的参数。
+   * @returns { Promise<TicketQueryResult> } Promise对象，返回${TicketQueryResult}
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
@@ -1196,11 +1197,11 @@ declare namespace abilityToolAccessCtrl {
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { TaskIdentityInfo } taskIdentityInfo - 要生成认证标识的任务信息。
-   * @returns { Promise<TaskIdentity> } Promise用于返回${TaskIdentity}。
+   * @returns { Promise<TaskIdentity> } Promise对象，返回${TaskIdentity}。
    * @throws { BusinessError } 201 - Permission verification failed.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010000 - Invalid parameter. TaskId is empty, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1213,15 +1214,15 @@ declare namespace abilityToolAccessCtrl {
 
   /**
    * 批量撤销代理命令的任务认证标识。
-   * 批量撤销任务鉴权标识，删除任务属性的本地缓存。
+   * 该函数批量撤销任务鉴权标识，删除任务属性的本地缓存。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { string[] } taskId - 待撤销的任务ID列表。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { string[] } taskId - 待撤销的任务ID列表。列表的最大长度为100。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed.
-   *     The interface caller does not have permission "ohos.permission.QUERY_TOOL_PERMISSIONS".
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 24h, etc.
+   * @throws { BusinessError } 24010000 - Invalid parameter. Task ID is invalid, etc.
    * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
    * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
    *     resource access failure, etc.
@@ -1234,12 +1235,12 @@ declare namespace abilityToolAccessCtrl {
 
   /**
    * 查询指定应用的控制权限状态。
-   * 此函数检查输入列表中的每个应用程序是否被允许或拒绝
+   * 该函数检查输入列表中的每个应用程序是否被允许或拒绝
    * 被外部工具控制。结果列表与输入顺序相对应。
    *
    * @permission ohos.permission.CONTROL_DEVICE
    * @param { AppInfo[] } appInfo - 应用信息列表。
-   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回${ControlAppStatusResult[]}。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
@@ -1253,12 +1254,14 @@ declare namespace abilityToolAccessCtrl {
   export function queryControlAppStatus(appInfo: AppInfo[]): Promise<ControlAppStatusResult[]>;
 
   /**
-   * 向用户请求指定应用的控制权限。该函数会弹出一个用户对话框，获取对每个应用的控制授权决  。返回结果反映用户对每个应用的允许或拒绝决策。
+   * 向用户请求指定应用的控制权限。
+   * 该函数会弹出一个用户对话框，获取对每个应用的控制授权决策。
+   * 返回结果反映用户对每个应用的允许或拒绝决策。
    *
    * @permission ohos.permission.CONTROL_DEVICE
    * @param { Context } context - 用于显示用户对话框的上下文对象。
    * @param { AppInfo[] } appInfo - 应用信息列表。
-   * @returns { Promise<ControlAppStatusResult[]> } Promise用于返回${ControlAppStatusResult[]}。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回${ControlAppStatusResult[]}。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
@@ -1274,11 +1277,11 @@ declare namespace abilityToolAccessCtrl {
     Promise<ControlAppStatusResult[]>;
   /**
    * 为任务认证令牌生成挑战值。
-   * 此函数基于任务身份信息生成挑战值。
+   * 该函数基于任务身份信息生成挑战值。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { TaskIdentityInfo } taskIdentityInfo - 用于生成挑战值的任务身份信息。
-   * @returns { Promise<Uint8Array> } Promise 用于返回 ${Uint8Array}。
+   * @returns { Promise<Uint8Array> } Promise对象，返回${Uint8Array}格式的挑战值。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

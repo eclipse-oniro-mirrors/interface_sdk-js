@@ -448,7 +448,7 @@ declare interface WaterFlowOptions {
 
 /**
  * Represents the return value of the
- * [getEvent('WaterFlow')]{@link ../../../arkui/FrameNode:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}
+ * [getEvent('WaterFlow')]{@link @ohos.arkui.node:typeNode.getEvent(node: FrameNode, nodeType: 'WaterFlow')}
  * method in **frameNode**, which can be used to set scroll events for a **WaterFlow** node.
  *
  * **UIWaterFlowEvent** inherits from [UIScrollableCommonEvent]{@link UIScrollableCommonEvent}.
@@ -540,7 +540,7 @@ declare type OnWaterFlowScrollIndexCallback = (first: number, last: number) => v
  * > child element dragging.
  * >
  * > The component has built-in gestures for functions such as scroll-following. To add custom gesture operations, refer
- * > to [Gesture Blocking Enhancement]{@link ./common}.
+ * > to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > For more development instructions on **WaterFlow**, see
  * > [Creating a Waterfall Flow (WaterFlow)](docroot://ui/arkts-layout-development-create-waterflow.md). For NDK
@@ -585,11 +585,11 @@ interface WaterFlowInterface {
 declare type PlaceholderProvider = import('../api/@ohos.arkui.placeholderRegister').PlaceholderProvider;
 
 /**
- * In addition to [universal attributes]{@link ./common} and
+ * In addition to [universal attributes]{@link CommonMethod} and
  * [universal attributes of scrollable components](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#attributes),
  * the following attributes are supported:
  *
- * In addition to [universal events]{@link ./common} and
+ * In addition to [universal events]{@link CommonMethod} and
  * [scrollable component common events](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#events),
  * the following events are also supported.
  *
@@ -1062,7 +1062,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
  * > child element dragging.
  * >
  * > The component has built-in gestures for functions such as scroll-following. To add custom gesture operations, refer
- * > to [Gesture Blocking Enhancement]{@link ./common}.
+ * > to [Gesture Blocking Enhancement]{@link CommonMethod}.
  * >
  * > For more development instructions on **WaterFlow**, see
  * > [Creating a Waterfall Flow (WaterFlow)](docroot://ui/arkts-layout-development-create-waterflow.md). For NDK
@@ -1073,7 +1073,7 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
  *
  * ###### Child Components
  *
- * Only the [FlowItem]{@link ./flow_item} child component and custom components are supported. When a custom component
+ * Only the [FlowItem]{@link @global:FlowItem} child component and custom components are supported. When a custom component
  * is used in **WaterFlow**, you are advised to use **FlowItem** as the top-level component of the custom component. You
  * are not advised to set attributes and event methods for the custom component.
  *

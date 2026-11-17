@@ -134,6 +134,42 @@ declare namespace appControl {
   }
 
   /**
+   * 标识恢复时功能组件类型。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum RecoverComponentType {
+    /**
+     * 服务扩展能力类型。仅支持service类型的[ExtensionAbility](docroot://quick-start/module-configuration-file.md#extensionabilities标签)
+     * 。
+     *
+     * 被拉起的ExtensionAbility通过want中bundleName、moduleName、abilityName字段共同确定。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    EXTENSION = 1,
+    /**
+     * UI扩展能力类型。
+     *
+     * 被拉起的UIExtensionAbility通过want中bundleName、moduleName、abilityName字段共同确定，同时want.parameters中的
+     * ability.want.params.uiExtensionType字段需要配置为
+     * [UIExtensionAbility](docroot://application-models/uiextensionability-sys.md)的类型。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    UI_EXTENSION = 2
+  }
+
+  /**
    * 标识目标应用被拦截时是否跳转到页面。
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
@@ -334,6 +370,46 @@ declare namespace appControl {
   }
 
   /**
+   * 描述应用恢复处置规则。
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface RecoverDisposedRule {
+    /**
+     * 指定应用被处置时展示的组件。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    want: Want;
+
+    /**
+     * 拦截规则的优先级，用于规则列表查询结果排序。取值为整数，数值越小，优先级越高，排序越靠前。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    priority: int;
+
+    /**
+     * 拦截时将拉起能力的类型。
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    recoverComponentType: RecoverComponentType;
+  }
+
+  /**
    * 设置应用的处置状态。使用callback异步回调。成功返回null，失败返回对应错误信息。
    *
    * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS
@@ -401,7 +477,7 @@ declare namespace appControl {
   /**
    * 获取指定应用的处置状态。使用callback异步回调，成功返回应用的处置状态，失败返回对应错误信息。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -422,7 +498,7 @@ declare namespace appControl {
   /**
    * 获取指定应用已设置的处置状态。使用Promise异步回调，成功返回应用的处置状态，失败返回对应错误信息。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -443,7 +519,7 @@ declare namespace appControl {
   /**
    * 以同步方法获取指定应用已设置的处置状态。成功返回应用的处置状态，失败抛出对应异常。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要查询的应用的appId。
    *     <br> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -538,7 +614,7 @@ declare namespace appControl {
   /**
    * 获取指定应用或分身应用已设置的拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } appId - 要获取拦截规则的应用的appId或appIdentifier。使用appId设置的拦截规则只能通过appId获取，使用appIdentifier设置的同理。<br/>
    *     **说明：**<br/> appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -617,7 +693,7 @@ declare namespace appControl {
   /**
    * 获取指定应用或分身应用已设置的优先级最高的卸载处置规则。
    *
-   * @permission ohos.permission.GET_DISPOSED_APP_STATUS or ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @permission ohos.permission.GET_DISPOSED_APP_STATUS 或 ohos.permission.MANAGE_DISPOSED_APP_STATUS
    * @param { string } appIdentifier - 要获取卸载处置规则的应用的appIdentifier。
    *     <br> 如果应用没有appIdentifier可使用appId代替。appId是应用的唯一标识，由应用Bundle名称和签名信息决定，获取方法参见
    *     [获取应用的appId](docroot://quick-start/common-problem-of-application.md#如何获取应用信息中的appid)。
@@ -683,7 +759,7 @@ declare namespace appControl {
   /**
    * 获取当前用户下已设置的所有拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @returns { Array<DisposedRuleConfiguration> } 应用已设置的拦截规则。
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
@@ -697,7 +773,7 @@ declare namespace appControl {
   /**
    * 获取指定应用程序包设置的所有拦截规则。
    *
-   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS or ohos.permission.GET_DISPOSED_APP_STATUS
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS 或 ohos.permission.GET_DISPOSED_APP_STATUS
    * @param { string } bundleName - 表示设置拦截规则的应用程序包的包名。
    * @returns { Array<DisposedRuleConfiguration> } 指定应用程序包已设置的拦截规则。
    * @throws { BusinessError } 201 - Permission denied.
@@ -710,6 +786,55 @@ declare namespace appControl {
    * @since 24 static
    */
   function getDisposedRulesByBundle(bundleName: string): Array<DisposedRuleConfiguration>;
+
+  /**
+   * 设置当前用户的恢复处置规则。
+   *
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @param { RecoverDisposedRule } rule - 恢复处置规则。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700075 - The specified bundleName of want is not the same with caller.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setRecoverDisposedRule(rule: RecoverDisposedRule): void;
+
+  /**
+   * 获取当前用户的恢复处置规则。
+   *
+   * @permission ohos.permission.GET_DISPOSED_APP_STATUS or ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @returns { RecoverDisposedRule } 恢复处置规则。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @throws { BusinessError } 18400001 - The caller has not configured disposal rules.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getRecoverDisposedRule(): RecoverDisposedRule;
+
+  /**
+   * 删除当前用户的恢复处置规则。
+   *
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function deleteRecoverDisposedRule(): void;
 
   /**
    * 标识卸载时功能组件类型。

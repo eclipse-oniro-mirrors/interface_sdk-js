@@ -860,19 +860,10 @@ declare namespace userAuth {
    * 
    * 该类型为下表类型取值中的联合类型。
    *
-   * @unionmember { 'result' } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **result**,
-   *     the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **result**, the [callback]{@link userAuth.AuthEvent.callback } If the
-   *     first parameter of [on]{@link userAuth.AuthInstance.on} is **result**, the
-   *     [callback]{@link userAuth.AuthEvent.callback } [on]{@link userAuth.AuthInstance.on}接口第一个参数为"result"时，
+   * @unionmember { 'result' } [on]{@link userAuth.AuthInstance.on}接口第一个参数为"result"时，
    *     [callback]{@link userAuth.AuthEvent.callback}回调返回认证的结果信息。
-   * @unionmember { 'tip' } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **tip**, the
-   *     [callback]{@link userAuth.AuthEvent.callback } If the first parameter of [on]{@link userAuth.AuthInstance.on}
-   *     is **tip**, the [callback]{@link userAuth.AuthEvent.callback } If the first parameter of
-   *     [on]{@link userAuth.AuthInstance.on} is **tip**, the [callback]{@link userAuth.AuthEvent.callback }
-   *     [on]{@link userAuth.AuthInstance.on}接口第一个参数为"tip"时，[callback]{@link userAuth.AuthEvent.callback}回调返回认证操作中的提示信息。
+   * @unionmember { 'tip' } [on]{@link userAuth.AuthInstance.on}接口第一个参数为"tip"时，
+   *     [callback]{@link userAuth.AuthEvent.callback}回调返回认证操作中的提示信息。
    * @syscap SystemCapability.UserIAM.UserAuth.Core
    * @since 9 dynamiconly
    * @deprecated since 11
@@ -1093,6 +1084,20 @@ declare namespace userAuth {
   /**
    * 查询指定类型和等级的认证能力是否支持。该接口用于检查当前设备是否支持指定的认证类型和认证可信等级，帮助应用在发起认证前判断认证能力是否可用，从而避免不必要的认证不通过。若查询通过（无错误抛出），表示认证能力可用；若抛出错误，应用应
    * 根据错误码判断具体原因并采取相应处理。
+   * 
+   * 错误码返回顺序说明：
+   * 
+   * 如果未注册对应执行器，系统不支持该认证能力，需返回12500005。
+   * 
+   * 如果已注册对应执行器，功能未禁用，但认证安全等级低于业务指定时，需返回12500006。
+   * 
+   * 如果已注册对应执行器，功能未禁用，但用户未注册凭据时，需返回12500010。
+   * 
+   * 如果已注册对应执行器，功能未禁用，但密码过期时，需返回12500013。
+   * 
+   * 注意：
+   * 
+   * 若用户注册的锁屏口令是4位PIN时，其认证可信等级为ATL3，调用该接口查询是否支持ATL4级别的密码认证时，需返回12500010。
    *
    * @permission ohos.permission.ACCESS_BIOMETRIC
    * @param { UserAuthType } authType - 认证类型。用于指定查询的认证类型，支持FACE（人脸）、FINGERPRINT（指纹）、PIN（密码）、COMPANION_DEVICE（伴随设备）。
@@ -1454,7 +1459,6 @@ declare namespace userAuth {
     /**
      * 待认证的目标用户ID，用于指定需要认证的用户。当需要认证特定用户而非当前登录用户时传入此参数；若不传入则默认使用当前登录用户的ID。取值为非负整数。
      *
-     * @default The ID of the current user. The value is a positive integer greater than or equal to 0.
      * @syscap SystemCapability.UserIAM.UserAuth.Core
      * @systemapi Hide this for inner system use.
      * @since 18 dynamic

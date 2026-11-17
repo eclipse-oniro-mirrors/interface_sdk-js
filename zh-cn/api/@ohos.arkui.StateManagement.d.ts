@@ -436,7 +436,15 @@ export interface TypeConstructor<T> {
 export declare type TypeDecorator = <T>(type: TypeConstructor<T>) => PropertyDecorator;
 
 /**
+ * @Type装饰类属性，用于[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)，确保序列化类时不丢失属性的复杂类型。
+ * 在使用[PersistenceV2]{@link PersistenceV2}等持久化能力对复杂类对象进行序列化和反序列化时，类的属性类型信息可能会丢失。通过@Type标记属性的原始类型，
+ * 可确保在序列化过程中正确保留和还原属性的复杂类型信息，适用于需要持久化或序列化复杂对象的场景，例如应用状态持久化存储、跨组件复杂数据传递等。
+ *
+ * 开发指南参考：[@Type装饰器：标记类属性的类型](docroot://ui/state-management/arkts-new-type.md)。
+ *
  * @Type标记属性的原始类型，可确保在序列化过程中正确保留和还原属性的复杂类型信息。
+ *
+ * type：标记类属性的原始类型，取值为对应类的构造函数，需与被装饰属性的类型一致。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1331,6 +1339,18 @@ export declare interface CustomComponentContext {
    * @since 26.0.0 dynamic
    */
   getReusePool(): IReusePool | undefined;
+
+  /**
+   * 返回该自定义组件拥有的默认复用池。
+   *
+   * @returns { IDefaultReusePool | undefined } 当前组件存在默认复用池时，返回默认复用池，否则返回`undefined`。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getDefaultReusePool(): IDefaultReusePool | undefined;
 }
 
 /**
@@ -1388,6 +1408,31 @@ export declare interface IReusePool {
 }
 
 /**
+ * `IDefaultReusePool`接口提供自定义组件上的默认复用池的相关功能，包括清理复用池中的节点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface IDefaultReusePool {
+  /**
+   * 清理复用池中的节点。
+   *
+   * 指定reuseId时，仅清理该reuseId对应的可复用自定义组件的节点；未指定时，清理复用池中的全部节点。
+   *
+   * @param { string } [reuseId] - 需要清理的复用池中可复用自定义组件的复用标识ID。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  clearCache(reuseId?: string): void;
+}
+
+/**
  * `IReusableInfo`接口提供有关复用池管理的可复用组件的当前数量和数量上限的信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1442,3 +1487,207 @@ export declare interface IReusableInfo {
  * @since 26.0.0 dynamic
  */
 declare type ReusableComponentConstructor = Function;
+
+/**
+ * 定义[RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md)回调上报的错误信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface RecoverableStorageError {
+  /**
+   * 错误原因。取值为**'serialization'**（序列化失败，如超出序列化上限或字段不可序列化）或
+   * **'deserialization'**（反序列化失败，如数据损坏、类型不匹配）。**connect**入口错误（类型不支持、
+   * 参数非法）以**BusinessError(140124)**直接**抛出**，不经本回调上报。
+   * 推荐用户数据总量：每实例≤100KB（150KB序列化预算，与系统数据共享）。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  reason: 'serialization' | 'deserialization';
+  /**
+   * 受错误影响的key列表。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keys: Array<string>;
+  /**
+   * 错误的附加信息。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  message: string;
+}
+
+/**
+ * 定义用于上报[RecoverableStorage](docroot://ui/state-management/arkts-new-recoverablestorage.md)错误的回调。
+ * 回调在UI线程执行，回调内不应抛出异常。
+ *
+ * @param { RecoverableStorageError } error - 错误信息。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export type NotifyOnErrorCallback = (error: RecoverableStorageError) => void;
+
+/**
+ * 定义[RecoverableStorage.connect]{@link RecoverableStorage.connect}的连接选项。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class RecoverableConnectOptions<T extends object, S extends object> {
+  /**
+   * 自定义组件实例，传入**this**，用于获取窗口级实例ID实现实例间隔离。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  component: BaseCustomComponent;
+  /**
+   * 可恢复状态变量的类型。仅支持对象类型；**number**、**string**、**boolean**等简单类型会被拒绝。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  type: TypeConstructorWithArgs<T>;
+  /**
+   * 可恢复状态变量的key。不指定时使用类型名作为key。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  key?: string;
+  /**
+   * 默认值构造器。首次连接（内存与快照中均不存在该key）时使用，恢复失败时作为回退。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  defaultCreator: StorageDefaultCreator<T>;
+  /**
+   * 集合嵌套**\@Type**成员的构造器，恢复时用于重建嵌套对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  defaultSubCreator?: StorageDefaultCreator<S>;
+  /**
+   * 序列化/反序列化错误回调。不指定时错误在内部处理，不会导致应用崩溃。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  notifyOnError?: NotifyOnErrorCallback;
+}
+
+/**
+ * 提供在应用被资源管控终止或异常退出时自动保存与恢复所声明的状态变量的能力。通过
+ * [connect]{@link RecoverableStorage.connect}声明变量后，其值在系统恢复链路的保存时机自动保存，并在下一次
+ * 恢复重启时自动恢复。
+ *
+ * > **说明：**
+ * >
+ * > 1. 资源管控终止（如低内存）场景：恢复退后台时保存的值。
+ * >
+ * > 2. **JS_ERROR**与**APP_FREEZE**异常退出场景：异常发生时刻的值被保存，并在系统自动重启后恢复。前提是
+ * > 应用已调用**enableAppRecovery**（默认参数即可满足）且未注册错误观察者。
+ * >
+ * > 3. 仅系统携带恢复重启参数拉起的启动会执行恢复。用户手动启动应用始终为冷启动，**connect**返回默认值。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare class RecoverableStorage {
+  /**
+   * 声明一个可恢复的状态变量。若该变量已存在（内存或快照中），返回已存的值；否则通过**defaultCreator**
+   * 构造默认值并返回。
+   *
+   * > **说明：**
+   * >
+   * > 1. 仅支持对象类型。连接**number**、**string**、**boolean**等简单类型会**抛出**
+   * > **BusinessError(140124)**（与PersistenceV2同款）。
+   * >
+   * > 2. 同一实例的同一key以相同类型重复连接时，返回已有引用；类型不匹配时**抛出**
+   * > **BusinessError(140124)**。
+   * >
+   * > 3. 恢复重启时恢复值优先于默认值；恢复失败时返回通过**defaultCreator**构造的默认值，并经
+   * > **notifyOnError**上报错误。
+   * >
+   * > 4. 典型用法为修改所连接对象的属性。对V1 **\@State**变量整体重新赋值会导致已存引用失效，不被跟踪。
+   * >
+   * > 5. 变量按**component**获取的窗口级实例ID隔离，不同实例的变量互不影响。
+   *
+   * @param { RecoverableConnectOptions<T, S> } params - 连接选项。
+   * @returns { T } 连接成功时返回恢复值或默认值。
+   * @throws { BusinessError } 140124 - Unsupported type or parameters.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static connect<T extends object, S extends object>(
+    params: RecoverableConnectOptions<T, S>
+  ): T;
+
+  /**
+   * 获取当前实例（以**component**的窗口级实例ID标识）注册的所有可恢复状态变量的key。
+   *
+   * > **说明：**
+   * >
+   * > key在Array中的顺序是无序的，与key注册的顺序无关。
+   *
+   * @param { BaseCustomComponent } component - 自定义组件实例，传入**this**。
+   * @returns { Array<string> } 当前实例注册的所有key。未注册变量时返回空数组。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static keys(component: BaseCustomComponent): Array<string>;
+
+  /**
+   * 注销当前实例（以**component**的窗口级实例ID标识）指定key的可恢复状态变量。注销后该变量不再保存与
+   * 恢复，再次连接该key时返回默认值。
+   *
+   * > **说明：**
+   * >
+   * > 注销不存在的key时会报告警告。
+   *
+   * @param { BaseCustomComponent } component - 自定义组件实例，传入**this**。
+   * @param { string | TypeConstructorWithArgs<T> } keyOrType - 待注销的key。若传入类型，则注销以该类型名为
+   *     key的变量。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static remove<T>(component: BaseCustomComponent, keyOrType: string | TypeConstructorWithArgs<T>): void;
+}

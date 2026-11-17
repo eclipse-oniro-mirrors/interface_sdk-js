@@ -25,45 +25,50 @@ import image from '../@ohos.multimedia.image';
 /**
  * The context of Photo Editor extension. It allows access to PhotoEditorExtension-specific resources.
  *
- * @extends ExtensionContext
  * @syscap SystemCapability.Ability.AppExtension.PhotoEditorExtension
- * @StageModelOnly
+ * @stagemodelonly
  * @since 12 dynamic
  * @since 23 static
  */
 declare class PhotoEditorExtensionContext extends ExtensionContext {
-    /**
-     * Save image data by uri.
-     *
-     * @param { string } uri Image editing URI.
-     * @returns { Promise<AbilityResult> } Returns the result of save.
-     * @throws { BusinessError } 401 - Params error. Possible causes: 1.Mandatory parameters are left unspecified.
-     * <br>2.Incorrect parameter types.
-     * @throws { BusinessError } 29600001 - Internal error.
-     * @throws { BusinessError } 29600002 - Image input error.
-     * @throws { BusinessError } 29600003 - Image too big.
-     * @syscap SystemCapability.Ability.AppExtension.PhotoEditorExtension
-     * @since 12 dynamic
-     * @since 23 static
-     */
-    saveEditedContentWithUri(uri: string): Promise<AbilityResult>;
+  /**
+   * Save image data by uri.
+   *
+   * @param { string } uri Image editing URI.
+   * @returns { Promise<AbilityResult> } Returns the result of save.
+   * @throws { BusinessError } 401 - [Async] Params error. Possible causes: 
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameter types.
+   *     <br> 3. Parameter verification failed.
+   * @throws { BusinessError } 29600001 - Internal error.
+   * @throws { BusinessError } 29600002 - Image input error.
+   * @throws { BusinessError } 29600003 - Image too big.
+   * @syscap SystemCapability.Ability.AppExtension.PhotoEditorExtension
+   * @stagemodelonly
+   * @since 12 dynamic
+   * @since 23 static
+   */
+  saveEditedContentWithUri(uri: string): Promise<AbilityResult>;
 
-    /**
-     * Save image data by image pixmap.
-     *
-     * @param { image.PixelMap } pixeMap Image pixmap.
-     * @param { image.PackingOption } option Option for image packing.
-     * @returns { Promise<AbilityResult> } Returns the result of save.
-     * @throws { BusinessError } 401 - Params error. Possible causes: 1.Mandatory parameters are left unspecified.
-     * <br>2.Incorrect parameter types.
-     * @throws { BusinessError } 29600001 - Internal error.
-     * @throws { BusinessError } 29600002 - Image input error.
-     * @throws { BusinessError } 29600003 - Image too big.
-     * @syscap SystemCapability.Ability.AppExtension.PhotoEditorExtension
-     * @since 12 dynamic
-     * @since 23 static
-     */
-    saveEditedContentWithImage(pixeMap: image.PixelMap, option: image.PackingOption): Promise<AbilityResult>;
+  /**
+   * Save image data by image pixelMap.
+   *
+   * @param { image.PixelMap } pixelMap Image pixelMap.
+   * @param { image.PackingOption } option Option for image packing.
+   * @returns { Promise<AbilityResult> } Promise used to return the result of save.
+   * @throws { BusinessError } 401 - [Async] Parameter error. Possible causes: 
+   *     <br> 1. Mandatory parameters are left unspecified.
+   *     <br> 2. Incorrect parameter types.
+   *     <br> 3. Parameter verification failed.
+   * @throws { BusinessError } 29600001 - Internal error.
+   * @throws { BusinessError } 29600002 - Image input error.
+   * @throws { BusinessError } 29600003 - Image too big.
+   * @syscap SystemCapability.Ability.AppExtension.PhotoEditorExtension
+   * @stagemodelonly
+   * @since 12 dynamic
+   * @since 23 static
+   */
+  saveEditedContentWithImage(pixelMap: image.PixelMap, option: image.PackingOption): Promise<AbilityResult>;
 }
 
 export default PhotoEditorExtensionContext;

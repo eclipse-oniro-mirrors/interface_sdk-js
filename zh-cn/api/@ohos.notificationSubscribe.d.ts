@@ -44,6 +44,13 @@ import type { BadgeNumberCallbackData as _BadgeNumberCallbackData } from './noti
  * 本模块提供[通知订阅](docroot://notification/notification-glossary.md#notification-subscription通知订阅)、取消订阅、通知移除等，一般情况下，只有系统应用具有这
  * 些操作权限。
  *
+ * > **说明：**
+ * >
+ * > 本模块接口均为系统接口。
+ * >
+ * > 在Worker线程中订阅时，需在线程退出前调用unsubscribe取消订阅：若线程环境已销毁而未取消订阅，系统会自动取消订阅，在取消订阅生效前服务端投递的事件将被丢弃，不会触发订阅者回调；调用unsubscribe后，尚未派发的
+ * > 在途事件也会被丢弃，不会触发订阅者回调。
+ *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
  * @since 9 dynamic
@@ -677,7 +684,7 @@ declare namespace notificationSubscribe {
   export type EnabledNotificationCallbackData = _EnabledNotificationCallbackData;
 
   /**
-   * 应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)开关状态变化的回调数据。
+   * 应用通知静默提醒开关状态变化的回调数据。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -687,7 +694,7 @@ declare namespace notificationSubscribe {
   export type EnabledSilentReminderCallbackData = _EnabledSilentReminderCallbackData;
 
   /**
-   * 注册应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)使能状态变化的回调函数类型。
+   * 注册应用通知静默提醒使能状态变化的回调函数类型。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License"),
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,7 +29,7 @@
  */
 export interface AutoStartupInfo {
   /**
-   * Bundle name.
+   * Bundle name of the application, which uniquely identifies the application.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -51,7 +51,7 @@ export interface AutoStartupInfo {
   moduleName?: string;
 
   /**
-   * Ability name.
+   * Ability name of the application, which identifies the specific Ability component to start.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -73,7 +73,7 @@ export interface AutoStartupInfo {
   abilityTypeName?: string;
 
   /**
-   * Index of an application clone.
+   * Index of the app clone. The default value is 0, indicating the main application.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
@@ -117,8 +117,8 @@ export interface AutoStartupInfo {
   readonly setterUserId?: int;
 
   /**
-   * Whether the developer is allowed to modify the auto-startup status of this application. The options include
-   * **true** (yes) and **false** (no).
+   * Whether developers are allowed to modify the auto-start status of this application.
+   * The value true means allowed, and false means not allowed. The default value is false.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi

@@ -3959,6 +3959,138 @@ declare enum FunctionKey {
    * @since 12 dynamic
    */
   DPAD_RIGHT,
+
+  /**
+   * CapsLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * ScrollLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SCROLL_LOCK = 20,
+
+  /**
+   * Pause/Break key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAUSE_BREAK = 21,
+
+  /**
+   * NumLock key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  NUM_LOCK = 22,
+
+  /**
+   * Insert key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  INSERT = 23,
+
+  /**
+   * Delete key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DELETE = 24,
+
+  /**
+   * Home key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  HOME = 25,
+
+  /**
+   * End key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 26,
+
+  /**
+   * Page Up key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_UP = 27,
+
+  /**
+   * Page Down key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  PAGE_DOWN = 28,
+
+  /**
+   * Enter key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  ENTER = 29,
+
+  /**
+   * Backspace key on the keyboard.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BACKSPACE = 30,
 }
 
 /**
@@ -4639,7 +4771,7 @@ declare enum DialogButtonStyle {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
- * @form
+ * @form [since 26.1.0]
  * @atomicservice
  * @since 11 dynamic
  */
@@ -4651,7 +4783,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4664,7 +4796,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4678,7 +4810,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -4691,7 +4823,7 @@ declare enum WordBreak {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @form
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 18 dynamic
    */
@@ -4816,6 +4948,7 @@ declare enum IlluminatedType {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 26.1.0]
  * @atomicservice [since 12]
  * @since 11 dynamic
  */
@@ -4826,6 +4959,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4837,6 +4971,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4848,6 +4983,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -4859,6 +4995,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -4870,6 +5007,7 @@ declare enum EllipsisMode {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 24 dynamic
    */
@@ -6514,37 +6652,6 @@ declare enum RawInputEventType {
 }
 
 /**
- * Enumerates the component animation modes under the UI material effect.
- *
- * @enum { int }
- * @syscap SystemCapability.ArkUI.ArkUI.Full
- * @stagemodelonly
- * @atomicservice
- * @since 26.0.0 dynamic
- */
-declare enum UIMaterialAnimationMode {
-  /**
-   * When the material is enabled for the component, the animation effect is automatically enabled.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  IMMERSIVE = 0,
-
-  /**
-   * Disable the animation effect.
-   *
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @atomicservice
-   * @since 26.0.0 dynamic
-   */
-  NONE = 1
-}
-
-/**
  * Defines the edge light position.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -6625,6 +6732,43 @@ declare enum EdgeLightPosition {
    * @since 26.0.0 dynamic
    */
   RIGHT = 7
+}
+
+/**
+ * Defines the input control mode for Agent-generated events.
+ *
+ * Agent-generated events include events generated by a System Agent and events injected by an application
+ * with the ohos.permission.CONTROL_COMPONENT permission. The control applies only to such Agent-generated
+ * input events.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum AgentControlMode {
+  /**
+   * Allows Agent-generated input operations without user confirmation.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  ALLOW = 0,
+
+  /**
+   * Blocks Agent-generated input operations.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  DENY = 1
 }
 
 /**
@@ -6798,7 +6942,7 @@ declare enum ImmersiveStrategy {
   AVOID_FLOAT_NAV = 1,
 
   /**
-   * Avoid the window control buttons, which are the close, minimize and zoom buttons.
+   * Expands the clip content of the Grid component to the safe area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -6855,7 +6999,7 @@ declare enum ImmersiveStrategy {
   /**
    * Expand the title area of bindSheet as safe area for the content region.
    *
-  * > **NOTE**
+   * > **NOTE**
    * >
    * > When this strategy is applied via {@link UIContext.applyDefaultImmersiveStrategy},
    * > bindSheet's {@link SheetOptions.titleBarHoverMode} defaults to
@@ -6878,7 +7022,18 @@ declare enum ImmersiveStrategy {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TABS_EXPAND_SAFE_AREA = 9
 }
 
 /**

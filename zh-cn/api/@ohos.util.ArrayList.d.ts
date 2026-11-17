@@ -69,7 +69,7 @@ declare class ArrayList<T> {
    */
   get length(): int;
   /**
-   * 在ArrayList尾部插入元素。批量添加元素时，建议先调用increaseCapacityTo方法扩充容量，避免多次自动扩容带来的性能开销。
+   * 在ArrayList尾部插入元素。批量添加元素时，建议先调用[increaseCapacityTo]{@link util.ArrayList.increaseCapacityTo}方法扩充容量，避免多次自动扩容带来的性能开销。
    *
    * @param { T } element - 被插入的元素。
    * @returns { boolean } 插入成功返回true，失败返回false。
@@ -109,7 +109,7 @@ declare class ArrayList<T> {
    */
   has(element: T): boolean;
   /**
-   * 返回指定元素第一次出现的下标，查找失败返回-1。与getLastIndexOf的区别在于，该方法返回元素首次出现的位置，getLastIndexOf返回元素最后一次出现的位置。
+   * 返回指定元素第一次出现的下标，查找失败返回-1。与[getLastIndexOf]{@link util.ArrayList.getLastIndexOf}的区别在于，该方法返回元素首次出现的位置，getLastIndexOf返回元素最后一次出现的位置。
    *
    * @param { T } element - 需要查找第一次出现位置的元素。
    * @returns { int } 返回指定元素第一次出现时的下标值，查找失败返回-1。
@@ -162,8 +162,7 @@ declare class ArrayList<T> {
    */
   getLastIndexOf(element: T): int;
   /**
-   * 删除指定范围内的元素，即左闭右开区间[fromIndex, toIndex)。删除后，ArrayList的length减少对应的元素个数，toIndex之后的元素依次向前移动。如果fromIndex或toIndex超出范围，
-   * 则抛出异常。
+   * 删除指定范围内的元素，区间包含fromIndex，但不包含toIndex，即左闭右开区间[fromIndex, toIndex)。删除后，ArrayList的length减少对应的元素个数，toIndex之后的元素依次向前移动。
    *
    * @param { int } fromIndex - 起始下标，区间包含该下标。需要小于等于int32_max即2147483647。
    * @param { int } toIndex - 终止下标，区间不包含该下标。需要小于等于int32_max即2147483647。
@@ -179,7 +178,7 @@ declare class ArrayList<T> {
   /**
    * 遍历ArrayList中的每个元素，对每个元素执行回调函数，用回调函数返回的值替换原元素。
    *
-   * @param { function } callbackFn - 用于操作元素并返回替换值的回调函数。
+   * @param { function } callbackFn - 用于操作元素并返回替换值的回调函数。 value是当前遍历的元素；index是当前下标，默认值为0；arrlist是当前调用的ArrayList实例，默认值为当前实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值。当回调函数需要引用外部对象作为this上下文时传入此参数，不传入时默认值为undefined。
    * @throws { BusinessError } 10200011 - The replaceAllElements method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
@@ -203,7 +202,7 @@ declare class ArrayList<T> {
   /**
    * 在遍历ArrayList实例对象的过程中，对每个元素执行回调函数。
    *
-   * @param { function } callbackFn - 对每个元素执行操作的回调函数。
+   * @param { function } callbackFn - 对每个元素执行操作的回调函数。 value是当前遍历的元素；index是当前下标，默认值为0；arrlist是当前调用的ArrayList实例，默认值为当前实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值。当回调函数需要引用外部对象作为this上下文时传入此参数，不传入时默认值为undefined。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
@@ -257,7 +256,7 @@ declare class ArrayList<T> {
    */
   subArrayList(fromIndex: int, toIndex: int): ArrayList<T>;
   /**
-   * 清除ArrayList中的所有元素，并把length置为0。此方法不会释放预留的容量空间，如需释放容量请调用trimToCurrentLength方法。
+   * 清除ArrayList中的所有元素，并把length置为0。此方法不会释放预留的容量空间，如需释放容量请调用[trimToCurrentLength]{@link util.ArrayList.trimToCurrentLength}方法。
    *
    * @throws { BusinessError } 10200011 - The clear method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
@@ -280,7 +279,7 @@ declare class ArrayList<T> {
    */
   clone(): ArrayList<T>;
   /**
-   * 返回当前实例的容量大小。
+   * 获取当前实例的容量大小。
    *
    * @returns { int } 返回当前实例的容量大小。
    * @throws { BusinessError } 10200011 - The getCapacity method cannot be bound.

@@ -39,7 +39,7 @@ declare enum SizeType {
    * @deprecated since 9
    * @useinstead grid_col/GridColColumnOption and grid_row/GridRowColumnOption
    */
-  Auto = 0,
+  Auto,
 
   /**
    * 最小宽度类型设备，宽度≤320vp。
@@ -146,7 +146,7 @@ declare interface GridContainerOptions {
  *
  * > **说明：**
  * >
- * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link ./grid_col}、[GridRow]{@link ./grid_row}。
+ * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link @global:GridCol}、[GridRow]{@link @global:GridRow}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7 dynamiconly
@@ -190,7 +190,7 @@ declare class GridContainerAttribute extends ColumnAttribute {}
  *
  * > **说明：**
  * >
- * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link ./grid_col}、[GridRow]{@link ./grid_row}。
+ * > 从API version 9开始，该组件不再维护，推荐使用新组件[GridCol]{@link @global:GridCol}、[GridRow]{@link @global:GridRow}。
  *
  * ###### 子组件
  * 

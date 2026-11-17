@@ -554,7 +554,7 @@ declare type OnNativeLoadCallback = (event?: object) => void;
  *
  * 除通用属性外，还支持以下属性。
  *
- * 从API版本12开始，当type设置为**SURFACE**或**TEXTURE**时，支持[通用事件]{@link ./common}。
+ * 从API版本12开始，当type设置为**SURFACE**或**TEXTURE**时，支持[通用事件]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 12]

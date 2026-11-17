@@ -338,7 +338,7 @@ declare class LinkedList<T> {
   /**
    * 通过回调函数来遍历LinkedList实例对象上的元素以及其下标。
    *
-   * @param { function } callbackFn - 回调函数。
+   * @param { function } callbackFn - 回调函数。 value是当前遍历的元素；index是当前下标，默认值为0；LinkedList是当前调用的LinkedList实例，默认值为当前实例。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值，默认值为当前实例对象。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang

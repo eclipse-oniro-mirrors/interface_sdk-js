@@ -35,10 +35,15 @@ import { FontWeightConfigs } from "./textCommon";
  */
 export declare interface SymbolSpanAttribute {
   /**
-   * Called when the SymbolSpan size is set.
+   * 设置SymbolSpan组件大小。设置string类型时，支持number类型取值的字符串形式，可以附带单位，例如"10"、"10fp"。未通过该接口设置时，默认组件大小为16fp。
    *
-   * @param { double | string | Resource | undefined } value - Default value is 16fp.
-   *     Passing `undefined` resets it to the default size.
+   * > **说明：**
+   * >
+   * > 从API version 12开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { double | string | Resource | undefined } value - SymbolSpan组件大小。 <br>取值范围：[0, +∞) <br>单位：
+   * [fp](docroot://reference/apis-arkui/arkui-ts/ts-pixel-units.md#基本像素单位)
+   * <br>取值为undefined时，按默认值处理。
    * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -46,19 +51,31 @@ export declare interface SymbolSpanAttribute {
    */
   default fontSize(value: double | string | Resource | undefined): this;
   /**
-   * Called when the SymbolSpan color is set.
+   * 设置SymbolSpan组件颜色。未通过该接口设置时，默认颜色随[renderingStrategy]{@link SymbolSpanAttribute#renderingStrategy}变化，单色渲染策略（SINGLE）下默
+   * 认为单色；多色渲染策略（MULTIPLE_COLOR）和分层渲染策略（MULTIPLE_OPACITY）下默认取图标资源预设的多色配置。具体说明请参考
+   * [SymbolRenderingStrategy]{@link SymbolRenderingStrategy}。
    *
-   * @param { Array<ResourceColor> | undefined } value - Passing `undefined` resets it to the default color.
-   * @returns { SymbolSpanAttribute } The attribute of the SymbolGlyph.
+   * > **说明：**
+   * >
+   * > 从API version 12开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { Array<ResourceColor> | undefined } value - SymbolSpan组件颜色。具体颜色渲染模式及其说明请参考
+   * [SymbolRenderingStrategy]{@link SymbolRenderingStrategy}。
+   * <br>取值为undefined时，按默认值处理。
+   * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default fontColor(value: Array<ResourceColor> | undefined): this;
   /**
-   * 设置字体fontWeight属性
+   * 设置SymbolSpan组件字体粗细。未通过该接口设置时，默认字体粗细为FontWeight.Normal（正常粗细，对应数值400）。
    *
-   * @param { int | FontWeight | string | undefined } value - 默认值为FontWeight.Normal，设置`undefined`将恢复默认值
+   * @param { int | FontWeight | string | undefined } value - SymbolSpan组件字体粗细。
+   * <br>number类型取值[100, 900]，取值间隔为100，默认为400，取值越大，字体越粗。
+   * string类型仅支持number类型取值的字符串形式，例如"400"，以及"bold"、"bolder"、"lighter"、"regular"、"medium"，分别对应FontWeight中相应的枚举值。
+   * 设置过大可能会在不同字体下有截断。传入超出取值范围或不符合间隔要求的值时取默认值。
+   * <br>取值为undefined时，按默认值处理。
    * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -83,32 +100,50 @@ export declare interface SymbolSpanAttribute {
    */
   default fontWeight(value: int | FontWeight | ResourceStr | undefined, fontWeightConfigs?: FontWeightConfigs): this;
   /**
-   * Called when the SymbolSpan effect is set.
+   * 设置SymbolSpan动效策略。未通过该接口设置时，默认动效策略为SymbolEffectStrategy.NONE。
    *
-   * @param { SymbolEffectStrategy | undefined } value - The default value is SymbolEffectStrategy.NONE.
-   *     Passing `undefined` resets it to the default value.
-   * @returns { SymbolSpanAttribute } The attribute of the SymbolGlyph.
+   * NONE表示无动效，适用于静态展示场景；SCALE表示整体缩放动效，适用于需要吸引用户注意力的场景，如按钮点击反馈；HIERARCHICAL表示层级动效，适用于需要突出图标层次感的场景。
+   *
+   * 不同动效策略效果可以参考
+   * [示例1（设置渲染和动效策略）](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-symbolSpan.md#示例1设置渲染和动效策略)。
+   *
+   * > **说明：**
+   * >
+   * > 从API version 12开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { SymbolEffectStrategy | undefined } value - SymbolSpan动效策略。
+   * <br>取值为undefined时，按默认值处理。
+   * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default effectStrategy(value: SymbolEffectStrategy | undefined): this;
   /**
-   * Called when the SymbolSpan rendering strategy is set.
+   * 设置SymbolSpan渲染策略。未通过该接口设置时，默认渲染策略为SymbolRenderingStrategy.SINGLE。
    *
-   * @param { SymbolRenderingStrategy | undefined } value - The default value is 
-   *     SymbolRenderingStrategy.SINGLE. Passing `undefined` resets it to the default value.
-   * @returns { SymbolSpanAttribute } The attribute of the SymbolGlyph.
+   * SINGLE表示单色渲染，适用于需要统一颜色的图标显示场景；MULTIPLE_COLOR表示多色渲染，适用于需要展示图标多层不同颜色的场景；MULTIPLE_OPACITY表示分层渲染，适用于需要展示图标层次效果的场景。
+   *
+   * > **说明：**
+   * >
+   * > 从API version 12开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { SymbolRenderingStrategy | undefined } value - SymbolSpan渲染策略。
+   * <br>取值为undefined时，按默认值处理。
+   * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default renderingStrategy(value: SymbolRenderingStrategy | undefined): this;
   /**
-   * Key. User can set an key to the component to identify it.
+   * 组件的唯一标识，唯一性由使用者保证。
+   * 此接口仅用于对应用的测试。与id同时使用时，后赋值的属性会覆盖先赋值的属性，建议仅设置id。
    *
-   * @param { string | undefined } value
-   * @returns { this }
+   * @param { string | undefined } value - 组件的唯一标识，唯一性由使用者保证。
+   * <br>默认值：''
+   * <br>取值为undefined时，按默认值处理。
+   * @returns { this } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -116,20 +151,23 @@ export declare interface SymbolSpanAttribute {
    */
   default key(value: string | undefined): this;
   /**
-   * Id. User can set an id to the component to identify it.
+   * 组件的唯一标识，唯一性由使用者保证。若同一个组件设置了多个id，最后设置的生效。当未设置id时，组件默认id为空。与key同时使用时，后赋值的属性会覆盖先赋值的属性。
    *
-   * @param { string | undefined } value
-   * @returns { this }
+   * @param { string | undefined } value - 组件的唯一标识，唯一性由使用者保证。
+   * <br>默认值：''
+   * <br>取值为undefined时，按默认值处理。
+   * @returns { this } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default id(value: string | undefined): this;
   /**
-   * 设置modifier属性
+   * 设置组件的动态属性。
    *
-   * @param { AttributeModifier<SymbolSpanAttribute> | undefined } modifier - 设置Symbol modifier, 设置undefined无效果。
-   * @returns { SymbolSpanAttribute } 返回 SymbolSpanAttribute.
+   * @param { AttributeModifier<SymbolSpanAttribute> | undefined } modifier - 动态设置组件的属性。
+   * <br>取值为undefined时，按当前组件的属性方法默认值处理。
+   * @returns { SymbolSpanAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

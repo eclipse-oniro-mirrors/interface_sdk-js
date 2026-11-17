@@ -290,7 +290,7 @@ export declare interface DataPanelAttribute extends CommonMethod {
      * @returns { DataPanelAttribute } 返回DataPanel属性的实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setDataPanelOptions(options: DataPanelOptions): this;
 }

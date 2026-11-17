@@ -77,7 +77,7 @@ declare enum SlideEffect {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Left = 0,
+  Left,
 
   /**
    * 设置到入场时表示从右边滑入，退场时表示滑出到右边。
@@ -87,7 +87,7 @@ declare enum SlideEffect {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Right = 1,
+  Right,
 
   /**
    * 设置到入场时表示从上边滑入，退场时表示滑出到上边。
@@ -97,7 +97,7 @@ declare enum SlideEffect {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Top = 2,
+  Top,
 
   /**
    * 设置到入场时表示从下边滑入，退场时表示滑出到下边。
@@ -107,7 +107,7 @@ declare enum SlideEffect {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Bottom = 3,
+  Bottom,
 
   /**
    * 设置LTR入场时表示从左边滑入，退场时表示滑出到左边。RTL入场时表示从右边滑入，退场时表示滑出到右边。

@@ -28,55 +28,55 @@ import { Size } from './Graphics';
  * > **NOTE**
  * >
  * > - Currently, the **RENDER_TYPE_TEXTURE** type takes effect only for the
- * > [XComponentNode]{@link ./XComponentNode:XComponentNode} and the [BuilderNode]{@link BuilderNode} holding a
+ * > [XComponentNode]{@link @ohos.arkui.node:XComponentNode} and the [BuilderNode]{@link @ohos.arkui.node:BuilderNode} holding a
  * > component tree whose root node is a custom component.
  * >
  * > - The following custom components currently support texture export as root nodes in
- * > [BuilderNode]{@link BuilderNode} scenarios: [Badge]{@link ../@internal/component/ets/badge},
- * > [Blank]{@link ../@internal/component/ets/blank}, [Button]{@link ../@internal/component/ets/button},
- * > [CanvasGradient]{@link ../@internal/component/ets/canvas},
- * > [CanvasPattern]{@link ../@internal/component/ets/canvas},
- * > [CanvasRenderingContext2D]{@link ../@internal/component/ets/canvas},
- * > [Canvas]{@link ../@internal/component/ets/canvas}, [CheckboxGroup]{@link ../@internal/component/ets/checkboxgroup},
- * > [Checkbox]{@link ../@internal/component/ets/checkbox}, [Circle]{@link ../@internal/component/ets/circle},
- * > [ColumnSplit]{@link ../@internal/component/ets/column_split}, [Column]{@link ../@internal/component/ets/column},
- * > [ContainerSpan]{@link ../@internal/component/ets/container_span},
- * > [Counter]{@link ../@internal/component/ets/counter}, [DataPanel]{@link ../@internal/component/ets/data_panel},
- * > [Divider]{@link ../@internal/component/ets/divider}, [Ellipse]{@link ../@internal/component/ets/ellipse},
- * > [Flex]{@link ../@internal/component/ets/flex}, [Gauge]{@link ../@internal/component/ets/gauge},
- * > [Hyperlink]{@link ../@internal/component/ets/hyperlink}, [ImageBitmap]{@link ../@internal/component/ets/canvas},
- * > [ImageData]{@link ../@internal/component/ets/canvas}, [Image]{@link ../@internal/component/ets/image},
- * > [Line]{@link ../@internal/component/ets/line},
- * > [LoadingProgress]{@link ../@internal/component/ets/loading_progress},
- * > [Marquee]{@link ../@internal/component/ets/marquee}, [Matrix2D]{@link ../@internal/component/ets/canvas},
- * > [OffscreenCanvasRenderingContext2D]{@link ../@internal/component/ets/canvas},
- * > [OffscreenCanvas]{@link ../@internal/component/ets/canvas}, [Path2D]{@link ../@internal/component/ets/canvas},
- * > [Path]{@link ../@internal/component/ets/path}, [PatternLock]{@link ../@internal/component/ets/pattern_lock},
- * > [Polygon]{@link ../@internal/component/ets/polygon}, [Polyline]{@link ../@internal/component/ets/polyline},
- * > [Progress]{@link ../@internal/component/ets/progress}, [QRCode]{@link ../@internal/component/ets/qrcode},
- * > [Radio]{@link ../@internal/component/ets/radio}, [Rating]{@link ../@internal/component/ets/rating},
- * > [Rect]{@link ../@internal/component/ets/rect},
- * > [RelativeContainer]{@link ../@internal/component/ets/relative_container},
- * > [RowSplit]{@link ../@internal/component/ets/row_split}, [Row]{@link ../@internal/component/ets/row},
- * > [Shape]{@link ../@internal/component/ets/shape}, [Slider]{@link ../@internal/component/ets/slider},
- * > [Span]{@link ../@internal/component/ets/span}, [Stack]{@link ../@internal/component/ets/stack},
- * > [TextArea]{@link ../@internal/component/ets/text_area}, [TextClock]{@link ../@internal/component/ets/text_clock},
- * > [TextInput]{@link ../@internal/component/ets/text_input}, [TextTimer]{@link ../@internal/component/ets/text_timer},
- * > [Text]{@link ../@internal/component/ets/text}, [Toggle]{@link ../@internal/component/ets/toggle},
- * > [Video]{@link ../@internal/component/ets/video} (excluding full-screen playback),
- * > [Web]{@link ../@internal/component/ets/web}, [XComponent]{@link ../@internal/component/ets/xcomponent}.
+ * > [BuilderNode]{@link @ohos.arkui.node:BuilderNode} scenarios: [Badge]{@link @global:Badge},
+ * > [Blank]{@link @global:Blank}, [Button]{@link @global:Button},
+ * > [CanvasGradient]{@link @global:CanvasGradient},
+ * > [CanvasPattern]{@link @global:CanvasPattern},
+ * > [CanvasRenderingContext2D]{@link @global:CanvasRenderingContext2D},
+ * > [Canvas]{@link @global:Canvas}, [CheckboxGroup]{@link @global:CheckboxGroup},
+ * > [Checkbox]{@link @global:Checkbox}, [Circle]{@link @global:Circle},
+ * > [ColumnSplit]{@link @global:ColumnSplit}, [Column]{@link @global:Column},
+ * > [ContainerSpan]{@link @global:ContainerSpan},
+ * > [Counter]{@link @global:Counter}, [DataPanel]{@link @global:DataPanel},
+ * > [Divider]{@link @global:Divider}, [Ellipse]{@link @global:Ellipse},
+ * > [Flex]{@link @global:Flex}, [Gauge]{@link @global:Gauge},
+ * > [Hyperlink]{@link @global:Hyperlink}, [ImageBitmap]{@link @global:ImageBitmap},
+ * > [ImageData]{@link @global:ImageData}, [Image]{@link @global:Image},
+ * > [Line]{@link @global:Line},
+ * > [LoadingProgress]{@link @global:LoadingProgress},
+ * > [Marquee]{@link @global:Marquee}, [Matrix2D]{@link @global:Matrix2D},
+ * > [OffscreenCanvasRenderingContext2D]{@link @global:OffscreenCanvasRenderingContext2D},
+ * > [OffscreenCanvas]{@link @global:OffscreenCanvas}, [Path2D]{@link @global:Path2D},
+ * > [Path]{@link @global:Path}, [PatternLock]{@link @global:PatternLock},
+ * > [Polygon]{@link @global:Polygon}, [Polyline]{@link @global:Polyline},
+ * > [Progress]{@link @global:Progress}, [QRCode]{@link @global:QRCode},
+ * > [Radio]{@link @global:Radio}, [Rating]{@link @global:Rating},
+ * > [Rect]{@link @global:Rect},
+ * > [RelativeContainer]{@link @global:RelativeContainer},
+ * > [RowSplit]{@link @global:RowSplit}, [Row]{@link @global:Row},
+ * > [Shape]{@link @global:Shape}, [Slider]{@link @global:Slider},
+ * > [Span]{@link @global:Span}, [Stack]{@link @global:Stack},
+ * > [TextArea]{@link @global:TextArea}, [TextClock]{@link @global:TextClock},
+ * > [TextInput]{@link @global:TextInput}, [TextTimer]{@link @global:TextTimer},
+ * > [Text]{@link @global:Text}, [Toggle]{@link @global:Toggle},
+ * > [Video]{@link @global:Video} (excluding full-screen playback),
+ * > [Web]{@link @global:Web}, [XComponent]{@link @global:XComponent}.
  * >
  * > - Since API version 12, the following components also support texture export:
- * > [DatePicker]{@link ../@internal/component/ets/date_picker}, [ForEach]{@link ../@internal/component/ets/for_each},
- * > [Grid]{@link ../@internal/component/ets/grid},
+ * > [DatePicker]{@link @global:DatePicker}, [ForEach]{@link @global:ForEach},
+ * > [Grid]{@link @global:Grid},
  * > [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md),
- * > [LazyForEach]{@link ../@internal/component/ets/lazy_for_each}, [List]{@link ../@internal/component/ets/list},
- * > [Scroll]{@link ../@internal/component/ets/scroll}, [Swiper]{@link ../@internal/component/ets/swiper},
- * > [TimePicker]{@link ../@internal/component/ets/time_picker}, custom components decorated with
+ * > [LazyForEach]{@link @global:LazyForEach}, [List]{@link @global:List},
+ * > [Scroll]{@link @global:Scroll}, [Swiper]{@link @global:Swiper},
+ * > [TimePicker]{@link @global:TimePicker}, custom components decorated with
  * > [@Component](docroot://ui/state-management/arkts-create-custom-components.md#component),
- * > [NodeContainer]{@link ../@internal/component/ets/node_container}, and [FrameNode]{@link ./FrameNode} and
- * > [RenderNode]{@link ./RenderNode:RenderNode} mounted to
- * > [NodeContainer]{@link ../@internal/component/ets/node_container}.
+ * > [NodeContainer]{@link @global:NodeContainer}, and [FrameNode]{@link @ohos.arkui.node:FrameNode} and
+ * > [RenderNode]{@link @ohos.arkui.node:RenderNode} mounted to
+ * > [NodeContainer]{@link @global:NodeContainer}.
  * >
  * > - For details, see
  * > [Rendering and Drawing Video and Button Components at the Same Layer](docroot://web/web-same-layer.md).
@@ -266,9 +266,9 @@ declare type InputEventType = TouchEvent | MouseEvent | AxisEvent;
  * > [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md)/
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)/
  * > [ContentSlot](docroot://ui/rendering-control/arkts-rendering-control-contentslot.md)...),
- * > [Span]{@link ../@internal/component/ets/span}, [ContainerSpan]{@link ../@internal/component/ets/container_span},
- * > [SymbolSpan]{@link ../@internal/component/ets/symbol_span}, or a custom component, an additional
- * > [FrameNode]{@link ./FrameNode} will be generated and displayed as "BuilderProxyNode" in the node tree. This causes
+ * > [Span]{@link @global:Span}, [ContainerSpan]{@link @global:ContainerSpan},
+ * > [SymbolSpan]{@link @global:SymbolSpan}, or a custom component, an additional
+ * > [FrameNode]{@link @ohos.arkui.node:FrameNode} will be generated and displayed as "BuilderProxyNode" in the node tree. This causes
  * > tree structure changes and affects testing processes such as event propagation. For details, see
  * > [BuilderProxyNode in BuilderNode Causes Tree Structure Changes](docroot://ui/arkts-user-defined-arktsNode-builderNode.md#builderproxynode-in-buildernode-causes-tree-structure-changes).
  * >
@@ -348,7 +348,7 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - To operate objects in a BuilderNode, ensure that the reference to the BuilderNode is not garbage collected.
    * > When a BuilderNode object is garbage collected by the virtual machine, the associated
-   * > [FrameNode]{@link ./FrameNode} and [RenderNode]{@link ./RenderNode:RenderNode} objects are also dereferenced from
+   * > [FrameNode]{@link @ohos.arkui.node:FrameNode} and [RenderNode]{@link @ohos.arkui.node:RenderNode} objects are also dereferenced from
    * > the backend node tree. This means that any FrameNode objects obtained from a BuilderNode will no longer
    * > correspond to any actual node if the BuilderNode is garbage collected.
    * >
@@ -393,7 +393,7 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - To operate objects in a BuilderNode, ensure that the reference to the BuilderNode is not garbage collected.
    * > When a BuilderNode object is garbage collected by the virtual machine, the associated
-   * > [FrameNode]{@link ./FrameNode} and [RenderNode]{@link ./RenderNode:RenderNode} objects are also dereferenced from
+   * > [FrameNode]{@link @ohos.arkui.node:FrameNode} and [RenderNode]{@link @ohos.arkui.node:RenderNode} objects are also dereferenced from
    * > the backend node tree. This means that any FrameNode objects obtained from a BuilderNode will no longer
    * > correspond to any actual node if the BuilderNode is garbage collected.
    * >
@@ -432,7 +432,7 @@ export class BuilderNode<Args extends Object[]> {
   update(arg: Object): void;
 
   /**
-   * Obtains the [FrameNode]{@link ./FrameNode} from the BuilderNode. The FrameNode is generated only after the
+   * Obtains the [FrameNode]{@link @ohos.arkui.node:FrameNode} from the BuilderNode. The FrameNode is generated only after the
    * BuilderNode executes the build operation.
    *
    * @returns { FrameNode | null } **FrameNode** object held by the BuilderNode, used to mount the BuilderNode as a
@@ -455,7 +455,7 @@ export class BuilderNode<Args extends Object[]> {
    * figure below.
    *
    * **OffsetA** indicates the offset of the BuilderNode relative to the parent component. You can obtain this offset by
-   * calling [getPositionToParent]{@link ./FrameNode:FrameNode#getPositionToParent} in the FrameNode. **OffsetB**
+   * calling [getPositionToParent]{@link @ohos.arkui.node:FrameNode.getPositionToParent} in the FrameNode. **OffsetB**
    * indicates the offset of the touch point relative to the BuilderNode. You can obtain this offset from the
    * [TouchEvent]{@link TouchEvent} object. **OffsetC** is the sum of **offsetA** and **offsetB**. It represents the
    * final offset that you need to pass to **postTouchEvent**.
@@ -472,7 +472,7 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - The **postTouchEvent** API can be called only once for the same timestamp.<!--Del-->
    * >
-   * > - This API cannot be called by [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.
+   * > - This API cannot be called by [UIExtensionComponent]{@link @global:UIExtensionComponent}.
    *
    * <!--DelEnd-->
    *
@@ -600,8 +600,8 @@ export class BuilderNode<Args extends Object[]> {
    * > events and mouse events at the outer layer, as this may cause coordinate offsets. This is because **SourceType**
    * > does not change during event conversion. For details, see [onTouch]{@link CommonMethod#onTouch}.
    * >
-   * > - When an [axis event]{@link AxisEvent} is injected, it cannot trigger
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}, because the axis event does not include rotation
+   * > - When an [axis event]{@link @global:AxisEvent} is injected, it cannot trigger
+   * > [RotationGesture]{@link @global:RotationGesture}, because the axis event does not include rotation
    * > axis information.
    * >
    * > - A forwarded event undergoes touch testing in the target component's subtree and triggers corresponding
@@ -620,7 +620,7 @@ export class BuilderNode<Args extends Object[]> {
    * > coordinates of the target component.
    * >
    * > - Avoid forwarding a single event multiple times.<!--Del--> This API cannot be called by
-   * > [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.<!--DelEnd-->
+   * > [UIExtensionComponent]{@link @global:UIExtensionComponent}.<!--DelEnd-->
    *
    * @param { InputEventType } event - Input event to post.
    * @returns { boolean } Whether the event is successfully posted. Returns **true** if the event is successfully
@@ -654,8 +654,8 @@ export class BuilderNode<Args extends Object[]> {
    * > coordinate offsets. This is because [SourceType]{@link SourceType} does not change during the event conversion.
    * > For details about the specifications, see [onTouch]{@link CommonMethod#onTouch}.
    * >
-   * > - When an [axis event]{@link AxisEvent} is injected, it cannot trigger
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}, because the axis event does not include rotation
+   * > - When an [axis event]{@link @global:AxisEvent} is injected, it cannot trigger
+   * > [RotationGesture]{@link @global:RotationGesture}, because the axis event does not include rotation
    * > axis information.
    * >
    * > - The forwarded event is posted to the target component and its child components for processing, and triggers the
@@ -675,7 +675,7 @@ export class BuilderNode<Args extends Object[]> {
    * > the window coordinates of the target component.
    * >
    * > - The same event can be forwarded multiple times.<!--Del--> This API cannot be called by
-   * > [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.<!--DelEnd-->
+   * > [UIExtensionComponent]{@link @global:UIExtensionComponent}.<!--DelEnd-->
    *
    * @param { InputEventType } event - Input event to post.
    * @param { CompetitionStrategy } [competitionStrategy] - Gesture competition strategy for posting events.
@@ -742,12 +742,12 @@ export class BuilderNode<Args extends Object[]> {
 /**
  * **ReactiveBuilderNode** uses the stateless UI method [@Builder](docroot://ui/state-management/arkts-builder.md) to
  * generate a component tree and holds the root node of the component tree. A ReactiveBuilderNode cannot be defined as a
- * state variable. [FrameNode]{@link ./FrameNode} held in **ReactiveBuilderNode** is used only to mount the
+ * state variable. [FrameNode]{@link @ohos.arkui.node:FrameNode} held in **ReactiveBuilderNode** is used only to mount the
  * ReactiveBuilderNode as a child node to another FrameNode. Undefined behavior may occur if you set attributes or
  * perform operations on subnodes of the FrameNode held by the ReactiveBuilderNode. Therefore, after you have obtained a
  * RenderNode through the [getFrameNode]{@link BuilderNode#getFrameNode} method of the ReactiveBuilderNode and the
- * [getRenderNode]{@link ./FrameNode:FrameNode#getRenderNode} method of the [FrameNode]{@link ./FrameNode}, avoid
- * setting the attributes or operating the subnodes through APIs of [RenderNode]{@link ./RenderNode:RenderNode}.
+ * [getRenderNode]{@link @ohos.arkui.node:FrameNode.getRenderNode} method of the [FrameNode]{@link @ohos.arkui.node:FrameNode}, avoid
+ * setting the attributes or operating the subnodes through APIs of [RenderNode]{@link @ohos.arkui.node:RenderNode}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -758,7 +758,7 @@ export class BuilderNode<Args extends Object[]> {
 export class ReactiveBuilderNode<Args extends Object[]> {
   /**
    * Constructs a **ReactiveBuilderNode** class. When the content generated by **ReactiveBuilderNode** is embedded into
-   * another [RenderNode]{@link ./RenderNode:RenderNode} for display, you need to explicitly specify
+   * another [RenderNode]{@link @ohos.arkui.node:RenderNode} for display, you need to explicitly specify
    * [selfIdealSize]{@link RenderOptions} in [RenderOptions]{@link RenderOptions}. Otherwise, the default parent
    * component layout constraint of the nodes in **ReactiveBuilderNode** is [0, 0]. If this API is called and
    * **selfIdealSize** is not set, the size of the root node of the subtree in **ReactiveBuilderNode** is [0, 0].
@@ -793,7 +793,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * >
    * > - To operate objects in a ReactiveBuilderNode, ensure that the reference to the ReactiveBuilderNode is not
    * > garbage collected. When a ReactiveBuilderNode object is garbage collected by the virtual machine, the associated
-   * > [FrameNode]{@link ./FrameNode} and [RenderNode]{@link ./RenderNode:RenderNode} objects are also dereferenced from
+   * > [FrameNode]{@link @ohos.arkui.node:FrameNode} and [RenderNode]{@link @ohos.arkui.node:RenderNode} objects are also dereferenced from
    * > the backend node tree. This means that any FrameNode objects obtained from a ReactiveBuilderNode will no longer
    * > correspond to any actual node if the ReactiveBuilderNode is garbage collected.
    * >
@@ -816,7 +816,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    */
   build(builder: WrappedBuilder<Args>, config: BuildOptions, ...args: Args): void;
   /**
-   * Obtains the [FrameNode]{@link ./FrameNode} from the ReactiveBuilderNode. The FrameNode is generated only after the
+   * Obtains the [FrameNode]{@link @ohos.arkui.node:FrameNode} from the ReactiveBuilderNode. The FrameNode is generated only after the
    * ReactiveBuilderNode executes the build operation.
    *
    * @returns { FrameNode | null } **FrameNode** object held by the ReactiveBuilderNode, which is used to mount the
@@ -840,7 +840,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * figure below.
    *
    * **OffsetA** indicates the offset of the BuilderNode relative to the parent component. You can obtain this offset by
-   * calling [getPositionToParent]{@link ./FrameNode:FrameNode#getPositionToParent} in the FrameNode. **OffsetB**
+   * calling [getPositionToParent]{@link @ohos.arkui.node:FrameNode.getPositionToParent} in the FrameNode. **OffsetB**
    * indicates the offset of the touch point relative to the BuilderNode. You can obtain this offset from the
    * [TouchEvent]{@link TouchEvent} object. **OffsetC** is the sum of **offsetA** and **offsetB**. It represents the
    * final offset that you need to pass to **postTouchEvent**.
@@ -858,7 +858,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > The **postTouchEvent** API can be called only once for the same timestamp.<!--Del-->
    * >
    * > The **postTouchEvent** parameter does not support
-   * > [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.
+   * > [UIExtensionComponent]{@link @global:UIExtensionComponent}.
    *
    * <!--DelEnd-->
    *
@@ -997,8 +997,8 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > [SourceType]{@link SourceType} of the event does not change during the event conversion. For details about the
    * > specifications, see [onTouch]{@link CommonMethod#onTouch}.
    * >
-   * > When an [axis event]{@link AxisEvent} is injected, it cannot trigger
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}, because the axis event does not include rotation
+   * > When an [axis event]{@link @global:AxisEvent} is injected, it cannot trigger
+   * > [RotationGesture]{@link @global:RotationGesture}, because the axis event does not include rotation
    * > axis information.
    * >
    * > A forwarded event undergoes touch testing in the target component's subtree and triggers corresponding gestures.
@@ -1020,7 +1020,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > Avoid forwarding a single event multiple times.<!--Del-->
    * >
    * > The **postInputEvent** parameter does not support
-   * > [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.<!--DelEnd-->
+   * > [UIExtensionComponent]{@link @global:UIExtensionComponent}.<!--DelEnd-->
    *
    * @param { InputEventType } event - Input event to post.
    * @returns { boolean } Whether the event is successfully posted. Returns **true** if the event is successfully
@@ -1054,8 +1054,8 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > coordinate offsets. This is because [SourceType]{@link SourceType} does not change during the event conversion.
    * > For details about the specifications, see [onTouch]{@link CommonMethod#onTouch}.
    * >
-   * > - When an [axis event]{@link AxisEvent} is injected, it cannot trigger
-   * > [RotationGesture]{@link ../@internal/component/ets/gesture}, because the axis event does not include rotation
+   * > - When an [axis event]{@link @global:AxisEvent} is injected, it cannot trigger
+   * > [RotationGesture]{@link @global:RotationGesture}, because the axis event does not include rotation
    * > axis information.
    * >
    * > - The forwarded event is posted to the target component and its child components for processing, and triggers the
@@ -1075,7 +1075,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * > the window coordinates of the target component.
    * >
    * > - The same event can be forwarded multiple times.<!--Del-->This API cannot be called by
-   * > [UIExtensionComponent]{@link ../@internal/component/ets/ui_extension_component}.<!--DelEnd-->
+   * > [UIExtensionComponent]{@link @global:UIExtensionComponent}.<!--DelEnd-->
    *
    * @param { InputEventType } event - Input event to post.
    * @param { CompetitionStrategy } [competitionStrategy] - Gesture competition strategy for posting events.

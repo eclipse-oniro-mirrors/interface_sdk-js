@@ -116,11 +116,14 @@ declare namespace deviceStatus {
   function on(type: 'steadyStandingDetect', callback: Callback<SteadyStandingStatus>): void;
 
   /**
-   * Unsubscribes from steady standing state events.
+   * Unsubscribes from the device steady standing state (stand mode) event. It is used in scenarios where the
+   * application exits a page or no longer needs to listen for stand mode changes. Related resources are released
+   * after the call.
    *
    * @param { 'steadyStandingDetect' } type - Event type. This field has a fixed value of **steadyStandingDetect**.
-   * @param { Callback<SteadyStandingStatus> } [callback] - Callback used to return the steady standing state of the
-   *     device.
+   * @param { Callback<SteadyStandingStatus> } [callback] - Callback to unregister. It must be the same as the
+   *     callback passed during subscription. If this parameter is not specified, all callbacks currently listening
+   *     for this event are unsubscribed.
    * @throws { BusinessError } 801 - Capability not supported. Function can not work correctly due to limited
    *     <br> device capabilities.
    * @throws { BusinessError } 32500001 - Service exception.
@@ -175,5 +178,60 @@ declare namespace deviceStatus {
    * @since 23 static
    */
   function offSteadyStandingDetect(callback?: Callback<SteadyStandingStatus>): void;
+
+  /**
+   * Defines the phone drop detection status.
+   * 
+   * Indicates the device's drop detection state, including normal state and dropped state.
+   *
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum DropDetectionStatus {
+    /**
+     * Normal state, indicating the device is in a normal held or placed state.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_NORMAL = 0,
+    /**
+     * Dropped state, indicating the device has detected a drop event.
+     *
+     * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    STATUS_DROPPED = 1
+  }
+
+  /**
+   * Subscribes to drop detection events. 
+   *
+   * @param { Callback<DropDetectionStatus> } callback - Indicates the callback for device-drop event.
+   *     Repeated subscriptions with the same callback throw error 32500002.
+   * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500002 - Subscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onDropDetect(callback: Callback<DropDetectionStatus>): void;
+
+  /**
+   * Unsubscribes from drop detection events.
+   *
+   * @param { Callback<DropDetectionStatus> } [callback] - Indicates the callback for device-drop event.
+   * @throws { BusinessError } 801 - Failed due to limited device capabilities.
+   * @throws { BusinessError } 32500001 - Service exception.
+   * @throws { BusinessError } 32500003 - Unsubscription failed.
+   * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offDropDetect(callback?: Callback<DropDetectionStatus>): void;
 }
 export default deviceStatus;

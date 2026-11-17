@@ -23,7 +23,7 @@
  * [on]{@link @ohos.app.ability.appManager:appManager.on(type: 'applicationState', observer: ApplicationStateObserver)},
  *  the system triggers the
  * [onForegroundApplicationChanged](docroot://reference/apis-ability-kit/js-apis-inner-application-applicationStateObserver.md#applicationstateobserveronforegroundapplicationchanged)
- *  callback of [ApplicationStateObserver]{@link ./application/ApplicationStateObserver} to deliver notifications whenever
+ *  callback of [ApplicationStateObserver]{@link ApplicationStateObserver} to deliver notifications whenever
  *  the state of an application, process, or ability changes.
  *
  * @syscap SystemCapability.Ability.AbilityRuntime.Core

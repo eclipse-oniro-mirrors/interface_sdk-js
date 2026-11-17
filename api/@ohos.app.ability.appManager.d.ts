@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,6 +40,8 @@ import _AppForegroundStateObserver from './application/AppForegroundStateObserve
 import { AbilityFirstFrameStateObserver as _AbilityFirstFrameStateObserver } from './application/AbilityFirstFrameStateObserver';
 import { AbilityFirstFrameStateData as _AbilityFirstFrameStateData } from './application/AbilityFirstFrameStateData';
 /*** endif */
+import _FocusedApplicationObserver from './application/FocusedApplicationObserver';
+import _FocusedApplicationInfo from './application/FocusedApplicationInfo';
 
 /**
  * The appManager module implements application management. You can use the APIs of this module to query whether the
@@ -1038,6 +1040,40 @@ declare namespace appManager {
   function offAbilityFirstFrameStateChange(observer?: AbilityFirstFrameStateObserver): void;
 
   /**
+   * Registers an observer to listen for focused application changes.
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { FocusedApplicationObserver } observer - Observer used to listen for focused application changes.
+   * @returns { int } ID of the observer registered. You can pass this ID to
+   *     [offFocusedApplicationChanged]{@link appManager.offFocusedApplicationChanged} to unregister the observer.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000165 - The number of registered observers for the current application has reached
+   *     the upper limit.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function onFocusedApplicationChanged(observer: FocusedApplicationObserver): int;
+
+  /**
+   * Unregisters the observer used to listen for focused application changes.
+   *
+   * @permission ohos.permission.RUNNING_STATE_OBSERVER
+   * @param { int } observerId - ID of the observer registered, which is the listener ID returned by
+   *     [onFocusedApplicationChanged]{@link appManager.onFocusedApplicationChanged}.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16300004 - The observer does not exist.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function offFocusedApplicationChanged(observerId: int): void;
+
+  /**
    * Obtains applications that are running in the foreground. The application information is defined by
    * [AppStateData]{@link ./application/AppStateData:AppStateData}. This API uses an asynchronous callback to return the
    * result.
@@ -1163,6 +1199,36 @@ declare namespace appManager {
    * @since 23 static
    */
   function killProcessWithAccount(bundleName: string, accountId: int, callback: AsyncCallback<void>): void;
+
+  /**
+   * Kills processes based on bundle name, account ID, appIndex safely.
+   * If the target process is protected, it cannot be terminated. This API uses a promise to return the result.
+   *
+   * > **NOTE**
+   * >
+   * > The ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS permission is not required when **accountId** specifies the
+   * > current user.
+   *
+   * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.KILL_APP_PROCESSES
+   *     or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.CLEAN_BACKGROUND_PROCESSES
+   * @param { string } bundleName - Bundle name.
+   * @param { int } accountId - ID of a system account.
+   * @param { boolean } clearPageStack - Whether to clear the page stack. **true** to clear, **false** otherwise.
+   * @param { int } [appIndex] - Index of an application clone. Default value is 0.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000210 - The target process is protected by an MDM application
+   *     and cannot be terminated.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function killProcessWithAccountSafely(bundleName: string, accountId: int, clearPageStack: boolean, appIndex?: int):
+    Promise<void>;
 
   /**
    * Checks whether the system is undergoing a stability test. This API uses an asynchronous callback to return the
@@ -2095,6 +2161,24 @@ declare namespace appManager {
    * @since 23 static
    */
   export type AbilityFirstFrameStateData = _AbilityFirstFrameStateData;
+
+  /**
+   * Defines the observer used to listen for focused application changes.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationObserver = _FocusedApplicationObserver;
+
+  /**
+   * Defines the focused application information reported when the focused application changes.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export type FocusedApplicationInfo = _FocusedApplicationInfo;
 
   /**
    * Defines the information of an application in multi-app mode in the running state.

@@ -299,7 +299,7 @@ export declare interface PatternLockAttribute extends CommonMethod {
      * @returns { PatternLockAttribute } 返回PatternLock属性实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setPatternLockOptions(controller?: PatternLockController): this;
 }

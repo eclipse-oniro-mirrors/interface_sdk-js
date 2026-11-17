@@ -201,7 +201,7 @@ declare namespace distributedDataObject {
    * @param { string } networkId - Network ID of the peer device, with a maximum of 255 bytes. The value must be a non-
    *     empty string.
    * @param { string } status - Status of the distributed data object. Possible values are **'online'**,
-   *     **'offline'**, and **'restore'**.
+   *     **'offline'**, and **'restored'**.
    * @syscap SystemCapability.DistributedDataManager.DataObject.DistributedObject
    * @since 20 dynamic
    * @since 23 static

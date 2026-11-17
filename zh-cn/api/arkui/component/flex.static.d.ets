@@ -147,15 +147,16 @@ export declare interface FlexAttribute extends CommonMethod {
     */
     default pointLight(value: PointLightStyle | undefined): FlexAttribute;
     /**
- 	 * Set Flex options.
- 	 *
- 	 * @param { FlexOptions } [value] - Flex constructor options
- 	 * @returns { FlexAttribute } Returns the instance of the FlexAttribute.
+     * 设置Flex选项。
+     *
+     * @param { FlexOptions } value - Flex容器的配置选项，用于设置子组件的排列方向、换行方式、对齐方式和间距。不传入时使用默认配置，各属性默认值详见
+     *    [FlexOptions]{@link FlexOptions}对象说明。
+     * @returns { FlexAttribute } 返回FlexAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setFlexOptions(value?: FlexOptions): this;
     /**
      * 设置组件的动态属性。

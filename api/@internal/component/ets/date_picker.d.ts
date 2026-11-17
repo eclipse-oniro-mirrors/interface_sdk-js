@@ -252,7 +252,7 @@ declare interface DatePickerOptions {
    * the year and month or the month and day need to be selected. If this parameter is not passed,
    * **DatePickerMode.DATE** is used by default, and the year, month, and day columns are displayed.
    *
-   * In [DatePickerDialog]{@link ./date_picker}, when **showTime** of
+   * In [DatePickerDialog]{@link @global:DatePickerDialog}, when **showTime** of
    * [DatePickerDialogOptions]{@link DatePickerDialogOptions} is set to **true**, this parameter does not take effect,
    * and the year, month, and day columns are displayed by default. This is to ensure layout rationality, because an
    * additional time column is displayed when **showTime** is set to **true**.
@@ -313,9 +313,9 @@ interface DatePickerInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @extends CommonMethod [since 8 - 10]
  * @extends CommonMethod<DatePickerAttribute> [since 11]
@@ -1369,7 +1369,7 @@ declare interface DatePickerDialogOptions extends DatePickerOptions {
    * [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}, background blur
    * [backgroundBlurStyle]{@link CommonMethod#backgroundBlurStyle(value: BlurStyle,
    * options?: BackgroundBlurStyleOptions)},
-   * background blur effect [backgroundBlurStyleOptions]{@link BackgroundBlurStyleOptions}, background effect
+   * background blur effect [backgroundBlurStyleOptions]{@link @global:BackgroundBlurStyleOptions}, background effect
    * [backgroundEffect]{@link CommonMethod#backgroundEffect(options: BackgroundEffectOptions)}, border color
    * [borderColor]{@link CommonMethod#borderColor}, border width [borderWidth]{@link CommonMethod#borderWidth}, and
    * shadow [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}. When the system material is set,

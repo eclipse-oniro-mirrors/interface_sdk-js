@@ -58,7 +58,7 @@ declare interface MenuItemGroupOptions {
  * 
  * > **说明：**
  * 
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -97,11 +97,11 @@ declare class MenuItemGroupAttribute extends CommonMethod<MenuItemGroupAttribute
  * 
  * > **说明：**
  * 
- * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link with_theme}。
+ * > - 该组件从API版本26.0.0开始支持[WithTheme]{@link @global:WithTheme}。
  * 
  * ###### 子组件
  * 
- * 包含[MenuItem]{@link menu_item}子组件。
+ * 包含[MenuItem]{@link @global:MenuItem}子组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

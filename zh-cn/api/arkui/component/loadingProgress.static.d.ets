@@ -32,7 +32,7 @@ import { AttributeModifier } from "./common";
  */
 export declare enum LoadingProgressStyle {
     /**
-     * Default style.
+     * 默认加载样式。API version 8及以后不支持设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -40,7 +40,7 @@ export declare enum LoadingProgressStyle {
      */
     Default,
     /**
-     * Announcement style.
+     * 环形加载样式。API version 8及以后不支持设置。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -48,7 +48,7 @@ export declare enum LoadingProgressStyle {
      */
     Circular,
     /**
-     * The style of the track.
+     * 彗星形加载样式。API version 8及以后默认为彗星形样式。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -119,7 +119,7 @@ export declare interface LoadingProgressAttribute extends CommonMethod {
      * @returns { LoadingProgressAttribute } 返回LoadingProgress属性实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setLoadingProgressOptions(): this;
 }

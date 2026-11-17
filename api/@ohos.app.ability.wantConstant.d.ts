@@ -437,7 +437,17 @@ declare namespace wantConstant {
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
-    UI_EXTENSION_ROOT_TOKEN = 'ohos.param.uiExtension.rootHostToken'
+    UI_EXTENSION_ROOT_TOKEN = 'ohos.param.uiExtension.rootHostToken',
+
+    /**
+     * Indicates the ID of the task to be started.
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    AGENT_TASK_ID = 'ohos.aafwk.param.agent.taskId'
   }
 
   /**

@@ -51,8 +51,6 @@ import { LocalStorage } from '@ohos.arkui.stateManagement';
  *  - 标准悬浮窗由系统管理并统一绘制UI，动效更为高端精致。
  *  - 标准悬浮窗支持与[闪控球]{@link @ohos.window.floatingBall:floatingBall}互相绑定联合使用，实现更复杂场景。
  *
- * **起始版本：** 26.0.0
- *
  * > **说明：**
  * >
  * > - 针对系统能力SystemCapability.Window.SessionManager，请先使用

@@ -198,6 +198,16 @@ declare namespace insightIntentDriver {
      * @since 26.0.0 dynamic&static
      */
     deviceId?: string;
+
+    /**
+     * 表示工具调用ID，用于将此意图执行与某个测试步骤关联。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamic&static
+     */
+    toolCallId?: string;
   }
 
   /**

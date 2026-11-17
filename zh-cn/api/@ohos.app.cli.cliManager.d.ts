@@ -108,6 +108,18 @@ declare namespace cliManager {
      * @since 26.1.0 dynamiconly
      */
     taskId?: string;
+
+    /**
+     * 安全策略，参数格式为JSON字符串。
+     *
+     * 该策略字符串由系统服务解析，用于对命令执行施加额外的安全约束。
+     *
+     * @syscap SystemCapability.Ability.AgentRuntime.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.0.1 dynamiconly
+     */
+    policy?: string;
   }
 
   /**

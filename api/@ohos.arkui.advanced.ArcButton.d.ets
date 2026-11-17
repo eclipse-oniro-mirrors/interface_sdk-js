@@ -29,11 +29,11 @@
   * 
   * ###### Attributes
   * 
-  * The [universal attributes]{@link common} are not supported.
+  * The [universal attributes]{@link CommonMethod} are not supported.
   * 
   * ###### Events
   * 
-  * Among the universal events, the [click event]{@link common} and [touch event]{@link common} are supported.
+  * Among the universal events, the [click event]{@link CommonMethod} and [touch event]{@link CommonMethod} are supported.
   * 
   * @file ArcButton
   * @kit ArkUI

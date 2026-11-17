@@ -127,7 +127,7 @@ export interface NotificationSubscriber {
   onEnabledNotificationChanged?:(callbackData: EnabledNotificationCallbackData) => void;
 
   /**
-   * 返回应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)的使能状态变化。
+   * 返回应用通知静默提醒的使能状态变化。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -227,7 +227,7 @@ export interface SubscribeCallbackData {
   readonly request: NotificationRequest;
 
   /**
-   * [通知排序](docroot://notification/notification-glossary.md#notification-sorting通知排序)信息。
+   * 通知排序信息。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -332,7 +332,7 @@ export interface EnabledNotificationCallbackData {
 }
 
 /**
- * 应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)开关状态变化的回调数据。
+ * 应用通知静默提醒开关状态变化的回调数据。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi
@@ -387,7 +387,7 @@ export interface EnabledPriorityNotificationCallbackData {
   /**
    * 所有通知的优先使能状态。
    *
-   * - true：允许设置为[优先通知](docroot://notification/notification-glossary.md#priority-notification优先通知)。
+   * - true：允许设置为优先通知。
    * - false：禁止设置为优先通知。
    *
    * @syscap SystemCapability.Notification.Notification
@@ -524,7 +524,7 @@ export interface BadgeEnabledChangedCallback {
  */
 export interface VoiceContent {
   /**
-   * 文本语音播报内容。
+   * 文本语音播报内容。中国境内（香港特别行政区、澳门特别行政区、中国台湾除外）播报内容为智能化播报内容。从API版本26.1.0开始，支持中国境内之外地区通知语音播报，播报内容固定为应用名+通知正文。
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -588,7 +588,7 @@ export type BadgeEnabledChangedCallback = (data: EnabledNotificationCallbackData
 export type SystemUpdateCallback = (data: SubscribeCallbackData) => void;
 
 /**
- * 注册应用通知[静默提醒](docroot://notification/notification-glossary.md#silent-reminder静默提醒)使能状态变化的回调函数类型。
+ * 注册应用通知静默提醒使能状态变化的回调函数类型。
  *
  * @param { EnabledSilentReminderCallbackData } callbackData - 回调返回监听到的静默提醒使能状态信息。
  * @syscap SystemCapability.Notification.Notification

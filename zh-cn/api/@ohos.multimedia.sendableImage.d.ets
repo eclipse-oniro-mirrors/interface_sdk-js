@@ -411,7 +411,7 @@ declare namespace sendableImage {
      *     字节。缓冲区的大小由[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -457,7 +457,7 @@ declare namespace sendableImage {
      *     则获取的像素数据格式与PixelMap相同，否则会被转换为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -503,7 +503,7 @@ declare namespace sendableImage {
      *     如果PixelMap的像素格式为YUV类型，则缓冲区内的像素数据格式需与PixelMap相同，否则需要为BGRA_8888格式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -533,7 +533,7 @@ declare namespace sendableImage {
      *     [getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -556,7 +556,7 @@ declare namespace sendableImage {
      * 获取图像像素信息。同步返回结果。
      *
      * @returns { image.ImageInfo } 图像像素信息。
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.ImageSource
      * @crossplatform
      * @atomicservice
@@ -623,7 +623,7 @@ declare namespace sendableImage {
      * @param { number } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -661,7 +661,7 @@ declare namespace sendableImage {
      *
      * @returns { PixelMap } 成功同步返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -697,7 +697,7 @@ declare namespace sendableImage {
      * @param { number } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -733,7 +733,7 @@ declare namespace sendableImage {
      * @param { number } y - 纵向平移的距离。方向为正数向下，负数向上。取值范围是(-图像高度, +∞)。单位：像素（px）。<br>取值为负数时，平移的效果等同于裁剪掉自图像上方起的y行像素。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -771,7 +771,7 @@ declare namespace sendableImage {
      * @param { number } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -799,7 +799,7 @@ declare namespace sendableImage {
      * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice
@@ -825,7 +825,7 @@ declare namespace sendableImage {
      * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 501 - The resource is unavailable as it is occupied by another thread.
+     * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
      * @atomicservice

@@ -14,6 +14,7 @@
  */
 
 /**
+ * @overview Defines the UIExtensionAbility component and its related configuration strategy types.
  * @file ExtensionAbility with UI
  * @kit AbilityKit
  */
@@ -23,6 +24,38 @@ import type Want from './@ohos.app.ability.Want';
 import ExtensionAbility from './@ohos.app.ability.ExtensionAbility';
 import type UIExtensionContentSession from './@ohos.app.ability.UIExtensionContentSession';
 import type UIExtensionContext from './application/UIExtensionContext';
+import ConfigurationConstant from './@ohos.app.ability.ConfigurationConstant';
+
+/**
+ * Configuration strategy of the UIExtensionAbility.
+ *
+ * @syscap SystemCapability.Ability.AbilityRuntime.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export interface ConfigurationStrategy {
+  /**
+   * Brand color strategy of the UIExtensionAbility.
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  brandColorStrategy?: ConfigurationConstant.BrandColorStrategy;
+}
+
+/**
+ * Defines the function type of the callback that returns the configuration strategy of the UIExtensionAbility.
+ *
+ * @returns { ConfigurationStrategy } The configuration strategy of the UIExtensionAbility.
+ * @syscap SystemCapability.Ability.AbilityRuntime.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic&static
+ */
+export type OnGetConfigurationStrategyFn = () => ConfigurationStrategy;
 
 /**
  * UIExtensionAbility is an ExtensionAbility component with a User Interface (UI). It inherits from
@@ -68,6 +101,18 @@ declare class UIExtensionAbility extends ExtensionAbility {
    * @since 23 static
    */
   onCreate(launchParam: AbilityConstant.LaunchParam): void;
+
+  /**
+   * Called back to return the configuration strategy of the UIExtensionAbility.
+   * It is called after {@link onCreate} and before {@link onSessionCreate}.
+   *
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  onGetConfigurationStrategy?: OnGetConfigurationStrategyFn;
 
   /**
    * Called when a [UIExtensionContentSession]{@link ./@ohos.app.ability.UIExtensionContentSession} instance is created.

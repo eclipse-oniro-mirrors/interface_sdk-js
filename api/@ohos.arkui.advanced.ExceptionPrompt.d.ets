@@ -18,8 +18,8 @@
  * 
  * > **NOTE**
  * >
- * > - If the **ExceptionPrompt** component has [universal attributes]{@link common} and 
- * > [universal events]{@link common} configured, the compiler toolchain automatically generates an additional 
+ * > - If the **ExceptionPrompt** component has [universal attributes]{@link CommonMethod} and 
+ * > [universal events]{@link CommonMethod} configured, the compiler toolchain automatically generates an additional 
  * > \_\_Common\_\_ node and mounts the universal attributes and universal events on this node rather than 
  * > the **ExceptionPrompt** component itself. As a result, the configured universal attributes and universal events 
  * > may fail to take effect or behave as intended. For this reason, avoid using universal attributes 
@@ -238,16 +238,8 @@ export declare struct ExceptionPrompt {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @since 11
-   */
-  /**
-   * The build function is a member function that must return an ArkTS component type (Element) to represent the component to be rendered as a user interface.
-   * @type { function }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 12 dynamic
+   * @atomicservice [since 12]
+   * @since 11 dynamic
    */
   build(): void;
 }

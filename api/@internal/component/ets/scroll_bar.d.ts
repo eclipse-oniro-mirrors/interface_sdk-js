@@ -117,17 +117,17 @@ declare interface ScrollBarOptions {
 
 /**
  * The **ScrollBar** component is used together with scrollable components, such as
- * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./list}, [Grid]{@link ./grid}, [Scroll]{@link ./scroll}, and
- * [WaterFlow]{@link ./water_flow}, to provide visual scrolling indication and control capabilities, and supports custom
+ * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List}, [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, and
+ * [WaterFlow]{@link @global:WaterFlow}, to provide visual scrolling indication and control capabilities, and supports custom
  * scrollbar styles.
  *
  * > **NOTE**
  * >
  * > - If the size of the main axis direction is not set for **ScrollBar**, the **maxSize** value in the
- * > [layout constraints]{@link ../../../arkui/FrameNode:LayoutConstraint} of the parent component is used. If the
+ * > [layout constraints]{@link @ohos.arkui.node:LayoutConstraint} of the parent component is used. If the
  * > parent component of the **ScrollBar** component contains a scrollable component, such as
- * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./list}, [Grid]{@link ./grid}, [Scroll]{@link ./scroll}, or
- * > [WaterFlow]{@link ./water_flow}, you are advised to set the size in the main axis direction of the **ScrollBar**;
+ * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List}, [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, or
+ * > [WaterFlow]{@link @global:WaterFlow}, you are advised to set the size in the main axis direction of the **ScrollBar**;
  * > otherwise, the size in the main axis direction of **ScrollBar** may become infinite.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -154,7 +154,7 @@ interface ScrollBarInterface {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -215,8 +215,8 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
 
 /**
  * The **ScrollBar** component is used together with scrollable components, such as
- * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./list}, [Grid]{@link ./grid}, [Scroll]{@link ./scroll}, and
- * [WaterFlow]{@link ./water_flow}, to provide visual scrolling indication and control capabilities, and supports custom
+ * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List}, [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, and
+ * [WaterFlow]{@link @global:WaterFlow}, to provide visual scrolling indication and control capabilities, and supports custom
  * scrollbar styles.
  *
  * > **NOTE**
@@ -225,10 +225,10 @@ declare class ScrollBarAttribute extends CommonMethod<ScrollBarAttribute> {
  * > earliest API version.
  * >
  * > - If the size of the main axis direction is not set for **ScrollBar**, the **maxSize** value in the
- * > [layout constraints]{@link ../../../arkui/FrameNode:LayoutConstraint} of the parent component is used. If the
+ * > [layout constraints]{@link @ohos.arkui.node:LayoutConstraint} of the parent component is used. If the
  * > parent component of the **ScrollBar** component contains a scrollable component, such as
- * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./list}, [Grid]{@link ./grid}, [Scroll]{@link ./scroll}, or
- * > [WaterFlow]{@link ./water_flow}, you are advised to set the size in the main axis direction of the **ScrollBar**;
+ * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List}, [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, or
+ * > [WaterFlow]{@link @global:WaterFlow}, you are advised to set the size in the main axis direction of the **ScrollBar**;
  * > otherwise, the size in the main axis direction of **ScrollBar** may become infinite.
  *
  * ###### Child Components

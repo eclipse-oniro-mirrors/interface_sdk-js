@@ -62,7 +62,7 @@ declare class UIServiceExtensionAbility extends ExtensionAbility {
   context: UIServiceExtensionContext;
 
   /**
-   * Called to initialize the service logic.
+   * Called when the UIServiceExtension is created. This callback is used to execute the initialization logic.
    *
    * @param { Want } want - [Want]{@link @ohos.app.ability.Want:Want} information about the 
    *     [UIServiceExtensionAbility]{@link @ohos.app.ability.UIServiceExtensionAbility:UIServiceExtensionAbility}, including 

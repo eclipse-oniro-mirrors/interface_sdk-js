@@ -108,7 +108,7 @@ export interface BreakpointOptions {
  * >
  * > - 容器断点基于组件自身的实际尺寸和断点阈值数组确定高度和宽度断点值，组件尺寸和断点信息仅作用于当前组件及其子组件，同一页面中的多个容器可拥有各自独立的断点状态。
  * >
- * > - ContainerReader组件的尺寸需要由父容器和自身布局确定，不受子组件影响。在不同父容器下的布局规格：父容器为[Flex]{@link ./flex}、[Column]{@link ./column}、[Row]{@link ./row}时撑满容器剩余空间；父容器为其他类型时撑满父容器。
+ * > - ContainerReader组件的尺寸需要由父容器和自身布局确定，不受子组件影响。在不同父容器下的布局规格：父容器为[Flex]{@link @global:Flex}、[Column]{@link @global:Column}、[Row]{@link @global:Row}时撑满容器剩余空间；父容器为其他类型时撑满父容器。
  * >
  * > - ContainerReader接口的参数必须使用状态变量结合双向绑定形式([!!语法](docroot://ui/state-management/arkts-new-binding.md))，以便在后端计算尺寸变化时及时通知前端刷新UI。
  * >
@@ -174,7 +174,7 @@ export declare class ContainerReaderAttribute extends CommonMethod<ContainerRead
  * >
  * > - 容器断点基于组件自身的实际尺寸和断点阈值数组确定高度和宽度断点值，组件尺寸和断点信息仅作用于当前组件及其子组件，同一页面中的多个容器可拥有各自独立的断点状态。
  * >
- * > - ContainerReader组件的尺寸需要由父容器和自身布局确定，不受子组件影响。在不同父容器下的布局规格：父容器为[Flex]{@link ./flex}、[Column]{@link ./column}、[Row]{@link ./row}时撑满容器剩余空间；父容器为其他类型时撑满父容器。
+ * > - ContainerReader组件的尺寸需要由父容器和自身布局确定，不受子组件影响。在不同父容器下的布局规格：父容器为[Flex]{@link @global:Flex}、[Column]{@link @global:Column}、[Row]{@link @global:Row}时撑满容器剩余空间；父容器为其他类型时撑满父容器。
  * >
  * > - ContainerReader接口的参数必须使用状态变量结合双向绑定形式([!!语法](docroot://ui/state-management/arkts-new-binding.md))，以便在后端计算尺寸变化时及时通知前端刷新UI。
  * >

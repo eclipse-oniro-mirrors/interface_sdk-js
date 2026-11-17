@@ -1181,6 +1181,26 @@ declare namespace privacyManager {
      * @since 26.0.0 dynamic&static
      */
     enhancedIdentity?: string;
+    /**
+     * 被自动化控制的目标应用的身份标识。仅在查询自动化控制记录的情况时有效。查询非自动化控制记录时，该值为0。
+     * 取值限定为整数。默认值：0。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetTokenId?: int;
+    /**
+     * 被自动化控制的目标应用的包名。仅在查询自动化控制记录的情况时有效。查询非自动化控制记录时，该值为空字符串。
+     * 默认值：空。
+     *
+     * @syscap SystemCapability.Security.AccessToken
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    targetBundleName?: string;
   }
 
   /**

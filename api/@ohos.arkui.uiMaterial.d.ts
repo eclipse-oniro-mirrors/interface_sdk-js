@@ -116,10 +116,10 @@ declare namespace uiMaterial {
     /**
      * Default state. The immersive system material is enabled by default for the 
      * [Dialog](docroot://ui/arkts-base-dialog-overview.md), [Toast](docroot://ui/arkts-create-toast.md), and 
-     * [AlphabetIndexer]{@link ./@internal/component/ets/alphabet_indexer} components if the background color, blur, and
+     * [AlphabetIndexer]{@link @global:AlphabetIndexer} components if the background color, blur, and
      * shadow are not set for the components. The immersive system material is enabled by default for the text menu 
      * triggered by long-pressing or double-clicking after [copyOption]{@link TextAttribute#copyOption} is set in the 
-     * [Text]{@link ./@internal/component/ets/text} component. For other components, whether the immersive system 
+     * [Text]{@link @global:Text} component. For other components, whether the immersive system 
      * material is enabled is set by the application.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -132,13 +132,13 @@ declare namespace uiMaterial {
     /**
      * Enabled state. The immersive system material is enabled by default for the 
      * [Dialog](docroot://ui/arkts-base-dialog-overview.md), [Toast](docroot://ui/arkts-create-toast.md), 
-     * [AlphabetIndexer]{@link ./@internal/component/ets/alphabet_indexer}, 
+     * [AlphabetIndexer]{@link @global:AlphabetIndexer}, 
      * [ChipGroup]{@link @ohos.arkui.advanced.ChipGroup}, [Chip]{@link @ohos.arkui.advanced.Chip}, 
-     * [Select]{@link ./@internal/component/ets/select}, [Menu Control]{@link ./@internal/component/ets/common}, 
-     * [Toggle]{@link ./@internal/component/ets/toggle}, [SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}, 
-     * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}, [Slider]{@link ./@internal/component/ets/slider}, 
+     * [Select]{@link @global:Select}, [Menu Control]{@link CommonMethod}, 
+     * [Toggle]{@link @global:Toggle}, [SegmentButton]{@link @ohos.arkui.advanced.SegmentButton}, 
+     * [SegmentButtonV2]{@link @ohos.arkui.advanced.SegmentButtonV2}, [Slider]{@link @global:Slider}, 
      * and [SelectionMenu]{@link @ohos.arkui.advanced.SelectionMenu} components. After 
-     * [copyOption]{@link TextAttribute#copyOption} is set for the [Text]{@link ./@internal/component/ets/text} 
+     * [copyOption]{@link TextAttribute#copyOption} is set for the [Text]{@link @global:Text} 
      * component, the immersive system material is enabled by default for the text menu triggered by long-pressing or 
      * double-clicking. In this state, the immersive system material style takes precedence over the background color, 
      * blur, shadow, and border style set for the components. You need to set whether to enable the immersive system 
@@ -217,7 +217,7 @@ declare namespace uiMaterial {
 
   /**
    * Enumerates the material styles. The enum values suffixed with EC are set on 
-   * [EffectComponent]{@link ./@internal/component/ets/effect_component}, and those suffixed with EC_SUB are set on the 
+   * [EffectComponent]{@link @global:EffectComponent}, and those suffixed with EC_SUB are set on the 
    * child components of EffectComponent. The two work together to achieve merged optimization of material effect 
    * rendering. The material blur set on EffectComponent will ultimately take effect on its child components. Different 
    * material styles correspond to different material parameters, mainly including the blur level and highlight effect 
@@ -284,7 +284,7 @@ declare namespace uiMaterial {
     /**
      * Ultra-thin style. The material layer is ultra-thin, providing a strong transparency effect.
      * 
-     * Applicable to [EffectComponent]{@link ./@internal/component/ets/effect_component}. It must be used together with 
+     * Applicable to [EffectComponent]{@link @global:EffectComponent}. It must be used together with 
      * the corresponding EC_SUB suffix enum to achieve merged optimization of material effect rendering.
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -455,8 +455,37 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     SMOOTH = 2,
- 	}
- 	 
+  }
+
+  /**
+   * Material color blend mode.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum MaterialColorBlendMode {
+    /**
+     * Linear mix mode. The material color is mixed with the material background in a linear manner.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    LINEAR_MIX = 0,
+    /**
+     * Tinted glass mode. The material color is applied as a tinted glass effect, maintaining background transparency.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    TINTED_GLASS = 1
+  }
+
   /**
    * Obtains the global material level, which is related to the device computing power. This configuration item is 
    * defined by the device and cannot be modified.
@@ -487,7 +516,7 @@ declare namespace uiMaterial {
 
   /**
    * Converts an [ImmersiveMaterial]{@link uiMaterial.ImmersiveMaterial} material into an ImmersiveMaterial material 
-   * applicable to [EffectComponent]{@link ./@internal/component/ets/effect_component}.
+   * applicable to [EffectComponent]{@link @global:EffectComponent}.
    * 
    * The [materialColor]{@link uiMaterial.ImmersiveOptions}, [applyShadow]{@link uiMaterial.ImmersiveOptions}, 
    * [interactive]{@link uiMaterial.ImmersiveOptions}, and [lightEffect]{@link uiMaterial.ImmersiveOptions} properties 
@@ -496,7 +525,7 @@ declare namespace uiMaterial {
    *
    * @param { uiMaterial.ImmersiveMaterial } material - Immersive material to convert.
    * @returns { uiMaterial.ImmersiveMaterial } Immersive material applicable to
-   *     [EffectComponent]{@link ./@internal/component/ets/effect_component} after conversion.
+   *     [EffectComponent]{@link @global:EffectComponent} after conversion.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -507,11 +536,11 @@ declare namespace uiMaterial {
   function convertToECMaterial(material: uiMaterial.ImmersiveMaterial) : uiMaterial.ImmersiveMaterial;
   /**
    * Converts an [ImmersiveMaterial]{@link uiMaterial.ImmersiveMaterial} material into an ImmersiveMaterial material 
-   * applicable to the child components of [EffectComponent]{@link ./@internal/component/ets/effect_component}.
+   * applicable to the child components of [EffectComponent]{@link @global:EffectComponent}.
    *
    * @param { uiMaterial.ImmersiveMaterial } material - Immersive material to convert.
    * @returns { uiMaterial.ImmersiveMaterial } Immersive material applicable to the child components of
-   *     [EffectComponent]{@link ./@internal/component/ets/effect_component} after conversion.
+   *     [EffectComponent]{@link @global:EffectComponent} after conversion.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -692,6 +721,33 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     lightEffect?: LightEffectOptions | null;
+    /**
+     * Material color mode.
+     * Note: Fix the material's light/dark mode, overriding WithTheme and independent of the system theme.
+     * This affects only the material effect, leaving child components and other properties unchanged.
+     * Default value: **ThemeColorMode.SYSTEM**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    colorMode?: ThemeColorMode;
+    /**
+     * Material color blend mode.
+     * Default value: uiMaterial.MaterialColorBlendMode.LINEAR_MIX.
+     * Note: 1. This parameter takes effect only on the display effect of high- and medium- computing power devices
+     * that support immersive material.
+     * 2. **TINTED_GLASS** takes effect only on some components. Currently supported components include:
+     * Button, Chip, ChipGroup, and Toggle. For other components, **TINTED_GLASS** does not take effect.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    colorBlendMode?: MaterialColorBlendMode;
   }
 
   /**

@@ -132,6 +132,8 @@ import functionManager, { FunctionHook, InvokeFunctionParam, FunctionResultWrap 
 import pluginBundleManager from '@ohos.bundle.pluginBundleManager';
 import appMemoryOptimizer from '@ohos.app.ability.appMemoryOptimizer';
 import AppProcessStateObserver from '@ohos.app.ability.AppProcessStateObserver';
+import { ConfigurationStrategy } from '@ohos.app.ability.UIExtensionAbility';
+import launchServiceManager from '@ohos.app.ability.launchServiceManager';
 
 export {
   Ability, AbilityConstant, AbilityLifecycleCallback, AbilityStage, ActionExtensionAbility,
@@ -155,7 +157,7 @@ export {
   CompletionHandlerForAtomicService, CompletionHandlerForAbilityStartCallback, AbilityStartFailureCode, FailureCode, InteropAbilityLifecycleCallback,
   systemConfiguration, AgentExtensionAbility, AgentUIExtensionAbility, agentConstant, agentManager, hyperSnapManager, cliManager, pluginBundleManager,
   functionManager, appMemoryOptimizer, CliHook, ExecToolParam, ExecCmdParam, ExecResultWrap,
-  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl, AppProcessStateObserver
+  FunctionHook, InvokeFunctionParam, FunctionResultWrap, taskManager, abilityToolAccessCtrl, AppProcessStateObserver, launchServiceManager
 };
 
 /*** if arkts static */
@@ -170,6 +172,7 @@ import installer from '@ohos.bundle.installer';
 import launcherBundleManager from '@ohos.bundle.launcherBundleManager';
 import overlay from '@ohos.bundle.overlay';
 import shortcutManager from '@ohos.bundle.shortcutManager';
+import skillManager from '@ohos.bundle.skillManager';
 import common from '@ohos.app.ability.common';
 import ConfigurationConstant from '@ohos.app.ability.ConfigurationConstant';
 import { Configuration } from '@ohos.app.ability.Configuration';
@@ -249,10 +252,12 @@ import pluginBundleManager from '@ohos.bundle.pluginBundleManager';
 import errorManager from '@ohos.app.ability.errorManager';
 import appMemoryOptimizer from '@ohos.app.ability.appMemoryOptimizer';
 import AppProcessStateObserver from '@ohos.app.ability.AppProcessStateObserver';
+import { ConfigurationStrategy } from '@ohos.app.ability.UIExtensionAbility';
+import launchServiceManager from '@ohos.app.ability.launchServiceManager';
 
 export {
   appControl, bundleManager, bundleMonitor, bundleResourceManager, defaultAppManager, distributedBundleManager,
-  freeInstall, installer, launcherBundleManager, overlay, shortcutManager,
+  freeInstall, installer, launcherBundleManager, overlay, shortcutManager, skillManager,
   common, ConfigurationConstant, Configuration, ErrorCode, Want, StartOptions, contextConstant,
   AbilityConstant, UIExtensionContentSession, wantConstant, AbilityStage, UIExtensionAbility,
   uriPermissionManager, ServiceExtensionAbility, AtomicServiceOptions, InsightIntentContext,
@@ -269,6 +274,6 @@ export {
   StartupTask, startupManager, systemConfiguration, PhotoEditorExtensionAbility, AgentExtensionAbility, 
   AgentUIExtensionAbility, agentConstant, agentManager, InsightIntentLink, InsightIntentPage, InsightIntentFunctionMethod, InsightIntentFunction, 
   InsightIntentEntry, LinkParamCategory, LinkIntentParamMapping, InsightIntentEntity, InsightIntentEntryExecutor, InsightIntentForm, hyperSnapManager, 
-  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager, AppProcessStateObserver
+  pluginBundleManager, errorManager, appMemoryOptimizer, taskManager, AppProcessStateObserver, ConfigurationStrategy, launchServiceManager
 };
 /*** endif */

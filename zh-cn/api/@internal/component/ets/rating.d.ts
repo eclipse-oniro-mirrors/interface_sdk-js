@@ -97,7 +97,7 @@ declare interface StarStyleOptions {
    * 未选中的星级的图片路径，可由用户自定义或使用系统默认图片。
    * 
    * 从API version 20开始，该接口支持设置Resource资源。参考
-   * [示例3（通过Resource资源设置评分的样式）]{@link ./rating}
+   * [示例3（通过Resource资源设置评分的样式）]{@link @global:Rating}
    * 代码。
    *
    * @type { string } [since 7 - 19]
@@ -115,7 +115,7 @@ declare interface StarStyleOptions {
    * 选中的星级的图片路径，可由用户自定义或使用系统默认图片。
    * 
    * 从API version 20开始，该接口支持设置Resource资源。参考
-   * [示例3（通过Resource资源设置评分的样式）]{@link ./rating}
+   * [示例3（通过Resource资源设置评分的样式）]{@link @global:Rating}
    * 代码。
    *
    * @type { string } [since 7 - 19]
@@ -133,7 +133,7 @@ declare interface StarStyleOptions {
    * 部分选中的星级的图片路径，可由用户自定义或使用系统默认图片。未设置时将优先使用backgroundUri，效果等同于仅设置foregroundUri和backgroundUri。
    * 
    * 从API version 20开始，该接口支持设置Resource资源。参考
-   * [示例3（通过Resource资源设置评分的样式）]{@link ./rating}
+   * [示例3（通过Resource资源设置评分的样式）]{@link @global:Rating}
    * 代码。
    *
    * @type { ?string } [since 7 - 19]
@@ -341,7 +341,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   stepSize(size: Optional<number>): RatingAttribute;
 
   /**
-   * 设置评分的样式。该属性所支持的图片类型能力参考[Image]{@link image}组件。
+   * 设置评分的样式。该属性所支持的图片类型能力参考[Image]{@link @global:Image}组件。
    * 
    * 支持加载本地图片和网络图片，暂不支持PixelMap类型。
    * 
@@ -362,7 +362,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   starStyle(options: StarStyleOptions): RatingAttribute;
 
   /**
-   * 设置评分的样式。该属性所支持的图片类型能力参考[Image]{@link image}组件。
+   * 设置评分的样式。该属性所支持的图片类型能力参考[Image]{@link @global:Image}组件。
    * 
    * 支持加载本地图片和网络图片，暂不支持PixelMap类型。
    * 

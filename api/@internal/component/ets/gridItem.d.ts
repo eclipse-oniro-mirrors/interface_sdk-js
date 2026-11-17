@@ -93,7 +93,7 @@ declare interface GridItemOptions {
  *
  * > **NOTE**
  * >
- * > * This component can be used only as a child of [Grid]{@link ./grid}.
+ * > * This component can be used only as a child of [Grid]{@link @global:Grid}.
  * >
  * > * When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are
@@ -278,7 +278,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    * Sets whether the grid item is selectable in the mouse selection box area. This attribute takes effect only when
    * mouse box selection is enabled for the parent **Grid** container.
    *
-   * This attribute must be used before the [polymorphic style]{@link ./common} is set. Otherwise, the style settings
+   * This attribute must be used before the [polymorphic style]{@link CommonMethod} is set. Otherwise, the style settings
    * will not take effect.
    *
    * @param { boolean } value - Whether the grid item is selectable in the mouse selection box area. The value **true**
@@ -297,7 +297,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
    * Sets whether the grid item is selected. This attribute supports two-way binding through
    * [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *
-   * This attribute must be used before the [polymorphic style]{@link ./common} is set. Otherwise, the style settings
+   * This attribute must be used before the [polymorphic style]{@link CommonMethod} is set. Otherwise, the style settings
    * will not take effect.
    *
    * @param { boolean } value - Whether the current **GridItem** is selected. The value **true** indicates the selected
@@ -333,7 +333,7 @@ declare class GridItemAttribute extends CommonMethod<GridItemAttribute> {
  *
  * > **NOTE**
  * >
- * > * This component can be used only as a child of [Grid]{@link ./grid}.
+ * > * This component can be used only as a child of [Grid]{@link @global:Grid}.
  * >
  * > * When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are

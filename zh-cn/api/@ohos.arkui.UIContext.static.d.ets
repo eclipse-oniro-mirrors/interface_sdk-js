@@ -16,7 +16,7 @@
  */
 
 /**
- * @file
+ * @file UIContext实例
  * @kit ArkUI
  */
 import font from './@ohos.font';
@@ -66,7 +66,8 @@ import { Scroller } from '@ohos.arkui.component';
 import { ResourceStr, SizeOptions, VoidCallback } from './arkui/component/units';
 
 import { KeyProcessingMode } from '@ohos.arkui.component';
-import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType } from './arkui/component/enums';
+import { Nullable, Color, FontStyle, WidthBreakpoint, HeightBreakpoint, PixelRoundMode, RawInputEventType,
+  ModifierKey, FunctionKey } from './arkui/component/enums';
 
 import { TextMenuOptions, TextLayoutOptions, StyledString, Paragraph } from '@ohos.arkui.component';
 import { TimePickerDialogOptions } from './arkui/component/timePicker';
@@ -89,7 +90,13 @@ import { GestureEvent, GestureRecognizer } from '@ohos.arkui.component';
 import { ResourceStr, SizeOptions, VoidCallback } from '@ohos.arkui.component';
 
 /**
- * class Font
+ * Font用于管理自定义字体和系统字体信息，支持注册自定义字体、获取系统字体列表、查询字体详细信息等功能，适用于需要在应用中使用自定义字体或查询系统字体资源的场景。
+  *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getFont()]{@link UIContext.getFont}方法获取到Font对象，再通过该对象调用对应方法。
+ * >
+ * > - 推荐使用字体引擎的[loadFontSync()]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}接口注册自定义字体。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -107,8 +114,15 @@ export declare class Font {
   registerFont(options: font.FontOptions): void;
 
   /**
-   * Gets a list of fonts supported by system.
-   * @returns { Array<string> } A list of font names
+   * 获取系统支持的字体列表。
+   *
+   * 该接口仅在PC/2in1设备上生效，在其他设备上返回空数组。
+   *
+   * > **说明**
+   * > 推荐使用[getSystemFontFullNamesByType()]{@link
+   * @ohos.graphics.text:text.getSystemFontFullNamesByType}接口获取系统最新支持的字体列表数据。
+   *
+   * @returns { Array<string> } 系统支持的字体名称列表，返回的名称可用于getFontByName方法查询对应字体的详细信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -135,7 +149,11 @@ import { AlertDialogParamWithConfirm, AlertDialogParamWithButtons, AlertDialogPa
 import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui.component';
 
 /**
- * class MediaQuery
+ * 提供根据不同媒体类型定义不同的样式。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMediaQuery()]{@link getMediaQuery}方法获取MediaQuery实例，再通过此实例调用对应方法。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -143,10 +161,11 @@ import { TextPickerDialogOptions, TextPickerDialogOptionsExt } from '@ohos.arkui
  */
 export declare class MediaQuery {
   /**
-   * Sets the media query criteria and returns the corresponding listening handle
+   * 设置媒体查询的查询条件，并返回对应的监听句柄。
    *
-   * @param { string } condition - media conditions
-   * @returns { mediaQuery.MediaQueryListener } the corresponding listening handle
+   * @param { string } condition - 媒体查询的匹配条件，
+   * 具体可参考[媒体查询语法规则](docroot:../../ui/arkts-layout-development-media-query.md#语法规则)。
+   * @returns { mediaQuery.MediaQueryListener } 媒体事件监听句柄，用于注册和去注册监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1323,13 +1342,7 @@ export interface OrderOverlayOptions {
 export declare type NodeIdentity = string | int;
 
 /**
- * An enumeration type that identifies the current node's rendering state. The UI components used in
- * the application are automatically managed by the system and controlled for participation in graphical
- * rendering by either mounting them onto the render tree or removing them from it. Only nodes that
- * participate in graphical rendering have the potential to be displayed. However, participating in
- * rendering does not equal to the node's visibility, as there may be many occlusion scenarios in the
- * actual implementation of the application. Nevertheless, if a node does not participate in rendering,
- * it will definitely not be visible.
+ * 节点的渲染状态。
  *
  * @enum { number } NodeRenderState
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1374,6 +1387,110 @@ export const enum NodeRenderState {
  * @since 26.0.0 static
  */
 export declare type NodeRenderStateChangeCallback = (state: NodeRenderState, node?: FrameNode) => void;
+
+/**
+ * 定义可通过节点敏感输入监听器上报的输入事件类型。
+ * 事件对象由NodeSensitiveInputInfo中与该类型匹配的成员字段承载；
+ * 例如，取值为**TOUCH**时，事件对象由**touchEvent**承载。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export const enum NodeSensitiveInputEventType {
+  /**
+   * 上报的事件为触摸事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TOUCH = 0,
+
+  /**
+   * 上报的事件为鼠标事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  MOUSE = 1,
+
+  /**
+   * 上报的事件为按键事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  KEY = 2
+}
+
+/**
+ * 定义输入事件分发到**nodeIdentity**指定节点前上报的信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface NodeSensitiveInputInfo {
+  /**
+   * 事件是否为Agent生成的事件。**true**表示该事件由系统Agent生成，或由具有
+   * ohos.permission.CONTROL_COMPONENT权限的应用注入；**false**表示用户生成的输入事件或其他注入事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  isAgent: boolean;
+
+  /**
+   * 上报的输入事件类型。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  type: NodeSensitiveInputEventType;
+
+  /**
+   * 触摸事件，仅当**type**为**NodeSensitiveInputEventType.TOUCH**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  touchEvent?: TouchEvent;
+
+  /**
+   * 鼠标事件，仅当**type**为**NodeSensitiveInputEventType.MOUSE**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  mouseEvent?: MouseEvent;
+
+  /**
+   * 按键事件，仅当**type**为**NodeSensitiveInputEventType.KEY**时有效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  keyEvent?: KeyEvent;
+}
+
+/**
+ * 定义监听指定节点输入事件的回调类型。
+ *
+ * @param { NodeSensitiveInputInfo } info - 即将分发到节点的输入事件信息。
+ * @param { FrameNode } [node] - 接收输入事件的组件；若组件已释放，则返回**null**。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare type NodeSensitiveInputCallback = (info: NodeSensitiveInputInfo, node?: FrameNode) => void;
 
 /**
  * 表示触发的手势回调阶段的枚举类型，对应
@@ -1577,11 +1694,10 @@ export declare class UIObserver {
     ): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdate`.
+   * 取消通过监听选项监听NavDestination组件的状态变化。
    *
-   * @param { observer.NavDestinationSwitchObserverOptions } options - The options object.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type and navigation ID will be removed.
+   * @param { observer.NavDestinationSwitchObserverOptions } options - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调。不指定具体的回调函数时，取消options指定的Navigation上所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1603,10 +1719,9 @@ export declare class UIObserver {
   onNavDestinationUpdate(callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdate`.
+   * 取消监听NavDestination组件的状态变化。
    *
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消所有NavDestination组件状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1626,11 +1741,10 @@ export declare class UIObserver {
   onNavDestinationUpdateByUniqueId(navigationUniqueId: int, callback: Callback<observer.NavDestinationInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationUpdateByUniqueId`.
+   * 取消通过Navigation的uniqueId监听NavDestination组件的状态变化。
    *
-   * @param { int } navigationUniqueId - The uniqueId of the navigation.
-   * @param { Callback<observer.NavDestinationInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { int } navigationUniqueId - 指定监听的Navigation的uniqueId，可以通过queryNavigationInfo获取。
+   * @param { Callback<observer.NavDestinationInfo> } [callback] - 需要取消的监听回调，不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1650,11 +1764,11 @@ export declare class UIObserver {
   onScrollEvent(options: observer.ObserverOptions, callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听指定id的滚动组件滚动事件的开始和结束。
    *
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type and scroll ID will be removed.
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 回调函数。返回滚动事件的信息。
+   *     不传参数时，取消该id下所有滚动事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1673,10 +1787,10 @@ export declare class UIObserver {
   onScrollEvent(callback: Callback<observer.ScrollEventInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onScrollEvent()`.
+   * 取消监听所有滚动组件滚动事件的开始和结束。
    *
-   * @param { Callback<observer.ScrollEventInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type will be removed.
+   * @param { Callback<observer.ScrollEventInfo> } [callback] - 需要被注销的回调函数。
+   *     若不指定具体的回调函数，则注销该UIContext下所有scrollEvent事件监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1695,10 +1809,9 @@ export declare class UIObserver {
   onRouterPageUpdate(callback: Callback<observer.RouterPageInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onRouterPageUpdate`.
+   * 取消监听router中page页面的状态变化。
    *
-   * @param { Callback<observer.RouterPageInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type will be removed.
+   * @param { Callback<observer.RouterPageInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有router中page页面状态变化的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1717,10 +1830,10 @@ export declare class UIObserver {
   onDensityUpdate(callback: Callback<observer.DensityInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听屏幕像素密度的变化。
    *
-   * @param { Callback<observer.DensityInfo> } [callback] - The callback function to remove. If not provided, all
-   *     callbacks for the given event type will be removed.
+   * @param { Callback<observer.DensityInfo> } [callback] - 需要被注销的回调函数。若不指定具体的回调函数，则注销该
+   *         [UIContext]{@link @ohos.arkui.UIContext}下所有屏幕像素密度变化事件监听。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1738,10 +1851,9 @@ export declare class UIObserver {
   onWillDraw(callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧绘制指令下发情况。
    *
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。不传参数时，取消所有绘制指令下发事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1759,10 +1871,9 @@ export declare class UIObserver {
   onDidLayout(callback: Callback<void>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听每一帧布局完成情况。
    *
-   * @param { Callback<void> } [callback] - The callback function to remove. If not provided, all callbacks for the
-   *     given event type will be removed.
+   * @param { Callback<void> } [callback] - 需要被注销的回调函数。不传参数时，取消所有布局完成的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1781,10 +1892,9 @@ export declare class UIObserver {
   onNavDestinationSwitch(callback: Callback<observer.NavDestinationSwitchInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationSwitch`.
+   * 取消监听Navigation的页面切换事件。
    *
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有Navigation页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1807,11 +1917,10 @@ export declare class UIObserver {
   ): void;
 
   /**
-   * Removes a callback function that was previously registered with `onNavDestinationSwitch`.
+   * 取消通过监听选项监听Navigation的页面切换事件。
    *
-   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - Options.
-   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - The callback function to remove.
-   *     If not provided, all callbacks for the given event type will be removed.
+   * @param { observer.NavDestinationSwitchObserverOptions } observerOptions - 页面切换监听选项，用于指定需要取消监听的Navigation组件，例如通过navigationId指定Navigation组件的id。
+   * @param { Callback<observer.NavDestinationSwitchInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消该Navigation上所有的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2016,6 +2125,39 @@ export declare class UIObserver {
   offNodeRenderState(nodeIdentity: NodeIdentity, callback?: NodeRenderStateChangeCallback): void;
 
   /**
+   * 注册回调，监听**nodeIdentity**指定节点的输入事件。注册后，在输入事件（触摸、鼠标或按键事件）
+   * 分发到节点前触发回调，无论该事件由用户还是Agent生成。可以通过**NodeSensitiveInputInfo**中的
+   * **isAgent**判断事件是否由系统Agent生成，或由具有ohos.permission.CONTROL_COMPONENT权限的应用注入。
+   *
+   * 即使事件最终未分发到节点，也会触发回调。例如，被**agentControlMode**阻止的Agent生成事件
+   * 仍会上报，以便感知对敏感控件的操控尝试。
+   *
+   * 仅上报命中测试目标为节点自身的事件；命中测试目标为子节点的事件不上报。
+   *
+   * 同一**nodeIdentity**可以注册多个回调，所有回调都会在输入事件分发前执行。如果节点不存在，
+   * 注册不生效，且不上报事件。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } callback - 输入事件分发到组件节点前执行的回调函数。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  onNodeSensitiveInput(nodeIdentity: NodeIdentity, callback: NodeSensitiveInputCallback): void;
+
+  /**
+   * 移除节点敏感输入监听回调。
+   *
+   * @param { NodeIdentity } nodeIdentity - 目标节点的标识。
+   * @param { NodeSensitiveInputCallback } [callback] - 待移除的回调函数。未传入此参数时，移除指定节点的
+   *     全部回调。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  offNodeSensitiveInput(nodeIdentity: NodeIdentity, callback?: NodeSensitiveInputCallback): void;
+
+  /**
    * 注册一个回调函数，当窗口大小布局断点改变时调用。
    * 此方法允许观察窗口大小断点的变化，可用于
    * 根据窗口尺寸调整UI布局。
@@ -2054,11 +2196,10 @@ export declare class UIObserver {
   onTabContentUpdate(options: observer.ObserverOptions, callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听指定Tabs组件id的TabContent页面切换事件。
    *
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.TabContentInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type and Tabs ID will be removed.
+   * @param { observer.ObserverOptions } options - 指定监听的Tabs组件的id。
+   * @param { Callback<observer.TabContentInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消options指定的Tabs组件上的所有TabContent页面切换事件监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2077,10 +2218,9 @@ export declare class UIObserver {
   onTabContentUpdate(callback: Callback<observer.TabContentInfo>): void;
 
   /**
-   * Removes a callback function that was previously registered with `on()`.
+   * 取消监听TabContent页面的切换事件。
    *
-   * @param { Callback<observer.TabContentInfo> } [callback] - The callback function to remove. If not provided,
-   *     all callbacks for the given event type and Tabs ID will be removed.
+   * @param { Callback<observer.TabContentInfo> } [callback] - 需要被注销的回调函数。不传参数时，取消所有TabContent页面切换事件的监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2622,7 +2762,7 @@ export interface AtomicServiceBar {
 }
 
 /**
- * Represents a dynamic synchronization scene.
+ * 提供组件自定义场景下相关帧率的配置，支持设置期望帧率范围和获取当前帧率配置，适用于动画、手势等需要动态调整帧率的场景，有助于优化渲染性能和功耗。动态同步场景用于将组件的帧率需求与系统帧率调度机制进行同步，开发者可通过场景类型区分不同的帧率需求（如动画场景、跟手场景），系统会根据当前激活的场景综合决策最终帧率。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -2630,9 +2770,9 @@ export interface AtomicServiceBar {
  */
 export declare class DynamicSyncScene {
   /**
-   * Sets the FrameRateRange of the DynamicSyncScene.
+   * 设置期望帧率范围。
    *
-   * @param { ExpectedFrameRateRange } range - The range of frameRate.
+   * @param { ExpectedFrameRateRange } range - 设置期望的帧率范围。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2640,9 +2780,9 @@ export declare class DynamicSyncScene {
   setFrameRateRange(range: ExpectedFrameRateRange): void;
 
   /**
-   * Gets the FrameRateRange of the DynamicSyncScene.
+   * 获取期望帧率范围。
    *
-   * @returns { ExpectedFrameRateRange } The range of frameRate.
+   * @returns { ExpectedFrameRateRange } 当前动态同步场景配置的期望帧率范围，包含期望的最小帧率(min)、期望的最大帧率(max)和期望的最优帧率(expected)信息。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2672,7 +2812,12 @@ export declare class SwiperDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
- * Represents a dynamic synchronization scene of Marquee.
+ * 提供Marquee组件动态帧率的配置能力，支持在Marquee组件运行动画时动态调节帧率，优化性能和功耗，适用于需要在跑马灯场景中平衡动画流畅度和系统资源消耗的场景。
+ *
+ * > **说明**
+ * >
+ * > - MarqueeDynamicSyncScene继承自[DynamicSyncScene]{@link @ohos.arkui.UIContext:DynamicSyncScene}，
+ * 对应[Marquee]{@link @global:Marquee}的动态帧率场景。
  *
  * @extends DynamicSyncScene
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2681,7 +2826,7 @@ export declare class SwiperDynamicSyncScene extends DynamicSyncScene {
  */
 export declare class MarqueeDynamicSyncScene extends DynamicSyncScene {
   /**
-   * Type of the MarqueeDynamicSyncSceneType.
+   * Marquee的动态帧率场景类型。用于指定Marquee组件的动态帧率场景模式，不同场景类型对应不同的帧率调节策略，详见MarqueeDynamicSyncSceneType。
    * @type { MarqueeDynamicSyncSceneType }
    * @readonly
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2836,7 +2981,20 @@ export declare class DragController {
 }
 
 /**
- * class MeasureUtils
+ * MeasureUtils提供文本宽度、高度等相关计算能力，适用于文本自适应布局、多行文本截断、动态UI适配等场景。通过该类可精确计算文本尺寸，帮助开发者在布局前预判文本显示效果，避免文本溢出或布局错乱等问题。
+ *
+ * > **说明**
+ * >
+ * > - 以下API需先使用UIContext中的[getMeasureUtils()]{@link UIContext.getMeasureUtils}方法获取MeasureUtils实例，再通过此实例调用对应方法。
+ * >
+ * > - 如需更多测算文本参数，建议使用图形对应测算接口[Paragraph]{@link @ohos.graphics.text:text.Paragraph}接口。
+ * >
+ * > - 调用文本计算接口时，应避免同时用[ApplicationContext.setFontSizeScale](../apis-ability-kit/js-apis-inner-application-applicationCo
+ * ntext.md#applicationcontextsetfontsizescale13)设置应用字体大小缩放比例。为了确保时序正确性，建议开发者自行监听字体缩放变化，以保证测算结果的准确性。
+ * >
+ * > - 在测算裁剪后的文本时，由于某些Unicode字符（如emoji）的码位长度大于1，直接按字符串长度裁剪会导致不准确的结果。建议基于Unicode码点进行迭代处理，避免错误截断字符，确保测算结果准确，
+ * 请参考[measureTextSize]{@link MeasureUtils.measureTextSize}的示例2。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -3632,6 +3790,25 @@ export declare class ResolvedUIContext extends UIContext {
 }
 
 /**
+ * 应用级快捷键触发时的回调信息。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export interface ApplicationShortcutCallbackInfo {
+  /**
+   * 触发应用级快捷键的UI实例对应的UIContext。
+   *
+   * @type { UIContext }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  uiContext: UIContext;
+}
+
+/**
  * UIContext类
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3647,6 +3824,38 @@ export declare class UIContext {
    * @since 24 static
    */
   constructor();
+
+  /**
+   * 注册应用级键盘快捷键。
+   *
+   * 快捷键在应用内全局生效。快捷键触发时，回调参数包含触发该快捷键的UI实例对应的UIContext。
+   * 每次注册返回一个应用内唯一的正整数注册标识符，即使快捷键和回调相同，标识符也不同。
+   * 同一个快捷键的多次注册均被保留，仅最近一次未注销的注册生效。
+   * 注册标识符在应用运行期间不复用。
+   *
+   * @param { string | FunctionKey } value - 热键的单个字符（可以通过键盘输入的字符）或功能键。
+   * @param { Array<ModifierKey> } keys - 快捷键中的修饰键。
+   * @param { Callback<ApplicationShortcutCallbackInfo> } callback - 回调函数，返回触发热键的UI实例信息（ApplicationShortcutCallbackInfo）。
+   * @returns { int } 本次快捷键绑定的唯一注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static registerApplicationShortcut(value: string | FunctionKey, keys: Array<ModifierKey>,
+    callback: Callback<ApplicationShortcutCallbackInfo>): int;
+
+  /**
+   * 注销指定注册标识符对应的应用级键盘快捷键绑定。
+   *
+   * 仅移除该标识符对应的绑定，其他绑定不受影响。如果移除的是当前生效的绑定，
+   * 则最近一次仍未注销的同快捷键绑定恢复生效。标识符不存在或已注销时，不执行任何操作。
+   *
+   * @param { int } registrationId - 注册快捷键时返回的注册标识符。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  static unregisterApplicationShortcut(registrationId: int): void;
 
   /**
    * 获取与当前调用作用域关联的 UIContext
@@ -3715,9 +3924,9 @@ export declare class UIContext {
   static resolveUIContext(): ResolvedUIContext;
 
   /**
-   * get object font.
+   * 获取Font对象。
    *
-   * @returns { Font } object Font.
+   * @returns { Font } Font实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3767,9 +3976,9 @@ export declare class UIContext {
   isAvailable(): boolean;
 
   /**
-   * get object mediaQuery.
+   * 获取MediaQuery对象。
    *
-   * @returns { MediaQuery } object MediaQuery.
+   * @returns { MediaQuery } MediaQuery实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3843,9 +4052,9 @@ export declare class UIContext {
   getFilteredInspectorTreeById(id: string, depth: int, filters?: Array<string>): string;
 
   /**
-   * get object router.
+   * 获取Router对象。
    *
-   * @returns { Router } object Router.
+   * @returns { Router } 返回Router实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3933,10 +4142,11 @@ export declare class UIContext {
   getOverlayManagerOptions(): OverlayManagerOptions;
 
   /**
-   * Create an animator object for custom animation.
+   * 创建animator动画结果对象（AnimatorResult）。与[createAnimator]{@link @ohos.arkui.UIContext:UIContext#createAnimator}相比，新增对
+   * [SimpleAnimatorOptions]{@link @ohos.animator:SimpleAnimatorOptions}类型入参的支持。
    *
-   * @param { AnimatorOptions | SimpleAnimatorOptions } options - Options.
-   * @returns { AnimatorResult }
+   * @param { AnimatorOptions | SimpleAnimatorOptions } options - 定义动画选项。
+   * @returns { AnimatorResult } Animator结果接口。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -3948,10 +4158,33 @@ export declare class UIContext {
   createAnimator(options: AnimatorOptions | SimpleAnimatorOptions): AnimatorResult;
 
   /**
-   * Defining animation function
+   * 提供animateTo接口，用于为闭包代码中的状态变化添加过渡动画效果。
    *
-   * @param { AnimateParam } value - parameters for animation.
-   * @param { function } event - the closure base on which, the system will create animation automatically
+   * > **说明：**
+   * >
+   * > - 不推荐在aboutToAppear、aboutToDisappear中调用动画。
+   * >
+   * > - 如果在[aboutToAppear]{@link BaseCustomComponent#aboutToAppear}中调用动
+   * > 画，自定义组件内的build还未执行，内部组件还未创建，动画时机过早，动画属性没有初值无法对组件产生动画。
+   * >
+   * > - 执行[aboutToDisappear]{@link BaseCustomComponent#aboutToDisappear}
+   * > 时，组件即将销毁，不能在aboutToDisappear里面做动画。
+   * >
+   * > - 在组件出现和消失时，可以通过[组件内转场]{@link CommonMethod}添加动画效果。
+   * >
+   * > - 组件内转场不支持的属性，可以参考[显式动画]{@link CommonMethod}中的
+   * > [示例2](docroot://reference/apis-arkui/arkui-ts/ts-explicit-animation.md#示例2动画执行结束后组件消失)，使用animateTo实现动画执行结束后组件消失的效
+   * > 果。
+   * >
+   * > - 某些场景下，在[状态管理V2](docroot://ui/state-management/arkts-state-management-overview.md#状态管理v2)中使用animateTo动画，会产生异常效果，
+   * > 具体可参考：[在状态管理V2中使用animateTo动画效果异常](docroot://ui/state-management/arkts-new-local.md#在状态管理v2中使用animateto动画效果异常)。
+   * >
+   * > - UIAbility从前台切换至后台时会立即结束仍在步进中的有限循环动画，从而触发动画播放完成回调[onFinish]{@link AnimateParam}。
+   * >
+   * > - 在设置的开发者选项中关闭过渡动画，动画会当帧结束，onFinish动画播放完成回调会立即执行，请避免在回调中加入时序相关的功能逻辑。
+   *
+   * @param { AnimateParam } value - 设置动画效果相关参数。
+   * @param { function } event - 指定显示动效的闭包函数，在闭包函数中导致的状态变化系统会自动插入过渡动画。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4046,9 +4279,9 @@ export declare class UIContext {
   recycleInvisibleImageMemory(enabled: boolean): void;
 
   /**
-   * Run custom functions inside the UIContext scope.
+   * 在当前UIContext对应的UI实例作用域内执行传入的回调函数。
    *
-   * @param { function } callback - The function called through UIContext.
+   * @param { function } callback - 需要在当前UIContext对应的UI实例作用域内执行的回调函数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4095,11 +4328,12 @@ export declare class UIContext {
   getPixelRoundMode(): PixelRoundMode;
 
   /**
-   * Dispach keyboard event to the frameNode with inspector key.
+   * 按键事件应分发给指定的组件。为了确保行为的可预测性，目标组件必须位于分发组件的子树中。
    *
-   * @param { int | string } node - The uniqueId or inspector key of the target FrameNode.
-   * @param { KeyEvent } event - The keyboard event.
-   * @returns { boolean } Returns whether the key event is consumed.
+   * @param { int | string } node - 组件的id或者节点UniqueID。
+   * @param { KeyEvent } event - KeyEvent对象。
+   * @returns { boolean } - 按键事件是否成功分发给指定的组件。
+   *     true表示分发成功，false表示分发失败。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4134,10 +4368,10 @@ export declare class UIContext {
   getMeasureUtils(): MeasureUtils;
 
   /**
-   * Defining keyframe animation function.
+   * 产生关键帧动画。该接口的使用说明请参考[keyframeAnimateTo]{@link CommonMethod}。
    *
-   * @param { KeyframeAnimateParam } param - overall animation parameters
-   * @param { Array<KeyframeState> } keyframes - all keyframe states
+   * @param { KeyframeAnimateParam } param - 关键帧动画的整体动画参数。
+   * @param { Array<KeyframeState> } keyframes - 所有的关键帧状态的列表。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4224,11 +4458,14 @@ export declare class UIContext {
   getNavigationInfoByUniqueId(id: int): observer.NavigationInfo | undefined;
 
   /**
-   * Dynamic dimming.
+   * 通过该方法设置组件的压暗程度。
    *
-   * @param { string } id - The id of FrameNode.
-   * @param { double } value - Compared to the original level of dimming.value range [0,1],
-   *     set values less than 0 to 0 and values greater than 1 to 1.
+   * > **说明：**
+   * >
+   * > 设置该属性后设置其他效果类属性会导致效果冲突。
+   *
+   * @param { string } id - 组件id。
+   * @param { double } value - 组件压暗程度取值范围[0,1], 由0到1逐渐变亮。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
    * @stagemodelonly
@@ -4266,7 +4503,7 @@ export declare class UIContext {
   getComponentSnapshot(): ComponentSnapshot;
 
   /**
-   * Converts a value in vp units to a value in px.
+   * 将vp单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4276,7 +4513,7 @@ export declare class UIContext {
   vp2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in vp.
+   * 将px单位的数值转换为以vp为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4286,7 +4523,7 @@ export declare class UIContext {
   px2vp(value: double): double;
 
   /**
-   * Converts a value in fp units to a value in px.
+   * 将fp单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4296,7 +4533,7 @@ export declare class UIContext {
   fp2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in fp.
+   * 将px单位的数值转换为以fp为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4306,7 +4543,7 @@ export declare class UIContext {
   px2fp(value: double): double;
 
   /**
-   * Converts a value in lpx units to a value in px.
+   * 将lpx单位的数值转换为以px为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4316,7 +4553,7 @@ export declare class UIContext {
   lpx2px(value: double): double;
 
   /**
-   * Converts a value in px units to a value in lpx.
+   * 将px单位的数值转换为以lpx为单位的数值。
    * @param { double } value
    * @returns { double }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4390,22 +4627,34 @@ export declare class UIContext {
   getWindowHeightBreakpoint(): HeightBreakpoint;
 
   /**
-   * Open the BindSheet.
+   * 创建并弹出以bindSheetContent作为内容的半模态页面，使用Promise异步回调。通过该接口弹出的半模态页面样式完全按照bindSheetContent中设置的样式显示。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } [sheetOptions] - The options of sheet.
-   * @param { int } [targetId] - The uniqueId of the FrameNode to which BindSheet is attached.
+   * > **说明：**
+   * >
+   * > 1. 使用该接口时，若未传入有效的targetId，则不支持设置SheetOptions.preferType为POPUP模式、不支持设置SheetOptions.mode为EMBEDDED模式。
+   * >
+   * > 2. 由于[updateBindSheet]{@link UIContext#updateBindSheet}和[closeBindSheet]{@link UIContext#closeBindSheet}依赖
+   * > bindSheetContent去更新或者关闭指定的半模态页面，开发者需自行维护传入的bindSheetContent。
+   * >
+   * > 3. 不支持设置SheetOptions.UIContext。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } [sheetOptions] - 半模态页面样式。<br/>**说明：** <br/>1. 不支持设置SheetOptions.uiContext，该属性的值固定为当前实例的
+   *     UIContext。<br/>2. 若不传递targetId，则不支持设置SheetOptions.preferType为POPUP样式，若设置了POPUP样式则使用CENTER样式替代。<br/>3. 若不传递
+   *     targetId，则不支持设置SheetOptions.mode为EMBEDDED模式，默认为OVERLAY模式。<br/>4. 其余属性的默认值参考[SheetOptions]{@link SheetOptions}文
+   *     档。
+   * @param { int } [targetId] - 需要绑定组件的ID，若不指定则不绑定任何组件。id不存在时返回错误码120004。在传入undefined时返回错误码401。
    *     <br>Value range:(0, +∞)
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120002 - The bindSheetContent already exists.
-   * @throws { BusinessError } 120004 - The targetId does not exist.
-   * @throws { BusinessError } 120005 - The node of targetId is not in the component tree.
-   * @throws { BusinessError } 120006 - The node of targetId is not a child of the page node or NavDestination node.
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120002 - 内容节点对应半模态页面已存在。
+   * @throws { BusinessError } 120004 - 指定的targetId不存在。
+   * @throws { BusinessError } 120005 - 指定的targetId对应的节点未挂载在组件树上。
+   * @throws { BusinessError } 120006 - 指定的targetId对应的节点并不是page节点或NavDestination节点的子节点。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4413,20 +4662,24 @@ export declare class UIContext {
   openBindSheet(bindSheetContent: ComponentContentBase, sheetOptions?: SheetOptions, targetId?: int): Promise<void>;
 
   /**
-   * Update the BindSheet with sheetOptions.
+   * 更新bindSheetContent对应的半模态页面的样式，使用Promise异步回调。
    *
-   * @param { ComponentContentBase } bindSheetContent - The content of BindSheet.
-   * @param { SheetOptions } sheetOptions - The update options of sheet.
-   * @param { boolean } [partialUpdate] - If true, only the specified properties in the sheetOptions are updated,
-   *     otherwise the rest of the properties are overwritten with the default values.
-   *     Default value is false.
-   * @returns { Promise<void> } The promise returned by the function.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     <br> 1. Mandatory parameters are left unspecified.
-   *     <br> 2. Incorrect parameters types.
-   *     <br> 3. Parameter verification failed.
-   * @throws { BusinessError } 120001 - The bindSheetContent is incorrect.
-   * @throws { BusinessError } 120003 - The bindSheetContent cannot be found.
+   * > **说明：**
+   * >
+   * > 不支持更新SheetOptions.UIContext、SheetOptions.mode、回调函数。
+   *
+   * @param { ComponentContentBase } bindSheetContent - 半模态页面中显示的组件内容。
+   * @param { SheetOptions } sheetOptions - 半模态页面样式。<br/>**说明：** <br/>不支持更新SheetOptions.uiContext、SheetOptions.mode、回调函
+   *     数。
+   * @param { boolean } [partialUpdate] - 半模态页面更新方式，默认值为false。<br/>**说明：** <br/>1. true为增量更新，保留当前值，更新SheetOptions中的指定属
+   *     性。<br/>2. false为全量更新，除SheetOptions中的指定属性，其他属性恢复默认值。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 401 - 参数错误。可能的原因：
+   *     <br> 1. 必填参数未指定。
+   *     <br> 2. 参数类型不正确。
+   *     <br> 3. 参数验证失败。
+   * @throws { BusinessError } 120001 - 内容节点对应半模态页面错误。
+   * @throws { BusinessError } 120003 - 无法找到内容节点对应的半模态页面。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4451,9 +4704,9 @@ export declare class UIContext {
   closeBindSheet(bindSheetContent: ComponentContentBase): Promise<void>;
 
   /**
-   * Post a frame callback to run on the next frame.
+   * 注册一个回调，仅在下一帧渲染时调用。
    *
-   * @param { FrameCallback } frameCallback - The frame callback to run on the next frame.
+   * @param { FrameCallback } frameCallback - 下一帧需要执行的回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4461,10 +4714,10 @@ export declare class UIContext {
   postFrameCallback(frameCallback: FrameCallback): void;
 
   /**
-   * Post a frame callback to run on the next frame after the specified delay.
+   * 注册一个回调，在延迟一段时间后的下一帧进行渲染时执行。
    *
-   * @param { FrameCallback } frameCallback - The frame callback to run on the next frame.
-   * @param { long } delayTime - The delay time in milliseconds,
+   * @param { FrameCallback } frameCallback - 下一帧需要执行的回调。
+   * @param { long } delayTime - 延迟的时间，以毫秒为单位。传入null、undefined或小于0的值，会按0处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4483,9 +4736,7 @@ export declare class UIContext {
   requireDynamicSyncScene(id: string): Array<DynamicSyncScene>;
 
   /**
-   * Clear the cache generated by using $r/$rawfile to retrieve resources in HSP. This cache is used to accelerate the
-   * process of repeatedly loading resources. Clearing this cache may slow down the loading speed of resources during
-   * page overload.
+   * 清除跨模块（HSP包）访问资源时生成的资源对象缓存。清除缓存后，下次访问该模块资源的加载时间会增加。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -4495,9 +4746,10 @@ export declare class UIContext {
   clearResourceCache(): void;
 
   /**
-   * Checks whether current font scale follows the system.
+   * 获取当前UI上下文是否跟随系统字体倍率。
    *
-   * @returns { boolean } Returns true if current font scale follows the system; returns false otherwise.
+   * @returns { boolean } - 当前UI上下文是否跟随系统字体倍率。
+   *     true表示UI上下文跟随系统倍率，false表示UI上下文不跟随系统倍率。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4515,7 +4767,7 @@ export declare class UIContext {
   getMaxFontScale(): double;
 
   /**
-   * Bind tabs to scrollable container component to automatically hide tab bar.
+   * 将页签绑定到可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -4526,7 +4778,7 @@ export declare class UIContext {
   bindTabsToScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Unbind tabs from scrollable container component.
+   * 将页签从可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } scroller - The controller of the scrollable container component.
@@ -4537,7 +4789,7 @@ export declare class UIContext {
   unbindTabsFromScrollable(tabsController: TabsController, scroller: Scroller): void;
 
   /**
-   * Bind tabs to nested scrollable container components to automatically hide tab bar.
+   * 将页签绑定到嵌套可滚动容器组件，自动隐藏页签栏。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -4549,7 +4801,7 @@ export declare class UIContext {
   bindTabsToNestedScrollable(tabsController: TabsController, parentScroller: Scroller, childScroller: Scroller): void;
 
   /**
-   * Unbind tabs from nested scrollable container components.
+   * 将页签从嵌套可滚动容器组件解绑。
    *
    * @param { TabsController } tabsController - The controller of the tabs.
    * @param { Scroller } parentScroller - The controller of the parent scrollable container component.
@@ -4572,10 +4824,9 @@ export declare class UIContext {
   enableSwipeBack(enabled: boolean | undefined): void;
 
   /**
-   * Sets the component freezing flag based on the component id to prevent the
-   * UI component from marking and updating dirty areas.
-   * @param { string } id - Id of the frame node.
-   * @param { boolean } isFrozen  - whether the component is frozen.
+   * 通过id设置组件冻结状态，防止组件被标记为脏从而触发布局更新。
+   * @param { string } id - 组件的id。
+   * @param { boolean } isFrozen - 是否设置冻结。<br/>true表示设置冻结，false表示设置不冻结。<br/>默认值为false。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -4608,10 +4859,15 @@ export declare class UIContext {
   getTextMenuController(): TextMenuController;
 
   /**
-   * Create a UI instance singleton without window and get its UIContext object.
+   * 创建一个不依赖窗口的UI实例，并返回其UI上下文。该接口所创建的UI实例是单例。
    *
-   * @param { common.UIAbilityContext | common.ExtensionContext } context - UIAbilityContext or ExtensionContext.
-   * @returns { UIContext | undefined } object UIContext, or undefined when failed.
+   * > **说明：**
+   * >
+   * > 返回的UI上下文只可用于创建[自定义节点](docroot://ui/arkts-user-defined-node.md)，不能执行其他UI操作。
+   *
+   * @param { common.UIAbilityContext | common.ExtensionContext } context - [UIAbility]{@link @ohos.app.ability.UIAbility}或
+   *     [ExtensionAbility]{@link @ohos.app.ability.ExtensionAbility:ExtensionAbility}所对应的上下文环境。
+   * @returns { UIContext | undefined } 创建的UI实例的上下文，创建失败时返回undefined。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. The number of parameters is incorrect.
    * <br> 2. Invalid parameter type of context.
@@ -4624,7 +4880,7 @@ export declare class UIContext {
   static createUIContextWithoutWindow(context: common.UIAbilityContext | common.ExtensionContext) : UIContext | undefined;
 
   /**
-   * Destroy the UI instance singleton without window.
+   * 销毁[createUIContextWithoutWindow]{@link UIContext#createUIContextWithoutWindow}创建的UI实例。
    *
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4639,10 +4895,10 @@ export declare class UIContext {
    * 如果缓存上限设置过高，存在内存开销过大的风险。
    * 建议根据实际需要进行配置。
    *
-   * @param { int } count - The cache limit of resource manager for HSP, must be non-negative integers.
+   * @param { int } count - The cache limit of resource manager for HSP, must be non negative integers.
    * @throws { BusinessError } 100101 - The parameter is less than 0.
-   * @throws { BusinessError } 100102 - The parameter value cannot be a floating-point number.
-   * @throws { BusinessError } 100103 - The function cannot be called from a non-main thread.
+   * @throws { BusinessError } 100102 - The parameter value cannot be a floating point number.
+   * @throws { BusinessError } 100103 - The function cannot be called from a non main thread.
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4743,7 +4999,8 @@ export declare class UIContext {
  */
 export const enum KeyboardAvoidMode {
   /**
-   * Default Type, offset the whole page when keyBoard height changed.
+   * 上抬模式。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4751,7 +5008,8 @@ export const enum KeyboardAvoidMode {
   OFFSET = 0,
 
   /**
-   * Resize Type, resize the page when keyBoard height changed.
+   * 压缩模式。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4759,7 +5017,8 @@ export const enum KeyboardAvoidMode {
   RESIZE = 1,
 
   /**
-   * Offset Type, offset the whole page when caret position or keyboard height changed.
+   * 上抬模式，输入框光标位置发生变化时也会触发避让。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4767,7 +5026,8 @@ export const enum KeyboardAvoidMode {
   OFFSET_WITH_CARET = 2,
 
   /**
-   * Resize Type, resize the whole page when when caret position or keyboard height changed.
+   * 压缩模式，输入框光标位置发生变化时也会触发避让。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4775,7 +5035,8 @@ export const enum KeyboardAvoidMode {
   RESIZE_WITH_CARET = 3,
 
   /**
-   * None Type, nothing to do when keyboard height changed.
+   * 不避让键盘。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4801,7 +5062,7 @@ export const enum TextSelectionClearPolicy {
   KEEP_SELECTED_TEXT_ON_EXTERNAL_TOUCH = 0,
 
   /**
-   * Clear the selected text when touch outside of text component.
+   * 在文本组件外部单击时清除选定的文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4820,7 +5081,7 @@ export const enum TextSelectionClearPolicy {
  */
 export const enum SwiperDynamicSyncSceneType {
   /**
-   * Scene type is GESTURE.
+   * 手势操作场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4829,7 +5090,7 @@ export const enum SwiperDynamicSyncSceneType {
   GESTURE = 0,
 
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4839,7 +5100,7 @@ export const enum SwiperDynamicSyncSceneType {
 }
 
 /**
- * Enum of scene type for Marquee
+ * Marquee的动态帧率场景的类型枚举
  *
  * @enum { number } MarqueeDynamicSyncSceneType
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4848,7 +5109,7 @@ export const enum SwiperDynamicSyncSceneType {
  */
 export const enum MarqueeDynamicSyncSceneType {
   /**
-   * Scene type is ANIMATION.
+   * 动画过渡场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4886,7 +5147,13 @@ export const enum CustomKeyboardContinueFeature {
 }
 
 /**
- * class TextMenuController
+ * TextMenuController用于控制文本选择菜单的行为，支持设置菜单显示选项（如优先使用独立窗口显示）、屏蔽系统服务菜单项或指定菜单项，适用于需要自定义文本选择菜单显示方式或限制特定菜单功能的应用场景，
+ * 如在特定业务场景下禁用翻译、搜索等功能。
+ *
+ * > **说明**
+ * > - setMenuOptions接口为非静态API，
+ * 需先使用UIContext中的[getTextMenuController()]{@link UIContext#getTextMenuController}方法获取TextMenuController实例，再通过此实例调用对应方法。
+ * disableSystemServiceMenuItems和disableMenuItems为静态方法，可直接通过TextMenuController类调用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4904,10 +5171,39 @@ export declare class TextMenuController {
   setMenuOptions(options: TextMenuOptions): void;
 
   /**
-   * Disable all system service menus, such as translation and ai writer.
-   * True means disable, false means enable.
+   * 屏蔽文本选择菜单内所有系统服务菜单项。适用于需要完全自定义文本选择菜单的场景，例如企业安全应用中仅保留复制、剪切、全选、粘贴等基础功能，禁用搜索、翻译、分享等可能涉及数据外发的服务菜单。未通过该接口设置时，
+   * 默认不禁用系统服务菜单项。
    *
-   * @param { boolean } disable - flag to disable service menu items
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * > - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法[onCreateMenu]{@link
+   * > EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先调用的方法为准。例如：先调用disableSystemServiceMenuItems(true)，
+   * 再调用disableMenuItems([...])时，以disableSystemServiceMenuItems的设置为准；反之，先调用disableMenuItems([...])时，
+   * 则以disableMenuItems的设置为准。建议根据实际禁用范围需求选择使用其中一个方法，避免同时调用。
+   * > >
+   * >  - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * >  - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * >  - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
+   *
+   * @param { boolean } disable - 是否禁用系统服务菜单项。true表示禁用，false表示不禁用。
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4916,9 +5212,36 @@ export declare class TextMenuController {
   static disableSystemServiceMenuItems(disable: boolean): void;
 
   /**
-   * Disable menu action by action id.
+   * 屏蔽文本选择菜单内指定的系统服务菜单项。适用于需要按需禁用特定菜单功能的场景，例如禁用搜索和翻译菜单以简化用户界面或限制对外部服务的访问。未通过该接口设置时，默认不禁用任何菜单。
    *
-   * @param { Array<TextMenuItemId> } items - menu item id to disable
+   * > **说明**
+   * > >
+   * > - 此接口调用后整个应用进程都会生效。
+   * > >
+   * >  - 此接口可在[UIAbility]{@link @ohos.app.ability.UIAbility}使用。
+   * > >
+   * > - 此接口调用后将影响文本组件的接口[editMenuOptions]{@link TextAttribute#editMenuOptions}，其回调方法
+   * > [onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   * > >
+   * > - 涉及文本选择菜单的组件有 [Text]{@link @global:Text}、[TextArea]{@link @global:TextArea}、
+   * > [TextInput]{@link @global:TextInput}、[Search]{@link @global:Search}、
+   * > [RichEditor]{@link @global:RichEditor}、[Web]{@link @global:Web}。
+   * > >
+   * > - 系统服务菜单项指除[TextMenuItemId]{@link TextMenuItemId}中的复制、剪切、全选、粘贴以外的菜单项。
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时设置时，以先设置的disableSystemServiceMenuItems的设置结果为准。。
+   * > >
+   * > - 使用该接口时，全局生效，多次调用以最后一次为准。
+   * > >
+   * > - 可以通过以下三种方式恢复禁用菜单：
+   * > >
+   * > - 仅设置disableSystemServiceMenuItems(true)禁用菜单时，设置false即可恢复菜单；
+   * > >
+   * >  - 仅设置disableMenuItems禁用菜单时，设置为空数组即可恢复菜单；
+   * > >
+   * > - 当disableSystemServiceMenuItems与disableMenuItems同时使用时，则前者设置为false，后者设置为空数组，即可恢复菜单。
+   *
+   * @param { Array<TextMenuItemId> } items - 禁用菜单项的列表。仅支持禁用系统服务菜单项（复制、剪切、全选、粘贴除外），禁用一级菜单项会同时禁用其所有二级菜单项，不支持直接禁用二级菜单项。
    * @static
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

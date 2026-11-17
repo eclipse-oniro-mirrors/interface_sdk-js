@@ -375,9 +375,13 @@ declare namespace connection {
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be cancelled.
+   *     [since 26.2.0]
+   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.2.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.1.0]
+   * @publicapi [since 26.2.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -612,7 +616,7 @@ declare namespace connection {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { ScanMode } mode - Indicates the Bluetooth scan mode to set.
-   * @param { int } duration - Indicates the duration in seconds, in which the host is discoverable.
+   * @param { int } duration - Indicates the duration in milliseconds, in which the host is discoverable.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types. 3. Parameter verification failed.
@@ -1141,7 +1145,8 @@ declare namespace connection {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   function getBleMacByBrMac(brMac: string): string;
 
@@ -1524,7 +1529,7 @@ declare namespace connection {
   function offAclStateChange(callback?: Callback<AclStateResult>): void;
 
   /**
-   * Describes the class of a bluetooth device.
+   * Bond state change parameters.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -1544,7 +1549,7 @@ declare namespace connection {
      */
     deviceId: string;
     /**
-     * Profile connection state of the device.
+     * Bond state of the device.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -1921,7 +1926,7 @@ declare namespace connection {
    */
   interface DiscoveryResult {
     /**
-     * Identify of the discovery device
+     * Identify of the discovered device
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi [since 12 - 17]
@@ -1965,7 +1970,7 @@ declare namespace connection {
      */
     deviceClass: DeviceClass;
     /**
-     * The transport of the discovery device.
+     * The transport of the discovered device.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly

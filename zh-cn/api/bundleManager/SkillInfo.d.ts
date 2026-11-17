@@ -25,7 +25,8 @@
  * @syscap SystemCapability.BundleManager.BundleFramework.Core
  * @stagemodelonly
  * @atomicservice
- * @since 26.0.0 dynamic&static
+ * @since 26.0.0 dynamic
+ * @since 26.1.0 static
  */
 export interface SkillInfo {
   /**
@@ -36,7 +37,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly bundleName: string;
 
@@ -48,7 +50,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly moduleName: string;
 
@@ -60,7 +63,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly skillName: string;
 
@@ -72,7 +76,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly skillType: SkillType;
 
@@ -84,7 +89,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly skillPath: string;
 
@@ -96,7 +102,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly abilityName: string;
 
@@ -108,7 +115,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly versionCode: long;
 
@@ -120,7 +128,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly description?: string;
 
@@ -132,7 +141,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly srcEntries?: Array<string>;
 
@@ -144,7 +154,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly permissions?: Array<string>;
 
@@ -156,7 +167,8 @@ export interface SkillInfo {
    * @syscap SystemCapability.BundleManager.BundleFramework.Core
    * @stagemodelonly
    * @atomicservice
-   * @since 26.0.0 dynamic&static
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   readonly requestPermissions?: Array<string>;
 }
@@ -169,6 +181,7 @@ export interface SkillInfo {
  * @stagemodelonly
  * @atomicservice
  * @since 26.0.0 dynamic
+ * @since 26.1.0 static
  */
 export enum SkillType {
   /**
@@ -178,6 +191,7 @@ export enum SkillType {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   APP_SKILL = 0,
   /**
@@ -187,6 +201,7 @@ export enum SkillType {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
+   * @since 26.1.0 static
    */
   INDEPENDENT_SKILL = 1
 }

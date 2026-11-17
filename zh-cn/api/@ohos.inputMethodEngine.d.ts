@@ -1113,6 +1113,8 @@ declare namespace inputMethodEngine {
      * <br> > **说明：**
      * <br> >
      * <br> > 单个输入法应用仅允许创建一个[软键盘类型]{@link inputMethodEngine.PanelType}和一个[状态栏类型]{@link inputMethodEngine.PanelType}的面板。
+     * <br> > 不允许重复创建同类型面板，应复用已有面板，或先销毁已有面板再创建同类型面板。
+     * <br> > 面板创建失败时，动态实现沿用历史错误码1，静态实现沿用错误码12800004。实际失败原因请结合错误信息及原生日志排查。
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
@@ -1141,6 +1143,8 @@ declare namespace inputMethodEngine {
      * <br> > **说明：**
      * <br> >
      * <br> > 单个输入法应用仅允许创建一个[软键盘类型]{@link inputMethodEngine.PanelType}和一个[状态栏类型]{@link inputMethodEngine.PanelType}的面板。
+     * <br> > 不允许重复创建同类型面板，应复用已有面板，或先销毁已有面板再创建同类型面板。
+     * <br> > 面板创建失败时，动态实现沿用历史错误码1，静态实现沿用错误码12800004。实际失败原因请结合错误信息及原生日志排查。
      * <br> >
      * <br> > 输入法面板不支持创建子窗口。例如：不支持使用window.createWindow[设置应用子窗口](docroot://windowmanager/application-window-fa.md#设置应用子窗口)、
      * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
@@ -1174,10 +1178,15 @@ declare namespace inputMethodEngine {
      * <br>- 销毁的面板必须是已成功创建的面板对象。
      * <br>- 未正确销毁面板会导致资源泄漏，建议在面板使用完毕后及时调用destroyPanel()释放资源。
      *
+     * 销毁成功后，面板实例失效，不得复用。销毁旧实例不会移除同类型新面板的注册信息。
+     * 原生层销毁失败时，不会使仍有效的封装对象失效，也不会移除其注册信息，可先处理错误再重试。
+     * 窗口销毁失败沿用现有面板操作的错误码映射，返回错误码1。
+     *
      * @param { Panel } panel - 要销毁的面板对象。
      * @param { AsyncCallback<void> } callback - 回调函数。当输入法面板销毁成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1195,10 +1204,15 @@ declare namespace inputMethodEngine {
      * <br>- 销毁的面板必须是已成功创建的面板对象。
      * <br>- 未正确销毁面板会导致资源泄漏，建议在面板使用完毕后及时调用destroyPanel()释放资源。
      *
+     * 销毁成功后，面板实例失效，不得复用。销毁旧实例不会移除同类型新面板的注册信息。
+     * 原生层销毁失败时，不会使仍有效的封装对象失效，也不会移除其注册信息，可先处理错误再重试。
+     * 窗口销毁失败沿用现有面板操作的错误码映射，返回错误码1。
+     *
      * @param { Panel } panel - 要销毁的面板对象。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -2512,6 +2526,39 @@ declare namespace inputMethodEngine {
     setPreviewTextSync(text: string, range: Range): void;
 
     /**
+     * 设置带样式的预上屏文本。使用promise异步回调。
+     *
+     * @param { string } text - 预上屏文本。
+     * @param { Range } range - 预上屏文本范围。
+     * @param { PreviewTextStyle } style - 预上屏文本的样式。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyle(text: string, range: Range, style: PreviewTextStyle): Promise<void>;
+
+    /**
+     * 设置带样式的预上屏文本。
+     *
+     * @param { string } text - 预上屏文本。
+     * @param { Range } range - 预上屏文本范围。
+     * @param { PreviewTextStyle } style - 预上屏文本的样式。
+     * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800011 - text preview not supported.
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    setPreviewTextWithStyleSync(text: string, range: Range, style: PreviewTextStyle): void;
+
+    /**
      * 结束预上屏。使用promise异步回调。
      * <br>
      * <br> > **说明：**
@@ -2558,6 +2605,11 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > msgId最大限制256B，msgParam最大限制128KB。
      *
+     * 在ArkTS动态调用中，操作队列已满或排队等待超时时，将中止本次消息发送，并通过Promise拒绝返回BusinessError 12800003。
+     * 请等待操作完成后再发起其他请求。
+     * 异步任务创建失败或框架报告的任务提交失败使用BusinessError 12800008；取消操作时，若没有该操作的专用错误码，也使用此错误码。
+     * 如果无法准备异步输入或结果返回通道，且当前没有待处理的异常，则同步抛出BusinessError 12800008。
+     *
      * @param { string } msgId - 需要发送至已绑定当前输入法应用的编辑框应用的自定义数据的标识符。最大长度256字节。超出范围时返回错误码401。
      * @param { ArrayBuffer } [msgParam] - 需要发送至已绑定当前输入法应用的编辑框应用的自定义数据的消息体。最大大小128KB。超出范围时返回错误码401。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -2566,6 +2618,8 @@ declare namespace inputMethodEngine {
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to current input method application.
      *     3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
      * @throws { BusinessError } 12800014 - the input method is in basic mode.
      * @throws { BusinessError } 12800015 - the other side does not accept the request.
@@ -3299,6 +3353,7 @@ declare namespace inputMethodEngine {
    * <br>下列API均需使用
    * [createPanel]{@link inputMethodEngine.InputMethodAbility.createPanel(ctx: BaseContext, info: PanelInfo, callback: AsyncCallback<Panel>)}
    * 获取到Panel实例后，通过实例调用。
+   * destroyPanel成功销毁后，不得复用该实例，应创建并使用新的面板。
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 10 dynamic
@@ -3308,10 +3363,16 @@ declare namespace inputMethodEngine {
     /**
      * 为当前的输入法面板加载具体页面内容，使用callback异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板页面内容加载成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3321,10 +3382,16 @@ declare namespace inputMethodEngine {
     /**
      * 为当前的输入法面板加载具体页面内容，使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3334,11 +3401,17 @@ declare namespace inputMethodEngine {
     /**
      * 为当前的输入法面板加载与LocalStorage相关联的具体页面内容，使用callback异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { string } path - LocalStorage相关联的具体页面的路径。路径长度建议不超过1024字符。
      * @param { LocalStorage } storage - 存储单元，为应用程序范围内的可变状态属性和不可变状态属性提供存储。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板页面内容加载成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3348,11 +3421,17 @@ declare namespace inputMethodEngine {
     /**
      * 为当前面板加载与LocalStorage相关联的具体页面内容，使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @param { LocalStorage } storage - 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3368,11 +3447,17 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { long } width - 目标面板的宽度，单位为px。该参数应为大于或等于0的整数，不超出屏幕宽度。超出范围时返回错误码401。
      * @param { long } height - 目标面板的高度，单位为px。该参数应为大于或等于0的整数，不高于屏幕高度的0.7倍。超出范围时返回错误码401。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板大小改变成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3388,11 +3473,17 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { long } width - 目标面板的宽度，单位为px。该参数应为大于或等于0的整数，不超出屏幕宽度。超出范围时返回错误码401。
      * @param { long } height - 目标面板的高度，单位为px。该参数应为大于或等于0的整数，不高于屏幕高度的0.7倍。超出范围时返回错误码401。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3402,11 +3493,17 @@ declare namespace inputMethodEngine {
     /**
      * 移动面板位置，使用callback异步回调。[面板状态]{@link inputMethodEngine.PanelFlag}为固定态时，不产生实际移动效果。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { int } x - 横轴方向移动的值，单位为px。该参数应为整数。值大于0表示右移，小于0表示左移。超出屏幕范围时返回错误码401。
      * @param { int } y - 纵轴方向移动的值，单位为px。该参数应为整数。值大于0表示下移，小于0表示上移。超出屏幕范围时返回错误码401。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板位置移动成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3416,11 +3513,17 @@ declare namespace inputMethodEngine {
     /**
      * 移动面板位置，使用promise异步回调。[面板状态]{@link inputMethodEngine.PanelFlag}为固定态时，不产生实际移动效果。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { int } x - 横轴方向移动的值，值大于0表示右移，单位为px。该参数应为整数。
      * @param { int } y - 纵轴方向移动的值，值大于0表示下移，单位为px。该参数应为整数。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3445,6 +3548,10 @@ declare namespace inputMethodEngine {
     /**
      * 获取当前窗口的displayId，使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @returns { Promise<long> } Promise对象。返回窗口的displayId。
      * @throws { BusinessError } 12800002 - input method engine error. Possible causes:
      *     1.input method panel not created. 2.the input method application does not subscribe to related events.
@@ -3458,7 +3565,14 @@ declare namespace inputMethodEngine {
     /**
      * 显示当前输入法面板，使用callback异步回调。输入法应用与编辑框绑定成功后可正常调用。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { AsyncCallback<void> } callback - 回调函数。当面板显示成功，err为undefined，否则err为错误对象。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3468,7 +3582,14 @@ declare namespace inputMethodEngine {
     /**
      * 显示当前输入法面板，使用promise异步回调。输入法应用与编辑框绑定成功后可正常调用。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3478,7 +3599,13 @@ declare namespace inputMethodEngine {
     /**
      * 隐藏当前输入法面板，使用callback异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { AsyncCallback<void> } callback - 回调函数。当面板隐藏成功，err为undefined，否则err为错误对象。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3488,7 +3615,13 @@ declare namespace inputMethodEngine {
     /**
      * 隐藏当前输入法面板，使用promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @returns { Promise<void> } Promise对象，无返回结果。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3500,6 +3633,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'show' } type - 监听当前面板的状态类型，固定取值为'show'。
      * @param { function } callback - 回调函数。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3512,6 +3646,7 @@ declare namespace inputMethodEngine {
      * @param { function } [callback] - 取消订阅的回调函数。参数不填写时，取消订阅type对应的所有回调事件。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3522,6 +3657,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'hide' } type - 监听当前面板的状态类型，固定取值为'hide'。
      * @param { function } callback - 回调函数。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3534,6 +3670,7 @@ declare namespace inputMethodEngine {
      * @param { function } [callback] - 取消订阅的回调函数。参数不填写时，取消订阅type对应的所有回调事件。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3543,9 +3680,13 @@ declare namespace inputMethodEngine {
      * 将输入法应用的面板状态改变为其他[PanelFlag]{@link inputMethodEngine.PanelFlag}形态，仅对
      * [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType}生效。
      *
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3560,6 +3701,8 @@ declare namespace inputMethodEngine {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 11 dynamic
      * @since 23 static
@@ -3579,12 +3722,17 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      * @since 23 static
@@ -3610,12 +3758,17 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3633,11 +3786,16 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -3660,11 +3818,16 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -3685,10 +3848,15 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -3714,10 +3882,15 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
@@ -3735,11 +3908,16 @@ declare namespace inputMethodEngine {
      * <br> >
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { Array<window.Rect> } inputRegion - 面板内接收输入事件的区域。<br/>- 数组大小限制为[1, 4]。<br/>- 传入的热区位置是相对于输入法面板窗口左顶点的位置。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3763,6 +3941,7 @@ declare namespace inputMethodEngine {
      * @param { 'sizeChange' } type - 监听当前面板的大小是否产生变化，固定值为'sizeChange'。
      * @param { Callback<window.Size> } callback - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。 [since 12 - 14]
      * @param { SizeChangeCallback } callback - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。 [since 15]
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      */
@@ -3786,6 +3965,7 @@ declare namespace inputMethodEngine {
      * @param { ?Callback<window.Size> } [callback] - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。参数不填写时，取消订阅type对应的所有回调事
      *     件。 [since 12 - 14]
      * @param { ?SizeChangeCallback } [callback] - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。参数不填写时，取消订阅type对应的所有回调事件。 [since 15]
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      */
@@ -3802,6 +3982,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'sizeUpdate' } type - 监听当前面板的大小是否产生变化，固定取值为'sizeUpdate'。
      * @param { SizeUpdateCallback } callback - 面板大小变化时的回调，参数包含当前软键盘面板的宽度和高度。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 14 dynamic
@@ -3817,6 +3998,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'sizeUpdate' } type - 取消监听当前面板的大小是否产生变化，固定值为'sizeUpdate'。
      * @param { ?SizeUpdateCallback } [callback] - 回调函数。用于指定要取消监听的回调函数，如果不填则取消所有sizeUpdate监听。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 14 dynamic
@@ -3826,6 +4008,10 @@ declare namespace inputMethodEngine {
     /**
      * 设置输入法应用的沉浸模式。只能设置为不使用沉浸模式(NONE_IMMERSIVE)、浅色沉浸模式(LIGHT_IMMERSIVE)或深色沉浸模式(DARK_IMMERSIVE)。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { ImmersiveMode } mode - 沉浸模式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Incorrect parameter types; 2.Parameter verification failed.
@@ -3841,7 +4027,13 @@ declare namespace inputMethodEngine {
     /**
      * 获取输入法应用的沉浸模式。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @returns { ImmersiveMode } 沉浸模式。
+     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3863,6 +4055,10 @@ declare namespace inputMethodEngine {
      * <br> - [resize]{@link inputMethodEngine.Panel.resize(width: long, height: long, callback: AsyncCallback<void>)}(支持API
      * version 10)
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { ImmersiveEffect } effect - 沉浸效果。
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the capability;
      * 2. The chip does not support the capability; 3. A dependent service feature is not supported.
@@ -3891,6 +4087,7 @@ declare namespace inputMethodEngine {
      * @param { boolean } isKeepScreenOn - 是否设置屏幕常亮。true表示打开屏幕常亮，false表示关闭屏幕常亮。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 20 dynamic
      * @since 23 static
@@ -3900,12 +4097,17 @@ declare namespace inputMethodEngine {
     /**
      * 获取指定屏幕当前状态（例如：折叠或展开）下，当前输入法键盘状态（例如：悬浮或固定）下输入法软键盘相对系统面板的偏移区域。使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { number } displayId - 输入法键盘所在屏幕的displayId，可通过[getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}获取
      * @returns { Promise<SystemPanelInsets> } Promise对象。输入法键盘与系统面板的偏移区域。
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag. Possible causes:
      *     1. Current panel's type is not SOFT_KEYBOARD.  2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
      * @throws { BusinessError } 12800022 - invalid displayId.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 21 dynamic
      */
@@ -3914,12 +4116,17 @@ declare namespace inputMethodEngine {
     /**
      * 获取指定屏幕当前状态（例如：折叠或展开）下，当前输入法键盘状态（例如：悬浮或固定）下输入法软键盘相对系统面板的偏移区域。使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { long } displayId - 输入法键盘所在屏幕的displayId，可通过[getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}获取
      * @returns { Promise<SystemPanelInsets | null> } Promise对象。输入法键盘与系统面板的偏移区域。
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag. Possible causes:
      *     1. Current panel's type is not SOFT_KEYBOARD.  2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
      * @throws { BusinessError } 12800022 - invalid displayId.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3933,6 +4140,10 @@ declare namespace inputMethodEngine {
      * <br> > 不支持[PanelType](./js-apis-inputmethodengine.md#paneltype10)为SOFT_KEYBOARD类型且
      * [PanelFlag](./js-apis-inputmethodengine.md#panelflag10)状态为FLG_FIXED的面板。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { double } radius - 窗口边缘阴影的模糊半径，单位px，取值范围[0.0, +∞)，0.0时关闭窗口边缘阴影。
      * @param { string } color - 窗口边缘阴影的颜色，十六进制RGB或ARGB格式，不区分大小写，例如`#000000`或`#FF000000`。
      * @param { double } offsetX - 窗口边缘阴影X轴的偏移量，单位px。正值向右偏移，负值向左偏移。
@@ -3941,6 +4152,7 @@ declare namespace inputMethodEngine {
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
      *     Possible causes: Panel's flag is FLG_FIXED.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 22 dynamic
@@ -3951,11 +4163,17 @@ declare namespace inputMethodEngine {
     /**
      * 设置当前面板功能键颜色和功能键的背景颜色。使用Promise异步回调。
      *
+     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
+     * 请等待先前操作完成后再重试。 @staticonly
+     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { string | undefined } fillColor - 功能键的颜色，取值范围为[#01000000, #FFFFFFFF] 或 [#000000, #FFFFFF]，不支持具有完全透明Alpha通
      *     道（#00xxxxxx）的值。
      * @param { string | undefined } backgroundColor - 功能键的背景颜色，取值范围为[#01000000, #FFFFFFFF] 或 [#000000, #FFFFFF]，不支持具有完全
      *     透明Alpha通道（#00xxxxxx）的值。
      * @returns { Promise<void> } Promise对象。无返回结果。
+     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 22 dynamic
      * @since 23 static
@@ -3966,6 +4184,7 @@ declare namespace inputMethodEngine {
      * 监听当前面板显示状态，使用callback异步回调。
      *
      * @param { Callback<void> } callback - 回调函数。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3974,6 +4193,7 @@ declare namespace inputMethodEngine {
      * 取消监听当前输入法面板的隐藏状态，使用callback异步回调。
      *
      * @param { Callback<void> } [callback] - 取消订阅的回调函数。参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3983,6 +4203,7 @@ declare namespace inputMethodEngine {
      * 监听当前面板隐藏状态，使用callback异步回调。
      *
      * @param { Callback<void> } callback - 回调函数。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3991,6 +4212,7 @@ declare namespace inputMethodEngine {
      * 取消监听当前面板隐藏状态，使用callback异步回调。
      *
      * @param { Callback<void> } [callback] - 取消订阅的回调函数。参数不填写时，取消订阅type对应的所有回调事件。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -4000,6 +4222,7 @@ declare namespace inputMethodEngine {
      * 订阅面板尺寸更新（sizeUpdate）事件，当输入法面板尺寸发生变更时触发该事件，并执行指定的回调函数, 使用callback异步回调。
      *
      * @param { SizeUpdateCallback } callback - 面板尺寸更新时触发的回调函数，入参为面板尺寸信息对象。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -4009,6 +4232,7 @@ declare namespace inputMethodEngine {
      * 取消订阅面板尺寸更新（sizeUpdate）事件，停止监听输入法面板尺寸的变更动作, 使用callback异步回调。
      *
      * @param { SizeUpdateCallback } [callback] - 可选参数，需取消的目标回调函数：传入指定回调函数实例时，仅取消该回调的订阅；不传入时，取消所有sizeUpdate事件的订阅。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -4019,6 +4243,7 @@ declare namespace inputMethodEngine {
      * 监听当前面板大小变化，使用callback异步回调。
      *
      * @param { SizeChangeCallback } callback - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -4027,6 +4252,7 @@ declare namespace inputMethodEngine {
      * 取消监听当前面板大小变化，使用callback异步回调。
      *
      * @param { SizeChangeCallback } [callback] - 回调函数。返回当前软键盘面板的大小，包含宽度和高度值。
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -4987,6 +5213,73 @@ declare namespace inputMethodEngine {
      */
     CUSTOM = 3
   }
+  /**
+   * 枚举预上屏文本的下划线样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum UnderlineStyle {
+    /**
+     * 无下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    NONE = 0,
+    /**
+     * 实线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SOLID = 1,
+    /**
+     * 波浪线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    WAVY = 2,
+    /**
+     * 虚线下划线。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    DASHED = 3
+  }
+
+  /**
+   * 预上屏文本的样式。
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface PreviewTextStyle {
+    /**
+     * 下划线样式。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineStyle: UnderlineStyle;
+    /**
+     * 下划线颜色，格式为0xRRGGBB。可选参数，不传时下划线颜色应遵循应用主题颜色。若携带透明度，透明度无效，将被编辑器忽略。
+     * 取值限定为整数。默认值：缺省行为：不传递颜色给编辑框，由编辑框处理，默认跟随光标色。
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    underlineColor?: int;
 }
 
 export default inputMethodEngine;

@@ -284,7 +284,7 @@ export declare interface GaugeAttribute extends CommonMethod {
      * @returns { GaugeAttribute } 返回Gauge属性的实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
-     * @since 26.0.0 staticonly
+     * @since 26.0.1 staticonly
      */
     default setGaugeOptions(options: GaugeOptions): this;
 }

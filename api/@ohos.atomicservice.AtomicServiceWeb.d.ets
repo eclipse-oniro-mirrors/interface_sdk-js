@@ -25,11 +25,11 @@
  * 
  * ###### Attributes
  * 
- * The [universal attributes]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal attributes]{@link CommonMethod} are not supported.
  * 
  * ###### Events
  * 
- * The [universal events]{@link ./@internal/component/ets/common} are not supported.
+ * The [universal events]{@link CommonMethod} are not supported.
  *
  * @file Defines the atomicService web component
  * @kit ArkUI
@@ -45,8 +45,8 @@ import { Callback } from '@ohos.base';
  * >
  * > - You can preview how this component looks on a real device, but not in DevEco Studio Previewer.
  * >
- * > - If the **AtomicServiceWeb** component has [universal attributes]{@link ./@internal/component/ets/common}
- * > and [universal events]{@link ./@internal/component/ets/common} configured, the compiler toolchain automatically
+ * > - If the **AtomicServiceWeb** component has [universal attributes]{@link CommonMethod}
+ * > and [universal events]{@link CommonMethod} configured, the compiler toolchain automatically
  * > generates an additional \_\_Common\_\_ node and mounts the universal attributes and universal events on this node
  * > rather than the **AtomicServiceWeb** component itself. As a result, the configured universal attributes and
  * > universal events may fail to take effect or behave as intended. For this reason, avoid using universal attributes

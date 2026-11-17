@@ -37,7 +37,7 @@ declare namespace sendablePhotoAccessHelper {
    *
    * @param { Context } context - 传入Ability实例的Context。
    * @returns { PhotoAccessHelper } 相册管理模块的实例。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
    *     <br>3. Parameter verification failed.
@@ -321,7 +321,7 @@ declare namespace sendablePhotoAccessHelper {
      * .PhotoKeys}，例如：get title属性
      * fetchColumns: ['title']。
      * @returns { photoAccessHelper.MemberType } 获取PhotoAsset成员参数的值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -340,7 +340,7 @@ declare namespace sendablePhotoAccessHelper {
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
      *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -356,7 +356,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -375,11 +375,11 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<image.PixelMap> } Promise对象，返回缩略图的PixelMap。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -393,11 +393,11 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 12 dynamiconly
@@ -411,7 +411,7 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 12 dynamiconly
@@ -425,7 +425,7 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 14000011 - MediaLibrary inner fail. Possible causes:
-     *     <br>1. The PhotoAsset is not a valid PhotoAsset object.
+     *     <br>The PhotoAsset is not a valid PhotoAsset object.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -443,7 +443,7 @@ declare namespace sendablePhotoAccessHelper {
      * 获取文件检索结果中的文件总数。
      *
      * @returns { number } 检索到的文件总数。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -452,7 +452,7 @@ declare namespace sendablePhotoAccessHelper {
      * 检查结果集是否指向最后一行。
      *
      * @returns { boolean } 当读到最后一条记录后，后续没有记录返回true，否则返回false。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -461,7 +461,7 @@ declare namespace sendablePhotoAccessHelper {
      * 获取文件检索结果中的第一个文件资产。使用Promise异步回调。
      *
      * @returns { Promise<T> } Promise对象，返回结果集中第一个对象。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -473,7 +473,7 @@ declare namespace sendablePhotoAccessHelper {
      * 是否为最后一行。
      *
      * @returns { Promise<T> } Promise对象，返回结果集中下一个对象。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -482,7 +482,7 @@ declare namespace sendablePhotoAccessHelper {
      * 获取文件检索结果中的最后一个文件资产。使用Promise异步回调。
      *
      * @returns { Promise<T> } Promise对象，返回结果集中最后一个对象。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -492,11 +492,11 @@ declare namespace sendablePhotoAccessHelper {
      *
      * @param { number } index - 要获取的文件的索引，从0开始。
      * @returns { Promise<T> } Promise对象，返回结果集中指定索引的一个对象。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -505,7 +505,7 @@ declare namespace sendablePhotoAccessHelper {
      * 获取文件检索结果中的所有文件资产。使用Promise异步回调。
      *
      * @returns { Promise<Array<T>> } Promise对象，返回结果集中所有文件资产数组。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -513,7 +513,7 @@ declare namespace sendablePhotoAccessHelper {
     /**
      * 释放FetchResult实例并使其失效。释放后无法调用其他方法。
      *
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -774,7 +774,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<FetchResult<PhotoAsset>> } Promise对象，返回图片和视频数据结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -797,11 +797,11 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 14 dynamiconly
@@ -873,7 +873,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -899,7 +899,7 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 13 dynamiconly
@@ -908,7 +908,7 @@ declare namespace sendablePhotoAccessHelper {
   }
 
   /**
-   * Defines the shared photo asset
+   * 共享图片资产。
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @systemapi
@@ -916,7 +916,7 @@ declare namespace sendablePhotoAccessHelper {
    */
   interface SharedPhotoAsset extends lang.ISendable {
     /**
-     * File id of photo asset
+     * 图片资产标识id。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -924,7 +924,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     fileId: number;
     /**
-     * URI of photo asset
+     * 图片资产uri。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -932,7 +932,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     uri: string;
     /**
-     * Path data of photo asset
+     * 图片资产的路径数据。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -940,7 +940,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     data: string;
     /**
-     * Media type of photo asset
+     * 图片资产的媒体类型。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -948,7 +948,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     mediaType: PhotoType;
     /**
-     * Display name of photo asset
+     * 图片资产的显示名称。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -956,7 +956,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     displayName: string;
     /**
-     * Size of photo asset
+     * 图片资产文件大小。
      * 单位为： Byte，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -965,7 +965,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     size: number;
     /**
-     * Added date of photo asset
+     * 添加图片资产数据。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -974,7 +974,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateAdded: number;
     /**
-     * Modify date of photo asset
+     * 更改了图片资产数据。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -983,7 +983,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateModified: number;
     /**
-     * Duration of video photo asset
+     * 视频类型的图片资产时长。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -992,7 +992,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     duration: number;
     /**
-     * Width of photo asset
+     * 图片资产的像素宽度。
      * 单位为： px，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1001,7 +1001,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     width: number;
     /**
-     * Height of photo asset
+     * 图片资产的像素高度。
      * 单位为： px，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1010,7 +1010,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     height: number;
     /**
-     * DateTaken of photo asset
+     * 图片资产拍照后存入本地时间。
      * 单位为： ms，取值应为≥0的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1019,7 +1019,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateTaken: number;
     /**
-     * Orientation of photo asset
+     * 图片资产的旋转角度。
      * 单位为： deg，取值应为[0,359]内的整数。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -1028,7 +1028,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     orientation: number;
     /**
-     * Favorite state of photo asset
+     * 是否收藏了此图片。true表示已收藏，false表示未收藏。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1036,7 +1036,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     isFavorite: boolean;
     /**
-     * Title of photo asset
+     * 图片资产的标题。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1044,7 +1044,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     title: string;
     /**
-     * Position of photo asset
+     * 图片资产存在位置。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1052,7 +1052,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     position: PositionType;
     /**
-     * Trashed date of photo asset
+     * 图片资产是否在回收站中。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1060,7 +1060,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     dateTrashed: number;
     /**
-     * Hidden state of photo asset
+     * 图片资产是否隐藏。true表示已隐藏，false表示未隐藏。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1068,7 +1068,7 @@ declare namespace sendablePhotoAccessHelper {
      */
     hidden: boolean;
     /**
-     * User comment info of photo asset
+     * 图片资产的用户评论信息。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
@@ -1221,7 +1221,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<FetchResult<PhotoAsset>> } Promise对象，返回图片和视频数据结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1245,7 +1245,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<FetchResult<PhotoAsset>> } Promise对象，返回连拍照片数据结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1277,13 +1277,13 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 13900020 - Invalid argument.
      * @throws { BusinessError } 14000001 - Invalid display name.
-     * @throws { BusinessError } 14000011 - Internal system error.
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 12 dynamiconly
@@ -1309,13 +1309,13 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 13900020 - Invalid argument.
      * @throws { BusinessError } 14000001 - Invalid display name.
-     * @throws { BusinessError } 14000011 - Internal system error.
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 12 dynamiconly
@@ -1338,7 +1338,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<string> } Promise对象，返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1360,11 +1360,11 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<FetchResult<Album>> } Promise对象，返回获取相册的结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -1381,7 +1381,7 @@ declare namespace sendablePhotoAccessHelper {
      * @returns { Promise<FetchResult<Album>> } Promise对象，返回获取相册的结果集。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
@@ -1406,11 +1406,11 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 12 dynamiconly
@@ -1420,7 +1420,7 @@ declare namespace sendablePhotoAccessHelper {
      * 释放PhotoAccessHelper实例，当后续不需要使用PhotoAccessHelper实例中的方法时调用。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @since 12 dynamiconly
      */
@@ -1434,11 +1434,11 @@ declare namespace sendablePhotoAccessHelper {
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
      *     <br>3. Parameter verification failed.
-     * @throws { BusinessError } 14000011 - Internal system error
+     * @throws { BusinessError } 14000011 - MediaLibrary inner fail.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @systemapi
      * @since 14 dynamiconly
@@ -1529,7 +1529,7 @@ declare namespace sendablePhotoAccessHelper {
      * @stagemodelonly
      * @since 26.0.1 dynamiconly
      */
-    HIGH_REVIEW_RISK = 2,
+    HIGH_REVIEW_RISK = 2
   }
 }
 

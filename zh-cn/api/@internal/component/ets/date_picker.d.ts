@@ -216,7 +216,7 @@ declare interface DatePickerOptions {
   /**
    * 设置日期展示模式。适用于需要自定义日期展示列的场景，如仅需选择年月或月日。不传入时默认为DatePickerMode.DATE，显示年、月、日三列。
    *
-   * 在[DatePickerDialog]{@link ./date_picker}中，当
+   * 在[DatePickerDialog]{@link @global:DatePickerDialog}中，当
    * [DatePickerDialogOptions]{@link DatePickerDialogOptions}的showTime设置为true时，此参数不生效，默认显示年、月、日三列。
    * 这是为保证布局合理性，当showTime为true时会额外显示时间列。
    *
@@ -272,9 +272,9 @@ interface DatePickerInterface {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @extends CommonMethod [since 8 - 10]
  * @extends CommonMethod<DatePickerAttribute> [since 11]
@@ -1242,7 +1242,7 @@ declare interface DatePickerDialogOptions extends DatePickerOptions {
    * > 不同的材质具有不同的效果。关于ImmersiveMaterial的详细说明，请参考[SystemUiMaterial]{@link SystemUiMaterial}类型定义。
    * > - 该接口影响背景色[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、背景模糊
    * > [backgroundBlurStyle]{@link CommonMethod#backgroundBlurStyle(value: BlurStyle, options?: BackgroundBlurStyleOptions)}
-   * > 、背景模糊效果[backgroundBlurStyleOptions]{@link BackgroundBlurStyleOptions}、背景效果
+   * > 、背景模糊效果[backgroundBlurStyleOptions]{@link @global:BackgroundBlurStyleOptions}、背景效果
    * > [backgroundEffect]{@link CommonMethod#backgroundEffect(options: BackgroundEffectOptions)}、边框颜色
    * > [borderColor]{@link CommonMethod#borderColor}、边框宽度[borderWidth]{@link CommonMethod#borderWidth}、阴影
    * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}，当设置系统材质时，上述接口不生效。

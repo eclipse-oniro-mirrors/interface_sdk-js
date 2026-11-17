@@ -48,7 +48,7 @@ export interface CipherResponse {
  */
 export interface CipherRsaOptions {
   /**
-   * Action to perform. The options are as follows:
+   * Cipher operation type. The options are as follows:
    *
    * 1. **encrypt**: Encrypts data.
    * 2. **decrypt**: Decrypts data.
@@ -76,7 +76,7 @@ export interface CipherRsaOptions {
   text: string;
 
   /**
-   * RSA key. It is a public key in encryption and a private key in decryption.
+   * RSA key used for encryption or decryption. It is a public key in encryption and a private key in decryption.
    *
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly
@@ -136,7 +136,7 @@ export interface CipherRsaOptions {
  */
 export interface CipherAesOptions {
   /**
-   * Action to perform. The options are as follows:
+   * Cipher operation type. The options are as follows:
    *
    * 1. **encrypt**: Encrypts data.
    * 2. **decrypt**: Decrypts data.
@@ -256,7 +256,7 @@ export default class Cipher {
   /**
    * Encrypts or decrypts data using RSA.
    *
-   * @param { CipherRsaOptions } options - RSA options.
+   * @param { CipherRsaOptions } options - Parameters set for RSA encryption or decryption.
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly
    * @deprecated since 9
@@ -267,7 +267,7 @@ export default class Cipher {
   /**
    * Encrypts or decrypts data using AES.
    *
-   * @param { CipherAesOptions } options - AES options.
+   * @param { CipherAesOptions } options - Parameters set for AES encryption or decryption.
    * @syscap SystemCapability.Security.Cipher
    * @since 3 dynamiconly
    * @deprecated since 9

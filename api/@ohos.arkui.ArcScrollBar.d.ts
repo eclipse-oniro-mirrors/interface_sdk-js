@@ -57,18 +57,18 @@ declare interface ArcScrollBarOptions {
 /**
  * The **ArcScrollBar** component is an arc-shaped scroll bar suitable for scenarios that require an arc-shaped scroll
  * bar, such as circular screens. It is designed to be used together with scrollable components such as
- * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./@internal/component/ets/list},
- * [Grid]{@link ./@internal/component/ets/grid}, [Scroll]{@link ./@internal/component/ets/scroll}, and
- * [WaterFlow]{@link ./@internal/component/ets/water_flow}.
+ * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List},
+ * [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, and
+ * [WaterFlow]{@link @global:WaterFlow}.
  *
  * > **NOTE**
  * >
  * > - When the width and height of the **ArcScrollBar** component are not set, the **maxSize** value specified in its
- * > parent component [LayoutConstraint]{@link ./arkui/FrameNode:LayoutConstraint} is used as the width and height. If
+ * > parent component [LayoutConstraint]{@link @ohos.arkui.node:LayoutConstraint} is used as the width and height. If
  * > the parent component of the **ArcScrollBar** component contains scrollable components, such as
- * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./@internal/component/ets/list},
- * > [Grid]{@link ./@internal/component/ets/grid}, [Scroll]{@link ./@internal/component/ets/scroll}, or
- * > [WaterFlow]{@link ./@internal/component/ets/water_flow}, you are advised to set the width and height of the
+ * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List},
+ * > [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, or
+ * > [WaterFlow]{@link @global:WaterFlow}, you are advised to set the width and height of the
  * > **ArcScrollBar** component. Otherwise, the width and height of the component may be infinite.
  * >
  * > - This component can be used on phones, PCs/2-in-1 devices, tablets, TVs, and wearables. In API version 22 and
@@ -121,9 +121,9 @@ export declare const ArcScrollBarInstance: ArcScrollBarAttribute;
 /**
  * The **ArcScrollBar** component is an arc-shaped scroll bar suitable for scenarios that require an arc-shaped scroll
  * bar, such as circular screens. It is designed to be used together with scrollable components such as
- * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./@internal/component/ets/list},
- * [Grid]{@link ./@internal/component/ets/grid}, [Scroll]{@link ./@internal/component/ets/scroll}, and
- * [WaterFlow]{@link ./@internal/component/ets/water_flow}.
+ * [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List},
+ * [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, and
+ * [WaterFlow]{@link @global:WaterFlow}.
  *
  * > **NOTE**
  *
@@ -131,11 +131,11 @@ export declare const ArcScrollBarInstance: ArcScrollBarAttribute;
  * > earliest API version.
  * >
  * > - When the width and height of the **ArcScrollBar** component are not set, the **maxSize** value specified in its
- * > parent component [LayoutConstraint]{@link ./arkui/FrameNode:LayoutConstraint} is used as the width and height. If
+ * > parent component [LayoutConstraint]{@link @ohos.arkui.node:LayoutConstraint} is used as the width and height. If
  * > the parent component of the **ArcScrollBar** component contains scrollable components, such as
- * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link ./@internal/component/ets/list},
- * > [Grid]{@link ./@internal/component/ets/grid}, [Scroll]{@link ./@internal/component/ets/scroll}, or
- * > [WaterFlow]{@link ./@internal/component/ets/water_flow}, you are advised to set the width and height of the
+ * > [ArcList]{@link @ohos.arkui.ArcList}, [List]{@link @global:List},
+ * > [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll}, or
+ * > [WaterFlow]{@link @global:WaterFlow}, you are advised to set the width and height of the
  * > **ArcScrollBar** component. Otherwise, the width and height of the component may be infinite.
  * >
  * > - This component can be used on phones, PCs/2-in-1 devices, tablets, TVs, and wearables. In API version 22 and

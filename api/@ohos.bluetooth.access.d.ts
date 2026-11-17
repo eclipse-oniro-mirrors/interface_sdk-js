@@ -489,7 +489,16 @@ declare namespace access {
      * @since 20 dynamic
      * @since 23 static
      */
-    BLUETOOTH_SWITCH = 0
+    BLUETOOTH_SWITCH = 0,
+    /**
+     * Bluetooth Unpair dialog box.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BLUETOOTH_UNPAIR = 1
   }
 }
 

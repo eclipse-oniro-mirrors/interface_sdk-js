@@ -88,7 +88,7 @@ declare interface UIPickerComponentOptions {
  * > - The **UIPickerComponent** container currently does not support smartwatch devices. You can obtain the device type
  * > through **deviceInfo.deviceType** to determine whether the device is a smartwatch.
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -312,7 +312,7 @@ declare interface PickerIndicatorStyle {
    * **NOTE**
    *
    * 1. This attribute takes effect when **type** is **PickerIndicatorType.BACKGROUND**.
-   * 2. [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}: sets the size and unit of all four corner radii
+   * 2. [LengthMetrics]{@link @ohos.arkui.node:LengthMetrics}: sets the size and unit of all four corner radii
    * uniformly.
    * 3. [BorderRadiuses]{@link BorderRadiuses}: sets the size of the four corner radii separately (in vp).
    * 4. [LocalizedBorderRadiuses]{@link LocalizedBorderRadiuses}: sets the size and unit of the four corner radii
@@ -329,9 +329,9 @@ declare interface PickerIndicatorStyle {
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
- * In addition to the [universal events]{@link ./common}, the following events are supported.
+ * In addition to the [universal events]{@link CommonMethod}, the following events are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -476,7 +476,7 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
    * [height]{@link CommonMethod#height(value: Length)} attribute to ensure complete display.
    *
    * @param { Optional<LengthMetrics> } height - Height of an option.
-   *     <br>Unit: same as that of [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}.
+   *     <br>Unit: same as that of [LengthMetrics]{@link @ohos.arkui.node:LengthMetrics}.
    *     <br>Value range: [40vp, 64vp]
    *     <br>If the value is less than 40 vp or greater than 64 vp, the default value 40 vp is used.
    *     <br>If the value of height is undefined, the default value 40 vp is used.
@@ -512,6 +512,29 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
    * @since 26.0.0 dynamic
    */
   displayedItemCount(count: Optional<int>): UIPickerComponentAttribute;
+
+  /**
+   * Sets the text style of the selected item.
+   *
+   * @param { Optional<PickerComponentTextStyle> } style - Text style of the selected item.
+   *     <br>Default value:
+   *     <br>{
+   *     <br>color: $r('sys.color.font_primary'),
+   *     <br>font: {
+   *     <br>size: '20fp',
+   *     <br>weight: FontWeight.Normal
+   *     <br>},
+   *     <br>overflow: TextOverflow.Clip
+   *     <br>}.
+   *     <br>If the value of **style** is undefined, the default value is used.
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectedTextStyle(style: Optional<PickerComponentTextStyle>): UIPickerComponentAttribute;
 }
 
 /**
@@ -551,13 +574,13 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
  * > - The **UIPickerComponent** container currently does not support smartwatch devices. You can obtain the device type
  * > through **deviceInfo.deviceType** to determine whether the device is a smartwatch.
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * ###### Child Components
  *
  * - Multiple child components are supported.
- * - Supported child component types: [Text]{@link ./text}, [Image]{@link ./image}, [Row]{@link ./row}, and
- * [SymbolGlyph]{@link ./symbolglyph}.
+ * - Supported child component types: [Text]{@link @global:Text}, [Image]{@link @global:Image}, [Row]{@link @global:Row}, and
+ * [SymbolGlyph]{@link @global:SymbolGlyph}.
  * - Supported rendering control types: [if/else](docroot://ui/rendering-control/arkts-rendering-control-ifelse.md) and
  * [ForEach](docroot://ui/rendering-control/arkts-rendering-control-foreach.md).
  *

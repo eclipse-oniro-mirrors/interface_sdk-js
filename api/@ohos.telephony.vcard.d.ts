@@ -34,14 +34,16 @@ import type Context from './application/BaseContext';
  */
 declare namespace vcard {
   /**
-   * Imports a VCard file (that is, **.vcf** file) to the contact database. This API uses an asynchronous callback to
-   * return the result.
+   * Import the VCard file into the contact database. Applies to scenarios such as importing contacts in batches and
+   * restoring contact data after receiving VCard files from other devices or applications. Use the callback
+   * asynchronous callback.
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { string } filePath - URL of the vcard file (VCF).
+   * @param { string } filePath - Change the value to the VCF (VCard file) file address.
    * @param { int } accountId - Contact account ID.
+   *     <br>The value should be an integer.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
@@ -59,15 +61,17 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
-   * Imports a VCard file (that is, **.vcf** file) to the contact database. This API uses a promise to return the
-   * result.
+   * Import the VCard file into the contact database. Applies to scenarios such as importing contacts in batches and
+   * restoring contact data after receiving VCard files from other devices or applications. Use Promise asynchronous
+   * callbacks.
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { string } filePath - URL of the vcard file (VCF).
-   * @param { int } accountId - Contact account ID.
-   * @returns { Promise<void> } Promise used to return the operation result.
+   * @param { string } filePath - VCF (VCard file) file address.
+   * @param { int } [accountId] - Contact account ID. If this parameter is not transferred, the default account is used.
+   *     <br>The value should be an integer.
+   * @returns { Promise<void> } Promise object. No result is returned.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -84,13 +88,14 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, accountId?: int): Promise<void>;
 
   /**
-   * Imports a VCard file (that is, **.vcf** file) to the contact database. This API uses an asynchronous callback to
-   * return the result.
+   * Import the VCard file into the contact database. Applies to scenarios such as importing contacts in batches and
+   * restoring contact data after receiving VCard files from other devices or applications. Use the callback
+   * asynchronous callback.
    *
    * @permission ohos.permission.WRITE_CONTACTS and
    *     ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { string } filePath - URL of the vcard file (VCF).
+   * @param { string } filePath - Address of the VCF (VCard file) file.
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
@@ -108,13 +113,16 @@ declare namespace vcard {
   function importVCard(context: Context, filePath: string, callback: AsyncCallback<void>): void;
 
   /**
-   * Exports contacts as a vcard file (VCF). This API uses an asynchronous callback to return the result.
+   * Export contacts to a VCF (VCard file) file. This mode is applicable to scenarios such as contact data backup,
+   * cross-device contact migration, and contact sharing through files. Use the callback asynchronous callback.
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement.
+   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement. Used to filter the contact data to
+   *     be exported.
    * @param { VCardBuilderOptions } options - VCard version and encoding type.
-   * @param { AsyncCallback<string> } callback - Callback used to Address of the generated vcard file (VCF).
+   * @param { AsyncCallback<string> } callback - Callback function. Indicates the path of the generated VCF (VCard
+   *     file).
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -131,13 +139,15 @@ declare namespace vcard {
   function exportVCard(context: Context, predicates: dataSharePredicates.DataSharePredicates, options: VCardBuilderOptions, callback: AsyncCallback<string>): void;
 
   /**
-   * Exports contacts as a vcard file (VCF). This API uses a promise to return the result.
+   * Export contacts to a VCF (VCard file) file. This mode is applicable to scenarios such as contact data backup,
+   * cross-device contact migration, and contact sharing through files. Use Promise asynchronous callbacks.
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement.
-   * @param { VCardBuilderOptions } options - VCard version and encoding type.
-   * @returns { Promise<string> } Promise used to return the operation result.
+   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement. Used to filter the contact data to
+   *     be exported.
+   * @param { VCardBuilderOptions } [options] - VCard version and encoding type.
+   * @returns { Promise<string> } Promise used to return the address of the generated VCF (VCard file) file.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -154,12 +164,15 @@ declare namespace vcard {
   function exportVCard(context: Context, predicates: dataSharePredicates.DataSharePredicates, options?: VCardBuilderOptions): Promise<string>;
 
   /**
-   * Exports contacts as a vcard file (VCF). This API uses an asynchronous callback to return the result.
+   * Export contacts to a VCF (VCard file) file. This mode is applicable to scenarios such as contact data backup,
+   * cross-device contact migration, and contact sharing through files. Use the callback asynchronous callback.
    *
    * @permission ohos.permission.WRITE_CONTACTS and ohos.permission.READ_CONTACTS
    * @param { Context } context - Application context.
-   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement.
-   * @param { AsyncCallback<string> } callback - Callback used to Address of the generated vcard file (VCF).
+   * @param { dataSharePredicates.DataSharePredicates } predicates - Query statement. Used to filter the contact data to
+   *     be exported.
+   * @param { AsyncCallback<string> } callback - Callback function. Indicates the path of the generated VCF (VCard
+   *     file).
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 11 - 22]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.

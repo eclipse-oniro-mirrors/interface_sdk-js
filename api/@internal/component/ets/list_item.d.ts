@@ -517,8 +517,8 @@ declare interface ListItemOptions {
  *
  * > **NOTE**
  * >
- * > - The parent of this component can only be [List]{@link ./list} or
- * > [ListItemGroup]{@link ./list_item_group}.
+ * > - The parent of this component can only be [List]{@link @global:List} or
+ * > [ListItemGroup]{@link @global:ListItemGroup}.
  * >
  * > - When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are
@@ -573,7 +573,7 @@ interface ListItemInterface {
 
 /**
  * In addition to the
- * [universal attributes]{@link common}, the following
+ * [universal attributes]{@link CommonMethod}, the following
  * attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -622,15 +622,15 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
 
   /**
    * Sets whether the current **ListItem** element can be selected by mouse frame selection. This takes effect only when
-   * the parent [List]{@link ./list} component has
-   * [multiSelectable]{@link ./list:ListAttribute#multiSelectable} set to **true** to
+   * the parent [List]{@link @global:List} component has
+   * [multiSelectable]{@link @global:ListAttribute#multiSelectable} set to **true** to
    * enable mouse frame selection.
    *
    * @param { boolean } value - Whether the **ListItem** element can be selected by mouse frame selection. When set to
    *     **true**, it can be selected by mouse frame selection; when set to **false**, it cannot.<br/>Default value:
    *     **true**<br/>**Note:** This takes effect only when the outer
-   *     [List]{@link ./list} component sets
-   *     [multiSelectable]{@link ./list:ListAttribute#multiSelectable} to **true** to
+   *     [List]{@link @global:List} component sets
+   *     [multiSelectable]{@link @global:ListAttribute#multiSelectable} to **true** to
    *     enable mouse frame selection.
    * @returns { ListItemAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -645,7 +645,7 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
   /**
    * Sets whether the list item is selected. This attribute supports two-way binding through
    * [$$](docroot://ui/state-management/arkts-two-way-sync.md). This attribute must be used before the
-   * [polymorphic style]{@link common} is set.
+   * [polymorphic style]{@link CommonMethod} is set.
    * Otherwise, the style settings will not take effect.
    *
    * @param { boolean } value - Whether the **ListItem** is selected. The value **true** means the selected state, and
@@ -678,8 +678,8 @@ declare class ListItemAttribute extends CommonMethod<ListItemAttribute> {
   /**
    * Triggered when the selected state of the list item for multiselect changes.
    *
-   * This callback is triggered when the outer [List]{@link ./list}
-   * component has [multiSelectable]{@link ./list:ListAttribute#multiSelectable} set
+   * This callback is triggered when the outer [List]{@link @global:List}
+   * component has [multiSelectable]{@link @global:ListAttribute#multiSelectable} set
    * to **true** to enable mouse box selection, and the [selectable]{@link ListItemAttribute#selectable} attribute of
    * the current ListItem is set to **true**.
    *
@@ -716,8 +716,8 @@ declare const ListItemInstance: ListItemAttribute;
  *
  * > **NOTE**
  * >
- * > - The parent of this component can only be [List]{@link ./list} or
- * > [ListItemGroup]{@link ./list_item_group}.
+ * > - The parent of this component can only be [List]{@link @global:List} or
+ * > [ListItemGroup]{@link @global:ListItemGroup}.
  * >
  * > - When this component is used with
  * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md), its child components are

@@ -280,14 +280,14 @@ export default class MeasureText {
   /**
    * 计算指定文本作为单行文本显示时的宽度。如果文本包含多行（由换行符`\n`分隔），则返回其中最长的行的宽度。
    *
-   * > **说明：**
+   * > **说明**
+   * > - 从API version 9开始支持，从API version 18开始废弃，建议使用[measureText]{@link @ohos.arkui.UIContext:MeasureUtils.measureText}替代。
+   *   measureText需要先通过[UIContext]{@link @ohos.arkui.UIContext}中的[getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}方法获取
+   *   [MeasureUtils]{@link @ohos.arkui.UIContext}对象，然后通过该对象进行调用。且直接使用measureText可能导致[UI上下文不明确](docroot://ui/arkts-global-interface.md#ui上下文不明确)的问题。
    * >
-   * > - 从API version 12开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的
-   * > [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}方法获取当前UI上下文关联的
-   * > [MeasureUtils]{@link @ohos.arkui.UIContext}对象。
+   * > - 从API version 12开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的[getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}方法获取当前UI上下文关联的[MeasureUtils]{@link @ohos.arkui.UIContext}对象。
    * >
-   * > - measureText接口的计算结果始终是单行文本的宽度，入参options中配置的布局约束（如constraintWidth、maxLines）对measureText的结果没有影响。如果需要计算布局约束下的宽度，请使用
-   * > [measureTextSize]{@link @ohos.arkui.UIContext:MeasureUtils.measureTextSize}方法。
+   * > - measureText接口的计算结果始终是单行文本的宽度，入参options中配置的布局约束（如constraintWidth、maxLines）对measureText的结果没有影响。如果需要计算布局约束下的宽度，请使用[measureTextSize]{@link @ohos.arkui.UIContext:MeasureUtils.measureTextSize}方法。
    *
    * @param { MeasureOptions } options - 被计算文本描述信息。
    * @returns { number } 文本宽度。<br/>单位：px
@@ -303,7 +303,11 @@ export default class MeasureText {
   /**
    * 计算指定文本的宽度和高度。
    *
-   * > **说明：**
+   * > **说明**
+   * > - 从API version 10开始支持，从API version 18开始废弃，建议使用[measureTextSize]{@link @ohos.arkui.UIContext:MeasureUtils.measureTextSize}替代。
+   *   measureTextSize需要先通过[UIContext]{@link @ohos.arkui.UIContext}中的[getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}方法获取
+   *   [MeasureUtils]{@link @ohos.arkui.UIContext}对象，然后通过该对象进行调用。且直接使用measureTextSize可能导致
+   *   [UI上下文不明确](docroot://ui/arkts-global-interface.md#ui上下文不明确)的问题。
    * >
    * > - 从API version 12开始，可以通过使用[UIContext]{@link @ohos.arkui.UIContext}中的
    * > [getMeasureUtils]{@link @ohos.arkui.UIContext:UIContext.getMeasureUtils}方法获取当前UI上下文关联的

@@ -50,12 +50,14 @@ declare namespace eSIM {
   function isSupported(slotId: int): boolean;
 
   /**
-   * Launches the download page for the user to add a single profile. This API uses a promise to return the result.
+   * When a user needs to activate a new eSIM (for example, registering a new SIM card or changing a SIM card), this
+   * interface is invoked to guide the process of downloading and adding a configuration file. Use Promise asynchronous
+   * callbacks.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE_OPEN
    * @param { DownloadableProfile } profile - Profile that can be downloaded.
-   * @returns { Promise<boolean> } Promise used to return the result. The value **true** indicates that the operation is
-   *     successful, and the value **false** indicates the opposite.
+   * @returns { Promise<boolean> } Promise used to return the result.
+   *     The value **true** indicates successful, and **false** indicates fails.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1. Mandatory parameters are left unspecified.
@@ -95,10 +97,11 @@ declare namespace eSIM {
   function getEid(slotId: int): Promise<string>;
 
   /**
-   * Obtains the OS upgrade status for the eSIM in the specified slot. This API uses a promise to return the result.
+   * Obtains the OS upgrade status of a specified card slot. Using Promise Asynchronous Callbacks.
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @returns { Promise<OsuStatus> } Promise used to return the OS upgrade status.
@@ -124,11 +127,13 @@ declare namespace eSIM {
   function getOsuStatus(slotId: int): Promise<OsuStatus>;
 
   /**
-   * Upgrades the OS if the OS version of the eSIM in the specified slot is not the latest. This API uses a promise to
-   * return the result.
+   * If the operating system of the specified card slot is not the latest, perform the operating system upgrade. After
+   * the upgrade, you can use the getOsuStatus interface to query the upgrade status. (for example, the upgrade is in
+   * progress, the upgrade is successful, or the upgrade fails.) Use Promise asynchronous callback.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @returns { Promise<OsuStatus> } Promise used to return the OS upgrade status.
@@ -158,9 +163,11 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
-   * @param { int } portIndex - Port index of the slot.
+   * @param { int } portIndex - The port index of the slot. <br/>- 0: port 1. <br/>- 1: port 2.
+   *     <br>The value should be an integer.
    * @param { DownloadableProfile } profile - Downloadable profile.
    * @param { boolean } forceDisableProfile - Whether to forcibly deactivate the current profile during profile
    *     switching.
@@ -274,6 +281,7 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @returns { Promise<EuiccInfo> } Promise used to return the eUICC information.
@@ -294,13 +302,16 @@ declare namespace eSIM {
   function getEuiccInfo(slotId: int): Promise<EuiccInfo>;
 
   /**
-   * Deletes a profile. This API uses a promise to return the result.
+   * Delete configuration file. Use Promise asynchronous callback.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @param { string } iccid - Profile ID.
+   *     <br>The minimum length is 19 and the maximum length is 20.
+   *     <br>ID of the configuration file. Generally, the ICCID is a number of 19 to 20 digits.
    * @returns { Promise<ResultCode> } Promise used to return the operation result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -377,13 +388,18 @@ declare namespace eSIM {
   function setProfileNickname(slotId: int, iccid: string, nickname: string): Promise<ResultCode>;
 
   /**
-   * Clears all specific profiles and resets the eUICC. This API uses a promise to return the result.
+   * Clear all specific profiles and reset the eUICC. Different from reserveProfilesForFactoryRestore, this interface
+   * clears configuration files. To restore factory settings and retain existing configuration files, use
+   * reserveProfilesForFactoryRestore. Use Promise asynchronous callbacks.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
-   * @param { ResetOption } [options] - Reset options.
+   * @param { ResetOption } [options] - Resets the status. If this parameter is not transferred, the default setting is
+   *     used. You can transfer the corresponding enumerated value to specify the reset option. Multiple options can be
+   *     bitwise or combined.
    * @returns { Promise<ResultCode> } Promise used to return the operation result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -402,10 +418,11 @@ declare namespace eSIM {
   function resetMemory(slotId: int, options?:ResetOption): Promise<ResultCode>;
 
   /**
-   * Restores factory settings and retains profiles. This API uses a promise to return the result.
+   * Restore factory settings and retain the configuration file. Use Promise asynchronous callbacks.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @returns { Promise<ResultCode> } Promise used to return the operation result.
@@ -430,9 +447,11 @@ declare namespace eSIM {
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
-   * @param { string } address - Default SM-DP+ address.
+   * @param { string } address - Specifies the default SM-DP+ address to be set. The value must be a valid URL, for
+   *     example, https://example.com.
    * @returns { Promise<ResultCode> } Promise used to return the operation result.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
@@ -475,13 +494,17 @@ declare namespace eSIM {
   function getDefaultSmdpAddress(slotId: int): Promise<string>;
 
   /**
-   * Cancels a session. This API uses a promise to return the result.
+   * canceling an ongoing eSIM service session (for example, a configuration file download session) with the SM-DP+
+   * server. Transfer the service ID and cancellation reason to terminate the ongoing session operation. Use Promise
+   * asynchronous callbacks.
    *
    * @permission ohos.permission.SET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
-   * @param { string } transactionId - Service ID.
+   * @param { string } transactionId - Transaction ID of the session to be canceled, which is returned by operations
+   *     such as downloading the configuration file.
    * @param { CancelReason } cancelReason - Reason for canceling the session.
    * @returns { Promise<ResultCode> } Promise used to return the operation result.
    * @throws { BusinessError } 201 - Permission denied.
@@ -501,10 +524,11 @@ declare namespace eSIM {
   function cancelSession(slotId: int, transactionId: string, cancelReason: CancelReason): Promise<ResultCode>;
 
   /**
-   * Obtains the encrypted eSIM ID and other information required for enabling eSIM.
+   * Obtain the encrypted EID required for enabling the eSIM.
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @param { ContractRequestData } requestData - Information to be encrypted.
@@ -522,10 +546,13 @@ declare namespace eSIM {
   function getContractInfo(slotId: int, requestData: ContractRequestData) : Promise<string>;
 
   /**
-   * Obtains the public key ID information supported by the phone.
+   * This interface is used to obtain the public key ID information supported by the mobile phone for security
+   * authentication in the eSIM activation process. Before calling the getContractInfo interface for encryption
+   * authentication, you need to call this interface to obtain the available public key ID.
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @param { int } slotId - Card slot ID.
+   *     <br>The value should be an integer.
    *     <br>- **0**: card slot 1.
    *     <br>- **1**: card slot 2
    * @returns { Promise<string> } Promise used to return the public key ID information supported by the mobile phone in
@@ -552,7 +579,7 @@ declare namespace eSIM {
    */
   export interface ContractRequestData {
     /**
-     * Public key.
+     * Public key, which is encoded in Base64 format.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
@@ -562,7 +589,7 @@ declare namespace eSIM {
     publicKey: string;
 
     /**
-     * Random number.
+     * Random number in hexadecimal format.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
@@ -572,7 +599,7 @@ declare namespace eSIM {
     nonce: string;
 
     /**
-     * Selected public key ID.
+     * Select a public key ID from the value returned by the getSupportedPkids interface.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
@@ -583,72 +610,44 @@ declare namespace eSIM {
   }
 
   /**
-   * Establishes a single UICC access rule pursuant to the GlobalPlatform Secure Element Access Control specification.
+   * Defines access rules.
    *
-   * @interface AccessRule
    * @syscap SystemCapability.Telephony.CoreService.Esim
-   * @systemapi Hide this for inner system use.
-   * @since 18
-   */
-  /**
-   * Establishes a single UICC access rule pursuant to the GlobalPlatform Secure Element Access Control specification.
-   *
-   * @interface AccessRule
-   * @syscap SystemCapability.Telephony.CoreService.Esim
-   * @since 20 dynamic
+   * @systemapi Hide this for inner system use. [since 18 - 19]
+   * @publicapi [since 20]
+   * @since 18 dynamic
    * @since 23 static
    */
   export interface AccessRule {
     /**
-     * Certificate hash hexadecimal string.
+     * Hexadecimal string of 40 or 64 characters containing only digits 0-9 and letters a-f (or A-F).
      *
-     * @type { string }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * Certificate hash hexadecimal string.
-     *
-     * @type { string }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     certificateHashHexStr: string;
 
     /**
-     * The name of package.
+     * Package name.
      *
-     * @type { string }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * The name of package.
-     *
-     * @type { string }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     packageName: string;
 
     /**
-     * The type of access.
+     * Rule type.
      *
-     * @type { int }
      * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @systemapi Hide this for inner system use.
-     * @since 18
-     */
-    /**
-     * The type of access.
-     *
-     * @type { int }
-     * @syscap SystemCapability.Telephony.CoreService.Esim
-     * @since 20 dynamic
+     * @systemapi Hide this for inner system use. [since 18 - 19]
+     * @publicapi [since 20]
+     * @since 18 dynamic
      * @since 23 static
      */
     accessType: int;
@@ -672,7 +671,7 @@ declare namespace eSIM {
     activationCode: string;
 
     /**
-     * Confirmation code.
+     * Confirmation code. If this parameter is not specified, the value is a null string by default.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -681,7 +680,7 @@ declare namespace eSIM {
     confirmationCode?: string;
 
     /**
-     * Carrier name.
+     * Carrier name. If this parameter is not specified, the default value is null.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -690,7 +689,7 @@ declare namespace eSIM {
     carrierName?: string;
 
     /**
-     * Access rule array.
+     * Access rule array. If this parameter is not transferred, the default value is null.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @since 18 dynamic
@@ -912,7 +911,7 @@ declare namespace eSIM {
   }
 
   /**
-   * Obtains information about the eUICC chip or device.
+   * Carrier ID.
    *
    * @syscap SystemCapability.Telephony.CoreService.Esim
    * @systemapi Hide this for inner system use.
@@ -1031,7 +1030,7 @@ declare namespace eSIM {
     profileClass: ProfileClass;
 
     /**
-     * Operation ID of the profile.
+     * Carrier ID of the configuration file.
      *
      * @syscap SystemCapability.Telephony.CoreService.Esim
      * @systemapi Hide this for inner system use.
@@ -1820,8 +1819,7 @@ declare namespace eSIM {
   }
 
   /**
-   * This API is used to obtain the remaining storage space of the eUICC hardware. This API uses a promise to return the
-   * result.
+   * obtain remaining storage space of the eUICC hardware. Use Promise asynchronous callbacks.
    *
    * @permission ohos.permission.GET_TELEPHONY_ESIM_STATE
    * @returns { Promise<int> } Promise used to return the remaining storage space of the eUICC hardware, in KB.

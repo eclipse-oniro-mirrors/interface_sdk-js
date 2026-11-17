@@ -181,8 +181,8 @@ export declare enum SliderChangeMode {
  */
 export declare enum SliderInteraction {
     /**
-     * Users can drag the slider or touch the track to move the slider. The slider moves as soon as the mouse or
-     * finger is pressed.
+     * 用户可以拖动滑块或触摸滑动条来移动滑块。
+     * 鼠标或手指按下时，滑块即开始移动。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -190,7 +190,7 @@ export declare enum SliderInteraction {
      */
     SLIDE_AND_CLICK,
     /**
-     * Users are not allowed to move the slider by touching the slider.
+     * 不允许用户通过触摸滑块来移动滑块。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -198,8 +198,8 @@ export declare enum SliderInteraction {
      */
     SLIDE_ONLY,
     /**
-     * Users can drag the slider or touch the track to move the slider. The slider moves when the mouse is released or
-     * finger is lifted, if the release/lift position coincides with the screen press position.
+     * 用户可以拖动滑块或触摸滑动条来移动滑块。当鼠标释放或手指抬起时，
+     * 若释放/抬起位置与屏幕按下位置重合，滑块才会移动。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -397,7 +397,7 @@ export declare interface SliderOptions {
  */
 export declare enum SliderBlockType {
     /**
-     * Round slider.
+     * 圆形滑块。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -405,7 +405,7 @@ export declare enum SliderBlockType {
      */
     DEFAULT,
     /**
-     * Slider with an image background.
+     * 带图片背景的滑块。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -413,7 +413,7 @@ export declare enum SliderBlockType {
      */
     IMAGE,
     /**
-     * Slider in a custom shape.
+     * 自定义形状的滑块。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -696,7 +696,7 @@ export declare interface SliderPrefixOptions extends SliderCustomContentOptions 
 export declare interface SliderSuffixOptions extends SliderCustomContentOptions {
 }
 /**
- * 支持除触摸热区以外的[通用属性]{@link common}。
+ * 支持除触摸热区以外的[通用属性]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1054,6 +1054,18 @@ export declare interface SliderAttribute extends CommonMethod {
      * @since 23 static
      */
     default trackColorMetrics(color: ColorMetricsLinearGradient | undefined): this;
+
+    /**
+     * 设置滑块选项。
+     *
+     * @param { SliderOptions } [options] - 滑块构造选项。
+     * @returns { SliderAttribute } Returns the instance of the SliderAttribute.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setSliderOptions(options?: SliderOptions): this;
 }
 
 /**

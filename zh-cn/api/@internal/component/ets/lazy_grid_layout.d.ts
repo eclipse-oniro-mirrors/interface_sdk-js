@@ -21,12 +21,12 @@
 /**
  * 该组件用于实现支持懒加载的网格布局，适用于在滚动容器中按需渲染大量网格项的场景，可减少首帧渲染时间和内存开销。
  *
- * API版本26.0.0之前，其父组件支持[WaterFlow]{@link ./water_flow}和[FlowItem]{@link ./flow_item}组件，并支持使用自定义组件或
- * [NodeContainer]{@link ./node_container}组件封装后应用在WaterFlow或FlowItem中。
+ * API版本26.0.0之前，其父组件支持[WaterFlow]{@link @global:WaterFlow}和[FlowItem]{@link @global:FlowItem}组件，并支持使用自定义组件或
+ * [NodeContainer]{@link @global:NodeContainer}组件封装后应用在WaterFlow或FlowItem中。
  *
- * 从API版本26.0.0开始，其父组件新增支持[List]{@link ./list}、[Scroll]{@link ./scroll}和
+ * 从API版本26.0.0开始，其父组件新增支持[List]{@link @global:List}、[Scroll]{@link @global:Scroll}和
  * [LazyColumnLayout]{@link CommonMethod#LazyColumnLayout}，同时新增支持使用自定义组件或
- * [NodeContainer]{@link ./node_container}组件封装后应用在List、Scroll或LazyColumnLayout中。
+ * [NodeContainer]{@link @global:NodeContainer}组件封装后应用在List、Scroll或LazyColumnLayout中。
  *
  * 更多关于懒加载布局的使用场景和完整示例，可参考[创建懒加载布局](docroot://ui/arkts-layout-development-create-lazy-layout.md)。
  *
@@ -81,9 +81,9 @@ interface LazyVGridLayoutInterface {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
- * 除支持[通用事件]{@link common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -192,9 +192,9 @@ declare class LazyGridLayoutAttribute<T> extends CommonMethod<T> {
 }
 
 /**
- * 除支持[通用属性]{@link ./common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
- * 除支持[通用事件]{@link ./common}外，还支持以下事件：
+ * 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -270,12 +270,12 @@ declare class LazyVGridLayoutAttribute extends LazyGridLayoutAttribute<LazyVGrid
 /**
  * 该组件用于实现支持懒加载的网格布局，适用于在滚动容器中按需渲染大量网格项的场景，可减少首帧渲染时间和内存开销。
  *
- * API版本26.0.0之前，其父组件支持[WaterFlow]{@link ./water_flow}和[FlowItem]{@link ./flow_item}组件，并支持使用自定义组件或
- * [NodeContainer]{@link ./node_container}组件封装后应用在WaterFlow或FlowItem中。
+ * API版本26.0.0之前，其父组件支持[WaterFlow]{@link @global:WaterFlow}和[FlowItem]{@link @global:FlowItem}组件，并支持使用自定义组件或
+ * [NodeContainer]{@link @global:NodeContainer}组件封装后应用在WaterFlow或FlowItem中。
  *
- * 从API版本26.0.0开始，其父组件新增支持[List]{@link ./list}、[Scroll]{@link ./scroll}和
+ * 从API版本26.0.0开始，其父组件新增支持[List]{@link @global:List}、[Scroll]{@link @global:Scroll}和
  * [LazyColumnLayout]{@link CommonMethod#LazyColumnLayout}，同时新增支持使用自定义组件或
- * [NodeContainer]{@link ./node_container}组件封装后应用在List、Scroll或LazyColumnLayout中。
+ * [NodeContainer]{@link @global:NodeContainer}组件封装后应用在List、Scroll或LazyColumnLayout中。
  *
  * 更多关于懒加载布局的使用场景和完整示例，可参考[创建懒加载布局](docroot://ui/arkts-layout-development-create-lazy-layout.md)。
  *

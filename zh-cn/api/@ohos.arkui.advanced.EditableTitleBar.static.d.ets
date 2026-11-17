@@ -50,7 +50,7 @@ import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { PropRef } from './arkui/stateManagement/decorator';
 import { Builder } from './arkui/component/builder';
 /**
- * Declaration of the menu item on the right side.
+ * 声明右侧菜单项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -168,7 +168,7 @@ export declare class EditableTitleBarMenuItem {
   public defaultFocus?: boolean;
 }
 /**
- * Declaration of the image item .
+ * 声明图片项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -177,7 +177,7 @@ export declare class EditableTitleBarMenuItem {
  */
 export type EditableTitleBarItem = EditableTitleBarMenuItem;
 /**
- * Declaration of the left icon type.
+ * 声明左侧图标类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -203,7 +203,7 @@ export declare enum EditableLeftIconType {
   Cancel = 1
 }
 /**
- * Indicates the options of the editable title bar.
+ * 编辑型标题栏的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -424,7 +424,7 @@ export declare struct EditableTitleBar {
    */
   saveIconDefaultFocus?: boolean;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

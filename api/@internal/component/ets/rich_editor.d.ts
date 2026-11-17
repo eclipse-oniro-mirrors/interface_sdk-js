@@ -464,7 +464,7 @@ declare interface RichEditorTextStyle {
   textBackgroundStyle?: TextBackgroundStyle;
 
   /**
-   * Text stroke width. If the unit value of LengthMetrics is [PERCENT]{@link ../../../arkui/Graphics:LengthUnit}, the 
+   * Text stroke width. If the unit value of LengthMetrics is [PERCENT]{@link @ohos.arkui.node:LengthUnit}, the 
    * current setting does not take effect and is treated as 0.
    * 
    * If the value is less than 0, the text is rendered as solid; if greater than 0, the text is rendered as outline; if 
@@ -1112,7 +1112,7 @@ declare interface RichEditorTextStyleResult {
   /**
    * Text stroke width.
    * 
-   * The unit is [vp]{@link common}.
+   * The unit is [vp]{@link CommonMethod}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2936,7 +2936,7 @@ declare class RichEditorController extends RichEditorBaseController {
    * > [backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}, 
    * > [backgroundBlurStyle]{@link CommonMethod#backgroundBlurStyle(value: BlurStyle,
    * > options?: BackgroundBlurStyleOptions)},
-   * > [opacity]{@link ./common}, [blur]{@link CommonMethod#blur(value: number, options?: BlurOptions)}, 
+   * > [opacity]{@link CommonMethod}, [blur]{@link CommonMethod#blur(value: number, options?: BlurOptions)}, 
    * > [backdropBlur]{@link CommonMethod#backdropBlur(value: number, options?: BlurOptions)}, 
    * > [shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}, 
    * > [grayscale]{@link CommonMethod#grayscale(value: number)}, 
@@ -3282,9 +3282,9 @@ declare class RichEditorStyledStringController extends RichEditorBaseController 
 }
 
 /**
- * In addition to the [universal attributes]{@link ./common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  * 
- * In addition to the [universal events]{@link ./common}, [OnDidChangeCallback]{@link OnDidChangeCallback}, 
+ * In addition to the [universal events]{@link CommonMethod}, [OnDidChangeCallback]{@link OnDidChangeCallback}, 
  * [StyledStringChangedListener]{@link StyledStringChangedListener}, 
  * [StyledStringChangeValue]{@link StyledStringChangeValue}, and the following events are supported.
  *
@@ -3517,7 +3517,7 @@ declare class RichEditorAttribute extends CommonMethod<RichEditorAttribute> {
   /**
    * Sets a custom selection menu. It supports custom menu styles and trigger conditions, and is suitable for scenarios 
    * that require deep menu customization. When the custom menu is too long, it is recommended to nest a 
-   * [Scroll]{@link ./scroll} component inside to prevent the keyboard from being obscured.
+   * [Scroll]{@link @global:Scroll} component inside to prevent the keyboard from being obscured.
    *
    * @param { RichEditorSpanType } spanType - Type of the menu.
    *     <br>Default value: RichEditorSpanType.TEXT
@@ -4448,7 +4448,7 @@ declare type OnHoverCallback = (status: boolean, event: HoverEvent) => void;
  * > - This component is supported since API version 10. Newly added content in later versions is marked with a 
  * > superscript to indicate the version in which it was introduced.
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -4505,7 +4505,7 @@ declare const RichEditorInstance: RichEditorAttribute;
  * > - This component is supported since API version 10. Newly added content in later versions is marked with a 
  * > superscript to indicate the version in which it was introduced.
  * >
- * > - This component supports [WithTheme]{@link ./with_theme} since API version 26.0.0.
+ * > - This component supports [WithTheme]{@link @global:WithTheme} since API version 26.0.0.
  * 
  * ###### Child Components
  * 

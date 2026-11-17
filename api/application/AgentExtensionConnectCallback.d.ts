@@ -19,7 +19,15 @@
  */
 
 /**
- * Agent extension connect callback.
+ * Developers can use the callback APIs provided by AgentExtensionConnectCallback to receive data and security
+ *  authentication requests sent by the server, and to detect the disconnection of the AgentExtensionAbility server.
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this module are supported since API version 24. Newly added APIs will be marked with
+ * >   a superscript to indicate their earliest API version.
+ * > - The APIs of this module are system APIs.
+ * > - The APIs of this module can be used only in the stage model.
  *
  * @interface AgentExtensionConnectCallback
  * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -29,9 +37,9 @@
  */
 export interface AgentExtensionConnectCallback {
   /**
-   * Called back when data is received.
+   * Receives data from the AgentExtensionAbility server.
    *
-   * @param { string } data - Indicates the received data.
+   * @param { string } data - Data received from the server-side AgentExtensionAbility.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -40,9 +48,9 @@ export interface AgentExtensionConnectCallback {
   onData(data: string): void;
 
   /**
-   * Called back when authentication is received.
+   * Receives the security authentication callback from the AgentExtensionAbility server.
    *
-   * @param { string } handshakeData - Indicates the received handshake data.
+   * @param { string } handshakeData - Security authentication data received from the AgentExtensionAbility server side.
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -51,7 +59,7 @@ export interface AgentExtensionConnectCallback {
   onAuth(handshakeData: string): void;
 
   /**
-   * The callback interface was disconnected successfully.
+   * Called when the connection to the AgentExtensionAbility server is disconnected.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
    * @systemapi

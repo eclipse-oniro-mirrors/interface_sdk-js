@@ -85,9 +85,17 @@ declare namespace networkSecurity {
   /**
    * 系统将使用证书管理中的预置CA证书和用户安装的CA证书来校验应用传入的证书。使用Promise异步回调。
    *
+   * > **说明：**
+   * >
+   * > 这些错误代码对应于证书验证过程中的各种失败。
+   * >
+   * > **注意：**
+   * >
+   * > 请务必将示例中的证书数据替换为实际的证书内容。
+   *
    * @param { CertBlob } cert - 被校验的证书。
    * @param { CertBlob } [caCert] - 传入自定义的CA证书。
-   * @returns { Promise<int> } 以promise形式返回一个数字，表示证书验证的结果。如果证书验证成功，则返回0； 否则验证失败。
+   * @returns { Promise<int> } Promise对象，返回一个数字，表示证书验证的结果。如果证书验证成功，则返回0； 否则验证失败。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2305001 - Unspecified error.
    * @throws { BusinessError } 2305002 - Unable to get issuer certificate.
@@ -114,6 +122,14 @@ declare namespace networkSecurity {
 
   /**
    * 系统将使用证书管理中的预置CA证书和用户安装的CA证书来校验应用传入的证书，使用同步方式返回。
+   *
+   * > **说明：**
+   * >
+   * > 这些错误代码对应于证书验证过程中的各种失败。
+   * >
+   * > **注意：**
+   * >
+   * > 请务必将示例中的证书数据替换为实际的证书内容。
    *
    * @param { CertBlob } cert - 被校验的证书。
    * @param { CertBlob } [caCert] - 传入自定义的CA证书。
@@ -143,12 +159,20 @@ declare namespace networkSecurity {
   export function certVerificationSync(cert: CertBlob, caCert?: CertBlob): int;
 
   /**
-   * 验证服务器证书链并返回排序后的证书链。
+   * 传入证书链数组，进行证书链校验并构建排序后的证书链。系统将使用证书管理中的预置CA证书和用户安装的CA证书来配合校验传入的证书。使用Promise异步回调。
    *
-   * @param { CertBlob[] } cert - 要验证的证书链。
-   * @param { CertBlob } [caCert] - 入站自定义 CA 证书。
-   * @param { string } [hostname] - 要验证的主机名。
-   * @returns { Promise<CertBlob[]> } 返回一个 Promise，如果验证成功则解析为排序后的证书链（从叶子到根排序）。
+   * > **说明：**
+   * >
+   * > 这些错误代码对应于证书验证过程中的各种失败。
+   * >
+   * > **注意：**
+   * >
+   * > 请务必将示例中的证书数据替换为实际的证书内容。
+   *
+   * @param { CertBlob[] } cert - 待校验证书数组。第一个元素必须是叶子证书（end-entity certificate），其余元素为中间证书。
+   * @param { CertBlob } [caCert] - 传入自定义的CA证书。不传入则使用系统预置CA证书。
+   * @param { string } [hostname] - 需要验证的主机名，用于校验证书中的主机名是否匹配。不传入则跳过主机名验证。
+   * @returns { Promise<CertBlob[]> } Promise对象，返回排序后的证书链数组，顺序为从叶子节点到根节点。
    * @throws { BusinessError } 2305001 - Unspecified error.
    * @throws { BusinessError } 2305002 - Unable to get issuer certificate.
    * @throws { BusinessError } 2305004 - Unable to decrypt certificate signature.

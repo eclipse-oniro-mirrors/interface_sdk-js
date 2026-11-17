@@ -33,7 +33,7 @@ import type { Size } from './@ohos.arkui.node';
  * >
  * > - UIObserver can only listen for relevant information within the current process and does not support obtaining
  * > information in cross-process scenarios<!--Del--> such as
- * > [UIExtensionComponent]{@link ./@internal/component/ets/ui_extension_component}<!--DelEnd-->.
+ * > [UIExtensionComponent]{@link @global:UIExtensionComponent}<!--DelEnd-->.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1022,8 +1022,8 @@ declare namespace uiObserver {
 
   /**
    * Listens for the start and end of scroll events of a specific scrollable component identified by its ID. Supported
-   * components include [List]{@link ./@internal/component/ets/list}, [Grid]{@link ./@internal/component/ets/grid},
-   * [Scroll]{@link ./@internal/component/ets/scroll}, [WaterFlow]{@link ./@internal/component/ets/water_flow}, and
+   * components include [List]{@link @global:List}, [Grid]{@link @global:Grid},
+   * [Scroll]{@link @global:Scroll}, [WaterFlow]{@link @global:WaterFlow}, and
    * [ArcList]{@link @ohos.arkui.ArcList}.
    *
    * @param { 'scrollEvent' } type - Event type. The value **'scrollEvent'** indicates the start and end of a scroll
@@ -1041,9 +1041,9 @@ declare namespace uiObserver {
 
   /**
    * Unregisters the listener for the start and end of scroll events of a specific scrollable component identified by
-   * its ID. Supported components include [List]{@link ./@internal/component/ets/list},
-   * [Grid]{@link ./@internal/component/ets/grid}, [Scroll]{@link ./@internal/component/ets/scroll},
-   * [WaterFlow]{@link ./@internal/component/ets/water_flow}, and [ArcList]{@link @ohos.arkui.ArcList}.
+   * its ID. Supported components include [List]{@link @global:List},
+   * [Grid]{@link @global:Grid}, [Scroll]{@link @global:Scroll},
+   * [WaterFlow]{@link @global:WaterFlow}, and [ArcList]{@link @ohos.arkui.ArcList}.
    *
    * @param { 'scrollEvent' } type - Event type. The value **'scrollEvent'** indicates the start and end of a scroll
    *     event.
@@ -1060,8 +1060,8 @@ declare namespace uiObserver {
 
   /**
    * Listens for the start and end of scroll events of all scrollable components. Supported components include
-   * [List]{@link ./@internal/component/ets/list}, [Grid]{@link ./@internal/component/ets/grid},
-   * [Scroll]{@link ./@internal/component/ets/scroll}, [WaterFlow]{@link ./@internal/component/ets/water_flow}, and
+   * [List]{@link @global:List}, [Grid]{@link @global:Grid},
+   * [Scroll]{@link @global:Scroll}, [WaterFlow]{@link @global:WaterFlow}, and
    * [ArcList]{@link @ohos.arkui.ArcList}.
    *
    * @param { 'scrollEvent' } type - Event type. The value **'scrollEvent'** indicates the start and end of a scroll
@@ -1078,8 +1078,8 @@ declare namespace uiObserver {
 
   /**
    * Unregisters the listener for the start and end of scroll events of all scrollable components. Supported components
-   * include [List]{@link ./@internal/component/ets/list}, [Grid]{@link ./@internal/component/ets/grid},
-   * [Scroll]{@link ./@internal/component/ets/scroll}, [WaterFlow]{@link ./@internal/component/ets/water_flow}, and
+   * include [List]{@link @global:List}, [Grid]{@link @global:Grid},
+   * [Scroll]{@link @global:Scroll}, [WaterFlow]{@link @global:WaterFlow}, and
    * [ArcList]{@link @ohos.arkui.ArcList}.
    *
    * @param { 'scrollEvent'} type - Event type. The value **'scrollEvent'** indicates the start and end of a scroll

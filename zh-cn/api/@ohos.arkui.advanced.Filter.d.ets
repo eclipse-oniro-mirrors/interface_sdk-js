@@ -18,7 +18,7 @@
  * 
  * > **说明：**
  * >
- * > - 如果Filter设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生
+ * > - 如果Filter设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}，编译工具链会额外生
  * > 成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Filter本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Filter设置通用属性和通用事件。
  *
  * ###### 子组件
@@ -63,7 +63,7 @@ export declare enum FilterType {
 }
 
 /**
- *  This parameter is used to define the input of each filtering dimension.
+ *  该参数用于定义每个过滤维度的输入。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -103,8 +103,8 @@ export declare class FilterParams {
 }
 
 /**
- * This parameter specifies the selection result of a filtering dimension.
- * The index starts from 0.
+ * 该参数用于指定某个过滤维度的选择结果。
+ * 索引从0开始。
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

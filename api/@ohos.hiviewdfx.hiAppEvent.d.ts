@@ -1925,6 +1925,38 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     useRefinedLogFileName?: boolean;
+
+    /**
+     * Whether to enable the JSVM heap log for RESOURCE_OVERLIMIT event.
+     *
+     * **true**: yes.
+     *
+     * **false**: no.
+     *
+     * The default value is **false**.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    jsvmHeapLogEnable?: boolean;
+
+    /**
+     * Whether to enable the V8 heap log for RESOURCE_OVERLIMIT event.
+     *
+     * **true**: yes.
+     *
+     * **false**: no.
+     *
+     * The default value is **false**.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    v8HeapLogEnable?: boolean;
   }
 
   /**

@@ -128,7 +128,7 @@ declare namespace effectKit {
      *     and floating-point numbers are allowed. Values exceeding the boundary
      *     will be automatically truncated during implementation.
      * @param { FractionStop[] } fractionStops - Gradient blur position and intensity array.
-     *     The array length ranges from 0 to 12. It has no effect if the length is 0 or greater than 12.
+     *     The position values must be strictly increasing. The array length cannot be less than 2, and the maximum is 12.
      *     Both position and intensity values are between 0 and 1. Position 0 corresponds to the ellipse center,
      *     and position 1 corresponds to the ellipse boundary. Intensity 0 means no blur, while intensity 1 equals the
      *     blur effect of the input blur radius.

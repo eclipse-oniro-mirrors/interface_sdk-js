@@ -816,7 +816,7 @@ export interface NotificationRequest {
   readonly agentBundle?: BundleOption;
 
   /**
-   * 消息[智能聚合](docroot://notification/notification-glossary.md#notification-smart-aggregation智能聚合)信息字段。默认为空。 
+   * 消息智能聚合信息字段。默认为空。 
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -1032,7 +1032,7 @@ export interface NotificationCheckRequest {
 }
 
 /**
- * 描述通知[智能聚合](docroot://notification/notification-glossary.md#notification-smart-aggregation智能聚合)信息字段。
+ * 描述通知智能聚合信息字段。
  *
  * @syscap SystemCapability.Notification.Notification
  * @systemapi

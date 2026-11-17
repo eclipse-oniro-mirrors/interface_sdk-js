@@ -305,7 +305,7 @@ declare interface RatingConfiguration extends CommonConfiguration<RatingConfigur
 declare type OnRatingChangeCallback = (rating: number) => void;
 
 /**
- * In addition to the [universal attributes]{@link common}, the following attributes are supported.
+ * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -383,7 +383,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   stepSize(size: Optional<number>): RatingAttribute;
 
   /**
-   * Sets the star style. For details about the supported image types, see [Image]{@link ./image}.
+   * Sets the star style. For details about the supported image types, see [Image]{@link @global:Image}.
    *
    * Local and network images are supported. The PixelMap type is not supported.
    *
@@ -411,7 +411,7 @@ declare class RatingAttribute extends CommonMethod<RatingAttribute> {
   starStyle(options: StarStyleOptions): RatingAttribute;
 
   /**
-   * Sets the star style. For details about the supported image types, see [Image]{@link ./image}.
+   * Sets the star style. For details about the supported image types, see [Image]{@link @global:Image}.
    *
    * Local and network images are supported. The PixelMap type is not supported.
    *

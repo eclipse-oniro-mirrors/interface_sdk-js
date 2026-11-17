@@ -151,7 +151,7 @@ export declare interface CheckBoxGroupConfiguration extends CommonConfiguration<
  */
 export type OnCheckboxGroupChangeCallback = (value: CheckboxGroupResult) => void;
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -236,7 +236,7 @@ export declare interface CheckboxGroupAttribute extends CommonMethod {
      *
      * @param { AttributeModifier<CheckboxGroupAttribute> | AttributeModifier<CommonMethod> | undefined } modifier -
      *     CheckboxGroup的属性修饰器。<br/>CheckboxGroupAttribute：当前组件的[属性]{@link CheckboxGroupAttribute}<br/>CommonMethod：
-     *     [通用属性]{@link common}
+     *     [通用属性]{@link CommonMethod}
      * @returns { CheckboxGroupAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -254,6 +254,18 @@ export declare interface CheckboxGroupAttribute extends CommonMethod {
      * @since 23 static
      */
     default contentModifier(modifier: ContentModifier<CheckBoxGroupConfiguration> | undefined): this;
+
+    /**
+     * 设置CheckboxGroup选项。
+     *
+     * @param { CheckboxGroupOptions } [options] - CheckboxGroup构造器选项
+     * @returns { CheckboxGroupAttribute } 返回CheckboxGroupAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setCheckboxGroupOptions(options?: CheckboxGroupOptions): this;
 }
 
 /**

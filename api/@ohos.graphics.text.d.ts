@@ -1587,7 +1587,6 @@ declare namespace text {
      *
      * @returns { FontCollection } Local FontCollection instance object, recommended for widget scenarios. It can be
      *     used to manage font loading, unloading, and typesetting operations.
-     * @static
      * @syscap SystemCapability.Graphics.Drawing
      * @form
      * @atomicservice
@@ -3961,8 +3960,7 @@ declare namespace text {
      * >
      * > The figure shows the typesetting boundaries for the string "j" or "E".
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } Describes the typographic boundaries of a text line.
      * @syscap SystemCapability.Graphics.Drawing
@@ -4275,8 +4273,7 @@ declare namespace text {
      * >
      * > The figure shows the typesetting boundaries for the string "j" or "E".
      * >
-     * > !
-     * > [TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
+     * > ![TypographicBounds-Character.png](docroot://reference/apis-arkgraphics2d/figures/TypographicBounds-Character.png)
      *
      * @returns { TypographicBounds } Typographic boundaries of the run.
      * @syscap SystemCapability.Graphics.Drawing

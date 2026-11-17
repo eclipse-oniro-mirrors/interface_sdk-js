@@ -27,7 +27,9 @@ import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
  * 本模块提供管理Web模块的能力。
- * 
+ *
+ * ## 需要权限
+ *
  * 访问在线网页时需添加网络权限：ohos.permission.INTERNET，具体申请方式请参考[声明权限](docroot://security/AccessToken/declare-permissions.md)。
  *
  * @namespace webview
@@ -1325,6 +1327,10 @@ declare namespace webview {
   /**
    * Web组件数据库管理对象。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用WebDataBase下的方法，都需要先加载Web组件。
+   *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
    * @atomicservice [since 11]
@@ -1393,6 +1399,10 @@ declare namespace webview {
    * 加权限：ohos.permission.LOCATION、ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION_IN_BACKGROUND，具体权限说明请参
    * 考[申请位置权限开发指导](docroot://device/location/location-permission-guidelines.md)。
    *
+   * > **说明：**
+   * >
+   * > - 目前调用GeolocationPermissions下的方法，都需要先加载Web组件。
+   * 
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 18]
    * @atomicservice [since 11]
@@ -1407,9 +1417,9 @@ declare namespace webview {
      * @param { boolean } incognito - true表示隐私模式下允许指定源使用地理位置，false表示正常非隐私模式下允许指定源使用地理位置。
      *     <br>默认值：false。
      *     <br>传入null或undefined时为false。 [since 11]
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1427,7 +1437,7 @@ declare namespace webview {
      *     <br>传入null或undefined时为false。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1461,7 +1471,7 @@ declare namespace webview {
      *     <br>获取失败，表示不存在指定源的权限状态。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1482,7 +1492,7 @@ declare namespace webview {
      *     <br>传入null或undefined时会抛出异常错误码401。 [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must follow defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1618,7 +1628,9 @@ declare namespace webview {
    * 
    * > **说明：**
    * >
-   * > - 静态方法必须在用户界面（UI）线程上使用。
+   * > - 默认情况下，静态方法必须在用户界面（UI）线程上使用。从API版本26.0.1开始，
+   * > 调用[setLazyInitializeWebEngine]{@link webview.WebCookieManager.setLazyInitializeWebEngine(lazy: boolean)}
+   * > 设置为true后，静态方法支持在非用户界面（UI）线程使用。
    *
    * @syscap SystemCapability.Web.Webview.Core
    * @crossplatform [since 11]
@@ -2180,6 +2192,8 @@ declare namespace webview {
      * >
      * > - 该接口仅适用于调用后会初始化CookieManager的接口，比如本类WebCookieManager的其他接口。调用本接口设置为true后，再调用适用的接口，会在初始化CookieManager时跳过初始化
      * > ArkWeb内核，后续需自行初始化ArkWeb内核。
+     * >
+     * > - 从API版本26.0.1开始，调用本接口设置为true后，WebCookieManager的接口支持在异步线程使用。
      *
      * @param { boolean } lazy - Controls whether to delay the initialization of the web engine.
      * @syscap SystemCapability.Web.Webview.Core
@@ -4046,7 +4060,13 @@ declare namespace webview {
     /**
      * 调整当前网页的缩放比例，[zoomAccess]{@link WebAttribute#zoomAccess}需为true。
      *
-     * @param { number } factor - 基于当前网页所需调整的相对缩放比例，入参要求大于0，当入参为1时为默认加载网页的缩放比例，入参小于1为缩小，入参大于1为放大。
+     * > **说明：**
+     * >
+     * > 入参超出取值范围时，本次调用不生效，网页缩放比例保持不变。
+     * >
+     * > 当网页缩放比例已达到最大值或最小值时，继续同向缩放的调用同样不生效。
+     *
+     * @param { number } factor - 缩放倍数，与当前网页缩放比例相乘得到新的缩放比例。入参为1时缩放比例保持不变，入参小于1为缩小，入参大于1为放大。
      *     <br>取值范围：(0，100]。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
@@ -4373,6 +4393,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @returns { Promise<string> } Promise实例，返回脚本执行的结果，执行失败返回null。
@@ -4402,6 +4424,8 @@ declare namespace webview {
      * > - 执行异步方法无法获取返回值，需要根据具体情境判断是否使用同步或异步方式。
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScript时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript脚本。
      * @param { AsyncCallback<string> } callback - 回调执行JavaScript脚本结果。JavaScript脚本若执行失败或无返回值时，返回null。
@@ -4424,6 +4448,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但Promise结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4445,6 +4471,8 @@ declare namespace webview {
      * > **说明：**
      * >
      * > - 前端页面传到应用侧的string数据类型会被视为JSON格式的数据，需要调用JSON.parse反序列化。
+     * >
+     * > - 多次调用runJavaScriptExt时，脚本按调用顺序依次执行，但回调结果的返回顺序不保证与调用顺序一致。
      *
      * @param { string } script - JavaScript script. [since 10 - 11]
      * @param { string | ArrayBuffer } script - JavaScript脚本。 [since 12]
@@ -4628,10 +4656,6 @@ declare namespace webview {
 
     /**
      * 清除与当前WebView上下文相关的资源缓存。
-     * 
-     * > **说明：**
-     * >
-     * > 可以通过在data/storage/el2/base/cache/web/Cache目录下查看Webview的缓存。
      *
      * @param { boolean } clearRom - 设置为true时同时清除ROM和RAM中的缓存，设置为false时只清除RAM中的缓存。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
@@ -4684,6 +4708,10 @@ declare namespace webview {
 
     /**
      * 在指定时间内将页面滚动指定的偏移量。
+     *
+     * > **说明：**
+     * >
+     * > 嵌套滚动场景中，调用scrollBy不会触发父组件的嵌套滚动。
      *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。
      *     <br>单位：vp。
@@ -6071,6 +6099,13 @@ declare namespace webview {
     /**
      * 将页面滚动指定的偏移量，返回值表示此次滚动是否执行成功。
      *
+     * > **说明：**
+     * >
+     * > - 返回值场景：Web页面处于触摸中状态时，返回false，否则返回true。
+     * > - 同层渲染场景中，Web的同层渲染区域处于触摸中状态时，返回值为true。
+     * > - 嵌套滚动场景中，调用scrollByWithResult不会触发父组件的嵌套滚动。
+     * > - 此接口不保证滑动帧率性能。
+     *
      * @param { number } deltaX - 水平偏移量，其中水平向右为正方向。 
      *     <br>单位：vp。
      * @param { number } deltaY - 垂直偏移量，其中垂直向下为正方向。 
@@ -6420,11 +6455,21 @@ declare namespace webview {
     executeAIPageCommand(command: string): Promise<string>;
 
     /**
-     * 调用此接口设置当前网页的浏览器级缩放倍率。文字与图片同时缩放，页面重新布局（reflow）以适应Web组件宽度。
-     * 该接口与{@link zoom}、{@link zoomIn}、{@link zoomOut}（仅视觉缩放，不触发重新布局）以及
-     * {@link textZoomRatio}（仅缩放文字）相互独立。缩放倍率仅作用于当前Web组件实例，页面内跨文档跳转后保持不变。
+     * 设置当前网页的页面缩放倍率。页面缩放会同时缩放文字和图片，并触发页面重新布局以适应Web组件宽度。
      *
-     * @param { number } zoomFactor - 要设置的浏览器级缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
+     * > **说明：**
+     * >
+     * > - 页面缩放倍率按网页的主机名（Host）管理。在同一浏览数据上下文中，设置成功后，已打开的同Host Web组件会同步缩放，后续打开的同Host网页也会使用已保存的倍率；不同Host互不影响。当前Web组件导航至其他Host时，使用目标Host的页面缩放倍率，而非继续沿用原Host的倍率。
+     * >
+     * > - 如需让不同Host的网页使用相同倍率，可在网页开始加载时通过[onPageBegin]{@link WebAttribute#onPageBegin}针对当前Web组件再次调用本接口；原Host的倍率不会自动应用到目标Host。
+     * >
+     * > - [zoomControlAccess]{@link WebAttribute#zoomControlAccess}是Web组件的用户缩放开关：设置为**true**时，用户可通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整页面缩放倍率；设置为**false**时，上述用户操作无效。该开关不限制本接口的程序化设置。
+     * >
+     * > - 需要按指定倍率调整页面布局时，建议使用本接口；{@link zoom}、{@link zoomIn}、{@link zoomOut}适用于视觉缩放，[textZoomRatio]{@link WebAttribute#textZoomRatio}适用于文字缩放，三者相互独立。
+     * >
+     * > - 本接口需在Controller关联Web组件后调用，无需等待网页加载完成。若浏览器实例尚未创建，设置的倍率会在缩放控制器可用后应用。
+     *
+     * @param { number } zoomFactor - 要设置的页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
      *     <br>取值范围：[0.25, 5]。
      *     <br>超出该范围的值会被裁剪到边界值。
      * @throws { BusinessError } 17100001 - Init error.
@@ -6436,9 +6481,15 @@ declare namespace webview {
     setZoomFactor(zoomFactor: number): void;
 
     /**
-     * 获取当前网页的浏览器级缩放倍率。
+     * 获取当前网页的页面缩放倍率。
      *
-     * @returns { number } 当前浏览器级缩放倍率。**1**表示不缩放。
+     * > **说明：**
+     * >
+     * > - 本接口返回当前Web组件实际生效的页面缩放倍率。该倍率可能由本Controller通过{@link setZoomFactor}设置，也可能在[zoomControlAccess]{@link WebAttribute#zoomControlAccess}开启时由用户通过Ctrl+'-/+'或Ctrl+鼠标滚轮/触摸板调整，还可能受其他同Host Web组件的缩放操作影响，因此不一定等于本Controller上次设置的值。
+     * >
+     * > - 浏览器实例尚未创建时，**getZoomFactor**返回默认值**1.0**，不会返回尚待应用的设置值。
+     *
+     * @returns { number } 当前页面缩放倍率。**1**表示不缩放，小于**1**表示缩小，大于**1**表示放大。
      *     <br>取值范围：[0.25, 5.0]，默认值为**1**。
      * @throws { BusinessError } 17100001 - Init error.
      *     The WebviewController must be associated with a Web component.
@@ -6447,6 +6498,122 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * 在当前导航条目上设置用户数据的键值对。
+     *
+     * 用户数据与导航入口生命周期相关联。当前导航条目
+     * 指导航历史记录中的活动条目。当条目被销毁时
+     * （例如，通过历史导航或clearHistory）清除用户数据。如果一个具有
+     * 相同的键已经存在，它将被覆盖。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @param { string } value - 用户数据的价值。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * 获取与当前导航条目上的指定键关联的用户数据值。
+     *
+     * @param { string } key - 用户数据的密钥。
+     * @returns { string } 用户数据的值，如果键不存在，则为空字符串。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * 从当前导航条目中删除与指定键关联的用户数据。
+     * 如果密钥不存在，则此API不执行任何操作。
+     *
+     * @param { string } key - 要删除的用户数据的密钥。
+     * @throws { BusinessError } 17100001 - 初始化错误。
+     *     WebviewController必须与Web组件关联。
+     *     调用该接口前，请确保WebviewController关联了Web组件。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
+
+    /**
+     * 删除指定日期之后发生变化的已访问链接记录。
+     * 该接口使用异步回调返回结果。
+     *
+     * @param { Date } date - 数据删除的时间点。
+     *     已访问链接记录删除该日期后发生变化的数据。
+     * @param { Callback<void> } callback - 回调函数，用于返回结果。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+    /**
+     * 删除指定日期之后发生变化的已访问链接记录。
+     * 该接口使用Promise异步回调。
+     *
+     * @param { Date } date - 数据删除的时间点。
+     *     已访问链接记录删除该日期后发生变化的数据。
+     * @returns { Promise<void> } Promise对象，无返回结果。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date): Promise<void>;
+  
+    /**
+     * 设置 NavigationThrottle，用于在多个阶段拦截导航请求。
+     *
+     * NavigationThrottle 提供四个导航阶段的回调：`willStartRequest`、`willRedirectRequest`、
+     * `willProcessResponse`、`willFailRequest`。每个回调可返回 PROCEED、CANCEL 或 DEFER。
+     * 返回 DEFER 时，导航暂停，直到调用 DeferThrottleCallback 的`proceed()`或`cancel()`。
+     *
+     * > **说明**
+     * >
+     * > - 调用本接口会替换之前设置的 NavigationThrottle，原 throttle 不再被调用。
+     * > - 本接口不影响{@link onOverrideUrlLoading}。两者同时设置时，
+     * > 先调用{@link onOverrideUrlLoading}，再调用 NavigationThrottle 回调。
+     *
+     * @param { NavigationThrottle } throttle - 用于拦截导航的 NavigationThrottle 实例。
+     *     传入**undefined**或**null**清除当前 NavigationThrottle。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationThrottle(throttle: NavigationThrottle): void;
+
+    /**
+     * 获取上次向应用程序发送postMessage的帧的URL。
+     * 
+     * 此接口返回通过接收到的最近一次postMessage的发送者的帧的URL。
+     * [onMessageEvent]{@link webview.WebMessagePort.onMessageEvent}
+     * 或
+     * [onMessageEventExt]{@link webview.WebMessagePort.onMessageEventExt}.
+     * 如果没有收到postMessage，则返回空字符串。
+     * 
+     * @returns { string } 上次发送postMessage的帧的URL。如果没有收到postMessage,
+     *     返回空字符串。
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this method.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getLastPostMessageUrl(): string;
   }
 
   /**
@@ -9258,6 +9425,263 @@ declare namespace webview {
      * @since 26.0.0 dynamic
      */
     OVERLAY_VISUAL_SCROLLBAR = 2
+  }
+
+  /**
+   * NavigationThrottle 回调可执行的动作枚举。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum NavigationThrottleAction {  
+    /**
+     * 允许导航继续。当回调未实现或返回无效值时，默认使用此动作。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    PROCEED = 0,
+ 
+    /**
+     * 取消导航。当导航应被阻止时使用。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CANCEL = 1,
+ 
+    /**
+     * 暂缓决策。导航暂停，直到在{@link DeferThrottleCallback}上调用`proceed()`或`cancel()`。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    DEFER = 2
+  }
+
+  /**
+   * 传递给{@link NavigationThrottle}回调的导航信息。不同字段在不同回调阶段有效：
+   * - **willStartRequest**：url、isMainFrame、hasUserGesture、pageTransition、requestMethod、isRendererInitiated 有效。
+   * - **willRedirectRequest**：url（重定向目标）、isMainFrame、hasUserGesture、isRedirect、pageTransition、
+   *   requestMethod、isRendererInitiated 有效。
+   * - **willProcessResponse**：url、isMainFrame、statusCode、mimeType、contentDisposition 有效。
+   * - **willFailRequest**：url、isMainFrame、errorCode、errorDescription 有效。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationInfo {
+    /**
+     * 导航请求的URL。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    url: string;
+ 
+    /**
+     * 是否为主帧导航。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isMainFrame: boolean;
+ 
+    /**
+     * 导航是否由用户手势触发。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    hasUserGesture: boolean;
+
+    /**
+     * 是否为服务端重定向。仅在 willRedirectRequest 中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRedirect: boolean;
+
+    /**
+     * 页面跳转值，由[PageTransition]{@link webview.PageTransition}中定义的核心类型与修饰标志按位或得到。
+     * 可使用掩码常量（`CORE_MASK`、`QUALIFIER_MASK`、`IS_REDIRECT_MASK`）进行拆解。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    pageTransition: number;
+ 
+    /**
+     * 导航请求的 HTTP 方法，如`GET`、`POST`。
+     * 在 willStartRequest 阶段首次有效；在 willRedirectRequest 阶段可能更新（如重定向可能改变方法）；后续阶段保持不变。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    requestMethod: string;
+
+    /**
+     * 导航是否由渲染进程发起。`true`表示由渲染进程发起（如点击链接或脚本重定向），
+     * `false`表示由浏览器进程发起（如通过 API 调用）。
+     * 在 willStartRequest 阶段首次有效；后续阶段保持不变。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRendererInitiated: boolean;
+ 
+    /**
+     * 响应的HTTP状态码，有效范围【100,599】。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    statusCode: number;
+ 
+    /**
+     * 响应的MIME（多用途Internet邮件扩展）类型。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    mimeType: string;
+ 
+    /**
+     * 响应的Content-Disposition头。仅在willProcessResponse中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    contentDisposition: string;
+ 
+    /**
+     * 网络错误码。仅在 willFailRequest 中有效。详情参见[WebNetErrorList]{@link @ohos.web.netErrorList:WebNetErrorList}。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorCode: WebNetErrorList;
+ 
+    /**
+     * 错误描述。仅在willFailRequest中有效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorDescription: string;
+  }
+
+  /**
+   * 为返回 DEFER 的{@link NavigationThrottle}回调提供异步决策能力。
+   *
+   * 当 NavigationThrottle 回调返回{@link NavigationThrottleAction}.DEFER 时，导航暂停。NavigationThrottle 回调方法的第二个
+   * 参数为 DeferThrottleCallback。调用`proceed()`恢复导航，或调用`cancel()`取消导航。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface DeferThrottleCallback {  
+    /**
+     * 恢复暂缓的导航。重复调用，或在`cancel()`之后调用，均无效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    proceed(): void;
+ 
+    /**
+     * 取消暂缓的导航。重复调用，或在`proceed()`之后调用，均无效。
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    cancel(): void;
+  }
+
+  /**
+   * 在多个阶段拦截导航请求的接口。
+   *
+   * 通过{@link WebviewController#setNavigationThrottle}为 Web 组件设置 NavigationThrottle。每个回调接收一个
+   * {@link NavigationInfo}和一个{@link DeferThrottleCallback}，并返回一个{@link NavigationThrottleAction}。
+   *
+   * > **说明**
+   * >
+   * > - 回调未实现或返回无效值（如 undefined）时，默认使用 PROCEED。
+   * > - 回调返回 DEFER 时导航暂停，使用{@link DeferThrottleCallback}异步恢复或取消。
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationThrottle {  
+    /**
+     * 导航请求即将开始时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willStartRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 导航被服务端重定向时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**url**字段是重定向目标。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willRedirectRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 收到导航的服务端响应时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**statusCode**、**mimeType**、**contentDisposition**有效。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willProcessResponse(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+ 
+    /**
+     * 导航失败时调用。
+     *
+     * @param { NavigationInfo } info - 导航信息。**errorCode**和**errorDescription**有效。
+     * @param { DeferThrottleCallback } callback - 用于异步决策的 DeferThrottleCallback，返回 DEFER 时使用。
+     * @returns { NavigationThrottleAction } 要执行的动作。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willFailRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
   }
 }
 

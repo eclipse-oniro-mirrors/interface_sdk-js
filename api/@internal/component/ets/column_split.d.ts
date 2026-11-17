@@ -48,7 +48,7 @@ interface ColumnSplitInterface {
  *
  * > **NOTE**
  * >
- * > Similar to [RowSplit]{@link ./row_split}, the dividers of **ColumnSplit** adjust the height of adjacent child
+ * > Similar to [RowSplit]{@link @global:RowSplit}, the dividers of **ColumnSplit** adjust the height of adjacent child
  * > components. However, this adjustment is only applied to the extent that the resulting height stays within the
  * > height limits of the child components.
  * >

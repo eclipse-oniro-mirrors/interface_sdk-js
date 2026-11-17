@@ -19,7 +19,7 @@
  */
 
 /**
- * ImageSpan是[Text]{@link ./text}、[ContainerSpan]{@link ./container_span}组件的子组件，用于在文本中显示行内图片，支持设置图片对齐方式、缩放类型、加载占位图和颜色滤镜
+ * ImageSpan是[Text]{@link @global:Text}、[ContainerSpan]{@link @global:ContainerSpan}组件的子组件，用于在文本中显示行内图片，支持设置图片对齐方式、缩放类型、加载占位图和颜色滤镜
  * 等，适用于需要在文本段落中嵌入图片实现图文混排的场景。
  *
  * > **说明：**
@@ -57,7 +57,7 @@ interface ImageSpanInterface {
 }
 
 /**
- * 属性继承自[BaseSpan]{@link BaseSpan}，通用属性方法支持[尺寸设置]{@link ./common}、[背景设置]{@link ./common}、[边框设置]{@link ./common}。
+ * 属性继承自[BaseSpan]{@link BaseSpan}，通用属性方法支持[尺寸设置]{@link CommonMethod}、[背景设置]{@link CommonMethod}、[边框设置]{@link CommonMethod}。
  *
  * @extends CommonMethod<ImageSpanAttribute> [since 10 - 10]
  * @extends BaseSpan<ImageSpanAttribute> [since 11]
@@ -196,7 +196,7 @@ declare class ImageSpanAttribute extends BaseSpan<ImageSpanAttribute> {
 }
 
 /**
- * ImageSpan是[Text]{@link ./text}、[ContainerSpan]{@link ./container_span}组件的子组件，用于在文本中显示行内图片，支持设置图片对齐方式、缩放类型、加载占位图和颜色滤镜
+ * ImageSpan是[Text]{@link @global:Text}、[ContainerSpan]{@link @global:ContainerSpan}组件的子组件，用于在文本中显示行内图片，支持设置图片对齐方式、缩放类型、加载占位图和颜色滤镜
  * 等，适用于需要在文本段落中嵌入图片实现图文混排的场景。
  *
  * > **说明：**

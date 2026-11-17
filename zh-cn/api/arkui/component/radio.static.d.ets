@@ -182,7 +182,7 @@ export declare interface RadioStyle {
  */
 export type OnRadioChangeCallback = (isChecked: boolean) => void;
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -241,7 +241,7 @@ export declare interface RadioAttribute extends CommonMethod {
      * @param { AttributeModifier<RadioAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 在Radio组件上，定
      *     制属性区的方法。<br/>RadioAttribute表示
      *     [属性](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-radio.md#RadioAttribute)。<br/>CommonMethod表示
-     *     [通用属性]{@link common}和[通用事件]{@link common}。<br/>modifier：属性修改器，开发者需要自定义class实现AttributeModifier接口。<br/>当
+     *     [通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}。<br/>modifier：属性修改器，开发者需要自定义class实现AttributeModifier接口。<br/>当
      *     modifier的值为undefined时，不使用属性修改器。
      * @returns { RadioAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -249,6 +249,18 @@ export declare interface RadioAttribute extends CommonMethod {
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<RadioAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置Radio选项。
+     *
+     * @param { RadioOptions } options - Radio构造器选项
+     * @returns { RadioAttribute } 返回RadioAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setRadioOptions(options: RadioOptions): this;
 }
 /**
  * 开发者需要自定义class实现ContentModifier接口。继承自[CommonConfiguration]{@link CommonConfiguration}。

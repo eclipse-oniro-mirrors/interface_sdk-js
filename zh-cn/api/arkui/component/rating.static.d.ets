@@ -313,6 +313,18 @@ export declare interface RatingAttribute extends CommonMethod {
      * @since 23 static
      */
     default attributeModifier(modifier: AttributeModifier<RatingAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+    /**
+     * 设置Rating选项。
+     *
+     * @param { RatingOptions } [options] - Rating构造器选项
+     * @returns { RatingAttribute } 返回RatingAttribute实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setRatingOptions(options?: RatingOptions): this;
 }
 
 /**

@@ -22,7 +22,7 @@ import { Content } from './Content';
 import { FrameNode } from './FrameNode';
 
 /**
- * NodeContent是ArkUI提供的[ContentSlot]{@link ../@internal/component/ets/content_slot}的管理器，用于管理挂载到ContentSlot上的FrameNode节点内
+ * NodeContent是ArkUI提供的[ContentSlot]{@link @global:ContentSlot}的管理器，用于管理挂载到ContentSlot上的FrameNode节点内
  * 容，支持动态添加、删除FrameNode节点。适用于需要通过ContentSlot动态管理FrameNode节点内容的场景，例如根据用户交互动态新增或移除文本、图片等自定义FrameNode节点。
  * 
  * > **说明：**

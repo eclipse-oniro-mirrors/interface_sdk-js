@@ -266,11 +266,11 @@ interface SegmentButtonIconTextItem {
 /**
  * Defines the DimensionNoPercentage type.
  *
- * @unionmember { PX }
- * @unionmember { VP }
- * @unionmember { FP }
- * @unionmember { LPX }
- * @unionmember { Resource }
+ * @unionmember { PX } Length in px.
+ * @unionmember { VP } Length in vp.
+ * @unionmember { FP } Length in fp. 
+ * @unionmember { LPX } Length in lpx.
+ * @unionmember { Resource } Resource reference type, which is used to set the value of a component attribute.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -591,9 +591,9 @@ declare type ItemRestriction<T> = Array<T>;
 /**
  * Defines the SegmentButtonItemTuple type.
  *
- * @unionmember { ItemRestriction<SegmentButtonTextItem> }
- * @unionmember { ItemRestriction<SegmentButtonIconItem> }
- * @unionmember { ItemRestriction<SegmentButtonIconTextItem> }
+ * @unionmember { ItemRestriction<SegmentButtonTextItem> } A tuple of text-only button information.
+ * @unionmember { ItemRestriction<SegmentButtonIconItem> } A tuple of icon-only button information.
+ * @unionmember { ItemRestriction<SegmentButtonIconTextItem> } A tuple of icon and text button information.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -919,9 +919,9 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
   /**
    * Appends new elements to the end of SegmentButtonItemOptionsArray.
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - First element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - Second element to add to
    *     SegmentButtonItemOptionsArray.
    * @returns { int } Returns the new length of SegmentButtonItemOptionsArray.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -937,11 +937,11 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
   /**
    * Appends new elements to the end of SegmentButtonItemOptionsArray.
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - First element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - Second element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - Third element to add to
    *     SegmentButtonItemOptionsArray.
    * @returns { int } Returns the new length of SegmentButtonItemOptionsArray.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -993,9 +993,9 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
   /**
    * Appends new elements to the start of SegmentButtonItemOptionsArray.
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - First element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - Second element to add to
    *     SegmentButtonItemOptionsArray.
    * @returns { int } Returns the new length of SegmentButtonItemOptionsArray.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1012,11 +1012,11 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
   /**
    * Appends new elements to the start of SegmentButtonItemOptionsArray.
    *
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item1 - First element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item2 - Second element to add to
    *     SegmentButtonItemOptionsArray.
-   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - New element to add to
+   * @param { SegmentButtonTextItem | SegmentButtonIconItem | SegmentButtonIconTextItem } item3 - Third element to add to
    *     SegmentButtonItemOptionsArray.
    * @returns { int } Returns the new length of SegmentButtonItemOptionsArray.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1036,7 +1036,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    *
    * @param { int } start - The zero-based location in the array from which to start removing elements.
    *     <br>The value should be an integer.
-   * @param { int } deleteCount - The number of elements to remove.
+   * @param { int | undefined } deleteCount - The number of elements to remove.
    *     <br>The value should be an integer.
    * @param { SegmentButtonItemOptions[] } items - Elements to insert into the array in place of the deleted elements.
    * @returns { SegmentButtonItemOptions[] } Returns a SegmentButtonItemOptions array containing the deleted elements.
@@ -1045,7 +1045,7 @@ declare class SegmentButtonItemOptionsArray extends Array<SegmentButtonItemOptio
    * @since 23 static
    * @noninterop
    */
-  splice(start: int, deleteCount: int, ...items: SegmentButtonItemOptions[]): SegmentButtonItemOptions[];
+  splice(start: int, deleteCount: int | undefined , ...items: SegmentButtonItemOptions[]): SegmentButtonItemOptions[];
 
   /**
    * The function used to create a SegmentButtonItemOptionsArray object.

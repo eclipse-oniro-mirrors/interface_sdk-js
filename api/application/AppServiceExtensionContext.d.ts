@@ -44,9 +44,16 @@ import StartOptions from '../@ohos.app.ability.StartOptions';
  */
 declare class AppServiceExtensionContext extends ExtensionContext {
   /**
-   * Connects this AppServiceExtensionAbility to a ServiceExtensionAbility. It enables communication with the
-   * ServiceExtensionAbility via a proxy, allowing access to the capabilities exposed by the ServiceExtensionAbility.
-   * This API can be called only by the main thread.
+   * Connects this AppServiceExtensionAbility to a ServiceExtensionAbility (a ServiceExtensionAbility can be
+   *  developed only by system applications, but third-party applications can connect to it). It enables
+   *  communication with the ServiceExtensionAbility through the remote object returned by the onConnect
+   *  callback of ConnectOptions, allowing access to the capabilities exposed by the ServiceExtensionAbility.
+   *  You can use the returned connectionID to call disconnectServiceExtensionAbility() to disconnect.
+   *  This API can be called only by the main thread.
+   *
+   * > **NOTE**
+   * >
+   * > This API does not support connecting to the ServiceExtensionAbility of a cloned application.
    *
    * @param { Want } want - Want information about the target ability, such as the ability name and bundle name.
    * @param { ConnectOptions } callback - Callback used to return the information indicating that the connection is
@@ -86,7 +93,9 @@ declare class AppServiceExtensionContext extends ExtensionContext {
   disconnectServiceExtensionAbility(connection: long): Promise<void>;
 
   /**
-   * Starts the UIAbility. This API can be called only by the main thread. It uses a promise to return the result.
+   * Starts a UIAbility. After this API is called, the system starts the target UIAbility based on
+   *  the Want information. This API uses a promise to return the result. This API can be called
+   *  only by the main thread.
    *
    * @param { Want } want - Want information about the target ability, such as the ability name and bundle name.
    * @param { StartOptions } [options] - Parameters used for starting the ability.
@@ -122,8 +131,8 @@ declare class AppServiceExtensionContext extends ExtensionContext {
   startAbility(want: Want, options?: StartOptions): Promise<void>;
 
   /**
-   * Terminates this AppServiceExtensionAbility. This API can be called only by the main thread. It uses a promise to
-   * return the result.
+   * Destroys this AppServiceExtensionAbility. This API uses a promise to return the result.
+   *  This API can be called only by the main thread.
    *
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 16000009 - An ability cannot be started or stopped in Wukong mode.

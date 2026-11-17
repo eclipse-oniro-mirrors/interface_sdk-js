@@ -867,7 +867,7 @@ declare enum TextInputStyle {
  * >
  * > - 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link ./rich_editor}组件。
+ * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link @global:RichEditor}组件。
  * >
  * > - 如需设置触摸文本组件外部时是否清除文本选中和手柄，可使用
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy}接口。
@@ -987,7 +987,7 @@ declare type OnContentScrollCallback = (totalOffsetX: number, totalOffsetY: numb
 declare type OnPasteCallback = (content: string, event: PasteEvent) => void;
 
 /**
- * 除支持[通用属性]{@link ./common}，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}，还支持以下属性：
  *
  * > **说明：**
  * >
@@ -1024,7 +1024,7 @@ declare type OnPasteCallback = (content: string, event: PasteEvent) => void;
  * > 当光标在文本框边缘显示异常时，请检查是否是padding、borderRadius属性影响造成。
  * >
  * > 从API version 10开始，单行输入框可设置.width('auto')使组件宽度自适应文本宽度，自适应时组件宽度受constraintSize属性以及父容器传递的最大最小宽度限制，其余使用方式参考
- * > [尺寸设置]{@link ./common}。
+ * > [尺寸设置]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
@@ -2505,6 +2505,19 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
 
   /**
    * 设置是否在首行和尾行增加间距以避免文字截断。不通过该接口设置，默认不增加间距。
+   * 
+   * 从API版本26.1.0开始，该接口与[fallbackLineSpacing]{@link TextInputAttribute#fallbackLineSpacing}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } include - 是否在首行和尾行增加间距以避免文字截断。
    *     <br>true表示在首行和尾行增加间距；false表示在首行和尾行不增加间距。
@@ -2519,6 +2532,19 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
 
   /**
    * 针对多行文字叠加，支持行高基于文字实际高度自适应。此接口仅当行高小于文字实际高度时生效。不通过该接口设置，默认行高不基于文字实际高度自适应。
+   * 
+   * 从API版本26.1.0开始，该接口与[includeFontPadding]{@link TextInputAttribute#includeFontPadding}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } enabled - 行高是否基于文字实际高度自适应。
    *     <br>true表示行高基于文字实际高度自适应；false表示行高不基于文字实际高度自适应。
@@ -2626,7 +2652,7 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
  * >
  * > - 该组件从API version 7开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
  * >
- * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link ./rich_editor}组件。
+ * > - 该组件仅支持单文本样式，若需实现富文本样式，建议使用[RichEditor]{@link @global:RichEditor}组件。
  * >
  * > - 如需设置触摸文本组件外部时是否清除文本选中和手柄，可使用
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy}接口。

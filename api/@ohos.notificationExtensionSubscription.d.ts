@@ -34,6 +34,13 @@ import image from './@ohos.multimedia.image';
  * and setting the 
  * [notification authorization](docroot://notification/notification-glossary.md#notification-authorization) status.
  *
+ * > **NOTE**
+ * >
+ * > Notification extension events subscribed through this module are not delivered through the callbacks of this module
+ * > 's APIs. Instead, they are delivered through the callbacks (such as **onReceiveMessage**) of 
+ * > [NotificationSubscriberExtensionAbility]{@link @ohos.application.NotificationSubscriberExtensionAbility:NotificationSubscriberExtensionAbility},
+ * > and these callbacks are executed on the main thread of the **ExtensionAbility** instance.
+ *
  * @syscap SystemCapability.Notification.Notification
  * @since 22 dynamic
  * @since 23 static
@@ -315,7 +322,7 @@ declare namespace notificationExtensionSubscription {
    *     2.Memory operation error. 3.The user does not exist.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
-   * @throws { BusinessError } 1600022 - The application does not implement the
+   * @throws { BusinessError } 1600023 - The application does not implement the
    *     NotificationSubscriberExtensionAbility.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
