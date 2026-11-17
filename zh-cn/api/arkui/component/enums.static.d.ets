@@ -1182,7 +1182,7 @@ export declare enum EdgeEffect {
 }
 
 /**
- * Alignment enumeration description.
+ * 定义容器元素绘制区域内的子元素的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2084,7 +2084,7 @@ export declare enum SharedTransitionEffectType {
 }
 
 /**
- * Text style
+ * 字体样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2093,7 +2093,7 @@ export declare enum SharedTransitionEffectType {
  */
 export declare enum FontStyle {
   /**
-   * Default style.
+   * 标准的字体样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2102,7 +2102,7 @@ export declare enum FontStyle {
   Normal = 0,
 
   /**
-   * Italic style.
+   * 斜体的字体样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2112,7 +2112,7 @@ export declare enum FontStyle {
 }
 
 /**
- * The font weight of the text
+ * 字体粗细。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2121,7 +2121,7 @@ export declare enum FontStyle {
  */
 export declare enum FontWeight {
   /**
-   * Defines a lighter value than [Inherited Value]..
+   * 100字重，字体较细。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2130,7 +2130,7 @@ export declare enum FontWeight {
   Lighter = 0,
 
   /**
-   * Normal font. Equivalent to a digital value of 400.
+   * 400字重，字体粗细正常。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2139,7 +2139,7 @@ export declare enum FontWeight {
   Normal = 1,
 
   /**
-   * Defines a more general value than [Inherited Value].
+   * 400字重，字体粗细正常，与Normal效果相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2148,7 +2148,7 @@ export declare enum FontWeight {
   Regular = 2,
 
   /**
-   * Defines a value that is more centered than [Inherited Value].
+   * 500字重，字体粗细适中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2157,7 +2157,7 @@ export declare enum FontWeight {
   Medium = 3,
 
   /**
-   * Bold. Equivalent to a numeric value of 700.
+   * 700字重，字体较粗。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2166,7 +2166,7 @@ export declare enum FontWeight {
   Bold = 4,
 
   /**
-   * Defines a value that is heavier than [Inherited Value].
+   * 900字重，字体非常粗。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2176,7 +2176,7 @@ export declare enum FontWeight {
 }
 
 /**
- * Alignment of text.
+ * 文本段落在水平方向的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2185,7 +2185,7 @@ export declare enum FontWeight {
  */
 export declare enum TextAlign {
   /**
-   * Center the text.
+   * 水平居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2194,7 +2194,7 @@ export declare enum TextAlign {
   Center = 1,
 
   /**
-   * The text is aligned in the same direction as the writing
+   * 水平对齐首部。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2203,7 +2203,7 @@ export declare enum TextAlign {
   Start = 0,
 
   /**
-   * The text is aligned in the opposite direction of writing
+   * 水平对齐尾部。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2212,7 +2212,7 @@ export declare enum TextAlign {
   End = 2,
 
   /**
-   * Justify the text.
+   * 双端对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2221,7 +2221,7 @@ export declare enum TextAlign {
   JUSTIFY = 3,
 
   /**
-   * The text is aligned in the left direction.
+   * 左对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2230,7 +2230,7 @@ export declare enum TextAlign {
   LEFT = 4,
 
   /**
-   * The text is aligned in the right direction.
+   * 右对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2240,7 +2240,7 @@ export declare enum TextAlign {
 }
 
 /**
- * Declare how text overflows.
+ * 文本超长时的显示方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2249,7 +2249,7 @@ export declare enum TextAlign {
  */
 export declare enum TextOverflow {
   /**
-   * When the text overflows its dimensions, the text will not be cropped.
+   * 文本超长时按最大行截断显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2258,7 +2258,7 @@ export declare enum TextOverflow {
   None = 0,
 
   /**
-   * When the text overflows its dimensions, the text will be cropped and displayed.
+   * 文本超长时按最大行截断显示，与None效果相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2267,7 +2267,7 @@ export declare enum TextOverflow {
   Clip = 1,
 
   /**
-   * If the text overflows its dimensions, the text that cannot be displayed shall be replaced by ellipsis.
+   * 文本超长时显示不下的文本用省略号代替。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2276,7 +2276,7 @@ export declare enum TextOverflow {
   Ellipsis = 2,
 
   /**
-   * When the text overflows its dimensions, the text will scroll for displaying.
+   * 文本超长时以跑马灯的方式展示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2286,7 +2286,7 @@ export declare enum TextOverflow {
 }
 
 /**
- * Type of text modifier.
+ * 装饰线类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2295,7 +2295,7 @@ export declare enum TextOverflow {
  */
 export declare enum TextDecorationType {
   /**
-   * Do not use text decorative lines.
+   * 不使用文本装饰线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2304,7 +2304,7 @@ export declare enum TextDecorationType {
   None = 0,
 
   /**
-   * Underline the words.
+   * 文字下划线修饰。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2313,7 +2313,7 @@ export declare enum TextDecorationType {
   Underline = 1,
 
   /**
-   * Text is in all uppercase.
+   * 文字上划线修饰。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2322,7 +2322,7 @@ export declare enum TextDecorationType {
   Overline = 2,
 
   /**
-   * A modifier line that passes through the text.
+   * 穿过文本的修饰线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2332,7 +2332,7 @@ export declare enum TextDecorationType {
 }
 
 /**
- * Letter type in text
+ * 文本大小写的样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2341,7 +2341,7 @@ export declare enum TextDecorationType {
  */
 export declare enum TextCase {
   /**
-   * The default is normal.
+   * 保持文本原有大小写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2350,7 +2350,7 @@ export declare enum TextCase {
   Normal = 0,
 
   /**
-   * The text is all lowercase.
+   * 文本采用全小写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2359,7 +2359,7 @@ export declare enum TextCase {
   LowerCase = 1,
 
   /**
-   * The text is all uppercase.
+   * 文本采用全大写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2369,7 +2369,7 @@ export declare enum TextCase {
 }
 
 /**
- * Enum of text height adaptation
+ * 文本自适应布局调整字号的方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2378,9 +2378,7 @@ export declare enum TextCase {
  */
 export declare enum TextHeightAdaptivePolicy {
   /**
-   * Priority is given to using the maxLines attribute to adapt the text height.
-   * If the layout size using the maxLines attribute exceeds the layout constraint, try reducing the font size to
-   * display more text.
+   * 设置文本高度自适应方式为以[maxLines]{@link TextAreaAttribute#maxLines(value: number)}优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2389,9 +2387,7 @@ export declare enum TextHeightAdaptivePolicy {
   MAX_LINES_FIRST = 0,
 
   /**
-   * Priority is given to using the minFontSize attribute to adapt the text height.
-   * If the text can be layout in a single line using the minFontSize property, try increasing the font size and using
-   * the maximum possible font size.
+   * 设置文本高度自适应方式为以缩小字体优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2400,10 +2396,7 @@ export declare enum TextHeightAdaptivePolicy {
   MIN_FONT_SIZE_FIRST = 1,
 
   /**
-   * Priority is given to using the layout constraint to adapt the text height.
-   * If the layout size exceeds the layout constraint, try reducing the font size. If the layout size still exceeds
-   * the layout constraint after reducing the font size to minFontSize, remove the lines that exceed the layout
-   * constraint.
+   * 设置文本高度自适应方式为以布局约束（高度）优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2641,7 +2634,7 @@ export declare enum ArrowPointPosition {
 }
 
 /**
- * Indicates the share option.
+ * 剪贴板复制范围。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2650,7 +2643,7 @@ export declare enum ArrowPointPosition {
  */
 export declare enum CopyOptions {
   /**
-   * Not allow share.
+   * 不支持复制。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2659,7 +2652,7 @@ export declare enum CopyOptions {
   None = 0,
 
   /**
-   * Share in app.
+   * 支持仅在当前应用内复制粘贴。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2668,7 +2661,7 @@ export declare enum CopyOptions {
   InApp = 1,
 
   /**
-   * Share in local device.
+   * 支持复制后在所有应用内粘贴。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3131,7 +3124,7 @@ export declare enum FunctionKey {
 }
 
 /**
- * The alignment of ImageSpan
+ * 图片基于行高的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3140,7 +3133,7 @@ export declare enum FunctionKey {
  */
 export declare enum ImageSpanAlignment {
   /**
-   * Indicating that the bottom of the ImageSpan should be aligned with the baseline of the surrounding text.
+   * 图片下边沿与文本BaseLine对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3149,7 +3142,7 @@ export declare enum ImageSpanAlignment {
   BASELINE = 4,
 
   /**
-   * Indicating that the bottom of the ImageSpan should be aligned with the bottom of the surrounding text.
+   * 图片下边沿与行下边沿对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3158,7 +3151,7 @@ export declare enum ImageSpanAlignment {
   BOTTOM = 3,
 
   /**
-   * Indicating that the center of the ImageSpan should be aligned with the center of the surrounding text.
+   * 图片中间与行中间对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3167,7 +3160,7 @@ export declare enum ImageSpanAlignment {
   CENTER = 2,
 
   /**
-   * Indicating that the top of the ImageSpan should be aligned with the top of the surrounding text.
+   * 图片上边沿与行上边沿对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3176,7 +3169,7 @@ export declare enum ImageSpanAlignment {
   TOP = 1,
 
   /**
-   * Indicating that the ImageSpan should be aligned by the paragraph's textVerticalAlign.
+   * 对齐方式跟随Text父组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3205,7 +3198,7 @@ export declare enum ObscuredReasons {
 }
 
 /**
- * Text content style.
+ * 文本框多态样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3214,7 +3207,7 @@ export declare enum ObscuredReasons {
  */
 export declare enum TextContentStyle {
   /**
-   * Text content default style.
+   * 默认风格。光标宽度为1.5vp，光标高度与文本选中高亮高度和字体大小相关。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3223,7 +3216,13 @@ export declare enum TextContentStyle {
   DEFAULT = 0,
 
   /**
-   * Text content inline style.
+   * 内联输入风格，也称内联模式。文本选中高亮高度与输入框高度相同。
+   *
+   * 内联输入是在有明显的编辑态/非编辑态的区分场景下使用，例如：文件列表视图中的重命名。
+   *
+   * 不支持showError属性。
+   *
+   * 内联模式下，不支持拖入文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3597,7 +3596,7 @@ export declare enum DialogButtonStyle {
 }
 
 /**
- * Enum of word break
+ * 断行规则。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3606,7 +3605,7 @@ export declare enum DialogButtonStyle {
  */
 export declare enum WordBreak {
   /**
-   * By default, CJK text can be wrapped between any 2 characters, and non-CJK text can only be wrapped in spaces.
+   * CJK(中文、日文、韩文)文本可以在任意2个字符间断行，而Non-CJK文本（如英文等）只能在空白符处断行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3615,7 +3614,7 @@ export declare enum WordBreak {
   NORMAL = 0,
 
   /**
-   * Non-CJK text be wrapped at any character
+   * 对于Non-CJK的文本，可在任意2个字符间断行。对于CJK文本，效果与NORMAL一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3624,8 +3623,8 @@ export declare enum WordBreak {
   BREAK_ALL = 1,
 
   /**
-   * Non-CJK text can be wrapped at any character
-   * and if a complete word can be preserved in space breaks, the word must be kept on the line.
+   * 与BREAK_ALL相同，对于Non-CJK的文本可在任意2个字符间断行，一行文本中有断行破发点（如空白符）时，优先按破发点换行，保障单词优先完整显示。若整一行文本均无断行破发点，则在任意2个字符间断行。对于CJK文本，效果与
+   * NORMAL一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3634,7 +3633,7 @@ export declare enum WordBreak {
   BREAK_WORD = 2,
 
   /**
-   * For supported languages, line breaks can be performed by syllables.
+   * 每行末尾单词尝试通过连字符“-”进行断行，若无法添加连字符“-”，则跟BREAK_WORD保持一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3644,7 +3643,7 @@ export declare enum WordBreak {
 }
 
 /**
- * Enum of line break strategy
+ * 折行规则。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3653,8 +3652,7 @@ export declare enum WordBreak {
  */
 export declare enum LineBreakStrategy {
   /**
-   * By default. Display as many characters as possible on each line until no more characters
-   * can be displayed on that line, and do not automatically add hyphens under this strategy
+   * 使每一行尽可能显示多的字符，直到这一行不能显示更多字符时进行折行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3663,8 +3661,7 @@ export declare enum LineBreakStrategy {
   GREEDY = 0,
 
   /**
-   * High quality folding. Optimize the layout of the entire text's line breaks and automatically
-   * add hyphens if necessary.
+   * 在BALANCED的基础上，尽可能填满行，同时最后一行的权重较低，可能出现最后一行留白较多的情形。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3673,8 +3670,7 @@ export declare enum LineBreakStrategy {
   HIGH_QUALITY = 1,
 
   /**
-   * Balanced folding. We will try our best to ensure that the width of each line in a paragraph
-   * is the same, and if necessary, we will add conjunction
+   * 在不拆词的情况下，尽量使一个段落中每一行的宽度相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3750,7 +3746,7 @@ export declare enum IlluminatedType {
 }
 
 /**
- * Enum of ellipsisMode
+ * 省略的位置。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3759,7 +3755,7 @@ export declare enum IlluminatedType {
  */
 export declare enum EllipsisMode {
   /**
-   * The ellipsis is in the head.
+   * 省略行首内容。适用单行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3768,7 +3764,7 @@ export declare enum EllipsisMode {
   START = 0,
 
   /**
-   * The ellipsis is in the middle.
+   * 省略行中内容。适用单行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3777,7 +3773,7 @@ export declare enum EllipsisMode {
   CENTER = 1,
 
   /**
-   * The ellipsis is at the end.
+   * 省略行末内容。适用单行文本和多行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3786,7 +3782,7 @@ export declare enum EllipsisMode {
   END = 2,
 
    /**
-    * The ellipsis is in the head. It is valid for multiline and single line.
+    * 省略行首内容。适用单行文本和多行文本场景。
     *
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
@@ -3795,7 +3791,7 @@ export declare enum EllipsisMode {
    MULTILINE_START = 3,
 
   /**
-   * The ellipsis is in the middle. It is valid for multiline and single line.
+   * 省略行中内容。适用单行文本和多行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3952,7 +3948,7 @@ export declare enum EmbeddedType {
 }
 
 /**
- * Marquee scrolling strategy after text update
+ * 跑马灯组件属性更新后，跑马灯的滚动策略。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3961,7 +3957,7 @@ export declare enum EmbeddedType {
  */
 export declare enum MarqueeUpdateStrategy {
   /**
-   * Reset scroll position and restart scroll.
+   * 跑马灯组件属性更新后，从开始位置，运行跑马灯效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3970,7 +3966,7 @@ export declare enum MarqueeUpdateStrategy {
   DEFAULT = 0,
 
   /**
-   * Preserve scroll position, just change to new text
+   * 跑马灯组件属性更新后，保持当前位置，运行跑马灯效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3980,7 +3976,7 @@ export declare enum MarqueeUpdateStrategy {
 }
 
 /**
- * Type of text decoration line style.
+ * 装饰线样式。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3989,7 +3985,7 @@ export declare enum MarqueeUpdateStrategy {
  */
 export declare enum TextDecorationStyle {
   /**
-   * Solid line.
+   * 单实线（默认值）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3998,7 +3994,7 @@ export declare enum TextDecorationStyle {
   SOLID = 0,
 
   /**
-   * Double lines.
+   * 双实线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4007,7 +4003,7 @@ export declare enum TextDecorationStyle {
   DOUBLE = 1,
 
   /**
-   * Dotted line.
+   * 点线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4016,7 +4012,7 @@ export declare enum TextDecorationStyle {
   DOTTED = 2,
 
   /**
-   * Dashed line.
+   * 虚线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4025,7 +4021,7 @@ export declare enum TextDecorationStyle {
   DASHED = 3,
 
   /**
-   * Wavy line.
+   * 波浪线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4035,7 +4031,7 @@ export declare enum TextDecorationStyle {
 }
 
 /**
- * Type of text selectable.
+ * 文本可选择、可获焦状态。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4044,7 +4040,7 @@ export declare enum TextDecorationStyle {
  */
 export declare enum TextSelectableMode {
   /**
-   * set text selectable and unfocusable.
+   * 文本可选择，但不可获焦，设置属性selection、bindSelectionMenu、copyOption不影响当前行为。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4053,7 +4049,7 @@ export declare enum TextSelectableMode {
   SELECTABLE_UNFOCUSABLE = 0,
 
   /**
-   * set text selectable and focusable.
+   * 文本可选择，可获焦并Touch后获得焦点。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4062,7 +4058,7 @@ export declare enum TextSelectableMode {
   SELECTABLE_FOCUSABLE = 1,
 
   /**
-   * set text unselectable and unfocusable.
+   * 文本不可选择，不可获焦，设置属性selection、bindSelectionMenu、copyOption均不生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

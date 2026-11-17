@@ -506,7 +506,7 @@ export declare enum EnterKeyType {
   NEW_LINE = 8
 }
 /**
- * Defines the underline color width property.
+ * 定义下划线颜色宽度属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

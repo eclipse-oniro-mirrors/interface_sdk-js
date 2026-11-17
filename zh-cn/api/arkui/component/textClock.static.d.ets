@@ -119,8 +119,7 @@ export declare interface TextClockOptions {
      */
     timeZoneOffset?: double;
     /**
-     * TextClock controller.
-     * Anonymous Object Rectification.
+     * 绑定一个控制器，用来控制文本时钟的状态。当需要通过代码控制时钟的启动与停止时传入此参数；不传入时，时钟仍会正常运行显示，但无法通过代码控制启停。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

@@ -2818,7 +2818,7 @@ declare enum FontStyle {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Normal = 0,
+  Normal,
 
   /**
    * 斜体的字体样式。
@@ -2829,7 +2829,7 @@ declare enum FontStyle {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Italic = 1
+  Italic
 }
 
 /**
@@ -2851,7 +2851,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Lighter = 0,
+  Lighter,
 
   /**
    * 400字重，字体粗细正常。
@@ -2862,7 +2862,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Normal = 1,
+  Normal,
 
   /**
    * 400字重，字体粗细正常，与Normal效果相同。
@@ -2873,7 +2873,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Regular = 2,
+  Regular,
 
   /**
    * 500字重，字体粗细适中。
@@ -2884,7 +2884,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Medium = 3,
+  Medium,
 
   /**
    * 700字重，字体较粗。
@@ -2895,7 +2895,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Bold = 4,
+  Bold,
 
   /**
    * 900字重，字体非常粗。
@@ -2906,7 +2906,7 @@ declare enum FontWeight {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Bolder = 5
+  Bolder
 }
 
 /**
@@ -2928,7 +2928,7 @@ declare enum TextAlign {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Center = 0,
+  Center,
 
   /**
    * 水平对齐首部。
@@ -2939,7 +2939,7 @@ declare enum TextAlign {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Start = 1,
+  Start,
 
   /**
    * 水平对齐尾部。
@@ -2950,7 +2950,7 @@ declare enum TextAlign {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  End = 2,
+  End,
 
   /**
    * 双端对齐。
@@ -2962,7 +2962,7 @@ declare enum TextAlign {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  JUSTIFY = 3,
+  JUSTIFY,
 
   /**
    * 左对齐。
@@ -3008,7 +3008,7 @@ declare enum TextOverflow {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  None = 0,
+  None,
 
   /**
    * 文本超长时按最大行截断显示，与None效果相同。
@@ -3019,7 +3019,7 @@ declare enum TextOverflow {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Clip = 1,
+  Clip,
 
   /**
    * 文本超长时显示不下的文本用省略号代替。
@@ -3030,7 +3030,7 @@ declare enum TextOverflow {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Ellipsis = 2,
+  Ellipsis,
 
   /**
    * 文本超长时以跑马灯的方式展示。
@@ -3041,7 +3041,7 @@ declare enum TextOverflow {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  MARQUEE = 3
+  MARQUEE
 }
 
 /**
@@ -3063,7 +3063,7 @@ declare enum TextDecorationType {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  None = 0,
+  None,
 
   /**
    * 文字下划线修饰。
@@ -3074,7 +3074,7 @@ declare enum TextDecorationType {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Underline = 1,
+  Underline,
 
   /**
    * 文字上划线修饰。
@@ -3085,7 +3085,7 @@ declare enum TextDecorationType {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Overline = 2,
+  Overline,
 
   /**
    * 穿过文本的修饰线。
@@ -3096,7 +3096,7 @@ declare enum TextDecorationType {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  LineThrough = 3
+  LineThrough
 }
 
 /**
@@ -3118,7 +3118,7 @@ declare enum TextCase {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  Normal = 0,
+  Normal,
 
   /**
    * 文本采用全小写。
@@ -3129,7 +3129,7 @@ declare enum TextCase {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  LowerCase = 1,
+  LowerCase,
 
   /**
    * 文本采用全大写。
@@ -3140,7 +3140,7 @@ declare enum TextCase {
    * @atomicservice [since 11]
    * @since 7 dynamic
    */
-  UpperCase = 2
+  UpperCase
 }
 
 /**
@@ -3162,7 +3162,7 @@ declare enum TextHeightAdaptivePolicy {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  MAX_LINES_FIRST = 0,
+  MAX_LINES_FIRST,
 
   /**
    * 设置文本高度自适应方式为以缩小字体优先。
@@ -3173,7 +3173,7 @@ declare enum TextHeightAdaptivePolicy {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  MIN_FONT_SIZE_FIRST = 1,
+  MIN_FONT_SIZE_FIRST,
 
   /**
    * 设置文本高度自适应方式为以布局约束（高度）优先。
@@ -3184,7 +3184,7 @@ declare enum TextHeightAdaptivePolicy {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  LAYOUT_CONSTRAINT_FIRST = 2
+  LAYOUT_CONSTRAINT_FIRST
 }
 
 /**
@@ -4038,7 +4038,7 @@ declare enum ImageSpanAlignment {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  BASELINE = 0,
+  BASELINE,
 
   /**
    * 图片下边沿与行下边沿对齐。
@@ -4049,7 +4049,7 @@ declare enum ImageSpanAlignment {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  BOTTOM = 1,
+  BOTTOM,
 
   /**
    * 图片中间与行中间对齐。
@@ -4060,7 +4060,7 @@ declare enum ImageSpanAlignment {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  CENTER = 2,
+  CENTER,
 
   /**
    * 图片上边沿与行上边沿对齐。
@@ -4071,7 +4071,7 @@ declare enum ImageSpanAlignment {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  TOP = 3,
+  TOP,
 
   /**
    * 对齐方式跟随Text父组件。
@@ -4082,7 +4082,7 @@ declare enum ImageSpanAlignment {
    * @atomicservice
    * @since 20 dynamic
    */
-  FOLLOW_PARAGRAPH = 4
+  FOLLOW_PARAGRAPH
 }
 
 /**
@@ -4126,7 +4126,7 @@ declare enum TextContentStyle {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  DEFAULT = 0,
+  DEFAULT,
 
   /**
    * 内联输入风格，也称内联模式。文本选中高亮高度与输入框高度相同。
@@ -4143,7 +4143,7 @@ declare enum TextContentStyle {
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
-  INLINE = 1
+  INLINE
 }
 
 /**
