@@ -41,7 +41,7 @@ import { RecordData } from '@ohos.base';
 export abstract class ComponentContentBase extends Content {}
 
 /**
- * Defines ComponentContent.
+ * 定义ComponentContent。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -50,11 +50,11 @@ export abstract class ComponentContentBase extends Content {}
 export declare class ComponentContent<T = undefined> extends ComponentContentBase {
 
   /**
-   * Constructor.
+   * 构造函数。
    *
-   * @param { UIContext } uiContext - uiContext used to create the ComponentContent
-   * @param { WrappedBuilder<CustomBuilder> } builder - Defines the builder
-   *     that will be called to build ComponentContent.
+   * @param { UIContext } uiContext - 用于创建ComponentContent的UIContext对象。
+   * @param { WrappedBuilder<CustomBuilder> } builder - 定义的builder
+   *     将被调用来构建ComponentContent。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -62,12 +62,12 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   constructor(uiContext: UIContext, builder: WrappedBuilder<CustomBuilder>);
 
   /**
-   * Constructor.
+   * 构造函数。
    *
-   * @param { UIContext } uiContext - uiContext used to create the ComponentContent
-   * @param { WrappedBuilder<CustomBuilderT<T>> } builder - Defines the builder
-   *     that will be called to build ComponentContent.
-   * @param { T } args - Parameters used to update the ComponentContent.
+   * @param { UIContext } uiContext - 用于创建ComponentContent的UIContext对象。
+   * @param { WrappedBuilder<CustomBuilderT<T>> } builder - 定义的builder
+   *     将被调用来构建ComponentContent。
+   * @param { T } args - 用于更新ComponentContent的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -75,14 +75,13 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   constructor(uiContext: UIContext, builder: WrappedBuilder<CustomBuilderT<T>>, args: T);
 
   /**
-   * Constructor.
+   * 构造函数。
    *
-   * @param { UIContext } uiContext - uiContext used to create the ComponentContent
-   * @param { WrappedBuilder<CustomBuilderT<T>> } builder - Defines the builder
-   *     that will be called to build ComponentContent.
-   *     ComponentContent.
-   * @param { T } args - Parameters used to update the ComponentContent.
-   * @param { BuildOptions } options - Defines the options that will be used when building.
+   * @param { UIContext } uiContext - 用于创建ComponentContent的UIContext对象。
+   * @param { WrappedBuilder<CustomBuilderT<T>> } builder - 定义的builder
+   *     将被调用来构建ComponentContent。
+   * @param { T } args - 用于更新ComponentContent的参数。
+   * @param { BuildOptions } options - 定义构建时要使用的选项。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -90,10 +89,10 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   constructor(uiContext: UIContext, builder: WrappedBuilder<CustomBuilderT<T>>, args: T, options: BuildOptions);
 
   /**
-   * Update the ComponentContent based on the provided parameters.
+   * 基于提供的参数更新ComponentContent。
    *
-   * @param { T } args - Parameters used to update the ComponentContent, which must match the types required by the
-   *     builder bound to the ComponentContent.
+   * @param { T } args - 用于更新ComponentContent的参数，该参数必须与绑定到ComponentContent的
+   *     builder所需的类型匹配。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -111,7 +110,7 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   reuse(param?: RecordData): void;
 
   /**
-   * Recycle the ComponentContent.
+   * 回收ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -120,7 +119,7 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   recycle(): void;
 
   /**
-   * Dispose the ComponentContent immediately.
+   * 立即解绑ComponentContent。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -139,7 +138,7 @@ export declare class ComponentContent<T = undefined> extends ComponentContentBas
   isDisposed(): boolean;
 
   /**
-   * Notify ComponentContent to update the configuration to trigger a reload of the ComponentContent.
+   * 通知ComponentContent更新配置，以触发ComponentContent的重新加载。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
