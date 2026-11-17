@@ -3052,7 +3052,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  SCROLL_LOCK = 20,
+  SCROLL_LOCK = 19,
 
   /**
    * Pause/Break key.
@@ -3061,7 +3061,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAUSE_BREAK = 21,
+  PAUSE_BREAK = 20,
 
   /**
    * NumLock key.
@@ -3070,7 +3070,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  NUM_LOCK = 22,
+  NUM_LOCK = 21,
 
   /**
    * Insert key.
@@ -3079,7 +3079,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  INSERT = 23,
+  INSERT = 22,
 
   /**
    * Delete key.
@@ -3088,7 +3088,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  DELETE = 24,
+  DELETE = 23,
 
   /**
    * Home key.
@@ -3097,7 +3097,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  HOME = 25,
+  HOME = 24,
 
   /**
    * End key.
@@ -3106,7 +3106,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  END = 26,
+  END = 25,
 
   /**
    * Page Up key.
@@ -3115,7 +3115,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAGE_UP = 27,
+  PAGE_UP = 26,
 
   /**
    * Page Down key.
@@ -3124,7 +3124,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAGE_DOWN = 28,
+  PAGE_DOWN = 27,
 
   /**
    * Enter key.
@@ -3133,7 +3133,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  ENTER = 29,
+  ENTER = 28,
 
   /**
    * Backspace key.
@@ -3142,7 +3142,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  BACKSPACE = 30
+  BACKSPACE = 29
 }
 
 /**
