@@ -6256,10 +6256,11 @@ export class UIContext {
   getTextMenuController(): TextMenuController;
 
   /**
-   * 在输入框绑定输入法前设置键盘样式配置
+   * 设置键盘样式，包括模糊效果和流光效果，仅在沉浸式模式下生效，沉浸式定义可参见[KeyboardAppearance]{@link KeyboardAppearance}。
+   * 其中，流光效果依赖于模糊效果，若需启用流光效果，则需同时开启模糊效果，最终显示效果取决于输入法处理。
    *
-   * @param { number } uniqueId - The unique id of the input component.
-   * @param { KeyboardAppearanceConfig } config - The config of keyboard.
+   * @param { number } uniqueId - 组件节点对应的UniqueId。取值范围大于等于0。
+   * @param { KeyboardAppearanceConfig } config - 键盘样式配置参数。
    * @throws { BusinessError } 202 - The caller is not a system application.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
