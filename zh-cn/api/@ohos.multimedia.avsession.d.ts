@@ -14,7 +14,7 @@
 */
 
 /**
-  * @file
+  * @file 媒体会话管理
   * @kit AVSessionKit
  */
 

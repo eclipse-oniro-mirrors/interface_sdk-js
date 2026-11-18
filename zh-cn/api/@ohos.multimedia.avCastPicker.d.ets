@@ -14,7 +14,7 @@
 */
 
 /**
- * @file
+ * @file 投播组件
  * @kit AVSessionKit
  */
 
@@ -24,7 +24,7 @@ import { AVCastPickerColorMode } from './@ohos.multimedia.avCastPickerParam';
 
 /**
  * 本模块提供创建投播组件AVCastPicker的功能，提供设备发现连接的统一入口。
- * 
+ *
  * > **说明：**
  * >
  * > - 示例效果请以真机为准，当前DevEco Studio预览器无实际投播功能。<!--Del-->
@@ -39,7 +39,7 @@ import { AVCastPickerColorMode } from './@ohos.multimedia.avCastPickerParam';
 declare struct AVCastPicker {
   /**
    * 正常状态下投播组件的颜色。
-   * 
+   *
    * 未设置时，将采用colorMode下的颜色设置。
    *
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -52,7 +52,7 @@ declare struct AVCastPicker {
 
   /**
    * 设备连接成功状态下投播组件的颜色。
-   * 
+   *
    * 未设置时，系统将优先根据normalColor的颜色匹配；如果normalColor也未设置，将采用colorMode下的颜色设置。
    *
    * @syscap SystemCapability.Multimedia.AVSession.AVCast
@@ -65,7 +65,7 @@ declare struct AVCastPicker {
 
   /**
    * 投播样式。
-   * 
+   *
    * - 当sessionType是audio或者video时，默认值为STYLE_PANEL。
    * - 当sessionType是voice_call或者video_call时，默认值为STYLE_MENU，且不可修改为STYLE_PANEL。
    *
@@ -78,7 +78,7 @@ declare struct AVCastPicker {
 
   /**
    * 显示模式。默认值为AUTO。
-   * 
+   *
    * - 当colorMode设置为AUTO时，跟随系统的深浅色模式的默认色值。
    * - 当colorMode设置为DARK、LIGHT时，使用对应模式的系统预设色值。
    *

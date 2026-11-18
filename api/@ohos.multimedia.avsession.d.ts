@@ -14,7 +14,7 @@
 */
 
 /**
- * @file
+ * @file AVSession Management
  * @kit AVSessionKit
  */
 
