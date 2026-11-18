@@ -604,6 +604,20 @@ declare namespace http {
      * @since 26.1.0 dynamic&static
      */
     followRedirectPostToGet?: boolean;
+
+    /**
+     * The host name required for SSL server host name verification.
+     * The default value of sslServerHostnameVerify is true. When sslServerHostnameVerify is set to false, domain name
+     * verification is disabled.
+     * In this scenario, the certificate domain name verification is ignored when the IP address is used for connection.
+     * Default value: true.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 dynamic&static
+     */
+    sslServerHostnameVerification?: boolean;
   }
 
   /**
