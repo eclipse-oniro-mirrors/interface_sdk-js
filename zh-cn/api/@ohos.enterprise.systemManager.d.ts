@@ -577,7 +577,196 @@ declare namespace systemManager {
      * @stagemodelonly
      * @since 23
      */
-    RECENT = 5
+    RECENT = 5,
+
+    /**
+     * 功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    FN = 6,
+
+    /**
+     * 方向键-上。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_UP = 7,
+
+    /**
+     * 方向键-下。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_DOWN = 8,
+
+    /**
+     * 方向键-左。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_LEFT = 9,
+
+    /**
+     * 方向键-右。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_RIGHT = 10,
+
+    /**
+     * 方向键-确认。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    DPAD_CENTER = 11,
+
+    /**
+     * 亮度上键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_UP = 12,
+
+    /**
+     * 亮度下键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    BRIGHTNESS_DOWN = 13,
+
+    /**
+     * ESC键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ESCAPE = 14,
+
+    /**
+     * F1功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F1 = 15,
+
+    /**
+     * F2功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F2 = 16,
+
+    /**
+     * F3功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F3 = 17,
+
+    /**
+     * F4功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F4 = 18,
+
+    /**
+     * F5功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F5 = 19,
+
+    /**
+     * F6功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F6 = 20,
+
+    /**
+     * F7功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F7 = 21,
+
+    /**
+     * F8功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F8 = 22,
+
+    /**
+     * F9功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F9 = 23,
+
+    /**
+     * F10功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F10 = 24,
+
+    /**
+     * F11功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F11 = 25,
+
+    /**
+     * F12功能键。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    F12 = 26
   }
 
   /**
