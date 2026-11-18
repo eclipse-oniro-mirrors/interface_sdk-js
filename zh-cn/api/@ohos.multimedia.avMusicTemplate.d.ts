@@ -14,9 +14,7 @@
  */
 
 /**
- AVMusicTemplate
- * @file
- AVMusicTemplate
+ * @file 音频模板
  * @kit AVSessionKit
  */
 import type { Callback } from './@ohos.base';

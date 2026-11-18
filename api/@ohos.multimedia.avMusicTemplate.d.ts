@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Audio Template
  * @kit AVSessionKit
  */
 import type { Callback } from './@ohos.base';
@@ -507,7 +507,7 @@ declare namespace avMusicTemplate {
 
   /**
    * AVMusicTemplate interface
-   * 
+   *
    * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
    * @stagemodelonly
    * @since 23 dynamic&static
@@ -515,7 +515,7 @@ declare namespace avMusicTemplate {
   class AVMusicTemplate {
     /**
      * Unique AVMusicTemplate descriptor.
-     * 
+     *
      * @type { string }
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
@@ -525,7 +525,7 @@ declare namespace avMusicTemplate {
 
     /**
      * AVMusicTemplate tag.
-     * 
+     *
      * @type { string }
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
      * @stagemodelonly
@@ -535,7 +535,7 @@ declare namespace avMusicTemplate {
 
     /**
      * Start media center template interface.
-     * 
+     *
      * @returns { Promise<OperResult> } (OperResult) returned through promise
      * @throws { BusinessError } 801 - capability not supported.
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
@@ -1438,7 +1438,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  class AVMusicTemplateController {  
+  class AVMusicTemplateController {
 
     /**
      * Unique id of the AVMusicTemplateController.
@@ -2281,7 +2281,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface OperResult {  
+  interface OperResult {
     /**
      * error code.
      *
@@ -2311,7 +2311,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface MediaTab {  
+  interface MediaTab {
     /**
      * Unique ID of the tab page.
      *
@@ -2362,7 +2362,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface MediaTabContent extends OperResult {  
+  interface MediaTabContent extends OperResult {
 
     /**
      * Tab id corresponding to the content.
@@ -2394,7 +2394,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface CustomElement extends OperResult {  
+  interface CustomElement extends OperResult {
 
     /**
      * User information
@@ -2446,7 +2446,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface Compilation extends OperResult {  
+  interface Compilation extends OperResult {
 
     /**
      * Unique ID of the compilation
@@ -2517,7 +2517,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface PageMediaEntity extends OperResult {  
+  interface PageMediaEntity extends OperResult {
     /**
      * Pagination query page number.
      *
@@ -2606,7 +2606,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface MediaEntity {  
+  interface MediaEntity {
 
     /**
      * Unique ID of the media resource.
@@ -2709,7 +2709,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface Banner extends MediaEntity {  
+  interface Banner extends MediaEntity {
     /**
      * Is support one play
      *
@@ -2872,7 +2872,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  enum DownloadStatus {  
+  enum DownloadStatus {
     /**
      * DOWNLOAD_SUCCESS
      *
@@ -3160,7 +3160,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface UserInfo {  
+  interface UserInfo {
     /**
      * Unique id of the user.
      *
@@ -3230,7 +3230,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface MemberPurchaseInfo {  
+  interface MemberPurchaseInfo {
     /**
      * Unique id of the member purchase information.
      *
@@ -3290,7 +3290,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface QrCodeInfo {  
+  interface QrCodeInfo {
 
     /**
      * A QR code session used to uniquely identify a user login.
@@ -3396,7 +3396,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface SettingItem {  
+  interface SettingItem {
     /**
      * Unique ID of the setting item.
      *
@@ -3470,7 +3470,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface SettingContent {  
+  interface SettingContent {
     /**
      * Value of the setting content.
      *
@@ -3520,7 +3520,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface DialogActionInfo {  
+  interface DialogActionInfo {
     /**
      * Unique ID of the dialog action.
      *
@@ -3560,7 +3560,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface DialogInfo {  
+  interface DialogInfo {
     /**
      * Unique id of the dialog.
      *
@@ -3643,7 +3643,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface DialogButtonInfo {  
+  interface DialogButtonInfo {
     /**
      * Button id.
      *
@@ -3683,7 +3683,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  interface SearchPlayMusicItem {  
+  interface SearchPlayMusicItem {
     /**
      * Unique id of the Media.
      *
@@ -3834,7 +3834,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface SearchPlayKaraokeItem {  
+  interface SearchPlayKaraokeItem {
     /**
      * The unique identifier of the media resource.
      *
@@ -3843,7 +3843,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     entityId: string;
- 
+
     /**
      * The name of the audio.
      * When this parameter is left blank, the application searches for audio only based on {@link entityId}.
@@ -3854,7 +3854,7 @@ declare namespace avMusicTemplate {
      */
     entityName?: string;
   }
- 
+
   /**
    * The definition of SearchPlayKaraokeInfo.
    *
@@ -3862,11 +3862,11 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface SearchPlayKaraokeInfo {  
- 
+  interface SearchPlayKaraokeInfo {
+
     /**
      * Search the playlist.
-     * When this parameter is undefined or the array is empty, 
+     * When this parameter is undefined or the array is empty,
      *     the application does not search for audio by referring to this field.
      *
      * @syscap SystemCapability.Multimedia.AVSession.AVMusicTemplate
@@ -3874,7 +3874,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     items?: SearchPlayKaraokeItem[];
- 
+
     /**
      * Song name.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3884,7 +3884,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     songName?: string;
- 
+
     /**
      * Artist name.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3894,7 +3894,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     artist?: string;
- 
+
     /**
      * Album name.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3904,7 +3904,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     albumName?: string;
- 
+
     /**
      * Ranking name.
      * When this parameter is left blank, the application does not search for audio by referring to this field.
@@ -3914,7 +3914,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     billBoard?: string;
- 
+
     /**
      * Scene.
      * When this parameter is left blank, the application does not search for audio by referring to this field.
@@ -3924,7 +3924,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     scene?: string;
- 
+
     /**
      * Style.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3934,7 +3934,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     genre?: string;
- 
+
     /**
      * Musical instruments.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3944,7 +3944,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     instrument?: string;
- 
+
     /**
      * Language.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3954,7 +3954,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     language?: string;
- 
+
     /**
      * Age.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3964,7 +3964,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     decade?: string;
- 
+
     /**
      * Emotions.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3974,7 +3974,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     mood?: string;
- 
+
     /**
      * Gender.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3984,7 +3984,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     gender?: string;
- 
+
     /**
      * Search for keywords.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -3994,7 +3994,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     queryKeyWords?: string;
- 
+
     /**
      * Audio extras.
      * When this value is blank, the application does not search for audio by referring to this field.
@@ -4376,7 +4376,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  enum PlaybackState {  
+  enum PlaybackState {
     /**
      * Preparing state. Indicates that the media file is not ready to play,
      * the media is loading or buffering
@@ -4480,7 +4480,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  enum AVMusicTemplateType {  
+  enum AVMusicTemplateType {
     /**
      * Smart_car.
      *
@@ -4499,7 +4499,7 @@ declare namespace avMusicTemplate {
    * @stagemodelonly
    * @since 23 dynamic&static
    */
-  enum SearchPlayInfoType {  
+  enum SearchPlayInfoType {
     /**
      * playMusic.
      *
@@ -4535,7 +4535,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     PLAY_VIDEO_LIST = 'playVideoList',
- 
+
     /**
      * K song on demand
      *
@@ -4544,7 +4544,7 @@ declare namespace avMusicTemplate {
      * @since 26.0.1 dynamic&static
      */
     PLAY_KARAOKE = 'playKaraoke',
- 
+
     /**
      * K song playlist on-demand
      *
