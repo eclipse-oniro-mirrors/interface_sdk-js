@@ -1097,10 +1097,12 @@ export declare class PromptAction {
  */
 export class DialogPresenter {
   /**
-   * Presents a fixed-style dialog box.
+   * 提供一个固定样式的弹出框，返回对话结果。使用Promise异步回调。适用于使用系统统一样式展示提示或确认信息的场景。
    *
-   * @param { dialog.DialogStyleOptions } [options] - Dialog options.
-   * @returns { Promise<DialogResult> } Promise used to return the dialog result.
+   * @param { dialog.DialogStyleOptions } [options] - 固定样式弹出框的配置选项，用于配置弹出框的标题、副标题、消息、
+   *     按钮及工作表项等内容。弹出框样式（背景、对齐、蒙层、避让等）继承自dialog.DialogBaseOptions。
+   *     说明：dialog.DialogBaseOptions中的isModal与showInSubWindow不能同时设置为true。
+   * @returns { Promise<DialogResult> } Promise对象，返回对话结果，包含弹出框ID。
    * @throws { BusinessError } 103306 - The dialog cannot be opened due to node mount failure.
    * @throws { BusinessError } 103308 - The dialog cannot be opened due to subwindow create failure.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1132,11 +1134,11 @@ export class DialogPresenter {
   present(content: CustomBuilder | CustomBuilderWithId | ComponentContent<Object>, options?: dialog.DialogCustomOptions): Promise<DialogResult>;
 
   /**
-   * Updates a presented custom dialog box.
+   * 更新已弹出的自定义弹出框，无返回结果。使用Promise异步回调。适用于弹出框已弹出后需要动态更新其样式或位置的交互场景。
    *
-   * @param { ComponentContent<Object> } content - The content used to identify the dialog.
-   * @param { dialog.DialogBaseOptions } [options] - Options to update.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { ComponentContent<Object> } content - 用于标识弹出框的组件内容。
+   * @param { dialog.DialogBaseOptions } [options] - 要更新的弹出框选项。目前仅支持更新alignment、offset、autoCancel、maskColor。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1146,11 +1148,11 @@ export class DialogPresenter {
   update(content: ComponentContent<Object>, options?: dialog.DialogBaseOptions): Promise<void>;
 
   /**
-   * Dismisses a dialog box.
-   * Accepts either the dialog ID (returned by present) or the ComponentContent reference.
+   * 关闭弹出框，无返回结果。使用Promise异步回调。适用于在用户完成交互后关闭弹出框的场景。
+   * 接受弹出框ID（由present返回的DialogResult中的dialogId）或ComponentContent引用作为target，关闭对应的弹出框。
    *
-   * @param { int | ComponentContent<Object> } target - The dialog ID or ComponentContent to dismiss.
-   * @returns { Promise<void> } Promise that returns no value.
+   * @param { int | ComponentContent<Object> } target - 要关闭的弹出框ID或组件内容。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 103301 - Dialog content error. The ComponentContent is incorrect.
    * @throws { BusinessError } 103303 - Dialog content not found. The ComponentContent cannot be found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4062,9 +4064,9 @@ export declare class UIContext {
   getRouter(): Router;
 
   /**
-   * get object PromptAction.
+   * 获取PromptAction对象。
    *
-   * @returns { PromptAction } object PromptAction.
+   * @returns { PromptAction } 返回PromptAction实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4192,9 +4194,9 @@ export declare class UIContext {
   animateTo(value: AnimateParam, event: () => void): void;
 
   /**
-   * alertDialog display.
+   * 显示警告弹窗组件，可设置文本内容与响应回调。
    *
-   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - Options.
+   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - 定义并显示AlertDialog组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -4202,9 +4204,9 @@ export declare class UIContext {
   showAlertDialog(options: AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions): void;
 
   /**
-   * actionSheet display.
+   * 定义列表弹窗并弹出。
    *
-   * @param { ActionSheetOptions } value - Options.
+   * @param { ActionSheetOptions } value - 配置列表弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

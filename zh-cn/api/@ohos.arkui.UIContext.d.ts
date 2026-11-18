@@ -5115,9 +5115,9 @@ export class UIContext {
   getRouter(): Router;
 
   /**
-   * get object PromptAction.
+   * 获取PromptAction对象。
    *
-   * @returns { PromptAction } PromptAction object.
+   * @returns { PromptAction } 返回PromptAction实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5284,10 +5284,9 @@ export class UIContext {
   animateTo(value: AnimateParam, event: () => void): void;
 
   /**
-   * alertDialog display.
+   * 显示警告弹窗组件，可设置文本内容与响应回调。
    *
-   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - Shows
-   *     an AlertDialog component in the given settings.
+   * @param { AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions } options - 定义并显示AlertDialog组件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -5297,9 +5296,9 @@ export class UIContext {
   showAlertDialog(options: AlertDialogParamWithConfirm | AlertDialogParamWithButtons | AlertDialogParamWithOptions): void;
 
   /**
-   * Shows an action sheet in the given settings.
+   * 定义列表弹窗并弹出。
    *
-   * @param { ActionSheetOptions } value - Parameters of the action sheet.
+   * @param { ActionSheetOptions } value - 配置列表弹窗的参数。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

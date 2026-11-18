@@ -11430,7 +11430,7 @@ export declare interface AttributeModifier<T> {
   default monitoredStates(): int;
 }
 /**
- * Defines the content modifier.
+ * 开发者需要自定义class实现ContentModifier接口。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -11438,7 +11438,7 @@ export declare interface AttributeModifier<T> {
  */
 export declare interface ContentModifier<T> {
     /**
-     * Defining applyContent function.
+     * 定制内容区的Builder。
      *
      * @returns { WrappedBuilder<CustomBuilderT<T>> }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -11464,7 +11464,7 @@ export declare interface CommonConfiguration<T> {
      */
     enabled: boolean;
     /**
-     * Obtains the contentModifier instance object
+     * 用于将用户需要的组件信息发送到自定义内容区。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15046,11 +15046,11 @@ export declare interface OverlayOffset {
     y?: double;
 }
 /**
- * Defines the segment of blur.
- * The first element in the tuple means fraction.
- * The range of this value is [0,1]. A value of 1 means opaque and 0 means completely transparent.
- * The second element means the stop position.
- * The range of this value is [0,1]. A value of 1 means region ending position and 0 means region starting position.
+ * 定义模糊段。
+ * 元组中第一个元素表示分数。
+ * 取值范围为[0,1]，值1表示不透明，0表示完全透明。
+ * 第二个元素表示停止位置。
+ * 取值范围为[0,1]，值1表示区域结束位置，0表示区域开始位置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

@@ -194,7 +194,7 @@ export declare struct ExceptionPrompt {
    */
   onActionTextClick?: () => void;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

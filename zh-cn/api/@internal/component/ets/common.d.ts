@@ -27741,9 +27741,9 @@ declare class BaseCustomComponent extends CommonAttribute {
   onDidBuild?(): void;
 
   /**
-   * The dialog controller of the custom component.
+   * 获取自定义组件的弹窗控制器。
    *
-   * @returns { PromptActionDialogController | undefined } The controller of dialog, or undefined if it is not available
+   * @returns { PromptActionDialogController | undefined } 返回PromptActionDialogController实例对象；如果不可用，则返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
