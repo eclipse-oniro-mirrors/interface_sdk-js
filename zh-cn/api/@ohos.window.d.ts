@@ -3098,8 +3098,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 7开始支持，从API version 9开始废弃，参数id传入null或undefined时，可能会导致callback无法得到执行，建议使用
-   * [createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
+   * > 从API version 7开始支持，从API version 9开始废弃，参数id传入null或undefined时，可能会导致callback无法得到执行，建议使用[createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
    *
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
    * @param { WindowType } type - 窗口类型。
@@ -3155,8 +3154,7 @@ declare namespace window {
    * 
    * > **说明：**
    * >
-   * > 从API version 8开始支持，从API version 9开始废弃，建议使用
-   * [createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
+   * > 从API version 8开始支持，从API version 9开始废弃，建议使用[createWindow()]{@link window.createWindow(config: Configuration, callback: AsyncCallback<Window>)}替代。
    *
    * @param { BaseContext } ctx - 当前应用上下文信息。
    * @param { string } id - 窗口名字，即[Configuration]{@link @ohos.window:window.Configuration}中的name。
@@ -5705,8 +5703,8 @@ declare namespace window {
      * > **说明：**
      * >
      * > 调用该接口前，建议优先通过[loadContent]{@link window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)}方法或者
-     * [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}方法完成页面加载。如果应用主窗口没有完成页面加载，直接调用该接口，界面会
-     * 一直显示启动界面；如果系统窗口、应用子窗口和全局悬浮窗没有完成页面加载，直接调用该接口，窗口会处于前台，但不可见。
+     * > [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}方法完成页面加载。如果应用主窗口没有完成页面加载，直接调用该接口，界面会
+     * > 一直显示启动界面；如果系统窗口、应用子窗口和全局悬浮窗没有完成页面加载，直接调用该接口，窗口会处于前台，但不可见。
      *
      * @param { ShowWindowOptions } options - 显示子窗口或系统窗口时的参数。
      * @returns { Promise<void> } 无返回结果的Promise对象。

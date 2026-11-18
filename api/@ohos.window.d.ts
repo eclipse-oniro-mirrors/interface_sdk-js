@@ -5877,10 +5877,10 @@ declare namespace window {
      * >
      * > Before calling this API, you are advised to load the page by using
      * > [loadContent]{@link window.Window.loadContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>)} or
-     * [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}. If the main window has not
-     * finished loading and you call this API directly, the starting window keeps showing. Similarly, if the system
-     * window, application child window, or global floating window has finished loading and you call this API directly
-     * , the window is in the foreground but is not visible.
+     * > [setUIContent]{@link @ohos.window:window.Window.setUIContent(path: string)}. If the main window has not
+     * > finished loading and you call this API directly, the starting window keeps showing. Similarly, if the system
+     * > window, application child window, or global floating window has finished loading and you call this API directly
+     * > , the window is in the foreground but is not visible.
      *
      * @param { ShowWindowOptions } options - options of window shown
      * @returns { Promise<void> } Promise that returns no value.
