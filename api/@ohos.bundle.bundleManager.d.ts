@@ -220,10 +220,7 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * Used to obtain the bundle information of the application that has only a home screen icon. It is valid only in
-     * the [getAllBundleInfo]{@link bundleManager.getAllBundleInfo} API.
-     *
-     * **System API**: This flag can be used only in system APIs.
+     * Used to obtain the bundle information of the application that has only a home screen icon.
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
