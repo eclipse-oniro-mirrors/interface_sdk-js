@@ -996,11 +996,14 @@ declare namespace backgroundTaskManager {
    *
    * @param { int } requestId  - 短时任务的请求ID。
    *     通过申请短时任务[requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay}接口获取。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1017,11 +1020,14 @@ declare namespace backgroundTaskManager {
    * @param { int } requestId  - 短时任务的请求ID。
    *     通过申请短时任务[requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay}接口获取。
    * @param { AsyncCallback<int> } callback  - 回调函数，返回本次短时任务的剩余时间，单位：ms。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1038,11 +1044,14 @@ declare namespace backgroundTaskManager {
    * @param { int } requestId  - 短时任务的请求ID。
    *     通过申请短时任务[requestSuspendDelay]{@link backgroundTaskManager.requestSuspendDelay}接口获取。
    * @returns { Promise<int> } Promise对象，返回本次短时任务的剩余时间，单位：ms。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1063,11 +1072,13 @@ declare namespace backgroundTaskManager {
    * @param { string } reason  - 申请短时任务的原因。
    * @param { Callback<void> } callback  - 短时任务即将超时的回调函数，一般在超时前6秒，通过此回调通知应用。
    * @returns { DelaySuspendInfo } 返回短时任务信息。包含当前短时任务的任务ID和剩余时间。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9900001 - Caller information verification failed for a transient task.
@@ -1109,11 +1120,14 @@ declare namespace backgroundTaskManager {
    * @param { AsyncCallback<void> } callback - 回调函数，申请长时任务成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1143,11 +1157,14 @@ declare namespace backgroundTaskManager {
    * @returns { Promise<void> } 无返回结果的Promise对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1179,11 +1196,14 @@ declare namespace backgroundTaskManager {
    * @returns { Promise<ContinuousTaskNotification> } Promise对象，返回
    *     [ContinuousTaskNotification]{@link backgroundTaskManager.ContinuousTaskNotification}类型对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1244,8 +1264,7 @@ declare namespace backgroundTaskManager {
    *     <br> **说明：** Stage模型中，仅支持UIAbility申请。
    * @param { ContinuousTaskRequest } request - 长时任务请求信息，包括长时任务主类型、子类型等。
    * @returns { Promise<int> } Promise对象，返回长时任务ID
-   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-   *     required to call the API.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1279,11 +1298,14 @@ declare namespace backgroundTaskManager {
    * @returns { Promise<ContinuousTaskNotification> } Promise对象，返回
    *     [ContinuousTaskNotification]{@link backgroundTaskManager.ContinuousTaskNotification}长时任务通知信息对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1357,8 +1379,9 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1384,8 +1407,9 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
@@ -1436,8 +1460,9 @@ declare namespace backgroundTaskManager {
    *     <br> **说明：** Stage模型中，仅支持UIAbility申请；FA模型中，仅支持ServiceAbility申请。
    * @returns { Promise<ContinuousTaskInfo[]> } Promise对象，返回所有长时任务信息。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1457,8 +1482,9 @@ declare namespace backgroundTaskManager {
    * @param { boolean } includeSuspended - 是否获取暂停的长时任务信息， true表示获取， false表示不获取。
    * @returns { Promise<ContinuousTaskInfo[]> } Promise对象，返回所有长时任务信息。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 9800005 - Continuous task verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
@@ -1556,11 +1582,14 @@ declare namespace backgroundTaskManager {
    * @param { EfficiencyResourcesRequest } request  - 请求的必要信息，包括资源类型、超时时间等。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-   *     2. Incorrect parameters types; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
@@ -1578,8 +1607,9 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
-   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     <br> 2. Failed to apply for memory.
+   * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 9800003 - Internal transaction failed.
    * @throws { BusinessError } 9800004 - System service operation failed.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
@@ -1596,8 +1626,9 @@ declare namespace backgroundTaskManager {
    * @returns { Promise<EfficiencyResourcesInfo[]> } Promise对象，返回所有能效资源信息。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 18700001 - Caller information verification failed for an energy resource request.
-   * @throws { BusinessError } 18700002 - Failed to write data into parcel. Possible reasons: 1. Invalid parameters;
-   *     2. Failed to apply for memory.
+   * @throws { BusinessError } 18700002 - Failed to write data into parcel. Possible reasons:
+   *     <br>1. Invalid parameters;
+   *     <br>2. Failed to apply for memory.
    * @throws { BusinessError } 18700004 - System service operation failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.EfficiencyResourcesApply
    * @systemapi
@@ -1613,8 +1644,10 @@ declare namespace backgroundTaskManager {
    * @param { 'continuousTaskCancel' } type  - 事件回调类型，固定取值为'continuousTaskCancel'，表示长时任务取消。
    * @param { Callback<ContinuousTaskCancelInfo> } callback  - 回调函数，返回长时任务取消原因等信息。当长时任务被取消时触发此回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Register an existing callback type; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Register an existing callback type;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1626,8 +1659,10 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskCancelInfo> } callback - the callback of continuous task cancel.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Register a exist callback type; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Register a exist callback type;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
    */
@@ -1640,8 +1675,10 @@ declare namespace backgroundTaskManager {
    * @param { 'continuousTaskCancel' } type  - 事件回调类型，固定取值为'continuousTaskCancel'，表示长时任务取消。
    * @param { Callback<ContinuousTaskCancelInfo> } [callback]  - 需要取消监听的回调函数，未传入则取消所有注册回调。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Unregister type has not been registered; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Unregister type has not been registered;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 15 dynamic
    */
@@ -1653,8 +1690,10 @@ declare namespace backgroundTaskManager {
    * @permission ohos.permission.KEEP_BACKGROUND_RUNNING
    * @param { Callback<ContinuousTaskCancelInfo> } [callback] - the callback of continuous task cancel.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
-   * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Callback parameter error;
-   *     2. Unregister type has not register; 3. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible cause:
+   *     <br>1. Callback parameter error;
+   *     <br>2. Unregister type has not register;
+   *     <br>3. Parameter verification failed.
    * @syscap SystemCapability.ResourceSchedule.BackgroundTaskManager.ContinuousTask
    * @since 23 static
    */
