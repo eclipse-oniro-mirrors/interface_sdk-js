@@ -624,8 +624,6 @@ declare namespace inputMethod {
      * @param { 'imeShow' } type - 设置监听类型，固定取值为'imeShow'。
      * @param { function } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -635,14 +633,9 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘显示事件。
      *
-     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
-     *
      * @param { 'imeShow' } type - 设置监听类型，固定取值'imeShow'。
      * @param { function } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -661,8 +654,6 @@ declare namespace inputMethod {
      * @param { 'imeHide' } type - 设置监听类型，固定取值为'imeHide'。
      * @param { function } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -672,14 +663,9 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘隐藏事件。
      *
-     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
-     *
      * @param { 'imeHide' } type - 设置监听类型，固定取值'imeHide'。
      * @param { function } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 10 dynamic
@@ -783,7 +769,6 @@ declare namespace inputMethod {
 
     /**
      * 获取指定用户指定输入法的子类型列表。同步接口。
-     * 返回空数组表示查询成功但没有子类型，查询失败时将抛出错误。
      *
      * @param { string } bundleName - 指定输入法的包名。
      * @param { int } [userId] - 用户ID。取值范围为有效用户的ID。如果不提供：
@@ -1135,8 +1120,6 @@ declare namespace inputMethod {
      *
      * @param { ImeChangeWithUserIdCallback } callback - 回调函数，返回输入法属性对象、子类型对象及用户ID。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1147,12 +1130,8 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法及子类型变化监听事件，携带发生输入法变更的用户ID。使用callback异步回调。
      *
-     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
-     *
      * @param { ImeChangeWithUserIdCallback } [callback] - 回调函数，返回取消订阅的输入法属性对象、子类型对象及用户ID。<br>参数不填写时，取消订阅所有的回调事件
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1165,8 +1144,6 @@ declare namespace inputMethod {
      *
      * @param { Callback<Array<InputWindowInfo>> } callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1177,13 +1154,8 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘显示事件。
      *
-     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
-     *
      * @param { Callback<Array<InputWindowInfo>> } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @stagemodelonly
@@ -1196,8 +1168,6 @@ declare namespace inputMethod {
      *
      * @param { Callback<Array<InputWindowInfo>>} callback - 回调函数，返回输入法固定态软键盘信息。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -1207,13 +1177,8 @@ declare namespace inputMethod {
     /**
      * 取消订阅输入法[Panel]{@link @ohos.inputMethodEngine:inputMethodEngine.Panel}固定态软键盘隐藏事件。
      *
-     * 如果远端清理失败，本次调用已移除的本地回调不会恢复。
-     *
      * @param { Callback<Array<InputWindowInfo>> } [callback] - 取消订阅的回调函数。
      *     <br>参数不填写时，取消订阅type对应的所有回调事件。
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-     * a system error, such as null pointer, IPC exception.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static

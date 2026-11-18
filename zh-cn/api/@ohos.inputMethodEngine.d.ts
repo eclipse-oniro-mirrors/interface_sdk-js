@@ -3982,7 +3982,6 @@ declare namespace inputMethodEngine {
      *
      * @param { 'sizeUpdate' } type - 监听当前面板的大小是否产生变化，固定取值为'sizeUpdate'。
      * @param { SizeUpdateCallback } callback - 面板大小变化时的回调，参数包含当前软键盘面板的宽度和高度。
-     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 14 dynamic
@@ -3998,7 +3997,6 @@ declare namespace inputMethodEngine {
      *
      * @param { 'sizeUpdate' } type - 取消监听当前面板的大小是否产生变化，固定值为'sizeUpdate'。
      * @param { ?SizeUpdateCallback } [callback] - 回调函数。用于指定要取消监听的回调函数，如果不填则取消所有sizeUpdate监听。
-     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 14 dynamic
@@ -4140,10 +4138,6 @@ declare namespace inputMethodEngine {
      * <br> > 不支持[PanelType](./js-apis-inputmethodengine.md#paneltype10)为SOFT_KEYBOARD类型且
      * [PanelFlag](./js-apis-inputmethodengine.md#panelflag10)状态为FLG_FIXED的面板。
      *
-     * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
-     * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
      * @param { double } radius - 窗口边缘阴影的模糊半径，单位px，取值范围[0.0, +∞)，0.0时关闭窗口边缘阴影。
      * @param { string } color - 窗口边缘阴影的颜色，十六进制RGB或ARGB格式，不区分大小写，例如`#000000`或`#FF000000`。
      * @param { double } offsetX - 窗口边缘阴影X轴的偏移量，单位px。正值向右偏移，负值向左偏移。
@@ -4152,7 +4146,6 @@ declare namespace inputMethodEngine {
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
      *     Possible causes: Panel's flag is FLG_FIXED.
-     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 22 dynamic
@@ -4222,7 +4215,6 @@ declare namespace inputMethodEngine {
      * 订阅面板尺寸更新（sizeUpdate）事件，当输入法面板尺寸发生变更时触发该事件，并执行指定的回调函数, 使用callback异步回调。
      *
      * @param { SizeUpdateCallback } callback - 面板尺寸更新时触发的回调函数，入参为面板尺寸信息对象。
-     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
@@ -4232,7 +4224,6 @@ declare namespace inputMethodEngine {
      * 取消订阅面板尺寸更新（sizeUpdate）事件，停止监听输入法面板尺寸的变更动作, 使用callback异步回调。
      *
      * @param { SizeUpdateCallback } [callback] - 可选参数，需取消的目标回调函数：传入指定回调函数实例时，仅取消该回调的订阅；不传入时，取消所有sizeUpdate事件的订阅。
-     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @systemapi
      * @since 23 static
