@@ -1439,16 +1439,16 @@ declare namespace appManager {
   function getAppMemorySize(callback: AsyncCallback<int>): void;
 
   /**
-   * Obtains information about the running processes of the current application. This API uses a promise to return the
-   * result.
+   * Obtain information about application running processes. Use Promise asynchronous callbacks.
    *
    * > **NOTE**
    * >
-   * > - In versions earlier than API version 11, this API requires the ohos.permission.GET_RUNNING_INFO permission,
-   * > which is available only for system applications.
+   * > - For versions earlier than API version 11, you need to apply for the ohos.permission.GET_RUNNING_INFO
+   * > permission to query the running process information of all applications.
    * >
-   * > - Starting from API version 11, this API is used only to obtain the process information of the caller. No
-   * > permission is required.
+   * > - From API version 11, only the running process information of the caller is returned by default. If you have
+   * > the ohos.permission.GET_RUNNING_INFO permission,
+   * > You can query the running process information of all applications.
    *
    * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
    * @returns { Promise<Array<ProcessInformation>> } Promise used to return the API call result and the process running
@@ -1483,16 +1483,16 @@ declare namespace appManager {
     bundleType: bundleManager.BundleType): Promise<Array<ProcessInformation>>;
 
   /**
-   * Obtains information about the running processes of the current application. This API uses an asynchronous callback
-   * to return the result.
+   * Obtain information about application running processes. Use callback asynchronous callback.
    *
    * > **NOTE**
    * >
-   * > - In versions earlier than API version 11, this API requires the ohos.permission.GET_RUNNING_INFO permission,
-   * > which is available only for system applications.
+   * > - For versions earlier than API version 11, you need to apply for the ohos.permission.GET_RUNNING_INFO
+   * > permission to query the running process information of all applications.
    * >
-   * > - Starting from API version 11, this API is used only to obtain the process information of the caller. No
-   * > permission is required.
+   * > - From API version 11, only the running process information of the caller is returned by default. If you have
+   * > the ohos.permission.GET_RUNNING_INFO permission,
+   * > You can query the running process information of all applications.
    *
    * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
    * @param { AsyncCallback<Array<ProcessInformation>> } callback - Callback used to return the result. If the API call is
