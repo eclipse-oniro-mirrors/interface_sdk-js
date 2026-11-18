@@ -96,8 +96,7 @@ export declare interface InputCounterOptions {
 
     /**
      * 设置组件中字符计数器在溢出时的文本颜色。当用户输入的字符数超过计数器最大长度时，计数器的文本颜色和边框的颜色会切换为counterTextOverflowColor指定的颜色，以提醒用户输入已超出限制。
-     * 如果不设置counterTe
-     * xtOverflowColor，则计数器和边框在溢出时的文本颜色为默认颜色，默认颜色为红色。
+     * 如果不设置counterTextOverflowColor，则计数器和边框在溢出时的文本颜色为默认颜色，默认颜色为红色。
      * **说明：**
      * 当设置了[InputCounterOptions]{@link InputCounterOptions}的highlightBorder属性时，边框颜色才会被同步更改。
      *
