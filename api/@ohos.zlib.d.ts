@@ -1513,7 +1513,7 @@ declare namespace zlib {
      *
      * @param { ArrayBuffer } dest - Destination buffer.
      * @param { ArrayBuffer } source - Source buffer.
-     * @param { long } sourceLen - Length of the source data. The default value is **0**.
+     * @param { long } sourceLen - Length of the source data, in bytes. Defaults to source.byteLength.
      * @returns { Promise<ZipOutputInfo> } Promise used to return the result status and the total size of the
      *     destination buffer.
      * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
@@ -1654,7 +1654,7 @@ declare namespace zlib {
      *
      * @param { ZStream } strm - For details, see [ZStream<sup>12+</sup>]{@link zlib.ZStream}.
      * @param { int } windowBits - Memory window size. The value is restricted in certain range based on the data
-     *     formats. The options are as follows:<br>Zlib: [1, 15]<br>Gzip: (15, +∞)<br>Raw Deflate: [-15, -1]
+     *     formats. The options are as follows:<br>Zlib: [8, 15]<br>Gzip: [24, 31]<br>Raw Deflate: [-15, -8]
      * @returns { Promise<ReturnStatus> } Promise used to return the result status.
      * @throws { BusinessError } 401 - The parameter check failed. Possible causes: 1. Mandatory parameters are left
      *     unspecified;
