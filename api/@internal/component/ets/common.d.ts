@@ -31109,7 +31109,7 @@ declare interface BackgroundBrightnessOptions {
    * 
    * Default value: **0.0**
    * 
-   * Value range: (0.0, +∞)
+   * Value range: [0.0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
