@@ -1001,7 +1001,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    */
   default scrollSnapAlign(value: ScrollSnapAlign | undefined): this;
 
-      /**
+  /**
    * Sets a two-stage scroll snap strategy for the List.
    *
    * **ScrollSnapAlign.START**, **ScrollSnapAlign.CENTER**, and **ScrollSnapAlign.END** select
