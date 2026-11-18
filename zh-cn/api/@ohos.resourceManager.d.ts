@@ -96,10 +96,6 @@ declare namespace resourceManager {
   /**
    * 用于表示当前设备类型。
    *
-   * <!--RP1-->
-   *
-   * <!--RP1End-->
-   *
    * @syscap SystemCapability.Global.ResourceManager
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -163,7 +159,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_TV = 0x04,
 
     /**
-     * 智能手表。
+     * 智能穿戴。
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
