@@ -11800,7 +11800,7 @@ declare namespace media {
     /**
      * 进行视频转码的参数设置。使用Promise异步回调。
      *
-     * @param {  AVTranscoderConfig  } config - 配置视频转码的相关参数。 <!--RP1--><!--RP1End-->
+     * @param {  AVTranscoderConfig  } config - 配置视频转码的相关参数。 当config中设置的目标视频分辨率宽videoFrameWidth
      * @returns {  Promise<void>  } Promise对象，无返回结果。
      * @throws {  BusinessError  } 401 - The parameter check failed. Return by promise. 
      * @throws {  BusinessError  } 5400102 - Operation not allowed. Return by promise. 
