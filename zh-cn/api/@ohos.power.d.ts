@@ -55,7 +55,6 @@ declare namespace power {
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @since 7 dynamiconly
    * @deprecated since 9
-   * @useinstead power.reboot
    */
   function rebootDevice(reason: string): void;
 
