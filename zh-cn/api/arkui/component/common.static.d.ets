@@ -15996,6 +15996,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *     <br>单位：vp
      *     <br>设置为小于0的值时，按默认值处理。
      *     设置为<em>0</em>时，不显示滚动条。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16010,6 +16011,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *     <br>默认值：<em>4</em>
      *     <br>设置为小于0的值时，按默认值处理。
      *     设置为<em>0</em>时，不显示滚动条。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16084,7 +16086,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 设置是否支持滚动手势。
      *
-     * @param { boolean | undefined } value - 是否支持滚动手势。<br>默认值：<em>true</em>
+     * @param { boolean | undefined } value - 是否支持手指或鼠标滚动手势。设置为true时支持，设置为false时不支持，但不影响控制器[Scroller](ts-container-scroll.md#scroller)的滚动接口和[backToTop](#backtotop15)属性。
+     *     <br>默认值：<em>true</em>
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16095,6 +16099,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置摩擦系数。
      *
      * @param { double | Resource | undefined } value - 摩擦系数。
+     *     <br/>默认值：非Wearable设备为0.6，Wearable设备为0.9。
+     *     <br/>从API version 11开始，非Wearable设备默认值为0.7。
+     *     <br/>从API version 12开始，非Wearable设备默认值为0.75。
+     *     <br/>取值范围：(0, +∞)，设置为小于等于0的值时，按默认值处理。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly

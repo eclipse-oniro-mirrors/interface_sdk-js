@@ -72,7 +72,7 @@ export declare enum ScrollState {
 export declare enum ListItemAlign {
 
   /**
-   * ListItem在<em>List</em>中，交叉轴方向首部对齐。
+   * ListItem在List中，交叉轴方向首部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -81,7 +81,7 @@ export declare enum ListItemAlign {
   Start,
 
   /**
-   * ListItem在<em>List</em>中，交叉轴方向居中对齐。
+   * ListItem在List中，交叉轴方向居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -90,7 +90,7 @@ export declare enum ListItemAlign {
   Center,
 
   /**
-   * ListItem在<em>List</em>中，交叉轴方向尾部对齐。
+   * ListItem在List中，交叉轴方向尾部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -558,13 +558,13 @@ export declare class ListScroller extends Scroller {
    * 获取[ListItemGroup]{@link list_item_group}中的[ListItem]{@link list_item}的大小和相对于List的位置。
    *
    * <p><strong>注意</strong>：
-   * <br>-<em>index</em>的值必须是显示区域中可见的子组件的索引。
+   * <br>-index的值必须是显示区域中可见的子组件的索引。
    * 否则，该值将被视为无效值。
-   * <br>-设置<em>index</em>的子组件必须是列表项组。否则，
-   * <em>index </em>值被认为是无效的。
-   * <br>-<em>indexInGroup</em>的值必须是列表项组中某个列表项的索引
+   * <br>-设置index的子组件必须是列表项组。否则，
+   * index值被认为是无效的。
+   * <br>-indexInGroup的值必须是列表项组中某个列表项的索引
    * 在显示区域中可见。否则，该值将被视为无效值。
-   * <br>-当<em>index</em>或<em>indexInGroup</em>设置为无效值时，返回的大小和位置均为<em>0</em>。
+   * <br>-当index或indexInGroup设置为无效值时，返回的大小和位置均为0。
    * </p>
    *
    * @param { int } index - ListItemGroup在List中的索引值。
@@ -590,21 +590,21 @@ export declare class ListScroller extends Scroller {
    *     为异常值，本次跳转不生效。
    *     <br>取值限定为整数。
    *     <br>
-   *     <em>注意</em>
+   *     注意
    *     <br>如果设置的值为负值或大于容器中项目的最大索引，则
    *     则认为值异常，不进行滚动。
    * @param { int } indexInGroup - 要滑动到的目标元素所在的ListItemGroup在当前容器中的索引值。      <br/>**说明：** <br/>index值设置成负值或者大于当前容器子组件的最大索引值，视
    *     为异常值，本次跳转不生效。
    *     <br>取值限定为整数。
    *     <br>
-   *     <em>注意</em>
+   *     注意
    *     <br>如果设置的值为负值或大于容器中项目的最大索引，则
    *     则认为值异常，不进行滚动。
    * @param { boolean } [smooth] - 设置该次滑动是否有动效，true表示有动效，false表示没有动效。<br/>。
    *     <br>默认值：false<br/>**说明：** <br/>开启动效时，会对经过的所有item
    *     进行加载和布局计算，当大量加载item时会导致性能问题。
    * @param { ScrollAlign } [align] - 指定滑动到的元素与当前容器的对齐方式。<br/>。
-   *     <br>默认值：<em>ScrollAlign.START</em>。
+   *     <br>默认值：ScrollAlign.START。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -620,7 +620,7 @@ export declare class ListScroller extends Scroller {
    * 将[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link list_item}收起，并设置回调事件。
    *
    * <p><strong>注意</strong>：
-   * <br>-一个<em>ListScroller</em>必须绑定到<em>List</em>组件。
+   * <br>-一个ListScroller必须绑定到List组件。
    * </p>
    *
    * @param { CloseSwipeActionOptions } [options] - 收起[EXPANDED]{@link SwipeActionState}状态的[ListItem]{@link list_item}
@@ -640,9 +640,9 @@ export declare class ListScroller extends Scroller {
    * 根据坐标获取子组件的索引信息。
    *
    * <p><strong>注意</strong>：
-   * <br>-如果提供的<em>x</em>或<em>y</em>的值无效，
-   * 返回的VisibleListContentInfo对象的<em>index</em>属性设置为<em>-1</em>。
-   * 且<em>itemGroupArea</em>和<em>itemIndexInGroup</em>均为<em>未定义</em>。
+   * <br>-如果提供的x或y的值无效，
+   * 返回的VisibleListContentInfo对象的index属性设置为-1。
+   * 且itemGroupArea和itemIndexInGroup均为未定义。
    * </p>
    *
    * @param { double } x - x轴坐标，单位为vp。
@@ -1072,12 +1072,12 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * 设置显示区域上方插入或删除数据时是否要保持可见内容位置不变。
    *
    * <p><strong>注意</strong>：
-   * <br>-只有在使用<em>LazyForEach</em>插入或删除可见区域外的数据时，可见的内容位置才会保持不变。
-   * 如果使用<em>ForEach</em>来插入或删除数据，或者使用<em>LazyForEach</em>来重新加载数据。
-   * 即使<em>maintainVisibleContentPosition</em>设置为<em>true</em>，可见内容位置也会改变。
-   * <br>-当<em>maintainVisibleContentPosition</em>设置为<em>true</em>时，
-   * 在可见区域上方插入或删除数据将触发<em>onDidScroll</em>和<em>onScrollIndex</em>事件。
-   * <br>-在多列场景中，将<em>maintainVisibleContentPosition</em>设置为<em>true</em>允许
+   * <br>-只有在使用LazyForEach插入或删除可见区域外的数据时，可见的内容位置才会保持不变。
+   * 如果使用ForEach来插入或删除数据，或者使用LazyForEach来重新加载数据。
+   * 即使maintainVisibleContentPosition设置为true，可见内容位置也会改变。
+   * <br>-当maintainVisibleContentPosition设置为true时，
+   * 在可见区域上方插入或删除数据将触发onDidScroll和onScrollIndex事件。
+   * <br>-在多列场景中，将maintainVisibleContentPosition设置为true允许
    * 可以插入或删除整行数据，同时保持可见内容位置不变。
    * 但是，如果插入或删除不涉及整行，可见的内容位置仍然会改变。
    * </p>
@@ -1112,12 +1112,12 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * 设置List组件是否从末尾开始布局。
    *
    * <p><strong>注意</strong>：
-   * <br>-当<em>stackFromEnd</em>设置为<em>true</em>时，以下规则适用：
-   * <br>如果<em>List</em>组件的内容小于组件高度，则
+   * <br>-当stackFromEnd设置为true时，以下规则适用：
+   * <br>如果List组件的内容小于组件高度，则
    * 内容将对齐到组件的底部。
    * <br>-如果可见区域中列表项的高度发生变化，或者插入了新的列表项。
    * 更改或插入的项上方的列表项将向上移动以适应新的布局。
-   * <br>-<em>initialIndex</em>的默认值变为列表项的总数减一。
+   * <br>-initialIndex的默认值变为列表项的总数减一。
    * </p>
    *
    * @param { boolean | undefined } enabled - 设置List组件是否从末尾开始布局。false：List从顶部开始布局。 true：List组件从末尾开始布局。<br/>。

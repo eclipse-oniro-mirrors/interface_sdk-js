@@ -1108,7 +1108,7 @@ export declare enum Direction {
 }
 
 /**
- * 用于设置滚动条的状态。
+ * 设置滚动条的状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
