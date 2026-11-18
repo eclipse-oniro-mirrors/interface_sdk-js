@@ -3549,7 +3549,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for Select.
+   * 定义Select类型的FrameNode。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3558,10 +3558,10 @@ export declare namespace typeNode {
   type Select = SelectFrameNode;
 
   /**
-   * Create a FrameNode of Select type.
+   * 创建Select类型的FrameNode。
    *
-   * @param { UIContext } context - uiContext used to create the FrameNode.
-   * @returns { Select } - Return Select type FrameNode.
+   * @param { UIContext } context - 创建FrameNode所需的UIContext。
+   * @returns { Select } - 返回Select类型的FrameNode。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
