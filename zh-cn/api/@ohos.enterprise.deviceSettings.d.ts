@@ -719,6 +719,24 @@ declare namespace deviceSettings {
   }
 
   /**
+   * 企业展示信息。用于设置/查询锁屏与设置首页展示的企业定制文案（企业名称）。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface DisPlayInfo {
+    /**
+     * 企业展示信息，内层为按语言分别配置企业名称的 JSON 文本。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+  }
+
+  /**
    * 设置设备息屏时间。
    *
    * @permission ohos.permission.ENTERPRISE_SET_SCREENOFF_TIME
@@ -1225,6 +1243,39 @@ declare namespace deviceSettings {
    * @since 26.0.0
    */
   function setSwitchStatus(admin: Want, key: SwitchKey, status: SwitchStatus): void;
+
+  /**
+   * 获取企业展示信息。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @returns { DisPlayInfo } 获取企业展示信息，JSON格式。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseDisplayInfo(): DisPlayInfo;
+
+  /**
+   * 设置企业展示信息。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { DisPlayInfo } displayInfo - 需要设置的企业展示信息，JSON格式。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Invalid parameter.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setEnterpriseDisplayInfo(displayInfo: DisPlayInfo): void;
 }
 
 export default deviceSettings;

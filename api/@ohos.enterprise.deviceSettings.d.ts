@@ -721,6 +721,25 @@ declare namespace deviceSettings {
   }
 
   /**
+   * Enterprise display information. This interface is used to set or query the enterprise customized copywriting(
+   * enterprise name) displayed on the lock screen and home page.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface DisPlayInfo {
+    /**
+     * Enterprise display information. The inner layer is the JSON text of the enterprise name configured by language.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+  }
+
+  /**
    * Sets the device screen-off time.
    *
    * @permission ohos.permission.ENTERPRISE_SET_SCREENOFF_TIME
@@ -1344,6 +1363,39 @@ declare namespace deviceSettings {
    * @since 26.0.0
    */
   function setSwitchStatus(admin: Want, key: SwitchKey, status: SwitchStatus): void;
+
+  /**
+   * Obtains enterprise display information.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @returns { DisPlayInfo }This interface is used to obtain enterprise display information in JSON format.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseDisplayInfo(): DisPlayInfo;
+
+  /**
+   * Set enterprise display information.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SETTINGS
+   * @param { DisPlayInfo } displayInfo - Specifies the enterprise information to be displayed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setEnterpriseDisplayInfo(displayInfo: DisPlayInfo): void;
 }
 
 export default deviceSettings;
