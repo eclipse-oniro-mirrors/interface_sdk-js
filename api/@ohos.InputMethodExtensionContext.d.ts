@@ -91,39 +91,42 @@ import { ConnectOptions } from './ability/connectOptions';
  */
 declare class InputMethodExtensionContext extends ExtensionContext {
   /**
-   * Destroys this input method. This API uses an asynchronous callback to return the result.
-   * <br>
-   * <br>- Meaning/Function: Destroys the current **InputMethodExtensionAbility** and terminates the running of the input
-   * method app. After the call, the system triggers the **InputMethodExtensionAbility.onDestroy()** lifecycle callback.
-   * <br>- Usage scenarios: Used when the input method app needs to actively terminate its own running. For example, the
-   * input method app actively exits after completing a specific task, or performs cleanup logic within the
-   * **onDestroy** callback to ensure resource release.
-   * <br>- Use effect: After the call succeeds, the current **InputMethodExtensionAbility** is destroyed, the system
-   * triggers the **onDestroy()** lifecycle callback, and the input method app process is terminated. Any subsequent
-   * context operations after the call will no longer take effect.
-   *
-   * @param { AsyncCallback<void> } callback - Callback function. If the input method app is destroyed successfully, err
-   * is undefined; otherwise, it is an error object.
-   * @syscap SystemCapability.MiscServices.InputMethodFramework
-   * @stagemodelonly
+   * Destroy the input method application. Use the callback asynchronous callback. <br> <br>- Meaning/Function: Destroys
+   * the current InputMethodExtensionAbility and terminates the running of the input method application. After this
+   * interface is invoked, the system triggers the `InputMethodExtensionAbility.onDestroy()` life cycle callback.
+   * <br>-Application scenario: This parameter is used when an input method application needs to proactively terminate
+   * its running. For example, an input method application exits after processing a specific task. <br>- Effect: If the
+   * call is successful, the termination request is accepted. It does not mean that the destruction or process exit is
+   * complete. The system completes life cycle processing asynchronously. After the context is destroyed, it is not used
+   * any more.
+   * @param { AsyncCallback<void> } callback - Callback function. When the termination request is successful, the
+   * value of err is undefined. Otherwise, it is an error object.
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Ability management request failed. Possible causes include failure to connect
+   * to the system service or failure of the system service to communicate with a dependent module.
+   *     @syscap SystemCapability.MiscServices.InputMethodFramework
+   *     @stagemodelonly
    * @since 9 dynamic
    * @since 23 static
    */
   destroy(callback: AsyncCallback<void>): void;
 
   /**
-   * Destroys this input method. This API uses a promise to return the result.
-   * <br>
-   * <br>- Meaning/Function: Destroys the current **InputMethodExtensionAbility** and terminates the running of the input
-   * method app. After the call, the system triggers the **InputMethodExtensionAbility.onDestroy()** lifecycle callback.
-   * <br>- Usage scenarios: Used when the input method app needs to actively terminate its own running. It provides the same
-   * functionality and form as the callback and is suitable for scenarios that require promise chaining.
-   * <br>- Use effect: After the call succeeds, the current **InputMethodExtensionAbility** is destroyed, the system
-   * triggers the **onDestroy()** lifecycle callback, and the input method app process is terminated.
+   * Destroy the input method application. Use Promise asynchronous callbacks. <br> <br>- Meaning/Function: Destroys the
+   * current InputMethodExtensionAbility and terminates the running of the input method application. After this
+   * interface is invoked, the system triggers the `InputMethodExtensionAbility.onDestroy()` life cycle callback.
+   * <br>-Application scenario: This parameter is used when an input method application needs to proactively terminate
+   * its running. The function is the same as that of the callback form. It is applicable to scenarios where the Promise
+   * chain call is required. <br>- Effect: If the call is successful, the termination request is accepted. It does not
+   * mean that the destruction or process exit is complete. The system completes life cycle processing asynchronously.
+   * After the context is destroyed, it is not used any more.
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @syscap SystemCapability.MiscServices.InputMethodFramework
-   * @stagemodelonly
+   * @throws { BusinessError } 16000011 - The context does not exist.
+   * @throws { BusinessError } 16000050 - Ability management request failed. Possible causes include failure to connect
+   * to the system service or failure of the system service to communicate with a dependent module.
+   *     @syscap SystemCapability.MiscServices.InputMethodFramework
+   *     @stagemodelonly
    * @since 9 dynamic
    * @since 23 static
    */
