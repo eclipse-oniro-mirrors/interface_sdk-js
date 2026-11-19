@@ -931,7 +931,7 @@ declare interface DatePickerDialogOptions extends DatePickerOptions {
    *
    * }**
    *
-   * @default { color: '#ff007dff', font: { size: '20vp', weight: FontWeight.Medium } [since 11]
+   * @default { color: '#ff007dff', font: { size: '20fp', weight: FontWeight.Medium } [since 11]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

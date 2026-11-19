@@ -118,11 +118,11 @@ export declare enum DisplayMode {
  * 传递选择的具体日期时间值。
  *
  * 说明
- * 当[enableHideYear]{@link DateOptions}为**true**时，如果用户选择了"----"。
+ * 当[hideYear]{@link DateOptions}为**true**时，如果用户选择了"----"。
  * [year]{@link DatePickerComponentResult}不返回，如果选择了具体的年份，则
  * [year]{@link DatePickerComponentResult}为选择的年份。在农历模式下，返回的是年月日。
  * 和day为农历值，在公历模式下，返回值为公历值。
- * 当[enableHideYear]{@link DateOptions}为**false**时，固定年、月、日以返回公历值。
+ * 当[hideYear]{@link DateOptions}为**false**时，固定年、月、日以返回公历值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -133,7 +133,7 @@ export declare enum DisplayMode {
 export declare class DatePickerComponentResult {
   /**
    * 所选日期的年份。
-   * 当[enableHideYear]{@link DateOptions}为**true**且用户选择"----"时，不返回年份；当
+   * 当[hideYear]{@link DateOptions}为**true**且用户选择"----"时，不返回年份；当
    * 选择了特定年份，值是选择的年份。
    * 取值限定为整数。
    *
@@ -498,7 +498,7 @@ export declare class DateOptions extends CommonOptions {
    * DateMode.YEAR_AND_MONTH时生效。
    * 2. 该属性为true时，用户仍可滚动选择具体年份，"----"选项与具体年份可自由切换。
    * 3. 该属性支持运行时动态切换，属性值变化时年份列随之更新。
-   * 默认值：禁用。
+   * 默认值：false。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

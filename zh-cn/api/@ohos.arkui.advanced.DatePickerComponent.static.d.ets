@@ -105,9 +105,9 @@ export declare enum DisplayMode {
  * DatePickerComponentResult定义日期时间选择器的选择结果。
  *
  * 说明：
- * 当enableHideYear为true时，若用户选择"----"，不返回year；若选择具体年份，year为所选具体年份。
+ * 当hideYear为true时，若用户选择"----"，不返回year；若选择具体年份，year为所选具体年份。
  * 农历模式下，返回的年、月、日为农历值；公历模式下，返回的值为公历值。
- * 当enableHideYear为false时，年、月、日固定返回公历值。
+ * 当hideYear为false时，年、月、日固定返回公历值。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -118,7 +118,7 @@ export declare class DatePickerComponentResult {
    * 所选日期的年份。
    * 取值限定为整数。
    *
-   * 当enableHideYear为true且用户选择"----"时，不返回year；当选择具体年份时，
+   * 当hideYear为true且用户选择"----"时，不返回year；当选择具体年份时，
    * 值为所选具体年份。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -380,13 +380,12 @@ export declare class DateOptions extends CommonOptions {
    * 是否启用"隐藏年份"选项。
    * - true：在end年份之后追加"----"选项，用户可选择"----"表示不关心具体年份，适用于生日、纪念日等无需具体年份的场景。
    * - false：不显示"----"选项，年份列仅展示start和end范围内的具体年份。
-   * 默认值：禁用。
+   * 默认值：false。
    * **说明**：
    * 1. 该属性仅在displayMode为DisplayMode.DATE或DisplayMode.DATE_TIME，且mode为
    * DateMode.DATE或DateMode.YEAR_AND_MONTH时生效。
    * 2. 该属性为true时，用户仍可滚动选择具体年份，"----"选项与具体年份可自由切换。
    * 3. 该属性支持运行时动态切换，属性值变化时年份列随之更新。
-   * 默认值：禁用。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
