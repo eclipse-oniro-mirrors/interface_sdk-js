@@ -660,6 +660,15 @@ declare namespace bundleManager {
      * @since 20
      */
     readonly releaseType: string;
+
+     /**
+     * Application UID.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    readonly appUid: number;
   }
 
   /**
