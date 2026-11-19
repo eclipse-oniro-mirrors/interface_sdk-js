@@ -22618,8 +22618,8 @@ declare class CommonMethod<T> {
   useShadowBatching(use: Optional<boolean>): T;
 
   /**
-   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}或<!--DelEnd-->窗口定义的效果模板。effectType为DEFAULT时，必须在
-   * EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；effectType为WINDOW_EFFECT时，需配合窗口效果模板使用。不在对应容器内使用时，useEffect将不产生任何效
+   * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}或<!--DelEnd-->窗口定义的效果模板。<!--Del-->effectType为DEFAULT时，必须在
+   * EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；<!--DelEnd-->effectType为WINDOW_EFFECT时，需配合窗口效果模板使用。不在对应容器内使用时，useEffect将不产生任何效
    * 果。效果模板是一组预定义的视觉特效参数（包括模糊半径、饱和度、亮度、颜色），应用于组件以实现统一的视觉特效风格。
    *
    * @param { boolean } useEffect - 控制组件是否应用<!--Del-->父级EffectComponent或<!--DelEnd-->窗口定义的效果模板，从而合并绘制特效。
@@ -22639,7 +22639,7 @@ declare class CommonMethod<T> {
   /**
    * 用于设置组件是否应用<!--Del-->父级[EffectComponent]{@link @global:EffectComponent}或<!--DelEnd-->窗口定义的效果模板。与
    * [useEffect<sup>14+</sup>]{@link CommonMethod#useEffect(useEffect: boolean, effectType: EffectType)}相比，useEffect参数新增
-   * 了对undefined类型的支持。effectType为DEFAULT时，必须在EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；effectType为WINDOW_EFFECT
+   * 了对undefined类型的支持。<!--Del-->effectType为DEFAULT时，必须在EffectComponent的子组件上使用且EffectComponent需配置特效属性才能生效；<!--DelEnd-->effectType为WINDOW_EFFECT
    * 时，需配合窗口效果模板使用。不在对应容器内使用时，useEffect将不产生任何效果。
    *
    * @param { Optional<boolean> } useEffect - 控制组件是否应用<!--Del-->父级EffectComponent或<!--DelEnd-->窗口定义的效果模板。
