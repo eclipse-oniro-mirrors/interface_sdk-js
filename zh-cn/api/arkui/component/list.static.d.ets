@@ -20,6 +20,7 @@
 import { ChildrenMainSize, EditModeOptions, ItemDragInfo, RectResult, ScrollableCommonMethod, OnWillScrollCallback, OnScrollCallback, OnItemDragStartCallback } from './common';
 import { Axis, FocusWrapMode } from './enums';
 import { OnScrollFrameBeginCallback, ScrollAlign, Scroller } from "./scroll";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { Dimension, Length, LengthConstrain, ResourceColor, ItemFillPolicy, CacheCountInfo, Resource } from './units';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
 import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommonEvent } from "./common";
@@ -1042,6 +1043,28 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @since 23 static
    */
   default scrollSnapAlign(value: ScrollSnapAlign | undefined): this;
+
+  /**
+   * 为List设置两阶段滚动捕捉策略。
+   *
+   * **ScrollSnapAlign.START**、**ScrollSnapAlign.CENTER**和**ScrollSnapAlign.END**选择
+   * 内置策略。**ScrollSnapAlign.NONE**无效，会抛出401异常。
+   * 自定义提供程序要求**ComputingSnapOffset**为函数。传递
+   * **undefined**或没有参数将清除策略。
+   *
+   * > **说明**
+   * > 该属性和**scrollSnapAlign**使用last-set-wins语义。这份声明是
+   * > 在其运行时实现之前发布；在静态ArkTS应用程序中调用它是
+   * > 尚未启用。最终的快照遵循**scrollSnapAnimationSpeed**运行时支持
+   * > 已添加。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - 内置对齐或自定义提供程序。
+   * @returns { this } List属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
   /**
    * 设置List组件的子组件在主轴方向的大小信息。

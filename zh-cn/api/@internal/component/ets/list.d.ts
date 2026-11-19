@@ -1462,6 +1462,28 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   scrollSnapAlign(value: ScrollSnapAlign): ListAttribute;
 
   /**
+   * 为List设置两阶段滚动捕捉策略。
+   *
+   * **ScrollSnapAlign.START**、**ScrollSnapAlign.CENTER**和**ScrollSnapAlign.END**选择
+   * 内置策略。**ScrollSnapAlign.NONE**无效，会抛出401异常。
+   * 自定义提供程序要求**ComputingSnapOffset**为函数。传递
+   * **undefined**或没有参数将清除策略。
+   *
+   * > **说明**
+   * > 该属性和**scrollSnapAlign**使用last-set-wins语义。最后的快照使用
+   * > 列表弹簧动画并遵循**scrollSnapAnimationSpeed**。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐或自定义提供程序。
+   * @returns { ListAttribute } 列表的属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  scrollSnapStrategy(strategy?: ScrollSnapAlign | ScrollSnapOffsetProvider): ListAttribute;
+
+  /**
    * 设置前后两个方向的嵌套滚动模式，实现与父组件的滚动联动。
    *
    * @param { NestedScrollOptions } value - 嵌套滚动选项。<br/>默认值：{ scrollForward: NestedScrollMode.SELF_ONLY, scrollBackward:
