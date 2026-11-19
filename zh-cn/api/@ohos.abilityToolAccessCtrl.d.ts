@@ -12,16 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 /**
- * @file This module provides the capabilities of tools access control
+ * @file Tool Access Control Management
  * @kit AbilityKit
  */
 
 import { Permissions }  from './permissions';
 import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
 /**
- * abilityToolAccessCtrl的命名空间
+ * 本模块提供提供工具（CLI命令）的执行认证凭据获取能力，以及应用控制权限的查询与请求能力。
  *
  * @syscap SystemCapability.Security.Asset
  * @FaAndStageModel
@@ -1295,6 +1294,104 @@ declare namespace abilityToolAccessCtrl {
    * @since 26.1.0 dynamiconly
    */
   export function generateTaskChallenge(taskIdentityInfo: TaskIdentityInfo): Promise<Uint8Array>;
+
+  /**
+   * 注销控制组件模拟点击结果回调。用于在业务结束时释放回调资源。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function unregisterControlComponentResultCallback(): void;
+
+  /**
+   * 注册控制组件模拟点击结果回调。
+   * 注册后，控制组件每次模拟点击的结果通过该回调返回。
+   * 同一进程内仅支持注册一个回调，重复注册将覆盖先前注册的回调。
+   *
+   * @permission ohos.permission.CONTROL_DEVICE
+   * @param { ResultCallback } callback - 用于接收模拟点击操作结果的回调函数。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 24010000 - Invalid parameter. callback is invalid.
+   * @throws { BusinessError } 24010001 - Service is abnormal. Possible cause: IPC failed.
+   * @throws { BusinessError } 24010002 - Common internal error. Possible cause: dependent service unavailable,
+   *     resource access failure, etc.
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  export function registerControlComponentResultCallback(callback: ResultCallback): void;
+
+  /**
+   * 用于接收每次模拟点击操作结果的回调函数类型。
+   *
+   * @param { ControlComponentClickResult } result - 用于回调业务方模拟点击结果。
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  type ResultCallback = (result: ControlComponentClickResult) => void;
+
+  /**
+   * 模拟点击操作结果。
+   *
+   * @syscap SystemCapability.Security.Asset
+   * @FaAndStageModel
+   * @since 26.1.0 dynamiconly
+   */
+  interface ControlComponentClickResult {
+    /**
+     * 模拟点击操作结果码。0表示成功，其他表示失败。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    code: number;
+
+    /**
+     * 模拟点击的目标应用信息。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    appInfo: AppInfo;
+
+    /**
+     * 被模拟点击的组件ID。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    componentId: string;
+
+    /**
+     * 模拟点击是否被允许。true表示允许， false表示被拒绝。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    isAllowed: boolean;
+
+    /**
+     * 模拟点击操作结果的原因描述。
+     *
+     * @syscap SystemCapability.Security.Asset
+     * @FaAndStageModel
+     * @since 26.1.0 dynamiconly
+     */
+    reason: string;
+  }
 }
 
 export default abilityToolAccessCtrl;
