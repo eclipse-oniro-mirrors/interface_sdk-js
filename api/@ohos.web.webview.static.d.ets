@@ -28,7 +28,18 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
-  * This module provides the capability to manage web modules.
+  * This module provides the web control capability. For details about the web page display capability, see
+  * [Components]{@link @global:Web}.
+  *
+  * <!--RP1--><!--RP1End-->
+  *
+  * > **NOTE**
+  * >
+  * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+  * >
+  * > - The sample effect is subject to the actual device.
+  * >
+  * > - Static methods must be used on the user interface (UI) thread.
   *
   * ## Required Permissions
   *

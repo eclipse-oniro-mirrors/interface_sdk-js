@@ -26,7 +26,32 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
- * This module provides the capability to manage web modules.
+ * The WebView module is a web control capability module provided by the HarmonyOS ArkWeb framework. It is used to
+ * programmatically control the behavior of the **Web** component on the application side. This module does not
+ * involve the display and rendering of web pages (the display capability is provided by the **Web** component);
+ * instead, it focuses on the control logic during the running of the **Web** component, including page loading
+ * and navigation, JavaScript script execution and
+ * bidirectional message communication, cookie management, database management, Web component storage operations,
+ * download task management, network request interception and custom responses, proxy configuration, geolocation
+ * permission management, ad filtering, forward and backward cache, media playback hosting, and PDF generation.
+ *
+ * When developers use **Web** components to display web page content, if they need to intervene,
+ * monitor, or extend web page behavior on the application side (for example, sending messages to web pages,
+ * intercepting specific Scheme requests and returning local resources, managing the download process, configuring
+ * proxies, controlling cache policies, etc.), they should implement this through the Controller and various
+ * Manager/Delegate classes provided by this module.
+ *
+ * For the web page display capability, see [component description]{@link @global:Web}.
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
+ * >
+ * > - The static methods in this module must be called on the user interface (UI) thread. Otherwise, exceptions may occur.
  *
  * ## Required Permissions
  *
