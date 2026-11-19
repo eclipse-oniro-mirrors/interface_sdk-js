@@ -14053,6 +14053,20 @@ export declare interface CommonMethod {
      */
     default advancedBlendMode(effect: BlendMode | Blender | undefined, type?: BlendApplyType): this;
     /**
+     * 使用BlenderBase实例为当前组件添加颜色混合效果。不能与blenderMode接口同时使用。
+     *
+     * @param { BlenderBase | undefined } effect - Blender基础类型，创建各类Blender效果的入口。
+     *     BlenderBase实例必须通过BlenderBase类成员方法创建。
+     * @param { BlendApplyType } [type] - 混合效果的实现方式是否离屏。
+     *     默认值: BlendApplyType.FAST。
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default advancedBlendMode(effect: BlenderBase | undefined, type?: BlendApplyType): this;
+    /**
      * 是否对子组件超出当前组件范围外的区域进行裁剪。
      *
      * @param { boolean | undefined } value - 参数为boolean类型，设置是否按照父容器边缘轮廓进行裁剪。<br/>默认值：false <br/>true表示按照父容器边缘轮廓进行裁剪，
@@ -15616,6 +15630,15 @@ export type SystemUiMaterial = uiMaterial.Material;
  * @since 23 static
  */
 export type Blender = uiEffect.Blender;
+/**
+ * Blender基础类型，创建各类Blender效果的入口。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type BlenderBase = uiEffect.BlenderBase;
 /**
  * 从promptAction导入弹出框控制器类型
  *
