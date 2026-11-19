@@ -28,6 +28,7 @@
  * > - The pixel count of the **QRCode** component is related to its content. If the component size is too small, the
  * > content may not be displayed. In this case, adjust the component size appropriately.
  * >
+ * > <!--RP1--><!--RP1End-->
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

@@ -1745,8 +1745,7 @@ declare class SearchAttribute extends CommonMethod<SearchAttribute> {
    * > When both strokeWidth and [shaderStyle]{@link SearchAttribute#shaderStyle} are set, shaderStyle does not take
    * > effect.
    *
-   * @param { Optional<LengthMetrics> } width - Width of the text stroke. When the unit attribute of the LengthMetrics
-   *     object is LengthUnit.PERCENT, the current setting does not take effect and the default value is used.
+   * @param { Optional<LengthMetrics> } width - Width of the text stroke.
    *     <br>If the value is less than 0, solid characters are displayed; if the value is greater than 0, hollow
    *     characters are displayed.
    *     <br>**Note:**
