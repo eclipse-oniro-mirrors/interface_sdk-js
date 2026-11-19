@@ -3206,7 +3206,7 @@ declare enum ResponseType {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  RightClick = 0,
+  RightClick,
 
   /**
    * 通过长按触发菜单弹出。
@@ -3217,7 +3217,7 @@ declare enum ResponseType {
    * @atomicservice [since 11]
    * @since 8 dynamic
    */
-  LongPress = 1
+  LongPress
 }
 
 /**
