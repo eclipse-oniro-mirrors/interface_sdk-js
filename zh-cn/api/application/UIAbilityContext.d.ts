@@ -2244,6 +2244,26 @@ declare class UIAbilityContext extends Context {
   showAbility(): Promise<void>;
 
   /**
+   * 显示了这种UIAability。该接口使用promise返回结果。它只能在主线程上调用。
+   * 调用该接口前，请确保应用已添加到状态栏中。
+   * 该接口只能在PC二合一设备和平板电脑上正常调用。在其他设备上，它返回错误代码
+   * 801.。
+   * **系统能力**:SystemCapability.Ability.AbilityRuntime.Core
+   *
+   * @param { ShowParams } params - Parameters used for showing the UIAbility.
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 16000067 - The StartOptions check failed.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  showAbility(params: ShowParams): Promise<void>;
+
+  /**
    * 隐藏当前UIAbility。使用Promise异步回调。仅支持在主线程调用。
    * 调用此接口前要求确保应用已添加至状态栏。
    * 该接口仅在PC/2in1设备中、或处于[自由多窗模式](docroot://windowmanager/window-terminology.md#自由多窗模式)的Tablet设备中可正常调用，在其他设备中返回801错误码。
