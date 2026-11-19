@@ -22,7 +22,7 @@ import type { Callback } from '@ohos.base';
 import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
- * 本模块提供了星闪远端设备的连接与管理能力，包括连接与断开远端设备、可信配对与确认、调整连接间隔、订阅配对请求等。
+ * 本模块提供了星闪远端设备的连接与管理能力，包括创建远端设备实例、连接与断开远端设备、查询远端设备信息及订阅设备状态变化事件等。
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
@@ -109,10 +109,8 @@ declare namespace remoteDevice {
 
   /**
    * 订阅来自远程NearLink设备的配对请求事件。
-   * 如果用户被赋予了ohos.permission.GET_NEARLINK_PEER_MAC权限。
-   * 回调返回真实设备地址，否则返回随机设备地址
    *
-   * 只有授予了ohos.permission.NEARLINK_ACCESS权限的系统应用程序才能访问此事件。
+   * 只有授予了ohos.permission.ACCESS_NEARLINK权限的系统应用程序才能访问此事件。
    * 如果应用被赋予了ohos.permission.GET_NEARLINK_PEER_MAC权限。
    * 回调返回真实设备地址，否则返回随机设备地址。
    * 调用此接口前，您可以调用
@@ -131,7 +129,7 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offPairingRequest]{@link remoteDevice.offPairingRequest(callback?: Callback<PairingRequestParam>): void}
-      *     取消订阅配对请求事件。
+   *     取消订阅配对请求事件。
    */
   function onPairingRequest(callback: Callback<PairingRequestParam>): void;
 
@@ -153,7 +151,7 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onPairingRequest]{@link remoteDevice.onPairingRequest(callback: Callback<PairingRequestParam>): void}
-      *     订阅配对请求事件。
+   *     订阅配对请求事件。
    */
   function offPairingRequest(callback?: Callback<PairingRequestParam>): void;
 
@@ -176,7 +174,8 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offPairingStateChange]{@link remoteDevice.offPairingStateChange(callback?: Callback<PairingStateParam>):
-   *     void} Unsubscribes from the pairing status change event.
+   *     void}
+   *     取消订阅配对状态变化事件。
    */
   function onPairingStateChange(callback: Callback<PairingStateParam>): void;
 
@@ -198,7 +197,7 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onPairingStateChange]{@link remoteDevice.onPairingStateChange(callback: Callback<PairingStateParam>): void}
-      *     订阅配对状态变化事件。
+   *     订阅配对状态变化事件。
    */
   function offPairingStateChange(callback?: Callback<PairingStateParam>): void;
 
@@ -223,7 +222,8 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offConnectionStateChange]{@link remoteDevice.offConnectionStateChange(callback?:
-   *     Callback<ConnectionStateParam>): void} Unsubscribes from the connection status change event.
+   *     Callback<ConnectionStateParam>): void}
+   *     取消订阅连接状态变化事件。
    */
   function onConnectionStateChange(callback: Callback<ConnectionStateParam>): void;
 
@@ -245,7 +245,8 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [onConnectionStateChange]{@link remoteDevice.onConnectionStateChange(callback:
-   *     Callback<ConnectionStateParam>): void} Subscribes to the connection status change event.
+   *     Callback<ConnectionStateParam>): void}
+   *     订阅连接状态变化事件。
    */
   function offConnectionStateChange(callback?: Callback<ConnectionStateParam>): void;
 
@@ -270,7 +271,7 @@ declare namespace remoteDevice {
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
    * @see [offAcbStateChange]{@link remoteDevice.offAcbStateChange(callback?: Callback<AcbStateParam>): void}
-      *     取消订阅逻辑链路连接状态变化事件。
+   *     取消订阅逻辑链路连接状态变化事件。
    */
   function onAcbStateChange(callback: Callback<AcbStateParam>): void;
 
@@ -291,7 +292,8 @@ declare namespace remoteDevice {
    * @atomicservice [since 26.1.0]
    * @since 26.0.0 dynamic
    * @since 26.0.1 static
-   * @see [onAcbStateChange]{@link remoteDevice.onAcbStateChange(callback: Callback<AcbStateParam>): void}    *     订阅逻辑链路连接状态变化事件。
+   * @see [onAcbStateChange]{@link remoteDevice.onAcbStateChange(callback: Callback<AcbStateParam>): void}
+   *     订阅逻辑链路连接状态变化事件。
    */
   function offAcbStateChange(callback?: Callback<AcbStateParam>): void;
 
@@ -532,8 +534,7 @@ declare namespace remoteDevice {
      * 设置远端设备别名。
      *
      * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
-     * @param { string } alias - 远端设备别名。个字符，不能为空。
-     *     <br>最大长度为64。
+     * @param { string } alias - 远端设备别名。最大长度为64个字符，不能为空。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -825,7 +826,8 @@ declare namespace remoteDevice {
      */
     address: string;
     /**
-     * 设备配对的密钥。
+     * 设备配对的通行码，显示给用户确认。长度固定为6，字符串内容为数字。
+     * 仅在pairingType为PAIRING_TYPE_PASSCODE或PAIRING_TYPE_NUMBER_COMPARE时该字段生效。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -857,7 +859,7 @@ declare namespace remoteDevice {
    */
   enum PairingType {
     /**
-     * 表示不需要passkey的配对方式，用户无需检查配对码。
+     * 表示不需要通行码的配对方式，用户无需检查配对码。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1002,7 +1004,7 @@ declare namespace remoteDevice {
      */
     CONNECTION_REMOTE_DISCONNECT = 3,
     /**
-     * 连接失败：超过ACB连接限制。
+     * 连接失败：ACB连接失败。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -1135,7 +1137,7 @@ declare namespace remoteDevice {
    */
   interface DeviceInformation {
     /**
-     * 远端设备的制造商数据
+     * 远端设备的制造商数据。数据为二进制编码格式，可通过buffer.from(manufacturerData, 'binary')等方式解析。
      * 最大长度为255。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
@@ -1147,7 +1149,7 @@ declare namespace remoteDevice {
     manufacturerData: string;
 
     /**
-     * 远程设备的模型数据。
+     * 远端设备的模型数据。数据为二进制编码格式，可通过buffer.from(modelData, 'binary')等方式解析。
      * 最大长度为255。
      *
      * @syscap SystemCapability.Communication.NearLink.Base

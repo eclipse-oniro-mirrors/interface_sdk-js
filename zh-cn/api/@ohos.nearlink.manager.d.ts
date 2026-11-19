@@ -21,7 +21,7 @@
 import type { Callback } from '@ohos.base';
 
 /**
- * 本模块提供了星闪基础管理能力，包括打开/关闭星闪、获取本机MAC地址、设置连接模式等能力。
+ * 本模块提供了星闪基础管理能力，包括查询是否支持星闪、打开/关闭星闪、订阅星闪状态变化事件、查询已配对设备等。
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
@@ -217,7 +217,6 @@ declare namespace manager {
    * @permission ohos.permission.ACCESS_NEARLINK and ohos.permission.MANAGE_NEARLINK
    * @param { ConnectionMode } mode - 表示要设置的连接模式。
    * @param { int } duration - 表示设置模式的持续时间，单位为s，取值范围为大于等于0的整数，若为0则表示无限制。
-   *     <br>取值限定为整数。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.

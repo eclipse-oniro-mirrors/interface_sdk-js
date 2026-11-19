@@ -22,26 +22,29 @@ import type { Callback } from './@ohos.base';
 
 /**
  * OPP模块提供了使用蓝牙传输文件的功能，包括发送文件、接收文件和获取文件传输进度等。
- * 
+ *
  * 当前页面仅包含本模块的系统接口。
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @stagemodelonly
  * @since 16 dynamic
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 declare namespace opp {
   /**
    * 创建oppServer profile实例。
    *
    * @returns { OppServerProfile } 返回profile实例。
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createOppServerProfile(): OppServerProfile;
 
@@ -51,25 +54,24 @@ declare namespace opp {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface OppServerProfile {
     /**
      * 订阅蓝牙文件传输的进度和状态变化。
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @param { 'transferStateChange' } type - 事件回调类型，支持的事件为'transferStateChange'，当on('transferStateChange')调用完成后，可以收到文件
      *     传输进度和状态变化事件。
      * @param { Callback<OppTransferInformation> } callback - 表示文件传输进度和状态变化事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 16 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -81,24 +83,25 @@ declare namespace opp {
     on(type: 'transferStateChange', callback: Callback<OppTransferInformation>): void;
 
     /**
-     * 订阅文件传输状态变化上报的事件。
-     * 若应用程序拥有ohos.permission.GET_BLUETOOTH_PEERS_MAC权限，则对端设备地址类型为真实地址，否则为虚拟地址。
+     * Subscribe the event reported when the file transfer status changes.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<OppTransferInformation> } callback - 表示文件传输进度和状态变化事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onTransferStateChange(callback: Callback<OppTransferInformation>): void;
 
@@ -108,13 +111,15 @@ declare namespace opp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { 'transferStateChange' } type - 事件回调类型，支持的事件为'transferStateChange'，调用off('transferStateChange')后，停止接收文件传输
      *     进度和状态变化事件。
-     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } [callback] - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -126,40 +131,43 @@ declare namespace opp {
     off(type: 'transferStateChange', callback?: Callback<OppTransferInformation>): void;
 
     /**
-     * 取消订阅文件传输状态变化上报的事件。
+     * Unsubscribe the event reported when the file transfer status changes.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     * @param { Callback<OppTransferInformation> } [callback] - 表示文件传输进度和状态变化事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } [callback] - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offTransferStateChange(callback?: Callback<OppTransferInformation>): void;
 
     /**
      * 订阅蓝牙文件传输事件以接收文件。
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @param { 'receiveIncomingFile' } type - 事件回调类型，支持的事件为'receiveIncomingFile'，当on('receiveIncomingFile')调用完成后，表示可以收到
      *     是否有文件传输通知的事件。
      * @param { Callback<OppTransferInformation> } callback - 表示文件传输进度和状态变化事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 16 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -171,24 +179,25 @@ declare namespace opp {
     on(type: 'receiveIncomingFile', callback: Callback<OppTransferInformation>): void;
 
     /**
-     * 订阅接收到文件传输请求的事件。
-     * 若应用程序拥有ohos.permission.GET_BLUETOOTH_PEERS_MAC权限，则对端设备地址类型为真实地址，否则为虚拟地址。
+     * Subscribe to the event of receiving a file transfer request.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC)
-     * @param { Callback<OppTransferInformation> } callback - 表示是否有文件传输通知事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onReceiveIncomingFile(callback: Callback<OppTransferInformation>): void;
 
@@ -198,13 +207,15 @@ declare namespace opp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { 'receiveIncomingFile' } type - 事件回调类型，支持的事件为'receiveIncomingFile'，调用off('receiveIncomingFile')后，停止接收文件传输
      *     通知的事件。
-     * @param { Callback<OppTransferInformation> } callback - Callback used to listen for event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } [callback] - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -216,21 +227,25 @@ declare namespace opp {
     off(type: 'receiveIncomingFile', callback?: Callback<OppTransferInformation>): void;
 
     /**
-     * 取消订阅接收到文件传输请求的事件。
+     * Unsubscribe to the event of receiving a file transfer request.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     * @param { Callback<OppTransferInformation> } [callback] - 表示是否有文件传输通知事件的回调函数。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @param { Callback<OppTransferInformation> } [callback] - Callback used to listen for event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offReceiveIncomingFile(callback?: Callback<OppTransferInformation>): void;
 
@@ -241,11 +256,18 @@ declare namespace opp {
      * @param { string } deviceId - 接收端的蓝牙MAC地址。
      * @param { Array<FileHolder> } fileHolds - 发送的文件数据，依据插入Array的次序进行发送。
      * @returns { Promise<void> } Promise对象。无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth switch is off.
      * @throws { BusinessError } 2900004 - Profile is not supported.
@@ -257,7 +279,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     sendFile(deviceId: string, fileHolds: Array<FileHolder>): Promise<void>;
 
@@ -268,11 +290,14 @@ declare namespace opp {
      * @param { boolean } accept - 表示是否接受接收文件。true表示接受，false表示不接受。
      * @param { int } fileFd 接收的文件描述符，接收过程中需要保持开启。
      * @returns { Promise<void> } Promise对象。无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth switch is off.
      * @throws { BusinessError } 2900004 - Profile is not supported.
@@ -283,7 +308,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setIncomingFileConfirmation(accept: boolean, fileFd: int): Promise<void>;
 
@@ -292,10 +317,14 @@ declare namespace opp {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @returns { Promise<void> } Promise对象。无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth switch is off.
      * @throws { BusinessError } 2900004 - Profile is not supported.
@@ -305,22 +334,23 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     cancelTransfer(): Promise<void>;
 
     /**
      * 获取当前传输的文件信息。使用Promise异步回调。
      *
-     * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH [since 16 - 24]
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     or (ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
-     *     and ohos.permission.GET_BLUETOOTH_PEERS_MAC) [since 26.0.0]
      * @returns { Promise<OppTransferInformation> } Promise对象。返回当前传输的文件信息对象。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth switch is off.
      * @throws { BusinessError } 2900004 - Profile is not supported.
@@ -330,7 +360,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getCurrentTransferInformation(): Promise<OppTransferInformation>;
 
@@ -340,12 +370,14 @@ declare namespace opp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } uri - 最后一个接收文件的URI。
      * @returns { Promise<void> } Promise对象。无返回结果。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 203 - This function is prohibited by enterprise management policies.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -354,7 +386,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setLastReceivedFileUri(uri: string): Promise<void>;
   }
@@ -365,7 +397,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum DirectionType {
     /**
@@ -375,7 +407,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     OUTBOUND = 0,
 
@@ -386,7 +418,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     INBOUND = 1
   }
@@ -398,7 +430,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum TransferStatus {
     /**
@@ -408,7 +440,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     PENDING = 0,
 
@@ -419,7 +451,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     RUNNING = 1,
 
@@ -430,7 +462,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     FINISH = 2
   }
@@ -442,7 +474,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum TransferResult {
     /**
@@ -452,7 +484,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SUCCESS = 0,
 
@@ -463,7 +495,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_UNSUPPORTED_TYPE = 1,
 
@@ -474,7 +506,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_BAD_REQUEST = 2,
 
@@ -485,7 +517,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_NOT_ACCEPTABLE = 3,
 
@@ -496,7 +528,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_CANCELED = 4,
 
@@ -507,7 +539,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_CONNECTION_FAILED = 5,
 
@@ -518,7 +550,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_TRANSFER_FAILED = 6,
 
@@ -529,7 +561,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ERROR_UNKNOWN = 7
   }
@@ -541,7 +573,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface OppTransferInformation {
     /**
@@ -551,7 +583,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     filePath: string;
 
@@ -562,7 +594,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     remoteDeviceName: string;
 
@@ -573,7 +605,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     remoteDeviceId: string;
 
@@ -584,7 +616,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     direction: DirectionType;
 
@@ -595,7 +627,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     status: TransferStatus;
 
@@ -606,7 +638,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     result: TransferResult;
 
@@ -617,7 +649,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     currentBytes: long;
 
@@ -628,7 +660,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     totalBytes: long;
 
@@ -639,7 +671,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     currentCount: int;
 
@@ -650,7 +682,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     totalCount: int;
   }
@@ -662,7 +694,7 @@ declare namespace opp {
    * @systemapi
    * @stagemodelonly
    * @since 16 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface FileHolder {
     /**
@@ -672,7 +704,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     filePath: string;
 
@@ -683,7 +715,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     fileSize: long;
 
@@ -694,7 +726,7 @@ declare namespace opp {
      * @systemapi
      * @stagemodelonly
      * @since 16 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     fileFd: int;
   }

@@ -14,8 +14,7 @@
  */
 
 /**
- * @file NearLink Data Transfer Capability
- * @kit ConnectivityKit
+ * @file Starflash data transmission capability@kit ConnectivityKit
  */
 
 import type { Callback } from '@ohos.base';
@@ -427,8 +426,7 @@ declare namespace dataTransfer {
   }
 
   /**
-   * Represents the result of port connection parameter negotiation with a remote device.
-   *
+   *Negotiation result of the port connection parameters with the remote device.
    * @syscap SystemCapability.Communication.NearLink.Base
    * @stagemodelonly
    * @atomicservice [since 26.1.0]

@@ -1,5 +1,4 @@
 /*
-/*
  * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +22,8 @@ import type { Callback } from '@ohos.base';
 import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
- * This module provides the definition of the NearLink scanning mode.
- *
+ * This module provides functions related to star flash scanning, including initiating/stopping scanning and subscribing
+ * to scanning results.
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
  * @atomicservice [since 26.1.0]
@@ -152,8 +151,7 @@ declare namespace scan {
    */
   interface ScanResults {
     /**
-     * Address of the device discovered. The address format is **11:22:33:AA:BB:FF**.
-     *
+    The asterisk (*) indicates the address of the scanned device. The address format is 11:22:33:AA:BB:FF.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -193,9 +191,7 @@ declare namespace scan {
      */
     deviceName: string;
     /**
-     * Whether the discovered device is connectable. The value **true** indicates that the discovered device is
-     * connectable, and the value **false** indicates the opposite.
-     *
+    The asterisk (*) indicates whether the scanned broadcast can be connected. true: yes; false: no.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
      * @atomicservice [since 26.1.0]
@@ -384,8 +380,7 @@ declare namespace scan {
      */
     SCAN_MODE_BALANCED = 1,
     /**
-     * High-power scan mode. The scan frequency is high, and the power consumption is high.
-     *
+    The asterisk (*) indicates the low-delay scanning mode with high scanning frequency and high power consumption.
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi
      * @stagemodelonly

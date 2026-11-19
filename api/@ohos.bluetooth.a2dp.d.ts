@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Bluetooth a2dp module
  * @kit ConnectivityKit
  */
 
@@ -43,9 +43,10 @@ declare namespace a2dp {
    * create the instance of a2dp profile.
    *
    * @returns { A2dpSourceProfile } Returns the instance of profile.
-   * @throws { BusinessError } 401 - Invalid parameter.Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @crossplatform [since 13]
    * @since 10 dynamic
@@ -58,11 +59,13 @@ declare namespace a2dp {
    *
    * @returns { A2dpSinkProfile } Returns the instance of profile.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
-   *     3. A dependent service feature is not supported.
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   function createA2dpSnkProfile(): A2dpSinkProfile;
 
@@ -80,11 +83,17 @@ declare namespace a2dp {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -101,11 +110,17 @@ declare namespace a2dp {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -123,10 +138,16 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { PlayingState } Returns the playing state.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -143,11 +164,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<boolean> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -164,11 +191,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<boolean> } callback - Callback used to listen for the pairing request event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -185,11 +218,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<boolean> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -206,11 +245,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<boolean> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -227,11 +272,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -248,11 +299,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<void> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -269,11 +326,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -290,11 +353,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<void> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -311,9 +380,13 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { CodecInfoList[] } Returns the CodecInfoList.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -321,7 +394,7 @@ declare namespace a2dp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getCurrentFullCodecInfo(deviceId: string): CodecInfoList[];
 
@@ -331,11 +404,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { CodecInfo } Returns the CodecInfo.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -352,11 +431,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { CodecInfo } codecInfo - Indicates the CodecInfo.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -374,11 +459,17 @@ declare namespace a2dp {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { int } duration - Restricted duration <milliseconds>. Valid range is from 3000ms to 20000ms.
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -395,11 +486,17 @@ declare namespace a2dp {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -417,11 +514,17 @@ declare namespace a2dp {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<int> } Returns the duration <milliseconds>;
      *     If returns { @code -1 } means allow devices automatic play music when connected.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -438,7 +541,8 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   interface A2dpSinkProfile extends BaseProfile {
     /**
@@ -448,11 +552,11 @@ declare namespace a2dp {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
-     *     3. A dependent service feature is not supported.
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
@@ -463,7 +567,8 @@ declare namespace a2dp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     connect(deviceId: string): void;
 
@@ -474,11 +579,11 @@ declare namespace a2dp {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
-     *     3. A dependent service feature is not supported.
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
@@ -487,7 +592,8 @@ declare namespace a2dp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
 
@@ -499,11 +605,11 @@ declare namespace a2dp {
      * @returns { PlayingState } Returns the playing state.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
-     *     3. A dependent service feature is not supported.
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
      * @throws { BusinessError } 2900099 - Internal system error. For example, IPC error.
@@ -512,7 +618,8 @@ declare namespace a2dp {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     getPlayingState(deviceId: string): PlayingState;
   }
@@ -562,7 +669,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecBitRate?: CodecBitRate;
     /**
@@ -570,7 +677,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecFrameLength?: CodecFrameLength;
   }
@@ -580,7 +687,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface CodecInfoList {
     /**
@@ -588,7 +695,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecType: CodecType;
     /**
@@ -596,7 +703,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecBitsPerSampleArray: CodecBitsPerSample[];
     /**
@@ -604,7 +711,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecChannelModeArray: CodecChannelMode[];
     /**
@@ -612,7 +719,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecSampleRateArray: CodecSampleRate[];
     /**
@@ -620,7 +727,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecBitRateArray: CodecBitRate[];
     /**
@@ -628,7 +735,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     codecFrameLengthArray: CodecFrameLength[];
   }
@@ -864,7 +971,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum CodecBitRate {
     /**
@@ -872,7 +979,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_96000 = 0,
     /**
@@ -880,7 +987,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_128000 = 1,
     /**
@@ -888,7 +995,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_192000 = 2,
     /**
@@ -896,7 +1003,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_256000 = 3,
     /**
@@ -904,7 +1011,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_320000 = 4,
     /**
@@ -912,7 +1019,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_480000 = 5,
     /**
@@ -920,7 +1027,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_640000 = 6,
     /**
@@ -928,7 +1035,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_960000 = 7,
     /**
@@ -936,7 +1043,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_ABR = 8,
     /**
@@ -944,7 +1051,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 21 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_1500000 = 9,
     /**
@@ -952,7 +1059,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 21 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_BIT_RATE_2300000 = 10
   }
@@ -962,7 +1069,7 @@ declare namespace a2dp {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 19 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum CodecFrameLength {
     /**
@@ -970,7 +1077,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_FRAME_LENGTH_5MS = 0,
     /**
@@ -978,7 +1085,7 @@ declare namespace a2dp {
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     CODEC_FRAME_LENGTH_10MS = 1
   }

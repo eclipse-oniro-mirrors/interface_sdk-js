@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file Bluetooth ble module
  * @kit ConnectivityKit
  */
 
@@ -53,7 +53,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BluetoothAddress = common.BluetoothAddress;
 
@@ -64,7 +64,7 @@ declare namespace ble {
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BluetoothTransport = connection.BluetoothTransport;
 
@@ -86,9 +86,14 @@ declare namespace ble {
    *
    * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
    * @returns { GattClientDevice } Returns a Gatt client device instance {@code GattClientDevice}.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @crossplatform [since 13]
@@ -104,13 +109,15 @@ declare namespace ble {
    * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
    * @param { GattSetting } setting - Indicates Gatt setting for connection.
    * @returns { GattClientDevice } Returns a Gatt client device instance {@code GattClientDevice}.
-   * @throws { BusinessError } 801 - Capability not supported.
-   *     Failed to call the API because the short-range chip is not inserted on the 2in1 device.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createGattClientDevice(deviceId: string, setting: GattSetting): GattClientDevice;
 
@@ -132,8 +139,12 @@ declare namespace ble {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Array<string> } Returns the list of device address.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -152,15 +163,19 @@ declare namespace ble {
    * @param { BleProfile } profile - The profile in the BLE protocol.
    *     It is used to obtain the connected devices corresponding to the profile.
    * @returns { Array<string> } Returns the list of device address.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function getConnectedBLEDevices(profile: BleProfile): Array<string>;
 
@@ -170,15 +185,18 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Array<ScanFilter> } filters - Indicates the list of filters used to filter out specified devices.
    *     If you do not want to use filter, set this parameter to {@code null}.
-   * @param { ScanOptions } options - Indicates the parameters for scanning and if the user does not assign a value, the
-   *     default value will be used.
-   *     {@link ScanOptions#interval} set to 0, {@link ScanOptions#dutyMode} set to {@link SCAN_MODE_LOW_POWER}
-   *     and {@link ScanOptions#matchMode} set to {@link MATCH_MODE_AGGRESSIVE}.
-   *     and {@link ScanOptions#phyType} set to {@link PHY_LE_ALL_SUPPORTED}.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { ScanOptions } [options] - Indicates the parameter settings for scanning. If this parameter is left
+   *     blank, the default configuration is used.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -201,8 +219,12 @@ declare namespace ble {
    *     {@link ScanOptions#dutyMode} set to {@link SCAN_MODE_LOW_POWER}
    *     and {@link ScanOptions#matchMode} set to {@link MATCH_MODE_AGGRESSIVE}.
    *     and {@link ScanOptions#phyType} set to {@link PHY_LE_ALL_SUPPORTED}.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -217,8 +239,12 @@ declare namespace ble {
    * Stops BLE scanning.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -248,11 +274,18 @@ declare namespace ble {
    *     ohos.permission.MANAGE_BLUETOOTH_ADVERTISER_NAME) [since 23]
    * @param { AdvertiseSetting } setting - Indicates the settings for BLE advertising.
    * @param { AdvertiseData } advData - Indicates the advertising data.
-   * @param { AdvertiseData } advResponse - Indicates the scan response associated with the advertising data.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { AdvertiseData } [advResponse] - BLE scanning reply broadcast packets. If this parameter is left blank,
+   *     the scanning reply broadcast packet is not carried.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900010 - The number of advertising resources reaches the upper limit. [since 20]
@@ -271,8 +304,12 @@ declare namespace ble {
    * Stops BLE advertising.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -305,10 +342,16 @@ declare namespace ble {
    *     ohos.permission.MANAGE_BLUETOOTH_ADVERTISER_NAME) [since 23]
    * @param { AdvertisingParams } advertisingParams - Indicates the params for BLE advertising.
    * @param { AsyncCallback<int> } callback - the callback of advertise ID.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900010 - The number of advertising resources reaches the upper limit. [since 20]
@@ -342,10 +385,16 @@ declare namespace ble {
    *     ohos.permission.MANAGE_BLUETOOTH_ADVERTISER_NAME) [since 23]
    * @param { AdvertisingParams } advertisingParams - Indicates the param for BLE advertising.
    * @returns { Promise<int> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900010 - The number of advertising resources reaches the upper limit. [since 20]
@@ -365,10 +414,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { AdvertisingEnableParams } advertisingEnableParams - Indicates the params for enable advertising.
    * @param { AsyncCallback<void> } callback - the callback result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -386,10 +441,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { AdvertisingEnableParams } advertisingEnableParams - Indicates the params for enable advertising.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -407,10 +468,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { AdvertisingDisableParams } advertisingDisableParams - Indicates the params for disable advertising.
    * @param { AsyncCallback<void> } callback - the callback result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -428,10 +495,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { AdvertisingDisableParams } advertisingDisableParams - Indicates the params for disable advertising.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -450,10 +523,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { int } advertisingId - Indicates the ID for this BLE advertising.
    * @param { AsyncCallback<void> } callback - the callback result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -462,7 +541,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform [since 13]
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function stopAdvertising(advertisingId: int, callback: AsyncCallback<void>): void;
 
@@ -473,10 +552,16 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { int } advertisingId - Indicates the ID for this BLE advertising.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Operation failed.
@@ -485,7 +570,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform [since 13]
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function stopAdvertising(advertisingId: int): Promise<void>;
 
@@ -495,10 +580,12 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'advertisingStateChange' } type - Type of the advertising state to listen for.
    * @param { Callback<AdvertisingStateChangeInfo> } callback - Callback used to listen for the advertising state.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -512,26 +599,37 @@ declare namespace ble {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AdvertisingStateChangeInfo> } callback - Callback used to listen for the advertising state.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function onAdvertisingStateChange(callback: Callback<AdvertisingStateChangeInfo>): void;
-
   /**
    * Unsubscribe from advertising state change event.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'advertisingStateChange' } type - Type of the advertising state to listen for.
-   * @param { Callback<AdvertisingStateChangeInfo> } callback - Callback used to listen for the advertising state.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { Callback<AdvertisingStateChangeInfo> } [callback] - Specifies the callback function notification for
+   *     unsubscription.
+   * If the parameter is transferred, the parameter must be set to
+   * [ble.on('advertisingStateChange')]
+   * {@link ble.on(type:'advertisingStateChange', callback: Callback<AdvertisingStateChangeInfo>)}
+  The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+   * corresponding to the type are unsubscribed from.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -545,13 +643,17 @@ declare namespace ble {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { Callback<AdvertisingStateChangeInfo> } [callback] - Callback used to listen for the advertising state.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @crossplatform
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function offAdvertisingStateChange(callback?: Callback<AdvertisingStateChangeInfo>): void;
 
@@ -561,10 +663,12 @@ declare namespace ble {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
    * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -574,19 +678,23 @@ declare namespace ble {
    */
   function on(type: 'BLEDeviceFind', callback: Callback<Array<ScanResult>>): void;
 
-  /** 
-   * Subscribe BLE scan result. 
-   * 
+  /**
+   * Subscribe BLE scan result.
+   *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event. 
-   * @throws { BusinessError } 201 - Permission denied. 
-   * @throws { BusinessError } 801 - Capability not supported. 
-   * @throws { BusinessError } 2900099 - Operation failed. 
-   * @syscap SystemCapability.Communication.Bluetooth.Core 
-   * @stagemodelonly 
-   * @crossplatform 
-   * @since 26.0.1 static 
-   */ 
+   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 static
+   */
   function onBLEDeviceFind(callback: Callback<Array<ScanResult>>): void;
 
   /**
@@ -594,11 +702,19 @@ declare namespace ble {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
-   * @param { Callback<Array<ScanResult>> } callback - Callback used to listen for the scan result event.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @param { Callback<Array<ScanResult>> } [callback] - Specifies the callback function notification for
+   *     unsubscription.
+   * If the parameter is transferred, the parameter must be set to
+   * The callback functions in
+   * [ble.on('BLEDeviceFind')]{@link ble.on(type:'BLEDeviceFind', callback: Callback<Array<ScanResult>>)} are
+   * consistent; if
+   * If there is no input parameter, all callback function notifications corresponding to the type are unsubscribed.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
@@ -608,19 +724,23 @@ declare namespace ble {
    */
   function off(type: 'BLEDeviceFind', callback?: Callback<Array<ScanResult>>): void;
 
-  /** 
-   * Unsubscribe BLE scan result. 
-   * 
-   * @permission ohos.permission.ACCESS_BLUETOOTH 
-   * @param { Callback<Array<ScanResult>> } [callback] - Callback used to listen for the scan result event. 
-   * @throws { BusinessError } 201 - Permission denied. 
-   * @throws { BusinessError } 801 - Capability not supported. 
-   * @throws { BusinessError } 2900099 - Operation failed. 
-   * @syscap SystemCapability.Communication.Bluetooth.Core 
-   * @stagemodelonly 
-   * @crossplatform 
-   * @since 26.0.1 static 
-   */ 
+  /**
+   * Unsubscribe BLE scan result.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { Callback<Array<ScanResult>> } [callback] - Callback used to listen for the scan result event.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @since 26.1.0 static
+   */
   function offBLEDeviceFind(callback?: Callback<Array<ScanResult>>): void;
 
   /**
@@ -642,10 +762,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { GattService } service - Indicates the service to add.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -663,10 +789,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } serviceUuid - Indicates the UUID of the service to remove.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -684,9 +816,12 @@ declare namespace ble {
      * Removes all services from the list of GATT services offered by this device.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     *     Failed to call the API because the short-range chip is not inserted on the 2in1 device.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -694,7 +829,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     removeAllServices(): void;
 
@@ -704,8 +839,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } serviceUuid - Indicates the UUID of the service.
      * @returns { GattService } The GATT service has been obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -714,7 +853,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getService(serviceUuid: string): GattService;
 
@@ -723,8 +862,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { GattService[] } The list of GATT service has been obtained.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -732,7 +875,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getServices(): GattService[];
 
@@ -740,8 +883,12 @@ declare namespace ble {
      * Closes this {@code GattServer} object and unregisters its callbacks.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -761,9 +908,12 @@ declare namespace ble {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { boolean } [autoConnect] - Indicates whether to automatically connect to the remote device.
      *     If {@code true}, it will automatically connect when the remote device is available, default is {@code false}.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     *     Failed to call the API because the short-range chip is not inserted on the 2in1 device.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -771,7 +921,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     connect(deviceId: string, autoConnect?: boolean): void;
 
@@ -780,9 +930,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
-     *     Failed to call the API because the short-range chip is not inserted on the 2in1 device.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -790,7 +943,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
 
@@ -803,10 +956,16 @@ declare namespace ble {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { NotifyCharacteristic } notifyCharacteristic - Indicates the local characteristic that has changed.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -832,10 +991,16 @@ declare namespace ble {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { NotifyCharacteristic } notifyCharacteristic - Indicates the local characteristic that has changed.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -849,14 +1014,56 @@ declare namespace ble {
     notifyCharacteristicChanged(deviceId: string, notifyCharacteristic: NotifyCharacteristic): Promise<void>;
 
     /**
+     * Sends a notification of a change in a specified local characteristic with a asynchronous callback.
+     *
+     * This method should be called for every BLE peripheral device that has requested notifications.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
+     * @param { NotifyCharacteristic } notifyCharacteristic - Indicates the local characteristic that has changed.
+     * @param { boolean } isCongestionReportEnabled - Whether to report the congestion state of the connection
+     *     through the result of this call.
+     *     The value {@code true} indicates that report is enabled. If the connection is congested when this
+     *     method is called, the API fails with error code 2901004 and the data is not sent.
+     *     And the value {@code false} indicates that report is disabled.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900003 - Bluetooth disabled.
+     * @throws { BusinessError } 2900099 - Operation failed.
+     * @throws { BusinessError } 2901004 - The connection is congested.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    notifyCharacteristicChanged(
+      deviceId: string,
+      notifyCharacteristic: NotifyCharacteristic,
+      isCongestionReportEnabled: boolean
+    ): Promise<void>;
+
+    /**
      * Sends a response to a specified read or write request to a given BLE peripheral device.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { ServerResponse } serverResponse - Indicates the response parameters {@link ServerResponse}.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -875,8 +1082,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { ProfileConnectionState } Connection state.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -884,7 +1095,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getConnectedState(deviceId: string): ProfileConnectionState;
 
@@ -894,15 +1105,19 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<PhyValue> } Promise used to return the phy value read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     readPhy(deviceId: string): Promise<PhyValue>;
 
@@ -915,15 +1130,19 @@ declare namespace ble {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { PhyValue } phyValue - Indicates the phy to set.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setPhy(deviceId: string, phyValue: PhyValue): Promise<void>;
 
@@ -934,10 +1153,12 @@ declare namespace ble {
      * @param { 'characteristicRead' } type - Type of the characteristic read event to listen for.
      * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read
      *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -946,32 +1167,42 @@ declare namespace ble {
      */
     on(type: 'characteristicRead', callback: Callback<CharacteristicReadRequest>): void;
 
-    /** 
-     * Subscribe characteristic read event. 
-     * 
+    /**
+     * Subscribe characteristic read event.
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read 
-     *     event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read
+     *     event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onCharacteristicRead(callback: Callback<CharacteristicReadRequest>): void;
-
     /**
      * Unsubscribe characteristic read event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'characteristicRead' } type - Type of the characteristic read event to listen for.
-     * @param { Callback<CharacteristicReadRequest> } callback - Callback used to listen for the characteristic read
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<CharacteristicReadRequest> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('characteristicRead')]
+     * {@link ble.GattServer.on(type:'characteristicRead', callback: Callback<CharacteristicReadRequest>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -980,19 +1211,23 @@ declare namespace ble {
      */
     off(type: 'characteristicRead', callback?: Callback<CharacteristicReadRequest>): void;
 
-    /** 
-     * Unsubscribe characteristic read event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH 
-     * @param { Callback<CharacteristicReadRequest> } [callback] - 
-     *     Callback used to listen for the characteristic read event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+    /**
+     * Unsubscribe characteristic read event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CharacteristicReadRequest> } [callback] -
+     *     Callback used to listen for the characteristic read event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     offCharacteristicRead(callback?: Callback<CharacteristicReadRequest>): void;
 
     /**
@@ -1001,11 +1236,13 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'characteristicWrite' } type - Type of the characteristic write event to listen for.
      * @param { Callback<CharacteristicWriteRequest> } callback -
-     *     Callback used to listen for the characteristic write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * Specifies the subscription callback function, which carries the write request data sent by the client.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1014,32 +1251,42 @@ declare namespace ble {
      */
     on(type: 'characteristicWrite', callback: Callback<CharacteristicWriteRequest>): void;
 
-    /** 
-     * Subscribe characteristic write event. 
-     * 
+    /**
+     * Subscribe characteristic write event.
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write 
-     *     event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write
+     *     event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>): void;
-
     /**
      * Unsubscribe characteristic write event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'characteristicWrite' } type - Type of the characteristic write event to listen for.
-     * @param { Callback<CharacteristicWriteRequest> } callback - Callback used to listen for the characteristic write
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<CharacteristicWriteRequest> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('characteristicWrite')]
+     * {@link ble.GattServer.on(type:'characteristicWrite', callback: Callback<CharacteristicWriteRequest>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1047,20 +1294,27 @@ declare namespace ble {
      * @since 10 dynamic
      */
     off(type: 'characteristicWrite', callback?: Callback<CharacteristicWriteRequest>): void;
-
-    /** 
-     * Unsubscribe characteristic write event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH 
-     * @param { Callback<CharacteristicWriteRequest> } [callback] 
-     *     - Callback used to listen for the characteristic write event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+    /**
+     * Unsubscribe characteristic write event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CharacteristicWriteRequest> } [callback]
+     * Specifies the callback function notification for unsubscription.
+     * If a parameter is transferred, the parameter must be set to
+     * [onCharacteristicWrite]{@link ble.GattServer.onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     offCharacteristicWrite(callback?: Callback<CharacteristicWriteRequest>): void;
 
     /**
@@ -1069,10 +1323,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorRead' } type - Type of the descriptor read event to listen for.
      * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1081,30 +1337,40 @@ declare namespace ble {
      */
     on(type: 'descriptorRead', callback: Callback<DescriptorReadRequest>): void;
 
-    /** 
-     * Subscribe descriptor read event. 
-     * 
+    /**
+     * Subscribe descriptor read event.
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onDescriptorRead(callback: Callback<DescriptorReadRequest>): void;
-
     /**
      * Unsubscribe descriptor read event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorRead' } type - Type of the descriptor read event to listen for.
-     * @param { Callback<DescriptorReadRequest> } callback - Callback used to listen for the descriptor read event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<DescriptorReadRequest> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('descriptorRead')]{@link ble.GattServer.on(type:'descriptorRead', callback: Callback<DescriptorReadRequest>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1118,12 +1384,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<DescriptorReadRequest> } [callback] - Callback used to listen for the descriptor read event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offDescriptorRead(callback?: Callback<DescriptorReadRequest>): void;
 
@@ -1133,10 +1403,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorWrite' } type - Type of the descriptor write event to listen for.
      * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1145,30 +1417,41 @@ declare namespace ble {
      */
     on(type: 'descriptorWrite', callback: Callback<DescriptorWriteRequest>): void;
 
-	  /** 
-     * Subscribe descriptor write event. 
-     * 
+    /**
+     * Subscribe descriptor write event.
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onDescriptorWrite(callback: Callback<DescriptorWriteRequest>): void;
-
     /**
      * Unsubscribe descriptor write event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'descriptorWrite' } type - Type of the descriptor write event to listen for.
-     * @param { Callback<DescriptorWriteRequest> } callback - Callback used to listen for the descriptor write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<DescriptorWriteRequest> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('descriptorWrite')]
+     * {@link ble.GattServer.on(type:'descriptorWrite', callback: Callback<DescriptorWriteRequest>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1182,12 +1465,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<DescriptorWriteRequest> } [callback] - Callback used to listen for the descriptor write event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offDescriptorWrite(callback?: Callback<DescriptorWriteRequest>): void;
 
@@ -1197,11 +1484,13 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'connectionStateChange' } type - Type of the connection state changed event to listen for.
      * @param { Callback<BLEConnectionChangeState> } callback -
-     *     Callback used to listen for the connection state changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 10 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * Specifies the subscription callback function, which carries the connection status.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1210,32 +1499,41 @@ declare namespace ble {
      */
     on(type: 'connectionStateChange', callback: Callback<BLEConnectionChangeState>): void;
 
-	  /** 
-     * Subscribe server connection state changed event. 
-     * 
+    /**
+     * Subscribe server connection state changed event.
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } callback - 
-     *     Callback used to listen for the connection state changed event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+     * @param { Callback<BLEConnectionChangeState> } callback -
+     *     Callback used to listen for the connection state changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
-
     /**
      * Unsubscribe server connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'connectionStateChange' } type - Type of the connection state changed event to listen for.
-     * @param { Callback<BLEConnectionChangeState> } callback - Callback used to listen for the connection state changed
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLEConnectionChangeState> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('connectionStateChange')]{@link ble.GattServer.on(type:'connectionStateChange', callback: Callback<BLEConnectionChangeState>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1248,14 +1546,18 @@ declare namespace ble {
      * Unsubscribe server connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } [callback] - Callback used to listen for the connection state changed
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLEConnectionChangeState> } [callback]
+     *     - Callback used to listen for the connection state changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offConnectionStateChange(callback?: Callback<BLEConnectionChangeState>): void;
 
@@ -1265,10 +1567,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEMtuChange' } type - Type of the mtu changed event to listen for.
      * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1276,18 +1580,22 @@ declare namespace ble {
      */
     on(type: 'BLEMtuChange', callback: Callback<int>): void;
 
-    /** 
-     * Subscribe mtu changed event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH 
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+    /**
+     * Subscribe mtu changed event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onBLEMtuChange(callback: Callback<int>): void;
 
     /**
@@ -1295,11 +1603,17 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEMtuChange' } type - Type of the mtu changed event to listen for.
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<int> } [callback] - Specifies the callback function notification for unsubscription.
+     * If parameters are transferred, the callback function in
+     * [on('BLEMtuChange')]{@link ble.GattServer.on(type:'BLEMtuChange',callback: Callback<int>)} must be used.
+     * Consistent. If there is no input parameter, all callback function notifications corresponding to the type are
+     * unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -1312,12 +1626,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<int> } [callback] - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBLEMtuChange(callback?: Callback<int>): void;
 
@@ -1326,12 +1644,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<PhyValue> } callback - Callback used to listen for the phy updated event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onBlePhyUpdate(callback: Callback<PhyValue>): void;
 
@@ -1340,14 +1662,48 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<PhyValue> } [callback] - Callback used to listen for the phy updated event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBlePhyUpdate(callback?: Callback<PhyValue>): void;
+
+    /**
+     * Subscribe to the GATT flow control congestion state changed event.
+     *
+     * The callback is invoked when a GATT connection of this device enters or exits the congestion state.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CongestionChangeState> } callback - Callback used to listen for the congestion state
+     *     changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onCongestionChange(callback: Callback<CongestionChangeState>): void;
+
+    /**
+     * Unsubscribe from the GATT flow control congestion state changed event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CongestionChangeState> } [callback] - Callback used to listen for the congestion state
+     *     changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offCongestionChange(callback?: Callback<CongestionChangeState>): void;
   }
 
   /**
@@ -1368,8 +1724,12 @@ declare namespace ble {
      * The 'BLEConnectionStateChange' event is subscribed to return the connection state.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1386,8 +1746,12 @@ declare namespace ble {
      * Disconnects from or stops an ongoing connection to a BLE peripheral device.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1406,8 +1770,12 @@ declare namespace ble {
      * This method unregisters the device and clears the registered callbacks and handles.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1425,10 +1793,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { AsyncCallback<string> } callback - Callback used to obtain the device name.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1445,10 +1815,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<string> } Returns a string representation of the name if obtained;
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter.Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1465,10 +1837,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { AsyncCallback<Array<GattService>> } callback - Callback used to catch the services.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1476,7 +1850,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getServices(callback: AsyncCallback<Array<GattService>>): void;
 
@@ -1486,10 +1860,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<Array<GattService>> } Returns the list of services {@link GattService} of the BLE peripheral
      *     device.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1497,7 +1873,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getServices(): Promise<Array<GattService>>;
 
@@ -1507,10 +1883,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLECharacteristic } characteristic - Indicates the characteristic to read.
      * @param { AsyncCallback<BLECharacteristic> } callback - Callback invoked to return the characteristic value read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1525,7 +1907,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     readCharacteristicValue(characteristic: BLECharacteristic, callback: AsyncCallback<BLECharacteristic>): void;
 
@@ -1535,10 +1917,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLECharacteristic } characteristic - Indicates the characteristic to read.
      * @returns { Promise<BLECharacteristic> } - Promise used to return the characteristic value read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1562,10 +1950,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLEDescriptor } descriptor - Indicates the descriptor to read.
      * @param { AsyncCallback<BLEDescriptor> } callback - Callback invoked to return the descriptor read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1589,10 +1983,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLEDescriptor } descriptor - Indicates the descriptor to read.
      * @returns { Promise<BLEDescriptor> } - Promise used to return the descriptor read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1617,10 +2017,16 @@ declare namespace ble {
      * @param { BLECharacteristic } characteristic - Indicates the characteristic to write.
      * @param { GattWriteType } writeType - Write type of the characteristic.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1635,7 +2041,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     writeCharacteristicValue(
       characteristic: BLECharacteristic,
@@ -1650,10 +2056,16 @@ declare namespace ble {
      * @param { BLECharacteristic } characteristic - Indicates the characteristic to write.
      * @param { GattWriteType } writeType - Write type of the characteristic.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1668,9 +2080,48 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     writeCharacteristicValue(characteristic: BLECharacteristic, writeType: GattWriteType): Promise<void>;
+
+    /**
+     * Writes the characteristic of a BLE peripheral device.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { BLECharacteristic } characteristic - Indicates the characteristic to write.
+     * @param { GattWriteType } writeType - Write type of the characteristic.
+     * @param { boolean } isCongestionReportEnabled - Whether to report the congestion state of the connection
+     *     through the result of this call.
+     *     The value {@code true} indicates that report is enabled. If the connection is congested when this
+     *     method is called, the API fails with error code 2901004 and the data is not sent.
+     *     And the value {@code false} indicates that report is disabled.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @throws { BusinessError } 2900001 - Service stopped.
+     * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete.
+     * @throws { BusinessError } 2900099 - Operation failed.
+     * @throws { BusinessError } 2901001 - Write forbidden.
+     * @throws { BusinessError } 2901003 - The connection is not established.
+     * @throws { BusinessError } 2901004 - The connection is congested.
+     * @throws { BusinessError } 2901005 - The connection is not encrypted.
+     * @throws { BusinessError } 2901006 - The connection is not authenticated.
+     * @throws { BusinessError } 2901007 - The connection is not authorized.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    writeCharacteristicValue(
+      characteristic: BLECharacteristic,
+      writeType: GattWriteType,
+      isCongestionReportEnabled: boolean
+    ): Promise<void>;
 
     /**
      * Writes the characteristic of a BLE peripheral device with context.
@@ -1680,9 +2131,13 @@ declare namespace ble {
      * @param { GattWriteType } writeType - Write type of the characteristic.
      *     The interface currently only supports {@link GattWriteType#WRITE} mode.
      * @returns { Promise<GattRspContext> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901001 - Write forbidden.
@@ -1695,7 +2150,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     writeCharacteristicValueWithContext(
       characteristic: BLECharacteristic, writeType: GattWriteType): Promise<GattRspContext>;
@@ -1706,10 +2161,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLEDescriptor } descriptor - Indicates the descriptor to write.
      * @param { AsyncCallback<void> } callback - Callback used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1724,7 +2185,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     writeDescriptorValue(descriptor: BLEDescriptor, callback: AsyncCallback<void>): void;
 
@@ -1734,10 +2195,16 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { BLEDescriptor } descriptor - Indicates the descriptor to write.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1752,7 +2219,7 @@ declare namespace ble {
      * @crossplatform [since 13]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     writeDescriptorValue(descriptor: BLEDescriptor): Promise<void>;
 
@@ -1761,10 +2228,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { AsyncCallback<int> } callback - Callback invoked to return the RSSI, in dBm.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20 - 21]
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established. [since 20]
@@ -1772,7 +2241,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getRssiValue(callback: AsyncCallback<int>): void;
 
@@ -1781,10 +2250,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<int> } Returns the RSSI value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20 - 21]
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established. [since 20]
@@ -1792,7 +2263,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getRssiValue(): Promise<int>;
 
@@ -1801,10 +2272,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { int } mtu - The maximum transmission unit.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -1823,8 +2296,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { int } mtu - The maximum transmission unit.
      * @returns { Promise<int> } Promise used to return the mtu size that takes effect.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
@@ -1832,7 +2309,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setBLEMtu(mtu: int): Promise<int>;
 
@@ -1845,10 +2322,16 @@ declare namespace ble {
      *     The value {@code true} indicates that notification is enabled,
      *     and the value {@code false} indicates that indication is disabled.
      * @param { AsyncCallback<void> } callback - the callback of setCharacteristicChangeNotification.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1858,7 +2341,7 @@ declare namespace ble {
      * @crossplatform [since 26.0.0]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setCharacteristicChangeNotification(
       characteristic: BLECharacteristic,
@@ -1875,10 +2358,16 @@ declare namespace ble {
      *     The value {@code true} indicates that indication is enabled,
      *     and the value {@code false} indicates that indication is disabled.
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1888,7 +2377,7 @@ declare namespace ble {
      * @crossplatform [since 26.0.0]
      * @atomicservice [since 12]
      * @since 10 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setCharacteristicChangeNotification(characteristic: BLECharacteristic, enable: boolean): Promise<void>;
 
@@ -1901,10 +2390,16 @@ declare namespace ble {
      *     The value {@code true} indicates that indication is enabled,
      *     and the value {@code false} indicates that indication is disabled.
      * @param { AsyncCallback<void> } callback - the callback of setCharacteristicChangeIndication.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1931,10 +2426,16 @@ declare namespace ble {
      *     The value {@code true} indicates that indication is enabled,
      *     and the value {@code false} indicates that indication is disabled.
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900011 - The operation is busy. The last operation is not complete. [since 20]
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1953,8 +2454,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { ProfileConnectionState } Connection state.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1962,7 +2467,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getConnectedState(): ProfileConnectionState;
 
@@ -1972,8 +2477,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { ConnectionParam } param - GATT connection parameters.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -1982,7 +2491,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     updateConnectionParam(param: ConnectionParam): Promise<void>;
 
@@ -1991,15 +2500,19 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<PhyValue> } Promise used to return the phy value read.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     readPhy(): Promise<PhyValue>;
 
@@ -2011,15 +2524,19 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { PhyValue } phyValue - Indicates the phy to set.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setPhy(phyValue: PhyValue): Promise<void>;
 
@@ -2032,8 +2549,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<void> } Promise that returns no value.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @throws { BusinessError } 2901003 - The connection is not established.
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -2049,10 +2570,12 @@ declare namespace ble {
      * @param { 'BLECharacteristicChange' } type - Type of the characteristic value changed event to listen for.
      * @param { Callback<BLECharacteristic> } callback - Callback used to listen for the characteristic value changed
      *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 26.0.0]
@@ -2066,25 +2589,35 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<BLECharacteristic> } callback
-     *  - Callback used to listen for the characteristic value changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     - Callback used to listen for the characteristic value changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onBLECharacteristicChange(callback: Callback<BLECharacteristic>): void;
-
     /**
      * Unsubscribe characteristic value changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLECharacteristicChange' } type - Type of the characteristic value changed event to listen for.
-     * @param { Callback<BLECharacteristic> } callback - Callback used to listen for the characteristic value changed
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLECharacteristic> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('BLECharacteristicChange')]
+     * {@link ble.GattClientDevice.on (type: 'BLECharacteristicChange', callback: Callback<BLECharacteristic>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 26.0.0]
@@ -2097,13 +2630,17 @@ declare namespace ble {
      * Unsubscribe characteristic value changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLECharacteristic> } [callback] 
-     *  - Callback used to listen for the characteristic value changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLECharacteristic> } [callback]
+     *     - Callback used to listen for the characteristic value changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBLECharacteristicChange(callback?: Callback<BLECharacteristic>): void;
 
@@ -2114,10 +2651,12 @@ declare namespace ble {
      * @param { 'BLEConnectionStateChange' } type - Type of the connection state changed event to listen for.
      * @param { Callback<BLEConnectionChangeState> } callback - Callback used to listen for the connection state changed
      *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -2131,27 +2670,37 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<BLEConnectionChangeState> } callback
-     *  - Callback used to listen for the connection state changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     *     - Callback used to listen for the connection state changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onBLEConnectionStateChange(callback: Callback<BLEConnectionChangeState>): void;
-
     /**
      * Unsubscribe client connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEConnectionStateChange' } type - Type of the connection state changed event to listen for.
-     * @param { Callback<BLEConnectionChangeState> } callback - Callback used to listen for the connection state changed
-     *     event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLEConnectionChangeState> } [callback] - Specifies the callback function notification for
+     *     unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * [on('BLEConnectionStateChange')]
+     * {@link ble.GattClientDevice.on (type:'BLEConnectionStateChange', callback: Callback<BLEConnectionChangeState>)}
+    The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+     * corresponding to the type are unsubscribed from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -2164,13 +2713,17 @@ declare namespace ble {
      * Unsubscribe client connection state changed event.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
-     * @param { Callback<BLEConnectionChangeState> } [callback] 
-     *  - Callback used to listen for the connection state changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<BLEConnectionChangeState> } [callback]
+     *     - Callback used to listen for the connection state changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBLEConnectionStateChange(callback?: Callback<BLEConnectionChangeState>): void;
 
@@ -2180,10 +2733,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEMtuChange' } type - Type of the mtu changed event to listen for.
      * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -2192,17 +2747,21 @@ declare namespace ble {
      */
     on(type: 'BLEMtuChange', callback: Callback<int>): void;
 
-    /** 
-     * Subscribe mtu changed event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH 
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+    /**
+     * Subscribe mtu changed event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     onBLEMtuChange(callback: Callback<int>): void;
 
     /**
@@ -2210,11 +2769,18 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEMtuChange' } type - Type of the mtu changed event to listen for.
-     * @param { Callback<int> } callback - Callback used to listen for the mtu changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<int> } [callback] - Specifies the callback function notification for unsubscription. If the
+     *     parameter is transferred, the parameter must be set to
+     * The callback functions in [on('BLEMtuChange')]
+     * {@link ble.GattServer.on(type:'BLEMtuChange', callback: Callback<int>)} are the same. If no parameter is
+     * transferred, cancel the operation.
+     * Subscribe to all callback function notifications corresponding to the type.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform [since 13]
@@ -2223,18 +2789,22 @@ declare namespace ble {
      */
     off(type: 'BLEMtuChange', callback?: Callback<int>): void;
 
-    /** 
-     * Unsubscribe mtu changed event. 
-     * 
-     * @permission ohos.permission.ACCESS_BLUETOOTH 
-     * @param { Callback<int> } [callback] - Callback used to listen for the mtu changed event. 
-     * @throws { BusinessError } 201 - Permission denied. 
-     * @throws { BusinessError } 801 - Capability not supported. 
-     * @syscap SystemCapability.Communication.Bluetooth.Core 
-     * @stagemodelonly 
-     * @crossplatform 
-     * @since 26.0.1 static 
-     */ 
+    /**
+     * Unsubscribe mtu changed event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<int> } [callback] - Callback used to listen for the mtu changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @since 26.1.0 static
+     */
     offBLEMtuChange(callback?: Callback<int>): void;
 
     /**
@@ -2244,8 +2814,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'serviceChange' } type - Type of the service changed event to listen for.
      * @param { Callback<void> } callback - Callback used to listen for the service changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
@@ -2259,11 +2833,15 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<void> } callback - Callback used to listen for the service changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onServiceChange(callback: Callback<void>): void;
 
@@ -2273,8 +2851,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'serviceChange' } type - Type of the service changed event to listen for.
      * @param { Callback<void> } [callback] - Callback used to listen for the service changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
@@ -2287,11 +2869,15 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<void> } [callback] - Callback used to listen for the service changed event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offServiceChange(callback?: Callback<void>): void;
 
@@ -2300,12 +2886,16 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<PhyValue> } callback - Callback used to listen for the phy updated event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onBlePhyUpdate(callback: Callback<PhyValue>): void;
 
@@ -2314,14 +2904,56 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<PhyValue> } [callback] - Callback used to listen for the phy updated event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBlePhyUpdate(callback?: Callback<PhyValue>): void;
+
+    /**
+     * Subscribe to the GATT flow control congestion state changed event.
+     *
+     * The callback is invoked when a GATT connection of this device enters or exits the congestion state.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CongestionChangeState> } callback - Callback used to listen for the congestion state
+     *     changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onCongestionChange(callback: Callback<CongestionChangeState>): void;
+
+    /**
+     * Unsubscribe from the GATT flow control congestion state changed event.
+     *
+     * @permission ohos.permission.ACCESS_BLUETOOTH
+     * @param { Callback<CongestionChangeState> } [callback] - Callback used to listen for the congestion state
+     *     changed event.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offCongestionChange(callback?: Callback<CongestionChangeState>): void;
   }
 
   /**
@@ -2342,17 +2974,19 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Array<ScanFilter> } filters - Indicates the list of filters used to filter out specified devices.
      *     If you do not want to use filter, set this parameter to {@code null}.
-     * @param { ScanOptions } options - Indicates the parameters for scanning and if the user does not assign a value,
-     *     the default value will be used. {@link ScanOptions#interval} set to 0,
-     *     and {@link ScanOptions#dutyMode} set to {@link SCAN_MODE_LOW_POWER}
-     *     and {@link ScanOptions#matchMode} set to {@link MATCH_MODE_AGGRESSIVE}.
-     *     and {@link ScanOptions#phyType} set to {@link PHY_LE_ALL_SUPPORTED}.
-     *     and {@link ScanOptions#reportMode} set to {@link ScanReportMode#NORMAL}.
+     * @param { ScanOptions } [options] - Indicates the scanning configuration parameter. If this parameter is left
+     *     blank, the default configuration is used.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900009 - Fails to start scan as it is out of hardware resources.
@@ -2379,8 +3013,12 @@ declare namespace ble {
      *     and {@link ScanOptions#phyType} set to {@link PHY_LE_ALL_SUPPORTED}.
      *     and {@link ScanOptions#reportMode} set to {@link ScanReportMode#NORMAL}.
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900009 - Fails to start scan as it is out of hardware resources.
@@ -2397,8 +3035,12 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @returns { Promise<void> } Promise used to return the result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900099 - Operation failed.
@@ -2416,10 +3058,12 @@ declare namespace ble {
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
      * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed. [since 15 - 24]
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -2431,29 +3075,39 @@ declare namespace ble {
 
     /**
      * Subscribe BLE scan result.
-     * 
+     *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     onBLEDeviceFind(callback: Callback<ScanReport>): void;
-
     /**
      * Unsubscribe BLE scan result.
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { 'BLEDeviceFind' } type - Type of the scan result event to listen for.
-     * @param { Callback<ScanReport> } callback - Callback used to listen for the scan result event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @param { Callback<ScanReport> } [callback] - Specifies the callback function notification for unsubscription.
+     * If the parameter is transferred, the parameter must be set to
+     * Callback function 1 in [on('BLEDeviceFind')]
+     * {@link ble.BleScanner.on(type:'BLEDeviceFind', callback: Callback<ScanReport>)}
+     *: If no parameter is transferred, all callback function notifications corresponding to the type are unsubscribed
+     * from.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
@@ -2468,13 +3122,17 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<ScanReport> } [callback] - Callback used to listen for the scan result event.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900099 - Operation failed.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @crossplatform
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     offBLEDeviceFind(callback?: Callback<ScanReport>): void;
   }
@@ -3221,7 +3879,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 20 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     reason?: GattDisconnectReason;
     /**
@@ -3231,9 +3889,66 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     reasonMessage?: string;
+  }
+
+  /**
+   * The enum of gatt disconnection reasons.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 20 dynamic
+   * @since 26.1.0 static
+   */
+  enum GattDisconnectReason {
+    /**
+     * Disconnection due to timeout.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 26.1.0 static
+     */
+    CONN_TIMEOUT = 1,
+    /**
+     * The connection is disconnected due to the peer.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 26.1.0 static
+     */
+    CONN_TERMINATE_PEER_USER = 2,
+    /**
+     * The connection is disconnected due to the local host.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 26.1.0 static
+     */
+    CONN_TERMINATE_LOCAL_HOST = 3,
+    /**
+     * Disconnection due to unknown reason.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 26.1.0 static
+     */
+    CONN_UNKNOWN = 4
   }
 
   /**
@@ -3264,7 +3979,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     address?: BluetoothAddress;
     /**
@@ -3320,7 +4035,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     advertiseFlags?: int;
 
@@ -3332,7 +4047,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     manufacturerDataMap?: Map<int, Uint8Array>;
 
@@ -3344,7 +4059,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     serviceDataMap?: Map<string, Uint8Array>;
 
@@ -3356,7 +4071,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     serviceUuids?: string[];
 
@@ -3368,7 +4083,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     txPowerLevel?: int;
 
@@ -3380,7 +4095,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     advertisingDataMap?: Map<int, Uint8Array>;
   }
@@ -3473,7 +4188,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     isExtended?: boolean;
   }
@@ -3555,7 +4270,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     advertiseName?: string;
   }
@@ -3794,7 +4509,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     address?: BluetoothAddress;
     /**
@@ -3805,7 +4520,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     irk?: Uint8Array;
 
@@ -3937,7 +4652,7 @@ declare namespace ble {
      * @crossplatform
      * @atomicservice
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     rssiThreshold?: int;
   }
@@ -4014,7 +4729,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     isExtended?: boolean;
     /**
@@ -4024,7 +4739,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     scanEnhanceMode?: ScanEnhanceMode;
   }
@@ -4130,13 +4845,173 @@ declare namespace ble {
   }
 
   /**
+   * Describes the permission of a att attribute item.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 20 dynamic
+   * @since 23 static
+   */
+  interface GattPermissions {
+    /**
+     * The attribute field has the read permission.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    read?: boolean;
+
+    /**
+     * The attribute field has the encrypted read permission.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    readEncrypted?: boolean;
+
+    /**
+     * The attribute field has the read permission for encryption authentication.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    readEncryptedMitm?: boolean;
+
+    /**
+     * The attribute field has the write permission.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    write?: boolean;
+
+    /**
+     * The attribute field has the encrypted write permission.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    writeEncrypted?: boolean;
+
+    /**
+     * The attribute field has the write permission for encryption authentication.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    writeEncryptedMitm?: boolean;
+
+    /**
+     * The attribute field has the signed write permission.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    writeSigned?: boolean;
+
+    /**
+     * The attribute field has the write permission for signature authentication.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 20 dynamic
+     * @since 23 static
+     */
+    writeSignedMitm?: boolean;
+  }
+
+  /**
+   * Describe the context of GATT responses.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 23 dynamic
+   * @since 26.1.0 static
+   */
+  interface GattRspContext {
+    /**
+     * Timestamp of when Bluetooth received the response command.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 23 dynamic
+     * @since 26.1.0 static
+     */
+    timestamp: long;
+  }
+
+  /**
+   * Describes the parameters of the Ble phy.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 23 dynamic
+   * @since 26.1.0 static
+   */
+  interface PhyValue {
+    /**
+     * Transmitter phy.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 23 dynamic
+     * @since 26.1.0 static
+     */
+    txPhy: BlePhy;
+    /**
+     * Receiver phy.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 23 dynamic
+     * @since 26.1.0 static
+     */
+    rxPhy: BlePhy;
+    /**
+     * Preferred coded phy mode.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 23 dynamic
+     * @since 26.1.0 static
+     */
+    phyMode?: CodedPhyMode;
+  }
+
+  /**
    * Describes the setting for Gatt Connection.
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @atomicservice
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface GattSetting {
     /**
@@ -4146,7 +5021,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     autoConnect?: boolean;
     /**
@@ -4156,7 +5031,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     transport?: BluetoothTransport;
   }
@@ -4168,7 +5043,7 @@ declare namespace ble {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface ScanEnhanceMode {
     /**
@@ -4178,7 +5053,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     enhanceMode: EnhanceMode;
     /**
@@ -4189,9 +5064,35 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     timeout: int;
+  }
+
+  /**
+   * Describes the GATT flow control congestion state of a GATT connection.
+   *
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface CongestionChangeState {
+    /**
+     * Indicates the peer device address.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    deviceId: string;
+    /**
+     * Indicates whether the GATT connection is congested.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    congested: boolean;
   }
 
   /**
@@ -4491,7 +5392,7 @@ declare namespace ble {
      * @stagemodelonly
      * @atomicservice
      * @since 19 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     ON_BATCH = 3
   }
@@ -4502,7 +5403,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 21 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum BleProfile {
     /**
@@ -4511,7 +5412,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     GATT = 1,
     /**
@@ -4520,7 +5421,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     GATT_CLIENT = 2,
     /**
@@ -4529,7 +5430,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 21 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     GATT_SERVER = 3
   }
@@ -4541,7 +5442,7 @@ declare namespace ble {
    * @stagemodelonly
    * @crossplatform
    * @since 22 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ConnectionParam {
     /**
@@ -4551,7 +5452,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     LOW_POWER = 1,
     /**
@@ -4561,7 +5462,7 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BALANCED = 2,
     /**
@@ -4571,66 +5472,9 @@ declare namespace ble {
      * @stagemodelonly
      * @crossplatform
      * @since 22 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     HIGH = 3
-  }
-
-  /**
-   * The enum of gatt disconnection reasons.
-   *
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
-   * @since 26.0.1 static
-   */
-  enum GattDisconnectReason {
-    /**
-     * Disconnection due to timeout.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 26.0.1 static
-     */
-    CONN_TIMEOUT = 1,
-    /**
-     * The connection is disconnected due to the peer.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 26.0.1 static
-     */
-    CONN_TERMINATE_PEER_USER = 2,
-    /**
-     * The connection is disconnected due to the local host.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 26.0.1 static
-     */
-    CONN_TERMINATE_LOCAL_HOST = 3,
-    /**
-     * Disconnection due to unknown reason.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @crossplatform
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 26.0.1 static
-     */
-    CONN_UNKNOWN = 4
   }
 
   /**
@@ -4639,7 +5483,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum BlePhy {
     /**
@@ -4648,7 +5492,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_PHY_1M = 1,
     /**
@@ -4657,7 +5501,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_PHY_2M = 2,
     /**
@@ -4666,9 +5510,9 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
-    BLE_PHY_CODED = 3,
+    BLE_PHY_CODED = 3
   }
   /**
    * Coded phy mode for advertising or connection.
@@ -4676,7 +5520,7 @@ declare namespace ble {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 23 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum CodedPhyMode {
     /**
@@ -4685,7 +5529,7 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_PHY_CODED_S2 = 1,
     /**
@@ -4694,169 +5538,9 @@ declare namespace ble {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @stagemodelonly
      * @since 23 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_PHY_CODED_S8 = 2
-  }
-
-  /**
-   * Describes the permission of a att attribute item.
-   *
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
-   * @since 23 static
-   */
-  interface GattPermissions {
-    /**
-     * The attribute field has the read permission.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    read?: boolean;
-
-    /**
-     * The attribute field has the encrypted read permission.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    readEncrypted?: boolean;
-
-    /**
-     * The attribute field has the read permission for encryption authentication.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    readEncryptedMitm?: boolean;
-
-    /**
-     * The attribute field has the write permission.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    write?: boolean;
-
-    /**
-     * The attribute field has the encrypted write permission.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    writeEncrypted?: boolean;
-
-    /**
-     * The attribute field has the write permission for encryption authentication.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    writeEncryptedMitm?: boolean;
-
-    /**
-     * The attribute field has the signed write permission.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    writeSigned?: boolean;
-
-    /**
-     * The attribute field has the write permission for signature authentication.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @atomicservice
-     * @since 20 dynamic
-     * @since 23 static
-     */
-    writeSignedMitm?: boolean;
-  }
-
-  /**
-   * Describe the context of GATT responses.
-   *
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 23 dynamic
-   * @since 26.0.1 static
-   */
-  interface GattRspContext {
-    /**
-     * Timestamp of when Bluetooth received the response command.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @systemapi
-     * @stagemodelonly
-     * @since 23 dynamic
-     * @since 26.0.1 static
-     */
-    timestamp: long;
-  }
-
-  /**
-   * Describes the parameters of the Ble phy.
-   *
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @since 23 dynamic
-   * @since 26.0.1 static
-   */
-  interface PhyValue {
-    /**
-     * Transmitter phy.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @since 23 dynamic
-     * @since 26.0.1 static
-     */
-    txPhy: BlePhy;
-    /**
-     * Receiver phy.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @since 23 dynamic
-     * @since 26.0.1 static
-     */
-    rxPhy: BlePhy;
-    /**
-     * Preferred coded phy mode.
-     *
-     * @syscap SystemCapability.Communication.Bluetooth.Core
-     * @stagemodelonly
-     * @since 23 dynamic
-     * @since 26.0.1 static
-     */
-    phyMode?: CodedPhyMode;
   }
 
   /**
@@ -4866,7 +5550,7 @@ declare namespace ble {
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum EnhanceMode {
     /**
@@ -4876,7 +5560,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_SCAN_ENHANCE_MODE_BALANCED = 0,
     /**
@@ -4886,7 +5570,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_SCAN_ENHANCE_MODE_MEDIUM = 1,
     /**
@@ -4896,7 +5580,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_SCAN_ENHANCE_MODE_FAST = 2,
     /**
@@ -4906,7 +5590,7 @@ declare namespace ble {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     BLE_SCAN_ENHANCE_MODE_ULTRA_FAST = 3
   }
