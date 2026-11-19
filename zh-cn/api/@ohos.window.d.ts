@@ -1545,6 +1545,61 @@ declare namespace window {
     bottomRect: Rect;
   }
 
+   /**
+   * 窗口的避让区边衬。
+   *
+   * 避让区边衬表示由于[避让区]{@link window.AvoidArea}的存在，窗口内容在上下左右四个方向上需要避让的距离。
+   *
+   * > **说明**
+   * >
+   * > 避让区边衬的计算不包括[TYPE_KEYBOARD]{@link window.AvoidAreaType}类型的避让区。
+   *
+   * @syscap SystemCapability.Window.SessionManager
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AvoidAreaInsets {
+    /**
+     * 窗口顶部需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    top: int;
+
+    /**
+     * 窗口左侧需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    left: int;
+
+    /**
+     * 窗口右侧需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    right: int;
+
+    /**
+     * 窗口底部需要避让的距离。
+     * 单位为像素，取值限定为整数。
+     *
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    bottom: int;
+  }
+
   /**
    * 以vp为单位表示的窗口避让区域信息，在进行[沉浸式布局](docroot://windowmanager/window-terminology.md#immersive-layout沉浸式布局)适配时需关注。
    *
@@ -8106,6 +8161,58 @@ declare namespace window {
      * @since 23 static
      */
     offAvoidAreaChange(callback?: Callback<AvoidAreaOptions>): void;
+
+    /**
+     * 获取当前窗口的避让区边衬。
+     *
+     * @returns { AvoidAreaInsets } 避让区边衬。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    getAvoidAreaInsets(): AvoidAreaInsets;
+
+    /**
+     * 订阅窗口避让区边衬的变化。
+     *
+     * 当窗口的避让区发生变化时，会触发回调。
+     * 在同一次变化中，如果多个避让区发生变化，相关的避让区信息更新后，只会触发一次回调。
+     *
+     * > **说明**
+     * > 可以在回调中使用[getAvoidAreaInsets]{@link window.Window#getAvoidAreaInsets}来获取窗口最新的避让区边衬，或使用
+     * > [getWindowAvoidArea]{@link window.Window#getWindowAvoidArea}获取指定类型的避让区。
+     * >
+     * > [TYPE_KEYBOARD]{@link window.AvoidAreaType}类型的避让区变化不会触发回调。
+     *
+     * @param { Callback<void> } callback - 回调函数。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onAvoidAreaInsetsChange(callback: Callback<void>): void;
+
+    /**
+     * 取消订阅窗口避让区边衬的变化。
+     *
+     * @param { Callback<void> } [callback] - 回调函数。如果传入参数，则关闭该监听。如果未传入参数，则关闭该窗口所有避让区边衬
+     *     变化的监听。默认值：undefined。
+     * @throws { BusinessError } 1300002 - This window state is abnormal.
+     *     Possible cause: 1. The window is not created or destroyed.
+     * @throws { BusinessError } 1300003 - This window manager service works abnormally. Possible cause: The internal
+     *     services of the window are not started normally.
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offAvoidAreaInsetsChange(callback?: Callback<void>): void;
 
     /**
      * 开启固定态软键盘高度变化的监听。当软键盘从本窗口唤出且与窗口有重叠区域时，通知键盘高度变化。从API version 10开始，有关将软键盘设置为固定态或悬浮态的方法，请参见
