@@ -118,11 +118,13 @@ declare namespace uiAppearance {
    * between dark and light theme styles within the application.
    *
    * <!--Del-->
-   * 
+   *
    * > **NOTE**
    * >
-   * > This API is a system API in API version 19 and earlier. Using this API requires the [ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration) permission.
-   * 
+   * > This API is a system API in API version 19 and earlier. Using this API requires the
+   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
+   * > permission.
+   *
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 10 - 19]
@@ -165,11 +167,13 @@ declare namespace uiAppearance {
    * preferences.
    *
    * <!--Del-->
-   * 
+   *
    * > **NOTE**
    * >
-   * > This API is a system API in API version 19 and earlier. Using this API requires the [ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration) permission.
-   * 
+   * > This API is a system API in API version 19 and earlier. Using this API requires the
+   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
+   * > permission.
+   *
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 12 - 19]
@@ -210,11 +214,13 @@ declare namespace uiAppearance {
    * preferences.
    *
    * <!--Del-->
-   * 
+   *
    * > **NOTE**
    * >
-   * > This API is a system API in API version 19 and earlier. Using this API requires the [ohos.permission.UPDATE_CONFIGURATION](../../security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration) permission.
-   * 
+   * > This API is a system API in API version 19 and earlier. Using this API requires the
+   * > [ohos.permission.UPDATE_CONFIGURATION](docroot://security/AccessToken/permissions-for-system-apps.md#ohospermissionupdate_configuration)
+   * > permission.
+   *
    * <!--DelEnd-->
    *
    * @permission ohos.permission.UPDATE_CONFIGURATION [since 12 - 19]
