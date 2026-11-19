@@ -1163,7 +1163,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1194,7 +1193,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1237,7 +1235,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1278,7 +1275,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000019 - No matching ability is found. [since 12]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1308,7 +1304,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
    * @throws { BusinessError } 16000012 - The application is controlled. [since 10]
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1335,7 +1330,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API. [since 10]
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1372,7 +1366,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1407,7 +1400,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @throws { BusinessError } 16000004 - Cannot start an invisible component. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -1634,7 +1626,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
    * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 9 dynamic
@@ -1679,7 +1670,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM. [since 10]
    * @throws { BusinessError } 16000053 - The ability is not on the top of the UI. [since 10]
    * @throws { BusinessError } 16000055 - Installation-free timed out. [since 10]
-   * @throws { BusinessError } 16000073 - The app clone index is invalid. [since 12]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @systemapi
    * @stagemodelonly
@@ -2509,7 +2499,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16200001 - The caller has been released.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2548,7 +2537,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000050 - Internal error.
    * @throws { BusinessError } 16000055 - Installation-free timed out.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @atomicservice
@@ -2721,7 +2709,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000013 - The application is controlled by EDM.
    * @throws { BusinessError } 16000019 - No matching ability is found.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000200 - The caller is not in the appIdentifierAllowList of the target application.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2758,7 +2745,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000006 - Cross-user operations are not allowed.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000200 - The caller is not in the appIdentifierAllowList of the target application.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -2803,7 +2789,6 @@ declare class UIAbilityContext extends Context {
    * @throws { BusinessError } 16000008 - The crowdtesting application expires.
    * @throws { BusinessError } 16000011 - The context does not exist.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000073 - The app clone index is invalid.
    * @throws { BusinessError } 16000201 - The target service has not been started yet.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
