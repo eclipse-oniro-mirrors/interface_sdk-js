@@ -343,9 +343,9 @@ declare namespace effectKit {
      * scenarios such as extracting the top multiple colors by proportion in an image, such as multi-tone color
      * scheme generation and image color distribution analysis.
      *
-     * @param { int } colorCount - Number of colors to extract, rounded down. Before OpenHarmony 6.1, the value
+     * @param { int } colorCount - Number of colors to extract, rounded down. Before <!--RP1-->OpenHarmony 6.1<!--RP1End-->, the value
      *     range is [1, 10]. If the number of colors to extract is greater than 10, the top 10 are taken.
-     *     Since OpenHarmony 6.1, the value range is [1, 20]. If the number of colors to extract is greater than 20,
+     *     Since <!--RP1-->OpenHarmony 6.1<!--RP1End-->, the value range is [1, 20]. If the number of colors to extract is greater than 20,
      *     the top 20 are taken.
      * @returns { Array<Color | null> } Array of colors, i.e., the top colorCount color values by proportion in the
      *     image, sorted by proportion.
@@ -366,8 +366,8 @@ declare namespace effectKit {
      * the number specified by colorCount.
      *
      * @param { int } colorCount - Number of color values and their corresponding percentages, rounded down.
-     *     Before OpenHarmony 6.1, the value range is [1, 10]. If the number of colors to extract is greater than 10,
-     *     the top 10 are taken. Since OpenHarmony 6.1, the value range is [1, 20]. If the number of colors to
+     *     Before <!--RP1-->OpenHarmony 6.1<!--RP1End-->, the value range is [1, 10]. If the number of colors to extract is greater than 10,
+     *     the top 10 are taken. Since <!--RP1-->OpenHarmony 6.1<!--RP1End-->, the value range is [1, 20]. If the number of colors to
      *     extract is greater than 20, the top 20 are taken.
      * @returns { Map<Color | null, double | null> } Map of the top colorCount color values and their corresponding
      *     percentages by proportion in the image. The percentage value range is [0, 1].

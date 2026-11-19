@@ -291,8 +291,8 @@ declare namespace effectKit {
      * 读取图像占比靠前的颜色值，个数由`colorCount`指定，结果写入[Color]{@link effectKit.Color}的数组里，使用同步方式返回。
      * 常用于提取图片中占比最高的多个颜色，如多色调配色方案生成、图片色彩分布分析等场景。
      *
-     * @param { int } colorCount - 需要获取的颜色个数，向下取整。在OpenHarmony 6.1之前，取值范围为[1, 10]，
-     *     取色个数大于10视为取前10个；从OpenHarmony 6.1开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
+     * @param { int } colorCount - 需要获取的颜色个数，向下取整。在<!--RP1-->OpenHarmony 6.1<!--RP1End-->之前，取值范围为[1, 10]，
+     *     取色个数大于10视为取前10个；从<!--RP1-->OpenHarmony 6.1<!--RP1End-->开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
      * @returns { Array<Color | null> } Color数组，即图像占比前`colorCount`的颜色值数组，按占比排序。
      *     - 当实际读取的特征色个数小于`colorCount`时，数组大小为实际特征色个数。
      *     - 取色失败或取色个数小于1返回`[null]`。
@@ -308,8 +308,8 @@ declare namespace effectKit {
     /**
      * 同步返回图像占比靠前的颜色值及其对应比例，个数由`colorCount`指定。
      *
-     * @param { int } colorCount - 颜色值及对应比例的个数，向下取整。在OpenHarmony 6.1之前，取值范围为[1, 10]，
-     *     取色个数大于10视为取前10个；从OpenHarmony 6.1开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
+     * @param { int } colorCount - 颜色值及对应比例的个数，向下取整。在<!--RP1-->OpenHarmony 6.1<!--RP1End-->之前，取值范围为[1, 10]，
+     *     取色个数大于10视为取前10个；从<!--RP1-->OpenHarmony 6.1<!--RP1End-->开始，取值范围为[1, 20]，取色个数大于20视为取前20个。
      * @returns { Map<Color | null, double | null> } 图像占比前`colorCount`的颜色值与对应比例的字典，比例的取值范围为[0,1]。
      *     - 当实际读取的特征色个数小于`colorCount`时，字典大小为实际特征色个数。
      *     - 取色失败或取色个数小于1返回`Map()`。
