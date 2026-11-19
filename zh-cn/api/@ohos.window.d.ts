@@ -13547,7 +13547,7 @@ declare namespace window {
      * 自由窗口状态下，子窗口参数[decorEnabled]{@link window.SubWindowOptions}为false时，子窗口创建后为沉浸式布局；子窗口参数decorEnabled为true，子窗口创建后为非沉浸式布局。
      * @param { string } name - 子窗口的名字。
      * @param { SubWindowOptions } options - 子窗口参数。
-     * @returns { Promise<Window> } Promise对象。返回子窗口对象。
+     * @returns { Promise<Window> } Promise对象。返回当前Window下创建的子窗口对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: Incorrect parameter types.
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
