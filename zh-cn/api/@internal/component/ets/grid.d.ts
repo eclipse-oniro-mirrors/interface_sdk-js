@@ -987,7 +987,8 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * START、CENTER、END分别将item对齐到滚动轴方向视口的起始、中间和末尾位置。
    * 自定义提供方通过calculateApproachOffset确定惯性阶段的滚动距离，通过calculateSnapOffset确定最终吸附位置。
    * 不设置策略或传入ScrollSnapAlign.NONE、undefined时，Grid按惯性自然滑行至停止，不做吸附对齐。
-   * 包含跨行或跨列GridItem的布局不支持限位滚动。最终吸附位置始终在可滚动范围内。
+   * 包含跨列GridItem的布局不支持限位滚动。最终吸附位置始终在可滚动范围内。
+   * 启用限位滚动后，拖拽或鼠标框选操作结束时也会触发限位滚动。
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 内置对齐策略或自定义提供方。
    * @returns { GridAttribute } Grid组件的属性。
