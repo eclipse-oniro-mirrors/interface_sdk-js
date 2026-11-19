@@ -36,15 +36,15 @@
  */
 declare interface ScrollSnapOffsetProvider {
   /**
-   * Called once during a fling to determine the approach offset.
+   * Called once at the start of a fling to determine how far the content scrolls before snapping.
    *
    * The return value is a non-negative finite distance magnitude and may be greater than
    * or equal to decayOffset. A non-finite return value, a negative return value, or a
-   * callback exception falls back to the natural decay offset.
+   * callback exception uses the predicted fling distance instead. The snap phase still follows.
    *
-   * @param { number } velocity - Current fling velocity, positive toward the content end, in vp/s.
-   * @param { number } decayOffset - Non-negative natural friction decay distance magnitude, in vp.
-   * @returns { number } Approach offset magnitude, in vp.
+   * @param { number } velocity - Initial fling velocity, positive toward the content end, in vp/s.
+   * @param { number } decayOffset - Predicted distance of the default fling, in vp. Always non-negative.
+   * @returns { number } Distance to scroll during the fling, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -56,10 +56,10 @@ declare interface ScrollSnapOffsetProvider {
   /**
    * Called once when the approach motion hands off to the final snap animation.
    *
-   * The return value is an absolute content scroll target; 0 is valid. A finite target
+   * The return value is a scroll offset measured from the start of the content; 0 is valid. A finite target
    * outside the legal scroll range is clamped to that range.
    * A non-finite return value or a callback exception uses the component fallback target.
-   * A Grid custom strategy stays at the approach endpoint without returning to the gesture start position.
+   * In this case, Grid stops at its current position.
    *
    * @param { number } velocity - Velocity at the start of this approach stage,
    * positive toward the content end, in vp/s.
