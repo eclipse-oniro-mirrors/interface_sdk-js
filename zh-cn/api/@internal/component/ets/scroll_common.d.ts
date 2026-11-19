@@ -34,14 +34,14 @@
  */
 declare interface ScrollSnapOffsetProvider {
   /**
-   * 每次惯性滚动期间仅调用一次，用于计算趋近偏移量。
+   * 在惯性滚动开始时调用一次，用于计算进入限位动画前的滚动距离。
    *
    * 返回值为非负有限距离幅值，可以大于或等于decayOffset。
-   * 返回非有限值、负数或回调异常时回退到自然衰减偏移量。
+   * 返回非有限值、负数或回调抛出异常时，按默认惯性滚动预测的距离滑行，随后正常进入限位动画阶段。
    *
-   * @param { number } velocity - 当前惯性滚动速度，向内容末端为正，单位vp/s。
-   * @param { number } decayOffset - 自然摩擦衰减距离的非负幅值，单位vp。
-   * @returns { number } 趋近偏移量大小，单位vp。
+   * @param { number } velocity - 惯性滚动开始时的速度，向内容末端为正，单位vp/s。
+   * @param { number } decayOffset - 按默认惯性滚动预测的滑行距离，单位vp，取值为非负数。
+   * @returns { number } 惯性阶段的滚动距离，单位vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -53,9 +53,8 @@ declare interface ScrollSnapOffsetProvider {
   /**
    * 每次趋近运动切换到最终限位动画时仅调用一次，用于计算目标偏移量。
    *
-   * 返回值为绝对内容滚动目标，0是合法目标；有限目标超出合法滚动范围时会被限制到范围内。
-   * 返回非有限值或回调异常时，使用组件的兜底目标。Grid自定义策略保持在趋近阶段结束位置，
-   * 不返回手势起始位置。
+   * 返回值为最终吸附位置相对内容起点的滚动偏移量，0是有效值。有限值超出可滚动范围时，目标位置会被限制到范围内。
+   * 返回非有限值或回调抛出异常时，使用组件的兜底目标；此时Grid在当前滚动位置停止。
    *
    * @param { number } velocity - 本次趋近阶段开始时的速度，向内容末端为正，单位vp/s。
    * @returns { number } 目标滚动绝对偏移量，单位vp。

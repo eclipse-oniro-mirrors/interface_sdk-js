@@ -1154,12 +1154,14 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
   nestedScroll(value: NestedScrollOptions): GridAttribute;
 
   /**
-   * Sets the two-stage scroll snap strategy of the Grid.
+   * Sets how the Grid aligns an item or snaps to a custom position when scrolling ends.
    *
    * START, CENTER, and END align items with the start, center, and end of the viewport along the scrolling axis.
-   * A custom provider calculates the approach distance and final target through its two callbacks.
-   * NONE or undefined clears the strategy and restores the default scrolling behavior.
-   * Snapping is disabled for unsupported layouts. Targets are constrained to the legal scroll range.
+   * A custom provider uses calculateApproachOffset to set the fling distance and calculateSnapOffset
+   * to set the final snap position. If the strategy is omitted, ScrollSnapAlign.NONE, or undefined,
+   * the Grid coasts to a stop without snapping.
+   * Layouts with GridItems that span multiple rows or columns do not support snapping.
+   * The final snap position stays within the scrollable range.
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
    * @returns { GridAttribute } The attribute of the grid.
