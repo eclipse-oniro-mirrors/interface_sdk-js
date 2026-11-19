@@ -1746,6 +1746,20 @@ export interface PageInfo {
 }
 
 /**
+ * 定义拦截Overlay侧滑返回事件的回调类型。
+ *
+ * @returns { boolean } Whether to intercept the back-press event.
+ *     If **true** is returned, the event is intercepted and is prevented from reaching the lower-layer component.
+ *     If **false** is returned, the event is transparently transmitted to the lower-layer component.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.0.0 dynamic
+ */
+export declare type OnOverlayBackPressCallback = () => boolean;
+
+/**
 * 初始化OverlayManager时所用参数。
 * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full

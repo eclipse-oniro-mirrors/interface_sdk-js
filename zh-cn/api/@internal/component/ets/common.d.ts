@@ -27240,6 +27240,16 @@ declare type Theme = import('../api/@ohos.arkui.theme').Theme;
 declare type PromptActionDialogController = import('../api/@ohos.promptAction').promptAction.DialogController;
 
 /**
+ * 握持习惯跟随模式的枚举。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type HandednessFollowMode = import('../api/@ohos.arkui.dialog').HandednessFollowMode;
+
+/**
  * 自定义组件
  *
  * @extends CommonAttribute [since 7 - 17]
