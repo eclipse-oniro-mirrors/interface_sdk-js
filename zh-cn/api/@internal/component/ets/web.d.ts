@@ -23,7 +23,6 @@
  * 通过WebviewController可以控制Web组件各种行为。一个WebviewController对象只能控制一个Web组件，且必须在Web组件和
  * WebviewController绑定后，才能调用WebviewController上的方法（静态方法除外）。
  *
- * 
  * @syscap SystemCapability.Web.Webview.Core
  * @crossplatform [since 10]
  * @atomicservice [since 11]
