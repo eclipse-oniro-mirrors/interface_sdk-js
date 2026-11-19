@@ -5621,6 +5621,18 @@ declare namespace window {
      * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
+    
+    /**
+     * Position of the current window when it starts. Only supports WindowPosition.TOP and WindowPosition.BOTTOM.
+     * If WindowPosition.TOP, the current window will be at the top of all application main windows.
+     * If WindowPosition.BOTTOM, the current window will be at the bottom of all application main windows.
+     *
+     * @default WindowPosition.TOP
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    positionZ?: WindowPosition;
   }
 
   /**
