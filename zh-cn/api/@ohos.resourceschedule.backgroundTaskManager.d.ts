@@ -1075,6 +1075,7 @@ declare namespace backgroundTaskManager {
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameters types.
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
    *     <br>1. Invalid parameters;
@@ -1377,7 +1378,10 @@ declare namespace backgroundTaskManager {
    *     <br> **说明：** Stage模型中，仅支持UIAbility申请；FA模型中，仅支持ServiceAbility申请。
    * @param { AsyncCallback<void> } callback - 回调函数，取消长时任务成功时，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
    *     <br>1. Invalid parameters;
@@ -1405,7 +1409,10 @@ declare namespace backgroundTaskManager {
    *     <br> **说明：** Stage模型中，仅支持UIAbility申请；FA模型中，仅支持ServiceAbility申请。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API. [since 9 - 18]
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
    *     <br>1. Invalid parameters;
@@ -1605,7 +1612,10 @@ declare namespace backgroundTaskManager {
    *
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Parameter verification failed.
+   * @throws { BusinessError } 401 - Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameters types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 9800001 - Memory operation failed.
    * @throws { BusinessError } 9800002 - Failed to write data into parcel. Possible reasons:
    *     <br>1. Invalid parameters;
