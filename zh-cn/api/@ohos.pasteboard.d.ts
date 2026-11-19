@@ -14,7 +14,7 @@
  */
 
 /**
- * @file 剪贴板
+ * @file Pasteboard
  * @kit BasicServicesKit
  */
 
@@ -155,19 +155,249 @@ declare namespace pasteboard {
   const MIMETYPE_PIXELMAP: string;
 
   /**
+   * 支持的虚拟文件类型枚举。
+   *
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  enum VirtualItemType {
+    /**
+     * 用于表示虚拟文件类型。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    FILE = 0,
+    /**
+     * 用于表示虚拟文件夹类型。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    DIR = 1
+  }
+
+  /**
+   * 虚拟文件和文件夹的基础类型。
+   *
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  class VirtualBaseItem {
+    /**
+     * 文件名或文件夹名。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    name: string;
+    /**
+     * 文件类型。
+     * [VirtualFileItem]{@link pasteboard.VirtualFileItem}的type值为[FILE]{@link pasteboard.VirtualItemType.FILE}；
+     * [VirtualDirItem]{@link pasteboard.VirtualDirItem}的type值为[DIR]{@link pasteboard.VirtualItemType.DIR}。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: VirtualItemType;
+    /**
+     * 最后修改时间。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    modifyTime: Date;
+  }
+
+  /**
+   * 虚拟文件的元数据。
+   *
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  class VirtualFileItem extends VirtualBaseItem {
+    /**
+     * 文件唯一标识，用于在[onStat]{@link pasteboard.VirtualFileInfo.onStat}、[onRead]{@link pasteboard.VirtualFileInfo.onRead}和
+     * [onCancel]{@link pasteboard.VirtualFileInfo.onCancel}中标识需要处理的虚拟文件。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    id: string;
+    /**
+     * 文件类型，值为[FILE]{@link pasteboard.VirtualItemType.FILE}。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: VirtualItemType = VirtualItemType.FILE;
+    /**
+     * 文件大小（单位：字节数），可选参数。未填写时，需要通过[onStat]{@link pasteboard.VirtualFileInfo.onStat}在运行时返回文件大小信息。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    size?: long;
+  }
+
+  /**
+   * 虚拟文件夹的元数据。
+   *
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  class VirtualDirItem extends VirtualBaseItem {
+    /**
+     * 文件类型，值为[DIR]{@link pasteboard.VirtualItemType.DIR}。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: VirtualItemType = VirtualItemType.DIR;
+    /**
+     * 文件夹的子节点，可选参数。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    subItems?: Array<VirtualFileItem | VirtualDirItem>;
+  }
+
+  /**
+   * 用于查询指定虚拟文件的元数据。
+   *
+   * @param { string } id - 待查询的虚拟文件的文件唯一标识。
+   * @returns { Promise<VirtualFileItem> } Promise对象，返回虚拟文件的元数据对象。
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnStat = (id: string) => Promise<VirtualFileItem>;
+
+  /**
+   * 用于查询指定虚拟文件的文件内容。
+   *
+   * @param { string } id - 待查询的虚拟文件的文件唯一标识。
+   * @param { long } offset - 查询的虚拟文件内容的起始位置（单位：字节）。
+   * @param { int } length - 查询的虚拟文件内容的数据长度（单位：字节）。
+   * @returns { Promise<Uint8Array> } Promise对象，返回从offset开始，长度为length的虚拟文件数据。
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnRead = (id: string, offset: long, length: int) => Promise<Uint8Array>;
+
+  /**
+   * 用于取消指定虚拟文件的操作。
+   *
+   * @param { Array<string> } idList - 包含待取消的虚拟文件的文件唯一标识的列表。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnCancel = (idList: Array<string>) => Promise<void>;
+
+  /**
+   * 虚拟文件信息。
+   *
+   * @syscap SystemCapability.MiscServices.Pasteboard
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  class VirtualFileInfo {
+    /**
+     * 文件或文件夹的元数据。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    itemInfo: VirtualFileItem | VirtualDirItem;
+    /**
+     * 查询指定虚拟文件的元数据的回调，可选参数。
+     * 未填写时，若[itemInfo]{@link pasteboard.VirtualFileInfo.itemInfo}中存在[VirtualFileItem]{@link pasteboard.VirtualFileItem}，
+     * 需要通过[size]{@link pasteboard.VirtualFileItem.size}在复制时指定文件大小信息。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onStat?: VirtualFileOnStat;
+    /**
+     * 查询指定虚拟文件的文件内容的回调。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onRead: VirtualFileOnRead;
+    /**
+     * 取消指定虚拟文件操作的回调。
+     *
+     * @syscap SystemCapability.MiscServices.Pasteboard
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onCancel: VirtualFileOnCancel;
+  }
+
+  /**
    * 用于表示允许的数据字段类型。
+   * 从API 26.1.0开始，支持在
+   * [createData]{@link pasteboard.createData(mimeType: string, value: ValueType)}、
+   * [createRecord]{@link pasteboard.createRecord(mimeType: string, value: ValueType)}和
+   * [addEntry]{@link PasteDataRecord.addEntry(type: string, value: ValueType)}中，
+   * 使用[VirtualFileInfo]{@link pasteboard.VirtualFileInfo}类型。
    *
    * @unionmember { string } 表示string的类型。
    * @unionmember { image.PixelMap } 表示[image.PixelMap]{@link @ohos.multimedia.image:image.PixelMap}的类型。
    * @unionmember { Want } 表示[Want]{@link @ohos.app.ability.Want:Want}的类型。
    * @unionmember { ArrayBuffer } 表示ArrayBuffer的类型。
+   * @unionmember { VirtualFileInfo } 表示[VirtualFileInfo]{@link pasteboard.VirtualFileInfo}的类型。 [since 26.1.0]
    * @syscap SystemCapability.MiscServices.Pasteboard
    * @crossplatform [since 24]
    * @atomicservice [since 11]
    * @since 9 dynamic
    * @since 23 static
    */
-  type ValueType = string | image.PixelMap | Want | ArrayBuffer;
+  type ValueType = string | image.PixelMap | Want | ArrayBuffer | VirtualFileInfo;
 
   /**
    * 构建一个HTML剪贴板内容对象。
@@ -222,6 +452,7 @@ declare namespace pasteboard {
    * 调用此方法后，系统将验证MIME类型有效性，封装数据内容，并返回可用于后续剪贴板操作的PasteData对象。
    * 参数mimeType长度不能超过1024字节，value类型需与mimeType匹配。当需要将单一类型的数据（如纯文本、HTML、图片等）放入剪贴板时使用此方法。
    * mimeType优先使用已定义的常量类型（如MIMETYPE_TEXT_PLAIN），若需要传递自定义格式数据，可使用自定义MIME类型。
+   * 从API 26.1.0开始，支持创建值为[VirtualFileInfo]{@link pasteboard.VirtualFileInfo}的URI类型剪贴板内容对象。
    *
    * @param { string } mimeType - 剪贴板数据对应的MIME类型，
    *     可以是[常量](docroot://reference/apis-basic-services-kit/js-apis-pasteboard.md#常量)中已定义的类型，
@@ -314,6 +545,7 @@ declare namespace pasteboard {
   /**
    * 创建一条指定类型的数据内容条目，将数据内容封装为PasteDataRecord对象。调用此方法后，系统将根据MIME类型封装数据内容，返回可添加到PasteData中的条目对象。
    * 参数mimeType长度不能超过1024字节，value类型需与mimeType对应（如mimeType为MIMETYPE_TEXT_PLAIN，则value类型必须是string），参数不能为空。
+   * 从API 26.1.0开始，支持创建值为[VirtualFileInfo]{@link pasteboard.VirtualFileInfo}的URI类型数据内容条目。
    * 
    * - 创建的条目通常需要通过[addRecord]{@link pasteboard.PasteData.addRecord(record: PasteDataRecord)}方法添加到
    *   [PasteData]{@link pasteboard.PasteData}对象中才能生效。
@@ -369,7 +601,7 @@ declare namespace pasteboard {
      */
     INAPP = 0,
     /**
-     * 表示允许在任何应用内粘贴。
+     * 表示允许在任何应用内粘贴。<!--RP1--><!--RP1End-->
      *
      * @syscap SystemCapability.MiscServices.Pasteboard
      * @atomicservice [since 11]
@@ -380,7 +612,7 @@ declare namespace pasteboard {
     /**
      * 表示允许在任何应用内粘贴。
      *
-     * 从API version 12开始废弃，无替代接口和替代方法。
+     * 从API version 12开始废弃，无替代接口和替代方法。<!--RP2--><!--RP2End-->
      *
      * @syscap SystemCapability.MiscServices.Pasteboard
      * @atomicservice [since 11]
@@ -646,6 +878,7 @@ declare namespace pasteboard {
     /**
      * 往一个PasteDataRecord中额外添加一种样式的数据。此方式添加的MIME类型都不是Record的默认类型，
      * 粘贴时只能使用[getData]{@link pasteboard.PasteDataRecord.getData(type: string)}接口读取对应数据。
+     * 从API 26.1.0开始，支持添加值为[VirtualFileInfo]{@link pasteboard.VirtualFileInfo}的URI类型数据。
      *
      * @param { string } type - 剪贴板数据对应的MIME类型，
      *     可以是[常量](docroot://reference/apis-basic-services-kit/js-apis-pasteboard.md#常量)中已定义的类型，
@@ -916,8 +1149,8 @@ declare namespace pasteboard {
      * @param { int } index - 指定条目的下标。有效取值范围：[0, getRecordCount()-1]，超出范围会触发错误码12900001。
      * @returns { PasteDataRecord } 指定下标的条目。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
      * @throws { BusinessError } 12900001 - The index is out of range.
      * @syscap SystemCapability.MiscServices.Pasteboard
@@ -1005,8 +1238,8 @@ declare namespace pasteboard {
      *
      * @param { int } index - 指定的下标。有效取值范围：[0, getRecordCount()-1]，超出范围会触发错误码12900001。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
      * @throws { BusinessError } 12900001 - The index is out of range.
      * @syscap SystemCapability.MiscServices.Pasteboard
@@ -1036,8 +1269,8 @@ declare namespace pasteboard {
      * @param { int } index - 指定的下标。有效取值范围：[0, getRecordCount()-1]，超出范围会触发错误码12900001。
      * @param { PasteDataRecord } record - 被替换后的条目数据内容，设置后会替换指定下标位置的原始条目。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
      * @throws { BusinessError } 12900001 - The index is out of range.
      * @syscap SystemCapability.MiscServices.Pasteboard
@@ -1175,10 +1408,10 @@ declare namespace pasteboard {
    * 定义进度取消的函数，在粘贴过程中可选择取消任务，且仅当进度指示选项[ProgressIndicator]{@link pasteboard.ProgressIndicator}设置为NONE时此参数才生效。
    *
    * @syscap SystemCapability.MiscServices.Pasteboard
-   * @class ProgressSignal
    * @atomicservice
    * @since 15 dynamic
    * @since 23 static
+   * @class ProgressSignal
    */
   export class ProgressSignal {
     /**
@@ -1793,8 +2026,8 @@ declare namespace pasteboard {
      *
      * @permission ohos.permission.MANAGE_PASTEBOARD_APP_SHARE_OPTION [since 14]
      * @param { ShareOption } shareOptions - 可粘贴的范围，参数只允许pasteboard.ShareOption.INAPP。传入其他值时返回错误码401。
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     *     [since 12 - 13]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 12 - 13]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
@@ -1817,8 +2050,8 @@ declare namespace pasteboard {
      * - 必须在已设置分享范围的情况下才能调用。
      *
      * @permission ohos.permission.MANAGE_PASTEBOARD_APP_SHARE_OPTION [since 14]
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-     *     [since 12 - 13]
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
+     *     API. [since 12 - 13]
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the
      *     permission required to call the API. [since 14]
      * @syscap SystemCapability.MiscServices.Pasteboard
