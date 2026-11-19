@@ -1665,17 +1665,33 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
   scrollSnapAlign(value: ScrollSnapAlign): ListAttribute;
 
   /**
-   * Sets a two-stage scroll snap strategy for the List.
+   * Sets the scroll snap strategy of the List. When scrolling ends, the List aligns child
+   * components in the specified way, or stops at a custom snap position. For built-in alignment, see
+   * [Example 20: Setting Scroll Snap Alignment](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#example-20-setting-scroll-snap-alignment);
+   * for custom snap positions, see
+   * [Example 21: Customizing the Scroll Snap Position](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#example-21-customizing-the-scroll-snap-position).
    *
-   * **ScrollSnapAlign.START**, **ScrollSnapAlign.CENTER**, and **ScrollSnapAlign.END** select
-   * built-in strategies. **ScrollSnapAlign.NONE** is invalid and throws exception 401.
-   * A custom provider requires **calculateSnapOffset** to be a function. Passing
-   * **undefined** or no argument clears the strategy.
+   * > **NOTE**
+   * >
+   * > - The final snap position always stays within the legal scroll range. For example, with
+   * >   ScrollSnapAlign.CENTER, the first and last child components rest at the scroll boundaries
+   * >   instead of the viewport center. This differs from scrollSnapAlign, which prioritizes the
+   * >   alignment effect: with CENTER, the first and last child components still center themselves
+   * >   and the list may expose blank areas.
+   * > - Drag or mouse box-select gestures also trigger the scroll snap when they end.
+   * > - ListItemGroup participates in the alignment as a whole.
+   * > - This attribute is mutually exclusive with scrollSnapAlign: the last one set wins.
+   * > - The snap animation of this attribute is not affected by scrollSnapAnimationSpeed, which
+   * >   only tunes the snap animation speed produced by scrollSnapAlign.
    *
-   * This attribute and **scrollSnapAlign** use last-set-wins semantics. The final snap uses
-   * the List spring animation and follows **scrollSnapAnimationSpeed**.
-   *
-   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Scroll snap strategy.
+   *     When a ScrollSnapAlign enum is passed in, the built-in alignment is used: START, CENTER, and END
+   *     align child components with the start, center, and end of the viewport along the scroll axis.
+   *     When an object implementing ScrollSnapOffsetProvider is passed in, the developer computes the
+   *     scroll distance and the final snap position: calculateApproachOffset determines the scroll
+   *     distance of the inertial stage, and calculateSnapOffset determines the final snap position.
+   *     When this attribute is not set, or ScrollSnapAlign.NONE or undefined is passed in, scroll snapping
+   *     is disabled, the List does not perform snap alignment, and it coasts to a stop by inertia.
    * @returns { ListAttribute } The attribute of the list.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
