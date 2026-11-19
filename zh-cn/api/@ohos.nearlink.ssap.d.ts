@@ -660,7 +660,7 @@ declare namespace ssap {
      * @since 26.0.1 static
      * @see [onConnectionStateChange]{@link ssap.Server.onConnectionStateChange(callback:
      *     Callback<ConnectionChangeState>): void}
-     *    订阅连接状态变化事件。
+     *     订阅连接状态变化事件。
      */
     offConnectionStateChange(callback?: Callback<ConnectionChangeState>): void;
 

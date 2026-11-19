@@ -20,7 +20,9 @@
 
 import type baseProfile from './@ohos.bluetooth.baseProfile';
 import { Callback } from './@ohos.base';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 
 /**
  * 本模块提供基于人机接口协议（Human Interface Device Profile，HID）技术的蓝牙人机交互能力，支

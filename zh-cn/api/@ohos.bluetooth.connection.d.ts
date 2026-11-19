@@ -20,7 +20,9 @@
 
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type constant from './@ohos.bluetooth.constant';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 
 /**
  * connection模块提供了蓝牙设备的配对、连接、状态查询、设备扫描发现、扫描模式设置、电量信息获取及事件订阅等能力，适用于需要在应用中实现蓝牙设备发现、配对、连接和信息查询的场景。

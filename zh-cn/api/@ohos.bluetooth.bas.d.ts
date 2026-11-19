@@ -18,8 +18,10 @@
  * @kit ConnectivityKit
  */
 
-import type { AsyncCallback, Callback } from './@ohos.base';
+import type { Callback } from './@ohos.base';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 
 /**
  * 提供了访问BAS（Battery Service，电量服务）相关能力的方法，包括读取远端设备电量信息、监听远端设备电量信息变化等。

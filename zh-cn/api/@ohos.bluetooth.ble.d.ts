@@ -20,7 +20,9 @@
 
 import type { AsyncCallback, Callback } from './@ohos.base';
 import type constant from './@ohos.bluetooth.constant';
+/*** if arkts dynamic */
 import type common from './@ohos.bluetooth.common';
+/*** endif */
 import type connection from './@ohos.bluetooth.connection';
 
 /**
@@ -1388,7 +1390,7 @@ declare namespace ble {
      * @param { 'characteristicWrite' } type - 事件回调类型，支持的事件为'characteristicWrite'，表示特征值写请求事件。
      *     当收到client端设备的写特征值请求时，触发该事件。
      * @param { Callback<CharacteristicWriteRequest> } callback -
-          *      指定订阅的回调函数，会携带client端发送的写请求数据。
+     指定订阅的回调函数，会携带client端发送的写请求数据。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
@@ -1453,7 +1455,7 @@ declare namespace ble {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { Callback<CharacteristicWriteRequest> } [callback]
-          *      指定取消订阅的回调函数通知。
+     指定取消订阅的回调函数通知。
      *     若传参，则需与
      *     [onCharacteristicWrite]{@link ble.GattServer.onCharacteristicWrite(callback: Callback<CharacteristicWriteRequest>)}
      *     中的回调函数一致；若无传参，则取消订阅该type对应的所有回调函数通知。
@@ -1639,7 +1641,7 @@ declare namespace ble {
      *     当client和server端之间的连接状态发生变化时，触发该事件。
      *     例如：收到连接请求或者断连请求时，可能引起连接状态发生变化。
      * @param { Callback<BLEConnectionChangeState> } callback -
-          *      指定订阅的回调函数，会携带连接状态。
+     指定订阅的回调函数，会携带连接状态。
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
