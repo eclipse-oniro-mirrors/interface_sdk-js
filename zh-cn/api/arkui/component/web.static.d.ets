@@ -7084,6 +7084,21 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.1.0 static
      */
     default visitedLinkPersistEnabled(enabled: boolean | undefined): this;
+
+    /**
+     * 设置Web组件内网页弹框（时间选择器/文件选择器等）握姿适配模式。
+     *
+     * 启用时，宽屏设备（应用窗口宽度大于600vp）上点击网页内date/time/datetime-local/file类型的
+     * input元素，系统弹框在被点击元素附近弹出。
+     * 禁用后，弹框保持当前布局（屏幕中央或底部），与未设置该属性时一致。
+     *
+     * @param { WebHandednessFollowMode } mode - 握姿适配模式。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default adaptToHandedness(mode: WebHandednessFollowMode): this;
 }
 
 /**
@@ -7771,4 +7786,27 @@ export declare interface OnZoomChangeEvent {
    * @since 26.1.0 static
    */
   newZoomFactor: double;
+}
+
+/**
+ * 定义网页弹框的握姿适配模式。
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum WebHandednessFollowMode {
+    /**
+     * 不适配。弹出框保持当前布局。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    NONE = 0,
+    /**
+     * 弹出框跟随触发它的组件（最近交互的组件）的位置。
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    FOLLOW_ANCHOR = 1
 }

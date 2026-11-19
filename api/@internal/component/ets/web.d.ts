@@ -10567,6 +10567,21 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
+
+  /**
+   * Set the grip adaptation mode of the web page pop-up box (time selector/file selector) in the web component.
+   * When this function is enabled, click the date/time/datetime-local/file type on the web page on a wide-screen
+   * device(the width of the application window is greater than 600 vp).
+   * Input element. The system pop-up dialog box is displayed near the clicked element.
+   * After this function is disabled, the current layout(center or bottom of the screen) of the dialog box is retained,
+   * which is the same as that when this attribute is not set.
+   * @param { WebHandednessFollowMode } mode - Grip adaptation mode.
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness(mode: WebHandednessFollowMode): WebAttribute;
 }
 
 /**
@@ -11359,4 +11374,28 @@ declare interface OnZoomChangeEvent {
    * @since 26.1.0 dynamic
    */
   newZoomFactor: number;
+}
+
+/**
+ * Defines the grip adaptation mode of the web page pop-up box.
+ * @syscap SystemCapability.Web.Webview.Core
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum WebHandednessFollowMode {
+  /**
+   * No adaptation. The pop-up box keeps the current layout.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  NONE = 0,
+
+  /**
+   * The pop-up box follows the position of the component that triggers it (the most recently interacted component).
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  FOLLOW_ANCHOR = 1
 }
