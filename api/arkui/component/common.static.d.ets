@@ -6501,6 +6501,21 @@ export declare interface DragEvent {
      * @since 26.0.0 static
      */
     getGlobalDisplayY(): double;
+
+    /**
+     * Sets whether the drag backplane is visible. Invoked in the [onDragStart]{@link CommonMethod#onDragStart},
+     * [onDragEnter]{@link CommonMethod#onDragEnter}, and [onDragMove]{@link CommonMethod#onDragMove} callbacks. If this
+     * parameter is set to false, the backplane is hidden immediately after being dragged. Event distribution and data
+     * transmission are not affected. When you leave the target component area or drag the backplane, the backplane is
+     * automatically displayed. If you do not call this API to set whether to be visible, the system displays the drag
+     * backplane by default.
+     * @param { boolean } visible - Sets whether the drag backplane is visible. true: The drag backplane is
+     *     displayed. false: The drag backplane is hidden.
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    setDragWindowVisible(visible: boolean): void;
 }
 /**
  * The event callback function for drag and drop common interfaces.

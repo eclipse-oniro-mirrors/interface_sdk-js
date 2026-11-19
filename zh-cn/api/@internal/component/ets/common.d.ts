@@ -12471,6 +12471,20 @@ declare interface DragEvent {
    * @since 20 dynamic
    */
   enableInternalDropAnimation(configuration: string): void;
+
+  /**
+   * 设置拖拽背板是否可见。
+   * 在[onDragStart]{@link CommonMethod#onDragStart}、[onDragEnter]{@link CommonMethod#onDragEnter}、[onDragMove]{@link CommonMethod#onDragMove}回调中调用。
+   * 调用接口设为false后，拖拽背板立即隐藏，不影响事件分发和数据传输。
+   * 离开目标组件区域或者拖拽结束时拖拽背板自动恢复显示。
+   * 当开发者未调用该接口设置是否可见时，系统默认会显示拖拽背板。
+   * @param { boolean } visible - 设置拖拽背板是否可见。true：显示拖拽背板；false：隐藏拖拽背板。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  setDragWindowVisible(visible: boolean): void;
 }
 
 /**
