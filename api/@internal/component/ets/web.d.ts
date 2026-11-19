@@ -10570,16 +10570,16 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
 }
 
 /**
- * Defines Web Component.
+ * This module provides **Web** components with web page display capabilities. For details about web control
+ * capabilities, see [Module Description]{@link @ohos.web.webview:webview}.
  *
- * <p><strong>API Note</strong>:
+ * <!--RP1--><!--RP1End-->
  *
- * <strong>Performance Note</strong>:
- * <p>For details about how to optimize the compilation, resource loading, and JSBridge performance,
- * see [Optimizing Web Page Loading]{@link https://developer.huawei.com/consumer/en/doc/best-practices/bpta-web-develop-optimization}
- * <p>When the white screen duration is long due to complex web page parsing,
- * you can enable [optimizeParserBudget]{@link WebAttribute.optimizeParserBudget} to reduce the first frame rendering content.</p>
- * </p>
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
  *
  * ## Required Permissions
  *

@@ -7418,7 +7418,16 @@ export declare interface AcceptableFileType {
     acceptableType: Array<string>;
 }
 /**
- * Defines Web Component.
+ * This module provides **Web** components with web page display capabilities. For details about web control
+ * capabilities, see [Module Description]{@link @ohos.web.webview:webview}.
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this component are supported since API version 8. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
  *
  * @param { WebOptions } value.
  * @param { CustomBuilder } [content_] - container

@@ -7306,7 +7306,26 @@ export declare interface AcceptableFileType {
     acceptableType: Array<string>;
 }
 /**
- * Defines Web Component.
+ * Web组件是ArkWeb Kit提供的具有网页显示能力的UI组件，用于在应用内嵌入和展示网页内容。开发者可通过
+ * Web组件加载在线网页和本地网页，支持隐私模式浏览、同步渲染模式、共享渲染进程等特性，满足混合开发、
+ * 内容嵌入、浏览器类应用等多种场景下的网页展示需求。Web组件的控制器（WebviewController）及相关控制
+ * 能力由[模块描述]{@link @ohos.web.webview:webview}提供。在使用Web组件时需注意：同一页面内的多个Web
+ * 组件应分别绑定不同的WebviewController实例以保证独立性和性能隔离；移动设备上当Web实例超过10个时
+ * 系统会主动回收后台页面数据。
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **说明：**
+ * >
+ * > - 本模块同时支持ArkTS-Dyn、ArkTS-Sta。
+ * >
+ * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 本模块首批ArkTS-Sta接口从API version 20开始支持。
+ * >
+ * > - 示例效果请以真机运行为准。
+ * >
+ * > - 在移动设备上，当应用的Web实例数量超过10个时，系统会主动回收后台页面数据。
  *
  * @param { WebOptions } value.
  * @param { CustomBuilder } [content_] - container
