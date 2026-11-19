@@ -1160,7 +1160,8 @@ declare class GridAttribute extends ScrollableCommonMethod<GridAttribute> {
    * A custom provider uses calculateApproachOffset to set the fling distance and calculateSnapOffset
    * to set the final snap position. If the strategy is omitted, ScrollSnapAlign.NONE, or undefined,
    * the Grid coasts to a stop without snapping.
-   * Layouts with GridItems that span multiple rows or columns do not support snapping.
+   * Layouts with GridItems that span multiple columns do not support snapping.
+   * When snapping is enabled, ending a drag or a mouse box selection also triggers snapping.
    * The final snap position stays within the scrollable range.
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Built-in alignment or custom provider.
