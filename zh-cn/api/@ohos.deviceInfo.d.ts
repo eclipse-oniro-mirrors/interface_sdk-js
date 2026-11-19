@@ -145,7 +145,7 @@ declare namespace deviceInfo {
   const brand: string;
 
   /**
-   * 外部产品系列。
+   * <!--RP17-->外部产品系列。<!--RP17End-->
    * 
    * 示例：<!--RP2-->Mate XX<!--RP2End-->
    *
@@ -713,7 +713,9 @@ declare namespace deviceInfo {
 
   /**
    * 获取系统安装UTC时间戳。
-   * 例如：1790784000000。
+   * <!--RP18--><br> 例如：1790784000000。
+   * **模型约束**： 此接口仅可在Stage模型下使用。<br> 
+   * **起始版本**：26.1.0<!--RP18End-->
    * 
    * @syscap SystemCapability.Startup.SystemInfo
    * @stagemodelonly
