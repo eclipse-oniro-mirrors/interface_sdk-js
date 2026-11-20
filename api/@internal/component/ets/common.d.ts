@@ -5190,7 +5190,7 @@ declare interface ScaleOptions {
 }
 
 /**
- * Defines the vertical align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the vertical direction.
  *
  * @interface VerticalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5202,90 +5202,36 @@ declare interface ScaleOptions {
  */
 declare interface VerticalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { ?string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
    *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
   
   /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
+   * Vertical alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { VerticalAlign }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: VerticalAlign;
 }
 
 /**
- * Defines the horizontal align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the horizontal direction.
  *
  * @interface HorizontalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5297,83 +5243,30 @@ declare interface VerticalAlignParam {
  */
 declare interface HorizontalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
+   *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
 
   /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-   /**
-    * Sets the horizontal alignment relative to the anchor component.
+   * Horizontal alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { HorizontalAlign } align
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: HorizontalAlign;
 }

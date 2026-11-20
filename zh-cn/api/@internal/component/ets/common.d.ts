@@ -5037,7 +5037,9 @@ declare interface HorizontalAlignParam {
 
   /**
    * 设置作为锚点的组件的id值。
+   *
    * Anonymous Object Rectification
+   *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -5049,6 +5051,7 @@ declare interface HorizontalAlignParam {
 
   /**
    * 设置相对于锚点组件的水平对齐方式。
+   *
    * Anonymous Object Rectification
    *
    * @type { HorizontalAlign } align
@@ -23047,7 +23050,7 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
-   * @since 11 dynamiconly
+   * @since 7 dynamiconly
    * @deprecated since 14
    * @useinstead grid_col/GridColInterface and grid_row/GridRowInterface
    */
@@ -23067,7 +23070,7 @@ declare class CommonMethod<T> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
    * @atomicservice [since 11]
-   * @since 11 dynamiconly
+   * @since 7 dynamiconly
    * @deprecated since 14
    * @useinstead grid_col/GridColInterface and grid_row/GridRowInterface
    */

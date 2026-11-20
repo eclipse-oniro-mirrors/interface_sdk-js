@@ -5526,7 +5526,7 @@ export declare enum ImmersiveStrategy {
    */
   AVOID_CUTOUT = 0,
   /**
-   * Avoid the three-button navigation bar area on the phone.
+   * Avoid the three-button navigation bar area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

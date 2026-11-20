@@ -5459,6 +5459,28 @@ export declare enum EdgeLightPosition {
  */
 export declare enum ImmersiveStrategy {
   /**
+   * 避让挖孔区域。
+   *
+   * > **说明**
+   * >
+   * > 该策略的优先级比module.json5中的avoid_cutout配置项低，
+   * > 如果在module.json5的metadata中配置了avoid_cutout，
+   * > 该配置项的效果会优先生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  AVOID_CUTOUT = 0,
+  /**
+   * 避让三键导航栏区域。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  AVOID_FLOAT_NAV = 1,
+  /**
    * 扩展bindSheet的标题区作为内容区的安全区。
    *
    * > **NOTE**
