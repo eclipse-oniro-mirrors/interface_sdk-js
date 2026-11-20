@@ -14304,7 +14304,7 @@ export declare interface CommonMethod {
      * > 该接口不支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - 是否显示全屏模态页面。<br/>-true：显示全屏模态页面。<br/>-false：隐藏全屏模态页面。
-     * @param { CustomBuilder | undefined } builder - 配置全屏模态页面内容。
+     * @param { CustomBuilder | undefined } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
      * @param { ModalTransition } [type] - 全屏模态页面的系统转场方式。<br/> 默认值：ModalTransition.DEFAULT。<br/>**说明：**<br /> 同
      *     transition同时设置时，此属性不生效。
      * @returns { this }
@@ -14317,7 +14317,7 @@ export declare interface CommonMethod {
      * 给组件绑定全屏模态页面，点击后显示模态页面。模态页面内容自定义，可自定义设置转场方式。
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - 是否显示全屏模态页面。<br/>-true：显示全屏模态页面。<br/>-false：隐藏全屏模态页面。
-     * @param { CustomBuilder | undefined } builder - 配置全屏模态页面内容。
+     * @param { CustomBuilder | undefined } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
      * @param { ContentCoverOptions } [options] - 配置全屏模态页面的可选属性。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full

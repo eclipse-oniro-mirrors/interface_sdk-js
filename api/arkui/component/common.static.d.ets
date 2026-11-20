@@ -13259,7 +13259,7 @@ export declare interface CommonMethod {
      * Binds a modal page to the component, whose visibility is subject to the isShow settings.
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - true means display content, false means hide content.
-     * @param { CustomBuilder | undefined } builder - the content to be displayed.
+     * @param { CustomBuilder | undefined } builder - the content to be displayed. <!--RP1--><!--RP1End-->
      * @param { ModalTransition } [type] - transition type.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -13271,7 +13271,7 @@ export declare interface CommonMethod {
      * Bind content cover
      *
      * @param { boolean | Bindable<boolean> | undefined } isShow - true means display content, false means hide content.
-     * @param { CustomBuilder | undefined } builder - the content to be displayed.
+     * @param { CustomBuilder | undefined } builder - the content to be displayed. <!--RP1--><!--RP1End-->
      * @param { ContentCoverOptions } [options] - options of content cover.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
