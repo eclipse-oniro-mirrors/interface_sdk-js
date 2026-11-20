@@ -17479,7 +17479,7 @@ export declare interface TerminationInfo {
     want?: Want;
 }
 /**
- * Defines the format for displaying dates and times.
+ * 时间、日期格式化时可设置的配置项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
