@@ -1378,6 +1378,23 @@ declare class TabContentAttribute extends CommonMethod<TabContentAttribute> {
    * @since 26.1.0 dynamic
    */
   sidebarSection(value: Optional<SidebarSection>): TabContentAttribute;
+
+  /**
+   * Mark this TabContent as non-recyclable. When configuring Tabs.cachedMaxCount, if *keepAlive* of tabContent is set
+   * to true, tabContent will not be destroyed by the cache mechanism even if it is outside the cache range.
+   *
+   * @param { Optional<boolean> } keepAlive - Whether to keep this TabContent alive and
+   *     not recyclable.<br>Passing **undefined** resets this
+   *     property to its default value (**false**).
+   *     <br>Default value: **false**.
+   * @returns { TabContentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  keepAlive(keepAlive: Optional<boolean>): TabContentAttribute;
 }
 
 /**
