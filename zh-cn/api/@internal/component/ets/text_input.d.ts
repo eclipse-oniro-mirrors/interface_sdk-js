@@ -1038,6 +1038,13 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    *
    * 不同的InputType会拉起对应类型的键盘，同时限制输入。未通过该接口设置时，默认为InputType.Normal。
    *
+   * > **说明：**
+   * >
+   * > 密码填充服务需要密码相关的[输入框类型]{@link InputType}(如InputType.Password、InputType.NUMBER_PASSWORD、InputType.NEW_PASSWORD、InputType.USER_NAME)。<!--RP2--><!--RP2End-->
+   * >
+   * > 设置[密码模式](docroot://ui/arkts-common-components-text-input.md#密码模式)时，[decoration]{@link TextInputAttribute#decoration}、[showUnderline]{@link TextInputAttribute#showUnderline}、
+   * > [lineHeight]{@link TextInputAttribute#lineHeight}、[fontFeature]{@link TextInputAttribute#fontFeature}不生效。
+   *
    * @param { InputType } value - 输入框类型。
    * @returns { TextInputAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

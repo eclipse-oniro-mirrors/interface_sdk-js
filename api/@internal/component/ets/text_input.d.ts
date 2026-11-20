@@ -1092,6 +1092,13 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    * Different InputType values bring up the corresponding keyboard type and restrict input. When not set through this
    * interface, the default value is InputType.Normal.
    *
+   * > **NOTE**
+   * >
+   * > The password autofill service requires password-related [text box types]{@link InputType} (such as **InputType.Password**, **InputType.NUMBER_PASSWORD**, **InputType.NEW_PASSWORD**, and **InputType.USER_NAME**).<!--RP2--><!--RP2End-->
+   * >
+   * > When a [password mode](docroot://ui/arkts-common-components-text-input.md#password-mode) is set, [decoration]{@link TextInputAttribute#decoration}, [showUnderline]{@link TextInputAttribute#showUnderline},
+   * > [lineHeight]{@link TextInputAttribute#lineHeight}, and [fontFeature]{@link TextInputAttribute#fontFeature} do not take effect.
+   *
    * @param { InputType } value - Input box type.
    * @returns { TextInputAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full

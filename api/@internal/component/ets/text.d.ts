@@ -1780,6 +1780,7 @@ declare const TextInstance: TextAttribute;
  * > - To set whether to clear the text selection and handle when the user touches outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.
  * >
+ * > <!--RP3--><!--RP3End-->
  *
  * ###### Child Components
  *
