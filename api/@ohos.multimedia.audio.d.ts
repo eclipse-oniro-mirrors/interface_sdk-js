@@ -13763,21 +13763,23 @@ declare namespace audio {
     getSupportedNoiseReductionModes(): Array<NoiseReductionMode>;
 
     /**
-     * Subscribes to the noise reduction mode change event, which is triggered when the noise reduction mode
-     * is changed for the audio capturer.
-     * The change may be triggered by the user through the system record controller panel, by the application calling
-     * {@link #setNoiseReductionMode}, or by the system adjusting the mode due to device changes or
-     * stream concurrency. For details, see {@link NoiseReductionModeChangeReason}.
-     * 
-     * Application scenario: Applies to scenarios where applications need to detect noise reduction mode changes in real
-     * time, such as
-     * [SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE} live broadcast,
-     * [SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC} recording,
-     * [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER} recording,
-     * [SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION} VoIP, and
-     * [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE} voice messages. After detecting the noise
-     * reduction mode change, an application can determine whether to disable the noise reduction algorithm superimposed
-     * by the application based on the actual situation to achieve the best E2E overall noise reduction experience.
+     * Subscribes to the noise reduction mode change event, which is triggered when the noise reduction mode of the
+     * audio capturer changes.
+     * The change may be triggered by the user switching the noise reduction mode through the system recording control
+     * panel, the application calling the {@link #setNoiseReductionMode} API, or system adjustments caused by device
+     * changes or concurrent recording stream conflicts. For details, see {@link NoiseReductionModeChangeReason}.
+     *
+     * Use case: This API is applicable to scenarios where the application needs to detect noise reduction mode changes
+     * in real time, such as
+     * live streaming([SOURCE_TYPE_LIVE]{@link SourceType#SOURCE_TYPE_LIVE}), microphone recording(
+     * [SOURCE_TYPE_MIC]{@link SourceType#SOURCE_TYPE_MIC}), video recording(
+     * [SOURCE_TYPE_CAMCORDER]{@link SourceType#SOURCE_TYPE_CAMCORDER}), VoIP(
+     * [SOURCE_TYPE_VOICE_COMMUNICATION]{@link SourceType#SOURCE_TYPE_VOICE_COMMUNICATION}), and voice messages(
+     * [SOURCE_TYPE_VOICE_MESSAGE]{@link SourceType#SOURCE_TYPE_VOICE_MESSAGE}). After detecting the change of the noise
+     * reduction mode, the application can determine whether to disable its own noise reduction algorithm based on the
+     * actual situation to achieve the optimal end-to-end noise reduction experience.
+     * Constraints: Multiple subscriptions with different callback objects are all retained, and callbacks are invoked
+     * sequentially in subscription order. Do not call **AudioCapturer** APIs in the callback.
      *
      * @param { Callback<NoiseReductionModeChangeInfo> } callback - Callback used to return the noise reduction mode
      *     change information.
@@ -13790,7 +13792,7 @@ declare namespace audio {
     /**
      * Unsubscribe from the NR mode change event.
      * 
-     * Application scenario: This interface is invoked when the application no longer needs to detect the NR mode
+     * Use case: This interface is invoked when the application no longer needs to detect the NR mode
      * change.
      * Constraint: If the callback parameter is transferred, only the registered callback that matches the callback
      * instance is canceled. If the callback parameter is not transferred, all registered NR mode change callbacks are
