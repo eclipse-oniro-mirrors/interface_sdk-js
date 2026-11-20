@@ -359,6 +359,76 @@ declare namespace power {
   function unregisterShutdownCallback(callback?: Callback<void>): void;
 
   /**
+   * Defines the hibernation event callback interface.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface HibernateCallback {
+    /**
+     * Called when the device is entering hibernation.
+     *
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onHibernate(): Promise<void>;
+
+    /**
+     * Called when the device is exiting hibernation.
+     *
+     * @param { boolean } hibernateResult - Indicates whether the hibernation succeeded.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onWakeup(hibernateResult: boolean): Promise<void>;
+  }
+
+  /**
+   * Registers a callback to be invoked when the device enters or exits hibernation.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { HibernateCallback } callback - Callback object containing onHibernate and onWakeup methods.
+   *     onHibernate is called when entering hibernation (no parameters).
+   *     onWakeup is called when exiting hibernation, with hibernateResult indicating whether
+   *     the hibernation succeeded.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900400 - Parameter error. Possible causes: The callback object is missing
+   *     onHibernate or onWakeup function members.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function registerHibernateCallback(callback: HibernateCallback): void;
+
+  /**
+   * Unregisters the callback invoked when the device enters or exits hibernation.
+   * All registered hibernation callbacks are removed.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function unregisterHibernateCallback(): void;
+
+  /**
    * Query the power configuration value for a given scene name.
    *
    * @permission ohos.permission.POWER_CONFIG
@@ -542,6 +612,131 @@ declare namespace power {
      */
     LONG_PRESS_FILTERING_ONCE = 1
   }
+
+  /**
+   * Enumerates the API invoking mode.
+   * Indicates how an API call is executed and how its result is delivered.
+   *
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum InvokeMode {
+    /**
+     * Synchronous invocation. The caller blocks until the API returns the result.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    SYNC = 0,
+    /**
+     * Asynchronous invocation. The caller returns immediately; the result is delivered via a Promise.
+     *
+     * @syscap SystemCapability.PowerManager.PowerManager.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    ASYNC = 1
+  }
+
+  /**
+   * Wakes up a device.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { string } detail - Wakeup reason. The value must be a string.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function wakeup(detail: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Enables a device to enter the sleep state.
+   *
+   * @permission ohos.permission.POWER_MANAGER
+   * @param { boolean } [isImmediate] - Whether the device enters the sleep state immediately. The value **true**
+   *     indicates that the device enters the sleep state immediately after the screen is turned off; **false**
+   *     indicates that the system controls when the device enters the sleep state. If this parameter is not set, the
+   *     default value **false** is used. If you only want to turn off the screen, you are advised not to set this
+   *     parameter.
+   *     <br>Default value: false.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
+   *     1. Not allowed to turn off the screen during the exam.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. This API cannot work in car devices.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function suspend(isImmediate?: boolean, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Shuts down the system.
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - Shutdown reason. The value must be a string.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function shutdown(reason: string, mode?: InvokeMode): void | Promise<void>;
+
+  /**
+   * Reboots a device.
+   *
+   * @permission ohos.permission.REBOOT
+   * @param { string } reason - Indicates the restart reason. For example, "updater" indicates entering the updater mode
+   *     after the restart. If the parameter is not specified, the system enters the normal mode after the restart.
+   * @param { InvokeMode } [mode] - Invoking mode. You are advised to set this parameter to
+   *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
+   *     is used.
+   *     <br>Default value: InvokeMode.SYNC.
+   * @returns { void | Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 4900101 - Failed to connect to the service.
+   * @syscap SystemCapability.PowerManager.PowerManager.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function reboot(reason: string, mode?: InvokeMode): void | Promise<void>;
+
 }
 
 export default power;

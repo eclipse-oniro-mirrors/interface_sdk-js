@@ -2716,6 +2716,7 @@ declare namespace media {
      * 表示音画不同步的指标事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LIP_ASYNC = 2,
@@ -2724,6 +2725,7 @@ declare namespace media {
      * 表示加载速率变化超过10%的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADINGRATE_CHANGE = 3,
@@ -2732,6 +2734,7 @@ declare namespace media {
      * 表示加载数据请求错误的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_LOADING_ERROR = 4,
@@ -2740,6 +2743,7 @@ declare namespace media {
      * 表示播放内容切换的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_CHANGED = 5,
@@ -2748,6 +2752,7 @@ declare namespace media {
      * 表示播放内容不连续的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_CONTENT_DISCONTINUITY = 6,
@@ -2756,6 +2761,7 @@ declare namespace media {
      * 表示音频状态变化的事件。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
+     * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     AV_METRICS_EVENT_AUDIO_ABNORMAL = 7
@@ -3135,13 +3141,11 @@ declare namespace media {
      *
      * @param { MediaType } trackType - 指定的媒体类型，见[MediaType]{@link #MediaType}.
      * @returns { Promise<int> } Promise对象，返回已选择轨道索引。
-     * @throws { BusinessError } 202 - Called from Non-System applications. Return by promise.
      * @throws { BusinessError } 5400101 - No memory. Return by promise.
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - I/O error. Return by promise.
      * @throws { BusinessError } 5400105 - Service died. Return by promise.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
@@ -3841,7 +3845,6 @@ declare namespace media {
      * 默认值: PRIVACY_TYPE_PUBLIC.
      *
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
-     * @systemapi
      * @stagemodelonly
      * @crossplatform
      * @since 26.0.0 dynamic&static
@@ -4789,8 +4792,8 @@ declare namespace media {
      * 连接或断开连接时通过参考“响应音频输出设备更改”来实现播放器行为。
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } callback - 用于监听设备更改事件的回调。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
@@ -5040,8 +5043,8 @@ declare namespace media {
      *
      * @param { Callback<audio.AudioStreamDeviceChangeInfo> } [callback] - 回调用于返回
      *     当前音频流的输出设备描述符和更改原因。
-     * @throws { BusinessError } 401 - 参数错误。可能原因：1. 必填参数未指定。
-     *     <br>2. 参数类型不正确。 3.参数校验失败。
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
+     *     2. Incorrect parameter types. 3.Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Media.AVPlayer
      * @since 23 static
      */
@@ -6733,10 +6736,10 @@ declare namespace media {
    * [pause]{@link media.AVRecorder#pause()}/[resume]{@link media.AVRecorder#resume()} →
    * [stop]{@link media.AVRecorder#stop()} →
    * [release]{@link media.AVRecorder#release()}。
-   * 
+   *
    * 音视频录制示例可参考：[音频录制开发指导](docroot://media/media/using-avrecorder-for-recording.md)、
    * [视频录制开发指导](docroot://media/media/video-recording.md)。
-   * 
+   *
    * > **说明：**
    * > - 本模块首批接口从API version 6开始支持。后续版本的新增接口，采用上角标单独标记接口的起始版本。
    * > - 本Interface首批接口从API version 9开始支持。
@@ -6796,7 +6799,7 @@ declare namespace media {
 
     /**
      * 获取实时的配置参数。适用于需要确认录制配置是否正确应用的场景，如调试录制参数、验证配置生效情况等。使用callback异步回调。<br>
-     * 
+     *
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}之后调用。
      *
      * @param { AsyncCallback<AVRecorderConfig> } callback - 回调函数。获取实时配置的参数成功时，err为undefined，data为获取到的配置参数，否则为错误对象。
@@ -6810,7 +6813,7 @@ declare namespace media {
 
     /**
      * 获取实时的配置参数。适用于需要确认录制配置是否正确应用的场景，如调试录制参数、验证配置生效情况等。使用callback异步回调。<br>
-     * 
+     *
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}之后调用。
      *
      * @param { AsyncCallback<AVRecorderConfig | undefined> } callback - 回调函数。获取实时配置的参数成功时，err为undefined，data为获取到的配置参数，
@@ -6825,7 +6828,7 @@ declare namespace media {
 
     /**
      * 获取实时的配置参数。适用于需要确认录制配置是否正确应用的场景，如调试录制参数、验证配置生效情况等。使用Promise异步回调。<br>
-     * 
+     *
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}之后调用。
      *
      * @returns { Promise<AVRecorderConfig> } Promise对象。返回实时配置参数。
@@ -6839,7 +6842,7 @@ declare namespace media {
 
     /**
      * 获取实时的配置参数。适用于需要确认录制配置是否正确应用的场景，如调试录制参数、验证配置生效情况等。使用Promise异步回调。<br>
-     * 
+     *
      * 必须在[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}之后调用。
      *
      * @returns { Promise<AVRecorderConfig | undefined> } Promise对象，返回实时配置参数。
@@ -6956,7 +6959,7 @@ declare namespace media {
 
     /**
      * 查询设备是否支持硬件数字水印。使用Promise异步回调。
-     * 
+     *
      * 可以在prepare()、start()或pause()事件触发后调用。
      *
      * @returns { Promise<boolean> } Promise对象，返回查询结果。true表示设备支持硬件数字水印，false表示不支持。
@@ -6972,14 +6975,14 @@ declare namespace media {
      * 当且仅当[prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig)}事件成功触发后，
      * 且在[start]{@link media.AVRecorder#start()}之前，才能调用setWatermark方法。
      *
-     * @param { image.PixelMap } watermark - 图像PixelMap数据。<br/>当前支持规格:<br/>- 当前仅支持pixelformat为RGBA8888。
+     * @param { image.PixelMap } watermark 图像PixelMap数据。<br/>当前支持规格:<br/>- 当前仅支持pixelformat为RGBA8888。
      * <br/>- 原图像为8K时->水印图像限制范围3072x288，原图像为4K时->水印图像限制范围1536x144。
-     * @param { WatermarkConfig } config - 水印的相关配置参数。
+     * @param { WatermarkConfig } config 水印的相关配置参数。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     *     1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types.
-     *     3. Parameter verification failed.
+     * @throws { BusinessError } 401 - Parameter error. Possible causes: 
+     *     <br>1. Mandatory parameters are left unspecified.
+     *     <br>2. Incorrect parameter types. 
+     *     <br>3. Parameter verification failed.
      * @throws { BusinessError } 801 - Capability not supported.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @systemapi
@@ -7260,7 +7263,7 @@ declare namespace media {
      * 释放音视频录制资源之后，该AVRecorder实例不能再进行任何操作。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 5400105 - Service died. Return by callback.
+     * @throws { BusinessError } 5400105 - Service died. Return by Promise.
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
      * @atomicservice [since 12]
@@ -7384,7 +7387,7 @@ declare namespace media {
 
     /**
      * 音视频录制的状态。<br>
-     * 
+     *
      * **原子化服务API：** 从API version 12 开始，该接口支持在原子化服务中使用。
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
@@ -7458,7 +7461,7 @@ declare namespace media {
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
-     * @throws { BusinessError } 5400104 - Operation time out.
+     * @throws { BusinessError } 5400104 - Operation timeout.
      * @throws { BusinessError } 5400105 - Service died.
      * @throws { BusinessError } 5400106 - Unsupported format.
      * @throws { BusinessError } 5400107 - Audio interrupted. [since 11]
@@ -7816,6 +7819,7 @@ declare namespace media {
      */
     longitude: double;
   }
+
   /**
    * 设置给AVRecorder的水印相关配置，该位置以画面的左上角为开始点。
    *
@@ -7852,10 +7856,11 @@ declare namespace media {
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
    */
-  interface WatermarkConfiguration {  
+  interface WatermarkConfiguration {
     /**
      * 水印相对于视频顶部位置的偏移量。
      * 取值为整数，单位为像素（px）。
+     * 单位为：像素。取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -7865,6 +7870,7 @@ declare namespace media {
     /**
      * 水印相对于视频左侧位置的偏移量。
      * 取值为整数，单位为像素（px）。
+     * 单位为：像素。取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -7874,6 +7880,7 @@ declare namespace media {
     /**
      * 水印图片的宽度。
      * 取值为正整数，取值范围为[1, 4096]，单位为像素（px）。
+     * 单位为：像素。取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -7883,6 +7890,7 @@ declare namespace media {
     /**
      * 水印图片的高度。
      * 取值为正整数，取值范围为[1, 4096]，单位为像素（px）。
+     * 单位为：像素。取值限定为整数。
      *
      * @syscap SystemCapability.Multimedia.Media.Core
      * @stagemodelonly
@@ -8012,7 +8020,7 @@ declare namespace media {
    * > **说明：**
    * >
    * > 从API version 6开始支持，从API version 9开始废弃，建议使用[AVRecorder]{@link media.AVRecorder}替代。
-   * 
+   *
    * 音频录制管理类，用于录制音频媒体。在调用AudioRecorder的方法前，需要先通过
    * [createAudioRecorder()]{@link media.createAudioRecorder} 构建一个AudioRecorder实例。
    *
@@ -8024,7 +8032,7 @@ declare namespace media {
   interface AudioRecorder {
     /**
      * 录制准备，根据传入的配置参数初始化录制资源（包括编码器、采样率、声道数等），完成录制前的准备工作。
-     * 
+     *
      * > **说明：**
      * > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.prepare]{@link media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)}
@@ -8036,101 +8044,101 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.prepare(config: AVRecorderConfig, callback: AsyncCallback<void>)
      */
     prepare(config: AudioRecorderConfig): void;
 
     /**
      * 开始录制，需在'prepare'事件成功触发后，才能调用start方法。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.start]{@link media.AVRecorder#start(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#start(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.start(callback: AsyncCallback<void>)
      */
     start(): void;
 
     /**
      * 暂停录制，需要在'start'事件成功触发后，才能调用pause方法。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.pause]{@link media.AVRecorder#pause(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#pause(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.pause(callback: AsyncCallback<void>)
      */
     pause(): void;
 
     /**
      * 恢复录制，需要在'pause'事件成功触发后，才能调用resume方法。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.resume]{@link media.AVRecorder#resume(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#resume(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.resume(callback: AsyncCallback<void>)
      */
     resume(): void;
 
     /**
      * 停止录音。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.stop]{@link media.AVRecorder#stop(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#stop(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.stop(callback: AsyncCallback<void>)
      */
     stop(): void;
 
     /**
      * 释放录音资源。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.release]{@link media.AVRecorder#release(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#release(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.release(callback: AsyncCallback<void>)
      */
     release(): void;
 
     /**
      * 重置录音。
-     * 
+     *
      * 进行重置录音之前，需要先调用stop()停止录音。重置录音之后，需要调用prepare()设置录音参数项，才能再次进行录音。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.reset]{@link media.AVRecorder#reset(callback: AsyncCallback<void>)}替代。
      *
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#reset(callback: AsyncCallback<void>)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.reset(callback: AsyncCallback<void>)
      */
     reset(): void;
 
     /**
      * 开始订阅音频录制事件。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('stateChange')]{@link media.AVRecorder#on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler)}
      * > 替代。
      *
@@ -8147,15 +8155,15 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.on(type: 'stateChange', callback: OnAVRecorderStateChangeHandler)
      */
     on(type: 'prepare' | 'start' | 'pause' | 'resume' | 'stop' | 'release' | 'reset', callback: () => void): void;
 
     /**
      * 开始订阅音频录制错误事件，当上报error错误事件后，用户需处理error事件，退出录制操作。
-     * 
+     *
      * > **说明：**
-     * > 从API version 6开始支持，从API version 9开始废弃，建议使用
+     * > > 从API version 6开始支持，从API version 9开始废弃，建议使用
      * > [AVRecorder.on('error')]{@link media.AVRecorder#on(type: 'error', callback: ErrorCallback)}
      * > 替代。
      *
@@ -8164,26 +8172,25 @@ declare namespace media {
      * @syscap SystemCapability.Multimedia.Media.AudioRecorder
      * @since 6 dynamiconly
      * @deprecated since 9
-     * @useinstead media.AVRecorder#on(type: 'error', callback: ErrorCallback)
+     * @useinstead @ohos.multimedia.media:media.AVRecorder.on(type: 'error', callback: ErrorCallback)
      */
     on(type: 'error', callback: ErrorCallback): void;
   }
 
-    /**
-     * 视频录制的状态机。可通过state属性获取当前状态。
-     *
-     * @unionmember { 'idle' } 视频录制空闲。
-     * @unionmember { 'prepared' } 视频录制参数设置完成。
-     * @unionmember { 'playing' } 视频正在录制。
-     * @unionmember { 'paused' } 视频暂停录制。
-     * @unionmember { 'stopped' } 视频录制停止。
-     * @unionmember { 'error' } 错误状态。
-     * @syscap SystemCapability.Multimedia.Media.VideoRecorder
-     * @systemapi
-     * @since 9 dynamic
-     * @since 23 static
-     */
-
+  /**
+   * 视频录制的状态机。可通过state属性获取当前状态。
+   *
+   * @unionmember { 'idle' } 视频录制空闲。
+   * @unionmember { 'prepared' } 视频录制参数设置完成。
+   * @unionmember { 'playing' } 视频正在录制。
+   * @unionmember { 'paused' } 视频暂停录制。
+   * @unionmember { 'stopped' } 视频录制停止。
+   * @unionmember { 'error' } 错误状态。
+   * @syscap SystemCapability.Multimedia.Media.VideoRecorder
+   * @systemapi
+   * @since 9 dynamic
+   * @since 23 static
+   */
   type VideoRecordState = 'idle' | 'prepared' | 'playing' | 'paused' | 'stopped' | 'error';
 
   /**
@@ -8410,7 +8417,7 @@ declare namespace media {
      * 需要重新调用[prepare()]{@link media.VideoRecorder#prepare(config: VideoRecorderConfig, callback: AsyncCallback<void>)}
      * 和[getInputSurface()]{@link media.VideoRecorder#getInputSurface(callback: AsyncCallback<void>)}接口才能重新录制。
      *
-     * @param { AsyncCallback<void>  } callback - 回调函数。停止视频录制成功，err为undefined，否则为错误对象。
+     * @param { AsyncCallback<void>  } callback 回调函数。停止视频录制成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by callback.
      * @throws { BusinessError } 5400103 - I/O error. Return by callback.
      * @throws { BusinessError } 5400105 - Service died. Return by callback.
@@ -10214,7 +10221,7 @@ declare namespace media {
      * - 采样率使用16K以下时，对应比特率范围为[8000 - 64000]。<br>
      * - 采样率使用16K~32K时对应的比特率范围为[8000, 160000]。<br>
      * - 采样率使用32K以上时对应的比特率范围为[32000, 320000]。<br>
-     * 
+     *
      * - AMR_NB编码格式支持比特率范围[4750, 5150, 5900, 6700, 7400, 7950, 10200, 12200]。<br>
      * - AMR_WB编码格式支持比特率范围[6600, 8850, 12650, 14250, 15850, 18250, 19850, 23050, 23850]。<br>
      * **原子化服务API：** 从API version 12开始，该接口支持在原子化服务中使用。
@@ -10324,6 +10331,7 @@ declare namespace media {
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
+     * @atomicservice [since 22]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -10334,6 +10342,7 @@ declare namespace media {
      *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @crossplatform [since 12]
+     * @atomicservice [since 22]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -10384,12 +10393,12 @@ declare namespace media {
      * 在StableQualityMode中设置质量参数。取值范围为【0,51】。
      * 数值越小，输出码率越高，质量越好。
      * 取值限定为整数。
-     * 
+     *
      * @syscap SystemCapability.Multimedia.Media.AVRecorder
      * @stagemodelonly
      * @since 26.0.1 dynamic&static
      */
-    sqrFactor?: boolean;
+    sqrFactor?: int;
 
     /**
      * 视频录制是否启用B帧编码。true表示启用B帧编码（仅在视频编码格式为H.265且设备硬件支持的情况下生效），false表示不启用B帧编码。<br>该参数为视频录制场景下的可选项，默认值为false。
@@ -11935,7 +11944,6 @@ declare namespace media {
      * @param { 'error' } type - 转码错误事件回调类型'error'。 <br>'error'：转码过程中发生错误，触发该事件。
      * @param { ErrorCallback } callback - 转码错误事件回调方法。
      * @throws { BusinessError } 401 - The parameter check failed.
-     * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.
@@ -12012,7 +12020,6 @@ declare namespace media {
      *
      * @param { ErrorCallback } callback - 转码错误事件回调方法。
      * @throws { BusinessError } 401 - The parameter check failed.
-     * @throws { BusinessError } 801 - Capability not supported.
      * @throws { BusinessError } 5400101 - No memory.
      * @throws { BusinessError } 5400102 - Operation not allowed.
      * @throws { BusinessError } 5400103 - I/O error.

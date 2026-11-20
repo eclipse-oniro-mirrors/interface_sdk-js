@@ -97,7 +97,7 @@ export declare enum SideBarContainerType {
 export declare enum SideBarPosition {
 
   /**
-   * The sidebar is on the Start of the container
+   * 侧边栏位于容器左侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -106,7 +106,7 @@ export declare enum SideBarPosition {
   Start,
 
   /**
-   * The sidebar is on the End of the container
+   * 侧边栏位于容器右侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -451,7 +451,8 @@ export declare interface SideBarContainerAttribute extends CommonMethod {
    * @returns { SideBarContainerAttribute } 返回SideBarContainerAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setSideBarContainerOptions(type?: SideBarContainerType): this;
 }
@@ -485,7 +486,8 @@ export declare function SideBarContainer(
  * @returns { SideBarContainerAttribute }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 @Builder
 export declare function SideBarContainer(

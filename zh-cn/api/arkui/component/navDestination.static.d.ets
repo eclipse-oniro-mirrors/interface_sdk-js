@@ -514,7 +514,8 @@ export declare interface NavDestinationTransition {
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
+ * @unpublished
  */
 export declare interface NavDestinationModuleInfo {
 
@@ -523,7 +524,8 @@ export declare interface NavDestinationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   moduleName: string;
 
@@ -532,7 +534,8 @@ export declare interface NavDestinationModuleInfo {
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   pagePath: string;
 }
@@ -694,8 +697,8 @@ export declare interface NavDestinationAttribute extends CommonMethod {
    * @param { NavDestinationMode } value - NavDestinationMode [since 23 - 24]
    * @param { NavDestinationMode | undefined } value - NavDestination类型。<br/>取值为undefined时，按默认值处理。<br/>默认值：
    *     NavDestinationMode.STANDARD [since 23 - 24]
-   * @returns { NavDestinationAttribute }    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+   * @returns { NavDestinationAttribute } [since 23]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
    * @stagemodelonly
    * @since 23 static
    */
@@ -1213,7 +1216,8 @@ export declare interface NavDestinationAttribute extends CommonMethod {
    * @returns { NavDestinationAttribute } 返回NavDestinationAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setNavDestinationOptions(moduleInfo?: NavDestinationModuleInfo): this;
 }

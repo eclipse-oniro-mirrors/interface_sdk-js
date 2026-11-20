@@ -23,7 +23,7 @@ import curves from '../../@ohos.curves';
 import { AttributeModifier, CommonMethod } from './common';
 
 /**
- * common enum of the checkbox shape
+ * 复选框形状的通用枚举。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -51,7 +51,7 @@ export declare enum CheckBoxShape {
 }
 
 /**
- * common enum of color
+ * 颜色类型。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -209,7 +209,7 @@ export declare enum ColoringStrategy {
 }
 
 /**
- * Image display mode.
+ * 用于设置图片填充效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -218,7 +218,7 @@ export declare enum ColoringStrategy {
  */
 export declare enum ImageFit {
   /**
-   * Zoom in or out without maintaining the aspect ratio so that the image fills the display boundary.
+   * 不保持宽高比进行放大缩小，使得图片充满显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -227,7 +227,7 @@ export declare enum ImageFit {
   Fill = 0,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that the image is completely displayed within the display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片完全显示在显示边界内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -236,8 +236,7 @@ export declare enum ImageFit {
   Contain = 1,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that both sides of the image are greater than or equal to the
-   * display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片两边都大于或等于显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,7 +245,7 @@ export declare enum ImageFit {
   Cover = 2,
 
   /**
-   * Adaptive display
+   * 图片根据其自身尺寸和组件的尺寸进行适当缩放，以在保持比例的同时填充视图。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -255,7 +254,7 @@ export declare enum ImageFit {
   Auto = 3,
 
   /**
-   * Keep the original size and display it in the center.
+   * 保持原有尺寸进行显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -264,7 +263,7 @@ export declare enum ImageFit {
   None = 5,
 
   /**
-   * Keep the aspect ratio displayed, and the image zooms out or remains unchanged.
+   * 保持宽高比进行显示，图片缩小或者保持不变。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -273,7 +272,7 @@ export declare enum ImageFit {
   ScaleDown = 6,
 
   /**
-   * Top Start.
+   * 图片显示在组件的顶部起始端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -282,7 +281,7 @@ export declare enum ImageFit {
   TOP_START = 7,
 
   /**
-   * The top is centered horizontally.
+   * 图片显示在组件的顶部横向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -291,7 +290,7 @@ export declare enum ImageFit {
   TOP = 8,
 
   /**
-   * Top tail end.
+   * 图片显示在组件的顶部尾端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -300,7 +299,7 @@ export declare enum ImageFit {
   TOP_END = 9,
 
   /**
-   * The starting end is centered longitudinally.
+   * 图片显示在组件的起始端纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -309,7 +308,7 @@ export declare enum ImageFit {
   START = 10,
 
   /**
-   * Center horizontal and vertical.
+   * 图片显示在组件的横向和纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -318,7 +317,7 @@ export declare enum ImageFit {
   CENTER = 11,
 
   /**
-   * The tail end is centered longitudinally.
+   * 图片显示在组件的尾端纵向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -327,7 +326,7 @@ export declare enum ImageFit {
   END = 12,
 
   /**
-   * Bottom starting end.
+   * 图片显示在组件的底部起始端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -336,7 +335,7 @@ export declare enum ImageFit {
   BOTTOM_START = 13,
 
   /**
-   * The bottom is centered horizontally.
+   * 图片显示在组件的底部横向居中，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -345,7 +344,7 @@ export declare enum ImageFit {
   BOTTOM = 14,
 
   /**
-   * Bottom end.
+   * 图片显示在组件的底部尾端，且保持原有尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -354,7 +353,7 @@ export declare enum ImageFit {
   BOTTOM_END = 15,
 
   /**
-   * Matrix of Image.
+   * 配合imageMatrix使用，使图像在Image组件自定义位置显示，且保持原有尺寸。不支持svg图源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -373,7 +372,7 @@ export declare enum ImageFit {
  */
 export declare enum BorderStyle {
   /**
-   * Displays as a series of dots with a radius of half the borderWidth.
+   * 显示为一系列圆点，圆点半径为borderWidth的一半。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -382,7 +381,7 @@ export declare enum BorderStyle {
   Dotted = 2,
 
   /**
-   * Shows as a series of short square dashed lines.
+   * 显示为一系列短的方形虚线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -391,7 +390,7 @@ export declare enum BorderStyle {
   Dashed = 1,
 
   /**
-   * Shows as a solid line.
+   * 显示为一条实线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -447,7 +446,7 @@ export declare enum RenderStrategy {
  */
 export declare enum LineJoinStyle {
   /**
-   * Connect path segments using bevels.
+   * 使用尖角连接路径段。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -456,7 +455,7 @@ export declare enum LineJoinStyle {
   Miter = 0,
 
   /**
-   * Connect path segments using sharp corners.
+   * 使用圆角连接路径段。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -465,7 +464,7 @@ export declare enum LineJoinStyle {
   Round = 1,
 
   /**
-   * Connect path segments using fillets.
+   * 使用斜角连接路径段。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -731,7 +730,7 @@ export declare enum MouseAction {
 }
 
 /**
- * Animation status.
+ * 用于动画播放状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -740,7 +739,7 @@ export declare enum MouseAction {
  */
 export declare enum AnimationStatus {
   /**
-   * Initial state of the animation.
+   * 动画初始状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -749,7 +748,7 @@ export declare enum AnimationStatus {
   Initial = 0,
 
   /**
-   * The animation is playing.
+   * 动画处于播放状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -758,7 +757,7 @@ export declare enum AnimationStatus {
   Running = 1,
 
   /**
-   * The animation is paused.
+   * 动画处于暂停状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -767,7 +766,7 @@ export declare enum AnimationStatus {
   Paused = 2,
 
   /**
-   * The animation is stopped.
+   * 动画处于停止状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -962,7 +961,7 @@ export declare enum KeySource {
  */
 export declare enum Edge {
   /**
-   * The top is centered horizontally.
+   * 竖直方向上边缘。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -971,7 +970,7 @@ export declare enum Edge {
   Top = 0,
 
   /**
-   * The bottom is centered horizontally.
+   * 竖直方向下边缘。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -980,7 +979,7 @@ export declare enum Edge {
   Bottom = 2,
 
   /**
-   * Align the head of the cross axis direction.
+   * 水平方向起始位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -989,7 +988,7 @@ export declare enum Edge {
   Start = 4,
 
   /**
-   * Align the head of the cross axis direction.
+   * 水平方向末尾位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1072,7 +1071,7 @@ export declare enum Week {
 }
 
 /**
- * Sets the horizontal layout of elements.
+ * 定义元素水平布局的方向。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1081,7 +1080,7 @@ export declare enum Week {
  */
 export declare enum Direction {
   /**
-   * Elements are laid out from left to right.
+   * 元素从左到右布局。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1090,7 +1089,7 @@ export declare enum Direction {
   Ltr = 0,
 
   /**
-   * Elements are laid out from right to left.
+   * 元素从右到左布局。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1099,7 +1098,7 @@ export declare enum Direction {
   Rtl = 1,
 
   /**
-   * Use the default layout direction.
+   * 使用系统默认布局方向。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1109,7 +1108,7 @@ export declare enum Direction {
 }
 
 /**
- * Used to set the status of the scroll bar.
+ * 用于设置滚动条的状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1118,7 +1117,7 @@ export declare enum Direction {
  */
 export declare enum BarState {
   /**
-   * Not displayed.
+   * 不显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1127,7 +1126,7 @@ export declare enum BarState {
   Off = 0,
 
   /**
-   * On-demand display (displayed when you touch it and disappears after 2 seconds).
+   * 按需显示（触摸时显示，2s后消失）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1136,7 +1135,7 @@ export declare enum BarState {
   Auto = 1,
 
   /**
-   * Resident display.
+   * 常驻显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1146,7 +1145,7 @@ export declare enum BarState {
 }
 
 /**
- * Sliding effect
+ * 定义滚动容器的滑动效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1155,8 +1154,7 @@ export declare enum BarState {
  */
 export declare enum EdgeEffect {
   /**
-   * Elastic physical action, sliding to the edge can continue to slide for a distance based on the initial speed or
-   * touch event, and spring back when released.
+   * 弹性物理动效，滑动到边缘后可以根据初始速度或通过触摸事件继续滑动一段距离，松手后回弹。<br />API version 22及之前版本，拖动滚动条，滚动组件的弹性物理动效不生效。<br />从API version 23开始，通过手指拖动滚动条，滚动组件的弹性物理动效可以生效。通过鼠标拖动滚动条，滚动组件的弹性物理动效不能生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1174,7 +1172,7 @@ export declare enum EdgeEffect {
   Fade = 1,
 
   /**
-   * Sliding to the edge has no effect.
+   * 滑动到边缘后无效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1184,7 +1182,7 @@ export declare enum EdgeEffect {
 }
 
 /**
- * Alignment enumeration description.
+ * 定义容器元素绘制区域内的子元素的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1193,7 +1191,7 @@ export declare enum EdgeEffect {
  */
 export declare enum Alignment {
   /**
-   * Top Start.
+   * 顶部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1202,7 +1200,7 @@ export declare enum Alignment {
   TopStart = 0,
 
   /**
-   * The top is centered horizontally.
+   * 顶部水平居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1211,7 +1209,7 @@ export declare enum Alignment {
   Top = 1,
 
   /**
-   * Top tail end.
+   * 顶部末尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1220,7 +1218,7 @@ export declare enum Alignment {
   TopEnd = 2,
 
   /**
-   * The starting end is centered longitudinally.
+   * 起始端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1229,7 +1227,7 @@ export declare enum Alignment {
   Start = 3,
 
   /**
-   * Center horizontal and vertical.
+   * 水平垂直居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1238,7 +1236,7 @@ export declare enum Alignment {
   Center = 4,
 
   /**
-   * The tail end is centered longitudinally.
+   * 末尾端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1247,7 +1245,7 @@ export declare enum Alignment {
   End = 5,
 
   /**
-   * Bottom starting end.
+   * 底部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1256,7 +1254,7 @@ export declare enum Alignment {
   BottomStart = 6,
 
   /**
-   * The bottom is centered horizontally.
+   * 底部水平居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1265,7 +1263,7 @@ export declare enum Alignment {
   Bottom = 7,
 
   /**
-   * Bottom end.
+   * 底部末尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1275,7 +1273,7 @@ export declare enum Alignment {
 }
 
 /**
- * Alignment enumeration description.
+ * 用于支持align、[layoutGravity]{@link CommonMethod#layoutGravity}属性镜像特性的枚举类型。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1284,7 +1282,7 @@ export declare enum Alignment {
  */
 export declare enum LocalizedAlignment {
   /**
-   * Top Start.
+   * 顶部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1292,7 +1290,7 @@ export declare enum LocalizedAlignment {
    */
   TOP_START = 'top_start',
   /**
-   * The top is centered horizontally.
+   * 顶部横向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1300,7 +1298,7 @@ export declare enum LocalizedAlignment {
    */
   TOP = 'top',
   /**
-   * Top tail end.
+   * 顶部尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1308,7 +1306,7 @@ export declare enum LocalizedAlignment {
    */
   TOP_END = 'top_end',
   /**
-   * The starting end is centered longitudinally.
+   * 起始端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1316,7 +1314,7 @@ export declare enum LocalizedAlignment {
    */
   START = 'start',
   /**
-   * Center horizontal and vertical.
+   * 横向和纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1324,7 +1322,7 @@ export declare enum LocalizedAlignment {
    */
   CENTER = 'center',
   /**
-   * The tail end is centered longitudinally.
+   * 尾端纵向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1332,7 +1330,7 @@ export declare enum LocalizedAlignment {
    */
   END = 'end',
   /**
-   * Bottom starting end.
+   * 底部起始端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1340,7 +1338,7 @@ export declare enum LocalizedAlignment {
    */
   BOTTOM_START = 'bottom_start',
   /**
-   * The bottom is centered horizontally.
+   * 底部横向居中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1348,7 +1346,7 @@ export declare enum LocalizedAlignment {
    */
   BOTTOM = 'bottom',
   /**
-   * Bottom end.
+   * 底部尾端。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1459,7 +1457,7 @@ export declare enum Visibility {
 }
 
 /**
- * LineCapStyle enumeration description
+ * 线条端点样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1468,7 +1466,7 @@ export declare enum Visibility {
  */
 export declare enum LineCapStyle {
   /**
-   * The two ends of the dividing line are parallel lines.
+   * 线条两端为平行线，不额外扩展。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1477,7 +1475,7 @@ export declare enum LineCapStyle {
   Butt = 0,
 
   /**
-   * The two ends of the dividing line are semicircles.
+   * 在线条两端延伸半个圆，直径等于线宽。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1486,8 +1484,7 @@ export declare enum LineCapStyle {
   Round = 1,
 
   /**
-   * Extends half a circle at the end of the path with a width equal to half the line width and a height equal to the
-   * line width.
+   * 在线条两端延伸一个矩形，宽度等于线宽的一半，高度等于线宽。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1526,7 +1523,7 @@ export declare enum Axis {
 
 
 /**
- * HorizontalAlign enumeration description.
+ * 定义子组件在水平方向上的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1535,7 +1532,7 @@ export declare enum Axis {
  */
 export declare enum HorizontalAlign {
   /**
-   * Aligns the start end in the language direction.
+   * 按照语言方向起始端对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1544,7 +1541,7 @@ export declare enum HorizontalAlign {
   Start = 0,
 
   /**
-   * Center alignment. The default alignment mode is used.
+   * 居中对齐，默认对齐方式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1553,7 +1550,7 @@ export declare enum HorizontalAlign {
   Center = 1,
 
   /**
-   * Aligns the ends in the language direction.
+   * 按照语言方向末端对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1563,7 +1560,7 @@ export declare enum HorizontalAlign {
 }
 
 /**
- * FlexAlign enumeration description.
+ * 定义元素在容器主轴上的对齐格式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1572,8 +1569,7 @@ export declare enum HorizontalAlign {
  */
 export declare enum FlexAlign {
   /**
-   * The element is aligned at the head of the principal axis,
-   * the first element is aligned with the head of the row, and subsequent elements are aligned with the previous one.
+   * 元素在主轴方向首端对齐，第一个元素与行首对齐，后续元素与前一个对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1582,9 +1578,7 @@ export declare enum FlexAlign {
   Start = 0,
 
   /**
-   * The elements are centered in the direction of the principal axis,
-   * and the first element is the same distance from the beginning of the row as the last element is from the end of
-   * the row.
+   * 元素在主轴方向中心对齐，第一个元素与行首的距离和最后一个元素与行尾的距离相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1593,8 +1587,7 @@ export declare enum FlexAlign {
   Center = 1,
 
   /**
-   * The element is aligned at the tail of the principal axis,
-   * the last element is aligned at the end of the row, and the other elements are aligned with the next.
+   * 元素在主轴方向尾部对齐，最后一个元素与行尾对齐，其余元素与后一个对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1603,9 +1596,7 @@ export declare enum FlexAlign {
   End = 2,
 
   /**
-   * Elastic elements are evenly distributed in the direction of the Flex principal axis,
-   * with the same distance between adjacent elements.
-   * The first element aligns with the beginning of the line, and the last element aligns with the end of the line.
+   * Flex主轴方向均匀分配弹性元素，相邻元素之间距离相同。第一个元素与行首对齐，最后一个元素与行尾对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1614,10 +1605,7 @@ export declare enum FlexAlign {
   SpaceBetween = 3,
 
   /**
-   * Elastic elements are evenly distributed in the direction of the Flex principal axis,
-   *  with the same distance between adjacent elements. Half the distance between adjacent elements as the distance
-   * between
-   * the first element and the distance between the last element and the end of the row.
+   * Flex主轴方向均匀分配弹性元素，相邻元素之间距离相同。第一个元素到行首的距离和最后一个元素到行尾的距离是相邻元素之间距离的一半。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1626,9 +1614,7 @@ export declare enum FlexAlign {
   SpaceAround = 4,
 
   /**
-   * Elements in the Flex axis direction are evenly spaced.
-   * The spacing between adjacent elements, the spacing between the first element and the beginning of the row,
-   * and the spacing between the last element and the end of the row are the same.
+   * Flex主轴方向均匀分配弹性元素，相邻元素之间的距离、第一个元素与行首的间距、最后一个元素到行尾的间距均相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1638,7 +1624,7 @@ export declare enum FlexAlign {
 }
 
 /**
- * ItemAlign enumeration description
+ * 定义元素在容器中交叉轴的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1647,7 +1633,7 @@ export declare enum FlexAlign {
  */
 export declare enum ItemAlign {
   /**
-   * Use the default configuration in the Flex container.
+   * 使用Flex容器中的默认配置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1656,7 +1642,7 @@ export declare enum ItemAlign {
   Auto = 0,
 
   /**
-   * The element is in the Flex container with the cross-axis direction head aligned.
+   * 元素在Flex容器中，沿交叉轴方向首部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1665,7 +1651,7 @@ export declare enum ItemAlign {
   Start = 1,
 
   /**
-   * The element is centered in the Flex container with the cross axis direction aligned.
+   * 元素在Flex容器中，沿交叉轴方向居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1674,7 +1660,7 @@ export declare enum ItemAlign {
   Center = 2,
 
   /**
-   * The element is bottom aligned in the Flex container with the cross axis direction.
+   * 元素在Flex容器中，沿交叉轴方向底部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1683,7 +1669,7 @@ export declare enum ItemAlign {
   End = 3,
 
   /**
-   * Element In the Flex container, the cross-axis direction text baseline is aligned.
+   * 元素在Flex容器中，交叉轴方向文本基线对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1692,8 +1678,8 @@ export declare enum ItemAlign {
   Baseline = 4,
 
   /**
-   * Element In a Flex container, the fill is stretched across the axis and, when no dimension is set, to the container
-   * size.
+   * 元素在Flex容器中，沿交叉轴方向拉伸填充。容器为Flex且设置Wrap为FlexWrap.Wrap或FlexWrap.WrapReverse时，元素拉伸到与当前行/列交叉轴长度最长的元素尺寸。其余情况下，无论元素尺寸是否设置，均
+   * 拉伸到容器尺寸。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1703,7 +1689,7 @@ export declare enum ItemAlign {
 }
 
 /**
- * FlexDirection enumeration description
+ * 定义子组件在Flex容器上排列的方向，即主轴的方向。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1712,7 +1698,7 @@ export declare enum ItemAlign {
  */
 export declare enum FlexDirection {
   /**
-   * The main axis is consistent with the row direction as the layout mode.
+   * 主轴与行方向一致作为布局模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1721,7 +1707,7 @@ export declare enum FlexDirection {
   Row = 0,
 
   /**
-   * The main axis is consistent with the column direction as the layout mode.
+   * 主轴与列方向一致作为布局模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1730,7 +1716,7 @@ export declare enum FlexDirection {
   Column = 1,
 
   /**
-   * The layout is in the opposite direction to the Row direction.
+   * 与Row方向相反方向进行布局。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1739,7 +1725,7 @@ export declare enum FlexDirection {
   RowReverse = 2,
 
   /**
-   * Layout in the opposite direction to the column.
+   * 与Column相反方向进行布局。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1758,7 +1744,7 @@ export declare enum FlexDirection {
  */
 export declare enum PixelRoundCalcPolicy {
   /**
-   * No Force round the component boundary coordinates to integer pixel.
+   * 非取整计算。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1766,7 +1752,7 @@ export declare enum PixelRoundCalcPolicy {
    */
   NO_FORCE_ROUND = 0,
   /**
-   * Force ceil the component boundary coordinates to integer pixel.
+   * 向上取整计算。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1774,7 +1760,7 @@ export declare enum PixelRoundCalcPolicy {
    */
   FORCE_CEIL = 1,
   /**
-   * Force floor the component boundary coordinates to integer pixel.
+   * 向下取整计算。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1793,7 +1779,7 @@ export declare enum PixelRoundCalcPolicy {
  */
 export declare enum PixelRoundMode {
   /**
-   * Do pixel round on layout finish.
+   * 在组件测量大小和位置后进行像素取整，默认值为0。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1801,7 +1787,7 @@ export declare enum PixelRoundMode {
    */
   PIXEL_ROUND_ON_LAYOUT_FINISH = 0,
   /**
-   * Do pixel round after measure.
+   * 在组件测量大小结束后进行像素取整。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1811,7 +1797,7 @@ export declare enum PixelRoundMode {
 }
 
 /**
- * FlexWrap enumeration description
+ * 定义Flex容器是单行/列还是多行/列排列。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1820,7 +1806,7 @@ export declare enum PixelRoundMode {
  */
 export declare enum FlexWrap {
   /**
-   * The Flex container has a single row/column layout of elements, and children are allowed to go beyond the container.
+   * Flex容器的元素以单行/列布局，子元素尽可能约束在容器内。当子元素有最小尺寸约束等设置时，Flex容器不会对其强制弹性压缩。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1829,8 +1815,7 @@ export declare enum FlexWrap {
   NoWrap = 0,
 
   /**
-   * The elements of the Flex container are arranged in multiple rows or columns, and the sub-items are allowed to
-   * exceed the container.
+   * Flex容器的元素以多行/列排布，子项允许超出容器。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1839,8 +1824,7 @@ export declare enum FlexWrap {
   Wrap = 1,
 
   /**
-   * The elements of the Flex container are arranged in reverse multiple rows/columns, and children are allowed to
-   * exceed the container.
+   * Flex容器的元素以反向多行/列排布，子项允许超出容器。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1850,7 +1834,7 @@ export declare enum FlexWrap {
 }
 
 /**
- * VerticalAlign enumeration description
+ * 定义子组件在垂直方向上的对齐格式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1859,7 +1843,7 @@ export declare enum FlexWrap {
  */
 export declare enum VerticalAlign {
   /**
-   * Top alignment.
+   * 顶部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1868,7 +1852,7 @@ export declare enum VerticalAlign {
   Top = 0,
 
   /**
-   * Center alignment. The default alignment mode is used.
+   * 居中对齐，默认对齐方式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1877,7 +1861,7 @@ export declare enum VerticalAlign {
   Center = 1,
 
   /**
-   * Bottom alignment.
+   * 底部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1887,7 +1871,7 @@ export declare enum VerticalAlign {
 }
 
 /**
- * ImageRepeat enumeration description
+ * 用于设置图片重复样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1896,7 +1880,7 @@ export declare enum VerticalAlign {
  */
 export declare enum ImageRepeat {
   /**
-   * Do not draw the picture again.
+   * 不重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1905,7 +1889,7 @@ export declare enum ImageRepeat {
   NoRepeat = 0,
 
   /**
-   * Repeat the drawing only on the horizontal axis.
+   * 只在水平轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1914,7 +1898,7 @@ export declare enum ImageRepeat {
   X = 1,
 
   /**
-   * Repeat the drawing only on the vertical axis.
+   * 只在垂直轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1923,7 +1907,7 @@ export declare enum ImageRepeat {
   Y = 2,
 
   /**
-   * Draw the picture repeatedly on both axes.
+   * 在两个轴上重复绘制图片。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1933,7 +1917,7 @@ export declare enum ImageRepeat {
 }
 
 /**
- * ImageSize enumeration description
+ * 用于设置图片宽高效果。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1942,7 +1926,7 @@ export declare enum ImageRepeat {
  */
 export declare enum ImageSize {
   /**
-   * Keep the scale of the original image unchanged.
+   * 保持原图的比例不变。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1951,8 +1935,7 @@ export declare enum ImageSize {
   Auto = 2,
 
   /**
-   * Keep the aspect ratio to zoom in or out the image so that both sides of the image are greater than or equal to the
-   * display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片两边都大于或等于显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1961,7 +1944,7 @@ export declare enum ImageSize {
   Cover = 1,
 
   /**
-   * Keep the aspect ratio to zoom out or zoom in so that the image is completely displayed within the display boundary.
+   * 保持宽高比进行缩小或者放大，使得图片完全显示在显示边界内。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1970,7 +1953,7 @@ export declare enum ImageSize {
   Contain = 0,
 
   /**
-   * Zoom in or out without maintaining the aspect ratio so that the image fills the display boundary.
+   * 不保持宽高比进行放大缩小，使得图片充满显示边界。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2101,7 +2084,7 @@ export declare enum SharedTransitionEffectType {
 }
 
 /**
- * Text style
+ * 字体样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2110,7 +2093,7 @@ export declare enum SharedTransitionEffectType {
  */
 export declare enum FontStyle {
   /**
-   * Default style.
+   * 标准的字体样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2119,7 +2102,7 @@ export declare enum FontStyle {
   Normal = 0,
 
   /**
-   * Italic style.
+   * 斜体的字体样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2129,7 +2112,7 @@ export declare enum FontStyle {
 }
 
 /**
- * The font weight of the text
+ * 字体粗细。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2138,7 +2121,7 @@ export declare enum FontStyle {
  */
 export declare enum FontWeight {
   /**
-   * Defines a lighter value than [Inherited Value]..
+   * 100字重，字体较细。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2147,7 +2130,7 @@ export declare enum FontWeight {
   Lighter = 0,
 
   /**
-   * Normal font. Equivalent to a digital value of 400.
+   * 400字重，字体粗细正常。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2156,7 +2139,7 @@ export declare enum FontWeight {
   Normal = 1,
 
   /**
-   * Defines a more general value than [Inherited Value].
+   * 400字重，字体粗细正常，与Normal效果相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2165,7 +2148,7 @@ export declare enum FontWeight {
   Regular = 2,
 
   /**
-   * Defines a value that is more centered than [Inherited Value].
+   * 500字重，字体粗细适中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2174,7 +2157,7 @@ export declare enum FontWeight {
   Medium = 3,
 
   /**
-   * Bold. Equivalent to a numeric value of 700.
+   * 700字重，字体较粗。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2183,7 +2166,7 @@ export declare enum FontWeight {
   Bold = 4,
 
   /**
-   * Defines a value that is heavier than [Inherited Value].
+   * 900字重，字体非常粗。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2193,7 +2176,7 @@ export declare enum FontWeight {
 }
 
 /**
- * Alignment of text.
+ * 文本段落在水平方向的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2202,7 +2185,7 @@ export declare enum FontWeight {
  */
 export declare enum TextAlign {
   /**
-   * Center the text.
+   * 水平居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2211,7 +2194,7 @@ export declare enum TextAlign {
   Center = 1,
 
   /**
-   * The text is aligned in the same direction as the writing
+   * 水平对齐首部。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2220,7 +2203,7 @@ export declare enum TextAlign {
   Start = 0,
 
   /**
-   * The text is aligned in the opposite direction of writing
+   * 水平对齐尾部。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2229,7 +2212,7 @@ export declare enum TextAlign {
   End = 2,
 
   /**
-   * Justify the text.
+   * 双端对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2238,7 +2221,7 @@ export declare enum TextAlign {
   JUSTIFY = 3,
 
   /**
-   * The text is aligned in the left direction.
+   * 左对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2247,7 +2230,7 @@ export declare enum TextAlign {
   LEFT = 4,
 
   /**
-   * The text is aligned in the right direction.
+   * 右对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2257,7 +2240,7 @@ export declare enum TextAlign {
 }
 
 /**
- * Declare how text overflows.
+ * 文本超长时的显示方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2266,7 +2249,7 @@ export declare enum TextAlign {
  */
 export declare enum TextOverflow {
   /**
-   * When the text overflows its dimensions, the text will not be cropped.
+   * 文本超长时按最大行截断显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2275,7 +2258,7 @@ export declare enum TextOverflow {
   None = 0,
 
   /**
-   * When the text overflows its dimensions, the text will be cropped and displayed.
+   * 文本超长时按最大行截断显示，与None效果相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2284,7 +2267,7 @@ export declare enum TextOverflow {
   Clip = 1,
 
   /**
-   * If the text overflows its dimensions, the text that cannot be displayed shall be replaced by ellipsis.
+   * 文本超长时显示不下的文本用省略号代替。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2293,7 +2276,7 @@ export declare enum TextOverflow {
   Ellipsis = 2,
 
   /**
-   * When the text overflows its dimensions, the text will scroll for displaying.
+   * 文本超长时以跑马灯的方式展示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2303,7 +2286,7 @@ export declare enum TextOverflow {
 }
 
 /**
- * Type of text modifier.
+ * 装饰线类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2312,7 +2295,7 @@ export declare enum TextOverflow {
  */
 export declare enum TextDecorationType {
   /**
-   * Do not use text decorative lines.
+   * 不使用文本装饰线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2321,7 +2304,7 @@ export declare enum TextDecorationType {
   None = 0,
 
   /**
-   * Underline the words.
+   * 文字下划线修饰。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2330,7 +2313,7 @@ export declare enum TextDecorationType {
   Underline = 1,
 
   /**
-   * Text is in all uppercase.
+   * 文字上划线修饰。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2339,7 +2322,7 @@ export declare enum TextDecorationType {
   Overline = 2,
 
   /**
-   * A modifier line that passes through the text.
+   * 穿过文本的修饰线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2349,7 +2332,7 @@ export declare enum TextDecorationType {
 }
 
 /**
- * Letter type in text
+ * 文本大小写的样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2358,7 +2341,7 @@ export declare enum TextDecorationType {
  */
 export declare enum TextCase {
   /**
-   * The default is normal.
+   * 保持文本原有大小写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2367,7 +2350,7 @@ export declare enum TextCase {
   Normal = 0,
 
   /**
-   * The text is all lowercase.
+   * 文本采用全小写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2376,7 +2359,7 @@ export declare enum TextCase {
   LowerCase = 1,
 
   /**
-   * The text is all uppercase.
+   * 文本采用全大写。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2386,7 +2369,7 @@ export declare enum TextCase {
 }
 
 /**
- * Enum of text height adaptation
+ * 文本自适应布局调整字号的方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2395,9 +2378,7 @@ export declare enum TextCase {
  */
 export declare enum TextHeightAdaptivePolicy {
   /**
-   * Priority is given to using the maxLines attribute to adapt the text height.
-   * If the layout size using the maxLines attribute exceeds the layout constraint, try reducing the font size to
-   * display more text.
+   * 设置文本高度自适应方式为以[maxLines]{@link TextAreaAttribute#maxLines(value: number)}优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2406,9 +2387,7 @@ export declare enum TextHeightAdaptivePolicy {
   MAX_LINES_FIRST = 0,
 
   /**
-   * Priority is given to using the minFontSize attribute to adapt the text height.
-   * If the text can be layout in a single line using the minFontSize property, try increasing the font size and using
-   * the maximum possible font size.
+   * 设置文本高度自适应方式为以缩小字体优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2417,10 +2396,7 @@ export declare enum TextHeightAdaptivePolicy {
   MIN_FONT_SIZE_FIRST = 1,
 
   /**
-   * Priority is given to using the layout constraint to adapt the text height.
-   * If the layout size exceeds the layout constraint, try reducing the font size. If the layout size still exceeds
-   * the layout constraint after reducing the font size to minFontSize, remove the lines that exceed the layout
-   * constraint.
+   * 设置文本高度自适应方式为以布局约束（高度）优先。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2430,7 +2406,7 @@ export declare enum TextHeightAdaptivePolicy {
 }
 
 /**
- * ResponseType for contextMenu
+ * 上下文菜单的触发方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2503,7 +2479,7 @@ export declare enum HoverEffect {
 }
 
 /**
- * Placement enumeration description
+ * 气泡显示的位置。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2512,7 +2488,7 @@ export declare enum HoverEffect {
  */
 export declare enum Placement {
   /**
-   * Left placement
+   * 气泡提示位于组件左侧，与组件左侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2521,7 +2497,7 @@ export declare enum Placement {
   Left = 0,
 
   /**
-   * Right placement
+   * 气泡提示位于组件右侧，与组件右侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2530,7 +2506,7 @@ export declare enum Placement {
   Right = 1,
 
   /**
-   * Top placement
+   * 气泡提示位于组件上侧，与组件上侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2539,7 +2515,7 @@ export declare enum Placement {
   Top = 2,
 
   /**
-   * Bottom placement
+   * 气泡提示位于组件下侧，与组件下侧中心对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2548,7 +2524,7 @@ export declare enum Placement {
   Bottom = 3,
 
   /**
-   * TopLeft placement
+   * 气泡提示位于组件上侧，从API version 9开始，与组件左侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2557,7 +2533,7 @@ export declare enum Placement {
   TopLeft = 4,
 
   /**
-   * TopRight placement
+   * 气泡提示位于组件上侧，从API version 9开始，与组件右侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2566,7 +2542,7 @@ export declare enum Placement {
   TopRight = 5,
 
   /**
-   * BottomLeft placement
+   * 气泡提示位于组件下侧，从API version 9开始，与组件左侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2575,7 +2551,7 @@ export declare enum Placement {
   BottomLeft = 6,
 
   /**
-   * BottomRight placement
+   * 气泡提示位于组件下侧，从API version 9开始，与组件右侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2584,7 +2560,7 @@ export declare enum Placement {
   BottomRight = 7,
 
   /**
-   * LeftTop placement
+   * 气泡提示位于组件左侧，与组件上侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2593,7 +2569,7 @@ export declare enum Placement {
   LeftTop = 8,
 
   /**
-   * LeftBottom placement
+   * 气泡提示位于组件左侧，与组件下侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2602,7 +2578,7 @@ export declare enum Placement {
   LeftBottom = 9,
 
   /**
-   * RightTop placement
+   * 气泡提示位于组件右侧，与组件上侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2611,7 +2587,7 @@ export declare enum Placement {
   RightTop = 10,
 
   /**
-   * RightBottom placement
+   * 气泡提示位于组件右侧，与组件下侧边缘对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2621,7 +2597,7 @@ export declare enum Placement {
 }
 
 /**
- * ArrowPointPosition enumeration description
+ * 气泡箭头的位置。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2630,7 +2606,7 @@ export declare enum Placement {
  */
 export declare enum ArrowPointPosition {
   /**
-   * Target start position
+   * 水平方向：位于父组件最左侧；垂直方向：位于父组件最上侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2639,7 +2615,7 @@ export declare enum ArrowPointPosition {
   START = 'Start',
 
   /**
-   * Target center position
+   * 位于父组件居中位置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2648,7 +2624,7 @@ export declare enum ArrowPointPosition {
   CENTER = 'Center',
 
   /**
-   * Target end position
+   * 水平方向：位于父组件最右侧；垂直方向：位于父组件最下侧。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2658,7 +2634,7 @@ export declare enum ArrowPointPosition {
 }
 
 /**
- * Indicates the share option.
+ * 剪贴板复制范围。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2667,7 +2643,7 @@ export declare enum ArrowPointPosition {
  */
 export declare enum CopyOptions {
   /**
-   * Not allow share.
+   * 不支持复制。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2676,7 +2652,7 @@ export declare enum CopyOptions {
   None = 0,
 
   /**
-   * Share in app.
+   * 支持仅在当前应用内复制粘贴。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2685,7 +2661,7 @@ export declare enum CopyOptions {
   InApp = 1,
 
   /**
-   * Share in local device.
+   * 支持复制后在所有应用内粘贴。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2805,7 +2781,7 @@ export declare enum HitTestMode {
 }
 
 /**
- * Title height.
+ * 设置标题栏的推荐高度。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2814,7 +2790,7 @@ export declare enum HitTestMode {
  */
 export declare enum TitleHeight {
   /**
-   * Title height when only main title is available.
+   * 只有主标题时，标题栏的推荐高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2823,7 +2799,7 @@ export declare enum TitleHeight {
   MainOnly = 0,
 
   /**
-   * Title height when main title and subtitle are both available.
+   * 同时有主标题和副标题时，标题栏的推荐高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3036,11 +3012,119 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 23 static
    */
-  DPAD_RIGHT = 17
+  DPAD_RIGHT = 17,
+
+  /**
+   * 表示键盘上的CapsLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * 表示键盘上的ScrollLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SCROLL_LOCK = 20,
+
+  /**
+   * 表示键盘上的Pause/Break键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAUSE_BREAK = 21,
+
+  /**
+   * 表示键盘上的NumLock键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  NUM_LOCK = 22,
+
+  /**
+   * 表示键盘上的Insert键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  INSERT = 23,
+
+  /**
+   * 表示键盘上的Delete键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  DELETE = 24,
+
+  /**
+   * 表示键盘上的Home键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  HOME = 25,
+
+  /**
+   * 表示键盘上的End键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  END = 26,
+
+  /**
+   * 表示键盘上的Page Up键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_UP = 27,
+
+  /**
+   * 表示键盘上的Page Down键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_DOWN = 28,
+
+  /**
+   * 表示键盘上的Enter键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ENTER = 29,
+
+  /**
+   * 表示键盘上的Backspace键。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BACKSPACE = 30
 }
 
 /**
- * The alignment of ImageSpan
+ * 图片基于行高的对齐方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3049,7 +3133,7 @@ export declare enum FunctionKey {
  */
 export declare enum ImageSpanAlignment {
   /**
-   * Indicating that the bottom of the ImageSpan should be aligned with the baseline of the surrounding text.
+   * 图片下边沿与文本BaseLine对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3058,7 +3142,7 @@ export declare enum ImageSpanAlignment {
   BASELINE = 4,
 
   /**
-   * Indicating that the bottom of the ImageSpan should be aligned with the bottom of the surrounding text.
+   * 图片下边沿与行下边沿对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3067,7 +3151,7 @@ export declare enum ImageSpanAlignment {
   BOTTOM = 3,
 
   /**
-   * Indicating that the center of the ImageSpan should be aligned with the center of the surrounding text.
+   * 图片中间与行中间对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3076,7 +3160,7 @@ export declare enum ImageSpanAlignment {
   CENTER = 2,
 
   /**
-   * Indicating that the top of the ImageSpan should be aligned with the top of the surrounding text.
+   * 图片上边沿与行上边沿对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3085,7 +3169,7 @@ export declare enum ImageSpanAlignment {
   TOP = 1,
 
   /**
-   * Indicating that the ImageSpan should be aligned by the paragraph's textVerticalAlign.
+   * 对齐方式跟随Text父组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3104,7 +3188,7 @@ export declare enum ImageSpanAlignment {
  */
 export declare enum ObscuredReasons {
   /**
-   * Displayed data should appear as generic placeholders.
+   * 显示的数据为通用占位符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3114,7 +3198,7 @@ export declare enum ObscuredReasons {
 }
 
 /**
- * Text content style.
+ * 文本框多态样式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3123,7 +3207,7 @@ export declare enum ObscuredReasons {
  */
 export declare enum TextContentStyle {
   /**
-   * Text content default style.
+   * 默认风格。光标宽度为1.5vp，光标高度与文本选中高亮高度和字体大小相关。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3132,7 +3216,13 @@ export declare enum TextContentStyle {
   DEFAULT = 0,
 
   /**
-   * Text content inline style.
+   * 内联输入风格，也称内联模式。文本选中高亮高度与输入框高度相同。
+   *
+   * 内联输入是在有明显的编辑态/非编辑态的区分场景下使用，例如：文件列表视图中的重命名。
+   *
+   * 不支持showError属性。
+   *
+   * 内联模式下，不支持拖入文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3207,7 +3297,7 @@ export declare enum XComponentType {
 }
 
 /**
- * Nested scroll nested mode
+ * 定义嵌套滚动组件中的嵌套模式。
 
  * @enum { number } NestedScrollMode
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3216,7 +3306,7 @@ export declare enum XComponentType {
  */
 export declare enum NestedScrollMode {
   /**
-   * Only Self response scrolling.
+   * 只自身滚动，不与父组件联动。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3225,7 +3315,7 @@ export declare enum NestedScrollMode {
   SELF_ONLY = 0,
 
   /**
-   * Self priority response scrolling.
+   * 自身先滚动，自身滚动到边缘以后父组件滚动。父组件滚动到边缘以后，如果父组件有边缘效果，则父组件触发边缘效果，否则子组件触发边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3234,7 +3324,7 @@ export declare enum NestedScrollMode {
   SELF_FIRST = 1,
 
   /**
-   * Parent scrollable component priority response scrolling.
+   * 父组件先滚动，父组件滚动到边缘以后自身滚动。自身滚动到边缘后，如果有边缘效果，会触发自身的边缘效果，否则触发父组件的边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3243,7 +3333,7 @@ export declare enum NestedScrollMode {
   PARENT_FIRST = 2,
 
   /**
-   * Both self and parent scrollable component response scrolling.
+   * 自身和父组件同时滚动，自身和父组件都到达边缘以后，如果自身有边缘效果，则自身触发边缘效果，否则父组件触发边缘效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3253,7 +3343,7 @@ export declare enum NestedScrollMode {
 }
 
 /**
- * The possible source of scroll event
+ * 滑动操作的来源。
  * @enum { number } ScrollSource
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3269,7 +3359,7 @@ export declare enum ScrollSource {
   DRAG = 0,
 
   /**
-   * Fling after the drag has ended with velocity.
+   * 拖拽结束之后的惯性滑动。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3277,7 +3367,7 @@ export declare enum ScrollSource {
   FLING = 1,
 
   /**
-   * Over scroll with EdgeEffect.Spring.
+   * EdgeEffect.Spring的边缘滚动效果。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3285,7 +3375,7 @@ export declare enum ScrollSource {
   EDGE_EFFECT = 2,
 
   /**
-   * Other user input except drag, such as mouse wheel, key event.
+   * 除拖拽外的其他用户输入，如鼠标滚轮、键盘事件等。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3293,7 +3383,7 @@ export declare enum ScrollSource {
   OTHER_USER_INPUT = 3,
 
   /**
-   * Drag events of scroll bar.
+   * 滚动条的拖拽事件。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3301,7 +3391,7 @@ export declare enum ScrollSource {
   SCROLL_BAR = 4,
 
   /**
-   * Fling after the drag on scroll bar has ended with velocity.
+   * 滚动条拖拽结束后的带速度的惯性滑动。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3309,7 +3399,7 @@ export declare enum ScrollSource {
   SCROLL_BAR_FLING = 5,
 
   /**
-   * Member methods of Scroller without animation.
+   * Scroller的不带动效方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3317,7 +3407,7 @@ export declare enum ScrollSource {
   SCROLLER = 6,
 
   /**
-   * Member methods of Scroller with animation.
+   * Scroller的带动效方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3481,7 +3571,7 @@ export declare enum RenderFit {
 }
 
 /**
- * The Button Style of dialog,
+ * 弹窗按钮的样式。
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3489,7 +3579,7 @@ export declare enum RenderFit {
  */
 export declare enum DialogButtonStyle {
   /**
-   * Default Style.
+   * 白底蓝字（深色主题下为黑底蓝字）。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3497,7 +3587,7 @@ export declare enum DialogButtonStyle {
   DEFAULT = 0,
 
   /**
-   * Highlight Style.
+   * 蓝底白字。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3506,7 +3596,7 @@ export declare enum DialogButtonStyle {
 }
 
 /**
- * Enum of word break
+ * 断行规则。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3515,7 +3605,7 @@ export declare enum DialogButtonStyle {
  */
 export declare enum WordBreak {
   /**
-   * By default, CJK text can be wrapped between any 2 characters, and non-CJK text can only be wrapped in spaces.
+   * CJK(中文、日文、韩文)文本可以在任意2个字符间断行，而Non-CJK文本（如英文等）只能在空白符处断行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3524,7 +3614,7 @@ export declare enum WordBreak {
   NORMAL = 0,
 
   /**
-   * Non-CJK text be wrapped at any character
+   * 对于Non-CJK的文本，可在任意2个字符间断行。对于CJK文本，效果与NORMAL一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3533,8 +3623,8 @@ export declare enum WordBreak {
   BREAK_ALL = 1,
 
   /**
-   * Non-CJK text can be wrapped at any character
-   * and if a complete word can be preserved in space breaks, the word must be kept on the line.
+   * 与BREAK_ALL相同，对于Non-CJK的文本可在任意2个字符间断行，一行文本中有断行破发点（如空白符）时，优先按破发点换行，保障单词优先完整显示。若整一行文本均无断行破发点，则在任意2个字符间断行。对于CJK文本，效果与
+   * NORMAL一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3543,7 +3633,7 @@ export declare enum WordBreak {
   BREAK_WORD = 2,
 
   /**
-   * For supported languages, line breaks can be performed by syllables.
+   * 每行末尾单词尝试通过连字符“-”进行断行，若无法添加连字符“-”，则跟BREAK_WORD保持一致。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3553,7 +3643,7 @@ export declare enum WordBreak {
 }
 
 /**
- * Enum of line break strategy
+ * 折行规则。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3562,8 +3652,7 @@ export declare enum WordBreak {
  */
 export declare enum LineBreakStrategy {
   /**
-   * By default. Display as many characters as possible on each line until no more characters
-   * can be displayed on that line, and do not automatically add hyphens under this strategy
+   * 使每一行尽可能显示多的字符，直到这一行不能显示更多字符时进行折行。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3572,8 +3661,7 @@ export declare enum LineBreakStrategy {
   GREEDY = 0,
 
   /**
-   * High quality folding. Optimize the layout of the entire text's line breaks and automatically
-   * add hyphens if necessary.
+   * 在BALANCED的基础上，尽可能填满行，同时最后一行的权重较低，可能出现最后一行留白较多的情形。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3582,8 +3670,7 @@ export declare enum LineBreakStrategy {
   HIGH_QUALITY = 1,
 
   /**
-   * Balanced folding. We will try our best to ensure that the width of each line in a paragraph
-   * is the same, and if necessary, we will add conjunction
+   * 在不拆词的情况下，尽量使一个段落中每一行的宽度相同。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3659,7 +3746,7 @@ export declare enum IlluminatedType {
 }
 
 /**
- * Enum of ellipsisMode
+ * 省略的位置。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3668,7 +3755,7 @@ export declare enum IlluminatedType {
  */
 export declare enum EllipsisMode {
   /**
-   * The ellipsis is in the head.
+   * 省略行首内容。适用单行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3677,7 +3764,7 @@ export declare enum EllipsisMode {
   START = 0,
 
   /**
-   * The ellipsis is in the middle.
+   * 省略行中内容。适用单行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3686,7 +3773,7 @@ export declare enum EllipsisMode {
   CENTER = 1,
 
   /**
-   * The ellipsis is at the end.
+   * 省略行末内容。适用单行文本和多行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3695,7 +3782,7 @@ export declare enum EllipsisMode {
   END = 2,
 
    /**
-    * The ellipsis is in the head. It is valid for multiline and single line.
+    * 省略行首内容。适用单行文本和多行文本场景。
     *
     * @syscap SystemCapability.ArkUI.ArkUI.Full
     * @stagemodelonly
@@ -3704,7 +3791,7 @@ export declare enum EllipsisMode {
    MULTILINE_START = 3,
 
   /**
-   * The ellipsis is in the middle. It is valid for multiline and single line.
+   * 省略行中内容。适用单行文本和多行文本场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3714,7 +3801,7 @@ export declare enum EllipsisMode {
 }
 
 /**
- * A type which can be undefined
+ * 在使用该类型时，其值可以是泛型参数T所指定的类型，也可以是undefined。
  *
  * @typedef { T | undefined } Nullable<T>
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3724,7 +3811,7 @@ export declare enum EllipsisMode {
 export type Nullable<T> = T | undefined;
 
 /**
- * Decide whether the width of select menu fit the trigger or content
+ * 决定选择器菜单的宽度是适配触发器还是内容。
  *
  * @enum { string }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3733,7 +3820,7 @@ export type Nullable<T> = T | undefined;
  */
 export declare enum OptionWidthMode {
   /**
-   * The menu width fit the content.
+   * 菜单宽度适配内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3742,7 +3829,7 @@ export declare enum OptionWidthMode {
   FIT_CONTENT = 'fit_content',
 
   /**
-   * The menu width fit the trigger.
+   * 菜单宽度适配触发器。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3752,7 +3839,7 @@ export declare enum OptionWidthMode {
 }
 
 /**
- * Enumerates the fold status.
+ * 定义设备的折叠状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3861,7 +3948,7 @@ export declare enum EmbeddedType {
 }
 
 /**
- * Marquee scrolling strategy after text update
+ * 跑马灯组件属性更新后，跑马灯的滚动策略。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3870,7 +3957,7 @@ export declare enum EmbeddedType {
  */
 export declare enum MarqueeUpdateStrategy {
   /**
-   * Reset scroll position and restart scroll.
+   * 跑马灯组件属性更新后，从开始位置，运行跑马灯效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3879,7 +3966,7 @@ export declare enum MarqueeUpdateStrategy {
   DEFAULT = 0,
 
   /**
-   * Preserve scroll position, just change to new text
+   * 跑马灯组件属性更新后，保持当前位置，运行跑马灯效果。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3889,7 +3976,7 @@ export declare enum MarqueeUpdateStrategy {
 }
 
 /**
- * Type of text decoration line style.
+ * 装饰线样式。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3898,7 +3985,7 @@ export declare enum MarqueeUpdateStrategy {
  */
 export declare enum TextDecorationStyle {
   /**
-   * Solid line.
+   * 单实线（默认值）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3907,7 +3994,7 @@ export declare enum TextDecorationStyle {
   SOLID = 0,
 
   /**
-   * Double lines.
+   * 双实线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3916,7 +4003,7 @@ export declare enum TextDecorationStyle {
   DOUBLE = 1,
 
   /**
-   * Dotted line.
+   * 点线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3925,7 +4012,7 @@ export declare enum TextDecorationStyle {
   DOTTED = 2,
 
   /**
-   * Dashed line.
+   * 虚线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3934,7 +4021,7 @@ export declare enum TextDecorationStyle {
   DASHED = 3,
 
   /**
-   * Wavy line.
+   * 波浪线。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3944,7 +4031,7 @@ export declare enum TextDecorationStyle {
 }
 
 /**
- * Type of text selectable.
+ * 文本可选择、可获焦状态。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3953,7 +4040,7 @@ export declare enum TextDecorationStyle {
  */
 export declare enum TextSelectableMode {
   /**
-   * set text selectable and unfocusable.
+   * 文本可选择，但不可获焦，设置属性selection、bindSelectionMenu、copyOption不影响当前行为。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3962,7 +4049,7 @@ export declare enum TextSelectableMode {
   SELECTABLE_UNFOCUSABLE = 0,
 
   /**
-   * set text selectable and focusable.
+   * 文本可选择，可获焦并Touch后获得焦点。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3971,7 +4058,7 @@ export declare enum TextSelectableMode {
   SELECTABLE_FOCUSABLE = 1,
 
   /**
-   * set text unselectable and unfocusable.
+   * 文本不可选择，不可获焦，设置属性selection、bindSelectionMenu、copyOption均不生效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3981,7 +4068,7 @@ export declare enum TextSelectableMode {
 }
 
 /**
- * Type of accessibility hover event.
+ * 辅助功能悬停事件的类型。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3990,7 +4077,7 @@ export declare enum TextSelectableMode {
  */
 export declare enum AccessibilityHoverType {
   /**
-   * Hover enter type.
+   * 手指按下时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3999,7 +4086,7 @@ export declare enum AccessibilityHoverType {
   HOVER_ENTER = 0,
 
   /**
-   * Hover move type.
+   * 触摸移动时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4008,7 +4095,7 @@ export declare enum AccessibilityHoverType {
   HOVER_MOVE = 1,
 
   /**
-   * Hover exit type.
+   * 手指抬起时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4017,7 +4104,7 @@ export declare enum AccessibilityHoverType {
   HOVER_EXIT = 2,
 
   /**
-   * Hover cancel type.
+   * 打断取消当前触发的事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4027,7 +4114,9 @@ export declare enum AccessibilityHoverType {
 }
 
 /**
- * Type of window width breakpoint.
+ * 表示窗口不同宽度阈值下对应的宽度断点枚举值。通过[getWindowWidthBreakpoint]{@link @ohos.arkui.UIContext:UIContext.getWindowWidthBreakpoint}返回。
+ *
+ * 下表列出了典型设备默认宽度断点的阈值划分，可在基于窗口宽度断点布局设计时作为参考。个别设备可根据需求通过产品化配置调整断点阈值。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4036,7 +4125,7 @@ export declare enum AccessibilityHoverType {
  */
 export declare enum WidthBreakpoint {
   /**
-   * Window width < 320vp type.
+   * 窗口宽度小于320vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4045,7 +4134,7 @@ export declare enum WidthBreakpoint {
   WIDTH_XS = 0,
 
   /**
-   * Window width >= 320vp and < 600vp type.
+   * 窗口宽度大于等于320vp，且小于600vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4054,7 +4143,7 @@ export declare enum WidthBreakpoint {
   WIDTH_SM = 1,
 
   /**
-   * Window width >= 600vp and < 840vp type.
+   * 窗口宽度大于等于600vp，且小于840vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4063,7 +4152,7 @@ export declare enum WidthBreakpoint {
   WIDTH_MD = 2,
 
   /**
-   * Window width >= 840vp and < 1440vp type.
+   * 窗口宽度大于等于840vp，且小于1440vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4072,7 +4161,7 @@ export declare enum WidthBreakpoint {
   WIDTH_LG = 3,
 
   /**
-   * Window width >= 1440vp type.
+   * 窗口宽度大于等于1440vp。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4082,7 +4171,10 @@ export declare enum WidthBreakpoint {
 }
 
 /**
- * Type of window height breakpoint.
+ * 表示窗口不同高宽比阈值下对应的高度断点枚举值。通过[getWindowHeightBreakpoint]{@link @ohos.arkui.UIContext:UIContext.getWindowHeightBreakpoint}
+ * 返回。
+ *
+ * 下表列出了典型设备默认高宽比断点的阈值划分，可在基于窗口高宽比布局设计时作为参考。个别设备可根据需求通过产品化配置调整断点阈值。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4091,7 +4183,7 @@ export declare enum WidthBreakpoint {
  */
 export declare enum HeightBreakpoint {
   /**
-   * Window aspectRatio < 0.8 type.
+   * 窗口高宽比小于0.8。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4100,7 +4192,7 @@ export declare enum HeightBreakpoint {
   HEIGHT_SM = 0,
 
   /**
-   * Window aspectRatio >= 0.8 and < 1.2 type.
+   * 窗口高宽比大于等于0.8，且小于1.2。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4109,7 +4201,7 @@ export declare enum HeightBreakpoint {
   HEIGHT_MD = 1,
 
   /**
-   * Window aspectRatio >= 1.2 type.
+   * 窗口高宽比大于等于1.2。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4299,7 +4391,7 @@ export declare enum AxisModel {
 }
 
 /**
- * Page flip mode of Swiper and Tabs on mouse wheel event.
+ * 表示鼠标滚轮翻页模式，适用于Swiper和Tabs组件。
 
  * @enum { number } PageFlipMode
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4308,7 +4400,7 @@ export declare enum AxisModel {
  */
 export declare enum PageFlipMode {
   /**
-   * Turn pages continuously according to the number of mouse wheel events.
+   * 连续翻页模式，鼠标滚轮连续滚动时翻多页。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4317,7 +4409,7 @@ export declare enum PageFlipMode {
   CONTINUOUS = 0,
 
   /**
-   * The page-turning animation remains unresponsive to other mouse wheel events until it completes.
+   * 单次翻页模式，在一次翻页动画结束前不响应滚轮事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4472,7 +4564,7 @@ export declare enum FocusDrawLevel {
 }
 
 /**
- * Menu divider mode.
+ * 分割线模式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4481,7 +4573,7 @@ export declare enum FocusDrawLevel {
  */
 export declare enum DividerMode {
   /**
-   * Menu divider mode floating above menu.
+   * 悬浮在Menu之上，默认值，不占用高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4490,7 +4582,7 @@ export declare enum DividerMode {
   FLOATING_ABOVE_MENU = 0,
 
   /**
-   * Menu divider mode embedded in menu.
+   * 在Menu中展开，参与布局计算，占用高度。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4518,7 +4610,7 @@ export declare enum EventQueryType {
 }
 
 /**
- * Tips show position type.
+ * 指定Tips跟随类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4527,7 +4619,7 @@ export declare enum EventQueryType {
  */
 export declare enum TipsAnchorType {
   /**
-   * Tips display position based on bound component.
+   * Tips跟随目标物。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4536,7 +4628,7 @@ export declare enum TipsAnchorType {
   TARGET = 0,
 
   /**
-   * Tips display position based on cursor position.
+   * Tips跟随鼠标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4555,7 +4647,7 @@ export declare enum TipsAnchorType {
  */
 export declare enum DialogDisplayMode {
   /**
-   * The dialog displayed based on screen.
+   * 弹窗在屏幕居中显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4563,7 +4655,7 @@ export declare enum DialogDisplayMode {
    */
   SCREEN_BASED = 0,
   /**
-   * The dialog displayed based on application window.
+   * 弹窗在应用窗口居中显示。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4751,7 +4843,7 @@ export enum CompetitionStrategy {
 }
 
 /**
- * Defines the state types that can be monitored by AttributeModifiers.
+ * 定义AttributeModifier可监听的状态类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4761,7 +4853,7 @@ export enum CompetitionStrategy {
 export enum AttributeModifierState {
 
   /**
-   * Normal state.
+   * 正常状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4770,7 +4862,7 @@ export enum AttributeModifierState {
   NORMAL = 0,
 
   /**
-   * Pressed state.
+   * 按压状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4779,7 +4871,7 @@ export enum AttributeModifierState {
   PRESSED = 1,
 
   /**
-   * Focused state.
+   * 获焦状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4788,7 +4880,7 @@ export enum AttributeModifierState {
   FOCUSED = 1 << 1,
 
   /**
-   * Disabled state.
+   * 不可用状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4797,7 +4889,7 @@ export enum AttributeModifierState {
   DISABLED = 1 << 2,
 
   /**
-   * Selected state.
+   * 选中状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4806,7 +4898,7 @@ export enum AttributeModifierState {
   SELECTED = 1 << 3,
 
   /**
-   * Hovered state.
+   * 悬停状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4816,7 +4908,7 @@ export enum AttributeModifierState {
 }
 
 /**
- * Specify the number of columns for different responsive breakpoints.
+ * 为不同响应式栅格容器断点指定列数。
  *
  * @enum { int }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4825,9 +4917,8 @@ export enum AttributeModifierState {
  */
 export declare enum PresetFillType {
     /**
-     * For Lists and Swipers: One column is displayed on SM (and smaller), two on MD, and three on LG (and larger)
-     * devices. For Grid and WaterFlow: two column is displayed on SM (and smaller), three on MD, and five on LG
-     * (and larger) devices.
+     * 针对List和Swiper组件：在组件宽度属于sm及更小的断点区间时显示1列，属于md断点区间时显示2列，属于lg及更大的断点区间时显示3列。
+     * 针对Grid和WaterFlow组件：在组件宽度属于sm及更小的断点区间时显示2列，属于md断点区间时显示3列，属于lg及更大的断点区间时显示5列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4835,7 +4926,7 @@ export declare enum PresetFillType {
      */
     BREAKPOINT_DEFAULT = 0,
     /**
-     * For SM (and smaller), MD, and LG (and larger) devices, one, two, and three columns are displayed respectively.
+     * 在组件宽度属于sm及更小的断点区间时显示1列，属于md断点区间时显示2列，属于lg及更大的断点区间时显示3列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -4843,7 +4934,7 @@ export declare enum PresetFillType {
      */
     BREAKPOINT_SM1MD2LG3 = 1,
     /**
-     * For SM (and smaller), MD, and LG (and larger) devices, two, three, and five columns are displayed respectively.
+     * 在组件宽度属于sm及更小的断点区间时显示2列，属于md断点区间时显示3列，属于lg及更大的断点区间时显示5列。
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -5367,6 +5458,28 @@ export declare enum EdgeLightPosition {
  * @since 26.1.0 static
  */
 export declare enum ImmersiveStrategy {
+  /**
+   * 避让挖孔区域。
+   *
+   * > **说明**
+   * >
+   * > 该策略的优先级比module.json5中的avoid_cutout配置项低，
+   * > 如果在module.json5的metadata中配置了avoid_cutout，
+   * > 该配置项的效果会优先生效。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  AVOID_CUTOUT = 0,
+  /**
+   * 避让三键导航栏区域。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  AVOID_FLOAT_NAV = 1,
   /**
    * 扩展bindSheet的标题区作为内容区的安全区。
    *

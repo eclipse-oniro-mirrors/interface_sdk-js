@@ -23,7 +23,8 @@
  */
 
 /**
- * Defines the PersistentStorage interface.
+ * PersistentStorage具体UI使用说明，详见
+ * [PersistentStorage(持久化存储UI状态)](docroot://ui/state-management-static/arkts-static-persiststorage.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -37,7 +38,8 @@ export declare class PersistentStorage {
    * 
    * 确定属性的类型和值的顺序如下：
    * 
-   * 1. 如果[PersistentStorage](docroot://ui/state-management-static/arkts-static-persiststorage.md)文件中存在key对应的属性，则返回false。
+   * 1. 如果[PersistentStorage](docroot://ui/state-management-static/arkts-static-persiststorage.md)
+   * 文件中存在key对应的属性，则返回false。
    * 
    * 2. 如果PersistentStorage文件中没有查询到key对应的属性，则在AppStorage中查找key对应的属性。如果找到key对应的属性，则将该属性持久化，并返回true。
    * 
@@ -51,14 +53,13 @@ export declare class PersistentStorage {
    *
    * @param { string } key - 属性名。
    * @param { T } defaultValue - 当在[PersistentStorage]{@link PersistentStorage}和
-   *     [AppStorage](docroot://reference/apis-arkui/arkui-ts/ts-state-management-Static-copy.md#appstorage)中未查询到key时，使用
+   *     [AppStorage]{@link AppStorage}中未查询到key时，使用
    *     defaultValue中。
    * @param { ToJSONType<T> } [toJson] - 见[ToJSONType]{@link ToJSONType}，用于序列化。对于复杂类型（除boolean、int、double、long、string外），
    *     开发者必须实现该方法才能成功序列化。
    * @param { FromJSONType<T> } [fromJson] - 见[FromJSONType]{@link FromJSONType}，用于反序列化。对于复杂类型（除boolean、int、double、long、
    *     string外），开发者必须实现该方法才能成功反序列化。
-   * @returns { boolean }
-   如果PersistentStorage文件中存在key对应的属性，则返回false。否则将依次从AppStorage、磁盘中查找对应属性，若存在，则返回true，若不存在，则创建并持久化
+   * @returns { boolean } 如果PersistentStorage文件中存在key对应的属性，则返回false。否则将依次从AppStorage、磁盘中查找对应属性，若存在，则返回true，若不存在，则创建并持久化
    *     key对应的属性，并返回true。
    * @stagemodelonly
    * @since 23 static
@@ -66,10 +67,10 @@ export declare class PersistentStorage {
   static persistProp<T>(key: string, defaultValue: T, toJson?: ToJSONType<T>, fromJson?: FromJSONType<T>): boolean;
 
   /**
-   * [persistProp]{@link PersistPropsOptions}的逆向操作。将key对应的属性从PersistentStorage中删除，后续
+   * [persistProp]{@link PersistentStorage#persistProp}的逆向操作。将key对应的属性从PersistentStorage中删除，后续
    * [AppStorage](docroot://ui/state-management-static/arkts-static-appstorage.md)的操作，对
    * [PersistentStorage](docroot://ui/state-management-static/arkts-static-persiststorage.md)不会再有影响。该操作会将对应的key从持久化文件中删
-   * 除，如果希望再次持久化，可以再次调用[persistProp]{@link PersistPropsOptions}接口。
+   * 除，如果希望再次持久化，可以再次调用[persistProp]{@link PersistentStorage#persistProp}接口。
    *
    * @param { string } key - PersistentStorage中的属性名。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -90,7 +91,7 @@ export declare class PersistentStorage {
 
   /**
    * 将[AppStorage](docroot://ui/state-management-static/arkts-static-appstorage.md)中key对应的属性持久化到文件中。与
-   * [persistProp]{@link PersistPropsOptions}的区别在于可以一次性持久化多个数据，适用场景是：应用启动时调用持久化接口。
+   * [persistProp]{@link PersistentStorage#persistProp}的区别在于可以一次性持久化多个数据，适用场景是：应用启动时调用持久化接口。
    *
    * @param { PersistPropsOptions<Any>[] } props 持久化数组。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -127,7 +128,7 @@ export declare type ToJSONType<T> = (value: T) => jsonx.JsonElement;
 export declare type FromJSONType<T> = (element: jsonx.JsonElement) => T;
 
 /**
- * 指定持久化属性及其默认值的键值对对象，作为[persistProps]{@link PersistPropsOptions}参数传入。
+ * 指定持久化属性及其默认值的键值对对象，作为[persistProps]{@link PersistentStorage#persistProps}参数传入。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -146,7 +147,7 @@ export declare interface PersistPropsOptions<T> {
 
   /**
    * 当在[PersistentStorage]{@link PersistentStorage}和
-   * [AppStorage](docroot://reference/apis-arkui/arkui-ts/ts-state-management-Static-copy.md#appstorage)中未查询到key时，使用
+   * [AppStorage]{@link AppStorage}中未查询到key时，使用
    * defaultValue中。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full

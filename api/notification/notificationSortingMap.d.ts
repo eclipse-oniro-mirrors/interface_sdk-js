@@ -31,7 +31,7 @@ import { NotificationSorting } from './notificationSorting';
  */
 export interface NotificationSortingMap {
   /**
-   * [Notification sorting](docroot://notification/notification-glossary.md#notification-sorting) information.
+   * Notification sorting information.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

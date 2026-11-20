@@ -418,6 +418,29 @@ export class MovingPhotoViewController {
      * @since 23 dynamic
      */
     notifyMovingPhotoTransition(): void;
+    /**
+     * Start play moving photo.
+     * 
+     * @param { DisplayMode } mode - Display mode
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    startPlayback(mode: DisplayMode): void;
+    /**
+     * Set display mode, and trigger callback completion.
+     * 
+     * @param { DisplayMode } mode - Display mode
+     * @param { MovingPhotoViewEventCallback } callback - Set display mode completion callback
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setDisplayMode(mode: DisplayMode, callback: MovingPhotoViewEventCallback): void;
 }
 /**
  * Defines MovingPhotoView Component.
@@ -498,6 +521,7 @@ export declare enum PixelMapFormat {
      * and are stored from the higher-order to the lower-order bits.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
      * @since 14 dynamic
      */
     YCBCR_P010 = 4,
@@ -507,6 +531,7 @@ export declare enum PixelMapFormat {
      * R(10bits), G(10bits), B(10bits), A(2bits) and are stored from the higher-order to the lower-order bits.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
      * @since 14 dynamic
      */
     RGBA_1010102 = 3,
@@ -526,6 +551,7 @@ export declare enum PixelMapFormat {
      * and are stored from the higher-order to the lower-order bits.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
      * @since 14 dynamic
      */
     YCRCB_P010 = 5,
@@ -538,4 +564,33 @@ export declare enum PixelMapFormat {
      * @since 14 dynamic
      */
     UNKNOWN = 0
+}
+
+/**
+ * Enums for display mode.
+ *
+ * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+export declare enum DisplayMode {
+    /**
+     * Display video and cover image.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    IMAGE_AND_VIDEO = 0,
+    /**
+     * Display only video.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    VIDEO_ONLY = 1
 }

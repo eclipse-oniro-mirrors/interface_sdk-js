@@ -133,7 +133,7 @@ declare enum SideBarPosition {
 declare interface ButtonIconOptions {
 
   /**
-   * Defines whether an icon is shown.
+   * 设置侧边栏显示时控制按钮的图标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -143,7 +143,7 @@ declare interface ButtonIconOptions {
   shown: string | PixelMap | Resource;
 
   /**
-   * Defines whether an icon is hidden.
+   * 设置侧边栏隐藏时控制按钮的图标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -153,7 +153,7 @@ declare interface ButtonIconOptions {
   hidden: string | PixelMap | Resource;
 
   /**
-   * Defines whether an icon is switching.
+   * 设置侧边栏显示和隐藏状态切换时控制按钮的图标。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]

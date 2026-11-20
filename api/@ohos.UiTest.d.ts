@@ -2882,6 +2882,23 @@ declare class Component {
    * @test
    */
   getOriginalText(): Promise<string>;
+  /**
+   * Checks whether this component is reachable. A component is unreachable if its center point is occluded by
+   * another component stacked above it, or if the component is invisible, has a zero-area bounds, or does not
+   * respond to the touch test. This API uses a promise to return the result.
+   *
+   * @returns { Promise<boolean> } - Promise used to return whether the component is reachable. The value **true**
+   *     indicates that the component is reachable, and **false** indicates that it is occluded, invisible,
+   *     zero-area, or does not respond to the touch test.
+   * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
+   * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
+   * @syscap SystemCapability.Test.UiTest
+   * @FaAndStageModel
+   * @atomicservice [since 26.1.0]
+   * @since 26.1.0 dynamic&static
+   * @test
+   */
+  isReachable(): Promise<boolean>;
  }
 
 /**

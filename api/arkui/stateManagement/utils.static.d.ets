@@ -25,6 +25,8 @@ import { CustomComponentLifecycle } from '../component/customComponent';
 
 import { WrappedBuilder, CustomBuilder } from '../component/builder';
 
+import { PlaceholderOptions } from '../../@ohos.arkui.placeholderRegister';
+
 /**
  * UIUtils is a state management tool class for operating the observed data.
  *
@@ -630,6 +632,76 @@ export declare interface CustomComponentContext {
    */
   registerActiveAndInactiveCallback(active?: ActiveAndInactiveCallbackType,
     inactive?: ActiveAndInactiveCallbackType): void;
+
+  /**
+   * Set the current custom component to asynchronous loading.
+   *
+   * Use this method in frame-rate-sensitive scenarios (such as page transitions) where synchronous loading of
+   * custom components causes frame drops, and asynchronous loading is preferred over the default synchronous
+   * loading. The real content of the component is loaded by the framework in an asynchronous task without blocking
+   * the main thread during page transition. While loading is not complete, the registered placeholder is displayed
+   * if configured, or the component is not displayed. After loading is complete, the placeholder is automatically
+   * replaced with the real content, and the rendering update is triggered by the framework automatically.
+   *
+   * If **timeout** is a positive value, the framework force-loads the component in subsequent frames after the
+   * timeout, and the number of components force-loaded in a single frame does not exceed a system-defined limit.
+   * The value **0** means no waiting: the component is force-loaded in subsequent frames. A negative value means
+   * never timing out. Failure of asynchronous loading is not handled in this version; the force-load mechanism
+   * triggered on timeout serves as the fallback.
+   *
+   * Different from [IReusePool.preRender()]{@link IReusePool#preRender}, which pre-creates reusable component
+   * instances, this method postpones the loading timing of the component instance. It is a configuration method that
+   * returns **void**.
+   *
+   * @param { CustomComponentAsyncLoadOptions } [options] - Configuration of asynchronous loading. The default value
+   *     **undefined** indicates that no placeholder is displayed before loading completes and the default timeout
+   *     (**1000** ms) is used.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  enableAsyncLoad(options?: CustomComponentAsyncLoadOptions): void;
+}
+
+/**
+ * CustomComponentAsyncLoadOptions is the configuration of asynchronous loading of a custom component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface CustomComponentAsyncLoadOptions {
+  /**
+   * Placeholder displayed while the custom component is being loaded asynchronously. The value is a
+   * [PlaceholderOptions]{@link @ohos.arkui.placeholderRegister:PlaceholderOptions} object: **id** refers to a
+   * template registered through
+   * [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}, and **size** is a
+   * layout suggestion of the **SizeOptions** type. When set, it acts as the ideal size of the placeholder root
+   * during measurement: numbers are in vp, unit-suffixed strings keep their units, and a Resource value is
+   * treated as unset. If **size** is not configured, or a dimension of it is unset or invalid, the placeholder
+   * is laid out based on the settings of the placeholder template itself.
+   *
+   * If **placeholder** is not configured, or its **id** is empty or not registered, no placeholder is displayed
+   * before asynchronous loading completes.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  placeholder?: PlaceholderOptions;
+
+  /**
+   * Timeout threshold for asynchronous loading, in ms. The default value is **1000**.
+   *
+   * The value is an integer. The value **0** means no waiting: the component is force-loaded in
+   * subsequent frames. A negative value means never timing out: the component keeps waiting until
+   * asynchronous loading completes.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  timeout?: int;
 }
 
 /**

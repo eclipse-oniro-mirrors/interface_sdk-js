@@ -464,6 +464,29 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
    * @since 26.0.0 dynamic
    */
   displayedItemCount(count: Optional<int>): UIPickerComponentAttribute;
+
+  /**
+   * 设置选中项的文本样式。
+   *
+   * @param { Optional<PickerComponentTextStyle> } style - 选中项的文本样式。
+   *     <br>默认值：
+   *     <br>{
+   *     <br>color: $r('sys.color.font_primary'),
+   *     <br>font: {
+   *     <br>size: '20fp',
+   *     <br>weight: FontWeight.Normal
+   *     <br>},
+   *     <br>overflow: TextOverflow.Clip
+   *     <br>}
+   *     <br>当style的值为undefined时，使用默认值。
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectedTextStyle(style: Optional<PickerComponentTextStyle>): UIPickerComponentAttribute;
 }
 
 /**

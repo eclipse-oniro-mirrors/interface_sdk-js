@@ -42,7 +42,7 @@ import { ButtonType, ButtonStyleMode, ButtonRole } from "./button";
 import { Area, ResourceColor, Dimension, ResourceStr, Font, Length, EdgeColors, LocalizedEdgeColors, BorderRadiuses, EdgeWidths, LocalizedEdgeWidths, SizeOptions, Bias, EdgeStyles, Position, LocalizedBorderRadiuses, Margin, ChainWeightOptions, Padding, LocalizedPadding, LocalizedMargin, BorderOptions, OutlineOptions, EdgeOutlineStyles, EdgeOutlineWidths, OutlineRadiuses, Edges, LocalizedEdges, LocalizedPosition, AccessibilityOptions, ConstraintSizeOptions, EdgeWidth, DirectionalEdgesT, VoidCallback, ColorMetrics, AccessibilityActionOptions, ScrollBarMargin, Coordinate2D, AccessibilityCustomAction, AccessibilityNextFocusParams } from "./units";
 import { BaseGestureEvent, GestureRecognizer, TouchRecognizer, GestureJudgeResult, GestureType, GestureMask, GestureHandler, GesturePriority, GestureInfo } from "./gesture";
 import { ScrollState } from "./list";
-import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
+import { AccessibilityHoverType, GestureCollectIntervention, Curve, PlayMode, SharedTransitionEffectType, KeySource, BorderStyle, HorizontalAlign, LocalizedAlignment, RenderStrategy, VerticalAlign, MouseButton, MouseAction, FontWeight, TouchType, FontStyle, Color, ColoringStrategy, Placement, ArrowPointPosition, ClickEffectLevel, NestedScrollMode, HitTestMode, AgentControlMode, Alignment, ImageRepeat, ImageSize, HoverEffect, Visibility, ItemAlign, Direction, Axis, GradientDirection, FunctionKey, ModifierKey, ObscuredReasons, RenderFit, LineCapStyle, LineJoinStyle, PixelRoundCalcPolicy, TextDecorationType, TextDecorationStyle, TextOverflow, KeyType, ResponseType, BarState, EdgeEffect, ScrollSource, InteractionHand, AxisAction, AxisType, AxisModel, CrownAction, FocusDrawLevel, CrownSensitivity, IlluminatedType, ResponseRegionSupportedTool, InputEventInterceptAction, GestureShortcut } from './enums';
 import { TextRange } from "./textCommon";
 import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
@@ -13015,6 +13015,21 @@ export declare interface CommonMethod {
      */
     default advancedBlendMode(effect: BlendMode | Blender | undefined, type?: BlendApplyType): this;
     /**
+     * Add a blender effect to the current component using a BlenderBase instance.
+     * Cannot be used together with the blendMode interface.
+     *
+     * @param { BlenderBase | undefined } effect - Blender base type, which is the entry point for creating various Blender effects.
+     *     A BlenderBase instance must be created through member methods of the BlenderBase class.
+     * @param { BlendApplyType } [type] - Whether the blend effect is implemented offscreen.
+     *     Default value: BlendApplyType.FAST.
+     * @returns { this }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default advancedBlendMode(effect: BlenderBase | undefined, type?: BlendApplyType): this;
+    /**
      * Sets whether to clip the areas of child components that extend beyond this component's boundaries,
      * That is, whether to perform clipping based on the edge contour of the parent container.
      *
@@ -14601,6 +14616,15 @@ export type SystemUiMaterial = uiMaterial.Material;
  */
 export type Blender = uiEffect.Blender;
 /**
+ * Blender base type, which is the entry point for creating various Blender effects.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export type BlenderBase = uiEffect.BlenderBase;
+/**
  * Import the DialogController type from promptAction.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -15237,11 +15261,13 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     default scrollBarHeight(height: LengthMetrics | undefined): this;
 
     /**
-     * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
-     * in response to arrow key presses when focused but not in active focus state.
+     * Sets whether the scrolling component supports scrolling by arrow keys. After this function is enabled, the
+     * scrolling component responds to the arrow keys on the keyboard when the focus is obtained and the focus is not
+     * activated. If this parameter is not set, scrolling by arrow keys is not supported by default.
      *
-     * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
-     *     <br>Default value: true.
+     * @param { boolean | undefined } enabled - Indicates whether to support scrolling by arrow keys on the
+     *     keyboard. <br/>true: scrolling is supported. <br/>false: scrolling is not supported. <br/>undefined:
+     *     scrolling is not supported.
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15569,6 +15595,7 @@ export declare interface EditModeOptions {
     /**
      * Define whether to gather selected items in grid or list when item is long pressed for context menu.
      *
+     * @type { ?boolean }
      * @default false
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15583,6 +15610,7 @@ export declare interface EditModeOptions {
      * Returning true means using the number of selected items within the display range.
      * Returning a number to include selected items outside the display range.
      *
+     * @type { ?OnGetPreviewBadgeCallback } onGetPreviewBadge
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
@@ -15595,6 +15623,7 @@ export declare interface EditModeOptions {
      * multi-select state.
      * {@code false} indicates that there is no default style after entering the multi-select state.
      *
+     * @type { ?boolean }
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -15607,6 +15636,7 @@ export declare interface EditModeOptions {
      * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
      * {@code false} indicates that two-finger swiping cannot perform multi-selection.
      *
+     * @type { ?boolean }
      * @default true
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16760,4 +16790,61 @@ export declare interface GravityCenterOptions {
    * @since 26.0.0 static
    */
   gravityIntensity?: double;
+}
+
+/**
+ * Defines the text style shared by DatePickerComponent and UIPickerComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface PickerComponentTextStyle {
+  /**
+   * Font color.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  color?: ResourceColor;
+
+  /**
+   * Text style. Only size and weight are supported.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  font?: Font;
+
+  /**
+   * Minimum font size for the text. Used with maxFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see minFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  minFontSize?: double | ResourceStr;
+
+  /**
+   * Maximum font size for the text. Used with minFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see maxFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  maxFontSize?: double | ResourceStr;
+
+  /**
+   * Text overflow behavior. This property has no effect when set to MARQUEE. For details, see textOverflow of
+   * TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  overflow?: TextOverflow;
 }

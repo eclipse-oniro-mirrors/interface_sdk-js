@@ -21,7 +21,7 @@
 import { SymbolGlyphModifier, DividerModifier } from './@ohos.arkui.modifier';
 import { ColorMetrics, LengthMetrics } from './@ohos.arkui.node';
 /**
- * Declare enum ToolBarV2ItemState
+ * 声明ToolBarV2ItemState枚举。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -32,7 +32,7 @@ import { ColorMetrics, LengthMetrics } from './@ohos.arkui.node';
  */
 export declare enum ToolBarV2ItemState {
   /**
-   * Enable type.
+   * 启用类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -42,7 +42,7 @@ export declare enum ToolBarV2ItemState {
    */
   ENABLE = 1,
   /**
-   * Disable type.
+   * 禁用类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -52,7 +52,7 @@ export declare enum ToolBarV2ItemState {
    */
   DISABLE = 2,
   /**
-   * Activate type.
+   * 激活类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -64,7 +64,7 @@ export declare enum ToolBarV2ItemState {
 }
 
 /**
- * Defines toolBarV2 symbolGlyph.
+ * 定义ToolBarV2的SymbolGlyph。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -76,7 +76,7 @@ export declare enum ToolBarV2ItemState {
 @ObservedV2
 export class ToolBarV2SymbolGlyph {
   /**
-   * Modifier of toolbarV2's normal symbol.
+   * ToolBarV2普通图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -87,7 +87,7 @@ export class ToolBarV2SymbolGlyph {
   @Trace
   normal: SymbolGlyphModifier;
   /**
-   * Modifier of toolbarV2's activated symbol.
+   * ToolBarV2激活图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -98,7 +98,7 @@ export class ToolBarV2SymbolGlyph {
   @Trace
   activated?: SymbolGlyphModifier;
   /**
-   * The constructor used to create a ToolBarV2SymbolGlyph object.
+   * 用于创建ToolBarV2SymbolGlyph对象的构造函数。
    *
    * @param { ToolBarV2SymbolGlyphOptions } options - symbol info.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -111,7 +111,7 @@ export class ToolBarV2SymbolGlyph {
 }
 
 /**
- * Declare the options of ToolBarV2SymbolGlyph
+ * 声明ToolBarV2SymbolGlyph的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -122,7 +122,7 @@ export class ToolBarV2SymbolGlyph {
  */
 export interface ToolBarV2SymbolGlyphOptions {
   /**
-   * Modifier of toolbarV2's normal symbol.
+   * ToolBarV2普通图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -132,7 +132,7 @@ export interface ToolBarV2SymbolGlyphOptions {
    */
   normal: SymbolGlyphModifier;
   /**
-   * Modifier of toolbarV2's activated symbol.
+   * ToolBarV2激活图标的修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -144,7 +144,7 @@ export interface ToolBarV2SymbolGlyphOptions {
 }
 
 /**
- * Declare type ToolBarV2ItemText
+ * 声明ToolBarV2ItemText类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -157,7 +157,7 @@ export interface ToolBarV2SymbolGlyphOptions {
 @ObservedV2
 export declare class ToolBarV2ItemText {
   /**
-   * Define text content.
+   * 定义文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -168,7 +168,7 @@ export declare class ToolBarV2ItemText {
   @Trace
   text: ResourceStr;
   /**
-   * Define text fontColor.
+   * 定义文本字体颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -179,7 +179,7 @@ export declare class ToolBarV2ItemText {
   @Trace
   color?: ColorMetrics;
   /**
-   * Text fontColor when the item is activated.
+   * 项被激活时的文本字体颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -190,7 +190,7 @@ export declare class ToolBarV2ItemText {
   @Trace
   activatedColor?: ColorMetrics;
   /**
-   * The constructor used to create a ToolBarV2ItemText object.
+   * ToolBarV2ItemText的构造函数。
    *
    * @param { ToolBarV2ItemTextOptions } options - text info.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -203,7 +203,7 @@ export declare class ToolBarV2ItemText {
 }
 
 /**
- * Declare the options of ToolBarV2ItemText
+ * 声明ToolBarV2ItemText的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -214,7 +214,7 @@ export declare class ToolBarV2ItemText {
  */
 export interface ToolBarV2ItemTextOptions {
   /**
-   * Define text content.
+   * 定义文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -224,7 +224,7 @@ export interface ToolBarV2ItemTextOptions {
    */
   text: ResourceStr;
   /**
-   * Define text fontColor.
+   * 定义文本字体颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -234,7 +234,7 @@ export interface ToolBarV2ItemTextOptions {
    */
   color?: ColorMetrics;
   /**
-   * Text fontColor when the item is activated.
+   * 项被激活时的文本字体颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,7 +246,7 @@ export interface ToolBarV2ItemTextOptions {
 }
 
 /**
- * Defines the icon type of ToolBarV2 item.
+ * 定义ToolBarV2项的图标类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -258,7 +258,7 @@ export interface ToolBarV2ItemTextOptions {
 export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2SymbolGlyph;
 
 /**
- * Declare type ToolBarV2ItemImage
+ * 声明ToolBarV2ItemImage类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -271,7 +271,7 @@ export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2Symbol
 @ObservedV2
 export declare class ToolBarV2ItemImage {
   /**
-   * Define icon resource.
+   * 定义图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -282,7 +282,7 @@ export declare class ToolBarV2ItemImage {
   @Trace
   src: ResourceStr;
   /**
-   * Define icon fillColor.
+   * 定义图标填充颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -293,7 +293,7 @@ export declare class ToolBarV2ItemImage {
   @Trace
   color?: ColorMetrics;
   /**
-   * Icon fillColor when the item is activated.
+   * 项被激活时的图标填充颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -317,7 +317,7 @@ export declare class ToolBarV2ItemImage {
 }
 
 /**
- * Declare the options of ToolBarV2ItemImage
+ * 声明ToolBarV2ItemImage的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -328,7 +328,7 @@ export declare class ToolBarV2ItemImage {
  */
 export interface ToolBarV2ItemImageOptions {
   /**
-   * Define icon resource.
+   * 定义图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -338,7 +338,7 @@ export interface ToolBarV2ItemImageOptions {
    */
   src: ResourceStr;
   /**
-   * Define icon fillColor.
+   * 定义图标填充颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -348,7 +348,7 @@ export interface ToolBarV2ItemImageOptions {
    */
   color?: ColorMetrics;
   /**
-   * Icon fillColor when the item is activated.
+   * 项被激活时的图标填充颜色。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -360,7 +360,7 @@ export interface ToolBarV2ItemImageOptions {
 }
 
 /**
- * Declare type ToolBarV2Item
+ * 声明ToolBarV2Item类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -373,7 +373,7 @@ export interface ToolBarV2ItemImageOptions {
 @ObservedV2
 export declare class ToolBarV2Item {
   /**
-   * Define text content.
+   * 定义文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -384,7 +384,7 @@ export declare class ToolBarV2Item {
   @Trace
   content: ToolBarV2ItemText;
   /**
-   * Define the action event.
+   * 定义点击事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -395,7 +395,7 @@ export declare class ToolBarV2Item {
   @Trace
   action?: ToolBarV2ItemAction;
   /**
-   * Define icon resource.
+   * 定义图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -406,7 +406,7 @@ export declare class ToolBarV2Item {
   @Trace
   icon?: ToolBarV2ItemIconType;
   /**
-   * Define item type.
+   * 定义项类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -417,7 +417,7 @@ export declare class ToolBarV2Item {
   @Trace
   state?: ToolBarV2ItemState;
   /**
-   * The accessibilityText of item.
+   * 项的无障碍文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -428,7 +428,7 @@ export declare class ToolBarV2Item {
   @Trace
   accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of item.
+   * 项的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -439,7 +439,7 @@ export declare class ToolBarV2Item {
   @Trace
   accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of item.
+   * 项的无障碍重要性级别。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -464,7 +464,7 @@ export declare class ToolBarV2Item {
 }
 
 /**
- * Declare the options of ToolBarV2Item
+ * 声明ToolBarV2Item的选项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -475,7 +475,7 @@ export declare class ToolBarV2Item {
  */
 export interface ToolBarV2ItemOptions {
   /**
-   * Define text content.
+   * 定义文本内容。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -485,7 +485,7 @@ export interface ToolBarV2ItemOptions {
    */
   content: ToolBarV2ItemText;
   /**
-   * Define the action event.
+   * 定义点击事件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -495,7 +495,7 @@ export interface ToolBarV2ItemOptions {
    */
   action?: ToolBarV2ItemAction;
   /**
-   * Define icon resource.
+   * 定义图标资源。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -505,7 +505,7 @@ export interface ToolBarV2ItemOptions {
    */
   icon?: ToolBarV2ItemIconType;
   /**
-   * Define item type.
+   * 定义项类型。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -515,7 +515,7 @@ export interface ToolBarV2ItemOptions {
    */
   state?: ToolBarV2ItemState;
   /**
-   * The accessibilityText of item.
+   * 项的无障碍文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -525,7 +525,7 @@ export interface ToolBarV2ItemOptions {
    */
   accessibilityText?: ResourceStr;
   /**
-   * The accessibilityDescription of item.
+   * 项的无障碍描述。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -535,7 +535,7 @@ export interface ToolBarV2ItemOptions {
    */
   accessibilityDescription?: ResourceStr;
   /**
-   * The accessibilityLevel of item.
+   * 项的无障碍重要性级别。
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -548,7 +548,7 @@ export interface ToolBarV2ItemOptions {
 }
 
 /**
- * Defines the action callback of ToolBarV2Item.
+ * 定义ToolBarV2Item的点击事件回调。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -560,7 +560,7 @@ export interface ToolBarV2ItemOptions {
 export type ToolBarV2ItemAction = (index: number) => void;
 
 /**
- * Declare ToolBarV2Modifier used in ToolBar
+ * 声明ToolBar中使用的ToolBarV2Modifier。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -571,7 +571,7 @@ export type ToolBarV2ItemAction = (index: number) => void;
  */
 export declare class ToolBarV2Modifier {
   /**
-   * Sets the height of the toolBarV2.
+   * 设置工具栏的高度。
    *
    * @param { LengthMetrics } height - toolBarV2's height.
    * @returns { ToolBarV2Modifier } returns the instance of the ToolBarV2Modifier.
@@ -583,7 +583,7 @@ export declare class ToolBarV2Modifier {
    */
   height(height: LengthMetrics): ToolBarV2Modifier;
   /**
-   * Sets the backgroundColor of the toolBarV2.
+   * 设置工具栏的背景色。
    *
    * @param { ColorMetrics } backgroundColor - toolBarV2's backgroundColor.
    * @returns { ToolBarV2Modifier } returns the instance of the ToolBarV2Modifier.
@@ -595,7 +595,7 @@ export declare class ToolBarV2Modifier {
    */
   backgroundColor(backgroundColor: ColorMetrics): ToolBarV2Modifier;
   /**
-   * Sets the left and right padding of the toolbarV2.
+   * 设置工具栏的左右内边距。
    *
    * @param { LengthMetrics } padding - left and right padding.
    * @returns { ToolBarV2Modifier } returns the instance of the ToolBarV2Modifier.
@@ -607,7 +607,7 @@ export declare class ToolBarV2Modifier {
    */
   padding(padding: LengthMetrics): ToolBarV2Modifier;
   /**
-   * Sets whether or not to display the press status effect.
+   * 设置是否显示按压态效果。
    *
    * @param { boolean } stateEffect - press status effect.
    * @returns { ToolBarV2Modifier } returns the instance of the ToolBarV2Modifier.
@@ -654,7 +654,7 @@ export declare class ToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * Define toolbarV2 item list.
+   * 定义ToolBarV2项列表。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -666,7 +666,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * Define toolbarV2 activate item index, default is -1.
+   * 定义ToolBarV2激活项的索引，默认值为-1。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -677,7 +677,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: number;
   /**
-   * Define divider Modifier.
+   * 定义分割线修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -688,7 +688,7 @@ export declare struct ToolBarV2 {
   @Param
   dividerModifier?: DividerModifier;
   /**
-   * Define toolbarV2 modifier.
+   * 定义ToolBarV2修饰符。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

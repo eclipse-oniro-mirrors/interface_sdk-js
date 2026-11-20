@@ -3034,7 +3034,115 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 23 static
    */
-  DPAD_RIGHT = 17
+  DPAD_RIGHT = 17,
+
+  /**
+   * CapsLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  CAPS_LOCK = 18,
+
+  /**
+   * ScrollLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SCROLL_LOCK = 20,
+
+  /**
+   * Pause/Break key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAUSE_BREAK = 21,
+
+  /**
+   * NumLock key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  NUM_LOCK = 22,
+
+  /**
+   * Insert key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  INSERT = 23,
+
+  /**
+   * Delete key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  DELETE = 24,
+
+  /**
+   * Home key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  HOME = 25,
+
+  /**
+   * End key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  END = 26,
+
+  /**
+   * Page Up key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_UP = 27,
+
+  /**
+   * Page Down key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  PAGE_DOWN = 28,
+
+  /**
+   * Enter key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  ENTER = 29,
+
+  /**
+   * Backspace key.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  BACKSPACE = 30
 }
 
 /**
@@ -5418,7 +5526,7 @@ export declare enum ImmersiveStrategy {
    */
   AVOID_CUTOUT = 0,
   /**
-   * Avoid the three-button navigation bar area on the phone.
+   * Avoid the three-button navigation bar area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -5491,7 +5599,15 @@ export declare enum ImmersiveStrategy {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  NAVIGATION_EXPAND_SAFE_AREA = 8
+  NAVIGATION_EXPAND_SAFE_AREA = 8,
+  /**
+   * Expands the TabBar of Tabs as safe areas for the content region.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  TABS_EXPAND_SAFE_AREA = 9
 }
 
 /**

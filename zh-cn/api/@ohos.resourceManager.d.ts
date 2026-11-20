@@ -141,7 +141,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_CAR = 0x02,
 
     /**
-     *
+     * 电脑。
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -174,7 +174,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_WEARABLE = 0x06,
 
     /**
-     *
+     * 2in1。
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform

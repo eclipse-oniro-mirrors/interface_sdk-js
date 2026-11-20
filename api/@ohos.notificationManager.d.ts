@@ -281,8 +281,7 @@ declare namespace notificationManager {
   function publish(request: NotificationRequest, userId: int): Promise<void>;
 
   /**
-   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
-   * an asynchronous callback to return the result.
+   * Publishes a proxy notification. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
@@ -329,8 +328,7 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
-   * a promise to return the result.
+   * Publishes a proxy notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { NotificationRequest } request - Content and related configuration of the notification to publish.
@@ -372,8 +370,7 @@ declare namespace notificationManager {
   function publishAsBundle(request: NotificationRequest, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * Publishes a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses
-   * a promise to return the result.
+   * Publishes a proxy notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - Bundle information of the application whose notification function is
@@ -548,8 +545,7 @@ declare namespace notificationManager {
   function cancel(representativeBundle: BundleOption, id: int): Promise<void>;
 
   /**
-   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses 
-   * an asynchronous callback to return the result.
+   * Cancels a proxy notification. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - Notification ID.
@@ -580,8 +576,7 @@ declare namespace notificationManager {
   ): void;
 
   /**
-   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses a
-   * promise to return the result.
+   * Cancels a proxy notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { int } id - Notification ID.
@@ -607,8 +602,7 @@ declare namespace notificationManager {
   function cancelAsBundle(id: int, representativeBundle: string, userId: int): Promise<void>;
 
   /**
-   * Cancels a [proxy notification](docroot://notification/notification-glossary.md#notification-proxy). This API uses a
-   * promise to return the result.
+   * Cancels a proxy notification. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER and ohos.permission.NOTIFICATION_AGENT_CONTROLLER
    * @param { BundleOption } representativeBundle - Bundle information of the application whose notification function is
@@ -3548,8 +3542,7 @@ declare namespace notificationManager {
 
   /**
    * Obtains the enabled status of the intelligent 
-   * [priority notification](docroot://notification/notification-glossary.md#priority-notification) service. This API 
-   * uses a promise to return the result.
+   * priority notification service. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise that contains the enabling status of the intelligent priority notification
@@ -3570,8 +3563,7 @@ declare namespace notificationManager {
 
   /**
    * Sets the enabled status of the intelligent service for 
-   * [priority notifications](docroot://notification/notification-glossary.md#priority-notification). This API uses a 
-   * promise to return the result.
+   * priority notifications. This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Enabling status of the intelligent priority notification service.
@@ -3780,7 +3772,7 @@ declare namespace notificationManager {
    * Disables the application from publishing notifications by adding the application bundle name to the permission 
    * control list. This function can be disabled as required.
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - Whether to enable the permission control list for publishing notifications (**true**:
    *     enabled; **false**: disabled).
    * @param { Array<string> } bundleList - Application list under the permission control list. The bundle name is used
@@ -3804,7 +3796,7 @@ declare namespace notificationManager {
    * Disables the application from publishing notifications by adding the application bundle name to the permission 
    * control list. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.NOTIFICATION_CONTROLLER or ohos.permission.MANAGE_EDM_POLICY
+   * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } disabled - Whether to enable the notification permission control list. The value **true**
    *     indicates that the notification permission control list is enabled; **false** indicates the opposite.
    * @param { Array<string> } bundleList - Bundles under the permission control list. The bundle name is used to
@@ -3990,8 +3982,7 @@ declare namespace notificationManager {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { BundleOption } bundle - Bundle information of the application.
    * @param { PriorityEnableStatus } enableStatus - Priority switch status of application notifications.
-   *     <br> - **DISABLE**: The notification cannot be set as a
-   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **DISABLE**: The notification cannot be set as a priority notification.
    *     <br> - **ENABLE_BY_INTELLIGENT**: The notification can be set as a priority notification through intelligent
    *     recognition, user keyword matching, application rule matching, and other methods.
    *     <br> - **ENABLE**: All application notifications are set as priority notifications.
@@ -4034,8 +4025,7 @@ declare namespace notificationManager {
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @returns { Promise<boolean> } Promise object that returns the enabled status of the notification priority master
    *     switch.
-   *     <br> - **true**: allowed to be set as
-   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **true**: allowed to be set as priority notification.
    *     <br> - **false**: prohibited from being set as priority notification.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Not system application to call the interface.
@@ -4052,8 +4042,7 @@ declare namespace notificationManager {
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
    * @param { boolean } enable - Whether all notifications are allowed to be set as priority notifications.
-   *     <br> - **true**: allows the notification to be set as a
-   *     [priority notification](docroot://notification/notification-glossary.md#priority-notification).
+   *     <br> - **true**: allows the notification to be set as a priority notification.
    *     <br> - **false**: forbids the notification from being set as a priority notification.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission denied.
@@ -4069,7 +4058,7 @@ declare namespace notificationManager {
   function setPriorityEnabled(enable: boolean): Promise<void>;
 
   /**
-   * Sets the switch status of [silent reminder](docroot://notification/notification-glossary.md#silent-reminder). This 
+   * Sets the switch status of silent reminder. This 
    * API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
@@ -4092,7 +4081,7 @@ declare namespace notificationManager {
   function setSilentReminderEnabled(bundle: BundleOption, enabled: boolean): Promise<void>;
 
   /**
-   * Queries the switch status of [silent reminder](docroot://notification/notification-glossary.md#silent-reminder). 
+   * Queries the switch status of silent reminder. 
    * This API uses a promise to return the result.
    *
    * @permission ohos.permission.NOTIFICATION_CONTROLLER
@@ -4327,7 +4316,7 @@ declare namespace notificationManager {
   function getBadgeNumber(): Promise<long>;
 
   /**
-   * Sets [notification snooze](docroot://notification/notification-glossary.md#notification-snooze). The notification 
+   * Sets notification snooze. The notification 
    * is reminded again after the specified time. Each setting triggers only one reminder, and the reminder mode is the 
    * same as that of the notification.
    *
@@ -4565,7 +4554,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Defines the [notification check](docroot://notification/notification-glossary.md#notification-check) parameters.
+   * Defines the notification check parameters.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -4663,7 +4652,7 @@ declare namespace notificationManager {
   }
 
   /**
-   * Defines the [notification check](docroot://notification/notification-glossary.md#notification-check) result.
+   * Defines the notification check result.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi
@@ -5296,7 +5285,7 @@ declare namespace notificationManager {
     reminderFlags: long;
 
     /**
-     * Whether the [silent reminder](docroot://notification/notification-glossary.md#silent-reminder) switch is enabled 
+     * Whether the silent reminder switch is enabled 
      * (**true**: enabled, **false**: disabled).
      *
      * @syscap SystemCapability.Notification.Notification
@@ -5644,8 +5633,8 @@ declare namespace notificationManager {
 
     /**
      * The priority switch of the application notification is in the intelligent recognition state. It can be set to 
-     * [priority notification](docroot://notification/notification-glossary.md#priority-notification) through 
-     * intelligent recognition, user keyword matching, application rule matching, and other methods.
+     * priority notification through intelligent recognition, user keyword matching,
+     * application rule matching, and other methods.
      *
      * @syscap SystemCapability.Notification.Notification
      * @systemapi
@@ -5957,8 +5946,7 @@ declare namespace notificationManager {
   export type NotificationRequest = _NotificationRequest;
 
   /**
-   * Describes the information fields of notification 
-   * [smart aggregation](docroot://notification/notification-glossary.md#notification-smart-aggregation).
+   * Describes the information fields of notification smart aggregation.
    *
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

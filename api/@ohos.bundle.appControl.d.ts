@@ -165,6 +165,43 @@ declare namespace appControl {
   }
 
   /**
+   * Enumerates the types of abilities during recovery.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export enum RecoverComponentType {
+    /**
+     * ExtensionAbility component. Only
+     * [ExtensionAbility](docroot://quick-start/module-configuration-file.md#extensionabilities) components of the
+     * service type is supported.
+     *
+     * The ExtensionAbility component is determined by bundleName, moduleName, and abilityName in want.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    EXTENSION = 1,
+    /**
+     * UIExtensionAbility component.
+     *
+     * The UIExtensionAbility is determined by bundleName, moduleName, and abilityName in want, and the
+     * **ability.want.params.uiExtensionType** field in **want.parameters** is set to
+     * [UIExtensionAbility](docroot://application-models/uiextensionability-sys.md).
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    UI_EXTENSION = 2
+  }
+
+  /**
    * Defines a disposed rule.
    *
    * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
@@ -344,6 +381,48 @@ declare namespace appControl {
      * @since 23 static
      */
     disposedRule: DisposedRule;
+  }
+
+  /**
+   * Describes an application recovery disposed rule.
+   *
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  export interface RecoverDisposedRule {
+    /**
+     * Component displayed when the application is disposed of.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    want: Want;
+
+    /**
+     * Priority of the disposed rule, which is used to sort the query results of the rule list. The value is an integer.
+     * A smaller value indicates a higher priority.
+     * The value should be an integer.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    priority: int;
+
+    /**
+     * Type of the ability to start during interception.
+     *
+     * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    recoverComponentType: RecoverComponentType;
   }
 
   /**
@@ -786,6 +865,55 @@ declare namespace appControl {
    * @since 24 static
    */
   function getDisposedRulesByBundle(bundleName: string): Array<DisposedRuleConfiguration>;
+
+  /**
+   * Sets a recovery disposed rule for current user.
+   *
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @param { RecoverDisposedRule } rule - Recover disposed rule.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700075 - The specified bundleName of want is not the same with caller.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setRecoverDisposedRule(rule: RecoverDisposedRule): void;
+
+  /**
+   * Obtains the recovery disposed rule for current user.
+   *
+   * @permission ohos.permission.GET_DISPOSED_APP_STATUS or ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @returns { RecoverDisposedRule } Recovery disposed rule.
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @throws { BusinessError } 18400001 - The caller has not configured disposal rules.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getRecoverDisposedRule(): RecoverDisposedRule;
+
+  /**
+   * Deletes a recovery disposed rule for current user.
+   *
+   * @permission ohos.permission.MANAGE_DISPOSED_APP_STATUS
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Permission denied. A non-system application is not allowed to call a system API.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.AppControl
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function deleteRecoverDisposedRule(): void;
 
   /**
    * Enumerates the types of abilities during uninstallation.

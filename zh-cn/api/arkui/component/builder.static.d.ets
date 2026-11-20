@@ -22,7 +22,10 @@
 import { Callback } from '@ohos.base';
 
 /**
- * Defines Builder Annotation.
+ * \@Builder装饰的函数也称为"自定义构建函数"。
+ * 开发指南见[\@Builder装饰器：自定义构建函数](docroot://ui/state-management/arkts-builder.md)。
+ *
+ * \@Builder装饰器的配置接口，声明\@Builder装饰器的配置项（如占位构建函数标记isPlaceholder）。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -54,7 +57,8 @@ export declare @interface Builder {}
 export declare @interface BuilderParam {}
 
 /**
- * Defines the CustomBuilder Type.
+ * 组件属性方法参数可使用CustomBuilder类型来自定义UI描述。
+ * 生成用户自定义组件，在使用时结合[@Builder](docroot://ui/state-management/arkts-builder.md)使用。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -64,7 +68,9 @@ export declare @interface BuilderParam {}
 export type CustomBuilder = @Builder (() => void);
 
 /**
- * Defines the CustomBuilder Type.
+ * 自定义UI描述，相比于CustomBuilder，本接口支持传入一个参数。
+ *
+ * t：生成用户自定义组件，在使用时结合[@Builder](docroot://ui/state-management/arkts-builder.md)使用，并允许传入一个参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -74,7 +80,10 @@ export type CustomBuilder = @Builder (() => void);
 export type CustomBuilderT<T> = @Builder ((t: T) => void);
 
 /**
- * Defines the PageMapBuilder Type.
+ * Navigation路由的构造方式类型。
+ *
+ * name：NavDestination页面名称。
+ * param：NavDestination页面详细参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -96,6 +105,8 @@ export type PageMapBuilder = @Builder ((name: string, param: Object | null | und
 export declare function wrapBuilder<T>(builder: T): WrappedBuilder<T>;
 
 /**
+ * \@Builder函数的包装类。模板参数`T`应传入@Builder函数类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -104,6 +115,8 @@ export declare function wrapBuilder<T>(builder: T): WrappedBuilder<T>;
 export declare class WrappedBuilder<T> {
 
   /**
+   * \@Builder修饰的全局函数。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

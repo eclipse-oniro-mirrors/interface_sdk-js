@@ -72,10 +72,8 @@ declare namespace hiRetrieval {
   }
 
   /**
-   * 初始化应用灰度模块。多实例应用不支持调用此接口。
+   * 初始化应用灰度模块。
    *
-   * @throws { BusinessError } 36000002 - Multi-instance applications not supported error.
-   *                                      Possibly caused by invoking this function in a multi-instance application.
    * @syscap SystemCapability.HiviewDFX.HiRetrieval
    * @FaAndStageModel
    * @atomicservice

@@ -1424,6 +1424,24 @@ declare namespace applicationManager {
    */
   function isAppKioskAllowed(appIdentifier: string): boolean;
 
+/**
+   * Obtains the icon data of an application.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
+   * @param { string } bundleName - Bundle name of the application.
+   * @returns { string } Base64 encoded icon data of the application.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201015 - The application is not installed.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getApplicationIconData(bundleName: string): string;
+
   /**
    * Sets the features of the kiosk mode. You can use this API to control whether the notification center and control
    * panel can be accessed in kiosk mode.
@@ -2298,14 +2316,17 @@ declare namespace applicationManager {
    * This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be added.
+   * @param { Array<string> } appIdentifiers - Unique identifiers of the applications to be added.
    * @param { number } accountId - User account ID.
    *     <br>The value must be greater than or equal to 0.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
+   * @throws { BusinessError } 9201015 - The application is not installed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2317,14 +2338,16 @@ declare namespace applicationManager {
    * This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @param { Array<string> } appIdentifiers - Bundle names of the applications to be removed.
+   * @param { Array<string> } appIdentifiers - Unique identifiers of the applications to be removed.
    * @param { number } accountId - User account ID.
    *     <br>The value must be greater than or equal to 0.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9200019 - The policy list has exceeded the limit.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2339,12 +2362,13 @@ declare namespace applicationManager {
    *     <br>The value must be greater than or equal to 0.
    * @param { common.QueryPolicy } [queryPolicy] - Query policy. If this parameter is not specified, the default value
    *     {@link common.QueryPolicy.SELF} is used.
-   * @returns { Array<string> } Returns the bundle names of the applications in the exclusion list.
+   * @returns { Array<string> } Returns the unique identifiers of the applications in the exclusion list.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
-   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
@@ -2361,6 +2385,7 @@ declare namespace applicationManager {
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
    * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
    * @throws { BusinessError } 9200012 - Parameter verification failed.
    * @throws { BusinessError } 9200016 - Service timeout.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -2373,7 +2398,7 @@ declare namespace applicationManager {
    * Obtains the states of all main windows.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_APPLICATION
-   * @returns { Array<MainWindowStates> } Return the main window states.
+   * @returns { Array<MainWindowStates> } Returns the main window states.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.

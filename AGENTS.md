@@ -48,7 +48,7 @@ update only the links in this index.
 | API version rules and system/API version mapping | every API design or validation task | [AGENTS-version-rules.md](./docs/AGENTS-version-rules.md) |
 | JSDoc / declaration-comment rules | every API design or validation task | [AGENTS-jsdoc-rules.md](./docs/AGENTS-jsdoc-rules.md) |
 | ArkTS API metadata format and schema | generating, validating, or consuming ArkTS metadata | [AGENTS-api-metadata.md](./docs/AGENTS-api-metadata.md) |
-| ArkTS static type API rules | `.static.d.ets`, ArkTS static/dynamic decisions, or static SDK concerns | [AGENTS-arkts-static-types.md](./docs/AGENTS-arkts-static-types.md) |
+| ArkTS static type API rules | `.static.d.ets`, ArkTS static/dynamic decisions, or static SDK concerns | Prerequisite: `arkts-static-spec` → [AGENTS-arkts-static-types.md](./docs/AGENTS-arkts-static-types.md) |
 | Device support and behavior differences | device support, device removal, or per-device behavior | [AGENTS-device-models.md](./docs/AGENTS-device-models.md) |
 
 The ArkTS metadata guide dynamically links to:

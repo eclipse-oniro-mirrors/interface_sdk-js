@@ -291,7 +291,7 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *            minute: 默认为"2-digit"，设置minute是否按照2位数字显示，如果实际数值小于10，则会补充前导0并显示，即为"0X"。
      *            second: 默认为"2-digit"，设置second是否按照2位数字显示，如果实际数值小于10，则会补充前导0并显示，即为"0X"。
      *     当value的值为undefined时，使用默认值。
-   * @returns { TimePickerAttribute } the attribute of the time picker
+   * @returns { TimePickerAttribute } 返回时间选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

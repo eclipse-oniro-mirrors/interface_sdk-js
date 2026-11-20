@@ -14,8 +14,8 @@
  */
 
 /**
-  * @file 网络状态
-  * @kit NetworkKit
+ * @file Network State
+ * @kit NetworkKit
  */
 
 /**

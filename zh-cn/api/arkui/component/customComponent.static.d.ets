@@ -36,8 +36,8 @@ import { CustomDialogController } from './customDialogController';
 import { RecordData } from '@ohos.base';
 
 /**
-  * Define ReuseObject for aboutToReuse method.
-  *
+ * [aboutToReuse]{@link CustomComponent#aboutToReuse}接收的入参类型。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -45,9 +45,9 @@ import { RecordData } from '@ohos.base';
 export declare class ReuseObject {
 
   /**
-   * Get the raw data of ReuseObject to get values.
+   * 获取ReuseObject的原始数据。
    *
-   * @returns { RecordData } - Returns the raw data of ReuseObject.
+   * @returns { RecordData } 返回ReuseObject的原始数据。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -55,10 +55,10 @@ export declare class ReuseObject {
   get raw(): RecordData;
 
   /**
-     * Get value from the ReuseObject by key.
-     *
-   * @param { string } key - the key of target value.
-   * @returns { RecordData } - the target value.
+   * 根据索引获取ReuseObject的数据。
+   *
+   * @param { string } key - 待获取数据的索引。
+   * @returns { RecordData } 返回ReuseObject的原始数据。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -66,10 +66,10 @@ export declare class ReuseObject {
   $_get(key: string): RecordData;
 
   /**
-    * Returns if the key is in the ReuseObject.
-    *
-   * @param { string } key - the key of target value.
-   * @returns { boolean } - if the key is in the ReuseObject.
+   * 返回当前索引是否在ReuseObject的数据范围内。
+   *
+   * @param { string } key - 待获取数据的索引。
+   * @returns { boolean } 返回当前索引是否在ReuseObject的数据范围内。true表示在数据范围内，false表示不在数据范围内。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -77,9 +77,9 @@ export declare class ReuseObject {
   has(key: string): boolean;
 
   /**
-    * Returns the keys array of the ReuseObject.
-    *
-   * @returns { string[] } - the keys array of the ReuseObject.
+   * 获取当前ReuseObject的所有数据索引。
+   *
+   * @returns { string[] } 返回当前ReuseObject的所有数据索引。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -88,9 +88,9 @@ export declare class ReuseObject {
 }
 
 /**
- * Defines Entry Annotation.
- *
- * Entry is an Annotation and it supports parameters.
+ * \@Entry装饰的自定义组件将作为UI页面的入口。在单个UI页面中，仅允许存在一个由@Entry装饰的
+ * 自定义组件作为页面的入口。开发指南参考：
+ * [@Component装饰器：自定义组件](docroot://ui/state-management-static/arkts-static-create-component.md#entry)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -100,8 +100,8 @@ export declare class ReuseObject {
 export @interface Entry {
 
   /**
-     * Named route name.
-     *
+   * 表示作为[命名路由](docroot://ui/arkts-routing.md#命名路由)页面的名字。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -109,8 +109,8 @@ export @interface Entry {
   routeName: string = "";
 
   /**
-     * Name of the function which returns LocalStorage instance.
-     *
+   * 返回[LocalStorage](docroot://ui/state-management/arkts-localstorage.md)实例对象的函数名。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -118,8 +118,10 @@ export @interface Entry {
   storage: string = "";
 
   /**
-     * Determines whether to use the LocalStorage instance object returned by UIContext.getSharedLocalStorage() interface.
-     *
+   * 是否使用UIContext.getSharedLocalStorage()接口返回的共享的
+   * [LocalStorage](docroot://ui/state-management/arkts-localstorage.md)实例对象，默认值false。
+   * true表示使用共享的LocalStorage实例对象。false表示不使用共享的LocalStorage实例对象。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -167,9 +169,9 @@ export declare enum ReusePoolOwnership {
 }
 
 /**
- * Defining Component Annotation
- *
- * Component is an Annotation to define a custom component using state management V1.
+ * \@Component装饰器能装饰struct关键字声明的数据结构。struct被@Component装饰后具备组件化的能力，
+ * 需要实现build方法描述UI，一个struct只能被一个@Component装饰。开发指南参考：
+ * [@Component装饰器：自定义组件](docroot://ui/state-management-static/arkts-static-create-component.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -198,9 +200,9 @@ export @interface Component {
 }
 
 /**
- * Defining ComponentV2 Annotation
- *
- * ComponentV2 is an Annotation to define a custom component using state management V2.
+ * \@ComponentV2主要配合状态管理V2使用。除非特别说明，@ComponentV2装饰的自定义组件将与@Component
+ * 装饰的自定义组件保持相同的行为。开发指南参考：
+ * [@ComponentV2装饰器：自定义组件](docroot://ui/state-management-static/arkts-static-componentv2.md)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -312,7 +314,9 @@ export @interface ReusableV2 {
 }
 
 /**
- * Defining CustomLayout Annotation that is used to decorate @Component and @ComponentV2.
+ * 在ArkTS-Sta中，自定义组件需要加上@CustomLayout装饰器，才能获得自定义布局能力。
+ * 开发指南参考：
+ * [自定义组件需要加上@CustomLayout装饰器以获得自定义布局能力](docroot://ui/arkts-dyn-sta-ui-rules.md#自定义组件需要加上customlayout装饰器以获得自定义布局能力)。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -342,9 +346,7 @@ export declare abstract class EntryPoint {
 }
 
 /**
- * Defining CustomDialog Annotation
- *
- * CustomDialog is an Annotation to define a custom dialog.
+ * 通过CustomDialogController类显示自定义弹窗。使用弹窗组件时，优先考虑自定义弹窗，便于弹窗样式与内容的自定义。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -450,9 +452,11 @@ export declare abstract class CustomComponent<T extends CustomComponent<T, T_Opt
     ): void;
 
   /**
-    * aboutToReuse Method
-    *
-   * @param { ReuseObject } params - Custom component init params.
+   * 当一个可复用的自定义组件从复用缓存中重新加入到节点树时，触发aboutToReuse生命周期回调，
+   * 并将组件的构造参数传递给该回调。
+   *
+   * @param { ReuseObject } params - 自定义组件的构造参数。其中key为复用时外部传入的组件成员变量名，
+   *     value为复用时外部传入的对应参数值。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -533,7 +537,7 @@ export declare abstract class CustomComponentV2<T extends CustomComponentV2<T, T
 }
 
 /**
- * Defining interface of PageLifeCycle for custom component, when decorate with @Entry.
+ * 页面生命周期。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -542,10 +546,8 @@ export declare abstract class CustomComponentV2<T extends CustomComponentV2<T, T
 export interface PageLifeCycle {
 
   /**
-   * onPageShow Method.
-   *
-   * The page is triggered once each time it is displayed, including scenarios such as
-   *     the routing process and the application entering the foreground
+   * router路由页面（即[@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)装饰的
+   * 自定义组件）每次显示时触发一次，包括路由跳转、应用进入前台等场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -554,10 +556,8 @@ export interface PageLifeCycle {
   onPageShow(): void {};
 
   /**
-   * onPageHide Method.
-   *
-   * It is triggered once each time the page is hidden, including scenarios such as
-   *     the routing process and the application entering the background
+   * router路由页面（即[@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)装饰的
+   * 自定义组件）每次隐藏时触发一次，包括路由跳转、应用进入后台等场景。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -566,12 +566,12 @@ export interface PageLifeCycle {
   onPageHide(): void {};
 
   /**
-   * onBackPress Method.
+   * 在router路由页面（即[@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)装饰的
+   * 自定义组件）生效，当用户点击返回按钮时触发。返回true表示页面自己处理返回逻辑，不进行页面路由；
+   * 返回false表示使用默认的路由返回逻辑，不设置返回值按照false处理。
    *
-   * Triggered when the user clicks the back button
-   *
-   * @returns { boolean } true means that the page itself processes the return logic.
-   *     false means that the default return logic is used.
+   * @returns { boolean } 返回按钮动作。返回true表示页面自己处理返回逻辑，不进行页面路由；
+   *     返回false表示使用默认的路由返回逻辑，不设置返回值按照false处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -579,8 +579,7 @@ export interface PageLifeCycle {
   onBackPress(): boolean { return false; };
 
   /**
-   * PageTransition Method.
-   * Implement Animation when enter this page or move to other pages.
+   * pageTransition函数用于定义页面入场和页面退场的转场动效。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -589,9 +588,12 @@ export interface PageLifeCycle {
   pageTransition(): void {};
 
   /**
-   * Triggered when the Entry custom component has been pushed with singleton mode.
+   * 该回调仅生效于由[@Entry](docroot://ui/state-management/arkts-create-custom-components.md#entry)装饰的、
+   * 作为[router]{@link router}路由页面存在的自定义组件。当之前存在于路由栈中的页面，通过单实例模式
+   * [RouterMode]{@link RouterMode}移动到栈顶时触发该回调。
    *
-   * @param { object | undefined | null } param - New parameters pushed with singleton mode.
+   * @param { object | undefined | null } param - 路由跳转时传递到目标页面的数据，与router.pushUrl()中
+   *     params字段传递的数据一致，数据结构由开发者自定义。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -600,7 +602,19 @@ export interface PageLifeCycle {
 }
 
 /**
- * Defining interface of LayoutCallbacks for custom component, when decorate with @Layoutable.
+ * 自定义组件的自定义布局允许开发者通过onMeasureSize和onPlaceChildren接口，以数据计算的方式精确控制子组件的位置和尺寸，实现更灵活的布局效果。适用于需要实现复杂非标准布局、内置布局组件无法满足特定排列需求、
+ * 需要根据动态数据计算子组件位置和尺寸等场景。
+ *
+ * > **说明：**
+ * >
+ * > - 在自定义组件内实现onMeasureSize、onPlaceChildren任一方法即视为实现自定义布局。onMeasureSize负责测量并返回自定义组件的尺寸，onPlaceChildren负责布局子组件的位置。
+ * > 为实现完整的自定义布局效果，推荐同时实现两种方法：onMeasureSize确定组件尺寸后，onPlaceChildren才能根据该尺寸正确布局子组件。具体参数说明请参见对应接口的详细描述。
+ * >
+ * > - 从API version 20开始，在自定义布局的自定义组件中，子组件若设置了[LayoutPolicy]{@link LayoutPolicy}对象的fixAtIdealSize属性，表示尺寸将不受父组件约束，
+ * > 完全按照开发者自定义的尺寸范围布局。
+ * >
+ * > - 自定义布局内不支持使用懒加载（包含[Repeat](docroot://ui/rendering-control/arkts-new-rendering-control-repeat.md)和
+ * > [LazyForEach](docroot://ui/rendering-control/arkts-rendering-control-lazyforeach.md)）。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -608,28 +622,42 @@ export interface PageLifeCycle {
  */
 export interface LayoutCallbacks {
 
-  /**
-   * Custom component override this method to layout each of its sub components.
-   *
-   * @param { GeometryInfo } selfLayoutInfo
-   * @param { Array<Layoutable> } children
-   * @param { ConstraintSizeOptions } constraint
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 23 static
-   */
+   /**
+    * ArkUI框架会在自定义组件确定位置时，将该自定义组件的子节点的布局信息通过onPlaceChildren传递给自定义组件。不允许在onPlaceChildren函数中改变状态变量。
+    *
+    * @param { GeometryInfo } selfLayoutInfo - 父组件（自定义组件）布局信息。
+    * @param { Array<Layoutable> } children - 计算子组件大小后的子组件布局信息。
+    * @param { ConstraintSizeOptions } constraint - 父组件传入的布局约束信息，包含minWidth、maxWidth、
+    *     minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 23 static
+    */
   onPlaceChildren(selfLayoutInfo: GeometryInfo, children: Array<Layoutable>, constraint: ConstraintSizeOptions): void {};
 
-  /**
-   * Custom component override this method to measure each of its sub components.
-   * @param { GeometryInfo } selfLayoutInfo
-   * @param { Array<Measurable> } children - indicate the measure child
-   * @param { ConstraintSizeOptions } constraint - indicate child constraint size
-   * @returns { SizeResult }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 23 static
-   */
+   /**
+    * ArkUI（方舟UI框架）会在自定义组件确定尺寸时，将该自定义组件的节点信息和尺寸范围通过
+    * onMeasureSize传递给开发者。不允许在onMeasureSize函数中改变状态变量。
+    *
+    * > **说明：**
+    * >
+    * > - 使用自定义布局方法时，推荐同时实现onMeasureSize和onPlaceChildren方法，否则可能出现布局异常。
+    * > - 自定义布局内不支持使用懒加载（包含Repeat和LazyForEach）。
+    * > - 父容器（自定义组件）上设置的尺寸信息，除aspectRatio之外，优先级小于onMeasureSize设置的尺寸信息。
+    *
+    * @param { GeometryInfo } selfLayoutInfo - 父组件（自定义组件）布局信息。
+    *     **说明：**
+    *     第一次布局时以自身设置的属性为准。
+    * @param { Array<Measurable> } children - 计算子组件大小后的测量信息。
+    *     **说明：**
+    *     如果没有设置子组件的尺寸信息，子组件会维持上一次的尺寸，当子组件从来没有设置过尺寸时，尺寸默认为0。
+    * @param { ConstraintSizeOptions } constraint - 父组件传入的布局约束信息，包含minWidth、maxWidth、
+    *     minHeight、maxHeight等约束条件。取值原则：minWidth≤maxWidth，minHeight≤maxHeight；单位：vp。
+    * @returns { SizeResult } 自定义组件自身的尺寸信息，包含测量后的宽度和高度。
+    * @syscap SystemCapability.ArkUI.ArkUI.Full
+    * @stagemodelonly
+    * @since 23 static
+    */
   onMeasureSize(selfLayoutInfo: GeometryInfo, children: Array<Measurable>, constraint: ConstraintSizeOptions): SizeResult {
         return {width: 0, height: 0} as SizeResult;
     };
@@ -677,7 +705,7 @@ export declare interface CustomComponentLifecycle {
   /**
    * getCurrentState函数用于获得自定义组件当前的生命周期状态。
    *
-   * @returns { CustomComponentLifecycleState } - 自定义组件当前的生命周期状态。
+   * @returns { CustomComponentLifecycleState } 自定义组件当前的生命周期状态。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 24 static

@@ -1561,7 +1561,7 @@ declare class SearchAttribute extends CommonMethod<SearchAttribute> {
    * >
    * > 当同时设置strokeWidth和[shaderStyle]{@link SearchAttribute#shaderStyle}时，shaderStyle不生效。
    *
-   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。当LengthMetrics对象的unit属性为LengthUnit.PERCENT时，当前设置不生效，按默认值处理。
+   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。
    *     <br>若设置值小于0，显示实心字；若大于0，显示空心字。
    *     <br>**说明：**
    *     <br>当同时设置strokeWidth和[shaderStyle]{@link SearchAttribute#shaderStyle}时，shaderStyle不生效。

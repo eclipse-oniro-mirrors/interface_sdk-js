@@ -228,7 +228,7 @@ export declare interface CustomDialogControllerOptions {
      */
     showInSubWindow?: boolean;
     /**
-     * Defines the dialog display mode when show in subwindow.
+     * 弹窗在子窗口中的显示模式。
      *
      * @default DialogDisplayMode.SCREEN_BASED
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -649,7 +649,7 @@ export declare interface CustomDialogControllerOptions {
      */
     systemMaterial?: SystemUiMaterial;
     /**
-     * Sets the distortion animation Mode of the dialog.
+     * 设置系统材质下弹窗的非线性动画模式。
      *
      * @default DistortionMode.DISTORTION_AUTO
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -659,7 +659,7 @@ export declare interface CustomDialogControllerOptions {
      */
     distortionMode?: DistortionMode;
     /**
-     * Sets the edgeLight animation Mode of the dialog.
+     * 设置系统材质下弹窗的流光动画模式。
      *
      * @default EdgeLightMode.EDGELIGHT_AUTO
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -668,6 +668,16 @@ export declare interface CustomDialogControllerOptions {
      * @since 26.0.0 static
      */
     edgeLightMode?: EdgeLightMode;
+    /**
+     * Set the component bound to the dialog.
+     *
+     * @type { ?ExtendableComponent }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    baseComponent?: ExtendableComponent;
 
     /**
      * 是否以及如何使对话框适配惯用手。

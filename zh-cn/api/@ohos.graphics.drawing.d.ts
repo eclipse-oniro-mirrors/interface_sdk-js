@@ -275,7 +275,7 @@ declare namespace drawing {
      */
     DIFFERENCE = 22,
     /**
-     * 排除模式，rc = s + d - two(s * d), ra = s + (1 - sa) * d，类似于DIFFERENCE，但对比度较低。
+     * 排除模式，rc = s + d - 2 * (s * d), ra = s + (1 - sa) * d，类似于DIFFERENCE，但对比度较低。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @crossplatform [since 20]

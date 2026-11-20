@@ -27,6 +27,7 @@ import { ComponentContentBase } from '../ComponentContent';
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, ICurve } from "./common";
 import { CommonModifier } from '@ohos.arkui.modifier';
+import { TabVisibility, SidebarSection } from './tabContent';
 
 import uiMaterial from '../../@ohos.arkui.uiMaterial'
 
@@ -216,6 +217,43 @@ export declare enum LayoutStyle {
    * @since 23 static
    */
   SPACE_BETWEEN_OR_CENTER = 2
+}
+
+/**
+ * Declare the overlap mode of the tab bar and tab content.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum BarOverlapMode {
+  /**
+   * The tab bar does not overlap with the tab content. The tab content height equals the Tabs height minus the tab bar
+   * height. This is equivalent to barOverlap(false).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  STANDARD = 0,
+  /**
+   * The tab bar floats on top of the tab content. The tab content occupies all available space. This is equivalent to
+   * barOverlap(true).
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  STACK = 1,
+  /**
+   * The tab bar area becomes part of the safe area padding for the tab content. The tab content can extend into the
+   * tab bar area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  SAFE_AREA_PADDING = 2
 }
 
 /**
@@ -1023,6 +1061,42 @@ export declare interface TabsBreakpointType<T> {
 }
 
 /**
+ * Defines the centralized customization configuration for the sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface TabViewCustomization {
+  /**
+   * A map of TabContent index to sidebar visibility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  visibilityMap?: Map<int, TabVisibility>;
+
+  /**
+   * A map of TabContent index to sidebar section.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  sectionMap?: Map<int, SidebarSection>;
+
+  /**
+   * A map of TabContent index to the display priority of tab items in the sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  orderMap?: Map<int, int>;
+}
+
+/**
  * The TabsAttribute.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1349,6 +1423,22 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 23 static
    */
   default barOverlap(value: boolean | undefined): this;
+
+  /**
+   * Sets the overlap mode of the tab bar and TabContent component.
+   *
+   * @param { BarOverlapMode | undefined } value - Overlap mode of the tab bar and tab content.
+   * **BarOverlapMode.STACK**: The tab bar overlaps with the tab content with a blurred background.
+   * **BarOverlapMode.STANDARD**: There is no blur or overlap effect.
+   * **BarOverlapMode.SAFE_AREA_PADDING**: The tab bar area becomes part of the safe area padding for the tab
+   * content.
+   * Default value is **BarOverlapMode.STANDARD**.
+   * @returns { TabsAttribute } the attribute of the tabs
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default barOverlap(value: BarOverlapMode | undefined): this;
 
   /**
    * Set the background color of the tab bar.
@@ -1834,6 +1924,17 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.1.0 static
    */
   default showSidebarControlButton(value: boolean | undefined): this;
+
+  /**
+   * Sets the centralized customization configuration for the sidebar tab bar.
+   *
+   * @param { TabViewCustomization | undefined } value - The centralized customization configuration.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default tabViewCustomization(value: TabViewCustomization | undefined): this;
 }
 
 /**

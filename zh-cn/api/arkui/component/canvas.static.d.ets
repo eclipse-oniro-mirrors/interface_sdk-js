@@ -166,7 +166,7 @@ export declare class CanvasGradient {
 }
 
 /**
- * Path object, which provides basic methods for drawing paths.
+ * 路径对象，提供基本的路径绘制方法。路径相关API的详细说明请参见CanvasRenderingContext2D中的描述。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -174,29 +174,44 @@ export declare class CanvasGradient {
  */
 export declare class CanvasPath {
   /**
-   * Draw an arc path
+   * 绘制弧线路径。
    *
-   * @param { double } x - The x-axis coordinate of the center (center of the circle) of the arc.
-   * @param { double } y - The y-axis coordinate of the center (center of the circle) of the arc.
-   * @param { double } radius - Radius of the arc.
-   * @param { double } startAngle - Start point of an arc, which starts to be calculated in the x-axis direction.
-   *     The unit is radian.
-   * @param { double } endAngle - The end point of the arc, in radians.
-   * @param { boolean } [counterclockwise] - If the value is true, the arc is drawn counterclockwise. Otherwise,
-   *     the arc is drawn clockwise. The default value is false.
+   * @param { double } x - 弧线圆心的x坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y - 弧线圆心的y坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } radius - 弧线的圆半径。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } startAngle - 弧线的起始弧度。单位：弧度。
+   * @param { double } endAngle - 弧线的终止弧度。单位：弧度。
+   * @param { boolean } counterclockwise - 是否逆时针绘制圆弧。<br>**true**：逆时针方向绘制圆弧。
+   *    <br>**false**：顺时针方向绘制圆弧。<br>默认值：**false**，设置**null**或**undefined**按默认值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   arc(x: double, y: double, radius: double, startAngle: double, endAngle: double, counterclockwise?: boolean): void;
   /**
-   * Draw arc paths based on control points and radius
+   * 依据圆弧经过的点和圆弧半径创建圆弧路径。
    *
-   * @param { double } x1 - The x-axis coordinate of the first control point.
-   * @param { double } y1 - The y-axis coordinate of the first control point.
-   * @param { double } x2 - The x-axis coordinate of the second control point.
-   * @param { double } y2 - The y-axis coordinate of the second control point.
-   * @param { double } radius - Radius of the arc.
+   * @param { double } x1 - 圆弧经过的第一个点的x坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径
+   *    不显示；设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或
+   *    undefined时当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y1 - 圆弧经过的第一个点的y坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径
+   *    不显示；设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或
+   *    undefined时当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } x2 - 圆弧经过的第二个点的x坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径
+   *    不显示；设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或
+   *    undefined时当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y2 - 圆弧经过的第二个点的y坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径
+   *    不显示；设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或
+   *    undefined时当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } radius - 圆弧的圆半径值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -217,7 +232,7 @@ export declare class CanvasPath {
    */
   bezierCurveTo(cp1x: double, cp1y: double, cp2x: double, cp2y: double, x: double, y: double): void;
   /**
-   * Returns the pen point to the start point of the current sub-path
+   * 将路径的当前点移回到路径的起点，当前点到起点间画一条直线。如果形状已经闭合或只有一个点，则此功能不执行任何操作。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -225,18 +240,25 @@ export declare class CanvasPath {
    */
   closePath(): void;
   /**
-   * Draw an Elliptic Path
+   * 在规定的矩形区域绘制一个椭圆。
    *
-   * @param { double } x - x-axis coordinate of the center of the ellipse.
-   * @param { double } y - y-axis coordinate of the center of the ellipse.
-   * @param { double } radiusX - Radius of the major axis of the ellipse.
-   * @param { double } radiusY - Radius of the minor axis of the ellipse.
-   * @param { double } rotation - The rotation angle of the ellipse, in radians (not angular degrees).
-   * @param { double } startAngle - The angle of the starting point to be drawn, measured from the x-axis in radians
-   *     (not angular degrees).
-   * @param { double } endAngle - The angle, in radians, at which the ellipse is to be drawn (not angular degrees).
-   * @param { boolean } [counterclockwise] - If the value is true, the ellipse is drawn counterclockwise. Otherwise,
-   *     the ellipse is drawn clockwise. The default value is false.
+   * @param { double } x - 椭圆圆心的x轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y - 椭圆圆心的y轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } radiusX - 椭圆x轴的半径长度。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } radiusY - 椭圆y轴的半径长度。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } rotation - 椭圆的旋转角度。单位：弧度。
+   * @param { double } startAngle - 椭圆绘制的起始点角度。单位：弧度。
+   * @param { double } endAngle - 椭圆绘制的结束点角度。单位：弧度。
+   * @param { boolean } counterclockwise - 是否以逆时针方向绘制椭圆。<br>**true**：逆时针方向绘制椭圆。
+   *    <br>**false**：顺时针方向绘制椭圆。<br>默认值：**false**，设置**null**或**undefined**按默认值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -244,32 +266,54 @@ export declare class CanvasPath {
   ellipse(x: double, y: double, radiusX: double, radiusY: double, rotation: double, startAngle: double,
     endAngle: double, counterclockwise?: boolean): void;
   /**
-   * Connect sub-path using straight lines
+   * 从当前点绘制一条直线到目标点。
    *
-   * @param { double } x - The x-axis coordinate of the end point of the line.
-   * @param { double } y - The y-axis coordinate of the end point of the line.
+   * @param { double } x - 目标点X轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y - 目标点Y轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   lineTo(x: double, y: double): void;
   /**
-   * Moves the start point of a new sub-path to the (x, y) coordinate.
+   * 将路径的当前坐标点移动到目标点，移动过程中不绘制线条。
    *
-   * @param { double } x - The x-axis coordinate of the point.
-   * @param { double } y - The y-axis coordinate of the point.
+   * @param { double } x - 目标点X轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y - 目标点Y轴坐标。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   *    > **说明：**
+   *    >
+   *    > API version 18之前，如果没有调用**moveTo**接口或传入无效参数，路径从(0,0)开始。
+   *    >
+   *    > API version 18及以后，如果没有调用**moveTo**接口或传入无效参数，路径将从第一个有效调用的
+   *    > **lineTo**、**arcTo**、**bezierCurveTo**或**quadraticCurveTo**的起始点开始。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   moveTo(x: double, y: double): void;
   /**
-   * Draw quadratic Bezier curve paths
+   * 创建二次贝塞尔曲线路径。
    *
-   * @param { double } cpx - The x-axis coordinate of the control point.
-   * @param { double } cpy - The y-axis coordinate of the control point.
-   * @param { double } x - x-axis coordinate of the end point.
-   * @param { double } y - y-axis coordinate of the end point.
+   * @param { double } cpx - 贝塞尔参数的x坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } cpy - 贝塞尔参数的y坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } x - 路径结束时的x坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
+   * @param { double } y - 路径结束时的y坐标值。<br>API version 18之前，设置NaN或Infinity时，整条路径不显示；
+   *    设置null或undefined时，当前接口不生效。API version 18及以后，设置NaN、Infinity、null或undefined时
+   *    当前接口不生效，其他传入有效参数的路径方法正常绘制。默认单位：vp
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -289,14 +333,26 @@ export declare class CanvasPath {
   rect(x: double, y: double, w: double, h: double): void;
 
   /**
-   * Draw rounded Rectangular Paths
+   * 创建圆角矩形路径，此方法不会直接渲染内容，如需将圆角矩形绘制到画布上，可以使用fill或stroke方法。
    *
-   * @param { double } x - The x-axis coordinate of the start point of the rectangle.
-   * @param { double } y - The y-axis coordinate of the start point of the rectangle.
-   * @param { double } w - Width of the rectangle.
-   * @param { double } h - Height of the rectangle.
-   * @param { double | Array<double> } [radii] - A number or list specifying the radii of the circular arc
-   *     to be used for the corners of the rectangle. The default value is 0.
+   * @param { double } x - 矩形左上角x坐标值。<br>设置**null**时，按照**0**处理；设置**undefined**时，
+   *    按无效值处理，不进行绘制。<br>绘制完整矩形时，取值范围为[0, 画布宽度)。<br>默认单位：vp
+   * @param { double } y - 矩形左上角y坐标值。<br>设置**null**时，按照**0**处理；设置**undefined**时，
+   *    按无效值处理，不进行绘制。<br>绘制完整矩形时，取值范围为[0, 画布高度)。<br>默认单位：vp
+   * @param { double } w - 矩形的宽度。负值表示从右向左绘制矩形。<br>设置**null**时，按照**0**处理；
+   *    设置**undefined**时，按无效值处理，不进行绘制。<br>绘制完整矩形时，取值范围为[-x, 画布宽度 - x]。
+   *    <br>默认单位：vp
+   * @param { double } h - 矩形的高度。负值表示向上绘制。<br>设置**null**时，按照**0**处理；
+   *    设置**undefined**时，按无效值处理，不进行绘制。<br>绘制完整矩形时，取值范围为[-y, 画布高度 - y]。
+   *    <br>默认单位：vp
+   * @param { double | Array<double> } radii - 矩形圆角的圆弧半径值或半径值列表。
+   *    <br>参数类型为number时，表示矩形四个角的圆弧半径。
+   *    <br>参数类型为Array<number>时，数组包含1到4个数字，含义如下：<br>[矩形四个角的圆弧半径]
+   *    <br>[矩形左上角和右下角的圆弧半径，矩形右上角和左下角的圆弧半径]<br>[矩形左上角的圆弧半径，
+   *    矩形右上角和左下角的圆弧半径，矩形右下角的圆弧半径]<br>[矩形左上角的圆弧半径，矩形右上角的圆弧半径，
+   *    矩形右下角的圆弧半径，矩形左下角的圆弧半径]<br>如果**radii**中包含负数或数组元素个数不在[1,4]范围内，
+   *    则上报错误码103701。<br>默认值：**0**。设置**null**或**undefined**时按默认值处理。<br>如果圆弧半径超过
+   *    矩形的宽度和高度，将按比例缩小以匹配对应尺寸。<br>默认单位：vp
    * @throws { BusinessError } 103701 - Parameter error. Possible causes:
    * <br> 1. The param radii is a list that has zero or more than four elements.
    * <br> 2. The param radii contains negative value.
@@ -308,7 +364,18 @@ export declare class CanvasPath {
 }
 
 /**
- * 2D path object for path drawing
+ * 路径对象，支持通过对象的接口进行路径的描述和组合，并通过Canvas的stroke接口或者fill接口进行绘制。
+ * Path2D支持复用路径、组合多个路径、基于SVG路径字符串创建路径等功能，适用于需要多次绘制相同路径、动态组合复杂图形或基于SVG路径数据绘制图形的场景。
+ *
+ * > **说明：**
+ * >
+ * > Path2D对象不支持重置已设置的路径，如需新路径可重新创建一个空的Path2D对象。
+ * >
+ * > Path2D对象的方法无法对
+ * > [CanvasRenderingContext2D]{@link CanvasRenderingContext2D}
+ * > 和
+ * > [OffscreenCanvasRenderingContext2D]{@link OffscreenCanvasRenderingContext2D}
+ * > 对象中设置的路径生效。
  *
  * @extends CanvasPath
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -317,17 +384,21 @@ export declare class CanvasPath {
  */
 export declare class Path2D extends CanvasPath {
   /**
-   * Adds a path according to the specified path variable.
+   * 将另一个路径添加到当前的路径对象中，并使用Matrix2D对象对新添加的路径对象进行图形变换。
    *
-   * @param { Path2D } path - Indicates the path object to be added.
-   * @param { Matrix2D } [transform] - Transformation matrix of the new trail. The default value is null.
+   * @param { Path2D } path - 需要添加到当前路径的路径对象。
+   *    <br>异常值undefined和null按无效值处理。
+   * @param { Matrix2D } transform - 新增路径的变换矩阵对象，用于对添加的路径进行平移、旋转、缩放等变换。
+   *    当需要对添加的路径进行图形变换时传入此参数，不需要变换时可不传。不传入时默认为null，表示不对路径进行变换。
+   *    <br>异常值undefined和null按无效值处理。
+   *    <br>默认值：null
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   addPath(path: Path2D, transform?: Matrix2D): void;
   /**
-   * Create an empty path object.
+   * 构造一个空的Path2D对象。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -335,48 +406,58 @@ export declare class Path2D extends CanvasPath {
    */
   constructor();
   /**
-   * Create an empty path object.
+   * 构造一个空的Path2D对象，支持配置Path2D对象的单位模式。
    *
-   * @param { LengthMetricsUnit } unit - the unit mode
+   * @param { LengthMetricsUnit } unit - 用来配置Path2D对象的单位模式，配置后无法动态更改，
+   *    配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
+   *    <br>异常值NaN和Infinity按默认值处理。
+   *    <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   constructor(unit: LengthMetricsUnit);
   /**
-   * Create a copy of a path object
+   * 使用路径对象构造Path2D对象。
    *
-   * @param { Path2D } path - Path object to be copied
+   * @param { Path2D } path - 需要复制的路径对象，新创建的Path2D对象将包含与原路径相同的路径数据。异常值null和undefined时创建空路径对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   constructor(path: Path2D);
   /**
-   * Create a copy of a path object
+   * 使用路径对象构造Path2D对象，支持配置Path2D对象的单位模式。
    *
-   * @param { Path2D } path - Path object to be copied
-   * @param { LengthMetricsUnit } unit - the unit mode
+   * @param { Path2D } path - 需要复制的Path2D路径对象，用于基于现有路径创建新的Path2D对象。传入的路径对象不会被修改，新创建的对象将包含该路径的完整副本。
+   * @param { LengthMetricsUnit } unit - 用来配置Path2D对象的单位模式，配置后无法动态更改，
+   *    配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
+   *    <br>异常值NaN和Infinity按默认值处理。
+   *    <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   constructor(path: Path2D, unit: LengthMetricsUnit);
   /**
-   * Create a new path according to the description.
+   * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
-   * @param { string } d - Indicates the path string that compiles with the SVG path description specifications.
+   * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
+   *    [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   constructor(d: string);
   /**
-   * Create a new path according to the description.
+   * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
-   * @param { string } description - Indicates the path string that compiles with
-   *     the SVG path description specifications.
-   * @param { LengthMetricsUnit } unit - the unit mode
+   * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
+   *    [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
+   * @param { LengthMetricsUnit } unit - 用来配置Path2D对象的单位模式，配置后无法动态更改，
+   *    配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
+   *    <br>异常值NaN和Infinity按默认值处理。
+   *    <br>默认值：DEFAULT
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2242,11 +2323,17 @@ export declare interface CanvasAttribute extends CommonMethod {
    */
   enableAnalyzer(enable: boolean | undefined): this;
   /**
-   * Set Canvas options.
+   * 设置Canvas选项。
    *
-   * @param { CanvasRenderingContext2D | DrawingRenderingContext } [context] - Canvas context object.
-   * @param { ImageAIOptions } [imageAIOptions] - Options for AI analyzer.
-   * @returns { CanvasAttribute } Returns instance of CanvasAttribute.
+   * @param { CanvasRenderingContext2D | DrawingRenderingContext } context - CanvasRenderingContext2D: 不支持多个Canvas共用一个
+   *    CanvasRenderingContext2D对象，具体描述见[CanvasRenderingContext2D]{@link Canvas}对象。DrawingRenderingContext: 不支持多个
+   *    Canvas共用一个DrawingRenderingContext对象，具体描述见[DrawingRenderingContext]{@link Canvas}对象。
+   *    <br>异常值null和undefined按未设置context处理。
+   * @param { ImageAIOptions } imageAIOptions - 给组件设置一个AI分析选项，通过此项可配置分析类型或绑定一个分析控制器。
+   *    <br>异常值null和undefined按[ImageAIOptions]{@link ImageAIOptions}的默认值处理，默认取值为{ type:
+   *    [ImageAnalyzerType.SUBJECT, ImageAnalyzerType.TEXT], aiController: new ImageAnalyzerController() }，即开启主体识别和文字识别
+   *    功能。
+   * @returns { CanvasAttribute } 返回CanvasAttribute实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @unpublished
    * @stagemodelonly
@@ -2254,10 +2341,10 @@ export declare interface CanvasAttribute extends CommonMethod {
    */
   default setCanvasOptions(context?: CanvasRenderingContext2D | DrawingRenderingContext, imageAIOptions?: ImageAIOptions): this;
   /**
-   * Set Canvas options.
+   * 设置Canvas选项。
    *
-   * @param { CanvasParams } params - Parameters for creating Canvas.
-   * @returns { CanvasAttribute } Returns instance of CanvasAttribute.
+   * @param { CanvasParams } params - Canvas组件的构造参数，用于创建不缓存指令的Canvas组件。配置参数详见[CanvasParams]{@link CanvasParams}。
+   * @returns { CanvasAttribute } 返回CanvasAttribute实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @unpublished
    * @stagemodelonly
@@ -2265,9 +2352,10 @@ export declare interface CanvasAttribute extends CommonMethod {
    */
   default setCanvasOptions(params: CanvasParams): this;
   /**
-   * Call attributeModifier.
+   * 设置组件的动态属性。
    *
-   * @param { AttributeModifier<CanvasAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
+   * @param { AttributeModifier<CanvasAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - 动态设置Canvas组件的属性。<br>
+   *    取值为undefined时，按当前组件的属性方法默认值处理。
    * @returns { CanvasAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -1899,7 +1899,10 @@ declare namespace photoAccessHelper {
      *     <br>- It must not contain a file name extension.
      *     <br>- The string length
      *     ranges from 1 to 255. (The asset file name is in the format of title + file name extension.)
-     *     <br>- It must not contain any invalid characters, which are:\ / : * ? " ' ` < > | { } [ ]
+     *     <br>- Invalid English characters.
+     *     <br>- API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed,
+     *     but a period (.) cannot be used as the first character.
+     *     <br>- Before API26.1.0, invalid characters include: . \ / : * ? " ' ` < > | { } [ ]
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2648,7 +2651,10 @@ declare namespace photoAccessHelper {
      *     <br>- It must not contain a file name extension.
      *     <br>- The string length ranges from 1 to 255. (The asset file name is in
      *     the format of title + file name extension.)
-     *     <br>- It must not contain any invalid characters, which are:\ / : * ? " ' ` < > | { } [ ]
+     *     <br>- Invalid English characters.
+     *     <br>- API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed,
+     *     but a period (.) cannot be used as the first character.
+     *     <br>- Before API26.1.0, invalid characters include: . \ / : * ? " ' ` < > | { } [ ]
      * @returns { Promise<PhotoAsset> } Promise used to return the
      *     [PhotoAsset]{@link @ohos.file.photoAccessHelper:photoAccessHelper} instance.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -4218,7 +4224,9 @@ declare namespace photoAccessHelper {
      * - It must not contain a file name extension.
      * - The total length of the file name, which is in the format of title+file name extension, must be between 1 and 2
      * 55 characters.
-     * - It must not contain any invalid characters, which are:\ / : * ? " ' ` < > | { } [ ]
+     * - Invalid English characters that are not allowed.
+     * - API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed, but a period (.) cannot be used as the first character.
+     * - Before API26.1.0, illegal characters include: . \ / : * ? " ' ` < > | { } [ ]
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -4277,7 +4285,9 @@ declare namespace photoAccessHelper {
      * If this parameter is not passed, the system generates a value. The parameter specifications are as follows:
      *
      * - It must not contain a file name extension.
-     * - It must not contain any invalid characters, which are:\ / : * ? " ' ` < > | { } [ ]
+     * - Invalid English characters that are not allowed.
+     * - API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed, but a period (.) cannot be used as the first character.
+     * - Before API26.1.0, illegal characters include: . \ / : * ? " ' ` < > | { } [ ]
      * - The file name consists of the title and file name extension. The file name string length ranges from 1 to 255.
      * Therefore, the title length cannot be too long.
      *
@@ -6140,7 +6150,10 @@ declare namespace photoAccessHelper {
      *     <br>**NOTE**
      *     <br>If a **subtype** option is passed, the configuration does not take effect. Only DEFAULT images can
      *     be saved.
-     *     <br>The file name must not contain any invalid characters, which are:.. \ / : * ? " ' ` < > | { } [ ]
+     *     <br> Invalid English characters.
+     *     <br> API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed,
+     *     but a period (.) cannot be used as the first character.
+     *     <br> Before API26.1.0, invalid characters include: . \ / : * ? " ' ` < > | { } [ ]
      * @param { AsyncCallback<string> } callback - Callback used to return the URI of the created image or video asset.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
@@ -12984,7 +12997,10 @@ declare namespace photoAccessHelper {
      * @param { string } extension - File name extension, for example, **'jpg'**.
      * @param { CreateOptions } [options] - Options for creating the image or video asset, for example,
      *     **{title: 'testPhoto'}**.
-     *     <br>The file name must not contain any invalid characters, which are:.. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>Invalid English characters.
+     *     <br>API version 26.1.0 and later versions. Invalid characters include: \ / : * ? " ' ` < > | { } [ ]; A period (.) is allowed,
+     *     but a period (.) cannot be used as the first character.
+     *     <br>Before API26.1.0, invalid characters include: . \ / : * ? " ' ` < > | { } [ ]
      * @returns { MediaAssetChangeRequest } **MediaAssetChangeRequest** created.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -13920,9 +13936,8 @@ declare namespace photoAccessHelper {
      * @param { string } name - asset name to set.
      *     <br> Should not contain extensions.
      *     The file name contains 1 to 255 characters.
-     *     Invalid English characters, including:
-     *     . \ /: *? "'`< > | {} []
-     *     Name-only is not allowed. Or..
+     *     Invalid English characters, including:  \ / : * ? " ' ` < > | { } [ ] can contain a period(.), but cannot start with a period(.).
+     *     The name of the document management directory must be unique.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
      *     <br>The asset is not exist;
@@ -14617,7 +14632,7 @@ declare namespace photoAccessHelper {
      *     <br>Value range:1-255
      *     <br>Album name parameter specifications:
      *     The album name contains 1 to 255 characters.
-     *     Invalid English characters, including:
+     *     It must not contain the following invalid characters:
      *     \ /: *? "'`< > | {} []
      *     It is not allowed to name only. or..
      *     English characters are case insensitive.
@@ -19674,7 +19689,7 @@ declare namespace photoAccessHelper {
      * @param { string } outVideoParentFolder - Video output parent folder.
      * @returns { string[] } Returns the path to pictures and videos
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. SingleFileMovingPhotoUri、outImageParentFolder、outVideoParentFolder are empty or can not open.
+     *     <br>1. SingleFileMovingPhotoUri, outImageParentFolder, outVideoParentFolder are empty or can not open.
      *     <br>2. When saving generated files, a naming conflict occurs after more than 10 attempts.
      * @throws { BusinessError } 23800109 - Incorrect file format.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -19694,7 +19709,7 @@ declare namespace photoAccessHelper {
      * @param { string } outParentFolder - Output single file moving photo parent folder.
      * @returns { string } Returns the single file moving photo path.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
-     *     <br>1. ImageUri、videoUri and outParentFolder are empty or can not open.
+     *     <br>1. imageUri, videoUri and outParentFolder are empty or can not open.
      *     <br>2. The image and video formats do not satisfy jpeg/jpg/heic/heif+mp4.
      *     <br>3. When saving generated files, a naming conflict occurs after more than 10 attempts.
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core

@@ -883,8 +883,14 @@ export declare struct ChipGroup {
   backgroundSystemMaterial?: uiMaterial.Material;
 
   /**
-   * Set system-styled materials for the component when selected. Different materials have different effects,
-   * which can influence the backgroundColor, border, shadow, and other visual attributes of the component.
+   * 设置组件选中状态的系统材质样式。不同材质具有不同的效果，能够影响组件选中时的[backgroundColor]{@link CommonMethod#backgroundColor(value: ResourceColor)}、
+   * [border]{@link CommonMethod#border}、[shadow]{@link CommonMethod#shadow(value: ShadowOptions | ShadowStyle)}视觉属性。设置自
+   * 动反色的系统材质时，selectedFontColor如果使用系统预定义的可反色颜色资源（如`$r('sys.color.font_primary')`），颜色自动适配到材质背景色的反色。当设置
+   * selectedBackgroundSystemMaterial时，应将selectedBackgroundColor设为Color.Transparent，否则会与系统材质冲突。
+   *
+   * 默认值：undefined
+   *
+   * 值为undefined时，不应用选中状态的材质样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

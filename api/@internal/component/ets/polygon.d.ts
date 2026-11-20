@@ -108,7 +108,7 @@ interface PolygonInterface {
    *     passed, the default width and height (both 0) are used. If **undefined** or **null** is passed, the parameter
    *     setting does not take effect and the component attributes remain unchanged. [since 18]
    * @returns { PolygonAttribute } [since 18]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 9]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
    * @form [since 9]

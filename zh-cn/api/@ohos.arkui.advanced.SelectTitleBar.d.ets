@@ -19,7 +19,7 @@
  */
 
 /**
- * Declaration of the menu item on the right side.
+ * 声明右侧菜单项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

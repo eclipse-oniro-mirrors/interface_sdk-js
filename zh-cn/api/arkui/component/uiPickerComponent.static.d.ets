@@ -22,7 +22,7 @@
 
 import { ResourceColor, BorderRadiuses, LocalizedBorderRadiuses } from "./units";
 
-import { CommonMethod } from './common';
+import { CommonMethod, PickerComponentTextStyle } from './common';
 
 import { LengthMetrics } from './../Graphics';
 
@@ -353,14 +353,35 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default displayedItemCount(count: int | undefined): this;
+
+  /**
+   * 设置选中项的文本样式。
+   * 默认值：
+   * {
+   * color: $r('sys.color.font_primary'),
+   * font: {
+   * size: '20fp',
+   * weight: FontWeight.Normal
+   * },
+   * overflow: TextOverflow.Clip
+   * }
+   *
+   * @param { PickerComponentTextStyle | undefined } style
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default selectedTextStyle(style: PickerComponentTextStyle | undefined): UIPickerComponentAttribute;
 }
 
 /**
  * 定义UIPickerComponent组件。
  *
- * @param { UIPickerComponentOptions } [options] - picker options.
+ * @param { UIPickerComponentOptions } [options] - 配置UIPickerComponent容器的参数，用于自定义初始选中项等配置。
+ *     参数缺省时组件占位，但内容显示为空。当需要设置初始选中项时传入此参数。
  * @param { CustomBuilder } [content_]
- * @returns { UIPickerComponentAttribute } - The attribute of the Picker.
+ * @returns { UIPickerComponentAttribute } - 返回选择器的属性对象。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

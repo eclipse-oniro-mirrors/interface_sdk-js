@@ -237,6 +237,24 @@ export default class EnterpriseAdminExtensionAbility {
   onAccountSwitched(accountId: number): void;
 
   /**
+   * Callback for account switched events.
+   * Called when the current user account is switched from one account to another.
+   * This callback differs from the existing onAccountSwitched(accountId: number) by providing both source and
+   * target account IDs for more detailed account transition tracking.
+   *
+   * You should register the **MANAGED_EVENT_ACCOUNT_SWITCHED** event through the
+   * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
+   * API.
+   *
+   * @param { number } fromAccountId - ID of the account that was switched from.
+   * @param { number } toAccountId - ID of the account that was switched to.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onAccountSwitched(fromAccountId: number, toAccountId: number): void;
+
+  /**
    * Called when the system account is removed. You should register the **MANAGED_EVENT_ACCOUNT_REMOVED** event through
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}.
    * The enterprise administrator application can subscribe to system account removal events. When a system account is
@@ -483,11 +501,24 @@ export default class EnterpriseAdminExtensionAbility {
    * [adminManager.subscribeManagedEventSync]{@link @ohos.enterprise.adminManager:adminManager.subscribeManagedEventSync}
    * API.
    *
-   * @param { number } cumulativeFailedCount - Cumulative number of failed password attempts.
-   * @param { number } accountId - ID of the user whose password authentication failed.
+   * @param { number } cumulativeFailedCount - Total number of failed password attempts.
+   * @param { number } accountId - ID of the account whose password authentication failed.
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
    * @stagemodelonly
    * @since 26.1.0
    */
   onPasswordFailed(cumulativeFailedCount: number, accountId: number): void;
+
+  /**
+   * Callback for USB device added events.
+   * Called when a USB device is added to the device. This callback is triggered when a USB device is plugged in
+   * and the system has recognized it.
+   *
+   * @param { common.UsbDeviceInfo } usbDeviceInfo - USB device information, including bus number, device address,
+   *     serial number, vendor ID, product ID, and other device attributes.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  onUsbDeviceAdded(usbDeviceInfo: common.UsbDeviceInfo): void;
 }

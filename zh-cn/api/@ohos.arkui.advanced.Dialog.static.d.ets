@@ -274,7 +274,7 @@ export declare struct TipsDialog {
    */
   onCheckedChange?: Callback<boolean>;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -368,7 +368,7 @@ export declare struct SelectDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -482,7 +482,7 @@ export declare struct ConfirmDialog {
    */
   onCheckedChange?: Callback<boolean>;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -582,7 +582,7 @@ export declare struct AlertDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -638,7 +638,7 @@ export declare struct LoadingDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -748,7 +748,7 @@ export declare struct CustomContentDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -794,7 +794,7 @@ export declare struct PopoverDialog {
   @Require @BuilderParam
   targetBuilder: () => void;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

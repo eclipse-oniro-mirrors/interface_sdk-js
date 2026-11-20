@@ -455,8 +455,37 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     SMOOTH = 2,
- 	}
- 	 
+  }
+
+  /**
+   * Material color blend mode.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum MaterialColorBlendMode {
+    /**
+     * Linear mix mode. The material color is mixed with the material background in a linear manner.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    LINEAR_MIX = 0,
+    /**
+     * Tinted glass mode. The material color is applied as a tinted glass effect, maintaining background transparency.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    TINTED_GLASS = 1
+  }
+
   /**
    * Obtains the global material level, which is related to the device computing power. This configuration item is 
    * defined by the device and cannot be modified.
@@ -692,6 +721,33 @@ declare namespace uiMaterial {
      * @since 26.0.0 dynamic
      */
     lightEffect?: LightEffectOptions | null;
+    /**
+     * Material color mode.
+     * Note: Fix the material's light/dark mode, overriding WithTheme and independent of the system theme.
+     * This affects only the material effect, leaving child components and other properties unchanged.
+     * Default value: **ThemeColorMode.SYSTEM**.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @crossplatform
+     * @atomicservice
+     * @since 26.1.0 dynamic
+     */
+    colorMode?: ThemeColorMode;
+    /**
+     * Material color blend mode.
+     * Default value: uiMaterial.MaterialColorBlendMode.LINEAR_MIX.
+     * Note: 1. This parameter takes effect only on the display effect of high- and medium- computing power devices
+     * that support immersive material.
+     * 2. **TINTED_GLASS** takes effect only on some components. Currently supported components include:
+     * Button, Chip, ChipGroup, and Toggle. For other components, **TINTED_GLASS** does not take effect.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    colorBlendMode?: MaterialColorBlendMode;
   }
 
   /**

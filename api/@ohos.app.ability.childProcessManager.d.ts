@@ -131,7 +131,9 @@ declare namespace childProcessManager {
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000061 - Operation not supported.
+   * @throws { BusinessError } 16000061 - Operation not supported. Possible causes:
+   *     <br>1. Child processes cannot be started from within a child process;
+   *     <br>2. The device does not support the capability.
    * @throws { BusinessError } 16000062 - The number of child processes exceeds the upper limit.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -171,7 +173,9 @@ declare namespace childProcessManager {
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000061 - Operation not supported.
+   * @throws { BusinessError } 16000061 - Operation not supported. Possible causes:
+   *     <br>1. Child processes cannot be started from within a child process;
+   *     <br>2. The device does not support the capability.
    * @throws { BusinessError } 16000062 - The number of child processes exceeds the upper limit.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -216,7 +220,7 @@ declare namespace childProcessManager {
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000061 - Operation not supported.
+   * @throws { BusinessError } 16000061 - Operation not supported. Child processes cannot be started from within a child process.
    * @throws { BusinessError } 16000062 - The number of child processes exceeds the upper limit. [since 13]
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -258,7 +262,7 @@ declare namespace childProcessManager {
    * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
    *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16000050 - Internal error.
-   * @throws { BusinessError } 16000061 - Operation not supported.
+   * @throws { BusinessError } 16000061 - Operation not supported. Child processes cannot be started from within a child process.
    * @throws { BusinessError } 16000062 - The number of child processes exceeds the upper limit.
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly

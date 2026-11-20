@@ -138,7 +138,7 @@ export declare struct MultiNavigation {
   onHomeShowOnTop?: OnHomeShowOnTopCallback;
 
   /**
-   * The method to build multiNavigation.
+   * 构建MultiNavigation的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -159,7 +159,7 @@ export declare struct MultiNavigation {
 export declare class MultiNavPathStack extends NavPathStack {
 
   /**
-   * Creates an instance of MultiNavPathStack.
+   * 创建MultiNavPathStack实例。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

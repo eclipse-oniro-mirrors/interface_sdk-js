@@ -212,8 +212,7 @@ declare namespace hiTraceMeter {
    * 如果具有相同name的任务是串行执行的，则taskId可以相同。具体示例可参考[finishAsyncTrace()]{@link hiTraceMeter.finishAsyncTrace}
    * 中的示例。
    *
-   * @param { HiTraceOutputLevel } level - 跟踪输出级别，必须与流程开始的
-   * [startAsyncTrace()]{@link hiTraceMeter.startAsyncTrace}的level参数值一致。
+   * @param { HiTraceOutputLevel } level - 跟踪输出级别。
    * @param { string } name - 要跟踪的任务名称。由于单条trace记录的总长度限制为512Byte，超过的部分将会被截断，建议name、
    * customCategory、customArgs的长度之和不要超过420Byte。
    * @param { int } taskId - 任务id。用来区分具有相同名称的多个不同的任务，需确保并发执行的同名任务之间的任务id具有唯一性。

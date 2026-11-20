@@ -228,8 +228,8 @@ declare class CanvasGradient {
   /**
    * Sets the gradient breakpoint value, including the offset and color. Colors in RGB or
    * ARGB format are supported. P3 wide color gamut color values can be set by passing in
-   * the [ColorMetrics]{@link ColorMetrics} type. Since API version 26.0.0, BT2020 wide
-   * color gamut and HDR brightening are also supported.
+   * the [ColorMetrics]{@link ColorMetrics} type. <!--Del-->Since API version 26.0.0, BT2020 wide
+   * color gamut and HDR brightening are also supported.<!--DelEnd-->
    *
    * > **NOTE**
    * >
@@ -776,7 +776,7 @@ declare class Path2D extends CanvasPath {
    * description specifications.
    *
    * @param { string } d - Path string that complies with the SVG path description
-   *     specification. For the format, see [SVG Path Syntax]{@link ./path#svg-path-syntax}.
+   *     specification. For the format, see [SVG Path Syntax]{@link @global:Path}.
    *     Abnormal values are treated as invalid values.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
@@ -793,7 +793,7 @@ declare class Path2D extends CanvasPath {
    *
    * @param { string } description - Path string that conforms to the SVG path
    *     description specification. For details about the format, see
-   *     [SVG Path Syntax]{@link ./path#svg-path-syntax}.
+   *     [SVG Path Syntax]{@link @global:Path}.
    *     Abnormal values are handled as invalid values.
    * @param { LengthMetricsUnit } [unit] - Unit mode for configuring the **Path2D**
    *     object. After configuration, it cannot be dynamically changed. The

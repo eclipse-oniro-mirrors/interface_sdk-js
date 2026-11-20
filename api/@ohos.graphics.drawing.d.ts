@@ -282,7 +282,7 @@ declare namespace drawing {
      */
     DIFFERENCE = 22,
     /**
-     * rc = s + d - two(s * d), ra = s + (1 - sa) * d, similar to **DIFFERENCE** but with lower contrast.
+     * rc = s + d - 2 * (s * d), ra = s + (1 - sa) * d, similar to **DIFFERENCE** but with lower contrast.
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @crossplatform [since 20]
@@ -950,7 +950,7 @@ declare namespace drawing {
      *     number.
      * @param { double } y2 - Y coordinate of the lower right corner of the rectangle. The value is a floating point
      *     number.
-     * @param { double } startDeg - Start angle. The start direction (0��) of the angle is the positive direction of the
+     * @param { double } startDeg - Start angle. The start direction (0°) of the angle is the positive direction of the
      *     X axis.
      * @param { double } sweepDeg - Angle to sweep, in degrees. A positive value indicates a clockwise sweep, and a
      *     negative value indicates a counterclockwise sweep. The actual swipe degree is the modulo operation result of
@@ -4454,7 +4454,7 @@ declare namespace drawing {
     setThemeFontFollowed(followed: boolean): void;
 
     /**
-     * Checks whether the font follows the theme font. By default, the font follows the theme font.
+     * Checks whether the font follows the theme font. By default, the theme font is not followed.
      *
      * @returns { boolean } Check result. The value **true** means that the theme font is followed, and **false** means
      *     the opposite.
@@ -5280,7 +5280,7 @@ declare namespace drawing {
      * radial gradient refers to the color transition that spreads out gradually from the center of a circle.
      *
      * @param { common2D.Point } centerPt - Center of the circle.
-     * @param { double } radius - Radius of the gradient. A negative number is invalid. The value is a floating point
+     * @param { double } radius - Radius of the gradient. A non-positive number is invalid. The value is a floating point
      *     number.
      * @param { Array<int> } colors - Array of colors to distribute between the center and ending shape of the circle.
      *     The values in the array are 32-bit (ARGB) unsigned integers.
@@ -5330,27 +5330,27 @@ declare namespace drawing {
       mode: TileMode, pos?: Array<double> | null, matrix?: Matrix | null): ShaderEffect | undefined;
 
     /**
-     * Creates a **ShaderEffect** object that generates a color sweep gradient around a given center point, either in a
-     * clockwise or counterclockwise direction.
+     * Creates a shader that generates a color sweep gradient with the given center point as the center of the circle,
+     * in a clockwise or counterclockwise direction between the start angle and the end angle.
      *
-     * @param { common2D.Point } centerPt - Center of the circle.
+     * @param { common2D.Point } centerPt - Center of the gradient circle.
      * @param { Array<number> } colors - Array of colors to distribute between the start angle and end angle. The values
      *     in the array are 32-bit (ARGB) unsigned integers.
      * @param { TileMode } mode - Tile mode of the shader effect.
      * @param { number } startAngle - Start angle of the sweep gradient, in degrees. The value 0 indicates the positive
-     *     direction of the X axis. A positive number indicates an offset towards the positive direction, and a negative
-     *     number indicates an offset towards the negative direction. The value is a floating point number.
+     *     direction of the X axis. A positive number indicates an offset in the clockwise direction, and a negative
+     *     number indicates an offset in the counterclockwise direction. The value is a floating point number.
      * @param { number } endAngle - End angle of the sweep gradient, in degrees. The value 0 indicates the positive
-     *     direction of the X axis. A positive number indicates an offset towards the positive direction, and a negative
-     *     number indicates an offset towards the negative direction. A value less than the start angle is invalid. The
-     *     value is a floating point number.
+     *     direction of the X axis. A positive number indicates an offset in the clockwise direction, and a negative
+     *     number indicates an offset in the counterclockwise direction. A value less than the start angle is invalid.
+     *     The value is a floating point number.
      * @param { Array<number> | null } [pos] - Relative position of each color in the color array. The array length must
      *     be the same as that of **colors**. The first element in the array must be 0.0, the last element must be 1.0,
      *     and the middle elements must be between 0.0 and 1.0 and increase by index. The default value is null,
      *     indicating that the colors are evenly distributed between the start angle and end angle.
      * @param { Matrix | null } [matrix] - **Matrix** object used to perform matrix transformation on the shader effect.
      *     The default value is null, indicating the identity matrix.
-     * @returns { ShaderEffect } **ShaderEffect** object created.
+     * @returns { ShaderEffect } Returns a sweep gradient shader object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @syscap SystemCapability.Graphics.Drawing
@@ -7122,14 +7122,16 @@ declare namespace drawing {
     setRotation(degree: double, px: double, py: double): void;
 
     /**
-     * Sets this matrix as an identity matrix and scales it with the coefficients (sx, sy) at the scale point (px, py).
+     * Sets the matrix as an identity matrix and scales it by sx and sy around the scale center point (px, py).
      *
-     * @param { double } sx - Scale coefficient along the X axis. If a negative number is passed in, the matrix is
-     *     mirrored around y = px before being scaled. The value is a floating point number.
-     * @param { double } sy - Scale coefficient along the Y axis. If a negative number is passed in, the matrix is
-     *     mirrored around x = py before being scaled. The value is a floating point number.
-     * @param { double } px - X coordinate of the scale point. The value is a floating point number.
-     * @param { double } py - Y coordinate of the scale point. The value is a floating point number.
+     * @param { double } sx - Scale factor in the x-axis direction. When negative, it can be viewed as a mirror flip
+     *     about x = px followed by scaling. This parameter is a floating-point number.
+     * @param { double } sy - Scale factor in the y-axis direction. When negative, it can be viewed as a mirror flip
+     *     about y = py followed by scaling. This parameter is a floating-point number.
+     * @param { double } px - X-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
+     * @param { double } py - Y-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
      * @syscap SystemCapability.Graphics.Drawing
@@ -7312,7 +7314,7 @@ declare namespace drawing {
      * Obtains a matrix value of a given index, which ranges from 0 to 8.
      *
      * @param { int } index - Index. The value is an integer ranging from 0 to 8.
-     * @returns { double } Value obtained, which is an integer.
+     * @returns { double } Value obtained, which is a floating point number.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @syscap SystemCapability.Graphics.Drawing
@@ -7338,15 +7340,19 @@ declare namespace drawing {
      */
     postRotate(degree: double, px: double, py: double): void;
     /**
-     * Post multiplies this matrix by a matrix that is derived from an identity matrix after it has been scaled with the
-     * coefficient (sx, sy) at the scale point (px, py).
+     * Sets the matrix to the matrix obtained by right-multiplying the existing matrix by an identity matrix that has
+     * been scaled with the coefficients (sx, sy) at the scale point (px, py), that is, the new scaling transformation
+     * is applied after the transformation of the existing matrix. To apply the scaling transformation before the
+     * transformation of the existing matrix, use the preScale method.
      *
-     * @param { double } sx - Scale coefficient along the X axis. If a negative number is passed in, the matrix is
-     *     mirrored around y = px before being scaled. The value is a floating point number.
-     * @param { double } sy - Scale coefficient along the Y axis. If a negative number is passed in, the matrix is
-     *     mirrored around x = py before being scaled. The value is a floating point number.
-     * @param { double } px - X coordinate of the scale point. The value is a floating point number.
-     * @param { double } py - Y coordinate of the scale point. The value is a floating point number.
+     * @param { double } sx - Scale factor in the x-axis direction. A negative value indicates mirror flip about x = px
+     *     before scaling. This parameter is a floating-point number.
+     * @param { double } sy - Scale factor in the y-axis direction. A negative value indicates mirror flip about y = py
+     *     before scaling. This parameter is a floating-point number.
+     * @param { double } px - X-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
+     * @param { double } py - Y-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
      * @syscap SystemCapability.Graphics.Drawing
@@ -7414,15 +7420,19 @@ declare namespace drawing {
     postSkew(kx: double, ky: double, px: double, py: double): void;
 
     /**
-     * Premultiplies this matrix by a matrix that is derived from an identity matrix after it has been scaled with the
-     * coefficient (sx, sy) at the scale point (px, py).
+     * Sets the matrix to the matrix obtained by premultiplying this matrix by the identity matrix scaled with the
+     * coefficients sx and sy around the scale center point, that is, the new scaling transformation is applied before
+     * the transformation of the current matrix. If the scaling transformation needs to be applied after the
+     * transformation of the current matrix, use the postScale method.
      *
-     * @param { double } sx - Scale coefficient along the X axis. If a negative number is passed in, the matrix is
-     *     mirrored around y = px before being scaled. The value is a floating point number.
-     * @param { double } sy - Scale coefficient along the Y axis. If a negative number is passed in, the matrix is
-     *     mirrored around x = py before being scaled. The value is a floating point number.
-     * @param { double } px - X coordinate of the scale point. The value is a floating point number.
-     * @param { double } py - Y coordinate of the scale point. The value is a floating point number.
+     * @param { double } sx - Scale factor in the x-axis direction. When negative, it can be viewed as a mirror flip
+     *     about x = px before scaling. This parameter is a floating-point number.
+     * @param { double } sy - Scale factor in the y-axis direction. When negative, it can be viewed as a mirror flip
+     *     about y = py before scaling. This parameter is a floating-point number.
+     * @param { double } px - X-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
+     * @param { double } py - Y-axis coordinate of the scale center. This parameter is a floating-point number. The unit
+     *     is physical pixel px.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types.
      * @syscap SystemCapability.Graphics.Drawing

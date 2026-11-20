@@ -795,7 +795,7 @@ declare class ButtonAttribute extends CommonMethod<ButtonAttribute> {
 declare const Button: ButtonInterface;
 
 /**
- * Defines Button Component instance.
+ * 定义Button组件实例。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel

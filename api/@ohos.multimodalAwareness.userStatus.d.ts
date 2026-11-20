@@ -101,7 +101,9 @@ declare namespace userStatus {
    *
    * @param { 'userAgeGroupDetected' } type - Event type. The value **userAgeGroupDetected** indicates the event of
    *     enabling age group detection.
-   * @param { Callback<UserClassification> } callback - Callback used to return the detection result.
+   * @param { Callback<UserClassification> } callback - Callback used to return the detection result. The callback
+   *     to be unsubscribed must be the same as the one passed in during subscription. If not specified, all
+   *     callbacks currently listening for this event will be unsubscribed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability;
    *     <br>2. The chip does not support the capability;
@@ -251,7 +253,8 @@ declare namespace userStatus {
    */
   export interface DeviceInfo {
     /**
-     * Device ID.
+     * Device ID. A unique device identifier used to identify and distinguish different devices.
+     * The string length ranges from 0 to 64.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -261,7 +264,8 @@ declare namespace userStatus {
     deviceId: string;
 
     /**
-     * Device network ID.
+     * Device network ID. A unique network identifier used for device networking and cross-device
+     * communication. The string length ranges from 0 to 64.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -271,7 +275,8 @@ declare namespace userStatus {
     networkId: string;
 
     /**
-     * Device name.
+     * Device name. A user-defined device display name used to show device information in the UI.
+     * The string length ranges from 0 to 64.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -631,7 +636,8 @@ declare namespace userStatus {
     feature: UserStatusFeature;
 
     /**
-     * Multi-stage detection states under a single perception feature.
+     * Multi-stage detection status under a specific function. The string value indicates the corresponding
+     * detection status, and the maximum length of the string is 64.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -673,8 +679,9 @@ declare namespace userStatus {
    */
   export interface UserBlowData extends UserStatusData {
     /**
-     * Face position relative to screen.
-     * The normalized coordinate system ranges from 0 to 640.
+     * Coordinates of the face relative to the screen. The array length is 8, representing the x and y
+     * coordinates of the four vertices (top, bottom, left, and right). The value range in the
+     * normalized coordinate system is [0,640]. Unit: px
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -728,7 +735,8 @@ declare namespace userStatus {
     isGazeStatus?: boolean;
 
     /**
-     * Gravity acceleration of user motion status, in m/s².
+     * Gravity acceleration of the device in the current state. The array length is 3, representing the
+     * acceleration components in the x, y, and z directions. Unit: m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -738,7 +746,9 @@ declare namespace userStatus {
     gravityAcceleration?: double[];
 
     /**
-     * Linear acceleration of user motion status, in m/s²..
+     * Linear acceleration of the device in the current state. A two-dimensional array. The outer layer
+     * represents sampling at multiple points, and the inner layer is an array of length 3, representing
+     * the acceleration components in the x, y, and z directions. Unit: m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -803,7 +813,8 @@ declare namespace userStatus {
     emotionNonRealTime ?: int[];
 
     /**
-     * Gravity acceleration of user motion status, in m/s².
+     * Gravity acceleration of the device in the current state. The array length is 3, representing the
+     * acceleration components in the x, y, and z directions respectively, in m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -813,7 +824,9 @@ declare namespace userStatus {
     gravityAcceleration?: double[];
 
     /**
-     * Linear acceleration of user motion status, in m/s².
+     * Linear acceleration of the device in the current state. It is a two-dimensional array. The outer
+     * layer represents sampling at multiple points, and the inner layer is an array of length 3,
+     * representing the acceleration components in the x, y, and z directions respectively, in m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -833,7 +846,7 @@ declare namespace userStatus {
    */
   export interface ComfortReminderData extends UserStatusData {
     /**
-     * Fusion reminder data.
+     * Reminder level after comprehensive detection.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -843,7 +856,7 @@ declare namespace userStatus {
     fusionReminderData: ReminderLevel;
 
     /**
-     * Swing reminder data.
+     * Reminder level when gazing at the screen.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -853,8 +866,7 @@ declare namespace userStatus {
     swingReminderData: ReminderLevel;
 
     /**
-     * Event type.
-     * The value ranges from 0 to 1. 0: Gaze event, 1: Ambient sound event..
+     * Event type. The value 0 indicates a gaze event, and 1 indicates an ambient sound event.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -874,8 +886,7 @@ declare namespace userStatus {
    */
   export interface UserFacesData extends UserStatusData {
     /**
-     * User visual angle.
-     * The value ranges from 0 to 90, in degrees.
+     * Viewing angle of the user looking at the screen. Value range: [0, 90]. Unit: deg.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -885,7 +896,8 @@ declare namespace userStatus {
     visualAngle?: double[];
 
     /**
-     * Angular velocity of user motion status, in rad/s.
+     * Angular velocity of the device in the current state. The array length is 3, representing the
+     * angular velocity components of rotation around the x, y, and z axes respectively. Unit: rad/s.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -895,7 +907,8 @@ declare namespace userStatus {
     angularVelocity?: double[];
 
     /**
-     * Gravity acceleration of user motion status, in m/s².
+     * Gravity acceleration of the device in the current state. The array length is 3, representing
+     * the acceleration components in the x, y, and z directions respectively. Unit: m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -905,7 +918,9 @@ declare namespace userStatus {
     gravityAcceleration?: double[];
 
     /**
-     * Linear acceleration of user motion status, in m/s².
+     * Linear acceleration of the device in the current state. Two-dimensional array. The outer layer
+     * represents sampling at multiple points, and the inner layer is an array of length 3, representing
+     * the acceleration components in the x, y, and z directions respectively. Unit: m/s².
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -915,8 +930,9 @@ declare namespace userStatus {
     linearAcceleration?: double[][];
 
     /**
-     * Azimuth of user motion status.
-     * The value ranges from 0 to 360, in degrees.
+     * Azimuth of the device in the current state. The array length is 3, representing the yaw
+     * angle (around the y-axis), pitch angle (around the x-axis), and roll angle (around the z-axis)
+     * respectively. Value range: [0, 360]. Unit: deg.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -926,8 +942,7 @@ declare namespace userStatus {
     azimuth?: double[];
 
     /**
-     * Number of faces detected.
-     * The value must be an integer within [0,3].
+     * Number of detected faces. Value range: [0, 3].
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -947,7 +962,7 @@ declare namespace userStatus {
    */
   export interface UserGesturesData extends UserFacesData {
     /**
-     * Whether user hand exists.
+     * Whether the user's hand exists. Value range: [true, false].
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -957,8 +972,9 @@ declare namespace userStatus {
     isHandExist?: boolean;
 
     /**
-     * Hand position relative to screen. 
-     * The normalized coordinate system ranges from 0 to 640.
+     * Coordinate position of the hand relative to the screen. The array length is 8, representing the x
+     * and y coordinates of the four vertices (top, bottom, left, and right). The value range in the
+     * normalized coordinate system is [0, 640].
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -968,8 +984,8 @@ declare namespace userStatus {
     handPosition?: double[];
 
     /**
-     * User dynamic gesture type.
-     * The value ranges from 0 to 3. 0: Up, 1: Down, 2: Screen capture, 3: Release.
+     * User's dynamic gesture type. Value range: [0, 3]. 0: flip up, 1: flip down, 2: grab screen,
+     * 3: release.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -979,8 +995,7 @@ declare namespace userStatus {
     motionGesture?: int;
 
     /**
-     * User static gesture type.
-     * The value ranges from 0 to 3. 0: Palm, 1: Fist, 2: Scissors, 3: Finger heart.
+     * User's static gesture type. Value range: [0, 3]. 0: palm, 1: fist, 2: scissors, 3: heart.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -990,8 +1005,8 @@ declare namespace userStatus {
     handType?: int;
 
     /**
-     * Angle between user gesture and screen directions.
-     * The value ranges from 0 to 90, in degrees.
+     * Angle between the user's gesture and the screen direction. The array contains the angle
+     * values of the gesture in multiple dimensions. The value range of each elementis [0, 90]. Unit: deg.
      *
      * @syscap SystemCapability.MultimodalAwareness.UserStatus
      * @systemapi
@@ -1033,11 +1048,20 @@ declare namespace userStatus {
   }
 
   /**
-   * Subscribes to user status monitoring.
+   * Subscribes to user status monitoring to obtain user status data. After calling subscribe(), you must
+   * call unsubscribe() to cancel the subscription and release callback resources when they are no longer
+   * needed. Failure to call unsubscribe() causes callback resource leakage and affects application
+   * performance. It is recommended to call configure() to configure feature parameters before calling
+   * subscribe() to start the subscription.
    *
    * @param { UserStatusFeature } featureId - Indicates the feature to be subscribed to.
-   * @param { Callback<UserStatusData> } callback - Callback used to return user status data.
-   * @param { DeviceInfo[] } [deviceInfo] - List of devices to enable user status monitoring.
+   * @param { Callback<UserStatusData> } callback - Callback invoked to return the user status data. It
+   *     is invoked when the subscribed user status data is updated.
+   * @param { DeviceInfo[] } [deviceInfo] - List of devices for which user status monitoring is to be
+   *     enabled. When featureId is HAND_GAZE_COORDINATION, valid and non-empty deviceInfo must be
+   *     provided; otherwise, the function may not work properly. For other featureId values, this
+   *     parameter can be omitted. If an empty value, undefined, or null is passed, it is considered that
+   *     no actual value is provided.
    * @returns { int } Returns the registered callback ID.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
@@ -1061,10 +1085,14 @@ declare namespace userStatus {
     deviceInfo?: DeviceInfo[]): int;
 
   /**
-   * Unsubscribes from user status monitoring.
+   * Unsubscribes from user status monitoring. This method is used in pair with subscribe() to cancel the
+   * subscription callback and release resources. It must be called after subscribe(). Unsubscribing from
+   * a featureId that is not subscribed returns a failure. It is recommended to call unsubscribe() when
+   * the application exits or no longer needs monitoring.
    *
    * @param { UserStatusFeature } featureId - Indicates the feature to be unsubscribed from.
-   * @param { Callback<UserStatusData> } [callback] - Callback used to return user status data.
+   * @param { Callback<UserStatusData> } [callback] - Callback for the notification event. If null,
+   *     undefined, or null is passed, all notification events subscribed to by featureId are unsubscribed.
    * @returns { int } Returns 0 if the operation succeeds; otherwise, returns a non-zero value.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
@@ -1086,11 +1114,31 @@ declare namespace userStatus {
   function unsubscribe(featureId: UserStatusFeature, callback?: Callback<UserStatusData>): int;
 
   /**
-   * Configures feature parameters.
+   * Configures feature parameters. After a successful call, the configuration parameters of the specified
+   * feature are updated, affecting the subsequent detection behavior of the feature, such as detection
+   * sensitivity, sampling frequency, and enabled detection items. It is recommended to call configure()
+   * to configure feature parameters before subscribe() to ensure that the configuration takes effect upon
+   * subscription. For features that require specific configuration (such as the real-time/non-real-time
+   * mode of USER_MOOD), it is recommended to call configure() before subscribe().
+   *
+   * **detail Definition**
+   *
+   * | featureId | description | value | Description |
+   * | --- | --- | --- | --- |
+   * | USER_MOOD | isRealTime | [ ] | **isRealTime** takes the value **0** or **1**, where **0** indicates non-real-time
+   * and **1** indicates real-time. Obtaining data in real-time mode increases performance overhead. It is recommended to
+   * select an appropriate mode based on business needs to optimize performance. |
+   * | - | atomicCapabilities | [ ] | **atomicCapabilities** can contain one or more values, and duplicate values are automatically deduplicated. Enabling multiple capabilities increases the computational load. It is recommended to select capabilities on demand based on business requirements to optimize performance.<br>5=atomic gravity sensor<br>8=atomic linear acceleration sensor<br>12=atomic emotion capability |
+   * | GESTURES_RECOGNITION<br>QUICK_GESTURES_RECOGNITION | dynamicGestureTypes | [ ] | **dynamicGestureTypes** can contain one or more values, and duplicate values are invalid. Enabling multiple gesture types increases the recognition computational load. It is recommended to select them on demand to optimize performance.<br>0=grab<br>1=swipe down<br>2=initial flip-up gesture<br>3=initial flip-down gesture<br>4=swipe up<br>5=fist to open palm<br>6=disappear |
+   * | - | staticGestureTypes | [ ] | **staticGestureTypes** can contain one or more values, and duplicate values are invalid. Enabling multiple gesture types increases the recognition computational load. It is recommended to select them on demand to optimize performance.<br>7=palm<br>8=scissors hand<br>9=fist<br>10=heart gesture |
+   * | USER_BLOWING_STATUS | atomicCapabilities | [ ] | **atomicCapabilities** can contain one or more values, and duplicate values are automatically deduplicated. Enabling multiple capabilities increases the computational load. It is recommended to select capabilities on demand based on business requirements to optimize performance.<br>5=atomic gravity sensor<br>8=atomic linear acceleration sensor<br>11=atomic blowing capability<br>12=atomic emotion capability<br>15=atomic screen gaze capability |
    *
    * @param { UserStatusFeature } featureId - Feature to configure.
-   * @param { string } detail - Detailed feature parameters in JSON format.
-   * @returns { int } Returns 0 if the operation succeeds; otherwise, returns a non-zero value.
+   * @param { string } detail - Configuration parameter, a JSON format string. It contains a params array,
+   *     where each parameter contains the description (parameter name) and value (parameter value array)
+   *     fields. For the specific format and value range, see the detail definition table below.
+   * @returns { int } Configuration execution result. The value 0 indicates that the operation is
+   *     successful, and a non-zero value indicates that the operation fails.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 33900001 - Service exception. Possible causes:
    *     <br>1. System error, such as a null pointer and container-related exception.
@@ -1103,7 +1151,9 @@ declare namespace userStatus {
   function configure(featureId: UserStatusFeature, detail: string): int;
 
   /**
-   * Queries device-supported atomic capabilities.
+   * Queries the atomic capabilities supported by the device. This method determines whether the specified
+   * atomic capabilities are supported through the underlying interface and returns the list of
+   * capabilities actually supported by the device.
    *
    * @param { UserStatusAtomicCap[] } capabilities - List of atomic capabilities to query.
    * @returns { UserStatusAtomicCap[] } Returns the list of device-supported atomic capabilities.

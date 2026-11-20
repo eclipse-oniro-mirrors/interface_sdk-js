@@ -1131,6 +1131,43 @@ declare namespace observer {
   function offIccAccountInfoChange(callback?: Callback<void>): void;
 
   /**
+   * 订阅呼叫转移状态变化事件，使用callback方式作为异步方法。当指定卡槽的呼叫转移状态发生变化时回调。
+   *
+   * @permission ohos.permission.GET_TELEPHONY_STATE
+   * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1。<br/>- 1：卡槽2。
+   * @param { Callback<boolean> } callback - 回调函数。返回true表示呼叫转移已使能，返回false表示呼叫转移未使能。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 8300001 - Invalid parameter value.
+   * @throws { BusinessError } 8300002 - Service connection failed.
+   * @throws { BusinessError } 8300003 - System internal error.
+   * @throws { BusinessError } 8300999 - Unknown error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @systemapi Hide this for inner system use.
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function onCallTransferChange(slotId: int, callback: Callback<boolean>): void;
+
+  /**
+   * 取消订阅呼叫转移状态变化事件，使用callback方式作为异步方法。
+   *
+   * @permission ohos.permission.GET_TELEPHONY_STATE
+   * @param { Callback<boolean> } [callback] - 指示要取消订阅的呼叫转移状态变化事件的回调函数。
+   * @throws { BusinessError } 201 - Permission denied.
+   * @throws { BusinessError } 202 - Non-system applications use system APIs.
+   * @throws { BusinessError } 8300001 - Invalid parameter value.
+   * @throws { BusinessError } 8300002 - Service connection failed.
+   * @throws { BusinessError } 8300003 - System internal error.
+   * @throws { BusinessError } 8300999 - Unknown error.
+   * @syscap SystemCapability.Telephony.StateRegistry
+   * @systemapi Hide this for inner system use.
+   * @FaAndStageModel
+   * @since 26.0.1 dynamic&static
+   */
+  function offCallTransferChange(callback?: Callback<boolean>): void;
+
+  /**
    * SIM卡类型和状态。
    *
    * @syscap SystemCapability.Telephony.StateRegistry

@@ -1885,7 +1885,9 @@ declare namespace photoAccessHelper {
      *     [PhotoKeys]{@link @ohos.file.photoAccessHelper:photoAccessHelper.PhotoKeys}.TITLE的值。title的参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2615,7 +2617,9 @@ declare namespace photoAccessHelper {
      * @param { string } title - 克隆后资产的标题。参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @returns { Promise<PhotoAsset> } Promise对象，返回
      *     [PhotoAsset]{@link @ohos.file.photoAccessHelper:photoAccessHelper}。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -4186,7 +4190,9 @@ declare namespace photoAccessHelper {
      * 
      * - 不应包含扩展名。
      * - 文件名字符串长度为1~255（资产文件名为标题+扩展名）。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -4242,7 +4248,9 @@ declare namespace photoAccessHelper {
      * 不传入时由系统生成，参数规格如下：
      * 
      * - 不应包含扩展名。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * - 由于文件名由标题 + 扩展名组成，文件名字符串长度范围为[1, 255]，因此请注意标题长度不宜过长。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -6048,7 +6056,9 @@ declare namespace photoAccessHelper {
      * @param { CreateOptions } options - 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。
      *     <br>**注意：**
      *     <br>传入'subtype'选项，配置不生效，仅支持保存DEFAULT类型图片。
-     *     <br>文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括： . .. \ / : * ? " ' ` < > | { } [ ]
      * @param { AsyncCallback<string> } callback - callback返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
@@ -12629,7 +12639,9 @@ declare namespace photoAccessHelper {
      * @param { PhotoType } photoType - 待创建的文件类型，IMAGE或者VIDEO类型。
      * @param { string } extension - 文件扩展名，例如：'jpg'。
      * @param { CreateOptions } [options] - 创建选项，例如：{title: 'testPhoto'}。
-     *     <br>文件名中不允许出现非法英文字符，包括：. .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括：. .. \ / : * ? " ' ` < > | { } [ ]
      * @returns { MediaAssetChangeRequest }      **MediaAssetChangeRequest** created.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -13527,8 +13539,8 @@ declare namespace photoAccessHelper {
      *     <br>不应包含扩展名。
      *     文件名字符串长度为1~255。
      *     不允许出现的非法英文字符，包括：
-     *     . \ / : * ? " ' ` < > | { } [ ]
-     *     不允许仅命名.或者..
+     *     \ / : * ? " ' ` < > | { } [ ]
+     *     允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
      *     文管目录下不允许重名
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:

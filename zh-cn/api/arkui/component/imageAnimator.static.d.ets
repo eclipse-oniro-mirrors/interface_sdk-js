@@ -325,7 +325,7 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
   default onFinish(event: (() => void) | undefined): this;
 
   /**
-     * Set the attribute modifier
+     * 动态设置组件的属性方法。
      *
    * @param { AttributeModifier<ImageAnimatorAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { ImageAnimatorAttribute }
@@ -339,9 +339,9 @@ export declare interface ImageAnimatorAttribute extends CommonMethod {
 }
 
 /**
- * Defines the ImageAnimator component.
+ * 提供帧动画组件来实现逐帧播放图片的能力，可以配置需要播放的图片列表，每张图片可以配置时长。
  *
- * @returns { ImageAnimatorAttribute } The attribute of the ImageAnimator.
+ * @returns { ImageAnimatorAttribute } ImageAnimator的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

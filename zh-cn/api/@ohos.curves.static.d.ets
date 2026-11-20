@@ -57,7 +57,7 @@ declare namespace curves {
     export enum Curve {
 
         /**
-         * Linear. Indicates that the animation has the same velocity from start to finish.
+         * 表示动画从头到尾的速度都是相同的。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -66,8 +66,7 @@ declare namespace curves {
         Linear,
 
         /**
-         * Ease. Indicates that the animation starts at a low speed, then speeds up, and slows down before the end,
-         * CubicBezier(0.25, 0.1, 0.25, 1.0).
+         * 表示动画以低速开始，然后加快，在结束前变慢，cubic-bezier(0.25, 0.1, 0.25, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -76,7 +75,7 @@ declare namespace curves {
         Ease,
 
         /**
-         * EaseIn. Indicates that the animation starts at a low speed, Cubic Bezier (0.42, 0.0, 1.0, 1.0).
+         * 表示动画以低速开始，cubic-bezier(0.42, 0.0, 1.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -85,7 +84,7 @@ declare namespace curves {
         EaseIn,
 
         /**
-         * EaseOut. Indicates that the animation ends at low speed, CubicBezier (0.0, 0.0, 0.58, 1.0).
+         * 表示动画以低速结束，cubic-bezier(0.0, 0.0, 0.58, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -94,7 +93,7 @@ declare namespace curves {
         EaseOut,
 
         /**
-         * EaseInOut. Indicates that the animation starts and ends at low speed, CubicBezier (0.42, 0.0, 0.58, 1.0).
+         * 表示动画以低速开始和结束，cubic-bezier(0.42, 0.0, 0.58, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -103,7 +102,7 @@ declare namespace curves {
         EaseInOut,
          
         /**
-         * FastOutSlowIn. Standard curve, cubic-bezier (0.4, 0.0, 0.2, 1.0).
+         * 标准曲线，cubic-bezier(0.4, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -112,7 +111,7 @@ declare namespace curves {
         FastOutSlowIn,
 
         /**
-         * LinearOutSlowIn. Deceleration curve, cubic-bezier (0.0, 0.0, 0.2, 1.0).
+         * 减速曲线，cubic-bezier(0.0, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -121,7 +120,7 @@ declare namespace curves {
         LinearOutSlowIn,
 
         /**
-         * FastOutLinearIn. Acceleration curve, cubic-bezier (0.4, 0.0, 1.0, 1.0).
+         * 加速曲线，cubic-bezier(0.4, 0.0, 1.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -130,7 +129,7 @@ declare namespace curves {
         FastOutLinearIn,
 
         /**
-         * ExtremeDeceleration. Abrupt curve, cubic-bezier (0.0, 0.0, 0.0, 1.0).
+         * 极缓曲线，cubic-bezier(0.0, 0.0, 0.0, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -139,7 +138,7 @@ declare namespace curves {
         ExtremeDeceleration,
 
         /**
-         * Sharp. Sharp curves, cubic-bezier (0.33, 0.0, 0.67, 1.0).
+         * 锐利曲线，cubic-bezier(0.33, 0.0, 0.67, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -148,7 +147,7 @@ declare namespace curves {
         Sharp,
 
         /**
-         * Rhythm. Rhythmic curve, cubic-bezier (0.7, 0.0, 0.2, 1.0).
+         * 节奏曲线，cubic-bezier(0.7, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -157,7 +156,7 @@ declare namespace curves {
         Rhythm,
 
         /**
-         * Smooth. Smooth curves, cubic-bezier (0.4, 0.0, 0.4, 1.0).
+         * 平滑曲线，cubic-bezier(0.4, 0.0, 0.4, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly
@@ -166,7 +165,7 @@ declare namespace curves {
         Smooth,
 
         /**
-         * Friction. Damping curves, CubicBezier (0.2, 0.0, 0.2, 1.0).
+         * 阻尼曲线，cubic-bezier(0.2, 0.0, 0.2, 1.0)。
          *
          * @syscap SystemCapability.ArkUI.ArkUI.Full
          * @stagemodelonly

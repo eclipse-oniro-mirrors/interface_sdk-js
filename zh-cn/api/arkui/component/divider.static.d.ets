@@ -108,9 +108,9 @@ export declare interface DividerAttribute extends CommonMethod {
      */
     default lineCap(value: LineCapStyle | undefined): this;
     /**
-     * Set Divider options.
+     * 设置Divider选项。
      *
-     * @returns { DividerAttribute } Returns the instance of the DividerAttribute.
+     * @returns { DividerAttribute } 返回DividerAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
      * @stagemodelonly

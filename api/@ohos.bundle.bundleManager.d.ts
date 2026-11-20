@@ -220,10 +220,7 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * Used to obtain the bundle information of the application that has only a home screen icon. It is valid only in
-     * the [getAllBundleInfo]{@link bundleManager.getAllBundleInfo} API.
-     *
-     * **System API**: This flag can be used only in system APIs.
+     * Used to obtain the bundle information of the application that has only a home screen icon.
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]
@@ -4758,6 +4755,22 @@ declare namespace bundleManager {
    * @since 23 static
    */
   function getAppCloneIdentityBySandboxDataDir(sandboxDataDir: string): AppCloneIdentity;
+
+   /**
+   * Obtain the refresh timestamp of the current theme.
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @returns { Promise<string> } Promise used to return the refresh timestamp of the current theme.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getThemeRefreshTime(): Promise<string>;
 
   /**
    * Restores the backup data for a specified application or application clone under a specified user. This API uses a

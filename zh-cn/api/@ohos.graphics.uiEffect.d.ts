@@ -1387,12 +1387,13 @@ declare namespace uiEffect {
    * @unionmember { HdrBrightnessBlender } 支持HDR的提亮混合器 [since 20]
    * @unionmember { HdrDarkenBlender } 支持HDR的压暗混合器 [since 26.0.0]
     * @unionmember { ColorfulBrightnessBlender } 具有提亮压暗效果的混合器（保持色相） [since 26.1.0]
+   * @unionmember { BlenderBase } 混合器基础类型 [since 26.1.0]
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
    * @stagemodelonly
    * @since 13 dynamic
    */
-  type Blender = BrightnessBlender | HdrBrightnessBlender | HdrDarkenBlender | ColorfulBrightnessBlender;
+  type Blender = BrightnessBlender | HdrBrightnessBlender | HdrDarkenBlender | ColorfulBrightnessBlender | BlenderBase;
 
   /**
    * 提亮混合器，用于将提亮效果添加到指定的组件上。
@@ -1520,10 +1521,8 @@ declare namespace uiEffect {
   interface HdrDarkenBlender {
 
     /**
-     * HDR的提亮倍数。取值范围为[1.0, 设备当前支持最大提亮倍数]。
-     * 设置小于1.0的值时，按值为1.0处理；当值等于1.0时，为组件原本亮度；
-     * 设置大于设备当前支持最大提亮倍数的值时，按值为设备当前支持最大提亮倍数处理，
-     * 支持最大提亮倍数 = 设备最大亮度 / 设备默认亮度。
+     * HDR的提亮倍数。取值范围为[1.0, 设备当前支持最大提亮倍数]，超出边界时会自动截断。
+     * 当取值等于1.0时，为组件原本亮度。设备当前支持最大提亮倍数 = 设备最大亮度 / 设备默认亮度。
      * 设备最大亮度通过hdc命令获取：hdc shell param get const.display.brightness.max
      * 设备默认亮度通过hdc命令获取：hdc shell param get const.display.brightness.default
      *
@@ -1559,48 +1558,48 @@ declare namespace uiEffect {
    * @systemapi
    * @stagemodelonly
    * @form
-   * @since 26.1.0 dynamiconly
+   * @since 26.1.0 dynamic&static
    */
   interface ColorfulBrightnessBlenderOptions {
     /**
      * 前景压暗权重，控制提亮压暗的方向与强度。取0时提亮前景，前景倾向亮于背景以保证可读性；
      * 取1时压暗前景，前景倾向暗于背景；0到1之间为提亮与压暗的过渡。默认值为1。
-     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     * 取值范围为[0, 1]，超出边界会自动截断。
      *
      * @default 1
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     darkenWeight?: double;
 
     /**
      * 色彩增强强度，控制对前景饱和度的增强程度。取0时不额外增强饱和度，前景保持原始饱和度；
      * 值越大饱和度增强越明显，取1时增强到最大、色彩最鲜艳。默认值为0。
-     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     * 取值范围为[0, 1]，超出边界会自动截断。
      *
      * @default 0
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     vibrancyStrength?: double;
 
     /**
      * 保证可读性的亮度差阈值，用于约束前景与背景之间的亮度差以保持足够对比度。
      * 取0时不强制额外亮度差，可读性约束最弱；值越大强制的亮度差越大、对比度越强；取1时强制最大亮度差。默认值为0。
-     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     * 取值范围为[0, 1]，超出边界会自动截断。
      *
      * @default 0
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     lumaDiff?: double;
 
@@ -1613,21 +1612,21 @@ declare namespace uiEffect {
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     hdrEnabled?: boolean;
 
     /**
      * 输入色彩影响度，控制输入色参与提亮压暗计算的程度。取1时输入色完全参与计算，输出结果保留输入色的色彩倾向；
      * 取0时输入色不参与计算，输出结果不受输入色的影响，直接基于背景颜色做提亮压暗；0到1之间为两者的插值过渡。默认值为1。
-     * 取值范围为[0, 1]，超出边界会在实现时自动截断。
+     * 取值范围为[0, 1]，超出边界会自动截断。
      *
      * @default 1
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
      * @stagemodelonly
      * @form
-     * @since 26.1.0 dynamiconly
+     * @since 26.1.0 dynamic&static
      */
     tintedColorPercent?: double;
   }
@@ -1658,6 +1657,7 @@ declare namespace uiEffect {
 
     /**
      * 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
+     * 此参数不填时，使用ColorfulBrightnessBlenderOptions各字段的默认值。
      *
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -1763,7 +1763,7 @@ declare namespace uiEffect {
     /**
      * 设置棱镜遮罩的归一化半径。
      * 取值范围为 [0, 10]，超出范围的值在实现时会被截断。
-     * 当 maskRadius等于1.0时, 等于组件宽度。
+     * 当 maskRadius等于1.0时, 等于组件高度。
      * 
      * @syscap SystemCapability.Graphics.Drawing
      * @systemapi
@@ -2152,7 +2152,7 @@ declare namespace uiEffect {
   /**
    * 创建BrightnessBlender实例用于给组件添加提亮效果。
    *
-   * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度、混合比例等配置项。
+   * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度和混合比例等配置项。
    * @returns { BrightnessBlender } 返回提亮效果的BrightnessBlender混合器。
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -2165,7 +2165,7 @@ declare namespace uiEffect {
   /**
    * 创建HdrBrightnessBlender实例用于给组件添加支持HDR的提亮效果。
    *
-   * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度、混合比例等配置项，用于配置提亮效果。
+   * @param { BrightnessBlenderParam } param - 实现提亮效果的参数，包含灰度调整系数、饱和度和混合比例等配置项，用于配置提亮效果。
    * @returns { HdrBrightnessBlender } 返回具有提亮效果的混合器（支持HDR）。
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Graphics.Drawing
@@ -2178,10 +2178,9 @@ declare namespace uiEffect {
    /**
     * 创建HdrDarkenBlender实例用于HDR图层的压暗混合效果。
     *
-    * @param { double } hdrBrightnessRatio - HDR的提亮倍数。取值范围为[1.0, 设备当前支持最大提亮倍数]。
-    *     设置小于1.0的值时，按值为1.0处理；当值等于1.0时，为组件原本亮度；
-    *     设置大于设备当前支持最大提亮倍数的值时，按值为设备当前支持最大提亮倍数处理，
-     *     支持最大提亮倍数 = 设备最大亮度 / 设备默认亮度。
+    * @param { double } hdrBrightnessRatio - HDR的提亮倍数。取值范围为[1.0, 设备当前支持最大提亮倍数]，
+    *     超出边界时会自动截断。当取值等于1.0时，为组件原本亮度。
+    *     设备当前支持最大提亮倍数 = 设备最大亮度 / 设备默认亮度。
      *     设备最大亮度通过hdc命令获取：hdc shell param get const.display.brightness.max
      *     设备默认亮度通过hdc命令获取：hdc shell param get const.display.brightness.default
      * @param { [double, double, double] } [grayscaleFactor] - 将RGB颜色转换为灰度值。灰度转换公式的权重
@@ -2203,6 +2202,7 @@ declare namespace uiEffect {
    *
    * @param { BrightnessBlenderParam } brightnessBlenderParam - 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
    * @param { ColorfulBrightnessBlenderOptions } [options] - 提亮压暗的增强参数，用于控制提亮压暗方向、色彩增强强度、可读性阈值及HDR开关。
+   *     此参数不填时，使用ColorfulBrightnessBlenderOptions各字段的默认值。
    * @returns { ColorfulBrightnessBlender } 返回基于保持色相的提亮压暗混合器。
    * @syscap SystemCapability.Graphics.Drawing
    * @systemapi
@@ -2212,6 +2212,73 @@ declare namespace uiEffect {
    */
   function createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
     options?: ColorfulBrightnessBlenderOptions): ColorfulBrightnessBlender;
+
+  /**
+   * 混合器基础类型，提供各类混合效果的统一创建入口。推荐统一使用本类型的方法创建混合器。
+   *
+   * @syscap SystemCapability.Graphics.Drawing
+   * @systemapi
+   * @stagemodelonly
+   * @form [since 26.1.0]
+   * @since 26.1.0 dynamic&static
+   */
+  class BlenderBase {
+
+    /**
+     * 输入提亮混合器参数创建提亮混合的BlenderBase实例。可选参数hdrEnabled为false时效果与调用
+     * uiEffect.createBrightnessBlender()相同，为true时效果与调用uiEffect.createHdrBrightnessBlender()相同。
+     *
+     * @param { BrightnessBlenderParam } param - 提亮混合器参数，包含灰度调整系数、饱和度和混合比例等配置项，
+     *     用于配置提亮混合效果。
+     * @param { boolean } [hdrEnabled] - 是否为提亮混合效果开启HDR。设置为true时，提亮混合效果开启HDR；
+     *     设置为false时，提亮混合效果不开启HDR。默认值为false。
+     * @returns { BlenderBase } 返回带有提亮混合效果的BlenderBase实例。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form [since 26.1.0]
+     * @since 26.1.0 dynamic&static
+     */
+    static createBrightnessBlender(param: BrightnessBlenderParam, hdrEnabled?: boolean): BlenderBase;
+
+    /**
+     * 创建HDR压暗混合的BlenderBase实例，用于HDR图层的压暗混合效果。
+     * 效果与调用uiEffect.createHdrDarkenBlender()相同。
+     *
+     * @param { double } hdrBrightnessRatio - HDR的提亮倍数。取值范围为[1.0, 设备当前支持最大提亮倍数]，
+     *     超出边界时会自动截断。当取值等于1.0时，为组件原本亮度。
+     *     设备当前支持最大提亮倍数 = 设备最大亮度 / 设备默认亮度。
+     *     设备最大亮度通过hdc命令获取：hdc shell param get const.display.brightness.max
+     *     设备默认亮度通过hdc命令获取：hdc shell param get const.display.brightness.default
+     * @param { [double, double, double] } [grayscaleFactor] - 将RGB颜色转换为灰度值。
+     *     灰度转换公式的权重可随当前色域自动调整，不同色域下使用不同的权重计算方式；
+     *     适用于sRGB等标准色域场景。当需要根据特定色域或视觉效果自定义灰度转换权重时传入此参数。
+     *     三个分量均无边界限制。默认值为标准灰度权重[0.299, 0.587, 0.114]。
+     * @returns { BlenderBase } 返回带有HDR压暗混合效果的BlenderBase实例，用于将压暗效果添加到指定的组件上。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static createHdrDarkenBlender(hdrBrightnessRatio: double, grayscaleFactor?: [double, double, double]): BlenderBase;
+
+    /**
+     * 创建BlenderBase实例，用于给组件添加基于保持色相的提亮压暗效果。
+     * 效果与调用uiEffect.createColorfulBrightnessBlender()相同。
+     *
+     * @param { BrightnessBlenderParam } brightnessBlenderParam - 提亮压暗的常规参数，用于配置亮度映射、饱和度曲线等基础属性。
+     * @param { ColorfulBrightnessBlenderOptions } [options] - 提亮压暗的增强参数，用于控制提亮压暗方向、
+     *     色彩增强强度、可读性阈值及HDR开关。此参数不填时，使用ColorfulBrightnessBlenderOptions各字段的默认值。
+     * @returns { BlenderBase } 返回带有基于保持色相的提亮压暗混合效果的BlenderBase实例。
+     * @syscap SystemCapability.Graphics.Drawing
+     * @systemapi
+     * @stagemodelonly
+     * @form [since 26.1.0]
+     * @since 26.1.0 dynamic&static
+     */
+    static createColorfulBrightnessBlender(brightnessBlenderParam: BrightnessBlenderParam,
+      options?: ColorfulBrightnessBlenderOptions): BlenderBase;
+  }
 }
 
 /**

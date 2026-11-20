@@ -50,7 +50,7 @@ declare namespace pluginBundleManager {
    * @throws { BusinessError } 17700016 -
    *     Failed to install the plugin because of insufficient system disk space.
    * @throws { BusinessError } 17700017 -
-   *     Failed to install the plugin because the version of the plugin to install is too early.
+   *     Failed to install the plugin since the version of the plugin to install is too early.
    * @throws { BusinessError } 17700048 -
    *     Failed to install the plugin because the code signature verification failed.
    * @throws { BusinessError } 17700052 -

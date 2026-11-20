@@ -154,7 +154,17 @@ declare namespace dlpPermission {
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 10
          */
-        FULL_CONTROL = 3
+        FULL_CONTROL = 3,
+        /**
+         * 用户对文件拥有原子控制，实现细粒度权限管理
+         * 通过DlpAtomicPermissionType位掩码。
+         * 与授予所有权限的FULL_CONTROL相比，这提供了更细粒度的控制。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_CONTROL = 4
     }
     /**
      * 表示DLP文件的权限信息。
@@ -991,6 +1001,16 @@ declare namespace dlpPermission {
          * @since 10
          */
         permExpiryTime: number;
+        /**
+         * DLP文件的原子权限控制位掩码。值是由DlpAtomicPermissionType标志的按位或运算符（|）形成的掩码，来控制读取、编辑、复制、截图、打印和应用级权限。
+         * 例如，`DlpAtomicPermissionType.ATOMIC_READ | DlpAtomicPermissionType.ATOMIC_COPY`
+         * 同时授予读取和复制权限。默认值为0，表示不授予任何原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        atomicDlpFileAccess?: number;
     }
     /**
      * 表示授权相关信息。
@@ -1740,7 +1760,8 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+     *     feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1771,7 +1792,8 @@ declare namespace dlpPermission {
      * @returns { Promise<string> } Promise对象，返回当前DLP策略的JSON字符串。长度不超过4194304字节。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+     *     feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1804,7 +1826,8 @@ declare namespace dlpPermission {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 201 - Permission denied.
      * @throws { BusinessError } 202 - Non-system applications use system APIs. [since 20 - 20]
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+     *     feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
      * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1847,7 +1870,8 @@ declare namespace dlpPermission {
      * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE
      * @param { EnterprisePolicy } policy - 待设置的企业应用防护策略，设置后将按策略对企业DLP文件进行访问控制和行为限制。
      * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+     *     feature. [since 26.0.1]
      * @throws { BusinessError } 19100001 - Invalid parameter value.
      * @throws { BusinessError } 19100011 - The system ability works abnormally.
      * @throws { BusinessError } 19100021 - Failed to set the enterprise policy.
@@ -1882,7 +1906,8 @@ declare namespace dlpPermission {
          * @param { string } requestData - SA（System Ability）侧传递的数据。无范围限制。
          * @param { Callback<string> } callback - SA（System Ability）侧传递的接口，用于回调。无范围限制。
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+         *     feature. [since 26.0.1]
          * @throws { BusinessError } 19100011 - The system ability works abnormally.
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
@@ -1906,7 +1931,8 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+         *     feature. [since 26.0.1]
          * @syscap SystemCapability.Security.DataLossPrevention
          * @since 21
          */
@@ -1924,7 +1950,8 @@ declare namespace dlpPermission {
          *     便SA侧调用时能够通过回调返回处理结果。
          * @returns { number } 注册结果，返回该回调的唯一标识ID。取值范围为[0, 2<sup>53</sup>-1]。
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+         *     feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
@@ -1945,7 +1972,8 @@ declare namespace dlpPermission {
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE [since 21 - 24]
          * @permission ohos.permission.ENTERPRISE_ACCESS_DLP_FILE or ohos.permission.ACCESS_DLP_SERVICE [since 26.0.0]
          * @throws { BusinessError } 201 - Permission denied.
-         * @throws { BusinessError } 801 - Capability not supported because car not support DLP feature. [since 26.0.1]
+         * @throws { BusinessError } 801 - Capability not supported. Possible causes: the car does not support DLP
+         *     feature. [since 26.0.1]
          * @throws { BusinessError } 19100001 - Invalid parameter value.
          * @throws { BusinessError } 19100002 - Credential service busy due to too many tasks or duplicate tasks.
          * @throws { BusinessError } 19100003 - Credential task time out.
@@ -2143,5 +2171,90 @@ declare namespace dlpPermission {
      * @since 26.0.1
      */
     function processPluginCommand(code: PluginCmd, message: string): Promise<string>;
+
+    /**
+     * 枚举DLP文件的原子权限，包括用户操作和应用权限控制。
+     * 该枚举支持按位OR操作，以组合多个权限。
+     *
+     * @syscap SystemCapability.Security.DataLossPrevention
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    export enum DlpAtomicPermissionType{
+        /**
+         * 读取文件的原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_READ = 0x01,
+
+        /**
+         * 文件编辑原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_EDIT = 0x02,
+
+        /**
+         * 复制文件内容的原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_COPY = 0x04,
+
+        /**
+         * 截图文件的原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_SCREENSHOT = 0x08,
+
+        /**
+         * 打印文件的原子权限。
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_PRINT = 0x10,
+
+        /**
+         * 原子权限，允许沙箱应用访问被限制的系统服务。
+         * 访问DLP文件时，系统会创建应用的独立沙箱，该沙箱继承应用的数据、配置和权限。
+         * 该标志位允许沙箱在继承的权限内访问系统服务。
+         * 例如，如果原始应用没有使用蓝牙权限，那么即使启用此标志，沙箱应用也无法调用蓝牙相关API。
+         * 具体包括以下权限：
+         * -访问互联网，设置Wi-Fi配置，设置Wi-Fi信息，管理Wi-Fi热点权限。
+         * -使用蓝牙，管理蓝牙，访问蓝牙，发现蓝牙权限。
+         * -访问NearLink并管理NearLink权限。
+         * -使用云公共服务、使用云备份服务、使用云硬盘服务、云文件同步、
+         * 云文件同步管理器权限。
+         * -发送消息、接收短信、接收彩信、接收WAP消息权限。
+         * -写入音频、写入文档、写入图像/视频和写入媒体权限。
+         * -读写下载目录、读写桌面目录、读写文档目录权限。
+         * -写入整个日历权限。
+         * -代理授权URI权限。
+         * -文件访问管理器权限。
+         * -分布式数据同步权限。
+         * - NFC标签权限。
+         *
+         * 该权限可以与其他原子权限使用按位或运算组合。
+         * 查看 [DLP服务开发指导](docroot://security/DataProtectionKit/dlp-guidelines.md)
+         *
+         * @syscap SystemCapability.Security.DataLossPrevention
+         * @stagemodelonly
+         * @since 26.1.0
+         */
+        ATOMIC_APP_PERMISSION = 0x20
+    }
+
 }
 export default dlpPermission;

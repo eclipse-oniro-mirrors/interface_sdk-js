@@ -522,6 +522,7 @@ declare namespace inputMethodEngine {
    * @returns { boolean } whether to consume this key event.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type InputKeyEventCallback = (event: InputKeyEvent) => boolean;
 
@@ -533,6 +534,7 @@ declare namespace inputMethodEngine {
    * @param { double } height - the height of the cursor, unit is px.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type CursorContextChangeCallback = (x: double, y: double, height: double) => void;
 
@@ -545,6 +547,7 @@ declare namespace inputMethodEngine {
    * @param { int } newEnd - the new end of the selected text.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 23 static
+   * @since 26.1.0 dynamic
    */
   export type SelectionChangeCallback = (oldBegin: int, oldEnd: int, newBegin: int, newEnd: int) => void;
 
@@ -976,31 +979,33 @@ declare namespace inputMethodEngine {
     getSecurityMode(): SecurityMode;
 
     /**
-     * Creates an input method panel. This API can be called only by the input method application in the
-     * [InputMethodExtensionAbility]{@link @ohos.InputMethodExtensionAbility:InputMethodExtensionAbility} class. This
-     * API uses an asynchronous callback to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > Only one [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType} panel and one
-     * <br> > [STATUS_BAR]{@link inputMethodEngine.PanelType} panel can be created for a single input method.
-     * <br>
-     * <br> > The input method panel does not support subwindows. For example, subwindows cannot be created using APIs such
-     * <br> > as
-     * <br> > [window.createWindow](docroot://windowmanager/application-window-fa.md#setting-the-child-window-of-an-application),
-     * <br> >
-     * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)},
-     * <br> > and [CustomDialog]{@link CustomDialogController}. You are advised to adopt
-     * <br> > alternative solutions to sub-windows, such as using a [dialog box]{@link @ohos.arkui.advanced.Dialog} or
-     * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
-     * <br> > set **showInSubwindow** to **false**.
-     *
+     * This interface is used to create an input method panel. The input method can be invoked only by the input method
+     * application in the
+     * [InputMethodExtensionAbility]{@link @ohos.InputMethodExtensionAbility:InputMethodExtensionAbility} class. Use the
+     * callback asynchronous callback. <br> <br> Pairing call: <br> <br> - After calling createPanel() to create a
+     * panel, you must call [destroyPanel]{@link inputMethodEngine.InputMethodAbility.destroyPanel(panel: Panel, callback: AsyncCallback<void>)}
+     * to destroy the panel after using it to release resources. <br>- If destroyPanel() is not invoked, panel resources
+     * are leaked, affecting the use of system resources. <br>- A single input method application allows only one soft
+     * keyboard type and one status bar type panel to be created. <br> <br> > **Note: ** <br> > <br> > Only one panel of
+     * [soft keyboard type] {@link inputMethodEngine.PanelType} and [status bar type]
+     * {@link inputMethodEngine.PanelType} can be created for a single input method application. <br>>You are not
+     * allowed to create panels of the same type repeatedly. You must reuse existing panels or destroy existing panels
+     * before creating panels of the same type. <br> >When a panel fails to be created, the historical error code 1 is
+     * used for dynamic implementation, and the error code 12800004 is used for static implementation. Locate the
+     * failure cause based on the error information and native logs. <br>> <br> > The input method panel does not
+     * support creating sub-windows. For example, the window.createWindow [Setting Application Subwindow](
+     * docroot://windowmanager/application-window-fa.md# Setting Application Subwindow), <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
+     * <br> >, and [CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller} interfaces cannot be used to
+     * create subwindow pop-up windows. You are advised to use a non-subwindow alternative, for example, <br> > [pop-up]
+     * {@link @ohos.arkui.advanced.Dialog}, <br> >
+     * [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
+     * set <br> > showInSubwindow to false.
      * @param { BaseContext } ctx - Current context of the input method.
      * @param { PanelInfo } info - Information about the input method panel.
      * @param { AsyncCallback<Panel> } callback - Callback used to return the result. If the operation is successful,
-     * the created input method panel is returned.
+     *         the created input method panel is returned.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
      * @throws { BusinessError } 12800004 - not an input method application.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -1009,30 +1014,30 @@ declare namespace inputMethodEngine {
     createPanel(ctx: BaseContext, info: PanelInfo, callback: AsyncCallback<Panel>): void;
 
     /**
-     * Creates an input method panel. This API can be called only by the input method application in the
-     * [InputMethodExtensionAbility]{@link @ohos.InputMethodExtensionAbility:InputMethodExtensionAbility} class. This
-     * API uses a promise to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > Only one [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType} panel and one
-     * <br> > [STATUS_BAR]{@link inputMethodEngine.PanelType} panel can be created for a single input method.
-     * <br>
-     * <br> > The input method panel does not support subwindows. For example, subwindows cannot be created using APIs such
-     * <br> > as
-     * <br> > [window.createWindow](docroot://windowmanager/application-window-fa.md#setting-the-child-window-of-an-application),
-     * <br> >
-     * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)},
-     * <br> > and [CustomDialog]{@link CustomDialogController}. You are advised to adopt
-     * <br> > alternative solutions to sub-windows, such as using a [dialog box]{@link @ohos.arkui.advanced.Dialog} or
-     * <br> > [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
-     * <br> > set **showInSubwindow** to **false**.
-     *
+     * This interface is used to create an input method panel. This interface can be invoked only by the input method
+     * application in the
+     * [InputMethodExtensionAbility]{@link @ohos.InputMethodExtensionAbility:InputMethodExtensionAbility} class. Use the
+     * promise asynchronous callback. <br> <br> > **Note: ** <br> > <br> > Only one panel of [soft keyboard type]
+     * {@link inputMethodEngine.PanelType} and [status bar type] {@link inputMethodEngine.PanelType} can be created for
+     * a single input method application. <br>>You are not allowed to create panels of the same type repeatedly. You
+     * must reuse existing panels or destroy existing panels before creating panels of the same type. <br>>When a panel
+     * fails to be created, the historical error code 1 is used for dynamic implementation, and the error code 12800004
+     * is used for static implementation. Locate the failure cause based on the error information and native logs. <br>>
+     * <br> > The input method panel does not support creating sub-windows. For example, the window.createWindow
+     
+     * [Setting Application Subwindow](docroot://windowmanager/application-window-fa.md# Setting Application Subwindow),
+     * <br> > [bindContextMenu]{@link CommonMethod#bindContextMenu(content: CustomBuilder, responseType: ResponseType, options?: ContextMenuOptions)}
+     * <br> >, and [CustomDialog]{@link ./@internal/component/ets/custom_dialog_controller} interface cannot be used to
+     * create subwindow pop-up windows. You are advised to use a non-subwindow alternative, for example, <br> > [pop-up]
+     * {@link @ohos.arkui.advanced.Dialog}, <br> >
+     * [bindMenu]{@link CommonMethod#bindMenu(content: Array<MenuElement> | CustomBuilder, options?: MenuOptions)}, or
+     * set <br> > showInSubwindow to false.
+     
      * @param { BaseContext } ctx - Current context of the input method.
      * @param { PanelInfo } info - Information about the input method panel.
      * @returns { Promise<Panel> } the promise returned by the function.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
      * @throws { BusinessError } 12800004 - not an input method application.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
@@ -1041,13 +1046,24 @@ declare namespace inputMethodEngine {
     createPanel(ctx: BaseContext, info: PanelInfo): Promise<Panel>;
 
     /**
-     * Destroys the specified input method panel. This API uses an asynchronous callback to return the result.
-     *
+     * Destroy the input method panel. This interface must be invoked before creating a panel by calling [createPanel]
+     * _{@link inputMethodEngine.InputMethodAbility.createPanel(ctx: BaseContext, info: PanelInfo, callback:
+     * AsyncCallback<Panel>)}_. Use the callback asynchronous callback. <br> <br> Pair Call: <br> <br> - Must be used
+     * with the [createPanel]{@link inputMethodEngine.InputMethodAbility.createPanel(ctx: BaseContext, info: PanelInfo, callback: AsyncCallback<Panel>)}
+     * method to destroy the input method panel created by createPanel(). <br>- The panel to be destroyed must be a
+     * panel object that has been successfully created. <br>- If the panel is not destroyed correctly, resource leakage
+     * may occur. You are advised to call destroyPanel() to release resources after the panel is used. After being
+     * destroyed, the panel instance becomes invalid and cannot be reused. Destroying the old instance does not remove
+     * the registration information of the new panel of the same type. When the native layer fails to be destroyed, the
+     * encapsulation object that is still valid is not invalidated, and the registration information of the
+     * encapsulation object is not removed. You can handle the error and then try again. If the window fails to be
+     * destroyed, the error code mapping of the existing panel operation is used. Error code 1 is returned.
      * @param { Panel } panel - Input method panel to destroy.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1055,12 +1071,22 @@ declare namespace inputMethodEngine {
     destroyPanel(panel: Panel, callback: AsyncCallback<void>): void;
 
     /**
-     * Destroys the specified input method panel. This API uses a promise to return the result.
-     *
+     * Destroy the input method panel. Use the promise asynchronous callback. <br> <br> Pairing call: <br> <br> - Must
+     * be used with the [createPanel]_{@link inputMethodEngine.InputMethodAbility.createPanel(ctx: BaseContext, info:
+     * PanelInfo, callback: AsyncCallback<Panel>)} method to destroy the input method panel created by createPanel().
+     * <br>- The destroyed panel must be a successfully created panel object. <br>- If the panel is not destroyed
+     * correctly, resource leakage may occur. You are advised to call destroyPanel() to release resources after the
+     * panel is used. After being destroyed, the panel instance becomes invalid and cannot be reused. Destroying the old
+     * instance does not remove the registration information of the new panel of the same type. When the native layer
+     * fails to be destroyed, the encapsulation object that is still valid is not invalidated, and its registration
+     * information is not removed. You can handle the error and try again. If the window fails to be destroyed, the
+     * error code mapping of the existing panel operation is used. Error code 1 is returned.
+     
      * @param { Panel } panel - Input method panel to destroy.
      * @returns { Promise<void> } the promise returned by the function.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -2289,26 +2315,33 @@ declare namespace inputMethodEngine {
     finishTextPreviewSync(): void;
 
     /**
-     * Sends the custom communication to the edit box application attached to the input method application. This API
-     * uses a promise to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API can be called only when the edit box is attached to the input method and enter the edit mode, and the
-     * <br> > input method application is in full experience mode.
-     * <br> >
-     * <br> > The maximum length of **msgId** is 256 B, and the maximum length of **msgParam** is 128 KB.
-     *
+     * Send custom communication to the edit box application bound to the current input method application. Use Promise
+     * asynchronous callbacks. <br> <br> > **Note: ** <br> > <br> > This interface can be invoked only when the edit box
+     * is bound to the input method and the input method is in full experience mode. <br>> <br>> The maximum size of
+     * msgId is 256 bytes, and the maximum size of msgParam is 128 KB. In the ArkTS dynamic call, if the operation queue
+     * is full or the queue times out, the message sending is aborted and BusinessError 12800003 is returned through
+     * Promise rejection. Wait until the operation is complete before initiating another request. If an asynchronous
+     
+     * task fails to be created or a framework report fails to be submitted, use BusinessError 12800008. This error code
+     
+     * is also used when an operation is canceled if there is no dedicated error code for the operation. If the
+     * asynchronous input or result return channel cannot be prepared and there are no pending exceptions, the
+     * BusinessError 12800008 is thrown synchronously.
+     
+     
+     
      * @param { string } msgId - Identifier of the custom data to be sent to the edit box application attached to the
-     * input method application.
+     *         input method application.
      * @param { ArrayBuffer } [msgParam] - Message body of the custom data to be sent to the edit box application
-     * attached to the input method application.
+     *         attached to the input method application.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1. Incorrect parameter types. 2. Incorrect parameter length.
+     *         1. Incorrect parameter types. 2. Incorrect parameter length.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
-     * 1.the edit box is not focused. 2.no edit box is bound to current input method application.
-     * 3.ipc failed due to the large amount of data transferred or other reasons.
+     *         1.the edit box is not focused. 2.no edit box is bound to current input method application.
+     *         3.ipc failed due to the large amount of data transferred or other reasons.
+     * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+     * a system error, such as null pointer, IPC exception.
      * @throws { BusinessError } 12800009 - input method client detached.
      * @throws { BusinessError } 12800014 - the input method is in basic mode.
      * @throws { BusinessError } 12800015 - the other side does not accept the request.
@@ -3015,14 +3048,14 @@ declare namespace inputMethodEngine {
    */
   interface Panel {
     /**
-     * Loads content from a page to this input method panel. This API uses an asynchronous callback to return the
-     * result.
-     *
+     * Load specific page content for the current input method panel and use callback asynchronous callback.
      * @param { string } path - Path of the page from which the content will be loaded.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3030,12 +3063,14 @@ declare namespace inputMethodEngine {
     setUiContent(path: string, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads content from a page to this input method panel. This API uses a promise to return the result.
-     *
+     * Load specific page content for the current input method panel, using Promise asynchronous callback.
+     
      * @param { string } path - Path of the page from which the content will be loaded.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3043,16 +3078,17 @@ declare namespace inputMethodEngine {
     setUiContent(path: string): Promise<void>;
 
     /**
-     * Loads content from a page linked to LocalStorage to this input method panel. This API uses an asynchronous
-     * callback to return the result.
-     *
-     * @param { string } path - Path of the page linked to LocalStorage.
+     * Load the specific page content associated with LocalStorage for the current panel, using an asynchronous
+     * callback.
+     * @param { string } path - Path of the page from which the content will be loaded.
      * @param { LocalStorage } storage - Storage unit that provides storage for mutable and immutable state variables in
-     * the application.
+     *         the application.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3060,14 +3096,16 @@ declare namespace inputMethodEngine {
     setUiContent(path: string, storage: LocalStorage, callback: AsyncCallback<void>): void;
 
     /**
-     * Loads content from a page linked to LocalStorage to this panel. This API uses a promise to return the result.
-     *
+     * Load the specific page content associated with LocalStorage for the current panel, using Promise asynchronous
+     * callback.
      * @param { string } path - Path of the page from which the content will be loaded.
      * @param { LocalStorage } storage - Storage unit that provides storage for mutable and immutable state variables in
-     * the application.
+     *         the application.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3075,25 +3113,22 @@ declare namespace inputMethodEngine {
     setUiContent(path: string, storage: LocalStorage): Promise<void>;
 
     /**
-     * Resizes this input method panel. This API uses an asynchronous callback to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > The panel width cannot exceed the screen width, and the panel height cannot be 0.7 times higher than the screen
-     * <br> > height.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * <br> > function buttons at the bottom of the panel will dynamically adjust their size according to the panel width. To
-     * <br> > ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Change the size of the current input method panel and use the callback asynchronous callback function. <br> <br>
+     * > **Description** <br> > <br> > The panel width cannot exceed the screen width, and the panel height cannot be
+     * 0.7 times the screen height. <br>> <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges from 0 to
+     * 288 vp, the function keys at the bottom of the panel are dynamically adjusted based on the panel width. To ensure
+     * optimal user experience, it is recommended that the panel width be greater than or equal to 90 vp.
+     
      * @param { long } width - Target width of the panel, in px. The value is an integer greater than or equal to 0, and
-     * cannot be greater than the screen width.
+     *         cannot be greater than the screen width.
      * @param { long } height - Target height of the panel, in px. The value is an integer greater than or equal to 0,
-     * and cannot be greater than 0.7 times the screen height.
+     *         and cannot be greater than 0.7 times the screen height.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3101,24 +3136,21 @@ declare namespace inputMethodEngine {
     resize(width: long, height: long, callback: AsyncCallback<void>): void;
 
     /**
-     * Resizes this input method panel. This API uses a promise to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > The panel width cannot exceed the screen width, and the panel height cannot be 0.7 times higher than the screen
-     * <br> > height.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * <br> > function buttons at the bottom of the panel will dynamically adjust their size according to the panel width. To
-     * <br> > ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Change the size of the current input method panel and use Promise asynchronous callback. <br> <br> >
+     * **Description** <br> > <br> > The panel width cannot exceed the screen width, and the panel height cannot be 0.7
+     * times the screen height. <br>> <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges from 0 to 288
+     * vp, the function keys at the bottom of the panel are dynamically adjusted based on the panel width. To ensure
+     * optimal user experience, it is recommended that the panel width be greater than or equal to 90 vp.
+     
      * @param { long } width - Target width of the panel, in px. The value is an integer greater than or equal to 0, and
-     * cannot be greater than the screen width.
+     *         cannot be greater than the screen width.
      * @param { long } height - Target height of the panel, in px. The value is an integer greater than or equal to 0,
-     * and cannot be greater than 0.7 times the screen height.
+     *         and cannot be greater than 0.7 times the screen height.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3126,17 +3158,19 @@ declare namespace inputMethodEngine {
     resize(width: long, height: long): Promise<void>;
 
     /**
-     * Moves this input method panel to the specified position. This API uses an asynchronous callback to return the
-     * result. This API does not work on panels in the [FLG_FIXED]{@link inputMethodEngine.PanelFlag} state.
-     *
+     * Move the panel position and use the callback asynchronous callback function. [Panel status] When
+     * {@link inputMethodEngine.PanelFlag} is fixed, the actual movement effect is not generated.
+     
      * @param { int } x - Distance to move along the horizontal axis, in px. A positive value indicates moving
-     * rightwards. The value must be an integer.
+     *         rightwards. The value must be an integer.
      * @param { int } y - Distance to move along the vertical axis, in px. A positive value indicates moving downwards.
-     * The value must be an integer.
+     *         The value must be an integer.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3144,16 +3178,17 @@ declare namespace inputMethodEngine {
     moveTo(x: int, y: int, callback: AsyncCallback<void>): void;
 
     /**
-     * Moves this input method panel to the specified position. This API uses a promise to return the result. This API
-     * does not work on panels in the [FLG_FIXED]{@link inputMethodEngine.PanelFlag} state.
-     *
+     * Move the panel position and use promise asynchronous callback. [Panel status] When
+     * {@link inputMethodEngine.PanelFlag} is fixed, the actual movement effect is not generated.
      * @param { int } x - Distance to move along the horizontal axis, in px. A positive value indicates moving
-     * rightwards. The value must be an integer.
+     *         rightwards. The value must be an integer.
      * @param { int } y - Distance to move along the vertical axis, in px. A positive value indicates moving downwards.
-     * The value must be an integer.
+     *         The value must be an integer.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3177,11 +3212,11 @@ declare namespace inputMethodEngine {
     startMoving(): void;
 
     /**
-     * Obtains the window ID. This API uses a promise to return the result.
-     *
+     * Obtain the displayId of the current window and use Promise asynchronous callback.
+     
      * @returns { Promise<long> } Promise used to return the result. It returns **displayId** of the window.
      * @throws { BusinessError } 12800002 - input method engine error. Possible causes:
-     * 1.input method panel not created. 2.the input method application does not subscribe to related events.
+     *         1.input method panel not created. 2.the input method application does not subscribe to related events.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
@@ -3190,11 +3225,14 @@ declare namespace inputMethodEngine {
     getDisplayId(): Promise<long>;
 
     /**
-     * Shows this input method panel. This API uses an asynchronous callback to return the result. It can be called when
-     * the input method is bound to the edit box.
-     *
+     * Display the current input method panel. Use callback asynchronous callback. The input method application can be
+     * invoked after it is bound to the edit box.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing
+     * the panel.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3202,10 +3240,13 @@ declare namespace inputMethodEngine {
     show(callback: AsyncCallback<void>): void;
 
     /**
-     * Shows this input method panel. This API uses a promise to return the result. It can be called when the input
-     * method is bound to the edit box.
-     *
+     * Display the current input method panel and use promise asynchronous callback. The input method application can be
+     * invoked after it is bound to the edit box.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing
+     * the panel.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3213,10 +3254,11 @@ declare namespace inputMethodEngine {
     show(): Promise<void>;
 
     /**
-     * Hides this panel. This API uses an asynchronous callback to return the result.
-     *
+     * Hide the current input method panel and use the callback asynchronous callback function.
      * @param { AsyncCallback<void> } callback - Callback used to return the result. If the operation is successful,
-     * **err** is **undefined**. Otherwise, **err** is an error object.
+     *         **err** is **undefined**. Otherwise, **err** is an error object.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3224,9 +3266,10 @@ declare namespace inputMethodEngine {
     hide(callback: AsyncCallback<void>): void;
 
     /**
-     * Hides this panel. This API uses a promise to return the result.
-     *
+     * Hide the current input method panel and use promise asynchronous callback.
      * @returns { Promise<void> } Promise that returns no value.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3238,6 +3281,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'show' } type - Event type, which is **'show'**.
      * @param { function } callback - Callback used to return the result.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3248,9 +3292,10 @@ declare namespace inputMethodEngine {
      *
      * @param { 'show' } type - Event type, which is **'show'**.
      * @param { function } [callback] - Callback to unregister. If this parameter is not specified, this API unregisters
-     * all callbacks for the specified type.
+     *         all callbacks for the specified type.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3261,6 +3306,7 @@ declare namespace inputMethodEngine {
      *
      * @param { 'hide' } type - Event type, which is **'hide'**.
      * @param { function } callback - Callback used to return the result.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
@@ -3271,21 +3317,24 @@ declare namespace inputMethodEngine {
      *
      * @param { 'hide' } type - Event type, which is **'hide'**.
      * @param { function } [callback] - Callback to unregister. If this parameter is not specified, this API unregisters
-     * all callbacks for the specified type.
+     *         all callbacks for the specified type.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      */
     off(type: 'hide', callback?: () => void): void;
 
     /**
-     * Changes the state type ([PanelFlag]{@link inputMethodEngine.PanelFlag}) of this input method panel. This API only
-     * works for [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType} panels.
-     *
+     * This command is used to change the panel status of the input method application to another
+     * [PanelFlag]{@link inputMethodEngine.PanelFlag} form. This command takes effect only for the
+     * [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType}.
      * @param { PanelFlag } flag - Type of the state of the target panel.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3297,12 +3346,13 @@ declare namespace inputMethodEngine {
      *
      * @permission ohos.permission.PRIVACY_WINDOW
      * @param { boolean } isPrivacyMode - Whether to set the input method panel to privacy mode.
-     * <br>    - **true**: privacy mode.
-     * <br>    - **false**: non-privacy mode.
-     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
-     * required to call the API.
+     *         <br>- **true**: privacy mode.
+     *         <br>- **false**: non-privacy mode.
+     * @throws { BusinessError } 201 - permissions check fails.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
+     * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 11 dynamic
      * @since 23 static
@@ -3310,29 +3360,26 @@ declare namespace inputMethodEngine {
     setPrivacyMode(isPrivacyMode: boolean): void;
 
     /**
-     * Adjusts the panel rectangle. After the API is called, the adjust request is submitted to the input method
-     * framework, but the execution is not complete.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * <br> > state.
-     * <br> >
-     * <br> > This API returns the result synchronously. The return only indicates that the system receives the setting
-     * <br> > request, not that the setting is complete.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * <br> > function buttons at the bottom of the panel will dynamically adjust their size according to the panel width. To
-     * <br> > ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size of the input method application. After the interface invoking is
+     * complete, the adjust request has been submitted to the input method framework, but the execution is not complete.
+     * <br> <br>> **Note: ** <br>> <br>> This parameter is applicable only to panels of the SOFT_KEYBOARD type and the
+     * status is FLG_FIXED or FLG_FLOING. <br>> <br>>This interface is a synchronous interface. If the interface returns
+     * a success message, the system receives the setting request, but does not indicate that the setting is complete.
+     * To detect exceptions during execution, you are advised to use <br> >
+     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)} or <br> >
+     * [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: PanelRect)}. <br>>
+     * <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges from 0 to 288 vp, the function keys at the
+     * bottom of the panel are dynamically adjusted based on the panel width. To ensure optimal user experience, it is
+     * recommended that the panel width be greater than or equal to 90 vp.
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { PanelRect } rect - Landscape rectangle and portrait rectangle of the target panel. For the panel of the
-     * fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
-     * For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
-     * the screen width.
+     *         fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
+     *         For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
+     *         the screen width.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      * @since 23 static
@@ -3340,30 +3387,29 @@ declare namespace inputMethodEngine {
     adjustPanelRect(flag: PanelFlag, rect: PanelRect): void;
 
     /**
-     * Adjusts the panel rectangle, and customizes the avoid area and touch area.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * <br> > state. This API is compatible with
-     * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}. If the
-     * <br> > input parameter **rect** contains only the **landscapeRect** and **portraitRect** attributes,
-     * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)} is called by
-     * <br> > default.
-     * <br> >
-     * <br> > This API returns the result synchronously. The return only indicates that the system receives the setting
-     * <br> > request, not that the setting is complete.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * <br> > function buttons at the bottom of the panel will dynamically adjust their size according to the panel width. To
-     * <br> > ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size, position, custom avoidance area, and hot area of the input method
+     * application. <br> <br>> **Note: ** <br>> <br>> This parameter is applicable only to panels of the SOFT_KEYBOARD
+     * type and the status is FLG_FIXED or FLG_FLOING. This API is compatible with the invoking method of <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}. If only the
+     * landscapeRect and portraitRect attributes are set for the input parameter rect, <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)} is invoked by
+     * default. <br>> <br>>This interface is a synchronous interface. If the interface returns a success message, the
+     * system receives the setting request but does not indicate that the setting is complete. To detect exceptions
+     * during execution, you are advised to use <br> >
+     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} or
+     * <br> > [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: EnhancedPanelRect)}
+     * <br> >. <br>> <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges from 0 to 288 vp, the function
+     * keys at the bottom of the panel are dynamically adjusted based on the panel width. To ensure optimal user
+     * experience, it is recommended that the panel width be greater than or equal to 90 vp. <br>> <br>> When the
+     * com.ohos.sceneboard process does not exist, the effective range of the input method hot zone is the same as that
+     * of the soft keyboard.
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { EnhancedPanelRect } rect - The target panel rectangle, avoid area, and touch area.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3371,100 +3417,109 @@ declare namespace inputMethodEngine {
     adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect): void;
 
     /**
-     * Update the panel rectangle. This API uses a promise to return the result.
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * state.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * function buttons at the bottom of the panel will dynamically update their size according to the panel width. To
-     * ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size of the input method application. Use Promise asynchronous callbacks.
+     * <br> <br>> **Note: ** <br>> <br>> This parameter is applicable only to panels of the SOFT_KEYBOARD type and the
+     * status is FLG_FIXED or FLG_FLOING. <br>> <br>>This interface is an asynchronous interface. If the interface
+     * returns a response, it indicates that the system receives the setting request, but does not indicate that the
+     
+     
+     * setting is complete. <br>> <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges from 0 to 288 vp,
+     * the function keys at the bottom of the panel are dynamically adjusted based on the panel width. To ensure optimal
+     * user experience, it is recommended that the panel width be greater than or equal to 90 vp.
+     
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { PanelRect } rect - Landscape rectangle and portrait rectangle of the target panel. For the panel of the
-     * fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
-     * For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
-     * the screen width.
+     *         fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
+     *         For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
+     *         the screen width.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
-     * @stagemodelonly
+     *     @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     updatePanelRect(flag: PanelFlag, rect: PanelRect): Promise<void>;
 
     /**
-     * Update the panel rectangle, and customizes the avoid area and touch area. This API
-     * uses a promise to return the result.
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * state. This API is compatible with
-     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)}.
-     * If the input parameter **rect** contains only the **landscapeRect** and **portraitRect** attributes,
-     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)}
-     * is called by default.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * function buttons at the bottom of the panel will dynamically update their size according to the panel width. To
-     * ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size, position, custom avoidance area, and hot area of the input method
+     * application. Use Promise asynchronous callbacks. <br> <br>> **Note: ** <br>> <br>> This parameter is applicable
+     
+     
+     * only to panels of the SOFT_KEYBOARD type and the status is FLG_FIXED or FLG_FLOING. This API is compatible with
+     * the invoking method of <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}. If only the
+     * landscapeRect and portraitRect attributes are set for the input parameter rect, <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)} is invoked by
+     
+     
+     * default. <br>> <br>> This interface is an asynchronous interface. The interface response indicates that the
+     * system receives the setting request, but does not indicate that the setting is complete. <br>> <br>> If PanelFlag
+     * is set to FLG_FLOATED and the panel width ranges from 0 to 288 vp, the function keys at the bottom of the panel
+     * are dynamically adjusted based on the panel width. To ensure optimal user experience, it is recommended that the
+     * panel width be greater than or equal to 90 vp. <br>> <br>> When the com.ohos.sceneboard process does not exist,
+     * the effective range of the input method hot zone is the same as that of the soft keyboard.
+     
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { EnhancedPanelRect } rect - The target panel rectangle, avoid area, and touch area.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
-     * @stagemodelonly
+     *     @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     updatePanelRect(flag: PanelFlag, rect: EnhancedPanelRect): Promise<void>;
 
     /**
-     * Update the panel rectangle.
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * state.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * function buttons at the bottom of the panel will dynamically update their size according to the panel width. To
-     * ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size of the input method application. <br> <br> > **Note: ** <br> > <br> >
+     * The synchronization interface blocks the main thread, which may affect UI interaction. Therefore, exercise
+     * caution when using this interface. You are advised to use the corresponding asynchronous interface <br> >
+     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)} first. <br>>
+     * <br>> applies only to panels of the SOFT_KEYBOARD type and the status is FLG_FIXED or FLG_FLOING. <br>> <br>>This
+     * interface is a synchronous interface. The return of the interface indicates that the system receives the setting
+     * request and the setting is complete. <br>> <br>> If PanelFlag is set to FLG_FLOATED and the panel width ranges
+     * from 0 to 288 vp, the function keys at the bottom of the panel are dynamically adjusted based on the panel width.
+     * To ensure optimal user experience, it is recommended that the panel width be greater than or equal to 90 vp.
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { PanelRect } rect - Landscape rectangle and portrait rectangle of the target panel. For the panel of the
-     * fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
-     * For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
-     * the screen width.
+     *         fixed state, the height cannot exceed 70% of the screen height, and the width cannot exceed the screen width.
+     *         For the panel of the floating state, the height cannot exceed the screen height, and the width cannot exceed
+     *         the screen width.
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
-     * @stagemodelonly
+     *     @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     updatePanelRectSync(flag: PanelFlag, rect: PanelRect): void;
 
     /**
-     * Update the panel rectangle, and customizes the avoid area and touch area.
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * state. This API is compatible with
-     * [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: PanelRect)}.
-     * If the input parameter **rect** contains only the **landscapeRect** and **portraitRect** attributes,
-     * [updatePanelRectSync]{@link inputMethodEngine.Panel.updatePanelRectSync(flag: PanelFlag, rect: PanelRect)}
-     * is called by default.
-     * <br> >
-     * <br> > When the **PanelFlag** of a smartphone is **FLG_FLOATING** and the panel width is between 0 and 288 vp, the
-     * function buttons at the bottom of the panel will dynamically update their size according to the panel width. To
-     * ensure the optimal user experience, it is recommended that the panel width be no less than 90 vp.
-     *
+     * Pre-set the landscape/portrait screen size, position, custom avoidance area, and hot area of the input method
+     * application. <br> <br> > **Note: ** <br> > <br> > The synchronization interface blocks the main thread, which may
+     
+     * affect UI interaction. Therefore, exercise caution when using this interface. You are advised to use the
+     * corresponding asynchronous interface <br> >
+     * [updatePanelRect]{@link inputMethodEngine.Panel.updatePanelRect(flag: PanelFlag, rect: PanelRect)} first. <br>>
+     * <br>> applies only to panels of the SOFT_KEYBOARD type and the status is FLG_FIXED or FLG_FLOING. This API is
+     * compatible with the invoking method of <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}. If only the
+     * landscapeRect and portraitRect attributes are set for the input parameter rect, <br> >
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)} is invoked by
+     * default. <br>> <br>>This interface is a synchronous interface. The return of the interface indicates that the
+     * system receives the setting request and the setting is complete. <br>> <br>> When PanelFlag is set to FLG_FLOATED
+     * and the panel width ranges from 0 to 288 vp, the function keys at the bottom of the panel are dynamically
+     * adjusted based on the panel width. To ensure optimal user experience, it is recommended that the panel width be
+     * greater than or equal to 90 vp. <br> > <br> > When the com.ohos.sceneboard process does not exist, the effective
+     * range of the input method hot zone is the same as that of the soft keyboard.
      * @param { PanelFlag } flag - Type of the state of the target panel. It can be **FLG_FIXED** or **FLG_FLOATING**.
      * @param { EnhancedPanelRect } rect - The target panel rectangle, avoid area, and touch area.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
-     * @stagemodelonly
+     *     @stagemodelonly
      * @since 26.0.0 dynamic&static
      */
     updatePanelRectSync(flag: PanelFlag, rect: EnhancedPanelRect): void;
@@ -3481,12 +3536,13 @@ declare namespace inputMethodEngine {
      * <br> > for updating the hot zone, not that the hot zone has been updated.
      *
      * @param { Array<window.Rect> } inputRegion - Region for receiving input events.
-     * <br>    - The array size is limited to [1, 4].
-     * <br>    - The input hot zone is relative to the left vertex of the input method panel window.
+     *         <br>- The array size is limited to [1, 4].
+     *         <br>- The input hot zone is relative to the left vertex of the input method panel window.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+     *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3495,27 +3551,28 @@ declare namespace inputMethodEngine {
 
     /**
      * Enables listening for the panel size change. This API uses an asynchronous callback to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * <br> > state. When you call **adjustPanelRect** to adjust the panel size, the system calculates the final value based
-     * <br> > on certain rules (for example, whether the panel size exceeds the screen). This callback can be used to obtain
-     * <br> > the actual panel size to refresh the panel layout.
-     * <br> >
-     * <br> > -  This API is supported from API version 12 to 14. The callback function of this API contains only mandatory
-     * <br> > parameters of the [window.Size]{@link @ohos.window:window.Size} type.
-     * <br> >
-     * <br> > -  Since API version 15, after the
-     * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} API
-     * <br> > is called, an optional parameter of the [KeyboardArea]{@link inputMethodEngine.KeyboardArea} type is added to
-     * <br> > the callback function of this API.
+     *
+     * > **NOTE**
+     * >
+     * > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
+     * > state. When you call **adjustPanelRect** to adjust the panel size, the system calculates the final value based
+     * > on certain rules (for example, whether the panel size exceeds the screen). This callback can be used to obtain
+     * > the actual panel size to refresh the panel layout.
+     * >
+     * > - This API is supported from API version 12 to 14. The callback function of this API contains only mandatory
+     * > parameters of the [window.Size]{@link window.Size} type.
+     * >
+     * > - Since API version 15, after the
+     * > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} API
+     * > is called, an optional parameter of the [KeyboardArea]{@link inputMethodEngine.KeyboardArea} type is added to
+     * > the callback function of this API.
      *
      * @param { 'sizeChange' } type - Event type, which is **'sizeChange'**.
      * @param { Callback<window.Size> } callback - Callback used to return the size of the soft keyboard panel,
-     * including the width and height. [since 12 - 14]
+     *         including the width and height. [since 12 - 14]
      * @param { SizeChangeCallback } callback - Callback used to return the size of the soft keyboard panel, including
-     * the width and height. [since 15]
+     *         the width and height. [since 15]
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      */
@@ -3523,27 +3580,28 @@ declare namespace inputMethodEngine {
 
     /**
      * Disables listening for the panel size change. This API uses an asynchronous callback to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
-     * <br> > state. When you call **adjustPanelRect** to adjust the panel size, the system calculates the final value based
-     * <br> > on certain rules (for example, whether the panel size exceeds the screen). This callback can be used to obtain
-     * <br> > the actual panel size to refresh the panel layout.
-     * <br> >
-     * <br> > -  This API is supported from API version 12 to 14. The callback function of this API contains only mandatory
-     * <br> > parameters of the [window.Size]{@link @ohos.window:window.Size} type.
-     * <br> >
-     * <br> > -  Since API version 15, after the
-     * <br> > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} API
-     * <br> > is called, an optional parameter of the [KeyboardArea]{@link inputMethodEngine.KeyboardArea} type is added to
-     * <br> > the callback function of this API.
+     *
+     * > **NOTE**
+     * >
+     * > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED** or **FLG_FLOATING**
+     * > state. When you call **adjustPanelRect** to adjust the panel size, the system calculates the final value based
+     * > on certain rules (for example, whether the panel size exceeds the screen). This callback can be used to obtain
+     * > the actual panel size to refresh the panel layout.
+     * >
+     * > - This API is supported from API version 12 to 14. The callback function of this API contains only mandatory
+     * > parameters of the [window.Size]{@link window.Size} type.
+     * >
+     * > - Since API version 15, after the
+     * > [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} API
+     * > is called, an optional parameter of the [KeyboardArea]{@link inputMethodEngine.KeyboardArea} type is added to
+     * > the callback function of this API.
      *
      * @param { 'sizeChange' } type - Event type, which is **'sizeChange'**.
      * @param { ?Callback<window.Size> } [callback] - Callback used to return the size of the soft keyboard panel,
-     * including the width and height. [since 12 - 14]
+     *         including the width and height. [since 12 - 14]
      * @param { ?SizeChangeCallback } [callback] - Callback used to return the size of the soft keyboard panel,
-     * including the width and height. [since 15]
+     *         including the width and height. [since 15]
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 12 dynamic
      */
@@ -3592,14 +3650,13 @@ declare namespace inputMethodEngine {
     off(type: 'sizeUpdate', callback?: SizeUpdateCallback): void;
 
     /**
-     * Sets the immersive mode of the input method application. You can only set the immersion mode to
-     * **NONE_IMMERSIVE**, **LIGHT_IMMERSIVE**, or **DARK_IMMERSIVE**. **IMMERSIVE** cannot be set.
-     *
+     * Set the immersive mode of the input method application. It can only be set to not use immersion mode(NONE_:00
+     * -20:00SIVE), light immersion mode(Light_:00-20:00SIVE), or dark immersion mode(DAK_:00-20:00SIVE).
      * @param { ImmersiveMode } mode - Immersive mode.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
-     * 1.Incorrect parameter types; 2.Parameter verification failed.
+     *         1.Incorrect parameter types; 2.Parameter verification failed.
      * @throws { BusinessError } 12800002 - input method engine error. Possible causes:
-     * 1.input method panel not created. 2.the input method application does not subscribe to related events.
+     *         1.input method panel not created. 2.the input method application does not subscribe to related events.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
@@ -3608,9 +3665,10 @@ declare namespace inputMethodEngine {
     setImmersiveMode(mode: ImmersiveMode): void;
 
     /**
-     * Obtains the immersive mode of the input method application.
-     *
+     * Obtain the immersive mode of the input method application.
      * @returns { ImmersiveMode } Immersive mode.
+     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 15 dynamic
      * @since 23 static
@@ -3618,32 +3676,26 @@ declare namespace inputMethodEngine {
     getImmersiveMode(): ImmersiveMode;
 
     /**
-     * Sets the immersive effect of the input method application.
-     * <br>
-     * <br>- Gradient mode and fluid light mode can be used only when the
-     * [immersive mode]{@link inputMethodEngine.Panel.setImmersiveMode} is enabled.
-     * <br>- The fluid light mode can be used only when the gradient mode is enabled.
-     * <br>- If the gradient mode is disabled, the gradient height must be 0 px.
-     * <br>- Only system applications can set the fluid light mode.
-     * <br>- The current API can be called only after any of the following APIs is called:
-     * <br>- [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)} (available
-     * since API version 12)
-     * <br>- [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)} (
-     * available since API version 15)
-     * <br>- [resize]{@link inputMethodEngine.Panel.resize(width: long, height: long, callback: AsyncCallback<void>)} (
-     * available since API version 10)
-     *
+     * Set the immersive effect of the input method application. <br> <br>- Gradient mode and Streamlight mode can only
+     * be used when [Immersive mode is enabled] {@link inputMethodEngine.Panel.setImmersiveMode}. <br>- Streamlight mode
+     * can only be used when gradient mode is enabled. <br>- When gradient mode is not enabled, the gradient height must
+     * be 0px. <br>- Only the system application can set the streamer mode. <br>-The current interface can be invoked
+     * only after any of the following interfaces is invoked: <br> -
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: PanelRect)}(supporting API
+     * version 12) <br> -
+     * [adjustPanelRect]{@link inputMethodEngine.Panel.adjustPanelRect(flag: PanelFlag, rect: EnhancedPanelRect)}(
+     * supporting API version 15) <br> -
+     * [resize]{@link inputMethodEngine.Panel.resize(width: long, height: long, callback: AsyncCallback<void>)}(
+     * supporting API version 10)
      * @param { ImmersiveEffect } effect - Immersive effect.
-     * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
-     * capability;
-     * 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+     * @throws { BusinessError } 801 - capability not supported.
      * @throws { BusinessError } 12800002 - input method engine error. Possible causes:
-     * 1. input method panel not created. 2. the input method application does not subscribe to related events.
+     *         1. input method panel not created. 2. the input method application does not subscribe to related events.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800020 - invalid immersive effect.
-     * 1. The gradient mode and the fluid light mode can only be used when the immersive mode is enabled.
-     * 2. The fluid light mode can only be used when the gradient mode is enabled.
-     * 3. When the gradient mode is not enabled, the gradient height can only be 0.
+     *         1. The gradient mode and the fluid light mode can only be used when the immersive mode is enabled.
+     *         2. The fluid light mode can only be used when the gradient mode is enabled.
+     *         3. When the gradient mode is not enabled, the gradient height can only be 0.
      * @throws { BusinessError } 12800021 - this operation is allowed only after adjustPanelRect or resize is called.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 20 dynamic
@@ -3652,19 +3704,20 @@ declare namespace inputMethodEngine {
     setImmersiveEffect(effect: ImmersiveEffect): void;
     /**
      * Sets to keep the screen always on. This API uses a promise to return the result.
-     * <br>
-     * <br> > **NOTE**
-     * <br> >
-     * <br> > - When the keyboard is displayed, the screen stays on. When the keyboard is hidden, the screen turns off.
-     * <br> >
-     * <br> > - You need to use this API properly. Set the attribute to **true** in necessary scenarios (for example, voice
-     * <br> > input) and reset this attribute to **false** after exiting necessary scenarios. In other scenarios, do not use
-     * <br> > this API.
+     *
+     * > **NOTE**
+     * >
+     * > - When the keyboard is displayed, the screen stays on. When the keyboard is hidden, the screen turns off.
+     * >
+     * > - You need to use this API properly. Set the attribute to **true** in necessary scenarios (for example, voice
+     * > input) and reset this attribute to **false** after exiting necessary scenarios. In other scenarios, do not use
+     * > this API.
      *
      * @param { boolean } isKeepScreenOn - Whether to keep the screen always on. The value **true** means that the
-     * screen is always on; the value **false** means the opposite.
+     *         screen is always on; the value **false** means the opposite.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800013 - window manager service error.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 20 dynamic
      * @since 23 static
@@ -3672,37 +3725,35 @@ declare namespace inputMethodEngine {
     setKeepScreenOn(isKeepScreenOn: boolean): Promise<void>;
 
     /**
-     * Obtains the offset area of the soft keyboard relative to the system panel under the current state of the
-     * specified screen (for example, folded or unfolded) and the current state of the input method keyboard (for
-     * example, floating or fixed). This API uses a promise to return the result.
-     *
+     * Obtain the offset area of the input method soft keyboard relative to the system panel in the current state(for
+     * example, collapsed or expanded) of the specified screen and in the current state(for example, floating or fixed)
+     * of the input method keyboard. Use Promise asynchronous callbacks.
+     
      * @param { number } displayId - Display ID of the screen where the input method keyboard is located. It can be
-     * obtained by calling [getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}.
+     *         obtained by calling [getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}.
      * @returns { Promise<SystemPanelInsets> } Promise used to return the offset area between the input method keyboard
-     * and the system panel.
+     *         and the system panel.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag. Possible causes:
-     * 1. Current panel's type is not SOFT_KEYBOARD.  2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
+     *         1. Current panel's type is not SOFT_KEYBOARD. 2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
      * @throws { BusinessError } 12800022 - invalid displayId.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 21 dynamic
      */
     getSystemPanelCurrentInsets(displayId: number): Promise<SystemPanelInsets>;
 
     /**
-     * Get the current insets of the system panel of a specified display.
-     * <br>
-     * <br><p>It's only used for SOFT_KEYBOARD panel with FLG_FIXED or FLG_FLOATING.</p>
-     * <p>This interface only supports obtaining the current insets values of a display.
-     * When the display undergoes orientation changes, or is folded or unfolded, it is necessary to
-     * reinvoke this interface to get the latest values.</p>
-     *
+     * Obtain the offset area of the input method soft keyboard relative to the system panel in the current state(for
+     * example, collapsed or expanded) of the specified screen and in the current state(for example, floating or fixed)
+     * of the input method keyboard. Use Promise asynchronous callbacks.
      * @param { long } displayId - specify which display's system panel insets.
      * @returns { Promise<SystemPanelInsets | null> } the promise returned by the function.
      * @throws { BusinessError } 12800013 - window manager service error.
      * @throws { BusinessError } 12800017 - invalid panel type or panel flag. Possible causes:
-     * 1. Current panel's type is not SOFT_KEYBOARD.  2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
+     *         1. Current panel's type is not SOFT_KEYBOARD. 2. Panel's flag is not FLG_FIXED or FLG_FLOATING.
      * @throws { BusinessError } 12800022 - invalid displayId.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3736,15 +3787,16 @@ declare namespace inputMethodEngine {
     setShadow(radius: double, color: string, offsetX: double, offsetY: double): void;
 
     /**
-     * Sets the color of the function buttons and their background color on the current panel. This API uses a promise
-     * to return the result.
-     *
+     * Set the color of the function keys on the current panel and the background color of the function keys. Use
+     * Promise asynchronous callbacks.
      * @param { string | undefined } fillColor - Color of the function buttons. The value can be [#01000000, #FFFFFFFF]
-     * or [#000000, #FFFFFF]. The value of the fully transparent alpha channel (**#00xxxxxx**) is not supported.
+     *         or [#000000, #FFFFFF]. The value of the fully transparent alpha channel (**#00xxxxxx**) is not supported.
      * @param { string | undefined } backgroundColor - Background color of the function buttons. The value can be
-     * [#01000000, #FFFFFFFF] or [#000000, #FFFFFF]. The value of the fully transparent alpha channel (#00xxxxxx) is
-     * not supported.
+     *         [#01000000, #FFFFFFFF] or [#000000, #FFFFFF]. The value of the fully transparent alpha channel (#00xxxxxx) is
+     *         not supported.
      * @returns { Promise<void> } Promise that returns no result.
+     * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 22 dynamic
      * @since 23 static
@@ -3753,10 +3805,11 @@ declare namespace inputMethodEngine {
 
     /**
      * Registers panel show event.
-     * <br>
-     * <br><p>The "show" events are triggered when the panel is shown.</p>
+     *
+     * <p>The "show" events are triggered when the panel is shown.</p>
      *
      * @param { Callback<void> } callback - the callback called when the panel shows.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3765,6 +3818,7 @@ declare namespace inputMethodEngine {
      * Unregisters panel show event.
      *
      * @param { Callback<void> } [callback] - optional, the callback called when the panel shows.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3772,10 +3826,11 @@ declare namespace inputMethodEngine {
 
     /**
      * Registers panel hide event.
-     * <br>
-     * <br><p>The "hide" events are triggered when the panel is hidden.</p>
+     *
+     * <p>The "hide" events are triggered when the panel is hidden.</p>
      *
      * @param { Callback<void> } callback - the callback called when the panel hides.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3784,6 +3839,7 @@ declare namespace inputMethodEngine {
      * Unregisters panel hide event.
      *
      * @param { Callback<void> } [callback] - the callback to Unregister.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -3814,20 +3870,22 @@ declare namespace inputMethodEngine {
 
     /**
      * Subscribe 'sizeChange' event.
-     * <br>
-     * <br><p>It's only used for SOFT_KEYBOARD panel with FLG_FIXED and FLG_FLOATING.</p>
+     *
+     * <p>It's only used for SOFT_KEYBOARD panel with FLG_FIXED and FLG_FLOATING.</p>
      *
      * @param { SizeChangeCallback } callback - the callback called when the panel size changes.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
     onSizeChange(callback: SizeChangeCallback): void;
     /**
      * Unsubscribe 'sizeChange' event.
-     * <br>
-     * <br><p>It's only used for SOFT_KEYBOARD panel with FLG_FIXED and FLG_FLOATING.</p>
+     *
+     * <p>It's only used for SOFT_KEYBOARD panel with FLG_FIXED and FLG_FLOATING.</p>
      *
      * @param { SizeChangeCallback } [callback] - optional, the callback called when the panel size changes.
+     * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 23 static
      */
@@ -4948,6 +5006,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4963,6 +5022,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4978,6 +5038,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -4992,6 +5053,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons. 
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5007,6 +5069,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text before the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5022,6 +5085,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<string> } Promise used to return the specific-length text after the cursor.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5035,6 +5099,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<EditorAttribute> } Promise used to return the attribute of the edit box.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5047,6 +5112,7 @@ declare namespace inputMethodEngine {
      * @param { int } direction - Direction in which the cursor moves.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5061,6 +5127,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5074,6 +5141,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -5086,6 +5154,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<int> } Promise used to return the result.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5100,6 +5169,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @throws { BusinessError } 12800016 - input method client is not editable.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
@@ -5125,6 +5195,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 12800003 - input method client error. Possible causes:
      *     1.the edit box is not focused. 2.no edit box is bound to the proxy input method.
+     *     3.ipc failed due to the large amount of data transferred or other reasons.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @stagemodelonly
      * @since 26.1.0 dynamic&static

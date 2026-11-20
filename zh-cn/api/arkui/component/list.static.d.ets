@@ -20,6 +20,7 @@
 import { ChildrenMainSize, EditModeOptions, ItemDragInfo, RectResult, ScrollableCommonMethod, OnWillScrollCallback, OnScrollCallback, OnItemDragStartCallback } from './common';
 import { Axis, FocusWrapMode } from './enums';
 import { OnScrollFrameBeginCallback, ScrollAlign, Scroller } from "./scroll";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { Dimension, Length, LengthConstrain, ResourceColor, ItemFillPolicy, CacheCountInfo, Resource } from './units';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
 import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommonEvent } from "./common";
@@ -33,8 +34,8 @@ import { AttributeModifier, Bindable, Callback, CommonMethod, UIScrollableCommon
 export declare enum ScrollState {
 
   /**
-   * Idle state. Triggered when the scroll state returns to idle, and when the controller's
-   * non-animated methods are used to control the scroll.
+   * 空闲状态。滚动状态回归空闲时触发，
+   * 控制器提供的无动画方法控制滚动时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -43,8 +44,8 @@ export declare enum ScrollState {
   Idle,
 
   /**
-   * Scrolling state. Triggered when the list is dragged with the finger,
-   * when the scrollbar is dragged, or when the mouse scroll wheel is used.
+   * 滚动状态。手指拖动List，
+   * 拖动滚动条和滚动鼠标滚轮时触发。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -53,7 +54,7 @@ export declare enum ScrollState {
   Scroll,
 
   /**
-   * Inertial scrolling state.
+   * 惯性滚动状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -72,7 +73,7 @@ export declare enum ScrollState {
 export declare enum ListItemAlign {
 
   /**
-   * The list items are packed toward the start edge of the <em>List</em> component along the cross axis.
+   * ListItem在<em>List</em>中，交叉轴方向首部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -81,7 +82,7 @@ export declare enum ListItemAlign {
   Start,
 
   /**
-   * The list items are centered in the <em>List</em> component along the cross axis.
+   * ListItem在<em>List</em>中，交叉轴方向居中对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -90,7 +91,7 @@ export declare enum ListItemAlign {
   Center,
 
   /**
-   * The list items are packed toward the end edge of the <em>List</em> component along the cross axis.
+   * ListItem在<em>List</em>中，交叉轴方向尾部对齐。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -202,8 +203,8 @@ export declare enum StickyStyle {
 export declare enum ChainEdgeEffect {
 
   /**
-   * Default edge effect. Compress the space in the drag direction
-   * and stretch the space in the opposite drag direction.
+   * 默认效果，拖拽方向上的列表项间距缩小，
+   * 拖拽反方向上的列表项间距扩大。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -213,7 +214,7 @@ export declare enum ChainEdgeEffect {
   DEFAULT,
 
   /**
-   * Stretch all space.
+   * 所有列表项间距扩大。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -1042,6 +1043,28 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @since 23 static
    */
   default scrollSnapAlign(value: ScrollSnapAlign | undefined): this;
+
+  /**
+   * 为List设置两阶段滚动捕捉策略。
+   *
+   * **ScrollSnapAlign.START**、**ScrollSnapAlign.CENTER**和**ScrollSnapAlign.END**选择
+   * 内置策略。**ScrollSnapAlign.NONE**无效，会抛出401异常。
+   * 自定义提供程序要求**ComputingSnapOffset**为函数。传递
+   * **undefined**或没有参数将清除策略。
+   *
+   * > **说明**
+   * > 该属性和**scrollSnapAlign**使用last-set-wins语义。这份声明是
+   * > 在其运行时实现之前发布；在静态ArkTS应用程序中调用它是
+   * > 尚未启用。最终的快照遵循**scrollSnapAnimationSpeed**运行时支持
+   * > 已添加。
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - 内置对齐或自定义提供程序。
+   * @returns { this } List属性。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
   /**
    * 设置List组件的子组件在主轴方向的大小信息。

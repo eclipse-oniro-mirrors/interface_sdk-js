@@ -32,6 +32,7 @@ import dialogRequest from '../@ohos.app.ability.dialogRequest';
 import { HapModuleInfo } from '../bundleManager/HapModuleInfo';
 import OpenLinkOptions from '../@ohos.app.ability.OpenLinkOptions';
 import Want from '../@ohos.app.ability.Want';
+import ShowParams from '../@ohos.app.ability.ShowParams';
 import StartOptions from '../@ohos.app.ability.StartOptions';
 import { Configuration } from '../@ohos.app.ability.Configuration';
 import window from '../@ohos.window';
@@ -279,7 +280,7 @@ declare class UIAbilityContext extends Context {
   startAbility(want: Want, options?: StartOptions): Promise<void>;
 
   /**
-   * Starts a UIAbility by using <!--RP2-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP2End-
+   * Starts a UIAbility by using <!--RP1-->[App Linking](docroot://application-models/app-linking-startup.md)<!--RP1End-
    * -> or [Deep Linking](docroot://application-models/deep-linking-startup.md), and returns the exit result of the 
    * launched UIAbility via a callback. This API uses a promise to return the result. It can be called only on the main 
    * thread.
@@ -2398,7 +2399,7 @@ declare class UIAbilityContext extends Context {
 
   /**
    * Moves this UIAbility from the foreground to the background. This API uses a promise to return the result. It can be
-   *  called only on the main thread.<br><!--RP1--><!--RP1End-->
+   *  called only on the main thread.
    * Starting from API version 12, this API can be properly called on phones, wearables, and TVs. If it is called on 
    * other device types, error code 16000061 is returned.
    * Starting from API version 13, this API can be properly called on phones, tablets, wearables, and TVs. If it is 
@@ -2437,6 +2438,26 @@ declare class UIAbilityContext extends Context {
    * @since 23 static
    */
   showAbility(): Promise<void>;
+
+  /**
+   * Shows this UIAbility. This API uses a promise to return the result. It can be called only on the main thread.
+   * Before calling this API, ensure that the application has been added to the status bar.
+   * This API can be properly called only on PC/2-in-1 devices and tablets. On other devices, it returns the error code
+   * 801.
+   * **System capability**: SystemCapability.Ability.AbilityRuntime.Core
+   *
+   * @param { ShowParams } params - Parameters used for showing the UIAbility.
+   * @returns { Promise<void> } Promise that returns no value.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
+   * @throws { BusinessError } 16000050 - Internal error. Possible causes: 1. Connect to system service failed;
+   *     2.System service failed to communicate with dependency module.
+   * @throws { BusinessError } 16000067 - The StartOptions check failed.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  showAbility(params: ShowParams): Promise<void>;
 
   /**
    * Hides this UIAbility. This API uses a promise to return the result. It can be called only on the main thread.

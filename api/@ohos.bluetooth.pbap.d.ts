@@ -27,7 +27,7 @@ import type constant from './@ohos.bluetooth.constant';
  *
  * @syscap SystemCapability.Communication.Bluetooth.Core
  * @since 11 dynamic
- * @since 26.0.1 static
+ * @since 26.1.0 static
  */
 declare namespace pbap {
   /**
@@ -35,7 +35,7 @@ declare namespace pbap {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type BaseProfile = baseProfile.BaseProfile;
 
@@ -45,7 +45,7 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   type AccessAuthorization = constant.AccessAuthorization;
 
@@ -55,7 +55,7 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   enum ShareType {
     /**
@@ -64,7 +64,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SHARE_NAME_AND_PHONE_NUMBER = 0,
     /**
@@ -73,7 +73,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SHARE_ALL = 1,
     /**
@@ -82,7 +82,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     SHARE_NOTHING = 2
   }
@@ -91,12 +91,13 @@ declare namespace pbap {
    * create the instance of PBAP server profile.
    *
    * @returns { PbapServerProfile } Returns the instance of pbap profile.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
+   *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createPbapServerProfile(): PbapServerProfile;
 
@@ -105,11 +106,13 @@ declare namespace pbap {
    *
    * @returns { PbapClientProfile } Returns the instance of pbap client profile.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+   *     1. The hardware does not support the capability;
+   *     2. The chip does not support the capability;
    *     3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   function createPbapClientProfile(): PbapClientProfile;
 
@@ -118,7 +121,7 @@ declare namespace pbap {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 11 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface PbapServerProfile extends BaseProfile {
     /**
@@ -126,11 +129,17 @@ declare namespace pbap {
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -138,7 +147,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
 
@@ -149,11 +158,17 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { ShareType } type - Indicates the PBAP sharing type.
      * @param { AsyncCallback<void> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -161,7 +176,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setShareType(deviceId: string, type: ShareType, callback: AsyncCallback<void>): void;
 
@@ -172,11 +187,17 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { ShareType } type - Indicates the PBAP sharing type.
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -184,7 +205,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setShareType(deviceId: string, type: ShareType): Promise<void>;
 
@@ -194,11 +215,17 @@ declare namespace pbap {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<ShareType> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -206,7 +233,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getShareType(deviceId: string, callback: AsyncCallback<ShareType>): void;
 
@@ -216,11 +243,17 @@ declare namespace pbap {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<ShareType> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -228,7 +261,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getShareType(deviceId: string): Promise<ShareType>;
 
@@ -239,11 +272,17 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AccessAuthorization } authorization - Indicates the permission.
      * @param { AsyncCallback<void> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -251,7 +290,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setPhoneBookAccessAuthorization(
       deviceId: string,
@@ -266,11 +305,17 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AccessAuthorization } authorization - Indicates the permission.
      * @returns { Promise<void> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -278,7 +323,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     setPhoneBookAccessAuthorization(deviceId: string, authorization: AccessAuthorization): Promise<void>;
 
@@ -288,11 +333,17 @@ declare namespace pbap {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @param { AsyncCallback<AccessAuthorization> } callback - the callback result.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -300,7 +351,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getPhoneBookAccessAuthorization(deviceId: string, callback: AsyncCallback<AccessAuthorization>): void;
 
@@ -310,11 +361,17 @@ declare namespace pbap {
      * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @returns { Promise<AccessAuthorization> } Returns the promise object.
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     1. Mandatory parameters are left unspecified;
+     *     2. Incorrect parameter types;
+     *     3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
+     *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -322,7 +379,7 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @since 11 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     getPhoneBookAccessAuthorization(deviceId: string): Promise<AccessAuthorization>;
   }
@@ -332,7 +389,8 @@ declare namespace pbap {
    *
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   interface PbapClientProfile extends BaseProfile {
     /**
@@ -342,10 +400,10 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -354,7 +412,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     connect(deviceId: string): void;
 
@@ -365,10 +424,10 @@ declare namespace pbap {
      * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -377,7 +436,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
 
@@ -389,10 +449,10 @@ declare namespace pbap {
      * @returns { SyncStateType } Returns the phone book sync state.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-     *     1. The hardware does not support the capability; 2. The chip does not support the capability;
+     *     1. The hardware does not support the capability;
+     *     2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -401,7 +461,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     getSyncState(deviceId: string): SyncStateType;
 
@@ -413,12 +474,12 @@ declare namespace pbap {
      * @param { Callback<SyncStateChangeParam> } callback - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     onSyncStateChange(callback: Callback<SyncStateChangeParam>): void;
 
@@ -429,12 +490,12 @@ declare namespace pbap {
      * @param { Callback<SyncStateChangeParam> } [callback] - Callback used to listen for event.
      * @throws { BusinessError } 201 - Permission verification failed.
      *     The application does not have the permission required to call the API.
-     * @throws { BusinessError } 202 - Permission verification failed.
-     *     A non-system application calls a system API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     offSyncStateChange(callback?: Callback<SyncStateChangeParam>): void;
   }
@@ -445,7 +506,8 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   interface SyncStateChangeParam {
     /**
@@ -454,7 +516,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     deviceId: string;
     /**
@@ -463,7 +526,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     state: SyncStateType;
   }
@@ -474,7 +538,8 @@ declare namespace pbap {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @systemapi
    * @stagemodelonly
-   * @since 26.0.1 dynamic&static
+   * @since 26.0.1 dynamic
+   * @since 26.1.0 static
    */
   enum SyncStateType {
     /**
@@ -483,7 +548,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     PHONEBOOK_STATE_IDLE = 0,
     /**
@@ -492,7 +558,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     PHONEBOOK_STATE_DOWNLOADING = 1,
     /**
@@ -501,7 +568,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     PHONEBOOK_STATE_DOWNLOADED = 2,
     /**
@@ -510,7 +578,8 @@ declare namespace pbap {
      * @syscap SystemCapability.Communication.Bluetooth.Core
      * @systemapi
      * @stagemodelonly
-     * @since 26.0.1 dynamic&static
+     * @since 26.0.1 dynamic
+     * @since 26.1.0 static
      */
     PHONEBOOK_STATE_DOWNLOAD_ERROR = 3
   }

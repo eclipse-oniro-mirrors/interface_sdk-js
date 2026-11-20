@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file UIContext instance
  * @kit ArkUI
  */
 
@@ -4139,8 +4139,8 @@ export class MeasureUtils {
    *
    * > **NOTE**
    * >
-   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link
-   * > ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
+   * > When calling this MPI, do not use [ApplicationContext.setFontSizeScale]{@link 
+   * ./application/ApplicationContext:ApplicationContext.setFontSizeScale} to set the font size scaling ratio. To
    * > ensure the correctness of the time sequence, you are advised to monitor the font scaling changes by yourself to
    * > ensure the accuracy of the calculation result.
    *
@@ -6570,7 +6570,8 @@ export class UIContext {
    *     if this API is called in a page within a UIAbility window, the returned context type is
    *     [UIAbilityContext]{@link ./application/UIAbilityContext:UIAbilityContext}. If this API is called in a page within an
    *     ExtensionAbility window, the returned context type is
-   *     {@link ./application/ExtensionContext:ExtensionContext}. If the ability context does not exist,
+   *     [ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}. 
+   *     If the ability context does not exist,
    *     **undefined** is returned.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -7059,9 +7060,9 @@ export class UIContext {
   getPageRootNode(): FrameNode | null;
 
   /**
-   * Checks whether the current UI instance is in easy split mode.
+   * <!--RP1-->Obtains the split view state in compatibility mode of the current UI instance.<!--RP1End-->
    *
-   * @returns { boolean } Returns true if the current UI instance is in easy split mode; returns false otherwise.
+   * @returns { boolean } <!--RP2-->Split view state in compatibility mode of the current UI instance. The value **true** indicates that the split view mode is active, and the value **false** indicates that the split view mode is inactive.<!--RP2End-->
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -7147,8 +7148,8 @@ export class UIContext {
    * > starts on the current page. If it is called after the page enters the first layout process, the applied
    * > strategies remain unchanged and this API does not take effect.
    *
-   * @param { ImmersiveStrategy[] } types - Immersive strategies to apply. An empty array clears all applied
-   *     immersive strategies.
+   * @param { ImmersiveStrategy[] } types - Immersive policy to apply. An empty array clears all applied immersive policies.
+   * <br/>Abnormal values such as **undefined**, **null**, **NaN**, and **Infinity** are treated as an empty array.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

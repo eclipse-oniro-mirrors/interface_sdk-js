@@ -20,6 +20,7 @@
 import { ChildrenMainSize, EditModeOptions, ItemDragInfo, RectResult, ScrollableCommonMethod, OnWillScrollCallback, OnScrollCallback, OnItemDragStartCallback } from './common';
 import { Axis, FocusWrapMode } from './enums';
 import { OnScrollFrameBeginCallback, ScrollAlign, Scroller } from "./scroll";
+import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { Dimension, Length, LengthConstrain, ResourceColor, ItemFillPolicy, CacheCountInfo, Resource } from './units';
 import { ComponentBuilder, CustomBuilder, Builder, CustomBuilderT, ConstructorT } from './builder';
 import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
@@ -999,6 +1000,27 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
    * @since 23 static
    */
   default scrollSnapAlign(value: ScrollSnapAlign | undefined): this;
+
+  /**
+   * Sets a two-stage scroll snap strategy for the List.
+   *
+   * **ScrollSnapAlign.START**, **ScrollSnapAlign.CENTER**, and **ScrollSnapAlign.END** select
+   * built-in strategies. **ScrollSnapAlign.NONE** is invalid and throws exception 401.
+   * A custom provider requires **calculateSnapOffset** to be a function. Passing
+   * **undefined** or no argument clears the strategy.
+   *
+   * This attribute and **scrollSnapAlign** use last-set-wins semantics. This declaration is
+   * published before its runtime implementation; calling it in a static ArkTS application is
+   * not yet enabled. The final snap follows **scrollSnapAnimationSpeed** after runtime support
+   * is added.
+   *
+   * @param { ScrollSnapAlign | ScrollSnapOffsetProvider | undefined } strategy - Built-in alignment or custom provider.
+   * @returns { this } The List attribute.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default scrollSnapStrategy(strategy: ScrollSnapAlign | ScrollSnapOffsetProvider | undefined): this;
 
   /**
    * Sets the size information of the child components of a <em>List</em> component along the main axis.

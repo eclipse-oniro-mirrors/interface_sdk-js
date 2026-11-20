@@ -33,7 +33,7 @@ import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './buil
 import { ScrollState } from "./list";
 
 /**
- * Provides methods for switching components.
+ * Swiper容器组件的控制器，可以将此对象绑定至Swiper组件，实现控制Swiper翻页等功能。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -189,7 +189,7 @@ export declare class SwiperController {
 }
 
 /**
- * Defines the indicator class.
+ * 设置导航点与Swiper组件的距离。由于导航点有默认交互区域，交互区域高度为32vp，所以无法让显示部分完全贴底。若想实现完全贴底，可以使用[IndicatorComponent]{@link ts-swiper-components-indicator#IndicatorComponent}组件，更灵活地调整位置。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -311,7 +311,7 @@ export declare class Indicator {
 }
 
 /**
- * Define DotIndicator, the indicator type is dot.
+ * 构造圆点指示器的样式，继承自[Indicator]{@link Indicator}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -458,7 +458,7 @@ export declare class DotIndicator extends Indicator {
 }
 
 /**
- * Set Swiper column count adaptation.
+ * 自适应属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -479,7 +479,7 @@ export declare interface SwiperAutoFill {
 }
 
 /**
- * Define DigitIndicator, the indicator type is digit.
+ * 构造数字指示器的样式，继承自[Indicator]{@link Indicator}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -553,7 +553,7 @@ export declare class DigitIndicator extends Indicator {
 }
 
 /**
- * Arrow object.
+ * 左右箭头属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -657,11 +657,11 @@ export declare enum SwiperDisplayMode {
    * @stagemodelonly
    * @since 23 static
    */
-  STRETCH = 0
+  STRETCH
 }
 
 /**
- * Provides an interface for swiper animation.
+ * Swiper组件动画相关信息集合。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -704,7 +704,7 @@ export declare interface SwiperAnimationEvent {
 }
 
 /**
- * Define autoPlay related options.
+ * 自动播放属性。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -826,7 +826,7 @@ export declare enum SwiperNestedScrollMode {
 }
 
 /**
- * Declare the animation mode of SwiperController's changeIndex method.
+ * SwiperController的changeIndex方法的翻页动效模式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1184,13 +1184,13 @@ export declare interface SwiperAttribute extends CommonMethod {
    * @param { boolean | undefined } [swipeByGroup] - if swipe by group.
    *     <br>Default value: false
    *     <br>true: The page is turned by group. The number of subelements in each group is the value of displayCount.
-   *     false: The default page turning behavior is used. That is, pages are turned based on subelements.    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
-   * @returns { SwiperAttribute }    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full    * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
+   *     false: The default page turning behavior is used. That is, pages are turned based on subelements. [since 23]
+   * @returns { SwiperAttribute } [since 23]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 23]
    * @stagemodelonly
    * @since 23 static
    */
-  default displayCount(value: int | string | SwiperAutoFill | ItemFillPolicy| undefined, swipeByGroup?: boolean | undefined): this;
+  default displayCount(value: int | string | SwiperAutoFill | ItemFillPolicy | undefined, swipeByGroup?: boolean | undefined): this;
 
   /**
    * 设置边缘滑动效果，[loop]{@link SwiperAttribute.loop}为false或Swiper视窗内一屏显示所有子节点时生效。调用
@@ -1524,7 +1524,8 @@ export declare interface SwiperAttribute extends CommonMethod {
    * @returns { SwiperAttribute } 返回SwiperAttribute的实例。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
+   * @unpublished
    */
   default setSwiperOptions(controller?: SwiperController): this;
 
@@ -1542,7 +1543,7 @@ export declare interface SwiperAttribute extends CommonMethod {
 }
 
 /**
- * Defines the swiper content animated transition options.
+ * Swiper自定义切换动画相关信息。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1574,7 +1575,7 @@ export declare interface SwiperContentAnimatedTransition {
 }
 
 /**
- * The proxy of SwiperContentAnimatedTransition.
+ * Swiper自定义切换动画执行过程中，返回给开发者的proxy对象。开发者可通过该对象获取自定义动画视窗内的页面信息，同时，也可以通过调用该对象的finishTransition接口通知Swiper组件页面自定义动画已结束。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1632,7 +1633,7 @@ export declare interface SwiperContentTransitionProxy {
 }
 
 /**
- * The result of swiper ContentWillScrollCallback.
+ * 滑动的相关信息，主要包括：当前页面对应的index、滑动方向上即将显示的页面index和此次滑动的位移。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

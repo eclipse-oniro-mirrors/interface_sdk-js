@@ -98,7 +98,7 @@ interface PolygonInterface {
    * @param { PolygonOptions } [options] - Polygon组件的配置选项，用于定义绘制区域的宽度和高度。需要指定多边形尺寸时传入此参数，不传入时使用默认宽度和高度（均为0）。当传入undefined
    *     或null时，参数设置无效，组件属性维持原值。 [since 18]
    * @returns { PolygonAttribute } [since 18]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 9]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
    * @form [since 9]

@@ -14,7 +14,7 @@
 */
 
 /**
- * @file
+ * @file AVCastPicker
  * @kit AVSessionKit
  */
 

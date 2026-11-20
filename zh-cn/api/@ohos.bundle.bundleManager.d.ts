@@ -213,9 +213,7 @@ declare namespace bundleManager {
      */
     GET_BUNDLE_INFO_WITH_SKILL = 0x00000800,
     /**
-     * 用于获取仅包含有桌面图标的应用的bundleInfo。它仅在[getAllBundleInfo]{@link bundleManager.getAllBundleInfo}接口中生效。 
-     *
-     * **系统API：** 该标记仅支持在系统API中使用。
+     * 用于获取仅包含有桌面图标的应用的bundleInfo。
      *
      * @syscap SystemCapability.BundleManager.BundleFramework.Core
      * @systemapi [since 12 - 26.0.1]

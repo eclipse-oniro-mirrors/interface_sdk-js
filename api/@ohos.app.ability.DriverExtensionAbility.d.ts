@@ -114,8 +114,8 @@ declare class DriverExtensionAbility {
   /**
    * Dumps client information. It is recommended that developers don't DUMP sensitive information.
    *
-   * @param { Array<string> } params - Parameters in the form of a command.
-   * @returns { Array<string> } String array used to dump client information.
+   * @param { Array<string> } params - Array of dump command parameters.
+   * @returns { Array<string> } String array containing the dumped client information.
    * @syscap SystemCapability.Driver.ExternalDevice
    * @StageModelOnly
    * @since 10 dynamic
