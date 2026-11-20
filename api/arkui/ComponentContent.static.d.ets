@@ -19,9 +19,9 @@
  * @kit ArkUI
  */
 
-import { BuildOptions } from 'arkui.BuilderNode';
+import { BuildOptions } from './BuilderNode';
 
-import { Content } from 'arkui.Content';
+import { Content } from './Content';
 
 import { UIContext } from '@ohos.arkui.UIContext';
 

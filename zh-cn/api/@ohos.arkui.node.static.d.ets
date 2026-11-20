@@ -25,7 +25,7 @@
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from 'arkui.BuilderNode';
+export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from './arkui/BuilderNode';
 
 /**
  * 导出BuildOptions，用于通过builder创建节点树并管理树的更新。
@@ -34,7 +34,7 @@ export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from 
  * @stagemodelonly
  * @since 23 static
  */
-export { BuildOptions } from 'arkui.BuilderNode';
+export { BuildOptions } from './arkui/BuilderNode';
 
 /**
  * 导出NodeController，即节点容器的控制器。为关联的NodeContainer提供生命周期回调，并提供控制NodeContainer子节点的方法。
@@ -43,7 +43,7 @@ export { BuildOptions } from 'arkui.BuilderNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeController } from 'arkui.NodeController';
+export { NodeController } from './arkui/NodeController';
 
 /**
  * 导出FrameNode，一种包含RenderNode的基本节点类型。
@@ -52,7 +52,7 @@ export { NodeController } from 'arkui.NodeController';
  * @stagemodelonly
  * @since 23 static
  */
-export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from 'arkui.FrameNode';
+export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from './arkui/FrameNode';
 
 /**
  * 导出UIState。
@@ -61,7 +61,7 @@ export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from 'a
  * @stagemodelonly
  * @since 24 static
  */
-export { UIState } from 'arkui.FrameNode';
+export { UIState } from './arkui/FrameNode';
 
 /**
  * 导出typeNode、NodeAdapter。
@@ -70,7 +70,7 @@ export { UIState } from 'arkui.FrameNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { typeNode, NodeAdapter } from 'arkui.FrameNode';
+export { typeNode, NodeAdapter } from './arkui/FrameNode';
 
 /**
  * 导出与图形相关的基本类型。
@@ -79,7 +79,7 @@ export { typeNode, NodeAdapter } from 'arkui.FrameNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, RoundRect, Circle, CommandPath, ShapeMask, ShapeClip, NodeBorderRadiuses, CornerRadius, Rect, NodeEdges, edgeColors, edgeWidths, borderStyles, borderRadiuses, LengthMetricsUnit } from 'arkui.Graphics';
+export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, RoundRect, Circle, CommandPath, ShapeMask, ShapeClip, NodeBorderRadiuses, CornerRadius, Rect, NodeEdges, edgeColors, edgeWidths, borderStyles, borderRadiuses, LengthMetricsUnit } from './arkui/Graphics';
 
 /**
  * 导出与图形相关的基本类型。
@@ -88,7 +88,7 @@ export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation,
  * @stagemodelonly
  * @since 23 static
  */
-export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from 'arkui.Graphics';
+export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from './arkui/Graphics';
 
 /**
  * 导出RenderNode。RenderNode包含节点树操作和节点上的渲染属性操作。
@@ -97,7 +97,7 @@ export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from 'arkui
  * @stagemodelonly
  * @since 23 static
  */
-export { RenderNode } from 'arkui.RenderNode';
+export { RenderNode } from './arkui/RenderNode';
 
 /**
  * 导出Content。
@@ -106,7 +106,7 @@ export { RenderNode } from 'arkui.RenderNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { Content } from 'arkui.Content';
+export { Content } from './arkui/Content';
 
 /**
  * 导出ComponentContent、ComponentContentBase、ReactiveComponentContent。
@@ -115,7 +115,7 @@ export { Content } from 'arkui.Content';
  * @stagemodelonly
  * @since 23 static
  */
-export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from 'arkui.ComponentContent';
+export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from './arkui/ComponentContent';
 
 /**
  * 导出NodeContent。
@@ -124,4 +124,4 @@ export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeContent } from 'arkui.NodeContent';
+export { NodeContent } from './arkui/NodeContent';

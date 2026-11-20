@@ -19,8 +19,8 @@
  * @kit ArkUI
  */
 
-import { Content } from 'arkui.Content';
-import { FrameNode } from 'arkui.FrameNode';
+import { Content } from './Content';
+import { FrameNode } from './FrameNode';
 
 /**
 * NodeContent是节点内容的实体封装。

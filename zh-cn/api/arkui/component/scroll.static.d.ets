@@ -23,7 +23,7 @@ import { Dimension, Length, VoidCallback, Resource, LengthMetrics } from './unit
 import { ScrollSnapAlign, ScrollState } from "./list";
 import { Builder, ComponentBuilder, CustomBuilder, CustomBuilderT } from './builder';
 import { AttributeModifier, CommonMethod, UIScrollableCommonEvent, SizeResult, Bindable } from "./common";
-import { FrameNode } from 'arkui.FrameNode';
+import { FrameNode } from '../FrameNode';
 /**
  * 滚动方向枚举。
  *

@@ -21,7 +21,7 @@
 import { Component } from '@ohos.arkui.component';
 import { ResourceStr } from '@ohos.arkui.component';
 import { PropRef } from '@ohos.arkui.stateManagement';
-import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 import { Builder } from '@ohos.arkui.component';
 /**
  * 列表左侧图标类型。

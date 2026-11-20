@@ -25,11 +25,11 @@ import { ResourceStr, Resource, ResourceColor } from '@ohos.arkui.component';
 
 import { PropRef, Observed, ObjectLink } from '@ohos.arkui.stateManagement';
 
-import { SymbolGlyphModifier } from 'arkui.SymbolGlyphModifier';
+import { SymbolGlyphModifier } from './arkui/SymbolGlyphModifier';
 
-import { DividerModifier } from 'arkui.DividerModifier';
+import { DividerModifier } from './arkui/DividerModifier';
 
-import { LengthMetrics } from 'arkui.Graphics';
+import { LengthMetrics } from './arkui/Graphics';
 
 import { TabsController } from '@ohos.arkui.component';
 

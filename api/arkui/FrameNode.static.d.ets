@@ -19,13 +19,13 @@
  * @kit ArkUI
  */
 
-import { RenderNode } from 'arkui.RenderNode';
-import { Size, NodePosition, NodeEdges, LengthMetrics, SizeT } from 'arkui.Graphics';
-import { DrawContext } from 'arkui.Graphics';
-import { ComponentContent, ReactiveComponentContent } from 'arkui.ComponentContent';
+import { RenderNode } from './RenderNode';
+import { Size, NodePosition, NodeEdges, LengthMetrics, SizeT } from './Graphics';
+import { DrawContext } from './Graphics';
+import { ComponentContent, ReactiveComponentContent } from './ComponentContent';
 import { BusinessError } from '@ohos.base';
 import { UIContext } from '@ohos.arkui.UIContext';
-import { InputEventType } from 'arkui.BuilderNode';
+import { InputEventType } from './BuilderNode';
 import { UICommonEvent, UIGestureEvent, CommonAttribute, CustomProperty, KeyEvent, CompetitionStrategy } from '@ohos.arkui.component';
 import { SwiperAttribute, SwiperController } from '@ohos.arkui.component';
 import { ScrollAttribute, Scroller, UIScrollEvent } from '@ohos.arkui.component';
@@ -36,7 +36,7 @@ import { WaterFlowAttribute, WaterFlowOptions, UIWaterFlowEvent } from '@ohos.ar
 import { FlowItemAttribute } from '@ohos.arkui.component';
 import { GridAttribute, GridLayoutOptions, UIGridEvent } from '@ohos.arkui.component';
 import { GridItemAttribute, GridItemOptions } from '@ohos.arkui.component';
-import { Resource } from 'global.resource';
+import { Resource } from '../global/resource';
 import { TextAttribute, TextOptions, TextController } from '@ohos.arkui.component';
 import { TextInputAttribute, TextInputOptions, TextInputController } from '@ohos.arkui.component';
 import { TextAreaAttribute, TextAreaOptions, TextAreaController } from '@ohos.arkui.component';
