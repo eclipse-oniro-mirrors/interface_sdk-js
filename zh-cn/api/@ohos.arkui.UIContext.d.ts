@@ -2244,11 +2244,10 @@ export class UIObserver {
   ): void;
 
   /**
-   * Registers a callback function to be called before clickEvent is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。回调类型为[ClickEventListenerCallback]{@link ClickEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to listen for.
-   * @param { ClickEventListenerCallback } callback - The callback function to be called
-   *                                                  when the clickEvent will be trigger or after.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。
+   * @param { ClickEventListenerCallback } callback - 回调函数。可以获得点击事件的[ClickEvent]{@link ClickEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2258,11 +2257,10 @@ export class UIObserver {
   on(type: 'willClick', callback: ClickEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called before clickEvent is called.
+   * 取消监听on('willClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to remove the listener for.
-   * @param { ClickEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                    all callbacks for the given event type will be removed.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，即点击事件指令下发情况。
+   * @param { ClickEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2272,11 +2270,10 @@ export class UIObserver {
   off(type: 'willClick', callback?: ClickEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called after clickEvent is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。回调类型为[ClickEventListenerCallback]{@link ClickEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to listen for.
-   * @param { ClickEventListenerCallback } callback - The callback function to be called
-   *                                                  when the clickEvent will be trigger or after.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。
+   * @param { ClickEventListenerCallback } callback - 回调函数。可以获得点击事件的[ClickEvent]{@link ClickEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2286,11 +2283,10 @@ export class UIObserver {
   on(type: 'didClick', callback: ClickEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called after clickEvent is called.
+   * 取消监听on('didClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to remove the listener for.
-   * @param { ClickEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                    all callbacks for the given event type will be removed.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，即点击事件指令下发情况。
+   * @param { ClickEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2300,11 +2296,10 @@ export class UIObserver {
   off(type: 'didClick', callback?: ClickEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called before tapGesture is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。回调类型为[GestureEventListenerCallback]{@link GestureEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to listen for.
-   * @param { GestureEventListenerCallback } callback - The callback function to be called
-   *                                                    when the clickEvent will be trigger or after.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发前触发。
+   * @param { GestureEventListenerCallback } callback - 回调函数。可以获得点击事件的[GestureEvent]{@link GestureEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2314,11 +2309,10 @@ export class UIObserver {
   on(type: 'willClick', callback: GestureEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called before tapGesture is called.
+   * 取消监听on('willClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'willClick' } type - The type of event to remove the listener for.
-   * @param { GestureEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                      all callbacks for the given event type will be removed.
+   * @param { 'willClick' } type - 监听事件，固定为'willClick'，即点击事件指令下发情况。
+   * @param { GestureEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2328,11 +2322,10 @@ export class UIObserver {
   off(type: 'willClick', callback?: GestureEventListenerCallback): void;
 
   /**
-   * Registers a callback function to be called after tapGesture is called.
+   * 监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。回调类型为[GestureEventListenerCallback]{@link GestureEventListenerCallback}。从API version 20开始支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to listen for.
-   * @param { GestureEventListenerCallback } callback - The callback function to be called
-   *                                                    when the clickEvent will be trigger or after.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，用于监听点击事件指令下发情况，所注册回调将于点击事件触发后触发。
+   * @param { GestureEventListenerCallback } callback - 回调函数。可以获得点击事件的[GestureEvent]{@link GestureEvent}和组件的[FrameNode]{@link FrameNode}。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -2342,11 +2335,10 @@ export class UIObserver {
   on(type: 'didClick', callback: GestureEventListenerCallback): void;
 
   /**
-   * Removes a callback function to be called after tapGesture is called.
+   * 取消监听on('didClick')中的点击事件指令下发情况。从API version 20开始，支持屏幕朗读触控模式。
    *
-   * @param { 'didClick' } type - The type of event to remove the listener for.
-   * @param { GestureEventListenerCallback } [callback] - The callback function to remove. If not provided,
-   *                                                      all callbacks for the given event type will be removed.
+   * @param { 'didClick' } type - 监听事件，固定为'didClick'，即点击事件指令下发情况。
+   * @param { GestureEventListenerCallback } [callback] - 需要被注销的回调函数。不传参数时，取消所有的点击事件指令下发监听回调。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -3243,8 +3235,8 @@ export class Magnifier {
 }
 
 /**
-* interface AtomicServiceBar
-*
+ * AtomicServiceBar提供对原子化服务menuBar的属性设置能力，支持设置menuBar的可见性、背景颜色、标题内容、标题字体样式、图标颜色，以及获取menuBar的布局信息和监听布局变化。适用于需要在原子化服务中自定义menuBar外观和行为的场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -5153,9 +5145,9 @@ export class UIContext {
   getDialogPresenter(): DialogPresenter;
 
   /**
-   * get object ComponentUtils.
+   * 获取ComponentUtils对象。
    *
-   * @returns { ComponentUtils } object ComponentUtils.
+   * @returns { ComponentUtils } 返回ComponentUtils实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

@@ -41,11 +41,12 @@ import promptAction from '@ohos.promptAction';
 export declare interface LifeCycle {
 
   /**
-     * aboutToAppear Method.
-     * 
-     * The aboutToAppear function is executed after a new instance of the custom component is created,
-     * before its build() function is executed.
-     *
+   * aboutToAppear函数在创建自定义组件的新实例后，在其build()函数执行前调用。允许在aboutToAppear函数中改变状态变量，更改将在后续执行build()函数中生效。实现自定义布局的自定义组件的aboutToAppear生命周期在布局过程中触发。具体使用说明，详见自定义组件生命周期指南。
+   * > **说明：**
+   * >
+   * > * 在该回调函数内，建议仅执行当前节点组件的初始化逻辑，避免高耗时操作阻塞主线程。对于高耗时操作，推荐采用缓存或异步方案替代。最佳实践请参考UI组件性能优化-避免在自定义组件的生命周期内执行高耗时操作。
+   * > * 在需要频繁创建和销毁组件的场景中，将会频繁调用该回调函数。最佳实践请参考主线程耗时操作优化指导-组件生命周期回调。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -53,10 +54,11 @@ export declare interface LifeCycle {
   default aboutToAppear(): void;
 
   /**
-     * aboutToDisappear Method.
-     * 
-     * The aboutToDisappear function executes before a custom component is destroyed.
-     *
+   * aboutToDisappear函数在自定义组件析构销毁时执行。不允许在aboutToDisappear函数中改变状态变量，特别是\@Link变量的修改可能会导致应用行为不稳定。具体使用说明，详见自定义组件生命周期指南。不建议在aboutToDisappear函数调用后再触发例如自定义弹窗的创建等逻辑，这可能会因为组件树信息丢失导致应用行为异常，例如@Consume找不到对应的@Provide、弹窗内白屏不显示组件等。
+   * > **说明：**
+   * >
+   * > 在需要频繁创建和销毁组件的场景中，将会频繁调用该回调函数。最佳实践请参考主线程耗时操作优化指导-组件生命周期回调。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -74,8 +76,8 @@ export declare interface LifeCycle {
   default onDidBuild(): void;
 
   /**
-     * Customize the build process of the custom component.
-     *
+   * build()函数用于定义自定义组件的声明式UI描述，自定义组件必须定义build()函数。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -168,10 +170,9 @@ export declare abstract class ExtendableComponent implements LifeCycle, IVariabl
   queryRouterPageInfo(): RouterPageInfo | undefined;
 
   /**
-     * The dialog controller of the custom component.
-     *
-   * @returns { promptAction.DialogController | undefined } The controller of dialog,
-   *     or undefined if the custom component does not display in the dialog.
+   * 获取PromptActionDialogController实例对象。
+   *
+   * @returns { promptAction.DialogController | undefined } 返回PromptActionDialogController实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

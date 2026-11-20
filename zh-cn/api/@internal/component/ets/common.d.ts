@@ -6608,53 +6608,37 @@ declare function animateTo(value: AnimateParam, event: () => void): void;
 declare function animateToImmediately(value: AnimateParam, event: () => void): void;
 
 /**
- * Converts a value in vp units to a value in px.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将vp单位的数值转换为以px为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将vp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a value in vp units to a value in px.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将vp单位的数值转换为以px为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将vp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a value in vp units to a value in px.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将vp单位的数值转换为以px为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将vp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a value in vp units to a value in px.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将vp单位的数值转换为以px为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将vp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -6666,53 +6650,37 @@ declare function animateToImmediately(value: AnimateParam, event: () => void): v
 declare function vp2px(value: number): number;
 
 /**
- * Converts a number in units of px to a number in units of vp.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将px单位的数值转换为以vp为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以vp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：vp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a number in units of px to a number in units of vp.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将px单位的数值转换为以vp为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以vp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：vp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a number in units of px to a number in units of vp.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将px单位的数值转换为以vp为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以vp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：vp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a number in units of px to a number in units of vp.
- * By default, the virtual pixel ratio of the screen where the current UI instance is located is used for conversion.
- * If no UI instance is available, the virtual pixel ratio of the default screen is used instead.
+ * 将px单位的数值转换为以vp为单位的数值。默认使用当前UI实例所在屏幕的虚拟像素比进行转换，UI实例不明确时，使用默认屏幕的虚拟像素比进行转换。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以vp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：vp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -6724,45 +6692,37 @@ declare function vp2px(value: number): number;
 declare function px2vp(value: number): number;
 
 /**
- * Converts a number in fp units to a number in px.
+ * 将fp单位的数值转换为以px为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将fp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a number in fp units to a number in px.
+ * 将fp单位的数值转换为以px为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将fp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a number in fp units to a number in px.
+ * 将fp单位的数值转换为以px为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将fp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a number in fp units to a number in px.
+ * 将fp单位的数值转换为以px为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将fp单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -6774,45 +6734,37 @@ declare function px2vp(value: number): number;
 declare function fp2px(value: number): number;
 
 /**
- * Converts a number in units of px to a number in units of fp.
+ * 将px单位的数值转换为以fp为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以fp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：fp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a number in units of px to a number in units of fp.
+ * 将px单位的数值转换为以fp为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以fp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：fp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a number in units of px to a number in units of fp.
+ * 将px单位的数值转换为以fp为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以fp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：fp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a number in units of px to a number in units of fp.
+ * 将px单位的数值转换为以fp为单位的数值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以fp为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：fp。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -6824,45 +6776,37 @@ declare function fp2px(value: number): number;
 declare function px2fp(value: number): number;
 
 /**
- * Converts a number in units of lpx to a number in units of px.
+ * 将lpx单位的数值转换为以px为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将lpx单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a number in units of lpx to a number in units of px.
+ * 将lpx单位的数值转换为以px为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将lpx单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a number in units of lpx to a number in units of px.
+ * 将lpx单位的数值转换为以px为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将lpx单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a number in units of lpx to a number in units of px.
+ * 将lpx单位的数值转换为以px为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将lpx单位的数值转换为以px为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：px。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -6874,45 +6818,37 @@ declare function px2fp(value: number): number;
 declare function lpx2px(value: number): number;
 
 /**
- * Converts a number in units of px to a number in units of lpx.
+ * 将px单位的数值转换为以lpx为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以lpx为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：lpx。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 7
  */
 /**
- * Converts a number in units of px to a number in units of lpx.
+ * 将px单位的数值转换为以lpx为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以lpx为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：lpx。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @form
  * @since 9
  */
 /**
- * Converts a number in units of px to a number in units of lpx.
+ * 将px单位的数值转换为以lpx为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以lpx为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：lpx。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
  * @since 10
  */
 /**
- * Converts a number in units of px to a number in units of lpx.
+ * 将px单位的数值转换为以lpx为单位的数值。lpx与px的转换比例取决于实际屏幕宽度与逻辑宽度（通过designWidth配置）的比值。
  *
- * @param { number } value
- * Value range of value: (-∞, +∞).
- * @returns { number }
- * Value range of the return value: (-∞, +∞).
+ * @param { number } value - 将px单位的数值转换为以lpx为单位的数值。<br/>取值范围：(-∞, +∞)
+ * @returns { number } 转换后的数值，单位：lpx。<br/>取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @form
@@ -24939,18 +24875,18 @@ declare class CommonMethod<T> {
   stateStyles(value: StateStyles): T;
 
   /**
-   * id for distribute identification.
+   * 标记支持分布式迁移的组件Id，系统通过该Id匹配两端设备上的对应组件，并据此恢复组件的特定状态。不同组件的迁移效果和限制有所不同：Grid的ScrollBar位置无法迁移；Scroll在两端设备显示规格不同或布局参数差异导致布局不一致时会影响迁移效果；WaterFlow还会迁移顶部FlowItem相对WaterFlow的主轴偏移值（单位为vp）。
    *
-   * @param { number } value
-   * @returns { T }
+   * @param { number } value - 标记支持分布式迁移的组件Id，用于两端设备组件的配对。取值为整数，具体范围以接口实现约束为准。同一个应用中各个支持分布式迁移组件的Id必须不同；否则可能导致两端设备组件无法正确配对，影响分布式迁移时的状态恢复。
+   * @returns { T } 返回当前组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 8
    */
   /**
-   * id for distribute identification.
+   * 标记支持分布式迁移的组件Id，系统通过该Id匹配两端设备上的对应组件，并据此恢复组件的特定状态。不同组件的迁移效果和限制有所不同：Grid的ScrollBar位置无法迁移；Scroll在两端设备显示规格不同或布局参数差异导致布局不一致时会影响迁移效果；WaterFlow还会迁移顶部FlowItem相对WaterFlow的主轴偏移值（单位为vp）。
    *
-   * @param { number } value
-   * @returns { T }
+   * @param { number } value - 标记支持分布式迁移的组件Id，用于两端设备组件的配对。取值为整数，具体范围以接口实现约束为准。同一个应用中各个支持分布式迁移组件的Id必须不同；否则可能导致两端设备组件无法正确配对，影响分布式迁移时的状态恢复。
+   * @returns { T } 返回当前组件。
       * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform
    * @atomicservice
@@ -26054,7 +25990,7 @@ declare class CommonMethod<T> {
 }
 
 /**
- * CommonAttribute for ide.
+ * IDE使用的CommonAttribute
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]
