@@ -3717,7 +3717,25 @@ declare namespace huks {
      * @atomicservice [since 12]
      * @since 8
      */
-    HUKS_DIGEST_SHA512 = 14
+    HUKS_DIGEST_SHA512 = 14,
+    /**
+     * 摘要算法：SHAKE128可扩展输出函数（XOF）。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_DIGEST_SHAKE128 = 15,
+    /**
+     * 摘要算法：SHAKE256可扩展输出函数（XOF）。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_DIGEST_SHAKE256 = 16
   }
 
   /**
@@ -5045,6 +5063,44 @@ declare namespace huks {
      */
     HUKS_KEY_SECURITY_LEVEL_SE = 1
   }
+
+  /**
+   * 后量子密码（PQC）算法签名模式枚举。
+   *
+   * @syscap SystemCapability.Security.Huks.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0
+   */
+  export enum HuksPQCSigMode {
+    /**
+     * 纯模式（Pure）：直接对原始消息签名，无需预先哈希。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_PURE = 0,
+    /**
+     * 预哈希模式（Pre-hash）：先对消息进行哈希，再对哈希值签名。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_PREHASH = 1,
+    /**
+     * 外部 Mu 模式（External Mu）：输入为预先计算好的 64 字节消息代表值 Mu。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_EXTERNAL_MU = 2
+  }
   /**
    * 表示调用参数的Tag。
    *
@@ -5726,6 +5782,15 @@ declare namespace huks {
      * @since 26.0.1
      */
     HUKS_TAG_TIMEOUT = HuksTagType.HUKS_TAG_TYPE_UINT | 529,
+    /**
+     * 后量子密码（PQC）签名模式，用于签名和验签操作。
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_TAG_PQC_SIG_MODE = HuksTagType.HUKS_TAG_TYPE_UINT | 530,
     /**
      * 表示是否使用生成key时传入的别名的Tag。
      *

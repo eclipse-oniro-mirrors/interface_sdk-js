@@ -3723,7 +3723,25 @@ declare namespace huks {
      * @atomicservice [since 12]
      * @since 8
      */
-    HUKS_DIGEST_SHA512 = 14
+    HUKS_DIGEST_SHA512 = 14,
+    /**
+     * Digest algorithm: SHAKE128 extendable-output function (XOF).
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_DIGEST_SHAKE128 = 15,
+    /**
+     * Digest algorithm: SHAKE256 extendable-output function (XOF).
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_DIGEST_SHAKE256 = 16
   }
 
   /**
@@ -5061,6 +5079,44 @@ declare namespace huks {
      */
     HUKS_KEY_SECURITY_LEVEL_SE = 1
   }
+
+  /**
+   * Enumeration of signature modes for Post-Quantum Cryptography (PQC) algorithms.
+   *
+   * @syscap SystemCapability.Security.Huks.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0
+   */
+  export enum HuksPQCSigMode {
+    /**
+     * Pure mode: signs the original message directly without pre-hashing.
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_PURE = 0,
+    /**
+     * Pre-hash mode: hashes the message before signing.
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_PREHASH = 1,
+    /**
+     * External Mu mode: accepts a pre-computed 64-byte message representative Mu as input.
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_PQC_SIG_MODE_EXTERNAL_MU = 2
+  }
   /**
    * Enumerates the tags used to invoke parameters.
    *
@@ -5741,6 +5797,15 @@ declare namespace huks {
      * @since 26.0.1
      */
     HUKS_TAG_TIMEOUT = HuksTagType.HUKS_TAG_TYPE_UINT | 529,
+    /**
+     * Post-Quantum Cryptography (PQC) signature mode used for signing and verification operations.
+     *
+     * @syscap SystemCapability.Security.Huks.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0
+     */
+    HUKS_TAG_PQC_SIG_MODE = HuksTagType.HUKS_TAG_TYPE_UINT | 530,
     /**
      * Whether to use the alias passed in during key generation.
      *
