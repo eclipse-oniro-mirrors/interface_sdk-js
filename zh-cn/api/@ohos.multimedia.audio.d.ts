@@ -15318,10 +15318,10 @@ declare namespace audio {
     /**
      * 启用或禁用音频返听器。使用Promise异步回调。
      *
-     * @permission ohos.permission.MICROPHONE
+     * @permission ohos.permission.MICROPHONE [since 20 - 26.0.1]
      * @param { boolean } enable - 表示是否启用音频返听器。true表示启用，false表示禁用。
      * @returns { Promise<boolean> } Promise对象。返回true表示功能执行成功；返回false表示功能执行失败。
-     * @throws { BusinessError } 201 - Permission denied.
+     * @throws { BusinessError } 201 - Permission denied. [since 20 - 26.0.1]
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @since 20 dynamic
