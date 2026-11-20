@@ -108,7 +108,27 @@ declare enum FormDimension {
    * @systemapi
    * @since 18 dynamic
    */
-  DIMENSION_3_3 = 9
+  DIMENSION_3_3 = 9,
+
+  /**
+   * 2 x 1 卡片
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  DIMENSION_2_1 = 10,
+
+  /**
+   * 4 x 2 卡片
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  DIMENSION_4_2 = 11
 }
 
 /**
