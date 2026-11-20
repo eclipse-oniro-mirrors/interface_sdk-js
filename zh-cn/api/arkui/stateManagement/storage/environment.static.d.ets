@@ -15,14 +15,12 @@
  */
 
 /*
- * 用于指定环境变量名称及其默认值的键值对对象，作为[envProps]{@link Environment.envProps}参数传入。
- *
  * @file
  * @kit ArkUI
  */
 
 /**
- * Defining the EnvPropsOptions interface
+ * 用于指定环境变量名称及其默认值的键值对对象，作为[envProps]{@link Environment#envProps}参数传入。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
