@@ -3366,13 +3366,13 @@ declare namespace wifiManager {
     /**
      * Status indicating whether the current network can be selected.
      * 
-     * **1**: network selection allowed
+     * **0**: network selection allowed
      * 
-     * **2**: network selection forbidden
+     * **1**: network selection forbidden
      * 
-     * **3**: network selection permanently forbidden
+     * **2**: network selection permanently forbidden
      * 
-     * 4: unknown
+     * **3**: unknown
      *
      * @syscap SystemCapability.Communication.WiFi.STA
      * @systemapi Hide this for inner system use.
