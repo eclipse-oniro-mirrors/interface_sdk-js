@@ -3159,6 +3159,31 @@ declare namespace http {
      */
     redirectCount: int;
 
+    /**
+     * Total number of bytes actually sent over the HTTP request link, including the request line, request header, and
+     * request body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    sentTotalBytes?: int;
+
+    /**
+     * Total number of bytes actually received over the HTTP request link, including the status line, response header,
+     * and response body. The unit is byte.
+     * Unit: Byte.
+     * .
+     * . The value should be an integer.
+     *
+     * @syscap SystemCapability.Communication.NetStack
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    receivedTotalBytes?: int;
   }
 
   /**
