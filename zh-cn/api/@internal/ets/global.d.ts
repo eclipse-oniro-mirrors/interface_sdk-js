@@ -439,35 +439,38 @@ export declare function getInspectorByKey(id: string): string;
 export declare function getInspectorTree(): Object;
 
 /**
- * Sends an event to the component with the specified ID.
+ * 给指定id的组件发送事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
+ * @param { string } id - 要触发事件的组件的id。
+ * @param { number } action - 要触发的事件类型，目前支持取值：<br>- 点击事件Click: 10。<br>- 长按事件LongClick: 11。
+ * @param { string } params - 事件参数。当前支持的事件类型（Click和LongClick）均无需额外参数，请传空字符串 ""。
+ * @returns { boolean } 找不到指定id的组件时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 9
  * @test
  */
 /**
- * Sends an event to the component with the specified ID.
+ * 给指定id的组件发送事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
+ * @param { string } id - 要触发事件的组件的id。
+ * @param { number } action - 要触发的事件类型，目前支持取值：<br>- 点击事件Click: 10。<br>- 长按事件LongClick: 11。
+ * @param { string } params - 事件参数。当前支持的事件类型（Click和LongClick）均无需额外参数，请传空字符串 ""。
+ * @returns { boolean } 找不到指定id的组件时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  * @test
  */
 /**
- * Sends an event to the component with the specified ID.
+ * 给指定id的组件发送事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { string } id - ID of the component for which the event is to be sent.
- * @param { number } action - Type of the event to be sent. The options are as follows: Click event: 10 LongClick: 11.
- * @param { string } params - Event parameters. If there is no parameter, pass an empty string "".
- * @returns { boolean }
+ * @param { string } id - 要触发事件的组件的id。
+ * @param { number } action - 要触发的事件类型，目前支持取值：<br>- 点击事件Click: 10。<br>- 长按事件LongClick: 11。
+ * @param { string } params - 事件参数。当前支持的事件类型（Click和LongClick）均无需额外参数，请传空字符串 ""。
+ * @returns { boolean } 找不到指定id的组件时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @atomicservice
@@ -477,29 +480,32 @@ export declare function getInspectorTree(): Object;
 export declare function sendEventByKey(id: string, action: number, params: string): boolean;
 
 /**
- * Send touch event.
+ * 发送触摸事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
+ * @param { TouchObject } event - 触摸事件，event参数见[TouchObject]{@link TouchObject}的介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 9
  * @test
  */
 /**
- * Send touch event.
+ * 发送触摸事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
+ * @param { TouchObject } event - 触摸事件，event参数见[TouchObject]{@link TouchObject}的介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  * @test
  */
 /**
- * Send touch event.
+ * 发送触摸事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { TouchObject } event - TouchObject to be sent.
- * @returns { boolean }
+ * @param { TouchObject } event - 触摸事件，event参数见[TouchObject]{@link TouchObject}的介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @atomicservice
@@ -509,29 +515,32 @@ export declare function sendEventByKey(id: string, action: number, params: strin
 export declare function sendTouchEvent(event: TouchObject): boolean;
 
 /**
- * Send key event.
+ * 发送按键事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
+ * @param { KeyEvent } event - 按键事件，event参数见[KeyEvent]{@link KeyEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 9
  * @test
  */
 /**
- * Send key event.
+ * 发送按键事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
+ * @param { KeyEvent } event - 按键事件，event参数见[KeyEvent]{@link KeyEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  * @test
  */
 /**
- * Send key event.
+ * 发送按键事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { KeyEvent } event - KeyEvent to be sent.
- * @returns { boolean }
+ * @param { KeyEvent } event - 按键事件，event参数见[KeyEvent]{@link KeyEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @atomicservice
@@ -541,29 +550,32 @@ export declare function sendTouchEvent(event: TouchObject): boolean;
 export declare function sendKeyEvent(event: KeyEvent): boolean;
 
 /**
- * Send mouse event.
+ * 发送鼠标事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
+ * @param { MouseEvent } event - 鼠标事件，event参数见[MouseEvent]{@link MouseEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 9
  * @test
  */
 /**
- * Send mouse event.
+ * 发送鼠标事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
+ * @param { MouseEvent } event - 鼠标事件，event参数见[MouseEvent]{@link MouseEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @since 10
  * @test
  */
 /**
- * Send mouse event.
+ * 发送鼠标事件。
+ * 此接口仅用于对应用的测试，使用时建议等应用启动且布局完成后再调用此接口。由于耗时长，不建议使用。
  *
- * @param { MouseEvent } event - MouseEvent to be sent.
- * @returns { boolean }
+ * @param { MouseEvent } event - 鼠标事件，event参数见[MouseEvent]{@link MouseEvent}介绍。
+ * @returns { boolean } 事件发送失败时返回false，其余情况返回true。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform
  * @atomicservice

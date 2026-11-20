@@ -4212,7 +4212,9 @@ declare enum XComponentType {
   SURFACE,
 
   /**
-   * Component type.
+   * 使用[XComponent]{@link XComponent}作为容器组件，支持在其中执行非UI逻辑以动态加载显示内容。
+   * **说明：**
+   * 从API version 10开始支持，从API version 12开始废弃，建议使用其他容器组件替代。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -2526,17 +2526,23 @@ export interface SwiperItemInfo {
 }
 
 /**
- * class ComponentUtils
+ * 提供获取组件绘制区域坐标、大小、平移、缩放、旋转及仿射矩阵等属性信息的能力，适用于需要查询组件绘制区域信息的场景，帮助开发者获取组件布局结果。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class ComponentUtils {
   /**
-   * Provide the ability to obtain the coordinates and size of component drawing areas.
+   * 获取组件大小、位置、平移、缩放、旋转及仿射矩阵属性信息。
+   * > **说明：**
+   * >
+   * > 该接口需要在目标组件布局完成以后获取目标组件区域大小信息，建议在布局回调中使用该接口。如果组件动态创建但未挂载到组件树，则无法通过该接口获取经过测量与布局后的组件信息。因为此时组件一般未经过UI框架的测量与布局，请确保组件已挂载到组件树后再尝试获取组件信息。
+   * >
+   * > 该接口返回的组件位置为布局位置，某些属性计算不支持，如位置设置类[offset]{@link offset}、[markAnchor]{@link markAnchor}、[Edges]{@link Edges}和[LocalizedEdges]{@link LocalizedEdges}类型的[position]{@link position}，以及图形变换类[rotate]{@link rotate}、[translate]{@link translate}、[scale]{@link scale}、[transform]{@link transform}。可使用替代接口[getPositionToWindowWithTransform]{@link getPositionToWindowWithTransform}，获取组件相对于窗口且带有绘制属性的位置偏移。
    *
-   * @param { string } id - ID of the component whose attributes are to be obtained.
-   * @returns { componentUtils.ComponentInfo } the object of ComponentInfo.
+   * @param { string } id - 组件唯一标识id，需确保该id对应的组件已挂载到组件树且完成布局。
+   * @returns { componentUtils.ComponentInfo } 组件大小、位置、平移、缩放、旋转及仿射矩阵属性信息。
    * @throws { BusinessError } 100001 - UI execution context not found.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2839,19 +2845,19 @@ export declare class MarqueeDynamicSyncScene extends DynamicSyncScene {
 }
 
 /**
- * class DragController
+ * 提供拖拽控制能力，支持在应用接收到触摸或长按等事件时主动发起拖拽并携带拖拽信息，也支持创建拖拽Action、获取拖拽背板、控制拖拽事件上报和拖拽启动请求、取消拖拽数据加载，以及设置不允许落入目标区域时的禁止角标显示。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class DragController {
   /**
-   * Execute a drag event.
-   * @param { CustomBuilder | DragItemInfo | undefined } custom - Object used for prompts displayed when the object
-   *     is dragged.
-   * @param { dragController.DragInfo } dragInfo - Information about the drag event.
-   * @param { AsyncCallback<dragController.DragEventParam> } callback - Callback that contains
-   * the drag event information.
+   * 主动发起拖拽能力，传入拖拽发起后跟手效果所拖拽的对象以及携带拖拽信息。通过回调返回拖拽事件结果。
+   *
+   * @param { CustomBuilder | DragItemInfo | undefined } custom - 拖拽发起后跟手效果所拖拽的对象。 <br/> **说明：** <br/>不支持全局builder。如果builder中使用了[Image]{@link Image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link syncLoad}为true。该builder只用于生成当次拖拽中显示的图片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @param { AsyncCallback<dragController.DragEventParam> } callback - 拖拽结束返回结果的回调<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -2865,13 +2871,11 @@ export declare class DragController {
     callback: AsyncCallback<dragController.DragEventParam>): void;
 
   /**
-   * Execute a drag event.
-   * @param { CustomBuilder | DragItemInfo | undefined } custom - Object used for prompts displayed when the object
-   * is dragged.
-   * @param { dragController.DragInfo } dragInfo - Information about the drag event.
-   * @returns { Promise<dragController.DragEventParam> | null } A Promise with the drag event information. Null will be returned
-   *     if the parameters' checking failed or some internal errors occur, for example: the runtime environment is
-   *     broken.
+   * 主动发起拖拽能力，传入拖拽发起后跟手效果所拖拽的对象以及携带拖拽信息。通过回调返回拖拽事件结果。
+   *
+   * @param { CustomBuilder | DragItemInfo | undefined } custom - 拖拽发起后跟手效果所拖拽的对象。 <br/> **说明：** <br/>不支持全局builder。如果builder中使用了[Image]{@link Image}组件，应尽量开启同步加载，即配置Image的[syncLoad]{@link syncLoad}为true。该builder只用于生成当次拖拽中显示的图片。builder的根组件宽高为0时，无法生成拖拽显示的图片导致拖拽失败。builder的修改不会同步到当前正在拖拽的图片，对builder的修改需要在下一次拖拽时生效。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @returns { Promise<dragController.DragEventParam> | null } 拖拽结束返回的结果<br/>- event：拖拽事件信息，仅包括拖拽结果。<br/>- extraParams：拖拽事件额外信息。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -2885,12 +2889,14 @@ export declare class DragController {
     : Promise<dragController.DragEventParam> | null;
 
   /**
-   * Create one drag action object, which can be used for starting drag later or monitoring the drag status after
-   * drag started.
-   * @param { Array<CustomBuilder | DragItemInfo> | undefined } customArray - Objects used for prompts
-   * displayed when the objects are dragged.
-   * @param { dragController.DragInfo } dragInfo - Information about the drag event.
-   * @returns { dragController.DragAction } one drag action object
+   * 创建拖拽的Action对象时，需要显式指定拖拽背板图（可多个）、拖拽的数据、跟手点等信息。当通过一个已创建的Action对象发起的拖拽未结束时，无法再次创建新的Action对象，接口会抛出异常。当Action对象的生命周期结束后，注册在该对象上的回调函数会失效。因此，需要在需要接收该对象回调期间持有该对象，并在每次发起拖拽前通过createDragAction返回新的对象覆盖旧值。
+   * > **说明：**
+   * >
+   * > 建议控制传递的拖拽背板数量，避免因拖拽背板数量增加导致拖起耗时增加。
+   *
+   * @param { Array<CustomBuilder | DragItemInfo> | undefined } customArray - 拖拽发起后跟手效果所拖拽的对象。
+   * @param { dragController.DragInfo } dragInfo - 拖拽信息。
+   * @returns { dragController.DragAction } 创建拖拽Action对象，主要用于后面实现注册监听拖拽状态改变事件和启动拖拽服务。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    * <br> 1. Mandatory parameters are left unspecified.
    * <br> 2. Incorrect parameters types.
@@ -2912,15 +2918,9 @@ export declare class DragController {
   getDragPreview(): dragController.DragPreview;
 
   /**
-   * Enable drag event strict reporting for drag enter and leave notification in nested situation.
-   * For example, the parent and child both register the onDragEnter/onDragLeave events, if this
-   * flag is enabled, the parent will be notified with leave event, and the child will notified with
-   * enter event at the same time, when user drag action is passing through the parent and enter the
-   * scope of the child.
-   * Please be noted, the default value of the flag is false, it means, for the same situation, the
-   * parent will not receive the leave notification, just the child can get the enter event, which is
-   * not fully strict.
-   * @param { boolean } enable - Indicating enable drag event strict reporting or not.
+   * 当拖拽对象从父组件拖拽到子组件时，是否会触发父组件的onDragLeave回调。
+   *
+   * @param { boolean } enable - 当拖拽对象从父组件拖拽到子组件时，是否会触发父组件的onDragLeave回调。true表示触发父组件的onDragLeave回调，false表示不触发。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2928,8 +2928,9 @@ export declare class DragController {
   setDragEventStrictReportingEnabled(enable: boolean): void;
 
   /**
-   * Notify the drag start request to specific pending or continue.
-   * @param { dragController.DragStartRequestStatus } requestStatus - Status about the drag start behavior.
+   * 控制应用是否可以发起拖拽。该接口通常与组件的onPreDrag和onDragStart回调配合使用：在拖拽开始但数据尚未准备完成时，可在onDragStart回调中调用notifyDragStartRequest(DragStartRequestStatus.WAITING)，阻止立即发起拖拽；待拖拽数据和预览资源准备完成后，再调用notifyDragStartRequest(DragStartRequestStatus.READY)，允许继续发起拖拽。若未按拖拽准备流程正确上报状态，可能导致拖拽无法按预期启动，或启动时拖拽数据尚未准备完成。
+   *
+   * @param { dragController.DragStartRequestStatus } requestStatus - 定义应用是否可以发起拖拽。取值为WAITING时，表示应用数据仍在准备阶段，暂不允许发起拖拽；取值为READY时，表示应用数据已准备完成，允许继续发起拖拽。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -2937,9 +2938,9 @@ export declare class DragController {
   notifyDragStartRequest(requestStatus: dragController.DragStartRequestStatus): void;
 
   /**
-   * Cancel the UDMF data sync process by passing in the data key as the identify, can only be used after the drop.
+   * 当使用[startDataLoading]{@link startDataLoading}获取拖拽数据时，可调用该接口取消数据传输。仅可在拖拽释放后调用。
    *
-   * @param { string } key - The data key returned by startDataLoading method.
+   * @param { string } key - 拖拽数据的标识，用于区分每次拖拽。key可通过startDataLoading接口获取。
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 190004 - Operation failed.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2960,21 +2961,9 @@ export declare class DragController {
   interruptFollowHandMorphDropAnimation(): boolean;
 
   /**
-   * Sets whether to enable the disallow badge icon show.
+   * 当拖拽数据类型与组件配置的[allowDrop]{@link allowDrop}允许接收的数据类型无交集时，可显示禁用角标。通常，当组件可以接收或处理拖拽数据，或当它返回DragBehavior.COPY向系统声明数据以复制方式处理时，拖拽对象会显示加号及数据编号的角标。如果返回DragBehavior.MOVE以向系统声明数据以剪切方式处理，拖拽对象将只显示数据编号的角标。当目标进行拖拽时，若系统决定或组件显式声明无法处理拖拽数据，可通过该方法检查是否应显示拖拽禁止角标。该接口暂不支持[UIExtension]{@link UIExtension}。
    *
-   * Typically, when a component can receive or process data dragged by the user, or when it declares to the
-   * system that data should be processed in COPY way by returning DragBehavior.COPY, the system will display
-   * a plus sign together with the data number on the upper-left corner of the dragged object; if returning
-   * DragBehavior.MOVE to the system to declare that data should be processed in CUT way, the system will only
-   * display the data number on the upper-left corner of the dragged object.
-   *
-   * In some cases, when the system determines or the component explicitly declares that it cannot handle the
-   * data that the user is dragging, the system displays a badge icon in the same way as it does for DragBehavior.MOVE.
-   * So if you want to show the more clearly status, you can call this method on the UI instance in advance to force
-   * the system to display a clear prohibition icon on the upper left corner in such cases, and the user can clearly
-   * know that data cannot be dropped here.
-   *
-   * @param { boolean } enabled - Indicating enable the disallow status showing or not.
+   * @param { boolean } enabled - 当拖拽数据类型与组件配置的[allowDrop]{@link allowDrop}允许接收的数据类型无交集时，可显示禁用角标；当拖拽对象经过目标组件时，通过enableDropDisallowedBadge方法设置是否显示拖拽禁止角标。true表示显示拖拽禁止角标，false表示不显示拖拽禁止角标。未调用该接口时不显示拖拽禁止角标。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
@@ -3038,14 +3027,16 @@ export declare class MeasureUtils {
 }
 
 /**
- * class FocusController
+ * 提供控制焦点的能力，如清除、移动和激活焦点等功能，适用于需要管理页面或组件焦点状态、控制焦点流转的场景，可帮助开发者优化键盘等输入方式下的焦点交互体验。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
  */
 export declare class FocusController {
   /**
-   * clear focus to the root container.
+   * 清除焦点，将焦点强制转移到页面根容器节点，焦点链路上其他节点失焦。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3053,8 +3044,9 @@ export declare class FocusController {
   clearFocus(): void;
 
   /**
-   * request focus to the specific component.
-   * @param { string } key - the inspector key of the component.
+   * 通过组件的id将焦点转移到组件树对应的实体节点，当前帧生效，适用于需要在表单校验、页面初始化或键盘操作流程中主动将焦点定位到指定组件的场景。
+   *
+   * @param { string } key - 节点对应的组件标识。
    * @throws { BusinessError } 150001 - the component cannot be focused.
    * @throws { BusinessError } 150002 - This component has an unfocusable ancestor.
    * @throws { BusinessError } 150003 - the component is not on tree or does not exist.
@@ -3065,9 +3057,10 @@ export declare class FocusController {
   requestFocus(key: string): void;
 
   /**
-   * Activate focus style.
-   * @param { boolean } isActive - activate/deactivate the focus style.
-   * @param { boolean } [autoInactive] - deactivate the focus style when touch event or mouse event triggers, the default value is true.
+   * 设置当前界面的焦点激活态。
+   *
+   * @param { boolean } isActive - 设置是否进入/退出焦点激活态。<br>true表示设置进入焦点激活态，false表示设置退出焦点激活态。
+   * @param { boolean } [autoInactive] - 设置焦点激活态退出逻辑。<br>为true时，会自动在触摸事件、鼠标事件触发时退出，为false时，仅受开发者API控制。<br>默认值：true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3103,7 +3096,7 @@ export declare class FocusController {
 }
 
 /**
- * Pointer style.
+ * 鼠标光标样式类型。
  *
  * @typedef {pointer.PointerStyle} PointerStyle
  * @syscap SystemCapability.MultimodalInput.Input.Pointer
@@ -3112,7 +3105,7 @@ export declare class FocusController {
 export type PointerStyle = pointer.PointerStyle;
 
 /**
- * class CursorController
+ * 提供鼠标光标样式设置的能力，支持恢复默认鼠标光标样式、设置系统鼠标光标样式以及设置自定义鼠标光标样式，适用于需要根据界面交互状态动态调整鼠标光标显示效果的场景，有助于提升界面交互提示的清晰度。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -3120,7 +3113,10 @@ export type PointerStyle = pointer.PointerStyle;
  */
 export declare class CursorController {
   /**
-   * Restore default cursor.
+   * 恢复默认的光标样式。
+   * > **说明：**
+   * >
+   * > 该接口调用后不会立即生效，而是在下一帧改变鼠标光标样式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3183,9 +3179,9 @@ export declare class ContextMenuController {
  */
 export declare abstract class FrameCallback {
   /**
-   * Call when a new display frame is being rendered.
+   * 在下一帧进行渲染时，该方法将被执行。
    *
-   * @param { long } frameTimeInNano - The frame time in nanoseconds.
+   * @param { long } frameTimeInNano - 下一帧渲染开始执行的时间，以ns为单位。<br/>取值范围：[0, +∞)
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3215,7 +3211,8 @@ export declare abstract class FrameCallback {
 export type Context = common.Context;
 
 /**
- * class ComponentSnapshot
+ * 提供获取组件截图的能力，包括已加载组件和未加载组件的截图，适用于需要获取组件渲染结果用于展示或后续处理的场景。
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -3244,7 +3241,7 @@ export declare class ComponentSnapshot {
    *
    * @param { string } id - Target component ID, set by developer through .id attribute.
    * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
-   * @returns { Promise<image.PixelMap> | null } A Promise with the snapshot in PixelMap format.
+   * @returns { Promise<image.PixelMap> | null } Promise对象，返回组件截图对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3258,13 +3255,18 @@ export declare class ComponentSnapshot {
   get(id: string, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap> | null;
 
   /**
-   * Generate a snapshot from a custom component builder.
+   * 传入[CustomBuilder]{@link CustomBuilder}自定义组件，系统对其进行离屏构建后进行截图。使用callback异步回调。
+   * > **说明：**
+   * >
+   * > - 由于需要等待组件构建、渲染成功，离屏截图的回调有500ms以内的延迟，不适宜使用在对性能敏感的场景。
+   * >
+   * > - 部分执行耗时任务的组件可能无法及时在截图前加载完成，因此会截取不到加载成功后的图像。例如：加载网络图片的[Image]{@link Image}组件、[Web]{@link Web}组件。
    *
-   * @param { CustomBuilder } builder - Builder function of a custom component.
-   * @param { AsyncCallback<image.PixelMap> } callback - Callback that contains the snapshot in PixelMap format.
-   * @param { int } [delay] - Defines the delay time to render the snapshot.
-   * @param { boolean } [checkImageStatus] - Defines if check the image decoding status before taking snapshot.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
+   * @param { CustomBuilder } builder - 自定义组件构建函数。<br/>**说明：** 不支持全局builder。<br/>builder的根组件宽高为0时，截图操作会失败并抛出100001错误码。
+   * @param { AsyncCallback<image.PixelMap> } callback - 回调函数。当截图返回结果成功，err为undefined，data为获取到的image.[PixelMap]{@link PixelMap}；否则为错误对象。支持在回调中获取离屏组件绘制区域坐标和大小。
+   * @param { int } [delay] - 指定触发截图指令的延迟时间。当布局中使用了图片组件时，需要指定延迟时间，以便系统解码图片资源。资源越大，解码需要的时间越长，建议尽量使用不需要解码的PixelMap资源。<br/> 当使用PixelMap资源或对Image组件设置[syncLoad]{@link syncLoad}为true时，可以配置delay为0，强制不等待触发截图。该延迟时间并非指接口从调用到返回的时间，由于系统需要对传入的builder进行临时离屏构建，因此返回的时间通常要比该延迟时间长。<br/>**说明：** 截图接口传入的builder中，不应使用状态变量控制子组件的构建，如果必须要使用，在调用截图接口时，也不应再有变化，以避免出现截图不符合预期的情况。<br/> 默认值：300 <br/> 单位：ms <br/> 取值范围：[0, +∞)，小于0时按默认值处理。
+   * @param { boolean } [checkImageStatus] - 指定是否允许在截图之前，校验图片解码状态。如果为true，则会在截图之前检查所有Image组件是否已经解码完成，如果没有完成检查，则会放弃截图并返回异常。<br/>默认值：false
+   * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3282,13 +3284,18 @@ export declare class ComponentSnapshot {
     delay?: int, checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): void;
 
   /**
-   * Generate a snapshot from a custom component builder.
+   * 传入[CustomBuilder]{@link CustomBuilder}自定义组件，系统对其进行离屏构建后进行截图。使用callback异步回调。
+   * > **说明：**
+   * >
+   * > - 由于需要等待组件构建、渲染成功，离屏截图的回调有500ms以内的延迟，不适宜使用在对性能敏感的场景。
+   * >
+   * > - 部分执行耗时任务的组件可能无法及时在截图前加载完成，因此会截取不到加载成功后的图像。例如：加载网络图片的[Image]{@link Image}组件、[Web]{@link Web}组件。
    *
-   * @param { CustomBuilder } builder - Builder function of a custom component.
-   * @param { int } [delay] - Defines the delay time to render the snapshot.
-   * @param { boolean } [checkImageStatus] - Defines if check the image decoding status before taking snapshot.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
-   * @returns { Promise<image.PixelMap> | null } A Promise with the snapshot in PixelMap format.
+   * @param { CustomBuilder } builder - 自定义组件构建函数。<br/>**说明：** 不支持全局builder。<br/>builder的根组件宽高为0时，截图操作会失败并抛出100001错误码。
+   * @param { int } [delay] - 指定触发截图指令的延迟时间。当布局中使用了图片组件时，需要指定延迟时间，以便系统解码图片资源。资源越大，解码需要的时间越长，建议尽量使用不需要解码的PixelMap资源。<br/> 当使用PixelMap资源或对Image组件设置[syncLoad]{@link syncLoad}为true时，可以配置delay为0，强制不等待触发截图。该延迟时间并非指接口从调用到返回的时间，由于系统需要对传入的builder进行临时离屏构建，因此返回的时间通常要比该延迟时间长。<br/>**说明：** 截图接口传入的builder中，不应使用状态变量控制子组件的构建，如果必须要使用，在调用截图接口时，也不应再有变化，以避免出现截图不符合预期的情况。<br/> 默认值：300 <br/> 单位：ms <br/> 取值范围：[0, +∞)，小于0时按默认值处理。
+   * @param { boolean } [checkImageStatus] - 指定是否允许在截图之前，校验图片解码状态。如果为true，则会在截图之前检查所有Image组件是否已经解码完成，如果没有完成检查，则会放弃截图并返回异常。<br/>默认值：false
+   * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
+   * @returns { Promise<image.PixelMap> | null } Promise对象，返回组件截图对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3306,15 +3313,14 @@ export declare class ComponentSnapshot {
     checkImageStatus?: boolean, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap> | null;
 
   /**
-   * Take a screenshot of the specified component in synchronous mode,
-   * this mode will block the main thread, please use it with caution, the maximum
-   * waiting time of the interface is 3s, if it does not return after 3s, an exception will be thrown.
+   * 获取已加载的组件的截图，传入组件的组件标识，找到对应组件进行截图，同步等待截图完成返回[PixelMap]{@link PixelMap}，适用于需要即时获取截图结果且对性能要求不高的场景。本方法会阻塞主线程，请谨慎使用。接口的最大等待时间为3s，如果3s后未返回将会抛出异常。
+   * > **说明：**
+   * >
+   * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { string } id - Target component ID, set by developer through .id attribute.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
-   * @returns { image.PixelMap | null } The snapshot result in PixelMap format. Null will be returned
-   *     if the parameters' checking failed or some internal errors occur, for example: the runtime environment is
-   *     broken.
+   * @param { string } id - 目标组件的组件标识。 <br>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
+   * @returns { image.PixelMap | null } 截图返回的结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3347,13 +3353,14 @@ export declare class ComponentSnapshot {
   getWithUniqueId(uniqueId: int, options?: componentSnapshot.SnapshotOptions): Promise<image.PixelMap> | null;
 
   /**
-   * Take a screenshot of the specified component in synchronous mode,
-   * this mode will block the main thread, please use it with caution, the maximum
-   * waiting time of the interface is 3s, if it does not return after 3s, an exception will be thrown.
+   * 获取已加载的组件的截图，传入组件的uniqueId，找到对应组件进行截图，适用于通过FrameNode等节点对象管理组件且需要同步获取组件截图的场景。同步等待截图完成返回[PixelMap]{@link PixelMap}。本方法会阻塞主线程，请谨慎使用；如无同步获取截图的强诉求，建议使用[getWithUniqueId]{@link getWithUniqueId}异步获取截图。
+   * > **说明：**
+   * >
+   * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
    *
-   * @param { int } uniqueId - The uniqueId of the node, can get through getUniqueId.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
-   * @returns { image.PixelMap } The snapshot result in PixelMap format.
+   * @param { int } uniqueId - 目标组件的uniqueId。FrameNode节点的uniqueId可通过[getUniqueId]{@link getUniqueId}接口获取。<br/>**说明：** 不支持未挂树组件，当传入的组件标识是离屏或缓存未挂树的节点时，系统不会对其进行截图。
+   * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。
+   * @returns { image.PixelMap } 截图返回的结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -3368,13 +3375,18 @@ export declare class ComponentSnapshot {
   getSyncWithUniqueId(uniqueId: int, options?: componentSnapshot.SnapshotOptions): image.PixelMap;
 
   /**
-   * Generate a snapshot from a custom component content.
+   * 将传入的content对象进行截图。使用Promise异步回调。
+   * > **说明：**
+   * >
+   * > - 由于需要等待组件构建、渲染成功，截图的返回有一定的延迟，不适宜使用在对性能敏感的场景。
+   * >
+   * > - 部分执行耗时任务的组件可能无法及时在截图前加载完成，因此会截取不到加载成功后的图像。例如：加载网络图片的[Image]{@link Image}组件、[Web]{@link Web}组件。
    *
-   * @param { ComponentContent<T> } content - The content to be taken snapshot.
-   * @param { int } [delay] - Defines the delay time to render the snapshot.
-   * @param { boolean } [checkImageStatus] - Defines if check the image decoding status before taking snapshot.
-   * @param { componentSnapshot.SnapshotOptions } [options] - Define the snapshot options.
-   * @returns { Promise<image.PixelMap> | null } A Promise with the snapshot in PixelMap format.
+   * @param { ComponentContent<T> } content - 当前UIContext显示的组件内容。
+   * @param { int } [delay] - 指定触发截图指令的延迟时间。当布局中使用了图片组件时，需要指定延迟时间，以便系统解码图片资源。资源越大，解码需要的时间越长，建议尽量使用不需要解码的PixelMap资源。<br/> 当使用PixelMap资源或对Image组件设置[syncLoad]{@link syncLoad}为true时，可以配置delay为0，强制不等待触发截图。该延迟时间并非指接口从调用到返回的时间，由于系统需要对传入的content进行临时离屏构建，因此返回的时间通常要比该延迟时间长。<br/>**说明：** 截图接口传入的content中，不应使用状态变量控制子组件的构建，如果必须要使用，在调用截图接口时，也不应再有变化，以避免出现截图不符合预期的情况。<br/> 取值范围：[0,+∞) ，小于0时按默认值处理。<br/>默认值：300 <br/> 单位：ms
+   * @param { boolean } [checkImageStatus] - 指定是否允许在截图之前，校验图片解码状态。如果为true，则会在截图之前检查所有Image组件是否已经解码完成，如果没有完成检查，则会放弃截图并返回异常。<br/>默认值：false
+   * @param { componentSnapshot.SnapshotOptions } [options] - 截图相关的自定义参数。可以指定截图时图形侧绘制pixelmap的缩放比例与是否强制等待系统执行截图指令前所有绘制指令都执行完成之后再截图。
+   * @returns { Promise<image.PixelMap> | null } Promise对象，返回组件截图对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes:
    *     <br> 1. Mandatory parameters are left unspecified.
    *     <br> 2. Incorrect parameters types.
@@ -4084,8 +4096,9 @@ export declare class UIContext {
   getDialogPresenter(): DialogPresenter;
 
   /**
-   * get object ComponentUtils.
-   * @returns { ComponentUtils } object ComponentUtils.
+   * 获取ComponentUtils对象。
+   *
+   * @returns { ComponentUtils } 返回ComponentUtils实例对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

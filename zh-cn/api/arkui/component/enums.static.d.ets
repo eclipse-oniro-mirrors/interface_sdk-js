@@ -1393,7 +1393,7 @@ export declare enum TransitionType {
 }
 
 /**
- * RelateType enumeration description
+ * 定义子组件的填充方式。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1402,7 +1402,7 @@ export declare enum TransitionType {
  */
 export declare enum RelateType {
   /**
-   * Scales the current component to fill the parent component.
+   * 缩放当前子组件以填充满父组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1411,7 +1411,7 @@ export declare enum RelateType {
   FILL = 0,
 
   /**
-   * Scales the current component to fit the parent component.
+   * 缩放当前子组件以自适应父组件。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3269,7 +3269,7 @@ export declare enum ClickEffectLevel {
 }
 
 /**
- * The type of XComponent
+ * XComponent的类型。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3278,7 +3278,7 @@ export declare enum ClickEffectLevel {
  */
 export declare enum XComponentType {
   /**
-   * Surface type. The default type is used.
+   * 用于EGL/OpenGLES和媒体数据写入，单独展示开发者定制的绘制内容到屏幕上。背景色设置为黑色时走显示子系统（DSS）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3287,7 +3287,7 @@ export declare enum XComponentType {
   SURFACE = 0,
 
   /**
-   * Texture type.
+   * 用于EGL/OpenGLES和媒体数据写入，开发者定制的绘制内容将与XComponent组件的内容合成后展示到屏幕上。1、保持帧同步，保持在同一帧将图形处理器（GPU）纹理和ArkUI其他的绘制指令统一发给渲染服务(RenderService)。2、动效和系统组件统一。3、走图形处理器（GPU）合成，相比surface可能走显示子系统（DSS）功耗更高。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3351,7 +3351,8 @@ export declare enum NestedScrollMode {
  */
 export declare enum ScrollSource {
   /**
-   * Drag events.
+   * 拖拽事件。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -3938,7 +3939,7 @@ export declare enum AppRotation {
  */
 export declare enum EmbeddedType {
   /**
-   * The EmbeddedComponent show the UI in EmbeddedUIExtensionAbility.
+   * 表示当前拉起的提供方类型为EmbeddedUIExtensionAbility。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4536,7 +4537,7 @@ export declare enum AxisAction {
 }
 
 /**
- * Type of focus draw level.
+ * 定义节点获焦框的绘制层级。
  *
  * @enum {number}
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -4545,7 +4546,7 @@ export declare enum AxisAction {
  */
 export declare enum FocusDrawLevel {
   /**
-   * Draw focus on node self level.
+   * 获焦框绘制在节点自身层级。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -4554,7 +4555,7 @@ export declare enum FocusDrawLevel {
   SELF = 0,
 
   /**
-   * Draw focus on top level.
+   * 获焦框绘制在当前实例Z序的最上层。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

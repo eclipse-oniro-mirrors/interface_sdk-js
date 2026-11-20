@@ -3200,7 +3200,7 @@ export declare namespace typeNode {
   }
 
   /**
-   * Define the FrameNode type for XComponent.
+   * XComponent对应的FrameNode类型定义。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -3249,11 +3249,10 @@ export declare namespace typeNode {
     context: UIContext, parameters: NativeXComponentParameters, options?: FrameNodeOptions): XComponent;
 
   /**
-   * Get the attribute instance of FrameNode which type is XComponent to set attributes.
+   * 获取XComponent类型FrameNode的属性对象，用于设置XComponent的属性。
    *
-   * @param { FrameNode } node - the target FrameNode.
-   * @returns { XComponentAttribute | undefined } - Return the attribute instance of FrameNode,
-   *     and return undefined if it does not exist.
+   * @param { FrameNode } node - 目标FrameNode节点。
+   * @returns { XComponentAttribute | undefined } 返回XComponent类型FrameNode的属性对象，不存在时返回undefined。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
