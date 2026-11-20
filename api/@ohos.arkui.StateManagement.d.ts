@@ -33,6 +33,7 @@
 import contextConstant from '@ohos.app.ability.contextConstant';
 
 import collections from '@arkts.collections';
+import { PlaceholderOptions } from '@ohos.arkui.placeholderRegister';
 
 /**
  * Obtains the default constructor.
@@ -1550,6 +1551,93 @@ export declare interface CustomComponentContext {
    * @since 26.1.0 dynamic
    */
   getDefaultReusePool(): IDefaultReusePool | undefined;
+
+  /**
+   * Sets the current custom component to asynchronous loading. The framework loads the actual content of the
+   * component in an asynchronous task instead of blocking the main thread during page transition.
+   *
+   * Use this method in frame-rate-sensitive scenarios (such as page transitions) where synchronous loading of custom
+   * components causes frame drops. After the call succeeds, the component enters the asynchronous loading state
+   * managed by the component context. While loading is not complete, the registered placeholder (if configured and
+   * found) is displayed, or the component is not displayed. After loading is complete, the placeholder is
+   * automatically replaced with the actual content, and the rendering update is triggered automatically.
+   *
+   * Different from [IReusePool.preRender()]{@link IReusePool#preRender}, which pre-creates reusable component
+   * instances, this method postpones the loading timing of the component instance. It is a configuration method that
+   * returns **void**.
+   *
+   * > **NOTE**
+   * >
+   * > 1. This method takes effect only for the current custom component instance. Components that do not call this
+   * > method keep the existing synchronous loading behavior.
+   * > 2. The placeholder template must be registered first through
+   * > [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}, and the builder must
+   * > be a global, parameterless **\@Builder({ isPlaceholder: true })** function.
+   * > 3. For the semantics of **timeout** values (positive number, **0**, and negative number), see
+   * > [CustomComponentAsyncLoadOptions.timeout]{@link CustomComponentAsyncLoadOptions#timeout}.
+   * > 4. Failure of asynchronous loading is not handled in this version; the timeout force-load mechanism serves as
+   * > the fallback.
+   *
+   * @param { CustomComponentAsyncLoadOptions } [options] - Configuration of asynchronous loading. The default value
+   *     **undefined** indicates that no placeholder is displayed before loading completes and the default timeout
+   *     (**1000** ms) is used.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  enableAsyncLoad(options?: CustomComponentAsyncLoadOptions): void;
+}
+
+/**
+ * Describes the configuration options for asynchronous loading of a custom component.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+export declare interface CustomComponentAsyncLoadOptions {
+  /**
+   * Placeholder displayed while the custom component is being loaded asynchronously. The value is a
+   * [PlaceholderOptions]{@link @ohos.arkui.placeholderRegister:PlaceholderOptions} object: **id** refers to a
+   * template registered through
+   * [getPlaceholderRegister()]{@link @ohos.arkui.UIContext:UIContext#getPlaceholderRegister}, and **size** is a
+   * layout suggestion of the **SizeOptions** type. When set, it acts as the ideal size of the placeholder root
+   * during measurement: numbers are in vp, unit-suffixed strings keep their units, and a Resource value is
+   * treated as unset. If **size** is not configured, or a dimension of it is unset or invalid, the placeholder
+   * is laid out based on the settings of the placeholder template itself.
+   *
+   * If **placeholder** is not configured, or its **id** is empty or not registered, no placeholder is displayed
+   * before asynchronous loading completes.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  placeholder?: PlaceholderOptions;
+
+  /**
+   * Timeout threshold for asynchronous loading, in ms. The default value is **1000**.
+   *
+   * The value can be any number. **NaN** is treated as the default value (**1000**), and **+/-Infinity** is
+   * treated as a negative value. A positive fractional value is rounded up to the next whole millisecond. If the
+   * component is not loaded within **timeout** ms, the framework force-loads it in subsequent frames, and the
+   * number of components force-loaded in a single frame does not exceed a system-defined limit. The value **0**
+   * means no waiting: the component is force-loaded in subsequent frames. A negative value means never timing
+   * out: the component keeps waiting until asynchronous loading completes.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  timeout?: number;
 }
 
 /**
