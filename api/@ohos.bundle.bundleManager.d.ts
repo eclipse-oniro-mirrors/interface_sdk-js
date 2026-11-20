@@ -4756,6 +4756,22 @@ declare namespace bundleManager {
    */
   function getAppCloneIdentityBySandboxDataDir(sandboxDataDir: string): AppCloneIdentity;
 
+   /**
+   * Obtain the refresh timestamp of the current theme.
+   *
+   * @permission ohos.permission.GET_BUNDLE_RESOURCES
+   * @returns { Promise<string> } Promise used to return the refresh timestamp of the current theme.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17700101 - Bundle manager service exception.
+   * @syscap SystemCapability.BundleManager.BundleFramework.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getThemeRefreshTime(): Promise<string>;
+
   /**
    * Restores the backup data for a specified application or application clone under a specified user. This API uses a
    * promise to return the result.
