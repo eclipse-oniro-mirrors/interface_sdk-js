@@ -3525,12 +3525,16 @@ declare namespace inputMethodEngine {
     updatePanelRectSync(flag: PanelFlag, rect: EnhancedPanelRect): void;
 
     /**
-     * Update the hot zone in the input method panel in the current state. <br> <br>> **Note: ** <br>> <br>> This
-     * parameter is applicable only to panels of the SOFT_KEYBOARD type and the status is FLG_FIXED or FLG_FLOING. <br>>
-     * <br>>This interface is a synchronous interface. The return value indicates that the system receives the hot zone
-     * update request, but does not indicate that the hot zone update is complete. <br>> <br>> When the
-     * com.ohos.sceneboard process does not exist, the effective range of the input method hot zone is the same as that
-     * of the soft keyboard.
+     * Updates the hot zone on the input method panel in the current state.
+     * <br>
+     * <br> > **NOTE**
+     * <br> >
+     * <br> > This API applies only to the panels of the **SOFT_KEYBOARD** type in the **FLG_FIXED**, **FLG_FLOATING**,
+     * <br> > or **FLAG_DETACHED** state.
+     * <br> >
+     * <br> > This API returns the result synchronously. The return only indicates that the system has received the request
+     * <br> > for updating the hot zone, not that the hot zone has been updated.
+     *
      * @param { Array<window.Rect> } inputRegion - Region for receiving input events.
      *         <br>- The array size is limited to [1, 4].
      *         <br>- The input hot zone is relative to the left vertex of the input method panel window.
@@ -4108,9 +4112,10 @@ declare namespace inputMethodEngine {
    * <br>
    * | Name        | Value| Description              |
    * | ------------ | -- | ------------------ |
-   * | FLG_FIXED  | 0 | Fixed state type.|
-   * | FLG_FLOATING | 1 | Floating state type.|
-   * | FLAG_CANDIDATE<sup>15+</sup> | 2 | Candidate state type.|
+    * | FLG_FIXED  | 0 | Fixed state type.|
+    * | FLG_FLOATING | 1 | Floating state type.|
+    * | FLAG_CANDIDATE<sup>15+</sup> | 2 | Candidate state type.|
+    * | FLAG_DETACHED<sup>26.1.0+</sup> | 3 | Detached state type.|
    *
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @since 10 dynamic
@@ -4153,7 +4158,19 @@ declare namespace inputMethodEngine {
      * @since 15 dynamic
      * @since 23 static
      */
-    FLAG_CANDIDATE
+    FLAG_CANDIDATE,
+
+    /**
+     * Type of the panel in the detached state.
+     * <br>
+     * <br><p>Provided for panels of the SOFT_KEYBOARD type. The width of the panel is equal to the width of the screen.
+     * The panel can only be moved vertically. </p>
+     *
+     * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    FLAG_DETACHED
   }
 
   /**

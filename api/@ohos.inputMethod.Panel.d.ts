@@ -204,7 +204,18 @@ export enum PanelFlag {
    * @since 11 dynamic
    * @since 23 static
    */
-  FLAG_CANDIDATE
+  FLAG_CANDIDATE,
+
+  /**
+   * Separated panel type.
+   * <br>
+   * <br>- The width of the panel is equal to the width of the screen. The panel can only be moved vertically.
+   *
+   * @syscap SystemCapability.MiscServices.InputMethodFramework
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  FLAG_DETACHED
 }
 
 /**
