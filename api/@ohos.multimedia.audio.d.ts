@@ -5056,18 +5056,18 @@ declare namespace audio {
      *
      * > **NOTE**
      * > The returned format is the format of the path actually selected after system routing, which may differ from the
-     * > format requested when creating stream. If **uid** is not specified, streams from all applications are
-     * > queried. if no playback stream is routed to the specified device, **null** is returned. This may occur if the
+     * > format requested when creating the stream. If **uid** is not specified, streams of all applications are
+     * > queried. If no playback stream is routed to the specified device, **null** is returned. This may occur if the
      * > application has not created an **AudioRenderer** or the output device of the created **AudioRenderer** is not
      * > the passed device.
-     * 
+     *
      * @param { AudioDeviceDescriptor } deviceDescriptor - Audio device descriptor.
      * @param { int } [uid] - ID of the application to query. This parameter is optional.
-     *    The value must be an integer. If **uid** id not specified, stream information of all applications is queried.
+     *        The value must be an integer. If **uid** is not specified, stream information of all applications is queried.
      * @returns { Promise<AudioStreamInfo | null> } Promise used to return the stream information.
      * @throws { BusinessError } 202 - The caller is not a system application.
-     * @throws { BusinessError } 6800101 - Parameter verification failed. Eusure that the specified
-     *    AudioDeviceDescriptor is valid and the device exists. Ensure that the specified uid is valid.
+     * @throws { BusinessError } 6800101 - Parameter verification failed. Ensure that the specified
+     *        AudioDeviceDescriptor is valid and the device exists. Ensure that the specified uid is valid.
      * @throws { BusinessError } 6800301 - System error. An unexpected error occurred in audio system.
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @systemapi
