@@ -4161,12 +4161,13 @@ declare namespace inputMethodEngine {
     FLAG_CANDIDATE,
 
     /**
-     * Detached style.
+     * Type of the panel in the detached state.
      * <br>
-     * <br><p>It's provided for the panel with type of SOFT_KEYBOARD.
-     * The panel width equals the display width, and the panel can only be moved vertically.</p>
+     * <br><p>Provided for panels of the SOFT_KEYBOARD type. The width of the panel is equal to the width of the screen.
+     * The panel can only be moved vertically. </p>
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
+     * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     FLAG_DETACHED
