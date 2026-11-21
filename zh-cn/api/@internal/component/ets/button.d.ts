@@ -774,6 +774,18 @@ declare class ButtonAttribute extends CommonMethod<ButtonAttribute> {
    * @since 18 dynamic
    */
   maxFontScale(scale: number | Resource): ButtonAttribute;
+
+  /**
+   * 设置Button组件内文本的提亮压暗模式。
+   *
+   * @param { VibrancyMode } mode - 按钮内文本的提亮压暗模式。
+   * @returns { ButtonAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  vibrancyMode(mode: VibrancyMode): ButtonAttribute;
 }
 
 /**
