@@ -12780,6 +12780,22 @@ declare interface DragEvent {
    * @since 20 dynamic
    */
   enableInternalDropAnimation(configuration: string): void;
+
+  /**
+   * Sets whether the drag backplane is visible. Invoked in the [onDragStart]{@link CommonMethod#onDragStart},
+   * [onDragEnter]{@link CommonMethod#onDragEnter}, and [onDragMove]{@link CommonMethod#onDragMove} callbacks. If this
+   * parameter is set to false, the backplane is hidden immediately after being dragged. Event distribution and data
+   * transmission are not affected. When you leave the target component area or drag the backplane, the backplane is
+   * automatically displayed. If you do not call this API to set whether to be visible, the system displays the drag
+   * backplane by default.
+   * @param { boolean } visible - Sets whether the drag backplane is visible. true: The drag backplane is
+   *     displayed. false: The drag backplane is hidden.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  setDragWindowVisible(visible: boolean): void;
 }
 
 /**
