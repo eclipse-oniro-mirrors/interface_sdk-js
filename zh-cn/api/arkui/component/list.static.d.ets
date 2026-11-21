@@ -1046,8 +1046,6 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
 
   /**
    * 设置List的限位滚动策略，使List在滚动结束时按指定方式对齐子组件，或停在自定义的吸附位置。
-   * 内置对齐方式参考[示例20（设置滚动吸附对齐）](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#示例20设置滚动吸附对齐)，
-   * 自定义吸附位置参考[示例21（自定义滚动吸附位置）](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#示例21自定义滚动吸附位置)。
    *
    * > **说明：**
    * >

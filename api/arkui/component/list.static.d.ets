@@ -1003,10 +1003,7 @@ export declare interface ListAttribute extends ScrollableCommonMethod {
 
   /**
    * Sets the scroll snap strategy of the List. When scrolling ends, the List aligns child
-   * components in the specified way, or stops at a custom snap position. For built-in alignment, see
-   * [Example 20: Setting Scroll Snap Alignment](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#example-20-setting-scroll-snap-alignment);
-   * for custom snap positions, see
-   * [Example 21: Customizing the Scroll Snap Position](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#example-21-customizing-the-scroll-snap-position).
+   * components in the specified way, or stops at a custom snap position.
    *
    * > **NOTE**
    * >
