@@ -51,13 +51,13 @@ declare interface ScrollSnapOffsetProvider {
   calculateApproachOffset(velocity: number, decayOffset: number): number;
 
   /**
-   * 每次趋近运动切换到最终限位动画时仅调用一次，用于计算目标偏移量。
+   * 在惯性阶段结束、限位动画开始前调用一次，用于计算目标偏移量。
    *
    * 返回值为绝对内容滚动目标，0是合法目标；有限目标超出合法滚动范围时会被限制到范围内。
    * 返回非有限值或回调异常时，使用组件的兜底目标。Grid自定义策略保持在趋近阶段结束位置，
    * 不返回手势起始位置。
    *
-   * @param { number } velocity - 本次趋近阶段开始时的速度，向内容末端为正，单位vp/s。
+   * @param { number } velocity - 惯性滚动结束时的剩余速度，向内容末端为正，单位vp/s。
    * @returns { number } 目标滚动绝对偏移量，单位vp。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

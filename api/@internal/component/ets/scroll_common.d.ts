@@ -54,14 +54,14 @@ declare interface ScrollSnapOffsetProvider {
   calculateApproachOffset(velocity: number, decayOffset: number): number;
 
   /**
-   * Called once when the approach motion hands off to the final snap animation.
+   * Called once when the inertial stage ends, before the final snap animation starts.
    *
    * The return value is an absolute content scroll target; 0 is valid. A finite target
    * outside the legal scroll range is clamped to that range.
    * A non-finite return value or a callback exception uses the component fallback target.
    * A Grid custom strategy stays at the approach endpoint without returning to the gesture start position.
    *
-   * @param { number } velocity - Velocity at the start of this approach stage,
+   * @param { number } velocity - Residual velocity at the end of the inertial scroll,
    * positive toward the content end, in vp/s.
    * @returns { number } Absolute target scroll offset, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
