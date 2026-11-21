@@ -7123,7 +7123,7 @@ declare namespace camera {
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
      * @atomicservice
-     * @since 26.2.0 dynamic&static
+     * @since 26.1.0 dynamic&static
      */
     LOW_QUALITY = 2
   }
