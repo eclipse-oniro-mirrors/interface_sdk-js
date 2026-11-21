@@ -35,7 +35,6 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export declare enum ToolBarV2ItemState {
   /**
@@ -78,7 +77,6 @@ export declare enum ToolBarV2ItemState {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 @ObservedV2
 export class ToolBarV2SymbolGlyph {
@@ -127,7 +125,6 @@ export class ToolBarV2SymbolGlyph {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export interface ToolBarV2SymbolGlyphOptions {
   /**
@@ -160,7 +157,6 @@ export interface ToolBarV2SymbolGlyphOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  * @class ToolBarV2ItemText
  */
 @ObservedV2
@@ -223,7 +219,6 @@ export declare class ToolBarV2ItemText {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export interface ToolBarV2ItemTextOptions {
   /**
@@ -272,7 +267,6 @@ export interface ToolBarV2ItemTextOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2SymbolGlyph;
 
@@ -284,7 +278,6 @@ export declare type ToolBarV2ItemIconType = ToolBarV2ItemImage | ToolBarV2Symbol
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  * @class ToolBarV2ItemImage
  */
 @ObservedV2
@@ -347,7 +340,6 @@ export declare class ToolBarV2ItemImage {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export interface ToolBarV2ItemImageOptions {
   /**
@@ -394,7 +386,6 @@ export interface ToolBarV2ItemImageOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  * @class ToolBarV2Item
  */
 @ObservedV2
@@ -499,7 +490,6 @@ export declare class ToolBarV2Item {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export interface ToolBarV2ItemOptions {
   /**
@@ -613,7 +603,6 @@ export interface ToolBarV2ItemOptions {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export type ToolBarV2ItemAction = (index: number) => void;
 
@@ -626,7 +615,6 @@ export type ToolBarV2ItemAction = (index: number) => void;
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 export declare class ToolBarV2Modifier {
   /**
@@ -2133,7 +2121,6 @@ export declare class AdvancedToolBarV2Modifier {
  * @crossplatform
  * @atomicservice
  * @since 18 dynamic
- * @noninterop
  */
 @ComponentV2
 export declare struct ToolBarV2 {
