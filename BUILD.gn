@@ -883,6 +883,14 @@ ohos_copy("ohos_ets_runtimeapi") {
   module_install_name = ""
 }
 
+# interface_sdk-js仓的extension_blocklist.json拷贝到build-tools下，给extensionAbility提供受限api清单
+ohos_copy("ohos_ets_extension_blocklist") {
+  sources = [ "//interface/sdk-js/build-tools/extension_blocklist.json" ]
+  outputs = [ target_out_dir + "/${target_name}/{{source_file_part}}" ]
+  module_source_dir = target_out_dir + "/${target_name}"
+  module_install_name = ""
+}
+
 action("ohos_ets_process_interop") {
   deps = [
     ":build_dynamic_sdk_interop_inner",
