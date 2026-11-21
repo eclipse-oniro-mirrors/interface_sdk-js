@@ -313,7 +313,7 @@ declare namespace notificationExtensionSubscription {
    * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
    *     2.Memory operation error. 3.Failed to obtain or decode the application icon.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
-   * @throws { BusinessError } 1600022 - The specified bundle is invaild. Possible cause: 1.The application is not in the list. 2.The application is disabled.
+   * @throws { BusinessError } 1600022 - The specified bundle is invalid. Possible cause: 1.The application is not in the list. 2.The application is disabled.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -335,7 +335,7 @@ declare namespace notificationExtensionSubscription {
    * @throws { BusinessError } 1600001 - Internal error. Possible cause: 1.IPC communication failed.
    *     2.Memory operation error. 3.Database operation failed.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
-   * @throws { BusinessError } 1600022 - The specified bundle is invaild.
+   * @throws { BusinessError } 1600022 - The specified bundle is invalid.
    * @syscap SystemCapability.Notification.Notification
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
