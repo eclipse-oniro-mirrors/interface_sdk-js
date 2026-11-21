@@ -133,7 +133,7 @@ declare namespace cliManager {
    */
   interface ExecCmdOptions {
     /**
-     * 命令执行的工作目录，如果不传或传空，则为根目录。
+     * 命令执行的工作目录，如果不传或传空，则使用系统服务的默认工作目录。
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi [since 26.0.0 - 26.0.0]
@@ -171,7 +171,7 @@ declare namespace cliManager {
     background?: boolean;
 
     /**
-     * 命令前台执行时长，单位为毫秒。取值范围：0 ~ 1000 * timeout，默认值：0。
+     * 命令前台执行时长，单位为毫秒。取值范围：0 ~ 1000 * timeout，默认值：0。超出取值范围时抛出错误码401。
      *
      * @default 0
      * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -183,7 +183,7 @@ declare namespace cliManager {
     yieldMs?: long;
 
     /**
-     * 命令执行超时时长，单位为秒。取值范围：0 ~ 1800。默认值：1800，传0表示不会超时。
+     * 命令执行超时时长，单位为秒。取值范围：0 ~ 1800。默认值：1800，传0表示不会超时。超出取值范围时抛出错误码401。
      *
      * @default 1800
      * @syscap SystemCapability.Ability.AgentRuntime.Core
