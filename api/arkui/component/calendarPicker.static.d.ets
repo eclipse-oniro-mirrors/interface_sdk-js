@@ -55,9 +55,10 @@ export declare enum CalendarAlign {
    */
   END = 2
 }
+
 /**
  * The first day of the week for the calendar picker.
- * @enum { int }
+ *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 26.1.0 static
@@ -65,6 +66,7 @@ export declare enum CalendarAlign {
 export declare enum CalendarFirstDayOfWeek {
   /**
    * Follows the system region.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -72,6 +74,7 @@ export declare enum CalendarFirstDayOfWeek {
   LOCAL = 0,
   /**
    * Monday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -79,6 +82,7 @@ export declare enum CalendarFirstDayOfWeek {
   MON = 1,
   /**
    * Tuesday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -86,6 +90,7 @@ export declare enum CalendarFirstDayOfWeek {
   TUE = 2,
   /**
    * Wednesday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -93,6 +98,7 @@ export declare enum CalendarFirstDayOfWeek {
   WED = 3,
   /**
    * Thursday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -100,6 +106,7 @@ export declare enum CalendarFirstDayOfWeek {
   THU = 4,
   /**
    * Friday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -107,6 +114,7 @@ export declare enum CalendarFirstDayOfWeek {
   FRI = 5,
   /**
    * Saturday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -114,12 +122,14 @@ export declare enum CalendarFirstDayOfWeek {
   SAT = 6,
   /**
    * Sunday.
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
    */
   SUN = 7
 }
+
 /**
  * Defines the options of CalendarPicker.
  * @interface CalendarOptions
@@ -183,7 +193,6 @@ export declare interface CalendarOptions {
  * @noninterop
  */
 export declare interface CalendarPickerAttribute extends CommonMethod {
-
   /**
    * Sets the calendar picker options.
    *
@@ -235,16 +244,6 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    */
   default markToday(enabled: boolean | undefined): this;
   /**
-   * Sets the first day of the week for the calendar picker.
-   *
-   * @param { CalendarFirstDayOfWeek | undefined } value - First day of the week for the calendar picker.
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 26.1.0 static
-   */
-  default firstDayOfWeek(value: CalendarFirstDayOfWeek | undefined): this;
-  /**
    * Set the attribute modifier
    *
    * @param { AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
@@ -254,6 +253,17 @@ export declare interface CalendarPickerAttribute extends CommonMethod {
    * @since 23 static
    */
   default attributeModifier(modifier: AttributeModifier<CalendarPickerAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+
+  /**
+   * Sets the first day of the week for the calendar picker.
+   *
+   * @param { CalendarFirstDayOfWeek | undefined } value - First day of the week for the calendar picker.
+   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default firstDayOfWeek(value: CalendarFirstDayOfWeek | undefined): this;
 }
 /**
  * Defines the DatePickerDialogOptions for Calendar Picker Dialog.
@@ -435,9 +445,8 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * Sets the distortion animation mode for the dialog.
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -446,9 +455,8 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * Sets the edge light animation mode for the dialog.
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -457,6 +465,7 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
+
   /**
    * Sets the first day of the week for the calendar picker dialog.
    *
@@ -476,7 +485,6 @@ export declare interface CalendarDialogOptions extends CalendarOptions {
    * the device, distinguished from the operating hand) reported by the awareness
    * platform; falls back to the current layout when unavailable.
    *
-   * @default HandednessFollowMode.NONE
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -514,7 +522,6 @@ export declare class CalendarPickerDialog {
 export declare function CalendarPicker(
     options?: CalendarOptions
 ): CalendarPickerAttribute;
-
 /**
  * Defines the CalendarPicker component. It requires call setCalendarPickerOptions at start of the
  * component attribute set-up. ant it requires call applyAttributeFinish at the end of the component attribute set-up.

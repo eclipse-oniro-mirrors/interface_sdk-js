@@ -1,4 +1,3 @@
-
 'use static';
 /*
  * Copyright (c) 2025 Huawei Device Co., Ltd.
@@ -16,8 +15,8 @@
  */
 
 /**
- * @file
- * @kit ArkUI
+  * @file
+  * @kit ArkUI
  */
 
 import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
@@ -43,7 +42,6 @@ import { AttributeModifier } from "./common";
  * @since 23 static
  */
 export declare interface TimePickerResult {
-
   /**
      * 选中时间的时。
      * 
@@ -55,7 +53,6 @@ export declare interface TimePickerResult {
    * @since 23 static
    */
   hour: int;
-
   /**
      * 选中时间的分。
      * 
@@ -67,7 +64,6 @@ export declare interface TimePickerResult {
    * @since 23 static
    */
   minute: int;
-
   /**
      * 选中时间的秒。
      * 
@@ -80,7 +76,6 @@ export declare interface TimePickerResult {
    */
   second: int;
 }
-
 /**
  * 时间选择器的数据格式。
  *
@@ -90,24 +85,22 @@ export declare interface TimePickerResult {
  * @since 23 static
  */
 export declare enum TimePickerFormat {
-
   /**
-     * 按照小时和分钟进行显示。
+     * Hour and minute and second
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
-  HOUR_MINUTE = 0,
+  HOUR_MINUTE_SECOND = 1,
 
   /**
-     * 按照小时、分钟和秒进行显示。
+     * Hour and minute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
-  HOUR_MINUTE_SECOND = 1
+  HOUR_MINUTE = 0
 }
-
 /**
  * 时间选择器组件的参数说明。
  * 
@@ -132,7 +125,6 @@ export declare enum TimePickerFormat {
  * @since 23 static
  */
 export declare interface TimePickerOptions {
-
   /**
      * 设置选中项的时间。
      * 
@@ -146,7 +138,6 @@ export declare interface TimePickerOptions {
    * @since 23 static
    */
   selected?: Date | Bindable<Date>;
-
   /**
      * 指定需要显示的TimePicker的格式。
      * 
@@ -159,7 +150,6 @@ export declare interface TimePickerOptions {
    * @since 23 static
    */
   format?: TimePickerFormat;
-
   /**
      * 指定时间选择组件的起始时间。
      * 
@@ -176,7 +166,6 @@ export declare interface TimePickerOptions {
    * @since 23 static
    */
   start?: Date;
-
   /**
      * 指定时间选择组件的结束时间。
      * 
@@ -194,7 +183,6 @@ export declare interface TimePickerOptions {
    */
   end?: Date;
 }
-
 /**
  * 选择时间时触发该事件。
  *
@@ -205,7 +193,6 @@ export declare interface TimePickerOptions {
  * @since 23 static
  */
 export type OnTimePickerChangeCallback = (result: TimePickerResult) => void;
-
 /**
  * 除支持[通用属性]{@link ./common}外，还支持以下属性：
  * 
@@ -220,29 +207,38 @@ export type OnTimePickerChangeCallback = (result: TimePickerResult) => void;
  */
 export declare interface TimePickerAttribute extends CommonMethod {
   /**
+   * 设置时间选择器选项。
+   *
+   * @param { TimePickerOptions } [options] - 时间选择器选项。
+   * @returns { TimePickerAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.0.1 staticonly
+   */
+  default setTimePickerOptions(options?: TimePickerOptions): this;
+  /**
      * 设置展示时间是否为24小时制。如果展示时间为12小时制，上下午与小时无联动。
      *
    * @param { boolean | undefined } value
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default useMilitaryTime(value: boolean | undefined): this;
-
   /**
      * 设置是否启用循环模式。
      *
    * @param { boolean | undefined } value - 是否启用循环模式。
      *     默认值：true
      *     当value的值为undefined时，使用默认值。true表示启用循环模式，false表示不启用循环模式。
-   * @returns { TimePickerAttribute }    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @returns { TimePickerAttribute } the attribute of the time picker
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default loop(value: boolean | undefined): this;
-
   /**
      * 设置边缘项（以选中项为基准向上或向下的第二项）的文本样式。
      *
@@ -250,12 +246,11 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *     默认值：{ color: '#ff182431', font: { size: '14fp', weight: FontWeight.Regular } }
      *     当value的值为undefined时，使用默认值。
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default disappearTextStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 设置待选项（以选中项为基准向上或向下的第一项）的文本样式。
      *
@@ -263,12 +258,11 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *     默认值：{ color: '#ff182431', font: { size: '16fp', weight: FontWeight.Regular } }
      *     当value的值为undefined时，使用默认值。
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default textStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 设置选中项的文本颜色、字号和字体粗细。
      *
@@ -276,12 +270,11 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *     默认值：{ color: '#ff007dff', font: { size: '20fp', weight: FontWeight.Medium } }
      *     当value的值为undefined时，使用默认值。
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default selectedTextStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 设置时分秒是否显示前导0。
      *
@@ -297,7 +290,6 @@ export declare interface TimePickerAttribute extends CommonMethod {
    * @since 23 static
    */
   default dateTimeOptions(value: DateTimeOptions | undefined): this;
-
   /**
      * 滑动TimePicker后，时间选项归位至选中项位置时，触发该回调。不能通过双向绑定的状态变量触发。与[onChange]{@link onChange}相比，
      * callback参数类型为[OnTimePickerChangeCallback]{@link OnTimePickerChangeCallback} \| undefined。
@@ -306,12 +298,11 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *
    * @param { OnTimePickerChangeCallback | undefined } callback
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onChange(callback: OnTimePickerChangeCallback | undefined): this;
-
   /**
      * 滑动TimePicker过程中，选项进入分割线区域内，触发该回调。
      * 
@@ -326,12 +317,11 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *
    * @param { Callback<TimePickerResult> | undefined } callback
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onEnterSelectedArea(callback: Callback<TimePickerResult> | undefined): this;
-
   /**
      * 设置是否支持触控反馈。
      * 
@@ -342,23 +332,21 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *     当enable的值为undefined时，使用默认值。true表示开启触控反馈，false表示不开启触控反馈。
      *     设置为true后，其生效情况取决于系统的硬件是否支持。
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default enableHapticFeedback(enable: boolean | undefined): this;
-
   /**
      * 设置表冠灵敏度。
      *
    * @param { CrownSensitivity | undefined } sensitivity
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
-
   /**
      * 设置上午和下午的标识是否根据小时数自动切换，仅在[useMilitaryTime]{@link useMilitaryTime}设置为false时生效。
      *
@@ -368,24 +356,22 @@ export declare interface TimePickerAttribute extends CommonMethod {
      *     默认值：false
      *     当enabled设置为true时，仅在loop参数同时为true时生效。当enabled的值为undefined时，使用默认值。
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default enableCascade(enabled: boolean | undefined): this;
-
   /**
      * 设置属性修改器。
      *
    * @param { AttributeModifier<TimePickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { TimePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default attributeModifier(modifier: AttributeModifier<TimePickerAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 }
-
 /**
  * 时间选择器弹窗选项。
  * 
@@ -398,7 +384,6 @@ export declare interface TimePickerAttribute extends CommonMethod {
  * @since 23 static
  */
 export declare interface TimePickerDialogOptions extends TimePickerOptions {
-
   /**
      * 时间是否以24小时制展示。
      * 
@@ -413,7 +398,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   useMilitaryTime?: boolean;
-
   /**
      * 设置边缘项（以选中项为基准向上或向下的第二项）的文本颜色、字号、字体粗细。
      * 
@@ -425,7 +409,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   disappearTextStyle?: PickerTextStyle;
-
   /**
      * 设置待选项（以选中项为基准向上或向下的第一项）的文本颜色、字号、字体粗细。
      * 
@@ -437,7 +420,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   textStyle?: PickerTextStyle;
-
   /**
      * 设置确认按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、按钮是否默认响应Enter键。
      * 
@@ -447,8 +429,8 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
      *    保持默认值false。
      * 
      * 2. 按钮高度默认40vp，在关怀模式-大字体场景下高度不变，即使按钮样式设置为圆角矩形
-     *    [ROUNDED_RECTANGLE]{@link ROUNDED_RECTANGLE}，呈现效果
-     *    依然是胶囊型按钮[Capsule]{@link Capsule}。
+     *    [ROUNDED_RECTANGLE](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)，呈现效果
+     *    依然是胶囊型按钮[Capsule](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)。
      *
    * @type { ?PickerDialogButtonStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -456,7 +438,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   acceptButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 设置取消按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、按钮是否默认响应Enter键。
      * 
@@ -466,8 +447,8 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
      *    默认值false。
      * 
      * 2. 按钮高度默认40vp，在关怀模式-大字体场景下高度不变，即使按钮样式设置为圆角矩形
-     *    [ROUNDED_RECTANGLE]{@link ROUNDED_RECTANGLE}，呈现效果
-     *    依然是胶囊型按钮[Capsule]{@link Capsule}。
+     *    [ROUNDED_RECTANGLE](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)，呈现效果
+     *    依然是胶囊型按钮[Capsule](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)。
      *
    * @type { ?PickerDialogButtonStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -475,7 +456,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   cancelButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 设置选中项的文本颜色、字号、字体粗细。
      * 
@@ -487,7 +467,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   selectedTextStyle?: PickerTextStyle;
-
   /**
      * 弹窗遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。
      * 
@@ -499,7 +478,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   maskRect?: Rectangle;
-
   /**
      * 设置弹窗在垂直方向上的对齐方式。
      * 
@@ -511,7 +489,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   alignment?: DialogAlignment;
-
   /**
      * 设置弹窗相对alignment所在位置的偏移量。
      * 
@@ -523,7 +500,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   offset?: Offset;
-
   /**
      * 点击弹窗中的“确定”按钮时触发该回调。
      *
@@ -533,7 +509,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onAccept?: (value: TimePickerResult) => void;
-
   /**
      * 点击弹窗中的“取消”按钮时触发该回调。
      *
@@ -543,7 +518,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onCancel?: VoidCallback;
-
   /**
      * 滑动弹窗中的选择器后，选项归位至选中项位置时，触发该回调。
      *
@@ -553,7 +527,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onChange?: (value: TimePickerResult) => void;
-
   /**
      * 滑动过程中，选项进入分割线区域内，触发该回调。与onChange事件的差别在于，该事件的触发时机早于onChange事件，当当前滑动列滑动距离超过选中
      * 项高度的一半时，选项此时已经进入分割线区域内，会触发该事件。
@@ -569,7 +542,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onEnterSelectedArea?: Callback<TimePickerResult>;
-
   /**
      * 弹窗背板颜色。
      * 
@@ -586,7 +558,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   backgroundColor?: ResourceColor;
-
   /**
      * 弹窗背板模糊材质。
      * 
@@ -604,7 +575,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   backgroundBlurStyle?: BlurStyle;
-
   /**
      * 背景模糊效果。
      *
@@ -614,7 +584,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
-
   /**
      * 背景效果参数。
      *
@@ -624,7 +593,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   backgroundEffect?: BackgroundEffectOptions;
-
   /**
      * 设置上午和下午的标识是否根据小时数自动切换，仅在useMilitaryTime设置为false时生效。
      * 
@@ -642,7 +610,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   enableCascade?: boolean;
-
   /**
      * 弹窗弹出后的事件回调。
      * 
@@ -659,7 +626,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onDidAppear?: VoidCallback;
-
   /**
      * 弹窗消失后的事件回调。
      * 
@@ -673,7 +639,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onDidDisappear?: VoidCallback;
-
   /**
      * 弹窗显示动效前的事件回调。
      * 
@@ -688,7 +653,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onWillAppear?: VoidCallback;
-
   /**
      * 弹窗退出动效前的事件回调。
      * 
@@ -703,7 +667,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   onWillDisappear?: VoidCallback;
-
   /**
      * 设置弹窗背板的阴影。
      * 
@@ -717,7 +680,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   shadow?: ShadowOptions | ShadowStyle;
-
   /**
      * 设置时分是否显示前导0，目前只支持设置hour和minute参数。
      * 
@@ -734,7 +696,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   dateTimeOptions?: DateTimeOptions;
-
   /**
      * 是否响应悬停态。
      * 
@@ -750,7 +711,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   enableHoverMode?: boolean;
-
   /**
      * 悬停态下弹窗默认展示区域。
      * 
@@ -763,7 +723,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   hoverModeArea?: HoverModeAreaType;
-
   /**
      * 设置是否开启触控反馈。
      * 
@@ -784,7 +743,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 23 static
    */
   enableHapticFeedback?: boolean;
-
   /**
      * 为对话框设置系统风格的材质。不同的材质具有不同的效果，可以影响对话框的背景颜色、边框、阴影等视觉属性。
      *
@@ -793,7 +751,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
      * 设置对话框的形变动画模式。
      *
@@ -804,7 +761,6 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
      * 设置对话框的边缘光动画模式。
      *
@@ -817,11 +773,10 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
   edgeLightMode?: EdgeLightMode;
 
   /**
-   * 是否以及如何使对话框适配惯用手。
-   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
-   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
-   *
-   * @default HandednessFollowMode.NONE
+     * 弹窗是否以及如何跟手的属性设置。
+     * FOLLOW_ANCHOR：弹窗向触发组件的位置偏移。
+     * FOLLOW_GRIP_Hand：弹窗向握持手（握持的手，区别于操作手)。相关底层判定不可用时回退为当前显示下效果。
+     *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -843,3 +798,16 @@ export declare interface TimePickerDialogOptions extends TimePickerOptions {
 export declare function TimePicker(
     options?: TimePickerOptions
 ): TimePickerAttribute;
+/**
+ * 定义时间选择器组件。它要求在组件属性设置开始时调用setTimePickerOptions。
+ *
+ * @param { CustomBuilderT<TimePickerAttribute> } style - 设置组件属性的回调函数。
+ * @returns { TimePickerAttribute } 时间选择器属性。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
+ * @stagemodelonly
+ * @since 26.0.1 staticonly
+ * @noninterop
+ */
+@Builder
+export declare function TimePicker(style: CustomBuilderT<TimePickerAttribute>): TimePickerAttribute;

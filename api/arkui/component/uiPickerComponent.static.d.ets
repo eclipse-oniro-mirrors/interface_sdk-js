@@ -23,6 +23,7 @@ import { CommonMethod, PickerComponentTextStyle } from './common';
 import { LengthMetrics } from './../Graphics';
 import { AttributeModifier } from "./common";
 import { ComponentBuilder, CustomBuilder, CustomBuilderT, Builder } from './builder';
+import { CrownSensitivity } from "./enums";
 /**
  * Defines the options of Picker.
  *
@@ -152,6 +153,7 @@ export declare interface PickerIndicatorStyle {
 
   /**
    * Defines the border radius of selected items.
+   *
    * @type { ?(LengthMetrics | BorderRadiuses | LocalizedBorderRadiuses) } borderRadius
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -162,6 +164,7 @@ export declare interface PickerIndicatorStyle {
 
 /**
  * Defines the Picker component attributes.
+ *
  * @extends CommonMethod
  * @interface UIPickerComponentAttribute
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -182,6 +185,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
   default setUIPickerComponentOptions(options?: UIPickerComponentOptions): this;
   /**
    * This event is triggered when a Picker item is selected.
+   *
    * @param { OnUIPickerComponentCallback | undefined } callback - The callback of onChange.
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -192,6 +196,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * This event is triggered when a Picker item is selected and scrolling has stopped.
+   *
    * @param { OnUIPickerComponentCallback | undefined } callback - The callback of onScrollStop.
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -202,6 +207,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * Can scroll loop if true is set, on the contrary it can not.
+   *
    * @param { boolean | undefined } isLoop
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -212,6 +218,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * Enable or disable haptic feedback.
+   *
    * @param { boolean | undefined } enable - Default value is true, set false to disable haptic feedback.
    *     Default value is true, set false to disable haptic feedback.
    * @returns { UIPickerComponentAttribute }
@@ -223,6 +230,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * Sets the indicator's type and style.
+   *
    * @param { PickerIndicatorStyle | undefined } style
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -233,6 +241,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * Set the attribute modifier
+   *
    * @param { AttributeModifier<UIPickerComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -240,7 +249,6 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @since 23 static
    */
   default attributeModifier(modifier: AttributeModifier<UIPickerComponentAttribute> | AttributeModifier<CommonMethod> | undefined): this;
-
   /**
    * Sets the height of each item.
    *
@@ -255,13 +263,23 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
   /**
    * Sets the total number of visible items.
    *
-   * @param { int | undefined } count - Total number of visible items.
+   * @param { int | undefined } count - The total number of visible items.
    * @returns { UIPickerComponentAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   default displayedItemCount(count: int | undefined): this;
+  /**
+   * Sets the sensitivity to the digital crown rotation.
+   *
+   * @param { CrownSensitivity | undefined } sensitivity - Sensitivity to the digital crown rotation.
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
 
   /**
    * Sets the text style of the selected item.
@@ -287,6 +305,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
 /**
  * Defines the Picker container.
+ *
  * @param { UIPickerComponentOptions } [options] - picker options.
  * @param { CustomBuilder } [content_]
  * @returns { UIPickerComponentAttribute } - The attribute of the Picker.
@@ -296,7 +315,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
  */
 @ComponentBuilder
 export declare function UIPickerComponent(
-    options?: UIPickerComponentOptions,
+    options?: UIPickerComponentOptions, 
     content_?: CustomBuilder
 ): UIPickerComponentAttribute;
 /**

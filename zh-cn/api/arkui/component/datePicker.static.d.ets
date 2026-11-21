@@ -16,8 +16,8 @@
  */
 
 /**
- * @file
- * @kit ArkUI
+  * @file
+  * @kit ArkUI
  */
 
 import { HandednessFollowMode } from '../../@ohos.arkui.dialog';
@@ -43,7 +43,6 @@ import { AttributeModifier } from "./common";
  * @since 23 static
  */
 export declare interface DatePickerResult {
-
   /**
      * 选中日期的年。
      * 
@@ -55,7 +54,6 @@ export declare interface DatePickerResult {
    * @since 23 static
    */
   year?: int;
-
   /**
      * 选中日期的月的索引值，索引从0开始，0表示1月，11表示12月。
      * 
@@ -67,7 +65,6 @@ export declare interface DatePickerResult {
    * @since 23 static
    */
   month?: int;
-
   /**
      * 选中日期的日。
      * 
@@ -80,7 +77,6 @@ export declare interface DatePickerResult {
    */
   day?: int;
 }
-
 /**
  * 设置日期展示模式。
  *
@@ -90,7 +86,6 @@ export declare interface DatePickerResult {
  * @since 23 static
  */
 export declare enum DatePickerMode {
-
   /**
      * 显示年、月、日三列。
      *
@@ -99,7 +94,6 @@ export declare enum DatePickerMode {
    * @since 23 static
    */
   DATE = 0,
-
   /**
      * 显示年、月二列。
      *
@@ -108,7 +102,6 @@ export declare enum DatePickerMode {
    * @since 23 static
    */
   YEAR_AND_MONTH = 1,
-
   /**
      * 显示月、日二列。
      * 
@@ -120,7 +113,6 @@ export declare enum DatePickerMode {
    */
   MONTH_AND_DAY = 2
 }
-
 /**
  * 日期选择器组件的参数说明。
  * 
@@ -140,7 +132,6 @@ export declare enum DatePickerMode {
  * @since 23 static
  */
 export declare interface DatePickerOptions {
-
   /**
      * 指定选择器的起始日期。
      * 
@@ -155,7 +146,6 @@ export declare interface DatePickerOptions {
    * @since 23 static
    */
   start?: Date;
-
   /**
      * 指定选择器的结束日期。
      * 
@@ -170,7 +160,6 @@ export declare interface DatePickerOptions {
    * @since 23 static
    */
   end?: Date;
-
   /**
      * 设置选中项的日期。
      * 
@@ -186,7 +175,6 @@ export declare interface DatePickerOptions {
    * @since 23 static
    */
   selected?: Date | Bindable<Date>;
-
   /**
      * 设置日期展示模式。
      * 
@@ -204,7 +192,6 @@ export declare interface DatePickerOptions {
    */
   mode?: DatePickerMode;
 }
-
 /**
  * 除支持[通用属性]{@link ./common}外，还支持以下属性：
  * 
@@ -219,6 +206,17 @@ export declare interface DatePickerOptions {
  */
 export declare interface DatePickerAttribute extends CommonMethod {
   /**
+     * 设置日期选择器选项。
+     *
+   * @param { DatePickerOptions } [options] - date picker options.
+   * @returns { DatePickerAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.0.1 staticonly
+   */
+  default setDatePickerOptions(options?: DatePickerOptions): this;
+  /**
      * 设置日期是否显示为农历。
      * 
      * **说明：**
@@ -232,12 +230,11 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     当value的值为undefined时，使用默认值。
    * @default false
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default lunar(value: boolean | undefined): this;
-
   /**
      * 设置边缘项（以选中项为基准向上或向下的第二项）的文本样式。
      *
@@ -246,12 +243,11 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     当value的值为undefined时，使用默认值。
    * @default {<br>color: '#ff182431',<br>font: {<br>size: '14fp', <br>weight: FontWeight.Regular<br>}<br>}
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default disappearTextStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 设置待选项（以选中项为基准向上或向下的第一项）的文本样式。
      *
@@ -260,12 +256,11 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     当value的值为undefined时，使用默认值。
    * @default {<br>color: '#ff182431',<br>font: {<br>size: '16fp', <br>weight: FontWeight.Regular<br>}<br>}
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default textStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 设置选中项的文本样式。
      *
@@ -274,23 +269,21 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     当value的值为undefined时，使用默认值。
    * @default {<br>color: '#ff007dff',<br>font: {<br>size: '20vp', <br>weight: FontWeight.Medium<br>}<br>}
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default selectedTextStyle(value: PickerTextStyle | undefined): this;
-
   /**
      * 滑动DatePicker文本内容后，选项完全归位至选中项位置时，触发该回调。不能通过双向绑定的状态变量触发。
      *
    * @param { Callback<Date> | undefined } callback
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onDateChange(callback: Callback<Date> | undefined): this;
-
   /**
      * 设置表冠灵敏度。
      * 
@@ -303,12 +296,11 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     当sensitivity的值为undefined时，使用默认值。
    * @default CrownSensitivity.MEDIUM
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
-
   /**
      * 设置是否开启触控反馈。
      *
@@ -319,35 +311,32 @@ export declare interface DatePickerAttribute extends CommonMethod {
      *     设置为true后，其生效情况取决于系统的硬件是否支持。当enable的值为undefined时，使用默认值。
    * @default true
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default enableHapticFeedback(enable: boolean | undefined): this;
-
   /**
      * 设置是否可循环滚动。
      *
    * @param { boolean | undefined } isLoop
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default canLoop(isLoop: boolean | undefined): this;
-
   /**
      * 设置属性修改器。
      *
    * @param { AttributeModifier<DatePickerAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { DatePickerAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default attributeModifier(modifier: AttributeModifier<DatePickerAttribute> | AttributeModifier<CommonMethod> | undefined): this;
 }
-
 /**
  * 农历开关样式。
  *
@@ -357,7 +346,6 @@ export declare interface DatePickerAttribute extends CommonMethod {
  * @since 23 static
  */
 export declare interface LunarSwitchStyle {
-
   /**
      * 开关开启时的背景颜色。
      * 
@@ -370,7 +358,6 @@ export declare interface LunarSwitchStyle {
    * @since 23 static
    */
   selectedColor?: ResourceColor;
-
   /**
      * 开关关闭时的边框颜色。
      * 
@@ -383,7 +370,6 @@ export declare interface LunarSwitchStyle {
    * @since 23 static
    */
   unselectedColor?: ResourceColor;
-
   /**
      * 开关内部图标颜色。
      * 
@@ -397,7 +383,6 @@ export declare interface LunarSwitchStyle {
    */
   strokeColor?: ResourceColor;
 }
-
 /**
  * 日期选择器弹窗选项。
  * 
@@ -410,7 +395,6 @@ export declare interface LunarSwitchStyle {
  * @since 23 static
  */
 export declare interface DatePickerDialogOptions extends DatePickerOptions {
-
   /**
      * 日期是否显示为农历。
      * 
@@ -430,7 +414,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   lunar?: boolean;
-
   /**
      * 是否展示切换农历的开关。
      * 
@@ -450,7 +433,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   lunarSwitch?: boolean;
-
   /**
      * 设置农历开关的颜色样式。
      * 
@@ -465,7 +447,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   lunarSwitchStyle?: LunarSwitchStyle;
-
   /**
      * 是否在弹窗内展示时间选择器。
      * 
@@ -486,7 +467,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   showTime?: boolean;
-
   /**
      * 弹窗内展示的时间选择器是否为24小时制，仅当showTime为true时生效。
      * 
@@ -506,7 +486,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   useMilitaryTime?: boolean;
-
   /**
      * 设置边缘项（以选中项为基准向上或向下的第二项）的文本颜色、字号、字体粗细。
      * 
@@ -519,7 +498,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   disappearTextStyle?: PickerTextStyle;
-
   /**
      * 设置待选项（以选中项为基准向上或向下的第一项）的文本颜色、字号、字体粗细。
      * 
@@ -532,7 +510,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   textStyle?: PickerTextStyle;
-
   /**
      * 设置确认按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、按钮是否默认响应Enter键。
      * 
@@ -542,8 +519,8 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
      *    保持默认值false。
      * 
      * 2. 按钮高度默认40vp，在关怀模式-大字体场景下高度不变，即使按钮样式设置为圆角矩形
-     *    [ROUNDED_RECTANGLE]{@link buttontype}，呈现效果
-     *    依然是胶囊型按钮[Capsule]{@link buttontype}。
+     *    [ROUNDED_RECTANGLE](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)，呈现效果
+     *    依然是胶囊型按钮[Capsule](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)。
      *
    * @type { ?PickerDialogButtonStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -551,7 +528,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   acceptButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 设置取消按钮显示样式、样式和重要程度、角色、背景色、圆角、文本颜色、字号、字体粗细、字体样式、字体列表、按钮是否默认响应Enter键。
      * 
@@ -561,8 +537,8 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
      *    保持默认值false。
      * 
      * 2. 按钮高度默认40vp，在关怀模式-大字体场景下高度不变，即使按钮样式设置为圆角矩形
-     *    [ROUNDED_RECTANGLE]{@link buttontype}，呈现效果
-     *    依然是胶囊型按钮[Capsule]{@link ButtonType}。
+     *    [ROUNDED_RECTANGLE](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)，呈现效果
+     *    依然是胶囊型按钮[Capsule](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-button.md#buttontype)。
      *
    * @type { ?PickerDialogButtonStyle }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -570,7 +546,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   cancelButtonStyle?: PickerDialogButtonStyle;
-
   /**
      * 设置选中项的文本颜色、字号、字体粗细。
      * 
@@ -583,7 +558,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   selectedTextStyle?: PickerTextStyle;
-
   /**
      * 弹窗遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。
      * 
@@ -596,7 +570,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   maskRect?: Rectangle;
-
   /**
      * 弹窗在竖直方向上的对齐方式。
      * 
@@ -609,7 +582,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   alignment?: DialogAlignment;
-
   /**
      * 弹窗相对alignment所在位置的偏移量。
      * 
@@ -622,7 +594,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   offset?: Offset;
-
   /**
      * 点击弹窗中的“取消”按钮时触发该回调。
      *
@@ -632,7 +603,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onCancel?: VoidCallback;
-
   /**
      * 点击弹窗中的“确定”按钮时触发该回调。
      * 
@@ -646,7 +616,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onDateAccept?: Callback<Date>;
-
   /**
      * 滑动弹窗中的日期使当前选中项改变时触发该回调。
      * 
@@ -660,7 +629,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onDateChange?: Callback<Date>;
-
   /**
      * 弹窗背板颜色。
      * 
@@ -677,7 +645,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   backgroundColor?: ResourceColor;
-
   /**
      * 弹窗背板模糊材质。
      * 
@@ -695,7 +662,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   backgroundBlurStyle?: BlurStyle;
-
   /**
      * 背景模糊效果。
      *
@@ -705,7 +671,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   backgroundBlurStyleOptions?: BackgroundBlurStyleOptions;
-
   /**
      * 背景效果参数。
      *
@@ -715,7 +680,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   backgroundEffect?: BackgroundEffectOptions;
-
   /**
      * 弹窗弹出后的事件回调。
      * 
@@ -732,7 +696,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onDidAppear?: VoidCallback;
-
   /**
      * 弹窗消失后的事件回调。
      * 
@@ -746,7 +709,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onDidDisappear?: VoidCallback;
-
   /**
      * 弹窗显示动效前的事件回调。
      * 
@@ -761,7 +723,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onWillAppear?: VoidCallback;
-
   /**
      * 弹窗退出动效前的事件回调。
      * 
@@ -776,7 +737,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   onWillDisappear?: VoidCallback;
-
   /**
      * 设置弹窗背板的阴影。
      * 
@@ -788,7 +748,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   shadow?: ShadowOptions | ShadowStyle;
-
   /**
      * 设置时分是否显示前导0，目前只支持设置hour和minute参数。
      * 
@@ -807,7 +766,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   dateTimeOptions?: DateTimeOptions;
-
   /**
      * 是否响应悬停态。
      * 
@@ -823,7 +781,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   enableHoverMode?: boolean;
-
   /**
      * 悬停态下弹窗默认展示区域。
      * 
@@ -836,7 +793,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   hoverModeArea?: HoverModeAreaType;
-
   /**
      * 设置是否开启触控反馈。
      * 
@@ -857,7 +813,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   enableHapticFeedback?: boolean;
-
   /**
      * 设置是否可循环滚动。
      * 
@@ -875,7 +830,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 23 static
    */
   canLoop?: boolean;
-
   /**
      * 为对话框设置系统风格的材质。不同的材质具有不同的效果，可以影响对话框的背景颜色、边框、阴影等视觉属性。
      *
@@ -884,7 +838,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   systemMaterial?: SystemUiMaterial;
-
   /**
      * 设置对话框的形变动画模式。
      *
@@ -895,7 +848,6 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   distortionMode?: DistortionMode;
-
   /**
      * 设置对话框的边缘光动画模式。
      *
@@ -906,13 +858,11 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
    * @since 26.0.0 static
    */
   edgeLightMode?: EdgeLightMode;
-
   /**
-   * 是否以及如何使对话框适配惯用手。
-   * FOLLOW_ANCHOR：对话框向触发它的组件（最近交互的组件）的位置偏移；当不存在触发组件时，回退到当前布局。
-   * FOLLOW_GRIP_HAND：对话框向感知平台上报的握持手（握持设备的手，区别于操作手）偏移；当不可用时，回退到当前布局。
-   *
-   * @default HandednessFollowMode.NONE
+     * 弹窗是否以及如何跟手的属性设置。
+     * FOLLOW_ANCHOR：弹窗向触发组件的位置偏移。
+     * FOLLOW_GRIP_Hand：弹窗向握持手（握持的手，区别于操作手)。相关底层判定不可用时回退为当前显示下效果。
+     *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.1.0 static
@@ -934,3 +884,16 @@ export declare interface DatePickerDialogOptions extends DatePickerOptions {
 export declare function DatePicker(
     options?: DatePickerOptions
 ): DatePickerAttribute;
+/**
+ * 定义日期选择器组件。它要求在组件属性设置开始时调用setDatePickerOptions。
+ *
+ * @param { CustomBuilderT<DatePickerAttribute> } style - 置组件属性的回调函数。
+ * @returns { DatePickerAttribute } 日期选择器属性.
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
+ * @stagemodelonly
+ * @since 26.0.1 staticonly
+ * @noninterop
+ */
+@Builder
+export declare function DatePicker(style: CustomBuilderT<DatePickerAttribute>): DatePickerAttribute;
