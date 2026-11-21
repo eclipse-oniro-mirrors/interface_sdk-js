@@ -28,7 +28,7 @@ import uiMaterial from './@ohos.arkui.uiMaterial';
  * | -------- | - | --------------- |
  * | ENABLE   | 1 | The toolbar item is enabled. |
  * | DISABLE  | 2 | The toolbar item is disabled.  |
- * | ACTIVATE | 3 | The toolbar item is activated and can be clicked.|
+ * | ACTIVATE | 3 | The toolbar item is activated.|
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -71,7 +71,7 @@ export declare enum ToolBarV2ItemState {
 }
 
 /**
- * Defines the SymbolGlyph for ToolBarV2.
+ * Defines the icon symbol options.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -83,7 +83,7 @@ export declare enum ToolBarV2ItemState {
 @ObservedV2
 export class ToolBarV2SymbolGlyph {
   /**
-   * Modifier of ToolBarV2's normal symbol.
+   * Icon symbol of the toolbar item in normal state.
    *
    * Decorator: @Trace
    *
@@ -96,7 +96,7 @@ export class ToolBarV2SymbolGlyph {
   @Trace
   normal: SymbolGlyphModifier;
   /**
-   * Modifier of ToolBarV2's activated symbol.
+   * Icon symbol of the toolbar item in activated state.
    *
    * Default value:
    *
@@ -484,8 +484,7 @@ export declare class ToolBarV2Item {
   @Trace
   accessibilityDescription?: ResourceStr;
   /**
-   * Accessibility level of the item.
-   * Default value: "auto".
+   * The accessibilityLevel of item.
    *
    * @default "auto"
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -670,7 +669,7 @@ export declare class ToolBarV2Modifier {
    *
    * @param { ColorMetrics } backgroundColor - toolBarV2's backgroundColor.
    * @returns { ToolBarV2Modifier } **ToolBarV2Modifier** object after setting the background color, which can be used
-   *     for chained calls to other methods to further customize the toolbar style.
+   *     for chained calls to further customize the toolbar style.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -683,7 +682,7 @@ export declare class ToolBarV2Modifier {
    *
    * @param { LengthMetrics } padding - left and right padding.
    * @returns { ToolBarV2Modifier } **ToolBarV2Modifier** object with the padding set, which can be used for chained
-   *     calls to other methods to further customize the toolbar style.
+   *     calls to further customize the toolbar style.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -695,8 +694,8 @@ export declare class ToolBarV2Modifier {
    * Sets whether to display the pressed state effect.
    *
    * @param { boolean } stateEffect - press status effect.
-   * @returns { ToolBarV2Modifier } **ToolBarV2Modifier** object with the pressed-state effect set,
-   *     which can be used for chained calls to other methods to further customize the toolbar style.
+   * @returns { ToolBarV2Modifier } **ToolBarV2Modifier** object with the pressed state effect set, which can be used
+   *     for chained calls to other methods to further customize the toolbar style.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -717,8 +716,7 @@ export declare class ToolBarV2Modifier {
  */
 export declare enum ToolBarV2ItemPlacement {
   /**
-   * Center area. Suitable for primary toolbar actions displayed in the main content area.
-   * This is the default placement for regular toolbar items.
+   * Center area (default). Suitable for primary toolbar actions displayed in the main content region.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -728,7 +726,7 @@ export declare enum ToolBarV2ItemPlacement {
    */
   MAIN = 0,
   /**
-   * Leading half-area. Suitable for navigation or primary actions placed before the main content.
+   * Leading half-area. Suitable for primary actions placed before the main content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -818,10 +816,11 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   displayPriority?: number;
   /**
-   * Background color of an item in the ACTIVATE state (activated background color).
-   * Only applies to icon-only items; icon+text items cannot have a background color.
-   * Default value: undefined. No color is applied when this parameter is not set.
-   * Using $r('sys.color.comp_background_emphasize') (HarmonyOS blue) is recommended.
+   * Item background color in `ACTIVATE` status (activated background color).
+   * Only applies to icon-only items; icon+text items cannot set a background color.
+   * Defaults to transparent when not specified. Recommend using
+   * `$r('sys.color.comp_background_emphasize')` (HarmonyOS blue).
+   * Default value: Color.Transparent.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -843,7 +842,10 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   id?: string;
   /**
-   * Item size (width × height) of the toolbar item.
+   * Item size (width × height) for the toolbar item.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -855,8 +857,8 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   itemSize?: Size;
   /**
    * Whether to show a separator after this item.
-   * When true, a separator is rendered after this item, but not after the last item in the toolbar.
-   * Default value: undefined. If this parameter is not set, the value is false and no separator is displayed.
+   * When true, a separator is rendered after this item (not after the last item in the toolbar).
+   * Default value: false.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -868,9 +870,10 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   isShowSeparator?: boolean;
   /**
    * Whether to display the text content of the toolbar item.
-   * When set to false, the text specified by content is not rendered in the toolbar.
-   * This is useful for scenarios where only the icon needs to be displayed.
-   * Default value: undefined.
+   * When set to false, the text specified by `content` is not rendered in the toolbar,
+   * but `content` is still used for overflow menu identification.
+   * This is useful when an icon-only item still needs text identification in the overflow menu.
+   * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -881,8 +884,8 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   isShowText?: boolean;
   /**
-   * Whether to display the toolbar overflow menu for this item.
-   * Default value: undefined. If this parameter is not set, the value is false.
+   * Whether to display the overflowMenu of the toolbar in this item.
+   * Default value: false.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -893,8 +896,9 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   isShowOverflowMenu?: boolean;
   /**
-   * Group identifier. Items with the same non-empty groupID are rendered as a visual group.
-   * The first item with the same groupID determines the group placement.
+   * Group identifier. Items sharing the same non-empty `groupID` are rendered
+   * as a visual group. Group-level configuration is read from the first item
+   * in the array that carries this `groupID`.
    * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -906,9 +910,9 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   groupID?: string;
   /**
-   * Style configuration for the group to which this item belongs.
-   * Only the style configuration of the first item with the same groupID that has groupStyle set takes effect.
-   * Values on subsequent items with the same groupID are ignored.
+   * Style configuration for the group that this item belongs to.
+   * Only the value on the first item (in array order) carrying a given `groupID`
+   * takes effect; values on subsequent items with the same `groupID` are ignored.
    * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -920,9 +924,9 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
   @Trace
   groupStyle?: ToolBarV2ItemGroupStyle;
   /**
-   * Creates an AdvancedToolBarV2Item object.
+   * The constructor used to create a AdvancedToolBarV2Item object.
    *
-   * @param { AdvancedToolBarV2ItemParams } params - Constructor parameters.
+   * @param { AdvancedToolBarV2ItemParams } params - item info.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -933,10 +937,10 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
 }
 
 /**
- * Declares the parameters of AdvancedToolBarV2Item.
+ * Declare the options of AdvancedToolBarV2Item.
  *
- * Extends {@link ToolBarV2ItemOptions} with advanced fields. content is
- * inherited as a required field; use isShowText on the item to control
+ * Extends {@link ToolBarV2ItemOptions} with advanced fields. `content` is
+ * inherited as a required field; use `isShowText` on the item to control
  * whether the text is rendered.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -948,6 +952,7 @@ export declare class AdvancedToolBarV2Item extends ToolBarV2Item {
 export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
   /**
    * Custom content builder for the toolbar item. When set, content and icon are ignored.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -991,10 +996,10 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   displayPriority?: number;
   /**
-   * Background color of an item in the ACTIVATE state (activated background color).
-   * Only applies to icon-only items; icon+text items cannot have a background color.
-   * Using $r('sys.color.comp_background_emphasize') is recommended.
-   * Default value: undefined, indicating no color.
+   * Item background color in `ACTIVATE` status (activated background color).
+   * Only applies to icon-only items; icon+text items cannot set a background color.
+   * Defaults to transparent when not specified. Recommend using `$r('sys.color.comp_background_emphasize')`.
+   * Default value: Color.Transparent.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1015,7 +1020,10 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   id?: string;
   /**
-   * Item size (width × height) of the toolbar item.
+   * Item size (width × height) for the toolbar item.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1038,10 +1046,10 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
   isShowSeparator?: boolean;
   /**
    * Whether to display the text content of the toolbar item.
-   * When set to false, the text specified by content is not rendered in the toolbar.
-   * This is useful for scenarios where only the icon needs to be displayed.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default value is true,
-   * and text can be displayed when both an icon and text are present.
+   * When set to false, the text specified by `content` is not rendered in the toolbar,
+   * but `content` is still used for accessibility and overflow menu identification.
+   * This is useful when an icon-only item still needs text identification in the overflow menu.
+   * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1051,8 +1059,8 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   isShowText?: boolean;
   /**
-   * Whether to display the toolbar overflow menu for this item.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default value is false.
+   * Whether to display the overflowMenu of the toolbar in this item.
+   * Default value: false.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1062,9 +1070,9 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   isShowOverflowMenu?: boolean;
   /**
-   * Group identifier. Items with the same non-empty groupID are rendered as a visual group.
-   * The first item with the same groupID determines the group placement.
-   * Default value: undefined, indicating that no groupID is set.
+   * Group identifier. Items sharing the same non-empty `groupID` are rendered
+   * as a visual group.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1074,9 +1082,10 @@ export interface AdvancedToolBarV2ItemParams extends ToolBarV2ItemOptions {
    */
   groupID?: string;
   /**
-   * Style configuration for the group to which this item belongs.
-   * Only the style configuration of the first item with the same groupID that has groupStyle set takes effect.
-   * Values on subsequent items with the same groupID are ignored.
+   * Style configuration for the group that this item belongs to.
+   * Only the value on the first item (in array order) carrying a given `groupID`
+   * takes effect; values on subsequent items with the same `groupID` are ignored.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1133,6 +1142,7 @@ export interface ToolBarV2PaddingOptions {
 export interface ToolBarV2OverflowMenuStyle {
   /**
    * Font configuration for overflow menu items.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1143,6 +1153,7 @@ export interface ToolBarV2OverflowMenuStyle {
   font?: Font;
   /**
    * Font color of overflow menu items.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1153,6 +1164,7 @@ export interface ToolBarV2OverflowMenuStyle {
   fontColor?: ColorMetrics;
   /**
    * Overflow menu corner radius.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1163,6 +1175,7 @@ export interface ToolBarV2OverflowMenuStyle {
   radius?: Dimension | BorderRadiuses;
   /**
    * Divider style between individual overflow menu items.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1173,6 +1186,7 @@ export interface ToolBarV2OverflowMenuStyle {
   menuItemDivider?: DividerStyleOptions;
   /**
    * Divider style between overflow menu item groups.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1195,6 +1209,7 @@ export interface ToolBarV2OverflowMenuStyle {
 export interface ToolBarV2TitleStyleOptions {
   /**
    * Font size of the title text.
+   * Default value: 20fp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1205,6 +1220,7 @@ export interface ToolBarV2TitleStyleOptions {
   fontSize?: LengthMetrics;
   /**
    * Title text color.
+   * Default value: $r('sys.color.font_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1215,6 +1231,7 @@ export interface ToolBarV2TitleStyleOptions {
   fontColor?: ColorMetrics;
   /**
    * Font weight of the title text.
+   * Default value: FontWeight.Bold.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1224,7 +1241,8 @@ export interface ToolBarV2TitleStyleOptions {
    */
   fontWeight?: FontWeight;
   /**
-   * Minimum length of the title.
+   * Minimum width of the title.
+   * Default value: 48vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1248,8 +1266,7 @@ export interface ToolBarV2TitleStyleOptions {
 export declare class ToolBarV2TitleStyle {
   /**
    * Font size of the title text.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default font size
-   * is 20fp for the title and 14fp for the subtitle.
+   * Default value: 20fp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1261,8 +1278,7 @@ export declare class ToolBarV2TitleStyle {
   fontSize?: LengthMetrics;
   /**
    * Title text color.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default color
-   * is $r('sys.color.font_primary') for the title and $r('sys.color.font_secondary') for the subtitle.
+   * Default value: $r('sys.color.font_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1274,8 +1290,7 @@ export declare class ToolBarV2TitleStyle {
   fontColor?: ColorMetrics;
   /**
    * Font weight of the title text.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default font weight
-   * is FontWeight.Bold for the title and FontWeight.Regular for the subtitle.
+   * Default value: FontWeight.Bold.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1286,8 +1301,8 @@ export declare class ToolBarV2TitleStyle {
   @Trace
   fontWeight?: FontWeight;
   /**
-   * Minimum length of the title.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default value is 48vp.
+   * Minimum width of the title.
+   * Default value: 48vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1321,7 +1336,8 @@ export declare class ToolBarV2TitleStyle {
  */
 export interface ToolBarV2TitleOptions {
   /**
-   * Title text content.
+   * Title text content. Required when constructing ToolBarV2TitleConfigs.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1341,7 +1357,9 @@ export interface ToolBarV2TitleOptions {
    */
   subTitleContent?: ResourceStr;
   /**
-   * Placement of the title.
+   * Placement position of the title within the toolbar.
+   * Reuses `ToolBarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
+   * Default value: ToolBarV2ItemPlacement.LEADING.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1352,6 +1370,7 @@ export interface ToolBarV2TitleOptions {
   placement?: ToolBarV2ItemPlacement;
   /**
    * Whether the title is visible.
+   * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1399,7 +1418,6 @@ export interface ToolBarV2TitleOptions {
 export declare class ToolBarV2TitleConfigs {
   /**
    * Title text content. Required when constructing ToolBarV2TitleConfigs.
-   * Default value: undefined. No content is available when this parameter is not set.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1421,7 +1439,8 @@ export declare class ToolBarV2TitleConfigs {
    */
   subTitleContent?: ResourceStr;
   /**
-   * Placement of the title.
+   * Placement position of the title within the toolbar.
+   * Reuses `ToolBarV2ItemPlacement` — the title is arranged in the same area as items with the same placement.
    * Default value: ToolBarV2ItemPlacement.LEADING.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1434,7 +1453,7 @@ export declare class ToolBarV2TitleConfigs {
   placement?: ToolBarV2ItemPlacement;
   /**
    * Whether the title is visible.
-   * Default value: true. The value true makes the title visible, and false hides it.
+   * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1490,8 +1509,9 @@ export declare class ToolBarV2TitleConfigs {
  */
 export interface ToolBarV2ItemGroupStyleOptions {
   /**
-   * Placement of the group within the toolbar.
+   * Placement position of the group within the toolbar.
    * The group placement takes precedence over the placement of individual items within the group.
+   * Default value: ToolBarV2ItemPlacement.MAIN.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1513,6 +1533,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
   space?: LengthMetrics;
   /**
    * Background color of the group container.
+   * Default value: $r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1523,6 +1544,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
   backgroundColor?: ColorMetrics;
   /**
    * Padding of the group container.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1533,6 +1555,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
   padding?: ToolBarV2PaddingOptions;
   /**
    * Border radius of the group container.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1543,6 +1566,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
   borderRadius?: LengthMetrics;
   /**
    * Border width of the group container.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1552,7 +1576,8 @@ export interface ToolBarV2ItemGroupStyleOptions {
    */
   borderWidth?: LengthMetrics;
   /**
-   * Corner color of the group container.
+   * Border color of the group container.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1562,7 +1587,8 @@ export interface ToolBarV2ItemGroupStyleOptions {
    */
   borderColor?: ColorMetrics;
   /**
-   * Whether to show the pressed-state effect for items within the group.
+   * Whether to show the press-state effect for items within the group.
+   * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1574,7 +1600,7 @@ export interface ToolBarV2ItemGroupStyleOptions {
 }
 
 /**
- * Defines the style configuration for a toolbar item group.
+ * Defines the style configuration for toolbar item group.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1611,8 +1637,7 @@ export declare class ToolBarV2ItemGroupStyle {
   space?: LengthMetrics;
   /**
    * Background color of the group container.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * $r('sys.color.comp_background_primary') is used.
+   * Default value: $r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1624,7 +1649,7 @@ export declare class ToolBarV2ItemGroupStyle {
   backgroundColor?: ColorMetrics;
   /**
    * Padding of the group container.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default value is 12vp.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1636,8 +1661,7 @@ export declare class ToolBarV2ItemGroupStyle {
   padding?: ToolBarV2PaddingOptions;
   /**
    * Border radius of the group container.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the default value
-   * is half of the cross-axis length of the toolbar.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1649,7 +1673,7 @@ export declare class ToolBarV2ItemGroupStyle {
   borderRadius?: LengthMetrics;
   /**
    * Border width of the group container.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no border width is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1660,8 +1684,8 @@ export declare class ToolBarV2ItemGroupStyle {
   @Trace
   borderWidth?: LengthMetrics;
   /**
-   * Corner color of the group container.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no color is applied.
+   * Border color of the group container.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1739,7 +1763,8 @@ export declare enum ToolBarV2MaterialStyle {
  */
 export interface ToolBarV2StyleOptions {
   /**
-   * Padding of the toolbar.
+   * Toolbar padding. Each edge can be set independently.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1750,7 +1775,7 @@ export interface ToolBarV2StyleOptions {
   padding?: ToolBarV2PaddingOptions;
   /**
    * Background color of the toolbar.
-   * Default value: undefined. If this parameter is not set, $r('sys.color.comp_background_primary') is used.
+   * Default value: $r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1761,7 +1786,6 @@ export interface ToolBarV2StyleOptions {
   backgroundColor?: ColorMetrics;
   /**
    * Background blur style of the toolbar.
-   * Default value: undefined. If this parameter is not set, no blur effect is applied.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1771,8 +1795,9 @@ export interface ToolBarV2StyleOptions {
    */
   backgroundBlurStyle?: BlurStyle;
   /**
-   * System material effect of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the system material is disabled.
+   * Background material of the toolbar. Sets a system-styled material effect that influences
+   * the backgroundColor, border, shadow, and other visual attributes of the toolbar.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -1795,9 +1820,8 @@ export interface ToolBarV2StyleOptions {
    */
   systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
-   * Spacing between toolbar groups, and between a group and a standalone item.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the spacing is 12vp.
-   * Value range: [8vp, 20vp].
+   * Spacing between item groups.
+   * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1807,9 +1831,10 @@ export interface ToolBarV2StyleOptions {
    */
   groupSpace?: LengthMetrics;
   /**
-   * Size of toolbar items.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the main-axis length is 56vp and the cross-axis length is 48vp.
+   * Item size of the toolbar items.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1819,9 +1844,8 @@ export interface ToolBarV2StyleOptions {
    */
   itemSize?: Size;
   /**
-   * Default font size of text in toolbar items.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the font size is $r('sys.float.ohos_id_text_size_caption').
+   * Font size of the toolbar item text.
+   * Default value: $r('sys.float.ohos_id_text_size_caption').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1832,7 +1856,7 @@ export interface ToolBarV2StyleOptions {
   fontSize?: LengthMetrics;
   /**
    * Border width of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no border width is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1843,7 +1867,7 @@ export interface ToolBarV2StyleOptions {
   borderWidth?: LengthMetrics;
   /**
    * Border color of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no color is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1854,8 +1878,7 @@ export interface ToolBarV2StyleOptions {
   borderColor?: ColorMetrics;
   /**
    * Border radius of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the radius is half of the cross-axis length of the toolbar.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1865,7 +1888,7 @@ export interface ToolBarV2StyleOptions {
    */
   borderRadius?: LengthMetrics;
   /**
-   * Whether to enable the pressed-state effect.
+   * Whether to enable the state effect.
    * Default value: true.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1889,7 +1912,8 @@ export interface ToolBarV2StyleOptions {
 @ObservedV2
 export declare class ToolBarV2StyleConfigs {
   /**
-   * Padding of the toolbar.
+   * Toolbar padding. Each edge can be set independently.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1901,8 +1925,7 @@ export declare class ToolBarV2StyleConfigs {
   padding?: ToolBarV2PaddingOptions;
   /**
    * Background color of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * $r('sys.color.comp_background_primary') is used.
+   * Default value: $r('sys.color.comp_background_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1914,7 +1937,7 @@ export declare class ToolBarV2StyleConfigs {
   backgroundColor?: ColorMetrics;
   /**
    * Background blur style of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no blur effect is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1925,8 +1948,9 @@ export declare class ToolBarV2StyleConfigs {
   @Trace
   backgroundBlurStyle?: BlurStyle;
   /**
-   * System material effect of the toolbar.
-   * Default value: undefined. The system material is not enabled when this parameter is not set.
+   * Background material of the toolbar. Sets a system-styled material effect that influences
+   * the backgroundColor, border, shadow, and other visual attributes of the toolbar.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -1950,9 +1974,8 @@ export declare class ToolBarV2StyleConfigs {
   @Trace
   systemMaterialStyle?: ToolBarV2MaterialStyle;
   /**
-   * Spacing between toolbar groups, and between a group and a standalone item.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the spacing is 12vp.
-   * Value range: [8vp, 20vp].
+   * Spacing between item groups.
+   * Default value: 12vp, value range [8vp, 20vp], clamped to the boundary when out of range.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1963,9 +1986,10 @@ export declare class ToolBarV2StyleConfigs {
   @Trace
   groupSpace?: LengthMetrics;
   /**
-   * Size of toolbar items.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the main-axis length is 56vp and the cross-axis length is 48vp.
+   * Item size of the toolbar items.
+   * Default value: mainAxis 56vp x crossAxis 48vp.
+   * When horizontal: 56vp(width) x 48vp(height).
+   * When vertical: 48vp(width) x 56vp(height).
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1976,9 +2000,8 @@ export declare class ToolBarV2StyleConfigs {
   @Trace
   itemSize?: Size;
   /**
-   * Default font size of text in toolbar items.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the font size is $r('sys.float.ohos_id_text_size_caption').
+   * Font size of the toolbar item text.
+   * Default value: $r('sys.float.ohos_id_text_size_caption').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1990,7 +2013,7 @@ export declare class ToolBarV2StyleConfigs {
   fontSize?: LengthMetrics;
   /**
    * Border width of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no border width is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2002,7 +2025,7 @@ export declare class ToolBarV2StyleConfigs {
   borderWidth?: LengthMetrics;
   /**
    * Border color of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set, no color is applied.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2014,8 +2037,7 @@ export declare class ToolBarV2StyleConfigs {
   borderColor?: ColorMetrics;
   /**
    * Border radius of the toolbar.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the radius is half of the cross-axis length of the toolbar.
+   * Default value: undefined.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2068,8 +2090,7 @@ export declare class AdvancedToolBarV2Modifier {
    * Sets the length of the toolbar along the layout direction.
    *
    * Horizontal: controls width. Vertical: controls height.
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * the toolbar fills the available space along the layout direction.
+   * Default value: '100%'.
    *
    * @param { LengthMetrics } value - The length value along the layout direction.
    * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
@@ -2081,12 +2102,11 @@ export declare class AdvancedToolBarV2Modifier {
    */
   mainAxisLength(value: LengthMetrics): AdvancedToolBarV2Modifier;
   /**
-   * Sets the length of the toolbar perpendicular to the layout direction.
+   * Sets the breadth of the toolbar perpendicular to the layout direction.
    *
-   * Horizontal: controls height. Vertical: controls width.
-   * Default value: undefined. If the value is undefined or this parameter is not set, the value is 56vp.
+   * Horizontal: controls height. Vertical: controls width. When not set, the cross-axis is auto-sized by content.
    *
-   * @param { LengthMetrics } value - The length value perpendicular to the layout direction.
+   * @param { LengthMetrics } value - The breadth value perpendicular to the layout direction.
    * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2098,8 +2118,8 @@ export declare class AdvancedToolBarV2Modifier {
   /**
    * Sets the layout direction of the toolbar.
    *
-   * Default value: undefined. If the value is undefined or this parameter is not set,
-   * items are arranged horizontally.
+   * HORIZONTAL: items arranged in a row (default).
+   * VERTICAL: items arranged in a column.
    *
    * @param { Axis } value - The direction value.
    * @returns { AdvancedToolBarV2Modifier } Returns this modifier for chaining.
@@ -2140,9 +2160,9 @@ export declare class AdvancedToolBarV2Modifier {
 
 /**
  * The toolbar is used to display action options for the current screen content. It is displayed at the bottom of the
- * screen and is suitable for scenarios where quick action entries need to be provided to users. A standard toolbar can
- * display a maximum of five entries. Any excess entries are collapsed into a "More" item, which is displayed on the
- * far right. It is suitable for scenarios where quick operations on the current page content are needed, helping
+ * screen and is suitable for scenarios where quick action entries need to be provided to users. A maximum of five
+ * entries can be displayed at the bottom. Any excess entries are collapsed into a "More" item, which is displayed on
+ * the far right. It is suitable for scenarios where quick operations on the current page content are needed, helping
  * users quickly access common functions and improving operation efficiency.<br />
  * ToolBarV2 supports configuring advanced toolbar items via `AdvancedToolBarV2Item` (which extends `ToolBarV2Item`).
  * A toolbar with configured advanced items is more flexible, allowing you to customize titles, overflow
@@ -2170,10 +2190,6 @@ export declare class AdvancedToolBarV2Modifier {
  * > - When the system switches between light and dark modes, the toolbar background color does not automatically follow
  * > the switch.
  *
- * ###### Child Components
- *
- * None
- *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -2184,7 +2200,7 @@ export declare class AdvancedToolBarV2Modifier {
 @ComponentV2
 export declare struct ToolBarV2 {
   /**
-   * Define ToolBarV2 item list. Using ToolBarV2Item[] constitutes a standard toolbar.
+   * Define ToolBarV2 item list. Using ToolBarV2Item[] constitutes a simple toolbar.
    * `AdvancedToolBarV2Item` (which extends `ToolBarV2Item`) can be used for advanced
    * layout scenarios such as titles, overflow menus, and item grouping.
    *
@@ -2198,8 +2214,7 @@ export declare struct ToolBarV2 {
   @Param
   toolBarList: ToolBarV2Item[];
   /**
-   * Defines the index of the activated item in ToolBarV2. The default value is -1.
-   * This parameter applies only to standard toolbars composed of ToolBarV2Item.
+   * Define ToolBarV2 activate item index, default is -1. Which is only used for ToolBarV2Item.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2210,8 +2225,7 @@ export declare struct ToolBarV2 {
   @Param
   activatedIndex?: number;
   /**
-   * Defines the divider modifier of ToolBarV2.
-   * This parameter applies only to standard toolbars composed of ToolBarV2Item.
+   * Define ToolBarV2 divider Modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -2222,8 +2236,7 @@ export declare struct ToolBarV2 {
   @Param
   dividerModifier?: DividerModifier;
   /**
-   * Defines the modifier of ToolBarV2.
-   * This parameter applies only to standard toolbars composed of ToolBarV2Item.
+   * Define ToolBarV2 modifier.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
