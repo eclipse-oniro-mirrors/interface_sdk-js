@@ -89,9 +89,9 @@ declare namespace accessibility {
    * @since 23 static
    */
   type Action = 'accessibilityFocus' | 'clearAccessibilityFocus' | 'focus' | 'clearFocus' | 'clearSelection' |
-  'click' | 'longClick' | 'cut' | 'copy' | 'paste' | 'select' | 'setText' | 'delete' |
-  'scrollForward' | 'scrollBackward' | 'setSelection' | 'setCursorPosition' | 'home' |
-  'back' | 'recentTask' | 'notificationCenter' | 'controlCenter' | 'common' | 'injectAction' | 'executeCustomAction';
+    'click' | 'longClick' | 'cut' | 'copy' | 'paste' | 'select' | 'setText' | 'delete' |
+    'scrollForward' | 'scrollBackward' | 'setSelection' | 'setCursorPosition' | 'home' |
+    'back' | 'recentTask' | 'notificationCenter' | 'controlCenter' | 'common' | 'injectAction' | 'executeCustomAction';
 
   /**
    * 无障碍事件类型。
@@ -123,10 +123,10 @@ declare namespace accessibility {
    * @since 23 static
    */
   type EventType = 'accessibilityFocus' | 'accessibilityFocusClear' |
-  'click' | 'longClick' | 'focus' | 'select' | 'hoverEnter' | 'hoverExit' |
-  'textUpdate' | 'textSelectionUpdate' | 'scroll' | 'requestFocusForAccessibility' |
-  'announceForAccessibility' | 'requestFocusForAccessibilityNotInterrupt' | 
-  'announceForAccessibilityNotInterrupt' | 'scrolling' | 'pageActive' | 'notificationUpdate' | 'focusInvisible';
+    'click' | 'longClick' | 'focus' | 'select' | 'hoverEnter' | 'hoverExit' |
+    'textUpdate' | 'textSelectionUpdate' | 'scroll' | 'requestFocusForAccessibility' |
+    'announceForAccessibility' | 'requestFocusForAccessibilityNotInterrupt' |
+    'announceForAccessibilityNotInterrupt' | 'scrolling' | 'pageActive' | 'notificationUpdate' | 'focusInvisible';
 
   /**
    * 窗口变化类型。
@@ -763,7 +763,7 @@ declare namespace accessibility {
    * @since 23 static
    */
   type CaptionsFontFamily = 'default' | 'monospacedSerif' | 'serif' |
-     'monospacedSansSerif' | 'sansSerif' | 'casual' | 'cursive' | 'smallCapitals';
+    'monospacedSansSerif' | 'sansSerif' | 'casual' | 'cursive' | 'smallCapitals';
   /**
    * 字幕风格。
    *
@@ -3166,7 +3166,7 @@ export declare interface UIAccessibilityElement {
   /**
    * 元素所属组件的ID。
    * 
-   * 默认值：-1。
+   * 默认值为-1。-1表示的是一个非法的组件ID。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3288,7 +3288,7 @@ export declare interface UIAccessibilityElement {
   /**
    * 页面ID。
    * 
-   * 默认值：-1。
+   * 默认值为-1。-1表示非法的页面ID。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3332,7 +3332,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly text?: string;
   /**
-   * 元素的最大文本长度。默认值：0。
+   * 元素的最大文本长度。默认值为0，单位为字节（Byte）。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3421,7 +3421,7 @@ export declare interface UIAccessibilityElement {
    * 
    * true表示元素可滚动，false表示元素不可滚动。
    * 
-   * 默认值：false。
+   * 默认值：true。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3467,7 +3467,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityVisible?: boolean;
   /**
-   * 组件的父元素ID。默认值：-1。
+   * 组件的父元素ID。-1表示当前组件没有父元素。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
