@@ -344,7 +344,8 @@ declare namespace inputEventClient {
     /**
      * Presses a key. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { KeyCode } keyCode - Key code of the key to be pressed.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -361,7 +362,8 @@ declare namespace inputEventClient {
     /**
      * Releases a key. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { KeyCode } keyCode - Key code of the key to be released.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -378,7 +380,8 @@ declare namespace inputEventClient {
   /**
    * Creates a keyboard controller for simulating key operations. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<KeyboardController> } Promise used to return the keyboard controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
@@ -410,7 +413,8 @@ declare namespace inputEventClient {
     /**
      * Moves the mouse cursor to the specified display coordinates. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { int } displayId - ID of the target display.
      * @param { int } displayX - X coordinate relative to the left edge of the display, in px. If the value exceeds the
      *     valid range of the display, the actual coordinate will be clamped to the valid range [0, display width - 1].
@@ -430,7 +434,8 @@ declare namespace inputEventClient {
     /**
      * Presses a mouse button. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Button } button - Mouse button to be pressed.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -446,7 +451,8 @@ declare namespace inputEventClient {
     /**
      * Release a mouse button. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Button } button - Mouse button to be released.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -462,7 +468,8 @@ declare namespace inputEventClient {
     /**
      * Starts an axis event. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - Axis type.
      * @param { int } value - Axis value.
      * @returns { Promise<void> } Promise that returns no value.
@@ -479,7 +486,8 @@ declare namespace inputEventClient {
     /**
      * Updates an axis event. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - Axis type.
      * @param { int } value - Axis value.
      * @returns { Promise<void> } Promise that returns no value.
@@ -496,7 +504,8 @@ declare namespace inputEventClient {
     /**
      * Ends an axis event. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { Axis } axis - Axis type.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -513,7 +522,8 @@ declare namespace inputEventClient {
   /**
    * Creates a mouse controller for simulating mouse operations. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<MouseController> } Promise used to return the mouse controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
@@ -590,7 +600,8 @@ declare namespace inputEventClient {
     /**
      * Presses down a touch point. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - Information about the touch point that is in contact with the display.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -608,7 +619,8 @@ declare namespace inputEventClient {
     /**
      * Moves a touch point. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - Information about the touch point to be moved.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -625,7 +637,8 @@ declare namespace inputEventClient {
     /**
      * Releases a touch point. This API uses a promise to return the result.
      *
-     * @permission ohos.permission.CONTROL_DEVICE
+     * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+     * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
      * @param { TouchPoint } touch - Information about the touch point to be released.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 201 - Permission verification failed.
@@ -643,7 +656,8 @@ declare namespace inputEventClient {
   /**
    * Creates a touch controller for simulating touch operations. This API uses a promise to return the result.
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.CONTROL_DEVICE [since 26.0.0 - 26.0.1]
+   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.ENTERPRISE_CONTROL_DEVICE [since 26.1.0]
    * @returns { Promise<TouchController> } Promise used to return the touch controller instance.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
