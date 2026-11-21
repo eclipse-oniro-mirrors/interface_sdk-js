@@ -447,7 +447,20 @@ declare namespace wantConstant {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    AGENT_TASK_ID = 'ohos.aafwk.param.agent.taskId'
+    AGENT_TASK_ID = 'ohos.aafwk.param.agent.taskId',
+
+    /**
+     * Indicates the priority promotion flag when starting or connecting a service extension ability.
+     * When this parameter is set, the system will promote the priority of the target service extension process.
+     * The caller must have the ohos.permission.PROMOTE_BACKGROUND_PROCESS_PRIORITY permission, otherwise this
+     * parameter will be ignored.
+     *
+     * @syscap SystemCapability.Ability.AbilityBase
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BACKGROUND_PROCESS_PROMOTE_PRIORITY = 'ohos.param.promoteBackgroundProcessPriority'
   }
 
   /**
