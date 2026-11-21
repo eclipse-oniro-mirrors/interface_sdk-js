@@ -44,16 +44,7 @@ declare namespace dataFabricAddress {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    SCENARIO_NAVIGATION_COMMUTE = 0,
-    /**
-     * 其他业务场景。
-     *
-     * @syscap SystemCapability.DistributedDataManager.DataFabric.Address
-     * @systemapi
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    OTHERS = 1
+    SCENARIO_NAVIGATION_COMMUTE = 0
   }
 
   /**
@@ -350,7 +341,7 @@ declare namespace dataFabricAddress {
     callback: Callback<DataProcessingResponse>): void;
 
   /**
-   * 取消订阅地址数据捐赠接口。该接口应在成功调用onDataFabricAddress订阅后调用；在未成功订阅的情况下调用，将返回错误码36900004。
+   * 取消订阅地址数据捐赠接口。该接口应在成功调用onDataFabricAddress订阅后调用；在未成功订阅的情况下调用，将返回错误码36900003。
    *
    * @permission ohos.permission.LOCATION and ohos.permission.APPROXIMATELY_LOCATION and
    *     ohos.permission.LOCATION_IN_BACKGROUND
@@ -362,7 +353,6 @@ declare namespace dataFabricAddress {
    *     <br> limited device capabilities.
    * @throws { BusinessError } 36900001 - Internal error in the API.
    * @throws { BusinessError } 36900003 - Unsubscription failed.
-   * @throws { BusinessError } 36900004 - Operation not supported.
    * @throws { BusinessError } 36900005 - Invalid parameter.
    * @syscap SystemCapability.DistributedDataManager.DataFabric.Address
    * @systemapi

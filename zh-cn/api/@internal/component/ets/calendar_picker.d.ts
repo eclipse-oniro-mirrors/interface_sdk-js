@@ -450,7 +450,7 @@ declare class CalendarPickerAttribute extends CommonMethod<CalendarPickerAttribu
    *
    * @param { CalendarFirstDayOfWeek } value - 设置日历选择器每周的起始日。
    *     <br>默认值：CalendarFirstDayOfWeek.LOCAL（跟随系统区域变化）
-   * @returns { CalendarPickerAttribute } the attribute of the calendar picker.
+   * @returns { CalendarPickerAttribute } 返回日历选择器的属性对象。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform

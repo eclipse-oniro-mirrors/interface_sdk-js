@@ -33,7 +33,7 @@ import { ColorMetrics } from '../Graphics';
 export declare enum ScrollBarDirection {
 
   /**
-   * Vertical scrolling is supported.
+   * 纵向滚动条。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -42,7 +42,7 @@ export declare enum ScrollBarDirection {
   Vertical,
 
   /**
-     * Horizontal scrolling is supported.
+     * 横向滚动条。
      *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -89,7 +89,7 @@ export declare interface ScrollBarOptions {
 }
 
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

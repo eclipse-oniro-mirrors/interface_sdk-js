@@ -9273,13 +9273,9 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * 设置是否启用网页自动填充，默认开启。
    * 
-   * <!--RP1-->
-   * 
    * > **说明：**
    * >
    * > 本接口的自动填充功能，依赖“智能填充服务”和“密码填充服务”的支持。
-   * 
-   * <!--RP1End-->
    *
    * @param { boolean } value - 是否启用网页自动填充，true表示启用，false表示不启用。
    *     <br>传入undefined或null时为true。
@@ -9550,19 +9546,52 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
    * @since 26.1.0 dynamic
    */
   flingSpeedLimit(speedLimit: number): WebAttribute;
+
+  /**
+   * 设置Web组件是否开启已访问链接持久化。
+   *
+   * 开启后，已访问链接记录存储在数据库文件中，应用重启后记录仍保留，
+   * 已访问链接着色在应用重启后保持一致。
+   * 关闭后，已访问链接记录仅存储在共享内存中，应用退出后记录丢失。
+   *
+   * > **说明**
+   * > 默认值为`false`。未显式调用本属性时，
+   * > 已访问链接仅存储在共享内存中。
+   *
+   * > 开启持久化后，记录按应用隔离，
+   * > 最多保存20000条，保存期限为30天。
+   *
+   * > 过期记录和超出数量上限的记录会在后台线程中自动清理。
+   *
+   * > 当Web组件处于隐私模式（通过`incognitoMode:true`开启）时，本属性不生效，
+   * > 已访问链接记录仅存储在共享内存中，不会写入磁盘。
+   *
+   * @param { boolean } enabled - 是否开启已访问链接持久化。默认值为**false**。
+   * @returns { WebAttribute }
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  visitedLinkPersistEnabled(enabled: boolean): WebAttribute;
 }
 
 /**
- * 定义 Web 组件。
+ * Web组件是ArkWeb Kit提供的具有网页显示能力的UI组件，用于在应用内嵌入和展示网页内容。开发者可通过
+ * Web组件加载在线网页和本地网页，支持隐私模式浏览、同步渲染模式、共享渲染进程等特性，满足混合开发、
+ * 内容嵌入、浏览器类应用等多种场景下的网页展示需求。Web组件的控制器（WebviewController）及相关控制
+ * 能力由[模块描述]{@link @ohos.web.webview:webview}提供。在使用Web组件时需注意：同一页面内的多个Web
+ * 组件应分别绑定不同的WebviewController实例以保证独立性和性能隔离；移动设备上当Web实例超过10个时
+ * 系统会主动回收后台页面数据。
  *
- * <p><strong>接口说明</strong>:
+ * <!--RP1--><!--RP1End-->
  *
- * <strong>性能说明</strong>:
- * <p>有关如何优化编译、资源加载和JSBridge性能的详细信息，
- * 请参见[Web加载性能优化]{@link https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-web-develop-optimization}
- * <p>当由于复杂的网页解析导致白屏时间较长时，
- * 可以开启[optimizeParserBudget]{@link WebAttribute.optimizeParserBudget}以减少首帧渲染内容。</p>
- * </p>
+ * > **说明：**
+ * >
+ * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 示例效果请以真机运行为准。
+ * >
+ * > - 在移动设备上，当应用的Web实例数量超过10个时，系统会主动回收后台页面数据。
  *
  * ## 需要权限
  *

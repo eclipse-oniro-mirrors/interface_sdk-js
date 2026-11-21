@@ -147,7 +147,7 @@ declare namespace proxyChannelManager {
    * [on('channelStateChange')]{@link proxyChannelManager.on(type: 'channelStateChange', channelId: number, callback: Callback<ChannelStateInfo>)}
    * event to monitor the channel status. When the channel is unavailable, suspend data transmission. When the channel
    * recovers, resume data transmission. Data is transmitted to the peer device through the established proxy channel
-   * over the BR link. The maximum data length is 4096 bytes. If the data length exceeds 4096 bytes, error code 32390103
+   * over the BR link. The maximum data length is 4194304 bytes. If the data length exceeds 4194304 bytes, error code 32390103
    * will be returned.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
@@ -156,7 +156,7 @@ declare namespace proxyChannelManager {
    *     value is out of range, error code 32390006 will be returned. This parameter takes effect only when the proxy
    *     channel is available. After the channel is closed or disconnected, the channel ID becomes unavailable.
    * @param { ArrayBuffer } data - Binary data sent to the peer device. The data format is defined by the app layer.
-   *     The maximum length is 4096 bytes. If the length exceeds the upper limit, error code 32390103 is returned.
+   *     The maximum length is 4194304 bytes. If the length exceeds the upper limit, error code 32390103 is returned.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
@@ -454,7 +454,7 @@ declare namespace proxyChannelManager {
     channelId: int;
 
     /**
-     * Received data, in bytes. The maximum value is **4096**.
+     * Received data, in bytes. The maximum value is **4194304**.
      *
      * @syscap SystemCapability.DistributedSched.AppCollaboration
      * @stagemodelonly

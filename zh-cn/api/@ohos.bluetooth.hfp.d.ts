@@ -43,9 +43,10 @@ declare namespace hfp {
    * 话音频连接状态。典型应用场景包括车载信息娱乐系统的蓝牙通话功能、平板电脑蓝牙通话等，本端设备作为音频网关（AG）角色管理通话音频路由。
    *
    * @returns { HandsFreeAudioGatewayProfile } 返回HFP AG实例，可用于获取和其他设备间的蓝牙通话音频连接状态等操作。
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @since 10 dynamic
    * @since 23 static
@@ -57,17 +58,20 @@ declare namespace hfp {
    * 场景包括蓝牙耳机的免提通话功能、车载免提系统等，本端设备作为免提（HF）角色接收和处理通话音频。
    *
    * @returns { HandsFreeHfProfile } 返回HF实例，可用于获取和其他设备间的蓝牙通话音频连接状态等操作。
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   function createHfpHfProfile(): HandsFreeHfProfile;
 
   /**
    * 该实例表示蓝牙通话音频中的HFP AG角色‌。
-   * 
+   *
    * - 该类继承于[BaseProfile]{@link hfp.BaseProfile}，因此可以使用其父类中的方法。
    * - 使用该类的接口前，需通过[createHfpAgProfile]{@link hfp.createHfpAgProfile}接口构造该类的实例。
    * - 和该实例角色相对应的是HF角色。
@@ -79,18 +83,24 @@ declare namespace hfp {
   interface HandsFreeAudioGatewayProfile extends BaseProfile {
     /**
      * 连接设备的HFP服务。例如，在车载通话、蓝牙耳机等免提通话场景中，可通过此接口主动建立与远端设备的HFP连接。
-     * 
+     *
      * 需要通过
      * [on('connectionStateChange')]{@link @ohos.bluetooth.baseProfile:BaseProfile.on(type: 'connectionStateChange', callback: Callback<StateChangeParam>)}
      * 接口注册回调，来感知设备的HFP Profile的连接状态变化。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - 远端设备的MAC地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -104,18 +114,24 @@ declare namespace hfp {
 
     /**
      * 断开连接设备的HFP服务。例如，在用户主动断开蓝牙耳机或车载设备的免提通话连接时使用。
-     * 
+     *
      * 需要通过
      * [on('connectionStateChange')]{@link @ohos.bluetooth.baseProfile:BaseProfile.on(type: 'connectionStateChange', callback: Callback<StateChangeParam>)}
      * 接口注册回调，来感知设备的HFP Profile的连接状态变化。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - 远端设备的MAC地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-     *     2. Incorrect parameter types. 3. Parameter verification failed.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+     *     <br>1. Mandatory parameters are left unspecified;
+     *     <br>2. Incorrect parameter types;
+     *     <br>3. Parameter verification failed.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -130,7 +146,7 @@ declare namespace hfp {
 
   /**
    * 该实例表示蓝牙通话音频中的HF角色‌。
-   * 
+   *
    * - 该类继承于[BaseProfile]{@link hfp.BaseProfile}，因此可以使用其父类中的方法。
    * - 使用该类的接口前，需通过[createHfpHfProfile]{@link hfp.createHfpHfProfile}接口构造该类的实例。
    * - 和该实例角色相对应的是HFP AG角色。
@@ -138,21 +154,25 @@ declare namespace hfp {
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @stagemodelonly
    * @since 26.0.0 dynamic
-   * @since 26.0.1 static
+   * @since 26.1.0 static
    */
   interface HandsFreeHfProfile extends BaseProfile {
     /**
      * 连接设备的HFP服务。例如，在蓝牙耳机或车载设备需要主动连接手机以进行免提通话时使用。
-     * 
+     *
      * 需要通过
      * [on('connectionStateChange')]{@link @ohos.bluetooth.baseProfile:BaseProfile.on(type: 'connectionStateChange', callback: Callback<StateChangeParam>)}
      * 接口注册回调，感知设备的HFP Profile的连接状态变化。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - 远端设备的MAC地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -161,22 +181,26 @@ declare namespace hfp {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     connect(deviceId: string): void;
 
     /**
      * 断开连接设备的HFP服务。
-     * 
+     *
      * 需要通过
      * [on('connectionStateChange')]{@link @ohos.bluetooth.baseProfile:BaseProfile.on(type: 'connectionStateChange', callback: Callback<StateChangeParam>)}
      * 接口注册回调，感知设备的HFP Profile的连接状态变化。
      *
      * @permission ohos.permission.ACCESS_BLUETOOTH
      * @param { string } deviceId - 远端设备的MAC地址，例如："XX:XX:XX:XX:XX:XX"。
-     * @throws { BusinessError } 201 - Permission denied.
-     * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-     * @throws { BusinessError } 801 - Capability not supported.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+     *     <br>1. The hardware does not support the capability;
+     *     <br>2. The chip does not support the capability;
+     *     <br>3. A dependent service feature is not supported.
      * @throws { BusinessError } 2900001 - Service stopped.
      * @throws { BusinessError } 2900003 - Bluetooth disabled.
      * @throws { BusinessError } 2900004 - Profile not supported.
@@ -185,7 +209,7 @@ declare namespace hfp {
      * @systemapi
      * @stagemodelonly
      * @since 26.0.0 dynamic
-     * @since 26.0.1 static
+     * @since 26.1.0 static
      */
     disconnect(deviceId: string): void;
   }

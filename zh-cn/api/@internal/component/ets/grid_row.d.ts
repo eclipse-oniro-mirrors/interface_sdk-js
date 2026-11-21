@@ -316,7 +316,7 @@ declare enum BreakpointsReference {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  WindowSize = 0,
+  WindowSize,
 
   /**
    * 以容器为参照。断点计算基于GridRow组件自身尺寸，适用于需要根据组件容器尺寸变化进行响应式布局的场景，例如GridRow嵌套在其他容器中时。
@@ -327,7 +327,7 @@ declare enum BreakpointsReference {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  ComponentSize = 1
+  ComponentSize,
 }
 
 /**
@@ -363,7 +363,7 @@ declare enum GridRowDirection {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  Row = 0,
+  Row,
 
   /**
    * 栅格元素按照逆序行方向排列，适用于RTL（从右到左）语言布局或需要反向排列的场景。
@@ -374,7 +374,7 @@ declare enum GridRowDirection {
    * @atomicservice [since 11]
    * @since 9 dynamic
    */
-  RowReverse = 1
+  RowReverse,
 }
 
 /**

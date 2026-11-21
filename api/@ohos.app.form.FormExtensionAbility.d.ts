@@ -44,7 +44,6 @@ import { Configuration } from './@ohos.app.ability.Configuration';
  * <p>You must override this callback if you want this ability to return the actual form state. Otherwise,
  * this method returns {@link FormState#DEFAULT} by default.</p>
  *
- * @typedef { function }
  * @param { Want } want - Indicates the description of the form for which the {@link formInfo#FormState}
  *                        is obtained. The description covers the bundle name, ability name, module name,
  *                        form name, and form dimensions.
@@ -59,7 +58,6 @@ type OnAcquireFormStateFn = (want: Want) => formInfo.FormState;
 /**
  * Called when the system shares the form.
  *
- * @typedef { function }
  * @param { string } formId - Indicates the ID of the form.
  * @returns { Record<string, Object> } Returns the wantParams object.
  * @syscap SystemCapability.Ability.Form
@@ -72,7 +70,6 @@ type OnShareFormFn = (formId: string) => Record<string, Object>;
 /**
  * Called when the system acquire the form data.
  *
- * @typedef { function }
  * @param { string } formId - Indicates the ID of the form.
  * @returns { Record<string, Object> } Returns the wantParams object.
  * @syscap SystemCapability.Ability.Form
@@ -85,7 +82,6 @@ type OnAcquireFormDataFn = (formId: string) => Record<string, Object>;
 /**
  * Called when this ability breaks the last link, notifying the provider that the provider process is about to stop.
  *
- * @typedef { function }
  * @syscap SystemCapability.Ability.Form
  * @stagemodelonly
  * @atomicservice

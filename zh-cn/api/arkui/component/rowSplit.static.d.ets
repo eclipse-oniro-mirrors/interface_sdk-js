@@ -60,9 +60,9 @@ export declare interface RowSplitAttribute extends CommonMethod {
      */
     default resizeable(value: boolean | undefined): this;
     /**
-     * Set RowSplit options.
+     * 设置RowSplit选项。
      *
-     * @returns { RowSplitAttribute } Returns the instance of the RowSplitAttribute.
+     * @returns { RowSplitAttribute } 返回RowSplitAttribute实例。
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @unpublished
      * @stagemodelonly

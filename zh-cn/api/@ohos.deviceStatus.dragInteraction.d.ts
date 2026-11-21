@@ -119,9 +119,9 @@ declare namespace dragInteraction {
   function on(type: 'drag', callback: Callback<DragState>): void;
 
   /**
-   * Listens for dragging state change events.
+   * 注册监听拖拽状态。
    *
-   * @param { Callback<DragState> } callback Indicates the callback to receive the changed dragging state.
+   * @param { Callback<DragState> } callback - 回调函数，异步返回拖拽状态消息。
    * @throws {BusinessError} 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Msdp.DeviceStatus.Drag
    * @systemapi Hide this for inner system use.
@@ -145,10 +145,9 @@ declare namespace dragInteraction {
   function off(type: 'drag', callback?: Callback<DragState>): void;
 
   /**
-   * Disables listening for dragging state change events.
+   * 取消监听拖拽状态。
    *
-   * @param { Callback<DragState> } [callback] - Indicates the callback for which listening is disabled. If this
-   *     <br> parameter is not specified, listening will be disabled for all registered callbacks.
+   * @param { Callback<DragState> } [callback] - 需要取消注册的回调函数，若无此参数，则取消当前应用注册的所有回调函数。
    * @throws {BusinessError} 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Msdp.DeviceStatus.Drag
    * @systemapi Hide this for inner system use.

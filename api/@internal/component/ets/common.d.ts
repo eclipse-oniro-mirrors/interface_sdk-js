@@ -974,6 +974,7 @@ declare class WritableSystemEnvKey<T> extends SystemEnvKey<T> {}
  * @since 26.0.0 dynamic
  */
 declare class ReadonlySystemEnvKey<T> extends SystemEnvKey<T> {}
+
 /**
  * Defines the type of the key for a custom environment variable.
  *
@@ -5189,7 +5190,7 @@ declare interface ScaleOptions {
 }
 
 /**
- * Defines the vertical align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the vertical direction.
  *
  * @interface VerticalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5201,90 +5202,36 @@ declare interface ScaleOptions {
  */
 declare interface VerticalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { ?string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
    *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
   
   /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
-   *
-   * @type { VerticalAlign }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Sets the vertical alignment relative to the anchor component.
+   * Vertical alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { VerticalAlign }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: VerticalAlign;
 }
 
 /**
- * Defines the horizontal align rule of relative container.
+ * Defines the alignment rule for child components in a relative layout component in the horizontal direction.
  *
  * @interface HorizontalAlignParam
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -5296,83 +5243,30 @@ declare interface VerticalAlignParam {
  */
 declare interface HorizontalAlignParam {
   /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Specifies the anchor component.
-   *
-   * @type { string } anchor
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Specifies the anchor component
+   * ID of the component that serves as the anchor.
    *
    * Anonymous Object Rectification
+   *
    * @type { string } anchor
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   anchor: string;
 
   /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Sets the horizontal alignment relative to the anchor component.
-   *
-   * @type { HorizontalAlign } align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-   /**
-    * Sets the horizontal alignment relative to the anchor component.
+   * Horizontal alignment mode relative to the anchor component.
    *
    * Anonymous Object Rectification
    *
    * @type { HorizontalAlign } align
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
+   * @crossplatform [since 10]
    * @form
-   * @atomicservice
-   * @since 23 dynamic
+   * @atomicservice [since 11]
+   * @since 9 dynamic
    */
   align: HorizontalAlign;
 }
@@ -14681,6 +14575,19 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.0.1 dynamiconly
    */
   closeButtonMaterial?: SystemUiMaterial;
+
+  /**
+   * Set the touch follow mode of the semi-modal page.
+   * -FOLLOW_ANCHOR: Place the bindSheet near the last component to be interacted.
+   * -FOLLOW_GRIP_HAND: The layout follows the grip.
+   * -NONE: Retain the current layout.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  adaptToHandedness?: HandednessFollowMode;
 }
 
 /**
@@ -14752,11 +14659,6 @@ declare interface SheetTitleBarBackgroundBlurOptions {
    * Base color of the gradient mask.
    * This color serves as the maximum color at the top of the mask.
    * The system applies a built-in transparency curve to gradually fade it from top to bottom.
-   * When not set:
-   * on mid-to-high-performance devices: #CCF1F3F5 is used in light mode,
-   * and #66202224 is used in dark mode.
-   * On low-performance devices: #F2F1F3F5 is used in light mode,
-   * and #E5202224 is used in dark mode.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @systemapi
@@ -20376,33 +20278,14 @@ declare interface BackgroundOptions {
   /**
    * Set the alignment of the custom background and component.
    *
-   * @type { ?Alignment} align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Set the alignment of the custom background and component.
-   *
-   * @type { ?Alignment} align
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Set the alignment of the custom background and component.
-   * 
    * Anonymous Object Rectification.
    * @type { ?Alignment }
-   * @default Alignment.Center
+   * @default Alignment.Center [since 20]
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   align?: Alignment;
   /**
@@ -20481,10 +20364,10 @@ declare class CommonMethod<T> {
    *
    * >  **NOTE**
    * >
-   * >  - In the [TextInput](./ts-basic-components-textinput.md) component, setting width to **auto** means
+   * >  - In the [TextInput]{@link @global:TextInput} component, setting width to **auto** means
    * >    adapting to the text width.
    * >
-   * >  - In the [AlphabetIndexer](./ts-container-alphabet-indexer.md) component, setting **width** to
+   * >  - In the [AlphabetIndexer]{@link @global:AlphabetIndexer} component, setting **width** to
    * >    **auto** means adapting to the width of the largest index item.
    * >
    * >  - In the [Row]{@link @global:Row}, [Column]{@link @global:Column}, and [RelativeContainer]{@link @global:RelativeContainer}
@@ -20860,6 +20743,24 @@ declare class CommonMethod<T> {
   hitTestBehavior(value: HitTestMode): T;
 
   /**
+   * Sets the input control level for Agent-generated events on the component.
+   *
+   * Agent-generated events include events generated by a System Agent and events injected by an application
+   * with the ohos.permission.CONTROL_COMPONENT permission. The setting applies to supported Agent-generated
+   * input events, such as touch and mouse events. It does not affect user-generated input events or other
+   * injected events.
+   *
+   * @param { AgentControlMode | undefined } value - Input control level for System Agent-generated events.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  agentControlMode(value: AgentControlMode | undefined): T;
+
+  /**
    * Allows the current component to customize the hit test and control child component behavior during the test by
    * setting a callback.
    *
@@ -21050,44 +20951,21 @@ declare class CommonMethod<T> {
   margin(value: Margin | Length | LocalizedMargin): T;
 
   /**
-   * Sets the background color of the component.
-   *
-   * @param { CustomBuilder } builder - Custom background.
-   * @param { object } options - Alignment mode between the custom background and the component.
-   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
-   *     <br>They will all take effect, with **background** at the top layer.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @since 10
-   */
-  /**
-   * Sets the background color of the component.
-   *
-   * @param { CustomBuilder } builder - Custom background.
-   * @param { object } options - Alignment mode between the custom background and the component.
-   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
-   *     <br>They will all take effect, with **background** at the top layer.
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @crossplatform
-   * @atomicservice
-   * @since 11
-   */
-  /**
    * Add a background for the component.
    *
    * Anonymous Object Rectification.
-   * @param { CustomBuilder | ResourceColor } content
-   * @param { BackgroundOptions } [options]
+   * @param { CustomBuilder } builder - Custom background. [since 10 - 19]
+   * @param { CustomBuilder | ResourceColor } content [since 20]
+   * @param { object } options - Alignment mode between the custom background and the component.
+   *     <br>If **background**, **backgroundColor**, and **backgroundImage** are set at the same time
+   *     <br>They will all take effect, with **background** at the top layer. [since 10 - 19]
+   * @param { BackgroundOptions } [options] [since 20]
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
-   * @atomicservice
-   * @since 20 dynamic
+   * @atomicservice [since 11]
+   * @since 10 dynamic
    */
   background(content: CustomBuilder | ResourceColor, options?: BackgroundOptions): T;
 
@@ -21097,37 +20975,10 @@ declare class CommonMethod<T> {
    * @param { ResourceColor } value
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background color
-   *
-   * @param { ResourceColor } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundColor(value: ResourceColor): T;
 
@@ -21217,60 +21068,15 @@ declare class CommonMethod<T> {
    * Background image
    * src: Image address url
    *
-   * @param { ResourceStr } src
+   * @param { ResourceStr } src [since 7 - 11]
+   * @param { ResourceStr | PixelMap } src [since 12]
    * @param { ImageRepeat } repeat
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11
-   */
-  /**
-   * Background image
-   * src: Image address url
-   *
-   * @param { ResourceStr | PixelMap } src
-   * @param { ImageRepeat } repeat
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 12 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImage(src: ResourceStr | PixelMap, repeat?: ImageRepeat): T;
 
@@ -21292,40 +21098,13 @@ declare class CommonMethod<T> {
   /**
    * Background image size
    *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image size
-   *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image size
-   *
-   * @param { SizeOptions | ImageSize } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image size
-   *
    * @param { SizeOptions | ImageSize } value - The width and height of the background image.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImageSize(value: SizeOptions | ImageSize): T;
 
@@ -21336,40 +21115,10 @@ declare class CommonMethod<T> {
    * @param { Position | Alignment } value
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @since 7
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @form
-   * @since 9
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @since 10
-   */
-  /**
-   * Background image position
-   * x:Horizontal coordinate;y:Vertical axis coordinate.
-   *
-   * @param { Position | Alignment } value
-   * @returns { T }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @crossplatform
-   * @form
-   * @atomicservice
-   * @since 11 dynamic
+   * @crossplatform [since 10]
+   * @form [since 9]
+   * @atomicservice [since 11]
+   * @since 7 dynamic
    */
   backgroundImagePosition(value: Position | Alignment): T;
 
@@ -23631,15 +23380,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)  
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23666,15 +23413,13 @@ declare class CommonMethod<T> {
    *     <br>z: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>**NOTE**
    *     <br>When the component is translated along the z-axis, the position of the observation point remains
    *     unchanged. As such, the component appears larger when the value of **z** places it closer to the observation
    *     point and smaller when the
    *     value of **z** places it further away from the observation point.
-   *     <br>!
-   *     [coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
+   *     <br>![coordinateNode](docroot://reference/apis-arkui/arkui-ts/figures/coordinateNote.png)
    *     <br>If **translate** is
    *     **undefined**, the component reverts to its original state with no translation.
    * @returns { T } Current component.
@@ -23803,8 +23548,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -23834,8 +23578,7 @@ declare class CommonMethod<T> {
    *     <br>perspective: 0
    *     <br>}
    *     <br>Unit: vp
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
@@ -23881,8 +23624,7 @@ declare class CommonMethod<T> {
    *     <br>centerZ: 0,
    *     <br>perspective: 0
    *     <br>}
-   *     <br>!
-   *     [coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
+   *     <br>![coordinates](docroot://reference/apis-arkui/arkui-ts/figures/coordinates.png)
    *     <br>If **options** is
    *     **undefined**, the component reverts to its original state with no rotation.
    * @returns { T } Current component.
@@ -28968,6 +28710,16 @@ declare type Theme = import('../api/@ohos.arkui.theme').Theme;
 declare type PromptActionDialogController = import('../api/@ohos.promptAction').promptAction.DialogController;
 
 /**
+ * Import the HandednessFollowMode type from a dialog.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare type HandednessFollowMode = import('../api/@ohos.arkui.dialog').HandednessFollowMode;
+
+/**
  * Custom Component
  *
  * @extends CommonAttribute [since 7 - 17]
@@ -30246,9 +29998,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
    *
    * @param { boolean | undefined } enabled - Whether to support scrolling by dragging with the left mouse button 
    *    pressed.
-   *    <br>Default value: For API versions earlier than 26.1.0,the defalut value is false.
-   *    For API versions 26.1.0 and later, the defalut value is true when the scrollable component scrolls
-   *    horizontally,false otherwise.
+   *    <br>true: Supports dragging to scroll with the left mouse button pressed.
+   *    <br>false: Not support dragging to scroll with the left mouse button pressed.
+   *    <br>undefined: When first set to undefined, the default value is used. When set to undefined subsequently, 
+   *    the previous setting remains unchanged.
+   *    <br>Default value: For API versions earlier than 26.1.0, the default value is false.
+   *    For API versions 26.1.0 and later, the default value is true when the scrollable component scrolls
+   *    horizontally, false otherwise.
    * @returns { T } Current scrollable component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -30609,11 +30365,13 @@ declare class ScrollableCommonMethod<T> extends CommonMethod<T> {
   scrollBarHeight(height: LengthMetrics | undefined): T;
 
   /**
-   * Sets whether to enable scrolling with keyboard arrow keys. When enabled, the component will scroll
-   * in response to arrow key presses when focused but not in active focus state.
+   * Sets whether the scrolling component supports scrolling by arrow keys. After this function is enabled, the
+   * scrolling component responds to the arrow keys on the keyboard when the focus is obtained and the focus is not
+   * activated. If this parameter is not set, scrolling by arrow keys is not supported by default.
    *
-   * @param { boolean | undefined } enabled - Whether to enable scrolling with keyboard arrow keys.
-   *     <br>Default value: true.
+   * @param { boolean | undefined } enabled - Indicates whether to support scrolling by arrow keys on the keyboard.
+   *     <br/>true: scrolling is supported. <br/>false: scrolling is not supported. <br/>undefined: scrolling is not
+   *     supported.
    * @returns { T }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -30934,6 +30692,7 @@ declare class DynamicNode<T> {
    * @since 20 dynamic
    */
   onMove(handler: Optional<OnMoveHandler>, eventHandler: ItemDragEventHandler): T;
+}
   
 /**
  * Implements an object used to configure the
@@ -31157,6 +30916,7 @@ declare interface EditModeOptions {
   /**
    * Define whether to gather selected items in grid or list when item is long pressed for context menu.
    *
+   * @type { ?boolean }
    * @default false
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31173,6 +30933,7 @@ declare interface EditModeOptions {
    * Returning true means using the number of selected items within the display range.
    * Returning a number to include selected items outside the display range.
    *
+   * @type { ?OnGetPreviewBadgeCallback } onGetPreviewBadge
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -31187,6 +30948,7 @@ declare interface EditModeOptions {
    * multi-select state.
    * {@code false} indicates that there is no default style after entering the multi-select state.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31201,6 +30963,7 @@ declare interface EditModeOptions {
    * {@code true} indicates that two-finger swiping can enter edit mode and perform multi-selection.
    * {@code false} indicates that two-finger swiping cannot perform multi-selection.
    *
+   * @type { ?boolean }
    * @default true
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -31239,7 +31002,7 @@ declare interface BackgroundBrightnessOptions {
    * 
    * Default value: **0.0**
    * 
-   * Value range: (0.0, +∞)
+   * Value range: [0.0, +∞)
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -32795,4 +32558,73 @@ declare interface SmartGestureShortcutOptions {
    * @since 26.0.0 dynamic
    */
   selectable?: boolean;
+}
+
+/**
+ * Defines the text style shared by DatePickerComponent and UIPickerComponent.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface PickerComponentTextStyle {
+  /**
+   * Font color.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  color?: ResourceColor;
+
+  /**
+   * Text style. Only size and weight are supported.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  font?: Font;
+
+  /**
+   * Minimum font size for the text. Used with maxFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see minFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  minFontSize?: number | ResourceStr;
+
+  /**
+   * Maximum font size for the text. Used with minFontSize to enable font scaling. When both minFontSize and
+   * maxFontSize are set, the size property in font is ignored. For details, see maxFontSize of TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  maxFontSize?: number | ResourceStr;
+
+  /**
+   * Text overflow behavior. This property has no effect when set to MARQUEE. For details, see textOverflow of
+   * TextAttribute.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  overflow?: TextOverflow;
 }

@@ -206,7 +206,7 @@ declare interface RoundedRectOptions {
  * >
  * > Since API version 20, this component supports using the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class to update constructor parameters.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class to update constructor parameters.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -367,7 +367,7 @@ declare class RectAttribute extends CommonShapeMethod<RectAttribute> {
  * >
  * > Since API version 20, this component supports using the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class to update constructor parameters.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class to update constructor parameters.
  *
  * ###### Child Components
  *

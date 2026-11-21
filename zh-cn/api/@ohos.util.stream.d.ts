@@ -75,7 +75,7 @@ declare namespace stream {
    */
   class Writable {
     /**
-     * **Writable**的构造函数。
+     * Writable的构造函数。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -86,12 +86,12 @@ declare namespace stream {
     constructor();
 
     /**
-     * 将数据写入流的缓冲区中。数据写入缓冲区后，当缓冲区数据被消耗时，会自动调用doWrite()将数据写出。使用callback异步回调。
+     * 将数据写入流的缓冲区中。数据写入缓冲区后，当缓冲区数据被消耗时，会自动调用[doWrite()]{@link stream.Writable.doWrite}将数据写出。使用callback异步回调。
      *
      * @param { string | Uint8Array } [chunk] - 需要写入的数据。默认值为undefined。当前版本不支持传入null、undefined和空字符串，会抛出异常。
-     * @param { string } [encoding] - 字符编码类型。默认值是**'utf8'**，当前版本支持**'utf8'**、**'gb18030'**、**'gbk'**以及**'gb2312'**。
+     * @param { string } [encoding] - 字符编码类型。默认值是'utf8'，当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
      * @param { Function } [callback] - 回调函数，用于在数据写入完成后执行特定逻辑。传入callback时，数据写入缓冲区后会调用该回调函数；不传入时，不调用回调函数。
-     * @returns { boolean } 可写流的缓冲区中是否还有空间。**true**表示缓冲区还有空间，**false**表示流的内部缓冲区数据量已达到设定水位线，不建议继续写入以避免内存溢出。
+     * @returns { boolean } 可写流的缓冲区中是否还有空间。true表示缓冲区还有空间，false表示流的内部缓冲区数据量已达到设定水位线，不建议继续写入以避免内存溢出。
      * @throws { BusinessError } 10200035 - The doWrite method has not been implemented.
      * @throws { BusinessError } 10200036 - The stream has been ended.
      * @throws { BusinessError } 10200037 - The callback is invoked multiple times consecutively.
@@ -104,11 +104,11 @@ declare namespace stream {
     write(chunk?: string | Uint8Array, encoding?: string, callback?: Function): boolean;
 
     /**
-     * 结束可写流的写入过程。如果**writableCorked**的值大于0，则将其置为**0**，并输出缓冲区中的剩余数据。如果传入**chunk**参数且不为空，则将其视为最后一个数据块，根据当前执行上下文使用**write**或**doWrite** API写入。如果使用**doWrite**写入，**encoding**参数的有效性检查由**doWrite**决定。如果单独使用**end**（不使用**write**）且传入**chunk**参数，则数据通过**doWrite**写入。使用异步回调返回结果。
+     * 结束可写流的写入操作。如果属性writableCorked的值大于0，会将该属性的值置0，并输出缓冲区剩余数据。如果传入chunk参数且不为空值时，则根据实际运行情况，通过write或者doWrite将其作为最后一块数据写入。其中通过doWrite写入时，encoding参数的合法性检查依赖doWrite。end单独使用（不使用write）并传入chunk参数的情况下，必然通过doWrite写入。使用callback异步回调。
      *
-     * @param { string | Uint8Array } [chunk] - 待写入的数据。默认值为**undefined**。
-     * @param { string } [encoding] - 编码格式。默认值为**'utf8'**。目前支持**'utf8'**、**'gb18030'**、**'gbk'**和**'gb2312'**。
-     * @param { Function } [callback] - 用于返回结果的回调函数。传入时异步调用，不传入时，不调用回调函数。
+     * @param { string | Uint8Array } [chunk] - 需要写入的数据。默认值为undefined。
+     * @param { string } [encoding] - 字符编码类型。默认值是'utf8'，当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
+     * @param { Function } [callback] - 回调函数。传入时异步调用，不传入时，不调用回调函数。
      * @returns { Writable } 返回当前可写流对象。
      * @throws { BusinessError } 10200035 - The doWrite method has not been implemented.
      * @syscap SystemCapability.Utils.Lang
@@ -133,7 +133,7 @@ declare namespace stream {
     setDefaultEncoding(encoding?: string): boolean;
 
     /**
-     * 强制将后续写入的数据缓存起来。调用此API可优化连续写入操作的性能。调用此API后，**writableCorked**的值加1。建议与[uncork()]{@link stream.Writable.uncork}配合使用。
+     * 使后续写入的数据强制写入缓冲区，优化连续写入操作的性能。使用后属性writableCorked的值会加一。建议和[uncork()]{@link stream.Writable.uncork}成对使用。
      *
      * @returns { boolean } 返回设置cork状态是否成功。true表示成功，false表示失败。
      * @syscap SystemCapability.Utils.Lang
@@ -145,7 +145,7 @@ declare namespace stream {
     cork(): boolean;
 
     /**
-     * 释放cork状态，刷新缓冲区中的数据并写入目标位置。调用此API后，**writableCorked**的值减1。如果值变为**0**，则流不再处于cork状态；否则，流仍处于cork状态。建议与[cork()]{@link stream.Writable.cork}配合使用。
+     * 解除cork状态，解除后刷新缓冲区数据并写入目标位置。使用后属性writableCorked的值会减一，如果该值降为0，则解除cork状态，否则流依然处于cork状态。建议和[cork()]{@link stream.Writable.cork}成对使用。
      *
      * @returns { boolean } 返回解除cork状态是否成功。true表示成功，false表示失败。
      * @syscap SystemCapability.Utils.Lang
@@ -159,11 +159,11 @@ declare namespace stream {
     /**
      * 注册事件处理函数来监听可写流上的不同事件。
      *
-     * @param { string } event - 事件回调类型，支持的事件包括：'close' | 'drain' | 'error' | 'finish'。
-     *     - 'close'：完成end()调用，结束写入操作，触发该事件。
-     *     - 'drain'：在可写流缓冲区中数据清空时触发该事件。
-     *     - 'error'：在可写流发生异常时触发该事件。
-     *     - 'finish'：在数据缓冲区全部写入到目标后触发该事件。
+     * @param { string } event - 事件回调类型，支持的事件包括：`'close'` | `'drain'` | `'error'` | `'finish'` 。
+     *     - `'close'`：完成[end()]{@link stream.Writable.end}调用，结束写入操作，触发该事件。
+     *     - `'drain'`：在可写流缓冲区中数据清空时触发该事件。
+     *     - `'error'`：在可写流发生异常时触发该事件。
+     *     - `'finish'`：在数据缓冲区全部写入到目标后触发该事件。
      * @param { Callback<emitter.EventData> } callback - 回调函数，返回事件传输的数据。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -185,13 +185,13 @@ declare namespace stream {
     on(event: string, callback: Function): void;
 
     /**
-     * 移除通过on注册的事件处理函数。
+     * 移除通过[on]{@link stream.Writable#on(event: string, callback: Callback<emitter.EventData>)}注册的事件处理函数。
      *
-     * @param { string } event - 事件回调类型，支持的事件包括：'close' | 'drain' | 'error' | 'finish'。
-     *     - 'close'：完成end()调用，结束写入操作，触发该事件。
-     *     - 'drain'：在可写流缓冲区中数据清空时触发该事件。
-     *     - 'error'：在可写流发生异常时触发该事件。
-     *     - 'finish'：在数据缓冲区全部写入到目标后触发该事件。
+     * @param { string } event - 事件回调类型，支持的事件包括：`'close'` | `'drain'` | `'error'` | `'finish'` 。
+     *     - `'close'`：完成[end()]{@link stream.Writable.end}调用，结束写入操作，触发该事件。
+     *     - `'drain'`：在可写流缓冲区中数据清空时触发该事件。
+     *     - `'error'`：在可写流发生异常时触发该事件。
+     *     - `'finish'`：在数据缓冲区全部写入到目标后触发该事件。
      * @param { Callback<emitter.EventData> } [callback] - 指定事件的要注销的回调函数。不传入时注销指定事件的所有回调函数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -213,7 +213,7 @@ declare namespace stream {
     off(event: string, callback?: Function): void;
 
     /**
-     * 需要由开发者实现此API，但不要直接调用。此API在可写流初始化期间自动调用。使用异步回调返回结果。
+     * 开发者实现这个函数。该函数在可写流初始化阶段被调用，无需手动触发。使用callback异步回调。
      *
      * @param { Function } callback - 回调函数。
      * @syscap SystemCapability.Utils.Lang
@@ -340,7 +340,7 @@ declare namespace stream {
    */
   class Readable {
     /**
-     * 创建**Readable**对象的构造函数。
+     * Readable的构造函数。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -351,7 +351,7 @@ declare namespace stream {
     constructor();
 
     /**
-     * 创建**Readable**对象的构造函数。
+     * Readable的构造函数。
      *
      * @param { ReadableOptions } options - Readable构造函数的选项信息。
      * @syscap SystemCapability.Utils.Lang
@@ -363,7 +363,7 @@ declare namespace stream {
     constructor(options: ReadableOptions);
 
     /**
-     * 从可读流的缓冲区中读取数据，并返回读取的数据。如果没有读取到数据，则返回**null**。
+     * 从可读流缓冲区读取数据，并返回读取到的数据，如果未读取到数据，则返回null。
      *
      * @param { number } size - 读取数据的字节数。默认为undefined。
      * @returns { string | null } 从可读流缓冲区读取出的数据。如果未读取到数据，则返回null。
@@ -390,7 +390,7 @@ declare namespace stream {
     read(size?: int): buffer.Buffer | string | null;
 
     /**
-     * 恢复已显式暂停的可读流。可以使用**isPaused**检查流是否已暂停。
+     * 将流的读取模式从暂停切换到流动模式，可用接口isPaused判断是否已切换。
      *
      * @returns { Readable } 当前可读流本身。
      * @syscap SystemCapability.Utils.Lang
@@ -402,7 +402,7 @@ declare namespace stream {
     resume(): Readable;
 
     /**
-     * 暂停流动模式下的可读流。可以使用**isPaused**检查流是否已暂停。
+     * 将流的读取模式从流动切换到暂停模式，可用接口isPaused判断是否已切换。
      *
      * @returns { Readable } 当前可读流本身。
      * @syscap SystemCapability.Utils.Lang
@@ -415,7 +415,7 @@ declare namespace stream {
 
     /**
      * 设置可读流的字符编码类型。
-     * 当缓冲区有数据时，不允许设置字符编码类型，返回值为**false**。
+     * 当缓冲区有数据时，不允许设置字符编码类型，返回值为false。
      *
      * @param { string } [encoding] - 需要设置的字符编码类型。默认值是'utf8'，当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
      * @returns { boolean } 返回是否设置成功。true表示设置成功，false表示设置失败。
@@ -428,7 +428,7 @@ declare namespace stream {
     setEncoding(encoding?: string): boolean;
 
     /**
-     * 检查可读流是否已暂停。流在调用[pause()]{@link stream.Readable.pause}后暂停，在调用[resume()]{@link stream.Readable.resume}后从暂停状态恢复。
+     * 检查流是否处于暂停模式，调用[pause()]{@link stream.Readable.pause}后，返回值为true；调用[resume()]{@link stream.Readable.resume}后，返回值为false。
      *
      * @returns { boolean } 返回流是否处于暂停模式。true表示流处于暂停模式，false表示流未处于暂停模式。
      * @syscap SystemCapability.Utils.Lang
@@ -440,7 +440,7 @@ declare namespace stream {
     isPaused(): boolean;
 
     /**
-     * 将一个可写流附加到可读流上，以实现数据的自动传输。
+     * 将一个可读流与一个可写流连接起来，实现数据的自动传输。
      *
      * @param { Writable } destination - 接收数据的可写流。
      * @param { Object } [options] - 预留字段，暂不支持使用。
@@ -454,7 +454,7 @@ declare namespace stream {
     pipe(destination: Writable, options?: Object): Writable;
 
     /**
-     * 将之前附加到可读流的可写流分离。
+     * 从可写流中移除所有或指定的已连接的可读流。
      *
      * @param { Writable } [destination] - 从当前可写流中移除指定的这个可读流。默认为undefined。
      * @returns { Readable } 返回当前可读流对象。
@@ -469,14 +469,14 @@ declare namespace stream {
     /**
      * 注册事件处理函数来监听可读流上的不同事件。
      *
-     * @param { string } event - 事件回调类型，支持的事件包括：'close' | 'data' | 'end' | 'error' | 'readable' | 'pause' | 'resume'。
-     *     - 'close'：完成push()调用，传入null值，触发该事件。
-     *     - 'data'：当流传递给消费者一个数据块时触发该事件。
-     *     - 'end'：完成push()调用，传入null值，触发该事件。
-     *     - 'error'：流发生异常时触发。
-     *     - 'readable'：当有可从流中读取的数据时触发该事件。
-     *     - 'pause'：完成pause()调用，触发该事件。
-     *     - 'resume'：完成resume()调用，触发该事件。
+     * @param { string } event - 事件回调类型，支持的事件包括：`'close'` | `'data'` | `'end'` | `'error'` | `'readable'` | `'pause'` | `'resume'` 。
+     *     - `'close'`：可读流关闭，发生error事件或end事件后触发该事件。
+     *     - `'data'`：当流传递给消费者一个数据块时触发该事件。
+     *     - `'end'`：完成[push()]{@link stream.Readable.push}调用，传入null值，触发该事件。
+     *     - `'error'`：流发生异常时触发。
+     *     - `'readable'`：当有可从流中读取的数据时触发该事件。
+     *     - `'pause'`：完成[pause()]{@link stream.Readable.pause}调用，触发该事件。
+     *     - `'resume'`：完成[resume()]{@link stream.Readable.resume}调用，触发该事件。
      * @param { Callback<emitter.EventData> } callback - 回调函数，返回事件数据。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -498,16 +498,16 @@ declare namespace stream {
     on(event: string, callback: Function): void;
 
     /**
-     * 移除通过on注册的事件处理函数。
+     * 移除通过[on]{@link stream.Readable#on(event: string, callback: Callback<emitter.EventData>)}注册的事件处理函数。
      *
-     * @param { string } event - 事件回调类型，支持的事件包括：'close' | 'data' | 'end' | 'error' | 'readable' | 'pause' | 'resume'。
-     *     - 'close'：完成push()调用，传入null值，触发该事件。
-     *     - 'data'：当流传递给消费者一个数据块时触发该事件。
-     *     - 'end'：完成push()调用，传入null值，触发该事件。
-     *     - 'error'：流发生异常时触发。
-     *     - 'readable'：当有可从流中读取的数据时触发该事件。
-     *     - 'pause'：完成pause()调用，触发该事件。
-     *     - 'resume'：完成resume()调用，触发该事件。
+     * @param { string } event - 事件回调类型，支持的事件包括：`'close'` | `'data'` | `'end'` | `'error'` | `'readable'` | `'pause'` | `'resume'` 。
+     *     - `'close'`：可读流关闭，发生error事件或end事件后触发该事件。
+     *     - `'data'`：当流传递给消费者一个数据块时触发该事件。
+     *     - `'end'`：完成[push()]{@link stream.Readable.push}调用，传入null值，触发该事件。
+     *     - `'error'`：流发生异常时触发。
+     *     - `'readable'`：当有可从流中读取的数据时触发该事件。
+     *     - `'pause'`：完成[pause()]{@link stream.Readable.pause}调用，触发该事件。
+     *     - `'resume'`：完成[resume()]{@link stream.Readable.resume}调用，触发该事件。
      * @param { Callback<emitter.EventData> } [callback] - 指定事件的要注销的回调函数。不传入时注销指定事件的所有回调函数。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -529,7 +529,7 @@ declare namespace stream {
     off(event: string, callback?: Function): void;
 
     /**
-     * 需要由开发者实现此API。在可读流首次调用[on]{@link stream.Readable#on(event: string, callback: Callback<emitter.EventData>)}时调用此API。使用异步回调返回结果。
+     * 开发者实现这个函数，这个函数在可读流第一次使用[on]{@link stream.Readable#on(event: string, callback: Callback<emitter.EventData>)}监听时被调用。使用callback异步回调。
      *
      * @param { Function } callback - 回调函数。
      * @syscap SystemCapability.Utils.Lang
@@ -541,9 +541,9 @@ declare namespace stream {
     doInitialize(callback: Function): void;
 
     /**
-     * 数据读取API，需在子类中实现。
+     * 数据读取接口，需要在子类中被实现。
      *
-     * @param { int } size - 读取数据的字节数。取值范围：0 <= size <= Number.MAX_VALUE。
+     * @param { int } size - 读取数据的字节数。 取值范围：0 <= size <= Number.MAX_VALUE。
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
      * @atomicservice
@@ -553,7 +553,7 @@ declare namespace stream {
     doRead(size: int): void;
 
     /**
-     * 将数据推入可读流的缓冲区。
+     * 将数据推送到可读流缓冲区中。
      *
      * @param {  Uint8Array | string | null } chunk - 读取的数据。 <br> API version22开始发生兼容性变更，在API version21及之前的版本其类型为：
      * `Uint8Array | string | null`。 [since 12 - 22]
@@ -659,7 +659,7 @@ declare namespace stream {
    */
   class Duplex extends Readable {
     /**
-     * 创建**Duplex**对象的构造函数。
+     * Duplex的构造函数。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -670,10 +670,10 @@ declare namespace stream {
     constructor();
 
     /**
-     * 向流的缓冲区写入数据。使用异步回调返回结果。
+     * 将数据写入流的缓冲区中。使用callback异步回调。
      *
      * @param { string | Uint8Array } [chunk] - 需要写入的数据。默认值为undefined。当前版本不支持传入null、undefined和空字符串，会抛出异常。
-     * @param { string } [encoding] - 编码格式。默认值为**'utf8'**。目前支持**'utf8'**、**'gb18030'**、**'gbk'**和**'gb2312'**。
+     * @param { string } [encoding] - 字符编码类型。默认值是'utf8'，当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
      * @param { Function } [callback] - 回调函数，用于在数据写入完成后执行特定逻辑。传入callback时，数据写入缓冲区后会调用该回调函数；不传入时，不调用回调函数。
      * @returns { boolean } 可写流的缓冲区中是否还有空间。true表示缓冲区还有空间，false表示流的内部缓冲区数据量已达到设定水位线，不建议继续写入，如果连续调用写入函数，数据仍会被添加到缓冲区中，
      * 直到内存溢出为止。
@@ -690,10 +690,10 @@ declare namespace stream {
     write(chunk?: string | Uint8Array, encoding?: string, callback?: Function): boolean;
 
     /**
-     * 结束双工流的写入过程。如果**writableCorked**的值大于0，则将其置为**0**，并输出缓冲区中的剩余数据。如果传入**chunk**参数，则将其视为最后一个数据块，根据当前执行上下文使用**write**或**doWrite** API写入。如果使用**doWrite**写入，**encoding**参数的有效性检查由**doWrite**决定。如果单独使用**end**（不使用**write**）且传入**chunk**参数，则数据通过**doWrite**写入。使用异步回调返回结果。
+     * 结束双工流的写入操作。如果属性writableCorked的值大于0，会将该属性的值置0，并输出缓冲区剩余数据。如果传入chunk参数，则根据实际运行情况，通过write或者doWrite将其作为最后一块数据写入。其中通过doWrite写入时，encoding参数的合法性检查依赖doWrite。end单独使用（不使用write）并传入chunk参数的情况下，必然通过doWrite写入。使用callback异步回调。
      *
      * @param { string | Uint8Array } [chunk] - 需要写入的数据。默认值为undefined。
-     * @param { string } [encoding] - 编码格式。默认值为**'utf8'**。目前支持**'utf8'**、**'gb18030'**、**'gbk'**和**'gb2312'**。
+     * @param { string } [encoding] - 字符编码类型。默认值是'utf8'，当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
      * @param { Function } [callback] - 回调函数。传入时异步调用，不传入时，不调用回调函数。
      * @returns { Writable } 返回可写流对象。
      * @throws { BusinessError } 10200039 - The doTransform method has not been implemented for a class that inherits
@@ -720,7 +720,7 @@ declare namespace stream {
     setDefaultEncoding(encoding?: string): boolean;
 
     /**
-     * 强制将后续写入的数据缓存起来。调用此API可优化连续写入操作的性能。调用此API后，**writableCorked**的值加1。建议与[uncork()]{@link stream.Writable.uncork}配合使用。
+     * 将写入的数据强制写入缓冲区暂存，用来优化连续写入操作的性能。使用后属性writableCorked的值会加一。建议和[uncork()]{@link stream.Writable.uncork}成对使用。
      *
      * @returns { boolean } 返回设置cork状态是否成功。true表示设置成功，false表示设置失败。
      * @syscap SystemCapability.Utils.Lang
@@ -732,7 +732,7 @@ declare namespace stream {
     cork(): boolean;
 
     /**
-     * 释放cork状态，刷新缓冲区中的数据并写入目标位置。调用此API后，**writableCorked**的值减1。如果值变为**0**，则流不再处于cork状态；否则，流仍处于cork状态。建议与[cork()]{@link stream.Writable.cork}配合使用。
+     * 解除cork状态，解除后将缓冲区中的数据全部刷新，并将其写入目标位置。使用后属性writableCorked的值会减一，如果该值降为0，则解除cork状态，否则流依然处于cork状态。建议和[cork()]{@link stream.Writable.cork}成对使用。
      *
      * @returns { boolean } 返回解除cork状态是否成功。true表示成功，false表示失败。
      * @syscap SystemCapability.Utils.Lang
@@ -859,7 +859,7 @@ declare namespace stream {
    */
   class Transform extends Duplex {
     /**
-     * 创建**Transform**对象的构造函数。
+     * Transform的构造函数。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -870,7 +870,7 @@ declare namespace stream {
     constructor();
 
     /**
-     * 转换或处理输入的数据块，并通过回调通知处理完成。
+     * 对输入的数据块进行转换或处理，并通过回调函数通知操作完成。
      *
      * @param { string } chunk - 需要写入的数据。
      * @param { string } encoding - 字符编码类型。当前版本支持'utf8'、'gb18030'、'gbk'以及'gb2312'。
@@ -884,7 +884,7 @@ declare namespace stream {
     doTransform(chunk: string, encoding: string, callback: Function): void;
 
     /**
-     * 在流结束时调用，用于处理剩余数据。使用异步回调返回结果。
+     * 该函数会在流结束时被调用，用于处理剩余的数据。使用callback异步回调。
      *
      * @param { Function } callback - 回调函数。
      * @syscap SystemCapability.Utils.Lang

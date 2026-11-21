@@ -35,7 +35,6 @@ declare namespace netFirewall {
    * > **NOTE**
    * >
    * > If this API is called by multiple applications under the same system user, the latest delivered policy prevails.
-   * > **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
    *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { int } userId - System user ID, which must exist.
@@ -57,11 +56,9 @@ declare namespace netFirewall {
    * Queries the firewall policy for a system user ID, including the firewall switch status and default inbound or
    * outbound behavior (allow or deny). This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NET_FIREWALL
-   *
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - System user ID, which must exist.
-   * @returns { Promise<NetFirewallPolicy> } Promise used to return the result, which is a firewall policy.
+   * @returns { Promise<NetFirewallPolicy> } Promise used to return the firewall policy of the current user.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -78,79 +75,85 @@ declare namespace netFirewall {
    * Adds a firewall rule for the system user ID. The supported rule types are IP, Domain, and DNS. This API uses a
    * promise to return the result.
    *
-   * > **Description**
+   * > **NOTE**
    * >
-   * > 1. The priority of firewall rules is described as follows (there is no requirement on the call sequence of
-   * > [setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy} and
+   * > 1. Firewall rule priority description (no call order is required between
+   * > [setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy} and
    * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule}):
    * >
-   * > - Call [setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy} to set the default policy to **DENY** and call
-   * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule} to add an explicit rule. The priorities of the rules
-   * > are as follows:
+   * > - When [setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy} is called to set the default policy to deny
+   * >   and [addNetFirewallRule]{@link netFirewall.addNetFirewallRule} is called to add explicit rules, the rule
+   * >   priority from high to low is as follows:
    * >
-   * > - Explicit denying rule
+   * > - Explicit deny rule
    * >
-   * > - Explicit allowing rule
+   * > - Explicit allow rule
    * >
-   * > - Default denying policy
+   * > - Default deny policy
    * >
-   * > - Call [setNetFirePolicy]{@link netFirewall.setNetFirewallPolicy} to set the default policy to **ALLOW** and call
-   * > [addNetFirewallRule]{@link netFirewall.addNetFirewallRule} to add an explicit rule. The priorities of the rules
-   * > are as follows:
+   * > - When [setNetFirewallPolicy]{@link netFirewall.setNetFirewallPolicy} is called to set the default policy to
+   * >   allow and [addNetFirewallRule]{@link netFirewall.addNetFirewallRule} is called to add explicit rules, the rule
+   * >   priority from high to low is as follows:
    * >
-   * > - Explicit allowing rule
+   * > - Explicit allow rule
    * >
-   * > - Explicit denying rule
+   * > - Explicit deny rule
    * >
-   * > - Default allowing policy
+   * > - Default allow policy
    * >
-   * > - When the IP address rule and domain name rule of the firewall conflict (the IP of the domain name resolution is
-   * > the same as that in the IP address rule, and the rule behavior conflicts):
+   * > - When a firewall IP rule conflicts with a domain rule (the IP resolved from the domain is the same as the IP in
+   * >   the IP rule, and the rule actions conflict):
    * >
-   * > - If the access is performed using a domain name, the domain name rule has a higher priority than the IP address
-   * > rule and is not affected by the rule of the IP parsed from the domain name.
+   * > - If the access is performed by domain name, the domain rule takes precedence over the IP rule and is not
+   * >   affected by the rule of the IP resolved from the domain.
    * >
-   * > - If the access is performed using an IP address, the following rules are followed:
+   * > - If the access is performed by IP address, the following principles apply:
    * >
-   * > - If the domain name rule allows the access and the domain name resolution has been performed, the IP address
-   * > denying rule or the default denying policy will not take effect, and the access using the IP address will be
-   * > allowed.
+   * > - When the domain rule allows access, neither the IP rule nor the default policy can block the access, and the
+   * >   access by IP address is ultimately allowed.
    * >
-   * > - If the domain name rule allows the access and the domain name resolution has not been performed, the IP address
-   * > denying rule or the default denying policy will take effect, and the access using the IP address will be denied.
+   * > - When the domain rule denies access, the allow action of the IP rule or the default policy still takes effect,
+   * >   and the access by IP address is ultimately allowed.
    * >
-   * > - If the domain name rule denies the access, the IP address allowing rule or the default policy will take effect,
-   * > and the access using the IP address will be allowed.
+   * > - The system identifies domain-based access and IP-based access as follows:
+   * >
+   * > - If the destination IP matches an IP address in the system network-layer domain cache table, the application is
+   * >   considered to access by domain name.
+   * >
+   * > - If the destination IP does not match any IP address in the system network-layer domain cache table, the
+   * >   application is considered to access by IP address.
+   * >
+   * > - The system network layer proactively queries the DNS information configured in the firewall and caches the
+   * >   corresponding IP addresses so that the domain allow rule takes effect.
    * >
    * > 2. Supplementary description of rule types:
    * >
-   * > - When the input parameter **rule.type** of **addNetFirewallRule** is set to **RULE_IP**:
+   * > - When **rule.type** of **addNetFirewallRule** is set to **RULE_IP**:
    * >
-   * > - If **rule.action** is set to **RULE_ALLOW** and **rule.localIps** and **rule.remoteIps** are not configured,
-   * > the rule takes effect as full IP range access is allowed.
+   * > - If **rule.action** is **RULE_ALLOW** and neither **rule.localIps** nor **rule.remoteIps** is configured, the
+   * >   rule takes effect as allowing all IP segments.
    * >
-   * > - If **rule.action** is set to **RULE_DENY** and **rule.localIps** and **rule.remoteIps** are not configured, the
-   * > rule takes effect as full IP range access is denied.
+   * > - If **rule.action** is **RULE_DENY** and neither **rule.localIps** nor **rule.remoteIps** is configured, the
+   * >   rule takes effect as blocking all IP segments.
    * >
-   * > - If **rule.type** of **addNetFirewallRule** is set to **RULE_DOMAIN** and **rule.domains** is not configured,
-   * > the rule does not take effect.
+   * > - When **rule.type** of **addNetFirewallRule** is set to **RULE_DOMAIN**, if **rule.domains** is not configured,
+   * >   the rule does not take effect.
    * >
    * > 3. Description of the upper limit for adding firewall rules:
    * >
-   * > - A maximum of 1000 firewall rules can be added for a single system user ID. If this limit is exceeded, error
-   * > code **29400001** is reported.
+   * > - The upper limit of firewall rules added for a single system user ID is 1000. If this limit is exceeded, error
+   * >   code **29400001** is reported.
    * >
-   * > - A maximum of 2000 firewall rules can be added for all system user IDs. If this limit is exceeded, error code
-   * > **29400001** is reported.
+   * > - The upper limit of the total number of firewall rules added for all system user IDs is 2000. If this limit is
+   * >   exceeded, error code 29400001 is reported.
    * >
-   * > - A maximum of 100 fuzzy domain name rules can be added for all system user IDs. If this limit is exceeded, error
-   * > code **29400005** is reported.
-   * > **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
+   * > - The upper limit of the total number of wildcard domain rules added for all system user IDs is 100. If this
+   * >   limit is exceeded, error code 29400005 is reported.
    *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { NetFirewallRule } rule - Firewall rule.
-   * @returns { Promise<int> } Promise used to return the result, which is the firewall rule ID automatically generated
-   *     by the system.
+   * @returns { Promise<int> } Promise used to return the firewall rule ID, which is automatically generated by the
+   *     system.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -171,8 +174,6 @@ declare namespace netFirewall {
 
   /**
    * Updates a firewall rule. This API uses a promise to return the result.
-   *
-   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
    *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { NetFirewallRule } rule - Firewall rule.
@@ -198,8 +199,6 @@ declare namespace netFirewall {
   /**
    * Deletes a specified firewall rule of a system user ID. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.MANAGE_NET_FIREWALL
-   *
    * @permission ohos.permission.MANAGE_NET_FIREWALL
    * @param { int } userId - System user ID, which must exist.
    * @param { int } ruleId - ID of the firewall rule.
@@ -221,13 +220,11 @@ declare namespace netFirewall {
    * Obtains firewall rules by user ID. You need to specify the pagination query parameter when calling this API.
    * Currently, firewall rules can be sorted by name. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NET_FIREWALL
-   *
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - System user ID, which must exist.
    * @param { RequestParam } requestParam - Pagination query parameter. The **orderField** field can be sorted only by
    *     firewall rule name.
-   * @returns { Promise<FirewallRulePage> } Promise used to return the result, which is list of firewall rules.
+   * @returns { Promise<FirewallRulePage> } Promise used to return the paginated firewall rule list.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -243,12 +240,10 @@ declare namespace netFirewall {
   /**
    * Obtains a firewall rule based on the specified user ID and rule ID. This API uses a promise to return the result.
    *
-   * **Required permission**: ohos.permission.GET_NET_FIREWALL
-   *
    * @permission ohos.permission.GET_NET_FIREWALL
    * @param { int } userId - System user ID, which must exist.
    * @param { int } ruleId - ID of the firewall rule.
-   * @returns { Promise<NetFirewallRule> } Promise used to return the result, which is a firewall rule.
+   * @returns { Promise<NetFirewallRule> } Promise used to return the firewall rule.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 401 - Parameter error.
    * @throws { BusinessError } 2100001 - Invalid parameter value.
@@ -263,12 +258,13 @@ declare namespace netFirewall {
   function getNetFirewallRule(userId: int, ruleId: int): Promise<NetFirewallRule>;
 
   /**
-   * Get intercepted records by userId, and it is necessary to specify the pagination query parameters.
+   * Obtains the interception records by **userId**. You need to specify the pagination query parameters. This API uses
+   * a promise to return the result.
    *
    * @permission ohos.permission.GET_NET_FIREWALL
-   * @param { int } userId - Indicates the user ID. It cannot be the ID of a user that does not exist.
-   * @param { RequestParam } requestParam - Paging query input parameters.
-   * @returns { Promise<InterceptedRecordPage> } Block Record List.
+   * @param { int } userId - User ID. The value must be an existing user ID in the system.
+   * @param { RequestParam } requestParam - Query parameter.
+   * @returns { Promise<InterceptedRecordPage> } Promise used to return the list of intercepted records.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -366,11 +362,11 @@ declare namespace netFirewall {
      * @since 15 dynamic
      * @since 26.0.1 static
      */
-    RULE_DNS = 3,
+    RULE_DNS = 3
   }
 
   /**
-   * Enumerates the sorting methods of firewall rules.
+   * Enumeration type, the sorting method of firewall rules.
    *
    * > **Description**
    * >
@@ -579,8 +575,20 @@ declare namespace netFirewall {
      */
     isWildcard: boolean;
     /**
-     * If **isWildcard** is set to **false**, the complete domain name, for example, "www.example.cn", needs to be
-     * specified.
+     * When **isWildcard** is **false**, a complete domain is required, for example, "www.example.com"; when
+     * **isWildcard** is **true**, wildcard rules are supported. For details about the format, see the description
+     * below.
+     * When **isWildcard** is **true**, **domain** supports the wildcard character *"*"*, which can appear at the
+     * beginning, the end, or both the beginning and the end of a domain name, indicating that it matches any character
+     * of any length (including zero). The following wildcard formats are supported:
+     * - `"*.xxx.xxx"`: prefix wildcard, matching xxx.xxx and all its subdomains. For example, "*.example.com" can
+     * match "example.com", "www.example.com", and "a.b.example.com". (Supported since API version 21)
+     * - `"*xx.xxx.xxx"`: prefix wildcard, matching domain names ending with "xx.xxx.xxx". For example,
+     * "*a.example.com" can match "a.example.com" and "www.a.example.com". (Supported since API version 26.0.1)
+     * - `"xxx.xxx.xxx.*"`: suffix wildcard, matching domain names starting with "xxx.xxx.xxx.". For example,
+     * "www.example.*" can match "www.example.com" and "www.example.cn". (Supported since API version 26.0.1)
+     * - `"xxx.xxx.xxx.xx*"`: suffix wildcard, matching domain names starting with "xxx.xxx.xxx.xx". For example,
+     * "www.example.co*" can match "www.example.com" and "www.example.com.cn". (Supported since API version 26.0.1).
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -720,8 +728,7 @@ declare namespace netFirewall {
      */
     remoteIps?: Array<NetFirewallIpParams>;
     /**
-     * Protocol, which can be TCP (value **6**) or UDP (value **17**) or ICMP (value **1**) or ICMPv6 (value **58**).
-     * This parameter is valid only when **type** is set to **RULE_IP**.
+     * Protocol, including TCP: 6, UDP: 17, ICMP: 1, and ICMPv6: 58. Valid when **type=RULE_IP**.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -730,7 +737,7 @@ declare namespace netFirewall {
     protocol?: int;
     /**
      * Local ports. This parameter is valid only when **type** is set to **RULE_IP**. Otherwise, it will be ignored. A
-     * maximum of 10 IP addresses can be specified.
+     * maximum of 10 port ranges can be specified.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -739,7 +746,7 @@ declare namespace netFirewall {
     localPorts?: Array<NetFirewallPortParams>;
     /**
      * Remote ports. This parameter is valid only when **type** is set to **RULE_IP**. Otherwise, it will be ignored. A
-     * maximum of 10 ports can be specified.
+     * maximum of 10 port ranges can be specified.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @since 15 dynamic
@@ -765,7 +772,8 @@ declare namespace netFirewall {
      */
     dns?: NetFirewallDnsParams;
     /**
-     * Interface name: valid when type = RULE_IP, otherwise it will be ignored.
+     * Name of the physical network interface card, for example, wlan0. Valid when **type=RULE_IP**; otherwise, it is
+     * ignored. Optional, with a maximum of 16 characters.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @stagemodelonly
@@ -783,7 +791,7 @@ declare namespace netFirewall {
   }
 
   /**
-   * Intercepted record.
+   * Defines an interception record.
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
    * @systemapi Hide this for inner system use.
@@ -801,7 +809,7 @@ declare namespace netFirewall {
      */
     time: int;
     /**
-     * Local IP.
+     * Local IP address.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -810,7 +818,7 @@ declare namespace netFirewall {
      */
     localIp?: string;
     /**
-     * Remote IP.
+     * Remote IP address.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -819,7 +827,7 @@ declare namespace netFirewall {
      */
     remoteIp?: string;
     /**
-     * Local port.
+     * Local port. The default value is **0**.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -828,7 +836,7 @@ declare namespace netFirewall {
      */
     localPort?: int;
     /**
-     * Remote port.
+     * Remote port. The default value is **0**.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -837,7 +845,7 @@ declare namespace netFirewall {
      */
     remotePort?: int;
     /**
-     * Transport layer protocol.
+     * Transport layer protocol. The default value is **0**.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -846,7 +854,7 @@ declare namespace netFirewall {
      */
     protocol?: int;
     /**
-     * Application or service ID.
+     * Application or service UID. The default value is **0**.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -855,7 +863,7 @@ declare namespace netFirewall {
      */
     appUid?: int;
     /**
-     * Blocked domain name information.
+     * Domain name.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -950,7 +958,7 @@ declare namespace netFirewall {
   }
 
   /**
-   * Intercepted record page information.
+   * Defines the pagination structure for interception records.
    *
    * @syscap SystemCapability.Communication.NetManager.NetFirewall
    * @systemapi Hide this for inner system use.
@@ -959,7 +967,7 @@ declare namespace netFirewall {
    */
   interface InterceptedRecordPage {
     /**
-     * Current page number: indicates the page number of this query.
+     * Current page.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -968,7 +976,7 @@ declare namespace netFirewall {
      */
     page: int;
     /**
-     * Page size: maximum number of records on a page for this query.
+     * Page size.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -977,7 +985,7 @@ declare namespace netFirewall {
      */
     pageSize: int;
     /**
-     * Total pages: total number of pages.
+     * Total number of pages.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.
@@ -986,7 +994,7 @@ declare namespace netFirewall {
      */
     totalPage: int;
     /**
-     * Page data: all records displayed on this page.
+     * Page data.
      *
      * @syscap SystemCapability.Communication.NetManager.NetFirewall
      * @systemapi Hide this for inner system use.

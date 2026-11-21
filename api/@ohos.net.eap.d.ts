@@ -37,8 +37,9 @@ declare namespace eap {
    * retrieve.
    *
    * @permission ohos.permission.MANAGE_ENTERPRISE_WIFI_CONNECTION
-   * @param { int } netType - Network type. The value can be **1** or **2**.
-   *     <br>The value **1** indicates WLAN, and the value **2** indicates Ethernet.
+   * @param { int } netType - Network type. The value is **1** or **2**.
+   *     <br>netType=**1** indicates WLAN (WLAN is supported only on PC/2-in-1 devices), and netType=**2** indicates
+   *     Ethernet.
    * @param { int } eapCode - EAP code. The value can be any of the following:
    *     <br>code=1 Request, code=2 Response, code=3 Success, code=4 Failure.
    * @param { int } eapType - EAP method. The value range is [0, 255].
@@ -48,11 +49,11 @@ declare namespace eap {
    * @param { Callback<EapData> } callback - Callback function, which returns the packet of the specified eapCode+
    *     eapType.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 33200006 - Invalid net type
-   * @throws { BusinessError } 33200007 - Invalid eap code
-   * @throws { BusinessError } 33200008 - Invalid eap type
-   * @throws { BusinessError } 33200009 - netmanager stop
-   * @throws { BusinessError } 33200099 - internal error
+   * @throws { BusinessError } 33200006 - Invalid net type.
+   * @throws { BusinessError } 33200007 - Invalid eap code.
+   * @throws { BusinessError } 33200008 - Invalid eap type.
+   * @throws { BusinessError } 33200009 - netmanager stop.
+   * @throws { BusinessError } 33200099 - internal error.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -64,8 +65,8 @@ declare namespace eap {
    * asynchronously through a callback.
    *
    * @permission ohos.permission.MANAGE_ENTERPRISE_WIFI_CONNECTION
-   * @param { int } netType - Network type. The value can be **1** or **2**.
-   *     <br>The value **1** indicates WLAN, and the value **2** indicates Ethernet.
+   * @param { int } netType - Network type. The value **1** indicates WLAN (WLAN is supported only on PCs/2-in-1
+   *     devices), and the value **2** indicates Ethernet.
    * @param { int } eapCode - EAP code. The value can be any of the following:
    *     <br>code=1 Request, code=2 Response, code=3 Success, code=4 Failure.
    * @param { int } eapType - EAP method. The value range is [0, 255].
@@ -75,11 +76,11 @@ declare namespace eap {
    * @param { Callback<EapData> } callback - Callback function, which returns the packet of the specified eapCode+
    *     eapType.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 33200006 - Invalid net type
-   * @throws { BusinessError } 33200007 - Invalid eap code
-   * @throws { BusinessError } 33200008 - Invalid eap type
-   * @throws { BusinessError } 33200009 - netmanager stop
-   * @throws { BusinessError } 33200099 - internal error
+   * @throws { BusinessError } 33200006 - Invalid net type.
+   * @throws { BusinessError } 33200007 - Invalid eap code.
+   * @throws { BusinessError } 33200008 - Invalid eap type.
+   * @throws { BusinessError } 33200009 - netmanager stop.
+   * @throws { BusinessError } 33200099 - internal error.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -91,20 +92,20 @@ declare namespace eap {
    *
    * > **NOTE**
    * >
-   * > - If this callback is used to process received EAP data packets, the customized portion added by the server must
-   * > be removed from the EAP data transmitted to the system.
+   * > - If the callback is used to process received EAP packets (rx), the EAP data passed to the system must have
+   * > the custom part added by the server stripped.
    * >
-   * > - If this callback is used to process sent EAP data packets, the EAP data transmitted to the system is the EAP
-   * > data with the customized portion added by the server.
+   * > - If the callback is used to process sent EAP packets (tx), the EAP data passed to the system is the EAP data
+   * > after the custom part is added.
    *
    * @permission ohos.permission.MANAGE_ENTERPRISE_WIFI_CONNECTION
    * @param { CustomResult } result - Extensible authentication result.
    * @param { EapData } data - EAP data.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 33200004 - Invalid result
-   * @throws { BusinessError } 33200005 - Invalid size of eap data
-   * @throws { BusinessError } 33200009 - netmanager stop
-   * @throws { BusinessError } 33200099 - internal error
+   * @throws { BusinessError } 33200004 - Invalid result.
+   * @throws { BusinessError } 33200005 - Invalid size of eap data.
+   * @throws { BusinessError } 33200009 - netmanager stop.
+   * @throws { BusinessError } 33200099 - internal error.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -119,11 +120,11 @@ declare namespace eap {
    *     matches the Ethernet NIC to initiate EAP authentication.
    * @param { EthEapProfile } profile - EAP profile.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 33200001 - Invalid netId
-   * @throws { BusinessError } 33200003 - Invalid profile
-   * @throws { BusinessError } 33200009 - netmanager stop
-   * @throws { BusinessError } 33200010 - invalid eth state
-   * @throws { BusinessError } 33200099 - internal error
+   * @throws { BusinessError } 33200001 - Invalid netId.
+   * @throws { BusinessError } 33200003 - Invalid profile.
+   * @throws { BusinessError } 33200009 - netmanager stop.
+   * @throws { BusinessError } 33200010 - invalid eth state.
+   * @throws { BusinessError } 33200099 - internal error.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -137,11 +138,11 @@ declare namespace eap {
    * @param { int } netId - ID of the Ethernet NIC. If the default value **-1** is specified, the system automatically
    *     matches the Ethernet NIC to initiate EAP authentication.
    * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 33200001 - Invalid netId
-   * @throws { BusinessError } 33200002 - Log off fail
-   * @throws { BusinessError } 33200009 - netmanager stop
-   * @throws { BusinessError } 33200010 - invalid eth state
-   * @throws { BusinessError } 33200099 - internal error
+   * @throws { BusinessError } 33200001 - Invalid netId.
+   * @throws { BusinessError } 33200002 - Log off fail.
+   * @throws { BusinessError } 33200009 - netmanager stop.
+   * @throws { BusinessError } 33200010 - invalid eth state.
+   * @throws { BusinessError } 33200099 - internal error.
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
    * @since 26.0.1 static
@@ -150,8 +151,6 @@ declare namespace eap {
 
   /**
    * Defines the EAP data.
-   *
-   * ​
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
@@ -186,8 +185,6 @@ declare namespace eap {
 
   /**
    * Enumerates the EAP authentication results.
-   *
-   * ​
    *
    * @syscap SystemCapability.Communication.NetManager.Eap
    * @since 20 dynamic
@@ -256,7 +253,7 @@ declare namespace eap {
      * @since 26.0.1 static
      */
     EAP_TLS = 2,
-  
+
     /**
      * TTLS.
      *
@@ -536,6 +533,7 @@ declare namespace eap {
      */
     eapSubId: int;
   }
+
   /**
    * Represents the 802.1X Ethernet EAP configuration, including the EAP profile and feature toggles.
    *
@@ -543,7 +541,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapConfig {  
+  interface EthEapConfig {
     /**
      * EAP profile information.
      *
@@ -588,7 +586,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapState {  
+  enum EthEapState {
     /**
      * Idle: no authentication has been initiated.
      *
@@ -642,7 +640,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  interface EthEapStateInfo {  
+  interface EthEapStateInfo {
     /**
      * Current authentication state.
      *
@@ -653,8 +651,7 @@ declare namespace eap {
     state: EthEapState;
 
     /**
-     * Current retry count (resets to 0 on success).
-     * The value should be an integer.
+     * Current retry count (resets to 0 on success). The value should be an integer.
      *
      * @syscap SystemCapability.Communication.NetManager.Eap
      * @stagemodelonly
@@ -675,10 +672,9 @@ declare namespace eap {
   /**
    * Sets the 802.1X EAP configuration for Ethernet. The configuration is persisted and encrypted.
    *
-   * Any field change triggers one auto-auth cycle unless the feature is disabled or
-   * the authentication is occupied by an enterprise app (then the config is only
-   * persisted; the enterprise app keeps control). The auth result is delivered via
-   * the stateChange callback, not by this API's return.
+   * Any field change triggers one auto-auth cycle unless the feature is disabled or the authentication is occupied by
+   * an enterprise app (then the config is only persisted; the enterprise app keeps control). The auth result is
+   * delivered via the stateChange callback, not by this API's return.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
    * @param { EthEapConfig } config - 802.1X EAP configuration to set. Sensitive fields (password, certPassword,
@@ -692,8 +688,8 @@ declare namespace eap {
   function setEthEapConfig(config: EthEapConfig): void;
 
   /**
-   * Gets the 802.1X EAP configuration for Ethernet. Sensitive fields (password, certPassword, certEntry) are
-   * always returned empty.
+   * Gets the 802.1X EAP configuration for Ethernet. Sensitive fields (password, certPassword, certEntry) are always
+   * returned empty.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
    * @returns { Promise<EthEapConfig> } Promise used to return EthEapConfig.
@@ -706,8 +702,8 @@ declare namespace eap {
   function getEthEapConfig(): Promise<EthEapConfig>;
 
   /**
-   * Deletes the persisted 802.1X EAP configuration and stops any ongoing auto-authentication.
-   * Idempotent: resolves successfully even if no configuration has been stored.
+   * Deletes the persisted 802.1X EAP configuration and stops any ongoing auto-authentication. Idempotent: resolves
+   * successfully even if no configuration has been stored.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
    * @returns { Promise<void> } Promise that returns no value.
@@ -765,7 +761,7 @@ declare namespace eap {
    * @stagemodelonly
    * @since 26.0.1 dynamic&static
    */
-  enum EthEapConnectAction {  
+  enum EthEapConnectAction {
     /**
      * Re-triggers authentication with the saved configuration.
      *
@@ -774,6 +770,7 @@ declare namespace eap {
      * @since 26.0.1 dynamic&static
      */
     ACTION_CONNECT = 0,
+
     /**
      * Stops auto authentication and logs off the underlying 802.1X authentication.
      *
@@ -787,16 +784,15 @@ declare namespace eap {
   /**
    * Manually triggers or disconnects the 802.1X EAP authentication of Ethernet.
    *
-   * When **action** is **ACTION_CONNECT**, authentication is re-triggered with the saved
-   * configuration (manual counterpart of the auto-auth trigger; fails if no configuration
-   * has been stored). If the authentication is occupied by an enterprise app, this API
-   * does not interrupt it; the result is delivered via the stateChange callback.
-   * When **action** is **ACTION_DISCONNECT**, auto authentication is stopped and the underlying
-   * 802.1X authentication is logged off.
+   * When **action** is **ACTION_CONNECT**, authentication is re-triggered with the saved configuration (manual
+   * counterpart of the auto-auth trigger; fails if no configuration has been stored). If the authentication is occupied
+   * by an enterprise app, this API does not interrupt it; the result is delivered via the stateChange callback. When
+   * **action** is **ACTION_DISCONNECT**, auto authentication is stopped and the underlying 802.1X authentication is
+   * logged off.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_EAP
-   * @param { EthEapConnectAction } action - Manual connect action: re-trigger authentication
-   *     (**ACTION_CONNECT**) or disconnect (**ACTION_DISCONNECT**).
+   * @param { EthEapConnectAction } action - Manual connect action: re-trigger authentication (**ACTION_CONNECT**) or
+   *     disconnect (**ACTION_DISCONNECT**).
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.

@@ -36,7 +36,7 @@ import colorSpaceManager from './@ohos.graphics.colorSpaceManager';
  * > [createPixelMapFromSurface]{@link @ohos.multimedia.image:image.createPixelMapFromSurface(surfaceId: string, region: Region)}
  * > 直接获取图片。
  * >
- * > - 如果组件自身内容不能填满组件大小区域，那么剩余位置截图返回的内容为透明像素。如果组件使用了[图像效果]{@link common}类属性或其他的效果类属性，则可能产生非用户预期的截图结果。请排查是否需要填充组件透
+ * > - 如果组件自身内容不能填满组件大小区域，那么剩余位置截图返回的内容为透明像素。如果组件使用了[图像效果]{@link CommonMethod}类属性或其他的效果类属性，则可能产生非用户预期的截图结果。请排查是否需要填充组件透
  * > 明内容区域，或使用窗口截图接口[snapshot]{@link @ohos.window:window.Window#snapshot(callback: AsyncCallback<image.PixelMap>)}替代。
  * >
  * > - 示例效果请以真机运行为准，当前 DevEco Studio预览器不支持。
@@ -383,14 +383,14 @@ declare namespace componentSnapshot {
     dynamicRangeMode?: DynamicRangeModeOptions;
     }
   /**
-     * 获取已加载的组件的截图，传入组件的[组件标识]{@link common}，找到对应组件进行截图。同步等待截图完成返回
+     * 获取已加载的组件的截图，传入组件的[组件标识]{@link CommonMethod}，找到对应组件进行截图。同步等待截图完成返回
      * [PixelMap]{@link @ohos.multimedia.image:image.PixelMap}。
      * 
      * > **说明：**
      * >
      * > 截图会获取最近一帧的绘制内容。如果在组件触发更新的同时调用截图，更新的渲染内容不会被截取到，截图会返回上一帧的绘制内容。
      *
-   * @param { string } id - 目标组件的[组件标识]{@link common}。
+   * @param { string } id - 目标组件的[组件标识]{@link CommonMethod}。
    * @param { SnapshotOptions } [options] - 截图相关的自定义参数。
    * @returns { image.PixelMap | null } 截图返回的结果。
    * @throws { BusinessError } 100001 - Invalid ID.

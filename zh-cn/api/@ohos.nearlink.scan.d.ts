@@ -1,5 +1,4 @@
 /*
-/*
  * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +22,7 @@ import type { Callback } from '@ohos.base';
 import nearlinkConstant from '@ohos.nearlink.constant';
 
 /**
- * 本模块提供了星闪扫描模式的定义。
+ * 本模块提供了星闪扫描相关功能，包括发起/停止扫描、订阅扫描结果等。
  *
  * @syscap SystemCapability.Communication.NearLink.Base
  * @stagemodelonly
@@ -139,7 +138,7 @@ declare namespace scan {
    */
   interface ScanResults {
     /**
-     * 表示扫描到设备地址。地址格式参考：11:22:33:AA:BB:FF。
+     * 表示扫描到的设备地址。地址格式参考：11:22:33:AA:BB:FF。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -180,7 +179,7 @@ declare namespace scan {
      */
     deviceName: string;
     /**
-     * 表示扫描到的广播是否可连接。true：可连接，false：不可连接
+     * 表示扫描到的广播是否可连接。true：可连接，false：不可连接。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @stagemodelonly
@@ -363,7 +362,7 @@ declare namespace scan {
      */
     SCAN_MODE_BALANCED = 1,
     /**
-     * 表示高功率扫描模式，具有更高的扫描频率，功耗较高。
+     * 表示低延时扫描模式，扫描频率高，功耗较高。
      *
      * @syscap SystemCapability.Communication.NearLink.Base
      * @systemapi

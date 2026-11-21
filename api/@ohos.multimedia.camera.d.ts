@@ -14862,8 +14862,6 @@ declare namespace camera {
      * @param { C2PASignatureConfig } [config] - C2PA signature configuration, which includes the author name and
      *     author ID. This parameter is optional. If not provided, the C2PA signature will be generated
      *     without author information.
-     * @throws { BusinessError } 7400113 - An exception occurred in the session currently in use.
-     * @throws { BusinessError } 7400116 - The session does not have camerainput information.
      * @throws { BusinessError } 7400201 - Camera service fatal error.
      * @syscap SystemCapability.Multimedia.Camera.Core
      * @stagemodelonly
@@ -17211,6 +17209,34 @@ declare namespace camera {
      * @since 26.0.0 dynamic&static
      */
     getControlCenterHeight(): double;
+
+    /**
+     * Obtains the list of cameras that can be switched to, including the local camera
+     * and supported distributed cameras.
+     *
+     * @returns { Array<CameraDevice> } List of cameras available for switching.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 7400104 - Operation not supported.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+     getSwitchableCameras(): Array<CameraDevice>;
+
+    /**
+     * Switching between the local and distributed cameras.
+     *
+     * @param { CameraDevice } device - Target camera device to switch to.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 7400104 - Operation not supported.
+     * @throws { BusinessError } 7400201 - Camera service fatal error.
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+     switchCamera(device: CameraDevice): void;
   }
 
   /**

@@ -76,7 +76,7 @@ declare namespace sharing {
   function isSharingSupported(): Promise<boolean>;
 
   /**
-   * Obtains the current network sharing status. This API uses an asynchronous callback to return the result.
+   * Obtains the current network sharing state. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { AsyncCallback<boolean> } callback - Callback used to return the result. The value **true** means that
@@ -167,7 +167,7 @@ declare namespace sharing {
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceType } type - Sharing type. The value **0** means Wi-Fi hotspot sharing, **1** means USB
    *     sharing, and **2** means Bluetooth sharing.
-   * @param { AsyncCallback<void> } callback - Callback used to return the result.
+   * @param { AsyncCallback<void> } callback - Callback used to return the result of stopping network sharing.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -210,8 +210,7 @@ declare namespace sharing {
   function stopSharing(type: SharingIfaceType): Promise<void>;
 
   /**
-   * Obtains the volume of mobile data traffic received via network sharing. This API uses an asynchronous callback to
-   * return the result.
+   * Obtains the received data size of the shared network. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { AsyncCallback<int> } callback - Callback used to return the data volume, in KB.
@@ -232,7 +231,7 @@ declare namespace sharing {
    * result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @returns { Promise<int> } Promise used to return the data volume, in KB.
+   * @returns { Promise<int> } Promise used to return the received data size of the shared network, in KB.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -246,8 +245,8 @@ declare namespace sharing {
   function getStatsRxBytes(): Promise<int>;
 
   /**
-   * Obtains the volume of mobile data traffic sent via network sharing. This API uses an asynchronous callback to
-   * return the result.
+   * Obtains the transmitted data size of the shared network. This API uses an asynchronous callback to return the
+   * result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { AsyncCallback<int> } callback - Callback used to return the data volume, in KB.
@@ -267,7 +266,7 @@ declare namespace sharing {
    * Obtains the volume of mobile data traffic sent via network sharing. This API uses a promise to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @returns { Promise<int> } Promise used to return the data volume, in KB.
+   * @returns { Promise<int> } Promise used to return the data size of the shared network transmission, in KB.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -281,8 +280,7 @@ declare namespace sharing {
   function getStatsTxBytes(): Promise<int>;
 
   /**
-   * Obtains the total volume of mobile data traffic sent via network sharing. This API uses an asynchronous callback to
-   * return the result.
+   * Obtains the total data size of the shared network. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { AsyncCallback<int> } callback - Callback used to return the data volume, in KB.
@@ -303,7 +301,7 @@ declare namespace sharing {
    * result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @returns { Promise<int> } Promise used to return the data volume, in KB.
+   * @returns { Promise<int> } Promise used to return the total data size of the shared network, in KB.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -317,8 +315,8 @@ declare namespace sharing {
   function getStatsTotalBytes(): Promise<int>;
 
   /**
-   * Obtains the names of NICs in the specified network sharing state. This API uses an asynchronous callback to return
-   * the result.
+   * Obtains the list of network interface card names in the specified state. This API uses an asynchronous callback to
+   * return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceState } state - Network sharing state.
@@ -341,7 +339,8 @@ declare namespace sharing {
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceState } state - Network sharing state.
-   * @returns { Promise<Array<string>> } Promise used to return an array of NIC names.
+   * @returns { Promise<Array<string>> } Promise used to return the list of network interface card names in the
+   *     specified state.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -382,7 +381,7 @@ declare namespace sharing {
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceType } type - Sharing type. The value **0** means Wi-Fi hotspot sharing, **1** means USB
    *     sharing, and **2** means Bluetooth sharing.
-   * @returns { Promise<SharingIfaceState> } Promise used to return the network sharing state.
+   * @returns { Promise<SharingIfaceState> } Promise used to return the sharing state of the specified type of network.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -397,8 +396,8 @@ declare namespace sharing {
   function getSharingState(type: SharingIfaceType): Promise<SharingIfaceState>;
 
   /**
-   * Obtains regular expressions of NICs of a specified type. This API uses an asynchronous callback to return the
-   * result.
+   * Obtains the list of regular expressions for network interface card names of the specified type. This API uses an
+   * asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceType } type - Sharing type. The value **0** means Wi-Fi hotspot sharing, **1** means USB
@@ -423,7 +422,7 @@ declare namespace sharing {
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { SharingIfaceType } type - Sharing type. The value **0** means Wi-Fi hotspot sharing, **1** means USB
    *     sharing, and **2** means Bluetooth sharing.
-   * @returns { Promise<Array<string>> } Promise used to return an array of regular expressions.
+   * @returns { Promise<Array<string>> } Promise used to return the list of regular expressions.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -438,12 +437,14 @@ declare namespace sharing {
   function getSharableRegexes(type: SharingIfaceType): Promise<Array<string>>;
 
   /**
-   * Registers the network sharing status change event. This API uses an asynchronous callback to return the result.
+   * Registers a listener for network sharing state changes. This API uses an asynchronous callback to return the
+   * result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { 'sharingStateChange' } type - Event type.<br/> The value **sharingStateChange** indicates a network
-   *     sharing status change event.
-   * @param { Callback<boolean> } callback - Callback invoked when the network sharing state changes.
+   * @param { 'sharingStateChange' } type - Event type.
+   *     <br/>
+   *     The value **sharingStateChange** indicates a network sharing status change event.
+   * @param { Callback<boolean> } callback - Callback invoked to return the network sharing state.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -467,13 +468,13 @@ declare namespace sharing {
   function onSharingStateChange(callback: Callback<boolean>): void;
 
   /**
-   * Unregisters the network sharing status change event. This method uses an asynchronous callback to return the
+   * Unregisters the listener for network sharing state changes. This API uses an asynchronous callback to return the
    * result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { 'sharingStateChange' } type - Event type. The value **sharingStateChange** indicates a network sharing
    *     status change event.
-   * @param { Callback<boolean> } callback - Callback invoked when the network sharing state changes.
+   * @param { Callback<boolean> } callback - Callback invoked to return the network sharing state.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -497,16 +498,17 @@ declare namespace sharing {
   function offSharingStateChange(callback?: Callback<boolean>): void;
 
   /**
-   * Subscribes to network sharing state changes of a specified NIC. This API uses an asynchronous callback to return
-   * the result.
+   * Registers a listener for network sharing state changes of a network interface card. This API uses an asynchronous
+   * callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { 'interfaceSharingStateChange' } type - Event type.<br/> The value **interfaceSharingStateChange**
-   *     indicates a network sharing status change event of the NIC.
+   * @param { 'interfaceSharingStateChange' } type - Event type.
+   *     <br/>
+   *     The value **interfaceSharingStateChange** indicates a network sharing status change event of the NIC.
    * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - Callback used
    *     to return the result. It is called when the network sharing state of a specified NIC changes. [since 9 - 10]
-   * @param { Callback<InterfaceSharingStateInfo> } callback - Callback used to return the result. It is called when the
-   *     network sharing state of a specified NIC changes. [since 11]
+   * @param { Callback<InterfaceSharingStateInfo> } callback - Callback invoked when the sharing state of the specified
+   *     network interface card changes. [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -530,15 +532,16 @@ declare namespace sharing {
   function onInterfaceSharingStateChange(callback: Callback<InterfaceSharingStateInfo>): void;
 
   /**
-   * Unsubscribes from network sharing state changes of a specified NIC. This API uses an asynchronous callback to
-   * return the result.
+   * Unregisters the listener for network sharing state changes of a network interface card. This API uses an
+   * asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { 'interfaceSharingStateChange' } type - Event type. The value **interfaceSharingStateChange** indicates a
    *     network sharing status change event of the NIC.
    * @param { Callback<{ type: SharingIfaceType, iface: string, state: SharingIfaceState }> } callback - Callback used
    *     to return the result. [since 9 - 10]
-   * @param { Callback<InterfaceSharingStateInfo> } callback - Callback used to return the result. [since 11]
+   * @param { Callback<InterfaceSharingStateInfo> } callback - Callback for the sharing state change event of the
+   *     specified network interface card. [since 11]
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -562,12 +565,13 @@ declare namespace sharing {
   function offInterfaceSharingStateChange(callback?: Callback<InterfaceSharingStateInfo>): void;
 
   /**
-   * Subscribes to upstream network changes. This API uses an asynchronous callback to return the result.
+   * Registers a listener for upstream network changes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
-   * @param { 'sharingUpstreamChange' } type - Event type.<br/> The value **sharingUpstreamChange** indicates an
-   *     upstream network change event.
-   * @param { Callback<NetHandle> } callback - Callback invoked when the upstream network changes.
+   * @param { 'sharingUpstreamChange' } type - Event type.
+   *     <br/>
+   *     The value **sharingUpstreamChange** indicates an upstream network change event.
+   * @param { Callback<NetHandle> } callback - Callback invoked when the uplink network changes.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.
@@ -591,12 +595,12 @@ declare namespace sharing {
   function onSharingUpstreamChange(callback: Callback<NetHandle>): void;
 
   /**
-   * Unsubscribes from upstream network changes. This API uses an asynchronous callback to return the result.
+   * Unregisters the listener for upstream network changes. This API uses an asynchronous callback to return the result.
    *
    * @permission ohos.permission.CONNECTIVITY_INTERNAL
    * @param { 'sharingUpstreamChange' } type - Event type. The value **sharingUpstreamChange** indicates an upstream
    *     network change event.
-   * @param { Callback<NetHandle> } callback - Callback used for unsubscription from upstream network changes.
+   * @param { Callback<NetHandle> } callback - Callback for the uplink network change event.
    * @throws { BusinessError } 201 - Permission denied.
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error.

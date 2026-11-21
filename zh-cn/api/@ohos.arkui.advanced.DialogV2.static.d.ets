@@ -25,7 +25,7 @@
  * 
  * > **说明：**
  * >
- * > - 如果DialogV2设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，
+ * > - 如果DialogV2设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}，编译工具链会额外生成节点__Common__，并将通用属性或通用事件挂载在__Common__上，
  * > 而不是直接应用到DialogV2本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议DialogV2设置通用属性和通用事件。
  *
  * ###### 子组件
@@ -443,7 +443,7 @@ export declare struct TipsDialogV2 {
   @Param
   onCheckedChange?: AdvancedDialogV2OnCheckedChange;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -517,7 +517,7 @@ export declare struct SelectDialogV2 {
   @Param
   radioContent: SheetInfo[];
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -615,7 +615,7 @@ export declare struct ConfirmDialogV2 {
   @Param
   onCheckedChange?: AdvancedDialogV2OnCheckedChange;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -693,7 +693,7 @@ export declare struct AlertDialogV2 {
   @Param
   secondaryButton?: AdvancedDialogV2Button;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -726,7 +726,7 @@ export declare struct LoadingDialogV2 {
   @Param
   content?: ResourceStr;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -803,7 +803,7 @@ export declare struct CustomContentDialogV2 {
   @Param
   buttons?: AdvancedDialogV2Button[];
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -866,7 +866,7 @@ export declare struct PopoverDialogV2 {
   @BuilderParam
   targetBuilder: CustomBuilder;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * 
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

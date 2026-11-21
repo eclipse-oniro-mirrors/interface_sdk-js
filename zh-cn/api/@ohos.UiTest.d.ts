@@ -2950,6 +2950,20 @@ declare class Component {
    * @test
    */
   getOriginalText(): Promise<string>;
+
+  /**
+   * 检查此组件是否可触达。若组件中心点被层叠顺序更高的其他组件遮挡，或组件不可见、面积为零、不响应触摸测试，则该组件不可触达。使用Promise异步回调。
+   *
+   * @returns { Promise<boolean> } - Promise对象，返回组件是否可触达。true：可触达。false：被遮挡、不可见、面积为零或不响应触摸测试。
+   * @throws { BusinessError } 17000002 - The API does not support concurrent calls.
+   * @throws { BusinessError } 17000004 - The window or component is invisible or destroyed.
+   * @syscap SystemCapability.Test.UiTest
+   * @FaAndStageModel
+   * @atomicservice [since 26.1.0]
+   * @since 26.1.0 dynamic&static
+   * @test
+   */
+  isReachable(): Promise<boolean>;
  }
 
 /**

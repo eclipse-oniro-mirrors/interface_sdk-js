@@ -824,7 +824,7 @@ declare namespace behaviorAwareness {
     recurrence: RecurrenceType;
     /**
      * Day of the week.
-     * The value must be an integer within [1,7]. Default value: The default value is 0.
+     * Value range: [1,7]. The value must be an integer within [1,7]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -834,7 +834,7 @@ declare namespace behaviorAwareness {
     dayOfWeek?: int;
     /**
      * Day of the month.
-     * Unit: day. The value must be an integer within [1,31]. Default value: The default value is 0.
+     * The value must be an integer within [1,31]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -895,7 +895,7 @@ declare namespace behaviorAwareness {
     kind: 'location';
     /**
      * Location type.
-     *
+     * Default value: Empty.
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -904,7 +904,7 @@ declare namespace behaviorAwareness {
     locationType?: LocationType;
     /**
      * Location name.
-     *
+     * Default value: Empty.
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -912,7 +912,7 @@ declare namespace behaviorAwareness {
      */
     locationName?: string;
     /**
-     * Geographic coordinates.
+     * Geographic coordinates. Latitude value range: [-90,90]; longitude value range: [-180,180].
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -942,6 +942,7 @@ declare namespace behaviorAwareness {
     kind: 'systemEvent';
     /**
      * Application package name.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -951,6 +952,7 @@ declare namespace behaviorAwareness {
     packageName?: string;
     /**
      * Application name.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -960,6 +962,7 @@ declare namespace behaviorAwareness {
     appName?: string;
     /**
      * Application ID (for app-related events).
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -969,7 +972,7 @@ declare namespace behaviorAwareness {
     appId?: string;
     /**
      * Single-use duration threshold.
-     * Unit: Minute. The value should be an integer. Default value: The default value is 0.
+     * Unit: min. The value should be an integer. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -979,7 +982,7 @@ declare namespace behaviorAwareness {
     durationThreshold?: int;
     /**
      * Daily usage duration threshold.
-     * Unit: Minute. The value must be an integer within [0,1440]. Default value: The default value is 0.
+     * Unit: min. The value must be an integer within [0,1440]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -989,7 +992,7 @@ declare namespace behaviorAwareness {
     dailyDurationThreshold?: int;
     /**
      * Battery threshold.
-     * Unit: Percentage. The value must be an integer within [0,100]. Default value: The default value is 0.
+     * Unit: %. The value must be an integer within [0,100]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -999,7 +1002,7 @@ declare namespace behaviorAwareness {
     batteryThreshold?: int;
     /**
      * Battery percentage.
-     * Unit: Percentage. The value must be an integer within [0,100]. Default value: The default value is 0.
+     * Unit: %. The value must be an integer within [0,100]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1009,7 +1012,7 @@ declare namespace behaviorAwareness {
     level?: int;
     /**
      * Bluetooth device type.
-     * Default value: The default value is 0.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1019,7 +1022,7 @@ declare namespace behaviorAwareness {
     bluetoothDeviceType?: BluetoothDeviceType;
     /**
      * Bluetooth device name.
-     *
+     * Default value: Empty.
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -1057,6 +1060,7 @@ declare namespace behaviorAwareness {
     operation: Operation;
     /**
      * Application package name.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1066,6 +1070,7 @@ declare namespace behaviorAwareness {
     packageName?: string;
     /**
      * Application name.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1075,7 +1080,7 @@ declare namespace behaviorAwareness {
     appName?: string;
     /**
      * Adjustment direction.
-     *
+     * Default value: Empty.
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
      * @stagemodelonly
@@ -1084,7 +1089,7 @@ declare namespace behaviorAwareness {
     adjustment?: AdjustmentDirection;
     /**
      * Absolute value indicates the fixed value of the brightness or volume.
-     * Unit: Percentage. The value must be an integer within [0,100]. Default value: The default value is 0.
+     * Unit: %. The value must be an integer within [0,100]. Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1094,6 +1099,7 @@ declare namespace behaviorAwareness {
     value?: int;
     /**
      * Sound mode.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1141,7 +1147,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * Occurrence timestamp.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1151,7 +1157,7 @@ declare namespace behaviorAwareness {
     timestamp: long;
     /**
      * Additional Parameters.
-     * Default value: Default behavior without additional parameters.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1161,6 +1167,7 @@ declare namespace behaviorAwareness {
     params?: Record<string, string | int | boolean>;
     /**
      * Scenario Attributes.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1180,7 +1187,8 @@ declare namespace behaviorAwareness {
    */
   export interface ActionData {  
     /**
-     * Action ID (specific prefix format).
+     * Action ID. The value is the perceptionEventId of PerceptionEvent from the onPerception callback.
+     * This value must be passed when calling submitFeedback. The prefix is habitAwareness_.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1208,7 +1216,7 @@ declare namespace behaviorAwareness {
     name: string;
     /**
      * Additional Parameters.
-     * Default value: Default behavior: no additional parameters.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1218,6 +1226,7 @@ declare namespace behaviorAwareness {
     params?: Record<string, string | int | boolean>;
     /**
      * Scenario Attributes.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1228,7 +1237,7 @@ declare namespace behaviorAwareness {
   }
 
   /**
-   * Habit-aware domain payload. Specific data in the HABIT_Awareness domain.
+   * Habit-aware domain payload. Specific data in the HABIT_AWARENESS domain.
    *
    * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
    * @systemapi
@@ -1295,7 +1304,7 @@ declare namespace behaviorAwareness {
     /**
      * Confidence.The value 0 indicates no confidence, and the value 100 indicates
      * complete confidence.
-     * Unit: Percentage. The value must be an integer within [0,100].
+     * Unit: %. The value must be an integer within [0,100].
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1305,7 +1314,7 @@ declare namespace behaviorAwareness {
     confidence: int;
     /**
      * Generate the timestamp.
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1344,7 +1353,7 @@ declare namespace behaviorAwareness {
     domain: PerceptionDomain;
     /**
      * Subtype Filtering (Optional. If this parameter is not specified, all modes in the domain are subscribed.).
-     * Default value: Subscribe to all subtypes in the domain without filtering.
+     * Default value: Empty.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1383,7 +1392,7 @@ declare namespace behaviorAwareness {
     feedbackType: FeedbackType;
     /**
      * Feedback timestamp .
-     * Unit: milliseconds.
+     * Unit: ms.
      *
      * @syscap SystemCapability.MultimodalAwareness.DeviceStatus
      * @systemapi
@@ -1405,7 +1414,7 @@ declare namespace behaviorAwareness {
    * @param { Callback<PerceptionEvent<BehaviorAwarenessPayload>> } callback - Callback used to return the
    *     awareness event. 
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1432,7 +1441,7 @@ declare namespace behaviorAwareness {
    *     <br>Default value: If this parameter is not specified, all subscriptions of the current package
    *     are canceled.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.
@@ -1453,7 +1462,7 @@ declare namespace behaviorAwareness {
    *
    * @param { FeedbackData } feedback - Feedback data.
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application uses the system API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
    *     <br>1. The hardware does not support the capability.
    *     <br>2. The chip does not support the capability.

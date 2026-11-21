@@ -20,7 +20,7 @@
  * 
  * > **NOTE**
  * >
- * > - If the **Dialog** component has [universal attributes]{@link common} and [universal events]{@link common}
+ * > - If the **Dialog** component has [universal attributes]{@link CommonMethod} and [universal events]{@link CommonMethod}
  * > configured,
  * > the compiler toolchain automatically generates an additional \_\_Common\_\_ node and mounts the universal
  * > attributes and universal events on this node rather than the **Dialog** component itself.

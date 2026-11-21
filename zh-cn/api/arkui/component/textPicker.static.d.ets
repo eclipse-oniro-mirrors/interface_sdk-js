@@ -1448,8 +1448,9 @@ export declare interface TextPickerDialogOptionsExt extends TextPickerOptions {
 /**
  * 定义文本选择器组件。
  *
- * @param { TextPickerOptions } [options] - text picker options.
- * @returns { TextPickerAttribute } The attribute of the TextPicker.
+ * @param { TextPickerOptions } [options] - 配置文本选择器的参数。当需要自定义选择器的数据源、选中项、列宽等配置时传入此参数。
+ *     参数缺省时组件无法显示。
+ * @returns { TextPickerAttribute } 返回文本选择器的属性对象。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static

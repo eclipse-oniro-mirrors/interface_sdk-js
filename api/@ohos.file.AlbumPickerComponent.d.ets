@@ -14,23 +14,31 @@
  */
 
 /**
- * The **AlbumPickerComponent** embedded in the UI of an application allows the application to access the albums in the 
- * user directory without any permission.
+ * The **AlbumPickerComponent** displays a list of albums in an app for users to select an album to browse images or 
+ * videos. For example, in a social media app, users can select an album to upload photos. With this component, apps can
+ * access the album list in the public directory without requesting the album access permission. This simplifies the 
+ * permission request process, reduces development costs, and improves user experience.
  * 
- * Note that **AlbumPickerComponent** does not support nesting. Additionally, prevent overlaying components with the 
- * **overlay** attribute or of higher levels on top it, as this will prevent it from receiving gesture events.
+ * The album picker component must be used together with the photo picker component. When a user selects an album, the 
+ * system triggers the **onAlbumClick** callback and passes **AlbumInfo** (including the album URI and name) to the app.
+ * The app needs to pass the URI to the photo picker component through the **PickerController** to refresh the images 
+ * and videos in the selected album. For details about the collaboration mechanism, see 
+ * [@ohos.file.PhotoPickerComponent (PhotoPickerComponent)]{@link @ohos.file.PhotoPickerComponent}.
  * 
- * This component must be used together with [PhotoPickerComponent]{@link @ohos.file.PhotoPickerComponent}. When a user 
- * selects an album by using the **AlbumPickerComponent**, the **PhotoPickerComponent** is instructed to update the 
- * images and videos in the album.
+ * Note that the album picker component does not support nesting. Additionally, prevent overlaying components with the 
+ * **overlay** attribute or of higher levels on top the component, as this will prevent it from receiving gesture 
+ * events.
  * 
  * > **NOTE**
+ * >
+ * > - This component is supported since API version 12. Newly added APIs will be marked with a superscript to indicate 
+ * > their 
  * >
  * > - This component does not support [same-layer rendering](docroot://web/web-same-layer.md).
  * 
  * ###### Attributes
  * 
- * The [universal attributes]{@link common} are supported.
+ * The [universal attributes]{@link ./@internal/component/ets/common} are supported.
  *
  * @file AlbumPickerComponent
  * @kit MediaLibraryKit
@@ -40,10 +48,10 @@ import { PickerColorMode } from '@ohos.file.PhotoPickerComponent';
 import photoAccessHelper from '@ohos.file.photoAccessHelper';
 
 /**
- * AlbumPickerComponent( {albumPickerOptions?: AlbumPickerOptions, onAlbumClick?: (albumInfo: AlbumInfo) => boolean,
+ * AlbumPickerComponent({albumPickerOptions?: AlbumPickerOptions, onAlbumClick?: (albumInfo: AlbumInfo) => boolean,
  * onEmptyAreaClick?: EmptyAreaClickCallback, albumPickerController?: AlbumPickerController })
  *
- * The **AlbumPickerComponent** embedded in the UI of an application allows the application to access the albums in the
+ * The album picker component embedded in the UI of an application allows the application to access the albums in the
  * user directory without any permission.
  *
  * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -107,7 +115,7 @@ export type EmptyAreaClickCallback = () => void;
  */
 export declare class AlbumPickerOptions {
   /**
-   * Theme color of the album page. The options are **AUTO**, **Light**, and **Dark**. The default value is **AUTO**.
+   * Theme color of the album list. The options are **AUTO**, **Light**, and **Dark**. The default value is **AUTO**.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -116,8 +124,8 @@ export declare class AlbumPickerOptions {
   themeColorMode?: PickerColorMode;
 
   /**
-   * Type of the filter. You can use it to display images, videos, or both. If this parameter is not specified, images
-   * and videos are displayed in a specific album.
+   * Type of the filter. You can use it to display images, videos, or both. If this parameter is not specified, the
+   * album component displays all image and video resources.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -126,7 +134,9 @@ export declare class AlbumPickerOptions {
   filterType?: photoAccessHelper.PhotoViewMIMETypes;
 
   /**
-   * Font size. For details about the value range, see [fontSize]{@link TextAttribute#fontSize}.
+   * Font size. For details about the value range, see [fontSize]{@link TextAttribute#fontSize}. If this parameter is
+   * not set, the default font size is used. You can also dynamically set the font size using
+   * [AlbumPickerController]{@link AlbumPickerController}.setFontSize.
    *
    * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
    * @atomicservice
@@ -172,7 +182,8 @@ export declare class AlbumInfo {
 @Observed
 export declare class AlbumPickerController {
   /**
-   * Sets the font size of the album list.
+   * Sets the font size of the album list. The **albumPickerController** parameter needs to be passed when the album
+   * picker component is created.
    *
    * @param { number | string } fontSize - Font size. For details about the value range, see
    *     [fontSize]{@link TextAttribute#fontSize}.

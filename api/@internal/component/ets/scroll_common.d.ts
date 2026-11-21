@@ -19,7 +19,7 @@
  */
 
 /**
- * Provides offsets for a two-stage scroll snap of a scrollable component.
+ * Provides custom offsets for two-stage scroll snapping with scrollSnapStrategy in Grid and WaterFlow.
  *
  * Offsets are in vp and velocity is in vp/s. Callbacks are invoked synchronously
  * on the UI thread and must be pure calculations. No layout snapshot is provided;
@@ -36,15 +36,15 @@
  */
 declare interface ScrollSnapOffsetProvider {
   /**
-   * Called once during a fling to determine the approach offset.
+   * Called once at the start of a fling to determine how far the content scrolls before snapping.
    *
    * The return value is a non-negative finite distance magnitude and may be greater than
    * or equal to decayOffset. A non-finite return value, a negative return value, or a
-   * callback exception falls back to the natural decay offset.
+   * callback exception uses the predicted fling distance instead. The snap phase still follows.
    *
-   * @param { number } velocity - Current fling velocity, positive toward the content end, in vp/s.
-   * @param { number } decayOffset - Non-negative natural friction decay distance magnitude, in vp.
-   * @returns { number } Approach offset magnitude, in vp.
+   * @param { number } velocity - Initial fling velocity, positive toward the content end, in vp/s.
+   * @param { number } decayOffset - Predicted distance of the default fling, in vp. Always non-negative.
+   * @returns { number } Distance to scroll during the fling, in vp.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -56,10 +56,11 @@ declare interface ScrollSnapOffsetProvider {
   /**
    * Called once when the approach motion hands off to the final snap animation.
    *
-   * The return value is an absolute content scroll target; 0 is valid. A finite target
-   * outside the legal scroll range is clamped to that range.
-   * A non-finite return value or a callback exception uses the component fallback target.
-   * A Grid custom strategy stays at the approach endpoint without returning to the gesture start position.
+   * Return a finite target offset on the logical scroll axis. Zero is the content start; offsets are
+   * positive toward the content end and negative in the opposite direction. A target outside the
+   * scrollable range is clamped to the nearest boundary. If the target exceeds the current offset,
+   * the component scrolls toward the content end; if smaller, toward the start. Equal offsets cause no scrolling.
+   * If the callback returns a non-finite value or throws an exception, the component stops at its current position.
    *
    * @param { number } velocity - Velocity at the start of this approach stage,
    * positive toward the content end, in vp/s.

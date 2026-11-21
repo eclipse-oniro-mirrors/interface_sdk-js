@@ -146,7 +146,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
     abilityStartCallback: AbilityStartCallback): Promise<void>;
 
   /**
-   * 连接到[UIExtensionAbility]{@link ./../@ohos.app.ability.UIExtensionAbility:UIExtensionAbility}，返回连接id。
+   * 连接到[ServiceExtensionAbility]{@link ./../@ohos.app.ability.ServiceExtensionAbility:ServiceExtensionAbility}，返回连接id。
    * 
    * > **说明：**
    * >
@@ -179,7 +179,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
   connectServiceExtensionAbility(want: Want, options: ConnectOptions): long;
 
   /**
-   * 断开与[UIExtensionAbility]{@link ./../@ohos.app.ability.UIExtensionAbility:UIExtensionAbility}的连接，与
+   * 断开与[ServiceExtensionAbility]{@link ./../@ohos.app.ability.ServiceExtensionAbility:ServiceExtensionAbility}的连接，与
    * [connectServiceExtensionAbility]{@link UIServiceExtensionContext.connectServiceExtensionAbility}功能相反。使用Promise异步回调。
    *
    * @param { long } connectionId - 从

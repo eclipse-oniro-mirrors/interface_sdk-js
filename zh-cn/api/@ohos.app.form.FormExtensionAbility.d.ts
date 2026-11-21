@@ -20,7 +20,7 @@
  * >
  * > FormExtensionAbility创建后10秒内无操作将会被清理。
  * 
- * ###### 约束限制
+ * ## 约束限制
  * 
  * 为保障系统安全性和稳定性，防止 FormExtensionAbility 滥用系统资源，系统对其能力进行管控， 不支持以下模块的引用：
  * 
@@ -28,8 +28,7 @@
  * - [@ohos.multimedia.audio (音频管理)]{@link @ohos.multimedia.audio:audio}
  * - [@ohos.multimedia.camera (相机管理)]{@link @ohos.multimedia.camera:camera}
  * - [@ohos.multimedia.media (媒体服务)]{@link @ohos.multimedia.media:media}
- * - 
- * [@ohos.resourceschedule.backgroundTaskManager (后台任务管理)]{@link @ohos.resourceschedule.backgroundTaskManager:backgroundTaskManager}
+ * - [@ohos.resourceschedule.backgroundTaskManager (后台任务管理)]{@link @ohos.resourceschedule.backgroundTaskManager:backgroundTaskManager}
  *
  * @file 卡片扩展能力-FormExtensionAbility
  * @kit FormKit
@@ -46,7 +45,6 @@ import { Configuration } from './@ohos.app.ability.Configuration';
  * <p>You must override this callback if you want this ability to return the actual form state. Otherwise,
  * this method returns {@link FormState#DEFAULT} by default.</p>
  *
- * @typedef { function }
  * @param { Want } want - Indicates the description of the form for which the {@link formInfo#FormState}
  *                        is obtained. The description covers the bundle name, ability name, module name,
  *                        form name, and form dimensions.
@@ -61,7 +59,6 @@ type OnAcquireFormStateFn = (want: Want) => formInfo.FormState;
 /**
  * 卡片提供方接收卡片分享的通知接口。
  *
- * @typedef { function }
  * @param { string } formId - 卡片标识。
  * @returns { Record<string, Object> } 卡片要分享的数据，由开发者自行决定传入的键值对。
  * @syscap SystemCapability.Ability.Form
@@ -74,7 +71,6 @@ type OnShareFormFn = (formId: string) => Record<string, Object>;
 /**
  * 卡片提供方接收卡片请求自定义数据的通知接口。
  *
- * @typedef { function }
  * @param { string } formId - 卡片标识。
  * @returns { Record<string, Object> } 卡片的自定义数据，由开发者自行决定传入的键值对。
  * @syscap SystemCapability.Ability.Form
@@ -87,7 +83,6 @@ type OnAcquireFormDataFn = (formId: string) => Record<string, Object>;
 /**
  * Called when this ability breaks the last link, notifying the provider that the provider process is about to stop.
  *
- * @typedef { function }
  * @syscap SystemCapability.Ability.Form
  * @stagemodelonly
  * @atomicservice
@@ -119,6 +114,7 @@ declare class FormExtensionAbility {
   /**
    * 卡片提供方接收创建卡片的通知接口。需要注意：FormExtensionAbility创建后10秒内无操作将会被清理，请避免在回调中执行耗时操作。
    * 
+   * **配合使用：**
    * - 必须调用
    * [formBindingData.createFormBindingData()]{@link @ohos.app.form.formBindingData:formBindingData.createFormBindingData}
    * 创建卡片数据对象。
@@ -140,8 +136,9 @@ declare class FormExtensionAbility {
   onAddForm(want: Want): formBindingData.FormBindingData;
 
   /**
-   * 卡片提供方收到卡片使用方将临时卡片转常态卡片的通知接口。临时卡片、常态卡片是卡片使用方的概念，其中：临时卡片是短期存在的，在特定事件或用户行为后显示，完成后自动消失。常态卡片具有持久性，在用户主动清除或更改前将一直保留；日常开发的
-   * 功能卡片均归属此类。在当前版本，卡片使用方不使用临时卡片。
+   * 卡片提供方收到卡片使用方将临时卡片转为常态卡片的通知接口。临时卡片、常态卡片是卡片使用方的概念，使用方会在
+   * 需要时请求将临时卡片转换为常态卡片；提供方收到通知后，应将本地记录中该卡片由临时卡片数据更新为常态卡片数据，避免
+   * 后续清理长时间未删除的临时卡片时误删已转换的卡片信息。
    *
    * @param { string } formId - 请求转换为常态的卡片标识。
    * @syscap SystemCapability.Ability.Form

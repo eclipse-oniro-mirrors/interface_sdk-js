@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file File URI 
  * @kit CoreFileKit
  */
 

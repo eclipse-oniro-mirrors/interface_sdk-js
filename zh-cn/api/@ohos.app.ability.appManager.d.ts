@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1139,6 +1139,35 @@ declare namespace appManager {
   function killProcessWithAccount(bundleName: string, accountId: int, callback: AsyncCallback<void>): void;
 
   /**
+   * 根据包名、账号ID和应用分身ID安全终止进程。
+   * 如果目标进程受到保护，则无法终止。使用Promise异步回调。
+   *
+   * > **说明：**
+   * >
+   * > 当accountId为当前用户时，不需要校验ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS权限。
+   *
+   * @permission ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.KILL_APP_PROCESSES
+   *     or ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS and ohos.permission.CLEAN_BACKGROUND_PROCESSES
+   * @param { string } bundleName - 应用Bundle名称。
+   * @param { int } accountId - 系统账号的账号ID。
+   * @param { boolean } clearPageStack - 表示是否清除页面堆栈。true表示清除，false表示不清除。
+   * @param { int } [appIndex] - 应用分身ID。默认值为0。
+   * @returns { Promise<void> } Promise对象。无返回结果的Promise对象。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 16000050 - Connect to system server failed.
+   * @throws { BusinessError } 16000210 - The target process is protected by an MDM application
+   *     and cannot be terminated.
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function killProcessWithAccountSafely(bundleName: string, accountId: int, clearPageStack: boolean, appIndex?: int):
+    Promise<void>;
+
+  /**
    * 查询当前系统是否处于稳定性测试场景。使用callback异步回调。
    * 
    * > **说明：**
@@ -1322,13 +1351,14 @@ declare namespace appManager {
   function getAppMemorySize(callback: AsyncCallback<int>): void;
 
   /**
-   * 获取当前应用运行进程的相关信息。使用Promise异步回调。
-   * 
+   * 获取应用运行进程的相关信息。使用Promise异步回调。
+   *
    * > **说明：**
    * >
-   * > - 对于API version 11之前的版本，该接口需要申请权限ohos.permission.GET_RUNNING_INFO（该权限仅系统应用可申请）。
+   * > - 对于API version 11之前的版本，该接口需要申请权限ohos.permission.GET_RUNNING_INFO，可查询全量应用的运行进程信息。
    * >
-   * > - 从API version 11开始，该接口仅用于获取调用方自身的进程信息，不再需要申请权限。
+   * > - 从API version 11开始，默认仅返回调用方自身的运行进程信息；若拥有ohos.permission.GET_RUNNING_INFO权限，
+   * >   则可查询全量应用的运行进程信息。
    *
    * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
    * @returns { Promise<Array<ProcessInformation>> } Promise对象，返回接口运行结果及有关运行进程的信息，可进行错误处理或其他自定义处理。
@@ -1360,13 +1390,14 @@ declare namespace appManager {
     bundleType: bundleManager.BundleType): Promise<Array<ProcessInformation>>;
 
   /**
-   * 获取当前应用运行进程的相关信息。使用callback异步回调。
-   * 
+   * 获取应用运行进程的相关信息。使用callback异步回调。
+   *
    * > **说明：**
    * >
-   * > - 对于API version 11之前的版本，该接口需要申请权限ohos.permission.GET_RUNNING_INFO（该权限仅系统应用可申请）。
+   * > - 对于API version 11之前的版本，该接口需要申请权限ohos.permission.GET_RUNNING_INFO，可查询全量应用的运行进程信息。
    * >
-   * > - 从API version 11开始，该接口仅用于获取调用方自身的进程信息，不再需要申请权限。
+   * > - 从API version 11开始，默认仅返回调用方自身的运行进程信息；若拥有ohos.permission.GET_RUNNING_INFO权限，
+   * >   则可查询全量应用的运行进程信息。
    *
    * @permission ohos.permission.GET_RUNNING_INFO [since 9 - 10]
    * @param { AsyncCallback<Array<ProcessInformation>> } callback - 回调函数。当接口调用成功，err为undefined，data为当前应用运行进程的信息；否则为错误对象。可进行错误

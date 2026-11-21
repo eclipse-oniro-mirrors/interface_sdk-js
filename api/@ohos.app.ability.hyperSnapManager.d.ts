@@ -257,7 +257,7 @@ declare namespace hyperSnapManager {
      * This is useful for applications to distinguish between a normal cold start and a Hyper Snap template
      * process initialization, allowing them to adjust their initialization logic accordingly.
      *
-     * @returns { Promise<boolean> } Promise used to return the result.
+     * @returns { boolean } Returns a flag indicating whether initialization is in progress.
      *     The value **true** indicates the current process is undergoing Hyper Snap initialization,
      *     and **false** indicates the current process is not undergoing Hyper Snap initialization
      *     (snapshot completed, failed, or the process is not a template process).
@@ -266,6 +266,6 @@ declare namespace hyperSnapManager {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    function isHyperSnapInitializing(): Promise<boolean>;
+    function isHyperSnapInitializing(): boolean;
 }
 export default hyperSnapManager;

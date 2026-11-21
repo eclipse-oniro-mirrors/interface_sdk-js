@@ -89,7 +89,7 @@ declare interface PolygonOptions {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @FaAndStageModel
@@ -108,7 +108,7 @@ interface PolygonInterface {
    *     passed, the default width and height (both 0) are used. If **undefined** or **null** is passed, the parameter
    *     setting does not take effect and the component attributes remain unchanged. [since 18]
    * @returns { PolygonAttribute } [since 18]
-   * @syscap SystemCapability.ArkUI.ArkUI.Full [since 9]
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
    * @form [since 9]
@@ -179,7 +179,7 @@ declare class PolygonAttribute extends CommonShapeMethod<PolygonAttribute> {
  * >
  * > Since API version 20, this component supports updating constructor parameters through the
  * > [updateConstructorParams](docroot://reference/apis-arkui/js-apis-arkui-AttributeUpdater.md#properties) API of the
- * > [AttributeUpdater]{@link @global:AttributeUpdater} class.
+ * > [AttributeUpdater]{@link @ohos.arkui.modifier:AttributeUpdater} class.
  *
  * ###### Child Components
  *

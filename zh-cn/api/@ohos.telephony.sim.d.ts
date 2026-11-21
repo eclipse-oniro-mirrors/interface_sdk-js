@@ -709,12 +709,14 @@ declare namespace sim {
   function getIMSI(slotId: int): Promise<string>;
 
   /**
-   * Indicates whether the SIM card in a specified slot is a specified operator.
+   * 获取指定卡槽SIM卡是否为指定运营商卡。例如，运营商专属应用在启动时可通过此接口判断当前SIM卡是否为自家运营商卡，从而决定是否展示运营商专属服务或功能。
    *
-   * @param { int } slotId - Indicates the card slot index number,
-   * ranging from 0 to the maximum card slot index number supported by the device.
-   * @param { OperatorSimCard } operator - Indicates the operator of sim.
-   * @returns { boolean } Returns {@code true} if the SIM card is specified operator; return {@code false} otherwise.
+   * @param { int } slotId - 卡槽ID。<br/>- 0：卡槽1<br/>- 1：卡槽2。
+   *     <br>取值限定为整数。
+   * @param { OperatorSimCard } operator - 运营商卡名称。（当前仅支持中国电信卡）。
+   * @returns { boolean } 返回指定卡槽是否为指定运营商卡
+   *     <br/>- true：是
+   *     <br/>- false：否
    * @throws { BusinessError } 202 - Non-system applications use system APIs.
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
    *     2. Incorrect parameter types.

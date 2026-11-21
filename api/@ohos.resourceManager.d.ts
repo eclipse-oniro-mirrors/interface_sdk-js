@@ -79,7 +79,7 @@ declare namespace resourceManager {
    */
   export enum Direction {
     /**
-     * Portrait
+     * Portrait.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 10]
@@ -90,7 +90,7 @@ declare namespace resourceManager {
     DIRECTION_VERTICAL = 0,
 
     /**
-     * Landscape
+     * Landscape.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 10]
@@ -104,10 +104,6 @@ declare namespace resourceManager {
   /**
    * Enumerates the device types.
    *
-   * <!--RP1-->
-   *
-   * <!--RP1End-->
-   *
    * @syscap SystemCapability.Global.ResourceManager
    * @crossplatform [since 10]
    * @atomicservice [since 11]
@@ -116,7 +112,7 @@ declare namespace resourceManager {
    */
   export enum DeviceType {
     /**
-     * Phone
+     * Phone.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 10]
@@ -127,7 +123,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_PHONE = 0x00,
 
     /**
-     * Tablet
+     * Tablet.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -138,7 +134,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_TABLET = 0x01,
 
     /**
-     * Head unit
+     * Head unit.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -149,7 +145,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_CAR = 0x02,
 
     /**
-     * Indicates a PC.
+     * PC.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -160,7 +156,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_PC = 0x03,
 
     /**
-     * Smart TV
+     * Smart TV.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -171,7 +167,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_TV = 0x04,
 
     /**
-     * Wearable
+     * Wearable.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform [since 11]
@@ -182,7 +178,7 @@ declare namespace resourceManager {
     DEVICE_TYPE_WEARABLE = 0x06,
 
     /**
-     * PC/2-in-1 device
+     * 2-in-1 device.
      *
      * @syscap SystemCapability.Global.ResourceManager
      * @crossplatform

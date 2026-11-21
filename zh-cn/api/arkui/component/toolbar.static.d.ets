@@ -88,16 +88,18 @@ export declare interface ToolBarItemAttribute {
    * @param { ToolBarItemOptions } [options] - 列选项
    * @returns { this } ToolBarItemAttribute实例
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   setToolBarItemOptions(options?: ToolBarItemOptions): this;
   /**
    * 通知ToolBarItem已完成属性设置。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
    * @stagemodelonly
-   * @since 26.0.0 staticonly
+   * @since 26.0.1 staticonly
    */
   applyAttributesFinish(): void;
 }
@@ -126,8 +128,9 @@ export declare function ToolBarItem(
  * @param { CustomBuilder } [content_] - 容器。
  * @returns { ToolBarItemAttribute } ToolBarItem的属性。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
  * @stagemodelonly
- * @since 26.0.0 staticonly
+ * @since 26.0.1 staticonly
  */
 @Builder
 export declare function ToolBarItem(

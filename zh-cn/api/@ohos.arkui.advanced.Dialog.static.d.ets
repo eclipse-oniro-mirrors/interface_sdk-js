@@ -19,7 +19,7 @@
  * 
  * > **说明：**
  * >
- * > - 如果Dialog设置[通用属性]{@link common}和[通用事件]{@link common}，编译工具链会额外生
+ * > - 如果Dialog设置[通用属性]{@link CommonMethod}和[通用事件]{@link CommonMethod}，编译工具链会额外生
  * > 成节点__Common__，并将通用属性或通用事件挂载在__Common__上，而不是直接应用到Dialog本身。这可能导致开发者设置的通用属性或通用事件不生效或不符合预期，因此，不建议Dialog设置通用属性和通用事件。
  *
  * ###### 子组件
@@ -274,7 +274,7 @@ export declare struct TipsDialog {
    */
   onCheckedChange?: Callback<boolean>;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -368,7 +368,7 @@ export declare struct SelectDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -482,7 +482,7 @@ export declare struct ConfirmDialog {
    */
   onCheckedChange?: Callback<boolean>;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -582,7 +582,7 @@ export declare struct AlertDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -638,7 +638,7 @@ export declare struct LoadingDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -748,7 +748,7 @@ export declare struct CustomContentDialog {
    */
   themeColorMode?: ThemeColorMode;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -794,7 +794,7 @@ export declare struct PopoverDialog {
   @Require @BuilderParam
   targetBuilder: () => void;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

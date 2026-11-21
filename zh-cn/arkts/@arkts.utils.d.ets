@@ -65,7 +65,7 @@ declare namespace utils {
      * 以原子方式将指定值与目标元素相加，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 要相加的值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -80,7 +80,7 @@ declare namespace utils {
      * 以原子方式执行按位与运算，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 用于按位与运算的值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -95,7 +95,7 @@ declare namespace utils {
      * 目标元素与预期值相等时，以原子方式替换并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } expectedValue - 用于与目标元素比较的值。
      * @param { number } replacementValue - 比较成功时存储的值。
      * @returns { number } 操作前的元素值。
@@ -112,7 +112,7 @@ declare namespace utils {
      * 以原子方式替换目标元素，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 替换值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -126,7 +126,7 @@ declare namespace utils {
     /**
      * 返回指定字节大小的原子操作是否无锁。
      *
-     * @param { number } size - 原子操作的字节大小。
+     * @param { number } size - 要查询的元素字节大小，而非数组长度。该值按32位整数转换；转换后为1、2、4或8时返回true，其他值返回false。
      * @returns { boolean } 如果指定大小的原子操作无锁，则返回true；否则返回false。
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
@@ -139,7 +139,7 @@ declare namespace utils {
      * 以原子方式读取并返回目标元素。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @returns { number } 目标元素的值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @syscap SystemCapability.Utils.Lang
@@ -153,7 +153,7 @@ declare namespace utils {
      * 以原子方式执行按位或运算，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 用于按位或运算的值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -165,12 +165,14 @@ declare namespace utils {
      */
     static or(typedArray: AtomicIntegerArray, index: number, value: number): number;
     /**
-     * 以原子方式存储值，并返回转换后的存储值。
+     * 以原子方式将value整数化后写入目标元素，并返回整数化后的value。
+     *
+     * 返回值是value整数化后的值，不包含写入目标元素时按位宽和符号进行的类型转换，因此不一定等于实际存入的元素值。例如向collections.Uint8Array写入257时返回257，但实际存入的元素值为1。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
-     * @param { number } value - 要存储的值。
-     * @returns { number } 存入目标元素的转换后值。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
+     * @param { number } value - 要存储的值。先转换为整数，再按目标元素类型写入。超出目标元素类型表示范围时，按该类型的位宽和符号转换。
+     * @returns { number } value整数化后的值，不包含按目标元素位宽和符号进行的类型转换。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
@@ -183,7 +185,7 @@ declare namespace utils {
      * 以原子方式从目标元素减去指定值，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 要减去的值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -197,11 +199,13 @@ declare namespace utils {
     /**
      * 当指定Int32元素等于预期值时等待。
      *
+     * 当元素等于预期值时阻塞当前线程，直到收到notify通知或等待超时。值不相等时返回not-equal，不进入等待。仅修改目标元素的值不会自动唤醒等待线程。调用线程必须允许阻塞等待；接口先检查线程是否允许阻塞，再比较元素值，即使timeout为0或元素值不等也必须满足此要求。不允许阻塞时抛出参数错误。应在允许阻塞的Worker线程中调用，避免阻塞UI线程。
+     *
      * @param { collections.Int32Array } typedArray - 包含目标元素的Int32Array。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 预期值。
-     * @param { number } [timeout] - 最长等待时间，单位为毫秒，默认值为正无穷。
-     * @returns { 'ok' | 'not-equal' | 'timed-out' } 等待操作的结果。
+     * @param { number } [timeout] - 最长等待时间，单位为毫秒。省略、传入NaN或正无穷时，若元素值等于预期值，则持续等待直到收到通知；负数按0处理。为0且元素值等于预期值时，立即返回timed-out。需要限制等待时间时，传入有限的非负数。
+     * @returns { 'ok' | 'not-equal' | 'timed-out' } 等待结果。ok表示被通知唤醒；not-equal表示目标元素不等于预期值，未进入等待；timed-out表示等待超时。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @syscap SystemCapability.Utils.Lang
      * @stagemodelonly
@@ -214,9 +218,11 @@ declare namespace utils {
     /**
      * 通知等待指定Int32元素的线程，并返回已通知的线程数。
      *
+     * 等待与通知必须针对同一底层缓冲区的同一字节位置；不同数组中相同的数值索引不代表同一等待位置。使用同一缓冲区的不同视图时，还需考虑byteOffset。此方法仅发送通知，不修改目标元素。通知只作用于当前已进入等待的线程，不会为后续wait调用保留。需要通知等待线程读取新值时，应先写入新值，再调用notify。
+     *
      * @param { collections.Int32Array } typedArray - 包含目标元素的Int32Array。
-     * @param { number } index - 目标元素的索引。
-     * @param { number } [count] - 要通知的最大等待线程数，默认通知全部等待线程。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
+     * @param { number } [count] - 要通知的最大等待线程数。省略或传入正无穷时通知全部等待线程；为0或负数时不通知；非整数截去小数部分。
      * @returns { number } 已通知的等待线程数。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
      * @syscap SystemCapability.Utils.Lang
@@ -230,7 +236,7 @@ declare namespace utils {
      * 以原子方式执行按位异或运算，并返回操作前的值。
      *
      * @param { AtomicIntegerArray } typedArray - 包含目标元素的整数TypedArray。
-     * @param { number } index - 目标元素的索引。
+     * @param { number } index - 目标元素的索引。索引从0开始，应小于typedArray.length。
      * @param { number } value - 用于按位异或运算的值。
      * @returns { number } 操作前的元素值。
      * @throws { BusinessError } 10200001 - The value of index is out of range.
@@ -276,7 +282,7 @@ declare namespace utils {
     @Sendable
     class AsyncLock {
       /**
-       * 默认构造函数。
+       * 默认构造函数。创建一个异步锁。
        *
        * @syscap SystemCapability.Utils.Lang
        * @crossplatform [since 18]
@@ -285,10 +291,10 @@ declare namespace utils {
        */
       constructor();
       /**
-       * 使用指定的名称查找或创建AsyncLock实例。
+       * 使用指定的名称查找或创建（如果未找到）异步锁实例。
        *
-       * @param { string } name - 要查找或创建的锁的名称。
-       * @returns { AsyncLock } 返回AsyncLock实例。
+       * @param { string } name - 按指定名称查找或创建异步锁实例。
+       * @returns { AsyncLock } 返回查找到或创建后的异步锁实例。
        * @syscap SystemCapability.Utils.Lang
        * @crossplatform [since 18]
        * @atomicservice
@@ -625,6 +631,8 @@ declare namespace utils {
   /**
    * 为支持将JSON字符串解析为共享数据，即Sendable支持的数据类型，ArkTS语言基础库新增了ASON工具。ASON工具支持解析JSON字符串并生成共享数据，用于跨并发实例引用传递，同时也支持将共享数据转换为JSON字符串。
    *
+   * 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
+   *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 18]
    * @atomicservice
@@ -783,6 +791,8 @@ declare namespace utils {
    * SendableLruCache在缓存空间不足时，会用新数据替换近期最少使用的数据。此设计基于资源访问的考虑：
    * 近期访问的数据可能在不久的将来再次访问，因此最少访问的数据价值最小，应优先移出缓存。
    * SendableLruCache支持Sendable（可跨线程安全共享的）特性，可保存Sendable对象，确保跨线程安全访问。
+   *
+   * 此模块仅支持在ArkTS文件（文件后缀为.ets）中导入使用。
    *
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 22]

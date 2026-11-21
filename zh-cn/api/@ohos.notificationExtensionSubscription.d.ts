@@ -293,7 +293,7 @@ declare namespace notificationExtensionSubscription {
    *     2.Memory operation error. 3.The user does not exist.
    * @throws { BusinessError } 1600002 - Marshalling or unmarshalling error.
    * @throws { BusinessError } 1600003 - Failed to connect to the service.
-   * @throws { BusinessError } 1600022 - The application does not implement the
+   * @throws { BusinessError } 1600023 - The application does not implement the
    *     NotificationSubscriberExtensionAbility.
    * @syscap SystemCapability.Notification.Notification
    * @systemapi

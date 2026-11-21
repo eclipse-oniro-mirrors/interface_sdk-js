@@ -87,7 +87,7 @@ declare enum IndexerAlign {
 interface AlphabetIndexerOptions {
 
   /**
-   * Alphabetical index string array.
+   * 字符串数组，每个字符串代表一个索引项。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -97,7 +97,7 @@ interface AlphabetIndexerOptions {
   arrayValue: Array<string>;
 
   /**
-   * ID of the selected item.
+   * 选中项的索引值。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @crossplatform [since 10]
@@ -181,9 +181,9 @@ declare type OnAlphabetIndexerRequestPopupDataCallback  = (index: number) => Arr
 * 文本最大的字体缩放倍数[maxFontScale]{@link TextAttribute#maxFontScale}和最小的字体缩放倍数[minFontScale]{@link TextAttribute#minFontScale}
 * 皆为1，不跟随系统字体大小调节变化。
 *
-* 除支持[通用属性]{@link common}外，还支持以下属性：
+* 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
 *
-* 除支持[通用事件]{@link common}外，还支持以下事件：
+* 除支持[通用事件]{@link CommonMethod}外，还支持以下事件：
 *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @crossplatform [since 10]

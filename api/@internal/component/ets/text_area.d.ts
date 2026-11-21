@@ -1830,8 +1830,7 @@ declare class TextAreaAttribute extends CommonMethod<TextAreaAttribute> {
    * [shaderStyle]{@link TextAreaAttribute#shaderStyle} are set, shaderStyle does not take effect. If this API is not
    * called, the default value is 0, and no stroke is applied.
    *
-   * @param { Optional<LengthMetrics> } width - Width of the text stroke. When the unit attribute of the LengthMetrics
-   *     object is LengthUnit.PERCENT, this setting does not take effect and the default value is used.
+   * @param { Optional<LengthMetrics> } width - Width of the text stroke.
    *     <br>If the value is less than 0, solid text is displayed; if the value is greater than 0, hollow text is
    *     displayed.
    * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.

@@ -1634,6 +1634,46 @@ declare namespace photoAccessHelper {
     readonly result: Array<string|null>;
   }
 
+  /**
+   * 媒体资产URI的操作结果信息。
+   *
+   * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface AssetUriResult {
+    /**
+     * 操作对应的原始资产URI。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly originalUri: string;
+
+    /**
+     * 操作结果对应的资产URI。操作失败时为空字符串。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly resultUri: string;
+
+    /**
+     * 操作是否成功。true表示成功，false表示失败，失败时resultUri为空字符串。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly isSuccess: boolean;
+  }
+
 
   /**
    * 用于中断复制操作的信号。
@@ -1845,7 +1885,9 @@ declare namespace photoAccessHelper {
      *     [PhotoKeys]{@link @ohos.file.photoAccessHelper:photoAccessHelper.PhotoKeys}.TITLE的值。title的参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types;
@@ -2575,7 +2617,9 @@ declare namespace photoAccessHelper {
      * @param { string } title - 克隆后资产的标题。参数规格为：
      *     <br>- 不应包含扩展名。
      *     <br>- 文件名字符串长度的取值范围为[1, 255]（资产文件名为标题+扩展名）。
-     *     <br>- 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>- 不允许出现的非法英文字符。
+     *     <br>- API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>- API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * @returns { Promise<PhotoAsset> } Promise对象，返回
      *     [PhotoAsset]{@link @ohos.file.photoAccessHelper:photoAccessHelper}。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -4146,7 +4190,9 @@ declare namespace photoAccessHelper {
      * 
      * - 不应包含扩展名。
      * - 文件名字符串长度为1~255（资产文件名为标题+扩展名）。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
      * @atomicservice
@@ -4202,7 +4248,9 @@ declare namespace photoAccessHelper {
      * 不传入时由系统生成，参数规格如下：
      * 
      * - 不应包含扩展名。
-     * - 不允许出现的非法英文字符，包括：. \ / : * ? " ' ` < > | { } [ ]
+     * - 不允许出现的非法英文字符。
+     * - API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     * - API版本26.1.0之前，非法字符包括：. \ / : * ? " ' ` < > | { } [ ]
      * - 由于文件名由标题 + 扩展名组成，文件名字符串长度范围为[1, 255]，因此请注意标题长度不宜过长。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -6008,7 +6056,9 @@ declare namespace photoAccessHelper {
      * @param { CreateOptions } options - 创建选项，当前仅支持'title'，例如{title: 'testPhoto'}。
      *     <br>**注意：**
      *     <br>传入'subtype'选项，配置不生效，仅支持保存DEFAULT类型图片。
-     *     <br>文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括： . .. \ / : * ? " ' ` < > | { } [ ]
      * @param { AsyncCallback<string> } callback - callback返回创建的图片和视频的uri。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.[since 11]
@@ -12589,7 +12639,9 @@ declare namespace photoAccessHelper {
      * @param { PhotoType } photoType - 待创建的文件类型，IMAGE或者VIDEO类型。
      * @param { string } extension - 文件扩展名，例如：'jpg'。
      * @param { CreateOptions } [options] - 创建选项，例如：{title: 'testPhoto'}。
-     *     <br>文件名中不允许出现非法英文字符，包括：. .. \ / : * ? " ' ` < > | { } [ ]
+     *     <br>文件名中不允许出现非法英文字符。
+     *     <br>API版本26.1.0开始，非法字符包括：\ / : * ? " ' ` < > | { } [ ]；允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
+     *     <br>API版本26.1.0之前，非法字符包括：. .. \ / : * ? " ' ` < > | { } [ ]
      * @returns { MediaAssetChangeRequest }      **MediaAssetChangeRequest** created.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -13301,6 +13353,65 @@ declare namespace photoAccessHelper {
     static deleteLocalAssetsWithUri(context: Context, assetUris: string[]): Promise<void>;
 
     /**
+     * 批量删除本地的媒体资产（照片或视频）到回收站，并返回每个资产的操作结果。使用Promise异步回调。
+     *
+     * > **说明：**
+     * >
+     * > - 对仅存在于本端设备的资产，直接删除到回收站，操作成功后resultUri为该资产在回收站中的新URI。
+     * >
+     * > - 对仅存在于云端的资产，不做任何处理，操作结果中isSuccess为false，resultUri为空字符串。
+     * >
+     * > - 对于同时存储在本端设备和云端的资产，调用接口后仅保留云端资产，本地资产进入回收站，操作成功后resultUri为本地资产在回收站中的新URI。
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - 传入Ability实例的context。
+     * @param { string[] } assetUris - 待删除的图片或者视频Uri数组，数组中元素个数不超过500个。
+     * @returns { Promise<Array<AssetUriResult>> } Promise对象，返回每个资产的操作结果数组，结果数组与入参assetUri数组一一对应。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static deleteLocalAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
+
+    /**
+     * 从回收站中批量恢复指定的URI字符串数组所对应的资产，并返回每个资产的操作结果。操作成功后，资产从回收站恢复到正常状态，
+     * resultUri为恢复后资产的新URI。操作失败时，isSuccess为false，resultUri为空字符串。使用Promise异步回调。
+     *
+     * @permission ohos.permission.WRITE_IMAGEVIDEO
+     * @param { Context } context - 传入Ability实例的Context。
+     * @param { string[] } assetUris - 待从回收站中恢复的资产Uri数组，数组中元素个数不超过500个。
+     * @returns { Promise<Array<AssetUriResult>> } Promise对象，返回每个资产的操作结果数组，结果数组与入参assetUri数组一一对应。
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:
+     *     <br>1. The context is empty;
+     *     <br>2. Asset uri array size is empty or bigger than 500.
+     * @throws { BusinessError } 23800301 - Internal system error. It is recommended to retry and check the logs.
+     *     Possible causes:
+     *     <br>1. Database corrupted;
+     *     <br>2. The file system is abnormal;
+     *     <br>3. The IPC request timed out.
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    static recoverAssetsAndGetUris(context: Context, assetUris: string[]): Promise<Array<AssetUriResult>>;
+
+    /**
      * 批量删除云端状态的媒体资产（照片或视频）到回收站。使用promise异步回调。
      *
      * > **说明：**
@@ -13428,8 +13539,8 @@ declare namespace photoAccessHelper {
      *     <br>不应包含扩展名。
      *     文件名字符串长度为1~255。
      *     不允许出现的非法英文字符，包括：
-     *     . \ / : * ? " ' ` < > | { } [ ]
-     *     不允许仅命名.或者..
+     *     \ / : * ? " ' ` < > | { } [ ]
+     *     允许包含英文句点（.），但不允许以英文句点（.）作为首字符。
      *     文管目录下不允许重名
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 23800151 - The scenario parameter verification fails. Possible causes:

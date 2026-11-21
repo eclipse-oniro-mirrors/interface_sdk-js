@@ -39,9 +39,9 @@ declare namespace storageStatistics {
    *     <br>Unit: Byte.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -60,9 +60,9 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } return Promise (Unit: Byte)
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -81,9 +81,9 @@ declare namespace storageStatistics {
    *     <br>Unit: Byte.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-  parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -102,9 +102,9 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } return Promise (Unit: Byte)
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:1.Mandatory
-   *     parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600008 - No such object.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -211,8 +211,8 @@ declare namespace storageStatistics {
    * result.
    *
    * @param { AsyncCallback<BundleStats> } callback - Callback used to return the application space obtained.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -226,8 +226,8 @@ declare namespace storageStatistics {
    * Obtains the storage space (in bytes) of this application. This API uses a promise to return the result.
    *
    * @returns { Promise<BundleStats> } Promise used to return the application storage space obtained.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -245,8 +245,8 @@ declare namespace storageStatistics {
    *     <br>Unit: Byte.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -263,8 +263,8 @@ declare namespace storageStatistics {
    * @returns { Promise<long> } return Promise (Unit: Byte)
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -363,9 +363,9 @@ declare namespace storageStatistics {
    * @returns { Promise<StorageStats> } Promise used to return the storage statistics (in bytes) obtained.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -382,9 +382,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<StorageStats> } callback - Callback used to return the storage statistics obtained.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -402,9 +402,9 @@ declare namespace storageStatistics {
    * @returns { Promise<StorageStats> } Promise used to return the storage statistics (in bytes) obtained.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600009 - User if out of range.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -424,9 +424,9 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<StorageStats> } callback - Callback used to return the storage statistics obtained.
    * @throws { BusinessError } 201 - Permission verification failed.
    * @throws { BusinessError } 202 - The caller is not a system application.
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:
-   *     1.Mandatory parameters are left unspecified;
-   *     <br>2.Incorrect parameter types.
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified.
+   *     <br>2. Incorrect parameter types.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13600009 - User if out of range.
    * @throws { BusinessError } 13900042 - Unknown error.
@@ -445,8 +445,8 @@ declare namespace storageStatistics {
    * @param { AsyncCallback<long> } callback - Callback used to return the built-in storage space obtained.
    * @throws { BusinessError } 201 - Permission verification failed. [since 9 - 14]
    * @throws { BusinessError } 202 - The caller is not a system application. [since 9 - 14]
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics
@@ -502,8 +502,8 @@ declare namespace storageStatistics {
    *     obtained.
    * @throws { BusinessError } 201 - Permission verification failed. [since 9 - 14]
    * @throws { BusinessError } 202 - The caller is not a system application. [since 9 - 14]
-   * @throws { BusinessError } 401 - The input parameter is invalid.Possible causes:Mandatory
-   *     parameters are left unspecified;
+   * @throws { BusinessError } 401 - The input parameter is invalid. Possible causes: Mandatory
+   *     parameters are left unspecified.
    * @throws { BusinessError } 13600001 - IPC error.
    * @throws { BusinessError } 13900042 - Unknown error.
    * @syscap SystemCapability.FileManagement.StorageService.SpatialStatistics

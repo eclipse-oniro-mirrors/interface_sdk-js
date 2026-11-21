@@ -191,8 +191,8 @@ declare class CanvasGradient {
   addColorStop(offset: number, color: string): void;
 
   /**
-   * 设置渐变断点值，包括偏移和颜色。支持设置rgb或argb格式颜色。支持通过传入[ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型设置P3广色域颜色值，从API版
-   * 本26.0.0开始，新增支持BT2020广色域和HDR提亮。
+   * 设置渐变断点值，包括偏移和颜色。支持设置rgb或argb格式颜色。支持通过传入[ColorMetrics]{@link ../../../arkui/Graphics:ColorMetrics}类型设置P3广色域颜色值<!--Del-->，从API版
+   * 本26.0.0开始，新增支持BT2020广色域和HDR提亮<!--DelEnd-->。
    *
    * @param { number } offset - 设置渐变点距离起点的位置占总体长度的比例，范围为[0, 1]。
    *     <br>设置offset<0或offset>1无渐变效果。
@@ -585,7 +585,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象。
    *
    * @param { string } d - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @FaAndStageModel
    * @crossplatform [since 10]
@@ -599,7 +599,7 @@ declare class Path2D extends CanvasPath {
    * 使用符合SVG路径描述规范的路径字符串构造Path2D对象，支持配置Path2D对象的单位模式。
    *
    * @param { string } description - 符合SVG路径描述规范的路径字符串，格式参考
-   * [SVG路径描述规范]{@link ./path#svg路径描述规范}，异常值按无效值处理。
+   * [SVG路径描述规范]{@link @global:Path}，异常值按无效值处理。
    * @param { LengthMetricsUnit } [unit] - 用来配置Path2D对象的单位模式，配置后无法动态更改，
    * 配置方法同[CanvasRenderingContext2D]{@link CanvasRenderingContext2D}。
    * <br>异常值NaN和Infinity按默认值处理。
@@ -1383,7 +1383,7 @@ declare class CanvasRenderer extends CanvasPath {
    * @crossplatform [since 10]
    * @form [since 9]
    * @atomicservice [since 11]
-   * @since 8 dynami
+   * @since 8 dynamic
    */
   clip(path: Path2D, fillRule?: CanvasFillRule): void;
 

@@ -172,15 +172,16 @@ export declare interface FolderStackAttribute extends CommonMethod {
      */
     default autoHalfFold(value: boolean | undefined): this;
     /**
- 	 * Set FolderStack options.
- 	 *
- 	 * @param { FolderStackOptions } [options] - FolderStack constructor options
- 	 * @returns { FolderStackAttribute } Returns the instance of the FolderStackAttribute.
+     * 设置FolderStack选项。
+     *
+     * @param { FolderStackOptions } options - FolderStack的配置项，用于设置悬停态时需要移到上半屏的子组件。当需要使用折叠屏悬停能力时，通过upperItems数组指定子组件id；不
+     *    传入时FolderStack作为普通Stack组件使用，不启用悬停能力，upperItems默认为空数组。 [since 18]
+     * @returns { FolderStackAttribute } 返回FolderStackAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setFolderStackOptions(options?: FolderStackOptions): this;
     /**
      * 设置组件的动态属性。

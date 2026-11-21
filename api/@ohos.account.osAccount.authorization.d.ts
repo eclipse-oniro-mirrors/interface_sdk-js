@@ -85,6 +85,35 @@ declare namespace authorization {
     requestAuthorization(privilege: Privilege, context: UIAbilityContext): Promise<AuthorizationResult>;
 
     /**
+     * Requests that the specified batch privileges be granted to the current process. This API uses a promise to
+     * return the result.
+     *
+     * When the application is in the foreground and there is no valid authorization, the authorization dialog is
+     * displayed in modal application mode. If a valid authorization already exists, it will be reused.
+     *
+     * @permission ohos.permission.REQUEST_LOCAL_ACCOUNT_AUTHORIZATION
+     * @param { Array<Privilege> } privileges - Target batch privileges. For available value, see
+     *     [Privilege]{@link authorization.Privilege}.
+     *     <br>The maxium length is 5 and connot be empty
+     * @param { UIAbilityContext } context - The [UIAbility context]{@link ./application/UIAbilityContext:UIAbilityContext}
+     *     that hosts the authorization dialog.
+     * @returns { Promise<Map<Privilege, AuthorizationResult>> } Promise used to return the authorization results.
+     * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+     *     required to call the API.
+     * @throws { BusinessError } 12300001 - The system service works abnormally.
+     * @throws { BusinessError } 12300002 - The privileges array is empty or exceeds the batch limit.
+     * @throws { BusinessError } 12300302 - User interaction is required but not allowed.
+     *     Possible causes: 1. The specified UI context is invalid; 2. The application is not in the foreground.
+     *     Suggested solutions: Ensure the application is in the foreground and pass a valid UIAbilityContext.
+     * @throws { BusinessError } 12300304 - Authorization service is busy.
+     *     Possible cause: Another authorization is being processed.
+     * @syscap SystemCapability.Account.OsAccount
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    requestBatchAuthorization(privileges: Array<Privilege>, context: UIAbilityContext): Promise<Map<Privilege, AuthorizationResult>>;
+
+    /**
      * Checks whether the current process has authorization for the specified privilege. This API uses a promise to
      * return the result.
      *

@@ -1,0 +1,926 @@
+# Illustrative ArkTS API metadata example. Names are fictional and do not declare a public SDK API.
+schemaVersion: "1.0.0"
+language: arkts
+source:
+  repository: interface_sdk-js
+  branch: feature/proposal-12345-api-metadata
+  commit: "1234567890abcdef1234567890abcdef12345678"
+  path: api/@ohos.sample.d.ts
+file:
+  path: interface_sdk-js/api/@ohos.sample.d.ts
+  kit: SampleKit
+  packageName: sample
+  license: Apache-2.0
+  imports: []
+  exports:
+    - "@ohos.sample.d.ts"
+apis:
+  - kind: namespace
+    id: sample
+    parentId: null
+    name: sample
+    qualifiedName: sample
+    declaration: "declare namespace sample"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 18
+    endLine: 22
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Provides sample APIs.
+        scenario: Use this namespace for sample operations.
+        effect: Applications can call sample APIs.
+      zh:
+        function: 提供示例 API。
+        scenario: 用于示例操作。
+        effect: 应用可调用示例 API。
+    members:
+      - sample.processor
+      - sample.options
+      - sample.state
+      - sample.mode
+      - sample.limit
+      - sample.value
+      - sample.create
+      - sample.observable
+      - sample.validation
+  - kind: class
+    id: sample.processor
+    parentId: sample
+    name: Processor
+    qualifiedName: sample.Processor
+    declaration: "export class Processor<T extends object>"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 30
+    endLine: 84
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Processes sample data.
+        scenario: Use this class when sample data must be processed.
+        effect: A processor instance is created and can run.
+      zh:
+        function: 处理示例数据。
+        scenario: 需要处理示例数据时使用。
+        effect: 创建处理器实例并可执行处理。
+    typeParameters:
+      - name: T
+        constraint:
+          text: object
+    extends:
+      text: BaseProcessor
+    implements:
+      - text: IProcessor
+    isAbstract: false
+    isSealed: false
+    members:
+      - sample.processor.constructor
+      - sample.processor.run
+      - sample.processor.enabled
+      - sample.processor.tags
+      - sample.processor.size.get
+      - sample.processor.index
+    constructors:
+      - sample.processor.constructor
+    staticMembers: []
+  - kind: interface
+    id: sample.options
+    parentId: sample
+    name: Options
+    qualifiedName: sample.Options
+    declaration: "export interface Options"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 92
+    endLine: 126
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines sample options.
+        scenario: Use this interface to configure sample APIs.
+        effect: Options are passed to sample APIs.
+      zh:
+        function: 定义示例配置。
+        scenario: 用于配置示例 API。
+        effect: 配置将传递给示例 API。
+    typeParameters: []
+    extends: []
+    members: []
+    callSignatures:
+      - sample.options.call
+    constructSignatures:
+      - sample.options.construct
+    indexSignatures: []
+  - kind: struct
+    id: sample.state
+    parentId: sample
+    name: State
+    qualifiedName: sample.State
+    declaration: "export struct State"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 132
+    endLine: 156
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Declares a sample UI state struct.
+        scenario: Use this struct for sample UI state.
+        effect: Sample UI state is represented.
+      zh:
+        function: 声明示例 UI 状态结构。
+        scenario: 用于示例 UI 状态。
+        effect: 表示示例 UI 状态。
+    typeParameters: []
+    implements: []
+    decorators: []
+    members: []
+    lifecycleHooks: []
+  - kind: method
+    id: sample.processor.run
+    parentId: sample.processor
+    name: run
+    qualifiedName: sample.Processor.run
+    declaration: "run(options?: Options): Promise<void>"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 42
+    endLine: 58
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Runs the processor.
+        scenario: Call this method to process sample data.
+        effect: The promise completes after processing.
+      zh:
+        function: 执行处理器。
+        scenario: 调用该方法处理示例数据。
+        effect: 处理完成后 Promise 完成。
+    typeParameters: []
+    parameters:
+      - name: options
+        type:
+          text: Options
+          kind: reference
+        required: false
+        optional: true
+    returnType:
+      text: Promise<void>
+      kind: promise
+      typeArguments:
+        - text: void
+          kind: void
+    isStatic: false
+    isAbstract: false
+    isOptional: false
+    overloadGroup: null
+    errorCodes:
+      - code: 401
+        condition: The input parameter type is invalid.
+        message:
+          en: Parameter error.
+          zh: 参数错误。
+  - kind: function
+    id: sample.create
+    parentId: sample
+    name: create
+    qualifiedName: sample.create
+    declaration: "export function create(options?: Options): Processor<Options>"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 164
+    endLine: 182
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Creates a sample processor.
+        scenario: Call this function to obtain a processor.
+        effect: A processor instance is returned.
+      zh:
+        function: 创建示例处理器。
+        scenario: 调用该函数获取处理器。
+        effect: 返回处理器实例。
+    typeParameters: []
+    parameters:
+      - name: options
+        type:
+          text: Options
+          kind: reference
+        required: false
+        optional: true
+    returnType:
+      text: Processor<Options>
+      kind: reference
+      typeArguments:
+        - text: Options
+          kind: reference
+    overloadGroup: null
+    errorCodes: []
+  - kind: constructor
+    id: sample.processor.constructor
+    parentId: sample.processor
+    name: constructor
+    qualifiedName: sample.Processor.constructor
+    declaration: "constructor(options?: Options)"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 36
+    endLine: 39
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Constructs a processor.
+        scenario: Create a processor before running it.
+        effect: A processor instance is created.
+      zh:
+        function: 构造处理器。
+        scenario: 运行前先创建处理器。
+        effect: 创建处理器实例。
+    typeParameters: []
+    parameters:
+      - name: options
+        type:
+          text: Options
+          kind: reference
+        required: false
+        optional: true
+    overloadGroup: null
+    errorCodes: []
+  - kind: property
+    id: sample.processor.enabled
+    parentId: sample.processor
+    name: enabled
+    qualifiedName: sample.Processor.enabled
+    declaration: "enabled?: boolean"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 60
+    endLine: 64
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Indicates whether the processor is enabled.
+        scenario: Read or set this property before running.
+        effect: The processor state is changed.
+      zh:
+        function: 表示处理器是否启用。
+        scenario: 运行前读取或设置该属性。
+        effect: 处理器状态发生变化。
+    propertyType:
+      text: boolean
+      kind: primitive
+    isOptional: true
+    isReadonly: false
+    isStatic: false
+    defaultValue: true
+    initializer: "true"
+    accessors: []
+  - kind: property
+    id: sample.processor.tags
+    parentId: sample.processor
+    name: tags
+    qualifiedName: sample.Processor.tags
+    declaration: "tags: string[]"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 66
+    endLine: 70
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Stores sample tags.
+        scenario: Use this property to attach tags.
+        effect: Tags are available on the processor.
+      zh:
+        function: 存储示例标签。
+        scenario: 使用该属性附加标签。
+        effect: 处理器上可获取标签。
+    propertyType:
+      text: string[]
+      kind: array
+      elementType:
+        text: string
+        kind: primitive
+    isOptional: false
+    isReadonly: false
+    isStatic: false
+    defaultValue: null
+    initializer: "[]"
+    accessors: []
+  - kind: const
+    id: sample.limit
+    parentId: sample
+    name: LIMIT
+    qualifiedName: sample.LIMIT
+    declaration: "export const LIMIT: number"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 188
+    endLine: 192
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines the sample limit.
+        scenario: Use this constant to limit sample size.
+        effect: The sample size is bounded.
+      zh:
+        function: 定义示例上限。
+        scenario: 使用该常量限制示例规模。
+        effect: 示例规模受限。
+    constType:
+      text: number
+      kind: primitive
+    value: 1024
+    initializer: "1024"
+    isUniqueSymbol: false
+    isReadonly: true
+  - kind: enum
+    id: sample.mode
+    parentId: sample
+    name: Mode
+    qualifiedName: sample.Mode
+    declaration: "export enum Mode"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 198
+    endLine: 216
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines sample modes.
+        scenario: Use this enum to select a mode.
+        effect: A sample mode is selected.
+      zh:
+        function: 定义示例模式。
+        scenario: 使用该枚举选择模式。
+        effect: 选择示例模式。
+    underlyingType: number
+    isFlags: false
+    members:
+      - sample.mode.fast
+      - sample.mode.normal
+  - kind: enumMember
+    id: sample.mode.fast
+    parentId: sample.mode
+    name: FAST
+    qualifiedName: sample.Mode.FAST
+    declaration: "FAST = 0"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 203
+    endLine: 206
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Indicates fast mode.
+        scenario: Use this value for fast processing.
+        effect: Fast mode is selected.
+      zh:
+        function: 表示快速模式。
+        scenario: 使用该值进行快速处理。
+        effect: 选择快速模式。
+    value: 0
+    initializer: "0"
+    valueType: number
+    ownerEnum: sample.mode
+  - kind: enumMember
+    id: sample.mode.normal
+    parentId: sample.mode
+    name: NORMAL
+    qualifiedName: sample.Mode.NORMAL
+    declaration: "NORMAL = 1"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 208
+    endLine: 211
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Indicates normal mode.
+        scenario: Use this value for default processing.
+        effect: Normal mode is selected.
+      zh:
+        function: 表示普通模式。
+        scenario: 使用该值进行默认处理。
+        effect: 选择普通模式。
+    value: 1
+    initializer: "1"
+    valueType: number
+    ownerEnum: sample.mode
+  - kind: typeAlias
+    id: sample.value
+    parentId: sample
+    name: Value
+    qualifiedName: sample.Value
+    declaration: "export type Value = string | number"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 222
+    endLine: 226
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines a sample value type.
+        scenario: Use this type for sample values.
+        effect: Sample values are typed.
+      zh:
+        function: 定义示例值类型。
+        scenario: 用于示例值。
+        effect: 示例值具有类型。
+    typeParameters: []
+    typeExpression:
+      text: string | number
+      kind: union
+    aliasKind: union
+    unionMembers:
+      - text: string
+        kind: primitive
+      - text: number
+        kind: primitive
+  - kind: accessor
+    id: sample.processor.size.get
+    parentId: sample.processor
+    name: size.get
+    qualifiedName: sample.Processor.size.get
+    declaration: "get size(): number"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 68
+    endLine: 72
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Gets the sample size.
+        scenario: Read this property after processing.
+        effect: The current size is returned.
+      zh:
+        function: 获取示例大小。
+        scenario: 处理后读取该属性。
+        effect: 返回当前大小。
+    accessorKind: get
+    propertyType:
+      text: number
+      kind: primitive
+    isReadOnly: true
+    pairedAccessor: null
+    errorCodes: []
+  - kind: callSignature
+    id: sample.options.call
+    parentId: sample.options
+    name: "[[Call]]"
+    qualifiedName: sample.Options.[[Call]]
+    declaration: "(event: string): void"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 100
+    endLine: 104
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines a callable sample interface.
+        scenario: Call the interface directly.
+        effect: The callback is executed.
+      zh:
+        function: 定义可调用的示例接口。
+        scenario: 直接调用该接口。
+        effect: 执行回调。
+    typeParameters: []
+    parameters:
+      - name: event
+        type:
+          text: string
+          kind: primitive
+        required: true
+        optional: false
+    returnType:
+      text: void
+      kind: void
+    errorCodes: []
+  - kind: constructSignature
+    id: sample.options.construct
+    parentId: sample.options
+    name: "[[Construct]]"
+    qualifiedName: sample.Options.[[Construct]]
+    declaration: "new (name: string): Options"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 108
+    endLine: 112
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Constructs sample options.
+        scenario: Use this signature to create options.
+        effect: An options instance is created.
+      zh:
+        function: 构造示例配置。
+        scenario: 使用该签名创建配置。
+        effect: 创建配置实例。
+    typeParameters: []
+    parameters:
+      - name: name
+        type:
+          text: string
+          kind: primitive
+        required: true
+        optional: false
+    newType:
+      text: Options
+      kind: reference
+    errorCodes: []
+  - kind: indexSignature
+    id: sample.processor.index
+    parentId: sample.processor
+    name: "[key: string]"
+    qualifiedName: sample.Processor.index
+    declaration: "[key: string]: string"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 76
+    endLine: 80
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines a sample index signature.
+        scenario: Access processor values by string key.
+        effect: A value is returned.
+      zh:
+        function: 定义示例索引签名。
+        scenario: 通过字符串键访问处理器值。
+        effect: 返回对应值。
+    keyName: key
+    keyType:
+      text: string
+      kind: primitive
+    valueType:
+      text: string
+      kind: primitive
+    isReadonly: false
+  - kind: annotation
+    id: sample.validation
+    parentId: sample
+    name: Validation
+    qualifiedName: sample.Validation
+    declaration: "export @interface Validation"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 232
+    endLine: 240
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines a sample annotation.
+        scenario: Use this annotation on sample methods.
+        effect: The method is marked for validation.
+      zh:
+        function: 定义示例注解。
+        scenario: 在示例方法上使用该注解。
+        effect: 方法被标记为需要校验。
+    members:
+      - sample.validation.policy
+    retention:
+      policy: SOURCE
+    targets:
+      - CLASS_METHOD
+  - kind: property
+    id: sample.validation.policy
+    parentId: sample.validation
+    name: policy
+    qualifiedName: sample.Validation.policy
+    declaration: "policy: string"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 236
+    endLine: 238
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines the validation policy.
+        scenario: Set the policy when using the annotation.
+        effect: Validation behavior changes.
+      zh:
+        function: 定义校验策略。
+        scenario: 使用注解时设置策略。
+        effect: 校验行为改变。
+    propertyType:
+      text: string
+      kind: primitive
+    isOptional: false
+    isReadonly: false
+    isStatic: false
+    defaultValue: null
+    initializer: null
+    accessors: []
+  - kind: decorator
+    id: sample.observable
+    parentId: sample
+    name: Observable
+    qualifiedName: sample.Observable
+    declaration: "export declare const Observable: MethodDecorator & ((options?: ObserveOptions) => MethodDecorator)"
+    filePath: interface_sdk-js/api/@ohos.sample.d.ts
+    startLine: 246
+    endLine: 252
+    accessLevel: public
+    since: "26.0.0"
+    syscap: SystemCapability.Sample.Full
+    permissions: []
+    platform:
+      crossplatform:
+        enabled: true
+        since: "12"
+        until: "18"
+      atomicservice:
+        enabled: true
+        since: "11"
+      form:
+        enabled: false
+    applicationModel: stage-only
+    description:
+      en:
+        function: Defines a sample decorator.
+        scenario: Use this decorator on sample methods.
+        effect: The method becomes observable.
+      zh:
+        function: 定义示例装饰器。
+        scenario: 在示例方法上使用该装饰器。
+        effect: 方法变为可观察。
+    decoratorForm:
+      - constant
+      - factory
+    targetTypes:
+      - method
+    decoratorType:
+      text: "MethodDecorator & ((options?: ObserveOptions) => MethodDecorator)"
+      kind: intersection
+    parameters:
+      - name: options
+        type:
+          text: ObserveOptions
+          kind: reference
+        required: false
+        optional: true
+    returnType:
+      text: MethodDecorator
+      kind: reference

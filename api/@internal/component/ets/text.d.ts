@@ -977,6 +977,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice
    * @since 11 dynamic
    */
@@ -1192,6 +1193,7 @@ declare class TextAttribute extends CommonMethod<TextAttribute> {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 12]
    * @since 11 dynamic
    */
@@ -1778,6 +1780,7 @@ declare const TextInstance: TextAttribute;
  * > - To set whether to clear the text selection and handle when the user touches outside the text component, use the
  * > [setTextSelectionClearPolicy]{@link @ohos.arkui.UIContext:UIContext.setTextSelectionClearPolicy} API.
  * >
+ * > <!--RP3--><!--RP3End-->
  *
  * ###### Child Components
  *

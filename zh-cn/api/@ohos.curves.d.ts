@@ -60,7 +60,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Linear = 0,
+    Linear,
     /**
      * 表示动画以低速开始，然后加快，在结束前变慢，cubic-bezier(0.25, 0.1, 0.25, 1.0)。
      *
@@ -69,7 +69,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Ease = 1,
+    Ease,
     /**
      * 表示动画以低速开始，cubic-bezier(0.42, 0.0, 1.0, 1.0)。
      *
@@ -78,7 +78,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    EaseIn = 2,
+    EaseIn,
     /**
      * 表示动画以低速结束，cubic-bezier(0.0, 0.0, 0.58, 1.0)。
      *
@@ -87,7 +87,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    EaseOut = 3,
+    EaseOut,
     /**
      * 表示动画以低速开始和结束，cubic-bezier(0.42, 0.0, 0.58, 1.0)。
      *
@@ -96,7 +96,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    EaseInOut = 4,
+    EaseInOut,
     /**
      * 标准曲线，cubic-bezier(0.4, 0.0, 0.2, 1.0)。
      *
@@ -105,7 +105,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    FastOutSlowIn = 5,
+    FastOutSlowIn,
     /**
      * 减速曲线，cubic-bezier(0.0, 0.0, 0.2, 1.0)。
      *
@@ -114,7 +114,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    LinearOutSlowIn = 6,
+    LinearOutSlowIn,
     /**
      * 加速曲线，cubic-bezier(0.4, 0.0, 1.0, 1.0)。
      *
@@ -123,7 +123,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    FastOutLinearIn = 7,
+    FastOutLinearIn,
     /**
      * 急缓曲线，cubic-bezier(0.0, 0.0, 0.0, 1.0)。
      *
@@ -132,7 +132,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    ExtremeDeceleration = 8,
+    ExtremeDeceleration,
     /**
      * 锐利曲线，cubic-bezier(0.33, 0.0, 0.67, 1.0)。
      *
@@ -141,7 +141,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Sharp = 9,
+    Sharp,
     /**
      * 节奏曲线，cubic-bezier(0.7, 0.0, 0.2, 1.0)。
      *
@@ -150,7 +150,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Rhythm = 10,
+    Rhythm,
     /**
      * 平滑曲线，cubic-bezier(0.4, 0.0, 0.4, 1.0)。
      *
@@ -159,7 +159,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Smooth = 11,
+    Smooth,
     /**
      * 阻尼曲线，cubic-bezier(0.2, 0.0, 0.2, 1.0)。
      *
@@ -168,7 +168,7 @@ declare namespace curves {
      * @atomicservice [since 11]
      * @since 7 dynamic
      */
-    Friction = 12
+    Friction
   }
 
   /**

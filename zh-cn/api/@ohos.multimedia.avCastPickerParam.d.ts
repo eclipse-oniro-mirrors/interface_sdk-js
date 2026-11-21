@@ -14,9 +14,7 @@
 */
 
 /**
- 投播组件参数
- * @file
- 投播组件参数
+ * @file 投播组件参数
  * @kit AVSessionKit
  */
 

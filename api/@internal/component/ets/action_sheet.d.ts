@@ -906,7 +906,13 @@ interface ActionSheetOptions {
   systemMaterial?: SystemUiMaterial;
 
   /**
-   * Sets the distortion animation Mode of the dialog.
+   * Sets the distortion animation mode of the dialog.
+   *
+   * > **NOTE**
+   * >
+   * > This parameter takes effect only when **systemMaterial** is set to **ImmersiveMaterial**. **DISTORTION_AUTO**
+   * > takes effect on high- and mid-end devices and does not take effect on low-end devices. Enabling the distortion
+   * > animation increases the rendering overhead.
    *
    * @default DistortionMode.DISTORTION_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -917,7 +923,13 @@ interface ActionSheetOptions {
   distortionMode?: DistortionMode;
 
   /**
-   * Sets the edgeLight animation Mode of the dialog.
+   * Sets the edge light animation mode of the dialog.
+   *
+   * > **NOTE**
+   * >
+   * > This parameter takes effect only when **systemMaterial** is set to **ImmersiveMaterial**. **EDGELIGHT_AUTO**
+   * > takes effect on high-end devices and does not take effect on mid- or low-end devices. Enabling the edge light
+   * > animation increases the rendering overhead.
    *
    * @default EdgeLightMode.EDGELIGHT_AUTO
    * @syscap SystemCapability.ArkUI.ArkUI.Full

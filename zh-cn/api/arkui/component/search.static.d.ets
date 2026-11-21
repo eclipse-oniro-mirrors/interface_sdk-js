@@ -1074,8 +1074,10 @@ export declare interface SearchAttribute extends CommonMethod {
   /**
    * 设置文本描边的宽度。
    *
-   * @param { LengthMetrics | undefined } width - 文本描边的宽度。如果LengthMetrics的unit值是PERCENT，当前设置不生效，按默认值处理。<br/>若设置值小于0，显示
-   *     实心字；若大于0，显示空心字。<br/>默认值为0，不做描边处理。<br/>设置undefined时按默认值处理。
+   * @param { LengthMetrics | undefined } width - 文本描边的宽度。
+   *     <br/>若设置值小于0，显示实心字；若大于0，显示空心字。
+   *     <br/>默认值为0，不做描边处理。
+   *     <br/>设置undefined时按默认值处理。
    * @returns { SearchAttribute } returns the instance of the SearchAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

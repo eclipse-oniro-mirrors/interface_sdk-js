@@ -15,7 +15,7 @@
  */
 
 /**
- * @file
+ * @file Performance Monitoring
  * @kit ArkUI
  */
 /**

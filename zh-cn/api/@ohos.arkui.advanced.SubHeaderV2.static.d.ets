@@ -772,7 +772,7 @@ export declare struct SubHeaderV2 {
   titleBuilder?: SubHeaderV2TitleBuilder;
 
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @since 23 staticonly
    */

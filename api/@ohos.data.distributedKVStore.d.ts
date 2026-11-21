@@ -731,6 +731,18 @@ declare namespace distributedKVStore {
      * @since 24 dynamic&static
      */
     rootDir?: string;
+    /**
+     * Size threshold in KB for starting an automatic checkpoint. When the WAL file size reaches this value,
+     * a checkpoint is triggered to merge the WAL content back into the main database file.
+     * Unit: KB. Value range: [16, 524288]. Default value: 204800.
+     * NOTE:
+     * - Larger values reduce the checkpoint frequency but increase the WAL file size and peak memory usage.
+     *
+     * @syscap SystemCapability.DistributedDataManager.KVStore.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    walStartCheckpointSize?: int;
   }
 
   /**

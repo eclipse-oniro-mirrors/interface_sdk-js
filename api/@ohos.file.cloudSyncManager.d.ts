@@ -397,7 +397,31 @@ declare namespace cloudSyncManager {
      * @since 20 dynamic
      * @since 23 static
      */
-    OTHER_REASON = 6
+    OTHER_REASON = 6,
+    /**
+     * During the download, the download stops due to missing content.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CONTENT_NOT_FOUND = 7,
+    /**
+     * During the download process, the download is stopped due to frequent user requests.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    FREQUENT_USER_REQUESTS = 8,
+    /**
+     * Download stopped due to low battery during download.
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    LOW_BATTERY = 9
   }
 
   /**

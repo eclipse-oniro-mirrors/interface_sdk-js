@@ -454,7 +454,7 @@ declare namespace relationalStore {
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
-    dumpStackOnFileDel?: boolean;
+    dumpStackOnFileDeletion?: boolean;
 
     /**
      * 指定数据库是否支持搜索，true表示支持搜索，false表示不支持搜索，默认不支持搜索。
@@ -827,7 +827,7 @@ declare namespace relationalStore {
    * 
    * 在使用不同的分词器时，使用的建表语句会有所区别。
    * 
-   * 示例代码中this.context定义见Stage模型的应用[Context]{@link ./app/context}。
+   * 示例代码中this.context定义见Stage模型的应用[Context]{@link ./application/Context:Context}。
    * 
    * 使用ICU_TOKENIZER分词器时，创建表的示例：
    * 
@@ -3218,8 +3218,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { string } 返回指定列的名称。当结果集中包含重名列时，返回值会不符合预期。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3321,8 +3319,6 @@ declare namespace relationalStore {
      * @param { int } offset - 表示相对当前结果集指针位置的偏移量，正值表示向后移动，负值表示向前移动。
      * @returns { boolean } 如果成功移动结果集，则为true；否则返回false。
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3354,8 +3350,6 @@ declare namespace relationalStore {
      * @param { int } position - 表示要移动到的指定位置。
      * @returns { boolean } 如果成功移动结果集，则为true；否则返回false。
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800014 - The target instance is already closed. [since 12]
@@ -3507,8 +3501,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { Uint8Array } 以字节数组的形式返回指定列的值。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3541,8 +3533,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { string } 以字符串形式返回指定列的值。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3580,8 +3570,6 @@ declare namespace relationalStore {
      *     [getDouble]{@link relationalStore.ResultSet.getDouble}，对于INTEGER类型的值使用
      *     [getString]{@link relationalStore.ResultSet.getString}。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3613,8 +3601,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { double } 以double形式返回指定列的值。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3647,8 +3633,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { Asset } 以Asset形式返回指定列的值。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3681,8 +3665,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { Assets } 以Assets形式返回指定列的值。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -3714,8 +3696,6 @@ declare namespace relationalStore {
      *
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { ValueType } 表示允许的数据字段类型。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error.
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted.
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds.
@@ -3747,8 +3727,6 @@ declare namespace relationalStore {
      *
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { Float32Array } 以浮点数组的形式返回指定列的值。
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -3919,8 +3897,6 @@ declare namespace relationalStore {
      * @param { int } columnIndex - 指定的列索引，从0开始。
      * @returns { boolean } 如果当前行中指定列的值为null，则返回true，否则返回false。
      * @throws { BusinessError } 14800013 - Column index is out of bounds.
-     * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
-     *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
      * @throws { BusinessError } 14800000 - Inner error. [since 12]
      * @throws { BusinessError } 14800011 - The current operation failed because the database is corrupted. [since 12]
      * @throws { BusinessError } 14800012 - ResultSet is empty or pointer index is out of bounds. [since 12]
@@ -6342,6 +6318,7 @@ declare namespace relationalStore {
      * @param { RdbPredicates } predicates - 表示查询的谓词条件。
      * @param { Array<string> } [columns] - 表示要查找的列字段名。此参数不填时，返回的结果集中只包含共享资源标识字段。
      * @returns { Promise<ResultSet> } Promise对象。返回查询的结果集。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -6378,6 +6355,7 @@ declare namespace relationalStore {
      *
      * @param { RdbPredicates } predicates - 表示查询的谓词条件。
      * @param { AsyncCallback<ResultSet> } callback - 回调函数。返回查询的结果集。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -6415,6 +6393,7 @@ declare namespace relationalStore {
      * @param { RdbPredicates } predicates - 表示查询的谓词条件。
      * @param { Array<string> } columns - 表示要查找的列字段名。
      * @param { AsyncCallback<ResultSet> } callback - 回调函数。返回查询的结果集。
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -7117,7 +7096,6 @@ declare namespace relationalStore {
     /**
      * 设置分布式数据库表，使用callback异步回调。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - 要设置的分布式数据库的表名。
      * @param { AsyncCallback<void> } callback - 回调函数。当设置分布式列表成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -7136,7 +7114,6 @@ declare namespace relationalStore {
     /**
      * 设置分布式数据库表，使用Promise异步回调。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - 要设置的分布式数据库的表名。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -7155,7 +7132,6 @@ declare namespace relationalStore {
     /**
      * 设置分布式数据库表，支持指定表的分布式类型，使用callback异步回调。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - 要设置的分布式数据库的表名。
      * @param { DistributedType } type - 表的分布式类型。
      * @param { AsyncCallback<void> } callback - 回调函数。当设置分布式列表成功，err为undefined，否则为错误对象。
@@ -7176,7 +7152,6 @@ declare namespace relationalStore {
     /**
      * 设置分布式数据库表，支持指定表的分布式类型和表的分布式配置信息，使用callback异步回调。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - 要设置的分布式数据库的表名。
      * @param { DistributedType } type - 表的分布式类型。
      * @param { DistributedConfig } config - 表的分布式配置信息。
@@ -7203,7 +7178,6 @@ declare namespace relationalStore {
     /**
      * 设置分布式数据库表，支持指定表的分布式类型和表的分布式配置信息，使用Promise异步回调。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { Array<string> } tables - 要设置的分布式数据库的表名。
      * @param { DistributedType } type - 表的分布式类型。默认值是relationalStore.DistributedType.DISTRIBUTED_DEVICE。
      * @param { DistributedConfig } config - 表的分布式配置信息。不传入时默认autoSync为false，需要调用
@@ -7305,7 +7279,6 @@ declare namespace relationalStore {
      * > [deviceManager.getAvailableDeviceListSync]{@link @ohos.distributedDeviceManager:distributedDeviceManager.DeviceManager.getAvailableDeviceListSync}
      * > 方法得到。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } device - 远程设备ID，不能为空字符串。
      * @param { string } table - 远程设备的本地表名。
      * @param { AsyncCallback<string> } callback - 回调函数。当获取分布式表名成功，err为undefined，data为远程设备的分布式表名；否则为错误对象。
@@ -7331,7 +7304,6 @@ declare namespace relationalStore {
      * > [deviceManager.getAvailableDeviceListSync]{@link @ohos.distributedDeviceManager:distributedDeviceManager.DeviceManager.getAvailableDeviceListSync}
      * > 方法得到。
      *
-     * @permission ohos.permission.DISTRIBUTED_DATASYNC
      * @param { string } device - 远程设备ID，不能为空字符串。
      * @param { string } table - 远程设备的本地表名。
      * @returns { Promise<string> } Promise对象。返回远程设备的分布式表名。
@@ -7715,7 +7687,6 @@ declare namespace relationalStore {
      *     改的详情。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -7923,7 +7894,6 @@ declare namespace relationalStore {
      *     <br>当observer没有传入时，表示取消当前type类型下所有数据变更的事件监听。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
-     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported. Possible causes:
      *     1. The hardware does not support the capability; 2. The chip does not support the capability;
      *     3. A dependent service feature is not supported.
@@ -8185,8 +8155,8 @@ declare namespace relationalStore {
      * attach不能并发调用，否则可能出现未响应情况并报错14800015，需要重试。除此之外，attach附加加密数据库时，可能受到并发的影响，出现解密失败的情况，报错14800011，需要显式指定加密参数并重试。
      *
      * @param { Context } context - 应用的上下文。
-     *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-     *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+     *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+     *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
      * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
      * @param { string } attachName - 表示附加后的数据库的别名，不能为空字符串。
      * @param { int } [waitTime] - 表示附加数据库文件的等待时长，单位：s。默认值2s，最小值1s，最大值300s。
@@ -8564,7 +8534,7 @@ declare namespace relationalStore {
    * 
    * **示例：**
    * 
-   * 示例代码中this.context定义见Stage模型的应用[Context]{@link ./app/context}。
+   * 示例代码中this.context定义见Stage模型的应用[Context]{@link ./application/Context:Context}。
    *
    * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
    * @crossplatform
@@ -8733,7 +8703,7 @@ declare namespace relationalStore {
      * @throws { BusinessError } 14800047 - The WAL file size exceeds the default limit.
      * @syscap SystemCapability.DistributedDataManager.RelationalStore.Core
      * @crossplatform
-     * @since 23 static
+     * @since 23 staticonly
      */
     insertSync(table: string, values: ValuesBucket, conflict?: ConflictResolution): long;
 
@@ -9554,7 +9524,7 @@ declare namespace relationalStore {
      * 不支持开头包含注释的语句。
      *
      * @param { string } sql - 指定要执行的SQL语句，不能为空字符串。
-     * @param { Array<ValueType> } [args] - SQL语句中参数的值。该值与sql参数语句中的占位符相对应。该参数不填，或者填null或undefined，都认为是sql参数语句完整。默认值为空。
+     * @param { Array<ValueType> } [args] - SQL语句中参数的值。该值与sql参数语句中的占位符相对应。该参数不填，或者填null或undefined，都认为是sql参数语句完整。默认值为空数组。
      * @returns { ValueType } 返回sql执行后的结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
      *     <br>2. Incorrect parameter types; 3. Parameter verification failed.
@@ -9600,8 +9570,8 @@ declare namespace relationalStore {
    * getRdbStore支持多线程并发操作。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
    * @param { AsyncCallback<RdbStore> } callback - 回调函数。当获取RdbStore成功，err为undefined，data为RdbStore对象；否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -9642,8 +9612,8 @@ declare namespace relationalStore {
    * getRdbStore支持多线程并发操作。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
    * @returns { Promise<RdbStore> } Promise对象。返回RdbStore对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -9684,8 +9654,8 @@ declare namespace relationalStore {
    * getRdbStoreSync支持多线程并发操作。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
    * @returns { RdbStore } 返回RdbStore对象。
    * @throws { BusinessError } 14800001 - Invalid args.
@@ -9716,8 +9686,8 @@ declare namespace relationalStore {
    * 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的RdbStore和ResultSet均已成功关闭。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - 数据库名称，不能为空字符串且不能包含路径分隔符/。
    * @param { AsyncCallback<void> } callback - 回调函数。当删除数据库成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -9740,8 +9710,8 @@ declare namespace relationalStore {
    * 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的RdbStore和ResultSet均已成功关闭。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
    * @param { AsyncCallback<void> } callback - 回调函数。当删除数据库成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -9766,8 +9736,8 @@ declare namespace relationalStore {
    * 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的RdbStore和ResultSet均已成功关闭。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { string } name - 数据库名称，不能为空字符串且不能包含路径分隔符/。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;
@@ -9790,8 +9760,8 @@ declare namespace relationalStore {
    * 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的RdbStore和ResultSet均已成功关闭。
    *
    * @param { Context } context - 应用的上下文。
-   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context}。
-   *     <br>Stage模型的应用Context定义见[Context]{@link ./app/context}。
+   *     <br>FA模型的应用Context定义见[Context]{@link ./app/context:Context}。
+   *     <br>Stage模型的应用Context定义见[Context]{@link ./application/Context:Context}。
    * @param { StoreConfig } config - 与此RDB存储相关的数据库配置。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified;

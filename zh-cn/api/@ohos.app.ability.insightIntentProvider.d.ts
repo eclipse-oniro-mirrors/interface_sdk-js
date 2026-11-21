@@ -111,6 +111,61 @@ declare namespace insightIntentProvider {
    * @since 26.0.0 static
    */
   function sendIntentResult<T>(instanceId: int, result: insightIntent.IntentResult<T>): Promise<void>;
+
+  /**
+   * 定义onWillInsightIntentExecuteCallBackFn函数。
+   *
+   * @param { insightIntent.InsightIntentExecutionInfo } executionInfo - 意图执行信息。
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  type OnWillInsightIntentExecuteCallBackFn = (executionInfo: insightIntent.InsightIntentExecutionInfo) => void;
+
+  /**
+   * 意图执行回调。
+   *
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  interface InsightIntentExecutionCallBack {
+    /**
+     * 在意图执行前调用。
+     *
+     * @syscap SystemCapability.Ability.AbilityRuntime.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    onWillInsightIntentExecuteCallBack?: OnWillInsightIntentExecuteCallBackFn;
+  }
+
+  /**
+   * 注册意图执行的监听器。
+   *
+   * @param { InsightIntentExecutionCallBack } callback - 意图执行回调。
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  function onWillInsightIntentExecute(callback: InsightIntentExecutionCallBack): void;
+
+  /**
+   * 注销意图执行的监听器。
+   *
+   * @param { InsightIntentExecutionCallBack } [callback] - 意图执行回调。
+   *     如果传入指定的回调，则注销该回调对应的监听。
+   *     如果未传入任何值，则注销所有意图执行的监听。
+   * @syscap SystemCapability.Ability.AbilityRuntime.Core
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic&static
+   */
+  function offWillInsightIntentExecute(callback?: InsightIntentExecutionCallBack): void;
 }
 
 export default insightIntentProvider;

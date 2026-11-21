@@ -1150,7 +1150,7 @@ declare namespace drm {
      *     [isMediaKeySystemSupported]{@link @ohos.multimedia.drm:drm.isMediaKeySystemSupported(name: string, mimeType: string)}
      *     .
      * @param { Uint8Array } initData - Initial data.
-     * @param { int } mediaKeyType - Type of the media key. The value **0** means an online media key, and **1** means
+     * @param { int } mediaKeyType - Type of the media key. The value **1** means an online media key, and **0** means
      *     an offline media key.
      * @param { OptionsData[] } options - Optional data.
      * @returns { Promise<MediaKeyRequest> } Promise used to return the media key request generated.
@@ -1575,4 +1575,4 @@ declare namespace drm {
   }
 }
 
-export default drm;
+export default drm;

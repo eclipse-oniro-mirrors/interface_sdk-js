@@ -1516,6 +1516,22 @@ declare namespace hiAppEvent {
      * @since 23 static
      */
     autoStopSampling?: boolean;
+
+    /**
+     * 主线程超时发生时，是否采集EventHandler任务队列信息。
+     *
+     * true：使能采集EventHandler任务队列信息。
+     *
+     * false：不使能采集EventHandler任务队列信息。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    enableEventHandlerDump?: boolean;
   }
 
   /**
@@ -1813,6 +1829,38 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     useRefinedLogFileName?: boolean;
+
+    /**
+     * 是否使能资源泄漏事件的JSVM堆日志。
+     *
+     * true：使能资源泄漏事件的JSVM堆日志。
+     *
+     * false：不使能资源泄漏事件的JSVM堆日志。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    jsvmHeapLogEnable?: boolean;
+
+    /**
+     * 是否使能资源泄漏事件的V8堆日志。
+     *
+     * true：使能资源泄漏事件的V8堆日志。
+     *
+     * false：不使能资源泄漏事件的V8堆日志。
+     *
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    v8HeapLogEnable?: boolean;
   }
 
   /**

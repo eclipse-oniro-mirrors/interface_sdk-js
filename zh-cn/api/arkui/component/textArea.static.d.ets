@@ -30,7 +30,22 @@ import { AttributeModifier, CommonMethod } from "./common";
 import { ColorMetrics } from '../Graphics';
 import { ComponentContentBase } from '../ComponentContent';
 /**
- * Provides the method of switching the cursor position.
+ * TextArea组件的控制器继承自[TextContentControllerBase]{@link TextContentControllerBase}，涉及的接口有
+ * [getTextContentRect]{@link TextContentControllerBase#getTextContentRect}、
+ * [getTextContentLineCount]{@link TextContentControllerBase#getTextContentLineCount}、
+ * [getCaretOffset]{@link TextContentControllerBase#getCaretOffset}、[addText]{@link TextContentControllerBase#addText}、
+ * [deleteText]{@link TextContentControllerBase#deleteText}、[getSelection]{@link TextContentControllerBase#getSelection}
+ * 、[clearPreviewText]{@link TextContentControllerBase#clearPreviewText}、
+ * [setStyledPlaceholder]{@link TextContentControllerBase#setStyledPlaceholder}、
+ * [deleteBackward]{@link TextContentControllerBase#deleteBackward}、
+ * [scrollToVisible]{@link TextContentControllerBase#scrollToVisible}<!--Del-->以及系统接口
+ * [getText]{@link TextContentControllerBase#getText}<!--DelEnd-->。
+ *
+ * ###### 导入对象
+ *
+ * ```ts
+ * controller: TextAreaController = new TextAreaController();
+ * ```
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -38,8 +53,7 @@ import { ComponentContentBase } from '../ComponentContent';
  */
 export declare class TextAreaController extends TextContentControllerBase {
   /**
-   * constructor.
-   * A constructor used to create a TextAreaController object.
+   * TextAreaController的构造函数。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -47,40 +61,30 @@ export declare class TextAreaController extends TextContentControllerBase {
    */
   constructor();
   /**
-   * Called when the position of the insertion cursor is set.
+   * 设置输入光标的位置。
    *
-   * @param { int } value - Length from the start of the string to the position where the caret is located.
+   * @param { int } value - 从字符串开始到光标所在位置的字符长度。 <br>当value<0时，按照0处理。当value>字符串长度时，按照字符串长度处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   caretPosition(value: int): void;
   /**
-   * Text selection is achieved by specifying the start and end positions of the text.
+   * 组件在获焦状态下，调用该接口设置文本选择区域并高亮显示，且只有在selectionStart小于selectionEnd时，文字才会被选取、高亮显示。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>If <em>selectionMenuHidden</em> is set to <em>true</em> or a 2-in-1 device is used,
-   * calling setTextSelection does not display the context menu even when options is set to <em>MenuPolicy.SHOW</em>.
-   * <br>If the selected text contains an emoji,
-   * the emoji is selected when its start position is within the text selection range.
-   * </p>
-   *
-   * @param { int } selectionStart - The start position of the selected text.
-   *     The start position of text in the text box is 0.
-   *     A value less than 0 is handled as 0.
-   *     A value greater than the maximum text length is handled as the maximum text length.
-   * @param { int } selectionEnd - The end position of the selected text.
-   *     A value less than 0 is handled as the value 0.
-   *     A value greater than the maximum text length is handled as the maximum text length.
-   * @param { SelectionOptions } [options] - Indicates the options of the text selection.
-   *     Default value is MenuPolicy.DEFAULT.
+   * @param { int } selectionStart - 文本选择区域起始位置，文本框中文字的起始位置为0。
+   *     <br>当selectionStart小于0时，按0处理；当selectionStart大于文字最大长度时，按照文字最大长度处理。
+   * @param { int } selectionEnd - 文本选择区域结束位置。
+   *     <br>当selectionEnd小于0时，按0处理；当selectionEnd大于文字最大长度时，按照文字最大长度处理。
+   * @param { SelectionOptions } [options] - 选中文字时的配置。
+   *     <br>默认值：MenuPolicy.DEFAULT。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   setTextSelection(selectionStart: int, selectionEnd: int, options?: SelectionOptions): void;
   /**
-   * Exit edit state.
+   * 退出编辑态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -89,7 +93,7 @@ export declare class TextAreaController extends TextContentControllerBase {
   stopEditing(): void;
 }
 /**
- * Defines the options of TextArea.
+ * TextArea初始化参数。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -97,13 +101,11 @@ export declare class TextAreaController extends TextContentControllerBase {
  */
 export declare interface TextAreaOptions {
   /**
-   * The place holder text string.
-   * Text displayed when there is no input.
+   * 设置无输入时的提示文本。输入内容后，提示文本不显示。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>When only the placeholder attribute is set, the text selection handle is still available.
-   * <br>The caret stays at the beginning of the placeholder text when the handle is released.
-   * </p>
+   * 仅设置placeholder属性时，手柄依然跟随拖动，手柄松开后光标停留在文字开头位置。
+   *
+   * 默认值：空字符串，不设置时不显示提示文本。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -111,7 +113,15 @@ export declare interface TextAreaOptions {
    */
   placeholder?: ResourceStr;
   /**
-   * Sets the current value of TextArea.
+   * 设置输入框当前的文本内容。默认值：空字符串。
+   *
+   * 建议通过onChange事件将状态变量与文本实时绑定，
+   *
+   * 避免组件刷新时TextArea中的文本内容异常。
+   *
+   * 从API version 10开始，该参数支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
+   *
+   * 从API version 18开始，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -119,7 +129,7 @@ export declare interface TextAreaOptions {
    */
   text?: ResourceStr | Bindable<ResourceStr> | Bindable<Resource> | Bindable<string>;
   /**
-   * Called when the position of the insertion cursor is set.
+   * 设置TextArea控制器。不设置时，组件使用内部默认控制器，但无法调用控制器相关方法。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -128,7 +138,7 @@ export declare interface TextAreaOptions {
   controller?: TextAreaController;
 }
 /**
- * Declare the type of input box
+ * 多行文本输入框类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -136,15 +146,15 @@ export declare interface TextAreaOptions {
  */
 export declare enum TextAreaType {
   /**
-   * Basic input mode.
-   * The value can contain digits, letters, underscores (_), spaces, and special characters.
+   * 基本输入模式，无特殊限制。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   NORMAL = 0,
   /**
-   * Pure digital input mode.
+   * 纯数字输入模式。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -152,33 +162,37 @@ export declare enum TextAreaType {
    */
   NUMBER = 2,
   /**
-   * Phone number entry mode.
-   * In this mode, the following are allowed: digits, spaces, plus signs (+), hyphens (-), asterisks (*), and number signs (#).
-   * the length is not limited.
+   * 电话号码输入模式。
+   *
+   * 支持输入数字、空格、+ 、-、*、#、(、)，长度不限。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   PHONE_NUMBER = 3,
   /**
-   * E-mail address input mode.
-   * This mode accepts only digits, letters, underscores (_), dots (.),
-   * and the following special characters: ! # $ % & ' * + - / = ? ^ ` { | } ~ @ (which can only appear once).
+   * 邮箱地址输入模式。
+   *
+   * 支持数字，字母，下划线、小数点、!、#、$、%、&、'、*、+、-、/、=、?、^、`、{、|、}、~，以及@字符（只能存在一个@字符）。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   EMAIL = 5,
   /**
-   * Number decimal entry mode.
-   * The value can contain digits and one decimal point.
+   * 带小数点的数字输入模式。
+   *
+   * 支持数字，小数点（只能存在一个小数点）。
+   *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   NUMBER_DECIMAL = 12,
   /**
-   * URL entry mode.
+   * 带URL的输入模式，无特殊限制。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -195,10 +209,10 @@ export declare enum TextAreaType {
   ONE_TIME_CODE = 14
 }
 /**
- * Declare the event listener callback of the enter key.
+ * 软键盘按下回车键时的回调事件。
  *
- * @param { EnterKeyType } enterKeyType - The enter key type of soft keyboard.
- * If the type is EnterKeyType.NEW_LINE, onSubmit is not triggered.
+ * @param { EnterKeyType } enterKeyType - 软键盘输入法回车键类型。
+ *     <br>类型为EnterKeyType.NEW_LINE时不触发onSubmit。
  * @param { SubmitEvent } [event] - Provides the method of keeping textArea editable state when submitted.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -206,7 +220,26 @@ export declare enum TextAreaType {
  */
 export type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: SubmitEvent) => void;
 /**
- * Defines the attribute functions of TextArea.
+ * 除支持[通用属性]{@link CommonMethod}，还支持以下属性：
+ *
+ * > **说明：**
+ * >
+ * > [通用属性padding]{@link CommonMethod#padding}的默认值为
+ *
+ * {
+ *
+ * &nbsp;top: '8vp',
+ *
+ * &nbsp;right: '16vp',
+ *
+ * &nbsp;bottom: '8vp',
+ *
+ * &nbsp;left: '16vp'
+ *
+ * }
+ *
+ * > 从API version 11开始，多行输入框可设置.width('auto')使组件宽度自适应文本宽度，自适应时组件宽度受constraintSize属性以及父容器传递的最大最小宽度限制，其余使用方式参考
+ * > [尺寸设置]{@link CommonMethod}。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -215,9 +248,9 @@ export type TextAreaSubmitCallback = (enterKeyType: EnterKeyType, event?: Submit
  */
 export declare interface TextAreaAttribute extends CommonMethod {
   /**
-   * Called when the color of the placeholder is set.
+   * 设置placeholder文本颜色。未通过该接口设置时，默认placeholder文本颜色跟随主题，深色模式下显示为#ffffff（白色），浅色模式下显示为#000000（黑色）。
    *
-   * @param { ResourceColor | undefined } value - Default value follows the theme.
+   * @param { ResourceColor | undefined } value - placeholder文本颜色。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -225,10 +258,14 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default placeholderColor(value: ResourceColor | undefined): this;
   /**
-   * Called when the font property of the placeholder is set.
-   * The 'HarmonyOS Sans' font and registered custom fonts are supported.
+   * 设置placeholder文本样式，包括字体大小、字体粗细、字体族、字体风格。未通过该接口设置时，默认placeholder文本样式为：字体大小14fp，字体粗细FontWeight.Normal，字体族HarmonyOS
+   * Sans，字体风格FontStyle.Normal。
    *
-   * @param { Font | undefined } value
+   * > **说明：**
+   * >
+   * > 可以使用[loadFontSync]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}注册自定义字体。
+   *
+   * @param { Font | undefined } value - placeholder文本样式，包括字体大小、字体粗细、字体族、字体风格。用于自定义placeholder文本的显示样式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -236,9 +273,13 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default placeholderFont(value: Font | undefined): this;
   /**
-   * Called when the type of soft keyboard input button is set.
+   * 设置输入法回车键类型。未通过该接口设置时，默认输入法回车键类型为EnterKeyType.NEW_LINE。
    *
-   * @param { EnterKeyType | undefined } value the type of soft keyboard - Default value is EnterKeyType.NEW_LINE.
+   * > **说明：**
+   * >
+   * > 从API version 12开始，该接口支持在[attributeModifier]{@link CommonMethod#attributeModifier}中调用。
+   *
+   * @param { EnterKeyType | undefined } value - 输入法回车键类型。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -246,20 +287,19 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default enterKeyType(value: EnterKeyType | undefined): this;
   /**
-   * Called when the alignment of the contents of a multiline text box is set.
+   * 设置文本在输入框中的水平对齐方式。未通过该接口设置时，默认文本在输入框中的水平对齐方式为TextAlign.Start。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>To set vertical alignment for the text, use the align attribute.
-   * <br>The align attribute alone does not control the horizontal position of the text.
-   * <br>In other words, Alignment.TopStart, Alignment.Top, and Alignment.TopEnd produce the same effect,
-   * top-aligning the text; Alignment.Start, Alignment.Center, and Alignment.End produce the same effect,
-   * centered-aligning the text vertically; Alignment.BottomStart, Alignment.Bottom,
-   * and Alignment.BottomEnd produce the same effect, bottom-aligning the text.
-   * <br>When textAlign is set to TextAlign.JUSTIFY, the text in the last line is horizontally aligned with the start edge.
-   * <br>Since API version 11, textAlign can be set to TextAlign.JUSTIFY.
-   * </p>
+   * 支持TextAlign.Start、TextAlign.Center和TextAlign.End。从API version 11开始，新增TextAlign.JUSTIFY选项。
    *
-   * @param { TextAlign | undefined } value - Default value is TextAlign.Start.
+   * 可通过[align]{@link CommonMethod#align(value: Alignment)}属性控制文本段落在垂直方向上的位置，此组件中不可通过align属性控制文本段落在水平方向上的位置。
+   *
+   * - Alignment.TopStart、Alignment.Top、Alignment.TopEnd：内容顶部对齐。
+   * - Alignment.Start、Alignment.Center、Alignment.End：内容垂直居中。
+   * - Alignment.BottomStart、Alignment.Bottom、Alignment.BottomEnd：内容底部对齐。
+   *
+   * 当textAlign属性设置为TextAlign.JUSTIFY时，最后一行文本不参与两端对齐，为水平对齐首部效果。
+   *
+   * @param { TextAlign | undefined } value - 文本在输入框中的水平对齐方式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -267,13 +307,10 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default textAlign(value: TextAlign | undefined): this;
   /**
-   * Called when the insertion cursor color is set.
+   * 设置输入框光标颜色。当同时设置caretColor属性和caretStyle属性中的color参数时，后设置的属性值生效。例如，先设置caretColor再设置caretStyle.color，则caretStyle.color生
+   * 效；反之，先设置caretStyle.color再设置caretColor，则caretColor生效。未通过该接口设置时，默认输入框光标颜色为'#007DFF'（蓝色）。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>Since API version 12, this API can be used to set the text handle color, which is the same as the caret color.
-   * </p>
-   *
-   * @param { ResourceColor | undefined } value - Default value is '#007DFF'.
+   * @param { ResourceColor | undefined } value - 输入框光标颜色。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -281,9 +318,10 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default caretColor(value: ResourceColor | undefined): this;
   /**
-   * Called when the font color is set.
+   * 设置字体颜色。未通过该接口设置时，默认字体颜色跟随主题。
    *
-   * @param { ResourceColor | undefined } value
+   * @param { ResourceColor | undefined } value - 字体颜色，用于自定义输入文本的颜色。 <br>**说明：
+   *     ** 当同时设置[shaderStyle]{@link TextAreaAttribute#shaderStyle}时，shaderStyle优先级更高，fontColor不生效。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -291,11 +329,10 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default fontColor(value: ResourceColor | undefined): this;
   /**
-   * Called when the font size is set.
-   *
-   * @param { Length | undefined } value - Default value is 16fp.The default value on wearable devices is 18fp.
-   * If fontSize is of the number type, the unit fp is used.
-   * This parameter cannot be set in percentage.
+   * 设置字体大小。未通过该接口设置时，默认字体大小为16fp。Wearable设备上默认字体大小为18fp。
+   * @param { Length | undefined } value - 字体大小。
+   *     fontSize为number类型时，使用fp单位。不支持设置百分比字符串。
+   *     <br>取值为undefined时，按默认值处理。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -303,9 +340,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default fontSize(value: Length | undefined): this;
   /**
-   * Called when the font style of a font is set.
+   * 设置字体样式。未通过该接口设置时，默认字体样式为FontStyle.Normal。
    *
-   * @param { FontStyle | undefined } value - Default value is FontStyle.Normal.
+   * @param { FontStyle | undefined } value - 字体样式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -324,14 +361,13 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default fontWeight(value: int | FontWeight | ResourceStr | undefined): this;
   /**
-   * Called when the font list of text is set.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>The 'HarmonyOS Sans' font and registered custom fonts are supported for applications.
-   * <br>Only the 'HarmonyOS Sans' font is supported for widgets.
-   * </p>
-   *
-   * @param { ResourceStr | undefined } value - Default value is 'HarmonyOS Sans'.
+   * 设置字体列表。
+   * > **说明：**
+   * >
+   * > 可以使用[loadFontSync]{@link @ohos.graphics.text:text.FontCollection#loadFontSync}注册自定义字体。
+   * @param { ResourceStr | undefined } value - 字体列表。默认字体'HarmonyOS Sans'。<br>
+   *     使用多个字体时，请用逗号','分隔，字体的优先级按顺序生效。例如：'Arial, HarmonyOS Sans'。<br>
+   *     应用当前支持'HarmonyOS Sans'字体和[注册自定义字体](../js-apis-font.md)。<br>卡片当前仅支持'HarmonyOS Sans'字体。<br>取值为undefined时，按默认值处理。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -339,18 +375,21 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default fontFamily(value: ResourceStr | undefined): this;
   /**
-   * Called when the overflow mode of the font is set.
+   * 设置文本超长时的显示方式。未通过该接口设置时，默认文本超长时的显示方式为TextOverflow.Clip。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>In inline style, the effect of truncating text according to maxLines only applies when textOverflow is set.
-   * <br>Text is clipped at the transition between words.
-   * <br>To clip text in the middle of a word, set wordBreak to WordBreak.BREAK_ALL.
-   * <br>If overflow is set to TextOverflow.None, TextOverflow.Clip, or TextOverflow.Ellipsis,
-   * this attribute must be used with maxLines for the settings to take effect.
-   * <br>TextOverflow.None produces the same effect as TextOverflow.Clip.
-   * </p>
+   * 内联模式，主动配置textOverflow才会生效按[maxLines]{@link TextAreaAttribute#maxLines(value: number)}截断效果，不配置时，默认不截断。
    *
-   * @param { TextOverflow | undefined } value - Default value is TextOverflow.Clip.
+   * 文本截断是按字截断。例如，英文以单词为最小单位进行截断，若需要以字母为单位进行截断，[wordBreak]{@link @global:WordBreak}属性可设置为WordBreak.BREAK_ALL。
+   *
+   * 当textOverflow设置为TextOverflow.None、TextOverflow.Clip、TextOverflow.Ellipsis时，需配合
+   * [maxLines]{@link TextAreaAttribute#maxLines(value: number)}使用，单独设置不生效。设置TextOverflow.None与TextOverflow.Clip效果一样。
+   *
+   * > **说明：**
+   * >
+   * > TextArea组件不支持设置TextOverflow.MARQUEE模式，当设置为TextOverflow.MARQUEE模式时，显示为TextOverflow.Clip。
+   *
+   * @param { TextOverflow | undefined } value - 文本超长时的显示方式。 <br>内联模式需主动配置才生效，设置为None、Clip、Ellipsis时需配合maxLines使用，
+   *     单独设置不生效。 <br>不支持TextOverflow.MARQUEE模式，设置为MARQUEE时显示为Clip。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -358,26 +397,22 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default textOverflow(value: TextOverflow | undefined): this;
   /**
-   * Specify the indentation of the first line in a text-block.
-   *
-   * @param { Dimension | undefined } value - The length of text indent.Default value is 0.
-   * @returns { TextAreaAttribute } The attribute of the text.
+   * 设置首行文本缩进。未通过该接口设置时，默认首行文本缩进为0。
+   * @param { Dimension | undefined } value - 首行文本缩进。<br>单位：[vp](ts-pixel-units.md#基本像素单位) <br>
+   *     取值范围：大于等于0。设置负数时，按默认值处理。<br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default textIndent(value: Dimension | undefined): this;
   /**
-   * Called when the inputFilter of text is set.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>Only inputs that comply with the regular expression can be displayed.
-   * <br>Other inputs are filtered out.
-   * <br>The specified regular expression can match single characters, but not strings.
-   * </p>
-   *
-   * @param { ResourceStr | undefined } value
-   * @param { function | undefined } [error]
+   * 通过正则表达式设置输入过滤器。匹配表达式的输入允许显示，不匹配的输入将被过滤。
+   * 单字符输入场景仅支持单字符匹配，多字符输入场景支持字符串匹配，例如粘贴。
+   * 从API version 11开始，设置inputFilter且输入的字符不为空字符，会导致[type]{@link TextAreaAttribute#type}接口附带的文本过滤效果失效。
+   * @param { ResourceStr | undefined } value - 正则表达式。<br>取值为undefined时，按无正则匹配过滤处理。
+   * @param { function | undefined } [error] - 匹配失败时的回调。<br>value：正则匹配失败时，返回被过滤的内容。正则匹配成功时，无返回。<br>
+   *     取值为undefined时，不使用回调函数。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -385,9 +420,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default inputFilter(value: ResourceStr | undefined, error?: ((value: string) => void) | undefined): this;
   /**
-   * Define the caret style of the text input.
+   * 设置光标风格。
    *
-   * @param { CaretStyle | undefined } value
+   * @param { CaretStyle | undefined } value - 光标的风格，用于自定义光标的显示样式，包括宽度和颜色。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -395,10 +430,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default caretStyle(value: CaretStyle | undefined): this;
   /**
-   * Define the text selected background color of the text input.
-   * If the opacity is not set, a 20% opacity will be used.
+   * 设置文本选中高亮颜色。如果未设置不透明度或设置为完全不透明，默认使用20%不透明度。
    *
-   * @param { ResourceColor | undefined } value
+   * @param { ResourceColor | undefined } value - 文本选中高亮颜色。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -406,9 +440,8 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default selectedBackgroundColor(value: ResourceColor | undefined): this;
   /**
-   * Called when submitted.
-   *
-   * @param { TextAreaSubmitCallback | undefined } callback - callback of the listened event.
+   * 按下软键盘输入法回车键时，触发该回调。
+   * @param { TextAreaSubmitCallback | undefined } callback - 按下软键盘输入法回车键时的回调事件。<br>取值为undefined时，不使用回调函数。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -416,15 +449,22 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onSubmit(callback: TextAreaSubmitCallback | undefined): this;
   /**
-   * Called when the input changes.
+   * 输入内容发生变化时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>In this callback, if cursor operations are performed,
-   * you need to adjust the cursor logic based on the previewText parameter
-   * to make sure it works seamlessly under the preview display scenario.
-   * </p>
+   * 在本回调中，若执行了光标操作，需要开发者在预上屏场景下依据[EditableTextOnChangeCallback]{@link EditableTextOnChangeCallback}的previewText参数调整光标逻
+   * 辑，以适应预上屏场景。
    *
-   * @param { EditableTextOnChangeCallback | undefined } callback
+   * > **说明：**
+   * >
+   * > onWillChange和onChange形成will/did时序模式：
+   * >
+   * > - onWillChange在文本变更前触发，可通过返回false拦截变更；返回true则允许变更，随后触发onChange。
+   * >
+   * > - onChange在变更完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillChange用于拦截控制，onChange用于获取变更结果。
+   *
+   * @param { EditableTextOnChangeCallback | undefined } callback - 当前输入文本内容变化时的回调。 [since 12]
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -432,35 +472,30 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onChange(callback: EditableTextOnChangeCallback | undefined): this;
   /**
-   * Called when the text selection changes.
-   *
-   * @param { function | undefined } callback - callback of the listened event.
-   *     { int } selectionStart - The start position of text is 0.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * 文本选择的位置或编辑状态下光标位置发生变化时，触发该回调。
+   * @param { function | undefined } callback - 文本选择的位置或编辑状态下光标位置发生变化时，触发该回调。<br>
+   *     selectionStart：所选文本的起始位置，文字的起始位置为0。<br>selectionEnd：所选文本的结束位置。<br>取值为undefined时，不使用回调函数。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onTextSelectionChange(callback: ((selectionStart: int, selectionEnd: int) => void) | undefined): this;
   /**
-   * Called when the content scrolls.
-   *
-   * @param { function | undefined } callback - callback of the listened event.
-   *     { double } totalOffsetX - The unit is px.
-   *     { double
-   *     } totalOffsetY - The unit is px.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * 文本内容滚动时，触发该回调。
+   * @param { function | undefined } callback - 文本内容滚动时，触发该回调。<br>totalOffsetX：文本在内容区的横坐标偏移。<br>
+   *     单位：[px](ts-pixel-units.md#基本像素单位)<br>totalOffsetY：文本在内容区的纵坐标偏移。<br>单位：[px](ts-pixel-units.md#基本像素单位) <br>
+   *     取值为undefined时，不使用回调函数。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onContentScroll(callback: ((totalOffsetX: double, totalOffsetY: double) => void) | undefined): this;
   /**
-   * Called when judging whether the text editing change finished.
-   * The text box is in the editing state when it has the caret placed in it, and is in the non-editing state otherwise.
-   *
-   * @param { function | undefined } callback - Triggered when the text area status changes.
-   * If the value of isEditing is true, text area is in progress.
+   * 输入状态变化时，触发该回调。有光标时为编辑态，无光标时为非编辑态。
+   * @param { function | undefined } callback - 输入状态变化时，触发该回调。<br>isEditing：是否处于编辑态。<br> true：编辑态；false：非编辑态。<br>
+   *     取值为undefined时，不使用回调函数。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -468,9 +503,18 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onEditChange(callback: ((isEditing: boolean) => void) | undefined): this;
   /**
-   * Called when using the Clipboard menu
+   * 进行复制操作时，触发该回调。
+   * > **说明：**
+   * >
+   * > onWillCopy和onCopy形成will/did时序模式：
+   * >
+   * > - onWillCopy在复制操作前触发，可通过返回false拦截复制操作；返回true则允许复制，随后触发onCopy。
+   * >
+   * > - onCopy在复制操作完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillCopy用于拦截控制，onCopy用于获取复制结果。
    *
-   * @param { function | undefined } callback
+   * @param { function | undefined } callback - 进行复制操作时，触发该回调。<br>value：复制的文本内容。<br>取值为undefined时，不使用回调函数。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -488,9 +532,18 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onWillCopy(callback: Callback<string, boolean> | undefined): this;
   /**
-   * Called when using the Clipboard menu
+   * 进行剪切操作时，触发该回调。
+   * > **说明：**
+   * >
+   * > onWillCut和onCut形成will/did时序模式：
+   * >
+   * > - onWillCut在剪切操作前触发，可通过返回false拦截剪切操作；返回true则允许剪切，随后触发onCut。
+   * >
+   * > - onCut在剪切操作完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillCut用于拦截控制，onCut用于获取剪切结果。
    *
-   * @param { function | undefined } callback
+   * @param { function | undefined } callback - 进行剪切操作时，触发该回调。<br>value：剪切的文本内容。 <br>取值为undefined时，不使用回调函数。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -508,28 +561,23 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onWillCut(callback: Callback<string, boolean> | undefined): this;
   /**
-   * Called when using the Clipboard menu
+   * 进行粘贴操作时，触发该回调。
    *
-   * @param { function | undefined } callback
-   *          Executed when a paste operation is performed.
-   *          { string } value - The text content to be pasted.
-   *          { PasteEvent } event - The user-defined paste event.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * @param { function | undefined } callback - 进行粘贴操作时，触发该回调。<br>value：粘贴的文本内容。<br>
+   *     event：用户自定义的粘贴事件[PasteEvent](ts-basic-components-richeditor.md#pasteevent11) 。<br>取值为undefined时，不使用回调函数。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default onPaste(callback: ((value: string, event: PasteEvent) => void) | undefined): this;
   /**
-   * Called when the copy option is set.
+   * 设置输入的文本是否可复制。设置CopyOptions.None时，只支持粘贴和全选。未通过该接口设置时，默认输入的文本可复制（CopyOptions.LocalDevice，支持设备内复制）。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>If this attribute is set to CopyOptions.None, the text can only be pasted;
-   * all other actions, such as copying, cutting, and sharing, are disabled.
-   * <br>Dragging is not allowed when CopyOptions.None is set.
-   * </p>
+   * 设置CopyOptions.None时，不支持拖拽操作。[enableSelectedDataDetector]{@link TextAreaAttribute#enableSelectedDataDetector}功能需要
+   * CopyOptions为CopyOptions.LocalDevice或CopyOptions.CROSS_DEVICE时才生效。
    *
-   * @param { CopyOptions | undefined } value - Default value is CopyOptions.LocalDevice.
+   * @param { CopyOptions | undefined } value - 输入的文本是否可复制。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -537,25 +585,21 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default copyOption(value: CopyOptions | undefined): this;
   /**
-   * Sets whether request keyboard or not when on focus.
+   * 设置TextArea通过点击以外的方式获焦时，是否主动拉起软键盘。未通过该接口设置时，默认通过点击以外的方式获焦时主动拉起软键盘。
+   * 从API version 10开始，获焦默认绑定输入法。
    *
-   * @param { boolean | undefined } value - Default value is true.
-   * @returns { TextAreaAttribute } Returns the instance of the TextAreaAttribute.
+   * @param { boolean | undefined } value - 通过点击以外的方式获焦时，是否主动拉起软键盘。<br>true表示主动拉起，false表示不主动拉起。<br>
+   *     取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default enableKeyboardOnFocus(value: boolean | undefined): this;
   /**
-   * Define the max length content of the text area.
+   * 设置文本的最大输入字符数。到达文本最大字符限制，将无法继续输入字符。未通过该接口设置时，默认不设置最大输入字符数限制。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>By default, there is no maximum number of characters.
-   * <br>When the maximum number of characters is reached,
-   * no more characters can be entered, and the border turns red.
-   * </p>
-   *
-   * @param { int | undefined } value
+   * @param { int | undefined } value - 文本的最大输入字符数。 <br>取值范围：[0, UINT32_MAX]。当value<0时，不设限制。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -563,28 +607,15 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default maxLength(value: int | undefined): this;
   /**
-   * Define show counter of the text area.
+   * 设置当通过InputCounterOptions输入的字符数超过阈值时显示计数器。未调用showCounter接口时，默认不显示计数器。
+   * 参数value为true时，才能设置options，文本框开启计数器功能，需要配合maxLength（设置最大字符限制）一起使用，未设置maxLength时计数器功能不生效。字符计数器显示的效果是当前输入字符数/最大可输入字符数。
+   * 当输入字符数大于最大字符数乘百分比值时，显示字符计数器。如果用户设置计数器时不设置InputCounterOptions，那么当前输入字符数达到最大字符数时，边框和计数器下标将变为红色。若用户同时设置参数value为true和
+   * InputCounterOptions，当thresholdPercentage数值在有效区间内且输入字符数超过最大字符数时，边框和计数器下标将变为红色，框体抖动。计数器默认显示红色边框；highlightBorder设置为
+   * false时，则不显示红色边框。内联模式下字符计数器不显示。
+   * [示例2（设置计数器）](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-textarea.md#示例2设置计数器)展示了设置showCounter的效果。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>options can be set only when value is set to true,
-   * in which case a character counter is displayed below the text box.
-   * <br>This attribute must be used together with maxlength.
-   * <br>The character counter is displayed in this format: Number of characters entered/Character limit.
-   * <br>It is visible when the number of characters entered is greater than
-   * the character limit multiplied by the threshold percentage value.
-   * <br>If options is not set, the text box border and character counter subscript turn red
-   * when the number of characters entered reaches the limit.
-   * <br>If value is set to true and options is set,
-   * the text box border and character counter subscript turn red
-   * and the text box shakes when the number of characters entered reaches the limit,
-   * provided that the value of thresholdPercentage is valid.
-   * <br>If highlightBorder is set to false, the text box border does not turn red.
-   * <br>By default, highlightBorder is set to true.
-   * <br>The character counter is not displayed for text boxes in inline input style.
-   * </p>
-   *
-   * @param { boolean | undefined } value - Set showcounter of the text area.
-   *     Passing `undefined` resets it to the default value.
+   * @param { boolean | undefined } value - 是否显示计数器。
+   *     <br>true表示显示计数器，false表示不显示。<br>取值为undefined时，不显示计数器。
    * @param { InputCounterOptions } [options] - Set the percentage of counter.
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -593,13 +624,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default showCounter(value: boolean | undefined, options?: InputCounterOptions): this;
   /**
-   * Define style of the text area.
+   * 设置文本框多态样式，内联输入风格只支持TextAreaType.NORMAL类型。未通过该接口设置时，默认文本框多态样式为TextContentStyle.DEFAULT。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>The inline input style is only available for the TextAreaType.Normal type.
-   * </p>
-   *
-   * @param { TextContentStyle | undefined } value - Default value is TextContentStyle.DEFAULT.
+   * @param { TextContentStyle | undefined } value - 文本框多态样式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -607,9 +634,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default style(value: TextContentStyle | undefined): this;
   /**
-   * Define bar state of the text area.
+   * 设置输入框滚动条的显示模式。未通过该接口设置时，默认输入框滚动条的显示模式为BarState.Auto。
    *
-   * @param { BarState | undefined } value - Default value is BarState.Auto.
+   * @param { BarState | undefined } value - 输入框滚动条的显示模式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -629,35 +656,31 @@ export declare interface TextAreaAttribute extends CommonMethod {
   default scrollBarColor(thumbColor: ColorMetrics | undefined): this;
 
   /**
-   * Controls whether the selection menu pops up.
+   * 设置是否不弹出系统文本选择菜单。未通过该接口设置时，默认弹出系统文本选择菜单。
    *
-   * <p><strong>NOTE</strong>:
-   * <br><em>true</em>:
-   * <br>The system text selection menu does not appear under the following circumstances: clicking the text box cursor,
-   * long-pressing the text box, double-tapping the text box, triple-tapping the text box, or right-clicking the text box.
-   * <br><em>false</em>:
-   * <br>The system text selection menu appears under the following circumstances: clicking the text box cursor,
-   * long-pressing the text box, double-tapping the text box, triple-tapping the text box, or right-clicking the text box.
-   * </p>
-   *
-   * @param { boolean | undefined } value - Default value is false.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * @param { boolean | undefined } value - 是否不弹出系统文本选择菜单。<br>设置为true时，单击输入框光标、长按输入框、双击输入框、三击输入框或者右键输入框，
+   *     不弹出系统文本选择菜单。<br>设置为false时，弹出系统文本选择菜单。<br>
+   *     **说明：** 设置为true时，即使[setTextSelection](#settextselection10)方法中options设置为MenuPolicy.SHOW，也不会弹出菜单。
+   *     <br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default selectionMenuHidden(value: boolean | undefined): this;
   /**
-   * Called when the minimum font size of the font is set.
+   * 设置文本最小显示字号。string类型支持number类型取值的字符串形式，可以附带单位，例如"10"、"10fp"。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>For the string type, numeric string values with optional units, for example, "10" or "10fp", are supported.
-   * <br>For the setting to take effect, this attribute must be used together with maxFontSize and maxLines,
-   *     or layout constraint settings.
-   * <br>When the adaptive font size is used, the fontSize settings do not take effect.
-   * </p>
+   * 需配合[maxFontSize]{@link TextAreaAttribute#maxFontSize}以及[maxLines]{@link TextAreaAttribute#maxLines(value: number)}或
+   * 布局大小限制使用，单独设置不生效。
    *
-   * @param { double | string | Resource | undefined } value - The unit is fp.
+   * 自适应字号生效时，fontSize设置不生效。
+   *
+   * minFontSize小于或等于0时，自适应字号不生效，此时按照[fontSize]{@link TextAreaAttribute#fontSize}属性的值生效，未设置时按照其默认值生效。
+   *
+   * @param { double | string | Resource | undefined } value - 文本最小显示字号。 <br>需配合maxFontSize以及maxLines或布局大小限制使用，单独设置不生效。
+   *     <br>取值范围：(0, maxFontSize]。超出取值范围时按照fontSize属性值生效。 <br>单位：
+   *     [fp](docroot://reference/apis-arkui/arkui-ts/ts-pixel-units.md#基本像素单位)
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -665,16 +688,19 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default minFontSize(value: double | string | Resource | undefined): this;
   /**
-   * Called when the maximum font size of the font is set.
+   * 设置文本最大显示字号。string类型支持number类型取值的字符串形式，可以附带单位，例如"10"、"10fp"。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>For the string type, numeric string values with optional units, for example, "10" or "10fp", are supported.
-   * <br>For the setting to take effect, this attribute must be used together with minFontSize and maxLines,
-   *     or layout constraint settings.
-   * <br>When the adaptive font size is used, the fontSize settings do not take effect.
-   * </p>
+   * 需配合[minFontSize]{@link TextAreaAttribute#minFontSize}以及[maxLines]{@link TextAreaAttribute#maxLines(value: number)}或
+   * 布局大小限制使用，单独设置不生效。
    *
-   * @param { double | string | Resource | undefined } value - The unit is fp.
+   * 自适应字号生效时，fontSize设置不生效。
+   *
+   * maxFontSize小于等于0或者maxFontSize小于minFontSize时，自适应字号不生效，此时按照[fontSize]{@link TextAreaAttribute#fontSize}属性的值生效，未设置时按照其
+   * 默认值生效。
+   *
+   * @param { double | string | Resource | undefined } value - 文本最大显示字号。 <br>需配合minFontSize以及maxLines或布局大小限制使用，单独设置不生效。
+   *     <br>取值范围：(0, +∞)。超出取值范围时按照fontSize属性值生效。 <br>单位：
+   *     [fp](docroot://reference/apis-arkui/arkui-ts/ts-pixel-units.md#基本像素单位)
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -682,17 +708,13 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default maxFontSize(value: double | string | Resource | undefined): this;
   /**
-   * Called when the minimum font scale of the font is set.
-   * Value range: [0, 1]
+   * 设置文本最小的字体缩放倍数。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>The undefined type is supported.
-   * <br>A value less than 0 is handled as 0.
-   * <br>A value greater than 1 is handled as 1.
-   * <br>Abnormal values are ineffective by default.
-   * </p>
-   *
-   * @param { double | Resource | undefined } scale
+   * @param { double | Resource | undefined } scale - 文本最小的字体缩放倍数，支持undefined类型。 <br>取值范围：[0, 1] <br>**说明：** <br>
+   *     设置的值小于0时，按值为0处理。设置的值大于1，按值为1处理。异常值默认不生效。
+   *     <br>使用前需在工程中配置configuration.json文件和app.json5文件，
+   *     具体详见
+   *     [示例17（设置最小字体范围与最大字体范围）](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-textarea.md#示例17设置最小字体范围与最大字体范围)。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -700,15 +722,13 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default minFontScale(scale: double | Resource | undefined): this;
   /**
-   * Called when the maximum font scale of the font is set.
-   * Value range: [1, +∞)
+   * 设置文本最大的字体缩放倍数。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>A value less than 1 is handled as 1.
-   * <br>Abnormal values are ineffective by default.
-   * </p>
-   *
-   * @param { double | Resource | undefined } scale
+   * @param { double | Resource | undefined } scale - 文本最大的字体缩放倍数，支持undefined类型。 
+   *     <br>取值范围：[1, +∞) <br>**说明：** <br>
+   *     设置的值小于1时，按值为1处理。异常值默认不生效。
+   *     <br>使用前需在工程中配置configuration.json文件和app.json5文件，具体详见
+   *     [示例17（设置最小字体范围与最大字体范围）](docroot://reference/apis-arkui/arkui-ts/ts-basic-components-textarea.md#示例17设置最小字体范围与最大字体范围)。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -716,28 +736,23 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default maxFontScale(scale: double | Resource | undefined): this;
   /**
-   * Called when the height adaptive policy is set.
+   * 设置文本自适应高度的方式。未通过该接口设置时，默认文本自适应高度的方式为TextHeightAdaptivePolicy.MAX_LINES_FIRST。
    *
-   * <p><strong>NOTE</strong>:
-   * <ul>
-   * <li>When this attribute is set to TextHeightAdaptivePolicy.MAX_LINES_FIRST,
-   * the maxLines attribute takes precedence for adjusting the text height.
-   * <br>If the maxLines setting results in a layout beyond the layout constraints,
-   * the text will shrink to a font size between minFontSize and maxFontSize to allow for more content to be shown.
-   * <br>If the text box is in inline input style,
-   * the font size in the editing state is different from that in the non-editing state.</li>
-   * <li>If this attribute is set to TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST,
-   * the minFontSize attribute takes precedence for adjusting the text height.
-   * <br>If the text can fit in one line with the minFontSize setting,
-   * the text will enlarge to the largest possible font size between minFontSize and maxFontSize.</li>
-   * <li>If this attribute is set to TextHeightAdaptivePolicy.LAYOUT_CONSTRAINT_FIRST,
-   * the layout constraints take precedence for adjusting the text height.
-   * <br>If the resultant layout is beyond the layout constraints,
-   * the text will shrink to a font size between minFontSize and maxFontSize to respect the layout constraints.</li>
-   * </ul>
-   * </p>
+   * 当设置为TextHeightAdaptivePolicy.MAX_LINES_FIRST时，优先使用[maxLines]{@link TextAreaAttribute#maxLines(value: number)}属性来调整文
+   * 本高度。如果使用maxLines属性的布局大小超过了布局约束，则尝试在[minFontSize]{@link TextAreaAttribute#minFontSize}和
+   * [maxFontSize]{@link TextAreaAttribute#maxFontSize}的范围内缩小字体以显示更多文本。
    *
-   * @param { TextHeightAdaptivePolicy | undefined } value - The height adaptive policy.Default value is TextHeightAdaptivePolicy.MAX_LINES_FIRST.
+   * 组件设置为内联输入风格时，编辑态与非编辑态的字体大小可能不一致。
+   *
+   * 当设置为TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST时，优先使用minFontSize属性来调整文本高度。如果使用minFontSize属性可以将文本布局在一行中，则尝试在
+   * minFontSize和maxFontSize的范围内增大字体并使用最大可能的字体大小。
+   *
+   * 当设置为TextHeightAdaptivePolicy.LAYOUT_CONSTRAINT_FIRST时，优先使用布局约束来调整文本高度。如果布局大小超过布局约束，则尝试在minFontSize和maxFontSize的范围内缩
+   * 小字体以满足布局约束。
+   *
+   * @param { TextHeightAdaptivePolicy | undefined } value - 文本自适应高度的方式。 <br>MAX_LINES_FIRST优先使用maxLines调整高度，
+   *     超出布局约束时在minFontSize和maxFontSize范围内缩小字体；MIN_FONT_SIZE_FIRST优先使用minFontSize调整 高度；LAYOUT_CONSTRAINT_FIRST优先使用布局约束调整高度，
+   *     超出约束时缩小字体。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -769,30 +784,24 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default maxLines(value: int | undefined, options?: MaxLinesOptions): this;
   /**
-   * Set the word break type.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>This attribute does not take effect for the placeholder text.
-   * <br>The component does not support the clip attribute.
-   * <br>Therefore, setting this attribute does not affect text clipping.
-   * </p>
-   *
-   * @param { WordBreak | undefined } value - The word break type.Default value is WordBreak.BREAK_WORD.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * 设置文本断行规则。该属性对placeholder文本无效。当设置为WordBreak.BREAK_ALL时，
+   * [lineBreakStrategy]{@link TextAreaAttribute#lineBreakStrategy}属性不生效，
+   * [orphanCharOptimization]{@link TextAreaAttribute#orphanCharOptimization}功能也不生效。未通过该接口设置时，默认文本断行规则为
+   * WordBreak.BREAK_WORD。
+   * @param { WordBreak | undefined } value - 文本断行规则。<br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default wordBreak(value: WordBreak | undefined): this;
   /**
-   * Set the text line break strategy type.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>This attribute takes effect when wordBreak is not set to breakAll. Hyphens are not supported.
-   * </p>
-   *
-   * @param { LineBreakStrategy | undefined } strategy - The text line break strategy type.Default value is LineBreakStrategy.GREEDY.
-   * @returns { TextAreaAttribute } The attribute of the TextAreaAttribute.
+   * 设置折行规则。适用于需要优化多行文本换行效果的场景，例如GREEDY策略适合一般文本的快速排版，HIGH_QUALITY策略适合对排版质量要求较高的正式文档，BALANCED策略适合需要各行宽度均衡的展示场景。该属性在
+   * [wordBreak]{@link TextAreaAttribute#wordBreak}不等于WordBreak.BREAK_ALL的时候生效，不支持连词符。未通过该接口设置时，默认文本的折行规则为
+   * LineBreakStrategy.GREEDY。
+   * @param { LineBreakStrategy | undefined } strategy - 文本的折行规则。
+   *     该属性在[wordBreak](#wordbreak12)不等于WordBreak.BREAK_ALL时生效，不支持连词符。<br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -824,9 +833,21 @@ export declare interface TextAreaAttribute extends CommonMethod {
   default customKeyboard(value: CustomBuilder | ComponentContentBase | undefined, options?: KeyboardOptions): this;
 
   /**
-   * Called when the text decoration of the text is set.
+   * 设置文本装饰线类型样式及其颜色。未通过该接口设置时，默认文本装饰线对象为
    *
-   * @param { TextDecorationOptions | undefined } value - Default value is { type: TextDecorationType.None, color: Color.Black, style: TextDecorationStyle.SOLID }.
+   * {
+   *
+   * &nbsp;type:&nbsp;TextDecorationType.None,
+   *
+   * &nbsp;color:&nbsp;Color.Black,
+   *
+   * &nbsp;style:&nbsp;TextDecorationStyle.SOLID,
+   *
+   * &nbsp;thicknessScale:&nbsp;1.0
+   *
+   * }
+   *
+   * @param { TextDecorationOptions | undefined } value - 文本装饰线对象。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -834,16 +855,14 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default decoration(value: TextDecorationOptions | undefined): this;
   /**
-   * Called when the distance between text fonts is set.
+   * 设置文本字符间距。设置该值为百分比时，按默认值显示。当设置该值为0时，使用默认值。string类型支持number类型取值的字符串形式，可以附带单位，例如"10"、"10fp"。未通过该接口设置时，默认文本字符间距为0fp。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>If the value specified is a percentage or 0, the default value is used.
-   * <br>For the string type, numeric string values with optional units, for example, "10" or "10fp", are supported.
-   * <br>If the value specified is a negative value, the text is compressed.
-   * <br>A negative value too small may result in the text being compressed to 0 and no content being displayed.
-   * </p>
+   * 当取值为负值时，文字会发生压缩，负值过小时会将组件内容区大小压缩为0，导致无内容显示。
    *
-   * @param { double | string | Resource | undefined } value - The unit is fp.
+   * 对每个字符生效，包括行尾字符。
+   *
+   * @param { double | string | Resource | undefined } value - 文本字符间距。 <br>设置为百分比时按默认值处理；设置为0时使用默认值；负值会导致文字压缩，
+   *     过小时可能无内容显示。 <br>单位：[fp](docroot://reference/apis-arkui/arkui-ts/ts-pixel-units.md#基本像素单位)
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -852,13 +871,11 @@ export declare interface TextAreaAttribute extends CommonMethod {
   default letterSpacing(value: double | string | Resource | undefined): this;
   /**
    * 设置字体行间距。
-   *
    * <p><strong>注意</strong>：
    * <br>如果指定的值小于或等于0，则使用默认值0。
    * </p>
-   *
-   * @param { LengthMetrics | undefined } value - 默认值为0。
-   * @param { LineSpacingOptions } [options]
+   * @param { LengthMetrics | undefined } value - 文本的行间距。设置值不大于0时，取默认值0。<br>取值为undefined时，按默认值处理。
+   * @param { LineSpacingOptions } [options] - 设置行间距配置项。<br>默认值：{ onlyBetweenLines: false }
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -866,14 +883,10 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default lineSpacing(value: LengthMetrics | undefined, options?: LineSpacingOptions): this;
   /**
-   * Called when the line height of the font is set.
+   * 设置文本的行高，设置值不大于0时，不限制文本行高，自适应字体大小。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>If the value is less than or equal to 0, the line height is not limited and the font size is adaptive.
-   * <br>If the value is of the number type, the unit fp is used.
-   * </p>
-   *
-   * @param { double | string | Resource | undefined } value
+   * @param { double | string | Resource | undefined } value - 文本的行高。需要显式指定[像素单位]{@link CommonMethod}，如'10px'，
+   *     也可设置百分比字符串，如'100%'。 <br>**说明**：不指定像素单位时，默认单位fp，如'10'，等同于10。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -881,9 +894,12 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default lineHeight(value: double | string | Resource | undefined): this;
   /**
-   * Called when the input type is set.
+   * 设置输入框类型。未通过该接口设置时，默认输入框类型为TextAreaType.NORMAL。
    *
-   * @param { TextAreaType | undefined } value - Default value is TextAreaType.Normal.
+   * 不同的TextAreaType会拉起对应类型的键盘，同时限制输入。从API version 11开始，设置[inputFilter]{@link TextAreaAttribute#inputFilter}且输入的字符不为空字符
+   * 时，type接口附带的文本过滤效果失效。
+   *
+   * @param { TextAreaType | undefined } value - 输入框类型。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -891,9 +907,11 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default type(value: TextAreaType | undefined): this;
   /**
-   * Sets whether enable auto fill or not.
+   * 设置是否启用自动填充。<!--RP2--><!--RP2End-->未通过该接口设置时，默认启用自动填充。
    *
-   * @param { boolean | undefined } value - Indicates the flag whether autofill is enabled.Default value is true.True: enable, false: disable.
+   * <!--RP6--><!--RP6End-->
+   *
+   * @param { boolean | undefined } value - 是否启用自动填充。 <br>true表示启用，false表示不启用。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -901,9 +919,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default enableAutoFill(value: boolean | undefined): this;
   /**
-   * Called when the auto fill type is set.
+   * 设置自动填充类型。<!--RP3--><!--RP3End-->
    *
-   * @param { ContentType | undefined } contentType - Indicates autofill type.
+   * @param { ContentType | undefined } contentType - 自动填充类型，用于指定输入框的自动填充内容类型，以便系统提供正确的自动填充建议。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -923,29 +941,38 @@ export declare interface TextAreaAttribute extends CommonMethod {
   default enableSelectedDataDetector(enable: boolean | undefined): this;
 
   /**
-   * Set font feature.
+   * 设置文字特性效果，比如数字等宽的特性。
    *
-   * @param { string | undefined } value - The fontFeature.
-   * normal | <feature-tag-value>,
-   * where <feature-tag-value> = <string> [ <integer> | on | off ], like: "ss01" 0
-   * the values of <feature-tag-value> reference to doc of TextArea component
-   * number of <feature-tag-value> can be single or multiple, and separated by comma ','.
-   * @returns { TextAreaAttribute }
+   * 格式为：normal \| \<feature-tag-value\>
+   *
+   * \<feature-tag-value\>的格式为：\<string\> \[ \<integer\> \| on \| off ]
+   *
+   * \<feature-tag-value\>的个数可以有多个，中间用','隔开。
+   *
+   * 例如，使用等宽数字的输入格式为："ss01" on。
+   *
+   * @param { string | undefined } value - 文字特性效果，用于设置文字的特殊显示效果，如数字等宽等。格式为：normal | <feature-tag-value>。
+   *     <br>取值为undefined时，按默认值处理。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default fontFeature(value: string | undefined): this;
   /**
-   * Get text value information when about to input.
+   * 在将要输入时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>It returns true if the text is inserted; returns false otherwise.
-   * <br>This callback is not triggered for pre-edit or candidate word operations.
-   * <br>It is available only for system input methods.
-   * </p>
+   * > **说明：**
+   * >
+   * > onWillInsert和onDidInsert形成will/did时序模式：
+   * >
+   * > - onWillInsert在插入操作前触发，可通过返回false拦截插入操作；返回true则允许插入，随后触发onDidInsert。
+   * >
+   * > - onDidInsert在插入完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillInsert用于拦截控制，onDidInsert用于获取插入结果。
    *
-   * @param { Callback<InsertValue, boolean> | undefined } callback - The triggered function when text content is about to insert.
+   * @param { Callback<InsertValue, boolean> | undefined } callback - 在将要输入时调用的回调。 <br>在返回true时，表示正常插入，返回false时，表示不插入。
+   *     <br>在预上屏和候选词操作时，该回调不触发。 <br>仅支持系统输入法输入的场景。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -953,13 +980,19 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onWillInsert(callback: Callback<InsertValue, boolean> | undefined): this;
   /**
-   * Get text value information when completed input.
+   * 在输入完成时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>It is available only for system input methods.
-   * </p>
+   * > **说明：**
+   * >
+   * > onWillInsert和onDidInsert形成will/did时序模式：
+   * >
+   * > - onWillInsert在插入操作前触发，可通过返回false拦截插入操作；返回true则允许插入，随后触发onDidInsert。
+   * >
+   * > - onDidInsert在插入完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillInsert用于拦截控制，onDidInsert用于获取插入结果。
    *
-   * @param { Callback<InsertValue> | undefined } callback - The triggered function when text content has been inserted.
+   * @param { Callback<InsertValue> | undefined } callback - 在输入完成时调用的回调。 <br>仅支持系统输入法输入的场景。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -967,15 +1000,24 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onDidInsert(callback: Callback<InsertValue> | undefined): this;
   /**
-   * Get text value information when about to delete.
+   * 在将要删除时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>It returns true if the text is deleted; returns false otherwise.
-   * <br>This callback is not called for text preview.
-   * <br>It is available only for system input methods.
-   * </p>
+   * 点击清除按钮不触发onWillDelete回调。
    *
-   * @param { Callback<DeleteValue, boolean> | undefined } callback - The triggered function when text content is about to delete.
+   * > **说明：**
+   * >
+   * > - 点击清除按钮不触发onWillDelete回调。
+   * >
+   * > - onWillDelete和onDidDelete形成will/did时序模式：
+   * >
+   * > - onWillDelete在删除操作前触发，可通过返回false拦截删除操作；返回true则允许删除，随后触发onDidDelete。
+   * >
+   * > - onDidDelete在删除完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillDelete用于拦截控制，onDidDelete用于获取删除结果。
+   *
+   * @param { Callback<DeleteValue, boolean> | undefined } callback - 在将要删除时调用的回调。 <br>在返回true时，表示正常删除，返回false时，表示不删除。
+   *     <br>在预上屏和候选词操作时，该回调不触发。点击清除按钮不触发onDidDelete回调。 <br>仅支持系统输入法输入的场景。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -983,13 +1025,21 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onWillDelete(callback: Callback<DeleteValue, boolean> | undefined): this;
   /**
-   * Get text value information when the deletion has been completed
+   * 在删除完成时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>It is available only for system input methods.
-   * </p>
+   * > **说明：**
+   * >
+   * > - 点击清除按钮不触发onDidDelete回调。
+   * >
+   * > - onWillDelete和onDidDelete形成will/did时序模式：
+   * >
+   * > - onWillDelete在删除操作前触发，可通过返回false拦截删除操作；返回true则允许删除，随后触发onDidDelete。
+   * >
+   * > - onDidDelete在删除完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillDelete用于拦截控制，onDidDelete用于获取删除结果。
    *
-   * @param { Callback<DeleteValue> | undefined } callback - The triggered function when text content has been deleted.
+   * @param { Callback<DeleteValue> | undefined } callback - 在删除完成时调用的回调。 <br>点击清除按钮不触发onDidDelete回调。 <br>仅支持系统输入法输入的场景。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -997,11 +1047,13 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default onDidDelete(callback: Callback<DeleteValue> | undefined): this;
   /**
-   * Set the custom text menu.
-   * Sets the extended options of the custom context menu on selection,
-   * including the text content, icon, and callback.
+   * 设置自定义菜单扩展项，允许用户设置扩展项的文本内容、图标、回调方法。
    *
-   * @param { EditMenuOptions | undefined } editMenu - Customize text menu options.
+   * 调用[disableMenuItems]{@link @ohos.arkui.UIContext:TextMenuController.disableMenuItems}或
+   * [disableSystemServiceMenuItems]{@link @ohos.arkui.UIContext:TextMenuController.disableSystemServiceMenuItems}接口屏蔽文本
+   * 选择菜单内的系统服务菜单项时，editMenuOptions接口内回调方法[onCreateMenu]{@link EditMenuOptions.onCreateMenu}的入参列表中不包含被屏蔽的菜单选项。
+   *
+   * @param { EditMenuOptions | undefined } editMenu - 扩展菜单选项，用于自定义文本选择菜单扩展项，允许设置扩展项的文本内容、图标、回调方法。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1009,14 +1061,11 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default editMenuOptions(editMenu: EditMenuOptions | undefined): this;
   /**
-   * Define the preview text mode of the text input.
+   * 设置是否开启输入预上屏。未通过该接口设置时，默认开启输入预上屏。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>Preview text is in a temporary state and does not support text interception.
-   * <br>As such, it does not trigger onWillInsert, onDidInsert, onWillDelete, or onDidDelete callbacks.
-   * </p>
+   * 预上屏内容定义为文字暂存态，目前不支持文字拦截功能。
    *
-   * @param { boolean | undefined } enable - Indicates the preview text mode.Default value is true.
+   * @param { boolean | undefined } enable - 是否开启输入预上屏。 <br>true表示开启，false表示不开启。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1024,11 +1073,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default enablePreviewText(enable: boolean | undefined): this;
   /**
-   * Enable or disable haptic feedback.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>To enable haptic feedback,
-   * <br>you must declare the ohos.permission.VIBRATE permission under requestPermissions in the module.json5 file of the project.
+   * 设置是否开启触控反馈。未通过该接口设置时，默认开启触控反馈。
+   * 开启触控反馈时，需要在工程的[module.json5](docroot://quick-start/module-configuration-file.md)中配置requestPermissions字段以开启振动权限，配置如
+   * 下：
    * <code>
    * "requestPermissions": [
    *   {
@@ -1036,10 +1083,8 @@ export declare interface TextAreaAttribute extends CommonMethod {
    *   }
    * ]
    * </code>
-   * </p>
-   *
-   * @param { boolean | undefined } isEnabled - Default value is true, set false to disable haptic feedback.
-   * @returns { TextAreaAttribute } returns the instance of the TextAreaAttribute.
+   * @param { boolean | undefined } isEnabled - 是否开启触控反馈。<br>true表示开启，false表示不开启。<br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1057,9 +1102,9 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default voiceButton(options: VoiceButtonOptions | undefined): this;
   /**
-   * Set text mode of automatic case mode switching.
+   * 设置自动大小写模式的文本模式，只提供接口能力，具体实现以输入法应用为主。未通过该接口设置时，默认不产生大小写转换效果，具体实现以输入法应用为主。
    *
-   * @param { AutoCapitalizationMode | undefined } mode - Automatic case mode values.
+   * @param { AutoCapitalizationMode | undefined } mode - 自动大小写模式，用于设置输入法的大小写转换规则，具体实现以输入法应用为主。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1077,16 +1122,14 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default halfLeading(halfLeading: boolean | undefined): this;
   /**
-   * Set the ellipsis mode.
-   *
-   * <p><strong>NOTE</strong>:
-   * <br>For the settings to work, overflow must be set to TextOverflow.Ellipsis and maxLines must be specified.
-   * <br>Setting ellipsisMode alone does not take effect.
-   * <br>EllipsisMode.START and EllipsisMode.CENTER take effect only when maxLines is set to 1.
-   * </p>
-   *
-   * @param { EllipsisMode | undefined } mode - The ellipsis mode.Default value is EllipsisMode.END.
-   * @returns { TextAreaAttribute } The attribute of TextArea.
+   * 设置省略位置。ellipsisMode属性需要配合[textOverflow]{@link TextAreaAttribute#textOverflow}设置为TextOverflow.Ellipsis以及
+   * [maxLines]{@link TextAreaAttribute#maxLines(value: number)}使用，单独设置ellipsisMode属性不生效。未通过该接口设置时，默认省略位置为
+   * EllipsisMode.END。
+   * EllipsisMode.START和EllipsisMode.CENTER仅在[maxLines]{@link TextAreaAttribute#maxLines(value: number)}设置为1生效。
+   * @param { EllipsisMode | undefined } mode - 省略位置。
+   *     需配合[textOverflow](#textoverflow12)设置为TextOverflow.Ellipsis以及[maxLines](#maxlines10)使用，单独设置不生效。
+   *     <br>EllipsisMode.START和EllipsisMode.CENTER仅在maxLines设置为1时生效。<br>取值为undefined时，按默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1103,14 +1146,23 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default stopBackPress(isStopped: boolean | undefined): this;
   /**
-   * Get text value information when about to change.
+   * 在文本内容将要发生变化时，触发该回调。
    *
-   * <p><strong>NOTE</strong>:
-   * <br>This callback is triggered after onWillInsert and onWillDelete, but before onDidInsert and onDidDelete.
-   * </p>
+   * > **说明：**
+   * >
+   * > - onWillChange的回调时序晚于onWillInsert、onWillDelete，早于onDidInsert、onDidDelete。
+   * >
+   * > - onWillChange和onChange形成will/did时序模式：
+   * >
+   * > - onWillChange在文本变更前触发，可通过返回false拦截变更；返回true则允许变更，随后触发onChange。
+   * >
+   * > - onChange在变更完成后触发，无法拦截。
+   * >
+   * > - 两者可以同时使用，onWillChange用于拦截控制，onChange用于获取变更结果。
+   * > onWillChange的回调时序晚于onWillInsert、onWillDelete，早于onDidInsert、onDidDelete。
    *
-   * @param { Callback<EditableTextChangeValue, boolean> | undefined } callback - The triggered function when text content is about to change.
-   * Returning true allows the change to proceed, while returning false cancels the change.
+   * @param { Callback<EditableTextChangeValue, boolean> | undefined } callback - 在文本内容将要发生变化时的回调。 <br>返回true时，表示正常修改。
+   *     返回false时，表示拦截此次触发。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1140,10 +1192,22 @@ export declare interface TextAreaAttribute extends CommonMethod {
    */
   default enableAutoSpacing(enabled: boolean | undefined): this;
   /**
-   * Sets the attribute modifier.
+   * 除支持[通用属性]{@link CommonMethod}，还支持以下属性：
+   * > **说明：**
+   * >
+   * > [通用属性padding]{@link CommonMethod#padding}的默认值为
+   * {
+   * &nbsp;top: '8vp',
+   * &nbsp;right: '16vp',
+   * &nbsp;bottom: '8vp',
+   * &nbsp;left: '16vp'
+   * }
+   * > 从API version 11开始，多行输入框可设置.width('auto')使组件宽度自适应文本宽度，自适应时组件宽度受constraintSize属性以及父容器传递的最大最小宽度限制，其余使用方式参考
+   * > [尺寸设置]{@link CommonMethod}。
    *
-   * @param { AttributeModifier<TextAreaAttribute> | AttributeModifier<CommonMethod> | undefined } modifier.
-   * @returns { TextAreaAttribute } the attribute of the TextAreaAttribute.
+   * @param { AttributeModifier<TextAreaAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - undefined
+   *     动态设置TextArea组件的属性。<br>取值为undefined时，按当前组件的属性方法默认值处理。
+   * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1198,7 +1262,7 @@ export declare interface TextAreaAttribute extends CommonMethod {
    * 用于设置拖拽后的背板样式。
    *
    * @param { SelectedDragPreviewStyle | undefined } value - 选中拖拽后的背板样式。
-   *    若传入undefined会重置样式。
+   *        若传入undefined会重置样式。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1209,7 +1273,7 @@ export declare interface TextAreaAttribute extends CommonMethod {
    * 设置文本方向。
    *
    * @param { TextDirection | undefined } direction - 表示文本方向。
-   * 当设置为undefined，该属性会被重置为TextDirection.DEFAULT。
+   *     当设置为undefined，该属性会被重置为TextDirection.DEFAULT。
    * @returns { TextAreaAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

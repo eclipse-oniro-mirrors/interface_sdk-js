@@ -31,7 +31,7 @@ import { ComponentContentBase } from '../ComponentContent';
 export declare enum RefreshStatus {
 
   /**
-   * The refresh status of the drop-down refresh.
+   * 默认未下拉状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -40,7 +40,7 @@ export declare enum RefreshStatus {
   Inactive,
 
   /**
-   * Drop down, but the drop-down distance is less than the refresh distance.
+   * 下拉中，下拉距离小于刷新距离。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -49,7 +49,7 @@ export declare enum RefreshStatus {
   Drag,
 
   /**
-   * The pull-down exceeds the refresh distance.
+   * 下拉中，下拉距离超过刷新距离。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -58,7 +58,7 @@ export declare enum RefreshStatus {
   OverDrag,
 
   /**
-   * After the pull-down, it rebounds to the refresh distance and enters the refresh state.
+   * 下拉结束，回弹至刷新距离，进入刷新中状态。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -67,7 +67,7 @@ export declare enum RefreshStatus {
   Refresh,
 
   /**
-   * After refresh, return to the initial state.
+   * 刷新结束，返回初始状态（顶部）。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -123,7 +123,7 @@ export interface RefreshOptions {
 }
 
 /**
- * 支持[通用属性]{@link common}外，还支持以下属性：
+ * 支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

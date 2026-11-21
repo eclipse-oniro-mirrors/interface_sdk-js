@@ -74,10 +74,12 @@ declare namespace xml {
 
     /**
      * 写入元素的属性和属性值。
-     * 
+     *
      * > **说明：**
      * >
-     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许添加数字开头的属性名称以及添加多个同名的属性名称。
+     * > 该接口必须在[startElement]{@link xml.XmlDynamicSerializer#startElement}之后调用，用于为当前已开启的元素设置属性。
+     * >
+     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许添加数字开头的属性名称以及添加多个同名的属性名称。
      *
      * @param { string } name - 属性名。所组成的XML长度不能超过100000，不可为空字符。
      * @param { string } value - 属性值。所组成的XML长度不能超过100000字符。
@@ -97,7 +99,7 @@ declare namespace xml {
      * 
      * > **说明：**
      * >
-     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许添加数字开头的元素名称。
+     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许添加数字开头的元素名称。
      *
      * @param { string } name - 该空元素的元素名，所组成的XML长度不能超过100000。
      * @throws { BusinessError } 10200062 - The cumulative length of xml has exceeded the upper limit 100000.
@@ -130,7 +132,7 @@ declare namespace xml {
      * >
      * > - 调用该接口后须调用[endElement]{@link xml.XmlSerializer#endElement}写入元素结束标记，以确保节点正确闭合。
      * >
-     * > - 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许添加数字开头的元素名称。
+     * > - 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许添加数字开头的元素名称。
      *
      * @param { string } name - 当前元素的元素名。所组成的XML长度不能超过100000，不可为空字符。
      * @throws { BusinessError } 10200062 - The cumulative length of xml has exceeded the upper limit 100000.
@@ -168,7 +170,7 @@ declare namespace xml {
      * > 该接口应在[startElement]{@link xml.XmlDynamicSerializer#startElement}之前调用，为即将开启的元素设置命名空间前缀。调用顺序：
      * > 先调用setNamespace设置命名空间，再调用startElement开启元素。
      * >
-     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许添加数字开头的前缀以及对同一个元素设置多个命名空间。
+     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许添加数字开头的前缀以及为同一个元素设置多个命名空间。
      *
      * @param { string } prefix - 当前元素及其子元素的前缀。所组成的XML长度不能超过100000，不可为空字符串。
      * @param { string } namespace - 当前元素及其子元素的命名空间。所组成的XML长度不能超过100000，不可为空字符串。
@@ -201,7 +203,7 @@ declare namespace xml {
      *
      * > **说明：**
      * >
-     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许在CDATA标签中添加包含"\]\]\>"字符串的数据。
+     * > 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许在CDATA标签中添加包含"\]\]\>"字符串的数据。
      *
      * @param { string } text - CDATA标签中的数据内容。所组成的XML长度不能超过100000。
      * @throws { BusinessError } 10200062 - The cumulative length of xml has exceeded the upper limit 100000.
@@ -340,7 +342,7 @@ declare namespace xml {
      * >
      * > - 调用该接口后须调用[endElement]{@link xml.XmlSerializer#endElement}写入元素结束标记，以确保节点正确闭合。
      * >
-     * > - 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。比如不允许添加数字开头的元素名称。
+     * > - 该接口对所添加数据不做标准XML校验处理，请确保所添加的数据符合标准XML规范。例如不允许添加数字开头的元素名称。
      *
      * @param { string } name - 当前元素的元素名。
      * @syscap SystemCapability.Utils.Lang
@@ -415,10 +417,6 @@ declare namespace xml {
 
     /**
      * 添加标签值，标签值将作为当前元素的文本内容，写入元素的开始标记与结束标记之间。
-     *
-     * > **说明：**
-     * >
-     * > 调用该接口前必须先调用[startElement]{@link xml.XmlSerializer#startElement}接口写入元素开始标记。
      *
      * @param { string } text - XML元素的标签文本内容。
      * @syscap SystemCapability.Utils.Lang
@@ -580,8 +578,6 @@ declare namespace xml {
    */
   interface ParseInfo {
     /**
-     * ArkTS-Sta: getColumnNumber(): int
-     *
      * 获取当前列号，从1开始计数。
      *
      * @returns { int } 当前元素的列号（从1开始），用于定位XML解析位置。
@@ -593,10 +589,8 @@ declare namespace xml {
      */
     getColumnNumber(): int;
     /**
-     * ArkTS-Sta: getDepth(): int
-     * 
      * 获取元素的当前深度。
-     * 
+     *
      * > **说明：**
      * >
      * > 标签内的空白事件深度与标签的深度保持一致。
@@ -610,8 +604,6 @@ declare namespace xml {
      */
     getDepth(): int;
     /**
-     * ArkTS-Sta: getLineNumber(): int
-     *
      * 获取当前行号，从1开始。
      *
      * @returns { int } 当前元素的行号（从1开始），用于定位XML解析位置。
@@ -689,9 +681,7 @@ declare namespace xml {
      */
     isWhitespace(): boolean;
     /**
-     * ArkTS-Sta: getAttributeCount(): int
-     *
-     * 当前开始标记的属性数量，用于遍历和处理XML属性。
+     * 获取当前开始标记的属性数量。
      *
      * @returns { int } 当前开始标记的属性数量，用于遍历和处理XML属性。
      * @syscap SystemCapability.Utils.Lang
@@ -738,6 +728,7 @@ declare namespace xml {
 
     /**
      * 解析开始标签、标签值和结束标签，默认值undefined，表示不解析。   
+     * 返回true表示继续解析，返回false表示停止解析。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -749,6 +740,7 @@ declare namespace xml {
 
     /**
      * 解析属性和属性值，默认值undefined，表示不解析。
+     * 返回true表示继续解析，返回false表示停止解析。
      *
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]

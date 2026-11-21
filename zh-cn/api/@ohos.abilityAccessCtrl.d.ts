@@ -1185,16 +1185,14 @@ declare namespace abilityAccessCtrl {
      */
     isPermissionSupported(permissionName: Permissions): boolean;
     /**
-     * 设置控制方应用对目标应用的自动化控制开关，
-     * 返回每个目标应用的结果。该开关状态包含允许和禁止。
+     * 设置控制方应用对目标应用的自动化控制开关状态，返回每个目标应用的设置结果。该开关状态包含允许和禁止。使用Promise异步回调。
      *
      * @permission ohos.permission.GRANT_SENSITIVE_PERMISSIONS
-     * @param { int } controllerTokenID - 控制方应用的身份标识，参数值大于0。
-     *     <br>取值限定为整数。
+     * @param { int } controllerTokenID - 控制方应用的身份标识。可通过应用BundleInfo中的ApplicationInfo的[accessTokenId]{@link
+     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId}字段获取。该参数必须为大于0的整数，传入0时返回错误码12100001。
      * @param { Array<AutomationControlTargetParam> } targetList - 被控制目标应用列表及其自动化控制开关状态。
      *     <br>最大长度为1024且不能为空。
-     * @returns { Promise<Array<AutomationControlSetResult>> } Promise用于返回每个目标应用的结果。
-     *     与targetList的顺序相同。
+     * @returns { Promise<Array<AutomationControlSetResult>> } Promise对象，用于返回每个目标应用的设置结果，与targetList传入的应用顺序相同。
      * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
      *     permission "ohos.permission.GRANT_SENSITIVE_PERMISSIONS".
      * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
@@ -1215,13 +1213,12 @@ declare namespace abilityAccessCtrl {
       targetList: Array<AutomationControlTargetParam>
     ): Promise<Array<AutomationControlSetResult>>;
     /**
-     * 查询指定应用的自动化控制目标应用的信息。返回目标应用列表及其状态。
+     * 查询被指定应用自动化控制的目标应用的信息。返回目标应用列表及其状态。使用Promise异步回调。
      *
      * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
-     * @param { int } controllerTokenID - 控制方应用的Token ID。
-     *     <br>取值限定为整数。
-     * @returns { Promise<Array<AutomationControlTargetResult>> } Promise用于返回目标应用及其
-     *     自动化控制状态。
+     * @param { int } controllerTokenID - 控制方应用的身份标识。可通过应用BundleInfo中的ApplicationInfo的[accessTokenId]{@link
+     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId}字段获取。该参数必须为大于0的整数，传入0时返回错误码12100002。
+     * @returns { Promise<Array<AutomationControlTargetResult>> } Promise对象，用于返回目标应用及其自动化控制状态。
      * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
      *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
      * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
@@ -1235,14 +1232,12 @@ declare namespace abilityAccessCtrl {
      */
     getAutomationControlTargets(controllerTokenID: int): Promise<Array<AutomationControlTargetResult>>;
     /**
-     * 查询对目标应用有自动化控制能力的控制方应用。
-     * 返回控制方应用信息列表。
+     * 查询对目标应用有自动化控制能力的控制方应用。返回控制方应用信息列表。使用Promise异步回调。
      *
      * @permission ohos.permission.GET_SENSITIVE_PERMISSIONS
-     * @param { int } targetTokenID - 目标被控制应用的Token ID。
-     *     <br>取值限定为整数。
-     * @returns { Promise<Array<AutomationControlControllerInfo>> } Promise用于返回控制方应用的列表，这些应用可
-     *     对指定的目标应用进行自动化控制。
+     * @param { int } targetTokenID - 目标被控制应用的身份标识。可通过应用BundleInfo中的ApplicationInfo的[accessTokenId]{@link
+     *     ./bundleManager/ApplicationInfo:ApplicationInfo.accessTokenId}字段获取。该参数必须为大于0的整数，传入0时返回错误码12100002。
+     * @returns { Promise<Array<AutomationControlControllerInfo>> } Promise对象，用于返回控制方应用的列表，这些应用可对指定的目标应用进行自动化控制。
      * @throws { BusinessError } 201 - Permission denied. Interface caller does not have
      *     permission "ohos.permission.GET_SENSITIVE_PERMISSIONS".
      * @throws { BusinessError } 202 - Not system application. Interface caller is not a system application.
@@ -1746,7 +1741,7 @@ declare namespace abilityAccessCtrl {
     grantTimestamp?: long;
   }
   /**
-   * 自动化控制开关状态值。
+   * 表示自动化控制开关状态的枚举。
    *
    * @syscap SystemCapability.Security.AccessToken
    * @systemapi
@@ -1755,7 +1750,7 @@ declare namespace abilityAccessCtrl {
    */
   export enum AutomationControlStatus {
     /**
-     * 关闭自动化控制权限
+     * 禁止自动化控制。
      *
      * @syscap SystemCapability.Security.AccessToken
      * @systemapi
@@ -1764,7 +1759,7 @@ declare namespace abilityAccessCtrl {
      */
     DISABLED = 0,
     /**
-     * 授予自动化控制权限。
+     * 允许自动化控制。
      *
      * @syscap SystemCapability.Security.AccessToken
      * @systemapi
@@ -1792,7 +1787,7 @@ declare namespace abilityAccessCtrl {
      */
     SUCCESS = 0,
     /**
-     * 指定的目标应用token ID不存在。
+     * 指定的targetTokenID不存在，或对应目标不是应用进程。
      *
      * @syscap SystemCapability.Security.AccessToken
      * @systemapi
@@ -1811,7 +1806,7 @@ declare namespace abilityAccessCtrl {
    */
   interface AutomationControlTargetParam {
     /**
-     * 目标被控制应用的Token ID。
+     * 目标被控制应用的身份标识。
      * 取值限定为整数。
      *
      * @syscap SystemCapability.Security.AccessToken
@@ -1840,7 +1835,7 @@ declare namespace abilityAccessCtrl {
    */
   interface AutomationControlTargetResult {
     /**
-     * 目标被控制应用的Token ID。
+     * 目标被控制应用的身份标识。
      * 取值限定为整数。
      *
      * @syscap SystemCapability.Security.AccessToken

@@ -801,6 +801,72 @@ export declare class BottomTabBarStyle {
 }
 
 /**
+ * Enumeration of the title font style.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare enum SidebarSectionTitleStyle {
+  /**
+   * Title style for standard fonts.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  STANDARD = 0,
+ 
+  /**
+   * Heading style for accent fonts.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  EMPHASIZED = 1
+}
+ 
+/**
+ * Defines a partial grouping of sidebars with headings.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface SidebarSection {
+  /**
+   * The section title.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  title: ResourceStr;
+
+  /**
+   * Sort order for the sidebar grouping.
+  The value of * must be an integer.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  order?: int;
+ 
+  /**
+   * Font style of the title.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 static
+   */
+  titleStyle?: SidebarSectionTitleStyle;
+}
+
+/**
  * Define the TabContentAttribute.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -905,6 +971,32 @@ export declare interface TabContentAttribute extends CommonMethod {
    * @since 26.0.1 static
    */
   default tabBarVisibility(visibility: TabVisibility, displayMode: TabBarDisplayMode | undefined): this;
+
+  /**
+   * Sets the sidebar section grouping for this TabContent.
+   *
+   * @param { SidebarSection | undefined } value - The sidebar section.
+   * @returns { TabContentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default sidebarSection(value: SidebarSection | undefined): this;
+
+  /**
+   * Mark this TabContent as non-recyclable. When configuring Tabs.cachedMaxCount, if *keepAlive* of tabContent is set
+   * to true, tabContent will not be destroyed by the cache mechanism even if it is outside the cache range.
+   *
+   * @param { boolean | undefined } keepAlive - Whether to keep this TabContent alive and
+   *     not recyclable.<br>Passing **undefined** resets this
+   *     property to its default value (**false**).
+   *     <br>Default value: **false**.
+   * @returns { TabContentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default keepAlive(keepAlive: boolean | undefined): this;
 }
 
 /**

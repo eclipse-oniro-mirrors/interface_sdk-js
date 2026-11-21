@@ -1522,7 +1522,7 @@ export declare interface OutlineOptions {
 }
 
 /**
- * Define the style of checkbox mark.
+ * 定义复选框标记的样式。
  *
  * @interface MarkStyle
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1796,7 +1796,7 @@ export declare interface ChainWeightOptions {
 }
 
 /**
- * Defines the struct of AccessibilityOptions.
+ * 定义AccessibilityOptions的结构体。
  *
  * @interface AccessibilityOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full

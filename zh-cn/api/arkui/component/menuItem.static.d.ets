@@ -114,7 +114,7 @@ export declare interface MenuItemOptions {
     builder?: CustomBuilder;
 }
 /**
- * 除支持[通用属性]{@link common}外，还支持以下属性：
+ * 除支持[通用属性]{@link CommonMethod}外，还支持以下属性：
  * 
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -203,7 +203,7 @@ export declare interface MenuItemAttribute extends CommonMethod {
      * 设置MenuItem组件的属性修改器。
      *
      * @param { AttributeModifier<MenuItemAttribute> | AttributeModifier<CommonMethod> | undefined } modifier - MenuItem
-     *     组件的属性修改器。取值为undefined时，则不使用属性修改器。<br/>CommonMethod：[通用属性]{@link common}
+     *     组件的属性修改器。取值为undefined时，则不使用属性修改器。<br/>CommonMethod：[通用属性]{@link CommonMethod}
      * @returns { MenuItemAttribute }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -211,6 +211,28 @@ export declare interface MenuItemAttribute extends CommonMethod {
      */
     default attributeModifier(
         modifier: AttributeModifier<MenuItemAttribute> | AttributeModifier<CommonMethod> | undefined): this;
+    /**
+     * 为自定义菜单项创建子菜单。
+     *
+     * @param { CustomBuilder | undefined } builder - 子菜单的构建者函数。
+     * @returns { MenuItemAttribute }
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @stagemodelonly
+     * @since 26.0.0 static
+     */
+    default subMenuBuilder(builder: CustomBuilder | undefined): this;
+
+    /**
+     * 设置菜单项选项。
+     *
+     * @param { MenuItemOptions | CustomBuilder } [value] - 菜单项构造选项。
+     * @returns { MenuItemAttribute } 返回MenuItemAttribute的实例。
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @unpublished
+     * @stagemodelonly
+     * @since 26.0.1 staticonly
+     */
+    default setMenuItemOptions(value?: MenuItemOptions | CustomBuilder): this;
 }
 
 /**

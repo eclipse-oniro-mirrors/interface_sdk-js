@@ -34,8 +34,12 @@ declare namespace access {
    * Enables Bluetooth on a device.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -50,8 +54,12 @@ declare namespace access {
    * Disables Bluetooth on a device.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -67,11 +75,15 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         <br>1. The hardware does not support the capability;
+   *         <br>2. The chip does not support the capability;
+   *         <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
-   * @throws { BusinessError } 2900013 - The user does not respond.
-   * @throws { BusinessError } 2900014 - User refuse the action.
+   * @throws { BusinessError } 2900013 - The user did not respond.
+   * @throws { BusinessError } 2900014 - The user refused the action.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @crossplatform
@@ -86,11 +98,15 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         <br>1. The hardware does not support the capability;
+   *         <br>2. The chip does not support the capability;
+   *         <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
-   * @throws { BusinessError } 2900013 - The user does not respond.
-   * @throws { BusinessError } 2900014 - User refuse the action.
+   * @throws { BusinessError } 2900013 - The user did not respond.
+   * @throws { BusinessError } 2900014 - The user refused the action.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
    * @crossplatform
@@ -106,9 +122,13 @@ declare namespace access {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { NotifyDialogResultParams } notifyDialogResultParams - Indicates the params for dialog result.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -123,9 +143,13 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -140,8 +164,12 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 12]
    * @returns { BluetoothState } Returns the Bluetooth status.
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 12]
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 10 - 12]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -157,11 +185,13 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @param { AsyncCallback<void> } callback - Callback used to return the result.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -176,9 +206,13 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.MANAGE_BLUETOOTH
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -193,9 +227,13 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.GET_BLUETOOTH_LOCAL_MAC
    * @returns { string } The local MAC address. For example, "11:22:33:AA:BB:FF".
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 202 - Non-system applications are not allowed to use system APIs.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -206,88 +244,22 @@ declare namespace access {
   function getLocalAddress(): string;
 
   /**
-   * Check whether Bluetooth is available.
-   *
-   * @returns { boolean } Returns {@code true} if Bluetooth is available, returns {@code false} otherwise.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @stagemodelonly
-   * @since 26.0.0 dynamic
-   * @since 26.0.1 static
-   */
-  function isBluetoothSupported(): boolean;
-
-  /**
-   * Subscribe the event reported when the Bluetooth state changes.
-   *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 17]
-   * @param { 'stateChange' } type - Type of the Bluetooth state changes event to listen for.
-   * @param { Callback<BluetoothState> } callback - Callback used to listen for the Bluetooth state event.
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 17]
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @crossplatform [since 13]
-   * @atomicservice [since 12]
-   * @since 10 dynamic
-   */
-  function on(type: 'stateChange', callback: Callback<BluetoothState>): void;
-
-  /**
-   * Subscribe the event reported when the Bluetooth state changes.
-   *
-   * @param { Callback<BluetoothState> } callback - Callback used to listen for the Bluetooth state event.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @crossplatform
-   * @since 23 static
-   */
-  function onStateChange(callback: Callback<BluetoothState>): void;
-
-  /**
-   * Unsubscribe the event reported when the Bluetooth state changes.
-   *
-   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 17]
-   * @param { 'stateChange' } type - Type of the Bluetooth state changes event to listen for.
-   * @param { Callback<BluetoothState> } callback - Callback used to listen for the Bluetooth state event.
-   * @throws { BusinessError } 201 - Permission denied. [since 10 - 17]
-   * @throws { BusinessError } 401 - Invalid parameter. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @crossplatform [since 13]
-   * @atomicservice [since 12]
-   * @since 10 dynamic
-   */
-  function off(type: 'stateChange', callback?: Callback<BluetoothState>): void;
-
-  /**
-   * Unsubscribe the event reported when the Bluetooth state changes.
-   *
-   * @param { Callback<BluetoothState> } [callback] - Callback used to listen for the Bluetooth state event.
-   * @throws { BusinessError } 801 - Capability not supported.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @crossplatform
-   * @since 23 static
-   */
-  function offStateChange(callback?: Callback<BluetoothState>): void;
-
-  /**
    * Add a persistent random device address. Once the randomized address is successfully added,
    * the application can save it for an extended period of time.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.PERSISTENT_BLUETOOTH_PEERS_MAC
    * @param { string } deviceId - the randomized address of remote device.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900010 - The number of supported device addresses has reached the upper limit.
    * @throws { BusinessError } 2900099 - Add persistent device address failed.
@@ -304,10 +276,16 @@ declare namespace access {
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.PERSISTENT_BLUETOOTH_PEERS_MAC
    * @param { string } deviceId - the randomized address of remote device.
    * @returns { Promise<void> } Returns the promise object.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - delete persistent device address failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -322,8 +300,12 @@ declare namespace access {
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH and ohos.permission.PERSISTENT_BLUETOOTH_PEERS_MAC
    * @returns { string[] } Returns the list of persistent random device addresses.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Get persistent device address failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -339,10 +321,16 @@ declare namespace access {
    * @permission ohos.permission.ACCESS_BLUETOOTH
    * @param { string } deviceId - the randomized address of remote device.
    * @returns { boolean } Returns whether the randomized device address is valid.
-   * @throws { BusinessError } 201 - Permission denied.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
-   *     2. Incorrect parameter types. 3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900099 - Check persistent device address failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -362,6 +350,140 @@ declare namespace access {
    * @since 26.0.0 static
    */
   function convertUuid(uuid: string): string;
+
+  /**
+   * Check whether Bluetooth is available.
+   *
+   * @returns { boolean } Returns {@code true} if Bluetooth is available, returns {@code false} otherwise.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.0.0 dynamic
+   * @since 26.1.0 static
+   */
+  function isBluetoothSupported(): boolean;
+
+  /**
+   * Start capturing HCI packet and returns a socket file descriptor carrying the real-time HCI data stream.
+   *
+   * The data stream is encapsulated in the standard btsnoop format and can be forwarded to a PC for real-time
+   * parsing (for example, Wireshark).
+   * Multiple applications are not allowed to capture HCI packet simultaneously.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @returns { int } Returns the socket file descriptor carrying the real-time HCI data stream.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
+   *     <br>1. The operation is restricted by the OS-account constraint;
+   *     <br>2. The required privilege for the operation has not been granted.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900020 - Another HCI sniffing session is in progress.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function startSnoopCapture(): int;
+
+  /**
+   * Stop capturing HCI packet.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 204 - Access denied due to user access control policy. Possible causes:
+   *     <br>1. The operation is restricted by the OS-account constraint;
+   *     <br>2. The required privilege for the operation has not been granted.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900021 - The HCI capture session is initiated by another application.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function stopSnoopCapture(): void;
+
+  /**
+   * Subscribe the event reported when the Bluetooth state changes.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 17]
+   * @param { 'stateChange' } type - Type of the Bluetooth state changes event to listen for.
+   * @param { Callback<BluetoothState> } callback - Callback used to listen for the Bluetooth state event.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 10 - 17]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @crossplatform [since 13]
+   * @atomicservice [since 12]
+   * @since 10 dynamic
+   */
+  function on(type: 'stateChange', callback: Callback<BluetoothState>): void;
+
+  /**
+   * Subscribe the event reported when the Bluetooth state changes.
+   *
+   * @param { Callback<BluetoothState> } callback - Callback used to listen for the Bluetooth state event.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @crossplatform
+   * @since 23 static
+   */
+  function onStateChange(callback: Callback<BluetoothState>): void;
+  /**
+   * Unsubscribe the event reported when the Bluetooth state changes.
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH [since 10 - 17]
+   * @param { 'stateChange' } type - Type of the Bluetooth state changes event to listen for.
+   * @param { Callback<BluetoothState> } [callback] - Specifies the callback function notification for unsubscription.
+   * If a parameter is transferred, the parameter value must be the same as
+   * [access.on('stateChange')]{@link access.on(type:'stateChange', callback: Callback<BluetoothState>)}.
+  The callback functions in * are the same. If no parameter is transferred, all callback function notifications
+   * corresponding to the type are unsubscribed from.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API. [since 10 - 17]
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @crossplatform [since 13]
+   * @atomicservice [since 12]
+   * @since 10 dynamic
+   */
+  function off(type: 'stateChange', callback?: Callback<BluetoothState>): void;
+
+  /**
+   * Unsubscribe the event reported when the Bluetooth state changes.
+   *
+   * @param { Callback<BluetoothState> } [callback] - Callback used to listen for the Bluetooth state event.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @crossplatform
+   * @since 23 static
+   */
+  function offStateChange(callback?: Callback<BluetoothState>): void;
 
   /**
    * The enum of bluetooth state.
@@ -461,7 +583,7 @@ declare namespace access {
      */
     dialogType: DialogType;
     /**
-     * The result of bluetooth dialog. The value true indicates that the user approves the request,
+     * The result of bluetooth dailog. The value true indicates that the user approves the request,
      * and the value false indicates that the user rejects the request.
      *
      * @syscap SystemCapability.Communication.Bluetooth.Core
@@ -489,7 +611,16 @@ declare namespace access {
      * @since 20 dynamic
      * @since 23 static
      */
-    BLUETOOTH_SWITCH = 0
+    BLUETOOTH_SWITCH = 0,
+    /**
+     * Bluetooth Unpair dialog box.
+     *
+     * @syscap SystemCapability.Communication.Bluetooth.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    BLUETOOTH_UNPAIR = 1
   }
 }
 

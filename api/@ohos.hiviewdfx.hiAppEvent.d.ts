@@ -1633,6 +1633,18 @@ declare namespace hiAppEvent {
      * @since 23 static
      */
     autoStopSampling?: boolean;
+
+    /**
+     * Indicates whether to collect the EventHandler task queue information when the main thread times out. true: The
+     * function of collecting the queue information of the EventHandler task is enabled. false: The function of
+     * collecting queue information about the EventHandler task is disabled. Default value: false.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    enableEventHandlerDump?: boolean;
   }
 
   /**
@@ -1925,6 +1937,38 @@ declare namespace hiAppEvent {
      * @since 26.0.0 dynamic&static
      */
     useRefinedLogFileName?: boolean;
+
+    /**
+     * Whether to enable the JSVM heap log for RESOURCE_OVERLIMIT event.
+     *
+     * **true**: yes.
+     *
+     * **false**: no.
+     *
+     * The default value is **false**.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    jsvmHeapLogEnable?: boolean;
+
+    /**
+     * Whether to enable the V8 heap log for RESOURCE_OVERLIMIT event.
+     *
+     * **true**: yes.
+     *
+     * **false**: no.
+     *
+     * The default value is **false**.
+     *
+     * @syscap SystemCapability.HiviewDFX.HiAppEvent
+     * @FaAndStageModel
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    v8HeapLogEnable?: boolean;
   }
 
   /**

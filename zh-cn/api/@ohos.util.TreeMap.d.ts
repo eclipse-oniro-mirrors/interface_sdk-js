@@ -317,7 +317,7 @@ declare class TreeMap<K, V> {
    */
   values(): IterableIterator<V>;
   /**
-   * 对容器中指定key对应的键值对进行更新（替换）。
+   * 对容器中指定key对应的value进行替换，若key存在则替换成功并返回true，若key不存在则不做修改并返回false。
    *
    * @param { K } key - 指定需要替换value对应的key。
    * @param { V } newValue - 替换的新值，将覆盖指定key对应的原有value。
@@ -332,10 +332,11 @@ declare class TreeMap<K, V> {
   replace(key: K, newValue: V): boolean;
   /**
    * 通过回调函数来遍历实例对象上的元素及其键。
-   * 不会对已删除的key执行回调。
    *
-   * @param { function } callbackFn - 回调函数。依次接收value、key和map三个参数：value为当前元素的值，key为当前元素的键，
-   *     map为当前调用forEach方法的TreeMap实例。
+   * @param { function } callbackFn - 回调函数，用于遍历实例对象中的每个键值对并在回调中执行自定义操作。
+   *     value（可选）当前遍历到的元素键值对的值。
+   *     key（可选）当前遍历到的元素键值对的键。
+   *     map（可选）当前调用forEach方法的实例对象。
    * @param { Object } [thisArg] - callbackFn被调用时用作this值，默认值为undefined。
    * @throws { BusinessError } 10200011 - The forEach method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
@@ -360,7 +361,7 @@ declare class TreeMap<K, V> {
   /**
    * 返回包含此映射中键值对的新迭代器对象。
    *
-   * @returns { IterableIterator<[K, V]> } 返回一个迭代器。
+   * @returns { IterableIterator<[K, V]> } 返回包含此映射中所有键值对的迭代器对象。
    * @throws { BusinessError } 10200011 - The entries method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -372,7 +373,7 @@ declare class TreeMap<K, V> {
   /**
    * 返回一个迭代器，迭代器的每一项是一个包含键和值的[K, V]数组。
    *
-   * @returns { IterableIterator<[K, V]> } 返回包含此映射中所有键值对的迭代器对象。
+   * @returns { IterableIterator<[K, V]> } 返回一个迭代器。
    * @throws { BusinessError } 10200011 - The Symbol.iterator method cannot be bound.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]

@@ -203,6 +203,26 @@ declare namespace browser {
   function setManagedBrowserPolicy(admin: Want, bundleName: string, policyName: string, policyValue: string): void;
 
   /**
+   * 设置指定浏览器应用程序的托管浏览器策略。
+   *
+   * @permission ohos.permission.ENTERPRISE_SET_BROWSER_POLICY
+   * @param { string } bundleName - 浏览器应用的Bundle名称。
+   * @param { string } policyName - 要设置的策略名称。
+   * @param { string } policyValue - 要设置的策略的值。
+   * @param { boolean } [forceOverride] - 是否强制覆盖已有策略。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setManagedBrowserPolicy(bundleName: string, policyName: string, policyValue: string, forceOverride?: boolean): void;
+
+  /**
    * 通过应用包名获取指定浏览器的浏览器策略，适用于查询当前浏览器策略配置的场景，例如在企业设备管理应用中展示策略详情、验证策略是否生效等。
    *
    * @param { Want } admin - 企业设备管理扩展组件。Want中必须包含企业设备管理扩展能力的abilityName和所在应用的bundleName。

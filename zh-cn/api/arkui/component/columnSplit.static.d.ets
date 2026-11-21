@@ -98,14 +98,14 @@ export declare interface ColumnSplitAttribute extends CommonMethod {
      */
     default divider(value: ColumnSplitDividerStyle | null | undefined): this;
     /**
- 	 * Set ColumnSplit options.
- 	 *
-     * @returns { ColumnSplitAttribute }
+     * 设置ColumnSplit选项。
+     *
+     * @returns { ColumnSplitAttribute } 返回ColumnSplitAttribute实例。
  	 * @syscap SystemCapability.ArkUI.ArkUI.Full
  	 * @unpublished
  	 * @stagemodelonly
  	 * @since 26.0.1 staticonly
- 	 */
+     */
  	default setColumnSplitOptions(): this;
     /**
      * 设置组件的动态属性。

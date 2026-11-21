@@ -24,7 +24,8 @@
  * version, description, and input/output schema.
  *
  * @syscap SystemCapability.Ability.AgentRuntime.Core
- * @systemapi
+ * @systemapi [since 26.0.0 - 26.0.1]
+ * @publicapi [since 26.1.0]
  * @stagemodelonly
  * @since 26.0.0 dynamiconly
  */
@@ -35,7 +36,8 @@ export interface FunctionInfo {
    * provider. The version number is used to identify the function iteration and compatibility changes of the Function.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -46,7 +48,8 @@ export interface FunctionInfo {
    * identify Functions in different functional domains.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -56,7 +59,8 @@ export interface FunctionInfo {
    * Name of the Function, used to uniquely identify a Function within the functionNamespace.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -68,7 +72,8 @@ export interface FunctionInfo {
    * decision-making.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -79,7 +84,8 @@ export interface FunctionInfo {
    * accepted by the Function. It must conform to the JSON Schema format definition.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
@@ -90,7 +96,8 @@ export interface FunctionInfo {
    * value. It must conform to the JSON Schema format definition.
    *
    * @syscap SystemCapability.Ability.AgentRuntime.Core
-   * @systemapi
+   * @systemapi [since 26.0.0 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */

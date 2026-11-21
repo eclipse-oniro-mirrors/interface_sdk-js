@@ -427,10 +427,10 @@ type MessageType = 'message' | 'messageerror';
  */
 export interface EventTarget {
   /**
-   * 向Worker添加一个事件监听。
+   * 向Worker添加一个事件监听，该接口与on接口功能一致。
    *
    * @param { string } type - 监听的事件类型。
-   * @param { EventListener } listener - listener 当指定类型的事件发生时调用的回调函数。
+   * @param { EventListener } listener - 事件触发时的回调函数。
    * @syscap SystemCapability.Utils.Lang
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -442,7 +442,7 @@ export interface EventTarget {
    * 分发Worker实例上已注册的事件。
    *
    * @param { Event } event - 需要分发的事件。
-   * @returns { boolean }
+   * @returns { boolean } 分发的结果。true表示分发成功，false表示分发失败。
    * @syscap SystemCapability.Utils.Lang
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -451,10 +451,10 @@ export interface EventTarget {
   dispatchEvent(event: Event): boolean;
 
   /**
-   * 移除Worker的事件监听。
+   * 移除Worker的事件监听，该接口与off接口功能一致。
    *
-   * @param { string } type - 需要移除的事件类型。
-   * @param { EventListener } callback - 要移除的事件监听的回调函数。
+   * @param { string } type - 需要移除的事件类型。事件类型通过addEventListener设置。
+   * @param { EventListener } callback - 需要删除的特定监听器回调函数。如果未传入此参数，则会删除该类型的所有监听器。
    * @syscap SystemCapability.Utils.Lang
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -483,10 +483,10 @@ export interface EventTarget {
  */
 export interface WorkerEventTarget {
   /**
-   * 向Worker线程的实例对象添加事件监听。该接口与on9+接口功能一致。
+   * 向Worker线程的实例对象添加事件监听。
    *
    * @param { string } type - 监听的事件类型。
-   * @param { WorkerEventListener } listener - listener 当指定类型的事件发生时调用的回调函数。
+   * @param { WorkerEventListener } listener - 回调的事件。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200005 - The called API is not supported in the worker thread.
    * @syscap SystemCapability.Utils.Lang
@@ -496,10 +496,10 @@ export interface WorkerEventTarget {
    */
   addEventListener(type: string, listener: WorkerEventListener): void;
   /**
-   * 分发定义在Worker线程的事件。
+   * 在Worker线程将事件对象分发到Worker线程的事件系统，并触发该类型事件的所有监听器回调。
    *
    * @param { Event } event - 需要分发的事件。
-   * @returns { boolean }
+   * @returns { boolean } 分发的结果。true表示分发成功，false表示分发失败。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -510,8 +510,8 @@ export interface WorkerEventTarget {
   /**
    * 移除Worker线程实例对象中类型为type的事件监听。该接口与off9+接口功能一致。
    *
-   * @param { string } type - 需要移除的事件类型。
-   * @param { WorkerEventListener } [callback] - 要移除的特定事件监听回调函数；省略时移除该类型的全部监听器。
+   * @param { string } type - 需要删除的监听事件类型。事件类型通过addEventListener设置。
+   * @param { WorkerEventListener } [callback] - 需要删除的特定监听器回调函数。如果未传入此参数，则会删除该类型的所有监听器。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @syscap SystemCapability.Utils.Lang
    * @crossplatform [since 10]
@@ -654,10 +654,11 @@ export interface DedicatedWorkerGlobalScope extends WorkerGlobalScope {
   close(): void;
 
   /**
-   * Worker线程向宿主线程发送消息。
+   * Worker线程通过转移对象所有权的方式向宿主线程发送消息。
    *
-   * @param { Object } messageObject - messageObject 发送至宿主线程的数据。
-   * @param { Transferable[] } transfer - transfer 数组不可包含null。
+   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象，
+   *     序列化支持类型见序列化支持类型。
+   * @param { Transferable[] } transfer - 暂不支持该参数类型。
    * @syscap SystemCapability.Utils.Lang
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -666,10 +667,13 @@ export interface DedicatedWorkerGlobalScope extends WorkerGlobalScope {
   postMessage(messageObject: Object, transfer: Transferable[]): void;
 
   /**
-   * Worker线程向宿主线程发送消息。
+   * Worker线程通过转移对象所有权或者拷贝数据的方式向宿主线程发送消息。
    *
-   * @param { Object } messageObject - messageObject 发送至宿主线程的数据。
-   * @param { PostMessageOptions } [options] - 可为postMessage设置的选项。
+   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象，
+   *     序列化支持类型见序列化支持类型。
+   * @param { PostMessageOptions } [options] - 当填入该参数时，与传入ArrayBuffer[]的作用一致，该数组中对象的所有权会被转移到宿主线程，
+   *     在Worker线程中将会变为不可用，仅在宿主线程中可用。
+   *     若不填入该参数，默认设置为 undefined，通过拷贝数据的方式传输信息到宿主线程。
    * @syscap SystemCapability.Utils.Lang
    * @since 7 dynamiconly
    * @deprecated since 9
@@ -678,10 +682,12 @@ export interface DedicatedWorkerGlobalScope extends WorkerGlobalScope {
   postMessage(messageObject: Object, options?: PostMessageOptions): void;
 
   /**
-   * Worker线程向宿主线程发送消息。
+   * Worker线程通过转移对象所有权的方式向宿主线程发送消息。
    *
-   * @param { Object } messageObject - messageObject 发送至宿主线程的数据。
-   * @param { ArrayBuffer[] } transfer - transfer 数组不可包含null。
+   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象，
+   *     序列化支持类型见序列化支持类型。
+   * @param { ArrayBuffer[] } transfer - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权会被转移到宿主线程，
+   *     在Worker线程中将会变为不可用，仅在宿主线程中可用，数组不可传入null。
    * @syscap SystemCapability.Utils.Lang
    * @since 9 dynamiconly
    * @deprecated since 9
@@ -740,10 +746,10 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
   /**
    * Worker线程通过转移对象所有权的方式向宿主线程发送消息。
    *
-   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象。
-   *     支持的参数类型请参考序列化支持类型。
+   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象，
+   *     序列化支持类型见序列化支持类型。
    * @param { ArrayBuffer[] } transfer - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权
-   *     会被转移到宿主线程，转移后该对象仅在宿主线程中可用。该数组不可传入null。
+   *     会被转移到宿主线程，在Worker线程中将会变为不可用，仅在宿主线程中可用，数组不可传入null。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @syscap SystemCapability.Utils.Lang
@@ -754,13 +760,13 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
   postMessage(messageObject: Object, transfer: ArrayBuffer[]): void;
 
   /**
-   * Worker线程通过转移对象所有权或拷贝数据的方式向宿主线程发送消息。
+   * Worker线程通过转移对象所有权或拷贝数据的方式向宿主线程发送消息。在传递Sendable对象时，使用拷贝数据的方式进行传递。
    *
-   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象。
-   *     支持的参数类型请参考序列化支持类型。
+   * @param { Object } messageObject - 发送至宿主线程的数据，该数据对象必须是可序列化对象，
+   *     序列化支持类型见序列化支持类型。
    * @param { PostMessageOptions } [options] - 当填入该参数时，其作用与传入ArrayBuffer[]相同，
    *     该数组中对象的所有权会被转移到宿主线程，在Worker线程中将变为不可用，仅在宿主线程中可用。
-   *     若不填入该参数，默认设置为undefined，通过拷贝数据的方式传输信息到宿主线程。
+   *     若不填入该参数，默认设置为 undefined，通过拷贝数据的方式传输信息到宿主线程。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @syscap SystemCapability.Utils.Lang
@@ -774,11 +780,11 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
    * Worker线程向宿主线程发送消息，消息中的Sendable对象通过引用传递，
    * 非Sendable对象通过拷贝数据的方式传递。
    *
-   * @param { Object } message - 发送至宿主线程的数据，该数据对象必须是可序列化或可共享。
-   *     支持的序列化类型请参考序列化支持类型。
-   *     支持的共享类型请参考Sendable支持的数据类型。
+   * @param { Object } message - 发送至宿主线程的数据，该数据对象必须是可序列化或可共享，
+   *     序列化支持类型见序列化支持类型，
+   *     共享支持类型见Sendable支持的数据类型。
    * @param { ArrayBuffer[] } [transfer] - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权
-   *     会被转移到宿主线程，转移后该对象仅在宿主线程中可用。该数组不可传入null。默认值为空数组。
+   *     会被转移到宿主线程，在Worker线程中将会变为不可用，仅在宿主线程中可用，数组不可传入null。默认值为空数组。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @syscap SystemCapability.Utils.Lang
@@ -795,12 +801,11 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
    * @param { string } instanceName - 注册对象时使用的键，用于在宿主线程中查找对象。
    * @param { string } methodName - 在已注册对象上调用的方法名。该方法不能使用async修饰，
    *     也不能基于底层异步机制返回结果，否则会抛出异常。
-   * @param { number } timeout - 表示从Worker线程发起调用开始到在主线程中执行目标方法的最大等待时间，
-   *     单位为ms，取整数，取值范围为[1-5000]。也可取特殊值0，此时表示本次调用等待时间为5000ms。
-   *     该值应为整数。
-   *     <br>单位：ms。
+   * @param { number } timeout - 最大等待时间，单位为ms，取整数，取值范围为[1-5000]ms。超出范围时按5000ms处理。
+   *     API version 21之前，debug模式也受此最大等待时间限制；从API version 21开始，debug模式不受此限制，可一直等待。
    * @param { Object[] } args - 注册对象上所调用方法的参数数组。
    * @returns { Object } 返回值为调用方法在宿主线程的返回值，无返回值时返回void。
+   *     返回值必须可序列化，支持类型见worker的序列化类型说明。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @throws { BusinessError } 10200019 - The globalCallObject is not registered.
@@ -814,8 +819,7 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
   callGlobalCallObjectMethod(instanceName: string, methodName: string, timeout: number, ...args: Object[]): Object;
 
   /**
-   * Worker线程通过转移对象所有权的方式向宿主线程发送插队消息，并插入到对应优先级队列的队头。
-   * 除Worker线程向主线程发送的场景外，该接口与postMessage功能一致。
+   * Worker线程向宿主线程发送插队消息，消息中的Sendable对象通过引用传递，非Sendable对象通过拷贝数据的方式传递。
    *
    * > **说明：**
    * >
@@ -825,12 +829,12 @@ export interface ThreadWorkerGlobalScope extends GlobalScope {
    * >
    * > - postMessage和postMessageWithSharedSendable接口向宿主线程发送消息，默认是HIGH优先级，无插队效果。
    *
-   * @param { Object } message - 发送至宿主线程的数据，该数据对象必须是可序列化或可共享。
-   *     支持的序列化类型请参考序列化支持类型。
-   *     支持的共享类型请参考Sendable支持的数据类型。
-   * @param { Priority } priority - Worker EventHandler的优先级。
+   * @param { Object } message - 发送至宿主线程的数据，该数据对象必须是可序列化或可共享，
+   *     序列化支持类型见序列化支持类型，
+   *     共享支持类型见Sendable支持的数据类型。
+   * @param { Priority } priority - 消息发送的优先级。
    * @param { ArrayBuffer[] } [transfer] - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权
-   *     会被转移到主线程，转移后该对象仅在主线程中可用。该数组不可传入null。
+   *     会被转移到宿主线程，在Worker线程中将会变为不可用，仅在宿主线程中可用，数组不可传入null。默认值为空数组。
    * @throws { BusinessError } 10200004 - The Worker instance is not running.
    * @throws { BusinessError } 10200006 - An exception occurred during serialization.
    * @syscap SystemCapability.Utils.Lang
@@ -857,6 +861,10 @@ type ErrorCallback = (err: ErrorEvent) => void;
 
 /**
  * JS跨线程通信工具。
+ * Worker基于Actor并发模型，各线程运行环境相互隔离，通过序列化、引用传递或转移所有权传递对象。
+ * 每个Actor具有消息队列和单线程执行模块，串行处理请求、发送请求并创建Actor。Actor异步交互，相互隔离且没有数据竞争。
+ * 序列化支持除Symbol之外的基础类型、Date、String、RegExp、Array、Map、Set、Object、ArrayBuffer、TypedArray。
+ * 普通Object仅传递属性，不传递原型及方法；通过自定义class创建的对象可以传递，但其函数属性及方法无法序列化传递。
  *
  * @syscap SystemCapability.Utils.Lang
  * @crossplatform [since 10]
@@ -977,10 +985,10 @@ declare namespace worker {
     /**
      * 宿主线程通过转移对象所有权的方式向Worker线程发送消息。
      *
-     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象。
-     *     支持的参数类型请参考序列化支持类型。
+     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象，
+     *     序列化支持类型见序列化支持类型。
      * @param { ArrayBuffer[] } transfer - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权
-     *     会被转移到Worker线程，在宿主线程中将会变为不可用，仅在Worker线程中可用。该数组不可传入null。
+     *     会被转移到Worker线程，在宿主线程中将会变为不可用，仅在Worker线程中可用，数组不可传入null。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @syscap SystemCapability.Utils.Lang
@@ -990,13 +998,13 @@ declare namespace worker {
      */
     postMessage(message: Object, transfer: ArrayBuffer[]): void;
     /**
-     * 宿主线程可以通过转移对象所有权或拷贝数据的方式向Worker线程发送消息。
+     * 宿主线程可以通过转移对象所有权或拷贝数据的方式向Worker线程发送消息。在传递Sendable对象时，使用拷贝数据的方式。
      *
-     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象。
-     *     支持的参数类型请参考序列化支持类型。
-     * @param { PostMessageOptions } [options] - 当填入该参数时，其作用与传入ArrayBuffer[]相同，
-     *     该数组中对象的所有权会被转移到Worker线程，在宿主线程中将变为不可用，仅在Worker线程中可用。
-     *     若不填入该参数，默认设置为undefined，通过拷贝数据的方式传输信息到Worker线程。
+     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象，
+     *     序列化支持类型见序列化支持类型。
+     * @param { PostMessageOptions } [options] - 当填入该参数时，传输的数据将通过所有权转移的方式发送到Worker线程。
+     *     这些数据在宿主线程中将变为不可用，仅在Worker线程中可用。
+     *     若不填入该参数，默认设置为 undefined，数据将通过拷贝的方式传输到Worker线程。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @syscap SystemCapability.Utils.Lang
@@ -1010,11 +1018,12 @@ declare namespace worker {
      * 宿主线程向Worker线程发送消息，消息中的Sendable对象通过引用传递，
      * 非Sendable对象通过拷贝数据的方式传递。
      *
-     * @param { Object } message - 发送至Worker线程的数据，该数据对象必须是可序列化或可共享。
-     *     支持的序列化类型请参考序列化支持类型。
-     *     支持的共享类型请参考Sendable支持的数据类型。
-     * @param { ArrayBuffer[] } [transfer] - 表示可转移的ArrayBuffer实例对象数组，该数组中对象的所有权
-     *     会被转移到Worker线程，转移后该对象仅在Worker线程中可用。该数组不可传入null。默认值为undefined。
+     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象，
+     *     序列化支持类型见序列化支持类型。
+     *     如果需要共享数据，支持类型见Sendable支持的数据类型。
+     * @param { ArrayBuffer[] } [transfer] - 可转移的ArrayBuffer实例对象数组。
+     *     该数组中对象的所有权将转移到Worker线程，在宿主线程中变为不可用，仅在Worker线程中可用，数组不可传入null。
+     *     默认值为空数组。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200006 - An exception occurred during serialization.
      * @syscap SystemCapability.Utils.Lang
@@ -1028,7 +1037,7 @@ declare namespace worker {
      * 向宿主线程的Worker实例对象添加一个事件监听，该接口与addEventListener9+接口功能一致。
      *
      * @param { string } type - 监听的事件类型。
-     * @param { WorkerEventListener } listener - 当指定类型的事件发生时调用的回调函数。
+     * @param { WorkerEventListener } listener - 回调的事件。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200005 - The called API is not supported in the worker thread.
      * @syscap SystemCapability.Utils.Lang
@@ -1041,7 +1050,7 @@ declare namespace worker {
      * 向宿主线程的Worker实例对象添加一个事件监听，该事件监听只执行一次，执行完后会自动删除。
      *
      * @param { string } type - 监听的事件类型。
-     * @param { WorkerEventListener } listener - listener 当指定类型的事件发生时调用的回调函数。
+     * @param { WorkerEventListener } listener - 回调的事件。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200005 - The called API is not supported in the worker thread.
      * @syscap SystemCapability.Utils.Lang
@@ -1053,8 +1062,8 @@ declare namespace worker {
     /**
      * 移除宿主线程的Worker实例对象中类型为type的事件监听，该接口与removeEventListener9+接口功能一致。
      *
-     * @param { string } type - 需要移除的事件类型。
-     * @param { WorkerEventListener } [listener] - listener 要移除的事件监听的回调函数。
+     * @param { string } type - 需要删除的事件类型。事件类型通过on设置。
+     * @param { WorkerEventListener } [listener] - 需要删除的特定监听器回调函数。如果未传入此参数，则会删除该类型的所有监听器。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200005 - The called API is not supported in the worker thread.
      * @syscap SystemCapability.Utils.Lang
@@ -1077,7 +1086,7 @@ declare namespace worker {
      * 向宿主线程的Worker实例对象添加一个事件监听，该接口与on9+接口功能一致。
      *
      * @param { string } type - 监听的事件类型。
-     * @param { WorkerEventListener } listener 当指定类型的事件发生时调用的回调函数。
+     * @param { WorkerEventListener } listener - 回调的事件。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @throws { BusinessError } 10200005 - The called API is not supported in the worker thread.
      * @syscap SystemCapability.Utils.Lang
@@ -1087,10 +1096,10 @@ declare namespace worker {
      */
     addEventListener(type: string, listener: WorkerEventListener): void;
     /**
-     * 分发定义在Worker线程的事件。
+     * 在宿主线程将事件对象分发到Worker线程的事件系统，该系统会自动触发该类型事件对应的所有监听器回调。
      *
      * @param { Event } event - 需要分发的事件。
-     * @returns { boolean }
+     * @returns { boolean } 分发的结果。true表示分发成功，false表示分发失败。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1101,8 +1110,8 @@ declare namespace worker {
     /**
      * 移除宿主线程的Worker实例对象中类型为type的事件监听，该接口与off9+接口功能一致。
      *
-     * @param { string } type - 需要移除的事件类型。
-     * @param { WorkerEventListener } [callback] - 要移除的特定事件监听回调函数；省略时移除该类型的全部监听器。
+     * @param { string } type - 需要删除的监听事件类型。事件类型通过addEventListener设置。
+     * @param { WorkerEventListener } [callback] - 需要删除的特定监听器回调函数。如果未传入此参数，则会删除该类型的所有监听器。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform [since 10]
@@ -1122,11 +1131,10 @@ declare namespace worker {
     removeAllListener(): void;
 
     /**
-     * 在宿主线程的ThreadWorker实例上注册一个对象，该对象的方法可在Worker线程中通过
-     * callGlobalCallObjectMethod调用。
+     * 在宿主线程的ThreadWorker实例上注册一个对象，该对象的方法可在Worker线程中调用。详情请参见callGlobalCallObjectMethod。
      *
      * @param { string } instanceName - 注册对象时使用的键，调用时通过该键值找到被注册的对象。
-     * @param { Object } globalCallObject - 被注册的对象，ThreadWorker实例会持有该对象的强引用。
+     * @param { Object } globalCallObject - 被注册的对象，ThreadWorker实例会持有被注册对象的强引用。
      * @throws { BusinessError } 10200004 - The Worker instance is not running.
      * @syscap SystemCapability.Utils.Lang
      * @crossplatform
@@ -1136,7 +1144,7 @@ declare namespace worker {
     registerGlobalCallObject(instanceName: string, globalCallObject: Object): void;
 
     /**
-     * 取消在宿主线程ThreadWorker实例上注册的对象，该方法会释放ThreadWorker实例与目标对象之间的强引用。
+     * 取消在宿主线程ThreadWorker实例上注册的对象，该方法会释放ThreadWorker实例中与该键相匹配的对象的强引用。
      * 如果无匹配对象，该方法不会报错。
      *
      * @param { string } [instanceName] - 注册对象时使用的键。此参数不填时，
@@ -1184,10 +1192,10 @@ declare namespace worker {
    */
   class Worker implements EventTarget {
     /**
-     * 创建一个worker实例。
+     * Worker构造函数。
      *
-     * @param { string } scriptURL - scriptURL worker执行的脚本URL。
-     * @param { WorkerOptions } options - 可为worker设置的选项。
+     * @param { string } scriptURL - Worker线程文件的路径，详细参考文件路径注意事项。
+     * @param { WorkerOptions } options - Worker构造的选项。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1237,12 +1245,12 @@ declare namespace worker {
     onmessageerror?: (event: MessageEvent) => void;
 
     /**
-     * 向Worker线程发送消息。
-     * 数据通过结构化克隆算法传递。
+     * 宿主线程通过转移对象所有权的方式向Worker线程发送消息。
      *
-     * @param { Object } message - 发送至Worker的数据。
-     * @param { ArrayBuffer[] } transfer - transfer 可转移的ArrayBuffer实例对象。
-     *     transferList数组不可包含null。
+     * @param { Object } message - 发送至Worker的数据对象必须是可序列化对象，
+     *     序列化支持类型见序列化支持类型。
+     * @param { ArrayBuffer[] } transfer - 表示可转移的ArrayBuffer实例对象数组，所有权会转移到Worker线程，
+     *     仅在该线程中可用。数组不可传入null。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1251,12 +1259,13 @@ declare namespace worker {
     postMessage(message: Object, transfer: ArrayBuffer[]): void;
 
     /**
-     * 向Worker线程发送消息。
-     * 数据通过结构化克隆算法传递。
+     * 宿主线程通过转移对象所有权或者拷贝数据的方式向Worker线程发送消息。
      *
-     * @param { Object } message - 发送至Worker的数据。
-     * @param { PostMessageOptions } [options] - 可为postMessage设置的选项。
-     *     transferList数组不可包含null。
+     * @param { Object } message - 发送至Worker的数据，该数据对象必须是可序列化对象，
+     *     序列化支持类型见序列化支持类型。
+     * @param { PostMessageOptions } [options] - 当填入该参数时，与传入ArrayBuffer[]的作用一致，
+     *     该数组中对象的所有权会被转移到Worker线程，在宿主线程中将变为不可用，仅在Worker线程中可用。
+     *     若不填入该参数，默认设置为undefined，通过拷贝数据的方式传输信息到Worker线程。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1265,10 +1274,10 @@ declare namespace worker {
     postMessage(message: Object, options?: PostMessageOptions): void;
 
     /**
-     * 向Worker添加一个事件监听。
+     * 向Worker添加一个事件监听，该接口与addEventListener接口功能一致。
      *
-     * @param { string } type - type 向Worker添加一个事件监听。
-     * @param { EventListener } listener - listener 当指定类型的事件发生时调用的回调函数。
+     * @param { string } type - 监听的事件类型。
+     * @param { EventListener } listener - 事件触发时的回调函数。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1281,7 +1290,7 @@ declare namespace worker {
      * 该事件监听只执行一次，执行完后会自动删除。
      *
      * @param { string } type - 监听的事件类型。
-     * @param { EventListener } listener - listener 当指定类型的事件发生时调用的回调函数。
+     * @param { EventListener } listener - 事件触发时的回调函数。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1290,10 +1299,10 @@ declare namespace worker {
     once(type: string, listener: EventListener): void;
 
     /**
-     * 移除Worker的事件监听。
+     * 移除类型为type的事件监听，该接口与removeEventListener接口功能一致。
      *
-     * @param { string } type - 需要移除的事件类型。
-     * @param { EventListener } listener - listener 要移除的事件监听的回调函数。
+     * @param { string } type - 需要删除的事件类型。事件类型通过on设置。
+     * @param { EventListener } listener - 需要删除的特定监听器回调函数。如果未传入此参数，则会删除该类型的所有监听器。
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly
      * @deprecated since 9
@@ -1302,7 +1311,7 @@ declare namespace worker {
     off(type: string, listener?: EventListener): void;
 
     /**
-     * 由宿主线程主动销毁Worker线程并停止Worker线程接收消息。
+     * 销毁Worker线程，终止Worker接收消息。
      *
      * @syscap SystemCapability.Utils.Lang
      * @since 7 dynamiconly

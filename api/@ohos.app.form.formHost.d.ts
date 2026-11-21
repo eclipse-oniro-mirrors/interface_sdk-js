@@ -43,9 +43,9 @@ declare namespace formHost {
    * @param { Want } want - Indicates want of the form.
    * @returns { Promise<formInfo.RunningFormInfo> } Return the form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -66,9 +66,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is deleted, **error**
    *     is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -89,9 +89,9 @@ declare namespace formHost {
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -114,9 +114,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is released, **error**
    *     is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -142,9 +142,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is released, **error**
    *     is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -169,9 +169,9 @@ declare namespace formHost {
    *     <br>**false**: Not release the cache.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -192,9 +192,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is updated, **error**
    *     is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -214,9 +214,9 @@ declare namespace formHost {
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -237,9 +237,9 @@ declare namespace formHost {
    * @param { Record<string, Object> } [wantParams] - Parameters used for the update.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -260,9 +260,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is converted to a
    *     normal one, **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -282,9 +282,9 @@ declare namespace formHost {
    * @param { string } formId - Widget ID.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -307,9 +307,9 @@ declare namespace formHost {
    *     the widget framework to make the widget visible, **error** is undefined; otherwise, **error** is an error
    *     object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -328,9 +328,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - List of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -350,9 +350,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If a notification is sent to the
    *     widget framework to make the widget invisible, **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -371,9 +371,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - List of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -394,9 +394,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If a notification is sent to the
    *     widget framework to make the widget updatable, **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -416,9 +416,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - List of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -440,9 +440,9 @@ declare namespace formHost {
    *     widget framework to make the widget not updatable, **error** is undefined; otherwise, **error** is an error
    *     object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -463,9 +463,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - List of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -483,9 +483,9 @@ declare namespace formHost {
    *
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the check is successful,
    *     **error** is undefined; otherwise, **error** is an error object.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -497,7 +497,7 @@ declare namespace formHost {
    * Checks whether the system is ready. This API uses a promise to return the result.
    *
    * @returns { Promise<void> } Promise that returns no value.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -514,9 +514,9 @@ declare namespace formHost {
    *     information is obtained, **error** is undefined and **data** is the information obtained; otherwise, **error**
    *     is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -534,7 +534,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -555,9 +555,9 @@ declare namespace formHost {
    *     information is obtained, **error** is undefined and **data** is the information obtained; otherwise, **error**
    *     is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -580,9 +580,9 @@ declare namespace formHost {
    *     information is obtained, **error** is undefined and **data** is the information obtained; otherwise, **error**
    *     is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -607,9 +607,9 @@ declare namespace formHost {
    * @param { string } [moduleName] - Module name. By default, no value is passed.
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -629,9 +629,9 @@ declare namespace formHost {
    * @param { formInfo.FormInfoFilter } filter - Filter criterion.
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -651,9 +651,9 @@ declare namespace formHost {
    * @param { AsyncCallback<int> } callback - Callback used to return the result. If the invalid widgets are deleted, 
    *     **error** is undefined and **data** is the number of widgets deleted; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -671,9 +671,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - List of valid widget IDs.
    * @returns { Promise<int> } Promise used to return the number of widgets deleted.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -694,9 +694,9 @@ declare namespace formHost {
    *     state is obtained, **error** is undefined and **data** is the widget state obtained; otherwise, **error**
    *     is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -716,9 +716,9 @@ declare namespace formHost {
    *     bundle name, ability name, module name, widget name, and widget dimensions.
    * @returns { Promise<formInfo.FormStateInfo> } Promise used to return the widget state obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -740,9 +740,9 @@ declare namespace formHost {
    *
    * @param { "formUninstall" } type - Event type. The value **"formUninstall"** indicates a widget uninstall event.
    * @param { Callback<string> } callback - Callback used to return the widget ID.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -755,9 +755,9 @@ declare namespace formHost {
    * You can use this method to listen to the event of uninstall form.
    *
    * @param { Callback<string> } callback - The callback of formUninstall.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -777,9 +777,9 @@ declare namespace formHost {
    *     indicates the callback for all the events that have been subscribed.
    *     <br> To cancel the subscription with a given callback, this parameter must be set to the same value as 
    *     **callback** in **on("formUninstall")**.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 9 dynamic
@@ -792,9 +792,9 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of uninstall form.
    *
    * @param { Callback<string> } [callback] - The callback of formUninstall.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -812,9 +812,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the notification is sent,
    *     **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -836,9 +836,9 @@ declare namespace formHost {
    *     <br>**false**: The widget is invisible.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -861,9 +861,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the notification is sent,
    *     **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -889,9 +889,9 @@ declare namespace formHost {
    *     <br>**false**: The widget cannot be updated.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -912,9 +912,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widget is shared, **error**
    *     is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -934,9 +934,9 @@ declare namespace formHost {
    * @param { string } deviceId - Remote device ID.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
@@ -960,9 +960,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If privacy protection is set
    *     successfully, **error** is undefined; otherwise, **error** is an error object.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -988,9 +988,9 @@ declare namespace formHost {
    *     <br>**false**: The widget does not require privacy protection.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1011,9 +1011,9 @@ declare namespace formHost {
    * @param { AsyncCallback<Record<string, Object>> } callback - Callback used to return the API call result and the 
    *     shared data. [since 11]
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -1036,9 +1036,9 @@ declare namespace formHost {
    * @returns { Promise<Record<string, Object>> } Promise used to return the API call result and the shared 
    *     data. [since 11]
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -1069,9 +1069,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the router proxy is set, **error** is 
    *     **undefined**; otherwise, an exception is thrown.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1101,9 +1101,9 @@ declare namespace formHost {
    * @param { Callback<Want> } proxy - Callback used to return the Want information required for redirection.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1123,9 +1123,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the router proxy is cleared,
    *     **error** is **undefined**; otherwise, an exception is thrown.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1144,9 +1144,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - Array of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1165,9 +1165,9 @@ declare namespace formHost {
    * @param { string } formId - Widget ID.
    * @param { formInfo.PublishFormResult } result - Result of the operation.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1187,9 +1187,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - Array of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1209,9 +1209,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widgets are set to be
    *     recyclable, **error** is **undefined**; otherwise, an exception is thrown.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1230,9 +1230,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - Array of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1252,9 +1252,9 @@ declare namespace formHost {
    * @param { Array<string> } formIds - Array of widget IDs.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1274,9 +1274,9 @@ declare namespace formHost {
    * @param { AsyncCallback<void> } callback - Callback used to return the result. If the widgets are recovered,
    *     **error** is **undefined**; otherwise, an exception is thrown.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1295,9 +1295,9 @@ declare namespace formHost {
    * @param { string } formId - Widget ID.
    * @param { formInfo.FormLocation } location - Widget location.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1322,7 +1322,7 @@ declare namespace formHost {
    *     **true** indicates that the widget is in the locked state, and the value **false** indicates the opposite.
    * @returns { Promise<void> } The promise returned by the function.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -1343,7 +1343,7 @@ declare namespace formHost {
    *     interactive widget animation request.
    * @param { Callback<formInfo.OverflowRequest> } callback - Callback used by the widget host to process the animation
    *     request.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1356,7 +1356,7 @@ declare namespace formHost {
    * You can use this method to listen to the event of formOverflow.
    *
    * @param { Callback<formInfo.OverflowRequest> } callback - The callback of formOverflow.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1372,7 +1372,7 @@ declare namespace formHost {
    * @param { Callback<formInfo.OverflowRequest> } [callback] - Callback function, which corresponds to the subscribed 
    *     interactive widget animation request. By default, all registered interactive widget animation request events
    *     are deregistered.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1385,7 +1385,7 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of formOverflow.
    *
    * @param { Callback<formInfo.OverflowRequest> } [callback] - The callback of formOverflow.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1402,7 +1402,7 @@ declare namespace formHost {
    * @param { formInfo.Rect } newRect - Widget position information, including the X and Y coordinates of the widget's
    *     top-left corner, as well as its width and height.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - caller is not system app.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @throws { BusinessError } 16501001 - The ID of the form to be operated does not exist.
    * @throws { BusinessError } 16501012 - The dimension parameter is incorrect
@@ -1423,7 +1423,7 @@ declare namespace formHost {
    *     when the interactive widget state is switched.
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } callback - Callback function, which is used by the
    *     widget host to process the state switching request.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1438,7 +1438,7 @@ declare namespace formHost {
    *
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } callback - The callback of
    *     change scene animation state.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1456,7 +1456,7 @@ declare namespace formHost {
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } [callback] - Callback function, which corresponds
    *     to the request for switching the state of a subscribed interactive widget. By default, all registered 
    *     interactive widget state switching events are deregistered.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1471,7 +1471,7 @@ declare namespace formHost {
    *
    * @param { Callback<formInfo.ChangeSceneAnimationStateRequest> } [callback] - The callback of
    *     change scene animation state.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1487,7 +1487,7 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } callback - Callback function used by the widget host to process the
    *     request and return the position and dimension of the widget relative to the upper-left corner of the screen.
    *     The unit is vp.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1500,7 +1500,7 @@ declare namespace formHost {
    * You can use this method to listen to the event of get form rect.
    *
    * @param { formInfo.GetFormRectInfoCallback } callback - The callback of get form rect.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1516,7 +1516,7 @@ declare namespace formHost {
    * @param { formInfo.GetFormRectInfoCallback } [callback] - Callback function, corresponding to the subscribed
    *     widget position and dimension request. By default, all registered widget position and dimension request event
    *     callbacks are deregistered.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1529,7 +1529,7 @@ declare namespace formHost {
    * You can use this method to cancel listening to the event of get form rect.
    *
    * @param { formInfo.GetFormRectInfoCallback } [callback] - The callback of get form rect.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1541,7 +1541,7 @@ declare namespace formHost {
    *
    * @param { 'getLiveFormStatus' } type - Indicates event type.
    * @param { formInfo.GetLiveFormStatusCallback } callback  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1552,7 +1552,7 @@ declare namespace formHost {
    * Listens to the event of get live form status.
    *
    * @param { formInfo.GetLiveFormStatusCallback } callback  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1564,7 +1564,7 @@ declare namespace formHost {
    *
    * @param { 'getLiveFormStatus' } type - Indicates event type.
    * @param { formInfo.GetLiveFormStatusCallback } [callback]  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 20 dynamic
@@ -1576,7 +1576,7 @@ declare namespace formHost {
    * Cancels Listening to the event of get live form status.
    *
    * @param { formInfo.GetLiveFormStatusCallback } [callback]  - The callback of get live form status.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1590,7 +1590,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1607,7 +1607,7 @@ declare namespace formHost {
    * @param { string } [moduleName] - Module name. By default, no value is passed.
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise used to return the information obtained.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1623,7 +1623,7 @@ declare namespace formHost {
    * @param { formInfo.TemplateFormDetailInfoCallback } callback - Callback function used to listen for changes in
    *     the static configuration information of template widgets.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1640,7 +1640,7 @@ declare namespace formHost {
    * @param { formInfo.TemplateFormDetailInfoCallback } [callback] - Callback function used to listen for changes
    *     in the static configuration information of template widgets.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1657,7 +1657,7 @@ declare namespace formHost {
     * @param { formInfo.FormLocation } location - Widget location.
     * @returns { Promise<Array<string>> } Promise used to return the obtained widget ID list.
     * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @throws { BusinessError } 16500050 - IPC connection error.
     * @throws { BusinessError } 16501016 - The location of the widget is invalid.
     * @syscap SystemCapability.Ability.Form
@@ -1672,7 +1672,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.GetWantParamsCallback } callback - the callback for getting want parameters of the form.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1687,7 +1687,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.GetWantParamsCallback } [callback] - the callback for getting want parameters of the form.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1702,7 +1702,7 @@ declare namespace formHost {
    * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { formInfo.UpdateFormsConfigCallback } callback - Identifies the callback for updating form config.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -1717,7 +1717,7 @@ declare namespace formHost {
     * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
     * @param { formInfo.UpdateFormsConfigCallback } [callback] - Identifies the callback for updating form config.
     * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @throws { BusinessError } 16500050 - IPC connection error.
     * @syscap SystemCapability.Ability.Form
     * @systemapi
@@ -1732,7 +1732,7 @@ declare namespace formHost {
     * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
     * @param { formInfo.DeleteFormsCallback } callback - Identifies the callback for deleting forms.
     * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @throws { BusinessError } 16500050 - IPC connection error.
     * @syscap SystemCapability.Ability.Form
     * @systemapi
@@ -1747,7 +1747,7 @@ declare namespace formHost {
     * @permission ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
     * @param { formInfo.DeleteFormsCallback } [callback] - Identifies the callback for deleting forms.
     * @throws { BusinessError } 201 - Permissions denied.
-    * @throws { BusinessError } 202 - The application is not a system application.
+    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
     * @throws { BusinessError } 16500050 - IPC connection error.
     * @syscap SystemCapability.Ability.Form
     * @systemapi
@@ -1763,7 +1763,7 @@ declare namespace formHost {
    * @param { formInfo.FormHostServiceInfo } service - Identifies service info registered to form management service.
    * @returns { Promise<string> } Promise used to return the service Id of the form host service.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -1780,7 +1780,7 @@ declare namespace formHost {
    * @param { string } serviceId - Identifies service Id of the form host service.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501019 - A form service not owned by you cannot be unregistered.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.

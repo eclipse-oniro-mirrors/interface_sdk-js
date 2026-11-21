@@ -359,7 +359,7 @@ export declare interface UIWaterFlowEvent extends UIScrollableCommonEvent {
 export declare type OnWaterFlowScrollIndexCallback = (first: int, last: int) => void;
 
 /**
- * 除支持[通用属性]{@link common}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还支持
+ * 除支持[通用属性]{@link CommonMethod}和[滚动组件通用属性]{@link ScrollableCommonMethod}外，还支持
  * 以下属性：
  *
  * > **说明：**

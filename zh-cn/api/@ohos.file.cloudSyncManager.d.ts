@@ -384,7 +384,31 @@ declare namespace cloudSyncManager {
      * @since 20 dynamic
      * @since 23 static
      */
-    OTHER_REASON = 6
+    OTHER_REASON = 6,
+    /**
+     * 下载过程中，因内容缺失停止下载。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    CONTENT_NOT_FOUND = 7,
+    /**
+     * 下载过程中，因用户请求过于频繁停止下载。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    FREQUENT_USER_REQUESTS = 8,
+    /**
+     * 下载过程中，因低电量停止下载。
+     *
+     * @syscap SystemCapability.FileManagement.DistributedFileService.CloudSyncManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    LOW_BATTERY = 9
   }
 
   /**

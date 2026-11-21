@@ -57,6 +57,7 @@ declare enum DataPanelType {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 26.1.0]
  * @atomicservice [since 11]
  * @since 10 dynamic
  */
@@ -67,6 +68,7 @@ declare interface ColorStop {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
@@ -84,6 +86,7 @@ declare interface ColorStop {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 11]
    * @since 10 dynamic
    */
@@ -96,6 +99,7 @@ declare interface ColorStop {
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
+ * @form [since 26.1.0]
  * @atomicservice [since 11]
  * @since 10 dynamic
  */
@@ -107,6 +111,7 @@ declare class LinearGradient {
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
+   * @form [since 26.1.0]
    * @atomicservice [since 11]
    * @since 10 dynamic
    */

@@ -110,6 +110,68 @@ declare namespace pinAuth {
   function getPinDeletionDisabledState(userId: int): boolean | undefined;
 
   /**
+   * Sets the number of recent historical PINs to check when the PIN is changed.
+   * After the policy is set, the user cannot reuse any of the specified number of
+   * most recent historical PINs when changing the PIN.
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - User ID. If the value is 0, the policy takes effect for all users; otherwise, the policy
+   *     takes effect for the specified user.
+   *     <br>The value should be an integer.
+   * @param { int } historyRange - The number of recent historical PINs to check. The value ranges from 1 to 5.
+   *     <br>The value should be an integer.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function setPinHistoryCheckRange(userId: int, historyRange: int): void;
+
+  /**
+   * Gets the number of recent historical PINs to check when the PIN is changed.
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - User ID.
+   *     <br>The value should be an integer.
+   * @returns { int | undefined } The number of recent historical PINs to check. Returns undefined if the history check
+   *     range has not been set for the specified user.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function getPinHistoryCheckRange(userId: int): int | undefined;
+
+  /**
+   * Clears the history pin check range policy.
+   * After the policy is cleared, the user can reuse any historical pin when changing the PIN.
+   *
+   * @permission ohos.permission.USE_USER_ACCESS_MANAGER
+   * @param { int } userId - User ID. If the value is 0, the policy is cleared for all users; otherwise, the policy is
+   *     cleared for the specified user.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 12500002 - General operation error.
+   * @throws { BusinessError } 12500008 - The parameter is out of range.
+   * @syscap SystemCapability.UserIAM.UserAuth.Core
+   * @systemapi Hide this for inner system use.
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  function clearPinHistoryCheckRange(userId: int): void;
+
+  /**
    * PIN complexity check policy and description.
    *
    * @syscap SystemCapability.UserIAM.UserAuth.Core

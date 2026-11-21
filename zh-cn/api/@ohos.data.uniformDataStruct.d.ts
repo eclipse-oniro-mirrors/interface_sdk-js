@@ -475,6 +475,191 @@ declare namespace uniformDataStruct {
   }
 
   /**
+   * 描述按需提供拖拽数据的虚拟文件或目录的公共元数据。
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualBaseItem {
+    /**
+     * 节点名称，最多 255 字节，不得为 . 或 ..，不得包含斜杠、反斜杠或空字符。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    name: string;
+ 
+    /**
+     * 节点类型。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'file' | 'dir';
+ 
+    /**
+     * 最近修改时间，单位为自 Unix 纪元开始的毫秒数。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    modifyTime: long;
+  }
+ 
+  /**
+   * 描述按需提供内容的虚拟文件。起拖时必须声明文件大小。
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualFileItem extends VirtualBaseItem {
+    /**
+     * 传给虚拟文件回调的文件标识，最多 1024 字节。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    id: string;
+    /**
+     * 文件节点类型。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'file';
+    /**
+     * 必填的文件字节数，必须为非负整数；0 表示真实空文件。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    size: long;
+  }
+ 
+  /**
+   * 描述虚拟目录及其可选子节点。目录不要求提供文件大小。
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualDirItem extends VirtualBaseItem {
+    /**
+     * 目录节点类型。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    readonly type: 'dir';
+    /**
+     * 落入方枚举目录时可访问的子节点。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    subItems?: Array<VirtualItemType>;
+  }
+ 
+  /**
+   * 虚拟文件或目录的元数据。
+   *
+   * @typedef VirtualItemType
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualItemType = VirtualFileItem | VirtualDirItem;
+ 
+  /**
+   * 获取虚拟文件元数据的回调，不能替代起拖前声明文件大小。
+   *
+   * @typedef { function } VirtualFileOnStat
+   * @param { string } id - 虚拟文件标识。
+   * @returns { Promise<VirtualFileItem> } 通过 Promise 返回的虚拟文件元数据，必须包含非负的 size。
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnStat = (id: string) => Promise<VirtualFileItem>;
+  /**
+   * 从虚拟文件读取至多 length 字节的回调，单次请求最大为 5 MiB。
+   *
+   * @typedef { function } VirtualFileOnRead
+   * @param { string } id - 虚拟文件标识。
+   * @param { long } offset - 从 0 开始计算的读取字节偏移。
+   * @param { int } length - 本次最多读取的字节数。
+   * @returns { Promise<Uint8Array> } 通过 Promise 返回的文件内容，空数组表示文件结束。
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnRead = (id: string, offset: long, length: int) => Promise<Uint8Array>;
+  /**
+   * 取消指定虚拟文件待处理任务的回调。
+   *
+   * @typedef { function } VirtualFileOnCancel
+   * @param { Array<string> } idList - 需要取消的虚拟文件标识。
+   * @returns { Promise<void> } 用于返回结果的 Promise。
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  type VirtualFileOnCancel = (idList: Array<string>) => Promise<void>;
+ 
+  /**
+   * 定义虚拟文件系统的根节点，以及拖拽落入成功后 UDMF 用于提供数据的回调。
+   * 回调状态仅保留在起拖方进程中，不会通过落入方的数据获取操作返回。
+   *
+   * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface VirtualFileInfo {
+    /**
+     * 作为根节点的虚拟文件或目录。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    itemInfo: VirtualItemType;
+    /**
+     * 可选的文件元数据回调，不能替代必填的文件大小。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onStat?: VirtualFileOnStat;
+    /**
+     * 按需读取文件内容的回调。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onRead: VirtualFileOnRead;
+    /**
+     * 可选的取消回调。未设置时，取消操作成功，不向提供方发送回调通知。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    onCancel?: VirtualFileOnCancel;
+  }
+
+  /**
    * 文件地址类型数据，用于描述文件的URI地址信息。创建FileUri对象后，可用于文件拖拽、文件共享等场景，支持通过uriAuthorizationPolicies控制文件访问权限，实现跨应用的文件数据传递和权限管理。
    *
    * @syscap SystemCapability.DistributedDataManager.UDMF.Core
@@ -535,6 +720,15 @@ declare namespace uniformDataStruct {
      * @since 26.0.0 dynamic&static
      */
     uriAuthorizationPolicies?: Array<int>;
+
+    /**
+     * 按需提供内容的虚拟文件信息。每个文件都必须声明非负的 size。
+     *
+     * @syscap SystemCapability.DistributedDataManager.UDMF.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    virtualEntry?: VirtualFileInfo;
   }
 
   /**

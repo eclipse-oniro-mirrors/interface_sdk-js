@@ -112,7 +112,7 @@ export interface ToolBarSymbolGlyphOptions {
   activated?: SymbolGlyphModifier;
 }
 /**
- * Declare ToolBarOptions use in ToolBar.
+ * 声明ToolBar中使用的ToolBarOptions。
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @since 23 static
@@ -200,7 +200,7 @@ export declare struct ToolBar {
   @PropRef
   toolBarModifier?: ToolBarModifier;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly
@@ -410,7 +410,7 @@ export declare class ToolBarModifier {
 }
 
 /**
- * Declare ToolBarOptions use in ToolBar.
+ * 声明ToolBar中使用的ToolBarOptions。
  * @typedef { Array<ToolBarOption> } ToolBarOptions
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @since 22 static

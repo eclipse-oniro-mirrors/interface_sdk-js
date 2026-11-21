@@ -26,7 +26,32 @@ import type print from './@ohos.print';
 import { WebNetErrorList } from './@ohos.web.netErrorList';
 
 /**
- * This module provides the capability to manage web modules.
+ * The WebView module is a web control capability module provided by the HarmonyOS ArkWeb framework. It is used to
+ * programmatically control the behavior of the **Web** component on the application side. This module does not
+ * involve the display and rendering of web pages (the display capability is provided by the **Web** component);
+ * instead, it focuses on the control logic during the running of the **Web** component, including page loading
+ * and navigation, JavaScript script execution and
+ * bidirectional message communication, cookie management, database management, Web component storage operations,
+ * download task management, network request interception and custom responses, proxy configuration, geolocation
+ * permission management, ad filtering, forward and backward cache, media playback hosting, and PDF generation.
+ *
+ * When developers use **Web** components to display web page content, if they need to intervene,
+ * monitor, or extend web page behavior on the application side (for example, sending messages to web pages,
+ * intercepting specific Scheme requests and returning local resources, managing the download process, configuring
+ * proxies, controlling cache policies, etc.), they should implement this through the Controller and various
+ * Manager/Delegate classes provided by this module.
+ *
+ * For the web page display capability, see [component description]{@link @global:Web}.
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **NOTE**
+ * >
+ * > - The initial APIs of this module are supported since API version 9. Updates will be marked with a superscript to indicate their earliest API version.
+ * >
+ * > - The sample effect is subject to the actual device.
+ * >
+ * > - The static methods in this module must be called on the user interface (UI) thread. Otherwise, exceptions may occur.
  *
  * ## Required Permissions
  *
@@ -1483,7 +1508,7 @@ declare namespace webview {
      *     <br>The value is **false** when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1526,7 +1551,7 @@ declare namespace webview {
      *     <br>If the operation fails, the geolocation permission status of the specified origin is not found.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -1553,7 +1578,7 @@ declare namespace webview {
      *     <br>Throws an exception error with error code 401 when null or undefined is input. [since 11]
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
      *     <br>2. Incorrect parameter types. 3.Parameter verification failed.
-     * @throws { BusinessError } 17100011 - Invalid origin.
+     * @throws { BusinessError } 17100011 - Invalid origin. The origin format must comply with the format defined in RFC 6454.
      * @syscap SystemCapability.Web.Webview.Core
      * @crossplatform [since 18]
      * @atomicservice [since 11]
@@ -3872,6 +3897,35 @@ declare namespace webview {
      * @since 23 dynamic
      */
     static isActiveWebEngineEvergreen(): boolean;
+  
+    /**
+     * Sets the data directory suffix for the WebEngine in current process.
+     * 
+     * The provided suffix is appended to the data directory path to achieve data isolation for different processes.
+     * If this API is not called, no suffix will be used. The WebEngine in current process uses the default data directory.
+     * This API must be called before WebEngine is initialized.
+     * 
+     * @param { string } suffix - The data directory suffix.
+     *     <br>The maximum length is 128.
+     *     <br>Must not contain a path separator.
+     *     <br>This value cannot be null.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static setDataDirectorySuffix(suffix: string): void;
+
+    /**
+     * Obtains the data directory suffix for current process.
+     * 
+     * If the data directory suffix has not been set, an empty string is returned.
+     *
+     * @returns { string } The current data directory suffix, or an empty string if not set.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static getDataDirectorySuffix(): string;
 
     /**
      * Loads the dynamic library file of the web engine through this API before the **Web** component is initialized, so
@@ -5969,6 +6023,23 @@ declare namespace webview {
     static getDefaultUserAgent(): string;
 
     /**
+     * Obtains the default user agent without initializing the ArkWeb kernel.
+     *
+     * Unlike [getDefaultUserAgent]{@link webview.WebviewController#getDefaultUserAgent}, this API does not
+     * trigger web engine initialization, so it can be called during application startup to report the
+     * user agent to a server without extra memory cost.
+     *
+     * If the ArkWeb engine library is unavailable, an empty string is returned.
+     *
+     * @returns {string} Default **User-Agent** string of ArkWeb, identical to the string returned by
+     * [getUserAgent]{@link webview.WebviewController#getUserAgent} after the web engine is initialized.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static getDefaultUserAgentLite(): string;
+
+    /**
      * Registers a callback function. After [enableNativeMediaPlayer]{@link WebAttribute#enableNativeMediaPlayer} is
      * used to enable the app to take over web page media playback, the registered callback function is triggered when
      * media is played on the web page.
@@ -7032,6 +7103,30 @@ declare namespace webview {
     executeAIPageCommand(command: string): Promise<string>;
 
     /**
+     * Set NavigationThrottle to intercept navigation requests in multiple phases.
+     *
+     * NavigationThrottle provides callbacks for four navigation phases: `willStartRequest`, `willRedirectRequest`,
+     * `willProcessResponse`, `willFailRequest`. Each callback can return whether it isPROCEED, CANCEL, or DEFER.
+     * When DEFER is returned, navigation pauses until `proceed()` or `cancel()` of DeferThrottleCallback is called.
+     *
+     * > **Description* *
+     * >
+     * > - Invoking this interface replaces the previously set NavigationThrottle, and the original navigationThrottle
+     * > is no longer invoked.
+     * > - This interface does not affect {@link onOverrideUrlLoading}. When both are set,
+     * > Invoke {@link onOverrideUrlLoading} and then the NavigationThrottle callback.
+     *
+     * @param { NavigationThrottle } throttle - The NavigationThrottle instance used to intercept navigation.
+     * Pass **undefined** or **null** to clear the current NavigationThrottle.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationThrottle(throttle: NavigationThrottle): void;
+
+    /**
      * Sets the browser zoom factor of this web page. Both text and images are scaled simultaneously, and the page
      * is re-laid out (reflow) to fit the width of the **Web** component.
      * This API works independently of {@link zoom}, {@link zoomIn}, and {@link zoomOut} (visual scaling without
@@ -7062,6 +7157,148 @@ declare namespace webview {
      * @since 26.1.0 dynamic
      */
     getZoomFactor(): number;
+
+    /**
+     * Register the instance-level website configuration query callback. It is mainly used in normal web page navigation
+     * scenarios. When ArkWeb performs this type of navigation,
+     * This callback is called synchronously to get the site configuration. Callback receives a
+     * {@link webview.WebSiteConfigParams} object, which must be returned.
+     * {@link webview.WebSiteConfigResult} object.
+     *
+     * > **Description**
+     * >
+     * > - This callback is invoked synchronously by the UI thread. Do not perform time-consuming operations during
+     * > the callback.
+     * > - When the userAgent returned by the callback is empty, the default User-Agent of ArkWeb is used.
+     * > - The default viewport width is used when the viewportWidth returned by the callback is 0.
+     * > - Only one callback is retained. Repeated calls will overwrite the previously registered callback. Pass
+     * > **null** to clear the current callback.
+     *
+     * @param { OnQueryWebSiteConfigCallback } callback - Website configuration query callback.
+     * Pass **null** to clear the currently registered callback.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setWebSiteConfigCallback(callback: OnQueryWebSiteConfigCallback): void
+    /**
+     * Register the static global website configuration query callback. Mainly used in scenarios where specific Web
+     * components cannot be determined, such as ServiceWorker
+     * Request or independent download, etc. When ArkWeb performs such navigation, the callback is called synchronously
+     * to get the site configuration. Callback to receive a
+     * {@link webview.WebSiteConfigParams} Object. The {@link webview.WebSiteConfigResult} object must be returned.
+     *
+     * > **Description**
+     * >
+     * > - The callback is invoked synchronously on the UI thread. Do not perform time-consuming operations in the
+     * > callback.
+     * > - If the callback returns an empty userAgent, the default User-Agent of ArkWeb is used.
+     * > - If the viewportWidth returned by the callback is 0, the default viewport width is used.
+     * > - Only one callback is retained. Calling this API again replaces the previously registered callback. Transfer
+     * > **null** to clear the current callback.
+     *
+     * @param { OnQueryWebSiteConfigCallback } callback - Global website configuration query callback.
+     * Pass **null** to clear the currently registered callback.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static setGlobalWebSiteConfigCallback(callback: OnQueryWebSiteConfigCallback): void
+
+    /**
+     * Sets a key-value pair of user data on the current navigation entry.
+     *
+     * The user data is associated with the NavigationEntry lifecycle. The current navigation entry
+     * refers to the active entry in the navigation history. When the entry is destroyed
+     * (e.g., via history navigation or clearHistory), the user data is cleared. If a value with
+     * the same key already exists, it will be overwritten.
+     *
+     * @param { string } key - Key of the user data.
+     * @param { string } value - Value of the user data.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    setNavigationEntryUserData(key: string, value: string): void;
+
+    /**
+     * Obtains the user data value associated with the specified key on the current navigation entry.
+     *
+     * @param { string } key - Key of the user data.
+     * @returns { string } Value of the user data, or an empty string if the key does not exist.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getNavigationEntryUserData(key: string): string;
+
+    /**
+     * Removes the user data associated with the specified key from the current navigation entry.
+     * If the key does not exist, this API does nothing.
+     *
+     * @param { string } key - Key of the user data to remove.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this API.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    removeNavigationEntryUserData(key: string): void;
+
+    /**
+     * Removes visited link records that changed after the specified date.
+     * This API uses an asynchronous callback to return the result.
+     *
+     * @param { Date } date - The time point for the data removal.
+     *     The visited link records remove data that changed after the date.
+     * @param { Callback<void> } callback - Callback used to return the result.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date, callback: Callback<void>): void;
+
+    /**
+     * Removes visited link records that changed after the specified date.
+     * This API uses a promise to return the result.
+     *
+     * @param { Date } date - The time point for the data removal.
+     *     The visited link records remove data that changed after the date.
+     * @returns { Promise<void> } Promise that returns no value.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    static removeVisitedLinksSince(date: Date): Promise<void>;
+
+    /**
+     * Obtains the URL of the frame that last sent a postMessage to the application.
+     * 
+     * This API returns the frame URL of the sender of the most recent postMessage received through
+     * [onMessageEvent]{@link webview.WebMessagePort.onMessageEvent}
+     * or
+     * [onMessageEventExt]{@link webview.WebMessagePort.onMessageEventExt}.
+     * If no postMessage has been received, an empty string is returned.
+     * 
+     * @returns { string } URL of the frame that last sent a postMessage. If no postMessage has been received,
+     *     an empty string is returned.
+     * @throws { BusinessError } 17100001 - Init error.
+     *     The WebviewController must be associated with a Web component.
+     *     Ensure that the WebviewController is associated with a Web component before calling this method.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    getLastPostMessageUrl(): string;
   }
 
   /**
@@ -10073,6 +10310,664 @@ declare namespace webview {
      */
     OVERLAY_VISUAL_SCROLLBAR = 2
   }
+
+  /**
+   * NavigationThrottle callback action enumeration.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum NavigationThrottleAction {
+    /**
+     *Allow navigation to continue. This action is used by default when the callback is not implemented or an invalid
+     * value is returned.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    PROCEED = 0,
+
+    /**
+     * Cancel navigation. Use when navigation should be blocked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CANCEL = 1,
+    /**
+    :: Suspend decision-making. Navigation pauses until `proceed()` or `cancel()` is called on
+     * {@link DeferThrottleCallback}.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    DEFER = 2
+  }
+
+  /**
+   * Navigation information passed to the {@link NavigationThrottle} callback. Different fields are valid in different
+   * callback phases:
+   * - **willStartRequest**: url, isMainFrame, hasUserGesture, pageTransition, requestMethod, and isRendererInitiated
+   * are valid.
+   * - **willRedirectRequest**: url (redirect target), isMainFrame, hasUserGesture, isRedirect, pageTransition,
+   * requestMethod and isRendererInitiated are valid.
+   * - **willProcessResponse**: URL, isMainFrame, statusCode, mimeType, and contentDisposition are valid.
+   * - **willFailRequest**: URL, isMainFrame, errorCode, and errorDescription are valid.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationInfo {
+    /**
+     * URL of the navigation request.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    url: string;
+
+    /**
+     * Page redirection value, which is obtained by bitwise ORing the core type and modifier flag defined in
+     * [PageTransition]{@link webview.PageTransition}.
+     * The mask constants (`CORE_MASK`, `QUALATOR_MASK`, and `IS_REDIRECT_MASK`) can be used for disassembly.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    pageTransition: number;
+
+    /**
+     * Whether to navigate the main frame.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isMainFrame: boolean;
+
+    /**
+     * Whether navigation is triggered by user gestures.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    hasUserGesture: boolean;
+
+    /**
+     * Indicates whether redirection is performed on the server. This parameter is valid only in willRedirectRequest.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRedirect: boolean;
+
+    /**
+     * HTTP method of the navigation request, such as `GET` and `POST`.
+     * Valid for the first time in the willStartRequest phase; It may be updated in the willRedirectRequest phase(for
+     * example, redirection may change the method). The subsequent phases remain the same.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    requestMethod: string;
+
+    /**
+     * Whether navigation is initiated by the rendering process. `true` indicates that it is initiated by the rendering
+     * process(such as clicking a link or redirecting a script).
+     * `false` indicates that the request is initiated by a browser process (for example, through an API).
+     * Valid for the first time in the willStartRequest phase; The subsequent phases remain the same.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isRendererInitiated: boolean;
+
+    /**
+     * HTTP status code of the response. The value ranges from 100 to 599. This parameter is valid only in
+     * willProcessResponse.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    statusCode: number;
+
+    /**
+     * MIME(Multipurpose Internet Mail Extensions) type of the response. This parameter is valid only in
+     * willProcessResponse.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    mimeType: string;
+
+    /**
+     * Content-Disposition header of the response. This parameter is valid only in willProcessResponse.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    contentDisposition: string;
+
+    /**
+     * Network error code. This parameter is valid only in willFailRequest. See
+     * [WebNetErrorList]{@link @ohos.web.netErrorList:WebNetErrorList} for details.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorCode: WebNetErrorList;
+
+    /**
+     * Error description. This parameter is valid only in willFailRequest.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    errorDescription: string;
+  }
+
+  /**
+   * Provide asynchronous decision capabilities for {@link NavigationThrottle} callbacks that return DEFER.
+   *
+   * Navigation pauses when the NavigationThrottle callback returns {@link NavigationThrottleAction}.DEFER. Second of
+   * NavigationThrottle callback method
+   * The parameter is DeferThrottleCallback. Call `proceed()` to resume navigation, or call `cancel()` to cancel
+   * navigation.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface DeferThrottleCallback {
+    /**
+     *Resumes suspended navigation. Repeated calls, or after `cancel()`, are invalid.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    proceed(): void;
+
+    /**
+     * Unsuspended navigation. Repeated calls, or after `proceed()`, have no effect.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    cancel(): void;
+  }
+
+  /**
+   * Interface to intercept navigation requests at multiple stages.
+   *
+   * Set the NavigationThrottle for the Web component through {@link WebviewController#setNavigationThrottle}. Each
+   * callback receives one
+   * {@link NavigationInfo} and a {@link DeferThrottleCallback}, and returns a {@link NavigationThrottleAction}.
+   *
+   * > **Description* *
+   * >
+   * > - When the callback is not implemented or an invalid value(for example, undefined) is returned, the default
+   * > value PROCEED is used.
+   * > - Navigation pauses when the callback returns to DEFER, resumes or cancels asynchronously using
+   * > {@link DeferThrottleCallback}.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface NavigationThrottle {
+    /**
+     * Called when the navigation request is about to start.
+     *
+     * @param { NavigationInfo } info - Navigation information.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willStartRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * This interface is invoked when the navigation is redirected by the server.
+     *
+     * @param { NavigationInfo } info - Navigation information. The **url** field is the redirect target.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willRedirectRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * This interface is invoked when a response from the navigation server is received.
+     *
+     * @param { NavigationInfo } info - Navigation information. **statusCode**, **mimeType**, and
+     *     **contentDisposition** are valid.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willProcessResponse(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+
+    /**
+     * Invoked when navigation fails.
+     *
+     * @param { NavigationInfo } info - Navigation information. **errorCode** and **errorDescription** are valid.
+     * @param { DeferThrottleCallback } callback - DeferThrottleCallback for asynchronous decision, used when DEFER
+     *     is returned.
+     * @returns { NavigationThrottleAction }The action to be performed.
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    willFailRequest(info: NavigationInfo, callback: DeferThrottleCallback): NavigationThrottleAction;
+  }
+
+  /**
+   * Enumerates the sources that trigger the website configuration query.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum WebSiteSource {
+    /**
+     * The query is triggered by a web page navigation.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    WEB_PAGE = 1,
+
+    /**
+     * The query is triggered by a ServiceWorker request.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    SERVICE_WORKER = 2,
+
+    /**
+     * The query is triggered by a download request.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    DOWNLOAD = 3,
+
+    /**
+     * The query is triggered by an extension.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    EXTENSIONS = 4,
+
+    /**
+     * The query is triggered by another source.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    OTHER = 5
+  }
+
+  /**
+   * Represents the parameters passed to the website configuration query callback registered by
+   * [setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback} or
+   * [setGlobalWebSiteConfigCallback]{@link webview.WebviewController#setGlobalWebSiteConfigCallback}.
+   *
+   * The `url` and `source` fields are always present. The optional fields are populated only when
+   * the instance-level callback is invoked; they are not provided when the static global callback
+   * is invoked.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface WebSiteConfigParams {
+    /**
+     * Complete request URL.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    url: string;
+
+    /**
+     * Source that triggers the website configuration query. See [WebSiteSource]{@link webview.WebSiteSource}.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    source: WebSiteSource;
+
+    /**
+     * Whether the navigation is for the main frame. The value `true` means a main frame navigation,
+     * and `false` means a subframe. This field is optional and is set only when the instance-level
+     * callback is invoked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    isMainFrame?: boolean;
+
+    /**
+     * Top-level frame URL. For main-frame navigations, this is the same as `url`; for
+     * subframe navigations, this is the URL of the top-level page that contains the subframe.
+     * This field is optional and is set only when the instance-level callback is invoked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    topFrameUrl?: string;
+
+    /**
+     * Redirect chain. Each element is a URL string. This field is optional and is set only when
+     * the instance-level callback is invoked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    redirectChain?: Array<string>;
+
+    /**
+     * Source page URL (referrer). This field is optional and is set only when the instance-level
+     * callback is invoked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    referrer?: string;
+
+    /**
+     * Page transition value, formed by OR'ing a core type with qualifier flags defined in
+     * [PageTransition]{@link webview.PageTransition}. Use the mask constants
+     * (`CORE_MASK`, `QUALIFIER_MASK`, `IS_REDIRECT_MASK`) to decompose it. This field is optional
+     * and is set only when the instance-level callback is invoked.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    pageTransition?: number;
+  }
+
+  /**
+   * Represents the result returned by the
+   * [setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback} callback.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  interface WebSiteConfigResult {
+    /**
+     * Complete User-Agent string. An empty string indicates that the ArkWeb default User-Agent is used.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    userAgent: string;
+
+    /**
+     * Viewport width, in px. The value 0 indicates that the default viewport width is used.
+     * Unit: px.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    viewportWidth: number;
+  }
+
+  /**
+   * Enumerates the page transition types. The `PageTransition` value consists of two parts:
+   *
+   * **Core type** (low byte, values 0–10): Represents the primary navigation cause, such as
+   * {@link LINK}, {@link TYPED}, {@link FORM_SUBMIT}, {@link RELOAD}, {@link AUTO_SUBFRAME}, etc.
+   * Each navigation has exactly one core type.
+   *
+   * **Qualifier flags** (high bits): Represent additional navigation characteristics, such as
+   * {@link FORWARD_BACK} (back/forward navigation), {@link FROM_API} (API-triggered),
+   * {@link CLIENT_REDIRECT} (JavaScript/meta redirect), {@link SERVER_REDIRECT} (HTTP redirect), etc.
+   * A navigation can have zero or more qualifier flags.
+   *
+   * A combined transition value is formed by OR'ing a core type with qualifier flags. Use the mask
+   * constants to decompose it: `CORE_MASK` extracts the core type, `QUALIFIER_MASK` extracts the
+   * qualifier flags, and `IS_REDIRECT_MASK` checks whether the navigation involves a redirect.
+   *
+   * For example, `TYPED | FROM_ADDRESS_BAR` produces a combined value of `0x02000001`.
+   * Use `combined & CORE_MASK` (result: `0x01`) to extract the core type `TYPED`;
+   * use `combined & QUALIFIER_MASK` (result: `0x02000000`) to extract the qualifier `FROM_ADDRESS_BAR`;
+   * use `(combined & FROM_ADDRESS_BAR) !== 0` to check whether the navigation was triggered from the address bar;
+   * use `(combined & IS_REDIRECT_MASK) !== 0` to check whether the navigation involves a redirect.
+   *
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  enum PageTransition {
+    /**
+     * The user navigated to this page by clicking a link on another page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    LINK = 0,
+
+    /**
+     * The user navigated to this page by typing the address in the URL bar.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    TYPED = 1,
+
+    /**
+     * This is a subframe navigation. This is any content that is automatically loaded in a non-toplevel frame.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    AUTO_SUBFRAME = 3,
+
+    /**
+     * The user explicitly requested a subframe navigation that generates new navigation entries in the
+     * back/forward list.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    MANUAL_SUBFRAME = 4,
+
+    /**
+     * This is a toplevel navigation. This is any content that is automatically loaded in a toplevel frame.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    AUTO_TOPLEVEL = 6,
+
+    /**
+     * The user filled out values in a form and submitted it.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FORM_SUBMIT = 7,
+
+    /**
+     * The user reloaded the page, either by pressing the reload button or by pressing Enter in the address bar.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    RELOAD = 8,
+
+    /**
+     * Mask to extract the core page transition type from a combined transition value. Use bitwise AND with a
+     * combined transition value; the result is a `PageTransition` core type enum value.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CORE_MASK = 0xFF,
+
+    /**
+     * The user used the Forward or Back button to navigate among browsing history.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FORWARD_BACK = 0x01000000,
+
+    /**
+     * The user used the address bar to trigger this navigation.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FROM_ADDRESS_BAR = 0x02000000,
+
+    /**
+     * The transition originated from an API call or an external application.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    FROM_API = 0x08000000,
+
+    /**
+     * The beginning of a navigation chain.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CHAIN_START = 0x10000000,
+
+    /**
+     * The last transition in a redirect chain.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CHAIN_END = 0x20000000,
+
+    /**
+     * Redirects caused by JavaScript or a meta refresh tag on the page.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    CLIENT_REDIRECT = 0x40000000,
+
+    /**
+     * Redirection sent by the server via HTTP header.
+     * The value is 0x80000000 in hexadecimal notation. The value is expressed in signed decimal notation because it
+     * exceeds the maximum value of int32.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    SERVER_REDIRECT = -2147483648,
+
+    /**
+     * Mask, which is used to determine whether a redirection is a redirection(client or server). The combined jump
+     * value is bitwise ANDed with, and the result is a non-zero result indicating that the navigation contains
+     * redirection.
+     * The mask is obtained by the bitwise OR of {@link CLIENT_REDIRECT} | {@link SERVER_REDIRECT}.
+     * The value is 0xC0000000 in hexadecimal notation. The value is expressed in signed decimal notation because it
+     * exceeds the maximum value of int32.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    IS_REDIRECT_MASK = -1073741824,
+
+    /**
+     * mask used to extract the modifier flag bits from the combined jump value.
+     * The value is 0xFFFFFF00 in hexadecimal notation. The value is expressed in signed decimal notation because it
+     * exceeds the maximum value of int32.
+     *
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 dynamic
+     */
+    QUALIFIER_MASK = -256
+  }
+
+  /**
+   * Represents the callback triggered by
+   * [setWebSiteConfigCallback]{@link webview.WebviewController#setWebSiteConfigCallback} or
+   * [setGlobalWebSiteConfigCallback]{@link webview.WebviewController#setGlobalWebSiteConfigCallback} to obtain
+   * the website configuration. When invoked by the instance-level callback, all optional fields of
+   * {@link WebSiteConfigParams} are populated; when invoked by the static global callback, only `url`
+   * and `source` are populated.
+   *
+   * @param { WebSiteConfigParams } params - Website configuration parameters, including the request URL
+   *     and the source that triggers the query. Optional fields are populated only when the
+   *     instance-level callback is invoked.
+   * @returns { WebSiteConfigResult } Website configuration result.
+   * @syscap SystemCapability.Web.Webview.Core
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  type OnQueryWebSiteConfigCallback =
+      (params: WebSiteConfigParams) => WebSiteConfigResult;
+
 }
 
 export default webview;

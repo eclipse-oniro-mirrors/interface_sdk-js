@@ -40,8 +40,8 @@ declare namespace formProvider {
    * @param { string } formId - 卡片标识。
    * @param { int } minute - 指定卡片多久之后刷新，取值范围：大于等于5，单位：min。
    * @param { AsyncCallback<void> } callback - 回调函数。设置结果的回调，成功时error为undefined。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -62,8 +62,8 @@ declare namespace formProvider {
    * @param { string } formId - 卡片标识。
    * @param { int } minute - 指定卡片多久之后刷新，取值范围：大于等于5，单位：min。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -89,8 +89,8 @@ declare namespace formProvider {
    * @param { string } formId - 请求更新的卡片标识。
    * @param { formBindingData.FormBindingData } formBindingData - 用于更新的数据。具体限制请参考上方说明。
    * @param { AsyncCallback<void> } callback - 回调函数。更新结果的回调，成功时error为undefined。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -119,8 +119,8 @@ declare namespace formProvider {
    * @param { string } formId - 请求更新的卡片标识。
    * @param { formBindingData.FormBindingData } formBindingData - 用于更新的数据。具体限制请参考上方说明。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -139,8 +139,8 @@ declare namespace formProvider {
    *
    * @param { formInfo.FormInfoFilter } filter - 卡片信息过滤器。
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。返回查询到符合条件的卡片信息。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -155,8 +155,8 @@ declare namespace formProvider {
    * 获取设备上当前应用程序的卡片信息，使用callback异步回调。适用于卡片管理、调试、统计等场景，例如查看应用所有卡片配置信息、统计卡片数量等。
    *
    * @param { AsyncCallback<Array<formInfo.FormInfo>> } callback - 回调函数。返回查询到的卡片信息。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -173,8 +173,8 @@ declare namespace formProvider {
    * @param { formInfo.FormInfoFilter } [filter] - 卡片信息过滤器，用于筛选指定条件的卡片信息。当需要获取特定模块或特定名称的卡片时传入此参数进行过滤，当需要获取所有卡片信息时可以不传此参
    *     数。不传入时默认为空，返回所有卡片信息。
    * @returns { Promise<Array<formInfo.FormInfo>> } Promise对象。返回查询到符合条件的卡片信息。
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync/Async] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -196,9 +196,8 @@ declare namespace formProvider {
    *     <br>'ohos.extra.param.key.module_name'
    * @param { formBindingData.FormBindingData } formBindingData - 创建卡片的数据。
    * @param { AsyncCallback<string> } callback - 回调函数，返回卡片标识。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -227,9 +226,8 @@ declare namespace formProvider {
    *     <br>'ohos.extra.param.key.form_name'
    *     <br>'ohos.extra.param.key.module_name'
    * @param { AsyncCallback<string> } callback - 回调函数，返回卡片标识。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -255,9 +253,9 @@ declare namespace formProvider {
    *     <br>'ohos.extra.param.key.module_name'
    * @param { formBindingData.FormBindingData } [formBindingData] - 创建卡片的数据，默认为空，不提供创建卡片数据。
    * @returns { Promise<string> } Promise对象。返回卡片标识。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -278,9 +276,9 @@ declare namespace formProvider {
    * @param { AsyncCallback<boolean> } callback - 返回查询结果的回调函数。
    *     <br>true: 表示可以发布卡片到卡片使用方。
    *     <br>false: 表示不可以发布卡片到卡片使用方。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -296,7 +294,7 @@ declare namespace formProvider {
    * @returns { Promise<boolean> } Promise对象。返回是否可以发布卡片到卡片使用方的结果。
    *     <br>true: 表示可以发布卡片到卡片使用方。
    *     <br>false: 表示不可以发布卡片到卡片使用方。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
    * @syscap SystemCapability.Ability.Form
@@ -389,14 +387,20 @@ declare namespace formProvider {
   function openFormManager(want: Want): void;
 
   /**
-   * Open the view of forms belonging to the specified bundle.
-   * Client to communication with FormManagerService.
+   * 打开卡片管理页面。
    *
    * @permission ohos.permission.PUBLISH_FORM_CROSS_BUNDLE
-   * @param { Want } want - The want of the form to open.
+   * @param { Want } want - 打开卡片管理页面的请求中的want参数，需包含以下字段。
+         <br>bundleName: 卡片所属应用的包名。
+         <br>abilityName: 卡片所属的ability名称。
+         <br>parameters:
+         <br>- ohos.extra.param.key.form_dimension: [卡片尺寸]{@link @ohos.app.form.formInfo:formInfo.FormDimension}。
+         <br>- ohos.extra.param.key.form_name: 卡片名称。
+         <br>- ohos.extra.param.key.module_name: 卡片所属的模块名称。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -414,8 +418,8 @@ declare namespace formProvider {
    *     <br>- true：表示是主编辑页，适合首次配置卡片基本信息的场景。
    *     <br>- false：表示不是主编辑页，适合进行卡片细节调整或高级配置的场景。
    *     <br>默认值：true（通常首次编辑卡片时使用默认值即可）。
-   * @throws { BusinessError } 801 - Capability not supported.function openFormEditAbility cannot work correctly due to
-   *     limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -433,9 +437,9 @@ declare namespace formProvider {
    *
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.function activateSceneAnimation
-   *     cannot work correctly due to limited device capabilities.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -456,9 +460,9 @@ declare namespace formProvider {
    *
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 801 - Capability not supported.function deactivateSceneAnimation can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -487,8 +491,8 @@ declare namespace formProvider {
    * @param { string } formId - 卡片标识。
    * @param { formInfo.OverflowInfo } overflowInfo - 动效请求参数信息。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 801 - Capability not supported.function requestOverflow can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -516,8 +520,8 @@ declare namespace formProvider {
    *
    * @param { string } formId - 卡片标识。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 801 - Capability not supported.function cancelOverflow can
-   *     not work correctly due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -537,8 +541,8 @@ declare namespace formProvider {
    *
    * @param { string } formId - 卡片标识。
    * @returns { Promise<formInfo.Rect> } Promise对象，返回卡片相对屏幕左上角的位置信息和卡片尺寸信息。
-   * @throws { BusinessError } 801 - Capability not supported.function getFormRect cannot work correctly
-   *     due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
@@ -595,7 +599,7 @@ declare namespace formProvider {
    *
    * @param { Array<formInfo.TemplateFormDetailInfo> } templateFormInfo - 指定的模板卡片静态配置信息。
    * @returns { Promise<void> } 无返回结果的Promise对象。
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501013 - The system does not support the current operation.
    * @syscap SystemCapability.Ability.Form
@@ -611,7 +615,7 @@ declare namespace formProvider {
    * @permission ohos.permission.PUBLISH_FORM_CROSS_BUNDLE_CONTROL
    * @param { formInfo.PublishFormCrossBundleControlCallback } callback - 跨应用加桌管控的回调函数。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -626,7 +630,7 @@ declare namespace formProvider {
    * @permission ohos.permission.PUBLISH_FORM_CROSS_BUNDLE_CONTROL
    * @param { formInfo.PublishFormCrossBundleControlCallback } [callback] - 跨应用加桌管控的回调函数，不传则取消所有已订阅的回调。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
@@ -642,7 +646,8 @@ declare namespace formProvider {
    *     <br>- true：关闭主编辑页，适合在主编辑页完成配置后关闭的场景。
    *     <br>- false：关闭非主编辑页，适合在多级编辑页场景下关闭当前非主编辑页的场景。
    *     <br>默认值：true（通常关闭当前编辑页时使用默认值即可）。
-   * @throws { BusinessError } 801 - Capability not supported due to limited device capabilities.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the
+   *     capability; 2. The chip does not support the capability; 3. A dependent service feature is not supported.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16501015 - Cannot close the widget editing page opened by other apps.
    * @syscap SystemCapability.Ability.Form

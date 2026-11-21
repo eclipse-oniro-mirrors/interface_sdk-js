@@ -100,7 +100,7 @@ export declare enum OperationType {
   LOADING = 3
 }
 /**
- * Declare type OperationOption
+ * 声明OperationOption类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -194,7 +194,7 @@ export declare class OperationOption {
   public id?: string;
 }
 /**
- * Declare type SelectOption
+ * 声明SelectOption类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -277,7 +277,7 @@ export declare class SelectOptions {
   public id?: string;
 }
 /**
- * Declare type SymbolOptions
+ * 声明SymbolOptions类型。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -577,7 +577,7 @@ export declare struct SubHeader {
   @PropRef
   titleId?: string;
   /**
-   * The method to build component.
+   * 构建组件的方法。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 staticonly

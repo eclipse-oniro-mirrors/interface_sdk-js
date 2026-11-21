@@ -154,7 +154,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
     abilityStartCallback: AbilityStartCallback): Promise<void>;
 
   /**
-   * Connects to a [UIExtensionAbility]{@link ./../@ohos.app.ability.UIExtensionAbility:UIExtensionAbility} and returns
+   * Connects to a [ServiceExtensionAbility]{@link ./../@ohos.app.ability.ServiceExtensionAbility:ServiceExtensionAbility} and returns
    * the connection ID.
    *
    * > **NOTE**
@@ -189,7 +189,7 @@ declare class UIServiceExtensionContext extends ExtensionContext {
   connectServiceExtensionAbility(want: Want, options: ConnectOptions): long;
 
   /**
-   * Disconnects from a [UIExtensionAbility]{@link ./../@ohos.app.ability.UIExtensionAbility:UIExtensionAbility}. This
+   * Disconnects from a [ServiceExtensionAbility]{@link ./../@ohos.app.ability.ServiceExtensionAbility:ServiceExtensionAbility}. This
    * API is opposite to [connectServiceExtensionAbility]{@link UIServiceExtensionContext.connectServiceExtensionAbility}
    * . This API uses a promise to return the result.
    *

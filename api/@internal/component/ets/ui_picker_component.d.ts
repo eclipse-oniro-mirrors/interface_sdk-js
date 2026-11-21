@@ -512,6 +512,29 @@ declare class UIPickerComponentAttribute extends CommonMethod<UIPickerComponentA
    * @since 26.0.0 dynamic
    */
   displayedItemCount(count: Optional<int>): UIPickerComponentAttribute;
+
+  /**
+   * Sets the text style of the selected item.
+   *
+   * @param { Optional<PickerComponentTextStyle> } style - Text style of the selected item.
+   *     <br>Default value:
+   *     <br>{
+   *     <br>color: $r('sys.color.font_primary'),
+   *     <br>font: {
+   *     <br>size: '20fp',
+   *     <br>weight: FontWeight.Normal
+   *     <br>},
+   *     <br>overflow: TextOverflow.Clip
+   *     <br>}.
+   *     <br>If the value of **style** is undefined, the default value is used.
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  selectedTextStyle(style: Optional<PickerComponentTextStyle>): UIPickerComponentAttribute;
 }
 
 /**

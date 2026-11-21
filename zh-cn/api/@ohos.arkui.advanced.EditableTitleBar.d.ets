@@ -165,7 +165,7 @@ export declare class EditableTitleBarMenuItem {
 }
 
 /**
- * Declaration of the image item .
+ * 声明图片项。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly

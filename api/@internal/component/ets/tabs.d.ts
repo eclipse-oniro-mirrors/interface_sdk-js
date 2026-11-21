@@ -256,6 +256,54 @@ declare enum LayoutStyle {
 }
 
 /**
+ * Enumerates the overlap modes of the tab bar and tab content.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum BarOverlapMode {
+
+  /**
+   * The tab bar does not overlap with the tab content. The tab content height equals the Tabs height minus the tab bar
+   * height. This is equivalent to **barOverlap(false)**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  STANDARD = 0,
+
+  /**
+   * The tab bar floats on top of the tab content. The tab content occupies all available space. This is equivalent to
+   * **barOverlap(true)**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  STACK = 1,
+
+  /**
+   * The tab bar area becomes part of the safe area padding for the tab content. The tab content can extend into the
+   * tab bar area.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  SAFE_AREA_PADDING = 2
+}
+
+/**
  * Enumerates the caching modes for child components.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1504,7 +1552,84 @@ declare interface TabsBreakpointType<T> {
   lg?: T;
 }
 
+/**
+ * Defines ths options for the title bar of the sidebar tab bar. The title bar is displayed above the header area.
+ * When the title bar is set, the expand/collapse button moves from the default left side to the right side of the
+ * title bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TabsSidebarTitleBarOptions<T> {
+  /**
+   * Icon of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  icon?: ResourceStr;
 
+  /**
+   * Text of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  text?: ResourceStr;
+}
+
+/**
+ * Defines the centralized customization configuration for the sidebar tab bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @crossplatform
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+interface TabViewCustomization {
+  /**
+   * A map of TabContent index to sidebar visibility.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  visibilityMap?: Map<number, TabVisibility>;
+
+  /**
+   * A map of TabContent index to sidebar section.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sectionMap?: Map<number, SidebarSection>;
+
+  /**
+   * A map of TabContent index to the display priority of tab items in the sidebar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  orderMap?: Map<number, number>;
+}
 
 /**
  * In addition to the [universal attributes]{@link CommonMethod}, the following attributes are supported.
@@ -1998,6 +2123,24 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 10 dynamic
    */
   barOverlap(value: boolean): TabsAttribute;
+
+  /**
+   * Sets the overlap mode of the tab bar and **TabContent** component.
+   *
+   * @param { BarOverlapMode | boolean } value - Overlap mode of the tab bar and **TabContent** component.
+   *     **BarOverlapMode.STACK**: The tab bar overlaps the **TabContent** component with a blurred background effect,
+   *     and the default blur style of the tab bar is set to **'BlurStyle.COMPONENT_THICK'**.<br>
+   *     **BarOverlapMode.STANDARD**: There is no blur or overlap effect.<br>
+   *     **BarOverlapMode.SAFE_AREA_PADDING**: The tab bar area becomes part of the safe area padding for the tab
+   *     content, and the tab content can extend into the tab bar area.
+   * @returns { TabsAttribute } the attribute of the tabs
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  barOverlap(value: BarOverlapMode | boolean): TabsAttribute;
 
   /**
    * Sets the background color of the tab bar.
@@ -2574,6 +2717,33 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.1.0 dynamic
    */
   showSidebarControlButton(value: Optional<boolean>): TabsAttribute;
+
+  /**
+   * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
+   * set, the expand/collapse button moves from the default left side to the right side of the title bar.
+   *
+   * @param { Optional<TabsSidebarTitleBarOptions> } value - Title bar options of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sidebarTitleBar(value: Optional<TabsSidebarTitleBarOptions>): TabsAttribute;
+
+  /**
+   * Sets the centralized customization configuration for the sidebar tab bar.
+   *
+   * @param { Optional<TabViewCustomization> } value - The centralized customization configuration.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  tabViewCustomization(value: Optional<TabViewCustomization>): TabsAttribute;
 }
 
 /**

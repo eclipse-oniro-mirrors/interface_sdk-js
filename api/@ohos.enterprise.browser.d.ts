@@ -232,6 +232,26 @@ declare namespace browser {
   function setManagedBrowserPolicy(admin: Want, bundleName: string, policyName: string, policyValue: string): void;
 
   /**
+   * Sets the managed browser policy for a specified browser application.
+   *
+   * @permission ohos.permission.ENTERPRISE_SET_BROWSER_POLICY
+   * @param { string } bundleName - Bundle name of the browser application.
+   * @param { string } policyName - Name of the policy to set.
+   * @param { string } policyValue - Value of the policy to set.
+   * @param { boolean } [forceOverride] - Whether to forcibly override the existing policy.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setManagedBrowserPolicy(bundleName: string, policyName: string, policyValue: string, forceOverride?: boolean): void;
+
+  /**
    * Obtains the policy of a specified browser based on the application bundle name. This API is applicable to scenarios
    * where the current browser policy configuration needs to be queried, for example, displaying policy details in an
    * enterprise device administrator application and verifying whether a policy has taken effect.

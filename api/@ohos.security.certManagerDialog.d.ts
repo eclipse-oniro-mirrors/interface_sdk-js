@@ -618,7 +618,7 @@ declare namespace certificateManagerDialog {
    * @throws { BusinessError } 29700002 - The user cancels the authentication operation or operation timed out.
    * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
    *     The USB key certificate does not exist.
-   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   *     The USB key status is abnormal. Please ask the user to check the status of the Ukey.
    *     The Ukey authentication dialog box cannot be opened concurrently. Please try again later.
    * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
    *     For example, the parameter format is incorrect or the value range is invalid.
@@ -707,7 +707,7 @@ declare namespace certificateManagerDialog {
    * @throws { BusinessError } 29700002 - The user cancels the authentication operation.
    * @throws { BusinessError } 29700003 - The authentication operation failed, such as:
    *     The USB key certificate does not exist.
-   *     The USB key status is abnormal, Please ask the user to check the status of the Ukey.
+   *     The USB key status is abnormal. Please ask the user to check the status of the Ukey.
    * @throws { BusinessError } 29700005 - The operation does not comply with the device security policy. Only the
    *     PC/2in1 device can open the dialog box of the UkeyAuthExtensionAbility type.
    * @throws { BusinessError } 29700006 - Indicates that the input parameters validation failed.
@@ -775,7 +775,7 @@ declare namespace certificateManagerDialog {
    * @since 26.1.0 dynamic&static
    */
   export interface InstallCertificateRequest {
- 
+
     /**
      * Type of the certificate to install. **CA_CERT**, **CREDENTIAL_USER**, and
      *     **CREDENTIAL_SYSTEM** are currently supported.
@@ -785,17 +785,17 @@ declare namespace certificateManagerDialog {
      * @since 26.1.0 dynamic&static
      */
     certType: CertificateType;
- 
+
     /**
-     * Usage scope of the certificate to install. **CURRENT_USER** and
-     *     **NOT_SPECIFIED** are currently supported.
+     * Application scope of the certificate to be installed. Currently, **CURRENT_USER** and **NOT_SPECIFIED** are
+     * supported.
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
      */
     certScope: CertificateScope;
- 
+
     /**
      * Certificate data. The size cannot exceed 8 KB. <br>When certificateType is set to CA_CERT, the certificate data
      * must be in PEM or DER format. <br>When certType is set to CREDENTIAL_USER or CREDENTIAL_SYSTEM, the encoding
@@ -806,11 +806,11 @@ declare namespace certificateManagerDialog {
      * @since 26.1.0 dynamic&static
      */
     cert: Uint8Array;
- 
+
     /**
      * Password of the keystore file. This parameter is valid only when certType is set to CREDENTIAL_USER or
-     * CREDENTIAL_SYSTEM. If keystorePwd is specified, the user does not need to enter the password in the dialog box.
-     * The maximum length is 128.
+     * CREDENTIAL_SYSTEM. If keystorePwd is specified, you do not need to enter the password in the dialog box.
+     * The maximum length is 32 bytes.
      *
      * @syscap SystemCapability.Security.CertificateManagerDialog
      * @stagemodelonly
@@ -818,7 +818,7 @@ declare namespace certificateManagerDialog {
      */
     keystorePwd?: string;
   }
- 
+
   /**
    * Opens the Certificate Management Install Certificate dialog box. After the certificate is successfully installed,
    * the unique identifier of the certificate is returned. Applications can use the identifier to use the certificate.

@@ -150,8 +150,8 @@ declare class CircleAttribute extends CommonShapeMethod<CircleAttribute> {
   stroke(value: ResourceColor | ColorMetrics): CircleAttribute;
   
   /**
-   * Sets the color of the fill area. [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} can be used to describe
-   * the color for HDR brightening. This attribute can be dynamically set using
+   * Sets the color of the fill area. [ColorMetrics]{@link @ohos.arkui.node:ColorMetrics} can be<!--Del--> used to describe
+   * the color for HDR brightening. This attribute can be<!--DelEnd--> dynamically set using
    * [attributeModifier]{@link CommonMethod#attributeModifier}. If this attribute is not set, the default fill color is
    * [Color]{@link Color}.Black. Abnormal values **undefined**, **null**, **NaN**, and **Infinity** are treated as the
    * default value. When this attribute is set together with the universal attribute **foregroundColor**, the one set

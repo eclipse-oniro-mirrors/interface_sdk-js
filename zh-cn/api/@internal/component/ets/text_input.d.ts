@@ -1038,6 +1038,13 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
    *
    * 不同的InputType会拉起对应类型的键盘，同时限制输入。未通过该接口设置时，默认为InputType.Normal。
    *
+   * > **说明：**
+   * >
+   * > 密码填充服务需要密码相关的[输入框类型]{@link InputType}(如InputType.Password、InputType.NUMBER_PASSWORD、InputType.NEW_PASSWORD、InputType.USER_NAME)。<!--RP2--><!--RP2End-->
+   * >
+   * > 设置[密码模式](docroot://ui/arkts-common-components-text-input.md#密码模式)时，[decoration]{@link TextInputAttribute#decoration}、[showUnderline]{@link TextInputAttribute#showUnderline}、
+   * > [lineHeight]{@link TextInputAttribute#lineHeight}、[fontFeature]{@link TextInputAttribute#fontFeature}不生效。
+   *
    * @param { InputType } value - 输入框类型。
    * @returns { TextInputAttribute }
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2451,7 +2458,7 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
   /**
    * 设置文本描边的宽度。未通过该接口设置时，默认值为0，不做描边处理。
    *
-   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。当LengthMetrics对象的unit属性为LengthUnit.PERCENT时，当前设置不生效，按默认值处理。
+   * @param { Optional<LengthMetrics> } width - 文本描边的宽度。
    *     <br>若设置值小于0，显示实心字；若大于0，显示空心字。
    * @returns { TextInputAttribute } returns the instance of the TextInputAttribute.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -2505,6 +2512,19 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
 
   /**
    * 设置是否在首行和尾行增加间距以避免文字截断。不通过该接口设置，默认不增加间距。
+   * 
+   * 从API版本26.1.0开始，该接口与[fallbackLineSpacing]{@link TextInputAttribute#fallbackLineSpacing}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } include - 是否在首行和尾行增加间距以避免文字截断。
    *     <br>true表示在首行和尾行增加间距；false表示在首行和尾行不增加间距。
@@ -2519,6 +2539,19 @@ declare class TextInputAttribute extends CommonMethod<TextInputAttribute> {
 
   /**
    * 针对多行文字叠加，支持行高基于文字实际高度自适应。此接口仅当行高小于文字实际高度时生效。不通过该接口设置，默认行高不基于文字实际高度自适应。
+   * 
+   * 从API版本26.1.0开始，该接口与[includeFontPadding]{@link TextInputAttribute#includeFontPadding}支持通过module.json5中配置
+   * [metadata]{@link EntryAbility}字段统一开启，两个能力同时生效，不支持单独开启。配置后，[Text]{@link Text}、
+   * [TextArea]{@link TextArea}、[TextInput]{@link TextInput}、[RichEditor]{@link RichEditor}、[Search]{@link Search}等文本类组件在未显式设置对应属性时默认按true处理；
+   * 组件显式设置的值优先于metadata开关；未配置metadata的应用行为不变。配置如下：
+   * ```json
+   * "metadata": [
+   *   {
+   *     "name": "configTextStyleOptimizeFlagInArkUI",
+   *     "value": "true"
+   *   }
+   * ]
+   * ```
    *
    * @param { Optional<boolean> } enabled - 行高是否基于文字实际高度自适应。
    *     <br>true表示行高基于文字实际高度自适应；false表示行高不基于文字实际高度自适应。

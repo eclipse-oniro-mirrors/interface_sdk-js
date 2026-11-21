@@ -257,6 +257,8 @@ export interface Context extends BaseContext {
    * ability in the ACTIVE state.
    * The interface can only take effect in API8 and below versions.
    *
+   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen} instead.<!--DelEnd--> The substitute API is available only for system applications.
+   *
    * @param { boolean } show - Specifies whether to show this ability on top of the lock screen. The value true means
    *     to show it on the lock screen, and the value false means not.
    * @param { AsyncCallback<void> } callback - Returns the callback result.
@@ -271,6 +273,8 @@ export interface Context extends BaseContext {
    * Sets whether to show this ability on top of the lock screen whenever the lock screen is displayed, keeping the
    * ability in the ACTIVE state.
    * The interface can only take effect in API8 and below versions.
+   *
+   * Supported since API version 7, deprecated since API version 9. <!--Del-->Recommended to use [setShowOnLockScreen]{@link @ohos.window:window.WindowStage.setShowOnLockScreen} instead.<!--DelEnd--> The substitute API is available only for system applications.
    *
    * @param { boolean } show - Specifies whether to show this ability on top of the lock screen. The value true means to
    *     show it on the lock screen, and the value false means not.

@@ -14,29 +14,29 @@
  */
 
 /**
- * @file
+ * @file WLAN Extension
  * @kit ConnectivityKit
  */
 
 import { AsyncCallback, Callback } from './@ohos.base';
 
 /**
- * Provides extended methods to operate or manage Wi-Fi.
+ * This module provides Wi-Fi extension APIs for non-universal products.
+ * 
+ * > **NOTE**
+ * >
+ * > The APIs provided by this module are no longer maintained since API version 9. You are advised to use 
+ * > [@ohos.wifiManagerExt (WLAN Extension)]{@link @ohos.wifiManagerExt:wifiManagerExt}.
  *
- * <p>The APIs involved in this file are non-general APIs.
- * These extended APIs are only used by some product types, such as routers. 
- * Common products should not use these APIs.</p>
- *
- * @namespace wifiext
  * @syscap SystemCapability.Communication.WiFi.AP.Extension
  * @since 8 dynamiconly
  */
 declare namespace wifiext {
   /**
-   * Enables a Wi-Fi hotspot.
+   * Enables the Wi-Fi hotspot.
    *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
-   * @returns { boolean } Returns {@code true} if this method is called successfully; returns {@code false} otherwise.
+   * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -45,9 +45,10 @@ declare namespace wifiext {
   function enableHotspot(): boolean;
 
   /**
-   * Disables a Wi-Fi hotspot.
+   * Disables the Wi-Fi hotspot.
+   *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
-   * @returns { boolean } Returns {@code true} if this method is called successfully; returns {@code false} otherwise.
+   * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -56,9 +57,10 @@ declare namespace wifiext {
   function disableHotspot(): boolean;
 
   /**
-   * Obtains the supported power model.
+   * Obtains the supported power models. This API uses a promise to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<Array<PowerModel>> } Returns the array of supported power model.
+   * @returns { Promise<Array<PowerModel>> } Promise used to return the power models obtained.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -67,9 +69,10 @@ declare namespace wifiext {
   function getSupportedPowerModel(): Promise<Array<PowerModel>>;
 
   /**
-   * Obtains the supported power model.
+   * Obtains the supported power models. This API uses an asynchronous callback to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<Array<PowerModel>> } callback - callback function, no return value.
+   * @param { AsyncCallback<Array<PowerModel>> } callback - Callback used to return the result.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -78,9 +81,10 @@ declare namespace wifiext {
   function getSupportedPowerModel(callback: AsyncCallback<Array<PowerModel>>): void;
 
   /**
-   * Obtains the current Wi-Fi power mode.
+   * Obtains the current power model. This API uses a promise to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @returns { Promise<PowerModel> } Returns the current Wi-Fi power mode. If a value less than zero is returned, it indicates a failure.
+   * @returns { Promise<PowerModel> } Promise used to return the current power model obtained.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -89,9 +93,10 @@ declare namespace wifiext {
   function getPowerModel(): Promise<PowerModel>;
 
   /**
-   * Obtains the current Wi-Fi power mode.
+   * Obtains the current power model. This API uses an asynchronous callback to return the result.
+   *
    * @permission ohos.permission.GET_WIFI_INFO
-   * @param { AsyncCallback<PowerModel> } callback - callback function, no return value.
+   * @param { AsyncCallback<PowerModel> } callback - Callback used to return the result.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -100,10 +105,11 @@ declare namespace wifiext {
   function getPowerModel(callback: AsyncCallback<PowerModel>): void;
 
   /**
-   * Set the current Wi-Fi power mode.
+   * Sets the power model.
+   *
    * @permission ohos.permission.MANAGE_WIFI_HOTSPOT_EXT
-   * @param { PowerModel } model - model indicates model file description to be loaded.
-   * @returns { boolean } Returns {@code true} if the Wi-Fi is active; returns {@code false} otherwise.
+   * @param { PowerModel } model - Power model to set.
+   * @returns { boolean } Returns **true** if the operation is successful; returns **false** otherwise.
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
@@ -112,40 +118,42 @@ declare namespace wifiext {
   function setPowerModel(model: PowerModel): boolean;
 
   /**
-   * The power model enumeration.
+   * Enumerates the power models.
    *
-   * @enum { number } PowerModel
    * @syscap SystemCapability.Communication.WiFi.AP.Extension
    * @since 8 dynamiconly
    * @deprecated since 9
    * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
    */
   export enum PowerModel {
-    /** 
-    * Sleeping model.
-    * @syscap SystemCapability.Communication.WiFi.AP.Extension
-    * @since 8 dynamiconly
-    * @deprecated since 9
-    * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
-    */
+    /**
+     * Sleeping mode.
+     *
+     * @syscap SystemCapability.Communication.WiFi.AP.Extension
+     * @since 8 dynamiconly
+     * @deprecated since 9
+     * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
+     */
     SLEEPING = 0,
 
-    /** 
-    * General model.
-    * @syscap SystemCapability.Communication.WiFi.AP.Extension
-    * @since 8 dynamiconly
-    * @deprecated since 9
-    * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
-    */
+    /**
+     * General mode.
+     *
+     * @syscap SystemCapability.Communication.WiFi.AP.Extension
+     * @since 8 dynamiconly
+     * @deprecated since 9
+     * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
+     */
     GENERAL = 1,
 
-    /** 
-    * Through wall model.
-    * @syscap SystemCapability.Communication.WiFi.AP.Extension
-    * @since 8 dynamiconly
-    * @deprecated since 9
-    * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
-    */
+    /**
+     * Through-wall mode.
+     *
+     * @syscap SystemCapability.Communication.WiFi.AP.Extension
+     * @since 8 dynamiconly
+     * @deprecated since 9
+     * @useinstead ohos.wifiManagerExt/wifiManagerExt.PowerMode
+     */
     THROUGH_WALL = 2,
   }
 }

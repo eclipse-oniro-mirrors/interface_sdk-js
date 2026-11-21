@@ -411,7 +411,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用callback异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。需要包含bundle名、ability名、module名、卡片名、卡片规格等。
    * @param { AsyncCallback<formInfo.FormStateInfo> } callback - 回调函数。当获取卡片状态成功，error为undefined，data为获取到的卡片状态；否则为错误对象。
    * @syscap SystemCapability.Ability.Form
@@ -425,7 +425,7 @@ declare namespace formHost {
   /**
    * 获取卡片状态。使用Promise异步回调。
    *
-   * @permission ohos.permission.REQUIRE_FORM and ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
+   * @permission ohos.permission.REQUIRE_FORM和ohos.permission.GET_BUNDLE_INFO_PRIVILEGED
    * @param { Want } want - 查询卡片状态时携带的want信息。
    * @returns { Promise<formInfo.FormStateInfo> } Promise对象。返回卡片状态。
    * @syscap SystemCapability.Ability.Form

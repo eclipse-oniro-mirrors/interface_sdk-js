@@ -2237,7 +2237,7 @@ export declare class WebContextMenuParam {
     /**
      * Returns a Text Fragment link URL that points to the currently highlighted text.
      *
-     * @returns { string } Return the Text Fragment link URL, or return null if not available.
+     * @returns { string } Return the Text Fragment link URL, or return an empty string if not available.
      * @syscap SystemCapability.Web.Webview.Core
      * @stagemodelonly
      * @since 26.1.0 static
@@ -7056,6 +7056,34 @@ export declare interface WebAttribute extends CommonMethod {
      * @since 26.1.0 static
      */
     default flingSpeedLimit(speedLimit: double | undefined): this;
+
+    /**
+     * 设置Web组件是否开启已访问链接持久化。
+     *
+     * 开启后，已访问链接记录存储在数据库文件中，应用重启后记录仍保留，
+     * 已访问链接着色在应用重启后保持一致。
+     * 关闭后，已访问链接记录仅存储在共享内存中，应用退出后记录丢失。
+     *
+     * > **说明**
+     * > 默认值为`false`。未显式调用本属性时，
+     * > 已访问链接仅存储在共享内存中。
+     *
+     * > 开启持久化后，记录按应用隔离，
+     * > 最多保存20000条，保存期限为30天。
+     *
+     * > 过期记录和超出数量上限的记录会在后台线程中自动清理。
+     *
+     * > 当Web组件处于隐私模式（通过`incognitoMode:true`开启）时，本属性不生效，
+     * > 已访问链接记录仅存储在共享内存中，不会写入磁盘。
+     *
+     * @param { boolean | undefined } enabled - 是否开启已访问链接持久化。
+     *     传入undefined时，本属性恢复为默认值（false）。
+     * @returns { WebAttribute }
+     * @syscap SystemCapability.Web.Webview.Core
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    default visitedLinkPersistEnabled(enabled: boolean | undefined): this;
 }
 
 /**
@@ -7278,7 +7306,26 @@ export declare interface AcceptableFileType {
     acceptableType: Array<string>;
 }
 /**
- * Defines Web Component.
+ * Web组件是ArkWeb Kit提供的具有网页显示能力的UI组件，用于在应用内嵌入和展示网页内容。开发者可通过
+ * Web组件加载在线网页和本地网页，支持隐私模式浏览、同步渲染模式、共享渲染进程等特性，满足混合开发、
+ * 内容嵌入、浏览器类应用等多种场景下的网页展示需求。Web组件的控制器（WebviewController）及相关控制
+ * 能力由[模块描述]{@link @ohos.web.webview:webview}提供。在使用Web组件时需注意：同一页面内的多个Web
+ * 组件应分别绑定不同的WebviewController实例以保证独立性和性能隔离；移动设备上当Web实例超过10个时
+ * 系统会主动回收后台页面数据。
+ *
+ * <!--RP1--><!--RP1End-->
+ *
+ * > **说明：**
+ * >
+ * > - 本模块同时支持ArkTS-Dyn、ArkTS-Sta。
+ * >
+ * > - 该组件从API version 8开始支持。后续版本如有新增内容，则采用上角标单独标记该内容的起始版本。
+ * >
+ * > - 本模块首批ArkTS-Sta接口从API version 20开始支持。
+ * >
+ * > - 示例效果请以真机运行为准。
+ * >
+ * > - 在移动设备上，当应用的Web实例数量超过10个时，系统会主动回收后台页面数据。
  *
  * @param { WebOptions } value.
  * @param { CustomBuilder } [content_] - container

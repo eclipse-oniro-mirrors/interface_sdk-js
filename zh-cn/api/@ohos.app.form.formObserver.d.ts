@@ -41,9 +41,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'formAdd' } type - 填写'formAdd'，表示卡片新增事件。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回当前新增卡片的信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -58,9 +58,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -74,9 +74,9 @@ declare namespace formObserver {
    * @param { 'formAdd' } type - 填写'formAdd'，表示卡片新增事件。
    * @param { string } hostBundleName - 指定订阅卡片使用方包的bundleName。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回指定卡片使用方应用新增卡片的信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -92,9 +92,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -111,9 +111,9 @@ declare namespace formObserver {
    *     <br> 缺省则取消订阅所有卡片使用方的卡片新增事件，与注册时未填写bundleName的on接口相对应。
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - 回调函数。返回当前新增卡片信息。缺省时，表示注销对应已注册事件回调。
    *     <br> 需与对应on('formAdd')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -129,9 +129,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -144,9 +144,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'formRemove' } type - 填写'formRemove'，表示卡片删除事件。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回当前删除卡片的信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -161,9 +161,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -177,9 +177,9 @@ declare namespace formObserver {
    * @param { 'formRemove' } type - 填写'formRemove'，表示卡片删除事件。
    * @param { string } hostBundleName - 指定订阅卡片使用方包的bundleName。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回指定卡片使用方应用被删除卡片的信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -195,9 +195,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -214,9 +214,9 @@ declare namespace formObserver {
    *     <br> 缺省则取消订阅所有卡片使用方的卡片删除事件，与注册时未填写bundleName的on接口相对应。
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - 回调函数。返回当前删除卡片的信息。缺省时，表示注销对应已注册事件回调。
    *     <br> 需与对应on('formRemove')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -232,9 +232,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -249,9 +249,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'notifyVisible' } type - 仅允许填写'notifyVisible'，表示订阅通知卡片可见的事件。
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - 回调函数。返回订阅该事件的卡片信息列表。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -266,9 +266,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -284,9 +284,9 @@ declare namespace formObserver {
    * @param { 'notifyVisible' } type - 仅允许填写'notifyVisible'，表示订阅通知卡片可见的事件。
    * @param { string } hostBundleName - 指定卡片使用方的bundleName，用于订阅卡片在该使用方的可见状态变更事件。
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - 回调函数。返回订阅该事件的卡片信息列表。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -306,9 +306,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -327,9 +327,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'notifyInvisible' } type - 仅允许填写'notifyInvisible'，表示订阅卡片不可见的事件。
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - 回调函数。返回订阅通知卡片不可见的卡片信息列表。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -344,9 +344,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -363,9 +363,9 @@ declare namespace formObserver {
    * @param { 'notifyInvisible' } type - 仅允许填写'notifyInvisible'，表示订阅卡片不可见的事件。
    * @param { string } hostBundleName - 指定卡片使用方的bundleName，用于订阅卡片在该使用方的可见状态变更事件。
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - 回调函数。返回订阅通知卡片不可见的卡片信息列表。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -385,9 +385,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } observerCallback - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -406,9 +406,9 @@ declare namespace formObserver {
    *     <br> 填写该参数时，与注册时填写bundleName的on接口对应。
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - 回调函数。返回取消订阅该事件的卡片信息列表。缺省时，表示注销对应已注册订阅的回调。
    *     <br> 需与对应on('notifyVisible')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -428,9 +428,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                  the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -450,9 +450,9 @@ declare namespace formObserver {
    *     <br>
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - 回调函数。返回取消订阅通知卡片不可见的卡片信息列表。缺省时，表示注销对应已注册事件
    *     回调。<br/> 需与对应on('notifyInvisible')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 10 dynamic
@@ -472,9 +472,9 @@ declare namespace formObserver {
    * @param { Callback<Array<formInfo.RunningFormInfo>> } [observerCallback] - The callback is used to return
    *                                                                         the running form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -493,9 +493,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - 指定要查询的卡片使用方名称，指定后会仅返回该卡片使用方下正在运行的非临时卡片信息。 
    *     <br> 缺省时，返回设备上所有正在运行的非临时卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -517,9 +517,9 @@ declare namespace formObserver {
    * @param { string } [hostBundleName] - 指定要查询的卡片使用方名称，指定后会仅返回该卡片使用方下正在运行的非临时卡片信息。 
    *     <br> 缺省时，返回设备上所有正在运行的非临时卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -541,9 +541,9 @@ declare namespace formObserver {
    *     <br> 缺省时，返回设备上所有正在运行的非临时卡片信息。
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } Promise对象。返回设备上正在运行的所有非临时卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -564,9 +564,9 @@ declare namespace formObserver {
    *     <br> 缺省时，返回设备上所有正在运行的非临时卡片信息。
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } Promise对象。返回设备上正在运行的所有非临时卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500060 - Service connection error.
    * @syscap SystemCapability.Ability.Form
@@ -586,9 +586,9 @@ declare namespace formObserver {
    * @param { formInfo.FormProviderFilter } formProviderFilter - 卡片提供方应用信息。
    * @returns { Promise<Array<formInfo.RunningFormInfo>> } Promise对象。返回已添加的卡片信息列表。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -610,9 +610,9 @@ declare namespace formObserver {
    * @param { AsyncCallback<Array<formInfo.RunningFormInfo>> } callback - 回调函数。返回已添加的卡片信息列表。error为undefined，data为查询到的卡片信
    *     息列表；否则为错误对象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -634,9 +634,9 @@ declare namespace formObserver {
    * @param { string } formId - 卡片标识。
    * @returns { Promise<formInfo.RunningFormInfo> } Promise对象。返回已添加的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -658,9 +658,9 @@ declare namespace formObserver {
    *     <br>false: 表示不包含未使用的卡片。
    * @returns { Promise<formInfo.RunningFormInfo> } Promise对象。返回已添加的卡片信息。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -680,9 +680,9 @@ declare namespace formObserver {
    * @param { AsyncCallback<formInfo.RunningFormInfo> } callback - 回调函数。返回已添加的卡片信息。error为undefined，data为查询到的卡片信息；否则为错误对
    *     象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -705,9 +705,9 @@ declare namespace formObserver {
    * @param { AsyncCallback<formInfo.RunningFormInfo> } callback - 回调函数。返回已添加的卡片信息。error为undefined，data为查询到的卡片信息；否则为错误对
    *     象。
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @throws { BusinessError } 16500050 - IPC connection error.
    * @throws { BusinessError } 16500100 - Failed to obtain the configuration information.
    * @throws { BusinessError } 16501000 - An internal functional error occurred.
@@ -729,9 +729,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'router' } type - 填写'router'，表示订阅卡片的router事件。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发router事件的卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -746,9 +746,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -762,9 +762,9 @@ declare namespace formObserver {
    * @param { 'router' } type - 填写'router'，表示订阅卡片的router事件。
    * @param { string } hostBundleName - 指定卡片使用方的bundleName。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发router事件的卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -780,9 +780,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -800,9 +800,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - 回调函数。返回触发router事件的卡片信息。缺省时，表示注销对应bundleName下已注册事
    *     件回调。
    *     <br>需与对应on('router')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -817,9 +817,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -832,9 +832,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'message' } type - 填写'message'，表示订阅卡片的message事件。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发message事件的卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -849,9 +849,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -865,9 +865,9 @@ declare namespace formObserver {
    * @param { 'message' } type - 填写'message'，表示订阅卡片的message事件。
    * @param { string } hostBundleName - 指定卡片使用方的bundleName。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发message事件的卡片的信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -883,9 +883,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -902,9 +902,9 @@ declare namespace formObserver {
    *     <br>缺省则取消订阅所有卡片使用方的message事件，与注册时未填写bundleName的on接口相对应。
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - 回调函数。返回触发message事件的卡片的信息。缺省时，表示注销对应已注册事件回调。
    *     <br>需与对应on('message')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -919,9 +919,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -934,9 +934,9 @@ declare namespace formObserver {
    * @permission ohos.permission.OBSERVE_FORM_RUNNING
    * @param { 'call' } type - 填写'call'，表示订阅卡片的call事件。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发call事件的卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -951,9 +951,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -967,9 +967,9 @@ declare namespace formObserver {
    * @param { 'call' } type - 填写'call'，表示订阅卡片的call事件。
    * @param { string } hostBundleName - 指定卡片使用方的bundleName。
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - 回调函数。返回触发call事件的卡片信息。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -985,9 +985,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } observerCallback - The callback is used to return the running
    *                                                                  form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
@@ -1004,9 +1004,9 @@ declare namespace formObserver {
    *     <br>缺省则取消订阅所有卡片使用方的call事件，与注册时未填写bundleName的on接口相对应。
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - 回调函数。返回触发call事件的卡片信息。缺省时，表示注销对应已注册事件回调。
    *     <br>需与对应on('call')的callback一致。
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 11 dynamic
@@ -1021,9 +1021,9 @@ declare namespace formObserver {
    * @param { Callback<formInfo.RunningFormInfo> } [observerCallback] - The callback is used to return the running
    *                                                                    form info.
    * @throws { BusinessError } 201 - Permissions denied.
-   * @throws { BusinessError } 202 - The application is not a system application.
-   * @throws { BusinessError } 401 - Parameter error. Possible causes:
-   *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     1. Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed.
    * @syscap SystemCapability.Ability.Form
    * @systemapi
    * @since 23 static
