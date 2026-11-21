@@ -23,7 +23,7 @@ import { SymbolGlyphModifier } from '@ohos.arkui.modifier';
 import { AdvancedToolBarV2Item, AdvancedToolBarV2Modifier } from '@ohos.arkui.advanced.ToolBarV2';
 
 /**
- * 工具栏的拖拽状态改变回调，拖拽开始或结束时触发。
+ * Defines the callback invoked when the drag state of the toolbar changes, specifically when dragging starts or ends.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -33,10 +33,10 @@ import { AdvancedToolBarV2Item, AdvancedToolBarV2Modifier } from '@ohos.arkui.ad
  */
 export declare type ToolBarDragStateCallback = () => void;
 /**
- * 相对于ToolBarContainer容器的拖拽偏移量回调。
+ * Defines the callback for the drag offset relative to the ToolBarContainer container.
  *
- * @param { number } x - X轴偏移量，单位为vp。
- * @param { number } y - Y轴偏移量，单位为vp。
+ * @param { number } x - Offset along the X-axis, in vp.
+ * @param { number } y - Offset along the Y-axis, in vp.
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform
@@ -45,9 +45,9 @@ export declare type ToolBarDragStateCallback = () => void;
  */
 export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
 /**
- * 工具栏状态变化时的回调。
+ * Defines the callback invoked when the toolbar state changes.
  *
- * @param { ToolBarState } state - 当前工具栏状态。
+ * @param { ToolBarState } state - Current toolbar state.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -57,10 +57,10 @@ export declare type ToolBarDragOffsetCallback = (x: number, y: number) => void;
  */
 export declare type ToolBarStateCallback = (state: ToolBarState) => void;
 /**
- * 工具栏停靠到指定区域和方向时的回调。
+ * Defines the callback invoked when the toolbar docks to the specified area and direction.
  *
- * @param { DockArea } area - 工具栏停靠的区域。
- * @param { Axis } direction - 停靠方向。
+ * @param { DockArea } area - Area where the toolbar is docked.
+ * @param { Axis } direction - Docking direction.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -70,7 +70,7 @@ export declare type ToolBarStateCallback = (state: ToolBarState) => void;
  */
 export declare type ToolBarDockCallback = (area: DockArea, direction: Axis) => void;
 /**
- * 定义工具栏接入智感握姿模式。
+ * Defines the handedness adaptation mode for the toolbar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -80,7 +80,7 @@ export declare type ToolBarDockCallback = (area: DockArea, direction: Axis) => v
  */
 export enum HandednessAdaptationMode {
   /**
-   * 工具栏不启用智感握姿。
+   * Handedness adaptation is disabled for the toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -90,7 +90,7 @@ export enum HandednessAdaptationMode {
    */
   NONE = 0,
   /**
-   * 工具栏适配启用默认智感握姿适配。
+   * The toolbar uses the default handedness adaptation.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -101,7 +101,7 @@ export enum HandednessAdaptationMode {
   DEFAULT = 1
 }
 /**
- * 定义工具栏状态。
+ * Defines the toolbar states.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -111,7 +111,7 @@ export enum HandednessAdaptationMode {
  */
 export enum ToolBarState {
   /**
-   * 工具栏固定在当前位置。
+   * The toolbar is fixed at its current position.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -121,7 +121,7 @@ export enum ToolBarState {
    */
   FIXED = 0,
   /**
-   * 工具栏处于浮动状态，可被拖拽。
+   * The toolbar is floating and can be dragged.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -131,7 +131,7 @@ export enum ToolBarState {
    */
   FLOATING = 1,
   /**
-   * 工具栏被最小化为悬浮球。
+   * The toolbar is minimized to a floating ball.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -143,7 +143,7 @@ export enum ToolBarState {
 }
 
 /**
- * 定义浮动工具栏可停靠的区域。
+ * Defines the areas where the floating toolbar can dock.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -153,7 +153,7 @@ export enum ToolBarState {
  */
 export enum DockArea {
   /**
-   * 停靠在顶部边缘。
+   * The toolbar is docked to the top edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -163,7 +163,7 @@ export enum DockArea {
    */
   TOP = 0,
   /**
-   * 停靠在底部边缘。
+   * The toolbar is docked to the bottom edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -173,7 +173,7 @@ export enum DockArea {
    */
   BOTTOM = 1,
   /**
-   * 停靠在左侧边缘。
+   * The toolbar is docked to the left edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -183,7 +183,7 @@ export enum DockArea {
    */
   LEFT = 2,
   /**
-   * 停靠在右侧边缘。
+   * The toolbar is docked to the right edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -193,7 +193,7 @@ export enum DockArea {
    */
   RIGHT = 3,
   /**
-   * 停靠在左上角。
+   * The toolbar is docked to the upper left corner.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -203,7 +203,7 @@ export enum DockArea {
    */
   TOP_LEFT = 4,
   /**
-   * 停靠在右上角。
+   * The toolbar is docked to the upper right corner.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -213,7 +213,7 @@ export enum DockArea {
    */
   TOP_RIGHT = 5,
   /**
-   * 停靠在左下角。
+   * The toolbar is docked to the lower left corner.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -223,7 +223,7 @@ export enum DockArea {
    */
   BOTTOM_LEFT = 6,
   /**
-   * 停靠在右下角。
+   * The toolbar is docked to the lower right corner.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -235,7 +235,7 @@ export enum DockArea {
 }
 
 /**
- * 定义浮动工具栏拖拽到角落时的吸附模式。
+ * Defines the snapping mode used when the floating toolbar is dragged to a corner.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -245,7 +245,8 @@ export enum DockArea {
  */
 export enum DockCornerMode {
   /**
-   * 吸附到角落并最小化；点击角落后跟随所在边缘。
+   * Snaps the toolbar to a corner and minimizes it; after the corner is clicked, the toolbar follows the edge where it
+   * is located.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -255,7 +256,7 @@ export enum DockCornerMode {
    */
   MINIMIZE = 0,
   /**
-   * 保持拖拽方向，不进行最小化。
+   * Retains the drag direction without minimizing the toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -267,7 +268,7 @@ export enum DockCornerMode {
 }
 
 /**
- * 定义工具栏的安全区内边距模式。
+ * Defines the safe area padding mode of the toolbar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -277,7 +278,7 @@ export enum DockCornerMode {
  */
 export enum ToolBarSafeAreaMode {
   /**
-   * 不应用安全区内边距。
+   * Does not apply safe area padding.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -287,7 +288,7 @@ export enum ToolBarSafeAreaMode {
    */
   NONE = 0,
   /**
-   * 应用等于安全区内边距。
+   * Applies padding equal to the safe area insets.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -297,7 +298,7 @@ export enum ToolBarSafeAreaMode {
    */
   PADDING = 1,
   /**
-   * 同时应用安全区内边距和额外的内边距。
+   * Applies both safe area padding and additional padding.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -309,7 +310,7 @@ export enum ToolBarSafeAreaMode {
 }
 
 /**
- * 配置工具栏浮动行为的选项。
+ * Defines options for configuring the floating behavior of the toolbar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -319,7 +320,8 @@ export enum ToolBarSafeAreaMode {
  */
 export interface ToolBarFloatingOptions {
   /**
-   * 浮动工具栏是否可拖拽。默认值：true。true表示支持拖拽，false表示禁止拖拽。
+   * Whether the floating toolbar can be dragged. Default value: true. The value true indicates that dragging is
+   * supported, and false indicates that dragging is prohibited.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -329,8 +331,8 @@ export interface ToolBarFloatingOptions {
    */
   draggable?: boolean;
   /**
-   * 浮动工具栏允许停靠的区域。
-   * 默认值：全部8个区域。
+   * Areas where the floating toolbar is allowed to dock.
+   * Default value: all eight areas.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -340,7 +342,7 @@ export interface ToolBarFloatingOptions {
    */
   dockAreas?: DockArea[];
   /**
-   * 浮动工具栏悬浮球的最小化配置。
+   * Minimization configuration for the floating ball of the floating toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -350,7 +352,8 @@ export interface ToolBarFloatingOptions {
    */
   minimizeConfigs?: ToolBarMinimizeConfigs;
   /**
-   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND表示保持拖拽方向。
+   * Corner snapping mode. MINIMIZE (default) indicates that the toolbar snaps to a corner and follows the edge where
+   * it is located; EXPAND indicates that the drag direction is retained.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -362,8 +365,8 @@ export interface ToolBarFloatingOptions {
 }
 
 /**
- * 浮动工具栏行为的可观察配置存储，
- * 与{@link ToolBarFloatingOptions}对应。
+ * Observable configuration store for floating toolbar behavior,
+ * corresponding to {@link ToolBarFloatingOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -374,7 +377,8 @@ export interface ToolBarFloatingOptions {
 @ObservedV2
 export class ToolBarFloatingConfigs {
   /**
-   * 浮动工具栏是否可拖拽。默认值：true。true表示支持拖拽，false表示禁止拖拽。
+   * Whether the floating toolbar can be dragged. Default value: true. The value true indicates that dragging is
+   * supported, and false indicates that dragging is prohibited.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -385,8 +389,8 @@ export class ToolBarFloatingConfigs {
   @Trace
   draggable?: boolean;
   /**
-   * 浮动工具栏允许停靠的区域。
-   * 默认支持所有可吸附位置。
+   * Areas where the floating toolbar is allowed to dock.
+   * All snapping positions are supported by default.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -397,7 +401,7 @@ export class ToolBarFloatingConfigs {
   @Trace
   dockAreas?: DockArea[];
   /**
-   * 最小化配置。
+   * Minimization configuration.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -408,7 +412,8 @@ export class ToolBarFloatingConfigs {
   @Trace
   minimizeConfigs?: ToolBarMinimizeConfigs;
   /**
-   * 角落吸附模式。MINIMIZE（默认）表示吸附到角落并跟随所在边缘；EXPAND表示保持拖拽方向。
+   * Corner snapping mode. MINIMIZE (default) indicates that the toolbar snaps to a corner and follows the edge where
+   * it is located; EXPAND indicates that the drag direction is retained.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -419,9 +424,9 @@ export class ToolBarFloatingConfigs {
   @Trace
   cornerMode?: DockCornerMode;
   /**
-   * ToolBarFloatingConfigs的构造函数。当options省略时，所有字段使用各自的默认值。
+   * Constructor of ToolBarFloatingConfigs. When options is omitted, all fields use their respective default values.
    *
-   * @param { ToolBarFloatingOptions } [options] - 浮动行为选项。
+   * @param { ToolBarFloatingOptions } [options] - Floating behavior options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -432,7 +437,7 @@ export class ToolBarFloatingConfigs {
 }
 
 /**
- * 配置工具栏最小化悬浮球的选项。
+ * Defines options for configuring the minimized floating ball of the toolbar.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -442,7 +447,7 @@ export class ToolBarFloatingConfigs {
  */
 export interface ToolBarMinimizeOptions {
   /**
-   * 文本标签。默认值为undefined，表示无文本内容。
+   * Text label. Default value: undefined, indicating that there is no text content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -452,7 +457,7 @@ export interface ToolBarMinimizeOptions {
    */
   text?: ResourceStr;
   /**
-   * 图标。默认值为undefined，表示无图标内容。
+   * Icon. Default value: undefined, indicating that there is no icon content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -462,7 +467,7 @@ export interface ToolBarMinimizeOptions {
    */
   icon?: ResourceStr | SymbolGlyphModifier;
   /**
-   * 文本颜色。默认值为$r('sys.color.font_primary')。
+   * Text color. Default value: $r('sys.color.font_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -472,7 +477,7 @@ export interface ToolBarMinimizeOptions {
    */
   textColor?: ColorMetrics;
   /**
-   * 图标颜色。默认值为$r('sys.color.icon_primary')。
+   * Icon color. Default value: $r('sys.color.icon_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -482,7 +487,7 @@ export interface ToolBarMinimizeOptions {
    */
   iconColor?: ColorMetrics;
   /**
-   * 自定义构建器。默认值为undefined，表示无自定义内容。
+   * Custom builder. Default value: undefined, indicating that there is no custom content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -492,7 +497,7 @@ export interface ToolBarMinimizeOptions {
    */
   builder?: CustomBuilder;
   /**
-   * 图标尺寸。
+   * Icon size.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -502,7 +507,7 @@ export interface ToolBarMinimizeOptions {
    */
   iconSize?: LengthMetrics;
   /**
-   * 最小化悬浮球的直径。
+   * Diameter of the minimized floating ball.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -514,8 +519,8 @@ export interface ToolBarMinimizeOptions {
 }
 
 /**
- * 最小化悬浮球的可观察配置存储，
- * 与{@link ToolBarMinimizeOptions}对应。
+ * Observable configuration store for the minimized floating ball,
+ * corresponding to {@link ToolBarMinimizeOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -526,7 +531,7 @@ export interface ToolBarMinimizeOptions {
 @ObservedV2
 export class ToolBarMinimizeConfigs {
   /**
-   * 文本标签。默认值为undefined，表示无文本内容。
+   * Text label. Default value: undefined, indicating that there is no text content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -537,7 +542,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   text?: ResourceStr;
   /**
-   * 图标。默认值为undefined，表示无图标内容。
+   * Icon. Default value: undefined, indicating that there is no icon content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -548,7 +553,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   icon?: ResourceStr | SymbolGlyphModifier;
   /**
-   * 文本颜色。默认值为$r('sys.color.font_primary')。
+   * Text color. Default value: $r('sys.color.font_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -559,7 +564,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   textColor?: ColorMetrics;
   /**
-   * 图标颜色。默认值为$r('sys.color.icon_primary')。
+   * Icon color. Default value: $r('sys.color.icon_primary').
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -570,7 +575,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   iconColor?: ColorMetrics;
   /**
-   * 自定义构建器。默认值为undefined，无自定义内容。
+   * Custom builder. Default value: undefined, indicating that there is no custom content.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -581,7 +586,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   builder?: CustomBuilder;
   /**
-   * 图标尺寸。
+   * Icon size.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -592,7 +597,7 @@ export class ToolBarMinimizeConfigs {
   @Trace
   iconSize?: LengthMetrics;
   /**
-   * 最小化悬浮球的直径。
+   * Diameter of the minimized floating ball.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -603,9 +608,9 @@ export class ToolBarMinimizeConfigs {
   @Trace
   buoySize?: LengthMetrics;
   /**
-   * ToolBarMinimizeConfigs的构造函数。当options省略时，所有字段使用各自的默认值。
+   * Constructor of ToolBarMinimizeConfigs. When options is omitted, all fields use their respective default values.
    *
-   * @param { ToolBarMinimizeOptions } [options] - 最小化悬浮球选项。
+   * @param { ToolBarMinimizeOptions } [options] - Options for the minimized floating ball.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -616,7 +621,7 @@ export class ToolBarMinimizeConfigs {
 }
 
 /**
- * 用于命令式操作工具栏停靠、固定和最小化状态控制器。
+ * Defines a controller for imperatively managing toolbar docking, pinning, and minimization states.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -626,10 +631,11 @@ export class ToolBarMinimizeConfigs {
  */
 export class ToolBarController {
   /**
-   * 将浮动工具栏停靠到指定区域，可指定停靠方向。
+   * Docks the floating toolbar to the specified area, with an optional docking direction.
    *
-   * @param { DockArea } area - 要设置的停靠区域。
-   * @param { Axis } [direction] - 停靠方向。停靠方向默认为当前浮动工具栏的排列方向。
+   * @param { DockArea } area - Docking area to set.
+   * @param { Axis } [direction] - Docking direction. By default, the docking direction is the arrangement direction of
+   *     the current floating toolbar.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -638,7 +644,7 @@ export class ToolBarController {
    */
   setDock(area: DockArea, direction?: Axis): void;
   /**
-   * 将工具栏固定为FIXED状态。
+   * Pins the toolbar in the FIXED state.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -648,7 +654,7 @@ export class ToolBarController {
    */
   pin(): void;
   /**
-   * 取消固定工具栏，从FIXED状态切换为FLOATING状态。
+   * Unpins the toolbar, switching it from FIXED to FLOATING.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -658,7 +664,7 @@ export class ToolBarController {
    */
   unpin(): void;
   /**
-   * 将浮动工具栏最小化为悬浮球，从FLOATING切换为MINIMIZED。
+   * Minimizes the floating toolbar to a floating ball, switching it from FLOATING to MINIMIZED.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -668,7 +674,7 @@ export class ToolBarController {
    */
   minimize(): void;
   /**
-   * 将最小化悬浮球恢复为浮动工具栏，从MINIMIZED切换为FLOATING。
+   * Restores the minimized floating ball to a floating toolbar, switching it from MINIMIZED to FLOATING.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -678,9 +684,9 @@ export class ToolBarController {
    */
   restore(): void;
   /**
-   * 获取当前工具栏状态。
+   * Obtains the current toolbar state.
    *
-   * @returns { ToolBarState } 当前工具栏状态。
+   * @returns { ToolBarState } Current toolbar state.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -690,9 +696,9 @@ export class ToolBarController {
    */
   getState(): ToolBarState;
   /**
-   * 获取浮动工具栏当前停靠的区域。
+   * Obtains the area where the floating toolbar is currently docked.
    *
-   * @returns { DockArea } 工具栏当前停靠的区域。
+   * @returns { DockArea } Area where the toolbar is currently docked.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -702,9 +708,9 @@ export class ToolBarController {
    */
   getDockArea(): DockArea;
   /**
-   * 获取浮动工具栏的停靠方向。
+   * Obtains the docking direction of the floating toolbar.
    *
-   * @returns { Axis } 浮动工具栏的停靠方向。
+   * @returns { Axis } Docking direction of the floating toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -716,7 +722,7 @@ export class ToolBarController {
 }
 
 /**
- * 工具栏初始位置参数，指定创建时的停靠区域、方向和状态。
+ * Initial position parameters of the toolbar, specifying the docking area, direction, and state at creation.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -726,7 +732,7 @@ export class ToolBarController {
  */
 export interface ToolBarInitialParams {
   /**
-   * 工具栏初始停靠的区域。
+   * Initial area where the toolbar is docked.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -736,7 +742,8 @@ export interface ToolBarInitialParams {
    */
   dockArea: DockArea;
   /**
-   * 工具栏初始停靠方向。默认与吸附的边保持方向一致。
+   * Initial docking direction of the toolbar. By default, the direction is aligned with the edge to which the toolbar
+   * is snapped.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -746,7 +753,7 @@ export interface ToolBarInitialParams {
    */
   direction?: Axis;
   /**
-   * 工具栏初始状态。默认值：{@link ToolBarState.FLOATING}。
+   * Initial state of the toolbar. Default value: {@link ToolBarState.FLOATING}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -758,7 +765,7 @@ export interface ToolBarInitialParams {
 }
 
 /**
- * 用于工具栏拖拽、吸附以及状态回调的合集。
+ * Defines a collection of callbacks for toolbar dragging, snapping, and state changes.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -768,7 +775,7 @@ export interface ToolBarInitialParams {
  */
 export class ToolBarCallbacks {
   /**
-   * 工具栏停靠到新区域时的回调。
+   * Callback invoked when the toolbar docks to a new area.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -778,7 +785,7 @@ export class ToolBarCallbacks {
    */
   onDock?: ToolBarDockCallback;
   /**
-   * 用户开始拖拽工具栏时的回调。
+   * Callback invoked when the user starts dragging the toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -788,7 +795,7 @@ export class ToolBarCallbacks {
    */
   onDragStart?: ToolBarDragStateCallback;
   /**
-   * 拖拽过程中的回调，返回X/Y轴偏移量，单位为vp。
+   * Callback invoked during dragging, which returns the X-axis and Y-axis offsets in vp.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -798,7 +805,7 @@ export class ToolBarCallbacks {
    */
   onDrag?: ToolBarDragOffsetCallback;
   /**
-   * 用户结束拖拽时的回调。
+   * Callback invoked when the user finishes dragging the toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -808,7 +815,7 @@ export class ToolBarCallbacks {
    */
   onDragEnd?: ToolBarDragStateCallback;
   /**
-   * 工具栏状态变化时的回调。
+   * Callback invoked when the toolbar state changes.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -820,7 +827,7 @@ export class ToolBarCallbacks {
 }
 
 /**
- * 构造工具栏的参数，包括项列表、修改器、浮动配置和回调。
+ * Parameters for constructing a toolbar, including the item list, modifier, floating configuration, and callbacks.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -830,7 +837,7 @@ export class ToolBarCallbacks {
  */
 export interface ToolBarParams {
   /**
-   * 要显示的高级工具栏项的列表。
+   * List of advanced toolbar items to display.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -840,7 +847,7 @@ export interface ToolBarParams {
    */
   toolBarList: AdvancedToolBarV2Item[];
   /**
-   * 初始位置。
+   * Initial position.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -850,7 +857,7 @@ export interface ToolBarParams {
    */
   initialParams: ToolBarInitialParams;
   /**
-   * 高级工具栏的修改器。
+   * Modifier of the advanced toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -860,7 +867,8 @@ export interface ToolBarParams {
    */
   advancedToolBarModifier?: AdvancedToolBarV2Modifier;
   /**
-   * 工具栏浮动行为配置。默认值：按{@link ToolBarFloatingConfigs}各字段默认值。
+   * Floating behavior configuration of the toolbar. Default value: the respective default values of the fields in
+   * {@link ToolBarFloatingConfigs}.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -870,7 +878,7 @@ export interface ToolBarParams {
    */
   floatingConfigs?: ToolBarFloatingConfigs;
   /**
-   * 工具栏控制器。
+   * Toolbar controller.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -880,7 +888,7 @@ export interface ToolBarParams {
    */
   controller?: ToolBarController;
   /**
-   * 工具栏回调合集。
+   * Collection of toolbar callbacks.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -892,8 +900,8 @@ export interface ToolBarParams {
 }
 
 /**
- * 工具栏的可观察配置存储，
- * 与{@link ToolBarParams}对应。
+ * Observable configuration store for the toolbar,
+ * corresponding to {@link ToolBarParams}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -904,7 +912,7 @@ export interface ToolBarParams {
 @ObservedV2
 export class ToolBarConfigs {
   /**
-   * 要显示的高级工具栏项列表。
+   * List of advanced toolbar items to display.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -915,7 +923,7 @@ export class ToolBarConfigs {
   @Trace
   toolBarList: AdvancedToolBarV2Item[];
   /**
-   * 高级工具栏的初始位置。
+   * Initial position of the advanced toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -925,7 +933,7 @@ export class ToolBarConfigs {
    */
   initialParams: ToolBarInitialParams;
   /**
-   * 高级工具栏的修改器。
+   * Modifier of the advanced toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -936,7 +944,7 @@ export class ToolBarConfigs {
   @Trace
   advancedToolBarModifier: AdvancedToolBarV2Modifier;
   /**
-   * 高级工具栏的浮动配置。
+   * Floating configuration of the advanced toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -947,7 +955,7 @@ export class ToolBarConfigs {
   @Trace
   floatingConfigs?: ToolBarFloatingConfigs;
   /**
-   * 工具栏控制器。
+   * Toolbar controller.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -957,7 +965,7 @@ export class ToolBarConfigs {
    */
   controller?: ToolBarController;
   /**
-   * 工具栏回调合集。
+   * Collection of toolbar callbacks.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -968,9 +976,9 @@ export class ToolBarConfigs {
   @Trace
   callbacks?: ToolBarCallbacks;
   /**
-   * 工具栏配置ToolBarConfigs的构造函数。
+   * Constructor of the toolbar configuration class ToolBarConfigs.
    *
-   * @param { ToolBarParams } params - 工具栏构造参数。
+   * @param { ToolBarParams } params - Parameters for constructing the toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -982,7 +990,7 @@ export class ToolBarConfigs {
 }
 
 /**
- * 配置浮动工具栏各边停靠偏移量的选项。
+ * Defines options for configuring the docking offsets of the floating toolbar on each edge.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -992,7 +1000,7 @@ export class ToolBarConfigs {
  */
 export interface ToolBarDockOffsetOptions {
   /**
-   * 顶部停靠偏移量。
+   * Top docking offset.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1002,7 +1010,7 @@ export interface ToolBarDockOffsetOptions {
    */
   top?: LengthMetrics;
   /**
-   * 右侧停靠偏移量。
+   * Right docking offset.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1012,7 +1020,7 @@ export interface ToolBarDockOffsetOptions {
    */
   right?: LengthMetrics;
   /**
-   * 底部停靠偏移量。
+   * Bottom docking offset.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1022,7 +1030,7 @@ export interface ToolBarDockOffsetOptions {
    */
   bottom?: LengthMetrics;
   /**
-   * 左侧停靠偏移量。
+   * Left docking offset.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1034,7 +1042,7 @@ export interface ToolBarDockOffsetOptions {
 }
 
 /**
- * 配置工具栏各边安全区避让模式的选项。
+ * Defines options for configuring the safe area avoidance mode of the toolbar on each edge.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1044,7 +1052,7 @@ export interface ToolBarDockOffsetOptions {
  */
 export interface ToolBarSafeAreaOptions {
   /**
-   * 顶部边缘的安全区避让模式。
+   * Safe area avoidance mode for the top edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1054,7 +1062,7 @@ export interface ToolBarSafeAreaOptions {
    */
   top?: ToolBarSafeAreaMode;
   /**
-   * 右侧边缘的安全区避让模式。
+   * Safe area avoidance mode for the right edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1064,7 +1072,7 @@ export interface ToolBarSafeAreaOptions {
    */
   right?: ToolBarSafeAreaMode;
   /**
-   * 底部边缘的安全区避让模式。
+   * Safe area avoidance mode for the bottom edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1074,7 +1082,7 @@ export interface ToolBarSafeAreaOptions {
    */
   bottom?: ToolBarSafeAreaMode;
   /**
-   * 左侧边缘的安全区避让模式。
+   * Safe area avoidance mode for the left edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1086,7 +1094,7 @@ export interface ToolBarSafeAreaOptions {
 }
 
 /**
- * 配置工具栏容器的布局、安全区避让和握姿适配的选项。
+ * Defines options for configuring the layout, safe area avoidance, and handedness adaptation of the toolbar container.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1096,7 +1104,7 @@ export interface ToolBarSafeAreaOptions {
  */
 export interface ToolBarContainerOptions {
   /**
-   * 浮动工具栏的停靠偏移量。
+   * Docking offsets of the floating toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1106,7 +1114,7 @@ export interface ToolBarContainerOptions {
    */
   dockOffset?: ToolBarDockOffsetOptions;
   /**
-   * 工具栏超长溢出时的避让间隔。
+   * Avoidance spacing used when the toolbar is too long and overflows.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1116,7 +1124,7 @@ export interface ToolBarContainerOptions {
    */
   gutter?: LengthMetrics;
   /**
-   * 安全区避让模式。默认值：各边为{@link ToolBarSafeAreaMode.NONE}。
+   * Safe area avoidance mode. Default value: {@link ToolBarSafeAreaMode.NONE} for each edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1126,7 +1134,8 @@ export interface ToolBarContainerOptions {
    */
   safeArea?: ToolBarSafeAreaOptions;
   /**
-   * 接入智感握姿模式。默认值：HandednessAdaptationMode.NONE。仅在单工具栏时生效。
+   * Handedness adaptation mode. Default value: HandednessAdaptationMode.NONE. This parameter takes effect only when
+   * there is a single toolbar.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1138,8 +1147,8 @@ export interface ToolBarContainerOptions {
 }
 
 /**
- * 工具栏容器的可观察配置存储，
- * 与{@link ToolBarContainerOptions}对应。
+ * Observable configuration store for the toolbar container,
+ * corresponding to {@link ToolBarContainerOptions}.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1150,7 +1159,7 @@ export interface ToolBarContainerOptions {
 @ObservedV2
 export class ToolBarContainerConfigs {
   /**
-   * 停靠偏移量，单位为vp。默认值：各边为16vp。
+   * Docking offsets, in vp. Default value: 16 vp for each edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1161,7 +1170,7 @@ export class ToolBarContainerConfigs {
   @Trace
   dockOffset?: ToolBarDockOffsetOptions;
   /**
-   * 工具栏之间的间隔。
+   * Spacing between toolbars.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1172,7 +1181,7 @@ export class ToolBarContainerConfigs {
   @Trace
   gutter?: LengthMetrics;
   /**
-   * 安全区模式。默认值：各边为ToolBarSafeAreaMode.NONE。
+   * Safe area mode. Default value: ToolBarSafeAreaMode.NONE for each edge.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1183,7 +1192,7 @@ export class ToolBarContainerConfigs {
   @Trace
   safeArea?: ToolBarSafeAreaOptions;
   /**
-   * 接入智感握姿模式。默认值：HandednessAdaptationMode.NONE。
+   * Handedness adaptation mode. Default value: HandednessAdaptationMode.NONE.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1194,9 +1203,9 @@ export class ToolBarContainerConfigs {
   @Trace
   adaptToHandedness?: HandednessAdaptationMode;
   /**
-   * 构造函数。当options省略时，所有字段使用各自的默认值。
+   * Constructor. When options is omitted, all fields use their respective default values.
    *
-   * @param { ToolBarContainerOptions } [options] - 容器选项。
+   * @param { ToolBarContainerOptions } [options] - Container options.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -1207,8 +1216,8 @@ export class ToolBarContainerConfigs {
 }
 
 /**
- * ToolBarContainer组件，用于承载一个或多个浮动工具栏，
- * 支持停靠、安全区避让和握姿适配。
+ * The ToolBarContainer component hosts one or more floating toolbars,
+ * and supports docking, safe area avoidance, and handedness adaptation.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -1219,7 +1228,8 @@ export class ToolBarContainerConfigs {
 @ComponentV2
 export struct ToolBarContainer {
   /**
-   * 工具栏配置列表。最多支持4个工具栏，超出部分不生效。
+   * List of toolbar configurations. A maximum of four toolbars is supported; any additional toolbars do not take
+   * effect.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1231,7 +1241,7 @@ export struct ToolBarContainer {
   @Param
   toolbars: ToolBarConfigs[];
   /**
-   * 容器级配置，包括停靠偏移量、安全区避让和握姿适配。
+   * Container-level configuration, including docking offsets, safe area avoidance, and handedness adaptation.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
@@ -1242,7 +1252,7 @@ export struct ToolBarContainer {
   @Param
   containerConfigs?: ToolBarContainerConfigs;
   /**
-   * 组件中显示的内容。
+   * Content displayed in the component.
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
