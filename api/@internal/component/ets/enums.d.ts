@@ -7037,6 +7037,56 @@ declare enum ImmersiveStrategy {
 }
 
 /**
+ * Enumerates the phases of a touchpad event.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum TouchPadEventPhase {
+  /**
+   * A contact begins.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BEGIN = 0,
+
+  /**
+   * A contact moves.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOVE = 1,
+
+  /**
+   * A contact ends.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 2,
+
+  /**
+   * A contact is canceled.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CANCEL = 3
+}
+
+/**
  * Enumerates the clip modes for the shadow when it is not filled.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full

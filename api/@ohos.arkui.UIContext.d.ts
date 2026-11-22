@@ -7008,6 +7008,19 @@ export class UIContext {
   static setResourceManagerCacheMaxCountForHSP(count: number): void;
 
   /**
+   * Sets whether raw touchpad events are reported for the application.
+   *
+   * @param { boolean } enabled - Whether to enable application-level raw touchpad event reporting. The value **true**
+   *     enables reporting, and **false** disables reporting.
+   *     <br>Default value: **false**.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static enableTouchPadEvent(enabled: boolean): void;
+
+  /**
    * Obtains the unique ID of a UI instance object. In multi-instance scenarios, you can use this unique ID to
    * distinguish between different UI instance objects for easier management.
    *

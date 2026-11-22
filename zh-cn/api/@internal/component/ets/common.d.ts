@@ -7033,7 +7033,17 @@ declare enum SourceType {
    * @atomicservice
    * @since 22 dynamic
    */
-  JOYSTICK = 5
+  JOYSTICK = 5,
+
+  /**
+   * 来自触摸板的原始触摸输入。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCHPAD_TOUCH = 6
 }
 
 /**
@@ -11086,7 +11096,280 @@ declare interface TouchEvent extends BaseEvent {
 }
 
 /**
- * 轴事件的对象说明，继承于[BaseEvent]{@link BaseEvent}。
+ * 描述原始触控板事件中的单个触点。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TouchPadEventContact {
+  /**
+   * 触点的唯一标识。该标识在触点按下至抬起或取消期间保持不变。
+   * 取值限定为整数。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  id: int;
+ 
+  /**
+   * 触点阶段。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  phase: TouchPadEventPhase;
+ 
+  /**
+   * 触点在触控板逻辑坐标范围内归一化后的X轴位置。
+   * 取值范围：[0,1]。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionX: double;
+ 
+  /**
+   * 触点在触控板逻辑坐标范围内归一化后的Y轴位置。
+   * 取值范围：[0,1]。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionY: double;
+}
+/**
+ * 描述原始触控板事件。该事件独立于触摸、鼠标、轴事件和系统手势事件。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare abstract class TouchPadEvent {
+  /**
+   * 事件时间戳，表示事件发生时距离系统启动的时间间隔。
+   * 单位为：纳秒。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  timestamp: long;
+ 
+  /**
+   * 事件的输入源。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  source: SourceType;
+ 
+  /**
+   * 事件的输入工具。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sourceTool: SourceTool;
+ 
+  /**
+   * 触发事件的触控板设备ID。
+   * 取值应≥0。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceId: int;
+ 
+  /**
+   * 光标在当前应用屏幕坐标系中的X坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayX: double;
+ 
+  /**
+   * 光标在当前应用屏幕坐标系中的Y坐标。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayY: double;
+ 
+  /**
+   * 光标在当前应用窗口坐标系中的X坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowX: double;
+ 
+  /**
+   * 光标在当前应用窗口坐标系中的Y坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowY: double;
+ 
+  /**
+   * 光标在事件响应组件坐标系中的X坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  x: double;
+ 
+  /**
+   * 光标在事件响应组件坐标系中的Y坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  y: double;
+ 
+  /**
+   * 光标在全局坐标系中的X坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayX: double;
+ 
+  /**
+   * 光标在全局坐标系中的Y坐标。
+   * 单位为：vp。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayY: double;
+
+  /**
+   * 触摸板的宽度。
+   * 单位为：mm。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceWidth: double;
+
+  /**
+   * 触摸板的高度。
+   * 单位为：mm。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceHeight: double;
+ 
+  /**
+   * 当前事件上报的全部触点。触点数量取决于硬件能力，对外接口不设置固定上限。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  contacts: TouchPadEventContact[];
+ 
+  /**
+   * 本次发生变化并触发事件的触点信息。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  changedContact: TouchPadEventContact;
+
+  /**
+   * 触发事件的元素对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  target: EventTarget;
+ 
+  /**
+   * 事件发生的屏幕ID。
+   * 取值应≥0。默认值：**0**。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  targetDisplayId?: int;
+ 
+  /**
+   * 获取功能键按压状态。支持Ctrl、Alt和Shift功能键。
+   *
+   * @param { Array<string> } keys - 功能键列表。
+   * @returns { boolean } 功能键按压状态。所有指定功能键均被按下时返回true，否则返回false。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getModifierKeyState(keys: Array<string>): boolean;
+ 
+  /**
+   * 停止当前触控板事件在ArkUI节点事件链中的传播。该操作不影响触摸、鼠标、轴事件或系统手势事件。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  stopPropagation(): void;
+}
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -21700,6 +21983,32 @@ declare class CommonMethod<T> {
    * @since 7 dynamic
    */
   onTouch(event: (event: TouchEvent) => void): T;
+
+  /**
+   * 上报原始触控板事件时触发。
+   *
+   * @param { Callback<TouchPadEvent> | undefined } event - Callback used to return ${TouchPadEvent}. Passing
+   *     **undefined** unregisters the callback.
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEvent(event: Callback<TouchPadEvent> | undefined): T;
+
+  /**
+   * 绑定触控板事件命中测试的拦截回调。返回的[HitTestMode]{@link HitTestMode}决定组件在当前触控板事件链中的
+   * 命中测试行为，不影响触摸、鼠标、轴事件或系统手势事件链。
+   *
+   * @param { Callback<TouchPadEvent, HitTestMode> | undefined } callback - 回调函数，返回${TouchPadEvent}。传入**undefined**表示取消注册回调。
+   * @returns { T } 返回当前组件。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEventIntercept(callback: Callback<TouchPadEvent, HitTestMode> | undefined): T;
 
   /**
    * 绑定该方法的组件获焦后，按键动作触发该回调。

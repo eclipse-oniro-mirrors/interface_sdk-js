@@ -6811,6 +6811,56 @@ declare enum ImmersiveStrategy {
 }
 
 /**
+ * 定义触控板事件的阶段。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare enum TouchPadEventPhase {
+  /**
+   * 触点开始接触。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  BEGIN = 0,
+ 
+  /**
+   * 触点移动。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  MOVE = 1,
+ 
+  /**
+   * 触点结束接触。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  END = 2,
+ 
+  /**
+   * 触点事件取消。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  CANCEL = 3
+}
+
+/**
  * 阴影不填充时的裁切方式。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
