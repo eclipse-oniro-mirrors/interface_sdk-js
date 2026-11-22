@@ -6285,6 +6285,18 @@ export class UIContext {
   static setResourceManagerCacheMaxCountForHSP(count: number): void;
 
   /**
+   * 设置应用级是否上报原始触控板事件。
+   *
+   * @param { boolean } enabled - 是否使能应用级原始触控板事件上报。true表示使能，false表示禁用。
+   *     <br>默认值：false。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  static enableTouchPadEvent(enabled: boolean): void;
+
+  /**
    * 获取UI实例对象唯一标识，多实例场景下，开发者可使用此唯一标识区分多个UI实例对象，便于管理。
    *
    * @returns { number } 后端实例的唯一标识。取值范围为[-1, +∞)。

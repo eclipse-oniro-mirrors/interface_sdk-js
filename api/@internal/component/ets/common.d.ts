@@ -7414,7 +7414,17 @@ declare enum SourceType {
    * @atomicservice
    * @since 22 dynamic
    */
-  JOYSTICK = 5
+  JOYSTICK = 5,
+ 
+  /**
+   * Raw contact input from a touchpad.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  TOUCHPAD_TOUCH = 6
 }
 
 /**
@@ -11199,6 +11209,286 @@ declare interface TouchEvent extends BaseEvent {
    * @since 24 dynamic
    */
   eventHandleId?: number;
+}
+
+/**
+ * Describes a contact in a raw touchpad event.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare interface TouchPadEventContact {
+  /**
+   * Unique identifier of the contact. The identifier remains unchanged from the beginning until the end or
+   * cancellation of the contact.
+   * The value should be an integer.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  id: int;
+ 
+  /**
+   * Phase of the contact.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  phase: TouchPadEventPhase;
+ 
+  /**
+   * X coordinate of the contact normalized to the logical coordinate range of the touchpad.
+   * Value range: [0,1].
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionX: double;
+ 
+  /**
+   * Y coordinate of the contact normalized to the logical coordinate range of the touchpad.
+   * Value range: [0,1].
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  positionY: double;
+}
+/**
+ * Describes a raw touchpad event. The event is independent of touch, mouse, axis, and system gesture events.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @atomicservice
+ * @since 26.1.0 dynamic
+ */
+declare abstract class TouchPadEvent {
+  /**
+   * Timestamp of the event, representing the interval from system startup to event occurrence.
+   * Unit: ns.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  timestamp: long;
+ 
+  /**
+   * Input source of the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  source: SourceType;
+ 
+  /**
+   * Input tool of the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sourceTool: SourceTool;
+ 
+  /**
+   * ID of the touchpad that triggers the event.
+   * The value must be greater than or equal to 0.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceId: int;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the current application screen.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the current application screen.
+   * Unit: vp.
+   * .
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  displayY: double;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the current application window.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the current application window.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  windowY: double;
+ 
+  /**
+   * X coordinate of the cursor in the coordinate system of the event-responsive component.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  x: double;
+ 
+  /**
+   * Y coordinate of the cursor in the coordinate system of the event-responsive component.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  y: double;
+ 
+  /**
+   * X coordinate of the cursor in the global coordinate system.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayX: double;
+ 
+  /**
+   * Y coordinate of the cursor in the global coordinate system.
+   * Unit: vp.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  globalDisplayY: double;
+
+  /**
+   * Width of the touchpad. The unit is mm.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceWidth: double;
+ 
+  /**
+   * Height of the touchpad. The unit is mm.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  deviceHeight: double;
+ 
+  /**
+   * All contacts reported for the event. The number of contacts depends on the hardware capability and has no fixed
+   * public upper limit.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  contacts: TouchPadEventContact[];
+ 
+  /**
+   * Contact that changed and triggered the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  changedContact: TouchPadEventContact;
+
+  /**
+   * Object that triggers the event.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  target: EventTarget;
+ 
+  /**
+   * ID of the screen where the event occurs.
+   * The value must be greater than or equal to 0. Default value: **0**.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  targetDisplayId?: int;
+ 
+  /**
+   * Obtains the pressed status of modifier keys. The Ctrl, Alt, and Shift keys are supported.
+   *
+   * @param { Array<string> } keys - Modifier key list.
+   * @returns { boolean } Pressed status of modifier keys. Returns **true** if all specified modifier keys are pressed;
+   *     returns **false** otherwise.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  getModifierKeyState(keys: Array<string>): boolean;
+ 
+  /**
+   * Stops propagation of the current touchpad event in the ArkUI node event chain. This operation does not
+   * affect touch, mouse, axis, or system gesture events.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  stopPropagation(): void;
 }
 
 /**
@@ -21991,6 +22281,34 @@ declare class CommonMethod<T> {
    * @since 7 dynamic
    */
   onTouch(event: (event: TouchEvent) => void): T;
+
+   /**
+   * Invoked when a raw touchpad event is reported.
+   *
+   * @param { Callback<TouchPadEvent> | undefined } event - Callback used to return ${TouchPadEvent}. Passing
+   *     **undefined** unregisters the callback.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEvent(event: Callback<TouchPadEvent> | undefined): T;
+
+  /**
+   * Binds an interception callback for touchpad event hit testing. The returned [HitTestMode]{@link HitTestMode}
+   * determines the hit test behavior of the component for the current touchpad event chain and does not affect
+   * touch, mouse, axis, or system gesture event chains.
+   *
+   * @param { Callback<TouchPadEvent, HitTestMode> | undefined } callback - Callback used to return ${TouchPadEvent}.
+   *     Passing **undefined** unregisters the callback.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  onTouchPadEventIntercept(callback: Callback<TouchPadEvent, HitTestMode> | undefined): T;
 
   /**
    * After the component bound to this API obtains focus, a key action triggers this callback. The **onKeyEvent** event
