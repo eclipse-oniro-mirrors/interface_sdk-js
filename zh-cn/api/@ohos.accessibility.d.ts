@@ -220,7 +220,7 @@ declare namespace accessibility {
    * 如需获取系统内辅助应用信息，推荐使用
    * [accessibility.getAccessibilityExtensionListSync]{@link accessibility.getAccessibilityExtensionListSync}。
    *
-   * @returns { boolean } 表示当前系统内是否有辅助应用开启。true表示启用了一个或多个辅助应用，false表示未启用任何辅助应用。
+   * @returns { boolean } 表示当前系统内是否有辅助应用开启。true表示启用了一个或多个辅助应用，false表示未启用任何辅助应用。<!--RP3--><!--RP3End-->
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @crossplatform [since 20]
    * @form [since 23]
