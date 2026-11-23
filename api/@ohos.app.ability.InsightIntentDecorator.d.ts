@@ -384,7 +384,7 @@ declare interface PageIntentDecoratorInfo extends IntentDecoratorInfo {
   pagePath: string;
 
   /**
-   * ID of the [NavDestination组件]{@link ./@internal/component/ets/navigation:NavigationAttribute}
+   * ID of the [NavDestination]{@link ./@internal/component/ets/navigation:NavigationAttribute}
    * component bound to the intent.
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
