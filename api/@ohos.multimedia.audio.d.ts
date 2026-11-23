@@ -187,6 +187,7 @@ declare namespace audio {
    *     is null or the parameter type is incorrect.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    */
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer>): void;
@@ -205,6 +206,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
    * @crossplatform
+   * @atomicservice [since 23]
    * @since 23 static
    */
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer | null>): void;
@@ -221,6 +223,7 @@ declare namespace audio {
    *     <br>Error code 6800101: indicates that a mandatory parameter is null or the parameter type is incorrect.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    */
   function createAudioCapturer(options: AudioCapturerOptions): Promise<AudioCapturer>;
@@ -238,6 +241,7 @@ declare namespace audio {
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @stagemodelonly
    * @crossplatform
+   * @atomicservice [since 23]
    * @since 23 static
    */
   function createAudioCapturer(options: AudioCapturerOptions): Promise<AudioCapturer | null>;
@@ -1346,6 +1350,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1364,6 +1369,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1373,6 +1379,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1384,6 +1391,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1395,6 +1403,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1406,6 +1415,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -1417,6 +1427,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1426,6 +1437,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1435,6 +1447,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1444,6 +1457,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1453,6 +1467,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1462,6 +1477,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1471,6 +1487,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1480,6 +1497,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1489,6 +1507,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1498,6 +1517,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1507,6 +1527,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1516,6 +1537,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1525,6 +1547,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1534,6 +1557,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -1545,6 +1569,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -1554,6 +1579,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1563,6 +1589,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1572,6 +1599,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1581,6 +1609,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1590,6 +1619,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1599,6 +1629,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1608,6 +1639,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1617,6 +1649,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1626,6 +1659,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1635,6 +1669,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1643,6 +1678,7 @@ declare namespace audio {
      * The sampling rate is 88200.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 23]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1652,6 +1688,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -1660,6 +1697,7 @@ declare namespace audio {
      * The sampling rate is 176400.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 23]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -1668,6 +1706,7 @@ declare namespace audio {
      * The sampling rate is 192000.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
+     * @atomicservice [since 23]
      * @since 12 dynamic
      * @since 23 static
      */
@@ -2115,6 +2154,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -2125,6 +2165,7 @@ declare namespace audio {
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @FaAndStageModel [since 26.0.0]
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2134,6 +2175,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2143,6 +2185,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2152,6 +2195,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -2161,6 +2205,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      * @since 23 static
      */
@@ -12345,6 +12390,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12362,6 +12408,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12371,6 +12418,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 9 dynamic
      * @since 23 static
      */
@@ -12412,6 +12460,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12551,6 +12600,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12560,6 +12610,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12571,6 +12622,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12582,6 +12634,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12591,6 +12644,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12600,6 +12654,7 @@ declare namespace audio {
      *
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12855,6 +12910,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Capturer
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 8 dynamic
    * @since 23 static
    */
@@ -12978,6 +13034,7 @@ declare namespace audio {
      *     failure, and abnormal system processing. For details, see system logs.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -12991,6 +13048,7 @@ declare namespace audio {
      *     details, see system logs.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13105,6 +13163,7 @@ declare namespace audio {
      *     **err** is **undefined**; otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13115,6 +13174,7 @@ declare namespace audio {
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13127,6 +13187,7 @@ declare namespace audio {
      *     **err** is **undefined**; otherwise, **err** is an error object.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13137,6 +13198,7 @@ declare namespace audio {
      * @returns { Promise<void> } Promise that returns no value.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 8 dynamic
      * @since 23 static
      */
@@ -13586,6 +13648,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      */
     on(type: 'readData', callback: Callback<ArrayBuffer>): void;
@@ -13613,6 +13676,7 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
+     * @atomicservice [since 23]
      * @since 11 dynamic
      */
     off(type: 'readData', callback?: Callback<ArrayBuffer>): void;
@@ -14774,6 +14838,7 @@ declare namespace audio {
    *
    * @syscap SystemCapability.Multimedia.Audio.Core
    * @crossplatform [since 12]
+   * @atomicservice [since 23]
    * @since 11 dynamic
    * @since 23 static
    */
