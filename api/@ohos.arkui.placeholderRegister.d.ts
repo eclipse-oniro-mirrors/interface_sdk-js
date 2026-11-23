@@ -109,8 +109,8 @@ export class PlaceholderRegister {
    *     the template by this ID.
    * @param { WrappedBuilder<[]> } builder - Global parameterless placeholder builder wrapped
    *     through **wrapBuilder**; a bare builder function is not accepted.
-   * @throws { BusinessError } 100031 - Registration rejected: the builder is not marked with
-   *     **@Builder({ isPlaceholder: true })**. The ID is not registered.
+   * @throws { BusinessError } 100031 - Registration rejected:
+   *     the builder is not marked with @Builder({ isPlaceholder: true }). The ID is not registered.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
