@@ -27,29 +27,21 @@ import { LocalStorage } from '@ohos.arkui.stateManagement';
 /*** endif */
 
 /**
- * 标准悬浮窗是悬浮在桌面/应用界面上的小型窗口，提供灵活的窗口管理能力。
+ * 闪控窗是悬浮在桌面/应用界面上的小型窗口，提供灵活的窗口管理能力。
  *
- * 本模块提供标准悬浮窗能力，包括判断设备是否支持标准悬浮窗功能、创建标准悬浮窗控制器以启动、更新或停止标准悬浮窗等。
+ * 本模块提供闪控窗能力，包括判断设备是否支持闪控窗功能、创建闪控窗控制器以启动、更新或停止闪控窗等。
  *
  * **适用场景：**
  *
- * 标准悬浮窗适用于需要在独立小窗口中持续展示应用内容或提供快捷操作的场景。例如：
+ * 闪控窗适用于需要在独立小窗口中持续展示应用内容或提供快捷操作的场景。例如：
  *
- * - 股市盯盘应用：用户在浏览其他应用时，通过标准悬浮窗实时查看股票行情变化，无需频繁切换应用。
- * - 手机直播应用：主播在直播过程中使用标准悬浮窗展示自定义的互动面板或控制界面，方便实时操作和互动。
+ * - 股市盯盘应用：用户在浏览其他应用时，通过闪控窗实时查看股票行情变化，无需频繁切换应用。
+ * - 手机直播应用：主播在直播过程中使用闪控窗展示自定义的互动面板或控制界面，方便实时操作和互动。
  *
- * **与闪控球联动：**
- *
- * 本模块可与[@ohos.window.floatingBall]{@link @ohos.window.floatingBall:floatingBall}（闪控球）联合使用。通过
- * [floatView.bind]{@link floatView.bind}接口将标准悬浮窗控制器与闪控球控制器绑定后，用户点击闪控球可展开为标准悬浮窗，点击标准悬浮窗左上角的缩小按钮可收起为闪控球，实现两种窗口形态的相互切换。
- *
- * **全局悬浮窗和标准悬浮窗对比**
- *
- * - 共同点：全局悬浮窗和标准悬浮窗均为一种特殊的应用辅助窗口，具备在应用主窗口和对应Ability退至后台后仍然可以在前台显示的能力。可以用于应用退至后台后，使用其继续显示UI。
- * - 区别：
- *  - 全局悬浮窗由开发者管理并实现UI绘制，无统一UI及动效。
- *  - 标准悬浮窗由系统管理并统一绘制UI，动效更为高端精致。
- *  - 标准悬浮窗支持与[闪控球]{@link @ohos.window.floatingBall:floatingBall}互相绑定联合使用，实现更复杂场景。
+ * **相关比对**：
+ * [闪控球和闪控窗的对比](docroot://windowmanager/window-type-overview.md#闪控球和闪控窗的对比)
+ * 、
+ * [全局悬浮窗和闪控窗的对比](docroot://windowmanager/window-type-overview.md#全局悬浮窗和闪控窗的对比)
  *
  * > **说明：**
  * >
@@ -64,9 +56,9 @@ import { LocalStorage } from '@ohos.arkui.stateManagement';
  */
 declare namespace floatView {
   /**
-   * 判断当前设备是否支持标准悬浮窗功能。
+   * 判断当前设备是否支持闪控窗功能。
    *
-   * @returns { boolean } 当前设备是否支持标准悬浮窗功能。true表示支持，false则表示不支持。
+   * @returns { boolean } 当前设备是否支持闪控窗功能。true表示支持，false则表示不支持。
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -74,11 +66,10 @@ declare namespace floatView {
   function isFloatViewEnabled(): boolean;
 
   /**
-   * 创建标准悬浮窗控制器。使用Promise异步回调。
+   * 创建闪控窗控制器。使用Promise异步回调。
    *
-   * @param { FloatViewConfiguration } config - 创建标准悬浮窗控制器的参数。该参数以及构造该参数的context不能为null或者undefined，否则抛出401。其他参数异常情况抛出130
-   *     0016。
-   * @returns { Promise<FloatViewController> } Promise对象。返回当前创建的标准悬浮窗控制器。
+   * @param { FloatViewConfiguration } config - 创建闪控窗控制器的参数。该参数及其context字段不能为null或者undefined，否则抛出401。其他参数异常情况抛出1300016。
+   * @returns { Promise<FloatViewController> } Promise对象。返回当前创建的闪控窗控制器。
    * @throws { BusinessError } 801 - Capability not supported. Possible cause: Call the API on unsupported device.
    * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
    *     1. This window context is abnormal.
@@ -92,24 +83,24 @@ declare namespace floatView {
   function create(config: FloatViewConfiguration): Promise<FloatViewController>;
 
   /**
-   * 绑定标准悬浮窗和闪控球。需要先创建[标准悬浮窗控制器]{@link floatView.FloatViewController}和
+   * 绑定闪控窗和闪控球。需要先创建[闪控窗控制器]{@link floatView.FloatViewController}和
    * [闪控球控制器]{@link @ohos.window.floatingBall:floatingBall.FloatingBallController}，且均未启动。使用Promise异步回调。
    *
    * > **说明：**
    * >
    * > - 绑定成功后，调用[start()]{@link floatView.FloatViewController.start}或
    * > [startFloatingBall()]{@link @ohos.window.floatingBall:floatingBall.FloatingBallController.startFloatingBall}均会同时创
-   * > 建标准悬浮窗窗口和闪控球窗口，并触发对应窗口已注册的状态回调。但同一时刻仅展示其中一个窗口，展示顺序取决于先调用哪个控制器的启动接口。
+   * > 建闪控窗窗口和闪控球窗口，并触发对应窗口已注册的状态回调。但同一时刻仅展示其中一个窗口，展示顺序取决于先调用哪个控制器的启动接口。
    * >
-   * > - 绑定成功后，用户可通过点击操作在标准悬浮窗窗口与闪控球之间进行切换。
+   * > - 绑定成功后，用户可通过点击操作在闪控窗窗口与闪控球之间进行切换。
    * >
    * > - 绑定成功后，调用任一控制器的停止接口（[stop()]{@link floatView.FloatViewController.stop}或
    * > [stopFloatingBall()]{@link @ohos.window.floatingBall:floatingBall.FloatingBallController.stopFloatingBall}）会同时销毁标
    * > 准悬浮窗窗口和闪控球窗口，并触发对应窗口已注册的状态回调。
    *
    * @permission ohos.permission.USE_FLOAT_BALL and ohos.permission.FLOAT_VIEW
-   * @param { FloatViewController } floatViewController - 标准悬浮窗控制器。
-   * @param { floatingBall.FloatingBallController } floatingBallController - 闪控球控制器。
+   * @param { FloatViewController } floatViewController - 闪控窗控制器，用于管理闪控窗的启动、停止和状态监听等操作。
+   * @param { floatingBall.FloatingBallController } floatingBallController - 闪控球控制器，用于管理闪控球的启动、停止和状态监听等操作。
    * @param { floatingBall.FloatingBallParams } floatingBallParams - 闪控球参数。绑定时设置的参数会覆盖掉闪控球控制器启动时已保存的参数。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. Possible cause:
@@ -132,11 +123,11 @@ declare namespace floatView {
     floatingBallParams: floatingBall.FloatingBallParams): Promise<void>;
 
   /**
-   * 解绑标准悬浮窗和闪控球。需要在[标准悬浮窗控制器]{@link floatView.FloatViewController}和
+   * 解绑闪控窗和闪控球。需要在[闪控窗控制器]{@link floatView.FloatViewController}和
    * [闪控球控制器]{@link @ohos.window.floatingBall:floatingBall.FloatingBallController}均停止后才可解绑。使用Promise异步回调。
    *
-   * @param { FloatViewController } floatViewController - 标准悬浮窗控制器。
-   * @param { floatingBall.FloatingBallController } floatingBallController - 闪控球控制器。
+   * @param { FloatViewController } floatViewController - 闪控窗控制器，用于管理闪控窗的启动、停止和状态监听等操作。
+   * @param { floatingBall.FloatingBallController } floatingBallController - 闪控球控制器，用于管理闪控球的启动、停止和状态监听等操作。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 801 - Capability not supported on this device. Possible cause:
    *     Call api on unsupported device.
@@ -155,10 +146,10 @@ declare namespace floatView {
     floatingBallController: floatingBall.FloatingBallController): Promise<void>;
 
   /**
-   * 根据传入的模板类型获取对应标准悬浮窗窗口的限制，单位为px。
+   * 根据传入的模板类型获取对应闪控窗窗口的限制，单位为px。
    *
-   * @param { FloatViewTemplateType } templateType - 标准悬浮窗模板类型。
-   * @returns { FloatViewLimits } 返回标准悬浮窗窗口的限制，包括最大尺寸、最小尺寸和宽高比的限制范围。
+   * @param { FloatViewTemplateType } templateType - 闪控窗模板类型。
+   * @returns { FloatViewLimits } 返回闪控窗窗口的限制，包括最大尺寸、最小尺寸和宽高比的限制范围。
    * @throws { BusinessError } 801 - Capability not supported. Possible cause:
    *     Call the API on unsupported device.
    * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -173,7 +164,7 @@ declare namespace floatView {
   function getFloatViewLimits(templateType: FloatViewTemplateType): FloatViewLimits;
 
   /**
-   * 创建标准悬浮窗控制器时需要提供的参数配置。
+   * 创建闪控窗控制器时需要提供的参数配置。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -181,7 +172,7 @@ declare namespace floatView {
    */
   interface FloatViewConfiguration {
     /**
-     * 表示上下文环境。
+     * 表示上下文环境，用于创建闪控窗控制器时关联的应用主窗口。必须传入有效的UIAbilityContext实例。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -190,7 +181,7 @@ declare namespace floatView {
     context: BaseContext;
 
     /**
-     * 标准悬浮窗的模板类型。
+     * 闪控窗的模板类型。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -199,8 +190,7 @@ declare namespace floatView {
     templateType: FloatViewTemplateType;
 
     /**
-     * 控制关闭窗口时是否弹出确认对话框.如果为 true，则点击关闭按钮时需要用户确认；如果为 false，则不需要确认，直接关闭。
-     * 默认值： 默认值为false。
+     * 点击关闭按钮时是否需要用户确认。true表示点击关闭按钮时需要用户确认，否则不需要确认。默认值为false。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -210,7 +200,7 @@ declare namespace floatView {
   }
 
   /**
-   * 切换悬浮窗模板并修改窗口尺寸时需要提供的参数配置。
+   * 切换闪控窗模板并修改窗口尺寸时需要提供的参数配置。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -218,7 +208,7 @@ declare namespace floatView {
    */
   interface TemplateProperty {
     /**
-     * 标准悬浮窗的模板类型。
+     * 闪控窗的模板类型。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -237,9 +227,9 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗控制器实例。用于启动、停止标准悬浮窗以及注册回调等操作。
+   * 闪控窗控制器实例。用于启动、停止闪控窗以及注册回调等操作。
    *
-   * 下列API示例中都需先使用[floatView.create()]{@link floatView.create}方法获取到标准悬浮窗控制器实例（即floatViewController），再通过此实例调用对应方法。
+   * 下列API示例中都需先使用[floatView.create()]{@link floatView.create}方法获取到闪控窗控制器实例（即floatViewController），再通过此实例调用对应方法。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -248,9 +238,14 @@ declare namespace floatView {
   interface FloatViewController {
 
     /**
-     * 根据当前工程中指定的页面路径为标准悬浮窗加载具体页面内容，通过LocalStorage传递状态属性至加载页面。使用Promise异步回调。
+     * 根据当前工程中指定的页面路径为闪控窗加载具体页面内容，通过LocalStorage传递状态属性至加载页面。使用Promise异步回调。
+     * 
+     * 建议在闪控窗启动前使用该接口，重复调用将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
+     * 
+     * 本接口不支持加载跨包页面，若有需要请使用[setUIContextByName()]{@link floatView.FloatViewController.setUIContextByName}接口。
      *
-     * @param { string } path - 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。不支持相对路径写法，需与main_pages.json中的src取值保持一致。
+     * @param { string } path - 要加载到窗口中的页面内容的路径，该路径需添加到工程的main_pages.json文件中。不支持相对路径写法，需与main_pages.json中的src取值保持一致。若路劲无
+     *     效或不满足上述要求，将抛出错误码1300016。
      * @param { LocalStorage } [storage] - 页面级UI状态存储单元，用于为加载到窗口的页面内容传递状态属性。默认值为空。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -263,9 +258,10 @@ declare namespace floatView {
     setUIContext(path: string, storage?: LocalStorage): Promise<void>;
 
     /**
-     * 根据指定路由页面名称为当前窗口加载[命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。
+     * 根据指定路由页面名称为当前窗口加载
+     * [命名路由](docroot://ui/arkts-routing.md#命名路由)页面，通过LocalStorage传递状态属性至加载页面，使用Promise异步回调。建议在闪控窗启动前使用该接口，重复调用将先销毁旧的页面内容（即UIContent）再加载新的页面内容，请谨慎使用。
      *
-     * @param { string } name - 命名路由页面的名称。
+     * @param { string } name - 命名路由页面的名称，用于加载指定的命名路由页面内容。需与@Entyry装饰器中的routeName参数指定的名称一致。
      * @param { LocalStorage } [storage] - 页面级UI状态存储单元，用于为加载到窗口的页面内容传递状态属性。默认值为空。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -278,11 +274,12 @@ declare namespace floatView {
     setUIContextByName(name: string, storage?: LocalStorage): Promise<void>;
 
     /**
-     * 设置标准悬浮窗窗口大小。建议先调用[getFloatViewLimits]{@link floatView.getFloatViewLimits}接口获取推荐的宽高范围和宽高比范围，再根据推荐值调用本接口。窗口实际大小变化可通
+     * 设置闪控窗窗口大小。建议先调用[getFloatViewLimits]{@link floatView.getFloatViewLimits}接口获取推荐的宽高范围和宽高比范围，再根据推荐值调用本接口。窗口实际大小变化可通
      * 过[onRectChange]{@link floatView.FloatViewController.onRectChange(callback: Callback<FloatViewRectChangeInfo>)}接口监
      * 听。使用Promise异步回调。
      *
-     * @param { window.Size } size - 表示窗口的大小。建议大小满足[getFloatViewLimits]{@link floatView.getFloatViewLimits}接口返回的限制。
+     * @param { window.Size } size - 表示窗口的大小，单位为px，宽度和高度必须大于0，超出有效范围抛出错误码1300016。建议大小满足
+     * [getFloatViewLimits]{@link floatView.getFloatViewLimits}接口返回的限制。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
@@ -297,12 +294,11 @@ declare namespace floatView {
     setWindowSize(size: window.Size): Promise<void>;
 
     /**
-     * 切换标准悬浮窗的模板并改变其窗口尺寸。建议先调用[getFloatViewLimits]{@link floatView.getFloatViewLimits}接口获取目标模板类型推荐的宽高范围和宽高比范围，再根据推荐值调用本
-     * 接口。窗口实际大小变化可通过
-     * [onRectChange]{@link floatView.FloatViewController.onRectChange(callback: Callback<FloatViewRectChangeInfo>)}接口监听
-     * 。使用Promise异步回调。
+     * 切换闪控窗的模板并改变其窗口尺寸。建议先调用[getFloatViewLimits]{@link floatView.getFloatViewLimits}接口获取目标模板类型推荐的宽高范围和宽高比范围，再根据推荐值调用本接
+     * 口。窗口实际大小变化可通过
+     * [onRectChange]{@link floatView.FloatViewController.onRectChange(callback: Callback<FloatViewRectChangeInfo>)}接口监听。使用Promise异步回调。
      *
-     * @param { TemplateProperty } templateProperty - 表示需要切换的窗口模板类型及大小。建议大小满足
+     * @param { TemplateProperty } templateProperty - 表示需要切换的窗口模板类型及大小。size中的宽度和高度必须大于0，超出有效范围抛出错误码1300016。建议大小满足
      *     [getFloatViewLimits]{@link floatView.getFloatViewLimits}接口返回的限制。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
@@ -319,7 +315,7 @@ declare namespace floatView {
     switchTemplate(templateProperty: TemplateProperty): Promise<void>;
 
     /**
-     * 启动标准悬浮窗窗口。接口返回不表示start流程结束，需要通过
+     * 启动闪控窗窗口。接口返回不表示start流程结束，需要通过
      * [onStateChange]{@link floatView.FloatViewController.onStateChange(callback: Callback<FloatViewStateChangeInfo>)}接
      * 口监听到STARTED回调时判断启动成功。建议在调用[setUIContext()]{@link floatView.FloatViewController.setUIContext}或
      * [setUIContextByName()]{@link floatView.FloatViewController.setUIContextByName}后调用start()。使用Promise异步回调。
@@ -348,7 +344,7 @@ declare namespace floatView {
     start(): Promise<void>;
 
     /**
-     * 停止标准悬浮窗窗口。接口返回不表示stop流程结束，需要通过
+     * 停止闪控窗窗口。接口返回不表示stop流程结束，需要通过
      * [onStateChange]{@link floatView.FloatViewController.onStateChange(callback: Callback<FloatViewStateChangeInfo>)}接
      * 口监听到STOPPED回调时判断停止成功。使用Promise异步回调。
      *
@@ -368,11 +364,11 @@ declare namespace floatView {
     stop(): Promise<void>;
 
     /**
-     * 设置应用在前台时标准悬浮窗窗口是否可见。使用Promise异步回调。
+     * 设置应用在前台时闪控窗窗口是否可见。使用Promise异步回调。
      *
-     * 创建标准悬浮窗后未调用此接口前，默认其在应用处于前台时为可见状态。
+     * 创建闪控窗后未调用此接口前，默认其在应用处于前台时为可见状态。
      *
-     * @param { boolean } isVisible - 应用在前台时标准悬浮窗是否可见，true表示可见，false表示不可见。
+     * @param { boolean } isVisible - 应用在前台时闪控窗是否可见，true表示可见，false表示不可见。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
@@ -385,12 +381,12 @@ declare namespace floatView {
     setFloatViewVisibilityInApp(isVisible: boolean): Promise<void>;
 
     /**
-     * 恢复标准悬浮窗的主窗口到前台显示。如果主窗口已处于前台时调用，将抬升主窗口层级。此接口只能在标准悬浮窗窗口被点击后使用。当主窗口处于PAUSED生命周期或处于多任务状态时，调用接口将抛出错误码1300032。使用Promise
-     * 异步回调。
+     * 恢复闪控窗的主窗口到前台显示。如果主窗口已处于前台时调用，将抬升主窗口层级。此接口要求闪控窗处于STARTED状态，且只能在用户点击后调用。当主窗口处于PAUSED生命周期或处于多任务状态时，调用接口将抛出错误码13
+     * 00032。使用Promise异步回调。
      *
-     * @param { Record<string, Object> } [wantParameters] - 恢复标准悬浮窗的主窗口时会给主窗口传递的自定义参数，主窗口会在触发
+     * @param { Record<string, Object> } [wantParameters] - 恢复闪控窗的主窗口时会给主窗口传递的自定义参数，主窗口会在触发
      *     [onNewWant]{@link @ohos.app.ability.AbilityLifecycleCallback:AbilityLifecycleCallback#onNewWant?(ability: UIAbility)}
-     *     回调时收到。默认值为空，代表不向主窗传入任何自定义参数。
+     *     回调时收到。默认值为空，代表不向主窗口传入任何自定义参数。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
@@ -410,9 +406,9 @@ declare namespace floatView {
     restoreMainWindow(wantParameters?: Record<string, Object>): Promise<void>;
 
     /**
-     * 获取标准悬浮窗窗口的属性。
+     * 获取闪控窗窗口的属性。
      *
-     * @returns { FloatViewProperties } 返回标准悬浮窗窗口的属性。
+     * @returns { FloatViewProperties } 返回闪控窗窗口的属性。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
      * @throws { BusinessError } 1300031 - This operation is not supported on the float view in the current state.
@@ -424,9 +420,9 @@ declare namespace floatView {
     getWindowProperties(): FloatViewProperties;
 
     /**
-     * 注册标准悬浮窗状态变化的监听事件。不再使用时，取消监听以避免内存泄漏。
+     * 注册闪控窗状态变化的监听事件。不再使用时，取消监听以避免内存泄漏。
      *
-     * @param { Callback<FloatViewStateChangeInfo> } callback - 回调函数。返回当前的标准悬浮窗状态变化信息。
+     * @param { Callback<FloatViewStateChangeInfo> } callback - 回调函数。返回当前的闪控窗状态变化信息。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
      * @throws { BusinessError } 1300030 - Repeated operations on the float view. Possible cause:
@@ -438,9 +434,9 @@ declare namespace floatView {
     onStateChange(callback: Callback<FloatViewStateChangeInfo>): void;
 
     /**
-     * 取消标准悬浮窗状态变化的监听事件。
+     * 取消闪控窗状态变化的监听事件。
      *
-     * @param { Callback<FloatViewStateChangeInfo> } [callback] - 回调函数。返回当前的标准悬浮窗状态变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有标准悬浮窗状态
+     * @param { Callback<FloatViewStateChangeInfo> } [callback] - 回调函数。返回当前的闪控窗状态变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有闪控窗状态
      *     变化的监听。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
@@ -451,9 +447,9 @@ declare namespace floatView {
     offStateChange(callback?: Callback<FloatViewStateChangeInfo>): void;
 
     /**
-     * 注册标准悬浮窗矩形区域（位置和大小）变化的监听事件。不再使用时，取消监听以避免内存泄漏。
+     * 注册闪控窗矩形区域（位置和大小）变化的监听事件。不再使用时，取消监听以避免内存泄漏。
      *
-     * @param { Callback<FloatViewRectChangeInfo> } callback - 回调函数。返回当前的标准悬浮窗矩形区域变化信息。
+     * @param { Callback<FloatViewRectChangeInfo> } callback - 回调函数。返回当前的闪控窗矩形区域变化信息。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
      * @throws { BusinessError } 1300030 - Repeated operations on the float view. Possible cause:
@@ -465,9 +461,9 @@ declare namespace floatView {
     onRectChange(callback: Callback<FloatViewRectChangeInfo>): void;
 
     /**
-     * 取消标准悬浮窗矩形区域变化的监听事件。
+     * 取消闪控窗矩形区域变化的监听事件。
      *
-     * @param { Callback<FloatViewRectChangeInfo> } [callback] - 回调函数。返回当前的标准悬浮窗矩形区域变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有标准悬浮窗矩
+     * @param { Callback<FloatViewRectChangeInfo> } [callback] - 回调函数。返回当前的闪控窗矩形区域变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有闪控窗矩
      *     形区域变化的监听。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
@@ -478,9 +474,9 @@ declare namespace floatView {
     offRectChange(callback?: Callback<FloatViewRectChangeInfo>): void;
 
     /**
-     * 注册标准悬浮窗限制变化的监听事件，当限制规格变化时触发回调，例如设备折叠或者展开。不再使用时，取消监听以避免内存泄漏。
+     * 注册闪控窗限制变化的监听事件，当限制规格变化时触发回调（例如折叠展开导致屏幕宽度变化或切换模板），触发回调并返回当前窗口模板类型的限制信息。不再使用时，取消监听以避免内存泄漏。
      *
-     * @param { Callback<FloatViewLimits> } callback - 回调函数。返回当前的标准悬浮窗限制变化信息。
+     * @param { Callback<FloatViewLimits> } callback - 回调函数。返回当前的闪控窗限制变化信息。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
      * @throws { BusinessError } 1300030 - Repeated operations on the float view. Possible cause:
@@ -492,9 +488,9 @@ declare namespace floatView {
     onLimitsChange(callback: Callback<FloatViewLimits>): void;
 
     /**
-     * 取消标准悬浮窗限制变化的监听事件。
+     * 取消闪控窗限制变化的监听事件。
      *
-     * @param { Callback<FloatViewLimits> } [callback] - 回调函数。返回当前的标准悬浮窗限制变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有标准悬浮窗限制变化的监听。
+     * @param { Callback<FloatViewLimits> } [callback] - 回调函数。返回当前的闪控窗限制变化信息。若传入参数，则停止该监听。若未传入参数，则停止所有闪控窗限制变化的监听。
      * @throws { BusinessError } 1300002 - This window state is abnormal. Possible cause:
      *     The float view controller object is null.
      * @syscap SystemCapability.Window.SessionManager
@@ -505,7 +501,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗模板类型的枚举。
+   * 闪控窗模板类型的枚举。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -532,7 +528,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗窗口的属性。
+   * 闪控窗窗口的属性。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -540,7 +536,7 @@ declare namespace floatView {
    */
   interface FloatViewProperties {
     /**
-     * 标准悬浮窗的模板类型。
+     * 闪控窗的模板类型。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -549,7 +545,7 @@ declare namespace floatView {
     templateType: FloatViewTemplateType;
 
     /**
-     * 标准悬浮窗窗口ID。
+     * 闪控窗窗口ID。
      * 取值限定为整数。
      *
      * @syscap SystemCapability.Window.SessionManager
@@ -559,7 +555,7 @@ declare namespace floatView {
     windowId: int;
 
     /**
-     * 标准悬浮窗所在屏幕ID。
+     * 闪控窗所在屏幕ID。
      * 取值限定为整数。
      *
      * @syscap SystemCapability.Window.SessionManager
@@ -569,7 +565,7 @@ declare namespace floatView {
     displayId: int;
 
     /**
-     * 标准悬浮窗窗口矩形区域。
+     * 闪控窗窗口矩形区域。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -578,7 +574,7 @@ declare namespace floatView {
     windowRect: window.Rect;
 
     /**
-     * 标准悬浮窗窗口缩放比例。
+     * 闪控窗窗口缩放比例。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -587,7 +583,7 @@ declare namespace floatView {
     windowScale: double;
 
     /**
-     * 标准悬浮窗内容的避让区域。
+     * 闪控窗内容的避让区域。
      *
      * **注意：**
      *
@@ -602,7 +598,7 @@ declare namespace floatView {
     avoidArea: window.AvoidArea;
 
     /**
-     * 标准悬浮窗是否在侧边栏中。true为在侧边栏中，false为不在侧边栏中。
+     * 闪控窗是否在侧边栏中。true为在侧边栏中，false为不在侧边栏中。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -612,7 +608,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗的宽高比限制范围。宽高比比值由窗口矩形区域的宽除以高获得。
+   * 闪控窗的宽高比限制范围。宽高比比值由窗口矩形区域的宽除以高获得。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -620,7 +616,7 @@ declare namespace floatView {
    */
   interface RatioLimit {
     /**
-     * 标准悬浮窗的宽高比最小值。
+     * 闪控窗的宽高比最小值。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -629,7 +625,7 @@ declare namespace floatView {
     minRatio: double;
 
     /**
-     * 标准悬浮窗的宽高比最大值。
+     * 闪控窗的宽高比最大值。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -639,7 +635,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗窗口的限制。
+   * 闪控窗窗口的限制。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -647,7 +643,7 @@ declare namespace floatView {
    */
   interface FloatViewLimits {
     /**
-     * 标准悬浮窗的最小尺寸。
+     * 闪控窗的最小尺寸。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -656,7 +652,7 @@ declare namespace floatView {
     minSize: window.Size;
 
     /**
-     * 标准悬浮窗的最大尺寸。
+     * 闪控窗的最大尺寸。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -665,7 +661,7 @@ declare namespace floatView {
     maxSize: window.Size;
 
     /**
-     * 标准悬浮窗的宽高比限制范围。
+     * 闪控窗的宽高比限制范围，数组中的每个元素包含minRatio（最小宽高比）和maxRatio（最大宽高比）。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -675,7 +671,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗状态变化信息。
+   * 闪控窗状态变化信息。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -683,7 +679,7 @@ declare namespace floatView {
    */
   interface FloatViewStateChangeInfo {
     /**
-     * 标准悬浮窗的状态。
+     * 闪控窗的状态。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -692,7 +688,7 @@ declare namespace floatView {
     state: FloatViewState;
 
     /**
-     * 标准悬浮窗停止的原因。该参数仅在状态为FloatViewState.STOPPED时有效，在其他状态下默认为空字符串。停止原因和对应含义如下：
+     * 闪控窗停止的原因。该参数仅在状态为FloatViewState.STOPPED时有效，在其他状态下默认为空字符串。停止原因和对应含义如下：
      *
      * "APP_STOP"：应用主动停止
      *
@@ -702,7 +698,7 @@ declare namespace floatView {
      *
      * "DUMPSTER_STOP"：拖入垃圾桶停止
      *
-     * "REPLACE_STOP"：被其他标准悬浮窗挤占
+     * "REPLACE_STOP"：被其他闪控窗挤占
      *
      * "FLOATING_BALL_STOP"：绑定状态下跟随闪控球停止
      *
@@ -716,7 +712,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗状态的枚举。
+   * 闪控窗状态的枚举。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -724,7 +720,7 @@ declare namespace floatView {
    */
   enum FloatViewState {
     /**
-     * 标准悬浮窗已启动并显示。
+     * 闪控窗已启动并显示。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -733,8 +729,8 @@ declare namespace floatView {
     STARTED = 1,
 
     /**
-     * 标准悬浮窗已隐藏。上滑进入多任务界面时触发、使用
-     * [setFloatViewVisibilityInApp]{@link floatView.FloatViewController.setFloatViewVisibilityInApp}接口设置了应用在前台时隐藏标准悬浮窗且
+     * 闪控窗已隐藏。上滑进入多任务界面时触发；或使用
+     * [setFloatViewVisibilityInApp]{@link floatView.FloatViewController.setFloatViewVisibilityInApp}接口设置了应用在前台时隐藏闪控窗后，
      * 应用处于前台时触发。
      *
      * @syscap SystemCapability.Window.SessionManager
@@ -744,7 +740,7 @@ declare namespace floatView {
     HIDDEN = 2,
 
     /**
-     * 标准悬浮窗已停止。
+     * 闪控窗已停止。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -753,7 +749,7 @@ declare namespace floatView {
     STOPPED = 3,
 
     /**
-     * 标准悬浮窗在侧边栏中。
+     * 闪控窗在侧边栏中。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -762,7 +758,7 @@ declare namespace floatView {
     IN_SIDEBAR = 4,
 
     /**
-     * 标准悬浮窗切换为闪控球。
+     * 闪控窗切换为闪控球。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -771,7 +767,7 @@ declare namespace floatView {
     IN_FLOATING_BALL = 5,
 
     /**
-     * 标准悬浮窗发生异常。
+     * 闪控窗发生异常。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -781,7 +777,7 @@ declare namespace floatView {
   }
 
   /**
-   * 标准悬浮窗矩形区域变化信息。
+   * 闪控窗矩形区域变化信息。
    *
    * @syscap SystemCapability.Window.SessionManager
    * @stagemodelonly
@@ -789,7 +785,7 @@ declare namespace floatView {
    */
   interface FloatViewRectChangeInfo {
     /**
-     * 标准悬浮窗窗口矩形区域。
+     * 闪控窗窗口矩形区域。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -798,7 +794,7 @@ declare namespace floatView {
     windowRect: window.Rect;
 
     /**
-     * 标准悬浮窗窗口缩放比例。
+     * 闪控窗窗口缩放比例。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @stagemodelonly
@@ -807,7 +803,7 @@ declare namespace floatView {
     windowScale: double;
 
     /**
-     * 标准悬浮窗矩形区域变化的原因。原因和对应含义如下：
+     * 闪控窗矩形区域变化的原因。原因和对应含义如下：
      *
      * "POSITION_CHANGE"：位置变化
      *
