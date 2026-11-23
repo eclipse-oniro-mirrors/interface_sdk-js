@@ -4939,6 +4939,33 @@ declare namespace photoAccessHelper {
      */
     HIGHLIGHT_SUGGESTIONS = 4105,
     /**
+     * 宠物相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET = 4106,
+    /**
+     * 人和宠物合影相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HUMAN_PET_GROUP_PHOTO = 4112,
+    /**
+     * 宠物和宠物合影相册。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET_GROUP_PHOTO = 4113,
+    /**
      * 共享相册。
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -5725,10 +5752,11 @@ declare namespace photoAccessHelper {
      */
     setCoverUri(uri: string): Promise<void>;
     /**
-     * 获取人像相册或合影相册的封面人脸标识。
+     * 获取人像相册或合影相册的封面人脸标识。API版本26.1.0开始，也支持宠物相册及人和宠物合影相册、宠物和宠物合影相册，返回脸部标识。
      *
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @returns { Promise<string> } Promise对象，人像相册返回tag_id，合影相册返回group_tag，未找到返回空字符串。
+     *     <br>API版本26.1.0开始，宠物相册返回tag_id，人和宠物合影相册、宠物和宠物合影相册返回group_tag。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -14119,13 +14147,13 @@ declare namespace photoAccessHelper {
     setIsMe(): void;
 
     /**
-     * 设置人像相册的显示级别。
+     * 设置人像相册的显示级别。API版本26.1.0开始，也支持设置宠物相册的显示级别。
      *
-     * @param { int } displayLevel - 设置人像相册的显示级别，
-     *     <br>0：取消该人像相册收藏；
-     *     <br>1：设置人像相册为首届面；
-     *     <br>2：设置人像相册为更多界面；
-     *     <br>3：设置人像相册为收藏界面。
+     * @param { int } displayLevel - 设置人像相册或宠物相册的显示级别，
+     *     <br>0：取消该相册收藏；
+     *     <br>1：设置该相册为首届面；
+     *     <br>2：设置该相册为更多界面；
+     *     <br>3：设置该相册为收藏界面。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -14140,7 +14168,7 @@ declare namespace photoAccessHelper {
     setDisplayLevel(displayLevel: int): void;
 
     /**
-     * 从该人像相册或合影相册中移除指定图片。
+     * 从该人像相册或合影相册中移除指定图片。API版本26.1.0开始，也支持从宠物相册及人和宠物合影相册、宠物和宠物合影相册中移除指定图片。
      *
      * @param { Array<PhotoAsset> } assets - 需要移除的文件列表。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -14158,7 +14186,7 @@ declare namespace photoAccessHelper {
     dismissAssets(assets: Array<PhotoAsset>): void;
 
     /**
-     * 将两个人像相册合并。
+     * 将两个人像相册合并。API版本26.1.0开始，也支持将两个宠物相册合并。
      *
      * @param { Album } target - 需要合并的目标相册，合并相册必须重命名。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
