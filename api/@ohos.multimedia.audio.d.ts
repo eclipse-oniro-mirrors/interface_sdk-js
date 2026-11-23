@@ -13333,7 +13333,6 @@ declare namespace audio {
      * @param { Callback<long> } callback - Callback used to return the value of the **frame** parameter.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      */
     on(type: 'markReach', frame: long, callback: Callback<long>): void;
@@ -13357,7 +13356,6 @@ declare namespace audio {
      * @param { Callback<long> } callback - Callback used to return the value of the **frame** parameter. [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      */
     off(type: 'markReach', callback?: Callback<long>): void;
@@ -13385,7 +13383,6 @@ declare namespace audio {
      * @param { Callback<long> } callback - Callback used to return the value of the **frame** parameter.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      */
     on(type: 'periodReach', frame: long, callback: Callback<long>): void;
@@ -13409,7 +13406,6 @@ declare namespace audio {
      * @param { Callback<long> } callback - Callback used to return the value of the **frame** parameter. [since 18]
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      */
     off(type: 'periodReach', callback?: Callback<long>): void;
@@ -13432,7 +13428,6 @@ declare namespace audio {
      * @param { Callback<AudioState> } callback - Callback used to return the audio status.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 8 dynamic
      */
     on(type: 'stateChange', callback: Callback<AudioState>): void;
@@ -13455,7 +13450,6 @@ declare namespace audio {
      * @param { Callback<AudioState> } callback - Callback used to return the audio status.
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
-     * @atomicservice [since 26.1.0]
      * @since 18 dynamic
      */
     off(type: 'stateChange', callback?: Callback<AudioState>): void;
@@ -13492,7 +13486,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Interrupt
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 10 dynamic
      */
     on(type: 'audioInterrupt', callback: Callback<InterruptEvent>): void;
@@ -13519,7 +13512,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Interrupt
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 10 dynamic
      */
     off(type: 'audioInterrupt'): void;
@@ -13546,7 +13538,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     on(type: 'inputDeviceChange', callback: Callback<AudioDeviceDescriptors>): void;
@@ -13576,7 +13567,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Device
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     off(type: 'inputDeviceChange', callback?: Callback<AudioDeviceDescriptors>): void;
@@ -13607,7 +13597,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     on(type: 'audioCapturerChange', callback: Callback<AudioCapturerChangeInfo>): void;
@@ -13636,7 +13625,6 @@ declare namespace audio {
      * @throws { BusinessError } 6800101 - Parameter verification failed.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @crossplatform [since 12]
-     * @atomicservice [since 26.1.0]
      * @since 11 dynamic
      */
     off(type: 'audioCapturerChange', callback?: Callback<AudioCapturerChangeInfo>): void;
