@@ -483,7 +483,6 @@ interface WaterFlowInterface {
  * @noninterop
  */
 declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribute> {
-
   /**
    * 设置当前瀑布流组件布局列的数量，不设置时默认1列。当[layoutDirection]{@link WaterFlowAttribute#layoutDirection}设置为横向布局（FlexDirection.Row或
    * FlexDirection.RowReverse）时，columnsTemplate不生效，由[rowsTemplate]{@link WaterFlowAttribute#rowsTemplate}控制布局。使用
@@ -750,6 +749,55 @@ declare class WaterFlowAttribute extends ScrollableCommonMethod<WaterFlowAttribu
    * @since 26.0.0 dynamic
    */
   supportEmptyBranchInLazyLoading(supported: boolean | undefined): WaterFlowAttribute;
+
+  /**
+   * 设置**WaterFlow**组件的头部。头部显示在主轴起始位置，参与瀑布流的总大小、可滚动边界和基于索引的滚动。
+   * 头部大小变化时，总大小和可滚动范围会相应更新。
+   *
+   * @param { CustomBuilder | ComponentContent | undefined } builder - **WaterFlow**组件的头部。
+   *     <br>默认值：**undefined**。
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  header(builder: CustomBuilder | ComponentContent | undefined): WaterFlowAttribute;
+
+  /**
+   * 设置**WaterFlow**组件的尾部。尾部显示在主轴末尾位置，参与瀑布流的总大小、可滚动边界和基于索引的滚动。
+   * 尾部大小变化时，总大小和可滚动范围会相应更新。
+   *
+   * 本属性与[WaterFlowOptions]{@link WaterFlowOptions}中的**footer**和**footerContent**相互独立：
+   * 现有**footer**、**footerContent**和**sections**能力及其优先级不受本属性影响。
+   *
+   * @param { CustomBuilder | ComponentContent | undefined } builder - **WaterFlow**组件的尾部。
+   *     <br>默认值：**undefined**。
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  footer(builder: CustomBuilder | ComponentContent | undefined): WaterFlowAttribute;
+
+  /**
+   * 设置滚动过程中，通过[header]{@link WaterFlowAttribute#header}设置的头部是否固定在视口起始位置，
+   * 以及通过[footer]{@link WaterFlowAttribute#footer}设置的尾部是否固定在视口末尾位置。
+   * 仅在已设置头部或尾部时，本属性才生效。
+   *
+   * @param { StickyStyle } style - 头部和尾部组件的吸顶吸底样式。
+   *     <br>默认值：**StickyStyle.None**。
+   * @returns { WaterFlowAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  sticky(style: StickyStyle): WaterFlowAttribute;
 
   /**
    * 瀑布流内容到达起始位置时触发。
