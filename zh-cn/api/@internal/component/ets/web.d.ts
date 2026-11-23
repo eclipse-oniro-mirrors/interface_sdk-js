@@ -9273,9 +9273,13 @@ declare class WebAttribute extends CommonMethod<WebAttribute> {
   /**
    * 设置是否启用网页自动填充，默认开启。
    * 
+   * <!--RP1-->
+   * 
    * > **说明：**
    * >
    * > 本接口的自动填充功能，依赖“智能填充服务”和“密码填充服务”的支持。
+   * 
+   * <!--RP1End-->
    *
    * @param { boolean } value - 是否启用网页自动填充，true表示启用，false表示不启用。
    *     <br>传入undefined或null时为true。
