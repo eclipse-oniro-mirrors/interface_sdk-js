@@ -7246,6 +7246,16 @@ declare namespace camera {
      * @since 24 static
      */
     SPEED = 1,
+
+    /**
+     * Focuses on low overhead, prioritizing the shortest capture time with reduced image quality.
+     *
+     * @syscap SystemCapability.Multimedia.Camera.Core
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    LOW_QUALITY = 2
   }
 
   /**
