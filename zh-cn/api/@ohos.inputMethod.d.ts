@@ -105,23 +105,25 @@ declare namespace inputMethod {
    */
   const MAX_TYPE_NUM: int;
 
-   /**
-   * 异步向当前获焦、与输入法应用绑定且处于编辑状态的编辑框发送文本。
-   * 适用于PC Stage应用集成跨应用文本输入，支持密码框。
-   * 与injectTextSync不同，本接口通过Promise报告发送结果，不等待目标完成编辑。
-   * 目标由当前输入焦点确定，无默认文本，不支持调用方指定目标。
-   * 仅支持PC，不支持跨平台应用、元服务或卡片。
-   * 空字符串同样经过权限及目标检查后下传，不新增编码合法性校验。
-   * 参数错误通过Promise拒绝返回BusinessError 401。应处理拒绝结果，禁止记录敏感文本。
+  /**
+   * 将文本注入到前台应用程序的当前焦点编辑框中。该接口使用promise返回
+   * 的结果。
+   * <br>
+   * <br> > **注意**
+   * <br>
+   * <br> > 此接口仅在PC设备上支持。
    *
-   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION
-   * @param { string } text - 必填文本，无默认值。UTF-8编码后的长度为0到512字节。
-   * @returns { Promise<void> } 请求发送成功时完成的Promise，不代表目标已完成编辑。
-   * @throws { BusinessError } 201 - 权限校验失败，两项允许权限均未获得。
-   * @throws { BusinessError } 801 - 设备不支持该能力。
-   * @throws { BusinessError } 12800003 - 无合法获焦且绑定的编辑框，或目标失效。
-   * @throws { BusinessError } 12800008 - 输入法服务不可用或请求发送失败。
-   * @throws { BusinessError } 12800016 - 目标编辑框处于非编辑状态。
+   * @permission ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION or ohos.permission.CONTROL_DEVICE
+   * @param { string } text - 要注入的文本。必填，无默认值。UTF-8编码后的长度为0到512字节。
+   * @returns { Promise<void> } 不返回任何值的Promise。
+   * @throws { BusinessError } 201 - permissions check fails.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+   *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
+   *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+   * a system error,such as null pointer, IPC exception.
+   * @throws { BusinessError } 12800016 - input method client is not editable.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -129,23 +131,22 @@ declare namespace inputMethod {
   function injectText(text: string): Promise<void>;
  
   /**
-   * 同步向当前获焦、与输入法应用绑定且处于编辑状态的编辑框发送文本。
-   * 适用于PC Stage应用需要在当前调用中取得发送结果的场景，支持密码框。
-   * 与injectText不同，本接口发送成功时正常返回，失败时抛出BusinessError。
-   * 本同步接口阻塞调用线程，在主线程调用容易影响UI交互，需谨慎使用。
-   * 目标由当前输入焦点确定，无默认文本，不支持调用方指定目标。
-   * 仅支持PC，不支持跨平台应用、元服务或卡片。
-   * 空字符串同样经过权限及目标检查后下传，不新增编码合法性校验。
-   * 参数错误抛BusinessError 401。正常返回不代表目标完成编辑，也不读取目标文本。
-   * 应处理异常，禁止记录敏感文本。
+   * 将文本注入到前台应用程序的当前焦点编辑框中。
+   * <br>
+   * <br> > **注意**
+   * <br>
+   * <br> > 此接口仅在PC设备上支持。
    *
-   * @permission ohos.permission.CONTROL_DEVICE or ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION
-   * @param { string } text - 必填文本，无默认值。UTF-8编码后的长度为0到512字节。
-   * @throws { BusinessError } 201 - 权限校验失败，两项允许权限均未获得。
-   * @throws { BusinessError } 801 - 设备不支持该能力。
-   * @throws { BusinessError } 12800003 - 无合法获焦且绑定的编辑框，或目标失效。
-   * @throws { BusinessError } 12800008 - 输入法服务不可用或请求发送失败。
-   * @throws { BusinessError } 12800016 - 目标编辑框处于非编辑状态。
+   * @permission ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION or ohos.permission.CONTROL_DEVICE
+   * @param { string } text - 要注入的文本。必填，无默认值。UTF-8编码后的长度为0到512字节。
+   * @throws { BusinessError } 201 - permissions check fails.
+   * @throws { BusinessError } 801 - Capability not supported.
+   * @throws { BusinessError } 12800003 - input method client error. Possible causes:
+   *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
+   *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+   * a system error,such as null pointer, IPC exception.
+   * @throws { BusinessError } 12800016 - input method client is not editable.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static

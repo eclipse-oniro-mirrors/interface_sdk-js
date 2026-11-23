@@ -148,7 +148,7 @@ declare namespace inputMethod {
    * Injects text into the currently focused edit box of the foreground application. This API uses a promise to return
    * the result.
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION or ohos.permission.CONTROL_DEVICE
    * @param { string } text - Text to inject. Maximun 512 bytes.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - permissions check fails.
@@ -156,6 +156,9 @@ declare namespace inputMethod {
    * @throws { BusinessError } 12800003 - input method client error. Possible causes:
    *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
    *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+   * a system error, such as null pointer, IPC exception.
+   * @throws { BusinessError } 12800016 - input method client is not editable.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
@@ -163,9 +166,13 @@ declare namespace inputMethod {
   function injectText(text: string): Promise<void>;
  
   /**
-   * Injects text into the currently focused edit box of the foreground application.
+   * Inject text into the current focus edit box of the foreground application.
+   * <br>
+   * <br> > **Note**
+   * <br>
+   * <br> > This interface is supported only by PCs.
    *
-   * @permission ohos.permission.CONTROL_DEVICE
+   * @permission ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION or ohos.permission.CONTROL_DEVICE
    * @param { string } text - Text to inject. Maximun 512 bytes.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - permissions check fails.
@@ -173,6 +180,9 @@ declare namespace inputMethod {
    * @throws { BusinessError } 12800003 - input method client error. Possible causes:
    *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
    *  3.ipc failed due to the large amount of data transferred or other reasons.
+   * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
+   * a system error,such as null pointer, IPC exception.
+   * @throws { BusinessError } 12800016 - input method client is not editable.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
    * @since 26.1.0 dynamic&static
