@@ -1866,7 +1866,7 @@ declare namespace dlpPermission {
      * This API sets the sandbox application configuration so that the application can pass custom parameters as 
      * required.
      *
-     * @param { string } configInfo - Sandbox application configuration. The value contains a maximum of 4,194,304
+     * @param { string } configInfo - Sandbox application configuration. The value contains a maximum of 4,194,303
      *     bytes. If the value is out of range, error code 401 is thrown.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1. Mandatory parameters are left unspecified.
