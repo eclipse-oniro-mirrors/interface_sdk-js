@@ -1467,11 +1467,11 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * > **说明：**
    * >
    * > - 最终吸附位置始终在合法滚动范围内。例如对齐方式为ScrollSnapAlign.CENTER时，首尾子组件会停靠在可滚动边界处，而非视口中央。
-   * >   此行为与scrollSnapAlign不同：scrollSnapAlign以对齐效果优先，CENTER档位下首尾子组件仍会居中，列表可能露出空白区域。
-   * > - 启用限位滚动后，拖拽或鼠标框选操作结束时也会触发限位滚动。
+   * >   此行为与scrollSnapAlign不同：scrollSnapAlign以对齐效果优先，CENTER挡位下首尾子组件仍会居中，列表可能露出空白区域。
+   * > - 启用限位滚动后，通过onMove接口发起的拖拽结束时，或鼠标框选操作结束时，也会触发限位滚动。
    * > - ListItemGroup作为整体参与对齐。
    * > - 该属性与scrollSnapAlign互斥，后设置者生效。
-   * > - scrollSnapStrategy的限位动画不受scrollSnapAnimationSpeed影响，该属性仅影响scrollSnapAlign属性产生的限位动画速度。
+   * > - scrollSnapStrategy的限位动画不受scrollSnapAnimationSpeed影响，scrollSnapAnimationSpeed仅影响scrollSnapAlign属性产生的限位动画速度。
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 限位滚动策略。
    *     传入ScrollSnapAlign枚举时，使用内置对齐方式：START、CENTER、END分别将子组件对齐到视口沿滚动轴的起始、中央和末尾位置。

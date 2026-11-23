@@ -1675,11 +1675,12 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * >   instead of the viewport center. This differs from scrollSnapAlign, which prioritizes the
    * >   alignment effect: with CENTER, the first and last child components still center themselves
    * >   and the list may expose blank areas.
-   * > - Drag or mouse box-select gestures also trigger the scroll snap when they end.
+   * > - A drag initiated through the onMove interface or a mouse box-select operation also
+   * >   triggers the snap scrolling when it ends.
    * > - ListItemGroup participates in the alignment as a whole.
    * > - This attribute is mutually exclusive with scrollSnapAlign: the last one set wins.
-   * > - The snap animation of this attribute is not affected by scrollSnapAnimationSpeed, which
-   * >   only tunes the snap animation speed produced by scrollSnapAlign.
+   * > - The snap animation of this attribute is not affected by scrollSnapAnimationSpeed;
+   * >   scrollSnapAnimationSpeed only tunes the snap animation speed produced by scrollSnapAlign.
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Scroll snap strategy.
    *     When a ScrollSnapAlign enum is passed in, the built-in alignment is used: START, CENTER, and END
