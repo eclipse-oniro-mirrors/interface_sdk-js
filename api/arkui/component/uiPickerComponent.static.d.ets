@@ -23,7 +23,6 @@ import { CommonMethod, PickerComponentTextStyle } from './common';
 import { LengthMetrics } from './../Graphics';
 import { AttributeModifier } from "./common";
 import { ComponentBuilder, CustomBuilder, CustomBuilderT, Builder } from './builder';
-import { CrownSensitivity } from "./enums";
 /**
  * Defines the options of Picker.
  *
@@ -270,16 +269,6 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default displayedItemCount(count: int | undefined): this;
-  /**
-   * Sets the sensitivity to the digital crown rotation.
-   *
-   * @param { CrownSensitivity | undefined } sensitivity - Sensitivity to the digital crown rotation.
-   * @returns { UIPickerComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 26.1.0 static
-   */
-  default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
 
   /**
    * Sets the text style of the selected item.

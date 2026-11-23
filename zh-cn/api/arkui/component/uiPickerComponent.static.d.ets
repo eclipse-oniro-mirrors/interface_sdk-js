@@ -30,8 +30,6 @@ import { AttributeModifier } from "./common";
 
 import { ComponentBuilder, CustomBuilder } from './builder';
 
-import { CrownSensitivity } from "./enums";
-
 /**
  * UIPickerComponent容器的参数说明。
  *
@@ -360,16 +358,6 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @since 26.0.0 static
    */
   default displayedItemCount(count: int | undefined): this;
-  /**
-   * 设置表冠旋转的灵敏度。
-   *
-   * @param { CrownSensitivity | undefined } sensitivity - 表冠旋转的灵敏度。
-   * @returns { UIPickerComponentAttribute }
-   * @syscap SystemCapability.ArkUI.ArkUI.Full
-   * @stagemodelonly
-   * @since 26.1.0 static
-   */
-  default digitalCrownSensitivity(sensitivity: CrownSensitivity | undefined): this;
 
   /**
    * 设置选中项的文本样式。
