@@ -9125,7 +9125,7 @@ declare namespace audio {
      * 获取音频分离效果启用状态。
      *
      * @returns { boolean } 返回是否启用音频分离效果。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9164,7 +9164,7 @@ declare namespace audio {
      * 播控应用可根据此状态决定是否显示音频分离开关按钮。
      *
      * @returns { AudioSeparationEffectAvailableStatus } 返回音频分离效果的可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9178,7 +9178,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioSeparationEffectAvailableStatus> } callback - Callback function, which is used to return
      *     the changed availablity status.
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -9192,7 +9192,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioSeparationEffectAvailableStatus> } [callback] - 待取消的回调。
      *     <br>如果不传callback参数，则取消所有订阅的回调。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @systemapi
      * @stagemodelonly
@@ -12256,7 +12256,7 @@ declare namespace audio {
      * 
      * @param { boolean } on - 进入或退出standby状态，true表示进入，false表示退出。
      * @returns { Promise<void> } Promise对象，无返回结果。
-     * @throws { BusinessError } 6800103 - 当前状态下不允许操作。
+     * @throws { BusinessError } 6800103 - The operation is not allowed in the current state.
      * @syscap SystemCapability.Multimedia.Audio.Renderer
      * @stagemodelonly
      * @since 26.1.0 dynamic&static
@@ -15382,7 +15382,7 @@ declare namespace audio {
      * 此功能仅适用于播控应用。
      *
      * @returns { AudioLoopbackavailablestatus } 全局环回的可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
@@ -15395,7 +15395,7 @@ declare namespace audio {
      * 此功能仅适用于播控应用。
      *
      * @param { Callback<AudioLoopbackavailablestatus> } callback - 回调函数，用于返回变化后的音频返听可用状态。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
@@ -15410,7 +15410,7 @@ declare namespace audio {
      *
      * @param { Callback<AudioLoopbackavailablestatus> } [callback] - 待取消的回调。
      *     <br>如果不传callback参数，则取消所有订阅的回调。
-     * @throws { BusinessError } 202 - 调用方不是系统应用程序。
+     * @throws { BusinessError } 202 - Caller is not a system application.
      * @syscap SystemCapability.Multimedia.Audio.Capturer
      * @systemapi
      * @stagemodelonly
