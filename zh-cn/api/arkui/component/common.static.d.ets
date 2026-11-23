@@ -48,7 +48,7 @@ import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
-import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode, VibrancyMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -8187,6 +8187,22 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     colorFilterEffect?: ColorFilter;
+
+    /**
+     * 标题栏提亮压暗模式。
+     * 设置后标题栏内容（主标题、副标题、关闭按钮）提亮或压暗，以提升通透材质背景下的可读性。
+     * 其中主标题、副标题仅对[SheetTitleOptions]{@link SheetTitleOptions}形式的系统标题生效，
+     * 对[CustomBuilder]{@link CustomBuilder}自定义标题不生效。
+     * 仅对高算力和中算力设备生效，设备算力等级可通过
+     * [uiMaterial.getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel}接口获取。
+     * 默认值：undefined，表示不使用提亮压暗效果。
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarVibrancyMode?: VibrancyMode;
 }
 /**
  * 标题栏悬浮模式枚举。

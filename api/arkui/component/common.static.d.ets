@@ -48,7 +48,7 @@ import { StyledString } from "./styledString";
 import { CustomBuilder, WrappedBuilder, CustomBuilderT } from './builder';
 import { RecordData } from '../../@ohos.base';
 import curves from '../../@ohos.curves';
-import { TipsAnchorType, EdgeLightPosition, ShadowClipMode } from './enums';
+import { TipsAnchorType, EdgeLightPosition, ShadowClipMode, VibrancyMode } from './enums';
 import matrix4 from '../../@ohos.matrix4';
 import { AvoidanceMode } from './select';
 import uiMaterial from '../../@ohos.arkui.uiMaterial';
@@ -7640,6 +7640,25 @@ export declare interface SheetOptions extends BindOptions {
      * @since 26.1.0 static
      */
     colorFilterEffect?: ColorFilter;
+
+    /**
+     * Vibrancy mode of the title bar.
+     * After this attribute is set, the title bar content (main title, subtitle, and close button) is brightened or
+     * darkened, improving readability against translucent material backgrounds.
+     * The main title and subtitle take effect only for system titles in the
+     * [SheetTitleOptions]{@link SheetTitleOptions} form; they do not take effect for custom titles built with
+     * [CustomBuilder]{@link CustomBuilder}.
+     * This attribute takes effect only on high-compute and medium-compute devices. The device compute level can be
+     * obtained through
+     * [uiMaterial.getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel}.
+     * Default value: **undefined**, indicating that the vibrancy effect is not used.
+     *
+     * @syscap SystemCapability.ArkUI.ArkUI.Full
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 static
+     */
+    titleBarVibrancyMode?: VibrancyMode;
 }
 /**
  * Enum of title bar hover modes.
