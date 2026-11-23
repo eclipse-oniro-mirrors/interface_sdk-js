@@ -270,7 +270,7 @@ declare namespace AbilityConstant {
 
     /**
      * Indicates the reason for the last exit of the Ability. For details about the values, see
-     * [Application Termination Event Reason Field Description](docroot://dfx/hiappevent-watcher-app-killed-events.md#reason字段说明).
+     * [Application Termination Event Reason Field Description](docroot://dfx/hiappevent-watcher-app-killed-events.md#reason).
      *
      * @syscap SystemCapability.Ability.AbilityRuntime.Core
      * @stagemodelonly
