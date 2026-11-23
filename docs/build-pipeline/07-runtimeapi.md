@@ -14,7 +14,7 @@
 | 目标 | `action("copy_runtimeapi")`、`action("validate_delete_unpublished")`、`ohos_copy("ohos_ets_runtimeapi")` |
 | 输入 | `out/<产品>/ohos_static`（static 装配目录） |
 | 输出 | `out/<产品>/obj/interface/sdk-js/copy_runtimeapi`（删标签+API）+ `out/<产品>/obj/interface/sdk-js/copy_runtimeapi_runtimeapi`（保留原始） |
-| 一句话 | 生成两份副本：一份给 `ets/static/*` 打包，一份给 ets-loader runtimeapi |
+| 一句话 | 对 static 接口树生成两份副本：一份删标签+校验后给 `ets/static/*` 打包，一份保留原始安装到 `ets/static/build-tools/ets-loader/runtimeapi` |
 
 ## 2. `copy_runtimeapi` 调用关系
 

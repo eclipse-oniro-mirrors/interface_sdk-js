@@ -13,7 +13,7 @@
 | 调用位置 | `build/ohos/sdk/BUILD.gn`（变量名 `generate_all_types_sdk_script`）                                                 |
 | 调用方式 | GN 生成期 `exec_script`                                                                                                  |
 | 触发条件 | `if (!use_current_sdk)` 成立，在 `parse_sdk_description.py`（01.2）之后始终执行                                        |
-| 一句话   | 用 Jinja2 渲染出「每个 SDK 类型 × 每个 OS」的打包目标 `BUILD.gn`，并顺带为每个类型/OS 写入 `oh-uni-package.json` |
+| 一句话   | 用 Jinja2 按「SDK 类型 × OS」渲染打包目标 `BUILD.gn`（供 GN import、ninja 执行拷贝/打包），并为每个类型/OS 写入 `oh-uni-package.json` |
 
 流程位置：`parse_sdk_description.py`（01.2）→ **本脚本** → GN `import` 生成物、ninja 执行拷贝/打包。
 

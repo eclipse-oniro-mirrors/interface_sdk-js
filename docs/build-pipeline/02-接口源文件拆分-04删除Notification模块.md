@@ -1,6 +1,6 @@
-# 02.5 删除 Notification 模块（interface/sdk-js/build-tools/delete_notification_plugin.js）
+# 02.4 删除 Notification 模块（interface/sdk-js/build-tools/delete_notification_plugin.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.5」。
+> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.4」。
 > public SDK（`sdk_build_public == "true"`）不对外提供 notification（通知）能力，
 > 删除整个通知模块文件，并清理其它模块对通知类型 / 模块的引用。
 
@@ -34,7 +34,7 @@ node interface/sdk-js/build-tools/delete_notification_plugin.js \
 
 | 类别 | 内容                                                                                                   |
 | ---- | ------------------------------------------------------------------------------------------------------ |
-| 输入 | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（已删 `@systemapi`、已删 StageModelOnly 标签） |
+| 输入 | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（已删 `@systemapi`） |
 | 输入 | 同级 `kits/`（读取并清理 NotificationKit 及对通知模块的引用）                                        |
 | 输出 | 暂存目录 `build-tools/api`、`build-tools/kits`（结构镜像源目录）                                      |
 | 输出 | 被删除的模块文件不输出；被清理引用后的跨模块文件输出处理结果                                          |
@@ -119,10 +119,9 @@ flowchart TD
 - **AST 判定**：成员是否引用被删类型，通过递归扫描成员节点的 Identifier 是否落入
   「被删模块导入的标识符集合」判断，命中即删除整个成员（含其 JSDoc）；
 - **仅清理 import 者**：未 import 通知模块的文件原样保留，避免对大量无关文件做无谓改写；
-- **与 02.3 / 02.4 顺序**：本环节在 `delete_systemapi_plugin.js`（02.3）、
-  `delete_stagemodelonly_label.js`（02.4）之后执行，三者输出暂存到同一 `build-tools`，
-  各自从已覆盖的正式目录读取、写暂存；本环节执行完由 Python 立即把
-  `build-tools/api`、`build-tools/kits` 覆盖回正式目录；
+- **与 02.3 顺序**：本环节在 `delete_systemapi_plugin.js`（02.3）之后执行，
+  二者输出暂存到同一 `build-tools`，各自从已覆盖的正式目录读取、写暂存；
+  本环节执行完由 Python 立即把 `build-tools/api`、`build-tools/kits` 覆盖回正式目录；
 - **不依赖 es2panda**：工具基于 TypeScript 编译器 API（`typescript` 依赖已随 build-tools 安装）。
 
 ## 8. 相关文件

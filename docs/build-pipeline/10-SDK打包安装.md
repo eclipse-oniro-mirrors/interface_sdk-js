@@ -12,7 +12,7 @@
 | 模板 | `build/ohos/sdk/sdk.gni` 的 `copy_and_archive`（`make_<os>_sdk_modules`） |
 | 输入 | ①环节 01.2 的 `ohos_sdk_install_paths.json`（label→install_dir）②各模块产物（`module_source_dir`） |
 | 输出 | `out/<产品>/packages/ohos-sdk/<os>/<sdk_type>-<os>-<arch>-<version>.zip` |
-| 一句话 | 按安装路径表把每个模块 `module_source_dir` 内容拷到 `install_dir` 再打 zip，并做完整性校验与 NOTICE 补写 |
+| 一句话 | 按 `ohos_sdk_install_paths.json` 把每个模块 `module_source_dir` 内容拷到 `install_dir` 再打 zip，并做完整性校验与 NOTICE 补写 |
 
 `make_<os>_sdk_modules`（环节 01.3 渲染）解析各模块 label → 生成 `sdk_modules.json` →
 `copy_and_archive` 调 `copy_sdk_modules.py`，最终产出
