@@ -174,14 +174,13 @@ declare namespace inputMethod {
    *
    * @permission ohos.permission.OPERATE_TEXT_ACROSS_APPLICATION or ohos.permission.CONTROL_DEVICE
    * @param { string } text - Text to inject. Maximun 512 bytes.
-   * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - permissions check fails.
    * @throws { BusinessError } 801 - Capability not supported.
    * @throws { BusinessError } 12800003 - input method client error. Possible causes:
    *  1.the edit box is not focused. 2.no edit box is bound to current input method application.
    *  3.ipc failed due to the large amount of data transferred or other reasons.
    * @throws { BusinessError } 12800008 - input method manager service error. Possible cause:
-   * a system error,such as null pointer, IPC exception.
+   * a system error, such as null pointer, IPC exception.
    * @throws { BusinessError } 12800016 - input method client is not editable.
    * @syscap SystemCapability.MiscServices.InputMethodFramework
    * @stagemodelonly
