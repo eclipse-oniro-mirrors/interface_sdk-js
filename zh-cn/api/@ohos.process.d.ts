@@ -232,6 +232,17 @@ declare namespace process {
     }
 
   /**
+   * 返回进程的应用标识（AppUid，数值形式）。
+   *
+   * @syscap SystemCapability.Utils.Lang
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamiconly
+   */
+  const appuid: number;
+
+  /**
    * 返回进程的有效组 ID（数值形式）。
    *
    * @syscap SystemCapability.Utils.Lang
