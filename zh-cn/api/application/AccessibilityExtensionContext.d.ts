@@ -1850,6 +1850,7 @@ export interface ElementAttributeValues {
    * 表示元素是否处于无障碍焦点状态。true表示元素处于无障碍焦点状态，false表示元素不处于无障碍焦点状态，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   accessibilityFocused: boolean;
@@ -1857,6 +1858,7 @@ export interface ElementAttributeValues {
    * 应用包名。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   bundleName: string;
@@ -1864,6 +1866,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可勾选。true表示元素可勾选，false表示元素不可勾选，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   checkable: boolean;
@@ -1871,6 +1874,7 @@ export interface ElementAttributeValues {
    * 表示元素的勾选状态。true表示元素已勾选，false表示元素未勾选，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   checked: boolean;
@@ -1878,6 +1882,7 @@ export interface ElementAttributeValues {
    * 所有子元素。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   children: Array<AccessibilityElement>;
@@ -1885,6 +1890,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可点击。true表示元素可点击，false表示元素不可点击，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   clickable: boolean;
@@ -1892,6 +1898,7 @@ export interface ElementAttributeValues {
    * 元素所属的组件ID。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   componentId: long;
@@ -1899,6 +1906,7 @@ export interface ElementAttributeValues {
    * 表示元素所属的组件类型，如：按钮Button类型对应'Button'、图像Image类型对应'Image'。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   componentType: string;
@@ -1906,6 +1914,7 @@ export interface ElementAttributeValues {
    * 内容列表。根据实际场景设置，无特殊限制。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   contents: Array<string>;
@@ -1913,6 +1922,7 @@ export interface ElementAttributeValues {
    * 当前项的索引，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   currentIndex: int;
@@ -1920,6 +1930,7 @@ export interface ElementAttributeValues {
    * 元素的描述信息。根据实际场景设置，无特殊限制。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   description: string;
@@ -1927,6 +1938,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可编辑。true表示元素可编辑，false表示元素不可编辑，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   editable: boolean;
@@ -1934,6 +1946,7 @@ export interface ElementAttributeValues {
    * 屏幕最后显示项的列表索引，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   endIndex: int;
@@ -1941,6 +1954,7 @@ export interface ElementAttributeValues {
    * 错误状态字符串。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   error: string;
@@ -1948,6 +1962,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可聚焦。true表示元素可聚焦，false表示元素不可聚焦，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   focusable: boolean;
@@ -1955,6 +1970,7 @@ export interface ElementAttributeValues {
    * 提示文本。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   hintText: string;
@@ -1962,6 +1978,7 @@ export interface ElementAttributeValues {
    * 输入文本的类型，不同数值对应不同的输入模式：0表示无特定类型；1表示文本；2表示邮箱；3表示日期；4表示时间；5表示数字；6表示密码；7表示电话号码；8表示用户名；9表示新密码。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   inputType: int;
@@ -1969,6 +1986,7 @@ export interface ElementAttributeValues {
    * 表示元素的别名。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   inspectorKey: string;
@@ -1976,6 +1994,7 @@ export interface ElementAttributeValues {
    * 表示元素是否处于活动状态。true表示元素处于活动状态，false表示元素不处于活动状态，默认值为true。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isActive: boolean;
@@ -1983,6 +2002,7 @@ export interface ElementAttributeValues {
    * 表示元素是否启用。true表示元素已启用，false表示元素未启用，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isEnable: boolean;
@@ -1990,6 +2010,7 @@ export interface ElementAttributeValues {
    * 表示元素是否为提示状态。true表示元素处于提示状态，false表示元素不处于提示状态，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isHint: boolean;
@@ -1997,6 +2018,7 @@ export interface ElementAttributeValues {
    * 表示元素是否聚焦。true表示元素处于聚焦状态，false表示元素不处于聚焦状态，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isFocused: boolean;
@@ -2004,6 +2026,7 @@ export interface ElementAttributeValues {
    * 表示元素是否为密码。true表示元素为密码，false表示元素不为密码，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isPassword: boolean;
@@ -2011,6 +2034,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可见。true表示元素可见，false表示元素不可见，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isVisible: boolean;
@@ -2018,6 +2042,7 @@ export interface ElementAttributeValues {
    * 项目的总数，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   itemCount: int;
@@ -2025,6 +2050,7 @@ export interface ElementAttributeValues {
    * 列表或滚动控件中最后一项的内容。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   lastContent: string;
@@ -2032,6 +2058,7 @@ export interface ElementAttributeValues {
    * 该元素的显示层，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   layer: int;
@@ -2039,6 +2066,7 @@ export interface ElementAttributeValues {
    * 表示元素是否可长按。true表示元素可长按，false表示元素不可长按，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   longClickable: boolean;
@@ -2046,6 +2074,7 @@ export interface ElementAttributeValues {
    * 页码ID。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   pageId: int;
@@ -2053,6 +2082,7 @@ export interface ElementAttributeValues {
    * 元素的父元素。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   parent: AccessibilityElement;
@@ -2060,6 +2090,7 @@ export interface ElementAttributeValues {
    * 表示元素是否支持多行文本。true表示元素支持多行文本，false表示元素不支持多行文本，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   pluralLineSupported: boolean;
@@ -2067,6 +2098,7 @@ export interface ElementAttributeValues {
    * 元素的矩形区域，包含位置和尺寸信息。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   rect: Rect;
@@ -2074,6 +2106,7 @@ export interface ElementAttributeValues {
    * 元素的资源名称。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   resourceName: string;
@@ -2081,6 +2114,7 @@ export interface ElementAttributeValues {
    * 窗口元素的根节点元素。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   rootElement: AccessibilityElement;
@@ -2088,6 +2122,7 @@ export interface ElementAttributeValues {
    * 元素的显示区域。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   screenRect: Rect;
@@ -2096,6 +2131,7 @@ export interface ElementAttributeValues {
    * accessibilityScrollable属性值为准。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   scrollable: boolean;
@@ -2103,6 +2139,7 @@ export interface ElementAttributeValues {
    * 表示元素是否被选中。true表示元素被选中，false表示元素未被选中，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   selected: boolean;
@@ -2110,6 +2147,7 @@ export interface ElementAttributeValues {
    * 在屏幕上的第一个项目的列表索引，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   startIndex: int;
@@ -2117,6 +2155,7 @@ export interface ElementAttributeValues {
    * 元素的文本。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   text: string;
@@ -2124,6 +2163,7 @@ export interface ElementAttributeValues {
    * 元素文本的最大长度限制，取值范围大于等于0。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   textLengthLimit: int;
@@ -2131,6 +2171,7 @@ export interface ElementAttributeValues {
    * 文本被读取时的移动粒度。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   textMoveUnit: accessibility.TextMoveUnit;
@@ -2138,6 +2179,7 @@ export interface ElementAttributeValues {
    * 触发元素事件的动作。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   triggerAction: accessibility.Action;
@@ -2145,6 +2187,7 @@ export interface ElementAttributeValues {
    * 元素的窗口类型。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   type: WindowType;
@@ -2152,6 +2195,7 @@ export interface ElementAttributeValues {
    * 最大值。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueMax: double;
@@ -2159,6 +2203,7 @@ export interface ElementAttributeValues {
    * 最小值。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueMin: double;
@@ -2166,6 +2211,7 @@ export interface ElementAttributeValues {
    * 当前值。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueNow: double;
@@ -2173,6 +2219,7 @@ export interface ElementAttributeValues {
    * 窗口ID。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   windowId: int;
@@ -2180,6 +2227,7 @@ export interface ElementAttributeValues {
    * 对于可滚动类控件，如List、Grid，内容区相对控件的顶部坐标滚动的像素偏移量，单位为像素（px）。默认值为0。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   offset: double;
@@ -2187,6 +2235,7 @@ export interface ElementAttributeValues {
    * 元素的无障碍文本类型，由组件accessibilityTextHint属性配置。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   textType: string;
@@ -2194,6 +2243,7 @@ export interface ElementAttributeValues {
    * 元素的无障碍文本信息。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   accessibilityText: string;
@@ -2201,6 +2251,7 @@ export interface ElementAttributeValues {
    * 元素的可触摸区域。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   hotArea: Rect;
@@ -2208,6 +2259,7 @@ export interface ElementAttributeValues {
    * 自定义组件类型。与元素的[AccessibilityRoleType]{@link @global:AccessibilityRoleType}类型对应。默认值为空。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   customComponentType?: string;
@@ -2215,6 +2267,7 @@ export interface ElementAttributeValues {
    * 下一个要聚焦的组件ID。通过findElement('elementId')查询到的AccessibilityElement对象中可获取到用户在控件上设置的该属性值。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityNextFocusId?: long;
@@ -2222,6 +2275,7 @@ export interface ElementAttributeValues {
    * 上一个聚焦的组件ID。通过findElement('elementId')查询到的AccessibilityElement对象中可获取到用户在控件上设置的该属性值。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityPreviousFocusId?: long;
@@ -2241,6 +2295,7 @@ export interface ElementAttributeValues {
    * - componentTypeDescription：组件类型详细信息，对componentType的补充描述。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   extraInfo?: string;
@@ -2248,6 +2303,7 @@ export interface ElementAttributeValues {
    * 表示无障碍模式下元素是否可滚动，优先级高于scrollable，即以accessibilityScrollable属性值为准。其中，true表示可滚动，false表示不可滚动，默认值为true。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityScrollable?: boolean;

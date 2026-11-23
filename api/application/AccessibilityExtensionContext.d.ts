@@ -2189,6 +2189,7 @@ export interface ElementAttributeValues {
    * accessibility focus state, and **false** indicates the opposite. The default value is **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   accessibilityFocused: boolean;
@@ -2196,6 +2197,7 @@ export interface ElementAttributeValues {
    * Bundle name.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   bundleName: string;
@@ -2204,6 +2206,7 @@ export interface ElementAttributeValues {
    * indicates the opposite. The default value is **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   checkable: boolean;
@@ -2212,6 +2215,7 @@ export interface ElementAttributeValues {
    * the opposite. The default value is **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   checked: boolean;
@@ -2219,6 +2223,7 @@ export interface ElementAttributeValues {
    * All child elements.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   children: Array<AccessibilityElement>;
@@ -2229,6 +2234,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   clickable: boolean;
@@ -2238,6 +2244,7 @@ export interface ElementAttributeValues {
    * Default value: **-1**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   componentId: long;
@@ -2245,6 +2252,7 @@ export interface ElementAttributeValues {
    * Component type of the element, for example, 'Button' for the Button component and 'Image' for the Image component.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   componentType: string;
@@ -2252,6 +2260,7 @@ export interface ElementAttributeValues {
    * List of contents. Set this parameter based on site requirements. No special restrictions.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   contents: Array<string>;
@@ -2259,6 +2268,7 @@ export interface ElementAttributeValues {
    * Index of the current item. The value range is greater than or equal to 0. The default value is **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   currentIndex: int;
@@ -2266,6 +2276,7 @@ export interface ElementAttributeValues {
    * Description of the element. Set this parameter based on site requirements. No special restrictions.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   description: string;
@@ -2276,6 +2287,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   editable: boolean;
@@ -2284,6 +2296,7 @@ export interface ElementAttributeValues {
    * value is **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   endIndex: int;
@@ -2291,6 +2304,7 @@ export interface ElementAttributeValues {
    * Error status.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   error: string;
@@ -2301,6 +2315,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   focusable: boolean;
@@ -2308,6 +2323,7 @@ export interface ElementAttributeValues {
    * Hint text.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   hintText: string;
@@ -2318,6 +2334,7 @@ export interface ElementAttributeValues {
    * default value is **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   inputType: int;
@@ -2325,6 +2342,7 @@ export interface ElementAttributeValues {
    * Alias of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   inspectorKey: string;
@@ -2335,6 +2353,7 @@ export interface ElementAttributeValues {
    * Default value: **true**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isActive: boolean;
@@ -2345,6 +2364,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isEnable: boolean;
@@ -2355,6 +2375,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isHint: boolean;
@@ -2365,6 +2386,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isFocused: boolean;
@@ -2375,6 +2397,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isPassword: boolean;
@@ -2385,6 +2408,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   isVisible: boolean;
@@ -2392,6 +2416,7 @@ export interface ElementAttributeValues {
    * Total number of items. The value range is greater than or equal to 0. The default value is **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   itemCount: int;
@@ -2399,6 +2424,7 @@ export interface ElementAttributeValues {
    * Content of the last item in a list or scrollable control.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   lastContent: string;
@@ -2406,6 +2432,7 @@ export interface ElementAttributeValues {
    * Display layer of the element. The value range is greater than or equal to 0. The default value is **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   layer: int;
@@ -2414,6 +2441,7 @@ export interface ElementAttributeValues {
    * **false** indicates the opposite. The default value is **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   longClickable: boolean;
@@ -2421,6 +2449,7 @@ export interface ElementAttributeValues {
    * Page ID. The default value is **-1**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   pageId: int;
@@ -2428,6 +2457,7 @@ export interface ElementAttributeValues {
    * Parent element of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   parent: AccessibilityElement;
@@ -2438,6 +2468,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   pluralLineSupported: boolean;
@@ -2445,6 +2476,7 @@ export interface ElementAttributeValues {
    * Rectangular area of the element, including position and size information.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   rect: Rect;
@@ -2452,6 +2484,7 @@ export interface ElementAttributeValues {
    * Resource name of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   resourceName: string;
@@ -2459,6 +2492,7 @@ export interface ElementAttributeValues {
    * Root node element of the window element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   rootElement: AccessibilityElement;
@@ -2466,6 +2500,7 @@ export interface ElementAttributeValues {
    * Display area of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   screenRect: Rect;
@@ -2475,6 +2510,7 @@ export interface ElementAttributeValues {
    * accessibilityScrollable and scrollable conflict, the accessibilityScrollable attribute takes precedence.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   scrollable: boolean;
@@ -2485,6 +2521,7 @@ export interface ElementAttributeValues {
    * Default value: **false**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   selected: boolean;
@@ -2493,6 +2530,7 @@ export interface ElementAttributeValues {
    * **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   startIndex: int;
@@ -2500,6 +2538,7 @@ export interface ElementAttributeValues {
    * Text of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   text: string;
@@ -2508,6 +2547,7 @@ export interface ElementAttributeValues {
    * **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   textLengthLimit: int;
@@ -2515,6 +2555,7 @@ export interface ElementAttributeValues {
    * Granularity of movement when the text is read.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   textMoveUnit: accessibility.TextMoveUnit;
@@ -2522,6 +2563,7 @@ export interface ElementAttributeValues {
    * Action that triggers the element event.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   triggerAction: accessibility.Action;
@@ -2529,6 +2571,7 @@ export interface ElementAttributeValues {
    * Window type of the element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   type: WindowType;
@@ -2538,6 +2581,7 @@ export interface ElementAttributeValues {
    * Default value: **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueMax: double;
@@ -2547,6 +2591,7 @@ export interface ElementAttributeValues {
    * Default value: **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueMin: double;
@@ -2556,6 +2601,7 @@ export interface ElementAttributeValues {
    * Default value: **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   valueNow: double;
@@ -2565,6 +2611,7 @@ export interface ElementAttributeValues {
    * Default value: **-1**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 9 dynamiconly
    */
   windowId: int;
@@ -2575,6 +2622,7 @@ export interface ElementAttributeValues {
    * Default value: **0**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   offset: double;
@@ -2583,6 +2631,7 @@ export interface ElementAttributeValues {
    * component.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   textType: string;
@@ -2590,6 +2639,7 @@ export interface ElementAttributeValues {
    * Accessibility text information of an element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   accessibilityText: string;
@@ -2606,6 +2656,7 @@ export interface ElementAttributeValues {
    * Touchable area of an element.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 12 dynamiconly
    */
   hotArea: Rect;
@@ -2614,6 +2665,7 @@ export interface ElementAttributeValues {
    * the AccessibilityElement object queried through findElement('elementId'). The default value is **-1**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityNextFocusId?: long;
@@ -2622,6 +2674,7 @@ export interface ElementAttributeValues {
    * default value is an empty string.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   customComponentType?: string;
@@ -2653,6 +2706,7 @@ export interface ElementAttributeValues {
    * for componentType.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   extraInfo?: string;
@@ -2661,6 +2715,7 @@ export interface ElementAttributeValues {
    * the AccessibilityElement object queried through findElement('elementId'). The default value is **-1**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityPreviousFocusId?: long;
@@ -2670,6 +2725,7 @@ export interface ElementAttributeValues {
    * indicates not scrollable. The default value is **true**.
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
+   * @stagemodelonly
    * @since 18 dynamiconly
    */
   accessibilityScrollable?: boolean;
