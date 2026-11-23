@@ -42,8 +42,8 @@ import type common from './@ohos.app.ability.common';
 import type pointer from './@ohos.multimodalInput.pointer';
 import { ComponentContent, FrameNode, Frame, LengthMetrics } from '@ohos.arkui.node';
 
-import { ComponentContentBase } from 'arkui.ComponentContent';
-import { NodeEdges } from 'arkui.Graphics';
+import { ComponentContentBase } from './arkui/ComponentContent';
+import { NodeEdges } from './arkui/Graphics';
 
 import { ActionSheetOptions } from '@ohos.arkui.component';
 import { ComponentContentBase } from '../ComponentContent';

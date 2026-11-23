@@ -24,8 +24,8 @@ import { CustomBuilder } from '@ohos.arkui.component';
 import { DialogAlignment } from '@ohos.arkui.component';
 import { DismissDialogAction } from '@ohos.arkui.component';
 import { BorderStyle, Alignment, DialogDisplayMode } from '@ohos.arkui.component';
-import { Resource } from 'global.resource';
-import { LengthMetrics } from 'arkui.Graphics';
+import { Resource } from './global/resource';
+import { LengthMetrics } from './arkui/Graphics';
 import uiMaterial from '@ohos.arkui.uiMaterial';
 import { HandednessFollowMode } from '@ohos.arkui.dialog';
 /**

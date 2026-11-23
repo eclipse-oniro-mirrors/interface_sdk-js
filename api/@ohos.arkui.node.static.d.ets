@@ -26,7 +26,7 @@
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from 'arkui.BuilderNode';
+export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from './arkui/BuilderNode';
 
 /**
  * Export BuildOptions which is used to create a node trees by builder function and manage the update of the tree.
@@ -35,7 +35,7 @@ export { NodeRenderType, RenderOptions, BuilderNode, ReactiveBuilderNode } from 
  * @stagemodelonly
  * @since 23 static
  */
-export { BuildOptions } from 'arkui.BuilderNode';
+export { BuildOptions } from './arkui/BuilderNode';
 
 /**
  * Export NodeController, which defines the controller of node container.
@@ -46,7 +46,7 @@ export { BuildOptions } from 'arkui.BuilderNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeController } from 'arkui.NodeController';
+export { NodeController } from './arkui/NodeController';
 
 /**
  * Export FrameNode. FrameNode defines a basic type of node which contains a RenderNode.
@@ -55,7 +55,7 @@ export { NodeController } from 'arkui.NodeController';
  * @stagemodelonly
  * @since 23 static
  */
-export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from 'arkui.FrameNode';
+export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from './arkui/FrameNode';
 
 /**
  * Export UIState.
@@ -64,7 +64,7 @@ export { FrameNode, LayoutConstraint, ExpandMode, CrossLanguageOptions } from 'a
  * @stagemodelonly
  * @since 24 static
  */
-export { UIState } from 'arkui.FrameNode';
+export { UIState } from './arkui/FrameNode';
 
 /**
  * Export FrameNode. FrameNode defines a basic type of node which contains a RenderNode.
@@ -73,7 +73,7 @@ export { UIState } from 'arkui.FrameNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { typeNode, NodeAdapter } from 'arkui.FrameNode';
+export { typeNode, NodeAdapter } from './arkui/FrameNode';
 
 /**
  * Export Graphics. Defines the basic types related to the Graphics.
@@ -82,7 +82,7 @@ export { typeNode, NodeAdapter } from 'arkui.FrameNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, RoundRect, Circle, CommandPath, ShapeMask, ShapeClip, NodeBorderRadiuses, CornerRadius, Rect, NodeEdges, edgeColors, edgeWidths, borderStyles, borderRadiuses, LengthMetricsUnit } from 'arkui.Graphics';
+export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation, Matrix4, Rotation, Frame, RoundRect, Circle, CommandPath, ShapeMask, ShapeClip, NodeBorderRadiuses, CornerRadius, Rect, NodeEdges, edgeColors, edgeWidths, borderStyles, borderRadiuses, LengthMetricsUnit } from './arkui/Graphics';
 
 /**
  * Export Graphics. Defines the basic types related to the Graphics.
@@ -91,7 +91,7 @@ export { DrawContext, Size, NodeOffset, NodePosition, Pivot, Scale, Translation,
  * @stagemodelonly
  * @since 23 static
  */
-export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from 'arkui.Graphics';
+export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from './arkui/Graphics';
 
 /**
  * Export RenderNode. RenderNode contains node tree operations and render property operations on node.
@@ -100,7 +100,7 @@ export { LengthUnit, SizeT, PositionT, LengthMetrics, ColorMetrics } from 'arkui
  * @stagemodelonly
  * @since 23 static
  */
-export { RenderNode } from 'arkui.RenderNode';
+export { RenderNode } from './arkui/RenderNode';
 
 /**
  * Export Content.
@@ -109,7 +109,7 @@ export { RenderNode } from 'arkui.RenderNode';
  * @stagemodelonly
  * @since 23 static
  */
-export { Content } from 'arkui.Content';
+export { Content } from './arkui/Content';
 
 /**
  * Export ComponentContent, ComponentContentBase and ReactiveComponentContent.
@@ -118,7 +118,7 @@ export { Content } from 'arkui.Content';
  * @stagemodelonly
  * @since 23 static
  */
-export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from 'arkui.ComponentContent';
+export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from './arkui/ComponentContent';
 
 /**
  * Export NodeContent.
@@ -127,4 +127,4 @@ export { ComponentContent, ComponentContentBase, ReactiveComponentContent } from
  * @stagemodelonly
  * @since 23 static
  */
-export { NodeContent } from 'arkui.NodeContent';
+export { NodeContent } from './arkui/NodeContent';

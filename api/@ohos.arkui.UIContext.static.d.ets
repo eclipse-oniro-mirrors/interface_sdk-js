@@ -99,7 +99,7 @@ import type pointer from './@ohos.multimodalInput.pointer';
 
 import { ComponentContent, FrameNode, Frame } from '@ohos.arkui.node';
 
-import { ComponentContentBase } from 'arkui.ComponentContent';
+import { ComponentContentBase } from './arkui/ComponentContent';
 
 import { DpiFollowStrategy, ReceiveCallback, TerminationInfo, TransitionEffect, UIExtensionProxy,
   WindowModeFollowStrategy } from '@ohos.arkui.component';

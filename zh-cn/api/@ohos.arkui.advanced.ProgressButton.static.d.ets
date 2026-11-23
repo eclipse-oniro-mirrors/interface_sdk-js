@@ -23,7 +23,7 @@ import { Component } from '@ohos.arkui.component';
 import { PropRef } from '@ohos.arkui.stateManagement';
 import { ResourceColor, ResourceStr, Length } from '@ohos.arkui.component';
 import { Builder } from '@ohos.arkui.component';
-import { LengthMetrics } from 'arkui.Graphics';
+import { LengthMetrics } from './arkui/Graphics';
 /**
  * 创建ProgressButton组件。
  *
