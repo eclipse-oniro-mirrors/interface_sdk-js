@@ -16,8 +16,8 @@
  */
 
 /**
- * @file
- * @kit ArkUI
+  * @file
+  * @kit ArkUI
  */
 
 import { ResourceColor, BorderRadiuses, LocalizedBorderRadiuses } from "./units";
@@ -39,7 +39,6 @@ import { ComponentBuilder, CustomBuilder } from './builder';
  * @since 23 static
  */
 export declare interface UIPickerComponentOptions {
-
   /**
    * 选中项的索引值。</br>取值范围：[0, 子组件的个数-1]内的整数。不在取值范围内时，使用默认值；设置小数时，使用向下取整后的整数。
    * </br>默认值：0
@@ -76,7 +75,6 @@ export declare type OnUIPickerComponentCallback = (selectedIndex: int) => void;
  * @since 23 static
  */
 export declare enum PickerIndicatorType {
-
   /**
    * 通过给选中项添加背景，标识选中项。
    *
@@ -85,7 +83,6 @@ export declare enum PickerIndicatorType {
    * @since 23 static
    */
   BACKGROUND = 0,
-
   /**
    * 通过在选中项的上下边缘添加分割线，标识选中项。
    *
@@ -105,7 +102,6 @@ export declare enum PickerIndicatorType {
  * @since 23 static
  */
 export declare interface PickerIndicatorStyle {
-
   /**
    * 选中项指示器的类型。
    * 
@@ -250,6 +246,17 @@ export declare interface PickerIndicatorStyle {
  */
 export declare interface UIPickerComponentAttribute extends CommonMethod {
   /**
+   * 设置UIPickerComponent组件选项。
+   *
+   * @param { UIPickerComponentOptions } [options] - 选择器参数。
+   * @returns { UIPickerComponentAttribute }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @unpublished
+   * @stagemodelonly
+   * @since 26.0.1 staticonly
+   */
+  default setUIPickerComponentOptions(options?: UIPickerComponentOptions): this;
+  /**
    * 滑动选择器选项时，若选中项发生变化，触发该事件。
    * 
    * > **说明：**
@@ -262,7 +269,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @param { OnUIPickerComponentCallback | undefined } callback - 当选中项发生变化时触发的回调函数。<br/>当callback的值为
    *      undefined时，不使用回调函数。
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -275,7 +282,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @param { OnUIPickerComponentCallback | undefined } callback - 当选择器滑动停止时触发的回调函数。<br/>当callback的值为
    *      undefined时，不使用回调函数。
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -286,7 +293,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    *
    * @param { boolean | undefined } isLoop
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -300,7 +307,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    * @param { boolean | undefined } enable - 设置是否开启触控反馈。<br/>- true：开启触控反馈。<br/>- false：不开启触控反馈。
    *     <br/>默认值：true<br/>当enable的值为undefined时，使用默认值。<br/>开启后，是否存在触控反馈取决于系统硬件支持情况。
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -311,7 +318,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    *
    * @param { PickerIndicatorStyle | undefined } style
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
@@ -322,12 +329,11 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    *
    * @param { AttributeModifier<UIPickerComponentAttribute> | AttributeModifier<CommonMethod> | undefined } modifier
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
    */
   default attributeModifier(modifier: AttributeModifier<UIPickerComponentAttribute> | AttributeModifier<CommonMethod> | undefined): this;
-
   /**
    * 设置UIPickerComponent容器每个选项的高度。未通过该接口设置时，每个选项的高度为40vp。
    *
@@ -335,12 +341,11 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    *     [LengthMetrics]{@link ../../../arkui/Graphics:LengthMetrics}一致。<br/>取值范围：[40vp, 64vp]<br/>设置小于40vp或
    *     大于64vp时，使用默认值40vp。<br/>当height的值为undefined时，使用默认值40vp。<br/>不支持"百分比"类型。
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
   default itemHeight(height: LengthMetrics | undefined): this;
-
   /**
    * 设置UIPickerComponent容器可见选项的数量。未通过该接口设置时，可见选项的数量为7行。
    *
@@ -348,7 +353,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
    *     <br/>设置偶数时，自动转为不小于该值的奇数（例如2变为3、8变为9）。
    *     <br/>设置不在取值范围内时，使用默认值7行。<br/>当count的值为undefined时，使用默认值7行。
    * @returns { UIPickerComponentAttribute }
-      * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 26.0.0 static
    */
@@ -356,6 +361,7 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 
   /**
    * 设置选中项的文本样式。
+   *
    * 默认值：
    * {
    * color: $r('sys.color.font_primary'),
@@ -390,4 +396,21 @@ export declare interface UIPickerComponentAttribute extends CommonMethod {
 export declare function UIPickerComponent(
     options?: UIPickerComponentOptions, 
     content_?: CustomBuilder
+): UIPickerComponentAttribute;
+/**
+ * 定义UIPickerComponent组件。它要求在组件属性设置开始时调用setUIPickerComponentOptions。
+ *
+ * @param { CustomBuilderT<UIPickerComponentAttribute> } style - 设置组件属性的回调。
+ * @param { CustomBuilder } [content_]
+ * @returns { UIPickerComponentAttribute } UIPickerComponent组件的属性。
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @unpublished
+ * @stagemodelonly
+ * @since 26.0.1 staticonly
+ * @noninterop
+ */
+@Builder
+export declare function UIPickerComponent(
+  style: CustomBuilderT<UIPickerComponentAttribute>,
+  content_?: CustomBuilder
 ): UIPickerComponentAttribute;
