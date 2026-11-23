@@ -19,14 +19,24 @@
  */
 
 /**
- * Provides offsets for a two-stage scroll snap of a scrollable component.
+ * Provides custom snap-scroll distances and snap positions. This interface applies to the
+ * scrollSnapStrategy attribute of the Grid, WaterFlow, and List components; implement the
+ * interface and pass the object to scrollSnapStrategy to use it.
+ * For a complete example, see [Example 24: Customizing the Scroll Snap Position](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-24-customizing-the-scroll-snap-position).
  *
- * Offsets are in vp and velocity is in vp/s. Callbacks are invoked synchronously
- * on the UI thread and must be pure calculations. No layout snapshot is provided;
- * a provider must maintain or derive item geometry itself.
- * velocity is the time derivative of the logical content scroll offset, positive toward
- * the content end. The component normalizes reversed layouts and RTL directions.
- * decayOffset is the non-negative magnitude of the natural friction decay distance.
+ * Custom snap scrolling has two stages: the component first scrolls by inertia for the
+ * specified distance, then scrolls to the target snap position through a snap animation.
+ * The two callbacks are invoked at the start of each stage:
+ * - calculateApproachOffset: invoked once when the inertial scrolling starts.
+ * - calculateSnapOffset: invoked once when the inertial stage ends, before the snap
+ *   animation starts.
+ *
+ * Notes:
+ * - Offsets are in vp and velocity is in vp/s.
+ * - Both callbacks are invoked synchronously on the UI thread and must be used for
+ *   calculation only; do not modify component layout or application state.
+ * - The callbacks do not provide item positions or sizes; record or derive this
+ *   information yourself.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -36,15 +46,20 @@
  */
 declare interface ScrollSnapOffsetProvider {
   /**
-   * Called once during a fling to determine the approach offset.
+   * Callback that computes the inertial scroll distance, invoked once when the inertial
+   * scrolling starts.
    *
-   * The return value is a non-negative finite distance magnitude and may be greater than
-   * or equal to decayOffset. A non-finite return value, a negative return value, or a
-   * callback exception falls back to the natural decay offset.
-   *
-   * @param { number } velocity - Current fling velocity, positive toward the content end, in vp/s.
-   * @param { number } decayOffset - Non-negative natural friction decay distance magnitude, in vp.
-   * @returns { number } Approach offset magnitude, in vp.
+   * @param { number } velocity - Velocity at the start of the inertial scrolling, positive
+   *     toward the content end. Reversed layouts and RTL directions are normalized by the component.
+   *     Unit: vp/s.
+   * @param { number } decayOffset - Glide distance predicted by the default inertial scrolling.
+   *     Unit: vp.
+   *     Value range: [0, +∞).
+   * @returns { number } Inertial scroll distance, which must not be NaN or Infinity and may exceed decayOffset. When a negative
+   *     value, NaN, or Infinity is returned, or the callback throws an exception, this stage scrolls by the default inertial
+   *     glide distance and then enters the snap animation stage normally.
+   *     Unit: vp.
+   *     Value range: [0, +∞).
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
@@ -54,16 +69,20 @@ declare interface ScrollSnapOffsetProvider {
   calculateApproachOffset(velocity: number, decayOffset: number): number;
 
   /**
-   * Called once when the inertial stage ends, before the final snap animation starts.
+   * Callback that computes the final snap position, invoked once when the inertial stage
+   * ends, before the snap animation starts.
    *
-   * The return value is an absolute content scroll target; 0 is valid. A finite target
-   * outside the legal scroll range is clamped to that range.
-   * A non-finite return value or a callback exception uses the component fallback target.
-   * A Grid custom strategy stays at the approach endpoint without returning to the gesture start position.
-   *
-   * @param { number } velocity - Residual velocity at the end of the inertial scroll,
-   * positive toward the content end, in vp/s.
-   * @returns { number } Absolute target scroll offset, in vp.
+   * @param { number } velocity - Residual velocity at the end of the inertial scrolling, positive
+   *     toward the content end. Reversed layouts and RTL directions are normalized by the component.
+   *     Unit: vp/s.
+   * @returns { number } Scroll offset of the final snap position relative to the content start, which must be a finite value.
+   *     Along the logical main axis, offsets are positive toward the content end, negative in the opposite direction, and 0
+   *     indicates the content start. The actual scroll direction depends on the target and current positions: the component
+   *     scrolls toward the content end when the target is greater, toward the content start when smaller, and does not scroll
+   *     when they are equal. Targets outside the scrollable range are clamped to the range boundary. When the callback returns
+   *     NaN or Infinity or throws an exception, the component stops at the current position.
+   *     Unit: vp.
+   *     Value range: scroll offsets within the scrollable range of the component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @crossplatform
