@@ -3695,7 +3695,7 @@ export declare enum ThemeColorMode {
 }
 
 /**
- * enum color mode of pointing popup
+ * 配置组件主题跟随的颜色模式。
 
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -3704,7 +3704,7 @@ export declare enum ThemeColorMode {
  */
 export declare enum AnchoredColorMode {
     /**
-     * Defines the mode which is follow up with system.
+     * 颜色模式跟随系统
      *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -3712,8 +3712,8 @@ export declare enum AnchoredColorMode {
     */
     FOLLOW_SYSTEM = 0,
     /**
-     * Defines the mode which is follow up with target.
-     * 
+     * 颜色模式跟随目标组件
+     *
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 26.0.0 static
