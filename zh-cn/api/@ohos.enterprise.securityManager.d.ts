@@ -1062,6 +1062,62 @@ declare namespace securityManager {
   function uninstallEnterpriseReSignatureCertificate(admin: Want, certificateAlias: string, accountId: int): void;
 
   /**
+   * 企业重签名证书信息。
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface ReSignatureCertificateInfo {
+    /**
+     * 证书别名。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    certificateAlias: string;
+
+    /**
+     * 企业名称。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+
+    /**
+     * 过期时间，单位：毫秒。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    expirationTime: number;
+  }
+
+  /**
+   * 根据账号ID获取企业重签名证书信息。该接口返回信息
+   * 同步，企业可通过该接口查询企业重签名证书详情
+   * 的管理和有效性监控。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - 用户ID，必须大于等于0。
+   * @returns { Array<ReSignatureCertificateInfo> } 获取的企业重签名证书信息。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseReSignatureCertificates(accountId: number): Array<ReSignatureCertificateInfo>;
+
+  /**
    * 设置屏幕水印策略，对所有用户生效。
    *
    * > **说明：**
