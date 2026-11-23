@@ -24,9 +24,10 @@
  * > 本模块接口仅可在Stage模型下使用。
  * 
  * ## 约束限制
- * - 当前仅支持PC/2in1设备。
- * - 应用集成AppServiceExtensionAbility的组件需要申请ACL权限（ohos.permission.SUPPORT_APP_SERVICE_EXTENSION）。该ACL权限当前只对企业普通应用开放申请，申请方
- * 式参考权限申请指导。
+ * - 支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+ * - 集成AppServiceExtensionAbility组件的应用需要获授ACL权限：手机和平板设备使用
+ * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION_ADVANCED，仅向MDM应用开放；PC/2in1设备可使用该权限或
+ * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION（仅向企业普通应用开放），满足一项即可。申请方式参考权限申请指导。
  * - 为保障系统安全性和稳定性，防止AppServiceExtensionAbility滥用系统资源，系统对其能力进行管控，不支持@ohos.window (窗口)。
  * 
  * ## 生命周期
@@ -79,6 +80,9 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
   /**
    * AppServiceExtensionAbility的上下文环境，继承自[ExtensionContext]{@link ./application/ExtensionContext:ExtensionContext}。
    *
+   * **设备行为差异**：该属性支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不生效。
+   *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
    * @since 20 dynamic
@@ -93,7 +97,8 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * >
    * > 如果AppServiceExtensionAbility实例已创建，再次启动或连接该实例时不会触发onCreate()回调。
    * 
-   * **设备行为差异**：该接口仅在PC/2in1设备中可正常执行回调，在其他设备上不执行回调。
+   * **设备行为差异**：该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不执行回调。
    *
    * @param { Want } want - 调用方拉起当前AppServiceExtensionAbility实例时传递的Want类型信息，包括Ability名称、Bundle名称等。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
@@ -106,7 +111,8 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
   /**
    * 在AppServiceExtensionAbility实例销毁时，系统会触发该回调。应用可以在该接口中执行资源清理等操作，如注销监听等。
    * 
-   * **设备行为差异**：该接口仅在PC/2in1设备中可正常执行回调，在其他设备上不执行回调。
+   * **设备行为差异**：该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不执行回调。
    *
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
@@ -120,7 +126,8 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * [startAppServiceExtensionAbility()]{@link ./application/UIAbilityContext:UIAbilityContext.startAppServiceExtensionAbility}
    * 拉起AppServiceExtensionAbility实例时，系统都会触发该回调。
    * 
-   * **设备行为差异**：该接口仅在PC/2in1设备中可正常执行回调，在其他设备上不执行回调。
+   * **设备行为差异**：该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不执行回调。
    *
    * @param { Want } want - 调用方拉起当前AppServiceExtensionAbility实例时传递的Want类型信息，包括Ability名称、Bundle名称等。
    * @param { int } startId - 拉起次数标识。首次拉起初始值为1，多次拉起时自动递增。建议开发者根据startId值判断是否为首次启动，避免重复执行初始化操作。
@@ -139,7 +146,8 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
    * 应用需要在该接口中返回一个RemoteObject对象，用于客户端和服务端进行通信。当AppServiceExtensionAbility实例处于连接状态时，如果调用方发起新的连接，系统会返回缓存的RemoteObject对象，
    * 而不会重复回调onConnect()接口。
    * 
-   * **设备行为差异**：该接口仅在PC/2in1设备中可正常执行回调，在其他设备上不执行回调。
+   * **设备行为差异**：该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不执行回调。
    *
    * @param { Want } want - 调用方拉起当前AppServiceExtensionAbility实例时传递的Want类型信息，包括Ability名称、Bundle名称等。
    * @returns { rpc.RemoteObject } 一个RemoteObject对象，用于客户端和服务端进行通信。
@@ -153,7 +161,8 @@ declare class AppServiceExtensionAbility extends ExtensionAbility {
   /**
    * 当所有连接方断开与AppServiceExtensionAbility实例的连接时，系统会触发该回调。
    * 
-   * **设备行为差异**：该接口仅在PC/2in1设备中可正常执行回调，在其他设备上不执行回调。
+   * **设备行为差异**：该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上不执行回调。
    *
    * @param { Want } want - AppServiceExtensionAbility实例最近一次被拉起或者连接时，调用方传递的Want类型信息，包括Ability名称、Bundle名称等。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core

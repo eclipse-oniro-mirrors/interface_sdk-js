@@ -2493,7 +2493,8 @@ declare class UIAbilityContext extends Context {
    * 启动
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 实例。使用Promise异步回调。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2533,7 +2534,8 @@ declare class UIAbilityContext extends Context {
    * 停止
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 实例。使用Promise异步回调。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2569,7 +2571,8 @@ declare class UIAbilityContext extends Context {
    * 将当前UIAbility连接到
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 。通过返回的proxy与AppServiceExtensionAbility进行通信，以使用AppServiceExtensionAbility对外提供的能力。仅支持在主线程调用。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * > **说明：**
    * >
@@ -2609,7 +2612,8 @@ declare class UIAbilityContext extends Context {
    * [AppServiceExtensionAbility](docroot://reference/apis-ability-kit/js-apis-app-ability-appServiceExtensionAbility.md)
    * 的连接。仅支持在主线程调用。使用Promise异步回调。
    * 断开连接之后，为了防止使用可能失效的remote对象进行通信，建议将连接成功时返回的remote对象设置为null。
-   * 该接口仅在PC/2in1设备中可正常调用，在其他设备中返回801错误码。
+   * 该接口支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
+   * 在不支持该能力的设备上返回801错误码。
    *
    * @param { long } connection - 在
    *     [connectAppServiceExtensionAbility]{@link UIAbilityContext.connectAppServiceExtensionAbility}返回的连接id。
