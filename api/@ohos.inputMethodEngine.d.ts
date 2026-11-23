@@ -3938,8 +3938,8 @@ declare namespace inputMethodEngine {
    */
   interface EditorAttribute {
     /**
-     * Text attribute of the edit box. For details, see
-     * [edit box definitions in constants](docroot://reference/apis-ime-kit/js-apis-inputmethodengine.md#工具不太能识别具体链接到的是哪个常量。让人工处理。咨询黄山）).
+     * Text attribute of the edit box. For details, see 
+     * [edit box definitions in constants](docroot://reference/apis-ime-kit/js-apis-inputmethodengine.md#Constants).
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 8 dynamic
@@ -3948,8 +3948,8 @@ declare namespace inputMethodEngine {
     readonly inputPattern: int;
 
     /**
-     * Function attributes of the edit box. For details, see
-     * [function key definitions in constants](docroot://reference/apis-ime-kit/js-apis-inputmethodengine.md#工具不太能识别具体链接到的是哪个常量。让人工处理。咨询黄山）).
+     * Function attributes of the edit box. For details, see 
+     * [function key definitions in constants](docroot://reference/apis-ime-kit/js-apis-inputmethodengine.md#Constants).
      *
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 8 dynamic
