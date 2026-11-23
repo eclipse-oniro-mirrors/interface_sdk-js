@@ -202,7 +202,7 @@ declare namespace config {
    */
   const repeatClickInterval: Config<RepeatClickInterval>;
   /**
-   * 表示屏幕放大功能启用状态。
+   * 表示屏幕放大功能启用状态。true表示已启用屏幕放大功能，false表示未启用屏幕放大功能，默认值为false。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi

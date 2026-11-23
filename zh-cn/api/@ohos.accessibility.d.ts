@@ -89,9 +89,9 @@ declare namespace accessibility {
    * @since 23 static
    */
   type Action = 'accessibilityFocus' | 'clearAccessibilityFocus' | 'focus' | 'clearFocus' | 'clearSelection' |
-  'click' | 'longClick' | 'cut' | 'copy' | 'paste' | 'select' | 'setText' | 'delete' |
-  'scrollForward' | 'scrollBackward' | 'setSelection' | 'setCursorPosition' | 'home' |
-  'back' | 'recentTask' | 'notificationCenter' | 'controlCenter' | 'common' | 'injectAction' | 'executeCustomAction';
+    'click' | 'longClick' | 'cut' | 'copy' | 'paste' | 'select' | 'setText' | 'delete' |
+    'scrollForward' | 'scrollBackward' | 'setSelection' | 'setCursorPosition' | 'home' |
+    'back' | 'recentTask' | 'notificationCenter' | 'controlCenter' | 'common' | 'injectAction' | 'executeCustomAction';
 
   /**
    * 无障碍事件类型。
@@ -123,10 +123,10 @@ declare namespace accessibility {
    * @since 23 static
    */
   type EventType = 'accessibilityFocus' | 'accessibilityFocusClear' |
-  'click' | 'longClick' | 'focus' | 'select' | 'hoverEnter' | 'hoverExit' |
-  'textUpdate' | 'textSelectionUpdate' | 'scroll' | 'requestFocusForAccessibility' |
-  'announceForAccessibility' | 'requestFocusForAccessibilityNotInterrupt' | 
-  'announceForAccessibilityNotInterrupt' | 'scrolling' | 'pageActive' | 'notificationUpdate' | 'focusInvisible';
+    'click' | 'longClick' | 'focus' | 'select' | 'hoverEnter' | 'hoverExit' |
+    'textUpdate' | 'textSelectionUpdate' | 'scroll' | 'requestFocusForAccessibility' |
+    'announceForAccessibility' | 'requestFocusForAccessibilityNotInterrupt' |
+    'announceForAccessibilityNotInterrupt' | 'scrolling' | 'pageActive' | 'notificationUpdate' | 'focusInvisible';
 
   /**
    * 窗口变化类型。
@@ -220,7 +220,7 @@ declare namespace accessibility {
    * 如需获取系统内辅助应用信息，推荐使用
    * [accessibility.getAccessibilityExtensionListSync]{@link accessibility.getAccessibilityExtensionListSync}。
    *
-   * @returns { boolean } 表示当前系统内是否有辅助应用开启。true表示启用了一个或多个辅助应用，false表示未启用任何辅助应用。
+   * @returns { boolean } 表示当前系统内是否有辅助应用开启。true表示启用了一个或多个辅助应用，false表示未启用任何辅助应用。<!--RP3--><!--RP3End-->
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @crossplatform [since 20]
    * @form [since 23]
@@ -428,7 +428,7 @@ declare namespace accessibility {
    * 
    * 如需获取系统内辅助应用信息，推荐使用
    * [accessibility.getAccessibilityExtensionListSync]{@link accessibility.getAccessibilityExtensionListSync}。
-   * 
+   *
    * > **说明：**
    * >
    * > - 注册监听的callback参数应使用具名函数而非匿名函数，否则每次调用时会创建一个新的底层对象，引起内存泄漏问题。
@@ -763,7 +763,7 @@ declare namespace accessibility {
    * @since 23 static
    */
   type CaptionsFontFamily = 'default' | 'monospacedSerif' | 'serif' |
-     'monospacedSansSerif' | 'sansSerif' | 'casual' | 'cursive' | 'smallCapitals';
+    'monospacedSansSerif' | 'sansSerif' | 'casual' | 'cursive' | 'smallCapitals';
   /**
    * 字幕风格。
    *
@@ -1679,7 +1679,14 @@ declare namespace accessibility {
   
   /**
    * 监听应用内无障碍焦点变化事件。
-   *
+   * 
+   * > **说明：**
+   * >
+   * > - 注册监听的callback参数应使用具名函数而非匿名函数，否则每次调用时会创建一个新的底层对象，引起内存泄漏问题。
+   * > - 调用此方法后，务必在组件实例销毁前（如aboutToDisappear生命周期中）
+   * > - 使用[accessibility.offUIAccessibilityFocusChanged]{@link accessibility.offUIAccessibilityFocusChanged}
+   * > - 取消监听，否则可能会导致崩溃。
+   * 
    * @param { Callback<UIAccessibilityFocusChangeInfo> } callback - 回调函数。在应用内焦点变化时将焦点变化信息通过此函数进行通知。
    * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
    *     <br>1.Internal operation failed.
@@ -3166,7 +3173,7 @@ export declare interface UIAccessibilityElement {
   /**
    * 元素所属组件的ID。
    * 
-   * 默认值：-1。
+   * 默认值为-1。-1表示的是一个非法的组件ID。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3288,7 +3295,7 @@ export declare interface UIAccessibilityElement {
   /**
    * 页面ID。
    * 
-   * 默认值：-1。
+   * 默认值为-1。-1表示非法的页面ID。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3332,7 +3339,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly text?: string;
   /**
-   * 元素的最大文本长度。默认值：0。
+   * 元素的最大文本长度。默认值为0，单位为字节（Byte）。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3421,7 +3428,7 @@ export declare interface UIAccessibilityElement {
    * 
    * true表示元素可滚动，false表示元素不可滚动。
    * 
-   * 默认值：false。
+   * 默认值：true。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly
@@ -3467,7 +3474,7 @@ export declare interface UIAccessibilityElement {
    */
   readonly accessibilityVisible?: boolean;
   /**
-   * 组件的父元素ID。默认值：-1。
+   * 组件的父元素ID。-1表示当前组件没有父元素。默认值为-1。
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @stagemodelonly

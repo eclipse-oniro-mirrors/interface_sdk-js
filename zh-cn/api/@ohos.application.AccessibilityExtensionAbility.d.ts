@@ -345,8 +345,7 @@ export declare interface AccessibilityEvent {
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @since 9 dynamiconly
    */
-  eventType: accessibility.EventType | accessibility.WindowUpdateType |
-        TouchGuideType | GestureType | PageUpdateType;
+  eventType: accessibility.EventType | accessibility.WindowUpdateType | TouchGuideType | GestureType | PageUpdateType;
 
   /**
    * 发生事件的目标元素。当无障碍事件涉及具体元素时，此属性包含该元素信息。
