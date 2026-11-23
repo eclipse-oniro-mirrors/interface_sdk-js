@@ -28849,7 +28849,7 @@ declare class ScrollResult {
  * @param { ScrollState } scrollState - 当前滑动状态。
  * @param { ScrollSource } scrollSource - 当前滑动操作的来源。
  * @returns { void | ScrollResult } 返回ScrollResult时按照开发者指定的相对上一帧的偏移量滑动；
- *     不返回时按回调参数scrollOffset滑动。<br/>取值范围：(-∞, +∞)
+ *     不返回时按回调参数scrollOffset滑动。<br/>ScrollResult中offsetRemain的取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

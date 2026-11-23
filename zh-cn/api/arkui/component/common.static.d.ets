@@ -15980,9 +15980,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置滚动条的颜色。
      *
      * @param { Color | int | string | Resource | undefined } color - 滚动条的颜色。
-     *     <br>默认值：<em>'\#182431'</em>（40%不透明度）
-     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：<em>0xffffff</em>。
-     *     string为rgb或者argb格式颜色，示例：<em>'#ffffff'</em>。
+     *     <br>儿童智能表的默认值颜色为'#ffffff'，表示白色（100%不透明度）。其他设备默认值为'#182431'，表示深蓝灰色（40%不透明度）。
+     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16022,8 +16021,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置滚动条的边距。
      *
      * @param { ScrollBarMargin | undefined } margin - 滚动条起始、末尾边距。
-     *     <br>传入undefined时恢复默认值。默认值：{start: LengthMetrics.vp(0), end:
-     *     LengthMetrics.vp(0)}.
+     *     <br>儿童智能表默认值：{start: LengthMetrics.vp(42), end: LengthMetrics.vp(0)}
+     *     <br>其他设备默认值：{start: LengthMetrics.vp(0), end: LengthMetrics.vp(0)}
+     *     <br>取值为undefined时，滚动条起始、末尾边距默认为0。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16045,17 +16045,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 设置边缘滑动效果。
      *
-     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，
-     *     支持弹簧效果和阴影效果。默认值：
-     *     <em>EdgeEffect.None</em>适用于<em>Grid</em>、<em>Scroll</em>和<em>WaterFlow</em>
-     *     组件，<em>EdgeEffect.Spring</em>适用于<em>List</em>组件。
-     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，
-     *     是否开启滑动效果。
-     *     <em>{ alwaysEnabled: true }</em>表示开启滑动效果，
-     *     <em>{ alwaysEnabled: false }</em>表示不开启。默认值：
-     *     <em>{ alwaysEnabled: false }</em>适用于<em>List</em>、<em>Grid</em>、
-     *     <em>WaterFlow</em>组件，<em>{ alwaysEnabled: true }</em>
-     *     适用于<em>Scroll</em>组件。
+     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，支持弹簧效果和阴影效果。
+     *     <br>默认值：Grid、Scroll、WaterFlow组件默认为EdgeEffect.None，List组件默认EdgeEffect.Spring。
+     *     <br>取值为undefined时，按默认值处理。
+     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，是否开启滑动效果。从API version 18开始，支持设置边缘效果生效的边缘。设置为{ alwaysEnabled：true }会开启滑动效果，{ alwaysEnabled：false }不开启。
+     *     <br>默认值：List、Grid、WaterFlow组件默认{ alwaysEnabled：false }，Scroll组件默认{ alwaysEnabled：true }。从API version 18开始，默认增加effectEdge字段，取值为EffectEdge.START | EffectEdge.END。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16087,7 +16081,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置是否支持滚动手势。
      *
      * @param { boolean | undefined } value - 是否支持手指或鼠标滚动手势。设置为true时支持，设置为false时不支持，但不影响控制器[Scroller](ts-container-scroll.md#scroller)的滚动接口和[backToTop](#backtotop15)属性。
-     *     <br>默认值：<em>true</em>
+     *     <br>默认值：true
      *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -16115,7 +16109,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { double | Resource | undefined } offset - 内容区域起始偏移量。滚动组件滚动到起始位置时，
      *     内容与组件显示区域边界保留指定距离。
-     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
+     *     <br>默认值：0
+     *     <br>单位：vp
+     *     <br>取值范围：[0, +∞)
+     *     <br>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16206,8 +16203,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 滚动组件到达起始位置时触发。
      *
-     * @param { function | undefined } event - 滚动组件到达起始位置时
-     *     触发的回调。
+     * @param { function | undefined } event - 滚动组件到达起始位置时触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
