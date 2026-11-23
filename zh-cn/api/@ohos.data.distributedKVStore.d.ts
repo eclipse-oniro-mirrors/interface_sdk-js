@@ -678,6 +678,7 @@ declare namespace distributedKVStore {
      * @since 24 dynamic&static
      */
     rootDir?: string;
+
     /**
      * 启动checkpoint的大小阈值。当WAL文件大小达到这个值时，会触发将WAL内容合并回主数据库文件。
      * 单位：KB。取值范围：[16, 524288]。默认值：204800。

@@ -731,6 +731,7 @@ declare namespace distributedKVStore {
      * @since 24 dynamic&static
      */
     rootDir?: string;
+
     /**
      * Size threshold in KB for starting an automatic checkpoint. When the WAL file size reaches this value,
      * a checkpoint is triggered to merge the WAL content back into the main database file.
