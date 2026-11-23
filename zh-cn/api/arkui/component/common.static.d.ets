@@ -16493,7 +16493,7 @@ export declare interface DynamicNode {
     onMove(handler: OnMoveHandler | undefined, eventHandler: ItemDragEventHandler): this;
 }
 /**
- * Define EdgeEffect Options.
+ * edgeEffect属性参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16544,7 +16544,11 @@ export declare enum EffectEdge {
     END = 2
 }
 /**
- * Indicates children main size.
+ * 维护List组件或ListItemGroup组件的子组件在主轴方向的大小信息，仅支持一对一绑定到List组件或ListItemGroup组件。
+ *
+ * > **说明：**
+ * >
+ * > - 提供的主轴方向大小信息必须与子组件实际在主轴方向的大小一致，子组件在主轴方向大小变化或者增删子组件时都必须通过ChildrenMainSize对象方法通知List组件或ListItemGroup组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16552,10 +16556,9 @@ export declare enum EffectEdge {
  */
 export declare class ChildrenMainSize {
     /**
-     * Creates an instance of ChildrenMainSize.
+     * ChildrenMainSize有参构造函数。
      *
-     * @param { double } childDefaultSize - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @param { double } childDefaultSize - 子组件在主轴方向的默认大小。<br/>单位：vp<br/>**说明：** <br/>必须是有限的非负数值，否则抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16566,10 +16569,9 @@ export declare class ChildrenMainSize {
      */
     constructor(childDefaultSize: double);
     /**
-     * Set default size.
+     * 修改子组件在主轴方向的默认大小。
      *
-     * @param { double } value - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @param { double } value - 子组件在主轴方向的默认大小。<br/>单位：vp<br/>**说明：** <br/>必须是有限的非负数值，否则抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16580,21 +16582,24 @@ export declare class ChildrenMainSize {
      */
     set childDefaultSize(value: double);
     /**
-     * Get default size
+     * 获取子组件在主轴方向的默认大小。
      *
-     * @returns { double } - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @returns { double } - 子组件在主轴方向的默认大小。<br/>单位：vp <br/>取值范围：[0, +∞)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     get childDefaultSize(): double;
     /**
-     * Changes children main size by removing or replacing existing elements and/or adding new elements in place.
+     * 批量增删改子组件在主轴方向的大小信息。
      *
-     * @param { int } start - Zero-based index at which to start changing the children main size.
-     * @param { int } [deleteCount] - Indicating the number of children main size to remove from start.
-     * @param { Array<double> } [childrenSize] - Add the new children main size, beginning from start.
+     * @param { int } start - 从0开始计算的索引值，表示要开始修改子组件在主轴方向大小信息的位置。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则抛出异常。<br/>2. 非整数会被截断为
+     *     整数。<br/>3. 超过最大索引值不生效。<br/>取值范围：[0, +∞)
+     * @param { int } [deleteCount] - 从start开始删除的大小信息的数量。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则处理为0。<br/>2. 非整数会被截断为整数。
+     *     <br/>3. start + deleteCount - 1可以超过最大索引值，会删除索引值start开始之后的所有子组件的大小信息。<br/>默认值为+∞。 <br/>取值范围：[0, +∞)
+     * @param { Array<double> } [childrenSize] - 要在start位置插入的所有子组件的主轴方向的大小。<br/>Array中各个数值单位：vp
+     *     <br/>**说明：** <br/>1.数组中数值如果是有限的非负值，则认为是指定的大小，后续不随默认大小的变化而变化。
+     *     <br/>2. 数组中数值如果不是有限的非负值，会被处理成默认大小，后续会随默认大小的变化而变化。<br/>默认值为空数组。 <br/>取值范围：[0, +∞)
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16602,16 +16607,18 @@ export declare class ChildrenMainSize {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
-     * @example splice(1, 0, [100]), Insert a child after first child, the child's main size is 100vp.
-     * splice(1, 1), Delete the second child.
-     * splice(1, 2, [100, 100]), Change the main size of the second and third children to 100vp.
+     * @example splice(1, 0, [100])，在第一个子组件后插入一个主轴大小为100vp的子组件。
+     * splice(1, 1)，删除第二个子组件。
+     * splice(1, 2, [100, 100])，将第二个和第三个子组件的主轴大小修改为100vp。
      */
     splice(start: int, deleteCount?: int, childrenSize?: Array<double>): void;
     /**
-     * Updates main size for specified child.
+     * 修改指定索引值对应的子组件的主轴方向的大小信息。
      *
-     * @param { int } index - index of child to be updated.
-     * @param { double } childSize - new section options.
+     * @param { int } index - 从0开始计算的索引值，表示要开始修改子组件在主轴方向大小信息的位置。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则抛出异常。<br/>2. 非整数会被截断为
+     *     整数。<br/>3. 超过最大索引值不生效。 <br/>取值范围：[0, +∞)
+     * @param { double } childSize - 要更新成的大小。<br/>单位：vp <br/>**说明：** <br/>1.数值如果是有限的非负值，则认为是指定的大小，后续不随默认大小的变化而变化。
+     *     <br/>2. 数值如果不是有限的非负值，会被处理成默认大小，后续会随默认大小的变化而变化。 <br/>取值范围：[0, +∞)
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
