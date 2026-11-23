@@ -65,6 +65,7 @@ export interface GrantedBundleInfo {
   /**
    * 应用的分身索引标识，仅在分身应用中生效。从ApplicationInfo中appIndex获取。
    *
+   * @readonly [since 22 - 26.0.1]
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
    * @since 23 static
