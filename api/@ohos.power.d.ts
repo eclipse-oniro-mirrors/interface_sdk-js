@@ -177,6 +177,7 @@ declare namespace power {
 
   /**
    * Sets the power mode of a device. This API uses an asynchronous callback to return the result.
+   * To set both the power mode and the sub-mode, use [setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}.
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
@@ -237,6 +238,8 @@ declare namespace power {
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - Power mode. The value must be an enum.
    * @param { DevicePowerSubMode } subMode - Power sub-mode. The value must be an enum.
+   *     Only MODE_EXTREME_POWER_SAVE (603) supports power sub-mode, and the default value is SUB_MODE_EMERGENCY (603002).
+   *     <br>Default value: SUB_MODE_EMERGENCY.
    * @returns { Promise<void> } Promise that returns no value.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.

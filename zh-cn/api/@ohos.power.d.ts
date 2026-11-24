@@ -161,6 +161,7 @@ declare namespace power {
 
   /**
    * 设置当前设备的电源模式，不同的电源模式会影响设备的性能与功耗策略。使用callback异步回调。
+   * 如需同时设置电源模式及其子模式，请使用[setPowerMode(mode, subMode)]{@link setPowerMode(mode: DevicePowerMode, subMode?: DevicePowerSubMode)}。
    *
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
@@ -217,6 +218,8 @@ declare namespace power {
    * @permission ohos.permission.POWER_OPTIMIZATION
    * @param { DevicePowerMode } mode - 电源模式。各模式含义请参见DevicePowerMode枚举说明。
    * @param { DevicePowerSubMode } [subMode] - 电源模式子模式。各模式含义请参见DevicePowerSubMode枚举说明。
+   *     仅 MODE_EXTREME_POWER_SAVE（603）支持电源模式子模式，subMode 默认值为 SUB_MODE_EMERGENCY（603002）。
+   *     <br>默认值：SUB_MODE_EMERGENCY。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
