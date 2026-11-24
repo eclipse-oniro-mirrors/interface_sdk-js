@@ -13,14 +13,15 @@
  * limitations under the License.
  */
 /**
- * @file Tool Access Control Management
+ * @file 工具访问控制
  * @kit AbilityKit
  */
 
 import { Permissions }  from './permissions';
 import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
 /**
- * 本模块提供提供工具（CLI命令）的执行认证凭据获取能力，以及应用控制权限的查询与请求能力。
+ * 工具访问控制模块提供工具（CLI命令和API接口）的权限管理能力，包括权限查询、用户授权、远程授权等功能。
+ * 当需要查询CLI命令或API接口的权限状态、进行工具权限授权、或管理远程设备的授权时，使用本模块接口。
  *
  * @syscap SystemCapability.Security.Asset
  * @FaAndStageModel
@@ -28,7 +29,7 @@ import abilityAccessCtrl from './@ohos.abilityAccessCtrl';
  */
 declare namespace abilityToolAccessCtrl {
   /**
-   * CLI命令信息。
+   * 表示CLI（Command Line Interface，命令行界面）命令信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -36,7 +37,8 @@ declare namespace abilityToolAccessCtrl {
    */
   interface CliCmdInfo {
     /**
-     * CLI主命令名称。
+     * CLI命令名称，用于指定CLI命令。
+     * 需传入系统支持的CLI命令名称，如'ohos-batteryManager'。长度不超过512字节，不能为空。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -45,7 +47,8 @@ declare namespace abilityToolAccessCtrl {
     cliCmdName: string;
 
     /**
-     * CLI子命令名。
+     * CLI子命令名称，用于指定CLI子命令。
+     * 需传入指定CLI命令支持的子命令名称，如'total-energy'。长度不超过512字节，可为空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -55,7 +58,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远程控制交互参数
+   * 表示远程控制交互参数。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -64,7 +67,9 @@ declare namespace abilityToolAccessCtrl {
    */
   interface RemoteControlParams {
     /**
-     * 防重放challenge。
+     * 防重放挑战值，用于防止重放攻击。
+     * 合法的挑战值由generateControlledDevicePackage接口获取。
+     * 默认值：空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -73,7 +78,8 @@ declare namespace abilityToolAccessCtrl {
      */
     challenge?: string;
     /**
-     * 可信设备的远程控制凭证。
+     * 可信设备的远程控制凭证，用于远程控制场景同账号下可信设备的身份验证。
+     * 默认值：空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -83,6 +89,7 @@ declare namespace abilityToolAccessCtrl {
     remoteControlTicket?: string;
     /**
      * 被控设备的设备名称。
+     * 默认值：空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -92,6 +99,7 @@ declare namespace abilityToolAccessCtrl {
     controlledDeviceName?: string;
     /**
      * 主控设备的设备名称。
+     * 默认值：空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -100,7 +108,8 @@ declare namespace abilityToolAccessCtrl {
      */
     controllerDeviceName?: string;
     /**
-     * 签名认证需要的额外信息。
+     * 签名认证需要的额外信息，如调用方包名、模块名等。
+     * 默认值：空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -110,7 +119,7 @@ declare namespace abilityToolAccessCtrl {
     signVerifyMsg?: string;
   }
   /**
-   * 权限查询信息。
+   * 表示权限查询信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -120,7 +129,7 @@ declare namespace abilityToolAccessCtrl {
   interface PermissionQuery {
 
     /**
-     * 操作信息列表。
+     * 操作信息列表，指定待查询的CLI命令或API接口。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -130,7 +139,9 @@ declare namespace abilityToolAccessCtrl {
     operationInfo: OperationInfo[];
 
     /**
-     * 是否需要ticket
+     * 是否需要生成ticket用于本地或远程授权。true表示需要生成ticket，false表示不需要。
+     * 当设置为true时，仅在本次查询结果通过的情况下才会返回ticket信息。
+     * 默认值：false
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -140,8 +151,10 @@ declare namespace abilityToolAccessCtrl {
     needTicket?: boolean;
 
     /**
-     * 凭据过期时间，单位为毫秒。取值必须大于0。
-     * 取值约束：大于0。
+     * ticket过期时间，单位为毫秒。需配合needTicket参数使用，仅当needTicket为true时本参数生效。
+     * 常规授权场景取值范围：1~60000（60秒），长时间远程授权场景取值范围：1~86400000（24小时），
+     * 超过最大值将返回错误码24010000。
+     * 默认值：10000
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -151,7 +164,7 @@ declare namespace abilityToolAccessCtrl {
     ticketExpireTimeMs?: long;
 
     /**
-     * 远端设备信息。
+     * 远端设备信息，包含设备角色、设备ID、域标识等。用于远程授权场景。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -161,8 +174,8 @@ declare namespace abilityToolAccessCtrl {
     remoteInfo?: RemoteInfo;
 
     /**
-     * 主叫token标识。
-     * 取值范围：(-∞,+∞)。
+     * 调用方进程的tokenId。当需要为其他进程查询或授权时，可指定目标进程的tokenId。
+     * 如果未传入该参数，默认获取调用方进程的tokenId。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -172,7 +185,7 @@ declare namespace abilityToolAccessCtrl {
     callerTokenId?: long;
 
     /**
-     * 域ID。
+     * 域标识。如果未传入该参数，则默认使用调用方当前的域标识。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -182,7 +195,8 @@ declare namespace abilityToolAccessCtrl {
     domainId?: string;
 
     /**
-     * 任务标识。
+     * 任务标识，用于智能体命令的任务身份验证。可通过generateTaskIdentity获取。
+     * 默认值：空。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -193,7 +207,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远端设备信息。
+   * 表示远端设备信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -203,7 +217,7 @@ declare namespace abilityToolAccessCtrl {
   interface RemoteInfo {
 
     /**
-     * 设备角色。
+     * 设备角色，表示设备是主控设备还是被控设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -213,7 +227,7 @@ declare namespace abilityToolAccessCtrl {
     role: Role;
 
     /**
-     * 远端设备ID。
+     * 远端设备ID，用于唯一标识远端设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -223,7 +237,7 @@ declare namespace abilityToolAccessCtrl {
     remoteId: string;
 
     /**
-     * 域ID。
+     * 域标识。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -233,7 +247,7 @@ declare namespace abilityToolAccessCtrl {
     domainId: string;
 
     /**
-     * 远程控制中的交互参数。
+     * 远程控制中的交互参数，包含防重放挑战值、远程控制凭证等信息。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -244,7 +258,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 操作信息。
+   * 表示操作信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -253,7 +267,7 @@ declare namespace abilityToolAccessCtrl {
    */
   interface OperationInfo {
     /**
-     * 操作类型。
+     * 操作类型，表示操作是CLI命令还是API接口。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -263,7 +277,8 @@ declare namespace abilityToolAccessCtrl {
     operationType: OperationType;
 
     /**
-     * 操作详细信息。
+     * 操作具体信息。当operationType为CLI时，info为CliCmdInfo；当operationType为API时，info为权限名称。
+     * 如果operationType和info的类型不匹配，会导致参数错误。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -274,7 +289,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 权限信息。
+   * 表示权限信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -283,7 +298,7 @@ declare namespace abilityToolAccessCtrl {
   interface PermissionInfo {
 
     /**
-     * 权限名称。
+     * 权限名称，合法的权限名取值可在应用权限列表中查询。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -302,6 +317,8 @@ declare namespace abilityToolAccessCtrl {
 
     /**
      * 授权状态信息。
+     * 该项作为出参；当PermissionInfo作为入参时，该项无需传入，若传入会被忽略。
+     * 默认值：undefined。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -312,7 +329,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 授权状态信息。
+   * 表示授权状态信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -322,6 +339,7 @@ declare namespace abilityToolAccessCtrl {
   interface AuthStatusInfo {
     /**
      * 授权状态。
+     * 作为入参时，该项无需传入，如果传入会被忽略；作为出参时，该项返回实际的授权状态，表示权限的授权结果。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -331,8 +349,8 @@ declare namespace abilityToolAccessCtrl {
     authStatus?: AuthStatus;
 
     /**
-     * 授权标志。
-     * 取值范围：(-∞,+∞)。
+     * 授权标志，用于标识权限授权的相关属性（如授权类型、授权持久性等）。
+     * 作为入参时无需传入，若传入将被忽略，默认值为0；作为出参时返回实际授权标志。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -343,7 +361,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 权限查询结果。
+   * 表示权限查询结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -353,7 +371,7 @@ declare namespace abilityToolAccessCtrl {
   interface PermissionQueryResult {
 
     /**
-     * 是否需要对话。
+     * 是否需要弹窗。true表示需要弹窗请求用户授权，false表示不需要弹窗。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -363,7 +381,7 @@ declare namespace abilityToolAccessCtrl {
     needDialog: boolean;
 
     /**
-     * 权限结果列表。
+     * 权限状态结果列表。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -373,7 +391,8 @@ declare namespace abilityToolAccessCtrl {
     permissionResults: PermissionInfo[];
 
     /**
-     * 票证信息。
+     * ticket信息。
+     * 当入参permissionQuery.needTicket为true且本次查询结果通过时，返回ticket信息。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -384,7 +403,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 凭据信息。
+   * 表示ticket信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -394,7 +413,7 @@ declare namespace abilityToolAccessCtrl {
   interface TicketInfo {
 
     /**
-     * 凭据消息
+     * ticket消息，用于传递授权信息、提示信息和状态描述。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -404,7 +423,7 @@ declare namespace abilityToolAccessCtrl {
     message: string;
 
     /**
-     * 挑战值。
+     * 挑战值，用于验证ticket的合法性。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -414,7 +433,7 @@ declare namespace abilityToolAccessCtrl {
     challenge: string;
 
     /**
-     * 凭据字符串
+     * ticket字符串，用于权限验证。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -425,7 +444,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远程授权包。
+   * 表示远程授权包。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -435,7 +454,7 @@ declare namespace abilityToolAccessCtrl {
   interface RemoteAuthPackage {
 
     /**
-     * 远程消息。
+     * 远程消息，用于传递远程授权信息。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -445,7 +464,7 @@ declare namespace abilityToolAccessCtrl {
     remoteMessage: string;
 
     /**
-     * 挑战值。
+     * 防重放挑战值，用于验证ticket的合法性。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -455,7 +474,7 @@ declare namespace abilityToolAccessCtrl {
     challenge: string;
 
     /**
-     * 凭据字符串。
+     * ticket字符串，用于权限验证。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -466,7 +485,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 用户授权结果。
+   * 表示用户授权结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -476,7 +495,7 @@ declare namespace abilityToolAccessCtrl {
   interface UserAuthResult {
 
     /**
-     * 权限信息列表。
+     * 权限信息列表，包含权限名称和授权状态。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -486,7 +505,7 @@ declare namespace abilityToolAccessCtrl {
     permissionInfo: PermissionInfo[];
 
     /**
-     * 权限查询信息。
+     * 对应的权限查询信息。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -497,7 +516,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远程用户授权结果。
+   * 表示远程用户授权结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -507,7 +526,7 @@ declare namespace abilityToolAccessCtrl {
   interface RemoteUserAuthResults {
 
     /**
-     * 授权结果列表。
+     * 授权结果列表，包含权限名称和授权结果。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -517,7 +536,7 @@ declare namespace abilityToolAccessCtrl {
     results: RemoteUserAuthItem[];
 
     /**
-     * 权限查询信息。
+     * 权限查询信息，用于关联授权结果与查询请求。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -528,7 +547,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远程用户授权项。
+   * 表示远程用户授权项。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -538,7 +557,7 @@ declare namespace abilityToolAccessCtrl {
   interface RemoteUserAuthItem {
 
     /**
-     * 权限名称。
+     * 权限名称，合法的权限名取值可在应用权限列表中查询。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -548,7 +567,9 @@ declare namespace abilityToolAccessCtrl {
     permission: string;
 
     /**
-     * 授权结果。
+     * 授权结果，表示权限的授权状态。
+     * 支持的取值包括"DENIED"（用户未授权）、"GRANTED"（已授权）、"NOT_DETERMINED"（未操作授权）、
+     * INVALID（无效权限）、RESTRICTED（限制授权）。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -559,7 +580,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 生成票据的可选参数
+   * 表示生成ticket的参数。各字段均为可选，未传入的字段使用默认值。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -568,8 +589,8 @@ declare namespace abilityToolAccessCtrl {
   interface TicketParams {
 
     /**
-     * 票证过期时间（毫秒）。
-     * 单位为：毫秒。
+     * ticket过期时间，单位为毫秒。取值范围：1~60000（60秒）。
+     * 默认值：10000
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -579,7 +600,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 票据查询结果。
+   * 表示ticket查询结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -588,7 +609,7 @@ declare namespace abilityToolAccessCtrl {
   interface TicketQueryResult {
 
     /**
-     * 权限结果列表。
+     * 权限状态结果列表。当用户尚未授权CLI工具所需的权限时，返回需要授权的权限列表及其状态。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -597,7 +618,8 @@ declare namespace abilityToolAccessCtrl {
     permissionResults: PermissionInfo[];
 
     /**
-     * 票证信息。
+     * ticket字符串，用于权限验证。
+     * 当用户已授权所有所需权限时，返回已认证的ticket；当用户尚未授权所有权限时，该项为空字符串。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -607,7 +629,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 授权状态。
+   * 表示授权状态枚举。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -626,7 +648,7 @@ declare namespace abilityToolAccessCtrl {
     REQUIRE_AUTH = 0,
 
     /**
-     * 禁止使用。
+     * 禁止授权。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -646,7 +668,7 @@ declare namespace abilityToolAccessCtrl {
     AUTHORIZED = 2,
 
     /**
-     * 受策略限制，不允许授权。
+     * 受系统或策略限制，当前授权被拒绝。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -656,7 +678,7 @@ declare namespace abilityToolAccessCtrl {
     RESTRICTED = 3,
 
     /**
-     * 策略限制的远程授权。
+     * 远程首先，不允许在远程授权场景下授予权限。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -667,7 +689,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 设备角色。
+   * 表示设备角色枚举。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -676,7 +698,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum Role {
     /**
-     * 主控设备。
+     * 主控设备，发起远程控制的设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -686,7 +708,7 @@ declare namespace abilityToolAccessCtrl {
     CONTROLLER = 0x01,
 
     /**
-     * 被控设备。
+     * 被控设备，接受远程控制指令的设备。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -697,7 +719,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 操作类型。
+   * 表示操作类型枚举。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -706,7 +728,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum OperationType {
     /**
-     * 命令行操作。
+     * CLI命令操作。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -716,7 +738,7 @@ declare namespace abilityToolAccessCtrl {
     CLI = 0x01,
 
     /**
-     * API操作。
+     * API接口操作。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -727,7 +749,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 远程授权状态。
+   * 表示远程授权状态枚举。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -736,7 +758,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum RemoteGrantStatus {
     /**
-     * 启用远程授权。
+     * 启用远程授权，允许设备向远程设备授予权限。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -746,7 +768,7 @@ declare namespace abilityToolAccessCtrl {
     ENABLE = 0x01,
 
     /**
-     * 禁用远程授权。
+     * 禁用远程授权，不允许远程授权。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -757,7 +779,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 控制权限状态。
+   * 表示应用控制权限状态枚举。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -765,7 +787,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum ControlAppStatus {
     /**
-     * 允许控制权限。
+     * 控制权限被授予。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -793,7 +815,7 @@ declare namespace abilityToolAccessCtrl {
    */
   interface TaskIdentity {
     /**
-     * 任务属性。
+     * 任务属性。为JSON格式的字符串，包含taskId、taskExpireTime、executeType、allowScreenLockExecution等字段。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -832,7 +854,7 @@ declare namespace abilityToolAccessCtrl {
    */
   enum ExecuteType {
     /**
-     * 即时任务。
+     * 即时任务，任务立即执行。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -841,7 +863,7 @@ declare namespace abilityToolAccessCtrl {
      */
     INSTANT = 0x01,
     /**
-     * 延时任务。
+     * 延时任务，任务在指定条件下延后执行。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -852,7 +874,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 用于生成任务标识的任务标识输入信息。
+   * 任务标识的输入参数，包含任务ID、过期时间、执行类型等信息，用于生成任务挑战值或任务标识。
    *
    * @syscap SystemCapability.Security.Asset
    * @systemapi
@@ -870,8 +892,7 @@ declare namespace abilityToolAccessCtrl {
      */
     taskId: string;
     /**
-     * 任务过期时间。
-     * 单位为：秒。
+     * 任务过期时间。单位为：秒。取值范围：-1或正整数。-1表示无过期时间。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -898,7 +919,8 @@ declare namespace abilityToolAccessCtrl {
      */
     allowScreenLockExecution: boolean;
     /**
-     * 可信持有物的认证凭据。
+     * 可信持有物的认证凭据。长度不超过4096字节。
+     * 默认值：空。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -907,8 +929,8 @@ declare namespace abilityToolAccessCtrl {
      */
     authToken?: Uint8Array;
     /**
-     * 可信持有物认证凭据的有效时长。
-     * 单位为：毫秒。取值范围：(0,86400000]。
+     * 可信持有物认证凭据的有效时长。单位为：毫秒。取值范围：(0,86400000]。
+     * 默认值：600000。
      *
      * @syscap SystemCapability.Security.Asset
      * @systemapi
@@ -919,7 +941,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 应用的相关信息。
+   * 表示应用信息。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -927,15 +949,15 @@ declare namespace abilityToolAccessCtrl {
    */
   interface AppInfo {
     /**
-      * 应用的包名。
-      *
+     * 应用包名，用于唯一标识一个应用。
+     *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
      * @since 26.1.0 dynamiconly
      */
     bundleName: string;
     /**
-     * 应用的分身索引。
+     * 应用分身索引。0表示主应用，大于0表示对应的分身应用。
      *
      * @syscap SystemCapability.Security.Asset
      * @FaAndStageModel
@@ -945,7 +967,7 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 应用的控制权限状态结果。
+   * 表示应用控制权限状态查询结果。
    *
    * @syscap SystemCapability.Security.Asset
    * @FaAndStageModel
@@ -972,14 +994,14 @@ declare namespace abilityToolAccessCtrl {
   }
 
   /**
-   * 根据指定的操作查询工具权限。
-   * 该函数用于检查权限查询中指定的CLI命令或API的权限状态。
-   * 对于每个操作，它返回权限状态、授权状态以及是否需要用户对话框。
-   * 当needTicket设置为true时，远程授权会生成一个凭据。
+   * 根据指定操作查询工具权限。
+   * 检查入参permissionQuery的operationInfo属性中指定的CLI命令或API接口的权限状态，
+   * 返回每个操作的权限状态、授权状态以及是否需要用户弹窗。
+   * 当permissionQuery.needTicket设置为true时，将生成用于远程授权的ticket。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { PermissionQuery } permissionQuery - 权限查询信息。
-   * @returns { Promise<PermissionQueryResult> } Promise对象，返回${PermissionQueryResult}。
+   * @param { PermissionQuery } permissionQuery - 权限查询信息，包含操作信息列表、是否需要生成ticket、远程设备信息等。
+   * @returns { Promise<PermissionQueryResult> } Promise对象，返回权限查询结果，包含是否需要弹窗、权限状态信息和ticket信息。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -999,13 +1021,12 @@ declare namespace abilityToolAccessCtrl {
   export function requestToolPermissions(permissionQuery: PermissionQuery): Promise<PermissionQueryResult>;
 
   /**
-   * 根据用户授权结果授予工具权限。
-   * 该功能根据用户的授权决定授予工具（CLI命令或API）的权限。
-   * 授权成功后，会生成凭据，用于权限验证。
+   * 根据用户授权结果，为工具（CLI命令或API接口）授予权限。授权成功后，生成可用于权限验证的ticket。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
-   * @param { UserAuthResult[] } userAuthResult - 用户授权结果列表
-   * @returns { Promise<TicketInfo[]> } Promise对象，返回${TicketInfo[]}。
+   * @param { UserAuthResult[] } userAuthResult - 用户授权结果列表，包含权限信息和权限查询信息。
+   * @returns { Promise<TicketInfo[]> } Promise对象，返回授权成功后生成的ticket信息列表。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1026,13 +1047,12 @@ declare namespace abilityToolAccessCtrl {
   export function grantToolPermissionsByUser(userAuthResult: UserAuthResult[]): Promise<TicketInfo[]>;
 
   /**
-   * 生成主控设备的授权包。
-   * 根据远程用户授权结果生成远程授权包。
-   * 生成的包可以发送到被控设备进行权限验证。
+   * 在主控设备上，生成远程授权结果包。生成的包可以发送到被控设备上，完成完整性校验后，执行权限授权。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { RemoteUserAuthResults[] } remoteUserAuthResult - 远程用户授权结果列表
-   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回${RemoteAuthPackage[]}。
+   * @param { RemoteUserAuthResults[] } remoteUserAuthResult - 用户远程授权结果列表，包含授权结果和权限信息。
+   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回远程授权结果包列表。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1051,13 +1071,12 @@ declare namespace abilityToolAccessCtrl {
     Promise<RemoteAuthPackage[]>;
 
   /**
-   * 生成被控设备的授权包。
-   * 根据权限查询列表生成远程授权包。
-   * 生成的包可以发送到主控设备进行权限验证。
+   * 在被控设备上，根据权限查询列表生成远程授权请求包。生成的包可以发送到主控设备上，
+   * 完成完整性校验后，发起用户授权确认。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { PermissionQuery[] } permissionQuery - 权限查询列表。
-   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回${RemoteAuthPackage[]}。
+   * @param { PermissionQuery[] } permissionQuery - 权限查询列表，包含CLI和API操作信息、远程授权交互信息等。
+   * @returns { Promise<RemoteAuthPackage[]> } Promise对象，返回远程授权请求包列表。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1075,14 +1094,13 @@ declare namespace abilityToolAccessCtrl {
   export function generateControlledDevicePackage(permissionQuery: PermissionQuery[]): Promise<RemoteAuthPackage[]>;
 
   /**
-   * 验证来自主控设备的授权包。
-   * 验证主控设备发送的远程授权包。
-   * 验证票证和远程设备信息，以确保授权是合法的。
+   * 验证主控设备发送的远程授权结果包，检查消息凭据和远程设备信息以确保授权结果合法。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { RemoteAuthPackage[] } ticketInfo - 远程授权包列表
-   * @param { RemoteInfo } remoteInfo - 远端设备信息
-   * @returns { Promise<boolean[]> } Promise对象，返回${boolean[]}。
+   * @param { RemoteAuthPackage[] } ticketInfo - 远程授权结果包列表，包含远程消息、防重放挑战值和消息完整性凭据。
+   * @param { RemoteInfo } remoteInfo - 远端设备信息，包含设备角色、设备ID、域标识等。
+   * @returns { Promise<boolean[]> } Promise对象，返回true表示验证通过；返回false表示验证失败。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1100,13 +1118,11 @@ declare namespace abilityToolAccessCtrl {
     Promise<boolean[]>;
 
   /**
-   * 对被控设备的授权包进行校验。
-   * 对被控设备发送的远程授权包进行校验。
-   * 验证票证以确保授权是合法的。
+   * 验证被控设备发送的授权请求包，检查消息凭据以确保授权请求合法。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { RemoteAuthPackage[] } ticketInfo - 远程授权包列表
-   * @returns { Promise<boolean[]> } Promise用于返回${boolean[]}。
+   * @param { RemoteAuthPackage[] } ticketInfo - 远程授权请求包列表，包含远程消息、防重放挑战值和消息完整性凭据。
+   * @returns { Promise<boolean[]> } Promise对象，返回true表示验证通过；返回false表示验证失败。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1123,13 +1139,11 @@ declare namespace abilityToolAccessCtrl {
   export function verifyControlledDevicePackage(ticketInfo: RemoteAuthPackage[]): Promise<boolean[]>;
 
   /**
-   * 获取远程授权状态。
-   * 该功能用于查询远程授权特性的使能状态。
-   * 启用时，设备可以向远程设备授予权限；
-   * 禁用时，不允许远程授权。
+   * 查询远程授权开关的使能状态。启用时设备可以发起远程授权，禁用时不允许远程授权。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @returns { Promise<RemoteGrantStatus> } Promise对象，返回${RemoteGrantStatus}。
+   * @returns { Promise<RemoteGrantStatus> } Promise对象，返回远程授权开关状态。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1144,13 +1158,11 @@ declare namespace abilityToolAccessCtrl {
   export function getRemoteGrantStatus(): Promise<RemoteGrantStatus>;
 
   /**
-   * 更新远程授权状态。
-   * 该功能用于开启或关闭远程授权特性。
-   * 启用时，设备可以向远程设备授予权限；
-   * 禁用时，不允许远程授权。
+   * 更新远程授权开关状态，开启或关闭远程授权使能开关。
+   * 启用时设备可以发起远程授权，禁用时不允许远程授权。使用Promise异步回调。
    *
    * @permission ohos.permission.MANAGE_TOOL_RUNTIME_PERMISSIONS
-   * @param { RemoteGrantStatus } remoteGrantStatus - 要设置的远程授权状态
+   * @param { RemoteGrantStatus } remoteGrantStatus - 要设置的远程授权状态。
    * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
@@ -1167,15 +1179,14 @@ declare namespace abilityToolAccessCtrl {
   export function updateRemoteGrantStatus(remoteGrantStatus: RemoteGrantStatus): Promise<void>;
 
   /**
-   * 获取CLI工具的执行认证票据。
-   * 该函数用于获取CLI工具及子命令的执行认证票据。
-   * 如果CLI工具所需权限用户尚未授权，会返回需要授权的权限列表及权限状态。
-   * 如果CLI工具所需权限用户均授权，会返回授权的票据。
+   * 获取CLI工具的执行认证ticket。
+   * 传入CLI命令列表，如果用户尚未授权CLI工具所需的权限，返回需要授权的权限列表及其状态；
+   * 如果用户已授权所有所需权限，返回已认证的ticket。使用Promise异步回调。
    *
    * @permission ohos.permission.EXEC_PUBLIC_CLI_TOOL
-   * @param { CliCmdInfo[] } cliCmdInfos - CLI命令列表。
-   * @param { TicketParams } ticketParams - 用于生成凭据的参数。
-   * @returns { Promise<TicketQueryResult> } Promise对象，返回${TicketQueryResult}
+   * @param { CliCmdInfo[] } cliCmdInfos - CLI命令列表，指定需要获取执行认证ticket的CLI命令及其子命令。数组长度不超过300。
+   * @param { TicketParams } ticketParams - 生成ticket的可选参数，包含ticket过期时间等。
+   * @returns { Promise<TicketQueryResult> } Promise对象，返回ticket查询结果，包含权限状态信息和ticket字符串。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. TicketExpireTime exceeds 60s, etc.
@@ -1191,12 +1202,12 @@ declare namespace abilityToolAccessCtrl {
   export function requestToolTicket(cliCmdInfos: CliCmdInfo[], ticketParams: TicketParams): Promise<TicketQueryResult>;
 
   /**
-   * 为代理命令生成基于任务的身份验证身份。
-   * 该函数根据调用者身份和基本任务属性（例如任务 ID 和任务过期时间）生成认证标识。
+   * 为智能体命令生成任务标识。
+   * 该函数根据调用者身份和基本任务属性（例如任务ID和任务过期时间）生成该标识。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
-   * @param { TaskIdentityInfo } taskIdentityInfo - 要生成认证标识的任务信息。
-   * @returns { Promise<TaskIdentity> } Promise对象，返回${TaskIdentity}。
+   * @param { TaskIdentityInfo } taskIdentityInfo - 要生成任务标识的任务信息。
+   * @returns { Promise<TaskIdentity> } Promise对象，返回生成的任务标识（TaskIdentity），包含任务属性、标识信息和挑战值。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -1212,8 +1223,7 @@ declare namespace abilityToolAccessCtrl {
   export function generateTaskIdentity(taskIdentityInfo: TaskIdentityInfo): Promise<TaskIdentity>;
 
   /**
-   * 批量撤销代理命令的任务认证标识。
-   * 该函数批量撤销任务鉴权标识，删除任务属性的本地缓存。
+   * 批量撤销智能体命令的任务标识，并删除任务属性的本地缓存。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { string[] } taskId - 待撤销的任务ID列表。列表的最大长度为100。
@@ -1233,13 +1243,13 @@ declare namespace abilityToolAccessCtrl {
   export function revokeTaskIdentity(taskId: string[]): Promise<void>;
 
   /**
-   * 查询指定应用的控制权限状态。
-   * 该函数检查输入列表中的每个应用程序是否被允许或拒绝
-   * 被外部工具控制。结果列表与输入顺序相对应。
+   * 查询指定应用的控制权限状态。使用Promise异步回调。
+   * 检查输入列表中的每个应用是否被允许或拒绝被外部工具控制。结果列表与输入列表顺序一一对应。
+   * 使用Promise异步回调。
    *
    * @permission ohos.permission.CONTROL_DEVICE
-   * @param { AppInfo[] } appInfo - 应用信息列表。
-   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回${ControlAppStatusResult[]}。
+   * @param { AppInfo[] } appInfo - 应用信息列表，指定需要查询控制权限状态的应用。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回控制权限状态结果列表，与输入列表顺序一一对应。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. appInfo is empty, bundleName is invalid, etc.
@@ -1254,13 +1264,13 @@ declare namespace abilityToolAccessCtrl {
 
   /**
    * 向用户请求指定应用的控制权限。
-   * 该函数会弹出一个用户对话框，获取对每个应用的控制授权决策。
-   * 返回结果反映用户对每个应用的允许或拒绝决策。
+   * 弹出用户对话框，获取用户对每个应用的控制授权决定。返回结果反映用户对每个应用的允许或拒绝决策，
+   * 与输入列表顺序一一对应。使用Promise异步回调。
    *
    * @permission ohos.permission.CONTROL_DEVICE
-   * @param { Context } context - 用于显示用户对话框的上下文对象。
-   * @param { AppInfo[] } appInfo - 应用信息列表。
-   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回${ControlAppStatusResult[]}。
+   * @param { Context } context - 应用上下文。
+   * @param { AppInfo[] } appInfo - 应用信息列表，指定需要请求控制权限的应用。
+   * @returns { Promise<ControlAppStatusResult[]> } Promise对象，返回控制权限状态结果列表，与输入列表顺序一一对应。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 24010000 - Invalid parameter. context is invalid, appInfo is empty,
@@ -1275,12 +1285,11 @@ declare namespace abilityToolAccessCtrl {
   export function requestControlAppPermissionFromUser(context: Context, appInfo: AppInfo[]):
     Promise<ControlAppStatusResult[]>;
   /**
-   * 为任务认证令牌生成挑战值。
-   * 该函数基于任务身份信息生成挑战值。
+   * 基于任务身份信息生成挑战值。使用Promise异步回调。
    *
    * @permission ohos.permission.QUERY_TOOL_PERMISSIONS
    * @param { TaskIdentityInfo } taskIdentityInfo - 用于生成挑战值的任务身份信息。
-   * @returns { Promise<Uint8Array> } Promise对象，返回${Uint8Array}格式的挑战值。
+   * @returns { Promise<Uint8Array> } Promise对象，返回Uint8Array格式的挑战值。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
