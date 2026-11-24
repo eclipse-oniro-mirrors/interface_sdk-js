@@ -16209,9 +16209,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置滚动条的颜色。
      *
      * @param { Color | int | string | Resource | undefined } color - 滚动条的颜色。
-     *     <br>默认值：<em>'\#182431'</em>（40%不透明度）
-     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：<em>0xffffff</em>。
-     *     string为rgb或者argb格式颜色，示例：<em>'#ffffff'</em>。
+     *     <br>儿童智能表的默认值颜色为'#ffffff'，表示白色（100%不透明度）。其他设备默认值为'#182431'，表示深蓝灰色（40%不透明度）。
+     *     <br>number为HEX格式颜色，支持rgb或者argb，示例：0xffffff。string为rgb或者argb格式颜色，示例：'#ffffff'。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16225,6 +16224,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *     <br>单位：vp
      *     <br>设置为小于0的值时，按默认值处理。
      *     设置为<em>0</em>时，不显示滚动条。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16239,6 +16239,7 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *     <br>默认值：<em>4</em>
      *     <br>设置为小于0的值时，按默认值处理。
      *     设置为<em>0</em>时，不显示滚动条。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16249,8 +16250,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置滚动条的边距。
      *
      * @param { ScrollBarMargin | undefined } margin - 滚动条起始、末尾边距。
-     *     <br>传入undefined时恢复默认值。默认值：{start: LengthMetrics.vp(0), end:
-     *     LengthMetrics.vp(0)}.
+     *     <br>儿童智能表默认值：{start: LengthMetrics.vp(42), end: LengthMetrics.vp(0)}
+     *     <br>其他设备默认值：{start: LengthMetrics.vp(0), end: LengthMetrics.vp(0)}
+     *     <br>取值为undefined时，滚动条起始、末尾边距默认为0。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16272,17 +16274,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 设置边缘滑动效果。
      *
-     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，
-     *     支持弹簧效果和阴影效果。默认值：
-     *     <em>EdgeEffect.None</em>适用于<em>Grid</em>、<em>Scroll</em>和<em>WaterFlow</em>
-     *     组件，<em>EdgeEffect.Spring</em>适用于<em>List</em>组件。
-     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，
-     *     是否开启滑动效果。
-     *     <em>{ alwaysEnabled: true }</em>表示开启滑动效果，
-     *     <em>{ alwaysEnabled: false }</em>表示不开启。默认值：
-     *     <em>{ alwaysEnabled: false }</em>适用于<em>List</em>、<em>Grid</em>、
-     *     <em>WaterFlow</em>组件，<em>{ alwaysEnabled: true }</em>
-     *     适用于<em>Scroll</em>组件。
+     * @param { EdgeEffect | undefined } edgeEffect - 滚动组件的边缘滑动效果，支持弹簧效果和阴影效果。
+     *     <br>默认值：Grid、Scroll、WaterFlow组件默认为EdgeEffect.None，List组件默认EdgeEffect.Spring。
+     *     <br>取值为undefined时，按默认值处理。
+     * @param { EdgeEffectOptions } [options] - 组件内容大小小于组件自身时，是否开启滑动效果。从API version 18开始，支持设置边缘效果生效的边缘。设置为{ alwaysEnabled：true }会开启滑动效果，{ alwaysEnabled：false }不开启。
+     *     <br>默认值：List、Grid、WaterFlow组件默认{ alwaysEnabled：false }，Scroll组件默认{ alwaysEnabled：true }。从API version 18开始，默认增加effectEdge字段，取值为EffectEdge.START | EffectEdge.END。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16313,7 +16309,9 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 设置是否支持滚动手势。
      *
-     * @param { boolean | undefined } value - 是否支持滚动手势。<br>默认值：<em>true</em>
+     * @param { boolean | undefined } value - 是否支持手指或鼠标滚动手势。设置为true时支持，设置为false时不支持，但不影响控制器[Scroller](ts-container-scroll.md#scroller)的滚动接口和[backToTop](#backtotop15)属性。
+     *     <br>默认值：true
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16324,6 +16322,11 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      * 设置摩擦系数。
      *
      * @param { double | Resource | undefined } value - 摩擦系数。
+     *     <br/>默认值：非Wearable设备为0.6，Wearable设备为0.9。
+     *     <br/>从API version 11开始，非Wearable设备默认值为0.7。
+     *     <br/>从API version 12开始，非Wearable设备默认值为0.75。
+     *     <br/>取值范围：(0, +∞)，设置为小于等于0的值时，按默认值处理。
+     *     <br/>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16335,7 +16338,10 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
      *
      * @param { double | Resource | undefined } offset - 内容区域起始偏移量。滚动组件滚动到起始位置时，
      *     内容与组件显示区域边界保留指定距离。
-     *     <br>单位：vp，<br>取值为undefined时，按默认值处理。默认值：<em>0</em>。
+     *     <br>默认值：0
+     *     <br>单位：vp
+     *     <br>取值范围：[0, +∞)
+     *     <br>取值为undefined时，按默认值处理。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16423,8 +16429,8 @@ export declare interface ScrollableCommonMethod extends CommonMethod {
     /**
      * 滚动组件到达起始位置时触发。
      *
-     * @param { function | undefined } event - 滚动组件到达起始位置时
-     *     触发的回调。
+     * @param { function | undefined } event - 滚动组件到达起始位置时触发的回调。
+     *     <br>当设置为undefined时，重置该事件回调。
      * @returns { this }
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
@@ -16716,7 +16722,7 @@ export declare interface DynamicNode {
     onMove(handler: OnMoveHandler | undefined, eventHandler: ItemDragEventHandler): this;
 }
 /**
- * Define EdgeEffect Options.
+ * edgeEffect属性参数对象。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16767,7 +16773,11 @@ export declare enum EffectEdge {
     END = 2
 }
 /**
- * Indicates children main size.
+ * 维护List组件或ListItemGroup组件的子组件在主轴方向的大小信息，仅支持一对一绑定到List组件或ListItemGroup组件。
+ *
+ * > **说明：**
+ * >
+ * > - 提供的主轴方向大小信息必须与子组件实际在主轴方向的大小一致，子组件在主轴方向大小变化或者增删子组件时都必须通过ChildrenMainSize对象方法通知List组件或ListItemGroup组件。
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
@@ -16775,10 +16785,9 @@ export declare enum EffectEdge {
  */
 export declare class ChildrenMainSize {
     /**
-     * Creates an instance of ChildrenMainSize.
+     * ChildrenMainSize有参构造函数。
      *
-     * @param { double } childDefaultSize - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @param { double } childDefaultSize - 子组件在主轴方向的默认大小。<br/>单位：vp<br/>**说明：** <br/>必须是有限的非负数值，否则抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16789,10 +16798,9 @@ export declare class ChildrenMainSize {
      */
     constructor(childDefaultSize: double);
     /**
-     * Set default size.
+     * 修改子组件在主轴方向的默认大小。
      *
-     * @param { double } value - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @param { double } value - 子组件在主轴方向的默认大小。<br/>单位：vp<br/>**说明：** <br/>必须是有限的非负数值，否则抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16803,21 +16811,24 @@ export declare class ChildrenMainSize {
      */
     set childDefaultSize(value: double);
     /**
-     * Get default size
+     * 获取子组件在主轴方向的默认大小。
      *
-     * @returns { double } - default main size, in vp. If the main axis is vertical, it indicates height.
-     * If the main axis is horizontal, it indicates width.
+     * @returns { double } - 子组件在主轴方向的默认大小。<br/>单位：vp <br/>取值范围：[0, +∞)
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
      */
     get childDefaultSize(): double;
     /**
-     * Changes children main size by removing or replacing existing elements and/or adding new elements in place.
+     * 批量增删改子组件在主轴方向的大小信息。
      *
-     * @param { int } start - Zero-based index at which to start changing the children main size.
-     * @param { int } [deleteCount] - Indicating the number of children main size to remove from start.
-     * @param { Array<double> } [childrenSize] - Add the new children main size, beginning from start.
+     * @param { int } start - 从0开始计算的索引值，表示要开始修改子组件在主轴方向大小信息的位置。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则抛出异常。<br/>2. 非整数会被截断为
+     *     整数。<br/>3. 超过最大索引值不生效。<br/>取值范围：[0, +∞)
+     * @param { int } [deleteCount] - 从start开始删除的大小信息的数量。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则处理为0。<br/>2. 非整数会被截断为整数。
+     *     <br/>3. start + deleteCount - 1可以超过最大索引值，会删除索引值start开始之后的所有子组件的大小信息。<br/>默认值为+∞。 <br/>取值范围：[0, +∞)
+     * @param { Array<double> } [childrenSize] - 要在start位置插入的所有子组件的主轴方向的大小。<br/>Array中各个数值单位：vp
+     *     <br/>**说明：** <br/>1.数组中数值如果是有限的非负值，则认为是指定的大小，后续不随默认大小的变化而变化。
+     *     <br/>2. 数组中数值如果不是有限的非负值，会被处理成默认大小，后续会随默认大小的变化而变化。<br/>默认值为空数组。 <br/>取值范围：[0, +∞)
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
@@ -16825,16 +16836,18 @@ export declare class ChildrenMainSize {
      * @syscap SystemCapability.ArkUI.ArkUI.Full
      * @stagemodelonly
      * @since 23 static
-     * @example splice(1, 0, [100]), Insert a child after first child, the child's main size is 100vp.
-     * splice(1, 1), Delete the second child.
-     * splice(1, 2, [100, 100]), Change the main size of the second and third children to 100vp.
+     * @example splice(1, 0, [100])，在第一个子组件后插入一个主轴大小为100vp的子组件。
+     * splice(1, 1)，删除第二个子组件。
+     * splice(1, 2, [100, 100])，将第二个和第三个子组件的主轴大小修改为100vp。
      */
     splice(start: int, deleteCount?: int, childrenSize?: Array<double>): void;
     /**
-     * Updates main size for specified child.
+     * 修改指定索引值对应的子组件的主轴方向的大小信息。
      *
-     * @param { int } index - index of child to be updated.
-     * @param { double } childSize - new section options.
+     * @param { int } index - 从0开始计算的索引值，表示要开始修改子组件在主轴方向大小信息的位置。<br/>**说明：** <br/>1. 必须是有限的非负数值，否则抛出异常。<br/>2. 非整数会被截断为
+     *     整数。<br/>3. 超过最大索引值不生效。 <br/>取值范围：[0, +∞)
+     * @param { double } childSize - 要更新成的大小。<br/>单位：vp <br/>**说明：** <br/>1.数值如果是有限的非负值，则认为是指定的大小，后续不随默认大小的变化而变化。
+     *     <br/>2. 数值如果不是有限的非负值，会被处理成默认大小，后续会随默认大小的变化而变化。 <br/>取值范围：[0, +∞)
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     <br> 1. Mandatory parameters are left unspecified.
      *     <br> 2. Incorrect parameters types.
