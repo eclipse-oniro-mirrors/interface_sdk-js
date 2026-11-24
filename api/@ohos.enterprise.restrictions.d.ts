@@ -642,6 +642,15 @@ declare namespace restrictions {
     POWER_SAVING_MODE = 57,
 
     /**
+     * Recent Tasks.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    RECENT_TASKS = 58,
+
+    /**
      * Control Center.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -666,7 +675,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-     PARENT_CONTROL = 61
+    PARENT_CONTROL = 61,
+
+    /**
+     * Multi Window Dock.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    MULTI_WINDOW_DOCK = 62
   }
 
   /**
