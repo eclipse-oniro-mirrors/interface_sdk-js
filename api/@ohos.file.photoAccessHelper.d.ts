@@ -3819,6 +3819,15 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     LOCAL_ENHANCEMENT_STATUS = 'local_enhancement_status',
+    /**
+     * Camera personalized color card shooting type.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamic&static
+     */
+    PHOTO_XT_STYLE_TEMPLATE_NUMBER = 'xt_style_template_number',
   }
 
   /**

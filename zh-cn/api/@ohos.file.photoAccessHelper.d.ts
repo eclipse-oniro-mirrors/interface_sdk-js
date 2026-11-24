@@ -3785,6 +3785,15 @@ declare namespace photoAccessHelper {
      * @since 19 dynamic
      */
     SUM_SIZE = 'sum(size)',
+    /**
+     * 相机个性色卡拍照类型。
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamic&static
+     */
+    PHOTO_XT_STYLE_TEMPLATE_NUMBER = 'xt_style_template_number',
   }
 
   /**
