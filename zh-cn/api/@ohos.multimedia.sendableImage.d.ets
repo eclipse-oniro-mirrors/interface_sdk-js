@@ -570,9 +570,13 @@ declare namespace sendableImage {
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个
-     *     PixelMap的像素数据，且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过
-     *     [getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixels]{@link sendableImage.PixelMap.writePixels}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -584,9 +588,13 @@ declare namespace sendableImage {
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。同步返回结果。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个
-     *     PixelMap的像素数据，且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过
-     *     [getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsSync]{@link sendableImage.PixelMap.writePixelsSync}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.

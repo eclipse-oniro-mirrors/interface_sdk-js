@@ -4055,7 +4055,7 @@ declare namespace image {
     size: Size;
 
     /**
-     * 传入的缓冲区数据的像素格式。默认值为BGRA_8888。
+     * 传入的缓冲区数据的像素格式。默认值为BGRA_8888。设为UNKNOWN时将使用默认值。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @since 12 dynamic
@@ -4064,7 +4064,7 @@ declare namespace image {
     srcPixelFormat?: PixelMapFormat;
 
     /**
-     * 生成的PixelMap的像素格式。默认值为RGBA_8888。
+     * 生成的PixelMap的像素格式。默认值为RGBA_8888。设为UNKNOWN时将使用默认值。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -4089,6 +4089,8 @@ declare namespace image {
 
     /**
      * 透明度类型。默认值为AlphaType.PREMUL。
+     * 仅对[RGB](docroot://media/image/image-glossary.md#rgb-pixel-formatrgb像素格式)格式的PixelMap生效，
+     * 对[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不生效。
      *
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6287,8 +6289,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。使用Promise异步回调。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
-     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -6309,8 +6316,13 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
     /**
      * 将缓冲区内的像素数据写入整个PixelMap。同步返回结果。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
-     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * > **说明：**
+     * >
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
+     *
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6335,18 +6347,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需写入与当前PixelMap像素格式相同的源数据（包括[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式），
      * 请使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer(src: ArrayBuffer)}。
-     * > - 如需写入具有自定义行跨距或偏移量的源数据，
+     * > - 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，
      * 请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
      * `PixelMap宽度 × PixelMap高度 × 每像素字节数`
      *  
-     * 公式中每像素字节数取决于sourcePixelFormat，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
+     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
      *
-     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
-     *     <br>缓冲区内的像素数据必须至少包含整个PixelMap的像素数据，且不包含内存对齐填充字节。
-     *     <br>所需的最小缓冲区大小请参考上方计算公式。
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据按`sourcePixelFormat`格式紧密排列，不含行末填充字节；缓冲区大小不得小于上方公式的计算结果。
      * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
@@ -6373,18 +6384,17 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需写入与当前PixelMap像素格式相同的源数据（包括[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式），
      * 请使用[writeAllPixelsFromBufferSync]{@link image.PixelMap.writeAllPixelsFromBufferSync(src: ArrayBuffer)}。
-     * > - 如需写入具有自定义行跨距或偏移量的源数据，
+     * > - 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，
      * 请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
      * `PixelMap宽度 × PixelMap高度 × 每像素字节数`
      *  
-     * 公式中每像素字节数取决于sourcePixelFormat，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
+     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
      *
-     * @param { ArrayBuffer } src - 源像素数据的缓冲区，该缓冲区内的像素数据会被拷贝至PixelMap。
-     *     <br>缓冲区内的像素数据必须至少包含整个PixelMap的像素数据，且不包含内存对齐填充字节。
-     *     <br>所需的最小缓冲区大小请参考上方计算公式。
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据按`sourcePixelFormat`格式紧密排列，不含行末填充字节；缓冲区大小不得小于上方公式的计算结果。
      * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -6409,8 +6419,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
-     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6428,8 +6439,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
-     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @param { AsyncCallback<void> } callback - 回调函数。当缓冲区中的图像像素数据写入PixelMap成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6448,8 +6460,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBufferSync]{@link image.PixelMap.writeAllPixelsFromBufferSync}
      * 代替，以获得更完善的异常处理能力。
      *
-     * @param { ArrayBuffer } src - 源数据缓冲区，该缓冲区内的图像像素数据会被写入PixelMap。缓冲区内的像素数据必须是整个PixelMap的像素数据，
-     *     且像素格式需与PixelMap相同，不包含内存对齐填充字节。缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap，必须包含整个PixelMap全部像素的源数据，而非仅部分区域的数据。
+     *     <br>数据需按PixelMap自身的像素格式紧密排列，不含行末填充字节；
+     *     缓冲区大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
