@@ -1097,6 +1097,35 @@ export declare interface TabViewCustomization {
 }
 
 /**
+ * Defines ths options for the title bar of the sidebar tab bar. The title bar is displayed above the header area.
+ * When the title bar is set, the expand/collapse button moves from the default left side to the right side of the
+ * title bar.
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @stagemodelonly
+ * @since 26.1.0 static
+ */
+export declare interface TabsSidebarTitleBarOptions {
+  /**
+   * Icon of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  icon?: ResourceStr;
+
+  /**
+   * Text of the title bar.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  text?: ResourceStr;
+}
+
+/**
  * The TabsAttribute.
  *
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1935,6 +1964,18 @@ export declare interface TabsAttribute extends CommonMethod {
    * @since 26.1.0 static
    */
   default tabViewCustomization(value: TabViewCustomization | undefined): this;
+
+  /**
+   * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
+   * set, the expand/collapse button moves from the default left side to the right side of the title bar.
+   *
+   * @param { TabsSidebarTitleBarOptions | undefined } value - Title bar options of the sidebar tab bar.
+   * @returns { TabsAttribute } - the attribute of the tabs.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default sidebarTitleBar(value: TabsSidebarTitleBarOptions | undefined): this;
 }
 
 /**
