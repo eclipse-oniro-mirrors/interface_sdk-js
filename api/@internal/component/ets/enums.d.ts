@@ -3980,7 +3980,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  SCROLL_LOCK = 20,
+  SCROLL_LOCK = 19,
 
   /**
    * Pause/Break key on the keyboard.
@@ -3991,7 +3991,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  PAUSE_BREAK = 21,
+  PAUSE_BREAK = 20,
 
   /**
    * NumLock key on the keyboard.
@@ -4002,7 +4002,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  NUM_LOCK = 22,
+  NUM_LOCK = 21,
 
   /**
    * Insert key on the keyboard.
@@ -4013,7 +4013,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  INSERT = 23,
+  INSERT = 22,
 
   /**
    * Delete key on the keyboard.
@@ -4024,7 +4024,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  DELETE = 24,
+  DELETE = 23,
 
   /**
    * Home key on the keyboard.
@@ -4035,7 +4035,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  HOME = 25,
+  HOME = 24,
 
   /**
    * End key on the keyboard.
@@ -4046,7 +4046,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  END = 26,
+  END = 25,
 
   /**
    * Page Up key on the keyboard.
@@ -4057,7 +4057,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  PAGE_UP = 27,
+  PAGE_UP = 26,
 
   /**
    * Page Down key on the keyboard.
@@ -4068,7 +4068,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  PAGE_DOWN = 28,
+  PAGE_DOWN = 27,
 
   /**
    * Enter key on the keyboard.
@@ -4079,7 +4079,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  ENTER = 29,
+  ENTER = 28,
 
   /**
    * Backspace key on the keyboard.
@@ -4090,7 +4090,7 @@ declare enum FunctionKey {
    * @atomicservice
    * @since 26.1.0 dynamic
    */
-  BACKSPACE = 30,
+  BACKSPACE = 29,
 }
 
 /**

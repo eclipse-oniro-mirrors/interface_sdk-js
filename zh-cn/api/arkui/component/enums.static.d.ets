@@ -3030,7 +3030,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  SCROLL_LOCK = 20,
+  SCROLL_LOCK = 19,
 
   /**
    * 表示键盘上的Pause/Break键。
@@ -3039,7 +3039,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAUSE_BREAK = 21,
+  PAUSE_BREAK = 20,
 
   /**
    * 表示键盘上的NumLock键。
@@ -3048,7 +3048,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  NUM_LOCK = 22,
+  NUM_LOCK = 21,
 
   /**
    * 表示键盘上的Insert键。
@@ -3057,7 +3057,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  INSERT = 23,
+  INSERT = 22,
 
   /**
    * 表示键盘上的Delete键。
@@ -3066,7 +3066,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  DELETE = 24,
+  DELETE = 23,
 
   /**
    * 表示键盘上的Home键。
@@ -3075,7 +3075,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  HOME = 25,
+  HOME = 24,
 
   /**
    * 表示键盘上的End键。
@@ -3084,7 +3084,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  END = 26,
+  END = 25,
 
   /**
    * 表示键盘上的Page Up键。
@@ -3093,7 +3093,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAGE_UP = 27,
+  PAGE_UP = 26,
 
   /**
    * 表示键盘上的Page Down键。
@@ -3102,7 +3102,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  PAGE_DOWN = 28,
+  PAGE_DOWN = 27,
 
   /**
    * 表示键盘上的Enter键。
@@ -3111,7 +3111,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  ENTER = 29,
+  ENTER = 28,
 
   /**
    * 表示键盘上的Backspace键。
@@ -3120,7 +3120,7 @@ export declare enum FunctionKey {
    * @stagemodelonly
    * @since 26.1.0 static
    */
-  BACKSPACE = 30
+  BACKSPACE = 29
 }
 
 /**
