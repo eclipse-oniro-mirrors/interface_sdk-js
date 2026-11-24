@@ -1966,6 +1966,23 @@ export declare interface TabsAttribute extends CommonMethod {
   default tabViewCustomization(value: TabViewCustomization | undefined): this;
 
   /**
+   * Sets whether to display the bottom tab bar when the sidebar tab bar is collapsed. This attribute takes effect only
+   * when the tab bar is displayed as a sidebar. When this property is not set, the bottom tab bar is not displayed when
+   * the sidebar tab bar is folded.
+   *
+   * @param { boolean | undefined } value - Indicates whether to display the bottom tab bar when the sidebar tab bar
+   *     is collapsed. If this parameter is set to true, the bottom tab bar is displayed when the sidebar tab bar is
+   *     collapsed and hidden when the sidebar is expanded. If this parameter is set to false, the bottom tab bar is not
+   *     displayed when the sidebar tab bar is collapsed or expanded. If this parameter is set to undefined, the default
+   *     value false is used.
+   * @returns { TabsAttribute } - Properties of the tab.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default showBottomBarOnSidebarCollapse(value: boolean | undefined): this;
+
+  /**
    * Sets the title bar of the sidebar tab bar. The title bar is displayed above the header area. When the title bar is
    * set, the expand/collapse button moves from the default left side to the right side of the title bar.
    *

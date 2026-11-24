@@ -2744,6 +2744,25 @@ declare class TabsAttribute extends CommonMethod<TabsAttribute> {
    * @since 26.1.0 dynamic
    */
   tabViewCustomization(value: Optional<TabViewCustomization>): TabsAttribute;
+
+  /**
+   * Sets whether to display the bottom tab bar when the sidebar tab bar is collapsed. This attribute takes effect only
+   * when the tab bar is displayed as a sidebar. When this property is not set, the bottom tab bar is not displayed when
+   * the sidebar tab bar is folded.
+   *
+   * @param { Optional<boolean> } value - Indicates whether to display the bottom tab bar when the sidebar tab bar
+   *     is collapsed. If this parameter is set to true, the bottom tab bar is displayed when the sidebar tab bar is
+   *     collapsed and hidden when the sidebar is expanded. If this parameter is set to false, the bottom tab bar is not
+   *     displayed when the sidebar tab bar is collapsed or expanded. If this parameter is set to undefined, the default
+   *     value false is used.
+   * @returns { TabsAttribute } - Properties of the tab.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  showBottomBarOnSidebarCollapse(value: Optional<boolean>): TabsAttribute;
 }
 
 /**
