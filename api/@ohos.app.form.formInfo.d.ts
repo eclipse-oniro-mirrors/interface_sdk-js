@@ -1207,7 +1207,27 @@ declare namespace formInfo {
      * @since 18 dynamic
      * @since 23 static
      */
-    DIMENSION_3_3 = 9
+    DIMENSION_3_3 = 9,
+
+    /**
+     * 2 x 1 card.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    DIMENSION_2_1 = 10,
+
+    /**
+     * 4 x 2 cards.
+     *
+     * @syscap SystemCapability.Ability.Form
+     * @stagemodelonly
+     * @atomicservice
+     * @since 26.1.0 dynamic&static
+     */
+    DIMENSION_4_2 = 11
   }
 
   /**
