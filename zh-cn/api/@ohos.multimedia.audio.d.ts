@@ -2327,6 +2327,20 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     originalAppIdInfo?: AppIdInfo;
+
+    /**
+     * 是否在静音播放时保持音频通路运行，默认值为false。
+     * 在默认情况下，播放静音数据，包括音量为0和输入静音数据，系统会在检测到后停止音频通路和硬件，
+     * 以达到节省功耗的效果。当恢复有声数据时，系统会立即恢复。
+     * 但恢复存在短暂耗时，如果应用需要在播放静音数据时保持通路运行，以确保数据输出时间固定，可通过此接口设置关闭。
+     * 关闭效果仅在音频播放流运行阶段有效。
+     * 默认值：false。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    keepActiveOnSilence?: boolean;
   }
 
   /**

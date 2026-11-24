@@ -2340,6 +2340,23 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     originalAppIdInfo?: AppIdInfo;
+
+    /**
+     * Indicates whether to keep the audio path active during silent playback.
+     * By default, when silent data is played, including zero-volume audio or input of silent data, the system stops the
+     * audio path and hardware
+     * upon detection to save power. The audio path is restored immediately when non-silent audio data resumes.
+     * However, this restoration incurs a short delay. To keep the audio path active during silent playback to ensure a
+     * fixed data output timing,
+     * you can disable this behavior using this API. This setting is valid only when the audio playback stream is
+     * running.
+     * The default value is **false**.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    keepActiveOnSilence?: boolean;
   }
 
   /**
