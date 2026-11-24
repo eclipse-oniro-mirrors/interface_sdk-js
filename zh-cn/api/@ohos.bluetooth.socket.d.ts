@@ -195,12 +195,13 @@ declare namespace socket {
   /**
    * 客户端和服务端均可使用，向对端设备发送数据。
    *
-   * 仅在双方成功建立连接后，调用本接口才有效。
-   * 若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
-   * 若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
-   * 若开发者需感知传输过程中异常断连等错误，建议使用[socket.sppWriteAsync]{@link socket.sppWriteAsync}。
-   * 按照蓝牙协议规范，数据通道在空闲状态需进入休眠模式以降低功耗。蓝牙子系统实现上，通道在5-7s内没有数据交互时会进入休眠模式，将导致下次调用此接口发送数据前，会耗费500ms左右退出休眠模式才开始发送数据。
-   * 若想减少每次发送数据前退出休眠模式的耗时，建议每3s左右可往数据通道上发送一次任意大小的心跳数据，对数据通道进行保活，可防止进入休眠模式，但同时也会提高设备功耗。
+   * <br>仅在双方成功建立连接后，调用本接口才有效。
+   * <br>若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
+   * <br>若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
+   * <br>若开发者需感知传输过程中异常断连等错误，建议使用[socket.sppWriteAsync]{@link socket.sppWriteAsync}。
+   * <br>按照蓝牙协议规范，数据通道在空闲状态需进入休眠模式以降低功耗。蓝牙子系统实现上，通道在5-7s内没有数据交互时会进入休眠模式，将导致下次调用此接口发送数据前，会耗费500ms左右退出休眠模式才开始发送数据。
+   * <br>若想减少每次发送数据前退出休眠模式的耗时，建议每3s左右可往数据通道上发送一次任意大小的心跳数据，对数据通道进行保活，可防止进入休眠模式，但同时也会提高设备功耗。
+   * <!--RP1--><!--RP1End-->
    *
    * @param { int } clientSocket - 客户端套接字的ID。
    *     该值是调用[socket.sppAccept]{@link socket.sppAccept}或[socket.sppConnect]{@link socket.sppConnect}接口，通过其异步
@@ -227,12 +228,13 @@ declare namespace socket {
   /**
    * 客户端和服务端均可使用，向对端设备发送数据。使用Promise异步回调。当连接断开时，该接口会抛出错误码并返回。
    *
-   * 仅在双方成功建立连接后，调用本接口才有效。
-   * 若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
-   * 若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
-   * 按照蓝牙协议规范，数据通道在空闲状态需进入休眠模式以降低功耗。蓝牙子系统实现上，通道在5-7s内没有数据交互时会进入休眠模式，将导致下次调用此接口发送数据前，会耗费500ms左右退出休眠模式才开始发送数据。
-   * 若想减少每次发送数据前退出休眠模式的耗时，建议每3s左右可往数据通道上发送一次任意大小的心跳数据，对数据通道进行保活，可防止进入休眠模式，但同时也会提高设备功耗。
-   *
+   * <br>仅在双方成功建立连接后，调用本接口才有效。
+   * <br>若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
+   * <br>若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
+   * <br>按照蓝牙协议规范，数据通道在空闲状态需进入休眠模式以降低功耗。蓝牙子系统实现上，通道在5-7s内没有数据交互时会进入休眠模式，将导致下次调用此接口发送数据前，会耗费500ms左右退出休眠模式才开始发送数据。
+   * <br>若想减少每次发送数据前退出休眠模式的耗时，建议每3s左右可往数据通道上发送一次任意大小的心跳数据，对数据通道进行保活，可防止进入休眠模式，但同时也会提高设备功耗。
+   * <!--RP3--><!--RP3End-->
+   * 
    * @param { int } clientSocket - 客户端套接字的ID。
    *     该值是调用[sppAccept]{@link socket.sppAccept}或[sppConnect]{@link socket.sppConnect}接口，通过其异步callback获取到的。
    * @param { ArrayBuffer } data - 写入的数据。
@@ -252,15 +254,16 @@ declare namespace socket {
   /**
    * 客户端和服务端均可使用，读取对端发送数据的异步接口。使用Promise异步回调。当连接断开时，该接口会抛出错误码并返回。
    *
-   * 若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
-   * 若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
-   * 不可以和API version 10开始支持的
+   * <br>若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
+   * <br>若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
+   * <br>不可以和API version 10开始支持的
    * [socket.on('sppRead')]{@link socket.on(type: 'sppRead', clientSocket: number, callback: Callback<ArrayBuffer>)}接口混
    * 用，同一路socket只能使用
    * [socket.on('sppRead')]{@link socket.on(type: 'sppRead', clientSocket: number, callback: Callback<ArrayBuffer>)}接口或者
    * socket.sppReadAsync接口。
-   * 通过Promise异步返回读取的数据，建议在连接成功后循环调用去获取接收到的数据，若不及时调用会丢失接收的数据。
-   * 该接口为异步接口，需要等异步回调结果返回后才能进行下一次调用。
+   * <br>通过Promise异步返回读取的数据，建议在连接成功后循环调用去获取接收到的数据，若不及时调用会丢失接收的数据。
+   * <br>该接口为异步接口，需要等异步回调结果返回后才能进行下一次调用。
+   * <!--RP4--><!--RP4End-->
    *
    * @param { int } clientSocket - 客户端套接字的ID。
    *     该值是调用[sppAccept]{@link socket.sppAccept}或[sppConnect]{@link socket.sppConnect}接口，通过其异步callback获取到的。
@@ -346,11 +349,12 @@ declare namespace socket {
   /**
    * 客户端和服务端均可使用，订阅套接字读请求事件。调用该接口后，当收到对端发送的数据会执行订阅的回调函数。
    *
-   * 若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
-   * 若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
-   * 不可以和API version 18开始支持的[socket.sppReadAsync]{@link socket.sppReadAsync}接口混用，同一路套接字连接只能使用socket.on('sppRead')接口或者
+   * <br>若客户端使用，需在调用[socket.sppConnect]{@link socket.sppConnect}后，且连接成功后使用。
+   * <br>若服务端使用，需在调用[socket.sppAccept]{@link socket.sppAccept}后，且连接成功后使用。
+   * <br>不可以和API version 18开始支持的[socket.sppReadAsync]{@link socket.sppReadAsync}接口混用，同一路套接字连接只能使用socket.on('sppRead')接口或者
    * [socket.sppReadAsync]{@link socket.sppReadAsync}接口。
-   * 若开发者需感知传输过程中异常断连等错误，建议使用[socket.sppReadAsync]{@link socket.sppReadAsync}。
+   * <br>若开发者需感知传输过程中异常断连等错误，建议使用[socket.sppReadAsync]{@link socket.sppReadAsync}。
+   * <!--RP2--><!--RP2End-->
    *
    * @param { 'sppRead' } type - 事件回调类型，支持的事件为'sppRead'，表示订阅spp读请求事件。
    *     当收到了对端发送的数据时，触发该事件。
