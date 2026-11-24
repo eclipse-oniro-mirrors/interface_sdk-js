@@ -42,7 +42,6 @@ import { SDK_CONSTANTS } from './validators/sdk_comparison_helper';
 import { DiagnosticCategory, ConditionCheckResult } from '../api-check-wrapper/utils/api_check_wrapper_typedef';
 import { validateApiAvailableArgument } from './validators/apiAvailable_validate_utils';
 
-
 export function isAnnotationAllowed(node: arkts.AstNode): node is AnnotationAllowedAstNode {
   const annotations: readonly arkts.AnnotationUsage[] | undefined = (node as AnnotationAllowedAstNode).annotations;
   return !!annotations && Array.isArray(annotations);
