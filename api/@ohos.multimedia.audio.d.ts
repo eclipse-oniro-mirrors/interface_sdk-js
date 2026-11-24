@@ -193,14 +193,14 @@ declare namespace audio {
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer>): void;
 
   /**
-   * Obtains an {@link #AudioCapturer} instance. This method uses an asynchronous callback to return the
-   * capturer instance.
-   * Using {@link #AudioCapturer} to record audio will need permission according to different {@link #Sourcetype}
-   * in options parameter, like {@link #ohos.permission.MICROPHONE} for the most microphone recording cases.
+   * Creates an audio capturer. This API uses an asynchronous callback to return the result.
    *
-   * @param { AudioCapturerOptions } options - Capturer configurations.
-   * @param { AsyncCallback<AudioCapturer | null> } callback - Callback used to return the audio capturer
-   *     instance, or null if any error occurs.
+   * If {@link audio.SourceType} in the **options** parameter is set to the audio source for microphone recording, the
+   * **ohos.permission.MICROPHONE** permission is required.
+   *
+   * @param { AudioCapturerOptions } options - Audio capturer configurations.
+   * @param { AsyncCallback<AudioCapturer | null> } callback - Callback used to return the **AudioCapturer**
+   *     instance. If an error occurs, **null** is returned.
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800301 - Audio system internal error, such as system crash.
    * @syscap SystemCapability.Multimedia.Audio.Capturer
@@ -229,13 +229,14 @@ declare namespace audio {
   function createAudioCapturer(options: AudioCapturerOptions): Promise<AudioCapturer>;
 
   /**
-   * Obtains an {@link AudioCapturer} instance. This method uses a promise to return the capturer instance.
-   * Using {@link #AudioCapturer} to record audio will need permission according to different {@link #Sourcetype}
-   * in options parameter, like {@link #ohos.permission.MICROPHONE} for the most microphone recording cases.
+   * Creates an audio capturer. This API uses an asynchronous callback to return the result.
    *
-   * @param { AudioCapturerOptions } options - Capturer configurations.
-   * @returns { Promise<AudioCapturer | null> } Promise used to return the audio capturer instance,
-   *     or null if any error occurs.
+   * If {@link audio.SourceType} in the **options** parameter is set to the audio source for microphone recording, the
+   * **ohos.permission.MICROPHONE** permission is required.
+   *
+   * @param { AudioCapturerOptions } options - Audio capturer configurations.
+   * @param { AsyncCallback<AudioCapturer | null> } callback - Callback used to return the **AudioCapturer**
+   *     instance. If an error occurs, **null** is returned.
    * @throws { BusinessError } 6800101 - Parameter verification failed.
    * @throws { BusinessError } 6800301 - Audio system internal error, such as system crash.
    * @syscap SystemCapability.Multimedia.Audio.Capturer

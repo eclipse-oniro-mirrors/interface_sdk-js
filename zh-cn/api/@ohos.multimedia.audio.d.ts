@@ -188,9 +188,9 @@ declare namespace audio {
   function createAudioCapturer(options: AudioCapturerOptions, callback: AsyncCallback<AudioCapturer>): void;
 
   /**
-   * 创建音频采集器。使用callback异步回调。
+   * 创建音频采集器。使用Callback异步回调。
    *
-   * 当设置Mic音频源（即[SourceType]{@link #Sourcetype}为SOURCE_TYPE_MIC、SOURCE_TYPE_VOICE_RECOGNITION、SOURCE_TYPE_VOICE_COMMUNICATION、SOURCE_TYPE_VOICE_MESSAGE、SOURCE_TYPE_CAMCORDER）时需要ohos.permission.MICROPHONE权限。
+   * 当options参数中{@link audio.SourceType}设置为使用麦克风录音的音频源时，需要申请ohos.permission.MICROPHONE权限。
    *
    * @param { AudioCapturerOptions } options - 配置音频采集器。
    * @param { AsyncCallback<AudioCapturer | null> } callback - 回调函数，用于返回音频采集器实例，若发生任何错误则返回 null。
@@ -225,7 +225,7 @@ declare namespace audio {
   /**
    * 创建音频采集器。使用Promise异步回调。
    *
-   * 当设置Mic音频源（即[SourceType]{@link #Sourcetype}为SOURCE_TYPE_MIC、SOURCE_TYPE_VOICE_RECOGNITION、SOURCE_TYPE_VOICE_COMMUNICATION、SOURCE_TYPE_VOICE_MESSAGE、SOURCE_TYPE_CAMCORDER）时需要ohos.permission.MICROPHONE权限。
+   * 当options参数中{@link audio.SourceType}设置为使用麦克风录音的音频源时，需要申请ohos.permission.MICROPHONE权限。
    *
    * @param { AudioCapturerOptions } options - 配置音频采集器。
    * @returns { Promise<AudioCapturer | null> } Promise对象，返回音频捕获器实例，若发生任何错误则返回 null。
