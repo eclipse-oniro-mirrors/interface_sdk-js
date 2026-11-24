@@ -5463,6 +5463,18 @@ declare namespace window {
      * @since 26.0.1 dynamic&static
      */
     excludeFromRecent?: boolean;
+
+    /**
+     * 当前窗口启动时的位置。
+     * 如果WindowPosition.TOP，则当前窗口将位于所有应用程序主窗口的顶部。
+     * 如果WindowPosition.BOTTOM，则当前窗口将位于所有应用程序主窗口的底部。
+     *
+     * @default WindowPosition.TOP
+     * @syscap SystemCapability.Window.SessionManager
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    positionZ?: WindowPosition;
   }
 
   /**
