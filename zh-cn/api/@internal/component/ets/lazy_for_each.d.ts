@@ -1029,6 +1029,8 @@ interface LazyForEachInterface {
    * LazyForEach从提供的数据源中按需迭代数据，并在每次迭代过程中创建相应的组件。当在滚动容器中使用了LazyForEach，框架会根据滚动容器可视区域按需创建组件，当组件滑出可视区域外时，框架会进行组件销毁回收以降低内存占
    * 用。
    *
+   * <!--RP1--><!--RP1End-->
+   * 
    * @param { IDataSource } dataSource - LazyForEach数据源，需要开发者实现相关接口。
    * @param { function } itemGenerator - 子组件生成函数，为数组中的每一个数据项创建一个子组件。
    *     <br>**说明：**

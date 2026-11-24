@@ -1129,6 +1129,8 @@ interface LazyForEachInterface {
    * When **LazyForEach** is used in a scrolling container, the framework creates components as required within the
    * visible area of the scrolling container. When a component is out of the visible area, the framework destroys and
    * reclaims the component to reduce memory usage.
+   * 
+   * <!--RP1--><!--RP1End-->
    *
    * @param { IDataSource } dataSource - **LazyForEach** data source. You need to implement related APIs.
    * @param { function } itemGenerator - Child component generation function, which generates a child component for each
