@@ -12429,7 +12429,6 @@ declare namespace audio {
     /**
      * Playback capture source type.
      * @syscap SystemCapability.Multimedia.Audio.PlaybackCapture
-     * @atomicservice [since 26.1.0]
      * @since 10 dynamiconly
      * @deprecated since 12
      * @useinstead OH_AVScreenCapture in native interface.
@@ -12520,7 +12519,6 @@ declare namespace audio {
      * Unprocessed voice assistant source type.
      *
      * @syscap SystemCapability.Multimedia.Audio.Core
-     * @atomicservice [since 26.1.0]
      * @systemapi
      * @stagemodelonly
      * @since 23 dynamic&static
