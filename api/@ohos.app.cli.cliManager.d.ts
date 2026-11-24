@@ -138,7 +138,7 @@ declare namespace cliManager {
     /**
      * Indicates the working directory for the command.
      *
-     * If not specified, the default working directory of the system service is used.
+     * If not specified, the root directory is used.
      *
      * @syscap SystemCapability.Ability.AgentRuntime.Core
      * @systemapi [since 26.0.0 - 26.0.0]
@@ -185,7 +185,6 @@ declare namespace cliManager {
      * the command to complete in the foreground. If the command does not finish within this duration, the method
      * returns a session ID and the command continues running in the background. A value of 0 means the caller waits
      * until the command finishes or the maximum execution timeout ({@link timeout}) is reached.
-     * The value ranges from **0** to **1000 * timeout**. If the value is out of range, error code 401 is thrown.
      *
      * @default 0
      * @syscap SystemCapability.Ability.AgentRuntime.Core
@@ -201,8 +200,6 @@ declare namespace cliManager {
      *
      * If the command process runs longer than this duration, it is forcibly terminated and the
      * {@link ExecResult.timeOut} field is set to **true**.
-     * The value ranges from **0** to **1800**. A value of **0** means the command will not time out.
-     * If the value is out of range, error code 401 is thrown.
      *
      * @default 1800
      * @syscap SystemCapability.Ability.AgentRuntime.Core
