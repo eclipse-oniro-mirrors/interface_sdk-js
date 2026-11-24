@@ -19,14 +19,14 @@
  */
 
 /**
- * 用于自定义限位滚动的距离和吸附位置。此接口适用于Grid、WaterFlow和List组件的scrollSnapStrategy属性，
+ * 用于自定义限位滚动的距离和吸附位置。此接口适用于[Grid](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md)、[WaterFlow](docroot://reference/apis-arkui/arkui-ts/ts-container-waterflow.md)和[List](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md)组件的scrollSnapStrategy属性，
  * 开发者实现接口后，将对象传入scrollSnapStrategy即可使用。
  * 完整示例参考[示例24（自定义滚动吸附位置）](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#示例24自定义滚动吸附位置)。
  *
  * 自定义限位滚动分为两个阶段：先按指定的距离惯性滚动，再通过限位动画滚动到目标吸附位置。
  * 两个回调分别在两个阶段的起始时机调用：
- * - calculateApproachOffset：在惯性滚动开始时调用一次。
- * - calculateSnapOffset：在惯性阶段结束、限位动画开始前调用一次。
+ * - [calculateApproachOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculateapproachoffset)：在惯性滚动开始时调用一次。
+ * - [calculateSnapOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculatesnapoffset)：在惯性阶段结束、限位动画开始前调用一次。
  *
  * 使用时请注意：
  * - 偏移量的单位是vp，速度的单位是vp/s。

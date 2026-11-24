@@ -20,15 +20,15 @@
 
 /**
  * Provides custom snap-scroll distances and snap positions. This interface applies to the
- * scrollSnapStrategy attribute of the Grid, WaterFlow, and List components; implement the
+ * scrollSnapStrategy attribute of the [Grid](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md), [WaterFlow](docroot://reference/apis-arkui/arkui-ts/ts-container-waterflow.md), and [List](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md) components; implement the
  * interface and pass the object to scrollSnapStrategy to use it.
  * For a complete example, see [Example 24: Customizing the Scroll Snap Position](docroot://reference/apis-arkui/arkui-ts/ts-container-grid.md#example-24-customizing-the-scroll-snap-position).
  *
  * Custom snap scrolling has two stages: the component first scrolls by inertia for the
  * specified distance, then scrolls to the target snap position through a snap animation.
  * The two callbacks are invoked at the start of each stage:
- * - calculateApproachOffset: invoked once when the inertial scrolling starts.
- * - calculateSnapOffset: invoked once when the inertial stage ends, before the snap
+ * - [calculateApproachOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculateapproachoffset): invoked once when the inertial scrolling starts.
+ * - [calculateSnapOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculatesnapoffset): invoked once when the inertial stage ends, before the snap
  *   animation starts.
  *
  * Notes:

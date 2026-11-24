@@ -1675,19 +1675,19 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * >   instead of the viewport center. This differs from scrollSnapAlign, which prioritizes the
    * >   alignment effect: with CENTER, the first and last child components still center themselves
    * >   and the list may expose blank areas.
-   * > - A drag initiated through the onMove interface or a mouse box-select operation also
+   * > - A drag initiated through the [onMove](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-drag-sorting.md#onmove) interface or a mouse box-select operation also
    * >   triggers the snap scrolling when it ends.
-   * > - ListItemGroup participates in the alignment as a whole.
-   * > - This attribute is mutually exclusive with scrollSnapAlign: the last one set wins.
-   * > - The snap animation of this attribute is not affected by scrollSnapAnimationSpeed;
+   * > - [ListItemGroup](docroot://reference/apis-arkui/arkui-ts/ts-container-listitemgroup.md) participates in the alignment as a whole.
+   * > - This attribute is mutually exclusive with [scrollSnapAlign](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapalign10): the last one set wins.
+   * > - The snap animation of this attribute is not affected by [scrollSnapAnimationSpeed](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapanimationspeed22);
    * >   scrollSnapAnimationSpeed only tunes the snap animation speed produced by scrollSnapAlign.
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - Scroll snap strategy.
-   *     When a ScrollSnapAlign enum is passed in, the built-in alignment is used: START, CENTER, and END
+   *     When a [ScrollSnapAlign](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapalign10) enum is passed in, the built-in alignment is used: START, CENTER, and END
    *     align child components with the start, center, and end of the viewport along the scroll axis.
-   *     When an object implementing ScrollSnapOffsetProvider is passed in, the developer computes the
-   *     scroll distance and the final snap position: calculateApproachOffset determines the scroll
-   *     distance of the inertial stage, and calculateSnapOffset determines the final snap position.
+   *     When an object implementing [ScrollSnapOffsetProvider](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#scrollsnapoffsetprovider) is passed in, the developer computes the
+   *     scroll distance and the final snap position: [calculateApproachOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculateapproachoffset) determines the scroll
+   *     distance of the inertial stage, and [calculateSnapOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculatesnapoffset) determines the final snap position.
    *     When this attribute is not set, or ScrollSnapAlign.NONE or undefined is passed in, scroll snapping
    *     is disabled, the List does not perform snap alignment, and it coasts to a stop by inertia.
    * @returns { ListAttribute } The attribute of the list.
