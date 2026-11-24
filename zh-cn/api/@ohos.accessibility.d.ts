@@ -1683,9 +1683,10 @@ declare namespace accessibility {
    * > **说明：**
    * >
    * > - 注册监听的callback参数应使用具名函数而非匿名函数，否则每次调用时会创建一个新的底层对象，引起内存泄漏问题。
+   * 
    * > - 调用此方法后，务必在组件实例销毁前（如aboutToDisappear生命周期中）
-   * > - 使用[accessibility.offUIAccessibilityFocusChanged]{@link accessibility.offUIAccessibilityFocusChanged}
-   * > - 取消监听，否则可能会导致崩溃。
+   * > 使用[accessibility.offUIAccessibilityFocusChanged]{@link accessibility.offUIAccessibilityFocusChanged}
+   * > 取消监听，否则可能会导致崩溃。
    * 
    * @param { Callback<UIAccessibilityFocusChangeInfo> } callback - 回调函数。在应用内焦点变化时将焦点变化信息通过此函数进行通知。
    * @throws { BusinessError } 9300000 - System abnormality. Possible causes: 
@@ -1722,7 +1723,7 @@ declare namespace accessibility {
    */
   interface UIAccessibilityFocusChangeInfo {
     /**
-     * 本次焦点变化中获得焦点的无障碍元素。
+     * 当前聚焦节点的信息。
      *
      * @syscap SystemCapability.BarrierFree.Accessibility.Core
      * @stagemodelonly
@@ -1730,7 +1731,7 @@ declare namespace accessibility {
      */
     focusedElement?: UIAccessibilityElement;
     /**
-     * 本次焦点变化中失去焦点的无障碍元素。
+     * 上一个聚焦节点的信息。
      *
      * @syscap SystemCapability.BarrierFree.Accessibility.Core
      * @stagemodelonly
@@ -3078,7 +3079,7 @@ export enum AccessibilitySourceType {
 }
 
 /**
- * 表示矩形区域。
+ * 表示矩形区域。仅在[UIAccessibilityElement]{@link accessibility.UIAccessibilityElement}中被使用，用于表示组件所在的矩形区域的范围。
  *
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @stagemodelonly
@@ -3120,7 +3121,7 @@ export interface UIRect {
 }
  
 /**
- * 无障碍节点元素。
+ * 无障碍聚焦节点元素信息。
  *
  * 通过[accessibility.getFocusedUIAccessibilityElement]{@link accessibility.getFocusedUIAccessibilityElement}获取
  * UIAccessibilityElement实例。
