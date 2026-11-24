@@ -5474,14 +5474,14 @@ declare namespace wifiManager {
     SERVICE_TYPE_VENDOR_SPECIFIC = 255
   }
   
-    /**
-     * 表示P2P服务信息。
-     *
-     * @syscap SystemCapability.Communication.WiFi.P2P
-     * @stagemodelonly
-     * @since 26.1.0 dynamic&static
-     */
-    interface WifiP2pServiceInfo {
+  /**
+   * 表示P2P服务信息。
+   *
+   * @syscap SystemCapability.Communication.WiFi.P2P
+   * @stagemodelonly
+   * @since 26.1.0 dynamic&static
+   */
+  interface WifiP2pServiceInfo {
     /**
      * 服务名称。
      *
