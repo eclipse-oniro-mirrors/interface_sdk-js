@@ -26096,7 +26096,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal. The root node in **builder** must be unique.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ModalTransition } [type] - System transition mode of the modal.
    *     <br> Default value:
    *     **ModalTransition.DEFAULT**.
@@ -26123,7 +26123,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ContentCoverOptions } [options] - Optional attributes of the modal.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full

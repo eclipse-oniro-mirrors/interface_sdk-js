@@ -25119,7 +25119,7 @@ declare class CommonMethod<T> {
    *     <br>-false：隐藏全屏模态页面。
    *     <br>从API version 10开始，该参数支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *     <br>从API version 18开始，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
-   * @param { CustomBuilder } builder - 配置全屏模态页面内容。builder中的根节点需唯一。<!--RP1--><!--RP1End-->
+   * @param { CustomBuilder } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
    * @param { ModalTransition } type - 全屏模态页面的系统转场方式。
    *     <br>取值原则：DEFAULT-上下切换过渡，NONE-无动画过渡，ALPHA-透明渐变过渡。
    *     <br> 默认值：ModalTransition.DEFAULT，即上下切换过渡。
@@ -25146,7 +25146,7 @@ declare class CommonMethod<T> {
    *     <br>-false：隐藏全屏模态页面。
    *     <br>从API version 10开始，该参数支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *     <br>从API version 18开始，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
-   * @param { CustomBuilder } builder - 配置全屏模态页面内容。
+   * @param { CustomBuilder } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
    * @param { ContentCoverOptions } options - 配置全屏模态页面的可选属性。不传入此参数时，各可选属性使用各自默认值。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
