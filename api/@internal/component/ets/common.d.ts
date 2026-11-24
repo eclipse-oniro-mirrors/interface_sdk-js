@@ -22217,7 +22217,9 @@ declare class CommonMethod<T> {
    * a finger touches the component area, and neither the component nor any of its child components is identified as
    * focusable by the accessibility hover event. The callback parameter returns the **TouchEvent** corresponding to
    * the touch event. Only single-finger touch is supported. Scenarios where the touch position is within the area of
-   * the following components are not supported, including UIExtension, Web, XComponent, and scenarios integrated with
+   * the following components are not supported, including [UIExtension]{@link @global:UIExtension},
+   * [Web]{@link @global:Web}<!--Del-->, [FormComponent]{@link @global:FormComponent}<!--DelEnd-->,
+   * [XComponent]{@link @global:XComponent}, and scenarios integrated with
    * third-party UI frameworks. In the preceding scenarios, this callback API does not take effect.
    * <br>This API is complementary to **onAccessibilityHover**. Only one of the two callbacks is triggered for the same
    * component at a time. This API cannot be called in **attributeModifier**.
