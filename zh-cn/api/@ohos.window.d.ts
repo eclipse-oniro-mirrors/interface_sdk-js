@@ -696,7 +696,7 @@ declare namespace window {
      */
     MINIMIZE = 3,
     /**
-     * 表示APP自由悬浮形式窗口模式。
+     * 表示APP自由悬浮形式窗口模式，窗口可以自由移动和缩放，适用于需要多窗口同时使用的场景。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 20]
@@ -706,7 +706,7 @@ declare namespace window {
      */
     FLOATING = 4,
     /**
-     * 表示APP分屏模式。
+     * 表示APP分屏模式。屏幕同时显示两个应用窗口，每个窗口占据屏幕的一半空间，适用于多任务并行处理的场景。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 20]
@@ -1447,7 +1447,9 @@ declare namespace window {
     parentWindowStatusChangeCallback?: Callback<WindowStatusType>;
 
     /**
-     * 是否使用处于协同关系中两个窗口的宽度限制的交集。
+     * 子窗与绑定主窗的宽度是否相互限制。
+     * - true：表示子窗与绑定主窗的宽度不能超过两个窗口宽度限制的交集；若两者宽度限制无交集，则不互相限制。当多个子窗同时设置此参数为true时，所有参与互限的窗口（包括主窗）的宽度受全部窗口宽度限制的交集约束。
+     * - false：表示子窗与绑定的主窗宽度不会互相限制。
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -1458,7 +1460,9 @@ declare namespace window {
     isIntersectedWidthLimit?: boolean;
 
     /**
-     * 是否使用处于协同关系中两个窗口的高度限制的交集。
+     * 子窗与绑定主窗的高度是否相互限制。
+     * - true：表示子窗与绑定主窗的高度不能超过两个窗口高度限制的交集；若两者高度限制无交集，则不互相限制。当多个子窗同时设置此参数为true时，所有参与互限的窗口（包括主窗）的高度受全部窗口高度限制的交集约束。
+     * - false：表示子窗与绑定的主窗高度不会互相限制。
      *
      * @default false
      * @syscap SystemCapability.Window.SessionManager
@@ -1997,7 +2001,7 @@ declare namespace window {
     windowType?: WindowType;
 
     /**
-     * 在满足isLayoutFullScreen为true的条件下如果隐藏了状态栏，返回值为true，其他情况下均返回false。
+     * 窗口是否处于[沉浸式布局](docroot://windowmanager/window-terminology.md#immersive-layout沉浸式布局)并设置了状态栏隐藏。
      *
      * @syscap SystemCapability.WindowManager.WindowManager.Core
      * @atomicservice [since 12]
@@ -2755,7 +2759,7 @@ declare namespace window {
    */
   interface RectChangeOptions {
     /**
-     * New value of the window rectangle.
+     * 窗口矩形变化后的值。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2911,7 +2915,7 @@ declare namespace window {
    */
   enum RectChangeReason {
     /**
-     * 默认值。
+     * 默认值，表示窗口矩形变化的原因未定义。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2922,7 +2926,7 @@ declare namespace window {
     UNDEFINED = 0,
 
     /**
-     * 窗口最大化。
+     * 窗口最大化或全屏模式。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -2933,7 +2937,7 @@ declare namespace window {
     MAXIMIZE = 1,
 
     /**
-     * 窗口恢复到上一次的状态。
+     * 窗口从最大化模式、全屏模式或分屏模式恢复到自由悬浮窗模式。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @crossplatform [since 26.0.1]
@@ -5311,10 +5315,9 @@ declare namespace window {
   /**
    * 当前支持显示或隐藏的系统栏类型。
    *
-   * @unionmember { 'status' } Status bar.
-   * @unionmember { 'navigation' } <!--RP13--><!--RP13End-->Three-button navigation bar.
-   * @unionmember { 'navigationIndicator' } Bottom navigation bar. <!--RP12-->OpenHarmony devices do not support this
-   *     capability.<!--RP12End-->
+   * @unionmember { 'status' } 状态栏。
+   * @unionmember { 'navigation' } <!--RP13--><!--RP13End-->三键导航栏或工具栏。当前工具栏仅Car设备支持。
+   * @unionmember { 'navigationIndicator' } 底部导航。 <!--RP12-->OpenHarmony各设备不支持此能力。<!--RP12End-->
    * @syscap SystemCapability.Window.SessionManager
    * @crossplatform [since 12]
    * @atomicservice
@@ -5417,9 +5420,9 @@ declare namespace window {
     needAnimation?: boolean;
 
     /**
-     * 是否覆盖系统窗口尺寸限制。
-     * 如果为true，则当前主窗口可以设置超出系统限制的窗口尺寸限制。
-     *
+     * 应用主窗口尺寸限制是否可突破系统默认限制。仅当被启动应用为系统应用时生效，否则不生效也不报错。
+     * - true：运行突破系统默认限制。在窗口尺寸限制计算过程中，将忽略系统默认限制，最终生效结果仍按各来源取交集计算，且优先级保持不变。详细说明可参考[WindowLimits]{@link @ohos.window:window.WindowLimits}
+     * - false：不允许突破系统默认限，。窗口尺寸限制按照默认规则计算（包含系统默认限制）。
      * @default false
      * @syscap SystemCapability.Window.SessionManager
      * @systemapi Hide this for inner system use.
@@ -5569,7 +5572,7 @@ declare namespace window {
    */
   interface KeyFramePolicy {
     /**
-     * 是否开启关键帧。true表示开启，false表示关闭。
+     * 是否开启关键帧。true表示开启关键帧策略，在拖拽窗口时会按照关键帧布局进行切换；false表示关闭关键帧策略，窗口拖拽时平滑过渡。
      *
      * @syscap SystemCapability.Window.SessionManager
      * @since 20 dynamic
@@ -5578,7 +5581,7 @@ declare namespace window {
     enable: boolean;
 
     /**
-     * 设置关键帧布局切换的拖拽时间间隔，单位为毫秒，默认值为1000。取值为正整数，浮点数向下取整。与distance判断为或的关系：满足其一即开始布局切换。
+     * 设置关键帧布局切换的拖拽时间间隔，单位为毫秒，默认值为1000。表示拖拽持续该时间后将触发布局切换，值越大需要拖拽越久才会切换。取值为正整数，浮点数向下取整。与distance判断为或的关系：满足其一即开始布局切换。
      *
      * @default 1000
      * @syscap SystemCapability.Window.SessionManager
@@ -5588,7 +5591,7 @@ declare namespace window {
     interval?: long;
 
     /**
-     * 设置关键帧布局切换的拖拽距离间隔，单位为px，默认值为1000。取值为0或正整数，浮点数向下取整。设置为0时，忽略拖拽距离因素。与interval判断为或的关系：满足其一即开始布局切换。
+     * 设置关键帧布局切换的拖拽距离间隔，单位为px，默认值为1000。表示拖拽距离达到该值后将触发布局切换，值越大需要拖拽越远才会切换。取值为0或正整数，浮点数向下取整。设置为0时，忽略拖拽距离因素，仅通过interval判断是否切换。与interval判断为或的关系：满足其一即开始布局切换。
      *
      * @default 1000
      * @syscap SystemCapability.Window.SessionManager
@@ -6326,7 +6329,7 @@ declare namespace window {
      * 负值为非法参数（抛出错误码401）。
      * @param { int } height - 当前窗口的目标高度，单位为px，该参数仅支持整数输入，浮点数输入将向下取整，
      * 负值为非法参数（抛出错误码401）。
-     * @param { AsyncCallback<void> } callback - Callback used to return the result.
+     * @param { AsyncCallback<void> } callback - 回调函数。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
      *     3. Parameter verification failed.
@@ -6461,6 +6464,8 @@ declare namespace window {
      * 
      * 该相对位置通过子窗与主窗之间的锚点偏移量表示，子窗和主窗使用的窗口锚点相同。
      * 
+     * 非独立子窗支持单独调用。独立子窗调用此接口时，将返回1300004错误码。
+     * 
      * > **说明：**
      * >
      * > - 只支持一级子窗调用该接口，子窗需处于自由悬浮窗口模式（即窗口模式为window.WindowStatusType.FLOATING）。
@@ -6502,6 +6507,8 @@ declare namespace window {
 
     /**
      * 解除一级子窗与主窗保持相对位置不变的协同关系。使用Promise异步回调。
+     * 
+     * 非独立子窗支持单独调用。独立子窗调用此接口时，将返回1300004错误码。
      * 
      * > **说明：**
      * >
@@ -6775,7 +6782,7 @@ declare namespace window {
      * - 仅在调用[setSystemAvoidAreaEnabled]{@link window.Window.setSystemAvoidAreaEnabled}方法使能后，才能通过此接口获取计算后的避让区域，否则获取的避让区域
      * 为空。
      *
-     * @param { AvoidAreaType } type - Type of the area.
+     * @param { AvoidAreaType } type - 表示避让区域类型。不支持获取软键盘类型的避让区域，传入TYPE_KEYBOARD时，返回1300016错误码。
      * @returns { AvoidArea } 窗口内容避让区域。
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
@@ -6812,7 +6819,7 @@ declare namespace window {
      * 调用该接口。
      * - 当应用内子窗需要临时显示，对显示内容做布局避让时可调用该接口。
      *
-     * @param { AvoidAreaType } type - Type of the area
+     * @param { AvoidAreaType } type - 表示避让区域类型。
      * @returns { AvoidArea } 窗口内容避让区域。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types;
@@ -6834,8 +6841,7 @@ declare namespace window {
      * [on('avoidAreaChange')]{@link window.Window.on(type: 'avoidAreaChange', callback: Callback<AvoidAreaOptions>)}监听窗
      * 口避让区变化。
      *
-     * @param { boolean } enabled - If true, the system window type can obtain avoid area. If false, the avoid area
-     *     obtained by the system window type will always be empty.
+     * @param { boolean } enabled - 是否可以获取到避让区。true表示可以获取避让区；false表示不可以获取避让区。默认值为false。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 801 - Capability not supported. Failed to call the API due to limited device
      *     capabilities.
@@ -7037,7 +7043,7 @@ declare namespace window {
      * 
      * 非沉浸式布局生效时，布局避让状态栏与<!--RP15-->三键导航栏<!--RP15End-->，组件不会与其重叠。
      *
-     * @param { boolean } isLayoutFullScreen - The window can layout in full screen
+     * @param { boolean } isLayoutFullScreen - 窗口的布局是否为沉浸式布局（该沉浸式布局状态栏、工具栏或导航栏仍然显示）。true表示沉浸式布局；false表示非沉浸式布局。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -7132,7 +7138,7 @@ declare namespace window {
      * 
      * 调用生效后返回并不表示状态栏、<!--RP15-->三键导航栏<!--RP15End-->的显示或隐藏已完成。主窗口在非全屏/最大化模式（悬浮窗、分屏等场景）下配置不生效，进入全屏/最大化模式后配置生效。
      *
-     * @param { Array<'status' | 'navigation'> } names - The set of system bar
+     * @param { Array<'status' | 'navigation'> } names - 设置窗口全屏/最大化模式时状态栏、工具栏或<!--RP15-->三键导航栏<!--RP15End-->是否显示。<br>例如，需全部显示，该参数设置为['status','navigation']；设置为[]，则不显示。
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 401 - Parameter error. Possible cause: 1.Mandatory parameters are left unspecified;
      *     2.Incorrect parameter types.
@@ -7153,10 +7159,9 @@ declare namespace window {
      * 
      * 调用生效后返回并不表示状态栏、<!--RP15-->三键导航栏<!--RP15End-->的显示或隐藏已完成。子窗口调用后不生效。主窗口在非全屏/最大化模式（悬浮窗、分屏等场景）下配置不生效，进入全屏/最大化模式后配置生效。
      *
-     * @param {SpecificSystemBar} name - the set of system bar
-     * @param {boolean} enable - Show specific system bar if true, or hide specific system bar if false.
-     * @param {boolean} enableAnimation - Whether using animation during this setting,
-     *     using animation if true or not using animation if false. [since 12]
+     * @param {SpecificSystemBar} name - 设置窗口全屏模式时，显示或隐藏的系统栏类型。
+     * @param {boolean} enable - 设置窗口全屏模式时状态栏或工具栏或<!--RP15-->三键导航栏<!--RP15End-->是否显示。true表示显示，false表示隐藏。
+     * @param {boolean} enableAnimation - 设置状态栏或工具栏或<!--RP15-->三键导航栏<!--RP15End-->显示状态变化时是否使用动画。true表示使用，false表示不使用，默认值为false [since 12]
      * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws {BusinessError} 401 - Parameter error. Possible cause: 1. Mandatory parameters are left unspecified;
      *     2. Incorrect parameter types.
@@ -12139,11 +12144,14 @@ declare namespace window {
     enableLandscapeMultiWindow(): Promise<void>;
 
     /**
-     * 开始移动此窗口。
-     * 只有在 `onTouch` 回调函数中调用此 API，且事件类型为 `TouchType.Down` 时，窗口才会随光标移动。
+     * 开始移动此窗口，使用Promise异步回调。
+     * 
+     * 仅在[onTouch]{@link TouchEvent}事件（其中，事件类型必须为TouchType.Down）的回调方法中调用此接口才会有移动效果，成功调用此接口后，窗口将跟随鼠标或触摸点移动。
      *
+     * 在点击拖拽场景下，若不期望在按下时触发拖拽事件，则可以在事件类型为[TouchType.Move]{@link ./@internal/component/ets/enums:TouchType}（需要保证当前行为已经触发TouchType.Down事件）时调用此接口，触发移动效果。
+     * 
      * @param { StartMovingOptions } [startMovingOptions] - 拖拽移动过程中的移动配置。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 801 - Capability not supported.
      *     Failed to call the API due to limited device capabilities.
@@ -14446,7 +14454,7 @@ declare namespace window {
      *     图片资源需放在resources/base/media目录下，通过$r资源访问方式获取对应图片的资源id，这里以获取startIcon图片的资源id
      *     为例给出示意：$r("app.media.startIcon").id。
      * @param { ImageFit } value - 应用自定义图片的填充方式。
-     * @returns { Promise<void> } Promise that returns no value.
+     * @returns { Promise<void> } 无返回结果的Promise对象。
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have
      *     the permission required or a non-system application calls the API. [since 26.0.0]
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system
