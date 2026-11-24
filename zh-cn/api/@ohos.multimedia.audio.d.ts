@@ -2327,6 +2327,18 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     originalAppIdInfo?: AppIdInfo;
+
+    /**
+     * 是否允许使用低功耗模式。
+     * 当音频播放使用场景为音乐或听书时，系统会默认使用低功耗模式播放音频，可在后台播放时降低功耗。
+     * 然而低功耗模式下，音频系统内缓存数据量很大，在实时生成音频数据的场景并不适用，此时开发者可设置不使用此模式。
+     * 默认值：true。
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offloadAllowed?: boolean;
   }
 
   /**

@@ -2340,6 +2340,21 @@ declare namespace audio {
      * @since 26.0.0 dynamic&static
      */
     originalAppIdInfo?: AppIdInfo;
+
+    /**
+     * Indicates whether the low-power mode is allowed.
+     * When the audio playback scenario is music or book listening, the system uses the low-power mode to play the audio
+     * by default, which reduces power consumption when the audio is played in the background.
+     * However, in low power consumption mode, a large amount of data is buffered in the audio system. Therefore, this
+     * mode is not applicable to scenarios where audio data is generated in real time. In this case, developers can set
+     * this mode not to be used.
+     * Default value: true.
+     *
+     * @syscap SystemCapability.Multimedia.Audio.Renderer
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    offloadAllowed?: boolean;
   }
 
   /**
