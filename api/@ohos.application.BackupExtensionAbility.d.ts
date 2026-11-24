@@ -14,7 +14,7 @@
  */
 
 /**
- * @file Backup and restore extention ability
+ * @file BackupExtensionAbility
  * @kit CoreFileKit
  */
 import type BackupExtensionContext from './@ohos.file.BackupExtensionContext';
