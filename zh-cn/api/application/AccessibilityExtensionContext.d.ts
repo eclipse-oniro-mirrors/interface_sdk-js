@@ -1729,7 +1729,8 @@ export declare interface AccessibilityElement {
    * 
    * 与
    * [findElementsByCondition]{@link AccessibilityElement.findElementsByCondition(rule: FocusRule, condition: FocusCondition)}
-   * 相比，本方法主要用于查找Web组件；findElementsByCondition主要用于查找UI组件。
+   * （从API版本23开始支持）相比，本方法用于查找Web组件；findElementsByCondition用于查找非Web组件。
+   * 可通过组件的supportedActionNames属性是否包含'nextHtmlItem'或'previousHtmlItem'来判断组件是否为Web组件。
    *
    * @permission ohos.permission.ACCESSIBILITY_EXTENSION_ABILITY
    * @param { FocusDirection } condition - 焦点方向，用于指定查找元素的搜索方向，如'forward'表示向前查找、'backward'表示向后查找等。
@@ -1747,6 +1748,11 @@ export declare interface AccessibilityElement {
 
   /**
    * 根据焦点方向和聚焦类型查找元素。使用Promise异步回调。
+   * 
+   * 与
+   * [findElementsByCondition]{@link AccessibilityElement.findElementsByCondition(rule: FocusRule, condition: FocusCondition)}
+   * 相比，本方法用于查找Web组件；findElementsByCondition用于查找非Web组件。
+   * 可通过组件的supportedActionNames属性是否包含'nextHtmlItem'或'previousHtmlItem'来判断组件是否为Web组件。
    *
    * @permission ohos.permission.ACCESSIBILITY_EXTENSION_ABILITY
    * @param { FocusDirection } condition - 焦点方向。
@@ -1803,8 +1809,9 @@ export declare interface AccessibilityElement {
   /**
    * 查询满足条件的可聚焦节点。使用Promise异步回调。
    * 
-   * 与[findElementByFocusDirection]{@link AccessibilityElement.findElementByFocusDirection(condition: FocusDirection)}相
-   * 比，本方法主要用于查找UI组件；findElementByFocusDirection主要用于查找Web组件。
+   * 与[findElementByFocusDirection]{@link AccessibilityElement.findElementByFocusDirection(condition: FocusDirection)}
+   * （从API版本20开始支持）相比，本方法用于查找非Web组件；findElementByFocusDirection用于查找Web组件。
+   * 可通过组件的supportedActionNames属性是否包含'nextHtmlItem'或'previousHtmlItem'来判断组件是否为Web组件。
    *
    * @permission ohos.permission.ACCESSIBILITY_EXTENSION_ABILITY
    * @param { FocusRule } rule - 检查当前节点及其子节点的规则。
@@ -1821,6 +1828,10 @@ export declare interface AccessibilityElement {
 
   /**
    * 根据规则和查询条件查找目标类型的可聚焦节点。使用Promise异步回调。
+   * 
+   * 与[findElementByFocusDirection]{@link AccessibilityElement.findElementByFocusDirection(condition: FocusDirection)}
+   * 相比，本方法用于查找非Web组件；findElementByFocusDirection用于查找Web组件。
+   * 可通过组件的supportedActionNames属性是否包含'nextHtmlItem'或'previousHtmlItem'来判断组件是否为Web组件。
    *
    * @permission ohos.permission.ACCESSIBILITY_EXTENSION_ABILITY
    * @param { FocusRule } rule - 检查当前节点及其子节点的规则。
