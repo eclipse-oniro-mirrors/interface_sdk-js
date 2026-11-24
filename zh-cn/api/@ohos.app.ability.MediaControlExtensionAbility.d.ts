@@ -14,9 +14,7 @@
  */
 
 /**
- 播控扩展能力
- * @file
- 播控扩展能力
+ * @file 播控扩展能力
  * @kit AVSessionKit
  */
 
