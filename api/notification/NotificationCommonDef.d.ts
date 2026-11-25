@@ -68,6 +68,7 @@ export interface GrantedBundleInfo {
    * Index of an application clone, which takes effect only for application clones. The value is obtained from the
    * **appIndex** of ApplicationInfo.
    *
+   * @readonly [since 22 - 26.0.1]
    * @syscap SystemCapability.Notification.Notification
    * @since 22 dynamic
    * @since 23 static
