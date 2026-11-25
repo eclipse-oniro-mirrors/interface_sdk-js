@@ -441,7 +441,7 @@ declare namespace sendableImage {
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { image.PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -477,7 +477,7 @@ declare namespace sendableImage {
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { image.PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -515,7 +515,7 @@ declare namespace sendableImage {
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { image.PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -551,7 +551,7 @@ declare namespace sendableImage {
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { image.PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -575,8 +575,8 @@ declare namespace sendableImage {
      * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixels]{@link sendableImage.PixelMap.writePixels}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -593,8 +593,8 @@ declare namespace sendableImage {
      * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsSync]{@link sendableImage.PixelMap.writePixelsSync}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.

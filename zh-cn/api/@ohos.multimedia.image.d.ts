@@ -5774,7 +5774,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
@@ -5819,7 +5819,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
@@ -5867,7 +5867,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
@@ -5909,7 +5909,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
@@ -5951,7 +5951,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 读取区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 读取区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 读取的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，获取的像素数据会被拷贝至
@@ -5994,7 +5994,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -6044,7 +6044,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -6090,7 +6090,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 取决于sourcePixelFormat，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat} | - |
+     * | 每像素字节数 | 取决于sourcePixelFormat，各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat} | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至[PositionArea]{@link image.PositionArea}.region指定的区域。
@@ -6136,7 +6136,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 取决于sourcePixelFormat，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat} | - |
+     * | 每像素字节数 | 取决于sourcePixelFormat，各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat} | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>数据将从[PositionArea]{@link image.PositionArea}.pixels拷贝至[PositionArea]{@link image.PositionArea}.region指定的区域。
@@ -6184,7 +6184,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -6226,7 +6226,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -6268,7 +6268,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * | `stride` | 内存中每行像素（含行末填充字节）所占的字节数。 | `PositionArea.stride` |
      * | `width` | 写入区域的宽度，单位为像素（px）。 | `PositionArea.region.size.width` |
      * | `height` | 写入区域的高度，单位为像素（px）。 | `PositionArea.region.size.height` |
-     * | 每像素字节数 | 各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
+     * | 每像素字节数 | 各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。 | - |
      *
      * @param { PositionArea } area - 写入的区域数据。
      *     <br>该区域由[PositionArea]{@link image.PositionArea}.region指定，
@@ -6294,8 +6294,8 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -6321,8 +6321,8 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6354,10 +6354,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *  
      * `PixelMap宽度 × PixelMap高度 × 每像素字节数`
      *  
-     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
+     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按`sourcePixelFormat`格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于上方公式的计算结果，超出部分不会被写入。
+     *     <br>数据按`sourcePixelFormat`格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于上方公式的计算结果，超出部分不会被写入。
      * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
@@ -6391,10 +6391,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *  
      * `PixelMap宽度 × PixelMap高度 × 每像素字节数`
      *  
-     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数见[PixelMapFormat]{@link image.PixelMapFormat}。
+     * 公式中每像素字节数取决于`sourcePixelFormat`，各格式的每像素占用字节数请参见[PixelMapFormat]{@link image.PixelMapFormat}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按`sourcePixelFormat`格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于上方公式的计算结果，超出部分不会被写入。
+     *     <br>数据按`sourcePixelFormat`格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于上方公式的计算结果，超出部分不会被写入。
      * @param { PixelMapFormat } sourcePixelFormat - 源数据的像素格式。支持的值为BGRA_8888、RGBA_8888、RGB_888、RGB_565和RGBA_F16。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -6420,8 +6420,8 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6440,8 +6440,8 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @param { AsyncCallback<void> } callback - 回调函数。当缓冲区中的图像像素数据写入PixelMap成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6461,8 +6461,8 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
-     *     <br>数据按PixelMap自身的像素格式紧密排列（不含行末填充字节）；缓冲区大小必须不小于整个PixelMap的像素字节数
-     *     （即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值），超出部分不会被写入。
+     *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
+     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
