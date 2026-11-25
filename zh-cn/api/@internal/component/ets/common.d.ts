@@ -26310,6 +26310,32 @@ declare class CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   inspectorLabel(label: string | undefined): T;
+
+  /**
+   * 为组件添加颜色滤镜效果。颜色滤镜通过4x5颜色矩阵对组件像素进行颜色变换，可用于实现护眼模式、色温调节等视觉效果。
+   *
+   * @param { ColorFilter | undefined } filter - 应用于组件的颜色滤镜。取值为由4x5颜色矩阵（20个数值）构造的
+   *     [ColorFilter]{@link ColorFilter}对象。
+   *     <br>**说明：**
+   *     <br>当filter为有效的ColorFilter（非undefined）时，颜色滤镜优先生效，
+   *     [grayscale]{@link CommonMethod#grayscale(value: number)}、
+   *     [brightness]{@link CommonMethod#brightness(value: number)}、
+   *     [contrast]{@link CommonMethod#contrast(value: number)}、
+   *     [saturate]{@link CommonMethod#saturate(value: number)}、
+   *     [sepia]{@link CommonMethod#sepia(value: number)}、
+   *     [invert]{@link CommonMethod#invert(value: number | InvertOptions)}、
+   *     [hueRotate]{@link CommonMethod#hueRotate(value: number | string)}、
+   *     [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}
+   *     属性均不生效。
+   *     <br>当filter为undefined时，清除颜色滤镜，上述属性恢复生效。
+   * @returns { T } 返回当前组件，用于链式调用。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect(filter: ColorFilter | undefined): T;
 }
 
 /**
