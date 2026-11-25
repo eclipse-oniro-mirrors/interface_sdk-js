@@ -363,7 +363,7 @@ declare namespace connection {
    * @since 23 static
    */
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
- 
+
   /**
    * Delete the paired peer device. Use Promise asynchronous callbacks. The API version is 26.1.0 or later. When an NA
    * calls this API, a confirmation dialog box is displayed before the pairing is deleted. The pairing is removed only

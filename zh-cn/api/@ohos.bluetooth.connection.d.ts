@@ -387,7 +387,7 @@ declare namespace connection {
    * @since 23 static
    */
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
- 
+
   /**
    * 删除已配对的对端设备。使用Promise异步回调。
    *
