@@ -14615,6 +14615,18 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.1.0 dynamic
    */
   titleBarVibrancyMode?: VibrancyMode;
+
+  /**
+   * 为组件添加颜色滤镜效果。颜色滤镜通过4x5颜色矩阵对组件像素进行颜色变换，可用于实现护眼模式、色温调节等视觉效果。
+   * 参数类型为[ColorFilter]{@link ColorFilter}对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**
@@ -18490,6 +18502,17 @@ declare interface ContextMenuOptions {
    * @since 26.0.0 dynamic
    */
   gridStyle?: MenuGridStyleOptions;
+  /**
+   * 为组件添加颜色滤镜效果。颜色滤镜通过4x5颜色矩阵对组件像素进行颜色变换，可用于实现护眼模式、色温调节等视觉效果。
+   * 参数类型为[ColorFilter]{@link ColorFilter}对象。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**

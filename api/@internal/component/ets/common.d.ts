@@ -14913,6 +14913,19 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.1.0 dynamic
    */
   titleBarVibrancyMode?: VibrancyMode;
+
+  /**
+   * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+   * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**
@@ -18729,6 +18742,18 @@ declare interface ContextMenuOptions {
    * @since 26.0.0 dynamic
    */
   gridStyle?: MenuGridStyleOptions;
+  /**
+   * Applies a color filter effect to the component. The color filter effect applies a 4 x 5 color matrix to transform
+   * the component's pixel colors. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect?: ColorFilter;
 }
 
 /**
