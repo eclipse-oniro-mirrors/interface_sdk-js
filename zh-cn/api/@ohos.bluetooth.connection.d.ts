@@ -353,14 +353,18 @@ declare namespace connection {
     p256Data?: OobData): Promise<void>;
 
   /**
-   * 删除配对的远程设备。使用Callback异步回调。
+   * 删除已配对的对端设备。使用Callback异步回调。
+   *
+   * API版本26.1.0及以上，第三方应用调用本接口时，删除配对前会弹出系统确认对话框，只有在用户确认对话框后，
+   * 配对才会被移除。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 表示要删除的远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
-   * @param { AsyncCallback<void> } callback - 回调函数。当删除远程配对设备成功，err为undefined，否则为错误对象。
+   * @param { string } deviceId - 表示要删除配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @param { AsyncCallback<void> } callback - 回调函数。当删除已配对设备成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -371,9 +375,13 @@ declare namespace connection {
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user did not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - The user refused the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
@@ -381,15 +389,14 @@ declare namespace connection {
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
 
   /**
-   * 删除已配对的远端设备。
+   * 删除已配对的对端设备。使用Promise异步回调。
    *
-   * 删除行为因调用方的身份而异：
-   * 对于第三方应用，删除配对前会弹出系统确认对话框。
-   * 只有在用户确认对话框后，配对才会被移除。
+   * API版本26.1.0及以上，第三方应用调用本接口时，删除配对前会弹出系统确认对话框，只有在用户确认对话框后，
+   * 配对才会被移除。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 设备ID。例如，“11:22:33:AA:BB:FF”。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
+   * @param { string } deviceId - 表示要删除配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @returns { Promise<void> } Promise对象，无返回结果。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed.
@@ -418,41 +425,15 @@ declare namespace connection {
   function cancelPairedDevice(deviceId: string): Promise<void>;
 
   /**
-   * 删除正在配对中的远程设备。与cancelPairedDevice（用于删除已配对的设备）不同，本接口用于取消正在进行中的配对流程。使用Callback异步回调。
+   * 取消当前应用发起的与对端设备的配对。使用Callback异步回调。
+   *
+   * 本接口用于取消正在进行的配对流程，对端设备未处于配对中时调用本接口会失败。
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 表示要删除的远程设备的地址，例如："XX:XX:XX:XX:XX:XX"。
-   * @param { AsyncCallback<void> } callback - 回调函数。当删除远程配对设备成功，err为undefined，否则为错误对象。
+   * @param { string } deviceId - 表示要取消配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @param { AsyncCallback<void> } callback - 回调函数。当取消配对成功，err为undefined，否则为错误对象。
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
-   *     <br>1. Mandatory parameters are left unspecified;
-   *     <br>2. Incorrect parameter types;
-   *     <br>3. Parameter verification failed.
-   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *     <br>1. The hardware does not support the capability;
-   *     <br>2. The chip does not support the capability;
-   *     <br>3. A dependent service feature is not supported.
-   * @throws { BusinessError } 2900001 - Service stopped.
-   * @throws { BusinessError } 2900003 - Bluetooth disabled.
-   * @throws { BusinessError } 2900099 - Operation failed.
-   * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
-   * @stagemodelonly
-   * @since 10 dynamic
-   * @since 23 static
-   */
-  function cancelPairingDevice(deviceId: string, callback: AsyncCallback<void>): void;
-
-  /**
-   * 取消当前应用发起的配对远端设备。
-   *
-   * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - 设备ID。例如，“11:22:33:AA:BB:FF”。
-   * @returns { Promise<void> } 不会返回任何值的Promise。
-   * @throws { BusinessError } 201 - Permission verification failed.
-   *    The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed.
    *     A non-system application calls a system API. [since 10 - 26.0.1]
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
@@ -465,8 +446,43 @@ declare namespace connection {
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
-   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and
-   *     cannot be cancelled. [since 26.1.0]
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be
+   *     cancelled. [since 26.1.0]
+   * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.1.0]
+   * @throws { BusinessError } 2900099 - Operation failed.
+   * @syscap SystemCapability.Communication.Bluetooth.Core
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
+   * @stagemodelonly
+   * @since 10 dynamic
+   * @since 23 static
+   */
+  function cancelPairingDevice(deviceId: string, callback: AsyncCallback<void>): void;
+
+  /**
+   * 取消当前应用发起的与对端设备的配对。使用Promise异步回调。
+   *
+   * 本接口用于取消正在进行的配对流程，对端设备未处于配对中时调用本接口会失败。
+   *
+   * @permission ohos.permission.ACCESS_BLUETOOTH
+   * @param { string } deviceId - 表示要取消配对的对端设备MAC地址，由12个十六进制字符和5个冒号（:）组成，例如：“11:22:33:AA:BB:FF”。
+   * @returns { Promise<void> } Promise对象，无返回结果。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
+   * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 2900001 - Service stopped.
+   * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900018 - The pairing is initiated by another application and cannot be
+   *     cancelled. [since 26.1.0]
    * @throws { BusinessError } 2900019 - The device is not in the pairing state. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core

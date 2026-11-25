@@ -1756,9 +1756,8 @@ export declare class UIObserver {
   /**
    * 注册回调函数，在滚动事件开始或停止时调用。
    *
-   * @param { observer.ObserverOptions } options - The options object.
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { observer.ObserverOptions } options - Observer选项，包含指定监听的滚动组件的id。
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。滚动事件开始和结束时触发。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static
@@ -1780,8 +1779,7 @@ export declare class UIObserver {
   /**
    * 注册回调函数，在滚动事件开始或停止时调用。
    *
-   * @param { Callback<observer.ScrollEventInfo> } callback - The callback function to be called when the scroll event
-   *     start or stop.
+   * @param { Callback<observer.ScrollEventInfo> } callback - 回调函数。滚动事件开始和结束时触发。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly
    * @since 23 static

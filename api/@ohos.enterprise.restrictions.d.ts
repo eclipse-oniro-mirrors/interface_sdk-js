@@ -633,6 +633,14 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * Enhanced information.
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ADVANCED_MESSAGE = 55,
+
+    /**
      * Power saving mode, including battery saver, ultra battery saver and expedition.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -819,7 +827,16 @@ declare namespace restrictions {
      * @stagemodelonly
      * @since 26.1.0
      */
-    FREE_WINDOW = 14
+    FREE_WINDOW = 14,
+
+    /**
+     * Device-level certificate.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    INSTALL_DEVICE_CERTIFICATE = 15,
   }
 
   /**
@@ -1388,6 +1405,73 @@ declare namespace restrictions {
    * @useinstead restrictions.getDisallowedPolicyForAccount(admin: Want | null, feature: FeatureForAccount, accountId: number)
    */
   function getDisallowedPolicyForAccount(admin: Want | null, feature: string, accountId: number): boolean;
+
+  /**
+   * Enable or disable a feature for a specified user.
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - The user attribute to disable or allow. <br>When feature is set to
+   *     SUPER_HUB, if the transit station has been added to the list of applications that cannot be stopped under the
+   *     current user through the
+   *     [addUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.addUserNonStopApps} interface
+   *     and then this interface is invoked to disable the transit station, a policy conflict occurs and the error code
+   *     9200010 is reported. You can use the
+   *     [removeUserNonStopApps]{@link @ohos.enterprise.applicationManager:applicationManager.removeUserNonStopApps}
+   *     interface to remove the transit station from the list of applications that cannot be stopped under the current
+   *     user to resolve the conflict. <br>When feature is set to DISTRIBUTED_TRANSITIC, if the distributed
+   *     unidirectional data transmission capability between devices has been disabled by calling
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)},
+   *     a policy conflict occurs and the 9200010 error code is reported. You can use the
+   *     [setDisallowedPolicyForAccount]{@link restrictions.setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number)}
+   *     interface to undisable distributed unidirectional data transmission between devices to resolve conflicts.
+   * @param { boolean } disallow - The value true indicates that the function is disabled, and the value false
+   *     indicates that the function is enabled.
+   * @param { number } accountId - User ID. The value is greater than or equal to 0. <br>The account ID can be
+   *     obtained through interfaces such as
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}. <br>When
+   *     feature is set to SUPER_HUB, accountId can only be set to the ID of the current user.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *         <br>1. The hardware does not support the capability.
+   *         <br>2. The chip does not support the capability.
+   *         <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200010 - A conflict policy has been configured.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200013 - The enterprise management policy has been successfully set,
+   *         but the function has not taken effect in real time.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function setDisallowedPolicyForAccount(feature: FeatureForAccount, disallow: boolean, accountId: number): void;
+
+  /**
+   * Obtain the status of a feature of a specified subscriber.
+   * @permission ohos.permission.ENTERPRISE_MANAGE_RESTRICTIONS
+   * @param { FeatureForAccount } feature - Specifies the user attribute to be queried.
+   * @param { number } accountId - User ID. The value is greater than or equal to 0. <br>The account ID can be
+   *     obtained through interfaces such as
+   *     [getOsAccountLocalId]{@link @ohos.account.osAccount:osAccount.AccountManager.getOsAccountLocalId()}.
+   * @param { common.QueryPolicy } [queryPolicy] - Indicates the policy to be queried. <br>Default value:
+   *     common.QueryPolicy.SELF.
+   * @returns { boolean }If true is returned, the feature corresponding to the feature parameter is disabled. If
+   *     false is returned, the feature corresponding to the feature parameter is not disabled.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *         The application does not have the permission required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getDisallowedPolicyForAccount(feature: FeatureForAccount, accountId: number, queryPolicy?: common.QueryPolicy): boolean;
 
   /**
    * Adds a list of applications that are not allowed to use a feature for a specified user.

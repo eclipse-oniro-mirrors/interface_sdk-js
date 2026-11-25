@@ -14,7 +14,7 @@
  */
 
 /**
- * @file
+ * @file MediaControlExtensionContext
  * @kit AVSessionKit
  */
 

@@ -406,7 +406,11 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - 在[webview]{@link @ohos.web.webview:webview}中，内部已经处理过坐标系变换，可以将TouchEvent事件直接下发。
    * >
-   * > - 同一时间戳，postTouchEvent只能调用一次。
+   * > - 同一时间戳，postTouchEvent只能调用一次。<!--Del-->
+   * >
+   * > - 不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}。
+   * 
+   * <!--DelEnd-->
    *
    * @param { TouchEvent } event - 用于派发到BuilderNode创建出的FrameNode上的触摸事件。
    * @returns { boolean } 派发事件是否成功。true：已命中响应事件的组件；false：未命中任何可响应事件的组件。
@@ -521,7 +525,7 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - postTouchEvent接口需要提供手势坐标相对于接收事件的目标节点内的局部坐标，postInputEvent接口需要提供手势坐标相对于接收事件的目标节点内的窗口坐标。
    * >
-   * > - 不建议同一个事件转发多次。
+   * > - 不建议同一个事件转发多次。<!--Del-->不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}。<!--DelEnd-->
    *
    * @param { InputEventType } event - 用于事件分发的输入事件。
    * @returns { boolean } 事件是否被成功派发。如果事件派发成功，则返回true；否则，返回false。
@@ -560,7 +564,7 @@ export class BuilderNode<Args extends Object[]> {
    * >
    * > - postTouchEvent接口需要提供手势坐标相对于接收事件的目标节点内的局部坐标，postInputEventWithStrategy接口需要提供手势坐标相对于接收事件的目标节点内的窗口坐标。
    * >
-   * > - 支持同一个事件转发多次。
+   * > - 支持同一个事件转发多次<!--Del-->，不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}调用本接口<!--DelEnd-->。
    *
    * @param { InputEventType } event - 用于事件分发的输入事件。
    * @param { CompetitionStrategy } [competitionStrategy] - 分发事件的手势竞争策略。CompetitionStrategy.DEFAULT表示非竞争模式（目标组件与当前组件的手势不
@@ -700,7 +704,11 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * >
    * > 在[webview]{@link @ohos.web.webview:webview}中，内部已经处理过坐标系变换，可以将TouchEvent事件直接下发。
    * >
-   * > 同一时间戳，postTouchEvent只能调用一次。
+   * > 同一时间戳，postTouchEvent只能调用一次。<!--Del-->
+   * >
+   * > postTouchEvent的参数不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}。
+   * 
+   * <!--DelEnd-->
    *
    * @param { TouchEvent } event - 用于派发到ReactiveBuilderNode创建出的FrameNode上的触摸事件。
    * @returns { boolean } 派发事件是否成功。true：已命中响应事件的组件；false：未命中任何可响应事件的组件。
@@ -824,7 +832,9 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * >
    * > postTouchEvent接口需要提供手势坐标相对于接收事件的目标节点内的局部坐标，postInputEvent接口需要提供手势坐标相对于接收事件的目标节点内的窗口坐标。
    * >
-   * > 不建议同一个事件转发多次。
+   * > 不建议同一个事件转发多次。<!--Del-->
+   * > 
+   * > postInputEvent的参数不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}。<!--DelEnd-->
    *
    * @param { InputEventType } event - 待分发的输入事件。
    * @returns { boolean } 事件是否被成功分发。如果事件分发成功，则返回true；否则，返回false。
@@ -863,7 +873,7 @@ export class ReactiveBuilderNode<Args extends Object[]> {
    * >
    * > - postTouchEvent接口需要提供手势坐标相对于接收事件的目标节点内的局部坐标，postInputEventWithStrategy接口需要提供手势坐标相对于接收事件的目标节点内的窗口坐标。
    * >
-   * > - 支持同一个事件转发多次。
+   * > - 支持同一个事件转发多次<!--Del-->，不支持[UIExtensionComponent]{@link @global:UIExtensionComponent}调用本接口<!--DelEnd-->。
    *
    * @param { InputEventType } event - 用于事件分发的输入事件。
    * @param { CompetitionStrategy } [competitionStrategy] - 分发事件的手势竞争策略。CompetitionStrategy.DEFAULT表示非竞争模式（目标组件与当前组件的手势不

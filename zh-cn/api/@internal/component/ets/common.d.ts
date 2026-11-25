@@ -25119,7 +25119,7 @@ declare class CommonMethod<T> {
    *     <br>-false：隐藏全屏模态页面。
    *     <br>从API version 10开始，该参数支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *     <br>从API version 18开始，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
-   * @param { CustomBuilder } builder - 配置全屏模态页面内容。builder中的根节点需唯一。<!--RP1--><!--RP1End-->
+   * @param { CustomBuilder } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
    * @param { ModalTransition } type - 全屏模态页面的系统转场方式。
    *     <br>取值原则：DEFAULT-上下切换过渡，NONE-无动画过渡，ALPHA-透明渐变过渡。
    *     <br> 默认值：ModalTransition.DEFAULT，即上下切换过渡。
@@ -25146,7 +25146,7 @@ declare class CommonMethod<T> {
    *     <br>-false：隐藏全屏模态页面。
    *     <br>从API version 10开始，该参数支持[$$](docroot://ui/state-management/arkts-two-way-sync.md)双向绑定变量。
    *     <br>从API version 18开始，该参数支持[!!](docroot://ui/state-management/arkts-new-binding.md#系统组件参数双向绑定)双向绑定变量。
-   * @param { CustomBuilder } builder - 配置全屏模态页面内容。
+   * @param { CustomBuilder } builder - 配置全屏模态页面内容。<!--RP1--><!--RP1End-->
    * @param { ContentCoverOptions } options - 配置全屏模态页面的可选属性。不传入此参数时，各可选属性使用各自默认值。
    * @returns { T } 返回当前组件，用于链式调用。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -26310,6 +26310,32 @@ declare class CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   inspectorLabel(label: string | undefined): T;
+
+  /**
+   * 为组件添加颜色滤镜效果。颜色滤镜通过4x5颜色矩阵对组件像素进行颜色变换，可用于实现护眼模式、色温调节等视觉效果。
+   *
+   * @param { ColorFilter | undefined } filter - 应用于组件的颜色滤镜。取值为由4x5颜色矩阵（20个数值）构造的
+   *     [ColorFilter]{@link ColorFilter}对象。
+   *     <br>**说明：**
+   *     <br>当filter为有效的ColorFilter（非undefined）时，颜色滤镜优先生效，
+   *     [grayscale]{@link CommonMethod#grayscale(value: number)}、
+   *     [brightness]{@link CommonMethod#brightness(value: number)}、
+   *     [contrast]{@link CommonMethod#contrast(value: number)}、
+   *     [saturate]{@link CommonMethod#saturate(value: number)}、
+   *     [sepia]{@link CommonMethod#sepia(value: number)}、
+   *     [invert]{@link CommonMethod#invert(value: number | InvertOptions)}、
+   *     [hueRotate]{@link CommonMethod#hueRotate(value: number | string)}、
+   *     [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}
+   *     属性均不生效。
+   *     <br>当filter为undefined时，清除颜色滤镜，上述属性恢复生效。
+   * @returns { T } 返回当前组件，用于链式调用。
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect(filter: ColorFilter | undefined): T;
 }
 
 /**
@@ -29172,7 +29198,7 @@ declare class ScrollResult {
  * @param { ScrollState } scrollState - 当前滑动状态。
  * @param { ScrollSource } scrollSource - 当前滑动操作的来源。
  * @returns { void | ScrollResult } 返回ScrollResult时按照开发者指定的相对上一帧的偏移量滑动；
- *     不返回时按回调参数scrollOffset滑动。<br/>取值范围：(-∞, +∞)
+ *     不返回时按回调参数scrollOffset滑动。<br/>ScrollResult中offsetRemain的取值范围：(-∞, +∞)
  * @syscap SystemCapability.ArkUI.ArkUI.Full
  * @stagemodelonly
  * @crossplatform

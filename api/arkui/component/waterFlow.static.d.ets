@@ -21,7 +21,7 @@ import { AttributeModifier, UIScrollableCommonEvent, ScrollableCommonMethod, Nes
 import { Builder, CustomBuilder, ComponentBuilder, CustomBuilderT } from './builder';
 import { Length, Dimension, Margin, ConstraintSizeOptions, Resource, ItemFillPolicy } from './units';
 import { Scroller, OnScrollFrameBeginCallback } from "./scroll";
-import { ScrollSnapAlign, ScrollState } from "./list";
+import { ScrollSnapAlign, ScrollState, StickyStyle } from "./list";
 import { ScrollSnapOffsetProvider } from './scrollCommon';
 import { PlaceholderProvider } from '../../@ohos.arkui.placeholderRegister';
 import { FlexDirection } from './enums';
@@ -392,7 +392,6 @@ export declare type OnWaterFlowScrollIndexCallback = (first: int, last: int) => 
  * @noninterop
  */
 export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
-
   /**
    * Sets the number of columns in the layout. If this attribute is not set, one column is used by default.
    *
@@ -626,6 +625,47 @@ export declare interface WaterFlowAttribute extends ScrollableCommonMethod {
    * @since 26.1.0 static
    */
   default scrollPlaceholder(provider: PlaceholderProvider | undefined): this;
+
+  /**
+   * Sets the header of the water flow. The header is displayed at the start of the main axis and participates in
+   * the total size, scrollable boundary, and index-based scrolling of the water flow.
+   *
+   * @param { CustomBuilder | ComponentContentBase | undefined } builder - Header of the water flow.
+   *     <br>Default value: <em>undefined</em> (no header is displayed). Passing undefined will remove the header.
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default header(builder: CustomBuilder | ComponentContentBase | undefined): this;
+
+  /**
+   * Sets the footer of the water flow. The footer is displayed at the end of the main axis and participates in
+   * the total size, scrollable boundary, and index-based scrolling of the water flow. This attribute is independent
+   * of the <em>footer</em> and <em>footerContent</em> in <em>WaterFlowOptions</em>: the existing <em>footer</em>,
+   * <em>footerContent</em>, and <em>sections</em> capabilities and their priority are not affected by this attribute.
+   *
+   * @param { CustomBuilder | ComponentContentBase | undefined } builder - Footer of the water flow.
+   *     <br>Default value: <em>undefined</em> (no footer is displayed). Passing undefined will remove the footer.
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default footer(builder: CustomBuilder | ComponentContentBase | undefined): this;
+
+  /**
+   * Sets sticky style for the header set via <em>header</em> and the footer set via <em>footer</em>. This attribute
+   * takes effect only when the header or footer is set.
+   *
+   * @param { StickyStyle | undefined } style - Sticky style of the header and footer.
+   *     <br>Default value: <em>StickyStyle.None</em>. Passing undefined will restore the default value.
+   * @returns { this }
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @since 26.1.0 static
+   */
+  default sticky(style: StickyStyle | undefined): this;
 
   /**
    * Called attributeModifier.

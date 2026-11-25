@@ -1108,7 +1108,7 @@ export declare enum Direction {
 }
 
 /**
- * 用于设置滚动条的状态。
+ * 滚动条的状态。
  *
  * @enum { number }
  * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -1163,7 +1163,7 @@ export declare enum EdgeEffect {
   Spring = 0,
 
   /**
-   * Fade.
+   * 阴影效果，滑动到边缘后会有圆弧状的阴影。
    *
    * @syscap SystemCapability.ArkUI.ArkUI.Full
    * @stagemodelonly

@@ -428,7 +428,23 @@ export declare interface AccessibilityEventInfo {
   timestamp?: long;
 
   /**
-   * 针对TextArea、TextInput、SearchField、RichEdit组件，当组件文本内容发生增删变化时，此属性表示增删的具体文本内容。默认值为空字符串。
+   * 默认值为空字符串。
+   * 
+   * 事件附加信息，值为JSON字符串，根据实际事件场景设置，无对应信息时为空字符串。包含以下字段：
+   * - addText：文本内容新增时，新增的具体文本内容。
+   * - removeText：文本内容删除时，删除的具体文本内容。
+   * - beforeText：文本内容发生变化前的文本内容。
+   * - addedCount：文本内容新增的字符数量。
+   * - removedCount：文本内容删除的字符数量。
+   * - startIndex：列表滚动前后的索引项，或编辑框的起始索引。
+   * - endIndex：列表滚动前后的索引项，或编辑框的结束索引。
+   * - scrollX：滚动事件发生时水平方向的滚动偏移量，单位为像素（px）
+   * - scrollY：滚动事件发生时垂直方向的滚动偏移量，单位为像素（px）。
+   * - scrollSource：滚动事件的触发来源。
+   * - itemCounts：列表或翻页类组件的总项数。
+   * - currentIndex：列表或翻页类组件当前项的索引。
+   * - candidateIds：焦点不可见时事件携带的候选焦点ID。
+   * - touchGuideGestureType：触摸浏览手势的类型。 
    *
    * @syscap SystemCapability.BarrierFree.Accessibility.Core
    * @systemapi
@@ -501,7 +517,7 @@ type GestureType = 'left' | 'leftThenRight' | 'leftThenUp' | 'leftThenDown' |
  *
  * @unionmember { 'pageContentUpdate' } 表示页面内容更新。
  * @unionmember { 'pageStateUpdate' } 表示页面状态更新。
- * @unionmember { 'pageStatePreUpdate' } 表示页面状态即将更新。 [since 26.1.0]
+ * @unionmember { 'pageStatePreUpdate' } 表示页面状态即将刷新。 [since 26.1.0]
  * @syscap SystemCapability.BarrierFree.Accessibility.Core
  * @since 9 dynamiconly
  */

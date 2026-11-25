@@ -3819,6 +3819,15 @@ declare namespace photoAccessHelper {
      * @since 26.0.1 dynamic&static
      */
     LOCAL_ENHANCEMENT_STATUS = 'local_enhancement_status',
+    /**
+     * Camera personalized color card shooting type.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @FaAndStageModel
+     * @since 26.1.0 dynamic&static
+     */
+    PHOTO_XT_STYLE_TEMPLATE_NUMBER = 'xt_style_template_number',
   }
 
   /**
@@ -5001,6 +5010,33 @@ declare namespace photoAccessHelper {
      */
     HIGHLIGHT_SUGGESTIONS = 4105,
     /**
+     * Pet album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET = 4106,
+    /**
+     * Human-pet group photo album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    HUMAN_PET_GROUP_PHOTO = 4112,
+    /**
+     * Pet group photo album.
+     *
+     * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    PET_GROUP_PHOTO = 4113,
+    /**
      * Share album.
      *
      * @syscap SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -5807,10 +5843,14 @@ declare namespace photoAccessHelper {
     setCoverUri(uri: string): Promise<void>;
     /**
      * Obtains the face identifier on the cover of a portrait album or group photo album.
+     * Starting from API version 26.1.0, this API also returns face identifiers for pet albums, human-pet group photo
+     * albums, and pet group photo albums.
      *
      * @permission ohos.permission.READ_IMAGEVIDEO
      * @returns { Promise<string> } Promise used to return **tag_id** of the portrait album, **group_tag** of the group
      *     photo album, or an empty string if no face identifier is found.
+     *     <br>Starting from API version 26.1.0, pet albums return **tag_id**, and human-pet group photo albums
+     *     and pet group photo albums return **group_tag**.
      * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
      *     required to call the API.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -14501,12 +14541,13 @@ declare namespace photoAccessHelper {
 
     /**
      * Sets the display level of the portrait album.
+     * Starting from API version 26.1.0, this API also supports setting the display level of pet albums.
      *
-     * @param { int } displayLevel - Display level to set. The options are as follows:
-     *     <br>**0**: unfavorite the portrait album.
-     *     <br>**1**: set the portrait album as the first to display.
-     *     <br>**2**: do not display the portrait album as the first one.
-     *     <br>**3**: favorite the portrait album.
+     * @param { int } displayLevel - Display level to set for a portrait album or pet album. The options are as follows:
+     *     <br>**0**: unfavorite this album.
+     *     <br>**1**: set this album to appear on the first screen.
+     *     <br>**2**: set this album to appear on the More screen.
+     *     <br>**3**: set this album to appear on the Favorites screen.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
      *     <br>1. Mandatory parameters are left unspecified;
@@ -14522,6 +14563,8 @@ declare namespace photoAccessHelper {
 
     /**
      * Removes assets from this portrait album or group photo album.
+     * Starting from API version 26.1.0, this API also supports removing images from pet albums, human-pet group photo
+     * albums, and pet group photo albums.
      *
      * @param { Array<PhotoAsset> } assets - Assets to remove.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -14540,6 +14583,7 @@ declare namespace photoAccessHelper {
 
     /**
      * Merges two portrait albums.
+     * Starting from API version 26.1.0, this API also supports merging two pet albums.
      *
      * @param { Album } target - Album generated after the merge. The album must be renamed.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.

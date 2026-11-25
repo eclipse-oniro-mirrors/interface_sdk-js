@@ -22217,7 +22217,9 @@ declare class CommonMethod<T> {
    * a finger touches the component area, and neither the component nor any of its child components is identified as
    * focusable by the accessibility hover event. The callback parameter returns the **TouchEvent** corresponding to
    * the touch event. Only single-finger touch is supported. Scenarios where the touch position is within the area of
-   * the following components are not supported, including UIExtension, Web, XComponent, and scenarios integrated with
+   * the following components are not supported, including [UIExtension]{@link @global:UIExtension},
+   * [Web]{@link @global:Web}<!--Del-->, [FormComponent]{@link @global:FormComponent}<!--DelEnd-->,
+   * [XComponent]{@link @global:XComponent}, and scenarios integrated with
    * third-party UI frameworks. In the preceding scenarios, this callback API does not take effect.
    * <br>This API is complementary to **onAccessibilityHover**. Only one of the two callbacks is triggered for the same
    * component at a time. This API cannot be called in **attributeModifier**.
@@ -26096,7 +26098,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal. The root node in **builder** must be unique.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ModalTransition } [type] - System transition mode of the modal.
    *     <br> Default value:
    *     **ModalTransition.DEFAULT**.
@@ -26123,7 +26125,7 @@ declare class CommonMethod<T> {
    *     [$$](docroot://ui/state-management/arkts-two-way-sync.md).
    *     <br>Since API version 18, this attribute supports two-way binding through
    *     [!!](docroot://ui/state-management/arkts-new-binding.md#two-way-binding-between-built-in-component-parameters).
-   * @param { CustomBuilder } builder - Content of the modal.
+   * @param { CustomBuilder } builder - Content of the modal. <!--RP1--><!--RP1End-->
    * @param { ContentCoverOptions } [options] - Optional attributes of the modal.
    * @returns { T } Current component.
    * @syscap SystemCapability.ArkUI.ArkUI.Full
@@ -27620,6 +27622,34 @@ declare class CommonMethod<T> {
    * @since 26.0.0 dynamic
    */
   doubleSided(value: Optional<boolean>): T;
+
+  /**
+   * Adds a color filter effect to the component. The color filter transforms the component's pixels through
+   * a 4 x 5 color matrix. This can be used to implement eye-care mode, color temperature adjustment, and other
+   * visual effects.
+   *
+   * @param { ColorFilter | undefined } filter - Color filter applied to the component. The value is a
+   *     [ColorFilter]{@link ColorFilter} object constructed with a 4 x 5 color matrix (20 numbers).
+   *     <br>**NOTE**
+   *     <br>When **filter** is a valid **ColorFilter** (not **undefined**), the color filter takes priority,
+   *     and the following properties do not take effect:
+   *     [grayscale]{@link CommonMethod#grayscale(value: number)},
+   *     [brightness]{@link CommonMethod#brightness(value: number)},
+   *     [contrast]{@link CommonMethod#contrast(value: number)},
+   *     [saturate]{@link CommonMethod#saturate(value: number)},
+   *     [sepia]{@link CommonMethod#sepia(value: number)},
+   *     [invert]{@link CommonMethod#invert(value: number | InvertOptions)},
+   *     [hueRotate]{@link CommonMethod#hueRotate(value: number | string)},
+   *     and [colorBlend]{@link CommonMethod#colorBlend(value: Color | string | Resource)}.
+   *     <br>When **filter** is **undefined**, the color filter is cleared and the above properties resume effect.
+   * @returns { T } Current component.
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @stagemodelonly
+   * @crossplatform
+   * @atomicservice
+   * @since 26.1.0 dynamic
+   */
+  colorFilterEffect(filter: ColorFilter | undefined): T;
 }
 
 /**
