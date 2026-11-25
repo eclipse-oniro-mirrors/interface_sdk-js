@@ -310,6 +310,30 @@ declare namespace vpnExtension {
     protect(socketFd: int): Promise<void>;
 
     /**
+     * 保护套接字不受VPN连接影响，通过该套接字发送的数据将直接基于物理网络收发，因此其流量不会通过VPN转发。
+     * 使用同步方式返回。
+     *
+     * > **说明：**
+     * > 
+     * > - 该接口为同步调用，会在当前线程完成服务校验等过程，不建议在UI主线程循环中对大量socketFd串行调用；
+     * >   批量场景可使用异步[protect]{@link vpnExtension.VpnConnection.protect()}接口或分批处理。
+     * > - 本接口仅对传入的socketFD生效，需在socket连接建立后调用；由该socket派生的新连接需重新调用本接口。
+     * > - 接口抛2203004错误码时，表示fwmark（firewall mark，防火墙标记）设置失败，该socket的流量仍按VPN规则转发；
+     * >   请在确认socket有效后重试，或改用异步protect接口。
+     * 
+     * @param { int } socketFd - 指定保护的socketfd，该文件描述符通过[getSocketFd]{@link @ohos.net.socket:socket.TCPSocket.getSocketFd()}获取，
+     *     <br>取值必须为整数。
+     * @throws { BusinessError } 2200001 - Invalid parameter value.
+     * @throws { BusinessError } 2200002 - Operation failed. Cannot connect to service.
+     * @throws { BusinessError } 2200003 - System internal error.
+     * @throws { BusinessError } 2203004 - Invalid socket file descriptor.
+     * @syscap SystemCapability.Communication.NetManager.Vpn
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    protectSync(socketFd: int): void;
+
+    /**
      * 销毁启动的VPN网络。使用Promise异步回调。
      *
      * @returns { Promise<void> } Promise对象，无返回结果。
