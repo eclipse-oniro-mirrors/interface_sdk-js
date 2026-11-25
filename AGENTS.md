@@ -26,7 +26,7 @@ arkts/                        # ArkTS 语言层 API 声明
 kits/                         # Kit 聚合声明文件（@kit.×××.d.ts）
 zh-cn/                        # API 声明文件中文翻译
 build-tools/                  # API 相关工具链
-docs/                         # 文档
+docs/                         # 文档（AGENTS-*.md 知识库；build-pipeline/ 构建流水线分篇）
 ```
 
 ## API File Types
@@ -50,6 +50,7 @@ update only the links in this index.
 | ArkTS API metadata format and schema | generating, validating, or consuming ArkTS metadata | [AGENTS-api-metadata.md](./docs/AGENTS-api-metadata.md) |
 | ArkTS static type API rules | `.static.d.ets`, ArkTS static/dynamic decisions, or static SDK concerns | Prerequisite: `arkts-static-spec` → [AGENTS-arkts-static-types.md](./docs/AGENTS-arkts-static-types.md) |
 | Device support and behavior differences | device support, device removal, or per-device behavior | [AGENTS-device-models.md](./docs/AGENTS-device-models.md) |
+| Build pipeline & SDK packaging internals | working on `build/ohos/sdk` scripts, GN-gen flow, interface-source split, or SDK artifact layout | [AGENTS-build-pipeline.md](./docs/AGENTS-build-pipeline.md) |
 
 The ArkTS metadata guide dynamically links to:
 
@@ -66,6 +67,11 @@ API contract generation. A deterministic repository rule, such as a
 system-release-to-API-version mapping, must be used directly and cited as the
 evidence source; do not ask the developer to reconfirm a fact already resolved
 by this knowledge index.
+
+The SDK build pipeline knowledge (GN generation, interface-source split,
+assembly, packaging/install) is indexed under
+[AGENTS-build-pipeline.md](./docs/AGENTS-build-pipeline.md); load the relevant
+stage docs there when working on build scripts or SDK artifact layout.
 
 ## Important Notes
 
