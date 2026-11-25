@@ -763,8 +763,7 @@ declare namespace media {
    * > 可创建的视频转码实例不能超过2个。
    *
    * @returns {  Promise<AVTranscoder>  } Promise对象。异步返回AVTranscoder实例，失败时返回null。可用于视频转码。
-   * @throws {  BusinessError  } 5400101 - No memory. Return by promise. 
-   * @throws {   BusinessError   } 5400101 - No memory. Return by promise.
+   * @throws {  BusinessError  } 5400101 - No memory. Return by promise.
    * @syscap SystemCapability.Multimedia.Media.AVTranscoder
    * @atomicservice [since 22]
    * @since 12 dynamic
@@ -907,8 +906,6 @@ declare namespace media {
    * 创建AVMetadataExtractor实例。使用Promise异步回调。
    *
    * @returns { Promise<AVMetadataExtractor | undefined> } Promise对象。异步返回元数据获取类对象（AVMetadataExtractor）。
-   *     instance
-   *     if the operation is successful; returns null otherwise.
    * @throws { BusinessError } 5400101 - No memory. Returned by promise.
    * @syscap SystemCapability.Multimedia.Media.AVMetadataExtractor
    * @crossplatform
@@ -11909,8 +11906,8 @@ declare namespace media {
      * 应用最多可以添加5个水印。
      * 此接口只能在prepared状态之前调用。
      *
-     * @param { image.PixelMap } watermark - : 水印图像。
-     * @param { WatermarkConfiguration } config - : 水印配置参数。
+     * @param { image.PixelMap } watermark - 水印图像。
+     * @param { WatermarkConfiguration } config - 水印配置参数。
      * @returns { Promise<int> } Promise对象，返回添加的水印ID。
      * @throws { BusinessError } 5400102 - Operation not allowed. Return by promise.
      * @throws { BusinessError } 5400103 - IO error. Return by promise.
