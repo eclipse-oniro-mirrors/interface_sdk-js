@@ -744,6 +744,24 @@ declare namespace restrictions {
     OPEN_FILE_BOOST = 10,
 
     /**
+     * 系统分享面板。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SYSTEM_SHARING_PANEL = 11,
+
+    /**
+     * 远程分享。
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COLLABORATION_REMOTE_SHARE = 12,
+
+    /**
      * 自由多窗模式是一种支持用户在移动设备上进行多任务处理的交互方式。
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
