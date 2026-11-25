@@ -821,6 +821,24 @@ declare namespace restrictions {
     OPEN_FILE_BOOST = 10,
 
     /**
+     * System sharing panel.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    SYSTEM_SHARING_PANEL = 11,
+
+    /**
+     * Remote sharing.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    COLLABORATION_REMOTE_SHARE = 12,
+
+    /**
      * Free window mode is an interaction method that supports users in performing multitasking on mobile devices.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
