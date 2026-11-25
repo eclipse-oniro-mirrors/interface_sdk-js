@@ -405,8 +405,6 @@ declare namespace power {
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 4900400 - Parameter error. Possible causes: The callback object is missing
-   *     onHibernate or onWakeup function members.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @syscap SystemCapability.PowerManager.PowerManager.Core
    * @systemapi
@@ -655,7 +653,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
@@ -682,7 +680,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
    * @throws { BusinessError } 4900101 - Failed to connect to the service.
    * @throws { BusinessError } 4900701 - Failed to suspend the device. Possible causes:
@@ -706,7 +704,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
@@ -728,7 +726,7 @@ declare namespace power {
    *     [InvokeMode.ASYNC](@link ASYNC). If this parameter is not set, the default value [InvokeMode.SYNC](@link SYNC)
    *     is used.
    *     <br>Default value: InvokeMode.SYNC.
-   * @returns { void | Promise<void> } Promise that returns no value.
+   * @returns { void | Promise<void> } No return value or a Promise object that returns no result.
    * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
    *     required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
