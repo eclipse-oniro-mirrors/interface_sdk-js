@@ -328,14 +328,19 @@ declare namespace connection {
     p256Data?: OobData): Promise<void>;
 
   /**
-   * Remove a paired remote device.
+   * Delete the paired peer device. Use the Callback asynchronous callback. The API version is 26.1.0 or later. When an
+   * NA calls this API, a confirmation dialog box is displayed before the pairing is deleted. The pairing is removed
+   * only after the confirmation dialog box is displayed.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-   * @param { AsyncCallback<void> } callback - the callback of cancelPairedDevice.
+   * @param { string } deviceId - Indicates the MAC address of the peer device to be deleted. The value consists of
+   *     12 hexadecimal characters and five colons(:), for example, 11:22:33:AA:BB:FF.
+   * @param { AsyncCallback<void> } callback - Callback function. If the paired device is deleted successfully, the
+   *     value of err is undefined. Otherwise, the object is incorrect.
    * @throws { BusinessError } 201 - Permission verification failed.
    *     The application does not have the permission required to call the API.
-   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 202 - Permission verification failed.
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
    *     <br>1. Mandatory parameters are left unspecified;
    *     <br>2. Incorrect parameter types;
@@ -346,37 +351,40 @@ declare namespace connection {
    *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
+   * @throws { BusinessError } 2900013 - The user did not respond. [since 26.1.0]
+   * @throws { BusinessError } 2900014 - The user refused the action. [since 26.1.0]
+   * @throws { BusinessError } 2900016 - Device unpaired. [since 26.1.0]
    * @throws { BusinessError } 2900099 - Operation failed.
    * @syscap SystemCapability.Communication.Bluetooth.Core
-   * @systemapi
+   * @systemapi [since 10 - 26.0.1]
+   * @publicapi [since 26.1.0]
    * @stagemodelonly
    * @since 10 dynamic
    * @since 23 static
    */
   function cancelPairedDevice(deviceId: string, callback: AsyncCallback<void>): void;
-
+ 
   /**
-   * Remove a paired remote device.
-   *
-   * On API 26.1.0 and above, for a third-party application,
-   * a system confirmation dialog box is displayed before removing the pairing,
-   * and the pairing is removed only after the user confirms the dialog box.
+   * Delete the paired peer device. Use Promise asynchronous callbacks. The API version is 26.1.0 or later. When an NA
+   * calls this API, a confirmation dialog box is displayed before the pairing is deleted. The pairing is removed only
+   * after the confirmation dialog box is displayed.
    *
    * @permission ohos.permission.ACCESS_BLUETOOTH
-   * @param { string } deviceId - Indicates device ID. For example, "11:22:33:AA:BB:FF".
-   * @returns { Promise<void> } Returns the promise object.
+   * @param { string } deviceId - Indicates the MAC address of the peer device to be deleted. The value consists of
+   *     12 hexadecimal characters and five colons(:), for example, 11:22:33:AA:BB:FF.
+   * @returns { Promise<void> }Promise object. No result is returned.
    * @throws { BusinessError } 201 - Permission verification failed.
-   *         The application does not have the permission required to call the API.
+   *     The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed.
-   *         A non-system application calls a system API. [since 10 - 26.0.1]
+   *     A non-system application calls a system API. [since 10 - 26.0.1]
    * @throws { BusinessError } 401 - [Sync] Parameter error. Possible causes:
-   *         <br>1. Mandatory parameters are left unspecified;
-   *         <br>2. Incorrect parameter types;
-   *         <br>3. Parameter verification failed.
+   *     <br>1. Mandatory parameters are left unspecified;
+   *     <br>2. Incorrect parameter types;
+   *     <br>3. Parameter verification failed.
    * @throws { BusinessError } 801 - Capability not supported. Possible causes:
-   *         <br>1. The hardware does not support the capability;
-   *         <br>2. The chip does not support the capability;
-   *         <br>3. A dependent service feature is not supported.
+   *     <br>1. The hardware does not support the capability;
+   *     <br>2. The chip does not support the capability;
+   *     <br>3. A dependent service feature is not supported.
    * @throws { BusinessError } 2900001 - Service stopped.
    * @throws { BusinessError } 2900003 - Bluetooth disabled.
    * @throws { BusinessError } 2900013 - The user did not respond. [since 26.1.0]
