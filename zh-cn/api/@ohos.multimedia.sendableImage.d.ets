@@ -395,7 +395,7 @@ declare namespace sendableImage {
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用Promise异步回调。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充
-     *     字节。缓冲区的大小由[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     *     字节。缓冲区的大小由[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -408,7 +408,7 @@ declare namespace sendableImage {
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。同步返回结果。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充
-     *     字节。缓冲区的大小由[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
+     *     字节。缓冲区的大小由[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -572,11 +572,11 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixels]{@link sendableImage.PixelMap.writePixels}。
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixels()]{@link sendableImage.PixelMap.writePixels}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform
@@ -590,11 +590,11 @@ declare namespace sendableImage {
      *
      * > **说明：**
      * >
-     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsSync]{@link sendableImage.PixelMap.writePixelsSync}。
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsSync()]{@link sendableImage.PixelMap.writePixelsSync}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link sendableImage.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.

@@ -4980,7 +4980,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
    * @param { Region } region - 截取的画面区域。仅支持从画面左上角开始截取部分或整个画面，即Region中的x和y必须为0，Region.size中
    *     width和height的取值范围分别为[1, 预览流宽度]和[1, 预览流高度]。如需截取任意区域，可先使用
    *     [image.createPixelMapFromSurface]{@link image.createPixelMapFromSurface}获取整个画面，再使用
-   *     [applyCrop]{@link image.PixelMap.applyCrop}截取所需区域。
+   *     [applyCrop()]{@link image.PixelMap.applyCrop}截取所需区域。
    * @returns { Promise<PixelMap> } Promise对象，返回创建的PixelMap对象，接口调用失败时会抛出异常。
    * @throws { BusinessError } 62980115 - If the image parameter invalid.
    * @throws { BusinessError } 62980105 - Failed to get the data.
@@ -5656,7 +5656,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。使用Promise异步回调。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
-     *     缓冲区的大小可通过[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     *     缓冲区的大小可通过[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -5677,7 +5677,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * 读取整个PixelMap的像素数据，并按照PixelMap的像素格式存入缓冲区。同步返回结果。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
-     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     *     缓冲区的大小由[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -5698,10 +5698,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer()]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
-     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     *     缓冲区的大小由[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -5717,10 +5717,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBuffer()]{@link image.PixelMap.readAllPixelsToBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
-     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     *     缓冲区的大小由[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @param { AsyncCallback<void> } callback - 回调函数。当读取像素数据到ArrayBuffer成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -5736,10 +5736,10 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBufferSync]{@link image.PixelMap.readAllPixelsToBufferSync}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readAllPixelsToBufferSync()]{@link image.PixelMap.readAllPixelsToBufferSync}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } dst - 目标缓冲区，获取的像素数据会被拷贝至该缓冲区。缓冲区内像素的格式与PixelMap相同，不包含内存对齐填充字节。
-     *     缓冲区的大小由[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口获取。
+     *     缓冲区的大小由[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口获取。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -5848,7 +5848,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readPixelsToArea]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readPixelsToArea()]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -5890,7 +5890,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readPixelsToArea]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readPixelsToArea()]{@link image.PixelMap.readPixelsToArea}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -5932,7 +5932,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[readPixelsToAreaSync]{@link image.PixelMap.readPixelsToAreaSync}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[readPixelsToAreaSync()]{@link image.PixelMap.readPixelsToAreaSync}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -5975,7 +5975,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 如需指定源像素数据的格式，请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
+     * > 如需指定源像素数据的格式，请使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6025,7 +6025,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 如需指定源像素数据的格式，请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
+     * > 如需指定源像素数据的格式，请使用[writePixelsFromAreaSync()]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6074,7 +6074,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需向[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的PixelMap中写入相同格式的像素数据，
-     * 请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
+     * 请使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6120,7 +6120,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需向[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的PixelMap中写入相同格式的像素数据，
-     * 请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
+     * 请使用[writePixelsFromAreaSync()]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6165,7 +6165,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6207,7 +6207,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6249,7 +6249,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[writePixelsFromAreaSync()]{@link image.PixelMap.writePixelsFromAreaSync}代替，以获得更完善的异常处理能力。
      *
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6291,11 +6291,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea(area: PositionArea)}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
@@ -6318,11 +6318,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
+     * > 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，请使用[writePixelsFromAreaSync()]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea)}。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 7600104 - Failed to get image data.
      *     Possible cause: Internal data is corrupted. Please check the logs for detailed information.
      * @throws { BusinessError } 7600105 - The PixelMap has been released.
@@ -6346,9 +6346,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需写入与当前PixelMap像素格式相同的源数据（包括[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式），
-     * 请使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer(src: ArrayBuffer)}。
+     * 请使用[writeAllPixelsFromBuffer()]{@link image.PixelMap.writeAllPixelsFromBuffer(src: ArrayBuffer)}。
      * > - 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，
-     * 请使用[writePixelsFromArea]{@link image.PixelMap.writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
+     * 请使用[writePixelsFromArea()]{@link image.PixelMap.writePixelsFromArea(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6383,9 +6383,9 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - 本接口仅支持被以下像素格式的PixelMap调用：BGRA_8888、RGBA_8888、ARGB_8888、RGB_888、RGB_565、RGBA_F16、RGBA_1010102。
      * > - 如需写入与当前PixelMap像素格式相同的源数据（包括[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式），
-     * 请使用[writeAllPixelsFromBufferSync]{@link image.PixelMap.writeAllPixelsFromBufferSync(src: ArrayBuffer)}。
+     * 请使用[writeAllPixelsFromBufferSync()]{@link image.PixelMap.writeAllPixelsFromBufferSync(src: ArrayBuffer)}。
      * > - 如需写入指定区域的像素数据，或源数据具有自定义行跨距或偏移量，
-     * 请使用[writePixelsFromAreaSync]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
+     * 请使用[writePixelsFromAreaSync()]{@link image.PixelMap.writePixelsFromAreaSync(area: PositionArea, sourcePixelFormat: PixelMapFormat)}。
      *  
      * 所需的最小缓冲区大小，单位为字节（Byte），计算公式如下：
      *  
@@ -6417,11 +6417,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer()]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6437,11 +6437,11 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBuffer()]{@link image.PixelMap.writeAllPixelsFromBuffer}代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @param { AsyncCallback<void> } callback - 回调函数。当缓冲区中的图像像素数据写入PixelMap成功，err为undefined，否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
      * @crossplatform [since 10]
@@ -6457,12 +6457,12 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBufferSync]{@link image.PixelMap.writeAllPixelsFromBufferSync}
+     * > 从API版本26.0.0开始，建议使用[writeAllPixelsFromBufferSync()]{@link image.PixelMap.writeAllPixelsFromBufferSync}
      * 代替，以获得更完善的异常处理能力。
      *
      * @param { ArrayBuffer } src - 源像素数据的缓冲区，其数据会被拷贝并覆盖写入整个PixelMap。
      *     <br>数据按PixelMap自身的像素格式紧密排列，不含行末填充字节。缓冲区大小必须大于等于整个PixelMap的像素字节数，
-     *     即[getPixelBytesNumber]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
+     *     即[getPixelBytesNumber()]{@link image.PixelMap.getPixelBytesNumber}接口的返回值，超出部分不会被写入。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
      *     2.Incorrect parameter types. 3.Parameter verification failed.
      * @throws { BusinessError } 501 - Access denied because the resource is occupied by another thread.
@@ -6619,7 +6619,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的图像不支持设置不透明度。
-     * > - 从API版本26.0.0开始，建议使用[setOpacity]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[setOpacity()]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
      *
      * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @param { AsyncCallback<void> } callback - 回调函数。当设置透明比率成功，err为undefined，否则为错误对象。
@@ -6638,7 +6638,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的图像不支持设置不透明度。
-     * > - 从API版本26.0.0开始，建议使用[setOpacity]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[setOpacity()]{@link image.PixelMap.setOpacity}代替，以获得更完善的异常处理能力。
      *
      * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -6657,7 +6657,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式的图像不支持设置不透明度。
-     * > - 从API版本26.0.0开始，建议使用[setOpacitySync]{@link image.PixelMap.setOpacitySync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[setOpacitySync()]{@link image.PixelMap.setOpacitySync}代替，以获得更完善的异常处理能力。
      *
      * @param { double } rate - 不透明度的值，取值范围是(0.0, 1.0]。1.0表示完全不透明，数值越接近0.0则透明度越高。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
@@ -6730,7 +6730,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不支持此接口。
      * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
-     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap()]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
      *
      * @returns { Promise<PixelMap> } Promise对象，返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap。
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -6749,7 +6749,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不支持此接口。
      * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
-     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMap()]{@link image.PixelMap.extractAlphaPixelMap}代替，以获得更完善的异常处理能力。
      *
      * @param { AsyncCallback<PixelMap> } callback - 回调函数，当创建PixelMap成功，err为undefined，data为获取到的PixelMap对象；否则为错误对象。
      * @syscap SystemCapability.Multimedia.Image.Core
@@ -6768,7 +6768,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * >
      * > - [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式不支持此接口。
      * > - 如果原PixelMap的格式是ALPHA_F16，则新生成的PixelMap将维持ALPHA_F16格式。
-     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMapSync]{@link image.PixelMap.extractAlphaPixelMapSync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[extractAlphaPixelMapSync()]{@link image.PixelMap.extractAlphaPixelMapSync}代替，以获得更完善的异常处理能力。
      *
      * @returns { PixelMap } 成功同步返回仅包含Alpha通道信息的ALPHA_8格式的PixelMap对象，失败抛出异常。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Parameter verification failed.
@@ -6842,7 +6842,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
-     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyScale()]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
@@ -6862,7 +6862,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
-     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyScale()]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
@@ -6882,7 +6882,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
-     * > - 从API版本26.0.0开始，建议使用[applyScaleSync]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyScaleSync()]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
@@ -6903,7 +6903,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
-     * > - 从API版本26.0.0开始，建议使用[applyScale]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyScale()]{@link image.PixelMap.applyScale}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
@@ -6927,7 +6927,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > **说明：**
      * >
      * > - 宽高的缩放倍数 = 缩放后的图片宽高 / 缩放前的图片宽高。
-     * > - 从API版本26.0.0开始，建议使用[applyScaleSync]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyScaleSync()]{@link image.PixelMap.applyScaleSync}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 宽度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
      * @param { double } y - 高度的缩放倍数。<br>取值不能为0，建议取正数，否则会产生翻转效果。
@@ -7052,7 +7052,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
      * > - 如果平移造成图像尺寸扩大，新增的区域（原图范围之外）以空白填充：
      * 非[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式填充为透明黑色（所有分量为0），YUV格式填充为白色（Y分量为255、UV分量为128）。
-     * > - 从API版本26.0.0开始，建议使用[applyTranslate]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslate()]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
      *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
@@ -7076,7 +7076,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
      * > - 如果平移造成图像尺寸扩大，新增的区域（原图范围之外）以空白填充：
      * 非[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式填充为透明黑色（所有分量为0），YUV格式填充为白色（Y分量为255、UV分量为128）。
-     * > - 从API版本26.0.0开始，建议使用[applyTranslate]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslate()]{@link image.PixelMap.applyTranslate}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
      *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
@@ -7100,7 +7100,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 平移后的图像尺寸将变为：宽度 = 原宽度 + x，高度 = 原高度 + y。
      * > - 如果平移造成图像尺寸扩大，新增的区域（原图范围之外）以空白填充：
      * 非[YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式填充为透明黑色（所有分量为0），YUV格式填充为白色（Y分量为255、UV分量为128）。
-     * > - 从API版本26.0.0开始，建议使用[applyTranslateSync]{@link image.PixelMap.applyTranslateSync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyTranslateSync()]{@link image.PixelMap.applyTranslateSync}代替，以获得更完善的异常处理能力。
      *
      * @param { double } x - 横向平移的距离。方向为正数向右，负数向左。取值范围是(-图像宽度, +∞)。单位：像素（px）。
      *     <br>取值为负数时，平移的效果等同于裁剪掉自图像左侧起的x列像素。
@@ -7180,7 +7180,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 旋转角度入参无限制，超出[0, 360]时将根据圆周360°自动矫正（例如，-100°与260°效果相同）；
      * [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式仅支持90°倍数的旋转角。
      * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
-     * > - 从API版本26.0.0开始，建议使用[applyRotate]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyRotate()]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
      *
      * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行旋转成功，err为undefined，否则为错误对象。
@@ -7201,7 +7201,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 旋转角度入参无限制，超出[0, 360]时将根据圆周360°自动矫正（例如，-100°与260°效果相同）；
      * [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式仅支持90°倍数的旋转角。
      * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
-     * > - 从API版本26.0.0开始，建议使用[applyRotate]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyRotate()]{@link image.PixelMap.applyRotate}代替，以获得更完善的异常处理能力。
      *
      * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -7222,7 +7222,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      * > - 旋转角度入参无限制，超出[0, 360]时将根据圆周360°自动矫正（例如，-100°与260°效果相同）；
      * [YUV](docroot://media/image/image-glossary.md#yuv-pixel-formatyuv像素格式)格式仅支持90°倍数的旋转角。
      * > - 如果图片旋转的角度不是90的整数倍，旋转后图片的尺寸会发生改变。
-     * > - 从API版本26.0.0开始，建议使用[applyRotateSync]{@link image.PixelMap.applyRotateSync}代替，以获得更完善的异常处理能力。
+     * > - 从API版本26.0.0开始，建议使用[applyRotateSync()]{@link image.PixelMap.applyRotateSync}代替，以获得更完善的异常处理能力。
      *
      * @param { double } angle - 图像旋转的角度。方向为正数顺时针，负数逆时针。单位：角度（°）。
      * @throws { BusinessError } 401 - Parameter error. Possible causes: 1.Mandatory parameters are left unspecified.
@@ -7284,7 +7284,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[applyFlip]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[applyFlip()]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
      *
      * @param { boolean } horizontal - true表示进行水平翻转，false表示不进行水平翻转。
      * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
@@ -7303,7 +7303,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[applyFlip]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[applyFlip()]{@link image.PixelMap.applyFlip}代替，以获得更完善的异常处理能力。
      *
      * @param { boolean } horizontal - true表示进行水平翻转，false表示不进行水平翻转。
      * @param { boolean } vertical - true表示进行垂直翻转，false表示不进行垂直翻转。
@@ -7385,7 +7385,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[applyCrop]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[applyCrop()]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
      *
      * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @param { AsyncCallback<void> } callback - 回调函数。当对图片进行裁剪成功，err为undefined，否则为错误对象。
@@ -7403,7 +7403,7 @@ function createUnpremultipliedPixelMap(src: PixelMap, dst: PixelMap): Promise<vo
      *
      * > **说明：**
      * >
-     * > 从API版本26.0.0开始，建议使用[applyCrop]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
+     * > 从API版本26.0.0开始，建议使用[applyCrop()]{@link image.PixelMap.applyCrop}代替，以获得更完善的异常处理能力。
      *
      * @param { Region } region - 裁剪的区域，包含起始坐标和宽高。取值范围不能超过图片的宽高。单位：像素（px）。
      * @returns { Promise<void> } Promise对象，无返回结果。
