@@ -6892,3 +6892,50 @@ declare enum ShadowClipMode {
    */
   BOUNDS_SHAPE = 1,
 }
+
+/**
+ * 定义提亮压暗模式，指定是否对内容使用提亮或压暗效果，以提升通透材质背景下的可读性。
+ *
+ * @syscap SystemCapability.ArkUI.ArkUI.Full
+ * @systemapi
+ * @stagemodelonly
+ * @since 26.1.0 dynamic
+ */
+declare enum VibrancyMode {
+  /**
+   * 不启用提亮压暗，内容无提亮压暗效果。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DISABLED = 0,
+  /**
+   * 自动模式。当自身或祖先组件的系统材质能够自动反色时，跟随材质的反色结果（材质取色为深色时提亮，为浅色时压暗）；否则跟随控件的深浅色模式（深色模式时提亮，浅色模式时压暗）。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  AUTO = 1,
+  /**
+   * 提亮模式。始终对内容提亮，以提升深色背景下的可读性。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  BRIGHTEN = 2,
+  /**
+   * 压暗模式。始终对内容压暗，以提升浅色背景下的可读性。
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  DARKEN = 3
+}

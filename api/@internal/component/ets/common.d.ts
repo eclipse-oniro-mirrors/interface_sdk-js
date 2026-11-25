@@ -14894,6 +14894,25 @@ declare interface SheetOptions extends BindOptions {
    * @since 26.1.0 dynamic
    */
   adaptToHandedness?: HandednessFollowMode;
+
+  /**
+   * Vibrancy mode of the title bar.
+   * After this attribute is set, the title bar content (main title, subtitle, and close button) is brightened or
+   * darkened, improving readability against translucent material backgrounds.
+   * The main title and subtitle take effect only for system titles in the
+   * [SheetTitleOptions]{@link SheetTitleOptions} form; they do not take effect for custom titles built with
+   * [CustomBuilder]{@link CustomBuilder}.
+   * This attribute takes effect only on high-compute and medium-compute devices. The device compute level can be
+   * obtained through
+   * [uiMaterial.getGlobalMaterialLevel]{@link @ohos.arkui.uiMaterial:uiMaterial.getGlobalMaterialLevel}.
+   * Default value: **undefined**, indicating that the vibrancy effect is not used.
+   *
+   * @syscap SystemCapability.ArkUI.ArkUI.Full
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamic
+   */
+  titleBarVibrancyMode?: VibrancyMode;
 }
 
 /**
