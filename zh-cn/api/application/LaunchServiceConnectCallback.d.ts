@@ -56,8 +56,10 @@ declare interface LaunchServiceConnectCallback {
    * 当连接失败时调用。
    *
    * @param { int } code - 连接失败时返回的错误码。
-   *     16000211 -找不到指定的服务。
-   *     16000050 -系统服务连接失败。
+   *     16000211 - The specified service is not found.
+   *     16000213 - The specified service is disabled.
+   *     16000219 - Connection to the specified service timed out.
+   *     16000050 - System service connection failed.
    *     <br>取值限定为整数。
    * @syscap SystemCapability.Ability.AbilityRuntime.Core
    * @stagemodelonly
