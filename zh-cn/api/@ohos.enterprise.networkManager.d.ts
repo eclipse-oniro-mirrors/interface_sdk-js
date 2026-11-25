@@ -684,32 +684,6 @@ declare namespace networkManager {
     dnsServers?: string;
   }
 
-  /**
-   * 共享路径的用户权限信息。
-   *
-   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-   * @stagemodelonly
-   * @since 26.1.0
-   */
-  interface UserPathInfo {
-    /**
-     * 用户名。
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userName: string;
-
-    /**
-     * 用户对该共享路径的权限。
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userPermission: string;
-  }
 
   /**
    * 共享路径数据。
@@ -736,24 +710,6 @@ declare namespace networkManager {
      * @since 26.1.0
      */
     shareUri: string;
-
-    /**
-     * 用户路径信息列表，用于权限管理。
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userPathInfoList: Array<UserPathInfo>;
-
-    /**
-     * 允许访问该共享资源的最大用户数。
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    shareLimit: number;
   }
 
   /**

@@ -713,33 +713,6 @@ declare namespace networkManager {
   }
 
   /**
-   * User permission information for the shared path.
-   *
-   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-   * @stagemodelonly
-   * @since 26.1.0
-   */
-  interface UserPathInfo {
-    /**
-     * User name.
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userName: string;
-
-    /**
-     * The user's permissions for this shared path.
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userPermission: string;
-  }
-
-  /**
    * Path shared data.
    *
    * @syscap SystemCapability.Customization.EnterpriseDeviceManager
@@ -764,24 +737,6 @@ declare namespace networkManager {
      * @since 26.1.0
      */
     shareUri: string;
-
-    /**
-     * User path information list, used for permission management.
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    userPathInfoList: Array<UserPathInfo>;
-
-    /**
-     * The maximum number of users allowed to access this shared resource.
-     *
-     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
-     * @stagemodelonly
-     * @since 26.1.0
-     */
-    shareLimit: number;
   }
 
   /**
