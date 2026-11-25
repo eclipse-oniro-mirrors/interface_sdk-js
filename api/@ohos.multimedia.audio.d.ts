@@ -7223,6 +7223,22 @@ declare namespace audio {
      * @since 26.0.1 dynamic&static
      */
     confirmVolumeLimitExceeded(volumeType: AudioVolumeType, result: boolean): void;
+ 
+    /**
+     * Restore all volume settings to factory defaults. Use Promise asynchronous callbacks.
+     *
+     * @permission ohos.permission.MANAGE_AUDIO_CONFIG
+     * @returns { Promise<void> }Promise object. No result is returned.
+     * @throws { BusinessError } 201 - Permission verification failed.
+     *     The application does not have the permission required to call the API.
+     * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+     * @throws { BusinessError } 6800301 - Crash or blocking occurs in system process.
+     * @syscap SystemCapability.Multimedia.Audio.Volume
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamic&static
+     */
+    factoryResetVolumeParameters(): Promise<void>;
   }
 
   /**
