@@ -1609,6 +1609,31 @@ declare namespace securityManager {
   function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
 
   /**
+   * 根据认证Token获取凭证ID。该接口使用promise返回结果。
+   * 企业可以通过该接口解析和查询用户凭证ID（如人脸、指纹ID等）。
+   * 企业设备安全审计、身份认证等场景。
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { Uint8Array } authToken - 认证令牌，认证成功后颁发。最大的
+   *     长度为1024字节。
+   * @param { number } allowableDuration - 允许解析认证token的时长，单位为毫秒。
+   *     且小于等于86400000。
+   *     <br>取值应>0。
+   * @returns { Promise<bigint> } Promise对象，返回凭证ID。
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201057 - Invalid authentication token.
+   * @throws { BusinessError } 9201058 - The authentication token parsing duration is out of the allowed range.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCredentialId(authToken: Uint8Array, allowableDuration: number): Promise<bigint>;
+
+  /**
    * 设置企业复位策略。
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY

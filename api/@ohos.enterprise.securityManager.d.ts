@@ -1802,6 +1802,33 @@ declare namespace securityManager {
   function getEnterpriseResetPolicy(): EnterpriseResetPolicy;
 
   /**
+   * Obtains the credential ID based on the authentication token. This API uses a promise to return the result.
+   * Enterprises can use this API to parse and query user credential IDs (such as facial or fingerprint IDs) for
+   * scenarios such as enterprise device security audit and identity verification.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { Uint8Array } authToken - Authentication token, which is issued after successful authentication. The
+   *         maximum
+   *         length is 1024 bytes.
+   * @param { number } allowableDuration - Allowable duration for parsing the authentication token, in milliseconds.
+   *          and less than or equal to 86400000.
+   *         <br>The value must be greater than 0.
+   * @returns { Promise<bigint> } Promise used to return the credential ID.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *         required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201057 - Invalid authentication token.
+   * @throws { BusinessError } 9201058 - The authentication token parsing duration is out of the allowed range.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getCredentialId(authToken: Uint8Array, allowableDuration: number): Promise<bigint>;
+
+  /**
    * Sets the enterprise reset policy.
    *
    * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
