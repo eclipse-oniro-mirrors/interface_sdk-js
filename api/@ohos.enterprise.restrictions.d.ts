@@ -633,6 +633,14 @@ declare namespace restrictions {
     SUPER_PRIVACY = 53,
 
     /**
+     * Enhanced information.
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    ADVANCED_MESSAGE = 55,
+
+    /**
      * Power saving mode, including battery saver, ultra battery saver and expedition.
      *
      * @syscap SystemCapability.Customization.EnterpriseDeviceManager
