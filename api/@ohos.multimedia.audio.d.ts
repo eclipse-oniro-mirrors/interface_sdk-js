@@ -3583,9 +3583,9 @@ declare namespace audio {
     getRecordingManager(): AudioRecordingManager;
 
     /**
-     * Obtain the AudioSuiteDownloadManager instance for downloading the audio editing feature.
+     * Obtains an **AudioSuiteDownloadManager** instance for downloading audio suite features.
      *
-     * @returns { AudioSuiteDownloadManager }AudioSuiteDownloadManager instance.
+     * @returns { AudioSuiteDownloadManager } **AudioSuiteDownloadManager** instance.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15803,7 +15803,7 @@ declare namespace audio {
   }
 
   /**
-   * Enumerated audio encoding feature type.
+   * Enumerates the audio suite feature types.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15812,7 +15812,7 @@ declare namespace audio {
    */
   enum AudioSuiteFeatureType {
     /**
-     * Enhancement for voice dialogue part of the audio.
+     * Enhances the dialogues in audio.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15821,7 +15821,7 @@ declare namespace audio {
      */
     AUDIO_DIALOG_ENHANCEMENT = 0,
     /**
-     * Enhancement for the main voice part of the audio.
+     * Enhances the primary vocal in the audio.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15830,7 +15830,7 @@ declare namespace audio {
      */
     AUDIO_CENTER_VOICE_ENHANCEMENT = 1,
     /**
-     * Enhancement for the human voice part of the audio.
+     * Enhances vocal in audio.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15839,7 +15839,7 @@ declare namespace audio {
      */
     AUDIO_VOICE_ENHANCEMENT = 2,
     /**
-     * Enhancement for the music portion of the audio.
+     * Enhances music in audio.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15848,7 +15848,7 @@ declare namespace audio {
      */
     AUDIO_MUSIC_ENHANCEMENT = 3,
     /**
-     * Audio source separation.
+     * Separates audio sources.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15859,7 +15859,7 @@ declare namespace audio {
   }
 
   /**
-   * Enumerated value, indicating the status of the audio encoding feature.
+   * Enumerates the audio suite feature states.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -15868,7 +15868,7 @@ declare namespace audio {
    */
   enum AudioSuiteFeatureStatus {
     /**
-     * Invalid status.
+     * Invalid state.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15877,7 +15877,7 @@ declare namespace audio {
      */
     INVALID = -1,
     /**
-     * Initialized status.
+     * Initialization state.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15886,7 +15886,7 @@ declare namespace audio {
      */
     INITIALIZED = 0,
     /**
-     * Feature is checking version.
+     * The feature version is being checked.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15895,7 +15895,7 @@ declare namespace audio {
      */
     VERSION_CHECKING = 10,
     /**
-     * Check the version failure status.
+     * Failed to check the version.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15904,7 +15904,7 @@ declare namespace audio {
      */
     VERSION_CHECK_FAILED = 11,
     /**
-     * Check version success status.
+     * Version check succeeded.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15913,7 +15913,7 @@ declare namespace audio {
      */
     VERSION_CHECK_SUCCEEDED = 12,
     /**
-     * Downloading status.
+     * Downloading.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15922,7 +15922,7 @@ declare namespace audio {
      */
     DOWNLOADING = 20,
     /**
-     * Paused during download status.
+     * Downloading paused.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15940,7 +15940,7 @@ declare namespace audio {
      */
     DOWNLOAD_FAILED = 22,
     /**
-     * Download succeeded status.
+     * Downloaded successfully.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15949,7 +15949,7 @@ declare namespace audio {
      */
     DOWNLOAD_SUCCEEDED = 23,
     /**
-     * Installing status.
+     * Installation state.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15958,7 +15958,7 @@ declare namespace audio {
      */
     INSTALLING = 30,
     /**
-     * Waiting for installation status.
+     * Waiting for installation.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15967,7 +15967,7 @@ declare namespace audio {
      */
     WAITING_FOR_INSTALLATION = 31,
     /**
-     * Installation failed status.
+     * Installation failed.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15976,7 +15976,7 @@ declare namespace audio {
      */
     INSTALLATION_FAILED = 35,
     /**
-     * Installation succeeded status.
+     * Installation succeeded.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15985,7 +15985,7 @@ declare namespace audio {
      */
     INSTALLATION_SUCCEEDED = 36,
     /**
-     * Uninstalling status.
+     * Uninstallation state.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -15994,7 +15994,7 @@ declare namespace audio {
      */
     UNINSTALLING = 40,
     /**
-     * Waiting for uninstalling status.
+     * Waiting for uninstallation.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16003,7 +16003,7 @@ declare namespace audio {
      */
     WAITING_FOR_UNINSTALLATION = 41,
     /**
-     * Uninstallation failed status.
+     * Uninstallation failed.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16012,7 +16012,7 @@ declare namespace audio {
      */
     UNINSTALLATION_FAILED = 42,
     /**
-     * Uninstallation succeeded status.
+     * Uninstallation succeeded.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16023,7 +16023,7 @@ declare namespace audio {
   }
 
   /**
-   * Network type for downloading the audio encoding feature.
+   * Enumerates the network types for downloading audio suite features.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -16032,7 +16032,7 @@ declare namespace audio {
    */
   enum NetworkType {
     /**
-     * Wi-Fi network.
+     * Wi-Fi.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16041,7 +16041,7 @@ declare namespace audio {
      */
     WIFI = 6,
     /**
-     * Cellular and Wi-Fi network.
+     * Cellular and Wi-Fi networks.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16052,7 +16052,7 @@ declare namespace audio {
   }
 
   /**
-   * Defines the status of the audio encoding feature.
+   * Defines the status information of audio suite features.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -16061,7 +16061,7 @@ declare namespace audio {
    */
   interface AudioSuiteFeatureStatusInfo {
     /**
-     * Type of the feature module.
+     * Feature module type.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16070,7 +16070,7 @@ declare namespace audio {
      */
     featureType: AudioSuiteFeatureType;
     /**
-     * Status of the feature module.
+     * Feature module status.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16089,7 +16089,7 @@ declare namespace audio {
     installPath: string;
     /**
      * Download progress. The value ranges from 0 to 100.
-     * The value should be an integer.
+     * The value must be an integer.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16098,9 +16098,9 @@ declare namespace audio {
      */
     progress: int;
     /**
-     * Error code when the feature enters the error status.
-     * <br>If the error code is 6800301, the internal database or I/O of the system is abnormal, which is irrelevant to
-     * application invoking.
+     * Error code after the feature enters an abnormal state.
+     * If the error code is 6800301, it indicates an internal system database or I/O exception, which is unrelated to
+     * application calls.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16111,7 +16111,7 @@ declare namespace audio {
   }
 
   /**
-   * Defines the status information array of the audio encoding feature.
+   * Defines the status information array of audio suite features.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -16121,7 +16121,7 @@ declare namespace audio {
   type AudioSuiteFeatureStatusInfoArray = Array<AudioSuiteFeatureStatusInfo>;
 
   /**
-   * Defines the version information of the audio editing feature.
+   * Defines the version information of audio suite features.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -16130,7 +16130,7 @@ declare namespace audio {
    */
   interface AudioSuiteFeatureVersionInfo {
     /**
-     * Type of the feature module.
+     * Feature module type.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16139,7 +16139,7 @@ declare namespace audio {
      */
     featureType: AudioSuiteFeatureType;
     /**
-     * Status of the feature module.
+     * Feature module status.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16157,8 +16157,8 @@ declare namespace audio {
      */
     version: string;
     /**
-     * Storage size of feature module.
-     * Unit: Bytes.
+     * Space occupied by the feature module.
+     * The unit is bytes.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16167,9 +16167,9 @@ declare namespace audio {
      */
     size: long;
     /**
-     * Error code after a feature enters the abnormal state.
-     * <br>If the error code is 6800301, it indicates that the internal database or I/O of the system is abnormal, which
-     * is irrelevant to application invoking.
+     * Error code after the feature enters an abnormal state.
+     * If the error code is 6800301, it indicates an internal system database or I/O exception, which is unrelated to
+     * application calls.
      *
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
      * @systemapi
@@ -16180,8 +16180,8 @@ declare namespace audio {
   }
 
   /**
-   * Provides the capability of downloading and managing the audio editing feature, including starting, pausing,
-   * Cancel the download, status query, and uninstallation functions.
+   * Provides the capabilities to manage the download of audio suite features, including starting, pausing,
+   * and canceling the download, querying the status, and uninstalling the features.
    *
    * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
    * @systemapi
@@ -16190,15 +16190,14 @@ declare namespace audio {
    */
   interface AudioSuiteDownloadManager {
     /**
-     * Obtains whether a specified feature has been installed. Use Promise asynchronous callback.
+     * Checks whether specified features have been installed. This API uses a promise to return the result.
      *
-     * This interface is used to query the local installation status of a feature and does not depend on the network
-     * environment.
+     * This API queries the local installation status of features and does not depend on the network environment.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<Array<boolean>> } Promise used to return the install status array.
-     *     Each element corresponds to the feature at the same index in featureTypes.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to query.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<Array<boolean>> } Promise used to return the installation status array.
+     *     Each element corresponds to the feature at the matching index in **featureTypes**.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16210,15 +16209,14 @@ declare namespace audio {
     isFeatureInstalled(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<boolean>>;
 
     /**
-     * Obtain the status of a specified feature. Use Promise asynchronous callback.
+     * Obtains the status of specified features. This API uses a promise to return the result.
      *
-     * This interface is used to query the local installation status of a feature and does not depend on the network
-     * environment.
+     * This API queries the local installation status of features and does not depend on the network environment.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> }Promise object, which returns an array of attribute states.
-     * Each element corresponds to a feature at the same index in featureTypes.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to query.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<AudioSuiteFeatureStatusInfoArray> } Promise used to return the feature status array.
+     *     Each element corresponds to the feature at the matching index in **featureTypes**.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16230,14 +16228,14 @@ declare namespace audio {
     getFeatureStatus(featureTypes: Array<AudioSuiteFeatureType>): Promise<AudioSuiteFeatureStatusInfoArray>;
 
     /**
-     * Obtain the latest version of a specified feature. Use Promise asynchronous callback.
+     * Obtains the latest version information about specified features. This API uses a promise to return the result.
      *
      * Before calling this API, ensure that the device is connected to an available network.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to query.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise used to return the version info array.
-     *     Each element corresponds to the feature at the same index in featureTypes.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to query.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<Array<AudioSuiteFeatureVersionInfo>> } Promise used to return the version information
+     *     array. Each element corresponds to the feature at the matching index in **featureTypes**.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16251,21 +16249,22 @@ declare namespace audio {
     getNewVersionInfo(featureTypes: Array<AudioSuiteFeatureType>): Promise<Array<AudioSuiteFeatureVersionInfo>>;
 
     /**
-     * Start downloading features based on the specified network. Use Promise asynchronous callbacks.
-     * Invoke {@link getNewVersionInfo} to query the new version. The query is successful and the status changes to
-     * This interface is invoked after {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED},
-     * Alternatively, in the {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED} state, invoke this interface to
-     * continue the download,
-     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
-     * After the download is successful, the system automatically enters the
-     * {@link audio.AudioSuiteFeatureStatus.INSTALLING} state.
+     * Starts downloading features over the specified network. This API uses a promise to return the result.
+     * Call {@link getNewVersionInfo} to query the new version. If the query is successful and the status changes to
+     * {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}, call this API.
+     * Alternatively, you can call this API to resume the download when the status is
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}.
+     * After this API is called, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
+     * After the download is successful, the status automatically changes to
+     * {@link audio.AudioSuiteFeatureStatus.INSTALLING}.
      *
-     * The interface is returned after the download starts. During the download, you can use the
-     * {@link onDownloadStatusChange} Obtains the download progress of the subscribed download status change event.
+     * This API returns a result immediately after the download starts. During the download, you can obtain the download
+     * progress
+     * through the download status change event subscribed to by {@link onDownloadStatusChange}.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to download.
-     *     <br>The maximum length is 5.
-     * @param { NetworkType } networkType - Network type for downloading.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to download.
+     *     The value can contain a maximum of 5 characters.
+     * @param { NetworkType } networkType - Network type for the download.
      * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
@@ -16281,16 +16280,16 @@ declare namespace audio {
     startDownload(featureTypes: Array<AudioSuiteFeatureType>, networkType: NetworkType): Promise<void>;
 
     /**
-     * Pause the download of a specified feature. Use Promise asynchronous callback.
-     * Should be called after the property state is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING},
-     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}.
+     * Pauses the download of specified features. This API uses a promise to return the result.
+     * This API should be called after the feature status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}.
+     * After this API is called, the status changes to {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}.
      *
-     * If this interface is invoked when the feature status is not {@link audio.AudioSuiteFeatureStatus.DOWNLOADING}, a
-     * success message is returned and the original status remains unchanged.
+     * If this API is called when the feature is not in the {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} status,
+     * the API returns a successful response and retains the original status.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of the features to pause.
-     *     <br>The maximum length is 5.
-     * @returns { Promise<void> }Promise object. No result is returned.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to pause downloading.
+     *     The value can contain a maximum of 5 characters.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16302,18 +16301,18 @@ declare namespace audio {
     pauseDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Cancel the download of a specified feature. Use Promise asynchronous callbacks.
-     * Should be in the characteristic state {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
-     * This interface is invoked when {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUTE} is invoked,
-     * After this function is invoked, the status changes to {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}.
+     * Cancels the download of specified features. This API uses a promise to return the result.
+     * This API should be called when the feature status is {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}.
+     * After this API is called, the status changes to {@link audio.AudioSuiteFeatureStatus.VERSION_CHECK_SUCCEEDED}.
      *
-     * When the feature status is not {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
-     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUTE} This interface is invoked. A success response is returned
-     * and the original status remains unchanged.
+     * If this API is called when the feature status is not {@link audio.AudioSuiteFeatureStatus.DOWNLOADING} or
+     * {@link audio.AudioSuiteFeatureStatus.DOWNLOAD_PAUSED}, the API returns a successful response and retains the
+     * original status.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - The type of property to cancel.
-     * <br>The maximum length is 5.
-     * @returns { Promise<void> }Promise object. No result is returned.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to cancel downloading.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16325,19 +16324,20 @@ declare namespace audio {
     cancelDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Start the background download feature. Use Promise asynchronous callbacks.
-     * If the current network condition is Wi-Fi, the system audio service will directly download the feature.
-     * If a non-Wi-Fi network, the system audio service automatically downloads after switching to a Wi-Fi network.
-     * It can be called in any {@link audio.AudioSuiteFeatureStatus} state.
-     * After the client process exits, the system audio service continuously listens to the network environment until
-     * the task is downloaded successfully.
+     * Starts downloading features in the background. This API uses a promise to return the result.
+     * If the current network is Wi-Fi, the system audio service directly downloads the features.
+     * If the current network is not Wi-Fi, the system audio service automatically downloads the features once the
+     * network switches to Wi-Fi.
+     * This API can be called in any feature status (specified by {@link audio.AudioSuiteFeatureStatus}).
+     * After the client process exits, the system audio service continuously monitors the network environment until the
+     * download task is completed.
      *
-     * The interface returns a message after the command is sent. During the download, the download progress can be
-     * obtained through the download status change event subscribed by {@link onDownloadStatusChange}.
+     * The API returns a result immediately after a request is sent. During the download, you can obtain the download
+     * progress by subscribing to the download status change event via {@link onDownloadStatusChange}.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - The type of feature to download.
-     * <br>The maximum length is 5.
-     * @returns { Promise<void> }Promise object. No result is returned.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to download.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16349,16 +16349,19 @@ declare namespace audio {
     startBackgroundDownload(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Uninstall downloaded features. Use Promise asynchronous callbacks.
-     * Should be called after the property state is {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED},
-     * If the status changes to {@link audio.AudioSuiteFeatureStatus.UNINSTALLING}, the uninstallation starts.
+     * Uninstalls downloaded features. This API uses a promise to return the result.
+     * This API should be called after the feature status changes to
+     * {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED}.
+     * After this API is called, the status changes to {@link audio.AudioSuiteFeatureStatus.UNINSTALLING} and the
+     * uninstallation starts.
      *
-     * This interface is invoked when the feature status is not {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED},
-     * The interface returns a success message and retains the original status.
+     * If this API is called when the feature status is not
+     * {@link audio.AudioSuiteFeatureStatus.INSTALLATION_SUCCEEDED},
+     * the API returns a successful response and retains the original status.
      *
-     * @param { Array<AudioSuiteFeatureType> } featureTypes - The property type to unload.
-     * <br>The maximum length is 5.
-     * @returns { Promise<void> }Promise object. No result is returned.
+     * @param { Array<AudioSuiteFeatureType> } featureTypes - Types of features to uninstall.
+     *     The array can contain at most 5 elements.
+     * @returns { Promise<void> } Promise that returns no value.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800101 - Parameter verification failed. The value of featureTypes is invalid.
      * @throws { BusinessError } 6800302 - System service process terminated.
@@ -16370,11 +16373,11 @@ declare namespace audio {
     uninstallFeature(featureTypes: Array<AudioSuiteFeatureType>): Promise<void>;
 
     /**
-     * Subscribe to download status change events.
-     * When the download status or progress of any feature changes, the subscription callback is triggered.
+     * Subscribes to the download status change event.
+     * The callback is triggered when the download status or progress of any feature changes.
      *
-     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } callback - Callback function, which is used to return the
-     *     array of changed download status information.
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } callback - Callback used to return the updated download
+     *     status information array.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
@@ -16385,12 +16388,12 @@ declare namespace audio {
     onDownloadStatusChange(callback: Callback<AudioSuiteFeatureStatusInfoArray>): void;
 
     /**
-     * Unsubscribe from the download status change event.
-     * After you cancel the callback, the system does not trigger the callback.
+     * Unsubscribes from the download status change event.
+     * Upon unsubscription, the system will no longer trigger the callback.
      *
-     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - Callback function to be canceled,
-     * The default value is null. If this parameter is not set, all callbacks that have been subscribed to in the
-     * current process are canceled.
+     * @param { Callback<AudioSuiteFeatureStatusInfoArray> } [callback] - Callback to unsubscribe.
+     *     By default, this parameter is left empty. If this parameter is not set, all callbacks subscribed to in the
+     *     current process are unsubscribed.
      * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
      * @throws { BusinessError } 6800302 - System service process terminated.
      * @syscap SystemCapability.Multimedia.Audio.SuiteEngine
