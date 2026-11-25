@@ -1,6 +1,6 @@
 # 02.7 数值类型转换（interface/sdk-js/build-tools/intToNumber.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.7」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.7」。
 > 把动态 SDK 中的 `int` / `long` / `double` 改为 JS 兼容的 `number`。
 
 ## 1. 脚本定位

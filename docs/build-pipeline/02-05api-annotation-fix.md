@@ -1,6 +1,6 @@
 # 02.5 修正 API 注解（interface/sdk-js/build-tools/adjust_api_annotation.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.5」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.5」。
 > 修正 `@syscap`/`@permission`/`@supportDeviceType` 等注解里的 `[since x-y]`
 > 区间，使其与接口自身 `@since` 起始版本一致。
 

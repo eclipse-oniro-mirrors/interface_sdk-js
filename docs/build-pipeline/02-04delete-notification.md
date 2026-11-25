@@ -1,6 +1,6 @@
 # 02.4 删除 Notification 模块（interface/sdk-js/build-tools/delete_notification_plugin.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.4」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.4」。
 > public SDK（`sdk_build_public == "true"`）不对外提供 notification（通知）能力，
 > 删除整个通知模块文件，并清理其它模块对通知类型 / 模块的引用。
 

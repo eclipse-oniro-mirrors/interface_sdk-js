@@ -1,6 +1,6 @@
 # 02.6 生成权限声明（interface/sdk-js/build-tools/permissions_converter/convert.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.6」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.6」。
 > 把系统权限定义 `permission_definitions.json` 转成 SDK 的
 > `export type Permissions = ...`。
 
@@ -35,7 +35,7 @@ build/ohos/sdk/parse_interface_sdk.py: convert_permissions(root_build_dir, out_p
 
 > 同一个转换工具还有一处独立调用：环节 01 的 `parse_sdk_description.py` 在解析
 > SDK 描述文件前，会以 public SDK 目录 `out/sdk-public/public_interface/sdk-js` 为输出
-> 执行同样流程，见 [01-GN生成期-02生成模块清单](./01-GN生成期-02生成模块清单.md)。两处只是输出目录不同，
+> 执行同样流程，见 [01-02module-list](./01-02module-list.md)。两处只是输出目录不同，
 > 转换工具本身一致。
 
 ## 3. 输入与输出

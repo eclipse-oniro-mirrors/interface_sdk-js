@@ -1,6 +1,6 @@
 # 03 目录级过滤（`ohos_declaration_ets` / `ohos_declaration_ets2` / `ohos_declaration_common`）
 
-> 对应 [00-总览](./00-总览.md)「环节 03」。
+> 对应 [00-overview](./00-overview.md)「环节 03」。
 > 脚本 `interface/sdk-js/remove_internal.py`，模板 `ohos_declaration_template`（`BUILD.gn:136`）。
 > 本环节做**目录级过滤**：从接口树 `api/` 拷贝出常规声明目录，
 > 排除内置 `remove_list` 中的 6 个特殊目录（见下）。
@@ -102,7 +102,7 @@ flowchart TD
 
 > `ohos_declaration_ets_api`（`BUILD.gn:257`）也以 `ohos_declaration_ets` 为输入，
 > 输出到 `out/<产品>/obj/interface/api`，通过 `sdk:ohos_declaration_ets_api` 被
-> `developtools_ace_ets2bundle` 读取（跨部件契约，见 [11-部件化对外接口](./11-部件化对外接口.md)）。
+> `developtools_ace_ets2bundle` 读取（跨部件契约，见 [11-cross-part-interfaces](./11-cross-part-interfaces.md)）。
 
 ## 6. 常加的改动
 

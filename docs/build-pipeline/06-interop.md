@@ -1,9 +1,9 @@
 # 06 interop（互操作声明 / 胶水代码）
 
-> 对应 [00-总览](./00-总览.md)「环节 06」。
+> 对应 [00-overview](./00-overview.md)「环节 06」。
 > 涉及脚本：`interface/sdk-js/arkui_interop_copy_dynamic.sh`、`interface/sdk-js/process_label_noninterop.py`（+ js 工具）、
 > `interface/sdk-js/run_compile_declgen.py` → `interface/sdk-js/build-tools/declgen.js`、`interface/sdk-js/compile_ets_ts.py`。
-> 输入来自 [05-装配](./05-装配.md)，与 [08-清标签](./08-清标签.md) 的 `@noninterop` 清理同源；
+> 输入来自 [05-assembly](./05-assembly.md)，与 [08-label-cleanup](./08-label-cleanup.md) 的 `@noninterop` 清理同源；
 > static 支线是 [07-runtimeapi](./07-runtimeapi.md) 的上游（runtimeapi 的 `copy_runtimeapi` order-only 依赖本环节 `build_static_sdk_interop`）。
 
 ## 1. 环节职责
@@ -196,9 +196,9 @@ flowchart TD
 - `arkui_dummy_interop*` 不是真实产物，仅作 GN `outputs` 标记；
 - component 目录在收尾时被删除，interop 只保留 `api` / `arkts` / `kits`。
 
-## 8. 与 [07-runtimeapi](./07-runtimeapi.md)、[08-清标签](./08-清标签.md) 的关系
+## 8. 与 [07-runtimeapi](./07-runtimeapi.md)、[08-label-cleanup](./08-label-cleanup.md) 的关系
 
-三个环节数据上都从 [05-装配](./05-装配.md) 出发，但**处理对象不同**：
+三个环节数据上都从 [05-assembly](./05-assembly.md) 出发，但**处理对象不同**：
 
 | 环节 | 处理对象 | `@noninterop` 处理 | 消费方 |
 | ---- | -------- | ----------------- | ------ |

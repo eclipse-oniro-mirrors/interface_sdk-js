@@ -1,9 +1,9 @@
 # 08 清标签（`ohos_handle_declaration_template`）
 
-> 对应 [00-总览](./00-总览.md)「环节 08」。
+> 对应 [00-overview](./00-overview.md)「环节 08」。
 > 脚本链：`interface/sdk-js/delete_arkui_label.py`（Python 转发）
 > → `interface/sdk-js/build-tools/delete_label_noninterop.js`（干活的 Node 脚本）。
-> dynamic 输入来自 [05-装配](./05-装配.md)；static 输入经 [07-runtimeapi](./07-runtimeapi.md) 处理，
+> dynamic 输入来自 [05-assembly](./05-assembly.md)；static 输入经 [07-runtimeapi](./07-runtimeapi.md) 处理，
 > 与 [06-interop](./06-interop.md) 的 `@noninterop` 成员清理同源（本环节只删标签行，见下文）。
 
 ## 1. 环节职责
@@ -104,7 +104,7 @@ content.replace(/^\s*\*\s*\@noninterop\s*[\r\n]/mg, '')
   `validate_delete_unpublished` 处理 static `@unpublished` 相关内容。
 - 与 [06-interop](./06-interop.md) 的区分：06 在 interop 副本上**删 `@noninterop` 成员**（声明级），
   本环节在安装副本上**只删 `@noninterop` 标签行**（声明保留），二者同源于 `@noninterop` 但互不消费；
-  dynamic 输入直取 [05-装配](./05-装配.md) 的 `ohos_dynamic`，static 输入取 [07-runtimeapi](./07-runtimeapi.md) 的 `copy_runtimeapi`。
+  dynamic 输入直取 [05-assembly](./05-assembly.md) 的 `ohos_dynamic`，static 输入取 [07-runtimeapi](./07-runtimeapi.md) 的 `copy_runtimeapi`。
 
 ## 6. 常加的改动
 

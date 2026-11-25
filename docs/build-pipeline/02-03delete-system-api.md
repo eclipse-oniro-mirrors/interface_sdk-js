@@ -1,6 +1,6 @@
 # 02.3 删除系统 API（interface/sdk-js/build-tools/delete_systemapi_plugin.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.3」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.3」。
 > 删除 `@systemapi` 声明；带 `@publicapi [since x]` 的接口转为 public 并重算 `@since`。
 
 ## 1. 脚本定位

@@ -1,6 +1,6 @@
 # 01.2 生成模块清单（build/ohos/sdk/parse_sdk_description.py）
 
-> 对应 [01-GN生成期-00总览](./01-GN生成期-00总览.md)「环节 01 · 步骤 01.2」。
+> 对应 [01-00gn-generation-overview](./01-00gn-generation-overview.md)「环节 01 · 步骤 01.2」。
 > 把扁平 SDK 描述 JSON 展开为「按 SDK 类型 / OS 分组的 GN 变量」，
 > 同时生成安装路径表和 SDK 类型列表。
 
@@ -254,7 +254,7 @@ convert_permissions(options.source_root_dir,
 > 同一个转换工具还有另一处调用：环节 02 的 `ohos_base_split`
 > 会对 `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` 各执行一遍。两处共用
 > `convert_permissions.py`，只是输出目录不同：本处是 public SDK 目录
-> `out/sdk-public/public_interface/sdk-js`，另一处是接口树目录，见 [02-接口源文件拆分-06生成权限声明](./02-接口源文件拆分-06生成权限声明.md)。
+> `out/sdk-public/public_interface/sdk-js`，另一处是接口树目录，见 [02-06permission-declaration](./02-06permission-declaration.md)。
 
 ## 5. 输出一：`out/<产品>/gen/build/ohos/sdk/ohos_sdk_modules.gni`
 

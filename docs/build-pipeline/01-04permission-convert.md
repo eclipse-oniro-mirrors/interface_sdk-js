@@ -1,9 +1,9 @@
 # 01.4 权限转换（build/ohos/sdk/convert_permissions.py）
 
-> 对应 [01-GN生成期-00总览](./01-GN生成期-00总览.md)「环节 01 · 步骤 01.4」。
+> 对应 [01-00gn-generation-overview](./01-00gn-generation-overview.md)「环节 01 · 步骤 01.4」。
 > 01.2 在解析 SDK 描述文件前，经 `convert_permissions.py` 调用
 > `interface/sdk-js/build-tools/permissions_converter/convert.js` 生成权限声明；
-> 转换工具的处理细节见 [02-接口源文件拆分-06生成权限声明](./02-接口源文件拆分-06生成权限声明.md)。
+> 转换工具的处理细节见 [02-06permission-declaration](./02-06permission-declaration.md)。
 
 ## 1. 脚本定位
 
@@ -28,4 +28,4 @@ parse_sdk_description.py（01.2，解析描述文件前）
 
 同一转换工具在环节 02 还会由 `parse_interface_sdk.py` 对 dynamic / static 两棵接口树
 各调用一次（输出 `permissions.d.ts` / `.d.ets`）。权限过滤、版本计算、输出结构等
-与环节 02 完全一致，详见 [02-接口源文件拆分-06生成权限声明](./02-接口源文件拆分-06生成权限声明.md)。
+与环节 02 完全一致，详见 [02-06permission-declaration](./02-06permission-declaration.md)。

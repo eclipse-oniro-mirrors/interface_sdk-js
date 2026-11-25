@@ -1,6 +1,6 @@
 # 11 跨部件对外接口（`sdk:` 标签 / `inner_kits` 契约）
 
-> 对应 [00-总览](./00-总览.md)「环节 11」。
+> 对应 [00-overview](./00-overview.md)「环节 11」。
 > 与环节 01~10 的**内部处理链**不同，本文是**跨部件依赖契约**：
 > 其他部件如何依赖 `interface_sdk-js` 暴露的 GN 目标。
 > 内容依据 `interface/sdk-js/bundle.json` 的 `component.build.inner_kits`。
@@ -147,7 +147,7 @@ ohos_ets_arkts_deps = "sdk:ohos_ets_arkts"
 
 | inner_kit | 内部下游（05 环节） | 说明 |
 | --------- | ------------------- | ---- |
-| `ohos_declaration_ets` | 环节 03 → [05-装配](./05-装配.md) | 装配 dynamic `api` |
+| `ohos_declaration_ets` | 环节 03 → [05-assembly](./05-assembly.md) | 装配 dynamic `api` |
 | `ets_internal_api` | 环节 04 → 05 装配 | 装配 `api/@internal/full` |
 | `bundle_arkts` | 环节 04 → 05 装配 | 装配 dynamic `arkts` |
 | `ets_component` | 环节 04 → 05 装配 | 装配 dynamic `component` |

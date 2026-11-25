@@ -1,6 +1,6 @@
 # 01.3 打包 BUILD 渲染（build/ohos/sdk/generate_all_types_sdk.py）
 
-> 对应 [01-GN生成期-00总览](./01-GN生成期-00总览.md)「环节 01 · 步骤 01.3」。
+> 对应 [01-00gn-generation-overview](./01-00gn-generation-overview.md)「环节 01 · 步骤 01.3」。
 > 用 Jinja2 渲染出「每个 SDK 类型 × 每个 OS」的打包目标 `BUILD.gn`，
 > 并顺带为每个类型/OS 写入 `oh-uni-package.json`。
 

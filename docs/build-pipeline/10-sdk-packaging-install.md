@@ -1,9 +1,9 @@
 # 10 SDK 打包安装（build 仓，`copy_and_archive` 模板）
 
-> 对应 [00-总览](./00-总览.md)「环节 10」。
+> 对应 [00-overview](./00-overview.md)「环节 10」。
 > 脚本均在 build 仓：`build/ohos/sdk/copy_sdk_modules.py`、`build/ohos/sdk/check_sdk_completeness.py`、`build/ohos/sdk/add_notice_file.py`。
-> 上游模块产物来自 [01-GN生成期](./01-GN生成期-00总览.md) 至 [08-清标签](./08-清标签.md)，
-> 以及独立环节 [09-插件](./09-插件.md)。
+> 上游模块产物来自 [01-00gn-generation-overview](./01-00gn-generation-overview.md) 至 [08-label-cleanup](./08-label-cleanup.md)，
+> 以及独立环节 [09-plugins](./09-plugins.md)。
 
 ## 1. 环节职责
 
@@ -71,7 +71,7 @@ flowchart TD
 ## 4. 安装路径与模块来源
 
 `ohos_sdk_install_paths.json` 中本仓（`//interface/sdk-js:`）共 **23 条**登记，逐一列出如下
-（分组、开关联动、5 种流程等完整视角见 [12-入口清单与流程视角](./12-入口清单与流程视角.md)）：
+（分组、开关联动、5 种流程等完整视角见 [12-entry-flow-map](./12-entry-flow-map.md)）：
 
 | install_dir | module_label | 目标类型 | 来源 |
 | ----------- | ------------ | -------- | ---- |

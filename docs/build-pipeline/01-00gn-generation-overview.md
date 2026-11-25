@@ -1,6 +1,6 @@
 # 01 GN 生成期（总览）
 
-> 对应 [00-总览](./00-总览.md)「环节 01」，发生于
+> 对应 [00-overview](./00-overview.md)「环节 01」，发生于
 > `build/ohos/sdk/BUILD.gn` 的 `exec_script`，**ninja 之前**执行。
 > 产出「菜单」（模块清单、安装路径表、打包 BUILD.gn），不碰任何接口产物。
 > 本总览只保留环节概览与脚本索引，各脚本的详细说明见 01.1~01.4 分篇。
@@ -35,10 +35,10 @@ flowchart TD
 
 | 步骤 | 归属领域 | 分篇                                                  | 脚本                                                 | 一句话                                                                          |
 | ---- | -------- | ----------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------- |
-| 01.1 | sdk | [01 文件裁剪](./01-GN生成期-01文件裁剪.md)             | `build/ohos/sdk/parse_description.py`              | 按 `sdk_build_public`/`sdk_build_arkts` 裁剪条目、改写 `install_dir`（`ets/dynamic/`→`ets/`） |
-| 01.2 | 编译构建 | [02 生成模块清单](./01-GN生成期-02生成模块清单.md)     | `build/ohos/sdk/parse_sdk_description.py`          | 展开 `${base}/${platforms}/${variant}`，按 SDK 类型 / OS 分组                 |
-| 01.3 | 编译构建 | [03 打包 BUILD 渲染](./01-GN生成期-03打包BUILD渲染.md) | `build/ohos/sdk/generate_all_types_sdk.py`         | Jinja2 渲染「类型 × OS」打包目标与 `oh-uni-package.json`                     |
-| 01.4 | 安全领域 | [04 权限转换](./01-GN生成期-04权限转换.md)             | `build/ohos/sdk/convert_permissions.py`            | 系统权限定义 JSON → `export type Permissions` 声明                                           |
+| 01.1 | sdk | [01 文件裁剪](./01-01file-trim.md)             | `build/ohos/sdk/parse_description.py`              | 按 `sdk_build_public`/`sdk_build_arkts` 裁剪条目、改写 `install_dir`（`ets/dynamic/`→`ets/`） |
+| 01.2 | 编译构建 | [02 生成模块清单](./01-02module-list.md)     | `build/ohos/sdk/parse_sdk_description.py`          | 展开 `${base}/${platforms}/${variant}`，按 SDK 类型 / OS 分组                 |
+| 01.3 | 编译构建 | [03 打包 BUILD 渲染](./01-03build-render.md) | `build/ohos/sdk/generate_all_types_sdk.py`         | Jinja2 渲染「类型 × OS」打包目标与 `oh-uni-package.json`                     |
+| 01.4 | 安全领域 | [04 权限转换](./01-04permission-convert.md)             | `build/ohos/sdk/convert_permissions.py`            | 系统权限定义 JSON → `export type Permissions` 声明                                           |
 
 ## 4. 输出与下游消费
 

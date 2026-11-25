@@ -1,6 +1,6 @@
 # 02.1 拆分源接口（interface/sdk-js/build-tools/handleApiFiles.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.1」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.1」。
 > 递归扫描 `interface/sdk-js`，按 `--type` 与 `@arkts` 标签产出
 > `dynamic/sdk-js` 或 `static/sdk-js` 基础接口树。
 

@@ -1,6 +1,6 @@
 # 02.2 API 版本校验（interface/sdk-js/build-tools/checkApiVersion.js）
 
-> 对应 [02-接口源文件拆分-00总览](./02-接口源文件拆分-00总览.md)「环节 02 · 步骤 02.2」。
+> 对应 [02-00interface-split-overview](./02-00interface-split-overview.md)「环节 02 · 步骤 02.2」。
 > 校验接口 `@since` 版本号格式合法，且不超过 `--sdk-api-version`。
 
 ## 1. 脚本定位

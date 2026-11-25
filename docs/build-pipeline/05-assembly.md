@@ -1,6 +1,6 @@
 # 05 装配（`ohos_copy` 纯拷贝，无脚本）
 
-> 对应 [00-总览](./00-总览.md)「环节 05」。
+> 对应 [00-overview](./00-overview.md)「环节 05」。
 > 使用 `build/templates/common/copy.gni` 的 `ohos_copy` 模板，**没有任何脚本参与**。
 
 ## 1. 环节职责
@@ -74,7 +74,7 @@ flowchart TD
   直接作为 `js/api/@internal/*`、`js/api` 安装；
 - `ohos_ets_{api,arkts,kits}` 是 static SDK 面向 ets2panda 工具链的输入出口
   （被 `ets2abc_config.gni` 以 `sdk:ohos_ets_*` 引用，见
-  [11-部件化对外接口](./11-部件化对外接口.md)）；
+  [11-cross-part-interfaces](./11-cross-part-interfaces.md)）；
 - 新建目标通常不需要动这里的装配关系。
 
 ## 7. 相关文件

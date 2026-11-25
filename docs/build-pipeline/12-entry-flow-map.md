@@ -4,7 +4,7 @@
 > 从 `build/ohos/sdk/ohos_sdk_description_std.json` 中 `module_label` 属于
 > `//interface/sdk-js` 的 **23 条**条目出发，看每条入口：
 > ①装到什么 `install_dir`、②被 public / arkts 开关如何联动、③执行时先后跑哪些脚本。
-> 与 [10-SDK打包安装](./10-SDK打包安装.md) §4 的登记表同源，本文补充分组、联动、流程。
+> 与 [10-sdk-packaging-install](./10-sdk-packaging-install.md) §4 的登记表同源，本文补充分组、联动、流程。
 
 > 入口语义：**「构建该 GN 目标，产物安装到 SDK 的 install_dir」**。
 > 条目本身仍是 GN 依赖图的顶层节点，其 `deps` 决定中间产物如何生成。
@@ -15,21 +15,21 @@
 
 | install_dir | module_label | 目标类型 | 来源内容 | 上游依赖 |
 | ----------- | ------------ | -------- | -------- | -------- |
-| `js/api` | `ohos_declaration_common` | `ohos_declaration_template` | `out/<产品>/sdk-interface/dynamic/sdk-js/api` 经 [03-目录级过滤](./03-目录级过滤.md) 排除 `@internal`/`common`/`form`/`config` 等 6 个目录后的声明集 | [02](./02-接口源文件拆分-00总览.md) |
+| `js/api` | `ohos_declaration_common` | `ohos_declaration_template` | `out/<产品>/sdk-interface/dynamic/sdk-js/api` 经 [03-directory-filter](./03-directory-filter.md) 排除 `@internal`/`common`/`form`/`config` 等 6 个目录后的声明集 | [02](./02-00interface-split-overview.md) |
 | `js/api/config` | `config` | `ohos_copy` | 源仓 `api/config/{css,hml}`（直接读源码目录，不依赖接口树） | — |
 | `js/form` | `form_declaration` | `ohos_copy` | 源仓 `api/form/{action,css,hml}`（直接读源码目录） | — |
-| `js/api/@internal/full` | `internal_full` | `ohos_copy_internal` | `out/<产品>/sdk-interface/dynamic/sdk-js/api/common/full` 经 [04-内部目录与独立模块](./04-内部目录与独立模块.md) | [02](./02-接口源文件拆分-00总览.md) |
-| `js/api/@internal/lite` | `internal_lite` | `ohos_copy_internal` | `out/<产品>/sdk-interface/dynamic/sdk-js/api/common/lite`（public 删 `featureability.d.ts`） | [02](./02-接口源文件拆分-00总览.md) |
+| `js/api/@internal/full` | `internal_full` | `ohos_copy_internal` | `out/<产品>/sdk-interface/dynamic/sdk-js/api/common/full` 经 [04-internal-dirs-modules](./04-internal-dirs-modules.md) | [02](./02-00interface-split-overview.md) |
+| `js/api/@internal/lite` | `internal_lite` | `ohos_copy_internal` | `out/<产品>/sdk-interface/dynamic/sdk-js/api/common/lite`（public 删 `featureability.d.ts`） | [02](./02-00interface-split-overview.md) |
 
 > `js/api` 的输入同时会产出 `js/api/config`、`js/form` 的内容，但
-> [03-目录级过滤](./03-目录级过滤.md) 把 `config`、`form` 目录排除了，所以这两个目录
+> [03-directory-filter](./03-directory-filter.md) 把 `config`、`form` 目录排除了，所以这两个目录
 > 需要由 `config` / `form_declaration` 两条入口单独从源码目录拷贝安装。
 
 ### 1.2 ets/dynamic/*（ArkTS 1.1 动态 SDK，7 条）
 
 | install_dir | module_label | 目标类型 | 来源内容 |
 | ----------- | ------------ | -------- | -------- |
-| `ets/dynamic/api` | `ohos_build_dynamic_sdk_api` | `ohos_handle_declaration_template` | `out/<产品>/ohos_dynamic/api`（声明集 + `@internal/full`，经 [08-清标签](./08-清标签.md)） |
+| `ets/dynamic/api` | `ohos_build_dynamic_sdk_api` | `ohos_handle_declaration_template` | `out/<产品>/ohos_dynamic/api`（声明集 + `@internal/full`，经 [08-label-cleanup](./08-label-cleanup.md)） |
 | `ets/dynamic/arkts` | `ohos_build_dynamic_sdk_arkts` | `ohos_handle_declaration_template` | `out/<产品>/ohos_dynamic/arkts` |
 | `ets/dynamic/component` | `ohos_build_dynamic_sdk_component` | `ohos_handle_declaration_template` | `out/<产品>/ohos_dynamic/component`（组件声明，public 删 13 个系统组件） |
 | `ets/dynamic/kits` | `ohos_build_dynamic_sdk_kits` | `ohos_handle_declaration_template` | `out/<产品>/ohos_dynamic/kits` |
@@ -49,8 +49,8 @@
 | `ets/static/build-tools/interop/bridge` | `build_static_bridge_sdk_interop` | `ohos_copy` | `out/<产品>/sdk-interface/static-interop/bridge` |
 | `ets/static/build-tools/interop/declaration/api` | `build_static_predefined_declaration_sdk_interop` | `ohos_copy` | 源仓 `build-tools/interop/static/declaration/api/` 下 2 个预定义声明 |
 | `ets/static/build-tools/interop/bridge/api` | `build_static_predefined_bridge_sdk_interop` | `ohos_copy` | 源仓 `build-tools/interop/static/bridge/api/@ohos.lang.interop.ts` |
-| `ets/static/build-tools/ui-plugins/lib/api-check-plugin` | `api_check_plugin` | `action` + `ohos_copy` | [09-插件](./09-插件.md) npm 构建产物 |
-| `ets/static/build-tools/ui-plugins/lib/api-transform-plugin` | `api-transform-plugin` | `action` + `ohos_copy` | [09-插件](./09-插件.md) npm 构建产物 |
+| `ets/static/build-tools/ui-plugins/lib/api-check-plugin` | `api_check_plugin` | `action` + `ohos_copy` | [09-plugins](./09-plugins.md) npm 构建产物 |
+| `ets/static/build-tools/ui-plugins/lib/api-transform-plugin` | `api-transform-plugin` | `action` + `ohos_copy` | [09-plugins](./09-plugins.md) npm 构建产物 |
 
 ### 1.4 toolchains/（1 条）
 
@@ -63,7 +63,7 @@
 
 ## 2. 与 01-01 过滤规则的联动
 
-`build/ohos/sdk/parse_description.py`（[01-GN生成期-01文件裁剪](./01-GN生成期-01文件裁剪.md)）
+`build/ohos/sdk/parse_description.py`（[01-01file-trim](./01-01file-trim.md)）
 对这 23 条的效果：
 
 ### 2.1 `sdk_build_public == "true"`
@@ -71,8 +71,8 @@
 | 效果 | 条目 |
 | ---- | ---- |
 | 删除 | `bundle_api`（`DEL_TARGET` 唯一成员；public SDK 不带 ets-loader declarations） |
-| [04-内部目录与独立模块](./04-内部目录与独立模块.md) 内部再过滤 | `internal_lite`（删 `featureability.d.ts`）、`ets_component`（删 13 个系统组件，ets/dynamic/component 入口的上游） |
-| 替代删除 | [02-接口源文件拆分-03](./02-接口源文件拆分-03删除系统API.md) 阶段删 `@systemapi`（依赖链内，非描述文件过滤） |
+| [04-internal-dirs-modules](./04-internal-dirs-modules.md) 内部再过滤 | `internal_lite`（删 `featureability.d.ts`）、`ets_component`（删 13 个系统组件，ets/dynamic/component 入口的上游） |
+| 替代删除 | [02-03delete-system-api](./02-03delete-system-api.md) 阶段删 `@systemapi`（依赖链内，非描述文件过滤） |
 
 ### 2.2 `sdk_build_arkts == "false"`（不构建静态 SDK）
 
@@ -103,15 +103,15 @@ dynamic 与 static 目录并存。
 描述文件只收录 **可直接安装的最终目标**；本仓 `BUILD.gn` 中其余目标属于
 中间产物或对外部件接口，不在此表：
 
-- **中间链路**：[02-接口源文件拆分](./02-接口源文件拆分-00总览.md)（`ohos_base_split`）、
-  [03-目录级过滤](./03-目录级过滤.md)（`ohos_declaration_ets`）、
-  [04-内部目录与独立模块](./04-内部目录与独立模块.md)（`ohos_copy_internal` 全部实例）、
-  [05-装配](./05-装配.md)（`ohos_ets_dynamic*` / `ohos_ets_static*` 装配目标）、
+- **中间链路**：[02-00interface-split-overview](./02-00interface-split-overview.md)（`ohos_base_split`）、
+  [03-directory-filter](./03-directory-filter.md)（`ohos_declaration_ets`）、
+  [04-internal-dirs-modules](./04-internal-dirs-modules.md)（`ohos_copy_internal` 全部实例）、
+  [05-assembly](./05-assembly.md)（`ohos_ets_dynamic*` / `ohos_ets_static*` 装配目标）、
   [07-runtimeapi](./07-runtimeapi.md)（`copy_runtimeapi`）、[06-interop](./06-interop.md) 各 action——
   它们作为上述 23 条目标的 `deps` 被 ninja 间接构建；
 - **多设备/部件直接消费**：`ohos_declaration_ets_api`、`bundle_arkts_etc`、
   `bundle_kits_etc` 等通过部件 `deps` 直接被外部子系统依赖
-  （见 [11-部件化对外接口](./11-部件化对外接口.md)），不参与 SDK 打包。
+  （见 [11-cross-part-interfaces](./11-cross-part-interfaces.md)），不参与 SDK 打包。
 
 ## 5. 23 条入口只有 5 种流程
 
@@ -178,11 +178,11 @@ flowchart TD
 
 | 步骤 | 脚本 / 动作 | 干什么 |
 | ---- | ----------- | ------ |
-| 1 | [02-接口源文件拆分](./02-接口源文件拆分-00总览.md)（`parse_interface_sdk.py` + 7 个 Node 工具） | 把源接口「清洗」成 `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` 两套接口树 |
-| 2 | [03-目录级过滤](./03-目录级过滤.md)（`remove_internal.py`） | 生成声明集，跳过 6 个特殊目录 |
-| 3 | [04-内部目录与独立模块](./04-内部目录与独立模块.md)（`process_internal.py` ×4 并行） | 处理 `@internal/ets`、`arkts`、`component/ets`、`kits` |
-| 4 | [05-装配](./05-装配.md)（`ohos_copy` 纯拷贝） | 合成待打包目录 `out/<产品>/ohos_dynamic/{api,@internal/full,arkts,component,kits}` |
-| 5 | [08-清标签](./08-清标签.md)（`delete_arkui_label.py`） | 逐文件删 `@noninterop` 标签行，输出最终目录 |
+| 1 | [02-00interface-split-overview](./02-00interface-split-overview.md)（`parse_interface_sdk.py` + 7 个 Node 工具） | 把源接口「清洗」成 `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` 两套接口树 |
+| 2 | [03-directory-filter](./03-directory-filter.md)（`remove_internal.py`） | 生成声明集，跳过 6 个特殊目录 |
+| 3 | [04-internal-dirs-modules](./04-internal-dirs-modules.md)（`process_internal.py` ×4 并行） | 处理 `@internal/ets`、`arkts`、`component/ets`、`kits` |
+| 4 | [05-assembly](./05-assembly.md)（`ohos_copy` 纯拷贝） | 合成待打包目录 `out/<产品>/ohos_dynamic/{api,@internal/full,arkts,component,kits}` |
+| 5 | [08-label-cleanup](./08-label-cleanup.md)（`delete_arkui_label.py`） | 逐文件删 `@noninterop` 标签行，输出最终目录 |
 
 - `arkts`、`kits` 与 api 相同规则；`component` 因输入目录名就叫 component，会命中整个目录；
 - `bundle_api` 也属于本流程：步骤 1 完成后纯拷贝安装那 1 个额外文件
@@ -196,7 +196,7 @@ static 的 3 条安装项（api / arkts / kits）把流程 ① 的 5 步换成 s
 - 步骤 2~4 换成 `ohos_declaration_ets2`、`_static` 三件套，装配为 `out/<产品>/ohos_static`；
 - **多出**步骤 4.5：[07-runtimeapi](./07-runtimeapi.md)（`copy_runtimeapi.py`）→
   静态树先拷两份，对其中一份删 `@unpublished` 标签+声明；另一份保留原始内容（内部版本）；
-- 步骤 5 同样用 [08-清标签](./08-清标签.md) 清标签后安装到 `ets/static/*`；
+- 步骤 5 同样用 [08-label-cleanup](./08-label-cleanup.md) 清标签后安装到 `ets/static/*`；
 - 产物 `ohos_ets_runtimeapi`：不跑步骤 5，直接把「保留 `@unpublished` 的那份副本」
   安装到 `ets/static/build-tools/ets-loader/runtimeapi`（给 ets-loader 用；
   public / 非静态构建下会随 `ets/static/*` 一起被过滤掉）。
@@ -222,7 +222,7 @@ static 的 3 条安装项（api / arkts / kits）把流程 ① 的 5 步换成 s
 | 入口 | 跑法 |
 | ---- | ---- |
 | `ohos_declaration_common`（js/api） | 流程 ① 的步骤 1 + 步骤 2 就直接安装（**无步骤 4、5**：不装配、不清标签） |
-| `internal_full`（js/api/@internal/full） | 步骤 1 + [04](./04-内部目录与独立模块.md) 全量拷贝（不装配、不清标签） |
+| `internal_full`（js/api/@internal/full） | 步骤 1 + [04](./04-internal-dirs-modules.md) 全量拷贝（不装配、不清标签） |
 | `internal_lite`（js/api/@internal/lite） | 同上，公开版多删 `featureability.d.ts` |
 | `config` / `form_declaration` / `syscap_check` | **零脚本**源码直拷（`parse_interface_sdk.py` 根本不碰，从源仓直接安装） |
 
@@ -233,7 +233,7 @@ static 的 3 条安装项（api / arkts / kits）把流程 ① 的 5 步换成 s
 
 `api_check_plugin`、`api-transform-plugin`：
 `build_api_check_plugin.py` 用 npm 把两个静态插件工程（`build-tools/compile-plugins/*`）
-构建出来再拷贝安装，与接口树无关，不需要先跑任何拆分脚本（详见 [09-插件](./09-插件.md)）。
+构建出来再拷贝安装，与接口树无关，不需要先跑任何拆分脚本（详见 [09-plugins](./09-plugins.md)）。
 
 ## 8. 23 条入口 → 流程归属总表
 

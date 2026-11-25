@@ -1,6 +1,6 @@
 # 02 接口源文件拆分（总览）
 
-> 对应 [00-总览](./00-总览.md)「环节 02」，是整个链路的**地基**。
+> 对应 [00-overview](./00-overview.md)「环节 02」，是整个链路的**地基**。
 > 定义在 `interface/sdk-js/BUILD.gn:24`，脚本 `build/ohos/sdk/parse_interface_sdk.py`（build 仓）。
 > 本总览只保留环节概览与工具总表，7 个 Node 工具的完整逻辑见 02.1~02.7 分篇。
 
@@ -134,13 +134,13 @@ if sdk_type == "ets":
 
 | # | 归属领域 | Node 工具 | 分篇 | 输入 | 输出 | 处理内容 | 并发 |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| 02.1 | sdk | `interface/sdk-js/build-tools/handleApiFiles.js` | [01 拆分源接口](./02-接口源文件拆分-01拆分源接口.md) | `interface/sdk-js` 全量目录（`api/`、`arkts/`、`kits/` 等） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` | 复制源接口，按 `--type` / `@arkts` 标签 / 开关筛选 | 单进程 |
-| 02.2 | sdk | `interface/sdk-js/build-tools/checkApiVersion.js` | [02 API 版本校验](./02-接口源文件拆分-02API版本校验.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`、`arkts` + `--versionNumber` | stdout 错误清单 | `@since` 格式与上限校验 | 单进程 |
-| 02.3 | sdk | `interface/sdk-js/build-tools/delete_systemapi_plugin.js` | [03 删除系统 API](./02-接口源文件拆分-03删除系统API.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api` + `--build-sdk-path` | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,kits,arkts}` 暂存 | 删除 `@systemapi`，`@publicapi` 转 public | 单进程（内部同步调 es2panda） |
-| 02.4 | sdk | `interface/sdk-js/build-tools/delete_notification_plugin.js` | [04 删除 Notification 模块](./02-接口源文件拆分-04删除Notification模块.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（同级 kits） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,kits}` 暂存 | public 时删除 notification 模块文件并清理引用 | 单进程 |
-| 02.5 | sdk | `interface/sdk-js/build-tools/adjust_api_annotation.js` | [05 修正 API 注解](./02-接口源文件拆分-05修正API注解.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（含同级 arkts） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,arkts}` 暂存 | 修正 `[since x-y]` 区间与接口 `@since` 一致 | 单进程 |
-| 02.6 | 安全领域 | `interface/sdk-js/build-tools/permissions_converter/convert.js` | [06 生成权限声明](./02-接口源文件拆分-06生成权限声明.md) | `base/security/access_token/services/accesstokenmanager/permission_definitions.json` | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api/permissions.d.ts` / `.d.ets` | 生成权限联合类型 | 单进程 |
-| 02.7 | sdk | `interface/sdk-js/build-tools/intToNumber.js` | [07 数值类型转换](./02-接口源文件拆分-07数值类型转换.md) | `out/<产品>/sdk-interface/dynamic/sdk-js`（仅 dynamic） | `out/<产品>/sdk-interface/dynamic/sdk-js/build-tools/type-change/{api,arkts}` | 仅 dynamic：`int/long/double` → `number` | 10 进程并发（Python 按 `--index` 分片启动） |
+| 02.1 | sdk | `interface/sdk-js/build-tools/handleApiFiles.js` | [01 拆分源接口](./02-01split-api.md) | `interface/sdk-js` 全量目录（`api/`、`arkts/`、`kits/` 等） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` | 复制源接口，按 `--type` / `@arkts` 标签 / 开关筛选 | 单进程 |
+| 02.2 | sdk | `interface/sdk-js/build-tools/checkApiVersion.js` | [02 API 版本校验](./02-02api-version-check.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`、`arkts` + `--versionNumber` | stdout 错误清单 | `@since` 格式与上限校验 | 单进程 |
+| 02.3 | sdk | `interface/sdk-js/build-tools/delete_systemapi_plugin.js` | [03 删除系统 API](./02-03delete-system-api.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api` + `--build-sdk-path` | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,kits,arkts}` 暂存 | 删除 `@systemapi`，`@publicapi` 转 public | 单进程（内部同步调 es2panda） |
+| 02.4 | sdk | `interface/sdk-js/build-tools/delete_notification_plugin.js` | [04 删除 Notification 模块](./02-04delete-notification.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（同级 kits） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,kits}` 暂存 | public 时删除 notification 模块文件并清理引用 | 单进程 |
+| 02.5 | sdk | `interface/sdk-js/build-tools/adjust_api_annotation.js` | [05 修正 API 注解](./02-05api-annotation-fix.md) | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api`（含同级 arkts） | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/build-tools/{api,arkts}` 暂存 | 修正 `[since x-y]` 区间与接口 `@since` 一致 | 单进程 |
+| 02.6 | 安全领域 | `interface/sdk-js/build-tools/permissions_converter/convert.js` | [06 生成权限声明](./02-06permission-declaration.md) | `base/security/access_token/services/accesstokenmanager/permission_definitions.json` | `out/<产品>/sdk-interface/{dynamic,static}/sdk-js/api/permissions.d.ts` / `.d.ets` | 生成权限联合类型 | 单进程 |
+| 02.7 | sdk | `interface/sdk-js/build-tools/intToNumber.js` | [07 数值类型转换](./02-07numeric-conversion.md) | `out/<产品>/sdk-interface/dynamic/sdk-js`（仅 dynamic） | `out/<产品>/sdk-interface/dynamic/sdk-js/build-tools/type-change/{api,arkts}` | 仅 dynamic：`int/long/double` → `number` | 10 进程并发（Python 按 `--index` 分片启动） |
 
 ## 5. 并发、容错与约束
 

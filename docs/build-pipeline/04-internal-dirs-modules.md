@@ -1,6 +1,6 @@
 # 04 内部目录 / 独立模块（`ohos_copy_internal` ×9）
 
-> 对应 [00-总览](./00-总览.md)「环节 04」。
+> 对应 [00-overview](./00-overview.md)「环节 04」。
 > 脚本 `interface/sdk-js/process_internal.py`，规则文件 `interface/sdk-js/remove_list.json`，
 > 模板 `ohos_copy_internal`（`BUILD.gn:86`）。
 

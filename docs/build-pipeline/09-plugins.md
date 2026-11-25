@@ -1,8 +1,8 @@
 # 09 插件（ui-plugins，独立环节）
 
-> 对应 [00-总览](./00-总览.md)「环节 09」。
+> 对应 [00-overview](./00-overview.md)「环节 09」。
 > 脚本 `interface/sdk-js/build_api_check_plugin.py`，**独立环节**：与接口源文件处理无关。
-> 本环节产物由 [10-SDK打包安装](./10-SDK打包安装.md) 安装。
+> 本环节产物由 [10-sdk-packaging-install](./10-sdk-packaging-install.md) 安装。
 
 ## 1. 环节职责
 

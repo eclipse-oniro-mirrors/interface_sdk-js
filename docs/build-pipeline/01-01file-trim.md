@@ -1,6 +1,6 @@
 # 01.1 文件裁剪（build/ohos/sdk/parse_description.py）
 
-> 对应 [01-GN生成期-00总览](./01-GN生成期-00总览.md)「环节 01 · 步骤 01.1」。
+> 对应 [01-00gn-generation-overview](./01-00gn-generation-overview.md)「环节 01 · 步骤 01.1」。
 > 按 `sdk_build_public` / `sdk_build_arkts` 两个开关，对 SDK 模块描述 JSON 做
 > 条目裁剪与 `install_dir` 路径改写，输出新的描述文件。
 

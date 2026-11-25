@@ -1,9 +1,9 @@
 # 07 runtimeapi（static，删 `@unpublished`）
 
-> 对应 [00-总览](./00-总览.md)「环节 07」。
+> 对应 [00-overview](./00-overview.md)「环节 07」。
 > 脚本链：`interface/sdk-js/copy_runtimeapi.py` → `interface/sdk-js/build-tools/delete_unpublished_plugin.js`；
 > 校验：`arkcompiler/ets_frontend/ets2panda/bindings/diagnostics.py`。
-> 本环节只作用于 static SDK，输入来自 [05-装配](./05-装配.md)，随后由 [08-清标签](./08-清标签.md) 处理。
+> 本环节只作用于 static SDK，输入来自 [05-assembly](./05-assembly.md)，随后由 [08-label-cleanup](./08-label-cleanup.md) 处理。
 
 ## 1. 环节职责
 
@@ -154,7 +154,7 @@ flowchart TD
 - `kits/` 下空文件保留，其余空文件删除；
 - `LD_LIBRARY_PATH` 只在 Linux 生效；
 - 处理顺序：先 `copy_runtimeapi` 删 `@unpublished`（本环节 07），
-  再由 [08-清标签](./08-清标签.md) 的 `ohos_build_static_sdk_*` 删 `@noninterop`。
+  再由 [08-label-cleanup](./08-label-cleanup.md) 的 `ohos_build_static_sdk_*` 删 `@noninterop`。
 
 ## 8. 相关文件
 

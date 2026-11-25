@@ -5,7 +5,7 @@
 
 - 本文件：**脚本总览 + 11 个环节速览 + 全链路流程图**。
 - `01`~`11`：按 GN 执行顺序（`11` 为跨部件契约维度），逐环节说明**涉及的脚本、输入输出、处理流程图**。
-- [12-入口清单与流程视角](./12-入口清单与流程视角.md)：补充**入口视角**——从 SDK 描述文件
+- [12-entry-flow-map](./12-entry-flow-map.md)：补充**入口视角**——从 SDK 描述文件
   23 条入口出发，看安装位置、开关联动与「23 条入口只命中 5 种流程」，不占用流水线环节编号。
 - 脚本总览与全流程图表见下文，逐环节详情见 `01`~`11` 分篇。
 
@@ -78,18 +78,18 @@ flowchart TD
 
 | 文件 | 环节（GN 顺序） | 输入 → 输出 |
 | ---- | ---- | ---- |
-| [01](./01-GN生成期-00总览.md) | GN 生成期 | 描述 JSON → `out/<产品>/gen/build/ohos/sdk/ohos_sdk_modules.gni`、安装路径表、打包 `BUILD.gn` |
-| [02](./02-接口源文件拆分-00总览.md) | 接口源文件拆分 `ohos_base_split` | `interface/sdk-js` → `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` |
-| [03](./03-目录级过滤.md) | 目录级过滤 | 接口树 `api/` → `out/<产品>/ohos_declaration/ohos_declaration_{ets,ets2,common}` |
-| [04](./04-内部目录与独立模块.md) | 内部目录 / 独立模块 | 接口树子目录 → `out/<产品>/obj/interface/sdk-js/<target>` |
-| [05](./05-装配.md) | 装配 | 环节 03/04 产物 → `out/<产品>/ohos_dynamic`、`out/<产品>/ohos_static`、`out/<产品>/ohos_ets` |
+| [01](./01-00gn-generation-overview.md) | GN 生成期 | 描述 JSON → `out/<产品>/gen/build/ohos/sdk/ohos_sdk_modules.gni`、安装路径表、打包 `BUILD.gn` |
+| [02](./02-00interface-split-overview.md) | 接口源文件拆分 `ohos_base_split` | `interface/sdk-js` → `out/<产品>/sdk-interface/{dynamic,static}/sdk-js` |
+| [03](./03-directory-filter.md) | 目录级过滤 | 接口树 `api/` → `out/<产品>/ohos_declaration/ohos_declaration_{ets,ets2,common}` |
+| [04](./04-internal-dirs-modules.md) | 内部目录 / 独立模块 | 接口树子目录 → `out/<产品>/obj/interface/sdk-js/<target>` |
+| [05](./05-assembly.md) | 装配 | 环节 03/04 产物 → `out/<产品>/ohos_dynamic`、`out/<产品>/ohos_static`、`out/<产品>/ohos_ets` |
 | [06](./06-interop.md) | interop 互操作 | `out/<产品>/ohos_dynamic_two` / `ohos_ets` → `out/<产品>/sdk-interface/dynamic-interop`、`static-interop/{declaration,bridge}` |
 | [07](./07-runtimeapi.md) | runtimeapi / `@unpublished` | `out/<产品>/ohos_static` → `out/<产品>/obj/interface/sdk-js/copy_runtimeapi*` |
-| [08](./08-清标签.md) | 清 `@noninterop` | 装配目录 → `out/<产品>/obj/interface/sdk-js/ohos_build_{dynamic,static}_sdk_*` |
-| [09](./09-插件.md) | 插件（独立环节） | 插件源码 → `out/<产品>/gen/interface/sdk-js/gen_api_check_plugin`、`gen_api_transform` |
-| [10](./10-SDK打包安装.md) | SDK 打包安装 | 各模块产物 + 安装路径表 → SDK zip |
-| [11](./11-部件化对外接口.md) | 跨部件对外接口（`sdk:` 契约，横切维度） | 13 个对外 GN 目标 → 外部部件依赖 |
-| [12](./12-入口清单与流程视角.md) | **入口视角**（非环节） | 23 条描述文件入口 → 安装位置 / 开关联动 / 5 种流程 |
+| [08](./08-label-cleanup.md) | 清 `@noninterop` | 装配目录 → `out/<产品>/obj/interface/sdk-js/ohos_build_{dynamic,static}_sdk_*` |
+| [09](./09-plugins.md) | 插件（独立环节） | 插件源码 → `out/<产品>/gen/interface/sdk-js/gen_api_check_plugin`、`gen_api_transform` |
+| [10](./10-sdk-packaging-install.md) | SDK 打包安装 | 各模块产物 + 安装路径表 → SDK zip |
+| [11](./11-cross-part-interfaces.md) | 跨部件对外接口（`sdk:` 契约，横切维度） | 13 个对外 GN 目标 → 外部部件依赖 |
+| [12](./12-entry-flow-map.md) | **入口视角**（非环节） | 23 条描述文件入口 → 安装位置 / 开关联动 / 5 种流程 |
 
 > `12` 是阅读视角的补充篇，不占用流水线环节编号，也不出现在第 1 节流程图中。
 
@@ -192,7 +192,7 @@ flowchart TD
 | 11.3 | —        | `ets2abc_config.gni`                             | `sdk:ohos_ets_{api,arkts,kits}`        | static SDK 面向 ets2panda 的输入出口                                                  |
 
 > 环节 11 不是流水线 action，而是贯穿 02~10 产物、面向外部部件的**依赖契约**；
-> 详见 [11-部件化对外接口](./11-部件化对外接口.md)。
+> 详见 [11-cross-part-interfaces](./11-cross-part-interfaces.md)。
 
 ---
 
