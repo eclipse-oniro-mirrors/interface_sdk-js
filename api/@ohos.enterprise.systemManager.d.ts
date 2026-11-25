@@ -2003,6 +2003,55 @@ declare namespace systemManager {
    * @since 26.1.0
    */
   function getVolumeDegree(volumeType: AudioVolumeType): number;
+
+  /**
+   * Installs the font file from the specified path to the system font library.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } path - The path to the font file to install.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201060 - Font file does not exist.
+   * @throws { BusinessError } 9201061 - Font not supported.
+   * @throws { BusinessError } 9201062 - Font already installed.
+   * @throws { BusinessError } 9201063 - Number of installed fonts exceeds the limit.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function installFont(path: string): Promise<void>;
+ 
+  /**
+   * Uninstalls installed font files from the system font library by font name.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SYSTEM
+   * @param { string } fullName - Name of the font to uninstall.
+   * @returns { Promise<void> }Promise object. No result is returned.
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     The application does not have the permission required to call the API.
+   * @throws { BusinessError } 801 - Capability not supported. Possible causes:
+   *     <br>1. The hardware does not support the capability.
+   *     <br>2. The chip does not support the capability.
+   *     <br>3. A dependent service feature is not supported.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200012 - Parameter verification failed.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @throws { BusinessError } 9201064 - Font to uninstall does not exist.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function uninstallFont(fullName: string): Promise<void>;
 }
 
 export default systemManager;
