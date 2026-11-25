@@ -548,10 +548,11 @@ export declare abstract class SoftShadowConfig {
  */
 export declare class PCFConfig extends SoftShadowConfig {
   /**
-   * 采样半径，决定了阴影边缘模糊的范围，半径越大，阴影边缘越柔和。采样半径过大会导致阴影过度模糊，失去阴影形状特征。
+   * 采样半径，决定阴影边缘的模糊范围，半径越大阴影边缘越柔和；半径过大会导致阴影过度模糊，失去阴影形状特征。
    * 默认值为5.0。
    * 取值范围：>= 0。
-   * - 设置为0时，将不进行PCF采样，无阴影效果。
+   * - 设置为0时，不进行PCF采样，无阴影效果。
+   * - 设置为负数时为无效赋值，本次设置不生效，属性保留当前值不变。
    * - 设置为undefined时，恢复默认值5.0进行渲染。
    *
    * @returns { double | undefined }
@@ -562,10 +563,11 @@ export declare class PCFConfig extends SoftShadowConfig {
   get shadowSampleRadius(): double | undefined;
 
   /**
-   * 采样半径，决定了阴影边缘模糊的范围，半径越大，阴影边缘越柔和。采样半径过大会导致阴影过度模糊，失去阴影形状特征。
+   * 采样半径，决定阴影边缘的模糊范围，半径越大阴影边缘越柔和；半径过大会导致阴影过度模糊，失去阴影形状特征。
    * 默认值为5.0。
    * 取值范围：>= 0。
-   * - 设置为0时，将不进行PCF采样，无阴影效果。
+   * - 设置为0时，不进行PCF采样，无阴影效果。
+   * - 设置为负数时为无效赋值，本次设置不生效，属性保留当前值不变。
    * - 设置为undefined时，恢复默认值5.0进行渲染。
    *
    * @param { double | undefined } value
@@ -577,14 +579,15 @@ export declare class PCFConfig extends SoftShadowConfig {
   set shadowSampleRadius(value: double | undefined);
 
   /**
-   * 采样数量，决定了每个像素采样阴影图的次数，数量越多，阴影质量越高，但性能开销越大。
-   * 默认值为16。
-   * 取值范围：0 ~ 64。
-   * - 超出此范围的值会被自动限制到最近的有效边界值（例如65实际按64处理）。
-   * - 设置为0时，将不进行PCF采样，无阴影效果。
-   * - 设置为undefined时，恢复默认值16进行渲染。
+   * 采样半径，决定阴影边缘的模糊范围，半径越大阴影边缘越柔和；半径过大会导致阴影过度模糊，失去阴影形状特征。
+   * 默认值为5.0。
+   * 取值范围：>= 0。
+   * - 设置为0时，不进行PCF采样，无阴影效果。
+   * - 设置为负数时为无效赋值，本次设置不生效，属性保留当前值不变。
+   * - 设置为undefined时，恢复默认值5.0进行渲染。
    *
-   * @returns { int | undefined }
+   * @param { double | undefined } value
+   * @default 5.0
    * @syscap SystemCapability.ArkUi.Graphics3D
    * @stagemodelonly
    * @since 26.0.0 dynamic&static
@@ -592,11 +595,12 @@ export declare class PCFConfig extends SoftShadowConfig {
   get shadowSampleCount(): int | undefined;
 
   /**
-   * 采样数量，决定了每个像素采样阴影图的次数，数量越多，阴影质量越高，但性能开销越大。
+   * 采样数量，决定每个像素采样阴影图的次数，数量越多阴影质量越高，但性能开销越大。
    * 默认值为16。
-   * 取值范围：0 ~ 64。
-   * - 超出此范围的值会被自动限制到最近的有效边界值（例如65实际按64处理）。
-   * - 设置为0时，将不进行PCF采样，无阴影效果。
+   * 取值范围：0 ~ 16。
+   * - 设置为0时，不进行PCF采样，无阴影效果。
+   * - 设置为负数时为无效赋值，本次设置不生效，属性保留当前值不变（例如传入-16，属性值和渲染效果仍保持设置前的状态）。
+   * - 设置大于16的值不会被拒绝，属性按实际传入值保存（例如传入70可设置成功），但渲染时按上限16计算，阴影效果与设置为16时一致。
    * - 设置为undefined时，恢复默认值16进行渲染。
    *
    * @param { int | undefined } value
