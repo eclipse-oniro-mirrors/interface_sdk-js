@@ -1205,6 +1205,62 @@ declare namespace securityManager {
   function uninstallEnterpriseReSignatureCertificate(admin: Want, certificateAlias: string, accountId: int): void;
 
   /**
+   * Indicates the enterprise re-signature certificate information.
+   *
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  interface ReSignatureCertificateInfo {
+    /**
+     * Certificate alias.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    certificateAlias: string;
+
+    /**
+     * Enterprise name.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    enterpriseName: string;
+
+    /**
+     * Expiration time, in milliseconds.
+     *
+     * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+     * @stagemodelonly
+     * @since 26.1.0
+     */
+    expirationTime: number;
+  }
+
+  /**
+   * Obtains enterprise re-signature certificate information based on the account ID. This API returns the information
+   * synchronously. Enterprises can use this API to query enterprise re-signature certificate details for certificate
+   * management and validity monitoring.
+   *
+   * @permission ohos.permission.ENTERPRISE_MANAGE_SECURITY
+   * @param { number } accountId - User ID, which must be greater than or equal to 0.
+   * @returns { Array<ReSignatureCertificateInfo> } Enterprise re-signature certificate information obtained.
+   * @throws { BusinessError } 201 - Permission verification failed. The application does not have the permission
+   *     required to call the API.
+   * @throws { BusinessError } 9200001 - The application is not an administrator application of the device.
+   * @throws { BusinessError } 9200002 - The administrator application does not have permission to manage the device.
+   * @throws { BusinessError } 9200006 - The specified account ID is invalid.
+   * @throws { BusinessError } 9200016 - Service timeout.
+   * @syscap SystemCapability.Customization.EnterpriseDeviceManager
+   * @stagemodelonly
+   * @since 26.1.0
+   */
+  function getEnterpriseReSignatureCertificates(accountId: number): Array<ReSignatureCertificateInfo>;
+
+  /**
    * Sets a screen watermark policy, which takes effect for all users.
    *
    * > **NOTE**
