@@ -507,6 +507,16 @@ declare namespace certificateManager {
      * @since 26.0.0 dynamic&static
      */
     uriList?: Array<string>;
+
+    /**
+     * 证书库信息。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    certStoreInfo?: CertStoreInfo;
   }
 
   /**
@@ -1569,14 +1579,39 @@ declare namespace certificateManager {
    * @throws { BusinessError } 201 - Permission verification failed.
    *     <br>The application does not have the permission required to call the API.
    * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
-   * @throws { BusinessError } 17500001 - Internal error. Possible causes: 1. IPC communication failed;
-   *     <br>2. Memory operation error; 3. File operation error. Please try again.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes:
+   *     <br>1. IPC communication failed;
+   *     <br>2. Memory operation error;
+   *     <br>3. File operation error. Please try again.
    * @syscap SystemCapability.Security.CertificateManager
    * @systemapi
    * @stagemodelonly
    * @since 26.0.0 dynamiconly
    */
   function getSystemTrustedCertificateList(): Promise<CMResult>;
+
+  /**
+   * 获取系统信任的CA证书列表。此接口仅供证书管理应用调用。该接口使用promise返回结果。
+   *
+   * @permission ohos.permission.ACCESS_CERT_MANAGER and ohos.permission.ACCESS_CERT_MANAGER_INTERNAL
+   * @param { CertAlgorithm } certAlg - 该参数表示系统根证书库的证书算法类型。
+   * @returns { Promise<CMResult> } 用于返回操作结果的Promise，参考**certList**
+   *     [CMResult]{@link ./@ohos.security.certManager：证书管理对象.CMResult}。
+   * @throws { BusinessError } 201 - Permission verification failed.
+   *     <br>The application does not have the permission required to call the API.
+   * @throws { BusinessError } 202 - Permission verification failed. A non-system application calls a system API.
+   * @throws { BusinessError } 17500001 - Internal error. Possible causes:
+   *     <br>1. IPC communication failed;
+   *     <br>2. Memory operation error;
+   *     <br>3. File operation error. Please try again.
+   * @throws { BusinessError } 17500011 - The input parameters validation failed.
+   *     For example, the parameter format is incorrect or the value range is invalid.
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  function getSystemTrustedCertificateList(certAlg: CertAlgorithm): Promise<CMResult>;
 
   /**
    * 获取系统信任的CA证书详情，仅证书管理应用调用。使用Promise异步回调。
@@ -2017,7 +2052,37 @@ declare namespace certificateManager {
    * @since 26.0.0 dynamic&static
    */
   function importUkeyCertificate(keyUri: string, cert: Uint8Array, ukeyInfo: UkeyInfo): Promise<void>;
- 
+
+  /**
+   * 表示证书库信息。
+   *
+   * @syscap SystemCapability.Security.CertificateManager
+   * @systemapi
+   * @stagemodelonly
+   * @since 26.1.0 dynamiconly
+   */
+  export interface CertStoreInfo {
+    /**
+     * 国际算法系统证书库的版本号。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    certStoreVersion: string;
+
+    /**
+     * 国密算法系统证书库的版本号。
+     *
+     * @syscap SystemCapability.Security.CertificateManager
+     * @systemapi
+     * @stagemodelonly
+     * @since 26.1.0 dynamiconly
+     */
+    smCertStoreVersion?: string;
+  }
+
   /**
    * 表示证书管理配置项。
    *
