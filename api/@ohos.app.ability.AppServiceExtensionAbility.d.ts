@@ -35,7 +35,6 @@ import ExtensionAbility from './@ohos.app.ability.ExtensionAbility';
  * tablets, ohos.permission.SUPPORT_APP_SERVICE_EXTENSION_ADVANCED is required and is available only for MDM
  * applications. On PC/2-in-1 devices, either this permission or
  * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION (available only for enterprise applications) is required.
- * <!--RP14--><!--RP14End-->
  *
  * ###### Lifecycle
  *
