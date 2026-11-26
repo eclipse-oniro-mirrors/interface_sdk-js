@@ -27,7 +27,7 @@
  * - 支持PC/2in1设备；从API version 26.1.0开始，支持手机和平板设备，具体支持情况由产品配置决定。
  * - 集成AppServiceExtensionAbility组件的应用需要获授ACL权限：手机和平板设备使用
  * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION_ADVANCED，仅向MDM应用开放；PC/2in1设备可使用该权限或
- * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION（仅向企业普通应用开放），满足一项即可。申请方式参考权限申请指导。
+ * ohos.permission.SUPPORT_APP_SERVICE_EXTENSION（仅向企业普通应用开放），满足一项即可。申请方式参考权限申请指导。<!--RP14--><!--RP14End-->
  * - 为保障系统安全性和稳定性，防止AppServiceExtensionAbility滥用系统资源，系统对其能力进行管控，不支持@ohos.window (窗口)。
  * 
  * ## 生命周期
