@@ -1468,14 +1468,15 @@ declare class ListAttribute extends ScrollableCommonMethod<ListAttribute> {
    * >
    * > - 最终吸附位置始终在合法滚动范围内。例如对齐方式为ScrollSnapAlign.CENTER时，首尾子组件会停靠在可滚动边界处，而非视口中央。
    * >   此行为与scrollSnapAlign不同：scrollSnapAlign以对齐效果优先，CENTER挡位下首尾子组件仍会居中，列表可能露出空白区域。
-   * > - 启用限位滚动后，通过[onMove](docroot://reference/apis-arkui/arkui-ts/ts-universal-attributes-drag-sorting.md#onmove)接口发起的拖拽结束时，或鼠标框选操作结束时，也会触发限位滚动。
-   * > - [ListItemGroup](docroot://reference/apis-arkui/arkui-ts/ts-container-listitemgroup.md)作为整体参与对齐。
-   * > - 该属性与[scrollSnapAlign](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapalign10)互斥，后设置者生效。
-   * > - scrollSnapStrategy的限位动画不受[scrollSnapAnimationSpeed](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapanimationspeed22)影响，scrollSnapAnimationSpeed仅影响scrollSnapAlign属性产生的限位动画速度。
+   * > - 启用限位滚动后，通过onMove接口发起的拖拽结束时，或鼠标框选操作结束时，也会触发限位滚动。
+   * > - ListItemGroup作为整体参与对齐。
+   * > - 该属性与scrollSnapAlign互斥，后设置者生效。
+   * > - scrollSnapStrategy的限位动画不受scrollSnapAnimationSpeed影响，scrollSnapAnimationSpeed仅影响scrollSnapAlign属性产生的限位动画速度。
    *
    * @param { ScrollSnapAlign | ScrollSnapOffsetProvider } [strategy] - 限位滚动策略。
-   *     传入[ScrollSnapAlign](docroot://reference/apis-arkui/arkui-ts/ts-container-list.md#scrollsnapalign10枚举说明)枚举时，使用内置对齐方式：START、CENTER、END分别将子组件对齐到视口沿滚动轴的起始、中央和末尾位置。
-   *     传入实现[ScrollSnapOffsetProvider](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#scrollsnapoffsetprovider)接口的对象时，由开发者计算滚动距离和最终吸附位置：[calculateApproachOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculateapproachoffset)确定惯性阶段的滚动距离，[calculateSnapOffset](docroot://reference/apis-arkui/arkui-ts/ts-container-scrollable-common.md#calculatesnapoffset)确定最终吸附位置。
+   *     传入ScrollSnapAlign枚举时，使用内置对齐方式：START、CENTER、END分别将子组件对齐到视口沿滚动轴的起始、中央和末尾位置。
+   *     传入实现ScrollSnapOffsetProvider接口的对象时，由开发者计算滚动距离和最终吸附位置：calculateApproachOffset确定惯性阶段的滚动距离，
+   *     calculateSnapOffset确定最终吸附位置。
    *     不设置或传入ScrollSnapAlign.NONE、undefined时，不启用限位滚动，List不做吸附对齐，按惯性自然滑行至停止。
    * @returns { ListAttribute } 列表的属性。
    * @syscap SystemCapability.ArkUI.ArkUI.Full
