@@ -1186,7 +1186,7 @@ declare namespace inputMethodEngine {
      * @param { AsyncCallback<void> } callback - 回调函数。当输入法面板销毁成功，err为undefined，否则为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
-     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1212,7 +1212,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
-     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -3364,9 +3364,9 @@ declare namespace inputMethodEngine {
      * 为当前的输入法面板加载具体页面内容，使用callback异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板页面内容加载成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -3383,9 +3383,9 @@ declare namespace inputMethodEngine {
      * 为当前的输入法面板加载具体页面内容，使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -3402,9 +3402,9 @@ declare namespace inputMethodEngine {
      * 为当前的输入法面板加载与LocalStorage相关联的具体页面内容，使用callback异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { string } path - LocalStorage相关联的具体页面的路径。路径长度建议不超过1024字符。
      * @param { LocalStorage } storage - 存储单元，为应用程序范围内的可变状态属性和不可变状态属性提供存储。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板页面内容加载成功，err为undefined，否则err为错误对象。
@@ -3422,9 +3422,9 @@ declare namespace inputMethodEngine {
      * 为当前面板加载与LocalStorage相关联的具体页面内容，使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { string } path - 具体页面的路径。路径长度建议不超过1024字符。
      * @param { LocalStorage } storage - 存储单元，为应用程序范围内的可变状态属性和非可变状态属性提供存储。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -3448,9 +3448,9 @@ declare namespace inputMethodEngine {
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { long } width - 目标面板的宽度，单位为px。该参数应为大于或等于0的整数，不超出屏幕宽度。超出范围时返回错误码401。
      * @param { long } height - 目标面板的高度，单位为px。该参数应为大于或等于0的整数，不高于屏幕高度的0.7倍。超出范围时返回错误码401。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板大小改变成功，err为undefined，否则err为错误对象。
@@ -3474,9 +3474,9 @@ declare namespace inputMethodEngine {
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { long } width - 目标面板的宽度，单位为px。该参数应为大于或等于0的整数，不超出屏幕宽度。超出范围时返回错误码401。
      * @param { long } height - 目标面板的高度，单位为px。该参数应为大于或等于0的整数，不高于屏幕高度的0.7倍。超出范围时返回错误码401。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -3494,9 +3494,9 @@ declare namespace inputMethodEngine {
      * 移动面板位置，使用callback异步回调。[面板状态]{@link inputMethodEngine.PanelFlag}为固定态时，不产生实际移动效果。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { int } x - 横轴方向移动的值，单位为px。该参数应为整数。值大于0表示右移，小于0表示左移。超出屏幕范围时返回错误码401。
      * @param { int } y - 纵轴方向移动的值，单位为px。该参数应为整数。值大于0表示下移，小于0表示上移。超出屏幕范围时返回错误码401。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板位置移动成功，err为undefined，否则err为错误对象。
@@ -3514,9 +3514,9 @@ declare namespace inputMethodEngine {
      * 移动面板位置，使用promise异步回调。[面板状态]{@link inputMethodEngine.PanelFlag}为固定态时，不产生实际移动效果。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { int } x - 横轴方向移动的值，值大于0表示右移，单位为px。该参数应为整数。
      * @param { int } y - 纵轴方向移动的值，值大于0表示下移，单位为px。该参数应为整数。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -3549,9 +3549,9 @@ declare namespace inputMethodEngine {
      * 获取当前窗口的displayId，使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { Promise<long> } Promise对象。返回窗口的displayId。
      * @throws { BusinessError } 12800002 - input method engine error. Possible causes:
      *     1.input method panel not created. 2.the input method application does not subscribe to related events.
@@ -3566,9 +3566,9 @@ declare namespace inputMethodEngine {
      * 显示当前输入法面板，使用callback异步回调。输入法应用与编辑框绑定成功后可正常调用。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板显示成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
@@ -3583,9 +3583,9 @@ declare namespace inputMethodEngine {
      * 显示当前输入法面板，使用promise异步回调。输入法应用与编辑框绑定成功后可正常调用。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @throws { BusinessError } 12800003 - input client error. Bind the input method to an editor before showing the panel.
@@ -3600,9 +3600,9 @@ declare namespace inputMethodEngine {
      * 隐藏当前输入法面板，使用callback异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { AsyncCallback<void> } callback - 回调函数。当面板隐藏成功，err为undefined，否则err为错误对象。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @throws { BusinessError } 12800013 - window manager service error.
@@ -3616,9 +3616,9 @@ declare namespace inputMethodEngine {
      * 隐藏当前输入法面板，使用promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { Promise<void> } Promise对象，无返回结果。
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
      * @throws { BusinessError } 12800013 - window manager service error.
@@ -3681,7 +3681,7 @@ declare namespace inputMethodEngine {
      * [SOFT_KEYBOARD]{@link inputMethodEngine.PanelType}生效。
      *
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
@@ -3723,9 +3723,9 @@ declare namespace inputMethodEngine {
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
@@ -3759,9 +3759,9 @@ declare namespace inputMethodEngine {
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
@@ -3787,9 +3787,9 @@ declare namespace inputMethodEngine {
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
@@ -3819,9 +3819,9 @@ declare namespace inputMethodEngine {
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @returns { Promise<void> } Promise对象，无返回结果。
@@ -3849,9 +3849,9 @@ declare namespace inputMethodEngine {
      * <br> > 手机的PanelFlag是FLG_FLOATING且面板宽度在0~288vp之间时，面板底部功能键将随面板宽度动态调整大小，为了保证最佳用户体验，建议面板宽度不小于90vp。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { PanelRect } rect - 目标面板横屏状态及竖屏状态的横坐标，纵坐标，宽度以及高度。固定态：高度不能超过屏幕高度的70%，宽度不能超过屏幕宽度；悬浮态：高度不能超过屏幕高度，宽度不能超过屏幕宽度。
      *     超出范围时返回错误码401。
@@ -3883,9 +3883,9 @@ declare namespace inputMethodEngine {
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { PanelFlag } flag - 目标面板状态类型。类型为FLG_FIXED或FLG_FLOATING。
      * @param { EnhancedPanelRect } rect - 目标面板横屏状态及竖屏状态的位置、大小、避让区域以及热区。
      * @throws { BusinessError } 12800013 - window manager service error.
@@ -3909,9 +3909,9 @@ declare namespace inputMethodEngine {
      * <br> > 当com.ohos.sceneboard进程不存在时，输入法热区生效范围保持和软键盘区域一致。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { Array<window.Rect> } inputRegion - 面板内接收输入事件的区域。<br/>- 数组大小限制为[1, 4]。<br/>- 传入的热区位置是相对于输入法面板窗口左顶点的位置。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
@@ -4007,9 +4007,9 @@ declare namespace inputMethodEngine {
      * 设置输入法应用的沉浸模式。只能设置为不使用沉浸模式(NONE_IMMERSIVE)、浅色沉浸模式(LIGHT_IMMERSIVE)或深色沉浸模式(DARK_IMMERSIVE)。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { ImmersiveMode } mode - 沉浸模式。
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *     1.Incorrect parameter types; 2.Parameter verification failed.
@@ -4026,9 +4026,9 @@ declare namespace inputMethodEngine {
      * 获取输入法应用的沉浸模式。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @returns { ImmersiveMode } 沉浸模式。
      * @throws { BusinessError } 12800013 - Failed to obtain panel execution order.
      * @throws { BusinessError } 12800002 - input method engine error. The panel has been destroyed or is unavailable.
@@ -4054,9 +4054,9 @@ declare namespace inputMethodEngine {
      * version 10)
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { ImmersiveEffect } effect - 沉浸效果。
      * @throws { BusinessError } 801 - Capability not supported. Possible causes: 1. The hardware does not support the capability;
      * 2. The chip does not support the capability; 3. A dependent service feature is not supported.
@@ -4096,9 +4096,9 @@ declare namespace inputMethodEngine {
      * 获取指定屏幕当前状态（例如：折叠或展开）下，当前输入法键盘状态（例如：悬浮或固定）下输入法软键盘相对系统面板的偏移区域。使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { number } displayId - 输入法键盘所在屏幕的displayId，可通过[getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}获取
      * @returns { Promise<SystemPanelInsets> } Promise对象。输入法键盘与系统面板的偏移区域。
      * @throws { BusinessError } 12800013 - window manager service error.
@@ -4115,9 +4115,9 @@ declare namespace inputMethodEngine {
      * 获取指定屏幕当前状态（例如：折叠或展开）下，当前输入法键盘状态（例如：悬浮或固定）下输入法软键盘相对系统面板的偏移区域。使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { long } displayId - 输入法键盘所在屏幕的displayId，可通过[getDisplayId]{@link inputMethodEngine.Panel.getDisplayId}获取
      * @returns { Promise<SystemPanelInsets | null> } Promise对象。输入法键盘与系统面板的偏移区域。
      * @throws { BusinessError } 12800013 - window manager service error.
@@ -4157,9 +4157,9 @@ declare namespace inputMethodEngine {
      * 设置当前面板功能键颜色和功能键的背景颜色。使用Promise异步回调。
      *
      * @description 在ArkTS静态调用中，面板任务队列已满或等待按序执行超时时，将中止操作并返回BusinessError 12800013。
-     * 请等待先前操作完成后再重试。 @staticonly
+     * 请等待先前操作完成后再重试。
      * @description 在ArkTS动态调用中，无法获得面板操作的执行顺序时，将中止操作并返回BusinessError 12800013。
-     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。 @dynamiconly
+     * 同步调用时，若先前排队的操作尚未完成，则立即失败，不会阻塞JS线程等待；请等待先前操作完成后再重试。
      * @param { string | undefined } fillColor - 功能键的颜色，取值范围为[#01000000, #FFFFFFFF] 或 [#000000, #FFFFFF]，不支持具有完全透明Alpha通
      *     道（#00xxxxxx）的值。
      * @param { string | undefined } backgroundColor - 功能键的背景颜色，取值范围为[#01000000, #FFFFFFFF] 或 [#000000, #FFFFFF]，不支持具有完全

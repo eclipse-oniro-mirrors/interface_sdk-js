@@ -1063,7 +1063,7 @@ declare namespace inputMethodEngine {
      *         **err** is **undefined**. Otherwise, **err** is an error object.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
-     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
@@ -1086,7 +1086,7 @@ declare namespace inputMethodEngine {
      * @returns { Promise<void> } the promise returned by the function.
      * @throws { BusinessError } 401 - Parameter error. Possible causes:
      *         1.Mandatory parameters are left unspecified; 2.Incorrect parameter types; 3.Parameter verification failed.
-     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation. @dynamiconly
+     * @throws { BusinessError } 12800008 - Failed to initialize or submit the asynchronous operation.
      * @syscap SystemCapability.MiscServices.InputMethodFramework
      * @since 10 dynamic
      * @since 23 static
